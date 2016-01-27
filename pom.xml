@@ -97,11 +97,30 @@
 	<modules>
 		<module>modules/common</module>
 		<!-- other module-->
-		<module>modules/account/account</module>
+		
 		<module>modules/account/accountImpl</module>
-		<module>modules/member/member</module>
 		<module>modules/member/memberImpl</module>
-		<module>wars/witpart-web</module>
+		<module>modules/commodityCenter/commodityCenterImpl</module>
+		<module>modules/commonCenter/commonCenterImpl</module>
+		<module>modules/contentCenter/contentCenterImpl</module>
+		<module>modules/customerCenter/customerCenterImpl</module>
+		<module>modules/enterproseCenter/enterproseCenterImpl</module>
+		<module>modules/merchantCenter/merchantCenterImpl</module>
+		<module>modules/operationCenter/operationCenterImpl</module>
+		<module>modules/portalCenter/portalCenterImpl</module>
+		<module>modules/propertyCenter/propertyCenterImpl</module>
+		<module>wars/smartPark-web</module>
+		<module>modules/account/account</module>
+		<module>modules/commodityCenter/commodityCenter</module>
+		<module>modules/commonCenter/commonCenter</module>
+		<module>modules/contentCenter/contentCenter</module>
+		<module>modules/customerCenter/customerCenter</module>
+		<module>modules/enterproseCenter/enterproseCenter</module>
+		<module>modules/member/member</module>
+		<module>modules/merchantCenter/merchantCenter</module>
+		<module>modules/operationCenter/operationCenter</module>
+		<module>modules/portalCenter/portalCenter</module>
+		<module>modules/propertyCenter/propertyCenter</module>
 	</modules>
 
 	<build>
