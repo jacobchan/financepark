@@ -8,10 +8,8 @@
 	</menu> -->
 	<menu id="020000" text="运营中心">
 		<menu id="021000" text="采购管理" href="">
-			<menu id="021100" text="供应商管理" href="page/operationCenter.pur.supplier/supplier.html"></menu>
-			<menu id="021200" text="商品管理" href="page/operationCenter.pur.commodity/commodity.html"></menu>
-			<menu id="021300" text="采购订单管理" href="page/operationCenter.pur.purorder/purorder.html"></menu>
-			<menu id="021400" text="物流单管理" href="page/operationCenter.pur.expressorder/expressorder.html"></menu>
+			<menu id="021100" text="供应商管理" href="page/commonCenter.purchasingManager.purchasingmanagerMerchant/purchasingmanagerMerchant.html"></menu>
+			<menu id="021200" text="商品管理" href="page/commonCenter.purchasingManager.purchasingmanagerCommodity/purchasingmanagerCommodity.html"></menu>
 		</menu>
 	</menu>
 	<menu id="030000" text="公共管理">
