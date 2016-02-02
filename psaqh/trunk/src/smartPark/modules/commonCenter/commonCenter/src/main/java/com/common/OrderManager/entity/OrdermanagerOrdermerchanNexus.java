@@ -1,0 +1,113 @@
+/**
+ *
+ */
+package com.common.OrderManager.entity;
+
+import javax.persistence.*;
+import org.hibernate.validator.*;
+
+import org.hibernate.annotations.GenericGenerator;
+
+import com.gsoft.framework.core.dataobj.Domain;
+/**
+ * 实体: 订单商户关系表
+ * @author
+ * @version
+ * 
+ */
+@Entity
+@Table(name = "sp_OrderManager_orderMerchan_nexus")
+public class OrdermanagerOrdermerchanNexus implements Domain{
+	
+	private static final long serialVersionUID = -8254367141827058896L;
+	
+
+	@Column(name = "MERCHANT_ID_")
+	@Length(max=36)
+	private String merchantId;//商户ID
+	@Id @GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
+	@Column(name = "ORDERMERCHAN_NEXUS_ID_")
+	@Length(max=36)
+	private String ordermerchanNexusId;//订单商户序列
+
+	@Column(name = "ORDERMERCHAN_NEXUS_EXPRESS_ORDER_")
+	@Length(max=32)
+	private String ordermerchanNexusExpressOrder;//物流单号
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="USERORDER_ID_")
+	private com.common.OrderManager.entity.OrdermanagerUserorder ordermanagerUserorder;//用户订单序列
+	
+	public String getMerchantId(){
+		return this.merchantId;
+	}
+	
+	public void setMerchantId(String merchantId){
+		this.merchantId = merchantId;
+	}
+	public String getOrdermerchanNexusId(){
+		return this.ordermerchanNexusId;
+	}
+	
+	public void setOrdermerchanNexusId(String ordermerchanNexusId){
+		this.ordermerchanNexusId = ordermerchanNexusId;
+	}
+	public String getOrdermerchanNexusExpressOrder(){
+		return this.ordermerchanNexusExpressOrder;
+	}
+	
+	public void setOrdermerchanNexusExpressOrder(String ordermerchanNexusExpressOrder){
+		this.ordermerchanNexusExpressOrder = ordermerchanNexusExpressOrder;
+	}
+	
+	public void setOrdermanagerUserorder(com.common.OrderManager.entity.OrdermanagerUserorder ordermanagerUserorder){
+		this.ordermanagerUserorder = ordermanagerUserorder;
+	}
+	
+	public com.common.OrderManager.entity.OrdermanagerUserorder getOrdermanagerUserorder(){
+		return this.ordermanagerUserorder;
+	}
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((merchantId == null) ? 0 : merchantId.hashCode());
+		result = prime * result + ((ordermerchanNexusId == null) ? 0 : ordermerchanNexusId.hashCode());
+		result = prime * result + ((ordermerchanNexusExpressOrder == null) ? 0 : ordermerchanNexusExpressOrder.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final OrdermanagerOrdermerchanNexus other = (OrdermanagerOrdermerchanNexus) obj;
+		if (merchantId == null) {
+			if (other.merchantId != null)
+				return false;
+		} else if (!merchantId.equals(other.merchantId))
+			return false;
+		if (ordermerchanNexusId == null) {
+			if (other.ordermerchanNexusId != null)
+				return false;
+		} else if (!ordermerchanNexusId.equals(other.ordermerchanNexusId))
+			return false;
+		if (ordermerchanNexusExpressOrder == null) {
+			if (other.ordermerchanNexusExpressOrder != null)
+				return false;
+		} else if (!ordermerchanNexusExpressOrder.equals(other.ordermerchanNexusExpressOrder))
+			return false;
+		return true;
+	}
+	
+	public String toString(){
+		return super.toString();
+	}
+}
