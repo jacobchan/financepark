@@ -21,11 +21,6 @@ public class ShoppingcarCatering implements Domain{
 	
 	private static final long serialVersionUID = -3634320706417096476L;
 	
-	@Id @GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
-	@Column(name = "COMPANY_CATERING_ID_")
-	@Length(max=36)
-	private String companyCateringId;//餐饮购物车ID
 
 	@Column(name = "COMPANY_CATERING_AMOUNT_")
 	@Length(max=16)
@@ -34,18 +29,16 @@ public class ShoppingcarCatering implements Domain{
 	@Column(name = "MEMBER_ID_")
 	@Length(max=36)
 	private String memberId;//会员用户ID
+	@Id @GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
+	@Column(name = "COMPANY_CATERING_ID_")
+	@Length(max=36)
+	private String companyCateringId;//餐饮购物车ID
 
 	@Column(name = "COMPANY_CATERING_UNIVALENCE_")
 	@Length(max=16)
 	private String companyCateringUnivalence;//餐饮单价
 	
-	public String getCompanyCateringId(){
-		return this.companyCateringId;
-	}
-	
-	public void setCompanyCateringId(String companyCateringId){
-		this.companyCateringId = companyCateringId;
-	}
 	public String getCompanyCateringAmount(){
 		return this.companyCateringAmount;
 	}
@@ -59,6 +52,13 @@ public class ShoppingcarCatering implements Domain{
 	
 	public void setMemberId(String memberId){
 		this.memberId = memberId;
+	}
+	public String getCompanyCateringId(){
+		return this.companyCateringId;
+	}
+	
+	public void setCompanyCateringId(String companyCateringId){
+		this.companyCateringId = companyCateringId;
 	}
 	public String getCompanyCateringUnivalence(){
 		return this.companyCateringUnivalence;
@@ -74,9 +74,9 @@ public class ShoppingcarCatering implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((companyCateringId == null) ? 0 : companyCateringId.hashCode());
 		result = prime * result + ((companyCateringAmount == null) ? 0 : companyCateringAmount.hashCode());
 		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
+		result = prime * result + ((companyCateringId == null) ? 0 : companyCateringId.hashCode());
 		result = prime * result + ((companyCateringUnivalence == null) ? 0 : companyCateringUnivalence.hashCode());
 		return result;
 	}
@@ -90,11 +90,6 @@ public class ShoppingcarCatering implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		final ShoppingcarCatering other = (ShoppingcarCatering) obj;
-		if (companyCateringId == null) {
-			if (other.companyCateringId != null)
-				return false;
-		} else if (!companyCateringId.equals(other.companyCateringId))
-			return false;
 		if (companyCateringAmount == null) {
 			if (other.companyCateringAmount != null)
 				return false;
@@ -104,6 +99,11 @@ public class ShoppingcarCatering implements Domain{
 			if (other.memberId != null)
 				return false;
 		} else if (!memberId.equals(other.memberId))
+			return false;
+		if (companyCateringId == null) {
+			if (other.companyCateringId != null)
+				return false;
+		} else if (!companyCateringId.equals(other.companyCateringId))
 			return false;
 		if (companyCateringUnivalence == null) {
 			if (other.companyCateringUnivalence != null)
