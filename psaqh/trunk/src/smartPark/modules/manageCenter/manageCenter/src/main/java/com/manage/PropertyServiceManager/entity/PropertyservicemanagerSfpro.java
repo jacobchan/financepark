@@ -27,13 +27,13 @@ public class PropertyservicemanagerSfpro implements Domain{
 	@Length(max=36)
 	private String sfproId;//收费项目序列
 
-	@Column(name = "SFPRO_AMOUNT_")
-	@Length(max=14)
-	private String sfproAmount;//项目金额
-
 	@Column(name = "SFPRO_NAME_")
 	@Length(max=36)
 	private String sfproName;//收费项目名称
+
+	@Column(name = "SFPRO_AMOUNT_")
+	@Length(max=14)
+	private String sfproAmount;//项目金额
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="CHARGE_ID_")
@@ -46,19 +46,19 @@ public class PropertyservicemanagerSfpro implements Domain{
 	public void setSfproId(String sfproId){
 		this.sfproId = sfproId;
 	}
-	public String getSfproAmount(){
-		return this.sfproAmount;
-	}
-	
-	public void setSfproAmount(String sfproAmount){
-		this.sfproAmount = sfproAmount;
-	}
 	public String getSfproName(){
 		return this.sfproName;
 	}
 	
 	public void setSfproName(String sfproName){
 		this.sfproName = sfproName;
+	}
+	public String getSfproAmount(){
+		return this.sfproAmount;
+	}
+	
+	public void setSfproAmount(String sfproAmount){
+		this.sfproAmount = sfproAmount;
 	}
 	
 	public void setPropertyservicemanagerCharge(com.manage.PropertyServiceManager.entity.PropertyservicemanagerCharge propertyservicemanagerCharge){
@@ -75,8 +75,8 @@ public class PropertyservicemanagerSfpro implements Domain{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((sfproId == null) ? 0 : sfproId.hashCode());
-		result = prime * result + ((sfproAmount == null) ? 0 : sfproAmount.hashCode());
 		result = prime * result + ((sfproName == null) ? 0 : sfproName.hashCode());
+		result = prime * result + ((sfproAmount == null) ? 0 : sfproAmount.hashCode());
 		return result;
 	}
 	
@@ -94,15 +94,15 @@ public class PropertyservicemanagerSfpro implements Domain{
 				return false;
 		} else if (!sfproId.equals(other.sfproId))
 			return false;
-		if (sfproAmount == null) {
-			if (other.sfproAmount != null)
-				return false;
-		} else if (!sfproAmount.equals(other.sfproAmount))
-			return false;
 		if (sfproName == null) {
 			if (other.sfproName != null)
 				return false;
 		} else if (!sfproName.equals(other.sfproName))
+			return false;
+		if (sfproAmount == null) {
+			if (other.sfproAmount != null)
+				return false;
+		} else if (!sfproAmount.equals(other.sfproAmount))
 			return false;
 		return true;
 	}

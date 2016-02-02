@@ -22,14 +22,6 @@ public class LettermanagerLetter implements Domain{
 	private static final long serialVersionUID = -3949501152058406923L;
 	
 
-	@Column(name = "LETTER_RECIPIENT_ID")
-	@Length(max=32)
-	private String letterRecipientId;//接收人ID
-
-	@Column(name = "LETTER_ENTERPRISE_ID")
-	@Length(max=32)
-	private String letterEnterpriseId;//企业信息ID
-
 	@Column(name = "LETTER_CONTENT")
 	@Length(max=1024)
 	private String letterContent;//私信内容
@@ -43,24 +35,18 @@ public class LettermanagerLetter implements Domain{
 	@Length(max=32)
 	private String letterTime;//私信发送时间
 
+	@Column(name = "LETTER_ENTERPRISE_ID")
+	@Length(max=32)
+	private String letterEnterpriseId;//企业信息ID
+
+	@Column(name = "LETTER_RECIPIENT_ID")
+	@Length(max=32)
+	private String letterRecipientId;//接收人ID
+
 	@Column(name = "RZ_ID_")
 	@Length(max=36)
 	private String rzId;//ID
 	
-	public String getLetterRecipientId(){
-		return this.letterRecipientId;
-	}
-	
-	public void setLetterRecipientId(String letterRecipientId){
-		this.letterRecipientId = letterRecipientId;
-	}
-	public String getLetterEnterpriseId(){
-		return this.letterEnterpriseId;
-	}
-	
-	public void setLetterEnterpriseId(String letterEnterpriseId){
-		this.letterEnterpriseId = letterEnterpriseId;
-	}
 	public String getLetterContent(){
 		return this.letterContent;
 	}
@@ -82,6 +68,20 @@ public class LettermanagerLetter implements Domain{
 	public void setLetterTime(String letterTime){
 		this.letterTime = letterTime;
 	}
+	public String getLetterEnterpriseId(){
+		return this.letterEnterpriseId;
+	}
+	
+	public void setLetterEnterpriseId(String letterEnterpriseId){
+		this.letterEnterpriseId = letterEnterpriseId;
+	}
+	public String getLetterRecipientId(){
+		return this.letterRecipientId;
+	}
+	
+	public void setLetterRecipientId(String letterRecipientId){
+		this.letterRecipientId = letterRecipientId;
+	}
 	public String getRzId(){
 		return this.rzId;
 	}
@@ -96,11 +96,11 @@ public class LettermanagerLetter implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((letterRecipientId == null) ? 0 : letterRecipientId.hashCode());
-		result = prime * result + ((letterEnterpriseId == null) ? 0 : letterEnterpriseId.hashCode());
 		result = prime * result + ((letterContent == null) ? 0 : letterContent.hashCode());
 		result = prime * result + ((letterId == null) ? 0 : letterId.hashCode());
 		result = prime * result + ((letterTime == null) ? 0 : letterTime.hashCode());
+		result = prime * result + ((letterEnterpriseId == null) ? 0 : letterEnterpriseId.hashCode());
+		result = prime * result + ((letterRecipientId == null) ? 0 : letterRecipientId.hashCode());
 		result = prime * result + ((rzId == null) ? 0 : rzId.hashCode());
 		return result;
 	}
@@ -114,16 +114,6 @@ public class LettermanagerLetter implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		final LettermanagerLetter other = (LettermanagerLetter) obj;
-		if (letterRecipientId == null) {
-			if (other.letterRecipientId != null)
-				return false;
-		} else if (!letterRecipientId.equals(other.letterRecipientId))
-			return false;
-		if (letterEnterpriseId == null) {
-			if (other.letterEnterpriseId != null)
-				return false;
-		} else if (!letterEnterpriseId.equals(other.letterEnterpriseId))
-			return false;
 		if (letterContent == null) {
 			if (other.letterContent != null)
 				return false;
@@ -138,6 +128,16 @@ public class LettermanagerLetter implements Domain{
 			if (other.letterTime != null)
 				return false;
 		} else if (!letterTime.equals(other.letterTime))
+			return false;
+		if (letterEnterpriseId == null) {
+			if (other.letterEnterpriseId != null)
+				return false;
+		} else if (!letterEnterpriseId.equals(other.letterEnterpriseId))
+			return false;
+		if (letterRecipientId == null) {
+			if (other.letterRecipientId != null)
+				return false;
+		} else if (!letterRecipientId.equals(other.letterRecipientId))
 			return false;
 		if (rzId == null) {
 			if (other.rzId != null)

@@ -26,22 +26,9 @@ public class InformationMedia implements Domain{
 	@Length(max=128)
 	private String mediaTilurl;//文章URL_
 
-	@Column(name = "MEDIA_URL_")
-	@Length(max=64)
-	private String mediaUrl;//图片URL
-
-	@Column(name = "RZ_ID_")
-	@Length(max=36)
-	private String rzId;//ID2
-
 	@Column(name = "MEDIA_TITLE_")
 	@Length(max=64)
 	private String mediaTitle;//标题
-	@Id @GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
-	@Column(name = "MEDIA_ID_")
-	@Length(max=36)
-	private String mediaId;//ID
 
 	@Column(name = "MEDIA_STATUS_")
 	@Length(max=2)
@@ -50,6 +37,19 @@ public class InformationMedia implements Domain{
 	@Column(name = "MEDIA_RE_")
 	@Length(max=32)
 	private String mediaRe;//企业信息ID
+	@Id @GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
+	@Column(name = "MEDIA_ID_")
+	@Length(max=36)
+	private String mediaId;//ID
+
+	@Column(name = "MEDIA_URL_")
+	@Length(max=64)
+	private String mediaUrl;//图片URL
+
+	@Column(name = "RZ_ID_")
+	@Length(max=36)
+	private String rzId;//ID2
 	
 	public String getMediaTilurl(){
 		return this.mediaTilurl;
@@ -58,33 +58,12 @@ public class InformationMedia implements Domain{
 	public void setMediaTilurl(String mediaTilurl){
 		this.mediaTilurl = mediaTilurl;
 	}
-	public String getMediaUrl(){
-		return this.mediaUrl;
-	}
-	
-	public void setMediaUrl(String mediaUrl){
-		this.mediaUrl = mediaUrl;
-	}
-	public String getRzId(){
-		return this.rzId;
-	}
-	
-	public void setRzId(String rzId){
-		this.rzId = rzId;
-	}
 	public String getMediaTitle(){
 		return this.mediaTitle;
 	}
 	
 	public void setMediaTitle(String mediaTitle){
 		this.mediaTitle = mediaTitle;
-	}
-	public String getMediaId(){
-		return this.mediaId;
-	}
-	
-	public void setMediaId(String mediaId){
-		this.mediaId = mediaId;
 	}
 	public String getMediaStatus(){
 		return this.mediaStatus;
@@ -100,6 +79,27 @@ public class InformationMedia implements Domain{
 	public void setMediaRe(String mediaRe){
 		this.mediaRe = mediaRe;
 	}
+	public String getMediaId(){
+		return this.mediaId;
+	}
+	
+	public void setMediaId(String mediaId){
+		this.mediaId = mediaId;
+	}
+	public String getMediaUrl(){
+		return this.mediaUrl;
+	}
+	
+	public void setMediaUrl(String mediaUrl){
+		this.mediaUrl = mediaUrl;
+	}
+	public String getRzId(){
+		return this.rzId;
+	}
+	
+	public void setRzId(String rzId){
+		this.rzId = rzId;
+	}
 	
 	
 	
@@ -108,12 +108,12 @@ public class InformationMedia implements Domain{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((mediaTilurl == null) ? 0 : mediaTilurl.hashCode());
-		result = prime * result + ((mediaUrl == null) ? 0 : mediaUrl.hashCode());
-		result = prime * result + ((rzId == null) ? 0 : rzId.hashCode());
 		result = prime * result + ((mediaTitle == null) ? 0 : mediaTitle.hashCode());
-		result = prime * result + ((mediaId == null) ? 0 : mediaId.hashCode());
 		result = prime * result + ((mediaStatus == null) ? 0 : mediaStatus.hashCode());
 		result = prime * result + ((mediaRe == null) ? 0 : mediaRe.hashCode());
+		result = prime * result + ((mediaId == null) ? 0 : mediaId.hashCode());
+		result = prime * result + ((mediaUrl == null) ? 0 : mediaUrl.hashCode());
+		result = prime * result + ((rzId == null) ? 0 : rzId.hashCode());
 		return result;
 	}
 	
@@ -131,25 +131,10 @@ public class InformationMedia implements Domain{
 				return false;
 		} else if (!mediaTilurl.equals(other.mediaTilurl))
 			return false;
-		if (mediaUrl == null) {
-			if (other.mediaUrl != null)
-				return false;
-		} else if (!mediaUrl.equals(other.mediaUrl))
-			return false;
-		if (rzId == null) {
-			if (other.rzId != null)
-				return false;
-		} else if (!rzId.equals(other.rzId))
-			return false;
 		if (mediaTitle == null) {
 			if (other.mediaTitle != null)
 				return false;
 		} else if (!mediaTitle.equals(other.mediaTitle))
-			return false;
-		if (mediaId == null) {
-			if (other.mediaId != null)
-				return false;
-		} else if (!mediaId.equals(other.mediaId))
 			return false;
 		if (mediaStatus == null) {
 			if (other.mediaStatus != null)
@@ -160,6 +145,21 @@ public class InformationMedia implements Domain{
 			if (other.mediaRe != null)
 				return false;
 		} else if (!mediaRe.equals(other.mediaRe))
+			return false;
+		if (mediaId == null) {
+			if (other.mediaId != null)
+				return false;
+		} else if (!mediaId.equals(other.mediaId))
+			return false;
+		if (mediaUrl == null) {
+			if (other.mediaUrl != null)
+				return false;
+		} else if (!mediaUrl.equals(other.mediaUrl))
+			return false;
+		if (rzId == null) {
+			if (other.rzId != null)
+				return false;
+		} else if (!rzId.equals(other.rzId))
 			return false;
 		return true;
 	}

@@ -22,29 +22,29 @@ public class PropertyservicenanagerBack implements Domain{
 	private static final long serialVersionUID = -2704311533158045190L;
 	
 
-	@Column(name = "BACK_CODE_")
-	@Length(max=32)
-	private String backCode;//回访单号
+	@Column(name = "BACK_RECORD_")
+	@Length(max=300)
+	private String backRecord;//回访记录
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "BACK_ID_")
 	@Length(max=36)
 	private String backId;//回访ID
 
-	@Column(name = "BACK_RECORD_")
-	@Length(max=300)
-	private String backRecord;//回访记录
+	@Column(name = "BACK_CODE_")
+	@Length(max=32)
+	private String backCode;//回访单号
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="COS_ID_")
 	private com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos propertyservicemanagerCos;//投诉ID
 	
-	public String getBackCode(){
-		return this.backCode;
+	public String getBackRecord(){
+		return this.backRecord;
 	}
 	
-	public void setBackCode(String backCode){
-		this.backCode = backCode;
+	public void setBackRecord(String backRecord){
+		this.backRecord = backRecord;
 	}
 	public String getBackId(){
 		return this.backId;
@@ -53,12 +53,12 @@ public class PropertyservicenanagerBack implements Domain{
 	public void setBackId(String backId){
 		this.backId = backId;
 	}
-	public String getBackRecord(){
-		return this.backRecord;
+	public String getBackCode(){
+		return this.backCode;
 	}
 	
-	public void setBackRecord(String backRecord){
-		this.backRecord = backRecord;
+	public void setBackCode(String backCode){
+		this.backCode = backCode;
 	}
 	
 	public void setPropertyservicemanagerCos(com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos propertyservicemanagerCos){
@@ -74,9 +74,9 @@ public class PropertyservicenanagerBack implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((backCode == null) ? 0 : backCode.hashCode());
-		result = prime * result + ((backId == null) ? 0 : backId.hashCode());
 		result = prime * result + ((backRecord == null) ? 0 : backRecord.hashCode());
+		result = prime * result + ((backId == null) ? 0 : backId.hashCode());
+		result = prime * result + ((backCode == null) ? 0 : backCode.hashCode());
 		return result;
 	}
 	
@@ -89,20 +89,20 @@ public class PropertyservicenanagerBack implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		final PropertyservicenanagerBack other = (PropertyservicenanagerBack) obj;
-		if (backCode == null) {
-			if (other.backCode != null)
+		if (backRecord == null) {
+			if (other.backRecord != null)
 				return false;
-		} else if (!backCode.equals(other.backCode))
+		} else if (!backRecord.equals(other.backRecord))
 			return false;
 		if (backId == null) {
 			if (other.backId != null)
 				return false;
 		} else if (!backId.equals(other.backId))
 			return false;
-		if (backRecord == null) {
-			if (other.backRecord != null)
+		if (backCode == null) {
+			if (other.backCode != null)
 				return false;
-		} else if (!backRecord.equals(other.backRecord))
+		} else if (!backCode.equals(other.backCode))
 			return false;
 		return true;
 	}

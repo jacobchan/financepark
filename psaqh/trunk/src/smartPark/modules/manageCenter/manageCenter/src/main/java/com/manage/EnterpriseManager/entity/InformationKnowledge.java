@@ -25,31 +25,31 @@ public class InformationKnowledge implements Domain{
 	@Column(name = "RZ_ID_")
 	@Length(max=36)
 	private String rzId;//ID2
-
-	@Column(name = "KNOWLEDGE_URL_")
-	@Length(max=64)
-	private String knowledgeUrl;//图片URL
-
-	@Column(name = "KNOWLEDGE_RE_")
-	@Length(max=32)
-	private String knowledgeRe;//企业信息ID
-
-	@Column(name = "KNOWLEDGE_STATUS_")
-	@Length(max=2)
-	private String knowledgeStatus;//发布状态
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "KNOWLEDGE_ID_")
 	@Length(max=32)
 	private String knowledgeId;//ID
 
-	@Column(name = "KNOWLEDGE_CONTENT_")
-	@Length(max=256)
-	private String knowledgeContent;//描述
+	@Column(name = "KNOWLEDGE_RE_")
+	@Length(max=32)
+	private String knowledgeRe;//企业信息ID
 
 	@Column(name = "KNOWLEDGE_TITLE_")
 	@Length(max=64)
 	private String knowledgeTitle;//标题
+
+	@Column(name = "KNOWLEDGE_CONTENT_")
+	@Length(max=256)
+	private String knowledgeContent;//描述
+
+	@Column(name = "KNOWLEDGE_URL_")
+	@Length(max=64)
+	private String knowledgeUrl;//图片URL
+
+	@Column(name = "KNOWLEDGE_STATUS_")
+	@Length(max=2)
+	private String knowledgeStatus;//发布状态
 	
 	public String getRzId(){
 		return this.rzId;
@@ -58,12 +58,12 @@ public class InformationKnowledge implements Domain{
 	public void setRzId(String rzId){
 		this.rzId = rzId;
 	}
-	public String getKnowledgeUrl(){
-		return this.knowledgeUrl;
+	public String getKnowledgeId(){
+		return this.knowledgeId;
 	}
 	
-	public void setKnowledgeUrl(String knowledgeUrl){
-		this.knowledgeUrl = knowledgeUrl;
+	public void setKnowledgeId(String knowledgeId){
+		this.knowledgeId = knowledgeId;
 	}
 	public String getKnowledgeRe(){
 		return this.knowledgeRe;
@@ -72,19 +72,12 @@ public class InformationKnowledge implements Domain{
 	public void setKnowledgeRe(String knowledgeRe){
 		this.knowledgeRe = knowledgeRe;
 	}
-	public String getKnowledgeStatus(){
-		return this.knowledgeStatus;
+	public String getKnowledgeTitle(){
+		return this.knowledgeTitle;
 	}
 	
-	public void setKnowledgeStatus(String knowledgeStatus){
-		this.knowledgeStatus = knowledgeStatus;
-	}
-	public String getKnowledgeId(){
-		return this.knowledgeId;
-	}
-	
-	public void setKnowledgeId(String knowledgeId){
-		this.knowledgeId = knowledgeId;
+	public void setKnowledgeTitle(String knowledgeTitle){
+		this.knowledgeTitle = knowledgeTitle;
 	}
 	public String getKnowledgeContent(){
 		return this.knowledgeContent;
@@ -93,12 +86,19 @@ public class InformationKnowledge implements Domain{
 	public void setKnowledgeContent(String knowledgeContent){
 		this.knowledgeContent = knowledgeContent;
 	}
-	public String getKnowledgeTitle(){
-		return this.knowledgeTitle;
+	public String getKnowledgeUrl(){
+		return this.knowledgeUrl;
 	}
 	
-	public void setKnowledgeTitle(String knowledgeTitle){
-		this.knowledgeTitle = knowledgeTitle;
+	public void setKnowledgeUrl(String knowledgeUrl){
+		this.knowledgeUrl = knowledgeUrl;
+	}
+	public String getKnowledgeStatus(){
+		return this.knowledgeStatus;
+	}
+	
+	public void setKnowledgeStatus(String knowledgeStatus){
+		this.knowledgeStatus = knowledgeStatus;
 	}
 	
 	
@@ -108,12 +108,12 @@ public class InformationKnowledge implements Domain{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((rzId == null) ? 0 : rzId.hashCode());
-		result = prime * result + ((knowledgeUrl == null) ? 0 : knowledgeUrl.hashCode());
-		result = prime * result + ((knowledgeRe == null) ? 0 : knowledgeRe.hashCode());
-		result = prime * result + ((knowledgeStatus == null) ? 0 : knowledgeStatus.hashCode());
 		result = prime * result + ((knowledgeId == null) ? 0 : knowledgeId.hashCode());
-		result = prime * result + ((knowledgeContent == null) ? 0 : knowledgeContent.hashCode());
+		result = prime * result + ((knowledgeRe == null) ? 0 : knowledgeRe.hashCode());
 		result = prime * result + ((knowledgeTitle == null) ? 0 : knowledgeTitle.hashCode());
+		result = prime * result + ((knowledgeContent == null) ? 0 : knowledgeContent.hashCode());
+		result = prime * result + ((knowledgeUrl == null) ? 0 : knowledgeUrl.hashCode());
+		result = prime * result + ((knowledgeStatus == null) ? 0 : knowledgeStatus.hashCode());
 		return result;
 	}
 	
@@ -131,35 +131,35 @@ public class InformationKnowledge implements Domain{
 				return false;
 		} else if (!rzId.equals(other.rzId))
 			return false;
-		if (knowledgeUrl == null) {
-			if (other.knowledgeUrl != null)
+		if (knowledgeId == null) {
+			if (other.knowledgeId != null)
 				return false;
-		} else if (!knowledgeUrl.equals(other.knowledgeUrl))
+		} else if (!knowledgeId.equals(other.knowledgeId))
 			return false;
 		if (knowledgeRe == null) {
 			if (other.knowledgeRe != null)
 				return false;
 		} else if (!knowledgeRe.equals(other.knowledgeRe))
 			return false;
-		if (knowledgeStatus == null) {
-			if (other.knowledgeStatus != null)
+		if (knowledgeTitle == null) {
+			if (other.knowledgeTitle != null)
 				return false;
-		} else if (!knowledgeStatus.equals(other.knowledgeStatus))
-			return false;
-		if (knowledgeId == null) {
-			if (other.knowledgeId != null)
-				return false;
-		} else if (!knowledgeId.equals(other.knowledgeId))
+		} else if (!knowledgeTitle.equals(other.knowledgeTitle))
 			return false;
 		if (knowledgeContent == null) {
 			if (other.knowledgeContent != null)
 				return false;
 		} else if (!knowledgeContent.equals(other.knowledgeContent))
 			return false;
-		if (knowledgeTitle == null) {
-			if (other.knowledgeTitle != null)
+		if (knowledgeUrl == null) {
+			if (other.knowledgeUrl != null)
 				return false;
-		} else if (!knowledgeTitle.equals(other.knowledgeTitle))
+		} else if (!knowledgeUrl.equals(other.knowledgeUrl))
+			return false;
+		if (knowledgeStatus == null) {
+			if (other.knowledgeStatus != null)
+				return false;
+		} else if (!knowledgeStatus.equals(other.knowledgeStatus))
 			return false;
 		return true;
 	}
