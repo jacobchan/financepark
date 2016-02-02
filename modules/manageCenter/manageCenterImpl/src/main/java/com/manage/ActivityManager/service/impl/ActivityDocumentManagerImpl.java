@@ -1,0 +1,106 @@
+/**
+ * 代码声明
+ */
+package com.manage.ActivityManager.service.impl;
+
+import java.util.List;
+import java.util.Collection;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.gsoft.framework.core.exception.BusException;
+import com.gsoft.framework.core.orm.Condition;
+//import com.gsoft.framework.core.orm.ConditionFactory;
+import com.gsoft.framework.core.orm.Order;
+import com.gsoft.framework.core.orm.Pager;
+import com.gsoft.framework.core.orm.PagerRecords;
+
+import com.gsoft.framework.esb.annotation.*;
+
+import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+
+import com.manage.ActivityManager.entity.ActivityDocument;
+import com.manage.ActivityManager.dao.ActivityDocumentDao;
+import com.manage.ActivityManager.service.ActivityDocumentManager;
+
+@Service("activityDocumentManager")
+@Transactional
+public class ActivityDocumentManagerImpl extends BaseManagerImpl implements ActivityDocumentManager{
+	@Autowired
+	private ActivityDocumentDao activityDocumentDao;
+	
+    /**
+     * 查询列表
+     */
+    //@EsbServiceMapping
+    public List<ActivityDocument> getActivityDocuments() throws BusException{
+    	return activityDocumentDao.getAll();
+    }
+     /**
+     * 条件查询列表
+     */
+    @EsbServiceMapping
+    public List<ActivityDocument> getActivityDocuments(
+    	@ConditionCollection(domainClazz=ActivityDocument.class) Collection<Condition> conditions,
+    	@OrderCollection Collection<Order> orders) throws BusException{
+    	return activityDocumentDao.commonQuery(conditions, orders);
+    }
+    /**
+     * 根据主键查询
+     */
+    @EsbServiceMapping
+    public ActivityDocument getActivityDocument(@ServiceParam(name="documentId") String id)  throws BusException{
+    	return activityDocumentDao.get(id);
+    }
+	
+	@EsbServiceMapping
+	public PagerRecords getPagerActivityDocuments(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=ActivityDocument.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)  throws BusException{
+		PagerRecords pagerRecords = activityDocumentDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
+    /**
+     * 保存对象
+     */
+    @EsbServiceMapping
+    public ActivityDocument saveActivityDocument(ActivityDocument o) throws BusException{
+//    	String activityDocumentId = o.getActivityDocumentId();
+//    	boolean isUpdate = StringUtils.isNotEmpty(activityDocumentId);
+//    	if(isUpdate){//修改
+//    	
+//    	}else{//新增
+//    		
+//    	}
+    	return activityDocumentDao.save(o);
+    }
+
+    /**
+     * 删除对象
+     */
+    @EsbServiceMapping
+    public void removeActivityDocument(@ServiceParam(name="documentId") String id) throws BusException{
+    	activityDocumentDao.remove(id);
+    }
+    /**
+     * 根据主键集合删除对象
+     * @param ids
+     */
+    public void removeActivityDocuments(@ServiceParam(name="documentId") String[] ids)  throws BusException{
+   		for(String id:ids){
+    		removeActivityDocument(id);
+    	}
+    }
+    
+    @EsbServiceMapping
+    public boolean exsitActivityDocument(@ServiceParam(name="documentId") String id)  throws BusException{
+		return activityDocumentDao.exists(id);
+	}
+    
+    public boolean exsitActivityDocument(String propertyName,Object value) throws BusException{
+		return activityDocumentDao.exists(propertyName,value);
+	}
+
+}
