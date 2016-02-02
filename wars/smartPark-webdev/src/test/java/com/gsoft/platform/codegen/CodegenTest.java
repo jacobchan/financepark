@@ -14,8 +14,8 @@ import com.gsoft.platform.codegen.pdm.Pdm2ModelXml;
 public class CodegenTest {
 
     public static void main(String[] args) {
-            String tablePrefix = "witpart";
-            Document doc = Dom4jUtils.saxParse("E:\\pdm\\witpart.pdm");
+            String tablePrefix = "sp";
+            Document doc = Dom4jUtils.saxParse("E:\\pdm\\SmartPark_PDM.pdm");
             // TODO Auto-generated method stub
             Pdm2ModelXml pdm2ModelXml = new Pdm2ModelXml(doc,tablePrefix);
             Document modelXml = pdm2ModelXml.getModelDoc();
@@ -26,8 +26,30 @@ public class CodegenTest {
             
             GenerateConfig config = new GenerateConfig();
             config.setSourceHome("E:\\workspace\\witpark\\smartPark\\wars\\smartPark-webdev");
-            config.setPackagePrefix("com.smartPark.operationCenter");
-            generateEngine.generate("pur", config);
+            
+//            String[] commonBuff = new String[]{"BuildingBaseManager",
+//            		"MessageCenter","purchasingManager","OrderManager",
+//            		"NewsManager","MemberManager","PayManager","EnterpriceTypeManager"};
+//            for(int i = 0;i<commonBuff.length;i++){
+//            	config.setPackagePrefix("com.common");
+//            	generateEngine.generate(commonBuff[i], config);
+//            }
+            
+//            String[] manageBuff = new String[]{"EnterBusinessManager",
+//            		"PropertyServiceManager","PublicUtilitiesManager","EmployeeManager",
+//            		"EnterpriseManager","EnterpriseMessageManager","ActivityManager",
+//            		"PolicyManager","ReserveManager"};
+//            for(int i = 0;i<manageBuff.length;i++){
+//            	config.setPackagePrefix("com.manage");
+//            	generateEngine.generate(manageBuff[i], config);
+//            }
+//            
+//            String[] memberBuff = new String[]{"MemberAdrManager",
+//            		"MemberCommentManager","shoppingCarManager","FavoritsManage"};
+//            for(int i = 0;i<memberBuff.length;i++){
+//            	config.setPackagePrefix("com.member");
+//            	generateEngine.generate(memberBuff[i], config);
+//            }
     }
 
 }
