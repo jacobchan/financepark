@@ -21,6 +21,11 @@ public class ActivityComment implements Domain{
 	
 	private static final long serialVersionUID = 914550468307755210L;
 	
+	@Id @GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
+	@Column(name = "COMMENT_ID")
+	@Length(max=36)
+	private String commentId;//评论ID
 
 	@Column(name = "COMMENT_TIME_")
 	private String commentTime;//评论时间
@@ -28,16 +33,18 @@ public class ActivityComment implements Domain{
 	@Column(name = "COMMENT_CONTENT_")
 	@Length(max=32)
 	private String commentContent;//评论内容
-	@Id @GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
-	@Column(name = "COMMENT_ID")
-	@Length(max=36)
-	private String commentId;//评论ID
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="APPLY_ID_")
 	private com.manage.ActivityManager.entity.ActivityApply activityApply;//活动申请ID
 	
+	public String getCommentId(){
+		return this.commentId;
+	}
+	
+	public void setCommentId(String commentId){
+		this.commentId = commentId;
+	}
 	public String getCommentTime(){
 		return this.commentTime;
 	}
@@ -51,13 +58,6 @@ public class ActivityComment implements Domain{
 	
 	public void setCommentContent(String commentContent){
 		this.commentContent = commentContent;
-	}
-	public String getCommentId(){
-		return this.commentId;
-	}
-	
-	public void setCommentId(String commentId){
-		this.commentId = commentId;
 	}
 	
 	public void setActivityApply(com.manage.ActivityManager.entity.ActivityApply activityApply){
@@ -73,9 +73,9 @@ public class ActivityComment implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((commentId == null) ? 0 : commentId.hashCode());
 		result = prime * result + ((commentTime == null) ? 0 : commentTime.hashCode());
 		result = prime * result + ((commentContent == null) ? 0 : commentContent.hashCode());
-		result = prime * result + ((commentId == null) ? 0 : commentId.hashCode());
 		return result;
 	}
 	
@@ -88,6 +88,11 @@ public class ActivityComment implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		final ActivityComment other = (ActivityComment) obj;
+		if (commentId == null) {
+			if (other.commentId != null)
+				return false;
+		} else if (!commentId.equals(other.commentId))
+			return false;
 		if (commentTime == null) {
 			if (other.commentTime != null)
 				return false;
@@ -97,11 +102,6 @@ public class ActivityComment implements Domain{
 			if (other.commentContent != null)
 				return false;
 		} else if (!commentContent.equals(other.commentContent))
-			return false;
-		if (commentId == null) {
-			if (other.commentId != null)
-				return false;
-		} else if (!commentId.equals(other.commentId))
 			return false;
 		return true;
 	}

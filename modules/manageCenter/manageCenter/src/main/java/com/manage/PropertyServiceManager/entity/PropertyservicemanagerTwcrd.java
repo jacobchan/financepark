@@ -21,33 +21,33 @@ public class PropertyservicemanagerTwcrd implements Domain{
 	
 	private static final long serialVersionUID = -2667746533182298089L;
 	
-
-	@Column(name = "TWCRD_ADDREC_")
-	@Length(max=50)
-	private String twcrdAddrec;//二维码URL地址
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "TWCRD_ID_")
 	@Length(max=36)
 	private String twcrdId;//二维码记录序列
+
+	@Column(name = "TWCRD_ADDREC_")
+	@Length(max=50)
+	private String twcrdAddrec;//二维码URL地址
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="FKCODE_ID_")
 	private com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode propertyservicemanagerFkcode;//访客申请ID
 	
-	public String getTwcrdAddrec(){
-		return this.twcrdAddrec;
-	}
-	
-	public void setTwcrdAddrec(String twcrdAddrec){
-		this.twcrdAddrec = twcrdAddrec;
-	}
 	public String getTwcrdId(){
 		return this.twcrdId;
 	}
 	
 	public void setTwcrdId(String twcrdId){
 		this.twcrdId = twcrdId;
+	}
+	public String getTwcrdAddrec(){
+		return this.twcrdAddrec;
+	}
+	
+	public void setTwcrdAddrec(String twcrdAddrec){
+		this.twcrdAddrec = twcrdAddrec;
 	}
 	
 	public void setPropertyservicemanagerFkcode(com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode propertyservicemanagerFkcode){
@@ -63,8 +63,8 @@ public class PropertyservicemanagerTwcrd implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((twcrdAddrec == null) ? 0 : twcrdAddrec.hashCode());
 		result = prime * result + ((twcrdId == null) ? 0 : twcrdId.hashCode());
+		result = prime * result + ((twcrdAddrec == null) ? 0 : twcrdAddrec.hashCode());
 		return result;
 	}
 	
@@ -77,15 +77,15 @@ public class PropertyservicemanagerTwcrd implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		final PropertyservicemanagerTwcrd other = (PropertyservicemanagerTwcrd) obj;
-		if (twcrdAddrec == null) {
-			if (other.twcrdAddrec != null)
-				return false;
-		} else if (!twcrdAddrec.equals(other.twcrdAddrec))
-			return false;
 		if (twcrdId == null) {
 			if (other.twcrdId != null)
 				return false;
 		} else if (!twcrdId.equals(other.twcrdId))
+			return false;
+		if (twcrdAddrec == null) {
+			if (other.twcrdAddrec != null)
+				return false;
+		} else if (!twcrdAddrec.equals(other.twcrdAddrec))
 			return false;
 		return true;
 	}

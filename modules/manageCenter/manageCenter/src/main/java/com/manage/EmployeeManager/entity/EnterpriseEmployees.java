@@ -22,9 +22,9 @@ public class EnterpriseEmployees implements Domain{
 	private static final long serialVersionUID = 2584651808359871795L;
 	
 
-	@Column(name = "EMPLOYEES_TELEPHONE")
-	@Length(max=16)
-	private String employeesTelephone;//员工电话
+	@Column(name = "EMPLOYEES_COM_ID")
+	@Length(max=32)
+	private String employeesComId;//企业信息ID_
 
 	@Column(name = "EMPLOYEES_DEPARTMENT")
 	@Length(max=2)
@@ -35,28 +35,28 @@ public class EnterpriseEmployees implements Domain{
 	@Length(max=36)
 	private String employeesId;//ID_
 
+	@Column(name = "EMPLOYEES_TELEPHONE")
+	@Length(max=16)
+	private String employeesTelephone;//员工电话
+
 	@Column(name = "EMPLOYEES_NAME")
 	@Length(max=32)
 	private String employeesName;//员工姓名
-
-	@Column(name = "MEMBER_ID_")
-	@Length(max=36)
-	private String memberId;//会员用户ID
 
 	@Column(name = "RZ_ID_")
 	@Length(max=36)
 	private String rzId;//ID
 
-	@Column(name = "EMPLOYEES_COM_ID")
-	@Length(max=32)
-	private String employeesComId;//企业信息ID_
+	@Column(name = "MEMBER_ID_")
+	@Length(max=36)
+	private String memberId;//会员用户ID
 	
-	public String getEmployeesTelephone(){
-		return this.employeesTelephone;
+	public String getEmployeesComId(){
+		return this.employeesComId;
 	}
 	
-	public void setEmployeesTelephone(String employeesTelephone){
-		this.employeesTelephone = employeesTelephone;
+	public void setEmployeesComId(String employeesComId){
+		this.employeesComId = employeesComId;
 	}
 	public String getEmployeesDepartment(){
 		return this.employeesDepartment;
@@ -72,19 +72,19 @@ public class EnterpriseEmployees implements Domain{
 	public void setEmployeesId(String employeesId){
 		this.employeesId = employeesId;
 	}
+	public String getEmployeesTelephone(){
+		return this.employeesTelephone;
+	}
+	
+	public void setEmployeesTelephone(String employeesTelephone){
+		this.employeesTelephone = employeesTelephone;
+	}
 	public String getEmployeesName(){
 		return this.employeesName;
 	}
 	
 	public void setEmployeesName(String employeesName){
 		this.employeesName = employeesName;
-	}
-	public String getMemberId(){
-		return this.memberId;
-	}
-	
-	public void setMemberId(String memberId){
-		this.memberId = memberId;
 	}
 	public String getRzId(){
 		return this.rzId;
@@ -93,12 +93,12 @@ public class EnterpriseEmployees implements Domain{
 	public void setRzId(String rzId){
 		this.rzId = rzId;
 	}
-	public String getEmployeesComId(){
-		return this.employeesComId;
+	public String getMemberId(){
+		return this.memberId;
 	}
 	
-	public void setEmployeesComId(String employeesComId){
-		this.employeesComId = employeesComId;
+	public void setMemberId(String memberId){
+		this.memberId = memberId;
 	}
 	
 	
@@ -107,13 +107,13 @@ public class EnterpriseEmployees implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((employeesTelephone == null) ? 0 : employeesTelephone.hashCode());
+		result = prime * result + ((employeesComId == null) ? 0 : employeesComId.hashCode());
 		result = prime * result + ((employeesDepartment == null) ? 0 : employeesDepartment.hashCode());
 		result = prime * result + ((employeesId == null) ? 0 : employeesId.hashCode());
+		result = prime * result + ((employeesTelephone == null) ? 0 : employeesTelephone.hashCode());
 		result = prime * result + ((employeesName == null) ? 0 : employeesName.hashCode());
-		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
 		result = prime * result + ((rzId == null) ? 0 : rzId.hashCode());
-		result = prime * result + ((employeesComId == null) ? 0 : employeesComId.hashCode());
+		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
 		return result;
 	}
 	
@@ -126,10 +126,10 @@ public class EnterpriseEmployees implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		final EnterpriseEmployees other = (EnterpriseEmployees) obj;
-		if (employeesTelephone == null) {
-			if (other.employeesTelephone != null)
+		if (employeesComId == null) {
+			if (other.employeesComId != null)
 				return false;
-		} else if (!employeesTelephone.equals(other.employeesTelephone))
+		} else if (!employeesComId.equals(other.employeesComId))
 			return false;
 		if (employeesDepartment == null) {
 			if (other.employeesDepartment != null)
@@ -141,25 +141,25 @@ public class EnterpriseEmployees implements Domain{
 				return false;
 		} else if (!employeesId.equals(other.employeesId))
 			return false;
+		if (employeesTelephone == null) {
+			if (other.employeesTelephone != null)
+				return false;
+		} else if (!employeesTelephone.equals(other.employeesTelephone))
+			return false;
 		if (employeesName == null) {
 			if (other.employeesName != null)
 				return false;
 		} else if (!employeesName.equals(other.employeesName))
-			return false;
-		if (memberId == null) {
-			if (other.memberId != null)
-				return false;
-		} else if (!memberId.equals(other.memberId))
 			return false;
 		if (rzId == null) {
 			if (other.rzId != null)
 				return false;
 		} else if (!rzId.equals(other.rzId))
 			return false;
-		if (employeesComId == null) {
-			if (other.employeesComId != null)
+		if (memberId == null) {
+			if (other.memberId != null)
 				return false;
-		} else if (!employeesComId.equals(other.employeesComId))
+		} else if (!memberId.equals(other.memberId))
 			return false;
 		return true;
 	}
