@@ -51,8 +51,8 @@
 		<nexus.root>http://220.249.113.11/nexus</nexus.root>
 		<gsoft.version>1.0.3.RELEASE</gsoft.version>
 		<!-- 开发时配置 -->
-		<operationCenter.src.path>E:\workspace\witpark\smartPark\modules\operationCenter\operationCenter</operationCenter.src.path>
-		<operationCenterImpl.src.path>E:\workspace\witpark\smartPark\modules\operationCenter\operationCenterImpl</operationCenterImpl.src.path>
+		<commonCenter.src.path>E:\workspace\witpark\smartPark\modules\commonCenter\commonCenter</commonCenter.src.path>
+		<commonCenterImpl.src.path>E:\workspace\witpark\smartPark\modules\commonCenter\commonCenterImpl</commonCenterImpl.src.path>
 	</properties>
 	<!-- 本模块使用的包 -->
 	<dependencies>
@@ -266,7 +266,7 @@
 					</additionalBuildcommands>
 				</configuration>
 			</plugin>
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>1.7</version>
@@ -276,26 +276,26 @@
 						<phase>compile</phase>
 						<configuration>
 							<tasks>
-								<echo message="operationCenter模块代码" />
-								<copy toDir="${operationCenter.src.path}/src/main/java">
+								<echo message="commonCenter模块代码" />
+								<copy toDir="${commonCenter.src.path}/src/main/java">
 									<fileset dir="${basedir}/src/main/java">
-										<include name="com/smartPark/operationCenter/**/service/*.java"/>
-										<include name="com/smartPark/operationCenter/**/dao/*.java"/>
-										<include name="com/smartPark/operationCenter/**/entity/*.java"/>
+										<include name="com/common/operationCenter/**/service/*.java"/>
+										<include name="com/common/operationCenter/**/dao/*.java"/>
+										<include name="com/common/operationCenter/**/entity/*.java"/>
 									</fileset>
 								</copy>
-								<copy toDir="${operationCenterImpl.src.path}/src/main/java">
+								<copy toDir="${commonCenterrImpl.src.path}/src/main/java">
 									<fileset dir="${basedir}/src/main/java">
-										<include name="com/smartPark/operationCenter/**/service/impl/*.java"/>
-										<include name="com/smartPark/operationCenter/**/dao/hibernate/*.java"/>
-										<include name="com/smartPark/operationCenter/**/ModuleConfig.java"/>
+										<include name="com/common/operationCenter/**/service/impl/*.java"/>
+										<include name="com/common/operationCenter/**/dao/hibernate/*.java"/>
+										<include name="com/common/operationCenter/**/ModuleConfig.java"/>
 									</fileset>
 								</copy>
-								<!-- testJSP页面代码-->
-								<copy toDir="${operationCenterImpl.src.path}/src/main/resources/META-INF/resources">
+								testJSP页面代码
+								<copy toDir="${commonCenterImpl.src.path}/src/main/resources/META-INF/resources">
 									<fileset dir="${basedir}/src/main/webapp">
-										<include name="WEB-INF/pages/operationCenter/**/**/*.jsp"/>
-<!-- 										<include name="WEB-INF/pages/testPojo/test2/**/*.jsp"/> -->
+										<include name="WEB-INF/pages/common/**/**/*.jsp"/>
+										<include name="WEB-INF/pages/testPojo/test2/**/*.jsp"/>
 									</fileset>
 								</copy>
 							</tasks>
@@ -305,7 +305,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 		</plugins>
 		
 		<pluginManagement>
