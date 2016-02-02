@@ -10,10 +10,10 @@
 	     <relativePath>../../../</relativePath>
 	</parent>
 
-	<artifactId>smartPark-portalCenterImpl</artifactId>
+	<artifactId>smartPark-manageCenterImpl</artifactId>
 	<packaging>jar</packaging>
 
-	<name>smartPark-portalCenterImpl</name>
+	<name>smartPark-manageCenterImpl</name>
 	<url>http://maven.apache.org</url>
 	<!-- 导入项目公共包 -->
 	<dependencyManagement>
@@ -31,7 +31,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.gsoft.smartPark</groupId>
-			<artifactId>smartPark-portalCenter</artifactId>
+			<artifactId>smartPark-manageCenter</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
