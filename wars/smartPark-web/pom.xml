@@ -187,50 +187,19 @@
 		</dependency>
 		<dependency>
 			<groupId>com.gsoft.smartPark</groupId>
-			<artifactId>smartPark-commodityCenterImpl</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.gsoft.smartPark</groupId>
 			<artifactId>smartPark-commonCenterImpl</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.gsoft.smartPark</groupId>
-			<artifactId>smartPark-contentCenterImpl</artifactId>
+			<artifactId>smartPark-manageCenterImpl</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.gsoft.smartPark</groupId>
-			<artifactId>smartPark-customerCenterImpl</artifactId>
+			<artifactId>smartPark-memberCenterImpl</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>com.gsoft.smartPark</groupId>
-			<artifactId>smartPark-enterproseCenterImpl</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.gsoft.smartPark</groupId>
-			<artifactId>smartPark-merchantCenterImpl</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.gsoft.smartPark</groupId>
-			<artifactId>smartPark-operationCenterImpl</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.gsoft.smartPark</groupId>
-			<artifactId>smartPark-portalCenterImpl</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.gsoft.smartPark</groupId>
-			<artifactId>smartPark-propertyCenterImpl</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		
 	</dependencies>
 	
 	<profiles>
