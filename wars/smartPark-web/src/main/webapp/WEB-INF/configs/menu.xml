@@ -19,6 +19,11 @@
 		<menu id="030107" text="代码集管理" href="page/codemap/codemap.html"></menu>
 		<!-- <menu id="030108" text="系统日记" href="admin/transLog/index.html"></menu> -->
 	</menu>
+	<menu id="040000" text="订单管理">
+		<menu id="040001" text="订单类型" href="page/commonCenter.OrderManager.ordermanagerOrdertype/ordermanagerOrdertype.html"></menu>
+		<menu id="040002" text="订单扩展项" href="page/commonCenter.OrderManager.ordermanagerOrderprojecttype/ordermanagerOrderprojecttype.html"></menu>
+		<!-- <menu id="030108" text="系统日记" href="admin/transLog/index.html"></menu> -->
+	</menu>
 	
 	<!-- <menu id="070000" text="调度管理">
 		<menu id="070101" text="调度配置"  href="page/scheduler.job/job.html"></menu>
