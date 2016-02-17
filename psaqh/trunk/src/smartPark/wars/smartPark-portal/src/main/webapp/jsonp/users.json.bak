@@ -1,0 +1,13 @@
+{
+	"records":[{
+		"loginName":"zhangsan",
+		"userCaption":"张三11"
+	},{
+		"loginName":"lisi",
+		"userCaption":"李四"
+	}],
+	
+	"record":{"userId":"zhangsan","userCaption":"张三"},
+	
+	"totalCount":1
+}
