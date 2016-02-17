@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+.youi-page-header .header-top{
+	background-color:#545454;
+	height:40px;
+	padding:10px;
+}
+
+.youi-page-header  a,.youi-page-header{
+	color:silver;
+}
+
+.youi-page-header  a:hover,.youi-page-header  a:active,.youi-page-header  a:focus{
+	color:white;
+}
+
+.youi-page-body{
+	min-height:300px;
+	padding-left:10%;
+	padding-right:10%;
+}
