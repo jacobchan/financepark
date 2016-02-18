@@ -6,7 +6,6 @@
 				editSrc="esb/web/propertyservicemanagerFxtdcManager/getPropertyservicemanagerFxtdc.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/propertyservicemanagerFxtdcManager/removePropertyservicemanagerFxtdc.json">
 		<youi:fieldLayout>
-
 			<youi:fieldText property="twcrdAddrec"  caption="二维码URL地址"/>
 		</youi:fieldLayout>
 
