@@ -62,4 +62,18 @@
 		<menu id="050003" text="楼层管理" href="page/commonCenter.BuildingBaseManager.bbmFloor/bbmFloor.html"></menu>
 		<menu id="050004" text="单元管理" href="page/commonCenter.BuildingBaseManager.bbmRoom/bbmRoom.html"></menu>
 	</menu>
+	<menu id="330100" text="物业入驻服务管理">
+		<menu id="330101" text="企业入驻管理" href="page/manageCenter.EnterBusinessManager.enterbusinessmanagerRz/enterbusinessmanagerRz.html"></menu>
+	</menu>
+	<menu id="330300" text="公共资源管理">
+		<menu id="330301" text="使用状态管理" href="page/manageCenter.PublicUtilitiesManager.publicutilitiesmanagerReso/publicutilitiesmanagerReso.html"></menu>
+		<menu id="330302" text="订单管理" href="page/manageCenter.PublicUtilitiesManager.publicutilitiesmanagerReso/ordermanagerUserorder.html"></menu>
+	</menu>
+	
+	<menu id="330700" text="运营活动管理">
+		<menu id="330701" text="活动内容管理" href="page/manageCenter.ActivityManager.activityApply/activityApply.html"></menu>
+		<menu id="330702" text="活动报名管理" href="page/manageCenter.ActivityManager.activityApplylist/activityApplylist.html"></menu>
+		<menu id="330703" text="活动评论回复管理" href="page/manageCenter.ActivityManager.activityComment/activityComment.html"></menu>
+		<menu id="330704" text="活动文档管理" href="page/manageCenter.ActivityManager.activityDocument/activityDocument.html"></menu>
+	</menu>
 </menus>
