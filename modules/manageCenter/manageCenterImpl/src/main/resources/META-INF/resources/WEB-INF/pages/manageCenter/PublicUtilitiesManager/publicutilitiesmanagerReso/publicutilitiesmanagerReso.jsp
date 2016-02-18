@@ -7,14 +7,16 @@
 				removeSrc="esb/web/publicutilitiesmanagerResoManager/removePublicutilitiesmanagerReso.json">
 		<youi:fieldLayout>
 
-			<youi:fieldText property="resoDate"  caption="可用日期"/>
-			<youi:fieldText property="commodityId"  caption="商品ID"/>
-			<youi:fieldText property="resoStatus"  caption="资源状态"/>
+			<youi:fieldCalendar property="resoDate"  caption="可用日期"/>
+			<youi:fieldSelect property="resoStatus"  caption="资源状态">
+				<youi:fieldOption caption="可用" value="00"></youi:fieldOption>
+				<youi:fieldOption caption="已过期" value="01"></youi:fieldOption>
+			</youi:fieldSelect>
 			<youi:fieldText property="resoTime"  caption="可用时段"/>
 		</youi:fieldLayout>
 
-		<youi:gridCol property="resoDate"  caption="可用日期"/>
 		<youi:gridCol property="commodityId"  caption="商品ID"/>
+		<youi:gridCol property="resoDate"  caption="可用日期"/>
 		<youi:gridCol property="resoStatus"  caption="资源状态"/>
 		<youi:gridCol property="resoTime"  caption="可用时段"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
@@ -26,10 +28,13 @@
 	<!-- form-资源状态编辑 -->
 	<youi:form dialog="true" caption="资源状态" id="form_publicutilitiesmanagerReso" action="esb/web/publicutilitiesmanagerResoManager/savePublicutilitiesmanagerReso.json">
 		<youi:fieldLayout prefix="record">
-			<youi:fieldText property="resoId"  caption="资源状态序列"/>
-			<youi:fieldText property="resoDate"  caption="可用日期"/>
-			<youi:fieldText property="commodityId"  caption="商品ID"/>
-			<youi:fieldText property="resoStatus"  caption="资源状态"/>
+			<%-- <youi:fieldText property="resoId"  caption="资源状态序列"/> --%>		
+			<youi:fieldSelect property="commodityId"  caption="商品ID" src="esb/web/bbmBuildingManager/getBbmBuildings.json" code="buildingId" show="buildingNo"/>
+			<youi:fieldCalendar property="resoDate"  caption="可用日期"/>
+			<youi:fieldSelect property="resoStatus"  caption="资源状态">
+				<youi:fieldOption caption="可用" value="00"></youi:fieldOption>
+				<youi:fieldOption caption="已过期" value="01"></youi:fieldOption>
+			</youi:fieldSelect>
 			<youi:fieldText property="resoTime"  caption="可用时段"/>
 		</youi:fieldLayout>
 	</youi:form>

@@ -6,11 +6,12 @@
 				editSrc="esb/web/activityApplylistManager/getActivityApplylist.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/activityApplylistManager/removeActivityApplylist.json">
 		<youi:fieldLayout>
-			<youi:fieldText property="applylistTime"  caption="报名时间"/>
+			<youi:fieldCalendar property="applylistTime"  caption="报名时间"/>
 
 		</youi:fieldLayout>
-		<youi:gridCol property="applylistTime"  caption="报名时间"/>
-
+		<youi:gridCol property="activityApply.applyTitle"  caption="活动标题" width="20%"/>
+		<youi:gridCol property="applylistTime"  caption="报名时间" width="20%"/>
+		<youi:gridCol property="applyMember"  caption="报名人" width="20%"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -20,8 +21,9 @@
 	<!-- form--报名名单编辑 -->
 	<youi:form dialog="true" caption="-报名名单" id="form_activityApplylist" action="esb/web/activityApplylistManager/saveActivityApplylist.json">
 		<youi:fieldLayout prefix="record">
-			<youi:fieldText property="applylistTime"  caption="报名时间"/>
-			<youi:fieldText property="applylistId"  caption="报名名单ID"/>
+			<youi:fieldHidden property="applylistId"  caption="报名名单ID"/>
+			<youi:fieldSelect property="activityApply.applyId"  caption="活动" src="esb/web/activityApplyManager/getActivityApplys.json" code="applyId" show="applyTitle"/>
+			<youi:fieldCalendar property="applylistTime"  caption="报名时间"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
