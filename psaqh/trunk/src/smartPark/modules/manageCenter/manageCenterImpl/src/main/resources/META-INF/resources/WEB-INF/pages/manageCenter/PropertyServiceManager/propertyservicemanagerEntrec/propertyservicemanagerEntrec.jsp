@@ -30,7 +30,8 @@
 		<youi:fieldLayout prefix="record" labelWidths="90,100">
 			<youi:fieldText property="enteringName"  caption="入驻申请人"/>
 			<youi:fieldText property="enteringTelephone"  caption="入驻联系电话"/>
-			<youi:fieldHidden property="memberId"  caption="会员用户ID"/>
+			<youi:fieldText property="memberId"  caption="会员用户ID"/>
+			<youi:fieldText property="propertyservicemanagerEntering"  caption="预约记录ID"/>
 			<youi:fieldHidden property="entrecId"  caption="入驻预约记录ID"/>
 			<youi:fieldText property="enteringTime"  caption="预约时间段"/>
 			<youi:fieldSelect property="enteringStatus"  caption="预约数量状态" convert="enteringStatus"/>
