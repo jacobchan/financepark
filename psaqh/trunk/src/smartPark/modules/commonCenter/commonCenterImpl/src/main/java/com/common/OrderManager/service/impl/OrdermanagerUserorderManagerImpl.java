@@ -102,5 +102,14 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     public boolean exsitOrdermanagerUserorder(String propertyName,Object value) throws BusException{
 		return ordermanagerUserorderDao.exists(propertyName,value);
 	}
+    
+    @EsbServiceMapping
+	public void updateUserorderStatus(@ServiceParam(name="userorderId") String id, @ServiceParam(name="userorderStatus") String userorderStatus)
+			throws BusException {
+		// TODO Auto-generated method stub
+    	OrdermanagerUserorder o=ordermanagerUserorderDao.get(id);
+    	o.setUserorderStatus(userorderStatus);
+    	ordermanagerUserorderDao.save(o);
+	}
 
 }
