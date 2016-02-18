@@ -63,4 +63,9 @@ public interface ActivityDocumentManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitActivityDocument(String propertyName,Object value) throws BusException;
+	
+	 /**
+     * 获取文档转换html
+     */
+    public String  getViewDocument(String id) throws BusException;
 }
