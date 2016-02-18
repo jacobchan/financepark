@@ -67,6 +67,10 @@ public class EnterbusinessmanagerRz implements Domain{
 	@Length(max=36)
 	private String parkId;//园区ID
 	
+	@Column(name = "RZ_STATUS_")
+	@Length(max=2)
+	private String rzStatus;//入驻状态
+	
 	public String getRzManager(){
 		return this.rzManager;
 	}
@@ -147,6 +151,14 @@ public class EnterbusinessmanagerRz implements Domain{
 	
 	
 	
+	public String getRzStatus() {
+		return rzStatus;
+	}
+
+	public void setRzStatus(String rzStatus) {
+		this.rzStatus = rzStatus;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
