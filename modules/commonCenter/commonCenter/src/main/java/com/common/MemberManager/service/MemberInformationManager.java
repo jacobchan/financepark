@@ -12,7 +12,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.common.MemberManager.entity.MemberInformation;
 
 public interface MemberInformationManager extends BaseManager{
@@ -63,4 +63,13 @@ public interface MemberInformationManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitMemberInformation(String propertyName,Object value) throws BusException;
+	
+	/**
+     * 用户注册
+     * @param ids
+     */
+	public void saveReister(@ServiceParam(name="userName") String userName,
+			@ServiceParam(name="passwd") String passwd,
+			@ServiceParam(name="repasswd") String repasswd,
+			@ServiceParam(name="mobile") String mobile) throws BusException;
 }
