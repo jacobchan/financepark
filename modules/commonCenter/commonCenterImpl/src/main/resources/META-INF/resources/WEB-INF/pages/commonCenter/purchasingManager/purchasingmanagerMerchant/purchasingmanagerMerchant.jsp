@@ -14,7 +14,7 @@
 				editSrc="esb/web/purchasingmanagerMerchantManager/getPurchasingmanagerMerchant.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/purchasingmanagerMerchantManager/removePurchasingmanagerMerchant.json">
 		<youi:fieldLayout labelWidths="120,120">
-			<youi:fieldSelect property="parkBusinessTupe" convert="PARK_BUSINESS_TYPE"  caption="园区商业类型"/>
+			<youi:fieldSelect property="parkBusinessTupe" convert="businessType"  caption="园区商业类型"/>
 			<youi:fieldSelect property="merchantType" convert="MERCHANT_TYPE"   caption="商户类型"/>
 			<youi:fieldText property="merchantName"  caption="商户名称"/>
 			<youi:fieldText property="merchantEnterpriseName"  caption="企业名称"/>
@@ -25,7 +25,7 @@
 		<youi:gridCol property="merchantName"  caption="商户名称" align="center" width="15%"/>
 		<youi:gridCol property="merchantEnterpriseName"  caption="企业名称" align="center" width="15%"/>
 		<youi:gridCol property="merchantType"  caption="商户类型" align="center" convert="MERCHANT_TYPE" width="15%"/>
-		<youi:gridCol property="parkBusinessTupe"  caption="园区商业类型" align="center" convert="PARK_BUSINESS_TYPE" width="15%"/>
+		<youi:gridCol property="parkBusinessTupe"  caption="园区商业类型" align="center" convert="businessType" width="15%"/>
 		<youi:gridCol property="merchantLinkman"  caption="联系人" align="center" width="10%"/>
 		<youi:gridCol property="merchantLinkmanPhone"  caption="联系人电话" align="center" width="10%"/>
 		<youi:gridCol property="merchantSendAddress"  caption="发货地址" align="center" width="10%"/>
@@ -43,7 +43,7 @@
 			<youi:fieldText property="merchantName"  caption="商户名称"/>
 			<youi:fieldText property="merchantEnterpriseName"  caption="企业名称"/>
 			<youi:fieldSelect property="merchantType"  caption="商户类型" convert="MERCHANT_TYPE"/>
-			<youi:fieldSelect property="parkBusinessTupe"  caption="园区商业类型" convert="PARK_BUSINESS_TYPE"/>
+			<youi:fieldSelect property="parkBusinessTupe"  caption="园区商业类型" convert="businessType"/>
 			<youi:fieldText property="merchantLinkman"  caption="联系人"/>
 			<youi:fieldText property="merchantLinkmanPhone"  caption="联系人电话"/>
 			<youi:fieldText property="merchantSendAddress"  caption="发货地址"/>
