@@ -4,8 +4,8 @@
 package com.manage.ReserveManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
@@ -37,6 +37,14 @@ public class ReservationRecord implements Domain{
 	@Column(name = "RECORD_VISITE_STATUS")
 	@Length(max=2)
 	private String recordVisiteStatus;//是否到访
+	
+	@Column(name = "VISITE_DATE")
+	@Length(max=20)
+	private String visiteDate;//来访日期
+	
+	@Column(name = "VISITE_TIME")
+	@Length(max=20)
+	private String VisiteTime;//来访时间
 
 	@Column(name = "RECORD_CUSTOMER")
 	@Length(max=32)
@@ -103,20 +111,55 @@ public class ReservationRecord implements Domain{
 	
 	
 	
+	public String getVisiteDate() {
+		return visiteDate;
+	}
+
+	public void setVisiteDate(String visiteDate) {
+		this.visiteDate = visiteDate;
+	}
+
+	public String getVisiteTime() {
+		return VisiteTime;
+	}
+
+	public void setVisiteTime(String visiteTime) {
+		VisiteTime = visiteTime;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((recordServiceTel == null) ? 0 : recordServiceTel.hashCode());
-		result = prime * result + ((recordStatus == null) ? 0 : recordStatus.hashCode());
-		result = prime * result + ((recordMemberId == null) ? 0 : recordMemberId.hashCode());
-		result = prime * result + ((recordVisiteStatus == null) ? 0 : recordVisiteStatus.hashCode());
-		result = prime * result + ((recordCustomer == null) ? 0 : recordCustomer.hashCode());
-		result = prime * result + ((recordId == null) ? 0 : recordId.hashCode());
-		result = prime * result + ((recordType == null) ? 0 : recordType.hashCode());
+		result = prime * result
+				+ ((VisiteTime == null) ? 0 : VisiteTime.hashCode());
+		result = prime * result
+				+ ((recordCustomer == null) ? 0 : recordCustomer.hashCode());
+		result = prime * result
+				+ ((recordId == null) ? 0 : recordId.hashCode());
+		result = prime * result
+				+ ((recordMemberId == null) ? 0 : recordMemberId.hashCode());
+		result = prime
+				* result
+				+ ((recordServiceTel == null) ? 0 : recordServiceTel.hashCode());
+		result = prime * result
+				+ ((recordStatus == null) ? 0 : recordStatus.hashCode());
+		result = prime * result
+				+ ((recordType == null) ? 0 : recordType.hashCode());
+		result = prime
+				* result
+				+ ((recordVisiteStatus == null) ? 0 : recordVisiteStatus
+						.hashCode());
+		result = prime * result
+				+ ((visiteDate == null) ? 0 : visiteDate.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -125,26 +168,11 @@ public class ReservationRecord implements Domain{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final ReservationRecord other = (ReservationRecord) obj;
-		if (recordServiceTel == null) {
-			if (other.recordServiceTel != null)
+		ReservationRecord other = (ReservationRecord) obj;
+		if (VisiteTime == null) {
+			if (other.VisiteTime != null)
 				return false;
-		} else if (!recordServiceTel.equals(other.recordServiceTel))
-			return false;
-		if (recordStatus == null) {
-			if (other.recordStatus != null)
-				return false;
-		} else if (!recordStatus.equals(other.recordStatus))
-			return false;
-		if (recordMemberId == null) {
-			if (other.recordMemberId != null)
-				return false;
-		} else if (!recordMemberId.equals(other.recordMemberId))
-			return false;
-		if (recordVisiteStatus == null) {
-			if (other.recordVisiteStatus != null)
-				return false;
-		} else if (!recordVisiteStatus.equals(other.recordVisiteStatus))
+		} else if (!VisiteTime.equals(other.VisiteTime))
 			return false;
 		if (recordCustomer == null) {
 			if (other.recordCustomer != null)
@@ -156,14 +184,39 @@ public class ReservationRecord implements Domain{
 				return false;
 		} else if (!recordId.equals(other.recordId))
 			return false;
+		if (recordMemberId == null) {
+			if (other.recordMemberId != null)
+				return false;
+		} else if (!recordMemberId.equals(other.recordMemberId))
+			return false;
+		if (recordServiceTel == null) {
+			if (other.recordServiceTel != null)
+				return false;
+		} else if (!recordServiceTel.equals(other.recordServiceTel))
+			return false;
+		if (recordStatus == null) {
+			if (other.recordStatus != null)
+				return false;
+		} else if (!recordStatus.equals(other.recordStatus))
+			return false;
 		if (recordType == null) {
 			if (other.recordType != null)
 				return false;
 		} else if (!recordType.equals(other.recordType))
 			return false;
+		if (recordVisiteStatus == null) {
+			if (other.recordVisiteStatus != null)
+				return false;
+		} else if (!recordVisiteStatus.equals(other.recordVisiteStatus))
+			return false;
+		if (visiteDate == null) {
+			if (other.visiteDate != null)
+				return false;
+		} else if (!visiteDate.equals(other.visiteDate))
+			return false;
 		return true;
 	}
-	
+
 	public String toString(){
 		return super.toString();
 	}
