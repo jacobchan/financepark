@@ -63,4 +63,10 @@ public interface EnterpriseEmployeesManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitEnterpriseEmployees(String propertyName,Object value) throws BusException;
+	
+	/**
+     * 入驻审核成功后同步企业员工数据
+     */
+    public EnterpriseEmployees saveEnterpriseEmployeesAfterEnter(String id) throws BusException;
+	
 }
