@@ -8,7 +8,6 @@
 		<youi:fieldLayout>
 			<youi:fieldText property="moverecUnit"  caption="楼宇单元"/>
 			<youi:fieldText property="moverecComp"  caption="搬家企业名称"/>
-
 			<youi:fieldText property="moverecRemark"  caption="物品描述"/>
 			<youi:fieldText property="moverecName"  caption="搬家联系人"/>
 			<youi:fieldText property="memberId"  caption="会员用户ID"/>
@@ -16,7 +15,6 @@
 		</youi:fieldLayout>
 		<youi:gridCol property="moverecUnit"  caption="楼宇单元"/>
 		<youi:gridCol property="moverecComp"  caption="搬家企业名称"/>
-
 		<youi:gridCol property="moverecRemark"  caption="物品描述"/>
 		<youi:gridCol property="moverecName"  caption="搬家联系人"/>
 		<youi:gridCol property="memberId"  caption="会员用户ID"/>
@@ -26,7 +24,6 @@
 			<youi:button name="remove" caption="删除"/>
 		</youi:gridCol>
 	</youi:grid>
-	
 	<!-- form-搬家申请记录编辑 -->
 	<youi:form dialog="true" caption="搬家申请记录" id="form_propertyservicemanagerMoverec" action="esb/web/propertyservicemanagerMoverecManager/savePropertyservicemanagerMoverec.json">
 		<youi:fieldLayout prefix="record">
