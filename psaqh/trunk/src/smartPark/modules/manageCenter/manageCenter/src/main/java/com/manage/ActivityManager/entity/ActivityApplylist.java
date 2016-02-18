@@ -4,6 +4,7 @@
 package com.manage.ActivityManager.entity;
 
 import javax.persistence.*;
+
 import org.hibernate.validator.*;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -30,10 +31,22 @@ public class ActivityApplylist implements Domain{
 	@Length(max=36)
 	private String applylistId;//报名名单ID
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="APPLY_ID_")
 	private com.manage.ActivityManager.entity.ActivityApply activityApply;//活动申请ID
 	
+	@Column(name = "APPLY_MEMBER_")
+	@Length(max=36)
+	private String applyMember;//报名人
+	
+	public String getApplyMember() {
+		return applyMember;
+	}
+
+	public void setApplyMember(String applyMember) {
+		this.applyMember = applyMember;
+	}
+
 	public String getApplylistTime(){
 		return this.applylistTime;
 	}
