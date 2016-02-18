@@ -42,14 +42,14 @@
 			<youi:fieldHidden property="rzId"  caption="ID"/>
 			<youi:fieldSelect property="rzManager"  caption="企业管理员" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
 			<youi:fieldCalendar property="rzDate"  caption="入驻时间"/>
-			<youi:fieldText property="rzRemark"  caption="企业备注"/>
-			<youi:fieldText property="buildingId"  caption="楼栋ID"/>
+			<youi:fieldSelect property="parkId"  caption="园区ID" src="esb/web/bbmParkManager/getBbmParks.json" code="parkId" show="parkName"/>
+			<youi:fieldSelect property="buildingId"  caption="楼栋ID" src="esb/web/bbmBuildingManager/getBbmBuildings.json" code="buildingId" show="buildingNo"/>
 			<youi:fieldText property="rzBuss"  caption="企业主营"/>
 			<youi:fieldSelect property="enTypeId"  caption="企业类型" src="esb/web/etypeEnterprisetypeManager/getEtypeEnterprisetypes.json" code="enTypeId" show="enTypeName"/>
 			<youi:fieldText property="rzSign"  caption="企业码"/>
 			<youi:fieldText property="rzMem"  caption="会员信息"/>
 			<youi:fieldText property="rzTelephone"  caption="联系方式"/>
-			<youi:fieldText property="parkId"  caption="园区ID"/>
+			<youi:fieldArea property="rzRemark"  caption="企业备注"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
