@@ -4,8 +4,8 @@
 package com.common.purchasingManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
@@ -41,6 +41,10 @@ public class PurchasingmanagerCommodity implements Domain{
 	@Column(name = "COMMODITY_TITLE_")
 	@Length(max=128)
 	private String commodityTitle;//标题
+	
+	@Column(name = "COMMODITY_BRAND_")
+	@Length(max=128)
+	private String commodityBrand;//品牌
 
 	@Column(name = "PARK_BUSINESS_TUPE_")
 	@Length(max=2)
@@ -221,6 +225,14 @@ public class PurchasingmanagerCommodity implements Domain{
 		return this.commodityUpTime;
 	}
 	
+	public String getCommodityBrand() {
+		return commodityBrand;
+	}
+
+	public void setCommodityBrand(String commodityBrand) {
+		this.commodityBrand = commodityBrand;
+	}
+
 	public void setCommodityUpTime(String commodityUpTime){
 		this.commodityUpTime = commodityUpTime;
 	}
@@ -254,32 +266,80 @@ public class PurchasingmanagerCommodity implements Domain{
 		return this.purchasingmanagerCategory;
 	}
 	
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((companyServerId == null) ? 0 : companyServerId.hashCode());
-		result = prime * result + ((commodityDescribe == null) ? 0 : commodityDescribe.hashCode());
-		result = prime * result + ((commodityImage == null) ? 0 : commodityImage.hashCode());
-		result = prime * result + ((commodityId == null) ? 0 : commodityId.hashCode());
-		result = prime * result + ((commodityTitle == null) ? 0 : commodityTitle.hashCode());
-		result = prime * result + ((parkBusinessTupe == null) ? 0 : parkBusinessTupe.hashCode());
-		result = prime * result + ((favoritGoodsId == null) ? 0 : favoritGoodsId.hashCode());
-		result = prime * result + ((commodityHighestPrice == null) ? 0 : commodityHighestPrice.hashCode());
-		result = prime * result + ((commodityIsnotDisplayStock == null) ? 0 : commodityIsnotDisplayStock.hashCode());
-		result = prime * result + ((companyCateringId == null) ? 0 : companyCateringId.hashCode());
-		result = prime * result + ((commodityPrice == null) ? 0 : commodityPrice.hashCode());
-		result = prime * result + ((commodityCoverImage == null) ? 0 : commodityCoverImage.hashCode());
-		result = prime * result + ((commodityOriginalPrice == null) ? 0 : commodityOriginalPrice.hashCode());
-		result = prime * result + ((commodityDownTime == null) ? 0 : commodityDownTime.hashCode());
-		result = prime * result + ((companyGroupId == null) ? 0 : companyGroupId.hashCode());
-		result = prime * result + ((commodityLowestPrice == null) ? 0 : commodityLowestPrice.hashCode());
-		result = prime * result + ((commodityUpTime == null) ? 0 : commodityUpTime.hashCode());
-		result = prime * result + ((commodityStock == null) ? 0 : commodityStock.hashCode());
+		result = prime * result
+				+ ((commodityBrand == null) ? 0 : commodityBrand.hashCode());
+		result = prime
+				* result
+				+ ((commodityCoverImage == null) ? 0 : commodityCoverImage
+						.hashCode());
+		result = prime
+				* result
+				+ ((commodityDescribe == null) ? 0 : commodityDescribe
+						.hashCode());
+		result = prime
+				* result
+				+ ((commodityDownTime == null) ? 0 : commodityDownTime
+						.hashCode());
+		result = prime
+				* result
+				+ ((commodityHighestPrice == null) ? 0 : commodityHighestPrice
+						.hashCode());
+		result = prime * result
+				+ ((commodityId == null) ? 0 : commodityId.hashCode());
+		result = prime * result
+				+ ((commodityImage == null) ? 0 : commodityImage.hashCode());
+		result = prime
+				* result
+				+ ((commodityIsnotDisplayStock == null) ? 0
+						: commodityIsnotDisplayStock.hashCode());
+		result = prime
+				* result
+				+ ((commodityLowestPrice == null) ? 0 : commodityLowestPrice
+						.hashCode());
+		result = prime
+				* result
+				+ ((commodityOriginalPrice == null) ? 0
+						: commodityOriginalPrice.hashCode());
+		result = prime * result
+				+ ((commodityPrice == null) ? 0 : commodityPrice.hashCode());
+		result = prime * result
+				+ ((commodityStock == null) ? 0 : commodityStock.hashCode());
+		result = prime * result
+				+ ((commodityTitle == null) ? 0 : commodityTitle.hashCode());
+		result = prime * result
+				+ ((commodityUpTime == null) ? 0 : commodityUpTime.hashCode());
+		result = prime
+				* result
+				+ ((companyCateringId == null) ? 0 : companyCateringId
+						.hashCode());
+		result = prime * result
+				+ ((companyGroupId == null) ? 0 : companyGroupId.hashCode());
+		result = prime * result
+				+ ((companyServerId == null) ? 0 : companyServerId.hashCode());
+		result = prime * result
+				+ ((favoritGoodsId == null) ? 0 : favoritGoodsId.hashCode());
+		result = prime
+				* result
+				+ ((parkBusinessTupe == null) ? 0 : parkBusinessTupe.hashCode());
+		result = prime
+				* result
+				+ ((purchasingmanagerCategory == null) ? 0
+						: purchasingmanagerCategory.hashCode());
+		result = prime
+				* result
+				+ ((purchasingmanagerGenre == null) ? 0
+						: purchasingmanagerGenre.hashCode());
+		result = prime
+				* result
+				+ ((purchasingmanagerMerchant == null) ? 0
+						: purchasingmanagerMerchant.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -288,100 +348,123 @@ public class PurchasingmanagerCommodity implements Domain{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final PurchasingmanagerCommodity other = (PurchasingmanagerCommodity) obj;
-		if (companyServerId == null) {
-			if (other.companyServerId != null)
+		PurchasingmanagerCommodity other = (PurchasingmanagerCommodity) obj;
+		if (commodityBrand == null) {
+			if (other.commodityBrand != null)
 				return false;
-		} else if (!companyServerId.equals(other.companyServerId))
-			return false;
-		if (commodityDescribe == null) {
-			if (other.commodityDescribe != null)
-				return false;
-		} else if (!commodityDescribe.equals(other.commodityDescribe))
-			return false;
-		if (commodityImage == null) {
-			if (other.commodityImage != null)
-				return false;
-		} else if (!commodityImage.equals(other.commodityImage))
-			return false;
-		if (commodityId == null) {
-			if (other.commodityId != null)
-				return false;
-		} else if (!commodityId.equals(other.commodityId))
-			return false;
-		if (commodityTitle == null) {
-			if (other.commodityTitle != null)
-				return false;
-		} else if (!commodityTitle.equals(other.commodityTitle))
-			return false;
-		if (parkBusinessTupe == null) {
-			if (other.parkBusinessTupe != null)
-				return false;
-		} else if (!parkBusinessTupe.equals(other.parkBusinessTupe))
-			return false;
-		if (favoritGoodsId == null) {
-			if (other.favoritGoodsId != null)
-				return false;
-		} else if (!favoritGoodsId.equals(other.favoritGoodsId))
-			return false;
-		if (commodityHighestPrice == null) {
-			if (other.commodityHighestPrice != null)
-				return false;
-		} else if (!commodityHighestPrice.equals(other.commodityHighestPrice))
-			return false;
-		if (commodityIsnotDisplayStock == null) {
-			if (other.commodityIsnotDisplayStock != null)
-				return false;
-		} else if (!commodityIsnotDisplayStock.equals(other.commodityIsnotDisplayStock))
-			return false;
-		if (companyCateringId == null) {
-			if (other.companyCateringId != null)
-				return false;
-		} else if (!companyCateringId.equals(other.companyCateringId))
-			return false;
-		if (commodityPrice == null) {
-			if (other.commodityPrice != null)
-				return false;
-		} else if (!commodityPrice.equals(other.commodityPrice))
+		} else if (!commodityBrand.equals(other.commodityBrand))
 			return false;
 		if (commodityCoverImage == null) {
 			if (other.commodityCoverImage != null)
 				return false;
 		} else if (!commodityCoverImage.equals(other.commodityCoverImage))
 			return false;
-		if (commodityOriginalPrice == null) {
-			if (other.commodityOriginalPrice != null)
+		if (commodityDescribe == null) {
+			if (other.commodityDescribe != null)
 				return false;
-		} else if (!commodityOriginalPrice.equals(other.commodityOriginalPrice))
+		} else if (!commodityDescribe.equals(other.commodityDescribe))
 			return false;
 		if (commodityDownTime == null) {
 			if (other.commodityDownTime != null)
 				return false;
 		} else if (!commodityDownTime.equals(other.commodityDownTime))
 			return false;
-		if (companyGroupId == null) {
-			if (other.companyGroupId != null)
+		if (commodityHighestPrice == null) {
+			if (other.commodityHighestPrice != null)
 				return false;
-		} else if (!companyGroupId.equals(other.companyGroupId))
+		} else if (!commodityHighestPrice.equals(other.commodityHighestPrice))
+			return false;
+		if (commodityId == null) {
+			if (other.commodityId != null)
+				return false;
+		} else if (!commodityId.equals(other.commodityId))
+			return false;
+		if (commodityImage == null) {
+			if (other.commodityImage != null)
+				return false;
+		} else if (!commodityImage.equals(other.commodityImage))
+			return false;
+		if (commodityIsnotDisplayStock == null) {
+			if (other.commodityIsnotDisplayStock != null)
+				return false;
+		} else if (!commodityIsnotDisplayStock
+				.equals(other.commodityIsnotDisplayStock))
 			return false;
 		if (commodityLowestPrice == null) {
 			if (other.commodityLowestPrice != null)
 				return false;
 		} else if (!commodityLowestPrice.equals(other.commodityLowestPrice))
 			return false;
-		if (commodityUpTime == null) {
-			if (other.commodityUpTime != null)
+		if (commodityOriginalPrice == null) {
+			if (other.commodityOriginalPrice != null)
 				return false;
-		} else if (!commodityUpTime.equals(other.commodityUpTime))
+		} else if (!commodityOriginalPrice.equals(other.commodityOriginalPrice))
+			return false;
+		if (commodityPrice == null) {
+			if (other.commodityPrice != null)
+				return false;
+		} else if (!commodityPrice.equals(other.commodityPrice))
 			return false;
 		if (commodityStock == null) {
 			if (other.commodityStock != null)
 				return false;
 		} else if (!commodityStock.equals(other.commodityStock))
 			return false;
+		if (commodityTitle == null) {
+			if (other.commodityTitle != null)
+				return false;
+		} else if (!commodityTitle.equals(other.commodityTitle))
+			return false;
+		if (commodityUpTime == null) {
+			if (other.commodityUpTime != null)
+				return false;
+		} else if (!commodityUpTime.equals(other.commodityUpTime))
+			return false;
+		if (companyCateringId == null) {
+			if (other.companyCateringId != null)
+				return false;
+		} else if (!companyCateringId.equals(other.companyCateringId))
+			return false;
+		if (companyGroupId == null) {
+			if (other.companyGroupId != null)
+				return false;
+		} else if (!companyGroupId.equals(other.companyGroupId))
+			return false;
+		if (companyServerId == null) {
+			if (other.companyServerId != null)
+				return false;
+		} else if (!companyServerId.equals(other.companyServerId))
+			return false;
+		if (favoritGoodsId == null) {
+			if (other.favoritGoodsId != null)
+				return false;
+		} else if (!favoritGoodsId.equals(other.favoritGoodsId))
+			return false;
+		if (parkBusinessTupe == null) {
+			if (other.parkBusinessTupe != null)
+				return false;
+		} else if (!parkBusinessTupe.equals(other.parkBusinessTupe))
+			return false;
+		if (purchasingmanagerCategory == null) {
+			if (other.purchasingmanagerCategory != null)
+				return false;
+		} else if (!purchasingmanagerCategory
+				.equals(other.purchasingmanagerCategory))
+			return false;
+		if (purchasingmanagerGenre == null) {
+			if (other.purchasingmanagerGenre != null)
+				return false;
+		} else if (!purchasingmanagerGenre.equals(other.purchasingmanagerGenre))
+			return false;
+		if (purchasingmanagerMerchant == null) {
+			if (other.purchasingmanagerMerchant != null)
+				return false;
+		} else if (!purchasingmanagerMerchant
+				.equals(other.purchasingmanagerMerchant))
+			return false;
 		return true;
 	}
-	
+
 	public String toString(){
 		return super.toString();
 	}
