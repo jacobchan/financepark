@@ -10,9 +10,8 @@
 			<youi:fieldText property="applyOrderNumber"  caption="场地订单编号"/>
 			<youi:fieldText property="applyMaxuser"  caption="限制人数"/>
 			<youi:fieldText property="applyTitle"  caption="活动标题"/>
-			<youi:fieldText property="commentTime"  caption="评论时间"/>
-			<youi:fieldText property="commentContent"  caption="评论内容"/>
-
+			<youi:fieldCalendar property="startTime"  caption="活动开始时间"/>
+			<youi:fieldCalendar property="endTime"  caption="活动结束时间"/>
 			<youi:fieldSelect property="applyStatus"  caption="活动申请状态" convert="activityApplyStatus" />
 			<youi:fieldText property="memberId"  caption="会员用户ID"/>
 		</youi:fieldLayout>
@@ -20,7 +19,8 @@
 		<youi:gridCol property="applyOrderNumber"  caption="场地订单编号" width="100px"/>
 		<youi:gridCol property="applyMaxuser"  caption="限制人数" width="100px"/>
 		<youi:gridCol property="applyTitle"  caption="活动标题" width="150px"/>
-		<youi:gridCol property="commentTime"  caption="活动开始时间" width="100px"/>
+		<youi:gridCol property="startTime"  caption="活动开始时间" width="100px"/>
+		<youi:gridCol property="endTime"  caption="活动结束时间" width="100px"/>
 		<youi:gridCol property="commentContent"  caption="活动内容" width="200px"/>
 
 		<youi:gridCol property="applyStatus"  caption="活动申请状态" convert="activityApplyStatus" width="100px"/>
@@ -40,8 +40,8 @@
 			<youi:fieldText property="applyTitle"  caption="活动标题"/>
 			<youi:fieldSpinner property="applyMaxuser"  caption="限制人数" min="0" step="1" styleClass="input-group"/>
 			<youi:fieldSelect property="memberId"  caption="会员用户ID" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
-			<youi:fieldCalendar property="commentTime"  caption="活动开始时间"/>
-			<youi:fieldCalendar property="commentTimeEnd"  caption="活动结束时间"/>
+			<youi:fieldCalendar property="startTime"  caption="活动开始时间"/>
+			<youi:fieldCalendar property="endTime"  caption="活动结束时间"/>
 			<youi:fieldSelect property="applyStatus"  caption="活动申请状态" convert="activityApplyStatus"/>
 			<youi:fieldArea property="commentContent"  caption="活动内容"/>
 		</youi:fieldLayout>

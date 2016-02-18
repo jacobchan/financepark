@@ -41,7 +41,7 @@
 	
 	<!-- form-用户订单表编辑 -->
 	<youi:form dialog="true" caption="用户订单表" id="form_ordermanagerUserorder" action="esb/web/ordermanagerUserorderManager/saveOrdermanagerUserorder.json">
-		<youi:fieldLayout prefix="record">
+		<youi:fieldLayout prefix="record" labelWidths="100,100">
 			<youi:fieldText property="userorderPayMode"  caption="支付方式"/>
 			<youi:fieldText property="userorderBuyUser"  caption="购买人"/>
 			<youi:fieldText property="userorderAmount"  caption="订单金额"/>

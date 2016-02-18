@@ -23,6 +23,7 @@
 		<youi:fieldLayout prefix="record">
 			<youi:fieldHidden property="applylistId"  caption="报名名单ID"/>
 			<youi:fieldSelect property="activityApply.applyId"  caption="活动" src="esb/web/activityApplyManager/getActivityApplys.json" code="applyId" show="applyTitle"/>
+			<youi:fieldSelect property="applyMember"  caption="报名人" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
 			<youi:fieldCalendar property="applylistTime"  caption="报名时间"/>
 		</youi:fieldLayout>
 	</youi:form>
