@@ -12,19 +12,19 @@
 				editSrc="esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommodity.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/purchasingmanagerCommodityManager/removePurchasingmanagerCommodity.json">
 		<youi:fieldLayout labelWidths="120,120">
-			<youi:fieldSelect property="parkBusinessTupe"  convert="PARK_BUSINESS_TYPE"  caption="园区商业类型"/>
+			<youi:fieldSelect property="parkBusinessTupe"  convert="businessType"  caption="园区商业类型"/>
 			<youi:fieldText property="commodityTitle"  caption="标题"/>
 			<youi:fieldText property="commodityPrice"  caption="标价"/>
 			<youi:fieldText property="commodityStock"  caption="库存"/>
 		</youi:fieldLayout>
 		
-		<youi:gridCol property="parkBusinessTupe" convert="PARK_BUSINESS_TYPE"  caption="园区商业类型" align="center" width="13%"/>
+		<youi:gridCol property="parkBusinessTupe" convert="businessType"  caption="园区商业类型" align="center" width="13%"/>
 		<youi:gridCol property="commodityTitle"  caption="标题" align="center" width="13%"/>
 		<youi:gridCol property="commodityDescribe"  caption="描述" align="center" width="8%"/>
 		<youi:gridCol property="commodityPrice"  caption="标价" align="center" width="8%"/>
 		<youi:gridCol property="commodityOriginalPrice"  caption="原价" align="center" width="8%"/>
 		<youi:gridCol property="commodityHighestPrice"  caption="最高价" align="center" width="8%"/>
-		<youi:gridCol property="commodityLowestPrice"  caption="最低价" align="center" width="8%"/>
+		<youi:gridCol property="commodityBrand"  caption="品牌" align="center" width="8%"/>
 		<youi:gridCol property="commodityIsnotDisplayStock"  convert="ISNOT" caption="是否显示库存" align="center" width="10%"/>
 		<youi:gridCol property="commodityStock"  caption="库存" align="center" width="8%"/>
 		<youi:gridCol property="commodityUpTime"  caption="上架时间" align="center" width="8%"/>
@@ -41,9 +41,10 @@
 	<youi:form dialog="true" caption="商品信息" id="form_purchasingmanagerCommodity" action="esb/web/purchasingmanagerCommodityManager/savePurchasingmanagerCommodity.json">
 		<youi:fieldLayout prefix="record" labelWidths="120,120">
 			<youi:fieldText property="commodityTitle"  caption="标题"/>
-			<youi:fieldSelect property="parkBusinessTupe"  caption="园区商业类型" convert="PARK_BUSINESS_TYPE" />
+			<youi:fieldSelect property="parkBusinessTupe"  caption="园区商业类型" convert="businessType" />
 			<youi:fieldSelect property="commodityIsnotDisplayStock" convert="ISNOT"  caption="是否显示库存"/>
 			<youi:fieldText property="commodityPrice"  caption="标价"/>
+			<youi:fieldText property="commodityBrand"  caption="品牌"/>
 			<youi:fieldText property="commodityOriginalPrice"  caption="原价"/>
 			<youi:fieldText property="commodityHighestPrice"  caption="最高价"/>
 			<youi:fieldText property="commodityLowestPrice"  caption="最低价"/>

@@ -6,7 +6,7 @@
 				editSrc="esb/web/purchasingmanagerCommodityExtendManager/getPurchasingmanagerCommodityExtend.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/purchasingmanagerCommodityExtendManager/removePurchasingmanagerCommodityExtend.json">
 		<youi:fieldLayout labelWidths="120,120">
-			<youi:fieldSelect property="parkBusinessTupe" convert="PARK_BUSINESS_TYPE" caption="园区商业类型"/>
+			<youi:fieldSelect property="parkBusinessTupe" convert="businessType" caption="园区商业类型"/>
 			<youi:fieldSelect property="commodityExtendInformationType"  caption="信息类型"/>
 			<youi:fieldText property="commodityExtendDisplayName"  caption="显示名称"/>
 			<youi:fieldText property="commodityExtendFieldName"  caption="字段名称"/>
@@ -15,7 +15,7 @@
 			<youi:fieldSelect property="commodityExtendIsnotDisplay" convert="ISNOT"  caption="是否显示"/>
 		</youi:fieldLayout>
 
-		<youi:gridCol property="parkBusinessTupe" convert="PARK_BUSINESS_TYPE" caption="园区商业类型" align="center" width="14%"/>
+		<youi:gridCol property="parkBusinessTupe" convert="businessType" caption="园区商业类型" align="center" width="14%"/>
 		<youi:gridCol property="commodityExtendFieldType"  caption="字段类型" align="center" width="14%"/>
 		<youi:gridCol property="commodityExtendDisplayName"  caption="显示名称" align="center" width="16%"/>
 		<youi:gridCol property="commodityExtendFieldName"  caption="字段名称" align="center" width="14%"/>
@@ -33,7 +33,7 @@
 	<!-- form-采购商品信息扩展编辑 -->
 	<youi:form dialog="true" caption="采购商品信息扩展" id="form_purchasingmanagerCommodityExtend" action="esb/web/purchasingmanagerCommodityExtendManager/savePurchasingmanagerCommodityExtend.json">
 		<youi:fieldLayout prefix="record" labelWidths="120,120">
-			<youi:fieldSelect property="parkBusinessTupe" convert="PARK_BUSINESS_TYPE" caption="园区商业类型"/>
+			<youi:fieldSelect property="parkBusinessTupe" convert="businessType" caption="园区商业类型"/>
 			<youi:fieldSelect property="commodityExtendInformationType"  caption="信息类型"/>
 			<youi:fieldText property="commodityExtendDisplayName"  caption="显示名称"/>
 			<youi:fieldText property="commodityExtendFieldName"  caption="字段名称"/>
