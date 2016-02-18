@@ -24,13 +24,17 @@ import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 import com.manage.EmployeeManager.dao.EnterpriseEmployeesDao;
 import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
+import com.manage.EnterBusinessManager.dao.EnterbusinessmanagerRzDao;
+import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
+import com.manage.EnterBusinessManager.service.EnterbusinessmanagerRzManager;
 
 @Service("enterpriseEmployeesManager")
 @Transactional
 public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements EnterpriseEmployeesManager{
 	@Autowired
 	private EnterpriseEmployeesDao enterpriseEmployeesDao;
-	
+	@Autowired
+	private EnterbusinessmanagerRzManager enterbusinessmanagerRzManager;
     /**
      * 查询列表
      */
@@ -101,6 +105,16 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
     
     public boolean exsitEnterpriseEmployees(String propertyName,Object value) throws BusException{
 		return enterpriseEmployeesDao.exists(propertyName,value);
+	}
+    
+    @EsbServiceMapping
+	public EnterpriseEmployees saveEnterpriseEmployeesAfterEnter(@ServiceParam(name="rzId") String id)
+			throws BusException {
+		// TODO Auto-generated method stub
+    	EnterbusinessmanagerRz enterbusinessmanagerRz=enterbusinessmanagerRzManager.getEnterbusinessmanagerRz(id);
+    	EnterpriseEmployees enterpriseEmployees=new EnterpriseEmployees();
+    	enterpriseEmployees.setEmployeesName(enterbusinessmanagerRz.getRzManager());
+		return enterpriseEmployeesDao.save(enterpriseEmployees);
 	}
 
 }
