@@ -7,7 +7,7 @@
 				removeSrc="esb/web/enterbusinessmanagerRzManager/removeEnterbusinessmanagerRz.json">
 		<youi:fieldLayout>
 			<youi:fieldText property="rzManager"  caption="企业管理员"/>
-			<youi:fieldText property="rzDate"  caption="入驻时间"/>
+			<youi:fieldCalendar property="rzDate"  caption="入驻时间"/>
 			<youi:fieldText property="rzRemark"  caption="企业备注"/>
 			<youi:fieldText property="buildingId"  caption="楼栋ID"/>
 			<youi:fieldText property="rzBuss"  caption="企业主营"/>
@@ -33,18 +33,19 @@
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
 		</youi:gridCol>
+		<youi:button name="pass" caption="审核通过"/>
 	</youi:grid>
 	
 	<!-- form-入驻企业基本信息编辑 -->
 	<youi:form dialog="true" caption="入驻企业基本信息" id="form_enterbusinessmanagerRz" action="esb/web/enterbusinessmanagerRzManager/saveEnterbusinessmanagerRz.json">
 		<youi:fieldLayout prefix="record">
-			<youi:fieldText property="rzManager"  caption="企业管理员"/>
-			<youi:fieldText property="rzDate"  caption="入驻时间"/>
+			<youi:fieldHidden property="rzId"  caption="ID"/>
+			<youi:fieldSelect property="rzManager"  caption="企业管理员" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
+			<youi:fieldCalendar property="rzDate"  caption="入驻时间"/>
 			<youi:fieldText property="rzRemark"  caption="企业备注"/>
 			<youi:fieldText property="buildingId"  caption="楼栋ID"/>
 			<youi:fieldText property="rzBuss"  caption="企业主营"/>
-			<youi:fieldText property="rzId"  caption="ID"/>
-			<youi:fieldText property="enTypeId"  caption="企业类型ID"/>
+			<youi:fieldSelect property="enTypeId"  caption="企业类型" src="esb/web/etypeEnterprisetypeManager/getEtypeEnterprisetypes.json" code="enTypeId" show="enTypeName"/>
 			<youi:fieldText property="rzSign"  caption="企业码"/>
 			<youi:fieldText property="rzMem"  caption="会员信息"/>
 			<youi:fieldText property="rzTelephone"  caption="联系方式"/>
@@ -55,4 +56,15 @@
 	<!--**********************************页面函数Start********************************-->
 	
 	<!--**********************************页面函数End**********************************-->
+	<youi:func name="func_grid_pass">
+	var gridElement=$elem('grid_enterbusinessmanagerRz',pageId),
+		selectedRecord = gridElement.grid('getSelectedRecord');
+	$.youi.ajaxUtil.ajax({
+		url:'esb/web/enterpriseEmployeesManager/saveEnterpriseEmployeesAfterEnter.json',
+		data:'rzId='+selectedRecord.rzId,
+		success:function(result){
+			
+		}
+	});
+	</youi:func>
 </youi:page>
