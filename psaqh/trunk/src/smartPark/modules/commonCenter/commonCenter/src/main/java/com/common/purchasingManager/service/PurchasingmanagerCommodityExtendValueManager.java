@@ -12,7 +12,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.common.purchasingManager.entity.PurchasingmanagerCommodityExtendValue;
 
 public interface PurchasingmanagerCommodityExtendValueManager extends BaseManager{
@@ -63,4 +62,9 @@ public interface PurchasingmanagerCommodityExtendValueManager extends BaseManage
      * @param ids
      */
 	public boolean exsitPurchasingmanagerCommodityExtendValue(String propertyName,Object value) throws BusException;
+	/**
+     * 根据商品ID和扩展属性名获取扩展属性值对象
+     */
+	public PurchasingmanagerCommodityExtendValue getPurchasingmanagerCommodityExtendValue(
+			String commodityId, String commodityExtendValueFieldName);
 }
