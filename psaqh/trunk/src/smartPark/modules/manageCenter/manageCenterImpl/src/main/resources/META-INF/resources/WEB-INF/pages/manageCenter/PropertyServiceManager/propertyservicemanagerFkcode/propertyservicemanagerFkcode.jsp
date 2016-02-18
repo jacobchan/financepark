@@ -10,7 +10,7 @@
 			<youi:fieldText property="fkcodeRemark"  caption="访客说明"/>
 			<youi:fieldText property="fkcodeComp"  caption="到访企业"/>
 			<youi:fieldText property="fkcodeName"  caption="联系人"/>
-			<youi:fieldText property="fkcodeTime"  caption="到访时间"/>
+			<youi:fieldCalendar property="fkcodeTime"  caption="到访时间"/>
 			<youi:fieldText property="memberId"  caption="会员用户ID"/>
 			<youi:fieldText property="fkcodeSex"  caption="性别"/>
 
@@ -36,7 +36,7 @@
 			<youi:fieldText property="fkcodeRemark"  caption="访客说明"/>
 			<youi:fieldText property="fkcodeComp"  caption="到访企业"/>
 			<youi:fieldText property="fkcodeName"  caption="联系人"/>
-			<youi:fieldText property="fkcodeTime"  caption="到访时间"/>
+			<youi:fieldCalendar property="fkcodeTime"  caption="到访时间"/>
 			<youi:fieldText property="memberId"  caption="会员用户ID"/>
 			<youi:fieldText property="fkcodeSex"  caption="性别"/>
 			<youi:fieldText property="fkcodeId"  caption="访客申请ID"/>
