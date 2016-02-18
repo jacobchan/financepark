@@ -78,7 +78,7 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
 			}
 			
 		}
-		pagerRecords.setRecords(rooms);
+		//pagerRecords.setRecords(rooms);
 		return pagerRecords;
 	}
     /**
