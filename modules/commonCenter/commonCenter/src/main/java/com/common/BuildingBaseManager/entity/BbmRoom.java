@@ -4,8 +4,8 @@
 package com.common.BuildingBaseManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
@@ -104,9 +104,48 @@ public class BbmRoom implements Domain{
 	private String roomName;//招商_房间名称
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="PARK_ID_")
+	private com.common.BuildingBaseManager.entity.BbmPark bbmPark;//园区ID
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="BUILDING_ID_")
+	private com.common.BuildingBaseManager.entity.BbmBuilding bbmBuilding;//楼栋ID
+	
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="FLOOR_ID_")
 	private com.common.BuildingBaseManager.entity.BbmFloor bbmFloor;//楼层ID
 	
+	@Transient
+	private String parkName;
+	@Transient
+	private String buildingName;
+	@Transient
+	private String floorName;
+	
+	public String getParkName() {
+		return parkName;
+	}
+
+	public void setParkName(String parkName) {
+		this.parkName = parkName;
+	}
+
+	public String getBuildingName() {
+		return buildingName;
+	}
+
+	public void setBuildingName(String buildingName) {
+		this.buildingName = buildingName;
+	}
+
+	public String getFloorName() {
+		return floorName;
+	}
+
+	public void setFloorName(String floorName) {
+		this.floorName = floorName;
+	}
+
 	public String getStatus(){
 		return this.status;
 	}
@@ -248,6 +287,23 @@ public class BbmRoom implements Domain{
 		this.roomName = roomName;
 	}
 	
+	public com.common.BuildingBaseManager.entity.BbmPark getBbmPark() {
+		return bbmPark;
+	}
+
+	public void setBbmPark(com.common.BuildingBaseManager.entity.BbmPark bbmPark) {
+		this.bbmPark = bbmPark;
+	}
+
+	public com.common.BuildingBaseManager.entity.BbmBuilding getBbmBuilding() {
+		return bbmBuilding;
+	}
+
+	public void setBbmBuilding(
+			com.common.BuildingBaseManager.entity.BbmBuilding bbmBuilding) {
+		this.bbmBuilding = bbmBuilding;
+	}
+
 	public void setBbmFloor(com.common.BuildingBaseManager.entity.BbmFloor bbmFloor){
 		this.bbmFloor = bbmFloor;
 	}

@@ -60,9 +60,34 @@ public class BbmFloor implements Domain{
 	private String floorRoomCount;//楼层单元数量
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="PARK_ID_")
+	private com.common.BuildingBaseManager.entity.BbmPark bbmPark;//园区ID
+	
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="BUILDING_ID_")
 	private com.common.BuildingBaseManager.entity.BbmBuilding bbmBuilding;//楼栋ID
 	
+	@Transient
+	private String parkName;
+	@Transient
+	private String buildingName;
+	
+	public String getParkName() {
+		return parkName;
+	}
+
+	public void setParkName(String parkName) {
+		this.parkName = parkName;
+	}
+
+	public String getBuildingName() {
+		return buildingName;
+	}
+
+	public void setBuildingName(String buildingName) {
+		this.buildingName = buildingName;
+	}
+
 	public String getFloorNo(){
 		return this.floorNo;
 	}
@@ -127,6 +152,14 @@ public class BbmFloor implements Domain{
 		this.floorRoomCount = floorRoomCount;
 	}
 	
+	public void setBbmPark(com.common.BuildingBaseManager.entity.BbmPark bbmPark){
+		this.bbmPark = bbmPark;
+	}
+	
+	public com.common.BuildingBaseManager.entity.BbmPark getBbmPark(){
+		return this.bbmPark;
+	}
+	
 	public void setBbmBuilding(com.common.BuildingBaseManager.entity.BbmBuilding bbmBuilding){
 		this.bbmBuilding = bbmBuilding;
 	}
@@ -134,6 +167,7 @@ public class BbmFloor implements Domain{
 	public com.common.BuildingBaseManager.entity.BbmBuilding getBbmBuilding(){
 		return this.bbmBuilding;
 	}
+	
 	
 	
 	@Override
