@@ -16,11 +16,9 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.common.purchasingManager.entity.PurchasingmanagerMerchantAddress;
 import com.common.purchasingManager.dao.PurchasingmanagerMerchantAddressDao;
 import com.common.purchasingManager.service.PurchasingmanagerMerchantAddressManager;
@@ -67,13 +65,13 @@ public class PurchasingmanagerMerchantAddressManagerImpl extends BaseManagerImpl
      */
     @EsbServiceMapping
     public PurchasingmanagerMerchantAddress savePurchasingmanagerMerchantAddress(PurchasingmanagerMerchantAddress o) throws BusException{
-//    	String purchasingmanagerMerchantAddressId = o.getPurchasingmanagerMerchantAddressId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(purchasingmanagerMerchantAddressId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
+    	String purchasingmanagerMerchantAddressId = o.getMerchantAddressId();
+    	boolean isUpdate = StringUtils.isNotEmpty(purchasingmanagerMerchantAddressId);
+    	if(isUpdate){//修改
+    	
+    	}else{//新增
+    		
+    	}
     	return purchasingmanagerMerchantAddressDao.save(o);
     }
 

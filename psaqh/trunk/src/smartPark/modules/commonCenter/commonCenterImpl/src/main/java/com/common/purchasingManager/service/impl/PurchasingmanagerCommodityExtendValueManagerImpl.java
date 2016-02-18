@@ -3,6 +3,7 @@
  */
 package com.common.purchasingManager.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -16,11 +17,9 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.common.purchasingManager.entity.PurchasingmanagerCommodityExtendValue;
 import com.common.purchasingManager.dao.PurchasingmanagerCommodityExtendValueDao;
 import com.common.purchasingManager.service.PurchasingmanagerCommodityExtendValueManager;
@@ -101,6 +100,23 @@ public class PurchasingmanagerCommodityExtendValueManagerImpl extends BaseManage
     
     public boolean exsitPurchasingmanagerCommodityExtendValue(String propertyName,Object value) throws BusException{
 		return purchasingmanagerCommodityExtendValueDao.exists(propertyName,value);
+	}
+    //根据商品ID和扩展属性名获取扩展属性值对象
+    @EsbServiceMapping
+	public PurchasingmanagerCommodityExtendValue getPurchasingmanagerCommodityExtendValue(@ServiceParam(name="commodityId") String commodityId,
+			@ServiceParam(name="commodityExtendValueFieldName") String commodityExtendValueFieldName) {
+		Collection<Condition> conditions = new ArrayList<Condition>();
+		Collection<Order> orders = new ArrayList<Order>();
+		conditions.add(ConditionUtils.getCondition("commodityExtendValueFieldName", 
+				Condition.EQUALS,commodityExtendValueFieldName));
+		conditions.add(ConditionUtils.getCondition("purchasingmanagerCommodity.commodityId", 
+				Condition.EQUALS,commodityId));
+		List<PurchasingmanagerCommodityExtendValue> list = purchasingmanagerCommodityExtendValueDao.commonQuery(conditions, orders);
+		PurchasingmanagerCommodityExtendValue pce = new PurchasingmanagerCommodityExtendValue();
+		if(list.size()>0){
+			pce = list.get(0);
+		}
+		return pce;
 	}
 
 }
