@@ -7,24 +7,13 @@
 				removeSrc="esb/web/bbmFloorManager/removeBbmFloor.json">
 		<youi:fieldLayout>
 			<youi:fieldText property="floorNo"  caption="楼层编号"/>
-			<youi:fieldText property="roomNo"  caption="招商_房间编号"/>
-			<youi:fieldText property="rzId"  caption="ID"/>
-			<youi:fieldText property="useStatus"  caption="招商_使用状态"/>
 			<youi:fieldText property="floorCaption"  caption="楼层说明"/>
-			<youi:fieldText property="roomNum"  caption="招商_房间个数"/>
-
-			<youi:fieldText property="company"  caption="招商_所属企业"/>
 			<youi:fieldText property="floorRoomCount"  caption="楼层单元数量"/>
 		</youi:fieldLayout>
-		<youi:gridCol property="floorNo"  caption="楼层编号"/>
-		<youi:gridCol property="roomNo"  caption="招商_房间编号"/>
-		<youi:gridCol property="rzId"  caption="ID"/>
-		<youi:gridCol property="useStatus"  caption="招商_使用状态"/>
-		<youi:gridCol property="floorCaption"  caption="楼层说明"/>
-		<youi:gridCol property="roomNum"  caption="招商_房间个数"/>
-
-		<youi:gridCol property="company"  caption="招商_所属企业"/>
-		<youi:gridCol property="floorRoomCount"  caption="楼层单元数量"/>
+		<youi:gridCol property="floorNo"  caption="楼层编号" width="150px"/>
+		<youi:gridCol property="floorCaption"  caption="楼层说明" width="150px"/>
+		<youi:gridCol property="floorRoomCount"  caption="楼层单元数量" width="150px"/>
+		<youi:gridCol property="bbmBuilding.buildingCaption" caption="所属楼栋" width="150px"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -34,14 +23,13 @@
 	<!-- form-楼层基础信息编辑 -->
 	<youi:form dialog="true" caption="楼层基础信息" id="form_bbmFloor" action="esb/web/bbmFloorManager/saveBbmFloor.json">
 		<youi:fieldLayout prefix="record">
+			<youi:fieldHidden property="floorId"  caption="楼层ID"/>
 			<youi:fieldText property="floorNo"  caption="楼层编号"/>
-			<youi:fieldText property="roomNo"  caption="招商_房间编号"/>
-			<youi:fieldText property="rzId"  caption="ID"/>
-			<youi:fieldText property="useStatus"  caption="招商_使用状态"/>
 			<youi:fieldText property="floorCaption"  caption="楼层说明"/>
-			<youi:fieldText property="roomNum"  caption="招商_房间个数"/>
-			<youi:fieldText property="floorId"  caption="楼层ID"/>
-			<youi:fieldText property="company"  caption="招商_所属企业"/>
+			<youi:fieldSelect property="bbmPark.parkId" caption="所属园区" code="parkId" show="parkName"
+				src="esb/web/bbmParkManager/getBbmParks.json"></youi:fieldSelect>
+			<youi:fieldSelect property="bbmBuilding.buildingId" caption="所属楼栋" code="buildingId" show="buildingCaption" showProperty="bbmBuilding.buildingCaption"
+				src="esb/web/bbmBuildingManager/getBbmBuildings.json" parents="bbmPark.parkId" parentsAlias="bbmPark.parkId"></youi:fieldSelect>
 			<youi:fieldText property="floorRoomCount"  caption="楼层单元数量"/>
 		</youi:fieldLayout>
 	</youi:form>
