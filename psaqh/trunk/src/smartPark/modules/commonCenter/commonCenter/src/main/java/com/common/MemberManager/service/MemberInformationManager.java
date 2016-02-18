@@ -68,8 +68,5 @@ public interface MemberInformationManager extends BaseManager{
      * 用户注册
      * @param ids
      */
-	public void saveReister(@ServiceParam(name="userName") String userName,
-			@ServiceParam(name="passwd") String passwd,
-			@ServiceParam(name="repasswd") String repasswd,
-			@ServiceParam(name="mobile") String mobile) throws BusException;
+	public void saveReister(String userName,String passwd,String repasswd,String mobile) throws BusException;
 }
