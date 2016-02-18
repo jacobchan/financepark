@@ -8,7 +8,7 @@
 		editSrc="esb/web/etypeEnterprisetypeManager/getEtypeEnterprisetype.json"
 		edit="NOT" remove="NOT" showCheckbox="true"
 		removeSrc="esb/web/etypeEnterprisetypeManager/removeEtypeEnterprisetype.json">
-		<youi:fieldLayout>
+		<youi:fieldLayout labelWidths="120,120">
 			<youi:fieldSelect property="parentId"
 				src="esb/web/etypeEnterprisetypeManager/getPagerEtypeEnterprisetypes.json"
 				code="enTypeId" show="enTypeName" caption="父ID" tooltips="企业类型父级id" />
