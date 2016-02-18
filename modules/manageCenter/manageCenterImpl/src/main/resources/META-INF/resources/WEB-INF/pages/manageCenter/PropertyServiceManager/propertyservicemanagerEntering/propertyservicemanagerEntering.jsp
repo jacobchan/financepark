@@ -8,7 +8,7 @@
 		<youi:fieldLayout labelWidths="90,100">
 			<youi:fieldSelect property="enteringStatus"  caption="预约数量状态" convert="enteringStatus"/>
 			<youi:fieldText property="enteringRemain"  caption="剩余数量"/>
-			<youi:fieldText property="enteringTime"  caption="预约时间段"/>
+			<youi:fieldText property="enteringTime"  caption="预约时间段" convert="enteringTime"/>
 
 			<youi:fieldText property="enteringAlre"  caption="已预约数"/>
 			<youi:fieldText property="enteringSum"  caption="预约总量"/>
@@ -16,7 +16,7 @@
 		</youi:fieldLayout>
 		<youi:gridCol property="enteringStatus"  caption="预约数量状态" convert="enteringStatus"  width="100"/>
 		
-		<youi:gridCol property="enteringTime"  caption="预约时间段" width="150"/>
+		<youi:gridCol property="enteringTime"  caption="预约时间段" width="150" convert="enteringTime"/>
 
 		<youi:gridCol property="enteringSum"  caption="预约总量" />
 		<youi:gridCol property="enteringRemain"  caption="剩余数量"/>
@@ -33,7 +33,7 @@
 		<youi:fieldLayout prefix="record" labelWidths="90,100">
 			<youi:fieldSelect property="enteringStatus"  caption="预约数量状态" convert="enteringStatus"/>
 			<youi:fieldText property="enteringRemain"  caption="剩余数量"/>
-			<youi:fieldText property="enteringTime"  caption="预约时间段"/>
+			<youi:fieldText property="enteringTime"  caption="预约时间段" convert="enteringTime"/>
 			<youi:fieldHidden property="enteringId"  caption="预约记录ID"/>
 			<youi:fieldText property="enteringAlre"  caption="已预约数"/>
 			<youi:fieldText property="enteringSum"  caption="预约总量"/>
