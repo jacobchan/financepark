@@ -6,6 +6,15 @@
 		<menu id="010103" text="模型设计"  href="page/platform.codepdm.pdm/pdm.html"></menu>
 		<menu id="010104" text="图标"  href="page/common/icon.html"></menu>
 	</menu> -->
+	<menu id="120000" text="商品管理">
+		<menu id="120001" text="商户信息管理" href="page/commonCenter.purchasingManager.purchasingmanagerMerchant/purchasingmanagerMerchant.html"></menu>
+		<!-- <menu id="020002" text="商户地址管理" href="page/commonCenter.purchasingManager.purchasingmanagerMerchantAddress/purchasingmanagerMerchantAddress.html"></menu> -->
+		<menu id="120003" text="商品类目管理" href="page/commonCenter.purchasingManager.purchasingmanagerCategory/purchasingmanagerCategory.html"></menu>
+		<menu id="120004" text="商品类别管理" href="page/commonCenter.purchasingManager.purchasingmanagerGenre/purchasingmanagerGenre.html"></menu>
+		<menu id="120005" text="商品信息管理" href="page/commonCenter.purchasingManager.purchasingmanagerCommodity/purchasingmanagerCommodity.html"></menu>
+		<menu id="120006" text="商品扩展信息管理" href="page/commonCenter.purchasingManager.purchasingmanagerCommodityExtend/purchasingmanagerCommodityExtend.html"></menu>
+		<!-- <menu id="020006" text="商品扩展信息值管理" href="page/commonCenter.purchasingManager.purchasingmanagerCommodityExtendValue/purchasingmanagerCommodityExtendValue.html"></menu> -->
+	</menu>
 	<menu id="020000" text="运营中心">
 		<menu id="021000" text="采购管理" href="">
 			<menu id="021100" text="供应商管理" href="page/commonCenter.purchasingManager.purchasingmanagerMerchant/purchasingmanagerMerchant.html"></menu>
