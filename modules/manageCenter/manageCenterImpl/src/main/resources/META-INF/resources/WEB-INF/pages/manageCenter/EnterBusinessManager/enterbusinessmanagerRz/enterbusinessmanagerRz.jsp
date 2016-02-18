@@ -6,12 +6,11 @@
 				editSrc="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/enterbusinessmanagerRzManager/removeEnterbusinessmanagerRz.json">
 		<youi:fieldLayout>
-			<youi:fieldText property="rzManager"  caption="企业管理员"/>
+			<youi:fieldSelect property="rzManager"  caption="企业管理员" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
 			<youi:fieldCalendar property="rzDate"  caption="入驻时间"/>
 			<youi:fieldText property="rzRemark"  caption="企业备注"/>
 			<youi:fieldText property="buildingId"  caption="楼栋ID"/>
 			<youi:fieldText property="rzBuss"  caption="企业主营"/>
-
 			<youi:fieldText property="enTypeId"  caption="企业类型ID"/>
 			<youi:fieldText property="rzSign"  caption="企业码"/>
 			<youi:fieldText property="rzMem"  caption="会员信息"/>
@@ -20,15 +19,15 @@
 		</youi:fieldLayout>
 		<youi:gridCol property="rzManager"  caption="企业管理员"/>
 		<youi:gridCol property="rzDate"  caption="入驻时间"/>
-		<youi:gridCol property="rzRemark"  caption="企业备注"/>
 		<youi:gridCol property="buildingId"  caption="楼栋ID"/>
-		<youi:gridCol property="rzBuss"  caption="企业主营"/>
-
+		<youi:gridCol property="parkId"  caption="园区ID"/>
+		<youi:gridCol property="rzBuss"  caption="企业主营" convert="pubStatus"/>
 		<youi:gridCol property="enTypeId"  caption="企业类型ID"/>
 		<youi:gridCol property="rzSign"  caption="企业码"/>
 		<youi:gridCol property="rzMem"  caption="会员信息"/>
 		<youi:gridCol property="rzTelephone"  caption="联系方式"/>
-		<youi:gridCol property="parkId"  caption="园区ID"/>
+		<youi:gridCol property="rzStatus"  caption="入驻状态" convert="pubStatus"/>
+		<youi:gridCol property="rzRemark"  caption="企业备注" width="200px"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -44,11 +43,12 @@
 			<youi:fieldCalendar property="rzDate"  caption="入驻时间"/>
 			<youi:fieldSelect property="parkId"  caption="园区ID" src="esb/web/bbmParkManager/getBbmParks.json" code="parkId" show="parkName"/>
 			<youi:fieldSelect property="buildingId"  caption="楼栋ID" src="esb/web/bbmBuildingManager/getBbmBuildings.json" code="buildingId" show="buildingNo"/>
-			<youi:fieldText property="rzBuss"  caption="企业主营"/>
+			<youi:fieldSelect property="rzBuss"  caption="企业主营" convert="pubStatus"/>
 			<youi:fieldSelect property="enTypeId"  caption="企业类型" src="esb/web/etypeEnterprisetypeManager/getEtypeEnterprisetypes.json" code="enTypeId" show="enTypeName"/>
 			<youi:fieldText property="rzSign"  caption="企业码"/>
 			<youi:fieldText property="rzMem"  caption="会员信息"/>
 			<youi:fieldText property="rzTelephone"  caption="联系方式"/>
+			<youi:fieldSelect property="rzStatus"  caption="入驻状态" convert="pubStatus"/>
 			<youi:fieldArea property="rzRemark"  caption="企业备注"/>
 		</youi:fieldLayout>
 	</youi:form>
