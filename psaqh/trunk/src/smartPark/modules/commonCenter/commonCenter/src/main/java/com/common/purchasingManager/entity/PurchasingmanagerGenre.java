@@ -36,7 +36,7 @@ public class PurchasingmanagerGenre implements Domain{
 	private String genreName;//商业类别名称
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="sp__GENRE_ID_")
+    @JoinColumn(name="sp_GENRE_ID_")
 	private com.common.purchasingManager.entity.PurchasingmanagerGenre purchasingmanagerGenre;//320_商业类别ID
 	
 	public String getGenreId(){
