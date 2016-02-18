@@ -63,6 +63,15 @@ public class BbmBuilding implements Domain{
     @JoinColumn(name="PARK_ID_")
 	private com.common.BuildingBaseManager.entity.BbmPark bbmPark;//园区ID
 	
+	@Transient
+	private String parkName;
+	public String getParkName() {
+		return parkName;
+	}
+	public void setParkName(String parkName) {
+		this.parkName = parkName;
+	}
+	
 	public String getAttributeFloorCount(){
 		return this.attributeFloorCount;
 	}
