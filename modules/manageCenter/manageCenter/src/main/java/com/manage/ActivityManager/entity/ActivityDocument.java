@@ -35,7 +35,7 @@ public class ActivityDocument implements Domain{
 	@Length(max=256)
 	private String documentPath;//文档路径
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="APPLY_ID_")
 	private com.manage.ActivityManager.entity.ActivityApply activityApply;//活动申请ID
 	

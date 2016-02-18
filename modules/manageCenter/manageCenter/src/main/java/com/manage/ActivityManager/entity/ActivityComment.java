@@ -4,6 +4,7 @@
 package com.manage.ActivityManager.entity;
 
 import javax.persistence.*;
+
 import org.hibernate.validator.*;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -34,10 +35,24 @@ public class ActivityComment implements Domain{
 	@Length(max=32)
 	private String commentContent;//评论内容
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@Column(name = "COMMENT_MEMBER_")
+	@Length(max=36)
+	private String commentMember;//评论人
+	
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="APPLY_ID_")
 	private com.manage.ActivityManager.entity.ActivityApply activityApply;//活动申请ID
 	
+	
+	
+	public String getCommentMember() {
+		return commentMember;
+	}
+
+	public void setCommentMember(String commentMember) {
+		this.commentMember = commentMember;
+	}
+
 	public String getCommentId(){
 		return this.commentId;
 	}

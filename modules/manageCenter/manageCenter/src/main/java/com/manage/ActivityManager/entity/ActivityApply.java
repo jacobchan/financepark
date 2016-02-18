@@ -40,6 +40,12 @@ public class ActivityApply implements Domain{
 
 	@Column(name = "COMMENT_TIME_")
 	private String commentTime;//评论时间
+	
+	@Column(name = "START_TIME_")
+	private String startTime;//活动开始时间
+	
+	@Column(name = "END_TIME_")
+	private String endTime;//活动结束时间
 
 	@Column(name = "COMMENT_CONTENT_")
 	@Length(max=32)
@@ -124,6 +130,22 @@ public class ActivityApply implements Domain{
 	
 	
 	
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
