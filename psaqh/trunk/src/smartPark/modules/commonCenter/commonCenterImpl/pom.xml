@@ -36,6 +36,13 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.gsoft.framework</groupId>
+			<artifactId>gsoft-framework-security</artifactId>
+			<version>1.0.3.RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 		</dependency>
