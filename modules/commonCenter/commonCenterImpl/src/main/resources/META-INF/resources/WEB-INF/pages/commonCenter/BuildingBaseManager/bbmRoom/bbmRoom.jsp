@@ -6,11 +6,11 @@
 				editSrc="esb/web/bbmRoomManager/getBbmRoom.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/bbmRoomManager/removeBbmRoom.json">
 		<youi:fieldLayout>
-			<youi:fieldText property="status"  caption="使用状态"/>
+			<youi:fieldSelect property="status"  caption="使用状态" convert="floorUsingStatus"/>
 			<youi:fieldText property="rentCharge"  caption="物业_租金"/>
 			<youi:fieldText property="aspect"  caption="招商_朝向"/>
 			<youi:fieldText property="rzId"  caption="ID"/>
-			<youi:fieldText property="saleState"  caption="招商_销售状态"/>
+			<youi:fieldSelect property="saleState"  caption="招商_销售状态" convert="saleState"/>
 			<youi:fieldText property="enteredEnt"  caption="包含企业"/>
 			<youi:fieldText property="salesPrice"  caption="招商_单价"/>
 			<youi:fieldText property="roomCaption"  caption="单元说明"/>
@@ -27,11 +27,11 @@
 			<youi:fieldText property="waterCharge"  caption="物业_水费"/>
 			<youi:fieldText property="roomName"  caption="招商_房间名称"/>
 		</youi:fieldLayout>
-		<youi:gridCol property="status"  caption="使用状态"/>
+		<youi:gridCol property="status"  caption="使用状态" convert="floorUsingStatus"/>
 		<youi:gridCol property="rentCharge"  caption="物业_租金"/>
 		<youi:gridCol property="aspect"  caption="招商_朝向"/>
 		<youi:gridCol property="rzId"  caption="ID"/>
-		<youi:gridCol property="saleState"  caption="招商_销售状态"/>
+		<youi:gridCol property="saleState"  caption="招商_销售状态" convert="saleState"/>
 		<youi:gridCol property="enteredEnt"  caption="包含企业"/>
 		<youi:gridCol property="salesPrice"  caption="招商_单价"/>
 		<youi:gridCol property="roomCaption"  caption="单元说明"/>
@@ -56,11 +56,11 @@
 	<!-- form-单元基础信息编辑 -->
 	<youi:form dialog="true" caption="单元基础信息" id="form_bbmRoom" action="esb/web/bbmRoomManager/saveBbmRoom.json">
 		<youi:fieldLayout prefix="record">
-			<youi:fieldText property="status"  caption="使用状态"/>
+			<youi:fieldSelect property="status"  caption="使用状态" convert="floorUsingStatus"/>
 			<youi:fieldText property="rentCharge"  caption="物业_租金"/>
 			<youi:fieldText property="aspect"  caption="招商_朝向"/>
 			<youi:fieldText property="rzId"  caption="ID"/>
-			<youi:fieldText property="saleState"  caption="招商_销售状态"/>
+			<youi:fieldSelect property="saleState"  caption="招商_销售状态" convert="saleState"/>
 			<youi:fieldText property="enteredEnt"  caption="包含企业"/>
 			<youi:fieldText property="salesPrice"  caption="招商_单价"/>
 			<youi:fieldText property="roomCaption"  caption="单元说明"/>
