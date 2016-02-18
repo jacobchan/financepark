@@ -16,12 +16,11 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
+import com.common.BuildingBaseManager.entity.BbmBuilding;
 import com.common.BuildingBaseManager.entity.BbmFloor;
+import com.common.BuildingBaseManager.entity.BbmPark;
 import com.common.BuildingBaseManager.dao.BbmFloorDao;
 import com.common.BuildingBaseManager.service.BbmFloorManager;
 
@@ -52,7 +51,8 @@ public class BbmFloorManagerImpl extends BaseManagerImpl implements BbmFloorMana
      */
     @EsbServiceMapping
     public BbmFloor getBbmFloor(@ServiceParam(name="floorId") String id)  throws BusException{
-    	return bbmFloorDao.get(id);
+//    	return bbmFloorDao.get(id);
+    	return bbmFloorDao.getInitializeObject(id, new String[]{"bbmBuilding","bbmPark"});
     }
 	
 	@EsbServiceMapping
@@ -60,6 +60,13 @@ public class BbmFloorManagerImpl extends BaseManagerImpl implements BbmFloorMana
 			@ConditionCollection(domainClazz=BbmFloor.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
 		PagerRecords pagerRecords = bbmFloorDao.findByPager(pager, conditions, orders);
+		List<BbmFloor> floors = pagerRecords.getRecords();
+		for(BbmFloor floor:floors){
+			BbmPark park = floor.getBbmPark();
+			floor.setParkName(park.getParkName());
+			BbmBuilding building = floor.getBbmBuilding();
+			floor.setBuildingName(building.getBuildingCaption());
+		}
 		return pagerRecords;
 	}
     /**
