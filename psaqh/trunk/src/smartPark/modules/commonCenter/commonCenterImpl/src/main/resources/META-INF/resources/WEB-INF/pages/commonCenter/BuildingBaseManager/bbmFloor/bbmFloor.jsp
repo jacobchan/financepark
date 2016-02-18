@@ -8,7 +8,6 @@
 		<youi:fieldLayout>
 			<youi:fieldText property="floorNo"  caption="楼层编号"/>
 			<youi:fieldText property="floorCaption"  caption="楼层说明"/>
-			<youi:fieldText property="floorRoomCount"  caption="楼层单元数量"/>
 		</youi:fieldLayout>
 		<youi:gridCol property="floorNo"  caption="楼层编号" width="150px"/>
 		<youi:gridCol property="floorCaption"  caption="楼层说明" width="150px"/>
