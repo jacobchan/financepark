@@ -51,7 +51,6 @@ public class ActivityDocumentManagerImpl extends BaseManagerImpl implements Acti
 	private ActivityDocumentDao activityDocumentDao;
 	@Autowired
 	private FileStoreManager fileStoreManager;
-	
     /**
      * 查询列表
      */
