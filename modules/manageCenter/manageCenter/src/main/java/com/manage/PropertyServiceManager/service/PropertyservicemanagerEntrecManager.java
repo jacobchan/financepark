@@ -48,6 +48,10 @@ public interface PropertyservicemanagerEntrecManager extends BaseManager{
     public void removePropertyservicemanagerEntrec(String id) throws BusException;
     
     /**
+     *入驻申请添加
+     */
+    public void enterApplication(PropertyservicemanagerEntrec propertyservicemanagerEntrec) throws BusException;
+    /**
      * 根据主键集合删除对象
      * @param ids
      */
