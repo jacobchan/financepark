@@ -14,6 +14,11 @@
 		<menu id="022000" text="招商管理" href="">
 			<menu id="022100" text="招商楼宇信息管理" href="page/commonCenter.BuildingBaseManager.bbmRoom/bbmRoom.html"></menu>
 		</menu>
+		
+		<menu id="023000" text="入驻预约管理" href="">
+		<menu id="023100" text="预约数量管理" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerEntering/propertyservicemanagerEntering.html"></menu>
+		<menu id="023200" text="入驻申请管理" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerEntrec/propertyservicemanagerEntrec.html"></menu>
+		</menu>
 	</menu>
 	<menu id="030000" text="公共管理">
 		<menu id="030300" text="角色管理" href="page/security.fuc.role/role.html"></menu>
