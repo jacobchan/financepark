@@ -61,15 +61,24 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
 			@ConditionCollection(domainClazz=BbmRoom.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
 		PagerRecords pagerRecords = bbmRoomDao.findByPager(pager, conditions, orders);
+		@SuppressWarnings("unchecked")
 		List<BbmRoom> rooms = pagerRecords.getRecords();
 		for(BbmRoom room:rooms){
 			BbmPark park = room.getBbmPark();
-			room.setParkName(park.getParkName());
+			if(park != null){
+				room.setParkName(park.getParkName());
+			}
 			BbmBuilding building = room.getBbmBuilding();
-			room.setBuildingName(building.getBuildingCaption());
+			if(building != null){
+				room.setBuildingName(building.getBuildingCaption());
+			}
 			BbmFloor floor = room.getBbmFloor();
-			room.setFloorName(floor.getFloorCaption());
+			if(floor != null){
+				room.setFloorName(floor.getFloorCaption());
+			}
+			
 		}
+		pagerRecords.setRecords(rooms);
 		return pagerRecords;
 	}
     /**
