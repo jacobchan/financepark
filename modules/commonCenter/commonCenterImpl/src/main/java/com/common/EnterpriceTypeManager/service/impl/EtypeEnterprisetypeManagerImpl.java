@@ -16,11 +16,9 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.common.EnterpriceTypeManager.entity.EtypeEnterprisetype;
 import com.common.EnterpriceTypeManager.dao.EtypeEnterprisetypeDao;
 import com.common.EnterpriceTypeManager.service.EtypeEnterprisetypeManager;
@@ -67,14 +65,14 @@ public class EtypeEnterprisetypeManagerImpl extends BaseManagerImpl implements E
      */
     @EsbServiceMapping
     public EtypeEnterprisetype saveEtypeEnterprisetype(EtypeEnterprisetype o) throws BusException{
-//    	String etypeEnterprisetypeId = o.getEtypeEnterprisetypeId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(etypeEnterprisetypeId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	return etypeEnterprisetypeDao.save(o);
+    	String etypeEnterprisetypeId = o.getEnTypeId();
+    	boolean isUpdate = StringUtils.isNotEmpty(etypeEnterprisetypeId);
+    	if(isUpdate){//修改
+    		etypeEnterprisetypeDao.update(etypeEnterprisetypeId, o);
+    	}else{//新增
+    		etypeEnterprisetypeDao.save(o);
+    	}
+    	return o;
     }
 
     /**
