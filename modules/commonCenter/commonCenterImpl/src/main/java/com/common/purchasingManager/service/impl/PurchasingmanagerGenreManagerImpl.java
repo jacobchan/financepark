@@ -16,11 +16,8 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.common.purchasingManager.dao.PurchasingmanagerGenreDao;
 import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
@@ -101,6 +98,15 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
     
     public boolean exsitPurchasingmanagerGenre(String propertyName,Object value) throws BusException{
 		return purchasingmanagerGenreDao.exists(propertyName,value);
+	}
+    
+    //根据类别ID获取下级类别列表
+	@Override
+	@EsbServiceMapping
+	public List<PurchasingmanagerGenre> getSubPurchasingmanagerGenreList(
+			@ServiceParam(name="genreId") String genreId) throws BusException {
+		List<PurchasingmanagerGenre> list = purchasingmanagerGenreDao.getList("purchasingmanagerGenre.genreId", genreId);
+		return list;
 	}
 
 }
