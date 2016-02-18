@@ -102,6 +102,7 @@ public class PurchasingmanagerCommodityExtendValueManagerImpl extends BaseManage
 		return purchasingmanagerCommodityExtendValueDao.exists(propertyName,value);
 	}
     //根据商品ID和扩展属性名获取扩展属性值对象
+    @Override
     @EsbServiceMapping
 	public PurchasingmanagerCommodityExtendValue getPurchasingmanagerCommodityExtendValue(@ServiceParam(name="commodityId") String commodityId,
 			@ServiceParam(name="commodityExtendValueFieldName") String commodityExtendValueFieldName) {
