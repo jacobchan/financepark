@@ -34,6 +34,10 @@
 			<menu id="024100" text="搬家申请记录" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerMoverec/propertyservicemanagerMoverec.html"></menu>
 			<menu id="024200" text="搬家放行二维码记录" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerFxtdc/propertyservicemanagerFxtdc.html"></menu>
 		</menu>
+		<menu id="025000" text="招商预约管理" href="">
+			<menu id="025100" text="预约记录分配管理" href="page/manageCenter.ReserveManager.reservationRecord/reservationRecord.html"></menu>
+		</menu>
+		
 	</menu>
 	<menu id="030000" text="公共管理">
 		<menu id="030300" text="角色管理" href="page/security.fuc.role/role.html"></menu>
