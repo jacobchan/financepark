@@ -9,7 +9,7 @@
 			<youi:fieldText property="enteringName"  caption="入驻申请人"/>
 			<youi:fieldText property="enteringTelephone"  caption="入驻联系电话"/>
 
-			<youi:fieldText property="enteringTime"  caption="预约时间段" convert="enteringTime"/>
+			<youi:fieldSelect property="enteringTime"  caption="预约时间段" convert="enteringTime"/>
 			<youi:fieldSelect property="enteringStatus"  caption="预约数量状态" convert="enteringStatus"/>
 			<youi:fieldCalendar property="enteringDate"  caption="预约时间日期" textFormat="yyyy-MM-dd" format="yyyy-MM-dd"/>
 		</youi:fieldLayout>
@@ -33,7 +33,7 @@
 			<youi:fieldHidden property="memberId"  caption="会员用户ID"/>
 			<youi:fieldHidden property="propertyservicemanagerEntering.enteringId"  caption="预约记录ID"/>
 			<youi:fieldHidden property="entrecId"  caption="入驻预约记录ID"/>
-			<youi:fieldText property="enteringTime"  caption="预约时间段" convert="enteringTime"s/>
+			<youi:fieldSelect property="enteringTime"  caption="预约时间段" convert="enteringTime"s/>
 			<youi:fieldSelect property="enteringStatus"  caption="预约数量状态" convert="enteringStatus"/>
 			<youi:fieldCalendar property="enteringDate"  caption="预约时间日期" textFormat="yyyy-MM-dd" format="yyyy-MM-dd"/>
 		</youi:fieldLayout>
