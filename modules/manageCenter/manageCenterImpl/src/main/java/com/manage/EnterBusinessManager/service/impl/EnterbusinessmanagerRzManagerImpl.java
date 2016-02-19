@@ -3,6 +3,7 @@
  */
 package com.manage.EnterBusinessManager.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -18,18 +19,27 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.ConditionUtils;
 
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 
+import com.manage.EmployeeManager.entity.EnterpriseEmployees;
+import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.EnterBusinessManager.dao.EnterbusinessmanagerRzDao;
 import com.manage.EnterBusinessManager.service.EnterbusinessmanagerRzManager;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
+import com.manage.PropertyServiceManager.service.PropertyservicemanagerEntrecManager;
 
 @Service("enterbusinessmanagerRzManager")
 @Transactional
 public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implements EnterbusinessmanagerRzManager{
 	@Autowired
 	private EnterbusinessmanagerRzDao enterbusinessmanagerRzDao;
+	@Autowired
+	private PropertyservicemanagerEntrecManager propertyservicemanagerEntrecManager;
+	@Autowired
+	private EnterpriseEmployeesManager enterpriseEmployeesManager;
 	
     /**
      * 查询列表
@@ -102,5 +112,22 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     public boolean exsitEnterbusinessmanagerRz(String propertyName,Object value) throws BusException{
 		return enterbusinessmanagerRzDao.exists(propertyName,value);
 	}
-
+    
+    @EsbServiceMapping
+	public void saveEnterbusinessmanagerRzBasicData(@ServiceParam(name="entrecId") String id)
+			throws BusException {
+		// TODO Auto-generated method stub
+    	PropertyservicemanagerEntrec psme=propertyservicemanagerEntrecManager.getPropertyservicemanagerEntrec(id);
+    	//根据入驻办理预约记录表数据新增入驻信息基本数据
+    	EnterbusinessmanagerRz enterbusinessmanagerRz=new EnterbusinessmanagerRz();
+    	enterbusinessmanagerRz.setEntrecId(psme);
+    	enterbusinessmanagerRz.setRzManager(psme.getMemberId());
+    	EnterbusinessmanagerRz er=enterbusinessmanagerRzDao.save(enterbusinessmanagerRz);
+    	//新增企业员工数据
+    	EnterpriseEmployees enterpriseEmployees=new EnterpriseEmployees();
+    	enterpriseEmployees.setEmployeesComId(er);
+    	enterpriseEmployees.setEmployeesTelephone(er.getRzTelephone());
+    	enterpriseEmployees.setMemberId(er.getRzManager());
+    	enterpriseEmployeesManager.saveEnterpriseEmployees(enterpriseEmployees);
+	}
 }
