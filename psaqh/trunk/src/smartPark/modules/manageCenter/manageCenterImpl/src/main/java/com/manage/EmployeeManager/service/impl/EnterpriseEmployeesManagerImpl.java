@@ -3,6 +3,7 @@
  */
 package com.manage.EmployeeManager.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -18,6 +19,7 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.ConditionUtils;
 
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 
@@ -33,8 +35,6 @@ import com.manage.EnterBusinessManager.service.EnterbusinessmanagerRzManager;
 public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements EnterpriseEmployeesManager{
 	@Autowired
 	private EnterpriseEmployeesDao enterpriseEmployeesDao;
-	@Autowired
-	private EnterbusinessmanagerRzManager enterbusinessmanagerRzManager;
     /**
      * 查询列表
      */
@@ -107,14 +107,4 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 		return enterpriseEmployeesDao.exists(propertyName,value);
 	}
     
-    @EsbServiceMapping
-	public EnterpriseEmployees saveEnterpriseEmployeesAfterEnter(@ServiceParam(name="rzId") String id)
-			throws BusException {
-		// TODO Auto-generated method stub
-    	EnterbusinessmanagerRz enterbusinessmanagerRz=enterbusinessmanagerRzManager.getEnterbusinessmanagerRz(id);
-    	EnterpriseEmployees enterpriseEmployees=new EnterpriseEmployees();
-    	enterpriseEmployees.setEmployeesName(enterbusinessmanagerRz.getRzManager());
-		return enterpriseEmployeesDao.save(enterpriseEmployees);
-	}
-
 }
