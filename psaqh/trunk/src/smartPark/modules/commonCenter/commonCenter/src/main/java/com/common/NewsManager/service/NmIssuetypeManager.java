@@ -63,4 +63,9 @@ public interface NmIssuetypeManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitNmIssuetype(String propertyName,Object value) throws BusException;
+	
+	 /**
+     * 条件查询列表
+     */
+    public List<NmIssuetype> getChildren(String parentId) throws BusException;
 }

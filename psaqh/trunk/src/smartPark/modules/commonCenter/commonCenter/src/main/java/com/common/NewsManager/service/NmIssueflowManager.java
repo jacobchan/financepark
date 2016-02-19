@@ -12,8 +12,9 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
+import com.gsoft.framework.esb.annotation.OrderCollection;
 import com.common.NewsManager.entity.NmIssueflow;
+import com.common.NewsManager.entity.NmIssuetype;
 
 public interface NmIssueflowManager extends BaseManager{
 
@@ -63,4 +64,65 @@ public interface NmIssueflowManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitNmIssueflow(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 保存多条
+	 * @param nmIssueflows
+	 * @throws BusException
+	 */
+	public void saveNmIssueflows(List<NmIssueflow> nmIssueflows) throws BusException;
+	
+	/**
+	 * 根据发布类型获取所有流程状态
+	 * @param pager
+	 * @param nmIssuetype
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	public PagerRecords getPagerNmIssueflowByType(Pager pager, NmIssuetype nmIssuetype, @OrderCollection Collection<Order> orders) throws BusException;
+	
+	/**
+	 * 根据条件查询
+	 * @param issueTypeId
+	 * @param properties
+	 * @param values
+	 * @return
+	 * @throws BusException
+	 */
+	public List<NmIssueflow> getNmIssueflowsWithTypeid(String issueTypeId,String[] properties,String[] values) throws BusException;
+	
+	/**
+	 * 根据新闻发布类型确认初始状态
+	 * @param nmIssuetype
+	 * @return
+	 * @throws BusException
+	 */
+	public String getStartStatus(String nmIssuetypeId) throws BusException;
+	
+	/**
+	 * 根据新闻发布类型和当前状态确认下一步状态
+	 * @param nmIssuetypeId
+	 * @param currentStatus
+	 * @return
+	 * @throws BusException
+	 */
+	public String getNextStatus(String nmIssuetypeId,String currentStatus) throws BusException;
+	
+	/**
+	 * 状态查对应操作
+	 * @param status
+	 * @return
+	 * @throws BusException
+	 */
+	public String getOperateByStatus(String nmIssuetypeId,String status) throws BusException;
+	
+	/**
+	 * 判断是否最后一步
+	 * @param nmIssuetypeId
+	 * @param currentStatus
+	 * @return
+	 * @throws BusException
+	 */
+	public boolean isFinally(String nmIssuetypeId,String currentStatus) throws BusException;
 }

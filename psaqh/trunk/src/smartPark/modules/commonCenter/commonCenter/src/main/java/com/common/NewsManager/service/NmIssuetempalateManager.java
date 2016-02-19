@@ -63,4 +63,10 @@ public interface NmIssuetempalateManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitNmIssuetempalate(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 根据模板内容政策内容
+	 * @return
+	 */
+	public String genPolicyContent(NmIssuetempalate nmIssuetempalate,String... params) throws BusException;
 }

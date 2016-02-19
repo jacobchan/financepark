@@ -33,7 +33,7 @@ public class NmIssuetempalate implements Domain{
 
 	@Column(name = "ISSUE_SENDSTATUS_")
 	@Length(max=2)
-	private String issueSendstatus;//发送状态
+	private String issueSendstatus;//使用状态
 
 	@Column(name = "ISSUE_TEMPALATE_TO_")
 	@Length(max=36)
@@ -47,7 +47,7 @@ public class NmIssuetempalate implements Domain{
 	@Length(max=256)
 	private String issueTempalateContent;//发布模板内容
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(name="ISSUE_TYPE_ID_")
 	private com.common.NewsManager.entity.NmIssuetype nmIssuetype;//发布类型ID
 	

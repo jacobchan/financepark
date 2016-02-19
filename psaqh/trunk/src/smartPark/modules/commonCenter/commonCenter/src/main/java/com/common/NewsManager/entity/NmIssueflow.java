@@ -24,7 +24,7 @@ public class NmIssueflow implements Domain{
 
 	@Column(name = "ISSUE_FLOW_N_STATUS_")
 	@Length(max=36)
-	private String issueFlowNStatus;//下步状态
+	private String issueFlowNStatus;//上步状态
 
 	@Column(name = "ISSUE_FLOW_CAPTION_")
 	@Length(max=36)
@@ -51,7 +51,7 @@ public class NmIssueflow implements Domain{
 	@Length(max=36)
 	private String issueFlowId;//发布流程ID
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(name="ISSUE_TYPE_ID_")
 	private com.common.NewsManager.entity.NmIssuetype nmIssuetype;//发布类型ID
 	
