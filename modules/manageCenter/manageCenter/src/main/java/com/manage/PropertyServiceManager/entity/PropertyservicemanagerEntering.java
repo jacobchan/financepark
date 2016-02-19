@@ -24,7 +24,7 @@ public class PropertyservicemanagerEntering implements Domain{
 
 	@Column(name = "ENTERING_STATUS_")
 	@Length(max=2)
-	private String enteringStatus;//预约数量状态
+	private String enteringStatus;//可预约状态
 
 	@Column(name = "ENTERING_REMAIN_")
 	private String enteringRemain;//剩余数量
