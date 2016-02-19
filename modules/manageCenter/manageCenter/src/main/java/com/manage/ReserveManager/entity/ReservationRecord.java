@@ -38,11 +38,11 @@ public class ReservationRecord implements Domain{
 	@Length(max=2)
 	private String recordVisiteStatus;//是否到访
 	
-	@Column(name = "VISITE_DATE")
+	@Column(name = "VISITE_DATE_")
 	@Length(max=20)
 	private String visiteDate;//来访日期
 	
-	@Column(name = "VISITE_TIME")
+	@Column(name = "VISITE_TIME_")
 	@Length(max=20)
 	private String VisiteTime;//来访时间
 
