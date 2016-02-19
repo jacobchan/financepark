@@ -215,6 +215,16 @@ public class LoginController {
 		return new DataModelAndView(new Message(Constants.SUCCESS_CODE,"密码修改成功"));
 	}
 	
+	/**
+	 * 用户注册
+	 *
+	 */
+	@RequestMapping("/personRegister.html")
+	public ModelAndView personRegister(HttpServletRequest request) {
+		ModelAndView model = new ModelAndView("member/register");
+		return model;
+	}
+	
 	private class HtmlTreeNodeSearch{
 		
 		private String term;
