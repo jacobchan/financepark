@@ -130,4 +130,16 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     	enterpriseEmployees.setMemberId(er.getRzManager());
     	enterpriseEmployeesManager.saveEnterpriseEmployees(enterpriseEmployees);
 	}
+    
+    @EsbServiceMapping
+	public void updateEnteringStatus(@ServiceParam(name="rzId") String id) throws BusException {
+		// TODO Auto-generated method stub
+    	EnterbusinessmanagerRz enterbusinessmanagerRz=enterbusinessmanagerRzDao.get(id);
+		String buildingId=enterbusinessmanagerRz.getBuildingId();
+		if(buildingId!=""&&buildingId!=null){
+			PropertyservicemanagerEntrec psme=propertyservicemanagerEntrecManager.getPropertyservicemanagerEntrec(enterbusinessmanagerRz.getEntrecId().getEntrecId());
+			psme.setEnteringStatus("");//更改状态
+			propertyservicemanagerEntrecManager.savePropertyservicemanagerEntrec(psme);
+		}
+	}
 }
