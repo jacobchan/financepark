@@ -5,11 +5,12 @@
 				src="esb/web/propertyservicemanagerFxtdcManager/getPagerPropertyservicemanagerFxtdcs.json" dataFormId="form_propertyservicemanagerFxtdc"
 				editSrc="esb/web/propertyservicemanagerFxtdcManager/getPropertyservicemanagerFxtdc.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/propertyservicemanagerFxtdcManager/removePropertyservicemanagerFxtdc.json">
-		<youi:fieldLayout>
+		<youi:fieldLayout labelWidths="120,120">
 			<youi:fieldText property="twcrdAddrec"  caption="二维码URL地址"/>
 		</youi:fieldLayout>
-
-		<youi:gridCol property="twcrdAddrec"  caption="二维码URL地址"/>
+		<youi:gridCol property="fxtdcId"  caption="二维码记录序列" width="250"/>
+		<youi:gridCol property="propertyservicemanagerMoverec"  caption="搬家申请记录ID" width="250"/>
+		<youi:gridCol property="twcrdAddrec"  caption="二维码URL地址" width="110"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -18,9 +19,10 @@
 	
 	<!-- form-搬家放行二维码记录表编辑 -->
 	<youi:form dialog="true" caption="搬家放行二维码记录表" id="form_propertyservicemanagerFxtdc" action="esb/web/propertyservicemanagerFxtdcManager/savePropertyservicemanagerFxtdc.json">
-		<youi:fieldLayout prefix="record">
-			<youi:fieldText property="fxtdcId"  caption="二维码记录序列"/>
+		<youi:fieldLayout prefix="record" labelWidths="120,120">
+			<youi:fieldHidden property="fxtdcId"  caption="二维码记录序列"/>
 			<youi:fieldText property="twcrdAddrec"  caption="二维码URL地址"/>
+			<youi:fieldText property="propertyservicemanagerMoverec"  caption="搬家申请记录ID"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
