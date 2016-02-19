@@ -85,6 +85,8 @@
 		<menu id="030107" text="代码集管理" href="page/codemap/codemap.html"></menu>
 		<!-- <menu id="030108" text="系统日记" href="admin/transLog/index.html"></menu> -->
 	</menu>
-
+	<menu id="060000" text="政策新闻管理">
+		<menu id="061000" text="政策新闻" href="page/commonCenter.NewsManager.nmIssuenews/zsIssuenews.html"></menu>
+	</menu>
 		
 </menus>
