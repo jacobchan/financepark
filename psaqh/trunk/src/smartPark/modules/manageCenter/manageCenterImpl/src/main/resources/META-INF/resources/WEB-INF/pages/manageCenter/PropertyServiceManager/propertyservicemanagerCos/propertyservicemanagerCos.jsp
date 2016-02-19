@@ -14,8 +14,8 @@
 			<youi:fieldSelect property="memberId"
 				src="esb/web/memberInformationManager/getMemberInformations.json"
 				code="memberId" show="memberNickname" caption="会员用户" />
-			<youi:fieldSelect property="cosStatus" caption="投诉受理状态" convert="" />
-			<youi:fieldSelect property="cosBool" caption="是否接受回访" convert="" />
+			<youi:fieldSelect property="cosStatus" caption="投诉受理状态" convert="acceptanceStatus" />
+			<youi:fieldSelect property="cosBool" caption="是否接受回访" convert="isAbleVisible" />
 			<youi:fieldText property="cosTelephone" caption="回访电话" />
 			<youi:fieldCalendar property="cosTime" caption="投诉时间"
 				format="yyyy-MM-dd" />
@@ -24,8 +24,8 @@
 		<youi:gridCol property="cosContent" caption="投诉内容" width="280" />
 		<youi:gridCol property="cosName" caption="投诉联系人" width="100" />
 		<youi:gridCol property="memberId" caption="会员用户" width="100" />
-		<youi:gridCol property="cosStatus" caption="投诉受理状态" width="100" />
-		<youi:gridCol property="cosBool" caption="是否接受回访" width="100" />
+		<youi:gridCol property="cosStatus" caption="投诉受理状态" convert="acceptanceStatus" width="100" />
+		<youi:gridCol property="cosBool" caption="是否接受回访" convert="isAbleVisible" width="100" />
 		<youi:gridCol property="cosTelephone" caption="回访电话" width="100" />
 		<youi:gridCol property="cosTime" caption="投诉时间" width="120" />
 		<youi:gridCol width="60" fixed="true" property="button" type="button"
@@ -46,8 +46,8 @@
 			<youi:fieldSelect property="memberId"
 				src="esb/web/memberInformationManager/getMemberInformations.json"
 				code="memberId" show="memberNickname" caption="会员用户" />
-			<youi:fieldSelect property="cosStatus" caption="投诉受理状态" convert="" />
-			<youi:fieldSelect property="cosBool" caption="是否接受回访" convert="" />
+			<youi:fieldSelect property="cosStatus" caption="投诉受理状态" convert="acceptanceStatus" />
+			<youi:fieldSelect property="cosBool" caption="是否接受回访" convert="isAbleVisible" />
 			<youi:fieldText property="cosTelephone" caption="回访电话" />
 			<youi:fieldCalendar property="cosTime" caption="投诉时间"
 				format="yyyy-MM-dd" />
