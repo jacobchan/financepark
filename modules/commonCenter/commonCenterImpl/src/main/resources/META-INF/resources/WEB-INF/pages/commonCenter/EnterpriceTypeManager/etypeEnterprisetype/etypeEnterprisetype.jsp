@@ -9,7 +9,7 @@
 		edit="NOT" remove="NOT" showCheckbox="true"
 		removeSrc="esb/web/etypeEnterprisetypeManager/removeEtypeEnterprisetype.json">
 		<youi:fieldLayout labelWidths="120,120">
-			<youi:fieldSelect property="enTypeId"
+			<youi:fieldSelect property="etypeEnterprisetype.enTypeId"
 				src="esb/web/etypeEnterprisetypeManager/getEtypeEnterprisetypes.json"
 				code="enTypeId" show="enTypeName" caption="父ID" tooltips="企业类型父级id" />
 			<youi:fieldText property="enTypeName" caption="企业类型名称" />
@@ -29,7 +29,7 @@
 		id="form_etypeEnterprisetype"
 		action="esb/web/etypeEnterprisetypeManager/saveEtypeEnterprisetype.json">
 		<youi:fieldLayout prefix="record" columns="1" labelWidths="120,120">
-			<youi:fieldSelect property="enTypeId"
+			<youi:fieldSelect property="etypeEnterprisetype.enTypeId"
 				src="esb/web/etypeEnterprisetypeManager/getEtypeEnterprisetypes.json"
 				code="enTypeId" show="enTypeName" caption="父ID" tooltips="企业类型父级id" />
 			<youi:fieldText property="enTypeName" caption="企业类型名称" />
