@@ -12,7 +12,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
+import com.common.NewsManager.entity.NmIssueflow;
 import com.common.NewsManager.entity.NmIssuenews;
 
 public interface NmIssuenewsManager extends BaseManager{
@@ -63,4 +63,20 @@ public interface NmIssuenewsManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitNmIssuenews(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 根据ID查出发布流程
+	 * @param id
+	 * @return
+	 * @throws BusException
+	 */
+	public NmIssueflow getNmIssueflowById(String id,String currentStatus)throws BusException;
+	
+	/**
+	 * 发布
+	 * @return
+	 * @param nmIssuenews
+	 * @throws BueException
+	 */
+//	public String issue(NmIssuenews nmIssuenews) throws BusException;
 }

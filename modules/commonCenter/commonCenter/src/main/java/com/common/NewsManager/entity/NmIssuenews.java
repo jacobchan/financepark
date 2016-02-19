@@ -27,9 +27,9 @@ public class NmIssuenews implements Domain{
 	@Length(max=36)
 	private String policyId;//政策ID
 
-	@Column(name = "POLICY_TYPE_")
-	@Length(max=36)
-	private String policyType;//政策类别
+	@JoinColumn(name = "POLICY_TYPE_")
+	@ManyToOne
+	private NmIssuetype policyType;//政策发布类型
 
 	@Column(name = "POLICY_CAPTION_")
 	@Length(max=36)
@@ -62,11 +62,11 @@ public class NmIssuenews implements Domain{
 	public void setPolicyId(String policyId){
 		this.policyId = policyId;
 	}
-	public String getPolicyType(){
+	public NmIssuetype getPolicyType(){
 		return this.policyType;
 	}
 	
-	public void setPolicyType(String policyType){
+	public void setPolicyType(NmIssuetype policyType){
 		this.policyType = policyType;
 	}
 	public String getPolicyCaption(){
