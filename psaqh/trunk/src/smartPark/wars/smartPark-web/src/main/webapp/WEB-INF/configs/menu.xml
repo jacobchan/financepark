@@ -14,12 +14,20 @@
 			<menu id="021100" text="员工信息" href="page/manageCenter.EmployeeManager.enterpriseEmployees/enterpriseEmployees.html"></menu>
 		</menu>
 	</menu>
-	<menu id="050000" text="园区基础">
-		<menu id="050001" text="园区管理" href="page/commonCenter.BuildingBaseManager.bbmPark/bbmPark.html"></menu>
-		<menu id="050002" text="楼栋管理" href="page/commonCenter.BuildingBaseManager.bbmBuilding/bbmBuilding.html"></menu>
-		<menu id="050003" text="楼层管理" href="page/commonCenter.BuildingBaseManager.bbmFloor/bbmFloor.html"></menu>
-		<menu id="050004" text="单元管理" href="page/commonCenter.BuildingBaseManager.bbmRoom/bbmRoom.html"></menu>
+	<menu id="320100" text="园区基础">
+		<menu id="320101" text="园区管理" href="page/commonCenter.BuildingBaseManager.bbmPark/bbmPark.html"></menu>
+		<menu id="320102" text="楼栋管理" href="page/commonCenter.BuildingBaseManager.bbmBuilding/bbmBuilding.html"></menu>
+		<menu id="320103" text="楼层管理" href="page/commonCenter.BuildingBaseManager.bbmFloor/bbmFloor.html"></menu>
+		<menu id="320104" text="单元管理" href="page/commonCenter.BuildingBaseManager.bbmRoom/bbmRoom.html"></menu>
 	</menu>
+	<menu id="320600" text="政策发布管理">
+		<menu id="320601" text="发布类型" href="page/commonCenter.NewsManager.nmIssuetype/nmIssuetype.html"></menu>
+		<menu id="320603" text="发布流程" href="page/commonCenter.NewsManager.nmIssueflow/nmIssueflow.html"></menu>
+		<menu id="320602" text="发布模板" href="page/commonCenter.NewsManager.nmIssuetempalate/nmIssuetempalate.html"></menu>
+		<menu id="320604" text="新闻政策" href="page/commonCenter.NewsManager.nmIssuenews/nmIssuenews.html"></menu>
+	</menu>
+	
+	
 	<menu id="081000" text="物业投诉">
 		<menu id="081100" text="投诉记录" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerCos/propertyservicemanagerCos.html"></menu>
 		<menu id="081200" text="回访记录" href="page/manageCenter.PropertyServiceManager.propertyservicenanagerBack/propertyservicenanagerBack.html"></menu>
