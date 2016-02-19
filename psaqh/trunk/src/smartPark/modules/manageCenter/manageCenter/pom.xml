@@ -34,5 +34,10 @@
 			<artifactId>smartPark-common</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.gsoft.smartPark</groupId>
+			<artifactId>smartPark-commonCenterImpl</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 </project>
