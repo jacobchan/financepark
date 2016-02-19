@@ -14,7 +14,7 @@
 		</youi:fieldLayout>
 		<youi:gridCol property="recordServiceTel"  caption="客服电话" width="100"/>
 		<youi:gridCol property="recordStatus"  caption="预约记录状态" convert="enteringStatus" width="120"/>
-		<youi:gridCol property="recordMemberId"  caption="预约对象" convert="recordMemberId" width="100"/>
+		<youi:gridCol property="recordMemberId"  caption="预约对象"  width="100"/>
 		<youi:gridCol property="recordVisiteStatus"  caption="是否到访" convert="recordVisiteStatus" width="100"/>
 		<youi:gridCol property="recordCustomer"  caption="客服代表"/>
 		<youi:gridCol property="recordType"  caption="预约类型" convert="recordType"/>
@@ -27,12 +27,12 @@
 	</youi:grid>
 	
 	<!-- form-预约记录编辑 -->
-	<youi:form dialog="true" caption="预约记录" id="form_reservationRecord" action="esb/web/reservationRecordManager/saveReservationRecord.json">
+	<youi:form dialog="true" caption="预约记录" id="form_reservationRecord" action="esb/web/reservationRecordManager/saveReservationRecordByType.json">
 		<youi:fieldLayout prefix="record">
 		    <youi:fieldCalendar property="visiteDate"  caption="来访日期" width="120"/>
 		    <youi:fieldSelect property="visiteTime"  caption="来访时间" convert="enteringTime" width="120"/>
 			<youi:fieldSelect property="recordStatus"  caption="预约记录状态" convert="enteringStatus" width="100"/>
-			<youi:fieldSelect property="recordMemberId"  caption="预约对象" convert="recordMemberId"/>
+			<youi:fieldHidden property="recordMemberId"  caption="预约对象"/>
 			<youi:fieldSelect property="recordVisiteStatus"  caption="是否到访" convert="recordVisiteStatus"/>
 			<youi:fieldText property="recordCustomer"  caption="客服代表"/>
 			<youi:fieldText property="recordServiceTel"  caption="客服电话"/>

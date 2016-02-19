@@ -12,7 +12,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.ReserveManager.entity.ReservationRecord;
 
 public interface ReservationRecordManager extends BaseManager{
@@ -63,4 +63,6 @@ public interface ReservationRecordManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitReservationRecord(String propertyName,Object value) throws BusException;
+	
+	public ReservationRecord saveReservationRecordByType(ReservationRecord o,String commodityId,String roomId) throws BusException;		   
 }
