@@ -12,6 +12,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 
@@ -63,4 +64,12 @@ public interface EnterbusinessmanagerRzManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitEnterbusinessmanagerRz(String propertyName,Object value) throws BusException;
+	 /**
+     * 根据预约记录新增入驻基础数据
+     */
+	public void saveEnterbusinessmanagerRzBasicData(String id)throws BusException;
+	 /**
+     * 根据楼栋信息更新预约记录状态
+     */
+	public void updateEnteringStatus(String buildingId)throws BusException;
 }
