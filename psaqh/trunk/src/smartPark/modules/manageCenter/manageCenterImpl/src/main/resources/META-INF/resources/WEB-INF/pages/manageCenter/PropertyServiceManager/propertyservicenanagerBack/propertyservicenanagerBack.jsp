@@ -29,7 +29,7 @@
 		id="form_propertyservicenanagerBack"
 		action="esb/web/propertyservicenanagerBackManager/savePropertyservicenanagerBack.json">
 		<youi:fieldLayout prefix="record" columns="1" labelWidths="120,120">
-			<youi:fieldText property="backId" caption="回访ID" />
+			<youi:fieldHidden property="backId" caption="回访ID" />
 			<youi:fieldSelect property="propertyservicemanagerCos.cosId"
 				src="esb/web/propertyservicemanagerCosManager/getPropertyservicemanagerCoss.json"
 				code="cosId" show="cosCode" caption="投诉ID" notNull="true" />
