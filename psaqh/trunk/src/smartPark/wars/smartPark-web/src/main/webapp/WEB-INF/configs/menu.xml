@@ -24,7 +24,7 @@
 			<menu id="021200" text="商品管理" href="page/commonCenter.purchasingManager.purchasingmanagerCommodity/purchasingmanagerCommodity.html"></menu>
 		</menu>
 		<menu id="022000" text="招商管理" href="">
-			<menu id="022100" text="招商楼宇信息管理" href="page/commonCenter.BuildingBaseManager.bbmRoom/bbmRoom.html"></menu>
+			<menu id="022100" text="招商楼宇信息管理" href="page/commonCenter.BuildingBaseManager.bbmRoom/zsbbmRoom.html"></menu>
 		</menu>
 		<menu id="023000" text="入驻预约管理" href="">
 		<menu id="023100" text="预约数量管理" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerEntering/propertyservicemanagerEntering.html"></menu>
