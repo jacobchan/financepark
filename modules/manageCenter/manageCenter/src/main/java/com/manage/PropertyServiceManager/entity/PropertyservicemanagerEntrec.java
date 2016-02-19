@@ -46,9 +46,9 @@ public class PropertyservicemanagerEntrec implements Domain{
 	@Length(max=20)
 	private String enteringTime;//预约时间段
 
-	@Column(name = "ENTERING_STATUS_")
+	@Column(name = "ENTERREC_STATUS_")
 	@Length(max=2)
-	private String enteringStatus;//预约数量状态
+	private String enterrecStatus;//预约数量状态
 
 	@Column(name = "ENTERING_DATE_")
 	@Length(max=20)
@@ -88,12 +88,12 @@ public class PropertyservicemanagerEntrec implements Domain{
 	public void setEnteringTime(String enteringTime){
 		this.enteringTime = enteringTime;
 	}
-	public String getEnteringStatus(){
-		return this.enteringStatus;
+	public String getEnterrecStatus(){
+		return this.enterrecStatus;
 	}
 	
-	public void setEnteringStatus(String enteringStatus){
-		this.enteringStatus = enteringStatus;
+	public void setEnterrecStatus(String enteringStatus){
+		this.enterrecStatus = enteringStatus;
 	}
 	public String getEnteringDate(){
 		return this.enteringDate;
@@ -130,7 +130,7 @@ public class PropertyservicemanagerEntrec implements Domain{
 		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
 		result = prime * result + ((entrecId == null) ? 0 : entrecId.hashCode());
 		result = prime * result + ((enteringTime == null) ? 0 : enteringTime.hashCode());
-		result = prime * result + ((enteringStatus == null) ? 0 : enteringStatus.hashCode());
+		result = prime * result + ((enterrecStatus == null) ? 0 : enterrecStatus.hashCode());
 		result = prime * result + ((enteringDate == null) ? 0 : enteringDate.hashCode());
 		return result;
 	}
@@ -169,10 +169,10 @@ public class PropertyservicemanagerEntrec implements Domain{
 				return false;
 		} else if (!enteringTime.equals(other.enteringTime))
 			return false;
-		if (enteringStatus == null) {
-			if (other.enteringStatus != null)
+		if (enterrecStatus == null) {
+			if (other.enterrecStatus != null)
 				return false;
-		} else if (!enteringStatus.equals(other.enteringStatus))
+		} else if (!enterrecStatus.equals(other.enterrecStatus))
 			return false;
 		if (enteringDate == null) {
 			if (other.enteringDate != null)
