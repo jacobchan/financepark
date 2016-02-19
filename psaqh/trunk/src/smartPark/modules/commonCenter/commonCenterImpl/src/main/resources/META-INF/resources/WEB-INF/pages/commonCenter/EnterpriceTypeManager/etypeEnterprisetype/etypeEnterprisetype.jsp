@@ -29,6 +29,7 @@
 		id="form_etypeEnterprisetype"
 		action="esb/web/etypeEnterprisetypeManager/saveEtypeEnterprisetype.json">
 		<youi:fieldLayout prefix="record" columns="1" labelWidths="120,120">
+			<youi:fieldHidden property="enTypeId" caption="企业类型名称" />
 			<youi:fieldSelect property="etypeEnterprisetype.enTypeId"
 				src="esb/web/etypeEnterprisetypeManager/getEtypeEnterprisetypes.json"
 				code="enTypeId" show="enTypeName" caption="父ID" tooltips="企业类型父级id" />
