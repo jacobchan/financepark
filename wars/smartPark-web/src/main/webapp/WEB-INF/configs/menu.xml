@@ -12,6 +12,7 @@
 	<menu id="080000" text="物业服务">
 		<menu id="081000" text="物业投诉" href="">
 			<menu id="081100" text="投诉记录" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerCos/propertyservicemanagerCos.html"></menu>
+			<menu id="081200" text="回访记录" href="page/manageCenter.PropertyServiceManager.propertyservicenanagerBack/propertyservicenanagerBack.html"></menu>
 		</menu>
 	</menu>
 	<menu id="120000" text="商品管理">
