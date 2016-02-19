@@ -4,11 +4,14 @@
 package com.manage.EnterBusinessManager.entity;
 
 import javax.persistence.*;
+
 import org.hibernate.validator.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
 /**
  * 实体: 入驻企业基本信息
  * @author
@@ -22,9 +25,14 @@ public class EnterbusinessmanagerRz implements Domain{
 	private static final long serialVersionUID = -2526455072813371693L;
 	
 
-	@Column(name = "RZ_MANAGER_")
-	@Length(max=36)
-	private String rzManager;//企业管理员
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="RZ_MANAGER_")
+	private MemberInformation rzManager;//企业管理员
+	
+
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="ENTREC_ID_")
+	private PropertyservicemanagerEntrec entrecId;//物业入驻记录ID
 
 	@Column(name = "RZ_DATE_")
 	@Length(max=20)
@@ -68,13 +76,23 @@ public class EnterbusinessmanagerRz implements Domain{
 	private String parkId;//园区ID
 	
 	
-	public String getRzManager(){
-		return this.rzManager;
-	}
 	
-	public void setRzManager(String rzManager){
+	public MemberInformation getRzManager() {
+		return rzManager;
+	}
+
+	public void setRzManager(MemberInformation rzManager) {
 		this.rzManager = rzManager;
 	}
+
+	public PropertyservicemanagerEntrec getEntrecId() {
+		return entrecId;
+	}
+
+	public void setEntrecId(PropertyservicemanagerEntrec entrecId) {
+		this.entrecId = entrecId;
+	}
+
 	public String getRzDate(){
 		return this.rzDate;
 	}
