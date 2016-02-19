@@ -3,34 +3,41 @@
  */
 package com.common.NewsManager.service.impl;
 
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.NewsManager.dao.NmIssueflowDao;
+import com.common.NewsManager.dao.NmIssuenewsDao;
+import com.common.NewsManager.entity.NmIssueflow;
+import com.common.NewsManager.entity.NmIssuenews;
+import com.common.NewsManager.entity.NmIssuetype;
+import com.common.NewsManager.service.NmIssuenewsManager;
+import com.common.NewsManager.service.NmIssuetypeManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
-import com.gsoft.framework.esb.annotation.*;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
-import com.common.NewsManager.entity.NmIssuenews;
-import com.common.NewsManager.dao.NmIssuenewsDao;
-import com.common.NewsManager.service.NmIssuenewsManager;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 
 @Service("nmIssuenewsManager")
 @Transactional
 public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuenewsManager{
 	@Autowired
 	private NmIssuenewsDao nmIssuenewsDao;
-	
+	@Autowired
+	private NmIssueflowDao nmIssueflowDao;
+	@Autowired
+	private NmIssuetypeManager issuetypeManager;
     /**
      * 查询列表
      */
@@ -101,6 +108,25 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
     
     public boolean exsitNmIssuenews(String propertyName,Object value) throws BusException{
 		return nmIssuenewsDao.exists(propertyName,value);
+	}
+	@Override
+	public NmIssueflow getNmIssueflowById(String id,String currentStatus) throws BusException {
+		NmIssuenews nmIssuenews = nmIssuenewsDao.get(id);
+		if(nmIssuenews!=null){
+			NmIssuetype issueType = nmIssuenews.getPolicyType();//发布类型
+			List<NmIssueflow> nmIssueflows = nmIssueflowDao.getList("nmIssuetype.issueTypeId", issueType.getIssueTypeId());
+			if(nmIssueflows!=null&&nmIssueflows.size()>0){
+				for(NmIssueflow nmIssueflow:nmIssueflows){
+					if(currentStatus.equals(nmIssueflow.getIssueFlowCStatus())){
+						String operate = nmIssueflow.getIssueOperate();//当前操作
+					}
+					if(currentStatus.equals(nmIssueflow.getIssueFlowNStatus())){
+						String nextOperate = nmIssueflow.getIssueOperate();//下一步操作
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 }

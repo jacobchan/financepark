@@ -3,27 +3,32 @@
  */
 package com.common.NewsManager.service.impl;
 
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.NewsManager.dao.NmIssuetempalateDao;
+import com.common.NewsManager.entity.NmIssuetempalate;
+import com.common.NewsManager.service.NmIssuetempalateManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
-import com.gsoft.framework.esb.annotation.*;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
-import com.common.NewsManager.entity.NmIssuetempalate;
-import com.common.NewsManager.dao.NmIssuetempalateDao;
-import com.common.NewsManager.service.NmIssuetempalateManager;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.ServiceParam;
+import com.gsoft.framework.security.AccountPrincipal;
+import com.gsoft.framework.security.agt.entity.User;
+import com.gsoft.framework.util.SecurityUtils;
 
 @Service("nmIssuetempalateManager")
 @Transactional
@@ -59,6 +64,8 @@ public class NmIssuetempalateManagerImpl extends BaseManagerImpl implements NmIs
 	public PagerRecords getPagerNmIssuetempalates(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=NmIssuetempalate.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
+		AccountPrincipal account = SecurityUtils.getAccount();
+		System.out.println("-------------:"+(account instanceof AccountPrincipal));
 		PagerRecords pagerRecords = nmIssuetempalateDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
@@ -101,6 +108,39 @@ public class NmIssuetempalateManagerImpl extends BaseManagerImpl implements NmIs
     
     public boolean exsitNmIssuetempalate(String propertyName,Object value) throws BusException{
 		return nmIssuetempalateDao.exists(propertyName,value);
+	}
+    
+	@Override
+	public String genPolicyContent(NmIssuetempalate nmIssuetempalate,
+			String... params) throws BusException {
+		String tempalateContent = nmIssuetempalate.getIssueTempalateContent();
+	
+		return replaceChar(tempalateContent,'#',params);
+	}
+	
+	public static String replaceChar(String str,char c,String... params){
+		if(str!=null&&!"".equals(str)){
+			String[] tempArray = str.split(""+c+"");
+			int countC = tempArray.length-1;
+			if(countC==params.length){
+				Pattern pattern = Pattern.compile(""+c+"");
+				Matcher matcher = pattern.matcher(str);
+				int i = 0;
+				boolean result = matcher.find();
+				StringBuffer sb = new StringBuffer();
+				while(result){
+					matcher.appendReplacement(sb, params[i]);
+					i++;
+					result = matcher.find(); 
+				}
+				matcher.appendTail(sb);
+				return sb.toString();
+			}else{
+			//	System.out.println("参数个数不一致");
+				throw new BusException("参数个数不一致");
+			}
+		}
+		return null;
 	}
 
 }
