@@ -15,8 +15,8 @@
 		<youi:gridCol property="roomNo"  caption="单元编号" width="150px"/>
 		<youi:gridCol property="roomCaption"  caption="单元说明" width="150px"/>
 		<youi:gridCol property="enteredEnt"  caption="包含企业" width="150px"/>
-		<youi:gridCol property="bbmBuilding.buildingCaption" caption="所属楼栋" width="150px"/>
-		<youi:gridCol property="bbmFloor.floorCaption" caption="所属楼层" width="150px"/>
+		<youi:gridCol property="bbmBuilding.buildingNo" caption="所属楼栋" width="150px"/>
+		<youi:gridCol property="bbmFloor.floorNo" caption="所属楼层" width="150px"/>
 		<youi:gridCol property="status"  caption="使用状态" width="150px"/>
 
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
@@ -33,9 +33,9 @@
 			<youi:fieldText property="roomCaption"  caption="单元说明"/>
 			<youi:fieldSelect property="bbmPark.parkId" caption="所属园区" code="parkId" show="parkName"
 				src="esb/web/bbmParkManager/getBbmParks.json"></youi:fieldSelect>
-			<youi:fieldSelect property="bbmBuilding.buildingId" caption="所属楼栋" code="buildingId" show="buildingCaption" showProperty="bbmBuilding.buildingCaption"
+			<youi:fieldSelect property="bbmBuilding.buildingId" caption="所属楼栋" code="buildingId" show="buildingNo" showProperty="bbmBuilding.buildingCaption"
 				src="esb/web/bbmBuildingManager/getBbmBuildings.json" parents="bbmPark.parkId" parentsAlias="bbmPark.parkId"></youi:fieldSelect>
-			<youi:fieldSelect property="bbmFloor.floorId" caption="所属楼层" code="floorId" show="floorCaption" showProperty="bbmFloor.floorCaption"
+			<youi:fieldSelect property="bbmFloor.floorId" caption="所属楼层" code="floorId" show="floorNo" showProperty="bbmFloor.floorCaption"
 				src="esb/web/bbmFloorManager/getBbmFloors.json" parents="bbmBuilding.buildingId" parentsAlias="bbmBuilding.buildingId"></youi:fieldSelect>
 			<youi:fieldText property="status"  caption="使用状态"/>
 			<youi:fieldText property="enteredEnt"  caption="包含企业"/>
