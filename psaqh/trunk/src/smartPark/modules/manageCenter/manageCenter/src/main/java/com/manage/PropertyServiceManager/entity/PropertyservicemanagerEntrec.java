@@ -4,10 +4,12 @@
 package com.manage.PropertyServiceManager.entity;
 
 import javax.persistence.*;
+
 import org.hibernate.validator.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: 入驻服务办理预约记录表
@@ -29,10 +31,11 @@ public class PropertyservicemanagerEntrec implements Domain{
 	@Column(name = "ENTERING_TELEPHONE_")
 	@Length(max=16)
 	private String enteringTelephone;//入驻联系电话
-
-	@Column(name = "MEMBER_ID_")
-	@Length(max=36)
-	private String memberId;//会员用户ID
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="MEMBER_ID_")
+	private MemberInformation memberId;//会员用户ID
+	
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "ENTREC_ID_")
@@ -69,13 +72,8 @@ public class PropertyservicemanagerEntrec implements Domain{
 	public void setEnteringTelephone(String enteringTelephone){
 		this.enteringTelephone = enteringTelephone;
 	}
-	public String getMemberId(){
-		return this.memberId;
-	}
 	
-	public void setMemberId(String memberId){
-		this.memberId = memberId;
-	}
+	
 	public String getEntrecId(){
 		return this.entrecId;
 	}
@@ -114,6 +112,15 @@ public class PropertyservicemanagerEntrec implements Domain{
 	}
 	
 	
+	
+	public MemberInformation getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(MemberInformation memberId) {
+		this.memberId = memberId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

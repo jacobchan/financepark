@@ -4,11 +4,14 @@
 package com.manage.EmployeeManager.entity;
 
 import javax.persistence.*;
+
 import org.hibernate.validator.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
+import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 /**
  * 实体: 企业员工表
  * @author
@@ -22,9 +25,9 @@ public class EnterpriseEmployees implements Domain{
 	private static final long serialVersionUID = 2584651808359871795L;
 	
 
-	@Column(name = "EMPLOYEES_COM_ID")
-	@Length(max=32)
-	private String employeesComId;//企业信息ID_
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="EMPLOYEES_COM_ID")
+	private EnterbusinessmanagerRz employeesComId;//企业信息ID_
 
 	@Column(name = "EMPLOYEES_DEPARTMENT")
 	@Length(max=2)
@@ -47,17 +50,11 @@ public class EnterpriseEmployees implements Domain{
 	@Length(max=36)
 	private String rzId;//ID
 
-	@Column(name = "MEMBER_ID_")
-	@Length(max=36)
-	private String memberId;//会员用户ID
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="MEMBER_ID_")
+	private MemberInformation memberId;//会员用户ID
 	
-	public String getEmployeesComId(){
-		return this.employeesComId;
-	}
-	
-	public void setEmployeesComId(String employeesComId){
-		this.employeesComId = employeesComId;
-	}
+
 	public String getEmployeesDepartment(){
 		return this.employeesDepartment;
 	}
@@ -93,16 +90,28 @@ public class EnterpriseEmployees implements Domain{
 	public void setRzId(String rzId){
 		this.rzId = rzId;
 	}
-	public String getMemberId(){
-		return this.memberId;
-	}
 	
-	public void setMemberId(String memberId){
+	
+	
+	
+	public EnterbusinessmanagerRz getEmployeesComId() {
+		return employeesComId;
+	}
+
+	public void setEmployeesComId(EnterbusinessmanagerRz employeesComId) {
+		this.employeesComId = employeesComId;
+	}
+
+	
+
+	public MemberInformation getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(MemberInformation memberId) {
 		this.memberId = memberId;
 	}
-	
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
