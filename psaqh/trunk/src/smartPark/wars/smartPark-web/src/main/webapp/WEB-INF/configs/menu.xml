@@ -6,14 +6,19 @@
 		<menu id="010103" text="模型设计"  href="page/platform.codepdm.pdm/pdm.html"></menu>
 		<menu id="010104" text="图标"  href="page/common/icon.html"></menu>
 	</menu> -->
+	<menu id="010000" text="企业中心">
+		<menu id="011000" text="企业类型管理" href="">
+			<menu id="011100" text="企业行业类型" href="page/commonCenter.EnterpriceTypeManager.etypeEnterprisetype/etypeEnterprisetype.html"></menu>
+		</menu>
+		<menu id="021000" text="企业员工管理" href="">
+			<menu id="021100" text="员工信息" href="page/manageCenter.EmployeeManager.enterpriseEmployees/enterpriseEmployees.html"></menu>
+		</menu>
+	</menu>
 	<menu id="050000" text="园区基础">
 		<menu id="050001" text="园区管理" href="page/commonCenter.BuildingBaseManager.bbmPark/bbmPark.html"></menu>
 		<menu id="050002" text="楼栋管理" href="page/commonCenter.BuildingBaseManager.bbmBuilding/bbmBuilding.html"></menu>
 		<menu id="050003" text="楼层管理" href="page/commonCenter.BuildingBaseManager.bbmFloor/bbmFloor.html"></menu>
 		<menu id="050004" text="单元管理" href="page/commonCenter.BuildingBaseManager.bbmRoom/bbmRoom.html"></menu>
-	</menu>
-	<menu id="010000" text="企业类型管理">
-		<menu id="011000" text="企业行业类型" href="page/commonCenter.EnterpriceTypeManager.etypeEnterprisetype/etypeEnterprisetype.html"></menu>
 	</menu>
 	<menu id="081000" text="物业投诉">
 		<menu id="081100" text="投诉记录" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerCos/propertyservicemanagerCos.html"></menu>
