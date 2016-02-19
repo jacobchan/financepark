@@ -65,14 +65,7 @@ public class EtypeEnterprisetypeManagerImpl extends BaseManagerImpl implements E
      */
     @EsbServiceMapping
     public EtypeEnterprisetype saveEtypeEnterprisetype(EtypeEnterprisetype o) throws BusException{
-    	String etypeEnterprisetypeId = o.getEnTypeId();
-    	boolean isUpdate = StringUtils.isNotEmpty(etypeEnterprisetypeId);
-    	if(isUpdate){//修改
-    		etypeEnterprisetypeDao.update(etypeEnterprisetypeId, o);
-    	}else{//新增
-    		etypeEnterprisetypeDao.save(o);
-    	}
-    	return o;
+    	return etypeEnterprisetypeDao.save(o);
     }
 
     /**
