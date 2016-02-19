@@ -36,6 +36,14 @@
 			<version>${project.version}</version>
 		</dependency>
 		
+		
+		<dependency>
+			<groupId>com.gsoft.framework</groupId>
+			<artifactId>gsoft-framework-codemap</artifactId>
+			<version>1.0.3.RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
+		
 		<!--文件上传  -->
 		<dependency>
 			<groupId>com.gsoft.framework</groupId>

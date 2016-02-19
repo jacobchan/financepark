@@ -10,17 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.BuildingBaseManager.dao.BbmRoomDao;
+import com.common.BuildingBaseManager.entity.BbmRoom;
+import com.common.purchasingManager.dao.PurchasingmanagerCommodityDao;
+import com.common.purchasingManager.dao.PurchasingmanagerCommodityExtendValueDao;
+import com.common.purchasingManager.entity.PurchasingmanagerCommodityExtendValue;
+import com.gsoft.framework.codemap.dao.CodeitemDao;
+import com.gsoft.framework.codemap.entity.Codeitem;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.manage.ReserveManager.entity.ReservationRecord;
 import com.manage.ReserveManager.dao.ReservationRecordDao;
 import com.manage.ReserveManager.service.ReservationRecordManager;
@@ -30,6 +34,18 @@ import com.manage.ReserveManager.service.ReservationRecordManager;
 public class ReservationRecordManagerImpl extends BaseManagerImpl implements ReservationRecordManager{
 	@Autowired
 	private ReservationRecordDao reservationRecordDao;
+	
+	@Autowired
+	private PurchasingmanagerCommodityDao purchasingmanagerCommodityDao;
+	
+	@Autowired
+	private PurchasingmanagerCommodityExtendValueDao purchasingmanagerCommodityExtendValueDao;
+	
+	@Autowired
+	private CodeitemDao<Codeitem, String> codeItemDao;
+	
+	@Autowired
+	private BbmRoomDao bbmRoomDao;
 	
     /**
      * 查询列表
@@ -102,5 +118,36 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
     public boolean exsitReservationRecord(String propertyName,Object value) throws BusException{
 		return reservationRecordDao.exists(propertyName,value);
 	}
+    
+    
+    /**
+     * 根据预约类型不同生成相应的招商预约记录
+     */
+    @EsbServiceMapping
+    public ReservationRecord saveReservationRecordByType(ReservationRecord o,@ServiceParam(name="commodityId") String commodityId,@ServiceParam(name="roomId") String roomId) throws BusException{
+        if(o.getRecordType().equals("01")){//众创空间预约 
+        	//根据商品ID查询商品信息
+        	if(commodityId !=null){
+        		PurchasingmanagerCommodityExtendValue commodityValue=purchasingmanagerCommodityExtendValueDao.get(commodityId);
+        		o.setRecordMemberId(commodityValue.getCommodityExtendValueDisplayName());//预约对象ID
+        	}else{
+        		o.setRecordMemberId(null);//预约对象ID
+        	}
+        	
+        }else if(o.getRecordType().equals("02")){//虚拟空间预约
+        	//根据单元ID查询单元基础信息
+        	if(roomId != null){
+        	    BbmRoom bbmRoom=bbmRoomDao.get(roomId);
+        	    o.setRecordMemberId(bbmRoom.getRoomName());
+        	}else{
+        		o.setRecordMemberId(null);//预约对象ID
+        	}
+        }else{//其他
+        	List<Codeitem> list = codeItemDao.getList(new String[] {"codemap.code", "itemValue" }, new Object[] {
+					"recordType", o.getRecordType()});// 预约类型
+        	o.setRecordMemberId(list.get(0).getItemCaption());
+        }
+    	return reservationRecordDao.save(o);
+    }
 
 }
