@@ -9,6 +9,11 @@
 	<menu id="010000" text="企业类型管理">
 		<menu id="011000" text="企业行业类型" href="page/commonCenter.EnterpriceTypeManager.etypeEnterprisetype/etypeEnterprisetype.html"></menu>
 	</menu>
+	<menu id="080000" text="物业服务">
+		<menu id="081000" text="物业投诉" href="">
+			<menu id="081100" text="投诉记录" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerCos/propertyservicemanagerCos.html"></menu>
+		</menu>
+	</menu>
 	<menu id="120000" text="商品管理">
 		<menu id="120001" text="商户信息管理" href="page/commonCenter.purchasingManager.purchasingmanagerMerchant/purchasingmanagerMerchant.html"></menu>
 		<!-- <menu id="020002" text="商户地址管理" href="page/commonCenter.purchasingManager.purchasingmanagerMerchantAddress/purchasingmanagerMerchantAddress.html"></menu> -->
