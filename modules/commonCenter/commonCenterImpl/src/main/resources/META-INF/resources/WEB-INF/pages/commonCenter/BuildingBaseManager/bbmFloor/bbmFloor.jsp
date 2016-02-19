@@ -12,7 +12,7 @@
 		<youi:gridCol property="floorNo"  caption="楼层编号" width="150px"/>
 		<youi:gridCol property="floorCaption"  caption="楼层说明" width="150px"/>
 		<youi:gridCol property="floorRoomCount"  caption="楼层单元数量" width="150px"/>
-		<youi:gridCol property="bbmBuilding.buildingCaption" caption="所属楼栋" width="150px"/>
+		<youi:gridCol property="bbmBuilding.buildingNo" caption="所属楼栋" width="150px"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -27,7 +27,7 @@
 			<youi:fieldText property="floorCaption"  caption="楼层说明"/>
 			<youi:fieldSelect property="bbmPark.parkId" caption="所属园区" code="parkId" show="parkName"
 				src="esb/web/bbmParkManager/getBbmParks.json"></youi:fieldSelect>
-			<youi:fieldSelect property="bbmBuilding.buildingId" caption="所属楼栋" code="buildingId" show="buildingCaption" showProperty="bbmBuilding.buildingCaption"
+			<youi:fieldSelect property="bbmBuilding.buildingId" caption="所属楼栋" code="buildingId" show="buildingNo" showProperty="bbmBuilding.buildingCaption"
 				src="esb/web/bbmBuildingManager/getBbmBuildings.json" parents="bbmPark.parkId" parentsAlias="bbmPark.parkId"></youi:fieldSelect>
 			<youi:fieldText property="floorRoomCount"  caption="楼层单元数量"/>
 		</youi:fieldLayout>
