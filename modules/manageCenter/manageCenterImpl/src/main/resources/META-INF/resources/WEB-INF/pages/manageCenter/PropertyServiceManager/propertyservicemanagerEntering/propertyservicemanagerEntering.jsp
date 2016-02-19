@@ -31,13 +31,13 @@
 	<!-- form-可办理预约记录编辑 -->
 	<youi:form dialog="true" caption="可办理预约记录" id="form_propertyservicemanagerEntering" action="esb/web/propertyservicemanagerEnteringManager/savePropertyservicemanagerEntering.json">
 		<youi:fieldLayout prefix="record" labelWidths="90,100">
-			<youi:fieldSelect property="enteringStatus"  caption="可预约状态" convert="enteringStatus"/>
-			<youi:fieldText property="enteringRemain"  caption="剩余数量"/>
-			<youi:fieldSelect property="enteringTime"  caption="预约时间段" convert="enteringTime"/>
+			<youi:fieldSelect property="enteringStatus"  caption="可预约状态" convert="enteringStatus" notNull="true"/>
+			<youi:fieldSelect property="enteringTime"  caption="预约时间段" convert="enteringTime" notNull="true"/>
+			<youi:fieldText property="enteringSum"  caption="预约总量" expression="^[0-9]*$" expressionMessage="请输入数值" notNull="true"/>
+			<youi:fieldText property="enteringRemain"  caption="剩余数量" expression="^[0-9]*$" expressionMessage="请输入数值" notNull="true"/>
+			<youi:fieldText property="enteringAlre"  caption="已预约数" expression="^[0-9]*$" expressionMessage="请输入数值" notNull="true"/>
 			<youi:fieldHidden property="enteringId"  caption="预约记录ID"/>
-			<youi:fieldText property="enteringAlre"  caption="已预约数"/>
-			<youi:fieldText property="enteringSum"  caption="预约总量"/>
-			<youi:fieldCalendar property="enteringDate"  caption="预约时间日期" textFormat="yyyy-MM-dd" format="yyyy-MM-dd"/>
+			<youi:fieldCalendar property="enteringDate"  caption="预约时间日期" textFormat="yyyy-MM-dd" format="yyyy-MM-dd" notNull="true"/>
 		</youi:fieldLayout>
 	</youi:form>
 	<!--**********************************页面函数Start********************************-->
