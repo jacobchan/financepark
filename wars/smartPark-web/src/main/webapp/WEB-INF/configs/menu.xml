@@ -49,6 +49,8 @@
 		<menu id="025000" text="招商预约管理" href="">
 			<menu id="025100" text="预约记录分配管理" href="page/manageCenter.ReserveManager.reservationRecord/reservationRecord.html"></menu>
 		</menu>
+		<menu id="026000" text="物业楼宇信息管理" href="page/commonCenter.BuildingBaseManager.bbmRoom/wybbmRoom.html"></menu>
+
 	</menu>
 	<menu id="030000" text="公共管理">
 		<menu id="030300" text="角色管理" href="page/security.fuc.role/role.html"></menu>
@@ -94,9 +96,6 @@
 		<menu id="330703" text="活动评论回复管理" href="page/manageCenter.ActivityManager.activityComment/activityComment.html"></menu>
 		<menu id="330704" text="活动文档管理" href="page/manageCenter.ActivityManager.activityDocument/activityDocument.html"></menu>
 	</menu>
-	<menu id="330800" text="物业楼宇管理" href="">
-			<menu id="330810" text="物业楼宇信息管理" href="page/commonCenter.BuildingBaseManager.bbmRoom/wybbmRoom.html">	</menu>																
-		</menu>
-		
+
 		
 </menus>
