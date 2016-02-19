@@ -40,7 +40,7 @@
 		id="form_propertyservicemanagerCos"
 		action="esb/web/propertyservicemanagerCosManager/savePropertyservicemanagerCos.json">
 		<youi:fieldLayout prefix="record" labelWidths="120,120">
-			<youi:fieldText property="cosId" caption="投诉ID" />
+			<youi:fieldHidden property="cosId" caption="投诉ID" />
 			<youi:fieldText property="cosCode" caption="投诉单号" />
 			<youi:fieldText property="cosName" caption="投诉联系人" />
 			<youi:fieldSelect property="memberId"
