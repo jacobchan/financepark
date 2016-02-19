@@ -26,7 +26,7 @@
 	</youi:grid>
 	
 	<!-- form-入驻服务办理预约记录表编辑 -->
-	<youi:form dialog="true" caption="入驻服务办理预约记录表" id="form_propertyservicemanagerEntrec" action="esb/web/propertyservicemanagerEntrecManager/savePropertyservicemanagerEntrec.json">
+	<youi:form dialog="true" caption="入驻服务办理预约记录表" id="form_propertyservicemanagerEntrec" action="esb/web/propertyservicemanagerEntrecManager/enterApplication.json">
 		<youi:fieldLayout prefix="record" labelWidths="90,100">
 			<youi:fieldText property="enteringName"  caption="入驻申请人"/>
 			<youi:fieldText property="enteringTelephone"  caption="入驻联系电话"/>
