@@ -11,8 +11,8 @@
 			<youi:fieldText property="mediaStatus"  caption="发布状态"/>
 			<youi:fieldText property="mediaRe"  caption="企业信息ID"/>
 
-			<youi:fieldText property="mediaUrl"  caption="图片URL"/>
-			<%-- <youi:fieldText property="rzId"  caption="ID2"/> --%>
+		<%-- 	<youi:fieldText property="mediaUrl"  caption="图片URL"/>
+			<youi:fieldText property="rzId"  caption="ID2"/>             --%>
 		</youi:fieldLayout>
 		<youi:gridCol property="mediaTilurl"  caption="文章URL_"/>
 		<youi:gridCol property="mediaTitle"  caption="标题"/>
