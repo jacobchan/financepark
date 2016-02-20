@@ -11,7 +11,7 @@
 			<youi:fieldText property="knowledgeRe"  caption="企业信息ID"/>
 			<youi:fieldText property="knowledgeTitle"  caption="标题"/>
 			<youi:fieldText property="knowledgeContent"  caption="描述"/>
-			<youi:fieldText property="knowledgeUrl"  caption="图片URL"/>
+			<%-- <youi:fieldText property="knowledgeUrl"  caption="图片URL"/> --%>
 			<youi:fieldText property="knowledgeStatus"  caption="发布状态"/>
 		</youi:fieldLayout>
 		<%-- <youi:gridCol property="rzId"  caption="ID2"/> --%>
