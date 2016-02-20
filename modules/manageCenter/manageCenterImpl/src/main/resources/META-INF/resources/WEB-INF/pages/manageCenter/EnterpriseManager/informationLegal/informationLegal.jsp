@@ -3,10 +3,10 @@
 <youi:page>
 	<youi:grid id="grid_informationLegal" idKeys="legalId" caption="法人介绍列表"  panel="false"
 				src="esb/web/informationLegalManager/getPagerInformationLegals.json" dataFormId="form_informationLegal"
-				editSrc="esb/web/informationLegalManager/getInformationLegal.json" edit="NOT" remove="NOT" showCheckbox="true"
+				editSrc="esb/web/informationLegalManager/getInformationLegal.json" edit="NOT" remove="NOT" showCheckbox="true" add="NOT"
 				removeSrc="esb/web/informationLegalManager/removeInformationLegal.json">
 		<youi:fieldLayout>
-			<youi:fieldText property="rzId"  caption="ID2"/>
+			<%-- <youi:fieldText property="rzId"  caption="ID2"/> --%>
 
 			<youi:fieldText property="legalTelephone"  caption="联系方式"/>
 			<youi:fieldText property="legalName"  caption="法人信息"/>
