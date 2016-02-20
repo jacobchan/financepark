@@ -27,14 +27,14 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
+		
 	<dependencies>
 		<dependency>
 			<groupId>com.gsoft.smartPark</groupId>
 			<artifactId>smartPark-commonCenter</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-
+	
 		<dependency>
 			<groupId>com.gsoft.framework</groupId>
 			<artifactId>gsoft-framework-security</artifactId>
