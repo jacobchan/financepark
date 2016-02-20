@@ -43,9 +43,9 @@ public class PropertyservicemanagerTs implements Domain{
 	@Length(max=32)
 	private String tsName;//派工人员
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="BX_ID_")
-	private com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx propertyservicemanagerBx;//报修记录ID
+	private PropertyservicemanagerBx propertyservicemanagerBx;//报修记录ID
 	
 	public String getTsId(){
 		return this.tsId;

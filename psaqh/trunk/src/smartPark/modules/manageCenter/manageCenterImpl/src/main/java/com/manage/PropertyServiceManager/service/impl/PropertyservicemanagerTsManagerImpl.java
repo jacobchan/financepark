@@ -3,6 +3,7 @@
  */
 package com.manage.PropertyServiceManager.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -16,12 +17,12 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTs;
+import com.manage.PropertyServiceManager.dao.PropertyservicemanagerBxDao;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerTsDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerTsManager;
 
@@ -30,6 +31,8 @@ import com.manage.PropertyServiceManager.service.PropertyservicemanagerTsManager
 public class PropertyservicemanagerTsManagerImpl extends BaseManagerImpl implements PropertyservicemanagerTsManager{
 	@Autowired
 	private PropertyservicemanagerTsDao propertyservicemanagerTsDao;
+	@Autowired
+	private PropertyservicemanagerBxDao propertyservicemanagerBxDao;
 	
     /**
      * 查询列表
@@ -67,14 +70,29 @@ public class PropertyservicemanagerTsManagerImpl extends BaseManagerImpl impleme
      */
     @EsbServiceMapping
     public PropertyservicemanagerTs savePropertyservicemanagerTs(PropertyservicemanagerTs o) throws BusException{
-//    	String propertyservicemanagerTsId = o.getPropertyservicemanagerTsId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerTsId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	return propertyservicemanagerTsDao.save(o);
+    	String bxid = o.getPropertyservicemanagerBx().getBxId();
+    	PropertyservicemanagerBx bx = propertyservicemanagerBxDao.get(bxid);
+    	if(bx==null){
+    		throw new BusException("没有报修记录存在!");
+    	}else{
+    			if(o.getTsId()==null){
+	    			Collection<Condition> conditionts =  new ArrayList<Condition>();
+	    			String[] aa = {"00","01"};
+	    			conditionts.add(ConditionUtils.getCondition("tsStatus", Condition.IN,aa));//查询已发出派工记录或者派工已受理
+	    			conditionts.add(ConditionUtils.getCondition("propertyservicemanagerBx.bxId", Condition.EQUALS,bxid));
+	    			List<PropertyservicemanagerTs> listTs = propertyservicemanagerTsDao.commonQuery(conditionts, null);
+	    			if(listTs.size()>0){
+	    				throw new BusException("该报修已派工!");
+	    			}else{
+			    		bx.setBxStatus("02");//设置派工记录为待接单
+			    		propertyservicemanagerBxDao.save(bx);
+			    	   	return propertyservicemanagerTsDao.save(o);
+	    			}
+    			}else{
+    				return propertyservicemanagerTsDao.save(o);
+    			}
+    	}
+ 
     }
 
     /**
@@ -103,4 +121,23 @@ public class PropertyservicemanagerTsManagerImpl extends BaseManagerImpl impleme
 		return propertyservicemanagerTsDao.exists(propertyName,value);
 	}
 
+    @EsbServiceMapping
+	public void upTsbyId(@ServiceParam(name="id") String id,
+			@ServiceParam(name="code") String code) throws BusException {
+    	PropertyservicemanagerTs  ts = propertyservicemanagerTsDao.get(id);
+    	PropertyservicemanagerBx bx = ts.getPropertyservicemanagerBx();
+		if(code.equals("00")){
+			ts.setTsStatus("01");
+			bx.setBxStatus("03");
+			propertyservicemanagerTsDao.save(ts);
+			propertyservicemanagerBxDao.save(bx);
+		}else{
+			ts.setTsStatus("02");
+			bx.setBxStatus("01");
+			propertyservicemanagerTsDao.save(ts);
+			propertyservicemanagerBxDao.save(bx);
+		}
+	}
+
+    
 }

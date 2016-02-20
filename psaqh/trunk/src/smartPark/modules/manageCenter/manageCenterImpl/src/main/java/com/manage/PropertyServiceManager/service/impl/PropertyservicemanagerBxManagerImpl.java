@@ -10,17 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.OrderManager.dao.OrdermanagerUserorderDao;
+import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
+import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerBxDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerBxManager;
@@ -30,7 +30,8 @@ import com.manage.PropertyServiceManager.service.PropertyservicemanagerBxManager
 public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl implements PropertyservicemanagerBxManager{
 	@Autowired
 	private PropertyservicemanagerBxDao propertyservicemanagerBxDao;
-	
+	@Autowired
+	private OrdermanagerUserorderDao ordermanagerUserorderDao;
     /**
      * 查询列表
      */
@@ -103,4 +104,30 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 		return propertyservicemanagerBxDao.exists(propertyName,value);
 	}
 
+    @EsbServiceMapping
+	public void upBxbyId(@ServiceParam(name="id") String id,
+			@ServiceParam(name="code") String code) throws BusException {
+    	PropertyservicemanagerBx bx = propertyservicemanagerBxDao.get(id);
+    	String bxstatus = bx.getBxStatus();
+    	if(code.equals("01")){//回绝报修
+    		bx.setBxStatus("08");
+    	}else{
+    		if(bxstatus.equals("00")){//待受理-->已受理
+    			bx.setBxStatus("01");
+    		}else if(bxstatus.equals("06")){
+    			bx.setBxStatus("07");//生成订单
+    			OrdermanagerUserorder order = new OrdermanagerUserorder();
+    			order.setUserorderAmount(bx.getBxAmount().toString());
+    			order.setUserorderCode("1111111");
+    			order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    			order.setUserorderProject("物业报修");
+    			order.setBxId(id);
+    			order.setUserorderBuyUser(bx.getBxComp());
+    			ordermanagerUserorderDao.save(order);
+    		}
+    	}
+    	propertyservicemanagerBxDao.save(bx);
+	}
+
+    
 }
