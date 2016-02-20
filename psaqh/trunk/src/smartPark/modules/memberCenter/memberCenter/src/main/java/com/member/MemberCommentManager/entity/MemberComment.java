@@ -10,6 +10,7 @@ import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.common.MemberManager.entity.MemberInformation;
+import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: -商品评价
@@ -32,10 +33,10 @@ public class MemberComment implements Domain{
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="MEMBER_ID_")
 	private MemberInformation memberId;//会员用户ID
-
-	@Column(name = "COMMODITY_ID_")
-	@Length(max=36)
-	private String commodityId;//商品ID
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="COMMODITY_ID_")
+	private PurchasingmanagerCommodity commodityId;//商品ID
 
 	@Column(name = "GOODS_COMMENT_REVIEW_")
 	@Length(max=1024)
@@ -71,13 +72,15 @@ public class MemberComment implements Domain{
 		this.memberId = memberId;
 	}
 
-	public String getCommodityId(){
-		return this.commodityId;
-	}
 	
-	public void setCommodityId(String commodityId){
+	public PurchasingmanagerCommodity getCommodityId() {
+		return commodityId;
+	}
+
+	public void setCommodityId(PurchasingmanagerCommodity commodityId) {
 		this.commodityId = commodityId;
 	}
+
 	public String getGoodsCommentReview(){
 		return this.goodsCommentReview;
 	}
