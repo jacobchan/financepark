@@ -12,6 +12,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 
 import com.common.EnterpriceTypeManager.entity.EtypeEnterprisetype;
 
@@ -63,4 +64,6 @@ public interface EtypeEnterprisetypeManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitEtypeEnterprisetype(String propertyName,Object value) throws BusException;
+	
+	public List<EtypeEnterprisetype> getChildren(String parentId) throws BusException;
 }

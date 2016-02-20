@@ -35,7 +35,7 @@ public class EtypeEnterprisetype implements Domain{
 	@Length(max=36)
 	private String enTypeId;//企业类型ID
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="sp__en_type_id_")
 	private com.common.EnterpriceTypeManager.entity.EtypeEnterprisetype etypeEnterprisetype;//320_企业类型ID
 	

@@ -63,4 +63,9 @@ public interface OrdermanagerUserorderManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitOrdermanagerUserorder(String propertyName,Object value) throws BusException;
+	
+	  /**
+     * 更新状态
+     */
+    public void updateUserorderStatus(String id,String userorderStatus) throws BusException;
 }
