@@ -75,7 +75,7 @@
 			var gridElement = $elem('grid_propertyservicemanagerTs',pageId),
 			selectedRecord = gridElement.grid('getSelectedRecord');
 			var tsstatus = selectedRecord.tsStatus;
-			if(tsstatus=='00'||tsstatus=="01"){
+			if(tsstatus=='00'){
 				$.youi.messageUtils.confirm('确认拒单?',function(){
 					$.youi.ajaxUtil.ajax({
 					url:'/esb/web/propertyservicemanagerTsManager/upTsbyId.json',
@@ -86,6 +86,8 @@
 						}
 					});
 				});
+			}else if(tsstatus=="01"){
+				alert("您已接单");
 			}else{
 				alert("您已拒单!");
 			}
