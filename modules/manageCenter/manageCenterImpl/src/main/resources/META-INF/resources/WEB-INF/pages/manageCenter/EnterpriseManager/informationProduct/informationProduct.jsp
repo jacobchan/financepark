@@ -7,9 +7,9 @@
 				removeSrc="esb/web/informationProductManager/removeInformationProduct.json">
 		<youi:fieldLayout>
 
-			<youi:fieldText property="productContent"  caption="产品描述"/>
+			<%-- <youi:fieldText property="productContent"  caption="产品描述"/> --%>
 			<youi:fieldText property="productRe"  caption="企业ID"/>
-			<youi:fieldText property="rzId"  caption="ID2"/>
+			<%-- <youi:fieldText property="rzId"  caption="ID2"/> --%>
 			<youi:fieldText property="productType"  caption="产品类别"/>
 			<youi:fieldText property="productName"  caption="产品名称"/>
 		</youi:fieldLayout>
@@ -28,10 +28,10 @@
 	<!-- form-产品信息编辑 -->
 	<youi:form dialog="true" caption="产品信息" id="form_informationProduct" action="esb/web/informationProductManager/saveInformationProduct.json">
 		<youi:fieldLayout prefix="record">
-			<youi:fieldText property="productId"  caption="ID"/>
+			<%-- <youi:fieldText property="productId"  caption="ID"/> --%>
 			<youi:fieldText property="productContent"  caption="产品描述"/>
 			<youi:fieldText property="productRe"  caption="企业ID"/>
-			<youi:fieldText property="rzId"  caption="ID2"/>
+			<%-- <youi:fieldText property="rzId"  caption="ID2"/> --%>
 			<youi:fieldText property="productType"  caption="产品类别"/>
 			<youi:fieldText property="productName"  caption="产品名称"/>
 		</youi:fieldLayout>
