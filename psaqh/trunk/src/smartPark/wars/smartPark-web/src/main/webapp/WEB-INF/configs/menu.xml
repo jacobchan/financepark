@@ -6,44 +6,34 @@
 		<menu id="010103" text="模型设计"  href="page/platform.codepdm.pdm/pdm.html"></menu>
 		<menu id="010104" text="图标"  href="page/common/icon.html"></menu>
 	</menu> -->
-	<menu id="010000" text="企业中心">
-		<menu id="011000" text="企业类型管理" href="">
-			<menu id="011100" text="企业行业类型" href="page/commonCenter.EnterpriceTypeManager.etypeEnterprisetype/etypeEnterprisetype.html"></menu>
-		</menu>
-		<menu id="021000" text="企业员工管理" href="">
-			<menu id="021100" text="员工信息" href="page/manageCenter.EmployeeManager.enterpriseEmployees/enterpriseEmployees.html"></menu>
-		</menu>
+	<menu id="010000" text="企业管理">
+		<menu id="011100" text="企业行业类型" href="page/commonCenter.EnterpriceTypeManager.etypeEnterprisetype/etypeEnterprisetype.html"></menu>
+		<menu id="021100" text="员工信息" href="page/manageCenter.EmployeeManager.enterpriseEmployees/enterpriseEmployees.html"></menu>
 	</menu>
 	<menu id="320100" text="园区基础">
 		<menu id="320101" text="园区管理" href="page/commonCenter.BuildingBaseManager.bbmPark/bbmPark.html"></menu>
 		<menu id="320102" text="楼栋管理" href="page/commonCenter.BuildingBaseManager.bbmBuilding/bbmBuilding.html"></menu>
 		<menu id="320103" text="楼层管理" href="page/commonCenter.BuildingBaseManager.bbmFloor/bbmFloor.html"></menu>
 		<menu id="320104" text="单元管理" href="page/commonCenter.BuildingBaseManager.bbmRoom/bbmRoom.html"></menu>
-	</menu>
-	<menu id="320600" text="政策发布管理">
-		<menu id="320601" text="发布类型" href="page/commonCenter.NewsManager.nmIssuetype/nmIssuetype.html"></menu>
-		<menu id="320603" text="发布流程" href="page/commonCenter.NewsManager.nmIssueflow/nmIssueflow.html"></menu>
-		<menu id="320602" text="发布模板" href="page/commonCenter.NewsManager.nmIssuetempalate/nmIssuetempalate.html"></menu>
-		<menu id="320604" text="新闻政策" href="page/commonCenter.NewsManager.nmIssuenews/nmIssuenews.html"></menu>
-	</menu>
-	<menu id="320700" text="企业信息发布管理">
-		<menu id="320701" text="融资信息列表" href="page/manageCenter.EnterpriseManager.informationFinancing/informationFinancing.html"></menu>
-		<menu id="320703" text="法人介绍列表" href="page/manageCenter.EnterpriseManager.informationLegal/informationLegal.html"></menu>
-		<menu id="320702" text="公告信息列表" href="page/manageCenter.EnterpriseManager.informationNotice/informationNotice.html"></menu>
-		<menu id="320704" text="媒体报道信息列表" href="page/manageCenter.EnterpriseManager.informationMedia/informationMedia.html"></menu>
-	</menu>
-	
-	
-	<menu id="081000" text="物业投诉">
-		<menu id="081100" text="投诉记录" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerCos/propertyservicemanagerCos.html"></menu>
-		<menu id="081200" text="回访记录" href="page/manageCenter.PropertyServiceManager.propertyservicenanagerBack/propertyservicenanagerBack.html"></menu>
+		<menu id="022100" text="招商楼宇信息管理" href="page/commonCenter.BuildingBaseManager.bbmRoom/zsbbmRoom.html"></menu>
+		<menu id="026000" text="物业楼宇信息管理" href="page/commonCenter.BuildingBaseManager.bbmRoom/wybbmRoom.html"></menu>
 	</menu>
 	<menu id="024000" text="物业管理" >
+		<menu id="023100" text="预约数量管理" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerEntering/propertyservicemanagerEntering.html"></menu>
+		<menu id="023200" text="入驻申请管理" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerEntrec/propertyservicemanagerEntrec.html"></menu>
 		<menu id="330101" text="企业入驻管理" href="page/manageCenter.EnterBusinessManager.enterbusinessmanagerRz/enterbusinessmanagerRz.html"></menu>
 		<menu id="024100" text="搬家申请记录" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerMoverec/propertyservicemanagerMoverec.html"></menu>
 		<menu id="024200" text="搬家放行二维码记录" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerFxtdc/propertyservicemanagerFxtdc.html"></menu>
 		<menu id="024300" text="一卡通申请管理" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerOc/propertyservicemanagerOc.html"></menu>
 		<menu id="024400" text="访客记录管理" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerFkcode/propertyservicemanagerFkcode.html"></menu>
+		<menu id="330701" text="活动内容管理" href="page/manageCenter.ActivityManager.activityApply/activityApply.html"></menu>
+		<menu id="330702" text="活动报名管理" href="page/manageCenter.ActivityManager.activityApplylist/activityApplylist.html"></menu>
+		<menu id="330703" text="活动评论回复管理" href="page/manageCenter.ActivityManager.activityComment/activityComment.html"></menu>
+		<menu id="330704" text="活动文档管理" href="page/manageCenter.ActivityManager.activityDocument/activityDocument.html"></menu>
+		<menu id="081100" text="投诉记录" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerCos/propertyservicemanagerCos.html"></menu>
+		<menu id="081200" text="回访记录" href="page/manageCenter.PropertyServiceManager.propertyservicenanagerBack/propertyservicenanagerBack.html"></menu>
+		<menu id="330301" text="使用状态管理" href="page/manageCenter.PublicUtilitiesManager.publicutilitiesmanagerReso/publicutilitiesmanagerReso.html"></menu>
+		<menu id="330302" text="订单管理" href="page/manageCenter.PublicUtilitiesManager.publicutilitiesmanagerReso/ordermanagerUserorder.html"></menu>
 	</menu>
 	<menu id="120000" text="商品管理">
 		<menu id="120001" text="商户信息管理" href="page/commonCenter.purchasingManager.purchasingmanagerMerchant/purchasingmanagerMerchant.html"></menu>
@@ -53,14 +43,6 @@
 		<menu id="120005" text="商品信息管理" href="page/commonCenter.purchasingManager.purchasingmanagerCommodity/purchasingmanagerCommodity.html"></menu>
 		<menu id="120006" text="商品扩展信息管理" href="page/commonCenter.purchasingManager.purchasingmanagerCommodityExtend/purchasingmanagerCommodityExtend.html"></menu>
 		<!-- <menu id="020006" text="商品扩展信息值管理" href="page/commonCenter.purchasingManager.purchasingmanagerCommodityExtendValue/purchasingmanagerCommodityExtendValue.html"></menu> -->
-	</menu>
-	<menu id="020000" text="楼宇信息管理">
-		<menu id="022100" text="招商楼宇信息管理" href="page/commonCenter.BuildingBaseManager.bbmRoom/zsbbmRoom.html"></menu>
-		<menu id="026000" text="物业楼宇信息管理" href="page/commonCenter.BuildingBaseManager.bbmRoom/wybbmRoom.html"></menu>
-	</menu>
-	<menu id="023000" text="入驻预约管理">
-			<menu id="023100" text="预约数量管理" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerEntering/propertyservicemanagerEntering.html"></menu>
-			<menu id="023200" text="入驻申请管理" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerEntrec/propertyservicemanagerEntrec.html"></menu>
 	</menu>
 	<menu id="025000" text="招商预约管理">
 			<menu id="025100" text="预约记录分配管理" href="page/manageCenter.ReserveManager.reservationRecord/reservationRecord.html"></menu>
@@ -81,18 +63,18 @@
 		<menu id="080103" text="群发管理"  href="page/wx.wxmessage.wxmass/wxMass.html"></menu>
 		<menu id="080104" text="粉丝管理"  href="page/wx.wxmember.wxMember/wxFollower.html"></menu>
 	</menu> -->									
-	<menu id="330300" text="公共资源管理">
-		<menu id="330301" text="使用状态管理" href="page/manageCenter.PublicUtilitiesManager.publicutilitiesmanagerReso/publicutilitiesmanagerReso.html"></menu>
-		<menu id="330302" text="订单管理" href="page/manageCenter.PublicUtilitiesManager.publicutilitiesmanagerReso/ordermanagerUserorder.html"></menu>
+	<menu id="030000" text="公共管理">
+		<menu id="030300" text="角色管理" href="page/security.fuc.role/role.html"></menu>
+		<menu id="030400" text="人员管理" href="page/security.agt.user/user.html"></menu>
+		<menu id="030500" text="系统菜单" href="page/security.fuc.menu/menu.html"></menu>
+		<menu id="030107" text="代码集管理" href="page/codemap/codemap.html"></menu>
+		<menu id="320601" text="发布类型" href="page/commonCenter.NewsManager.nmIssuetype/nmIssuetype.html"></menu>
+		<menu id="320603" text="发布流程" href="page/commonCenter.NewsManager.nmIssueflow/nmIssueflow.html"></menu>
+		<menu id="320602" text="发布模板" href="page/commonCenter.NewsManager.nmIssuetempalate/nmIssuetempalate.html"></menu>
+		<menu id="320604" text="新闻政策" href="page/commonCenter.NewsManager.nmIssuenews/nmIssuenews.html"></menu>
+		<menu id="061000" text="政策新闻" href="page/commonCenter.NewsManager.nmIssuenews/zsIssuenews.html"></menu>
+		<!-- <menu id="030108" text="系统日记" href="admin/transLog/index.html"></menu> -->
 	</menu>
-	
-	<menu id="330700" text="运营活动管理">
-		<menu id="330701" text="活动内容管理" href="page/manageCenter.ActivityManager.activityApply/activityApply.html"></menu>
-		<menu id="330702" text="活动报名管理" href="page/manageCenter.ActivityManager.activityApplylist/activityApplylist.html"></menu>
-		<menu id="330703" text="活动评论回复管理" href="page/manageCenter.ActivityManager.activityComment/activityComment.html"></menu>
-		<menu id="330704" text="活动文档管理" href="page/manageCenter.ActivityManager.activityDocument/activityDocument.html"></menu>
-	</menu>
-	
 	<menu id="340000" text="会员中心">
 		<menu id="340101" text="地址管理" href="page/memberCenter.MemberAdrManager.memberadrAddress/memberadrAddress.html"></menu>
 		<menu id="340201" text="商品评价" href="page/memberCenter.MemberCommentManager.memberComment/memberComment.html"></menu>
@@ -101,15 +83,4 @@
 		<menu id="340303" text="餐饮购物车" href="page/memberCenter.shoppingCarManager.shoppingcarCatering/shoppingcarCatering.html"></menu>
 		<menu id="340401" text="收藏夹" href="page/memberCenter.FavoritsManage.favoritsFavoritgoods/favoritsFavoritgoods.html"></menu>
 	</menu>
-	<menu id="030000" text="公共管理">
-		<menu id="030300" text="角色管理" href="page/security.fuc.role/role.html"></menu>
-		<menu id="030400" text="人员管理" href="page/security.agt.user/user.html"></menu>
-		<menu id="030500" text="系统菜单" href="page/security.fuc.menu/menu.html"></menu>
-		<menu id="030107" text="代码集管理" href="page/codemap/codemap.html"></menu>
-		<!-- <menu id="030108" text="系统日记" href="admin/transLog/index.html"></menu> -->
-	</menu>
-	<menu id="060000" text="政策新闻管理">
-		<menu id="061000" text="政策新闻" href="page/commonCenter.NewsManager.nmIssuenews/zsIssuenews.html"></menu>
-	</menu>
-	
 </menus>
