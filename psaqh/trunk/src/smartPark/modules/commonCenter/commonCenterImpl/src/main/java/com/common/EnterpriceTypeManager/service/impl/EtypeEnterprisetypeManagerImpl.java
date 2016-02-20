@@ -3,6 +3,7 @@
  */
 package com.common.EnterpriceTypeManager.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -17,6 +18,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.common.EnterpriceTypeManager.entity.EtypeEnterprisetype;
@@ -93,5 +95,18 @@ public class EtypeEnterprisetypeManagerImpl extends BaseManagerImpl implements E
     public boolean exsitEtypeEnterprisetype(String propertyName,Object value) throws BusException{
 		return etypeEnterprisetypeDao.exists(propertyName,value);
 	}
-
+    
+    public List<EtypeEnterprisetype> getChildren(
+			@ServiceParam(name="enTypeId") String parentId) throws BusException {
+		Collection<Condition> conditions = new ArrayList<Condition>();
+		Collection<Order> orders = new ArrayList<Order>();
+		orders.add(ConditionUtils.getOrder("code", true));
+		if(StringUtils.isEmpty(parentId)){
+			List<EtypeEnterprisetype> ees = new ArrayList<EtypeEnterprisetype>();
+		}else{
+			conditions.add(ConditionUtils.getCondition("etypeEnterprisetype.enTypeId", Condition.EQUALS, parentId));
+		}
+	
+		return etypeEnterprisetypeDao.commonQuery(conditions, orders);
+	}
 }
