@@ -4,12 +4,10 @@
 package com.member.FavoritsManage.entity;
 
 import javax.persistence.*;
-
 import org.hibernate.validator.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: -商品收藏表
@@ -23,7 +21,11 @@ public class FavoritsFavoritgoods implements Domain{
 	
 	private static final long serialVersionUID = -8689841793197150974L;
 	
-
+	@Id @GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
+	@Column(name = "COMMODITY_ID_")
+	@Length(max=36)
+	private String commodityId;//商品ID
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "FAVORIT_GOODS_ID_")
@@ -34,11 +36,13 @@ public class FavoritsFavoritgoods implements Domain{
 	@Length(max=36)
 	private String memberId;//会员用户ID
 	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="COMMODITY_ID_")
-	private PurchasingmanagerCommodity commodityId;//商品ID
+	public String getCommodityId(){
+		return this.commodityId;
+	}
 	
-
+	public void setCommodityId(String commodityId){
+		this.commodityId = commodityId;
+	}
 	public String getFavoritGoodsId(){
 		return this.favoritGoodsId;
 	}
@@ -56,14 +60,6 @@ public class FavoritsFavoritgoods implements Domain{
 	
 	
 	
-	public PurchasingmanagerCommodity getCommodityId() {
-		return commodityId;
-	}
-
-	public void setCommodityId(PurchasingmanagerCommodity commodityId) {
-		this.commodityId = commodityId;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
