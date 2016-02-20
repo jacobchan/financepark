@@ -4,10 +4,12 @@
 package com.member.shoppingCarManager.entity;
 
 import javax.persistence.*;
+
 import org.hibernate.validator.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: -企业服务购物车
@@ -27,9 +29,9 @@ public class ShoppingcarCompanyserver implements Domain{
 	@Length(max=36)
 	private String commodityId;//商品ID
 
-	@Column(name = "MEMBER_ID_")
-	@Length(max=36)
-	private String memberId;//会员用户ID
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="MEMBER_ID_")
+	private MemberInformation memberId;//会员用户ID
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "COMPANY_SERVER_ID_")
@@ -51,13 +53,15 @@ public class ShoppingcarCompanyserver implements Domain{
 	public void setCommodityId(String commodityId){
 		this.commodityId = commodityId;
 	}
-	public String getMemberId(){
-		return this.memberId;
-	}
 	
-	public void setMemberId(String memberId){
+	public MemberInformation getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(MemberInformation memberId) {
 		this.memberId = memberId;
 	}
+
 	public String getCompanyServerId(){
 		return this.companyServerId;
 	}

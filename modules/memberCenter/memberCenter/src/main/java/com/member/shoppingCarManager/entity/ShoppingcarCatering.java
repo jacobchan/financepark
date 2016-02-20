@@ -4,10 +4,12 @@
 package com.member.shoppingCarManager.entity;
 
 import javax.persistence.*;
+
 import org.hibernate.validator.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: -餐饮购物车
@@ -40,9 +42,9 @@ public class ShoppingcarCatering implements Domain{
 	@Length(max=36)
 	private String companyCateringId;//餐饮购物车ID
 
-	@Column(name = "MEMBER_ID_")
-	@Length(max=36)
-	private String memberId;//会员用户ID
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="MEMBER_ID_")
+	private MemberInformation memberId;//会员用户ID
 	
 	public String getCompanyCateringAmount(){
 		return this.companyCateringAmount;
@@ -72,16 +74,18 @@ public class ShoppingcarCatering implements Domain{
 	public void setCompanyCateringId(String companyCateringId){
 		this.companyCateringId = companyCateringId;
 	}
-	public String getMemberId(){
-		return this.memberId;
-	}
 	
-	public void setMemberId(String memberId){
+	
+	
+	
+	public MemberInformation getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(MemberInformation memberId) {
 		this.memberId = memberId;
 	}
-	
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
