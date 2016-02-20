@@ -92,6 +92,15 @@
 		<menu id="330703" text="活动评论回复管理" href="page/manageCenter.ActivityManager.activityComment/activityComment.html"></menu>
 		<menu id="330704" text="活动文档管理" href="page/manageCenter.ActivityManager.activityDocument/activityDocument.html"></menu>
 	</menu>
+	
+	<menu id="340000" text="会员中心">
+		<menu id="340101" text="地址管理" href="page/memberCenter.MemberAdrManager.memberadrAddress/memberadrAddress.html"></menu>
+		<menu id="340201" text="商品评价" href="page/memberCenter.MemberCommentManager.memberComment/memberComment.html"></menu>
+		<menu id="340301" text="企业服务购物车" href="page/memberCenter.shoppingCarManager.shoppingcarCompanyserver/shoppingcarCompanyserver.html"></menu>
+		<menu id="340302" text="集采购物车" href="page/memberCenter.shoppingCarManager.shoppingcarGroup/shoppingcarGroup.html"></menu>
+		<menu id="340303" text="餐饮购物车" href="page/memberCenter.shoppingCarManager.shoppingcarCatering/shoppingcarCatering.html"></menu>
+		<menu id="340401" text="收藏夹" href="page/memberCenter.FavoritsManage.favoritsFavoritgoods/favoritsFavoritgoods.html"></menu>
+	</menu>
 	<menu id="030000" text="公共管理">
 		<menu id="030300" text="角色管理" href="page/security.fuc.role/role.html"></menu>
 		<menu id="030400" text="人员管理" href="page/security.agt.user/user.html"></menu>
@@ -102,5 +111,5 @@
 	<menu id="060000" text="政策新闻管理">
 		<menu id="061000" text="政策新闻" href="page/commonCenter.NewsManager.nmIssuenews/zsIssuenews.html"></menu>
 	</menu>
-		
+	
 </menus>
