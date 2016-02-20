@@ -6,14 +6,14 @@
 				editSrc="esb/web/nmIssuenewsManager/getNmIssuenews.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/nmIssuenewsManager/removeNmIssuenews.json">
 		<youi:fieldLayout labelWidths="100,100">
-			<youi:fieldSelect property="policyType"  caption="类别"/>
 			<youi:fieldText property="policyCaption"  caption="名称"/>
-			<youi:fieldSelect property="policyStatus"  caption="发布状态" convert="policyStatus"/>
 			<youi:fieldCalendar property="policyIssueDate"  caption="发布时间"/>
+			<youi:fieldSelect property="policyType"  caption="发布类型" />
+			<youi:fieldSelect property="policyStatus"  caption="发布状态" convert="policyStatus"/>
 		</youi:fieldLayout>
 		<youi:gridCol property="policyId"  caption="政策ID" width="257"/>
 		<youi:gridCol property="nmIssuetempalate"  caption="发布模板ID" width="257"/>
-		<youi:gridCol property="policyType"  caption="类别" width="60"/>
+		<youi:gridCol property="policyType.issueTypeCaption"  caption="发布类型" width="110" />
 		<youi:gridCol property="policyCaption"  caption="名称" width="100"/>
 		<youi:gridCol property="policyCome"  caption="发布人" width="60"/>
 		<youi:gridCol property="policyStatus"  caption="发布状态" width="60" convert="policyStatus"/>
@@ -30,7 +30,8 @@
 		<youi:fieldLayout prefix="record" labelWidths="100,100">
 			<youi:fieldHidden property="policyId"  caption="政策ID" />
 			<youi:fieldText property="nmIssuetempalate"  caption="发布模板ID" />
-			<youi:fieldSelect property="policyType"  caption="类别" />
+			<youi:fieldSelect property="policyType.issueTypeId"  caption="发布类型" 
+				src="esb/web/nmIssuetypeManager/getNmIssuetypes.json" code="issueTypeId" show="issueTypeCaption"/>
 			<youi:fieldText property="policyCaption"  caption="名称" />
 			<youi:fieldText property="policyCome"  caption="发布人" />
 			<youi:fieldSelect property="policyStatus"  caption="发布状态" convert="policyStatus"/>
