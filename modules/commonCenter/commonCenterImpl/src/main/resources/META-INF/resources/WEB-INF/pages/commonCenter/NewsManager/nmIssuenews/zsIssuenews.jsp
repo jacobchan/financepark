@@ -8,7 +8,8 @@
 		<youi:fieldLayout labelWidths="100,100">
 			<youi:fieldText property="policyCaption"  caption="名称"/>
 			<youi:fieldCalendar property="policyIssueDate"  caption="发布时间"/>
-			<youi:fieldSelect property="policyType"  caption="发布类型" />
+			<youi:fieldSelect property="policyType.issueTypeId"  caption="发布类型" 
+				src="esb/web/nmIssuetypeManager/getNmIssuetypes.json" code="issueTypeId" show="issueTypeCaption"/>
 			<youi:fieldSelect property="policyStatus"  caption="发布状态" convert="policyStatus"/>
 		</youi:fieldLayout>
 		<youi:gridCol property="policyId"  caption="政策ID" width="257"/>
