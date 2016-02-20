@@ -13,7 +13,6 @@
 			<youi:fieldText property="legalRe"  caption="企业信息ID"/>
 		</youi:fieldLayout>
 		<%-- <youi:gridCol property="rzId"  caption="ID2"/> --%>
-
 		<youi:gridCol property="legalTelephone"  caption="联系方式"/>
 		<youi:gridCol property="legalName"  caption="法人名字"/>
 		<youi:gridCol property="legalRe"  caption="企业信息ID"/>
