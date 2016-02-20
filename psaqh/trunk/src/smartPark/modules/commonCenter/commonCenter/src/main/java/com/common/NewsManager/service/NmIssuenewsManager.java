@@ -73,10 +73,19 @@ public interface NmIssuenewsManager extends BaseManager{
 	public NmIssueflow getNmIssueflowById(String id,String currentStatus)throws BusException;
 	
 	/**
-	 * 发布
+	 * 发布,用户的申请
 	 * @return
 	 * @param nmIssuenews
 	 * @throws BueException
 	 */
-//	public String issue(NmIssuenews nmIssuenews) throws BusException;
+	public void issue(Object apply) throws BusException;
+	
+	/**
+	 * 是否支持发布
+	 * @param issueTypeId
+	 * @param status
+	 * @return
+	 * @throws BusException
+	 */
+	public boolean supportIssue(String issueTypeId,String status)throws BusException;
 }
