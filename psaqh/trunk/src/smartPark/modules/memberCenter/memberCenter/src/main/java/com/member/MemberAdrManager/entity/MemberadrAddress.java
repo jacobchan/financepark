@@ -6,8 +6,10 @@ package com.member.MemberAdrManager.entity;
 import javax.persistence.*;
 import org.hibernate.validator.*;
 
+import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: -我的地址
@@ -34,11 +36,20 @@ public class MemberadrAddress implements Domain{
 	@Column(name = "ADDRESS_DETAIL_")
 	@Length(max=128)
 	private String addressDetail;//详细地址
-
-	@Column(name = "MEMBER_ID_")
-	@Length(max=36)
-	private String memberId;//会员用户ID
 	
+	@Column(name = "ADDRESS_NAME_")
+	@Length(max=32)
+	private String addressName;//姓名
+	
+	@Column(name = "ADDRESS_PHONE_")
+	@Length(max=128)
+	private String addressPhone;//电话
+
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="MEMBER_ID_")
+	private MemberInformation memberId;//会员用户ID
+
+
 	public String getAddressId(){
 		return this.addressId;
 	}
@@ -60,16 +71,38 @@ public class MemberadrAddress implements Domain{
 	public void setAddressDetail(String addressDetail){
 		this.addressDetail = addressDetail;
 	}
-	public String getMemberId(){
-		return this.memberId;
-	}
 	
-	public void setMemberId(String memberId){
+	
+	
+	
+
+	
+
+
+	public MemberInformation getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(MemberInformation memberId) {
 		this.memberId = memberId;
 	}
-	
-	
-	
+
+	public String getAddressName() {
+		return addressName;
+	}
+
+	public void setAddressName(String addressName) {
+		this.addressName = addressName;
+	}
+
+	public String getAddressPhone() {
+		return addressPhone;
+	}
+
+	public void setAddressPhone(String addressPhone) {
+		this.addressPhone = addressPhone;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

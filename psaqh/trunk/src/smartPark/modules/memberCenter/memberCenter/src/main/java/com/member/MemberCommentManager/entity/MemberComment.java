@@ -4,10 +4,12 @@
 package com.member.MemberCommentManager.entity;
 
 import javax.persistence.*;
+
 import org.hibernate.validator.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: -商品评价
@@ -27,9 +29,9 @@ public class MemberComment implements Domain{
 	@Length(max=36)
 	private String goodsCommentId;//商品评价ID
 
-	@Column(name = "MEMBER_ID_")
-	@Length(max=36)
-	private String memberId;//会员用户ID
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="MEMBER_ID_")
+	private MemberInformation memberId;//会员用户ID
 
 	@Column(name = "COMMODITY_ID_")
 	@Length(max=36)
@@ -60,13 +62,15 @@ public class MemberComment implements Domain{
 	public void setGoodsCommentId(String goodsCommentId){
 		this.goodsCommentId = goodsCommentId;
 	}
-	public String getMemberId(){
-		return this.memberId;
-	}
 	
-	public void setMemberId(String memberId){
+	public MemberInformation getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(MemberInformation memberId) {
 		this.memberId = memberId;
 	}
+
 	public String getCommodityId(){
 		return this.commodityId;
 	}
