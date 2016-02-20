@@ -15,6 +15,7 @@ import com.common.NewsManager.dao.NmIssuenewsDao;
 import com.common.NewsManager.entity.NmIssueflow;
 import com.common.NewsManager.entity.NmIssuenews;
 import com.common.NewsManager.entity.NmIssuetype;
+import com.common.NewsManager.service.NmIssueflowManager;
 import com.common.NewsManager.service.NmIssuenewsManager;
 import com.common.NewsManager.service.NmIssuetypeManager;
 import com.gsoft.framework.core.exception.BusException;
@@ -38,6 +39,8 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 	private NmIssueflowDao nmIssueflowDao;
 	@Autowired
 	private NmIssuetypeManager issuetypeManager;
+	@Autowired
+	private NmIssueflowManager issueflowManager;
     /**
      * 查询列表
      */
@@ -109,6 +112,7 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
     public boolean exsitNmIssuenews(String propertyName,Object value) throws BusException{
 		return nmIssuenewsDao.exists(propertyName,value);
 	}
+    
 	@Override
 	public NmIssueflow getNmIssueflowById(String id,String currentStatus) throws BusException {
 		NmIssuenews nmIssuenews = nmIssuenewsDao.get(id);
@@ -127,6 +131,19 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 			}
 		}
 		return null;
+	}
+	
+	@Override
+	public boolean supportIssue(String issueTypeId, String status)
+			throws BusException {
+		return issueflowManager.isFinally(issueTypeId, status);
+	}
+	
+	@Override
+	public void issue(Object apply) throws BusException {
+		// TODO Auto-generated method stub
+		//String status ;
+		//NmIssuenews nmIssuenews;
 	}
 
 }
