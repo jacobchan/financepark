@@ -3,6 +3,7 @@
  */
 package com.manage.PropertyServiceManager.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Collection;
 
@@ -16,13 +17,14 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSer;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTs;
+import com.manage.PropertyServiceManager.dao.PropertyservicemanagerBxDao;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerSerDao;
+import com.manage.PropertyServiceManager.dao.PropertyservicemanagerTsDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerSerManager;
 
 @Service("propertyservicemanagerSerManager")
@@ -30,7 +32,10 @@ import com.manage.PropertyServiceManager.service.PropertyservicemanagerSerManage
 public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implements PropertyservicemanagerSerManager{
 	@Autowired
 	private PropertyservicemanagerSerDao propertyservicemanagerSerDao;
-	
+	@Autowired
+	private PropertyservicemanagerTsDao propertyservicemanagerTsDao;
+	@Autowired
+	private PropertyservicemanagerBxDao propertyservicemanagerBxDao;
     /**
      * 查询列表
      */
@@ -67,14 +72,34 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
      */
     @EsbServiceMapping
     public PropertyservicemanagerSer savePropertyservicemanagerSer(PropertyservicemanagerSer o) throws BusException{
-//    	String propertyservicemanagerSerId = o.getPropertyservicemanagerSerId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerSerId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	return propertyservicemanagerSerDao.save(o);
+    	String tsid = o.getPropertyservicemanagerTs().getTsId();
+    	PropertyservicemanagerTs  propertyservicemanagerTsed = propertyservicemanagerTsDao.get(tsid);
+    	if(propertyservicemanagerTsed==null){
+    		throw new BusException("没有派工记录!");
+    	}else{
+    		if(propertyservicemanagerTsed.getTsStatus().equals("01")){	
+    			PropertyservicemanagerBx bx = propertyservicemanagerTsed.getPropertyservicemanagerBx();
+    			if(!bx.getBxStatus().equals("05")){
+    				BigDecimal amount =null;
+	    			if(bx.getBxAmount()==null){//自动累计计算总金额
+	    				amount = o.getSerPrice();
+	    				bx.setBxAmount(amount);
+	    			}else{
+	    				amount = bx.getBxAmount().add(o.getSerPrice());
+	    				bx.setBxAmount(amount);
+	    			}
+	    			if(bx.getBxStatus().equals("03")){
+	    				bx.setBxStatus("04");
+	    			}
+		    		propertyservicemanagerBxDao.save(bx);
+	    			return propertyservicemanagerSerDao.save(o);
+    			}else{
+    				throw new BusException("管理员已定价!");
+    			}
+    		}else{
+    			throw new BusException("派工记录有误!");
+    		}
+    	}
     }
 
     /**

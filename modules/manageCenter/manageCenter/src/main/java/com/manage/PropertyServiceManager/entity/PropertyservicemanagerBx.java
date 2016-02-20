@@ -3,9 +3,11 @@
  */
 package com.manage.PropertyServiceManager.entity;
 
-import javax.persistence.*;
-import org.hibernate.validator.*;
+import java.math.BigDecimal;
 
+import javax.persistence.*;
+
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
@@ -48,8 +50,7 @@ public class PropertyservicemanagerBx implements Domain{
 	private String bxProject;//报修项目
 
 	@Column(name = "BX_AMOUNT_")
-	@Length(max=14)
-	private String bxAmount;//维修总价
+	private BigDecimal bxAmount;//维修总价
 
 	@Column(name = "BX_FUJIAN")
 	@Length(max=50)
@@ -59,6 +60,18 @@ public class PropertyservicemanagerBx implements Domain{
 	@Length(max=50)
 	private String bxComp;//企业名称
 	
+	@Column(name = "BX_STATUS_")
+	@Length(max=2)
+	private String bxStatus;//报修状态
+	
+	public String getBxStatus() {
+		return bxStatus;
+	}
+
+	public void setBxStatus(String bxStatus) {
+		this.bxStatus = bxStatus;
+	}
+
 	public String getBxRemark(){
 		return this.bxRemark;
 	}
@@ -101,13 +114,16 @@ public class PropertyservicemanagerBx implements Domain{
 	public void setBxProject(String bxProject){
 		this.bxProject = bxProject;
 	}
-	public String getBxAmount(){
-		return this.bxAmount;
-	}
+
 	
-	public void setBxAmount(String bxAmount){
+	public BigDecimal getBxAmount() {
+		return bxAmount;
+	}
+
+	public void setBxAmount(BigDecimal bxAmount) {
 		this.bxAmount = bxAmount;
 	}
+
 	public String getBxFujian(){
 		return this.bxFujian;
 	}
@@ -124,20 +140,26 @@ public class PropertyservicemanagerBx implements Domain{
 	}
 	
 	
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((bxRemark == null) ? 0 : bxRemark.hashCode());
-		result = prime * result + ((bxAddress == null) ? 0 : bxAddress.hashCode());
-		result = prime * result + ((bxWay == null) ? 0 : bxWay.hashCode());
-		result = prime * result + ((bxType == null) ? 0 : bxType.hashCode());
-		result = prime * result + ((bxId == null) ? 0 : bxId.hashCode());
-		result = prime * result + ((bxProject == null) ? 0 : bxProject.hashCode());
-		result = prime * result + ((bxAmount == null) ? 0 : bxAmount.hashCode());
-		result = prime * result + ((bxFujian == null) ? 0 : bxFujian.hashCode());
+		result = prime * result
+				+ ((bxAddress == null) ? 0 : bxAddress.hashCode());
+		result = prime * result
+				+ ((bxAmount == null) ? 0 : bxAmount.hashCode());
 		result = prime * result + ((bxComp == null) ? 0 : bxComp.hashCode());
+		result = prime * result
+				+ ((bxFujian == null) ? 0 : bxFujian.hashCode());
+		result = prime * result + ((bxId == null) ? 0 : bxId.hashCode());
+		result = prime * result
+				+ ((bxProject == null) ? 0 : bxProject.hashCode());
+		result = prime * result
+				+ ((bxRemark == null) ? 0 : bxRemark.hashCode());
+		result = prime * result
+				+ ((bxStatus == null) ? 0 : bxStatus.hashCode());
+		result = prime * result + ((bxType == null) ? 0 : bxType.hashCode());
+		result = prime * result + ((bxWay == null) ? 0 : bxWay.hashCode());
 		return result;
 	}
 	
@@ -149,26 +171,26 @@ public class PropertyservicemanagerBx implements Domain{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final PropertyservicemanagerBx other = (PropertyservicemanagerBx) obj;
-		if (bxRemark == null) {
-			if (other.bxRemark != null)
-				return false;
-		} else if (!bxRemark.equals(other.bxRemark))
-			return false;
+		PropertyservicemanagerBx other = (PropertyservicemanagerBx) obj;
 		if (bxAddress == null) {
 			if (other.bxAddress != null)
 				return false;
 		} else if (!bxAddress.equals(other.bxAddress))
 			return false;
-		if (bxWay == null) {
-			if (other.bxWay != null)
+		if (bxAmount == null) {
+			if (other.bxAmount != null)
 				return false;
-		} else if (!bxWay.equals(other.bxWay))
+		} else if (!bxAmount.equals(other.bxAmount))
 			return false;
-		if (bxType == null) {
-			if (other.bxType != null)
+		if (bxComp == null) {
+			if (other.bxComp != null)
 				return false;
-		} else if (!bxType.equals(other.bxType))
+		} else if (!bxComp.equals(other.bxComp))
+			return false;
+		if (bxFujian == null) {
+			if (other.bxFujian != null)
+				return false;
+		} else if (!bxFujian.equals(other.bxFujian))
 			return false;
 		if (bxId == null) {
 			if (other.bxId != null)
@@ -180,20 +202,25 @@ public class PropertyservicemanagerBx implements Domain{
 				return false;
 		} else if (!bxProject.equals(other.bxProject))
 			return false;
-		if (bxAmount == null) {
-			if (other.bxAmount != null)
+		if (bxRemark == null) {
+			if (other.bxRemark != null)
 				return false;
-		} else if (!bxAmount.equals(other.bxAmount))
+		} else if (!bxRemark.equals(other.bxRemark))
 			return false;
-		if (bxFujian == null) {
-			if (other.bxFujian != null)
+		if (bxStatus == null) {
+			if (other.bxStatus != null)
 				return false;
-		} else if (!bxFujian.equals(other.bxFujian))
+		} else if (!bxStatus.equals(other.bxStatus))
 			return false;
-		if (bxComp == null) {
-			if (other.bxComp != null)
+		if (bxType == null) {
+			if (other.bxType != null)
 				return false;
-		} else if (!bxComp.equals(other.bxComp))
+		} else if (!bxType.equals(other.bxType))
+			return false;
+		if (bxWay == null) {
+			if (other.bxWay != null)
+				return false;
+		} else if (!bxWay.equals(other.bxWay))
 			return false;
 		return true;
 	}

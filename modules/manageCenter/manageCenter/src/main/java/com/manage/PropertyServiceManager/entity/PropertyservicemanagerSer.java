@@ -3,9 +3,11 @@
  */
 package com.manage.PropertyServiceManager.entity;
 
-import javax.persistence.*;
-import org.hibernate.validator.*;
+import java.math.BigDecimal;
 
+import javax.persistence.*;
+
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
@@ -36,16 +38,15 @@ public class PropertyservicemanagerSer implements Domain{
 	private String serId;//主键ID_
 
 	@Column(name = "SER_PRICE_")
-	@Length(max=14)
-	private String serPrice;//材料价格
+	private BigDecimal serPrice;//材料价格
 
 	@Column(name = "SER_TYPE_")
 	@Length(max=2)
 	private String serType;//材料类别
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="TS_ID_")
-	private com.manage.PropertyServiceManager.entity.PropertyservicemanagerTs propertyservicemanagerTs;//主键ID_2
+	private PropertyservicemanagerTs propertyservicemanagerTs;//主键ID_2
 	
 	public String getSerName(){
 		return this.serName;
@@ -68,13 +69,15 @@ public class PropertyservicemanagerSer implements Domain{
 	public void setSerId(String serId){
 		this.serId = serId;
 	}
-	public String getSerPrice(){
-		return this.serPrice;
+
+	public BigDecimal getSerPrice() {
+		return serPrice;
 	}
-	
-	public void setSerPrice(String serPrice){
+
+	public void setSerPrice(BigDecimal serPrice) {
 		this.serPrice = serPrice;
 	}
+
 	public String getSerType(){
 		return this.serType;
 	}
@@ -96,10 +99,16 @@ public class PropertyservicemanagerSer implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((serName == null) ? 0 : serName.hashCode());
-		result = prime * result + ((serPayStatus == null) ? 0 : serPayStatus.hashCode());
+		result = prime
+				* result
+				+ ((propertyservicemanagerTs == null) ? 0
+						: propertyservicemanagerTs.hashCode());
 		result = prime * result + ((serId == null) ? 0 : serId.hashCode());
-		result = prime * result + ((serPrice == null) ? 0 : serPrice.hashCode());
+		result = prime * result + ((serName == null) ? 0 : serName.hashCode());
+		result = prime * result
+				+ ((serPayStatus == null) ? 0 : serPayStatus.hashCode());
+		result = prime * result
+				+ ((serPrice == null) ? 0 : serPrice.hashCode());
 		result = prime * result + ((serType == null) ? 0 : serType.hashCode());
 		return result;
 	}
@@ -112,7 +121,18 @@ public class PropertyservicemanagerSer implements Domain{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final PropertyservicemanagerSer other = (PropertyservicemanagerSer) obj;
+		PropertyservicemanagerSer other = (PropertyservicemanagerSer) obj;
+		if (propertyservicemanagerTs == null) {
+			if (other.propertyservicemanagerTs != null)
+				return false;
+		} else if (!propertyservicemanagerTs
+				.equals(other.propertyservicemanagerTs))
+			return false;
+		if (serId == null) {
+			if (other.serId != null)
+				return false;
+		} else if (!serId.equals(other.serId))
+			return false;
 		if (serName == null) {
 			if (other.serName != null)
 				return false;
@@ -122,11 +142,6 @@ public class PropertyservicemanagerSer implements Domain{
 			if (other.serPayStatus != null)
 				return false;
 		} else if (!serPayStatus.equals(other.serPayStatus))
-			return false;
-		if (serId == null) {
-			if (other.serId != null)
-				return false;
-		} else if (!serId.equals(other.serId))
 			return false;
 		if (serPrice == null) {
 			if (other.serPrice != null)

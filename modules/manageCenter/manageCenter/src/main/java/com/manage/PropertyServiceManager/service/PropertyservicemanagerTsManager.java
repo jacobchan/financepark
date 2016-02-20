@@ -63,4 +63,9 @@ public interface PropertyservicemanagerTsManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitPropertyservicemanagerTs(String propertyName,Object value) throws BusException;
+	/**
+     * 根据id变更状态
+     * @param ids
+     */
+	public void upTsbyId(String id,String code) throws BusException;
 }
