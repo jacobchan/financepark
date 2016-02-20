@@ -5,7 +5,7 @@
 				src="esb/web/informationFinancingManager/getPagerInformationFinancings.json" dataFormId="form_informationFinancing"
 				editSrc="esb/web/informationFinancingManager/getInformationFinancing.json" edit="NOT" remove="NOT" showCheckbox="true" add="NOT"
 				removeSrc="esb/web/informationFinancingManager/removeInformationFinancing.json">
-		<youi:fieldLayout>
+		<youi:fieldLayout labelWidths="122">
 			<youi:fieldText property="financingSub"  caption="投资主体"/>
 			<youi:fieldText property="financingStatus"  caption="发布状态"/>
 			<youi:fieldText property="financingName"  caption="融资企业名称"/>
