@@ -4,7 +4,7 @@
 <youi:page>
 	<youi:grid id="grid_bbmRoom" idKeys="roomId" caption="单元基础信息列表"  panel="false"
 				src="esb/web/bbmRoomManager/getPagerBbmRooms.json" dataFormId="form_bbmRoom"
-				editSrc="esb/web/bbmRoomManager/getBbmRoom.json" edit="NOT" remove="NOT" showCheckbox="true" 
+				editSrc="esb/web/bbmRoomManager/getBbmRoom.json"  remove="NOT" showCheckbox="true" add="NOT"
 				removeSrc="esb/web/bbmRoomManager/removeBbmRoom.json">
 		<youi:fieldLayout>
 			<youi:fieldText property="roomNo"  caption="单元编号"/>
@@ -30,7 +30,7 @@
 		<youi:gridCol property="waterCharge"  caption="物业_水费" width="150px"/>		
 		<youi:gridCol property="area"  caption="房间面积" width="150px"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
-			<youi:button name="edit" caption="修改"/>
+			
 			<youi:button name="remove" caption="删除"/>
 		</youi:gridCol>
 	</youi:grid>
@@ -52,7 +52,7 @@
 			<youi:fieldText property="rentCharge"  caption="物业_租金" width="150px"/>
 			<youi:fieldText property="floor"  caption="所属楼层" width="150px"/>
 			<youi:fieldText property="eneryCharge"  caption="物业_电费" width="150px"/>
-			<youi:fieldText property="waterCharge"  caption="物业_水费" width="150px"/>		
+			<youi:fieldText property="waterCharge"  caption="物业_水费" width="150px"/>	
 			<youi:fieldText property="area"  caption="房间面积" width="150px"/> 
 		</youi:fieldLayout>
 	</youi:form>
