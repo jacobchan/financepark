@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2016/2/19 10:52:05                           */
+/* Created on:     2016/2/20 16:40:14                           */
 /*==============================================================*/
 
 
@@ -725,13 +725,14 @@ alter table sp_etype_enterprisetype
 create table sp_favorits_favoritGoods
 (
    FAVORIT_GOODS_ID_    char(36) not null,
+   COMMODITY_ID_        char(36) not null,
    MEMBER_ID_           char(36)
 );
 
 alter table sp_favorits_favoritGoods comment '340401-商品收藏表';
 
 alter table sp_favorits_favoritGoods
-   add primary key (FAVORIT_GOODS_ID_);
+   add primary key (FAVORIT_GOODS_ID_, COMMODITY_ID_);
 
 /*==============================================================*/
 /* Table: sp_information_financing                              */
@@ -1401,11 +1402,7 @@ create table sp_purchasingManager_commodity
 (
    PARK_BUSINESS_TUPE_  char(2),
    COMMODITY_ID_        char(36) not null,
-   COMPANY_CATERING_ID_ char(36),
-   FAVORIT_GOODS_ID_    char(36),
-   COMPANY_GROUP_ID_    char(36),
    CATEGORY_ID_         char(36),
-   COMPANY_SERVER_ID_   char(36),
    MERCHANT_ID_         char(36),
    GENRE_ID_            char(36),
    COMMODITY_TITLE_     varchar(128),
@@ -1570,15 +1567,16 @@ alter table sp_reservation_record
 create table sp_shoppingCar_catering
 (
    COMPANY_CATERING_ID_ char(36) not null,
-   MEMBER_ID_           char(36),
    COMPANY_CATERING_UNIVALENCE_ varchar(16),
-   COMPANY_CATERING_AMOUNT_ varchar(16)
+   COMPANY_CATERING_AMOUNT_ varchar(16),
+   COMMODITY_ID_        char(36) not null,
+   MEMBER_ID_           char(36)
 );
 
 alter table sp_shoppingCar_catering comment '340303-餐饮购物车';
 
 alter table sp_shoppingCar_catering
-   add primary key (COMPANY_CATERING_ID_);
+   add primary key (COMPANY_CATERING_ID_, COMMODITY_ID_);
 
 /*==============================================================*/
 /* Table: sp_shoppingCar_companyServer                          */
@@ -1586,15 +1584,16 @@ alter table sp_shoppingCar_catering
 create table sp_shoppingCar_companyServer
 (
    COMPANY_SERVER_ID_   char(36) not null,
-   MEMBER_ID_           char(36),
    COMPANY_CATERING_UNIVALENCE_ varchar(16),
-   COMPANY_CATERING_AMOUNT_ varchar(16)
+   COMPANY_CATERING_AMOUNT_ varchar(16),
+   COMMODITY_ID_        char(36) not null,
+   MEMBER_ID_           char(36)
 );
 
 alter table sp_shoppingCar_companyServer comment '340301-企业服务购物车';
 
 alter table sp_shoppingCar_companyServer
-   add primary key (COMPANY_SERVER_ID_);
+   add primary key (COMPANY_SERVER_ID_, COMMODITY_ID_);
 
 /*==============================================================*/
 /* Table: sp_shoppingCar_group                                  */
@@ -1602,16 +1601,17 @@ alter table sp_shoppingCar_companyServer
 create table sp_shoppingCar_group
 (
    COMPANY_GROUP_ID_    char(36) not null,
-   MEMBER_ID_           char(36),
    COMPANY_CATERING_UNIVALENCE_ varchar(16),
    COMPANY_CATERING_AMOUNT_ varchar(16),
-   COMPANY_GROUP_COLLECT_STATUS_ varchar(1)
+   COMPANY_GROUP_COLLECT_STATUS_ varchar(1),
+   COMMODITY_ID_        char(36) not null,
+   MEMBER_ID_           char(36)
 );
 
 alter table sp_shoppingCar_group comment '340302-集采购物车';
 
 alter table sp_shoppingCar_group
-   add primary key (COMPANY_GROUP_ID_);
+   add primary key (COMPANY_GROUP_ID_, COMMODITY_ID_);
 
 alter table sp_OrderManager_commodityDetail add constraint FK_Relationship_16 foreign key (COMMODITY_ID_)
       references sp_purchasingManager_commodity (COMMODITY_ID_) on delete restrict on update restrict;
@@ -1810,18 +1810,6 @@ alter table sp_purchasingManager_commodity add constraint FK_Relationship_24 for
 
 alter table sp_purchasingManager_commodity add constraint FK_Relationship_29 foreign key (MERCHANT_ID_)
       references sp_purchasingManager_merchant (MERCHANT_ID_) on delete restrict on update restrict;
-
-alter table sp_purchasingManager_commodity add constraint FK_Relationship_73 foreign key (COMPANY_GROUP_ID_)
-      references sp_shoppingCar_group (COMPANY_GROUP_ID_) on delete restrict on update restrict;
-
-alter table sp_purchasingManager_commodity add constraint FK_Relationship_74 foreign key (COMPANY_CATERING_ID_)
-      references sp_shoppingCar_catering (COMPANY_CATERING_ID_) on delete restrict on update restrict;
-
-alter table sp_purchasingManager_commodity add constraint FK_Relationship_75 foreign key (COMPANY_SERVER_ID_)
-      references sp_shoppingCar_companyServer (COMPANY_SERVER_ID_) on delete restrict on update restrict;
-
-alter table sp_purchasingManager_commodity add constraint FK_Relationship_79 foreign key (FAVORIT_GOODS_ID_)
-      references sp_favorits_favoritGoods (FAVORIT_GOODS_ID_) on delete restrict on update restrict;
 
 alter table sp_purchasingManager_commodity_extend_value add constraint FK_Relationship_30 foreign key (COMMODITY_ID_)
       references sp_purchasingManager_commodity (COMMODITY_ID_) on delete restrict on update restrict;
