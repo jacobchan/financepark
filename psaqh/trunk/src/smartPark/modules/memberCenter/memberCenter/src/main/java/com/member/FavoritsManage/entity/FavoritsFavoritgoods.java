@@ -4,10 +4,12 @@
 package com.member.FavoritsManage.entity;
 
 import javax.persistence.*;
+
 import org.hibernate.validator.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: -商品收藏表
@@ -32,9 +34,9 @@ public class FavoritsFavoritgoods implements Domain{
 	@Length(max=36)
 	private String favoritGoodsId;//商品收藏表ID
 
-	@Column(name = "MEMBER_ID_")
-	@Length(max=36)
-	private String memberId;//会员用户ID
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="MEMBER_ID_")
+	private MemberInformation memberId;//会员用户ID
 	
 	public String getCommodityId(){
 		return this.commodityId;
@@ -50,16 +52,18 @@ public class FavoritsFavoritgoods implements Domain{
 	public void setFavoritGoodsId(String favoritGoodsId){
 		this.favoritGoodsId = favoritGoodsId;
 	}
-	public String getMemberId(){
-		return this.memberId;
-	}
 	
-	public void setMemberId(String memberId){
+	
+	
+	
+	public MemberInformation getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(MemberInformation memberId) {
 		this.memberId = memberId;
 	}
-	
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
