@@ -26,6 +26,12 @@
 		<menu id="320602" text="发布模板" href="page/commonCenter.NewsManager.nmIssuetempalate/nmIssuetempalate.html"></menu>
 		<menu id="320604" text="新闻政策" href="page/commonCenter.NewsManager.nmIssuenews/nmIssuenews.html"></menu>
 	</menu>
+	<menu id="320700" text="企业信息发布管理">
+		<menu id="320701" text="融资信息列表" href="page/manageCenter.EnterpriseManager.informationFinancing/informationFinancing.html"></menu>
+		<menu id="320703" text="法人介绍列表" href="page/manageCenter.EnterpriseManager.informationLegal/informationLegal.html"></menu>
+		<menu id="320702" text="公告信息列表" href="page/manageCenter.EnterpriseManager.informationNotice/informationNotice.html"></menu>
+		<menu id="320704" text="媒体报道信息列表" href="page/manageCenter.EnterpriseManager.informationMedia/informationMedia.html"></menu>
+	</menu>
 	
 	
 	<menu id="081000" text="物业投诉">
