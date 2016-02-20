@@ -83,4 +83,12 @@
 		<menu id="340303" text="餐饮购物车" href="page/memberCenter.shoppingCarManager.shoppingcarCatering/shoppingcarCatering.html"></menu>
 		<menu id="340401" text="收藏夹" href="page/memberCenter.FavoritsManage.favoritsFavoritgoods/favoritsFavoritgoods.html"></menu>
 	</menu>
+	<menu id="350000" text="企业信息发布管理">
+		<menu id="350001" text="融资信息列表" href="page/manageCenter.EnterpriseManager.informationProduct/informationProduct.html"></menu>
+		<menu id="350002" text="知识产权信息列表" href="page/manageCenter.EnterpriseManager.informationProduct/informationProduct.html"></menu>
+		<menu id="350003" text="法人介绍列表" href="page/manageCenter.EnterpriseManager.informationProduct/informationProduct.html"></menu>
+		<menu id="350004" text="媒体报道信息列表" href="page/manageCenter.EnterpriseManager.informationProduct/informationProduct.html"></menu>
+		<menu id="350005" text="公告信息列表" href="page/manageCenter.EnterpriseManager.informationProduct/informationProduct.html"></menu>
+		<menu id="350006" text="产品信息列表" href="page/manageCenter.EnterpriseManager.informationProduct/informationProduct.html"></menu>
+	</menu>
 </menus>
