@@ -12,7 +12,7 @@
 			<youi:fieldText property="mediaRe"  caption="企业信息ID"/>
 
 			<youi:fieldText property="mediaUrl"  caption="图片URL"/>
-			<youi:fieldText property="rzId"  caption="ID2"/>
+			<%-- <youi:fieldText property="rzId"  caption="ID2"/> --%>
 		</youi:fieldLayout>
 		<youi:gridCol property="mediaTilurl"  caption="文章URL_"/>
 		<youi:gridCol property="mediaTitle"  caption="标题"/>
@@ -20,7 +20,7 @@
 		<youi:gridCol property="mediaRe"  caption="企业信息ID"/>
 
 		<youi:gridCol property="mediaUrl"  caption="图片URL"/>
-		<youi:gridCol property="rzId"  caption="ID2"/>
+		<%-- <youi:gridCol property="rzId"  caption="ID2"/> --%>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -34,9 +34,9 @@
 			<youi:fieldText property="mediaTitle"  caption="标题"/>
 			<youi:fieldText property="mediaStatus"  caption="发布状态"/>
 			<youi:fieldText property="mediaRe"  caption="企业信息ID"/>
-			<youi:fieldText property="mediaId"  caption="ID"/>
+			<%-- <youi:fieldText property="mediaId"  caption="ID"/> --%>
 			<youi:fieldText property="mediaUrl"  caption="图片URL"/>
-			<youi:fieldText property="rzId"  caption="ID2"/>
+			<%-- <youi:fieldText property="rzId"  caption="ID2"/> --%>
 		</youi:fieldLayout>
 	</youi:form>
 	
