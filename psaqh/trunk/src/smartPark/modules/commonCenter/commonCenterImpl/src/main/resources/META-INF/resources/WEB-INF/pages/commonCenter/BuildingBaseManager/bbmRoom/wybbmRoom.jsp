@@ -4,7 +4,7 @@
 <youi:page>
 	<youi:grid id="grid_bbmRoom" idKeys="roomId" caption="单元基础信息列表"  panel="false"
 				src="esb/web/bbmRoomManager/getPagerBbmRooms.json" dataFormId="form_bbmRoom"
-				editSrc="esb/web/bbmRoomManager/getBbmRoom.json"  remove="NOT" showCheckbox="true" add="NOT"
+				editSrc="esb/web/bbmRoomManager/getBbmRoom.json"  remove="NOT" showCheckbox="true" add="NOT" edit="NOT"
 				removeSrc="esb/web/bbmRoomManager/removeBbmRoom.json">
 		<youi:fieldLayout>
 			<youi:fieldText property="roomNo"  caption="单元编号"/>
