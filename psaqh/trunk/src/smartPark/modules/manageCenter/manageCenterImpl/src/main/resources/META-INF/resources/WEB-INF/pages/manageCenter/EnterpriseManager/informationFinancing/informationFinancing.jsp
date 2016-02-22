@@ -7,7 +7,7 @@
 				removeSrc="esb/web/informationFinancingManager/removeInformationFinancing.json">
 		<youi:fieldLayout labelWidths="122">
 			<youi:fieldText property="financingSub"  caption="投资主体"/>
-			<youi:fieldText property="financingStatus"  caption="发布状态"/>
+			<youi:fieldText property="financingStatus"  caption="发布状态" convert="financingStatus"/>
 			<youi:fieldText property="financingName"  caption="融资企业名称"/>
 			<%-- <youi:fieldText property="rzId"  caption="ID2"/> --%>
 			<youi:fieldCalendar property="financingTime"  caption="融资时间"/>
@@ -15,7 +15,7 @@
 		<%-- <youi:fieldText property="financingPre"  caption="持股比例"/>
 			<youi:fieldText property="financingRe"  caption="企业信息ID"/> 
 			<youi:fieldText property="financingAmount"  caption="融资金额"/>--%>
-			<youi:fieldText property="financingTp"  caption="融资状态"/>
+			<youi:fieldText property="financingTp"  caption="融资状态" convert="financingType"/>
 		</youi:fieldLayout>
 		<youi:gridCol property="financingSub"  caption="投资主体"/>
 		<youi:gridCol property="financingStatus"  caption="发布状态"/>
@@ -50,8 +50,4 @@
 			<youi:fieldText property="financingTp"  caption="融资状态"/>
 		</youi:fieldLayout>
 	</youi:form>
-	
-	<!--**********************************页面函数Start********************************-->
-	
-	<!--**********************************页面函数End**********************************-->
 </youi:page>
