@@ -38,6 +38,7 @@
 		<menu id="330201" text="物业报修管理" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerBx/propertyservicemanagerBx.html"></menu>
         <menu id="330202" text="派工记录管理" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerTs/propertyservicemanagerTs.html"></menu>
         <menu id="330203" text="维修费用清单管理" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerSer/propertyservicemanagerSer.html"></menu>
+        <menu id="330204" text="物业缴费登记管理" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerCharge/propertyservicemanagerCharge.html"></menu>
 	</menu>
 	<menu id="120000" text="商品管理">
 		<menu id="120001" text="商户信息管理" href="page/commonCenter.purchasingManager.purchasingmanagerMerchant/purchasingmanagerMerchant.html"></menu>
