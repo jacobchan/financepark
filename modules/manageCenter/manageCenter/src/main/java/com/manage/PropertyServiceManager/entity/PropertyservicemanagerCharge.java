@@ -3,9 +3,11 @@
  */
 package com.manage.PropertyServiceManager.entity;
 
-import javax.persistence.*;
-import org.hibernate.validator.*;
+import java.math.BigDecimal;
 
+import javax.persistence.*;
+
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
@@ -26,22 +28,21 @@ public class PropertyservicemanagerCharge implements Domain{
 	@Column(name = "CHARGE_ID_")
 	@Length(max=36)
 	private String chargeId;//收费登记序列
-
-	@Column(name = "USERORDER_ID_")
-	@Length(max=36)
-	private String userorderId;//用户订单序列
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="USERORDER_ID_")
+	private com.common.OrderManager.entity.OrdermanagerUserorder ordermanagerUserorder;//用户订单
 
 	@Column(name = "CHARGE_CREATETIME_")
 	@Length(max=20)
 	private String chargeCreatetime;//登记日期
 
 	@Column(name = "CHARGE_AMOUNT_")
-	@Length(max=14)
-	private String chargeAmount;//应缴费总额
+	private BigDecimal chargeAmount;//应缴费总额
 
-	@Column(name = "ROOM_ID_")
-	@Length(max=36)
-	private String roomId;//单元ID
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="ROOM_ID_")
+	private com.common.BuildingBaseManager.entity.BbmRoom bbmRoom;//单元
 
 	@Column(name = "CHARGE_ISBOOL_")
 	@Length(max=2)
@@ -70,113 +71,136 @@ public class PropertyservicemanagerCharge implements Domain{
 	@Column(name = "CHARGE_ENDATE_")
 	@Length(max=20)
 	private String chargeEndate;//截止日期
-	
-	public String getChargeId(){
-		return this.chargeId;
+
+	public String getChargeId() {
+		return chargeId;
 	}
-	
-	public void setChargeId(String chargeId){
+
+	public void setChargeId(String chargeId) {
 		this.chargeId = chargeId;
 	}
-	public String getUserorderId(){
-		return this.userorderId;
+
+	public com.common.OrderManager.entity.OrdermanagerUserorder getOrdermanagerUserorder() {
+		return ordermanagerUserorder;
 	}
-	
-	public void setUserorderId(String userorderId){
-		this.userorderId = userorderId;
+
+	public void setOrdermanagerUserorder(
+			com.common.OrderManager.entity.OrdermanagerUserorder ordermanagerUserorder) {
+		this.ordermanagerUserorder = ordermanagerUserorder;
 	}
-	public String getChargeCreatetime(){
-		return this.chargeCreatetime;
+
+	public String getChargeCreatetime() {
+		return chargeCreatetime;
 	}
-	
-	public void setChargeCreatetime(String chargeCreatetime){
+
+	public void setChargeCreatetime(String chargeCreatetime) {
 		this.chargeCreatetime = chargeCreatetime;
 	}
-	public String getChargeAmount(){
-		return this.chargeAmount;
+
+	public BigDecimal getChargeAmount() {
+		return chargeAmount;
 	}
-	
-	public void setChargeAmount(String chargeAmount){
+
+	public void setChargeAmount(BigDecimal chargeAmount) {
 		this.chargeAmount = chargeAmount;
 	}
-	public String getRoomId(){
-		return this.roomId;
+
+	public com.common.BuildingBaseManager.entity.BbmRoom getBbmRoom() {
+		return bbmRoom;
 	}
-	
-	public void setRoomId(String roomId){
-		this.roomId = roomId;
+
+	public void setBbmRoom(com.common.BuildingBaseManager.entity.BbmRoom bbmRoom) {
+		this.bbmRoom = bbmRoom;
 	}
-	public String getChargeIsbool(){
-		return this.chargeIsbool;
+
+	public String getChargeIsbool() {
+		return chargeIsbool;
 	}
-	
-	public void setChargeIsbool(String chargeIsbool){
+
+	public void setChargeIsbool(String chargeIsbool) {
 		this.chargeIsbool = chargeIsbool;
 	}
-	public String getChargeComp(){
-		return this.chargeComp;
+
+	public String getChargeComp() {
+		return chargeComp;
 	}
-	
-	public void setChargeComp(String chargeComp){
+
+	public void setChargeComp(String chargeComp) {
 		this.chargeComp = chargeComp;
 	}
-	public String getChargeUnit(){
-		return this.chargeUnit;
+
+	public String getChargeUnit() {
+		return chargeUnit;
 	}
-	
-	public void setChargeUnit(String chargeUnit){
+
+	public void setChargeUnit(String chargeUnit) {
 		this.chargeUnit = chargeUnit;
 	}
-	public String getChargeBedate(){
-		return this.chargeBedate;
+
+	public String getChargeBedate() {
+		return chargeBedate;
 	}
-	
-	public void setChargeBedate(String chargeBedate){
+
+	public void setChargeBedate(String chargeBedate) {
 		this.chargeBedate = chargeBedate;
 	}
-	public String getRzId(){
-		return this.rzId;
+
+	public String getRzId() {
+		return rzId;
 	}
-	
-	public void setRzId(String rzId){
+
+	public void setRzId(String rzId) {
 		this.rzId = rzId;
 	}
-	public String getChargeTime(){
-		return this.chargeTime;
+
+	public String getChargeTime() {
+		return chargeTime;
 	}
-	
-	public void setChargeTime(String chargeTime){
+
+	public void setChargeTime(String chargeTime) {
 		this.chargeTime = chargeTime;
 	}
-	public String getChargeEndate(){
-		return this.chargeEndate;
+
+	public String getChargeEndate() {
+		return chargeEndate;
 	}
-	
-	public void setChargeEndate(String chargeEndate){
+
+	public void setChargeEndate(String chargeEndate) {
 		this.chargeEndate = chargeEndate;
 	}
-	
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((chargeId == null) ? 0 : chargeId.hashCode());
-		result = prime * result + ((userorderId == null) ? 0 : userorderId.hashCode());
-		result = prime * result + ((chargeCreatetime == null) ? 0 : chargeCreatetime.hashCode());
-		result = prime * result + ((chargeAmount == null) ? 0 : chargeAmount.hashCode());
-		result = prime * result + ((roomId == null) ? 0 : roomId.hashCode());
-		result = prime * result + ((chargeIsbool == null) ? 0 : chargeIsbool.hashCode());
-		result = prime * result + ((chargeComp == null) ? 0 : chargeComp.hashCode());
-		result = prime * result + ((chargeUnit == null) ? 0 : chargeUnit.hashCode());
-		result = prime * result + ((chargeBedate == null) ? 0 : chargeBedate.hashCode());
+		result = prime * result + ((bbmRoom == null) ? 0 : bbmRoom.hashCode());
+		result = prime * result
+				+ ((chargeAmount == null) ? 0 : chargeAmount.hashCode());
+		result = prime * result
+				+ ((chargeBedate == null) ? 0 : chargeBedate.hashCode());
+		result = prime * result
+				+ ((chargeComp == null) ? 0 : chargeComp.hashCode());
+		result = prime
+				* result
+				+ ((chargeCreatetime == null) ? 0 : chargeCreatetime.hashCode());
+		result = prime * result
+				+ ((chargeEndate == null) ? 0 : chargeEndate.hashCode());
+		result = prime * result
+				+ ((chargeId == null) ? 0 : chargeId.hashCode());
+		result = prime * result
+				+ ((chargeIsbool == null) ? 0 : chargeIsbool.hashCode());
+		result = prime * result
+				+ ((chargeTime == null) ? 0 : chargeTime.hashCode());
+		result = prime * result
+				+ ((chargeUnit == null) ? 0 : chargeUnit.hashCode());
+		result = prime
+				* result
+				+ ((ordermanagerUserorder == null) ? 0 : ordermanagerUserorder
+						.hashCode());
 		result = prime * result + ((rzId == null) ? 0 : rzId.hashCode());
-		result = prime * result + ((chargeTime == null) ? 0 : chargeTime.hashCode());
-		result = prime * result + ((chargeEndate == null) ? 0 : chargeEndate.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -185,70 +209,70 @@ public class PropertyservicemanagerCharge implements Domain{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final PropertyservicemanagerCharge other = (PropertyservicemanagerCharge) obj;
-		if (chargeId == null) {
-			if (other.chargeId != null)
+		PropertyservicemanagerCharge other = (PropertyservicemanagerCharge) obj;
+		if (bbmRoom == null) {
+			if (other.bbmRoom != null)
 				return false;
-		} else if (!chargeId.equals(other.chargeId))
-			return false;
-		if (userorderId == null) {
-			if (other.userorderId != null)
-				return false;
-		} else if (!userorderId.equals(other.userorderId))
-			return false;
-		if (chargeCreatetime == null) {
-			if (other.chargeCreatetime != null)
-				return false;
-		} else if (!chargeCreatetime.equals(other.chargeCreatetime))
+		} else if (!bbmRoom.equals(other.bbmRoom))
 			return false;
 		if (chargeAmount == null) {
 			if (other.chargeAmount != null)
 				return false;
 		} else if (!chargeAmount.equals(other.chargeAmount))
 			return false;
-		if (roomId == null) {
-			if (other.roomId != null)
+		if (chargeBedate == null) {
+			if (other.chargeBedate != null)
 				return false;
-		} else if (!roomId.equals(other.roomId))
-			return false;
-		if (chargeIsbool == null) {
-			if (other.chargeIsbool != null)
-				return false;
-		} else if (!chargeIsbool.equals(other.chargeIsbool))
+		} else if (!chargeBedate.equals(other.chargeBedate))
 			return false;
 		if (chargeComp == null) {
 			if (other.chargeComp != null)
 				return false;
 		} else if (!chargeComp.equals(other.chargeComp))
 			return false;
-		if (chargeUnit == null) {
-			if (other.chargeUnit != null)
+		if (chargeCreatetime == null) {
+			if (other.chargeCreatetime != null)
 				return false;
-		} else if (!chargeUnit.equals(other.chargeUnit))
-			return false;
-		if (chargeBedate == null) {
-			if (other.chargeBedate != null)
-				return false;
-		} else if (!chargeBedate.equals(other.chargeBedate))
-			return false;
-		if (rzId == null) {
-			if (other.rzId != null)
-				return false;
-		} else if (!rzId.equals(other.rzId))
-			return false;
-		if (chargeTime == null) {
-			if (other.chargeTime != null)
-				return false;
-		} else if (!chargeTime.equals(other.chargeTime))
+		} else if (!chargeCreatetime.equals(other.chargeCreatetime))
 			return false;
 		if (chargeEndate == null) {
 			if (other.chargeEndate != null)
 				return false;
 		} else if (!chargeEndate.equals(other.chargeEndate))
 			return false;
+		if (chargeId == null) {
+			if (other.chargeId != null)
+				return false;
+		} else if (!chargeId.equals(other.chargeId))
+			return false;
+		if (chargeIsbool == null) {
+			if (other.chargeIsbool != null)
+				return false;
+		} else if (!chargeIsbool.equals(other.chargeIsbool))
+			return false;
+		if (chargeTime == null) {
+			if (other.chargeTime != null)
+				return false;
+		} else if (!chargeTime.equals(other.chargeTime))
+			return false;
+		if (chargeUnit == null) {
+			if (other.chargeUnit != null)
+				return false;
+		} else if (!chargeUnit.equals(other.chargeUnit))
+			return false;
+		if (ordermanagerUserorder == null) {
+			if (other.ordermanagerUserorder != null)
+				return false;
+		} else if (!ordermanagerUserorder.equals(other.ordermanagerUserorder))
+			return false;
+		if (rzId == null) {
+			if (other.rzId != null)
+				return false;
+		} else if (!rzId.equals(other.rzId))
+			return false;
 		return true;
 	}
-	
+
 	public String toString(){
 		return super.toString();
 	}
