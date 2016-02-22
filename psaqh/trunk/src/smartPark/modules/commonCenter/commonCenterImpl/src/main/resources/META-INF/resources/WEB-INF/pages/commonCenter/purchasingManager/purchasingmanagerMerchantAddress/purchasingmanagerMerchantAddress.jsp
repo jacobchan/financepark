@@ -24,7 +24,7 @@
 			<youi:fieldText property="merchantAddressLinkman"  caption="联系人"/>
 			<youi:fieldText property="merchantAddressPhone"  caption="联系电话"/>
 			<youi:fieldArea property="merchantAddressAddress"  caption="地址"/>
-			<youi:fieldSelect property="merchantAddressIsnotDefault" convert="ISNOT"  caption="是否默认"/>
+			<youi:fieldSelect property="merchantAddressIsnotDefault" convert="bool"  caption="是否默认"/>
 			<youi:fieldHidden property="merchantAddressId"  caption="地址ID"/>
 			<youi:fieldHidden property="purchasingmanagerMerchant.merchantId"  caption="商户ID"/>
 		</youi:fieldLayout>

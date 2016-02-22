@@ -15,7 +15,7 @@
 				removeSrc="esb/web/purchasingmanagerMerchantManager/removePurchasingmanagerMerchant.json">
 		<youi:fieldLayout labelWidths="120,120">
 			<youi:fieldSelect property="parkBusinessTupe" convert="businessType"  caption="园区商业类型"/>
-			<youi:fieldSelect property="merchantType" convert="MERCHANT_TYPE"   caption="商户类型"/>
+			<youi:fieldSelect property="merchantType" convert="merchant_type"   caption="商户类型"/>
 			<youi:fieldText property="merchantName"  caption="商户名称"/>
 			<youi:fieldText property="merchantEnterpriseName"  caption="企业名称"/>
 		</youi:fieldLayout>
@@ -24,7 +24,7 @@
 		
 		<youi:gridCol property="merchantName"  caption="商户名称" align="center" width="15%"/>
 		<youi:gridCol property="merchantEnterpriseName"  caption="企业名称" align="center" width="15%"/>
-		<youi:gridCol property="merchantType"  caption="商户类型" align="center" convert="MERCHANT_TYPE" width="15%"/>
+		<youi:gridCol property="merchantType"  caption="商户类型" align="center" convert="merchant_type" width="15%"/>
 		<youi:gridCol property="parkBusinessTupe"  caption="园区商业类型" align="center" convert="businessType" width="15%"/>
 		<youi:gridCol property="merchantLinkman"  caption="联系人" align="center" width="10%"/>
 		<youi:gridCol property="merchantLinkmanPhone"  caption="联系人电话" align="center" width="10%"/>
@@ -42,7 +42,7 @@
 		<youi:fieldLayout prefix="record" labelWidths="110,110" >
 			<youi:fieldText property="merchantName"  caption="商户名称"/>
 			<youi:fieldText property="merchantEnterpriseName"  caption="企业名称"/>
-			<youi:fieldSelect property="merchantType"  caption="商户类型" convert="MERCHANT_TYPE"/>
+			<youi:fieldSelect property="merchantType"  caption="商户类型" convert="merchant_type"/>
 			<youi:fieldSelect property="parkBusinessTupe"  caption="园区商业类型" convert="businessType"/>
 			<youi:fieldText property="merchantLinkman"  caption="联系人"/>
 			<youi:fieldText property="merchantLinkmanPhone"  caption="联系人电话"/>
@@ -58,7 +58,7 @@
 			<youi:fieldText property="merchantAddressAddress"  caption="地址"/>
 			<youi:fieldText property="merchantAddressLinkman"  caption="联系人"/>
 			<youi:fieldText property="merchantAddressId"  caption="地址ID"/>
-			<youi:fieldText property="merchantAddressIsnotDefault"  caption="是否默认"/>
+			<youi:fieldSelect property="merchantAddressIsnotDefault" convert="bool" caption="是否默认"/>
 			<youi:fieldText property="merchantAddressPhone"  caption="联系电话"/>
 		</youi:fieldLayout>
 	</youi:form>
