@@ -11,7 +11,6 @@
 			<youi:fieldSelect property="status"  caption="使用状态" convert="floorUsingStatus"/>
 			<youi:fieldText property="aspect"  caption="招商_朝向"/>
 			<youi:fieldSelect property="saleState"  caption="招商_销售状态" convert="saleState"/>
-			<youi:fieldText property="floor"  caption="所属楼层"/>
 			<youi:fieldText property="area"  caption="招商_房间面积"/>
 			<youi:fieldText property="roomName"  caption="招商_房间名称"/>
 		</youi:fieldLayout>
