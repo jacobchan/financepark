@@ -9,7 +9,9 @@
 		edit="NOT" remove="NOT" showCheckbox="true"
 		removeSrc="esb/web/enterpriseEmployeesManager/removeEnterpriseEmployees.json">
 		<youi:fieldLayout labelWidths="120,120">
-			<youi:fieldText property="employeesComId" caption="企业信息" />
+			<youi:fieldSelect property="employeesComId.rzId"
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json"
+				code="rzId" show="rzSign" caption="入驻企业" tooltips="入驻企业" />
 			<youi:fieldText property="employeesDepartment" caption="所属部门" />
 			<youi:fieldText property="employeesTelephone" caption="员工电话" />
 			<youi:fieldText property="employeesName" caption="员工姓名" />
