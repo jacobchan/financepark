@@ -12,7 +12,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCharge;
 
 public interface PropertyservicemanagerChargeManager extends BaseManager{
@@ -40,7 +39,8 @@ public interface PropertyservicemanagerChargeManager extends BaseManager{
     /**
      * 保存并返回对象
      */
-    public PropertyservicemanagerCharge savePropertyservicemanagerCharge(PropertyservicemanagerCharge o) throws BusException;
+    public PropertyservicemanagerCharge savePropertyservicemanagerCharge(PropertyservicemanagerCharge o,
+    		String propertyFee,String waterFee,String powerFee) throws BusException;
 
     /**
      * 删除对象
