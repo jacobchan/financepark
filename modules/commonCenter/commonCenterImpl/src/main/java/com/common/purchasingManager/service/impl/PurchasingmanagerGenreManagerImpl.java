@@ -3,6 +3,7 @@
  */
 package com.common.purchasingManager.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -17,6 +18,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.common.purchasingManager.dao.PurchasingmanagerGenreDao;
@@ -64,12 +66,18 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
      */
     @EsbServiceMapping
     public PurchasingmanagerGenre savePurchasingmanagerGenre(PurchasingmanagerGenre o) throws BusException{
-//    	String purchasingmanagerGenreId = o.getPurchasingmanagerGenreId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(purchasingmanagerGenreId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
+    	String genreId = o.getGenreId();
+    	boolean isUpdate = StringUtils.isNotEmpty(genreId);
+    	if(isUpdate){//修改
+    	
+    	}else{//新增
+    		
+    	}
+//    	if(o.getPurchasingmanagerGenre() != null){
+//    		if(o.getPurchasingmanagerGenre().getGenreId() != null){
+//    			PurchasingmanagerGenre pcg = purchasingmanagerGenreDao.get(o.getPurchasingmanagerGenre().getGenreId());
+//    			o.setPurchasingmanagerGenre(pcg);
+//    		}
 //    	}
     	return purchasingmanagerGenreDao.save(o);
     }
@@ -105,7 +113,12 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
 	@EsbServiceMapping
 	public List<PurchasingmanagerGenre> getSubPurchasingmanagerGenreList(
 			@ServiceParam(name="genreId") String genreId) throws BusException {
-		List<PurchasingmanagerGenre> list = purchasingmanagerGenreDao.getList("purchasingmanagerGenre.genreId", genreId);
+		List<PurchasingmanagerGenre> list = new ArrayList<PurchasingmanagerGenre>();
+		if(null == genreId||"".equals(genreId)){
+			list =purchasingmanagerGenreDao.getRootList();
+		}else{
+			list = purchasingmanagerGenreDao.getList("purchasingmanagerGenre.genreId", genreId);
+		}
 		return list;
 	}
 
