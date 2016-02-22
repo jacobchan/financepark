@@ -3,6 +3,7 @@
  */
 package com.manage.PropertyServiceManager.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Collection;
 
@@ -12,7 +13,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCharge;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSfpro;
 
 public interface PropertyservicemanagerSfproManager extends BaseManager{
@@ -63,4 +65,13 @@ public interface PropertyservicemanagerSfproManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitPropertyservicemanagerSfpro(String propertyName,Object value) throws BusException;
+	/**
+     * 根据收费登记获取收费登记项目列表
+     */
+	public PagerRecords getPagerPropertyservicemanagerSfprosByCharge(Pager pager,//分页条件
+			PropertyservicemanagerCharge psc, @OrderCollection Collection<Order> orders) throws BusException;
+	/**
+     * 根据收费登记获取收费登记项目金额总和
+     */
+	public BigDecimal getChargeAmountByCharge(PropertyservicemanagerCharge pc);
 }
