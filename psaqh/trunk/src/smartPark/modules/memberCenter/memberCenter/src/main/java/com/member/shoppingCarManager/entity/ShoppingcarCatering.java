@@ -27,8 +27,8 @@ public class ShoppingcarCatering implements Domain{
 	@Column(name = "COMPANY_CATERING_AMOUNT_")
 	@Length(max=16)
 	private String companyCateringAmount;//餐饮数量
-	@Id @GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
+/*	@Id @GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")*/
 	@Column(name = "COMMODITY_ID_")
 	@Length(max=36)
 	private String commodityId;//商品ID

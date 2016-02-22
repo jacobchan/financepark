@@ -23,8 +23,8 @@ public class FavoritsFavoritgoods implements Domain{
 	
 	private static final long serialVersionUID = -8689841793197150974L;
 	
-	@Id @GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
+	/*@Id @GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")*/
 	@Column(name = "COMMODITY_ID_")
 	@Length(max=36)
 	private String commodityId;//商品ID
