@@ -117,7 +117,7 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
     		}else if(bxstatus.equals("06")){
     			bx.setBxStatus("07");//生成订单
     			OrdermanagerUserorder order = new OrdermanagerUserorder();
-    			order.setUserorderAmount(bx.getBxAmount().toString());
+    			order.setUserorderAmount(bx.getBxAmount());
     			order.setUserorderCode("1111111");
     			order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     			order.setUserorderProject("物业报修");
