@@ -31,8 +31,8 @@ public class ShoppingcarGroup implements Domain{
 	@Column(name = "COMPANY_GROUP_COLLECT_STATUS_")
 	@Length(max=1)
 	private String companyGroupCollectStatus;//集采是否收藏
-	@Id @GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
+/*	@Id @GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")*/
 	@Column(name = "COMMODITY_ID_")
 	@Length(max=36)
 	private String commodityId;//商品ID
