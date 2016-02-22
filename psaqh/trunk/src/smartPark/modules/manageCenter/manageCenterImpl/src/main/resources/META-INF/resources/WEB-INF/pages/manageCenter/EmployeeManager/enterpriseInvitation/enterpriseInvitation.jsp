@@ -30,7 +30,9 @@
 		action="esb/web/enterpriseInvitationManager/saveEnterpriseInvitation.json">
 		<youi:fieldLayout prefix="record" columns="1" labelWidths="120,120">
 			<youi:fieldHidden property="invitationId" caption="邀请记录系列" />
-			<youi:fieldText property="rzId" caption="入驻企业" />
+			<youi:fieldSelect property="rzId"
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json"
+				code="rzId" show="rzSign" caption="入驻企业" tooltips="入驻企业" />
 			<youi:fieldText property="invitationTelephone" caption="会员电话" />
 			<youi:fieldText property="invitationCode" caption="企业邀请码" />
 		</youi:fieldLayout>
