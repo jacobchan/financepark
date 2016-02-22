@@ -8,11 +8,11 @@
 		<youi:fieldLayout labelWidths="120,120">
 			<youi:fieldSelect property="parkBusinessTupe" convert="businessType"  caption="园区商业类型"/>
 			<youi:fieldText property="categoryName"  caption="类目名称"/>
-			<youi:fieldSelect property="categoryIsnotEnable" convert="ISNOT" caption="是否启用" />
+			<youi:fieldSelect property="categoryboolEnable" convert="bool" caption="是否启用" />
 		</youi:fieldLayout>
 		<youi:gridCol property="categoryName"  caption="类目名称" align="center" width="33%"/>
 		<youi:gridCol property="parkBusinessTupe"  convert="businessType"  caption="园区商业类型" align="center" width="33%"/>
-		<youi:gridCol property="categoryIsnotEnable" convert="ISNOT" caption="是否启用" align="center" width="33%"/>
+		<youi:gridCol property="categoryboolEnable" convert="bool" caption="是否启用" align="center" width="33%"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -25,7 +25,7 @@
 			<youi:fieldSelect property="parkBusinessTupe" convert="businessType" caption="园区商业类型"/>
 			<youi:fieldText property="categoryName"  caption="类目名称"/>
 			<youi:fieldHidden property="categoryId"  caption="类目ID"/>
-			<youi:fieldSelect property="categoryIsnotEnable" convert="ISNOT" caption="是否启用"/>
+			<youi:fieldSelect property="categoryboolEnable" convert="bool" caption="是否启用"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
