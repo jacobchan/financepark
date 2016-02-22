@@ -3,9 +3,11 @@
  */
 package com.common.OrderManager.entity;
 
-import javax.persistence.*;
-import org.hibernate.validator.*;
+import java.math.BigDecimal;
 
+import javax.persistence.*;
+
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
@@ -31,8 +33,8 @@ public class OrdermanagerUserorder implements Domain{
 	private String userorderBuyUser;//购买人
 
 	@Column(name = "USERORDER_AMOUNT_")
-	@Length(max=10)
-	private String userorderAmount;//订单金额
+	private BigDecimal userorderAmount;//订单金额
+	
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "USERORDER_ID_")
@@ -81,13 +83,15 @@ public class OrdermanagerUserorder implements Domain{
 	public void setUserorderBuyUser(String userorderBuyUser){
 		this.userorderBuyUser = userorderBuyUser;
 	}
-	public String getUserorderAmount(){
-		return this.userorderAmount;
-	}
 	
-	public void setUserorderAmount(String userorderAmount){
+	public BigDecimal getUserorderAmount() {
+		return userorderAmount;
+	}
+
+	public void setUserorderAmount(BigDecimal userorderAmount) {
 		this.userorderAmount = userorderAmount;
 	}
+
 	public String getUserorderId(){
 		return this.userorderId;
 	}
