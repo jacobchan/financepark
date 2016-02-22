@@ -37,7 +37,7 @@
 			<youi:fieldText property="policyCome"  caption="发布人" />
 			<youi:fieldSelect property="policyStatus"  caption="发布状态" convert="policyStatus"/>
 			<youi:fieldCalendar property="policyIssueDate"  caption="发布时间" />
-			<youi:fieldText property="policyContent"  caption="政策内容"/>
+			<youi:fieldArea property="policyContent"  caption="政策内容" column="2" rows="4"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
