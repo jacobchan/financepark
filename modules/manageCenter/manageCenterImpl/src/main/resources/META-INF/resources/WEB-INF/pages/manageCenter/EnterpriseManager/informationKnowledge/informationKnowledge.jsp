@@ -12,7 +12,7 @@
 			<youi:fieldText property="knowledgeTitle"  caption="标题"/>
 			<youi:fieldText property="knowledgeContent"  caption="描述"/>
 			<%-- <youi:fieldText property="knowledgeUrl"  caption="图片URL"/> --%>
-			<youi:fieldText property="knowledgeStatus"  caption="发布状态"/>
+			<youi:fieldSelect property="knowledgeStatus"  caption="发布状态" convert="financingStatus"/>
 		</youi:fieldLayout>
 		<%-- <youi:gridCol property="rzId"  caption="ID2"/> --%>
 
@@ -37,7 +37,7 @@
 			<youi:fieldText property="knowledgeTitle"  caption="标题"/>
 			<youi:fieldText property="knowledgeContent"  caption="描述"/>
 			<youi:fieldText property="knowledgeUrl"  caption="图片URL"/>
-			<youi:fieldText property="knowledgeStatus"  caption="发布状态"/>
+			<youi:fieldSelect property="knowledgeStatus"  caption="发布状态" convert="financingStatus"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
