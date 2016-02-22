@@ -11,8 +11,8 @@
 			<youi:fieldText property="commodityExtendDisplayName"  caption="显示名称"/>
 			<youi:fieldText property="commodityExtendFieldName"  caption="字段名称"/>
 			<youi:fieldSelect property="commodityExtendFieldType"  caption="字段类型"/>
-			<youi:fieldSelect property="commodityExtendIsnotMust" convert="ISNOT"  caption="是否必须"/>
-			<youi:fieldSelect property="commodityExtendIsnotDisplay" convert="ISNOT"  caption="是否显示"/>
+			<youi:fieldSelect property="commodityExtendboolMust" convert="bool"  caption="是否必须"/>
+			<youi:fieldSelect property="commodityExtendboolDisplay" convert="bool"  caption="是否显示"/>
 		</youi:fieldLayout>
 
 		<youi:gridCol property="parkBusinessTupe" convert="businessType" caption="园区商业类型" align="center" width="14%"/>
@@ -21,8 +21,8 @@
 		<youi:gridCol property="commodityExtendFieldName"  caption="字段名称" align="center" width="14%"/>
 		<%-- <youi:gridCol property="commodityExtendContent"  caption="内容"/> --%>
 		<youi:gridCol property="commodityExtendInformationType"  caption="信息类型" align="center" width="14%"/>
-		<youi:gridCol property="commodityExtendIsnotMust" convert="ISNOT"  caption="是否必须" align="center" width="14%"/>
-		<youi:gridCol property="commodityExtendIsnotDisplay"  convert="ISNOT"  caption="是否显示" align="center" width="14%"/>
+		<youi:gridCol property="commodityExtendboolMust" convert="bool"  caption="是否必须" align="center" width="14%"/>
+		<youi:gridCol property="commodityExtendboolDisplay"  convert="bool"  caption="是否显示" align="center" width="14%"/>
 		
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
@@ -38,8 +38,8 @@
 			<youi:fieldText property="commodityExtendDisplayName"  caption="显示名称"/>
 			<youi:fieldText property="commodityExtendFieldName"  caption="字段名称"/>
 			<youi:fieldSelect property="commodityExtendFieldType"  caption="字段类型"/>
-			<youi:fieldSelect property="commodityExtendIsnotMust" convert="ISNOT"  caption="是否必须"/>
-			<youi:fieldSelect property="commodityExtendIsnotDisplay" convert="ISNOT"  caption="是否显示"/>
+			<youi:fieldSelect property="commodityExtendboolMust" convert="bool"  caption="是否必须"/>
+			<youi:fieldSelect property="commodityExtendboolDisplay" convert="bool"  caption="是否显示"/>
 			<youi:fieldHidden property="commodityExtendId" caption="商品扩展信息ID"></youi:fieldHidden>
 		</youi:fieldLayout>
 	</youi:form>
