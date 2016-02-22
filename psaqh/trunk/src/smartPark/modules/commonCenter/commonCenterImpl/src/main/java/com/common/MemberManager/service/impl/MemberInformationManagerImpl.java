@@ -112,15 +112,16 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 			throws BusException {
 		MemberInformation memberInformationed = memberInformationDao.getObjectByUniqueProperty("memberName", userName);
 		if(memberInformationed==null){
-			User user = new User();
+			
 			MemberInformation memberInformation = new MemberInformation();
 			memberInformation.setMemberName(userName);
-			memberInformation.setMemberDescribe2(PasswordUtils.md5Password(repasswd));
+			memberInformation.setMemberPassword(PasswordUtils.md5Password(repasswd));
 			memberInformation.setMemberPhoneNumber(mobile);
+			/*User user = new User();
 			user.setLoginName(userName);
 			user.setPassword(PasswordUtils.md5Password(repasswd));
 			user.setGroup("001");
-			userManager.saveUser(user);
+			userManager.saveUser(user);*/
 			memberInformationDao.save(memberInformation);
 	}else{
 		throw new BusException("该用户已存在!");
