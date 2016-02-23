@@ -15,7 +15,9 @@
 			<%-- <youi:fieldText property="rzId"  caption="ID2"/> --%>
 			<%-- <youi:fieldText property="noticeContent"  caption="内容"/> --%>
 		</youi:fieldLayout>
-		<youi:gridCol property="noticeRe"  caption="企业信息ID"/>
+		<%-- <youi:gridCol property="noticeRe"  caption="企业信息ID"/> --%>
+		<youi:fieldSelect property="legalRe" caption="企业信息ID" 
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
 
 		<youi:gridCol property="noticeSum"  caption="收藏次数"/>
 		<youi:gridCol property="noticeCount"  caption="浏览次数"/>
@@ -32,7 +34,9 @@
 	<!-- form-公告信息编辑 -->
 	<youi:form dialog="true" caption="公告信息" id="form_informationNotice" action="esb/web/informationNoticeManager/saveInformationNotice.json">
 		<youi:fieldLayout prefix="record">
-			<youi:fieldText property="noticeRe"  caption="企业信息ID"/>
+			<%-- <youi:fieldText property="noticeRe"  caption="企业信息ID"/> --%>
+			<youi:fieldSelect property="legalRe" caption="企业信息ID" 
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
 			<%-- <youi:fieldText property="noticeId"  caption="ID"/> --%>
 			<%-- <youi:fieldText property="noticeSum"  caption="收藏次数"/> --%>
 			<%-- <youi:fieldText property="noticeCount"  caption="浏览次数"/> --%>
