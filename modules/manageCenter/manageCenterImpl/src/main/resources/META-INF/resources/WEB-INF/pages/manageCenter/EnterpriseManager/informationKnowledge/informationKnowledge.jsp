@@ -8,7 +8,9 @@
 		<youi:fieldLayout>
 			<%-- <youi:fieldText property="rzId"  caption="ID2"/> --%>
 
-			<youi:fieldText property="knowledgeRe"  caption="企业信息ID"/>
+			<%-- <youi:fieldText property="knowledgeRe"  caption="企业信息ID"/> --%>
+			<youi:fieldSelect property="legalRe" caption="企业信息ID" 
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
 			<youi:fieldText property="knowledgeTitle"  caption="标题"/>
 			<youi:fieldText property="knowledgeContent"  caption="描述"/>
 			<%-- <youi:fieldText property="knowledgeUrl"  caption="图片URL"/> --%>
@@ -16,7 +18,9 @@
 		</youi:fieldLayout>
 		<%-- <youi:gridCol property="rzId"  caption="ID2"/> --%>
 
-		<youi:gridCol property="knowledgeRe"  caption="企业信息ID"/>
+		<%-- <youi:gridCol property="knowledgeRe"  caption="企业信息ID"/> --%>
+		<youi:fieldSelect property="legalRe" caption="企业信息ID" 
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
 		<youi:gridCol property="knowledgeTitle"  caption="标题"/>
 		
 		<youi:gridCol property="knowledgeUrl"  caption="图片URL"/>
@@ -33,7 +37,9 @@
 		<youi:fieldLayout prefix="record">
 			<%-- <youi:fieldText property="rzId"  caption="ID2"/>
 			<youi:fieldText property="knowledgeId"  caption="ID"/> --%>
-			<youi:fieldText property="knowledgeRe"  caption="企业信息ID"/>
+			<%-- <youi:fieldText property="knowledgeRe"  caption="企业信息ID"/> --%>
+			<youi:fieldSelect property="legalRe" caption="企业信息ID" 
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
 			<youi:fieldText property="knowledgeTitle"  caption="标题"/>
 			<youi:fieldText property="knowledgeContent"  caption="描述"/>
 			<youi:fieldText property="knowledgeUrl"  caption="图片URL"/>
