@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2016/2/23 15:28:28                           */
+/* Created on:     2016/2/23 15:43:45                           */
 /*==============================================================*/
 
 
@@ -350,10 +350,10 @@ create table sp_OrderManager_commodityDetail
    COMMODITYDETAIL_COMMODITY_ID_ char(36),
    COMMODITYDETAIL_NUM_ int,
    COMMODITYDETAIL_URL_ varchar(256),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_OrderManager_commodityDetail comment '320405订单商品明细';
@@ -370,10 +370,10 @@ create table sp_OrderManager_orderMerchan_nexus
    MERCHANT_ID_         char(36),
    USERORDER_ID_        char(36),
    ORDERMERCHAN_NEXUS_EXPRESS_ORDER_ varchar(32),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_OrderManager_orderMerchan_nexus comment '320406订单商户关系表';
@@ -398,10 +398,10 @@ create table sp_OrderManager_orderProjectType_
    ORDERPROJECTTYPE_ISNOT_DISPLAY_ varchar(1),
    ORDERPROJECTTYPE_OPTION_CODESET_ varchar(32),
    ORDERPROJECTTYPE_SORT_CHAR_ varchar(32),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_OrderManager_orderProjectType_ comment '320403订单项目类型表';
@@ -420,10 +420,10 @@ create table sp_OrderManager_orderProjectType_value_
    ORDERPROJECTTYPE_VALUE_DISPLAY_NAME_ varchar(128),
    ORDERPROJECTTYPE_VALUE_FIELD_NAME_ varchar(128),
    ORDERPROJECTTYPE_VALUE_FIELD_VALUE_ text,
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_OrderManager_orderProjectType_value_ comment '320404订单项目值表';
@@ -440,10 +440,10 @@ create table sp_OrderManager_orderType_
    ORDERTYPE_NAME_      varchar(128),
    ORDERTYPE_PROJECT_NAME_ varchar(128),
    ORDERTYPE_PROJECT_TEMPLATE_ADDRESS_ varchar(256),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_OrderManager_orderType_ comment '320402订单类型表';
@@ -467,10 +467,10 @@ create table sp_OrderManager_userOrder
    USERORDER_TIME_      varchar(20),
    USERORDER_BUY_USER_  varchar(64),
    USERORDER_PAY_MODE_  char(2),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_OrderManager_userOrder comment '320401用户订单表';
@@ -490,10 +490,10 @@ create table sp_PayManager_ordre_payFlow
    ORDER_PAYFLOW_PAY_AMOUNT_ decimal(10,2),
    ORDER_PAYFLOW_PAY_PROJECT_ varchar(128),
    ORDER_PAYFLOW_PAY_TIME_ varchar(20),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_PayManager_ordre_payFlow comment '320801订单支付流水表';
@@ -517,10 +517,10 @@ create table sp_activity_apply
    APPLY_ORDER_NUMBER_  varchar(32),
    START_TIME_          varchar(32),
    END_TIME_            varchar(32),
-   create_time_         datetime,
-   update_time_         datetime,
-   update_user_         char(36),
-   create_user_         char(36)
+   CREATE_TIME_         datetime,
+   UPDATE_TIME_         datetime,
+   UPDATE_USER_         char(36),
+   CREATE_USER_         char(36)
 );
 
 alter table sp_activity_apply comment '330701-活动申请内容列表';
@@ -537,10 +537,10 @@ create table sp_activity_applyList
    APPLY_ID_            char(36),
    APPLYLIST_TIME_      datetime,
    APPLY_MEMBER_        varchar(32),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_activity_applyList comment '330702-报名名单';
@@ -558,10 +558,10 @@ create table sp_activity_comment
    COMMENT_CONTENT_     varchar(32),
    COMMENT_TIME_        datetime,
    COMMENT_MEMBER_      varchar(32),
-   create_time_         datetime,
-   update_time_         datetime,
-   update_user_         char(36),
-   create_user_         char(36)
+   CREATE_TIME_         datetime,
+   UPDATE_TIME_         datetime,
+   UPDATE_USER_         char(36),
+   CREATE_USER_         char(36)
 );
 
 alter table sp_activity_comment comment '330704-活动评论';
@@ -578,10 +578,10 @@ create table sp_activity_document
    APPLY_ID_            char(36),
    DOCUMENT_NAME_       varchar(32),
    DOCUMENT_PATH_       varchar(256),
-   create_time_         datetime,
-   update_time_         datetime,
-   update_user_         char(36),
-   create_user_         char(36)
+   CREATE_TIME_         datetime,
+   UPDATE_TIME_         datetime,
+   UPDATE_USER_         char(36),
+   CREATE_USER_         char(36)
 );
 
 alter table sp_activity_document comment '330703-文档列表';
@@ -605,10 +605,10 @@ create table sp_bbm_building_
    Z_FLOOR_NUM_2        char(2),
    Z_USE_STATUS_        char(2) comment '0-在建，1-交付中，2-已用',
    PARK_ID_             char(36),
-   update_time_         datetime,
-   create_time_         datetime,
-   create_user_         char(36),
-   update_user_         char(36)
+   UPDATE_TIME_         datetime,
+   CREATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   UPDATE_USER_         char(36)
 );
 
 alter table sp_bbm_building_ comment '320102楼栋基础信息';
@@ -633,10 +633,10 @@ create table sp_bbm_floor_
    Z_USE_STATUS_        char(2) comment '0-在建，1-交付中，2-已用',
    PARK_ID_             char(36),
    BUILDING_ID_         char(36),
-   update_time_         datetime,
-   create_time_         datetime,
-   create_user_         char(36),
-   update_user_         char(36)
+   UPDATE_TIME_         datetime,
+   CREATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   UPDATE_USER_         char(36)
 );
 
 alter table sp_bbm_floor_ comment '320103楼层基础信息';
@@ -658,10 +658,10 @@ create table sp_bbm_park_
    TEL_                 varchar(32),
    EMAIL_               varchar(32),
    ADDRESS_             varchar(56),
-   update_time_         datetime,
-   create_time_         datetime,
-   create_user_         char(36),
-   update_user_         char(36)
+   UPDATE_TIME_         datetime,
+   CREATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   UPDATE_USER_         char(36)
 );
 
 alter table sp_bbm_park_ comment '320101园区信息';
@@ -698,10 +698,10 @@ create table sp_bbm_room_
    PARK_ID_             char(36),
    BUILDING_ID_         char(36),
    FLOOR_ID_            char(36),
-   update_time_         datetime,
-   create_time_         datetime,
-   create_user_         char(36),
-   update_user_         char(36)
+   UPDATE_TIME_         datetime,
+   CREATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   UPDATE_USER_         char(36)
 );
 
 alter table sp_bbm_room_ comment '320104单元基础信息';
@@ -726,10 +726,10 @@ create table sp_enterbusinessmanager_rz
    RZ_DATE_             varchar(20),
    RZ_SIGN_             varchar(8),
    RZ_MANAGER_          char(36),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_enterbusinessmanager_rz comment '330101入驻企业基本信息';
@@ -749,10 +749,10 @@ create table sp_enterprise_employees
    EMPLOYEES_NAME       varchar(32),
    EMPLOYEES_TELEPHONE  varchar(16),
    EMPLOYEES_DEPARTMENT varchar(2),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_enterprise_employees comment '330401企业员工表';
@@ -769,10 +769,10 @@ create table sp_enterprise_invitation
    RZ_ID_               varchar(36),
    INVITATION_CODE      varchar(32),
    INVITATION_TELEPHONE varchar(32),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_enterprise_invitation comment '330402邀请记录表';
@@ -788,10 +788,10 @@ create table sp_enterprise_role
    R_ID_                char(36) not null,
    R_E_ID_              char(36),
    R_R_ID_              char(36),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_enterprise_role comment '330403企业会员角色表';
@@ -808,10 +808,10 @@ create table sp_etype_enterprisetype
    sp__en_type_id_      char(36),
    en_type_name_        varchar(32),
    parent_id_           char(36),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_etype_enterprisetype comment '320901企业行业类型表';
@@ -827,10 +827,10 @@ create table sp_favorits_favoritGoods
    FAVORIT_GOODS_ID_    char(36) not null,
    COMMODITY_ID_        char(36) not null,
    MEMBER_ID_           char(36),
-   create_time_         datetime,
-   create_user_         char(36),
-   update_time_         datetime,
-   update_user_         char(36)
+   CREATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   UPDATE_USER_         char(36)
 );
 
 alter table sp_favorits_favoritGoods comment '340401-商品收藏表';
@@ -854,10 +854,10 @@ create table sp_information_financing
    FINANCING_TIME_      varchar(32),
    FINANCING_STATUS_    varchar(2),
    FINANCING_RE_        varchar(32),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_information_financing comment '330505融资信息';
@@ -877,10 +877,10 @@ create table sp_information_knowledge
    KNOWLEDGE_CONTENT_   varchar(256),
    KNOWLEDGE_STATUS_    varchar(2),
    KNOWLEDGE_RE_        varchar(32),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_information_knowledge comment '330504知识产权信息';
@@ -898,10 +898,10 @@ create table sp_information_legal
    LEGAL_NAME_          varchar(64),
    LEGAL_TELEPHONE_     varchar(16),
    LEGAL_RE_            varchar(32),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_information_legal comment '330503法人介绍';
@@ -921,10 +921,10 @@ create table sp_information_media
    MEDIA_TILURL_        varchar(128),
    MEDIA_STATUS_        varchar(2),
    MEDIA_RE_            varchar(32),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_information_media comment '330502媒体报道信息';
@@ -945,10 +945,10 @@ create table sp_information_notice
    NOTICE_COUNT_        int,
    NOTICE_SUM_          int,
    NOTICE_RE_           varchar(32),
-   create_time_         datetime,
-   create_user_         char(36),
-   update_time_         datetime,
-   update_user_         char(36)
+   CREATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   UPDATE_USER_         char(36)
 );
 
 alter table sp_information_notice comment '330501公告信息';
@@ -967,10 +967,10 @@ create table sp_information_product
    PRODUCT_TYPE_        varchar(2),
    PRODUCT_CONTENT_     varchar(256),
    PRODUCT_RE_          varchar(32),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_information_product comment '330506产品信息';
@@ -990,10 +990,10 @@ create table sp_lettermanager_comment
    COMMENT_TIME         varchar(32),
    COMMENT_REPLY_CONTENT varchar(256),
    COMMENT__REPLY_TIME  varchar(32),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_lettermanager_comment comment '330601评论';
@@ -1012,10 +1012,10 @@ create table sp_lettermanager_letter
    LETTER_RECIPIENT_ID  varchar(32),
    LETTER_CONTENT       varchar(1024),
    LETTER_TIME          varchar(32),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_lettermanager_letter comment '330602私信';
@@ -1036,10 +1036,10 @@ create table sp_mc_msgDatas_
    SEND_DATE_           varchar(20),
    RECEIVE_             varchar(36),
    SEND_STATUS_         varchar(2),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_mc_msgDatas_ comment '320203消息列表';
@@ -1060,10 +1060,10 @@ create table sp_mc_msgTempalate_
    MSG_RECEIVER_        varchar(36),
    MSG_RECEIVETYPE_     char(2),
    MSG_TEMPUSE_         char(2),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_mc_msgTempalate_ comment '320202消息模板';
@@ -1081,10 +1081,10 @@ create table sp_mc_msgType_
    MSG_TYPE_PARENT_     varchar(36),
    MSG_TYPE_STATUS_     char(2),
    IS_LEAF_             char(1),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_mc_msgType_ comment '320201消息类型';
@@ -1101,10 +1101,10 @@ create table sp_memberAdr_address
    MEMBER_ID_           char(36),
    ADDRESS_DETAIL_      varchar(128),
    ADDRESS_STATUS_      varchar(2),
-   create_time_         datetime,
-   create_user_         char(36),
-   update_time_         datetime,
-   update_user_         char(36)
+   CREATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   UPDATE_USER_         char(36)
 );
 
 alter table sp_memberAdr_address comment '340101-我的地址';
@@ -1125,10 +1125,10 @@ create table sp_member_comment
    GOODS_COMMENT_LEVEL_ varchar(2),
    GOODS_COMMENT_REVIEW_ varchar(1024),
    GOODS_COMMENT_REVIEWTIME_ datetime,
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_member_comment comment '340201-商品评价';
@@ -1150,10 +1150,10 @@ create table sp_member_information
    MEMBER_NAME_         varchar(32),
    MEMBER_BIRTHDATE_    datetime,
    MEMBER_DESCRIBE2_    varchar(256),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_member_information comment '320701-会员信息表';
@@ -1174,10 +1174,10 @@ create table sp_nm_issueFlow_
    ISSUE_OPERATE_       varchar(36),
    FLOW_USE_            varchar(36),
    FLOW_INSTANCE_       varchar(36),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_nm_issueFlow_ comment '320603流程定义';
@@ -1198,10 +1198,10 @@ create table sp_nm_issueNews_
    POLICY_COME_         varchar(36),
    POLICY_ISSUE_DATE_   varchar(20),
    POLICY_STATUS_       char(2),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_nm_issueNews_ comment '320604政策新闻内容';
@@ -1221,10 +1221,10 @@ create table sp_nm_issueTempalate_
    ISSUE_TEMPALATE_SRC_ varchar(256),
    ISSUE_TEMPALATE_TO_  varchar(36),
    ISSUE_SENDSTATUS_    char(2),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_nm_issueTempalate_ comment '320602发布模板';
@@ -1245,10 +1245,10 @@ create table sp_nm_issueType_
    IS_LEAF_2            char(1),
    ISSUE_TYPE_CODE_     varchar(12),
    ISSUE_TYPE_PATH_     varchar(256),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_nm_issueType_ comment '320601发布类型';
@@ -1267,10 +1267,10 @@ create table sp_policy_apply
    POLICY_APPLY_CONTACT_TEL_ varchar(32),
    POLICY_APPLY_CONPANY_NAME_ varchar(32),
    POLICY_APPLY_STATUS_ varchar(2),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_policy_apply comment '330801-政策申请记录';
@@ -1292,10 +1292,10 @@ create table sp_propertyservicemanager_bx
    BX_REMARK_           varchar(300),
    BX_FUJIAN            varchar(50),
    BX_AMOUNT_           decimal(14,2),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_propertyservicemanager_bx comment '330208物业报修记录';
@@ -1320,10 +1320,10 @@ create table sp_propertyservicemanager_charge
    CHARGE_ISBOOL_       varchar(2),
    CHARGE_AMOUNT_       decimal(14,2),
    CHARGE_CREATETIME_   varchar(20),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_propertyservicemanager_charge comment '330311物业收费登记表';
@@ -1345,10 +1345,10 @@ create table sp_propertyservicemanager_cos
    COS_STATUS_          varchar(2),
    COS_CODE_            varchar(32),
    COS_TIME_            varchar(20),
-   create_time_         datetime,
-   update_time_         datetime,
-   update_user_         char(36),
-   create_user_         char(36)
+   CREATE_TIME_         datetime,
+   UPDATE_TIME_         datetime,
+   UPDATE_USER_         char(36),
+   CREATE_USER_         char(36)
 );
 
 alter table sp_propertyservicemanager_cos comment '330206物业投诉记录表';
@@ -1368,10 +1368,10 @@ create table sp_propertyservicemanager_entering
    ENTERING_ALRE_       int,
    ENTERING_REMAIN_     int,
    ENTERING_STATUS_     varchar(2),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_propertyservicemanager_entering comment '330203可办理预约记录';
@@ -1392,10 +1392,10 @@ create table sp_propertyservicemanager_entrec
    ENTERING_DATE_       varchar(20),
    ENTERING_TIME_       varchar(20),
    ENTERREC_STATUS_     varchar(2),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_propertyservicemanager_entrec comment '330202入驻服务办理预约记录表';
@@ -1416,10 +1416,10 @@ create table sp_propertyservicemanager_fkcode_
    FKCODE_TIME_         varchar(20),
    FKCODE_COMP_         varchar(36),
    FKCODE_REMARK_       varchar(300),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_propertyservicemanager_fkcode_ comment '330213访客申请记录';
@@ -1435,10 +1435,10 @@ create table sp_propertyservicemanager_fxtdc
    FXTDC_ID_            varchar(36) not null,
    MOVEREC_ID_          varchar(36),
    TWCRD_ADDREC_        varchar(50),
-   create_time_         datetime,
-   create_user_         char(36),
-   update_time_         datetime,
-   update_user_         char(36)
+   CREATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   UPDATE_USER_         char(36)
 );
 
 alter table sp_propertyservicemanager_fxtdc comment '330205搬家放行二维码记录表';
@@ -1458,10 +1458,10 @@ create table sp_propertyservicemanager_moverec
    MOVEREC_NAME_        varchar(32),
    MOVEREC_WAY_         varchar(2),
    MOVEREC_REMARK_      varchar(300),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_propertyservicemanager_moverec comment '330204搬家申请记录';
@@ -1483,10 +1483,10 @@ create table sp_propertyservicemanager_oc
    OC_DATE_             varchar(20),
    OC_WAY_              varchar(2),
    OC_REMARK_           varchar(300),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_propertyservicemanager_oc comment '330201一卡通办理申请记录';
@@ -1505,10 +1505,10 @@ create table sp_propertyservicemanager_ser
    SER_NAME_            varchar(2),
    SER_PRICE_           decimal(14,2),
    SER_PAY_STATUS_      varchar(2),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_propertyservicemanager_ser comment '330210费用清单';
@@ -1525,10 +1525,10 @@ create table sp_propertyservicemanager_sfpro
    CHARGE_ID_           varchar(36),
    SFPRO_NAME_          varchar(36),
    SFPRO_AMOUNT_        decimal(14,2),
-   create_time_         datetime,
-   create_user_         char(36),
-   update_time_         datetime,
-   update_user_         char(36)
+   CREATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   UPDATE_USER_         char(36)
 );
 
 alter table sp_propertyservicemanager_sfpro comment '330312物业收费项目表';
@@ -1547,10 +1547,10 @@ create table sp_propertyservicemanager_ts
    TS_TELEPHONE_        varchar(20),
    TS_STATUS_           varchar(2),
    TS_REMARK_           varchar(300),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_propertyservicemanager_ts comment '330209派工维修记录';
@@ -1566,10 +1566,10 @@ create table sp_propertyservicemanager_twcrd
    TWCRD_ID_            varchar(36) not null,
    FKCODE_ID_           varchar(36),
    TWCRD_ADDREC_        varchar(50),
-   create_time_         datetime,
-   create_user_         char(36),
-   update_time_         datetime,
-   update_user_         char(36)
+   CREATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   UPDATE_USER_         char(36)
 );
 
 alter table sp_propertyservicemanager_twcrd comment '330214二维码记录';
@@ -1586,10 +1586,10 @@ create table sp_propertyservicenanager_back
    COS_ID_              varchar(36),
    BACK_CODE_           varchar(32),
    BACK_RECORD_         varchar(300),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_propertyservicenanager_back comment '330207投诉回访记录表';
@@ -1607,10 +1607,10 @@ create table sp_publicutilitiesmanager_reso
    RESO_DATE_           varchar(20),
    RESO_TIME_           varchar(20),
    RESO_STATUS_         varchar(2),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_publicutilitiesmanager_reso comment '330301资源状态';
@@ -1628,10 +1628,10 @@ create table sp_purchasingManager_category
    sp__CATEGORY_ID_     char(36),
    CATEGORY_NAME_       varchar(128),
    CATEGORY_ISNOT_ENABLE_ varchar(1),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_purchasingManager_category comment '320304商品类目表';
@@ -1662,10 +1662,10 @@ create table sp_purchasingManager_commodity
    COMMODITY_LOWEST_PRICE_ decimal(10,2),
    COMMODITY_ISNOT_DISPLAY_STOCK_ varchar(1),
    COMMODITY_BRAND_     varchar(128),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_purchasingManager_commodity comment '320301商品信息';
@@ -1687,10 +1687,10 @@ create table sp_purchasingManager_commodity_extend
    COMMODITY_EXTEND_INFORMATION_TYPE_ char(2),
    COMMODITY_EXTEND_ISNOT_DISPLAY_ varchar(1),
    COMMODITY_EXTEND_ISNOT_MUST_ varchar(1),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_purchasingManager_commodity_extend comment '320302采购商品信息扩展';
@@ -1709,10 +1709,10 @@ create table sp_purchasingManager_commodity_extend_value
    COMMODITY_EXTEND_VALUE_DISPLAY_NAME_ varchar(128),
    COMMODITY_EXTEND_VALUE_FIELD_NAME_ varchar(128),
    COMMODITY_EXTEND_VALUE_DISPLAY_CONTENT_ text,
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_purchasingManager_commodity_extend_value comment '320303商品扩展属性值表';
@@ -1729,10 +1729,10 @@ create table sp_purchasingManager_genre
    GENRE_ID_            char(36) not null,
    sp__GENRE_ID_        char(36),
    GENRE_NAME_          varchar(128),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_purchasingManager_genre comment '320305商品类别表';
@@ -1754,10 +1754,10 @@ create table sp_purchasingManager_genre_property
    GENRE_PROPERTY_ISNOT_DISPLAY_ varchar(1),
    GENRE_PROPERTY_DEFAULT_VALUE_ varchar(128),
    GENRE_PROPERTY_FIELD_LENGTH_ int,
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_purchasingManager_genre_property comment '320306商品类属性';
@@ -1779,10 +1779,10 @@ create table sp_purchasingManager_merchant
    MERCHANT_LINKMAN_    varchar(32),
    MERCHANT_LINKMAN_PHONE_ varchar(16),
    PARK_BUSINESS_TUPE_  char(2),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_purchasingManager_merchant comment '320307商户信息表';
@@ -1801,10 +1801,10 @@ create table sp_purchasingManager_merchant_address_
    MERCHANT_ADDRESS_PHONE_ varchar(16),
    MERCHANT_ADDRESS_ADDRESS_ varchar(256),
    MERCHANT_ADDRESS_ISNOT_DEFAULT_ varchar(1),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_purchasingManager_merchant_address_ comment '320308商户地址库';
@@ -1826,10 +1826,10 @@ create table sp_reservation_record
    RECORD_VISITE_STATUS varchar(2),
    VISITE_DATE_         varchar(20),
    VISITE_TIME_         varchar(20),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_reservation_record comment '330901预约记录';
@@ -1847,10 +1847,10 @@ create table sp_shoppingCar_catering
    COMPANY_CATERING_AMOUNT_ varchar(16),
    COMMODITY_ID_        char(36) not null,
    MEMBER_ID_           char(36),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_shoppingCar_catering comment '340303-餐饮购物车';
@@ -1868,10 +1868,10 @@ create table sp_shoppingCar_companyServer
    COMPANY_CATERING_AMOUNT_ varchar(16),
    COMMODITY_ID_        char(36) not null,
    MEMBER_ID_           char(36),
-   update_user_         char(36),
-   update_time_         datetime,
-   create_user_         char(36),
-   create_time_         datetime
+   UPDATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   CREATE_TIME_         datetime
 );
 
 alter table sp_shoppingCar_companyServer comment '340301-企业服务购物车';
@@ -1890,10 +1890,10 @@ create table sp_shoppingCar_group
    COMPANY_GROUP_COLLECT_STATUS_ varchar(1),
    COMMODITY_ID_        char(36) not null,
    MEMBER_ID_           char(36),
-   create_time_         datetime,
-   update_time_         datetime,
-   update_user_         char(36),
-   create_user_         char(36)
+   CREATE_TIME_         datetime,
+   UPDATE_TIME_         datetime,
+   UPDATE_USER_         char(36),
+   CREATE_USER_         char(36)
 );
 
 alter table sp_shoppingCar_group comment '340302-集采购物车';
