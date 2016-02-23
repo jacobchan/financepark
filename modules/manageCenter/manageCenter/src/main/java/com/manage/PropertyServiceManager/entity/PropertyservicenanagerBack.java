@@ -35,7 +35,7 @@ public class PropertyservicenanagerBack implements Domain{
 	@Length(max=32)
 	private String backCode;//回访单号
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="COS_ID_")
 	private com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos propertyservicemanagerCos;//投诉ID
 	
