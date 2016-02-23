@@ -6,7 +6,7 @@
 		src="esb/web/propertyservicenanagerBackManager/getPagerPropertyservicenanagerBacks.json"
 		dataFormId="form_propertyservicenanagerBack"
 		editSrc="esb/web/propertyservicenanagerBackManager/getPropertyservicenanagerBack.json"
-		edit="NOT" remove="NOT" showCheckbox="true"
+		edit="NOT" remove="NOT" save="NOT" showCheckbox="true"
 		removeSrc="esb/web/propertyservicenanagerBackManager/removePropertyservicenanagerBack.json">
 		<youi:fieldLayout labelWidths="120,120">
 			<youi:fieldSelect property="propertyservicemanagerCos.cosId"
