@@ -3,11 +3,10 @@
 <youi:page>
 	<youi:grid id="grid_enterbusinessmanagerRz" idKeys="rzId" caption="入驻企业基本信息列表"  panel="false"
 				src="esb/web/enterbusinessmanagerRzManager/getPagerEnterbusinessmanagerRzs.json" dataFormId="form_enterbusinessmanagerRz"
-				editSrc="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json" edit="NOT" remove="NOT" add="NOT" showCheckbox="true"
+				editSrc="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/enterbusinessmanagerRzManager/removeEnterbusinessmanagerRz.json">
 		<youi:fieldLayout>
-			<%-- <youi:fieldSelect property="rzManager"  caption="企业管理员" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/> --%>
-			<youi:fieldText property="rzManager"  caption="企业管理员" />
+			<youi:fieldSelect property="rzManager"  caption="企业管理员" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
 			<youi:fieldCalendar property="rzDate"  caption="入驻时间"/>
 			<youi:fieldText property="rzRemark"  caption="企业备注"/>
 			<youi:fieldText property="buildingId"  caption="楼栋ID"/>
@@ -38,9 +37,8 @@
 	<!-- form-入驻企业基本信息编辑 -->
 	<youi:form dialog="true" caption="入驻企业基本信息" id="form_enterbusinessmanagerRz" action="esb/web/enterbusinessmanagerRzManager/saveEnterbusinessmanagerRz.json">
 		<youi:fieldLayout prefix="record">
-			<%-- <youi:fieldHidden property="rzId"  caption="ID"/> --%>
-			<%-- <youi:fieldSelect property="rzManager"  caption="企业管理员" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/> --%>
-			<youi:fieldText property="rzManager"  caption="企业管理员" />
+			<youi:fieldHidden property="rzId"  caption="ID"/>
+			 <youi:fieldSelect property="rzManager"  caption="企业管理员" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/> 
 			<youi:fieldCalendar property="rzDate"  caption="入驻时间"/>
 			<youi:fieldSelect property="parkId"  caption="园区ID" src="esb/web/bbmParkManager/getBbmParks.json" code="parkId" show="parkName"/>
 			<youi:fieldSelect property="buildingId"  caption="楼栋ID" src="esb/web/bbmBuildingManager/getBbmBuildings.json" code="buildingId" show="buildingNo"/>
