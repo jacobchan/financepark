@@ -38,7 +38,7 @@
 			<youi:fieldText property="applyNumber"  caption="活动申请编号"/>
 			<youi:fieldText property="applyOrderNumber"  caption="场地订单编号"/>
 			<youi:fieldText property="applyTitle"  caption="活动标题"/>
-			<youi:fieldSpinner property="applyMaxuser"  caption="限制人数" min="0" step="1" styleClass="input-group"/>
+			<youi:fieldText property="applyMaxuser"  caption="限制人数" expressionMessage="请输入整数" expression="^[1-9]\d*$"/>
 			<youi:fieldSelect property="memberId"  caption="会员用户ID" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
 			<youi:fieldCalendar property="startTime"  caption="活动开始时间"/>
 			<youi:fieldCalendar property="endTime"  caption="活动结束时间"/>
