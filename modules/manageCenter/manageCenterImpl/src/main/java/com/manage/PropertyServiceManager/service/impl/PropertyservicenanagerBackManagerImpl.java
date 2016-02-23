@@ -3,6 +3,7 @@
  */
 package com.manage.PropertyServiceManager.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -16,11 +17,11 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
+import com.gsoft.framework.util.Assert;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos;
 import com.manage.PropertyServiceManager.entity.PropertyservicenanagerBack;
 import com.manage.PropertyServiceManager.dao.PropertyservicenanagerBackDao;
 import com.manage.PropertyServiceManager.service.PropertyservicenanagerBackManager;
@@ -103,4 +104,15 @@ public class PropertyservicenanagerBackManagerImpl extends BaseManagerImpl imple
 		return propertyservicenanagerBackDao.exists(propertyName,value);
 	}
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	@EsbServiceMapping
+	public PagerRecords getPagerPropertyservicenanagerBacksByCos(Pager pager,
+			PropertyservicemanagerCos cos, @OrderCollection Collection<Order> orders)
+			throws BusException {
+    	Assert.notNull(cos, "条件不能为空！");
+	    Assert.notNull(cos.getCosId(), "投诉记录cosId不能为空！");
+	    Collection conditions = new ArrayList();
+	    conditions.add(ConditionUtils.getCondition("propertyservicemanagerCos.cosId", "EQUALS", cos.getCosId()));
+		return propertyservicenanagerBackDao.findByPager(pager, conditions, orders);
+	}
 }
