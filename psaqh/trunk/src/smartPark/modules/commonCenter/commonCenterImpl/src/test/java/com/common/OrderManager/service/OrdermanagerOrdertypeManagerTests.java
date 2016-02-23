@@ -20,32 +20,6 @@ public class OrdermanagerOrdertypeManagerTests extends AbstractJUnit4SpringConte
 	public void setOrdermanagerOrdertypeManager(OrdermanagerOrdertypeManager ordermanagerOrdertypeManager){
 		this.ordermanagerOrdertypeManager = ordermanagerOrdertypeManager;
 	}
-    
-    /**
-     * 查询列表
-     */
-    @Test
-    public void testGetAllOrdermanagerOrdertypes(){
-    	
-    }
-     /**
-     * 条件查询列表
-     */
-    @Test
-    public void testGetOrdermanagerOrdertypes(){
-    	
-    }
-    /**
-     * 根据主键查询
-     */
-    @Test
-    public void testGetOrdermanagerOrdertype(){
-    	
-    }
-	@Test
-	public void testGetPagerOrdermanagerOrdertypes(){
-		
-	}
     /**
      * 保存对象
      */
@@ -60,22 +34,4 @@ public class OrdermanagerOrdertypeManagerTests extends AbstractJUnit4SpringConte
     	System.out.println(result.getOrdertypeId());
     }
 
-    /**
-     * 删除对象
-     */
-    @Test
-    public void testRemoveOrdermanagerOrdertype(){
-    	
-    }
-    /**
-     * 根据主键集合删除对象
-     */
-    @Test
-    public void testRemoveOrdermanagerOrdertypes(){
-   	
-    }
-    @Test
-    public void testExsitOrdermanagerOrdertype(){
-	
-	}
 }

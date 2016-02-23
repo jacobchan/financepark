@@ -24,8 +24,7 @@
 	<!-- ========================= RESOURCE DEFINITIONS ========================= -->
   	
   	<!-- 手工修改 ：根据需要配置加载的类-->
-  	<!-- <context:component-scan base-package="com.common.OrderManager"/> -->
-  	<context:component-scan base-package="com.common.MemberManager"/>
+  	<context:component-scan base-package="com.gsoft.platform.codemng"/>
   	
 	<!-- Configurer that replaces ${...} placeholders with values from a properties file -->
 	<!-- (in this case, JDBC-related settings for the dataSource definition below) -->
@@ -51,7 +50,7 @@
 			<props>
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
-				<!-- <prop key="hibernate.hbm2ddl.auto">update</prop> -->
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<!-- 
 				
 					
@@ -64,8 +63,8 @@
 		<!-- 手工修改，根据需要配置加载的实体 -->
 		<property name="annotatedClasses">
 			<list>
-				
-				<value>com.common.MemberManager.entity.MemberInformation</value>	
+				<value>com.gsoft.platform.codemng.entity.CodeProject</value>
+				<value>com.gsoft.platform.codemng.entity.CodeProjectGroup</value>
 			</list>
 		</property>
 	</bean>
