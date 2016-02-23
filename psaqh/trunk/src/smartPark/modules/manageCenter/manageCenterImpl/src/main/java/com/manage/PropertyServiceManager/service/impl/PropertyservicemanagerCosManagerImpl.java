@@ -16,11 +16,8 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerCosDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerCosManager;
@@ -103,4 +100,11 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
 		return propertyservicemanagerCosDao.exists(propertyName,value);
 	}
 
+    @EsbServiceMapping
+	public void upCosbyId(@ServiceParam(name="id") String id,
+			@ServiceParam(name="code") String code) throws BusException {
+    	PropertyservicemanagerCos cos = propertyservicemanagerCosDao.get(id);
+    	cos.setCosStatus(code);
+    	propertyservicemanagerCosDao.save(cos);
+	}
 }
