@@ -44,19 +44,6 @@
 			<scope>compile</scope>
 		</dependency>
 		
-		<!--文件上传  -->
-		<dependency>
-			<groupId>com.gsoft.framework</groupId>
-			<artifactId>gsoft-framework-upload</artifactId>
-			<version>1.0.3.RELEASE</version>
-			<scope>compile</scope>
-		</dependency>
-	 	<dependency>
-			<groupId>com.artofsolving</groupId>
-			<artifactId>jodconverter</artifactId>
-			<version>2.2.1</version>
-		</dependency>
-
 		
 		<dependency>
 			<groupId>com.gsoft.smartPark</groupId>
