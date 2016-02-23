@@ -46,8 +46,7 @@
 			success:function(result){
 			$elem('subpage_viewDocument',pageId).subpage('open',{html:result.record.html});
 		}
-	});
-		
+		});
 	</youi:func>
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
