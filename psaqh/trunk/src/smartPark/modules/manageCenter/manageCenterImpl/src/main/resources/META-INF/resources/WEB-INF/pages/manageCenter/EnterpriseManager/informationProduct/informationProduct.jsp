@@ -8,7 +8,9 @@
 		<youi:fieldLayout>
 
 			<%-- <youi:fieldText property="productContent"  caption="产品描述"/> --%>
-			<youi:fieldText property="productRe"  caption="企业ID"/>
+			<%-- <youi:fieldText property="productRe"  caption="企业ID"/> --%>
+			<youi:fieldSelect property="legalRe" caption="企业ID" 
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
 			<%-- <youi:fieldText property="rzId"  caption="ID2"/> --%>
 			<youi:fieldText property="productType"  caption="产品类别"/>
 			<youi:fieldText property="productName"  caption="产品名称"/>
@@ -30,7 +32,9 @@
 		<youi:fieldLayout prefix="record">
 			<%-- <youi:fieldText property="productId"  caption="ID"/> --%>
 			<youi:fieldText property="productContent"  caption="产品描述"/>
-			<youi:fieldText property="productRe"  caption="企业ID"/>
+			<%-- <youi:fieldText property="productRe"  caption="企业ID"/> --%>
+			<youi:fieldSelect property="legalRe" caption="企业ID" 
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
 			<%-- <youi:fieldText property="rzId"  caption="ID2"/> --%>
 			<youi:fieldText property="productType"  caption="产品类别"/>
 			<youi:fieldText property="productName"  caption="产品名称"/>
