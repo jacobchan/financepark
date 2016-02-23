@@ -16,11 +16,9 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntering;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerEnteringDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerEnteringManager;
@@ -59,6 +57,18 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
 	public PagerRecords getPagerPropertyservicemanagerEnterings(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=PropertyservicemanagerEntering.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
+		PagerRecords pagerRecords = propertyservicemanagerEnteringDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
+	
+    /**
+     * 查询所有可以预约的预约记录
+     */
+	@EsbServiceMapping
+	public PagerRecords getPropertyservicemanagerEnteringsByStatus(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PropertyservicemanagerEntering.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)  throws BusException{
+		conditions.add(ConditionUtils.getCondition("enteringStatus",Condition.EQUALS, "01"));// 查询所有可以预约的预约记录
 		PagerRecords pagerRecords = propertyservicemanagerEnteringDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
