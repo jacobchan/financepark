@@ -37,6 +37,14 @@ public interface PropertyservicemanagerEnteringManager extends BaseManager{
 	public PagerRecords getPagerPropertyservicemanagerEnterings(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders) throws BusException;
+	
+	/**
+	 * 查询所有可以预约的预约记录
+	 * @return 
+	 */
+	public PagerRecords getPropertyservicemanagerEnteringsByStatus(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders) throws BusException;
     /**
      * 保存并返回对象
      */
