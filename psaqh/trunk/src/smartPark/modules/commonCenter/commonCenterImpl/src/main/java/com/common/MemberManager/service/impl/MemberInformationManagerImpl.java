@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gsoft.framework.security.agt.entity.User;
 import com.gsoft.framework.security.agt.service.UserManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -30,8 +29,6 @@ import com.common.MemberManager.service.MemberInformationManager;
 public class MemberInformationManagerImpl extends BaseManagerImpl implements MemberInformationManager{
 	@Autowired
 	private MemberInformationDao memberInformationDao;
-	@Autowired
-	private UserManager userManager;
 	
     /**
      * 查询列表
