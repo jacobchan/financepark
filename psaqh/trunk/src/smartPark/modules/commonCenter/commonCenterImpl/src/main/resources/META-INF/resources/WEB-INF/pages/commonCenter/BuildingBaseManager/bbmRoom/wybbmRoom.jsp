@@ -29,8 +29,8 @@
 		<youi:gridCol property="eneryCharge"  caption="物业_电费" width="150px"/>
 		<youi:gridCol property="waterCharge"  caption="物业_水费" width="150px"/>		
 		<youi:gridCol property="area"  caption="房间面积" width="150px"/>
-		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
-			
+		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">	
+		<youi:button name="edit" caption="修改"/>		
 			<youi:button name="remove" caption="删除"/>
 		</youi:gridCol>
 	</youi:grid>
@@ -47,17 +47,15 @@
 				src="esb/web/bbmBuildingManager/getBbmBuildings.json" parents="bbmPark.parkId" parentsAlias="bbmPark.parkId"></youi:fieldSelect>
 			<youi:fieldSelect property="bbmFloor.floorId" caption="所属楼层" code="floorId" show="floorCaption" showProperty="bbmFloor.floorCaption"
 				src="esb/web/bbmFloorManager/getBbmFloors.json" parents="bbmBuilding.buildingId" parentsAlias="bbmBuilding.buildingId"></youi:fieldSelect>
-			<youi:fieldSelect property="status"  caption="使用状态"  convert="roomstatus" />
+			<youi:fieldSelect property="status"  caption="使用状态"  convert="roomstatus"/>
 			<youi:fieldText property="enteredEnt"  caption="包含企业"/>
 			<youi:fieldText property="rentCharge"  caption="物业_租金" width="150px"/>
 			<youi:fieldText property="floor"  caption="所属楼层" width="150px"/>
 			<youi:fieldText property="eneryCharge"  caption="物业_电费" width="150px"/>
-			<youi:fieldText property="waterCharge"  caption="物业_水费" width="150px"/>	
-			<youi:fieldText property="area"  caption="房间面积" width="150px"/> 
+			<youi:fieldText property="waterCharge"  caption="物业_水费" width="150px"/>
+			<youi:fieldText property="area"  caption="房间面积" width="150px"/>
 		</youi:fieldLayout>
 	</youi:form>
-	
-	<!--**********************************页面函数Start********************************-->
-	
+	<!--**********************************页面函数Start********************************-->	
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
