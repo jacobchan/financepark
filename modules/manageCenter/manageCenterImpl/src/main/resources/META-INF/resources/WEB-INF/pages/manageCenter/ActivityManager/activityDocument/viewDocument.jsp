@@ -4,7 +4,7 @@
 
 	<div style="position:absolute;left:50px;top:10px;">
 	       <div id="documentViewer" class="flexpaper_viewer" style="width:1000px;height:600px"></div>          
-        </div>
+   </div>
         
         
 	<youi:func name="subpage_init" params="result">
