@@ -4,6 +4,7 @@
 package com.manage.PropertyServiceManager.service.impl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -18,6 +19,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.Assert;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSer;
@@ -102,6 +105,19 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
     	}
     }
 
+  //根据派工记录获取维修费用记录列表
+  	@SuppressWarnings({ "rawtypes", "unchecked" })
+  	@EsbServiceMapping
+  	public PagerRecords getPagerPropertyservicemanagerSersByTs(Pager pager,//分页条件
+			PropertyservicemanagerTs ts,
+  			@OrderCollection Collection<Order> orders)  throws BusException{
+  	     Assert.notNull(ts, "派工条件不能为空！");
+  	     Assert.notNull(ts.getTsId(), "派工记录中tsId不能为空！");
+  	     Collection conditions = new ArrayList();
+  	     conditions.add(ConditionUtils.getCondition("propertyservicemanagerTs.tsId", "EQUALS", ts.getTsId()));
+  		return propertyservicemanagerSerDao.findByPager(pager, conditions, orders);
+  	}
+    
     /**
      * 删除对象
      */

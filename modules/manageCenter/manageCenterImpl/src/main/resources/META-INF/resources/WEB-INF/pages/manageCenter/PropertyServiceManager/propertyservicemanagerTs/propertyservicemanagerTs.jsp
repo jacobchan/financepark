@@ -1,31 +1,49 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
-	<youi:grid id="grid_propertyservicemanagerTs" idKeys="tsId" caption="派工维修记录列表"  panel="false"
-				src="esb/web/propertyservicemanagerTsManager/getPagerPropertyservicemanagerTss.json" dataFormId="form_propertyservicemanagerTs"
-				editSrc="esb/web/propertyservicemanagerTsManager/getPropertyservicemanagerTs.json" edit="NOT" remove="NOT" showCheckbox="true"
-				removeSrc="esb/web/propertyservicemanagerTsManager/removePropertyservicemanagerTs.json">
-		<youi:fieldLayout labelWidths="120,120">
-			<youi:fieldSelect property="tsStatus"  caption="派工受理状态" convert="ts_status"/>
-			<youi:fieldText property="tsTelephone"  caption="派工人员电话号码"/>
-			<youi:fieldText property="tsName"  caption="派工人员"/>
-		</youi:fieldLayout>
-		<youi:button name="agree" caption="接单" icon="edit" active="1"/>
-		<youi:button name="refuse" caption="拒单" icon="edit" active="1"/>
-		<youi:button name="putfrom" caption="填报维修费用清单" icon="edit" active="1"/>
+	<youi:table columns="1">
+		<youi:cell>
+			<youi:grid id="grid_propertyservicemanagerTs" idKeys="tsId" caption="派工维修记录列表"  panel="false"
+						src="esb/web/propertyservicemanagerTsManager/getPagerPropertyservicemanagerTss.json" dataFormId="form_propertyservicemanagerTs"
+						editSrc="esb/web/propertyservicemanagerTsManager/getPropertyservicemanagerTs.json" edit="NOT" remove="NOT" showCheckbox="true" height="400"
+						removeSrc="esb/web/propertyservicemanagerTsManager/removePropertyservicemanagerTs.json">
+				<youi:fieldLayout labelWidths="120,120">
+					<youi:fieldSelect property="tsStatus"  caption="派工受理状态" convert="ts_status"/>
+					<youi:fieldText property="tsTelephone"  caption="派工人员电话号码"/>
+					<youi:fieldText property="tsName"  caption="派工人员"/>
+				</youi:fieldLayout>
+				<youi:button name="agree" caption="接单" icon="edit" active="1"/>
+				<youi:button name="refuse" caption="拒单" icon="edit" active="1"/>
+				<youi:button name="putfrom" caption="填报维修费用清单" icon="edit" active="1"/>
+				
+				<youi:gridCol property="tsName"  caption="派工人员" width="15%"/>
+				<youi:gridCol property="tsStatus"  caption="派工受理状态" width="15%" convert="ts_status"/>
+				<youi:gridCol property="tsTelephone"  caption="派工人员电话号码" width="15%"/>
+				<youi:gridCol property="propertyservicemanagerBx.bxComp" caption="报修企业" width="15%"/>
+				<youi:gridCol property="propertyservicemanagerBx.bxRemark" caption="报修描述" width="20%"/>
+				<youi:gridCol property="tsRemark"  caption="备注" width="20%"/>
+				<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
+					<youi:button name="edit" caption="修改"/>
+					<youi:button name="remove" caption="删除"/>
+				</youi:gridCol>
+			</youi:grid>
+	</youi:cell>
 		
-		<youi:gridCol property="tsName"  caption="派工人员" width="15%"/>
-		<youi:gridCol property="tsStatus"  caption="派工受理状态" width="15%" convert="ts_status"/>
-		<youi:gridCol property="tsTelephone"  caption="派工人员电话号码" width="15%"/>
-		<youi:gridCol property="propertyservicemanagerBx.bxComp" caption="报修企业" width="15%"/>
-		<youi:gridCol property="propertyservicemanagerBx.bxRemark" caption="报修描述" width="20%"/>
-		<youi:gridCol property="tsRemark"  caption="备注" width="20%"/>
-		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
-			<youi:button name="edit" caption="修改"/>
-			<youi:button name="remove" caption="删除"/>
-		</youi:gridCol>
-	</youi:grid>
-	
+	<youi:cell>
+		<youi:grid id="grid_propertyservicemanagerSer" idKeys="serId" caption="费用清单列表"  panel="false"
+				src="esb/web/propertyservicemanagerSerManager/getPagerPropertyservicemanagerSersByTs.json" dataFormId="form_propertyservicemanagerSer"
+				editSrc="esb/web/propertyservicemanagerSerManager/getPropertyservicemanagerSer.json" edit="NOT" remove="NOT" showNum="true" add="NOT"
+				reset="NOT" height="320" submit="NOT" parentId="grid_propertyservicemanagerTs" parentAttr="propertyservicemanagerTs"
+				removeSrc="esb/web/propertyservicemanagerSerManager/removePropertyservicemanagerSer.json">
+			<youi:gridCol property="propertyservicemanagerTs.tsName" caption="维修人" width="10%"/>
+			<youi:gridCol property="propertyservicemanagerTs.tsTelephone" caption="维修人电话" width="15%"/>
+			<youi:gridCol property="propertyservicemanagerTs.propertyservicemanagerBx.bxComp" caption="报修企业" width="20%"/>
+			<youi:gridCol property="serName"  caption="材料名称" width="20%" convert="ser_name"/>
+			<youi:gridCol property="serPrice"  caption="材料价格" width="10%"/>
+			<youi:gridCol property="serType"  caption="材料类别" width="15%" convert="ser_type"/>
+		</youi:grid>
+	</youi:cell>
+	</youi:table>
 	<!-- form-派工维修记录编辑 -->
 	<youi:form dialog="true" caption="派工维修记录" id="form_propertyservicemanagerTs" action="esb/web/propertyservicemanagerTsManager/savePropertyservicemanagerTs.json">
 		<youi:fieldLayout prefix="record" labelWidths="120,120">

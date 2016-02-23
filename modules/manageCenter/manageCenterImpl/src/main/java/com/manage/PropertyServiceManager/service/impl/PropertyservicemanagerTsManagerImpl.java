@@ -18,6 +18,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.Assert;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
@@ -64,6 +65,19 @@ public class PropertyservicemanagerTsManagerImpl extends BaseManagerImpl impleme
 			@OrderCollection Collection<Order> orders)  throws BusException{
 		PagerRecords pagerRecords = propertyservicemanagerTsDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
+	}
+	
+	//根据报修记录获取派工记录列表
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@EsbServiceMapping
+	public PagerRecords getPagerPropertyservicemanagerTssByBx(Pager pager,//分页条件
+			PropertyservicemanagerBx bx,
+			@OrderCollection Collection<Order> orders)  throws BusException{
+	     Assert.notNull(bx, "物业报修条件不能为空！");
+	     Assert.notNull(bx.getBxId(), "物业报修中bxId不能为空！");
+	     Collection conditions = new ArrayList();
+	     conditions.add(ConditionUtils.getCondition("propertyservicemanagerBx.bxId", "EQUALS", bx.getBxId()));
+		return propertyservicemanagerTsDao.findByPager(pager, conditions, orders);
 	}
     /**
      * 保存对象

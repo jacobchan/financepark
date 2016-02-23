@@ -12,8 +12,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSer;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTs;
 
 public interface PropertyservicemanagerSerManager extends BaseManager{
 
@@ -37,6 +37,15 @@ public interface PropertyservicemanagerSerManager extends BaseManager{
 	public PagerRecords getPagerPropertyservicemanagerSers(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders) throws BusException;
+	
+	/**
+	 * 分页查询用户
+	 * @return 分页对象
+	 */
+	public PagerRecords getPagerPropertyservicemanagerSersByTs(Pager pager,//分页条件
+			PropertyservicemanagerTs ts,
+			Collection<Order> orders) throws BusException;
+	
     /**
      * 保存并返回对象
      */
