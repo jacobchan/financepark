@@ -75,6 +75,16 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 //    	}else{//新增
 //    		
 //    	}
+    	if(o.getBxStatus().equals("05")){
+    		OrdermanagerUserorder order = new OrdermanagerUserorder();
+			order.setUserorderAmount(o.getBxAmount());
+			order.setUserorderCode("1111111");
+			order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+			order.setUserorderProject("物业报修");
+			order.setBxId(o.getBxId());
+			order.setUserorderBuyUser(o.getBxComp());
+			ordermanagerUserorderDao.save(order);
+    	}
     	return propertyservicemanagerBxDao.save(o);
     }
 
@@ -115,15 +125,7 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
     		if(bxstatus.equals("00")){//待受理-->已受理
     			bx.setBxStatus("01");
     		}else if(bxstatus.equals("06")){
-    			bx.setBxStatus("07");//生成订单
-    			OrdermanagerUserorder order = new OrdermanagerUserorder();
-    			order.setUserorderAmount(bx.getBxAmount());
-    			order.setUserorderCode("1111111");
-    			order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    			order.setUserorderProject("物业报修");
-    			order.setBxId(id);
-    			order.setUserorderBuyUser(bx.getBxComp());
-    			ordermanagerUserorderDao.save(order);
+    			bx.setBxStatus("07");//
     		}
     	}
     	propertyservicemanagerBxDao.save(bx);

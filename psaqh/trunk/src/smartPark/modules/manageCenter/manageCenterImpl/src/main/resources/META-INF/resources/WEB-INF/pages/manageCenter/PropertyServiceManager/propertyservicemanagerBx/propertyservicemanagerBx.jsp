@@ -1,46 +1,67 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
-	<youi:grid id="grid_propertyservicemanagerBx" idKeys="bxId" caption="物业报修记录列表"  panel="false"
-				src="esb/web/propertyservicemanagerBxManager/getPagerPropertyservicemanagerBxs.json" dataFormId="form_propertyservicemanagerBx"
-				editSrc="esb/web/propertyservicemanagerBxManager/getPropertyservicemanagerBx.json" edit="NOT" remove="NOT" showCheckbox="true"
-				removeSrc="esb/web/propertyservicemanagerBxManager/removePropertyservicemanagerBx.json">
-		<youi:fieldLayout labelWidths="120,120">
-			<%-- <youi:fieldText property="bxRemark"  caption="描述"/>
-			<youi:fieldText property="bxAddress"  caption="维修地址"/> --%>
-			<youi:fieldSelect property="bxStatus"  caption="报修状态" convert="bx_status"/>
-			<youi:fieldSelect property="bxWay"  caption="报修方式" convert="bx_way"/>
-			<youi:fieldSelect property="bxType"  caption="报修类型" convert="bx_type"/>
+	<youi:table columns="1">
+		<youi:cell>
+			<youi:grid id="grid_propertyservicemanagerBx" idKeys="bxId" caption="物业报修记录列表"  panel="false"
+						src="esb/web/propertyservicemanagerBxManager/getPagerPropertyservicemanagerBxs.json" dataFormId="form_propertyservicemanagerBx"
+						editSrc="esb/web/propertyservicemanagerBxManager/getPropertyservicemanagerBx.json" 
+						edit="NOT" remove="NOT" showCheckbox="true"	height="420" 
+						removeSrc="esb/web/propertyservicemanagerBxManager/removePropertyservicemanagerBx.json">
+				<youi:fieldLayout labelWidths="120,120">
+					<%-- <youi:fieldText property="bxRemark"  caption="描述"/>
+					<youi:fieldText property="bxAddress"  caption="维修地址"/> --%>
+					<youi:fieldSelect property="bxStatus"  caption="报修状态" convert="bx_status"/>
+					<youi:fieldSelect property="bxWay"  caption="报修方式" convert="bx_way"/>
+					<youi:fieldSelect property="bxType"  caption="报修类型" convert="bx_type"/>
+					
+					<youi:fieldSelect property="bxProject"  caption="报修项目" convert="bx_project"/>
+				<%-- 	<youi:fieldText property="bxAmount"  caption="维修总价"/>
+					<youi:fieldText property="bxFujian"  caption="附件"/> --%>
+					<youi:fieldText property="bxComp"  caption="企业名称"/>
+				</youi:fieldLayout>
+					<youi:button name="refuse" caption="回绝" icon="edit" active="1"/>
+					<youi:button name="deal" caption="处理任务" icon="edit" active="1"/>
+					
+				<youi:gridCol property="bxComp"  caption="企业名称" width="12%"/>
+				<youi:gridCol property="bxAddress"  caption="维修地址" width="12%"/>
+				<youi:gridCol property="bxStatus"  caption="报修状态" convert="bx_status" width="10%"/>
+				<youi:gridCol property="bxWay"  caption="报修方式" width="8%" convert="bx_way"/>
+				<youi:gridCol property="bxType"  caption="报修类型" width="8%" convert="bx_type"/>
+				<youi:gridCol property="bxProject"  caption="报修项目" width="8%" convert="bx_project"/>
+				<youi:gridCol property="bxRemark"  caption="描述" width="24%"/>
+				<youi:gridCol property="bxAmount"  caption="维修总价" 	width="10%"/>
+				<youi:gridCol property="bxFujian"  caption="附件" width="8%"/>
 			
-			<youi:fieldSelect property="bxProject"  caption="报修项目" convert="bx_project"/>
-		<%-- 	<youi:fieldText property="bxAmount"  caption="维修总价"/>
-			<youi:fieldText property="bxFujian"  caption="附件"/> --%>
-			<youi:fieldText property="bxComp"  caption="企业名称"/>
-		</youi:fieldLayout>
-			<youi:button name="refuse" caption="回绝" icon="edit" active="1"/>
-			<youi:button name="deal" caption="处理任务" icon="edit" active="1"/>
-			
-		<youi:gridCol property="bxComp"  caption="企业名称" width="12%"/>
-		<youi:gridCol property="bxAddress"  caption="维修地址" width="12%"/>
-		<youi:gridCol property="bxStatus"  caption="报修状态" convert="bx_status" width="10%"/>
-		<youi:gridCol property="bxWay"  caption="报修方式" width="8%" convert="bx_way"/>
-		<youi:gridCol property="bxType"  caption="报修类型" width="8%" convert="bx_type"/>
-		<youi:gridCol property="bxProject"  caption="报修项目" width="8%" convert="bx_project"/>
-		<youi:gridCol property="bxRemark"  caption="描述" width="28%"/>
-		<youi:gridCol property="bxAmount"  caption="维修总价" 	width="10%"/>
-		<youi:gridCol property="bxFujian"  caption="附件" width="6%"/>
-	
-		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
-			<youi:button name="edit" caption="修改"/>
-			<youi:button name="remove" caption="删除"/>
-		</youi:gridCol>
-	</youi:grid>
+				<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
+					<youi:button name="edit" caption="修改"/>
+					<youi:button name="remove" caption="删除"/>
+				</youi:gridCol>
+			</youi:grid>
+		</youi:cell>
+		<youi:cell>
+			<youi:grid id="grid_propertyservicemanagerTs" idKeys="tsId" caption="派工维修记录列表"  panel="false"
+				src="esb/web/propertyservicemanagerTsManager/getPagerPropertyservicemanagerTssByBx.json" dataFormId="form_propertyservicemanagerTs"
+				editSrc="esb/web/propertyservicemanagerTsManager/getPropertyservicemanagerTs.json" 
+				edit="NOT" remove="NOT" submit="NOT" reset="NOT" showNum="true" add="NOT" height="320" 
+				removeSrc="esb/web/propertyservicemanagerTsManager/removePropertyservicemanagerTs.json"
+				parentId="grid_propertyservicemanagerBx" parentAttr="propertyservicemanagerBx">
+				<youi:gridCol property="tsName"  caption="派工人员" width="15%"/>
+				<youi:gridCol property="tsStatus"  caption="派工受理状态" width="15%" convert="ts_status"/>
+				<youi:gridCol property="tsTelephone"  caption="派工人员电话号码" width="15%"/>
+				<youi:gridCol property="propertyservicemanagerBx.bxComp" caption="报修企业" width="15%"/>
+				<youi:gridCol property="propertyservicemanagerBx.bxRemark" caption="报修描述" width="20%"/>
+				<youi:gridCol property="tsRemark"  caption="备注" width="20%"/>
+			</youi:grid>
+		</youi:cell>
+	</youi:table>
 	
 	<!-- form-物业报修记录编辑 -->
 	<youi:form dialog="true" caption="物业报修记录" id="form_propertyservicemanagerBx" action="esb/web/propertyservicemanagerBxManager/savePropertyservicemanagerBx.json">
 		<youi:fieldLayout prefix="record" labelWidths="120,120">
 			<youi:fieldHidden property="bxId" caption="ID"/>
 			<youi:fieldText property="bxComp"  caption="企业名称"/>
+			<%-- <youi:fieldSelect property="bxComp" caption="企业名称" src="/memberInformationManager/getMemberInformations.json" code="memberName" show="memberName" notNull="true" /> --%>
 			<youi:fieldText property="bxAddress"  caption="维修地址"/>
 			<youi:fieldSelect property="bxStatus"  caption="报修状态" convert="bx_status"/>
 			<youi:fieldSelect property="bxWay"  caption="报修方式" convert="bx_way"/>
@@ -102,8 +123,9 @@
                         }
                     });
                 }else if(bxstatus=='01'){
-                    $elem('recordTs_propertyservicemanagerBx_bxId',pageId).fieldValue(selectedRecord.bxId);
-                    $elem('form_propertyservicemanagerTs',pageId).form('open');
+                    //$elem('recordTs_propertyservicemanagerBx_bxId',pageId).fieldValue(selectedRecord.bxId);
+                    $elem('form_propertyservicemanagerTs',pageId).form("reset")
+					.form('fillRecord',{propertyservicemanagerBx:{bxId:selectedRecord['bxId']}}).form('open');
                 }else if(bxstatus=='02'||bxstatus=='03'){
                     alert("维修人员处理中!");
                 }else if(bxstatus=='04'){
