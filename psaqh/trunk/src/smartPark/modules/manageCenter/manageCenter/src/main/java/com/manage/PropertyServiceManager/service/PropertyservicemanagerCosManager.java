@@ -12,7 +12,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos;
 
 public interface PropertyservicemanagerCosManager extends BaseManager{
@@ -63,4 +62,10 @@ public interface PropertyservicemanagerCosManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitPropertyservicemanagerCos(String propertyName,Object value) throws BusException;
+	
+	/**
+     * 根据id修改投诉状态
+     * @param ids
+     */
+	public void upCosbyId(String id,String code) throws BusException;
 }

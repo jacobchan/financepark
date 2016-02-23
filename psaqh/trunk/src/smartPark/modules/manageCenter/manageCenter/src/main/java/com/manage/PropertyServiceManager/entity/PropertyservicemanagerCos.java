@@ -4,10 +4,11 @@
 package com.manage.PropertyServiceManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: 物业投诉记录表
@@ -54,10 +55,10 @@ public class PropertyservicemanagerCos implements Domain{
 	@Column(name = "COS_BOOL_")
 	@Length(max=2)
 	private String cosBool;//是否接受回访
-
-	@Column(name = "MEMBER_ID_")
-	@Length(max=36)
-	private String memberId;//会员用户ID
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="MEMBER_ID_")
+	private MemberInformation memberInformation;//投诉ID
 	
 	public String getCosTime(){
 		return this.cosTime;
@@ -115,16 +116,15 @@ public class PropertyservicemanagerCos implements Domain{
 	public void setCosBool(String cosBool){
 		this.cosBool = cosBool;
 	}
-	public String getMemberId(){
-		return this.memberId;
+	
+	public MemberInformation getMemberInformation() {
+		return memberInformation;
 	}
-	
-	public void setMemberId(String memberId){
-		this.memberId = memberId;
+
+	public void setMemberInformation(MemberInformation memberInformation) {
+		this.memberInformation = memberInformation;
 	}
-	
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -137,7 +137,6 @@ public class PropertyservicemanagerCos implements Domain{
 		result = prime * result + ((cosCode == null) ? 0 : cosCode.hashCode());
 		result = prime * result + ((cosStatus == null) ? 0 : cosStatus.hashCode());
 		result = prime * result + ((cosBool == null) ? 0 : cosBool.hashCode());
-		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
 		return result;
 	}
 	
@@ -189,11 +188,6 @@ public class PropertyservicemanagerCos implements Domain{
 			if (other.cosBool != null)
 				return false;
 		} else if (!cosBool.equals(other.cosBool))
-			return false;
-		if (memberId == null) {
-			if (other.memberId != null)
-				return false;
-		} else if (!memberId.equals(other.memberId))
 			return false;
 		return true;
 	}
