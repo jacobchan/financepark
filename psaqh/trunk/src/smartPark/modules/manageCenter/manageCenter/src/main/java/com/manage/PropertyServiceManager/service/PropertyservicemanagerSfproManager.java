@@ -13,6 +13,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.DomainCollection;
 import com.gsoft.framework.esb.annotation.OrderCollection;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCharge;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSfpro;
@@ -74,4 +75,9 @@ public interface PropertyservicemanagerSfproManager extends BaseManager{
      * 根据收费登记获取收费登记项目金额总和
      */
 	public BigDecimal getChargeAmountByCharge(PropertyservicemanagerCharge pc);
+	/**
+     * 保存物业收费登记项目
+     */
+	public void saveChargeSfpro(String chargeId,String chargeIsbool,String chargeCreatetime,
+			String chargeBedate,String chargeEndate,@DomainCollection(domainClazz=PropertyservicemanagerSfpro.class) List<PropertyservicemanagerSfpro> sfproList);
 }
