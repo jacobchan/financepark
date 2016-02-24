@@ -13,7 +13,7 @@
 			<youi:fieldSelect property="enterrecStatus"  caption="预约记录状态" convert="enterrecStatus"/>
 			<youi:fieldCalendar property="enteringDate"  caption="预约时间日期" textFormat="yyyy-MM-dd" format="yyyy-MM-dd"/>
 		</youi:fieldLayout>
-		<youi:button name="changeStatues" caption="授理" active="1" ></youi:button> 
+		<youi:button name="changeStatues" caption="授理" icon="edit" active="1" ></youi:button> 
 		<youi:gridCol property="enteringName"  caption="入驻申请人" width="100"/>
 		<%-- <youi:gridCol property="enteringTelephone"  caption="入驻联系电话" width="100"/> --%>
 
