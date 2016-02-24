@@ -64,4 +64,14 @@ public interface EnterpriseEmployeesManager extends BaseManager{
      */
 	public boolean exsitEnterpriseEmployees(String propertyName,Object value) throws BusException;
 	
+	/**
+	 * 接受企业邀请成为员工
+	 * @param rzId 企业id
+	 * @param phone 会员电话
+	 * @param code 邀请码
+	 * @return
+	 * @throws BusException
+	 */
+	public EnterpriseEmployees acceptEnterpriseInvitation(String rzId, String phone, String code) throws BusException;
+	
 }
