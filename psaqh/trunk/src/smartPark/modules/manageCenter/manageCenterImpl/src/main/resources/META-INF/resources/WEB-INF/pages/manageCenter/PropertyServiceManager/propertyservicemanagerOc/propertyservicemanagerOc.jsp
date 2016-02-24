@@ -38,7 +38,7 @@
 			<youi:fieldText property="ocComp"  caption="所属企业名称"/>
 			<youi:fieldText property="ocRemark"  caption="一卡通其他说明"/>
 			<youi:fieldText property="ocNumber"  caption="一卡通号码"/>
-			<youi:fieldText property="ocId"  caption="一卡通预约记录"/>
+			<youi:fieldHidden property="ocId"  caption="一卡通预约记录"/>
 			<youi:fieldCalendar property="ocDate"  caption="一卡通预约时间"/>
 			<youi:fieldText property="ocAddree"  caption="选择地址"/>
 			<youi:fieldText property="ocWay"  caption="一卡通办理方式"/>
