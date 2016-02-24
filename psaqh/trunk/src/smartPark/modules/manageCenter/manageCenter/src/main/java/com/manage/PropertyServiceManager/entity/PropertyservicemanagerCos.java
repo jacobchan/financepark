@@ -58,7 +58,7 @@ public class PropertyservicemanagerCos implements Domain{
 	
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="MEMBER_ID_")
-	private MemberInformation memberInformation;//投诉ID
+	private MemberInformation memberInformation;//会员ID
 	
 	public String getCosTime(){
 		return this.cosTime;
