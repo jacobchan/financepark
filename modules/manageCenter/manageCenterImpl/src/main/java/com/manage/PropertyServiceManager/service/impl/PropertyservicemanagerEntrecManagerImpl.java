@@ -89,17 +89,29 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
     	if(isUpdate){//修改
     		PropertyservicemanagerEntrec entrec=propertyservicemanagerEntrecDao.get(propertyservicemanagerEntreId);
     		String enteringId =entrec.getPropertyservicemanagerEntering().getEnteringId();
-    		if(!enteringId.equals(propertyservicemanagerEnteringId)){
-    			PropertyservicemanagerEntering enteringBefore=propertyservicemanagerEnteringDao.get(propertyservicemanagerEnteringId);
+    		if(!enteringId.equals(propertyservicemanagerEnteringId)){//变更预约
+    			
+    			//修改后的
+    			PropertyservicemanagerEntering enteringAfter=propertyservicemanagerEnteringDao.get(propertyservicemanagerEnteringId);
+        		//修改可办理预约表中的剩余预约数量和已预约数量
+        		if(enteringAfter.getEnteringRemain().equals("1")){//判断可办理预约表中剩余预约数量是否还有值
+        			enteringAfter.setEnteringStatus("02");//剩余数量为0，修改可预约状态为预约已满
+        		}
+        		enteringAfter.setEnteringRemain(String.valueOf(Integer.valueOf(enteringAfter.getEnteringRemain())-1));//剩余预约数量
+        		enteringAfter.setEnteringAlre(String.valueOf(Integer.valueOf(enteringAfter.getEnteringAlre())+1));//已预约数量
+        		propertyservicemanagerEnteringDao.save(enteringAfter);
+        		
+        		//修改前的
+        		PropertyservicemanagerEntering enteringBefore=propertyservicemanagerEnteringDao.get(enteringId);
         		//修改可办理预约表中的剩余预约数量和已预约数量
         		if(enteringBefore.getEnteringRemain().equals("1")){//判断可办理预约表中剩余预约数量是否还有值
         			enteringBefore.setEnteringStatus("02");//剩余数量为0，修改可预约状态为预约已满
         		}
-        		enteringBefore.setEnteringRemain(String.valueOf(Integer.valueOf(enteringBefore.getEnteringRemain())-1));//剩余预约数量
-        		enteringBefore.setEnteringAlre(String.valueOf(Integer.valueOf(enteringBefore.getEnteringAlre())+1));//已预约数量
+        		enteringBefore.setEnteringRemain(String.valueOf(Integer.valueOf(enteringBefore.getEnteringRemain())+1));//剩余预约数量
+        		enteringBefore.setEnteringAlre(String.valueOf(Integer.valueOf(enteringBefore.getEnteringAlre())-1));//已预约数量
         		propertyservicemanagerEnteringDao.save(enteringBefore);
         		
-        		o.setPropertyservicemanagerEntering(enteringBefore);
+        		o.setPropertyservicemanagerEntering(enteringAfter);
     		}
     	}else{//新增
 
