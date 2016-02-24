@@ -25,7 +25,7 @@ public class EnterpriseInvitation implements Domain {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "RZ_ID_")
-	private EnterbusinessmanagerRz enterbusinessmanagerRz;// 投诉ID
+	private EnterbusinessmanagerRz enterbusinessmanagerRz;// 企业ID
 
 	@Column(name = "INVITATION_TELEPHONE")
 	@Length(max = 32)
