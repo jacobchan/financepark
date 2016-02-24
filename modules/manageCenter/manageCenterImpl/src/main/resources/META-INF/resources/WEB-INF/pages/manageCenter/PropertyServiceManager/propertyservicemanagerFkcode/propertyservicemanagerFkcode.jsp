@@ -39,7 +39,7 @@
 			<youi:fieldCalendar property="fkcodeTime"  caption="到访时间"/>
 			<youi:fieldText property="memberId"  caption="会员用户ID"/>
 			<youi:fieldSelect property="fkcodeSex"  caption="性别" convert="sex" />
-			<youi:fieldText property="fkcodeId"  caption="访客申请ID"/>
+			<youi:fieldHidden property="fkcodeId"  caption="访客申请ID"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
