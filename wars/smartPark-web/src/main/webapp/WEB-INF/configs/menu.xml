@@ -78,7 +78,7 @@
 		<menu id="320603" text="发布流程" href="page/commonCenter.NewsManager.nmIssueflow/nmIssueflow.html"></menu>
 		<menu id="320602" text="发布模板" href="page/commonCenter.NewsManager.nmIssuetempalate/nmIssuetempalate.html"></menu>
 		<menu id="320604" text="新闻政策" href="page/commonCenter.NewsManager.nmIssuenews/nmIssuenews.html"></menu>
-		<menu id="061000" text="政策新闻" href="page/commonCenter.NewsManager.nmIssuenews/zsIssuenews.html"></menu>
+		<menu id="061000" text="政策申请记录" href="page/manageCenter.PolicyManager.policyApply/policyApply.html"></menu>
 		<!-- <menu id="030108" text="系统日记" href="admin/transLog/index.html"></menu> -->
 	</menu>
 	<menu id="340000" text="会员中心">
