@@ -38,7 +38,7 @@
 	
 	<!-- form-融资信息编辑 -->
 	<youi:form dialog="true" caption="融资信息" id="form_informationFinancing" action="esb/web/informationFinancingManager/saveInformationFinancing.json">
-		<youi:fieldLayout prefix="record">
+		<youi:fieldLayout prefix="record" labelWidths="122">
 			<youi:fieldText property="financingSub"  caption="投资主体"/>
 			<youi:fieldSelect property="financingStatus"  caption="发布状态" convert="financingStatus"/>
 			<youi:fieldText property="financingName"  caption="融资企业名称"/>
