@@ -94,12 +94,13 @@ public class NmIssueflowManagerImpl extends BaseManagerImpl implements NmIssuefl
     			throw new BusException("当前状态已存在");
     		}
     	}
-    	//没一个当前状态只能某一个状态的上步状态
+    	//每一个当前状态只能是某一个状态的上步状态
 		String lastStatus = o.getIssueFlowNStatus();//上步状态
 		if(StringUtils.isEmpty(lastStatus)){
     		Collection<Condition> conditions = new ArrayList<Condition>();
     		conditions.add(ConditionUtils.getCondition("issueFlowNStatus", Condition.IS_NULL, null));
     		conditions.add(ConditionUtils.getCondition("nmIssuetype.issueTypeId", Condition.EQUALS, issueType.getIssueTypeId()));
+    		conditions.add(ConditionUtils.getCondition("nmIssueflowId", Condition.NOT_EQUALS, nmIssueflowId));//
     		List<NmIssueflow> nmIssueflows = nmIssueflowDao.commonQuery(conditions, null);
     		if(nmIssueflows!=null&&nmIssueflows.size()>0){//只能有一个上步状态为空
     			throw new BusException("上步状态不能为空");
@@ -108,6 +109,7 @@ public class NmIssueflowManagerImpl extends BaseManagerImpl implements NmIssuefl
 			Collection<Condition> conditions = new ArrayList<Condition>();
 			conditions.add(ConditionUtils.getCondition("nmIssuetype.issueTypeId", Condition.EQUALS, issueType.getIssueTypeId()));
     		conditions.add(ConditionUtils.getCondition("issueFlowNStatus", Condition.EQUALS, lastStatus));
+    		conditions.add(ConditionUtils.getCondition("nmIssueflowId", Condition.NOT_EQUALS, nmIssueflowId));//
     		List<NmIssueflow> nmIssueflows = nmIssueflowDao.commonQuery(conditions, null);
     		if(nmIssueflows!=null&&nmIssueflows.size()>0){//只能有一个上步状态为空
     			throw new BusException("所选上步状态已被使用");
