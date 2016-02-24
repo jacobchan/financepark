@@ -30,7 +30,7 @@
 	<!-- form-产品信息编辑 -->
 	<youi:form dialog="true" caption="产品信息" id="form_informationProduct" action="esb/web/informationProductManager/saveInformationProduct.json">
 		<youi:fieldLayout prefix="record">
-			<%-- <youi:fieldText property="productId"  caption="ID"/> --%>
+			 <youi:fieldHidden property="productId"  caption="ID"/> 
 			<youi:fieldText property="productContent"  caption="产品描述"/>
 			<%-- <youi:fieldText property="productRe"  caption="企业ID"/> --%>
 			<youi:fieldSelect property="productRe" caption="企业ID" 
