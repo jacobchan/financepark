@@ -69,8 +69,9 @@ public interface EnterpriseEmployeesManager extends BaseManager{
 	 * @param rzId 企业id
 	 * @param phone 会员电话
 	 * @param code 邀请码
-	 * @return
+	 * @return EnterpriseEmployees
 	 * @throws BusException
+	 * @author Zhuyl
 	 */
 	public EnterpriseEmployees acceptEnterpriseInvitation(String rzId, String phone, String code) throws BusException;
 	
