@@ -2,6 +2,8 @@
  * 代码声明
  */
 package com.manage.EmployeeManager.service.impl;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Collection;
 
@@ -9,18 +11,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MemberManager.dao.MemberInformationDao;
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.security.fuc.dao.RoleDao;
+import com.gsoft.framework.security.fuc.entity.Role;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 import com.manage.EmployeeManager.entity.EnterpriseInvitation;
+import com.manage.EmployeeManager.entity.EnterpriseRole;
 import com.manage.EmployeeManager.dao.EnterpriseEmployeesDao;
 import com.manage.EmployeeManager.dao.EnterpriseInvitationDao;
+import com.manage.EmployeeManager.dao.EnterpriseRoleDao;
 import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
+import com.manage.EnterBusinessManager.dao.EnterbusinessmanagerRzDao;
+import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 @Service("enterpriseEmployeesManager")
 @Transactional
 public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements EnterpriseEmployeesManager{
@@ -28,6 +38,14 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 	private EnterpriseEmployeesDao enterpriseEmployeesDao;
 	@Autowired
 	private EnterpriseInvitationDao enterpriseInvitationDao;
+	@Autowired
+	private EnterbusinessmanagerRzDao enterbusinessmanagerRzDao;
+	@Autowired
+	private MemberInformationDao memberInformationDao;
+	@Autowired
+	private RoleDao roleDao;
+	@Autowired
+	private EnterpriseRoleDao enterpriseRoleDao;
     /**
      * 查询列表
      */
@@ -113,13 +131,33 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
     @EsbServiceMapping
 	public EnterpriseEmployees acceptEnterpriseInvitation(@ServiceParam(name="rzId") String rzId, @ServiceParam(name="phone") String phone, @ServiceParam(name="code") String code) throws BusException{
 		EnterpriseEmployees ems = new EnterpriseEmployees();
+		EnterpriseRole role = new EnterpriseRole();
+		EnterbusinessmanagerRz rz = enterbusinessmanagerRzDao.get(rzId);
 		String[] params = new String[]{"enterbusinessmanagerRz.rzId","invitationTelephone","invitationCode"};
 		Object[] values = new Object[]{rzId,phone,code};
 		List<EnterpriseInvitation> invitationList = enterpriseInvitationDao.getList(params, values);
 		if(invitationList.size()>0){
+			MemberInformation info = memberInformationDao.getObjectByUniqueProperty("memberPhoneNumber", phone);
+			ems.setEmployeesComId(rz);
+			ems.setMemberId(rz.getRzManager());
+			ems.setRzId(rzId);
+			ems.setEmployeesName(info.getMemberName());
+			ems.setEmployeesTelephone(phone);
+			ems.setEmployeesDepartment("1");
+			enterpriseEmployeesDao.save(ems);
 			
+			//企业角色
+			Timestamp createTime = new Timestamp(new Date().getTime());
+			String[] roleparams = new String[]{"roleId","roleType"};
+			Object[] rolevalues = new Object[]{"ROLE_USER","1"};
+			List<Role> le = roleDao.getList(roleparams, rolevalues);
+			role.setEnterpriseEmployees(ems);
+			role.setRole(le.get(0));
+			role.setCreateuser(info);
+			role.setCreatetime(createTime);
+			enterpriseRoleDao.save(role);
 		}else{
-			
+			System.out.println("不存在此邀请");
 		}
 		return ems;
 	}
