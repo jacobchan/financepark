@@ -3,8 +3,12 @@
 <youi:page>
 	
 	<youi:subpage
-		src="page/manageCenter.PropertyServiceManager.propertyservicemanagerCharge/sFproManage.html?propertyservicemanagerCharge.chargeId={chargeId}" 
-		subpageId="sFproManage" height="600" caption="物业收费登记">
+		src="page/manageCenter.PropertyServiceManager.propertyservicemanagerCharge/addSFproManage.html?propertyservicemanagerCharge.chargeId={chargeId}" 
+		subpageId="addSFproManage" height="600" caption="物业收费登记增加">
+	</youi:subpage>
+	<youi:subpage
+		src="page/manageCenter.PropertyServiceManager.propertyservicemanagerCharge/updateSFproManage.html?propertyservicemanagerCharge.chargeId={chargeId}" 
+		subpageId="updateSFproManage" height="600" caption="物业收费登记修改">
 	</youi:subpage>
 
 	<youi:grid id="grid_propertyservicemanagerCharge" idKeys="chargeId" caption="物业收费登记表列表"  panel="false" pageSize="2" add="NOT"
@@ -41,14 +45,14 @@
 	
 	<youi:func name="func_grid_sFproAdd">
 		var gridElement = $elem('grid_propertyservicemanagerCharge',pageId);
-		var subpageElement = $elem('subpage_sFproManage',pageId);
+		var subpageElement = $elem('subpage_addSFproManage',pageId);
 		var selectedRecord = gridElement.grid('getSelectedRecord');
 		//打开子页面
 		subpageElement.subpage('open',null,null,null);
 	</youi:func>
 	<youi:func name="func_grid_sFproUpdate">
 		var gridElement = $elem('grid_propertyservicemanagerCharge',pageId);
-		var subpageElement = $elem('subpage_sFproManage',pageId);
+		var subpageElement = $elem('subpage_updateSFproManage',pageId);
 		var selectedRecord = gridElement.grid('getSelectedRecord');
 		//打开子页面
 		subpageElement.subpage('open',selectedRecord,null,selectedRecord);
