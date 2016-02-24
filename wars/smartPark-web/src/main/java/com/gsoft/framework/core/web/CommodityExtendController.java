@@ -17,8 +17,6 @@ import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodityExtendValue;
 import com.common.purchasingManager.service.PurchasingmanagerCommodityExtendValueManager;
 import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
-import com.common.purchasingManager.service.impl.PurchasingmanagerCommodityExtendValueManagerImpl;
-import com.common.purchasingManager.service.impl.PurchasingmanagerCommodityManagerImpl;
 import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.web.view.DataModelAndView;
 
