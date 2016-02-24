@@ -16,7 +16,7 @@
 				editSrc="esb/web/propertyservicemanagerChargeManager/getPropertyservicemanagerCharge.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/propertyservicemanagerChargeManager/removePropertyservicemanagerCharge.json">
 		<youi:fieldLayout labelWidths="120,120">
-			<youi:fieldText property="bbmRoom.roomNo"  caption="单元编号"/>
+			<youi:fieldTree simple="false" popup="true" tree="${bbmRoomTree}" property="bbmRoom.roomNo"  caption="单元编号"/>
 			<youi:fieldText property="ordermanagerUserorder.userorderCode"  caption="用户订单编号"/>
 			<youi:fieldSelect property="chargeIsbool" convert="bool" caption="是否缴费"/>
 			<youi:fieldCalendar property="chargeCreatetime"  caption="登记日期" format="yyyy-MM-dd" textFormat="yyyy-MM-dd"/>
