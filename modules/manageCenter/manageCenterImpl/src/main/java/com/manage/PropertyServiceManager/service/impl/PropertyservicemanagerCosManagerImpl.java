@@ -71,6 +71,7 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
 //    	}else{//新增
 //    		
 //    	}
+    	o.setCosStatus("0");
     	return propertyservicemanagerCosDao.save(o);
     }
 
