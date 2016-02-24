@@ -16,11 +16,9 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.common.MessageCenter.entity.McMsgtype;
 import com.common.MessageCenter.dao.McMsgtypeDao;
 import com.common.MessageCenter.service.McMsgtypeManager;
@@ -60,6 +58,13 @@ public class McMsgtypeManagerImpl extends BaseManagerImpl implements McMsgtypeMa
 			@ConditionCollection(domainClazz=McMsgtype.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
 		PagerRecords pagerRecords = mcMsgtypeDao.findByPager(pager, conditions, orders);
+		List<McMsgtype> msgTypes = pagerRecords.getRecords();
+		for(McMsgtype msgType:msgTypes){
+			if(StringUtils.isNotEmpty(msgType.getMsgTypeParent())){
+				McMsgtype msgType_ = mcMsgtypeDao.get(msgType.getMsgTypeParent());
+				msgType.setParentTypeCaption(msgType_.getMsgTypeCaption());
+			}
+		}
 		return pagerRecords;
 	}
     /**

@@ -3,27 +3,30 @@
  */
 package com.common.MessageCenter.service.impl;
 
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MessageCenter.dao.McMsgtempalateDao;
+import com.common.MessageCenter.entity.McMsgtempalate;
+import com.common.MessageCenter.service.McMsgtempalateManager;
+import com.common.MessageCenter.util.MessageGeneratUtils;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
-import com.gsoft.framework.esb.annotation.*;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
-import com.common.MessageCenter.entity.McMsgtempalate;
-import com.common.MessageCenter.dao.McMsgtempalateDao;
-import com.common.MessageCenter.service.McMsgtempalateManager;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.ServiceParam;
+import com.gsoft.framework.security.agt.service.UserManager;
 
 @Service("mcMsgtempalateManager")
 @Transactional
@@ -101,6 +104,10 @@ public class McMsgtempalateManagerImpl extends BaseManagerImpl implements McMsgt
     
     public boolean exsitMcMsgtempalate(String propertyName,Object value) throws BusException{
 		return mcMsgtempalateDao.exists(propertyName,value);
+	}
+	@Override
+	public String genMsgContent(McMsgtempalate msgtempalate,Map<String,String> replaceMap) throws BusException {
+		return com.gsoft.common.util.StringUtils.replaceAllString(msgtempalate.getMsgTempalateContent(), MessageGeneratUtils.placeholders, replaceMap);
 	}
 
 }
