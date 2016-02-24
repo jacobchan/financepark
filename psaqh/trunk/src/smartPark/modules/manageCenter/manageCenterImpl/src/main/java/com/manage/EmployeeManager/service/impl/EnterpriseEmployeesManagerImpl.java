@@ -2,8 +2,6 @@
  * 代码声明
  */
 package com.manage.EmployeeManager.service.impl;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -13,28 +11,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
-//import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-import com.gsoft.framework.util.ConditionUtils;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
+import com.manage.EmployeeManager.entity.EnterpriseInvitation;
 import com.manage.EmployeeManager.dao.EnterpriseEmployeesDao;
+import com.manage.EmployeeManager.dao.EnterpriseInvitationDao;
 import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
-import com.manage.EnterBusinessManager.dao.EnterbusinessmanagerRzDao;
-import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
-import com.manage.EnterBusinessManager.service.EnterbusinessmanagerRzManager;
-
 @Service("enterpriseEmployeesManager")
 @Transactional
 public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements EnterpriseEmployeesManager{
 	@Autowired
 	private EnterpriseEmployeesDao enterpriseEmployeesDao;
+	@Autowired
+	private EnterpriseInvitationDao enterpriseInvitationDao;
     /**
      * 查询列表
      */
@@ -103,8 +96,27 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 		return enterpriseEmployeesDao.exists(id);
 	}
     
+    @EsbServiceMapping
     public boolean exsitEnterpriseEmployees(String propertyName,Object value) throws BusException{
 		return enterpriseEmployeesDao.exists(propertyName,value);
 	}
     
+    /**
+	 * 接受企业邀请成为员工
+	 * @param rzId 企业id
+	 * @param phone 会员电话
+	 * @param code 邀请码
+	 * @return
+	 * @throws BusException
+	 */
+    @EsbServiceMapping
+	public EnterpriseEmployees acceptEnterpriseInvitation(@ServiceParam(name="rzId") String rzId, @ServiceParam(name="phone") String phone, @ServiceParam(name="code") String code) throws BusException{
+		System.out.println("参数值"+rzId+","+phone+","+code);
+		EnterpriseEmployees ems = new EnterpriseEmployees();
+		String[] params = new String[]{"rzId","phone","code"};
+		Object[] values = new Object[]{rzId,phone,code};
+		List<EnterpriseInvitation> invitationList = enterpriseInvitationDao.getList(params, values);
+		System.out.println(invitationList.size());
+		return ems;
+	}
 }
