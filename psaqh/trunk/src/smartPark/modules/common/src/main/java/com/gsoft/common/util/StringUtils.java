@@ -17,7 +17,7 @@ public class StringUtils {
 	 */
 	public static String replaceChar(String source, char c, String... params) {
 		if (source != null && !"".equals(source)) {
-			String[] tempArray = source.split("" + c + "");
+			String[] tempArray = (source+"_").split("" + c + "");
 			int countC = tempArray.length - 1;
 			if (countC == params.length) {
 				Pattern pattern = Pattern.compile("" + c + "");
