@@ -53,16 +53,7 @@ public class ActivityDocumentManagerImpl extends BaseManagerImpl implements Acti
 	private ActivityDocumentDao activityDocumentDao;
 	@Autowired
 	private FileStoreManager fileStoreManager;
-    /**
-      * office中各种格式
-      *       */
-    private static final String[] OFFICE_POSTFIXS = { "doc", "docx", "xls",
-             "xlsx", "ppt", "pptx" };
-    private ArrayList<String> Office_Formats = new ArrayList<String>();
-     /**
-      * pdf格式
-      */
-     private static final String PDF_POSTFIX= "pdf";
+
      
     /**
      * 查询列表
@@ -148,7 +139,7 @@ public class ActivityDocumentManagerImpl extends BaseManagerImpl implements Acti
     	String getFilename = file.getName();
     	String parent=file.getParent();
     	String fileName = getFilename .substring(0,getFilename .lastIndexOf("."));
-    	DocConverter.getSwfPath(filePath);
+    	DocConverter.getSwfPath("src/main/webapp/upload/"+filePath);
     	String swfPath="upload/"+parent+"/"+fileName+".swf";
     	return swfPath;
 	
