@@ -6,7 +6,9 @@
 				editSrc="esb/web/informationNoticeManager/getInformationNotice.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/informationNoticeManager/removeInformationNotice.json">
 		<youi:fieldLayout>
-			<youi:fieldText property="noticeRe"  caption="企业信息ID"/>
+			<%-- <youi:fieldText property="noticeRe"  caption="企业信息ID"/> --%>
+	     	<youi:fieldSelect property="noticeRe" caption="企业信息ID" 
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
 
 		<%--	<youi:fieldText property="noticeSum"  caption="收藏次数"/>
 			 <youi:fieldText property="noticeCount"  caption="浏览次数"/> --%>
@@ -16,9 +18,7 @@
 			<%-- <youi:fieldText property="noticeContent"  caption="内容"/> --%>
 		</youi:fieldLayout>
 		<%-- <youi:gridCol property="noticeRe"  caption="企业信息ID"/> --%>
-		<youi:fieldSelect property="legalRe" caption="企业信息ID" 
-				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
-
+		
 		<youi:gridCol property="noticeSum"  caption="收藏次数"/>
 		<youi:gridCol property="noticeCount"  caption="浏览次数"/>
 		<youi:gridCol property="noticeTime"  caption="发布时间"/>
@@ -34,15 +34,18 @@
 	<!-- form-公告信息编辑 -->
 	<youi:form dialog="true" caption="公告信息" id="form_informationNotice" action="esb/web/informationNoticeManager/saveInformationNotice.json">
 		<youi:fieldLayout prefix="record">
+		<youi:fieldh property="noticeRe"  caption="企业信息ID"/>
+		
+		
 			<%-- <youi:fieldText property="noticeRe"  caption="企业信息ID"/> --%>
-			<youi:fieldSelect property="legalRe" caption="企业信息ID" 
+			<youi:fieldSelect property="noticeRe" caption="企业信息ID" 
 				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
-			<%-- <youi:fieldText property="noticeId"  caption="ID"/> --%>
-			<%-- <youi:fieldText property="noticeSum"  caption="收藏次数"/> --%>
-			<%-- <youi:fieldText property="noticeCount"  caption="浏览次数"/> --%>
+			 <youi:fieldHidden property="noticeId"  caption="ID"/>
+			 <youi:fieldText property="noticeSum"  caption="收藏次数"/> 
+			 <youi:fieldText property="noticeCount"  caption="浏览次数"/> 
 			<youi:fieldText property="noticeTime"  caption="发布时间"/>
 			<youi:fieldText property="noticeTitle"  caption="标题"/>
-			<%-- <youi:fieldText property="rzId"  caption="ID2"/> --%>
+			 <youi:fieldText property="rzId"  caption="ID2"/> 
 			<youi:fieldText property="noticeContent"  caption="内容"/>
 		</youi:fieldLayout>
 	</youi:form>
