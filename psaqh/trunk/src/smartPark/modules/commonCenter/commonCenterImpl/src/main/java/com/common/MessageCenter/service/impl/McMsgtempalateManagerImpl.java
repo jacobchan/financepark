@@ -26,7 +26,6 @@ import com.gsoft.framework.esb.annotation.ConditionCollection;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.OrderCollection;
 import com.gsoft.framework.esb.annotation.ServiceParam;
-import com.gsoft.framework.security.agt.service.UserManager;
 
 @Service("mcMsgtempalateManager")
 @Transactional
