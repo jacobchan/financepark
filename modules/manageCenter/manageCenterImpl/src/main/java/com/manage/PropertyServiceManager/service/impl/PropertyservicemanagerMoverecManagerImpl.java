@@ -16,12 +16,11 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFxtdc;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerMoverec;
+import com.manage.PropertyServiceManager.dao.PropertyservicemanagerFxtdcDao;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerMoverecDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerMoverecManager;
 
@@ -30,6 +29,8 @@ import com.manage.PropertyServiceManager.service.PropertyservicemanagerMoverecMa
 public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl implements PropertyservicemanagerMoverecManager{
 	@Autowired
 	private PropertyservicemanagerMoverecDao propertyservicemanagerMoverecDao;
+	@Autowired
+	private PropertyservicemanagerFxtdcDao propertyservicemanagerFxtdcDao ;
 	
     /**
      * 查询列表
@@ -74,7 +75,17 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
 //    	}else{//新增
 //    		
 //    	}
-    	return propertyservicemanagerMoverecDao.save(o);
+    	
+    	PropertyservicemanagerMoverec rec = propertyservicemanagerMoverecDao.save(o);
+    	if(rec!=null){
+    		PropertyservicemanagerFxtdc propertyservicemanagerFxtdc = new PropertyservicemanagerFxtdc() ;
+        	propertyservicemanagerFxtdc.setPropertyservicemanagerMoverec(rec);
+        	propertyservicemanagerFxtdcDao.save(propertyservicemanagerFxtdc);
+        	return rec;
+    	}else{
+    		return null;
+    	}
+    	
     }
 
     /**
