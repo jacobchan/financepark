@@ -33,7 +33,7 @@
 	
 	<!-- form-一卡通办理申请记录编辑 -->
 	<youi:form dialog="true" caption="一卡通办理申请记录" id="form_propertyservicemanagerOc" action="esb/web/propertyservicemanagerOcManager/savePropertyservicemanagerOc.json">
-		<youi:fieldLayout prefix="record">
+		<youi:fieldLayout prefix="record" labelWidths="122,122">
 			<youi:fieldText property="memberId"  caption="会员用户ID"/>
 			<youi:fieldText property="ocComp"  caption="所属企业名称"/>
 			<youi:fieldText property="ocRemark"  caption="一卡通其他说明"/>
