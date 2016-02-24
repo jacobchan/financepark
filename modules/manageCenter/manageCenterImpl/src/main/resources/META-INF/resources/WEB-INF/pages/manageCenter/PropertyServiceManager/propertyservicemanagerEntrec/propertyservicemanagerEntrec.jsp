@@ -13,6 +13,7 @@
 			<youi:fieldSelect property="enterrecStatus"  caption="预约记录状态" convert="enterrecStatus"/>
 			<youi:fieldCalendar property="enteringDate"  caption="预约时间日期" textFormat="yyyy-MM-dd" format="yyyy-MM-dd"/>
 		</youi:fieldLayout>
+		<youi:button name="changeStatues" caption="授理" active="1" ></youi:button> 
 		<youi:gridCol property="enteringName"  caption="入驻申请人" width="100"/>
 		<%-- <youi:gridCol property="enteringTelephone"  caption="入驻联系电话" width="100"/> --%>
 
@@ -26,7 +27,7 @@
 	</youi:grid>
 	
 	<!-- form-入驻服务办理预约记录表编辑 -->
-	<youi:form dialog="true" caption="入驻服务办理预约记录表" id="form_propertyservicemanagerEntrec" action="esb/web/propertyservicemanagerEntrecManager/enterApplication.json">
+	<youi:form dialog="true" caption="入驻服务办理预约记录表" id="form_propertyservicemanagerEntrec" action="esb/web/propertyservicemanagerEntrecManager/savePropertyservicemanagerEntrec.json">
 		<youi:fieldLayout prefix="record" labelWidths="90,100">
 			<youi:fieldSelect property="enteringName"  caption="入驻申请人" notNull="true" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberName" show="memberName"/>
 			<%-- <youi:fieldText property="enteringTelephone"  caption="入驻联系电话" expression="^1[3|4|5|8|9]{1}[0-9]{9,9}$" expressionMessage="请填写正确的手机号码" notNull="true"/>
@@ -51,6 +52,27 @@
 					$('#P_'+pageId+'_record_enteringDate').fieldValue(record.enteringDate);
                   } 
             })
+
+    </youi:func>
+    	<youi:func name = "func_grid_changeStatues">
+        var gridElement = $elem('grid_propertyservicemanagerEntrec',pageId),
+		selectedRecord = gridElement.grid('getSelectedRecord');
+      	var entrecId = selectedRecord.entrecId;
+        var enterrecStatus = selectedRecord.enterrecStatus;
+        if(enterrecStatus == '01'){
+             $.youi.ajaxUtil.ajax({
+				url:'/esb/web/propertyservicemanagerEntrecManager/enterApplication.json',
+				data:{entrecId:entrecId},
+				success:function(result){
+					alert("授理成功");
+                    $elem('grid_propertyservicemanagerEntrec',pageId).grid('pReload');
+                  } 
+            })
+        }else{
+            alert("已预约状态才能进行授理");
+
+        }
+			
 
     </youi:func>
 	<!--**********************************页面函数End**********************************-->
