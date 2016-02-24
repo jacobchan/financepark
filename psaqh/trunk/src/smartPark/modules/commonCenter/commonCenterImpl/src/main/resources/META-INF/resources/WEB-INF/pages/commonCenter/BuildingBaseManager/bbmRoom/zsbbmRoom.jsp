@@ -38,11 +38,14 @@
 	<!-- form-楼宇招商信息修改 -->
 	<youi:form dialog="true" caption="楼宇招商信息修改" id="form_bbmRoom" action="esb/web/bbmRoomManager/saveBbmRoom.json">
 		<youi:fieldLayout prefix="record" labelWidths="140,140">
-			<youi:fieldHidden property="roomId" caption="单元ID"></youi:fieldHidden>
+			<youi:fieldHidden property="roomId" caption="单元ID"/>
+			<youi:fieldHidden property="rentCharge" caption="物业_租金"/>
+			<youi:fieldHidden property="eneryCharge" caption="物业_电费"/>
+			<youi:fieldHidden property="waterCharge" caption="物业_水费"/>
+			
 			<youi:fieldText property="floor"  caption="所属楼层" readonly="true"/>
 			<youi:fieldText property="roomNo"  caption="单元编号" readonly="true"/>
-			<youi:fieldSelect property="status"  caption="使用状态" convert="floorUsingStatus" readonly="true"/>
-			
+			<youi:fieldSelect property="status"  caption="使用状态" convert="floorUsingStatus"/>
 			<youi:fieldText property="aspect"  caption="招商_朝向"/>
 			<youi:fieldSelect property="saleState"  caption="招商_销售状态" convert="saleState"/>
 			<youi:fieldText property="salesPrice"  caption="招商_单价"/>
