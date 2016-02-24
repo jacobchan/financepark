@@ -11,19 +11,18 @@
 		<youi:fieldLayout labelWidths="120,120">
 			<youi:fieldSelect property="employeesComId.rzId"
 				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json"
-				code="rzId" show="rzSign" caption="入驻企业" tooltips="入驻企业" />
+				code="rzId" show="rzMem" caption="入驻企业" tooltips="入驻企业" />
 			<youi:fieldText property="employeesDepartment" caption="所属部门" />
 			<youi:fieldText property="employeesTelephone" caption="员工电话" />
 			<youi:fieldText property="employeesName" caption="员工姓名" />
-			<youi:fieldText property="rzId" caption="入驻信息" />
-			<youi:fieldText property="memberId" caption="会员用户" />
+			<youi:fieldText property="rzId" caption="企业信息" />
+			<youi:fieldText property="memberId.memberNickname" caption="会员用户" />
 		</youi:fieldLayout>
-		<youi:gridCol property="employeesComId" caption="企业信息" width="120" />
 		<youi:gridCol property="employeesDepartment" caption="所属部门" width="120" />
 		<youi:gridCol property="employeesTelephone" caption="员工电话" width="120" />
 		<youi:gridCol property="employeesName" caption="员工姓名" width="120" />
-		<youi:gridCol property="rzId" caption="入驻信息" width="120" />
-		<youi:gridCol property="memberId" caption="会员用户" width="120" />
+		<youi:gridCol property="employeesComId.rzMem" caption="企业信息" width="120" />
+		<youi:gridCol property="memberId.memberNickname" caption="会员用户" width="120" />
 		<youi:gridCol width="60" fixed="true" property="button" type="button"
 			caption="操作">
 			<youi:button name="edit" caption="修改" />
@@ -36,12 +35,11 @@
 		action="esb/web/enterpriseEmployeesManager/saveEnterpriseEmployees.json">
 		<youi:fieldLayout prefix="record" labelWidths="120,120">
 			<youi:fieldHidden property="employeesId" caption="ID" />
-			<youi:fieldText property="employeesComId" caption="企业信息" />
 			<youi:fieldText property="employeesDepartment" caption="所属部门" />
 			<youi:fieldText property="employeesTelephone" caption="员工电话" />
 			<youi:fieldText property="employeesName" caption="员工姓名" />
-			<youi:fieldText property="rzId" caption="入驻信息" />
-			<youi:fieldText property="memberId" caption="会员用户" />
+			<youi:fieldText property="employeesComId.rzMem" caption="企业信息" />
+			<youi:fieldText property="memberId.memberNickname" caption="会员用户" />
 		</youi:fieldLayout>
 	</youi:form>
 
