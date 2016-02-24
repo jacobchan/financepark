@@ -5,7 +5,7 @@
 				src="esb/web/propertyservicemanagerFkcodeManager/getPagerPropertyservicemanagerFkcodes.json" dataFormId="form_propertyservicemanagerFkcode"
 				editSrc="esb/web/propertyservicemanagerFkcodeManager/getPropertyservicemanagerFkcode.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/propertyservicemanagerFkcodeManager/removePropertyservicemanagerFkcode.json">
-		<youi:fieldLayout>
+		<youi:fieldLayout labelWidths="122,122">
 			<youi:fieldText property="fkcodeTelephone"  caption="联系电话"/>
 			<youi:fieldText property="fkcodeRemark"  caption="访客说明"/>
 			<youi:fieldText property="fkcodeComp"  caption="到访企业"/>
@@ -31,7 +31,7 @@
 	
 	<!-- form-访客申请记录编辑 -->
 	<youi:form dialog="true" caption="访客申请记录" id="form_propertyservicemanagerFkcode" action="esb/web/propertyservicemanagerFkcodeManager/savePropertyservicemanagerFkcode.json">
-		<youi:fieldLayout prefix="record">
+		<youi:fieldLayout prefix="record" labelWidths="122,122">
 			<youi:fieldText property="fkcodeTelephone"  caption="联系电话"/>
 			<youi:fieldText property="fkcodeRemark"  caption="访客说明"/>
 			<youi:fieldText property="fkcodeComp"  caption="到访企业"/>
