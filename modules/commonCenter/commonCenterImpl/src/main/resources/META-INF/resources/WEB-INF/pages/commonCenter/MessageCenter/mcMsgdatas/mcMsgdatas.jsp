@@ -2,41 +2,35 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
 	<youi:grid id="grid_mcMsgdatas" idKeys="msgId" caption="消息列表列表"  panel="false"
-				src="esb/web/mcMsgdatasManager/getPagerMcMsgdatass.json" dataFormId="form_mcMsgdatas"
+				src="esb/web/mcMsgdatasManager/getPagerMcMsgdatass.json" dataFormId="form_mcMsgdatas" add="NOT"
 				editSrc="esb/web/mcMsgdatasManager/getMcMsgdatas.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/mcMsgdatasManager/removeMcMsgdatas.json">
-		<youi:fieldLayout>
-
+		<youi:fieldLayout labelWidths="100,100">
 			<youi:fieldText property="msgType"  caption="消息类型"/>
-			<youi:fieldText property="sendStatus"  caption="发送状态"/>
-			<youi:fieldText property="receive"  caption="接收人"/>
-			<youi:fieldText property="msgContent"  caption="消息内容"/>
-			<youi:fieldText property="sendDate"  caption="发送时间"/>
 			<youi:fieldText property="msgCaption"  caption="消息主题"/>
 		</youi:fieldLayout>
 
-		<youi:gridCol property="msgType"  caption="消息类型"/>
-		<youi:gridCol property="sendStatus"  caption="发送状态"/>
-		<youi:gridCol property="receive"  caption="接收人"/>
-		<youi:gridCol property="msgContent"  caption="消息内容"/>
-		<youi:gridCol property="sendDate"  caption="发送时间"/>
-		<youi:gridCol property="msgCaption"  caption="消息主题"/>
-		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
-			<youi:button name="edit" caption="修改"/>
+		<youi:gridCol property="msgCaption"  caption="消息主题" width="150"/>
+		<youi:gridCol property="msgContent"  caption="消息内容" width="350"/>
+		<youi:gridCol property="receive"  caption="接收人" width="150"/>
+		<youi:gridCol property="sendDate"  caption="发送时间" width="150"/>
+		<youi:gridCol property="sendStatus"  caption="发送状态" width="150"/>
+		<youi:gridCol width="80" fixed="true" property="button" type="button" caption="操作">
+			<youi:button name="edit" caption="修改" icon="search"/>
 			<youi:button name="remove" caption="删除"/>
 		</youi:gridCol>
 	</youi:grid>
 	
 	<!-- form-消息列表编辑 -->
 	<youi:form dialog="true" caption="消息列表" id="form_mcMsgdatas" action="esb/web/mcMsgdatasManager/saveMcMsgdatas.json">
-		<youi:fieldLayout prefix="record">
-			<youi:fieldText property="msgId"  caption="消息ID"/>
-			<youi:fieldText property="msgType"  caption="消息类型"/>
-			<youi:fieldText property="sendStatus"  caption="发送状态"/>
-			<youi:fieldText property="receive"  caption="接收人"/>
-			<youi:fieldText property="msgContent"  caption="消息内容"/>
-			<youi:fieldText property="sendDate"  caption="发送时间"/>
-			<youi:fieldText property="msgCaption"  caption="消息主题"/>
+		<youi:fieldLayout prefix="record" columns="2" labelWidths="100,100">
+			<youi:fieldHidden property="msgId"  caption="消息ID"/>
+			<youi:fieldText property="msgCaption"  caption="消息主题" column="2" readonly="true"/>
+			<youi:fieldArea property="msgContent"  caption="消息内容" column="2" rows="3" readonly="true"/>
+			<youi:fieldSelect property="mcMsgtempalate.msgTempalateId" caption="消息模板" readonly="true"
+				src="esb/web/mcMsgtempalateManager/getMcMsgtempalates.json" code="msgTempalateId" show="msgTempalateCaption"/>
+			<youi:fieldText property="sendDate"  caption="发送时间"  readonly="true"/>
+			<youi:fieldText property="sendStatus"  caption="发送状态" readonly="true"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
