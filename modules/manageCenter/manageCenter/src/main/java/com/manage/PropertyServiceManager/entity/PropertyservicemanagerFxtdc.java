@@ -31,7 +31,7 @@ public class PropertyservicemanagerFxtdc implements Domain{
 	@Length(max=50)
 	private String twcrdAddrec;//二维码URL地址
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="MOVEREC_ID_")
 	private com.manage.PropertyServiceManager.entity.PropertyservicemanagerMoverec propertyservicemanagerMoverec;//搬家申请记录ID
 	
