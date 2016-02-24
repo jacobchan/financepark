@@ -4,10 +4,11 @@
 package com.manage.PolicyManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: -政策申请记录
@@ -26,9 +27,9 @@ public class PolicyApply implements Domain{
 	@Length(max=32)
 	private String policyApplyContactPeople;//联系人
 
-	@Column(name = "MEMBER_ID_")
-	@Length(max=36)
-	private String memberId;//会员用户ID
+	@ManyToOne//(fetch = FetchType.LAZY)
+    @JoinColumn(name="MEMBER_ID_")
+	private MemberInformation member;//会员用户ID
 
 	@Column(name = "POLICY_APPLY_CONPANY_NAME_")
 	@Length(max=32)
@@ -54,12 +55,12 @@ public class PolicyApply implements Domain{
 	public void setPolicyApplyContactPeople(String policyApplyContactPeople){
 		this.policyApplyContactPeople = policyApplyContactPeople;
 	}
-	public String getMemberId(){
-		return this.memberId;
+	public MemberInformation getMember(){
+		return this.member;
 	}
 	
-	public void setMemberId(String memberId){
-		this.memberId = memberId;
+	public void setMember(MemberInformation member){
+		this.member = member;
 	}
 	public String getPolicyApplyConpanyName(){
 		return this.policyApplyConpanyName;
@@ -97,7 +98,7 @@ public class PolicyApply implements Domain{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((policyApplyContactPeople == null) ? 0 : policyApplyContactPeople.hashCode());
-		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
+		result = prime * result + ((member == null) ? 0 : member.hashCode());
 		result = prime * result + ((policyApplyConpanyName == null) ? 0 : policyApplyConpanyName.hashCode());
 		result = prime * result + ((policyApplyStatus == null) ? 0 : policyApplyStatus.hashCode());
 		result = prime * result + ((policyApplyId == null) ? 0 : policyApplyId.hashCode());
@@ -119,10 +120,10 @@ public class PolicyApply implements Domain{
 				return false;
 		} else if (!policyApplyContactPeople.equals(other.policyApplyContactPeople))
 			return false;
-		if (memberId == null) {
-			if (other.memberId != null)
+		if (member == null) {
+			if (other.member != null)
 				return false;
-		} else if (!memberId.equals(other.memberId))
+		} else if (!member.equals(other.member))
 			return false;
 		if (policyApplyConpanyName == null) {
 			if (other.policyApplyConpanyName != null)
