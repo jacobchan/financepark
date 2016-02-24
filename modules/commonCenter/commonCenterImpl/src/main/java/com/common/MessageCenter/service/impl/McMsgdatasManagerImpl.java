@@ -3,27 +3,29 @@
  */
 package com.common.MessageCenter.service.impl;
 
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MessageCenter.dao.McMsgdatasDao;
+import com.common.MessageCenter.entity.McMsgdatas;
+import com.common.MessageCenter.entity.McMsgtempalate;
+import com.common.MessageCenter.service.McMsgdatasManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
-import com.gsoft.framework.esb.annotation.*;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
-import com.common.MessageCenter.entity.McMsgdatas;
-import com.common.MessageCenter.dao.McMsgdatasDao;
-import com.common.MessageCenter.service.McMsgdatasManager;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.ServiceParam;
+import com.gsoft.framework.security.agt.entity.User;
 
 @Service("mcMsgdatasManager")
 @Transactional
@@ -101,6 +103,29 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements McMsgdatas
     
     public boolean exsitMcMsgdatas(String propertyName,Object value) throws BusException{
 		return mcMsgdatasDao.exists(propertyName,value);
+	}
+    
+	@Override
+	public String buildMessageContent(McMsgdatas mcMsgdatas) throws BusException {
+		McMsgtempalate msgTempalate = mcMsgdatas.getMcMsgtempalate();//消息引用的模板
+		String[] params = null;
+		//模板内容转换成小心内容
+		return com.gsoft.common.util.StringUtils.replaceChar(msgTempalate.getMsgTempalateContent(), '#', params);
+	}
+	
+	@Override
+	public void sendMessage(McMsgdatas mcMsgdatas) throws BusException {
+		// TODO 发送消息
+		McMsgtempalate tempalate = mcMsgdatas.getMcMsgtempalate();
+		String receive = tempalate.getMsgReceiver();//接收对象 ROLE_ID
+		//根据role获取用户信息
+		
+		//获取电话号码
+		
+		//生成消息内容
+		
+		//调用发送消息的外部接口
+		
 	}
 
 }
