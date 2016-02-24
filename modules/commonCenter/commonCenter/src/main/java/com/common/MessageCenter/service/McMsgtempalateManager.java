@@ -5,6 +5,9 @@ package com.common.MessageCenter.service;
 
 import java.util.List;
 import java.util.Collection;
+import java.util.Map;
+
+import org.springframework.stereotype.Component;
 
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -12,7 +15,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.common.MessageCenter.entity.McMsgtempalate;
 
 public interface McMsgtempalateManager extends BaseManager{
@@ -63,4 +65,14 @@ public interface McMsgtempalateManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitMcMsgtempalate(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 根据消息模板获取消息内容
+	 * @param msgtempalate 模板
+	 * @param replaceMap 置换的map
+	 * @return
+	 * @throws BusException
+	 */
+	public String genMsgContent(McMsgtempalate msgtempalate,Map<String,String> replaceMap) throws BusException;
+	
 }

@@ -51,7 +51,7 @@ public class McMsgdatas implements Domain{
 	@Length(max=36)
 	private String msgCaption;//消息主题
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(name="MSG_TEMPALATE_ID_")
 	private com.common.MessageCenter.entity.McMsgtempalate mcMsgtempalate;//消息模板ID
 	
