@@ -49,9 +49,9 @@ public class DocConverter {
     public String getOfficeHome() {
         String osName = System.getProperty("os.name");
         if (Pattern.matches("Linux.*", osName)) {
-            return "/opt/openoffice.org3";
+            return "\\opt\\openoffice.org3";
         } else if (Pattern.matches("Windows.*", osName)) {
-            return "C:/Program Files (x86)/OpenOffice 4";
+            return "C:\\program Files (x86)\\OpenOffice 4";
         }
         return null;
     }
@@ -61,9 +61,9 @@ public class DocConverter {
     public String getSWFToolsHome() {
         String osName = System.getProperty("os.name");
         if (Pattern.matches("Linux.*", osName)) {
-            return "/opt/openoffice.org3";
+            return "\\opt\\openoffice.org3";
         } else if (Pattern.matches("Windows.*", osName)) {
-            return "H:/SWFTools/pdf2swf.exe "; 
+            return "H:\\SWFTools\\pdf2swf.exe "; 
         }
         return null;
     }
@@ -133,7 +133,7 @@ public class DocConverter {
             	String SWFToolsHome= getSWFToolsHome();
                     try {
                         // 这里根据SWFTools安装路径需要进行相应更改
-                        Process p = r.exec(""+SWFToolsHome+"" + pdfFile.getPath() + " -o " + swfFile.getPath() + " -T 9");
+                        Process p = r.exec(SWFToolsHome + pdfFile.getPath() + " -o " + swfFile.getPath() + " -T 9");
                         System.out.print(loadStream(p.getInputStream()));
                         System.err.print(loadStream(p.getErrorStream()));
                         System.out.print(loadStream(p.getInputStream()));
