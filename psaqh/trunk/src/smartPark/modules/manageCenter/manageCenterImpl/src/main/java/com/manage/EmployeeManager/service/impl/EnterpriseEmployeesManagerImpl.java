@@ -106,17 +106,21 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 	 * @param rzId 企业id
 	 * @param phone 会员电话
 	 * @param code 邀请码
-	 * @return
+	 * @return EnterpriseEmployees
 	 * @throws BusException
+	 * @author Zhuyl
 	 */
     @EsbServiceMapping
 	public EnterpriseEmployees acceptEnterpriseInvitation(@ServiceParam(name="rzId") String rzId, @ServiceParam(name="phone") String phone, @ServiceParam(name="code") String code) throws BusException{
-		System.out.println("参数值"+rzId+","+phone+","+code);
 		EnterpriseEmployees ems = new EnterpriseEmployees();
-		String[] params = new String[]{"rzId","phone","code"};
+		String[] params = new String[]{"enterbusinessmanagerRz.rzId","invitationTelephone","invitationCode"};
 		Object[] values = new Object[]{rzId,phone,code};
 		List<EnterpriseInvitation> invitationList = enterpriseInvitationDao.getList(params, values);
-		System.out.println(invitationList.size());
+		if(invitationList.size()>0){
+			
+		}else{
+			
+		}
 		return ems;
 	}
 }
