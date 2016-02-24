@@ -63,4 +63,19 @@ public interface McMsgdatasManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitMcMsgdatas(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 通过#按位置替换
+	 * @param mcMsgdatas
+	 * @return
+	 * @throws BusException
+	 */
+	public String buildMessageContent(McMsgdatas mcMsgdatas) throws BusException;
+	
+	/**
+	 * 发送消息
+	 * @param mcMsgdatas
+	 * @throws BusException
+	 */
+	public void sendMessage(McMsgdatas mcMsgdatas) throws BusException;
 }

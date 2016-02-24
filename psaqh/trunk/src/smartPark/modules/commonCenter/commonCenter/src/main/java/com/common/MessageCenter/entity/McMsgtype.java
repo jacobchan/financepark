@@ -15,6 +15,10 @@ import com.gsoft.framework.core.dataobj.Domain;
  * @version
  * 
  */
+/**
+ * @author ASUS
+ *
+ */
 @Entity
 @Table(name = "sp_mc_msgType_")
 public class McMsgtype implements Domain{
@@ -42,6 +46,16 @@ public class McMsgtype implements Domain{
 	@Column(name = "IS_LEAF_")
 	@Length(max=1)
 	private String isLeaf;//是否子节点
+	
+	@Transient
+	private String parentTypeCaption;
+	
+	public String getParentTypeCaption() {
+		return parentTypeCaption;
+	}
+	public void setParentTypeCaption(String parentTypeCaption) {
+		this.parentTypeCaption = parentTypeCaption;
+	}
 	
 	public String getMsgTypeCaption(){
 		return this.msgTypeCaption;

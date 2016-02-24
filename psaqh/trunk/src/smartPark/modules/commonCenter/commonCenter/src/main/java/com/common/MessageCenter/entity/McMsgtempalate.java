@@ -51,7 +51,7 @@ public class McMsgtempalate implements Domain{
 	@Length(max=36)
 	private String msgReceiver;//接收人
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(name="MSG_TYPE_ID_")
 	private com.common.MessageCenter.entity.McMsgtype mcMsgtype;//消息类型ID
 	
