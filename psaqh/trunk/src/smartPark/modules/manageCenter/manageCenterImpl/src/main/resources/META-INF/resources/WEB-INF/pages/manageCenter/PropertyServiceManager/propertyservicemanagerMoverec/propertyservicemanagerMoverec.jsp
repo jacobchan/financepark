@@ -11,11 +11,11 @@
 
 			<youi:fieldText property="moverecRemark"  caption="物品描述"/>
 			<youi:fieldText property="moverecName"  caption="搬家联系人"/>
-			<youi:fieldText property="memberId"  caption="会员用户ID"/>
+			<youi:fieldSelect property="member.memberId"  caption="会员姓名" 
+				src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
 			<youi:fieldText property="moverecWay"  caption="搬家提交方式" />
 		</youi:fieldLayout>
-		<youi:gridCol property="moverecId"  caption="搬家申请记录ID" width="250"/>
-		<youi:gridCol property="memberId"  caption="会员用户ID" width="100"/>
+		<youi:gridCol property="member.memberName"  caption="会员姓名" width="100" />
 		<youi:gridCol property="moverecUnit"  caption="楼宇单元"/>
 		<youi:gridCol property="moverecRemark"  caption="物品描述"/>
 		<youi:gridCol property="moverecName"  caption="搬家联系人"/>
@@ -33,13 +33,19 @@
 			<youi:fieldText property="moverecUnit"  caption="楼宇单元"/>
 			<youi:fieldText property="moverecRemark"  caption="物品描述"/>
 			<youi:fieldText property="moverecName"  caption="搬家联系人"/>
-			<youi:fieldText property="memberId"  caption="会员用户ID"/>
+			<youi:fieldSelect property="member.memberId"  caption="会员姓名"
+				src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
 			<youi:fieldText property="moverecWay"  caption="搬家提交方式"/>
 			<youi:fieldText property="moverecComp"  caption="搬家企业名称"/>
 			<youi:fieldHidden property="moverecId"  caption="搬家申请记录ID"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
+	<youi:func name = "form_propertyservicemanagerMoverec_afterSubmit">
+			var formPropertyservicemanagerMoverec = $elem('form_propertyservicemanagerMoverec',pageId);
+			formPropertyservicemanagerMoverec.form('close');
+			$elem('grid_propertyservicemanagerMoverec',pageId).grid('pReload');
+	</youi:func>
 	<!--**********************************页面函数Start********************************-->
 	
 	<!--**********************************页面函数End**********************************-->
