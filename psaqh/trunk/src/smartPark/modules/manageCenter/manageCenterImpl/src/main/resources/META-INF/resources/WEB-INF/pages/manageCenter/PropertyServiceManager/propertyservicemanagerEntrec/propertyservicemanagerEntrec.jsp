@@ -68,8 +68,10 @@
                     $elem('grid_propertyservicemanagerEntrec',pageId).grid('pReload');
                   } 
             })
+        }else if(enterrecStatus == '02'){
+          alert("已授理");
         }else{
-            alert("已预约状态才能进行授理");
+            alert("该状态下不能进行授理");
 
         }
 			
