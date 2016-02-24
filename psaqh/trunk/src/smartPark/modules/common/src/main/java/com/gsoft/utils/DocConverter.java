@@ -224,7 +224,7 @@ public class DocConverter {
     }
  
     public static  void getSwfPath(String path) {
-        DocConverter d = new DocConverter("/smartPark/smartPark/wars/smartPark-web/src/main/webapp/upload/"+path);
-        d.conver();
+        DocConverter d = new DocConverter(path);
+        d.conver();     
     }
 }
