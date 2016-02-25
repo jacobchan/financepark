@@ -20,7 +20,7 @@
 		<youi:gridCol property="buildingId"  caption="楼栋"  renderer="renderer_buildingId" width="10%"/>
 		<youi:gridCol property="parkId"  caption="园区" renderer="renderer_parkId" width="10%"/>
 		<youi:gridCol property="rzBuss"  caption="企业主营"  width="10%"/>
-		<youi:gridCol property="enTypeId"  caption="企业类型" width="10%"/>
+		<youi:gridCol property="enTypeId.enTypeName"  caption="企业类型" width="10%"/>
 		<youi:gridCol property="rzSign"  caption="企业码" width="10%"/>
 		<youi:gridCol property="rzMem"  caption="会员信息" width="10%"/>
 		<youi:gridCol property="rzTelephone"  caption="联系方式" width="10%"/>
@@ -32,7 +32,7 @@
 	
 	<!-- form-入驻企业基本信息编辑 -->
 	<youi:form dialog="true" caption="入驻企业基本信息" id="form_enterbusinessmanagerRz" action="esb/web/enterbusinessmanagerRzManager/saveEnterbusinessmanagerRz.json">
-		<youi:fieldLayout prefix="record">
+		<youi:fieldLayout prefix="record" labelWidths="100,100">
 			<youi:fieldHidden property="rzId"  caption="ID"/>
 			 <youi:fieldSelect property="rzManager.memberId"  caption="企业管理员" src="esb/web/memberInformationManager/getMemberInformations.json" 
 			 					code="memberId" show="memberName" notNull="true"/> 
@@ -42,10 +42,7 @@
 			<youi:fieldSelect property="buildingId"  caption="楼栋" src="esb/web/bbmBuildingManager/getBbmBuildings.json" 
 								code="buildingId" show="buildingNo" parents="parkId" parentsAlias="parkId" notNull="true"/>
 			<youi:fieldSelect property="rzBuss"  caption="企业主营" convert="pubStatus"/>
-			<youi:fieldTree property="etypeEnterprisetype.enTypeId"
-						simple="false" caption="企业类型" 
-						src="esb/web/etypeEnterprisetypeManager/getChildren.json" 
-						show="enTypeName" code="enTypeId" iteratorParentAttr="enTypeId"/>
+			<youi:fieldTree simple="false" popup="true" tree="${enetrTree}" property="enTypeId.enTypeId" caption="企业类型"/>
 			<youi:fieldText property="rzSign"  caption="企业码"/>
 			<youi:fieldText property="rzMem"  caption="会员信息"/>
 			<youi:fieldText property="rzTelephone"  caption="联系方式" expression="^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$" expressionMessage="手机号码格式不正确" />
