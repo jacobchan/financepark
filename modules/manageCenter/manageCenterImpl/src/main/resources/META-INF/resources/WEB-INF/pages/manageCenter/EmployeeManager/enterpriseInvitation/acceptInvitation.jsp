@@ -14,8 +14,7 @@
 	</youi:form>
 	<youi:func name="form_acceptInvitation_afterSubmit" params="result">
 		var acceptInvitation = $elem('form_acceptInvitation',pageId);
-		var record = result.record;
-		alert(record.msg);
-		acceptInvitation.form('reset').form('fillRecord',record);
+		alert(result.record.html);
+		acceptInvitation.form('reset').form('fillRecord',result.record.html);
 	</youi:func>
 </youi:page>
