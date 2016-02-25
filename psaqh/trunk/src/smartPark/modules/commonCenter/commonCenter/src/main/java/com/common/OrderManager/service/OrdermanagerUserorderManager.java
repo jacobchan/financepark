@@ -68,4 +68,42 @@ public interface OrdermanagerUserorderManager extends BaseManager{
      * 更新状态
      */
     public void updateUserorderStatus(String id,String userorderStatus) throws BusException;
+    /**
+     * 保存或修改采购订单
+     * @param o
+     * @return
+     * @throws BusException
+     */
+    public OrdermanagerUserorder savePurOrdermanager(OrdermanagerUserorder o) throws BusException;
+    /**
+     * 保存或修改餐饮订单
+     * @param o
+     * @return
+     * @throws BusException
+     */
+	public OrdermanagerUserorder saveFoodOrdermanager(OrdermanagerUserorder o) throws BusException;
+	/**
+	 * 保存或修改IT服务订单
+	 * @param o
+	 * @return
+	 * @throws BusException
+	 */
+	public OrdermanagerUserorder saveITSerOrderMg(OrdermanagerUserorder o) throws BusException;
+	/**
+	 * 获取企业服务订单列表
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	public PagerRecords getPagerComSerOrders(Pager pager,
+			Collection<Condition> conditions, Collection<Order> orders)throws BusException;
+	/**
+	 * 保存或修改企业服务订单
+	 * @param o
+	 * @return
+	 * @throws BusException
+	 */
+	public OrdermanagerUserorder saveCompSerOrderMg(OrdermanagerUserorder o) throws BusException;
 }

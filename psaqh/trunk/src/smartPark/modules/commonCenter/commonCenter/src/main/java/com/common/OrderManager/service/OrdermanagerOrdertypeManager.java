@@ -63,4 +63,14 @@ public interface OrdermanagerOrdertypeManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitOrdermanagerOrdertype(String propertyName,Object value) throws BusException;
+	/**
+	 * 获取企业服务订单类型列表
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	public PagerRecords getPagerComSerOrderTypes(Pager pager,
+			Collection<Condition> conditions, Collection<Order> orders) throws BusException;
 }
