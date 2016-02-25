@@ -22,11 +22,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
- 
+ /**
+  * 物业缴费登记
+  * @author maogf
+  *
+  */
 @Component("manageCenter.PropertyServiceManager.propertyservicemanagerCharge")
  public class ChargePageModel extends AbstractPageModel
    implements IPageModel{
- 
 	@Autowired
 	private BbmParkManager bbmParkManager;
 	@Autowired
@@ -35,14 +38,58 @@ import org.springframework.ui.ModelMap;
 	private BbmFloorDao bbmFloorDao;
 	@Autowired
 	private BbmRoomDao bbmRoomDao;
+	/**
+	 * 物业缴费登记查询
+	 * @param request
+	 * @param dataIn
+	 * @return
+	 */
 	
 	public ModelMap propertyservicemanagerCharge(
 			HttpServletRequest request,
 			DataIn<PropertyservicemanagerCharge> dataIn){
 		ModelMap modelMap = new ModelMap();
+		BbmRoomHtmlTreeNode bbmRoomTree = getBbmRoomTree();
+		modelMap.addAttribute("bbmRoomTree", bbmRoomTree);
+		return modelMap;
+	}
+	/**
+	 * 增加物业缴费登记
+	 * @param request
+	 * @param dataIn
+	 * @return
+	 */
+	public ModelMap addSFproManage(
+			HttpServletRequest request,
+			DataIn<PropertyservicemanagerCharge> dataIn){
+		ModelMap modelMap = new ModelMap();
+		BbmRoomHtmlTreeNode bbmRoomTree = getBbmRoomTree();
+		modelMap.addAttribute("bbmRoomTree", bbmRoomTree);
+		return modelMap;
+	}
+	/**
+	 * 修改物业缴费登记
+	 * @param request
+	 * @param dataIn
+	 * @return
+	 */
+	public ModelMap updateSFproManage(
+			HttpServletRequest request,
+			DataIn<PropertyservicemanagerCharge> dataIn){
+		ModelMap modelMap = new ModelMap();
+		BbmRoomHtmlTreeNode bbmRoomTree = getBbmRoomTree();
+		modelMap.addAttribute("bbmRoomTree", bbmRoomTree);
+		return modelMap;
+	}
+	/**
+	 * 获取所有的园区、楼栋、楼层、单元组织成的树对象
+	 * @return
+	 */
+	private BbmRoomHtmlTreeNode getBbmRoomTree() {
 		List<BbmPark> bbmParks = bbmParkManager.getBbmParks();
 		List<TreeNode> treeList = new ArrayList<TreeNode>();
 		for (BbmPark bbmPark : bbmParks) {
+		   //把所有的园区、楼栋、楼层、单元根据上下级组织成树节点list
 		   List<BbmBuilding> bbmBuildingList =  bbmBuildingDao.getList("bbmPark.parkId", bbmPark.getParkId());
 		   for(BbmBuilding bbmBuilding:bbmBuildingList){
 			   List<BbmFloor> bbmFloorList = bbmFloorDao.getList("bbmBuilding.buildingId", bbmBuilding.getBuildingId());
@@ -59,8 +106,7 @@ import org.springframework.ui.ModelMap;
 		}
 		BbmRoomHtmlTreeNode bbmRoomTree = ParkTreeUtils.listToBbmRoomTree(treeList, null, "单元");
 		bbmRoomTree.setId("tree_bbmRoom_root");
-		modelMap.addAttribute("bbmRoomTree", bbmRoomTree);
-		return modelMap;
+		return bbmRoomTree;
 	}
 	
  }
