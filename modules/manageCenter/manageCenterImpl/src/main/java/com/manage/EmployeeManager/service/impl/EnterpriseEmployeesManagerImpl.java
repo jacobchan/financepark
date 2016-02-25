@@ -124,41 +124,64 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 	 * @param rzId 企业id
 	 * @param phone 会员电话
 	 * @param code 邀请码
-	 * @return EnterpriseEmployees
+	 * @return String
 	 * @throws BusException
 	 * @author Zhuyl
 	 */
     @EsbServiceMapping
-	public EnterpriseEmployees acceptEnterpriseInvitation(@ServiceParam(name="rzId") String rzId, @ServiceParam(name="phone") String phone, @ServiceParam(name="code") String code) throws BusException{
-		EnterpriseEmployees ems = new EnterpriseEmployees();
+	public String acceptEnterpriseInvitation(@ServiceParam(name="rzId") String rzId, @ServiceParam(name="phone") String phone, @ServiceParam(name="code") String code) throws BusException{
+		String msg = "";
+    	EnterpriseEmployees ems = new EnterpriseEmployees();
 		EnterpriseRole role = new EnterpriseRole();
+		//根据rzId获取入驻企业
 		EnterbusinessmanagerRz rz = enterbusinessmanagerRzDao.get(rzId);
-		String[] params = new String[]{"enterbusinessmanagerRz.rzId","invitationTelephone","invitationCode"};
-		Object[] values = new Object[]{rzId,phone,code};
-		List<EnterpriseInvitation> invitationList = enterpriseInvitationDao.getList(params, values);
-		if(invitationList.size()>0){
-			MemberInformation info = memberInformationDao.getObjectByUniqueProperty("memberPhoneNumber", phone);
-			ems.setEmployeesComId(rz);
-			ems.setMemberId(rz.getRzManager());
-			ems.setRzId(rzId);
-			ems.setEmployeesName(info.getMemberName());
-			ems.setEmployeesTelephone(phone);
-			ems.setEmployeesDepartment("1");
-			enterpriseEmployeesDao.save(ems);
-			
-			//企业角色
-			Timestamp createTime = new Timestamp(new Date().getTime());
-			String[] roleparams = new String[]{"roleId","roleType"};
-			Object[] rolevalues = new Object[]{"ROLE_USER","1"};
-			List<Role> le = roleDao.getList(roleparams, rolevalues);
-			role.setEnterpriseEmployees(ems);
-			role.setRole(le.get(0));
-			role.setCreateuser(info);
-			role.setCreatetime(createTime);
-			enterpriseRoleDao.save(role);
+		//根据会员填写的手机号码查询此会员是否存在
+		MemberInformation info = memberInformationDao.getObjectByUniqueProperty("memberPhoneNumber", phone);
+		//标记填写的手机号码存在于会员表
+		if(null!=info){
+			//封装获取邀请记录的参数和值
+			String[] params = new String[]{"enterbusinessmanagerRz.rzId","invitationTelephone","invitationCode"};
+			Object[] values = new Object[]{rzId,phone,code};
+			List<EnterpriseInvitation> invitationList = enterpriseInvitationDao.getList(params, values);
+			//存在此邀请的情况下
+			if(invitationList.size()>0){
+				//查询此会员是否已存在
+				String[] ams = new String[]{"rzId","employeesTelephone"};
+				Object[] lus = new Object[]{rzId,phone};
+				List<EnterpriseEmployees> employeeList = enterpriseEmployeesDao.getList(ams, lus);
+				//标记此手机号码是否已成为企业员工
+				if(employeeList.size()<=0){						
+					ems.setEmployeesComId(rz);
+					ems.setMemberId(rz.getRzManager());
+					ems.setRzId(rzId);
+					ems.setEmployeesName(info.getMemberName());
+					ems.setEmployeesTelephone(phone);
+					ems.setEmployeesDepartment("1");
+					enterpriseEmployeesDao.save(ems);
+					
+					//企业角色
+					Timestamp createTime = new Timestamp(new Date().getTime());
+					String[] roleparams = new String[]{"roleId","roleType"};
+					Object[] rolevalues = new Object[]{"ROLE_USER","1"};
+					List<Role> le = roleDao.getList(roleparams, rolevalues);
+					role.setMemberInformation(info);
+					role.setRole(le.get(0));
+					role.setCreateuser(info);
+					role.setCreatetime(createTime);
+					role.setUpdateuser(info);
+					role.setUpdatetime(createTime);
+					enterpriseRoleDao.save(role);
+					
+					msg = info.getMemberName()+"成功入驻企业"+rz.getRzMem();
+				}else{
+					msg = "已接受此邀请成为企业员工，请勿重复操作！";
+				}
+			}else{
+				msg = "无此企业邀请信息！";
+			}
 		}else{
-			System.out.println("不存在此邀请");
+			msg = "手机号码不存在！";
 		}
-		return ems;
+		return msg;
 	}
 }
