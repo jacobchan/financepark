@@ -6,15 +6,15 @@
 				editSrc="esb/web/shoppingcarCompanyserverManager/getShoppingcarCompanyserver.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/shoppingcarCompanyserverManager/removeShoppingcarCompanyserver.json">
 		<youi:fieldLayout>
-			<youi:fieldText property="memberId"  caption="会员用户ID"/>
-			<youi:fieldText property="companyCateringAmount"  caption="餐饮数量"/>
-			<youi:fieldText property="companyCateringUnivalence"  caption="餐饮单价"/>
-
+			<youi:fieldSelect property="memberId.memberId"  caption="会员用户" src="esb/web/memberInformationManager/getMemberInformations.json" 
+							  code="memberId" show="memberName" />
+			<youi:fieldSelect property="commodityId"  caption="商品" src="esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommoditys.json"
+								code="commodityId"	show="commodityTitle" />	
 		</youi:fieldLayout>
-		<youi:gridCol property="memberId.memberName"  caption="会员用户ID" width="20%"/>
-		<youi:gridCol property="commodityId"  caption="商品ID" width="20%"/>
-		<youi:gridCol property="companyCateringAmount"  caption="餐饮数量" width="20%"/>
-		<youi:gridCol property="companyCateringUnivalence"  caption="餐饮单价" width="20%"/>
+		<youi:gridCol property="memberId.memberName"  caption="会员用户ID" width="25%"/>
+		<youi:gridCol property="commodityId"  caption="商品ID" renderer="renderer_commodityId" width="25%"/>
+		<youi:gridCol property="companyCateringAmount"  caption="餐饮数量" width="25%"/>
+		<youi:gridCol property="companyCateringUnivalence"  caption="餐饮单价" width="25%"/>
 
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
@@ -24,18 +24,29 @@
 	
 	<!-- form--企业服务购物车编辑 -->
 	<youi:form dialog="true" caption="-企业服务购物车" id="form_shoppingcarCompanyserver" action="esb/web/shoppingcarCompanyserverManager/saveShoppingcarCompanyserver.json">
-		<youi:fieldLayout prefix="record">
+		<youi:fieldLayout prefix="record" labelWidths="100,100">
 			<youi:fieldHidden property="companyServerId"  caption="企业服务购物车ID"/>
 			<youi:fieldSelect property="memberId.memberId"  caption="会员用户" src="esb/web/memberInformationManager/getMemberInformations.json" 
 							  code="memberId" show="memberName" notNull="true"/>
 			<youi:fieldSelect property="commodityId"  caption="商品" src="esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommoditys.json"
-								code="commodityId"	show="commodityTitle" notNull="true"/>	
-			<youi:fieldText property="companyCateringAmount"  caption="餐饮数量" />
-			<youi:fieldText property="companyCateringUnivalence"  caption="餐饮单价"/>
+								code="commodityId"	show="commodityTitle" notNull="true"/>							  
+			<youi:fieldText  property="companyCateringAmount"  caption="餐饮数量" expression="^[1-9]\d*$" expressionMessage="餐饮数量格式不正确，应为正整数" notNull="true"/>
+			<youi:fieldText property="companyCateringUnivalence"  caption="餐饮单价" expression="^\d{0,8}\.{0,1}(\d{1,2})?$" expressionMessage="餐饮单价格式不正确，应为" notNull="true"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
 	<!--**********************************页面函数Start********************************-->
-	
+	<youi:func name="renderer_commodityId" params="col,record">
+ 		var commodityTitle = ""; 
+		$.youi.ajaxUtil.ajax({
+				url:'esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommodity.json',
+				data:'commodityId='+record.commodityId,
+				async: false, 
+				success:function(result){
+					commodityTitle=result.record.commodityTitle;
+				}
+			});
+		return commodityTitle;
+	</youi:func>
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
