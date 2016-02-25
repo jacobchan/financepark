@@ -68,4 +68,11 @@ public interface NmIssuetypeManager extends BaseManager{
      * 条件查询列表
      */
     public List<NmIssuetype> getChildren(String parentId) throws BusException;
+    
+    /**类型编码是否已经存在
+     * @param code
+     * @return
+     * @throws BusException
+     */
+    public String codeExist(String code) throws BusException;
 }

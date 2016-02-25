@@ -3,19 +3,17 @@
  */
 package com.common.MessageCenter.service;
 
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Component;
-
+import com.common.MessageCenter.entity.McMsgtempalate;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.common.MessageCenter.entity.McMsgtempalate;
 
 public interface McMsgtempalateManager extends BaseManager{
 
@@ -74,5 +72,12 @@ public interface McMsgtempalateManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public String genMsgContent(McMsgtempalate msgtempalate,Map<String,String> replaceMap) throws BusException;
+	
+	/**获取参数个数
+	 * @param content
+	 * @return
+	 * @throws BusExcption
+	 */
+	public String getParamCount(String content) throws BusException;
 	
 }

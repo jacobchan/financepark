@@ -3,17 +3,16 @@
  */
 package com.common.MessageCenter.service;
 
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
+import com.common.MessageCenter.entity.McMsgtype;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
-import com.common.MessageCenter.entity.McMsgtype;
 
 public interface McMsgtypeManager extends BaseManager{
 
@@ -63,4 +62,11 @@ public interface McMsgtypeManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitMcMsgtype(String propertyName,Object value) throws BusException;
+	
+    /**根据父及查询
+     * @param parentId
+     * @return
+     * @throws BusException
+     */
+    public List<McMsgtype> getChildren(String parentId) throws BusException;
 }
