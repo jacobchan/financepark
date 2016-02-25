@@ -55,6 +55,9 @@ public class McMsgtempalate implements Domain{
     @JoinColumn(name="MSG_TYPE_ID_")
 	private com.common.MessageCenter.entity.McMsgtype mcMsgtype;//消息类型ID
 	
+	@Column(name="unique_code_")
+	private String uniqueCode;
+	
 	public String getMsgTempalateContent(){
 		return this.msgTempalateContent;
 	}
@@ -113,7 +116,14 @@ public class McMsgtempalate implements Domain{
 		return this.mcMsgtype;
 	}
 	
-	
+	public String getUniqueCode() {
+		return uniqueCode;
+	}
+
+	public void setUniqueCode(String uniqueCode) {
+		this.uniqueCode = uniqueCode;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

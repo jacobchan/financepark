@@ -80,4 +80,6 @@ public interface McMsgtempalateManager extends BaseManager{
 	 */
 	public String getParamCount(String content) throws BusException;
 	
+	public McMsgtempalate getMsgTempalate(String uniqueCode) throws BusException;
+	
 }
