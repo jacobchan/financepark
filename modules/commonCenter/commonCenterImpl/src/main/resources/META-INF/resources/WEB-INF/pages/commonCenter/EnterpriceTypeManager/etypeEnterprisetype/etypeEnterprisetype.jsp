@@ -9,12 +9,10 @@
 		edit="NOT" remove="NOT" showCheckbox="true"
 		removeSrc="esb/web/etypeEnterprisetypeManager/removeEtypeEnterprisetype.json">
 		<youi:fieldLayout labelWidths="120,120">
-			<youi:fieldSelect property="etypeEnterprisetype.enTypeId"
-				src="esb/web/etypeEnterprisetypeManager/getEtypeEnterprisetypes.json"
-				code="enTypeId" show="enTypeName" caption="父ID" tooltips="企业类型父级id" />
+			<youi:fieldTree simple="false" popup="true" tree="${enetrTree}" property="etypeEnterprisetype.enTypeId" caption="行业类别"/>
 			<youi:fieldText property="enTypeName" caption="企业类型名称" />
 		</youi:fieldLayout>
-		<youi:gridCol property="etypeEnterprisetype.enTypeName" caption="父ID" width="300" />
+		<youi:gridCol property="etypeEnterprisetype.enTypeName" caption="上级" width="300" />
 		<youi:gridCol property="enTypeName" caption="企业类型名称" width="280" />
 
 		<youi:gridCol width="60" fixed="true" property="button" type="button"
@@ -30,14 +28,17 @@
 		action="esb/web/etypeEnterprisetypeManager/saveEtypeEnterprisetype.json">
 		<youi:fieldLayout prefix="record" columns="1" labelWidths="120,120">
 			<youi:fieldHidden property="enTypeId" caption="企业类型名称" />
-			<youi:fieldSelect property="etypeEnterprisetype.enTypeId"
-				src="esb/web/etypeEnterprisetypeManager/getEtypeEnterprisetypes.json"
-				code="enTypeId" show="enTypeName" caption="父ID" tooltips="企业类型父级id" />
+			<youi:fieldTree simple="false" popup="true" tree="${enetrTree}" property="etypeEnterprisetype.enTypeId" caption="行业类别"/>
 			<youi:fieldText property="enTypeName" caption="企业类型名称" />
 		</youi:fieldLayout>
 	</youi:form>
 
 	<!--**********************************页面函数Start********************************-->
-
+	<youi:func name="form_etypeEnterprisetype_afterSubmit">
+		var etypeEnterprisetype = $elem('form_etypeEnterprisetype',pageId);
+		etypeEnterprisetype.form('reset');
+		etypeEnterprisetype.form('close');
+		$elem('grid_etypeEnterprisetype',pageId).grid('pReload');
+	</youi:func>
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
