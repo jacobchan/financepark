@@ -38,8 +38,12 @@
 			<youi:fieldText property="employeesDepartment" caption="所属部门" />
 			<youi:fieldText property="employeesTelephone" caption="员工电话" />
 			<youi:fieldText property="employeesName" caption="员工姓名" />
-			<youi:fieldText property="employeesComId.rzMem" caption="企业信息" />
-			<youi:fieldText property="memberId.memberNickname" caption="会员用户" />
+			<youi:fieldSelect property="employeesComId.rzId"
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json"
+				code="rzId" show="rzMem" caption="入驻企业" tooltips="入驻企业" />
+			<youi:fieldSelect property="memberId.memberId"
+				src="esb/web/memberInformationManager/getMemberInformations.json"
+				code="memberId" show="memberNickname" caption="会员用户" />
 		</youi:fieldLayout>
 	</youi:form>
 
