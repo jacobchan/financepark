@@ -20,6 +20,7 @@ import com.gsoft.framework.core.orm.PagerRecords;
 
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.StringUtils;
 
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 
@@ -77,13 +78,13 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
      */
     @EsbServiceMapping
     public EnterbusinessmanagerRz saveEnterbusinessmanagerRz(EnterbusinessmanagerRz o) throws BusException{
-//    	String enterbusinessmanagerRzId = o.getEnterbusinessmanagerRzId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(enterbusinessmanagerRzId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
+    	String enterbusinessmanagerRzId = o.getRzId();
+    	boolean isUpdate = StringUtils.isNotEmpty(enterbusinessmanagerRzId);
+    	if(isUpdate){//修改
+    	
+    	}else{//新增
+    		
+    	}
     	return enterbusinessmanagerRzDao.save(o);
     }
 
