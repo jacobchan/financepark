@@ -18,16 +18,16 @@
 	</youi:grid>
 	
 	<!--**********************************页面函数********************************-->
-	<!-- 行动作 -->
+	<!-- 初始化页面数据 -->
 	<youi:func name="subpage_init" params="record">
 		$elem('recordSer_propertyservicemanagerTs_tsId',pageId).fieldValue(record.tsId);
 		$elem('grid_proSer',pageId).grid('pReload');
 	</youi:func>
+	<!-- 批量提交维修单 -->
 	<youi:func name="func_grid_serSubmit" >
 		var tsId = $elem('recordSer_propertyservicemanagerTs_tsId',pageId).fieldValue();
 		var records = $elem('grid_proSer',pageId).grid('getRecords');
 		var submitRecord = {'records':records};
-
 		var fieldValues = $.youi.recordUtils.recordToParameters(submitRecord);
 		var params = '';
 		for(var i=0;i<fieldValues.length;i++){
