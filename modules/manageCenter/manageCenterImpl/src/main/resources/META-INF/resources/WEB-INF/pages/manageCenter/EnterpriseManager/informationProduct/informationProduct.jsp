@@ -17,7 +17,7 @@
 		</youi:fieldLayout>
 
 		<youi:gridCol property="productContent"  caption="产品描述"/>
-		<youi:gridCol property="productRe"  caption="企业ID"/>
+		<youi:gridCol property="productRe"  caption="企业"/>
 		<%-- <youi:gridCol property="rzId"  caption="ID2"/> --%>
 		<youi:gridCol property="productType"  caption="产品类别"/>
 		<youi:gridCol property="productName"  caption="产品名称"/>
