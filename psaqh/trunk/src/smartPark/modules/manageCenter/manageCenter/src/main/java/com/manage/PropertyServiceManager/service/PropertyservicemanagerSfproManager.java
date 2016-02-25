@@ -76,8 +76,14 @@ public interface PropertyservicemanagerSfproManager extends BaseManager{
      */
 	public BigDecimal getChargeAmountByCharge(PropertyservicemanagerCharge pc);
 	/**
-     * 保存物业收费登记项目
-     */
+	 * 保存物业收费登记项目
+	 * @param chargeId 
+	 * @param chargeIsbool
+	 * @param chargeCreatetime
+	 * @param chargeBedate
+	 * @param chargeEndate
+	 * @param sfproList
+	 */
 	public void saveChargeSfpro(String chargeId,String chargeIsbool,String chargeCreatetime,
 			String chargeBedate,String chargeEndate,@DomainCollection(domainClazz=PropertyservicemanagerSfpro.class) List<PropertyservicemanagerSfpro> sfproList);
 }
