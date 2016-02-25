@@ -164,12 +164,12 @@ public class NmIssueflowManagerImpl extends BaseManagerImpl implements NmIssuefl
 	}
     
     @EsbServiceMapping
-	public String getStartStatus(@ServiceParam(name="nmIssuetypeId") String  nmIssuetypeId) throws BusException {
+	public NmIssueflow getStartFlow(@ServiceParam(name="nmIssuetypeId") String  nmIssuetypeId) throws BusException {
 		List<NmIssueflow> nmIssueflows = getNmIssueflows(nmIssuetypeId);
 		if(nmIssueflows!=null){
 			for(NmIssueflow nmIssueflow:nmIssueflows){
 				if(StringUtils.isEmpty(nmIssueflow.getIssueFlowNStatus())){
-					return nmIssueflow.getIssueFlowCStatus();
+					return nmIssueflow;
 				}
 			}
 		}
@@ -177,17 +177,18 @@ public class NmIssueflowManagerImpl extends BaseManagerImpl implements NmIssuefl
 	}
     
     @EsbServiceMapping
-	public String getNextStatus(@ServiceParam(name="nmIssuetypeId") String  nmIssuetypeId,@ServiceParam(name="status") String currentStatus)
+	public NmIssueflow getNextFlow(@ServiceParam(name="nmIssuetypeId") String  nmIssuetypeId,@ServiceParam(name="issueFlowId") String issueFlowId)
 			throws BusException {
-		List<NmIssueflow> nmIssueflows = getNmIssueflows(nmIssuetypeId);
-		if(nmIssueflows!=null){
-			for(NmIssueflow nmIssueflow:nmIssueflows){
-				if(currentStatus.equals(nmIssueflow.getIssueFlowCStatus())){
-					return nmIssueflow.getIssueFlowCStatus();
-				}
-			}
-		}
-		return null;
+    	if(StringUtils.isNotEmpty(issueFlowId)){
+			NmIssueflow issueFlow = nmIssueflowDao.get(issueFlowId);
+			Collection<Condition> conditions = new ArrayList<Condition>();
+			conditions.add(ConditionUtils.getCondition("nmIssuetype.issueTypeId", Condition.EQUALS, nmIssuetypeId));
+			conditions.add(ConditionUtils.getCondition("issueFlowNStatus", Condition.EQUALS, issueFlow.getIssueFlowCStatus()));
+			List<NmIssueflow> nmIssueflows = nmIssueflowDao.commonQuery(conditions, null);
+			if(nmIssueflows!=null&&nmIssueflows.size()>0)
+				return nmIssueflows.get(0);
+    	}
+    	return null;
 	}
 
     private List<NmIssueflow> getNmIssueflows(String  nmIssuetypeId){
