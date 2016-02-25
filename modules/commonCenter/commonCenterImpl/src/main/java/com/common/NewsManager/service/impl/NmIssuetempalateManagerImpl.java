@@ -27,8 +27,8 @@ import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.OrderCollection;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.security.AccountPrincipal;
-import com.gsoft.framework.security.agt.entity.User;
 import com.gsoft.framework.util.SecurityUtils;
+import com.gsoft.framework.util.StringUtils;
 
 @Service("nmIssuetempalateManager")
 @Transactional
@@ -136,10 +136,23 @@ public class NmIssuetempalateManagerImpl extends BaseManagerImpl implements
 
 		return replaceChar(tempalateContent, '#', params);
 	}
+	
+	@EsbServiceMapping
+	public String genPolicyContent(@ServiceParam(name="nmIssuetempalateId") String nmIssuetempalateId,
+			@ServiceParam(name="paramStr") String paramStr) throws BusException {
+		String[] paramArry = null;
+		NmIssuetempalate nmIssuetempalate = nmIssuetempalateDao.get(nmIssuetempalateId);
+		if(StringUtils.isNotEmpty(paramStr)){
+			paramArry = paramStr.split(",|，");
+		}else{
+			paramArry = new String[]{};
+		}
+		return genPolicyContent(nmIssuetempalate,paramArry);
+	}
 
 	public static String replaceChar(String str, char c, String... params) {
 		if (str != null && !"".equals(str)) {
-			String[] tempArray = str.split("" + c + "");
+			String[] tempArray = (str+"_").split("" + c + "");
 			int countC = tempArray.length - 1;
 			if (countC == params.length) {
 				Pattern pattern = Pattern.compile("" + c + "");
@@ -155,8 +168,7 @@ public class NmIssuetempalateManagerImpl extends BaseManagerImpl implements
 				matcher.appendTail(sb);
 				return sb.toString();
 			} else {
-				// System.out.println("参数个数不一致");
-				throw new BusException("参数个数不一致");
+		//		throw new BusException("参数个数不一致");
 			}
 		}
 		return null;

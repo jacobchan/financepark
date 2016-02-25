@@ -78,6 +78,18 @@ public class NmIssuetypeManagerImpl extends BaseManagerImpl implements NmIssuety
     public NmIssuetype saveNmIssuetype(NmIssuetype o) throws BusException{
         String issueTypeId = o.getIssueTypeId();
         boolean isUpdate = StringUtils.isNotEmpty(issueTypeId);
+        
+        //编码唯一判断
+        boolean hasCode = nmIssuetypeDao.exists("issueTypeCode", o.getIssueTypeCode());
+        if(hasCode){
+        	NmIssuetype IssueType = nmIssuetypeDao.getObjectByUniqueProperty("issueTypeCode", o.getIssueTypeCode());
+        	if(!isUpdate){
+        		throw new BusException("类型编码已经存在");
+        	}
+        	if(!issueTypeId.equals(IssueType.getIssueTypeId())){
+        		throw new BusException("类型编码已经存在");
+        	}
+        }
 
         if (!isUpdate)
         {
@@ -144,9 +156,20 @@ public class NmIssuetypeManagerImpl extends BaseManagerImpl implements NmIssuety
 	      conditions.add(ConditionFactory.getInstance().getCondition("parentIssueTypeId", "IS_NULL", null));
 	      children = this.nmIssuetypeDao.commonQuery(conditions, null);
 	    } else {
-	      children = this.nmIssuetypeDao.getList("parentAgencyId", parentId);
+	      children = this.nmIssuetypeDao.getList("parentIssueTypeId", parentId);
 	    }
 		return children;
+	}
+    
+    @EsbServiceMapping
+	public String codeExist(@ServiceParam(name="issueTypeCode") String code) throws BusException {
+		boolean exist = nmIssuetypeDao.exists("issueTypeCode", code);
+		if(exist){
+	//		return "编码已经存在";
+			throw new BusException("编码已经存在");
+		}else{
+			return null;
+		}
 	}
 
 }

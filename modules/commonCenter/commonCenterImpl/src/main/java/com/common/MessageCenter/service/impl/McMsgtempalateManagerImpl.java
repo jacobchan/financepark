@@ -14,7 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.common.MessageCenter.dao.McMsgtempalateDao;
 import com.common.MessageCenter.entity.McMsgtempalate;
 import com.common.MessageCenter.service.McMsgtempalateManager;
-import com.common.MessageCenter.util.MessageGeneratUtils;
+import com.gsoft.common.util.MessageUtils;
+import com.gsoft.common.util.StringUtils;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -106,7 +107,12 @@ public class McMsgtempalateManagerImpl extends BaseManagerImpl implements McMsgt
 	}
 	@Override
 	public String genMsgContent(McMsgtempalate msgtempalate,Map<String,String> replaceMap) throws BusException {
-		return com.gsoft.common.util.StringUtils.replaceAllString(msgtempalate.getMsgTempalateContent(), MessageGeneratUtils.placeholders, replaceMap);
+		return com.gsoft.common.util.StringUtils.replaceAllString(msgtempalate.getMsgTempalateContent(), MessageUtils.placeholders, replaceMap);
+	}
+	
+	@EsbServiceMapping
+	public String getParamCount(@ServiceParam(name="content") String content) throws BusException {
+		return StringUtils.contantCount(content, MessageUtils.placeholders)+"";
 	}
 
 }

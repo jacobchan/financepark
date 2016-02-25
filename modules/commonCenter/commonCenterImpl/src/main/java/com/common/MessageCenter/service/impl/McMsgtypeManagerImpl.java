@@ -3,25 +3,30 @@
  */
 package com.common.MessageCenter.service.impl;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MessageCenter.dao.McMsgtypeDao;
+import com.common.MessageCenter.entity.McMsgtype;
+import com.common.MessageCenter.service.McMsgtypeManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
+import com.gsoft.framework.core.orm.ConditionFactory;
 //import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-import com.gsoft.framework.esb.annotation.*;
-import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-import com.common.MessageCenter.entity.McMsgtype;
-import com.common.MessageCenter.dao.McMsgtypeDao;
-import com.common.MessageCenter.service.McMsgtypeManager;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.ServiceParam;
+import com.gsoft.framework.util.StringUtils;
 
 @Service("mcMsgtypeManager")
 @Transactional
@@ -106,6 +111,19 @@ public class McMsgtypeManagerImpl extends BaseManagerImpl implements McMsgtypeMa
     
     public boolean exsitMcMsgtype(String propertyName,Object value) throws BusException{
 		return mcMsgtypeDao.exists(propertyName,value);
+	}
+    
+	@EsbServiceMapping
+	public List<McMsgtype> getChildren(@ServiceParam(name="msgTypeId") String parentId) throws BusException {
+	    List<McMsgtype> children ;
+	    if (StringUtils.isEmpty(parentId)) {
+	      Collection<Condition> conditions = new ArrayList<Condition>();
+	      conditions.add(ConditionFactory.getInstance().getCondition("msgTypeParent", "IS_NULL", null));
+	      children = this.mcMsgtypeDao.commonQuery(conditions, null);
+	    } else {
+	      children = this.mcMsgtypeDao.getList("msgTypeParent", parentId);
+	    }
+		return children;
 	}
 
 }
