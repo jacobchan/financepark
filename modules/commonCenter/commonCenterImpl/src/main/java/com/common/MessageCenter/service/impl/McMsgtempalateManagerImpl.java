@@ -16,6 +16,7 @@ import com.common.MessageCenter.entity.McMsgtempalate;
 import com.common.MessageCenter.service.McMsgtempalateManager;
 import com.gsoft.common.util.MessageUtils;
 import com.gsoft.common.util.StringUtils;
+import com.gsoft.entity.MessageTempCode;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -70,13 +71,22 @@ public class McMsgtempalateManagerImpl extends BaseManagerImpl implements McMsgt
      */
     @EsbServiceMapping
     public McMsgtempalate saveMcMsgtempalate(McMsgtempalate o) throws BusException{
-//    	String mcMsgtempalateId = o.getMcMsgtempalateId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(mcMsgtempalateId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
+    	String mcMsgtempalateId = o.getMsgTempalateId();
+    	boolean isUpdate = com.gsoft.framework.util.StringUtils.isNotEmpty(mcMsgtempalateId);
+    	if(isUpdate){//修改
+    		McMsgtempalate msgTempalate = getMsgTempalate(o.getUniqueCode());
+    		if(msgTempalate!=null&&!mcMsgtempalateId.equals(msgTempalate.getUniqueCode())){
+    			throw new BusException("唯一码已经存在");
+    		}
+    	
+    	}else{//新增
+    		if(mcMsgtempalateDao.exists("uniqueCode", o.getUniqueCode())){
+    			throw new BusException("唯一码已经存在");
+    		}
+    	}
+		if(!MessageTempCode.contant(o.getUniqueCode())){
+			throw new BusException("唯一码不存在存在");
+		}
     	return mcMsgtempalateDao.save(o);
     }
 
@@ -113,6 +123,11 @@ public class McMsgtempalateManagerImpl extends BaseManagerImpl implements McMsgt
 	@EsbServiceMapping
 	public String getParamCount(@ServiceParam(name="content") String content) throws BusException {
 		return StringUtils.contantCount(content, MessageUtils.placeholders)+"";
+	}
+	@Override
+	public McMsgtempalate getMsgTempalate(String uniqueCode)
+			throws BusException {
+		return mcMsgtempalateDao.getObjectByUniqueProperty("uniqueCode", uniqueCode);
 	}
 
 }
