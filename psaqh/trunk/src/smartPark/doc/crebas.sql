@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2016/2/23 15:43:45                           */
+/* Created on:     2016/2/25 16:29:54                           */
 /*==============================================================*/
 
 
@@ -387,7 +387,7 @@ alter table sp_OrderManager_orderMerchan_nexus
 create table sp_OrderManager_orderProjectType_
 (
    ORDERPROJECTTYPE_ID_ char(36) not null,
-   ORDERTYPE_ID_        char(36),
+   ORDERTYPE_ID_        varchar(10),
    ORDERPROJECTTYPE_DISPLAY_NAME_ varchar(128),
    ORDERPROJECTTYPE_FIELD_NAME_ varchar(128),
    ORDERPROJECTTYPE_FIELD_TYPE_ char(2),
@@ -436,9 +436,9 @@ alter table sp_OrderManager_orderProjectType_value_
 /*==============================================================*/
 create table sp_OrderManager_orderType_
 (
-   ORDERTYPE_ID_        char(36) not null,
-   ORDERTYPE_NAME_      varchar(128),
-   ORDERTYPE_PROJECT_NAME_ varchar(128),
+   ORDERTYPE_ID_        varchar(10) not null,
+   ORDERTYPE_NAME_      varchar(128) not null,
+   ORDERTYPE_PROJECT_NAME_ varchar(128) not null,
    ORDERTYPE_PROJECT_TEMPLATE_ADDRESS_ varchar(256),
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
@@ -458,7 +458,7 @@ create table sp_OrderManager_userOrder
 (
    USERORDER_ID_        char(36) not null,
    MEMBER_ID_           char(36),
-   ORDERTYPE_ID_        char(36),
+   ORDERTYPE_ID_        varchar(10),
    BX_ID_               varchar(36),
    USERORDER_CODE_      varchar(32),
    USERORDER_PROJECT_   varchar(128),
@@ -1147,6 +1147,7 @@ create table sp_member_information
    COMPANY_INVITECODE_  varchar(32),
    MEMBER_HEAD_PORTRAIT_ varchar(32),
    MEMBER_NICKNAME_     varchar(32),
+   MEMBER_PASSWORD_     varchar(64),
    MEMBER_NAME_         varchar(32),
    MEMBER_BIRTHDATE_    datetime,
    MEMBER_DESCRIBE2_    varchar(256),
@@ -1262,15 +1263,17 @@ alter table sp_nm_issueType_
 create table sp_policy_apply
 (
    POLICY_APPLY_ID_     char(36) not null,
+   ISSUE_FLOW_ID_       char(36),
+   POLICY_ID_           char(36),
    MEMBER_ID_           char(36),
    POLICY_APPLY_CONTACT_PEOPLE_ varchar(32),
    POLICY_APPLY_CONTACT_TEL_ varchar(32),
    POLICY_APPLY_CONPANY_NAME_ varchar(32),
-   POLICY_APPLY_STATUS_ varchar(2),
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
-   CREATE_TIME_         datetime
+   CREATE_TIME_         datetime,
+   POLICY_APPLY_STATUS_ varchar(2)
 );
 
 alter table sp_policy_apply comment '330801-Õþ²ßÉêÇë¼ÇÂ¼';
@@ -2036,8 +2039,14 @@ alter table sp_nm_issueTempalate_ add constraint FK_320601_360202 foreign key (I
 alter table sp_nm_issueType_ add constraint FK_Relationship_56 foreign key (sp__ISSUE_TYPE_ID_)
       references sp_nm_issueType_ (ISSUE_TYPE_ID_) on delete restrict on update restrict;
 
+alter table sp_policy_apply add constraint FK_Relationship_32 foreign key (POLICY_ID_)
+      references sp_nm_issueNews_ (POLICY_ID_) on delete restrict on update restrict;
+
 alter table sp_policy_apply add constraint FK_Relationship_46 foreign key (MEMBER_ID_)
       references sp_member_information (MEMBER_ID_) on delete restrict on update restrict;
+
+alter table sp_policy_apply add constraint FK_Relationship_59 foreign key (ISSUE_FLOW_ID_)
+      references sp_nm_issueFlow_ (ISSUE_FLOW_ID_) on delete restrict on update restrict;
 
 alter table sp_propertyservicemanager_charge add constraint FK_Relationship_31 foreign key (USERORDER_ID_)
       references sp_OrderManager_userOrder (USERORDER_ID_) on delete restrict on update restrict;
