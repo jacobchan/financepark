@@ -11,7 +11,7 @@
 		<menu id="012000" text="企业员工信息" href="page/manageCenter.EmployeeManager.enterpriseEmployees/enterpriseEmployees.html"></menu>
 		<menu id="013000" text="企业邀请记录" href="page/manageCenter.EmployeeManager.enterpriseInvitation/enterpriseInvitation.html"></menu>
 		<menu id="014000" text="会员接受邀请" href="page/manageCenter.EmployeeManager.enterpriseInvitation/acceptInvitation.html"></menu>
-		<menu id="015000" text="企业通讯录" href="page/manageCenter.EmployeeManager.enterpriseInvitation/enterpriseInvitation.html"></menu>
+		<menu id="015000" text="企业通讯录" href="page/manageCenter.EmployeeManager.enterpriseInvitation/enterprisemaillist.html"></menu>
 	</menu>
 	<menu id="320100" text="园区基础">
 		<menu id="320101" text="园区管理" href="page/commonCenter.BuildingBaseManager.bbmPark/bbmPark.html"></menu>
