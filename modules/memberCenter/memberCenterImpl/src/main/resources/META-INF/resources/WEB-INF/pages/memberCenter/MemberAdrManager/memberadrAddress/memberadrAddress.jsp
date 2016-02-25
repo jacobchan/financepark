@@ -28,11 +28,15 @@
 			<youi:fieldText property="addressName"  caption="联系人" notNull="true"/>
 			<youi:fieldText property="addressPhone"  caption="联系电话" notNull="true" expression="^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$" expressionMessage="手机号码格式不正确"/>
 			<youi:fieldText property="addressDetail"  caption="详细地址" notNull="true"/>
-			<youi:fieldSelect property="addressStatus"  caption="默认状态" convert="bool" notNull="true"/>
+			<youi:fieldSelect property="addressStatus"  caption="默认状态" convert="bool" defaultValue="1" notNull="true"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
 	<!--**********************************页面函数Start********************************-->
 	
 	<!--**********************************页面函数End**********************************-->
+	<youi:func name="form_memberadrAddress_afterSubmit">
+		var gridElement=$elem('grid_memberadrAddress',pageId);
+		gridElement.grid('pReload');
+	</youi:func>
 </youi:page>
