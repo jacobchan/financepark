@@ -6,12 +6,13 @@
 				editSrc="esb/web/mcMsgtypeManager/getMcMsgtype.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/mcMsgtypeManager/removeMcMsgtype.json">
 		<youi:fieldLayout labelWidths="100,100">
-			<youi:fieldText property="msgTypeCaption"  caption="消息类型名称"/>
-			<youi:fieldText property="msgTypeParent"  caption="消息类型上级"/>
+			<%-- <youi:fieldText property="msgTypeParent"  caption="消息类型上级"/> --%>
+			<youi:fieldTree property="msgTypeParent" caption="消息类型上级" tree="${typeTree}" simple="false"/>
+			<youi:fieldText property="msgTypeCaption"  caption="消息类型名称" operator="LIKE"/>
 		</youi:fieldLayout>
-		<youi:gridCol property="msgTypeCaption"  caption="消息类型名称" width="30%"/>
-		<youi:gridCol property="parentTypeCaption"  caption="消息类型上级" width="30%"/>
-		<youi:gridCol property="msgTypeStatus"  caption="消息类型状态" width="30%"/>
+		<youi:gridCol property="parentTypeCaption"  caption="消息类型上级" width="40%" align="center"/>
+		<youi:gridCol property="msgTypeCaption"  caption="消息类型名称" width="40%" align="center"/>
+		<%-- <youi:gridCol property="msgTypeStatus"  caption="消息类型状态" width="30%"/> --%>
 
 		<youi:gridCol width="80" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
@@ -23,12 +24,12 @@
 	<youi:form dialog="true" caption="消息类型" id="form_mcMsgtype" action="esb/web/mcMsgtypeManager/saveMcMsgtype.json">
 		<youi:fieldLayout prefix="record" columns="2" labelWidths="100,100">
 			<youi:fieldHidden property="msgTypeId"  caption="消息类型ID"/>
-			<youi:fieldText property="msgTypeCaption"  caption="消息类型名称"/>
+			<youi:fieldText property="msgTypeCaption"  caption="消息类型名称" notNull="true"/>
 			<%-- <youi:fieldText property="msgTypeParent"  caption="消息类型上级"/> --%>
 			<youi:fieldSelect property="msgTypeParent" caption="消息类型上级"
 				src="esb/web/mcMsgtypeManager/getMcMsgtypes.json" show="msgTypeCaption" code="msgTypeId"/>
-			<youi:fieldText property="msgTypeStatus"  caption="消息类型状态"/>
-			<youi:fieldLabel convert="booleanConvert" width="502" property="isLeaf" defaultValue="1" caption="是否子节点"/>
+			<youi:fieldHidden property="msgTypeStatus"  caption="消息类型状态" defaultValue="1"/>
+			<youi:fieldHidden property="isLeaf" defaultValue="1" caption="是否子节点"/>
 		</youi:fieldLayout>
 	</youi:form>
 	

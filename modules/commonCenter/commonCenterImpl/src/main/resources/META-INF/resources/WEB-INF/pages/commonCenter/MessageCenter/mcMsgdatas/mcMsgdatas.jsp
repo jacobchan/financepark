@@ -6,15 +6,16 @@
 				editSrc="esb/web/mcMsgdatasManager/getMcMsgdatas.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/mcMsgdatasManager/removeMcMsgdatas.json">
 		<youi:fieldLayout labelWidths="100,100">
-			<youi:fieldText property="msgType"  caption="消息类型"/>
-			<youi:fieldText property="msgCaption"  caption="消息主题"/>
+			<youi:fieldTree property="msgType" caption="消息类型" tree="${typeTree}" simple="false"/>
+			<youi:fieldText property="msgCaption"  caption="消息主题" operator="LIKE"/>
 		</youi:fieldLayout>
 
-		<youi:gridCol property="msgCaption"  caption="消息主题" width="150"/>
-		<youi:gridCol property="msgContent"  caption="消息内容" width="350"/>
-		<youi:gridCol property="receive"  caption="接收人" width="150"/>
-		<youi:gridCol property="sendDate"  caption="发送时间" width="150"/>
-		<youi:gridCol property="sendStatus"  caption="发送状态" width="150"/>
+		<youi:gridCol property="msgCaption"  caption="消息主题" width="15%" align="center"/>
+		<youi:gridCol property="msgContent"  caption="消息内容" width="40%"/>
+		<youi:gridCol property="receive"  caption="接收人" width="15%" align="center"/>
+		<youi:gridCol property="sendDate"  caption="发送时间" width="15%" align="center"/>
+		<youi:gridCol property="sendStatus"  caption="发送状态" width="15%" align="center"/>
+		
 		<youi:gridCol width="80" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改" icon="search"/>
 			<youi:button name="remove" caption="删除"/>
