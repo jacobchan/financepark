@@ -17,6 +17,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.member.MemberAdrManager.entity.MemberadrAddress;
 import com.member.MemberAdrManager.dao.MemberadrAddressDao;
@@ -64,13 +65,20 @@ public class MemberadrAddressManagerImpl extends BaseManagerImpl implements Memb
      */
     @EsbServiceMapping
     public MemberadrAddress saveMemberadrAddress(MemberadrAddress o) throws BusException{
-//    	String memberadrAddressId = o.getMemberadrAddressId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(memberadrAddressId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
+    	String memberadrAddressId = o.getAddressId();
+    	boolean isUpdate = StringUtils.isNotEmpty(memberadrAddressId);
+    	if(isUpdate){//修改
+
+    	}else{//新增
+    		
+    	}
+		List<MemberadrAddress> memberadrAddresss=memberadrAddressDao.getList("memberId.memberId", o.getMemberId().getMemberId());
+		if(o.getAddressStatus().equals("0")){
+    		for(MemberadrAddress ma:memberadrAddresss){
+    			ma.setAddressStatus("1");//设置所有状态为非默认状态
+    			memberadrAddressDao.save(ma);
+    		}
+		}
     	return memberadrAddressDao.save(o);
     }
 
