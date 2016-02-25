@@ -27,8 +27,8 @@ public class EnterpriseRole implements Domain {
 	private String rId;// 角色主键
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade={CascadeType.MERGE,CascadeType.PERSIST}, optional=false)
-	@JoinColumn(name = "MEMBER_ID_", insertable=true, updatable=false)
-	private MemberInformation memberInformation;// 企业员工ID
+	@JoinColumn(name = "EMPLOYEES_ID", insertable=true, updatable=false)
+	private EnterpriseEmployees employees;// 企业员工ID
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade={CascadeType.MERGE,CascadeType.PERSIST}, optional=false)
 	@JoinColumn(name = "ROLEID", insertable=true, updatable=false)
@@ -56,12 +56,12 @@ public class EnterpriseRole implements Domain {
 		this.rId = rId;
 	}
 
-	public MemberInformation getMemberInformation() {
-		return memberInformation;
+	public EnterpriseEmployees getEmployees() {
+		return employees;
 	}
 
-	public void setMemberInformation(MemberInformation memberInformation) {
-		this.memberInformation = memberInformation;
+	public void setEmployees(EnterpriseEmployees employees) {
+		this.employees = employees;
 	}
 
 	public Role getRole() {
