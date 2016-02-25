@@ -1,10 +1,10 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
-	<youi:grid id="grid_enterpriseInvitation" idKeys="invitationId"
+	<youi:grid id="grid_enterprisemaillist" idKeys="maillistId"
 		caption="邀请记录表列表" panel="false"
-		src="esb/web/enterpriseInvitationManager/getPagerEnterpriseInvitations.json"
-		dataFormId="form_enterpriseInvitation"
+		src="esb/web/enterpriseEmployeesManager/getPagerEnterpriseEmployeess.json"
+		dataFormId="form_enterprisemaillist"
 		editSrc="esb/web/enterpriseInvitationManager/getEnterpriseInvitation.json"
 		edit="NOT" remove="NOT" showCheckbox="true"
 		removeSrc="esb/web/enterpriseInvitationManager/removeEnterpriseInvitation.json">
@@ -15,6 +15,7 @@
 			<youi:fieldText property="invitationTelephone" caption="会员电话" />
 			<youi:fieldText property="invitationCode" caption="企业邀请码" />
 		</youi:fieldLayout>
+		<youi:button name="distribution" caption="分配角色" icon="search" active="1" />
 		<youi:gridCol property="enterbusinessmanagerRz.rzMem" caption="入驻企业" width="280" />
 		<youi:gridCol property="invitationTelephone" caption="会员电话" width="120" />
 		<youi:gridCol property="invitationCode" caption="企业邀请码" width="160" />
@@ -26,7 +27,7 @@
 	</youi:grid>
 
 	<!-- form-邀请记录表编辑 -->
-	<youi:form dialog="true" caption="邀请记录表" id="form_enterpriseInvitation"
+	<youi:form dialog="true" caption="邀请记录表" id="form_enterprisemaillist"
 		action="esb/web/enterpriseInvitationManager/saveEnterpriseInvitation.json">
 		<youi:fieldLayout prefix="record" columns="1" labelWidths="120,120">
 			<youi:fieldHidden property="invitationId" caption="邀请记录系列" />
@@ -38,17 +39,12 @@
 		</youi:fieldLayout>
 	</youi:form>
 
-	<!--**********************************页面函数Start********************************-->
-	<youi:func name="record_enterbusinessmanagerRz_rzId_change" params="value">
-		if(value!=''){
-			$.youi.ajaxUtil.ajax({
-				url:'/esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json',
-				data:{rzId:value},
-				success:function(result){
-					$elem('record_invitationCode',pageId).fieldValue(result.record.rzSign);
-				}
-			});
-		}
+	<!--**********************************页面函数Start********************************-->	
+	<!-- 分配角色 -->
+	<youi:func name="func_grid_distribution" params="value">
+		var gridElement = $elem('grid_enterprisemaillist',pageId),
+		selectedRecord = gridElement.grid('getSelectedRecord');
+		var phone = selectedRecord.invitationTelephone;
 	</youi:func>
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
