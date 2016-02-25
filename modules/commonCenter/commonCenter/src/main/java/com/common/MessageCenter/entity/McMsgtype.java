@@ -4,11 +4,12 @@
 package com.common.MessageCenter.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
+import com.gsoft.framework.core.dataobj.tree.TreeAttribute;
 /**
  * 实体: 消息类型
  * @author
@@ -56,7 +57,7 @@ public class McMsgtype implements Domain{
 	public void setParentTypeCaption(String parentTypeCaption) {
 		this.parentTypeCaption = parentTypeCaption;
 	}
-	
+	@TreeAttribute("text")
 	public String getMsgTypeCaption(){
 		return this.msgTypeCaption;
 	}
@@ -71,6 +72,7 @@ public class McMsgtype implements Domain{
 	public void setMsgTypeStatus(String msgTypeStatus){
 		this.msgTypeStatus = msgTypeStatus;
 	}
+	@TreeAttribute("parentId")
 	public String getMsgTypeParent(){
 		return this.msgTypeParent;
 	}
@@ -78,6 +80,7 @@ public class McMsgtype implements Domain{
 	public void setMsgTypeParent(String msgTypeParent){
 		this.msgTypeParent = msgTypeParent;
 	}
+	@TreeAttribute("id")
 	public String getMsgTypeId(){
 		return this.msgTypeId;
 	}
