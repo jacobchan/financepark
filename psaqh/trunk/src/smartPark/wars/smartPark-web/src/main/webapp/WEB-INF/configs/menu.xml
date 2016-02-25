@@ -42,6 +42,15 @@
         <menu id="330203" text="维修费用清单管理" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerSer/propertyservicemanagerSer.html"></menu>
         <menu id="330204" text="物业缴费登记管理" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerCharge/propertyservicemanagerCharge.html"></menu>
 	</menu>
+	<menu id="140000" text="订单管理">
+		<menu id="140007" text="订单类型管理" href="page/commonCenter.OrderManager.ordermanagerOrdertype/ordermanagerOrdertype.html"></menu>
+		<menu id="140001" text="采购订单管理" href="page/commonCenter.OrderManager.ordermanagerUserorder/purOrdermanager.html"></menu>
+		<menu id="140002" text="餐饮订单管理" href="page/commonCenter.OrderManager.ordermanagerUserorder/foodOrdermanager.html"></menu>
+		<menu id="140003" text="企业服务订单管理" href="page/commonCenter.OrderManager.ordermanagerUserorder/compSerOrderMg.html"></menu>
+		<menu id="140004" text="IT服务订单管理" href="page/commonCenter.OrderManager.ordermanagerUserorder/ITSerOrderMg.html"></menu>
+		<menu id="140005" text="政策申请记录管理" href="page/manageCenter.PolicyManager.policyApply/policyApplyManager.html"></menu>
+		<menu id="140006" text="活动申请流程处理" href="page/manageCenter.ActivityManager.activityApply/activityApplyManager.html"></menu>
+	</menu>
 	<menu id="120000" text="商品管理">
 		<menu id="120001" text="商户信息管理" href="page/commonCenter.purchasingManager.purchasingmanagerMerchant/purchasingmanagerMerchant.html"></menu>
 		<!-- <menu id="020002" text="商户地址管理" href="page/commonCenter.purchasingManager.purchasingmanagerMerchantAddress/purchasingmanagerMerchantAddress.html"></menu> -->
