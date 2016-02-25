@@ -10,8 +10,8 @@
 			<youi:fieldText property="mediaTitle"  caption="标题"/>
 			<youi:fieldSelect property="mediaStatus"  caption="发布状态" convert="financingStatus"/>
 			<%-- <youi:fieldText property="mediaRe"  caption="企业信息ID"/> --%>
-			<youi:fieldSelect property="mediaRe" caption="企业信息ID" 
-				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
+			<youi:fieldSelect property="mediaRe" caption="企业信息" 
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzName"/>
 			<%-- <youi:fieldText property="mediaUrl"  caption="图片URL"/> --%>
 			<youi:fieldText property="rzId"  caption="ID2"/>
 		</youi:fieldLayout>
@@ -35,8 +35,8 @@
 			<youi:fieldText property="mediaTitle"  caption="标题"/>
 			<youi:fieldSelect property="mediaStatus"  caption="发布状态" convert="financingStatus"/>
 			<%-- <youi:fieldText property="mediaRe"  caption="企业信息ID"/> --%>
-			<youi:fieldSelect property="mediaRe" caption="企业信息ID" 
-				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
+			<youi:fieldSelect property="mediaRe" caption="企业信息" 
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzName"/>
 			<%-- <youi:fieldHidden property="mediaId"  caption="ID"/> --%>
 			<youi:fieldText property="mediaUrl"  caption="图片URL"/>
 			<youi:fieldText property="rzId"  caption="ID2"/>
