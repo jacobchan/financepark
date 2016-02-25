@@ -93,21 +93,21 @@ public interface NmIssueflowManager extends BaseManager{
 	public List<NmIssueflow> getNmIssueflowsWithTypeid(String issueTypeId,String[] properties,String[] values) throws BusException;
 	
 	/**
-	 * 根据新闻发布类型确认初始状态
-	 * @param nmIssuetype
+	 * 根据新闻发布类型确认初始流程
+	 * @param nmIssuetypeId
 	 * @return
 	 * @throws BusException
 	 */
-	public String getStartStatus(String nmIssuetypeId) throws BusException;
+	public NmIssueflow getStartFlow(String nmIssuetypeId) throws BusException;
 	
 	/**
-	 * 根据新闻发布类型和当前状态确认下一步状态
+	 * 根据新闻发布类型和流程确认下一步流程
 	 * @param nmIssuetypeId
-	 * @param currentStatus
+	 * @param issueFlowId
 	 * @return
 	 * @throws BusException
 	 */
-	public String getNextStatus(String nmIssuetypeId,String currentStatus) throws BusException;
+	public NmIssueflow getNextFlow(String nmIssuetypeId,String issueFlowId) throws BusException;
 	
 	/**
 	 * 状态查对应操作
