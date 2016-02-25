@@ -9,6 +9,7 @@ import org.hibernate.validator.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.EnterpriceTypeManager.entity.EtypeEnterprisetype;
 import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
@@ -55,9 +56,10 @@ public class EnterbusinessmanagerRz implements Domain{
 	@Length(max=36)
 	private String rzId;//ID
 
-	@Column(name = "en_type_id_")
-	@Length(max=36)
-	private String enTypeId;//企业类型ID
+
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="en_type_id_")
+	private EtypeEnterprisetype enTypeId;//企业类型ID
 
 	@Column(name = "RZ_SIGN_")
 	@Length(max=8)
@@ -140,13 +142,15 @@ public class EnterbusinessmanagerRz implements Domain{
 	public void setRzId(String rzId){
 		this.rzId = rzId;
 	}
-	public String getEnTypeId(){
-		return this.enTypeId;
-	}
 	
-	public void setEnTypeId(String enTypeId){
+	public EtypeEnterprisetype getEnTypeId() {
+		return enTypeId;
+	}
+
+	public void setEnTypeId(EtypeEnterprisetype enTypeId) {
 		this.enTypeId = enTypeId;
 	}
+
 	public String getRzSign(){
 		return this.rzSign;
 	}
