@@ -45,7 +45,7 @@ public class EnterpriseRoleManagerImpl extends BaseManagerImpl implements
 	 */
 	@EsbServiceMapping
 	public EnterpriseRole getEnterpriseRole(
-			@ServiceParam(name = "invitationId") String id) throws BusException {
+			@ServiceParam(name = "rId") String id) throws BusException {
 		return enterpriseRoleDao.get(id);
 	}
 
@@ -80,7 +80,7 @@ public class EnterpriseRoleManagerImpl extends BaseManagerImpl implements
 	 */
 	@EsbServiceMapping
 	public void removeEnterpriseRole(
-			@ServiceParam(name = "invitationId") String id) throws BusException {
+			@ServiceParam(name = "rId") String id) throws BusException {
 		enterpriseRoleDao.remove(id);
 	}
 
@@ -90,7 +90,7 @@ public class EnterpriseRoleManagerImpl extends BaseManagerImpl implements
 	 * @param ids
 	 */
 	public void removeEnterpriseRoles(
-			@ServiceParam(name = "invitationId") String[] ids)
+			@ServiceParam(name = "rId") String[] ids)
 			throws BusException {
 		for (String id : ids) {
 			removeEnterpriseRole(id);
@@ -99,7 +99,7 @@ public class EnterpriseRoleManagerImpl extends BaseManagerImpl implements
 
 	@EsbServiceMapping
 	public boolean exsitEnterpriseRole(
-			@ServiceParam(name = "invitationId") String id) throws BusException {
+			@ServiceParam(name = "rId") String id) throws BusException {
 		return enterpriseRoleDao.exists(id);
 	}
 
