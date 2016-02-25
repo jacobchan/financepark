@@ -70,6 +70,10 @@ public class EnterbusinessmanagerRz implements Domain{
 	@Column(name = "RZ_TELEPHONE_")
 	@Length(max=16)
 	private String rzTelephone;//联系方式
+	
+	@Column(name = "RZ_Name_")
+	@Length(max=36)
+	private String rzName;//企业名称
 
 	@Column(name = "PARK_ID_")
 	@Length(max=36)
@@ -77,6 +81,14 @@ public class EnterbusinessmanagerRz implements Domain{
 	
 	
 	
+	public String getRzName() {
+		return rzName;
+	}
+
+	public void setRzName(String rzName) {
+		this.rzName = rzName;
+	}
+
 	public MemberInformation getRzManager() {
 		return rzManager;
 	}
