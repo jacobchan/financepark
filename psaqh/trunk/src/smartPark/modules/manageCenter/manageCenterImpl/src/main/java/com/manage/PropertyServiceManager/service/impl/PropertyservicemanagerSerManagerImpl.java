@@ -80,9 +80,9 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
     	if(propertyservicemanagerTsed==null){
     		throw new BusException("没有派工记录!");
     	}else{
-    		if(propertyservicemanagerTsed.getTsStatus().equals("01")){	
+    		if(propertyservicemanagerTsed.getTsStatus().equals("01")){//派工状态已接单
     			PropertyservicemanagerBx bx = propertyservicemanagerTsed.getPropertyservicemanagerBx();
-    			if(!bx.getBxStatus().equals("05")){
+    			if(!bx.getBxStatus().equals("05")){//管理员已定价不能新增或修改维修单
     				BigDecimal amount =null;
 	    			if(bx.getBxAmount()==null){//自动累计计算总金额
 	    				amount = o.getSerPrice();
@@ -91,7 +91,7 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
 	    				amount = bx.getBxAmount().add(o.getSerPrice());
 	    				bx.setBxAmount(amount);
 	    			}
-	    			if(bx.getBxStatus().equals("03")){
+	    			if(bx.getBxStatus().equals("03")){//变更状态为已完工
 	    				bx.setBxStatus("04");
 	    			}
 		    		propertyservicemanagerBxDao.save(bx);
@@ -105,7 +105,14 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
     	}
     }
 
-  //根据派工记录获取维修费用记录列表
+    /**
+	 * 根据派工id查询维修费用清单
+	 * @param pager
+	 * @param ts 派工对象
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
   	@SuppressWarnings({ "rawtypes", "unchecked" })
   	@EsbServiceMapping
   	public PagerRecords getPagerPropertyservicemanagerSersByTs(Pager pager,//分页条件
@@ -143,5 +150,45 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
     public boolean exsitPropertyservicemanagerSer(String propertyName,Object value) throws BusException{
 		return propertyservicemanagerSerDao.exists(propertyName,value);
 	}
+
+    /**
+	 * 批量新增维修费用清单
+	 * @param tsId 派工ID
+	 * @param listSer 费用清单列表
+	 */
+    @EsbServiceMapping
+	public void saveListSer(@ServiceParam(name="tsId") String tsId,
+			@DomainCollection(domainClazz=PropertyservicemanagerSer.class) List<PropertyservicemanagerSer> listSer) {
+    	PropertyservicemanagerTs  propertyservicemanagerTsed = propertyservicemanagerTsDao.get(tsId);
+    	if(propertyservicemanagerTsed==null){
+    		throw new BusException("没有派工记录!");
+    	}else{
+    		if(propertyservicemanagerTsed.getTsStatus().equals("01")){//派工状态已接单
+    			PropertyservicemanagerBx bx = propertyservicemanagerTsed.getPropertyservicemanagerBx();
+    			if(!bx.getBxStatus().equals("05")||!bx.getBxStatus().equals("06")||!bx.getBxStatus().equals("07")){//管理员已定价不能新增或修改维修单
+    				BigDecimal amount = BigDecimal.valueOf(0);
+    					for(PropertyservicemanagerSer ser : listSer){
+    						amount = amount.add(ser.getSerPrice());
+    					}
+	    				bx.setBxAmount(amount);
+	    			if(bx.getBxStatus().equals("03")){//变更状态为已完工
+	    				bx.setBxStatus("04");
+	    			}
+		    		propertyservicemanagerBxDao.save(bx);
+		    		for(PropertyservicemanagerSer allser : listSer){
+						allser.setPropertyservicemanagerTs(propertyservicemanagerTsed);
+						propertyservicemanagerSerDao.save(allser);
+					}
+    			}else{
+    				throw new BusException("管理员已定价!");
+    			}
+    		}else{
+    			throw new BusException("派工记录有误!");
+    		}
+    	}
+		
+	}
+    
+    
 
 }

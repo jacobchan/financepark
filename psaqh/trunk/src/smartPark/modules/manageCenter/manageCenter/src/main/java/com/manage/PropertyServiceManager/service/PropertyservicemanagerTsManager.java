@@ -39,8 +39,12 @@ public interface PropertyservicemanagerTsManager extends BaseManager{
 			Collection<Order> orders) throws BusException;
 	
 	/**
-	 * 分页查询用户
-	 * @return 分页对象
+	 * 根据报修记录id分页查询派工记录
+	 * @param pager
+	 * @param bx 报修记录
+	 * @param orders
+	 * @return
+	 * @throws BusException
 	 */
 	public PagerRecords getPagerPropertyservicemanagerTssByBx(Pager pager,//分页条件
 			PropertyservicemanagerBx bx,
@@ -73,8 +77,10 @@ public interface PropertyservicemanagerTsManager extends BaseManager{
      */
 	public boolean exsitPropertyservicemanagerTs(String propertyName,Object value) throws BusException;
 	/**
-     * 根据id变更状态
-     * @param ids
-     */
+	 * 根据派工id修改保修状态
+	 * @param id 派工id
+	 * @param code 判断回绝与接单标识
+	 * @throws BusException
+	 */
 	public void upTsbyId(String id,String code) throws BusException;
 }

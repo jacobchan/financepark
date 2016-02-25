@@ -101,15 +101,24 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
     public boolean exsitMemberInformation(String propertyName,Object value) throws BusException{
 		return memberInformationDao.exists(propertyName,value);
 	}
+    /**
+	 * 用户注册
+	 * @param userName 用户名
+	 * @param passwd 密码
+	 * @param repasswd 重复密码
+	 * @param mobile 手机号
+	 * @throws BusException
+	 */
     @EsbServiceMapping
 	public void saveReister(@ServiceParam(name="userName") String userName,
 			@ServiceParam(name="passwd") String passwd,
 			@ServiceParam(name="repasswd") String repasswd,
 			@ServiceParam(name="mobile") String mobile)
 			throws BusException {
+    	//判断该用户是否存在
 		MemberInformation memberInformationed = memberInformationDao.getObjectByUniqueProperty("memberName", userName);
 		if(memberInformationed==null){
-			
+			//新增用户
 			MemberInformation memberInformation = new MemberInformation();
 			memberInformation.setMemberName(userName);
 			memberInformation.setMemberPassword(PasswordUtils.md5Password(repasswd));

@@ -22,6 +22,7 @@
 				</youi:fieldLayout>
 					<youi:button name="refuse" caption="回绝" icon="edit" active="1"/>
 					<youi:button name="deal" caption="处理任务" icon="edit" active="1"/>
+					<youi:button name="pay" caption="支付订单" icon="edit" active="1"/>
 					
 				<youi:gridCol property="bxComp"  caption="企业名称" width="12%"/>
 				<youi:gridCol property="bxAddress"  caption="维修地址" width="12%"/>
@@ -60,9 +61,9 @@
 	<youi:form dialog="true" caption="物业报修记录" id="form_propertyservicemanagerBx" action="esb/web/propertyservicemanagerBxManager/savePropertyservicemanagerBx.json">
 		<youi:fieldLayout prefix="record" labelWidths="120,120">
 			<youi:fieldHidden property="bxId" caption="ID"/>
-			<youi:fieldText property="bxComp"  caption="企业名称"/>
-			<%-- <youi:fieldSelect property="bxComp" caption="企业名称" src="/memberInformationManager/getMemberInformations.json" code="memberName" show="memberName" notNull="true" /> --%>
-			<youi:fieldText property="bxAddress"  caption="维修地址"/>
+			<%-- <youi:fieldText property="bxComp"  caption="企业名称"/> --%>
+			<youi:fieldSelect property="bxComp" caption="企业名称" src="/memberInformationManager/getMemberInformations.json" code="memberName" show="memberName" notNull="true" />
+			<youi:fieldLabel property="bxAddress"  caption="维修地址"/>
 			<youi:fieldSelect property="bxStatus"  caption="报修状态" convert="bx_status"/>
 			<youi:fieldSelect property="bxWay"  caption="报修方式" convert="bx_way"/>
 			<youi:fieldSelect property="bxType"  caption="报修类型" convert="bx_type"/>
@@ -86,6 +87,43 @@
 	</youi:form>
 	
 	<!--**********************************页面函数Start********************************-->
+		<youi:func name="record_bxComp_change" params="value">
+			if(value!=''){
+				$.youi.ajaxUtil.ajax({
+					url:'/esb/web/memberadrAddressManager/getAddressByname.json',
+					data:{memberName:value},
+					success:function(result){
+							var record = result.record;
+							$elem('record_bxAddress',pageId).fieldValue(record.addressDetail);
+						}
+					});
+				
+			}
+			
+		</youi:func> 
+		<!-- 支付订单 -->
+		<youi:func name="func_grid_refuse">
+			var gridElement = $elem('grid_propertyservicemanagerBx',pageId),
+			selectedRecord = gridElement.grid('getSelectedRecord');
+			var bxstatus = selectedRecord.bxStatus;
+			if(bxstatus=='05'){
+				$.youi.messageUtils.confirm('支付?',function(){
+					$.youi.ajaxUtil.ajax({
+					url:'/esb/web/propertyservicemanagerBxManager/upBxbyId.json',
+					data:{id:selectedRecord.bxId,code:'00'},
+					success:function(result){	
+						$elem('grid_propertyservicemanagerBx',pageId).grid('pReload');
+						alert("支付成功!");
+						}
+					});
+				});
+			}else if(bxstatus=='06'){
+				alert("已支付成功!");
+			}else{
+				alert("已定价的记录才可以支付");
+			}	
+		</youi:func>
+		<!-- 回绝物业报修 -->
 		<youi:func name="func_grid_refuse">
 			var gridElement = $elem('grid_propertyservicemanagerBx',pageId),
 			selectedRecord = gridElement.grid('getSelectedRecord');
@@ -107,12 +145,13 @@
 				alert("该状态下不能回绝报修请求");
 			}	
 		</youi:func>
-		
+		<!-- 流程处理物业报修 -->
 		<youi:func name="func_grid_deal">
             $.youi.messageUtils.confirm('处理任务?',function(){
                 var gridElement = $elem('grid_propertyservicemanagerBx',pageId),
                 selectedRecord = gridElement.grid('getSelectedRecord');
                 var bxstatus = selectedRecord.bxStatus;
+				//待受理
                 if(bxstatus=='00'){
                     $.youi.ajaxUtil.ajax({
                         url:'/esb/web/propertyservicemanagerBxManager/upBxbyId.json',
@@ -122,17 +161,22 @@
                             alert("处理成功!!");
                         }
                     });
+				//已受理，进行派工
                 }else if(bxstatus=='01'){
                     //$elem('recordTs_propertyservicemanagerBx_bxId',pageId).fieldValue(selectedRecord.bxId);
                     $elem('form_propertyservicemanagerTs',pageId).form("reset")
 					.form('fillRecord',{propertyservicemanagerBx:{bxId:selectedRecord['bxId']}}).form('open');
+				//已接单，
                 }else if(bxstatus=='02'||bxstatus=='03'){
                     alert("维修人员处理中!");
+				//已完工，待定价
                 }else if(bxstatus=='04'){
                     var bxform = $elem('form_propertyservicemanagerBx',pageId);
                     bxform.form("reset").form('fillRecord',selectedRecord).form('fillRecord',{bxStatus:'05'}).form('open');
+				//已定价，待付款
                 }else if(bxstatus=='05'){
 					alert("请等待报修人付款!");
+				//已付款
 				}else if(bxstatus=='06'){
 					 $.youi.ajaxUtil.ajax({
                         url:'/esb/web/propertyservicemanagerBxManager/upBxbyId.json',
@@ -142,6 +186,7 @@
                             alert("处理成功!");
                         }
                     });
+				//已完工
 				}else if(bxstatus=='07'){
 					alert("报修已完成!");
 				}else{

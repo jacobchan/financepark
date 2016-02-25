@@ -67,7 +67,14 @@ public class PropertyservicemanagerTsManagerImpl extends BaseManagerImpl impleme
 		return pagerRecords;
 	}
 	
-	//根据报修记录获取派工记录列表
+	/**
+	 * 根据报修记录id分页查询派工记录
+	 * @param pager
+	 * @param bx 报修记录
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@EsbServiceMapping
 	public PagerRecords getPagerPropertyservicemanagerTssByBx(Pager pager,//分页条件
@@ -135,17 +142,23 @@ public class PropertyservicemanagerTsManagerImpl extends BaseManagerImpl impleme
 		return propertyservicemanagerTsDao.exists(propertyName,value);
 	}
 
+    /**
+	 * 根据派工id修改保修状态
+	 * @param id 派工id
+	 * @param code 判断回绝与接单标识
+	 * @throws BusException
+	 */
     @EsbServiceMapping
 	public void upTsbyId(@ServiceParam(name="id") String id,
 			@ServiceParam(name="code") String code) throws BusException {
     	PropertyservicemanagerTs  ts = propertyservicemanagerTsDao.get(id);
     	PropertyservicemanagerBx bx = ts.getPropertyservicemanagerBx();
-		if(code.equals("00")){
+		if(code.equals("00")){//维修人员接单，改状态为已接单，已派工
 			ts.setTsStatus("01");
 			bx.setBxStatus("03");
 			propertyservicemanagerTsDao.save(ts);
 			propertyservicemanagerBxDao.save(bx);
-		}else{
+		}else{//维修人员拒单，改状态
 			ts.setTsStatus("02");
 			bx.setBxStatus("01");
 			propertyservicemanagerTsDao.save(ts);
