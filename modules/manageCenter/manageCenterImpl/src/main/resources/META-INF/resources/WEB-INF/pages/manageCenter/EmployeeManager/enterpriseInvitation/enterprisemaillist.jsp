@@ -5,37 +5,33 @@
 		caption="邀请记录表列表" panel="false"
 		src="esb/web/enterpriseEmployeesManager/getPagerEnterpriseEmployeess.json"
 		dataFormId="form_enterprisemaillist"
-		editSrc="esb/web/enterpriseInvitationManager/getEnterpriseInvitation.json"
-		edit="NOT" remove="NOT" showCheckbox="true"
-		removeSrc="esb/web/enterpriseInvitationManager/removeEnterpriseInvitation.json">
+		editSrc="esb/web/enterpriseEmployeesManager/getEnterpriseEmployees.json"
+		edit="NOT" remove="NOT" add="NOT" showCheckbox="false"
+		removeSrc="esb/web/enterpriseEmployeesManager/removeEnterpriseEmployees.json">
 		<youi:fieldLayout columns="3" labelWidths="120,120,120">
-			<youi:fieldSelect property="enterbusinessmanagerRz.rzId"
+			<youi:fieldSelect property="employeesComId.rzId"
 				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json"
 				code="rzId" show="rzMem" caption="入驻企业" tooltips="入驻企业" />
 			<youi:fieldText property="invitationTelephone" caption="会员电话" />
 			<youi:fieldText property="invitationCode" caption="企业邀请码" />
 		</youi:fieldLayout>
 		<youi:button name="distribution" caption="分配角色" icon="search" active="1" />
-		<youi:gridCol property="enterbusinessmanagerRz.rzMem" caption="入驻企业" width="280" />
-		<youi:gridCol property="invitationTelephone" caption="会员电话" width="120" />
-		<youi:gridCol property="invitationCode" caption="企业邀请码" width="160" />
-		<youi:gridCol width="60" fixed="true" property="button" type="button"
-			caption="操作">
-			<youi:button name="edit" caption="修改" />
-			<youi:button name="remove" caption="删除" />
-		</youi:gridCol>
+		<youi:gridCol property="memberId.memberNickname" caption="会员用户" width="20%" />
+		<youi:gridCol property="employeesName" caption="员工姓名" width="20%" />
+		<youi:gridCol property="employeesTelephone" caption="员工电话" width="20%" />
+		<youi:gridCol property="employeesComId.rzMem" caption="企业信息" width="40%" />
 	</youi:grid>
 
-	<!-- form-邀请记录表编辑 -->
-	<youi:form dialog="true" caption="邀请记录表" id="form_enterprisemaillist"
-		action="esb/web/enterpriseInvitationManager/saveEnterpriseInvitation.json">
+	<!-- form-分配角色 -->
+	<youi:form dialog="true" caption="分配角色" id="form_enterprisemaillist"
+		action="esb/web/enterpriseRoleManager/saveEnterpriseRole.json">
 		<youi:fieldLayout prefix="record" columns="1" labelWidths="120,120">
-			<youi:fieldHidden property="invitationId" caption="邀请记录系列" />
-			<youi:fieldSelect property="enterbusinessmanagerRz.rzId"
-				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json"
-				code="rzId" show="rzMem" caption="入驻企业" tooltips="入驻企业" />
-			<youi:fieldText property="invitationCode" readonly="true" caption="企业邀请码" />
-			<youi:fieldText property="invitationTelephone" caption="会员电话" />
+			<youi:fieldHidden property="rId" caption="角色Id" />
+			<youi:fieldText property="invitationCode" notNull="true" readonly="true" caption="企业邀请码" />
+			<youi:fieldText property="invitationTelephone" notNull="true" caption="会员电话" />
+			<youi:fieldSelect property="role.roleId"
+				src="esb/web/roleManager/getPagerRoles.json"
+				code="roleId" show="roleCaption" caption="企业角色" notNull="true" tooltips="企业角色" />
 		</youi:fieldLayout>
 	</youi:form>
 
@@ -44,7 +40,17 @@
 	<youi:func name="func_grid_distribution" params="value">
 		var gridElement = $elem('grid_enterprisemaillist',pageId),
 		selectedRecord = gridElement.grid('getSelectedRecord');
-		var phone = selectedRecord.invitationTelephone;
+		var employeesId = selectedRecord.employeesId;
+		alert(employeesId);
+		if(employeesId!=''){
+			$.youi.ajaxUtil.ajax({
+				url:'/esb/web/enterpriseRoleManager/getEnterpriseRole.json',
+				data:{rId:employeesId},
+				success:function(result){
+					alert(result.record.employees.employeesName);
+				}
+			});
+		}
 	</youi:func>
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
