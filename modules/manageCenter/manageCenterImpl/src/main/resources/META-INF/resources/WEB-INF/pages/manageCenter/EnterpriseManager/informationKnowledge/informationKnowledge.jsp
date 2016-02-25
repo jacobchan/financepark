@@ -9,8 +9,8 @@
 			<%-- <youi:fieldText property="rzId"  caption="ID2"/> --%>
 
 			<%-- <youi:fieldText property="knowledgeRe"  caption="企业信息ID"/> --%>
-			<youi:fieldSelect property="knowledgeRe" caption="企业信息ID" 
-				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
+			<youi:fieldSelect property="knowledgeRe" caption="企业信息" 
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzName"/>
 			<youi:fieldText property="knowledgeTitle"  caption="标题"/>
 			<%-- <youi:fieldText property="knowledgeContent"  caption="描述"/> --%>
 			<%-- <youi:fieldText property="knowledgeUrl"  caption="图片URL"/> --%>
@@ -19,8 +19,8 @@
 		<%-- <youi:gridCol property="rzId"  caption="ID2"/> --%>
 
 		<%-- <youi:gridCol property="knowledgeRe"  caption="企业信息ID"/> --%>
-		<youi:fieldSelect property="legalRe" caption="企业信息ID" 
-				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
+		<youi:fieldSelect property="legalRe" caption="企业信息" 
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzName"/>
 		<youi:gridCol property="knowledgeTitle"  caption="标题"/>
 		
 		<youi:gridCol property="knowledgeUrl"  caption="图片URL"/>
@@ -38,8 +38,8 @@
 			<youi:fieldText property="rzId"  caption="ID2"/>
 			<%-- <youi:fieldHidden property="knowledgeId"  caption="ID"/> --%>
 			<%-- <youi:fieldText property="knowledgeRe"  caption="企业信息ID"/> --%>
-			<youi:fieldSelect property="knowledgeRe" caption="企业信息ID" 
-				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
+			<youi:fieldSelect property="knowledgeRe" caption="企业信息" 
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzName"/>
 			<youi:fieldText property="knowledgeTitle"  caption="标题"/>
 			<youi:fieldText property="knowledgeContent"  caption="描述"/>
 			<youi:fieldText property="knowledgeUrl"  caption="图片URL"/>
