@@ -16,11 +16,8 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.member.MemberAdrManager.entity.MemberadrAddress;
 import com.member.MemberAdrManager.dao.MemberadrAddressDao;
 import com.member.MemberAdrManager.service.MemberadrAddressManager;
@@ -102,5 +99,19 @@ public class MemberadrAddressManagerImpl extends BaseManagerImpl implements Memb
     public boolean exsitMemberadrAddress(String propertyName,Object value) throws BusException{
 		return memberadrAddressDao.exists(propertyName,value);
 	}
-
+    
+	/**
+     * 根据用户名获取地址信息
+     * @param memberName 用户名
+     */
+    @EsbServiceMapping
+	public MemberadrAddress getAddressByname(@ServiceParam(name="memberName") String memberName)
+			throws BusException {
+    	MemberadrAddress add = null;
+    	if(memberName!=null){
+    		add =  memberadrAddressDao.getObjectByUniqueProperty("memberId.memberName", memberName);
+    	}
+		return add;
+	}
+    
 }

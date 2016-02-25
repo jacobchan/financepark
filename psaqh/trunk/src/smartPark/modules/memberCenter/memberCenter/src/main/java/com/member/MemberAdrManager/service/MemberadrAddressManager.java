@@ -63,4 +63,10 @@ public interface MemberadrAddressManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitMemberadrAddress(String propertyName,Object value) throws BusException;
+	
+	/**
+     * 根据用户名获取地址信息
+     * @param memberName 用户名
+     */
+	public MemberadrAddress getAddressByname(String memberName) throws BusException;
 }
