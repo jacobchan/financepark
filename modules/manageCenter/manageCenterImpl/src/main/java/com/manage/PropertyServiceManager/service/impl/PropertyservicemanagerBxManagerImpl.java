@@ -75,6 +75,7 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 //    	}else{//新增
 //    		
 //    	}
+    	//物业管理员定价生成订单
     	if(o.getBxStatus().equals("05")){
     		OrdermanagerUserorder order = new OrdermanagerUserorder();
 			order.setUserorderAmount(o.getBxAmount());
@@ -114,6 +115,12 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 		return propertyservicemanagerBxDao.exists(propertyName,value);
 	}
 
+    /**
+     * 根据id修改报修状态
+	 * @param id 报修记录主键id
+	 * @param code 判断流程是否标识
+	 * @throws BusException
+     */
     @EsbServiceMapping
 	public void upBxbyId(@ServiceParam(name="id") String id,
 			@ServiceParam(name="code") String code) throws BusException {
@@ -124,8 +131,10 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
     	}else{
     		if(bxstatus.equals("00")){//待受理-->已受理
     			bx.setBxStatus("01");
-    		}else if(bxstatus.equals("06")){
-    			bx.setBxStatus("07");//
+    		}else if(bxstatus.equals("05")){//已定价-->已支付
+    			bx.setBxStatus("06");
+    		}else if(bxstatus.equals("06")){//已付款-->已完成
+    			bx.setBxStatus("07");
     		}
     	}
     	propertyservicemanagerBxDao.save(bx);

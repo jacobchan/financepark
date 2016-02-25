@@ -1,6 +1,11 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
+	<!-- 跳转费用清单页面 -->
+	<youi:subpage
+		src="page/manageCenter.PropertyServiceManager.propertyservicemanagerTs/addSer.html" 
+		subpageId="addSer" height="500" caption="维修费用清单新增">
+	</youi:subpage>
 	<youi:table columns="1">
 		<youi:cell>
 			<youi:grid id="grid_propertyservicemanagerTs" idKeys="tsId" caption="派工维修记录列表"  panel="false"
@@ -67,10 +72,12 @@
 	</youi:form>
 	
 	<!--**********************************页面函数Start********************************-->
+	<!-- 派工人员接单 -->
 	<youi:func name="func_grid_agree">
 			var gridElement = $elem('grid_propertyservicemanagerTs',pageId),
 			selectedRecord = gridElement.grid('getSelectedRecord');
 			var tsstatus = selectedRecord.tsStatus;
+			//待接单
 			if(tsstatus=='00'){
 				$.youi.messageUtils.confirm('确认接单?',function(){
 					$.youi.ajaxUtil.ajax({
@@ -88,7 +95,7 @@
 				alert("派工单已拒绝!");
 			}	
 		</youi:func>
-	
+		<!-- 派工人员拒单 -->
 		<youi:func name="func_grid_refuse">
 			var gridElement = $elem('grid_propertyservicemanagerTs',pageId),
 			selectedRecord = gridElement.grid('getSelectedRecord');
@@ -110,18 +117,26 @@
 				alert("您已拒单!");
 			}
 		</youi:func>
-		
+		<!-- 派工人员填报维修单 -->
 		<youi:func name="func_grid_putfrom">
 			var gridElement = $elem('grid_propertyservicemanagerTs',pageId),
 			selectedRecord = gridElement.grid('getSelectedRecord');
 			var tsstatus = selectedRecord.tsStatus;
 			if(tsstatus=="01"){
-				$elem('form_propertyservicemanagerSer',pageId).form("reset").form('fillRecord',{propertyservicemanagerTs:{tsId:selectedRecord['tsId']}}).form('open');
+				//$elem('form_propertyservicemanagerSer',pageId).form("reset").form('fillRecord',{propertyservicemanagerTs:{tsId:selectedRecord['tsId']}}).form('open');
+				var gridElement = $elem('grid_propertyservicemanagerTs',pageId);
+				var subpageElement = $elem('subpage_addSer',pageId);
+				var selectedRecord = gridElement.grid('getSelectedRecord');
+				//打开子页面
+				subpageElement.subpage('open',{tsId:selectedRecord.tsId});
 			}else{
 				alert("只有接单成功才能填报!");
 			}
+
+			
 		</youi:func>
 		
+		<!-- 维修费用清单填报完成 -->
 		<youi:func name = "form_propertyservicemanagerSer_afterSubmit">
 			var formpropertyservicemanagerSer = $elem('form_propertyservicemanagerSer',pageId);
 			alert("添加完成！");

@@ -65,9 +65,11 @@ public interface PropertyservicemanagerBxManager extends BaseManager{
 	public boolean exsitPropertyservicemanagerBx(String propertyName,Object value) throws BusException;
 	
 	/**
-     * 根据id修改报修状态
-     * @param ids
-     */
+	 * 根据id修改报修状态
+	 * @param id 报修记录主键id
+	 * @param code 判断流程是否标识
+	 * @throws BusException
+	 */
 	public void upBxbyId(String id,String code) throws BusException;
 	
 }

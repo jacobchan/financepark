@@ -65,8 +65,12 @@ public interface MemberInformationManager extends BaseManager{
 	public boolean exsitMemberInformation(String propertyName,Object value) throws BusException;
 	
 	/**
-     * 用户注册
-     * @param ids
-     */
+	 * 用户注册
+	 * @param userName 用户名
+	 * @param passwd 密码
+	 * @param repasswd 重复密码
+	 * @param mobile 手机号
+	 * @throws BusException
+	 */
 	public void saveReister(String userName,String passwd,String repasswd,String mobile) throws BusException;
 }
