@@ -12,7 +12,7 @@
 		<youi:gridCol property="addressName"  caption="联系人" width="20%"/>
 		<youi:gridCol property="addressPhone"  caption="联系电话" width="20%"/>
 		<youi:gridCol property="addressDetail"  caption="详细地址" width="20%"/>		
-		<youi:gridCol property="addressStatus"  caption="默认状态" convert="addressStatus" width="20%"/>
+		<youi:gridCol property="addressStatus"  caption="默认状态" convert="bool" width="20%"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -26,9 +26,9 @@
 			<youi:fieldSelect property="memberId.memberId"  caption="会员用户" src="esb/web/memberInformationManager/getMemberInformations.json" 
 								code="memberId" show="memberName" notNull="true"/>
 			<youi:fieldText property="addressName"  caption="联系人" notNull="true"/>
-			<youi:fieldText property="addressPhone"  caption="联系电话" notNull="true"/>
+			<youi:fieldText property="addressPhone"  caption="联系电话" notNull="true" expression="^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$" expressionMessage="手机号码格式不正确"/>
 			<youi:fieldText property="addressDetail"  caption="详细地址" notNull="true"/>
-			<youi:fieldSelect property="addressStatus"  caption="默认状态" convert="addressStatus" notNull="true"/>
+			<youi:fieldSelect property="addressStatus"  caption="默认状态" convert="bool" notNull="true"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
