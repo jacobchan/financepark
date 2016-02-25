@@ -5,58 +5,22 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/webapp"/>
-        <dependent-module archiveName="smartPark-commodityCenterImpl-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-commodityCenterImpl/smartPark-commodityCenterImpl">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="smartPark-commodityCenter-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-commodityCenter/smartPark-commodityCenter">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="smartPark-common-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-common/smartPark-common">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="smartPark-commonCenterImpl-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-commonCenterImpl/smartPark-commonCenterImpl">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="smartPark-commonCenter-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-commonCenter/smartPark-commonCenter">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="smartPark-contentCenterImpl-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-contentCenterImpl/smartPark-contentCenterImpl">
+        <dependent-module archiveName="smartPark-manageCenterImpl-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-manageCenterImpl/smartPark-manageCenterImpl">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="smartPark-contentCenter-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-contentCenter/smartPark-contentCenter">
+        <dependent-module archiveName="smartPark-manageCenter-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-manageCenter/smartPark-manageCenter">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="smartPark-customerCenterImpl-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-customerCenterImpl/smartPark-customerCenterImpl">
+        <dependent-module archiveName="smartPark-memberCenterImpl-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-memberCenterImpl/smartPark-memberCenterImpl">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="smartPark-customerCenter-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-customerCenter/smartPark-customerCenter">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="smartPark-enterproseCenterImpl-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-enterproseCenterImpl/smartPark-enterproseCenterImpl">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="smartPark-enterproseCenter-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-enterproseCenter/smartPark-enterproseCenter">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="smartPark-merchantCenterImpl-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-merchantCenterImpl/smartPark-merchantCenterImpl">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="smartPark-merchantCenter-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-merchantCenter/smartPark-merchantCenter">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="smartPark-operationCenterImpl-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-operationCenterImpl/smartPark-operationCenterImpl">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="smartPark-portalCenterImpl-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-portalCenterImpl/smartPark-portalCenterImpl">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="smartPark-portalCenter-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-portalCenter/smartPark-portalCenter">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="smartPark-propertyCenterImpl-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-propertyCenterImpl/smartPark-propertyCenterImpl">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="smartPark-propertyCenter-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-propertyCenter/smartPark-propertyCenter">
+        <dependent-module archiveName="smartPark-memberCenter-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smartPark-memberCenter/smartPark-memberCenter">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/witpart-web/target/classes"/>
