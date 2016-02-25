@@ -23,7 +23,6 @@ import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCharge;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSfpro;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerChargeDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerChargeManager;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerSfproManager;
@@ -89,7 +88,7 @@ public class PropertyservicemanagerChargeManagerImpl extends BaseManagerImpl imp
     		
     		BigDecimal chargeAmount = propertyservicemanagerSfproManager.getChargeAmountByCharge(pc);
     		
-    		OrdermanagerUserorder userOrder = pc.getOrdermanagerUserorder();
+    		OrdermanagerUserorder userOrder = pc.getUserorder();
     		userOrder.setUserorderAmount(chargeAmount);
     		ordermanagerUserorderDao.save(userOrder);
     		
@@ -100,7 +99,7 @@ public class PropertyservicemanagerChargeManagerImpl extends BaseManagerImpl imp
     		userOrder.setUserorderAmount(BigDecimal.valueOf(0).setScale(2, BigDecimal.ROUND_HALF_UP));
     		userOrder.setUserorderCode("123");
     		userOrder = ordermanagerUserorderDao.save(userOrder);
-    		o.setOrdermanagerUserorder(userOrder);
+    		o.setUserorder(userOrder);
     		o.setChargeAmount(BigDecimal.valueOf(0).setScale(2, BigDecimal.ROUND_HALF_UP));
     		pc = propertyservicemanagerChargeDao.save(o);
     	}
