@@ -30,7 +30,8 @@
 			<youi:fieldArea property="msgTempalateContent"  caption="模板内容" rows="3" column="2" notNull="true"/>
 			<youi:fieldSelect property="msgReceiver"  caption="接收对象"	notNull="true"
 				src="esb/web/roleManager/getPagerRoles.json" code="roleId" show="roleCaption"/>
-			<youi:fieldText property="msgTempalateParams"  caption="模板参数(个)" readonly="true"/>
+			<youi:fieldHidden property="msgTempalateParams"  caption="模板参数(个)"/>
+			<youi:fieldText property="uniqueCode" caption="模板唯一码" notNull="true"/>
 		</youi:fieldLayout>
 		
 	</youi:form>
@@ -42,7 +43,6 @@
 		areaEle.find('textarea').bind('blur',function(){
 			var areaVal = areaEle.fieldValue();
 		//	var count = check(areaVal);
-		//	var count = count(areaVal);
 			var count = 0;
 			$.youi.ajaxUtil.ajax({
 				url:'esb/web/mcMsgtempalateManager/getParamCount.json',
