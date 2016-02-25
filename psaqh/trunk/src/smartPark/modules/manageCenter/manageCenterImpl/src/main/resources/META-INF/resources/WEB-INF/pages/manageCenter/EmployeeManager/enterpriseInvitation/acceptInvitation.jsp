@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
-	<youi:form caption="邀请记录表" id="form_enterpriseInvitation"
+	<youi:form caption="成为企业员工" id="form_acceptInvitation"
 		action="esb/web/enterpriseEmployeesManager/acceptEnterpriseInvitation.json">
 		<youi:fieldLayout prefix="record" columns="1" labelWidths="120,120">
 			<youi:fieldHidden property="invitationId" caption="邀请记录系列" />
@@ -12,8 +12,10 @@
 			<youi:fieldText property="code" caption="企业邀请码" />
 		</youi:fieldLayout>
 	</youi:form>
-	<youi:func name="form_enterpriseInvitation_afterSubmit">
-		var enterpriseInvitation = $elem('form_enterpriseInvitation',pageId);
-		alert("1");
+	<youi:func name="form_acceptInvitation_afterSubmit" params="result">
+		var acceptInvitation = $elem('form_acceptInvitation',pageId);
+		var record = result.record;
+		alert(record.msg);
+		acceptInvitation.form('reset').form('fillRecord',record);
 	</youi:func>
 </youi:page>
