@@ -7,8 +7,8 @@
 				removeSrc="esb/web/informationNoticeManager/removeInformationNotice.json">
 		<youi:fieldLayout>
 			<%-- <youi:fieldText property="noticeRe"  caption="企业信息ID"/> --%>
-	     	<youi:fieldSelect property="noticeRe" caption="企业信息ID" 
-				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
+	     	<youi:fieldSelect property="noticeRe" caption="企业信息" 
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzName"/>
 
 		<%--	<youi:fieldText property="noticeSum"  caption="收藏次数"/>
 			 <youi:fieldText property="noticeCount"  caption="浏览次数"/> --%>
@@ -38,8 +38,8 @@
 		
 		
 			<%-- <youi:fieldText property="noticeRe"  caption="企业信息ID"/> --%>
-			<youi:fieldSelect property="noticeRe" caption="企业信息ID" 
-				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
+			<youi:fieldSelect property="noticeRe" caption="企业信息" 
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzName"/>
 			 <%-- <youi:fieldHidden property="noticeId"  caption="ID"/> --%>
 			 <youi:fieldText property="noticeSum"  caption="收藏次数"/> 
 			 <youi:fieldText property="noticeCount"  caption="浏览次数"/> 
