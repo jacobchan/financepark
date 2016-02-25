@@ -21,7 +21,7 @@ public class EnterprisetypePageModel extends AbstractPageModel implements
 			DataIn<EtypeEnterprisetype> dataIn) {
 		ModelMap modelMap = new ModelMap();
 		List<EtypeEnterprisetype> enter = this.etypeEnterprisetypeManager.getEtypeEnterprisetypes();
-		EnterprisetypeTreeNode enetrTree = ParkTreeUtils.listToEnterTree(enter, null, "行业类别");
+		EnterprisetypeTreeNode enetrTree = ParkTreeUtils.listToEnterTree(enter, null, "企业类型");
 		enetrTree.setId("tree_enter_root");
 		modelMap.addAttribute("enetrTree", enetrTree);
 		return modelMap;
