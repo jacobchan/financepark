@@ -6,7 +6,8 @@
 				editSrc="esb/web/favoritsFavoritgoodsManager/getFavoritsFavoritgoods.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/favoritsFavoritgoodsManager/removeFavoritsFavoritgoods.json">
 		<youi:fieldLayout>
-			<youi:fieldText property="memberId"  caption="会员用户ID"/>
+		<youi:fieldSelect property="memberId.memberId"  caption="会员用户" src="esb/web/memberInformationManager/getMemberInformations.json" 
+						  code="memberId" show="memberName" />
 
 		</youi:fieldLayout>
 		<youi:gridCol property="memberId.memberName"  caption="会员用户" width="50%"/>
