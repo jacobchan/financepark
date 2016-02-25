@@ -83,7 +83,7 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 			order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 			order.setUserorderProject("物业报修");
 			order.setBxId(o.getBxId());
-			order.setUserorderBuyUser(o.getBxComp());
+//			order.setUserorderBuyUser(o.getBxComp());
 			ordermanagerUserorderDao.save(order);
     	}
     	return propertyservicemanagerBxDao.save(o);
