@@ -1,6 +1,5 @@
 package com.manage.EmployeeManager.entity;
 import java.sql.Timestamp;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,10 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.Length;
-
 import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 import com.gsoft.framework.security.fuc.entity.Role;
@@ -29,20 +26,20 @@ public class EnterpriseRole implements Domain {
 	@Length(max = 36)
 	private String rId;// 角色主键
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade={CascadeType.MERGE,CascadeType.PERSIST})
-	@JoinColumn(name = "MEMBER_ID_")
-	private EnterpriseEmployees enterpriseEmployees;// 企业员工ID
+	@ManyToOne(fetch = FetchType.LAZY, cascade={CascadeType.MERGE,CascadeType.PERSIST}, optional=false)
+	@JoinColumn(name = "MEMBER_ID_", insertable=true, updatable=false)
+	private MemberInformation memberInformation;// 企业员工ID
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade={CascadeType.MERGE,CascadeType.PERSIST})
-	@JoinColumn(name = "ROLEID")
+	@ManyToOne(fetch = FetchType.LAZY, cascade={CascadeType.MERGE,CascadeType.PERSIST}, optional=false)
+	@JoinColumn(name = "ROLEID", insertable=true, updatable=false)
 	private Role role;// 角色ID
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade={CascadeType.MERGE,CascadeType.PERSIST})
-	@JoinColumn(name = "CREATE_USER_")
+	@ManyToOne(fetch = FetchType.LAZY, cascade={CascadeType.MERGE,CascadeType.PERSIST}, optional=false)
+	@JoinColumn(name = "CREATE_USER_", insertable=true, updatable=false)
 	private MemberInformation createuser;// 创建人
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade={CascadeType.MERGE,CascadeType.PERSIST})
-	@JoinColumn(name = "UPDATE_USER_")
+	@ManyToOne(fetch = FetchType.LAZY, cascade={CascadeType.MERGE,CascadeType.PERSIST}, optional=false)
+	@JoinColumn(name = "UPDATE_USER_", insertable=true, updatable=false)
 	private MemberInformation updateuser;// 修改人
 	
 	@Column(name = "CREATE_TIME_")
@@ -59,12 +56,12 @@ public class EnterpriseRole implements Domain {
 		this.rId = rId;
 	}
 
-	public EnterpriseEmployees getEnterpriseEmployees() {
-		return enterpriseEmployees;
+	public MemberInformation getMemberInformation() {
+		return memberInformation;
 	}
 
-	public void setEnterpriseEmployees(EnterpriseEmployees enterpriseEmployees) {
-		this.enterpriseEmployees = enterpriseEmployees;
+	public void setMemberInformation(MemberInformation memberInformation) {
+		this.memberInformation = memberInformation;
 	}
 
 	public Role getRole() {

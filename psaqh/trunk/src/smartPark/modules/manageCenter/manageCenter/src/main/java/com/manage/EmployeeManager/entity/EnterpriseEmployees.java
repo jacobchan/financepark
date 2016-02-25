@@ -21,10 +21,7 @@ import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 @Entity
 @Table(name = "sp_enterprise_employees")
 public class EnterpriseEmployees implements Domain{
-	
 	private static final long serialVersionUID = 2584651808359871795L;
-	
-
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="EMPLOYEES_COM_ID")
 	private EnterbusinessmanagerRz employeesComId;//企业信息ID_
