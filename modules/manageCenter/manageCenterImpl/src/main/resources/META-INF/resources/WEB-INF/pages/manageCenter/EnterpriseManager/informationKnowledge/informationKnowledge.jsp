@@ -12,7 +12,7 @@
 			<youi:fieldSelect property="knowledgeRe" caption="企业信息ID" 
 				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
 			<youi:fieldText property="knowledgeTitle"  caption="标题"/>
-			<youi:fieldText property="knowledgeContent"  caption="描述"/>
+			<%-- <youi:fieldText property="knowledgeContent"  caption="描述"/> --%>
 			<%-- <youi:fieldText property="knowledgeUrl"  caption="图片URL"/> --%>
 			<youi:fieldSelect property="knowledgeStatus"  caption="发布状态" convert="financingStatus"/>
 		</youi:fieldLayout>
@@ -36,7 +36,7 @@
 	<youi:form dialog="true" caption="知识产权信息" id="form_informationKnowledge" action="esb/web/informationKnowledgeManager/saveInformationKnowledge.json">
 		<youi:fieldLayout prefix="record">
 			<youi:fieldText property="rzId"  caption="ID2"/>
-			<youi:fieldHidden property="knowledgeId"  caption="ID"/>
+			<%-- <youi:fieldHidden property="knowledgeId"  caption="ID"/> --%>
 			<%-- <youi:fieldText property="knowledgeRe"  caption="企业信息ID"/> --%>
 			<youi:fieldSelect property="knowledgeRe" caption="企业信息ID" 
 				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
