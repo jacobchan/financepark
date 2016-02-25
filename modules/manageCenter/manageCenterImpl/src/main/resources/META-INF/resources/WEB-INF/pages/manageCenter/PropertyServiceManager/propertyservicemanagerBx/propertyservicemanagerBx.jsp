@@ -102,7 +102,7 @@
 			
 		</youi:func> 
 		<!-- 支付订单 -->
-		<youi:func name="func_grid_refuse">
+		<youi:func name="func_grid_pay">
 			var gridElement = $elem('grid_propertyservicemanagerBx',pageId),
 			selectedRecord = gridElement.grid('getSelectedRecord');
 			var bxstatus = selectedRecord.bxStatus;
