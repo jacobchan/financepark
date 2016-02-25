@@ -21,13 +21,12 @@ import com.gsoft.framework.core.dataobj.Domain;
 @Table(name = "sp_propertyservicemanager_sfpro")
 public class PropertyservicemanagerSfpro implements Domain{
 	
-	private static final long serialVersionUID = -7107806787165801687L;
+	private static final long serialVersionUID = -900697343768001146L;
 	
-	@Id @GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
-	@Column(name = "SFPRO_ID_")
+
+	@Column(name = "UPDATE_USER_")
 	@Length(max=36)
-	private String sfproId;//收费项目序列
+	private String updateUser;//修改人
 
 	@Column(name = "SFPRO_NAME_")
 	@Length(max=36)
@@ -36,16 +35,32 @@ public class PropertyservicemanagerSfpro implements Domain{
 	@Column(name = "SFPRO_AMOUNT_")
 	private BigDecimal sfproAmount;//项目金额
 	
+	@Id @GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
+	@Column(name = "SFPRO_ID_")
+	@Length(max=36)
+	private String sfproId;//收费项目序列
+
+	@Column(name = "CREATE_USER_")
+	@Length(max=36)
+	private String createUser;//创建人
+
+	@Column(name = "UPDATE_TIME_")
+	private String updateTime;//修改时间
+
+	@Column(name = "CREATE_TIME_")
+	private String createTime;//创建时间
+	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="CHARGE_ID_")
 	private com.manage.PropertyServiceManager.entity.PropertyservicemanagerCharge propertyservicemanagerCharge;//收费登记序列
 	
-	public String getSfproId(){
-		return this.sfproId;
+	public String getUpdateUser(){
+		return this.updateUser;
 	}
 	
-	public void setSfproId(String sfproId){
-		this.sfproId = sfproId;
+	public void setUpdateUser(String updateUser){
+		this.updateUser = updateUser;
 	}
 	public String getSfproName(){
 		return this.sfproName;
@@ -63,6 +78,35 @@ public class PropertyservicemanagerSfpro implements Domain{
 		this.sfproAmount = sfproAmount;
 	}
 
+	public String getSfproId(){
+		return this.sfproId;
+	}
+	
+	public void setSfproId(String sfproId){
+		this.sfproId = sfproId;
+	}
+	public String getCreateUser(){
+		return this.createUser;
+	}
+	
+	public void setCreateUser(String createUser){
+		this.createUser = createUser;
+	}
+	public String getUpdateTime(){
+		return this.updateTime;
+	}
+	
+	public void setUpdateTime(String updateTime){
+		this.updateTime = updateTime;
+	}
+	public String getCreateTime(){
+		return this.createTime;
+	}
+	
+	public void setCreateTime(String createTime){
+		this.createTime = createTime;
+	}
+	
 	public void setPropertyservicemanagerCharge(com.manage.PropertyServiceManager.entity.PropertyservicemanagerCharge propertyservicemanagerCharge){
 		this.propertyservicemanagerCharge = propertyservicemanagerCharge;
 	}
@@ -76,9 +120,13 @@ public class PropertyservicemanagerSfpro implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((sfproId == null) ? 0 : sfproId.hashCode());
+		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
 		result = prime * result + ((sfproName == null) ? 0 : sfproName.hashCode());
 		result = prime * result + ((sfproAmount == null) ? 0 : sfproAmount.hashCode());
+		result = prime * result + ((sfproId == null) ? 0 : sfproId.hashCode());
+		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
 		return result;
 	}
 	
@@ -91,10 +139,10 @@ public class PropertyservicemanagerSfpro implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		final PropertyservicemanagerSfpro other = (PropertyservicemanagerSfpro) obj;
-		if (sfproId == null) {
-			if (other.sfproId != null)
+		if (updateUser == null) {
+			if (other.updateUser != null)
 				return false;
-		} else if (!sfproId.equals(other.sfproId))
+		} else if (!updateUser.equals(other.updateUser))
 			return false;
 		if (sfproName == null) {
 			if (other.sfproName != null)
@@ -105,6 +153,26 @@ public class PropertyservicemanagerSfpro implements Domain{
 			if (other.sfproAmount != null)
 				return false;
 		} else if (!sfproAmount.equals(other.sfproAmount))
+			return false;
+		if (sfproId == null) {
+			if (other.sfproId != null)
+				return false;
+		} else if (!sfproId.equals(other.sfproId))
+			return false;
+		if (createUser == null) {
+			if (other.createUser != null)
+				return false;
+		} else if (!createUser.equals(other.createUser))
+			return false;
+		if (updateTime == null) {
+			if (other.updateTime != null)
+				return false;
+		} else if (!updateTime.equals(other.updateTime))
+			return false;
+		if (createTime == null) {
+			if (other.createTime != null)
+				return false;
+		} else if (!createTime.equals(other.createTime))
 			return false;
 		return true;
 	}
