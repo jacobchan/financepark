@@ -11,8 +11,8 @@
 			<youi:fieldText property="legalTelephone"  caption="联系方式"/>
 			<youi:fieldText property="legalName"  caption="法人名字"/>
 			<%-- <youi:fieldText property="legalRe"  caption="企业信息ID"/> --%>
-			<youi:fieldSelect property="legalRe" caption="企业信息ID" 
-				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
+			<youi:fieldSelect property="legalRe" caption="企业信息" 
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzName"/>
 			 	
 			<%-- 	
 			<youi:fieldSelect property="rzManager"  caption="企业管理员" 
@@ -40,8 +40,8 @@
 			<youi:fieldText property="legalTelephone"  caption="联系方式"/>
 			<youi:fieldText property="legalName"  caption="法人信息"/>
 			<%-- <youi:fieldText property="legalRe"  caption="企业信息ID"/> --%>
-			<youi:fieldSelect property="legalRe" caption="企业信息ID" 
-				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
+			<youi:fieldSelect property="legalRe" caption="企业信息" 
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzName"/>
 			 	
 		</youi:fieldLayout>
 	</youi:form>
