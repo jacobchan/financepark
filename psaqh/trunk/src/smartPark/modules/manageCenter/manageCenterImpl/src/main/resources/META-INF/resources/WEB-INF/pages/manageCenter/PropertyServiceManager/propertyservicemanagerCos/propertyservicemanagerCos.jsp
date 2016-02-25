@@ -96,10 +96,10 @@
 		action="esb/web/propertyservicenanagerBackManager/savePropertyservicenanagerBack.json">
 		<youi:fieldLayout prefix="recordVisit" columns="1"
 			labelWidths="120,120">
-			<youi:fieldHidden property="backId" caption="回访ID" />
+			<youi:fieldHidden property="backId" caption="回访编号" />
 			<youi:fieldSelect property="propertyservicemanagerCos.cosId"
 				src="esb/web/propertyservicemanagerCosManager/getPropertyservicemanagerCoss.json"
-				code="cosId" show="cosCode" caption="投诉ID" notNull="true" />
+				code="cosId" show="cosCode" caption="投诉编号" notNull="true" />
 			<youi:fieldText property="backCode" caption="回访单号" />
 			<youi:fieldArea property="backRecord" caption="回访记录" rows="8"
 				column="20" tooltips="回访记录" notNull="true" />
@@ -210,6 +210,7 @@
 	<!-- 添加回访表单提交后事件 -->
 	<youi:func name="form_propertyservicenanagerBack_afterSubmit">
 		var propertyservicenanagerBack = $elem('form_propertyservicenanagerBack',pageId);
+		propertyservicenanagerBack.form('reset');
 		propertyservicenanagerBack.form('close');
 		$elem('grid_propertyservicenanagerBack',pageId).grid('pReload');
 	</youi:func>
