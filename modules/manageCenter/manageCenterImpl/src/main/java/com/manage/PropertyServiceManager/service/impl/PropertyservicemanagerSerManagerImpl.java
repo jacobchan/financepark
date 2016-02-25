@@ -165,23 +165,26 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
     	}else{
     		if(propertyservicemanagerTsed.getTsStatus().equals("01")){//派工状态已接单
     			PropertyservicemanagerBx bx = propertyservicemanagerTsed.getPropertyservicemanagerBx();
-    			if(!bx.getBxStatus().equals("05")||!bx.getBxStatus().equals("06")||!bx.getBxStatus().equals("07")){//管理员已定价不能新增或修改维修单
+    			if(bx.getBxStatus().equals("03")||bx.getBxStatus().equals("04")){//管理员已定价不能新增或修改维修单
     				BigDecimal amount = BigDecimal.valueOf(0);
     					for(PropertyservicemanagerSer ser : listSer){//自动计算总价
     						amount = amount.add(ser.getSerPrice());
     					}
 	    				bx.setBxAmount(amount);
-	    			if(bx.getBxStatus().equals("03")){//变更状态为已完工
+	    				//变更状态为已完工
 	    				bx.setBxStatus("04");
-	    			}
 		    		propertyservicemanagerBxDao.save(bx);
 		    		//保存维修单
 		    		for(PropertyservicemanagerSer allser : listSer){
 						allser.setPropertyservicemanagerTs(propertyservicemanagerTsed);
 						propertyservicemanagerSerDao.save(allser);
 					}
-    			}else{
+    			}else if(bx.getBxStatus().equals("05")){
     				throw new BusException("管理员已定价!");
+    			}else if(bx.getBxStatus().equals("06")){
+    				throw new BusException("已付款!");
+    			}else if(bx.getBxStatus().equals("07")){
+    				throw new BusException("保修流程已结束!");
     			}
     		}else{
     			throw new BusException("派工记录有误!");
