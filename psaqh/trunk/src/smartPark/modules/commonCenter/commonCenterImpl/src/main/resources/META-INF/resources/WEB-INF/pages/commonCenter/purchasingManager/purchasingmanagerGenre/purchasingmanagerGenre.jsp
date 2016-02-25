@@ -49,8 +49,7 @@
 			var genreTree = $elem('tree_genre',pageId),
 				record = results.record,
 				relTreeNode;
-		
-			if(!record.purchasingmanagerGenre.genreId){
+			if(!record.purchasingmanagerGenre){
 				relTreeNode = genreTree.find('li.treeNode:first');
 			}else{
 				relTreeNode = genreTree.find('li.treeNode#'+record.purchasingmanagerGenre.genreId);
