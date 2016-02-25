@@ -10,6 +10,8 @@ import javax.persistence.*;
 import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.BuildingBaseManager.entity.BbmRoom;
+import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: 物业收费登记表
@@ -21,36 +23,49 @@ import com.gsoft.framework.core.dataobj.Domain;
 @Table(name = "sp_propertyservicemanager_charge")
 public class PropertyservicemanagerCharge implements Domain{
 	
-	private static final long serialVersionUID = -6701377551062721156L;
+	private static final long serialVersionUID = -6580344328596110188L;
 	
-	@Id @GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
-	@Column(name = "CHARGE_ID_")
-	@Length(max=36)
-	private String chargeId;//收费登记序列
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="USERORDER_ID_")
-	private com.common.OrderManager.entity.OrdermanagerUserorder ordermanagerUserorder;//用户订单
 
-	@Column(name = "CHARGE_CREATETIME_")
+	@Column(name = "UPDATE_TIME_")
+	private String updateTime;//修改时间
+
+	@Column(name = "CHARGE_TIME_")
 	@Length(max=20)
-	private String chargeCreatetime;//登记日期
-
-	@Column(name = "CHARGE_AMOUNT_")
-	private BigDecimal chargeAmount;//应缴费总额
-
-	@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="ROOM_ID_")
-	private com.common.BuildingBaseManager.entity.BbmRoom bbmRoom;//单元
+	private String chargeTime;//缴费日期
 
 	@Column(name = "CHARGE_ISBOOL_")
 	@Length(max=2)
 	private String chargeIsbool;//是否缴费
 
+	@Column(name = "CHARGE_AMOUNT_")
+	private BigDecimal chargeAmount;//应缴费总额
+
+	@Column(name = "CREATE_USER_")
+	@Length(max=36)
+	private String createUser;//创建人
+
+	@Column(name = "CREATE_TIME_")
+	private String createTime;//创建时间
+
+	@Column(name = "CHARGE_CREATETIME_")
+	@Length(max=20)
+	private String chargeCreatetime;//登记日期
+
 	@Column(name = "CHARGE_COMP_")
 	@Length(max=50)
 	private String chargeComp;//收费企业名称
+
+	@Column(name = "CHARGE_ENDATE_")
+	@Length(max=20)
+	private String chargeEndate;//截止日期
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="USERORDER_ID_")
+	private OrdermanagerUserorder userorder;//用户订单
+
+	@Column(name = "UPDATE_USER_")
+	@Length(max=36)
+	private String updateUser;//修改人
 
 	@Column(name = "CHARGE_UNIT_")
 	@Length(max=10)
@@ -59,58 +74,34 @@ public class PropertyservicemanagerCharge implements Domain{
 	@Column(name = "CHARGE_BEDATE_")
 	@Length(max=20)
 	private String chargeBedate;//起始日期
+	@Id @GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
+	@Column(name = "CHARGE_ID_")
+	@Length(max=36)
+	private String chargeId;//收费登记序列
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="ROOM_ID_")
+	private BbmRoom bbmRoom;//单元
 
 	@Column(name = "RZ_ID_")
 	@Length(max=36)
 	private String rzId;//ID
 
-	@Column(name = "CHARGE_TIME_")
-	@Length(max=20)
-	private String chargeTime;//缴费日期
-
-	@Column(name = "CHARGE_ENDATE_")
-	@Length(max=20)
-	private String chargeEndate;//截止日期
-
-	public String getChargeId() {
-		return chargeId;
+	public String getUpdateTime() {
+		return updateTime;
 	}
 
-	public void setChargeId(String chargeId) {
-		this.chargeId = chargeId;
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
 	}
 
-	public com.common.OrderManager.entity.OrdermanagerUserorder getOrdermanagerUserorder() {
-		return ordermanagerUserorder;
+	public String getChargeTime() {
+		return chargeTime;
 	}
 
-	public void setOrdermanagerUserorder(
-			com.common.OrderManager.entity.OrdermanagerUserorder ordermanagerUserorder) {
-		this.ordermanagerUserorder = ordermanagerUserorder;
-	}
-
-	public String getChargeCreatetime() {
-		return chargeCreatetime;
-	}
-
-	public void setChargeCreatetime(String chargeCreatetime) {
-		this.chargeCreatetime = chargeCreatetime;
-	}
-
-	public BigDecimal getChargeAmount() {
-		return chargeAmount;
-	}
-
-	public void setChargeAmount(BigDecimal chargeAmount) {
-		this.chargeAmount = chargeAmount;
-	}
-
-	public com.common.BuildingBaseManager.entity.BbmRoom getBbmRoom() {
-		return bbmRoom;
-	}
-
-	public void setBbmRoom(com.common.BuildingBaseManager.entity.BbmRoom bbmRoom) {
-		this.bbmRoom = bbmRoom;
+	public void setChargeTime(String chargeTime) {
+		this.chargeTime = chargeTime;
 	}
 
 	public String getChargeIsbool() {
@@ -121,12 +112,68 @@ public class PropertyservicemanagerCharge implements Domain{
 		this.chargeIsbool = chargeIsbool;
 	}
 
+	public BigDecimal getChargeAmount() {
+		return chargeAmount;
+	}
+
+	public void setChargeAmount(BigDecimal chargeAmount) {
+		this.chargeAmount = chargeAmount;
+	}
+
+	public String getCreateUser() {
+		return createUser;
+	}
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getChargeCreatetime() {
+		return chargeCreatetime;
+	}
+
+	public void setChargeCreatetime(String chargeCreatetime) {
+		this.chargeCreatetime = chargeCreatetime;
+	}
+
 	public String getChargeComp() {
 		return chargeComp;
 	}
 
 	public void setChargeComp(String chargeComp) {
 		this.chargeComp = chargeComp;
+	}
+
+	public String getChargeEndate() {
+		return chargeEndate;
+	}
+
+	public void setChargeEndate(String chargeEndate) {
+		this.chargeEndate = chargeEndate;
+	}
+
+	public OrdermanagerUserorder getUserorder() {
+		return userorder;
+	}
+
+	public void setUserorder(OrdermanagerUserorder userorder) {
+		this.userorder = userorder;
+	}
+
+	public String getUpdateUser() {
+		return updateUser;
+	}
+
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
 	}
 
 	public String getChargeUnit() {
@@ -145,28 +192,28 @@ public class PropertyservicemanagerCharge implements Domain{
 		this.chargeBedate = chargeBedate;
 	}
 
+	public String getChargeId() {
+		return chargeId;
+	}
+
+	public void setChargeId(String chargeId) {
+		this.chargeId = chargeId;
+	}
+
+	public BbmRoom getBbmRoom() {
+		return bbmRoom;
+	}
+
+	public void setBbmRoom(BbmRoom bbmRoom) {
+		this.bbmRoom = bbmRoom;
+	}
+
 	public String getRzId() {
 		return rzId;
 	}
 
 	public void setRzId(String rzId) {
 		this.rzId = rzId;
-	}
-
-	public String getChargeTime() {
-		return chargeTime;
-	}
-
-	public void setChargeTime(String chargeTime) {
-		this.chargeTime = chargeTime;
-	}
-
-	public String getChargeEndate() {
-		return chargeEndate;
-	}
-
-	public void setChargeEndate(String chargeEndate) {
-		this.chargeEndate = chargeEndate;
 	}
 
 	@Override
@@ -193,11 +240,17 @@ public class PropertyservicemanagerCharge implements Domain{
 				+ ((chargeTime == null) ? 0 : chargeTime.hashCode());
 		result = prime * result
 				+ ((chargeUnit == null) ? 0 : chargeUnit.hashCode());
-		result = prime
-				* result
-				+ ((ordermanagerUserorder == null) ? 0 : ordermanagerUserorder
-						.hashCode());
+		result = prime * result
+				+ ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result
+				+ ((createUser == null) ? 0 : createUser.hashCode());
 		result = prime * result + ((rzId == null) ? 0 : rzId.hashCode());
+		result = prime * result
+				+ ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result
+				+ ((updateUser == null) ? 0 : updateUser.hashCode());
+		result = prime * result
+				+ ((userorder == null) ? 0 : userorder.hashCode());
 		return result;
 	}
 
@@ -260,15 +313,35 @@ public class PropertyservicemanagerCharge implements Domain{
 				return false;
 		} else if (!chargeUnit.equals(other.chargeUnit))
 			return false;
-		if (ordermanagerUserorder == null) {
-			if (other.ordermanagerUserorder != null)
+		if (createTime == null) {
+			if (other.createTime != null)
 				return false;
-		} else if (!ordermanagerUserorder.equals(other.ordermanagerUserorder))
+		} else if (!createTime.equals(other.createTime))
+			return false;
+		if (createUser == null) {
+			if (other.createUser != null)
+				return false;
+		} else if (!createUser.equals(other.createUser))
 			return false;
 		if (rzId == null) {
 			if (other.rzId != null)
 				return false;
 		} else if (!rzId.equals(other.rzId))
+			return false;
+		if (updateTime == null) {
+			if (other.updateTime != null)
+				return false;
+		} else if (!updateTime.equals(other.updateTime))
+			return false;
+		if (updateUser == null) {
+			if (other.updateUser != null)
+				return false;
+		} else if (!updateUser.equals(other.updateUser))
+			return false;
+		if (userorder == null) {
+			if (other.userorder != null)
+				return false;
+		} else if (!userorder.equals(other.userorder))
 			return false;
 		return true;
 	}
