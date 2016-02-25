@@ -100,6 +100,6 @@
 		<menu id="350004" text="媒体报道信息列表" href="page/manageCenter.EnterpriseManager.informationMedia/informationMedia.html"></menu>
 		<menu id="350005" text="公告信息列表" href="page/manageCenter.EnterpriseManager.informationNotice/informationNotice.html"></menu>
 		<menu id="350006" text="产品信息列表" href="page/manageCenter.EnterpriseManager.informationProduct/informationProduct.html"></menu>
-		<menu id="350007" text="入驻企业基本信息列表" href="page/manageCenter.EnterBusinessManager.enterbusinessmanagerRz/enterbusinessmanagerRz.html"></menu>
+		
 	</menu>
 </menus>
