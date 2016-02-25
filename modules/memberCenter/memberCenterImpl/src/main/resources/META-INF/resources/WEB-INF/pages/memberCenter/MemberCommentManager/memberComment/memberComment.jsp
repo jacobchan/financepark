@@ -10,23 +10,23 @@
 							  code="memberId" show="memberName"/>
 			<youi:fieldSelect property="commodityId.commodityId"  caption="商品" src="esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommoditys.json"
 								code="commodityId"	show="commodityTitle"/>
-			<youi:fieldCalendar property="goodsCommentTime"  caption="商品评价时间"/>
+			<youi:fieldCalendar property="goodsCommentTime"  caption="商品评价时间" format="yyyy-MM-dd" textFormat="yyyy-MM-dd"/>
 			<youi:fieldSelect property="goodsCommentLevel"  caption="商品评价等级">
-			<youi:fieldOption caption="1" value="1"></youi:fieldOption>
+				<youi:fieldOption caption="1" value="1"></youi:fieldOption>
 				<youi:fieldOption caption="2" value="2"></youi:fieldOption>
 				<youi:fieldOption caption="3" value="3"></youi:fieldOption>
 				<youi:fieldOption caption="4" value="4"></youi:fieldOption>
 			</youi:fieldSelect>
-			<youi:fieldCalendar property="goodsCommentReviewtime"  caption="商品评价追评时间"/>
+			<youi:fieldCalendar property="goodsCommentReviewtime"  caption="商品追评时间" format="yyyy-MM-dd" textFormat="yyyy-MM-dd"/>
 		</youi:fieldLayout>
 
-		<youi:gridCol property="memberId.memberName"  caption="会员用户" width="100px"/>
-		<youi:gridCol property="commodityId.commodityTitle"  caption="商品ID" width="100px"/>
-		<youi:gridCol property="goodsCommentReview"  caption="商品评价追评" width="200px"/>
-		<youi:gridCol property="goodsCommentTime"  caption="商品评价时间" width="100px"/>
-		<youi:gridCol property="goodsCommentLevel"  caption="商品评价等级" width="100px"/>
-		<youi:gridCol property="goodsCommentReviewtime"  caption="商品评价追评时间" width="100px"/>
-		<youi:gridCol property="goodsCommentContent"  caption="商品评价内容" width="200px"/>
+		<youi:gridCol property="memberId.memberName"  caption="会员用户" width="15%"/>
+		<youi:gridCol property="commodityId.commodityTitle"  caption="商品" width="15%"/>
+		<youi:gridCol property="goodsCommentContent"  caption="商品评价内容" width="20%"/>
+		<youi:gridCol property="goodsCommentTime"  caption="商品评价时间" width="10%" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss"/>
+		<youi:gridCol property="goodsCommentLevel"  caption="商品评价等级" width="10%"/>
+		<youi:gridCol property="goodsCommentReview"  caption="商品评价追评" width="20%"/>
+		<youi:gridCol property="goodsCommentReviewtime"  caption="商品追评时间" width="10%" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -41,16 +41,16 @@
 							  code="memberId" show="memberName" notNull="true"/>
 			<youi:fieldSelect property="commodityId.commodityId"  caption="商品" src="esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommoditys.json"
 								code="commodityId"	show="commodityTitle" notNull="true"/>
-			<youi:fieldCalendar property="goodsCommentTime"  caption="商品评价时间"/>
+			<youi:fieldArea property="goodsCommentContent"  caption="商品评价内容" column="2"/>
+			<youi:fieldCalendar property="goodsCommentTime"  caption="商品评价时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss"/>
 			<youi:fieldSelect property="goodsCommentLevel"  caption="商品评价等级">
 				<youi:fieldOption caption="1" value="1"></youi:fieldOption>
 				<youi:fieldOption caption="2" value="2"></youi:fieldOption>
 				<youi:fieldOption caption="3" value="3"></youi:fieldOption>
 				<youi:fieldOption caption="4" value="4"></youi:fieldOption>
 			</youi:fieldSelect>
-			<youi:fieldArea property="goodsCommentReview"  caption="商品评价追评"/>
-			<youi:fieldCalendar property="goodsCommentReviewtime"  caption="商品评价追评时间"/>
-			<youi:fieldArea property="goodsCommentContent"  caption="商品评价内容"/>
+			<youi:fieldArea property="goodsCommentReview"  caption="商品评价追评" column="2"/>
+			<youi:fieldCalendar property="goodsCommentReviewtime"  caption="商品追评时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
