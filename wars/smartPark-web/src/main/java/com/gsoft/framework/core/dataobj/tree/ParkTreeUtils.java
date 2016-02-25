@@ -1,5 +1,6 @@
  package com.gsoft.framework.core.dataobj.tree;
  
+import com.common.EnterpriceTypeManager.entity.EtypeEnterprisetype;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 
 import java.util.ArrayList;
@@ -27,6 +28,19 @@ public class ParkTreeUtils{
 	   List<TreeNode> treeList = new ArrayList<TreeNode>();
 	   for (PurchasingmanagerGenre pg : list) {
 		   treeList.add(new GenreHtmlTreeNode(pg));
+	   }
+	   makeHtmlTree(root, treeList, 0, 0);
+	   return root;
+	}
+   
+ //商品类别树
+   public static EnterprisetypeTreeNode listToEnterTree(
+			List<EtypeEnterprisetype> list, String rootId, String rootText) {
+	   EnterprisetypeTreeNode root = new EnterprisetypeTreeNode(rootId, rootText);
+	   root.setGroup("root");
+	   List<TreeNode> treeList = new ArrayList<TreeNode>();
+	   for (EtypeEnterprisetype enter : list) {
+		   treeList.add(new EnterprisetypeTreeNode(enter));
 	   }
 	   makeHtmlTree(root, treeList, 0, 0);
 	   return root;
