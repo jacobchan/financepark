@@ -27,7 +27,7 @@
 		<youi:gridCol property="financingTime"  caption="融资时间"/>
 		<youi:gridCol property="financingCost"  caption="融资估值"/>
 		<youi:gridCol property="financingPre"  caption="持股比例"/>
-		<youi:gridCol property="financingRe"  caption="企业信息ID"/>
+		<youi:gridCol property="financingRe"  caption="企业信息"/>
 		<youi:gridCol property="financingAmount"  caption="融资金额"/>
 		<youi:gridCol property="financingTp"  caption="融资状态"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">

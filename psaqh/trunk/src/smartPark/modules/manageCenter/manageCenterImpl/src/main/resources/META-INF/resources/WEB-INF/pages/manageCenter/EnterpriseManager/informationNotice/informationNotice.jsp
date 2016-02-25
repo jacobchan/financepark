@@ -17,7 +17,7 @@
 			<%-- <youi:fieldText property="rzId"  caption="ID2"/> --%>
 			<%-- <youi:fieldText property="noticeContent"  caption="内容"/> --%>
 		</youi:fieldLayout>
-		<%-- <youi:gridCol property="noticeRe"  caption="企业信息ID"/> --%>
+	    <youi:gridCol property="noticeRe"  caption="企业信息"/>
 		
 		<youi:gridCol property="noticeSum"  caption="收藏次数"/>
 		<youi:gridCol property="noticeCount"  caption="浏览次数"/>

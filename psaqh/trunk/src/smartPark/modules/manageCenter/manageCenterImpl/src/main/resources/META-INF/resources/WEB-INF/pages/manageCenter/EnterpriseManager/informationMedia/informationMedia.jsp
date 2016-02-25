@@ -18,7 +18,7 @@
 		<youi:gridCol property="mediaTilurl"  caption="文章URL_"/>
 		<youi:gridCol property="mediaTitle"  caption="标题"/>
 		<youi:gridCol property="mediaStatus"  caption="发布状态"/>
-		<youi:gridCol property="mediaRe"  caption="企业信息ID"/>
+		<youi:gridCol property="mediaRe"  caption="企业信息"/>
 
 		<youi:gridCol property="mediaUrl"  caption="图片URL"/>
 		<youi:gridCol property="rzId"  caption="ID2"/>

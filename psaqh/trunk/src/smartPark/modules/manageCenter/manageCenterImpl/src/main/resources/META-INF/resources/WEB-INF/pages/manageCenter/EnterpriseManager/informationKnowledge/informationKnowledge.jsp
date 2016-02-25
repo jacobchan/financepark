@@ -18,9 +18,8 @@
 		</youi:fieldLayout>
 		<%-- <youi:gridCol property="rzId"  caption="ID2"/> --%>
 
-		<%-- <youi:gridCol property="knowledgeRe"  caption="企业信息ID"/> --%>
-		<youi:fieldSelect property="legalRe" caption="企业信息" 
-				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzName"/>
+		 <youi:gridCol property="knowledgeRe"  caption="企业信息"/>
+		
 		<youi:gridCol property="knowledgeTitle"  caption="标题"/>
 		
 		<youi:gridCol property="knowledgeUrl"  caption="图片URL"/>

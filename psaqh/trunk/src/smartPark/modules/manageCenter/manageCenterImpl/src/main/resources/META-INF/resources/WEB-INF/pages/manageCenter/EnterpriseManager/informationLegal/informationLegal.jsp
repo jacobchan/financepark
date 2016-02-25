@@ -25,7 +25,7 @@
 		<%-- <youi:gridCol property="rzId"  caption="ID2"/> --%>
 		<youi:gridCol property="legalTelephone"  caption="联系方式"/>
 		<youi:gridCol property="legalName"  caption="法人名字"/>
-		<youi:gridCol property="legalRe"  caption="企业信息ID"/>
+		<youi:gridCol property="legalRe"  caption="企业信息"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
