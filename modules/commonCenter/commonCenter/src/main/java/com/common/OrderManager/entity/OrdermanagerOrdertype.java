@@ -5,9 +5,6 @@ package com.common.OrderManager.entity;
 
 import javax.persistence.*;
 import org.hibernate.validator.*;
-
-import org.hibernate.annotations.GenericGenerator;
-
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: 订单类型表
@@ -21,11 +18,10 @@ public class OrdermanagerOrdertype implements Domain{
 	
 	private static final long serialVersionUID = 6846502395644472633L;
 	
-	@Id @GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
+	@Id
 	@Column(name = "ORDERTYPE_ID_")
-	@Length(max=36)
-	private String ordertypeId;//订单类型主键
+	@Length(max=10)
+	private String ordertypeId;//订单类型编号
 
 	@Column(name = "ORDERTYPE_PROJECT_NAME_")
 	@Length(max=128)
