@@ -12,7 +12,7 @@
 		<youi:gridCol property="addressName"  caption="联系人" width="20%"/>
 		<youi:gridCol property="addressPhone"  caption="联系电话" width="20%"/>
 		<youi:gridCol property="addressDetail"  caption="详细地址" width="20%"/>		
-		<youi:gridCol property="addressStatus"  caption="默认状态" convert="bool" width="20%"/>
+		<youi:gridCol property="addressStatus"  caption="是否默认地址" convert="bool" width="20%"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
