@@ -101,38 +101,38 @@ public class PropertyservicemanagerSfproManagerImpl extends BaseManagerImpl impl
      */
     @EsbServiceMapping
     public PropertyservicemanagerSfpro savePropertyservicemanagerSfpro(PropertyservicemanagerSfpro o) throws BusException{
-//    	PropertyservicemanagerSfpro ps = new PropertyservicemanagerSfpro();
-//    	PropertyservicemanagerCharge pc = new PropertyservicemanagerCharge();
-//    	BigDecimal chargeAmount = BigDecimal.valueOf(0);
-//    	String sfproId = o.getSfproId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(sfproId);
-//    	if(isUpdate){//修改
-//    		ps = propertyservicemanagerSfproDao.get(o.getSfproId());
-//    		pc = ps.getPropertyservicemanagerCharge();
-//    		chargeAmount = getChargeAmountByCharge(pc);
-//    		chargeAmount = chargeAmount.subtract(ps.getSfproAmount()).add(o.getSfproAmount()).setScale(2, BigDecimal.ROUND_HALF_UP);
-//    		ps.setSfproAmount(o.getSfproAmount());
-//    		ps.setSfproName(o.getSfproName());
-//    		ps = propertyservicemanagerSfproDao.save(ps);
-//    		
-//    	}else{//新增
-//    		if(o.getPropertyservicemanagerCharge() == null||o.getPropertyservicemanagerCharge().getChargeId() == null){
-//        		throw new BusException("请选择收费登记再增加收费登记项！");
-//        	}
-//        	pc = propertyservicemanagerChargeDao.get(o.getPropertyservicemanagerCharge().getChargeId());
-//        	chargeAmount = getChargeAmountByCharge(pc);
-//    		ps = propertyservicemanagerSfproDao.save(o);
-//    		chargeAmount = chargeAmount.add(o.getSfproAmount()).setScale(2, BigDecimal.ROUND_HALF_UP);
-//    	}
-//    	
-//    	pc.setChargeAmount(chargeAmount);
-//		propertyservicemanagerChargeDao.save(pc);
-//		OrdermanagerUserorder userOrder = pc.getOrdermanagerUserorder();
-//		userOrder.setUserorderAmount(chargeAmount);
-//		ordermanagerUserorderDao.save(userOrder);
-//		
-//		pc = propertyservicemanagerChargeDao.save(pc);
-    	return o;
+    	PropertyservicemanagerSfpro ps = new PropertyservicemanagerSfpro();
+    	PropertyservicemanagerCharge pc = new PropertyservicemanagerCharge();
+    	BigDecimal chargeAmount = BigDecimal.valueOf(0);
+    	String sfproId = o.getSfproId();
+    	boolean isUpdate = StringUtils.isNotEmpty(sfproId);
+    	if(isUpdate){//修改
+    		ps = propertyservicemanagerSfproDao.get(o.getSfproId());
+    		pc = ps.getPropertyservicemanagerCharge();
+    		chargeAmount = getChargeAmountByCharge(pc);
+    		chargeAmount = chargeAmount.subtract(ps.getSfproAmount()).add(o.getSfproAmount()).setScale(2, BigDecimal.ROUND_HALF_UP);
+    		ps.setSfproAmount(o.getSfproAmount());
+    		ps.setSfproName(o.getSfproName());
+    		ps = propertyservicemanagerSfproDao.save(ps);
+    		
+    	}else{//新增
+    		if(o.getPropertyservicemanagerCharge() == null||o.getPropertyservicemanagerCharge().getChargeId() == null){
+        		throw new BusException("请选择收费登记再增加收费登记项！");
+        	}
+        	pc = propertyservicemanagerChargeDao.get(o.getPropertyservicemanagerCharge().getChargeId());
+        	chargeAmount = getChargeAmountByCharge(pc);
+    		ps = propertyservicemanagerSfproDao.save(o);
+    		chargeAmount = chargeAmount.add(o.getSfproAmount()).setScale(2, BigDecimal.ROUND_HALF_UP);
+    	}
+    	
+    	pc.setChargeAmount(chargeAmount);
+		propertyservicemanagerChargeDao.save(pc);
+		OrdermanagerUserorder userOrder = pc.getUserorder();
+		userOrder.setUserorderAmount(chargeAmount);
+		ordermanagerUserorderDao.save(userOrder);
+		
+		pc = propertyservicemanagerChargeDao.save(pc);
+    	return ps;
     }
 
     /**
@@ -185,12 +185,18 @@ public class PropertyservicemanagerSfproManagerImpl extends BaseManagerImpl impl
 			pc.setChargeEndate(chargeEndate);
 			propertyservicemanagerChargeDao.save(pc);
 			for(PropertyservicemanagerSfpro ps:sfproList){
-				PropertyservicemanagerSfpro pss = propertyservicemanagerSfproDao.get(ps.getSfproId());
-				pss.setSfproAmount(ps.getSfproAmount());
-				pss.setSfproName(ps.getSfproName());
-				propertyservicemanagerSfproDao.save(pss);
+				if(StringUtils.isNotEmpty(ps.getSfproId())){
+					PropertyservicemanagerSfpro pss = propertyservicemanagerSfproDao.get(ps.getSfproId());
+					pss.setSfproAmount(ps.getSfproAmount());
+					pss.setSfproName(ps.getSfproName());
+					propertyservicemanagerSfproDao.save(pss);
+				}else{
+					ps.setPropertyservicemanagerCharge(pc);
+					propertyservicemanagerSfproDao.save(ps);
+				}
+				
 			}
-			OrdermanagerUserorder userOrder = pc.getOrdermanagerUserorder();
+			OrdermanagerUserorder userOrder = pc.getUserorder();
 			userOrder.setUserorderAmount(chargeAmount);
 			ordermanagerUserorderDao.save(userOrder);
 		}else{
@@ -198,7 +204,7 @@ public class PropertyservicemanagerSfproManagerImpl extends BaseManagerImpl impl
     		userOrder.setUserorderAmount(chargeAmount);
     		userOrder.setUserorderCode("123");
     		userOrder = ordermanagerUserorderDao.save(userOrder);
-    		pc.setOrdermanagerUserorder(userOrder);
+    		pc.setUserorder(userOrder);
 			pc.setChargeAmount(chargeAmount);
 			pc.setChargeIsbool(chargeIsbool);
 			pc.setChargeCreatetime(chargeCreatetime);
