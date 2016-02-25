@@ -29,9 +29,9 @@
 				removeSrc="esb/web/nmIssueflowManager/removeNmIssueflow.json" submit="NOT" reset="NOT" 
 				parentId="grid_nmIssuetype" parentAttr="nmIssuetype">
 
-		<youi:gridCol property="issueFlowCStatus"  caption="当前状态" width="30%"/>
-		<youi:gridCol property="issueFlowNStatus"  caption="上步状态" width="30%"/>
-		<youi:gridCol property="issueOperate"  caption="操作详细" width="30%"/>
+		<youi:gridCol property="issueFlowCStatus"  caption="当前状态" width="30%" align="center"/>
+		<youi:gridCol property="issueFlowNStatus"  caption="上步状态" width="30%" align="center"/>
+		<youi:gridCol property="issueOperate"  caption="操作详细" width="30%" align="center"/>
 	</youi:grid>
 	</youi:cell>
 </youi:table>	
