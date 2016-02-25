@@ -18,6 +18,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
@@ -64,22 +65,27 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "params.userId")})
     public PurchasingmanagerGenre savePurchasingmanagerGenre(PurchasingmanagerGenre o) throws BusException{
     	String genreId = o.getGenreId();
     	boolean isUpdate = StringUtils.isNotEmpty(genreId);
     	if(isUpdate){//修改
+    		PurchasingmanagerGenre pg = purchasingmanagerGenreDao.get(genreId);
+    		pg.setGenreName(o.getGenreName());
+    		pg.setUpdateUser(o.getUpdateUser());
+    		pg.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return purchasingmanagerGenreDao.save(pg);
     	
     	}else{//新增
-    		
+    		if(o.getPurchasingmanagerGenre() != null){
+    			PurchasingmanagerGenre pg = purchasingmanagerGenreDao.get(o.getPurchasingmanagerGenre().getGenreId());
+    			o.setPurchasingmanagerGenre(pg);
+    		}
+    		o.setCreateUser(o.getUpdateUser());
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+        	return purchasingmanagerGenreDao.save(o);
     	}
-//    	if(o.getPurchasingmanagerGenre() != null){
-//    		if(o.getPurchasingmanagerGenre().getGenreId() != null){
-//    			PurchasingmanagerGenre pcg = purchasingmanagerGenreDao.get(o.getPurchasingmanagerGenre().getGenreId());
-//    			o.setPurchasingmanagerGenre(pcg);
-//    		}
-//    	}
-    	return purchasingmanagerGenreDao.save(o);
     }
 
     /**
