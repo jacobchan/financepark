@@ -71,8 +71,8 @@ public class EnterbusinessmanagerRz implements Domain{
 	@Length(max=16)
 	private String rzTelephone;//联系方式
 	
-	@Column(name = "RZ_Name_")
-	@Length(max=36)
+	@Column(name = "RZ_NAME_")
+	@Length(max=128)
 	private String rzName;//企业名称
 
 	@Column(name = "PARK_ID_")
