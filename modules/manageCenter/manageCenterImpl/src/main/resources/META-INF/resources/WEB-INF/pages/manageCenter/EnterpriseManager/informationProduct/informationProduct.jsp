@@ -18,7 +18,7 @@
 
 		<youi:gridCol property="productContent"  caption="产品描述"/>
 		<youi:gridCol property="productRe"  caption="企业ID"/>
-		 <youi:gridCol property="rzId"  caption="ID2"/>
+		<%-- <youi:gridCol property="rzId"  caption="ID2"/> --%>
 		<youi:gridCol property="productType"  caption="产品类别"/>
 		<youi:gridCol property="productName"  caption="产品名称"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
@@ -30,12 +30,12 @@
 	<!-- form-产品信息编辑 -->
 	<youi:form dialog="true" caption="产品信息" id="form_informationProduct" action="esb/web/informationProductManager/saveInformationProduct.json">
 		<youi:fieldLayout prefix="record">
-			 <youi:fieldHidden property="productId"  caption="ID"/> 
+			<%--  <youi:fieldHidden property="productId"  caption="ID"/>  --%>
 			<youi:fieldText property="productContent"  caption="产品描述"/>
 			<%-- <youi:fieldText property="productRe"  caption="企业ID"/> --%>
 			<youi:fieldSelect property="productRe" caption="企业ID" 
 				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzId"/>
-			<youi:fieldText property="rzId"  caption="ID2"/>
+			<youi:fieldText property="rzId"  caption="ID2"/> 
 			<youi:fieldText property="productType"  caption="产品类别"/>
 			<youi:fieldText property="productName"  caption="产品名称"/>
 		</youi:fieldLayout>
