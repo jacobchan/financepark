@@ -8,7 +8,9 @@
 		<youi:fieldLayout labelWidths="122,122">
 			<youi:fieldText property="fkcodeTelephone"  caption="联系电话"/>
 			<youi:fieldText property="fkcodeRemark"  caption="访客说明"/>
-			<youi:fieldText property="fkcodeComp"  caption="到访企业"/>
+		<%-- 	<youi:fieldText property="fkcodeComp"  caption="到访企业"/> --%>
+		<youi:fieldSelect property="fkcodeComp" caption="到访企业" 
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzName"/>
 			<youi:fieldText property="fkcodeName"  caption="联系人"/>
 			<youi:fieldCalendar property="fkcodeTime"  caption="到访时间"/>
 			<youi:fieldText property="memberId"  caption="会员用户ID"/>
@@ -34,7 +36,9 @@
 		<youi:fieldLayout prefix="record" labelWidths="122,122">
 			<youi:fieldText property="fkcodeTelephone"  caption="联系电话"/>
 			<youi:fieldText property="fkcodeRemark"  caption="访客说明"/>
-			<youi:fieldText property="fkcodeComp"  caption="到访企业"/>
+			<%-- <youi:fieldText property="fkcodeComp"  caption="到访企业"/> --%>
+			<youi:fieldSelect property="fkcodeComp" caption="到访企业" 
+				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzName"/>
 			<youi:fieldText property="fkcodeName"  caption="联系人"/>
 			<youi:fieldCalendar property="fkcodeTime"  caption="到访时间"/>
 			<youi:fieldText property="memberId"  caption="会员用户ID"/>
