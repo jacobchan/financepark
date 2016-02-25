@@ -10,7 +10,7 @@
 
 		</youi:fieldLayout>
 		<youi:gridCol property="memberId.memberName"  caption="会员用户" width="50%"/>
-		<youi:gridCol property="commodityId"  caption="商品ID" width="50%"/>
+		<youi:gridCol property="commodityId"  caption="商品ID" renderer="renderer_commodityId" width="50%"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -29,6 +29,17 @@
 	</youi:form>
 	
 	<!--**********************************页面函数Start********************************-->
-	
+	<youi:func name="renderer_commodityId" params="col,record">
+ 		var commodityTitle = ""; 
+		$.youi.ajaxUtil.ajax({
+				url:'esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommodity.json',
+				data:'commodityId='+record.commodityId,
+				async: false, 
+				success:function(result){
+					commodityTitle=result.record.commodityTitle;
+				}
+			});
+		return commodityTitle;
+	</youi:func>
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
