@@ -8,7 +8,7 @@
 		<youi:fieldLayout labelWidths="122">
 			<youi:fieldText property="financingSub"  caption="投资主体"/>
 			<youi:fieldSelect property="financingStatus"  caption="发布状态" convert="financingStatus"/>
-			<youi:fieldText property="financingName"  caption="融资企业名称"/>
+			<youi:fieldText property="financingName"  caption="融资企业名称" />
 			<%-- <youi:fieldText property="rzId"  caption="ID2"/> --%>
 			<youi:fieldCalendar property="financingTime"  caption="融资时间"/>
 			<youi:fieldText property="financingCost"  caption="融资估值"/>
@@ -21,7 +21,7 @@
 		</youi:fieldLayout>
 		<youi:gridCol property="financingSub"  caption="投资主体"/>
 		<youi:gridCol property="financingStatus"  caption="发布状态"/>
-		<youi:gridCol property="financingName"  caption="融资企业名称"/>
+		<youi:gridCol property="financingName"  caption="融资企业名称" width=""/>
 		<%-- <youi:gridCol property="rzId"  caption="ID2"/> --%>
 
 		<youi:gridCol property="financingTime"  caption="融资时间"/>
@@ -43,7 +43,7 @@
 			<youi:fieldSelect property="financingStatus"  caption="发布状态" convert="financingStatus"/>
 			<youi:fieldText property="financingName"  caption="融资企业名称"/>
 			<youi:fieldText property="rzId"  caption="ID2"/>
-			 <youi:fieldHidden property="financingId"  caption="ID"/> 
+			 <%-- <youi:fieldHidden property="financingId"  caption="ID"/>  --%>
 			<youi:fieldCalendar property="financingTime"  caption="融资时间"/>
 			<youi:fieldText property="financingCost"  caption="融资估值"/>
 			<youi:fieldText property="financingPre"  caption="持股比例"/>
