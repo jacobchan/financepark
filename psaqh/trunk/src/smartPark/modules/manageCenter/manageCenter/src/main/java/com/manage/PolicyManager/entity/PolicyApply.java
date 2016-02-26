@@ -3,12 +3,21 @@
  */
 package com.manage.PolicyManager.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.Length;
 
 import com.common.MemberManager.entity.MemberInformation;
+import com.common.NewsManager.entity.NmIssueflow;
+import com.common.NewsManager.entity.NmIssuenews;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: -政策申请记录
@@ -48,6 +57,30 @@ public class PolicyApply implements Domain{
 	@Length(max=32)
 	private String policyApplyContactTel;//联系电话
 	
+	@ManyToOne//(fetch = FetchType.LAZY)
+    @JoinColumn(name="POLICY_APPLY_ISSUENEWS_")
+	private NmIssuenews nmIssuenews;//申请政策内容
+	
+	@OneToOne//(fetch = FetchType.LAZY)
+    @JoinColumn(name="POLICY_APPLY_ISSUEFLOW_")
+	private NmIssueflow nmIssueflow;//流程状态
+	
+	public NmIssueflow getNmIssueflow() {
+		return nmIssueflow;
+	}
+
+	public void setNmIssueflow(NmIssueflow nmIssueflow) {
+		this.nmIssueflow = nmIssueflow;
+	}
+
+	public NmIssuenews getNmIssuenews() {
+		return nmIssuenews;
+	}
+
+	public void setNmIssuenews(NmIssuenews nmIssuenews) {
+		this.nmIssuenews = nmIssuenews;
+	}
+
 	public String getPolicyApplyContactPeople(){
 		return this.policyApplyContactPeople;
 	}
