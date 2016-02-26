@@ -5,7 +5,6 @@ package com.common.MessageCenter.service;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import com.common.MessageCenter.entity.McMsgtempalate;
 import com.gsoft.framework.core.exception.BusException;
@@ -64,15 +63,6 @@ public interface McMsgtempalateManager extends BaseManager{
      */
 	public boolean exsitMcMsgtempalate(String propertyName,Object value) throws BusException;
 	
-	/**
-	 * 根据消息模板获取消息内容
-	 * @param msgtempalate 模板
-	 * @param replaceMap 置换的map
-	 * @return
-	 * @throws BusException
-	 */
-	public String genMsgContent(McMsgtempalate msgtempalate,Map<String,String> replaceMap) throws BusException;
-	
 	/**获取参数个数
 	 * @param content
 	 * @return
@@ -80,6 +70,11 @@ public interface McMsgtempalateManager extends BaseManager{
 	 */
 	public String getParamCount(String content) throws BusException;
 	
+	/**根据唯一码查找模板
+	 * @param uniqueCode
+	 * @return
+	 * @throws BusException
+	 */
 	public McMsgtempalate getMsgTempalate(String uniqueCode) throws BusException;
 	
 }
