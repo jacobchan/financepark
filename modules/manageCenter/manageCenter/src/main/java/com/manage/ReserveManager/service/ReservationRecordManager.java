@@ -69,14 +69,12 @@ public interface ReservationRecordManager extends BaseManager{
      */
 	public boolean exsitReservationRecord(String propertyName,Object value) throws BusException;
 	/**
-	 * 添加预约记录
+	 * 新增回访记录，预约由已授理状态变更为已到访或未到访状态
 	 * @param o
-	 * @param commodityId
-	 * @param roomId
 	 * @return
 	 * @throws BusException
 	 */
-	public ReservationRecord saveReservationRecordByType(ReservationRecord o,String commodityId,String roomId) throws BusException;
+	public ReservationRecord saveReternRecords(ReservationRecord o) throws BusException;
 	
   /**
   * 根据预约类型查询不同的预约对象，比如：01众创空间：查询商品表基础信息；02虚拟空间查询单元表基础信息
