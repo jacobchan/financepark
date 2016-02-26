@@ -26,7 +26,7 @@
 				</youi:fieldLayout>
 				<youi:button name="acceptance" caption="受理" icon="search" active="1" />
 				<youi:button name="goback" caption="退回" icon="remove" active="1" />
-				<youi:button name="govisit" caption="回访" icon="" active="1" />
+				<youi:button name="govisit" caption="回访" icon="edit" active="1" />
 				<youi:button name="evaluate" caption="评价" icon="edit" active="1" />
 				<youi:button name="visitrecord" caption="添加回访记录" icon="save" active="1" />
 				<youi:gridCol property="cosCode" caption="投诉单号" width="100" />
