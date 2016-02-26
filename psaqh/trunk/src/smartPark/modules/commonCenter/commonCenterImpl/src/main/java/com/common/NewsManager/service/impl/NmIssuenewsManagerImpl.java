@@ -36,7 +36,7 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 	@Autowired
 	private NmIssuenewsDao nmIssuenewsDao;
 	@Autowired
-	private NmIssueflowDao nmIssueflowDao;
+	private NmIssueflowManager nmIssueflowManager;
 	@Autowired
 	private NmIssuetypeManager issuetypeManager;
 	@Autowired
@@ -118,7 +118,7 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 		NmIssuenews nmIssuenews = nmIssuenewsDao.get(id);
 		if(nmIssuenews!=null){
 			NmIssuetype issueType = nmIssuenews.getPolicyType();//发布类型
-			List<NmIssueflow> nmIssueflows = nmIssueflowDao.getList("nmIssuetype.issueTypeId", issueType.getIssueTypeId());
+			List<NmIssueflow> nmIssueflows = nmIssueflowManager.getNmIssueflows(issueType.getIssueTypeId());
 			if(nmIssueflows!=null&&nmIssueflows.size()>0){
 				for(NmIssueflow nmIssueflow:nmIssueflows){
 					if(currentStatus.equals(nmIssueflow.getIssueFlowCStatus())){
