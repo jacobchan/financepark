@@ -17,11 +17,13 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFxtdc;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerMoverec;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerFxtdcDao;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerMoverecDao;
+import com.manage.PropertyServiceManager.service.PropertyservicemanagerFxtdcManager;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerMoverecManager;
 
 @Service("propertyservicemanagerMoverecManager")
@@ -30,7 +32,7 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
 	@Autowired
 	private PropertyservicemanagerMoverecDao propertyservicemanagerMoverecDao;
 	@Autowired
-	private PropertyservicemanagerFxtdcDao propertyservicemanagerFxtdcDao ;
+	private PropertyservicemanagerFxtdcManager propertyservicemanagerFxtdcManager ;
 	
     /**
      * 查询列表
@@ -75,12 +77,16 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
 //    	}else{//新增
 //    		
 //    	}
-    	
+    	String enName = o.getMoverecComp() ;//得到搬家企业名称
+    	if(StringUtils.isEmpty(enName)){
+    		throw new BusException("非企业用户没有权限申请！") ;
+    	}
+    	//保存并得到当前对象
     	PropertyservicemanagerMoverec rec = propertyservicemanagerMoverecDao.save(o);
     	if(rec!=null){
     		PropertyservicemanagerFxtdc propertyservicemanagerFxtdc = new PropertyservicemanagerFxtdc() ;
         	propertyservicemanagerFxtdc.setPropertyservicemanagerMoverec(rec);
-        	propertyservicemanagerFxtdcDao.save(propertyservicemanagerFxtdc);
+        	propertyservicemanagerFxtdcManager.savePropertyservicemanagerFxtdc(propertyservicemanagerFxtdc);
         	return rec;
     	}else{
     		return null;
