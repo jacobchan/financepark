@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -24,13 +25,32 @@ import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerOc;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerOcDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerOcManager;
-
+         
 @Service("propertyservicemanagerOcManager")
 @Transactional
 public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl implements PropertyservicemanagerOcManager{
 	@Autowired
 	private PropertyservicemanagerOcDao propertyservicemanagerOcDao;
-	
+	/**
+     * 修改一卡通预约状态
+     */
+	 @EsbServiceMapping	
+	 public void updateOcStatus(@ServiceParam(name="ocId") String id, @ServiceParam(name="ocStatus") String ocStatus)
+				throws BusException {
+		// TODO Auto-generated method stub
+		
+		 PropertyservicemanagerOc o=propertyservicemanagerOcDao.get(id);
+	    	o.setOcStatus(ocStatus);
+	    	propertyservicemanagerOcDao.save(o);
+	}
+	/* @EsbServiceMapping
+		public void updateUserorderStatus(@ServiceParam(name="userorderId") String id, @ServiceParam(name="userorderStatus") String userorderStatus)
+				throws BusException {
+			// TODO Auto-generated method stub
+	    	OrdermanagerUserorder o=ordermanagerUserorderDao.get(id);
+	    	o.setUserorderStatus(userorderStatus);
+	    	ordermanagerUserorderDao.save(o);
+		}*/
     /**
      * 查询列表
      */
@@ -102,5 +122,6 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
     public boolean exsitPropertyservicemanagerOc(String propertyName,Object value) throws BusException{
 		return propertyservicemanagerOcDao.exists(propertyName,value);
 	}
+	
 
 }
