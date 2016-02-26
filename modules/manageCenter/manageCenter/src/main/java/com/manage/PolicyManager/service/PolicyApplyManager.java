@@ -12,7 +12,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
+import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.PolicyManager.entity.PolicyApply;
 
 public interface PolicyApplyManager extends BaseManager{
@@ -63,4 +63,19 @@ public interface PolicyApplyManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitPolicyApply(String propertyName,Object value) throws BusException;
+	  
+    /**
+     * 更新政策申请状态
+     * @param policyApplyId，政策申请记录ID
+     * @throws BusException
+     */
+	public void updatePolicyApply(String policyApplyId) throws BusException;
+	
+	/**
+	 * 通过会员id查询到相应的企业名称
+	 * @param id 会员id
+	 * @return
+	 * @throws BusException
+	 */
+	public EnterbusinessmanagerRz findEnterpriseByMemberId(String id) throws BusException;
 }
