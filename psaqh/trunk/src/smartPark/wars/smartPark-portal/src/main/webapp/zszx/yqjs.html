@@ -13,7 +13,12 @@
 	<div id="youi_page_header" class="youi-page-header clearfix"></div>
 	
 	<div class="youi-page-body clearfix">
-		园区介绍
+		园区名称：
+		<input type="text" class="form-control textInput">
+		<button type="button" id="submit" data-name="submit" class="youi-button btn btn-default active-0 btn-primary">
+			<span class="youi-icon fa fa-submit btn-primary"></span> 提 交
+			
+		</button>
 	</div>
 	
 	<div id="youi_page_footer" class="youi-page-footer"></div>
@@ -24,5 +29,35 @@
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	
 	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+	<script type="text/javascript">
+		
+		
+			$('#submit').click(function(){
+				
+				
+				if(!isLogin){alert("请登录");return;}
+				var params = ['parkName=测试园区','parkIntroduce=园区简介','address=园区地址'];
+				var serviceURL = "http://localhost:8088/smartPark-web/esb/web/bbmParkManager/saveBbmPark.json";
+				
+				
+				
+				//公共方法
+				$.youi.ajaxUtils.ajax({
+					//url:'http://192.168.80.1:8088/gsoft-web/esb/web/userManager/getPagerUsers.json',
+					//url:'http://localhost:9088/jsonp/data.jsp?data:file=users.json',
+					url:serviceURL,
+					data:params.join('&'),
+/* 					url:this.options.jsonpSrc, */
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(results){
+						if(results&&results.records){
+							that._parseRecords(results.records);
+							alert("ok");
+						}
+					}
+				});
+			});
+	</script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ${package};
+package ${package}.data;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gsoft.framework.core.web.annotation.DataInfo;
 import com.gsoft.framework.core.web.controller.BaseDataController;
-import com.gsoft.framework.core.web.controller.DataIn;
+import com.gsoft.framework.core.web.controller.RequestDataIn;
 import com.gsoft.framework.core.web.view.DataModelAndView;
 import com.gsoft.framework.core.web.view.Message;
 

@@ -22,7 +22,7 @@ require("./giui.core.js");
 		options:{
 			bindResize:true
 		},
-		
+		var params = ['key=value','key1=value1'];
 		_initWidget:function(){
 			//jsonp
 			var that = this;

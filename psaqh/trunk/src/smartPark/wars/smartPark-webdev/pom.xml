@@ -49,7 +49,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<nexus.root>http://220.249.113.11/nexus</nexus.root>
-		<gsoft.version>1.0.3.RELEASE</gsoft.version>
+		<gsoft.version>1.0.4-SNAPSHOT</gsoft.version>
 		<!-- 开发时配置 -->
 		<commonCenter.src.path>E:\workspace\witpark\smartPark\modules\commonCenter\commonCenter</commonCenter.src.path>
 		<commonCenterImpl.src.path>E:\workspace\witpark\smartPark\modules\commonCenter\commonCenterImpl</commonCenterImpl.src.path>

@@ -26,6 +26,11 @@
 	<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
 	
 	<script type="text/javascript">
+		
+		function pageInit(isLogin){
+			alert(isLogin);
+		}
+	
 		$(function(){
 			$('#plist_user').plist({
 				template:'<span>{userCaption}</span><span>{loginName}</span>',

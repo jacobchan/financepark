@@ -65,7 +65,7 @@ public class BbmParkManagerImpl extends BaseManagerImpl implements BbmParkManage
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+	@EsbServiceMapping(pubConditions={@PubCondition(property="address",pubProperty="userId")})
     public BbmPark saveBbmPark(BbmPark o) throws BusException{
 //    	String bbmParkId = o.getBbmParkId();
 //    	boolean isUpdate = StringUtils.isNotEmpty(bbmParkId);

@@ -15,7 +15,7 @@ public class CodegenTest {
 
     public static void main(String[] args) {
             String tablePrefix = "sp";
-            Document doc = Dom4jUtils.saxParse("E:\\pdm\\SmartPark_PDM.pdm");
+            Document doc = Dom4jUtils.saxParse("/Users/jack/Project/SVNReponstory/psaqh/trunk/doc/02_设计/PDM/SmartPark_PDM.pdm");
             // TODO Auto-generated method stub
             Pdm2ModelXml pdm2ModelXml = new Pdm2ModelXml(doc,tablePrefix);
             Document modelXml = pdm2ModelXml.getModelDoc();
@@ -24,32 +24,34 @@ public class CodegenTest {
             
             GenerateEngine generateEngine = new GenerateEngine();
             
+            
             GenerateConfig config = new GenerateConfig();
-            config.setSourceHome("E:\\workspace\\witpark\\smartPark\\wars\\smartPark-webdev");
             
-//            String[] commonBuff = new String[]{"BuildingBaseManager",
-//            		"MessageCenter","purchasingManager","OrderManager",
-//            		"NewsManager","MemberManager","PayManager","EnterpriceTypeManager"};
-//            for(int i = 0;i<commonBuff.length;i++){
-//            	config.setPackagePrefix("com.common");
-//            	generateEngine.generate(commonBuff[i], config);
-//            }
+            config.setSourceHome("/Users/jack/Project/SVNReponstory/psaqh/trunk/doc/generatorCode/smartPark");
             
-//            String[] manageBuff = new String[]{"EnterBusinessManager",
-//            		"PropertyServiceManager","PublicUtilitiesManager","EmployeeManager",
-//            		"EnterpriseManager","EnterpriseMessageManager","ActivityManager",
-//            		"PolicyManager","ReserveManager"};
-//            for(int i = 0;i<manageBuff.length;i++){
-//            	config.setPackagePrefix("com.manage");
-//            	generateEngine.generate(manageBuff[i], config);
-//            }
-//            
-//            String[] memberBuff = new String[]{"MemberAdrManager",
-//            		"MemberCommentManager","shoppingCarManager","FavoritsManage"};
-//            for(int i = 0;i<memberBuff.length;i++){
-//            	config.setPackagePrefix("com.member");
-//            	generateEngine.generate(memberBuff[i], config);
-//            }
+            String[] commonBuff = new String[]{"BuildingBaseManager",
+            		"MessageCenter","purchasingManager","OrderManager",
+            		"NewsManager","MemberManager","PayManager","EnterpriceTypeManager"};
+            for(int i = 0;i<commonBuff.length;i++){
+            	config.setPackagePrefix("com.common");
+            	generateEngine.generate(commonBuff[i], config);
+            }
+            
+            String[] manageBuff = new String[]{"EnterBusinessManager",
+            		"PropertyServiceManager","PublicUtilitiesManager","EmployeeManager",
+            		"EnterpriseManager","EnterpriseMessageManager","ActivityManager",
+            		"PolicyManager","ReserveManager"};
+            for(int i = 0;i<manageBuff.length;i++){
+            	config.setPackagePrefix("com.manage");
+            	generateEngine.generate(manageBuff[i], config);
+            }
+            
+            String[] memberBuff = new String[]{"MemberAdrManager",
+            		"MemberCommentManager","shoppingCarManager","FavoritsManage"};
+            for(int i = 0;i<memberBuff.length;i++){
+            	config.setPackagePrefix("com.member");
+            	generateEngine.generate(memberBuff[i], config);
+            }
     }
 
 }

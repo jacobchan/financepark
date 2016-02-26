@@ -60,7 +60,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<nexus.root>http://220.249.113.11/nexus</nexus.root>
-		<gsoft.framework.version>1.0.3.RELEASE</gsoft.framework.version>
+		<gsoft.framework.version>1.0.4-SNAPSHOT</gsoft.framework.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
