@@ -23,7 +23,7 @@
 		<youi:gridCol property="enteredEnt"  caption="包含企业" width="150px"/>
 		<youi:gridCol property="bbmBuilding.buildingCaption" caption="所属楼栋" width="150px"/>
 		<youi:gridCol property="bbmFloor.floorCaption" caption="所属楼层" width="150px"/>
-		<youi:gridCol property="status"  caption="使用状态" width="150px"/>
+		<youi:gridCol property="status"  caption="使用状态" convert="roomstatus" width="150px"/>
 		<youi:gridCol property="rentCharge"  caption="物业_租金" width="150px"/>
 		<youi:gridCol property="floor"  caption="所属楼层" width="150px"/>
 		<youi:gridCol property="eneryCharge"  caption="物业_电费" width="150px"/>
