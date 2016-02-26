@@ -15,7 +15,7 @@
 			<youi:fieldText property="enTypeId"  caption="企业类型ID"/>
 			<youi:fieldText property="rzSign"  caption="企业码"/>
 		</youi:fieldLayout>
-		<youi:gridCol property="rzManager"  caption="企业管理员" width="10%"/>
+		<youi:gridCol property="rzManager.memberName"  caption="企业管理员" width="10%"/>
 		<youi:gridCol property="rzDate"  caption="入驻时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" width="10%"/>
 		<youi:gridCol property="buildingId"  caption="楼栋"  renderer="renderer_buildingId" width="10%"/>
 		<youi:gridCol property="parkId"  caption="园区" renderer="renderer_parkId" width="10%"/>

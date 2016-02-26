@@ -55,7 +55,9 @@
 				data:'memberId='+record.memberId,
 				async: false, 
 				success:function(result){
-					memberName=result.record.memberName;
+					if(result.record!=""&&result.record!=null){
+						memberName=result.record.memberName;
+					}
 				}
 			});
 		return memberName;
