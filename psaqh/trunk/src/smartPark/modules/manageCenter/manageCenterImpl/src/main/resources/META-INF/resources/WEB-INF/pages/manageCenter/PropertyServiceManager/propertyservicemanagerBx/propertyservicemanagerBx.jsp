@@ -64,13 +64,13 @@
 			<%-- <youi:fieldText property="bxComp"  caption="企业名称"/> --%>
 			<youi:fieldSelect property="bxComp" caption="企业名称" src="/memberInformationManager/getMemberInformations.json" code="memberName" show="memberName" notNull="true" />
 			<youi:fieldLabel property="bxAddress"  caption="维修地址"/>
-			<youi:fieldSelect property="bxStatus"  caption="报修状态" convert="bx_status"/>
-			<youi:fieldSelect property="bxWay"  caption="报修方式" convert="bx_way"/>
-			<youi:fieldSelect property="bxType"  caption="报修类型" convert="bx_type"/>
+			<youi:fieldSelect property="bxStatus"  caption="报修状态" convert="bx_status" defaultValue="00"/>
+			<youi:fieldSelect property="bxWay"  caption="报修方式" convert="bx_way" notNull="true"/>
+			<youi:fieldSelect property="bxType"  caption="报修类型" convert="bx_type" notNull="true" />
 			<youi:fieldSelect property="bxProject"  caption="报修项目" convert="bx_project"/>
 			<youi:fieldText property="bxAmount"  caption="维修总价" dataType="format" format="0,0.00"/>
 			<youi:fieldUpload property="bxFujian"  caption="附件"/>
-			<youi:fieldArea property="bxRemark"  caption="描述" column="3"/>
+			<youi:fieldArea property="bxRemark"  caption="描述" column="3" notNull="true" />
 		</youi:fieldLayout>
 	</youi:form>
 	
@@ -157,8 +157,8 @@
                         url:'/esb/web/propertyservicemanagerBxManager/upBxbyId.json',
                         data:{id:selectedRecord.bxId,code:'00'},
                         success:function(result){    
-                            $elem('grid_propertyservicemanagerBx',pageId).grid('pReload');
-                            alert("处理成功!!");
+                            alert("处理成功!");
+							$elem('grid_propertyservicemanagerBx',pageId).grid('pReload');
                         }
                     });
 				//已受理，进行派工
