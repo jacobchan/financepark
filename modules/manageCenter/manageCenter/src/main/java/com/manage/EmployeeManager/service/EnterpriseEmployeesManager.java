@@ -6,13 +6,13 @@ package com.manage.EmployeeManager.service;
 import java.util.List;
 import java.util.Collection;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 
 public interface EnterpriseEmployeesManager extends BaseManager{
@@ -74,5 +74,13 @@ public interface EnterpriseEmployeesManager extends BaseManager{
 	 * @author Zhuyl
 	 */
 	public String acceptEnterpriseInvitation(String rzId, String phone, String code) throws BusException;
+	
+	/**
+	 * 通过会员查询对应的企业会员
+	 * @param member
+	 * @return
+	 * @throws BusException
+	 */
+	public EnterpriseEmployees getEnterpriseEmployeesByMember(MemberInformation member) throws BusException;
 	
 }
