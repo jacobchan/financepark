@@ -21,9 +21,21 @@ import com.gsoft.framework.core.dataobj.Domain;
 @Table(name = "sp_propertyservicemanager_bx")
 public class PropertyservicemanagerBx implements Domain{
 	
-	private static final long serialVersionUID = 438289935878401876L;
+	private static final long serialVersionUID = 1200019789396828818L;
 	
+	
+	@Column(name = "CREATE_TIME_")
+	@Length(max=20)
+	private String createTime;//创建时间
 
+	@Column(name = "UPDATE_USER_")
+	@Length(max=36)
+	private String updateUser;//修改人
+
+	@Column(name = "CREATE_USER_")
+	@Length(max=36)
+	private String createUser;//创建人
+	
 	@Column(name = "BX_REMARK_")
 	@Length(max=300)
 	private String bxRemark;//描述
@@ -64,6 +76,42 @@ public class PropertyservicemanagerBx implements Domain{
 	@Length(max=2)
 	private String bxStatus;//报修状态
 	
+	@Column(name = "UPDATE_TIME_")
+	@Length(max=20)
+	private String updateTime;//修改时间
+	
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getUpdateUser() {
+		return updateUser;
+	}
+
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
+	}
+
+	public String getCreateUser() {
+		return createUser;
+	}
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+	public String getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
+	}
+
 	public String getBxStatus() {
 		return bxStatus;
 	}
@@ -160,6 +208,14 @@ public class PropertyservicemanagerBx implements Domain{
 				+ ((bxStatus == null) ? 0 : bxStatus.hashCode());
 		result = prime * result + ((bxType == null) ? 0 : bxType.hashCode());
 		result = prime * result + ((bxWay == null) ? 0 : bxWay.hashCode());
+		result = prime * result
+				+ ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result
+				+ ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result
+				+ ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result
+				+ ((updateUser == null) ? 0 : updateUser.hashCode());
 		return result;
 	}
 	
@@ -221,6 +277,26 @@ public class PropertyservicemanagerBx implements Domain{
 			if (other.bxWay != null)
 				return false;
 		} else if (!bxWay.equals(other.bxWay))
+			return false;
+		if (createTime == null) {
+			if (other.createTime != null)
+				return false;
+		} else if (!createTime.equals(other.createTime))
+			return false;
+		if (createUser == null) {
+			if (other.createUser != null)
+				return false;
+		} else if (!createUser.equals(other.createUser))
+			return false;
+		if (updateTime == null) {
+			if (other.updateTime != null)
+				return false;
+		} else if (!updateTime.equals(other.updateTime))
+			return false;
+		if (updateUser == null) {
+			if (other.updateUser != null)
+				return false;
+		} else if (!updateUser.equals(other.updateUser))
 			return false;
 		return true;
 	}

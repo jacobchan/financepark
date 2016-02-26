@@ -48,6 +48,54 @@ public class PropertyservicemanagerSer implements Domain{
     @JoinColumn(name="TS_ID_")
 	private PropertyservicemanagerTs propertyservicemanagerTs;//主键ID_2
 	
+	@Column(name = "CREATE_USER_")
+	@Length(max=36)
+	private String createUser;//创建人
+	
+	@Column(name = "UPDATE_TIME_")
+	@Length(max=20)
+	private String updateTime;//修改时间
+	
+	@Column(name = "UPDATE_USER_")
+	@Length(max=36)
+	private String updateUser;//修改人
+	
+	@Column(name = "CREATE_TIME_")
+	@Length(max=20)
+	private String createTime;//创建时间
+	
+	public String getCreateUser() {
+		return createUser;
+	}
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+	public String getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public String getUpdateUser() {
+		return updateUser;
+	}
+
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
+	}
+
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
 	public String getSerName(){
 		return this.serName;
 	}
@@ -99,6 +147,10 @@ public class PropertyservicemanagerSer implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result
+				+ ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result
+				+ ((createUser == null) ? 0 : createUser.hashCode());
 		result = prime
 				* result
 				+ ((propertyservicemanagerTs == null) ? 0
@@ -110,6 +162,10 @@ public class PropertyservicemanagerSer implements Domain{
 		result = prime * result
 				+ ((serPrice == null) ? 0 : serPrice.hashCode());
 		result = prime * result + ((serType == null) ? 0 : serType.hashCode());
+		result = prime * result
+				+ ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result
+				+ ((updateUser == null) ? 0 : updateUser.hashCode());
 		return result;
 	}
 	
@@ -122,6 +178,16 @@ public class PropertyservicemanagerSer implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		PropertyservicemanagerSer other = (PropertyservicemanagerSer) obj;
+		if (createTime == null) {
+			if (other.createTime != null)
+				return false;
+		} else if (!createTime.equals(other.createTime))
+			return false;
+		if (createUser == null) {
+			if (other.createUser != null)
+				return false;
+		} else if (!createUser.equals(other.createUser))
+			return false;
 		if (propertyservicemanagerTs == null) {
 			if (other.propertyservicemanagerTs != null)
 				return false;
@@ -152,6 +218,16 @@ public class PropertyservicemanagerSer implements Domain{
 			if (other.serType != null)
 				return false;
 		} else if (!serType.equals(other.serType))
+			return false;
+		if (updateTime == null) {
+			if (other.updateTime != null)
+				return false;
+		} else if (!updateTime.equals(other.updateTime))
+			return false;
+		if (updateUser == null) {
+			if (other.updateUser != null)
+				return false;
+		} else if (!updateUser.equals(other.updateUser))
 			return false;
 		return true;
 	}
