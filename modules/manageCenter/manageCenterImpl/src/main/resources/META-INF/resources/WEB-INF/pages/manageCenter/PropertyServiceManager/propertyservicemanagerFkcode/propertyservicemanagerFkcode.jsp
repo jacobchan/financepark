@@ -25,7 +25,7 @@
 		<youi:gridCol property="fkcodeName"  caption="联系人"/>
 		<youi:gridCol property="fkcodeTime"  caption="到访时间"/>
 		<youi:gridCol property="memberId"  caption="会员用户"/>
-		<youi:gridCol property="fkcodeSex"  caption="性别"/>
+		<youi:gridCol property="fkcodeSex"  caption="性别" convert="sex" />
 
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
