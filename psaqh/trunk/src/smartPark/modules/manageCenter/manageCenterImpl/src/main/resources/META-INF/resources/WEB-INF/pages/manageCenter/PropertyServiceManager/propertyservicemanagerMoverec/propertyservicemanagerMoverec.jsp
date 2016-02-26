@@ -56,7 +56,8 @@
 				data:{memberId:memberId},
 				success:function(result){
 					var record = result.record;
-                     $('#P_'+pageId+'_record_moverecComp').fieldValue(record.rzName);//将返回的对象里面的enName赋值给公司名称
+					$('#P_'+pageId+'_record_moverecComp').fieldValue('') ;//先将公司名称置空
+                    $('#P_'+pageId+'_record_moverecComp').fieldValue(record.rzName);//将返回的对象里面的enName赋值给公司名称
                   } 
             })
    	 </youi:func>
