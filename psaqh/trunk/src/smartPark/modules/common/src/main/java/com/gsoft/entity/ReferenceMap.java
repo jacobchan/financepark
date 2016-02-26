@@ -10,10 +10,19 @@ public class ReferenceMap extends HashMap<String, String>{
 	private static final long serialVersionUID = 1122406424890438625L;
 
 	public ReferenceMap(){
-		super();
+	//	super();
 		this.put("@user","");
-		this.put("@NO","");
-		this.put("@status","");
+		this.put("#user","");
+		this.put("#OrderType","");
+		this.put("#OrderNo","");
+		this.put("#Commdity","");
+		this.put("#RecNo","");
+		this.put("#NewType","");
+		this.put("#Type","");
+		this.put("#RecState","");
+		this.put("#waiter","");
+		this.put("#Phone","");
+		this.put("#qyadmin","");
 	}
 	
 	public ReferenceMap(String params){
@@ -31,5 +40,13 @@ public class ReferenceMap extends HashMap<String, String>{
 			}
 		}
 	}
+	
+//	@Override
+//	public String put(String key, String value) {
+//		if(this.containsKey(key))
+//			return super.put(key, value);
+//		else
+//			return value;
+//	}
 	
 }
