@@ -52,7 +52,7 @@
 		    <youi:fieldLabel property="recordType"  caption="预约类型" convert="recordType"/>
 		    <youi:fieldLabel property="recordMemberId"  caption="预约对象"/>
 		    <youi:fieldLabel property="visiteDate"  caption="来访日期" width="120" />
-		    <youi:fieldCalendar property="visiteTime"  caption="实际来访时间" width="120" notNull="true" textFormat="yyyy-MM-dd hh:MM:ss" format="yyyy-MM-dd hh:MM:ss"/>
+		    <youi:fieldCalendar property="visiteTime"  caption="实际来访时间" width="120" notNull="true" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss"/>
 			<youi:fieldSelect property="recordVisiteStatus"  caption="是否到访" convert="recordVisiteStatus" notNull="true"/>
 			<youi:fieldText property="recordCustomer"  caption="客服代表" notNull="true"/>
 			<youi:fieldText property="recordServiceTel"  caption="客服电话" notNull="true" expression="^1[3|4|5|8|9]{1}[0-9]{9,9}$" expressionMessage="请填写正确的手机号码"/>
