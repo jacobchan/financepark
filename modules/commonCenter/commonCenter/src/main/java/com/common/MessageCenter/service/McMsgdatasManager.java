@@ -5,6 +5,7 @@ package com.common.MessageCenter.service;
 
 import java.util.List;
 import java.util.Collection;
+import java.util.Map;
 
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -12,8 +13,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.common.MessageCenter.entity.McMsgdatas;
+import com.common.MessageCenter.entity.McMsgtempalate;
 
 public interface McMsgdatasManager extends BaseManager{
 
@@ -73,9 +74,26 @@ public interface McMsgdatasManager extends BaseManager{
 	public String buildMessageContent(McMsgdatas mcMsgdatas) throws BusException;
 	
 	/**
+	 * 根据消息模板获取消息内容
+	 * @param msgtempalate 模板
+	 * @param replaceMap 置换的map
+	 * @return
+	 * @throws BusException
+	 */
+	public String buildMsgContent(McMsgtempalate msgtempalate,Map<String,String> replaceMap) throws BusException;
+	
+	/**
 	 * 发送消息
 	 * @param mcMsgdatas
 	 * @throws BusException
 	 */
 	public void sendMessage(McMsgdatas mcMsgdatas) throws BusException;
+	
+	/**构建消息内容对象
+	 * @param uniqueCode 消息模板唯一码
+	 * @param replaceMap 参数map
+	 * @return
+	 * @throws BusException
+	 */
+	public McMsgdatas buildMsgData(String uniqueCode,Map<String,String> replaceMap) throws BusException;
 }
