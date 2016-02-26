@@ -16,12 +16,10 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFxtdc;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerMoverec;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerFxtdcDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerFxtdcManager;
 
@@ -102,5 +100,12 @@ public class PropertyservicemanagerFxtdcManagerImpl extends BaseManagerImpl impl
     public boolean exsitPropertyservicemanagerFxtdc(String propertyName,Object value) throws BusException{
 		return propertyservicemanagerFxtdcDao.exists(propertyName,value);
 	}
+	@Override
+	public PropertyservicemanagerFxtdc getFxtdcByMoverec(
+			PropertyservicemanagerMoverec moverec) {
+		PropertyservicemanagerFxtdc fxtdc = propertyservicemanagerFxtdcDao.getObjectByUniqueProperty("propertyservicemanagerMoverec", moverec) ;
+		return fxtdc;
+	}
+	
 
 }
