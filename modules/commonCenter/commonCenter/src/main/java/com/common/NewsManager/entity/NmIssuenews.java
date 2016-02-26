@@ -51,7 +51,7 @@ public class NmIssuenews implements Domain{
 	@Length(max=20)
 	private String policyIssueDate;//政策发布时间
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(name="ISSUE_TEMPALATE_ID_")
 	private com.common.NewsManager.entity.NmIssuetempalate nmIssuetempalate;//发布模板ID
 	
