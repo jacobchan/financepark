@@ -125,4 +125,11 @@ public interface NmIssueflowManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public boolean isFinally(String nmIssuetypeId,String currentStatus) throws BusException;
+	
+	/**
+	 * 通过政策类型ID得到对应的流程状态
+	 * @param nmIssuetypeId 政策类型ID
+	 * @return
+	 */
+	public List<NmIssueflow> getNmIssueflows(String  nmIssuetypeId) ;
 }
