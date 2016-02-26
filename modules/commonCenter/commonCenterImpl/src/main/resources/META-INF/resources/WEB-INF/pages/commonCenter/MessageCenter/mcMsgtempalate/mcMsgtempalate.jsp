@@ -9,10 +9,11 @@
 			<youi:fieldText property="msgTempalateCaption"  caption="消息模板标题" operator="LIKE"/>
 		</youi:fieldLayout>
 		
-		<youi:gridCol property="msgTempalateCaption"  caption="消息模板标题" width="20%" align="center"/>
+		<youi:gridCol property="msgTempalateCaption"  caption="消息模板标题" width="15%" align="center"/>
 		<youi:gridCol property="msgTempalateContent"  caption="模板内容" width="40%"/>
-		<youi:gridCol property="msgTempalateParams"  caption="模板参数(个)" width="15%" align="center"/>
-		<youi:gridCol property="msgReceiver"  caption="接收对象" width="20%" align="center"/>
+		<youi:gridCol property="mcMsgtype.msgTypeCaption"  caption="模板类型" width="15%" align="center"/>
+		<youi:gridCol property="msgReceiver"  caption="接收对象" width="15%" align="center"/>
+		<youi:gridCol property="uniqueCode"  caption="唯一码" width="15%" align="center"/>
 		
 		<youi:gridCol width="80" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
