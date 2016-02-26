@@ -101,7 +101,7 @@
         var recordStatus = selectedRecord.recordStatus;
         if(recordStatus == '01'){//01:待受理
              $.youi.ajaxUtil.ajax({
-				url:'/esb/web/propertyservicemanagerEntrecManager/cancelReservation.json',
+				url:'/esb/web/reservationRecordManager/cancelReservation.json',
 				data:{recordId:recordId},
 				success:function(result){
 					alert("预约成功取消");
