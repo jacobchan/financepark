@@ -52,6 +52,18 @@ public class PropertyservicemanagerMoverec implements Domain{
 	@Length(max=2)
 	private String moverecWay;//搬家提交方式
 	
+	@Column(name = "MOVEREC_TIME_")
+	@Length(max=32)
+	private String moverecTime;//搬家时间
+	
+	public String getMoverecTime() {
+		return moverecTime;
+	}
+
+	public void setMoverecTime(String moverecTime) {
+		this.moverecTime = moverecTime;
+	}
+
 	public String getMoverecUnit(){
 		return this.moverecUnit;
 	}
