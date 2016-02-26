@@ -62,6 +62,7 @@
 	</menu>
 	<menu id="025000" text="招商预约管理">
 			<menu id="025100" text="预约记录分配管理" href="page/manageCenter.ReserveManager.reservationRecord/reservationRecord.html"></menu>
+			<menu id="025200" text="回访记录管理" href="page/manageCenter.ReserveManager.reservationRecord/returnRecord.html"></menu>
 	</menu>
 	
 	<!-- <menu id="040000" text="订单管理">
