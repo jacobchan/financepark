@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2016/2/25 16:29:54                           */
+/* Created on:     2016/2/26 18:14:13                           */
 /*==============================================================*/
 
 
@@ -14,20 +14,10 @@ alter table sp_OrderManager_orderMerchan_nexus
 
 drop table if exists sp_OrderManager_orderMerchan_nexus;
 
-alter table sp_OrderManager_orderProjectType_
-   drop primary key;
-
-drop table if exists sp_OrderManager_orderProjectType_;
-
 alter table sp_OrderManager_orderProjectType_value_
    drop primary key;
 
 drop table if exists sp_OrderManager_orderProjectType_value_;
-
-alter table sp_OrderManager_orderType_
-   drop primary key;
-
-drop table if exists sp_OrderManager_orderType_;
 
 alter table sp_OrderManager_userOrder
    drop primary key;
@@ -294,11 +284,6 @@ alter table sp_purchasingManager_commodity_extend
 
 drop table if exists sp_purchasingManager_commodity_extend;
 
-alter table sp_purchasingManager_commodity_extend_value
-   drop primary key;
-
-drop table if exists sp_purchasingManager_commodity_extend_value;
-
 alter table sp_purchasingManager_genre
    drop primary key;
 
@@ -382,41 +367,13 @@ alter table sp_OrderManager_orderMerchan_nexus
    add primary key (ORDERMERCHAN_NEXUS_ID_);
 
 /*==============================================================*/
-/* Table: sp_OrderManager_orderProjectType_                     */
-/*==============================================================*/
-create table sp_OrderManager_orderProjectType_
-(
-   ORDERPROJECTTYPE_ID_ char(36) not null,
-   ORDERTYPE_ID_        varchar(10),
-   ORDERPROJECTTYPE_DISPLAY_NAME_ varchar(128),
-   ORDERPROJECTTYPE_FIELD_NAME_ varchar(128),
-   ORDERPROJECTTYPE_FIELD_TYPE_ char(2),
-   ORDERPROJECTTYPE_FIELD_LENGTH_ int,
-   ORDERPROJECTTYPE_DEFAULT_VALUE_ varchar(128),
-   ORDERPROJECTTYPE_CHECK_FORMAT_ varchar(64),
-   ORDERPROJECTTYPE_ISNOT_MUST_ varchar(1),
-   ORDERPROJECTTYPE_ISNOT_DISPLAY_ varchar(1),
-   ORDERPROJECTTYPE_OPTION_CODESET_ varchar(32),
-   ORDERPROJECTTYPE_SORT_CHAR_ varchar(32),
-   UPDATE_USER_         char(36),
-   UPDATE_TIME_         datetime,
-   CREATE_USER_         char(36),
-   CREATE_TIME_         datetime
-);
-
-alter table sp_OrderManager_orderProjectType_ comment '320403订单项目类型表';
-
-alter table sp_OrderManager_orderProjectType_
-   add primary key (ORDERPROJECTTYPE_ID_);
-
-/*==============================================================*/
 /* Table: sp_OrderManager_orderProjectType_value_               */
 /*==============================================================*/
 create table sp_OrderManager_orderProjectType_value_
 (
    ORDERPROJECTTYPE_VALUE_ID_ char(36) not null,
+   GENRE_PROPERTY_ID_   char(36),
    USERORDER_ID_        char(36),
-   ORDERPROJECTTYPE_ID_ char(36),
    ORDERPROJECTTYPE_VALUE_DISPLAY_NAME_ varchar(128),
    ORDERPROJECTTYPE_VALUE_FIELD_NAME_ varchar(128),
    ORDERPROJECTTYPE_VALUE_FIELD_VALUE_ text,
@@ -432,33 +389,13 @@ alter table sp_OrderManager_orderProjectType_value_
    add primary key (ORDERPROJECTTYPE_VALUE_ID_);
 
 /*==============================================================*/
-/* Table: sp_OrderManager_orderType_                            */
-/*==============================================================*/
-create table sp_OrderManager_orderType_
-(
-   ORDERTYPE_ID_        varchar(10) not null,
-   ORDERTYPE_NAME_      varchar(128) not null,
-   ORDERTYPE_PROJECT_NAME_ varchar(128) not null,
-   ORDERTYPE_PROJECT_TEMPLATE_ADDRESS_ varchar(256),
-   UPDATE_USER_         char(36),
-   UPDATE_TIME_         datetime,
-   CREATE_USER_         char(36),
-   CREATE_TIME_         datetime
-);
-
-alter table sp_OrderManager_orderType_ comment '320402订单类型表';
-
-alter table sp_OrderManager_orderType_
-   add primary key (ORDERTYPE_ID_);
-
-/*==============================================================*/
 /* Table: sp_OrderManager_userOrder                             */
 /*==============================================================*/
 create table sp_OrderManager_userOrder
 (
    USERORDER_ID_        char(36) not null,
    MEMBER_ID_           char(36),
-   ORDERTYPE_ID_        varchar(10),
+   GENRE_ID_            char(36),
    BX_ID_               varchar(36),
    USERORDER_CODE_      varchar(32),
    USERORDER_PROJECT_   varchar(128),
@@ -470,7 +407,8 @@ create table sp_OrderManager_userOrder
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
-   CREATE_TIME_         datetime
+   CREATE_TIME_         datetime,
+   USERORDER_ADR_       varchar(256)
 );
 
 alter table sp_OrderManager_userOrder comment '320401用户订单表';
@@ -729,7 +667,8 @@ create table sp_enterbusinessmanager_rz
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
-   CREATE_TIME_         datetime
+   CREATE_TIME_         datetime,
+   RZ_NAME_             varchar(128)
 );
 
 alter table sp_enterbusinessmanager_rz comment '330101入驻企业基本信息';
@@ -1682,6 +1621,7 @@ alter table sp_purchasingManager_commodity
 create table sp_purchasingManager_commodity_extend
 (
    COMMODITY_EXTEND_ID_ char(36) not null,
+   GENRE_PROPERTY_ID_   char(36),
    PARK_BUSINESS_TUPE_  char(2),
    COMMODITY_EXTEND_FIELD_NAME_ varchar(128),
    COMMODITY_EXTEND_FIELD_TYPE_ char(2),
@@ -1693,35 +1633,14 @@ create table sp_purchasingManager_commodity_extend
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
-   CREATE_TIME_         datetime
+   CREATE_TIME_         datetime,
+   GENRE_ID_            char(36)
 );
 
 alter table sp_purchasingManager_commodity_extend comment '320302采购商品信息扩展';
 
 alter table sp_purchasingManager_commodity_extend
    add primary key (COMMODITY_EXTEND_ID_);
-
-/*==============================================================*/
-/* Table: sp_purchasingManager_commodity_extend_value           */
-/*==============================================================*/
-create table sp_purchasingManager_commodity_extend_value
-(
-   COMMODITY_EXTEND_VALUE_id_ char(36) not null,
-   COMMODITY_ID_        char(36),
-   COMMODITY_EXTEND_ID_ char(36),
-   COMMODITY_EXTEND_VALUE_DISPLAY_NAME_ varchar(128),
-   COMMODITY_EXTEND_VALUE_FIELD_NAME_ varchar(128),
-   COMMODITY_EXTEND_VALUE_DISPLAY_CONTENT_ text,
-   UPDATE_USER_         char(36),
-   UPDATE_TIME_         datetime,
-   CREATE_USER_         char(36),
-   CREATE_TIME_         datetime
-);
-
-alter table sp_purchasingManager_commodity_extend_value comment '320303商品扩展属性值表';
-
-alter table sp_purchasingManager_commodity_extend_value
-   add primary key (COMMODITY_EXTEND_VALUE_id_);
 
 /*==============================================================*/
 /* Table: sp_purchasingManager_genre                            */
@@ -1735,7 +1654,9 @@ create table sp_purchasingManager_genre
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
-   CREATE_TIME_         datetime
+   CREATE_TIME_         datetime,
+   GENRE_MODULE_URL_    varchar(256),
+   GENRE_CODE_          varchar(10)
 );
 
 alter table sp_purchasingManager_genre comment '320305商品类别表';
@@ -1916,23 +1837,20 @@ alter table sp_OrderManager_orderMerchan_nexus add constraint FK_Relationship_18
 alter table sp_OrderManager_orderMerchan_nexus add constraint FK_Relationship_19 foreign key (MERCHANT_ID_)
       references sp_purchasingManager_merchant (MERCHANT_ID_) on delete restrict on update restrict;
 
-alter table sp_OrderManager_orderProjectType_ add constraint FK_Relationship_1 foreign key (ORDERTYPE_ID_)
-      references sp_OrderManager_orderType_ (ORDERTYPE_ID_) on delete restrict on update restrict;
+alter table sp_OrderManager_orderProjectType_value_ add constraint FK_Relationship_72 foreign key (GENRE_PROPERTY_ID_)
+      references sp_purchasingManager_genre_property (GENRE_PROPERTY_ID_) on delete restrict on update restrict;
 
-alter table sp_OrderManager_orderProjectType_value_ add constraint FK_Relationship_3 foreign key (USERORDER_ID_)
+alter table sp_OrderManager_orderProjectType_value_ add constraint FK_Relationship_81 foreign key (USERORDER_ID_)
       references sp_OrderManager_userOrder (USERORDER_ID_) on delete restrict on update restrict;
-
-alter table sp_OrderManager_orderProjectType_value_ add constraint FK_Relationship_4 foreign key (ORDERPROJECTTYPE_ID_)
-      references sp_OrderManager_orderProjectType_ (ORDERPROJECTTYPE_ID_) on delete restrict on update restrict;
 
 alter table sp_OrderManager_userOrder add constraint FK_Relationship_15 foreign key (BX_ID_)
       references sp_propertyservicemanager_bx (BX_ID_) on delete restrict on update restrict;
 
-alter table sp_OrderManager_userOrder add constraint FK_Relationship_2 foreign key (ORDERTYPE_ID_)
-      references sp_OrderManager_orderType_ (ORDERTYPE_ID_) on delete restrict on update restrict;
-
 alter table sp_OrderManager_userOrder add constraint FK_Relationship_8 foreign key (MEMBER_ID_)
       references sp_member_information (MEMBER_ID_) on delete restrict on update restrict;
+
+alter table sp_OrderManager_userOrder add constraint FK_Relationship_82 foreign key (GENRE_ID_)
+      references sp_purchasingManager_genre (GENRE_ID_) on delete restrict on update restrict;
 
 alter table sp_activity_apply add constraint FK_Relationship_54 foreign key (MEMBER_ID_)
       references sp_member_information (MEMBER_ID_) on delete restrict on update restrict;
@@ -2108,11 +2026,8 @@ alter table sp_purchasingManager_commodity add constraint FK_Relationship_24 for
 alter table sp_purchasingManager_commodity add constraint FK_Relationship_29 foreign key (MERCHANT_ID_)
       references sp_purchasingManager_merchant (MERCHANT_ID_) on delete restrict on update restrict;
 
-alter table sp_purchasingManager_commodity_extend_value add constraint FK_Relationship_30 foreign key (COMMODITY_ID_)
-      references sp_purchasingManager_commodity (COMMODITY_ID_) on delete restrict on update restrict;
-
-alter table sp_purchasingManager_commodity_extend_value add constraint FK_Relationship_81 foreign key (COMMODITY_EXTEND_ID_)
-      references sp_purchasingManager_commodity_extend (COMMODITY_EXTEND_ID_) on delete restrict on update restrict;
+alter table sp_purchasingManager_commodity_extend add constraint FK_Relationship_65 foreign key (GENRE_PROPERTY_ID_)
+      references sp_purchasingManager_genre_property (GENRE_PROPERTY_ID_) on delete restrict on update restrict;
 
 alter table sp_purchasingManager_genre add constraint FK_Relationship_21 foreign key (sp__GENRE_ID_)
       references sp_purchasingManager_genre (GENRE_ID_) on delete restrict on update restrict;
