@@ -40,12 +40,12 @@
 	<youi:func name="func_grid_distribution" params="value">
 		var gridElement = $elem('grid_enterprisemaillist',pageId),
 		selectedRecord = gridElement.grid('getSelectedRecord');
-		var employeesId = selectedRecord.employeesId;
-		alert(employeesId);
+		var eId = selectedRecord.employeesComId_rzId;
+		alert(eId);
 		if(employeesId!=''){
 			$.youi.ajaxUtil.ajax({
 				url:'/esb/web/enterpriseRoleManager/getEnterpriseRole.json',
-				data:{rId:employeesId},
+				data:{rId:eId},
 				success:function(result){
 					alert(result.record.employees.employeesName);
 				}
