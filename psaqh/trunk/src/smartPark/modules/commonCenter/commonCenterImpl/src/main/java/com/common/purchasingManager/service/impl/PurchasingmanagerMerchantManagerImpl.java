@@ -16,11 +16,10 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
+import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.common.purchasingManager.entity.PurchasingmanagerMerchant;
 import com.common.purchasingManager.dao.PurchasingmanagerMerchantDao;
 import com.common.purchasingManager.service.PurchasingmanagerMerchantManager;
@@ -65,16 +64,28 @@ public class PurchasingmanagerMerchantManagerImpl extends BaseManagerImpl implem
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
     public PurchasingmanagerMerchant savePurchasingmanagerMerchant(PurchasingmanagerMerchant o) throws BusException{
-//    	String purchasingmanagerMerchantId = o.getPurchasingmanagerMerchantId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(purchasingmanagerMerchantId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	return purchasingmanagerMerchantDao.save(o);
+    	String merchantId = o.getMerchantId();
+    	boolean isUpdate = StringUtils.isNotEmpty(merchantId);
+    	if(isUpdate){//修改
+    		PurchasingmanagerMerchant pm = purchasingmanagerMerchantDao.get(merchantId);
+    		pm.setMerchantName(o.getMerchantName());
+    		pm.setMerchantEnterpriseName(o.getMerchantEnterpriseName());
+    		pm.setMerchantType(o.getMerchantType());
+    		pm.setParkBusinessTupe(o.getParkBusinessTupe());
+    		pm.setMerchantLinkman(o.getMerchantLinkman());
+    		pm.setMerchantLinkmanPhone(o.getMerchantLinkmanPhone());
+    		pm.setMerchantSendAddress(o.getMerchantSendAddress());
+    		pm.setMerchantReturnAddress(o.getMerchantReturnAddress());
+    		pm.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return purchasingmanagerMerchantDao.save(pm);
+    	}else{//新增
+    		o.setCreateUser(o.getUpdateUser());
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return purchasingmanagerMerchantDao.save(o);
+    	}
     }
 
     /**
