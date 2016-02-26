@@ -27,6 +27,7 @@
   	<!-- <context:component-scan base-package="com.common.OrderManager"/> -->
   	<context:component-scan base-package="com.common.MemberManager"/>
   	<context:component-scan base-package="com.common.OrderManager"/>
+  	<context:component-scan base-package="com.common.MessageCenter"/>
   	
   	
 	<!-- Configurer that replaces ${...} placeholders with values from a properties file -->
@@ -69,6 +70,11 @@
 				<value>com.common.OrderManager.entity.OrdermanagerOrdertype</value>
 				
 				<value>com.common.MemberManager.entity.MemberInformation</value>	
+			</list>
+		</property>
+		<property name="packagesToScan">
+			<list>
+				<value>com.common.MessageCenter.entity</value>
 			</list>
 		</property>
 	</bean>
