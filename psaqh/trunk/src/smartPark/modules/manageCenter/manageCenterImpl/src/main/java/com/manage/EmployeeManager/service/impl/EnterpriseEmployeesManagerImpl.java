@@ -184,4 +184,10 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 		}
 		return msg;
 	}
+	@Override
+	public EnterpriseEmployees getEnterpriseEmployeesByMember(
+			MemberInformation member) throws BusException {
+		EnterpriseEmployees enterpriseEmployees = enterpriseEmployeesDao.getObjectByUniqueProperty("memberId", member) ;
+		return enterpriseEmployees;
+	}
 }
