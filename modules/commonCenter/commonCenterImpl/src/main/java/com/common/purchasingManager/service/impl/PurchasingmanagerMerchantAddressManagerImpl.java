@@ -17,6 +17,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.common.purchasingManager.entity.PurchasingmanagerMerchantAddress;
@@ -63,16 +64,23 @@ public class PurchasingmanagerMerchantAddressManagerImpl extends BaseManagerImpl
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
     public PurchasingmanagerMerchantAddress savePurchasingmanagerMerchantAddress(PurchasingmanagerMerchantAddress o) throws BusException{
-    	String purchasingmanagerMerchantAddressId = o.getMerchantAddressId();
-    	boolean isUpdate = StringUtils.isNotEmpty(purchasingmanagerMerchantAddressId);
+    	String merchantAddressId = o.getMerchantAddressId();
+    	boolean isUpdate = StringUtils.isNotEmpty(merchantAddressId);
     	if(isUpdate){//修改
-    	
+    		PurchasingmanagerMerchantAddress pma =  purchasingmanagerMerchantAddressDao.get(merchantAddressId);
+    		pma.setMerchantAddressLinkman(o.getMerchantAddressLinkman());
+    		pma.setMerchantAddressPhone(o.getMerchantAddressPhone());
+    		pma.setMerchantAddressAddress(o.getMerchantAddressAddress());
+    		pma.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return purchasingmanagerMerchantAddressDao.save(pma);
     	}else{//新增
-    		
+    		o.setCreateUser(o.getUpdateUser());
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return purchasingmanagerMerchantAddressDao.save(o);
     	}
-    	return purchasingmanagerMerchantAddressDao.save(o);
     }
 
     /**
