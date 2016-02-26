@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
-		<youi:grid id="grid_reservationRecord" idKeys="recordId" caption="预约记录列表"  panel="false" 
+	<youi:grid id="grid_reservationRecord" idKeys="recordId" caption="预约记录列表"  panel="false" 
 				src="esb/web/reservationRecordManager/getPagerReservationRecords.json" dataFormId="form_reservationRecord"
 				editSrc="esb/web/reservationRecordManager/getReservationRecord.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/reservationRecordManager/removeReservationRecord.json">
@@ -13,6 +13,7 @@
 			<youi:fieldSelect property="recordStatus"  caption="预约记录状态" convert="enterrecStatus"/>
 			<youi:fieldCalendar property="visiteDate"  caption="来访日期" textFormat="yyyy-MM-dd" format="yyyy-MM-dd"/>
 		</youi:fieldLayout>
+		<youi:button name="cancelReservation" caption="取消预约" icon="edit" active="1"></youi:button> 
 		<youi:button name="changeStatues" caption="预约授理" icon="edit" active="1"></youi:button> 
 		<youi:gridCol property="recordMemberId"  caption="预约对象"  width="10%" align="center"/>
 		<youi:gridCol property="recordType"  caption="预约类型" convert="recordType"  width="15%" align="center"/>
@@ -90,4 +91,27 @@
 		$elem('grid_reservationRecord',pageId).grid('pReload');
      </youi:func>
     <!--**********************************页面函数End:受理成功后，关闭页面并刷新父页面********************************-->
+    
+    
+	 <!--**********************************页面函数Start:取消预约并刷新父页面********************************-->
+	<youi:func name = "func_grid_cancelReservation">
+        var gridElement = $elem('grid_reservationRecord',pageId),
+		selectedRecord = gridElement.grid('getSelectedRecord');
+  		var recordId=selectedRecord.recordId;
+        var recordStatus = selectedRecord.recordStatus;
+        if(recordStatus == '01'){//01:待受理
+             $.youi.ajaxUtil.ajax({
+				url:'/esb/web/propertyservicemanagerEntrecManager/cancelReservation.json',
+				data:{recordId:recordId},
+				success:function(result){
+					alert("预约成功取消");
+                    $elem('grid_reservationRecord',pageId).grid('pReload');
+                  } 
+            })
+        }else{
+            alert("该状态不能进行取消操作");
+
+        }
+     </youi:func>
+    <!--**********************************页面函数End:取消预约并刷新父页面********************************-->
 </youi:page>

@@ -31,6 +31,7 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
 import com.manage.ReserveManager.entity.ReservationRecord;
@@ -206,5 +207,21 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
     	   }
         	return recordList;
         }
+	
+	
+	/**
+	 * 取消预约申请，将待受理状态变更为已取消
+	 * @param ReservationRecord
+	 */
+    @EsbServiceMapping
+	 public void cancelReservation(ReservationRecord o) throws BusException{
+    	ReservationRecord p=new ReservationRecord();
+		String recordId=o.getRecordId();
+		if(StringUtils.isNotEmpty(recordId)){
+			p=reservationRecordDao.get(recordId);//根据主键查询入驻服务办理预约数据
+		}
+		p.setRecordStatus("04");;//已取消
+		reservationRecordDao.save(p);
+    }
 
 }

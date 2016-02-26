@@ -18,6 +18,7 @@ import com.gsoft.framework.esb.annotation.ConditionCollection;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.OrderCollection;
 import com.gsoft.framework.esb.annotation.ServiceParam;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
 import com.manage.ReserveManager.entity.ReservationRecord;
 
 public interface ReservationRecordManager extends BaseManager{
@@ -90,4 +91,11 @@ public interface ReservationRecordManager extends BaseManager{
      * @throws BusException
      */
     public void changeReservationRecordByStatus(ReservationRecord o) throws BusException;
+    
+    /**
+	 * 取消预约申请，将待受理状态变更为已取消
+	 * @param propertyservicemanagerEntrec
+	 * @throws BusException
+	 */
+	 public void cancelReservation(ReservationRecord o) throws BusException;
 }
