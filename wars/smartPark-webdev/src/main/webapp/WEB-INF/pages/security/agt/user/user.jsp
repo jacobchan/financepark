@@ -1,53 +1,63 @@
-<%@ include file="/WEB-INF/pages/include.jsp" %>
+<%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page i18n="i18n.security.messages">
+	<!-- 页面描述： -->
+	<!--**********************************子页面**********************************-->
 	
-	<youi:subpage src="page/security.agt.user/userEdit.html"
-		subpageId="userEdit" caption="用户" 
-		editSrc="esb/web/userManager/getUser.json" idKeys="userId"
-		formAction="esb/web/userManager/saveUser.json"
-		formSubmit="提交"/>
-
+	<!--**********************************子页面**********************************-->
+	
+	<!--**********************************页面内容********************************-->
 	<!-- grid-用户列表-->
 	<youi:grid id="grid_user" idKeys="userId" caption="用户列表" panel="false"
-				src="esb/web/userManager/getPagerUsers.json" dataFormId="form_user"
-				exportTitle="我的文件" pageSize="3"
-				add="NOT" edit="NOT" remove="NOT" 
-				showCheckbox="true" exportXls="true" exportPdf="true" exportTxt="true"
-				removeSrc="esb/web/userManager/removeUser.json">
-		<youi:fieldLayout styleClass="notFillQuery">
-			<youi:fieldText property="loginName"  caption="登录名"/>
-			<youi:fieldText operator="LIKE" property="userCaption" caption="i18n.user.userName"/>
+				src="agt.91010203" dataFormId="form_user" exportTitle="我的文件"
+				editSrc="agt.91010201" edit="NOT" remove="NOT" showCheckbox="true"
+				exportXls="true" exportPdf="true" exportTxt="true"
+				removeSrc="agt.91010205"
+				>
+		<youi:fieldLayout>
+			<youi:fieldText property="loginName"  caption="登录名"></youi:fieldText>
+			<youi:fieldText property="userCaption" caption="i18n.user.userName" operator="LIKE"/>
+			
 		</youi:fieldLayout>
 
-		<youi:gridCol width="30%" type="myStyle" property="loginName"  caption="登录名"/>
+		<youi:gridCol width="30%" property="loginName"  caption="登录名"/>
 		<youi:gridCol width="70%"  property="userCaption"  caption="i18n.user.userName"/>
+		
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
-			<youi:button name="editUser" icon="edit" caption="修改"/>
+			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
 		</youi:gridCol>
-		
-		<youi:button name="addUser" icon="addRecord" caption="增加"/>
 	</youi:grid>
 	
-	<!-- 增加按钮动作：打开新增子页面 -->
-	<youi:func name="func_grid_addUser">
-		var subpageElement = $elem('subpage_userEdit',pageId);
-		subpageElement.subpage('open',{},'增加',{userId:''});
+	<!-- form-用户编辑 -->
+	<youi:form dialog="true" caption="用户" id="form_user" action="agt.91010204">
+		<youi:fieldLayout prefix="record">
+			<youi:fieldHidden property="userId"  caption="用户ID"/>
+			<youi:fieldText notNull="true" property="loginName"  caption="登录名"/>
+			<youi:fieldText notNull="true" property="userCaption"  caption="用户名称"/>
+			<youi:fieldHidden property="userActive"  caption="是否生效"/>
+		</youi:fieldLayout>
+		<fieldset>
+			<legend>选择用户角色</legend>
+			<youi:fieldLayout labelWidths="1" columns="1">
+				<youi:fieldTree property="roles" popup="false" valueMode="object"
+					show="roleCaption" code="roleId" caption=""
+					tree="${roleTree}" check="true" simple="false"/>
+			</youi:fieldLayout>
+		</fieldset>
+	</youi:form>
+	
+	<!--**********************************页面内容********************************-->
+	
+	<!--**********************************页面函数********************************-->
+	
+	<!-- 行动作 -->
+	<youi:func name="grid_user_col_button_edit" params="record,rowDoc" i18ns="user.userName">
+		$(this).grid('openFormEdit','修改',rowDoc);
 	</youi:func>
 	
-	<!-- 行编辑按钮动作：打开修改子页面 -->
-	<youi:func name="grid_user_col_button_editUser" params="record,rowDoc">
-		var subpageElement = $elem('subpage_userEdit',pageId);
-		subpageElement.subpage('open',{},'修改',record);
+	<youi:func name="grid_user_col_button_remove" params="record,rowDoc">
+		$(this).grid('removeRecords',rowDoc);
 	</youi:func>
-	
-	<youi:func name="subpage_userEdit_afterSubmit" params="results">
-		$(this).subpage('close');
-	</youi:func>
-	
-	<youi:func name="grid_user_reset">
-		alert(reset);
-	</youi:func>
-	
+	<!--**********************************页面函数********************************-->
 </youi:page>
