@@ -108,6 +108,7 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 //    	}else{//新增
 //    		
 //    	}
+    	o.setRecordStatus("01");//待受理
     	return reservationRecordDao.save(o);
     }
 
@@ -139,33 +140,16 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
     
     
     /**
-     * 根据预约类型不同生成相应的招商预约记录
+     * 新增回访记录，预约由已授理状态变更为已到访或未到访状态
      */
     @EsbServiceMapping
-    public ReservationRecord saveReservationRecordByType(ReservationRecord o,@ServiceParam(name="commodityId") String commodityId,@ServiceParam(name="roomId") String roomId) throws BusException{
-//        if(o.getRecordType().equals("01")){//众创空间预约 
-//        	//根据商品ID查询商品信息
-//        	if(commodityId !=null){
-//        		PurchasingmanagerCommodityExtendValue commodityValue=purchasingmanagerCommodityExtendValueDao.get(commodityId);
-//        		o.setRecordMemberId(commodityValue.getCommodityExtendValueDisplayName());//预约对象ID
-//        	}else{
-//        		o.setRecordMemberId(null);//预约对象ID
-//        	}
-//        	
-//        }else if(o.getRecordType().equals("02")){//虚拟空间预约
-//        	//根据单元ID查询单元基础信息
-//        	if(roomId != null){
-//        	    BbmRoom bbmRoom=bbmRoomDao.get(roomId);
-//        	    o.setRecordMemberId(bbmRoom.getRoomName());
-//        	}else{
-//        		o.setRecordMemberId(null);//预约对象ID
-//        	}
-//        }else{//其他
-//        	List<Codeitem> list = codeItemDao.getList(new String[] {"codemap.code", "itemValue" }, new Object[] {
-//					"recordType", o.getRecordType()});// 预约类型
-//        	o.setRecordMemberId(list.get(0).getItemCaption());
-//        }
-    	o.setRecordStatus("01");//已预约
+    public ReservationRecord saveReternRecords(ReservationRecord o) throws BusException{
+    	if(o.getRecordVisiteStatus().equals("01")){//是否回访 01：是
+    		o.setRecordStatus("03");//已到访
+    	}else{
+    		o.setRecordStatus("05");//未到访
+    	}
+    	
     	return reservationRecordDao.save(o);
     }
     

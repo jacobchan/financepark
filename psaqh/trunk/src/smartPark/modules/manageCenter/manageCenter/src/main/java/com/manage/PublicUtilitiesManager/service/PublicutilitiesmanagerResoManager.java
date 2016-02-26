@@ -6,13 +6,13 @@ package com.manage.PublicUtilitiesManager.service;
 import java.util.List;
 import java.util.Collection;
 
+import com.common.purchasingManager.entity.PurchasingmanagerCommodityExtendValue;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.manage.PublicUtilitiesManager.entity.PublicutilitiesmanagerReso;
 
 public interface PublicutilitiesmanagerResoManager extends BaseManager{
@@ -63,4 +63,11 @@ public interface PublicutilitiesmanagerResoManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitPublicutilitiesmanagerReso(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 查询园区商品类型为公用资源的商品
+	 * @return
+	 * @throws BusException
+	 */
+	public List<PurchasingmanagerCommodityExtendValue> getCommoditysByPublicStatus() throws BusException;
 }
