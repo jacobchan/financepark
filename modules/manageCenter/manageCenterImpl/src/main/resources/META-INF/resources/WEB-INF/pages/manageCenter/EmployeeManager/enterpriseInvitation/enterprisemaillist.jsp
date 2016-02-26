@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
-	<youi:grid id="grid_enterprisemaillist" idKeys="maillistId"
+	<youi:grid id="grid_enterprisemaillist" idKeys="employeesId,employeesComId.rzId"
 		caption="邀请记录表列表" panel="false"
 		src="esb/web/enterpriseEmployeesManager/getPagerEnterpriseEmployeess.json"
 		dataFormId="form_enterprisemaillist"
@@ -40,12 +40,12 @@
 	<youi:func name="func_grid_distribution" params="value">
 		var gridElement = $elem('grid_enterprisemaillist',pageId),
 		selectedRecord = gridElement.grid('getSelectedRecord');
-		var eId = selectedRecord.employeesComId_rzId;
-		alert(eId);
+		var rId = selectedRecord.employeesId;
+		alert(rId);
 		if(employeesId!=''){
 			$.youi.ajaxUtil.ajax({
 				url:'/esb/web/enterpriseRoleManager/getEnterpriseRole.json',
-				data:{rId:eId},
+				data:{rId:rId},
 				success:function(result){
 					alert(result.record.employees.employeesName);
 				}
