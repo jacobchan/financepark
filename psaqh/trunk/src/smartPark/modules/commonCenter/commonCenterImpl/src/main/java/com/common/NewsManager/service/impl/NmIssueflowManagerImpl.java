@@ -16,6 +16,7 @@ import com.common.NewsManager.dao.NmIssuetypeDao;
 import com.common.NewsManager.entity.NmIssueflow;
 import com.common.NewsManager.entity.NmIssuetype;
 import com.common.NewsManager.service.NmIssueflowManager;
+import com.common.NewsManager.service.NmIssuetypeManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -36,7 +37,7 @@ public class NmIssueflowManagerImpl extends BaseManagerImpl implements NmIssuefl
 	@Autowired
 	private NmIssueflowDao nmIssueflowDao;
 	@Autowired
-	private NmIssuetypeDao nmIssuetypeDao;
+	private NmIssuetypeManager nmIssuetypeManager;
 	
     /**
      * 查询列表
@@ -191,9 +192,9 @@ public class NmIssueflowManagerImpl extends BaseManagerImpl implements NmIssuefl
     	return null;
 	}
 
-    private List<NmIssueflow> getNmIssueflows(String  nmIssuetypeId){
+    public List<NmIssueflow> getNmIssueflows(String  nmIssuetypeId){
     	if(StringUtils.isNotEmpty(nmIssuetypeId)){
-			NmIssuetype issueType = nmIssuetypeDao.get(nmIssuetypeId);
+			NmIssuetype issueType = nmIssuetypeManager.getNmIssuetype(nmIssuetypeId);
 			List<NmIssueflow> nmIssueflows = nmIssueflowDao.getList("nmIssuetype.issueTypeId", issueType.getIssueTypeId());
 			return nmIssueflows;
     	}
