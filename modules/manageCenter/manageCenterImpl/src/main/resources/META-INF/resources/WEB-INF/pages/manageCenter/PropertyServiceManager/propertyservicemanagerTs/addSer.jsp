@@ -40,7 +40,8 @@
 			url:'/esb/web/propertyservicemanagerSerManager/saveListSer.json',
 			data:params,
 			success:function(result){
-				var record = result.record;
+				alert("添加成功!");
+				$elem('grid_proSer',pageId).grid('pReload');
 			}
 		});
 	</youi:func>
