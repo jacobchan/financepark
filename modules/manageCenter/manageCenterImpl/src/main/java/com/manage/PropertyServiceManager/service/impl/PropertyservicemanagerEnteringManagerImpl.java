@@ -84,6 +84,7 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
 //    	}else{//新增
 //    		
 //    	}
+    	o.setEnteringStatus("01");//01:可以预约
     	return propertyservicemanagerEnteringDao.save(o);
     }
 
