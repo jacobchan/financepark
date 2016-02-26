@@ -10,15 +10,12 @@ import com.gsoft.entity.ReferenceMap;
 public class MessageUtils {
 
 	//站位参数
-	public static List<String> placeholders = new ArrayList<String>();
+	public static List<String> placeholders = null;
 	//站位符-值
 	public static ReferenceMap referenceMap = new ReferenceMap();
 	
 	//站位符
 	static{
-//		placeholders.add("@user");
-//		placeholders.add("@NO");
-//		placeholders.add("@status");
 		placeholders = getKeys(referenceMap);
 	}
 	
@@ -58,4 +55,5 @@ public class MessageUtils {
 		}
 		return referenceMap;
 	}
+	
 }
