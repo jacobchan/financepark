@@ -5,7 +5,6 @@ package com.common.MessageCenter.service.impl;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,10 +74,9 @@ public class McMsgtempalateManagerImpl extends BaseManagerImpl implements McMsgt
     	boolean isUpdate = com.gsoft.framework.util.StringUtils.isNotEmpty(mcMsgtempalateId);
     	if(isUpdate){//修改
     		McMsgtempalate msgTempalate = getMsgTempalate(o.getUniqueCode());
-    		if(msgTempalate!=null&&!mcMsgtempalateId.equals(msgTempalate.getUniqueCode())){
+    		if(msgTempalate!=null&&!mcMsgtempalateId.equals(msgTempalate.getMsgTempalateId())){
     			throw new BusException("唯一码已经存在");
     		}
-    	
     	}else{//新增
     		if(mcMsgtempalateDao.exists("uniqueCode", o.getUniqueCode())){
     			throw new BusException("唯一码已经存在");
@@ -114,10 +112,6 @@ public class McMsgtempalateManagerImpl extends BaseManagerImpl implements McMsgt
     
     public boolean exsitMcMsgtempalate(String propertyName,Object value) throws BusException{
 		return mcMsgtempalateDao.exists(propertyName,value);
-	}
-	@Override
-	public String genMsgContent(McMsgtempalate msgtempalate,Map<String,String> replaceMap) throws BusException {
-		return com.gsoft.common.util.StringUtils.replaceAllString(msgtempalate.getMsgTempalateContent(), MessageUtils.placeholders, replaceMap);
 	}
 	
 	@EsbServiceMapping
