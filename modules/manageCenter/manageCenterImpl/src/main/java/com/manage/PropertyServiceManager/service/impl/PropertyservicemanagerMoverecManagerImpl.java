@@ -99,6 +99,10 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
      */
     @EsbServiceMapping
     public void removePropertyservicemanagerMoverec(@ServiceParam(name="moverecId") String id) throws BusException{
+    	//propertyservicemanagerFxtdcManager
+    	PropertyservicemanagerMoverec moverec = propertyservicemanagerMoverecDao.get(id) ;//得到搬家申请记录
+    	PropertyservicemanagerFxtdc fxtdc = propertyservicemanagerFxtdcManager.getFxtdcByMoverec(moverec) ;//得到搬家申请记录对应的二维码
+    	propertyservicemanagerFxtdcManager.removePropertyservicemanagerFxtdc(fxtdc.getFxtdcId());//通过id删除对应的二维码
     	propertyservicemanagerMoverecDao.remove(id);
     }
     /**
