@@ -40,26 +40,15 @@
 	<youi:form dialog="true" caption="商户信息表" id="form_purchasingmanagerMerchant" 
 		action="esb/web/purchasingmanagerMerchantManager/savePurchasingmanagerMerchant.json">
 		<youi:fieldLayout prefix="record" labelWidths="110,110" >
-			<youi:fieldText property="merchantName"  caption="商户名称"/>
-			<youi:fieldText property="merchantEnterpriseName"  caption="企业名称"/>
-			<youi:fieldSelect property="merchantType"  caption="商户类型" convert="merchant_type"/>
-			<youi:fieldSelect property="parkBusinessTupe"  caption="园区商业类型" convert="businessType"/>
-			<youi:fieldText property="merchantLinkman"  caption="联系人"/>
-			<youi:fieldText property="merchantLinkmanPhone"  caption="联系人电话"/>
-			<youi:fieldText property="merchantSendAddress"  caption="发货地址"/>
-			<youi:fieldText property="merchantReturnAddress"  caption="退货地址"/>
+			<youi:fieldText property="merchantName"  caption="商户名称" notNull="true"/>
+			<youi:fieldText property="merchantEnterpriseName"  caption="企业名称" notNull="true"/>
+			<youi:fieldSelect property="merchantType"  caption="商户类型" convert="merchant_type" notNull="true"/>
+			<youi:fieldSelect property="parkBusinessTupe"  caption="园区商业类型" convert="businessType" notNull="true"/>
+			<youi:fieldText property="merchantLinkman"  caption="联系人" notNull="true"/>
+			<youi:fieldText property="merchantLinkmanPhone"  caption="联系人电话" notNull="true"/>
+			<youi:fieldText property="merchantSendAddress"  caption="发货地址" notNull="true"/>
+			<youi:fieldText property="merchantReturnAddress"  caption="退货地址" notNull="true"/>
 			<youi:fieldHidden property="merchantId"  caption="商品ID"/>
-		</youi:fieldLayout>
-	</youi:form>
-	
-	<!-- form-商户地址库编辑 -->
-	<youi:form dialog="true" caption="商户地址库" id="form_purchasingmanagerMerchantAddress" action="esb/web/purchasingmanagerMerchantAddressManager/savePurchasingmanagerMerchantAddress.json">
-		<youi:fieldLayout prefix="record">
-			<youi:fieldText property="merchantAddressAddress"  caption="地址"/>
-			<youi:fieldText property="merchantAddressLinkman"  caption="联系人"/>
-			<youi:fieldText property="merchantAddressId"  caption="地址ID"/>
-			<youi:fieldSelect property="merchantAddressIsnotDefault" convert="bool" caption="是否默认"/>
-			<youi:fieldText property="merchantAddressPhone"  caption="联系电话"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
