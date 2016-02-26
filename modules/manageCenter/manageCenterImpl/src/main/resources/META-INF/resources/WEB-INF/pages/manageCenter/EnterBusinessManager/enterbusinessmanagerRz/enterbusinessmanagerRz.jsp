@@ -70,7 +70,9 @@
 				data:'parkId='+record.parkId,
 				async: false, 
 				success:function(result){
-					parkName=result.record.parkName;
+					if(result.record!=""&&result.record!=null){
+						parkName=result.record.parkName;
+					}		
 				}
 			});
 		return parkName;
@@ -83,7 +85,9 @@
 				data:'buildingId='+record.buildingId,
 				async: false, 
 				success:function(result){
-					buildingNo=result.record.buildingNo;
+					if(result.record!=""&&result.record!=null){
+						buildingNo=result.record.buildingNo;
+					}
 				}
 			});
 		return buildingNo;
