@@ -27,6 +27,13 @@
 		<property name="authParam" value="projectId"></property>
 	</bean>
 	
+	<!-- 会员页面过滤器 -->
+	<bean id="authcmember" class="com.gsoft.member.base.security.MemberFormAuthenticationFilter">
+		<!-- 启用校验码控制 -->
+		<property name="vcodeCheck" value="false"></property>
+		<property name="authParam" value="projectId"></property>
+	</bean>
+	
 	<!-- shiro web 安全管理类 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realms">
@@ -52,13 +59,17 @@
 			<value>
 				${login.url} = authc
 				/logout.html = anon
-				/index.html = anon
+				/home.html = anon
+				/register.html = anon
 				/common/** = anon
 				/esb/** = anon
+				/portal/** = anon
+				/index.html = authc
 				/page/** = authc
-				/cms/** = authc
 				/weixin/*/login.html= wxOAuth
 				${wx.login.failureUrl}=anon
+				/member/*/logout.html=anon
+				/member/**=authcmember
 	        </value>
 		</property>
 		<!--  实现 com.gsoft.framework.core.security.UrlResourceManager接口，
@@ -80,8 +91,7 @@
 <!-- 			</map> -->
 <!-- 		</property> -->
 <!-- 	</bean> -->
-
-
+	
 	<!-- 统一的用户服务 -->
 	<bean name="userService" class="com.gsoft.framework.security.UserServiceImpl">
 		<property name="cacheManager" ref="cacheManager"></property>

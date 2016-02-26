@@ -10,7 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gsoft.framework.security.DefaultLoginFormToken;
+import com.gsoft.framework.security.IAgency;
+import com.gsoft.framework.security.IRealmUserInfo;
+import com.gsoft.framework.security.IRealmUserToken;
+import com.gsoft.framework.security.IUser;
+import com.gsoft.framework.security.IUserAdapter;
+import com.gsoft.framework.security.agt.service.UserLoginService;
 import com.gsoft.framework.security.agt.service.UserManager;
+import com.gsoft.framework.core.dataobj.tree.TreeNode;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -20,6 +28,7 @@ import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.PasswordUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.framework.core.web.menu.IMenu;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.service.MemberInformationManager;
@@ -133,5 +142,6 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		throw new BusException("该用户已存在!");
 		}
 	}
+	
 
 }

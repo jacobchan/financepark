@@ -816,3 +816,539 @@
 2016-02-20 16:33:01  [ main:2440 ] - [ ERROR ]  模版【】读取异常：Template  not found.
 2016-02-20 16:33:01  [ main:2450 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
 2016-02-20 16:33:01  [ main:2451 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:167 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:170 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:599 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:600 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:618 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:619 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:635 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:636 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:683 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:684 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:703 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:705 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:723 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:724 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:741 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:742 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:765 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:767 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:817 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:819 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:830 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:831 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:843 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:844 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:863 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:866 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:890 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:892 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:904 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:905 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:921 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:922 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:936 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:937 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:963 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:966 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:994 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:995 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:1010 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:1012 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:1025 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:1026 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:1034 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:1035 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:1045 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:1046 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:26  [ main:1055 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:26  [ main:1056 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1066 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1068 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1078 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1079 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1090 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1091 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1108 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1109 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1117 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1118 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1129 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1131 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1141 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1142 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1152 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1169 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1179 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1182 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1196 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1197 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1206 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1209 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1222 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1224 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1235 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1236 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1243 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1244 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1258 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1260 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1268 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1270 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1278 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1278 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1288 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1290 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1297 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1297 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1308 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1310 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1318 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1319 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1333 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1336 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1572 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1573 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1629 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1630 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1637 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1638 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1645 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1646 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1651 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1652 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1659 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1660 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1668 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1669 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1677 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1677 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1684 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1685 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1693 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1694 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1702 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1703 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1709 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1710 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1717 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1719 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1727 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1727 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1735 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1736 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1744 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1744 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1750 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1751 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1760 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1761 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1768 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1769 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1776 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1777 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:32:27  [ main:1785 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:32:27  [ main:1786 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:10  [ main:418 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:10  [ main:420 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:11  [ main:1100 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:11  [ main:1101 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:11  [ main:1159 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:11  [ main:1162 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:11  [ main:1241 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:11  [ main:1244 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:11  [ main:1423 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:11  [ main:1424 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:11  [ main:1455 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:11  [ main:1461 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:11  [ main:1498 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:11  [ main:1499 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:11  [ main:1540 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:11  [ main:1542 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:11  [ main:1616 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:11  [ main:1617 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:11  [ main:1643 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:11  [ main:1644 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:11  [ main:1678 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:11  [ main:1680 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:11  [ main:1710 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:11  [ main:1711 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:11  [ main:1742 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:11  [ main:1742 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:11  [ main:1774 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:11  [ main:1776 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:1800 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:1801 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:1859 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:1861 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:1910 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:1911 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:1935 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:1936 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:1960 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:1961 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:1996 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:1997 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2018 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2019 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2043 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2044 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2071 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2072 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2093 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2094 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2128 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2129 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2149 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2151 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2169 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2170 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2225 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2226 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2268 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2269 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2299 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2300 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2319 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2320 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2334 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2335 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2349 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2350 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2364 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2365 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2377 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2378 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2389 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2390 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2402 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2403 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2415 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2415 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2429 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2430 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2446 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2447 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2461 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2461 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2478 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2478 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2491 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2492 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2512 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2512 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2525 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2526 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2541 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2542 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2558 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2558 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2587 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2588 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2629 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2629 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2670 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2671 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2701 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2702 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2721 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2721 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2748 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2748 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:12  [ main:2763 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:12  [ main:2764 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:13  [ main:2799 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:13  [ main:2799 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:13  [ main:2814 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:13  [ main:2816 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:13  [ main:2843 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:13  [ main:2844 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:13  [ main:2863 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:13  [ main:2864 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:13  [ main:2874 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:13  [ main:2875 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:13  [ main:2892 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:13  [ main:2892 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:13  [ main:2908 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:13  [ main:2909 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:13  [ main:2924 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:13  [ main:2925 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:13  [ main:2938 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:13  [ main:2939 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:13  [ main:2959 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:13  [ main:2961 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:13  [ main:2985 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:13  [ main:2985 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:13  [ main:3000 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:13  [ main:3001 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-23 15:45:13  [ main:3037 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-23 15:45:13  [ main:3038 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:44  [ main:263 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:44  [ main:268 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:904 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:904 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:934 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:935 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:975 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:976 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1033 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1034 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1052 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1053 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1075 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1076 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1116 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1117 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1166 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1168 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1203 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1204 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1219 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1220 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1259 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1276 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1292 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1293 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1318 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1320 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1336 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1383 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1412 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1413 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1467 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1470 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1481 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1483 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1524 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1524 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1614 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1615 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1628 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1629 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1642 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1642 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1659 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1660 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1673 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1697 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1723 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1724 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1738 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1739 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1751 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1765 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1784 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1785 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:45  [ main:1799 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:45  [ main:1800 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:1819 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:1820 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:1831 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:1833 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:1845 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:1847 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:1859 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:1859 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:1870 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:1871 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:1920 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:1924 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:1963 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:1967 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:1977 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:1978 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2005 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2007 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2059 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2060 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2073 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2074 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2085 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2086 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2148 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2149 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2159 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2160 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2171 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2172 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2181 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2182 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2195 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2196 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2204 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2204 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2215 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2215 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2226 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2227 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2261 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2263 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2276 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2279 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2290 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2302 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2322 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2325 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2340 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2341 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2351 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2352 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2364 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2365 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2376 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2377 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2445 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2452 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2461 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2461 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2473 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2474 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2485 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2486 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2499 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2500 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2509 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2510 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2535 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2538 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2553 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2554 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2569 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2571 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:34:46  [ main:2582 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:34:46  [ main:2583 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:35:59  [ main:890 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:35:59  [ main:899 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:35:59  [ main:1606 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:35:59  [ main:1608 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:35:59  [ main:1663 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:35:59  [ main:1664 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:35:59  [ main:1715 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:35:59  [ main:1720 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:35:59  [ main:1847 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:35:59  [ main:1848 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:1916 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:1918 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:1986 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:1990 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:2054 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:2062 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:2151 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:2152 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:2178 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:2180 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:2204 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:2205 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:2262 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:2263 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:2286 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:2288 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:2318 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:2320 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:2356 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:2360 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:2413 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:2416 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:2458 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:2460 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:2486 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:2487 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:2511 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:2512 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:2534 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:2536 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:2611 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:2613 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:2637 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:2640 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:2678 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:2679 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:2707 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:2710 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:2737 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:2738 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:2768 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:2770 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:2801 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:2802 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:00  [ main:2834 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:00  [ main:2836 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:2874 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:2875 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:2909 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:2909 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:2951 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:2953 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:2999 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3001 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3040 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3041 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3093 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3094 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3120 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3122 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3154 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3156 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3188 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3191 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3220 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3221 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3254 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3255 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3274 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3275 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3304 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3305 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3334 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3335 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3366 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3367 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3397 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3400 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3430 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3432 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3458 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3459 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3475 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3476 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3501 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3503 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3534 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3535 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3553 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3554 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3574 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3574 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3600 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3601 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3620 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3621 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3640 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3641 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3662 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3665 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3692 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3696 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3741 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3742 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3773 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3774 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3798 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3799 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:01  [ main:3834 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:01  [ main:3836 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:02  [ main:3871 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:02  [ main:3872 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:02  [ main:3910 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:02  [ main:3911 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:02  [ main:3996 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:02  [ main:3997 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:02  [ main:4022 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:02  [ main:4023 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:02  [ main:4046 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:02  [ main:4048 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:02  [ main:4087 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:02  [ main:4088 ] - [ ERROR ]  模版【】读取异常：Template  not found.
+2016-02-25 16:36:02  [ main:4109 ] - [ ERROR ]  模版【/java/serviceTest.ftl】读取异常：Template /java/serviceTest.ftl not found.
+2016-02-25 16:36:02  [ main:4110 ] - [ ERROR ]  模版【】读取异常：Template  not found.

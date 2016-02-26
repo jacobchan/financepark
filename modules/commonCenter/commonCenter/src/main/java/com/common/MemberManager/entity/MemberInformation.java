@@ -9,6 +9,8 @@ import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
+
+
 /**
  * 实体: -会员信息表
  * @author

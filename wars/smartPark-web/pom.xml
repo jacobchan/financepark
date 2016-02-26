@@ -49,7 +49,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<nexus.root>http://220.249.113.11/nexus</nexus.root>
-		<gsoft.version>1.0.3.RELEASE</gsoft.version>
+		<gsoft.version>1.0.4-SNAPSHOT</gsoft.version>
 	</properties>
 	<!-- 本模块使用的包 -->
 	<dependencies>
@@ -103,6 +103,28 @@
 			<version>${gsoft.version}</version>
 			<scope>compile</scope>
 		</dependency>
+		<!-- 会员模块临时使用的decorator -->
+		<dependency>
+			<groupId>com.gsoft.decorator</groupId>
+			<artifactId>gsoft-decorator-giui</artifactId>
+			<version>${gsoft.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<!-- 会员基础包 -->
+		<dependency>
+		  <groupId>com.gsoft.member</groupId>
+		  <artifactId>gsoft-member-base</artifactId>
+		  <version>${gsoft.version}</version>
+		</dependency>
+		
+		<!--会员登录临时包 -->
+		<!-- <dependency>
+		  <groupId>com.gsoft.member</groupId>
+		  <artifactId>gsoft-member-infoImpl</artifactId>
+		  <version>${gsoft.version}</version>
+		</dependency> -->
+		
 		<!--安全框架  -->
 		<dependency>
 			<groupId>com.gsoft.framework</groupId>
@@ -110,6 +132,8 @@
 			<version>${gsoft.version}</version>
 			<scope>compile</scope>
 		</dependency>
+		
+		
 		
 		<!--代码集  -->
 		<dependency>
@@ -200,6 +224,7 @@
 			<artifactId>smartPark-memberCenterImpl</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		
 	</dependencies>
 	
 	<profiles>

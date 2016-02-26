@@ -59,6 +59,7 @@ public class LoginController {
     		HttpServletResponse response){
 		
 		String userAdapterName = WebUtils.getCleanParam(request, "userAdapter");
+		String username = WebUtils.getCleanParam(request, "username");
 		
 		IUserAdapter userAdapter = userService.getUserAdapter(userAdapterName);
 		
@@ -68,7 +69,16 @@ public class LoginController {
 			viewName +=("-"+userAdapterName);
 		}
 		
-		return new ModelAndView(viewName);
+		response.setHeader("X-LOGIN", "true");
+		
+		AccountPrincipal account = SecurityUtils.getAccount();
+		if(account!=null){
+			return new ModelAndView("redirect:index.html");
+		}
+		
+		ModelAndView model = new ModelAndView(viewName);
+		model.addObject("username", username);
+		return model;
 	}
 	
 	@RequestMapping("/weixin/{name}/login.html")
@@ -102,7 +112,7 @@ public class LoginController {
 	}
 	
 	/**
-	 * 首页，登录成功跳转页面
+	 * 登录成功跳转页面
 	 * @param request
 	 * @param response
 	 * @return
@@ -116,10 +126,16 @@ public class LoginController {
 		AccountPrincipal account = SecurityUtils.getAccount();
 		
 		if(account!=null){
-			if(account.roleIds()!=null&&account.roleIds().contains("ROLE_MEMBER")){
-				//会员用户登录
-				return new ModelAndView("redirect:cms/account/index/"+account.getLoginName()+".html");
-			}if(account.roleIds()!=null&&account.roleIds().contains("ROLE_USER")){
+			//
+			if(account.roleIds()!=null&&account.roleIds().contains("ROLE_OPER")){
+				//用户登录
+				return new ModelAndView("redirect:member/portal/index.html");
+//				return new ModelAndView("redirect:member/portal/index.html");
+//				return new ModelAndView("redirect:cms/account/index/"+account.getLoginName()+".html");
+			}else if(account.roleIds()!=null&&account.roleIds().contains("ROLE_SUBSCRIPTION")){
+				//捧场用户登录
+				return new ModelAndView("redirect:member/vtui/index.html#p:page/vtui/welcome.html");
+			}else if(account.roleIds()!=null&&account.roleIds().contains("ROLE_USER")){
 				//移动手机会员用户登录
 				return new ModelAndView("redirect:cms/account/index/"+account.getLoginName()+".html");
 			}else{
@@ -131,7 +147,36 @@ public class LoginController {
 	}
 	
 	/**
-	 * 欢迎页
+	 * 无登录home页面
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("/home.html")
+	public ModelAndView home(
+    		HttpServletRequest request,
+    		HttpServletResponse response){
+		//微信登录页面
+		return new ModelAndView("home/index");
+	}
+	
+	/**
+	 * 注册页面
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("/register.html")
+	public ModelAndView register(
+    		HttpServletRequest request,
+    		HttpServletResponse response){
+		//微信登录页面
+		//生成页面唯一编码
+		return new ModelAndView("home/register");
+	}
+	
+	/**
+	 * 根据菜单名称或者编码模糊查找菜单
 	 * @param request
 	 * @param response
 	 * @return
