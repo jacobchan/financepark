@@ -44,7 +44,9 @@
 				data:'commodityId='+record.commodityId,
 				async: false, 
 				success:function(result){
-					commodityTitle=result.record.commodityTitle;
+					if(result.record!=""&&result.record!=null){
+						commodityTitle=result.record.commodityTitle;
+					}
 				}
 			});
 		return commodityTitle;
