@@ -11,19 +11,19 @@
 			<youi:fieldCalendar property="rzDate"  caption="入驻时间"/>			
 			<youi:fieldSelect property="parkId"  caption="园区ID" src="esb/web/bbmParkManager/getBbmParks.json" code="parkId" show="parkName"/>
 			<youi:fieldSelect property="buildingId"  caption="楼栋ID" src="esb/web/bbmBuildingManager/getBbmBuildings.json" 
-								code="buildingId" show="buildingNo" parents="parkId" parentsAlias="parkId"/>
+								code="buildingId" show="buildingNo" parents="parkId" parentsAlias="parkId"/> 
 			<youi:fieldText property="enTypeId"  caption="企业类型ID"/>
 			<youi:fieldText property="rzSign"  caption="企业码"/>
 		</youi:fieldLayout>
-		<youi:gridCol property="rzManager.memberName"  caption="企业管理员" width="10%"/>
-		<youi:gridCol property="rzDate"  caption="入驻时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" width="10%"/>
-		<youi:gridCol property="buildingId"  caption="楼栋"  renderer="renderer_buildingId" width="10%"/>
-		<youi:gridCol property="parkId"  caption="园区" renderer="renderer_parkId" width="10%"/>
-		<youi:gridCol property="rzBuss"  caption="企业主营"  width="10%"/>
-		<youi:gridCol property="enTypeId.enTypeName"  caption="企业类型" width="10%"/>
-		<youi:gridCol property="rzSign"  caption="企业码" width="10%"/>
-		<youi:gridCol property="rzMem"  caption="会员信息" width="10%"/>
-		<youi:gridCol property="rzTelephone"  caption="联系方式" width="10%"/>
+		<youi:gridCol property="rzManager.memberName"  caption="企业管理员" width="10%" align="center"/>
+		<youi:gridCol property="rzDate"  caption="入驻时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" width="20%" align="center"/>
+		<youi:gridCol property="buildingId"  caption="楼栋"  renderer="renderer_buildingId" width="10%" align="center"/>
+		<youi:gridCol property="parkId"  caption="园区" renderer="renderer_parkId" width="10%" align="center"/>
+		<youi:gridCol property="rzBuss"  caption="企业主营"  width="10%" align="center"/>
+		<youi:gridCol property="enTypeId.enTypeName"  caption="企业类型" width="10%" align="center"/>
+		<youi:gridCol property="rzSign"  caption="企业码" width="10%" align="center"/>
+		<youi:gridCol property="rzMem"  caption="会员信息" width="10%" align="center"/>
+		<youi:gridCol property="rzTelephone"  caption="联系方式" width="10%" align="center"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -64,32 +64,33 @@
 	</youi:func>
 	
 	<youi:func name="renderer_parkId" params="col,record">
+if(record.parkId !="" && record.parkId !=null){
 	 	var parkName = ""; 
 		$.youi.ajaxUtil.ajax({
 				url:'esb/web/bbmParkManager/getBbmPark.json',
 				data:'parkId='+record.parkId,
 				async: false, 
 				success:function(result){
-					if(result.record!=""&&result.record!=null){
-						parkName=result.record.parkName;
-					}		
+					parkName=result.record.parkName;
 				}
 			});
 		return parkName;
+}
 	</youi:func>
 	
 		<youi:func name="renderer_buildingId" params="col,record">
+        if(record.buildingId !="" && record.buildingId !=null){
 	 	var buildingNo = ""; 
 		$.youi.ajaxUtil.ajax({
 				url:'esb/web/bbmBuildingManager/getBbmBuilding.json',
 				data:'buildingId='+record.buildingId,
 				async: false, 
 				success:function(result){
-					if(result.record!=""&&result.record!=null){
-						buildingNo=result.record.buildingNo;
-					}
+					buildingNo=result.record.buildingNo;
 				}
 			});
 		return buildingNo;
-	</youi:func>
+
+        }
+	</youi:func>上
 </youi:page>
