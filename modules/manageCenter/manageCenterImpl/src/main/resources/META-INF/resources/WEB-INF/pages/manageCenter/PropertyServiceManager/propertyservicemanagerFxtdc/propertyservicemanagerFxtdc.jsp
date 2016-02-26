@@ -11,7 +11,7 @@
 		<%-- <youi:gridCol property="fxtdcId"  caption="二维码记录序列" width="250"/> --%>
 		<youi:gridCol property="propertyservicemanagerMoverec.moverecComp"  caption="搬家企业名称" width="250"/>
 		<youi:gridCol property="propertyservicemanagerMoverec.moverecRemark"  caption="物品描述" width="250"/>
-		<youi:gridCol property="twcrdAddrec"  caption="二维码URL地址" width="250"/>
+		<youi:gridCol property="twcrdAddrec"  caption="二维码URL地址" width="110"/>
 		<%-- <youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
