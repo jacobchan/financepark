@@ -9,7 +9,7 @@
 	<!-- 页面描述： -->
 	<!--**********************************子页面**********************************-->
 	<youi:subpage caption="菜单授权" height="480" width="780"
-		subpageId="auth" src="page/security.fuc.role/auth.html"/>
+		subpageId="menu_auth" src="page/security.fuc.role/auth.html"/>
 	
 	<youi:subpage caption="页面授权" height="520"
 		subpageId="page_auth" src="page/security.fuc.role/pageAuth.html?roleId={roleId}"/>
@@ -18,7 +18,7 @@
 	<!--**********************************页面内容********************************-->
 	<!-- grid-角色列表-->
 	<youi:grid id="grid_role" idKeys="roleId" caption="角色列表" panel="false"
-				src="esb/web/roleManager/getPagerRoles.json" dataFormId="form_role"  pageSize="3"
+				src="esb/web/roleManager/getPagerRoles.json" dataFormId="form_role"  pageSize="10"
 				editSrc="/local/fuc/role/getRole.json" edit="NOT" remove="NOT" exportXls="true" exportPdf="true" exportTxt="txt"
 				removeSrc="/local/fuc/role/removeRole.json">
 		<youi:fieldLayout styleClass="notFillQuery">
@@ -30,6 +30,7 @@
 		<youi:gridCol width="55%" property="roleCaption"  caption="角色描述"/>
 		<youi:gridCol width="20%" property="roleType" convert="roleType" caption="角色分类"/>
 		
+		<%-- <youi:button name="menuAuth" caption="菜单授权" order="200" active="1"/> --%>
 		<youi:button name="pageAuth" caption="页面授权" order="202" active="1"/>
 		
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
@@ -53,12 +54,19 @@
 	
 	<!--**********************************页面函数********************************-->
 	<youi:func name="grid_role_col_button_auth" params="record">
-		var subpageElement = $elem('subpage_auth',pageId);
+		var subpageElement = $elem('subpage_menu_auth',pageId);
 		subpageElement.subpage('open',record);
 	</youi:func>
 	
 	<youi:func name="func_grid_pageAuth">
 		var subpageElement = $elem('subpage_page_auth',pageId),
+			gridElement = $elem('grid_role',pageId),
+			selectedRecord = gridElement.grid('getSelectedRecord');
+		subpageElement.subpage('open',selectedRecord,null,selectedRecord);
+	</youi:func>
+	
+	<youi:func name="func_grid_menuAuth">
+		var subpageElement = $elem('subpage_menu_auth',pageId),
 			gridElement = $elem('grid_role',pageId),
 			selectedRecord = gridElement.grid('getSelectedRecord');
 		subpageElement.subpage('open',selectedRecord,null,selectedRecord);
