@@ -5,6 +5,7 @@ package com.common.MessageCenter.service.impl;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,8 @@ import com.common.MessageCenter.dao.McMsgdatasDao;
 import com.common.MessageCenter.entity.McMsgdatas;
 import com.common.MessageCenter.entity.McMsgtempalate;
 import com.common.MessageCenter.service.McMsgdatasManager;
+import com.common.MessageCenter.service.McMsgtempalateManager;
+import com.gsoft.common.util.MessageUtils;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -26,12 +29,15 @@ import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.OrderCollection;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.security.agt.entity.User;
+import com.gsoft.framework.util.DateUtils;
 
 @Service("mcMsgdatasManager")
 @Transactional
 public class McMsgdatasManagerImpl extends BaseManagerImpl implements McMsgdatasManager{
 	@Autowired
 	private McMsgdatasDao mcMsgdatasDao;
+	@Autowired
+	private McMsgtempalateManager msgtempalateManager;
 	
     /**
      * 查询列表
@@ -105,12 +111,17 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements McMsgdatas
 		return mcMsgdatasDao.exists(propertyName,value);
 	}
     
-	@Override
+    @EsbServiceMapping
 	public String buildMessageContent(McMsgdatas mcMsgdatas) throws BusException {
 		McMsgtempalate msgTempalate = mcMsgdatas.getMcMsgtempalate();//消息引用的模板
 		String[] params = null;
 		//模板内容转换成小心内容
 		return com.gsoft.common.util.StringUtils.replaceChar(msgTempalate.getMsgTempalateContent(), '#', params);
+	}
+	
+	@EsbServiceMapping
+	public String buildMsgContent(McMsgtempalate msgtempalate,Map<String,String> replaceMap) throws BusException {
+		return com.gsoft.common.util.StringUtils.replaceAllString(msgtempalate.getMsgTempalateContent(), MessageUtils.placeholders, replaceMap);
 	}
 	
 	@Override
@@ -126,6 +137,21 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements McMsgdatas
 		
 		//调用发送消息的外部接口
 		
+		//保存消息内容
+		saveMcMsgdatas(mcMsgdatas);
+	}
+	
+	@EsbServiceMapping
+	public McMsgdatas buildMsgData(@ServiceParam(name="uniqueCode") String uniqueCode,
+			Map<String, String> replaceMap) throws BusException {
+		McMsgdatas mcMsgdatas = new McMsgdatas();
+		McMsgtempalate msgTempalate = msgtempalateManager.getMsgTempalate(uniqueCode);
+		mcMsgdatas.setMsgCaption(msgTempalate.getMsgTempalateCaption());
+		mcMsgdatas.setMcMsgtempalate(msgTempalate);
+		mcMsgdatas.setMsgContent(buildMsgContent(msgTempalate, replaceMap));
+		mcMsgdatas.setSendDate(DateUtils.getToday("yyyy-MM-dd"));
+		mcMsgdatas.setSendStatus("0");//初始发送状态默认值
+		return mcMsgdatas;
 	}
 
 }
