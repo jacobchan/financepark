@@ -6,12 +6,17 @@ package com.manage.ReserveManager.service;
 import java.util.List;
 import java.util.Collection;
 
+import org.apache.poi.hssf.record.Record;
+
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.ReserveManager.entity.ReservationRecord;
 
@@ -63,6 +68,28 @@ public interface ReservationRecordManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitReservationRecord(String propertyName,Object value) throws BusException;
+	/**
+	 * 添加预约记录
+	 * @param o
+	 * @param commodityId
+	 * @param roomId
+	 * @return
+	 * @throws BusException
+	 */
+	public ReservationRecord saveReservationRecordByType(ReservationRecord o,String commodityId,String roomId) throws BusException;
 	
-	public ReservationRecord saveReservationRecordByType(ReservationRecord o,String commodityId,String roomId) throws BusException;		   
+  /**
+  * 根据预约类型查询不同的预约对象，比如：01众创空间：查询商品表基础信息；02虚拟空间查询单元表基础信息
+  * @param recordType:预约类型
+  * @return
+  * @throws BusException
+  */
+    public List<com.gsoft.framework.core.dataobj.Record> getRecordsByRecordType(String recordType) throws BusException;
+    
+    /**
+     * 授理预约记录，变更状态：已预约--->已授理
+     * @param o
+     * @throws BusException
+     */
+    public void changeReservationRecordByStatus(ReservationRecord o) throws BusException;
 }
