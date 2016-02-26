@@ -6,17 +6,25 @@ package com.manage.PropertyServiceManager.service;
 import java.util.List;
 import java.util.Collection;
 
+import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerOc;
 
 public interface PropertyservicemanagerOcManager extends BaseManager{
-
+	 /**
+     * 修改一卡通预约状态
+     */
+		/*public void updateOcStatus(@ServiceParam(name="ocId") String id, @ServiceParam(name="ocStatus") String ocStatus)
+				throws BusException;*/
+		public void updateOcStatus(String id, String ocStatus) throws BusException;
+ /*public void updateUserorderStatus(String id,String userorderStatus) throws BusException;*/
     /**
      * 查询列表
      */
