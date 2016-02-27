@@ -3,7 +3,7 @@
 <youi:page i18n="i18n.security.messages">
 	<!-- 页面描述： -->
 	<!--**********************************子页面**********************************-->
-	<youi:subpage caption="新增类别" height="260"
+	<youi:subpage caption="新增类别" height="100"
 		width="780" subpageId="addGenre"
 		src="page/commonCenter.purchasingManager.purchasingmanagerGenre/addPurchasingmanagerGenre.html?purchasingmanagerGenre.genreId={pruGenreId}"
 		formAction="esb/web/purchasingmanagerGenreManager/savePurchasingmanagerGenre.json">

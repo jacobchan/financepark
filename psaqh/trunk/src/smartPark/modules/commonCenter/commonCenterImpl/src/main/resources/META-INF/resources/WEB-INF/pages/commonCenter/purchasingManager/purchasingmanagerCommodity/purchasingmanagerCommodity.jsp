@@ -52,7 +52,7 @@
 			<youi:fieldText property="commodityLowestPrice"  caption="最低价"/>
 			<youi:fieldCalendar property="commodityUpTime"  caption="上架时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss"/>
 			<youi:fieldCalendar property="commodityDownTime"  caption="下架时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss"/>
-			<youi:fieldTree simple="false" popup="true" tree="${genreTree}" property="purchasingmanagerGenre.genreId"  caption="商品类别"/>
+			<youi:fieldTree simple="false" popup="true" tree="${genreTree}" property="purchasingmanagerGenre.genreId"  caption="商品类别" onlyLeaf="true"/>
 			<youi:fieldText property="commodityStock"  caption="库存"/>
 			<youi:fieldSwfupload property="commodityImage" caption="图像"/>
 			<youi:fieldSwfupload property="commodityCoverImage"  caption="封面图片"/>
