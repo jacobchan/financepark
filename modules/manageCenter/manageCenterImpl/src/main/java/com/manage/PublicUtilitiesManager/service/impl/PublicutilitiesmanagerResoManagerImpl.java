@@ -13,8 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.common.BuildingBaseManager.service.BbmRoomManager;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
-import com.common.purchasingManager.entity.PurchasingmanagerCommodityExtendValue;
-import com.common.purchasingManager.service.PurchasingmanagerCommodityExtendValueManager;
 import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
 import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
@@ -39,8 +37,8 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 	@Autowired
 	private PurchasingmanagerCommodityManager purchasingmanagerCommodityManager;
 	
-	@Autowired
-	private PurchasingmanagerCommodityExtendValueManager purchasingmanagerCommodityExtendValueManager;
+//	@Autowired
+//	private PurchasingmanagerCommodityExtendValueManager purchasingmanagerCommodityExtendValueManager;
 	
 	
 	
@@ -121,26 +119,26 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 	 * 查询园区商品类型为公用资源的商品
 	 */
     @EsbServiceMapping
-    public List<PurchasingmanagerCommodityExtendValue> getCommoditysByPublicStatus() throws BusException{
-    	List<PurchasingmanagerCommodityExtendValue> extendValueList=new ArrayList<PurchasingmanagerCommodityExtendValue>();
+    public List<PurchasingmanagerCommodity> getCommoditysByPublicStatus() throws BusException{
+//    	List<PurchasingmanagerCommodity> extendValueList=new ArrayList<PurchasingmanagerCommodity>();
     	//查询属于公共资源的商品
     	Collection<Condition> condition = new ArrayList<Condition>();
     	Collection<Order> order = new ArrayList<Order>();
     	condition.add(ConditionUtils.getCondition("parkBusinessTupe", Condition.EQUALS,"03"));//03:公共资源
     	List<PurchasingmanagerCommodity> commodityList=purchasingmanagerCommodityManager.getPurchasingmanagerCommoditys(condition, order);
     	
-    	for(PurchasingmanagerCommodity p:commodityList){
-    		//根据商品信息实体查询商品扩展属性值表
-    		Collection<Condition> conditions = new ArrayList<Condition>();
-    		Collection<Order> orders = new ArrayList<Order>();
-    		conditions.add(ConditionUtils.getCondition("purchasingmanagerCommodity", Condition.EQUALS,
-    				p));
-    		List<PurchasingmanagerCommodityExtendValue> commodityExtendValueList=purchasingmanagerCommodityExtendValueManager.getPurchasingmanagerCommodityExtendValues(conditions, orders);
-    		for(PurchasingmanagerCommodityExtendValue value:commodityExtendValueList){
-    			extendValueList.add(value);
-    		}
-    	}
-    	return extendValueList;
+//    	for(PurchasingmanagerCommodity p:commodityList){
+//    		//根据商品信息实体查询商品扩展属性值表
+//    		Collection<Condition> conditions = new ArrayList<Condition>();
+//    		Collection<Order> orders = new ArrayList<Order>();
+//    		conditions.add(ConditionUtils.getCondition("purchasingmanagerCommodity", Condition.EQUALS,
+//    				p));
+//    		List<PurchasingmanagerCommodity> commodityExtendValueList=purchasingmanagerCommodityManager.getPurchasingmanagerCommodityExtendValues(conditions, orders);
+//    		for(PurchasingmanagerCommodityExtendValue value:commodityExtendValueList){
+//    			extendValueList.add(value);
+//    		}
+//    	}
+    	return commodityList;
     }
 
 }
