@@ -15,10 +15,7 @@ import com.common.BuildingBaseManager.dao.BbmRoomDao;
 import com.common.BuildingBaseManager.entity.BbmRoom;
 import com.common.BuildingBaseManager.service.BbmRoomManager;
 import com.common.purchasingManager.dao.PurchasingmanagerCommodityDao;
-import com.common.purchasingManager.dao.PurchasingmanagerCommodityExtendValueDao;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
-import com.common.purchasingManager.entity.PurchasingmanagerCommodityExtendValue;
-import com.common.purchasingManager.service.PurchasingmanagerCommodityExtendValueManager;
 import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
 import com.gsoft.framework.codemap.dao.CodeitemDao;
 import com.gsoft.framework.codemap.entity.Codeitem;
@@ -47,8 +44,8 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 	@Autowired
 	private PurchasingmanagerCommodityDao purchasingmanagerCommodityDao;
 	
-	@Autowired
-	private PurchasingmanagerCommodityExtendValueDao purchasingmanagerCommodityExtendValueDao;
+//	@Autowired
+//	private PurchasingmanagerCommodityExtendValueDao purchasingmanagerCommodityExtendValueDao;
 	
 	@Autowired
 	private CodeitemDao<Codeitem, String> codeItemDao;
@@ -62,8 +59,8 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 	@Autowired
 	private BbmRoomManager bbmRoomManager;
 	
-	@Autowired
-	private PurchasingmanagerCommodityExtendValueManager purchasingmanagerCommodityExtendValueManager;
+//	@Autowired
+//	private PurchasingmanagerCommodityExtendValueManager purchasingmanagerCommodityExtendValueManager;
 	
 	
     /**
@@ -176,16 +173,16 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
     			   //根据商品id实体查询商品扩展属性值表
     			    Collection<Condition> conditions = new ArrayList<Condition>();
     			    Collection<Order> orders = new ArrayList<Order>();
-    				conditions.add(ConditionUtils.getCondition("purchasingmanagerCommodity", Condition.EQUALS,
-    						p));
-    			   List<PurchasingmanagerCommodityExtendValue> commodityExtendValueList=purchasingmanagerCommodityExtendValueManager.getPurchasingmanagerCommodityExtendValues(conditions, orders);
-    			   
-    			   for(PurchasingmanagerCommodityExtendValue value:commodityExtendValueList){
-    				   Record record = new Record();
-    				   record.put("commodityId", value.getCommodityExtendValueId());
-        			   record.put("commodityName", value.getCommodityExtendValueDisplayContent());
-        			   recordList.add(record);
-    			   }
+//    				conditions.add(ConditionUtils.getCondition("purchasingmanagerCommodity", Condition.EQUALS,
+//    						p));
+//    			   List<PurchasingmanagerCommodityExtendValue> commodityExtendValueList=purchasingmanagerCommodityExtendValueManager.getPurchasingmanagerCommodityExtendValues(conditions, orders);
+//    			   
+//    			   for(PurchasingmanagerCommodityExtendValue value:commodityExtendValueList){
+//    				   Record record = new Record();
+//    				   record.put("commodityId", value.getCommodityExtendValueId());
+//        			   record.put("commodityName", value.getCommodityExtendValueDisplayContent());
+//        			   recordList.add(record);
+//    			   }
     			   
     		   }
     		  
