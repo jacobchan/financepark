@@ -70,9 +70,6 @@ public class NmIssuetempalateManagerImpl extends BaseManagerImpl implements
 			Pager pager,// 分页条件
 			@ConditionCollection(domainClazz = NmIssuetempalate.class) Collection<Condition> conditions,// 查询条件
 			@OrderCollection Collection<Order> orders) throws BusException {
-		AccountPrincipal account = SecurityUtils.getAccount();
-		System.out.println("-------------:"
-				+ (account instanceof AccountPrincipal));
 		PagerRecords pagerRecords = nmIssuetempalateDao.findByPager(pager,
 				conditions, orders);
 		return pagerRecords;
