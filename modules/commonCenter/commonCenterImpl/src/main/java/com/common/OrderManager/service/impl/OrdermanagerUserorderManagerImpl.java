@@ -21,10 +21,11 @@ import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-import com.common.OrderManager.entity.OrdermanagerOrdertype;
+import com.gsoft.utils.BizCodeUtil;
+import com.common.MemberManager.dao.MemberInformationDao;
+import com.common.MemberManager.entity.MemberInformation;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.common.OrderManager.dao.OrdermanagerUserorderDao;
-import com.common.OrderManager.service.OrdermanagerOrdertypeManager;
 import com.common.OrderManager.service.OrdermanagerUserorderManager;
 
 @Service("ordermanagerUserorderManager")
@@ -33,7 +34,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	@Autowired
 	private OrdermanagerUserorderDao ordermanagerUserorderDao;
 	@Autowired
-	private OrdermanagerOrdertypeManager ordermanagerOrdertypeManager;
+	private MemberInformationDao memberInformationDao;
 	
     /**
      * 查询列表
@@ -135,16 +136,12 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	public OrdermanagerUserorder savePurOrdermanager(OrdermanagerUserorder o)
 			throws BusException {
 		//获取采购订单类型对象
-		OrdermanagerOrdertype oot = new OrdermanagerOrdertype();
-		if(o.getOrdermanagerOrdertype() != null){
-			oot = ordermanagerOrdertypeManager.getOrdermanagerOrdertype(o.getOrdermanagerOrdertype().getOrdertypeId());
-		}
 		
     	String ordermanagerUserorderId = o.getUserorderId();
     	boolean isUpdate = StringUtils.isNotEmpty(ordermanagerUserorderId);
     	if(isUpdate){//修改
     		OrdermanagerUserorder purOrder = ordermanagerUserorderDao.get(ordermanagerUserorderId);
-    		purOrder.setOrdermanagerOrdertype(oot);
+//    		purOrder.setOrdermanagerOrdertype(oot);
     		purOrder.setUserorderProject(o.getUserorderProject());
     		purOrder.setUserorderAmount(o.getUserorderAmount());
     		purOrder.setUserorderStatus(o.getUserorderStatus());
@@ -154,13 +151,16 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     		purOrder.setUpdateUser(o.getUpdateUser());
     		return ordermanagerUserorderDao.save(purOrder);
     	}else{//新增
-    		o.setOrdermanagerOrdertype(oot);
+//    		o.setOrdermanagerOrdertype(oot);
     		o.setCreateUser(o.getUpdateUser());
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-//    		o.setUserorderCode(userorderCode);
-//    		o.setUserorderBuyUser(userorderBuyUser);
-//    		o.setUserorderTime(userorderTime);
+    		if(o.getUpdateUser() != null){
+    			MemberInformation mem = memberInformationDao.get(o.getUpdateUser()); //获取当前登录用户
+        		o.setUserorderBuyUser(mem.getMemberName());
+    		}
+    		o.setMemberId(o.getUpdateUser());
+    		o.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return ordermanagerUserorderDao.save(o);
     	}
 	}
@@ -172,16 +172,12 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	public OrdermanagerUserorder saveFoodOrdermanager(OrdermanagerUserorder o)
 			throws BusException {
 		//获取餐饮订单类型对象
-		OrdermanagerOrdertype oot = new OrdermanagerOrdertype();
-		if(o.getOrdermanagerOrdertype() != null){
-			oot = ordermanagerOrdertypeManager.getOrdermanagerOrdertype(o.getOrdermanagerOrdertype().getOrdertypeId());
-		}
 		
     	String ordermanagerUserorderId = o.getUserorderId();
     	boolean isUpdate = StringUtils.isNotEmpty(ordermanagerUserorderId);
     	if(isUpdate){//修改
     		OrdermanagerUserorder purOrder = ordermanagerUserorderDao.get(ordermanagerUserorderId);
-    		purOrder.setOrdermanagerOrdertype(oot);
+//    		purOrder.setOrdermanagerOrdertype(oot);
     		purOrder.setUserorderProject(o.getUserorderProject());
     		purOrder.setUserorderAmount(o.getUserorderAmount());
     		purOrder.setUserorderStatus(o.getUserorderStatus());
@@ -191,13 +187,17 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     		purOrder.setUpdateUser(o.getUpdateUser());
     		return ordermanagerUserorderDao.save(purOrder);
     	}else{//新增
-    		o.setOrdermanagerOrdertype(oot);
+//    		o.setOrdermanagerOrdertype(oot);
     		o.setCreateUser(o.getUpdateUser());
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-//    		o.setUserorderCode(userorderCode);
-//    		o.setUserorderBuyUser(userorderBuyUser);
-//    		o.setUserorderTime(userorderTime);
+    		o.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("CG"));
+    		if(o.getUpdateUser() != null){
+    			MemberInformation mem = memberInformationDao.get(o.getUpdateUser()); //获取当前登录用户
+    			o.setUserorderBuyUser(mem.getMemberName());
+    		}
+    		o.setMemberId(o.getUpdateUser());
+    		o.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return ordermanagerUserorderDao.save(o);
     	}
 	}
@@ -209,16 +209,12 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	public OrdermanagerUserorder saveCompSerOrderMg(OrdermanagerUserorder o)
 			throws BusException {
 		//获取企业订单类型对象
-		OrdermanagerOrdertype oot = new OrdermanagerOrdertype();
-		if(o.getOrdermanagerOrdertype() != null){
-			oot = ordermanagerOrdertypeManager.getOrdermanagerOrdertype(o.getOrdermanagerOrdertype().getOrdertypeId());
-		}
 		
     	String ordermanagerUserorderId = o.getUserorderId();
     	boolean isUpdate = StringUtils.isNotEmpty(ordermanagerUserorderId);
     	if(isUpdate){//修改
     		OrdermanagerUserorder purOrder = ordermanagerUserorderDao.get(ordermanagerUserorderId);
-    		purOrder.setOrdermanagerOrdertype(oot);
+//    		purOrder.setOrdermanagerOrdertype(oot);
     		purOrder.setUserorderProject(o.getUserorderProject());
     		purOrder.setUserorderAmount(o.getUserorderAmount());
     		purOrder.setUserorderStatus(o.getUserorderStatus());
@@ -228,13 +224,17 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     		purOrder.setUpdateUser(o.getUpdateUser());
     		return ordermanagerUserorderDao.save(purOrder);
     	}else{//新增
-    		o.setOrdermanagerOrdertype(oot);
+//    		o.setOrdermanagerOrdertype(oot);
     		o.setCreateUser(o.getUpdateUser());
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-//    		o.setUserorderCode(userorderCode);
-//    		o.setUserorderBuyUser(userorderBuyUser);
-//    		o.setUserorderTime(userorderTime);
+    		o.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("CG"));
+    		if(o.getUpdateUser() != null){
+    			MemberInformation mem = memberInformationDao.get(o.getUpdateUser()); //获取当前登录用户
+    			o.setUserorderBuyUser(mem.getMemberName());
+    		}
+    		o.setMemberId(o.getUpdateUser());
+    		o.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return ordermanagerUserorderDao.save(o);
     	}
 	}
@@ -242,20 +242,16 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
      * 保存或修改IT服务订单
      */
 	@Override
-	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "params.userId")})
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
 	public OrdermanagerUserorder saveITSerOrderMg(OrdermanagerUserorder o)
 			throws BusException {
 		//获取IT服务订单类型对象
-		OrdermanagerOrdertype oot = new OrdermanagerOrdertype();
-		if(o.getOrdermanagerOrdertype() != null){
-			oot = ordermanagerOrdertypeManager.getOrdermanagerOrdertype(o.getOrdermanagerOrdertype().getOrdertypeId());
-		}
 		
     	String ordermanagerUserorderId = o.getUserorderId();
     	boolean isUpdate = StringUtils.isNotEmpty(ordermanagerUserorderId);
     	if(isUpdate){//修改
     		OrdermanagerUserorder purOrder = ordermanagerUserorderDao.get(ordermanagerUserorderId);
-    		purOrder.setOrdermanagerOrdertype(oot);
+//    		purOrder.setOrdermanagerOrdertype(oot);
     		purOrder.setUserorderProject(o.getUserorderProject());
     		purOrder.setUserorderAmount(o.getUserorderAmount());
     		purOrder.setUserorderStatus(o.getUserorderStatus());
@@ -265,13 +261,17 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     		purOrder.setUpdateUser(o.getUpdateUser());
     		return ordermanagerUserorderDao.save(purOrder);
     	}else{//新增
-    		o.setOrdermanagerOrdertype(oot);
+//    		o.setOrdermanagerOrdertype(oot);
     		o.setCreateUser(o.getUpdateUser());
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-//    		o.setUserorderCode(userorderCode);
-//    		o.setUserorderBuyUser(userorderBuyUser);
-//    		o.setUserorderTime(userorderTime);
+    		o.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("CG"));
+    		if(o.getUpdateUser() != null){
+    			MemberInformation mem = memberInformationDao.get(o.getUpdateUser()); //获取当前登录用户
+    			o.setUserorderBuyUser(mem.getMemberName());
+    		}
+    		o.setMemberId(o.getUpdateUser());
+    		o.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return ordermanagerUserorderDao.save(o);
     	}
 	}

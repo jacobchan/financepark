@@ -17,7 +17,27 @@ public class PurchasingmanagerGenreDaoHibernate extends
 	public Class<PurchasingmanagerGenre> getModelClazz(){
 		return PurchasingmanagerGenre.class;
 	}
-	
+	/**
+	 * 获取所有的采购餐饮类别列表
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PurchasingmanagerGenre> getPurFoodGenresList() {
+		String hql = "from PurchasingmanagerGenre m where "
+				+ "m.genreCode is null or m.genreCode = '01' or m.genreCode = '02'";
+		return getHibernateTemplate().find(hql);
+	}
+	/**
+	 * 获取所有的订单类型列表
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PurchasingmanagerGenre> getOrderTypesList() {
+		String hql = "from PurchasingmanagerGenre m where "
+				+ "m.genreCode is not null";
+		return getHibernateTemplate().find(hql);
+	}
 //	@Override
 //	@SuppressWarnings("unchecked")
 //	public List<PurchasingmanagerGenre> getRootList() {
@@ -34,12 +54,4 @@ public class PurchasingmanagerGenreDaoHibernate extends
 //		});
 //		return list;
 //	}
-	//得到类别根列表
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<PurchasingmanagerGenre> getRootList() {
-		String hql = "from PurchasingmanagerGenre m where "
-				+ "m.purchasingmanagerGenre is null ";
-		return getHibernateTemplate().find(hql);
-	}
 }
