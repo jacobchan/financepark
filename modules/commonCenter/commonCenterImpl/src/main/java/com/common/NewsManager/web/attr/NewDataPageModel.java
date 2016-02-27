@@ -16,7 +16,7 @@ import com.gsoft.framework.core.web.AbstractPageModel;
 import com.gsoft.framework.core.web.IPageModel;
 import com.gsoft.framework.core.web.controller.DataIn;
 
-@Component("cms.commonCenter.NewsManager.nmIssuenews")
+@Component("commonCenter.NewsManager.nmIssuenews")
 public class NewDataPageModel extends AbstractPageModel implements IPageModel{
 	
 	@Autowired
