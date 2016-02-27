@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2016/2/26 18:14:13                           */
+/* Created on:     2016/2/27 11:14:22                           */
 /*==============================================================*/
 
 
@@ -1231,6 +1231,7 @@ create table sp_propertyservicemanager_bx
    BX_WAY_              varchar(2),
    BX_PROJECT_          varchar(2),
    BX_ADDRESS_          varchar(36),
+   BX_STATUS_           varchar(2),
    BX_REMARK_           varchar(300),
    BX_FUJIAN            varchar(50),
    BX_AMOUNT_           decimal(14,2),
