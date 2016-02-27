@@ -15,7 +15,7 @@ import com.gsoft.entity.MessageTempCode;
 import com.gsoft.entity.ReferenceMap;
 
 @ContextConfiguration(locations={"classpath:applicationContext-test.xml"})
-public class MsgTest extends AbstractJUnit4SpringContextTests{
+public class MessageTest extends AbstractJUnit4SpringContextTests{
 	@Autowired
 	private McMsgtempalateManager mcMsgtempalateManager;
 	
