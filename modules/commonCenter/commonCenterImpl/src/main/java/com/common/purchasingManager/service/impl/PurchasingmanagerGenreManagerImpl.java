@@ -65,7 +65,7 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
     /**
      * 保存对象
      */
-	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "params.userId")})
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
     public PurchasingmanagerGenre savePurchasingmanagerGenre(PurchasingmanagerGenre o) throws BusException{
     	String genreId = o.getGenreId();
     	boolean isUpdate = StringUtils.isNotEmpty(genreId);
@@ -93,7 +93,14 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
      */
     @EsbServiceMapping
     public void removePurchasingmanagerGenre(@ServiceParam(name="genreId") String id) throws BusException{
-    	purchasingmanagerGenreDao.remove(id);
+    	PurchasingmanagerGenre pg = purchasingmanagerGenreDao.get(id);
+    	if("01".equals(pg.getGenreCode())){
+    		throw new BusException("不能删除急速采购类别！");
+    	}else if("02".equals(pg.getGenreCode())){
+    		throw new BusException("不能删除餐饮类别！");
+    	}else{
+    		purchasingmanagerGenreDao.remove(id);
+    	}
     }
     /**
      * 根据主键集合删除对象
@@ -113,18 +120,22 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
     public boolean exsitPurchasingmanagerGenre(String propertyName,Object value) throws BusException{
 		return purchasingmanagerGenreDao.exists(propertyName,value);
 	}
-    
-    //根据类别ID获取下级类别列表
+	/**
+	 * 获取所有的采购餐饮类别列表
+	 */
 	@Override
-	@EsbServiceMapping
-	public List<PurchasingmanagerGenre> getSubPurchasingmanagerGenreList(
-			@ServiceParam(name="genreId") String genreId) throws BusException {
+	public List<PurchasingmanagerGenre> getPurFoodGenres() throws BusException {
 		List<PurchasingmanagerGenre> list = new ArrayList<PurchasingmanagerGenre>();
-		if(null == genreId||"".equals(genreId)){
-			list =purchasingmanagerGenreDao.getRootList();
-		}else{
-			list = purchasingmanagerGenreDao.getList("purchasingmanagerGenre.genreId", genreId);
-		}
+		list = purchasingmanagerGenreDao.getPurFoodGenresList();
+		return list;
+	}
+	/**
+	 * 获取所有的订单类型列表
+	 */
+	@Override
+	public List<PurchasingmanagerGenre> getOrderTypes() throws BusException {
+		List<PurchasingmanagerGenre> list = new ArrayList<PurchasingmanagerGenre>();
+		list = purchasingmanagerGenreDao.getOrderTypesList();
 		return list;
 	}
 
