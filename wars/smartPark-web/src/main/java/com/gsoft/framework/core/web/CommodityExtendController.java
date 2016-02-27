@@ -14,8 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
-import com.common.purchasingManager.entity.PurchasingmanagerCommodityExtendValue;
-import com.common.purchasingManager.service.PurchasingmanagerCommodityExtendValueManager;
 import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
 import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.web.view.DataModelAndView;
@@ -30,8 +28,8 @@ import com.gsoft.framework.core.web.view.DataModelAndView;
 public class CommodityExtendController {
 	@Autowired
 	private PurchasingmanagerCommodityManager purchasingmanagerCommodityManager;
-	@Autowired
-	private PurchasingmanagerCommodityExtendValueManager purchasingmanagerCommodityExtendValueManager;
+//	@Autowired
+//	private PurchasingmanagerCommodityExtendValueManager purchasingmanagerCommodityExtendValueManager;
 	
 	//商品扩展属性保存
 	@RequestMapping("/saveCommodityExtend.json")
@@ -41,15 +39,15 @@ public class CommodityExtendController {
 		String commodityId = map.get("commodityId")[0];
 		PurchasingmanagerCommodity pc = purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
 		for(String s:keyset){
-			if(!s.equals("operant")&&!s.equals("commodityId")){
-				String value = map.get(s)[0];
-				PurchasingmanagerCommodityExtendValue pcv = purchasingmanagerCommodityExtendValueManager.
-						getPurchasingmanagerCommodityExtendValue(commodityId,s);
-				pcv.setPurchasingmanagerCommodity(pc);
-				pcv.setCommodityExtendValueFieldName(s);
-				pcv.setCommodityExtendValueDisplayContent(value);
-				purchasingmanagerCommodityExtendValueManager.savePurchasingmanagerCommodityExtendValue(pcv);
-			}
+//			if(!s.equals("operant")&&!s.equals("commodityId")){
+//				String value = map.get(s)[0];
+//				PurchasingmanagerCommodityExtendValue pcv = purchasingmanagerCommodityExtendValueManager.
+//						getPurchasingmanagerCommodityExtendValue(commodityId,s);
+//				pcv.setPurchasingmanagerCommodity(pc);
+//				pcv.setCommodityExtendValueFieldName(s);
+//				pcv.setCommodityExtendValueDisplayContent(value);
+//				purchasingmanagerCommodityExtendValueManager.savePurchasingmanagerCommodityExtendValue(pcv);
+//			}
 		}
 		return new DataModelAndView("true");
 	}
@@ -59,10 +57,10 @@ public class CommodityExtendController {
 	public DataModelAndView getValue(HttpServletRequest request){
 		String commodityId = request.getParameter("commodityId");
 		String commodityExtendValueFieldName = request.getParameter("commodityExtendValueFieldName");
-		PurchasingmanagerCommodityExtendValue pc = purchasingmanagerCommodityExtendValueManager.getPurchasingmanagerCommodityExtendValue(commodityId,commodityExtendValueFieldName);
-		String value = pc.getCommodityExtendValueDisplayContent();
+//		PurchasingmanagerCommodityExtendValue pc = purchasingmanagerCommodityExtendValueManager.getPurchasingmanagerCommodityExtendValue(commodityId,commodityExtendValueFieldName);
+//		String value = pc.getCommodityExtendValueDisplayContent();
 		TempDemo temp = new TempDemo();
-		temp.setBuff(value);
+//		temp.setBuff(value);
 		return new DataModelAndView(temp);
 	}
 }
