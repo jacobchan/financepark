@@ -59,11 +59,11 @@ public class BbmBuildingManagerImpl extends BaseManagerImpl implements BbmBuildi
 			@ConditionCollection(domainClazz=BbmBuilding.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
 		PagerRecords pagerRecords = bbmBuildingDao.findByPager(pager, conditions, orders);
-		List<BbmBuilding> buildings = pagerRecords.getRecords();
-		for(BbmBuilding building:buildings){
-			BbmPark park = building.getBbmPark();
-			building.setParkName(park.getParkName());
-		}
+//		List<BbmBuilding> buildings = pagerRecords.getRecords();
+//		for(BbmBuilding building:buildings){
+//			BbmPark park = building.getBbmPark();
+//			//building.setParkName(park.getParkName());
+//		}
 		
 		return pagerRecords;
 	}
