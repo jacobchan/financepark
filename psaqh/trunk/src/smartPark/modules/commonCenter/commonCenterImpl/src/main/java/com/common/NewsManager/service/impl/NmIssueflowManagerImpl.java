@@ -217,6 +217,9 @@ public class NmIssueflowManagerImpl extends BaseManagerImpl implements NmIssuefl
 	@Override
 	public boolean isFinally(String nmIssuetypeId, String currentStatus)
 			throws BusException {
+		if(StringUtils.isEmpty(nmIssuetypeId)||StringUtils.isEmpty(currentStatus)){
+			return false;
+		}
 		Collection<Condition> condition = new ArrayList<Condition>();
 		condition.add(ConditionUtils.getCondition("nmIssuetype.issueTypeId", Condition.EQUALS, nmIssuetypeId));
 		condition.add(ConditionUtils.getCondition("issueFlowNStatus", Condition.EQUALS, currentStatus));
@@ -240,6 +243,15 @@ public class NmIssueflowManagerImpl extends BaseManagerImpl implements NmIssuefl
 			return nmIssueflowDao.commonQuery(conditions, null);
 		}
 		return null;
+	}
+	@Override
+	public boolean isFinally(String nmIssuetypeId, NmIssueflow nmIssueflow)
+			throws BusException {
+		if(nmIssueflow!=null){
+			String currentStatus = nmIssueflow.getIssueFlowCStatus();
+			return isFinally(nmIssuetypeId, currentStatus);
+		}	
+		return false;
 	}
     
 }
