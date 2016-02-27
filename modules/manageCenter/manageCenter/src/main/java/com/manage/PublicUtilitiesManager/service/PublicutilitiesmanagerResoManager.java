@@ -6,7 +6,7 @@ package com.manage.PublicUtilitiesManager.service;
 import java.util.List;
 import java.util.Collection;
 
-import com.common.purchasingManager.entity.PurchasingmanagerCommodityExtendValue;
+import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -69,5 +69,5 @@ public interface PublicutilitiesmanagerResoManager extends BaseManager{
 	 * @return
 	 * @throws BusException
 	 */
-	public List<PurchasingmanagerCommodityExtendValue> getCommoditysByPublicStatus() throws BusException;
+	public List<PurchasingmanagerCommodity> getCommoditysByPublicStatus() throws BusException;
 }
