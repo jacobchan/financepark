@@ -16,6 +16,7 @@ import com.gsoft.framework.security.IRealmUserInfo;
 import com.gsoft.framework.security.IRealmUserToken;
 import com.gsoft.framework.security.IUser;
 import com.gsoft.framework.security.IUserAdapter;
+import com.gsoft.framework.security.agt.entity.User;
 import com.gsoft.framework.security.agt.service.UserLoginService;
 import com.gsoft.framework.security.agt.service.UserManager;
 import com.gsoft.framework.core.dataobj.tree.TreeNode;
@@ -38,7 +39,8 @@ import com.common.MemberManager.service.MemberInformationManager;
 public class MemberInformationManagerImpl extends BaseManagerImpl implements MemberInformationManager{
 	@Autowired
 	private MemberInformationDao memberInformationDao;
-	
+	@Autowired
+	private UserManager userManager;
     /**
      * 查询列表
      */
@@ -128,16 +130,25 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		MemberInformation memberInformationed = memberInformationDao.getObjectByUniqueProperty("memberName", userName);
 		if(memberInformationed==null){
 			//新增用户
-			MemberInformation memberInformation = new MemberInformation();
-			memberInformation.setMemberName(userName);
-			memberInformation.setMemberPassword(PasswordUtils.md5Password(repasswd));
-			memberInformation.setMemberPhoneNumber(mobile);
-			/*User user = new User();
-			user.setLoginName(userName);
-			user.setPassword(PasswordUtils.md5Password(repasswd));
-			user.setGroup("001");
-			userManager.saveUser(user);*/
-			memberInformationDao.save(memberInformation);
+			//判断用户密码是否准确
+			if (!passwd.equals(repasswd))
+				throw new BusException("两次输入的密码不一致");
+				User user = new User();
+				user.setLoginName(userName);
+				user.setUserCaption(userName);
+				user.setUserActive("1");
+				user.setPassword(PasswordUtils.md5Password(repasswd));
+				user.setGroup("003");
+				User saveuser = userManager.saveUser(user);
+			//保存用户同时insert youi_user
+			if(saveuser!=null){
+				MemberInformation memberInformation = new MemberInformation();
+				memberInformation.setMemberId(saveuser.getUserId());
+				memberInformation.setMemberName(userName);
+				memberInformation.setMemberPassword(PasswordUtils.md5Password(repasswd));
+				memberInformation.setMemberPhoneNumber(mobile);
+				memberInformationDao.save(memberInformation);
+			}
 	}else{
 		throw new BusException("该用户已存在!");
 		}
