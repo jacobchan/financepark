@@ -19,25 +19,39 @@ import com.gsoft.framework.core.dataobj.Domain;
 @Table(name = "sp_OrderManager_commodityDetail")
 public class OrdermanagerCommoditydetail implements Domain{
 	
-	private static final long serialVersionUID = -244655877726959214L;
+	private static final long serialVersionUID = 9208657303598567150L;
 	
-	@Id @GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
-	@Column(name = "COMMODITYDETAIL_ID_")
-	@Length(max=36)
-	private String commoditydetailId;//明细序号
-
-	@Column(name = "COMMODITYDETAIL_COMMODITY_ID_")
-	@Length(max=36)
-	private String commoditydetailCommodityId;//商户ID
 
 	@Column(name = "COMMODITY_ID_")
 	@Length(max=36)
 	private String commodityId;//商品ID
 
+	@Column(name = "COMMODITYDETAIL_COMMODITY_ID_")
+	@Length(max=36)
+	private String commoditydetailCommodityId;//商户ID
+
 	@Column(name = "COMMODITYDETAIL_URL_")
 	@Length(max=256)
 	private String commoditydetailUrl;//商品明细URL
+
+	@Column(name = "UPDATE_TIME_")
+	private String updateTime;//修改时间
+
+	@Column(name = "UPDATE_USER_")
+	@Length(max=36)
+	private String updateUser;//修改人
+
+	@Column(name = "CREATE_USER_")
+	@Length(max=36)
+	private String createUser;//创建人
+
+	@Column(name = "CREATE_TIME_")
+	private String createTime;//创建时间
+	@Id @GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
+	@Column(name = "COMMODITYDETAIL_ID_")
+	@Length(max=36)
+	private String commoditydetailId;//明细序号
 
 	@Column(name = "COMMODITYDETAIL_NUM_")
 	private String commoditydetailNum;//数量
@@ -46,12 +60,12 @@ public class OrdermanagerCommoditydetail implements Domain{
     @JoinColumn(name="USERORDER_ID_")
 	private com.common.OrderManager.entity.OrdermanagerUserorder ordermanagerUserorder;//用户订单序列
 	
-	public String getCommoditydetailId(){
-		return this.commoditydetailId;
+	public String getCommodityId(){
+		return this.commodityId;
 	}
 	
-	public void setCommoditydetailId(String commoditydetailId){
-		this.commoditydetailId = commoditydetailId;
+	public void setCommodityId(String commodityId){
+		this.commodityId = commodityId;
 	}
 	public String getCommoditydetailCommodityId(){
 		return this.commoditydetailCommodityId;
@@ -60,19 +74,47 @@ public class OrdermanagerCommoditydetail implements Domain{
 	public void setCommoditydetailCommodityId(String commoditydetailCommodityId){
 		this.commoditydetailCommodityId = commoditydetailCommodityId;
 	}
-	public String getCommodityId(){
-		return this.commodityId;
-	}
-	
-	public void setCommodityId(String commodityId){
-		this.commodityId = commodityId;
-	}
 	public String getCommoditydetailUrl(){
 		return this.commoditydetailUrl;
 	}
 	
 	public void setCommoditydetailUrl(String commoditydetailUrl){
 		this.commoditydetailUrl = commoditydetailUrl;
+	}
+	public String getUpdateTime(){
+		return this.updateTime;
+	}
+	
+	public void setUpdateTime(String updateTime){
+		this.updateTime = updateTime;
+	}
+	public String getUpdateUser(){
+		return this.updateUser;
+	}
+	
+	public void setUpdateUser(String updateUser){
+		this.updateUser = updateUser;
+	}
+	public String getCreateUser(){
+		return this.createUser;
+	}
+	
+	public void setCreateUser(String createUser){
+		this.createUser = createUser;
+	}
+	public String getCreateTime(){
+		return this.createTime;
+	}
+	
+	public void setCreateTime(String createTime){
+		this.createTime = createTime;
+	}
+	public String getCommoditydetailId(){
+		return this.commoditydetailId;
+	}
+	
+	public void setCommoditydetailId(String commoditydetailId){
+		this.commoditydetailId = commoditydetailId;
 	}
 	public String getCommoditydetailNum(){
 		return this.commoditydetailNum;
@@ -95,10 +137,14 @@ public class OrdermanagerCommoditydetail implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((commoditydetailId == null) ? 0 : commoditydetailId.hashCode());
-		result = prime * result + ((commoditydetailCommodityId == null) ? 0 : commoditydetailCommodityId.hashCode());
 		result = prime * result + ((commodityId == null) ? 0 : commodityId.hashCode());
+		result = prime * result + ((commoditydetailCommodityId == null) ? 0 : commoditydetailCommodityId.hashCode());
 		result = prime * result + ((commoditydetailUrl == null) ? 0 : commoditydetailUrl.hashCode());
+		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
+		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result + ((commoditydetailId == null) ? 0 : commoditydetailId.hashCode());
 		result = prime * result + ((commoditydetailNum == null) ? 0 : commoditydetailNum.hashCode());
 		return result;
 	}
@@ -112,25 +158,45 @@ public class OrdermanagerCommoditydetail implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		final OrdermanagerCommoditydetail other = (OrdermanagerCommoditydetail) obj;
-		if (commoditydetailId == null) {
-			if (other.commoditydetailId != null)
+		if (commodityId == null) {
+			if (other.commodityId != null)
 				return false;
-		} else if (!commoditydetailId.equals(other.commoditydetailId))
+		} else if (!commodityId.equals(other.commodityId))
 			return false;
 		if (commoditydetailCommodityId == null) {
 			if (other.commoditydetailCommodityId != null)
 				return false;
 		} else if (!commoditydetailCommodityId.equals(other.commoditydetailCommodityId))
 			return false;
-		if (commodityId == null) {
-			if (other.commodityId != null)
-				return false;
-		} else if (!commodityId.equals(other.commodityId))
-			return false;
 		if (commoditydetailUrl == null) {
 			if (other.commoditydetailUrl != null)
 				return false;
 		} else if (!commoditydetailUrl.equals(other.commoditydetailUrl))
+			return false;
+		if (updateTime == null) {
+			if (other.updateTime != null)
+				return false;
+		} else if (!updateTime.equals(other.updateTime))
+			return false;
+		if (updateUser == null) {
+			if (other.updateUser != null)
+				return false;
+		} else if (!updateUser.equals(other.updateUser))
+			return false;
+		if (createUser == null) {
+			if (other.createUser != null)
+				return false;
+		} else if (!createUser.equals(other.createUser))
+			return false;
+		if (createTime == null) {
+			if (other.createTime != null)
+				return false;
+		} else if (!createTime.equals(other.createTime))
+			return false;
+		if (commoditydetailId == null) {
+			if (other.commoditydetailId != null)
+				return false;
+		} else if (!commoditydetailId.equals(other.commoditydetailId))
 			return false;
 		if (commoditydetailNum == null) {
 			if (other.commoditydetailNum != null)
