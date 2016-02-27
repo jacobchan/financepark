@@ -16,13 +16,13 @@ import com.gsoft.framework.core.web.AbstractPageModel;
 import com.gsoft.framework.core.web.IPageModel;
 import com.gsoft.framework.core.web.controller.DataIn;
 
-@Component("commonCenter.MessageCenter.mcMsgtype")
-public class MsgTypePage extends AbstractPageModel implements IPageModel{
+@Component("commonCenter.MessageCenter.mcMsgdatas")
+public class MsgDataPage extends AbstractPageModel implements IPageModel{
 	
 	@Autowired
 	private McMsgtypeManager msgtypeManager;
 
-	  public ModelMap mcMsgtype(HttpServletRequest request, DataIn<McMsgtype> dataIn)	  {
+	  public ModelMap mcMsgdatas(HttpServletRequest request, DataIn<McMsgtype> dataIn)	  {
 	    return buildTreeModel();
 	  }
 
