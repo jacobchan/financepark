@@ -71,4 +71,10 @@ public interface PurchasingmanagerGenreManager extends BaseManager{
      * @return
      */
 	public List<PurchasingmanagerGenre> getOrderTypes() throws BusException;
+	/**
+	 * 获取商户类别列表
+	 * @return
+	 * @throws BusException
+	 */
+	public List<PurchasingmanagerGenre> getMerchantGenres() throws BusException;
 }

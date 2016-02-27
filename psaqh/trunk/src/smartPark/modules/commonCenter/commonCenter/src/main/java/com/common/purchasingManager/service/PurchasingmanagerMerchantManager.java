@@ -12,7 +12,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.common.purchasingManager.entity.PurchasingmanagerMerchant;
 
 public interface PurchasingmanagerMerchantManager extends BaseManager{
@@ -63,4 +62,11 @@ public interface PurchasingmanagerMerchantManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitPurchasingmanagerMerchant(String propertyName,Object value) throws BusException;
+	/**
+	 * 根据商品类别获取相关商户列表
+	 * @param genreId
+	 * @return
+	 * @throws BusException
+	 */
+	public List<PurchasingmanagerMerchant> getMerchantsByGenre(String genreId)  throws BusException;
 }
