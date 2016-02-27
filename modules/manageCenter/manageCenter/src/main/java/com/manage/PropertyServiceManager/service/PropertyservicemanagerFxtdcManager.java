@@ -12,8 +12,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFxtdc;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerMoverec;
 
 public interface PropertyservicemanagerFxtdcManager extends BaseManager{
 
@@ -63,4 +63,11 @@ public interface PropertyservicemanagerFxtdcManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitPropertyservicemanagerFxtdc(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 通过搬家申请对象得到对应的二维码
+	 * @param moverec 搬家申请对象
+	 * @return
+	 */
+	public PropertyservicemanagerFxtdc getFxtdcByMoverec(PropertyservicemanagerMoverec moverec) ;
 }
