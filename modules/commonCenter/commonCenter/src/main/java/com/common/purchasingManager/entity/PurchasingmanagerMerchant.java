@@ -4,8 +4,8 @@
 package com.common.purchasingManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
@@ -49,10 +49,10 @@ public class PurchasingmanagerMerchant implements Domain{
 	@Column(name = "CREATE_USER_")
 	@Length(max=36)
 	private String createUser;//创建人
-
-	@Column(name = "MERCHANT_TYPE_")
-	@Length(max=2)
-	private String merchantType;//商户类型
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="MERCHANT_TYPE_")
+	private com.common.purchasingManager.entity.PurchasingmanagerGenre merchantType;//商户类型
 
 	@Column(name = "MERCHANT_NAME_")
 	@Length(max=128)
@@ -122,13 +122,15 @@ public class PurchasingmanagerMerchant implements Domain{
 	public void setCreateUser(String createUser){
 		this.createUser = createUser;
 	}
-	public String getMerchantType(){
-		return this.merchantType;
+	public com.common.purchasingManager.entity.PurchasingmanagerGenre getMerchantType() {
+		return merchantType;
 	}
-	
-	public void setMerchantType(String merchantType){
+
+	public void setMerchantType(
+			com.common.purchasingManager.entity.PurchasingmanagerGenre merchantType) {
 		this.merchantType = merchantType;
 	}
+
 	public String getMerchantName(){
 		return this.merchantName;
 	}
