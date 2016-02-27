@@ -112,9 +112,8 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements McMsgdatas
 	}
     
     @EsbServiceMapping
-	public String buildMessageContent(McMsgdatas mcMsgdatas) throws BusException {
+	public String buildMessageContent(McMsgdatas mcMsgdatas,String[] params) throws BusException {
 		McMsgtempalate msgTempalate = mcMsgdatas.getMcMsgtempalate();//消息引用的模板
-		String[] params = null;
 		//模板内容转换成小心内容
 		return com.gsoft.common.util.StringUtils.replaceChar(msgTempalate.getMsgTempalateContent(), '#', params);
 	}
