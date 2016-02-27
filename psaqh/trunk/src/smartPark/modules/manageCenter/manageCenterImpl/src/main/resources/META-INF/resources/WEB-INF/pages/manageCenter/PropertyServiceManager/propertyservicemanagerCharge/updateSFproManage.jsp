@@ -6,7 +6,7 @@
 		action="esb/web/propertyservicemanagerChargeManager/savePropertyservicemanagerCharge.json">
 		<youi:fieldLayout prefix="record_sFpro" labelWidths="120,120">
 			<youi:fieldHidden property="chargeId"  caption="收费登记序列"/>
-			<youi:fieldTree simple="false" popup="true" tree="${bbmRoomTree}" property="bbmRoom.roomNo"  caption="单元编号"/>
+			<youi:fieldTree simple="false" popup="true" tree="${bbmRoomTree}" property="bbmRoom.roomNo"  caption="单元编号" onlyLeaf="true"/>
 			<youi:fieldSelect property="chargeIsbool" convert="bool" caption="是否缴费"/>
 			<youi:fieldCalendar property="chargeCreatetime"  caption="登记日期" format="yyyy-MM-dd" textFormat="yyyy-MM-dd"/>
 			<youi:fieldCalendar property="chargeBedate"  caption="起始日期" format="yyyy-MM-dd" textFormat="yyyy-MM-dd"/>
