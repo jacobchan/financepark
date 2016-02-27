@@ -24,7 +24,7 @@
 		<youi:fieldLayout prefix="record">
 			<youi:fieldHidden styleClass="field-parent" property="purchasingmanagerGenre.genreId" />
 			<youi:fieldHidden  property="genreId" caption="类别ID" />
-			<youi:fieldText width="120" styleClass="autoAlign" property="genreName" caption="类别名称"/>
+			<youi:fieldText width="120" styleClass="autoAlign" property="genreName" caption="类别名称" notNull="true"/>
 			<youi:fieldLabel  styleClass="autoAlign"  property="purchasingmanagerGenre.genreName" caption="上级类别" />
 		</youi:fieldLayout>
 		<youi:button icon="add" name="addGenre" caption="新增类别" />

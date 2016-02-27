@@ -12,27 +12,23 @@
 				editSrc="esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommodity.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/purchasingmanagerCommodityManager/removePurchasingmanagerCommodity.json">
 		<youi:fieldLayout labelWidths="120,120">
-			<youi:fieldSelect property="parkBusinessTupe"  convert="businessType"  caption="园区商业类型"/>
 			<youi:fieldText property="commodityTitle"  caption="标题"/>
-			<youi:fieldText property="commodityPrice"  caption="标价"/>
-			<youi:fieldText property="commodityStock"  caption="库存"/>
+			<youi:fieldTree simple="false" popup="true" tree="${genreTree}" property="purchasingmanagerGenre.genreId" caption="商品类别" onlyLeaf="true"/>
+			<youi:fieldText property="purchasingmanagerMerchant.merchantName"  caption="商户名称"/>
 		</youi:fieldLayout>
 		
-		<youi:gridCol property="parkBusinessTupe" convert="businessType"  caption="园区商业类型" align="center" width="13%"/>
-		<youi:gridCol property="purchasingmanagerMerchant.merchantName"  caption="下架时间" align="center" width="8%"/>
-		<youi:gridCol property="commodityTitle"  caption="标题" align="center" width="13%"/>
-		<youi:gridCol property="commodityDescribe"  caption="描述" align="center" width="8%"/>
+		<youi:gridCol property="commodityTitle"  caption="标题" align="center" width="15%"/>
+		<youi:gridCol property="purchasingmanagerMerchant.merchantName"  caption="商户名称" align="center" width="9%"/>
+		<youi:gridCol property="purchasingmanagerGenre.genreName"  caption="商品类别" align="center" width="8%"/>
 		<youi:gridCol property="commodityPrice"  caption="标价" align="center" width="8%"/>
-		<youi:gridCol property="commodityOriginalPrice"  caption="原价" align="center" width="8%"/>
-		<youi:gridCol property="commodityHighestPrice"  caption="最高价" align="center" width="8%"/>
-		<youi:gridCol property="commodityBrand"  caption="品牌" align="center" width="8%"/>
-		<youi:gridCol property="commodityboolDisplayStock"  convert="bool" caption="是否显示库存" align="center" width="10%"/>
 		<youi:gridCol property="commodityStock"  caption="库存" align="center" width="8%"/>
-		<youi:gridCol property="commodityUpTime"  caption="上架时间" align="center" width="8%"/>
-		<youi:gridCol property="commodityDownTime"  caption="下架时间" align="center" width="8%"/>
+		<youi:gridCol property="commodityDescribe"  caption="描述" align="center" width="22%"/>
+		<youi:gridCol property="commodityUpTime"  caption="上架时间" align="center" width="15%"/>
+		<youi:gridCol property="commodityDownTime"  caption="下架时间" align="center" width="15%"/>
+		<youi:gridCol property="purchasingmanagerGenre.genreId"  caption="商品类别" align="center" width="0"/>
 		
 		<youi:button name="commodity_extend" active="1" caption="商品扩展属性"/>
-		<youi:button name="veiwCommodity" active="1" caption="查看详情"/>
+		<%-- <youi:button name="veiwCommodity" active="1" caption="查看详情"/> --%>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -40,33 +36,32 @@
 	</youi:grid>
 	
 	<!-- form-商品信息编辑 -->
-	<youi:form dialog="true" caption="商品信息" id="form_purchasingmanagerCommodity" action="esb/web/purchasingmanagerCommodityManager/savePurchasingmanagerCommodity.json">
+	<youi:form dialog="true" caption="商品信息" id="form_purchasingmanagerCommodity" 
+		action="esb/web/purchasingmanagerCommodityManager/savePurchasingmanagerCommodity.json">
 		<youi:fieldLayout prefix="record" labelWidths="120,120">
-			<youi:fieldText property="commodityTitle"  caption="标题"/>
-			<youi:fieldSelect property="parkBusinessTupe"  caption="园区商业类型" convert="businessType" />
-			<youi:fieldSelect property="commodityboolDisplayStock" convert="bool"  caption="是否显示库存"/>
-			<youi:fieldText property="commodityPrice"  caption="标价"/>
-			<youi:fieldText property="commodityBrand"  caption="品牌"/>
-			<youi:fieldText property="commodityOriginalPrice"  caption="原价"/>
-			<youi:fieldText property="commodityHighestPrice"  caption="最高价"/>
-			<youi:fieldText property="commodityLowestPrice"  caption="最低价"/>
-			<youi:fieldCalendar property="commodityUpTime"  caption="上架时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss"/>
-			<youi:fieldCalendar property="commodityDownTime"  caption="下架时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss"/>
-			<youi:fieldTree simple="false" popup="true" tree="${genreTree}" property="purchasingmanagerGenre.genreId"  caption="商品类别" onlyLeaf="true"/>
+			<youi:fieldText property="commodityTitle"  caption="标题" notNull="true"/>
+			<youi:fieldText property="commodityPrice"  caption="标价" notNull="true"/>
+			<youi:fieldTree simple="false" popup="true" tree="${genreTree}" property="purchasingmanagerGenre.genreId" caption="商品类别" onlyLeaf="true" notNull="true"/>
+			<youi:fieldSelect property="purchasingmanagerMerchant.merchantId" show="merchantName" code="merchantId" notNull="true"
+				src="esb/web/purchasingmanagerMerchantManager/getMerchantsByGenre.json" caption="所属商户"
+				parents="purchasingmanagerGenre.genreId" parentsAlias="purchasingmanagerGenre.genreId"/>
 			<youi:fieldText property="commodityStock"  caption="库存"/>
+			<youi:fieldSelect property="commodityIsnotDisplayStock" convert="bool"  caption="是否显示库存" notNull="true"/>
+			<youi:fieldCalendar property="commodityUpTime"  caption="上架时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="true"/>
+			<youi:fieldCalendar property="commodityDownTime"  caption="下架时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="true"/>
 			<youi:fieldSwfupload property="commodityImage" caption="图像"/>
 			<youi:fieldSwfupload property="commodityCoverImage"  caption="封面图片"/>
-			<youi:fieldArea property="commodityDescribe"  caption="描述" column="2"/>
+			<youi:fieldArea property="commodityDescribe"  caption="描述" column="2" notNull="true"/>
 			<youi:fieldHidden property="commodityId"  caption="商品ID"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
-	<!-- form-查看详情 -->
+	<!-- form-查看详情 
 	<youi:form dialog="true" caption="商品详情" id="form_purchasingmanagerCommodity_view" action="esb/web/purchasingmanagerCommodityManager/savePurchasingmanagerCommodity.json">
 		<youi:fieldLayout prefix="record" labelWidths="120,120">
 			<youi:fieldLabel property="commodityTitle"  caption="标题"/>
 			<youi:fieldLabel property="parkBusinessTupe"  caption="园区商业类型" convert="businessType" />
-			<youi:fieldLabel property="commodityboolDisplayStock" convert="bool"  caption="是否显示库存"/>
+			<youi:fieldLabel property="commodityIsnotDisplayStock" convert="bool"  caption="是否显示库存"/>
 			<youi:fieldLabel property="commodityPrice"  caption="标价"/>
 			<youi:fieldLabel property="commodityBrand"  caption="品牌"/>
 			<youi:fieldLabel property="commodityOriginalPrice"  caption="原价"/>
@@ -79,13 +74,13 @@
 			<youi:fieldLabel property="commodityDescribe"  caption="描述" column="2"/>
 			<youi:fieldHidden property="commodityId"  caption="商品ID"/>
 		</youi:fieldLayout>
-	</youi:form>
+	</youi:form>-->
 	
 	<!--**********************************页面函数Start********************************-->
 	<youi:func name="func_grid_commodity_extend">
 		var selectRecord = $elem('grid_purchasingmanagerCommodity',pageId).grid('getSelectedRecord');
-		var commodityId = selectRecord['commodityId'];
-		$elem('subpage_sb_commodity_extend',pageId).subpage('open',{commodityId:commodityId},null,{commodityId:commodityId});
+		var aa = selectRecord['purchasingmanagerGenre.genreId'];
+		alert(aa);
 	</youi:func>
 	<youi:func name="func_grid_veiwCommodity">
 		var selectRecord = $elem('grid_purchasingmanagerCommodity',pageId).grid('getSelectedRecord');
