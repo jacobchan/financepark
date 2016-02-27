@@ -43,22 +43,12 @@
         <menu id="330204" text="物业缴费登记管理" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerCharge/propertyservicemanagerCharge.html"></menu>
 	</menu>
 	<menu id="140000" text="订单管理">
-		<menu id="140007" text="订单类型管理" href="page/commonCenter.OrderManager.ordermanagerOrdertype/ordermanagerOrdertype.html"></menu>
-		<menu id="140001" text="采购订单管理" href="page/commonCenter.OrderManager.ordermanagerUserorder/purOrdermanager.html"></menu>
-		<menu id="140002" text="餐饮订单管理" href="page/commonCenter.OrderManager.ordermanagerUserorder/foodOrdermanager.html"></menu>
-		<menu id="140003" text="企业服务订单管理" href="page/commonCenter.OrderManager.ordermanagerUserorder/compSerOrderMg.html"></menu>
-		<menu id="140004" text="IT服务订单管理" href="page/commonCenter.OrderManager.ordermanagerUserorder/ITSerOrderMg.html"></menu>
-		<menu id="140005" text="政策申请记录管理" href="page/manageCenter.PolicyManager.policyApply/policyApply.html"></menu>
-		<menu id="140006" text="活动申请流程处理" href="page/manageCenter.ActivityManager.activityApply/activityApplyManager.html"></menu>
+		<menu id="140001" text="订单类型管理" href="page/commonCenter.OrderManager.ordermanagerUserorder/orderType.html"></menu>
 	</menu>
 	<menu id="120000" text="商品管理">
 		<menu id="120001" text="商户信息管理" href="page/commonCenter.purchasingManager.purchasingmanagerMerchant/purchasingmanagerMerchant.html"></menu>
-		<!-- <menu id="020002" text="商户地址管理" href="page/commonCenter.purchasingManager.purchasingmanagerMerchantAddress/purchasingmanagerMerchantAddress.html"></menu> -->
-		<menu id="120003" text="商品类目管理" href="page/commonCenter.purchasingManager.purchasingmanagerCategory/purchasingmanagerCategory.html"></menu>
-		<menu id="120004" text="商品类别管理" href="page/commonCenter.purchasingManager.purchasingmanagerGenre/purchasingmanagerGenre.html"></menu>
-		<menu id="120005" text="商品信息管理" href="page/commonCenter.purchasingManager.purchasingmanagerCommodity/purchasingmanagerCommodity.html"></menu>
-		<menu id="120006" text="商品扩展信息管理" href="page/commonCenter.purchasingManager.purchasingmanagerCommodityExtend/purchasingmanagerCommodityExtend.html"></menu>
-		<!-- <menu id="020006" text="商品扩展信息值管理" href="page/commonCenter.purchasingManager.purchasingmanagerCommodityExtendValue/purchasingmanagerCommodityExtendValue.html"></menu> -->
+		<menu id="120002" text="商品信息管理" href="page/commonCenter.purchasingManager.purchasingmanagerCommodity/purchasingmanagerCommodity.html"></menu>
+		<menu id="120003" text="商品类别管理" href="page/commonCenter.purchasingManager.purchasingmanagerGenre/purchasingmanagerGenre.html"></menu>
 	</menu>
 	<menu id="025000" text="招商预约管理">
 			<menu id="025100" text="预约分配管理" href="page/manageCenter.ReserveManager.reservationRecord/reservationRecord.html"></menu>
