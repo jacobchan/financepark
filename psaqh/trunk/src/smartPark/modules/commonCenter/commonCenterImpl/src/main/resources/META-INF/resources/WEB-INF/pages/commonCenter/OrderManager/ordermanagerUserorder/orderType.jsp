@@ -19,7 +19,7 @@
 		<youi:fieldLayout prefix="record" labelWidths="120,120">
 			<youi:fieldHidden styleClass="field-parent" property="purchasingmanagerGenre.genreId" />
 			<youi:fieldHidden  property="genreId" caption="订单类型ID" />
-			<youi:fieldText width="120" styleClass="autoAlign" property="genreName" caption="订单类型名称"/>
+			<youi:fieldText width="120" styleClass="autoAlign" property="genreName" caption="订单类型名称" notNull="true"/>
 			<youi:fieldLabel width="120" styleClass="autoAlign" property="genreCode" caption="订单类型编码"/>
 			<youi:fieldLabel  styleClass="autoAlign"  property="purchasingmanagerGenre.genreName" caption="上级订单类型" />
 		</youi:fieldLayout>

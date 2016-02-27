@@ -14,8 +14,8 @@
 				editSrc="esb/web/purchasingmanagerMerchantManager/getPurchasingmanagerMerchant.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/purchasingmanagerMerchantManager/removePurchasingmanagerMerchant.json">
 		<youi:fieldLayout labelWidths="120,120">
-			<youi:fieldSelect property="parkBusinessTupe" convert="businessType"  caption="园区商业类型"/>
-			<youi:fieldSelect property="merchantType" convert="merchant_type"   caption="商户类型"/>
+			<youi:fieldSelect property="merchantType.genreId" src="esb/web/purchasingmanagerGenreManager/getMerchantGenres.json" 
+				show="genreName" code="genreId" caption="商户类型"/>
 			<youi:fieldText property="merchantName"  caption="商户名称"/>
 			<youi:fieldText property="merchantEnterpriseName"  caption="企业名称"/>
 		</youi:fieldLayout>
@@ -24,12 +24,11 @@
 		
 		<youi:gridCol property="merchantName"  caption="商户名称" align="center" width="15%"/>
 		<youi:gridCol property="merchantEnterpriseName"  caption="企业名称" align="center" width="15%"/>
-		<youi:gridCol property="merchantType"  caption="商户类型" align="center" convert="merchant_type" width="15%"/>
-		<youi:gridCol property="parkBusinessTupe"  caption="园区商业类型" align="center" convert="businessType" width="15%"/>
+		<youi:gridCol property="merchantType.genreName"  caption="商户类型" align="center" width="15%"/>
 		<youi:gridCol property="merchantLinkman"  caption="联系人" align="center" width="10%"/>
 		<youi:gridCol property="merchantLinkmanPhone"  caption="联系人电话" align="center" width="10%"/>
-		<youi:gridCol property="merchantSendAddress"  caption="发货地址" align="center" width="10%"/>
-		<youi:gridCol property="merchantReturnAddress"  caption="退货地址" align="center" width="10%"/>
+		<youi:gridCol property="merchantSendAddress"  caption="发货地址" align="center" width="17%"/>
+		<youi:gridCol property="merchantReturnAddress"  caption="退货地址" align="center" width="18%"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -42,8 +41,8 @@
 		<youi:fieldLayout prefix="record" labelWidths="110,110" >
 			<youi:fieldText property="merchantName"  caption="商户名称" notNull="true"/>
 			<youi:fieldText property="merchantEnterpriseName"  caption="企业名称" notNull="true"/>
-			<youi:fieldSelect property="merchantType"  caption="商户类型" convert="merchant_type" notNull="true"/>
-			<youi:fieldSelect property="parkBusinessTupe"  caption="园区商业类型" convert="businessType" notNull="true"/>
+			<youi:fieldSelect property="merchantType.genreId" src="esb/web/purchasingmanagerGenreManager/getMerchantGenres.json" 
+				show="genreName" code="genreId" caption="商户类型" notNull="true"/>
 			<youi:fieldText property="merchantLinkman"  caption="联系人" notNull="true"/>
 			<youi:fieldText property="merchantLinkmanPhone"  caption="联系人电话" notNull="true"/>
 			<youi:fieldText property="merchantSendAddress"  caption="发货地址" notNull="true"/>
