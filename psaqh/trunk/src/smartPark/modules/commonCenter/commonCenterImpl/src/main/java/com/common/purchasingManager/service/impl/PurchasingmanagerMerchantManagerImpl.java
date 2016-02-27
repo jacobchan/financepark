@@ -20,7 +20,9 @@ import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.common.purchasingManager.entity.PurchasingmanagerMerchant;
+import com.common.purchasingManager.dao.PurchasingmanagerGenreDao;
 import com.common.purchasingManager.dao.PurchasingmanagerMerchantDao;
 import com.common.purchasingManager.service.PurchasingmanagerMerchantManager;
 
@@ -29,6 +31,8 @@ import com.common.purchasingManager.service.PurchasingmanagerMerchantManager;
 public class PurchasingmanagerMerchantManagerImpl extends BaseManagerImpl implements PurchasingmanagerMerchantManager{
 	@Autowired
 	private PurchasingmanagerMerchantDao purchasingmanagerMerchantDao;
+	@Autowired
+	private PurchasingmanagerGenreDao purchasingmanagerGenreDao;
 	
     /**
      * 查询列表
@@ -73,7 +77,6 @@ public class PurchasingmanagerMerchantManagerImpl extends BaseManagerImpl implem
     		pm.setMerchantName(o.getMerchantName());
     		pm.setMerchantEnterpriseName(o.getMerchantEnterpriseName());
     		pm.setMerchantType(o.getMerchantType());
-    		pm.setParkBusinessTupe(o.getParkBusinessTupe());
     		pm.setMerchantLinkman(o.getMerchantLinkman());
     		pm.setMerchantLinkmanPhone(o.getMerchantLinkmanPhone());
     		pm.setMerchantSendAddress(o.getMerchantSendAddress());
@@ -113,5 +116,17 @@ public class PurchasingmanagerMerchantManagerImpl extends BaseManagerImpl implem
     public boolean exsitPurchasingmanagerMerchant(String propertyName,Object value) throws BusException{
 		return purchasingmanagerMerchantDao.exists(propertyName,value);
 	}
-
+    /**
+     * 根据商品类别获取相关商户列表
+     */
+    @Override
+    @EsbServiceMapping
+	public List<PurchasingmanagerMerchant> getMerchantsByGenre(@ServiceParam(name="purchasingmanagerGenre.genreId") String genreId)  throws BusException{
+    	PurchasingmanagerGenre pg = purchasingmanagerGenreDao.get(genreId);
+    	while(pg.getPurchasingmanagerGenre() != null){
+    		pg = pg.getPurchasingmanagerGenre();
+    	}
+		List<PurchasingmanagerMerchant> list = purchasingmanagerMerchantDao.getList("merchantType.genreId", pg.getGenreId());
+		return list;
+	}
 }

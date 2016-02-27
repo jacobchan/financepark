@@ -138,5 +138,22 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
 		list = purchasingmanagerGenreDao.getOrderTypesList();
 		return list;
 	}
-
+	
+	/**
+	 * 获取商户类别列表
+	 * @return
+	 * @throws BusException
+	 */
+	@Override
+	@EsbServiceMapping
+	public List<PurchasingmanagerGenre> getMerchantGenres() throws BusException {
+		List<PurchasingmanagerGenre> list = new ArrayList<PurchasingmanagerGenre>();
+		List<PurchasingmanagerGenre> pgList = getPurchasingmanagerGenres();
+		for(PurchasingmanagerGenre pg:pgList){
+			if(pg.getPurchasingmanagerGenre() == null){
+				list.add(pg);
+			}
+		}
+		return list;
+	}
 }
