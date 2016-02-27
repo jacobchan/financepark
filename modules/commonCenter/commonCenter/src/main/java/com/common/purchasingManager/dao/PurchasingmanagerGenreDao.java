@@ -9,7 +9,15 @@ import com.gsoft.framework.core.dao.Dao;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 
 public interface PurchasingmanagerGenreDao extends Dao<PurchasingmanagerGenre, String>  {
-	//得到类别根列表
-	public List<PurchasingmanagerGenre> getRootList();
+	/**
+	 * 获取所有的采购餐饮类别列表
+	 * @return
+	 */
+	public List<PurchasingmanagerGenre> getPurFoodGenresList();
+	/**
+	 * 获取所有的订单类型列表
+	 * @return
+	 */
+	public List<PurchasingmanagerGenre> getOrderTypesList();
 	
 }
