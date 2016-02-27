@@ -13,7 +13,7 @@
 			<youi:fieldSelect property="policyApplyStatus"  caption="申请状态" convert="policyApplyStatus"/>
 			<youi:fieldText property="policyApplyContactTel"  caption="联系电话"/>
 		</youi:fieldLayout>
-		<youi:button name="refuse" caption="拒绝申请" icon="edit" active="1"/>
+		<%-- <youi:button name="refuse" caption="拒绝申请" icon="edit" active="1"/> --%>
 		<youi:button name="deal" caption="处理任务" icon="edit" active="1"/>
 		
 		<youi:gridCol property="policyApplyContactPeople"  caption="联系人" width="100"/>
