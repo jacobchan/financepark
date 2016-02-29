@@ -84,11 +84,18 @@ public interface McMsgdatasManager extends BaseManager{
 	public String buildMsgContent(McMsgtempalate msgtempalate,Map<String,String> replaceMap) throws BusException;
 	
 	/**
-	 * 发送消息
+	 * 发送消息,根据模板角色发送
 	 * @param mcMsgdatas
 	 * @throws BusException
 	 */
 	public void sendMessage(McMsgdatas mcMsgdatas) throws BusException;
+	
+	/**
+	 * 发送消息,指定用户发送,生成消息类容时保留#user
+	 * @param mcMsgdatas
+	 * @throws BusException
+	 */
+	public void sendMessageSingle(McMsgdatas mcMsgdatas,String userId) throws BusException;
 	
 	/**构建消息内容对象
 	 * @param uniqueCode 消息模板唯一码
