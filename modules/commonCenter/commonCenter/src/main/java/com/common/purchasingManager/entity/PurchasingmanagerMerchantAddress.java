@@ -22,9 +22,16 @@ public class PurchasingmanagerMerchantAddress implements Domain{
 	private static final long serialVersionUID = 2980811411567964261L;
 	
 
+	@Column(name = "UPDATE_USER_")
+	@Length(max=36)
+	private String updateUser;//修改人
+
 	@Column(name = "CREATE_USER_")
 	@Length(max=36)
 	private String createUser;//创建人
+
+	@Column(name = "CREATE_TIME_")
+	private String createTime;//创建时间
 
 	@Column(name = "MERCHANT_ADDRESS_PHONE_")
 	@Length(max=16)
@@ -49,24 +56,31 @@ public class PurchasingmanagerMerchantAddress implements Domain{
 	@Column(name = "MERCHANT_ADDRESS_ID_")
 	@Length(max=36)
 	private String merchantAddressId;//地址ID
-
-	@Column(name = "CREATE_TIME_")
-	private String createTime;//创建时间
-
-	@Column(name = "UPDATE_USER_")
-	@Length(max=36)
-	private String updateUser;//修改人
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="MERCHANT_ID_")
 	private com.common.purchasingManager.entity.PurchasingmanagerMerchant purchasingmanagerMerchant;//商户ID
 	
+	public String getUpdateUser(){
+		return this.updateUser;
+	}
+	
+	public void setUpdateUser(String updateUser){
+		this.updateUser = updateUser;
+	}
 	public String getCreateUser(){
 		return this.createUser;
 	}
 	
 	public void setCreateUser(String createUser){
 		this.createUser = createUser;
+	}
+	public String getCreateTime(){
+		return this.createTime;
+	}
+	
+	public void setCreateTime(String createTime){
+		this.createTime = createTime;
 	}
 	public String getMerchantAddressPhone(){
 		return this.merchantAddressPhone;
@@ -110,20 +124,6 @@ public class PurchasingmanagerMerchantAddress implements Domain{
 	public void setMerchantAddressId(String merchantAddressId){
 		this.merchantAddressId = merchantAddressId;
 	}
-	public String getCreateTime(){
-		return this.createTime;
-	}
-	
-	public void setCreateTime(String createTime){
-		this.createTime = createTime;
-	}
-	public String getUpdateUser(){
-		return this.updateUser;
-	}
-	
-	public void setUpdateUser(String updateUser){
-		this.updateUser = updateUser;
-	}
 	
 	public void setPurchasingmanagerMerchant(com.common.purchasingManager.entity.PurchasingmanagerMerchant purchasingmanagerMerchant){
 		this.purchasingmanagerMerchant = purchasingmanagerMerchant;
@@ -138,15 +138,15 @@ public class PurchasingmanagerMerchantAddress implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
 		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
 		result = prime * result + ((merchantAddressPhone == null) ? 0 : merchantAddressPhone.hashCode());
 		result = prime * result + ((merchantAddressLinkman == null) ? 0 : merchantAddressLinkman.hashCode());
 		result = prime * result + ((merchantAddressAddress == null) ? 0 : merchantAddressAddress.hashCode());
 		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
 		result = prime * result + ((merchantAddressIsnotDefault == null) ? 0 : merchantAddressIsnotDefault.hashCode());
 		result = prime * result + ((merchantAddressId == null) ? 0 : merchantAddressId.hashCode());
-		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
-		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
 		return result;
 	}
 	
@@ -159,10 +159,20 @@ public class PurchasingmanagerMerchantAddress implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		final PurchasingmanagerMerchantAddress other = (PurchasingmanagerMerchantAddress) obj;
+		if (updateUser == null) {
+			if (other.updateUser != null)
+				return false;
+		} else if (!updateUser.equals(other.updateUser))
+			return false;
 		if (createUser == null) {
 			if (other.createUser != null)
 				return false;
 		} else if (!createUser.equals(other.createUser))
+			return false;
+		if (createTime == null) {
+			if (other.createTime != null)
+				return false;
+		} else if (!createTime.equals(other.createTime))
 			return false;
 		if (merchantAddressPhone == null) {
 			if (other.merchantAddressPhone != null)
@@ -193,16 +203,6 @@ public class PurchasingmanagerMerchantAddress implements Domain{
 			if (other.merchantAddressId != null)
 				return false;
 		} else if (!merchantAddressId.equals(other.merchantAddressId))
-			return false;
-		if (createTime == null) {
-			if (other.createTime != null)
-				return false;
-		} else if (!createTime.equals(other.createTime))
-			return false;
-		if (updateUser == null) {
-			if (other.updateUser != null)
-				return false;
-		} else if (!updateUser.equals(other.updateUser))
 			return false;
 		return true;
 	}

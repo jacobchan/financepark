@@ -22,6 +22,10 @@ public class OrdermanagerOrdermerchanNexus implements Domain{
 	private static final long serialVersionUID = 5883518807930679324L;
 	
 
+	@Column(name = "ORDERMERCHAN_NEXUS_EXPRESS_ORDER_")
+	@Length(max=32)
+	private String ordermerchanNexusExpressOrder;//物流单号
+
 	@Column(name = "MERCHANT_ID_")
 	@Length(max=36)
 	private String merchantId;//商户ID
@@ -30,29 +34,32 @@ public class OrdermanagerOrdermerchanNexus implements Domain{
 	@Length(max=36)
 	private String createUser;//创建人
 
-	@Column(name = "UPDATE_USER_")
-	@Length(max=36)
-	private String updateUser;//修改人
+	@Column(name = "CREATE_TIME_")
+	private String createTime;//创建时间
 
 	@Column(name = "UPDATE_TIME_")
 	private String updateTime;//修改时间
+
+	@Column(name = "UPDATE_USER_")
+	@Length(max=36)
+	private String updateUser;//修改人
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "ORDERMERCHAN_NEXUS_ID_")
 	@Length(max=36)
 	private String ordermerchanNexusId;//订单商户序列
-
-	@Column(name = "ORDERMERCHAN_NEXUS_EXPRESS_ORDER_")
-	@Length(max=32)
-	private String ordermerchanNexusExpressOrder;//物流单号
-
-	@Column(name = "CREATE_TIME_")
-	private String createTime;//创建时间
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="USERORDER_ID_")
 	private com.common.OrderManager.entity.OrdermanagerUserorder ordermanagerUserorder;//用户订单序列
 	
+	public String getOrdermerchanNexusExpressOrder(){
+		return this.ordermerchanNexusExpressOrder;
+	}
+	
+	public void setOrdermerchanNexusExpressOrder(String ordermerchanNexusExpressOrder){
+		this.ordermerchanNexusExpressOrder = ordermerchanNexusExpressOrder;
+	}
 	public String getMerchantId(){
 		return this.merchantId;
 	}
@@ -67,12 +74,12 @@ public class OrdermanagerOrdermerchanNexus implements Domain{
 	public void setCreateUser(String createUser){
 		this.createUser = createUser;
 	}
-	public String getUpdateUser(){
-		return this.updateUser;
+	public String getCreateTime(){
+		return this.createTime;
 	}
 	
-	public void setUpdateUser(String updateUser){
-		this.updateUser = updateUser;
+	public void setCreateTime(String createTime){
+		this.createTime = createTime;
 	}
 	public String getUpdateTime(){
 		return this.updateTime;
@@ -81,26 +88,19 @@ public class OrdermanagerOrdermerchanNexus implements Domain{
 	public void setUpdateTime(String updateTime){
 		this.updateTime = updateTime;
 	}
+	public String getUpdateUser(){
+		return this.updateUser;
+	}
+	
+	public void setUpdateUser(String updateUser){
+		this.updateUser = updateUser;
+	}
 	public String getOrdermerchanNexusId(){
 		return this.ordermerchanNexusId;
 	}
 	
 	public void setOrdermerchanNexusId(String ordermerchanNexusId){
 		this.ordermerchanNexusId = ordermerchanNexusId;
-	}
-	public String getOrdermerchanNexusExpressOrder(){
-		return this.ordermerchanNexusExpressOrder;
-	}
-	
-	public void setOrdermerchanNexusExpressOrder(String ordermerchanNexusExpressOrder){
-		this.ordermerchanNexusExpressOrder = ordermerchanNexusExpressOrder;
-	}
-	public String getCreateTime(){
-		return this.createTime;
-	}
-	
-	public void setCreateTime(String createTime){
-		this.createTime = createTime;
 	}
 	
 	public void setOrdermanagerUserorder(com.common.OrderManager.entity.OrdermanagerUserorder ordermanagerUserorder){
@@ -116,13 +116,13 @@ public class OrdermanagerOrdermerchanNexus implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((ordermerchanNexusExpressOrder == null) ? 0 : ordermerchanNexusExpressOrder.hashCode());
 		result = prime * result + ((merchantId == null) ? 0 : merchantId.hashCode());
 		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
-		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
-		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
-		result = prime * result + ((ordermerchanNexusId == null) ? 0 : ordermerchanNexusId.hashCode());
-		result = prime * result + ((ordermerchanNexusExpressOrder == null) ? 0 : ordermerchanNexusExpressOrder.hashCode());
 		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
+		result = prime * result + ((ordermerchanNexusId == null) ? 0 : ordermerchanNexusId.hashCode());
 		return result;
 	}
 	
@@ -135,6 +135,11 @@ public class OrdermanagerOrdermerchanNexus implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		final OrdermanagerOrdermerchanNexus other = (OrdermanagerOrdermerchanNexus) obj;
+		if (ordermerchanNexusExpressOrder == null) {
+			if (other.ordermerchanNexusExpressOrder != null)
+				return false;
+		} else if (!ordermerchanNexusExpressOrder.equals(other.ordermerchanNexusExpressOrder))
+			return false;
 		if (merchantId == null) {
 			if (other.merchantId != null)
 				return false;
@@ -145,30 +150,25 @@ public class OrdermanagerOrdermerchanNexus implements Domain{
 				return false;
 		} else if (!createUser.equals(other.createUser))
 			return false;
-		if (updateUser == null) {
-			if (other.updateUser != null)
+		if (createTime == null) {
+			if (other.createTime != null)
 				return false;
-		} else if (!updateUser.equals(other.updateUser))
+		} else if (!createTime.equals(other.createTime))
 			return false;
 		if (updateTime == null) {
 			if (other.updateTime != null)
 				return false;
 		} else if (!updateTime.equals(other.updateTime))
 			return false;
+		if (updateUser == null) {
+			if (other.updateUser != null)
+				return false;
+		} else if (!updateUser.equals(other.updateUser))
+			return false;
 		if (ordermerchanNexusId == null) {
 			if (other.ordermerchanNexusId != null)
 				return false;
 		} else if (!ordermerchanNexusId.equals(other.ordermerchanNexusId))
-			return false;
-		if (ordermerchanNexusExpressOrder == null) {
-			if (other.ordermerchanNexusExpressOrder != null)
-				return false;
-		} else if (!ordermerchanNexusExpressOrder.equals(other.ordermerchanNexusExpressOrder))
-			return false;
-		if (createTime == null) {
-			if (other.createTime != null)
-				return false;
-		} else if (!createTime.equals(other.createTime))
 			return false;
 		return true;
 	}
