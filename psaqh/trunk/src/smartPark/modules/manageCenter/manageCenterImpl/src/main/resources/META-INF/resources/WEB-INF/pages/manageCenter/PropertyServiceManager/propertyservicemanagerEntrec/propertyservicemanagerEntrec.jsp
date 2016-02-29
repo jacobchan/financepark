@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
-	<youi:grid id="grid_propertyservicemanagerEntrec" idKeys="entrecId,propertyservicemanagerEntering.enteringId" caption="入驻服务办理预约记录表列表"  panel="false"
+		<youi:grid id="grid_propertyservicemanagerEntrec" idKeys="entrecId,propertyservicemanagerEntering.enteringId" caption="入驻服务办理预约记录表列表"  panel="false"
 				src="esb/web/propertyservicemanagerEntrecManager/getPagerPropertyservicemanagerEntrecs.json" dataFormId="form_propertyservicemanagerEntrec"
 				editSrc="esb/web/propertyservicemanagerEntrecManager/getPropertyservicemanagerEntrec.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/propertyservicemanagerEntrecManager/removePropertyservicemanagerEntrec.json">
@@ -11,6 +11,7 @@
 			<youi:fieldSelect property="enterrecStatus"  caption="预约记录状态" convert="enterrecStatus"/>
 			<youi:fieldCalendar property="enteringDate"  caption="预约时间日期" textFormat="yyyy-MM-dd" format="yyyy-MM-dd"/>
 		</youi:fieldLayout>
+		<youi:button name="cancelReservation" caption="取消预约" icon="edit" active="1"></youi:button> 
 		<youi:button name="changeStatues" caption="预约授理" icon="edit" active="1"></youi:button> 
 		<youi:gridCol property="memberId.memberName"  caption="入驻申请人" width="15%" align="center"/>
 		<%-- <youi:gridCol property="enteringTelephone"  caption="入驻联系电话" width="100"/> --%>
@@ -79,4 +80,27 @@
         }
     </youi:func>
 	<!--**********************************页面函数End:将已预约的记录进行授理，变更为已授理状态，并刷新页面********************************-->
+	
+	
+	 <!--**********************************页面函数Start:取消预约并刷新父页面********************************-->
+	<youi:func name = "func_grid_cancelReservation">
+        var gridElement = $elem('grid_propertyservicemanagerEntrec',pageId),
+		selectedRecord = gridElement.grid('getSelectedRecord');
+  		var entrecId=selectedRecord.entrecId;
+        var enterrecStatus = selectedRecord.enterrecStatus;
+        if(enterrecStatus == '01'){//01:待受理
+             $.youi.ajaxUtil.ajax({
+				url:'/esb/web/propertyservicemanagerEntrecManager/cancelReservation.json',
+				data:{entrecId:entrecId},
+				success:function(result){
+					alert("预约成功取消");
+                    $elem('grid_propertyservicemanagerEntrec',pageId).grid('pReload');
+                  } 
+            })
+        }else{
+            alert("该状态不能进行取消操作");
+
+        }
+     </youi:func>
+    <!--**********************************页面函数End:取消预约并刷新父页面********************************-->
 </youi:page>

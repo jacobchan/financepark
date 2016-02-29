@@ -215,9 +215,9 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
     	ReservationRecord p=new ReservationRecord();
 		String recordId=o.getRecordId();
 		if(StringUtils.isNotEmpty(recordId)){
-			p=reservationRecordDao.get(recordId);//根据主键查询入驻服务办理预约数据
+			p=reservationRecordDao.get(recordId);//根据主键查询预约记录基础数据
 		}
-		p.setRecordStatus("04");;//已取消
+		p.setRecordStatus("04");//已取消
 		reservationRecordDao.save(p);
     }
 

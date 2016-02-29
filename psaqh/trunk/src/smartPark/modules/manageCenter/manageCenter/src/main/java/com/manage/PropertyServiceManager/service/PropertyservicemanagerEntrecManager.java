@@ -12,8 +12,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
+import com.manage.ReserveManager.entity.ReservationRecord;
 
 public interface PropertyservicemanagerEntrecManager extends BaseManager{
 
@@ -66,5 +66,11 @@ public interface PropertyservicemanagerEntrecManager extends BaseManager{
      * 属性值是否已经使用
      * @param ids
      */
-	public boolean exsitPropertyservicemanagerEntrec(String propertyName,Object value) throws BusException;
+    public boolean exsitPropertyservicemanagerEntrec(String propertyName,Object value) throws BusException;
+    /**
+     * 取消预约申请，将待受理状态变更为已取消
+     * @param propertyservicemanagerEntrec
+     * @throws BusException
+     */
+    public void cancelReservation(PropertyservicemanagerEntrec o) throws BusException;
 }
