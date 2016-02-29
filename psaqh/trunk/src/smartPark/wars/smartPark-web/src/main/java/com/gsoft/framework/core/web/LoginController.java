@@ -129,8 +129,8 @@ public class LoginController {
 			//
 			if(account.roleIds()!=null&&account.roleIds().contains("ROLE_OPER")){
 				//用户登录
-				return new ModelAndView("redirect:member/portal/index.html");
 //				return new ModelAndView("redirect:member/portal/index.html");
+				return new ModelAndView("redirect:memberCenter/memberInformation.html");
 //				return new ModelAndView("redirect:cms/account/index/"+account.getLoginName()+".html");
 			}else if(account.roleIds()!=null&&account.roleIds().contains("ROLE_SUBSCRIPTION")){
 				//捧场用户登录
