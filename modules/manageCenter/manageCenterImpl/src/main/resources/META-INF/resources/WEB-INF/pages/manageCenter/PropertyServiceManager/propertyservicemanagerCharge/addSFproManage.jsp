@@ -50,6 +50,7 @@
 			data:params,
 			success:function(result){
 				var record = result.record;
+				alert("添加成功!");
 			}
 		});
 	</youi:func>
