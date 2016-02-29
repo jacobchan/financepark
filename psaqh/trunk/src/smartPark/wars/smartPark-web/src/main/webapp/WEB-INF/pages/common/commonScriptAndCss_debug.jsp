@@ -65,6 +65,8 @@
 <youi:script src="/scripts/3.0/youi/field/field.form.js"/>
 <youi:script src="/scripts/3.0/youi/field/field.spinner.js"/>
 <youi:script src="/scripts/3.0/youi/field/field.list.js"/>
+<youi:script src="/scripts/js/flexpaper.js"/>
+<youi:script src="/scripts/js/FlexPaperViewer.swf"/>
 
 <youi:style href="/styles/3.0/bootstrap.css"/>
 
