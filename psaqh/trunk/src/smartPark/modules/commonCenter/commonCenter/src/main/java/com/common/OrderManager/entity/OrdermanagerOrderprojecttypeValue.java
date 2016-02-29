@@ -22,32 +22,23 @@ public class OrdermanagerOrderprojecttypeValue implements Domain{
 	private static final long serialVersionUID = 8308866799151068156L;
 	
 
-	@Column(name = "ORDERPROJECTTYPE_VALUE_DISPLAY_NAME_")
-	@Length(max=128)
-	private String orderprojecttypeValueDisplayName;//显示名称
-
 	@Column(name = "UPDATE_TIME_")
 	private String updateTime;//修改时间
 
-	@Column(name = "CREATE_TIME_")
-	private String createTime;//创建时间
-
-	@Column(name = "CREATE_USER_")
-	@Length(max=36)
-	private String createUser;//创建人
+	@Column(name = "ORDERPROJECTTYPE_VALUE_DISPLAY_NAME_")
+	@Length(max=128)
+	private String orderprojecttypeValueDisplayName;//显示名称
 
 	@Column(name = "GENRE_PROPERTY_ID_")
 	@Length(max=36)
 	private String genrePropertyId;//商品类别属性序列
 
+	@Column(name = "CREATE_TIME_")
+	private String createTime;//创建时间
+
 	@Column(name = "UPDATE_USER_")
 	@Length(max=36)
 	private String updateUser;//修改人
-	@Id @GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
-	@Column(name = "ORDERPROJECTTYPE_VALUE_ID_")
-	@Length(max=36)
-	private String orderprojecttypeValueId;//订单项目序列
 
 	@Column(name = "ORDERPROJECTTYPE_VALUE_FIELD_VALUE_")
 	private String orderprojecttypeValueFieldValue;//字段值
@@ -55,18 +46,20 @@ public class OrdermanagerOrderprojecttypeValue implements Domain{
 	@Column(name = "ORDERPROJECTTYPE_VALUE_FIELD_NAME_")
 	@Length(max=128)
 	private String orderprojecttypeValueFieldName;//字段名称
+	@Id @GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
+	@Column(name = "ORDERPROJECTTYPE_VALUE_ID_")
+	@Length(max=36)
+	private String orderprojecttypeValueId;//订单项目序列
+
+	@Column(name = "CREATE_USER_")
+	@Length(max=36)
+	private String createUser;//创建人
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="USERORDER_ID_")
 	private com.common.OrderManager.entity.OrdermanagerUserorder ordermanagerUserorder;//用户订单序列
 	
-	public String getOrderprojecttypeValueDisplayName(){
-		return this.orderprojecttypeValueDisplayName;
-	}
-	
-	public void setOrderprojecttypeValueDisplayName(String orderprojecttypeValueDisplayName){
-		this.orderprojecttypeValueDisplayName = orderprojecttypeValueDisplayName;
-	}
 	public String getUpdateTime(){
 		return this.updateTime;
 	}
@@ -74,19 +67,12 @@ public class OrdermanagerOrderprojecttypeValue implements Domain{
 	public void setUpdateTime(String updateTime){
 		this.updateTime = updateTime;
 	}
-	public String getCreateTime(){
-		return this.createTime;
+	public String getOrderprojecttypeValueDisplayName(){
+		return this.orderprojecttypeValueDisplayName;
 	}
 	
-	public void setCreateTime(String createTime){
-		this.createTime = createTime;
-	}
-	public String getCreateUser(){
-		return this.createUser;
-	}
-	
-	public void setCreateUser(String createUser){
-		this.createUser = createUser;
+	public void setOrderprojecttypeValueDisplayName(String orderprojecttypeValueDisplayName){
+		this.orderprojecttypeValueDisplayName = orderprojecttypeValueDisplayName;
 	}
 	public String getGenrePropertyId(){
 		return this.genrePropertyId;
@@ -95,19 +81,19 @@ public class OrdermanagerOrderprojecttypeValue implements Domain{
 	public void setGenrePropertyId(String genrePropertyId){
 		this.genrePropertyId = genrePropertyId;
 	}
+	public String getCreateTime(){
+		return this.createTime;
+	}
+	
+	public void setCreateTime(String createTime){
+		this.createTime = createTime;
+	}
 	public String getUpdateUser(){
 		return this.updateUser;
 	}
 	
 	public void setUpdateUser(String updateUser){
 		this.updateUser = updateUser;
-	}
-	public String getOrderprojecttypeValueId(){
-		return this.orderprojecttypeValueId;
-	}
-	
-	public void setOrderprojecttypeValueId(String orderprojecttypeValueId){
-		this.orderprojecttypeValueId = orderprojecttypeValueId;
 	}
 	public String getOrderprojecttypeValueFieldValue(){
 		return this.orderprojecttypeValueFieldValue;
@@ -123,6 +109,20 @@ public class OrdermanagerOrderprojecttypeValue implements Domain{
 	public void setOrderprojecttypeValueFieldName(String orderprojecttypeValueFieldName){
 		this.orderprojecttypeValueFieldName = orderprojecttypeValueFieldName;
 	}
+	public String getOrderprojecttypeValueId(){
+		return this.orderprojecttypeValueId;
+	}
+	
+	public void setOrderprojecttypeValueId(String orderprojecttypeValueId){
+		this.orderprojecttypeValueId = orderprojecttypeValueId;
+	}
+	public String getCreateUser(){
+		return this.createUser;
+	}
+	
+	public void setCreateUser(String createUser){
+		this.createUser = createUser;
+	}
 	
 	public void setOrdermanagerUserorder(com.common.OrderManager.entity.OrdermanagerUserorder ordermanagerUserorder){
 		this.ordermanagerUserorder = ordermanagerUserorder;
@@ -137,15 +137,15 @@ public class OrdermanagerOrderprojecttypeValue implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((orderprojecttypeValueDisplayName == null) ? 0 : orderprojecttypeValueDisplayName.hashCode());
 		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
-		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
-		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result + ((orderprojecttypeValueDisplayName == null) ? 0 : orderprojecttypeValueDisplayName.hashCode());
 		result = prime * result + ((genrePropertyId == null) ? 0 : genrePropertyId.hashCode());
+		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
 		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
-		result = prime * result + ((orderprojecttypeValueId == null) ? 0 : orderprojecttypeValueId.hashCode());
 		result = prime * result + ((orderprojecttypeValueFieldValue == null) ? 0 : orderprojecttypeValueFieldValue.hashCode());
 		result = prime * result + ((orderprojecttypeValueFieldName == null) ? 0 : orderprojecttypeValueFieldName.hashCode());
+		result = prime * result + ((orderprojecttypeValueId == null) ? 0 : orderprojecttypeValueId.hashCode());
+		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
 		return result;
 	}
 	
@@ -158,40 +158,30 @@ public class OrdermanagerOrderprojecttypeValue implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		final OrdermanagerOrderprojecttypeValue other = (OrdermanagerOrderprojecttypeValue) obj;
-		if (orderprojecttypeValueDisplayName == null) {
-			if (other.orderprojecttypeValueDisplayName != null)
-				return false;
-		} else if (!orderprojecttypeValueDisplayName.equals(other.orderprojecttypeValueDisplayName))
-			return false;
 		if (updateTime == null) {
 			if (other.updateTime != null)
 				return false;
 		} else if (!updateTime.equals(other.updateTime))
 			return false;
-		if (createTime == null) {
-			if (other.createTime != null)
+		if (orderprojecttypeValueDisplayName == null) {
+			if (other.orderprojecttypeValueDisplayName != null)
 				return false;
-		} else if (!createTime.equals(other.createTime))
-			return false;
-		if (createUser == null) {
-			if (other.createUser != null)
-				return false;
-		} else if (!createUser.equals(other.createUser))
+		} else if (!orderprojecttypeValueDisplayName.equals(other.orderprojecttypeValueDisplayName))
 			return false;
 		if (genrePropertyId == null) {
 			if (other.genrePropertyId != null)
 				return false;
 		} else if (!genrePropertyId.equals(other.genrePropertyId))
 			return false;
+		if (createTime == null) {
+			if (other.createTime != null)
+				return false;
+		} else if (!createTime.equals(other.createTime))
+			return false;
 		if (updateUser == null) {
 			if (other.updateUser != null)
 				return false;
 		} else if (!updateUser.equals(other.updateUser))
-			return false;
-		if (orderprojecttypeValueId == null) {
-			if (other.orderprojecttypeValueId != null)
-				return false;
-		} else if (!orderprojecttypeValueId.equals(other.orderprojecttypeValueId))
 			return false;
 		if (orderprojecttypeValueFieldValue == null) {
 			if (other.orderprojecttypeValueFieldValue != null)
@@ -202,6 +192,16 @@ public class OrdermanagerOrderprojecttypeValue implements Domain{
 			if (other.orderprojecttypeValueFieldName != null)
 				return false;
 		} else if (!orderprojecttypeValueFieldName.equals(other.orderprojecttypeValueFieldName))
+			return false;
+		if (orderprojecttypeValueId == null) {
+			if (other.orderprojecttypeValueId != null)
+				return false;
+		} else if (!orderprojecttypeValueId.equals(other.orderprojecttypeValueId))
+			return false;
+		if (createUser == null) {
+			if (other.createUser != null)
+				return false;
+		} else if (!createUser.equals(other.createUser))
 			return false;
 		return true;
 	}

@@ -4,8 +4,8 @@
 package com.common.purchasingManager.entity;
 
 import javax.persistence.*;
-
 import org.hibernate.validator.*;
+
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
@@ -22,24 +22,20 @@ public class PurchasingmanagerMerchant implements Domain{
 	private static final long serialVersionUID = -7613866920193893382L;
 	
 
-	@Column(name = "PARK_BUSINESS_TUPE_")
-	@Length(max=2)
-	private String parkBusinessTupe;//园区商业类型
+	@Column(name = "CREATE_TIME_")
+	private String createTime;//创建时间
 
 	@Column(name = "UPDATE_USER_")
 	@Length(max=36)
 	private String updateUser;//修改人
 
-	@Column(name = "MERCHANT_ENTERPRISE_NAME_")
-	@Length(max=128)
-	private String merchantEnterpriseName;//企业名称
+	@Column(name = "MERCHANT_RETURN_ADDRESS_")
+	@Length(max=256)
+	private String merchantReturnAddress;//退货地址
 
-	@Column(name = "MERCHANT_LINKMAN_PHONE_")
-	@Length(max=16)
-	private String merchantLinkmanPhone;//联系人电话
-
-	@Column(name = "UPDATE_TIME_")
-	private String updateTime;//修改时间
+	@Column(name = "PARK_BUSINESS_TUPE_")
+	@Length(max=2)
+	private String parkBusinessTupe;//园区商业类型
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "MERCHANT_ID_")
@@ -49,36 +45,40 @@ public class PurchasingmanagerMerchant implements Domain{
 	@Column(name = "CREATE_USER_")
 	@Length(max=36)
 	private String createUser;//创建人
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="MERCHANT_TYPE_")
-	private com.common.purchasingManager.entity.PurchasingmanagerGenre merchantType;//商户类型
 
-	@Column(name = "MERCHANT_NAME_")
-	@Length(max=128)
-	private String merchantName;//商户名称
+	@Column(name = "MERCHANT_LINKMAN_PHONE_")
+	@Length(max=16)
+	private String merchantLinkmanPhone;//联系人电话
 
 	@Column(name = "MERCHANT_LINKMAN_")
 	@Length(max=32)
 	private String merchantLinkman;//联系人
 
-	@Column(name = "CREATE_TIME_")
-	private String createTime;//创建时间
+	@Column(name = "MERCHANT_TYPE_")
+	@Length(max=36)
+	private String merchantType;//商户类型
+
+	@Column(name = "MERCHANT_NAME_")
+	@Length(max=128)
+	private String merchantName;//商户名称
+
+	@Column(name = "MERCHANT_ENTERPRISE_NAME_")
+	@Length(max=128)
+	private String merchantEnterpriseName;//企业名称
+
+	@Column(name = "UPDATE_TIME_")
+	private String updateTime;//修改时间
 
 	@Column(name = "MERCHANT_SEND_ADDRESS_")
 	@Length(max=256)
 	private String merchantSendAddress;//发货地址
-
-	@Column(name = "MERCHANT_RETURN_ADDRESS_")
-	@Length(max=256)
-	private String merchantReturnAddress;//退货地址
 	
-	public String getParkBusinessTupe(){
-		return this.parkBusinessTupe;
+	public String getCreateTime(){
+		return this.createTime;
 	}
 	
-	public void setParkBusinessTupe(String parkBusinessTupe){
-		this.parkBusinessTupe = parkBusinessTupe;
+	public void setCreateTime(String createTime){
+		this.createTime = createTime;
 	}
 	public String getUpdateUser(){
 		return this.updateUser;
@@ -87,26 +87,19 @@ public class PurchasingmanagerMerchant implements Domain{
 	public void setUpdateUser(String updateUser){
 		this.updateUser = updateUser;
 	}
-	public String getMerchantEnterpriseName(){
-		return this.merchantEnterpriseName;
+	public String getMerchantReturnAddress(){
+		return this.merchantReturnAddress;
 	}
 	
-	public void setMerchantEnterpriseName(String merchantEnterpriseName){
-		this.merchantEnterpriseName = merchantEnterpriseName;
+	public void setMerchantReturnAddress(String merchantReturnAddress){
+		this.merchantReturnAddress = merchantReturnAddress;
 	}
-	public String getMerchantLinkmanPhone(){
-		return this.merchantLinkmanPhone;
-	}
-	
-	public void setMerchantLinkmanPhone(String merchantLinkmanPhone){
-		this.merchantLinkmanPhone = merchantLinkmanPhone;
-	}
-	public String getUpdateTime(){
-		return this.updateTime;
+	public String getParkBusinessTupe(){
+		return this.parkBusinessTupe;
 	}
 	
-	public void setUpdateTime(String updateTime){
-		this.updateTime = updateTime;
+	public void setParkBusinessTupe(String parkBusinessTupe){
+		this.parkBusinessTupe = parkBusinessTupe;
 	}
 	public String getMerchantId(){
 		return this.merchantId;
@@ -122,21 +115,12 @@ public class PurchasingmanagerMerchant implements Domain{
 	public void setCreateUser(String createUser){
 		this.createUser = createUser;
 	}
-	public com.common.purchasingManager.entity.PurchasingmanagerGenre getMerchantType() {
-		return merchantType;
-	}
-
-	public void setMerchantType(
-			com.common.purchasingManager.entity.PurchasingmanagerGenre merchantType) {
-		this.merchantType = merchantType;
-	}
-
-	public String getMerchantName(){
-		return this.merchantName;
+	public String getMerchantLinkmanPhone(){
+		return this.merchantLinkmanPhone;
 	}
 	
-	public void setMerchantName(String merchantName){
-		this.merchantName = merchantName;
+	public void setMerchantLinkmanPhone(String merchantLinkmanPhone){
+		this.merchantLinkmanPhone = merchantLinkmanPhone;
 	}
 	public String getMerchantLinkman(){
 		return this.merchantLinkman;
@@ -145,12 +129,33 @@ public class PurchasingmanagerMerchant implements Domain{
 	public void setMerchantLinkman(String merchantLinkman){
 		this.merchantLinkman = merchantLinkman;
 	}
-	public String getCreateTime(){
-		return this.createTime;
+	public String getMerchantType(){
+		return this.merchantType;
 	}
 	
-	public void setCreateTime(String createTime){
-		this.createTime = createTime;
+	public void setMerchantType(String merchantType){
+		this.merchantType = merchantType;
+	}
+	public String getMerchantName(){
+		return this.merchantName;
+	}
+	
+	public void setMerchantName(String merchantName){
+		this.merchantName = merchantName;
+	}
+	public String getMerchantEnterpriseName(){
+		return this.merchantEnterpriseName;
+	}
+	
+	public void setMerchantEnterpriseName(String merchantEnterpriseName){
+		this.merchantEnterpriseName = merchantEnterpriseName;
+	}
+	public String getUpdateTime(){
+		return this.updateTime;
+	}
+	
+	public void setUpdateTime(String updateTime){
+		this.updateTime = updateTime;
 	}
 	public String getMerchantSendAddress(){
 		return this.merchantSendAddress;
@@ -159,13 +164,6 @@ public class PurchasingmanagerMerchant implements Domain{
 	public void setMerchantSendAddress(String merchantSendAddress){
 		this.merchantSendAddress = merchantSendAddress;
 	}
-	public String getMerchantReturnAddress(){
-		return this.merchantReturnAddress;
-	}
-	
-	public void setMerchantReturnAddress(String merchantReturnAddress){
-		this.merchantReturnAddress = merchantReturnAddress;
-	}
 	
 	
 	
@@ -173,19 +171,19 @@ public class PurchasingmanagerMerchant implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((parkBusinessTupe == null) ? 0 : parkBusinessTupe.hashCode());
+		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
 		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
-		result = prime * result + ((merchantEnterpriseName == null) ? 0 : merchantEnterpriseName.hashCode());
-		result = prime * result + ((merchantLinkmanPhone == null) ? 0 : merchantLinkmanPhone.hashCode());
-		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result + ((merchantReturnAddress == null) ? 0 : merchantReturnAddress.hashCode());
+		result = prime * result + ((parkBusinessTupe == null) ? 0 : parkBusinessTupe.hashCode());
 		result = prime * result + ((merchantId == null) ? 0 : merchantId.hashCode());
 		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result + ((merchantLinkmanPhone == null) ? 0 : merchantLinkmanPhone.hashCode());
+		result = prime * result + ((merchantLinkman == null) ? 0 : merchantLinkman.hashCode());
 		result = prime * result + ((merchantType == null) ? 0 : merchantType.hashCode());
 		result = prime * result + ((merchantName == null) ? 0 : merchantName.hashCode());
-		result = prime * result + ((merchantLinkman == null) ? 0 : merchantLinkman.hashCode());
-		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result + ((merchantEnterpriseName == null) ? 0 : merchantEnterpriseName.hashCode());
+		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
 		result = prime * result + ((merchantSendAddress == null) ? 0 : merchantSendAddress.hashCode());
-		result = prime * result + ((merchantReturnAddress == null) ? 0 : merchantReturnAddress.hashCode());
 		return result;
 	}
 	
@@ -198,30 +196,25 @@ public class PurchasingmanagerMerchant implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		final PurchasingmanagerMerchant other = (PurchasingmanagerMerchant) obj;
-		if (parkBusinessTupe == null) {
-			if (other.parkBusinessTupe != null)
+		if (createTime == null) {
+			if (other.createTime != null)
 				return false;
-		} else if (!parkBusinessTupe.equals(other.parkBusinessTupe))
+		} else if (!createTime.equals(other.createTime))
 			return false;
 		if (updateUser == null) {
 			if (other.updateUser != null)
 				return false;
 		} else if (!updateUser.equals(other.updateUser))
 			return false;
-		if (merchantEnterpriseName == null) {
-			if (other.merchantEnterpriseName != null)
+		if (merchantReturnAddress == null) {
+			if (other.merchantReturnAddress != null)
 				return false;
-		} else if (!merchantEnterpriseName.equals(other.merchantEnterpriseName))
+		} else if (!merchantReturnAddress.equals(other.merchantReturnAddress))
 			return false;
-		if (merchantLinkmanPhone == null) {
-			if (other.merchantLinkmanPhone != null)
+		if (parkBusinessTupe == null) {
+			if (other.parkBusinessTupe != null)
 				return false;
-		} else if (!merchantLinkmanPhone.equals(other.merchantLinkmanPhone))
-			return false;
-		if (updateTime == null) {
-			if (other.updateTime != null)
-				return false;
-		} else if (!updateTime.equals(other.updateTime))
+		} else if (!parkBusinessTupe.equals(other.parkBusinessTupe))
 			return false;
 		if (merchantId == null) {
 			if (other.merchantId != null)
@@ -233,6 +226,16 @@ public class PurchasingmanagerMerchant implements Domain{
 				return false;
 		} else if (!createUser.equals(other.createUser))
 			return false;
+		if (merchantLinkmanPhone == null) {
+			if (other.merchantLinkmanPhone != null)
+				return false;
+		} else if (!merchantLinkmanPhone.equals(other.merchantLinkmanPhone))
+			return false;
+		if (merchantLinkman == null) {
+			if (other.merchantLinkman != null)
+				return false;
+		} else if (!merchantLinkman.equals(other.merchantLinkman))
+			return false;
 		if (merchantType == null) {
 			if (other.merchantType != null)
 				return false;
@@ -243,25 +246,20 @@ public class PurchasingmanagerMerchant implements Domain{
 				return false;
 		} else if (!merchantName.equals(other.merchantName))
 			return false;
-		if (merchantLinkman == null) {
-			if (other.merchantLinkman != null)
+		if (merchantEnterpriseName == null) {
+			if (other.merchantEnterpriseName != null)
 				return false;
-		} else if (!merchantLinkman.equals(other.merchantLinkman))
+		} else if (!merchantEnterpriseName.equals(other.merchantEnterpriseName))
 			return false;
-		if (createTime == null) {
-			if (other.createTime != null)
+		if (updateTime == null) {
+			if (other.updateTime != null)
 				return false;
-		} else if (!createTime.equals(other.createTime))
+		} else if (!updateTime.equals(other.updateTime))
 			return false;
 		if (merchantSendAddress == null) {
 			if (other.merchantSendAddress != null)
 				return false;
 		} else if (!merchantSendAddress.equals(other.merchantSendAddress))
-			return false;
-		if (merchantReturnAddress == null) {
-			if (other.merchantReturnAddress != null)
-				return false;
-		} else if (!merchantReturnAddress.equals(other.merchantReturnAddress))
 			return false;
 		return true;
 	}
