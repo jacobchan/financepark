@@ -6,6 +6,8 @@ package com.common.MemberManager.service.impl;
 import java.util.List;
 import java.util.Collection;
 
+import javax.xml.crypto.Data;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,10 +29,13 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.PasswordUtils;
 import com.gsoft.framework.util.SecurityUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.framework.core.web.menu.IMenu;
+import com.sun.star.setup.OSType;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.service.MemberInformationManager;
@@ -76,16 +81,29 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
     public MemberInformation saveMemberInformation(MemberInformation o) throws BusException{
-//    	String memberInformationId = o.getMemberInformationId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(memberInformationId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	return memberInformationDao.save(o);
+    	String memberInformationId = o.getMemberId();
+    	boolean isUpdate = StringUtils.isNotEmpty(memberInformationId);
+    	String userName=SecurityUtils.getAccount().getLoginName();
+    	if(isUpdate){//修改
+    		MemberInformation mi= memberInformationDao.get(memberInformationId);
+    		mi.setMemberPhoneNumber(o.getMemberPhoneNumber());
+    		mi.setMemberName(o.getMemberName());
+    		mi.setMemberNickname(o.getMemberNickname());
+    		mi.setMemberBirthdate(o.getMemberBirthdate());
+    		mi.setMemberDescribe2(o.getMemberDescribe2());
+    		mi.setCompanyId(o.getCompanyId());
+    		mi.setUpdateUser(userName);
+    		mi.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return memberInformationDao.save(mi);
+    	}else{//新增
+    		o.setCreateUser(userName);
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setUpdateUser(userName);
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+        	return memberInformationDao.save(o);
+    	}
     }
 
     /**
