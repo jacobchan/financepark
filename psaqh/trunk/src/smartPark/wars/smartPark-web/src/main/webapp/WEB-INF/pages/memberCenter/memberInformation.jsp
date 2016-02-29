@@ -138,6 +138,10 @@
 							<col width="100"></col>
 							<col></col>
 						</colgroup>
+						<tr style="display:none;">
+							<td>ID</td>
+							<td><span class="" id="memberId"> </span></td>
+						</tr>
 						<tr>
 							<td>头像</td>
 							<td>
@@ -155,20 +159,20 @@
 						</tr>
 						<tr>
 							<td>真实姓名</td>
-							<td><input type="text"></td>
+							<td><input type="text" id="memberName"></td>
 						</tr>
 						<tr>
 							<td>出生日期</td>
-							<td><input type="text"></td>
+							<td><input type="text" id="memberBirthdate"></td>
 						</tr>
 						<tr>
 							<td>一句话介绍</td>
-							<td><textarea style="height:60px;"></textarea></td>
+							<td><textarea style="height:60px;" id="memberDescribe2"></textarea></td>
 						</tr>
 						<tr>
 							<td>公司</td>
 							<td>
-								<input type="text">
+								<input type="text" id="companyId">
 								<a href="javascript:;" class="ml15 open-tanc"><i class="fa fa-plus-circle mr5"></i>加入企业</a>
 							</td>
 						</tr>
@@ -258,9 +262,34 @@
 		
 		
 		function _parseRecords(record){
+			$("#memberId").html(record.memberId);
+			$(".c-b1").html(record.memberPhoneNumber);
 			$("#memberNickname").val(record.memberNickname);
+			$("#memberName").val(record.memberName);
+			$("#memberBirthdate").val(record.memberBirthdate);
+			$("#memberDescribe2").val(record.memberDescribe2);
+			$("#companyId").val(record.companyId);
 		};
 		
+		$('.hhf-submit').click(function(){
+			var memberId=$("#memberId").html();
+			var memberNickname=$("#memberNickname").val();
+			var memberPhoneNumber=$(".c-b1").html();
+			var memberName=$("#memberName").val();
+			var memberBirthdate=$("#memberBirthdate").val();
+			var memberDescribe2=$("#memberDescribe2").val();
+			var companyId=$("#companyId").val();
+			var params = ['memberId='+memberId+'','memberNickname='+memberNickname+'','memberPhoneNumber='+memberPhoneNumber+'','memberName='+memberName+'','memberBirthdate='+memberBirthdate+'','memberDescribe2='+memberDescribe2+'','companyId='+companyId+''];
+			$.youi.ajaxUtils.ajax({
+				url:'/smartPark-web/esb/web/memberInformationManager/saveMemberInformation.json',
+				data:params.join('&'),
+				success:function(result){
+					if(result&&result.record){
+						alert("修改成功");
+					}
+				}
+			});
+		});	
 	</script>
 </body>
 </html>
