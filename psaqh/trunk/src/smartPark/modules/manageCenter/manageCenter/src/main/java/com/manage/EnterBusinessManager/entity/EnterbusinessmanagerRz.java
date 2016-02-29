@@ -4,11 +4,15 @@
 package com.manage.EnterBusinessManager.entity;
 
 import javax.persistence.*;
+
 import org.hibernate.validator.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.EnterpriceTypeManager.entity.EtypeEnterprisetype;
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
 /**
  * 实体: 入驻企业基本信息
  * @author
@@ -19,152 +23,96 @@ import com.gsoft.framework.core.dataobj.Domain;
 @Table(name = "sp_enterbusinessmanager_rz")
 public class EnterbusinessmanagerRz implements Domain{
 	
-	private static final long serialVersionUID = -5221069390358480441L;
+	private static final long serialVersionUID = -2526455072813371693L;
 	
 
-	@Column(name = "PARK_ID_")
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="RZ_MANAGER_")
+	private MemberInformation rzManager;//企业管理员
+	
+
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="ENTREC_ID_")
+	private PropertyservicemanagerEntrec entrecId;//物业入驻记录ID
+
+	@Column(name = "RZ_DATE_")
+	@Length(max=20)
+	private String rzDate;//入驻时间
+
+	@Column(name = "RZ_REMARK_")
+	@Length(max=200)
+	private String rzRemark;//企业备注
+
+	@Column(name = "BUILDING_ID_")
 	@Length(max=36)
-	private String parkId;//园区ID
+	private String buildingId;//楼栋ID
+
+	@Column(name = "RZ_BUSS_")
+	@Length(max=2)
+	private String rzBuss;//企业主营
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "RZ_ID_")
 	@Length(max=36)
 	private String rzId;//ID
 
-	@Column(name = "RZ_MANAGER_")
-	@Length(max=36)
-	private String rzManager;//企业管理员
 
-	@Column(name = "CREATE_USER_")
-	@Length(max=36)
-	private String createUser;//创建人
-
-	@Column(name = "UPDATE_USER_")
-	@Length(max=36)
-	private String updateUser;//修改人
-
-	@Column(name = "UPDATE_TIME_")
-	private String updateTime;//修改时间
-
-	@Column(name = "RZ_TELEPHONE_")
-	@Length(max=16)
-	private String rzTelephone;//联系方式
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="en_type_id_")
+	private EtypeEnterprisetype enTypeId;//企业类型ID
 
 	@Column(name = "RZ_SIGN_")
 	@Length(max=8)
 	private String rzSign;//企业码
 
-	@Column(name = "en_type_id_")
-	@Length(max=36)
-	private String enTypeId;//企业类型ID
-
-	@Column(name = "RZ_BUSS_")
-	@Length(max=2)
-	private String rzBuss;//企业主营
-
-	@Column(name = "BUILDING_ID_")
-	@Length(max=36)
-	private String buildingId;//楼栋ID
-
-	@Column(name = "RZ_REMARK_")
-	@Length(max=200)
-	private String rzRemark;//企业备注
-
-	@Column(name = "ENTREC_ID_")
-	@Length(max=36)
-	private String entrecId;//入驻预约记录ID
-
 	@Column(name = "RZ_MEM_")
 	@Length(max=36)
 	private String rzMem;//会员信息
 
-	@Column(name = "CREATE_TIME_")
-	private String createTime;//创建时间
-
+	@Column(name = "RZ_TELEPHONE_")
+	@Length(max=16)
+	private String rzTelephone;//联系方式
+	
 	@Column(name = "RZ_NAME_")
 	@Length(max=128)
 	private String rzName;//企业名称
 
-	@Column(name = "RZ_DATE_")
-	@Length(max=20)
-	private String rzDate;//入驻时间
+	@Column(name = "PARK_ID_")
+	@Length(max=36)
+	private String parkId;//园区ID
 	
-	public String getParkId(){
-		return this.parkId;
-	}
 	
-	public void setParkId(String parkId){
-		this.parkId = parkId;
-	}
-	public String getRzId(){
-		return this.rzId;
-	}
 	
-	public void setRzId(String rzId){
-		this.rzId = rzId;
+	public String getRzName() {
+		return rzName;
 	}
-	public String getRzManager(){
-		return this.rzManager;
+
+	public void setRzName(String rzName) {
+		this.rzName = rzName;
 	}
-	
-	public void setRzManager(String rzManager){
+
+	public MemberInformation getRzManager() {
+		return rzManager;
+	}
+
+	public void setRzManager(MemberInformation rzManager) {
 		this.rzManager = rzManager;
 	}
-	public String getCreateUser(){
-		return this.createUser;
+
+	public PropertyservicemanagerEntrec getEntrecId() {
+		return entrecId;
+	}
+
+	public void setEntrecId(PropertyservicemanagerEntrec entrecId) {
+		this.entrecId = entrecId;
+	}
+
+	public String getRzDate(){
+		return this.rzDate;
 	}
 	
-	public void setCreateUser(String createUser){
-		this.createUser = createUser;
-	}
-	public String getUpdateUser(){
-		return this.updateUser;
-	}
-	
-	public void setUpdateUser(String updateUser){
-		this.updateUser = updateUser;
-	}
-	public String getUpdateTime(){
-		return this.updateTime;
-	}
-	
-	public void setUpdateTime(String updateTime){
-		this.updateTime = updateTime;
-	}
-	public String getRzTelephone(){
-		return this.rzTelephone;
-	}
-	
-	public void setRzTelephone(String rzTelephone){
-		this.rzTelephone = rzTelephone;
-	}
-	public String getRzSign(){
-		return this.rzSign;
-	}
-	
-	public void setRzSign(String rzSign){
-		this.rzSign = rzSign;
-	}
-	public String getEnTypeId(){
-		return this.enTypeId;
-	}
-	
-	public void setEnTypeId(String enTypeId){
-		this.enTypeId = enTypeId;
-	}
-	public String getRzBuss(){
-		return this.rzBuss;
-	}
-	
-	public void setRzBuss(String rzBuss){
-		this.rzBuss = rzBuss;
-	}
-	public String getBuildingId(){
-		return this.buildingId;
-	}
-	
-	public void setBuildingId(String buildingId){
-		this.buildingId = buildingId;
+	public void setRzDate(String rzDate){
+		this.rzDate = rzDate;
 	}
 	public String getRzRemark(){
 		return this.rzRemark;
@@ -173,12 +121,42 @@ public class EnterbusinessmanagerRz implements Domain{
 	public void setRzRemark(String rzRemark){
 		this.rzRemark = rzRemark;
 	}
-	public String getEntrecId(){
-		return this.entrecId;
+	public String getBuildingId(){
+		return this.buildingId;
 	}
 	
-	public void setEntrecId(String entrecId){
-		this.entrecId = entrecId;
+	public void setBuildingId(String buildingId){
+		this.buildingId = buildingId;
+	}
+	public String getRzBuss(){
+		return this.rzBuss;
+	}
+	
+	public void setRzBuss(String rzBuss){
+		this.rzBuss = rzBuss;
+	}
+	public String getRzId(){
+		return this.rzId;
+	}
+	
+	public void setRzId(String rzId){
+		this.rzId = rzId;
+	}
+	
+	public EtypeEnterprisetype getEnTypeId() {
+		return enTypeId;
+	}
+
+	public void setEnTypeId(EtypeEnterprisetype enTypeId) {
+		this.enTypeId = enTypeId;
+	}
+
+	public String getRzSign(){
+		return this.rzSign;
+	}
+	
+	public void setRzSign(String rzSign){
+		this.rzSign = rzSign;
 	}
 	public String getRzMem(){
 		return this.rzMem;
@@ -187,51 +165,39 @@ public class EnterbusinessmanagerRz implements Domain{
 	public void setRzMem(String rzMem){
 		this.rzMem = rzMem;
 	}
-	public String getCreateTime(){
-		return this.createTime;
+	public String getRzTelephone(){
+		return this.rzTelephone;
 	}
 	
-	public void setCreateTime(String createTime){
-		this.createTime = createTime;
+	public void setRzTelephone(String rzTelephone){
+		this.rzTelephone = rzTelephone;
 	}
-	public String getRzName(){
-		return this.rzName;
-	}
-	
-	public void setRzName(String rzName){
-		this.rzName = rzName;
-	}
-	public String getRzDate(){
-		return this.rzDate;
+	public String getParkId(){
+		return this.parkId;
 	}
 	
-	public void setRzDate(String rzDate){
-		this.rzDate = rzDate;
+	public void setParkId(String parkId){
+		this.parkId = parkId;
 	}
 	
 	
 	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((parkId == null) ? 0 : parkId.hashCode());
-		result = prime * result + ((rzId == null) ? 0 : rzId.hashCode());
 		result = prime * result + ((rzManager == null) ? 0 : rzManager.hashCode());
-		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
-		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
-		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
-		result = prime * result + ((rzTelephone == null) ? 0 : rzTelephone.hashCode());
-		result = prime * result + ((rzSign == null) ? 0 : rzSign.hashCode());
-		result = prime * result + ((enTypeId == null) ? 0 : enTypeId.hashCode());
-		result = prime * result + ((rzBuss == null) ? 0 : rzBuss.hashCode());
-		result = prime * result + ((buildingId == null) ? 0 : buildingId.hashCode());
-		result = prime * result + ((rzRemark == null) ? 0 : rzRemark.hashCode());
-		result = prime * result + ((entrecId == null) ? 0 : entrecId.hashCode());
-		result = prime * result + ((rzMem == null) ? 0 : rzMem.hashCode());
-		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
-		result = prime * result + ((rzName == null) ? 0 : rzName.hashCode());
 		result = prime * result + ((rzDate == null) ? 0 : rzDate.hashCode());
+		result = prime * result + ((rzRemark == null) ? 0 : rzRemark.hashCode());
+		result = prime * result + ((buildingId == null) ? 0 : buildingId.hashCode());
+		result = prime * result + ((rzBuss == null) ? 0 : rzBuss.hashCode());
+		result = prime * result + ((rzId == null) ? 0 : rzId.hashCode());
+		result = prime * result + ((enTypeId == null) ? 0 : enTypeId.hashCode());
+		result = prime * result + ((rzSign == null) ? 0 : rzSign.hashCode());
+		result = prime * result + ((rzMem == null) ? 0 : rzMem.hashCode());
+		result = prime * result + ((rzTelephone == null) ? 0 : rzTelephone.hashCode());
+		result = prime * result + ((parkId == null) ? 0 : parkId.hashCode());
 		return result;
 	}
 	
@@ -244,90 +210,60 @@ public class EnterbusinessmanagerRz implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		final EnterbusinessmanagerRz other = (EnterbusinessmanagerRz) obj;
-		if (parkId == null) {
-			if (other.parkId != null)
-				return false;
-		} else if (!parkId.equals(other.parkId))
-			return false;
-		if (rzId == null) {
-			if (other.rzId != null)
-				return false;
-		} else if (!rzId.equals(other.rzId))
-			return false;
 		if (rzManager == null) {
 			if (other.rzManager != null)
 				return false;
 		} else if (!rzManager.equals(other.rzManager))
 			return false;
-		if (createUser == null) {
-			if (other.createUser != null)
+		if (rzDate == null) {
+			if (other.rzDate != null)
 				return false;
-		} else if (!createUser.equals(other.createUser))
-			return false;
-		if (updateUser == null) {
-			if (other.updateUser != null)
-				return false;
-		} else if (!updateUser.equals(other.updateUser))
-			return false;
-		if (updateTime == null) {
-			if (other.updateTime != null)
-				return false;
-		} else if (!updateTime.equals(other.updateTime))
-			return false;
-		if (rzTelephone == null) {
-			if (other.rzTelephone != null)
-				return false;
-		} else if (!rzTelephone.equals(other.rzTelephone))
-			return false;
-		if (rzSign == null) {
-			if (other.rzSign != null)
-				return false;
-		} else if (!rzSign.equals(other.rzSign))
-			return false;
-		if (enTypeId == null) {
-			if (other.enTypeId != null)
-				return false;
-		} else if (!enTypeId.equals(other.enTypeId))
-			return false;
-		if (rzBuss == null) {
-			if (other.rzBuss != null)
-				return false;
-		} else if (!rzBuss.equals(other.rzBuss))
-			return false;
-		if (buildingId == null) {
-			if (other.buildingId != null)
-				return false;
-		} else if (!buildingId.equals(other.buildingId))
+		} else if (!rzDate.equals(other.rzDate))
 			return false;
 		if (rzRemark == null) {
 			if (other.rzRemark != null)
 				return false;
 		} else if (!rzRemark.equals(other.rzRemark))
 			return false;
-		if (entrecId == null) {
-			if (other.entrecId != null)
+		if (buildingId == null) {
+			if (other.buildingId != null)
 				return false;
-		} else if (!entrecId.equals(other.entrecId))
+		} else if (!buildingId.equals(other.buildingId))
+			return false;
+		if (rzBuss == null) {
+			if (other.rzBuss != null)
+				return false;
+		} else if (!rzBuss.equals(other.rzBuss))
+			return false;
+		if (rzId == null) {
+			if (other.rzId != null)
+				return false;
+		} else if (!rzId.equals(other.rzId))
+			return false;
+		if (enTypeId == null) {
+			if (other.enTypeId != null)
+				return false;
+		} else if (!enTypeId.equals(other.enTypeId))
+			return false;
+		if (rzSign == null) {
+			if (other.rzSign != null)
+				return false;
+		} else if (!rzSign.equals(other.rzSign))
 			return false;
 		if (rzMem == null) {
 			if (other.rzMem != null)
 				return false;
 		} else if (!rzMem.equals(other.rzMem))
 			return false;
-		if (createTime == null) {
-			if (other.createTime != null)
+		if (rzTelephone == null) {
+			if (other.rzTelephone != null)
 				return false;
-		} else if (!createTime.equals(other.createTime))
+		} else if (!rzTelephone.equals(other.rzTelephone))
 			return false;
-		if (rzName == null) {
-			if (other.rzName != null)
+		if (parkId == null) {
+			if (other.parkId != null)
 				return false;
-		} else if (!rzName.equals(other.rzName))
-			return false;
-		if (rzDate == null) {
-			if (other.rzDate != null)
-				return false;
-		} else if (!rzDate.equals(other.rzDate))
+		} else if (!parkId.equals(other.parkId))
 			return false;
 		return true;
 	}
