@@ -19,26 +19,47 @@ import com.gsoft.framework.core.dataobj.Domain;
 @Table(name = "sp_propertyservicenanager_back")
 public class PropertyservicenanagerBack implements Domain{
 	
-	private static final long serialVersionUID = -2704311533158045190L;
+	private static final long serialVersionUID = -8616190603389459289L;
 	
+
+	@Column(name = "CREATE_USER_")
+	@Length(max=36)
+	private String createUser;//创建人
 
 	@Column(name = "BACK_RECORD_")
 	@Length(max=300)
 	private String backRecord;//回访记录
+
+	@Column(name = "UPDATE_USER_")
+	@Length(max=36)
+	private String updateUser;//修改人
+
+	@Column(name = "BACK_CODE_")
+	@Length(max=32)
+	private String backCode;//回访单号
+
+	@Column(name = "UPDATE_TIME_")
+	private String updateTime;//修改时间
+
+	@Column(name = "CREATE_TIME_")
+	private String createTime;//创建时间
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "BACK_ID_")
 	@Length(max=36)
 	private String backId;//回访ID
-
-	@Column(name = "BACK_CODE_")
-	@Length(max=32)
-	private String backCode;//回访单号
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="COS_ID_")
 	private com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos propertyservicemanagerCos;//投诉ID
 	
+	public String getCreateUser(){
+		return this.createUser;
+	}
+	
+	public void setCreateUser(String createUser){
+		this.createUser = createUser;
+	}
 	public String getBackRecord(){
 		return this.backRecord;
 	}
@@ -46,12 +67,12 @@ public class PropertyservicenanagerBack implements Domain{
 	public void setBackRecord(String backRecord){
 		this.backRecord = backRecord;
 	}
-	public String getBackId(){
-		return this.backId;
+	public String getUpdateUser(){
+		return this.updateUser;
 	}
 	
-	public void setBackId(String backId){
-		this.backId = backId;
+	public void setUpdateUser(String updateUser){
+		this.updateUser = updateUser;
 	}
 	public String getBackCode(){
 		return this.backCode;
@@ -59,6 +80,27 @@ public class PropertyservicenanagerBack implements Domain{
 	
 	public void setBackCode(String backCode){
 		this.backCode = backCode;
+	}
+	public String getUpdateTime(){
+		return this.updateTime;
+	}
+	
+	public void setUpdateTime(String updateTime){
+		this.updateTime = updateTime;
+	}
+	public String getCreateTime(){
+		return this.createTime;
+	}
+	
+	public void setCreateTime(String createTime){
+		this.createTime = createTime;
+	}
+	public String getBackId(){
+		return this.backId;
+	}
+	
+	public void setBackId(String backId){
+		this.backId = backId;
 	}
 	
 	public void setPropertyservicemanagerCos(com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos propertyservicemanagerCos){
@@ -74,9 +116,13 @@ public class PropertyservicenanagerBack implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
 		result = prime * result + ((backRecord == null) ? 0 : backRecord.hashCode());
-		result = prime * result + ((backId == null) ? 0 : backId.hashCode());
+		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
 		result = prime * result + ((backCode == null) ? 0 : backCode.hashCode());
+		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result + ((backId == null) ? 0 : backId.hashCode());
 		return result;
 	}
 	
@@ -89,20 +135,40 @@ public class PropertyservicenanagerBack implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		final PropertyservicenanagerBack other = (PropertyservicenanagerBack) obj;
+		if (createUser == null) {
+			if (other.createUser != null)
+				return false;
+		} else if (!createUser.equals(other.createUser))
+			return false;
 		if (backRecord == null) {
 			if (other.backRecord != null)
 				return false;
 		} else if (!backRecord.equals(other.backRecord))
 			return false;
-		if (backId == null) {
-			if (other.backId != null)
+		if (updateUser == null) {
+			if (other.updateUser != null)
 				return false;
-		} else if (!backId.equals(other.backId))
+		} else if (!updateUser.equals(other.updateUser))
 			return false;
 		if (backCode == null) {
 			if (other.backCode != null)
 				return false;
 		} else if (!backCode.equals(other.backCode))
+			return false;
+		if (updateTime == null) {
+			if (other.updateTime != null)
+				return false;
+		} else if (!updateTime.equals(other.updateTime))
+			return false;
+		if (createTime == null) {
+			if (other.createTime != null)
+				return false;
+		} else if (!createTime.equals(other.createTime))
+			return false;
+		if (backId == null) {
+			if (other.backId != null)
+				return false;
+		} else if (!backId.equals(other.backId))
 			return false;
 		return true;
 	}

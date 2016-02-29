@@ -19,7 +19,7 @@ import com.gsoft.framework.core.dataobj.Domain;
 @Table(name = "sp_information_product")
 public class InformationProduct implements Domain{
 	
-	private static final long serialVersionUID = 7659995940064928319L;
+	private static final long serialVersionUID = 822382060365811351L;
 	
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
@@ -27,25 +27,39 @@ public class InformationProduct implements Domain{
 	@Length(max=36)
 	private String productId;//ID
 
-	@Column(name = "PRODUCT_CONTENT_")
-	@Length(max=256)
-	private String productContent;//产品描述
-
-	@Column(name = "PRODUCT_RE_")
-	@Length(max=32)
-	private String productRe;//企业ID
-
-	@Column(name = "RZ_ID_")
+	@Column(name = "CREATE_USER_")
 	@Length(max=36)
-	private String rzId;//ID2
+	private String createUser;//创建人
 
 	@Column(name = "PRODUCT_TYPE_")
 	@Length(max=2)
 	private String productType;//产品类别
 
+	@Column(name = "RZ_ID_")
+	@Length(max=36)
+	private String rzId;//ID2
+
+	@Column(name = "CREATE_TIME_")
+	private String createTime;//创建时间
+
+	@Column(name = "PRODUCT_RE_")
+	@Length(max=32)
+	private String productRe;//企业ID
+
+	@Column(name = "PRODUCT_CONTENT_")
+	@Length(max=256)
+	private String productContent;//产品描述
+
+	@Column(name = "UPDATE_TIME_")
+	private String updateTime;//修改时间
+
 	@Column(name = "PRODUCT_NAME_")
 	@Length(max=64)
 	private String productName;//产品名称
+
+	@Column(name = "UPDATE_USER_")
+	@Length(max=36)
+	private String updateUser;//修改人
 	
 	public String getProductId(){
 		return this.productId;
@@ -54,26 +68,12 @@ public class InformationProduct implements Domain{
 	public void setProductId(String productId){
 		this.productId = productId;
 	}
-	public String getProductContent(){
-		return this.productContent;
+	public String getCreateUser(){
+		return this.createUser;
 	}
 	
-	public void setProductContent(String productContent){
-		this.productContent = productContent;
-	}
-	public String getProductRe(){
-		return this.productRe;
-	}
-	
-	public void setProductRe(String productRe){
-		this.productRe = productRe;
-	}
-	public String getRzId(){
-		return this.rzId;
-	}
-	
-	public void setRzId(String rzId){
-		this.rzId = rzId;
+	public void setCreateUser(String createUser){
+		this.createUser = createUser;
 	}
 	public String getProductType(){
 		return this.productType;
@@ -82,12 +82,54 @@ public class InformationProduct implements Domain{
 	public void setProductType(String productType){
 		this.productType = productType;
 	}
+	public String getRzId(){
+		return this.rzId;
+	}
+	
+	public void setRzId(String rzId){
+		this.rzId = rzId;
+	}
+	public String getCreateTime(){
+		return this.createTime;
+	}
+	
+	public void setCreateTime(String createTime){
+		this.createTime = createTime;
+	}
+	public String getProductRe(){
+		return this.productRe;
+	}
+	
+	public void setProductRe(String productRe){
+		this.productRe = productRe;
+	}
+	public String getProductContent(){
+		return this.productContent;
+	}
+	
+	public void setProductContent(String productContent){
+		this.productContent = productContent;
+	}
+	public String getUpdateTime(){
+		return this.updateTime;
+	}
+	
+	public void setUpdateTime(String updateTime){
+		this.updateTime = updateTime;
+	}
 	public String getProductName(){
 		return this.productName;
 	}
 	
 	public void setProductName(String productName){
 		this.productName = productName;
+	}
+	public String getUpdateUser(){
+		return this.updateUser;
+	}
+	
+	public void setUpdateUser(String updateUser){
+		this.updateUser = updateUser;
 	}
 	
 	
@@ -97,11 +139,15 @@ public class InformationProduct implements Domain{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
-		result = prime * result + ((productContent == null) ? 0 : productContent.hashCode());
-		result = prime * result + ((productRe == null) ? 0 : productRe.hashCode());
-		result = prime * result + ((rzId == null) ? 0 : rzId.hashCode());
+		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
 		result = prime * result + ((productType == null) ? 0 : productType.hashCode());
+		result = prime * result + ((rzId == null) ? 0 : rzId.hashCode());
+		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result + ((productRe == null) ? 0 : productRe.hashCode());
+		result = prime * result + ((productContent == null) ? 0 : productContent.hashCode());
+		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
 		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
+		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
 		return result;
 	}
 	
@@ -119,30 +165,50 @@ public class InformationProduct implements Domain{
 				return false;
 		} else if (!productId.equals(other.productId))
 			return false;
-		if (productContent == null) {
-			if (other.productContent != null)
+		if (createUser == null) {
+			if (other.createUser != null)
 				return false;
-		} else if (!productContent.equals(other.productContent))
-			return false;
-		if (productRe == null) {
-			if (other.productRe != null)
-				return false;
-		} else if (!productRe.equals(other.productRe))
-			return false;
-		if (rzId == null) {
-			if (other.rzId != null)
-				return false;
-		} else if (!rzId.equals(other.rzId))
+		} else if (!createUser.equals(other.createUser))
 			return false;
 		if (productType == null) {
 			if (other.productType != null)
 				return false;
 		} else if (!productType.equals(other.productType))
 			return false;
+		if (rzId == null) {
+			if (other.rzId != null)
+				return false;
+		} else if (!rzId.equals(other.rzId))
+			return false;
+		if (createTime == null) {
+			if (other.createTime != null)
+				return false;
+		} else if (!createTime.equals(other.createTime))
+			return false;
+		if (productRe == null) {
+			if (other.productRe != null)
+				return false;
+		} else if (!productRe.equals(other.productRe))
+			return false;
+		if (productContent == null) {
+			if (other.productContent != null)
+				return false;
+		} else if (!productContent.equals(other.productContent))
+			return false;
+		if (updateTime == null) {
+			if (other.updateTime != null)
+				return false;
+		} else if (!updateTime.equals(other.updateTime))
+			return false;
 		if (productName == null) {
 			if (other.productName != null)
 				return false;
 		} else if (!productName.equals(other.productName))
+			return false;
+		if (updateUser == null) {
+			if (other.updateUser != null)
+				return false;
+		} else if (!updateUser.equals(other.updateUser))
 			return false;
 		return true;
 	}
