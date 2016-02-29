@@ -272,6 +272,7 @@
 		};
 		
 		$('.hhf-submit').click(function(){
+			this.disabled=true;
 			var memberId=$("#memberId").html();
 			var memberNickname=$("#memberNickname").val();
 			var memberPhoneNumber=$(".c-b1").html();
