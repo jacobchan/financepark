@@ -66,6 +66,7 @@
 				/portal/** = anon
 				/index.html = authc
 				/page/** = authc
+				/memberCenter/**=authc
 				/weixin/*/login.html= wxOAuth
 				${wx.login.failureUrl}=anon
 				/member/*/logout.html=anon
