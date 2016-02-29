@@ -33,6 +33,7 @@ import com.manage.PropertyServiceManager.dao.PropertyservicemanagerEntrecDao;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntering;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerEntrecManager;
+import com.manage.ReserveManager.entity.ReservationRecord;
 
 @Service("propertyservicemanagerEntrecManager")
 @Transactional
@@ -202,5 +203,20 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
     public boolean exsitPropertyservicemanagerEntrec(String propertyName,Object value) throws BusException{
 		return propertyservicemanagerEntrecDao.exists(propertyName,value);
 	}
+    
+    /**
+	 * 取消预约申请，将待受理状态变更为已取消
+	 * @param ReservationRecord
+	 */
+    @EsbServiceMapping
+	 public void cancelReservation(PropertyservicemanagerEntrec o) throws BusException{
+    	PropertyservicemanagerEntrec p=new PropertyservicemanagerEntrec();
+		String entrecId=o.getEntrecId();
+		if(StringUtils.isNotEmpty(entrecId)){
+			p=propertyservicemanagerEntrecDao.get(entrecId);//根据主键查询入驻服务办理预约数据
+		}
+		p.setEnterrecStatus("04");//已取消
+		propertyservicemanagerEntrecDao.save(p);
+    }
 
 }
