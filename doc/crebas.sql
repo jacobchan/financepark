@@ -1,9 +1,3 @@
-/*==============================================================*/
-/* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2016/2/27 11:14:22                           */
-/*==============================================================*/
-
-
 alter table sp_OrderManager_commodityDetail
    drop primary key;
 
@@ -341,7 +335,7 @@ create table sp_OrderManager_commodityDetail
    CREATE_TIME_         datetime
 );
 
-alter table sp_OrderManager_commodityDetail comment '320405¶©µ¥ÉÌÆ·Ã÷Ï¸';
+alter table sp_OrderManager_commodityDetail comment '320405è®¢å•å•†å“æ˜ç»†';
 
 alter table sp_OrderManager_commodityDetail
    add primary key (COMMODITYDETAIL_ID_);
@@ -361,7 +355,7 @@ create table sp_OrderManager_orderMerchan_nexus
    CREATE_TIME_         datetime
 );
 
-alter table sp_OrderManager_orderMerchan_nexus comment '320406¶©µ¥ÉÌ»§¹ØÏµ±í';
+alter table sp_OrderManager_orderMerchan_nexus comment '320406è®¢å•å•†æˆ·å…³ç³»è¡¨';
 
 alter table sp_OrderManager_orderMerchan_nexus
    add primary key (ORDERMERCHAN_NEXUS_ID_);
@@ -383,7 +377,7 @@ create table sp_OrderManager_orderProjectType_value_
    CREATE_TIME_         datetime
 );
 
-alter table sp_OrderManager_orderProjectType_value_ comment '320404¶©µ¥ÏîÄ¿Öµ±í';
+alter table sp_OrderManager_orderProjectType_value_ comment '320404è®¢å•é¡¹ç›®å€¼è¡¨';
 
 alter table sp_OrderManager_orderProjectType_value_
    add primary key (ORDERPROJECTTYPE_VALUE_ID_);
@@ -411,7 +405,7 @@ create table sp_OrderManager_userOrder
    USERORDER_ADR_       varchar(256)
 );
 
-alter table sp_OrderManager_userOrder comment '320401ÓÃ»§¶©µ¥±í';
+alter table sp_OrderManager_userOrder comment '320401ç”¨æˆ·è®¢å•è¡¨';
 
 alter table sp_OrderManager_userOrder
    add primary key (USERORDER_ID_);
@@ -434,7 +428,7 @@ create table sp_PayManager_ordre_payFlow
    CREATE_TIME_         datetime
 );
 
-alter table sp_PayManager_ordre_payFlow comment '320801¶©µ¥Ö§¸¶Á÷Ë®±í';
+alter table sp_PayManager_ordre_payFlow comment '320801è®¢å•æ”¯ä»˜æµæ°´è¡¨';
 
 alter table sp_PayManager_ordre_payFlow
    add primary key (ORDER_PAYFLOW_ID_);
@@ -461,7 +455,7 @@ create table sp_activity_apply
    CREATE_USER_         char(36)
 );
 
-alter table sp_activity_apply comment '330701-»î¶¯ÉêÇëÄÚÈİÁĞ±í';
+alter table sp_activity_apply comment '330701-æ´»åŠ¨ç”³è¯·å†…å®¹åˆ—è¡¨';
 
 alter table sp_activity_apply
    add primary key (APPLY_ID_);
@@ -481,7 +475,7 @@ create table sp_activity_applyList
    CREATE_TIME_         datetime
 );
 
-alter table sp_activity_applyList comment '330702-±¨ÃûÃûµ¥';
+alter table sp_activity_applyList comment '330702-æŠ¥ååå•';
 
 alter table sp_activity_applyList
    add primary key (APPLYLIST_ID_);
@@ -502,7 +496,7 @@ create table sp_activity_comment
    CREATE_USER_         char(36)
 );
 
-alter table sp_activity_comment comment '330704-»î¶¯ÆÀÂÛ';
+alter table sp_activity_comment comment '330704-æ´»åŠ¨è¯„è®º';
 
 alter table sp_activity_comment
    add primary key (COMMENT_ID);
@@ -522,7 +516,7 @@ create table sp_activity_document
    CREATE_USER_         char(36)
 );
 
-alter table sp_activity_document comment '330703-ÎÄµµÁĞ±í';
+alter table sp_activity_document comment '330703-æ–‡æ¡£åˆ—è¡¨';
 
 alter table sp_activity_document
    add primary key (DOCUMENT_ID_);
@@ -541,7 +535,7 @@ create table sp_bbm_building_
    COMPANY_             varchar(32),
    BUILDING_TYPE_       varchar(36),
    Z_FLOOR_NUM_2        char(2),
-   Z_USE_STATUS_        char(2) comment '0-ÔÚ½¨£¬1-½»¸¶ÖĞ£¬2-ÒÑÓÃ',
+   Z_USE_STATUS_        char(2) comment '0-åœ¨å»ºï¼Œ1-äº¤ä»˜ä¸­ï¼Œ2-å·²ç”¨',
    PARK_ID_             char(36),
    UPDATE_TIME_         datetime,
    CREATE_TIME_         datetime,
@@ -549,7 +543,7 @@ create table sp_bbm_building_
    UPDATE_USER_         char(36)
 );
 
-alter table sp_bbm_building_ comment '320102Â¥¶°»ù´¡ĞÅÏ¢';
+alter table sp_bbm_building_ comment '320102æ¥¼æ ‹åŸºç¡€ä¿¡æ¯';
 
 alter table sp_bbm_building_
    add primary key (BUILDING_ID_);
@@ -568,7 +562,7 @@ create table sp_bbm_floor_
    Z_ROOM_NUM_          char(2),
    Z_ROOM_NO_           varchar(36),
    Z_COMPANY_           varchar(36),
-   Z_USE_STATUS_        char(2) comment '0-ÔÚ½¨£¬1-½»¸¶ÖĞ£¬2-ÒÑÓÃ',
+   Z_USE_STATUS_        char(2) comment '0-åœ¨å»ºï¼Œ1-äº¤ä»˜ä¸­ï¼Œ2-å·²ç”¨',
    PARK_ID_             char(36),
    BUILDING_ID_         char(36),
    UPDATE_TIME_         datetime,
@@ -577,7 +571,7 @@ create table sp_bbm_floor_
    UPDATE_USER_         char(36)
 );
 
-alter table sp_bbm_floor_ comment '320103Â¥²ã»ù´¡ĞÅÏ¢';
+alter table sp_bbm_floor_ comment '320103æ¥¼å±‚åŸºç¡€ä¿¡æ¯';
 
 alter table sp_bbm_floor_
    add primary key (FLOOR_ID_);
@@ -602,7 +596,7 @@ create table sp_bbm_park_
    UPDATE_USER_         char(36)
 );
 
-alter table sp_bbm_park_ comment '320101Ô°ÇøĞÅÏ¢';
+alter table sp_bbm_park_ comment '320101å›­åŒºä¿¡æ¯';
 
 alter table sp_bbm_park_
    add primary key (PARK_ID_);
@@ -642,7 +636,7 @@ create table sp_bbm_room_
    UPDATE_USER_         char(36)
 );
 
-alter table sp_bbm_room_ comment '320104µ¥Ôª»ù´¡ĞÅÏ¢';
+alter table sp_bbm_room_ comment '320104å•å…ƒåŸºç¡€ä¿¡æ¯';
 
 alter table sp_bbm_room_
    add primary key (ROOM_ID_);
@@ -671,7 +665,7 @@ create table sp_enterbusinessmanager_rz
    RZ_NAME_             varchar(128)
 );
 
-alter table sp_enterbusinessmanager_rz comment '330101Èë×¤ÆóÒµ»ù±¾ĞÅÏ¢';
+alter table sp_enterbusinessmanager_rz comment '330101å…¥é©»ä¼ä¸šåŸºæœ¬ä¿¡æ¯';
 
 alter table sp_enterbusinessmanager_rz
    add primary key (RZ_ID_);
@@ -694,7 +688,7 @@ create table sp_enterprise_employees
    CREATE_TIME_         datetime
 );
 
-alter table sp_enterprise_employees comment '330401ÆóÒµÔ±¹¤±í';
+alter table sp_enterprise_employees comment '330401ä¼ä¸šå‘˜å·¥è¡¨';
 
 alter table sp_enterprise_employees
    add primary key (EMPLOYEES_ID);
@@ -714,7 +708,7 @@ create table sp_enterprise_invitation
    CREATE_TIME_         datetime
 );
 
-alter table sp_enterprise_invitation comment '330402ÑûÇë¼ÇÂ¼±í';
+alter table sp_enterprise_invitation comment '330402é‚€è¯·è®°å½•è¡¨';
 
 alter table sp_enterprise_invitation
    add primary key (INVITATION_ID_);
@@ -733,7 +727,7 @@ create table sp_enterprise_role
    CREATE_TIME_         datetime
 );
 
-alter table sp_enterprise_role comment '330403ÆóÒµ»áÔ±½ÇÉ«±í';
+alter table sp_enterprise_role comment '330403ä¼ä¸šä¼šå‘˜è§’è‰²è¡¨';
 
 alter table sp_enterprise_role
    add primary key (R_ID_);
@@ -753,7 +747,7 @@ create table sp_etype_enterprisetype
    CREATE_TIME_         datetime
 );
 
-alter table sp_etype_enterprisetype comment '320901ÆóÒµĞĞÒµÀàĞÍ±í';
+alter table sp_etype_enterprisetype comment '320901ä¼ä¸šè¡Œä¸šç±»å‹è¡¨';
 
 alter table sp_etype_enterprisetype
    add primary key (en_type_id_);
@@ -772,7 +766,7 @@ create table sp_favorits_favoritGoods
    UPDATE_USER_         char(36)
 );
 
-alter table sp_favorits_favoritGoods comment '340401-ÉÌÆ·ÊÕ²Ø±í';
+alter table sp_favorits_favoritGoods comment '340401-å•†å“æ”¶è—è¡¨';
 
 alter table sp_favorits_favoritGoods
    add primary key (FAVORIT_GOODS_ID_, COMMODITY_ID_);
@@ -799,7 +793,7 @@ create table sp_information_financing
    CREATE_TIME_         datetime
 );
 
-alter table sp_information_financing comment '330505ÈÚ×ÊĞÅÏ¢';
+alter table sp_information_financing comment '330505èèµ„ä¿¡æ¯';
 
 alter table sp_information_financing
    add primary key (FINANCING_ID_);
@@ -822,7 +816,7 @@ create table sp_information_knowledge
    CREATE_TIME_         datetime
 );
 
-alter table sp_information_knowledge comment '330504ÖªÊ¶²úÈ¨ĞÅÏ¢';
+alter table sp_information_knowledge comment '330504çŸ¥è¯†äº§æƒä¿¡æ¯';
 
 alter table sp_information_knowledge
    add primary key (KNOWLEDGE_ID_);
@@ -843,7 +837,7 @@ create table sp_information_legal
    CREATE_TIME_         datetime
 );
 
-alter table sp_information_legal comment '330503·¨ÈË½éÉÜ';
+alter table sp_information_legal comment '330503æ³•äººä»‹ç»';
 
 alter table sp_information_legal
    add primary key (LEGAL_ID_);
@@ -866,7 +860,7 @@ create table sp_information_media
    CREATE_TIME_         datetime
 );
 
-alter table sp_information_media comment '330502Ã½Ìå±¨µÀĞÅÏ¢';
+alter table sp_information_media comment '330502åª’ä½“æŠ¥é“ä¿¡æ¯';
 
 alter table sp_information_media
    add primary key (MEDIA_ID_);
@@ -890,7 +884,7 @@ create table sp_information_notice
    UPDATE_USER_         char(36)
 );
 
-alter table sp_information_notice comment '330501¹«¸æĞÅÏ¢';
+alter table sp_information_notice comment '330501å…¬å‘Šä¿¡æ¯';
 
 alter table sp_information_notice
    add primary key (NOTICE_ID_);
@@ -912,7 +906,7 @@ create table sp_information_product
    CREATE_TIME_         datetime
 );
 
-alter table sp_information_product comment '330506²úÆ·ĞÅÏ¢';
+alter table sp_information_product comment '330506äº§å“ä¿¡æ¯';
 
 alter table sp_information_product
    add primary key (PRODUCT_ID_);
@@ -935,7 +929,7 @@ create table sp_lettermanager_comment
    CREATE_TIME_         datetime
 );
 
-alter table sp_lettermanager_comment comment '330601ÆÀÂÛ';
+alter table sp_lettermanager_comment comment '330601è¯„è®º';
 
 alter table sp_lettermanager_comment
    add primary key (COMMENT_ID_);
@@ -957,7 +951,7 @@ create table sp_lettermanager_letter
    CREATE_TIME_         datetime
 );
 
-alter table sp_lettermanager_letter comment '330602Ë½ĞÅ';
+alter table sp_lettermanager_letter comment '330602ç§ä¿¡';
 
 alter table sp_lettermanager_letter
    add primary key (LETTER_ID);
@@ -981,7 +975,7 @@ create table sp_mc_msgDatas_
    CREATE_TIME_         datetime
 );
 
-alter table sp_mc_msgDatas_ comment '320203ÏûÏ¢ÁĞ±í';
+alter table sp_mc_msgDatas_ comment '320203æ¶ˆæ¯åˆ—è¡¨';
 
 alter table sp_mc_msgDatas_
    add primary key (MSG_ID_);
@@ -1002,10 +996,11 @@ create table sp_mc_msgTempalate_
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
-   CREATE_TIME_         datetime
+   CREATE_TIME_         datetime,
+   unique_code_         varchar(12)
 );
 
-alter table sp_mc_msgTempalate_ comment '320202ÏûÏ¢Ä£°å';
+alter table sp_mc_msgTempalate_ comment '320202æ¶ˆæ¯æ¨¡æ¿';
 
 alter table sp_mc_msgTempalate_
    add primary key (MSG_TEMPALATE_ID_);
@@ -1026,7 +1021,7 @@ create table sp_mc_msgType_
    CREATE_TIME_         datetime
 );
 
-alter table sp_mc_msgType_ comment '320201ÏûÏ¢ÀàĞÍ';
+alter table sp_mc_msgType_ comment '320201æ¶ˆæ¯ç±»å‹';
 
 alter table sp_mc_msgType_
    add primary key (MSG_TYPE_ID_);
@@ -1046,7 +1041,7 @@ create table sp_memberAdr_address
    UPDATE_USER_         char(36)
 );
 
-alter table sp_memberAdr_address comment '340101-ÎÒµÄµØÖ·';
+alter table sp_memberAdr_address comment '340101-æˆ‘çš„åœ°å€';
 
 alter table sp_memberAdr_address
    add primary key (ADDRESS_ID_);
@@ -1070,7 +1065,7 @@ create table sp_member_comment
    CREATE_TIME_         datetime
 );
 
-alter table sp_member_comment comment '340201-ÉÌÆ·ÆÀ¼Û';
+alter table sp_member_comment comment '340201-å•†å“è¯„ä»·';
 
 alter table sp_member_comment
    add primary key (GOODS_COMMENT_ID_);
@@ -1096,7 +1091,7 @@ create table sp_member_information
    CREATE_TIME_         datetime
 );
 
-alter table sp_member_information comment '320701-»áÔ±ĞÅÏ¢±í';
+alter table sp_member_information comment '320701-ä¼šå‘˜ä¿¡æ¯è¡¨';
 
 alter table sp_member_information
    add primary key (MEMBER_ID_);
@@ -1120,7 +1115,7 @@ create table sp_nm_issueFlow_
    CREATE_TIME_         datetime
 );
 
-alter table sp_nm_issueFlow_ comment '320603Á÷³Ì¶¨Òå';
+alter table sp_nm_issueFlow_ comment '320603æµç¨‹å®šä¹‰';
 
 alter table sp_nm_issueFlow_
    add primary key (ISSUE_FLOW_ID_);
@@ -1144,7 +1139,7 @@ create table sp_nm_issueNews_
    CREATE_TIME_         datetime
 );
 
-alter table sp_nm_issueNews_ comment '320604Õş²ßĞÂÎÅÄÚÈİ';
+alter table sp_nm_issueNews_ comment '320604æ”¿ç­–æ–°é—»å†…å®¹';
 
 alter table sp_nm_issueNews_
    add primary key (POLICY_ID_);
@@ -1167,7 +1162,7 @@ create table sp_nm_issueTempalate_
    CREATE_TIME_         datetime
 );
 
-alter table sp_nm_issueTempalate_ comment '320602·¢²¼Ä£°å';
+alter table sp_nm_issueTempalate_ comment '320602å‘å¸ƒæ¨¡æ¿';
 
 alter table sp_nm_issueTempalate_
    add primary key (ISSUE_TEMPALATE_ID_);
@@ -1191,7 +1186,7 @@ create table sp_nm_issueType_
    CREATE_TIME_         datetime
 );
 
-alter table sp_nm_issueType_ comment '320601·¢²¼ÀàĞÍ';
+alter table sp_nm_issueType_ comment '320601å‘å¸ƒç±»å‹';
 
 alter table sp_nm_issueType_
    add primary key (ISSUE_TYPE_ID_);
@@ -1215,7 +1210,7 @@ create table sp_policy_apply
    POLICY_APPLY_STATUS_ varchar(2)
 );
 
-alter table sp_policy_apply comment '330801-Õş²ßÉêÇë¼ÇÂ¼';
+alter table sp_policy_apply comment '330801-æ”¿ç­–ç”³è¯·è®°å½•';
 
 alter table sp_policy_apply
    add primary key (POLICY_APPLY_ID_);
@@ -1231,7 +1226,6 @@ create table sp_propertyservicemanager_bx
    BX_WAY_              varchar(2),
    BX_PROJECT_          varchar(2),
    BX_ADDRESS_          varchar(36),
-   BX_STATUS_           varchar(2),
    BX_REMARK_           varchar(300),
    BX_FUJIAN            varchar(50),
    BX_AMOUNT_           decimal(14,2),
@@ -1241,7 +1235,7 @@ create table sp_propertyservicemanager_bx
    CREATE_TIME_         datetime
 );
 
-alter table sp_propertyservicemanager_bx comment '330208ÎïÒµ±¨ĞŞ¼ÇÂ¼';
+alter table sp_propertyservicemanager_bx comment '330208ç‰©ä¸šæŠ¥ä¿®è®°å½•';
 
 alter table sp_propertyservicemanager_bx
    add primary key (BX_ID_);
@@ -1269,7 +1263,7 @@ create table sp_propertyservicemanager_charge
    CREATE_TIME_         datetime
 );
 
-alter table sp_propertyservicemanager_charge comment '330311ÎïÒµÊÕ·ÑµÇ¼Ç±í';
+alter table sp_propertyservicemanager_charge comment '330311ç‰©ä¸šæ”¶è´¹ç™»è®°è¡¨';
 
 alter table sp_propertyservicemanager_charge
    add primary key (CHARGE_ID_);
@@ -1294,7 +1288,7 @@ create table sp_propertyservicemanager_cos
    CREATE_USER_         char(36)
 );
 
-alter table sp_propertyservicemanager_cos comment '330206ÎïÒµÍ¶Ëß¼ÇÂ¼±í';
+alter table sp_propertyservicemanager_cos comment '330206ç‰©ä¸šæŠ•è¯‰è®°å½•è¡¨';
 
 alter table sp_propertyservicemanager_cos
    add primary key (COS_ID_);
@@ -1317,7 +1311,7 @@ create table sp_propertyservicemanager_entering
    CREATE_TIME_         datetime
 );
 
-alter table sp_propertyservicemanager_entering comment '330203¿É°ìÀíÔ¤Ô¼¼ÇÂ¼';
+alter table sp_propertyservicemanager_entering comment '330203å¯åŠç†é¢„çº¦è®°å½•';
 
 alter table sp_propertyservicemanager_entering
    add primary key (ENTERING_ID_);
@@ -1341,7 +1335,7 @@ create table sp_propertyservicemanager_entrec
    CREATE_TIME_         datetime
 );
 
-alter table sp_propertyservicemanager_entrec comment '330202Èë×¤·şÎñ°ìÀíÔ¤Ô¼¼ÇÂ¼±í';
+alter table sp_propertyservicemanager_entrec comment '330202å…¥é©»æœåŠ¡åŠç†é¢„çº¦è®°å½•è¡¨';
 
 alter table sp_propertyservicemanager_entrec
    add primary key (ENTREC_ID_);
@@ -1365,7 +1359,7 @@ create table sp_propertyservicemanager_fkcode_
    CREATE_TIME_         datetime
 );
 
-alter table sp_propertyservicemanager_fkcode_ comment '330213·Ã¿ÍÉêÇë¼ÇÂ¼';
+alter table sp_propertyservicemanager_fkcode_ comment '330213è®¿å®¢ç”³è¯·è®°å½•';
 
 alter table sp_propertyservicemanager_fkcode_
    add primary key (FKCODE_ID_);
@@ -1384,7 +1378,7 @@ create table sp_propertyservicemanager_fxtdc
    UPDATE_USER_         char(36)
 );
 
-alter table sp_propertyservicemanager_fxtdc comment '330205°á¼Ò·ÅĞĞ¶şÎ¬Âë¼ÇÂ¼±í';
+alter table sp_propertyservicemanager_fxtdc comment '330205æ¬å®¶æ”¾è¡ŒäºŒç»´ç è®°å½•è¡¨';
 
 alter table sp_propertyservicemanager_fxtdc
    add primary key (FXTDC_ID_);
@@ -1404,10 +1398,11 @@ create table sp_propertyservicemanager_moverec
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
-   CREATE_TIME_         datetime
+   CREATE_TIME_         datetime,
+   MOVEREC_TIME_        varchar(32)
 );
 
-alter table sp_propertyservicemanager_moverec comment '330204°á¼ÒÉêÇë¼ÇÂ¼';
+alter table sp_propertyservicemanager_moverec comment '330204æ¬å®¶ç”³è¯·è®°å½•';
 
 alter table sp_propertyservicemanager_moverec
    add primary key (MOVEREC_ID_);
@@ -1432,7 +1427,7 @@ create table sp_propertyservicemanager_oc
    CREATE_TIME_         datetime
 );
 
-alter table sp_propertyservicemanager_oc comment '330201Ò»¿¨Í¨°ìÀíÉêÇë¼ÇÂ¼';
+alter table sp_propertyservicemanager_oc comment '330201ä¸€å¡é€šåŠç†ç”³è¯·è®°å½•';
 
 alter table sp_propertyservicemanager_oc
    add primary key (OC_ID_);
@@ -1454,7 +1449,7 @@ create table sp_propertyservicemanager_ser
    CREATE_TIME_         datetime
 );
 
-alter table sp_propertyservicemanager_ser comment '330210·ÑÓÃÇåµ¥';
+alter table sp_propertyservicemanager_ser comment '330210è´¹ç”¨æ¸…å•';
 
 alter table sp_propertyservicemanager_ser
    add primary key (SER_ID_);
@@ -1474,7 +1469,7 @@ create table sp_propertyservicemanager_sfpro
    UPDATE_USER_         char(36)
 );
 
-alter table sp_propertyservicemanager_sfpro comment '330312ÎïÒµÊÕ·ÑÏîÄ¿±í';
+alter table sp_propertyservicemanager_sfpro comment '330312ç‰©ä¸šæ”¶è´¹é¡¹ç›®è¡¨';
 
 alter table sp_propertyservicemanager_sfpro
    add primary key (SFPRO_ID_);
@@ -1496,7 +1491,7 @@ create table sp_propertyservicemanager_ts
    CREATE_TIME_         datetime
 );
 
-alter table sp_propertyservicemanager_ts comment '330209ÅÉ¹¤Î¬ĞŞ¼ÇÂ¼';
+alter table sp_propertyservicemanager_ts comment '330209æ´¾å·¥ç»´ä¿®è®°å½•';
 
 alter table sp_propertyservicemanager_ts
    add primary key (TS_ID_);
@@ -1515,7 +1510,7 @@ create table sp_propertyservicemanager_twcrd
    UPDATE_USER_         char(36)
 );
 
-alter table sp_propertyservicemanager_twcrd comment '330214¶şÎ¬Âë¼ÇÂ¼';
+alter table sp_propertyservicemanager_twcrd comment '330214äºŒç»´ç è®°å½•';
 
 alter table sp_propertyservicemanager_twcrd
    add primary key (TWCRD_ID_);
@@ -1535,7 +1530,7 @@ create table sp_propertyservicenanager_back
    CREATE_TIME_         datetime
 );
 
-alter table sp_propertyservicenanager_back comment '330207Í¶Ëß»Ø·Ã¼ÇÂ¼±í';
+alter table sp_propertyservicenanager_back comment '330207æŠ•è¯‰å›è®¿è®°å½•è¡¨';
 
 alter table sp_propertyservicenanager_back
    add primary key (BACK_ID_);
@@ -1556,7 +1551,7 @@ create table sp_publicutilitiesmanager_reso
    CREATE_TIME_         datetime
 );
 
-alter table sp_publicutilitiesmanager_reso comment '330301×ÊÔ´×´Ì¬';
+alter table sp_publicutilitiesmanager_reso comment '330301èµ„æºçŠ¶æ€';
 
 alter table sp_publicutilitiesmanager_reso
    add primary key (RESO_ID_);
@@ -1577,7 +1572,7 @@ create table sp_purchasingManager_category
    CREATE_TIME_         datetime
 );
 
-alter table sp_purchasingManager_category comment '320304ÉÌÆ·ÀàÄ¿±í';
+alter table sp_purchasingManager_category comment '320304å•†å“ç±»ç›®è¡¨';
 
 alter table sp_purchasingManager_category
    add primary key (CATEGORY_ID_);
@@ -1611,7 +1606,7 @@ create table sp_purchasingManager_commodity
    CREATE_TIME_         datetime
 );
 
-alter table sp_purchasingManager_commodity comment '320301ÉÌÆ·ĞÅÏ¢';
+alter table sp_purchasingManager_commodity comment '320301å•†å“ä¿¡æ¯';
 
 alter table sp_purchasingManager_commodity
    add primary key (COMMODITY_ID_);
@@ -1638,7 +1633,7 @@ create table sp_purchasingManager_commodity_extend
    GENRE_ID_            char(36)
 );
 
-alter table sp_purchasingManager_commodity_extend comment '320302²É¹ºÉÌÆ·ĞÅÏ¢À©Õ¹';
+alter table sp_purchasingManager_commodity_extend comment '320302é‡‡è´­å•†å“ä¿¡æ¯æ‰©å±•';
 
 alter table sp_purchasingManager_commodity_extend
    add primary key (COMMODITY_EXTEND_ID_);
@@ -1660,7 +1655,7 @@ create table sp_purchasingManager_genre
    GENRE_CODE_          varchar(10)
 );
 
-alter table sp_purchasingManager_genre comment '320305ÉÌÆ·Àà±ğ±í';
+alter table sp_purchasingManager_genre comment '320305å•†å“ç±»åˆ«è¡¨';
 
 alter table sp_purchasingManager_genre
    add primary key (GENRE_ID_);
@@ -1685,7 +1680,7 @@ create table sp_purchasingManager_genre_property
    CREATE_TIME_         datetime
 );
 
-alter table sp_purchasingManager_genre_property comment '320306ÉÌÆ·ÀàÊôĞÔ';
+alter table sp_purchasingManager_genre_property comment '320306å•†å“ç±»å±æ€§';
 
 alter table sp_purchasingManager_genre_property
    add primary key (GENRE_PROPERTY_ID_);
@@ -1697,7 +1692,7 @@ create table sp_purchasingManager_merchant
 (
    MERCHANT_ID_         char(36) not null,
    MERCHANT_NAME_       varchar(128),
-   MERCHANT_TYPE_       char(2),
+   MERCHANT_TYPE_       char(36),
    MERCHANT_ENTERPRISE_NAME_ varchar(128),
    MERCHANT_RETURN_ADDRESS_ varchar(256),
    MERCHANT_SEND_ADDRESS_ varchar(256),
@@ -1710,7 +1705,7 @@ create table sp_purchasingManager_merchant
    CREATE_TIME_         datetime
 );
 
-alter table sp_purchasingManager_merchant comment '320307ÉÌ»§ĞÅÏ¢±í';
+alter table sp_purchasingManager_merchant comment '320307å•†æˆ·ä¿¡æ¯è¡¨';
 
 alter table sp_purchasingManager_merchant
    add primary key (MERCHANT_ID_);
@@ -1732,7 +1727,7 @@ create table sp_purchasingManager_merchant_address_
    CREATE_TIME_         datetime
 );
 
-alter table sp_purchasingManager_merchant_address_ comment '320308ÉÌ»§µØÖ·¿â';
+alter table sp_purchasingManager_merchant_address_ comment '320308å•†æˆ·åœ°å€åº“';
 
 alter table sp_purchasingManager_merchant_address_
    add primary key (MERCHANT_ADDRESS_ID_);
@@ -1757,7 +1752,7 @@ create table sp_reservation_record
    CREATE_TIME_         datetime
 );
 
-alter table sp_reservation_record comment '330901Ô¤Ô¼¼ÇÂ¼';
+alter table sp_reservation_record comment '330901é¢„çº¦è®°å½•';
 
 alter table sp_reservation_record
    add primary key (RECORD_ID);
@@ -1778,7 +1773,7 @@ create table sp_shoppingCar_catering
    CREATE_TIME_         datetime
 );
 
-alter table sp_shoppingCar_catering comment '340303-²ÍÒû¹ºÎï³µ';
+alter table sp_shoppingCar_catering comment '340303-é¤é¥®è´­ç‰©è½¦';
 
 alter table sp_shoppingCar_catering
    add primary key (COMPANY_CATERING_ID_, COMMODITY_ID_);
@@ -1799,7 +1794,7 @@ create table sp_shoppingCar_companyServer
    CREATE_TIME_         datetime
 );
 
-alter table sp_shoppingCar_companyServer comment '340301-ÆóÒµ·şÎñ¹ºÎï³µ';
+alter table sp_shoppingCar_companyServer comment '340301-ä¼ä¸šæœåŠ¡è´­ç‰©è½¦';
 
 alter table sp_shoppingCar_companyServer
    add primary key (COMPANY_SERVER_ID_, COMMODITY_ID_);
@@ -1821,7 +1816,7 @@ create table sp_shoppingCar_group
    CREATE_USER_         char(36)
 );
 
-alter table sp_shoppingCar_group comment '340302-¼¯²É¹ºÎï³µ';
+alter table sp_shoppingCar_group comment '340302-é›†é‡‡è´­ç‰©è½¦';
 
 alter table sp_shoppingCar_group
    add primary key (COMPANY_GROUP_ID_, COMMODITY_ID_);
@@ -2047,4 +2042,3 @@ alter table sp_shoppingCar_companyServer add constraint FK_Relationship_78 forei
 
 alter table sp_shoppingCar_group add constraint FK_Relationship_76 foreign key (MEMBER_ID_)
       references sp_member_information (MEMBER_ID_) on delete restrict on update restrict;
-
