@@ -28,6 +28,7 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.PasswordUtils;
+import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.framework.core.web.menu.IMenu;
 import com.common.MemberManager.entity.MemberInformation;
@@ -152,6 +153,20 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	}else{
 		throw new BusException("该用户已存在!");
 		}
+	}
+    
+    /**
+	 * 获取用户基本信息
+	 * @param user 登陆用户名
+	 * @return
+	 * @throws BusException
+	 */
+	@EsbServiceMapping(pubConditions={@PubCondition(property="memberName",pubProperty="userId")})
+	public MemberInformation getMemberInformationByLoginUser(MemberInformation o)
+			throws BusException {
+		// TODO Auto-generated method stub	
+		String userName=SecurityUtils.getAccount().getLoginName();
+		return memberInformationDao.getObjectByUniqueProperty("memberName", userName);
 	}
 	
 
