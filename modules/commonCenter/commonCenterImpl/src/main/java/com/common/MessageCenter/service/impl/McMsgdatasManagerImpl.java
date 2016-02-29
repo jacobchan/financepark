@@ -3,6 +3,7 @@
  */
 package com.common.MessageCenter.service.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -11,11 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.service.MemberInformationManager;
 import com.common.MessageCenter.dao.McMsgdatasDao;
 import com.common.MessageCenter.entity.McMsgdatas;
 import com.common.MessageCenter.entity.McMsgtempalate;
 import com.common.MessageCenter.service.McMsgdatasManager;
 import com.common.MessageCenter.service.McMsgtempalateManager;
+import com.common.MessageCenter.service.MessagePostProcessor;
+import com.gsoft.common.service.BaseUserManager;
 import com.gsoft.common.util.MessageUtils;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -28,6 +33,7 @@ import com.gsoft.framework.esb.annotation.ConditionCollection;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.OrderCollection;
 import com.gsoft.framework.esb.annotation.ServiceParam;
+import com.gsoft.framework.security.PrincipalConfig;
 import com.gsoft.framework.security.agt.entity.User;
 import com.gsoft.framework.util.DateUtils;
 
@@ -38,6 +44,12 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements McMsgdatas
 	private McMsgdatasDao mcMsgdatasDao;
 	@Autowired
 	private McMsgtempalateManager msgtempalateManager;
+	@Autowired(required=false)
+	private MessagePostProcessor messagePostProcessor;
+	@Autowired
+	private BaseUserManager baseUserManager;
+	@Autowired
+	private MemberInformationManager memberInformationManager;
 	
     /**
      * 查询列表
@@ -82,6 +94,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements McMsgdatas
 //    	}else{//新增
 //    		
 //    	}
+    	o.setSendDate(DateUtils.getToday("yyyy-MM-dd"));
     	return mcMsgdatasDao.save(o);
     }
 
@@ -125,19 +138,44 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements McMsgdatas
 	
 	@Override
 	public void sendMessage(McMsgdatas mcMsgdatas) throws BusException {
-		// TODO 发送消息
 		McMsgtempalate tempalate = mcMsgdatas.getMcMsgtempalate();
-		String receive = tempalate.getMsgReceiver();//接收对象 ROLE_ID
+		String receiver = tempalate.getMsgReceiver();//接收对象 ROLE_ID
+		//用户属性表中 手机属性必须为phone
+		List<String> phones = new ArrayList<String>();
 		//根据role获取用户信息
+		//如果角色属于会员用户，则从会员表里（MemberInformation）查询，否则从User里取
+		if("企业管理员ID".equals(receiver)){
+			//查出所有角色为企业管理员的用户
+			
+		}else{
+			List<User> users = baseUserManager.getUsersByRoles(new String[]{receiver});//后台用户
+			for(User user:users){
+				PrincipalConfig principalConfig = user.getPrincipalConfig();
+				if(principalConfig.get("phone")!=null){
+					phones.add(principalConfig.get("phone"));
+				}
+			}
+		}
+		if(messagePostProcessor!=null){
+			messagePostProcessor.send(mcMsgdatas.getMsgContent(), phones.toArray(new String[phones.size()]));
+		}
 		
-		//获取电话号码
-		
-		//生成消息内容
-		
-		//调用发送消息的外部接口
-		
-		//保存消息内容
-		saveMcMsgdatas(mcMsgdatas);
+	}
+	
+	@Override
+	public void sendMessageSingle(McMsgdatas mcMsgdatas, String userId)
+			throws BusException {
+		//发送给会员用户 ROLE_MEMBER
+		String msgContent = mcMsgdatas.getMsgContent();
+		MemberInformation member = memberInformationManager.getMemberInformation(userId);
+		if(msgContent.contains("#user")){
+			String userCaption = member.getMemberName();
+			String phone = member.getMemberPhoneNumber();
+			msgContent = msgContent.replace(msgContent, userCaption);
+			if(messagePostProcessor!=null){
+				messagePostProcessor.send(msgContent, new String[]{phone});
+			}
+		}
 	}
 	
 	@EsbServiceMapping
@@ -148,9 +186,9 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements McMsgdatas
 		mcMsgdatas.setMsgCaption(msgTempalate.getMsgTempalateCaption());
 		mcMsgdatas.setMcMsgtempalate(msgTempalate);
 		mcMsgdatas.setMsgContent(buildMsgContent(msgTempalate, replaceMap));
-		mcMsgdatas.setSendDate(DateUtils.getToday("yyyy-MM-dd"));
 		mcMsgdatas.setSendStatus("0");//初始发送状态默认值
 		return mcMsgdatas;
 	}
+
 
 }
