@@ -31,6 +31,9 @@ public class MessageTest extends AbstractJUnit4SpringContextTests{
 		McMsgtempalate tempalate = mcMsgtempalateManager.getMsgTempalate(MessageTempCode.MSG_TEMPT_1);
 		System.out.println("tempalate:"+tempalate.getMsgTempalateCaption());
 	}
+	/**
+	 * 通过消息模板和参数map获取内容
+	 */
 	@Test
 	public void genContent(){
 		McMsgtempalate tempalate = mcMsgtempalateManager.getMsgTempalate(MessageTempCode.MSG_TEMPT_1);;
@@ -41,6 +44,10 @@ public class MessageTest extends AbstractJUnit4SpringContextTests{
 		String content = mcMsgdatasManager.buildMsgContent(tempalate, replaceMap );
 		System.out.println("content:"+content);
 	}
+	
+	/**
+	 * 通过消息模板和参数map获取消息内容实体
+	 */
 	@Test
 	public void genMsgData(){
 		Map<String, String> replaceMap = new ReferenceMap();
