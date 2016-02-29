@@ -19,21 +19,32 @@ import com.gsoft.framework.core.dataobj.Domain;
 @Table(name = "sp_information_knowledge")
 public class InformationKnowledge implements Domain{
 	
-	private static final long serialVersionUID = 8627120313363183051L;
+	private static final long serialVersionUID = 8580116059989444631L;
 	
 
 	@Column(name = "RZ_ID_")
 	@Length(max=36)
 	private String rzId;//ID2
+
+	@Column(name = "KNOWLEDGE_STATUS_")
+	@Length(max=2)
+	private String knowledgeStatus;//发布状态
+
+	@Column(name = "KNOWLEDGE_URL_")
+	@Length(max=64)
+	private String knowledgeUrl;//图片URL
+
+	@Column(name = "UPDATE_TIME_")
+	private String updateTime;//修改时间
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "KNOWLEDGE_ID_")
 	@Length(max=32)
 	private String knowledgeId;//ID
 
-	@Column(name = "KNOWLEDGE_RE_")
-	@Length(max=32)
-	private String knowledgeRe;//企业信息ID
+	@Column(name = "CREATE_USER_")
+	@Length(max=36)
+	private String createUser;//创建人
 
 	@Column(name = "KNOWLEDGE_TITLE_")
 	@Length(max=64)
@@ -43,13 +54,16 @@ public class InformationKnowledge implements Domain{
 	@Length(max=256)
 	private String knowledgeContent;//描述
 
-	@Column(name = "KNOWLEDGE_URL_")
-	@Length(max=64)
-	private String knowledgeUrl;//图片URL
+	@Column(name = "UPDATE_USER_")
+	@Length(max=36)
+	private String updateUser;//修改人
 
-	@Column(name = "KNOWLEDGE_STATUS_")
-	@Length(max=2)
-	private String knowledgeStatus;//发布状态
+	@Column(name = "KNOWLEDGE_RE_")
+	@Length(max=32)
+	private String knowledgeRe;//企业信息ID
+
+	@Column(name = "CREATE_TIME_")
+	private String createTime;//创建时间
 	
 	public String getRzId(){
 		return this.rzId;
@@ -58,6 +72,27 @@ public class InformationKnowledge implements Domain{
 	public void setRzId(String rzId){
 		this.rzId = rzId;
 	}
+	public String getKnowledgeStatus(){
+		return this.knowledgeStatus;
+	}
+	
+	public void setKnowledgeStatus(String knowledgeStatus){
+		this.knowledgeStatus = knowledgeStatus;
+	}
+	public String getKnowledgeUrl(){
+		return this.knowledgeUrl;
+	}
+	
+	public void setKnowledgeUrl(String knowledgeUrl){
+		this.knowledgeUrl = knowledgeUrl;
+	}
+	public String getUpdateTime(){
+		return this.updateTime;
+	}
+	
+	public void setUpdateTime(String updateTime){
+		this.updateTime = updateTime;
+	}
 	public String getKnowledgeId(){
 		return this.knowledgeId;
 	}
@@ -65,12 +100,12 @@ public class InformationKnowledge implements Domain{
 	public void setKnowledgeId(String knowledgeId){
 		this.knowledgeId = knowledgeId;
 	}
-	public String getKnowledgeRe(){
-		return this.knowledgeRe;
+	public String getCreateUser(){
+		return this.createUser;
 	}
 	
-	public void setKnowledgeRe(String knowledgeRe){
-		this.knowledgeRe = knowledgeRe;
+	public void setCreateUser(String createUser){
+		this.createUser = createUser;
 	}
 	public String getKnowledgeTitle(){
 		return this.knowledgeTitle;
@@ -86,19 +121,26 @@ public class InformationKnowledge implements Domain{
 	public void setKnowledgeContent(String knowledgeContent){
 		this.knowledgeContent = knowledgeContent;
 	}
-	public String getKnowledgeUrl(){
-		return this.knowledgeUrl;
+	public String getUpdateUser(){
+		return this.updateUser;
 	}
 	
-	public void setKnowledgeUrl(String knowledgeUrl){
-		this.knowledgeUrl = knowledgeUrl;
+	public void setUpdateUser(String updateUser){
+		this.updateUser = updateUser;
 	}
-	public String getKnowledgeStatus(){
-		return this.knowledgeStatus;
+	public String getKnowledgeRe(){
+		return this.knowledgeRe;
 	}
 	
-	public void setKnowledgeStatus(String knowledgeStatus){
-		this.knowledgeStatus = knowledgeStatus;
+	public void setKnowledgeRe(String knowledgeRe){
+		this.knowledgeRe = knowledgeRe;
+	}
+	public String getCreateTime(){
+		return this.createTime;
+	}
+	
+	public void setCreateTime(String createTime){
+		this.createTime = createTime;
 	}
 	
 	
@@ -108,12 +150,16 @@ public class InformationKnowledge implements Domain{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((rzId == null) ? 0 : rzId.hashCode());
+		result = prime * result + ((knowledgeStatus == null) ? 0 : knowledgeStatus.hashCode());
+		result = prime * result + ((knowledgeUrl == null) ? 0 : knowledgeUrl.hashCode());
+		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
 		result = prime * result + ((knowledgeId == null) ? 0 : knowledgeId.hashCode());
-		result = prime * result + ((knowledgeRe == null) ? 0 : knowledgeRe.hashCode());
+		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
 		result = prime * result + ((knowledgeTitle == null) ? 0 : knowledgeTitle.hashCode());
 		result = prime * result + ((knowledgeContent == null) ? 0 : knowledgeContent.hashCode());
-		result = prime * result + ((knowledgeUrl == null) ? 0 : knowledgeUrl.hashCode());
-		result = prime * result + ((knowledgeStatus == null) ? 0 : knowledgeStatus.hashCode());
+		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
+		result = prime * result + ((knowledgeRe == null) ? 0 : knowledgeRe.hashCode());
+		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
 		return result;
 	}
 	
@@ -131,15 +177,30 @@ public class InformationKnowledge implements Domain{
 				return false;
 		} else if (!rzId.equals(other.rzId))
 			return false;
+		if (knowledgeStatus == null) {
+			if (other.knowledgeStatus != null)
+				return false;
+		} else if (!knowledgeStatus.equals(other.knowledgeStatus))
+			return false;
+		if (knowledgeUrl == null) {
+			if (other.knowledgeUrl != null)
+				return false;
+		} else if (!knowledgeUrl.equals(other.knowledgeUrl))
+			return false;
+		if (updateTime == null) {
+			if (other.updateTime != null)
+				return false;
+		} else if (!updateTime.equals(other.updateTime))
+			return false;
 		if (knowledgeId == null) {
 			if (other.knowledgeId != null)
 				return false;
 		} else if (!knowledgeId.equals(other.knowledgeId))
 			return false;
-		if (knowledgeRe == null) {
-			if (other.knowledgeRe != null)
+		if (createUser == null) {
+			if (other.createUser != null)
 				return false;
-		} else if (!knowledgeRe.equals(other.knowledgeRe))
+		} else if (!createUser.equals(other.createUser))
 			return false;
 		if (knowledgeTitle == null) {
 			if (other.knowledgeTitle != null)
@@ -151,15 +212,20 @@ public class InformationKnowledge implements Domain{
 				return false;
 		} else if (!knowledgeContent.equals(other.knowledgeContent))
 			return false;
-		if (knowledgeUrl == null) {
-			if (other.knowledgeUrl != null)
+		if (updateUser == null) {
+			if (other.updateUser != null)
 				return false;
-		} else if (!knowledgeUrl.equals(other.knowledgeUrl))
+		} else if (!updateUser.equals(other.updateUser))
 			return false;
-		if (knowledgeStatus == null) {
-			if (other.knowledgeStatus != null)
+		if (knowledgeRe == null) {
+			if (other.knowledgeRe != null)
 				return false;
-		} else if (!knowledgeStatus.equals(other.knowledgeStatus))
+		} else if (!knowledgeRe.equals(other.knowledgeRe))
+			return false;
+		if (createTime == null) {
+			if (other.createTime != null)
+				return false;
+		} else if (!createTime.equals(other.createTime))
 			return false;
 		return true;
 	}

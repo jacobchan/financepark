@@ -19,29 +19,35 @@ import com.gsoft.framework.core.dataobj.Domain;
 @Table(name = "sp_propertyservicemanager_oc")
 public class PropertyservicemanagerOc implements Domain{
 	
-	private static final long serialVersionUID = 8864663924863234408L;
+	private static final long serialVersionUID = -4956763543240118762L;
 	
 
-	@Column(name = "MEMBER_ID_")
-	@Length(max=36)
-	private String memberId;//会员用户ID
+	@Column(name = "OC_NUMBER_")
+	@Length(max=20)
+	private String ocNumber;//一卡通号码
 
-	@Column(name = "OC_COMP_")
-	@Length(max=50)
-	private String ocComp;//所属企业名称
+	@Column(name = "OC_STATUS_")
+	@Length(max=2)
+	private String ocStatus;//一卡通预约状态
 
 	@Column(name = "OC_REMARK_")
 	@Length(max=300)
 	private String ocRemark;//一卡通其他说明
 
-	@Column(name = "OC_NUMBER_")
-	@Length(max=20)
-	private String ocNumber;//一卡通号码
-	@Id @GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
-	@Column(name = "OC_ID_")
+	@Column(name = "OC_WAY_")
+	@Length(max=2)
+	private String ocWay;//一卡通办理方式
+
+	@Column(name = "OC_COMP_")
+	@Length(max=50)
+	private String ocComp;//所属企业名称
+
+	@Column(name = "UPDATE_USER_")
 	@Length(max=36)
-	private String ocId;//一卡通预约记录
+	private String updateUser;//修改人
+
+	@Column(name = "UPDATE_TIME_")
+	private String updateTime;//修改时间
 
 	@Column(name = "OC_DATE_")
 	@Length(max=20)
@@ -51,27 +57,35 @@ public class PropertyservicemanagerOc implements Domain{
 	@Length(max=36)
 	private String ocAddree;//选择地址
 
-	@Column(name = "OC_WAY_")
-	@Length(max=2)
-	private String ocWay;//一卡通办理方式
+	@Column(name = "CREATE_USER_")
+	@Length(max=36)
+	private String createUser;//创建人
 
-	@Column(name = "OC_STATUS_")
-	@Length(max=2)
-	private String ocStatus;//一卡通预约状态
+	@Column(name = "MEMBER_ID_")
+	@Length(max=36)
+	private String memberId;//会员用户ID
+	@Id @GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
+	@Column(name = "OC_ID_")
+	@Length(max=36)
+	private String ocId;//一卡通预约记录
+
+	@Column(name = "CREATE_TIME_")
+	private String createTime;//创建时间
 	
-	public String getMemberId(){
-		return this.memberId;
+	public String getOcNumber(){
+		return this.ocNumber;
 	}
 	
-	public void setMemberId(String memberId){
-		this.memberId = memberId;
+	public void setOcNumber(String ocNumber){
+		this.ocNumber = ocNumber;
 	}
-	public String getOcComp(){
-		return this.ocComp;
+	public String getOcStatus(){
+		return this.ocStatus;
 	}
 	
-	public void setOcComp(String ocComp){
-		this.ocComp = ocComp;
+	public void setOcStatus(String ocStatus){
+		this.ocStatus = ocStatus;
 	}
 	public String getOcRemark(){
 		return this.ocRemark;
@@ -80,19 +94,33 @@ public class PropertyservicemanagerOc implements Domain{
 	public void setOcRemark(String ocRemark){
 		this.ocRemark = ocRemark;
 	}
-	public String getOcNumber(){
-		return this.ocNumber;
+	public String getOcWay(){
+		return this.ocWay;
 	}
 	
-	public void setOcNumber(String ocNumber){
-		this.ocNumber = ocNumber;
+	public void setOcWay(String ocWay){
+		this.ocWay = ocWay;
 	}
-	public String getOcId(){
-		return this.ocId;
+	public String getOcComp(){
+		return this.ocComp;
 	}
 	
-	public void setOcId(String ocId){
-		this.ocId = ocId;
+	public void setOcComp(String ocComp){
+		this.ocComp = ocComp;
+	}
+	public String getUpdateUser(){
+		return this.updateUser;
+	}
+	
+	public void setUpdateUser(String updateUser){
+		this.updateUser = updateUser;
+	}
+	public String getUpdateTime(){
+		return this.updateTime;
+	}
+	
+	public void setUpdateTime(String updateTime){
+		this.updateTime = updateTime;
 	}
 	public String getOcDate(){
 		return this.ocDate;
@@ -108,19 +136,33 @@ public class PropertyservicemanagerOc implements Domain{
 	public void setOcAddree(String ocAddree){
 		this.ocAddree = ocAddree;
 	}
-	public String getOcWay(){
-		return this.ocWay;
+	public String getCreateUser(){
+		return this.createUser;
 	}
 	
-	public void setOcWay(String ocWay){
-		this.ocWay = ocWay;
+	public void setCreateUser(String createUser){
+		this.createUser = createUser;
 	}
-	public String getOcStatus(){
-		return this.ocStatus;
+	public String getMemberId(){
+		return this.memberId;
 	}
 	
-	public void setOcStatus(String ocStatus){
-		this.ocStatus = ocStatus;
+	public void setMemberId(String memberId){
+		this.memberId = memberId;
+	}
+	public String getOcId(){
+		return this.ocId;
+	}
+	
+	public void setOcId(String ocId){
+		this.ocId = ocId;
+	}
+	public String getCreateTime(){
+		return this.createTime;
+	}
+	
+	public void setCreateTime(String createTime){
+		this.createTime = createTime;
 	}
 	
 	
@@ -129,15 +171,19 @@ public class PropertyservicemanagerOc implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
-		result = prime * result + ((ocComp == null) ? 0 : ocComp.hashCode());
-		result = prime * result + ((ocRemark == null) ? 0 : ocRemark.hashCode());
 		result = prime * result + ((ocNumber == null) ? 0 : ocNumber.hashCode());
-		result = prime * result + ((ocId == null) ? 0 : ocId.hashCode());
+		result = prime * result + ((ocStatus == null) ? 0 : ocStatus.hashCode());
+		result = prime * result + ((ocRemark == null) ? 0 : ocRemark.hashCode());
+		result = prime * result + ((ocWay == null) ? 0 : ocWay.hashCode());
+		result = prime * result + ((ocComp == null) ? 0 : ocComp.hashCode());
+		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
+		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
 		result = prime * result + ((ocDate == null) ? 0 : ocDate.hashCode());
 		result = prime * result + ((ocAddree == null) ? 0 : ocAddree.hashCode());
-		result = prime * result + ((ocWay == null) ? 0 : ocWay.hashCode());
-		result = prime * result + ((ocStatus == null) ? 0 : ocStatus.hashCode());
+		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
+		result = prime * result + ((ocId == null) ? 0 : ocId.hashCode());
+		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
 		return result;
 	}
 	
@@ -150,30 +196,40 @@ public class PropertyservicemanagerOc implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		final PropertyservicemanagerOc other = (PropertyservicemanagerOc) obj;
-		if (memberId == null) {
-			if (other.memberId != null)
+		if (ocNumber == null) {
+			if (other.ocNumber != null)
 				return false;
-		} else if (!memberId.equals(other.memberId))
+		} else if (!ocNumber.equals(other.ocNumber))
 			return false;
-		if (ocComp == null) {
-			if (other.ocComp != null)
+		if (ocStatus == null) {
+			if (other.ocStatus != null)
 				return false;
-		} else if (!ocComp.equals(other.ocComp))
+		} else if (!ocStatus.equals(other.ocStatus))
 			return false;
 		if (ocRemark == null) {
 			if (other.ocRemark != null)
 				return false;
 		} else if (!ocRemark.equals(other.ocRemark))
 			return false;
-		if (ocNumber == null) {
-			if (other.ocNumber != null)
+		if (ocWay == null) {
+			if (other.ocWay != null)
 				return false;
-		} else if (!ocNumber.equals(other.ocNumber))
+		} else if (!ocWay.equals(other.ocWay))
 			return false;
-		if (ocId == null) {
-			if (other.ocId != null)
+		if (ocComp == null) {
+			if (other.ocComp != null)
 				return false;
-		} else if (!ocId.equals(other.ocId))
+		} else if (!ocComp.equals(other.ocComp))
+			return false;
+		if (updateUser == null) {
+			if (other.updateUser != null)
+				return false;
+		} else if (!updateUser.equals(other.updateUser))
+			return false;
+		if (updateTime == null) {
+			if (other.updateTime != null)
+				return false;
+		} else if (!updateTime.equals(other.updateTime))
 			return false;
 		if (ocDate == null) {
 			if (other.ocDate != null)
@@ -185,15 +241,25 @@ public class PropertyservicemanagerOc implements Domain{
 				return false;
 		} else if (!ocAddree.equals(other.ocAddree))
 			return false;
-		if (ocWay == null) {
-			if (other.ocWay != null)
+		if (createUser == null) {
+			if (other.createUser != null)
 				return false;
-		} else if (!ocWay.equals(other.ocWay))
+		} else if (!createUser.equals(other.createUser))
 			return false;
-		if (ocStatus == null) {
-			if (other.ocStatus != null)
+		if (memberId == null) {
+			if (other.memberId != null)
 				return false;
-		} else if (!ocStatus.equals(other.ocStatus))
+		} else if (!memberId.equals(other.memberId))
+			return false;
+		if (ocId == null) {
+			if (other.ocId != null)
+				return false;
+		} else if (!ocId.equals(other.ocId))
+			return false;
+		if (createTime == null) {
+			if (other.createTime != null)
+				return false;
+		} else if (!createTime.equals(other.createTime))
 			return false;
 		return true;
 	}
