@@ -22,6 +22,9 @@ public class MessageTest extends AbstractJUnit4SpringContextTests{
 	@Autowired
 	private McMsgdatasManager mcMsgdatasManager;
 	
+	/**
+	 * 通过唯一码获取消息模板对象
+	 */
 	@Test
 	public void getMsgTempalateByUniqueCode(){
 		//#user发起了#OrderType的订单，订单编号#OrderNo，请处理
