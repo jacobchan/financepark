@@ -9,13 +9,13 @@ import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.stereotype.Repository;
 
-import com.gsoft.common.dao.UserDao;
+import com.gsoft.common.dao.BaseUserDao;
 import com.gsoft.framework.core.dao.hibernate.BaseDaoHibernate;
 import com.gsoft.framework.security.agt.entity.User;
 
-@Repository("commonUserDao")
-public class UserDaoHibernate extends BaseDaoHibernate<User, String> implements
-		UserDao {
+@Repository("baseUserDao")
+public class BaseUserDaoHibernate extends BaseDaoHibernate<User, String> implements
+		BaseUserDao {
 	public Class<User> getModelClazz() {
 		return User.class;
 	}
