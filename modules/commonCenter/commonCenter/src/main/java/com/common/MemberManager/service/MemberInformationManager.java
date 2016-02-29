@@ -73,4 +73,12 @@ public interface MemberInformationManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public void saveReister(String userName,String passwd,String repasswd,String mobile) throws BusException;
+	
+	/**
+	 * 获取用户基本信息
+	 * @param user 登陆用户名
+	 * @return
+	 * @throws BusException
+	 */
+	 public MemberInformation getMemberInformationByLoginUser(MemberInformation o) throws BusException;
 }
