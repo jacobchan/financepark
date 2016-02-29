@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
+import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.common.purchasingManager.entity.PurchasingmanagerMerchant;
 /**
  * 商户新增修改测试
@@ -31,8 +32,9 @@ public class PurchasingmanagerMerchantManagerTest extends AbstractJUnit4SpringCo
     	PurchasingmanagerMerchant pm = new PurchasingmanagerMerchant();
     	pm.setMerchantName("肯德基");
     	pm.setMerchantEnterpriseName("肯德基餐饮连锁公司");
-    	pm.setMerchantType("01");
-    	pm.setParkBusinessTupe("02");
+    	PurchasingmanagerGenre pg = new PurchasingmanagerGenre();
+    	pg.setGenreId("02");
+    	pm.setMerchantType(pg);
     	pm.setMerchantLinkman("迈克尔");
     	pm.setMerchantLinkmanPhone("18812345678");
     	pm.setMerchantSendAddress("美国拉斯维加斯");
