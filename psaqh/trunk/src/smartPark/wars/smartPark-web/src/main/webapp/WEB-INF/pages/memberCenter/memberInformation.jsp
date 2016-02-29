@@ -1,8 +1,8 @@
+<!doctype html>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/pages/include.jsp" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!doctype html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -10,8 +10,8 @@
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/css/base.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/css/zs.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/css/awesome/css/font-awesome.min.css">
-	<script type="text/javascript" src="<%=request.getContextPath()%>/styles/js/jquery-1.11.0.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/styles/js/link.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/js/jquery-1.11.0.js"></script>
+<%-- 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/js/link.js"></script> --%>
 	
 </head>
 <body style="background-color:#f4f4f4;">
@@ -129,6 +129,8 @@
 						<dd><a href="grzx21.html">我发布的活动</a></dd>
 					</dl>
 				</div>
+				
+				
 				<div class="w1000">
 					<h3 class="per-h3">基本资料</h3>
 					<table class="setting-table grst-table">
@@ -149,7 +151,7 @@
 						</tr>
 						<tr>
 							<td>昵称</td>
-							<td><input type="text"></td>
+							<td><input type="text" id="memberNickname"></td>
 						</tr>
 						<tr>
 							<td>真实姓名</td>
@@ -236,5 +238,29 @@
 	    </div>
 	</div>
 	<!--***bottom end****************************************-->
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/lib/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/3.0/lib/jquery-ui.min.js?1=1"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/3.0/lib/bootstrap.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/lib/giui.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$.ajax({
+				url:'/smartPark-web/esb/web/memberInformationManager/getMemberInformationByLoginUser.json',
+				//async: false, 
+				success:function(result){
+					console.log(result);
+					if(result&&result.record){
+						_parseRecords(result.record);
+					}
+				}
+			});
+		});
+		
+		
+		function _parseRecords(record){
+			$("#memberNickname").val(record.memberNickname);
+		};
+		
+	</script>
 </body>
 </html>
