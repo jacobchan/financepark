@@ -26,7 +26,7 @@
 		<youi:gridCol property="bbmRoom.roomNo"  caption="单元编号"  width="15%"/>
 		<youi:gridCol property="chargeComp"  caption="收费企业名称"  width="10%"/>
 		<youi:gridCol property="chargeAmount"  caption="应缴费总额"  width="10%"/>
-		<youi:gridCol property="chargeIsbool"  caption="是否缴费"  width="10%"/>
+		<youi:gridCol property="chargeIsbool"  caption="是否缴费"  width="10%" convert="bool"/>
 		<youi:gridCol property="chargeCreatetime"  caption="登记日期"  width="10%"/>
 		<youi:gridCol property="chargeTime"  caption="缴费日期"  width="10%"/>
 		<youi:gridCol property="chargeBedate"  caption="起始日期"  width="10%"/>

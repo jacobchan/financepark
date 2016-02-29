@@ -51,6 +51,7 @@
 			data:params,
 			success:function(result){
 				var record = result.record;
+				alert("修改成功!");
 			}
 		});
 	</youi:func>
