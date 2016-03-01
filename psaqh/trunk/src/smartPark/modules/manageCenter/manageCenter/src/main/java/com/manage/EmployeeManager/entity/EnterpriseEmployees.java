@@ -3,10 +3,13 @@
  */
 package com.manage.EmployeeManager.entity;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 
 import org.hibernate.validator.*;
-
 import org.hibernate.annotations.GenericGenerator;
 
 import com.common.MemberManager.entity.MemberInformation;
@@ -53,6 +56,17 @@ public class EnterpriseEmployees implements Domain {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "MEMBER_ID_")
 	private MemberInformation memberId;// 会员用户ID
+	
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE},targetEntity = EnterpriseRole.class,mappedBy = "employees")
+	private Set<EnterpriseRole> enterpriseRole = new HashSet<EnterpriseRole>();
+
+	public Set<EnterpriseRole> getEnterpriseRole() {
+		return enterpriseRole;
+	}
+
+	public void setEnterpriseRole(Set<EnterpriseRole> enterpriseRole) {
+		this.enterpriseRole = enterpriseRole;
+	}
 
 	public String getEmployeesDepartment() {
 		return this.employeesDepartment;
