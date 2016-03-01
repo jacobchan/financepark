@@ -30,7 +30,7 @@ public class EnterpriseRole implements Domain {
 	@JoinColumn(name = "EMPLOYEES_ID", insertable=true, updatable=false)
 	private EnterpriseEmployees employees;// 企业员工ID
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade={CascadeType.MERGE,CascadeType.PERSIST}, optional=false)
+	@ManyToOne(fetch = FetchType.EAGER, cascade={CascadeType.MERGE,CascadeType.PERSIST}, optional=false)
 	@JoinColumn(name = "ROLEID", insertable=true, updatable=false)
 	private Role role;// 角色ID
 	
