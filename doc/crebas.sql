@@ -540,7 +540,8 @@ create table sp_bbm_building_
    UPDATE_TIME_         datetime,
    CREATE_TIME_         datetime,
    CREATE_USER_         char(36),
-   UPDATE_USER_         char(36)
+   UPDATE_USER_         char(36),
+   BUILDING_IMAGE_      varchar(100)
 );
 
 alter table sp_bbm_building_ comment '320102楼栋基础信息';
@@ -568,7 +569,9 @@ create table sp_bbm_floor_
    UPDATE_TIME_         datetime,
    CREATE_TIME_         datetime,
    CREATE_USER_         char(36),
-   UPDATE_USER_         char(36)
+   UPDATE_USER_         char(36),
+   FLOOR_IMAGE_         varchar(100),
+   PARK_NAME_           char(36)
 );
 
 alter table sp_bbm_floor_ comment '320103楼层基础信息';
@@ -593,7 +596,8 @@ create table sp_bbm_park_
    UPDATE_TIME_         datetime,
    CREATE_TIME_         datetime,
    CREATE_USER_         char(36),
-   UPDATE_USER_         char(36)
+   UPDATE_USER_         char(36),
+   BACKGROUND_IMAGE_    varchar(100)
 );
 
 alter table sp_bbm_park_ comment '320101园区信息';
@@ -1207,7 +1211,9 @@ create table sp_policy_apply
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
    CREATE_TIME_         datetime,
-   POLICY_APPLY_STATUS_ varchar(2)
+   POLICY_APPLY_STATUS_ varchar(2),
+   POLICY_APPLY_ISSUENEWS_ char(36),
+   POLICY_APPLY_ISSUEFLOW_ char(36)
 );
 
 alter table sp_policy_apply comment '330801-政策申请记录';
@@ -1424,7 +1430,8 @@ create table sp_propertyservicemanager_oc
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
-   CREATE_TIME_         datetime
+   CREATE_TIME_         datetime,
+   OC_CODE_             varchar(50)
 );
 
 alter table sp_propertyservicemanager_oc comment '330201一卡通办理申请记录';
@@ -1677,7 +1684,8 @@ create table sp_purchasingManager_genre_property
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
-   CREATE_TIME_         datetime
+   CREATE_TIME_         datetime,
+   COMMODITY_ID_        char(36)
 );
 
 alter table sp_purchasingManager_genre_property comment '320306商品类属性';
