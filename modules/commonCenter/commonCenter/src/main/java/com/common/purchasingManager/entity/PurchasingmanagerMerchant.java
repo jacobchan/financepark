@@ -56,7 +56,7 @@ public class PurchasingmanagerMerchant implements Domain{
 	
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="MERCHANT_TYPE_")
-	private PurchasingmanagerCommodity merchantType;//商户类型ID
+	private PurchasingmanagerGenre merchantType;//商户类型ID
 
 	@Column(name = "MERCHANT_NAME_")
 	@Length(max=128)
@@ -129,12 +129,12 @@ public class PurchasingmanagerMerchant implements Domain{
 	public void setMerchantLinkman(String merchantLinkman){
 		this.merchantLinkman = merchantLinkman;
 	}
-	
-	public PurchasingmanagerCommodity getMerchantType() {
+
+	public PurchasingmanagerGenre getMerchantType() {
 		return merchantType;
 	}
 
-	public void setMerchantType(PurchasingmanagerCommodity merchantType) {
+	public void setMerchantType(PurchasingmanagerGenre merchantType) {
 		this.merchantType = merchantType;
 	}
 
