@@ -6,7 +6,7 @@
 				editSrc="esb/web/memberInformationManager/getMemberInformation.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/memberInformationManager/removeMemberInformation.json">
 		<youi:fieldLayout>
-			<youi:fieldText property="memberBirthdate"  caption="出生日期"/>
+			<youi:fieldCalendar property="memberBirthdate"  caption="出生日期" format="yyyy-MM-dd" textFormat="yyyy-MM-dd"/>
 			<youi:fieldText property="memberNickname"  caption="昵称"/>
 			<youi:fieldText property="memberDescribe2"  caption="简介"/>
 			<youi:fieldText property="memberHeadPortrait"  caption="头像"/>
@@ -16,15 +16,15 @@
 
 			<youi:fieldText property="companyInvitecode"  caption="企业邀请码"/>
 		</youi:fieldLayout>
-		<youi:gridCol property="memberBirthdate"  caption="出生日期"/>
-		<youi:gridCol property="memberNickname"  caption="昵称"/>
-		<youi:gridCol property="memberDescribe2"  caption="简介"/>
-		<youi:gridCol property="memberHeadPortrait"  caption="头像"/>
-		<youi:gridCol property="memberName"  caption="姓名"/>
-		<youi:gridCol property="memberPhoneNumber"  caption="电话号码"/>
-		<youi:gridCol property="companyId"  caption="企业ID"/>
-
-		<youi:gridCol property="companyInvitecode"  caption="企业邀请码"/>
+		<youi:gridCol property="memberName"  caption="姓名" width="10%"/>
+		<youi:gridCol property="memberNickname"  caption="昵称" width="10%"/>
+		<youi:gridCol property="memberBirthdate"  caption="出生日期" width="10%"/>
+		<youi:gridCol property="memberNickname"  caption="昵称" width="10%"/>
+		<youi:gridCol property="memberPhoneNumber"  caption="电话号码" width="10%"/>
+		<youi:gridCol property="memberHeadPortrait"  caption="头像" width="10%"/>	
+		<youi:gridCol property="memberDescribe2"  caption="简介" width="20%"/>
+		<youi:gridCol property="companyId"  caption="企业ID" width="10%"/>
+		<youi:gridCol property="companyInvitecode"  caption="企业邀请码" width="10%"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -38,7 +38,7 @@
 			<youi:fieldText property="memberNickname"  caption="昵称"/>
 			<youi:fieldText property="memberHeadPortrait"  caption="头像"/>
 			<youi:fieldText property="memberName"  caption="姓名"/>
-			<youi:fieldCalendar property="memberBirthdate"  caption="出生日期"/>
+			<youi:fieldCalendar property="memberBirthdate"  caption="出生日期" format="yyyy-MM-dd" textFormat="yyyy-MM-dd"/>
 			<youi:fieldText property="memberPhoneNumber"  caption="电话号码" expression="^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$" expressionMessage="手机号码格式不正确"/>
 			<youi:fieldText property="companyId"  caption="企业ID"/>
 			<youi:fieldText property="companyInvitecode"  caption="企业邀请码"/>
