@@ -4,8 +4,8 @@
 package com.common.BuildingBaseManager.entity;
 
 import javax.persistence.*;
-
 import org.hibernate.validator.*;
+
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
@@ -19,24 +19,27 @@ import com.gsoft.framework.core.dataobj.Domain;
 @Table(name = "sp_bbm_building_")
 public class BbmBuilding implements Domain{
 	
-	private static final long serialVersionUID = -6948463690455514208L;
+	private static final long serialVersionUID = 1299058536300579348L;
 	
 
-	@Column(name = "PARK_ID_")
-	@Length(max=36)
-	private String parkId;//园区ID
+	@Column(name = "Z_FLOOR_NUM_2")
+	@Length(max=2)
+	private String floorNum;//招商_楼层数量
 
 	@Column(name = "BUILDING_NO_")
 	@Length(max=32)
 	private String buildingNo;//楼栋编号
 
-	@Column(name = "Z_USE_STATUS_")
-	@Length(max=2)
-	private String useStatus;//招商_使用状态
+	@Column(name = "BUILDING_CAPTION")
+	@Length(max=32)
+	private String buildingCaption;//楼宇说明
 
 	@Column(name = "CREATE_USER_")
 	@Length(max=36)
 	private String createUser;//创建人
+
+	@Column(name = "UPDATE_TIME_")
+	private String updateTime;//修改时间
 
 	@Column(name = "CREATE_TIME_")
 	private String createTime;//创建时间
@@ -45,60 +48,49 @@ public class BbmBuilding implements Domain{
 	@Length(max=32)
 	private String company;//入驻企业
 
-	@Column(name = "BUILDING_TYPE_")
+	@Column(name = "BUILDING_UNIT_COUNT_")
+	@Length(max=32)
+	private String buildingUnitCount;//楼宇单元数
+
+	@Column(name = "PARK_ID_")
 	@Length(max=36)
-	private String buildingType;//楼栋类别
-
-	@Column(name = "Z_FLOOR_NUM_2")
-	@Length(max=2)
-	private String floorNum;//招商_楼层数量
-
-	@Column(name = "BUILDING_CAPTION")
-	@Length(max=32)
-	private String buildingCaption;//楼宇说明
-
-	@Column(name = "Attribute_FLOOR_COUNT_")
-	@Length(max=32)
-	private String attributeFloorCount;//楼宇层数
-
-	@Column(name = "UPDATE_TIME_")
-	private String updateTime;//修改时间
+	private String parkId;//园区ID
 
 	@Column(name = "UPDATE_USER_")
 	@Length(max=36)
 	private String updateUser;//修改人
 
-	@Column(name = "BUILDING_UNIT_COUNT_")
+	@Column(name = "Attribute_FLOOR_COUNT_")
 	@Length(max=32)
-	private String buildingUnitCount;//楼宇单元数
+	private String attributeFloorCount;//楼宇层数
+
+	@Column(name = "BUILDING_IMAGE_")
+	@Length(max=100)
+	private String buildingImage;//楼栋图片
+
+	@Column(name = "BUILDING_TYPE_")
+	@Length(max=36)
+	private String buildingType;//楼栋类别
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "BUILDING_ID_")
 	@Length(max=36)
 	private String buildingId;//楼栋ID
+
+	@Column(name = "Z_USE_STATUS_")
+	@Length(max=2)
+	private String useStatus;//招商_使用状态
 	
-	@ManyToOne//(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="sp__PARK_ID_")
 	private com.common.BuildingBaseManager.entity.BbmPark bbmPark;//320_园区ID
 	
-	@Column(name = "BUILDING_IMAGE_")
-	@Length(max=100)
-	private String buildingImage;//楼栋图片URL
-	
-	public String getBuildingImage() {
-		return buildingImage;
-	}
-
-	public void setBuildingImage(String buildingImage) {
-		this.buildingImage = buildingImage;
-	}
-
-	public String getParkId(){
-		return this.parkId;
+	public String getFloorNum(){
+		return this.floorNum;
 	}
 	
-	public void setParkId(String parkId){
-		this.parkId = parkId;
+	public void setFloorNum(String floorNum){
+		this.floorNum = floorNum;
 	}
 	public String getBuildingNo(){
 		return this.buildingNo;
@@ -107,12 +99,12 @@ public class BbmBuilding implements Domain{
 	public void setBuildingNo(String buildingNo){
 		this.buildingNo = buildingNo;
 	}
-	public String getUseStatus(){
-		return this.useStatus;
+	public String getBuildingCaption(){
+		return this.buildingCaption;
 	}
 	
-	public void setUseStatus(String useStatus){
-		this.useStatus = useStatus;
+	public void setBuildingCaption(String buildingCaption){
+		this.buildingCaption = buildingCaption;
 	}
 	public String getCreateUser(){
 		return this.createUser;
@@ -120,6 +112,13 @@ public class BbmBuilding implements Domain{
 	
 	public void setCreateUser(String createUser){
 		this.createUser = createUser;
+	}
+	public String getUpdateTime(){
+		return this.updateTime;
+	}
+	
+	public void setUpdateTime(String updateTime){
+		this.updateTime = updateTime;
 	}
 	public String getCreateTime(){
 		return this.createTime;
@@ -135,40 +134,19 @@ public class BbmBuilding implements Domain{
 	public void setCompany(String company){
 		this.company = company;
 	}
-	public String getBuildingType(){
-		return this.buildingType;
+	public String getBuildingUnitCount(){
+		return this.buildingUnitCount;
 	}
 	
-	public void setBuildingType(String buildingType){
-		this.buildingType = buildingType;
+	public void setBuildingUnitCount(String buildingUnitCount){
+		this.buildingUnitCount = buildingUnitCount;
 	}
-	public String getFloorNum(){
-		return this.floorNum;
-	}
-	
-	public void setFloorNum(String floorNum){
-		this.floorNum = floorNum;
-	}
-	public String getBuildingCaption(){
-		return this.buildingCaption;
+	public String getParkId(){
+		return this.parkId;
 	}
 	
-	public void setBuildingCaption(String buildingCaption){
-		this.buildingCaption = buildingCaption;
-	}
-	public String getAttributeFloorCount(){
-		return this.attributeFloorCount;
-	}
-	
-	public void setAttributeFloorCount(String attributeFloorCount){
-		this.attributeFloorCount = attributeFloorCount;
-	}
-	public String getUpdateTime(){
-		return this.updateTime;
-	}
-	
-	public void setUpdateTime(String updateTime){
-		this.updateTime = updateTime;
+	public void setParkId(String parkId){
+		this.parkId = parkId;
 	}
 	public String getUpdateUser(){
 		return this.updateUser;
@@ -177,12 +155,26 @@ public class BbmBuilding implements Domain{
 	public void setUpdateUser(String updateUser){
 		this.updateUser = updateUser;
 	}
-	public String getBuildingUnitCount(){
-		return this.buildingUnitCount;
+	public String getAttributeFloorCount(){
+		return this.attributeFloorCount;
 	}
 	
-	public void setBuildingUnitCount(String buildingUnitCount){
-		this.buildingUnitCount = buildingUnitCount;
+	public void setAttributeFloorCount(String attributeFloorCount){
+		this.attributeFloorCount = attributeFloorCount;
+	}
+	public String getBuildingImage(){
+		return this.buildingImage;
+	}
+	
+	public void setBuildingImage(String buildingImage){
+		this.buildingImage = buildingImage;
+	}
+	public String getBuildingType(){
+		return this.buildingType;
+	}
+	
+	public void setBuildingType(String buildingType){
+		this.buildingType = buildingType;
 	}
 	public String getBuildingId(){
 		return this.buildingId;
@@ -190,6 +182,13 @@ public class BbmBuilding implements Domain{
 	
 	public void setBuildingId(String buildingId){
 		this.buildingId = buildingId;
+	}
+	public String getUseStatus(){
+		return this.useStatus;
+	}
+	
+	public void setUseStatus(String useStatus){
+		this.useStatus = useStatus;
 	}
 	
 	public void setBbmPark(com.common.BuildingBaseManager.entity.BbmPark bbmPark){
@@ -205,20 +204,21 @@ public class BbmBuilding implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((parkId == null) ? 0 : parkId.hashCode());
+		result = prime * result + ((floorNum == null) ? 0 : floorNum.hashCode());
 		result = prime * result + ((buildingNo == null) ? 0 : buildingNo.hashCode());
-		result = prime * result + ((useStatus == null) ? 0 : useStatus.hashCode());
+		result = prime * result + ((buildingCaption == null) ? 0 : buildingCaption.hashCode());
 		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
 		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
 		result = prime * result + ((company == null) ? 0 : company.hashCode());
-		result = prime * result + ((buildingType == null) ? 0 : buildingType.hashCode());
-		result = prime * result + ((floorNum == null) ? 0 : floorNum.hashCode());
-		result = prime * result + ((buildingCaption == null) ? 0 : buildingCaption.hashCode());
-		result = prime * result + ((attributeFloorCount == null) ? 0 : attributeFloorCount.hashCode());
-		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
-		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
 		result = prime * result + ((buildingUnitCount == null) ? 0 : buildingUnitCount.hashCode());
+		result = prime * result + ((parkId == null) ? 0 : parkId.hashCode());
+		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
+		result = prime * result + ((attributeFloorCount == null) ? 0 : attributeFloorCount.hashCode());
+		result = prime * result + ((buildingImage == null) ? 0 : buildingImage.hashCode());
+		result = prime * result + ((buildingType == null) ? 0 : buildingType.hashCode());
 		result = prime * result + ((buildingId == null) ? 0 : buildingId.hashCode());
+		result = prime * result + ((useStatus == null) ? 0 : useStatus.hashCode());
 		return result;
 	}
 	
@@ -231,25 +231,30 @@ public class BbmBuilding implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		final BbmBuilding other = (BbmBuilding) obj;
-		if (parkId == null) {
-			if (other.parkId != null)
+		if (floorNum == null) {
+			if (other.floorNum != null)
 				return false;
-		} else if (!parkId.equals(other.parkId))
+		} else if (!floorNum.equals(other.floorNum))
 			return false;
 		if (buildingNo == null) {
 			if (other.buildingNo != null)
 				return false;
 		} else if (!buildingNo.equals(other.buildingNo))
 			return false;
-		if (useStatus == null) {
-			if (other.useStatus != null)
+		if (buildingCaption == null) {
+			if (other.buildingCaption != null)
 				return false;
-		} else if (!useStatus.equals(other.useStatus))
+		} else if (!buildingCaption.equals(other.buildingCaption))
 			return false;
 		if (createUser == null) {
 			if (other.createUser != null)
 				return false;
 		} else if (!createUser.equals(other.createUser))
+			return false;
+		if (updateTime == null) {
+			if (other.updateTime != null)
+				return false;
+		} else if (!updateTime.equals(other.updateTime))
 			return false;
 		if (createTime == null) {
 			if (other.createTime != null)
@@ -261,45 +266,45 @@ public class BbmBuilding implements Domain{
 				return false;
 		} else if (!company.equals(other.company))
 			return false;
-		if (buildingType == null) {
-			if (other.buildingType != null)
+		if (buildingUnitCount == null) {
+			if (other.buildingUnitCount != null)
 				return false;
-		} else if (!buildingType.equals(other.buildingType))
+		} else if (!buildingUnitCount.equals(other.buildingUnitCount))
 			return false;
-		if (floorNum == null) {
-			if (other.floorNum != null)
+		if (parkId == null) {
+			if (other.parkId != null)
 				return false;
-		} else if (!floorNum.equals(other.floorNum))
-			return false;
-		if (buildingCaption == null) {
-			if (other.buildingCaption != null)
-				return false;
-		} else if (!buildingCaption.equals(other.buildingCaption))
-			return false;
-		if (attributeFloorCount == null) {
-			if (other.attributeFloorCount != null)
-				return false;
-		} else if (!attributeFloorCount.equals(other.attributeFloorCount))
-			return false;
-		if (updateTime == null) {
-			if (other.updateTime != null)
-				return false;
-		} else if (!updateTime.equals(other.updateTime))
+		} else if (!parkId.equals(other.parkId))
 			return false;
 		if (updateUser == null) {
 			if (other.updateUser != null)
 				return false;
 		} else if (!updateUser.equals(other.updateUser))
 			return false;
-		if (buildingUnitCount == null) {
-			if (other.buildingUnitCount != null)
+		if (attributeFloorCount == null) {
+			if (other.attributeFloorCount != null)
 				return false;
-		} else if (!buildingUnitCount.equals(other.buildingUnitCount))
+		} else if (!attributeFloorCount.equals(other.attributeFloorCount))
+			return false;
+		if (buildingImage == null) {
+			if (other.buildingImage != null)
+				return false;
+		} else if (!buildingImage.equals(other.buildingImage))
+			return false;
+		if (buildingType == null) {
+			if (other.buildingType != null)
+				return false;
+		} else if (!buildingType.equals(other.buildingType))
 			return false;
 		if (buildingId == null) {
 			if (other.buildingId != null)
 				return false;
 		} else if (!buildingId.equals(other.buildingId))
+			return false;
+		if (useStatus == null) {
+			if (other.useStatus != null)
+				return false;
+		} else if (!useStatus.equals(other.useStatus))
 			return false;
 		return true;
 	}
