@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
-	<youi:grid id="grid_enterprisemaillist" idKeys="employeesId,employeesComId.rzId"
+	<youi:grid id="grid_enterprisemaillist" idKeys="employeesId"
 		caption="邀请记录表列表" panel="false"
 		src="esb/web/enterpriseEmployeesManager/getPagerEnterpriseEmployeess.json"
 		dataFormId="form_enterprisemaillist"
@@ -20,15 +20,14 @@
 		<youi:gridCol property="employeesName" caption="员工姓名" width="20%" />
 		<youi:gridCol property="employeesTelephone" caption="员工电话" width="20%" />
 		<youi:gridCol property="employeesComId.rzMem" caption="企业信息" width="40%" />
+		<youi:gridCol property="employeesComId.rzMem" caption="角色" width="40%" />
+		<youi:gridCol property="employeesId" caption="企业编号" width="0" />
 	</youi:grid>
 
 	<!-- form-分配角色 -->
 	<youi:form dialog="true" caption="分配角色" id="form_enterprisemaillist"
 		action="esb/web/enterpriseRoleManager/saveEnterpriseRole.json">
 		<youi:fieldLayout prefix="record" columns="1" labelWidths="120,120">
-			<youi:fieldHidden property="rId" caption="角色Id" />
-			<youi:fieldText property="invitationCode" notNull="true" readonly="true" caption="企业邀请码" />
-			<youi:fieldText property="invitationTelephone" notNull="true" caption="会员电话" />
 			<youi:fieldSelect property="role.roleId"
 				src="esb/web/roleManager/getPagerRoles.json"
 				code="roleId" show="roleCaption" caption="企业角色" notNull="true" tooltips="企业角色" />
@@ -40,14 +39,18 @@
 	<youi:func name="func_grid_distribution" params="value">
 		var gridElement = $elem('grid_enterprisemaillist',pageId),
 		selectedRecord = gridElement.grid('getSelectedRecord');
-		var rId = selectedRecord.employeesId;
-		alert(rId);
-		if(employeesId!=''){
+		var eId = selectedRecord.employeesId;
+		if(eId!=''){
 			$.youi.ajaxUtil.ajax({
-				url:'/esb/web/enterpriseRoleManager/getEnterpriseRole.json',
-				data:{rId:rId},
+				url:'/esb/web/enterpriseRoleManager/getEnterpriseRoleByEmployees.json',
+				data:{eId:eId},
 				success:function(result){
-					alert(result.record.employees.employeesName);
+					var record = result.records;
+					for(var i=0;i<record.length;i++){
+						var roles = record[i];
+						$elem('record_role_roleId',pageId).fieldValue(roles.role.roleId);
+					}
+					$elem('form_enterprisemaillist',pageId).form('open');
 				}
 			});
 		}
