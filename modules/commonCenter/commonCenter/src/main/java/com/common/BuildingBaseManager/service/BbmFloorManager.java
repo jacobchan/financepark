@@ -12,8 +12,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.common.BuildingBaseManager.entity.BbmFloor;
+import com.common.BuildingBaseManager.entity.BbmPark;
 
 public interface BbmFloorManager extends BaseManager{
 
@@ -63,4 +63,12 @@ public interface BbmFloorManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitBbmFloor(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 通过楼栋ID获取园区
+	 * @param buildingId 楼栋ID
+	 * @return
+	 * @throws BusException
+	 */
+	public BbmPark findBbmParkByBuildingId(String buildingId) throws BusException ;
 }
