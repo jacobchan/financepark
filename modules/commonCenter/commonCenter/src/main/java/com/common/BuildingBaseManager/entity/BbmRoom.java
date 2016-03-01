@@ -111,7 +111,7 @@ public class BbmRoom implements Domain{
     @JoinColumn(name="BUILDING_ID_")
 	private com.common.BuildingBaseManager.entity.BbmBuilding bbmBuilding;//楼栋ID
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="FLOOR_ID_")
 	private com.common.BuildingBaseManager.entity.BbmFloor bbmFloor;//楼层ID
 	
