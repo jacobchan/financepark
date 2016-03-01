@@ -12,7 +12,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
+import com.common.BuildingBaseManager.entity.BbmBuilding;
+import com.common.BuildingBaseManager.entity.BbmFloor;
 import com.common.BuildingBaseManager.entity.BbmRoom;
 
 public interface BbmRoomManager extends BaseManager{
@@ -41,7 +42,7 @@ public interface BbmRoomManager extends BaseManager{
      * 保存并返回对象
      */
     public BbmRoom saveBbmRoom(BbmRoom o) throws BusException;
-
+    
     /**
      * 删除对象
      */
@@ -63,4 +64,18 @@ public interface BbmRoomManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitBbmRoom(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 通过楼层ID获取对应的楼栋信息
+	 * @param FloorId 楼层ID
+	 * @return
+	 */
+	public BbmBuilding findBbmBuildingByFloorId(String floorId);
+	
+	/**
+	 * 通过单元ID获取对应的楼层信息
+	 * @param roomId 单元ID
+	 * @return
+	 */
+	public BbmFloor findBbmFloorByRoomId(String roomId) ;
 }
