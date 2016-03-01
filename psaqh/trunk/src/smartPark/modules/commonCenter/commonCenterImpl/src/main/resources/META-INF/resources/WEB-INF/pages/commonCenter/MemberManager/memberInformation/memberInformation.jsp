@@ -35,11 +35,11 @@
 	<youi:form dialog="true" caption="-会员信息表" id="form_memberInformation" action="esb/web/memberInformationManager/saveMemberInformation.json">
 		<youi:fieldLayout prefix="record">
 			<youi:fieldHidden property="memberId"  caption="会员用户ID"/>
-			<youi:fieldText property="memberNickname"  caption="昵称"/>
+			<youi:fieldText property="memberName"  caption="姓名" notNull="true"/>
+			<youi:fieldText property="memberNickname"  caption="昵称" notNull="true"/>
 			<youi:fieldText property="memberHeadPortrait"  caption="头像"/>
-			<youi:fieldText property="memberName"  caption="姓名"/>
 			<youi:fieldCalendar property="memberBirthdate"  caption="出生日期" format="yyyy-MM-dd" textFormat="yyyy-MM-dd"/>
-			<youi:fieldText property="memberPhoneNumber"  caption="电话号码" expression="^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$" expressionMessage="手机号码格式不正确"/>
+			<youi:fieldText property="memberPhoneNumber"  caption="电话号码" expression="^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$" expressionMessage="手机号码格式不正确" notNull="true"/>
 			<youi:fieldText property="companyId"  caption="企业ID"/>
 			<youi:fieldText property="companyInvitecode"  caption="企业邀请码"/>
 			<youi:fieldArea property="memberDescribe2"  caption="简介" column="2"/>
