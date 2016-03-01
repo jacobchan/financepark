@@ -3,9 +3,11 @@
  */
 package com.manage.PropertyServiceManager.entity;
 
-import javax.persistence.*;
-import org.hibernate.validator.*;
+import java.math.BigDecimal;
 
+import javax.persistence.*;
+
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
@@ -32,8 +34,7 @@ public class PropertyservicemanagerSfpro implements Domain{
 	private String sfproId;//收费项目序列
 
 	@Column(name = "SFPRO_AMOUNT_")
-	@Length(max=14)
-	private String sfproAmount;//项目金额
+	private BigDecimal sfproAmount;//项目金额
 
 	@Column(name = "CREATE_USER_")
 	@Length(max=36)
@@ -67,13 +68,15 @@ public class PropertyservicemanagerSfpro implements Domain{
 	public void setSfproId(String sfproId){
 		this.sfproId = sfproId;
 	}
-	public String getSfproAmount(){
-		return this.sfproAmount;
-	}
 	
-	public void setSfproAmount(String sfproAmount){
+	public BigDecimal getSfproAmount() {
+		return sfproAmount;
+	}
+
+	public void setSfproAmount(BigDecimal sfproAmount) {
 		this.sfproAmount = sfproAmount;
 	}
+
 	public String getCreateUser(){
 		return this.createUser;
 	}
