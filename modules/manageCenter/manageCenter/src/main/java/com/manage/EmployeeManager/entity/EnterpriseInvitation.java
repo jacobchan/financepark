@@ -4,11 +4,12 @@
 package com.manage.EmployeeManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
+import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 /**
  * 实体: 邀请记录表
  * @author
@@ -29,10 +30,12 @@ public class EnterpriseInvitation implements Domain{
 	@Length(max=36)
 	private String updateUser;//修改人
 
-	@Column(name = "RZ_ID_")
-	@Length(max=36)
-	private String rzId;//ID
-	@Id @GeneratedValue(generator="system-uuid")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "RZ_ID_")
+	private EnterbusinessmanagerRz enterbusinessmanagerRz;// 企业ID
+	
+	@Id 
+	@GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "INVITATION_ID_")
 	@Length(max=36)
@@ -67,13 +70,16 @@ public class EnterpriseInvitation implements Domain{
 	public void setUpdateUser(String updateUser){
 		this.updateUser = updateUser;
 	}
-	public String getRzId(){
-		return this.rzId;
-	}
 	
-	public void setRzId(String rzId){
-		this.rzId = rzId;
+	public EnterbusinessmanagerRz getEnterbusinessmanagerRz() {
+		return enterbusinessmanagerRz;
 	}
+
+	public void setEnterbusinessmanagerRz(
+			EnterbusinessmanagerRz enterbusinessmanagerRz) {
+		this.enterbusinessmanagerRz = enterbusinessmanagerRz;
+	}
+
 	public String getInvitationId(){
 		return this.invitationId;
 	}
