@@ -2,9 +2,9 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
 	<!--**********************************子页面**********************************-->
-	<youi:subpage caption="商品扩展信息" 
+	<youi:subpage caption="采购商品扩展信息" 
 		width="800" subpageId="sb_commodity_extend"
-		src="page/commonCenter.purchasingManager.purchasingmanagerCommodityExtendValue/purchasingmanagerCommodityExtendValue.html?purchasingmanagerCommodity.commodityId={commodityId}">
+		src="page/commonCenter.purchasingManager.purchasingmanagerCommodityExtend/purchasingmanagerCommodityExtend.html?commodity.commodityId={commodityId}">
 	</youi:subpage>
 	<!--**********************************子页面**********************************-->
 	<youi:grid id="grid_purchasingmanagerCommodity" idKeys="commodityId" caption="商品信息列表"  panel="false"
@@ -79,8 +79,9 @@
 	<!--**********************************页面函数Start********************************-->
 	<youi:func name="func_grid_commodity_extend">
 		var selectRecord = $elem('grid_purchasingmanagerCommodity',pageId).grid('getSelectedRecord');
-		var aa = selectRecord['purchasingmanagerGenre.genreId'];
-		alert(aa);
+		var commodityId = selectRecord['commodityId'];
+		var genreId = selectRecord['purchasingmanagerGenre.genreId'];
+		$elem('subpage_sb_commodity_extend',pageId).subpage('open',{commodityId:commodityId},null,{commodityId:commodityId});
 	</youi:func>
 	<youi:func name="func_grid_veiwCommodity">
 		var selectRecord = $elem('grid_purchasingmanagerCommodity',pageId).grid('getSelectedRecord');
