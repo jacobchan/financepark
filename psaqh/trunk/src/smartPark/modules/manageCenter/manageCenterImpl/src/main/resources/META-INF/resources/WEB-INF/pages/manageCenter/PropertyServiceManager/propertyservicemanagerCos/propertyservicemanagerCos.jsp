@@ -155,7 +155,7 @@
 		var gridElement = $elem('grid_propertyservicemanagerCos',pageId),
 		selectedRecord = gridElement.grid('getSelectedRecord');
 		var cosstatus = selectedRecord.cosStatus;
-		if(cosstatus=='2'){
+		if(cosstatus=='2' || cosstatus=='3'){
 			$.youi.messageUtils.confirm('确定此投诉已回访?',function(){
 				$.youi.ajaxUtil.ajax({
 				url:'/esb/web/propertyservicemanagerCosManager/upCosbyId.json',
@@ -163,12 +163,8 @@
 				success:function(result){	
 					$elem('grid_propertyservicemanagerCos',pageId).grid('pReload');
 						alert("操作成功!");
-						if(cosstatus=='2'){
-							$elem('recordVisit_propertyservicemanagerCos_cosId',pageId).fieldValue(selectedRecord.cosId);
-        					$elem('form_propertyservicenanagerBack',pageId).form('open');
-						}else{
-							alert("该状态下不能添加回访记录！");
-						}
+						$elem('recordVisit_propertyservicemanagerCos_cosId',pageId).fieldValue(selectedRecord.cosId);
+        				$elem('form_propertyservicenanagerBack',pageId).form('open');
 					}
 				});
 			});
