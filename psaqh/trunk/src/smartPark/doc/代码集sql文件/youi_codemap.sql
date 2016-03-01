@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50538
 File Encoding         : 65001
 
-Date: 2016-02-24 10:54:32
+Date: 2016-03-01 17:50:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,6 +32,7 @@ CREATE TABLE `youi_codemap` (
 -- Records of youi_codemap
 -- ----------------------------
 INSERT INTO `youi_codemap` VALUES ('2c9dc604391da4c701391daaedc80001', 'codemapType', '代码集类型', '1', '');
+INSERT INTO `youi_codemap` VALUES ('40283f8153168c33015316f2fa9c0001', 'payWay', '支付方式', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aad53078875015307bebcbe0001', 'financingStatus', '发布状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aad53078875015307bfe6520004', 'financingType', '融资状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aad53078875015307c09d610007', 'recordType', '预约类型', '1', null);
@@ -51,11 +52,16 @@ INSERT INTO `youi_codemap` VALUES ('40288aad5307d0a601530804d9ad0030', 'addressS
 INSERT INTO `youi_codemap` VALUES ('40288aad5307d0a6015308057ef50033', 'yesOrNo', '是或否', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aad5307d0a60153081a5bbe0037', 'isAbleVisible', '是否接受回访', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aad5307d0a60153081a9204003a', 'acceptanceStatus', '投诉受理状态', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288aae5322165501532219eb9d0002', 'buildingType', '楼栋类别', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aaf52fca91d0152fcabefdb0001', 'floorUsingStatus', '楼层使用状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aaf52fca91d0152fcae28580006', 'saleState', '销售状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aaf52fca91d0152fcaf96140009', 'policyStatus ', '政策新闻发布状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab252f905180152f908e1d30001', 'roomstatus', '房间使用状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab2531113db015311211cf40001', 'policyApplyStatus', '政策申请状态', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288abc531c24bb01531c2a418c0001', 'resoStatus', '资源状态', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288acb53314dd40153318d8a160009', 'oc_status', '一卡通预约状态', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288acb53314dd40153318e54d8000c', 'oc_way', '一卡通办理方式', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288acb53314dd40153318f0c3b000f', 'resoTime', '可用时段', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288acd52f2342b0152f23628bf0001', 'businessType', '园区商品类型', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288acd52f2342b0152f23664670002', 'orderType', '订单类型', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288acd52f2342b0152f2369e7a0003', 'commodityOrderStatus', '商品订单状态', '1', null);
