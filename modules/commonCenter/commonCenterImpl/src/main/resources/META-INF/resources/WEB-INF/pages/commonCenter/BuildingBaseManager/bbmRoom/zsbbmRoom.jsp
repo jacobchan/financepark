@@ -7,18 +7,20 @@
 				removeSrc="esb/web/bbmRoomManager/removeBbmRoom.json">
 		<youi:fieldLayout labelWidths="140,140">
 			<youi:fieldText property="roomNo"  caption="单元编号"/>
-			<youi:fieldText property="floor"  caption="所属楼层"/>
-			<youi:fieldSelect property="status"  caption="使用状态" convert="floorUsingStatus"/>
+			<youi:fieldSelect property="bbmFloor.floorId" caption="所属楼层" code="floorId" show="floorNo" 
+				src="esb/web/bbmFloorManager/getBbmFloors.json" />
+			<youi:fieldSelect property="status"  caption="使用状态" convert="roomstatus"/>
 			<youi:fieldText property="aspect"  caption="招商_朝向"/>
 			<youi:fieldSelect property="saleState"  caption="招商_销售状态" convert="saleState"/>
 			<youi:fieldText property="area"  caption="招商_房间面积"/>
-			<youi:fieldText property="roomName"  caption="招商_房间名称"/>
 		</youi:fieldLayout>
-		<youi:gridCol property="floor"  caption="所属楼层"/>
-		<youi:gridCol property="roomNo"  caption="单元编号"/>
-		<youi:gridCol property="status"  caption="使用状态" convert="floorUsingStatus"/>
-		
-		
+		<youi:gridCol property="roomNo"  caption="单元编号" width="100" align="center"/>
+		<youi:gridCol property="bbmFloor.bbmBuilding.bbmPark.parkName" caption="所属园区" width="100" align="center"/>
+		<youi:gridCol property="bbmFloor.bbmBuilding.buildingNo" caption="所属楼栋" width="100" align="center"/>
+		<youi:gridCol property="bbmFloor.floorNo" caption="所属楼层" width="100" align="center"/>
+		<youi:gridCol property="roomHost"  caption="单元业主" width="100" align="center"/>
+		<youi:gridCol property="status"  caption="使用状态" width="100" align="center" convert="roomstatus"/>
+
 		<youi:gridCol property="aspect"  caption="招商_朝向"/>
 		<youi:gridCol property="salesPrice"  caption="招商_单价"/>
 		<youi:gridCol property="rebate"  caption="招商_折扣"/>
@@ -38,14 +40,22 @@
 	<!-- form-楼宇招商信息修改 -->
 	<youi:form dialog="true" caption="楼宇招商信息修改" id="form_bbmRoom" action="esb/web/bbmRoomManager/saveBbmRoom.json">
 		<youi:fieldLayout prefix="record" labelWidths="140,140">
-			<youi:fieldHidden property="roomId" caption="单元ID"/>
-			<youi:fieldHidden property="rentCharge" caption="物业_租金"/>
-			<youi:fieldHidden property="eneryCharge" caption="物业_电费"/>
-			<youi:fieldHidden property="waterCharge" caption="物业_水费"/>
+			<youi:fieldHidden property="roomId"  caption="单元ID"/>
+			<youi:fieldText property="roomNo"  caption="单元编号" notNull="true" readonly="true"/>
+			<youi:fieldSelect property="bbmFloor.floorId" caption="所属楼层" code="floorId" show="floorNo" notNull="true"
+				src="esb/web/bbmFloorManager/getBbmFloors.json" readonly="true"/>
+			<youi:fieldText property="buildingNo"  caption="所属楼栋" readonly="true"/>
+			<youi:fieldText property="parkName"  caption="所属园区" readonly="true"/>
+			<youi:fieldSelect property="status"  caption="使用状态" convert="roomstatus"/>
+			<youi:fieldText property="roomHost"  caption="单元业主" notNull="true"/>
 			
-			<youi:fieldText property="floor"  caption="所属楼层" readonly="true"/>
-			<youi:fieldText property="roomNo"  caption="单元编号" readonly="true"/>
-			<youi:fieldSelect property="status"  caption="使用状态" convert="floorUsingStatus"/>
+			<youi:fieldHidden property="roomTenement"  caption="单元租户"/>
+			<youi:fieldHidden property="rentCharge"  caption="物业_租金"/>
+			<youi:fieldHidden property="eneryCharge"  caption="物业_电费" />
+			<youi:fieldHidden property="waterCharge"  caption="物业_水费" />
+			<youi:fieldHidden property="propertyCharge"  caption="物业_物业费"/>
+			<youi:fieldHidden property="enteredEnt"  caption="包含企业"/>
+			
 			<youi:fieldText property="aspect"  caption="招商_朝向"/>
 			<youi:fieldSelect property="saleState"  caption="招商_销售状态" convert="saleState"/>
 			<youi:fieldText property="salesPrice"  caption="招商_单价"/>
@@ -59,6 +69,45 @@
 	</youi:form>
 	
 	<!--**********************************页面函数Start********************************-->
-	
+	<!-- 单元发生变化时，对应的楼栋，园区，业主也发生变化 -->
+		<%-- <youi:func name = "record_roomId_change">
+      		var roomId = $('#P_'+pageId+'_record_roomId').fieldValue();//获取当前选中楼栋的id
+			$.youi.ajaxUtil.ajax({
+				url:'/esb/web/bbmRoomManager/findBbmFloorByRoomId.json',
+				data:{roomId:roomId},
+				success:function(result){
+					var record = result.record;
+					$('#P_'+pageId+'_record_parkName').fieldValue('') ;//先将园区名称置空
+					$('#P_'+pageId+'_record_buildingNo').fieldValue('') ;//先将楼栋编号置空
+					$('#P_'+pageId+'_record_floorNo').fieldValue('') ;//先将楼层编号置空
+					$('#P_'+pageId+'_record_floorNo').fieldValue(record.floorNo);//将返回的对象里面的floorNo赋值给楼层编号
+ 					$('#P_'+pageId+'_record_buildingNo').fieldValue(record.bbmBuilding.buildingNo);//将返回的对象里面的buildingNo赋值给楼栋编号
+                    $('#P_'+pageId+'_record_parkName').fieldValue(record.bbmBuilding.bbmPark.parkName);//将返回的对象里面的bbmPark.parkName赋值给园区名称
+				} 
+            });
+   	 </youi:func> --%>
+   	 
+   	 <!-- 楼层发生变化时，对应的楼栋，园区也发生变化 -->
+		<youi:func name = "record_bbmFloor_floorId_change">
+      		var floorId = $('#P_'+pageId+'_record_bbmFloor_floorId').fieldValue();//获取当前选中楼栋的id
+			$.youi.ajaxUtil.ajax({
+				url:'/esb/web/bbmRoomManager/findBbmBuildingByFloorId.json',
+				data:{floorId:floorId},
+				success:function(result){
+					var record = result.record;
+					$('#P_'+pageId+'_record_parkName').fieldValue('') ;//先将园区名称置空
+					$('#P_'+pageId+'_record_buildingNo').fieldValue('') ;//先将楼层编号置空
+ 					$('#P_'+pageId+'_record_buildingNo').fieldValue(record.buildingNo);//将返回的对象里面的buildingNo赋值给楼层编号
+                    $('#P_'+pageId+'_record_parkName').fieldValue(record.bbmPark.parkName);//将返回的对象里面的bbmPark.parkName赋值给园区名称
+                  } 
+            });
+   	 </youi:func>
+   	 
+   	 <!-- 表单提交后重新加载页面 -->
+   	 <youi:func name = "form_bbmRoom_afterSubmit">
+			var bbmRoom = $elem('form_bbmRoom',pageId);
+			bbmRoom.form('close');
+			$elem('grid_bbmRoom',pageId).grid('pReload');
+	</youi:func>
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
