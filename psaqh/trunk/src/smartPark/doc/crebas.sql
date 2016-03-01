@@ -1637,7 +1637,8 @@ create table sp_purchasingManager_commodity_extend
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
    CREATE_TIME_         datetime,
-   GENRE_ID_            char(36)
+   GENRE_ID_            char(36),
+   COMMODITY_ID_        char(36)
 );
 
 alter table sp_purchasingManager_commodity_extend comment '320302采购商品信息扩展';
@@ -1684,8 +1685,7 @@ create table sp_purchasingManager_genre_property
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
-   CREATE_TIME_         datetime,
-   COMMODITY_ID_        char(36)
+   CREATE_TIME_         datetime
 );
 
 alter table sp_purchasingManager_genre_property comment '320306商品类属性';
