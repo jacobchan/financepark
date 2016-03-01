@@ -45,7 +45,7 @@ public class PropertyservicemanagerFxtdc implements Domain{
 	@Length(max=36)
 	private String fxtdcId;//二维码记录序列
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="MOVEREC_ID_")
 	private com.manage.PropertyServiceManager.entity.PropertyservicemanagerMoverec propertyservicemanagerMoverec;//搬家申请记录ID
 	
