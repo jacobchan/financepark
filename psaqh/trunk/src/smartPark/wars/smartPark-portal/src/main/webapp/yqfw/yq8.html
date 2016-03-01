@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>物业放行</title>
+	<link href="../styles/base.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
+	<link rel="stylesheet" type="text/css" href="../styles/page/awesome/css/font-awesome.min.css">
+	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+</head>
+<body>
+	<!--***top start****************************************-->
+	<div id="youi_page_header" class="youi-page-header clearfix"></div>
+	<!--***top end****************************************-->
+	<div class="w100">
+		<div class="w1200 clearfix pt30 pb50">
+			<div class="h-nav clearfix">
+				<a href=""><span>首页</span></a><img src="../styles/images/zs/right-j-b.png" border="0" />
+				<a href=""><span>物业服务</span></a><img src="../styles/images/zs/right-j-b.png" border="0" />
+				<a href=""><span class="current">物业放行</span></a>
+			</div>
+			<div class="clearfix">
+				<div class="fl w895">				
+					<div class="ht-bd-box">
+						<table class="setting-table">
+							<colgroup>
+								<col width="80"></col>
+								<col></col>
+								<col width="120"></col>
+								<col></col>
+							</colgroup>
+							<tr>
+								<td align="center">企业名称</td>
+								<td><input type="text" id="moverecComp"></td>
+								<td align="center">楼宇信息</td>
+								<td><input type="text" id="louyu"></td>
+							</tr>
+							<tr>
+								<td align="center">联系人</td>
+								<td><input type="text" id="moverecName"></td>
+								<td align="center">单元号</td>
+								<td><input type="text" id="unit"></td>
+							</tr>
+							<tr>
+								<td align="cneter">联系电话</td>
+								<td><input type="text"></td>
+								<td align="center">提交方式</td>
+								<td>
+									<div class="tct-select">
+										<div class="ic-select">
+											<p id="moverecWay">创立方2</p>
+										</div>
+										<ul style="display: none;" class="select-nav">
+											<li>创立方1</li>
+											<li>创立方2</li>
+											<li>创立方3</li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td align="center">物品描述</td>
+								<td colspan="3"><textarea id="moverecRemark"></textarea></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><input value="提交" class="hhf-submit" type="submit" style="margin-left:0px;"></td>
+							</tr>
+						</table>
+					</div>
+					<h4 class="f14 mt20 mb20">流程说明</h4>	
+					<div class="tc pt20 pb20" style="background-color:#f6f6f6;border:1px solid #ecebeb">
+						<img src="../styles/images/yqfw/lct1.png" border="0">
+					</div>
+				</div>
+				<div class="fr w285">
+					<h3 class="h3-bd">热点新闻</h3>
+					<div class="ifn-group">
+						<ul class="ig-nav">
+							<li>
+								<div class="in-photo">
+									<img src="../styles/images/zs/nav-img1.png" border="0" width="100%"/>
+								</div>
+								<div class="fr">
+									<p>杭州，一场无关情爱的风月无边月无</p>
+									<a href="" class="a-more">详细信息</a>
+								</div>
+							</li>
+							<li>
+								<div class="in-photo">
+									<img src="../styles/images/zs/nav-img2.png" border="0" width="100%"/>
+								</div>
+								<div class="fr">
+									<p>杭州，一场无关情爱的风月无边月无</p>
+									<a href="" class="a-more">详细信息</a>
+								</div>
+							</li>
+							<li>
+								<div class="in-photo">
+									<img src="../styles/images/zs/nav-img3.png" border="0" width="100%"/>
+								</div>
+								<div class="fr">
+									<p>杭州，一场无关情爱的风月无边月无</p>
+									<a href="" class="a-more">详细信息</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--***bottom start****************************************-->
+	<div id="youi_page_footer" class="youi-page-footer"></div>
+	<!--***bottom end****************************************-->
+
+	<!--***弹窗 start****************************************-->
+	<div class="bg-tanc">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<h3 class="mb10"><b>新增地址</b></h3>
+			<table class="line-table cic-l-t wybx-tanc">
+				<colgroup>
+					<col width="110"></col>
+					<col></col>
+				</colgroup>
+				<tr class="label">
+					<td><b>地址类型</b></td>
+					<td>
+						<label><input type="radio" name="address" class="mr5" checked="checked">园区地址</label>
+						<label class="ml30"><input type="radio" name="address" class="mr5">非园区地址</label>
+					</td>
+				</tr>
+				<tr>
+					<td><b>姓名</b></td>
+					<td><input type="text"></td>
+				</tr>
+				<tr>
+					<td><b>电话</b></td>
+					<td><input type="text"></td>
+				</tr>
+				<tr class="show1">
+					<td><b>园区地址</b></td>
+					<td>
+						<div class="tct-select fl mr20" style="width:200px">
+							<div class="ic-select">
+								<p>园区地址2</p>
+							</div>
+							<ul style="display: none;" class="select-nav">
+								<li>园区地址1</li>
+								<li>园区地址2</li>
+								<li>园区地址3</li>
+							</ul>
+						</div>
+						<div class="tct-select fl" style="width:200px">
+							<div class="ic-select">
+								<p>创立方2</p>
+							</div>
+							<ul style="display: none;" class="select-nav">
+								<li>创立方1</li>
+								<li>创立方2</li>
+								<li>创立方3</li>
+							</ul>
+						</div>
+					</td>
+				</tr>
+				<tr class="show2 undis">
+					<td><b>地址信息</b></td>
+					<td><input type="text" style="width:450px;"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td colspan="2"><a href="" class="ib-btn" style="width:120px;text-align:center;margin-top:10px;">保存</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<!--***弹窗 end****************************************-->
+	<script type="text/javascript" src="../scripts/page/right.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$(".hhf-submit").click(function(){
+				var obj={
+					moverecComp:$("#moverecComp").val(),
+					moverecWay:$("#moverecWay").text(),
+					moverecUnit:$("#louyu").val()+$("#unit").val(),
+					moverecName:$("#moverecName").val(),
+					moverecRemark:$("#moverecRemark").val()
+				};
+				var str=JSON.stringify(obj);
+				alert(str);
+			});
+		});
+	</script>
+</body>
+</html>

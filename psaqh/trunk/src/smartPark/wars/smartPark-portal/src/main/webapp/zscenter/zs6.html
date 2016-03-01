@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href="../styles/base.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
+	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+
+	<script type="text/javascript">
+		$(function () {
+		    var sbysf_index = 0;
+		     var n=$(".space-centent ul li").length-3;
+		    function sbysf_scroll_up(){
+		        sbysf_index++;
+		        if(sbysf_index > n){
+		            sbysf_index = 0;
+		        }
+		        sbysf_show(sbysf_index);
+		    }
+		    function sbysf_scroll_down(){
+		        sbysf_index--;
+		        if(sbysf_index < 0){
+		            sbysf_index = n;
+		        }
+		        sbysf_show(sbysf_index);
+		    }
+		    function sbysf_show(j){
+		        var index = -(j*375);
+		        $(".space-centent ul").animate({left: index+'px'},200);
+		    }
+		    $(".space-centent .arrow-right").click(function(){
+		        sbysf_scroll_up();
+		    });
+		    $(".space-centent .arrow-left").click(function(){
+		        sbysf_scroll_down();
+		    });
+			$(".input-con .now-btn").click(function(){
+				$(".bg-tanc").show();
+			});
+			$(".tc-close").click(function(){
+				$(".bg-tanc").hide();
+			});
+			$(".ic-select").click(function(){
+				$(this).next(".select-nav").toggle();
+			})
+			$(".select-nav li").click(function(){
+				$(".ic-select").find("p").text($(this).text()) ;
+				$(this).parent().hide();
+			})
+			$(function(){
+				$(".space-num .num-reduce").click(function(){
+					var n=parseInt($(this).next("input").val());
+					if(n>0){
+						$(this).next("input").val(n-1);
+					}else{
+						alert("已经是0了")
+					}
+					
+				})
+				$(".space-num .num-plus").click(function(){
+					var n=parseInt($(this).prev("input").val()) ;
+					if(n<6 && n>-1){
+						$(this).prev("input").val(n+1);
+					}else if(n==6){
+						alert("最大值了")
+					}
+				})
+			})
+		})
+	</script>
+</head>
+<body>
+	<!--***top start****************************************-->
+	<div id="youi_page_header" class="youi-page-header clearfix"></div>
+	<!--***top end****************************************-->
+	<!--banner---->
+	<div class="slideBox">
+		<ul class="clearfix  banner-nav">
+	    	<li><a href="javascript:;"><img src="../styles/images/zs/banner4.jpg"/></a></li>
+	        <li><a href="javascript:;"><img src="../styles/images/index/banner1.jpg"/></a></li>
+	        <li><a href="javascript:;"><img src="../styles/images/zs/banner4.jpg"/></a></li>
+	        <li><a href="javascript:;"><img src="../styles/images/index/banner1.jpg"/></a></li>
+	        <li><a href="javascript:;"><img src="../styles/images/zs/banner4.jpg"/></a></li>
+	        <li><a href="javascript:;"><img src="../styles/images/index/banner1.jpg"/></a></li>
+	    </ul>
+	    <div class="pagtion">
+	    	<div class="pt1"></div>
+	        <div></div>
+	        <div></div>
+	        <div></div>
+	        <div></div>
+	        <div></div>
+	    </div>
+	    <form class="visit_form">
+	        <div class="space-con">
+				<div class="sc-w960">
+					<h3 class="sw-h3">预约参与</h3>
+					<div class="input-con">
+						<div class="select-text">
+							<div class="ic-select">
+								<p>富春硅谷--创立方</p>
+							</div>
+							<ul class="select-nav">
+								<li>富春硅谷--创立方1</li>
+								<li>富春硅谷--创立方2</li>
+								<li>富春硅谷--创立方3</li>
+							</ul>
+						</div>
+						<input type="text" placeholder="来访日期">
+						<input type="text" placeholder="来访时间">
+						<input type="text" placeholder="姓名" style="width:90px">
+						<input type="text" placeholder="手机号码">
+						<input type="button" value="立即预约" class="now-btn">
+					</div>
+				</div>
+			</div>
+	    </form>
+	</div>
+	<!--banner end---->
+	<div class="w100">
+		<div class="w1200 clearfix pt50 pb50">
+			<div class="fl mt30">
+				<img src="../styles/images/zs/space1.jpg" border="0">
+			</div>
+			<div class="pro-text fr">
+				<div style="margin:30px 0px 20px;">
+					<h1 style="font-size:28px;">创立方-富春硅谷众创</h1>
+					<div class="pf-hr pf-c5 mt20" ></div>
+				</div>
+				<p style="color:#555;width:500px;line-height:28px;">位于杭州市富阳区银湖科技新城富春硅谷产业园内。创立方提供高速WiFi、会议室、复印打印、咖啡等服务。办公空间采用新风过滤系统，提供过滤PM2.5的健康空气，以及洁净的直饮水。同时，为了助力创业，富春硅谷打造智慧园区平台协助园区企业解决线上物业、企业服务、投融资、产业链对接等服务，提供创业和企业发展全要素，助力企业创新。</p>
+				<p class="mt20"><img src="../styles/images/zs/map.png" border="0" class="mr10">地方：杭州富阳区银湖科技新城富春硅谷科创大厦3楼</p>
+			</div>
+		</div>
+		<div style="background-color:#ffc000;">
+			<div class="space-centent clearfix">
+				<h3 class="tc">服务价格</h3>
+				<div class="w1200" style="overflow:hidden;">
+					<ul class="sc-nav">
+						<li>
+							<div class="mb10"><img src="../styles/images/zs/eig1.jpg" border="0"></div>
+							<input type="text" placeholder="活动卡位800元/月" disabled="disabled" style="cursor:default"><a href="" class="sc-yy" >预约</a>
+						</li>
+						<li>
+							<div class="mb10"><img src="../styles/images/zs/eig2.jpg" border="0"></div>
+							<input type="text" placeholder="活动卡位800元/月" disabled="disabled" style="cursor:default"><a href="" class="sc-yy">预约</a>
+						</li>
+						<li>
+							<div class="mb10"><img src="../styles/images/zs/eig3.jpg" border="0"></div>
+							<input type="text" placeholder="活动卡位800元/月" disabled="disabled" style="cursor:default"><a href="" class="sc-yy">预约</a>
+						</li>
+						<li>
+							<div class="mb10"><img src="../styles/images/zs/eig2.jpg" border="0"></div>
+							<input type="text" placeholder="活动卡位800元/月" disabled="disabled" style="cursor:default"><a href="" class="sc-yy">预约</a>
+						</li>
+						<li>
+							<div class="mb10"><img src="../styles/images/zs/eig3.jpg" border="0"></div>
+							<input type="text" placeholder="活动卡位800元/月" disabled="disabled" style="cursor:default"><a href="" class="sc-yy">预约</a>
+						</li>
+					</ul>
+				</div>
+				
+				<a href="javascript:;" class="arrow arrow-left"></a>
+				<a href="javascript:;" class="arrow arrow-right"></a>
+			</div>
+		</div>
+		<div style="background-color:#f7f7f7;" class="pb30">
+			<div class="clearfix space-centent">
+				<h3 class="tc">增值服务</h3>
+				<table class="zz-fw">
+					<tr>
+						<td>
+							<img src="../styles/images/zs/space-icon1.png" border="0">
+							<h4>空间</h4>
+							<p>覆盖全球孵化网络，汇聚各地创新资源，实现市场拓展和资源流通</p>
+						</td>
+						<td>
+							<img src="../styles/images/zs/space-icon2.png" border="0">
+							<h4>技术</h4>
+							<p>覆盖全球孵化网络，汇聚各地创新资源，实现市场拓展和资源流通</p>
+						</td>
+						<td>
+							<img src="../styles/images/zs/space-icon3.png" border="0">
+							<h4>服务</h4>
+							<p>覆盖全球孵化网络，汇聚各地创新资源，实现市场拓展和资源流通</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<img src="../styles/images/zs/space-icon4.png" border="0">
+							<h4>导师</h4>
+							<p>覆盖全球孵化网络，汇聚各地创新资源，实现市场拓展和资源流通</p>
+						</td>
+						<td>
+							<img src="../styles/images/zs/space-icon5.png" border="0">
+							<h4>人才</h4>
+							<p>覆盖全球孵化网络，汇聚各地创新资源，实现市场拓展和资源流通</p>
+						</td>
+						<td>
+							<img src="../styles/images/zs/space-icon6.png" border="0">
+							<h4>资金</h4>
+							<p>覆盖全球孵化网络，汇聚各地创新资源，实现市场拓展和资源流通</p>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div style="background-color:#fff;" >
+			<div class="clearfix space-centent">
+				<h3 class="tc">战略合作伙伴</h3>
+				<table class="sc-comp">
+					<colgroup>
+						<col width="310"></col>
+						<col width="310"></col>
+						<col width="310"></col>
+						<col width="270"></col>
+					</colgroup>
+					<tr>
+						<td>
+							<a href=""><div><img src="../styles/images/zs/comop1.png" border="0"></div></a>
+						</td>
+						<td>
+							<a href=""><div><img src="../styles/images/zs/comop2.png" border="0"></div></a>
+						</td>
+						<td>
+							<a href=""><div><img src="../styles/images/zs/comop3.png" border="0"></div></a>
+						</td>
+						<td>
+							<a href=""><div><img src="../styles/images/zs/comop4.png" border="0"></div></a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href=""><div><img src="../styles/images/zs/comop5.png" border="0"></div></a>
+						</td>
+						<td>
+							<a href=""><div><img src="../styles/images/zs/comop6.png" border="0"></div></a>
+						</td>
+						<td>
+							<a href=""><div><img src="../styles/images/zs/comop7.png" border="0"></div></a>
+						</td>
+						<td>
+							<a href=""><div><img src="../styles/images/zs/comop8.png" border="0"></div></a>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="pro-bottom two-bottom">
+			<div class="w1200">
+				<ul class="footer-nav clearfix">
+					<a href=""><li>关于我们</li></a>
+					<a href=""><li>园区服务平台</li></a>
+					<a href=""><li>客服中心</li></a>
+					<a href=""><li>运营合作方</li></a>
+					<a href=""><li>帮助中心</li></a>
+				</ul>
+				<p class="tc f13">© 2014-2015 杭州富春硅谷投资有限公司 浙B14231237号</p>
+			</div>
+		</div>
+	</div>
+	<!-- 弹窗 -->
+	<div class="bg-tanc">
+		<div class="tanc-con tanc-con-two clearfix" style="top: 50%;margin-top: -200px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<h3>预订临时工位</h3>
+			<div class="tct-input clearfix">
+				<input type="text" placeholder="杭州">
+				<div class="tct-select">
+					<div class="ic-select">
+						<p>创立方</p>
+					</div>
+					<ul class="select-nav">
+						<li>创立方1</li>
+						<li>创立方2</li>
+						<li>创立方3</li>
+					</ul>
+				</div>
+				<input type="text" placeholder="预定日期" class="inp-time" disabled="disabled">
+				<input type="text" placeholder="截止日期" class="inp-time" disabled="disabled">
+				<input type="submit" value="搜索">
+			</div>
+			<table class="tct-table fl">
+				<colgroup>
+					<col width="280"></col>
+					<col width="280"></col>
+					<col width="280"></col>
+				</colgroup>
+				<thead>
+					<th>产品</th>
+					<th>单价</th>
+					<th>数量</th>
+				</thead>
+				<tr>
+					<td>创立方</td>
+					<td>100/㎡</td>
+					<td>售罄</td>
+				</tr>
+				<tr>
+					<script type="text/javascript">
+						
+					</script>
+					<td>创立方</td>
+					<td>100/㎡</td>
+					<td><div class="space-num"><a href="javascript:;" class="num-reduce">-</a><input type="text" class="num" value="1"><a href="javascript:;" class="num-plus">+</a></div></td>
+				</tr>
+				<tr>
+					<td>创立方</td>
+					<td>100/㎡</td>
+					<td><div class="space-num"><a href="javascript:;" class="num-reduce">-</a><input type="text" class="num" value="1"><a href="javascript:;" class="num-plus">+</a></div></td>
+				</tr>
+			</table>
+			<table class="tct-table fr" style="width:220px;">
+				<colgroup>
+					<col width="220"></col>
+				</colgroup>
+				<thead>
+					<th>已选工位</th>
+				</thead>
+				<tr>
+					<td style="font-size:12px;color:#222;">
+						<div class="clearfix pb10" style="border-bottom:1px dashed #ddd">
+							<div class="fl">
+								<p>创立方</p>
+								<p>100/㎡</p>
+							</div>
+							<div class="fr mt20">
+								1 x
+							</div>
+						</div>
+						<p class="tr mt10">合计：<span style="color:#ff5809">100元</span></p>
+						<a href="" class="ib-btn" style="margin-top:1px;height:32px;line-height:32px;">提交订单</a>
+					</td>
+				</tr>
+			</table>
+			<p class="tc mt20"><a href="" class="add-btn">添加</a></p>
+		</div>
+	</div>
+	<script type="text/javascript" src="../scripts/page/banner.js"></script>
+</body>
+</html>

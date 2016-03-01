@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>搬家放行</title>
+	<link href="../styles/base.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
+	<link rel="stylesheet" type="text/css" href="../styles/page/awesome/css/font-awesome.min.css">
+	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+	<script type="text/javascript" src="../scripts/page/adcom.js"></script>
+	
+</head>
+<body style="background-color:#f4f4f4;">
+	<!--***top start****************************************-->
+	<div id="youi_page_header" class="youi-page-header clearfix"></div>
+	<!--***top end****************************************-->
+	<div class="w100">
+		<div class="w1200 clearfix pt30 pb50">
+			<div class="per-center-box clearfix">
+				<div id="youi_page_left" class="fl clearfix"></div>
+				<div class="w1000">
+					<h3 class="per-h3"><span class="c-333 f14">搬家放行列表 / </span>订单查看 <a href="grzx11.html" class="c-333 fr f14"><i class="fa fa-angle-left f20 mr5" style="font-size:18px;"></i>返回</a></h3>
+					<div class="clearfix mt20" >
+						<div class="gz-fx-box clearfix" style="width:100%;height:auto">
+							<div class="gzb-thead">
+								<span class="c-o mr50">订单号：44152444</span>
+								<span class="ml50">未受理</span>
+								<span class="fr f12">2016年 2 月 18 日 14:09:04</span>
+							</div>
+							<div class="ml15 mr15 clearfix" style="border-bottom:1px solid #efecec;">
+								<div class="w60 fl" style="width:40%">
+									<h4 class="f14 c-333">企业名称：深圳市前海怕啥科技有限公司</h4>
+									<p class="f12 lh20 mt20"><img src="../styles/images/grzx/map.png" class="mr15"> T6航站楼 A302</p>
+								</div>
+								<div class="w60 fl">
+									<h4 class="f14 c-333">张三</h4>
+									<p class="f12 lh20 mt20">1849798789</p>
+								</div>
+							</div>
+							<div class="ml15 mr15 clearfix">
+								<div class="w60">
+									<h4 class="f14 c-333">物品放行清单</h4>
+									<p class="f12 lh20 mt20"><span class="mr40">· 电脑主机</span><span class="mr40">· 一体式主机</span><span class="mr40">· 办公桌椅</span><span>· 打印机</span></p>
+								</div>
+							</div>
+						</div>
+						<a href="javascript:;" class="ib-btn mr10 ac-see" style="margin-top:0px;">查看二维码</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--***bottom start****************************************-->
+	<div id="youi_page_footer" class="youi-page-footer"></div>
+	<!--***bottom end****************************************-->
+
+	<!--***弹窗 start****************************************-->
+	<div class="bg-tanc m1">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="w60 tc mt40" style="margin-left:20%">
+				<div class="mt20 mb20 f16 lh26">
+					<img src="../styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o"> [ 123456789 ] </span>吗？
+				</div>
+				<p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p>
+				<input value="确定" class="hhf-submit" style="height:36px;" type="submit">
+			</div>
+		</div>
+	</div>
+	<div class="bg-tanc m2">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="w70 tc mt40" style="margin-left:15%">
+				<img src="../styles/images/grzx/ewm.jpg" border="0" class="mb20"/> 
+				<p class="mb10">订单号：<span class="c-o"> [ 123456789 ] </span></p>
+				<p>到访时间：2016年1月21日15:30</p>
+				<a href="javascript:;" class="ib-btn">分享到手机</a>
+				<p class="c-o f12 mt20">提示:推送到手机，必须确保手机端已经安装我们的官方APP</p>
+			</div>
+		</div>
+	</div>
+	<!--***弹窗 end****************************************-->
+	<script type="text/javascript" src="../scripts/page/right.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$(".ac-show").click(function(){
+				$(".bg-tanc.m1").show();
+			})
+			$(".ac-see").click(function(){
+				$(".bg-tanc.m2").show();
+			})
+		})
+	</script>
+</body>
+</html>

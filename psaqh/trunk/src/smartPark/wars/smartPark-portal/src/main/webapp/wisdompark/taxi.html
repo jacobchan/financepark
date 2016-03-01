@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>TAXI</title>
+<link href="../styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+<link href="../styles/base.css" type="text/css" rel="stylesheet">
+<link href="../styles/page/page.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+<div id="youi_page_header" class="youi-page-header clearfix"></div>
+<!--***top end****************************************-->
+<!--content-->
+<div class="w1200 pr"><!--选择-->
+	<img src="../styles/images/zhyq/bg.png" style="width:100%"/>
+    <div class="cosbox pl40 pt20">
+		<div><a href="javascript:;" class="cc"><i class="fa fa-angle-left fa-3x"></i></a></div>
+        <div class="clearfix">
+        	<ul class="fl tx_ul f16">
+            	<li class="taxi_1 tx active">接机</li>
+                <li class="taxi_2 tx">送机</li>
+                <li class="taxi_3 tx">代驾</li>
+                <li class="taxi_4 tx">专车</li>
+                <li class="taxi_5 tx">包车</li>
+                <li><span class="czhong">我的订单</span><i class="fa fa-angle-right fa-2x fr czhong" style="margin-top:-5px"></i></li>
+            </ul>
+            <div class="clearfix ml50 fl" style="width:860px">
+                <div class="tx_item fl">
+                    <div>
+                        <div class="tx_num c_yellow">1</div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c_yellow f16">用车信息</span>
+                    </div>
+                    <div class="tx_form">
+                        <div class="mb15">
+                            <p class="pb5"><span class="c_yellow">&bull;</span>&nbsp;<span class="cfff f12">用车时间</span></p>
+                            <input type="date" class="w75"/> <input type="time" style="margin-left:-5px">
+                        </div>
+                        <div class="mb15">
+                            <p class="pb5"><span class="c_yellow">&bull;</span>&nbsp;<span class="cfff f12">起点</span></p>
+                            <select>
+                                <option>深圳</option>
+                                <option>武汉</option>
+                                <option>北京</option>
+                            </select>
+                            <input type="text" class="w80" placeholder="详细地址" style="margin-left:-5px">
+                        </div>
+                        <div class="mb15">
+                            <p class="pb5"><span class="c_yellow">&bull;</span>&nbsp;<span class="cfff f12">终点</span></p>
+                            <select>
+                                <option>深圳</option>
+                                <option>武汉</option>
+                                <option>北京</option>
+                            </select>
+                            <input type="text" class="w80" placeholder="详细地址" style="margin-left:-5px">
+                        </div>
+                    </div>
+                </div><!--tx_item1 end-->
+                <div class="tx_item fl ml20">
+                    <div>
+                        <div class="tx_num c_yellow">2</div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c_yellow f16">联系人信息</span>
+                    </div>
+                    <div class="tx_form">
+                        <div class="mb15">
+                            <p class="pb5"><span class="c_yellow">&bull;</span>&nbsp;<span class="cfff f12">姓名</span></p>
+                            <input type="text" class="w100" placeholder="可选填">
+                        </div>
+                        <div class="mb15">
+                            <p class="pb5"><span class="c_yellow">&bull;</span>&nbsp;<span class="cfff f12">手机号</span></p>
+                            <input type="text" class="w100" placeholder="11位手机号" >
+                        </div>
+                        <div>
+                            <input type="checkbox">&nbsp;&nbsp;<span class="cfff f16">保存为常用联系人</span>
+                        </div>
+                    </div>
+                </div><!--tx_item1 end-->
+                <div class="tx_item fl mt20">
+                    <div>
+                        <div class="tx_num c_yellow">3</div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c_yellow f16">车型信息</span>
+                    </div>
+                    <div class="tx_form mt10">
+                        <ul class="txcar clearfix">
+                            <li class="active"><img src="../styles/images/zhyq/car1.png"/><div class="txzz"></div></li>
+                            <li><img src="../styles/images/zhyq/car1.png"/><div class="txzz"></div></li>
+                            <li><img src="../styles/images/zhyq/car1.png"/><div class="txzz"></div></li>
+                            <a href="javascript:;" class="inline_b mt40"><img src="../styles/images/zhyq/tx_w.png"/></a>
+                        </ul>
+                        <div class="mt20">
+                        	<a href="javascript:;"><img src="../styles/images/zhyq/tx_add.png"/><span class="vm">&nbsp;&nbsp;添加备注</span></a>
+                        </div>
+                        <div class="mt20 cfff">
+                        	预估费用<span class="c_yellow">121</span>元<span class="caaa">（车费预估0元，基础服务费8.8元）</span>
+                        </div>
+                    </div>
+                </div><!--tx_item1 end-->
+                <div class="tx_item fl mt20 tc ml20" style="background:transparent">
+                	<div class="tx_btn f18 fw tc" style="margin-top:100px">开始叫车</div>
+                    <div>请填写所有必填[<span class="c_yellow">&bull;</span>]信息</div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div><!--content***************  end-->  
+    
+<!--***bottom start****************************************-->
+	<div id="youi_page_footer" class="youi-page-footer"></div>
+<!--***bottom end****************************************-->
+
+<!--******************  code end  ****************************-->
+<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+<script>
+$(function(){
+	$(".txcar li").click(function(){
+		$(this).addClass("active").siblings().removeClass("active");
+	});
+});
+</script>
+</body>
+</html>

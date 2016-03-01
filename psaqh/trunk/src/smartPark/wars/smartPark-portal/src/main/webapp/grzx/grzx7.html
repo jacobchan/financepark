@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>企业通讯录</title>
+	<link href="../styles/base.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
+	<link rel="stylesheet" type="text/css" href="../styles/page/awesome/css/font-awesome.min.css">
+	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+	<script type="text/javascript" src="../scripts/page/adcom.js"></script>
+</head>
+<body style="background-color:#f4f4f4;">
+	<!--***top start****************************************-->
+	<div id="youi_page_header" class="youi-page-header clearfix"></div>
+	<!--***top end****************************************-->
+	<div class="w100">
+		<div class="w1200 clearfix pt30 pb50">
+			<div class="per-center-box clearfix">
+				<div id="youi_page_left" class="fl clearfix"></div>
+				<div class="w1000">
+					<h3 class="per-h3">我的地址</h3>
+					<div class="mt30">
+						<div class="gr-address active">
+							<div class="clearfix pl40 pr40"><span>姓名：赵璇</span><span class="fr">手机号码：1825598541</span></div>
+							<div class="pl40 pr40 mt5 mb10">园区地址：T4航站楼A302室</div>
+							<div class="pl20 pr20 lh35 tr f12" style="border-top:1px solid #ebecec">
+								<a href="javascript:;" class="mr10 ga-edit">编辑</a>
+								<a href="javascript:;">删除</a>
+							</div>
+							<em class="s-a-select">默认</em>
+						</div>
+						<div class="gr-address">
+							<div class="clearfix pl40 pr40"><span>姓名：赵璇</span><span class="fr">手机号码：1825598541</span></div>
+							<div class="pl40 pr40 mt5 mb10">园区地址：T4航站楼A302室</div>
+							<div class="pl20 pr20 lh35 tr f12" style="border-top:1px solid #ebecec">
+								<a href="javascript:;" class="mr10">设为默认</a>
+								<a href="javascript:;" class="mr10 ga-edit">编辑</a>
+								<a href="javascript:;">删除</a>
+							</div>
+							<em class="s-a-select">默认</em>
+						</div>
+						<a href="javascript:;" class="add-box ga-edit"><i class="fa fa-plus mr20"></i>新增地址</a>	
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--***bottom start****************************************-->
+	<div id="youi_page_footer" class="youi-page-footer"></div>
+	<!--***bottom end****************************************-->
+
+	<!--***弹窗 start****************************************-->
+	<div class="bg-tanc">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<h3 class="mb10 f16" style="font-size:16px;"><b>添加地址</b></h3>
+			<table class="line-table cic-l-t wybx-tanc" style="font-size:14px;">
+				<colgroup>
+					<col width="110"></col>
+					<col></col>
+				</colgroup>
+				<tr>
+					<td><b>联系人</b></td>
+					<td><input type="text"></td>
+				</tr>
+				<tr>
+					<td><b>联系电话</b></td>
+					<td><input type="text"></td>
+				</tr>
+				<tr class="label">
+					<td valign="top"><b>地址类型</b></td>
+					<td>
+						<label><input type="radio" name="address" class="mr5" checked="checked">园区地址</label>
+						<label class="ml30"><input type="radio" name="address" class="mr5">非园区地址</label>
+						<input type="text" style="width:350px;" class="show2 mt15 undis">
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td colspan="2"><a href="" class="ib-btn" style="width:120px;text-align:center;margin-top:10px;">保存</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<!--***弹窗 end****************************************-->
+	<script type="text/javascript" src="../scripts/page/right.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$(".ga-edit").click(function(){
+				$(".bg-tanc").show();
+			})
+		})
+	</script>
+</body>
+</html>

@@ -17,12 +17,12 @@ require("./giui.core.js");
 	 * @author  zhouyi
 	 * @version 1.0.0
 	 */
-	
+	 var count=0;
 	$.widget("youi.plist",$.youi.abstractWidget,$.extend({},{
 		options:{
 			bindResize:true
 		},
-		var params = ['key=value','key1=value1'];
+		
 		_initWidget:function(){
 			//jsonp
 			var that = this;
@@ -42,14 +42,14 @@ require("./giui.core.js");
 		
 		_parseRecords:function(records){
 			var htmls = [];
-			
-			var template = '<div class="list-item">'+this.options.template+'</div>';
-			
-			$(records).each(function(){
-				htmls.push($.youi.recordUtils.replaceByRecord(template,this));
-			});
-			
-			this.element.html(htmls.join(''));
+				
+				var template = ''+this.options.template+'';
+				
+				$(records).eq(count).each(function(){
+					htmls.push($.youi.recordUtils.replaceByRecord(template,this));
+				});
+				count++;
+				this.element.html(htmls.join(''));
 		},
 		
 		_destroy:function(){

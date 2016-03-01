@@ -1,0 +1,273 @@
+/**
+ * =================================================
+ * TA主题
+ * =================================================
+ */
+.absolute_div{position:absolute;top:111px;right:100px; z-index:2000}
+.colorblock{width:20px;height:20px;display:inline-block;vertical-align:middle}
+.ta_date{position:relative;background:#fff;padding:100px 100px 50px 100px;border:1px #ccc solid}
+.ta_date .to{ padding:0 5px;}
+.ta_date .opt_sel{/*====*/
+	width:30px;
+	height:28px;
+	line-height:28px;
+	display:inline-block;
+	text-align:center;
+	vertical-align:middle;
+	margin-left:-4px;	
+}
+.ta_date a.opt_sel:link, .ta_date a.opt_sel:visited {
+	
+}
+.ta_date a.opt_sel:active, .ta_date a.opt_sel:hover {
+	
+}
+
+.ta_date .i_orderd{
+	display: inline-block;
+	width: 0;
+	height: 0;
+	vertical-align:middle;
+	border-top: 5px solid #727272;
+	border-right: 5px dashed transparent;
+	border-left: 5px dashed transparent;
+	font-size:0;
+	content: "";
+	overflow:hidden;
+	*margin-top:10px;
+}
+
+
+.ta_calendar2{*width:536px;}
+.ta_calendar1{*width:268px;}
+.ta_calendar{background-color: #ffffff;
+	font-size:12px;
+	text-align:left;
+	z-index:100;
+    position:relative;
+    right: 0;
+}
+.i_pre,.i_next{ width:75px; height:142px;display:inline-block; }
+.i_pre{background:url(../images/company/date_left.png) no-repeat;}
+.i_next{background:url(../images/company/date_right.png) no-repeat;}
+
+.ta_calendar td.ta_dateRangeSelected{
+    background:#cbe6f5;
+}
+.ta_calendar td.ta_dateRangeGray{
+    color: #333;
+	background:#C0C0C0;
+    cursor: default;
+}
+
+.ta_calendar td.first,.ta_calendar td.today{
+	background:#A43548;color:#fff;
+}
+.ta_calendar td.first:after,.ta_calendar td.today:after{display: block; font-size: 10px;color:#fff;}
+
+.ta_calendar td.last{
+    background:#A43548;color:#fff;
+}
+.ta_calendar td.last:after{display: block; font-size: 10px;color:#fff;}
+
+.ta_calendar .dis{
+	color:#9e9e9e;
+}
+.ta_calendar table {
+	font-size: 12px;
+	_display:inline;
+	border-spacing:0 7px;
+	border-collapse:collapse;
+    width: 100%;
+}
+.ta_calendar table caption{height:58px;line-height:40px;font-size:14px;color:#FF6815}
+.ta_calendar table thead tr {
+	background:#F6F6F6;
+}
+.ta_calendar table thead th {
+	cursor: pointer;
+	text-align:center;
+    height: 40px;
+}
+
+.ta_calendar table.calendar-month {
+				font-size: 12px;
+				float:left;
+				margin:0 8px;
+				_display:inline;
+				border-spacing:7px;
+				border-collapse:separate;
+				margin-bottom:10px;
+			}
+			.calendar-month caption{
+				border-bottom:1px solid #E1E1E1;
+				*padding-bottom:0px;
+			}
+			
+			.calendar-month tbody td {
+				line-height: 30px;
+				padding: 4px 11px;
+				text-align:center;
+				white-space:nowrap;
+				font-family:"΢���ź�";
+				cursor:pointer;
+			}
+			.calendar-month td.hover,.calendar-month td:hover,.calendar-month caption span:hover{
+				background:#;
+				color:#6590c1;
+				border:1px solid #6590c1;
+				padding: 3px 10px;
+				border-radius:2px;
+				cursor:pointer;
+			}
+			.calendar .dis:hover{
+				color:#9e9e9e;
+				border:1px solid #d3d5d6;
+				padding: 3px 10px;
+			}
+			.calendar-month td.current{
+				background:#6590c1;
+				color:#fff;
+				border-radius:2px;
+			}
+
+.ta_calendar table thead th.sun{color: #999;}
+.ta_calendar table thead th.sat{color: #999;}
+.ta_calendar table td:first-child{height: 0px;}
+.ta_calendar table tbody td {
+	text-align:center;
+	white-space:nowrap;
+	font-family:"Tahoma";
+    background: #4AA2D4;
+    height: 120px;
+    width:14px;color:#fff;
+    border: 1px solid #fff;
+}
+
+.ta_calendar_cont{position:relative;}
+.ta_calendar_cont .i_pre,.ta_calendar_cont .i_next{position:absolute; top:325px;}
+.ta_calendar_cont .i_pre{left:-100px;}
+.ta_calendar_cont .i_next{right:-100px;}
+.ta_calendar_footer{
+	border-top:1px solid #e5e5e5;
+	background:#fafafa;
+	padding-top:6px;
+	height:34px;
+}
+.ta_calendar_footer .frm_btn{
+	float:right;
+}
+
+.ta_calendar_footer .frm_msg{
+	float:left;
+	vertical-align:middle;
+}
+.ta_calendar_footer .ipt_text_s{
+	padding:4px 4px;
+}
+
+.ta_ipt_text, .ta_ipt_textarea, .ta_ipt_text_s {
+    border: 1px solid #CCCCCC;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555555;
+    font-size: 12px;
+    height: 16px;
+    line-height: 16px;
+    padding: 6px 4px;
+    position: relative;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+    vertical-align: middle;
+    width: 180px;
+    z-index: 2;
+}
+
+.ta_ipt_text_s {
+    width: 80px;
+}
+
+.ta_btn {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #F5F5F5;
+    background-image: -moz-linear-gradient(center top , #FEFEFE, #F5F5F5);
+    background-repeat: repeat-x;
+    border-color: #CACACA #CACACA #B3B3B3;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+    color: #333333;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "΢���ź�","����";
+    font-size: 12px;
+    line-height: 20px;
+    margin-bottom: 0;
+    outline: 0 none;
+    padding: 3px 12px;
+    text-align: center;
+}
+.ta_btn:hover, .ta_btn:active, .ta_btn.active, .ta_btn.disabled, .ta_btn[disabled] {
+    color: #333333;
+}
+.ta_btn:hover {
+    background-color: #FEFEFE;
+    background-image: none;
+    color: #333333;
+    text-decoration: none;
+    transition: background-position 0.1s linear 0s;
+}
+.ta_btn:focus {
+    outline: thin dotted #333333;
+    outline-offset: -2px;
+}
+.ta_btn.active, .ta_btn:active {
+    background-color: #E6E6E6;
+    background-image: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    outline: 0 none;
+}
+.ta_btn.disabled, .ta_btn[disabled] {
+    background-color: #E6E6E6;
+    background-image: none;
+    box-shadow: none;
+    cursor: default;
+    opacity: 0.65;
+}
+.ta_btn {
+    margin: 0px 5px 0 0;
+    vertical-align: top;
+}
+.ta_btn:hover{
+    background-position: 0 -16px;
+}
+.ta_btn_primary {
+    background-color: #B4D66F;
+    background-image: -moz-linear-gradient(center top , #C7E184, #A2CC59);
+    border: 1px solid #88AB4A;
+    color: #56740F;
+}
+.ta_btn_primary:hover{
+    background-color: #5C96DB;
+    background-image: -moz-linear-gradient(center top , #74A5ED, #4789CD);
+    border: 1px solid #286AB1;
+    color: #FFFFFF;
+}
+
+.cf:after {
+    clear: both;
+}
+
+.cf:before, .cf:after {
+    content: "";
+    display: table;
+}
+
+.cf:before, .cf:after {
+    content: "";
+    display: table;
+}
+
