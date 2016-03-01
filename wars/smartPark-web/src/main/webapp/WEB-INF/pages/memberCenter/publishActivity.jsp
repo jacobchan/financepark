@@ -4,17 +4,23 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>我参加的活动</title>
-	<style>
-	  .ccheng{color:#FF6715}
+	<title>我发布的活动</title>
+    <style>
+	  .ccheng{color:#FF6715}.a_left,.a_right{width:40px;height:65px;cursor:pointer;position:absolute;margin-top:-32px;top:50%; opacity:0.7}
+	  .a_left{background:url(<%=request.getContextPath()%>/styles/images/grzx/a_left.png) no-repeat;left:0}
+	  .a_right{background:url(<%=request.getContextPath()%>/styles/images/grzx/a_right.png) no-repeat;right:0}
+	  .czh-box.active{border-color:#FF6715}.czh-box.active h4{color:#FF6715}
+	  .ac_box{border-bottom:1px #EFEEEE solid;}.ac_box a{padding:0 20px 0 0;color:#868686}
+	  .ac_box .active{color:#FF6715; text-decoration:underline}
+	  .img_list li{padding:20px;display:inline-block;float:left; text-align:center}
     </style>
 </head>
 <body style="background-color:#f4f4f4;">
 	<!--***top start****************************************-->
 	<div style="background-color:#545454">
 		<div class="w1200 tr head-top clearfix">
-			<a>${user}</a>
-			<a href="logout.html">退出</a>
+			<a href="">注册</a>
+			<a href="">登录</a>
 		</div>
 	</div>
 	<div class="header-cen clearfix">
@@ -88,7 +94,7 @@
 				<div class="w200 fl">
 					<dl>
 						<dt>个人中心</dt>
-						<dd><a href="grzx1.html">个人资料</a></dd>
+						<dd><a href="memberInformation.html">个人资料</a></dd>
 						<dd><a href="grzx2.html">订单中心</a></dd>
 						<dd><a href="grzx3.html">安全中心</a></dd>
 						<dd><a href="grzx4.html">消息</a></dd>
@@ -118,29 +124,77 @@
 						</dd>
 						<dd><a href="grzx19.html">退货处理</a></dd>
 						<dt>创智汇</dt>
-						<dd class="active"><a href="participateActivity.html">我参加的活动</a></dd>
-						<dd><a href="publishActivity.html">我发布的活动</a></dd>
+						<dd><a href="participateActivity.html">我参加的活动</a></dd>
+						<dd class="active"><a href="publishActivity.html">我发布的活动</a></dd>
 					</dl>
 				</div>
 				<div class="w1000">
 					<h3 class="per-h3">我参加的活动</h3>
 					<div class="clearfix mt40">
-						<div class="clearfix czh-knowledge">
-                            
+						<div class="clearfix czh-knowledge pr">
+                            <div class="czh-box">
+                                <img src="<%=request.getContextPath()%>/styles/images/czh/list-5.jpg">
+                                <div class="czh-group" style="border-bottom:1px solid #ecebeb">
+                                    <h4>孩子不宜过早玩的10种运动</h4>
+                                </div>
+                            </div>
+                            <div class="czh-box active">
+                                <img src="<%=request.getContextPath()%>/styles/images/czh/list-5.jpg">
+                                <div class="czh-group" style="border-bottom:1px solid #ecebeb">
+                                    <h4>孩子不宜过早玩的10种运动</h4>
+                                </div>
+                            </div>
+                            <div class="czh-box">
+                                <img src="<%=request.getContextPath()%>/styles/images/czh/list-5.jpg">
+                                <div class="czh-group" style="border-bottom:1px solid #ecebeb">
+                                    <h4>孩子不宜过早玩的10种运动</h4>
+                                </div>
+                            </div>
+                            <div class="czh-box">
+                                <img src="<%=request.getContextPath()%>/styles/images/czh/list-5.jpg">
+                                <div class="czh-group" style="border-bottom:1px solid #ecebeb">
+                                    <h4>孩子不宜过早玩的10种运动</h4>
+                                </div>
+                            </div>
+                            <div class="a_left"></div>
+                            <div class="a_right"></div>
                             
                          </div>
-
-                        
-						<div class="fr page-list-a clearfix lh30 mt20 f12">
-							<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
-							<a href="">首</a>
-							<a href=""><i class="fa fa-angle-left"></i></a>
-							<a>1</a>
-							<a href=""><i class="fa fa-angle-right"></i></a>
-							<a href="">末</a>
-							<input class="bd-input fl ml10 mr10" style="width:40px;" type="text">
-							<a href="">Go</a>
-						</div>
+                         <div class="mt40 ac_box pb20">
+                         	<a class="active" href="grzx21.html">报名的名单</a><a href="grzx21-2.html">活动评论</a><a href="grzx21-3.html">文档库</a>
+                            <a href="javascript:;" class="ccheng fr">导出为Excel文档>></a>
+                         </div>
+                         <ul class="clearfix img_list">
+                         	<li><img src="<%=request.getContextPath()%>/styles/images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                            <li><img src="../images/grzx/sl-i2.png" border="0" height="59" width="59"><br/>斯大林</li>
+                         </ul>
+                         <a href="" class="table-more">加载更多</a>
+						<!---->
 					</div>
 				</div>
 			</div>
@@ -202,52 +256,5 @@
 	    </div>
 	</div>
 	<!--***bottom end****************************************-->
-	<script type="text/javascript">
-		$(function(){
-			$.ajax({
-				url:'/smartPark-web/esb/web/activityApplyManager/getParticipateActivityList.json',
-				success:function(result){
-					console.log(result.records);
-					if(result&&result.records){
-						_parseRecords(result.records);
-						_assignment_applyStatus();
-					}
-				}
-			});
-		});
-		//拼接活动列表
-		function _parseRecords(record){
-			for(var i=0;i<record.length;i++){
-				var html="<div class='czh-box'>"+
-                    	 "<img src='<%=request.getContextPath()%>/styles/images/czh/list-5.jpg'>"+
-                		 "<div class='czh-group' style='border-bottom:1px solid #ecebeb'>"+
-                    	 "<h4>"+record[i].applyTitle+"</h4>"+
-                    	 "<span>活动发起人："+record[i].memberId+"</span><br/>"+
-                    	 "<span>举办时间："+record[i].startTime+"至"+record[i].endTime+"</span>"+
-                		 "</div>"+
-                		 "<div class='czh-group'>"+
-                    	 "<font class='cg-soan-btn' style='background:#FF6715'>相关文档</font>"+
-                    	 "<span class='fr' style='color:#FF6715'>"+record[i].applyStatus+"</span>"+
-                		 "</div>"+
-            			 "</div>";
-				 $(".clearfix .czh-knowledge").append(html);
-	
-			}
-		};
-		//根据不同状态重新赋文字说明
-		function _assignment_applyStatus(){
-			var span = $("span.fr");
-			if(span){
-			    var text = span.html();
-			    if(text=="00"){
-			    	span.html("申请中");
-			    }else if(text=="01"){
-			    	span.html("进行中");
-			    }else if(text=="01"){
-			    	span.html("已结束");
-			    }
-			} 
-		}
-	</script>
 </body>
 </html>

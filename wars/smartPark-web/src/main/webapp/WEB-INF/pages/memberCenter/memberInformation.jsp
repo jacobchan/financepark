@@ -1,17 +1,10 @@
 <!doctype html>
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/pages/include.jsp" %>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/WEB-INF/pages/common/memberCenterScriptAndCss.jsp"%>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>个人资料</title>
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/css/base.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/css/zs.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/css/awesome/css/font-awesome.min.css">
-	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/js/jquery-1.11.0.js"></script>
-<%-- 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/js/link.js"></script> --%>
 	
 </head>
 <body style="background-color:#f4f4f4;">
@@ -126,7 +119,7 @@
 						<dd><a href="grzx19.html">退货处理</a></dd>
 						<dt>创智汇</dt>
 						<dd><a href="participateActivity.html">我参加的活动</a></dd>
-						<dd><a href="grzx21.html">我发布的活动</a></dd>
+						<dd><a href="publishActivity.html">我发布的活动</a></dd>
 					</dl>
 				</div>
 				
@@ -242,10 +235,6 @@
 	    </div>
 	</div>
 	<!--***bottom end****************************************-->
-	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/lib/jquery-1.9.1.min.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/3.0/lib/jquery-ui.min.js?1=1"></script>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/3.0/lib/bootstrap.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/lib/giui.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
 			$.ajax({
