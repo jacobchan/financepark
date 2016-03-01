@@ -49,6 +49,7 @@
 		<menu id="120001" text="商户信息管理" href="page/commonCenter.purchasingManager.purchasingmanagerMerchant/purchasingmanagerMerchant.html"></menu>
 		<menu id="120002" text="商品信息管理" href="page/commonCenter.purchasingManager.purchasingmanagerCommodity/purchasingmanagerCommodity.html"></menu>
 		<menu id="120003" text="商品类别管理" href="page/commonCenter.purchasingManager.purchasingmanagerGenre/purchasingmanagerGenre.html"></menu>
+		<menu id="120004" text="商品扩展信息管理" href="page/commonCenter.purchasingManager.purchasingmanagerGenreProperty/purchasingmanagerGenreProperty.html"></menu>
 	</menu>
 	<menu id="025000" text="招商预约管理">
 			<menu id="025100" text="预约分配管理" href="page/manageCenter.ReserveManager.reservationRecord/reservationRecord.html"></menu>
