@@ -59,11 +59,11 @@ public class BbmFloor implements Domain{
 	@Length(max=32)
 	private String floorRoomCount;//楼层单元数量
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="PARK_ID_")
 	private com.common.BuildingBaseManager.entity.BbmPark bbmPark;//园区ID
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="BUILDING_ID_")
 	private com.common.BuildingBaseManager.entity.BbmBuilding bbmBuilding;//楼栋ID
 	
