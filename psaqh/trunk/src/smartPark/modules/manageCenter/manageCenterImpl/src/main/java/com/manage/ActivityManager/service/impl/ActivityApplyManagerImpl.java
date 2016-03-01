@@ -3,6 +3,7 @@
  */
 package com.manage.ActivityManager.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.service.MemberInformationManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -18,19 +21,26 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.SecurityUtils;
 
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 
 import com.manage.ActivityManager.entity.ActivityApply;
+import com.manage.ActivityManager.entity.ActivityApplylist;
 import com.manage.ActivityManager.dao.ActivityApplyDao;
 import com.manage.ActivityManager.service.ActivityApplyManager;
+import com.manage.ActivityManager.service.ActivityApplylistManager;
 
 @Service("activityApplyManager")
 @Transactional
 public class ActivityApplyManagerImpl extends BaseManagerImpl implements ActivityApplyManager{
 	@Autowired
 	private ActivityApplyDao activityApplyDao;
-	
+	@Autowired
+	private ActivityApplylistManager activityApplylistManager;
+	@Autowired
+	private MemberInformationManager memberInformationManager;
     /**
      * 查询列表
      */
@@ -101,6 +111,27 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     
     public boolean exsitActivityApply(String propertyName,Object value) throws BusException{
 		return activityApplyDao.exists(propertyName,value);
+	}
+    
+    /**
+     * 获取当前登录用户参加活动集合
+     * 
+     */ 
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+	public List<ActivityApply> getParticipateActivityList()
+			throws BusException {
+		// TODO Auto-generated method stub
+    	//先模拟一个登陆用户，之后会修改
+    	MemberInformation member=memberInformationManager.getMemberInformationByLoginUser(null);
+    	//获取当前用户参加活动的list
+    	Collection<Condition> condition = new ArrayList<Condition>();
+    	condition.add(ConditionUtils.getCondition("applyMember", Condition.EQUALS, member.getMemberId()));
+    	List<ActivityApplylist> activityApplylist=activityApplylistManager.getActivityApplylists(condition, null);
+    	List<ActivityApply> aalist=new ArrayList<ActivityApply>();
+    	for(ActivityApplylist aal:activityApplylist){
+    		aalist.add(aal.getActivityApply());
+    	}
+		return aalist;
 	}
 
 }
