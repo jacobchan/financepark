@@ -4,8 +4,8 @@
 package com.manage.PropertyServiceManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
@@ -42,6 +42,10 @@ public class PropertyservicemanagerOc implements Domain{
 	@Length(max=50)
 	private String ocComp;//所属企业名称
 
+	@Column(name = "OC_CODE_")
+	@Length(max=50)
+	private String ocCode;//一卡同申请编号
+	
 	@Column(name = "UPDATE_USER_")
 	@Length(max=36)
 	private String updateUser;//修改人
@@ -73,6 +77,14 @@ public class PropertyservicemanagerOc implements Domain{
 	@Column(name = "CREATE_TIME_")
 	private String createTime;//创建时间
 	
+	public String getOcCode() {
+		return ocCode;
+	}
+
+	public void setOcCode(String ocCode) {
+		this.ocCode = ocCode;
+	}
+
 	public String getOcNumber(){
 		return this.ocNumber;
 	}
@@ -171,19 +183,29 @@ public class PropertyservicemanagerOc implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((ocNumber == null) ? 0 : ocNumber.hashCode());
-		result = prime * result + ((ocStatus == null) ? 0 : ocStatus.hashCode());
-		result = prime * result + ((ocRemark == null) ? 0 : ocRemark.hashCode());
-		result = prime * result + ((ocWay == null) ? 0 : ocWay.hashCode());
+		result = prime * result
+				+ ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result
+				+ ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result
+				+ ((memberId == null) ? 0 : memberId.hashCode());
+		result = prime * result
+				+ ((ocAddree == null) ? 0 : ocAddree.hashCode());
+		result = prime * result + ((ocCode == null) ? 0 : ocCode.hashCode());
 		result = prime * result + ((ocComp == null) ? 0 : ocComp.hashCode());
-		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
-		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
 		result = prime * result + ((ocDate == null) ? 0 : ocDate.hashCode());
-		result = prime * result + ((ocAddree == null) ? 0 : ocAddree.hashCode());
-		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
-		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
 		result = prime * result + ((ocId == null) ? 0 : ocId.hashCode());
-		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result
+				+ ((ocNumber == null) ? 0 : ocNumber.hashCode());
+		result = prime * result
+				+ ((ocRemark == null) ? 0 : ocRemark.hashCode());
+		result = prime * result
+				+ ((ocStatus == null) ? 0 : ocStatus.hashCode());
+		result = prime * result + ((ocWay == null) ? 0 : ocWay.hashCode());
+		result = prime * result
+				+ ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result
+				+ ((updateUser == null) ? 0 : updateUser.hashCode());
 		return result;
 	}
 	
@@ -195,51 +217,11 @@ public class PropertyservicemanagerOc implements Domain{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final PropertyservicemanagerOc other = (PropertyservicemanagerOc) obj;
-		if (ocNumber == null) {
-			if (other.ocNumber != null)
+		PropertyservicemanagerOc other = (PropertyservicemanagerOc) obj;
+		if (createTime == null) {
+			if (other.createTime != null)
 				return false;
-		} else if (!ocNumber.equals(other.ocNumber))
-			return false;
-		if (ocStatus == null) {
-			if (other.ocStatus != null)
-				return false;
-		} else if (!ocStatus.equals(other.ocStatus))
-			return false;
-		if (ocRemark == null) {
-			if (other.ocRemark != null)
-				return false;
-		} else if (!ocRemark.equals(other.ocRemark))
-			return false;
-		if (ocWay == null) {
-			if (other.ocWay != null)
-				return false;
-		} else if (!ocWay.equals(other.ocWay))
-			return false;
-		if (ocComp == null) {
-			if (other.ocComp != null)
-				return false;
-		} else if (!ocComp.equals(other.ocComp))
-			return false;
-		if (updateUser == null) {
-			if (other.updateUser != null)
-				return false;
-		} else if (!updateUser.equals(other.updateUser))
-			return false;
-		if (updateTime == null) {
-			if (other.updateTime != null)
-				return false;
-		} else if (!updateTime.equals(other.updateTime))
-			return false;
-		if (ocDate == null) {
-			if (other.ocDate != null)
-				return false;
-		} else if (!ocDate.equals(other.ocDate))
-			return false;
-		if (ocAddree == null) {
-			if (other.ocAddree != null)
-				return false;
-		} else if (!ocAddree.equals(other.ocAddree))
+		} else if (!createTime.equals(other.createTime))
 			return false;
 		if (createUser == null) {
 			if (other.createUser != null)
@@ -251,15 +233,60 @@ public class PropertyservicemanagerOc implements Domain{
 				return false;
 		} else if (!memberId.equals(other.memberId))
 			return false;
+		if (ocAddree == null) {
+			if (other.ocAddree != null)
+				return false;
+		} else if (!ocAddree.equals(other.ocAddree))
+			return false;
+		if (ocCode == null) {
+			if (other.ocCode != null)
+				return false;
+		} else if (!ocCode.equals(other.ocCode))
+			return false;
+		if (ocComp == null) {
+			if (other.ocComp != null)
+				return false;
+		} else if (!ocComp.equals(other.ocComp))
+			return false;
+		if (ocDate == null) {
+			if (other.ocDate != null)
+				return false;
+		} else if (!ocDate.equals(other.ocDate))
+			return false;
 		if (ocId == null) {
 			if (other.ocId != null)
 				return false;
 		} else if (!ocId.equals(other.ocId))
 			return false;
-		if (createTime == null) {
-			if (other.createTime != null)
+		if (ocNumber == null) {
+			if (other.ocNumber != null)
 				return false;
-		} else if (!createTime.equals(other.createTime))
+		} else if (!ocNumber.equals(other.ocNumber))
+			return false;
+		if (ocRemark == null) {
+			if (other.ocRemark != null)
+				return false;
+		} else if (!ocRemark.equals(other.ocRemark))
+			return false;
+		if (ocStatus == null) {
+			if (other.ocStatus != null)
+				return false;
+		} else if (!ocStatus.equals(other.ocStatus))
+			return false;
+		if (ocWay == null) {
+			if (other.ocWay != null)
+				return false;
+		} else if (!ocWay.equals(other.ocWay))
+			return false;
+		if (updateTime == null) {
+			if (other.updateTime != null)
+				return false;
+		} else if (!updateTime.equals(other.updateTime))
+			return false;
+		if (updateUser == null) {
+			if (other.updateUser != null)
+				return false;
+		} else if (!updateUser.equals(other.updateUser))
 			return false;
 		return true;
 	}
