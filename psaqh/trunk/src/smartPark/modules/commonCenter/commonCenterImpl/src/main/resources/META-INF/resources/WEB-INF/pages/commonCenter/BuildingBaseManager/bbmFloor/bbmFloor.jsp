@@ -55,5 +55,10 @@
                   } 
             });
    	 </youi:func>
+   	 <youi:func name = "form_bbmFloor_afterSubmit">
+			var formBbmFloor = $elem('form_bbmFloor',pageId);
+			formBbmFloor.form('close');
+			$elem('grid_bbmFloor',pageId).grid('pReload');
+	</youi:func>
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
