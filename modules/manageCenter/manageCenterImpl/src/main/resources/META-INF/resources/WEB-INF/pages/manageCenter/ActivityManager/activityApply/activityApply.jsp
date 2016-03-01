@@ -15,9 +15,9 @@
 			<youi:fieldSelect property="memberId"  caption="会员用户" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>		
 		</youi:fieldLayout>
 		<youi:gridCol property="applyNumber"  caption="活动申请编号" width="100px"/>
-		<youi:gridCol property="applyOrderNumber"  caption="场地订单编号" width="100px"/>
-		<youi:gridCol property="applyMaxuser"  caption="限制人数"  width="100px"/>
+		<youi:gridCol property="applyOrderNumber"  caption="场地订单编号" width="100px"/>	
 		<youi:gridCol property="applyTitle"  caption="活动标题" width="150px"/>
+		<youi:gridCol property="applyMaxuser"  caption="限制人数"  width="100px"/>
 		<youi:gridCol property="startTime"  caption="活动开始时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" width="100px"/>
 		<youi:gridCol property="endTime"  caption="活动结束时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" width="100px"/>
 		<youi:gridCol property="commentContent"  caption="活动内容" width="200px"/>
