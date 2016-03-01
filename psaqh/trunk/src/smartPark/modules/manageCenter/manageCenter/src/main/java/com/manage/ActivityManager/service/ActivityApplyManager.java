@@ -14,6 +14,7 @@ import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
 
 import com.manage.ActivityManager.entity.ActivityApply;
+import com.manage.ActivityManager.entity.ActivityApplylist;
 
 public interface ActivityApplyManager extends BaseManager{
 
@@ -63,4 +64,9 @@ public interface ActivityApplyManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitActivityApply(String propertyName,Object value) throws BusException;
+    /**
+     * 获取当前登录用户参加活动集合
+     * 
+     */    
+    public List<ActivityApply> getParticipateActivityList() throws BusException;
 }
