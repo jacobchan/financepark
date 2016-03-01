@@ -42,7 +42,7 @@
 				src="esb/web/bbmFloorManager/getBbmFloors.json" parents="bbmBuilding.buildingId" parentsAlias="bbmBuilding.buildingId"/> --%>
 			<youi:fieldText property="roomCaption"  caption="单元说明"/>
 			<youi:fieldSelect property="status"  caption="使用状态" convert="floorUsingStatus"/>
-			<youi:fieldText property="enteredEnt"  caption="所属企业" />
+			<youi:fieldText property="enteredEnt"  caption="包含企业" />
 			<youi:fieldText property="roomHost"  caption="单元业主" notNull="true"/>
 			
 			<youi:fieldHidden property="rentCharge"  caption="物业_租金"/>
