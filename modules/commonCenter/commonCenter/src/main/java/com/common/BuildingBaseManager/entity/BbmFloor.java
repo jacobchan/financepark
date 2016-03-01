@@ -67,11 +67,28 @@ public class BbmFloor implements Domain{
     @JoinColumn(name="BUILDING_ID_")
 	private com.common.BuildingBaseManager.entity.BbmBuilding bbmBuilding;//楼栋ID
 	
-	@Transient
-	private String parkName;
+//	@Transient
+//	private String parkName;
 	@Transient
 	private String buildingName;
 	
+	@Column(name = "FLOOR_IMAGE_")
+	@Length(max=100)
+	private String floorImage;//楼层图片URL
+	
+	@Column(name = "PARK_NAME_")
+	@Length(max=36)
+	private String parkName;//园区名称
+	
+	
+	public String getFloorImage() {
+		return floorImage;
+	}
+
+	public void setFloorImage(String floorImage) {
+		this.floorImage = floorImage;
+	}
+
 	public String getParkName() {
 		return parkName;
 	}
