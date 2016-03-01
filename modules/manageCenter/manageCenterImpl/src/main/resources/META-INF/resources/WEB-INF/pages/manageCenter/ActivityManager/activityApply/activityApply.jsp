@@ -11,7 +11,7 @@
 			<youi:fieldText property="applyTitle"  caption="活动标题"/>
 			<youi:fieldCalendar property="startTime"  caption="活动开始时间"/>
 			<youi:fieldCalendar property="endTime"  caption="活动结束时间"/>
-			<youi:fieldSelect property="applyStatus"  caption="活动申请状态" convert="activityApplyStatus" />
+			<youi:fieldSelect property="applyStatus"  caption="活动申请状态" convert="activityStatus" />
 			<youi:fieldSelect property="memberId"  caption="会员用户" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
 			
 		</youi:fieldLayout>
@@ -23,7 +23,7 @@
 		<youi:gridCol property="endTime"  caption="活动结束时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" width="100px"/>
 		<youi:gridCol property="commentContent"  caption="活动内容" width="200px"/>
 
-		<youi:gridCol property="applyStatus"  caption="活动申请状态" convert="activityApplyStatus" width="100px"/>
+		<youi:gridCol property="applyStatus"  caption="活动申请状态" convert="activityStatus" width="100px"/>
 		<youi:gridCol property="memberId"  caption="会员用户" renderer="renderer_memberId" width="200px"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
