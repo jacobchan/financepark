@@ -26,9 +26,8 @@
 				</youi:fieldLayout>
 				<youi:button name="acceptance" caption="受理" icon="search" active="1" />
 				<youi:button name="goback" caption="退回" icon="remove" active="1" />
-				<youi:button name="govisit" caption="回访" icon="edit" active="1" />
+				<youi:button name="govisit" caption="回访" icon="save" active="1" />
 				<youi:button name="evaluate" caption="评价" icon="edit" active="1" />
-				<youi:button name="visitrecord" caption="添加回访记录" icon="save" active="1" />
 				<youi:gridCol property="cosCode" caption="投诉单号" width="100" />
 				<youi:gridCol property="cosContent" caption="投诉内容" width="280" />
 				<youi:gridCol property="cosName" caption="投诉联系人" width="100" />
@@ -164,6 +163,12 @@
 				success:function(result){	
 					$elem('grid_propertyservicemanagerCos',pageId).grid('pReload');
 						alert("操作成功!");
+						if(cosstatus=='2'){
+							$elem('recordVisit_propertyservicemanagerCos_cosId',pageId).fieldValue(selectedRecord.cosId);
+        					$elem('form_propertyservicenanagerBack',pageId).form('open');
+						}else{
+							alert("该状态下不能添加回访记录！");
+						}
 					}
 				});
 			});
@@ -193,18 +198,6 @@
 			alert("该记录已评价!");
 		}else{
 			alert("该状态下不能作评价处理！");
-		}
-	</youi:func>
-	<!-- 添加回访记录操作 -->
-	<youi:func name="func_grid_visitrecord">
-		var gridElement = $elem('grid_propertyservicemanagerCos',pageId);
-		selectedRecord = gridElement.grid('getSelectedRecord');
-		var cosstatus = selectedRecord.cosStatus;
-		if(cosstatus=='4'){
-			$elem('recordVisit_propertyservicemanagerCos_cosId',pageId).fieldValue(selectedRecord.cosId);
-        	$elem('form_propertyservicenanagerBack',pageId).form('open');
-		}else{
-			alert("该状态下不能添加回访记录！");
 		}
 	</youi:func>
 	<!-- 添加回访表单提交后事件 -->
