@@ -19,8 +19,8 @@
 		<youi:gridCol property="memberId.memberNickname" caption="会员用户" width="20%" />
 		<youi:gridCol property="employeesName" caption="员工姓名" width="20%" />
 		<youi:gridCol property="employeesTelephone" caption="员工电话" width="20%" />
-		<youi:gridCol property="employeesComId.rzMem" caption="企业信息" width="40%" />
-		<youi:gridCol property="employeesComId.rzMem" caption="角色" width="40%" />
+		<youi:gridCol property="employeesComId.rzMem" caption="企业信息" width="20%" />
+		<youi:gridCol property="enterpriseRole.rId" caption="角色" width="20%" />
 		<youi:gridCol property="employeesId" caption="企业编号" width="0" />
 	</youi:grid>
 
@@ -28,9 +28,11 @@
 	<youi:form dialog="true" caption="分配角色" id="form_enterprisemaillist"
 		action="esb/web/enterpriseRoleManager/saveEnterpriseRole.json">
 		<youi:fieldLayout prefix="record" columns="1" labelWidths="120,120">
+			<youi:fieldHidden property="rId" caption="编号" readonly="true" />
+			<youi:fieldHidden property="employees.employeesId" caption="员工编号" readonly="true" />
 			<youi:fieldSelect property="role.roleId"
 				src="esb/web/roleManager/getPagerRoles.json"
-				code="roleId" show="roleCaption" caption="企业角色" notNull="true" tooltips="企业角色" />
+				code="roleId" show="roleCaption" caption="员工角色" notNull="true" tooltips="员工角色" />
 		</youi:fieldLayout>
 	</youi:form>
 
@@ -48,12 +50,20 @@
 					var record = result.records;
 					for(var i=0;i<record.length;i++){
 						var roles = record[i];
+						$elem('record_rId',pageId).fieldValue(roles.rId);
+						$elem('record_employees_employeesId',pageId).fieldValue(eId);
 						$elem('record_role_roleId',pageId).fieldValue(roles.role.roleId);
 					}
 					$elem('form_enterprisemaillist',pageId).form('open');
 				}
 			});
 		}
+	</youi:func>
+	<youi:func name="form_enterprisemaillist_afterSubmit">
+		var enterprisemaillist = $elem('form_enterprisemaillist',pageId);
+		enterprisemaillist.form('reset');
+		enterprisemaillist.form('close');
+		$elem('grid_enterprisemaillist',pageId).grid('pReload');
 	</youi:func>
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
