@@ -27,6 +27,15 @@ public interface EnterpriseRoleManager extends BaseManager {
 	 */
 	public EnterpriseRole getEnterpriseRole(String id)
 			throws BusException;
+	
+	/**
+	 * 根据员工id
+	 * @param eId 员工id
+	 * @return
+	 * @throws BusException
+	 */
+	public List<EnterpriseRole> getEnterpriseRoleByEmployees(String eId)
+			throws BusException;
 
 	/**
 	 * 分页查询用户
