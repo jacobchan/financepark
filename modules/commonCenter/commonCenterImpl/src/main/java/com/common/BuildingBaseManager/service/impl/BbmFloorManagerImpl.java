@@ -22,6 +22,7 @@ import com.common.BuildingBaseManager.entity.BbmBuilding;
 import com.common.BuildingBaseManager.entity.BbmFloor;
 import com.common.BuildingBaseManager.entity.BbmPark;
 import com.common.BuildingBaseManager.dao.BbmFloorDao;
+import com.common.BuildingBaseManager.service.BbmBuildingManager;
 import com.common.BuildingBaseManager.service.BbmFloorManager;
 
 @Service("bbmFloorManager")
@@ -29,6 +30,8 @@ import com.common.BuildingBaseManager.service.BbmFloorManager;
 public class BbmFloorManagerImpl extends BaseManagerImpl implements BbmFloorManager{
 	@Autowired
 	private BbmFloorDao bbmFloorDao;
+	@Autowired
+	private BbmBuildingManager bbmBuildingManager ;
 	
     /**
      * 查询列表
@@ -60,13 +63,13 @@ public class BbmFloorManagerImpl extends BaseManagerImpl implements BbmFloorMana
 			@ConditionCollection(domainClazz=BbmFloor.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
 		PagerRecords pagerRecords = bbmFloorDao.findByPager(pager, conditions, orders);
-		List<BbmFloor> floors = pagerRecords.getRecords();
-		for(BbmFloor floor:floors){
-			BbmPark park = floor.getBbmPark();
-			floor.setParkName(park.getParkName());
-			BbmBuilding building = floor.getBbmBuilding();
-			floor.setBuildingName(building.getBuildingCaption());
-		}
+//		List<BbmFloor> floors = pagerRecords.getRecords();
+//		for(BbmFloor floor:floors){
+//			BbmPark park = floor.getBbmPark();
+//			floor.setParkName(park.getParkName());
+//			BbmBuilding building = floor.getBbmBuilding();
+//			floor.setBuildingName(building.getBuildingCaption());
+//		}
 		return pagerRecords;
 	}
     /**
@@ -108,6 +111,23 @@ public class BbmFloorManagerImpl extends BaseManagerImpl implements BbmFloorMana
     
     public boolean exsitBbmFloor(String propertyName,Object value) throws BusException{
 		return bbmFloorDao.exists(propertyName,value);
+	}
+    
+    /**
+	 * 通过楼栋ID获取园区
+	 * @return
+	 * @throws BusException
+	 */
+	@Override
+	@EsbServiceMapping
+	public BbmPark findBbmParkByBuildingId(@ServiceParam(name="buildingId") String buildingId) throws BusException {
+		if( ! "".equals(buildingId)){
+			BbmBuilding building = bbmBuildingManager.getBbmBuilding(buildingId) ;//通过楼栋ID获取楼栋信息
+			BbmPark park = building.getBbmPark() ;
+			
+			return park;
+		}
+		return null ;
 	}
 
 }

@@ -17,12 +17,13 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.common.BuildingBaseManager.entity.BbmBuilding;
 import com.common.BuildingBaseManager.entity.BbmFloor;
-import com.common.BuildingBaseManager.entity.BbmPark;
 import com.common.BuildingBaseManager.entity.BbmRoom;
 import com.common.BuildingBaseManager.dao.BbmRoomDao;
+import com.common.BuildingBaseManager.service.BbmFloorManager;
 import com.common.BuildingBaseManager.service.BbmRoomManager;
 
 @Service("bbmRoomManager")
@@ -30,6 +31,8 @@ import com.common.BuildingBaseManager.service.BbmRoomManager;
 public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManager{
 	@Autowired
 	private BbmRoomDao bbmRoomDao;
+	@Autowired
+	private BbmFloorManager bbmFloorManager ;
 	
     /**
      * 查询列表
@@ -61,23 +64,23 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
 			@ConditionCollection(domainClazz=BbmRoom.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
 		PagerRecords pagerRecords = bbmRoomDao.findByPager(pager, conditions, orders);
-		@SuppressWarnings("unchecked")
-		List<BbmRoom> rooms = pagerRecords.getRecords();
-		for(BbmRoom room:rooms){
-			BbmPark park = room.getBbmPark();
-			if(park != null){
-				room.setParkName(park.getParkName());
-			}
-			BbmBuilding building = room.getBbmBuilding();
-			if(building != null){
-				room.setBuildingName(building.getBuildingCaption());
-			}
-			BbmFloor floor = room.getBbmFloor();
-			if(floor != null){
-				room.setFloorName(floor.getFloorCaption());
-			}
+		//@SuppressWarnings("unchecked")
+//		List<BbmRoom> rooms = pagerRecords.getRecords();
+//		for(BbmRoom room:rooms){
+//			BbmPark park = room.getBbmPark();
+//			if(park != null){
+//				room.setParkName(park.getParkName());
+//			}
+//			BbmBuilding building = room.getBbmBuilding();
+//			if(building != null){
+//				room.setBuildingName(building.getBuildingCaption());
+//			}
+//			BbmFloor floor = room.getBbmFloor();
+//			if(floor != null){
+//				room.setFloorName(floor.getFloorCaption());
+//			}
 			
-		}
+		//}
 		//pagerRecords.setRecords(rooms);
 		return pagerRecords;
 	}
@@ -121,5 +124,36 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
     public boolean exsitBbmRoom(String propertyName,Object value) throws BusException{
 		return bbmRoomDao.exists(propertyName,value);
 	}
-
+    
+    /**
+	 * 通过楼层ID获取对应的楼栋信息
+	 * @param FloorId 楼层ID
+	 * @return
+	 */
+    @EsbServiceMapping
+	@Override
+	public BbmBuilding findBbmBuildingByFloorId(@ServiceParam(name="floorId") String floorId) {
+    	if(! "".equals(floorId)){
+    		BbmFloor floor = bbmFloorManager.getBbmFloor(floorId) ;
+    		BbmBuilding building = floor.getBbmBuilding() ;
+    		return building ;
+    	}
+		return null;
+	}
+    
+    /**
+	 * 通过单元ID获取对应的楼层信息
+	 * @param roomId 单元ID
+	 * @return
+	 */
+    @Override
+    @EsbServiceMapping
+    public BbmFloor findBbmFloorByRoomId(@ServiceParam(name="roomId") String roomId) {
+    	if(StringUtils.isNotEmpty(roomId)){
+    		BbmRoom room = bbmRoomDao.get(roomId) ;//通过单元ID获取单元对象
+    		BbmFloor floor = room.getBbmFloor() ;//获取楼层对象
+    		return floor ;
+    	}
+    	return null;
+    }
 }
