@@ -20,7 +20,7 @@
 		<youi:gridCol property="employeesName" caption="员工姓名" width="20%" />
 		<youi:gridCol property="employeesTelephone" caption="员工电话" width="20%" />
 		<youi:gridCol property="employeesComId.rzMem" caption="企业信息" width="20%" />
-		<youi:gridCol property="enterpriseRole.rId" caption="角色" width="20%" />
+		<youi:gridCol property="roleId" renderer="renderer_roleId" caption="角色" width="20%" />
 		<youi:gridCol property="employeesId" caption="企业编号" width="0" />
 	</youi:grid>
 
@@ -28,8 +28,8 @@
 	<youi:form dialog="true" caption="分配角色" id="form_enterprisemaillist"
 		action="esb/web/enterpriseRoleManager/saveEnterpriseRole.json">
 		<youi:fieldLayout prefix="record" columns="1" labelWidths="120,120">
-			<youi:fieldHidden property="rId" caption="编号" readonly="true" />
-			<youi:fieldHidden property="employees.employeesId" caption="员工编号" readonly="true" />
+			<youi:fieldHidden property="rId" caption="编号" />
+			<youi:fieldHidden property="employees.employeesId" caption="员工编号" />
 			<youi:fieldSelect property="role.roleId"
 				src="esb/web/roleManager/getPagerRoles.json"
 				code="roleId" show="roleCaption" caption="员工角色" notNull="true" tooltips="员工角色" />
@@ -58,6 +58,22 @@
 				}
 			});
 		}
+	</youi:func>
+	<youi:func name="renderer_roleId" params="col,record">
+	 	var roleName = ""; 
+		$.youi.ajaxUtil.ajax({
+			url:'esb/web/enterpriseRoleManager/getEnterpriseRoleByEmployees.json',
+			data:'eId='+record.employeesId,
+			async: false, 
+			success:function(result){
+				var record = result.records;
+				for(var i=0;i<record.length;i++){
+					var roles = record[i];
+					roleName += roles.role.roleCaption+",";
+				}
+			}
+		});
+		return roleName.substring(0,roleName.length-1);
 	</youi:func>
 	<youi:func name="form_enterprisemaillist_afterSubmit">
 		var enterprisemaillist = $elem('form_enterprisemaillist',pageId);
