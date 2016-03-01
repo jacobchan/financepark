@@ -60,12 +60,13 @@ public class ActivityApply implements Domain{
 	private String updateTime;//修改时间
 
 	@Column(name = "COMMENT_CONTENT_")
-	@Length(max=32)
 	private String commentContent;//评论内容
+
 
 	@Column(name = "START_TIME_")
 	@Length(max=32)
 	private String startTime;//开始时间
+	
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "APPLY_ID_")
