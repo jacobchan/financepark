@@ -20,11 +20,14 @@ import com.gsoft.framework.util.SecurityUtils;
 public class MemberCenterController {
 	
 	
-	@RequestMapping("/memberInformation.html")
-	public ModelAndView ctrwin(HttpServletRequest request, HttpServletResponse response){
+	@RequestMapping("/{pagePath}.html")
+	public ModelAndView ctrwin(HttpServletRequest request, 
+			HttpServletResponse response,
+			@PathVariable("pagePath") String pagePath){
 		String userName=SecurityUtils.getAccount().getLoginName();
 		request.setAttribute("user", userName);
-		return new ModelAndView("memberCenter/memberInformation");
+		
+		return new ModelAndView("memberCenter/"+pagePath);
 	}
 	
 	/**
