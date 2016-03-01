@@ -12,8 +12,9 @@
 		<youi:gridCol property="floorNo"  caption="楼层编号" width="15%" align="center"/>
 		<youi:gridCol property="floorCaption"  caption="楼层说明" width="20%" align="center"/>
 		<youi:gridCol property="parkName" caption="所属园区" width="15%" align="center"/>
-		<youi:gridCol property="buildingName" caption="所属楼栋" width="15%" align="center"/>
+		<youi:gridCol property="bbmBuilding.buildingNo" caption="所属楼栋" width="15%" align="center"/>
 		<youi:gridCol property="floorRoomCount"  caption="楼层单元数量" width="15%" align="center"/>
+		<youi:gridCol property="floorImage"  caption="楼层布局图片" width="15%" align="center"/>
 		
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
@@ -23,25 +24,36 @@
 	
 	<!-- form-楼层基础信息编辑 -->
 	<youi:form dialog="true" caption="楼层基础信息" id="form_bbmFloor" action="esb/web/bbmFloorManager/saveBbmFloor.json">
-		<youi:fieldLayout prefix="record" columns="2" labelWidths="100,100">
+		<youi:fieldLayout prefix="record" columns="2" labelWidths="110,110">
 			<youi:fieldHidden property="floorId"  caption="楼层ID"/>
 			<youi:fieldText property="floorNo"  caption="楼层编号" notNull="true"/>
+			<youi:fieldSelect property="bbmBuilding.buildingId" caption="所属楼栋" code="buildingId" show="buildingNo"
+				src="esb/web/bbmBuildingManager/getBbmBuildings.json" notNull="true"/>
+			<youi:fieldText property="parkName" caption="所属园区"  readonly="true"/>
 			<youi:fieldText property="floorRoomCount"  caption="楼层单元数量"/>
 			<youi:fieldText property="floorCaption"  caption="楼层说明" column="2"/>
-			<youi:fieldSelect property="bbmPark.parkId" caption="所属园区" code="parkId" show="parkName"
-				src="esb/web/bbmParkManager/getBbmParks.json" notNull="true"/>
-			<youi:fieldSelect property="bbmBuilding.buildingId" caption="所属楼栋" code="buildingId" show="buildingNo"
-				src="esb/web/bbmBuildingManager/getBbmBuildings.json" parents="bbmPark.parkId" parentsAlias="bbmPark.parkId" notNull="true"/>
-			<youi:fieldText property="floorLayoutPhotoPath" caption="布局照片路径" column="2"/>
+			<youi:fieldText property="floorImage" caption="楼层布局图片" column="2"/>
 			
-			<youi:fieldHidden property="roomNo" caption="招商房间编号"/>
+			<%-- <youi:fieldHidden property="roomNo" caption="招商房间编号"/>
 			<youi:fieldHidden property="useStatus" caption="招商使用状态"/>
 			<youi:fieldHidden property="roomNum" caption="招商房间个数"/>
-			<youi:fieldHidden property="company" caption="招商所属企业"/>
+			<youi:fieldHidden property="company" caption="招商所属企业"/> --%>
 		</youi:fieldLayout>
 	</youi:form>
 	
 	<!--**********************************页面函数Start********************************-->
-	
+	<!-- 楼栋发生变化时，对应的园区也发生变化 -->
+		<youi:func name = "record_bbmBuilding_buildingId_change">
+      		var buildingId = $('#P_'+pageId+'_record_bbmBuilding_buildingId').fieldValue();//获取当前选中楼栋的id
+			$.youi.ajaxUtil.ajax({
+				url:'/esb/web/bbmFloorManager/findBbmParkByBuildingId.json',
+				data:{buildingId:buildingId},
+				success:function(result){
+					var record = result.record;
+					$('#P_'+pageId+'_record_parkName').fieldValue('') ;//先将园区名称置空
+                    $('#P_'+pageId+'_record_parkName').fieldValue(record.parkName);//将返回的对象里面的parkName赋值给公司名称
+                  } 
+            });
+   	 </youi:func>
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
