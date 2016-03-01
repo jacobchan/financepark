@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>物业报修</title>
+	<link href="../styles/base.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
+	<link rel="stylesheet" type="text/css" href="../styles/page/awesome/css/font-awesome.min.css">
+	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+</head>
+<body>
+	<!--***top start****************************************-->
+	<div id="youi_page_header" class="youi-page-header clearfix"></div>
+	<!--***top end****************************************-->
+	<div class="w100">
+		<div class="w1200 clearfix pt30 pb50">
+			<div class="h-nav clearfix">
+				<a href=""><span>首页</span></a><img src="../styles/images/zs/right-j-b.png" border="0" />
+				<a href=""><span>物业服务</span></a><img src="../styles/images/zs/right-j-b.png" border="0" />
+				<a href=""><span class="current">物业报修</span></a>
+			</div>
+			<div class="clearfix">
+				<div class="fl w895">				
+					<div class="ht-bd-box">
+						<table class="setting-table">
+							<colgroup>
+								<col width="80"></col>
+								<col></col>
+								<col width="120"></col>
+								<col></col>
+							</colgroup>
+							<tr>
+								<td align="center">企业名称</td>
+								<td><input type="text" id="bxComp"></td>
+								<td align="center">报修方式</td>
+								<td>
+									<div class="tct-select">
+										<div class="ic-select">
+											<p id="bxWay">创立方2</p>
+										</div>
+										<ul style="display: none;" class="select-nav">
+											<li>创立方1</li>
+											<li>创立方2</li>
+											<li>创立方3</li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td align="center">报修类型</td>
+								<td>
+									<div class="tct-select">
+										<div class="ic-select">
+											<p id="bxType">创立方2</p>
+										</div>
+										<ul style="display: none;" class="select-nav">
+											<li>创立方1</li>
+											<li>创立方2</li>
+											<li>创立方3</li>
+										</ul>
+									</div>
+								</td>
+								<td align="center">报修项目</td>
+								<td>
+									<div class="tct-select">
+										<div class="ic-select">
+											<p id="bxProject">创立方2</p>
+										</div>
+										<ul style="display: none;" class="select-nav">
+											<li>创立方1</li>
+											<li>创立方2</li>
+											<li>创立方3</li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td align="center"  valign="top">地址选择</td>
+								<td colspan="3">
+									<div class="select-address active">
+										<p><span>联系人：李斯李斯</span><span class="ml20">联系电话：1825598541</span></p>
+										<p>园区地址：T4航站楼A302室</p>
+										<em class="s-a-select"></em>
+									</div>
+									<div class="select-address">
+										<p><span>联系人：李斯李斯</span><span class="ml20">联系电话：1825598541</span></p>
+										<p>园区地址：T4航站楼A302室</p>
+										<em class="s-a-select"></em>
+									</div>
+									<a href="javascript:;" class="fl mt15 open-tanc"><i class="fa fa-plus-circle mr5"></i>新增地址</a>
+								</td>
+							</tr>
+							
+							<tr>
+								<td align="center">相关描述</td>
+								<td colspan="3"><textarea id="bxRemark"></textarea></td>
+							</tr>
+							<tr>
+								<td align="center">相关附件</td>
+								<td>
+									<div class="set-line clearfix"> 
+										<span class="set-span"> 
+											<input name="" type="text" id="viewfile" onmouseout="document.getElementById('upload').style.display='none';" class="set-inputstyle" value="附件名称.doc" disabled="disabled"/> 
+										</span> 
+										<div for="unload" onmouseover="document.getElementById('upload').style.display='block';" class="set-file1">上传
+										<input type="file" onchange="document.getElementById('viewfile').value=this.value;this.style.display='none';" class="set-file" id="upload" /> </div> 
+									</div> 
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><input value="提交" class="hhf-submit" type="submit" style="margin-left:0px;"></td>
+							</tr>
+						</table>
+					</div>
+					<h4 class="f14 mt20 mb20">物业报修流程说明</h4>	
+					<div class="tc pt20 pb20" style="background-color:#f6f6f6;border:1px solid #ecebeb">
+						<img src="../styles/images/yqfw/lct2.png" border="0" />
+					</div>
+				</div>
+				<div class="fr w285">
+					<h3 class="h3-bd">热点新闻</h3>
+					<div class="ifn-group">
+						<ul class="ig-nav">
+							<li>
+								<div class="in-photo">
+									<img src="../styles/images/zs/nav-img1.png" border="0" width="100%"/>
+								</div>
+								<div class="fr">
+									<p>杭州，一场无关情爱的风月无边月无</p>
+									<a href="" class="a-more">详细信息</a>
+								</div>
+							</li>
+							<li>
+								<div class="in-photo">
+									<img src="../styles/images/zs/nav-img2.png" border="0" width="100%"/>
+								</div>
+								<div class="fr">
+									<p>杭州，一场无关情爱的风月无边月无</p>
+									<a href="" class="a-more">详细信息</a>
+								</div>
+							</li>
+							<li>
+								<div class="in-photo">
+									<img src="../styles/images/zs/nav-img3.png" border="0" width="100%"/>
+								</div>
+								<div class="fr">
+									<p>杭州，一场无关情爱的风月无边月无</p>
+									<a href="" class="a-more">详细信息</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--***bottom start****************************************-->
+	<div id="youi_page_footer" class="youi-page-footer"></div>
+	<!--***bottom end****************************************-->
+
+	<!--***弹窗 start****************************************-->
+	<div class="bg-tanc">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<h3 class="mb10"><b>新增地址</b></h3>
+			<table class="line-table cic-l-t wybx-tanc">
+				<colgroup>
+					<col width="110"></col>
+					<col></col>
+				</colgroup>
+				<tr class="label">
+					<td><b>地址类型</b></td>
+					<td>
+						<label><input type="radio" name="address" class="mr5" checked="checked">园区地址</label>
+						<label class="ml30"><input type="radio" name="address" class="mr5">非园区地址</label>
+					</td>
+				</tr>
+				<tr>
+					<td><b>姓名</b></td>
+					<td><input type="text"></td>
+				</tr>
+				<tr>
+					<td><b>电话</b></td>
+					<td><input type="text"></td>
+				</tr>
+				<tr class="show1">
+					<td><b>园区地址</b></td>
+					<td>
+						<div class="tct-select fl mr20" style="width:200px">
+							<div class="ic-select">
+								<p>园区地址2</p>
+							</div>
+							<ul style="display: none;" class="select-nav">
+								<li>园区地址1</li>
+								<li>园区地址2</li>
+								<li>园区地址3</li>
+							</ul>
+						</div>
+						<div class="tct-select fl" style="width:200px">
+							<div class="ic-select">
+								<p>创立方2</p>
+							</div>
+							<ul style="display: none;" class="select-nav">
+								<li>创立方1</li>
+								<li>创立方2</li>
+								<li>创立方3</li>
+							</ul>
+						</div>
+					</td>
+				</tr>
+				<tr class="show2 undis">
+					<td><b>地址信息</b></td>
+					<td><input type="text" style="width:450px;"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td colspan="2"><a href="" class="ib-btn" style="width:120px;text-align:center;margin-top:10px;">保存</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<!--***弹窗 end****************************************-->
+	<script type="text/javascript" src="../scripts/page/right.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$(".hhf-submit").click(function(){
+				var obj={
+				bxComp:$("#bxComp").val(),
+				bxWay:$("#bxWay").text(),
+				bxType:$("#bxType").text(),
+				bxProject:$("#bxProject").text(),
+				bxAddress:$(".select-address.active").text().replace(/\t|\n/ig,""),
+				bxRemark:$("#bxRemark").val(),
+				bxFujian:$("#upload").val()
+				};
+				var str=JSON.stringify(obj);
+				alert(str);
+			});
+		});
+	</script>
+</body>
+</html>

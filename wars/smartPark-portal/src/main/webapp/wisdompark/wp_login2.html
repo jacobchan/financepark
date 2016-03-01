@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>个人登录</title>
+<link href="../styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+<link href="../styles/base.css" type="text/css" rel="stylesheet">
+<link href="../styles/page/page.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+<div id="youi_page_header" class="youi-page-header clearfix"></div>
+<!--***top end****************************************-->
+<!--content-->
+<div class="w1200 mhbg">
+	<a href="javascript:;" class="inline_b ml20"><i class="fa fa-angle-left cc fa-3x"></i></a>
+	<div class="hxpic">
+    	<div class="hx01 bggreen">
+            <div class="hx_square1 hx_tright "></div>
+            <div class="hx_square1 hx_bright"></div>
+        </div>
+        <div class="hx02 bggreen">
+            <div class="hx_square1 hx_tright "></div>
+            <div class="hx_square1 hx_bright"></div>
+        </div>
+        <div class="hx03 bggreen">
+            <div class="hx_square2 hx_tright "></div>
+        </div>
+        <div class="hx04 bgred"></div>
+        <div class="hx05 bgred"></div>
+        <div class="hx06 bggreen"></div>
+        <div class="hx07 bggreen"></div>
+        <div class="hx08 bgred"></div>
+        <div class="hx09 bggreen"></div>
+        <div class="hx10 bggreen"></div>
+        <div class="hx11 bgred">
+            <div class="hx_square1 hx_tleft "></div>
+            <div class="hx_square1 hx_bleft"></div>
+        </div>
+        <div class="hx12 bgyellow">
+            <div class="hx_square1 hx_tleft "></div>
+            <div class="hx_square1 hx_bleft"></div>
+        </div>
+    </div>
+    <div class="hxinfo">
+    	<table class="tabel_hx">
+        	<tr><td colspan="2" class="into_tit">创智中心二号楼（5/9）</td></tr>
+            <tr>
+            	<td>公司名称：</td>
+                <td>波音科技有限公司</td>
+            </tr>
+            <tr>
+            	<td>房间名称：</td>
+                <td>2-504</td>
+            </tr>
+            <tr>
+            	<td>房间面积：</td>
+                <td>108.54平方米</td>
+            </tr>
+            <tr>
+            	<td>朝&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;向：</td>
+                <td>朝南</td>
+            </tr>
+            <tr>
+            	<td>户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型：</td>
+                <td>平层户型</td>
+            </tr>
+            <tr>
+            	<td>装&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修：</td>
+                <td>精装修</td>
+            </tr>
+            <tr>
+            	<td>水&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;费：</td>
+                <td>68元</td>
+            </tr>
+            <tr>
+            	<td>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;费：</td>
+                <td>771元</td>
+            </tr>
+            <tr>
+            	<td>物业&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;费：</td>
+                <td>568元</td>
+            </tr>
+        </table>
+        <div class="mt20 tc">
+            <div class="btn-cheng mr25" id="tj_pop">通知缴费</div>
+            <div class="btn-chengk">查看记录</div>
+        </div>
+        
+    </div>
+</div> 
+    
+<!--***bottom start****************************************-->
+	<div id="youi_page_footer" class="youi-page-footer"></div>
+<!--***bottom end****************************************-->
+<!--遮罩层-->
+<div class="pop_layer">
+	<div class="tj_info bgfff">
+		<div id="closer"></div>
+    	<div class="borderm pb10 f16">填写推荐信息</div>
+        <form class="tj_form mt15">
+        	<div>
+        		<label>联系人姓名</label>
+                <input type="text" class="ml10">
+            </div>
+            <div style="margin-left:84px" class="mt10 mb10">
+        		<i class="fa fa-square-o tj_radio" style="width:13px;display:inline-block"></i>&nbsp;先生
+                <i class="fa fa-square-o tj_radio" style="width:13px;display:inline-block"></i>&nbsp;女士
+            </div>
+            <div class="mb10">
+        		<label>联系人电话</label>
+                <input type="text" class="ml10">
+            </div>
+            <div class="mb15">
+        		<label>联系人姓名</label>
+                <input type="text" class="ml10">
+            </div>
+            <div class="mb15">
+        		<label>联系人电话</label>
+                <input type="text" class="ml10">
+            </div>
+            <div class="mb15">
+        		<label>备注</label>
+                <textarea class="ml10"></textarea>
+            </div>
+            <div class="mb15">
+        		<label>&nbsp;</label>
+                <div class="ml10 btn-cheng">提交</div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--******************  code end  ****************************-->
+<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+<script>
+	$(function(){
+		$(".tj_radio").click(function(){
+			$(this).toggleClass("fa-square-o").toggleClass("fa-check-square-o").siblings("i").addClass("fa-square-o").removeClass("fa-check-square-o");
+		});
+		$("#closer").click(function(){
+			$(".pop_layer").hide();
+		});
+		$("#tj_pop").click(function(){
+			$(".pop_layer").show();
+		});
+	})
+</script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>全部订单</title>
+	<link href="../styles/base.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
+	<link rel="stylesheet" type="text/css" href="../styles/page/awesome/css/font-awesome.min.css">
+	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+	<script type="text/javascript" src="../scripts/page/adcom.js"></script>
+	<script type="text/javascript" src="../scripts/page/right.js"></script>
+</head>
+<body style="background-color:#f4f4f4;">
+	<!--***top start****************************************-->
+	<div id="youi_page_header" class="youi-page-header clearfix"></div>
+	<!--***top end****************************************-->
+	<div class="w100">
+		<div class="w1200 clearfix pt30 pb50">
+			<div class="per-center-box clearfix">
+				<div id="youi_page_left" class="fl clearfix"></div>
+				<div class="w1000">
+					<h3 class="per-h3">订单评价</h3>
+					<div class="clearfix">
+						<table class="st-order st-num">
+							<colgroup>
+								<col width="550"></col><col width="200"></col><col width="141"></col>
+							</colgroup>
+							<thead>
+								<tr>
+									<th colspan="4"><span>订单信息</span><span>2016年1月13日17:35:14</span><span>订单号：11755289026</span></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<input checked="checked" type="checkbox" class="mr20 fl ml10 mt20">
+										<img src="../styles/images/grzx/sl-i1.png" border="0" width="60" height="60" class="mr20 fl"/>
+										<div class="fl mt10" style="width:360px;"><span class="so-p-text fl"><a href="">[小熊（Bear）电热饭盒 加热保温饭盒 双层密封</a></span> <span class="fr">x1</span></div>
+									</td>
+									<td>金额：￥79.00</td>
+									<td rowspan="2">已支付</td>
+								</tr>
+								<tr>
+									<td>
+										<input type="checkbox" class="mr20 fl ml10 mt20">
+										<img src="../styles/images/grzx/sl-i1.png" border="0" width="60" height="60" class="mr20 fl"/>
+										<div class="fl mt10" style="width:360px;"><span class="so-p-text fl"><a href="">[小熊（Bear）电热饭盒 加热保温饭盒 双层密封</a></span> <span class="fr">x1</span></div>
+									</td>
+									<td>金额：￥79.00</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="3">
+										<label class="lab-wd">商品质量</label>
+										<div class="fl pl20">
+											<span class="starbox1"><i class="star2"></i><i class="star2"></i><i class="star2"></i><i class="star2"></i><i class="star2"></i></span>
+										</div>
+									</td>
+								</tr>
+									<td colspan="3">
+										<label class="lab-wd">服务态度</label>
+										<div class="fl pl20">
+											<span class="starbox2"><i class="star2"></i><i class="star2"></i><i class="star2"></i><i class="star2"></i><i class="star2"></i></span>
+										</div>
+									</td>
+								</tr>
+									<td colspan="3">
+										<label class="lab-wd">总体评价</label>
+										<div class="fl"><textarea class="ml20" placeholder="请留下您的宝贵意见，10个字以上"></textarea></div>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+						<input value="保存" class="hhf-submit mt20" style="height:36px;" type="submit">
+					</div>					
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--***bottom start****************************************-->
+	<div id="youi_page_footer" class="youi-page-footer"></div>
+	<!--***bottom end****************************************-->
+	<script type="text/javascript">
+		$(function(){
+			star(".starbox1 i");
+				star(".starbox2 i");
+				star(".starbox3 i");
+				star(".starbox4 i");
+				function star(ele){
+					$(ele).hover(function(){
+						var index=$(this).index()+1;
+						$(ele).removeClass("star1").addClass("star2")
+						var arr=$(ele).toArray().slice(0,index);
+						for(var i=0;i<arr.length;i++){
+							arr[i].className="star1";
+						}
+					});
+				}
+			$(".so-see-address").hover(function(){
+				$(this).find(".ssa-pa").toggle();
+			})
+		})
+	</script>
+</body>
+</html>

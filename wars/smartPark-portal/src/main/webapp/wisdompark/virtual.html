@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>虚拟园区</title>
+<link href="../styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+<link href="../styles/base.css" type="text/css" rel="stylesheet">
+<link href="../styles/page/page.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+<div id="youi_page_header" class="youi-page-header clearfix"></div>
+<!--***top end****************************************-->
+<!--content-->
+<!--*******************************************-->
+<div class="w1200" style="margin-top:30px;position:relative">
+	<img src="../styles/images/zhyq/2.jpg" style="width:100%"/>
+    <div class="zznav">
+    	<ul class="oh fl zzul">
+        	<li class="b1"><a href="#">创智中心1#楼</a>
+            	<ul class="subul">
+                	<li><a href="wp_login.html">F1</a></li>
+                    <li><a href="wp_login.html">F2</a></li>
+                    <li><a href="wp_login.html">F3</a></li>
+                    <li><a href="wp_login.html">F4</a></li>
+                    <li><a href="wp_login.html">F5</a></li>
+                    <li><a href="wp_login.html">F6</a></li>
+                    <li><a href="wp_login.html">F7</a></li>
+                </ul>
+            </li>
+            <li class="b2"><a href="#">创智中心2#楼</a>
+            	<ul class="subul">
+                	<li>F1</li>
+                    <li>F2</li>
+                    <li>F3</li>
+                    <li>F4</li>
+                    <li>F5</li>
+                    <li>F6</li>
+                    <li>F7</li>
+					<li>F8</li>
+					<li>F9</li>
+                </ul>
+            </li>
+            <li><a href="#">创智中心3#楼</a></li>
+            <li><a href="#">创智中心4#楼</a></li>
+            <li><a href="#">创智中心5#楼</a></li>
+            <li><a href="#">创智中心6#楼</a></li>
+            <li><a href="#">创智中心7#楼</a></li>
+        </ul>
+        <div class="fl zz1"></div>
+    </div>
+	
+	<div class="maskset">
+		<div class="b1mask hide"><img src="../styles/images/zhyq/b1.png"/></div>
+		<div class="b2mask hide"><img src="../styles/images/zhyq/b2.png"/></div>
+		<div class="b2floor b2f1 hide"><img src="../styles/images/zhyq/b2f1.png" alt=""></div>
+		<div class="b2floor b2f2 hide"><img src="../styles/images/zhyq/b2f2.png" alt=""></div>
+		<div class="b2floor b2f3 hide"><img src="../styles/images/zhyq/b2f3.png" alt=""></div>
+		<div class="b2floor b2f4 hide"><img src="../styles/images/zhyq/b2f4.png" alt=""></div>
+		<div class="b2floor b2f5 hide"><img src="../styles/images/zhyq/b2f5.png" alt=""></div>
+		<div class="b2floor b2f6 hide"><img src="../styles/images/zhyq/b2f6.png" alt=""></div>
+		<div class="b2floor b2f7 hide"><img src="../styles/images/zhyq/b2f7.png" alt=""></div>
+		<div class="b2floor b2f8 hide"><img src="../styles/images/zhyq/b2f8.png" alt=""></div>
+		<div class="b2floor b2f9 hide"><img src="../styles/images/zhyq/b2f9.png" alt=""></div>
+		
+		<div class="b1floor b1f1 hide"><img src="../styles/images/zhyq/b1f1.png" alt=""></div>
+		<div class="b1floor b1f2 hide"><img src="../styles/images/zhyq/b1f2.png" alt=""></div>
+		<div class="b1floor b1f3 hide"><img src="../styles/images/zhyq/b1f3.png" alt=""></div>
+		<div class="b1floor b1f4 hide"><img src="../styles/images/zhyq/b1f4.png" alt=""></div>
+		<div class="b1floor b1f5 hide"><img src="../styles/images/zhyq/b1f5.png" alt=""></div>
+		<div class="b1floor b1f6 hide"><img src="../styles/images/zhyq/b1f6.png" alt=""></div>
+		<div class="b1floor b1f7 hide"><img src="../styles/images/zhyq/b1f7.png" alt=""></div>
+	</div>
+</div>
+<!--*******************************************-->
+    
+<!--***bottom start****************************************-->
+	<div id="youi_page_footer" class="youi-page-footer"></div>
+<!--***bottom end****************************************-->
+<!--******************  code end  ****************************-->
+<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+<script>
+	$(function(){
+		$(".b1").hover(function(){
+			$(".b1mask").toggleClass("hide");
+		});
+		$(".b2").hover(function(){
+			$(".b2mask").toggleClass("hide");
+		});
+		$(".b1 li").hover(function(){
+			var idx=$(this).index();
+			$(".b1floor").eq(idx).toggleClass("hide");
+		});
+		$(".b2 li").hover(function(){
+			var idx=$(this).index();
+			$(".b2floor").eq(idx).toggleClass("hide");
+		});
+	});
+</script>
+</body>
+</html>

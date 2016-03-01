@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>采购详情</title>
+<link href="../styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+<link href="../styles/base.css" type="text/css" rel="stylesheet">
+<link href="../styles/page/cg30.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+<div id="youi_page_header" class="youi-page-header clearfix"></div>
+<!--***top end****************************************-->
+<!--content-->
+<!--*******************************************-->
+
+<div class="w1200" style="position:relative">
+	<div class="pt5 pb5 f16"><a href="javascript:;" class="c3"><i class="fa fa-angle-left" style="font-size:20px"></i>&nbsp;&nbsp;返回</a></div>
+    <div class="clearfix mt30">
+    	<div class="fl goods_box tc">
+        	<div class="goods_img"><img src="../styles/images/cg30/cxq_big.png"/></div>
+            <ul class="goods_ul">
+            	<li><img src="../styles/images/cg30/cxq_sm1.jpg"/></li>
+                <li><img src="../styles/images/cg30/cxq_sm2.jpg"/></li>
+                <li class="active"><img src="../styles/images/cg30/cxq_sm3.jpg"/></li>
+                <li><img src="../styles/images/cg30/cxq_sm4.jpg"/></li>
+                <li><img src="../styles/images/cg30/cxq_sm5.jpg"/></li>
+            </ul>
+            <div class="a_left"></div><div class="a_right"></div>
+        </div>
+        <div class="fr p20" style="width:400px">
+        	<div class="f18 c3 lh40">齐心（COMIX）A511原味资料册/文件车 A4 60袋  橙色</div>
+            <div class="mt50">
+            	<div class="f12">
+                	<span>商品价格：</span><span class="ccheng f18">&yen;13.8</span>
+                </div>
+                <div class="f12 mt20">
+                	<span>商品评价：</span><span class="starbox"><i class="star0"></i><i class="star0"></i><i class="star0"></i><i class="star0"></i><i class="star0"></i></span>
+                </div>
+                <div class="f12 mt50">
+                	<span>选择颜色：</span>
+                    <div class="good_prop"><img src="../styles/images/cg30/prop1.png"/>&nbsp;蓝色</div>
+                    <div class="good_prop active"><img src="../styles/images/cg30/prop2.png"/>&nbsp;橙色</div>
+                    <div class="good_prop"><img src="../styles/images/cg30/prop3.png"/>&nbsp;红色</div>
+                </div>
+                <div class="f12 mt50">
+                	<span>选择颜色：</span>
+                    <div class="good_prop">原味40袋</div>
+                    <div class="good_prop active">原味60袋</div>
+                    <div class="good_prop">原味80袋</div>
+                </div>
+                <div class="mt50">
+                	<div class="btn_cc1 btn_full">加入购物车</div>
+                	<div class="btn_star ml15"><i class="fa fa-star-o"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--w1200 end-->
+</div>
+<div class="bgf1">
+	<div class="w1200 pt40">
+    	<ul class="type_ul pb15 oh" style="border-bottom:1px #B8B8B8 solid">
+                <li class="active">产品详情</li><li>规格参数</li><li>用户评价</li><li>常见问题</li><li>兼容配件</li>
+        </ul>
+        <img src="../styles/images/cg30/cp1.jpg"/>
+    </div>
+</div>
+<div class="w1200 pt40 pb10">
+	<img src="../styles/images/cg30/cp2.jpg"/>
+</div>
+<div class="bgf1">
+	<div class="w1200 pt40">
+        <img src="../styles/images/cg30/cp3.jpg"/>
+    </div>
+</div>
+<div class="w1200 pt40 pb10">
+	<img src="../styles/images/cg30/cp4.jpg"/>
+    <div class="tc mt50"><img src="../styles/images/cg30/footbar.png"/></div>
+</div>
+
+<!--*******************************************-->
+    
+<!--***bottom start****************************************-->
+	 <div id="youi_page_footer" class="youi-page-footer"></div>
+<!--***bottom end****************************************-->
+<!--******************  code end  ****************************-->
+<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+<script type="text/javascript" src="../scripts/page/cg30com.js"></script>
+<script>
+	$(function(){
+		$(".btn_star").click(function(){
+			$(this).toggleClass("active").find("i").toggleClass("fa-star-o").toggleClass("fa-star")
+		});
+		$(".starbox i").hover(function(){
+			var index=$(this).index()+1;
+			console.log(index);
+			$(".starbox i").removeClass("star1").addClass("star0");
+			var arr=$(".starbox i").toArray().slice(0,index);
+			for(var i=0;i<arr.length;i++){
+				arr[i].className="star1";
+			}
+		});
+	});
+</script>
+</body>
+</html>

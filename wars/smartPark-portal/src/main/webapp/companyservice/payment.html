@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>支付通道</title>
+<link href="../styles/base.css" type="text/css" rel="stylesheet">
+<link href="../styles/page/page.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+<div id="youi_page_header" class="youi-page-header clearfix"></div>
+<!--***top end****************************************-->
+<!--content-->
+<div class="w1200">
+	<div class="mt40 mb20"><span class="span_bold f20">确定支付订单</span></div>
+    <div class="pay_item">
+    	<div class="pay_tit c3">您当前选购的是：</div>
+        <div class="pay_content clearfix">
+        	<div class="fl mr40"><img src="../styles/images/company/egeg.jpg"/></div>
+            <div class="fl ml20 mr20">
+            	<span class="cc f18">车辆租凭：奔驰 伟大 9座商务车</span>
+                <div class="mt20 mb20">
+                    <div class="res_tip">自动挡</div>
+                    <div class="res_tip">9人座</div>
+                    <div class="res_tip">车牌：杭AL8899</div>
+                </div>
+                <div><input type="checkbox" class="vm"><span class="pl20 vm">是否索取发票</span></div>
+            </div>
+            <div class="fl tc pay_info"><span class="czz f16">&yen;500元/次</span></div>
+            <div class="fl tc pay_info"><span class="cc f16">预约时间星期五</span></div>
+        </div>
+    </div>
+    <!-------------------------------------->
+     <div class="pay_item">
+     	<div class="pay_tit c3">支付平台</div>
+        <div class="pay_content mb20">
+        	<div class="clearfix">
+            	<div class="fl mr40 platform"><i class="radio_1"></i><img src="../styles/images/company/zfb.jpg"/></div>
+                <div class="platform"><i class="radio_0"></i><img src="../styles/images/company/wx.jpg"/></div>
+                <div class="platform mt30">
+                	<i class="radio_0" style="vertical-align:middle"></i><span class="vm pl10">网银支付（需开通网上银行）</span>
+                    <ul class="blank_ul clearfix">
+                    	<li class="active"><img src="../styles/images/company/blank1.jpg"/></li>
+                        <li><img src="../styles/images/company/blank2.jpg"/></li>
+                        <li><img src="../styles/images/company/blank3.jpg"/></li>
+                        <li><img src="../styles/images/company/blank4.jpg"/></li>
+                        <li><img src="../styles/images/company/blank5.jpg"/></li>
+                        <li><img src="../styles/images/company/blank6.jpg"/></li>
+                        <li><img src="../styles/images/company/blank7.jpg"/></li>
+                        <li><img src="../styles/images/company/blank8.jpg"/></li>
+                        <li><img src="../styles/images/company/blank9.jpg"/></li>
+                        <li><img src="../styles/images/company/blank10.jpg"/></li>
+                        <li><img src="../styles/images/company/blank11.jpg"/></li>
+                        <li><img src="../styles/images/company/blank12.jpg"/></li>
+                        <li><img src="../styles/images/company/blank13.jpg"/></li>
+                        <li><img src="../styles/images/company/blank14.jpg"/></li>
+                        <li><img src="../styles/images/company/blank15.jpg"/></li>
+                        <li><img src="../styles/images/company/blank16.jpg"/></li>
+                    </ul>
+                </div>
+                <div class="mt40 ml40">
+                	<div class="btn-ck">提交订单</div>
+                </div>
+            </div>
+        </div>
+     </div>
+</div>    
+    
+<!--***bottom start****************************************-->
+<div id="youi_page_footer" class="youi-page-footer"></div>
+<!--***bottom end****************************************-->
+<div class="pop_layer">
+	<div class="online_box clearfix">
+    	<div class="fl w95">
+        	<div class="on_title">
+            	<span class="span_bold f18">填写在线预约单</span>
+            </div>
+            <div class="cc mt15 f12">*为了保证您的旅行顺利出行，请务必填写真实信息</div>
+            <form class="online_form mt20">
+            	<div>
+                    <div class="inline_b">
+                        <label><span class="cc vm">*</span>&nbsp;联系人</label>
+                        <input type="text"/>
+                    </div>
+                    <div class="inline_b ml40">
+                        <label><span class="cc vm">*</span>&nbsp;联系电话</label>
+                        <input type="text"/>
+                    </div>
+                </div>
+                <div class="mt25">
+                    <div class="inline_b">
+                        <label><span class="cc vm">*</span>&nbsp;联系邮箱</label>
+                        <input type="text"/>
+                    </div>
+                    <div class="inline_b ml40">
+                        <label>&nbsp;&nbsp;&nbsp;增值服务</label>
+                        <input type="checkbox" class="vm"/><span class="vm c3">司机</span>
+                    </div>
+                </div>
+                <div class="mt25">
+                	<label class="vt">&nbsp;&nbsp;&nbsp;备注</label>
+                    <textarea style="width:552px;height:150px"></textarea>
+                </div>
+                <div class="tc mt50">
+                	<div class="btn-cheng" style="padding:10px 30px">提交预约</div>
+                </div>
+            </form>
+        </div>
+    	<div class="close0 fr"></div>
+    </div>
+</div>
+
+<!--******************  code end  ****************************-->
+<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+<script>
+	$(function(){
+		$(".blank_ul").on("click","li",function(){
+			$(this).addClass("active").siblings().removeClass("active");
+		});
+		$(".platform").on("click",function(){
+			$(this).find("i").attr("class","radio_1");
+			$(this).siblings("div").find("i").attr("class","radio_0")
+		});
+	})
+</script>
+</body>
+</html>

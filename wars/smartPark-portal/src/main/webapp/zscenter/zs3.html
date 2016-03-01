@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href="../styles/base.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
+	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$(".index-fr-nav li").click(function(){
+				$(".index-fr-nav li").removeClass("active");
+				$(this).addClass("active");
+				$(".ifn-group ul").eq($(this).index()).removeClass("undis").siblings().addClass("undis");
+			});
+			$(".ib-btn").click(function(){
+				$(".bg-tanc").show();
+			});
+			$(".tc-close").click(function(){
+				$(".bg-tanc").hide();
+			});
+		})
+	</script>
+</head>
+<body>
+	<!--***top start****************************************-->
+	<div id="youi_page_header" class="youi-page-header clearfix"></div>
+	<!--***top end****************************************-->
+	<div class="w100">
+		<div class="index-ban">
+			<div class="ib-one">
+				<a href=""><img src="../styles/images/zs/con1.jpg"></a>
+			</div>
+		</div>
+		<div class="w1200 clearfix pt30 pb50">
+			<div class="fl w895">
+				<h3 class="h3-c-o">孵化器政策</h3>
+				<div class="index-group">
+					<h5>关于租金</h5>
+					<div class="ig-box">
+						<p>
+							第一年,5元/㎡/月；全额作为履约保证金，并于次年首个季度内全额返还；<br/>第二年,25元/㎡/月；其中15元/㎡/月作为租金，10元/㎡/月作为履约保证金，该保证金于次年首个季度内全额返还；<br/>第三年,45元/㎡/月；其中35元/㎡/月作为租金，10元/㎡/月作为履约保证金，该保证金于次年首个季度内全额返还；<br/>第四年起,按市场租金45元/㎡/月正常收取。（具体租金金额，会根据市场行情上下浮动）
+						</p>
+						<p class="ib-p-o">（PS:1、适用于租赁满1年及以上的入孵企业；2、租赁优惠面积≤500㎡）</p>
+						<a href="javascript:;" class="ib-btn">在线申请</a>
+					</div>
+				</div>
+				<div class="index-group">
+					<h5>货款贴息政策</h5>
+					<div class="ig-box">
+						<p>孵化企业获得银行贷款的，按照不超过当年实际贷款额银行基准利息的50%给予三年贴息补助，每家企业年最高贴息金额为15万元。</p>
+						<a href="javascript:;" class="ib-btn">在线申请</a>
+					</div>
+				</div>
+				<div class="index-group">
+					<h5>政策补助</h5>
+					<div class="ig-box">
+						<p>孵化企业入孵三年内自身缴纳增值税、营业税所形成的地方留成部分的80%补助给企业。企业孵化期满当年度主营业务收入达到500万元（含）、1000万元（含）以上的，分别给予5万元、10万元的资助；孵化企业列入杭州市雏鹰计划、青蓝计划、蒲公英计划及各类科技计划项目等资助的，按上级要求给予企业最高不超1∶1的比例配套资助。 </p>
+						<a href="javascript:;" class="ib-btn">在线申请</a>
+					</div>
+				</div>
+				<div class="index-group mb30 mt40">
+					<img src="../styles/images/zs/con2.jpg" />
+				</div>
+				<h3 class="h3-c-o mb20">加速器政策</h3>
+				<div class="index-group">
+					<div class="ig-box">
+						<h3 class="ib-h3-circle">适用范围</h3>
+						<p>适用于租赁满1年以上-5年以内企业；毛坯交付</p>
+						<h3 class="ib-h3-circle mt10">园区特别政策</h3>
+						<p>适政府为鼓励园区二次招商先租后售、园区招引的企业2016年度2017年两年内经审核认定后政府给予0.5元/㎡/天的租金补助。</p>
+						<a href="javascript:;" class="ib-btn">在线申请</a>
+					</div>
+				</div>
+			</div>
+			<div class="fr w285">
+				<ul class="index-fr-nav clearfix">
+					<li class="active">热门活动</li>
+					<li>即将进行</li>
+					<li>文档库</li>
+				</ul>
+				<div class="ifn-group">
+					<ul class="ig-nav">
+						<li>
+							<div class="in-photo">
+								<img src="../styles/images/zs/nav-img1.png" border="0" width="100%"/>
+							</div>
+							<div class="fr">
+								<p>杭州，一场无关情爱的风月无边月无</p>
+								<a href="" class="a-more">详细信息</a>
+							</div>
+						</li>
+						<li>
+							<div class="in-photo">
+								<img src="../styles/images/zs/nav-img2.png" border="0" width="100%"/>
+							</div>
+							<div class="fr">
+								<p>杭州，一场无关情爱的风月无边月无</p>
+								<a href="" class="a-more">详细信息</a>
+							</div>
+						</li>
+						<li>
+							<div class="in-photo">
+								<img src="../styles/images/zs/nav-img3.png" border="0" width="100%"/>
+							</div>
+							<div class="fr">
+								<p>杭州，一场无关情爱的风月无边月无</p>
+								<a href="" class="a-more">详细信息</a>
+							</div>
+						</li>
+					</ul>
+					<ul class="ig-nav undis">
+						<li>
+							<div class="in-photo">
+								<img src="../styles/images/zs/nav-img1.png" border="0" width="100%"/>
+							</div>
+							<div class="fr">
+								<p>杭州，一场无关情爱的风月</p>
+								<a href="" class="a-more">详细信息</a>
+							</div>
+						</li>
+						<li>
+							<div class="in-photo">
+								<img src="../styles/images/zs/nav-img2.png" border="0" width="100%"/>
+							</div>
+							<div class="fr">
+								<p>杭州，一场无关情爱的风月无边月无</p>
+								<a href="" class="a-more">详细信息</a>
+							</div>
+						</li>
+						<li>
+							<div class="in-photo">
+								<img src="../styles/images/zs/nav-img3.png" border="0" width="100%"/>
+							</div>
+							<div class="fr">
+								<p>杭州，一场无关情爱的风月无</p>
+								<a href="" class="a-more">详细信息</a>
+							</div>
+						</li>
+					</ul>
+					<ul class="ig-nav undis">
+						<li>
+							<div class="in-photo">
+								<img src="../styles/images/zs/nav-img1.png" border="0" width="100%"/>
+							</div>
+							<div class="fr">
+								<p>杭州，一场无关爱情的风月无边月无</p>
+								<a href="" class="a-more">详细信息</a>
+							</div>
+						</li>
+						<li>
+							<div class="in-photo">
+								<img src="../styles/images/zs/nav-img2.png" border="0" width="100%"/>
+							</div>
+							<div class="fr">
+								<p>杭州，一场无关情爱的风月无边月无</p>
+								<a href="" class="a-more">详细信息</a>
+							</div>
+						</li>
+						<li>
+							<div class="in-photo">
+								<img src="../styles/images/zs/nav-img3.png" border="0" width="100%"/>
+							</div>
+							<div class="fr">
+								<p>杭州，一场无关情爱的风月无边月无</p>
+								<a href="" class="a-more">详细信息</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--***bottom start****************************************-->
+	<div id="youi_page_footer" class="youi-page-footer"></div>
+	<!--***bottom end****************************************-->
+	<!--***弹窗 start****************************************-->
+	<div class="bg-tanc">
+		<div class="tanc-con" style="margin-top:-252px;top:50%;">
+			<a href="javascript:;" class="tc-close"></a>
+			<h3>填写在线预约单</h3>
+			<table class="line-table">
+				<colgroup>
+					<col width="140"></col>
+					<col width="240"></col>
+				</colgroup>
+				<tr>
+					<td>公司名称</td>
+					<td><input type="text"></td>
+					<td rowspan="6" style="color:#fb4a4a">
+						备注：如果贵司为已驻企业，请在线提报，如果贵司还未进入园区，请在线预约后再进行申请，谢谢！
+					</td>
+				</tr>
+				<tr>
+					<td>公司楼栋及地址</td>
+					<td><input type="text"></td>
+				</tr>
+				<tr>
+					<td>联系人</td>
+					<td><input type="text"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<label><input type="radio" name="sex" class="mr5">先生</label>
+						<label><input type="radio" name="sex" class="mr5">女士</label>
+					</td>
+				</tr>
+				<tr>
+					<td>联系人职位</td>
+					<td><input type="text"></td>
+				</tr>
+				<tr>
+					<td>联系手机</td>
+					<td><input type="text"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><a href="" class="ib-btn">提交预约</a></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<!--***弹窗 end****************************************-->
+</body>
+</html>

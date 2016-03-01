@@ -1,0 +1,28 @@
+{
+	"records":[{
+		"goodsName":"测试多功能手表",
+		"price":"9"
+	},{
+		"goodsName":"测试多功能电脑包",
+		"price":"19"
+	},
+	{
+		"goodsName":"水壶",
+		"price":"29"
+	},
+	{
+		"goodsName":"摄像头",
+		"price":"39"
+	},
+	{
+		"goodsName":"腰包",
+		"price":"49"
+	},
+	{
+		"goodsName":"幽兰壁灯",
+		"price":"59"
+	}
+	],
+	"record":{"userId":"zhangsan","userCaption":"张三"},
+	"totalCount":1
+}

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>访客管理</title>
+	<link href="../styles/base.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
+	<link rel="stylesheet" type="text/css" href="../styles/awesome/css/font-awesome.min.css">
+	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+</head>
+<body>
+	<!--***top start****************************************-->
+	<div id="youi_page_header" class="youi-page-header clearfix"></div>
+	<!--***top end****************************************-->
+	<div class="w100">
+		<div class="w1200 clearfix pt30 pb50">
+			<div class="h-nav clearfix">
+				<a href=""><span>首页</span></a><img src="../styles/images/zs/right-j-b.png" border="0" />
+				<a href=""><span>物业服务</span></a><img src="../styles/images/zs/right-j-b.png" border="0" />
+				<a href=""><span class="current">访客管理</span></a>
+			</div>
+			<div class="clearfix">
+				<div class="fl w895">				
+					<div class="ht-bd-box">
+						<table class="setting-table">
+							<colgroup>
+								<col width="80"></col>
+								<col></col>
+								<col width="120"></col>
+								<col></col>
+							</colgroup>
+							<tr>
+								<td align="center">姓名</td>
+								<td><input type="text" id="user"></td>
+								<td align="center">性别</td>
+								<td>
+									<div class="sex-group"><span class="active">男</span><span>女</span></div>
+								</td>
+							</tr>
+							<tr>
+								<td align="center">联系电话</td>
+								<td><input type="text" id="iphone"></td>
+								<td align="center">到访企业</td>
+								<td>
+									<input type="text" id="company">
+								</td>
+							</tr>
+							<tr>
+								<td align="center">到访时间</td>
+								<td><input type="text" id="timer"></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td align="center">访客说明</td>
+								<td colspan="3">
+									<textarea id="userinfo"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><input value="提交" class="hhf-submit" type="submit" style="margin-left:0px;"></td>
+							</tr>
+						</table>
+					</div>
+					<h4 class="f14 mt20 mb20">访客登记流程说明</h4>	
+					<div class="tc pt20 pb20" style="background-color:#f6f6f6;border:1px solid #ecebeb">
+						<img src="../styles/images/yqfw/lct1.png" border="0" />
+					</div>
+				</div>
+				<div class="fr w285">
+					<h3 class="h3-bd">热点新闻</h3>
+					<div class="ifn-group">
+						<ul class="ig-nav">
+							<li>
+								<div class="in-photo">
+									<img src="../styles/images/zs/nav-img1.png" border="0" width="100%"/>
+								</div>
+								<div class="fr">
+									<p>杭州，一场无关情爱的风月无边月无</p>
+									<a href="" class="a-more">详细信息</a>
+								</div>
+							</li>
+							<li>
+								<div class="in-photo">
+									<img src="../styles/images/zs/nav-img2.png" border="0" width="100%"/>
+								</div>
+								<div class="fr">
+									<p>杭州，一场无关情爱的风月无边月无</p>
+									<a href="" class="a-more">详细信息</a>
+								</div>
+							</li>
+							<li>
+								<div class="in-photo">
+									<img src="../styles/images/zs/nav-img3.png" border="0" width="100%"/>
+								</div>
+								<div class="fr">
+									<p>杭州，一场无关情爱的风月无边月无</p>
+									<a href="" class="a-more">详细信息</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--***bottom start****************************************-->
+	<div id="youi_page_footer" class="youi-page-footer"></div>
+	<!--***bottom end****************************************-->
+	<script type="text/javascript" src="../scripts/page/right.js"></script>
+<script>
+$(function(){
+	$(".hhf-submit").click(function(){
+		var obj={
+			createUser:$("#user").val(),
+			fkcodeSex:$(".sex-group span.active").index(),//0-男，1女
+			fkcodeTelephone:$("#iphone").val(),
+			fkcodeComp:$("#company").val(),
+			fkcodeTime:$("#timer").val(),
+			fkcodeRemark:$("#userinfo").val()
+			};
+		var str=JSON.stringify(obj);
+		alert(str);
+	});
+})
+</script>
+</body>
+</html>

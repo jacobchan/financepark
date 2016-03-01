@@ -206,10 +206,10 @@ input{font-family:"微软雅黑";}
 .index-head-nav li>a{color: #333;font-size: 16px;padding: 10px;line-height: 20px;display: inline-block;margin:0px 13px;}
 .index-head-nav li:hover>a,.index-head-nav li.active>a{color: #fb7730;}
 .index-head-nav li:hover dl{display: inline-block;} 
-.index-head-nav li dl{position: absolute;top: 40px; left: 0px;border:1px solid #ddd;background:#fff ;border-top: 0px;width: 100%;display: none;z-index: 2;}
+.index-head-nav li dl{position: absolute;top: 40px; left: 0px;border:1px solid #ddd;background:#fff ;border-top: 0px;width: 100%;display: none;z-index: 200;}
 .index-head-nav li dl dt{position: absolute;top: -5px;left: 50%;margin-left: -9px;width: 18px;height: 5px;background: url(images/sj-top.png) no-repeat;}
 .index-head-nav li dl dd a{color: #333;font-size: 14px;margin:0px;width: 100%;text-align: center;border-top: 1px solid #e8e8e8;padding: 10px;line-height: 20px;display: inline-block;}
-.index-head-nav li dl dd a:hover,.index-head-nav li dl dd.active a{background: #fb7730;color: #fff;}
+.index-head-nav li dl dd a:hover,.index-head-nav li dl dd.active a{background: #fb7730;color: #fff!important;}
 .search-see{padding: 0px;}
 .search-see .input-search{line-height: 20px;padding: 9px 10px;border:1px solid #e8e8e8;color: #454545;font-size: 15px;width:155px;height: 40px;}
 .search-see .btn-search{float: left;width:60px;height: 40px;display: block;background:#ff6715 url(images/zs/search.png) no-repeat center center;border:0px; }
@@ -224,3 +224,13 @@ input{font-family:"微软雅黑";}
 .bottom-partners{width: 1100px;float: right}
 .bottom-partners p{border-bottom:1px #434242 solid;padding:7px 0;line-height:25px}
 .bottom-partners a{margin-right: 20px;font-size: 12px;}
+
+/**个人中心**/
+.w200{width: 200px;background-color: #eeeeee;min-height: 980px;}
+.w1000{width: 998px;padding: 20px 50px;float: left;}
+.per-center-box{border:1px solid #ecebeb;background-color: #fff;}
+.per-center-box dl dt{font-size: 16px;font-weight: bold;line-height: 40px;padding: 10px 0px;padding-left: 50px;}
+.per-center-box dl dd a{color: #737373;display: block;padding-left: 63px;line-height: 30px;height: 30px;font-size: 12px;}
+.per-center-box dl dd a:hover,.per-center-box dl dd.active>a{color:#fff;background:#fa742c;border-top:1px solid #efefef;border-bottom:1px solid #efefef;}
+.per-center-box dl dd ul li a{padding-left: 75px;}
+.per-center-box dl dd ul li.active>a{ color:#fff;background:#fa742c;border-top:1px solid #efefef;border-bottom:1px solid #efefef;}

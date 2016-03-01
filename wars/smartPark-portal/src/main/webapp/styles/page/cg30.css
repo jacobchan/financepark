@@ -1,0 +1,96 @@
+@charset "utf-8";
+/*index 首页*/
+a{color:#aaa}.inline_b{display:inline-block}.fw{font-weight:600}.oh{ overflow:hidden}
+.bgf1{background:#f1f1f1}.bgfff{background:#fff}
+.c3{color:#333}.cc{color:#ccc}.ccheng{color:#FF6715}.c_green{color:#7AC041}
+.btn_cc0,.btn_cc1{display:inline-block;width:120px;height:40px;line-height:40px;border:1px #FF6715 solid; text-align:center;cursor:pointer}
+.btn_cc0{background:transparent;color:#FF6715}
+.btn_cc1{background:#FF6715;color:#fff;}
+.nav_bar{background:#494745;height:41px;line-height:41px}
+.cg_list{width:230px;float:left;background:rgba(255,255,255,0.2);text-align:center;cursor:pointer;color:#fff;cursor:pointer;position:relative}
+.down_list{position:absolute;top:41px;left:0;color:#747474;background:#fff; z-index:100;width:100%; line-height:normal;display:none}
+.cg_list:hover{color:#FFA200}.cg_list:hover .down_list{display:block}
+.down_list li{text-align:center;padding:10px}.down_list i{font-size:25px}
+.nav_ul li{display:inline-block;float:left;font-size:16px;}.nav_ul a{padding:10px 30px;}
+.nav_ul li:hover a,.nav_ul .active a{color:#FFA200;background:rgba(255,255,255,0.2)}
+.banner{background:url(../images/cg30/banner.png) no-repeat;min-height:490px;height:auto; background-size:100% auto;}
+.square_ul li{width:290px;background-color:#fff;padding:15px;padding-top:245px;display:inline-block;float:left;;margin:10px 10px 0 0;position:relative}
+.cg_tag{position:absolute;left:15px;top:15px}
+.info_tit{padding:10px 15px;font-size:18px;color:#333;position:absolute;top:-24px;left:32%;background:#f1f1f1}
+.info_tip{width:290px;border:2px #C3C3C3 solid;position:relative;text-align:center;padding:50px 20px 5px 20px}
+.info_tip li{list-style:disc inside; margin-top:15px}
+.cg_w1{background:url(../images/cg30/cg_w1.png) center 70px no-repeat;}
+.cg_w2{background:url(../images/cg30/cg_w2.png) center 70px no-repeat;}
+.cg_w3{background:url(../images/cg30/cg_w3.png) center 70px no-repeat;}
+.cg_q1{background:url(../images/cg30/cg_q1.png) center 50px no-repeat;}
+.cg_q2{background:url(../images/cg30/cg_q2.png) center 100px no-repeat;}
+.cg_q3{background:url(../images/cg30/cg_q3.png) center 50px no-repeat;}
+.cg_b1{background:url(../images/cg30/cg_b1.png) center 100px no-repeat;}
+.cg_b2{background:url(../images/cg30/cg_b2.png) center 50px no-repeat;}
+.cg_it1{background:url(../images/cg30/cg_it1.png) center 100px no-repeat;}
+.cg_it2{background:url(../images/cg30/cg_it2.png) center 100px no-repeat;}
+.cg_sm1{background:url(../images/cg30/cg_sm1.png) center 50px no-repeat;}
+.cg_sm2{background:url(../images/cg30/cg_sm2.png) center 50px no-repeat;}
+
+/*办公用品*/
+.bb{border-bottom:1px #F1F1F1 solid}
+.type_ul li{width:180px; text-align:center;display:inline-block;float:left;color:#333;cursor:pointer}
+.type_ul li:hover,.type_ul li.active,.tt_ul li:hover,.tt_ul li.active{color:#FF6715}
+.tt_ul li{display:inline-block;float:left;color:#333;cursor:pointer;border-left:1px #E2E2E2 solid;padding:2px 15px}
+.tt_ul li:first-child{border:0}
+.checkbox_div{width:17px;height:17px;border:1px #E2E2E2 solid;background:#fff;display:inline-block;cursor:pointer}
+.pagebox li{display:inline-block;float:left;color:#333;cursor:pointer;padding:5px 20px}
+.pagebox li.active{background:#757575;color:#fff}
+.pagebox ul:before{content:"<";display:inline-block;float:left;font-size:22px;margin-right:20px;cursor:pointer}
+.pagebox ul:after{content:">";display:inline-block;float:right;font-size:22px;margin-left:20px;cursor:pointer}
+.split_line{border-bottom:1px #C2C2C2 solid;margin-bottom:50px;height:20px;position:relative}
+.split_line>div{position:absolute;left:50%;margin-left:-200px;background:#F1F1F1;width:400px;}
+
+.like_ul li{display:inline-block;float:left;color:#333;padding:15px 0;margin-left:10px;text-align:center;position:relative;background:#fff;}
+.like_img{width:230px;height:195px;line-height:195px}
+.btn_cheng{display:inline-block;cursor:pointer;padding:3px 10px;background:#FF6700;color:#fff;position:absolute;bottom:8px;left:50%;margin-left:-45px;display:none}
+.like_ul li:hover .btn_cheng{display:inline-block}
+.goods img{padding:20px 40px 20px 20px}
+.btn_null,.btn_full{width:180px}
+
+/*详情页面*/
+.goods_box{position:relative;padding:20px}
+.goods_img{width:670px;text-align:center;line-height:445px;height:445px}
+.goods_ul{overflow:hidden; display:inline-block}
+.goods_ul li{display:inline-block;float:left;width:80px;height:70px;line-height:70px;text-align:center;cursor:pointer}
+.goods_ul li.active,.goods_ul li:hover{border:1px #ababab solid}
+.a_left,.a_right{position:absolute;cursor:pointer;width:17px;height:30px;top:50%;margin-top:-15px}
+.a_left{background:url(../images/cg30/a_left.png) no-repeat;left:3px}
+.a_right{background:url(../images/cg30/a_right.png) no-repeat;right:3px}
+.starbox i{background:url(../images/cg30/star.png) no-repeat;width:13px;height:12px;display:inline-block}
+.starbox .star0{ background-position:0 0;}.starbox .star1{ background-position:-13px 0;}
+.good_prop{width:60px;height:30px;line-height:27px;display:inline-block;border:1px #d8d8d8 solid; vertical-align:middle;text-align:center;cursor:pointer;
+position:relative}.good_prop.active{border-color:#FF6715;}
+.good_prop.active:before{
+display:block;position:absolute;bottom:0;right:0;background:url(../images/company/selected.png) no-repeat;width:13px;height:13px;content:"";}
+.btn_star{display:inline-block;cursor:pointer;padding:11px 15px 10px 15px;background:#B8B8B8;color:#fff}
+.btn_star.active{color:#FF6715}
+
+/*积分商城*/
+.stream li{padding-top:75px;display:inline-block;float:left;width:33%;position:relative;}
+.stream li:after{content:">";display:inline-block;position:absolute;bottom:0;right:-5px}.stream li:last-child:after{display:none}
+.jf1{background:url(../images/cg30/jf1.png) top center no-repeat;}
+.jf2{background:url(../images/cg30/jf2.png) top center no-repeat;}
+.jf3{background:url(../images/cg30/jf3.png) top center no-repeat;}
+.btn_small{display:inline-block;cuorsor:pointer;color:#FF9600;padding:2px 10px;border:1px #FF9600 solid}
+.btn_small:hover{background:#FF9600;color:#fff}
+.user_info{width:200px;margin:0 auto;height:162px;background:url(../images/cg30/useinfo.jpg) center center no-repeat}
+.pagebox1{display:inline-block}
+.pagebox1 li{display:inline-block;float:left;color:#333;cursor:pointer;padding:5px 12px;border:1px #ddd solid;background:#fff; margin-left:5px}
+.pagebox1 li.active{background:#FF6715;color:#fff;border:1px #FF6715 solid;}
+
+
+
+
+
+
+
+
+
+
+

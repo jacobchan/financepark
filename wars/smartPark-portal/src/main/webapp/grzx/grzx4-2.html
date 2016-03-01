@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>消息</title>
+	<link href="../styles/base.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
+	<link rel="stylesheet" type="text/css" href="../styles/page/awesome/css/font-awesome.min.css">
+	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+	<script type="text/javascript" src="../scripts/page/adcom.js"></script>
+	
+</head>
+<body style="background-color:#f4f4f4;">
+	<!--***top start****************************************-->
+	<div id="youi_page_header" class="youi-page-header clearfix"></div>
+	<!--***top end****************************************-->
+	<div class="w100">
+		<div class="w1200 clearfix pt30 pb50">
+			<div class="per-center-box clearfix">
+				<div id="youi_page_left" class="fl clearfix"></div>
+				<div class="fr clearfix">
+					<div class="w100p fl" >
+						<h3 class="lh30 f14 mb30">全部消息</h3>
+						<ul class="mess-nav">
+							<li><a href="grzx4.html">我的私信</a></li>
+							<li class="active"><a href="grzx4-2.html">我的评论</a></li>
+							<li><a href="grzx4-3.html">系统消息</a></li>
+						</ul>
+					</div>
+					<div class="clearfix fl" style="width:898px;padding:30px">
+						<table class="message-box w100 f12">
+							<colgroup>
+								<col width="190"></col>
+								<col></col>
+								<col></col>
+							</colgroup>
+							<tbody>
+								<tr>
+									<td align="center"><img src="../styles/images/grzx/tx.png" border="0" width="99" height="99" /></td>
+									<td style="padding-right:30px;">
+										<div class="clearfix lh40">
+											<span class="f14 fb">汪峰</span>
+										</div>
+										<p class="c-b1 lh20">
+											非常赞同你的观点，看来我们都是同道中人啊！
+										</p>
+										<div class="mes-has">
+											<b>回复我的评论：服务是很好，但是还不够开放！</b>
+										</div>
+										<p class="c-b1 tl mt10">2015-12-13</p>
+									</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td align="center" colspan="2">
+										<a href="javascript:;" class="a-reply">回复</a><img src="../styles/images/grzx/sj-top.png" class="tf-pa undis">
+									</td>
+								</tr>
+								<tr class="reply-show undis">
+									<th style="text-align:center;"><img src="../styles/images/grzx/tx.png" border="0" width="46" height="46" /></th>
+									<th style="padding-right:30px;">
+										<form>
+											<textarea placeholder="回复@汪峰"></textarea>
+											<input value="回复" class="hhf-submit mt20" style="height:36px;padding:0px 30px;font-size:14px;" type="submit">
+										</form>
+									</th>
+								</tr>
+							</tfoot>
+						</table>
+						<table class="message-box w100 f12">
+							<colgroup>
+								<col width="190"></col>
+								<col></col>
+								<col></col>
+							</colgroup>
+							<tbody>
+								<tr>
+									<td align="center"><img src="../styles/images/grzx/tx.png" border="0" width="99" height="99" /></td>
+									<td style="padding-right:30px;">
+										<div class="clearfix lh40">
+											<span class="f14 fb">汪峰</span>
+										</div>
+										<p class="c-b1 lh20">
+											非常赞同你的观点，看来我们都是同道中人啊！
+										</p>
+										<div class="mes-has">
+											<b>回复我的评论：服务是很好，但是还不够开放！</b>
+										</div>
+										<p class="c-b1 tl mt10">2015-12-13</p>
+									</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td align="center" colspan="2">
+										<a href="javascript:;" class="a-reply active">回复</a><img src="../styles/images/grzx/sj-top.png" class="tf-pa">
+									</td>
+								</tr>
+								<tr class="reply-show">
+									<th style="text-align:center;"><img src="../styles/images/grzx/tx.png" border="0" width="46" height="46" /></th>
+									<th style="padding-right:30px;">
+										<form>
+											<textarea placeholder="回复@汪峰"></textarea>
+											<input value="回复" class="hhf-submit mt20" style="height:36px;padding:0px 30px;font-size:14px;" type="submit">
+										</form>
+										
+									</th>
+								</tr>
+							</tfoot>
+						</table>
+						<div class="fr page-list-a clearfix lh30 mt20 f12">
+							<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
+							<a href="">首</a>
+							<a href=""><i class="fa fa-angle-left"></i></a>
+							<a>1</a>
+							<a href=""><i class="fa fa-angle-right"></i></a>
+							<a href="">末</a>
+							<input class="bd-input fl ml10 mr10" style="width:40px;" type="text">
+							<a href="">Go</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--***bottom start****************************************-->
+	<div id="youi_page_footer" class="youi-page-footer"></div>
+	<!--***bottom end****************************************-->
+	<script type="text/javascript">
+		$(function(){
+			$(".a-reply").click(function () {
+				$(this).toggleClass("active");
+				$(this).next(".tf-pa").toggleClass("undis");
+				$(this).parents("tr").next(".reply-show").toggleClass("undis");
+			})
+		})
+	</script>
+</body>
+</html>

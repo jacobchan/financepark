@@ -7,9 +7,8 @@
  *
  * Date: 2016-2-16
  */
-var isLogin=false;
 $(function(){
-	var _passportBaseUrl = 'http://localhost:8089/smartPark-web/';
+	var _passportBaseUrl = 'http://192.168.80.1:8088/gsoft-web/';
 	
 	$('#youi_page_header').load($.youi.serverConfig.contextPath+'/common/header.html',function(){
 		$.getScript(_passportBaseUrl+'portal/userInfo.html',function(){
@@ -17,10 +16,8 @@ $(function(){
 			if($.youi.serverConfig.authorization){
 				console.log('user authorization = '+$.youi.serverConfig.authorization);
 				$('#user_info:first').append('<a href="'+_passportBaseUrl+'portal/logout.html?redirect='+loc+'">退出</a>');
-				isLogin = true;
 			}else{
 				$('#user_info:first a:first').attr('href',_passportBaseUrl+'member/portal/login.html?redirect='+loc);
-				isLogin= false;
 			}
 		});
 	});
