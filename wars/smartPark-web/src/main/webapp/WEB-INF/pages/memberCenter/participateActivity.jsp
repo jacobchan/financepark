@@ -247,7 +247,6 @@
 		//根据不同状态重新赋文字说明
 		function _assignment_applyStatus(){
 			var span = $("span.fr");
-			console.log(span);
 			if(span){
 			    var text = span.html();
 			    if(text=="00"){
