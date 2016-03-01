@@ -17,11 +17,10 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
+import com.gsoft.utils.BizCodeUtil;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerOc;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerOcDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerOcManager;
@@ -87,14 +86,25 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
      */
     @EsbServiceMapping
     public PropertyservicemanagerOc savePropertyservicemanagerOc(PropertyservicemanagerOc o) throws BusException{
-//    	String propertyservicemanagerOcId = o.getPropertyservicemanagerOcId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerOcId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	return propertyservicemanagerOcDao.save(o);
+    	String propertyservicemanagerOcId = o.getOcId();
+    	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerOcId);
+    	if(isUpdate){//修改
+    		PropertyservicemanagerOc ocde = propertyservicemanagerOcDao.get(propertyservicemanagerOcId);
+    		if(ocde!=null){
+	    		ocde.setOcNumber(o.getOcNumber());
+	    		ocde.setOcDate(o.getOcDate());
+	    		ocde.setOcRemark(o.getOcRemark());
+	    		ocde.setOcStatus("01");
+	    		return propertyservicemanagerOcDao.save(ocde);
+    		}else{
+    			throw new BusException("未找到申请记录!");
+    		}
+    	}else{//新增
+    		//生成一卡通编号
+    		o.setOcCode(BizCodeUtil.getInstance().getBizCodeDate("OC"));
+    		return propertyservicemanagerOcDao.save(o);
+    	}
+    
     }
 
     /**
