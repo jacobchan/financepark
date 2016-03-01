@@ -156,4 +156,16 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
 		}
 		return list;
 	}
+	/**
+	 * 根据类别ID获得最上级商品类别
+	 */
+	@Override
+	@EsbServiceMapping
+	public PurchasingmanagerGenre getSuperGenre(@ServiceParam(name="genreId") String genreId) throws BusException {
+		PurchasingmanagerGenre pg = purchasingmanagerGenreDao.get(genreId);
+    	while(pg.getGenreCode() == null){
+    		pg = pg.getPurchasingmanagerGenre();
+    	}
+		return pg;
+	}
 }

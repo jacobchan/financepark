@@ -12,15 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
-//import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
+import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.common.purchasingManager.entity.PurchasingmanagerGenreProperty;
 import com.common.purchasingManager.dao.PurchasingmanagerGenrePropertyDao;
 import com.common.purchasingManager.service.PurchasingmanagerGenrePropertyManager;
@@ -65,16 +63,24 @@ public class PurchasingmanagerGenrePropertyManagerImpl extends BaseManagerImpl i
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
     public PurchasingmanagerGenreProperty savePurchasingmanagerGenreProperty(PurchasingmanagerGenreProperty o) throws BusException{
-//    	String purchasingmanagerGenrePropertyId = o.getPurchasingmanagerGenrePropertyId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(purchasingmanagerGenrePropertyId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	return purchasingmanagerGenrePropertyDao.save(o);
+    	String genrePropertyId = o.getGenrePropertyId();
+    	boolean isUpdate = StringUtils.isNotEmpty(genrePropertyId);
+    	if(isUpdate){//修改
+    		PurchasingmanagerGenreProperty pgp = purchasingmanagerGenrePropertyDao.get(genrePropertyId); 
+    		pgp.setGenrePropertyDisplayName(o.getGenrePropertyDisplayName());
+    		pgp.setGenrePropertyFieldName(o.getGenrePropertyFieldName());
+    		pgp.setPurchasingmanagerGenre(o.getPurchasingmanagerGenre());
+    		pgp.setUpdateUser(o.getUpdateUser());
+    		pgp.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return purchasingmanagerGenrePropertyDao.save(pgp);
+    	}else{//新增
+    		o.setCreateUser(o.getUpdateUser());
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return purchasingmanagerGenrePropertyDao.save(o);
+    	}
     }
 
     /**
