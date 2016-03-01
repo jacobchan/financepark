@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50710
 File Encoding         : 65001
 
-Date: 2016-02-27 15:59:34
+Date: 2016-03-01 11:15:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -48,7 +48,7 @@ INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e8153216adc01532176
 INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e8153216adc01532176c3ac0006', null, '企业服务', null, '2016-02-27 14:42:24', null, '2016-02-27 14:42:24', null, '05');
 INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e8153216adc01532176f9f10007', '40285e8153216adc01532176c3ac0006', '公司注册', null, '2016-02-27 14:42:38', null, '2016-02-27 14:42:38', null, '0501');
 INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e8153216adc015321772f9a0008', '40285e8153216adc01532176c3ac0006', '工商变更', null, '2016-02-27 14:42:52', null, '2016-02-27 14:42:52', null, '0502');
-INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e8153216adc0153217768bf0009', '40285e8153216adc01532176c3ac0006', '认识社保', null, '2016-02-27 14:43:07', null, '2016-02-27 14:43:07', null, '0503');
+INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e8153216adc0153217768bf0009', '40285e8153216adc01532176c3ac0006', '人事社保', null, '2016-03-01 11:15:12', null, '2016-02-27 14:43:07', null, '0503');
 INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e8153216adc0153217798c5000a', '40285e8153216adc01532176c3ac0006', '代理记账', null, '2016-02-27 14:43:19', null, '2016-02-27 14:43:19', null, '0504');
 INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e8153216adc01532177bed9000b', '40285e8153216adc01532176c3ac0006', '法律服务', null, '2016-02-27 14:43:29', null, '2016-02-27 14:43:29', null, '0505');
 INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e8153216adc01532177e899000c', '40285e8153216adc01532176c3ac0006', '商标专利', null, '2016-02-27 14:43:39', null, '2016-02-27 14:43:39', null, '0506');
@@ -56,3 +56,5 @@ INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e8153216adc01532178
 INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e8153216adc015321783d6a000e', null, 'IT服务', null, '2016-02-27 14:44:01', null, '2016-02-27 14:44:01', null, '06');
 INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e8153216adc015321786619000f', null, '物业报修', null, '2016-02-27 14:44:11', null, '2016-02-27 14:44:11', null, '07');
 INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e8153216adc0153217889720010', null, '物业缴费', null, '2016-02-27 14:44:20', null, '2016-02-27 14:44:20', null, '08');
+INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e815321d109015321ddcb120001', '40285e815320d801015320da4be90001', '办公用品', null, '2016-02-27 16:34:56', null, '2016-02-27 16:34:56', null, null);
+INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e815321d109015321ddf7ce0002', '40285e815321d109015321ddcb120001', '文件册', null, '2016-02-27 16:35:08', null, '2016-02-27 16:35:08', null, null);
