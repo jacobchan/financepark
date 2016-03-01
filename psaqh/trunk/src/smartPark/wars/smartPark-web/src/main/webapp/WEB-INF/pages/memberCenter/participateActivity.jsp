@@ -19,8 +19,8 @@
 	<!--***top start****************************************-->
 	<div style="background-color:#545454">
 		<div class="w1200 tr head-top clearfix">
-			<a href="">注册</a>
-			<a href="">登录</a>
+			<a>${user}</a>
+			<a href="logout.html">退出</a>
 		</div>
 	</div>
 	<div class="header-cen clearfix">

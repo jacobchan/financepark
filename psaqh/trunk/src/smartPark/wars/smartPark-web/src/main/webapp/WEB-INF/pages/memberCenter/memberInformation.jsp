@@ -95,11 +95,11 @@
 				<div class="w200 fl">
 					<dl>
 						<dt>个人中心</dt>
-						<dd class="active"><a href="grzx1.html">个人资料</a></dd>
+						<dd class="active"><a href="memberInformation.html">个人资料</a></dd>
 						<dd><a href="grzx2.html">订单中心</a></dd>
 						<dd><a href="grzx3.html">安全中心</a></dd>
 						<dd><a href="grzx4.html">消息</a></dd>
-						<dd><a href="grzx5.html">企业通讯录</a></dd>
+						<dd><a href="addressBook.html">企业通讯录</a></dd>
 						<dd><a href="grzx6.html">一卡通绑定</a></dd>
 						<dd><a href="grzx7.html">我的地址</a></dd>
 						<dd><a href="grzx14.html">我的预约</a></dd>
@@ -125,7 +125,7 @@
 						</dd>
 						<dd><a href="grzx19.html">退货处理</a></dd>
 						<dt>创智汇</dt>
-						<dd><a href="grzx20.html">我参加的活动</a></dd>
+						<dd><a href="participateActivity.html">我参加的活动</a></dd>
 						<dd><a href="grzx21.html">我发布的活动</a></dd>
 					</dl>
 				</div>
@@ -252,7 +252,6 @@
 				url:'/smartPark-web/esb/web/memberInformationManager/getMemberInformationByLoginUser.json',
 				//async: false, 
 				success:function(result){
-					console.log(result);
 					if(result&&result.record){
 						_parseRecords(result.record);
 					}
