@@ -21,7 +21,7 @@ public class MemberCenterController {
 	
 	
 	@RequestMapping("/{pagePath}.html")
-	public ModelAndView ctrwin(HttpServletRequest request, 
+	public ModelAndView index(HttpServletRequest request, 
 			HttpServletResponse response,
 			@PathVariable("pagePath") String pagePath){
 		String userName=SecurityUtils.getAccount().getLoginName();
