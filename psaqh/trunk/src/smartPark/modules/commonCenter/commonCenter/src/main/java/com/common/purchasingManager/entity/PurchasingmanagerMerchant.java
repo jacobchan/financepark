@@ -53,10 +53,10 @@ public class PurchasingmanagerMerchant implements Domain{
 	@Column(name = "MERCHANT_LINKMAN_")
 	@Length(max=32)
 	private String merchantLinkman;//联系人
-
-	@Column(name = "MERCHANT_TYPE_")
-	@Length(max=36)
-	private String merchantType;//商户类型
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="MERCHANT_TYPE_")
+	private PurchasingmanagerCommodity merchantType;//商户类型ID
 
 	@Column(name = "MERCHANT_NAME_")
 	@Length(max=128)
@@ -129,13 +129,15 @@ public class PurchasingmanagerMerchant implements Domain{
 	public void setMerchantLinkman(String merchantLinkman){
 		this.merchantLinkman = merchantLinkman;
 	}
-	public String getMerchantType(){
-		return this.merchantType;
-	}
 	
-	public void setMerchantType(String merchantType){
+	public PurchasingmanagerCommodity getMerchantType() {
+		return merchantType;
+	}
+
+	public void setMerchantType(PurchasingmanagerCommodity merchantType) {
 		this.merchantType = merchantType;
 	}
+
 	public String getMerchantName(){
 		return this.merchantName;
 	}
