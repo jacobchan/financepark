@@ -4,10 +4,11 @@
 package com.manage.PropertyServiceManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: 搬家申请记录
@@ -48,9 +49,13 @@ public class PropertyservicemanagerMoverec implements Domain{
 	@Length(max=32)
 	private String moverecName;//搬家联系人
 
-	@Column(name = "MEMBER_ID_")
-	@Length(max=36)
-	private String memberId;//会员用户ID
+//	@Column(name = "MEMBER_ID_")
+//	@Length(max=36)
+//	private String memberId;//会员用户ID
+	
+	@ManyToOne//(fetch = FetchType.LAZY)
+    @JoinColumn(name="MEMBER_ID_")
+	private MemberInformation member;//会员用户ID
 
 	@Column(name = "UPDATE_USER_")
 	@Length(max=36)
@@ -118,13 +123,15 @@ public class PropertyservicemanagerMoverec implements Domain{
 	public void setMoverecName(String moverecName){
 		this.moverecName = moverecName;
 	}
-	public String getMemberId(){
-		return this.memberId;
-	}
 	
-	public void setMemberId(String memberId){
-		this.memberId = memberId;
+	public MemberInformation getMember() {
+		return member;
 	}
+
+	public void setMember(MemberInformation member) {
+		this.member = member;
+	}
+
 	public String getUpdateUser(){
 		return this.updateUser;
 	}
@@ -167,7 +174,7 @@ public class PropertyservicemanagerMoverec implements Domain{
 		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
 		result = prime * result + ((moverecWay == null) ? 0 : moverecWay.hashCode());
 		result = prime * result + ((moverecName == null) ? 0 : moverecName.hashCode());
-		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
+		result = prime * result + ((member == null) ? 0 : member.hashCode());
 		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
 		result = prime * result + ((moverecId == null) ? 0 : moverecId.hashCode());
 		result = prime * result + ((moverecTime == null) ? 0 : moverecTime.hashCode());
@@ -219,10 +226,10 @@ public class PropertyservicemanagerMoverec implements Domain{
 				return false;
 		} else if (!moverecName.equals(other.moverecName))
 			return false;
-		if (memberId == null) {
-			if (other.memberId != null)
+		if (member == null) {
+			if (other.member != null)
 				return false;
-		} else if (!memberId.equals(other.memberId))
+		} else if (!member.equals(other.member))
 			return false;
 		if (updateUser == null) {
 			if (other.updateUser != null)
