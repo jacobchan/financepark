@@ -26,20 +26,20 @@ public class EnterpriseRole implements Domain {
 	@Length(max = 36)
 	private String rId;// 角色主键
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade={CascadeType.MERGE,CascadeType.PERSIST}, optional=false)
-	@JoinColumn(name = "EMPLOYEES_ID", insertable=true, updatable=false)
+	@ManyToOne(fetch = FetchType.LAZY, optional=false)
+	@JoinColumn(name = "EMPLOYEES_ID")
 	private EnterpriseEmployees employees;// 企业员工ID
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade={CascadeType.MERGE,CascadeType.PERSIST}, optional=false)
-	@JoinColumn(name = "ROLEID", insertable=true, updatable=false)
+	@ManyToOne(fetch = FetchType.EAGER, optional=false)
+	@JoinColumn(name = "ROLEID")
 	private Role role;// 角色ID
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade={CascadeType.MERGE,CascadeType.PERSIST}, optional=false)
-	@JoinColumn(name = "CREATE_USER_", insertable=true, updatable=false)
+	@ManyToOne(fetch = FetchType.LAZY, optional=false)
+	@JoinColumn(name = "CREATE_USER_")
 	private MemberInformation createuser;// 创建人
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade={CascadeType.MERGE,CascadeType.PERSIST}, optional=false)
-	@JoinColumn(name = "UPDATE_USER_", insertable=true, updatable=false)
+	@ManyToOne(fetch = FetchType.LAZY, optional=false)
+	@JoinColumn(name = "UPDATE_USER_")
 	private MemberInformation updateuser;// 修改人
 	
 	@Column(name = "CREATE_TIME_")

@@ -124,7 +124,6 @@ public class EnterpriseInvitation implements Domain{
 		int result = 1;
 		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
 		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
-		result = prime * result + ((rzId == null) ? 0 : rzId.hashCode());
 		result = prime * result + ((invitationId == null) ? 0 : invitationId.hashCode());
 		result = prime * result + ((invitationTelephone == null) ? 0 : invitationTelephone.hashCode());
 		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
@@ -151,11 +150,6 @@ public class EnterpriseInvitation implements Domain{
 			if (other.updateUser != null)
 				return false;
 		} else if (!updateUser.equals(other.updateUser))
-			return false;
-		if (rzId == null) {
-			if (other.rzId != null)
-				return false;
-		} else if (!rzId.equals(other.rzId))
 			return false;
 		if (invitationId == null) {
 			if (other.invitationId != null)
