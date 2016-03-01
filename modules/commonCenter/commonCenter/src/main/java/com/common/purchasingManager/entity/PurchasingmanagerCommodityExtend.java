@@ -10,7 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
 /**
- * 实体: 采购商品信息扩展
+ * 实体: 商品信息扩展
  * @author
  * @version
  * 
@@ -80,6 +80,17 @@ public class PurchasingmanagerCommodityExtend implements Domain{
     @JoinColumn(name="GENRE_PROPERTY_ID_")
 	private com.common.purchasingManager.entity.PurchasingmanagerGenreProperty purchasingmanagerGenreProperty;//商品类别属性序列
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="COMMODITY_ID_")
+	private com.common.purchasingManager.entity.PurchasingmanagerCommodity commodity;//商品序列
+
+	public com.common.purchasingManager.entity.PurchasingmanagerCommodity getCommodity() {
+		return commodity;
+	}
+	public void setCommodity(
+			com.common.purchasingManager.entity.PurchasingmanagerCommodity commodity) {
+		this.commodity = commodity;
+	}
 	public String getGenreId(){
 		return this.genreId;
 	}
