@@ -5,21 +5,26 @@
 				src="esb/web/propertyservicemanagerMoverecManager/getPagerPropertyservicemanagerMoverecs.json" dataFormId="form_propertyservicemanagerMoverec"
 				editSrc="esb/web/propertyservicemanagerMoverecManager/getPropertyservicemanagerMoverec.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/propertyservicemanagerMoverecManager/removePropertyservicemanagerMoverec.json">
-		<youi:fieldLayout labelWidths="100,100">
-			<youi:fieldText property="moverecUnit"  caption="楼宇单元"/>
+		<youi:fieldLayout labelWidths="120,120">
 			<youi:fieldCalendar property="moverecTime" caption="搬家时间"/>
 			<youi:fieldSelect property="member.memberId"  caption="会员姓名" 
 				src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
 			<youi:fieldText property="moverecName"  caption="搬家联系人"/>
-			<youi:fieldText property="moverecWay"  caption="搬家提交方式" />
+			<youi:fieldText property="moverecCode"  caption="搬家申请编号"  operator="LIKE"/>
+			<youi:fieldSelect property="moverecStatus"  caption="搬家申请状态" convert="moverec_status"/>
 		</youi:fieldLayout>
-		<youi:gridCol property="member.memberName"  caption="会员姓名" width="100" />
-		<youi:gridCol property="moverecUnit"  caption="楼宇单元"/>
-		<youi:gridCol property="moverecRemark"  caption="物品描述"/>
-		<youi:gridCol property="moverecTime"  caption="搬家时间"/>
-		<youi:gridCol property="moverecName"  caption="搬家联系人"/>
-		<youi:gridCol property="moverecComp"  caption="搬家企业名称" width="100"/>
-		<youi:gridCol property="moverecWay"  caption="搬家提交方式" width="100"/>
+		
+		<youi:button name="dealmov" caption="处理申请" icon="edit" active="1"/>
+		
+		<youi:gridCol property="member.memberName"  caption="会员姓名" width="10%" />
+		<youi:gridCol property="moverecUnit"  caption="楼宇单元" width="8%"/>
+		<youi:gridCol property="moverecTime"  caption="搬家时间" width="10%"/>
+		<youi:gridCol property="moverecCode"  caption="搬家申请编号" width="16%"/>
+		<youi:gridCol property="moverecStatus"  caption="搬家申请状态" width="10%" convert="moverec_status"/>
+		<youi:gridCol property="moverecName"  caption="搬家联系人" width="10%"  align="center"/>
+		<youi:gridCol property="moverecComp"  caption="搬家企业名称" width="10%"/>
+		<youi:gridCol property="moverecWay"  caption="搬家提交方式" width="10%" convert="oc_way"/>
+		<youi:gridCol property="moverecRemark"  caption="物品描述" width="16%"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -30,15 +35,14 @@
 	<youi:form dialog="true" caption="搬家申请记录" id="form_propertyservicemanagerMoverec" action="esb/web/propertyservicemanagerMoverecManager/savePropertyservicemanagerMoverec.json">
 		<youi:fieldLayout prefix="record" labelWidths="120,100">
 			<youi:fieldHidden property="moverecId"  caption="搬家申请记录ID"/>
-			
-			<youi:fieldText property="moverecUnit"  caption="楼宇单元"/>
-			<youi:fieldText property="moverecRemark"  caption="物品描述"/>
-			<youi:fieldCalendar property="moverecTime" caption="搬家时间"/>
 			<youi:fieldSelect property="member.memberId"  caption="会员姓名"
 				src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
-			<youi:fieldText property="moverecName"  caption="搬家联系人"/>
-			<youi:fieldText property="moverecWay"  caption="搬家提交方式"/>
 			<youi:fieldText property="moverecComp"  caption="搬家企业名称" readonly="true"/>
+			<youi:fieldText property="moverecUnit"  caption="楼宇单元"/>
+			<youi:fieldCalendar property="moverecTime" caption="搬家时间"/>
+			<youi:fieldText property="moverecName"  caption="搬家联系人"/>
+			<youi:fieldSelect property="moverecWay"  caption="搬家提交方式" convert="oc_way"/>
+			<youi:fieldArea property="moverecRemark"  caption="物品描述"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
@@ -61,5 +65,25 @@
                   } 
             })
    	 </youi:func>
+   	 <!-- 搬家申请审批，改变申请状态，同时生成二维码 -->
+   	 <youi:func name="func_grid_dealmov">
+			var gridElement = $elem('grid_propertyservicemanagerMoverec',pageId),
+			selectedRecord = gridElement.grid('getSelectedRecord');
+			var movstatus = selectedRecord.moverecStatus;
+			if(movstatus=='00'){
+				$.youi.messageUtils.confirm('处理申请?',function(){
+					$.youi.ajaxUtil.ajax({
+					url:'/esb/web/propertyservicemanagerMoverecManager/upMovById.json',
+					data:{id:selectedRecord.moverecId},
+					success:function(result){	
+						$elem('grid_propertyservicemanagerMoverec',pageId).grid('pReload');
+						alert("处理成功!");
+						}
+					});
+				});
+			}else{
+				alert("已处理成功!");
+			}	
+		</youi:func>
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
