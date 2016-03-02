@@ -139,7 +139,7 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 		String buildingId=enterbusinessmanagerRz.getBuildingId();
 		if(buildingId!=""&&buildingId!=null){
 			PropertyservicemanagerEntrec psme=propertyservicemanagerEntrecManager.getPropertyservicemanagerEntrec(enterbusinessmanagerRz.getEntrecId().getEntrecId());
-			psme.setEnterrecStatus("03");//更改状态为已入驻
+			psme.setEnterrecStatus("06");//更改状态为已入驻
 			propertyservicemanagerEntrecManager.savePropertyservicemanagerEntrec(psme);
 		}
 	}
