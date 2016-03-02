@@ -4,10 +4,11 @@
 package com.common.MessageCenter.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MessageCenter.service.IMessage;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: 消息列表
@@ -17,7 +18,7 @@ import com.gsoft.framework.core.dataobj.Domain;
  */
 @Entity
 @Table(name = "sp_mc_msgDatas_")
-public class McMsgdatas implements Domain{
+public class McMsgdatas implements Domain,IMessage{
 	
 	private static final long serialVersionUID = -56665491399218572L;
 	
