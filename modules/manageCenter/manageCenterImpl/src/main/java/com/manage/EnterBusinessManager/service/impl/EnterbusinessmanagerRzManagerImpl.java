@@ -20,6 +20,7 @@ import com.gsoft.framework.core.orm.PagerRecords;
 
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
@@ -81,10 +82,13 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     	String enterbusinessmanagerRzId = o.getRzId();
     	boolean isUpdate = StringUtils.isNotEmpty(enterbusinessmanagerRzId);
     	if(isUpdate){//修改
-    	
-    	}else{//新增
     		
+    	}else{//新增
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd"));
+    		o.setCreateUser("");
     	}
+    	o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd"));
+    	o.setUpdateUser("");
     	return enterbusinessmanagerRzDao.save(o);
     }
 
