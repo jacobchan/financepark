@@ -4,7 +4,7 @@
 package com.member.orderManage.service.impl;
 
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,35 +23,39 @@ import com.gsoft.utils.BizCodeUtil;
 import com.member.orderManager.service.OrderManager;
 import com.member.shoppingCarManager.entity.ShoppingcarCatering;
 import com.member.shoppingCarManager.entity.ShoppingcarGroup;
-import com.common.MemberManager.dao.MemberInformationDao;
+//import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
-import com.common.OrderManager.entity.OrdermanagerOrderprojecttypeValue;
+//import com.common.OrderManager.entity.OrdermanagerOrderprojecttypeValue;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.common.OrderManager.dao.OrdermanagerCommoditydetailDao;
-import com.common.OrderManager.dao.OrdermanagerOrderprojecttypeValueDao;
+//import com.common.OrderManager.dao.OrdermanagerOrderprojecttypeValueDao;
 import com.common.OrderManager.dao.OrdermanagerUserorderDao;
-import com.common.purchasingManager.dao.PurchasingmanagerGenreDao;
-import com.common.purchasingManager.dao.PurchasingmanagerGenrePropertyDao;
-import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
+//import com.common.purchasingManager.dao.PurchasingmanagerGenreDao;
+//import com.common.purchasingManager.dao.PurchasingmanagerGenrePropertyDao;
+//import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
-import com.common.purchasingManager.entity.PurchasingmanagerGenreProperty;
+//import com.common.purchasingManager.entity.PurchasingmanagerGenreProperty;
 
 @Service("orderManager")
 @Transactional
 public class OrderManagerImpl extends BaseManagerImpl implements OrderManager{
 	@Autowired
 	private OrdermanagerUserorderDao ordermanagerUserorderDao;
-	@Autowired
-	private MemberInformationDao memberInformationDao;
+	
+//	@Autowired
+//	private MemberInformationDao memberInformationDao;
+	
 	@Autowired
 	private OrdermanagerCommoditydetailDao ordermanagerCommoditydetailDao;
-	@Autowired
-	private PurchasingmanagerGenrePropertyDao purchasingmanagerGenrePropertyDao;
-	@Autowired
-	private OrdermanagerOrderprojecttypeValueDao ordermanagerOrderprojecttypeValueDao;
-	@Autowired
-	private PurchasingmanagerGenreDao purchasingmanagerGenreDao;
-	@Autowired
+	
+//	@Autowired
+//	private PurchasingmanagerGenrePropertyDao purchasingmanagerGenrePropertyDao;
+//	@Autowired
+//	private OrdermanagerOrderprojecttypeValueDao ordermanagerOrderprojecttypeValueDao;
+//	@Autowired
+//	private PurchasingmanagerGenreDao purchasingmanagerGenreDao;
+	
+//	@Autowired
 //	private PublicutilitiesmanagerResoManager publicutilitiesmanagerResoManager;
 	
 	/**
