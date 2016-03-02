@@ -37,11 +37,11 @@ public class EnterpriseRole implements Domain {
 	@JoinColumn(name = "ROLEID")
 	private Role role;// 角色ID
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER,optional=true,cascade=CascadeType.ALL)
 	@JoinColumn(name = "CREATE_USER_")
 	private MemberInformation createuser;// 创建人
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER,optional=true,cascade=CascadeType.ALL)
 	@JoinColumn(name = "UPDATE_USER_")
 	private MemberInformation updateuser;// 修改人
 	
