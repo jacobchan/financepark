@@ -10,27 +10,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTwcrd;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerFkcodeDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerFkcodeManager;
+import com.manage.PropertyServiceManager.service.PropertyservicemanagerTwcrdManager;
 
 @Service("propertyservicemanagerFkcodeManager")
 @Transactional
 public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl implements PropertyservicemanagerFkcodeManager{
 	@Autowired
 	private PropertyservicemanagerFkcodeDao propertyservicemanagerFkcodeDao;
-	
+	@Autowired
+	private PropertyservicemanagerTwcrdManager propertyservicemanagerTwcrdManager ;
     /**
      * 查询列表
      */
@@ -67,14 +69,17 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
      */
     @EsbServiceMapping
     public PropertyservicemanagerFkcode savePropertyservicemanagerFkcode(PropertyservicemanagerFkcode o) throws BusException{
-//    	String propertyservicemanagerFkcodeId = o.getPropertyservicemanagerFkcodeId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerFkcodeId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	return propertyservicemanagerFkcodeDao.save(o);
+    	String propertyservicemanagerFkcodeId = o.getFkcodeId();
+    	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerFkcodeId);
+    	PropertyservicemanagerFkcode fkcode =  null ;
+    	if(isUpdate){//修改
+    		fkcode = propertyservicemanagerFkcodeDao.save(o) ;//保存访客申请
+    	}else{//新增
+    		//如果是新增，则要创建对应的二维码
+    		o.setApplyStatus("01");//默认申请状态为申请中
+    		fkcode = propertyservicemanagerFkcodeDao.save(o) ;//保存访客申请
+    	}
+    	return fkcode;
     }
 
     /**
@@ -82,7 +87,15 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
      */
     @EsbServiceMapping
     public void removePropertyservicemanagerFkcode(@ServiceParam(name="fkcodeId") String id) throws BusException{
-    	propertyservicemanagerFkcodeDao.remove(id);
+    	if(StringUtils.isNotEmpty(id)){
+    		PropertyservicemanagerFkcode fkcode = propertyservicemanagerFkcodeDao.get(id) ;//通过id得到对应的申请对象
+    		PropertyservicemanagerTwcrd twcrd = propertyservicemanagerTwcrdManager.findTwcrdByFkcode(fkcode) ;//通过访客申请对象得到对应的二维码对象
+    		if(null != twcrd){//表示此申请状态有相应的二维码
+    			String twcrdId = twcrd.getTwcrdId() ;//得到二维码的ID
+    			propertyservicemanagerTwcrdManager.removePropertyservicemanagerTwcrd(twcrdId);//通过id删除二维码
+    		}
+    		propertyservicemanagerFkcodeDao.remove(id);
+    	}
     }
     /**
      * 根据主键集合删除对象
@@ -102,5 +115,46 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
     public boolean exsitPropertyservicemanagerFkcode(String propertyName,Object value) throws BusException{
 		return propertyservicemanagerFkcodeDao.exists(propertyName,value);
 	}
-
+    
+	/**
+	 * 根据访客申请ID得到会员名称
+	 * @param fkcodeId 访客申请ID
+	 * @return
+	 */
+    @EsbServiceMapping
+	@Override
+	public MemberInformation getMemberByFkcodeId(@ServiceParam(name="fkcodeId") String fkcodeId) {
+    	if(StringUtils.isNotEmpty(fkcodeId)){
+    		PropertyservicemanagerFkcode fkcode = propertyservicemanagerFkcodeDao.get(fkcodeId) ;
+    		MemberInformation member = fkcode.getMember() ;
+    		if(member != null){
+    			return member ;
+    		}else{
+    			return null ;
+    		}
+    	}
+		return null;
+	}
+    
+    /**
+	 * 更新访客申请的申请状态
+	 * @param fkcodeId 访客申请ID
+	 * @param 标识符，00表示同意申请，01表示拒绝申请
+	 */
+    @Override
+    @EsbServiceMapping
+    public void updateFkcode(@ServiceParam(name="fkcodeId")String fkcodeId, @ServiceParam(name="code")String code) {
+    	PropertyservicemanagerFkcode fkcode = propertyservicemanagerFkcodeDao.get(fkcodeId) ;
+    	if("00".equals(code)){//同意
+    		fkcode.setApplyStatus("02");//02表示申请成功
+    		fkcode = propertyservicemanagerFkcodeDao.save(fkcode) ;
+    		PropertyservicemanagerTwcrd twcrd = new PropertyservicemanagerTwcrd() ;//申请成功后会生成对应的二维码
+    		twcrd.setPropertyservicemanagerFkcode(fkcode);//将访客申请set到对应的二维码中
+    		propertyservicemanagerTwcrdManager.savePropertyservicemanagerTwcrd(twcrd) ;//保存访客申请的二维码
+    	}
+    	if("01".equals(code)){//拒绝
+    		fkcode.setApplyStatus("03");//03表示申请失败
+        	propertyservicemanagerFkcodeDao.save(fkcode) ;
+    	}
+    }
 }
