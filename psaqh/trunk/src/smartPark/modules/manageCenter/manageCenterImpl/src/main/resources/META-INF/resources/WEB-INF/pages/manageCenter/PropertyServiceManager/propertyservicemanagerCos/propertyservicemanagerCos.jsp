@@ -28,18 +28,15 @@
 				<youi:button name="goback" caption="退回" icon="remove" active="1" />
 				<youi:button name="govisit" caption="回访" icon="save" active="1" />
 				<youi:button name="evaluate" caption="评价" icon="edit" active="1" />
-				<youi:gridCol property="cosCode" caption="投诉单号" width="100" />
-				<youi:gridCol property="cosContent" caption="投诉内容" width="280" />
-				<youi:gridCol property="cosName" caption="投诉联系人" width="100" />
-				<youi:gridCol property="memberInformation.memberNickname" caption="会员用户" width="100" />
-				<youi:gridCol property="cosStatus" caption="投诉受理状态"
-					convert="acceptanceStatus" width="100" />
-				<youi:gridCol property="cosBool" caption="是否接受回访"
-					convert="isAbleVisible" width="100" />
-				<youi:gridCol property="cosTelephone" caption="回访电话" width="100" />
-				<youi:gridCol property="cosTime" caption="投诉时间" width="120" />
-				<youi:gridCol width="60" fixed="true" property="button"
-					type="button" caption="操作">
+				<youi:gridCol property="cosCode" caption="投诉单号" width="18%" />
+				<youi:gridCol property="cosContent" caption="投诉内容" width="22%" />
+				<youi:gridCol property="cosName" caption="投诉联系人" width="10%" />
+				<youi:gridCol property="memberInformation.memberNickname" caption="会员用户" width="10%" />
+				<youi:gridCol property="cosStatus" caption="投诉受理状态" convert="acceptanceStatus" width="10%" />
+				<youi:gridCol property="cosBool" caption="是否接受回访" convert="isAbleVisible" width="10%" />
+				<youi:gridCol property="cosTelephone" caption="回访电话" width="10%" />
+				<youi:gridCol property="cosTime" caption="投诉时间" width="10%" />
+				<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 					<youi:button name="edit" caption="修改" />
 					<youi:button name="remove" caption="删除" />
 				</youi:gridCol>
@@ -56,12 +53,10 @@
 				removeSrc="esb/web/propertyservicenanagerBackManager/removePropertyservicenanagerBack.json"
 				parentId="grid_propertyservicemanagerCos"
 				parentAttr="propertyservicemanagerCos">
-				<youi:gridCol property="propertyservicemanagerCos.cosCode"
-					caption="投诉单号" width="180" />
-				<youi:gridCol property="backCode" caption="回访单号" width="160" />
-				<youi:gridCol property="backRecord" caption="回访记录" width="380" />
-				<youi:gridCol width="60" fixed="true" property="button"
-					type="button" caption="操作">
+				<youi:gridCol property="propertyservicemanagerCos.cosCode" caption="投诉单号" width="25%" />
+				<youi:gridCol property="backCode" caption="回访单号" width="25%" />
+				<youi:gridCol property="backRecord" caption="回访记录" width="50%" />
+				<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 					<youi:button name="edit" caption="修改" />
 					<youi:button name="remove" caption="删除" />
 				</youi:gridCol>
@@ -74,7 +69,6 @@
 		action="esb/web/propertyservicemanagerCosManager/savePropertyservicemanagerCos.json">
 		<youi:fieldLayout prefix="recordRecode" labelWidths="120,120">
 			<youi:fieldHidden property="cosId" caption="投诉ID" />
-			<youi:fieldText property="cosCode" caption="投诉单号" />
 			<youi:fieldText property="cosName" caption="投诉联系人" />
 			<youi:fieldSelect property="memberInformation.memberId"
 				src="esb/web/memberInformationManager/getMemberInformations.json"
@@ -92,16 +86,28 @@
 	<!-- form-投诉回访记录表 -->
 	<youi:form dialog="true" caption="投诉回访记录表"
 		id="form_propertyservicenanagerBack"
-		action="esb/web/propertyservicenanagerBackManager/savePropertyservicenanagerBack.json">
+		action="esb/web/propertyservicenanagerBackManager/savePropertyservicenanagerBack.json" width="600">
 		<youi:fieldLayout prefix="recordVisit" columns="1"
 			labelWidths="120,120">
 			<youi:fieldHidden property="backId" caption="回访编号" />
 			<youi:fieldSelect property="propertyservicemanagerCos.cosId"
 				src="esb/web/propertyservicemanagerCosManager/getPropertyservicemanagerCoss.json"
 				code="cosId" show="cosCode" caption="投诉编号" notNull="true" />
-			<youi:fieldText property="backCode" caption="回访单号" />
 			<youi:fieldArea property="backRecord" caption="回访记录" rows="8"
 				column="20" tooltips="回访记录" notNull="true" />
+		</youi:fieldLayout>
+	</youi:form>
+
+	<!-- form-评价投诉 -->
+	<youi:form dialog="true" caption="投诉评价"
+		id="form_evaluationcomplaints"
+		action="esb/web/propertyservicemanagerCosManager/upCosbyId.json" width="350">
+		<youi:fieldLayout prefix="recordevaluation" columns="1" labelWidths="150">
+			<youi:fieldHidden property="id" caption="投诉编号" />
+			<youi:fieldSelect property="code" caption="对投诉回访是否满意" notNull="true" defaultValue="6">
+				<youi:fieldOption caption="满意并评价" value="6"></youi:fieldOption>
+				<youi:fieldOption caption="不满意并返回受理" value="2"></youi:fieldOption>
+			</youi:fieldSelect>
 		</youi:fieldLayout>
 	</youi:form>
 
@@ -114,10 +120,10 @@
 		if(cosstatus=='0'){
 			$.youi.messageUtils.confirm('确定受理此投诉?',function(){
 				$.youi.ajaxUtil.ajax({
-				url:'/esb/web/propertyservicemanagerCosManager/upCosbyId.json',
-				data:{id:selectedRecord.cosId,code:'2'},
-				success:function(result){	
-					$elem('grid_propertyservicemanagerCos',pageId).grid('pReload');
+					url:'/esb/web/propertyservicemanagerCosManager/upCosbyId.json',
+					data:{id:selectedRecord.cosId,code:'2'},
+					success:function(result){	
+						$elem('grid_propertyservicemanagerCos',pageId).grid('pReload');
 						alert("操作成功!");
 					}
 				});
@@ -180,16 +186,8 @@
 		selectedRecord = gridElement.grid('getSelectedRecord');
 		var cosstatus = selectedRecord.cosStatus;
 		if(cosstatus=='4'){
-			$.youi.messageUtils.confirm('确定评价此投诉?',function(){
-				$.youi.ajaxUtil.ajax({
-				url:'/esb/web/propertyservicemanagerCosManager/upCosbyId.json',
-				data:{id:selectedRecord.cosId,code:'6'},
-				success:function(result){	
-					$elem('grid_propertyservicemanagerCos',pageId).grid('pReload');
-						alert("操作成功!");
-					}
-				});
-			});
+			$elem('recordevaluation_id',pageId).fieldValue(selectedRecord.cosId);
+			$elem('form_evaluationcomplaints',pageId).form('open');
 		}else if(cosstatus=='6'){
 			alert("该记录已评价!");
 		}else{
@@ -202,6 +200,15 @@
 		propertyservicenanagerBack.form('reset');
 		propertyservicenanagerBack.form('close');
 		$elem('grid_propertyservicenanagerBack',pageId).grid('pReload');
+		$elem('grid_propertyservicemanagerCos',pageId).grid('pReload');
+	</youi:func>
+	<!-- 添加回访表单提交后事件 -->
+	<youi:func name="form_evaluationcomplaints_afterSubmit">
+		var evaluationcomplaints = $elem('form_evaluationcomplaints',pageId);
+		evaluationcomplaints.form('reset');
+		evaluationcomplaints.form('close');
+		$elem('grid_propertyservicenanagerBack',pageId).grid('pReload');
+		$elem('grid_propertyservicemanagerCos',pageId).grid('pReload');
 	</youi:func>
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
