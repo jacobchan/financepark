@@ -28,7 +28,8 @@
 		<menu id="024100" text="搬家申请记录" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerMoverec/propertyservicemanagerMoverec.html"></menu>
 		<menu id="024200" text="搬家放行二维码记录" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerFxtdc/propertyservicemanagerFxtdc.html"></menu>
 		<menu id="024300" text="一卡通申请管理" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerOc/propertyservicemanagerOc.html"></menu>
-		<menu id="024400" text="访客记录管理" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerFkcode/propertyservicemanagerFkcode.html"></menu>
+		<menu id="024400" text="访客申请记录" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerFkcode/propertyservicemanagerFkcode.html"></menu>
+		<menu id="024500" text="访客记录二维码" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerTwcrd/propertyservicemanagerTwcrd.html"></menu>
 		<menu id="330701" text="活动内容管理" href="page/manageCenter.ActivityManager.activityApply/activityApply.html"></menu>
 		<menu id="330702" text="活动报名管理" href="page/manageCenter.ActivityManager.activityApplylist/activityApplylist.html"></menu>
 		<menu id="330703" text="活动评论回复管理" href="page/manageCenter.ActivityManager.activityComment/activityComment.html"></menu>
