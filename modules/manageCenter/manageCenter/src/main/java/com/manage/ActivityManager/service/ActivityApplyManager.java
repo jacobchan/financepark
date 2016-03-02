@@ -6,6 +6,7 @@ package com.manage.ActivityManager.service;
 import java.util.List;
 import java.util.Collection;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -74,4 +75,9 @@ public interface ActivityApplyManager extends BaseManager{
      * 
      */    
     public List<ActivityApply> getPublishActivityList() throws BusException;
+    /**
+     * 根据活动主键查询报名名单
+     * 
+     */    
+    public List<MemberInformation> getPublishActivityMembers(ActivityApply o) throws BusException;
 }
