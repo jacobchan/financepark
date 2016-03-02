@@ -1,3 +1,9 @@
+/*==============================================================*/
+/* DBMS name:      MySQL 5.0                                    */
+/* Created on:     2016/3/2 13:29:22                            */
+/*==============================================================*/
+
+
 alter table sp_OrderManager_commodityDetail
    drop primary key;
 
@@ -527,16 +533,13 @@ alter table sp_activity_document
 create table sp_bbm_building_
 (
    BUILDING_ID_         char(36) not null,
-   sp__PARK_ID_         char(36),
+   PARK_ID_             char(36),
    BUILDING_NO_         varchar(32),
    BUILDING_CAPTION     varchar(32),
    BUILDING_UNIT_COUNT_ varchar(32),
    Attribute_FLOOR_COUNT_ varchar(32),
-   COMPANY_             varchar(32),
    BUILDING_TYPE_       varchar(36),
-   Z_FLOOR_NUM_2        char(2),
    Z_USE_STATUS_        char(2) comment '0-在建，1-交付中，2-已用',
-   PARK_ID_             char(36),
    UPDATE_TIME_         datetime,
    CREATE_TIME_         datetime,
    CREATE_USER_         char(36),
@@ -555,8 +558,7 @@ alter table sp_bbm_building_
 create table sp_bbm_floor_
 (
    FLOOR_ID_            char(36) not null,
-   sp__BUILDING_ID_     char(36),
-   RZ_ID_               varchar(36),
+   BUILDING_ID_         char(36),
    FLOOR_NO_            varchar(32),
    FLOOR_CAPTION_       varchar(32),
    FLOOR_ROOM_COUNT_    varchar(32),
@@ -565,7 +567,6 @@ create table sp_bbm_floor_
    Z_COMPANY_           varchar(36),
    Z_USE_STATUS_        char(2) comment '0-在建，1-交付中，2-已用',
    PARK_ID_             char(36),
-   BUILDING_ID_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_TIME_         datetime,
    CREATE_USER_         char(36),
@@ -611,12 +612,10 @@ alter table sp_bbm_park_
 create table sp_bbm_room_
 (
    ROOM_ID_             char(36) not null,
-   sp__FLOOR_ID_        char(36),
+   FLOOR_ID_            char(36),
    RZ_ID_               varchar(36),
    B_ROOM_NO_           varchar(10),
    B_ROOM_CAPTION_      varchar(256),
-   B_ENTERED_ENT_       varchar(32),
-   B_FLOOR_             varchar(32),
    B_STATUS_            varchar(2),
    Z_SALE_STATE_        varchar(2),
    W_WATER_CHARGE_      decimal(10,2),
@@ -633,7 +632,6 @@ create table sp_bbm_room_
    Z_LOWER_PRICE_       decimal(10,2),
    PARK_ID_             char(36),
    BUILDING_ID_         char(36),
-   FLOOR_ID_            char(36),
    UPDATE_TIME_         datetime,
    CREATE_TIME_         datetime,
    CREATE_USER_         char(36),
@@ -651,8 +649,6 @@ alter table sp_bbm_room_
 create table sp_enterbusinessmanager_rz
 (
    RZ_ID_               varchar(36) not null,
-   PARK_ID_             char(36),
-   BUILDING_ID_         char(36),
    en_type_id_          char(36),
    ENTREC_ID_           varchar(36),
    RZ_MEM_              varchar(36),
@@ -666,7 +662,10 @@ create table sp_enterbusinessmanager_rz
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
    CREATE_TIME_         datetime,
-   RZ_NAME_             varchar(128)
+   RZ_NAME_             varchar(128),
+   PARK_ID_             char(36),
+   BUILDING_ID_         char(36),
+   FLOOR_ID_            char(36)
 );
 
 alter table sp_enterbusinessmanager_rz comment '330101入驻企业基本信息';
@@ -682,7 +681,6 @@ create table sp_enterprise_employees
    EMPLOYEES_ID         char(36) not null,
    RZ_ID_               varchar(36),
    MEMBER_ID_           char(36),
-   EMPLOYEES_COM_ID     varchar(32),
    EMPLOYEES_NAME       varchar(32),
    EMPLOYEES_TELEPHONE  varchar(16),
    EMPLOYEES_DEPARTMENT varchar(2),
@@ -903,7 +901,6 @@ create table sp_information_product
    PRODUCT_NAME_        varchar(64),
    PRODUCT_TYPE_        varchar(2),
    PRODUCT_CONTENT_     varchar(256),
-   PRODUCT_RE_          varchar(32),
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
@@ -1317,7 +1314,7 @@ create table sp_propertyservicemanager_entering
    CREATE_TIME_         datetime
 );
 
-alter table sp_propertyservicemanager_entering comment '330203可办理预约记录';
+alter table sp_propertyservicemanager_entering comment '330203可办理预约状态记录';
 
 alter table sp_propertyservicemanager_entering
    add primary key (ENTERING_ID_);
@@ -1356,6 +1353,7 @@ create table sp_propertyservicemanager_fkcode_
    FKCODE_NAME_         varchar(32),
    FKCODE_SEX_          varchar(2),
    FKCODE_TELEPHONE_    varchar(16),
+   APPLY_STATUS_        varchar(2),
    FKCODE_TIME_         varchar(20),
    FKCODE_COMP_         varchar(36),
    FKCODE_REMARK_       varchar(300),
@@ -1868,26 +1866,17 @@ alter table sp_activity_comment add constraint FK_Relationship_53 foreign key (A
 alter table sp_activity_document add constraint FK_Relationship_51 foreign key (APPLY_ID_)
       references sp_activity_apply (APPLY_ID_) on delete restrict on update restrict;
 
-alter table sp_bbm_building_ add constraint FK_320101_320102 foreign key (sp__PARK_ID_)
+alter table sp_bbm_building_ add constraint FK_320101_320102 foreign key (PARK_ID_)
       references sp_bbm_park_ (PARK_ID_) on delete restrict on update restrict;
 
-alter table sp_bbm_floor_ add constraint FK_320102_320103 foreign key (sp__BUILDING_ID_)
+alter table sp_bbm_floor_ add constraint FK_320102_320103 foreign key (BUILDING_ID_)
       references sp_bbm_building_ (BUILDING_ID_) on delete restrict on update restrict;
 
-alter table sp_bbm_floor_ add constraint FK_Relationship_38 foreign key (RZ_ID_)
-      references sp_enterbusinessmanager_rz (RZ_ID_) on delete restrict on update restrict;
-
-alter table sp_bbm_room_ add constraint FK_320103_320104 foreign key (sp__FLOOR_ID_)
+alter table sp_bbm_room_ add constraint FK_320103_320104 foreign key (FLOOR_ID_)
       references sp_bbm_floor_ (FLOOR_ID_) on delete restrict on update restrict;
 
 alter table sp_bbm_room_ add constraint FK_Relationship_37 foreign key (RZ_ID_)
       references sp_enterbusinessmanager_rz (RZ_ID_) on delete restrict on update restrict;
-
-alter table sp_enterbusinessmanager_rz add constraint FK_Relationship_35 foreign key (PARK_ID_)
-      references sp_bbm_park_ (PARK_ID_) on delete restrict on update restrict;
-
-alter table sp_enterbusinessmanager_rz add constraint FK_Relationship_36 foreign key (BUILDING_ID_)
-      references sp_bbm_building_ (BUILDING_ID_) on delete restrict on update restrict;
 
 alter table sp_enterbusinessmanager_rz add constraint FK_Relationship_57 foreign key (en_type_id_)
       references sp_etype_enterprisetype (en_type_id_) on delete restrict on update restrict;
@@ -2050,3 +2039,4 @@ alter table sp_shoppingCar_companyServer add constraint FK_Relationship_78 forei
 
 alter table sp_shoppingCar_group add constraint FK_Relationship_76 foreign key (MEMBER_ID_)
       references sp_member_information (MEMBER_ID_) on delete restrict on update restrict;
+
