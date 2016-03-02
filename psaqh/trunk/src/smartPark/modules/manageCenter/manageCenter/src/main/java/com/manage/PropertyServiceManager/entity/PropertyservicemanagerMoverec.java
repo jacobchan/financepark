@@ -74,6 +74,30 @@ public class PropertyservicemanagerMoverec implements Domain{
 	@Length(max=20)
 	private String moverecUnit;//楼宇单元
 	
+	@Column(name = "MOVEREC_CODE_")
+	@Length(max=50)
+	private String moverecCode;//搬家申请编号
+	
+	@Column(name = "MOVEREC_STATUS_")
+	@Length(max=2)
+	private String moverecStatus;//搬家状态
+	
+	public String getMoverecCode() {
+		return moverecCode;
+	}
+
+	public void setMoverecCode(String moverecCode) {
+		this.moverecCode = moverecCode;
+	}
+
+	public String getMoverecStatus() {
+		return moverecStatus;
+	}
+
+	public void setMoverecStatus(String moverecStatus) {
+		this.moverecStatus = moverecStatus;
+	}
+
 	public String getCreateTime(){
 		return this.createTime;
 	}
@@ -167,18 +191,33 @@ public class PropertyservicemanagerMoverec implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
-		result = prime * result + ((moverecRemark == null) ? 0 : moverecRemark.hashCode());
-		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
-		result = prime * result + ((moverecComp == null) ? 0 : moverecComp.hashCode());
-		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
-		result = prime * result + ((moverecWay == null) ? 0 : moverecWay.hashCode());
-		result = prime * result + ((moverecName == null) ? 0 : moverecName.hashCode());
+		result = prime * result
+				+ ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result
+				+ ((createUser == null) ? 0 : createUser.hashCode());
 		result = prime * result + ((member == null) ? 0 : member.hashCode());
-		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
-		result = prime * result + ((moverecId == null) ? 0 : moverecId.hashCode());
-		result = prime * result + ((moverecTime == null) ? 0 : moverecTime.hashCode());
-		result = prime * result + ((moverecUnit == null) ? 0 : moverecUnit.hashCode());
+		result = prime * result
+				+ ((moverecCode == null) ? 0 : moverecCode.hashCode());
+		result = prime * result
+				+ ((moverecComp == null) ? 0 : moverecComp.hashCode());
+		result = prime * result
+				+ ((moverecId == null) ? 0 : moverecId.hashCode());
+		result = prime * result
+				+ ((moverecName == null) ? 0 : moverecName.hashCode());
+		result = prime * result
+				+ ((moverecRemark == null) ? 0 : moverecRemark.hashCode());
+		result = prime * result
+				+ ((moverecStatus == null) ? 0 : moverecStatus.hashCode());
+		result = prime * result
+				+ ((moverecTime == null) ? 0 : moverecTime.hashCode());
+		result = prime * result
+				+ ((moverecUnit == null) ? 0 : moverecUnit.hashCode());
+		result = prime * result
+				+ ((moverecWay == null) ? 0 : moverecWay.hashCode());
+		result = prime * result
+				+ ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result
+				+ ((updateUser == null) ? 0 : updateUser.hashCode());
 		return result;
 	}
 	
@@ -190,56 +229,51 @@ public class PropertyservicemanagerMoverec implements Domain{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final PropertyservicemanagerMoverec other = (PropertyservicemanagerMoverec) obj;
+		PropertyservicemanagerMoverec other = (PropertyservicemanagerMoverec) obj;
 		if (createTime == null) {
 			if (other.createTime != null)
 				return false;
 		} else if (!createTime.equals(other.createTime))
-			return false;
-		if (moverecRemark == null) {
-			if (other.moverecRemark != null)
-				return false;
-		} else if (!moverecRemark.equals(other.moverecRemark))
 			return false;
 		if (createUser == null) {
 			if (other.createUser != null)
 				return false;
 		} else if (!createUser.equals(other.createUser))
 			return false;
+		if (member == null) {
+			if (other.member != null)
+				return false;
+		} else if (!member.equals(other.member))
+			return false;
+		if (moverecCode == null) {
+			if (other.moverecCode != null)
+				return false;
+		} else if (!moverecCode.equals(other.moverecCode))
+			return false;
 		if (moverecComp == null) {
 			if (other.moverecComp != null)
 				return false;
 		} else if (!moverecComp.equals(other.moverecComp))
 			return false;
-		if (updateTime == null) {
-			if (other.updateTime != null)
+		if (moverecId == null) {
+			if (other.moverecId != null)
 				return false;
-		} else if (!updateTime.equals(other.updateTime))
-			return false;
-		if (moverecWay == null) {
-			if (other.moverecWay != null)
-				return false;
-		} else if (!moverecWay.equals(other.moverecWay))
+		} else if (!moverecId.equals(other.moverecId))
 			return false;
 		if (moverecName == null) {
 			if (other.moverecName != null)
 				return false;
 		} else if (!moverecName.equals(other.moverecName))
 			return false;
-		if (member == null) {
-			if (other.member != null)
+		if (moverecRemark == null) {
+			if (other.moverecRemark != null)
 				return false;
-		} else if (!member.equals(other.member))
+		} else if (!moverecRemark.equals(other.moverecRemark))
 			return false;
-		if (updateUser == null) {
-			if (other.updateUser != null)
+		if (moverecStatus == null) {
+			if (other.moverecStatus != null)
 				return false;
-		} else if (!updateUser.equals(other.updateUser))
-			return false;
-		if (moverecId == null) {
-			if (other.moverecId != null)
-				return false;
-		} else if (!moverecId.equals(other.moverecId))
+		} else if (!moverecStatus.equals(other.moverecStatus))
 			return false;
 		if (moverecTime == null) {
 			if (other.moverecTime != null)
@@ -250,6 +284,21 @@ public class PropertyservicemanagerMoverec implements Domain{
 			if (other.moverecUnit != null)
 				return false;
 		} else if (!moverecUnit.equals(other.moverecUnit))
+			return false;
+		if (moverecWay == null) {
+			if (other.moverecWay != null)
+				return false;
+		} else if (!moverecWay.equals(other.moverecWay))
+			return false;
+		if (updateTime == null) {
+			if (other.updateTime != null)
+				return false;
+		} else if (!updateTime.equals(other.updateTime))
+			return false;
+		if (updateUser == null) {
+			if (other.updateUser != null)
+				return false;
+		} else if (!updateUser.equals(other.updateUser))
 			return false;
 		return true;
 	}

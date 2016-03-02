@@ -4,8 +4,8 @@
 package com.manage.PropertyServiceManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
@@ -49,6 +49,18 @@ public class PropertyservicemanagerFxtdc implements Domain{
     @JoinColumn(name="MOVEREC_ID_")
 	private com.manage.PropertyServiceManager.entity.PropertyservicemanagerMoverec propertyservicemanagerMoverec;//搬家申请记录ID
 	
+	@Column(name = "FXTDC_STATUS_")
+	@Length(max=2)
+	private String fxtdcStatus;//二维码有效状态
+	
+	public String getFxtdcStatus() {
+		return fxtdcStatus;
+	}
+
+	public void setFxtdcStatus(String fxtdcStatus) {
+		this.fxtdcStatus = fxtdcStatus;
+	}
+
 	public String getUpdateUser(){
 		return this.updateUser;
 	}
@@ -105,12 +117,23 @@ public class PropertyservicemanagerFxtdc implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
-		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
-		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
-		result = prime * result + ((twcrdAddrec == null) ? 0 : twcrdAddrec.hashCode());
-		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result
+				+ ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result
+				+ ((createUser == null) ? 0 : createUser.hashCode());
 		result = prime * result + ((fxtdcId == null) ? 0 : fxtdcId.hashCode());
+		result = prime * result
+				+ ((fxtdcStatus == null) ? 0 : fxtdcStatus.hashCode());
+		result = prime
+				* result
+				+ ((propertyservicemanagerMoverec == null) ? 0
+						: propertyservicemanagerMoverec.hashCode());
+		result = prime * result
+				+ ((twcrdAddrec == null) ? 0 : twcrdAddrec.hashCode());
+		result = prime * result
+				+ ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result
+				+ ((updateUser == null) ? 0 : updateUser.hashCode());
 		return result;
 	}
 	
@@ -122,26 +145,11 @@ public class PropertyservicemanagerFxtdc implements Domain{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final PropertyservicemanagerFxtdc other = (PropertyservicemanagerFxtdc) obj;
-		if (updateUser == null) {
-			if (other.updateUser != null)
-				return false;
-		} else if (!updateUser.equals(other.updateUser))
-			return false;
-		if (updateTime == null) {
-			if (other.updateTime != null)
-				return false;
-		} else if (!updateTime.equals(other.updateTime))
-			return false;
+		PropertyservicemanagerFxtdc other = (PropertyservicemanagerFxtdc) obj;
 		if (createTime == null) {
 			if (other.createTime != null)
 				return false;
 		} else if (!createTime.equals(other.createTime))
-			return false;
-		if (twcrdAddrec == null) {
-			if (other.twcrdAddrec != null)
-				return false;
-		} else if (!twcrdAddrec.equals(other.twcrdAddrec))
 			return false;
 		if (createUser == null) {
 			if (other.createUser != null)
@@ -152,6 +160,32 @@ public class PropertyservicemanagerFxtdc implements Domain{
 			if (other.fxtdcId != null)
 				return false;
 		} else if (!fxtdcId.equals(other.fxtdcId))
+			return false;
+		if (fxtdcStatus == null) {
+			if (other.fxtdcStatus != null)
+				return false;
+		} else if (!fxtdcStatus.equals(other.fxtdcStatus))
+			return false;
+		if (propertyservicemanagerMoverec == null) {
+			if (other.propertyservicemanagerMoverec != null)
+				return false;
+		} else if (!propertyservicemanagerMoverec
+				.equals(other.propertyservicemanagerMoverec))
+			return false;
+		if (twcrdAddrec == null) {
+			if (other.twcrdAddrec != null)
+				return false;
+		} else if (!twcrdAddrec.equals(other.twcrdAddrec))
+			return false;
+		if (updateTime == null) {
+			if (other.updateTime != null)
+				return false;
+		} else if (!updateTime.equals(other.updateTime))
+			return false;
+		if (updateUser == null) {
+			if (other.updateUser != null)
+				return false;
+		} else if (!updateUser.equals(other.updateUser))
 			return false;
 		return true;
 	}
