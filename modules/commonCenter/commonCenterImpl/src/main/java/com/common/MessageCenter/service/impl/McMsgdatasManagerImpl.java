@@ -175,7 +175,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 			}
 		}
 		if (messagePostProcessor != null) {
-			messagePostProcessor.send(mcMsgdatas.getMsgContent(),
+			messagePostProcessor.send(mcMsgdatas,
 					phones.toArray(new String[phones.size()]));
 		}
 
@@ -193,7 +193,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 			String phone = member.getMemberPhoneNumber();
 			msgContent = msgContent.replace("@user", userCaption);
 			if (messagePostProcessor != null) {
-				messagePostProcessor.send(msgContent, new String[] { phone });
+				messagePostProcessor.send(mcMsgdatas, new String[] { phone });
 			}
 		}
 	}

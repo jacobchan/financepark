@@ -1,15 +1,16 @@
 package com.common.MessageCenter.service.impl;
 
+import com.common.MessageCenter.service.IMessage;
 import com.common.MessageCenter.service.MessagePostProcessor;
 import com.gsoft.framework.core.exception.BusException;
 
 public abstract class MessageAbstractPoster implements MessagePostProcessor{
 
 	@Override
-	public void send(String content, String[] phones) throws BusException {
+	public void send(IMessage message, String[] phones) throws BusException {
 		beforeSend();
 		onSend();
-		afterSend();
+		afterSend(message);
 	}
 
 	@Override
@@ -19,6 +20,6 @@ public abstract class MessageAbstractPoster implements MessagePostProcessor{
 	public abstract void beforeSend() throws BusException ;
 
 	@Override
-	public abstract void afterSend() throws BusException ;
+	public abstract void afterSend(IMessage message) throws BusException ;
 
 }
