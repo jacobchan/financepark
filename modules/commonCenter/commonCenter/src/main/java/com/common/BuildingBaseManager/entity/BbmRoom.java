@@ -115,6 +115,30 @@ public class BbmRoom implements Domain{
 	@Transient
 	private String floorName;//楼层说明
 	
+	@Column(name = "ROOM_HOST_")
+	@Length(max=20)
+	private String roomHost;//单元业主ROOM_TENEMENT_
+	
+	@Column(name = "ROOM_TENEMENT_")
+	@Length(max=20)
+	private String roomTenement;//单元租户
+	
+	public String getRoomHost() {
+		return roomHost;
+	}
+
+	public void setRoomHost(String roomHost) {
+		this.roomHost = roomHost;
+	}
+
+	public String getRoomTenement() {
+		return roomTenement;
+	}
+
+	public void setRoomTenement(String roomTenement) {
+		this.roomTenement = roomTenement;
+	}
+
 	public String getParkName() {
 		return parkName;
 	}
