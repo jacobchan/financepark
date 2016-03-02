@@ -30,10 +30,6 @@ public class BbmFloor implements Domain{
 	@Length(max=36)
 	private String roomNo;//招商_房间编号
 
-	@Column(name = "RZ_ID_")
-	@Length(max=36)
-	private String rzId;//ID
-
 	@Column(name = "Z_USE_STATUS_")
 	@Length(max=2)
 	private String useStatus;//招商_使用状态
@@ -119,13 +115,6 @@ public class BbmFloor implements Domain{
 	public void setRoomNo(String roomNo){
 		this.roomNo = roomNo;
 	}
-	public String getRzId(){
-		return this.rzId;
-	}
-	
-	public void setRzId(String rzId){
-		this.rzId = rzId;
-	}
 	public String getUseStatus(){
 		return this.useStatus;
 	}
@@ -193,7 +182,6 @@ public class BbmFloor implements Domain{
 		int result = 1;
 		result = prime * result + ((floorNo == null) ? 0 : floorNo.hashCode());
 		result = prime * result + ((roomNo == null) ? 0 : roomNo.hashCode());
-		result = prime * result + ((rzId == null) ? 0 : rzId.hashCode());
 		result = prime * result + ((useStatus == null) ? 0 : useStatus.hashCode());
 		result = prime * result + ((floorCaption == null) ? 0 : floorCaption.hashCode());
 		result = prime * result + ((roomNum == null) ? 0 : roomNum.hashCode());
@@ -221,11 +209,6 @@ public class BbmFloor implements Domain{
 			if (other.roomNo != null)
 				return false;
 		} else if (!roomNo.equals(other.roomNo))
-			return false;
-		if (rzId == null) {
-			if (other.rzId != null)
-				return false;
-		} else if (!rzId.equals(other.rzId))
 			return false;
 		if (useStatus == null) {
 			if (other.useStatus != null)

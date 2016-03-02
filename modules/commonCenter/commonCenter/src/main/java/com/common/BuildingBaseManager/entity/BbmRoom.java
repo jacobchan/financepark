@@ -36,15 +36,11 @@ public class BbmRoom implements Domain{
 
 	@Column(name = "RZ_ID_")
 	@Length(max=36)
-	private String rzId;//ID
+	private String rzId;//企业ID
 
 	@Column(name = "Z_SALE_STATE_")
 	@Length(max=2)
 	private String saleState;//招商_销售状态
-
-	@Column(name = "B_ENTERED_ENT_")
-	@Length(max=32)
-	private String enteredEnt;//包含企业
 
 	@Column(name = "Z_SALES_PRICE_")
 	@Length(max=10)
@@ -58,9 +54,6 @@ public class BbmRoom implements Domain{
 	@Length(max=10)
 	private String lowerPrice;//招商_底价
 
-	@Column(name = "B_FLOOR_")
-	@Length(max=32)
-	private String floor;//所属楼层
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "ROOM_ID_")
@@ -116,36 +109,12 @@ public class BbmRoom implements Domain{
 	private com.common.BuildingBaseManager.entity.BbmFloor bbmFloor;//楼层ID
 	
 	@Transient
-	private String parkName;
+	private String parkName;//园区名称
 	@Transient
-	private String buildingName;
+	private String buildingName;//楼栋说明
 	@Transient
-	private String floorName;
+	private String floorName;//楼层说明
 	
-	@Column(name = "ROOM_HOST_")
-	@Length(max=20)
-	private String roomHost;//单元业主
-	
-	@Column(name = "ROOM_TENEMENT_")
-	@Length(max=20)
-	private String roomTenement;//单元租户
-	
-	public String getRoomHost() {
-		return roomHost;
-	}
-
-	public void setRoomHost(String roomHost) {
-		this.roomHost = roomHost;
-	}
-
-	public String getRoomTenement() {
-		return roomTenement;
-	}
-
-	public void setRoomTenement(String roomTenement) {
-		this.roomTenement = roomTenement;
-	}
-
 	public String getParkName() {
 		return parkName;
 	}
@@ -205,13 +174,6 @@ public class BbmRoom implements Domain{
 	public void setSaleState(String saleState){
 		this.saleState = saleState;
 	}
-	public String getEnteredEnt(){
-		return this.enteredEnt;
-	}
-	
-	public void setEnteredEnt(String enteredEnt){
-		this.enteredEnt = enteredEnt;
-	}
 	public String getSalesPrice(){
 		return this.salesPrice;
 	}
@@ -232,13 +194,6 @@ public class BbmRoom implements Domain{
 	
 	public void setLowerPrice(String lowerPrice){
 		this.lowerPrice = lowerPrice;
-	}
-	public String getFloor(){
-		return this.floor;
-	}
-	
-	public void setFloor(String floor){
-		this.floor = floor;
 	}
 	public String getRoomId(){
 		return this.roomId;
@@ -346,11 +301,9 @@ public class BbmRoom implements Domain{
 		result = prime * result + ((aspect == null) ? 0 : aspect.hashCode());
 		result = prime * result + ((rzId == null) ? 0 : rzId.hashCode());
 		result = prime * result + ((saleState == null) ? 0 : saleState.hashCode());
-		result = prime * result + ((enteredEnt == null) ? 0 : enteredEnt.hashCode());
 		result = prime * result + ((salesPrice == null) ? 0 : salesPrice.hashCode());
 		result = prime * result + ((roomCaption == null) ? 0 : roomCaption.hashCode());
 		result = prime * result + ((lowerPrice == null) ? 0 : lowerPrice.hashCode());
-		result = prime * result + ((floor == null) ? 0 : floor.hashCode());
 		result = prime * result + ((roomId == null) ? 0 : roomId.hashCode());
 		result = prime * result + ((roomModule == null) ? 0 : roomModule.hashCode());
 		result = prime * result + ((area == null) ? 0 : area.hashCode());
@@ -398,11 +351,6 @@ public class BbmRoom implements Domain{
 				return false;
 		} else if (!saleState.equals(other.saleState))
 			return false;
-		if (enteredEnt == null) {
-			if (other.enteredEnt != null)
-				return false;
-		} else if (!enteredEnt.equals(other.enteredEnt))
-			return false;
 		if (salesPrice == null) {
 			if (other.salesPrice != null)
 				return false;
@@ -417,11 +365,6 @@ public class BbmRoom implements Domain{
 			if (other.lowerPrice != null)
 				return false;
 		} else if (!lowerPrice.equals(other.lowerPrice))
-			return false;
-		if (floor == null) {
-			if (other.floor != null)
-				return false;
-		} else if (!floor.equals(other.floor))
 			return false;
 		if (roomId == null) {
 			if (other.roomId != null)

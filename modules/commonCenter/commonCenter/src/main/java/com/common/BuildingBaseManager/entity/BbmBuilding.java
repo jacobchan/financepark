@@ -21,11 +21,6 @@ public class BbmBuilding implements Domain{
 	
 	private static final long serialVersionUID = 1299058536300579348L;
 	
-
-	@Column(name = "Z_FLOOR_NUM_2")
-	@Length(max=2)
-	private String floorNum;//招商_楼层数量
-
 	@Column(name = "BUILDING_NO_")
 	@Length(max=32)
 	private String buildingNo;//楼栋编号
@@ -43,10 +38,6 @@ public class BbmBuilding implements Domain{
 
 	@Column(name = "CREATE_TIME_")
 	private String createTime;//创建时间
-
-	@Column(name = "COMPANY_")
-	@Length(max=32)
-	private String company;//入驻企业
 
 	@Column(name = "BUILDING_UNIT_COUNT_")
 	@Length(max=32)
@@ -85,13 +76,6 @@ public class BbmBuilding implements Domain{
     @JoinColumn(name="sp__PARK_ID_")
 	private com.common.BuildingBaseManager.entity.BbmPark bbmPark;//320_园区ID
 	
-	public String getFloorNum(){
-		return this.floorNum;
-	}
-	
-	public void setFloorNum(String floorNum){
-		this.floorNum = floorNum;
-	}
 	public String getBuildingNo(){
 		return this.buildingNo;
 	}
@@ -126,13 +110,6 @@ public class BbmBuilding implements Domain{
 	
 	public void setCreateTime(String createTime){
 		this.createTime = createTime;
-	}
-	public String getCompany(){
-		return this.company;
-	}
-	
-	public void setCompany(String company){
-		this.company = company;
 	}
 	public String getBuildingUnitCount(){
 		return this.buildingUnitCount;
@@ -204,13 +181,11 @@ public class BbmBuilding implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((floorNum == null) ? 0 : floorNum.hashCode());
 		result = prime * result + ((buildingNo == null) ? 0 : buildingNo.hashCode());
 		result = prime * result + ((buildingCaption == null) ? 0 : buildingCaption.hashCode());
 		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
 		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
 		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
-		result = prime * result + ((company == null) ? 0 : company.hashCode());
 		result = prime * result + ((buildingUnitCount == null) ? 0 : buildingUnitCount.hashCode());
 		result = prime * result + ((parkId == null) ? 0 : parkId.hashCode());
 		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
@@ -231,11 +206,6 @@ public class BbmBuilding implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		final BbmBuilding other = (BbmBuilding) obj;
-		if (floorNum == null) {
-			if (other.floorNum != null)
-				return false;
-		} else if (!floorNum.equals(other.floorNum))
-			return false;
 		if (buildingNo == null) {
 			if (other.buildingNo != null)
 				return false;
@@ -260,11 +230,6 @@ public class BbmBuilding implements Domain{
 			if (other.createTime != null)
 				return false;
 		} else if (!createTime.equals(other.createTime))
-			return false;
-		if (company == null) {
-			if (other.company != null)
-				return false;
-		} else if (!company.equals(other.company))
 			return false;
 		if (buildingUnitCount == null) {
 			if (other.buildingUnitCount != null)
