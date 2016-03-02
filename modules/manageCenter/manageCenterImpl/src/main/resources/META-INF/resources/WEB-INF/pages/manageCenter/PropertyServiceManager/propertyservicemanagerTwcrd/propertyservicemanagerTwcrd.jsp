@@ -45,6 +45,7 @@
 				data:{twcrdId:twcrdId},
 				success:function(result){
 					alert("使用成功！") ;
+				$elem('grid_propertyservicemanagerTwcrd',pageId).grid('pReload');
                 } 
             });
 		}
