@@ -91,7 +91,7 @@ public interface McMsgdatasManager extends BaseManager{
 	public void sendMessage(McMsgdatas mcMsgdatas) throws BusException;
 	
 	/**
-	 * 发送消息,指定用户发送,生成消息类容时保留#user
+	 * 发送消息,指定用户发送,生成消息类容时#user-->@user
 	 * @param mcMsgdatas
 	 * @throws BusException
 	 */
