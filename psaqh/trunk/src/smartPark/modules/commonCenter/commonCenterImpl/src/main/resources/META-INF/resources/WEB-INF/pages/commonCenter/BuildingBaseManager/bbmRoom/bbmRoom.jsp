@@ -15,7 +15,6 @@
 		<youi:gridCol property="bbmFloor.bbmBuilding.bbmPark.parkName" caption="所属园区" width="100" align="center"/>
 		<youi:gridCol property="bbmFloor.bbmBuilding.buildingNo" caption="所属楼栋" width="100" align="center"/>
 		<youi:gridCol property="bbmFloor.floorNo" caption="所属楼层" width="100" align="center"/>
-		<youi:gridCol property="enteredEnt"  caption="包含企业" width="100" align="center"/>
 		<youi:gridCol property="roomHost"  caption="单元业主" width="100" align="center"/>
 		<youi:gridCol property="status"  caption="使用状态" width="100" align="center" convert="floorUsingStatus"/>
 
@@ -42,14 +41,13 @@
 				src="esb/web/bbmFloorManager/getBbmFloors.json" parents="bbmBuilding.buildingId" parentsAlias="bbmBuilding.buildingId"/> --%>
 			<youi:fieldText property="roomCaption"  caption="单元说明"/>
 			<youi:fieldSelect property="status"  caption="使用状态" convert="floorUsingStatus"/>
-			<youi:fieldText property="enteredEnt"  caption="包含企业" />
 			<youi:fieldText property="roomHost"  caption="单元业主" notNull="true"/>
 			
+			<youi:fieldHidden property="roomTenement"  caption="单元租户"/>
 			<youi:fieldHidden property="rentCharge"  caption="物业_租金"/>
 			<youi:fieldHidden property="floor"  caption="所属楼层" />
 			<youi:fieldHidden property="eneryCharge"  caption="物业_电费" />
 			<youi:fieldHidden property="waterCharge"  caption="物业_水费" />
-			<youi:fieldHidden property="area"  caption="房间面积" />
 			<youi:fieldHidden property="aspect"  caption="招商_朝向"/>
 			<youi:fieldHidden property="saleState"  caption="招商_销售状态"/>
 			<youi:fieldHidden property="salesPrice"  caption="招商_单价"/>
