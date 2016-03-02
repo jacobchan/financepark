@@ -202,8 +202,6 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 	@Override
 	public void sendMessageEnt(McMsgdatas mcMsgdatas, String entId)
 			throws BusException {
-		// 发送给会员用户 ROLE_MEMBER
-		String msgContent = mcMsgdatas.getMsgContent();
 		//通过企业id查找企业管理员
 		String userId = "";//企业管理员属于会员，且只有一个
 		sendMessageSingle(mcMsgdatas,userId);
