@@ -30,6 +30,7 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
@@ -99,17 +100,26 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
     public ReservationRecord saveReservationRecord(ReservationRecord o) throws BusException{
-//    	String reservationRecordId = o.getReservationRecordId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(reservationRecordId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	o.setRecordStatus("01");//待受理
-    	return reservationRecordDao.save(o);
+    	String recordId = o.getRecordId();
+    	boolean isUpdate = StringUtils.isNotEmpty(recordId);
+    	if(isUpdate){//修改
+    		ReservationRecord r=reservationRecordDao.get(recordId);
+    		r.setRecordMemberId(o.getRecordMemberId());
+    		r.setRecordType(o.getRecordType());
+    		r.setVisiteDate(o.getVisiteDate());
+    		r.setUpdateUser(o.getUpdateUser());
+    		r.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return reservationRecordDao.save(r);
+    	}else{//新增
+    		o.setRecordStatus("01");//待受理
+        	o.setCreateUser(o.getUpdateUser());
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return reservationRecordDao.save(o);
+    	}
+    	
     }
 
     /**
@@ -168,9 +178,10 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 	@EsbServiceMapping
 	public List<Record> getRecordsByRecordType(@ServiceParam(name="recordType") String recordType) throws BusException{
 		List<Record> recordList=new ArrayList<Record>();
+		Collection<Condition> conditions = new ArrayList<Condition>();
+		Collection<Order> orders = new ArrayList<Order>();
+		
 		if(recordType.equals("04")){//04:众创空间，查询商品表基础信息
-			Collection<Condition> conditions = new ArrayList<Condition>();
-			Collection<Order> orders = new ArrayList<Order>();
 			conditions.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS, "04"));
 			// 查询属于众创空间的商品：genreCode=04
 			List<PurchasingmanagerGenre> purchasingmanagerGenreList=purchasingmanagerGenreManager.getPurchasingmanagerGenres(conditions, orders);
@@ -189,8 +200,10 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 				}
 			}
 
-		}else if(recordType.equals("02")){//02:虚拟空间，查询单元表基础信息
-			List<BbmRoom> bbmRoomsList=bbmRoomManager.getBbmRooms();
+		}else if(recordType.equals("02")){
+			//02:虚拟空间，查询单元表基础信息
+//			conditions.add(ConditionUtils.getCondition("status",Condition.EQUALS, "2"));//房间使用状态：2--未使用
+			List<BbmRoom> bbmRoomsList=bbmRoomManager.getBbmRooms(conditions, orders);
 			for(BbmRoom b:bbmRoomsList){
 				Record record = new Record();
 				record.put("commodityId", b.getRoomId());
