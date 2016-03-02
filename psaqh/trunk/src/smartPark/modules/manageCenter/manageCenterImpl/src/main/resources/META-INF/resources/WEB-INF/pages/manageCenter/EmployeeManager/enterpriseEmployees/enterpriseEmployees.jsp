@@ -21,7 +21,7 @@
 		<youi:gridCol property="employeesDepartment" caption="所属部门" width="20%" />
 		<youi:gridCol property="employeesTelephone" caption="员工电话" width="20%" />
 		<youi:gridCol property="employeesName" caption="员工姓名" width="20%" />
-		<youi:gridCol property="employees.rzMem" caption="企业信息" width="20%" />
+		<youi:gridCol property="rz.rzName" caption="企业信息" width="20%" />
 		<youi:gridCol property="member.memberNickname" caption="会员用户" width="20%" />
 		<youi:gridCol width="60" fixed="true" property="button" type="button"
 			caption="操作">
