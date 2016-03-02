@@ -56,11 +56,11 @@ import org.springframework.ui.ModelMap;
 		return modelMap;
 	}
 	/**
-	 * 获取采购餐饮类别树对象
+	 * 获取采购、餐饮、IT服务类别树对象
 	 * @return
 	 */
 	private GenreHtmlTreeNode getGenreHtmlTreeNode() {
-		//获取所有的采购餐饮类别列表
+		//获取所有的采购、餐饮、IT服务类别列表
 		List<PurchasingmanagerGenre> genres = purchasingmanagerGenreManager.getPurFoodGenres();
 		GenreHtmlTreeNode genreTree = ParkTreeUtils.listToGenreTree(genres, null, "商品类别");
 		genreTree.setId("tree_genre_root");
