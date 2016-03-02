@@ -101,7 +101,6 @@
 				 "</li>";
 		}
 		html+="</ul>";
-		alert(html);
 		$(".activity-details").append(html);
 	};
 	</script>
