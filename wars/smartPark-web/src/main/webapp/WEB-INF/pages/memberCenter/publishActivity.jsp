@@ -23,7 +23,7 @@
 			<div class="per-center-box clearfix">
 				<%@ include file="/WEB-INF/pages/memberCenter/common/ad_left.jsp"%> 
 				<div class="w1000">
-					<h3 class="per-h3">我参加的活动</h3>
+					<h3 class="per-h3">我发布的活动</h3>
 					<div class="clearfix mt40">
 						<div class="clearfix czh-knowledge pr">
                             <div class="czh-box">
@@ -50,12 +50,18 @@
                                     <h4>孩子不宜过早玩的10种运动</h4>
                                 </div>
                             </div>
+                             <div class="czh-box">
+                                <img src="<%=request.getContextPath()%>/styles/images/czh/list-5.jpg">
+                                <div class="czh-group" style="border-bottom:1px solid #ecebeb">
+                                    <h4>孩子不宜过早玩的10种运动</h4>
+                                </div>
+                            </div>
                             <div class="a_left"></div>
                             <div class="a_right"></div>
                             
                          </div>
                          <div class="mt40 ac_box pb20">
-                         	<a class="active" href="grzx21.html">报名的名单</a><a href="grzx21-2.html">活动评论</a><a href="grzx21-3.html">文档库</a>
+                         	<a class="active" href="publishActivity.html">报名的名单</a><a href="publishActivity-2.html">活动评论</a><a href="publishActivity-3.html">文档库</a>
                             <a href="javascript:;" class="ccheng fr">导出为Excel文档>></a>
                          </div>
                          <ul class="clearfix img_list">
