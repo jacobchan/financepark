@@ -54,7 +54,6 @@
 			<youi:fieldHidden property="eneryCharge"  caption="物业_电费" />
 			<youi:fieldHidden property="waterCharge"  caption="物业_水费" />
 			<youi:fieldHidden property="propertyCharge"  caption="物业_物业费"/>
-			<youi:fieldHidden property="enteredEnt"  caption="包含企业"/>
 			
 			<youi:fieldText property="aspect"  caption="招商_朝向"/>
 			<youi:fieldSelect property="saleState"  caption="招商_销售状态" convert="saleState"/>
