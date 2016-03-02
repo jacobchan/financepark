@@ -23,8 +23,10 @@ import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.framework.esb.annotation.ConditionCollection;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.PubCondition;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.security.AccountPrincipal;
+import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.manage.EnterBusinessManager.service.EnterbusinessmanagerRzManager;
@@ -96,10 +98,10 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
     public PropertyservicemanagerEntrec savePropertyservicemanagerEntrec(PropertyservicemanagerEntrec o) throws BusException{
     	String propertyservicemanagerEnteringId =o.getPropertyservicemanagerEntering().getEnteringId();
-    	String propertyservicemanagerEntreId =o.getEntrecId();
+    	String propertyservicemanagerEntreId =o.getEntrecId();//主键ID
     	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerEntreId);
     	if(isUpdate){//修改
 			PropertyservicemanagerEntering enteringAfter=propertyservicemanagerEnteringDao.get(propertyservicemanagerEnteringId);
@@ -127,6 +129,9 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
         		propertyservicemanagerEnteringDao.save(enteringBefore);
         		
     		}
+    		
+    		enteringAfter.setUpdateUser(o.getUpdateUser());
+    		enteringAfter.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setPropertyservicemanagerEntering(enteringAfter);
     	}else{//新增
 
@@ -152,6 +157,9 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
     		}
     		o.setPropertyservicemanagerEntering(enteringBefore);
     		o.setEnterrecStatus("01");//01：已预约
+    		o.setCreateUser(o.getUpdateUser());
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     	}
     	
 		return propertyservicemanagerEntrecDao.save(o);
@@ -205,7 +213,7 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
 	}
     
     /**
-	 * 取消预约申请，将待受理状态变更为已取消
+	 * 取消预约申请，将待受理状态变更为已取消，并还原预约数量
 	 * @param ReservationRecord
 	 */
     @EsbServiceMapping
@@ -215,6 +223,17 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
 		if(StringUtils.isNotEmpty(entrecId)){
 			p=propertyservicemanagerEntrecDao.get(entrecId);//根据主键查询入驻服务办理预约数据
 		}
+		String enteringId=p.getPropertyservicemanagerEntering().getEnteringId();
+		PropertyservicemanagerEntering entering=propertyservicemanagerEnteringDao.get(enteringId);
+		String enteringRemain=entering.getEnteringRemain();//剩余预约数量
+		String enteringAlre=entering.getEnteringAlre();//已预约数量
+		entering.setEnteringRemain(String.valueOf(Integer.valueOf(enteringRemain)+1));
+		entering.setEnteringAlre(String.valueOf(Integer.valueOf(enteringAlre)-1));
+		if(entering.getEnteringRemain().equals("1")){
+			entering.setEnteringStatus("02");//剩余数量为0，修改可预约状态为预约已满：02
+		}
+		propertyservicemanagerEnteringDao.save(entering);
+		
 		p.setEnterrecStatus("04");//已取消
 		propertyservicemanagerEntrecDao.save(p);
     }
