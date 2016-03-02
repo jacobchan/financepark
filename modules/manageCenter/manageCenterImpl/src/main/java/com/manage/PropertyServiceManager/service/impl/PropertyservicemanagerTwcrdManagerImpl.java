@@ -16,11 +16,9 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTwcrd;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerTwcrdDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerTwcrdManager;
@@ -101,6 +99,19 @@ public class PropertyservicemanagerTwcrdManagerImpl extends BaseManagerImpl impl
     
     public boolean exsitPropertyservicemanagerTwcrd(String propertyName,Object value) throws BusException{
 		return propertyservicemanagerTwcrdDao.exists(propertyName,value);
+	}
+    
+    /**
+	 * 通过访客申请找到对应的二维码
+	 * @param fkcode 访客申请对象
+	 * @return
+	 */
+	@Override
+	@EsbServiceMapping
+	public PropertyservicemanagerTwcrd findTwcrdByFkcode(
+			@ServiceParam(name="fkcode")PropertyservicemanagerFkcode fkcode) {
+		PropertyservicemanagerTwcrd twcrd = propertyservicemanagerTwcrdDao.getObjectByUniqueProperty("propertyservicemanagerFkcode", fkcode) ;
+		return twcrd;
 	}
 
 }
