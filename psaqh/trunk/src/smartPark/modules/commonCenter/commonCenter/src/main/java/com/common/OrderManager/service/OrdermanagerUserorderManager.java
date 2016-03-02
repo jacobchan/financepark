@@ -63,13 +63,6 @@ public interface OrdermanagerUserorderManager extends BaseManager{
      */
 	public boolean exsitOrdermanagerUserorder(String propertyName,Object value) throws BusException;
 	/**
-	 * 根据订单ID获取订单详情
-	 * @param userorderId
-	 * @return
-	 * @throws BusException
-	 */
-	public OrdermanagerUserorder getOrder(String userorderId) throws BusException;
-	/**
 	 * 获取企业服务订单列表
 	 * @param pager
 	 * @param conditions

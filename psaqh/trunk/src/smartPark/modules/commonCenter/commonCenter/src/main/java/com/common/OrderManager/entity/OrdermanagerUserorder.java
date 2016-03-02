@@ -4,7 +4,6 @@
 package com.common.OrderManager.entity;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import javax.persistence.*;
 
@@ -87,27 +86,6 @@ public class OrdermanagerUserorder implements Domain{
 	@Column(name = "USERORDER_ADR_")
 	@Length(max=256)
 	private String userorderAdr;//发货地址
-	
-	private List<OrdermanagerCommoditydetail> orderDetailList;//订单明细列表
-	
-	private List<OrdermanagerOrderprojecttypeValue> orderExtendList;//扩展属性列表
-	
-	public List<OrdermanagerCommoditydetail> getOrderDetailList() {
-		return orderDetailList;
-	}
-
-	public void setOrderDetailList(List<OrdermanagerCommoditydetail> orderDetailList) {
-		this.orderDetailList = orderDetailList;
-	}
-
-	public List<OrdermanagerOrderprojecttypeValue> getOrderExtendList() {
-		return orderExtendList;
-	}
-
-	public void setOrderExtendList(
-			List<OrdermanagerOrderprojecttypeValue> orderExtendList) {
-		this.orderExtendList = orderExtendList;
-	}
 
 	public String getCreateTime(){
 		return this.createTime;
