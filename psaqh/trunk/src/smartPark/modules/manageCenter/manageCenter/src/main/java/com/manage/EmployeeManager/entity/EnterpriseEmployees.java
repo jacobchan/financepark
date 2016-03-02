@@ -26,11 +26,11 @@ public class EnterpriseEmployees implements Domain {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "RZ_ID_")
-	private EnterbusinessmanagerRz employeesComId;// 企业信息ID_
+	private EnterbusinessmanagerRz rz;// 企业信息ID_
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "MEMBER_ID_")
-	private MemberInformation memberId;// 会员用户ID
+	private MemberInformation member;// 会员用户ID
 	
 	@Column(name = "EMPLOYEES_NAME")
 	@Length(max = 32)
@@ -65,8 +65,6 @@ public class EnterpriseEmployees implements Domain {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((employeesComId == null) ? 0 : employeesComId.hashCode());
 		result = prime
 				* result
 				+ ((employeesDepartment == null) ? 0 : employeesDepartment
@@ -79,8 +77,6 @@ public class EnterpriseEmployees implements Domain {
 						.hashCode());
 		result = prime * result
 				+ ((employeesName == null) ? 0 : employeesName.hashCode());
-		result = prime * result
-				+ ((memberId == null) ? 0 : memberId.hashCode());
 		return result;
 	}
 
@@ -92,20 +88,20 @@ public class EnterpriseEmployees implements Domain {
 		this.employeesId = employeesId;
 	}
 
-	public EnterbusinessmanagerRz getEmployeesComId() {
-		return employeesComId;
+	public EnterbusinessmanagerRz getRz() {
+		return rz;
 	}
 
-	public void setEmployeesComId(EnterbusinessmanagerRz employeesComId) {
-		this.employeesComId = employeesComId;
+	public void setRz(EnterbusinessmanagerRz rz) {
+		this.rz = rz;
 	}
 
-	public MemberInformation getMemberId() {
-		return memberId;
+	public MemberInformation getMember() {
+		return member;
 	}
 
-	public void setMemberId(MemberInformation memberId) {
-		this.memberId = memberId;
+	public void setMember(MemberInformation member) {
+		this.member = member;
 	}
 
 	public String getEmployeesName() {
@@ -173,11 +169,6 @@ public class EnterpriseEmployees implements Domain {
 		if (getClass() != obj.getClass())
 			return false;
 		final EnterpriseEmployees other = (EnterpriseEmployees) obj;
-		if (employeesComId == null) {
-			if (other.employeesComId != null)
-				return false;
-		} else if (!employeesComId.equals(other.employeesComId))
-			return false;
 		if (employeesDepartment == null) {
 			if (other.employeesDepartment != null)
 				return false;
@@ -197,11 +188,6 @@ public class EnterpriseEmployees implements Domain {
 			if (other.employeesName != null)
 				return false;
 		} else if (!employeesName.equals(other.employeesName))
-			return false;
-		if (memberId == null) {
-			if (other.memberId != null)
-				return false;
-		} else if (!memberId.equals(other.memberId))
 			return false;
 		return true;
 	}
