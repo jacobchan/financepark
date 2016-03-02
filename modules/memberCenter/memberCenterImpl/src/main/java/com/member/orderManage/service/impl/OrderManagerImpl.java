@@ -19,7 +19,9 @@ import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PublicUtilitiesManager.entity.PublicutilitiesmanagerReso;
+import com.manage.PublicUtilitiesManager.service.PublicutilitiesmanagerResoManager;
 import com.member.orderManager.service.OrderManager;
+import com.member.shoppingCarManager.entity.ShoppingcarCatering;
 import com.member.shoppingCarManager.entity.ShoppingcarGroup;
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
@@ -49,41 +51,85 @@ public class OrderManagerImpl extends BaseManagerImpl implements OrderManager{
 	private OrdermanagerOrderprojecttypeValueDao ordermanagerOrderprojecttypeValueDao;
 	@Autowired
 	private PurchasingmanagerGenreDao purchasingmanagerGenreDao;
+	@Autowired
+	private PublicutilitiesmanagerResoManager publicutilitiesmanagerResoManager;
 	
 	/**
 	 * 新增采购订单
 	 */
-	public OrdermanagerUserorder savePurOrdermanager(OrdermanagerUserorder o,
+	public OrdermanagerUserorder savePurOrder(OrdermanagerUserorder o,
 			List<ShoppingcarGroup> shopCarList) throws BusException {
+		//获取当前登录用户
+		Object object = SecurityUtils.getPrincipal();
+		User user = new User();
+		if(object != null && object instanceof User){
+			user = (User) object;
+		}
 		if(shopCarList.size() == 0){
 			throw new BusException("购物车不能为空！");
 		}
 		PurchasingmanagerGenre pg = shopCarList.get(0).getCommodityId().getPurchasingmanagerGenre();
-		while(pg.getGenreCode() == null){
+		while(pg.getPurchasingmanagerGenre() != null){
 			pg = pg.getPurchasingmanagerGenre();
 		}
 		o.setGenreId(pg);
 		o.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("CG"));
 		o.setUserorderStatus("01");//01-未支付
-		o.setCreateUser(o.getUpdateUser());
+		o.setCreateUser(user.getUserId());
 		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		o.setUpdateUser(user.getUserId());
 		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-//		if(o.getUpdateUser() != null){
-//			MemberInformation mem = memberInformationDao.get(o.getUpdateUser()); //获取当前登录用户
-//    		o.setUserorderBuyUser(mem.getMemberName());
-//		}
-		o.setMemberId(o.getUpdateUser());
+		o.setUserorderBuyUser(user.getUserCaption());
+		o.setMemberId(user.getUserId());
 		o.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-		return ordermanagerUserorderDao.save(o);
+		o = ordermanagerUserorderDao.save(o);
+		for(ShoppingcarGroup shopCar:shopCarList){//保存订单明细
+			OrdermanagerCommoditydetail orderDetail = new OrdermanagerCommoditydetail();
+			orderDetail.setOrdermanagerUserorder(o);
+			orderDetail.setCommodityId(shopCar.getCommodityId().getCommodityId());
+			orderDetail.setCommoditydetailNum(shopCar.getCompanyCateringNum());
+			ordermanagerCommoditydetailDao.save(orderDetail);
+		}
+		return o;
 	}
 	/**
 	 * 新增餐饮订单
 	 */
 	@Override
-	public OrdermanagerUserorder saveFoodOrdermanager(OrdermanagerUserorder o)
-			throws BusException {
-		// TODO Auto-generated method stub
-		return null;
+	public OrdermanagerUserorder saveFoodOrder(OrdermanagerUserorder o,
+			List<ShoppingcarCatering> shopCarList) throws BusException {
+		//获取当前登录用户
+		Object object = SecurityUtils.getPrincipal();
+		User user = new User();
+		if(object != null && object instanceof User){
+			user = (User) object;
+		}
+		if(shopCarList.size() == 0){
+			throw new BusException("购物车不能为空！");
+		}
+		PurchasingmanagerGenre pg = shopCarList.get(0).getCommodityId().getPurchasingmanagerGenre();
+		while(pg.getPurchasingmanagerGenre() != null){
+			pg = pg.getPurchasingmanagerGenre();
+		}
+		o.setGenreId(pg);
+		o.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("CY"));
+		o.setUserorderStatus("01");//01-未支付
+		o.setCreateUser(user.getUserId());
+		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		o.setUpdateUser(user.getUserId());
+		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		o.setUserorderBuyUser(user.getUserCaption());
+		o.setMemberId(user.getUserId());
+		o.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		o = ordermanagerUserorderDao.save(o);
+		for(ShoppingcarCatering shopCar:shopCarList){//保存订单明细
+			OrdermanagerCommoditydetail orderDetail = new OrdermanagerCommoditydetail();
+			orderDetail.setOrdermanagerUserorder(o);
+			orderDetail.setCommodityId(shopCar.getCommodityId().getCommodityId());
+			orderDetail.setCommoditydetailNum(shopCar.getCompanyCateringNum());
+			ordermanagerCommoditydetailDao.save(orderDetail);
+		}
+		return o;
 	}
 	/**
 	 * 新增公共资源订单
@@ -92,6 +138,7 @@ public class OrderManagerImpl extends BaseManagerImpl implements OrderManager{
 	public OrdermanagerUserorder savePublicResoOrder(OrdermanagerUserorder o,
 			PurchasingmanagerCommodity commodity,
 			List<PublicutilitiesmanagerReso> publicResoList) throws BusException {
+		publicResoList = publicutilitiesmanagerResoManager.savePublicutilitiesmanagerResoList(publicResoList);
 		//获取当前登录用户
 		Object object = SecurityUtils.getPrincipal();
 		User user = new User();
@@ -110,27 +157,27 @@ public class OrderManagerImpl extends BaseManagerImpl implements OrderManager{
 		o.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		o = ordermanagerUserorderDao.save(o);
 		//保存订单明细列表
-		List<OrdermanagerCommoditydetail> orderDetailList = new ArrayList<OrdermanagerCommoditydetail>();
 		OrdermanagerCommoditydetail orderDetail = new OrdermanagerCommoditydetail();
 		orderDetail.setOrdermanagerUserorder(o);
 		orderDetail.setCommodityId(commodity.getCommodityId());
 		orderDetail.setCommoditydetailNum("1");
-		orderDetail = ordermanagerCommoditydetailDao.save(orderDetail);
-		orderDetailList.add(orderDetail);
+		ordermanagerCommoditydetailDao.save(orderDetail);
 		//保存订单扩展属性列表
-		List<OrdermanagerOrderprojecttypeValue> orderExtendList = new ArrayList<OrdermanagerOrderprojecttypeValue>();
 		PurchasingmanagerGenre pg = commodity.getPurchasingmanagerGenre();
 		while(pg.getPurchasingmanagerGenre() != null){//获取最顶级商品类别
 			pg = pg.getPurchasingmanagerGenre();
 		}
+		StringBuffer publicResoIdBuff =  new StringBuffer();//公共资源ID
 		String dateStr =  "";//订单预定日期
 		StringBuffer timeStrBuff =  new StringBuffer();//订单预定时段
 		for(int i = 0;i<publicResoList.size();i++){
 			PublicutilitiesmanagerReso publicReso = publicResoList.get(i);
 			dateStr = publicReso.getResoDate();
 			timeStrBuff.append(publicReso.getResoTime());
+			publicResoIdBuff.append(publicReso.getResoId());
 			if(i+1<publicResoList.size()){
 				timeStrBuff.append(",");
+				publicResoIdBuff.append(",");
 			}
 		}
 		List<PurchasingmanagerGenreProperty> genrePropertyList = purchasingmanagerGenrePropertyDao.getList("purchasingmanagerGenre.genreId", pg.getGenreId());
@@ -138,13 +185,14 @@ public class OrderManagerImpl extends BaseManagerImpl implements OrderManager{
 			OrdermanagerOrderprojecttypeValue orderExtendValue = new OrdermanagerOrderprojecttypeValue();
 			orderExtendValue.setOrdermanagerUserorder(o);
 			orderExtendValue.setGenrePropertyId(genreProperty);
-			if("orderDate".equals(genreProperty.getGenrePropertyFieldName())){
+			if("publicResoIdDate".equals(genreProperty.getGenrePropertyFieldName())){
 				orderExtendValue.setOrderprojecttypeValueFieldValue(dateStr);
-			}else if("orderTime".equals(genreProperty.getGenrePropertyFieldName())){
+			}else if("publicResoIdTime".equals(genreProperty.getGenrePropertyFieldName())){
 				orderExtendValue.setOrderprojecttypeValueFieldValue(timeStrBuff.toString());
+			}else if("publicResoId".equals(genreProperty.getGenrePropertyFieldName())){
+				orderExtendValue.setOrderprojecttypeValueFieldValue(publicResoIdBuff.toString());
 			}
-			orderExtendValue = ordermanagerOrderprojecttypeValueDao.save(orderExtendValue);
-			orderExtendList.add(orderExtendValue);
+			ordermanagerOrderprojecttypeValueDao.save(orderExtendValue);
 		}
 		
 		return o;
@@ -187,35 +235,4 @@ public class OrderManagerImpl extends BaseManagerImpl implements OrderManager{
 		}
 		return o;
 	}
-    /**
-//     * 保存或修改采购订单
-//     */
-//	@Override
-//	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "params.userId")})
-//	public OrdermanagerUserorder savePurOrdermanager(OrdermanagerUserorder o,List<ShoppingcarGroup> shopCarList)
-//			throws BusException {
-//    	String ordermanagerUserorderId = o.getUserorderId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(ordermanagerUserorderId);
-//    	if(!isUpdate){//新增
-//    		PurchasingmanagerGenre pg = shopCarList.get(0).getCommodityId().getPurchasingmanagerGenre();
-//    		while(pg.getGenreCode() == null){
-//    			pg = pg.getPurchasingmanagerGenre();
-//    		}
-//    		o.setGenreId(pg);
-//    		o.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("CG"));
-//    		o.setUserorderStatus("01");//01-未支付
-//    		o.setCreateUser(o.getUpdateUser());
-//    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-//    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-//    		if(o.getUpdateUser() != null){
-//    			MemberInformation mem = memberInformationDao.get(o.getUpdateUser()); //获取当前登录用户
-//        		o.setUserorderBuyUser(mem.getMemberName());
-//    		}
-//    		o.setMemberId(o.getUpdateUser());
-//    		o.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-//    		return ordermanagerUserorderDao.save(o);
-//    	}else{
-//    		throw new BusException("订单不能修改!");
-//    	}
-//	}
 }
