@@ -11,7 +11,7 @@ public class ReferenceMap extends HashMap<String, String>{
 
 	public ReferenceMap(){
 	//	super();
-		this.put("#user","#user");
+		this.put("#user","@user");
 		this.put("#OrderType","");
 		this.put("#OrderNo","");
 		this.put("#Commdity","");
