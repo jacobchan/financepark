@@ -69,7 +69,7 @@ public class McMsgtempalate implements Domain{
 	@Length(max=32)
 	private String msgTempalateCaption;//消息模板标题
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(name="MSG_TYPE_ID_")
 	private com.common.MessageCenter.entity.McMsgtype mcMsgtype;//消息类型ID
 	
