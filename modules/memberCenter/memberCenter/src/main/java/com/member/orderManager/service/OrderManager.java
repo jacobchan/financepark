@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.service.BaseManager;
+import com.member.shoppingCarManager.entity.ShoppingcarCatering;
 import com.member.shoppingCarManager.entity.ShoppingcarGroup;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
@@ -22,14 +23,14 @@ public interface OrderManager extends BaseManager{
      * @return
      * @throws BusException
      */
-    public OrdermanagerUserorder savePurOrdermanager(OrdermanagerUserorder o,List<ShoppingcarGroup> shopCarList) throws BusException;
+    public OrdermanagerUserorder savePurOrder(OrdermanagerUserorder o,List<ShoppingcarGroup> shopCarList) throws BusException;
     /**
      * 新增餐饮订单
      * @param o
      * @return
      * @throws BusException
      */
-	public OrdermanagerUserorder saveFoodOrdermanager(OrdermanagerUserorder o) throws BusException;
+	public OrdermanagerUserorder saveFoodOrder(OrdermanagerUserorder o,List<ShoppingcarCatering> shopCarList) throws BusException;
 	/**
 	 * 新增公共资源订单
 	 * @param o
