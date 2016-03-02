@@ -45,7 +45,7 @@ public class PropertyservicemanagerTwcrd implements Domain{
 	@Length(max=50)
 	private String twcrdAddrec;//二维码URL地址
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="FKCODE_ID_")
 	private com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode propertyservicemanagerFkcode;//访客申请ID
 	
