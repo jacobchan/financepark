@@ -69,4 +69,9 @@ public interface ActivityApplyManager extends BaseManager{
      * 
      */    
     public List<ActivityApply> getParticipateActivityList() throws BusException;
+    /**
+     * 获取当前登录用户发布活动集合
+     * 
+     */    
+    public List<ActivityApply> getPublishActivityList() throws BusException;
 }
