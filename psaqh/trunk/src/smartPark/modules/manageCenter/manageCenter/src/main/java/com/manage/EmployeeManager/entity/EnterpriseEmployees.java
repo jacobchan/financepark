@@ -48,11 +48,11 @@ public class EnterpriseEmployees implements Domain {
 	@Length(max = 2)
 	private String employeesDepartment;// 所属部门
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional=false)
+	@ManyToOne(fetch = FetchType.LAZY,optional=true,cascade=CascadeType.ALL)
 	@JoinColumn(name = "UPDATE_USER_")
 	private MemberInformation updateUser;//修改人
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional=false)
+	@ManyToOne(fetch = FetchType.LAZY,optional=true,cascade=CascadeType.ALL)
 	@JoinColumn(name = "CREATE_USER_")
 	private MemberInformation createUser;//创建人
 	
