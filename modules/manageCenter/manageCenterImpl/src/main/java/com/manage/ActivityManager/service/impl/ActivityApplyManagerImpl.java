@@ -133,5 +133,37 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     	}
 		return aalist;
 	}
+    /**
+     * 获取当前登录用户发布活动集合
+     * 
+     */ 
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+	public List<ActivityApply> getPublishActivityList() throws BusException {
+		// TODO Auto-generated method stub
+    	//先模拟一个登陆用户，之后会修改
+    	MemberInformation member=memberInformationManager.getMemberInformationByLoginUser(null);
+    	//获取当前用户参加活动的list
+    	List<ActivityApply> list=activityApplyDao.getList("memberId", member.getMemberId()); 	
+		return list;
+	}
+    /**
+     * 根据活动主键查询报名名单
+     * 
+     */ 
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+	public List<MemberInformation> getPublishActivityMembers(ActivityApply o)
+			throws BusException {
+		// TODO Auto-generated method stub
+    	//获取活动报名的list
+    	Collection<Condition> condition = new ArrayList<Condition>();
+    	condition.add(ConditionUtils.getCondition("activityApply.applyId", Condition.EQUALS,o.getApplyId()));
+    	List<ActivityApplylist> activityApplylist=activityApplylistManager.getActivityApplylists(condition, null);
+    	List<MemberInformation> members=new ArrayList<MemberInformation>();
+    	for(ActivityApplylist aa:activityApplylist){
+    		String memberId=aa.getApplyMember();
+    		members.add(memberInformationManager.getMemberInformation(memberId));
+    	}
+		return members;
+	}
 
 }
