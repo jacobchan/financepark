@@ -25,6 +25,11 @@ public interface PurchasingmanagerGenreManager extends BaseManager{
      * 条件查询列表
      */
     public List<PurchasingmanagerGenre> getPurchasingmanagerGenres(Collection<Condition> conditions,Collection<Order> orders) throws BusException;
+    
+    /**
+     * 根据商品类别（enreCode）查询商品
+     */
+    public List<PurchasingmanagerGenre> getPurchasingmanagerGenresByGenreCode(Collection<Condition> conditions,Collection<Order> orders) throws BusException;
     /**
      * 根据主键查询
      */

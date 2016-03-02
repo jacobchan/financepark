@@ -3,6 +3,7 @@
  */
 package com.common.purchasingManager.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -115,6 +116,29 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
     
     public boolean exsitPurchasingmanagerCommodity(String propertyName,Object value) throws BusException{
 		return purchasingmanagerCommodityDao.exists(propertyName,value);
+	}
+    
+    /**
+     * 根据商品类型获取相应的商品信息
+     */
+	@EsbServiceMapping
+    public List<PurchasingmanagerCommodity> getCommodityRecordsByRecordType(
+       @ServiceParam(name="commodityId.purchasingmanagerGenre.genreId") String genreId) throws BusException{
+		List<PurchasingmanagerCommodity> list=new ArrayList<PurchasingmanagerCommodity>();
+		if(StringUtils.isNotEmpty(genreId)){
+			list = purchasingmanagerCommodityDao.getList("purchasingmanagerGenre.genreId", genreId);
+		}
+		return list;
+	}
+	
+	/**
+     * 根据商品类别ID获取相应的商品信息
+     */
+	@EsbServiceMapping
+    public List<PurchasingmanagerCommodity> getCommodityRecordsByGenreId(
+       @ServiceParam(name="genreId") String genreId) throws BusException{
+		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("purchasingmanagerGenre.genreId", genreId);
+		return list;
 	}
 
 }

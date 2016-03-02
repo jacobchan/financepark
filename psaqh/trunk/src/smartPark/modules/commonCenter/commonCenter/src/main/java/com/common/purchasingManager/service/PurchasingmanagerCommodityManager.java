@@ -3,17 +3,16 @@
  */
 package com.common.purchasingManager.service;
 
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
+import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
-import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 
 public interface PurchasingmanagerCommodityManager extends BaseManager{
 
@@ -63,4 +62,16 @@ public interface PurchasingmanagerCommodityManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitPurchasingmanagerCommodity(String propertyName,Object value) throws BusException;
+	
+	  /**
+     * 根据商品类型获取相应的商品信息
+     *  @param genreId:商品类别
+     */
+    public List<PurchasingmanagerCommodity> getCommodityRecordsByRecordType(String genreId) throws BusException;
+    
+    /**
+     * 根据商品类别ID获取相应的商品信息
+     * @param genreId:商品类别ID
+     */
+    public List<PurchasingmanagerCommodity> getCommodityRecordsByGenreId(String genreId) throws BusException;
 }
