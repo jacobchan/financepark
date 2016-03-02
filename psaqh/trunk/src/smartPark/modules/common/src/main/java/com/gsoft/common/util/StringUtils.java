@@ -1,5 +1,7 @@
 package com.gsoft.common.util;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -70,7 +72,7 @@ public class StringUtils {
 		return str;
 	}
 	
-	/**替换字符串中多个
+	/**替换字符串中多个,replaceMap不要 key=value
 	 * @param str
 	 * @param targets
 	 * @param replaceMap
@@ -78,9 +80,12 @@ public class StringUtils {
 	 */
 	public static String replaceAllString(String str,List<String> targets,Map<String,String> replaceMap){
 		if(com.gsoft.framework.util.StringUtils.isNotEmpty(str)){
+			List<String> tempTargets = new ArrayList<String>();
+			tempTargets.addAll(targets);
 			for(String target:targets){
+				tempTargets.remove(target);
 				if(str.contains(target)){
-					return replaceAllString(replaceString(str,target,replaceMap.get(target)), targets, replaceMap);
+					return replaceAllString(replaceString(str,target,replaceMap.get(target)), tempTargets, replaceMap);
 				}
 			}
 		}
