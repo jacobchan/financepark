@@ -148,7 +148,6 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 				//标记此手机号码是否已成为企业员工
 				if(employeeList.size()<=0){
 					//企业角色
-					Timestamp createTime = new Timestamp(new Date().getTime());
 					String[] roleparams = new String[]{"roleId","roleType"};
 					Object[] rolevalues = new Object[]{"ROLE_USER","1"};
 					
@@ -160,19 +159,19 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 					ems.setEmployeesName(info.getMemberName());
 					ems.setEmployeesTelephone(info.getMemberPhoneNumber());
 					ems.setEmployeesDepartment("1");
-					ems.setCreateUser(info);
-					ems.setCreateTime(createTime);
-					ems.setUpdateUser(info);
-					ems.setUpdateTime(createTime);
+					ems.setCreateUser(info.getMemberId());
+					ems.setCreateTime(new Timestamp(new Date().getTime()));
+					ems.setUpdateUser(info.getMemberId());
+					ems.setUpdateTime(new Timestamp(new Date().getTime()));
 //					enterpriseEmployeesDao.save(ems);
 					
 					List<Role> le = roleDao.getList(roleparams, rolevalues);
 					role.setEmployees(ems);
 					role.setRole(le.get(0));
-					role.setCreateuser(info);
-					role.setCreatetime(createTime);
-					role.setUpdateuser(info);
-					role.setUpdatetime(createTime);
+					role.setCreateUser(info.getMemberId());
+					role.setCreateTime(new Timestamp(new Date().getTime()));
+					role.setUpdateUser(info.getMemberId());
+					role.setUpdateTime(new Timestamp(new Date().getTime()));
 					enterpriseRoleDao.save(role);
 					
 					msg = info.getMemberName()+"成功入驻企业"+rz.getRzMem();

@@ -1,14 +1,11 @@
 package com.manage.EmployeeManager.service.impl;
-
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.exception.BusException;
@@ -21,12 +18,12 @@ import com.gsoft.framework.esb.annotation.ConditionCollection;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.OrderCollection;
 import com.gsoft.framework.esb.annotation.ServiceParam;
-import com.gsoft.framework.util.StringUtils;
+import com.manage.EmployeeManager.dao.EnterpriseEmployeesDao;
 import com.manage.EmployeeManager.dao.EnterpriseRoleDao;
+import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 import com.manage.EmployeeManager.entity.EnterpriseInvitation;
 import com.manage.EmployeeManager.entity.EnterpriseRole;
 import com.manage.EmployeeManager.service.EnterpriseRoleManager;
-
 @Service("enterpriseRoleManager")
 @Transactional
 public class EnterpriseRoleManagerImpl extends BaseManagerImpl implements
@@ -35,6 +32,8 @@ public class EnterpriseRoleManagerImpl extends BaseManagerImpl implements
 	private EnterpriseRoleDao enterpriseRoleDao;
 	@Autowired
 	private MemberInformationDao memberInformationDao;
+	@Autowired
+	private EnterpriseEmployeesDao enterpriseEmployeesDao;
 
 	@Override
 	public List<EnterpriseRole> getEnterpriseRoles() throws BusException {
@@ -76,13 +75,14 @@ public class EnterpriseRoleManagerImpl extends BaseManagerImpl implements
 	@EsbServiceMapping
 	public EnterpriseRole saveEnterpriseRole(EnterpriseRole o)
 			throws BusException {
+		EnterpriseEmployees es = enterpriseEmployeesDao.get(o.getEmployees().getEmployeesId());
 		//根据会员填写的手机号码查询此会员是否存在
 		MemberInformation info = memberInformationDao.getObjectByUniqueProperty("memberPhoneNumber", "18062038519");
-		o.setEmployees(o.getEmployees());
-		o.setCreateuser(info);
-		o.setCreatetime(new Timestamp(new Date().getTime()));
-		o.setUpdateuser(info);
-		o.setUpdatetime(new Timestamp(new Date().getTime()));
+		o.setEmployees(es);
+		o.setCreateUser(info.getMemberId());
+		o.setCreateTime(new Timestamp(new Date().getTime()));
+		o.setUpdateUser(info.getMemberId());
+		o.setUpdateTime(new Timestamp(new Date().getTime()));
 		return enterpriseRoleDao.save(o);
 	}
 
