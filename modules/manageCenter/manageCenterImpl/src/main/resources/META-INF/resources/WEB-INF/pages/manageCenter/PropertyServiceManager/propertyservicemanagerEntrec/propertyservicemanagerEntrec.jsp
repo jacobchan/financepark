@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
-		<youi:grid id="grid_propertyservicemanagerEntrec" idKeys="entrecId,propertyservicemanagerEntering.enteringId" caption="入驻服务办理预约记录表列表"  panel="false"
+	<youi:grid id="grid_propertyservicemanagerEntrec" idKeys="entrecId,propertyservicemanagerEntering.enteringId" caption="入驻服务办理预约记录表列表"  panel="false"
 				src="esb/web/propertyservicemanagerEntrecManager/getPagerPropertyservicemanagerEntrecs.json" dataFormId="form_propertyservicemanagerEntrec"
 				editSrc="esb/web/propertyservicemanagerEntrecManager/getPropertyservicemanagerEntrec.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/propertyservicemanagerEntrecManager/removePropertyservicemanagerEntrec.json">
@@ -14,7 +14,7 @@
 		<youi:button name="cancelReservation" caption="取消预约" icon="edit" active="1"></youi:button> 
 		<youi:button name="changeStatues" caption="预约授理" icon="edit" active="1"></youi:button> 
 		<youi:gridCol property="memberId.memberName"  caption="入驻申请人" width="15%" align="center"/>
-		<%-- <youi:gridCol property="enteringTelephone"  caption="入驻联系电话" width="100"/> --%>
+	    <youi:gridCol property="memberId.memberPhoneNumber"  caption="入驻联系电话" width="20%" align="center"/>
 
 		<youi:gridCol property="enteringTime"  caption="预约时间段" width="20%" convert="enteringTime" align="center"/>
 		<youi:gridCol property="enterrecStatus"  caption="预约记录状态" convert="enterrecStatus" width="20%" align="center"/>
@@ -29,8 +29,8 @@
 	<youi:form dialog="true" caption="入驻服务办理预约记录表" id="form_propertyservicemanagerEntrec" action="esb/web/propertyservicemanagerEntrecManager/savePropertyservicemanagerEntrec.json">
 		<youi:fieldLayout prefix="record" labelWidths="90,100">
 			<youi:fieldSelect property="enteringName"  caption="入驻申请人" notNull="true" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
-			<%-- <youi:fieldText property="enteringTelephone"  caption="入驻联系电话" expression="^1[3|4|5|8|9]{1}[0-9]{9,9}$" expressionMessage="请填写正确的手机号码" notNull="true"/>
-			 --%>
+			 <youi:fieldLabel property="enteringTelephone"  caption="入驻联系电话"/>
+		<%-- 	  <youi:fieldLabel property="enteringTelephone"  caption="入驻联系电话" expression="^1[3|4|5|8|9]{1}[0-9]{9,9}$" expressionMessage="请填写正确的手机号码" notNull="true"/> --%>
 			 <youi:fieldHidden property="memberId"  caption="会员用户ID"/>
 			 <youi:fieldHidden property="enterrecStatus"  caption="预约记录状态"/>
 			<youi:fieldSelect property="propertyservicemanagerEntering.enteringId"  caption="预约记录ID" src="esb/web/propertyservicemanagerEnteringManager/getPropertyservicemanagerEnteringsByStatus.json" code="enteringId" show="enteringId" notNull="true"/>
@@ -49,13 +49,28 @@
 				data:{enteringId:enteringId},
 				success:function(result){
 					var record = result.record;
-                     $('#P_'+pageId+'_record_enteringTime').fieldValue(record.enteringTime);
+                    $('#P_'+pageId+'_record_enteringTime').fieldValue(record.enteringTime);
 					$('#P_'+pageId+'_record_enteringDate').fieldValue(record.enteringDate);
                   } 
             })
 
     </youi:func>
     <!--**********************************页面函数End:选择预约记录ID,将预约记录表里的预约时间段和预约日期带出来********************************-->
+    
+    <!--**********************************页面函数Start:选择入驻申请人,将会员表里的会员电话号码信息带出来********************************-->
+	<youi:func name = "record_enteringName_change">
+      		var memberId = $('#P_'+pageId+'_record_enteringName').fieldValue();
+			$.youi.ajaxUtil.ajax({
+				url:'/esb/web/memberInformationManager/getMemberInformation.json',
+				data:{memberId:memberId},
+				success:function(result){
+					var record = result.record;
+                     $('#P_'+pageId+'_record_enteringTelephone').fieldValue(record.memberPhoneNumber);
+                  } 
+            })
+
+    </youi:func>
+    <!--**********************************页面函数End:选择入驻申请人,将会员表里的会员电话号码信息带出来********************************-->
     
     <!--**********************************页面函数Start:将已预约的记录进行授理，变更为已授理状态，并刷新页面********************************-->
     	<youi:func name = "func_grid_changeStatues">

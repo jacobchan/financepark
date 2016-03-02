@@ -16,7 +16,9 @@ import com.common.BuildingBaseManager.entity.BbmRoom;
 import com.common.BuildingBaseManager.service.BbmRoomManager;
 import com.common.purchasingManager.dao.PurchasingmanagerCommodityDao;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
+import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
+import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
 import com.gsoft.framework.codemap.dao.CodeitemDao;
 import com.gsoft.framework.codemap.entity.Codeitem;
 import com.gsoft.framework.core.dataobj.Record;
@@ -59,8 +61,8 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 	@Autowired
 	private BbmRoomManager bbmRoomManager;
 	
-//	@Autowired
-//	private PurchasingmanagerCommodityExtendValueManager purchasingmanagerCommodityExtendValueManager;
+	@Autowired
+	private PurchasingmanagerGenreManager purchasingmanagerGenreManager;
 	
 	
     /**
@@ -164,46 +166,48 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
      * 根据预约类型不同生成相应的招商预约记录
      */
 	@EsbServiceMapping
-    public List<Record> getRecordsByRecordType(
-       @ServiceParam(name="recordType") String recordType) throws BusException{
-    	List<Record> recordList=new ArrayList<Record>();
-    	   if(recordType.equals("01")){//01:众创空间，查询商品表基础信息
-    		   List<PurchasingmanagerCommodity> purchasingmanagerCommodityList=purchasingmanagerCommodityManager.getPurchasingmanagerCommoditys();
-    		   for(PurchasingmanagerCommodity p:purchasingmanagerCommodityList){
-    			   //根据商品id实体查询商品扩展属性值表
-    			    Collection<Condition> conditions = new ArrayList<Condition>();
-    			    Collection<Order> orders = new ArrayList<Order>();
-//    				conditions.add(ConditionUtils.getCondition("purchasingmanagerCommodity", Condition.EQUALS,
-//    						p));
-//    			   List<PurchasingmanagerCommodityExtendValue> commodityExtendValueList=purchasingmanagerCommodityExtendValueManager.getPurchasingmanagerCommodityExtendValues(conditions, orders);
-//    			   
-//    			   for(PurchasingmanagerCommodityExtendValue value:commodityExtendValueList){
-//    				   Record record = new Record();
-//    				   record.put("commodityId", value.getCommodityExtendValueId());
-//        			   record.put("commodityName", value.getCommodityExtendValueDisplayContent());
-//        			   recordList.add(record);
-//    			   }
-    			   
-    		   }
-    		  
-    	   }else if(recordType.equals("02")){//02:虚拟空间，查询单元表基础信息
-    		   List<BbmRoom> bbmRoomsList=bbmRoomManager.getBbmRooms();
-    		   for(BbmRoom b:bbmRoomsList){
-    			   Record record = new Record();
-    			   record.put("commodityId", b.getRoomId());
-    			   record.put("commodityName", b.getRoomNo());
-    			   recordList.add(record);
-    		   }
-    	   }else{
-    		   List<Codeitem> list = codeItemDao.getList(new String[] {"codemap.code", "itemValue" }, new Object[] {
-   					"recordType", recordType});// 预约类型
-               Record record = new Record();
- 			   record.put("commodityId", list.get(0).getItemCaption());
- 			   record.put("commodityName", list.get(0).getItemCaption());
- 			   recordList.add(record);
-    	   }
-        	return recordList;
-        }
+	public List<Record> getRecordsByRecordType(@ServiceParam(name="recordType") String recordType) throws BusException{
+		List<Record> recordList=new ArrayList<Record>();
+		if(recordType.equals("04")){//04:众创空间，查询商品表基础信息
+			Collection<Condition> conditions = new ArrayList<Condition>();
+			Collection<Order> orders = new ArrayList<Order>();
+			conditions.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS, "04"));
+			// 查询属于众创空间的商品：genreCode=04
+			List<PurchasingmanagerGenre> purchasingmanagerGenreList=purchasingmanagerGenreManager.getPurchasingmanagerGenres(conditions, orders);
+			String genreId="";
+			if(purchasingmanagerGenreList.size()>0){
+				genreId = purchasingmanagerGenreList.get(0).getGenreId();
+			}
+			if(StringUtils.isNotEmpty(genreId)){
+				// 查询众创空间下包含的商品
+				List<PurchasingmanagerCommodity> commodityList = purchasingmanagerCommodityManager.getCommodityRecordsByGenreId(genreId);
+				for(PurchasingmanagerCommodity pc:commodityList){
+					Record record = new Record();
+					record.put("commodityId", pc.getCommodityId());
+					record.put("commodityName", pc.getCommodityTitle());
+					recordList.add(record);
+				}
+			}
+
+		}else if(recordType.equals("02")){//02:虚拟空间，查询单元表基础信息
+			List<BbmRoom> bbmRoomsList=bbmRoomManager.getBbmRooms();
+			for(BbmRoom b:bbmRoomsList){
+				Record record = new Record();
+				record.put("commodityId", b.getRoomId());
+				record.put("commodityName", b.getRoomNo());
+				recordList.add(record);
+			}
+		}else{
+			//其他预约类型
+			List<Codeitem> list = codeItemDao.getList(new String[] {"codemap.code", "itemValue" }, new Object[] {
+					"recordType", recordType});// 预约类型
+			Record record = new Record();
+			record.put("commodityId", list.get(0).getItemCaption());
+			record.put("commodityName", list.get(0).getItemCaption());
+			recordList.add(record);
+		}
+		return recordList;
+	}
 	
 	
 	/**

@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
-			<youi:grid id="grid_propertyservicemanagerEntering" idKeys="enteringId" caption="可办理预约记录列表"  panel="false"
+	<youi:grid id="grid_propertyservicemanagerEntering" idKeys="enteringId" caption="可办理预约记录列表"  panel="false"
 				src="esb/web/propertyservicemanagerEnteringManager/getPagerPropertyservicemanagerEnterings.json" dataFormId="form_propertyservicemanagerEntering"
 				editSrc="esb/web/propertyservicemanagerEnteringManager/getPropertyservicemanagerEntering.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/propertyservicemanagerEnteringManager/removePropertyservicemanagerEntering.json">
@@ -33,14 +33,22 @@
 			<youi:fieldCalendar property="enteringDate"  caption="预约时间日期" textFormat="yyyy-MM-dd" format="yyyy-MM-dd" notNull="true"/>
 			<youi:fieldSelect property="enteringTime"  caption="预约时间段" convert="enteringTime" notNull="true"/>
 			<youi:fieldText property="enteringSum"  caption="预约总量" expression="^[0-9]*$" expressionMessage="请输入数值" notNull="true"/>
-			<youi:fieldText property="enteringRemain"  caption="剩余数量" expression="^[0-9]*$" expressionMessage="请输入数值" notNull="true"/>
-			<youi:fieldText property="enteringAlre"  caption="已预约数" expression="^[0-9]*$" expressionMessage="请输入数值" notNull="true"/>
+			<youi:fieldLabel property="enteringRemain"  caption="剩余数量" />
+			<youi:fieldLabel property="enteringAlre"  caption="已预约数" />
 			<youi:fieldHidden property="enteringId"  caption="预约记录ID"/>
 			<youi:fieldHidden property="enteringStatus"  caption="可预约状态"/>
 			
 		</youi:fieldLayout>
 	</youi:form>
-	<!--**********************************页面函数Start********************************-->
-	
-	<!--**********************************页面函数End**********************************-->
+	   <!--**********************************页面函数Start:初次新增预约时，只需填预约总量，剩余数量和已预约数量默认********************************-->
+	<youi:func name = "record_enteringSum_change">
+      		var enteringId = $('#P_'+pageId+'_record_enteringId').fieldValue();
+            var enteringSum = $('#P_'+pageId+'_record_enteringSum').fieldValue();
+            if(enteringId =="" || enteringId ==null){
+               $('#P_'+pageId+'_record_enteringRemain').fieldValue(enteringSum);
+                $('#P_'+pageId+'_record_enteringAlre').fieldValue(0);
+           }
+
+    </youi:func>
+    <!--**********************************页面函数End:初次新增预约时，只需填预约总量，剩余数量和已预约数量默认********************************-->
 </youi:page>

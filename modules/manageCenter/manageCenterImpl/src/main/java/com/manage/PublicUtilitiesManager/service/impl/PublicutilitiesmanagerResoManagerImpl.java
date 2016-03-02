@@ -23,6 +23,8 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.PublicUtilitiesManager.entity.PublicutilitiesmanagerReso;
 import com.manage.PublicUtilitiesManager.dao.PublicutilitiesmanagerResoDao;
@@ -76,17 +78,57 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
     public PublicutilitiesmanagerReso savePublicutilitiesmanagerReso(PublicutilitiesmanagerReso o) throws BusException{
-//    	String publicutilitiesmanagerResoId = o.getPublicutilitiesmanagerResoId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(publicutilitiesmanagerResoId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	o.setResoStatus("01");//01:可用
-    	return publicutilitiesmanagerResoDao.save(o);
+    	String resoId = o.getResoId();
+    	boolean isUpdate = StringUtils.isNotEmpty(resoId);
+    	//获取商品信息
+    	String commodityId=o.getCommodityId().getCommodityId();
+		PurchasingmanagerCommodity pc=purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
+    	if(isUpdate){//修改
+    		PublicutilitiesmanagerReso pr = publicutilitiesmanagerResoDao.get(resoId); 
+    		pr.setCommodityId(pc);
+    		pr.setResoDate(o.getResoDate());
+    		pr.setResoTime(o.getResoTime());
+    		pr.setUpdateUser(o.getUpdateUser());
+    		pr.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return publicutilitiesmanagerResoDao.save(o);
+    	}else{//新增
+    		o.setResoStatus("01");//01:可用
+    		o.setCommodityId(pc);
+    		o.setCreateUser(o.getUpdateUser());
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return publicutilitiesmanagerResoDao.save(o);
+    	}
+    	
+    }
+    
+    /**
+     *前台页面：用户预约公共资源,保存对象
+     */
+    @EsbServiceMapping
+    public List<PublicutilitiesmanagerReso> savePublicutilitiesmanagerResoList(List<PublicutilitiesmanagerReso> o) throws BusException{
+    	String resoId = "";
+    	List<PublicutilitiesmanagerReso> resoList=new ArrayList<PublicutilitiesmanagerReso>();
+    	for(PublicutilitiesmanagerReso pr:o){
+    		resoId = pr.getResoId();
+    		boolean isUpdate = StringUtils.isNotEmpty(resoId);
+        	if(isUpdate){//修改
+        		//根据主键Id查询公共资源信息
+        		PublicutilitiesmanagerReso preso=publicutilitiesmanagerResoDao.get(resoId);
+        		preso.setResoStatus("02");//更新状态：02---已预约
+        		PublicutilitiesmanagerReso reso=publicutilitiesmanagerResoDao.save(preso);
+        		resoList.add(reso);
+        	}else{//新增
+        		pr.setResoStatus("02");//更新状态：02---已预约
+        		PublicutilitiesmanagerReso reso=publicutilitiesmanagerResoDao.save(pr);//生成新的公共资源信息
+        		resoList.add(reso);
+        	}
+    	}
+    	
+    	
+    	return resoList;
     }
 
     /**
