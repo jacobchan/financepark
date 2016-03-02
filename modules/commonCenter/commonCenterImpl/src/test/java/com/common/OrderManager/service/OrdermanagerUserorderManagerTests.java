@@ -29,6 +29,6 @@ public class OrdermanagerUserorderManagerTests extends AbstractJUnit4SpringConte
     public void testSaveOrdermanagerUserorder(){
     	OrdermanagerUserorder purOrder = new OrdermanagerUserorder();
     	purOrder.setUserorderAmount(BigDecimal.valueOf(10000));
-    	ordermanagerUserorderManager.savePurOrdermanager(purOrder);
+//    	ordermanagerUserorderManager.savePurOrdermanager(purOrder);
     }
 }
