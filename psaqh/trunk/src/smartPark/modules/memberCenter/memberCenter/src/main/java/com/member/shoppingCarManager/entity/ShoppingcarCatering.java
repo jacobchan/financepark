@@ -8,7 +8,7 @@ import javax.persistence.*;
 import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import com.common.MemberManager.entity.MemberInformation;
+import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: -餐饮购物车
@@ -35,7 +35,7 @@ public class ShoppingcarCatering implements Domain{
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="COMMODITY_ID_")
-	private MemberInformation commodityId;//商品ID
+	private PurchasingmanagerCommodity commodityId;//商品ID
 	
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
@@ -81,11 +81,11 @@ public class ShoppingcarCatering implements Domain{
 		this.updateUser = updateUser;
 	}
 	
-	public MemberInformation getCommodityId() {
+	public PurchasingmanagerCommodity getCommodityId() {
 		return commodityId;
 	}
 
-	public void setCommodityId(MemberInformation commodityId) {
+	public void setCommodityId(PurchasingmanagerCommodity commodityId) {
 		this.commodityId = commodityId;
 	}
 
