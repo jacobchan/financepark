@@ -48,7 +48,7 @@ public class ActivityApplylist implements Domain{
 	@Length(max=36)
 	private String updateUser;//修改人
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="APPLY_ID_")
 	private com.manage.ActivityManager.entity.ActivityApply activityApply;//活动申请ID
 	
