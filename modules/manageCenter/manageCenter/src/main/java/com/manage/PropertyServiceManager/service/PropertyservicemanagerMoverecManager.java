@@ -63,4 +63,10 @@ public interface PropertyservicemanagerMoverecManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitPropertyservicemanagerMoverec(String propertyName,Object value) throws BusException;
+	/**
+	 *  根据申请记录id审批
+	 * @param id 搬家申请记录id
+	 * @throws BusException
+	 */
+	public void upMovById(String id) throws BusException;
 }

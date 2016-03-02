@@ -70,4 +70,10 @@ public interface PropertyservicemanagerFxtdcManager extends BaseManager{
 	 * @return
 	 */
 	public PropertyservicemanagerFxtdc getFxtdcByMoverec(PropertyservicemanagerMoverec moverec) ;
+	/**
+	 * 通过二维码记录id改变二维码状态
+	 * @param id
+	 * @throws BusException
+	 */
+	public void upfxtdById(String id) throws BusException;
 }
