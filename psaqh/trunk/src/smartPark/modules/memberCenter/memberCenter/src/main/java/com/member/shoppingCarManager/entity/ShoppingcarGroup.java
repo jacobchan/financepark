@@ -24,11 +24,11 @@ public class ShoppingcarGroup implements Domain{
 
 	@Column(name = "COMPANY_CATERING_AMOUNT_")
 	@Length(max=16)
-	private String companyCateringAmount;//餐饮数量
+	private String companyCateringAmount;//商品数量
 
 	@Column(name = "COMPANY_CATERING_UNIVALENCE_")
 	@Length(max=16)
-	private String companyCateringUnivalence;//餐饮单价
+	private String companyCateringUnivalence;//商品单价
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "COMPANY_GROUP_ID_")
