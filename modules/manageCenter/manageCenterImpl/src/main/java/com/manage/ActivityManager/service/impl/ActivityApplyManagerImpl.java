@@ -28,9 +28,13 @@ import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 
 import com.manage.ActivityManager.entity.ActivityApply;
 import com.manage.ActivityManager.entity.ActivityApplylist;
+import com.manage.ActivityManager.entity.ActivityComment;
+import com.manage.ActivityManager.entity.ActivityDocument;
 import com.manage.ActivityManager.dao.ActivityApplyDao;
 import com.manage.ActivityManager.service.ActivityApplyManager;
 import com.manage.ActivityManager.service.ActivityApplylistManager;
+import com.manage.ActivityManager.service.ActivityCommentManager;
+import com.manage.ActivityManager.service.ActivityDocumentManager;
 
 @Service("activityApplyManager")
 @Transactional
@@ -41,6 +45,10 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
 	private ActivityApplylistManager activityApplylistManager;
 	@Autowired
 	private MemberInformationManager memberInformationManager;
+	@Autowired
+	private ActivityCommentManager activityCommentManager;
+	@Autowired
+	private ActivityDocumentManager activityDocumentManager;
     /**
      * 查询列表
      */
@@ -164,6 +172,37 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     		members.add(memberInformationManager.getMemberInformation(memberId));
     	}
 		return members;
+	}
+    /**
+     * 根据活动主键查询评论
+     * 
+     */ 
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+	public List<ActivityComment> getPublishActivityComments(ActivityApply o)
+			throws BusException {
+		// TODO Auto-generated method stub
+    	//获取活动评论的list
+    	Collection<Condition> condition = new ArrayList<Condition>();
+    	condition.add(ConditionUtils.getCondition("activityApply.applyId", Condition.EQUALS,o.getApplyId()));
+    	Collection<Order> orders = new ArrayList<Order>();
+    	orders.add(ConditionUtils.getOrder("createTime", false));
+    	List<ActivityComment> activityComments=activityCommentManager.getActivityComments(condition, orders);
+		return activityComments;
+	}
+    /**
+     * 根据活动主键查询文档
+     * 
+     */   
+    @EsbServiceMapping
+	public List<ActivityDocument> getPublishActivityDocuments(ActivityApply o)
+			throws BusException {
+		// TODO Auto-generated method stub
+    	Collection<Condition> condition = new ArrayList<Condition>();
+    	condition.add(ConditionUtils.getCondition("activityApply.applyId", Condition.EQUALS,o.getApplyId()));
+    	Collection<Order> orders = new ArrayList<Order>();
+    	orders.add(ConditionUtils.getOrder("createTime", false));
+    	List<ActivityDocument> activityDocuments=activityDocumentManager.getActivityDocuments(condition, orders);
+		return activityDocuments;
 	}
 
 }
