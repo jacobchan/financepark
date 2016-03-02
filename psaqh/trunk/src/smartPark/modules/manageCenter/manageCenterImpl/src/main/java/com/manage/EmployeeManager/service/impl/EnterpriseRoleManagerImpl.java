@@ -78,6 +78,7 @@ public class EnterpriseRoleManagerImpl extends BaseManagerImpl implements
 			throws BusException {
 		//根据会员填写的手机号码查询此会员是否存在
 		MemberInformation info = memberInformationDao.getObjectByUniqueProperty("memberPhoneNumber", "18062038519");
+		o.setEmployees(o.getEmployees());
 		o.setCreateuser(info);
 		o.setCreatetime(new Timestamp(new Date().getTime()));
 		o.setUpdateuser(info);
