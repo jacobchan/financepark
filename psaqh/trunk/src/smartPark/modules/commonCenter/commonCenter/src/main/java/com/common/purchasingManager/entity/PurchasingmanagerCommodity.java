@@ -95,7 +95,7 @@ public class PurchasingmanagerCommodity implements Domain{
 	@Length(max=256)
 	private String commodityCoverImage;//封面图片
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="GENRE_ID_")
 	private com.common.purchasingManager.entity.PurchasingmanagerGenre purchasingmanagerGenre;//商品类别ID
 	

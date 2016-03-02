@@ -4,8 +4,8 @@
 package com.common.OrderManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
@@ -28,10 +28,6 @@ public class OrdermanagerOrderprojecttypeValue implements Domain{
 	@Column(name = "ORDERPROJECTTYPE_VALUE_DISPLAY_NAME_")
 	@Length(max=128)
 	private String orderprojecttypeValueDisplayName;//显示名称
-
-	@Column(name = "GENRE_PROPERTY_ID_")
-	@Length(max=36)
-	private String genrePropertyId;//商品类别属性序列
 
 	@Column(name = "CREATE_TIME_")
 	private String createTime;//创建时间
@@ -60,6 +56,15 @@ public class OrdermanagerOrderprojecttypeValue implements Domain{
     @JoinColumn(name="USERORDER_ID_")
 	private com.common.OrderManager.entity.OrdermanagerUserorder ordermanagerUserorder;//用户订单序列
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="GENRE_PROPERTY_ID_")
+	private com.common.purchasingManager.entity.PurchasingmanagerGenreProperty genrePropertyId;//商品类别属性序列
+	
+	public void setGenrePropertyId(
+			com.common.purchasingManager.entity.PurchasingmanagerGenreProperty genrePropertyId) {
+		this.genrePropertyId = genrePropertyId;
+	}
+
 	public String getUpdateTime(){
 		return this.updateTime;
 	}
@@ -73,13 +78,6 @@ public class OrdermanagerOrderprojecttypeValue implements Domain{
 	
 	public void setOrderprojecttypeValueDisplayName(String orderprojecttypeValueDisplayName){
 		this.orderprojecttypeValueDisplayName = orderprojecttypeValueDisplayName;
-	}
-	public String getGenrePropertyId(){
-		return this.genrePropertyId;
-	}
-	
-	public void setGenrePropertyId(String genrePropertyId){
-		this.genrePropertyId = genrePropertyId;
 	}
 	public String getCreateTime(){
 		return this.createTime;

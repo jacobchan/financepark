@@ -4,12 +4,14 @@
 package com.common.OrderManager.entity;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.*;
 
 import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: 用户订单表
@@ -45,9 +47,9 @@ public class OrdermanagerUserorder implements Domain{
 	@Column(name = "UPDATE_TIME_")
 	private String updateTime;//修改时间
 
-	@Column(name = "GENRE_ID_")
-	@Length(max=36)
-	private String genreId;//商品类别ID
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="GENRE_ID_")
+	private PurchasingmanagerGenre genreId;//商品类别ID
 
 	@Column(name = "USERORDER_BUY_USER_")
 	@Length(max=64)
@@ -86,6 +88,27 @@ public class OrdermanagerUserorder implements Domain{
 	@Length(max=256)
 	private String userorderAdr;//发货地址
 	
+	private List<OrdermanagerCommoditydetail> orderDetailList;//订单明细列表
+	
+	private List<OrdermanagerOrderprojecttypeValue> orderExtendList;//扩展属性列表
+	
+	public List<OrdermanagerCommoditydetail> getOrderDetailList() {
+		return orderDetailList;
+	}
+
+	public void setOrderDetailList(List<OrdermanagerCommoditydetail> orderDetailList) {
+		this.orderDetailList = orderDetailList;
+	}
+
+	public List<OrdermanagerOrderprojecttypeValue> getOrderExtendList() {
+		return orderExtendList;
+	}
+
+	public void setOrderExtendList(
+			List<OrdermanagerOrderprojecttypeValue> orderExtendList) {
+		this.orderExtendList = orderExtendList;
+	}
+
 	public String getCreateTime(){
 		return this.createTime;
 	}
@@ -129,13 +152,15 @@ public class OrdermanagerUserorder implements Domain{
 	public void setUpdateTime(String updateTime){
 		this.updateTime = updateTime;
 	}
-	public String getGenreId(){
-		return this.genreId;
-	}
 	
-	public void setGenreId(String genreId){
+	public PurchasingmanagerGenre getGenreId() {
+		return genreId;
+	}
+
+	public void setGenreId(PurchasingmanagerGenre genreId) {
 		this.genreId = genreId;
 	}
+
 	public String getUserorderBuyUser(){
 		return this.userorderBuyUser;
 	}

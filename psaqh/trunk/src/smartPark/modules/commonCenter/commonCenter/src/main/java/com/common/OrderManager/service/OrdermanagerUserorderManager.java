@@ -12,7 +12,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 
 public interface OrdermanagerUserorderManager extends BaseManager{
@@ -63,32 +62,13 @@ public interface OrdermanagerUserorderManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitOrdermanagerUserorder(String propertyName,Object value) throws BusException;
-	
-	  /**
-     * 更新状态
-     */
-    public void updateUserorderStatus(String id,String userorderStatus) throws BusException;
-    /**
-     * 保存或修改采购订单
-     * @param o
-     * @return
-     * @throws BusException
-     */
-    public OrdermanagerUserorder savePurOrdermanager(OrdermanagerUserorder o) throws BusException;
-    /**
-     * 保存或修改餐饮订单
-     * @param o
-     * @return
-     * @throws BusException
-     */
-	public OrdermanagerUserorder saveFoodOrdermanager(OrdermanagerUserorder o) throws BusException;
 	/**
-	 * 保存或修改IT服务订单
-	 * @param o
+	 * 根据订单ID获取订单详情
+	 * @param userorderId
 	 * @return
 	 * @throws BusException
 	 */
-	public OrdermanagerUserorder saveITSerOrderMg(OrdermanagerUserorder o) throws BusException;
+	public OrdermanagerUserorder getOrder(String userorderId) throws BusException;
 	/**
 	 * 获取企业服务订单列表
 	 * @param pager
@@ -98,12 +78,5 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public PagerRecords getPagerComSerOrders(Pager pager,
-			Collection<Condition> conditions, Collection<Order> orders)throws BusException;
-	/**
-	 * 保存或修改企业服务订单
-	 * @param o
-	 * @return
-	 * @throws BusException
-	 */
-	public OrdermanagerUserorder saveCompSerOrderMg(OrdermanagerUserorder o) throws BusException;
+			Collection<Condition> conditions, Collection<Order> orders) throws BusException;
 }
