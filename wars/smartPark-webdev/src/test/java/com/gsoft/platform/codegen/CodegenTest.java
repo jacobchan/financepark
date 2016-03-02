@@ -15,6 +15,7 @@ public class CodegenTest {
 
     public static void main(String[] args) {
             String tablePrefix = "sp";
+            //配置PDM路径
             Document doc = Dom4jUtils.saxParse("/Users/jack/Project/SVNReponstory/psaqh/trunk/doc/02_设计/PDM/SmartPark_PDM.pdm");
             // TODO Auto-generated method stub
             Pdm2ModelXml pdm2ModelXml = new Pdm2ModelXml(doc,tablePrefix);
@@ -27,6 +28,7 @@ public class CodegenTest {
             
             GenerateConfig config = new GenerateConfig();
             
+            //设置生产代码保存路径
             config.setSourceHome("/Users/jack/Project/SVNReponstory/psaqh/trunk/doc/generatorCode/smartPark");
             
             String[] commonBuff = new String[]{"BuildingBaseManager",
