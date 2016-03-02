@@ -19,8 +19,6 @@ import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.common.MemberManager.dao.MemberInformationDao;
-import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
-import com.common.OrderManager.entity.OrdermanagerOrderprojecttypeValue;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.common.OrderManager.dao.OrdermanagerCommoditydetailDao;
 import com.common.OrderManager.dao.OrdermanagerOrderprojecttypeValueDao;
@@ -109,19 +107,6 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     
     public boolean exsitOrdermanagerUserorder(String propertyName,Object value) throws BusException{
 		return ordermanagerUserorderDao.exists(propertyName,value);
-	}
-    /**
-     * 根据订单ID获取订单详情
-     */
-    @Override
-    @EsbServiceMapping
-	public OrdermanagerUserorder getOrder(@ServiceParam(name="userorderId") String userorderId) throws BusException {
-		OrdermanagerUserorder order = ordermanagerUserorderDao.get(userorderId);
-		List<OrdermanagerCommoditydetail> orderDetailList = ordermanagerCommoditydetailDao.getList("ordermanagerUserorder.userorderId", userorderId);
-		order.setOrderDetailList(orderDetailList);
-		List<OrdermanagerOrderprojecttypeValue> orderExtendList = ordermanagerOrderprojecttypeValueDao.getList("ordermanagerUserorder.userorderId", userorderId);
-		order.setOrderExtendList(orderExtendList);
-		return order;
 	}
     /**
 	 * 获取企业服务订单列表
