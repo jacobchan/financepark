@@ -16,6 +16,8 @@ import com.gsoft.framework.core.service.BaseManager;
 
 import com.manage.ActivityManager.entity.ActivityApply;
 import com.manage.ActivityManager.entity.ActivityApplylist;
+import com.manage.ActivityManager.entity.ActivityComment;
+import com.manage.ActivityManager.entity.ActivityDocument;
 
 public interface ActivityApplyManager extends BaseManager{
 
@@ -80,4 +82,14 @@ public interface ActivityApplyManager extends BaseManager{
      * 
      */    
     public List<MemberInformation> getPublishActivityMembers(ActivityApply o) throws BusException;
+    /**
+     * 根据活动主键查询活动评价
+     * 
+     */    
+    public List<ActivityComment> getPublishActivityComments(ActivityApply o) throws BusException;
+    /**
+     * 根据活动主键查询文档
+     * 
+     */    
+    public List<ActivityDocument> getPublishActivityDocuments(ActivityApply o) throws BusException;
 }

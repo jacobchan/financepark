@@ -49,7 +49,7 @@ public class ActivityDocument implements Domain{
 	@Column(name = "CREATE_TIME_")
 	private String createTime;//创建时间
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="APPLY_ID_")
 	private com.manage.ActivityManager.entity.ActivityApply activityApply;//活动申请ID
 	

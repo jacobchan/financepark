@@ -52,7 +52,7 @@ public class ActivityComment implements Domain{
 	@Length(max=36)
 	private String commentId;//评论ID
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="APPLY_ID_")
 	private com.manage.ActivityManager.entity.ActivityApply activityApply;//活动申请ID
 	
