@@ -114,14 +114,14 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
     	for(PublicutilitiesmanagerReso pr:o){
     		resoId = pr.getResoId();
     		boolean isUpdate = StringUtils.isNotEmpty(resoId);
-        	if(isUpdate){//修改
+        	if(isUpdate){//修改,更新预约状态
         		//根据主键Id查询公共资源信息
         		PublicutilitiesmanagerReso preso=publicutilitiesmanagerResoDao.get(resoId);
         		preso.setResoStatus("02");//更新状态：02---已预约
         		PublicutilitiesmanagerReso reso=publicutilitiesmanagerResoDao.save(preso);
         		resoList.add(reso);
         	}else{//新增
-        		pr.setResoStatus("02");//更新状态：02---已预约
+        		pr.setResoStatus("02");//02---已预约
         		PublicutilitiesmanagerReso reso=publicutilitiesmanagerResoDao.save(pr);//生成新的公共资源信息
         		resoList.add(reso);
         	}
