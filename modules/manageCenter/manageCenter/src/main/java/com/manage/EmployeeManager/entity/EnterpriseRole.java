@@ -29,7 +29,7 @@ public class EnterpriseRole implements Domain {
 	@Length(max = 36)
 	private String rId;// 角色主键
 	
-	@ManyToOne(fetch=FetchType.EAGER,optional=true,cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.MERGE)
 	@JoinColumn(name = "EMPLOYEES_ID")
 	private EnterpriseEmployees employees;// 企业员工ID
 	
@@ -37,11 +37,11 @@ public class EnterpriseRole implements Domain {
 	@JoinColumn(name = "ROLEID")
 	private Role role;// 角色ID
 	
-	@ManyToOne(fetch = FetchType.EAGER,optional=true,cascade=CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.MERGE)
 	@JoinColumn(name = "CREATE_USER_")
 	private MemberInformation createuser;// 创建人
 	
-	@ManyToOne(fetch = FetchType.EAGER,optional=true,cascade=CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.MERGE)
 	@JoinColumn(name = "UPDATE_USER_")
 	private MemberInformation updateuser;// 修改人
 	
