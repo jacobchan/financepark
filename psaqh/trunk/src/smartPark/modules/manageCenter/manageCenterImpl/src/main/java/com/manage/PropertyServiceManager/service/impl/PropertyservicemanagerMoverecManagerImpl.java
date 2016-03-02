@@ -19,8 +19,10 @@ import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.utils.BizCodeUtil;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFxtdc;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerMoverec;
+import com.manage.PropertyServiceManager.dao.PropertyservicemanagerFxtdcDao;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerMoverecDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerFxtdcManager;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerMoverecManager;
@@ -69,23 +71,29 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
      */
     @EsbServiceMapping
     public PropertyservicemanagerMoverec savePropertyservicemanagerMoverec(PropertyservicemanagerMoverec o) throws BusException{
-    	String enName = o.getMoverecComp() ;//得到搬家企业名称
-    	if(StringUtils.isEmpty(enName)){
-    		throw new BusException("非企业用户没有权限申请！") ;
-    	}
-    	    	
-    	String propertyservicemanagerMoverecId = o.getMoverecId();//得到当前搬家申请的ID
-    	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerMoverecId);//为空表示新增，不为空表示修改
-    	PropertyservicemanagerMoverec rec = null ;
-    	if(isUpdate){//修改
-    		rec = propertyservicemanagerMoverecDao.save(o);
-    	}else{//新增
-    		rec = propertyservicemanagerMoverecDao.save(o);
-        	PropertyservicemanagerFxtdc propertyservicemanagerFxtdc = new PropertyservicemanagerFxtdc() ;//
-            propertyservicemanagerFxtdc.setPropertyservicemanagerMoverec(rec);
-            propertyservicemanagerFxtdcManager.savePropertyservicemanagerFxtdc(propertyservicemanagerFxtdc);//将搬家申请对应到二维码中
-    	}
-    	return rec;
+    	String propertyservicemanagerMoverecId = o.getMoverecId();
+    	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerMoverecId);
+   		if(isUpdate){//修改
+   			return propertyservicemanagerMoverecDao.save(o);
+   		}else{//新增
+   			String enName = o.getMoverecComp() ;//得到搬家企业名称
+   	    	if(StringUtils.isEmpty(enName)){
+   	    		throw new BusException("非企业用户没有权限申请！") ;
+   	    	}
+   	    	o.setMoverecStatus("00");
+   	    	//生成搬家发
+   	    	o.setMoverecCode(BizCodeUtil.getInstance().getBizCodeDate("MOV"));
+   	    	//保存并得到当前对象
+   	    	return  propertyservicemanagerMoverecDao.save(o);
+   	    	/*if(rec!=null){
+   	    		PropertyservicemanagerFxtdc propertyservicemanagerFxtdc = new PropertyservicemanagerFxtdc() ;
+   	        	propertyservicemanagerFxtdc.setPropertyservicemanagerMoverec(rec);
+   	        	propertyservicemanagerFxtdcManager.savePropertyservicemanagerFxtdc(propertyservicemanagerFxtdc);
+   	        	return rec;
+   	    	}else{
+   	    		return null;
+   	    	}*/
+   		}
     }
 
     /**
@@ -117,5 +125,27 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
     public boolean exsitPropertyservicemanagerMoverec(String propertyName,Object value) throws BusException{
 		return propertyservicemanagerMoverecDao.exists(propertyName,value);
 	}
+    
+    /**
+	 *  根据申请记录id审批
+	 * @param id 搬家申请记录id
+	 * @throws BusException
+	 */
+	@EsbServiceMapping
+	public void upMovById(@ServiceParam(name="id") String id) throws BusException {
+		PropertyservicemanagerMoverec moverec = propertyservicemanagerMoverecDao.get(id) ;//得到搬家申请记录
+		
+		if(moverec!=null){
+				moverec.setMoverecStatus("01");
+	    		PropertyservicemanagerFxtdc propertyservicemanagerFxtdc = new PropertyservicemanagerFxtdc() ;
+	    		//设置搬家二维码状态为有效
+	    		propertyservicemanagerFxtdc.setFxtdcStatus("00");
+	        	propertyservicemanagerFxtdc.setPropertyservicemanagerMoverec(moverec);
+	        	propertyservicemanagerFxtdcManager.savePropertyservicemanagerFxtdc(propertyservicemanagerFxtdc);
+	    	}else{
+	    		throw new BusException("未找到记录!");
+	    	}
+		}
 
+    
 }

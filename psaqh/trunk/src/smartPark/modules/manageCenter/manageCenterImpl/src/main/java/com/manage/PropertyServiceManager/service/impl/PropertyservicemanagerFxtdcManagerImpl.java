@@ -17,6 +17,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFxtdc;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerMoverec;
@@ -105,6 +106,28 @@ public class PropertyservicemanagerFxtdcManagerImpl extends BaseManagerImpl impl
 			PropertyservicemanagerMoverec moverec) {
 		PropertyservicemanagerFxtdc fxtdc = propertyservicemanagerFxtdcDao.getObjectByUniqueProperty("propertyservicemanagerMoverec", moverec) ;
 		return fxtdc;
+	}
+	/**
+	 * 通过二维码记录id改变二维码状态
+	 * @param id
+	 * @throws BusException
+	 */
+	@EsbServiceMapping
+	public void upfxtdById(@ServiceParam(name="id") String id) throws BusException {
+		PropertyservicemanagerFxtdc fxtdc = propertyservicemanagerFxtdcDao.get(id);
+		//搬家申请有效时间
+		String fxdate = fxtdc.getPropertyservicemanagerMoverec().getMoverecTime();
+		String today = DateUtils.getToday("yyyy-MM-dd");
+		if(fxdate.compareTo(today)>0){
+			throw new BusException("搬家申请时间为"+fxdate);
+		}else if(fxdate.compareTo(today)<0){
+			fxtdc.setFxtdcStatus("01");
+			propertyservicemanagerFxtdcDao.save(fxtdc);
+			throw new BusException("二维码已过期!");
+		}else{
+			fxtdc.setFxtdcStatus("01");
+			propertyservicemanagerFxtdcDao.save(fxtdc);
+		}
 	}
 	
 
