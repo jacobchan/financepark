@@ -98,6 +98,8 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
     		throw new BusException("不能删除急速采购类别！");
     	}else if("02".equals(pg.getGenreCode())){
     		throw new BusException("不能删除餐饮类别！");
+    	}else if("06".equals(pg.getGenreCode())){
+    		throw new BusException("不能删除IT服务类别！");
     	}else{
     		purchasingmanagerGenreDao.remove(id);
     	}
@@ -121,7 +123,7 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
 		return purchasingmanagerGenreDao.exists(propertyName,value);
 	}
 	/**
-	 * 获取所有的采购餐饮类别列表
+	 * 获取所有的采购、餐饮、IT服务类别列表
 	 */
 	@Override
 	public List<PurchasingmanagerGenre> getPurFoodGenres() throws BusException {
