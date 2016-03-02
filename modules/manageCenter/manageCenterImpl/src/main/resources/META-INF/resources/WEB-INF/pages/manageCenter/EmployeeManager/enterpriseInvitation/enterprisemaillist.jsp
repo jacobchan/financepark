@@ -26,7 +26,7 @@
 
 	<!-- form-分配角色 -->
 	<youi:form dialog="true" caption="分配角色" id="form_enterprisemaillist"
-		action="esb/web/enterpriseRoleManager/saveEnterpriseRole.json">
+		action="esb/web/enterpriseRoleManager/saveEnterpriseRole.json" width="600">
 		<youi:fieldLayout prefix="record" columns="1" labelWidths="120,120">
 			<youi:fieldHidden property="rId" caption="编号" />
 			<youi:fieldHidden property="employees.employeesId" caption="员工编号" />
