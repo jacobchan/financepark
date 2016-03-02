@@ -165,60 +165,60 @@
             </div>
             <table class="layout_table">
             	<tr>
-                	<td>
+                	<td class="cp_info">
                     	<a class="tc" href="javascript:;">
                             <div class="cp"><img src="styles/images/index/cp1.jpg"/></div>
-                            <div class="cp_info">
+                          
                             	小米多功能电脑包
                                 <p class="cc">&yen;199</p>
-                            </div>
+                            
                         </a>
                     </td>
-                    <td>
+                    <td class="cp_info">
                     	<a class="tc" href="javascript:;">
                             <div class="cp"><img src="styles/images/index/cp2.jpg"/></div>
-                            <div class="cp_info">
+                            
                             	小米多功能电脑包
                                 <p class="cc">&yen;199</p>
-                            </div>
+                            
                         </a>
                     </td>
-                    <td>
+                    <td class="cp_info">
                     	<a class="tc" href="javascript:;">
                             <div class="cp"><img src="styles/images/index/cp3.jpg"/></div>
-                            <div class="cp_info">
+                            
                             	小米多功能电脑包
                                 <p class="cc">&yen;199</p>
-                            </div>
+                            
                         </a>
                     </td>
                 </tr>
                 <tr>
-                	<td>
+                	<td class="cp_info">
                     	<a class="tc" href="javascript:;">
                             <div class="cp"><img src="styles/images/index/cp4.jpg"/></div>
-                            <div class="cp_info">
+                            
                             	小米多功能电脑包
                                 <p class="cc">&yen;99</p>
-                            </div>
+                            
                         </a>
                     </td>
-                    <td>
+                    <td class="cp_info">
                     	<a class="tc" href="javascript:;">
                             <div class="cp"><img src="styles/images/index/cp5.jpg"/></div>
-                            <div class="cp_info">
+                            
                             	小米多功能电脑包
                                 <p class="cc">&yen;19</p>
-                            </div>
+                            
                         </a>
                     </td>
-                    <td>
+                    <td class="cp_info">
                     	<a class="tc" href="javascript:;">
                             <div class="cp"><img src="styles/images/index/cp6.jpg"/></div>
-                            <div class="cp_info">
+                            
                             	小米多功能电脑包
                                 <p class="cc">&yen;89</p>
-                            </div>
+                            
                         </a>
                     </td>
                 </tr>
@@ -589,7 +589,7 @@
 	<script type="text/javascript">
 		$(function(){
 			$('.cp_info').plist({
-				template:'{goodsName}<p class="cc">&yen;{price}</p>',
+				template:'<a class="tc" href=xq?id={commodityId}.html><div class="cp"><img src={commodityImage}></div>{commodityTitle}<p class="cc">&yen;{commodityPrice}</p></a>',
 				jsonpSrc:'http://localhost:9088/jsonp/data.jsp?data:file=test.json'
 			});
 		});
