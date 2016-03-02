@@ -9,17 +9,17 @@
 		edit="NOT" remove="NOT" add="NOT" showCheckbox="false"
 		removeSrc="esb/web/enterpriseEmployeesManager/removeEnterpriseEmployees.json">
 		<youi:fieldLayout columns="3" labelWidths="120,120,120">
-			<youi:fieldSelect property="employeesComId.rzId"
+			<youi:fieldSelect property="rz.rzId"
 				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json"
 				code="rzId" show="rzMem" caption="入驻企业" tooltips="入驻企业" />
 			<youi:fieldText property="invitationTelephone" caption="会员电话" />
 			<youi:fieldText property="invitationCode" caption="企业邀请码" />
 		</youi:fieldLayout>
 		<youi:button name="distribution" caption="分配角色" icon="search" active="1" />
-		<youi:gridCol property="memberId.memberNickname" caption="会员用户" width="20%" />
+		<youi:gridCol property="member.memberNickname" caption="会员用户" width="20%" />
 		<youi:gridCol property="employeesName" caption="员工姓名" width="20%" />
 		<youi:gridCol property="employeesTelephone" caption="员工电话" width="20%" />
-		<youi:gridCol property="employeesComId.rzMem" caption="企业信息" width="20%" />
+		<youi:gridCol property="rz.rzMem" caption="企业信息" width="20%" />
 		<youi:gridCol property="roleId" renderer="renderer_roleId" caption="角色" width="20%" />
 		<youi:gridCol property="employeesId" caption="企业编号" width="0" />
 	</youi:grid>
