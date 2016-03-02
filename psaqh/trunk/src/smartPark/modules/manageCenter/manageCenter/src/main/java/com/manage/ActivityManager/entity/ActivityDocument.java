@@ -47,7 +47,7 @@ public class ActivityDocument implements Domain{
 	private String createUser;//创建人
 
 	@Column(name = "CREATE_TIME_")
-	private String createTime;//创建时间
+	private String createTime;//创建时间1
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="APPLY_ID_")
