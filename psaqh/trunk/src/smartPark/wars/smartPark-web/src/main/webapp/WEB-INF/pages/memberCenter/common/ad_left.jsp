@@ -8,7 +8,7 @@
 			<dd><a href="grzx2.html">订单中心</a></dd>
 			<dd><a href="grzx3.html">安全中心</a></dd>
 			<dd><a href="grzx4.html">消息</a></dd>
-			<dd><a href="grzx5.html">企业通讯录</a></dd>
+			<dd><a href="addressBook.html">企业通讯录</a></dd>
 			<dd><a href="grzx6.html">一卡通绑定</a></dd>
 			<dd><a href="grzx7.html">我的地址</a></dd>
 			<dd><a href="grzx14.html">我的预约</a></dd>
