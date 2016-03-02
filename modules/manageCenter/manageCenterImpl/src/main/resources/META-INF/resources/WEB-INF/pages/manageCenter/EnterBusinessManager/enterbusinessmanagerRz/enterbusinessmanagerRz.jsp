@@ -8,7 +8,7 @@
 		<youi:fieldLayout>
 			<youi:fieldSelect property="rzManager.memberId"  caption="企业管理员" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
 			<youi:fieldText property="rzName"  caption="企业名称"/>
-			<youi:fieldCalendar property="rzDate"  caption="入驻时间"/>			
+			<youi:fieldCalendar property="rzDate"  caption="入驻时间" format="yyyy-MM-dd" textFormat="yyyy-MM-dd"/>			
 			<youi:fieldSelect property="parkId"  caption="园区ID" src="esb/web/bbmParkManager/getBbmParks.json" code="parkId" show="parkName"/>
 			<youi:fieldSelect property="buildingId"  caption="楼栋ID" src="esb/web/bbmBuildingManager/getBbmBuildings.json" 
 								code="buildingId" show="buildingNo" parents="parkId" parentsAlias="parkId"/> 
@@ -33,11 +33,12 @@
 	<!-- form-入驻企业基本信息编辑 -->
 	<youi:form dialog="true" caption="入驻企业基本信息" id="form_enterbusinessmanagerRz" action="esb/web/enterbusinessmanagerRzManager/saveEnterbusinessmanagerRz.json">
 		<youi:fieldLayout prefix="record" labelWidths="100,100">
-			<youi:fieldHidden property="rzId"  caption="ID"/>
+			<youi:fieldHidden property="rzId"  caption="ID"/>		
+			<youi:fieldHidden property="entrecId.entrecId"  caption="物业入驻记录"/>
 			 <youi:fieldSelect property="rzManager.memberId"  caption="企业管理员" src="esb/web/memberInformationManager/getMemberInformations.json" 
 			 					code="memberId" show="memberName" notNull="true"/> 
 			<youi:fieldText property="rzName"  caption="企业名称" notNull="true"/>
-			<youi:fieldCalendar property="rzDate"  caption="入驻时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="true"/>
+			<youi:fieldCalendar property="rzDate"  caption="入驻时间" format="yyyy-MM-dd" textFormat="yyyy-MM-dd" notNull="true"/>
 			<youi:fieldSelect property="parkId"  caption="园区" src="esb/web/bbmParkManager/getBbmParks.json" code="parkId" show="parkName" notNull="true"/>
 			<youi:fieldSelect property="buildingId"  caption="楼栋" src="esb/web/bbmBuildingManager/getBbmBuildings.json" 
 								code="buildingId" show="buildingNo" parents="parkId" parentsAlias="parkId" notNull="true"/>
@@ -64,7 +65,7 @@
 	</youi:func>
 	
 	<youi:func name="renderer_parkId" params="col,record">
-if(record.parkId !="" && record.parkId !=null){
+	if(record.parkId !="" && record.parkId !=null){
 	 	var parkName = ""; 
 		$.youi.ajaxUtil.ajax({
 				url:'esb/web/bbmParkManager/getBbmPark.json',
