@@ -97,6 +97,13 @@ public interface McMsgdatasManager extends BaseManager{
 	 */
 	public void sendMessageSingle(McMsgdatas mcMsgdatas,String userId) throws BusException;
 	
+	/**发送消息到企业管理员
+	 * @param mcMsgdatas
+	 * @param entId
+	 * @throws BusException
+	 */
+	public void sendMessageEnt(McMsgdatas mcMsgdatas,String entId) throws BusException;
+	
 	/**构建消息内容对象
 	 * @param uniqueCode 消息模板唯一码
 	 * @param replaceMap 参数map
