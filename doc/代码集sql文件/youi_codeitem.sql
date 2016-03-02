@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : whgk
-Source Server Version : 50538
+Source Server         : yuanqu
+Source Server Version : 50547
 Source Host           : localhost:3306
 Source Database       : youi2
 
 Target Server Type    : MYSQL
-Target Server Version : 50538
+Target Server Version : 50547
 File Encoding         : 65001
 
-Date: 2016-03-01 17:50:32
+Date: 2016-03-02 15:12:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -44,10 +44,10 @@ INSERT INTO `youi_codeitem` VALUES ('40288aad53078875015307bf3fb60002', '40288aa
 INSERT INTO `youi_codeitem` VALUES ('40288aad53078875015307bf6a7c0003', '40288aad53078875015307bebcbe0001', '2', '未发布', null);
 INSERT INTO `youi_codeitem` VALUES ('40288aad53078875015307c023650005', '40288aad53078875015307bfe6520004', '1', '融资完成', null);
 INSERT INTO `youi_codeitem` VALUES ('40288aad53078875015307c051610006', '40288aad53078875015307bfe6520004', '2', '正在融资', null);
-INSERT INTO `youi_codeitem` VALUES ('40288aad53078875015307c0f7e30008', '40288aad53078875015307c09d610007', '01', '众创空间', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aad53078875015307c0f7e30008', '40288aad53078875015307c09d610007', '04', '众创空间', null);
 INSERT INTO `youi_codeitem` VALUES ('40288aad53078875015307c122940009', '40288aad53078875015307c09d610007', '02', '虚拟园区', null);
 INSERT INTO `youi_codeitem` VALUES ('40288aad53078875015307c147ff000a', '40288aad53078875015307c09d610007', '03', '展厅', null);
-INSERT INTO `youi_codeitem` VALUES ('40288aad53078875015307c1718d000b', '40288aad53078875015307c09d610007', '04', '游泳池', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aad53078875015307c1718d000b', '40288aad53078875015307c09d610007', '01', '游泳池', null);
 INSERT INTO `youi_codeitem` VALUES ('40288aad53078875015307c1eab1000d', '40288aad53078875015307c1b80c000c', '01', '是', null);
 INSERT INTO `youi_codeitem` VALUES ('40288aad53078875015307c212f0000e', '40288aad53078875015307c1b80c000c', '02', '否', null);
 INSERT INTO `youi_codeitem` VALUES ('40288aad53078875015307c2aec80010', '40288aad53078875015307c266c3000f', '01', '已预约', null);
