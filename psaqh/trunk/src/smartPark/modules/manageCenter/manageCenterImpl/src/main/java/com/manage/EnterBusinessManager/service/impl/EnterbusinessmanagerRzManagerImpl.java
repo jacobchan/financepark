@@ -126,9 +126,9 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     	EnterbusinessmanagerRz er=enterbusinessmanagerRzDao.save(enterbusinessmanagerRz);
     	//新增企业员工数据
     	EnterpriseEmployees enterpriseEmployees=new EnterpriseEmployees();
-    	enterpriseEmployees.setEmployeesComId(er);
+    	enterpriseEmployees.setRz(er);
     	enterpriseEmployees.setEmployeesTelephone(er.getRzTelephone());
-    	enterpriseEmployees.setMemberId(er.getRzManager());
+    	enterpriseEmployees.setMember(er.getRzManager());
     	enterpriseEmployeesManager.saveEnterpriseEmployees(enterpriseEmployees);
 	}
     
