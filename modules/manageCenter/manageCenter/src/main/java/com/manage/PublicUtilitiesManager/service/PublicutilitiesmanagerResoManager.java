@@ -13,6 +13,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.manage.PublicUtilitiesManager.entity.PublicutilitiesmanagerReso;
 
 public interface PublicutilitiesmanagerResoManager extends BaseManager{
@@ -70,4 +71,10 @@ public interface PublicutilitiesmanagerResoManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public List<PurchasingmanagerCommodity> getCommoditysByPublicStatus() throws BusException;
+	
+	/**
+     * 前台页面：用户预约公共资源,保存对象
+     *  @param List<PublicutilitiesmanagerReso> o  公共资源列表
+     */
+	 public List<PublicutilitiesmanagerReso> savePublicutilitiesmanagerResoList(List<PublicutilitiesmanagerReso> o) throws BusException;
 }

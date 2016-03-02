@@ -84,6 +84,10 @@ public class PurchasingmanagerMerchantManagerImpl extends BaseManagerImpl implem
     		pm.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return purchasingmanagerMerchantDao.save(pm);
     	}else{//新增
+    		PurchasingmanagerGenre pg=purchasingmanagerGenreDao.get(o.getMerchantType().getGenreId());
+    		if(pg != null){
+    			o.setMerchantType(pg);
+    		}
     		o.setCreateUser(o.getUpdateUser());
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));

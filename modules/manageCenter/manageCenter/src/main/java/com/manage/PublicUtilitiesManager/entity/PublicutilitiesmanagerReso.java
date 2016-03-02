@@ -4,10 +4,11 @@
 package com.manage.PublicUtilitiesManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: 资源状态
@@ -50,12 +51,13 @@ public class PublicutilitiesmanagerReso implements Domain{
 	@Length(max=36)
 	private String createUser;//创建人
 
-	@Column(name = "COMMODITY_ID_")
-	@Length(max=36)
-	private String commodityId;//商品ID
-
 	@Column(name = "UPDATE_TIME_")
 	private String updateTime;//修改时间
+	
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="COMMODITY_ID_")
+	private com.common.purchasingManager.entity.PurchasingmanagerCommodity commodityId;//商品ID
 	
 	public String getResoStatus(){
 		return this.resoStatus;
@@ -106,13 +108,6 @@ public class PublicutilitiesmanagerReso implements Domain{
 	public void setCreateUser(String createUser){
 		this.createUser = createUser;
 	}
-	public String getCommodityId(){
-		return this.commodityId;
-	}
-	
-	public void setCommodityId(String commodityId){
-		this.commodityId = commodityId;
-	}
 	public String getUpdateTime(){
 		return this.updateTime;
 	}
@@ -123,22 +118,39 @@ public class PublicutilitiesmanagerReso implements Domain{
 	
 	
 	
+
+	
+	public com.common.purchasingManager.entity.PurchasingmanagerCommodity getCommodityId() {
+		return commodityId;
+	}
+
+	public void setCommodityId(
+			com.common.purchasingManager.entity.PurchasingmanagerCommodity commodityId) {
+		this.commodityId = commodityId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((resoStatus == null) ? 0 : resoStatus.hashCode());
+		result = prime * result
+				+ ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result
+				+ ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result
+				+ ((resoDate == null) ? 0 : resoDate.hashCode());
 		result = prime * result + ((resoId == null) ? 0 : resoId.hashCode());
-		result = prime * result + ((resoTime == null) ? 0 : resoTime.hashCode());
-		result = prime * result + ((resoDate == null) ? 0 : resoDate.hashCode());
-		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
-		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
-		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
-		result = prime * result + ((commodityId == null) ? 0 : commodityId.hashCode());
-		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result
+				+ ((resoStatus == null) ? 0 : resoStatus.hashCode());
+		result = prime * result
+				+ ((resoTime == null) ? 0 : resoTime.hashCode());
+		result = prime * result
+				+ ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result
+				+ ((updateUser == null) ? 0 : updateUser.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -147,55 +159,50 @@ public class PublicutilitiesmanagerReso implements Domain{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final PublicutilitiesmanagerReso other = (PublicutilitiesmanagerReso) obj;
-		if (resoStatus == null) {
-			if (other.resoStatus != null)
-				return false;
-		} else if (!resoStatus.equals(other.resoStatus))
-			return false;
-		if (resoId == null) {
-			if (other.resoId != null)
-				return false;
-		} else if (!resoId.equals(other.resoId))
-			return false;
-		if (resoTime == null) {
-			if (other.resoTime != null)
-				return false;
-		} else if (!resoTime.equals(other.resoTime))
-			return false;
-		if (resoDate == null) {
-			if (other.resoDate != null)
-				return false;
-		} else if (!resoDate.equals(other.resoDate))
-			return false;
+		PublicutilitiesmanagerReso other = (PublicutilitiesmanagerReso) obj;
 		if (createTime == null) {
 			if (other.createTime != null)
 				return false;
 		} else if (!createTime.equals(other.createTime))
-			return false;
-		if (updateUser == null) {
-			if (other.updateUser != null)
-				return false;
-		} else if (!updateUser.equals(other.updateUser))
 			return false;
 		if (createUser == null) {
 			if (other.createUser != null)
 				return false;
 		} else if (!createUser.equals(other.createUser))
 			return false;
-		if (commodityId == null) {
-			if (other.commodityId != null)
+		if (resoDate == null) {
+			if (other.resoDate != null)
 				return false;
-		} else if (!commodityId.equals(other.commodityId))
+		} else if (!resoDate.equals(other.resoDate))
+			return false;
+		if (resoId == null) {
+			if (other.resoId != null)
+				return false;
+		} else if (!resoId.equals(other.resoId))
+			return false;
+		if (resoStatus == null) {
+			if (other.resoStatus != null)
+				return false;
+		} else if (!resoStatus.equals(other.resoStatus))
+			return false;
+		if (resoTime == null) {
+			if (other.resoTime != null)
+				return false;
+		} else if (!resoTime.equals(other.resoTime))
 			return false;
 		if (updateTime == null) {
 			if (other.updateTime != null)
 				return false;
 		} else if (!updateTime.equals(other.updateTime))
 			return false;
+		if (updateUser == null) {
+			if (other.updateUser != null)
+				return false;
+		} else if (!updateUser.equals(other.updateUser))
+			return false;
 		return true;
 	}
-	
+
 	public String toString(){
 		return super.toString();
 	}

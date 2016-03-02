@@ -18,6 +18,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
@@ -38,15 +39,34 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
     public List<PurchasingmanagerGenre> getPurchasingmanagerGenres() throws BusException{
     	return purchasingmanagerGenreDao.getAll();
     }
-     /**
+    /**
      * 条件查询列表
      */
     @EsbServiceMapping
     public List<PurchasingmanagerGenre> getPurchasingmanagerGenres(
-    	@ConditionCollection(domainClazz=PurchasingmanagerGenre.class) Collection<Condition> conditions,
-    	@OrderCollection Collection<Order> orders) throws BusException{
+    		@ConditionCollection(domainClazz=PurchasingmanagerGenre.class) Collection<Condition> conditions,
+    		@OrderCollection Collection<Order> orders) throws BusException{
     	return purchasingmanagerGenreDao.commonQuery(conditions, orders);
     }
+
+
+    /**
+     * 根据商品类别（enreCode）查询商品
+     */
+    @EsbServiceMapping
+    public List<PurchasingmanagerGenre> getPurchasingmanagerGenresByGenreCode(
+    		@ConditionCollection(domainClazz=PurchasingmanagerGenre.class) Collection<Condition> conditions,
+    		@OrderCollection Collection<Order> orders) throws BusException{
+    	Collection<Condition> condition = new ArrayList<Condition>();
+    	Collection<Order> order = new ArrayList<Order>();
+    	condition.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS, "03"));// 查询属于公共资源的商品：genreCode=03
+    	List<PurchasingmanagerGenre> purchasingmanagerGenreList=purchasingmanagerGenreDao.commonQuery(condition, order);
+    	if(purchasingmanagerGenreList.size()>0){
+    		conditions.add(ConditionUtils.getCondition("purchasingmanagerGenre",Condition.EQUALS, purchasingmanagerGenreList.get(0)));// 查询公共资源下包含的商品
+    	}
+    	return purchasingmanagerGenreDao.commonQuery(conditions, orders);
+    }
+   
     /**
      * 根据主键查询
      */
