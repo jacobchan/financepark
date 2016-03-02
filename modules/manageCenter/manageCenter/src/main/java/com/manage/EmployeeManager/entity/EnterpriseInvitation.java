@@ -1,13 +1,7 @@
-/**
- *
- */
 package com.manage.EmployeeManager.entity;
-
 import javax.persistence.*;
-
 import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
-
 import com.gsoft.framework.core.dataobj.Domain;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 /**
@@ -19,20 +13,7 @@ import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 @Entity
 @Table(name = "sp_enterprise_invitation")
 public class EnterpriseInvitation implements Domain{
-	
 	private static final long serialVersionUID = 2572499642718059106L;
-	
-
-	@Column(name = "UPDATE_TIME_")
-	private String updateTime;//修改时间
-
-	@Column(name = "UPDATE_USER_")
-	@Length(max=36)
-	private String updateUser;//修改人
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "RZ_ID_")
-	private EnterbusinessmanagerRz enterbusinessmanagerRz;// 企业ID
 	
 	@Id 
 	@GeneratedValue(generator="system-uuid")
@@ -40,21 +21,32 @@ public class EnterpriseInvitation implements Domain{
 	@Column(name = "INVITATION_ID_")
 	@Length(max=36)
 	private String invitationId;//邀请记录系列
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "RZ_ID_")
+	private EnterbusinessmanagerRz enterbusinessmanagerRz;// 企业ID
+	
+	@Column(name = "INVITATION_CODE")
+	@Length(max=32)
+	private String invitationCode;//企业邀请码
 
 	@Column(name = "INVITATION_TELEPHONE")
 	@Length(max=32)
 	private String invitationTelephone;//会员电话
 
-	@Column(name = "CREATE_TIME_")
-	private String createTime;//创建时间
-
 	@Column(name = "CREATE_USER_")
 	@Length(max=36)
 	private String createUser;//创建人
-
-	@Column(name = "INVITATION_CODE")
-	@Length(max=32)
-	private String invitationCode;//企业邀请码
+	
+	@Column(name = "CREATE_TIME_")
+	private String createTime;//创建时间
+	
+	@Column(name = "UPDATE_USER_")
+	@Length(max=36)
+	private String updateUser;//修改人
+	
+	@Column(name = "UPDATE_TIME_")
+	private String updateTime;//修改时间
 	
 	public String getUpdateTime(){
 		return this.updateTime;
