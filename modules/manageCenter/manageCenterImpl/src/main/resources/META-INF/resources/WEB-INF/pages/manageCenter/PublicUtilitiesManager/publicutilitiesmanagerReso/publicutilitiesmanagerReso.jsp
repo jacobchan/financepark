@@ -29,7 +29,7 @@
 	<youi:form dialog="true" caption="资源状态" id="form_publicutilitiesmanagerReso" action="esb/web/publicutilitiesmanagerResoManager/savePublicutilitiesmanagerReso.json">
 		<youi:fieldLayout prefix="record">
 			<%-- <youi:fieldText property="resoId"  caption="资源状态序列"/> --%>	
-			<youi:fieldSelect property="commodityId.purchasingmanagerGenre.genreId"  caption="商品类型" src="esb/web/purchasingmanagerGenreManager/getPurchasingmanagerGenres.json" code="genreId" show="genreName" notNull="true"/>	
+			<youi:fieldSelect property="commodityId.purchasingmanagerGenre.genreId"  caption="商品类型" src="esb/web/purchasingmanagerGenreManager/getPurchasingmanagerGenresByGenreCode.json" code="genreId" show="genreName" notNull="true"/>	
 			 <youi:fieldSelect property="commodityId.commodityId"  caption="商品" src="esb/web/purchasingmanagerCommodityManager/getCommodityRecordsByRecordType.json" notNull="true" parents="commodityId.purchasingmanagerGenre.genreId" parentsAlias="commodityId.purchasingmanagerGenre.genreId" code="commodityId" show="commodityTitle"/>
 			 <youi:fieldCalendar property="resoDate"  caption="可用日期" textFormat="yyyy-MM-dd" format="yyyy-MM-dd" notNull="true"/>
 			<youi:fieldSelect property="resoTime"  caption="可用时段" convert="resoTime" notNull="true"/>
