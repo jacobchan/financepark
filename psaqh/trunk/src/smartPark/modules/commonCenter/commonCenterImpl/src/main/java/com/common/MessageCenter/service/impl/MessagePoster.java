@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.common.MessageCenter.entity.McMsgdatas;
+import com.common.MessageCenter.service.IMessage;
 import com.common.MessageCenter.service.McMsgdatasManager;
 import com.gsoft.framework.core.exception.BusException;
 
@@ -26,9 +27,11 @@ public class MessagePoster extends MessageAbstractPoster{
 	}
 
 	@Override
-	public void afterSend() throws BusException {
+	public void afterSend(IMessage message) throws BusException {
 		System.out.println("-----------afterSend");
-		
+		if(message instanceof McMsgdatas){
+			msgdatasManager.saveMcMsgdatas(new McMsgdatas());
+		}
 	}
 
 }
