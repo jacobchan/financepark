@@ -12,8 +12,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.common.BuildingBaseManager.service.BbmRoomManager;
+import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
+import com.common.OrderManager.entity.OrdermanagerOrderprojecttypeValue;
+import com.common.OrderManager.entity.OrdermanagerUserorder;
+import com.common.OrderManager.service.OrdermanagerCommoditydetailManager;
+import com.common.OrderManager.service.OrdermanagerOrderprojecttypeValueManager;
+import com.common.OrderManager.service.OrdermanagerUserorderManager;
+import com.common.purchasingManager.dao.PurchasingmanagerGenrePropertyDao;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
+import com.common.purchasingManager.entity.PurchasingmanagerGenre;
+import com.common.purchasingManager.entity.PurchasingmanagerGenreProperty;
 import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
+import com.common.purchasingManager.service.PurchasingmanagerGenrePropertyManager;
 import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -22,9 +32,12 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.security.agt.entity.User;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.util.StringUtils;
+import com.gsoft.utils.BizCodeUtil;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.PublicUtilitiesManager.entity.PublicutilitiesmanagerReso;
 import com.manage.PublicUtilitiesManager.dao.PublicutilitiesmanagerResoDao;
@@ -38,6 +51,18 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 	
 	@Autowired
 	private PurchasingmanagerCommodityManager purchasingmanagerCommodityManager;
+	
+	@Autowired
+	private OrdermanagerUserorderManager userOrderManager;
+	
+	@Autowired
+	private OrdermanagerCommoditydetailManager userOrderDetailManager;
+	
+	@Autowired
+	private PurchasingmanagerGenrePropertyManager extensionPropertyManager;
+	
+	@Autowired
+	private OrdermanagerOrderprojecttypeValueManager orderprojectValueManager;
 	
 //	@Autowired
 //	private PurchasingmanagerCommodityExtendValueManager purchasingmanagerCommodityExtendValueManager;
@@ -182,5 +207,73 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 //    	}
     	return commodityList;
     }
+	@Override
+	public OrdermanagerUserorder savePublicResoOrder(OrdermanagerUserorder o, PurchasingmanagerCommodity commodity,
+			List<PublicutilitiesmanagerReso> publicResoList) throws BusException {
+		publicResoList = this.savePublicutilitiesmanagerResoList(publicResoList);
+		//获取当前登录用户
+		Object object = SecurityUtils.getPrincipal();
+		User user = new User();
+		if(object != null && object instanceof User){
+			user = (User) object;
+		}
+		o.setGenreId(commodity.getPurchasingmanagerGenre());
+		o.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("GGZY"));
+		o.setUserorderStatus("01");//01-未支付
+		o.setCreateUser(user.getUserId());
+		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		o.setUpdateUser(user.getUserId());
+		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		o.setUserorderBuyUser(user.getUserCaption());
+		o.setMemberId(user.getUserId());
+		o.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		o = userOrderManager.saveOrdermanagerUserorder(o);
+//		o = ordermanagerUserorderDao.save(o);
+		//保存订单明细列表
+		OrdermanagerCommoditydetail orderDetail = new OrdermanagerCommoditydetail();
+		orderDetail.setOrdermanagerUserorder(o);
+		orderDetail.setCommodityId(commodity.getCommodityId());
+		orderDetail.setCommoditydetailNum("1");
+//		ordermanagerCommoditydetailDao.save(orderDetail);
+		userOrderDetailManager.saveOrdermanagerCommoditydetail(orderDetail);
+		//保存订单扩展属性列表
+		PurchasingmanagerGenre pg = commodity.getPurchasingmanagerGenre();
+		while(pg.getPurchasingmanagerGenre() != null){//获取最顶级商品类别
+			pg = pg.getPurchasingmanagerGenre();
+		}
+		StringBuffer publicResoIdBuff =  new StringBuffer();//公共资源ID
+		String dateStr =  "";//订单预定日期
+		StringBuffer timeStrBuff =  new StringBuffer();//订单预定时段
+		for(int i = 0;i<publicResoList.size();i++){
+			PublicutilitiesmanagerReso publicReso = publicResoList.get(i);
+			dateStr = publicReso.getResoDate();
+			timeStrBuff.append(publicReso.getResoTime());
+			publicResoIdBuff.append(publicReso.getResoId());
+			if(i+1<publicResoList.size()){
+				timeStrBuff.append(",");
+				publicResoIdBuff.append(",");
+			}
+		}
+		//获取商品类别
+		Collection<Condition> conditions = new ArrayList<Condition>();
+		conditions.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.EQUALS, pg.getGenreId()));
+		List<PurchasingmanagerGenreProperty> genrePropertyList = extensionPropertyManager.getPurchasingmanagerGenrePropertys(conditions, null);
+//		List<PurchasingmanagerGenreProperty> genrePropertyList = extensionPropertyManager.getPurchasingmanagerGenrePropertys(conditions, orders)("", pg.getGenreId());
+		for(PurchasingmanagerGenreProperty genreProperty:genrePropertyList){//保存订单扩展项信息
+			OrdermanagerOrderprojecttypeValue orderExtendValue = new OrdermanagerOrderprojecttypeValue();
+			orderExtendValue.setOrdermanagerUserorder(o);
+			orderExtendValue.setGenrePropertyId(genreProperty);
+			if("publicResoIdDate".equals(genreProperty.getGenrePropertyFieldName())){
+				orderExtendValue.setOrderprojecttypeValueFieldValue(dateStr);
+			}else if("publicResoIdTime".equals(genreProperty.getGenrePropertyFieldName())){
+				orderExtendValue.setOrderprojecttypeValueFieldValue(timeStrBuff.toString());
+			}else if("publicResoId".equals(genreProperty.getGenrePropertyFieldName())){
+				orderExtendValue.setOrderprojecttypeValueFieldValue(publicResoIdBuff.toString());
+			}
+			this.orderprojectValueManager.saveOrdermanagerOrderprojecttypeValue(orderExtendValue);
+		}
+		
+		return o;
+	}
 
 }

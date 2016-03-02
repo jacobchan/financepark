@@ -176,7 +176,7 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
 				EnterpriseEmployees enterpriseEmployees = enterpriseEmployeesManager.getEnterpriseEmployeesByMember(member) ;
 				//得到企业员工对应的EnterbusinessmanagerRz 对象
 				if(enterpriseEmployees != null){
-					EnterbusinessmanagerRz enterBusiness = enterpriseEmployees.getEmployeesComId() ;
+					EnterbusinessmanagerRz enterBusiness = enterpriseEmployees.getRz();
 					if(enterBusiness != null){
 						return enterBusiness ;
 					}

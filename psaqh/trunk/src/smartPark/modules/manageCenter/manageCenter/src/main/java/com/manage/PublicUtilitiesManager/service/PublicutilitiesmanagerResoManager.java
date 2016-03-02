@@ -6,6 +6,7 @@ package com.manage.PublicUtilitiesManager.service;
 import java.util.List;
 import java.util.Collection;
 
+import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -77,4 +78,8 @@ public interface PublicutilitiesmanagerResoManager extends BaseManager{
      *  @param List<PublicutilitiesmanagerReso> o  公共资源列表
      */
 	 public List<PublicutilitiesmanagerReso> savePublicutilitiesmanagerResoList(List<PublicutilitiesmanagerReso> o) throws BusException;
+	 
+	 public OrdermanagerUserorder savePublicResoOrder(OrdermanagerUserorder o,
+				PurchasingmanagerCommodity commodity,
+				List<PublicutilitiesmanagerReso> publicResoList) throws BusException;
 }

@@ -34,7 +34,7 @@ public class PurchasingmanagerMerchantManagerTest extends AbstractJUnit4SpringCo
     	pm.setMerchantEnterpriseName("肯德基餐饮连锁公司");
     	PurchasingmanagerGenre pg = new PurchasingmanagerGenre();
     	pg.setGenreId("02");
-//    	pm.setMerchantType(pg);
+//    	pm.setMerchantType("02");
     	pm.setMerchantLinkman("迈克尔");
     	pm.setMerchantLinkmanPhone("18812345678");
     	pm.setMerchantSendAddress("美国拉斯维加斯");

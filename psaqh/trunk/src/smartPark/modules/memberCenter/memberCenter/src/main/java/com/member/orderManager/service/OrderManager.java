@@ -10,8 +10,8 @@ import com.gsoft.framework.core.service.BaseManager;
 import com.member.shoppingCarManager.entity.ShoppingcarCatering;
 import com.member.shoppingCarManager.entity.ShoppingcarGroup;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
-import com.manage.PublicUtilitiesManager.entity.PublicutilitiesmanagerReso;
+//import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
+//import com.manage.PublicUtilitiesManager.entity.PublicutilitiesmanagerReso;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 
 public interface OrderManager extends BaseManager{
@@ -31,24 +31,24 @@ public interface OrderManager extends BaseManager{
      * @throws BusException
      */
 	public OrdermanagerUserorder saveFoodOrder(OrdermanagerUserorder o,List<ShoppingcarCatering> shopCarList) throws BusException;
-	/**
-	 * 新增公共资源订单
-	 * @param o
-	 * @param commodity
-	 * @param publicReso
-	 * @return
-	 * @throws BusException
-	 */
-	public OrdermanagerUserorder savePublicResoOrder(OrdermanagerUserorder o,
-			PurchasingmanagerCommodity commodity,List<PublicutilitiesmanagerReso> publicResoList) throws BusException;
-	/**
-	 * 新增物业报修订单
-	 * @param o
-	 * @param propertyBx
-	 * @return
-	 * @throws BusException
-	 */
-	public OrdermanagerUserorder savePropertyBxOrder(OrdermanagerUserorder o,PropertyservicemanagerBx propertyBx) throws BusException;
+//	/**
+//	 * 新增公共资源订单
+//	 * @param o
+//	 * @param commodity
+//	 * @param publicReso
+//	 * @return
+//	 * @throws BusException
+//	 */
+//	public OrdermanagerUserorder savePublicResoOrder(OrdermanagerUserorder o,
+//			PurchasingmanagerCommodity commodity,List<PublicutilitiesmanagerReso> publicResoList) throws BusException;
+//	/**
+//	 * 新增物业报修订单
+//	 * @param o
+//	 * @param propertyBx
+//	 * @return
+//	 * @throws BusException
+//	 */
+//	public OrdermanagerUserorder savePropertyBxOrder(OrdermanagerUserorder o,PropertyservicemanagerBx propertyBx) throws BusException;
 //	/**
 //	 * 新增IT服务订单
 //	 * @param o
