@@ -6,13 +6,13 @@ package com.manage.PropertyServiceManager.service;
 import java.util.List;
 import java.util.Collection;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode;
 
 public interface PropertyservicemanagerFkcodeManager extends BaseManager{
@@ -63,4 +63,19 @@ public interface PropertyservicemanagerFkcodeManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitPropertyservicemanagerFkcode(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 根据访客申请ID得到会员名称
+	 * @param fkcodeId 访客申请ID
+	 * @return
+	 */
+	public MemberInformation getMemberByFkcodeId(String fkcodeId) ;
+	
+	/**
+	 * 更新访客申请的申请状态
+	 * @param fkcodeId 访客申请ID
+	 * @param 标识符，00表示同意申请，01表示拒绝申请
+	 */
+	public void updateFkcode(String fkcodeId,String code) ;
+	
 }

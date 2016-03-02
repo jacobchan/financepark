@@ -12,7 +12,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTwcrd;
 
 public interface PropertyservicemanagerTwcrdManager extends BaseManager{
@@ -63,4 +63,11 @@ public interface PropertyservicemanagerTwcrdManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitPropertyservicemanagerTwcrd(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 通过访客申请找到对应的二维码
+	 * @param fkcode 访客申请对象
+	 * @return
+	 */
+	public PropertyservicemanagerTwcrd findTwcrdByFkcode(PropertyservicemanagerFkcode fkcode) ;
 }
