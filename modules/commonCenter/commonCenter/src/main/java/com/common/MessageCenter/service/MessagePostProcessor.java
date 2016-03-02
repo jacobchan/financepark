@@ -4,7 +4,7 @@ import com.gsoft.framework.core.exception.BusException;
 
 public interface MessagePostProcessor {
 
-	public void send(String content,String[] phones) throws BusException;
+	public void send(IMessage message,String[] phones) throws BusException;
 	
 	/**发送消息前的处理
 	 * 注入外部接口
@@ -24,6 +24,6 @@ public interface MessagePostProcessor {
 	 * 3、保存发送内容实体
 	 * @throws BusException
 	 */
-	public void afterSend() throws BusException;
+	public void afterSend(IMessage message) throws BusException;
 	
 }
