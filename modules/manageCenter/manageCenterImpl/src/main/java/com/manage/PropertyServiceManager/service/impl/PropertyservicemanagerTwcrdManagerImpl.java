@@ -17,6 +17,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTwcrd;
@@ -113,5 +114,18 @@ public class PropertyservicemanagerTwcrdManagerImpl extends BaseManagerImpl impl
 		PropertyservicemanagerTwcrd twcrd = propertyservicemanagerTwcrdDao.getObjectByUniqueProperty("propertyservicemanagerFkcode", fkcode) ;
 		return twcrd;
 	}
-
+	
+	/**
+	 * 根据二维码ID更新二维码状态
+	 * @param twcrdId 二维码id
+	 */
+	@Override
+	@EsbServiceMapping
+	public void updateTwcrd(@ServiceParam(name="twcrdId")String twcrdId) {
+		if(StringUtils.isNotEmpty(twcrdId)){
+			PropertyservicemanagerTwcrd twcrd = propertyservicemanagerTwcrdDao.get(twcrdId) ;
+			twcrd.setStatus("01");//将二维码状态设置为已失效
+			propertyservicemanagerTwcrdDao.save(twcrd) ;
+		}
+	}
 }
