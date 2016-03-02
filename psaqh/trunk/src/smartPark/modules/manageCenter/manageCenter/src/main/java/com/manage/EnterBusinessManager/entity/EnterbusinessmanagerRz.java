@@ -25,7 +25,20 @@ public class EnterbusinessmanagerRz implements Domain{
 	
 	private static final long serialVersionUID = -2526455072813371693L;
 	
+	
+	@Column(name = "UPDATE_USER_")
+	@Length(max=36)
+	private String updateUser;//修改人
 
+	@Column(name = "UPDATE_TIME_")
+	private String updateTime;//修改时间
+
+	@Column(name = "CREATE_USER_")
+	@Length(max=36)
+	private String createUser;//创建人
+
+	@Column(name = "CREATE_TIME_")
+	private String createTime;//创建时间
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="RZ_MANAGER_")
 	private MemberInformation rzManager;//企业管理员
@@ -46,6 +59,10 @@ public class EnterbusinessmanagerRz implements Domain{
 	@Column(name = "BUILDING_ID_")
 	@Length(max=36)
 	private String buildingId;//楼栋ID
+	
+	@Column(name = "FLOOR_ID_")
+	@Length(max=36)
+	private String floorId;//所在楼层
 
 	@Column(name = "RZ_BUSS_")
 	@Length(max=2)
@@ -182,6 +199,46 @@ public class EnterbusinessmanagerRz implements Domain{
 	
 	
 	
+
+	public String getUpdateUser() {
+		return updateUser;
+	}
+
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
+	}
+
+	public String getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public String getCreateUser() {
+		return createUser;
+	}
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getFloorId() {
+		return floorId;
+	}
+
+	public void setFloorId(String floorId) {
+		this.floorId = floorId;
+	}
 
 	@Override
 	public int hashCode() {
