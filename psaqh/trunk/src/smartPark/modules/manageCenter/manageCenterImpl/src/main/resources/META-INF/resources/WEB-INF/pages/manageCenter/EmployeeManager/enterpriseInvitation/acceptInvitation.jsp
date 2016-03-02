@@ -7,7 +7,7 @@
 			<youi:fieldHidden property="invitationId" caption="邀请记录系列" />
 			<youi:fieldSelect property="memberId"
 				src="esb/web/memberInformationManager/getMemberInformations.json"
-				code="memberId" show="memberNickname" caption="会员用户" />
+				code="memberId" show="memberName" caption="会员用户" notNull="true" />
 			<youi:fieldText property="code" notNull="true" caption="企业邀请码" />
 		</youi:fieldLayout>
 	</youi:form>
