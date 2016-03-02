@@ -21,7 +21,6 @@ public class MemberInformation implements Domain{
 	
 	private static final long serialVersionUID = 2177240078237624499L;
 	
-
 	@Column(name = "MEMBER_BIRTHDATE_")
 	private String memberBirthdate;//出生日期
 
@@ -42,7 +41,9 @@ public class MemberInformation implements Domain{
 	@Column(name = "COMPANY_INVITECODE_")
 	@Length(max=32)
 	private String companyInvitecode;//企业邀请码
-	@Id @GeneratedValue(generator="system-uuid")
+	
+	@Id 
+	@GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "MEMBER_ID_")
 	@Length(max=36)
