@@ -1,7 +1,11 @@
 package com.manage.EmployeeManager.entity;
+import java.sql.Timestamp;
+
 import javax.persistence.*;
+
 import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
+
 import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
@@ -44,41 +48,22 @@ public class EnterpriseEmployees implements Domain {
 	@Length(max = 2)
 	private String employeesDepartment;// 所属部门
 	
-	@Column(name = "UPDATE_USER_")
-	@Length(max=36)
-	private String updateUser;//修改人
+	@ManyToOne(fetch = FetchType.LAZY, optional=false)
+	@JoinColumn(name = "UPDATE_USER_")
+	private MemberInformation updateUser;//修改人
 	
-	@Column(name = "CREATE_USER_")
-	@Length(max=36)
-	private String createUser;//创建人
+	@ManyToOne(fetch = FetchType.LAZY, optional=false)
+	@JoinColumn(name = "CREATE_USER_")
+	private MemberInformation createUser;//创建人
 	
 	@Column(name = "UPDATE_TIME_")
-	private String updateTime;//修改时间
+	private Timestamp updateTime;//修改时间
 	
 	@Column(name = "CREATE_TIME_")
-	private String createTime;//创建时间
+	private Timestamp createTime;//创建时间
 //	
 //	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE},targetEntity = EnterpriseRole.class,mappedBy = "employees")
 //	private Set<EnterpriseRole> enterpriseRole = new HashSet<EnterpriseRole>();
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime
-				* result
-				+ ((employeesDepartment == null) ? 0 : employeesDepartment
-						.hashCode());
-		result = prime * result
-				+ ((employeesId == null) ? 0 : employeesId.hashCode());
-		result = prime
-				* result
-				+ ((employeesTelephone == null) ? 0 : employeesTelephone
-						.hashCode());
-		result = prime * result
-				+ ((employeesName == null) ? 0 : employeesName.hashCode());
-		return result;
-	}
 
 	public String getEmployeesId() {
 		return employeesId;
@@ -128,71 +113,35 @@ public class EnterpriseEmployees implements Domain {
 		this.employeesDepartment = employeesDepartment;
 	}
 
-	public String getUpdateUser() {
+	public MemberInformation getUpdateUser() {
 		return updateUser;
 	}
 
-	public void setUpdateUser(String updateUser) {
+	public void setUpdateUser(MemberInformation updateUser) {
 		this.updateUser = updateUser;
 	}
 
-	public String getCreateUser() {
+	public MemberInformation getCreateUser() {
 		return createUser;
 	}
 
-	public void setCreateUser(String createUser) {
+	public void setCreateUser(MemberInformation createUser) {
 		this.createUser = createUser;
 	}
 
-	public String getUpdateTime() {
+	public Timestamp getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(String updateTime) {
+	public void setUpdateTime(Timestamp updateTime) {
 		this.updateTime = updateTime;
 	}
 
-	public String getCreateTime() {
+	public Timestamp getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(String createTime) {
+	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		final EnterpriseEmployees other = (EnterpriseEmployees) obj;
-		if (employeesDepartment == null) {
-			if (other.employeesDepartment != null)
-				return false;
-		} else if (!employeesDepartment.equals(other.employeesDepartment))
-			return false;
-		if (employeesId == null) {
-			if (other.employeesId != null)
-				return false;
-		} else if (!employeesId.equals(other.employeesId))
-			return false;
-		if (employeesTelephone == null) {
-			if (other.employeesTelephone != null)
-				return false;
-		} else if (!employeesTelephone.equals(other.employeesTelephone))
-			return false;
-		if (employeesName == null) {
-			if (other.employeesName != null)
-				return false;
-		} else if (!employeesName.equals(other.employeesName))
-			return false;
-		return true;
-	}
-
-	public String toString() {
-		return super.toString();
 	}
 }

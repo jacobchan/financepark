@@ -1,5 +1,6 @@
 package com.manage.EmployeeManager.entity;
 import java.sql.Timestamp;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,8 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.Length;
+
 import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 import com.gsoft.framework.security.fuc.entity.Role;
@@ -26,19 +29,19 @@ public class EnterpriseRole implements Domain {
 	@Length(max = 36)
 	private String rId;// 角色主键
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional=false)
+	@ManyToOne(fetch=FetchType.EAGER,optional=true,cascade=CascadeType.ALL)
 	@JoinColumn(name = "EMPLOYEES_ID")
 	private EnterpriseEmployees employees;// 企业员工ID
 	
-	@ManyToOne(fetch = FetchType.EAGER, optional=false)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ROLEID")
 	private Role role;// 角色ID
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional=false)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CREATE_USER_")
 	private MemberInformation createuser;// 创建人
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional=false)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "UPDATE_USER_")
 	private MemberInformation updateuser;// 修改人
 	
