@@ -16,7 +16,7 @@
 		<youi:gridCol property="bbmFloor.bbmBuilding.buildingNo" caption="所属楼栋" width="100" align="center"/>
 		<youi:gridCol property="bbmFloor.floorNo" caption="所属楼层" width="100" align="center"/>
 		<youi:gridCol property="roomHost"  caption="单元业主" width="100" align="center"/>
-		<youi:gridCol property="status"  caption="使用状态" width="100" align="center" convert="floorUsingStatus"/>
+		<youi:gridCol property="status"  caption="使用状态" width="100" align="center" convert="roomstatus"/>
 
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
@@ -40,7 +40,7 @@
 			<youi:fieldSelect property="bbmFloor.floorId" caption="所属楼层" code="floorId" show="floorCaption" notNull="true"
 				src="esb/web/bbmFloorManager/getBbmFloors.json" parents="bbmBuilding.buildingId" parentsAlias="bbmBuilding.buildingId"/> --%>
 			<youi:fieldText property="roomCaption"  caption="单元说明"/>
-			<youi:fieldSelect property="status"  caption="使用状态" convert="floorUsingStatus"/>
+			<youi:fieldSelect property="status"  caption="使用状态" convert="roomstatus"/>
 			<youi:fieldText property="roomHost"  caption="单元业主" notNull="true"/>
 			
 			<youi:fieldHidden property="roomTenement"  caption="单元租户"/>
