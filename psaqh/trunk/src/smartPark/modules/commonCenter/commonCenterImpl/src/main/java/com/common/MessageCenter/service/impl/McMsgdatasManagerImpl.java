@@ -162,7 +162,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 		List<String> phones = new ArrayList<String>();
 		// 如果角色属于会员用户，则从会员表里（MemberInformation）查询，否则从User里取
 		if ("企业管理员角色ID".equals(receiver)) {
-			// 查出所有角色为企业管理员的用户,管理员所在企业和用户企业相同
+			// 查出所有角色为企业管理员的用户,管理员所在企业和当前用户企业相同
 
 		} else {
 			List<User> users = baseUserManager
