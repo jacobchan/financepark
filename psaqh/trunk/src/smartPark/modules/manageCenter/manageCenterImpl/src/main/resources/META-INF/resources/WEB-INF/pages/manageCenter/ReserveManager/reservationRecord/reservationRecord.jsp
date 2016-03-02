@@ -18,10 +18,11 @@
 		<youi:gridCol property="recordMemberId"  caption="预约对象"  width="10%" align="center"/>
 		<youi:gridCol property="recordType"  caption="预约类型" convert="recordType"  width="15%" align="center"/>
 		<youi:gridCol property="recordStatus"  caption="预约记录状态" convert="enterrecStatus"  width="15%" align="center"/>
-	    <youi:gridCol property="visiteDate"  caption="来访日期"  width="10%" align="center" orderBy="desc"/>
+	    <youi:gridCol property="visiteDate"  caption="来访日期"  width="10%" align="center" />
 	    <youi:gridCol property="recordCustomer"  caption="客服代表"  width="10%" align="center"/>
 		<youi:gridCol property="recordServiceTel"  caption="客服电话"  width="10%" align="center"/>
         <youi:gridCol property="visiteTime"  caption="实际来访时间"  width="20%" align="center"/>
+        <youi:gridCol property="updateTime"  caption="更新时间"  width="20%" align="center" orderBy="desc"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -43,7 +44,8 @@
 			<youi:fieldHidden property="recordStatus"  caption="预约记录状态"/>
 			<youi:fieldHidden property="recordVisiteStatus"  caption="是否到访"/>
 			<youi:fieldHidden property="recordCustomer"  caption="客服代表"/>
-			<youi:fieldHidden property="visiteTime"  caption="来访时间"/>
+			<youi:fieldHidden property="visiteTime"  caption="实际来访时间"/>
+			<youi:fieldHidden property="recordServiceTel"  caption="客服电话"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
