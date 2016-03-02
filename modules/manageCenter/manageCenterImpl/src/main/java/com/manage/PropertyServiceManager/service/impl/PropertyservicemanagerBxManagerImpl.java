@@ -3,6 +3,7 @@
  */
 package com.manage.PropertyServiceManager.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -10,8 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.common.OrderManager.dao.OrdermanagerUserorderDao;
+import com.common.OrderManager.entity.OrdermanagerOrderprojecttypeValue;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
+import com.common.OrderManager.service.OrdermanagerOrderprojecttypeValueManager;
+import com.common.OrderManager.service.OrdermanagerUserorderManager;
+import com.common.purchasingManager.entity.PurchasingmanagerGenre;
+import com.common.purchasingManager.entity.PurchasingmanagerGenreProperty;
+import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
+import com.common.purchasingManager.service.PurchasingmanagerGenrePropertyManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -19,8 +26,12 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.security.agt.entity.User;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.utils.BizCodeUtil;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerBxDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerBxManager;
@@ -31,7 +42,13 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 	@Autowired
 	private PropertyservicemanagerBxDao propertyservicemanagerBxDao;
 	@Autowired
-	private OrdermanagerUserorderDao ordermanagerUserorderDao;
+	private OrdermanagerUserorderManager ordermanagerUserorderManager;
+	@Autowired
+	private PurchasingmanagerGenreManager	purchasingmanagerGenreManager;
+	@Autowired
+	private PurchasingmanagerGenrePropertyManager purchasingmanagerGenrePropertyManager;
+	@Autowired
+	private OrdermanagerOrderprojecttypeValueManager ordermanagerOrderprojecttypeValueManager;
     /**
      * 查询列表
      */
@@ -77,14 +94,44 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 //    	}
     	//物业管理员定价生成订单
     	if(o.getBxStatus().equals("05")){
+    		//获取当前登录用户
+    		Object object = SecurityUtils.getPrincipal();
+    		User user = new User();
+    		if(object != null && object instanceof User){
+    			user = (User) object;
+    		}
     		OrdermanagerUserorder order = new OrdermanagerUserorder();
-			order.setUserorderAmount(o.getBxAmount());
-			order.setUserorderCode("1111111");
-			order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-			order.setUserorderProject("物业报修");
-			order.setBxId(o.getBxId());
-//			order.setUserorderBuyUser(o.getBxComp());
-			ordermanagerUserorderDao.save(order);
+ 
+    		//查询商品类别
+    		Collection<Condition> condition =  new ArrayList<Condition>();
+    		condition.add(ConditionUtils.getCondition("genreCode", Condition.EQUALS,"07"));
+    		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenres(condition, null).get(0);
+    		
+    		order.setGenreId(pg);
+    		order.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("WYBX"));
+    		order.setUserorderStatus("01");//01-未支付
+    		order.setCreateUser(user.getUserId());
+    		order.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		order.setUpdateUser(user.getUserId());
+    		order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		order.setUserorderBuyUser(user.getUserCaption());
+    		order.setMemberId(user.getUserId());
+    		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		ordermanagerUserorderManager.saveOrdermanagerUserorder(order);
+    		
+    		//保存订单扩展属性列表
+    		Collection<Condition> purcondition =  new ArrayList<Condition>();
+    		purcondition.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.EQUALS,pg.getGenreId()));
+    		List<PurchasingmanagerGenreProperty> genrePropertyList = purchasingmanagerGenrePropertyManager.getPurchasingmanagerGenrePropertys(purcondition,null);
+    		for(PurchasingmanagerGenreProperty genreProperty:genrePropertyList){//保存订单扩展项信息
+    			OrdermanagerOrderprojecttypeValue orderExtendValue = new OrdermanagerOrderprojecttypeValue();
+    			orderExtendValue.setOrdermanagerUserorder(order);
+    			orderExtendValue.setGenrePropertyId(genreProperty);
+    			if("orderBxId".equals(genreProperty.getGenrePropertyFieldName())){
+    				orderExtendValue.setOrderprojecttypeValueFieldValue(o.getBxId());
+    			}
+    			ordermanagerOrderprojecttypeValueManager.saveOrdermanagerOrderprojecttypeValue(orderExtendValue);
+    		}
     	}
     	return propertyservicemanagerBxDao.save(o);
     }
