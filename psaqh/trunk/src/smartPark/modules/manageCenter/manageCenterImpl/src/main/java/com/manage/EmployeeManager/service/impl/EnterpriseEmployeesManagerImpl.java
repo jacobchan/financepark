@@ -121,7 +121,6 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
     
     /**
 	 * 接受企业邀请成为员工
-	 * @param rzId 企业id
 	 * @param phone 会员电话
 	 * @param code 邀请码
 	 * @return String
@@ -129,35 +128,33 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 	 * @author Zhuyl
 	 */
     @EsbServiceMapping
-	public String acceptEnterpriseInvitation(@ServiceParam(name="rzId") String rzId, @ServiceParam(name="phone") String phone, @ServiceParam(name="code") String code) throws BusException{
+	public String acceptEnterpriseInvitation(@ServiceParam(name="member") MemberInformation member, @ServiceParam(name="code") String code) throws BusException{
 		String msg = "";
     	EnterpriseEmployees ems = new EnterpriseEmployees();
 		EnterpriseRole role = new EnterpriseRole();
 		//根据rzId获取入驻企业
-		EnterbusinessmanagerRz rz = enterbusinessmanagerRzDao.get(rzId);
+		EnterbusinessmanagerRz rz = enterbusinessmanagerRzDao.getObjectByUniqueProperty("rzSign", code);
 		//根据会员填写的手机号码查询此会员是否存在
-		MemberInformation info = memberInformationDao.getObjectByUniqueProperty("memberPhoneNumber", phone);
+		MemberInformation info = memberInformationDao.getObjectByUniqueProperty("memberPhoneNumber", member.getMemberPhoneNumber());
 		//标记填写的手机号码存在于会员表
 		if(null!=info){
 			//封装获取邀请记录的参数和值
-			String[] params = new String[]{"enterbusinessmanagerRz.rzId","invitationTelephone","invitationCode"};
-			Object[] values = new Object[]{rzId,phone,code};
+			String[] params = new String[]{"invitationTelephone","invitationCode"};
+			Object[] values = new Object[]{member.getMemberPhoneNumber(),code};
 			List<EnterpriseInvitation> invitationList = enterpriseInvitationDao.getList(params, values);
 			//存在此邀请的情况下
 			if(invitationList.size()>0){
 				//查询此会员是否已存在
-				String[] ams = new String[]{"rzId","employeesTelephone"};
-				Object[] lus = new Object[]{rzId,phone};
+				String[] ams = new String[]{"employeesTelephone"};
+				Object[] lus = new Object[]{member.getMemberPhoneNumber()};
 				List<EnterpriseEmployees> employeeList = enterpriseEmployeesDao.getList(ams, lus);
 				//标记此手机号码是否已成为企业员工
 				if(employeeList.size()<=0){						
-					ems.setEmployeesComId(rz);
-					ems.setMemberId(rz.getRzManager());
-					ems.setRzId(rzId);
+					ems.setRz(rz);
+					ems.setMember(rz.getRzManager());
 					ems.setEmployeesName(info.getMemberName());
-					ems.setEmployeesTelephone(phone);
+					ems.setEmployeesTelephone(member.getMemberPhoneNumber());
 					ems.setEmployeesDepartment("1");
-//					enterpriseEmployeesDao.save(ems);
 					
 					//企业角色
 					Timestamp createTime = new Timestamp(new Date().getTime());
