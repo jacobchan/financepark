@@ -48,22 +48,19 @@ public class EnterpriseEmployees implements Domain {
 	@Length(max = 2)
 	private String employeesDepartment;// 所属部门
 	
-	@ManyToOne(fetch = FetchType.LAZY,optional=true,cascade=CascadeType.ALL)
-	@JoinColumn(name = "UPDATE_USER_")
-	private MemberInformation updateUser;//修改人
+	@Column(name = "UPDATE_USER_")
+	@Length(max=36)
+	private String updateUser;//修改人
 	
-	@ManyToOne(fetch = FetchType.LAZY,optional=true,cascade=CascadeType.ALL)
-	@JoinColumn(name = "CREATE_USER_")
-	private MemberInformation createUser;//创建人
+	@Column(name = "CREATE_USER_")
+	@Length(max=36)
+	private String createUser;//创建人
 	
 	@Column(name = "UPDATE_TIME_")
 	private Timestamp updateTime;//修改时间
 	
 	@Column(name = "CREATE_TIME_")
 	private Timestamp createTime;//创建时间
-//	
-//	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE},targetEntity = EnterpriseRole.class,mappedBy = "employees")
-//	private Set<EnterpriseRole> enterpriseRole = new HashSet<EnterpriseRole>();
 
 	public String getEmployeesId() {
 		return employeesId;
@@ -113,19 +110,19 @@ public class EnterpriseEmployees implements Domain {
 		this.employeesDepartment = employeesDepartment;
 	}
 
-	public MemberInformation getUpdateUser() {
+	public String getUpdateUser() {
 		return updateUser;
 	}
 
-	public void setUpdateUser(MemberInformation updateUser) {
+	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
 	}
 
-	public MemberInformation getCreateUser() {
+	public String getCreateUser() {
 		return createUser;
 	}
 
-	public void setCreateUser(MemberInformation createUser) {
+	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
 	}
 

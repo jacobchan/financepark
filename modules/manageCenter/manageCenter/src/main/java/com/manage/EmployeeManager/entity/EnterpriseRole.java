@@ -1,6 +1,5 @@
 package com.manage.EmployeeManager.entity;
 import java.sql.Timestamp;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,11 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.Length;
-
-import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 import com.gsoft.framework.security.fuc.entity.Role;
 @Entity
@@ -30,26 +26,26 @@ public class EnterpriseRole implements Domain {
 	private String rId;// 角色主键
 	
 	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.MERGE)
-	@JoinColumn(name = "EMPLOYEES_ID")
+	@JoinColumn(name = "EMPLOYEES_ID", updatable=false)
 	private EnterpriseEmployees employees;// 企业员工ID
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ROLEID")
 	private Role role;// 角色ID
 	
-	@ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.MERGE)
-	@JoinColumn(name = "CREATE_USER_")
-	private MemberInformation createuser;// 创建人
+	@Column(name = "UPDATE_USER_")
+	@Length(max=36)
+	private String updateUser;//修改人
 	
-	@ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.MERGE)
-	@JoinColumn(name = "UPDATE_USER_")
-	private MemberInformation updateuser;// 修改人
-	
-	@Column(name = "CREATE_TIME_")
-	private Timestamp createtime;//创建时间
+	@Column(name = "CREATE_USER_")
+	@Length(max=36)
+	private String createUser;//创建人
 	
 	@Column(name = "UPDATE_TIME_")
-	private Timestamp updatetime;//修改时间
+	private Timestamp updateTime;//修改时间
+	
+	@Column(name = "CREATE_TIME_")
+	private Timestamp createTime;//创建时间
 
 	public String getrId() {
 		return rId;
@@ -75,35 +71,35 @@ public class EnterpriseRole implements Domain {
 		this.role = role;
 	}
 
-	public MemberInformation getCreateuser() {
-		return createuser;
+	public String getUpdateUser() {
+		return updateUser;
 	}
 
-	public void setCreateuser(MemberInformation createuser) {
-		this.createuser = createuser;
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
 	}
 
-	public MemberInformation getUpdateuser() {
-		return updateuser;
+	public String getCreateUser() {
+		return createUser;
 	}
 
-	public void setUpdateuser(MemberInformation updateuser) {
-		this.updateuser = updateuser;
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
 	}
 
-	public Timestamp getCreatetime() {
-		return createtime;
+	public Timestamp getUpdateTime() {
+		return updateTime;
 	}
 
-	public void setCreatetime(Timestamp createtime) {
-		this.createtime = createtime;
+	public void setUpdateTime(Timestamp updateTime) {
+		this.updateTime = updateTime;
 	}
 
-	public Timestamp getUpdatetime() {
-		return updatetime;
+	public Timestamp getCreateTime() {
+		return createTime;
 	}
 
-	public void setUpdatetime(Timestamp updatetime) {
-		this.updatetime = updatetime;
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
 	}
 }
