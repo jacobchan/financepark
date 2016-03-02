@@ -128,38 +128,44 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 	 * @author Zhuyl
 	 */
     @EsbServiceMapping
-	public String acceptEnterpriseInvitation(@ServiceParam(name="member") MemberInformation member, @ServiceParam(name="code") String code) throws BusException{
+	public String acceptEnterpriseInvitation(MemberInformation member, @ServiceParam(name="code") String code) throws BusException{
 		String msg = "";
-    	EnterpriseEmployees ems = new EnterpriseEmployees();
-		EnterpriseRole role = new EnterpriseRole();
+		MemberInformation info = memberInformationDao.get(member.getMemberId());
 		//根据rzId获取入驻企业
 		EnterbusinessmanagerRz rz = enterbusinessmanagerRzDao.getObjectByUniqueProperty("rzSign", code);
-		//根据会员填写的手机号码查询此会员是否存在
-		MemberInformation info = memberInformationDao.getObjectByUniqueProperty("memberPhoneNumber", member.getMemberPhoneNumber());
 		//标记填写的手机号码存在于会员表
 		if(null!=info){
 			//封装获取邀请记录的参数和值
 			String[] params = new String[]{"invitationTelephone","invitationCode"};
-			Object[] values = new Object[]{member.getMemberPhoneNumber(),code};
+			Object[] values = new Object[]{info.getMemberPhoneNumber(),code};
 			List<EnterpriseInvitation> invitationList = enterpriseInvitationDao.getList(params, values);
 			//存在此邀请的情况下
 			if(invitationList.size()>0){
 				//查询此会员是否已存在
 				String[] ams = new String[]{"employeesTelephone"};
-				Object[] lus = new Object[]{member.getMemberPhoneNumber()};
+				Object[] lus = new Object[]{info.getMemberPhoneNumber()};
 				List<EnterpriseEmployees> employeeList = enterpriseEmployeesDao.getList(ams, lus);
 				//标记此手机号码是否已成为企业员工
-				if(employeeList.size()<=0){						
-					ems.setRz(rz);
-					ems.setMember(rz.getRzManager());
-					ems.setEmployeesName(info.getMemberName());
-					ems.setEmployeesTelephone(member.getMemberPhoneNumber());
-					ems.setEmployeesDepartment("1");
-					
+				if(employeeList.size()<=0){
 					//企业角色
 					Timestamp createTime = new Timestamp(new Date().getTime());
 					String[] roleparams = new String[]{"roleId","roleType"};
 					Object[] rolevalues = new Object[]{"ROLE_USER","1"};
+					
+					EnterpriseEmployees ems = new EnterpriseEmployees();
+					EnterpriseRole role = new EnterpriseRole();
+					
+					ems.setRz(rz);
+					ems.setMember(rz.getRzManager());
+					ems.setEmployeesName(info.getMemberName());
+					ems.setEmployeesTelephone(info.getMemberPhoneNumber());
+					ems.setEmployeesDepartment("1");
+					ems.setCreateUser(info);
+					ems.setCreateTime(createTime);
+					ems.setUpdateUser(info);
+					ems.setUpdateTime(createTime);
+//					enterpriseEmployeesDao.save(ems);
+					
 					List<Role> le = roleDao.getList(roleparams, rolevalues);
 					role.setEmployees(ems);
 					role.setRole(le.get(0));
@@ -181,6 +187,7 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 		}
 		return msg;
 	}
+    
 	@Override
 	public EnterpriseEmployees getEnterpriseEmployeesByMember(
 			MemberInformation member) throws BusException {
