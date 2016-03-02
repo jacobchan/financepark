@@ -21,6 +21,7 @@ import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.Assert;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.utils.BizCodeUtil;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos;
 import com.manage.PropertyServiceManager.entity.PropertyservicenanagerBack;
 import com.manage.PropertyServiceManager.dao.PropertyservicenanagerBackDao;
@@ -75,6 +76,7 @@ public class PropertyservicenanagerBackManagerImpl extends BaseManagerImpl imple
 //    	}else{//新增
 //    		
 //    	}
+    	o.setBackCode(BizCodeUtil.getInstance().getBizCodeDate("WYHF"));
     	return propertyservicenanagerBackDao.save(o);
     }
 
