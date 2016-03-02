@@ -4,10 +4,11 @@
 package com.manage.PropertyServiceManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: 访客申请记录
@@ -53,9 +54,13 @@ public class PropertyservicemanagerFkcode implements Domain{
 	@Length(max=32)
 	private String fkcodeName;//联系人
 
-	@Column(name = "MEMBER_ID_")
-	@Length(max=36)
-	private String memberId;//会员用户ID
+//	@Column(name = "MEMBER_ID_")
+//	@Length(max=36)
+//	private String memberId;//会员用户ID
+	
+	@ManyToOne//(fetch = FetchType.LAZY)
+    @JoinColumn(name="MEMBER_ID_")
+	private MemberInformation member;//会员用户ID
 
 	@Column(name = "FKCODE_REMARK_")
 	@Length(max=300)
@@ -69,6 +74,18 @@ public class PropertyservicemanagerFkcode implements Domain{
 	@Length(max=36)
 	private String updateUser;//修改人
 	
+	@Column(name = "APPLY_STATUS_")
+	@Length(max=2)
+	private String applyStatus;//修改人
+	
+	public String getApplyStatus() {
+		return applyStatus;
+	}
+
+	public void setApplyStatus(String applyStatus) {
+		this.applyStatus = applyStatus;
+	}
+
 	public String getCreateTime(){
 		return this.createTime;
 	}
@@ -125,13 +142,15 @@ public class PropertyservicemanagerFkcode implements Domain{
 	public void setFkcodeName(String fkcodeName){
 		this.fkcodeName = fkcodeName;
 	}
-	public String getMemberId(){
-		return this.memberId;
-	}
 	
-	public void setMemberId(String memberId){
-		this.memberId = memberId;
+	public MemberInformation getMember() {
+		return member;
 	}
+
+	public void setMember(MemberInformation member) {
+		this.member = member;
+	}
+
 	public String getFkcodeRemark(){
 		return this.fkcodeRemark;
 	}
@@ -168,7 +187,7 @@ public class PropertyservicemanagerFkcode implements Domain{
 		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
 		result = prime * result + ((fkcodeTelephone == null) ? 0 : fkcodeTelephone.hashCode());
 		result = prime * result + ((fkcodeName == null) ? 0 : fkcodeName.hashCode());
-		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
+		result = prime * result + ((member == null) ? 0 : member.hashCode());
 		result = prime * result + ((fkcodeRemark == null) ? 0 : fkcodeRemark.hashCode());
 		result = prime * result + ((fkcodeTime == null) ? 0 : fkcodeTime.hashCode());
 		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
@@ -224,10 +243,10 @@ public class PropertyservicemanagerFkcode implements Domain{
 				return false;
 		} else if (!fkcodeName.equals(other.fkcodeName))
 			return false;
-		if (memberId == null) {
-			if (other.memberId != null)
+		if (member == null) {
+			if (other.member != null)
 				return false;
-		} else if (!memberId.equals(other.memberId))
+		} else if (!member.equals(other.member))
 			return false;
 		if (fkcodeRemark == null) {
 			if (other.fkcodeRemark != null)
