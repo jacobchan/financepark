@@ -4,10 +4,11 @@
 package com.member.shoppingCarManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: -餐饮购物车
@@ -31,11 +32,11 @@ public class ShoppingcarCatering implements Domain{
 	@Column(name = "UPDATE_USER_")
 	@Length(max=36)
 	private String updateUser;//修改人
-	@Id @GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
-	@Column(name = "COMMODITY_ID_")
-	@Length(max=36)
-	private String commodityId;//商品ID
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="COMMODITY_ID_")
+	private MemberInformation commodityId;//商品ID
+	
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "COMPANY_CATERING_ID_")
@@ -79,13 +80,15 @@ public class ShoppingcarCatering implements Domain{
 	public void setUpdateUser(String updateUser){
 		this.updateUser = updateUser;
 	}
-	public String getCommodityId(){
-		return this.commodityId;
-	}
 	
-	public void setCommodityId(String commodityId){
+	public MemberInformation getCommodityId() {
+		return commodityId;
+	}
+
+	public void setCommodityId(MemberInformation commodityId) {
 		this.commodityId = commodityId;
 	}
+
 	public String getCompanyCateringId(){
 		return this.companyCateringId;
 	}

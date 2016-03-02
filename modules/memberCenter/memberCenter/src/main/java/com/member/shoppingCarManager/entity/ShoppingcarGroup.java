@@ -4,10 +4,11 @@
 package com.member.shoppingCarManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: -集采购物车
@@ -29,6 +30,7 @@ public class ShoppingcarGroup implements Domain{
 	@Column(name = "COMPANY_CATERING_UNIVALENCE_")
 	@Length(max=16)
 	private String companyCateringUnivalence;//商品单价
+	
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "COMPANY_GROUP_ID_")
@@ -41,11 +43,10 @@ public class ShoppingcarGroup implements Domain{
 
 	@Column(name = "UPDATE_TIME_")
 	private String updateTime;//修改时间
-	@Id @GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
-	@Column(name = "COMMODITY_ID_")
-	@Length(max=36)
-	private String commodityId;//商品ID
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="COMMODITY_ID_")
+	private MemberInformation commodityId;//商品ID
 
 	@Column(name = "CREATE_USER_")
 	@Length(max=36)
@@ -97,13 +98,15 @@ public class ShoppingcarGroup implements Domain{
 	public void setUpdateTime(String updateTime){
 		this.updateTime = updateTime;
 	}
-	public String getCommodityId(){
-		return this.commodityId;
-	}
 	
-	public void setCommodityId(String commodityId){
+	public MemberInformation getCommodityId() {
+		return commodityId;
+	}
+
+	public void setCommodityId(MemberInformation commodityId) {
 		this.commodityId = commodityId;
 	}
+
 	public String getCreateUser(){
 		return this.createUser;
 	}
