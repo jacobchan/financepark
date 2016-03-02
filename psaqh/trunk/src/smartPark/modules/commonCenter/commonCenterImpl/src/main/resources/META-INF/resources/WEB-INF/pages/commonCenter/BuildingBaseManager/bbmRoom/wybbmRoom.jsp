@@ -28,7 +28,6 @@
 		<youi:gridCol property="roomHost"  caption="单元业主" width="100" align="center"/>
 		<youi:gridCol property="roomTenement"  caption="单元租户"  width="100" align="center"/>
 		
-		<youi:gridCol property="enteredEnt"  caption="包含企业" width="150px"/>
 		<youi:gridCol property="status"  caption="使用状态" convert="roomstatus" width="150px"/>
 		<youi:gridCol property="rentCharge"  caption="物业_租金" width="150px"/>
 		<%-- <youi:gridCol property="bbmFloor.floorCaption" caption="所属楼层" width="150px"/> --%>
@@ -63,7 +62,6 @@
 			<youi:fieldText property="roomHost"  caption="单元业主" readonly="true"/>
 			<youi:fieldText property="roomTenement"  caption="单元租户" />
 			<youi:fieldSelect property="status"  caption="使用状态"  convert="roomstatus"/>
-			<youi:fieldText property="enteredEnt"  caption="包含企业"/>
 			<youi:fieldText property="rentCharge"  caption="物业_租金" width="150px"/>
 			<youi:fieldText property="eneryCharge"  caption="物业_电费" width="150px"/>
 			<youi:fieldText property="waterCharge"  caption="物业_水费" width="150px"/>
