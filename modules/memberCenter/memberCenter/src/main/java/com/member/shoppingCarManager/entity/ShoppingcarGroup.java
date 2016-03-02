@@ -8,7 +8,7 @@ import javax.persistence.*;
 import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import com.common.MemberManager.entity.MemberInformation;
+import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: -集采购物车
@@ -46,7 +46,7 @@ public class ShoppingcarGroup implements Domain{
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="COMMODITY_ID_")
-	private MemberInformation commodityId;//商品ID
+	private PurchasingmanagerCommodity commodityId;//商品ID
 
 	@Column(name = "CREATE_USER_")
 	@Length(max=36)
@@ -98,12 +98,12 @@ public class ShoppingcarGroup implements Domain{
 	public void setUpdateTime(String updateTime){
 		this.updateTime = updateTime;
 	}
-	
-	public MemberInformation getCommodityId() {
+
+	public PurchasingmanagerCommodity getCommodityId() {
 		return commodityId;
 	}
 
-	public void setCommodityId(MemberInformation commodityId) {
+	public void setCommodityId(PurchasingmanagerCommodity commodityId) {
 		this.commodityId = commodityId;
 	}
 
