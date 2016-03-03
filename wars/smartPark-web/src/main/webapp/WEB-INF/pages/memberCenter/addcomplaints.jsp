@@ -27,25 +27,25 @@
 							</colgroup>
 							<tr>
 								<td align="center">投诉内容</td>
-								<td colspan="3"><textarea></textarea></td>
+								<td colspan="3"><textarea id="cosContent" name="cosContent"></textarea></td>
 							</tr>
 							<tr>
 								<td align="center">接受回访</td>
 								<td>
-									<label><input name="yesNo" class="mr5" checked="checked" type="radio">是</label>
-									<label class="ml30"><input name="yesNo" class="mr5" type="radio">否</label>
+									<label><input name="cosBool" class="mr5" checked="checked" type="radio">是</label>
+									<label class="ml30"><input name="cosBool" class="mr5" type="radio">否</label>
 								</td>
 								<td></td>
 								<td></td>
 							</tr>
 							<tr class="yn-show">
 								<td align="center">联系人</td>
-								<td><input type="text"></td>
+								<td><input id="cosName" name="cosName" type="text"></td>
 							</tr>
 							<tr class="yn-show">
 								<td align="center">回访电话</td>
 								<td>
-									<input type="text">
+									<input id="cosTelephone" name="cosTelephone" type="text">
 								</td>
 							</tr>
 							<tr>
@@ -94,25 +94,22 @@
 	</div>
 	<%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%>
 	<script type="text/javascript">
-		$(function(){
-			$("#property").attr("class","active");
-			$.ajax({
-				url:'/smartPark-web/esb/web/propertyservicemanagerCosManager/getPropertyservicemanagerCoss.json',
+		$('.hhf-submit').click(function(){
+			var cosContent=$("#cosContent").html();	
+			var cosBool=$("#cosBool").val();
+			var cosName=$("#cosName").val();
+			var cosTelephone=$("#cosTelephone").val();
+			$.youi.ajaxUtils.ajax({
+				url:'/smartPark-web/esb/web/propertyservicemanagerCosManager/savePropertyservicemanagerCos.json',
+				data:'cosContent='+cosContent+'cosBool='+cosBool+'cosName='+cosName+'cosTelephone='+cosTelephone,
 				success:function(result){
-					console.log(result.records);
-					if(result&&result.records){
-						_parseRecords(result.records);
+					if(result&&result.record){
+						alert("提交成功");
+						location.reload();
 					}
 				}
 			});
 		});
-		//拼接活动列表
-		function _parseRecords(record){
-			for(var i=0;i<record.length;i++){
-				var html="<tr><td>"+record[i].cosCode+"</td><td>"+record[i].cosName+"</td><td>"+record[i].cosContent+"</td><td>"+record[i].cosStatus+"</td></tr>";
-				$("#czh-knowledge").append(html);
-			}
-		};
 	</script>
 </body>
 </html>
