@@ -14,11 +14,11 @@
 			<%-- <youi:fieldText property="memberId"  caption="会员用户ID"/> --%>
 			<youi:fieldSelect property="member.memberId"  caption="会员姓名" 
 				src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
-			<youi:fieldSelect property="applyStatus"  caption="申请状态" convert="applyStatus" />	
+			<%-- <youi:fieldSelect property="applyStatus"  caption="申请状态" convert="applyStatus" /> --%>	
 		</youi:fieldLayout>
 		<youi:button name="update" caption="修改" icon="edit" active="1"/>
-		<youi:button name="agree" caption="同意" icon="edit" active="1"/>
-		<youi:button name="refuse" caption="拒绝" icon="edit" active="1"/>
+		<%-- <youi:button name="agree" caption="同意" icon="edit" active="1"/>
+		<youi:button name="refuse" caption="拒绝" icon="edit" active="1"/> --%>
 		
 		<youi:gridCol property="fkcodeName"  caption="联系人" width="100" align="center"/>
 		<youi:gridCol property="fkcodeSex"  caption="性别" convert="sex" width="50" align="center"/>
@@ -26,7 +26,7 @@
 		<youi:gridCol property="fkcodeTime"  caption="到访时间" width="100" align="center"/>
 		<youi:gridCol property="member.memberName"  caption="会员姓名" width="100" align="center"/>
 		<youi:gridCol property="fkcodeComp"  caption="到访企业" width="150" align="center"/>
-		<youi:gridCol property="applyStatus"  caption="申请状态" width="100" align="center" convert="applyStatus"/>
+		<%-- <youi:gridCol property="applyStatus"  caption="申请状态" width="100" align="center" convert="applyStatus"/> --%>
 		<youi:gridCol property="fkcodeRemark"  caption="访客说明" width="150"/>
 
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
@@ -108,7 +108,7 @@
         });
    	 </youi:func>
    	 
-   	 <!-- 同意申请 -->
+   	 <!-- 同意申请 
    	 <youi:func name="func_grid_agree">
 		var gridElement = $elem('grid_propertyservicemanagerFkcode',pageId);
 		var	selectedRecord = gridElement.grid('getSelectedRecord');
@@ -129,7 +129,8 @@
 		}
 		$elem('grid_propertyservicemanagerFkcode',pageId).grid('pReload');
    	 </youi:func>
-   	 <!-- 拒绝申请 -->
+   	 -->
+   	 <!-- 拒绝申请 
    	 <youi:func name="func_grid_refuse">
 		var gridElement = $elem('grid_propertyservicemanagerFkcode',pageId);
 		var	selectedRecord = gridElement.grid('getSelectedRecord');
@@ -150,6 +151,7 @@
 		}
 		$elem('grid_propertyservicemanagerFkcode',pageId).grid('pReload');
    	 </youi:func>
+   	 -->
    	 <!-- 提交后，刷新页面 -->
    	 <youi:func name = "form_propertyservicemanagerFkcode_afterSubmit">
 			var formPropertyservicemanagerFkcode = $elem('form_propertyservicemanagerFkcode',pageId);
