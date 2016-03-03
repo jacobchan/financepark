@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : whgk
-Source Server Version : 50538
+Source Server         : yuanqu
+Source Server Version : 50547
 Source Host           : localhost:3306
 Source Database       : youi2
 
 Target Server Type    : MYSQL
-Target Server Version : 50538
+Target Server Version : 50547
 File Encoding         : 65001
 
-Date: 2016-03-02 17:35:57
+Date: 2016-03-03 11:05:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -39,6 +39,7 @@ INSERT INTO `youi_codeitem` VALUES ('2c9dc604391da4c701391dab23d70002', '2c9dc60
 INSERT INTO `youi_codeitem` VALUES ('2c9dc604391da4c701391dab42bd0003', '2c9dc604391da4c701391daaedc80001', '2', 'SQL代码集', null);
 INSERT INTO `youi_codeitem` VALUES ('402809cb53365be001533660c94b0001', '40288aad53078875015307c266c3000f', '04', '已取消', null);
 INSERT INTO `youi_codeitem` VALUES ('402809cb53365be001533661e3a60002', '40288aad53078875015307c266c3000f', '05', '未到访', null);
+INSERT INTO `youi_codeitem` VALUES ('402809cb533674c5015336805c120005', '40288aad53078875015307c266c3000f', '06', '已入驻', null);
 INSERT INTO `youi_codeitem` VALUES ('40283f8153168c33015316f351170002', '40283f8153168c33015316f2fa9c0001', '01', '网银', null);
 INSERT INTO `youi_codeitem` VALUES ('40283f8153168c33015316f387d90003', '40283f8153168c33015316f2fa9c0001', '02', '支付宝', null);
 INSERT INTO `youi_codeitem` VALUES ('40283f8153168c33015316f3c08e0004', '40283f8153168c33015316f2fa9c0001', '03', '微信', null);
@@ -122,6 +123,7 @@ INSERT INTO `youi_codeitem` VALUES ('40288ab252f905180152f90a172a0003', '40288ab
 INSERT INTO `youi_codeitem` VALUES ('40288ab2531113db01531121c6d60002', '40288ab2531113db015311211cf40001', '1', '申请中', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab2531113db01531122be800003', '40288ab2531113db015311211cf40001', '2', '申请成功', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab2531113db01531122ec4c0004', '40288ab2531113db015311211cf40001', '3', '申请失败', null);
+INSERT INTO `youi_codeitem` VALUES ('40288ab2533a65bb01533a6de7480001', '40288acd52f2342b0152f2369e7a0003', '05', '已取消', null);
 INSERT INTO `youi_codeitem` VALUES ('40288abc531c24bb01531c2a88940002', '40288abc531c24bb01531c2a418c0001', '01', '可用', null);
 INSERT INTO `youi_codeitem` VALUES ('40288abc531c24bb01531c2ab6970003', '40288abc531c24bb01531c2a418c0001', '02', '已预订', null);
 INSERT INTO `youi_codeitem` VALUES ('40288abc531c24bb01531c2ad5960004', '40288abc531c24bb01531c2a418c0001', '03', '不可用', null);
@@ -138,13 +140,6 @@ INSERT INTO `youi_codeitem` VALUES ('40288acb53314dd401533190413d0015', '40288ac
 INSERT INTO `youi_codeitem` VALUES ('40288acb53314dd40153319069330016', '40288acb53314dd40153318f0c3b000f', '07', '14:00-15:00', null);
 INSERT INTO `youi_codeitem` VALUES ('40288acb53314dd40153319093800017', '40288acb53314dd40153318f0c3b000f', '08', '15:00-16:00', null);
 INSERT INTO `youi_codeitem` VALUES ('40288acb53314dd401533190c44d0018', '40288acb53314dd40153318f0c3b000f', '09', '16:00-17:00', null);
-INSERT INTO `youi_codeitem` VALUES ('40288acb5336991b015336ab02650004', '40288acb5336991b015336aaade30003', '01', '申请中', null);
-INSERT INTO `youi_codeitem` VALUES ('40288acb5336991b015336ab235b0005', '40288acb5336991b015336aaade30003', '02', '申请成功', null);
-INSERT INTO `youi_codeitem` VALUES ('40288acb5336991b015336ab408a0006', '40288acb5336991b015336aaade30003', '03', '申请失败', null);
-INSERT INTO `youi_codeitem` VALUES ('40288acb5336991b015336adb1610008', '40288acb5336991b015336ad76950007', '00', '待审批', null);
-INSERT INTO `youi_codeitem` VALUES ('40288acb5336991b015336addfd70009', '40288acb5336991b015336ad76950007', '01', '已审批', null);
-INSERT INTO `youi_codeitem` VALUES ('40288acb5336991b015336ae6abd000b', '40288acb5336991b015336ae2b2e000a', '00', '有效', null);
-INSERT INTO `youi_codeitem` VALUES ('40288acb5336991b015336ae8dc0000c', '40288acb5336991b015336ae2b2e000a', '01', '已失效', null);
 INSERT INTO `youi_codeitem` VALUES ('40288acd52f2342b0152f238b84c0009', '40288acd52f2342b0152f238669e0008', '01', '已预定', null);
 INSERT INTO `youi_codeitem` VALUES ('40288acd52f2342b0152f238d793000a', '40288acd52f2342b0152f238669e0008', '02', '已支付', null);
 INSERT INTO `youi_codeitem` VALUES ('40288acd52f2342b0152f23951c2000b', '40288acd52f2342b0152f23628bf0001', '01', '急速采购', null);
