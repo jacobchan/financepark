@@ -10,7 +10,7 @@
 			<dd><a href="grzx4.html">消息</a></dd>
 			<dd><a href="addressBook.html">企业通讯录</a></dd>
 			<dd><a href="grzx6.html">一卡通绑定</a></dd>
-			<dd><a href="grzx7.html">我的地址</a></dd>
+			<dd><a href="myAdderss.html">我的地址</a></dd>
 			<dd><a href="grzx14.html">我的预约</a></dd>
 			<dd><a href="grzx23.html">政策申请</a></dd>
 			<dt>物业服务</dt>
