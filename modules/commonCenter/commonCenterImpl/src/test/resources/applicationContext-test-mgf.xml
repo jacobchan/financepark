@@ -25,7 +25,6 @@
   	
   	<!-- 手工修改 ：根据需要配置加载的类-->
   	<!-- <context:component-scan base-package="com.common.OrderManager"/> -->
-  	<context:component-scan base-package="com.common.MemberManager"/>
   	<context:component-scan base-package="com.common.OrderManager"/>
   	<context:component-scan base-package="com.common.purchasingManager"/>
   	
@@ -66,7 +65,6 @@
 		<!-- 手工修改，根据需要配置加载的实体 -->
 		<property name="annotatedClasses">
 			<list>
-				<value>com.common.MemberManager.entity.MemberInformation</value>
 				<value>com.common.OrderManager.entity.OrdermanagerUserorder</value>
 				<value>com.common.purchasingManager.entity.PurchasingmanagerMerchant</value>
 				<value>com.common.purchasingManager.entity.PurchasingmanagerMerchantAddress</value>
