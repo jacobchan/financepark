@@ -21,6 +21,8 @@
 							<input class="bd-input fl" type="text">
 							<div class="inp-box ml20"><input placeholder="投诉单号查询" type="text"><a class="fa fa-search" href=""></a></div>
 							<input value="搜索" class="hhf-submit f14 fr" type="button">
+						</div>
+						<div class="mt20 gr-txl clearfix lh30">
 							<a href="addcomplaints.html" class="hhf-submit f14 fr">我要投诉</a>
 						</div>
 						<table class="gt-table mt20">
@@ -73,13 +75,6 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		$(function () {
-			$(".ac-show").click(function(){
-				$(".bg-tanc").show();
-			});
-		});
-	</script>
-	<script type="text/javascript">
 		//读取当前用户投诉记录
 		$(function(){
 			$("#grzl").attr("class","");
@@ -92,6 +87,9 @@
 						_parseRecords(result.records);
 					}
 				}
+			});
+			$(".ac-show").click(function(){
+				$(".bg-tanc").show();
 			});
 		});
 		//格式化展示列表
