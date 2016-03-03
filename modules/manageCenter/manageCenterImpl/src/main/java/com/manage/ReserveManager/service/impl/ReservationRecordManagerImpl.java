@@ -159,7 +159,7 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
     	}else{
     		o.setRecordStatus("05");//未到访
     	}
-    	
+    	o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     	return reservationRecordDao.save(o);
     }
     
@@ -169,6 +169,7 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 	@EsbServiceMapping
 	public void changeReservationRecordByStatus(ReservationRecord o) throws BusException {
 		o.setRecordStatus("02");//已授理
+		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		reservationRecordDao.save(o);
 	}
     
@@ -235,6 +236,7 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 			p=reservationRecordDao.get(recordId);//根据主键查询预约记录基础数据
 		}
 		p.setRecordStatus("04");//已取消
+		p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		reservationRecordDao.save(p);
     }
 
