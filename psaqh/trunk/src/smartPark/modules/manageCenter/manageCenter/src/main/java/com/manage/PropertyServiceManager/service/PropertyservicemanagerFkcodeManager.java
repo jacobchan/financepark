@@ -76,6 +76,6 @@ public interface PropertyservicemanagerFkcodeManager extends BaseManager{
 	 * @param fkcodeId 访客申请ID
 	 * @param 标识符，00表示同意申请，01表示拒绝申请
 	 */
-	public void updateFkcode(String fkcodeId,String code) ;
+	//public void updateFkcode(String fkcodeId,String code) ;
 	
 }
