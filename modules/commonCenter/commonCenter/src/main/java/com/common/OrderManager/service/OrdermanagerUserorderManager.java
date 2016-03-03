@@ -12,9 +12,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.EsbServiceMapping;
-import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
-import com.common.OrderManager.entity.OrdermanagerOrderprojecttypeValue;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 
 public interface OrdermanagerUserorderManager extends BaseManager{
@@ -75,15 +72,4 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	 */
 	public PagerRecords getPagerComSerOrders(Pager pager,
 			Collection<Condition> conditions, Collection<Order> orders) throws BusException;
-	/**
-	 * 保存订单
-	 * @param o
-	 * @param orderDetailList 订单明细列表
-	 * @param orderExtendList 订单扩展属性值列表
-	 * @return
-	 * @throws BusException
-	 */
-    @EsbServiceMapping
-    public OrdermanagerUserorder saveOrder(OrdermanagerUserorder o,List<OrdermanagerCommoditydetail> orderDetailList,
-    		List<OrdermanagerOrderprojecttypeValue> orderExtendList) throws BusException;
 }
