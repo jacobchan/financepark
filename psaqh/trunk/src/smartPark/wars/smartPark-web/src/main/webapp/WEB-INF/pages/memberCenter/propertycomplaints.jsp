@@ -27,10 +27,10 @@
 							<colgroup>
 								<col width="150"></col>
 								<col width="150"></col>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="150"></col>
+								<col width="80"></col>
+								<col width="100"></col>
+								<col width="120"></col>
+								<col width="120"></col>
 								<col></col>
 							</colgroup>
 							<tbody id="czh-knowledge">
