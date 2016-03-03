@@ -76,8 +76,13 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
     		fkcode = propertyservicemanagerFkcodeDao.save(o) ;//保存访客申请
     	}else{//新增
     		//如果是新增，则要创建对应的二维码
-    		o.setApplyStatus("01");//默认申请状态为申请中
+    		//o.setApplyStatus("01");//默认申请状态为申请中
     		fkcode = propertyservicemanagerFkcodeDao.save(o) ;//保存访客申请
+    		
+    		PropertyservicemanagerTwcrd twcrd = new PropertyservicemanagerTwcrd() ;//申请成功后会生成对应的二维码
+    		twcrd.setStatus("00");//00二维码状态为有效,01表示无效
+    		twcrd.setPropertyservicemanagerFkcode(fkcode);//将访客申请set到对应的二维码中
+    		propertyservicemanagerTwcrdManager.savePropertyservicemanagerTwcrd(twcrd) ;//保存访客申请的二维码
     	}
     	return fkcode;
     }
@@ -141,20 +146,21 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
 	 * @param fkcodeId 访客申请ID
 	 * @param 标识符，00表示同意申请，01表示拒绝申请
 	 */
-    @Override
-    @EsbServiceMapping
-    public void updateFkcode(@ServiceParam(name="fkcodeId")String fkcodeId, @ServiceParam(name="code")String code) {
-    	PropertyservicemanagerFkcode fkcode = propertyservicemanagerFkcodeDao.get(fkcodeId) ;
-    	if("00".equals(code)){//同意
-    		fkcode.setApplyStatus("02");//02表示申请成功
-    		fkcode = propertyservicemanagerFkcodeDao.save(fkcode) ;
-    		PropertyservicemanagerTwcrd twcrd = new PropertyservicemanagerTwcrd() ;//申请成功后会生成对应的二维码
-    		twcrd.setPropertyservicemanagerFkcode(fkcode);//将访客申请set到对应的二维码中
-    		propertyservicemanagerTwcrdManager.savePropertyservicemanagerTwcrd(twcrd) ;//保存访客申请的二维码
-    	}
-    	if("01".equals(code)){//拒绝
-    		fkcode.setApplyStatus("03");//03表示申请失败
-        	propertyservicemanagerFkcodeDao.save(fkcode) ;
-    	}
-    }
+//    @Override
+//    @EsbServiceMapping
+//    public void updateFkcode(@ServiceParam(name="fkcodeId")String fkcodeId, @ServiceParam(name="code")String code) {
+//    	PropertyservicemanagerFkcode fkcode = propertyservicemanagerFkcodeDao.get(fkcodeId) ;
+//    	if("00".equals(code)){//同意
+//    		fkcode.setApplyStatus("02");//02表示申请成功
+//    		fkcode = propertyservicemanagerFkcodeDao.save(fkcode) ;
+//    		PropertyservicemanagerTwcrd twcrd = new PropertyservicemanagerTwcrd() ;//申请成功后会生成对应的二维码
+//    		twcrd.setStatus("00");//00二维码状态为有效,01表示无效
+//    		twcrd.setPropertyservicemanagerFkcode(fkcode);//将访客申请set到对应的二维码中
+//    		propertyservicemanagerTwcrdManager.savePropertyservicemanagerTwcrd(twcrd) ;//保存访客申请的二维码
+//    	}
+//    	if("01".equals(code)){//拒绝
+//    		fkcode.setApplyStatus("03");//03表示申请失败
+//        	propertyservicemanagerFkcodeDao.save(fkcode) ;
+//    	}
+//    }
 }
