@@ -37,17 +37,17 @@
 						<tr>
 							<td>号码</td>
 							<td>
-								<input type="text" id="companyId">
+								<input type="text" id="memberPhoneNumber">
 								<a href="javascript:;" class="ml15 open-tanc"><i class="fa fa-plus-circle mr5"></i>发送验证码</a>
 							</td>
 						</tr>
-						<!-- <tr>
+						 <tr>
 							<td>验证码</td>
 							<td>
-								<input type="text" id="companyId">
+								<input type="text" id="aaaaa">
 								
 							</td>
-						</tr> -->
+						</tr> 
 						<tr>
 							<td colspan="2">
 								<input type="submit" value="修改" class="hhf-submit" style="height:36px;" />
@@ -75,7 +75,7 @@
 		
 		function _parseRecords(record){
 			$("#memberId").html(record.memberId);
-			$("#memberPhoneNumber").val(record.memberNickname);
+			$("#memberPhoneNumber").val(record.memberPhoneNumber);
 			
 		};
 		
