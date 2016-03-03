@@ -46,7 +46,7 @@
 					data:{id:selectedRecord.fxtdcId},
 					success:function(result){	
 						$elem('grid_propertyservicemanagerFxtdc',pageId).grid('pReload');
-						alert("扫描成功!");
+						alert(result.record.html);
 						}
 					});
 

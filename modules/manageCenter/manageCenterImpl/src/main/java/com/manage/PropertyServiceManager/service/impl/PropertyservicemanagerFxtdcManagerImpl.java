@@ -113,21 +113,24 @@ public class PropertyservicemanagerFxtdcManagerImpl extends BaseManagerImpl impl
 	 * @throws BusException
 	 */
 	@EsbServiceMapping
-	public void upfxtdById(@ServiceParam(name="id") String id) throws BusException {
+	public String upfxtdById(@ServiceParam(name="id") String id) throws BusException {
+		String msg = "";
 		PropertyservicemanagerFxtdc fxtdc = propertyservicemanagerFxtdcDao.get(id);
 		//搬家申请有效时间
 		String fxdate = fxtdc.getPropertyservicemanagerMoverec().getMoverecTime();
 		String today = DateUtils.getToday("yyyy-MM-dd");
 		if(fxdate.compareTo(today)>0){
-			throw new BusException("搬家申请时间为"+fxdate);
+			msg	=	"搬家申请时间为"+fxdate;
 		}else if(fxdate.compareTo(today)<0){
 			fxtdc.setFxtdcStatus("01");
 			propertyservicemanagerFxtdcDao.save(fxtdc);
-			throw new BusException("二维码已过期!");
+			msg	=	"二维码已过期!";
 		}else{
 			fxtdc.setFxtdcStatus("01");
 			propertyservicemanagerFxtdcDao.save(fxtdc);
+			msg	=	"扫描成功!";
 		}
+		return msg;
 	}
 	
 
