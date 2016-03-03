@@ -190,7 +190,7 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 	@Override
 	public EnterpriseEmployees getEnterpriseEmployeesByMember(
 			MemberInformation member) throws BusException {
-		EnterpriseEmployees enterpriseEmployees = enterpriseEmployeesDao.getObjectByUniqueProperty("memberId", member) ;
+		EnterpriseEmployees enterpriseEmployees = enterpriseEmployeesDao.getObjectByUniqueProperty("member", member) ;
 		return enterpriseEmployees;
 	}
 }
