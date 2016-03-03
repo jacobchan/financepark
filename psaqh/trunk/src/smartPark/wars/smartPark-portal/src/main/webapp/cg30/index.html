@@ -355,7 +355,11 @@
 <script type="text/javascript">
         $(function(){
             $('.square_ul>li').plist({
-                template:'{goodsName}<p class="cc">&yen;{price}</p>',
+                template:'<div class="cgimg"><img src={commodityImage}.png></div>'+
+                		'<a href=../cg30/cg_xq.html?id={commodityId} class="c3">{commodityTitle}</a>'+
+                		'<div class="mt5"><span class="ccheng">{commodityPrice}</span>元'+
+                		'<a href=../cg30/shopcar.html?id={commodityId} class="fr"><img src="../styles/images/cg30/add.png"></a></div>'+
+                		'<div class="cg_tag"><img src={commodityBrand}.png></div>',
                 jsonpSrc:'http://localhost:9088/jsonp/data.jsp?data:file=cg_bg.json'
             });
         });
