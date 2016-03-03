@@ -4,10 +4,13 @@
 package com.member.MemberCommentManager.entity;
 
 import javax.persistence.*;
+
 import org.hibernate.validator.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
+import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: -商品评价
@@ -21,10 +24,9 @@ public class MemberComment implements Domain{
 	
 	private static final long serialVersionUID = -394241092932703095L;
 	
-
-	@Column(name = "COMMODITY_ID_")
-	@Length(max=36)
-	private String commodityId;//商品ID
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="COMMODITY_ID_")
+	private PurchasingmanagerCommodity commodityId;//商品ID
 
 	@Column(name = "UPDATE_USER_")
 	@Length(max=36)
@@ -50,9 +52,10 @@ public class MemberComment implements Domain{
 	@Length(max=1024)
 	private String goodsCommentContent;//商品评价内容
 
-	@Column(name = "MEMBER_ID_")
-	@Length(max=36)
-	private String memberId;//会员用户ID
+
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="MEMBER_ID_")
+	private MemberInformation memberId;//会员用户ID
 
 	@Column(name = "GOODS_COMMENT_TIME_")
 	private String goodsCommentTime;//商品评价时间
@@ -67,13 +70,7 @@ public class MemberComment implements Domain{
 	@Column(name = "GOODS_COMMENT_REVIEWTIME_")
 	private String goodsCommentReviewtime;//商品评价追评时间
 	
-	public String getCommodityId(){
-		return this.commodityId;
-	}
-	
-	public void setCommodityId(String commodityId){
-		this.commodityId = commodityId;
-	}
+
 	public String getUpdateUser(){
 		return this.updateUser;
 	}
@@ -116,13 +113,24 @@ public class MemberComment implements Domain{
 	public void setGoodsCommentContent(String goodsCommentContent){
 		this.goodsCommentContent = goodsCommentContent;
 	}
-	public String getMemberId(){
-		return this.memberId;
-	}
 	
-	public void setMemberId(String memberId){
+	
+	public PurchasingmanagerCommodity getCommodityId() {
+		return commodityId;
+	}
+
+	public void setCommodityId(PurchasingmanagerCommodity commodityId) {
+		this.commodityId = commodityId;
+	}
+
+	public MemberInformation getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(MemberInformation memberId) {
 		this.memberId = memberId;
 	}
+
 	public String getGoodsCommentTime(){
 		return this.goodsCommentTime;
 	}
