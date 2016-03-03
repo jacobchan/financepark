@@ -9,7 +9,7 @@
 		edit="NOT" remove="NOT" showCheckbox="true"
 		removeSrc="esb/web/etypeEnterprisetypeManager/removeEtypeEnterprisetype.json">
 		<youi:fieldLayout labelWidths="120,120">
-			<youi:fieldTree simple="false" popup="true" tree="${enetrTree}" property="etypeEnterprisetype.enTypeId" caption="企业类型"/>
+			<youi:fieldTree simple="false" popup="true" tree="${enetrTree}" property="enTypeId" caption="企业类型"/>
 			<youi:fieldText property="enTypeName" caption="企业类型名称" />
 		</youi:fieldLayout>
 		<youi:gridCol property="etypeEnterprisetype.enTypeName" caption="上级" width="300" />
@@ -28,7 +28,7 @@
 		action="esb/web/etypeEnterprisetypeManager/saveEtypeEnterprisetype.json">
 		<youi:fieldLayout prefix="record" columns="1" labelWidths="120,120">
 			<youi:fieldHidden property="enTypeId" caption="企业类型名称" />
-			<youi:fieldTree simple="false" popup="true" tree="${enetrTree}" property="etypeEnterprisetype.enTypeId" caption="企业类型"/>
+			<youi:fieldTree simple="false" popup="true" tree="${enetrTree}" property="enTypeId" caption="企业类型"/>
 			<youi:fieldText property="enTypeName" caption="企业类型名称" />
 		</youi:fieldLayout>
 	</youi:form>
