@@ -20,6 +20,8 @@ import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.service.MemberInformationManager;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.common.OrderManager.dao.OrdermanagerUserorderDao;
 import com.common.OrderManager.service.OrdermanagerUserorderManager;
@@ -29,6 +31,8 @@ import com.common.OrderManager.service.OrdermanagerUserorderManager;
 public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements OrdermanagerUserorderManager{
 	@Autowired
 	private OrdermanagerUserorderDao ordermanagerUserorderDao;
+	@Autowired
+	private MemberInformationManager memberInformationManager;
 	
     /**
      * 查询列表
@@ -74,7 +78,12 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     		o.setCreateUser(o.getUpdateUser());
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setMemberId(o.getUpdateUser());
+    		if(StringUtils.isNotEmpty(o.getUpdateUser())){
+    			MemberInformation mem = memberInformationManager.getMemberInformation(o.getUpdateUser());
+    			o.setUserorderBuyUser(mem.getMemberName());
+    		}
     	}
     	return ordermanagerUserorderDao.save(o);
     }
