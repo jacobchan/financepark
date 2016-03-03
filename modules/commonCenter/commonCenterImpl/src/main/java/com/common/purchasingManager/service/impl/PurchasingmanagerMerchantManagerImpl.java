@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
-//import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
@@ -22,8 +21,8 @@ import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.common.purchasingManager.entity.PurchasingmanagerMerchant;
-import com.common.purchasingManager.dao.PurchasingmanagerGenreDao;
 import com.common.purchasingManager.dao.PurchasingmanagerMerchantDao;
+import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
 import com.common.purchasingManager.service.PurchasingmanagerMerchantManager;
 
 @Service("purchasingmanagerMerchantManager")
@@ -32,7 +31,7 @@ public class PurchasingmanagerMerchantManagerImpl extends BaseManagerImpl implem
 	@Autowired
 	private PurchasingmanagerMerchantDao purchasingmanagerMerchantDao;
 	@Autowired
-	private PurchasingmanagerGenreDao purchasingmanagerGenreDao;
+	private PurchasingmanagerGenreManager purchasingmanagerGenreManager;
 	
     /**
      * 查询列表
@@ -84,7 +83,7 @@ public class PurchasingmanagerMerchantManagerImpl extends BaseManagerImpl implem
     		pm.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return purchasingmanagerMerchantDao.save(pm);
     	}else{//新增
-    		PurchasingmanagerGenre pg=purchasingmanagerGenreDao.get(o.getMerchantType().getGenreId());
+    		PurchasingmanagerGenre pg= purchasingmanagerGenreManager.getPurchasingmanagerGenre(o.getMerchantType().getGenreId());
     		if(pg != null){
     			o.setMerchantType(pg);
     		}
@@ -126,7 +125,7 @@ public class PurchasingmanagerMerchantManagerImpl extends BaseManagerImpl implem
     @Override
     @EsbServiceMapping
 	public List<PurchasingmanagerMerchant> getMerchantsByGenre(@ServiceParam(name="purchasingmanagerGenre.genreId") String genreId)  throws BusException{
-    	PurchasingmanagerGenre pg = purchasingmanagerGenreDao.get(genreId);
+    	PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(genreId);
     	while(pg.getPurchasingmanagerGenre() != null){
     		pg = pg.getPurchasingmanagerGenre();
     	}
