@@ -1,180 +1,180 @@
 {
 	"records":[{
-		"commodityImage":"../styles/images/cg30/cg_w1.png",
+		"commodityImage":"../styles/images/cg30/cg_w1",
 		"commodityTitle":"测试9091  文集金属网彩色文件夹",
 		"commodityPrice":"9",
 		"commodityId":"1",
-		"commodityBrand":"../styles/images/cg30/cg_wtip.png"
+		"commodityBrand":"../styles/images/cg30/cg_wtip"
 	},{
-		"commodityImage":"../styles/images/cg30/cg_w2.png",
+		"commodityImage":"../styles/images/cg30/cg_w2",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"19",
 		"commodityId":"2",
-		"commodityBrand":"../styles/images/cg30/cg_wtip.png"
+		"commodityBrand":"../styles/images/cg30/cg_wtip"
 	},
 	{
-		"commodityImage":"../styles/images/cg30/cg_w3.png",
+		"commodityImage":"../styles/images/cg30/cg_w3",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"29",
 		"commodityId":"3",
-		"commodityBrand":"../styles/images/cg30/cg_wtip.png"
+		"commodityBrand":"../styles/images/cg30/cg_wtip"
 	},
 	{
-		"commodityImage":"../styles/images/cg30/cg_w1.png",
+		"commodityImage":"../styles/images/cg30/cg_w1",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"39",
 		"commodityId":"4",
-		"commodityBrand":"../styles/images/cg30/cg_wtip.png"
+		"commodityBrand":"../styles/images/cg30/cg_wtip"
 	},
 	{
-		"commodityImage":"../styles/images/cg30/cg_w2.png",
+		"commodityImage":"../styles/images/cg30/cg_w2",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"49",
 		"commodityId":"5",
-		"commodityBrand":"../styles/images/cg30/cg_wtip.png"
+		"commodityBrand":"../styles/images/cg30/cg_wtip"
 	},
 	{
-		"commodityImage":"../styles/images/cg30/cg_w3.png",
+		"commodityImage":"../styles/images/cg30/cg_w3",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"59",
 		"commodityId":"6",
-		"commodityBrand":"../styles/images/cg30/cg_wtip.png"
+		"commodityBrand":"../styles/images/cg30/cg_wtip"
 	},{  //清洁绿化
-		"commodityImage":"../styles/images/cg30/cg_q1.png",
+		"commodityImage":"../styles/images/cg30/cg_q1",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"19",
 		"commodityId":"7",
-		"commodityBrand":"../styles/images/cg30/cg_wtip.png"
+		"commodityBrand":"../styles/images/cg30/cg_wtip"
 	},
 	{
-		"commodityImage":"../styles/images/cg30/cg_q1.png",
+		"commodityImage":"../styles/images/cg30/cg_q1",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"29",
 		"commodityId":"8",
-		"commodityBrand":"../styles/images/cg30/cg_wtip.png"
+		"commodityBrand":"../styles/images/cg30/cg_wtip"
 	},
 	{
-		"commodityImage":"../styles/images/cg30/cg_q3.png",
+		"commodityImage":"../styles/images/cg30/cg_q3",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"39",
 		"commodityId":"9",
-		"commodityBrand":"../styles/images/cg30/cg_wtip.png"
+		"commodityBrand":"../styles/images/cg30/cg_wtip"
 	},
 	{
-		"commodityImage":"../styles/images/cg30/cg_q2.png",
+		"commodityImage":"../styles/images/cg30/cg_q2",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"49",
 		"commodityId":"10",
-		"commodityBrand":"../styles/images/cg30/cg_wtip.png"
+		"commodityBrand":"../styles/images/cg30/cg_wtip"
 	},
 	{
-		"commodityImage":"../styles/images/cg30/cg_q3.png",
+		"commodityImage":"../styles/images/cg30/cg_q3",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"59",
 		"commodityId":"11",
-		"commodityBrand":"../styles/images/cg30/cg_wtip.png"
+		"commodityBrand":"../styles/images/cg30/cg_wtip"
 	},{
-		"commodityImage":"../styles/images/cg30/cg_q1.png",
+		"commodityImage":"../styles/images/cg30/cg_q1",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"19",
 		"commodityId":"12",
-		"commodityBrand":"../styles/images/cg30/cg_wtip.png"
+		"commodityBrand":"../styles/images/cg30/cg_wtip"
 	},
 	{
-		"commodityImage":"../styles/images/cg30/cg_q2.png",
+		"commodityImage":"../styles/images/cg30/cg_q2",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"29",
 		"commodityId":"13",
-		"commodityBrand":"../styles/images/cg30/cg_wtip.png"
+		"commodityBrand":"../styles/images/cg30/cg_wtip"
 	},
 	{
-		"commodityImage":"../styles/images/cg30/cg_q3.png",
+		"commodityImage":"../styles/images/cg30/cg_q3",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"39",
 		"commodityId":"14",
-		"commodityBrand":"../styles/images/cg30/cg_wtip.png"
+		"commodityBrand":"../styles/images/cg30/cg_wtip"
 	},
 	{  //办公家私
-		"commodityImage":"../styles/images/cg30/cg_b1.png",
+		"commodityImage":"../styles/images/cg30/cg_b1",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"49",
 		"commodityId":"15",
-		"commodityBrand":"../styles/images/cg30/cg_btip.png"
+		"commodityBrand":"../styles/images/cg30/cg_btip"
 	},
 	{
-		"commodityImage":"../styles/images/cg30/cg_b2.png",
+		"commodityImage":"../styles/images/cg30/cg_b2",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"59",
 		"commodityId":"16",
-		"commodityBrand":"../styles/images/cg30/cg_btip.png"
+		"commodityBrand":"../styles/images/cg30/cg_btip"
 	},{
-		"commodityImage":"../styles/images/cg30/cg_b1.png",
+		"commodityImage":"../styles/images/cg30/cg_b1",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"19",
 		"commodityId":"17",
-		"commodityBrand":"../styles/images/cg30/cg_btip.png"
+		"commodityBrand":"../styles/images/cg30/cg_btip"
 	},
 	{
-		"commodityImage":"../styles/images/cg30/cg_b2.png",
+		"commodityImage":"../styles/images/cg30/cg_b2",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"29",
 		"commodityId":"18",
-		"commodityBrand":"../styles/images/cg30/cg_btip.png"
+		"commodityBrand":"../styles/images/cg30/cg_btip"
 	},
 	{   //IT
-		"commodityImage":"../styles/images/cg30/cg_it1.png",
+		"commodityImage":"../styles/images/cg30/cg_it1",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"39",
 		"commodityId":"19",
-		"commodityBrand":"../styles/images/cg30/cg_btip.png"
+		"commodityBrand":"../styles/images/cg30/cg_btip"
 	},
 	{
-		"commodityImage":"../styles/images/cg30/cg_it2.png",
+		"commodityImage":"../styles/images/cg30/cg_it2",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"49",
 		"commodityId":"20",
-		"commodityBrand":"../styles/images/cg30/cg_btip.png"
+		"commodityBrand":"../styles/images/cg30/cg_btip"
 	},
 	{
-		"commodityImage":"../styles/images/cg30/cg_it1.png",
+		"commodityImage":"../styles/images/cg30/cg_it1",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"59",
 		"commodityId":"21",
-		"commodityBrand":"../styles/images/cg30/cg_btip.png"
+		"commodityBrand":"../styles/images/cg30/cg_btip"
 	},{
-		"commodityImage":"../styles/images/cg30/cg_it2.png",
+		"commodityImage":"../styles/images/cg30/cg_it2",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"19",
 		"commodityId":"22",
-		"commodityBrand":"../styles/images/cg30/cg_btip.png"
+		"commodityBrand":"../styles/images/cg30/cg_btip"
 	},
 	{	//手机
-		"commodityImage":"../styles/images/cg30/cg_sm1.png",
+		"commodityImage":"../styles/images/cg30/cg_sm1",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"29",
 		"commodityId":"23",
-		"commodityBrand":"../styles/images/cg30/cg_btip.png"
+		"commodityBrand":"../styles/images/cg30/cg_btip"
 	},
 	{
-		"commodityImage":"../styles/images/cg30/cg_sm2.png",
+		"commodityImage":"../styles/images/cg30/cg_sm2",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"39",
 		"commodityId":"24",
-		"commodityBrand":"../styles/images/cg30/cg_btip.png"
+		"commodityBrand":"../styles/images/cg30/cg_btip"
 	},
 	{
-		"commodityImage":"../styles/images/cg30/cg_sm1.png",
+		"commodityImage":"../styles/images/cg30/cg_sm1",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"49",
 		"commodityId":"25",
-		"commodityBrand":"../styles/images/cg30/cg_btip.png"
+		"commodityBrand":"../styles/images/cg30/cg_btip"
 	},
 	{
-		"commodityImage":"../styles/images/cg30/cg_sm1.png",
+		"commodityImage":"../styles/images/cg30/cg_sm1",
 		"commodityTitle":"得力9091  文集金属网彩色文件夹",
 		"commodityPrice":"59",
 		"commodityId":"26",
-		"commodityBrand":"../styles/images/cg30/cg_btip.png"
+		"commodityBrand":"../styles/images/cg30/cg_btip"
 	}
 	],
 	"record":{},

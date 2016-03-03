@@ -95,6 +95,20 @@
 <script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 <script type="text/javascript" src="../scripts/page/cg30com.js"></script>
 <script>
+$(function(){
+	var arg=getQueryStringArgs();
+    $('.goods').filters({
+        template:'<img src={commodityImage}.png><span class="vm inline_b">'+
+        		 '<span class="c3 f18">{commodityTitle}&nbsp;&nbsp;橘黄色&nbsp;&nbsp;{commodityPrice}元</span><br/>'+
+        		 '<span class="c_green f28">已成功加入购物车！</span>'+
+        		 '</span>',
+        jsonpSrc:'http://localhost:9088/jsonp/data.jsp?data:file=cg_bg.json',
+        type:"commodityId",
+        val:arg.id
+    });
+});
+</script>
+<script>
 	$(function(){
 		$(".b1").hover(function(){
 			$(".b1mask").toggleClass("hide");
