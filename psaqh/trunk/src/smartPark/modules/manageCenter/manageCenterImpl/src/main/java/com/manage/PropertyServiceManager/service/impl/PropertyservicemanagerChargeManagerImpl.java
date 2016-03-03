@@ -3,7 +3,6 @@
  */
 package com.manage.PropertyServiceManager.service.impl;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Collection;
 
@@ -15,11 +14,11 @@ import com.common.OrderManager.dao.OrdermanagerUserorderDao;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
-//import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCharge;
@@ -71,39 +70,30 @@ public class PropertyservicemanagerChargeManagerImpl extends BaseManagerImpl imp
     /**
      * 保存对象
      */
-    @EsbServiceMapping
-    public PropertyservicemanagerCharge savePropertyservicemanagerCharge(PropertyservicemanagerCharge o,
-    		@ServiceParam(name="propertyFee") String propertyFee,@ServiceParam(name="waterFee") String waterFee,
-    		@ServiceParam(name="powerFee") String powerFee) throws BusException{
-    	PropertyservicemanagerCharge pc = new PropertyservicemanagerCharge();
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+    public PropertyservicemanagerCharge savePropertyservicemanagerCharge(PropertyservicemanagerCharge o) throws BusException{
     	String chargeId = o.getChargeId();
     	boolean isUpdate = StringUtils.isNotEmpty(chargeId);
     	if(isUpdate){//修改
+    		PropertyservicemanagerCharge pc = new PropertyservicemanagerCharge();
     		pc = propertyservicemanagerChargeDao.get(chargeId);
-    		pc.setBbmRoom(o.getBbmRoom());
     		pc.setChargeIsbool(o.getChargeIsbool());
     		pc.setChargeCreatetime(o.getChargeCreatetime());
     		pc.setChargeBedate(o.getChargeBedate());
     		pc.setChargeEndate(o.getChargeEndate());
-    		
-    		BigDecimal chargeAmount = propertyservicemanagerSfproManager.getChargeAmountByCharge(pc);
-    		
+    		pc.setChargeAmount(o.getChargeAmount());
+    		pc.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		OrdermanagerUserorder userOrder = pc.getUserorder();
-    		userOrder.setUserorderAmount(chargeAmount);
+    		userOrder.setUserorderAmount(o.getChargeAmount());
     		ordermanagerUserorderDao.save(userOrder);
     		
-    		pc.setChargeAmount(chargeAmount);
-    		pc = propertyservicemanagerChargeDao.save(pc);
+    		return propertyservicemanagerChargeDao.save(pc);
     	}else{//新增
-    		OrdermanagerUserorder userOrder = new OrdermanagerUserorder();
-    		userOrder.setUserorderAmount(BigDecimal.valueOf(0).setScale(2, BigDecimal.ROUND_HALF_UP));
-    		userOrder.setUserorderCode("123");
-    		userOrder = ordermanagerUserorderDao.save(userOrder);
-    		o.setUserorder(userOrder);
-    		o.setChargeAmount(BigDecimal.valueOf(0).setScale(2, BigDecimal.ROUND_HALF_UP));
-    		pc = propertyservicemanagerChargeDao.save(o);
+    		o.setCreateUser(o.getUpdateUser());
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return propertyservicemanagerChargeDao.save(o);
     	}
-    	return pc;
     }
 
     /**

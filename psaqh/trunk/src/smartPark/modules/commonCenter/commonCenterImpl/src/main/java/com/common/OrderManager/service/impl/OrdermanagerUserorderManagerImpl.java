@@ -74,7 +74,12 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     	boolean isUpdate = StringUtils.isNotEmpty(userorderId);
     	if(isUpdate){//修改
     		OrdermanagerUserorder order = ordermanagerUserorderDao.get(userorderId);
-    		order.setUserorderStatus(o.getUserorderStatus());
+    		if(o.getUserorderAmount() != null){
+    			order.setUserorderAmount(o.getUserorderAmount());
+    		}
+    		if(o.getUserorderStatus() != null){
+    			order.setUserorderStatus(o.getUserorderStatus());
+    		}
     		order.setUpdateUser(o.getUpdateUser());
     		order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return ordermanagerUserorderDao.save(order);

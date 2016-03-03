@@ -39,8 +39,7 @@ public interface PropertyservicemanagerChargeManager extends BaseManager{
     /**
      * 保存并返回对象
      */
-    public PropertyservicemanagerCharge savePropertyservicemanagerCharge(PropertyservicemanagerCharge o,
-    		String propertyFee,String waterFee,String powerFee) throws BusException;
+    public PropertyservicemanagerCharge savePropertyservicemanagerCharge(PropertyservicemanagerCharge o) throws BusException;
 
     /**
      * 删除对象

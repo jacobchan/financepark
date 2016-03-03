@@ -190,4 +190,12 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
     	}
 		return pg;
 	}
+	/**
+	 * 根据类别唯一编号获取对象
+	 */
+	@Override
+	public PurchasingmanagerGenre getGenreByUniqueProperty(String genreCode)
+			throws BusException {
+		return purchasingmanagerGenreDao.getObjectByUniqueProperty("genreCode", genreCode);
+	}
 }
