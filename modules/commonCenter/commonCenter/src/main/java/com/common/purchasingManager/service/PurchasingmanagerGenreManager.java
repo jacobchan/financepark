@@ -89,4 +89,11 @@ public interface PurchasingmanagerGenreManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public PurchasingmanagerGenre getSuperGenre(String genreId) throws BusException;
+	/**
+	 * 根据类别唯一编号获取对象
+	 * @param genreCode
+	 * @return
+	 * @throws BusException
+	 */
+    public PurchasingmanagerGenre getGenreByUniqueProperty(String genreCode) throws BusException;
 }

@@ -124,7 +124,7 @@ public class PropertyservicemanagerTwcrdManagerImpl extends BaseManagerImpl impl
 	public void updateTwcrd(@ServiceParam(name="twcrdId")String twcrdId) {
 		if(StringUtils.isNotEmpty(twcrdId)){
 			PropertyservicemanagerTwcrd twcrd = propertyservicemanagerTwcrdDao.get(twcrdId) ;
-			twcrd.setStatus("01");//将二维码状态设置为已失效
+//			twcrd.setStatus("01");//将二维码状态设置为已失效
 			propertyservicemanagerTwcrdDao.save(twcrd) ;
 		}
 	}
