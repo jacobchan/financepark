@@ -33,6 +33,14 @@
 								<col></col>
 							</colgroup>
 							<tbody id="czh-knowledge">
+								<tr>
+									<th>订单号</th>
+									<th>申请时间</th>
+									<th>状态</th>
+									<th>联系人</th>
+									<th>联系电话</th>
+									<th>操作</th>
+								</tr>
 							</tbody>
 						</table>
 						<div class="fr page-list-a clearfix lh30 mt20 f12">
@@ -51,6 +59,7 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+		//读取当前用户投诉记录
 		$(function(){
 			$("#grzl").attr("class","");
 			$("#property").attr("class","active");
@@ -64,11 +73,33 @@
 				}
 			});
 		});
-		//拼接活动列表
+		//格式化展示列表
 		function _parseRecords(record){
 			$("#count").append(record.length);
 			for(var i=0;i<record.length;i++){
-				var html="<tr><td>"+record[i].cosCode+"</td><td>"+record[i].cosTime+"</td><td>"+record[i].cosBool+"</td><td>"+record[i].cosName+"</td><td>"+record[i].cosTelephone+"</td><td>"+record[i].cosStatus+"</td></tr>";
+				var bool = "";
+				var status = "";
+				if(record[i].cosBool=='0'){
+					bool = "是";
+				}else{
+					bool = "否";
+				}
+				if(record[i].cosStatus=='0'){
+					status = "待受理";
+				}else if(record[i].cosStatus=='1'){
+					status = "受理中";
+				}else if(record[i].cosStatus=='2'){
+					status = "已受理";
+				}else if(record[i].cosStatus=='3'){
+					status = "已退回";
+				}else if(record[i].cosStatus=='4'){
+					status = "已回访";
+				}else if(record[i].cosStatus=='5'){
+					status = "待评价";
+				}else if(record[i].cosStatus=='6'){
+					status = "已评价";
+				}
+				var html="<tr><td>"+record[i].cosCode+"</td><td>"+record[i].cosTime+"</td><td>"+bool+"</td><td>"+record[i].cosName+"</td><td>"+record[i].cosTelephone+"</td><td>"+status+"</td></tr>";
 				$("#czh-knowledge").append(html);
 			}
 		};
