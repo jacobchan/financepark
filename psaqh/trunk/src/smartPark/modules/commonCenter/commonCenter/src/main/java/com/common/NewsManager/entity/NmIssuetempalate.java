@@ -61,7 +61,7 @@ public class NmIssuetempalate implements Domain{
 	@Length(max=36)
 	private String issueTempalateId;//发布模板ID
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="ISSUE_TYPE_ID_")
 	private com.common.NewsManager.entity.NmIssuetype nmIssuetype;//发布类型ID
 	
