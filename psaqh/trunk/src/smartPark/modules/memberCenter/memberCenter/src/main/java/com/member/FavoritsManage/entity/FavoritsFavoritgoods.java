@@ -4,10 +4,13 @@
 package com.member.FavoritsManage.entity;
 
 import javax.persistence.*;
+
 import org.hibernate.validator.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
+import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: -商品收藏表
@@ -16,7 +19,7 @@ import com.gsoft.framework.core.dataobj.Domain;
  * 
  */
 @Entity
-@Table(name = "sp_favorits_favoritGoods")
+@Table(name = "sp_favorits_favoritgoods")
 public class FavoritsFavoritgoods implements Domain{
 	
 	private static final long serialVersionUID = 5895671883814315942L;
@@ -33,18 +36,17 @@ public class FavoritsFavoritgoods implements Domain{
 	@Column(name = "UPDATE_USER_")
 	@Length(max=36)
 	private String updateUser;//修改人
-	@Id @GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
-	@Column(name = "COMMODITY_ID_")
-	@Length(max=36)
-	private String commodityId;//商品ID
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="COMMODITY_ID_")
+	private PurchasingmanagerCommodity commodityId;//商品ID
 
 	@Column(name = "CREATE_TIME_")
 	private String createTime;//创建时间
 
-	@Column(name = "MEMBER_ID_")
-	@Length(max=36)
-	private String memberId;//会员用户ID
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="MEMBER_ID_")
+	private MemberInformation memberId;//会员用户ID
 
 	@Column(name = "CREATE_USER_")
 	@Length(max=36)
@@ -71,13 +73,7 @@ public class FavoritsFavoritgoods implements Domain{
 	public void setUpdateUser(String updateUser){
 		this.updateUser = updateUser;
 	}
-	public String getCommodityId(){
-		return this.commodityId;
-	}
-	
-	public void setCommodityId(String commodityId){
-		this.commodityId = commodityId;
-	}
+
 	public String getCreateTime(){
 		return this.createTime;
 	}
@@ -85,13 +81,23 @@ public class FavoritsFavoritgoods implements Domain{
 	public void setCreateTime(String createTime){
 		this.createTime = createTime;
 	}
-	public String getMemberId(){
-		return this.memberId;
-	}
 	
-	public void setMemberId(String memberId){
+	public PurchasingmanagerCommodity getCommodityId() {
+		return commodityId;
+	}
+
+	public void setCommodityId(PurchasingmanagerCommodity commodityId) {
+		this.commodityId = commodityId;
+	}
+
+	public MemberInformation getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(MemberInformation memberId) {
 		this.memberId = memberId;
 	}
+
 	public String getCreateUser(){
 		return this.createUser;
 	}
