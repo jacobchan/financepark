@@ -64,6 +64,12 @@ public class OrdermanagerOrderprojecttypeValue implements Domain{
 			com.common.purchasingManager.entity.PurchasingmanagerGenreProperty genrePropertyId) {
 		this.genrePropertyId = genrePropertyId;
 	}
+	
+
+	public com.common.purchasingManager.entity.PurchasingmanagerGenreProperty getGenrePropertyId() {
+		return genrePropertyId;
+	}
+
 
 	public String getUpdateTime(){
 		return this.updateTime;
