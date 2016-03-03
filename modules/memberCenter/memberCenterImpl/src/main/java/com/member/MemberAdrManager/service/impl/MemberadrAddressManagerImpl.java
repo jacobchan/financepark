@@ -3,6 +3,7 @@
  */
 package com.member.MemberAdrManager.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -19,6 +20,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.member.MemberAdrManager.entity.MemberadrAddress;
@@ -120,7 +122,10 @@ public class MemberadrAddressManagerImpl extends BaseManagerImpl implements Memb
 			throws BusException {
     	MemberadrAddress add = null;
     	if(memberName!=null){
-    		add =  memberadrAddressDao.getObjectByUniqueProperty("memberId.memberName", memberName);
+    		Collection<Condition> condition =  new ArrayList<Condition>();
+    		condition.add(ConditionUtils.getCondition("memberId.memberName", Condition.EQUALS,memberName));
+    		condition.add(ConditionUtils.getCondition("addressStatus", Condition.EQUALS,"0"));
+    		add =  memberadrAddressDao.commonQuery(condition, null).get(0);
     	}
 		return add;
 	}
