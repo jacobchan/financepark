@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.service.MemberInformationManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -28,7 +30,8 @@ import com.member.MemberAdrManager.service.MemberadrAddressManager;
 public class MemberadrAddressManagerImpl extends BaseManagerImpl implements MemberadrAddressManager{
 	@Autowired
 	private MemberadrAddressDao memberadrAddressDao;
-	
+	@Autowired
+	private MemberInformationManager memberInformationManager;
     /**
      * 查询列表
      */
@@ -120,6 +123,18 @@ public class MemberadrAddressManagerImpl extends BaseManagerImpl implements Memb
     		add =  memberadrAddressDao.getObjectByUniqueProperty("memberId.memberName", memberName);
     	}
 		return add;
+	}
+    /**
+     * 根据当前用户查询列表
+     */
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+	public List<MemberadrAddress> getMemberadrAddresssByUser()
+			throws BusException {
+		// TODO Auto-generated method stub
+       	//先模拟一个登陆用户，之后会修改
+    	MemberInformation member=memberInformationManager.getMemberInformationByLoginUser(null);
+    	List<MemberadrAddress> list=memberadrAddressDao.getList("memberId.memberId", member.getMemberId());
+		return list;
 	}
     
 }
