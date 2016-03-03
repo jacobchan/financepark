@@ -70,6 +70,9 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
 //    	}
     	o.setCosCode(BizCodeUtil.getInstance().getBizCodeDate("WYTS"));
     	o.setCosStatus("0");
+    	if("".equals(o.getCosTime()) || null==o.getCosTime()){
+    		o.setCosTime(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
+    	}
     	return propertyservicemanagerCosDao.save(o);
     }
 
