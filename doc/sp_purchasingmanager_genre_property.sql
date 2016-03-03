@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50710
 File Encoding         : 65001
 
-Date: 2016-03-02 15:52:48
+Date: 2016-03-03 14:18:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -45,3 +45,4 @@ INSERT INTO `sp_purchasingmanager_genre_property` VALUES ('40285e8153356c5f01533
 INSERT INTO `sp_purchasingmanager_genre_property` VALUES ('40285e8153356c5f015335df26ea0002', '40285e8153216adc01532175090f0001', '公共资源预定时段', 'publicResoIdTime', null, null, null, null, null, null, '2016-03-02 15:50:25', null, '2016-03-02 13:48:50');
 INSERT INTO `sp_purchasingmanager_genre_property` VALUES ('40285e8153356c5f015335e038bf0003', '40285e8153216adc015321786619000f', '物业报修记录ID', 'orderBxId', null, null, null, null, null, null, '2016-03-02 13:50:00', null, '2016-03-02 13:50:00');
 INSERT INTO `sp_purchasingmanager_genre_property` VALUES ('40285e8153364d020153364e38710001', '40285e8153216adc01532175090f0001', '公共资源ID', 'publicResoId', null, null, null, null, null, null, '2016-03-02 15:50:09', null, '2016-03-02 15:50:09');
+INSERT INTO `sp_purchasingmanager_genre_property` VALUES ('40285e81533b1eb301533b1f7c740001', '40285e8153216adc0153217889720010', '物业缴费记录ID', 'orderChargeId', null, null, null, null, null, null, '2016-03-03 14:17:12', null, '2016-03-03 14:17:12');
