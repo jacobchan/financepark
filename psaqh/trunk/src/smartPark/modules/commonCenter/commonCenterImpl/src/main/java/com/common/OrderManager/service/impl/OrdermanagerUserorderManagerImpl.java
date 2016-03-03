@@ -17,13 +17,10 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-import com.common.MemberManager.dao.MemberInformationDao;
-import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
-import com.common.OrderManager.entity.OrdermanagerOrderprojecttypeValue;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
-import com.common.OrderManager.dao.OrdermanagerCommoditydetailDao;
-import com.common.OrderManager.dao.OrdermanagerOrderprojecttypeValueDao;
 import com.common.OrderManager.dao.OrdermanagerUserorderDao;
 import com.common.OrderManager.service.OrdermanagerUserorderManager;
 
@@ -32,12 +29,6 @@ import com.common.OrderManager.service.OrdermanagerUserorderManager;
 public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements OrdermanagerUserorderManager{
 	@Autowired
 	private OrdermanagerUserorderDao ordermanagerUserorderDao;
-	@Autowired
-	private MemberInformationDao memberInformationDao;
-	@Autowired
-	private OrdermanagerCommoditydetailDao ordermanagerCommoditydetailDao;
-	@Autowired
-	private OrdermanagerOrderprojecttypeValueDao ordermanagerOrderprojecttypeValueDao;
 	
     /**
      * 查询列表
@@ -71,35 +62,21 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		return pagerRecords;
 	}
     /**
-     * 保存对象
-     */
-    @EsbServiceMapping
-    public OrdermanagerUserorder saveOrdermanagerUserorder(OrdermanagerUserorder o) throws BusException{
-//    	String ordermanagerUserorderId = o.getOrdermanagerUserorderId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(ordermanagerUserorderId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	return ordermanagerUserorderDao.save(o);
-    }
-    /**
      * 保存订单
      */
-    @EsbServiceMapping
-    public OrdermanagerUserorder saveOrder(OrdermanagerUserorder o,List<OrdermanagerCommoditydetail> orderDetailList,
-    		List<OrdermanagerOrderprojecttypeValue> orderExtendList) throws BusException{
-    	o = ordermanagerUserorderDao.save(o);
-    	for(OrdermanagerCommoditydetail orderDetail:orderDetailList){
-    		orderDetail.setOrdermanagerUserorder(o);
-    		ordermanagerCommoditydetailDao.save(orderDetail);
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+    public OrdermanagerUserorder saveOrdermanagerUserorder(OrdermanagerUserorder o) throws BusException{
+    	String UserorderId = o.getUserorderId();
+    	boolean isUpdate = StringUtils.isNotEmpty(UserorderId);
+    	if(isUpdate){//修改
+    	
+    	}else{//新增
+    		o.setCreateUser(o.getUpdateUser());
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setMemberId(o.getUpdateUser());
     	}
-    	for(OrdermanagerOrderprojecttypeValue orderExtendValue:orderExtendList){
-    		orderExtendValue.setOrdermanagerUserorder(o);
-    		ordermanagerOrderprojecttypeValueDao.save(orderExtendValue);
-    	}
-    	return o;
+    	return ordermanagerUserorderDao.save(o);
     }
 
     /**
