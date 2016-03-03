@@ -208,37 +208,47 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
     	return commodityList;
     }
 	@Override
-	public OrdermanagerUserorder savePublicResoOrder(OrdermanagerUserorder o, PurchasingmanagerCommodity commodity,
-			List<PublicutilitiesmanagerReso> publicResoList) throws BusException {
-		publicResoList = this.savePublicutilitiesmanagerResoList(publicResoList);
-		o.setGenreId(commodity.getPurchasingmanagerGenre());
+	 @EsbServiceMapping
+	public OrdermanagerUserorder savePublicResoOrder(PublicutilitiesmanagerReso publicReso) throws BusException {
+//		publicResoList = this.savePublicutilitiesmanagerResoList(publicResoList);
+		List<PublicutilitiesmanagerReso> prList=new ArrayList<PublicutilitiesmanagerReso> ();
+		String resoId=publicReso.getResoId();
+		if(StringUtils.isNotEmpty(resoId)){
+			publicReso = publicutilitiesmanagerResoDao.get(resoId); 
+			prList.add(publicReso);
+			this.savePublicutilitiesmanagerResoList(prList);
+		}
+		
+		OrdermanagerUserorder o =new OrdermanagerUserorder();
+		o.setGenreId(publicReso.getCommodityId().getPurchasingmanagerGenre());
 		o.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("GGZY"));
 		o.setUserorderStatus("01");//01-未支付
+		o.setUserorderProject(publicReso.getCommodityId().getCommodityTitle());
 		o = userOrderManager.saveOrdermanagerUserorder(o);
 		//保存订单明细列表
 		OrdermanagerCommoditydetail orderDetail = new OrdermanagerCommoditydetail();
 		orderDetail.setOrdermanagerUserorder(o);
-		orderDetail.setCommodityId(commodity.getCommodityId());
+		orderDetail.setCommodityId(publicReso.getCommodityId().getCommodityId());
 		orderDetail.setCommoditydetailNum("1");
 		this.userOrderDetailManager.saveOrdermanagerCommoditydetail(orderDetail);
 		//保存订单扩展属性列表
-		PurchasingmanagerGenre pg = commodity.getPurchasingmanagerGenre();
+		PurchasingmanagerGenre pg = publicReso.getCommodityId().getPurchasingmanagerGenre();
 		while(pg.getPurchasingmanagerGenre() != null){//获取最顶级商品类别
 			pg = pg.getPurchasingmanagerGenre();
 		}
 		StringBuffer publicResoIdBuff =  new StringBuffer();//公共资源ID
 		String dateStr =  "";//订单预定日期
 		StringBuffer timeStrBuff =  new StringBuffer();//订单预定时段
-		for(int i = 0;i<publicResoList.size();i++){
-			PublicutilitiesmanagerReso publicReso = publicResoList.get(i);
+//		for(int i = 0;i<publicResoList.size();i++){
+//			PublicutilitiesmanagerReso publicReso = publicResoList.get(i);
 			dateStr = publicReso.getResoDate();
 			timeStrBuff.append(publicReso.getResoTime());
 			publicResoIdBuff.append(publicReso.getResoId());
-			if(i+1<publicResoList.size()){
-				timeStrBuff.append(",");
-				publicResoIdBuff.append(",");
-			}
-		}
+//			if(i+1<publicResoList.size()){
+//				timeStrBuff.append(",");
+//				publicResoIdBuff.append(",");
+//			}
+//		}
 		//获取商品类别
 		Collection<Condition> conditions = new ArrayList<Condition>();
 		conditions.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.EQUALS, pg.getGenreId()));

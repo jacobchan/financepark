@@ -79,7 +79,11 @@ public interface PublicutilitiesmanagerResoManager extends BaseManager{
      */
 	 public List<PublicutilitiesmanagerReso> savePublicutilitiesmanagerResoList(List<PublicutilitiesmanagerReso> o) throws BusException;
 	 
-	 public OrdermanagerUserorder savePublicResoOrder(OrdermanagerUserorder o,
-				PurchasingmanagerCommodity commodity,
-				List<PublicutilitiesmanagerReso> publicResoList) throws BusException;
+	 public OrdermanagerUserorder savePublicResoOrder(PublicutilitiesmanagerReso publicReso) throws BusException;
+	 /**
+	  * 取消订单
+	  * @return
+	  * @param OrdermanagerUserorder o  订单ID
+	  */
+	 public void updateUserorderStatus(OrdermanagerUserorder o) throws BusException;
 }
