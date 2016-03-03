@@ -6,6 +6,7 @@
 				editSrc="esb/web/activityApplylistManager/getActivityApplylist.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/activityApplylistManager/removeActivityApplylist.json">
 		<youi:fieldLayout>
+			<youi:fieldSelect property="activityApply.applyId"  caption="活动" src="esb/web/activityApplyManager/getActivityApplys.json" code="applyId" show="applyTitle" notNull="ture"/>
 			<youi:fieldCalendar property="applylistTime"  caption="报名时间"/>
 
 		</youi:fieldLayout>

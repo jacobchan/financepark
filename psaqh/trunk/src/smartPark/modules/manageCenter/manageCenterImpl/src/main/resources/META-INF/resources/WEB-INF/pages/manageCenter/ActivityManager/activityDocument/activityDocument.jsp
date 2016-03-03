@@ -11,9 +11,8 @@
 				editSrc="esb/web/activityDocumentManager/getActivityDocument.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/activityDocumentManager/removeActivityDocument.json">
 		<youi:fieldLayout labelWidths="100,100">
-
+			<youi:fieldSelect property="activityApply.applyId"  caption="活动" src="esb/web/activityApplyManager/getActivityApplys.json" code="applyId" show="applyTitle" notNull="ture"/>
 			<youi:fieldText property="documentName"  caption="文档名"/>
-			<youi:fieldText property="documentPath"  caption="文档路径"/>
 		</youi:fieldLayout>
 		<youi:gridCol property="activityApply.applyTitle"  caption="活动" width="20%"/>
 		<youi:gridCol property="documentName"  caption="文档名" width="20%"/>

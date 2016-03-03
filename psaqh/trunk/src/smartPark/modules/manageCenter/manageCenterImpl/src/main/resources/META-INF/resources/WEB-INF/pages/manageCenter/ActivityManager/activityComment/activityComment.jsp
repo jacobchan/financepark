@@ -6,8 +6,8 @@
 				editSrc="esb/web/activityCommentManager/getActivityComment.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/activityCommentManager/removeActivityComment.json">
 		<youi:fieldLayout>
+			<youi:fieldSelect property="activityApply.applyId"  caption="活动" src="esb/web/activityApplyManager/getActivityApplys.json" code="applyId" show="applyTitle" notNull="ture"/>
 			<youi:fieldText property="commentTime"  caption="评论时间"/>
-			<youi:fieldText property="commentContent"  caption="评论内容"/>
 		</youi:fieldLayout>
 		<youi:gridCol property="activityApply.applyTitle"  caption="活动标题" width="20%"/>
 		<youi:gridCol property="commentMember"  caption="评论人" renderer="renderer_commentMember" width="20%"/>
