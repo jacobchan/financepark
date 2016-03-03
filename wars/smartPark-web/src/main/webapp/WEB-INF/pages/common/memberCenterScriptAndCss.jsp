@@ -10,4 +10,5 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/3.0/lib/jquery-ui.min.js?1=1"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/3.0/lib/bootstrap.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/lib/giui.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/js/right.js"></script>
   
