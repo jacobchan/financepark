@@ -4,7 +4,7 @@
 	<div class="w200 fl">
 		<dl>
 			<dt>个人中心</dt>
-			<dd class="active"><a href="memberInformation.html">个人资料</a></dd>
+			<dd id="grzl" class="active"><a href="memberInformation.html">个人资料</a></dd>
 			<dd><a href="grzx2.html">订单中心</a></dd>
 			<dd><a href="grzx3.html">安全中心</a></dd>
 			<dd><a href="grzx4.html">消息</a></dd>
@@ -15,7 +15,7 @@
 			<dd><a href="grzx23.html">政策申请</a></dd>
 			<dt>物业服务</dt>
 			<dd><a href="grzx8.html">物业报修</a></dd>
-			<dd><a href="grzx9.html">物业投诉</a></dd>
+			<dd id="property"><a href="propertycomplaints.html">物业投诉</a></dd>
 			<dd><a href="grzx10.html">访客登记</a></dd>
 			<dd><a href="grzx11.html">搬家放行</a></dd>
 			<dd><a href="grzx12.html">缴费查询</a></dd>
