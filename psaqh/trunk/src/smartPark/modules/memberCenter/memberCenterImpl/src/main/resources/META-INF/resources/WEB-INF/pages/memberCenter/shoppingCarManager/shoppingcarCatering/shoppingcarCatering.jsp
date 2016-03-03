@@ -8,12 +8,12 @@
 		<youi:fieldLayout>
 			<youi:fieldSelect property="memberId.memberId"  caption="会员用户" src="esb/web/memberInformationManager/getMemberInformations.json" 
 							  code="memberId" show="memberName" />
-			<youi:fieldSelect property="commodityId"  caption="商品" src="esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommoditys.json"
+			<youi:fieldSelect property="commodityId.commodityId"  caption="商品" src="esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommoditys.json"
 								code="commodityId"	show="commodityTitle" />	
 		</youi:fieldLayout>
 		<youi:gridCol property="memberId.memberName"  caption="会员用户" width="25%"/>
-		<youi:gridCol property="commodityId"  caption="商品 " renderer="renderer_commodityId" width="25%"/>
-		<youi:gridCol property="companyCateringAmount"  caption="餐饮数量" width="25%"/>
+		<youi:gridCol property="commodityId.commodityTitle"  caption="商品 "  width="25%"/>
+		<youi:gridCol property="companyCateringNum"  caption="餐饮数量" width="25%"/>
 		<youi:gridCol property="companyCateringUnivalence"  caption="餐饮单价" width="25%"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
@@ -27,9 +27,9 @@
 			<youi:fieldHidden property="companyCateringId"  caption="餐饮购物车ID"/>
 			<youi:fieldSelect property="memberId.memberId"  caption="会员用户" src="esb/web/memberInformationManager/getMemberInformations.json" 
 							  code="memberId" show="memberName" notNull="true"/>
-			<youi:fieldSelect property="commodityId"  caption="商品" src="esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommoditys.json"
+			<youi:fieldSelect property="commodityId.commodityId"  caption="商品" src="esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommoditys.json"
 								code="commodityId"	show="commodityTitle" notNull="true" />							  
-			<youi:fieldText  property="companyCateringAmount"  caption="餐饮数量" expression="^[1-9]\d*$" expressionMessage="餐饮数量格式不正确，应为正整数" notNull="true"/>
+			<youi:fieldText  property="companyCateringNum"  caption="餐饮数量" expression="^[1-9]\d*$" expressionMessage="餐饮数量格式不正确，应为正整数" notNull="true"/>
 			<youi:fieldText property="companyCateringUnivalence"  caption="餐饮单价" expression="^\d{0,8}\.{0,1}(\d{1,2})?$" expressionMessage="餐饮单价格式不正确，应为" notNull="true"/>
 		</youi:fieldLayout>
 	</youi:form>
