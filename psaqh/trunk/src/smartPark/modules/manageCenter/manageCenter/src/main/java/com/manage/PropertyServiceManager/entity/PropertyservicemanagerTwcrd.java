@@ -49,6 +49,18 @@ public class PropertyservicemanagerTwcrd implements Domain{
     @JoinColumn(name="FKCODE_ID_")
 	private com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode propertyservicemanagerFkcode;//访客申请ID
 	
+	@Column(name = "STATUS_")
+	@Length(max=2)
+	private String status;//二维码状态
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public String getCreateTime(){
 		return this.createTime;
 	}
