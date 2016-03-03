@@ -6,31 +6,17 @@
 				editSrc="esb/web/ordermanagerUserorderManager/getOrdermanagerUserorder.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/ordermanagerUserorderManager/removeOrdermanagerUserorder.json">
 		<youi:fieldLayout>
-			<youi:fieldText property="userorderPayMode"  caption="支付方式"/>
-			<youi:fieldText property="userorderBuyUser"  caption="购买人"/>
-			<youi:fieldText property="userorderAmount"  caption="订单金额"/>
-
-			<youi:fieldText property="bxId"  caption="报修记录ID"/>
-			<youi:fieldText property="memberId"  caption="会员用户ID"/>
-			<youi:fieldSelect property="userorderStatus"  caption="订单状态" convert="commodityOrderStatus">
-				<%-- <youi:fieldOption caption="待付款" value="00"></youi:fieldOption>
-				<youi:fieldOption caption="已付款" value="01"></youi:fieldOption>
-				<youi:fieldOption caption="已取消" value="02"></youi:fieldOption> --%>
-			</youi:fieldSelect>
-			<youi:fieldText property="userorderProject"  caption="订单项目"/>
-			<youi:fieldCalendar property="userorderTime"  caption="下单时间"/>
-			<youi:fieldText property="userorderCode"  caption="订单编号"/>
+			<youi:fieldSelect property="userorderPayMode"  caption="支付方式" convert="payWay"/>
+			<youi:fieldSelect property="userorderStatus"  caption="订单状态" convert="commodityOrderStatus"/>
+			<youi:fieldCalendar property="userorderTime"  caption="下单时间" textFormat="yyyy-MM-dd" format="yyyy-MM-dd"/>
 		</youi:fieldLayout>
-		<youi:gridCol property="userorderPayMode"  caption="支付方式"/>
-		<youi:gridCol property="userorderBuyUser"  caption="购买人"/>
-		<youi:gridCol property="userorderAmount"  caption="订单金额"/>
-
-		<youi:gridCol property="bxId"  caption="报修记录ID"/>
-		<youi:gridCol property="memberId"  caption="会员用户ID"/>
-		<youi:gridCol property="userorderStatus"  caption="订单状态"/>
-		<youi:gridCol property="userorderProject"  caption="订单项目"/>
-		<youi:gridCol property="userorderTime"  caption="下单时间"/>
-		<youi:gridCol property="userorderCode"  caption="订单编号"/>
+		<youi:gridCol property="userorderCode"  caption="订单编号" align="center" width="15%"/>
+		<youi:gridCol property="userorderProject"  caption="订单项目" align="center" width="15%"/>
+		<youi:gridCol property="userorderTime"  caption="下单时间" align="center" width="15%"/>
+		<youi:gridCol property="userorderStatus"  caption="订单状态" convert="commodityOrderStatus" align="center" width="10%"/>
+		<youi:gridCol property="userorderPayMode"  caption="支付方式" convert="payWay" align="center" width="15%"/>
+		<youi:gridCol property="userorderBuyUser"  caption="购买人" align="center" width="10%"/>
+		<youi:gridCol property="userorderAmount"  caption="订单金额" align="right" width="10%"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -48,11 +34,7 @@
 			<youi:fieldText property="userorderId"  caption="用户订单序列"/>
 			<youi:fieldText property="bxId"  caption="报修记录ID"/>
 			<youi:fieldText property="memberId"  caption="会员用户ID"/>
-			<youi:fieldSelect property="userorderStatus"  caption="订单状态">
-				<youi:fieldOption caption="待付款" value="00"></youi:fieldOption>
-				<youi:fieldOption caption="已付款" value="01"></youi:fieldOption>
-				<youi:fieldOption caption="已取消" value="02"></youi:fieldOption>
-			</youi:fieldSelect>
+			<youi:fieldSelect property="userorderStatus"  caption="订单状态" convert="commodityOrderStatus"></youi:fieldSelect>
 			<youi:fieldText property="userorderProject"  caption="订单项目"/>
 			<youi:fieldCalendar property="userorderTime"  caption="下单时间"/>
 			<youi:fieldText property="userorderCode"  caption="订单编号"/>
@@ -66,7 +48,6 @@
 		gridElement.find('#button_pay').addClass('disabled');	
 	</youi:func>
 	<youi:func name="grid_ordermanagerUserorder_select">
-		alert(111);
         eval('P_'+pageId+'_clear_button();');
         var gridElement = $elem('grid_ordermanagerUserorder',pageId);
 		var select = gridElement.grid('getSelectedRecord');
