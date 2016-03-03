@@ -14,7 +14,7 @@
 			</youi:fieldSelect>
 			<youi:fieldSelect property="resoTime"  caption="可用时段" convert="resoTime"/>
 		</youi:fieldLayout>
-
+        <youi:button name="reserve" caption="预约" active="1"/>
 		<youi:gridCol property="commodityId.commodityTitle"  caption="商品" width="20%"  align="center"/>
 		<youi:gridCol property="resoStatus"  caption="资源状态" convert="resoStatus" width="20%" align="center"/>
 		<youi:gridCol property="resoDate"  caption="可用日期" orderBy="desc" width="20%" align="center"/>
@@ -39,6 +39,20 @@
 	</youi:form>
 	
 	<!--**********************************页面函数Start********************************-->
-	
+		<youi:func name="func_grid_reserve">
+	var gridElement = $elem('grid_publicutilitiesmanagerReso',pageId);
+	var select = gridElement.grid('getSelectedRecord');
+	var resoId=select.resoId;
+	$.youi.ajaxUtil.ajax({
+		url:'esb/web/publicutilitiesmanagerResoManager/savePublicResoOrder.json',
+	 	data:{resoId:resoId},
+		success:function(result){
+            alert("订单预约成功！");
+			gridElement.grid('pReload');
+		}
+	});
+
+	</youi:func>
+	<!--**********************************页面函数End**********************************-->
 	<!--**********************************页面函数End**********************************-->
 </youi:page>

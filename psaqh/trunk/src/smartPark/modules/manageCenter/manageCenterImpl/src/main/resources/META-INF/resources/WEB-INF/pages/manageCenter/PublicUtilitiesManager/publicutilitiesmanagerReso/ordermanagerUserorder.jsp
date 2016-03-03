@@ -10,7 +10,7 @@
 			<youi:fieldSelect property="userorderStatus"  caption="订单状态" convert="commodityOrderStatus"/>
 			<youi:fieldCalendar property="userorderTime"  caption="下单时间" textFormat="yyyy-MM-dd" format="yyyy-MM-dd"/>
 		</youi:fieldLayout>
-		<youi:gridCol property="userorderCode"  caption="订单编号" align="center" width="15%"/>
+		<youi:gridCol property="userorderCode"  caption="订单编号" align="center" width="20%"/>
 		<youi:gridCol property="userorderProject"  caption="订单项目" align="center" width="15%"/>
 		<youi:gridCol property="userorderTime"  caption="下单时间" align="center" width="15%"/>
 		<youi:gridCol property="userorderStatus"  caption="订单状态" convert="commodityOrderStatus" align="center" width="10%"/>
@@ -73,10 +73,10 @@
 	<youi:func name="func_grid_cancel">
 	var gridElement = $elem('grid_ordermanagerUserorder',pageId);
 	var select = gridElement.grid('getSelectedRecord');
-	var userorderStatus='02';
+    var userorderId=select.userorderId;
 	$.youi.ajaxUtil.ajax({
 		url:'esb/web/publicutilitiesmanagerResoManager/updateUserorderStatus.json',
-	 	data:{userorderId:userorderId,userorderStatus:userorderStatus},
+	 	data:{userorderId:userorderId},
 		success:function(result){
             alert("订单取消成功！");
 			gridElement.grid('pReload');
