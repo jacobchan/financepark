@@ -140,5 +140,4 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
 		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("purchasingmanagerGenre.genreId", genreId);
 		return list;
 	}
-
 }
