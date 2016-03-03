@@ -30,6 +30,7 @@
 								<col width="150"></col>
 								<col width="150"></col>
 								<col width="150"></col>
+								<col width="150"></col>
 								<col></col>
 							</colgroup>
 							<tbody id="czh-knowledge">
@@ -39,6 +40,7 @@
 									<th>状态</th>
 									<th>联系人</th>
 									<th>联系电话</th>
+									<th>投诉状态</th>
 									<th>操作</th>
 								</tr>
 							</tbody>
@@ -58,6 +60,25 @@
 			</div>
 		</div>
 	</div>
+	<div class="bg-tanc">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="w60 tc mt40" style="margin-left:20%">
+				<div class="mt20 mb20 f16 lh26">
+					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o"> [ 123456789 ] </span>吗？
+				</div>
+				<p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p>
+				<input value="确定" class="hhf-submit" style="height:36px;" type="submit">
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(function () {
+			$(".ac-show").click(function(){
+				$(".bg-tanc").show();
+			});
+		});
+	</script>
 	<script type="text/javascript">
 		//读取当前用户投诉记录
 		$(function(){
@@ -79,6 +100,7 @@
 			for(var i=0;i<record.length;i++){
 				var bool = "";
 				var status = "";
+				var crop = "";
 				if(record[i].cosBool=='0'){
 					bool = "是";
 				}else{
@@ -86,6 +108,7 @@
 				}
 				if(record[i].cosStatus=='0'){
 					status = "待受理";
+					crop = "取消";
 				}else if(record[i].cosStatus=='1'){
 					status = "受理中";
 				}else if(record[i].cosStatus=='2'){
@@ -96,10 +119,11 @@
 					status = "已回访";
 				}else if(record[i].cosStatus=='5'){
 					status = "待评价";
+					crop = "评价";
 				}else if(record[i].cosStatus=='6'){
 					status = "已评价";
 				}
-				var html="<tr><td>"+record[i].cosCode+"</td><td>"+record[i].cosTime+"</td><td>"+bool+"</td><td>"+record[i].cosName+"</td><td>"+record[i].cosTelephone+"</td><td>"+status+"</td></tr>";
+				var html="<tr><td>"+record[i].cosCode+"</td><td>"+record[i].cosTime+"</td><td>"+bool+"</td><td>"+record[i].cosName+"</td><td>"+record[i].cosTelephone+"</td><td>"+status+"</td><td><a href='javascript:;' class='ac-show'>"+crop+"</a></td></tr>";
 				$("#czh-knowledge").append(html);
 			}
 		};
