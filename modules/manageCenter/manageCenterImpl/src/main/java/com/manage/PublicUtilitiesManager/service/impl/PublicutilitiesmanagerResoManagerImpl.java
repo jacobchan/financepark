@@ -211,31 +211,16 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 	public OrdermanagerUserorder savePublicResoOrder(OrdermanagerUserorder o, PurchasingmanagerCommodity commodity,
 			List<PublicutilitiesmanagerReso> publicResoList) throws BusException {
 		publicResoList = this.savePublicutilitiesmanagerResoList(publicResoList);
-		//获取当前登录用户
-		Object object = SecurityUtils.getPrincipal();
-		User user = new User();
-		if(object != null && object instanceof User){
-			user = (User) object;
-		}
 		o.setGenreId(commodity.getPurchasingmanagerGenre());
 		o.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("GGZY"));
 		o.setUserorderStatus("01");//01-未支付
-		o.setCreateUser(user.getUserId());
-		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-		o.setUpdateUser(user.getUserId());
-		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-		o.setUserorderBuyUser(user.getUserCaption());
-		o.setMemberId(user.getUserId());
-		o.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		o = userOrderManager.saveOrdermanagerUserorder(o);
-//		o = ordermanagerUserorderDao.save(o);
 		//保存订单明细列表
 		OrdermanagerCommoditydetail orderDetail = new OrdermanagerCommoditydetail();
 		orderDetail.setOrdermanagerUserorder(o);
 		orderDetail.setCommodityId(commodity.getCommodityId());
 		orderDetail.setCommoditydetailNum("1");
-//		ordermanagerCommoditydetailDao.save(orderDetail);
-		userOrderDetailManager.saveOrdermanagerCommoditydetail(orderDetail);
+		this.userOrderDetailManager.saveOrdermanagerCommoditydetail(orderDetail);
 		//保存订单扩展属性列表
 		PurchasingmanagerGenre pg = commodity.getPurchasingmanagerGenre();
 		while(pg.getPurchasingmanagerGenre() != null){//获取最顶级商品类别
@@ -258,7 +243,6 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 		Collection<Condition> conditions = new ArrayList<Condition>();
 		conditions.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.EQUALS, pg.getGenreId()));
 		List<PurchasingmanagerGenreProperty> genrePropertyList = extensionPropertyManager.getPurchasingmanagerGenrePropertys(conditions, null);
-//		List<PurchasingmanagerGenreProperty> genrePropertyList = extensionPropertyManager.getPurchasingmanagerGenrePropertys(conditions, orders)("", pg.getGenreId());
 		for(PurchasingmanagerGenreProperty genreProperty:genrePropertyList){//保存订单扩展项信息
 			OrdermanagerOrderprojecttypeValue orderExtendValue = new OrdermanagerOrderprojecttypeValue();
 			orderExtendValue.setOrdermanagerUserorder(o);
@@ -271,9 +255,44 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 				orderExtendValue.setOrderprojecttypeValueFieldValue(publicResoIdBuff.toString());
 			}
 			this.orderprojectValueManager.saveOrdermanagerOrderprojecttypeValue(orderExtendValue);
+			
+					
 		}
 		
 		return o;
 	}
+	
+	
+	/**
+	 * 取消订单,变更公共资源状态:由已预订变更为可用
+	 */
+	@EsbServiceMapping
+	public void updateUserorderStatus(OrdermanagerUserorder o) throws BusException{
+		String userorderId=o.getUserorderId();//订单ID
+		if(StringUtils.isNotEmpty(userorderId)){
+			//取消订单，变更状态为已取消
+			o=userOrderManager.getOrdermanagerUserorder(userorderId);
+			o.setUserorderStatus("05");//05-已取消
+			userOrderManager.saveOrdermanagerUserorder(o);
+		}
+        //根据订单ID获取订单扩展项信息
+		Collection<Condition> conditions = new ArrayList<Condition>();
+		Collection<Order> orders = new ArrayList<Order>();
+		conditions.add(ConditionUtils.getCondition("ordermanagerUserorder.userorderId", Condition.EQUALS, userorderId));
+		List<OrdermanagerOrderprojecttypeValue> orderprojecttypeList=orderprojectValueManager.getOrdermanagerOrderprojecttypeValues(conditions, orders);
+		for(OrdermanagerOrderprojecttypeValue ot:orderprojecttypeList){
+			//获取订单扩展项里的公共资源ID:publicResoId
+			if(ot.getGenrePropertyId().getGenrePropertyFieldName().equals("publicResoId")){
+				String[] publicResoId=ot.getOrderprojecttypeValueFieldValue().split(",");
+				for(String publicId:publicResoId){
+					//查询公共资源信息
+					PublicutilitiesmanagerReso pr = publicutilitiesmanagerResoDao.get(publicId);
+					pr.setResoStatus("01");//可用
+					publicutilitiesmanagerResoDao.save(pr);
+				}
+			}
+		}
+	}
+	
 
 }

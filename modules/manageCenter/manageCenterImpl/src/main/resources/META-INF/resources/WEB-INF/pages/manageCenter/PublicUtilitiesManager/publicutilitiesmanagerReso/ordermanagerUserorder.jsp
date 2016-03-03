@@ -12,10 +12,10 @@
 
 			<youi:fieldText property="bxId"  caption="报修记录ID"/>
 			<youi:fieldText property="memberId"  caption="会员用户ID"/>
-			<youi:fieldSelect property="userorderStatus"  caption="订单状态">
-				<youi:fieldOption caption="待付款" value="00"></youi:fieldOption>
+			<youi:fieldSelect property="userorderStatus"  caption="订单状态" convert="commodityOrderStatus">
+				<%-- <youi:fieldOption caption="待付款" value="00"></youi:fieldOption>
 				<youi:fieldOption caption="已付款" value="01"></youi:fieldOption>
-				<youi:fieldOption caption="已取消" value="02"></youi:fieldOption>
+				<youi:fieldOption caption="已取消" value="02"></youi:fieldOption> --%>
 			</youi:fieldSelect>
 			<youi:fieldText property="userorderProject"  caption="订单项目"/>
 			<youi:fieldCalendar property="userorderTime"  caption="下单时间"/>
@@ -94,12 +94,14 @@
 	var select = gridElement.grid('getSelectedRecord');
 	var userorderStatus='02';
 	$.youi.ajaxUtil.ajax({
-		url:'esb/web/ordermanagerUserorderManager/updateUserorderStatus.json',
-	 	data:'userorderId='+select.userorderId+'&userorderStatus='+userorderStatus,
+		url:'esb/web/publicutilitiesmanagerResoManager/updateUserorderStatus.json',
+	 	data:{userorderId:userorderId,userorderStatus:userorderStatus},
 		success:function(result){
+            alert("订单取消成功！");
 			gridElement.grid('pReload');
 		}
 	});
+
 	</youi:func>
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
