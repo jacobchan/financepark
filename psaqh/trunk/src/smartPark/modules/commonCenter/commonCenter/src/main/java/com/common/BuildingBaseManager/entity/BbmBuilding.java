@@ -73,7 +73,7 @@ public class BbmBuilding implements Domain{
 	private String useStatus;//招商_使用状态
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="sp__PARK_ID_")
+    @JoinColumn(name="PARK_ID_")
 	private com.common.BuildingBaseManager.entity.BbmPark bbmPark;//320_园区ID
 	
 	public String getBuildingNo(){
