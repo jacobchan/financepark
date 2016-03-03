@@ -70,10 +70,14 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
      */
 	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
     public OrdermanagerUserorder saveOrdermanagerUserorder(OrdermanagerUserorder o) throws BusException{
-    	String UserorderId = o.getUserorderId();
-    	boolean isUpdate = StringUtils.isNotEmpty(UserorderId);
+    	String userorderId = o.getUserorderId();
+    	boolean isUpdate = StringUtils.isNotEmpty(userorderId);
     	if(isUpdate){//修改
-    	
+    		OrdermanagerUserorder order = ordermanagerUserorderDao.get(userorderId);
+    		order.setUserorderStatus(o.getUserorderStatus());
+    		order.setUpdateUser(o.getUpdateUser());
+    		order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return ordermanagerUserorderDao.save(order);
     	}else{//新增
     		o.setCreateUser(o.getUpdateUser());
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
@@ -84,8 +88,8 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     			MemberInformation mem = memberInformationManager.getMemberInformation(o.getUpdateUser());
     			o.setUserorderBuyUser(mem.getMemberName());
     		}
+    		return ordermanagerUserorderDao.save(o);
     	}
-    	return ordermanagerUserorderDao.save(o);
     }
 
     /**
