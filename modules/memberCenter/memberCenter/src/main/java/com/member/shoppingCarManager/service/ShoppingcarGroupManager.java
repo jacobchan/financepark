@@ -6,13 +6,13 @@ package com.member.shoppingCarManager.service;
 import java.util.List;
 import java.util.Collection;
 
+import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.member.shoppingCarManager.entity.ShoppingcarGroup;
 
 public interface ShoppingcarGroupManager extends BaseManager{
@@ -63,4 +63,13 @@ public interface ShoppingcarGroupManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitShoppingcarGroup(String propertyName,Object value) throws BusException;
+	/**
+	 * 新增采购订单
+	 * @param o
+	 * @param shopCarList 购物车列表
+	 * @return
+	 * @throws BusException
+	 */
+	public OrdermanagerUserorder savePurOrder(OrdermanagerUserorder o,
+			List<ShoppingcarGroup> shopCarList) throws BusException;
 }
