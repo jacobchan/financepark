@@ -43,10 +43,6 @@ public class BbmBuilding implements Domain{
 	@Length(max=32)
 	private String buildingUnitCount;//楼宇单元数
 
-	@Column(name = "PARK_ID_")
-	@Length(max=36)
-	private String parkId;//园区ID
-
 	@Column(name = "UPDATE_USER_")
 	@Length(max=36)
 	private String updateUser;//修改人
@@ -118,13 +114,7 @@ public class BbmBuilding implements Domain{
 	public void setBuildingUnitCount(String buildingUnitCount){
 		this.buildingUnitCount = buildingUnitCount;
 	}
-	public String getParkId(){
-		return this.parkId;
-	}
 	
-	public void setParkId(String parkId){
-		this.parkId = parkId;
-	}
 	public String getUpdateUser(){
 		return this.updateUser;
 	}
@@ -187,7 +177,6 @@ public class BbmBuilding implements Domain{
 		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
 		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
 		result = prime * result + ((buildingUnitCount == null) ? 0 : buildingUnitCount.hashCode());
-		result = prime * result + ((parkId == null) ? 0 : parkId.hashCode());
 		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
 		result = prime * result + ((attributeFloorCount == null) ? 0 : attributeFloorCount.hashCode());
 		result = prime * result + ((buildingImage == null) ? 0 : buildingImage.hashCode());
@@ -235,11 +224,6 @@ public class BbmBuilding implements Domain{
 			if (other.buildingUnitCount != null)
 				return false;
 		} else if (!buildingUnitCount.equals(other.buildingUnitCount))
-			return false;
-		if (parkId == null) {
-			if (other.parkId != null)
-				return false;
-		} else if (!parkId.equals(other.parkId))
 			return false;
 		if (updateUser == null) {
 			if (other.updateUser != null)
