@@ -63,7 +63,7 @@ public class InformationFinancing implements Domain{
 
 	@Column(name = "RZ_ID_")
 	@Length(max=36)
-	private String rzId;//ID2
+	private String rzId;//企业信息
 
 	@Column(name = "CREATE_USER_")
 	@Length(max=36)
