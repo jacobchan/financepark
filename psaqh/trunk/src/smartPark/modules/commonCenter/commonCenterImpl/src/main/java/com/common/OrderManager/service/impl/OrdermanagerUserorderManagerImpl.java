@@ -19,6 +19,8 @@ import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.common.MemberManager.dao.MemberInformationDao;
+import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
+import com.common.OrderManager.entity.OrdermanagerOrderprojecttypeValue;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.common.OrderManager.dao.OrdermanagerCommoditydetailDao;
 import com.common.OrderManager.dao.OrdermanagerOrderprojecttypeValueDao;
@@ -81,6 +83,23 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 //    		
 //    	}
     	return ordermanagerUserorderDao.save(o);
+    }
+    /**
+     * 保存订单
+     */
+    @EsbServiceMapping
+    public OrdermanagerUserorder saveOrder(OrdermanagerUserorder o,List<OrdermanagerCommoditydetail> orderDetailList,
+    		List<OrdermanagerOrderprojecttypeValue> orderExtendList) throws BusException{
+    	o = ordermanagerUserorderDao.save(o);
+    	for(OrdermanagerCommoditydetail orderDetail:orderDetailList){
+    		orderDetail.setOrdermanagerUserorder(o);
+    		ordermanagerCommoditydetailDao.save(orderDetail);
+    	}
+    	for(OrdermanagerOrderprojecttypeValue orderExtendValue:orderExtendList){
+    		orderExtendValue.setOrdermanagerUserorder(o);
+    		ordermanagerOrderprojecttypeValueDao.save(orderExtendValue);
+    	}
+    	return o;
     }
 
     /**
