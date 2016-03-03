@@ -22,7 +22,7 @@
 		<youi:gridCol property="endTime"  caption="活动结束时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" width="100px"/>
 		<youi:gridCol property="commentContent"  caption="活动内容" width="200px"/>
 
-		<youi:gridCol property="applyStatus"  caption="活动申请状态" convert="activityStatus" width="100px"/>
+		<youi:gridCol property="applyStatus"  caption="活动申请状态" convert="activityApplyStatus" width="100px"/>
 		<youi:gridCol property="memberId"  caption="会员用户" renderer="renderer_memberId" width="200px"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
