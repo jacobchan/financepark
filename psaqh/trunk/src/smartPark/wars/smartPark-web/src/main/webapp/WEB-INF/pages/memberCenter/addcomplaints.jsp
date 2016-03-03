@@ -95,17 +95,38 @@
 	<%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%>
 	<script type="text/javascript">
 		$('.hhf-submit').click(function(){
-			var cosContent=$("#cosContent").html();	
-			var cosBool=$("#cosBool").val();
+			var cosContent=$("#cosContent").val();	
+			var cosBool=$('input[name="cosBool"]:checked').val();
 			var cosName=$("#cosName").val();
 			var cosTelephone=$("#cosTelephone").val();
+			if(cosBool=='on'){
+				cosBool = '0';
+			}else{
+				cosBool = '1';
+			}
+			if(cosContent=="" || cosContent.length==0){
+				alert("请输入投诉内容！");
+				return false;
+			}else{
+				if(cosBool=="on"){
+					if(cosName=="" || cosName.length==0){
+						alert("请输入联系人！");
+						return false;
+					}else if(cosTelephone=="" || cosTelephone.length==0){
+						alert("请输入联系人！");
+						return false;
+					}else{
+						return true;
+					}
+				}
+			}
 			$.youi.ajaxUtils.ajax({
 				url:'/smartPark-web/esb/web/propertyservicemanagerCosManager/savePropertyservicemanagerCos.json',
-				data:'cosContent='+cosContent+'cosBool='+cosBool+'cosName='+cosName+'cosTelephone='+cosTelephone,
+				data:'cosContent='+cosContent+'&cosBool='+cosBool+'&cosName='+cosName+'&cosTelephone='+cosTelephone,
 				success:function(result){
 					if(result&&result.record){
 						alert("提交成功");
-						location.reload();
+						window.location.href="<%=request.getContextPath()%>/memberCenter/propertycomplaints.html";
 					}
 				}
 			});
