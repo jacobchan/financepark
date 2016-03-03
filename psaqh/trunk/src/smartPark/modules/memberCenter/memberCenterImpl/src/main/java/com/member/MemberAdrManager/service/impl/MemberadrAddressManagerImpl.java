@@ -125,7 +125,10 @@ public class MemberadrAddressManagerImpl extends BaseManagerImpl implements Memb
     		Collection<Condition> condition =  new ArrayList<Condition>();
     		condition.add(ConditionUtils.getCondition("memberId.memberName", Condition.EQUALS,memberName));
     		condition.add(ConditionUtils.getCondition("addressStatus", Condition.EQUALS,"0"));
-    		add =  memberadrAddressDao.commonQuery(condition, null).get(0);
+    		List<MemberadrAddress> listMem = memberadrAddressDao.commonQuery(condition, null);
+    		if(listMem.size()>0){
+    			add = listMem.get(0);
+    		}
     	}
 		return add;
 	}
