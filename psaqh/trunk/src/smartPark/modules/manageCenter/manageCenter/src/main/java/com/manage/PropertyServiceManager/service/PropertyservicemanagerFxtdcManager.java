@@ -75,5 +75,5 @@ public interface PropertyservicemanagerFxtdcManager extends BaseManager{
 	 * @param id
 	 * @throws BusException
 	 */
-	public void upfxtdById(String id) throws BusException;
+	public String upfxtdById(String id) throws BusException;
 }
