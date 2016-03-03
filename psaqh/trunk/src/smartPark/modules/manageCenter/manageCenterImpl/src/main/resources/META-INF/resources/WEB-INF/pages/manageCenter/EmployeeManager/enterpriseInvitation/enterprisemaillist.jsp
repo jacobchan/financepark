@@ -12,14 +12,14 @@
 			<youi:fieldSelect property="rz.rzId"
 				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json"
 				code="rzId" show="rzMem" caption="入驻企业" tooltips="入驻企业" />
-			<youi:fieldText property="invitationTelephone" caption="会员电话" />
-			<youi:fieldText property="invitationCode" caption="企业邀请码" />
+			<youi:fieldText property="employeesTelephone" caption="会员电话" />
+			<youi:fieldText property="rz.rzSign" caption="企业邀请码" />
 		</youi:fieldLayout>
 		<youi:button name="distribution" caption="分配角色" icon="search" active="1" />
-		<youi:gridCol property="member.memberNickname" caption="会员用户" width="20%" />
+		<youi:gridCol property="member.memberName" caption="会员用户" width="20%" />
 		<youi:gridCol property="employeesName" caption="员工姓名" width="20%" />
 		<youi:gridCol property="employeesTelephone" caption="员工电话" width="20%" />
-		<youi:gridCol property="rz.rzMem" caption="企业信息" width="20%" />
+		<youi:gridCol property="rz.rzName" caption="企业信息" width="20%" />
 		<youi:gridCol property="roleId" renderer="renderer_roleId" caption="角色" width="20%" />
 		<youi:gridCol property="employeesId" caption="企业编号" width="0" />
 	</youi:grid>
@@ -28,8 +28,8 @@
 	<youi:form dialog="true" caption="分配角色" id="form_enterprisemaillist"
 		action="esb/web/enterpriseRoleManager/saveEnterpriseRole.json" width="450">
 		<youi:fieldLayout prefix="record" columns="1" labelWidths="120,120">
-			<youi:fieldHidden property="rId" caption="编号" />
-			<youi:fieldHidden property="employees.employeesId" caption="员工编号" />
+			<youi:fieldText property="rId" caption="编号" />
+			<youi:fieldText property="employees.employeesId" caption="员工编号" />
 			<youi:fieldSelect property="role.roleId"
 				src="esb/web/roleManager/getPagerRoles.json"
 				code="roleId" show="roleCaption" caption="员工角色" notNull="true" tooltips="员工角色" />
@@ -51,9 +51,9 @@
 					for(var i=0;i<record.length;i++){
 						var roles = record[i];
 						$elem('record_rId',pageId).fieldValue(roles.rId);
-						$elem('record_employees_employeesId',pageId).fieldValue(eId);
 						$elem('record_role_roleId',pageId).fieldValue(roles.role.roleId);
 					}
+					$elem('record_employees_employeesId',pageId).fieldValue(eId);
 					$elem('form_enterprisemaillist',pageId).form('open');
 				}
 			});
