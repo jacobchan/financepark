@@ -204,5 +204,13 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     	List<ActivityDocument> activityDocuments=activityDocumentManager.getActivityDocuments(condition, orders);
 		return activityDocuments;
 	}
+    
+    @EsbServiceMapping
+	public void updateApplyStatus(@ServiceParam(name="applyId") String id) throws BusException {
+		// TODO Auto-generated method stub
+    	ActivityApply aa=activityApplyDao.get(id);
+    	aa.setApplyStatus("01");
+    	activityApplyDao.save(aa);
+	}
 
 }
