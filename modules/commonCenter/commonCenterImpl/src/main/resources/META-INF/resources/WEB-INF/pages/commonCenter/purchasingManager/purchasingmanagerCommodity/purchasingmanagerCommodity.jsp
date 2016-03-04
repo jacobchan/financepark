@@ -2,7 +2,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
 	<!--**********************************子页面**********************************-->
-	<youi:subpage caption="采购商品扩展信息" 
+	<youi:subpage caption="商品扩展信息" 
 		width="800" subpageId="sb_commodity_extend"
 		src="page/commonCenter.purchasingManager.purchasingmanagerCommodityExtend/purchasingmanagerCommodityExtend.html?commodity.commodityId={commodityId}">
 	</youi:subpage>

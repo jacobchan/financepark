@@ -83,17 +83,16 @@ public interface PurchasingmanagerGenreManager extends BaseManager{
 	 */
 	public List<PurchasingmanagerGenre> getMerchantGenres() throws BusException;
 	/**
-	 * 根据类别ID获得最上级商品类别
-	 * @param genreId
-	 * @return
-	 * @throws BusException
-	 */
-	public PurchasingmanagerGenre getSuperGenre(String genreId) throws BusException;
-	/**
 	 * 根据类别唯一编号获取对象
 	 * @param genreCode
 	 * @return
 	 * @throws BusException
 	 */
     public PurchasingmanagerGenre getGenreByUniqueProperty(String genreCode) throws BusException;
+    /**
+     * 获取所有商品类别列表
+     * @return
+     * @throws BusException
+     */
+	public List<PurchasingmanagerGenre> getCommodityGenreList() throws BusException;
 }

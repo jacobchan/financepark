@@ -19,6 +19,7 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.security.agt.entity.User;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.util.StringUtils;
@@ -27,11 +28,11 @@ import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodityExtend;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.common.purchasingManager.entity.PurchasingmanagerGenreProperty;
-import com.common.purchasingManager.dao.PurchasingmanagerCommodityDao;
 import com.common.purchasingManager.dao.PurchasingmanagerCommodityExtendDao;
-import com.common.purchasingManager.dao.PurchasingmanagerGenrePropertyDao;
 import com.common.purchasingManager.service.PurchasingmanagerCommodityExtendManager;
+import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
 import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
+import com.common.purchasingManager.service.PurchasingmanagerGenrePropertyManager;
 
 @Service("purchasingmanagerCommodityExtendManager")
 @Transactional
@@ -39,11 +40,11 @@ public class PurchasingmanagerCommodityExtendManagerImpl extends BaseManagerImpl
 	@Autowired
 	private PurchasingmanagerCommodityExtendDao purchasingmanagerCommodityExtendDao;
 	@Autowired
-	private PurchasingmanagerGenrePropertyDao purchasingmanagerGenrePropertyDao;
+	private PurchasingmanagerGenrePropertyManager purchasingmanagerGenrePropertyManager;
 	@Autowired
 	private PurchasingmanagerGenreManager purchasingmanagerGenreManager;
 	@Autowired
-	private PurchasingmanagerCommodityDao purchasingmanagerCommodityDao;
+	private PurchasingmanagerCommodityManager purchasingmanagerCommodityManager;
 	
     /**
      * 查询列表
@@ -124,16 +125,22 @@ public class PurchasingmanagerCommodityExtendManagerImpl extends BaseManagerImpl
 	public List<PurchasingmanagerCommodityExtend> getPagerCommodityExts(@ServiceParam(name="commodity.commodityId") String commodityId) 
 			throws BusException {
 		List<PurchasingmanagerCommodityExtend> commodityExtList = new ArrayList<PurchasingmanagerCommodityExtend>();
-		PurchasingmanagerCommodity pc =  purchasingmanagerCommodityDao.get(commodityId);
-		//根据类别ID获得最上级商品类别
-		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getSuperGenre(pc.getPurchasingmanagerGenre().getGenreId());
-		//根据类别ID获得商品类属性
-		List<PurchasingmanagerGenreProperty> pgpList = purchasingmanagerGenrePropertyDao.getList("purchasingmanagerGenre.genreId", pg.getGenreId());
+		PurchasingmanagerCommodity pc =  purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
+		//获得最上级商品类别
+		PurchasingmanagerGenre pg = pc.getPurchasingmanagerGenre();
+		while(pg.getPurchasingmanagerGenre() != null){
+			pg = pg.getPurchasingmanagerGenre();
+		}
+		//根据类别ID获得商品类属性列表
+		Collection<Condition> conditions = new ArrayList<Condition>();
+		conditions.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.EQUALS, pg.getGenreId()));
+		List<PurchasingmanagerGenreProperty> pgpList = purchasingmanagerGenrePropertyManager.getPurchasingmanagerGenrePropertys(conditions, null);
 		for(PurchasingmanagerGenreProperty pgp:pgpList){
 			PurchasingmanagerCommodityExtend pce = new PurchasingmanagerCommodityExtend();
-			//根据商品ID和商品类属性字段名获取商品扩展属性
+			//根据商品ID和商品类属性字段名获取商品扩展属性值列表
 			List<PurchasingmanagerCommodityExtend> pceList = purchasingmanagerCommodityExtendDao.getList(
-					new String[]{"commodity.commodityId","purchasingmanagerGenreProperty.genrePropertyFieldName"}, new String[]{commodityId,pgp.getGenrePropertyFieldName()});
+					new String[]{"commodity.commodityId","purchasingmanagerGenreProperty.genrePropertyFieldName"}, 
+					new String[]{commodityId,pgp.getGenrePropertyFieldName()});
 			if(pceList.size()>0){
 				pce = pceList.get(0);
 			}else{

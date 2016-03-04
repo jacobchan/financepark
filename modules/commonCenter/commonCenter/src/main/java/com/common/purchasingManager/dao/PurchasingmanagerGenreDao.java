@@ -19,5 +19,10 @@ public interface PurchasingmanagerGenreDao extends Dao<PurchasingmanagerGenre, S
 	 * @return
 	 */
 	public List<PurchasingmanagerGenre> getOrderTypesList();
+	/**
+	 * 获取所有商品类别列表
+	 * @return
+	 */
+	public List<PurchasingmanagerGenre> getCommodityGenreList();
 	
 }
