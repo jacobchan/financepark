@@ -8,10 +8,11 @@
 		<youi:fieldLayout>
 		<youi:fieldSelect property="memberId.memberId"  caption="会员用户" src="esb/web/memberInformationManager/getMemberInformations.json" 
 						  code="memberId" show="memberName" />
-
+		<youi:fieldSelect property="commodityId.commodityId"  caption="商品" src="esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommoditys.json"
+								code="commodityId"	show="commodityTitle"/>
 		</youi:fieldLayout>
 		<youi:gridCol property="memberId.memberName"  caption="会员用户" width="50%"/>
-		<youi:gridCol property="commodityId"  caption="商品ID" renderer="renderer_commodityId" width="50%"/>
+		<youi:gridCol property="commodityId.commodityTitle"  caption="商品"  width="50%"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -24,7 +25,7 @@
 			<youi:fieldHidden property="favoritGoodsId"  caption="商品收藏表ID"/>
 			<youi:fieldSelect property="memberId.memberId"  caption="会员用户" src="esb/web/memberInformationManager/getMemberInformations.json" 
 							  code="memberId" show="memberName" notNull="true"/>
-			<youi:fieldSelect property="commodityId"  caption="商品" src="esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommoditys.json"
+			<youi:fieldSelect property="commodityId.commodityId"  caption="商品" src="esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommoditys.json"
 								code="commodityId"	show="commodityTitle" notNull="true"/>
 		</youi:fieldLayout>
 	</youi:form>
