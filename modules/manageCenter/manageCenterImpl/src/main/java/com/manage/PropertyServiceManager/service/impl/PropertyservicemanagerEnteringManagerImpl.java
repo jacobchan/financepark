@@ -3,6 +3,7 @@
  */
 package com.manage.PropertyServiceManager.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -18,6 +20,8 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntering;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerEnteringDao;
@@ -75,17 +79,46 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
     /**
      * 保存对象
      */
-    @EsbServiceMapping
-    public PropertyservicemanagerEntering savePropertyservicemanagerEntering(PropertyservicemanagerEntering o) throws BusException{
-//    	String propertyservicemanagerEnteringId = o.getPropertyservicemanagerEnteringId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerEnteringId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	o.setEnteringStatus("01");//01:可以预约
-    	return propertyservicemanagerEnteringDao.save(o);
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+    public void savePropertyservicemanagerEntering(PropertyservicemanagerEntering o) throws BusException{
+    	String enteringId = o.getEnteringId();
+    	boolean isUpdate = StringUtils.isNotEmpty(enteringId);
+    	if(isUpdate){//修改
+    		if(StringUtils.isNotEmpty(o.getEnteringDate())){
+    			if(propertyservicemanagerEnteringDao.exists("enteringDate",o.getEnteringDate())){
+    				throw new BusException("该预约日期已经添加,无需重复添加！");
+    			}else{
+    				PropertyservicemanagerEntering p=propertyservicemanagerEnteringDao.get(enteringId);
+    	    		p.setEnteringDate(o.getEnteringDate());
+    	    		p.setEnteringSum(o.getEnteringSum());
+    	    		p.setUpdateUser(o.getUpdateUser());
+    	    		p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	    		propertyservicemanagerEnteringDao.save(o);
+    			}
+    		}
+    		
+    	}else{//新增
+    		//判断预约日期是否重复
+    		if(StringUtils.isNotEmpty(o.getEnteringDate())){
+    			if(propertyservicemanagerEnteringDao.exists("enteringDate",o.getEnteringDate())){
+    				throw new BusException("该预约日期已经添加,无需重复添加！");
+    			}else{
+    				List<PropertyservicemanagerEntering> enteringList=new ArrayList<PropertyservicemanagerEntering> ();
+    	    		o.setEnteringTime("AM");//时段AM： 9:00-11:00
+    	    		o.setEnteringStatus("01");//01:可以预约
+    	    		o.setCreateUser(o.getUpdateUser());
+    	    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	    		enteringList.add(o);
+    	    		PropertyservicemanagerEntering p=new PropertyservicemanagerEntering();
+    	    		p=o;
+    	    		p.setEnteringTime("PM");//时段PM： 14:00-17:00
+    	    		enteringList.add(p);
+    	    	    propertyservicemanagerEnteringDao.save(enteringList);
+    			}
+    		}
+    	}
+    	
     }
 
     /**
@@ -110,8 +143,14 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
 		return propertyservicemanagerEnteringDao.exists(id);
 	}
     
-    public boolean exsitPropertyservicemanagerEntering(String propertyName,Object value) throws BusException{
-		return propertyservicemanagerEnteringDao.exists(propertyName,value);
+    @EsbServiceMapping
+    public TempDemo exsitPropertyservicemanagerEnteringForDate(@ServiceParam(name="propertyName") String propertyName,@ServiceParam(name="value")String value) throws BusException{
+		
+    	TempDemo temp=new TempDemo();
+    	boolean existFlag=propertyservicemanagerEnteringDao.exists(propertyName,value);
+    	temp.setBuff(String.valueOf(existFlag));
+    	return temp;
+		
 	}
 
 }

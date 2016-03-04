@@ -6,13 +6,13 @@ package com.manage.PropertyServiceManager.service;
 import java.util.List;
 import java.util.Collection;
 
+import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntering;
 
 public interface PropertyservicemanagerEnteringManager extends BaseManager{
@@ -48,7 +48,7 @@ public interface PropertyservicemanagerEnteringManager extends BaseManager{
     /**
      * 保存并返回对象
      */
-    public PropertyservicemanagerEntering savePropertyservicemanagerEntering(PropertyservicemanagerEntering o) throws BusException;
+    public void savePropertyservicemanagerEntering(PropertyservicemanagerEntering o) throws BusException;
 
     /**
      * 删除对象
@@ -70,5 +70,5 @@ public interface PropertyservicemanagerEnteringManager extends BaseManager{
      * 属性值是否已经使用
      * @param ids
      */
-	public boolean exsitPropertyservicemanagerEntering(String propertyName,Object value) throws BusException;
+	public TempDemo exsitPropertyservicemanagerEnteringForDate(String propertyName,String value) throws BusException;
 }

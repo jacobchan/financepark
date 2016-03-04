@@ -15,10 +15,11 @@
 			<youi:fieldSelect property="resoTime"  caption="可用时段" convert="resoTime"/>
 		</youi:fieldLayout>
         <youi:button name="reserve" caption="预约" active="1"/>
-		<youi:gridCol property="commodityId.commodityTitle"  caption="商品" width="20%"  align="center"/>
+		<youi:gridCol property="commodityId.commodityTitle"  caption="商品名称" width="20%"  align="center"/>
 		<youi:gridCol property="resoStatus"  caption="资源状态" convert="resoStatus" width="20%" align="center"/>
 		<youi:gridCol property="resoDate"  caption="可用日期" orderBy="desc" width="20%" align="center"/>
 		<youi:gridCol property="resoTime"  caption="可用时段" convert="resoTime" width="20%" align="center"/>
+		<youi:gridCol property="updateTime"  caption="更新时间" width="20%" align="center" orderBy="desc"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
