@@ -23,6 +23,7 @@ import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.SecurityUtils;
+import com.gsoft.framework.util.StringUtils;
 
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 
@@ -85,13 +86,23 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
      */
     @EsbServiceMapping
     public ActivityApply saveActivityApply(ActivityApply o) throws BusException{
-//    	String activityApplyId = o.getActivityApplyId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(activityApplyId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
+    	String applyId = o.getApplyId();
+    	boolean isUpdate = StringUtils.isNotEmpty(applyId);
+    	Collection<Condition> conditions=new ArrayList<Condition>();
+    	conditions.add(ConditionUtils.getCondition("memberId", Condition.EQUALS, o.getMemberId()));
+    	conditions.add(ConditionUtils.getCondition("applyStatus", Condition.EQUALS,"00"));
+    	List<ActivityApply> list=activityApplyDao.commonQuery(conditions, null);
+    	if(list.size()>1){
+    		throw new BusException("当前用户有申请还在审核中,请等管理员审批后再申请！");
+    	}
+    	if(isUpdate){//修改
+    	
+    	}else{//新增
+    		//活动申请选了场地要生成会议室订单
+    		if(StringUtils.isNotEmpty(o.getApplyOrderNumber())){
+    			System.out.println("****************活动申请选了场地要生成会议室订单******************");
+    		}
+    	}
     	return activityApplyDao.save(o);
     }
 
