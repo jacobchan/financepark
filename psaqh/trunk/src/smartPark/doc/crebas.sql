@@ -1,9 +1,3 @@
-/*==============================================================*/
-/* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2016/3/2 13:29:22                            */
-/*==============================================================*/
-
-
 alter table sp_OrderManager_commodityDetail
    drop primary key;
 
@@ -617,6 +611,8 @@ create table sp_bbm_room_
    B_ROOM_NO_           varchar(10),
    B_ROOM_CAPTION_      varchar(256),
    B_STATUS_            varchar(2),
+   ROOM_TENEMENT_       char(10),
+   ROOM_HOST_           char(10),
    Z_SALE_STATE_        varchar(2),
    W_WATER_CHARGE_      decimal(10,2),
    W_ENERY_CHARGE_      decimal(10,2),
@@ -721,8 +717,8 @@ alter table sp_enterprise_invitation
 create table sp_enterprise_role
 (
    R_ID_                char(36) not null,
-   R_E_ID_              char(36),
-   R_R_ID_              char(36),
+   EMPLOYEES_ID         char(36),
+   ROLEID               char(36),
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
@@ -1034,6 +1030,8 @@ create table sp_memberAdr_address
 (
    ADDRESS_ID_          char(36) not null,
    MEMBER_ID_           char(36),
+   ADDRESS_NAME_        char(10),
+   ADDRESS_PHONE_       char(10),
    ADDRESS_DETAIL_      varchar(128),
    ADDRESS_STATUS_      varchar(2),
    CREATE_TIME_         datetime,
@@ -1335,7 +1333,8 @@ create table sp_propertyservicemanager_entrec
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
-   CREATE_TIME_         datetime
+   CREATE_TIME_         datetime,
+   ENTERREC_CODE_       varchar(36)
 );
 
 alter table sp_propertyservicemanager_entrec comment '330202入驻服务办理预约记录表';
@@ -1376,6 +1375,7 @@ create table sp_propertyservicemanager_fxtdc
    FXTDC_ID_            varchar(36) not null,
    MOVEREC_ID_          varchar(36),
    TWCRD_ADDREC_        varchar(50),
+   FXTDC_STATUS_        varchar(2),
    CREATE_TIME_         datetime,
    CREATE_USER_         char(36),
    UPDATE_TIME_         datetime,
@@ -1399,6 +1399,8 @@ create table sp_propertyservicemanager_moverec
    MOVEREC_NAME_        varchar(32),
    MOVEREC_WAY_         varchar(2),
    MOVEREC_REMARK_      varchar(300),
+   MOVEREC_CODE_        varchar(20),
+   MOVEREC_STATUS_      varchar(2),
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
@@ -1429,7 +1431,8 @@ create table sp_propertyservicemanager_oc
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
    CREATE_TIME_         datetime,
-   OC_CODE_             varchar(50)
+   OC_CODE_             varchar(50),
+   BIND_STATUS          varchar(2)
 );
 
 alter table sp_propertyservicemanager_oc comment '330201一卡通办理申请记录';
@@ -1509,6 +1512,7 @@ create table sp_propertyservicemanager_twcrd
    TWCRD_ID_            varchar(36) not null,
    FKCODE_ID_           varchar(36),
    TWCRD_ADDREC_        varchar(50),
+   STATUS_              varchar(2),
    CREATE_TIME_         datetime,
    CREATE_USER_         char(36),
    UPDATE_TIME_         datetime,
@@ -2039,4 +2043,3 @@ alter table sp_shoppingCar_companyServer add constraint FK_Relationship_78 forei
 
 alter table sp_shoppingCar_group add constraint FK_Relationship_76 foreign key (MEMBER_ID_)
       references sp_member_information (MEMBER_ID_) on delete restrict on update restrict;
-
