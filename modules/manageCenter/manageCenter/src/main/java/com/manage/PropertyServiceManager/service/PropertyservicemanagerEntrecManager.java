@@ -12,6 +12,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntering;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
 import com.manage.ReserveManager.entity.ReservationRecord;
 
@@ -73,4 +75,12 @@ public interface PropertyservicemanagerEntrecManager extends BaseManager{
      * @throws BusException
      */
     public void cancelReservation(PropertyservicemanagerEntrec o) throws BusException;
+    
+    /**
+	 * 修改入驻服务申请时，判断预约记录Id是否变更
+	 *  @param o:入驻申请服务实体
+	 *  @param before:变更前可办理预约记录
+	 *  @param after:变更后可办理预约记录
+	 * */
+	public PropertyservicemanagerEntrec entringIdChange(PropertyservicemanagerEntrec o,PropertyservicemanagerEntering before,PropertyservicemanagerEntering after) throws BusException;
 }

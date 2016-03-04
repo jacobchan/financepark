@@ -29,6 +29,10 @@ public class PropertyservicemanagerEntrec implements Domain{
 
 	@Column(name = "CREATE_TIME_")
 	private String createTime;//创建时间
+	
+	@Column(name = "ENTERREC_CODE_")
+	@Length(max=32)
+	private String enterrecCode;//预约受理编号
 
 	@Column(name = "ENTERING_NAME_")
 	@Length(max=32)
@@ -161,23 +165,54 @@ public class PropertyservicemanagerEntrec implements Domain{
 	}
 	
 	
+	
+	public String getEnterrecCode() {
+		return enterrecCode;
+	}
+
+	public void setEnterrecCode(String enterrecCode) {
+		this.enterrecCode = enterrecCode;
+	}
+
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((enterrecStatus == null) ? 0 : enterrecStatus.hashCode());
-		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
-		result = prime * result + ((enteringName == null) ? 0 : enteringName.hashCode());
-		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
-		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
-		result = prime * result + ((enteringTime == null) ? 0 : enteringTime.hashCode());
-		result = prime * result + ((enteringTelephone == null) ? 0 : enteringTelephone.hashCode());
-		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
-		result = prime * result + ((entrecId == null) ? 0 : entrecId.hashCode());
-		result = prime * result + ((enteringDate == null) ? 0 : enteringDate.hashCode());
+		result = prime * result
+				+ ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result
+				+ ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result
+				+ ((enteringDate == null) ? 0 : enteringDate.hashCode());
+		result = prime * result
+				+ ((enteringName == null) ? 0 : enteringName.hashCode());
+		result = prime
+				* result
+				+ ((enteringTelephone == null) ? 0 : enteringTelephone
+						.hashCode());
+		result = prime * result
+				+ ((enteringTime == null) ? 0 : enteringTime.hashCode());
+		result = prime * result
+				+ ((enterrecCode == null) ? 0 : enterrecCode.hashCode());
+		result = prime * result
+				+ ((enterrecStatus == null) ? 0 : enterrecStatus.hashCode());
+		result = prime * result
+				+ ((entrecId == null) ? 0 : entrecId.hashCode());
+		result = prime * result
+				+ ((memberId == null) ? 0 : memberId.hashCode());
+		result = prime
+				* result
+				+ ((propertyservicemanagerEntering == null) ? 0
+						: propertyservicemanagerEntering.hashCode());
+		result = prime * result
+				+ ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result
+				+ ((updateUser == null) ? 0 : updateUser.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -186,60 +221,76 @@ public class PropertyservicemanagerEntrec implements Domain{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final PropertyservicemanagerEntrec other = (PropertyservicemanagerEntrec) obj;
-		if (enterrecStatus == null) {
-			if (other.enterrecStatus != null)
-				return false;
-		} else if (!enterrecStatus.equals(other.enterrecStatus))
-			return false;
+		PropertyservicemanagerEntrec other = (PropertyservicemanagerEntrec) obj;
 		if (createTime == null) {
 			if (other.createTime != null)
 				return false;
 		} else if (!createTime.equals(other.createTime))
-			return false;
-		if (enteringName == null) {
-			if (other.enteringName != null)
-				return false;
-		} else if (!enteringName.equals(other.enteringName))
 			return false;
 		if (createUser == null) {
 			if (other.createUser != null)
 				return false;
 		} else if (!createUser.equals(other.createUser))
 			return false;
-		if (updateTime == null) {
-			if (other.updateTime != null)
+		if (enteringDate == null) {
+			if (other.enteringDate != null)
 				return false;
-		} else if (!updateTime.equals(other.updateTime))
+		} else if (!enteringDate.equals(other.enteringDate))
 			return false;
-		if (enteringTime == null) {
-			if (other.enteringTime != null)
+		if (enteringName == null) {
+			if (other.enteringName != null)
 				return false;
-		} else if (!enteringTime.equals(other.enteringTime))
+		} else if (!enteringName.equals(other.enteringName))
 			return false;
 		if (enteringTelephone == null) {
 			if (other.enteringTelephone != null)
 				return false;
 		} else if (!enteringTelephone.equals(other.enteringTelephone))
 			return false;
-		if (updateUser == null) {
-			if (other.updateUser != null)
+		if (enteringTime == null) {
+			if (other.enteringTime != null)
 				return false;
-		} else if (!updateUser.equals(other.updateUser))
+		} else if (!enteringTime.equals(other.enteringTime))
+			return false;
+		if (enterrecCode == null) {
+			if (other.enterrecCode != null)
+				return false;
+		} else if (!enterrecCode.equals(other.enterrecCode))
+			return false;
+		if (enterrecStatus == null) {
+			if (other.enterrecStatus != null)
+				return false;
+		} else if (!enterrecStatus.equals(other.enterrecStatus))
 			return false;
 		if (entrecId == null) {
 			if (other.entrecId != null)
 				return false;
 		} else if (!entrecId.equals(other.entrecId))
 			return false;
-		if (enteringDate == null) {
-			if (other.enteringDate != null)
+		if (memberId == null) {
+			if (other.memberId != null)
 				return false;
-		} else if (!enteringDate.equals(other.enteringDate))
+		} else if (!memberId.equals(other.memberId))
+			return false;
+		if (propertyservicemanagerEntering == null) {
+			if (other.propertyservicemanagerEntering != null)
+				return false;
+		} else if (!propertyservicemanagerEntering
+				.equals(other.propertyservicemanagerEntering))
+			return false;
+		if (updateTime == null) {
+			if (other.updateTime != null)
+				return false;
+		} else if (!updateTime.equals(other.updateTime))
+			return false;
+		if (updateUser == null) {
+			if (other.updateUser != null)
+				return false;
+		} else if (!updateUser.equals(other.updateUser))
 			return false;
 		return true;
 	}
-	
+
 	public String toString(){
 		return super.toString();
 	}
