@@ -83,4 +83,11 @@ public interface PropertyservicemanagerTsManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public void upTsbyId(String id,String code) throws BusException;
+	/**
+	 * 根据报修id查找接单状态下的派工记录
+	 * @param bxId
+	 * @return
+	 * @throws BusException
+	 */
+	public PropertyservicemanagerTs getTsBybxId(String bxId)throws BusException;
 }

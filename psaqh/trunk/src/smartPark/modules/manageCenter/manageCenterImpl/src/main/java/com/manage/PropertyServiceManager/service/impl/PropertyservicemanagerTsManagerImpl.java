@@ -20,6 +20,7 @@ import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.Assert;
 import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTs;
@@ -155,6 +156,7 @@ public class PropertyservicemanagerTsManagerImpl extends BaseManagerImpl impleme
     	PropertyservicemanagerBx bx = ts.getPropertyservicemanagerBx();
 		if(code.equals("00")){//维修人员接单，改状态为已接单，已派工
 			ts.setTsStatus("01");
+			ts.setTsTime(DateUtils.getToday("yyyy-MM-dd"));
 			bx.setBxStatus("03");
 			propertyservicemanagerTsDao.save(ts);
 			propertyservicemanagerBxDao.save(bx);
@@ -164,6 +166,25 @@ public class PropertyservicemanagerTsManagerImpl extends BaseManagerImpl impleme
 			propertyservicemanagerTsDao.save(ts);
 			propertyservicemanagerBxDao.save(bx);
 		}
+	}
+    /**
+	 * 根据报修id查找接单状态下的派工记录
+	 * @param bxId
+	 * @return
+	 * @throws BusException
+	 */
+    @EsbServiceMapping
+	public PropertyservicemanagerTs getTsBybxId(@ServiceParam(name="bxId") String bxId)
+			throws BusException {
+    	PropertyservicemanagerTs ts = null;
+    	Collection<Condition> conditionts =  new ArrayList<Condition>();
+		conditionts.add(ConditionUtils.getCondition("tsStatus", Condition.EQUALS,"01"));//查询已已受理
+		conditionts.add(ConditionUtils.getCondition("propertyservicemanagerBx.bxId", Condition.EQUALS,bxId));
+		List<PropertyservicemanagerTs> listTs = propertyservicemanagerTsDao.commonQuery(conditionts, null);
+		if(listTs.size()>0){
+			ts = listTs.get(0);	 
+		}
+		return ts;		
 	}
 
     

@@ -23,15 +23,17 @@
 					<youi:button name="refuse" caption="回绝" icon="edit" active="1"/>
 					<youi:button name="deal" caption="处理任务" icon="edit" active="1"/>
 					<youi:button name="pay" caption="支付订单" icon="edit" active="1"/>
+					<youi:button name="redeal" caption="重修" icon="edit" active="1"/>
 					
-				<youi:gridCol property="bxComp"  caption="企业名称" width="12%"/>
-				<youi:gridCol property="bxAddress"  caption="维修地址" width="12%"/>
+				<youi:gridCol property="createUser"  caption="报修人" width="8%" renderer="renderer_memberId"/>	
+				<youi:gridCol property="bxComp"  caption="企业名称" width="10%"/>
+				<youi:gridCol property="bxAddress"  caption="维修地址" width="10%"/>
 				<youi:gridCol property="bxStatus"  caption="报修状态" convert="bx_status" width="10%"/>
 				<youi:gridCol property="bxWay"  caption="报修方式" width="8%" convert="bx_way"/>
 				<youi:gridCol property="bxType"  caption="报修类型" width="8%" convert="bx_type"/>
 				<youi:gridCol property="bxProject"  caption="报修项目" width="8%" convert="bx_project"/>
-				<youi:gridCol property="bxRemark"  caption="描述" width="24%"/>
-				<youi:gridCol property="bxAmount"  caption="维修总价" 	width="10%"/>
+				<youi:gridCol property="bxRemark"  caption="描述" width="21%"/>
+				<youi:gridCol property="bxAmount"  caption="维修总价" 	width="9%"/>
 				<youi:gridCol property="bxFujian"  caption="附件" width="8%"/>
 			
 				<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
@@ -62,13 +64,15 @@
 		<youi:fieldLayout prefix="record" labelWidths="120,120">
 			<youi:fieldHidden property="bxId" caption="ID"/>
 			<%-- <youi:fieldText property="bxComp"  caption="企业名称"/> --%>
-			<youi:fieldSelect property="bxComp" caption="企业名称" src="/memberInformationManager/getMemberInformations.json" code="memberName" show="memberName" notNull="true" />
+			<youi:fieldSelect property="createUser"  caption="会员姓名"
+				src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
+			<youi:fieldLabel property="bxComp"  caption="企业名称" />
 			<youi:fieldLabel property="bxAddress"  caption="维修地址"/>
-			<youi:fieldSelect property="bxStatus"  caption="报修状态" convert="bx_status" defaultValue="00"/>
+			<youi:fieldHidden property="bxStatus"  caption="报修状态"  defaultValue="00"/>
 			<youi:fieldSelect property="bxWay"  caption="报修方式" convert="bx_way" notNull="true"/>
 			<youi:fieldSelect property="bxType"  caption="报修类型" convert="bx_type" notNull="true" />
 			<youi:fieldSelect property="bxProject"  caption="报修项目" convert="bx_project"/>
-			<youi:fieldText property="bxAmount"  caption="维修总价" dataType="format" format="0,0.00"/>
+			<%-- <youi:fieldText property="bxAmount"  caption="维修总价" dataType="format" format="0,0.00"/> --%>
 			<youi:fieldUpload property="bxFujian"  caption="附件"/>
 			<youi:fieldArea property="bxRemark"  caption="描述" column="3" notNull="true" />
 		</youi:fieldLayout>
@@ -86,8 +90,42 @@
 		</youi:fieldLayout>
 	</youi:form>
 	
+	
+	<!-- form-物业定价 -->
+	<youi:form dialog="true" caption="物业定价" id="form_Bxchange" 
+	action="esb/web/propertyservicemanagerBxManager/savePropertyservicemanagerBx.json">
+		<youi:fieldLayout prefix="recordchange" labelWidths="120,120">
+			<youi:fieldHidden property="bxId" caption="ID"/>
+			<youi:fieldLabel property="bxComp"  caption="企业名称" />
+			<youi:fieldLabel property="bxAddress"  caption="维修地址"/>
+			 <youi:fieldText property="bxAmount"  caption="维修总价" dataType="format" format="0,0.00"/> 
+			<youi:fieldHidden property="bxStatus"  caption="报修状态" />
+			<youi:fieldArea property="bxRemark"  caption="描述" column="3" notNull="true" />
+		</youi:fieldLayout>
+		<youi:tabs id="tabs_loanApp">
+			<youi:tabItem caption="维修费用清单" id="tabitem_process">
+				<youi:grid id="grid_ser" idKeys="serId" caption="维修费用清单" panel="false"
+							src="esb/web/propertyservicemanagerSerManager/getPagerPropertyservicemanagerSersByTs.json" dataFormId="form_propertyservicemanagerSer"
+							add="NOT" edit="NOT" remove="NOT" reset="NOT" submit="NOT" usePager="false" load="false">
+						<youi:fieldLayout prefix="tscode">
+							<youi:fieldHidden property="tsId"  caption="id"/>
+						</youi:fieldLayout>
+						<youi:gridCol property="propertyservicemanagerTs.tsName" caption="维修人" width="10%"/>
+						<youi:gridCol property="propertyservicemanagerTs.tsTelephone" caption="维修人电话" width="15%"/>
+						<youi:gridCol property="propertyservicemanagerTs.propertyservicemanagerBx.bxComp" caption="报修企业" width="20%"/>
+						<youi:gridCol property="serName"  caption="材料名称" width="20%" convert="ser_name"/>
+						<youi:gridCol property="serPrice"  caption="材料价格" width="10%"/>
+						<youi:gridCol property="serType"  caption="材料类别" width="15%" convert="ser_type"/>
+					</youi:grid>
+			</youi:tabItem>
+		</youi:tabs>
+	</youi:form>
+	
+	
+	
+	
 	<!--**********************************页面函数Start********************************-->
-		<youi:func name="record_bxComp_change" params="value">
+		<%-- <youi:func name="record_bxComp_change" params="value">
 			if(value!=''){
 				$.youi.ajaxUtil.ajax({
 					url:'/esb/web/memberadrAddressManager/getAddressByname.json',
@@ -100,7 +138,37 @@
 				
 			}
 			
-		</youi:func> 
+		</youi:func>  --%>
+		
+		<!-- 获取用户名称 -->
+		<youi:func name="renderer_memberId" params="col,record">
+ 			var memberName = ""; 
+			$.youi.ajaxUtil.ajax({
+					url:'esb/web/memberInformationManager/getMemberInformation.json',
+					data:'memberId='+record.createUser,
+					async: false, 
+					success:function(result){
+						if(result.record!=""&&result.record!=null){
+							memberName=result.record.memberName;
+						}
+					}
+				});
+			return memberName;
+		</youi:func>
+		
+		<!-- 会员发生变化时，对应的企业名称也发生变化 -->
+		<youi:func name = "record_createUser_change">
+      		var memberId = $('#P_'+pageId+'_record_createUser').fieldValue();//获取当前选中会员的id
+			$.youi.ajaxUtil.ajax({
+				url:'/esb/web/policyApplyManager/findEnterpriseByMemberId.json',
+				data:{memberId:memberId},
+				success:function(result){
+					var record = result.record;
+					$('#P_'+pageId+'_record_bxComp').fieldValue('') ;//先将公司名称置空
+                    $('#P_'+pageId+'_record_bxComp').fieldValue(record.rzName);//将返回的对象里面的enName赋值给公司名称
+                  } 
+            })
+   	 </youi:func>
 		<!-- 支付订单 -->
 		<youi:func name="func_grid_pay">
 			var gridElement = $elem('grid_propertyservicemanagerBx',pageId),
@@ -123,6 +191,29 @@
 				alert("已定价的记录才可以支付");
 			}	
 		</youi:func>
+		
+		<!-- 重新报修 -->
+		<youi:func name="func_grid_redeal">
+			var gridElement = $elem('grid_propertyservicemanagerBx',pageId),
+			selectedRecord = gridElement.grid('getSelectedRecord');
+			var bxstatus = selectedRecord.bxStatus;
+			if(bxstatus=='05'){
+				$.youi.messageUtils.confirm('重新报修?',function(){
+					$.youi.ajaxUtil.ajax({
+					url:'/esb/web/propertyservicemanagerBxManager/upBxbyId.json',
+					data:{id:selectedRecord.bxId,code:'01'},
+					success:function(result){	
+							 $elem('form_propertyservicemanagerTs',pageId).form("reset")
+							.form('fillRecord',{propertyservicemanagerBx:{bxId:selectedRecord['bxId']}}).form('open');
+						}
+					});
+				 	
+				});
+			}else{
+				alert("该状态下不能重修!");
+			}	
+		</youi:func>
+		
 		<!-- 回绝物业报修 -->
 		<youi:func name="func_grid_refuse">
 			var gridElement = $elem('grid_propertyservicemanagerBx',pageId),
@@ -171,7 +262,18 @@
                     alert("维修人员处理中!");
 				//已完工，待定价
                 }else if(bxstatus=='04'){
-                    var bxform = $elem('form_propertyservicemanagerBx',pageId);
+					$.youi.ajaxUtil.ajax({
+						url:'/esb/web/propertyservicemanagerTsManager/getTsBybxId.json',
+						data:{bxId:selectedRecord.bxId},
+						success:function(result){	
+							var record = result.record;
+							$('#P_'+pageId+'_tscode_tsId').fieldValue('') ;//先将派工Id情况
+                    		$('#P_'+pageId+'_tscode_tsId').fieldValue(record.tsId);//
+							$elem('grid_ser',pageId).grid('pReload');
+						}
+					});
+					//
+                    var bxform = $elem('form_Bxchange',pageId);
                     bxform.form("reset").form('fillRecord',selectedRecord).form('fillRecord',{bxStatus:'05'}).form('open');
 				//已定价，待付款
                 }else if(bxstatus=='05'){
@@ -194,11 +296,18 @@
                 }
             });
         </youi:func>
-        
+        <!-- 关闭派工from -->
         <youi:func name = "form_propertyservicemanagerTs_afterSubmit">
 			var formpropertyservicemanagerTs = $elem('form_propertyservicemanagerTs',pageId);
 			alert("派工完成！");
 			formpropertyservicemanagerTs.form('close');
+			$elem('grid_propertyservicemanagerBx',pageId).grid('pReload');
+		</youi:func>
+		<!--关闭定价from  -->
+		<youi:func name = "form_Bxchange_afterSubmit">
+			var formBxchange = $elem('form_Bxchange',pageId);
+			alert("定价完成！");
+			formBxchange.form('close');
 			$elem('grid_propertyservicemanagerBx',pageId).grid('pReload');
 		</youi:func>
 	<!--**********************************页面函数End**********************************-->
