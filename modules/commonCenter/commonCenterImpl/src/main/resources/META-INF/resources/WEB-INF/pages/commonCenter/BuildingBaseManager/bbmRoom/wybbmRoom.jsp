@@ -8,10 +8,13 @@
 				removeSrc="esb/web/bbmRoomManager/removeBbmRoom.json">
 		<youi:fieldLayout>
 			<youi:fieldText property="roomNo"  caption="单元编号"/>
-			<youi:fieldText property="enteredEnt"  caption="包含企业"/>
-			<youi:fieldSelect property="status"  caption="使用状态" convert="roomstatus" />
 			<youi:fieldSelect property="bbmFloor.floorId" caption="所属楼层" code="floorId" show="floorNo" 
 				src="esb/web/bbmFloorManager/getBbmFloors.json" />
+			<youi:fieldSelect property="bbmPark.parkId" caption="所属园区" code="parkId" show="parkName"
+				src="esb/web/bbmParkManager/getBbmParks.json"/>
+			<youi:fieldSelect property="bbmBuilding.buildingId" caption="所属楼栋" code="buildingId" show="buildingNo"
+				src="esb/web/bbmBuildingManager/getBbmBuildings.json" />
+			<youi:fieldSelect property="status"  caption="使用状态" convert="roomstatus"/>
 			<%-- <youi:fieldSelect property="bbmPark.parkId" caption="所属园区" code="parkId" show="parkName"
 				src="esb/web/bbmParkManager/getBbmParks.json"></youi:fieldSelect>
 			<youi:fieldSelect property="bbmBuilding.buildingId" caption="所属楼栋" code="buildingId" show="buildingCaption" showProperty="bbmBuilding.buildingCaption"
@@ -22,19 +25,17 @@
 		<%-- <youi:gridCol property="roomNo"  caption="单元编号" width="150px"/>
 		<youi:gridCol property="bbmBuilding.buildingCaption" caption="所属楼栋" width="150px"/> --%>
 		<youi:gridCol property="roomNo"  caption="单元编号" width="100" align="center"/>
-		<youi:gridCol property="bbmFloor.bbmBuilding.bbmPark.parkName" caption="所属园区" width="100" align="center"/>
-		<youi:gridCol property="bbmFloor.bbmBuilding.buildingNo" caption="所属楼栋" width="100" align="center"/>
+		<youi:gridCol property="bbmPark.parkName" caption="所属园区" width="100" align="center"/>
+		<youi:gridCol property="bbmBuilding.buildingNo" caption="所属楼栋" width="100" align="center"/>
 		<youi:gridCol property="bbmFloor.floorNo" caption="所属楼层" width="100" align="center"/>
 		<youi:gridCol property="roomHost"  caption="单元业主" width="100" align="center"/>
 		<youi:gridCol property="roomTenement"  caption="单元租户"  width="100" align="center"/>
-		
 		<youi:gridCol property="status"  caption="使用状态" convert="roomstatus" width="150px"/>
 		<youi:gridCol property="rentCharge"  caption="物业_租金" width="150px"/>
-		<%-- <youi:gridCol property="bbmFloor.floorCaption" caption="所属楼层" width="150px"/> --%>
-		<%-- <youi:gridCol property="floor"  caption="所属楼层" width="150px"/> --%>
 		<youi:gridCol property="eneryCharge"  caption="物业_电费" width="150px"/>
 		<youi:gridCol property="waterCharge"  caption="物业_水费" width="150px"/>	
 		<youi:gridCol property="propertyCharge"  caption="物业_物业费" width="150px"/>		
+		
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">	
 		<youi:button name="edit" caption="修改"/>		
 			<youi:button name="remove" caption="删除"/>
