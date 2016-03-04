@@ -28,6 +28,7 @@
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
 		</youi:gridCol>
+		<youi:button name="pass" caption="申请通过" active="1"></youi:button>
 	</youi:grid>
 	
 	<!-- form--活动申请内容列表编辑 -->
@@ -47,7 +48,7 @@
 	</youi:form>
 	
 	<!--**********************************页面函数Start********************************-->
-		<youi:func name="renderer_memberId" params="col,record">
+	<youi:func name="renderer_memberId" params="col,record">
  		var memberName = ""; 
 		$.youi.ajaxUtil.ajax({
 				url:'esb/web/memberInformationManager/getMemberInformation.json',
@@ -60,6 +61,22 @@
 				}
 			});
 		return memberName;
+	</youi:func>
+	<youi:func name="func_grid_pass">
+		var gridElement=$elem("grid_activityApply",pageId);
+		var selectedRecord=gridElement.grid("getSelectedRecord");
+		if(selectedRecord.applyStatus=="00"){
+			$.youi.ajaxUtil.ajax({
+				url:'esb/web/activityApplyManager/updateApplyStatus.json',
+				data:'applyId='+selectedRecord.applyId,
+				success:function(result){
+				gridElement.grid("pReload");
+				}
+			})
+		}else{
+			alert("状态为申请中的活动才可以通过！")
+		}
+		
 	</youi:func>
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
