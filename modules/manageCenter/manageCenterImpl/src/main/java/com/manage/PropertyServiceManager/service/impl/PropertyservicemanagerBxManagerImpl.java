@@ -33,8 +33,10 @@ import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTs;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerBxDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerBxManager;
+import com.manage.PropertyServiceManager.service.PropertyservicemanagerTsManager;
 
 @Service("propertyservicemanagerBxManager")
 @Transactional
@@ -49,6 +51,8 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 	private PurchasingmanagerGenrePropertyManager purchasingmanagerGenrePropertyManager;
 	@Autowired
 	private OrdermanagerOrderprojecttypeValueManager ordermanagerOrderprojecttypeValueManager;
+	@Autowired
+	private PropertyservicemanagerTsManager propertyservicemanagerTsManager;
     /**
      * 查询列表
      */
@@ -94,6 +98,9 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 //    	}
     	//物业管理员定价生成订单
     	if(o.getBxStatus().equals("05")){
+    		//获取报修单
+    		String bxId = o.getBxId();
+    		PropertyservicemanagerBx bx = propertyservicemanagerBxDao.get(bxId);
     		//获取当前登录用户
     		Object object = SecurityUtils.getPrincipal();
     		User user = new User();
@@ -117,23 +124,35 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
     		order.setUserorderBuyUser(user.getUserCaption());
     		order.setMemberId(user.getUserId());
     		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		order.setUserorderAmount(o.getBxAmount());
     		ordermanagerUserorderManager.saveOrdermanagerUserorder(order);
     		
     		//保存订单扩展属性列表
     		Collection<Condition> purcondition =  new ArrayList<Condition>();
     		purcondition.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.EQUALS,pg.getGenreId()));
     		List<PurchasingmanagerGenreProperty> genrePropertyList = purchasingmanagerGenrePropertyManager.getPurchasingmanagerGenrePropertys(purcondition,null);
-    		for(PurchasingmanagerGenreProperty genreProperty:genrePropertyList){//保存订单扩展项信息
-    			OrdermanagerOrderprojecttypeValue orderExtendValue = new OrdermanagerOrderprojecttypeValue();
-    			orderExtendValue.setOrdermanagerUserorder(order);
-    			orderExtendValue.setGenrePropertyId(genreProperty);
-    			if("orderBxId".equals(genreProperty.getGenrePropertyFieldName())){
-    				orderExtendValue.setOrderprojecttypeValueFieldValue(o.getBxId());
-    			}
-    			ordermanagerOrderprojecttypeValueManager.saveOrdermanagerOrderprojecttypeValue(orderExtendValue);
+    		if(genrePropertyList.size()>0){
+	    		for(PurchasingmanagerGenreProperty genreProperty:genrePropertyList){//保存订单扩展项信息
+	    			OrdermanagerOrderprojecttypeValue orderExtendValue = new OrdermanagerOrderprojecttypeValue();
+	    			orderExtendValue.setOrdermanagerUserorder(order);
+	    			orderExtendValue.setGenrePropertyId(genreProperty);
+	    			if("orderBxId".equals(genreProperty.getGenrePropertyFieldName())){
+	    				orderExtendValue.setOrderprojecttypeValueFieldValue(bxId);
+	    			}
+	    			ordermanagerOrderprojecttypeValueManager.saveOrdermanagerOrderprojecttypeValue(orderExtendValue);
+	    		}
     		}
+    		//物业管理员定价，同时关闭派工记录
+    		PropertyservicemanagerTs ts =  propertyservicemanagerTsManager.getTsBybxId(bxId);
+    		ts.setTsStatus("03");
+    		propertyservicemanagerTsManager.savePropertyservicemanagerTs(ts);
+    		//保存报修记录
+    		bx.setBxStatus(o.getBxStatus());
+    		bx.setBxAmount(o.getBxAmount());
+    		return propertyservicemanagerBxDao.save(bx);
+    	}else{
+    		return propertyservicemanagerBxDao.save(o);
     	}
-    	return propertyservicemanagerBxDao.save(o);
     }
 
     /**
@@ -174,7 +193,11 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
     	PropertyservicemanagerBx bx = propertyservicemanagerBxDao.get(id);
     	String bxstatus = bx.getBxStatus();
     	if(code.equals("01")){//回绝报修
-    		bx.setBxStatus("08");
+    		if(bxstatus.equals("00")){
+    			bx.setBxStatus("08");
+    		}else if(bxstatus.equals("05")){//重修报修
+        		bx.setBxStatus("01");//回滚状态到已受理	
+    		}
     	}else{
     		if(bxstatus.equals("00")){//待受理-->已受理
     			bx.setBxStatus("01");

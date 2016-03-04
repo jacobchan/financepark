@@ -4,8 +4,8 @@
 package com.manage.PropertyServiceManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
@@ -57,10 +57,22 @@ public class PropertyservicemanagerTs implements Domain{
 	@Length(max=36)
 	private String createUser;//创建人
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="BX_ID_")
 	private com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx propertyservicemanagerBx;//报修记录ID
 	
+	@Column(name = "TS_TIME_")
+	@Length(max=20)
+	private String tsTime;//接单时间
+	
+	public String getTsTime() {
+		return tsTime;
+	}
+
+	public void setTsTime(String tsTime) {
+		this.tsTime = tsTime;
+	}
+
 	public String getTsStatus(){
 		return this.tsStatus;
 	}
@@ -138,15 +150,27 @@ public class PropertyservicemanagerTs implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((tsStatus == null) ? 0 : tsStatus.hashCode());
-		result = prime * result + ((tsTelephone == null) ? 0 : tsTelephone.hashCode());
-		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
+		result = prime * result
+				+ ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result
+				+ ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime
+				* result
+				+ ((propertyservicemanagerBx == null) ? 0
+						: propertyservicemanagerBx.hashCode());
 		result = prime * result + ((tsId == null) ? 0 : tsId.hashCode());
-		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
-		result = prime * result + ((tsRemark == null) ? 0 : tsRemark.hashCode());
-		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
 		result = prime * result + ((tsName == null) ? 0 : tsName.hashCode());
-		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result
+				+ ((tsRemark == null) ? 0 : tsRemark.hashCode());
+		result = prime * result
+				+ ((tsStatus == null) ? 0 : tsStatus.hashCode());
+		result = prime * result
+				+ ((tsTelephone == null) ? 0 : tsTelephone.hashCode());
+		result = prime * result + ((tsTime == null) ? 0 : tsTime.hashCode());
+		result = prime * result
+				+ ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result
+				+ ((updateUser == null) ? 0 : updateUser.hashCode());
 		return result;
 	}
 	
@@ -158,7 +182,38 @@ public class PropertyservicemanagerTs implements Domain{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final PropertyservicemanagerTs other = (PropertyservicemanagerTs) obj;
+		PropertyservicemanagerTs other = (PropertyservicemanagerTs) obj;
+		if (createTime == null) {
+			if (other.createTime != null)
+				return false;
+		} else if (!createTime.equals(other.createTime))
+			return false;
+		if (createUser == null) {
+			if (other.createUser != null)
+				return false;
+		} else if (!createUser.equals(other.createUser))
+			return false;
+		if (propertyservicemanagerBx == null) {
+			if (other.propertyservicemanagerBx != null)
+				return false;
+		} else if (!propertyservicemanagerBx
+				.equals(other.propertyservicemanagerBx))
+			return false;
+		if (tsId == null) {
+			if (other.tsId != null)
+				return false;
+		} else if (!tsId.equals(other.tsId))
+			return false;
+		if (tsName == null) {
+			if (other.tsName != null)
+				return false;
+		} else if (!tsName.equals(other.tsName))
+			return false;
+		if (tsRemark == null) {
+			if (other.tsRemark != null)
+				return false;
+		} else if (!tsRemark.equals(other.tsRemark))
+			return false;
 		if (tsStatus == null) {
 			if (other.tsStatus != null)
 				return false;
@@ -169,40 +224,20 @@ public class PropertyservicemanagerTs implements Domain{
 				return false;
 		} else if (!tsTelephone.equals(other.tsTelephone))
 			return false;
-		if (updateUser == null) {
-			if (other.updateUser != null)
+		if (tsTime == null) {
+			if (other.tsTime != null)
 				return false;
-		} else if (!updateUser.equals(other.updateUser))
-			return false;
-		if (tsId == null) {
-			if (other.tsId != null)
-				return false;
-		} else if (!tsId.equals(other.tsId))
+		} else if (!tsTime.equals(other.tsTime))
 			return false;
 		if (updateTime == null) {
 			if (other.updateTime != null)
 				return false;
 		} else if (!updateTime.equals(other.updateTime))
 			return false;
-		if (tsRemark == null) {
-			if (other.tsRemark != null)
+		if (updateUser == null) {
+			if (other.updateUser != null)
 				return false;
-		} else if (!tsRemark.equals(other.tsRemark))
-			return false;
-		if (createTime == null) {
-			if (other.createTime != null)
-				return false;
-		} else if (!createTime.equals(other.createTime))
-			return false;
-		if (tsName == null) {
-			if (other.tsName != null)
-				return false;
-		} else if (!tsName.equals(other.tsName))
-			return false;
-		if (createUser == null) {
-			if (other.createUser != null)
-				return false;
-		} else if (!createUser.equals(other.createUser))
+		} else if (!updateUser.equals(other.updateUser))
 			return false;
 		return true;
 	}

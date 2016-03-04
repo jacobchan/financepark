@@ -167,10 +167,15 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
     			PropertyservicemanagerBx bx = propertyservicemanagerTsed.getPropertyservicemanagerBx();
     			if(bx.getBxStatus().equals("03")||bx.getBxStatus().equals("04")){//管理员已定价不能新增或修改维修单
     				BigDecimal amount = BigDecimal.valueOf(0);
+    				BigDecimal bxAmount = bx.getBxAmount();
     					for(PropertyservicemanagerSer ser : listSer){//自动计算总价
     						amount = amount.add(ser.getSerPrice());
     					}
-	    				bx.setBxAmount(amount);
+    					if(bxAmount!=null){//是否已计价
+    						bx.setBxAmount(amount.add(bxAmount));
+    					}else{
+    						bx.setBxAmount(amount);
+    					}
 	    				//变更状态为已完工
 	    				bx.setBxStatus("04");
 		    		propertyservicemanagerBxDao.save(bx);
@@ -184,7 +189,7 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
     			}else if(bx.getBxStatus().equals("06")){
     				throw new BusException("已付款!");
     			}else if(bx.getBxStatus().equals("07")){
-    				throw new BusException("保修流程已结束!");
+    				throw new BusException("报修流程已结束!");
     			}
     		}else{
     			throw new BusException("派工记录有误!");

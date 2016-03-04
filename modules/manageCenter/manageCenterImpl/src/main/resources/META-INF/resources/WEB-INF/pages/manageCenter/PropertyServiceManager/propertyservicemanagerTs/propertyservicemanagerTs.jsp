@@ -21,11 +21,12 @@
 				<youi:button name="refuse" caption="拒单" icon="edit" active="1"/>
 				<youi:button name="putfrom" caption="填报维修费用清单" icon="edit" active="1"/>
 				
-				<youi:gridCol property="tsName"  caption="派工人员" width="15%"/>
-				<youi:gridCol property="tsStatus"  caption="派工受理状态" width="15%" convert="ts_status"/>
-				<youi:gridCol property="tsTelephone"  caption="派工人员电话号码" width="15%"/>
-				<youi:gridCol property="propertyservicemanagerBx.bxComp" caption="报修企业" width="15%"/>
-				<youi:gridCol property="propertyservicemanagerBx.bxRemark" caption="报修描述" width="20%"/>
+				<youi:gridCol property="tsName"  caption="派工人员" width="12%"/>
+				<youi:gridCol property="tsStatus"  caption="派工受理状态" width="12%" convert="ts_status"/>
+				<youi:gridCol property="tsTime"  caption="接单时间" width="10%"/>
+				<youi:gridCol property="tsTelephone"  caption="派工人员电话号码" width="12%"/>
+				<youi:gridCol property="propertyservicemanagerBx.bxComp" caption="报修企业" width="12%"/>
+				<youi:gridCol property="propertyservicemanagerBx.bxRemark" caption="报修描述" width="18%"/>
 				<youi:gridCol property="tsRemark"  caption="备注" width="20%"/>
 				<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 					<youi:button name="edit" caption="修改"/>
@@ -91,6 +92,8 @@
 				});
 			}else if(tsstatus=='01'){
 				alert("您已接单!");
+			}else if(tsstatus=='03'){
+				alert("已处理!");
 			}else{
 				alert("派工单已拒绝!");
 			}	
@@ -112,7 +115,9 @@
 					});
 				});
 			}else if(tsstatus=="01"){
-				alert("您已接单");
+				alert("您已接单!");
+			}else if(tsstatus=="03"){
+				alert("已处理!");
 			}else{
 				alert("您已拒单!");
 			}
