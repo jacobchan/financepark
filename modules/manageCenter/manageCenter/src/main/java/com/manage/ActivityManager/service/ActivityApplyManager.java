@@ -92,4 +92,8 @@ public interface ActivityApplyManager extends BaseManager{
      * 
      */    
     public List<ActivityDocument> getPublishActivityDocuments(ActivityApply o) throws BusException;
+    /**
+     * 申请通过更改状态
+     */
+    public void updateApplyStatus(String id) throws BusException;
 }
