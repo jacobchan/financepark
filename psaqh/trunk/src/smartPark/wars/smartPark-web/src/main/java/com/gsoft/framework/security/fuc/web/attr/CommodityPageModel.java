@@ -28,7 +28,7 @@ import org.springframework.ui.ModelMap;
 			DataIn<PurchasingmanagerGenre> dataIn){
 		ModelMap modelMap = new ModelMap();
 		//活动所有的商品类别列表
-		List<PurchasingmanagerGenre> genres = this.purchasingmanagerGenreManager.getCommodityGenreList();
+		List<PurchasingmanagerGenre> genres = purchasingmanagerGenreManager.getCommodityGenreList();
 		GenreHtmlTreeNode genreTree = ParkTreeUtils.listToGenreTree(genres, null, "商品类别");
 		genreTree.setId("tree_genre_root");
 		modelMap.addAttribute("genreTree", genreTree);
