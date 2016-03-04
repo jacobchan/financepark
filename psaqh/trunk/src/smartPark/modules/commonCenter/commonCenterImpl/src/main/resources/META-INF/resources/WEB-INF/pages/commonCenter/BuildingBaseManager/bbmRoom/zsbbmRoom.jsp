@@ -9,15 +9,19 @@
 			<youi:fieldText property="roomNo"  caption="单元编号"/>
 			<youi:fieldSelect property="bbmFloor.floorId" caption="所属楼层" code="floorId" show="floorNo" 
 				src="esb/web/bbmFloorManager/getBbmFloors.json" />
+			<youi:fieldSelect property="bbmPark.parkId" caption="所属园区" code="parkId" show="parkName"
+				src="esb/web/bbmParkManager/getBbmParks.json"/>
+			<youi:fieldSelect property="bbmBuilding.buildingId" caption="所属楼栋" code="buildingId" show="buildingNo"
+				src="esb/web/bbmBuildingManager/getBbmBuildings.json" />
 			<youi:fieldSelect property="status"  caption="使用状态" convert="roomstatus"/>
 			<youi:fieldText property="aspect"  caption="招商_朝向"/>
 			<youi:fieldSelect property="saleState"  caption="招商_销售状态" convert="saleState"/>
 			<youi:fieldText property="area"  caption="招商_房间面积"/>
 		</youi:fieldLayout>
-		<youi:gridCol property="roomNo"  caption="单元编号" width="100" align="center"/>
-		<youi:gridCol property="bbmFloor.bbmBuilding.bbmPark.parkName" caption="所属园区" width="100" align="center"/>
-		<youi:gridCol property="bbmFloor.bbmBuilding.buildingNo" caption="所属楼栋" width="100" align="center"/>
+		<youi:gridCol property="bbmPark.parkName" caption="所属园区" width="100" align="center"/>
+		<youi:gridCol property="bbmBuilding.buildingNo" caption="所属楼栋" width="100" align="center"/>
 		<youi:gridCol property="bbmFloor.floorNo" caption="所属楼层" width="100" align="center"/>
+		<youi:gridCol property="roomNo"  caption="单元编号" width="100" align="center"/>
 		<youi:gridCol property="roomHost"  caption="单元业主" width="100" align="center"/>
 		<youi:gridCol property="status"  caption="使用状态" width="100" align="center" convert="roomstatus"/>
 
