@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.service.MemberInformationManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -26,9 +27,11 @@ import com.gsoft.framework.esb.annotation.OrderCollection;
 import com.gsoft.framework.esb.annotation.PubCondition;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.security.AccountPrincipal;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.util.StringUtils;
+import com.gsoft.utils.BizCodeUtil;
 import com.manage.EnterBusinessManager.service.EnterbusinessmanagerRzManager;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerEnteringDao;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerEntrecDao;
@@ -45,6 +48,10 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
 	
 	@Autowired
 	private MemberInformationDao memberInformationDao;
+	
+	@Autowired
+	private MemberInformationManager memberInformationManager;
+	
 	
 	@Autowired
 	private PropertyservicemanagerEnteringDao propertyservicemanagerEnteringDao;
@@ -103,72 +110,115 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
     	String propertyservicemanagerEnteringId =o.getPropertyservicemanagerEntering().getEnteringId();
     	String propertyservicemanagerEntreId =o.getEntrecId();//主键ID
     	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerEntreId);
+    	
+    	MemberInformation memberInformation=new MemberInformation();
+		memberInformation=memberInformationManager.getMemberInformation(o.getEnteringName());
+		//判断入驻申请人是否重复
+		List<PropertyservicemanagerEntrec> entrecList=new ArrayList<PropertyservicemanagerEntrec>();
+		Collection<Condition> conditions = new ArrayList<Condition>();
+		conditions.add(ConditionUtils.getCondition("memberId.memberId", Condition.EQUALS, memberInformation.getMemberId()));
+		conditions.add(ConditionUtils.getCondition("enterrecStatus",Condition.IN, new String[] {"01","02","06"}));//待受理，已授理，已入驻
+		entrecList=propertyservicemanagerEntrecDao.commonQuery(conditions, null);
+    	
     	if(isUpdate){//修改
+    		
 			PropertyservicemanagerEntering enteringAfter=propertyservicemanagerEnteringDao.get(propertyservicemanagerEnteringId);
     		PropertyservicemanagerEntrec entrec=propertyservicemanagerEntrecDao.get(propertyservicemanagerEntreId);
     		String enteringId =entrec.getPropertyservicemanagerEntering().getEnteringId();
     		PropertyservicemanagerEntering enteringBefore=propertyservicemanagerEnteringDao.get(enteringId);
-    		//先前已经预约的申请，现修改后重新预约
-    		if(!enteringId.equals(propertyservicemanagerEnteringId)){
-    			
-        		//修改可办理预约表中的剩余预约数量和已预约数量：修改后
-        		if(enteringAfter.getEnteringRemain().equals("1")){//判断可办理预约表中剩余预约数量是否还有值
-        			enteringAfter.setEnteringStatus("02");//剩余数量为0，修改可预约状态为预约已满
+    		
+    		
+    		String enteringNameBefore=entrec.getEnteringName();//变更前的入驻申请人
+    		String enteringNameAfter=o.getEnteringName();//变更后的入驻申请人
+    		//若入驻申请人没有变更，则更新可办理预约记录和入驻申请服务信息
+    		if(enteringNameBefore.equals(enteringNameAfter)){
+    			PropertyservicemanagerEntrec pe=this.entringIdChange(o, enteringBefore, enteringAfter);
+    			return pe;
+    		}else{
+    			//若入驻申请人发生变更，则做入驻申请人重复性判断
+    			if(entrecList.size()>0){//存在重复申请，则抛提醒消息
+        			throw new BusException("该申请人已申请入驻，不能重复申请");
+        		}else{
+        			PropertyservicemanagerEntrec pe=this.entringIdChange(o, enteringBefore, enteringAfter);
+        			return pe;
         		}
-        		enteringAfter.setEnteringRemain(String.valueOf(Integer.valueOf(enteringAfter.getEnteringRemain())-1));//剩余预约数量
-        		enteringAfter.setEnteringAlre(String.valueOf(Integer.valueOf(enteringAfter.getEnteringAlre())+1));//已预约数量
-        		propertyservicemanagerEnteringDao.save(enteringAfter);
-        		
-        		
-        		//修改可办理预约表中的剩余预约数量和已预约数量：修改前
-        		if(enteringBefore.getEnteringRemain().equals("1")){//判断可办理预约表中剩余预约数量是否还有值
-        			enteringBefore.setEnteringStatus("02");//剩余数量为0，修改可预约状态为预约已满
-        		}
-        		enteringBefore.setEnteringRemain(String.valueOf(Integer.valueOf(enteringBefore.getEnteringRemain())+1));//剩余预约数量
-        		enteringBefore.setEnteringAlre(String.valueOf(Integer.valueOf(enteringBefore.getEnteringAlre())-1));//已预约数量
-        		propertyservicemanagerEnteringDao.save(enteringBefore);
-        		
     		}
     		
-    		enteringAfter.setUpdateUser(o.getUpdateUser());
-    		enteringAfter.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    		o.setPropertyservicemanagerEntering(enteringAfter);
     	}else{//新增
-
-    		//修改可办理预约表中的剩余预约数量和已预约数量
     		PropertyservicemanagerEntering enteringBefore=propertyservicemanagerEnteringDao.get(propertyservicemanagerEnteringId);
     		
     		String enteringRemain=enteringBefore.getEnteringRemain();//剩余预约数量
     		String enteringAlre=enteringBefore.getEnteringAlre();//已预约数量
     		enteringBefore.setEnteringRemain(String.valueOf(Integer.valueOf(enteringRemain)-1));
     		enteringBefore.setEnteringAlre(String.valueOf(Integer.valueOf(enteringAlre)+1));
-    		if(enteringBefore.getEnteringRemain().equals("1")){
+    		if(enteringBefore.getEnteringRemain().equals("0")){
     			enteringBefore.setEnteringStatus("02");//剩余数量为0，修改可预约状态为预约已满：02
     		}
+    		//变更可办理预约表中的剩余预约数量和已预约数量
     		propertyservicemanagerEnteringDao.save(enteringBefore);
-
-    		//新增 入驻服务办理预约记录基础数据
-    		MemberInformation memberInformation=null;
-    		if(o.getEnteringName() !=null){
-    			memberInformation=memberInformationDao.get(o.getEnteringName());
-    		}
-    		if(memberInformation != null){
+    		
+    		if(entrecList.size()>0){//存在重复申请，则抛提醒消息
+    			throw new BusException("该申请人已申请入驻，不能重复申请");
+    		}else{
     			o.setMemberId(memberInformation);
+    			o.setPropertyservicemanagerEntering(enteringBefore);
+    			o.setEnterrecStatus("01");//01：已预约
+    			o.setCreateUser(o.getUpdateUser());
+    			o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    			o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    			//新增 入驻服务办理预约记录基础数据
+        		return propertyservicemanagerEntrecDao.save(o);
     		}
-    		o.setPropertyservicemanagerEntering(enteringBefore);
-    		o.setEnterrecStatus("01");//01：已预约
-    		o.setCreateUser(o.getUpdateUser());
-    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		
     	}
     	
-		return propertyservicemanagerEntrecDao.save(o);
+		
 		
     }
     
+	/**
+	 * 修改入驻申请时，判断预约记录Id是否变更
+	 * */
+	@EsbServiceMapping
+	public PropertyservicemanagerEntrec entringIdChange(PropertyservicemanagerEntrec o,PropertyservicemanagerEntering before,PropertyservicemanagerEntering after) throws BusException {
+		String enteringIdBefore =before.getEnteringId();//变更前
+		String enteringIdAfter=after.getEnteringId();//变更后
+		//预约记录ID变更，则修改变更前和变更后的可办理预约记录信息(修改剩余预约数量和已预约数量)
+		if(!enteringIdBefore.equals(enteringIdAfter)){
+			//变更后
+			if(after.getEnteringRemain().equals("1")){//判断可办理预约表中剩余预约数量是否还有值
+				after.setEnteringStatus("02");//剩余数量为0，修改可预约状态为预约已满
+			}
+			after.setEnteringRemain(String.valueOf(Integer.valueOf(after.getEnteringRemain())-1));//剩余预约数量
+			after.setEnteringAlre(String.valueOf(Integer.valueOf(after.getEnteringAlre())+1));//已预约数量
+			if(after.getEnteringRemain().equals("0")){
+				after.setEnteringStatus("02");//剩余数量为0，修改可预约状态为预约已满：02
+    		}
+			propertyservicemanagerEnteringDao.save(after);
+
+
+			//变更前
+			if(before.getEnteringRemain().equals("1")){//判断可办理预约表中剩余预约数量是否还有值
+				before.setEnteringStatus("02");//剩余数量为0，修改可预约状态为预约已满
+			}
+			before.setEnteringRemain(String.valueOf(Integer.valueOf(before.getEnteringRemain())+1));//剩余预约数量
+			before.setEnteringAlre(String.valueOf(Integer.valueOf(before.getEnteringAlre())-1));//已预约数量
+			if(before.getEnteringRemain().equals("0")){
+				before.setEnteringStatus("02");//剩余数量为0，修改可预约状态为预约已满：02
+    		}
+			propertyservicemanagerEnteringDao.save(before);
+
+		}
+
+		after.setUpdateUser(o.getUpdateUser());
+		after.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		o.setPropertyservicemanagerEntering(after);
+		return propertyservicemanagerEntrecDao.save(o);
+	}
+	
     
 	/**
-	 * 变更状态:已预约-->已授理
+	 * 变更状态:已预约-->已授理，生成入驻受理编号，并发送短信通知用户
 	 * */
 	@EsbServiceMapping
 	public void enterApplication(PropertyservicemanagerEntrec propertyservicemanagerEntrec) throws BusException {
@@ -178,6 +228,7 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
 			p=propertyservicemanagerEntrecDao.get(entrecId);//根据主键查询入驻服务办理预约数据
 		}
 		p.setEnterrecStatus("02");//已授理
+		p.setEnterrecCode(BizCodeUtil.getInstance().getBizCodeDate("RZYY"));//生成入驻预约编号
 		PropertyservicemanagerEntrec entrec=propertyservicemanagerEntrecDao.save(p);
 		if(entrec!=null && entrec.getEnterrecStatus().equals("02")){
 			//若该预约可预约状态变更为已授理，则更新企业入驻信息基本数据和企业会员信息

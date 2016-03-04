@@ -13,11 +13,12 @@
 		</youi:fieldLayout>
 		<youi:button name="cancelReservation" caption="取消预约" icon="edit" active="1"></youi:button> 
 		<youi:button name="changeStatues" caption="预约授理" icon="edit" active="1"></youi:button> 
-		<youi:gridCol property="memberId.memberName"  caption="入驻申请人" width="15%" align="center"/>
-	    <youi:gridCol property="memberId.memberPhoneNumber"  caption="入驻联系电话" width="20%" align="center"/>
+		<youi:gridCol property="enterrecCode"  caption="入驻受理编号" width="20%" align="center"/>
+		<youi:gridCol property="memberId.memberName"  caption="入驻申请人" width="10%" align="center"/>
+	    <youi:gridCol property="memberId.memberPhoneNumber"  caption="入驻联系电话" width="15%" align="center"/>
 
 		<youi:gridCol property="enteringTime"  caption="预约时间段" width="20%" convert="enteringTime" align="center"/>
-		<youi:gridCol property="enterrecStatus"  caption="预约记录状态" convert="enterrecStatus" width="20%" align="center"/>
+		<youi:gridCol property="enterrecStatus"  caption="预约记录状态" convert="enterrecStatus" width="15%" align="center"/>
 		<youi:gridCol property="enteringDate"  caption="预约时间日期" width="20%" align="center" orderBy="desc"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
