@@ -143,13 +143,13 @@
 			<scope>compile</scope>
 		</dependency>
 		
-		<!--定时调度框架  -->
+		<!--定时调度框架-->
 		<dependency>
 			<groupId>com.gsoft.framework</groupId>
 			<artifactId>gsoft-framework-job</artifactId>
 			<version>${gsoft.version}</version>
 			<scope>compile</scope>
-		</dependency>
+		</dependency>  
 		
 		<!--文件上传  -->
 		<dependency>
@@ -203,59 +203,64 @@
     		<version>3.1.0</version>
     		<scope>provided</scope>
 		</dependency>
-		<!-- 高版本mysql 需引入  -->
+		<!-- 高版本mysql 需引入 -->
 		<dependency>
 			<groupId>mysql</groupId>
     		<artifactId>mysql-connector-java</artifactId>
     		<version>5.1.37</version>
-		</dependency>
-		<dependency>
-			<groupId>com.gsoft.smartPark</groupId>
-			<artifactId>smartPark-commonCenterImpl</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.gsoft.smartPark</groupId>
-			<artifactId>smartPark-manageCenterImpl</artifactId>
-			<version>${project.version}</version>
-		</dependency>
+		</dependency> 
 		<dependency>
 			<groupId>com.gsoft.smartPark</groupId>
 			<artifactId>smartPark-memberCenterImpl</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
 	</dependencies>
 	
 	<profiles>
 		<profile>
-			<id>integration</id>
+			<id>default</id>
+			<activation><activeByDefault>true</activeByDefault></activation>
+			<properties>
+				<package.target></package.target>
+			</properties>
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>org.apache.tomcat.maven</groupId>
-						<artifactId>tomcat7-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>start-tomcat</id>
-								<phase>pre-integration-test</phase>
-								<goals>
-									<goal>run</goal>
-								</goals>
-								<configuration>
-									<path>${m2eclipse.wtp.contextRoot}</path>
-									<fork>true</fork>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
+		                <groupId>org.apache.maven.plugins</groupId>
+		                <artifactId>maven-war-plugin</artifactId>
+		                <version>2.4</version>
+		                <configuration>
+			               	<webResources>
+				               	<resource>
+									<directory>appconf/</directory>  
+		                            <targetPath>WEB-INF/classes</targetPath>  
+		                            <filtering>true</filtering>
+		                        </resource>
+		               	</webResources>
+		                </configuration>
+                	</plugin>
 				</plugins>
 			</build>
+		</profile>
+		<profile>
+			<id>webtest</id>
+			<properties>
+				<package.target>web-test</package.target>
+			</properties>
 		</profile>
 	</profiles>
 	
 	<build>
 		<finalName>${project.artifactId}</finalName>
+		<resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <!-- 排除  -->
+                <excludes>
+                <exclude>web*/*/*</exclude>
+                </excludes>
+            </resource>
+        </resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
@@ -294,7 +299,26 @@
 					</additionalBuildcommands>
 				</configuration>
 			</plugin>
-			
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                	<warName>smartPark##${maven.build.timestamp}-${package.target}</warName>
+					<webResources>
+						<resource>
+							<directory>src/main/resources/${package.target}/properties</directory>  
+                            <targetPath>WEB-INF/classes</targetPath>  
+                            <filtering>true</filtering>
+                           </resource>
+						<resource>
+							<directory>src/main/resources/${package.target}/spring</directory>  
+                            <targetPath>WEB-INF/configs/spring</targetPath>  
+                            <filtering>true</filtering>
+                        </resource>
+                	</webResources> 
+	        	</configuration>
+	    	</plugin>
 		</plugins>
 		
 		<pluginManagement>
