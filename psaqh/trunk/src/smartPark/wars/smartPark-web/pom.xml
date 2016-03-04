@@ -50,6 +50,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<nexus.root>http://220.249.113.11/nexus</nexus.root>
 		<gsoft.version>1.0.4-SNAPSHOT</gsoft.version>
+		<maven.build.timestamp.format>yyMMdd</maven.build.timestamp.format>
 	</properties>
 	<!-- 本模块使用的包 -->
 	<dependencies>
