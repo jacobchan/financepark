@@ -8,13 +8,17 @@
 		<youi:fieldLayout columns="2" labelWidths="100,100">
 			<youi:fieldText property="floorNo"  caption="楼层编号" operator="LIKE"/>
 			<youi:fieldText property="floorCaption"  caption="楼层说明" operator="LIKE"/>
+			<youi:fieldSelect property="bbmPark.parkId" caption="所属园区" code="parkId" show="parkName"
+				src="esb/web/bbmParkManager/getBbmParks.json"/>
+			<youi:fieldSelect property="bbmBuilding.buildingId" caption="所属楼栋" code="buildingId" show="buildingNo"
+				src="esb/web/bbmBuildingManager/getBbmBuildings.json" />
 		</youi:fieldLayout>
-		<youi:gridCol property="floorNo"  caption="楼层编号" width="15%" align="center"/>
-		<youi:gridCol property="floorCaption"  caption="楼层说明" width="20%" align="center"/>
-		<youi:gridCol property="parkName" caption="所属园区" width="15%" align="center"/>
-		<youi:gridCol property="bbmBuilding.buildingNo" caption="所属楼栋" width="15%" align="center"/>
-		<youi:gridCol property="floorRoomCount"  caption="楼层单元数量" width="15%" align="center"/>
-		<youi:gridCol property="floorImage"  caption="楼层布局图片" width="15%" align="center"/>
+		<youi:gridCol property="floorNo"  caption="楼层编号" width="100" align="center"/>
+		<youi:gridCol property="bbmPark.parkName" caption="所属园区" width="100" align="center"/>
+		<youi:gridCol property="bbmBuilding.buildingNo" caption="所属楼栋" width="100" align="center"/>
+		<youi:gridCol property="floorRoomCount"  caption="楼层单元数量" width="100" align="center"/>
+		<youi:gridCol property="floorCaption"  caption="楼层说明" width="150" align="center"/>
+		<youi:gridCol property="floorImage"  caption="楼层布局图片" width="150" align="center"/>
 		
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
@@ -55,9 +59,10 @@
                   } 
             });
    	 </youi:func>
+   	 <!-- 表单提交后刷新页面 -->
    	 <youi:func name = "form_bbmFloor_afterSubmit">
-			var formBbmFloor = $elem('form_bbmFloor',pageId);
-			formBbmFloor.form('close');
+			var formbbmFloor = $elem('form_bbmFloor',pageId);
+			formbbmFloor.form('close');
 			$elem('grid_bbmFloor',pageId).grid('pReload');
 	</youi:func>
 	<!--**********************************页面函数End**********************************-->
