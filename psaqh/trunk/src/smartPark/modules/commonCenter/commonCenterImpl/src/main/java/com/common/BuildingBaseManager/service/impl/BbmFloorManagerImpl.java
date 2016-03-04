@@ -77,14 +77,19 @@ public class BbmFloorManagerImpl extends BaseManagerImpl implements BbmFloorMana
      */
     @EsbServiceMapping
     public BbmFloor saveBbmFloor(BbmFloor o) throws BusException{
-//    	String bbmFloorId = o.getBbmFloorId();
+//    	String bbmFloorId = o.getFloorId();
 //    	boolean isUpdate = StringUtils.isNotEmpty(bbmFloorId);
 //    	if(isUpdate){//修改
 //    	
 //    	}else{//新增
 //    		
 //    	}
-    	return bbmFloorDao.save(o);
+    	BbmBuilding building = o.getBbmBuilding() ; //得到楼栋对象，此时漏洞对象里面只有ID
+    	String buildingId = building.getBuildingId() ;//得到楼栋ID
+    	building = bbmBuildingManager.getBbmBuilding(buildingId) ; //通锅楼栋ID获取漏洞对象
+    	BbmPark park = building.getBbmPark() ;//获取楼栋对象对应的园区信息
+    	o.setBbmPark(park);//将园区信息set到楼层对象中
+    	return bbmFloorDao.save(o);//保存楼层对象
     }
 
     /**
