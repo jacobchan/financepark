@@ -19,6 +19,7 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.security.fuc.entity.Role;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
@@ -26,7 +27,9 @@ import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
+import com.manage.EmployeeManager.entity.EnterpriseRole;
 import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
+import com.manage.EmployeeManager.service.EnterpriseRoleManager;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.EnterBusinessManager.dao.EnterbusinessmanagerRzDao;
 import com.manage.EnterBusinessManager.service.EnterbusinessmanagerRzManager;
@@ -42,6 +45,8 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 	private PropertyservicemanagerEntrecManager propertyservicemanagerEntrecManager;
 	@Autowired
 	private EnterpriseEmployeesManager enterpriseEmployeesManager;
+	@Autowired
+	private EnterpriseRoleManager enterpriseRoleManager;
 	
     /**
      * 查询列表
@@ -133,7 +138,12 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     	enterpriseEmployees.setRz(er);
     	enterpriseEmployees.setEmployeesTelephone(er.getRzTelephone());
     	enterpriseEmployees.setMember(er.getRzManager());
-    	enterpriseEmployeesManager.saveEnterpriseEmployees(enterpriseEmployees);
+    	enterpriseEmployees=enterpriseEmployeesManager.saveEnterpriseEmployees(enterpriseEmployees);
+    	//企业员工默认为管理员角色
+    	EnterpriseRole enterpriseRole=new EnterpriseRole();
+    	enterpriseRole.setEmployees(enterpriseEmployees);
+    	enterpriseRole.setRole(new Role());
+    	enterpriseRoleManager.saveEnterpriseRole(enterpriseRole);
 	}
     
     @EsbServiceMapping
