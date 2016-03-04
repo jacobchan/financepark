@@ -179,23 +179,20 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
 		return list;
 	}
 	/**
-	 * 根据类别ID获得最上级商品类别
-	 */
-	@Override
-	@EsbServiceMapping
-	public PurchasingmanagerGenre getSuperGenre(@ServiceParam(name="genreId") String genreId) throws BusException {
-		PurchasingmanagerGenre pg = purchasingmanagerGenreDao.get(genreId);
-    	while(pg.getGenreCode() == null){
-    		pg = pg.getPurchasingmanagerGenre();
-    	}
-		return pg;
-	}
-	/**
 	 * 根据类别唯一编号获取对象
 	 */
 	@Override
 	public PurchasingmanagerGenre getGenreByUniqueProperty(String genreCode)
 			throws BusException {
 		return purchasingmanagerGenreDao.getObjectByUniqueProperty("genreCode", genreCode);
+	}
+	/**
+	 * 获取所有商品类别列表
+	 */
+	@Override
+	public List<PurchasingmanagerGenre> getCommodityGenreList() throws BusException {
+		List<PurchasingmanagerGenre> list = new ArrayList<PurchasingmanagerGenre>();
+		list = purchasingmanagerGenreDao.getCommodityGenreList();
+		return list;
 	}
 }

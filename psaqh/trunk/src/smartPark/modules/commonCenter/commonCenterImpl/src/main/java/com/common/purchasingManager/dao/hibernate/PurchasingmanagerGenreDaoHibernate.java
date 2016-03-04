@@ -54,4 +54,14 @@ public class PurchasingmanagerGenreDaoHibernate extends
 //		});
 //		return list;
 //	}
+	/**
+	 * 获取所有商品类别列表
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PurchasingmanagerGenre> getCommodityGenreList() {
+		String hql = "from PurchasingmanagerGenre m where "
+				+ "m.genreCode != '07' and m.genreCode != '08' or m.genreCode is null";
+		return getHibernateTemplate().find(hql);
+	}
 }

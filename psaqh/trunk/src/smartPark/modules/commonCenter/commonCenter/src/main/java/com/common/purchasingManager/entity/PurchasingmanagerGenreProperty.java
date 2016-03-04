@@ -68,7 +68,7 @@ public class PurchasingmanagerGenreProperty implements Domain{
 	@Length(max=2)
 	private String genrePropertyFieldType;//字段类型
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="GENRE_ID_")
 	private com.common.purchasingManager.entity.PurchasingmanagerGenre purchasingmanagerGenre;//商品类别ID
 	
