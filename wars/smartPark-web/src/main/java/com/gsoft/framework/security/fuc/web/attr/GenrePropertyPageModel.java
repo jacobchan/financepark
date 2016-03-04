@@ -9,6 +9,7 @@ import com.gsoft.framework.core.web.AbstractPageModel;
 import com.gsoft.framework.core.web.IPageModel;
 import com.gsoft.framework.core.web.controller.DataIn;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,12 +44,18 @@ import org.springframework.ui.ModelMap;
 	}
 	
 	/**
-	 * 获取商品类型编码不为空的商品类型
+	 * 获取最顶级的商品类型列表
 	 * @return
 	 */
 	private GenreHtmlTreeNode getGenreHtmlTreeNode() {
 		//获取所有的订单类型列表
-		List<PurchasingmanagerGenre> genres = purchasingmanagerGenreManager.getOrderTypes();
+		List<PurchasingmanagerGenre> genreList = purchasingmanagerGenreManager.getPurchasingmanagerGenres();
+		List<PurchasingmanagerGenre> genres = new ArrayList<PurchasingmanagerGenre>();
+		for(PurchasingmanagerGenre pg:genreList){
+			if(pg.getPurchasingmanagerGenre() == null){
+				genres.add(pg);
+			}
+		}
 		GenreHtmlTreeNode genreTree = ParkTreeUtils.listToGenreTree(genres, null, "商品类型");
 		genreTree.setId("tree_genreTree_root");
 		return genreTree;
