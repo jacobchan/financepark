@@ -21,6 +21,7 @@ import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.common.BuildingBaseManager.entity.BbmBuilding;
 import com.common.BuildingBaseManager.entity.BbmFloor;
+import com.common.BuildingBaseManager.entity.BbmPark;
 import com.common.BuildingBaseManager.entity.BbmRoom;
 import com.common.BuildingBaseManager.dao.BbmRoomDao;
 import com.common.BuildingBaseManager.service.BbmFloorManager;
@@ -96,6 +97,13 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
 //    	}else{//新增
 //    		
 //    	}
+    	BbmFloor floor = o.getBbmFloor() ;//获取楼层对象，此时只包含一个楼层ID
+    	String floorId = floor.getFloorId() ;//获取楼层ID
+    	floor = bbmFloorManager.getBbmFloor(floorId) ;//获取楼层对象
+    	BbmBuilding building = floor.getBbmBuilding() ;//获取楼栋对象
+    	BbmPark park = building.getBbmPark() ;//获取园区对象
+    	o.setBbmBuilding(building);
+    	o.setBbmPark(park);
     	return bbmRoomDao.save(o);
     }
 
