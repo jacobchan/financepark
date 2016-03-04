@@ -36,7 +36,8 @@
 		<youi:fieldLayout prefix="record" labelWidths="100,100">
 			<youi:fieldHidden property="applyId"  caption="活动申请ID"/>
 			<youi:fieldText property="applyNumber"  caption="活动申请编号"/>
-			<youi:fieldText property="applyOrderNumber"  caption="场地订单编号"/>
+			<youi:fieldSelect property="applyOrderNumber"  caption="场地编号" src="esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommoditys.json"
+								code="commodityId"	show="commodityTitle" />
 			<youi:fieldText property="applyTitle"  caption="活动标题" notNull="true"/>
 			<youi:fieldText property="applyMaxuser"  caption="限制人数" expressionMessage="请输入整数" expression="^[1-9]\d*$" notNull="true"/>
 			<youi:fieldSelect property="memberId"  caption="会员用户" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName" notNull="true"/>
