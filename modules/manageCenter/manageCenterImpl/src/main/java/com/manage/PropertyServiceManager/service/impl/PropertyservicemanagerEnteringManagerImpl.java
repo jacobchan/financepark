@@ -84,16 +84,24 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
     	String enteringId = o.getEnteringId();
     	boolean isUpdate = StringUtils.isNotEmpty(enteringId);
     	if(isUpdate){//修改
+    		PropertyservicemanagerEntering p=propertyservicemanagerEnteringDao.get(enteringId);
     		if(StringUtils.isNotEmpty(o.getEnteringDate())){
-    			if(propertyservicemanagerEnteringDao.exists("enteringDate",o.getEnteringDate())){
+    			//判断预约日期是否变更，若不变更，不需要判断日期重复性问题
+    			if(p.getEnteringDate().equals(o.getEnteringDate())){
+    				p.setEnteringDate(o.getEnteringDate());
+    				p.setEnteringSum(o.getEnteringSum());
+    				p.setUpdateUser(o.getUpdateUser());
+    				p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    				propertyservicemanagerEnteringDao.save(o);
+    			}else if(propertyservicemanagerEnteringDao.exists("enteringDate",o.getEnteringDate())){
+    				//若变更，则需要判断日期重复性问题，重复则抛异常，不重复则新增
     				throw new BusException("该预约日期已经添加,无需重复添加！");
     			}else{
-    				PropertyservicemanagerEntering p=propertyservicemanagerEnteringDao.get(enteringId);
-    	    		p.setEnteringDate(o.getEnteringDate());
-    	    		p.setEnteringSum(o.getEnteringSum());
-    	    		p.setUpdateUser(o.getUpdateUser());
-    	    		p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    	    		propertyservicemanagerEnteringDao.save(o);
+    				p.setEnteringDate(o.getEnteringDate());
+    				p.setEnteringSum(o.getEnteringSum());
+    				p.setUpdateUser(o.getUpdateUser());
+    				p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    				propertyservicemanagerEnteringDao.save(o);
     			}
     		}
     		
@@ -111,10 +119,17 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
     	    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     	    		enteringList.add(o);
     	    		PropertyservicemanagerEntering p=new PropertyservicemanagerEntering();
-    	    		p=o;
+    	    		p.setEnteringAlre(o.getEnteringAlre());
+    	    		p.setEnteringRemain(o.getEnteringRemain());
+    	    		p.setEnteringSum(o.getEnteringSum());
+    	    		p.setEnteringDate(o.getEnteringDate());
     	    		p.setEnteringTime("PM");//时段PM： 14:00-17:00
+    	    		p.setEnteringStatus("01");//01:可以预约
+    	    		p.setCreateUser(o.getUpdateUser());
+    	    		p.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	    		p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     	    		enteringList.add(p);
-    	    	    propertyservicemanagerEnteringDao.save(enteringList);
+    	    		propertyservicemanagerEnteringDao.save(enteringList);
     			}
     		}
     	}
