@@ -31,24 +31,68 @@
 		<youi:fieldLayout prefix="record" labelWidths="90,100">
 			<%-- <youi:fieldSelect property="enteringStatus"  caption="可预约状态" convert="enteringStatus" notNull="true"/> --%>
 			<youi:fieldCalendar property="enteringDate"  caption="预约时间日期" textFormat="yyyy-MM-dd" format="yyyy-MM-dd" notNull="true"/>
-			<youi:fieldSelect property="enteringTime"  caption="预约时间段" convert="enteringTime" notNull="true"/>
 			<youi:fieldText property="enteringSum"  caption="预约总量" expression="^[0-9]*$" expressionMessage="请输入数值" notNull="true"/>
 			<youi:fieldLabel property="enteringRemain"  caption="剩余数量" />
 			<youi:fieldLabel property="enteringAlre"  caption="已预约数" />
 			<youi:fieldHidden property="enteringId"  caption="预约记录ID"/>
 			<youi:fieldHidden property="enteringStatus"  caption="可预约状态"/>
+			<youi:fieldHidden property="enteringTime"  caption="预约时间段"/>
 			
 		</youi:fieldLayout>
 	</youi:form>
 	   <!--**********************************页面函数Start:初次新增预约时，只需填预约总量，剩余数量和已预约数量默认********************************-->
 	<youi:func name = "record_enteringSum_change">
       		var enteringId = $('#P_'+pageId+'_record_enteringId').fieldValue();
-            var enteringSum = $('#P_'+pageId+'_record_enteringSum').fieldValue();
+            var enteringAfter = $('#P_'+pageId+'_record_enteringSum').fieldValue();
             if(enteringId =="" || enteringId ==null){
-               $('#P_'+pageId+'_record_enteringRemain').fieldValue(enteringSum);
+               $('#P_'+pageId+'_record_enteringRemain').fieldValue(enteringAfter);
                 $('#P_'+pageId+'_record_enteringAlre').fieldValue(0);
-           }
+           }else{
+			    $.youi.ajaxUtil.ajax({
+				url:'/esb/web/propertyservicemanagerEnteringManager/getPropertyservicemanagerEntering.json',
+				data:{enteringId:enteringId},
+				success:function(result){
+                    var record = result.record;
+                    var enteringSumBefore =record.enteringSum;
+                    var enteringRemain =record.enteringRemain;
+ 					var enteringAlre =record.enteringAlre;
+                    if(enteringSumBefore<enteringAfter){//预约总量增加
+                    var diff=enteringAfter-enteringSumBefore;
+					$('#P_'+pageId+'_record_enteringRemain').fieldValue(parseFloat(enteringRemain)+parseFloat(diff));
+
+ 					}else {
+                        if(enteringSumBefore>enteringAfter){//预约总量减少
+                            var diff=enteringSumBefore-enteringAfter;
+ 							$('#P_'+pageId+'_record_enteringRemain').fieldValue(parseFloat(enteringRemain)-parseFloat(diff));
+						}
+    				}
+					
+                 } 
+            })
+
+          }
+
 
     </youi:func>
     <!--**********************************页面函数End:初次新增预约时，只需填预约总量，剩余数量和已预约数量默认********************************-->
+    
+       <!--**********************************页面函数Start:选择预约日期，判断日期是否重复********************************-->
+	<youi:func name = "record_enteringDate_change">
+      		var enteringDate = $('#P_'+pageId+'_record_enteringDate').fieldValue();
+           $.youi.ajaxUtil.ajax({
+				url:'/esb/web/propertyservicemanagerEnteringManager/exsitPropertyservicemanagerEnteringForDate.json',
+				data:{propertyName:"enteringDate",value:enteringDate},
+				success:function(result){
+                    var record = result.record;
+                 if(record.buff=="true"){
+                     alert("该预约日期已经添加，无需重复添加！");
+                     return false;
+
+                  }
+					
+                 } 
+            })
+
+    </youi:func>
+    <!--**********************************页面函数End:选择预约日期，判断日期是否重复********************************-->
 </youi:page>
