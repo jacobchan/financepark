@@ -19,7 +19,7 @@
 				<div class="w1000">
 					<h3 class="per-h3">修改一卡用绑定状态</h3>
 					<div class="clearfix mt40">
-						<table class="oc">
+						<table class="gt-table mt20">
                          <tr>
 					     	<td width="111">一卡通卡号 </td>
                          	<td width="111">绑定状态    </td>
@@ -50,7 +50,6 @@
 	function bind(id){				
 		var bindStatus='绑定';
 		var ocId=id;	
-
 		var params = ['ocId='+ocId+'','bindStatus='+bindStatus+''];
 	     $.ajax({
 			url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/updateBindStatus.json',
@@ -59,14 +58,14 @@
 	 		success:function(result){
 				if(result&&result.record){					
 					alert("已绑定");
-					var a=confirm(ocId);
+					
 					location.reload();
 				}
 			}
 		});
 	}
 	function unbound(id){				
-		var bindStatus='解绑';
+		var bindStatus='未绑定';
 		var ocId=id;
 		var params = ['ocId='+ocId+'','bindStatus='+bindStatus+''];
 	     $.ajax({
@@ -74,7 +73,7 @@
 			 data:params.join('&'),
 	 		success:function(result){
 				if(result&&result.record){					
-					alert("已绑定");
+					alert("已解绑定");
 					location.reload();
 				}
 			}
@@ -99,10 +98,9 @@
 					      "<td width='111'>"+record[i].ocNumber+"</td>"+
                           "<td width='111'>"+record[i].bindStatus+"</td>"+
                           "<td > <input type='button' value='绑定'   onclick='bind("+record[i].ocId+")' />"+
-                          "      <input type='button' value='解绑'   onclick='unbound("+record[i].ocId+")' /></td>"+
-                          "      <a href='#'  id='aaa' onclick='test("+record[i].ocId+")'>绑定</a></td>"+
+                          "      <input type='button' value='解绑'   onclick='unbound("+record[i].ocId+")' /></td>"+                 
                           " </tr>";
-				 $(".oc").append(html);	
+				 $(".gt-table").append(html);	
 			}
 		};
 	
