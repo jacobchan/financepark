@@ -8,6 +8,7 @@ import javax.persistence.*;
 import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.common.NewsManager.entity.NmIssueflow;
 import com.common.NewsManager.entity.NmIssuenews;
 import com.gsoft.framework.core.dataobj.Domain;
@@ -24,9 +25,13 @@ public class PolicyApply implements Domain{
 	private static final long serialVersionUID = -3899342288126952071L;
 	
 
-	@Column(name = "MEMBER_ID_")
-	@Length(max=36)
-	private String memberId;//会员用户ID
+//	@Column(name = "MEMBER_ID_")
+//	@Length(max=36)
+//	private String memberId;//会员用户ID
+	@ManyToOne
+	@JoinColumn(name = "MEMBER_ID_")
+	private MemberInformation member ;//会员用户
+	
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "POLICY_APPLY_ID_")
@@ -95,13 +100,7 @@ public class PolicyApply implements Domain{
 		this.nmIssueflow = nmIssueflow;
 	}
 
-	public String getMemberId(){
-		return this.memberId;
-	}
 	
-	public void setMemberId(String memberId){
-		this.memberId = memberId;
-	}
 	public String getPolicyApplyId(){
 		return this.policyApplyId;
 	}
@@ -180,13 +179,19 @@ public class PolicyApply implements Domain{
 		this.policyApplyContactPeople = policyApplyContactPeople;
 	}
 	
-	
+	public MemberInformation getMember() {
+		return member;
+	}
+
+	public void setMember(MemberInformation member) {
+		this.member = member;
+	}
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
+		result = prime * result + ((member == null) ? 0 : member.hashCode());
 		result = prime * result + ((policyApplyId == null) ? 0 : policyApplyId.hashCode());
 		result = prime * result + ((issueFlowId == null) ? 0 : issueFlowId.hashCode());
 		result = prime * result + ((policyApplyConpanyName == null) ? 0 : policyApplyConpanyName.hashCode());
@@ -210,10 +215,10 @@ public class PolicyApply implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		final PolicyApply other = (PolicyApply) obj;
-		if (memberId == null) {
-			if (other.memberId != null)
+		if (member == null) {
+			if (other.member != null)
 				return false;
-		} else if (!memberId.equals(other.memberId))
+		} else if (!member.equals(other.member))
 			return false;
 		if (policyApplyId == null) {
 			if (other.policyApplyId != null)
