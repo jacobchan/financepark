@@ -97,13 +97,18 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
     	String propertyservicemanagerOcId = o.getOcId();
     	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerOcId);
     	if(isUpdate){//修改
+    		//获取一卡通申请记录
     		PropertyservicemanagerOc ocde = propertyservicemanagerOcDao.get(propertyservicemanagerOcId);
     		if(ocde!=null){
-	    		ocde.setOcNumber(o.getOcNumber());
-	    		ocde.setOcDate(o.getOcDate());
-	    		ocde.setOcRemark(o.getOcRemark());
-	    		ocde.setOcStatus(o.getOcStatus());
-	    		ocde.setOcStatus("01");
+    			if(ocde.getOcStatus().equals("00")){//待处理-->已办理
+		    		ocde.setOcNumber(o.getOcNumber());
+		    		ocde.setOcDate(o.getOcDate());
+		    		ocde.setOcRemark(o.getOcRemark());
+		    		ocde.setOcStatus(o.getOcStatus());
+		    		ocde.setOcStatus("01");
+    			}else if(ocde.getOcStatus().equals("01")){//已办理-->已领卡
+    				ocde.setOcStatus("02");
+    			}
 	    		return propertyservicemanagerOcDao.save(ocde);
     		}else{
     			throw new BusException("未找到申请记录!");
