@@ -183,12 +183,12 @@
 		</dependency>
 		
 		
-		<!-- 基于http协议  微信适配器-->
+		<!-- 基于http协议  微信适配器
 		<dependency>
 			<groupId>com.gsoft.esb</groupId>
 			<artifactId>gsoft-esb-weixin</artifactId>
 			<version>${gsoft.version}</version>
-		</dependency>
+		</dependency>-->
 		
 		<!-- web 容器包 -->
 		<dependency>
