@@ -60,7 +60,7 @@
 				src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
 			<youi:fieldSelect property="ocComp" caption="所属企业名称" 
 				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzName"/> --%>
-			<youi:fieldText property="ocNumber"  caption="一卡通号码" notNull="true"/>
+			<%-- <youi:fieldText property="ocNumber"  caption="一卡通号码" notNull="true"/> --%>
 			<youi:fieldCalendar property="ocDate"  caption="一卡通预约时间" notNull="true"/>
 			<youi:fieldArea property="ocRemark"  caption="一卡通其他说明" notNull="true" column="2"/>
 		</youi:fieldLayout>
@@ -92,6 +92,15 @@
 		if(ocstatus=='00'){
 		 $elem('form_dealOc',pageId).form("reset")
 			.form('fillRecord',{ocId:selectedRecord['ocId']}).form('open');
+		}else if(ocstatus=='01'){
+			$.youi.ajaxUtil.ajax({
+				url:'/esb/web/propertyservicemanagerOcManager/savePropertyservicemanagerOc.json',
+				data:'ocId='+selectedRecord.ocId,
+				success:function(result){
+					alert("处理成功!");
+					$elem('grid_propertyservicemanagerOc',pageId).grid('pReload');
+				}
+			});
 		}else{
 			alert("已处理!");
 		}
