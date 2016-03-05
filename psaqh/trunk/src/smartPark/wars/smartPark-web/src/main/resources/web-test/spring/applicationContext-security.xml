@@ -38,7 +38,7 @@
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realms">
 			<list>
-				<ref bean="wxOAuthRealm"/>
+				<!-- <ref bean="wxOAuthRealm"/> -->
 				<ref bean="realm"/>
 			</list>
 		</property>
@@ -50,7 +50,7 @@
 		<property name="securityManager" ref="securityManager" />
 		<property name="filters">
 			<map>
-				<entry key="wxOAuth" value-ref="wxOAuth"/>
+				<!-- <entry key="wxOAuth" value-ref="wxOAuth"/> -->
 				<entry key="authc" value-ref="authc"/>
 			</map>
 		</property>
@@ -67,7 +67,6 @@
 				/index.html = authc
 				/page/** = authc
 				/memberCenter/**=authc
-				/weixin/*/login.html= wxOAuth
 				/member/*/logout.html=anon
 				/member/**=authcmember
 	        </value>
