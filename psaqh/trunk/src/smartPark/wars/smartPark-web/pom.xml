@@ -219,27 +219,26 @@
 	
 	<profiles>
 		<profile>
-			<id>default</id>
-			<activation><activeByDefault>true</activeByDefault></activation>
-			<properties>
-				<package.target></package.target>
-			</properties>
+			<id>integration</id>
 			<build>
 				<plugins>
 					<plugin>
-		                <groupId>org.apache.maven.plugins</groupId>
-		                <artifactId>maven-war-plugin</artifactId>
-		                <version>2.4</version>
-		                <configuration>
-			               	<webResources>
-				               	<resource>
-									<directory>appconf/</directory>  
-		                            <targetPath>WEB-INF/classes</targetPath>  
-		                            <filtering>true</filtering>
-		                        </resource>
-		               	</webResources>
-		                </configuration>
-                	</plugin>
+						<groupId>org.apache.tomcat.maven</groupId>
+						<artifactId>tomcat7-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>start-tomcat</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<path>${m2eclipse.wtp.contextRoot}</path>
+									<fork>true</fork>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
 				</plugins>
 			</build>
 		</profile>
@@ -309,7 +308,7 @@
 					<webResources>
 						<resource>
 							<directory>src/main/resources/${package.target}/properties</directory>  
-                            <targetPath>WEB-INF/classes</targetPath>  
+                            <targetPath>appconf</targetPath>  
                             <filtering>true</filtering>
                            </resource>
 						<resource>
