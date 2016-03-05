@@ -102,7 +102,7 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 	    		ocde.setOcNumber(o.getOcNumber());
 	    		ocde.setOcDate(o.getOcDate());
 	    		ocde.setOcRemark(o.getOcRemark());
-	    		ocde.setBindStatus(o.getBindStatus());
+	    		ocde.setOcStatus(o.getOcStatus());
 	    		ocde.setOcStatus("01");
 	    		return propertyservicemanagerOcDao.save(ocde);
     		}else{
@@ -179,7 +179,7 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
     		) throws BusException{   	
     		PropertyservicemanagerOc psm = propertyservicemanagerOcDao.get(ocId);  
     		
-    		psm.setBindStatus(bindStatus);
+    		psm.setOcStatus(bindStatus);
 	    	return propertyservicemanagerOcDao.save(psm);
     		
     }
