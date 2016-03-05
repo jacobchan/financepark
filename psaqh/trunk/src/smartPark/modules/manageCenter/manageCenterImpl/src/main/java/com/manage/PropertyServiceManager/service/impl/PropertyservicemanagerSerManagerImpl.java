@@ -125,6 +125,25 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
   		return propertyservicemanagerSerDao.findByPager(pager, conditions, orders);
   	}
     
+  	/**
+	 * 根据报修id查询维修费用清单
+	 * @param pager
+	 * @param ts 报修对象
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+  	@SuppressWarnings({ "rawtypes", "unchecked" })
+  	@EsbServiceMapping
+  	public PagerRecords getPagerPropertyservicemanagerSersByBx(Pager pager,//分页条件
+  			@ServiceParam(name="id") String id,
+  			@OrderCollection Collection<Order> orders)  throws BusException{
+  	     Assert.notNull(id, "派工记录中tsId不能为空！");
+  	     Collection conditions = new ArrayList();
+  	     conditions.add(ConditionUtils.getCondition("propertyservicemanagerTs.propertyservicemanagerBx.bxId", "EQUALS", id));
+  		return propertyservicemanagerSerDao.findByPager(pager, conditions, orders);
+  	}
+  	
     /**
      * 删除对象
      */

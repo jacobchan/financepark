@@ -105,10 +105,10 @@
 		<youi:tabs id="tabs_loanApp">
 			<youi:tabItem caption="维修费用清单" id="tabitem_process">
 				<youi:grid id="grid_ser" idKeys="serId" caption="维修费用清单" panel="false"
-							src="esb/web/propertyservicemanagerSerManager/getPagerPropertyservicemanagerSersByTs.json" dataFormId="form_propertyservicemanagerSer"
+							src="esb/web/propertyservicemanagerSerManager/getPagerPropertyservicemanagerSersByBx.json" dataFormId="form_propertyservicemanagerSer"
 							add="NOT" edit="NOT" remove="NOT" reset="NOT" submit="NOT" usePager="false" load="false">
 						<youi:fieldLayout prefix="tscode">
-							<youi:fieldHidden property="tsId"  caption="id"/>
+							<youi:fieldHidden property="id"  caption="id"/>
 						</youi:fieldLayout>
 						<youi:gridCol property="propertyservicemanagerTs.tsName" caption="维修人" width="10%"/>
 						<youi:gridCol property="propertyservicemanagerTs.tsTelephone" caption="维修人电话" width="15%"/>
@@ -262,17 +262,9 @@
                     alert("维修人员处理中!");
 				//已完工，待定价
                 }else if(bxstatus=='04'){
-					$.youi.ajaxUtil.ajax({
-						url:'/esb/web/propertyservicemanagerTsManager/getTsBybxId.json',
-						data:{bxId:selectedRecord.bxId},
-						success:function(result){	
-							var record = result.record;
-							$('#P_'+pageId+'_tscode_tsId').fieldValue('') ;//先将派工Id情况
-                    		$('#P_'+pageId+'_tscode_tsId').fieldValue(record.tsId);//
-							$elem('grid_ser',pageId).grid('pReload');
-						}
-					});
-					//
+					$('#P_'+pageId+'_tscode_id').fieldValue('') ;//先将派工Id情况
+                    $('#P_'+pageId+'_tscode_id').fieldValue(selectedRecord.bxId);//
+					$elem('grid_ser',pageId).grid('pReload');
                     var bxform = $elem('form_Bxchange',pageId);
                     bxform.form("reset").form('fillRecord',selectedRecord).form('fillRecord',{bxStatus:'05'}).form('open');
 				//已定价，待付款
