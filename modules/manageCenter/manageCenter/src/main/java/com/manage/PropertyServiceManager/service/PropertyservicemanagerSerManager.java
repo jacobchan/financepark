@@ -13,6 +13,7 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
 import com.gsoft.framework.esb.annotation.DomainCollection;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSer;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSfpro;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTs;
@@ -50,6 +51,18 @@ public interface PropertyservicemanagerSerManager extends BaseManager{
 	 */
 	public PagerRecords getPagerPropertyservicemanagerSersByTs(Pager pager,//分页条件
 			PropertyservicemanagerTs ts,
+			Collection<Order> orders) throws BusException;
+	
+	/**
+	 * 根据报修id查询维修费用清单
+	 * @param pager
+	 * @param bx 报修对象
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	public PagerRecords getPagerPropertyservicemanagerSersByBx(Pager pager,//分页条件
+			String id,
 			Collection<Order> orders) throws BusException;
 	
     /**
