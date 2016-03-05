@@ -57,6 +57,7 @@
 		<!-- other properties as necessary ... -->
 		<property name="filterChainDefinitions">
 			<value>
+				${login.url} = authc
 				/logout.html = anon
 				/home.html = anon
 				/register.html = anon
@@ -66,7 +67,10 @@
 				/index.html = authc
 				/page/** = authc
 				/memberCenter/**=authc
+				/weixin/*/login.html= wxOAuth
+				${wx.login.failureUrl}=anon
 				/member/*/logout.html=anon
+				/member/**=authcmember
 	        </value>
 		</property>
 		<!--  实现 com.gsoft.framework.core.security.UrlResourceManager接口，
@@ -75,7 +79,7 @@
 			    表示地址可以被admin和super访问
 		<property name="urlResourceManager" ref=""></property>
 		 -->
-		<property name="loginUrl" value="/login.html"/>
+		<property name="loginUrl" value="${login.url}"/>
 		<property name="unauthorizedUrl" value="/error.jsp"/>
 		<property name="successUrl" value="/index.html"/>
 	</bean>
