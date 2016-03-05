@@ -4,12 +4,15 @@
 package com.manage.PropertyServiceManager.service.impl;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.service.MemberInformationManager;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -18,10 +21,13 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerOc;
+import com.manage.ActivityManager.entity.ActivityApply;
+import com.manage.ActivityManager.entity.ActivityApplylist;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerOcDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerOcManager;
          
@@ -30,6 +36,8 @@ import com.manage.PropertyServiceManager.service.PropertyservicemanagerOcManager
 public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl implements PropertyservicemanagerOcManager{
 	@Autowired
 	private PropertyservicemanagerOcDao propertyservicemanagerOcDao;
+	@Autowired
+	private MemberInformationManager memberInformationManager;
 	/**
      * 修改一卡通预约状态
      */
@@ -94,6 +102,7 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 	    		ocde.setOcNumber(o.getOcNumber());
 	    		ocde.setOcDate(o.getOcDate());
 	    		ocde.setOcRemark(o.getOcRemark());
+	    		ocde.setBindStatus(o.getBindStatus());
 	    		ocde.setOcStatus("01");
 	    		return propertyservicemanagerOcDao.save(ocde);
     		}else{
@@ -132,6 +141,49 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
     public boolean exsitPropertyservicemanagerOc(String propertyName,Object value) throws BusException{
 		return propertyservicemanagerOcDao.exists(propertyName,value);
 	}
-	
+    /**
+     * 获取当前登录用户一卡通号码
+     * @return
+     * @throws BusException
+     */
+ /*  // @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")}) 	
+   
+	public List<PropertyservicemanagerOc> getPropertyservicemanagerOcListByLoginUser() throws BusException {		
+    	//先模拟一个登陆用户，之后会修改
+    	MemberInformation member=memberInformationManager.getMemberInformationByLoginUser(null); 
+    //	String memberId =  member.getMemberId();
+    	return propertyservicemanagerOcDao.getList("memberId", member.getMemberId()); 	
+    	
+    	
+	}*/
+    /**
+     * 获取当前登录用户一卡通号码
+     * @return
+     * @throws BusException
+     */
+    @EsbServiceMapping
+	public List<PropertyservicemanagerOc> getPropertyservicemanagerOcListByLoginUser() throws BusException {
+    	//先模拟一个登陆用户memberId=1，先在数据库插入memberId=1
+    	String m="1"; 
+    	return propertyservicemanagerOcDao.getList("memberId", m); 
+	}
+    /**
+     * 修改一卡通绑定状态
+     * @return
+     * @throws BusException
+     */
+   @EsbServiceMapping
+    public PropertyservicemanagerOc updateBindStatus(
+    		@ServiceParam(name="ocId") String ocId,
+    		@ServiceParam(name="bindStatus") String bindStatus
+    		) throws BusException{   	
+    		PropertyservicemanagerOc psm = propertyservicemanagerOcDao.get(ocId);  
+    		
+    		psm.setBindStatus(bindStatus);
+	    	return propertyservicemanagerOcDao.save(psm);
+    		
+    }
+
+    
 
 }
