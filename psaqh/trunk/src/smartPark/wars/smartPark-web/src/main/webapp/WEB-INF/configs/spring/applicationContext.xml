@@ -30,6 +30,9 @@
 	<!-- 导入安全配置 -->
 	<import resource="applicationContext-security.xml"/>
 	
+	<!-- 导入文件上传配置 -->
+	<import resource="applicationContext-upload.xml"/>
+	
 	<!-- 导入服务调用配置 -->
 	<import resource="applicationContext-service.xml"/>
 	
@@ -61,7 +64,7 @@
     
 	<!-- Configurer that replaces ${...} placeholders with values from a properties file -->
 	<!-- (in this case, JDBC-related settings for the dataSource definition below) -->
-	<context:property-placeholder location="classpath*:META-INF/**/*config-module-*.properties,file:appconf/config-*.properties"/>
+	<context:property-placeholder location="classpath*:config-*.properties"/>
 	<!--
 		Uses Apache Commons DBCP for connection pooling. See Commons DBCP documentation
 		for the required JAR files. Alternatively you can use another connection pool
