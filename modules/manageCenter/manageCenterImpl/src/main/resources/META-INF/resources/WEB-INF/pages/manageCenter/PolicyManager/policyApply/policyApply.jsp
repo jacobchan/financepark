@@ -9,20 +9,18 @@
 			<youi:fieldText property="policyApplyContactPeople"  caption="联系人"/>
 			<youi:fieldSelect property="member.memberId"  caption="会员姓名" 
 				src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
-			<%-- <youi:fieldText property="policyApplyConpanyName"  caption="企业名称"/> --%>
 			<youi:fieldSelect property="policyApplyStatus"  caption="申请状态" convert="policyApplyStatus"/>
 			<youi:fieldText property="policyApplyContactTel"  caption="联系电话"/>
 		</youi:fieldLayout>
 		<%-- <youi:button name="refuse" caption="拒绝申请" icon="edit" active="1"/> --%>
 		<youi:button name="deal" caption="处理任务" icon="edit" active="1"/>
 		
-		<youi:gridCol property="policyApplyContactPeople"  caption="联系人" width="100"/>
-		<youi:gridCol property="member.memberName"  caption="会员姓名" width="100"/>
-		<youi:gridCol property="policyApplyConpanyName"  caption="企业名称" width="150"/>
-		<youi:gridCol property="policyApplyStatus"  caption="申请状态" width="100" convert="policyApplyStatus"/>
-		<youi:gridCol property="policyApplyContactTel"  caption="联系电话" width="150"/>
-		<youi:gridCol property="nmIssueflow.issueFlowCStatus"  caption="流程状态" width="150"/>
-		<youi:gridCol property="nmIssuenews.policyCaption"  caption="申请新闻名称" width="150"/>
+		<youi:gridCol property="policyApplyContactPeople"  caption="联系人" width="100" align="center"/>
+		<youi:gridCol property="member.memberName"  caption="会员姓名" width="100" align="center"/>
+		<youi:gridCol property="policyApplyConpanyName"  caption="企业名称" width="150" align="center"/>
+		<youi:gridCol property="policyApplyContactTel"  caption="联系电话" width="150" align="center"/>
+		<youi:gridCol property="nmIssueflow.issueFlowCStatus"  caption="流程状态" width="150" align="center"/>
+		<youi:gridCol property="nmIssuenews.policyCaption"  caption="申请新闻名称" width="150" align="center"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -39,7 +37,7 @@
 			<youi:fieldText property="policyApplyConpanyName"  caption="企业名称" readonly="true"/>
 			<youi:fieldText property="policyApplyContactTel"  caption="联系电话" />
 			<youi:fieldSelect property="nmIssuenews.policyId"  caption="申请新闻名称" 
-				src="esb/web/nmIssuenewsManager/getNmIssuenewss.json" code="policyId" show="policyCaption" />
+				src="esb/web/nmIssuenewsManager/getNmIssuenewss.json" code="policyId" show="policyCaption" notNull="true"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
