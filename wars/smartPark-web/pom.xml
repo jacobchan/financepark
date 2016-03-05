@@ -234,7 +234,7 @@
 			               	<webResources>
 				               	<resource>
 									<directory>appconf/</directory>  
-		                            <targetPath>appconf/</targetPath>  
+		                            <targetPath>WEB-INF/classes</targetPath>  
 		                            <filtering>true</filtering>
 		                        </resource>
 		               	</webResources>
@@ -309,7 +309,7 @@
 					<webResources>
 						<resource>
 							<directory>src/main/resources/${package.target}/properties</directory>  
-                            <targetPath>appconf</targetPath>  
+                            <targetPath>WEB-INF/classes</targetPath>
                             <filtering>true</filtering>
                            </resource>
 						<resource>
