@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>登录/注册</title>
+<link href="../styles/base.css" rel="stylesheet" type="text/css">
+<link href="../styles/page/page.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<div style="background-color:#545454">
+		<div class="w1200 tr head-top clearfix">
+			<a href="">注册</a>
+			<a href="">登录</a>
+		</div>
+	</div>
+	<!--***top start****************************************-->
+	<div class="header-cen clearfix">
+		<div class="w1200  clearfix">
+			<div class="logo fl">
+		    	<a href=""><img src="../styles/images/logo_3.png" class="fl" style="margin-top:3px"/></a>		        
+		    </div>
+		   	<div class="party-change">
+		   		<a href=""><img src="../styles/images/logo_1.png" class="fl" style="margin-top:2px"/></a>
+		   		<a href="javascript:;" class="pc-click">[ 切换园区 ]</a>
+		   	</div>
+		    <ul class="index-head-nav" style="float:right">
+		    	<li class="active"><a href="#">首页</a></li>
+		        <li>
+		        	<a href="#">招商中心</a>
+		        	<dl>
+		        		<dt></dt>
+		        		<dd><a href="">园区简介</a></dd>
+		        		<dd><a href="">服务配套</a></dd>
+		        		<dd><a href="">园区风采</a></dd>
+		        		<dd><a href="">优惠政策</a></dd>
+		        		<dd><a href="">园区资讯</a></dd>
+		        		<dd><a href="">众创空间</a></dd>
+		        	</dl>
+		        </li>
+		        <li>
+		        	<a href="#">智慧园区</a>
+		        	<dl>
+		        		<dt></dt>
+			        	<dd><a href="">虚拟空间</a></dd>
+		        		<dd><a href="">智慧商业</a></dd>
+		        		<dd><a href="">安全园区</a></dd>
+		        		<dd><a href="">30采购</a></dd>
+	        		</dl>
+		        </li>
+		        <li>
+		        	<a href="#">园区服务</a>
+		        	<dl>
+		        		<dt></dt>
+		        		<dd><a href="">入驻服务</a></dd>
+		        		<dd><a href="">物业服务</a></dd>
+		        		<dd><a href="">公共资源</a></dd>
+		        		<dd><a href="">产业数据库</a></dd>
+		        	</dl>
+		        </li>
+		        <li><a href="#">企业服务</a></li>
+		        <li>
+		        	<a href="#">创智汇</a>
+		        	<dl>
+		        		<dt></dt>
+		        		<dd><a href="">创智汇介绍</a></dd>
+		        		<dd><a href="">创智讲堂</a></dd>
+		        		<dd><a href="">硅谷创业营</a></dd>
+		        		<dd><a href="">积分商城</a></dd>
+		        	</dl>
+		        </li>
+		    </ul>
+		</div>
+	</div>
+	<!--***top end****************************************-->
+<div class="w1200">
+	<div class="loginbox">
+    	<div class="w350">
+        	<ul class="clearfix login_ul">
+            	<li class="active">登录</li>
+                <li>注册</li>
+            </ul>
+            <form class="login_form">
+				<div class="login_input mt15">
+                	<label class="f16">手机号</label>
+                    <input type="text">
+                </div>
+                <div class="login_input mt10">
+                	<label class="f16">密码&nbsp;&nbsp;&nbsp;</label>
+                    <input type="password">
+                </div>
+                <div class="mt10 clearfix">
+                	<div class="fl"><input type="checkbox" class="vm">&nbsp;<span class="vm">记住密码</span></div>
+                	<div class="fr"><a href="findpsw.html" class="c3">忘记密码？</a></div>
+                </div>
+                <a href="grzx/grzx1.html" class="btn-cheng tc lh40 mt20" style="display:block">登录</a>
+            </form>
+            <form class="login_form" style="display:none">
+            	<div class="login_input mt15">
+                	<label class="f16">用户名</label>
+                    <input type="text" placeholder="请输入手机号码">
+                    <div class="btn_yzm f12 ml15">发送验证码</div>
+                </div>
+                <div class="login_input mt10">
+                	<label class="f16">验证码</label>
+                    <input type="text">
+                </div>
+                <div class="login_input mt10">
+                	<label class="f16">密码</label>
+                    <input type="password">
+                </div>
+                <div class="login_input mt10">
+                	<label class="f16">确定密码</label>
+                    <input type="password">
+                </div>
+                <div class="btn-cheng tc lh40 mt20" style="display:block">注册</div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!--***bottom start****************************************-->
+<div class="login_foot w1200 tc">
+    <a href="javascript:;">关于我们</a><a href="javascript:;">园区服务平台</a><a href="javascript:;">客服中心</a>
+    <a href="javascript:;">运营合作方</a><a href="javascript:;">帮助中心</a>
+    <div class="tc caaa mt15 f12">&copy;2014-2015杭州富春硅谷投资有限公司  版权所以  浙  B14231237号</div>
+</div>
+<!--***bottom end****************************************-->
+<script type="text/javascript" src="scripts/lib/jquery-1.9.1.min.js"></script>
+<script src="js/link.js"></script>
+<script type="text/javascript">
+$(function(){
+	$(".login_ul li").click(function(){
+		var index=$(this).index();
+		$(this).addClass("active").siblings().removeClass("active");
+		$(".login_form").eq(index).show().siblings(".login_form").hide();
+	});
+});
+</script>
+</body>
+</html>
