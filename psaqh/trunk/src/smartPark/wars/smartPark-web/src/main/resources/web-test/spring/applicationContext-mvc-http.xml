@@ -21,7 +21,7 @@
 	<int-http:inbound-gateway request-channel="start" reply-timeout="12000" request-timeout="12000" 
 		name="/esb/{channel}/{interfaceName}/{serviceName}.json" 
 		path="/esb/{channel}/{interfaceName}/{serviceName}.json" supported-methods="GET,POST"
-		mapped-response-headers="export,exportTitle,exportHeaders,exportProperties,exportConverts,Content-Encoding,Content-Type"
+		mapped-response-headers="jsonp,export,exportTitle,exportHeaders,exportProperties,exportConverts,Content-Encoding,Content-Type"
 		message-converters="httpResConverter" convert-exceptions="true" error-channel="exceptionChannel">
 		<!-- channel：通道名 -->
 		<int-http:header name="channel" expression="#pathVariables.channel" />
