@@ -1,0 +1,434 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href="styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+	<link href="styles/base.css" type="text/css" rel="stylesheet">
+	<link href="styles/page/zs.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="scripts/lib/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="scripts/lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="scripts/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="scripts/lib/giui.min.js"></script>
+	<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
+</head>
+<body>
+	<!--***top start****************************************-->
+	<div id="youi_page_header" class="youi-page-header clearfix"></div>
+	<!--***top end****************************************-->
+	<div class="w100">
+		<div class="w1200 clearfix pt30 pb50">
+			<div class="h-nav clearfix">
+				<a href=""><span>首页</span></a><img src="../styles/images/zs/right-j-b.png" border="0">
+				<a href=""><span class="current">机票预订</span></a>
+			</div>
+            <div style="width:890px;" class="fl">
+                <div class="car-search-box clearfix">
+			        <form action="">
+			            <input type="hidden" name="searchBy" value="1277">
+			            <div class="search-type">
+			                <label class="pi-radio pi-radio checked mb10">
+			                    <span class="pi-radio-icon"></span>
+			                    <input class="J_type_radio J_Direct" type="radio" value="0">
+			                    单程
+			                </label>
+			                <label class="pi-radio pi-radio">
+			                    <span class="pi-radio-icon"></span>
+			                    <input class="J_type_radio J_Round" type="radio" value="1" name="tripType" id="J_InputNode_334">
+			                    往返
+			                </label>
+			            </div>
+			            <div class="search-con">
+			                <label class="mb10">
+			                    <span class="fl">出发城市</span>
+			                    <input type="text" class="pi-input J_DepCity ks-autocomplete-input" name="depCityName" placeholder="城市名" autocomplete="off">
+			                    <input name="depCity" type="hidden" class="J_DepCityCode">
+			                </label>
+			                <label>
+			                    <span class="fl">到达城市</span>
+			                    <input type="text" class="pi-input" name="arrCityName" placeholder="城市名" autocomplete="off">
+			                    <input name="arrCity" type="hidden" class="J_ArrCityCode">
+			                </label>
+			                <div class="trade">
+			                	<a href="javascript:void(0)" target="_self">换</a>
+			                </div>
+			            </div>
+			            <div class="search-con">
+			                <label class="mb10">
+			                    <span class="fl">出发日期</span>
+			                    <div class="calendar-input-wrap">
+			                    	<input type="text" class="pi-input" name="depDate" placeholder="yyyy-mm-dd" autocomplete="off">
+			                    </div>
+			                </label>
+			                <label class="disabled">
+			                    <span class="fl">返程日期</span>
+			                    <div class="calendar-input-wrap"><span class="calendar-icon trigger-icon-654"></span><input type="text" class="pi-input J_EndDate trigger-node-654" name="arrDate" placeholder="yyyy-mm-dd" autocomplete="off"></div>
+			                </label>
+			            </div>
+			           	<div class="fr">
+			           		<input type="submit" value="搜索" class="ib-btn" style="padding:0px 40px;margin-top:15px;">
+			           	</div>
+			        </form>
+			    </div>
+			    <h3 class="f20 mt20 mb10">选择航班： <span class="ml10 mr10">北京</span>——<span class="ml10 mr10">上海</span> 02月09日 周二  </span> </h3>
+			    <div class="xc-price clearfix">
+		    		<a href="javascript:;" class="xp-tj-cal">
+		    			<div class="cal-icon"></div>
+		    			<p class="lh22">特价日历</p> 
+		    		</a>
+			    	<div class="sc-calendar">
+			    		<table>
+			    			<tbody>
+			    				<tr> 
+			    					<td class="preview">
+			    						<a href="javascript:;" target="_self" class="p-fl"></a>
+			    					</td>
+			    					<td class="sc-price-date">
+		    							<div class="sc-price-date-inner">
+		    								<table><tbody>
+		    									<tr>
+		    										<td>
+		    											<a href="javascript:;" class="outer lowest" target="_top">
+		    												<span class="c-o f14">¥650</span>
+		    												<p class="c-333 f12">03-07 周一</p>
+		    												<s></s>
+		    											</a>
+		    										</td>
+		    										<td>
+		    											<a href="" class="outer " target="_top">
+		    												<span class="c-o f14">¥820</span>
+		    												<p class="c-333 f12">03-08 周二</p>
+		    											</a>
+		    										</td>
+		    										<td class="active">
+		    											<div></div>
+		    											<a href="" class="outer lowest" target="_top">
+		    												<span class="c-o f14">¥650</span>
+		    												<p class="c-333 f12">03-09 周三</p>
+		    												<s></s>
+		    											</a>
+		    										</td>
+		    										<td>
+		    											<div class="current"><div>
+		    												<a href="" class="outer lowest">
+		    													<span class="c-o f14">¥650</span>
+		    													<p class="c-333 f12">03-10 周四</p>
+		    													<s></s>
+		    												</a>
+		    											</div>
+		    										</div>
+		    									</td>
+		    									<td>
+		    										<a href="" class="outer " target="_top">
+		    											<span class="c-o f14">¥673</span>
+		    											<p class="c-333 f12">03-11 周五</p>
+		    										</a>
+		    									</td>
+		    									<td>
+		    										<a href="" class="outer " target="_top">
+		    											<span class="c-o f14">¥659</span>
+		    											<p class="c-333 f12">03-12 周六</p>
+		    										</a>
+		    									</td>
+		    									<td>
+		    										<a href="?tripType=0&amp;depCity=BJS&amp;arrCity=CAN&amp;depDate=2016-03-13&amp;searchBy=1277" class="outer " target="_top">
+		    											<span class="c-o f14">¥673</span>
+		    											<p class="c-333 f12">03-13 周日</p>
+		    										</a>
+		    									</td>
+		    								</tr>
+		    								</tbody></table>
+			    						</div>
+				    				</td>
+				    				<td class="preview">
+			    						<a href="javascript:;" target="_self" class="p-fl p-fr"></a>
+			    					</td>
+			    				</tr>
+			    			</tbody>
+			    		</table>
+			    	</div>
+			    </div>
+			    <div class="clearfix">
+			    </div>
+			    <div class="clearfix mt30">
+			    	<table class="hcxx-table">
+			    		<colgroup>
+			    			<col width="18%"></col>
+			    			<col width="16%"></col>
+			    			<col width="16%"></col>
+			    			<col width="16%"></col>
+			    			<col width="16%"></col>
+			    			<col></col>
+			    		</colgroup>
+			    		<thead>
+			    			<th>航班信息</th>
+			    			<th>起降机场</th>
+			    			<th>起降时间</th>
+			    			<th>机票价格</th>
+			    			<th>机建燃油</th>
+			    			<th>预定操作</th>
+			    		</thead>
+			    	</table>
+			    	<div class="hcxx-hb-infor">
+			    		<table class="hcxx-table">
+			    			<colgroup>
+				    			<col width="18%"></col>
+				    			<col width="16%"></col>
+				    			<col width="16%"></col>
+				    			<col width="16%"></col>
+				    			<col width="16%"></col>
+				    			<col></col>
+				    		</colgroup>
+			    			<thead>
+				    			<tr>
+				    				<td align="left">
+				    					<div class="c-333"><img src="../styles/images/plane.png" width="18" height="17" class="ml10 mr5">四川航空 3u8421</div>
+				    					<p class="ml33">机型 : <span class="c-333">320</span></p>
+				    				</td>
+				    				<td>
+				    					<p>北京首都机场</p>
+				    					<p>上海虹桥机场</p>
+				    				</td>
+				    				<td>
+				    					<p class="c-333 f16">07:50</p>
+				    					<p>13:15</p>
+				    				</td>
+				    				<td>
+				    					<p class="c-o f20">¥520</p>
+				    					<p><span class="c-333">23</span>折 头等舱</p>
+				    				</td>
+				    				<td>
+				    					<p>¥520</p>
+				    					<p>包正餐</p>
+				    				</td>
+				    				<td>
+				    					<a href="" class="order-btn">预订</a>
+				    					<p><a href="javascript:;" class="see-all">查看所有仓位</a></p>
+				    				</td>
+				    			</tr>
+				    		</thead>
+				    		<tbody>
+				    			<tr>
+				    				<td colspan="2"></td>
+				    				<td>
+				    					<p class="c-333 f16">07:50</p>
+				    					<p>13:15</p>
+				    				</td>
+				    				<td>
+				    					<p class="c-o f20">¥520</p>
+				    					<p><span class="c-333">23</span>折 头等舱</p>
+				    				</td>
+				    				<td>
+				    					<p>¥520</p>
+				    					<p>包正餐</p>
+				    				</td>
+				    				<td>
+				    					<a href="" class="order-btn ob-orange">预订</a>
+				    				</td>
+				    			</tr>
+				    			<tr>
+				    				<td colspan="2"></td>
+				    				<td>
+				    					<p class="c-333 f16">07:50</p>
+				    					<p>13:15</p>
+				    				</td>
+				    				<td>
+				    					<p class="c-o f20">¥520</p>
+				    					<p><span class="c-333">23</span>折 头等舱</p>
+				    				</td>
+				    				<td>
+				    					<p>¥520</p>
+				    					<p>包正餐</p>
+				    				</td>
+				    				<td>
+				    					<a href="" class="order-btn ob-orange">预订</a>
+				    				</td>
+				    			</tr>
+				    			<tr>
+				    				<td colspan="2"></td>
+				    				<td>
+				    					<p class="c-333 f16">07:50</p>
+				    					<p>13:15</p>
+				    				</td>
+				    				<td>
+				    					<p class="c-o f20">¥520</p>
+				    					<p><span class="c-333">23</span>折 头等舱</p>
+				    				</td>
+				    				<td>
+				    					<p>¥520</p>
+				    					<p>包正餐</p>
+				    				</td>
+				    				<td>
+				    					<a href="" class="order-btn ob-orange">预订</a>
+				    				</td>
+				    			</tr>
+				    		</tbody>
+			    		</table>
+			    	</div>
+			    	<div class="hcxx-hb-infor">
+			    		<table class="hcxx-table">
+			    			<colgroup>
+				    			<col width="18%"></col>
+				    			<col width="16%"></col>
+				    			<col width="16%"></col>
+				    			<col width="16%"></col>
+				    			<col width="16%"></col>
+				    			<col></col>
+				    		</colgroup>
+			    			<thead>
+				    			<tr>
+				    				<td align="left">
+				    					<div class="c-333"><img src="../styles/images/plane.png" width="18" height="17" class="ml10 mr5">四川航空 3u8421</div>
+				    					<p class="ml33">机型 : <span class="c-333">320</span></p>
+				    				</td>
+				    				<td>
+				    					<p>北京首都机场</p>
+				    					<p>上海虹桥机场</p>
+				    				</td>
+				    				<td>
+				    					<p class="c-333 f16">07:50</p>
+				    					<p>13:15</p>
+				    				</td>
+				    				<td>
+				    					<p class="c-o f20">¥520</p>
+				    					<p><span class="c-333">23</span>折 头等舱</p>
+				    				</td>
+				    				<td>
+				    					<p>¥520</p>
+				    					<p>包正餐</p>
+				    				</td>
+				    				<td>
+				    					<a href="" class="order-btn">预订</a>
+				    					<p><a href="javascript:;" class="see-all">查看所有仓位</a></p>
+				    				</td>
+				    			</tr>
+				    		</thead>
+				    		<tbody>
+				    			<tr>
+				    				<td colspan="2"></td>
+				    				<td>
+				    					<p class="c-333 f16">07:50</p>
+				    					<p>13:15</p>
+				    				</td>
+				    				<td>
+				    					<p class="c-o f20">¥520</p>
+				    					<p><span class="c-333">23</span>折 头等舱</p>
+				    				</td>
+				    				<td>
+				    					<p>¥520</p>
+				    					<p>包正餐</p>
+				    				</td>
+				    				<td>
+				    					<a href="" class="order-btn ob-orange">预订</a>
+				    				</td>
+				    			</tr>
+				    			<tr>
+				    				<td colspan="2"></td>
+				    				<td>
+				    					<p class="c-333 f16">07:50</p>
+				    					<p>13:15</p>
+				    				</td>
+				    				<td>
+				    					<p class="c-o f20">¥520</p>
+				    					<p><span class="c-333">23</span>折 头等舱</p>
+				    				</td>
+				    				<td>
+				    					<p>¥520</p>
+				    					<p>包正餐</p>
+				    				</td>
+				    				<td>
+				    					<a href="" class="order-btn ob-orange">预订</a>
+				    				</td>
+				    			</tr>
+				    			<tr>
+				    				<td colspan="2"></td>
+				    				<td>
+				    					<p class="c-333 f16">07:50</p>
+				    					<p>13:15</p>
+				    				</td>
+				    				<td>
+				    					<p class="c-o f20">¥520</p>
+				    					<p><span class="c-333">23</span>折 头等舱</p>
+				    				</td>
+				    				<td>
+				    					<p>¥520</p>
+				    					<p>包正餐</p>
+				    				</td>
+				    				<td>
+				    					<a href="" class="order-btn ob-orange">预订</a>
+				    				</td>
+				    			</tr>
+				    		</tbody>
+			    		</table>
+			    	</div>
+			    </div>
+            </div>
+            <div class="fr" style="width:288px;">
+            	<div class="jp-order-box">
+            		<div class="job-header">特惠航班</div>
+            		<ul class="job-nav">
+            			<li>
+            				<a href="">
+	            				<h3 class="fb">北京－延安</h3>
+	            				<p>2016-01-20<span class="c-b1 ml5 mr5">星期四</span><span class="c-o">去程</span></p>
+	            			</a>
+            			</li>
+            			<li>
+            				<a href="">
+	            				<h3 class="fb">北京－延安</h3>
+	            				<p>2016-01-20<span class="c-b1 ml5 mr5">星期四</span><span class="c-o">去程</span></p>
+	            			</a>
+            			</li>
+            			<li>
+            				<a href="">
+	            				<h3 class="fb">北京－延安</h3>
+	            				<p>2016-01-20<span class="c-b1 ml5 mr5">星期四</span><span class="c-o">去程</span></p>
+	            			</a>
+            			</li>
+            		</ul>
+            	</div>
+            	<div class="jp-order-box">
+            		<div class="job-header"><b class="f14 mr5">往返程</b>推荐 <span class="fr">北京<img src="../styles/images/lf.png" border="0" class="ml10 mr10"/>延安</span></div>
+            		<ul class="job-nav">
+            			<li class="clearfix">
+            				<a href="" class="clearfix">
+	            				<div class="fl">
+	            					<span class="c-o f16">￥618</span>
+	            					<span>起</span>
+	            				</div>
+            					<div class="fr">
+            						<p>2016-01-20<span class="c-b1 ml5 mr5">星期四</span><span class="c-o">去程</span></p>
+            						<p>2016-01-20<span class="c-b1 ml5 mr5">星期四</span><span class="c-o">去程</span></p>
+            					</div>
+	            			</a>
+            			</li>
+            		</ul>
+            	</div>
+            	<div class="jp-order-box">
+            		<div class="job-header">我的历史查询</div>
+            		<ul class="job-nav">
+            			<li>
+            				<a href="">
+	            				<h3 class="fb">北京－延安</h3>
+	            				<p>2016-01-20<span class="c-b1 ml5 mr5">星期四</span><span class="c-o">去程</span></p>
+	            			</a>
+            			</li>
+            			<li>
+            				<a href="">
+	            				<h3 class="fb">北京－延安</h3>
+	            				<p>2016-01-20<span class="c-b1 ml5 mr5">星期四</span><span class="c-o">去程</span></p>
+	            			</a>
+            			</li>
+            		</ul>
+            	</div>
+            	<div class="w100">
+            		<img src="../styles/images/hc-p.jpg" border="0" style="max-width:100%"/>
+            	</div>
+            </div>
+		</div>
+	</div>
+	<!--***bottom start****************************************-->
+	<div id="youi_page_footer" class="youi-page-footer"></div>
+	<!--***bottom end****************************************-->
+</body>
+</html>
