@@ -2,7 +2,7 @@
 /* CSS 招商中心 PC端发布页样式*/
 
 *{margin:0px;padding:0px;}
-body{ font-family:"Microsoft YaHei","微软雅黑",Helvetica,Arial,Tahoma; color:#333; font-size: 14px;}
+body{ font-family:"Lantinghei SC","Open Sans",Arial,"Hiragino Sans GB","Microsoft YaHei","微软雅黑",STHeiti,"WenQuanYi Micro Hei",SimSun,sans-serif; color:#333; font-size: 14px;}
 
 /**下拉列表公共样式**/
 .tct-select {position: relative;background: #FFF none repeat scroll 0% 0%;border: 1px solid #ecebeb;cursor: pointer;height: 30px;}
@@ -221,7 +221,7 @@ a.add-btn:hover{background: #ffc000;border:1px solid #ffc000;color: #fff;}
 .space-centent ul li{float: left;margin-left: 75px;width: 300px;}
 .space-centent ul li img{width: 100%;overflow: hidden;}
 .space-centent ul li input[type="text"]{border:1px solid #000;color: #000;font-size: 14px;padding:8px 10px;line-height: 20px;width: 205px;background: transparent;}
-.space-centent ul li a.sc-yy{color: #000;width: 75px;height: 36px;text-align: center; line-height: 36px;float: right;background: transparent;border:1px solid #000;font-size: 15px;}
+.space-centent ul li a.sc-yy{color: #000;width: 75px;height: 36px;text-align: center; line-height: 36px;float: right;background: transparent;border:1px solid #000;font-size: 15px;transition: all .4s;}
 .space-centent ul li a.sc-yy:hover{background: #000;color: #fff;}
 .space-centent a.arrow{width: 69px;height: 207px;display: inline-block;position: absolute;top:50%;margin-top: -70px;z-index: 3;}
 .space-centent a.arrow.arrow-left{left: -15px;background: url(../images/zs/left.png) no-repeat left center;}
@@ -482,7 +482,7 @@ to {margin-left: 0px;}
 }
 
 /**园区服务企业**/
-.yqfw-index-head{width: 100%;height: 479px;background: url(../images/yqfw/bn1.jpg) no-repeat;}
+.yqfw-index-head{width: 100%;height: 479px;background: url(../images/yqfw/bn1.jpg) no-repeat;background-size: 100% 100%;}
 .yih-form{top:225px;margin:0px auto;display: inline-block;position: relative;left: 50%;margin-left: -200px;background: url(../images/yqfw/rgba.png) repeat;padding: 20px;}
 .yih-search-see .yih-input-search{line-height: 30px;padding: 10px;border:1px solid #fff;color: #454545;font-size: 18px;width:275px;height: 52px;color: #898989;}
 .yih-search-see .yih-btn-search{float: left;width:105px;height: 52px;display: block;background:#ff6715 url(../images/yqfw/search.png) no-repeat center center;border:0px; }
@@ -745,7 +745,7 @@ a.a-btn-small:hover{background-color: #FF5900;}
 /**航程信息**/
 .hc-con-h{background: #f6f6f6;padding:15px;position: relative;}
 .hc-con-h table{width: 80%;line-height: 24px;font-size: 12px;color: #a4a4a4;}
-.hch-pa{position: absolute;right: -6px;top: 50%;margin-top: -17px; width: 131px;height: 33px;padding-top: 3px;line-height: 30px;background: url(../images/hb-select.png) no-repeat;color: #fff;font-size: 12px;text-align: center;}
+.hch-pa{position: absolute;right: -6px;top: 50%;margin-top: -17px; width: 131px;height: 33px;padding-top: 4px;line-height: 29px;background: url(../images/hb-select.png) no-repeat;color: #fff;font-size: 12px;text-align: center;}
 .hc-con-c{background: #fdf7ee;padding: 10px 20px;line-height: 20px;border:1px solid #ed7034;font-size: 12px;color: #a4a4a4;}
 .hc-con-infor{border:1px solid #efecec;padding: 10px 30px;}
 .hcc-line{margin-left: 94px;font-size: 14px;color: #333;margin-top: 10px;line-height: 34px;}
@@ -796,3 +796,89 @@ a.a-btn-small:hover{background-color: #FF5900;}
 .jd-order-group table{width: 100%;}
 
 .c-824{color: #82b4f2;}
+
+/**酒店详情**/
+.jd-details td{padding: 5px;vertical-align: middle;}
+.table-photo td{padding-bottom: 10px;}
+.jd-list{width: 100%;background: #f6f6f6;color: #333;cursor: pointer;border-bottom: 1px solid #ed7034;height: 40px;}
+.jd-list li{float: left;padding: 10px 40px;text-align: center;line-height: 20px;font-size: 16px;}
+.jd-list li.current,.jd-list li:hover{background: #fff;padding:9px 39px; border:1px solid #ed7034;border-bottom: 1px solid #fff;height: 40px;color: #ed7034;}
+
+.room-detail{margin:30px 0px 10px 3%;width: 97%;}
+.room-detail tr:first-child td{border-bottom: 1px dashed #ecebeb;}
+.room-detail td{padding: 10px 0px;font-size: 12px;}
+.em-circle{width: 20px;height: 20px;border-radius: 20px;background: #f79a30;color: #fff;display: inline-block;text-align: center;line-height: 20px;}
+.c-y{color: #f79a30;}
+a.room-show{color: #333;font-size: 20px;width: 20px;height: 20px;display: inline-block;}
+a.room-show:hover{color: #FA742C;}
+.jd-order-room{margin-top: 20px;}
+.jd-order-room>table{border-bottom: 1px solid #ecebeb;width: 100%;}
+.jd-order-room tfoot{display: none;}
+.jd-order-room tfoot td{padding-top: 20px;border-top:1px solid #ecebeb;padding-bottom: 10px;background-color: #f6f6f6;border-right: 1px solid #f6f6f6;}
+
+
+.pf-nav{float: left;margin:0px 10px;font-size: 12px;color: #535351;line-height: 20px;line-height: 35px;}
+.pf-nav ul{background-color: #ededed;width: 100px;height: 12px;float: left;margin:12px 20px 13px 10px;}
+.pf-nav ul li{background-color: #fb7730;height: 12px;}
+
+.sug-num{float: left;width: 78%;margin-left: 5%;}
+.sug-num li{padding:0px 10px;  float: left;margin-top: 10px;font-size: 12px;line-height: 20px;}
+
+.jd-ss{border-top: 1px solid #ecebeb;width: 100%;}
+.jd-ss td{line-height: 20px;padding: 15px 0px;border-bottom: 1px dashed #ecebeb;}
+
+.sug-table-nav{width: 100%;}
+.sug-table-nav td{padding: 15px 10px;line-height: 24px;border-bottom: 1px solid #ecebeb;}
+
+/**机票预订**/
+/**左边**/
+.car-search-box{background: #fdf7ee;padding: 20px;}
+.search-type{float: left;margin-left: 10px;width: 80px;border-right: 1px solid #E4EAED;}
+.search-type input {margin-right: 10px;border: 1px solid #C7D1E4;display: none;}
+.car-search-box label {display: block;padding: 2px 0px;height: 30px;line-height: 26px;overflow: hidden;cursor: pointer;}
+.pi-radio .pi-radio-icon {width: 14px;height: 14px;overflow: hidden;vertical-align: middle;margin-right: 10px;background: transparent url("../images/radio.png") no-repeat scroll 0px -50px;display: inline-block;}
+.checked .pi-radio-icon {background-position: 0px 0px;}
+.search-con{position: relative;float: left;padding-left: 2.8%;width: 36%;font-size: 12px;}
+.search-con .pi-input{float: left;margin-left: 10px;}
+.pi-input{border:1px solid #ecebeb;height: 25px;width: 160px;padding:0px 10px;line-height: 18px;}
+.search-con .trade {position: absolute;left: 66%;top: 10px;margin-left: 3.3em;width: 24px;height: 48px;border:1px solid #ecebeb;border-left: 0px;}
+.search-con .trade a{display: block;width: 20px;height: 20px;border-radius: 5px;text-align: center;color: #fff;background: #ed7034;font-size: 12px;text-align: center;line-height: 20px;position: absolute;right: -10px;top: 12px;}
+.search-con .trade a:hover{background:#ff5900;}
+
+.xc-price{width: 100%;position: relative;background: #fdf7ee;height: 60px;border:1px solid #ecebeb;border-bottom: 1px solid #ed7034;}
+.xc-price .xp-tj-cal{position: absolute;right: 0px;width: 90px;text-align: center;height: 58px;display: inline-block;padding: 5px;color: #404040;font-size: 12px;}
+.xc-price .xp-tj-cal .cal-icon{width: 22px;height: 26px;margin:1px auto;background: url(../images/cal.png) no-repeat 0px -32px;}
+.xc-price .xp-tj-cal:hover{background: #fff;color: #ed7034;}
+.xc-price .xp-tj-cal:hover .cal-icon{background: url(../images/cal.png) no-repeat 0px 0px;}
+.sc-calendar{margin-right: 90px;height: 58px;}
+.sc-calendar table{width: 100%;height: 58px;}
+.sc-calendar table tr td.preview{width: 5%;text-align: center;background: #f7f0e6;border-right: 1px solid #ecebeb;}
+.sc-calendar table tr td.preview:hover{background: #fff;}
+.sc-calendar table tr td.preview .p-fl{background: #f7f0e6 url(../images/cal.png) no-repeat 0px -64px;width: 18px;height: 30px;display: block;margin:0px auto;}
+.sc-calendar table tr td.preview .p-fr{background: #f7f0e6 url(../images/cal.png) no-repeat -23px -105px;}
+.sc-calendar table tr td.preview:hover .p-fl{background: #fff url(../images/cal.png) no-repeat -21px -64px;}
+.sc-calendar table tr td.preview:hover .p-fr{background: #fff url(../images/cal.png) no-repeat 0px -105px;;}
+.sc-calendar table tr td.sc-price-date td{width: 14%;border-right: 1px solid #ecebeb;text-align: center;font-size: 12px;line-height: 20px;position: relative;}
+.sc-calendar table tr td.sc-price-date td s{position: absolute;top: 8px;right: 0px;float: right;width: 22px;height: 16px;background: url(../images/di.png) no-repeat;}
+.sc-calendar table tr td.sc-price-date td a{position: relative;width: 100%;height: 100%;position: absolute;z-index: 3;left: 0px;top: 0px;padding-top: 10px;}
+.sc-calendar table tr td.sc-price-date td.active{background: #fff;}
+.sc-calendar table tr td.sc-price-date td.active div{position: absolute;width: 103px;border:1px solid #ed7034;height: 60px;top: -1px;left: -1px;border-bottom: 1px solid #fff;}
+a.order-btn{background: #56a2ff;color: #fff;padding: 0px 30px;height: 28px;line-height: 28px;border-radius: 5px;display: inline-block;}
+a.order-btn:hover{background: #158FFF;}
+a.order-btn.ob-orange{background: #fb7730;}
+a.order-btn.ob-orange:hover{background: #fd6514;}
+a.see-all{color: #333;text-decoration: underline;}
+a.see-all:hover{color: #FF6715;}
+.hcxx-table{width: 100%;text-align: center;}
+.hcxx-table th{background: #f6f6f6;font-size: 12px;color: #333;height: 30px;text-align: center;}
+.hcxx-table td{padding: 20px 0px;font-size: 12px;line-height: 28px;padding: 10px;color: #9d9d9d;border-bottom: 1px solid #ecebeb}
+.ml33{margin-left: 33px;}
+.hcxx-table tr:hover td{background: #f6f6f6;}
+.hcxx-hb-infor .hcxx-table tbody{}
+
+/**右边**/
+.jp-order-box{border:1px solid #ecebeb;margin-bottom: 20px;}
+.jp-order-box .job-header{line-height: 40px;font-size: 12px;padding: 0px 20px;}
+.job-nav li{border-top:1px solid #ecebeb;padding: 10px 20px;font-size: 12px;line-height: 24px;}
+.job-nav li>a{color: #333;}
+.job-nav li:hover{background: #f6f6f6;}
