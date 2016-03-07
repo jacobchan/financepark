@@ -11,13 +11,14 @@
 			<dd><a href="addressBook.html">企业通讯录</a></dd>
 			<dd><a href="grzx6.html">一卡通绑定</a></dd>
 			<dd><a href="myAdderss.html">我的地址</a></dd>
-			<dd><a href="grzx14.html">我的预约</a></dd>
-			<dd><a href="grzx23.html">政策申请</a></dd>
+			<dd><a href="myReservation.html">我的预约</a></dd>
+			<dd><a href="policyApply.html">政策申请</a></dd>
 			<dt>物业服务</dt>
-			<dd><a href="grzx8.html">物业报修</a></dd>
-			<dd id="property"><a href="propertycomplaints.html">物业投诉</a></dd>
-			<dd><a href="grzx10.html">访客登记</a></dd>
-			<dd><a href="grzx11.html">搬家放行</a></dd>
+			<dd><a href="propertyManageBx.html">物业报修</a></dd>
+			<dd><a href="propertyManageCos.html">物业投诉</a></dd>
+			<dd><a href="propertycomplaints.html">物业投诉</a></dd>
+			<dd><a href="propertyManageFk.html">访客登记</a></dd>
+			<dd><a href="propertyManageMoverec.html">搬家放行</a></dd>
 			<dd><a href="grzx12.html">缴费查询</a></dd>
 			<dd><a href="grzx13.html">一卡通办理</a></dd>
 			<dt>全民营销</dt>
@@ -25,7 +26,7 @@
 			<dd><a href="grzx16.html">我的收益</a></dd>
 			<dt>极速采购</dt>
 			<dd>
-				<a href="grzx18.html">我的订单 <i class="fa fa-angle-down ml10" style="font-size:16px"></i></a>
+				<a href="myOrder.html">我的订单 <i class="fa fa-angle-down ml10" style="font-size:16px"></i></a>
 				<ul class="undis">
 					<li><a href="grzx18-2.html">退货</a></li>
 					<li class="active"><a href="grzx18-3.html">评价晒单</a></li>
