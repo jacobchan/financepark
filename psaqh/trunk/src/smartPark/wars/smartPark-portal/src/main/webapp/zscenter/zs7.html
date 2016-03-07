@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="../styles/base.css">
+	<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
+	<link rel="stylesheet" type="text/css" href="../styles/awesome/css/font-awesome.min.css">
+	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+	<script type="text/javascript">
+		var Ohref=window.location.href;
+		var Os=Ohref.split("?dataId=")[1];
+		$(function () {
+			var m=$(".article-con").html()
+			$(".article-con").filters({
+				type:"policyId",
+				val:Os,
+				template:m,
+				jsonpSrc:'http://localhost:8081/jsonp/data.jsp?data:file=zs4-test.json'
+			});
+		})
+	</script>
+</head>
+<body>
+	<!--***top start****************************************-->
+	<div id="youi_page_header" class="youi-page-header clearfix"></div>
+	<!--***top end****************************************-->
+	<div class="w100">
+		<div class="w1200 clearfix pt30 pb50">
+			<div class="h-nav clearfix">
+				<a href=""><span>首页</span></a><img src="../images/zs/right-j-b.png" border="0" />
+				<a href=""><span>招商中心</span></a><img src="../images/zs/right-j-b.png" border="0" />
+				<a href=""><span>园区新闻</span></a><img src="../images/zs/right-j-b.png" border="0" />
+				<a href=""><span class="current">正文</span></a>
+			</div>
+			<div class="fl" style="width:875px;">	
+				<div class="article-con">
+					<h2 style="font-size:26px;" class="lh35 mb20">{policyCaption}</h2>
+					<h5 class="f12 mb20">{policyIssueDate}<span class="c-b1 ml10 mr10">|</span> 来源：{policyCome} <span class="c-b1 ml10 mr10">|</span><img src="../styles/images/zs/page.png" border="0" class="mr5"/>1999</h5>
+					<div class="article-con-p">
+						<p>{policyContent}</p>
+					</div>
+				</div>	
+				<div class="article-zan clearfix">
+					<div class="fl">
+						<style type="text/css">
+							.jiathis_style>div{box-sizing: content-box !important;}
+						</style>
+						<div class="jiathis_style_24x24 fl" style="margin-top:36px">
+							<span class="fl lh24 c-b1 f16">分享至：</span>
+							<a title="分享到微信" class="jiathis_button_weixin"><span class="jiathis_txt jtico jtico_weixin"></span></a>
+							<a title="分享到新浪微博" class="jiathis_button_tsina"><span class="jiathis_txt jtico jtico_tsina"></span></a>
+							<a title="分享到QQ空间" class="jiathis_button_qzone"><span class="jiathis_txt jtico jtico_qzone"></span></a>
+							<a style="" href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+						</div>
+						<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+					</div>
+					<div class="fr clearfix" style="width:50%;border-left:1px solid #ecebeb;">
+						<table>
+							<colgroup>
+								<col></col>
+								<col width="38%"></col>
+								<col></col>
+								<col></col>
+							</colgroup>
+							<tr>
+								<td>
+									<a href="javascript:;" class="zan-cai">
+										<img src="../images/zs/cic-s.png" border="0">
+										<img src="../images/zs/cic-so.png" border="0" class="show2 undis">
+									</a>
+								</td>
+								<td>
+									<h3 class="f16 c-o">顶一个</h3>
+									<p class="f16 c-b1">(999)</p>
+								</td>
+								<td>
+									<a href="javascript:;" class="zan-cai">
+										<img src="../images/zs/cic-x.png" border="0">
+										<img src="../images/zs/cic-xo.png" border="0" class="show2 undis">
+									</a>
+
+								</td>
+								<td>
+									<h3 class="f16 c-o">踩一个</h3>
+									<p class="f16 c-b1">(80)</p>
+								</td>
+							</tr>
+						</table>
+					</div>	
+				</div>
+				<p class="article-p-a mt40 c-b1">上篇：<a href="">习近平亲密接触新媒体释放什么信号</a><span class="fr">下篇：<a href="">习近平亲密接触新媒体释放什么信号</a></span></p>	
+			</div>
+			<div class="fr" style="width:295px;">
+				<div class="mb20">
+					<img src="../images/zs/fr-top.png" border="0" />
+				</div>
+				<h3 class="h3-bd">热点新闻</h3>
+				<div class="ifn-group">
+					<ul class="ig-nav">
+						<li>
+							<div class="in-photo">
+								<img src="../images/zs/nav-img1.png" border="0" width="100%">
+							</div>
+							<div class="fr">
+								<p>杭州，一场无关情爱的风月无边月无</p>
+								<a href="" class="a-more">详细信息</a>
+							</div>
+						</li>
+						<li>
+							<div class="in-photo">
+								<img src="../images/zs/nav-img2.png" border="0" width="100%">
+							</div>
+							<div class="fr">
+								<p>杭州，一场无关情爱的风月无边月无</p>
+								<a href="" class="a-more">详细信息</a>
+							</div>
+						</li>
+						<li>
+							<div class="in-photo">
+								<img src="../images/zs/nav-img3.png" border="0" width="100%">
+							</div>
+							<div class="fr">
+								<p>杭州，一场无关情爱的风月无边月无</p>
+								<a href="" class="a-more">详细信息</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--***bottom start****************************************-->
+	<div id="youi_page_footer" class="youi-page-footer"></div>
+	<!--***bottom end****************************************-->
+	<script type="text/javascript">
+		$(function(){
+			/* $(".zan-cai").mouseover(function(){
+				$(this).find(".show2").removeClass("undis").siblings().addClass("undis");
+			});
+			$(".zan-cai").mouseout(function(){
+				$(this).find(".show2").addClass("undis").siblings().removeClass("undis");
+			})
+			$(".zan-cai").click(function(){
+				//$(".zan-cai").find(".show2").addClass("undis").siblings().removeClass("undis");
+				$(this).find(".show2").removeClass("undis").siblings().addClass("undis");
+				$(this).mouseout(function(){
+					$(this).find(".show2").removeClass("undis").siblings().addClass("undis");
+				})
+			}) */
+			
+		})
+	</script>
+</body>
+</html>

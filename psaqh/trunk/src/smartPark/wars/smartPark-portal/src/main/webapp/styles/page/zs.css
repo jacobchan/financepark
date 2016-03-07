@@ -399,6 +399,7 @@ a.ib-btn.bg-h{background: #b5b5b5;}
 .ht-table tr td a.em3{color: #333;}
 .ht-table tr td a.em2,.ht-table tr td a.em3{cursor: text;}
 .ht-table tr td a.em1.active{background: #fff;color: #e1a158;}
+.ht-table tr td a.em1:hover{background:#F3AE60;color:#fff;}
 .ht-table tr td.em1,.ht-table tr td.em2{color: #fff;}
 .ht-hb-form{margin:30px auto;width: 346px;color: #333;}
 .ht-hb-form div{margin-bottom: 15px;display: inline-block;}

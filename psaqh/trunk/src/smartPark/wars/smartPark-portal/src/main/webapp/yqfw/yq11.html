@@ -12,6 +12,17 @@
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
+	<script>
+		$(function(){
+			$(".yih-btn-search").click(function(){
+				var obj={
+				fkcodeComp:$("#rzName").val()
+				};
+				var str=JSON.stringify(obj);
+				alert(str);
+			})
+		})
+	</script>
 </head>
 <body style="background-color:#f1f1f1;">
 	<!--***top start****************************************-->
@@ -22,12 +33,14 @@
 	<div class="yqfw-index-head">
 		<div class="yih-form">
 			<div class="yih-search-see">
+			<form>
 			    <div class="fl">
-			    	<input class="yih-input-search" type="text" placeholder="请输入企业名称">
+			    	<input class="yih-input-search" type="text" placeholder="请输入企业名称" id="rzName">
 			    </div>
 		    	<div class="fl">
-			    	<a href="" class="yih-btn-search"></a>
+			    	<a href="javascript:;" class="yih-btn-search"></a>
 			    </div>
+			</form>
 		    </div>
 		</div>
 	</div>

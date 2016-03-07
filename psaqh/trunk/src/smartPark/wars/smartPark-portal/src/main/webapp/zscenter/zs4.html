@@ -40,10 +40,7 @@
 					</ul>
 				</div>
 				<div class="park-box">
-					<ul class="pb-list">
-						<a href=""><li>科技部关于《发展众创空间工作指引》的通知 <span class="fr">2015-12-24</span></li></a>
-						<a href=""><li>定制公交开通啦！往来富春硅谷更便捷<span class="fr">2015-12-24</span></li></a>
-					</ul>
+					<ul class="pb-list"></ul>
 					<ul class="pb-list-group undis">
 						<li>
 							<div class="plg-photo">
@@ -173,5 +170,14 @@
 	<!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
+	<script type="text/javascript">
+		$(".pb-list").filters({
+			type:"policyType",
+			val:0,
+			template:'<a href="zs7.html?dataId={policyId}"><li>{policyCaption}<span class="fr">{policyIssueDate}</span></li></a>',
+			jsonpSrc:'http://localhost:8081/jsonp/data.jsp?data:file=zs4-test.json'	
+		});
+		
+	</script>
 </body>
 </html>

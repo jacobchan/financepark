@@ -10,41 +10,45 @@
 	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
-
+	<script type="text/javascript" src="../scripts/page/zs.js"></script>
+	<script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
 	<script type="text/javascript">
 		$(function () {
-		    var sbysf_index = 0;
-		     var n=$(".space-centent ul li").length-3;
-		    function sbysf_scroll_up(){
-		        sbysf_index++;
-		        if(sbysf_index > n){
-		            sbysf_index = 0;
-		        }
-		        sbysf_show(sbysf_index);
-		    }
-		    function sbysf_scroll_down(){
-		        sbysf_index--;
-		        if(sbysf_index < 0){
-		            sbysf_index = n;
-		        }
-		        sbysf_show(sbysf_index);
-		    }
-		    function sbysf_show(j){
-		        var index = -(j*375);
-		        $(".space-centent ul").animate({left: index+'px'},200);
-		    }
-		    $(".space-centent .arrow-right").click(function(){
-		        sbysf_scroll_up();
-		    });
-		    $(".space-centent .arrow-left").click(function(){
-		        sbysf_scroll_down();
-		    });
-			$(".input-con .now-btn").click(function(){
-				$(".bg-tanc").show();
+			laydate({
+			    elem: '#fkcodeDate', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+			    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 			});
-			$(".tc-close").click(function(){
-				$(".bg-tanc").hide();
+			/* laydate({
+			    elem: '#fkcodeTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+			    format: 'YYYY-MM-DD hh:mm:ss', //日期格式
+		        istime: true, //是否开启时间选择
+			    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 			});
+			 */
+			
+			 var start = {
+			    elem: '#startTime',
+			    min: laydate.now(), //设定最小日期为当前日期
+			    max: '2099-06-16 23:59:59', //最大日期
+			    istoday: false,
+			    choose: function(datas){
+			         end.min = datas; //开始日选好后，重置结束日的最小日期
+			         end.start = datas //将结束日的初始值设定为开始日
+			    }
+			};
+			var end = {
+			    elem: '#endTime',
+			    min: laydate.now(),
+			    max: '2099-06-16 23:59:59',
+			    istoday: false,
+			    choose: function(datas){
+			        start.max = datas; //结束日选好后，重置开始日的最大日期
+			    }
+			};
+			laydate(start);
+			laydate(end);
+			 
+			 
 			$(".ic-select").click(function(){
 				$(this).next(".select-nav").toggle();
 			})
@@ -70,7 +74,20 @@
 						alert("最大值了")
 					}
 				})
-			})
+			});
+			
+			
+			$(".now-btn").click(function(){
+				var obj={
+				fkcodeComp:$("#fkcodeComp").text(),
+				fkcodeDate:$("#fkcodeDate").val(),
+				fkcodeTime:$("#fkcodeTime").val(),
+				fkcodeName:$("#fkcodeName").val(),
+				fkcodeTelephone:$("#fkcodeTelephone").val()
+				};
+				var str=JSON.stringify(obj);
+				alert(str);
+			});
 		})
 	</script>
 </head>
@@ -103,7 +120,7 @@
 					<div class="input-con">
 						<div class="select-text">
 							<div class="ic-select">
-								<p>富春硅谷--创立方</p>
+								<p id="fkcodeComp">富春硅谷--创立方</p>
 							</div>
 							<ul class="select-nav">
 								<li>富春硅谷--创立方1</li>
@@ -111,10 +128,10 @@
 								<li>富春硅谷--创立方3</li>
 							</ul>
 						</div>
-						<input type="text" placeholder="来访日期">
-						<input type="text" placeholder="来访时间">
-						<input type="text" placeholder="姓名" style="width:90px">
-						<input type="text" placeholder="手机号码">
+						<input type="text" placeholder="来访日期" id="fkcodeDate">
+						<input type="text" placeholder="来访时间" id="fkcodeTime">
+						<input type="text" placeholder="姓名" style="width:90px" id="fkcodeName">
+						<input type="text" placeholder="手机号码" id="fkcodeTelephone">
 						<input type="button" value="立即预约" class="now-btn">
 					</div>
 				</div>
@@ -143,23 +160,23 @@
 					<ul class="sc-nav">
 						<li>
 							<div class="mb10"><img src="../styles/images/zs/eig1.jpg" border="0"></div>
-							<input type="text" placeholder="活动卡位800元/月" disabled="disabled" style="cursor:default"><a href="" class="sc-yy" >预约</a>
+							<input type="text" placeholder="活动卡位800元/月" disabled="disabled" style="cursor:default"><a href="javascript:;" class="sc-yy" >预约</a>
 						</li>
 						<li>
 							<div class="mb10"><img src="../styles/images/zs/eig2.jpg" border="0"></div>
-							<input type="text" placeholder="活动卡位800元/月" disabled="disabled" style="cursor:default"><a href="" class="sc-yy">预约</a>
+							<input type="text" placeholder="活动卡位800元/月" disabled="disabled" style="cursor:default"><a href="javascript:;" class="sc-yy">预约</a>
 						</li>
 						<li>
 							<div class="mb10"><img src="../styles/images/zs/eig3.jpg" border="0"></div>
-							<input type="text" placeholder="活动卡位800元/月" disabled="disabled" style="cursor:default"><a href="" class="sc-yy">预约</a>
+							<input type="text" placeholder="活动卡位800元/月" disabled="disabled" style="cursor:default"><a href="javascript:;" class="sc-yy">预约</a>
 						</li>
 						<li>
 							<div class="mb10"><img src="../styles/images/zs/eig2.jpg" border="0"></div>
-							<input type="text" placeholder="活动卡位800元/月" disabled="disabled" style="cursor:default"><a href="" class="sc-yy">预约</a>
+							<input type="text" placeholder="活动卡位800元/月" disabled="disabled" style="cursor:default"><a href="javascript:;" class="sc-yy">预约</a>
 						</li>
 						<li>
 							<div class="mb10"><img src="../styles/images/zs/eig3.jpg" border="0"></div>
-							<input type="text" placeholder="活动卡位800元/月" disabled="disabled" style="cursor:default"><a href="" class="sc-yy">预约</a>
+							<input type="text" placeholder="活动卡位800元/月" disabled="disabled" style="cursor:default"><a href="javascript:;" class="sc-yy">预约</a>
 						</li>
 					</ul>
 				</div>
@@ -280,8 +297,8 @@
 						<li>创立方3</li>
 					</ul>
 				</div>
-				<input type="text" placeholder="预定日期" class="inp-time" disabled="disabled">
-				<input type="text" placeholder="截止日期" class="inp-time" disabled="disabled">
+				<input type="text" placeholder="预定日期" class="inp-time" id="startTime">
+				<input type="text" placeholder="截止日期" class="inp-time" id="endTime">
 				<input type="submit" value="搜索">
 			</div>
 			<table class="tct-table fl">
