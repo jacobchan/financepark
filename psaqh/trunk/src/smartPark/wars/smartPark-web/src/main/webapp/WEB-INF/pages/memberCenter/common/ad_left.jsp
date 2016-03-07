@@ -39,3 +39,17 @@
 			<dd><a href="publishActivity.html">我发布的活动</a></dd>
 		</dl>
 	</div>
+	<script type="text/javascript">
+	  $(function (){
+		      var urlstr = location.href;
+  			  var urlstatus=false;
+		      $(".w200 dd").each(function (){
+		    	    if ((urlstr + '/').indexOf($(this).find("a").attr('href')) > -1&&$(this).find("a").attr('href')!='') {
+		    	      $(this).addClass('active'); urlstatus = true;
+		    	    } else {
+		    	      $(this).removeClass('active');
+		    	    }
+		    	  });
+		      if (!urlstatus) {$(".w200 dd").eq(0).addClass('active'); }
+		     });
+</script>
