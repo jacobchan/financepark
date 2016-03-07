@@ -1,0 +1,294 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href="styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+	<link href="styles/base.css" type="text/css" rel="stylesheet">
+	<link href="styles/page/zs.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="scripts/lib/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="scripts/lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="scripts/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="scripts/lib/giui.min.js"></script>
+	<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
+	<script src="scripts/page/right.js"></script>
+</head>
+<body>
+	<!--***top start****************************************-->
+	<div id="youi_page_header" class="youi-page-header clearfix"></div>
+	<!--***top end****************************************-->
+	<div class="w100">
+		<div class="w1200 clearfix pt30 pb50">
+			<div class="h-nav clearfix">
+				<a href=""><span>首页</span></a><img src="styles/images/zs/right-j-b.png" border="0">
+				<a href=""><span class="current">国内酒店预订</span></a>
+			</div>
+			<div class="jdorder-select clearfix">
+				<div class="tct-select fl js-s clearfix">
+					<div class="ic-select">
+						<span class="fl lh30 mr10">目的地</span>
+						<p>创立方2</p>
+					</div>
+					<ul style="display: none;" class="select-nav">
+						<li>创立方1</li>
+						<li>创立方2</li>
+						<li>创立方3</li>
+					</ul>
+				</div>
+				<div class="js-date ml10 fl clearfix">
+					<div class="jd-bg-h"><span class="fl">入住</span><input type="text"></div>
+					<span class="fl ml10 mr10">—</span>
+					<div class="jd-bg-h"><span class="fl">离店</span><input type="text"></div>
+					<span class="fl ml50 lh22">共一晚</span>
+					<a href="" class="fr ml10"><img src="styles/images/close.png" border="0" style="margin-top:3px;"></a>
+				</div>
+				<div class="jd-bd-box ml10 fl clearfix">
+					<span class="fl">关键词</span>
+					<input type="text">
+				</div>
+				<input type="submit" value="立即搜索" class="jd-sea-btn fr">
+			</div>
+			<div class="clearfix jd-bd-select mt20">
+				<div class="jbk-bt clearfix">
+					<span class="jbk-span fl">价格区间</span>
+					<span class="ml50 mr50 c-o fl">不限</span>
+					<div class="fl">
+						<label><input type="checkbox" name="price"><span class="fl"> 低于￥150</span></label>
+						<label><input type="checkbox" name="price"><span class="fl"> ￥151－300</span></label>
+						<label><input type="checkbox" name="price"><span class="fl"> ￥301-450</span></label>
+						<label><input type="checkbox" name="price"><span class="fl"> ￥451－600</span></label>
+						<label><input type="checkbox" name="price"><span class="fl"> ￥600以上</span></label>
+						<div class="fl jbs-qu">自定义<input type="text" class="ml10"><span class="ml5 mr5">—</span><input type="text"></div>
+					</div>
+				</div>
+				<div class="jbk-bt clearfix">
+					<span class="jbk-span fl">酒店星级</span>
+					<span class="ml50 mr50 c-o fl">不限</span>
+					<div class="fl">
+						<label><input type="checkbox" name="star"> 二星级／经济型</label>
+						<label><input type="checkbox" name="star"> 三星级／舒适型</label>
+						<label><input type="checkbox" name="star"> 四星级／高档型</label>
+						<label><input type="checkbox" name="star"> 五星级／豪华型</label>
+					</div>
+				</div>
+			</div>
+			<h5 class="f12 mt20 mb20 lh30"><span class="f14 c-o">10758</span> 家酒店满足条件</h5>
+			<div class="fl" style="width:880px;">
+				<div class="czh-search clearfix jd-cs" style="font-size:14px;">
+					<ul class="fl">
+						<li class="active">热门推荐</li>
+						<li>价格 <i class="fa fa-angle-down ml20" style="font-size:18px;"></i></li>
+						<li>评分 <i class="fa fa-angle-down ml20" style="font-size:18px;"></i></li>
+					</ul>
+					<div class="fr clearfix f12">
+						<label class="fl"><input type="checkbox" name="th" class="mr10 fl" style="margin-top:12px;"><span class="fl">特惠</span></label>
+						<label class="ml20 mr20 fl"><input type="checkbox" name="th" class="mr10 fl" style="margin-top:12px;"><span class="fl">免担保</span></label>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="jd-order-group">
+						<table>
+							<colgroup>
+								<col width="180"></col>
+								<col width="490"></col>
+								<col></col>
+								<col width="110"></col>
+							</colgroup>
+							<tr>
+								<td><img src="styles/images/jd-p1.jpg" width="160" height="120"></td>
+								<td>
+									<div class="mb25">
+										<span class="lh30 f16 mr10">北京好苑建国酒店 </span>
+										<span class="starbox1"><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i></span>
+									</div>
+									<p class="mb25 lh20 f12">位于建国门，北京市东城区建国门内大街17号(朝阳门南小街与建国门内...</p>
+									<p class="c-b1 f12">
+										<span class="mr20"><i class="fa fa-wifi"></i> 无线上网</span>
+										<span class="mr20"><i class="fa fa-wifi"></i> 无线上网</span>
+										<span class="mr20"><i class="fa fa-wifi"></i> 接机服务</span>
+									</p>
+								</td>
+								<td valign="top" style="border-right:1px solid #ecebeb">
+									<p class="f12 mb15"><span class="c-o f20">4.5</span>/5.0</p>
+									<p class="c-824 f12">来自37条评论</p>
+								</td>
+								<td align="center">
+									<p><span class="c-o f20">￥618 </span>起</p>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="jd-order-group">
+						<table>
+							<colgroup>
+								<col width="180"></col>
+								<col width="490"></col>
+								<col></col>
+								<col width="110"></col>
+							</colgroup>
+							<tr>
+								<td><img src="styles/images/jd-p1.jpg" width="160" height="120"></td>
+								<td>
+									<div class="mb25">
+										<span class="lh30 f16 mr10">北京好苑建国酒店 </span>
+										<span class="starbox1"><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i></span>
+									</div>
+									<p class="mb25 lh20 f12">位于建国门，北京市东城区建国门内大街17号(朝阳门南小街与建国门内...</p>
+									<p class="c-b1 f12">
+										<span class="mr20"><i class="fa fa-wifi"></i> 无线上网</span>
+										<span class="mr20"><i class="fa fa-wifi"></i> 无线上网</span>
+										<span class="mr20"><i class="fa fa-wifi"></i> 接机服务</span>
+									</p>
+								</td>
+								<td valign="top" style="border-right:1px solid #ecebeb">
+									<p class="f12 mb15"><span class="c-o f20">4.5</span>/5.0</p>
+									<p class="c-824 f12">来自37条评论</p>
+								</td>
+								<td align="center">
+									<p><span class="c-o f20">￥618 </span>起</p>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="jd-order-group">
+						<table>
+							<colgroup>
+								<col width="180"></col>
+								<col width="490"></col>
+								<col></col>
+								<col width="110"></col>
+							</colgroup>
+							<tr>
+								<td><img src="styles/images/jd-p1.jpg" width="160" height="120"></td>
+								<td>
+									<div class="mb25">
+										<span class="lh30 f16 mr10">北京好苑建国酒店 </span>
+										<span class="starbox1"><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i></span>
+									</div>
+									<p class="mb25 lh20 f12">位于建国门，北京市东城区建国门内大街17号(朝阳门南小街与建国门内...</p>
+									<p class="c-b1 f12">
+										<span class="mr20"><i class="fa fa-wifi"></i> 无线上网</span>
+										<span class="mr20"><i class="fa fa-wifi"></i> 无线上网</span>
+										<span class="mr20"><i class="fa fa-wifi"></i> 接机服务</span>
+									</p>
+								</td>
+								<td valign="top" style="border-right:1px solid #ecebeb">
+									<p class="f12 mb15"><span class="c-o f20">4.5</span>/5.0</p>
+									<p class="c-824 f12">来自37条评论</p>
+								</td>
+								<td align="center">
+									<p><span class="c-o f20">￥618 </span>起</p>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="jd-order-group">
+						<table>
+							<colgroup>
+								<col width="180"></col>
+								<col width="490"></col>
+								<col></col>
+								<col width="110"></col>
+							</colgroup>
+							<tr>
+								<td><img src="styles/images/jd-p1.jpg" width="160" height="120"></td>
+								<td>
+									<div class="mb25">
+										<span class="lh30 f16 mr10">北京好苑建国酒店 </span>
+										<span class="starbox1"><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i></span>
+									</div>
+									<p class="mb25 lh20 f12">位于建国门，北京市东城区建国门内大街17号(朝阳门南小街与建国门内...</p>
+									<p class="c-b1 f12">
+										<span class="mr20"><i class="fa fa-wifi"></i> 无线上网</span>
+										<span class="mr20"><i class="fa fa-wifi"></i> 无线上网</span>
+										<span class="mr20"><i class="fa fa-wifi"></i> 接机服务</span>
+									</p>
+								</td>
+								<td valign="top" style="border-right:1px solid #ecebeb">
+									<p class="f12 mb15"><span class="c-o f20">4.5</span>/5.0</p>
+									<p class="c-824 f12">来自37条评论</p>
+								</td>
+								<td align="center">
+									<p><span class="c-o f20">￥618 </span>起</p>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="jd-order-group">
+						<table>
+							<colgroup>
+								<col width="180"></col>
+								<col width="490"></col>
+								<col></col>
+								<col width="110"></col>
+							</colgroup>
+							<tr>
+								<td><img src="styles/images/jd-p1.jpg" width="160" height="120"></td>
+								<td>
+									<div class="mb25">
+										<span class="lh30 f16 mr10">北京好苑建国酒店 </span>
+										<span class="starbox1"><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i></span>
+									</div>
+									<p class="mb25 lh20 f12">位于建国门，北京市东城区建国门内大街17号(朝阳门南小街与建国门内...</p>
+									<p class="c-b1 f12">
+										<span class="mr20"><i class="fa fa-wifi"></i> 无线上网</span>
+										<span class="mr20"><i class="fa fa-wifi"></i> 无线上网</span>
+										<span class="mr20"><i class="fa fa-wifi"></i> 接机服务</span>
+									</p>
+								</td>
+								<td valign="top" style="border-right:1px solid #ecebeb">
+									<p class="f12 mb15"><span class="c-o f20">4.5</span>/5.0</p>
+									<p class="c-824 f12">来自37条评论</p>
+								</td>
+								<td align="center">
+									<p><span class="c-o f20">￥618 </span>起</p>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="ycc-page clearfix fr" style="text-align:right">
+					<span class="c-b1 mr30 f12">找到相关结果约299个</span><a href="" class="no-c"><i class="fa fa-angle-double-left"></i></a><a href="" class="current">1</a><a href="">2</a><a href="">3</a><a href=""><i class="fa fa-angle-double-right"></i></a>
+				</div>
+			</div>
+			<div class="fr w285">
+				<h3 class="h3-bd">热点新闻</h3>
+				<div class="ifn-group">
+					<ul class="ig-nav">
+						<li>
+							<div class="in-photo">
+								<img src="styles/images/jd-p1.jpg" border="0" width="100%">
+							</div>
+							<div class="fr mt10">
+								<a href=""><p class="mb15">北京好苑建国酒店</p></a>
+								<p class="f12"><span class="c-o f16">￥618 </span>起</p>
+							</div>
+						</li>
+						<li>
+							<div class="in-photo">
+								<img src="styles/images/jd-p1.jpg" border="0" width="100%">
+							</div>
+							<div class="fr mt10">
+								<a href=""><p class="mb15">北京好苑建国酒店</p></a>
+								<p class="f12"><span class="c-o f16">￥618 </span>起</p>
+							</div>
+						</li>
+						<li>
+							<div class="in-photo">
+								<img src="styles/images/jd-p1.jpg" border="0" width="100%">
+							</div>
+							<div class="fr mt10">
+								<a href=""><p class="mb15">北京好苑建国酒店</p></a>
+								<p class="f12"><span class="c-o f16">￥618 </span>起</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--***bottom start****************************************-->
+	<div id="youi_page_footer" class="youi-page-footer"></div>
+	<!--***bottom end****************************************-->
+</body>
+</html>
