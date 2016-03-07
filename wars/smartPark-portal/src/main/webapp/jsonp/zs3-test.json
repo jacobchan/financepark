@@ -1,0 +1,34 @@
+{
+	"records":[{
+		"memberId":"01",
+		"policyApplyId":"01",
+		"policyApplyConpanyName":"百度",
+		"memberId":"101",
+		"policyApplyContactPeople":"夜夜",
+		"policyApplyContactTel":"13992558985"
+	},{
+		"memberId":"01",
+		"policyApplyId":"01",
+		"policyApplyConpanyName":"新浪",
+		"memberId":"101",
+		"policyApplyContactPeople":"玲玲",
+		"policyApplyContactTel":"13995246585"
+	},
+	{
+		"memberId":"01",
+		"policyApplyId":"01",
+		"policyApplyConpanyName":"鑫鑫工业",
+		"memberId":"101",
+		"policyApplyContactPeople":"鑫鑫",
+		"policyApplyContactTel":"13565916992"
+	},
+	{
+		"memberId":"01",
+		"policyApplyId":"01",
+		"policyApplyConpanyName":"文件",
+		"memberId":"101",
+		"policyApplyContactPeople":"问问",
+		"policyApplyContactTel":"139960236806"
+	}
+	],
+}

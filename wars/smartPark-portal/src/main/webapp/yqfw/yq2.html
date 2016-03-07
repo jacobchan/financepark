@@ -25,6 +25,41 @@
 				<a href=""><span>合同主体变更</span></a><img src="../styles/images/zs/right-j-b.png" border="0" />
 				<a href=""><span class="current">在线预约</span></a>
 			</div>
+			<script>
+				$(function(){
+					$(".em1").click(function(){
+						$(".em1").removeClass("active");
+						$(this).addClass("active");
+					})
+					var j=0;
+					var o=$(".ht-table tr th").length-1;
+					var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+					for(j=1;j<o;j++){
+						for(var i=0;i<j;i++){
+							var dd = new Date();
+						  	dd = new Date(dd.getTime() + 60*60*24*1000 *i); 
+						  	var dm=dd.getMonth()+1;
+						  	var dt=dd.getDate();
+						  	var dw=dd.getDay();	
+						  	$(".ht-table tr th").eq(j).html(dm+"月"+dt+"日"+"<br/>"+weekDay[dw]); 
+						}
+					}
+					/*  $(".ht-table").plists({
+						template:'',
+						jsonpSrc:'http://localhost:8081/jsonp/data.jsp?data:file=yq2-test.json'
+					});
+					$(".hhf-submit").click(function(){
+						var obj={
+						enteringName:$("#enteringName").val(),
+						enteringTelephone:$("#enteringTelephone").val(),
+						enteringEmail:$("#enteringEmail").val(),
+						enteringNote:$("#enteringNote").val(),
+						};
+						var str=JSON.stringify(obj);
+						alert(str);
+					}); */
+				})
+			</script>
 			<div class="clearfix">
 				<div class="fl w895">				
 					<div class="clearfix p30">
@@ -80,10 +115,10 @@
 						</table>
 						<h3 class="f16 lh22 pt10 pb10 mt40" style="border-bottom:1px solid #efebeb;">申请人基本信息</h3>
 						<form class="ht-hb-form">
-							<div><label><em>*</em> 申请人</label> <input type="text"></div>
-							<div><label><em>*</em> 申请人电话</label> <input type="text"></div>
-							<div><label>联系邮箱</label> <input type="text"></div>
-							<div><label>备注</label> <textarea></textarea></div>
+							<div><label><em>*</em> 申请人</label> <input type="text" id="enteringName"></div>
+							<div><label><em>*</em> 申请人电话</label> <input type="text" id="enteringTelephone"></div>
+							<div><label>联系邮箱</label> <input type="text" id="enteringEmail"></div>
+							<div><label>备注</label> <textarea id="enteringNote"></textarea></div>
 							<input type="submit" value="提交" class="hhf-submit" style="margin-left:160px;">
 						</form>
 					</div>	

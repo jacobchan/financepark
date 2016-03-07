@@ -182,50 +182,70 @@
 	<div class="bg-tanc">
 		<div class="tanc-con" style="margin-top:-252px;top:50%;">
 			<a href="javascript:;" class="tc-close"></a>
-			<h3>填写在线预约单</h3>
-			<table class="line-table">
-				<colgroup>
-					<col width="140"></col>
-					<col width="240"></col>
-				</colgroup>
-				<tr>
-					<td>公司名称</td>
-					<td><input type="text"></td>
-					<td rowspan="6" style="color:#fb4a4a">
-						备注：如果贵司为已驻企业，请在线提报，如果贵司还未进入园区，请在线预约后再进行申请，谢谢！
-					</td>
-				</tr>
-				<tr>
-					<td>公司楼栋及地址</td>
-					<td><input type="text"></td>
-				</tr>
-				<tr>
-					<td>联系人</td>
-					<td><input type="text"></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>
-						<label><input type="radio" name="sex" class="mr5">先生</label>
-						<label><input type="radio" name="sex" class="mr5">女士</label>
-					</td>
-				</tr>
-				<tr>
-					<td>联系人职位</td>
-					<td><input type="text"></td>
-				</tr>
-				<tr>
-					<td>联系手机</td>
-					<td><input type="text"></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><a href="" class="ib-btn">提交预约</a></td>
-					<td></td>
-				</tr>
-			</table>
+			<form>
+				<h3>填写在线预约单</h3>
+				<table class="line-table">
+					<colgroup>
+						<col width="140"></col>
+						<col width="240"></col>
+					</colgroup>
+					<tr>
+						<td>公司名称</td>
+						<td><input type="text" id="policyApplyConpanyName"></td>
+						<td rowspan="6" style="color:#fb4a4a">
+							备注：如果贵司为已驻企业，请在线提报，如果贵司还未进入园区，请在线预约后再进行申请，谢谢！
+						</td>
+					</tr>
+					<tr>
+						<td>公司楼栋及地址</td>
+						<td><input type="text" id="companyAdrress"></td>
+					</tr>
+					<tr>
+						<td>联系人</td>
+						<td><input type="text" id="policyApplyContactPeople"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td id="policyApplySex">
+							<label><input type="radio" name="sex" class="mr5" checked="checked" value="0">先生</label>
+							<label><input type="radio" name="sex" class="mr5" value="1">女士</label>
+						</td>
+					</tr>
+					<tr>
+						<td>联系人职位</td>
+						<td><input type="text" id="policyApplyContactPosition"></td>
+					</tr>
+					<tr>
+						<td>联系手机</td>
+						<td><input type="text" id="policyApplyContactTel"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input value="提交预约" class="ib-btn " style="width:123px" id="submit-ib"/></td>
+						<td></td>
+					</tr>
+				</table>
+			</form>
+			
 		</div>
 	</div>
 	<!--***弹窗 end****************************************-->
+	<script>
+		$(function(){
+			$("#submit-ib").click(function(){
+				var obj={
+					policyApplyConpanyName:$("#policyApplyConpanyName").val(),
+					companyAdrress:$("#companyAdrress").val(),
+					policyApplyContactPeople:$("#policyApplyContactPeople").val(),
+					policyApplySex:$("#policyApplySex input[name='sex']:checked").val(),//0-先生，1女士
+					policyApplyContactPosition:$("#policyApplyContactPosition").val(),
+					policyApplyContactTel:$("#policyApplyContactTel").val()
+					};
+				var str=JSON.stringify(obj);
+				alert(str);
+			});
+		})
+	</script>
+	
 </body>
 </html>
