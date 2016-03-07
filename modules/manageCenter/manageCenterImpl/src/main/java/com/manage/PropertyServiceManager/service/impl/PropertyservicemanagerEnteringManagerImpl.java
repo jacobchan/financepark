@@ -3,6 +3,7 @@
  */
 package com.manage.PropertyServiceManager.service.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
@@ -23,7 +24,10 @@ import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntering;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSer;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTs;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerEnteringDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerEnteringManager;
 
@@ -167,5 +171,42 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
     	return temp;
 		
 	}
+    
+    /**
+  	 * 批量新增可办理预约记录
+  	 * @param listEntering 可办理预约记录
+  	 */
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+    public void saveListEntering(@DomainCollection(domainClazz=PropertyservicemanagerEntering.class) List<PropertyservicemanagerEntering> listEntering) {
+
+    	//保存可办理预约记录
+    	for(PropertyservicemanagerEntering entering : listEntering){
+    		List<PropertyservicemanagerEntering> enteringList=new ArrayList<PropertyservicemanagerEntering> ();
+    		entering.setEnteringAlre("0");
+    		entering.setEnteringRemain(entering.getEnteringSum());
+    		entering.setEnteringStatus("01");//预约状态
+    		entering.setEnteringTime("AM");//时段AM： 9:00-11:00
+    		entering.setCreateUser(entering.getUpdateUser());
+    		entering.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		entering.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		enteringList.add(entering);
+    		
+    		PropertyservicemanagerEntering p=new PropertyservicemanagerEntering();
+    		p.setEnteringSum(entering.getEnteringSum());//下午预约总量
+    		p.setEnteringAlre("0");
+    		p.setEnteringRemain(entering.getEnteringSum());
+    		p.setEnteringDate(entering.getEnteringDate());
+    		p.setEnteringTime("PM");//时段PM： 14:00-17:00
+    		p.setEnteringStatus("01");//01:可以预约
+    		p.setCreateUser(entering.getUpdateUser());
+    		p.setUpdateUser(entering.getUpdateUser());
+    		p.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		enteringList.add(p);
+    		propertyservicemanagerEnteringDao.save(enteringList);
+    	}
+
+    }
+
 
 }

@@ -13,7 +13,10 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.DomainCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntering;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSfpro;
 
 public interface PropertyservicemanagerEnteringManager extends BaseManager{
 
@@ -71,4 +74,11 @@ public interface PropertyservicemanagerEnteringManager extends BaseManager{
      * @param ids
      */
 	public TempDemo exsitPropertyservicemanagerEnteringForDate(String propertyName,String value) throws BusException;
+	
+    /**
+  	 * 批量新增可办理预约记录
+  	 * @param listEntering 可办理预约记录
+  	 */
+     @EsbServiceMapping
+  	public void saveListEntering(List<PropertyservicemanagerEntering> listEntering);
 }
