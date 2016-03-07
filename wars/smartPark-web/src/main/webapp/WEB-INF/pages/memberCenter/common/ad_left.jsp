@@ -4,7 +4,7 @@
 	<div class="w200 fl">
 		<dl>
 			<dt>个人中心</dt>
-			<dd id="grzl" class="active"><a href="memberInformation.html">个人资料</a></dd>
+			<dd  class="active"><a href="memberInformation.html">个人资料</a></dd>
 			<dd><a href="grzx2.html">订单中心</a></dd>
 			<dd><a href="grzx3.html">安全中心</a></dd>
 			<dd><a href="grzx4.html">消息</a></dd>
