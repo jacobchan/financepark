@@ -1,7 +1,12 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
-	<youi:grid id="grid_propertyservicemanagerEntering" idKeys="enteringId" caption="可办理预约记录列表"  panel="false"
+	<youi:subpage
+		src="page/manageCenter.PropertyServiceManager.propertyservicemanagerEntering/addPropertyEnteringManage.html" 
+		subpageId="addEntering" height="600" caption="可办理预约记录增加">
+	</youi:subpage>
+
+	<youi:grid id="grid_propertyservicemanagerEntering" idKeys="enteringId" caption="可办理预约记录列表"  panel="false" add="NOT"
 				src="esb/web/propertyservicemanagerEnteringManager/getPagerPropertyservicemanagerEnterings.json" dataFormId="form_propertyservicemanagerEntering"
 				editSrc="esb/web/propertyservicemanagerEnteringManager/getPropertyservicemanagerEntering.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/propertyservicemanagerEnteringManager/removePropertyservicemanagerEntering.json">
@@ -13,13 +18,13 @@
 			<youi:fieldText property="enteringSum"  caption="预约总量"/> --%>
 			<youi:fieldCalendar property="enteringDate"  caption="预约时间日期" textFormat="yyyy-MM-dd" format="yyyy-MM-dd"/>
 		</youi:fieldLayout>
-		<youi:gridCol property="enteringStatus"  caption="可预约状态" convert="enteringStatus"  width="20%" align="center"/>
+		<youi:gridCol property="enteringDate"  caption="预约时间日期" width="30%" align="center" orderBy="desc"/>
 		<youi:gridCol property="enteringTime"  caption="预约时间段" convert="enteringTime" width="20%" align="center"/>
-
 		<youi:gridCol property="enteringSum"  caption="预约总量" width="10%" align="right"/>
 		<youi:gridCol property="enteringAlre"  caption="已预约数" width="10%" align="right"/>
 		<youi:gridCol property="enteringRemain"  caption="剩余数量" width="10%" align="right"/>
-		<youi:gridCol property="enteringDate"  caption="预约时间日期" width="30%" align="center" orderBy="desc"/>
+		<youi:gridCol property="enteringStatus"  caption="可预约状态" convert="enteringStatus"  width="20%" align="center"/>
+		<youi:button name="enteringAdd" caption="增加"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除" />
@@ -95,4 +100,15 @@
 
     </youi:func>
     <!--**********************************页面函数End:选择预约日期，判断日期是否重复********************************-->
+    
+    	<!--**********************************页面函数:增加可办理预约记录********************************-->
+	
+	<youi:func name="func_grid_enteringAdd">
+		var gridElement = $elem('grid_propertyservicemanagerEntering',pageId);
+		var subpageElement = $elem('subpage_addEntering',pageId);
+		var selectedRecord = gridElement.grid('getSelectedRecord');
+		//打开子页面
+		subpageElement.subpage('open',null,null,null);
+	</youi:func>
+	<!--**********************************页面函数:增加可办理预约记录********************************-->
 </youi:page>

@@ -153,6 +153,8 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
     		enteringBefore.setEnteringAlre(String.valueOf(Integer.valueOf(enteringAlre)+1));
     		if(enteringBefore.getEnteringRemain().equals("0")){
     			enteringBefore.setEnteringStatus("02");//剩余数量为0，修改可预约状态为预约已满：02
+    		}else{
+    			enteringBefore.setEnteringStatus("01");
     		}
     		//变更可办理预约表中的剩余预约数量和已预约数量
     		propertyservicemanagerEnteringDao.save(enteringBefore);
@@ -186,25 +188,23 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
 		//预约记录ID变更，则修改变更前和变更后的可办理预约记录信息(修改剩余预约数量和已预约数量)
 		if(!enteringIdBefore.equals(enteringIdAfter)){
 			//变更后
-			if(after.getEnteringRemain().equals("1")){//判断可办理预约表中剩余预约数量是否还有值
-				after.setEnteringStatus("02");//剩余数量为0，修改可预约状态为预约已满
-			}
 			after.setEnteringRemain(String.valueOf(Integer.valueOf(after.getEnteringRemain())-1));//剩余预约数量
 			after.setEnteringAlre(String.valueOf(Integer.valueOf(after.getEnteringAlre())+1));//已预约数量
 			if(after.getEnteringRemain().equals("0")){
 				after.setEnteringStatus("02");//剩余数量为0，修改可预约状态为预约已满：02
+    		}else{
+    			after.setEnteringStatus("01");
     		}
 			propertyservicemanagerEnteringDao.save(after);
 
 
 			//变更前
-			if(before.getEnteringRemain().equals("1")){//判断可办理预约表中剩余预约数量是否还有值
-				before.setEnteringStatus("02");//剩余数量为0，修改可预约状态为预约已满
-			}
 			before.setEnteringRemain(String.valueOf(Integer.valueOf(before.getEnteringRemain())+1));//剩余预约数量
 			before.setEnteringAlre(String.valueOf(Integer.valueOf(before.getEnteringAlre())-1));//已预约数量
 			if(before.getEnteringRemain().equals("0")){
 				before.setEnteringStatus("02");//剩余数量为0，修改可预约状态为预约已满：02
+    		}else{
+    			before.setEnteringStatus("01");
     		}
 			propertyservicemanagerEnteringDao.save(before);
 
@@ -280,8 +280,10 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
 		String enteringAlre=entering.getEnteringAlre();//已预约数量
 		entering.setEnteringRemain(String.valueOf(Integer.valueOf(enteringRemain)+1));
 		entering.setEnteringAlre(String.valueOf(Integer.valueOf(enteringAlre)-1));
-		if(entering.getEnteringRemain().equals("1")){
+		if(entering.getEnteringRemain().equals("0")){
 			entering.setEnteringStatus("02");//剩余数量为0，修改可预约状态为预约已满：02
+		}else{
+			entering.setEnteringStatus("01");
 		}
 		propertyservicemanagerEnteringDao.save(entering);
 		
