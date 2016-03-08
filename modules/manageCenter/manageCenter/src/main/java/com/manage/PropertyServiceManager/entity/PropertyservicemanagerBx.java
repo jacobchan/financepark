@@ -80,6 +80,18 @@ public class PropertyservicemanagerBx implements Domain{
 	@Length(max=20)
 	private String updateTime;//修改时间
 	
+	@Column(name = "BX_CODE_")
+	@Length(max=50)
+	private String bxCode;//报修单号
+	
+	public String getBxCode() {
+		return bxCode;
+	}
+
+	public void setBxCode(String bxCode) {
+		this.bxCode = bxCode;
+	}
+	
 	public String getCreateTime() {
 		return createTime;
 	}
@@ -196,6 +208,7 @@ public class PropertyservicemanagerBx implements Domain{
 				+ ((bxAddress == null) ? 0 : bxAddress.hashCode());
 		result = prime * result
 				+ ((bxAmount == null) ? 0 : bxAmount.hashCode());
+		result = prime * result + ((bxCode == null) ? 0 : bxCode.hashCode());
 		result = prime * result + ((bxComp == null) ? 0 : bxComp.hashCode());
 		result = prime * result
 				+ ((bxFujian == null) ? 0 : bxFujian.hashCode());
@@ -237,6 +250,11 @@ public class PropertyservicemanagerBx implements Domain{
 			if (other.bxAmount != null)
 				return false;
 		} else if (!bxAmount.equals(other.bxAmount))
+			return false;
+		if (bxCode == null) {
+			if (other.bxCode != null)
+				return false;
+		} else if (!bxCode.equals(other.bxCode))
 			return false;
 		if (bxComp == null) {
 			if (other.bxComp != null)
