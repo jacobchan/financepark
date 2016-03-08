@@ -6,73 +6,48 @@
 <head>
 	<meta charset="UTF-8">
 	<title>物业报修</title>
-	
+	<style>
+	  .ccheng{color:#FF6715}
+    </style>
 </head>
 <body style="background-color:#f4f4f4;">
+
 	<div class="w100">
 		<div class="w1200 clearfix pt30 pb50">
 			<div class="per-center-box clearfix">
 				<%@ include file="/WEB-INF/pages/memberCenter/common/ad_left.jsp"%> 
 				<div class="w1000">
-					<h3 class="per-h3">物业报修列表</h3>
+					<h3 class="per-h3">物业报修</h3>
+					<div class="clearfix mt40">
+					<div class="mt20 gr-txl clearfix lh30">
 					<div class="clearfix">
-						<div class="mt20 gr-txl clearfix lh30">
+							<div class="mt20 gr-txl clearfix lh30">
+							<label class="fl mr20 f16">投诉时间：</label>
+							<input class="bd-input fl" type="text"><span class="fl ml15 mr15">到</span>
+							<input class="bd-input fl" type="text">
+							<div class="inp-box ml20"><input placeholder="投诉单号查询" type="text"><a class="fa fa-search" href=""></a></div>
+							<input value="搜索" class="hhf-submit f14 fr" type="button">
+						</div>
+					
 							<label class="fl mr20 f16">申请时间：</label>
 							<input class="bd-input fl" type="text"><span class="fl ml15 mr15">到</span>
 							<input class="bd-input fl" type="text">
-							<div class="inp-box ml20"><input placeholder="订单号查询" type="text"><a class="fa fa-search" href=""></a></div>
+							<div class="inp-box ml20"><input placeholder="报修号查询" type="text"><a class="fa fa-search" href=""></a></div>
 							<input value="搜索" class="hhf-submit f14 fr" type="button">
 						</div>
 						<table class="gt-table mt20">
-							<colgroup>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col></col>
-							</colgroup>
-							<tbody><tr>
-								<th>订单号</th>
-								<th>申请时间</th>
-								<th>状态</th>
-								<th>联系人</th>
-								<th>联系电话</th>
-								<th>操作</th>
-							</tr>
-							<tr>
-								<td><a href="">123456789</a></td>
-								<td>2016-1-12</td>
-								<td>未受理</td>
-								<td>乔布斯</td>
-								<td>18659786621</td>
-								<td><a href="javascript:;" class="ac-show">取消</a></td>
-							</tr>
-							<tr>
-								<td><a href="">123456789</a></td>
-								<td>2016-1-12</td>
-								<td>已派工</td>
-								<td>乔布斯</td>
-								<td>18659786621</td>
-								<td><a href="javascript:;" class="ac-show">取消</a></td>
-							</tr>
-							<tr>
-								<td><a href="">123456789</a></td>
-								<td>2016-1-12</td>
-								<td>已完工</td>
-								<td>乔布斯</td>
-								<td>18659786621</td>
-								<td><a href="javascript:;">付款</a><span class="f12 ml5 mr5">|</span><a href="">申请重修</a></td>
-							</tr>
-							<tr>
-								<td><a href="">123456789</a></td>
-								<td>2016-1-12</td>
-								<td>已结束</td>
-								<td>乔布斯</td>
-								<td>18659786621</td>
-								<td><a href="javascript:;" class="ac-show">取消</a></td>
-							</tr>
-						</tbody></table>
+                         <tr>
+					     	<td width="111">订单号     </td>
+                         	<td width="111">申请时间  </td>
+                         	<td width="111">派工状态   </td>
+                         	<td width="111">派工人员  </td>
+                         	<td width="111">电话         </td>
+                         	<td width="111">操作         </td>
+                         </tr>
+                           
+                         </table>
+
+                        
 						<div class="fr page-list-a clearfix lh30 mt20 f12">
 							<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
 							<a href="">首</a>
@@ -84,62 +59,60 @@
 							<a href="">Go</a>
 						</div>
 					</div>
-					<!-- <div class="clearfix mt50">
-						<div class="mt20 gr-txl clearfix lh30">
-							<label class="fl mr20 f16">申请时间：</label>
-							<input class="bd-input fl" type="text"><span class="fl ml15 mr15">到</span>
-							<input class="bd-input fl" type="text">
-							<div class="inp-box ml20"><input placeholder="订单号查询" type="text"><a class="fa fa-search" href=""></a></div>
-							<input value="搜索" class="hhf-submit fr" type="button">
-						</div>
-						<table class="gt-table mt20">
-							<colgroup>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col></col>
-							</colgroup>
-							<tbody><tr>
-								<th>订单号</th>
-								<th>申请时间</th>
-								<th>状态</th>
-								<th>联系人</th>
-								<th>联系电话</th>
-								<th>操作</th>
-							</tr>
-							<tr>
-								<td colspan="6">暂无记录</td>
-							</tr>
-						</tbody></table>
-					</div> -->
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	<!--***弹窗 start****************************************-->
-	<div class="bg-tanc">
-		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
-			<a href="javascript:;" class="tc-close"></a>
-			<div class="w60 tc mt40" style="margin-left:20%">
-				<div class="mt20 mb20 f16 lh26">
-					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o"> [ 123456789 ] </span>吗？
-				</div>
-				<p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p>
-				<input value="确定" class="hhf-submit" style="height:36px;" type="submit">
-			</div>
-		</div>
-	</div>
-	<!--***弹窗 end****************************************-->
-	<script type="text/javascript">
-		$(function () {
+	<!--***bottom start****************************************-->
 
-			$(".ac-show").click(function(e){
-				$(".bg-tanc").show();
-			})
-		})
+	<script type="text/javascript">
+ 	function ts(id){				
+		var tsStatus='取消';
+		var tsId=id;	
+		var params = ['tsId='+tsId+'','tsStatus='+tsStatus+''];
+	     $.ajax({
+			url:'/smartPark-web/esb/web/propertyservicemanagerTsManager/updateTsStatus.json',
+
+            data:params.join('&'),
+	 		success:function(result){
+				if(result&&result.record){					
+					alert("已取消");
+					
+					location.reload();
+				}
+			}
+		});
+	} 
+	
+	
+		$(function(){
+			$.ajax({
+				url:'/smartPark-web/esb/web/propertyservicemanagerTsManager/getTsListByLoginUser.json',
+				success:function(result){
+				
+					console.log(result.records);
+					if(result&&result.records){					
+						_parseRecords(result.records);						
+					}
+				}
+			});
+		});
+		//拼接卡号列表
+		function _parseRecords(record){	
+			
+			for(var i=0;i<record.length;i++){
+				var html= "<tr>"+
+					      "<td width='111'>"+record[i].tsId+"</td>"+
+                          "<td width='111'>"+record[i].applicationDate+"</td>"+
+                          "<td width='111'>"+record[i].tsStatus+"</td>"+
+                          "<td width='111'>"+record[i].tsName+"</td>"+
+                          "<td width='111'>"+record[i].tsTelephone+"</td>"+
+                          "<td > <input type='button' value='取消'   onclick='ts("+record[i].tsId+")' />"+ 
+                         
+                          " </tr>";
+				 $(".gt-table").append(html);	
+			}
+		};
 	</script>
 </body>
 <%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 
