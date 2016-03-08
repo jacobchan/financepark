@@ -6,22 +6,23 @@ package com.common.MemberManager.service.impl;
 import java.util.List;
 import java.util.Collection;
 
-import javax.xml.crypto.Data;
+//import javax.xml.crypto.Data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gsoft.framework.security.DefaultLoginFormToken;
-import com.gsoft.framework.security.IAgency;
-import com.gsoft.framework.security.IRealmUserInfo;
-import com.gsoft.framework.security.IRealmUserToken;
-import com.gsoft.framework.security.IUser;
-import com.gsoft.framework.security.IUserAdapter;
-import com.gsoft.framework.security.agt.entity.User;
-import com.gsoft.framework.security.agt.service.UserLoginService;
-import com.gsoft.framework.security.agt.service.UserManager;
 import com.gsoft.framework.core.dataobj.tree.TreeNode;
+//import com.gsoft.framework.security.DefaultLoginFormToken;
+//import com.gsoft.framework.security.IAgency;
+//import com.gsoft.framework.security.IRealmUserInfo;
+//import com.gsoft.framework.security.IRealmUserToken;
+//import com.gsoft.framework.security.IUser;
+//import com.gsoft.framework.security.IUserAdapter;
+//import com.gsoft.framework.security.agt.entity.User;
+//import com.gsoft.framework.security.agt.service.UserLoginService;
+//import com.gsoft.framework.security.agt.service.UserManager;
+//import com.gsoft.framework.core.dataobj.tree.TreeNode;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -29,24 +30,35 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.security.DefaultLoginFormToken;
+import com.gsoft.framework.security.IAgency;
+import com.gsoft.framework.security.IRealmUserInfo;
+import com.gsoft.framework.security.IRealmUserToken;
+import com.gsoft.framework.security.IUser;
+import com.gsoft.framework.security.IUserAdapter;
+import com.gsoft.framework.security.agt.service.UserLoginService;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.PasswordUtils;
 import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.util.StringUtils;
+
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.framework.core.web.menu.IMenu;
-import com.sun.star.setup.OSType;
+//import com.gsoft.framework.core.web.menu.IMenu;
+//import com.sun.star.setup.OSType;
 import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.entity.MemberUserInfo;
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.service.MemberInformationManager;
 
 @Service("memberInformationManager")
 @Transactional
-public class MemberInformationManagerImpl extends BaseManagerImpl implements MemberInformationManager{
+public class MemberInformationManagerImpl extends BaseManagerImpl implements MemberInformationManager
+,UserLoginService<MemberInformation>,IUserAdapter<MemberInformation,DefaultLoginFormToken>{
 	@Autowired
 	private MemberInformationDao memberInformationDao;
-	@Autowired
-	private UserManager userManager;
+//	@Autowired
+//	private UserManager userManager;
     /**
      * 查询列表
      */
@@ -152,22 +164,22 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 			//判断用户密码是否准确
 			if (!passwd.equals(repasswd))
 				throw new BusException("两次输入的密码不一致");
-				User user = new User();
-				user.setLoginName(userName);
-				user.setUserCaption(userName);
-				user.setUserActive("1");
-				user.setPassword(PasswordUtils.md5Password(repasswd));
-				user.setGroup("003");
-				User saveuser = userManager.saveUser(user);
+//				User user = new User();
+//				user.setLoginName(userName);
+//				user.setUserCaption(userName);
+//				user.setUserActive("1");
+//				user.setPassword(PasswordUtils.md5Password(repasswd));
+//				user.setGroup("003");
+//				User saveuser = userManager.saveUser(user);
 			//保存用户同时insert youi_user
-			if(saveuser!=null){
+//			if(saveuser!=null){
 				MemberInformation memberInformation = new MemberInformation();
-				memberInformation.setMemberId(saveuser.getUserId());
+//				memberInformation.setMemberId(saveuser.getUserId());
 				memberInformation.setMemberName(userName);
 				memberInformation.setMemberPassword(PasswordUtils.md5Password(repasswd));
 				memberInformation.setMemberPhoneNumber(mobile);
 				memberInformationDao.save(memberInformation);
-			}
+//			}
 	}else{
 		throw new BusException("该用户已存在!");
 		}
@@ -185,6 +197,60 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		// TODO Auto-generated method stub	
 		String userName=SecurityUtils.getAccount().getLoginName();
 		return memberInformationDao.getObjectByUniqueProperty("memberName", userName);
+	}
+	@Override
+	public List<String> getAccountMenus(MemberInformation member) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<IAgency> getAgencyByParent(String arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public TreeNode getAgencyTree() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<IMenu> getProviderMenus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public IRealmUserInfo getRealmUserInfo(DefaultLoginFormToken token) {
+		// TODO Auto-generated method stub
+		//疑问，token里面存值，是在什么地方存储的？，多种方式登录如何处理，如用邮箱登录，手机登录，用户名登录。
+		//因为2，登录类型是从哪里获取的？
+		String memberName = token.getUsername();
+		MemberInformation member = this.memberInformationDao.getObjectByUniqueProperty("memberName", memberName);
+		member.getPrincipalConfig().put("userId", member.getMemberId());
+		member.getPrincipalConfig().put("loginType", token.getLoginType());
+		return new MemberUserInfo(member);
+	}
+	@Override
+	public IRealmUserInfo getRealmUserInfo(MemberInformation member) {
+		// TODO Auto-generated method stub
+		return new MemberUserInfo(member);
+	}
+	@Override
+	public boolean supports(IRealmUserToken token) {
+		if(token instanceof DefaultLoginFormToken){
+			//只支持带登录类型的登录
+			return  StringUtils.isNotEmpty(((DefaultLoginFormToken) token).getLoginType());
+		}
+		return false;
+	}
+	@Override
+	public boolean supports(IUser member) {
+		// TODO Auto-generated method stub
+		return MemberInformation.class.isAssignableFrom(member.getClass());
+	}
+	@Override
+	public MemberInformation getLoginUser(String arg0) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

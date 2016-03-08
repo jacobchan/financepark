@@ -1,3 +1,9 @@
+/*==============================================================*/
+/* DBMS name:      MySQL 5.0                                    */
+/* Created on:     2016/3/5 14:16:57                            */
+/*==============================================================*/
+
+
 alter table sp_OrderManager_commodityDetail
    drop primary key;
 
@@ -1492,6 +1498,7 @@ create table sp_propertyservicemanager_ts
    TS_NAME_             varchar(32),
    TS_TELEPHONE_        varchar(20),
    TS_STATUS_           varchar(2),
+   TS_TIME_             varchar(20),
    TS_REMARK_           varchar(300),
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
@@ -2043,3 +2050,4 @@ alter table sp_shoppingCar_companyServer add constraint FK_Relationship_78 forei
 
 alter table sp_shoppingCar_group add constraint FK_Relationship_76 foreign key (MEMBER_ID_)
       references sp_member_information (MEMBER_ID_) on delete restrict on update restrict;
+
