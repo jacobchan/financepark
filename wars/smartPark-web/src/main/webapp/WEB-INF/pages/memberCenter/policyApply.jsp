@@ -119,7 +119,6 @@
 		</div>
 	</div>
 	<!--***弹窗 end****************************************-->
-	<script type="text/javascript" src="../js/right.js"></script>
 	<script type="text/javascript">
 		$(function () {
 			$(".ac-see").click(function(){
