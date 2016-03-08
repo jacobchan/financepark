@@ -25,7 +25,7 @@
 	<!-- form-企业行业类型表编辑 -->
 	<youi:form dialog="true" caption="企业行业类型表"
 		id="form_etypeEnterprisetype"
-		action="esb/web/etypeEnterprisetypeManager/saveEtypeEnterprisetype.json">
+		action="esb/web/etypeEnterprisetypeManager/saveEtypeEnterprisetype.json" width="450">
 		<youi:fieldLayout prefix="record" columns="1" labelWidths="120,120">
 			<youi:fieldHidden property="enTypeId" caption="企业类型名称" />
 			<youi:fieldTree simple="false" popup="true" tree="${enetrTree}" property="enTypeId" caption="企业类型"/>
