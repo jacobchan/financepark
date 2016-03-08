@@ -6,20 +6,21 @@
 			<dt>个人中心</dt>
 			<dd  class="active"><a href="memberInformation.html">个人资料</a></dd>
 			<dd><a href="grzx2.html">订单中心</a></dd>
-			<dd><a href="grzx3.html">安全中心</a></dd>
+			<dd><a href="grzx3.html">修改密码</a></dd>
+			<dd><a href="updatepassword.html">修改电话</a></dd>
 			<dd><a href="grzx4.html">消息</a></dd>
 			<dd><a href="addressBook.html">企业通讯录</a></dd>
-			<dd><a href="grzx6.html">一卡通绑定</a></dd>
+			<dd><a href="propertyservicemanagerOcbind.html">一卡通绑定</a></dd>
 			<dd><a href="myAdderss.html">我的地址</a></dd>
 			<dd><a href="myReservation.html">我的预约</a></dd>
 			<dd><a href="policyApply.html">政策申请</a></dd>
 			<dt>物业服务</dt>
 			<dd><a href="propertyManageBx.html">物业报修</a></dd>
-			<dd><a href="propertyManageCos.html">物业投诉</a></dd>
+			<dd><a href="propertycomplaints.html">物业投诉</a></dd>
 			<dd><a href="propertycomplaints.html">物业投诉</a></dd>
 			<dd><a href="propertyManageFk.html">访客登记</a></dd>
 			<dd><a href="propertyManageMoverec.html">搬家放行</a></dd>
-			<dd><a href="grzx12.html">缴费查询</a></dd>
+			<dd><a href="querypayment.html">缴费查询</a></dd>
 			<dd><a href="grzx13.html">一卡通办理</a></dd>
 			<dt>全民营销</dt>
 			<dd><a href="grzx15.html">我的人脉</a></dd>
