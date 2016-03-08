@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.service.MemberInformationManager;
 import com.common.OrderManager.entity.OrdermanagerOrderprojecttypeValue;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.common.OrderManager.service.OrdermanagerOrderprojecttypeValueManager;
@@ -53,6 +55,8 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 	private OrdermanagerOrderprojecttypeValueManager ordermanagerOrderprojecttypeValueManager;
 	@Autowired
 	private PropertyservicemanagerTsManager propertyservicemanagerTsManager;
+	@Autowired
+	private MemberInformationManager memberInformationManager;
     /**
      * 查询列表
      */
@@ -209,6 +213,26 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
     		}
     	}
     	propertyservicemanagerBxDao.save(bx);
+	}
+    
+    /**
+	 * 根据当前登录用户获取报修单
+	 */
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId")})
+	public List<PropertyservicemanagerBx> getBxListforpage()
+			throws BusException {
+		//先模拟一个登陆用户，之后会修改
+    	MemberInformation member=memberInformationManager.getMemberInformationByLoginUser(null);
+    	//获取当前用户参加活动的list
+    	Collection<Condition> condition = new ArrayList<Condition>();
+    	condition.add(ConditionUtils.getCondition("createUser", Condition.EQUALS, member.getMemberId()));
+    	 List<PropertyservicemanagerBx> list = propertyservicemanagerBxDao.commonQuery(condition, null);
+    	 if(list.size()>0){
+    		 return list;
+    	 }else{
+    		 return null;
+    	 }
+		
 	}
 
     

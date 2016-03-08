@@ -168,9 +168,17 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
      */
     @EsbServiceMapping
 	public List<PropertyservicemanagerOc> getPropertyservicemanagerOcListByLoginUser() throws BusException {
-    	//先模拟一个登陆用户memberId=1，先在数据库插入memberId=1
-    	String m="1"; 
-    	return propertyservicemanagerOcDao.getList("memberId", m); 
+    	//先模拟一个登陆用户，之后会修改
+    	MemberInformation member=memberInformationManager.getMemberInformationByLoginUser(null);
+    	//获取当前用户参加活动的list
+    	Collection<Condition> condition = new ArrayList<Condition>();
+    	condition.add(ConditionUtils.getCondition("memberId", Condition.EQUALS, member.getMemberId()));
+    	List<PropertyservicemanagerOc> list = propertyservicemanagerOcDao.commonQuery(condition, null);
+    	if(list.size()>0){
+    		return list;
+    	}else{
+    		return null;
+    	}
 	}
     /**
      * 修改一卡通绑定状态
