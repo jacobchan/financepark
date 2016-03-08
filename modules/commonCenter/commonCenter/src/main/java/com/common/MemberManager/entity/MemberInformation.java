@@ -3,12 +3,18 @@
  */
 package com.common.MemberManager.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 import org.hibernate.validator.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
+import com.gsoft.framework.security.IUser;
+import com.gsoft.framework.security.IdUser;
+import com.gsoft.framework.security.PrincipalConfig;
 /**
  * 实体: -会员信息表
  * @author
@@ -17,7 +23,7 @@ import com.gsoft.framework.core.dataobj.Domain;
  */
 @Entity
 @Table(name = "sp_member_information")
-public class MemberInformation implements Domain{
+public class MemberInformation implements Domain,IdUser, IUser,IMemberInfomation{
 	
 	private static final long serialVersionUID = 2177240078237624499L;
 	
@@ -76,6 +82,15 @@ public class MemberInformation implements Domain{
 	@Column(name = "MEMBER_NICKNAME_")
 	@Length(max=32)
 	private String memberNickname;//昵称
+	
+	@Transient
+	private String loginType;//非数据库映射属性
+	
+	@Transient
+	private List<String> roleIds = new ArrayList<String>();//非数据库映射属性
+	
+	@Transient
+	private PrincipalConfig principalConfig = new PrincipalConfig();
 	
 	public String getMemberBirthdate(){
 		return this.memberBirthdate;
@@ -174,6 +189,10 @@ public class MemberInformation implements Domain{
 	
 	public void setMemberNickname(String memberNickname){
 		this.memberNickname = memberNickname;
+	}
+	
+	public void setRoleIds(List<String> roleIds) {
+		this.roleIds = roleIds;
 	}
 	
 	
@@ -283,5 +302,46 @@ public class MemberInformation implements Domain{
 	
 	public String toString(){
 		return super.toString();
+	}
+
+	@Override
+	public PrincipalConfig getPrincipalConfig() {
+		// TODO Auto-generated method stub
+		return principalConfig;
+	}
+
+	@Override
+	public String getLoginName() {
+		// TODO Auto-generated method stub
+		return this.memberName;
+	}
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return this.memberPassword;
+	}
+
+	@Override
+	public List<String> roleIds() {
+		// TODO Auto-generated method stub
+		return roleIds;
+	}
+	
+	public void setLoginType(String loginType) {
+		this.loginType = loginType;
+	}
+	
+	@Override
+	public String getLoginType()
+	{
+		return this.loginType;
+	}
+	
+	@Override
+	@Transient
+	public String getUserId() {
+		// TODO Auto-generated method stub
+		return this.memberId;
 	}
 }

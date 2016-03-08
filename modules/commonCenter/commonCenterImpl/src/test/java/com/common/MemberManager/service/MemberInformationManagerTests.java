@@ -24,7 +24,7 @@ public class MemberInformationManagerTests extends AbstractJUnit4SpringContextTe
 	
 	@Test
 	public void saveReister(){
-		this.memberInformationManager.saveReister("Jack", "123456", "123456", "18062038519");
+		this.memberInformationManager.saveReister("Lisa", "123456", "123456", "18062038510");
 		System.out.println("OK");
 	}
 }

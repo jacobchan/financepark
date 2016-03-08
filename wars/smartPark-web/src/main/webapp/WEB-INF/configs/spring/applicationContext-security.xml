@@ -28,7 +28,7 @@
 	</bean>
 	
 	<!-- 会员页面过滤器 -->
-	<bean id="authcmember" class="com.gsoft.member.base.security.MemberFormAuthenticationFilter">
+	<bean id="authcmember" class="com.common.MemberManager.security.MemberFormAuthenticationFilter">
 		<!-- 启用校验码控制 -->
 		<property name="vcodeCheck" value="false"></property>
 		<property name="authParam" value="projectId"></property>
@@ -50,7 +50,7 @@
 		<property name="securityManager" ref="securityManager" />
 		<property name="filters">
 			<map>
-				<!-- <entry key="wxOAuth" value-ref="wxOAuth"/> -->
+				<entry key="authcmember" value-ref="authcmember"/>
 				<entry key="authc" value-ref="authc"/>
 			</map>
 		</property>
@@ -66,7 +66,6 @@
 				/portal/** = anon
 				/index.html = authc
 				/page/** = authc
-				/memberCenter/**=authc
 				/member/*/logout.html=anon
 				/member/**=authcmember
 	        </value>

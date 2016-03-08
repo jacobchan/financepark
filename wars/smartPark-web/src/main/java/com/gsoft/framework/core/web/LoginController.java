@@ -125,19 +125,20 @@ public class LoginController {
 		//
 		AccountPrincipal account = SecurityUtils.getAccount();
 		
+		
 		if(account!=null){
 			//
-			if(account.roleIds()!=null&&account.roleIds().contains("ROLE_OPER")){
-				//用户登录
-				return new ModelAndView("redirect:member/portal/index.html");
+			if(account.getPrincipalConfig().containsKey("loginType")){
+				//根据loginType跳转
+				return new ModelAndView("redirect:member/"+account.getPrincipalConfig().get("loginType")+"/index.html");
 //				return new ModelAndView("redirect:memberCenter/memberInformation.html");
 //				return new ModelAndView("redirect:cms/account/index/"+account.getLoginName()+".html");
-			}else if(account.roleIds()!=null&&account.roleIds().contains("ROLE_SUBSCRIPTION")){
-				//捧场用户登录
-				return new ModelAndView("redirect:member/vtui/index.html#p:page/vtui/welcome.html");
-			}else if(account.roleIds()!=null&&account.roleIds().contains("ROLE_USER")){
-				//移动手机会员用户登录
-				return new ModelAndView("redirect:cms/account/index/"+account.getLoginName()+".html");
+//			}else if(account.roleIds()!=null&&account.roleIds().contains("ROLE_SUBSCRIPTION")){
+//				//捧场用户登录
+//				return new ModelAndView("redirect:member/vtui/index.html#p:page/vtui/welcome.html");
+//			}else if(account.roleIds()!=null&&account.roleIds().contains("ROLE_USER")){
+//				//移动手机会员用户登录
+//				return new ModelAndView("redirect:cms/account/index/"+account.getLoginName()+".html");
 			}else{
 				return new ModelAndView("index");
 			}
