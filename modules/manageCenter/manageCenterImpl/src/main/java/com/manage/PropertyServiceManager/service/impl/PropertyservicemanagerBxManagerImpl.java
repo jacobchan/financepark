@@ -87,7 +87,7 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+    @EsbServiceMapping(pubConditions={@PubCondition(property="createUser",pubProperty="userId")})
     public PropertyservicemanagerBx savePropertyservicemanagerBx(PropertyservicemanagerBx o) throws BusException{
 //    	String propertyservicemanagerBxId = o.getPropertyservicemanagerBxId();
 //    	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerBxId);
@@ -151,6 +151,7 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
     		bx.setBxAmount(o.getBxAmount());
     		return propertyservicemanagerBxDao.save(bx);
     	}else{
+    		o.setBxCode(BizCodeUtil.getInstance().getBizCodeDate("BX"));
     		return propertyservicemanagerBxDao.save(o);
     	}
     }
