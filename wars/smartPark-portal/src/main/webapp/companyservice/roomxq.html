@@ -56,7 +56,7 @@
             <div class="colorblock" style="background:#C0C0C0"></div><span class="vm">&nbsp;已过期</span>
         </div>
     	<table id="data_timer">
-        	  <tr>
+        	 <tr>
             	<td>8:00-9:00</td>
                 <td>8:00-9:00</td>
                 <td>8:00-9:00</td>
@@ -262,21 +262,19 @@
 				jsonp:'data:jsonp',
 				dataType:'jsonp',
 				success:function(results){
-				//	console.log(results);
 					if(results&&results.records){
 					//	alert("1122");
 					//var string =results.records.toJSONString(); 
-					console.log(results.records);
-					//	_parseRecords(results.records);
+				//	_parseRecords(results.records);
 					}
 				}
 			});
 			
 		});
 		//拼接活动列表
-		function _parseRecords(record){console.log(record);
+		function _parseRecords(record){
 			for(var i=0;i<record.length;i++){
-				var html="<tr><td>"+record[i].enteringTime+"</td>";
+				var html="<tr><td>"+record[i].resoTime+"</td>";
 				 $("#data_timer").append(html);
 			}
 		};
