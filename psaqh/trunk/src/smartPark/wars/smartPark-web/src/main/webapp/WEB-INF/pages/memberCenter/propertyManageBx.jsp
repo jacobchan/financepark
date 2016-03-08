@@ -22,10 +22,10 @@
 					<div class="mt20 gr-txl clearfix lh30">
 					<div class="clearfix">
 							<div class="mt20 gr-txl clearfix lh30">
-							<label class="fl mr20 f16">投诉时间：</label>
+							<label class="fl mr20 f16">报修时间：</label>
 							<input class="bd-input fl" type="text"><span class="fl ml15 mr15">到</span>
 							<input class="bd-input fl" type="text">
-							<div class="inp-box ml20"><input placeholder="投诉单号查询" type="text"><a class="fa fa-search" href=""></a></div>
+							<div class="inp-box ml20"><input placeholder="报修单号查询" type="text"><a class="fa fa-search" href=""></a></div>
 							<input value="搜索" class="hhf-submit f14 fr" type="button">
 						</div>
 					
