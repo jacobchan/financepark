@@ -12,6 +12,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.common.MemberManager.entity.MemberInformation;
 
@@ -80,5 +81,11 @@ public interface MemberInformationManager extends BaseManager{
 	 * @return
 	 * @throws BusException
 	 */
-	 public MemberInformation getMemberInformationByLoginUser(MemberInformation o) throws BusException;
+	
+	 	
+	 	public List<MemberInformation> getMemberInformation() throws BusException;
+	       public MemberInformation updatePassword(
+	       		String memberId,
+	       		 String memberPassword
+	       		) throws BusException;
 }
