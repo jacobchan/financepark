@@ -77,5 +77,9 @@ public interface PropertyservicemanagerFkcodeManager extends BaseManager{
 	 * @param 标识符，00表示同意申请，01表示拒绝申请
 	 */
 	//public void updateFkcode(String fkcodeId,String code) ;
-	
+	/**
+	  * 根据登录用户获取访客申请
+	 * @return
+	 */
+	public List<PropertyservicemanagerFkcode> getFkcodeListforpage() throws BusException; 
 }

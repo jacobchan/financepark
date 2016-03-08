@@ -71,5 +71,8 @@ public interface PropertyservicemanagerBxManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public void upBxbyId(String id,String code) throws BusException;
-	
+	/**
+	 * 根据当前登录用户获取报修单
+	 */
+	public List<PropertyservicemanagerBx> getBxListforpage() throws BusException;
 }

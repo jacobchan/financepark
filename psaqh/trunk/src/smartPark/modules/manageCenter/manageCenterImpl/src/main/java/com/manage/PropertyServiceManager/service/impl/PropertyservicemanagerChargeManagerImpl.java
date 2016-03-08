@@ -3,6 +3,7 @@
  */
 package com.manage.PropertyServiceManager.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.service.MemberInformationManager;
 import com.common.OrderManager.dao.OrdermanagerUserorderDao;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.gsoft.framework.core.exception.BusException;
@@ -18,6 +21,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
@@ -35,7 +39,8 @@ public class PropertyservicemanagerChargeManagerImpl extends BaseManagerImpl imp
 	private OrdermanagerUserorderDao ordermanagerUserorderDao;
 	@Autowired
 	private PropertyservicemanagerSfproManager propertyservicemanagerSfproManager;
-	
+	@Autowired
+	private MemberInformationManager memberInformationManager;
     /**
      * 查询列表
      */
@@ -120,6 +125,26 @@ public class PropertyservicemanagerChargeManagerImpl extends BaseManagerImpl imp
     
     public boolean exsitPropertyservicemanagerCharge(String propertyName,Object value) throws BusException{
 		return propertyservicemanagerChargeDao.exists(propertyName,value);
+	}
+    
+    /**
+	 * 获取当前登录用户获取缴费记录
+	 * @return
+	 * @throws BusException
+	 */
+    @EsbServiceMapping
+	public List<PropertyservicemanagerCharge> getChargeListforpage() throws BusException{
+		//先模拟一个登陆用户，之后会修改
+    	MemberInformation member=memberInformationManager.getMemberInformationByLoginUser(null);
+    	//获取当前用户参加活动的list
+    	Collection<Condition> condition = new ArrayList<Condition>();
+    	condition.add(ConditionUtils.getCondition("createUser", Condition.EQUALS, member.getMemberId()));
+    	List<PropertyservicemanagerCharge> list = propertyservicemanagerChargeDao.commonQuery(condition, null);
+    	if(list.size()>0){
+    		return list;
+    	}else{
+    		return null;
+    	}
 	}
 
 }

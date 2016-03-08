@@ -62,4 +62,11 @@ public interface PropertyservicemanagerChargeManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitPropertyservicemanagerCharge(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 获取当前登录用户获取缴费记录
+	 * @return
+	 * @throws BusException
+	 */
+	public List<PropertyservicemanagerCharge> getChargeListforpage() throws BusException;
 }

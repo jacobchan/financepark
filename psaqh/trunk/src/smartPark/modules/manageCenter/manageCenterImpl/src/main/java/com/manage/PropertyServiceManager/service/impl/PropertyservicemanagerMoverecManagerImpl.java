@@ -3,6 +3,7 @@
  */
 package com.manage.PropertyServiceManager.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.service.MemberInformationManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -17,6 +20,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
@@ -34,7 +38,8 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
 	private PropertyservicemanagerMoverecDao propertyservicemanagerMoverecDao;
 	@Autowired
 	private PropertyservicemanagerFxtdcManager propertyservicemanagerFxtdcManager ;
-	
+	@Autowired
+	private MemberInformationManager memberInformationManager;
     /**
      * 查询列表
      */
@@ -147,5 +152,22 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
 	    	}
 		}
 
-    
+	/**
+	 * 
+	 * 根据当前登录获取搬家放行
+	 */
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId")})
+	public List<PropertyservicemanagerMoverec> getMovListforpage() throws BusException{
+		//先模拟一个登陆用户，之后会修改
+    	MemberInformation member=memberInformationManager.getMemberInformationByLoginUser(null);
+    	//获取当前用户参加活动的list
+    	Collection<Condition> condition = new ArrayList<Condition>();
+    	condition.add(ConditionUtils.getCondition("member.memberId", Condition.EQUALS, member.getMemberId()));
+    	List<PropertyservicemanagerMoverec> list = propertyservicemanagerMoverecDao.commonQuery(condition, null);
+    	if(list.size()>0){
+    		return list;
+    	}else{
+    		return null;
+    	}
+	}
 }
