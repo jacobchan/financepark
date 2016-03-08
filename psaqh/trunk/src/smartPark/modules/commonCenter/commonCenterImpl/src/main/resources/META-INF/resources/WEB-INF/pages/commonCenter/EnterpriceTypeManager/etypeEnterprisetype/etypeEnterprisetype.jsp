@@ -1,44 +1,61 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
-	<youi:grid id="grid_etypeEnterprisetype" idKeys="enTypeId"
-		caption="企业行业类型表列表" panel="false"
-		src="esb/web/etypeEnterprisetypeManager/getPagerEtypeEnterprisetypes.json"
-		dataFormId="form_etypeEnterprisetype"
-		editSrc="esb/web/etypeEnterprisetypeManager/getEtypeEnterprisetype.json"
-		edit="NOT" remove="NOT" showCheckbox="true"
-		removeSrc="esb/web/etypeEnterprisetypeManager/removeEtypeEnterprisetype.json">
-		<youi:fieldLayout labelWidths="120,120">
-			<youi:fieldTree simple="false" popup="true" tree="${enetrTree}" property="enTypeId" caption="企业类型"/>
-			<youi:fieldText property="enTypeName" caption="企业类型名称" />
-		</youi:fieldLayout>
-		<youi:gridCol property="etypeEnterprisetype.enTypeName" caption="上级" width="300" />
-		<youi:gridCol property="enTypeName" caption="企业类型名称" width="280" />
+	<youi:subpage caption="新增类别" height="100" width="780"
+		subpageId="addType"
+		src="page/commonCenter.EnterpriceTypeManager.etypeEnterprisetype/addEnterprisetype.html?etypeEnterprisetype.enTypeId={pruenTypeId}"
+		formAction="esb/web/etypeEnterprisetypeManager/saveEtypeEnterprisetype.json">
+	</youi:subpage>
 
-		<youi:gridCol width="60" fixed="true" property="button" type="button"
-			caption="操作">
-			<youi:button name="edit" caption="修改" />
-			<youi:button name="remove" caption="删除" />
-		</youi:gridCol>
-	</youi:grid>
+	<youi:tree styleClass="page-height col-sm-2 youi-bgcolor"
+		id="tree_etypeEnterprisetype" dataFormId="form_etypeEnterprisetype"
+		idAttr="enTypeId" pidAttr="etypeEnterprisetype.enTypeId"
+		textAttr="enTypeName" tree="${enetrTree}"></youi:tree>
 
-	<!-- form-企业行业类型表编辑 -->
-	<youi:form dialog="true" caption="企业行业类型表"
-		id="form_etypeEnterprisetype"
-		action="esb/web/etypeEnterprisetypeManager/saveEtypeEnterprisetype.json" width="450">
-		<youi:fieldLayout prefix="record" columns="1" labelWidths="120,120">
-			<youi:fieldHidden property="enTypeId" caption="企业类型名称" />
-			<youi:fieldTree simple="false" popup="true" tree="${enetrTree}" property="enTypeId" caption="企业类型"/>
-			<youi:fieldText property="enTypeName" caption="企业类型名称" />
+	<youi:form styleClass="page-height col-sm-10" caption="企业行业类别"
+		id="form_type" panel="false"
+		action="esb/web/etypeEnterprisetypeManager/saveEtypeEnterprisetype.json"
+		findAction="esb/web/etypeEnterprisetypeManager/getEtypeEnterprisetype.json"
+		idKeys="genreId" submit="保存类型" reset="NOT"
+		removeAction="esb/web/etypeEnterprisetypeManager/removeEtypeEnterprisetype.json">
+		<youi:fieldLayout prefix="record">
+			<youi:fieldHidden styleClass="field-parent"
+				property="etypeEnterprisetype.enTypeId" />
+			<youi:fieldHidden property="enTypeId" caption="类别ID" />
+			<youi:fieldText width="120" styleClass="autoAlign"
+				property="enTypeName" caption="类别名称" notNull="true" />
+			<youi:fieldLabel styleClass="autoAlign"
+				property="etypeEnterprisetype.genreName" caption="上级类别" />
 		</youi:fieldLayout>
+		<youi:button icon="add" name="addType" caption="新增类型" />
 	</youi:form>
 
+	<youi:func name="func_form_addType">
+		var enTypeName = $elem('form_type',pageId).form('fieldValue','enTypeName');
+		var enTypeId = $elem('form_type',pageId).form('fieldValue','enTypeId');
+		var typeTree = $elem('tree_etypeEnterprisetype',pageId);
+		var selectedNode = typeTree.tree('getSelected');
+		if(selectedNode&&selectedNode.hasClass('root')){
+			enTypeId='';
+		}
+		$elem('subpage_addType',pageId).subpage('open',{pruenTypeId:enTypeId},null,{pruenTypeId:enTypeId});
+	</youi:func>
+
 	<!--**********************************页面函数Start********************************-->
-	<youi:func name="form_etypeEnterprisetype_afterSubmit">
-		var etypeEnterprisetype = $elem('form_etypeEnterprisetype',pageId);
-		etypeEnterprisetype.form('reset');
-		etypeEnterprisetype.form('close');
-		$elem('grid_etypeEnterprisetype',pageId).grid('pReload');
+	<youi:func name="subpage_addType_afterSubmit" params="results">
+		if(results&&results.record){
+			//增加树节点
+			var enetrTree = $elem('tree_etypeEnterprisetype',pageId),
+				record = results.record,
+				relTreeNode;
+			if(!record.etypeEnterprisetype){
+				relTreeNode = genreTree.find('li.treeNode:first');
+			}else{
+				relTreeNode = genreTree.find('li.treeNode#'+record.etypeEnterprisetype.enTypeId);
+			}
+			enetrTree.tree('addNode',relTreeNode,record.enTypeId,record.enTypeName);
+			$(this).form('close');
+		}
 	</youi:func>
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
