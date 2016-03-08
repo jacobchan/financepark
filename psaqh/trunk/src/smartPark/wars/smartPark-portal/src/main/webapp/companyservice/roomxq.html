@@ -49,15 +49,15 @@
 </div><!--content***************  end-->
 
 <div class="w1200 pt40 pb40"><!--选择-->
-	<div id='calendar'>
+ 	<div id='calendar'>
     	<div class="absolute_div">
             <div class="colorblock" style="background:#A2354A"></div><span class="vm">&nbsp;已预约（不可选）</span>
             <div class="colorblock" style="background:#4AA2D4"></div><span class="vm">&nbsp;可预约</span>
             <div class="colorblock" style="background:#C0C0C0"></div><span class="vm">&nbsp;已过期</span>
         </div>
     	<table id="data_timer">
-        	<tr>
-            	<td>8:00-9:00</td>
+        	 <tr>
+            	<td id=''>8:00-9:00</td>
                 <td>8:00-9:00</td>
                 <td>8:00-9:00</td>
                 <td>8:00-9:00</td>
@@ -104,47 +104,47 @@
             <tr>
             	<td>13:00-14:00</td>
                 <td>13:00-14:00</td>
-                <td>13:00-14:00</td>
-                <td>13:00-14:00</td>
-                <td>13:00-14:00</td>
-                <td>13:00-14:00</td>
-                <td>13:00-14:00</td>
+                <td class="cp_info">13:00-14:00</td>
+                <td class="cp_info">13:00-14:00</td>
+                <td class="cp_info">13:00-14:00</td>
+                <td class="cp_info">13:00-14:00</td>
+                <td class="cp_info">13:00-14:00</td>
             </tr>
             <tr>
-            	<td>14:00-15:00</td>
-                <td>14:00-15:00</td>
-                <td>14:00-15:00</td>
-                <td>14:00-15:00</td>
-                <td>14:00-15:00</td>
-                <td>14:00-15:00</td>
-                <td>14:00-15:00</td>
+            	<td class="cp_info">14:00-15:00</td>
+                <td class="cp_info">14:00-15:00</td>
+                <td class="cp_info">14:00-15:00</td>
+                <td class="cp_info">14:00-15:00</td>
+                <td class="cp_info">14:00-15:00</td>
+                <td class="cp_info">14:00-15:00</td>
+                <td class="cp_info">14:00-15:00</td>
             </tr>
             <tr>
-            	<td>15:00-16:00</td>
-                <td>15:00-16:00</td>
-                <td>15:00-16:00</td>
-                <td>15:00-16:00</td>
-                <td>15:00-16:00</td>
-                <td>15:00-16:00</td>
-                <td>15:00-16:00</td>
+            	<td class="cp_info">15:00-16:00</td>
+                <td class="cp_info">15:00-16:00</td>
+                <td class="cp_info">15:00-16:00</td>
+                <td class="cp_info">15:00-16:00</td>
+                <td class="cp_info">15:00-16:00</td>
+                <td class="cp_info">15:00-16:00</td>
+                <td class="cp_info">15:00-16:00</td>
             </tr>
             <tr>
-            	<td>16:00-17:00</td>
-                <td>16:00-17:00</td>
-                <td>16:00-17:00</td>
-                <td>16:00-17:00</td>
-                <td>16:00-17:00</td>
-                <td>16:00-17:00</td>
-                <td>16:00-17:00</td>
+            	<td class="cp_info">16:00-17:00</td>
+                <td class="cp_info">16:00-17:00</td>
+                <td class="cp_info">16:00-17:00</td>
+                <td class="cp_info">16:00-17:00</td>
+                <td class="cp_info">16:00-17:00</td>
+                <td class="cp_info">16:00-17:00</td>
+                <td class="cp_info">16:00-17:00</td>
             </tr>
             <tr>
-            	<td>17:00-18:00</td>
-                <td>17:00-18:00</td>
-                <td>17:00-18:00</td>
-                <td>17:00-18:00</td>
-                <td>17:00-18:00</td>
-                <td>17:00-18:00</td>
-                <td>17:00-18:00</td>
+            	<td class="cp_info">17:00-18:00</td>
+                <td class="cp_info">17:00-18:00</td>
+                <td class="cp_info">17:00-18:00</td>
+                <td class="cp_info">17:00-18:00</td>
+                <td class="cp_info">17:00-18:00</td>
+                <td class="cp_info">17:00-18:00</td>
+                <td class="cp_info">17:00-18:00</td>
             </tr>
         </table>
         <div class="tc mt50" id="commit">
@@ -152,7 +152,7 @@
             <div class="btn-zz">立即支付</div>
             <div class="cc mt20">*请注意，只能选择连续的时间段</div>
         </div>
-    </div>
+    </div> 
 </div><!--content***************  end-->
 </div>    
     
@@ -170,11 +170,11 @@
             	<div>
                     <div class="inline_b">
                         <label><span class="cc vm">*</span>&nbsp;联系人</label>
-                        <input type="text"/>
+                        <input type="text" id="enteringName" name="enteringName"/>
                     </div>
                     <div class="inline_b ml40">
                         <label><span class="cc vm">*</span>&nbsp;联系电话</label>
-                        <input type="text"/>
+                        <input type="text" id="enteringTelephone" name="enteringTelephone"/>
                     </div>
                 </div>
                 <div class="mt25">
@@ -252,5 +252,63 @@
 		});
 	})
 </script>
+<script type="text/javascript">
+		$(function(){
+			
+			var serviceURL = "http://localhost:8088/smartPark-web/esb/web/publicutilitiesmanagerResoManager/getPagerPublicutilitiesmanagerResos.json";
+			//公共方法
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(results){
+				//	console.log(results);
+					if(results&&results.records){
+					//	alert("1122");
+					//var string =results.records.toJSONString(); 
+					console.log(results.records);
+					//	_parseRecords();
+					}
+				}
+			});
+			
+		});
+		//拼接活动列表
+		function _parseRecords(record){console.log(record);
+			for(var i=0;i<record.length;i++){
+				var html="<tr><td>"+record[i].enteringTime+"</td>";
+				 $("#data_timer").append(html);
+			}
+		};
+	</script>
+
+<script type="text/javascript">
+		
+			$('.btn-cheng').click(function(){
+				
+				var params = ['enteringName='+$("#enteringName").val(),'enteringTelephone='+$("#enteringTelephone").val(),'propertyservicemanagerEntering.enteringId=402809cb53503f3b0153504068040001'];
+				alert(params);
+				var serviceURL = "http://localhost:8088/smartPark-web/esb/web/propertyservicemanagerEntrecManager/savePropertyservicemanagerEntrec.json";
+				
+				
+				
+				//公共方法
+				$.youi.ajaxUtils.ajax({
+					//url:'http://192.168.80.1:8088/gsoft-web/esb/web/userManager/getPagerUsers.json',
+					//url:'http://localhost:9088/jsonp/data.jsp?data:file=users.json',
+					url:serviceURL,
+					data:params.join('&'),
+/* 					url:this.options.jsonpSrc, */
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(results){
+						if(results&&results.records){
+							that._parseRecords(results.records);
+							alert("ok");
+						}
+					}
+				});
+			});
+	</script>
 </body>
 </html>
