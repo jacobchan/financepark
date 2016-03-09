@@ -85,6 +85,18 @@
 	</bean>
 			
 <!-- 	<jee:jndi-lookup id="dataSource" jndi-name="mon"/> -->
+
+	<bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>file:appconf/config-*.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <property name="properties" ref="configProperties" />
+    </bean>
 	
  	<bean id="sessionFactory"
 		class="com.gsoft.framework.context.hibernate.ModuleAnnotationSessionFactoryBean"
