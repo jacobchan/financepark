@@ -5,9 +5,11 @@ package com.manage.PropertyServiceManager.service.impl;
 
 import java.util.List;
 import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -16,6 +18,7 @@ import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
+import com.gsoft.utils.HttpSenderMsg;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerCosDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerCosManager;
@@ -73,6 +76,11 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
     	if("".equals(o.getCosTime()) || null==o.getCosTime()){
     		o.setCosTime(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
     	}
+    	try {
+			HttpSenderMsg.sendMsg(o.getCosTelephone(), "您提交的投诉："+o.getCosCode()+"待物业管理员受理中，请及时关注受理状态！");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     	return propertyservicemanagerCosDao.save(o);
     }
     
@@ -85,6 +93,11 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
     	cos.setBackrecord(o.getBackrecord());
     	cos.setBackcode(BizCodeUtil.getInstance().getBizCodeDate("WYHF"));
     	cos.setBacktime(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
+    	try {
+			HttpSenderMsg.sendMsg(cos.getCosTelephone(), "您的投诉："+cos.getCosCode()+"回访信息为："+o.getBackrecord()+"！");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     	return propertyservicemanagerCosDao.save(cos);
     }
 
