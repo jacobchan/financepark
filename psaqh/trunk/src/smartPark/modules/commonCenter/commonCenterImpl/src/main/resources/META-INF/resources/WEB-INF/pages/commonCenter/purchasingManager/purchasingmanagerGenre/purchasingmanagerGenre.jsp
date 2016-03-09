@@ -15,7 +15,7 @@
 					iteratorSrc="esb/web/purchasingmanagerGenreManager/getSubPurchasingmanagerGenreList.json"></youi:tree> --%>
 					
 	<youi:tree styleClass="page-height col-sm-2 youi-bgcolor" id="tree_genre" dataFormId="form_genre" idAttr="genreId"
-					pidAttr="purchasingmanagerGenre.genreName" textAttr="genreName" tree="${genreTree}"></youi:tree>
+					pidAttr="purchasingmanagerGenre.genreId" textAttr="genreName" tree="${genreTree}"></youi:tree>
 	
 	<youi:form styleClass="page-height col-sm-10" caption="编辑商品类别" id="form_genre" panel="false"
 		action="esb/web/purchasingmanagerGenreManager/savePurchasingmanagerGenre.json" findAction="esb/web/purchasingmanagerGenreManager/getPurchasingmanagerGenre.json"
