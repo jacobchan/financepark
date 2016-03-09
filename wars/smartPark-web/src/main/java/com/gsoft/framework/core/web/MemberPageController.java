@@ -77,7 +77,7 @@ public class MemberPageController {
 		}*/
 		ModelAndView model = new ModelAndView();
 		model.setViewName(/*pageModule+"/"+*/pagePath);
-		model.addObject("account", account);
+		model.addObject("user", account);
 		model.addObject("pagePath", pagePath);
 		return model;
 	}
