@@ -13,10 +13,10 @@
 		textAttr="enTypeName" tree="${enetrTree}"></youi:tree>
 
 	<youi:form styleClass="page-height col-sm-10" caption="企业行业类别"
-		id="form_type" panel="false"
+		id="form_etypeEnterprisetype" panel="false"
 		action="esb/web/etypeEnterprisetypeManager/saveEtypeEnterprisetype.json"
 		findAction="esb/web/etypeEnterprisetypeManager/getEtypeEnterprisetype.json"
-		idKeys="genreId" submit="保存类型" reset="NOT"
+		idKeys="enTypeId" submit="保存类型" reset="NOT"
 		removeAction="esb/web/etypeEnterprisetypeManager/removeEtypeEnterprisetype.json">
 		<youi:fieldLayout prefix="record">
 			<youi:fieldHidden styleClass="field-parent"
@@ -31,8 +31,8 @@
 	</youi:form>
 
 	<youi:func name="func_form_addType">
-		var enTypeName = $elem('form_type',pageId).form('fieldValue','enTypeName');
-		var enTypeId = $elem('form_type',pageId).form('fieldValue','enTypeId');
+		var enTypeName = $elem('form_etypeEnterprisetype',pageId).form('fieldValue','enTypeName');
+		var enTypeId = $elem('form_etypeEnterprisetype',pageId).form('fieldValue','enTypeId');
 		var typeTree = $elem('tree_etypeEnterprisetype',pageId);
 		var selectedNode = typeTree.tree('getSelected');
 		if(selectedNode&&selectedNode.hasClass('root')){
@@ -49,9 +49,9 @@
 				record = results.record,
 				relTreeNode;
 			if(!record.etypeEnterprisetype){
-				relTreeNode = genreTree.find('li.treeNode:first');
+				relTreeNode = enetrTree.find('li.treeNode:first');
 			}else{
-				relTreeNode = genreTree.find('li.treeNode#'+record.etypeEnterprisetype.enTypeId);
+				relTreeNode = enetrTree.find('li.treeNode#'+record.etypeEnterprisetype.enTypeId);
 			}
 			enetrTree.tree('addNode',relTreeNode,record.enTypeId,record.enTypeName);
 			$(this).form('close');
