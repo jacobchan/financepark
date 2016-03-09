@@ -1,0 +1,71 @@
+.select-files{
+	background:#A3AE23;
+	position:absolute;
+	padding:0px 0px 5px 0px;
+	left:65%;
+}
+.swf-fileItem>.title>div>a{
+	display:block;
+	background-color:#FFCC00;
+	border-radius:6px 6px 0px 0px;
+}
+.swf-fileItem>.title{
+	text-align:center;
+	margin-top:0px;
+}
+.swf-fileItem{
+	width:100px;
+	display：inline-block;
+	margin:5px;
+	border-radius:6px;
+	position:relative;
+}
+.swfFileList{
+	list-style:none;
+	margin:0px;
+}
+.swf-fileItem>.title>.close{
+	position:absolute;
+	top:0px;
+	right:4px;
+}
+.swf-fileItem>.body{
+	list-style:none;
+	position:relative;
+	background:#FFFF99;
+}
+.swf-fileItem>.body>.content{
+	height:50px;
+	text-align:center;
+	line-height:50px;
+	overflow:hidden;
+}
+.swf-fileItem>.body>.content img{
+	top:0px;
+	height:auto;
+	max-width:100%;
+	vertical-align:middle;
+	border:0;
+}
+.swf-fileItem>.title, .swf-fileItem>.footer{
+	text-align:center;
+	margin-top:0px;
+}
+.swf-fileItem>.footer>.file-type-jpg, .swf-fileItem>.footer>.file-type-jpeg{
+	background-color:#CCFF00;
+}
+.swf-fileItem>.footer>div{
+	font-family:'黑体';
+	font-size:10pt;
+	font-weight:bold;
+	border-radius:0px 0px 6px 6px;
+}
+
+
+
+
+
+
+
+
+
