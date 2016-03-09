@@ -85,7 +85,7 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
     	cos.setBackrecord(o.getBackrecord());
     	cos.setBackcode(BizCodeUtil.getInstance().getBizCodeDate("WYHF"));
     	cos.setBacktime(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
-    	return propertyservicemanagerCosDao.save(o);
+    	return propertyservicemanagerCosDao.save(cos);
     }
 
     /**
