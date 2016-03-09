@@ -73,6 +73,42 @@ public class PropertyservicemanagerCos implements Domain{
 	@Length(max=36)
 	private String memberId;//会员用户ID
 	
+	@Column(name = "BACK_CODE_")
+	@Length(max=32)
+	private String backcode;//回访编号
+	
+	@Column(name = "BACK_RECORD_")
+	@Length(max=300)
+	private String backrecord;//回访记录
+	
+	@Column(name = "BACK_TIME_")
+	@Length(max=20)
+	private String backtime;//回访时间
+	
+	public String getBackcode() {
+		return backcode;
+	}
+
+	public void setBackcode(String backcode) {
+		this.backcode = backcode;
+	}
+
+	public String getBackrecord() {
+		return backrecord;
+	}
+
+	public void setBackrecord(String backrecord) {
+		this.backrecord = backrecord;
+	}
+
+	public String getBacktime() {
+		return backtime;
+	}
+
+	public void setBacktime(String backtime) {
+		this.backtime = backtime;
+	}
+
 	public String getCosTelephone(){
 		return this.cosTelephone;
 	}
@@ -164,8 +200,6 @@ public class PropertyservicemanagerCos implements Domain{
 	public void setMemberId(String memberId){
 		this.memberId = memberId;
 	}
-	
-	
 	
 	@Override
 	public int hashCode() {
