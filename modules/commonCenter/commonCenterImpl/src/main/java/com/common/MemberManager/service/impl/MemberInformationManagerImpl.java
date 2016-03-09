@@ -192,12 +192,12 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	 * @return
 	 * @throws BusException
 	 */
-	@EsbServiceMapping(pubConditions={@PubCondition(property="memberName",pubProperty="userId")})
+	@EsbServiceMapping(pubConditions={@PubCondition(property="updateUser",pubProperty="userId")})
 	public MemberInformation getMemberInformationByLoginUser(MemberInformation o)
 			throws BusException {
 		// TODO Auto-generated method stub	
-		String userName=SecurityUtils.getAccount().getLoginName();
-		return memberInformationDao.getObjectByUniqueProperty("memberName", userName);
+		
+		return memberInformationDao.get(o.getUpdateUser());
 	}
 	@Override
 	public List<String> getAccountMenus(MemberInformation member) {
