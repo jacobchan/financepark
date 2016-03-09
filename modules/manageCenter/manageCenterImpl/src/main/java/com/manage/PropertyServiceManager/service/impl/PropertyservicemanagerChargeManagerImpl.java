@@ -135,7 +135,8 @@ public class PropertyservicemanagerChargeManagerImpl extends BaseManagerImpl imp
     @EsbServiceMapping
 	public List<PropertyservicemanagerCharge> getChargeListforpage() throws BusException{
 		//先模拟一个登陆用户，之后会修改
-    	MemberInformation member=memberInformationManager.getMemberInformationByLoginUser(null);
+    	MemberInformation mem = null;
+    	MemberInformation member=memberInformationManager.getMemberInformationByLoginUser(mem);
     	//获取当前用户参加活动的list
     	Collection<Condition> condition = new ArrayList<Condition>();
     	condition.add(ConditionUtils.getCondition("createUser", Condition.EQUALS, member.getMemberId()));
