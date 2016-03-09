@@ -42,7 +42,7 @@ public class MemberPortalController {
 		
 		String mcUrl = requestUrl.substring(0, requestUrl.length()-requestUri.length())+"/member/memberCenter/index.html";
 		
-		if(account!=null && (account.getPrincipalConfig().containsKey("portal") || account.getPrincipalConfig().containsKey("memberCenter"))){
+		if(account!=null && account.getPrincipalConfig().containsKey("loginType")){
 			jsonpBuilder.append("$.youi.serverConfig.authorization='"+esbSecurityManager.encryptSecurityInfo(null)+"';")
 				.append("$('#user_info:first').html('"+"<a target=\"_blank\" href=\""+mcUrl+"\">")
 				.append(account.getLoginName()+"</a>"+"');");
