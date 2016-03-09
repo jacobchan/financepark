@@ -2,6 +2,7 @@ package com.gsoft.utils;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.URLDecoder;
+
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
@@ -112,19 +113,22 @@ public class HttpSenderMsg {
 		}
 	}
 	
-	public static void main(String[] args) {
+	public static String sendMsg(String mobile, String msg) throws Exception{
 		String url = "http://222.73.117.158/msg/";// 应用地址
 		String account = "viphzfc";// 账号
 		String pswd = "Tch123456";// 密码
-		String mobile = "15827117035,18627815920";// 手机号码，多个号码使用","分割
-		String msg = "亲爱的用户，您的验证码是123456，5分钟内有效。";// 短信内容
 		boolean needstatus = true;// 是否需要状态报告，需要true，不需要false
 		String product = null;// 产品ID
 		String extno = null;// 扩展码
-
+		
+		return HttpSenderMsg.batchSend(url, account, pswd, mobile, msg, needstatus, product, extno);
+	}
+	
+	public static void main(String[] args) {
+		String mobile = "15827117035,18627815920";// 手机号码，多个号码使用","分割
+		String msg = "亲爱的用户，您的验证码是123456，5分钟内有效。";// 短信内容
 		try {
-			String returnString = HttpSenderMsg.batchSend(url, account, pswd, mobile, msg, needstatus, product, extno);
-			System.out.println(returnString);
+			System.out.println(HttpSenderMsg.sendMsg(mobile, msg));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
