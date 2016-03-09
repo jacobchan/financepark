@@ -26,4 +26,14 @@ public class EnterprisetypePageModel extends AbstractPageModel implements
 		modelMap.addAttribute("enetrTree", enetrTree);
 		return modelMap;
 	}
+	
+	public ModelMap addEnterprisetype(HttpServletRequest request,
+			DataIn<EtypeEnterprisetype> dataIn) {
+		ModelMap modelMap = new ModelMap();
+		List<EtypeEnterprisetype> enter = this.etypeEnterprisetypeManager.getEtypeEnterprisetypes();
+		EnterprisetypeTreeNode enetrTree = ParkTreeUtils.listToEnterTree(enter, null, "企业类型");
+		enetrTree.setId("tree_enter_root");
+		modelMap.addAttribute("enetrTree", enetrTree);
+		return modelMap;
+	}
 }
