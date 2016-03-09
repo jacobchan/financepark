@@ -9,6 +9,7 @@ import java.util.Collection;
 //import javax.xml.crypto.Data;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.Ordered;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,7 +55,7 @@ import com.common.MemberManager.service.MemberInformationManager;
 @Service("memberInformationManager")
 @Transactional
 public class MemberInformationManagerImpl extends BaseManagerImpl implements MemberInformationManager
-,UserLoginService<MemberInformation>,IUserAdapter<MemberInformation,DefaultLoginFormToken>{
+,UserLoginService<MemberInformation>,IUserAdapter<MemberInformation,DefaultLoginFormToken>,Ordered{
 	@Autowired
 	private MemberInformationDao memberInformationDao;
 //	@Autowired
@@ -251,6 +252,11 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	public MemberInformation getLoginUser(String arg0) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public int getOrder() {
+		// TODO Auto-generated method stub
+		return -1;
 	}
 	
 
