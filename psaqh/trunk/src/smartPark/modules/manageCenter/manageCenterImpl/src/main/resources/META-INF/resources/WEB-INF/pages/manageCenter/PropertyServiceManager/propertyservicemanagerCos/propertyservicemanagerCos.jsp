@@ -25,7 +25,6 @@
 						format="yyyy-MM-dd" />
 				</youi:fieldLayout>
 				<youi:button name="acceptance" caption="受理" icon="search" active="1" />
-				<youi:button name="goback" caption="退回" icon="remove" active="1" />
 				<youi:button name="govisit" caption="回访" icon="save" active="1" />
 				<youi:button name="evaluate" caption="评价" icon="edit" active="1" />
 				<youi:gridCol property="cosCode" caption="投诉单号" width="18%" />
@@ -42,7 +41,7 @@
 				</youi:gridCol>
 			</youi:grid>
 		</youi:cell>
-		<youi:cell>
+		<!--<youi:cell>
 			<youi:grid id="grid_propertyservicenanagerBack" idKeys="backId"
 				caption="投诉回访记录表列表" panel="false"
 				src="esb/web/propertyservicenanagerBackManager/getPagerPropertyservicenanagerBacksByCos.json"
@@ -61,7 +60,7 @@
 					<youi:button name="remove" caption="删除" />
 				</youi:gridCol>
 			</youi:grid>
-		</youi:cell>
+		</youi:cell>-->
 	</youi:table>
 	<!-- form-物业投诉记录表编辑 -->
 	<youi:form dialog="true" caption="物业投诉记录表"
@@ -86,15 +85,11 @@
 	<!-- form-投诉回访记录表 -->
 	<youi:form dialog="true" caption="投诉回访记录表"
 		id="form_propertyservicenanagerBack"
-		action="esb/web/propertyservicenanagerBackManager/savePropertyservicenanagerBack.json" width="600">
+		action="esb/web/propertyservicemanagerCosManager/updatePropertyservicemanagerCos.json" width="600">
 		<youi:fieldLayout prefix="recordVisit" columns="1"
 			labelWidths="120,120">
-			<youi:fieldHidden property="backId" caption="回访编号" />
-			<youi:fieldSelect property="propertyservicemanagerCos.cosId"
-				src="esb/web/propertyservicemanagerCosManager/getPropertyservicemanagerCoss.json"
-				code="cosId" show="cosCode" caption="投诉编号" notNull="true" />
-			<youi:fieldArea property="backRecord" caption="回访记录" rows="8"
-				column="20" tooltips="回访记录" notNull="true" />
+			<youi:fieldHidden property="cosId" caption="投诉编号" />
+			<youi:fieldArea property="backrecord" caption="回访记录" rows="8" column="20" tooltips="回访记录" notNull="true" />
 		</youi:fieldLayout>
 	</youi:form>
 
@@ -169,7 +164,7 @@
 				success:function(result){	
 					$elem('grid_propertyservicemanagerCos',pageId).grid('pReload');
 						alert("操作成功!");
-						$elem('recordVisit_propertyservicemanagerCos_cosId',pageId).fieldValue(selectedRecord.cosId);
+						$elem('recordVisit_cosId',pageId).fieldValue(selectedRecord.cosId);
         				$elem('form_propertyservicenanagerBack',pageId).form('open');
 					}
 				});
