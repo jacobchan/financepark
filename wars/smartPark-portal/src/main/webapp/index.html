@@ -598,7 +598,7 @@
 	$(function () {
 		/*banner*/
 		var active=0;
-		var len=$(".slideBox li").length-1;
+		var len=$(".slideBox>ul>li").length-1;
 		var timer=setInterval(change,3000);
 		function change(){
 			active++;
@@ -639,7 +639,7 @@
 		$(".quick span").click(function(){
 			var index=$(this).index();
 			$(this).addClass("span_bold").siblings().removeClass("span_bold");
-			$(".menu").eq(index).show().siblings(".server").hide();
+			$(".menu").eq(index).show().siblings(".menu").hide();
 		});
 		$(".reserve span").click(function(){
 			var index=$(this).index();
