@@ -12,6 +12,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.utils.BizCodeUtil;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos;
 
 public interface PropertyservicemanagerCosManager extends BaseManager{
@@ -40,6 +42,11 @@ public interface PropertyservicemanagerCosManager extends BaseManager{
      * 保存并返回对象
      */
     public PropertyservicemanagerCos savePropertyservicemanagerCos(PropertyservicemanagerCos o) throws BusException;
+    
+    /**
+     * 修改对象
+     */
+    public PropertyservicemanagerCos updatePropertyservicemanagerCos(PropertyservicemanagerCos o) throws BusException;
 
     /**
      * 删除对象

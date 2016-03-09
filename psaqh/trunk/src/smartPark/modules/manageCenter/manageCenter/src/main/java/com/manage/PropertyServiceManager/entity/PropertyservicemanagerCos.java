@@ -4,10 +4,11 @@
 package com.manage.PropertyServiceManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: 物业投诉记录表
@@ -68,10 +69,10 @@ public class PropertyservicemanagerCos implements Domain{
 	@Column(name = "COS_NAME_")
 	@Length(max=32)
 	private String cosName;//投诉联系人
-
-	@Column(name = "MEMBER_ID_")
-	@Length(max=36)
-	private String memberId;//会员用户ID
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="MEMBER_ID_")
+	private MemberInformation memberInformation;//会员ID
 	
 	@Column(name = "BACK_CODE_")
 	@Length(max=32)
@@ -193,14 +194,15 @@ public class PropertyservicemanagerCos implements Domain{
 	public void setCosName(String cosName){
 		this.cosName = cosName;
 	}
-	public String getMemberId(){
-		return this.memberId;
-	}
 	
-	public void setMemberId(String memberId){
-		this.memberId = memberId;
+	public MemberInformation getMemberInformation() {
+		return memberInformation;
 	}
-	
+
+	public void setMemberInformation(MemberInformation memberInformation) {
+		this.memberInformation = memberInformation;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -217,7 +219,6 @@ public class PropertyservicemanagerCos implements Domain{
 		result = prime * result + ((cosBool == null) ? 0 : cosBool.hashCode());
 		result = prime * result + ((cosId == null) ? 0 : cosId.hashCode());
 		result = prime * result + ((cosName == null) ? 0 : cosName.hashCode());
-		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
 		return result;
 	}
 	
@@ -289,11 +290,6 @@ public class PropertyservicemanagerCos implements Domain{
 			if (other.cosName != null)
 				return false;
 		} else if (!cosName.equals(other.cosName))
-			return false;
-		if (memberId == null) {
-			if (other.memberId != null)
-				return false;
-		} else if (!memberId.equals(other.memberId))
 			return false;
 		return true;
 	}
