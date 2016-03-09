@@ -30,7 +30,24 @@ public class MemberPageController {
 	@Autowired
 	private UserService userService;//用户服务
 	
-	//@PathVariable("subfolder") String subfolder
+	@RequestMapping(value = "/{pageModule}/{pagePath}.html")
+	public ModelAndView index(HttpServletRequest request, 
+			HttpServletResponse response,
+			@PathVariable("pageModule") String pageModule,
+			@PathVariable("pagePath") String pagePath){
+		return buildModelAndView(request,pageModule,StringUtils.arrayToDelimitedString(new String[]{pageModule,pagePath}, "/"),null);
+	}
+	
+	@RequestMapping(value = "/{pageModule}/{pageFile}/{pagePath}.html")
+	public ModelAndView index(HttpServletRequest request, 
+			HttpServletResponse response,
+			@PathVariable("pageModule") String pageModule,
+			@PathVariable("pageFile") String pageFile,
+			@PathVariable("pagePath") String pagePath){
+		return buildModelAndView(request,pageModule,StringUtils.arrayToDelimitedString(new String[]{pageModule,pageFile,pagePath}, "/"),null);
+	}
+	
+/*	//@PathVariable("subfolder") String subfolder
 	@RequestMapping(value = "/{pageModule}/{pagePath}/{loginName}.html")
 	public ModelAndView index(HttpServletRequest request,
 			HttpServletResponse response,
@@ -51,18 +68,17 @@ public class MemberPageController {
 		
 		return buildModelAndView(request,pageModule,StringUtils.arrayToDelimitedString(new String[]{pageModule,pagePath,subPath}, "/"),loginName);
 	}
-	
+*/	
 	private ModelAndView buildModelAndView(HttpServletRequest request,String pageModule,String pagePath,String loginName){
 		AccountPrincipal account = SecurityUtils.getAccount();
-		if(account==null||!loginName.equals(account.getLoginName())){
+/*		if(account==null||!loginName.equals(account.getLoginName())){
 			//输出权限错误异常
 			throw new BusException("010101","权限不足!");
-		}
+		}*/
 		ModelAndView model = new ModelAndView();
-		model.setViewName(pageModule+"/"+pagePath);
+		model.setViewName(/*pageModule+"/"+*/pagePath);
 		model.addObject("account", account);
 		model.addObject("pagePath", pagePath);
-		
 		return model;
 	}
 
