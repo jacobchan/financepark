@@ -4,16 +4,16 @@
 	<div class="w200 fl">
 		<dl>
 			<dt>个人中心</dt>
-			<dd  class="active"><a href="index.html">个人资料</a></dd>
+			<dd  class="active"><a href="<%=request.getContextPath()%>/member/memberCenter/index.html">个人资料</a></dd>
 			<dd><a href="grzx2.html">订单中心</a></dd>
 			<dd><a href="updatephone.html">修改电话</a></dd>
 			<dd><a href="updatepassword.html">修改密码</a></dd>
 			<dd><a href="grzx4.html">消息</a></dd>
-			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/addressBook.html">企业通讯录</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/addressBook.html">企业通讯录</a></dd>
 			<dd><a href="propertyservicemanagerOcbind.html">一卡通绑定</a></dd>
-			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/myAdderss.html">我的地址</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/myAdderss.html">我的地址</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/myReservation.html">我的预约</a></dd>
-			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/policyApply.html">政策申请</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/policyApply.html">政策申请</a></dd>
 			<dt>物业服务</dt>
 			<dd><a href="<%=request.getContextPath()%>/member/propertyService/propertyManageBx.html">物业报修</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/propertyService/propertycomplaints.html">物业投诉</a></dd>
