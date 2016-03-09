@@ -87,8 +87,8 @@ public class MemberLoginController {
 		
 		AccountPrincipal account = SecurityUtils.getAccount();
 		model.addObject("loginType", loginType);
-		//model.addObject("account", account.getPrincipalConfig());
-		model.addObject("account", account);
+		model.addObject("account", account.getPrincipalConfig());
+		model.addObject("user", account);
 		return model;
 	}
 	
