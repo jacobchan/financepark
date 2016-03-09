@@ -77,8 +77,12 @@
 			<youi:fieldText property="cosTelephone" caption="回访电话" />
 			<youi:fieldCalendar property="cosTime" caption="投诉时间" notNull="true"
 				format="yyyy-MM-dd" />
+			<youi:fieldCalendar property="backtime" caption="回访时间" notNull="true"
+				format="yyyy-MM-dd" />
 			<youi:fieldArea property="cosContent" caption="投诉内容" rows="8"
 				column="20" tooltips="投诉内容" notNull="true" />
+			<youi:fieldArea property="backrecord" caption="回访内容" rows="8"
+				column="20" tooltips="回访内容" notNull="true" />
 		</youi:fieldLayout>
 	</youi:form>
 
