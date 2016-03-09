@@ -215,24 +215,30 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
     	propertyservicemanagerBxDao.save(bx);
 	}
     
-    /**
+	/**
 	 * 根据当前登录用户获取报修单
+	 * @param o 报修对象
+	 * @return
+	 * @throws BusException
 	 */
 	@EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId")})
-	public List<PropertyservicemanagerBx> getBxListforpage()
+	public List<PropertyservicemanagerBx> getBxListforpage(PropertyservicemanagerBx o)
 			throws BusException {
-		//先模拟一个登陆用户，之后会修改
-		MemberInformation mem = null;
-    	MemberInformation member=memberInformationManager.getMemberInformationByLoginUser(mem);
-    	//获取当前用户参加活动的list
-    	Collection<Condition> condition = new ArrayList<Condition>();
-    	condition.add(ConditionUtils.getCondition("createUser", Condition.EQUALS, member.getMemberId()));
-    	 List<PropertyservicemanagerBx> list = propertyservicemanagerBxDao.commonQuery(condition, null);
-    	 if(list.size()>0){
-    		 return list;
-    	 }else{
-    		 return null;
-    	 }
+		//获取当前登录用户id
+		String id = o.getCreateUser();
+		if(id!=null){
+	    	//获取当前用户参加活动的list
+	    	Collection<Condition> condition = new ArrayList<Condition>();
+	    	condition.add(ConditionUtils.getCondition("createUser", Condition.EQUALS, id));
+	    	 List<PropertyservicemanagerBx> list = propertyservicemanagerBxDao.commonQuery(condition, null);
+	    	 if(list.size()>0){
+	    		 return list;
+	    	 }else{
+	    		 return null;
+	    	 }
+		}else{
+			return null;
+		}
 		
 	}
 

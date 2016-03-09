@@ -70,8 +70,10 @@ public interface PropertyservicemanagerMoverecManager extends BaseManager{
 	 */
 	public void upMovById(String id) throws BusException;
 	/**
-	 * 
 	 * 根据当前登录获取搬家放行
+	 * @param o 搬家对象
+	 * @return
+	 * @throws BusException
 	 */
-	public List<PropertyservicemanagerMoverec> getMovListforpage() throws BusException;
+	public List<PropertyservicemanagerMoverec> getMovListforpage(PropertyservicemanagerMoverec o) throws BusException;
 }

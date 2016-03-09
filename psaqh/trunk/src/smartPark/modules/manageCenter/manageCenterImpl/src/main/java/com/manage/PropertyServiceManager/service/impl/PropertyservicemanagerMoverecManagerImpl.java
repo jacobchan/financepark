@@ -74,7 +74,7 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+    @EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",pubProperty="userId")})
     public PropertyservicemanagerMoverec savePropertyservicemanagerMoverec(PropertyservicemanagerMoverec o) throws BusException{
     	String propertyservicemanagerMoverecId = o.getMoverecId();
     	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerMoverecId);
@@ -153,20 +153,25 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
 		}
 
 	/**
-	 * 
 	 * 根据当前登录获取搬家放行
+	 * @param o 搬家对象
+	 * @return
+	 * @throws BusException
 	 */
-	@EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId")})
-	public List<PropertyservicemanagerMoverec> getMovListforpage() throws BusException{
-		//先模拟一个登陆用户，之后会修改
-		MemberInformation mem = null;
-    	MemberInformation member=memberInformationManager.getMemberInformationByLoginUser(mem);
-    	//获取当前用户参加活动的list
-    	Collection<Condition> condition = new ArrayList<Condition>();
-    	condition.add(ConditionUtils.getCondition("member.memberId", Condition.EQUALS, member.getMemberId()));
-    	List<PropertyservicemanagerMoverec> list = propertyservicemanagerMoverecDao.commonQuery(condition, null);
-    	if(list.size()>0){
-    		return list;
+	@EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",pubProperty="userId")})
+	public List<PropertyservicemanagerMoverec> getMovListforpage(PropertyservicemanagerMoverec o) throws BusException{
+		//获取当前登录用户id
+    	String id = o.getMember().getMemberId();
+    	if(id!=null){
+	    	//获取当前用户参加活动的list
+	    	Collection<Condition> condition = new ArrayList<Condition>();
+	    	condition.add(ConditionUtils.getCondition("member.memberId", Condition.EQUALS, id));
+	    	List<PropertyservicemanagerMoverec> list = propertyservicemanagerMoverecDao.commonQuery(condition, null);
+	    	if(list.size()>0){
+	    		return list;
+	    	}else{
+	    		return null;
+	    	}
     	}else{
     		return null;
     	}
