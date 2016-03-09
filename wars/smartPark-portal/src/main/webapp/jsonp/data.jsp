@@ -4,7 +4,7 @@
 	String jsonp = request.getParameter("data:jsonp");
 	String fileName = request.getParameter("data:file");
 	
-	java.io.File file = new java.io.File("E:/tomcat-portal/apache-tomcat-7.0.57/webapps/ROOT/jsonp/"+fileName);
+	java.io.File file = new java.io.File("E:/java/workspace/smartPark/wars/smartPark-portal/src/main/webapp/jsonp/"+fileName);
 	
 	try {
 		java.io.ByteArrayOutputStream byteOut = new java.io.ByteArrayOutputStream();
