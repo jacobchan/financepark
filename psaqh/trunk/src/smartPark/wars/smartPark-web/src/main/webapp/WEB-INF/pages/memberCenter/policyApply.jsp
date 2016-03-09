@@ -6,16 +6,19 @@
 <head>
 	<meta charset="UTF-8">
 	<title>政策申请</title>
-	
+	<style>
+	  .ccheng{color:#FF6715}
+    </style>
 </head>
 <body style="background-color:#f4f4f4;">
+
 	<div class="w100">
 		<div class="w1200 clearfix pt30 pb50">
 			<div class="per-center-box clearfix">
 				<%@ include file="/WEB-INF/pages/memberCenter/common/ad_left.jsp"%> 
 				<div class="w1000">
 					<h3 class="per-h3">政策申请</h3>
-					<div class="clearfix">
+					<div class="clearfix mt40">
 						<table class="gt-table mt20">
 							<colgroup>
 								<col width="120"></col>
@@ -30,26 +33,14 @@
 								<th>政策类型</th>
 								<th>申请人</th>
 								<th>申请时间</th>
-								<th>状态</th>
+								
+								<th>流程状态</th>
+								<th>申请状态</th>
 								<th>操作</th>
-							</tr>
-							<tr>
-								<td><a href="">123456789</a></td>
-								<td>孵化器\租金</td>
-								<td>鲁智深</td>
-								<td>2016-02-01 10:30 </td>
-								<td>未办理</td>
-								<td><a href="javascript:;" class="ac-see">取消</a></td>
-							</tr>
-							<tr>
-								<td><a href="">123456789</a></td>
-								<td>孵化器\租金</td>
-								<td>鲁智深</td>
-								<td>2016-02-01 10:30 </td>
-								<td>未办理</td>
-								<td><a href="javascript:;" class="ac-see">重新提交</a></td>
-							</tr>
+							</tr>														
 						</tbody></table>
+
+                        
 						<div class="fr page-list-a clearfix lh30 mt20 f12">
 							<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
 							<a href="">首</a>
@@ -65,66 +56,54 @@
 			</div>
 		</div>
 	</div>
-	
-	<!--***弹窗 start****************************************-->
-		<div class="bg-tanc" >
-		<div class="tanc-con" style="top:50%;margin-top:-225px;width:900px;padding:40px 30px;">
-			<a href="javascript:;" class="tc-close"></a>
-			<h3 class="mb10" style="color:#666;"><b class="mr50">孵化器政策\租金</b><b class="ml50">申请编号：99999</b></h3>
-			<div class="clearfix mt40 tc">
-				<ul class="jc-nav clearfix mb30 ml40">
-					<li class="active">
-						<img src="<%=request.getContextPath()%>/styles/images/grzx/icon1.png" class="undis">
-						<img src="<%=request.getContextPath()%>/styles/images/grzx/icon1-o.png">
-					</li>
-					<li>
-						<img src="<%=request.getContextPath()%>/styles/images/grzx/iconr.png" class="mr40">
-						<img src="<%=request.getContextPath()%>/styles/images/grzx/iconr-o.png" class="undis mr40">
-						<img src="<%=request.getContextPath()%>/styles/images/grzx/icon2.png">
-						<img src="<%=request.getContextPath()%>/styles/images/grzx/icon2-o.png" class="undis">
-					</li>	
-					<li>
-						<img src="<%=request.getContextPath()%>/styles/images/grzx/iconr.png" class="mr40">
-						<img src="<%=request.getContextPath()%>/styles/images/grzx/iconr-o.png" class="undis mr40">
-						<img src="<%=request.getContextPath()%>/styles/images/grzx/icon3.png">
-						<img src="<%=request.getContextPath()%>/styles/images/grzx/icon3-o.png" class="undis">
-					</li>
-					<li>
-						<img src="<%=request.getContextPath()%>/styles/images/grzx/iconr.png" class="mr40">
-						<img src="<%=request.getContextPath()%>/styles/images/grzx/iconr-o.png" class="undis mr40">
-						<img src="<%=request.getContextPath()%>/styles/images/grzx/icon4.png">
-						<img src="<%=request.getContextPath()%>/styles/images/grzx/icon5-o.png" class="undis">
-					</li>
-					<li>
-						<img src="<%=request.getContextPath()%>/styles/images/grzx/iconr.png" class="mr40">
-						<img src="<%=request.getContextPath()%>/styles/images/grzx/iconr-o.png" class="undis mr40">
-						<img src="<%=request.getContextPath()%>/styles/images/grzx/icon5.png">
-						<img src="<%=request.getContextPath()%>/styles/images/grzx/icon5-o.png" class="undis">
-					</li>
-				</ul>
-				<div class="bd-dash">
-					申请人：鲁智深<span class="ml20">先生</span>
-					<span class="ml40">联系电话：15399964578</span>
-				</div>
-				<div class="bd-dash">
-					公司名称：深圳市前海怕啥科技有限公司
-					<span class="ml40">职位：总经理助理</span>
-				</div>
-				<div class="bd-dash">
-					<img src="<%=request.getContextPath()%>/styles/images/grzx/map.png" class="mr20">
-					创意文化园E6栋412
-				</div>
-				<a href="" class="pb-btn">取消申请</a><a href="javascript:;" class="ib-btn ml40">重新提交</a>
-			</div>
-		</div>
-	</div>
-	<!--***弹窗 end****************************************-->
+	<!--***bottom start****************************************-->
+
 	<script type="text/javascript">
-		$(function () {
-			$(".ac-see").click(function(){
-				$(".bg-tanc").show();
-			})
-		})
+
+	function apply(id){				
+		var policyApplyStatus='2';
+		var policyApplyId=id;
+		var params = ['policyApplyId='+policyApplyId+'','policyApplyStatus='+policyApplyStatus+''];
+	     $.ajax({
+			url:'/smartPark-web/esb/web/policyApplyManager/updatePolicyApplyStatus.json',
+			 data:params.join('&'),
+	 		success:function(result){
+				if(result&&result.record){					
+					alert("已取消");
+					location.reload();
+				}
+			}
+		});
+	}
+	
+		$(function(){
+			$.ajax({
+				
+				url:'/smartPark-web/esb/web/policyApplyManager/getPolicyApplyListByLoginUser.json',
+		//		url:'/smartPark-web/esb/web/policyApplyManager/getPolicyApplys.json',
+				success:function(result){					
+					console.log(result.records);
+					if(result&&result.records){					
+						_parseRecords(result.records);						
+					}
+				}
+			});
+		});
+		//拼接卡号列表
+		function _parseRecords(record){		
+			for(var i=0;i<record.length;i++){
+				var html= "<tr>"+
+					      "<td width='111'>"+record[i].policyId+"</td>"+
+                           "<td width='111'>"+record[i].nmIssuenews.policyType+"</td>"+
+                          "<td width='111'>"+record[i].policyApplyContactPeople+"</td>"+
+                          "<td width='111'>"+record[i].createTime+"</td>"+
+                          "<td width='111'>"+record[i].nmIssueflow.issueFlowCStatus+"</td>"+
+                          "<td width='111'>"+record[i].policyApplyStatus+"</td>"+                          
+                          "<td > <input type='button' value='取消'   onclick='apply("+record[i].policyApplyId+")' />"+                                   
+                          " </tr>";
+				 $(".gt-table").append(html);	
+			}
+		};	
 	</script>
 </body>
 <%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 
