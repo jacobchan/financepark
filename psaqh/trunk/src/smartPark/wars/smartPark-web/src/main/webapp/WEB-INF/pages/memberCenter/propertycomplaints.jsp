@@ -119,7 +119,7 @@
 					status = "待评价";
 					crop = "评价";
 				}else if(record[i].cosStatus=='6'){
-					status = "已评价";
+					status = "已完成";
 				}
 				var html="<tr><td>"+record[i].cosCode+"</td><td>"+record[i].cosTime+"</td><td>"+bool+"</td><td>"+record[i].cosName+"</td><td>"+record[i].cosTelephone+"</td><td>"+status+"</td><td><a href='javascript:;' class='ac-show'>"+crop+"</a></td></tr>";
 				$("#czh-knowledge").append(html);
