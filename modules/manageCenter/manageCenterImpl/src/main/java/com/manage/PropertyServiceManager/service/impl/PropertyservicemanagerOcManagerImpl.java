@@ -92,7 +92,7 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",pubProperty="userId")})
     public PropertyservicemanagerOc savePropertyservicemanagerOc(PropertyservicemanagerOc o) throws BusException{
     	String propertyservicemanagerOcId = o.getOcId();
     	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerOcId);
@@ -166,17 +166,20 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
      * @return
      * @throws BusException
      */
-    @EsbServiceMapping
-	public List<PropertyservicemanagerOc> getPropertyservicemanagerOcListByLoginUser() throws BusException {
-    	//先模拟一个登陆用户，之后会修改
-    	MemberInformation mem = null;
-    	MemberInformation member=memberInformationManager.getMemberInformationByLoginUser(mem);
-    	//获取当前用户参加活动的list
-    	Collection<Condition> condition = new ArrayList<Condition>();
-    	condition.add(ConditionUtils.getCondition("memberId", Condition.EQUALS, member.getMemberId()));
-    	List<PropertyservicemanagerOc> list = propertyservicemanagerOcDao.commonQuery(condition, null);
-    	if(list.size()>0){
-    		return list;
+    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",pubProperty="userId")})
+	public List<PropertyservicemanagerOc> getPropertyservicemanagerOcListByLoginUser(PropertyservicemanagerOc o) throws BusException {
+    	//获取当前登录用户id
+    	String id = o.getMemberId();
+    	if(id!=null){
+	    	//获取当前用户参加活动的list
+	    	Collection<Condition> condition = new ArrayList<Condition>();
+	    	condition.add(ConditionUtils.getCondition("memberId", Condition.EQUALS, id));
+	    	List<PropertyservicemanagerOc> list = propertyservicemanagerOcDao.commonQuery(condition, null);
+	    	if(list.size()>0){
+	    		return list;
+	    	}else{
+	    		return null;
+	    	}
     	}else{
     		return null;
     	}

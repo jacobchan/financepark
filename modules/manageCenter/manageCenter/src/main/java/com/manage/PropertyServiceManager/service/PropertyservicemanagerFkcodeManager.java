@@ -78,8 +78,10 @@ public interface PropertyservicemanagerFkcodeManager extends BaseManager{
 	 */
 	//public void updateFkcode(String fkcodeId,String code) ;
 	/**
-	  * 根据登录用户获取访客申请
+	 * 根据登录用户获取访客申请
+	 * @param o 访客对象
 	 * @return
+	 * @throws BusException
 	 */
-	public List<PropertyservicemanagerFkcode> getFkcodeListforpage() throws BusException; 
+	public List<PropertyservicemanagerFkcode> getFkcodeListforpage(PropertyservicemanagerFkcode o) throws BusException; 
 }

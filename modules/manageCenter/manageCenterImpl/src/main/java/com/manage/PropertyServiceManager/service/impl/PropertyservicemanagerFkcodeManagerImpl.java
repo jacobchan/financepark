@@ -72,7 +72,7 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+    @EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",pubProperty="userId")})
     public PropertyservicemanagerFkcode savePropertyservicemanagerFkcode(PropertyservicemanagerFkcode o) throws BusException{
     	String propertyservicemanagerFkcodeId = o.getFkcodeId();
     	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerFkcodeId);
@@ -169,20 +169,25 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
 //    	}
 //    }
     /**
-	  * 根据登录用户获取访客申请
+	 * 根据登录用户获取访客申请
+	 * @param o 访客对象
 	 * @return
+	 * @throws BusException
 	 */
-    @EsbServiceMapping
-	public List<PropertyservicemanagerFkcode> getFkcodeListforpage() throws BusException{
-    	//先模拟一个登陆用户，之后会修改
-    	MemberInformation mem = null;
-    	MemberInformation member=memberInformationManager.getMemberInformationByLoginUser(mem);
-    	//获取当前用户参加活动的list
-    	Collection<Condition> condition = new ArrayList<Condition>();
-    	condition.add(ConditionUtils.getCondition("member.memberId", Condition.EQUALS, member.getMemberId()));
-    	List<PropertyservicemanagerFkcode> list = propertyservicemanagerFkcodeDao.commonQuery(condition, null);
-    	if(list.size()>0){
-    		return list;
+    @EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",pubProperty="userId")})
+	public List<PropertyservicemanagerFkcode> getFkcodeListforpage(PropertyservicemanagerFkcode o) throws BusException{
+    	//获取当前登录用户id
+    	String id = o.getMember().getMemberId();
+    	if(id!=null){
+	    	//获取当前用户参加活动的list
+	    	Collection<Condition> condition = new ArrayList<Condition>();
+	    	condition.add(ConditionUtils.getCondition("member.memberId", Condition.EQUALS, id));
+	    	List<PropertyservicemanagerFkcode> list = propertyservicemanagerFkcodeDao.commonQuery(condition, null);
+	    	if(list.size()>0){
+	    		return list;
+	    	}else{
+	    		return null;
+	    	}
     	}else{
     		return null;
     	}
