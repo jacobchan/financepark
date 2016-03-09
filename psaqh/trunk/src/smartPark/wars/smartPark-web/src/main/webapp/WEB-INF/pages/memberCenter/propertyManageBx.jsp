@@ -29,12 +29,6 @@
 							<input value="搜索" class="hhf-submit f14 fr" type="button">
 						</div>
 					
-							<label class="fl mr20 f16">申请时间：</label>
-							<input class="bd-input fl" type="text"><span class="fl ml15 mr15">到</span>
-							<input class="bd-input fl" type="text">
-							<div class="inp-box ml20"><input placeholder="报修号查询" type="text"><a class="fa fa-search" href=""></a></div>
-							<input value="搜索" class="hhf-submit f14 fr" type="button">
-						</div>
 						<table class="gt-table mt20">
                          <tr>
 					     	<td width="111">订单号     </td>
