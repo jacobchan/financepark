@@ -15,6 +15,7 @@ import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.common.OrderManager.service.OrdermanagerCommoditydetailManager;
 import com.common.OrderManager.service.OrdermanagerUserorderManager;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
+import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -36,6 +37,8 @@ public class ShoppingcarGroupManagerImpl extends BaseManagerImpl implements Shop
 	private OrdermanagerUserorderManager ordermanagerUserorderManager;
 	@Autowired
 	private OrdermanagerCommoditydetailManager ordermanagerCommoditydetailManager;
+	@Autowired
+	private PurchasingmanagerCommodityManager purchasingmanagerCommodityManager;
 	
     /**
      * 查询列表
@@ -115,11 +118,12 @@ public class ShoppingcarGroupManagerImpl extends BaseManagerImpl implements Shop
     @Override
     @EsbServiceMapping
 	public OrdermanagerUserorder savePurOrder(OrdermanagerUserorder o,
-			List<ShoppingcarGroup> shopCarList) throws BusException {
+			@DomainCollection(domainClazz=ShoppingcarGroup.class)List<ShoppingcarGroup> shopCarList) throws BusException {
 		if(shopCarList.size() == 0){
 			throw new BusException("购物车不能为空！");
 		}
-		PurchasingmanagerGenre pg = shopCarList.get(0).getCommodityId().getPurchasingmanagerGenre();
+		String commodityId = shopCarList.get(0).getCommodityId().getCommodityId();
+		PurchasingmanagerGenre pg = purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId).getPurchasingmanagerGenre();
 		while(pg.getPurchasingmanagerGenre() != null){//获取最顶级商品类别
 			pg = pg.getPurchasingmanagerGenre();
 		}
