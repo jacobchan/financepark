@@ -4,22 +4,22 @@
 	<div class="w200 fl">
 		<dl>
 			<dt>个人中心</dt>
-			<dd  class="active"><a href="memberInformation.html">个人资料</a></dd>
+			<dd  class="active"><a href="index.html">个人资料</a></dd>
 			<dd><a href="grzx2.html">订单中心</a></dd>
 			<dd><a href="updatephone.html">修改电话</a></dd>
 			<dd><a href="updatepassword.html">修改密码</a></dd>
 			<dd><a href="grzx4.html">消息</a></dd>
-			<dd><a href="addressBook.html">企业通讯录</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/addressBook.html">企业通讯录</a></dd>
 			<dd><a href="propertyservicemanagerOcbind.html">一卡通绑定</a></dd>
-			<dd><a href="myAdderss.html">我的地址</a></dd>
-			<dd><a href="myReservation.html">我的预约</a></dd>
-			<dd><a href="policyApply.html">政策申请</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/myAdderss.html">我的地址</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/myReservation.html">我的预约</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/policyApply.html">政策申请</a></dd>
 			<dt>物业服务</dt>
-			<dd><a href="propertyManageBx.html">物业报修</a></dd>
-			<dd><a href="propertycomplaints.html">物业投诉</a></dd>
-			<dd><a href="propertycomplaints.html">物业投诉</a></dd>
-			<dd><a href="propertyManageFk.html">访客登记</a></dd>
-			<dd><a href="propertyManageMoverec.html">搬家放行</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/propertyService/propertyManageBx.html">物业报修</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/propertyService/propertycomplaints.html">物业投诉</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/propertyService/propertycomplaints.html">物业投诉</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/propertyService/propertyManageFk.html">访客登记</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/propertyService/propertyManageMoverec.html">搬家放行</a></dd>
 			<dd><a href="querypayment.html">缴费查询</a></dd>
 			<dd><a href="grzx13.html">一卡通办理</a></dd>
 			<dt>全民营销</dt>
@@ -27,7 +27,7 @@
 			<dd><a href="grzx16.html">我的收益</a></dd>
 			<dt>极速采购</dt>
 			<dd>
-				<a href="myOrder.html">我的订单 <i class="fa fa-angle-down ml10" style="font-size:16px"></i></a>
+				<a href="<%=request.getContextPath()%>/member/nationalMarketing/myOrder.html">我的订单 <i class="fa fa-angle-down ml10" style="font-size:16px"></i></a>
 				<ul class="undis">
 					<li><a href="grzx18-2.html">退货</a></li>
 					<li class="active"><a href="grzx18-3.html">评价晒单</a></li>
@@ -36,8 +36,8 @@
 			</dd>
 			<dd><a href="grzx19.html">退货处理</a></dd>
 			<dt>创智汇</dt>
-			<dd><a href="participateActivity.html">我参加的活动</a></dd>
-			<dd><a href="publishActivity.html">我发布的活动</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/genWisdom/participateActivity.html">我参加的活动</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/genWisdom/publishActivity.html">我发布的活动</a></dd>
 		</dl>
 	</div>
 	<script type="text/javascript">
