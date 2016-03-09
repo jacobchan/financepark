@@ -101,7 +101,6 @@
 			<youi:fieldHidden property="id" caption="投诉编号" />
 			<youi:fieldSelect property="code" caption="对投诉回访是否满意" notNull="true" defaultValue="6">
 				<youi:fieldOption caption="满意并评价" value="6"></youi:fieldOption>
-				<youi:fieldOption caption="不满意并返回受理" value="2"></youi:fieldOption>
 			</youi:fieldSelect>
 		</youi:fieldLayout>
 	</youi:form>
