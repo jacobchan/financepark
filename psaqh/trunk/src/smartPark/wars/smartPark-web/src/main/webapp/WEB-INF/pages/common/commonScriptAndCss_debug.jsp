@@ -7,9 +7,15 @@
 <youi:script src="/scripts/3.0/lib/jquery-ui.min.js?1=1"/>
 <youi:script src="/scripts/3.0/lib/jquery.mousewheel.js"/>
 
+<youi:script src="/scripts/lib/youi-2.0.0.min.js" />
+<youi:script src="/scripts/lib/jquery.swfupload.js" />
+<youi:script src="/scripts/lib/swfupload.js" />
+<youi:script src="/scripts/lib/swfupload.speed.js" />
+<youi:script src="/scripts/lib/youi.swfupload.js"/>
+
 <youi:script src="/scripts/3.0/lib/bootstrap.js"/>
 <youi:script src="/scripts/ckeditor4/ckeditor.js"/>
-<youi:script src="/scripts/upload/swfupload.js"/>
+<%-- <youi:script src="/scripts/upload/swfupload.js"/> --%>
 
 <youi:script src="/scripts/3.0/youi/youi.core.js"/>
 <youi:script src="/scripts/3.0/youi/youi.mousable.js"/>
@@ -57,7 +63,7 @@
 <youi:script src="/scripts/3.0/youi/field/field.password.js"/>
 <youi:script src="/scripts/3.0/youi/field/field.radioGroup.js"/>
 <youi:script src="/scripts/3.0/youi/field/field.select.js"/>
-<youi:script src="/scripts/3.0/youi/field/field.swfupload.js"/>
+<%-- <youi:script src="/scripts/3.0/youi/field/field.swfupload.js"/> --%>
 <youi:script src="/scripts/3.0/youi/field/field.multiupload.js"/>
 <youi:script src="/scripts/3.0/youi/field/field.text.js"/>
 <youi:script src="/scripts/3.0/youi/field/field.textarea.js"/>
@@ -68,8 +74,8 @@
 <youi:script src="/scripts/js/flexpaper.js"/>
 <youi:script src="/scripts/js/FlexPaperViewer.swf"/>
 
+<youi:style href="/styles/css/upload.css"/>
 <youi:style href="/styles/3.0/bootstrap.css"/>
-
 <youi:style href="/styles/3.0/youi/youi.core.css"/>
 <youi:style href="/styles/3.0/youi/youi.xmenu.css"/>
 <youi:style href="/styles/3.0/youi/youi.datepicker.css"/>
