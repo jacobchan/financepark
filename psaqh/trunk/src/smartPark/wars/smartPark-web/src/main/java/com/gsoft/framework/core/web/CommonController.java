@@ -18,6 +18,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,8 +37,8 @@ import com.gsoft.framework.util.DateUtils;
 @Controller
 @RequestMapping("/common")
 public class CommonController {
-//	@Value("${file.root.path}")
-	private String root = "/filestore/";
+	@Value("#{configProperties['file.root.path']}")
+	private String root;
 	
 	@SuppressWarnings("rawtypes")
 	@RequestMapping("/upload.html")
