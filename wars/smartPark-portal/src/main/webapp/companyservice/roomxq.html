@@ -224,6 +224,9 @@
 				defaultView: 'agendaWeek',
 				lang: currentLangCode,
 				agenda: null, 
+				dayClick:function(date){
+					alert(date);
+				}
 			});
 		}
 		renderCalendar();
@@ -233,9 +236,11 @@
 		if(today==0){today=7};
 		var len=$("#data_timer tr").length;
 		$("#data_timer tr").each(function(index, element) {
+			//alert($(element).children("td").eq);
             $(element).children("td").eq(today).prevAll("td").addClass("pasttd");
         });
 		$("#data_timer").on("click","td",function(){
+			
 			if(this.className=="pasttd"){return ;}
 			$(this).toggleClass("clicktd");
 		});

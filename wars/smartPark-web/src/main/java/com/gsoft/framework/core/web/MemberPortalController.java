@@ -40,9 +40,9 @@ public class MemberPortalController {
 		String requestUrl = request.getRequestURL().toString();
 		String requestUri = request.getServletPath();
 		
-		String mcUrl = requestUrl.substring(0, requestUrl.length()-requestUri.length())+"/member/vtui/index.html";
+		String mcUrl = requestUrl.substring(0, requestUrl.length()-requestUri.length())+"/member/memberCenter/index.html";
 		
-		if(account!=null){
+		if(account!=null && (account.getPrincipalConfig().containsKey("portal") || account.getPrincipalConfig().containsKey("memberCenter"))){
 			jsonpBuilder.append("$.youi.serverConfig.authorization='"+esbSecurityManager.encryptSecurityInfo(null)+"';")
 				.append("$('#user_info:first').html('"+"<a target=\"_blank\" href=\""+mcUrl+"\">")
 				.append(account.getLoginName()+"</a>"+"');");
