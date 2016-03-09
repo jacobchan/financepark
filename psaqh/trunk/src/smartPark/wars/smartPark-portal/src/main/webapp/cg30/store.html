@@ -6,6 +6,9 @@
 <link href="../styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 <link href="../styles/base.css" type="text/css" rel="stylesheet">
 <link href="../styles/page/cg30.css" type="text/css" rel="stylesheet">
+<style>
+	.square_ul li{text-align:center}
+</style>
 </head>
 
 <body class="bgf1">
@@ -35,25 +38,26 @@
             </div>
             <div class="fr mt10">
             	<div class="p30 f16 tc bgfff">
-                	<div class="user_info"></div>
+                	<div class="user_info" style="margin-bottom:10px"></div>
                     <span class="ccheng">121764395@qq.com</span><br/>
-                    <p class="c3 lh30 tl mt10" style="margin-left:60px">
+                    <p class="c3 lh30 tl mt20" style="margin-left:60px">
                         <span>会员等级:</span><span>铜牌</span><br/>
                         <span>我的积分:</span><span>8776分</span>
                     </p>
                 </div>
-            	<div class="info_tip mt30">
+            	<div class="info_tip" style="padding:80px 20px 40px 20px;margin-top:35px">
                 	<div class="info_tit">兑换流程</div>
                 	<ul class="stream ccheng">
                 		<li class="jf1">挑选礼品</li>
                         <li class="jf2">在线下单</li>
                         <li class="jf3">快递到家</li>                    
                     </ul>
-                    <a class="ccheng inline_b mt30" href="javascript:;">MORE<br/><i class="fa fa-angle-down" style="font-size:22px"></i></a>
+                    <a class="ccheng inline_b mt30" href="javascript:;">  <br/>
+                    <i class="fa fa-angle-down" style="font-size:22px;opacity: 0.7"></i></a>
                 </div>
             </div>
             <div class="fr mt40">
-            	<div class="info_tip">
+            	<div class="info_tip" style="padding-bottom:16px">
                 	<div class="info_tit">积分说明</div>
                     <div class="lh28">
                         <span class="c3 fw">1、积分兑换</span>
@@ -112,9 +116,8 @@
             $('.square_ul>li').plist({
                 template:'<div class="cgimg"><img src={commodityImage}.png></div>'+
                 		'<a href=../cg30/cg_xq.html?id={commodityId} class="c3">{commodityTitle}</a>'+
-                		'<div class="mt5"><span class="ccheng">{commodityPrice}</span>元'+
-                		'<a href=../cg30/shopcar.html?id={commodityId} class="fr"><img src="../styles/images/cg30/add.png"></a></div>'+
-                		'<div class="cg_tag"><img src={commodityBrand}.png></div>',
+                		'<div class="inline_b c3">兑换价：<span class="ccheng">{commodityPrice}</span>积分</div><br/>'+
+                		'<div class="btn_small mt5">兑换</div>',
                 jsonpSrc:'http://localhost:9088/jsonp/data.jsp?data:file=cg_bg.json'
             });
      });

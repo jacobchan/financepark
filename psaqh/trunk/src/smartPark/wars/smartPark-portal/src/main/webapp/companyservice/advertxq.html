@@ -197,7 +197,6 @@
     	<div class="close0 fr"></div>
     </div>
 </div>
-
 <!--******************  code end  ****************************-->
 <script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
@@ -207,36 +206,76 @@
 <script src='../scripts/page/date_week/moment.min.js'></script>
 <script src='../scripts/page/date_week/fullcalendar.min.js'></script>
 <script src='../scripts/page/date_week/lang-all.js'></script>
+<script type="text/javascript" src="../scripts/page/kefu.js"></script>
 <script>
-	$(document).ready(function() {
-		var currentLangCode = 'zh-cn';
 
-		function renderCalendar() {
-			$('#calendar').fullCalendar({
-				header: {
-					left: 'title',
-					center: 'prev,next',
-					right: ''
-				},
-				defaultView: 'agendaWeek',
-				lang: currentLangCode,
-				agenda: null, 
-			});
-		}
-		renderCalendar();
-		/**/
-		var today;
-		today=new Date().getDay();
-		if(today==0){today=7};
-		var len=$("#data_timer tr").length;
-		$("#data_timer tr").each(function(index, element) {
-            $(element).children("td").eq(today).prevAll("td").addClass("pasttd");
+    $(document).ready(function() {
+        var htmls=$("#data_timer").html();
+        var currentLangCode = 'zh-cn';
+
+        function renderCalendar() {
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'title',
+                    center: 'prev,next',
+                    right: ''
+                },
+                defaultView: 'agendaWeek',
+                lang: currentLangCode,
+                agenda: null, 
+            });
+        }
+        renderCalendar();
+        /**/
+        var today,cursor=0;
+        today=new Date().getDay();
+        nowday();
+        $("#data_timer").on("click","td",function(){
+            if(this.className=="pasttd"){return ;}
+            $(this).toggleClass("clicktd");
+            var active=$(this).index();
+            var time=$(this).html();
+            var dates=$(".fc-day-header").eq(active).attr("data-date");
+            alert(dates+"  "+time);
         });
-		$("#data_timer").on("click","td",function(){
-			if(this.className=="pasttd"){return ;}
-			$(this).toggleClass("clicktd");
-		});
-	});
+        
+        $(".fc-next-button").on("click",this,function(){
+            cursor++;
+            var flag=judgment();
+            console.log(cursor);
+            if(cursor==0){nowday();return ;}
+            if(flag){
+                $("#data_timer").html(htmls);
+            }
+        });
+        $(".fc-prev-button").on("click",this,function(){
+            cursor--;
+            var flag=judgment();
+            console.log(cursor);
+            if(cursor==0){nowday();return ;}
+            if(!flag){
+                $("#data_timer td").addClass("pasttd");
+            }
+            else{
+                $("#data_timer").html(htmls);
+            }
+        });
+        function nowday(){
+            if(today==0){today=7};
+            $("#data_timer").html(htmls);
+            $("#data_timer tr").each(function(index, element) {
+                $(element).children("td").eq(today).prevAll("td").addClass("pasttd");
+            });
+        };
+        function judgment(){
+            var data_date=$(".fc-mon").attr("data-date");
+            var date=new Date(data_date);
+            var tt=Date.now();
+            if(date>tt){return 1;}
+            else{return 0;}
+        }
+    });
+
 </script>
 <script>
 	$(function(){

@@ -234,3 +234,8 @@ input{font-family:"微软雅黑";}
 .per-center-box dl dd a:hover,.per-center-box dl dd.active>a{color:#fff;background:#fa742c;border-top:1px solid #efefef;border-bottom:1px solid #efefef;}
 .per-center-box dl dd ul li a{padding-left: 75px;}
 .per-center-box dl dd ul li.active>a{ color:#fff;background:#fa742c;border-top:1px solid #efefef;border-bottom:1px solid #efefef;}
+
+.brcd{border-right: 1px #cdcdcd solid;padding-right: 15px}
+.wximg{display: none;padding:15px;text-align: center;position: absolute;border: 1px #ECEBEB solid;background: #fff;left:25px;top: 30px;z-index: 2000}
+.wximg:before{content: "";display: inline-block;position: absolute;border: 7px transparent solid;border-bottom-color: #fff;top:-14px;left:50%;margin-left: -7px}
+.wx:hover .wximg{display: block}

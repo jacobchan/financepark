@@ -16,7 +16,7 @@
 .fc th{background:#F6F6F6;text-align: center;color:#333;line-height:25px;padding:10px 0;}
 .fc-prev-button{left:0;background:url(../images/company/date_left.png) no-repeat;width:75px;height:142px}
 .fc-next-button{right:0;background:url(../images/company/date_right.png) no-repeat;width:75px;height:142px}
-.fc-prev-button,.fc-next-button{position:absolute;top:50%;border:none; outline:none;margin-top:-60px;}
+.fc-prev-button,.fc-next-button{position:absolute;top:50%;border:none; outline:none;margin-top:-60px;opacity: 0.6}
 
 /* Toolbar
 --------------------------------------------------------------------------------------------------*/
@@ -25,5 +25,5 @@
 .fc-toolbar .fc-left{float:left;color:#FE6714}
 .fc-toolbar .fc-right {float: right;}
 .fc-toolbar .fc-center{display: inline-block;}
-
+.fc-state-hover{opacity: 1}
 

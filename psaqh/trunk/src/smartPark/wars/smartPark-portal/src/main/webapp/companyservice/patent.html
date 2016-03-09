@@ -16,10 +16,10 @@
 <div class="w1200 bgfff">
 	<div class="adapt_img">
     	<img src="../styles/images/company/banner_pa.png"/>
+        <img src="../styles/images/company/banner_pa1.png" style="display:none" />
     </div>
     <div class="nav_box">
-    	<div class="nav_left"></div>
-        <div class="nav_right"></div>
+    	 
     	<ul class="clearfix">
         	<li class="nav_1">
             	<a href="Resource.html">
@@ -688,15 +688,16 @@
 <script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 <script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 <script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+<script type="text/javascript" src="../scripts/page/kefu.js"></script>
 <script>
 $(function(){
 	/*购物车*/
 	$(".patent_ul li").hover(function(){
-		$(this).children("div").hide();
-		$(this).children(".patent_shop").show();
+		$(this).children("div").slideUp();
+		$(this).children(".patent_shop").slideDown();
 	},function(){
-		$(this).children("div").show();
-		$(this).children(".patent_shop").hide();
+		$(this).children("div").slideDown();
+		$(this).children(".patent_shop").slideUp();
 	});
 	$(".add").click(function(){
 		var count=$(this).parent().prev().val();
@@ -714,6 +715,7 @@ $(function(){
 		var index=$(this).index();
 		$(this).addClass("active").siblings("li").removeClass("active");
 		$(".tabbox").eq(index).show().siblings(".tabbox").hide();
+        $(".adapt_img img").eq(index).show().siblings("img").hide();
 	});
 	/**/
 	$(".nav_1,.navsub").hover(function(){
