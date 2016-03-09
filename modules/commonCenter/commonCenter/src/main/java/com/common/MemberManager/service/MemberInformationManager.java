@@ -83,17 +83,5 @@ public interface MemberInformationManager extends BaseManager{
 	 */
 	 public MemberInformation getMemberInformationByLoginUser(MemberInformation o) throws BusException;
 	
-	/**
-	 * 获取用户基本信息	 */
-	public List<MemberInformation> getMemberInformation() throws BusException;
-	/**修改电话*/		 
-	 public MemberInformation updatePhone(
-	    		 String memberId,
-	    		String memberPhoneNumber
-	    		) throws BusException;	 	
-	 /**修改密码*/
-	       public MemberInformation updatePassword(
-	       		String memberId,
-	       		 String memberPassword
-	       		) throws BusException;
+
 }
