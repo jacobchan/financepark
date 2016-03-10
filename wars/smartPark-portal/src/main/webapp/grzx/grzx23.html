@@ -47,7 +47,7 @@
 								<td>鲁智深</td>
 								<td>2016-02-01 10:30 </td>
 								<td>未办理</td>
-								<td><a href="javascript:;" class="ac-see">取消</a></td>
+								<td><a href="javascript:;" class="ac-cancle">取消</a></td>
 							</tr>
 							<tr>
 								<td><a href="">123456789</a></td>
@@ -78,7 +78,20 @@
 	<!--***bottom end****************************************-->
 
 	<!--***弹窗 start****************************************-->
-	<div class="bg-tanc" >
+	<div class="bg-tanc m1">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="w60 tc mt40" style="margin-left:20%">
+				<div class="mt20 mb20 f16 lh26">
+					<img src="../styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o"> [ 123456789 ] </span>吗？
+				</div>
+				<p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p>
+				<input value="确定" class="hhf-submit" style="height:36px;" type="submit">
+			</div>
+		</div>
+	</div>
+	
+	<div class="bg-tanc m2" >
 		<div class="tanc-con" style="top:50%;margin-top:-225px;width:900px;padding:40px 30px;">
 			<a href="javascript:;" class="tc-close"></a>
 			<h3 class="mb10" style="color:#666;"><b class="mr50">孵化器政策\租金</b><b class="ml50">申请编号：99999</b></h3>
@@ -134,7 +147,10 @@
 	<script type="text/javascript">
 		$(function () {
 			$(".ac-see").click(function(){
-				$(".bg-tanc").show();
+				$(".bg-tanc.m2").show();
+			})
+			$(".ac-cancle").click(function(){
+				$(".bg-tanc.m1").show();
 			})
 		})
 	</script>

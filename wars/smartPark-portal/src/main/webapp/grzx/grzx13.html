@@ -11,7 +11,32 @@
 	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/adcom.js"></script>
-	
+	<script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
+	<script>
+		$(function(){
+			var start = {
+			    elem: '#startTime',
+			    min: '2013-06-16 23:59:59', //设定最小日期为当前日期
+			    max: '2099-06-16 23:59:59', //最大日期
+			    istoday: false,
+			    choose: function(datas){
+			         end.min = datas; //开始日选好后，重置结束日的最小日期
+			         end.start = datas //将结束日的初始值设定为开始日
+			    }
+			};
+			var end = {
+			    elem: '#endTime',
+			    min: '2013-06-16 23:59:59',
+			    max: '2099-06-16 23:59:59',
+			    istoday: false,
+			    choose: function(datas){
+			        start.max = datas; //结束日选好后，重置开始日的最大日期
+			    }
+			};
+			laydate(start);
+			laydate(end);
+		})
+	</script>
 </head>
 <body style="background-color:#f4f4f4;">
 	<!--***top start****************************************-->
@@ -26,8 +51,8 @@
 					<div class="clearfix">
 						<div class="mt20 gr-txl clearfix lh30">
 							<label class="fl mr20 f16">申请时间：</label>
-							<input class="bd-input fl" type="text"><span class="fl ml15 mr15">到</span>
-							<input class="bd-input fl" type="text">
+							<input class="bd-input fl" type="text" id="startTime"><span class="fl ml15 mr15">到</span>
+							<input class="bd-input fl" type="text" id="endTime">
 							<div class="inp-box ml20"><input placeholder="订单号查询" type="text"><a class="fa fa-search" href=""></a></div>
 							<input value="搜索" class="hhf-submit f14 fr" type="button">
 						</div>

@@ -70,7 +70,7 @@
 								<td>已完工</td>
 								<td>乔布斯</td>
 								<td>18659786621</td>
-								<td><a href="javascript:;">付款</a><span class="f12 ml5 mr5">|</span><a href="">申请重修</a></td>
+								<td><a href="grzx24.html">付款</a><span class="f12 ml5 mr5">|</span><a href="javascript:;" class="show-m2">申请重修</a></td>
 							</tr>
 							<tr>
 								<td><a href="">123456789</a></td>
@@ -131,7 +131,7 @@
 	<!--***bottom end****************************************-->
 
 	<!--***弹窗 start****************************************-->
-	<div class="bg-tanc">
+	<div class="bg-tanc m1">
 		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
 			<a href="javascript:;" class="tc-close"></a>
 			<div class="w60 tc mt40" style="margin-left:20%">
@@ -141,6 +141,34 @@
 				<p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p>
 				<input value="确定" class="hhf-submit" style="height:36px;" type="submit">
 			</div>
+		</div>
+	</div>
+	
+	<div class="bg-tanc m2">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:400px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<h3 class="mb10 f16 c-333" style="font-size:16px;"><b>申请重修</b></h3>
+			<table class="line-table cic-l-t wybx-tanc" style="font-size:12px;">
+				<colgroup>
+					<col width="50%">
+					<col>
+				</colgroup>
+				<tbody>
+				<tr class="show2">
+					<td>维修类型：水电类</td>
+					<td align="right">申请人：李先生</td>
+				</tr>
+				<tr class="show2">
+					<td>订单状态：已完工</td>
+					<td align="right"></td>
+				</tr>
+				<tr>
+					<td colspan="2"><textarea placeholder="在此输入重修理由"></textarea></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="button" class="ib-btn" style="width:100%" value="确认申请"></td>
+				</tr>
+			</tbody></table>
 		</div>
 	</div>
 	<!--***弹窗 end****************************************-->
@@ -161,9 +189,12 @@
 						}
 					});
 				}
-			$(".ac-show").click(function(){
-				$(".bg-tanc").show();
-			})
+				$(".ac-show").click(function(){
+					$(".bg-tanc.m1").show();
+				})
+				$(".show-m2").click(function(){
+					$(".bg-tanc.m2").show();
+				})
 		})
 	</script>
 </body>
