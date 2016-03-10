@@ -12,8 +12,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.EsbServiceMapping;
-import com.gsoft.framework.esb.annotation.ServiceParam;
+
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerMoverec;
 
 public interface PropertyservicemanagerMoverecManager extends BaseManager{
@@ -70,25 +69,6 @@ public interface PropertyservicemanagerMoverecManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public void upMovById(String id) throws BusException;
-
-	/**
-     * 获取当前id
-     * @return
-     * @throws BusException
-     */
-    
-	public List<PropertyservicemanagerMoverec> getPayListByLoginUser() throws BusException; 
-	
-    /**
-     * 修改状态
-     * @return
-     * @throws BusException
-     */
-   
-    public PropertyservicemanagerMoverec updatePayStatus(
-     String moverecId,
-	 String movereStatus) throws BusException ; 	
-
 	/**
 	 * 根据当前登录获取搬家放行
 	 * @param o 搬家对象
@@ -96,5 +76,4 @@ public interface PropertyservicemanagerMoverecManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public List<PropertyservicemanagerMoverec> getMovListforpage(PropertyservicemanagerMoverec o) throws BusException;
-
 }
