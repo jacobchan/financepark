@@ -132,20 +132,22 @@ public class PropertyservicemanagerChargeManagerImpl extends BaseManagerImpl imp
 	 * @return
 	 * @throws BusException
 	 */
-    @EsbServiceMapping
-	public List<PropertyservicemanagerCharge> getChargeListforpage() throws BusException{
-		//先模拟一个登陆用户，之后会修改
-    	MemberInformation mem = null;
-    	MemberInformation member=memberInformationManager.getMemberInformationByLoginUser(mem);
-    	//获取当前用户参加活动的list
-    	Collection<Condition> condition = new ArrayList<Condition>();
-    	condition.add(ConditionUtils.getCondition("createUser", Condition.EQUALS, member.getMemberId()));
-    	List<PropertyservicemanagerCharge> list = propertyservicemanagerChargeDao.commonQuery(condition, null);
-    	if(list.size()>0){
-    		return list;
-    	}else{
-    		return null;
-    	}
+    @EsbServiceMapping(pubConditions={@PubCondition(property="createUser",pubProperty="userId")})
+	public List<PropertyservicemanagerCharge> getChargeListforpage(PropertyservicemanagerCharge o) throws BusException{
+		String id = o.getCreateUser();
+		if(id!=null){
+	    	//获取当前用户参加活动的list
+	    	Collection<Condition> condition = new ArrayList<Condition>();
+	    	condition.add(ConditionUtils.getCondition("createUser", Condition.EQUALS, id));
+	    	List<PropertyservicemanagerCharge> list = propertyservicemanagerChargeDao.commonQuery(condition, null);
+	    	if(list.size()>0){
+	    		return list;
+	    	}else{
+	    		return null;
+	    	}
+		}else{
+			return null;
+		}
 	}
 
 }

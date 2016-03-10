@@ -68,5 +68,5 @@ public interface PropertyservicemanagerChargeManager extends BaseManager{
 	 * @return
 	 * @throws BusException
 	 */
-	public List<PropertyservicemanagerCharge> getChargeListforpage() throws BusException;
+	public List<PropertyservicemanagerCharge> getChargeListforpage(PropertyservicemanagerCharge o) throws BusException;
 }
