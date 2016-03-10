@@ -24,6 +24,6 @@ $(function(){
 			}
 		});
 	});
-	
+	$('#youi_page_right').load($.youi.serverConfig.contextPath+'/common/list_right.html');
 	$('#youi_page_footer').load($.youi.serverConfig.contextPath+'/common/footer.html');
 });
