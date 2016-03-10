@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>物业报修</title>
@@ -48,13 +49,13 @@
 								<col></col>
 							</colgroup>
 							<tr>
-								<td align="center">企业名称</td>
+								<td align="center" id="bxComp">企业名称</td>
 								<td><input type="text"></td>
 								<td align="center">报修类型</td>
 								<td>
 									<div class="tct-select">
 										<div class="ic-select">
-											<p>空调类</p>
+											<p id="bxType">空调类</p>
 										</div>
 										<ul style="display: none;" class="select-nav">
 											<li>空调类</li>
@@ -66,7 +67,7 @@
 							</tr>
 							<tr>
 								<td align="center">相关描述</td>
-								<td colspan="3"><textarea></textarea></td>
+								<td colspan="3"><textarea id="bxRemark"></textarea></td>
 							</tr>
 							<tr>
 								<td align="center">相关附件</td>
@@ -144,7 +145,7 @@
 	<script type="text/javascript">
 		$(function(){
 			$(".hhf-submit").click(function(){
-				var obj={
+				/* var obj={
 				bxComp:$("#bxComp").val(),
 				bxWay:$("#bxWay").text(),
 				bxType:$("#bxType").text(),
@@ -154,7 +155,36 @@
 				bxFujian:$("#upload").val()
 				};
 				var str=JSON.stringify(obj);
-				alert(str);
+				alert(str); */
+				
+				/* if(!isLogin){alert("请登录");return;} */
+				var remark = $("#bxRemark").val();
+				if(remark=="" || remark.length==0){
+					alert("请输入相关描述！");
+					return false;
+				}
+				var params = ['bxComp='+$("#bxComp").val(),
+								//'bxWay='+$("#bxWay").text(),
+								'bxType=00',
+								//'bxProject='+$("#bxProject").text(),
+								'bxRemark='+remark,
+								'bxFujian='+$("#upload").val(),'bxStatus=00'];
+				var serviceURL = "http://localhost:8088/smartPark-web/esb/web/propertyservicemanagerBxManager/savePropertyservicemanagerBx.json";
+		
+				//公共方法
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					data:params.join('&'),
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(results){
+						if(results&&results.record){
+							alert("申请成功!");
+							window.location="/grzx/grzx8.html";
+						}
+					}
+				});
+				
 			});
 		});
 	</script>
