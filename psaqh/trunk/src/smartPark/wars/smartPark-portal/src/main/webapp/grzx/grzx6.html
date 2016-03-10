@@ -11,7 +11,13 @@
 	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/adcom.js"></script>
-	
+	<script type="text/javascript">
+		$(function(){
+			$(".hhf-submit.bd").click(function () {
+				$(this).parent(".mt20").hide().next(".mt20").show();
+			})
+		})
+	</script>
 </head>
 <body style="background-color:#f4f4f4;">
 	<!--***top start****************************************-->
@@ -25,6 +31,10 @@
 					<h3 class="per-h3">一卡通绑定</h3>
 					<h4 class="f16 mt20">绑定信息</h4>
 					<div class="mt20">
+						<input class="bd-input" type="text" style="width:290px;" placeholder="请输入卡号">
+						<input value="绑定" class="hhf-submit bd" style="padding:0px 10px;height:30px;" type="button">
+					</div>
+					<div class="mt20 undis">
 						<img src="../styles/images/grzx/check.png" border="0" />
 						<span class="ml30 mr30">已绑定卡号：<font class="c-o">123456789</font></span>
 						<input value="解除绑定" class="hhf-submit" style="padding:0px 10px;height:30px;" type="button">
