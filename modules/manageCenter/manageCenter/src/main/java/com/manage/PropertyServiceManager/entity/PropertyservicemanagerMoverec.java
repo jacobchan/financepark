@@ -82,6 +82,30 @@ public class PropertyservicemanagerMoverec implements Domain{
 	@Length(max=2)
 	private String moverecStatus;//搬家状态
 	
+	@Column(name = "MOVEREC_PHONE_")
+	@Length(max=20)
+	private String moverecPhone;//搬家联系电话
+	
+	@Column(name = "MOVEREC_FXMEM_")
+	@Length(max=36)
+	private String moverecFxmem;//放行人
+	
+	public String getMoverecFxmem() {
+		return moverecFxmem;
+	}
+
+	public void setMoverecFxmem(String moverecFxmem) {
+		this.moverecFxmem = moverecFxmem;
+	}
+
+	public String getMoverecPhone() {
+		return moverecPhone;
+	}
+
+	public void setMoverecPhone(String moverecPhone) {
+		this.moverecPhone = moverecPhone;
+	}
+
 	public String getMoverecCode() {
 		return moverecCode;
 	}
@@ -201,9 +225,13 @@ public class PropertyservicemanagerMoverec implements Domain{
 		result = prime * result
 				+ ((moverecComp == null) ? 0 : moverecComp.hashCode());
 		result = prime * result
+				+ ((moverecFxmem == null) ? 0 : moverecFxmem.hashCode());
+		result = prime * result
 				+ ((moverecId == null) ? 0 : moverecId.hashCode());
 		result = prime * result
 				+ ((moverecName == null) ? 0 : moverecName.hashCode());
+		result = prime * result
+				+ ((moverecPhone == null) ? 0 : moverecPhone.hashCode());
 		result = prime * result
 				+ ((moverecRemark == null) ? 0 : moverecRemark.hashCode());
 		result = prime * result
@@ -255,6 +283,11 @@ public class PropertyservicemanagerMoverec implements Domain{
 				return false;
 		} else if (!moverecComp.equals(other.moverecComp))
 			return false;
+		if (moverecFxmem == null) {
+			if (other.moverecFxmem != null)
+				return false;
+		} else if (!moverecFxmem.equals(other.moverecFxmem))
+			return false;
 		if (moverecId == null) {
 			if (other.moverecId != null)
 				return false;
@@ -264,6 +297,11 @@ public class PropertyservicemanagerMoverec implements Domain{
 			if (other.moverecName != null)
 				return false;
 		} else if (!moverecName.equals(other.moverecName))
+			return false;
+		if (moverecPhone == null) {
+			if (other.moverecPhone != null)
+				return false;
+		} else if (!moverecPhone.equals(other.moverecPhone))
 			return false;
 		if (moverecRemark == null) {
 			if (other.moverecRemark != null)
