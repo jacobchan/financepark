@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="fl ml10">
-            	<input type="text" placeholder="来访日期"/>
+            	<input type="text" id="lf_date" placeholder="来访日期"/>
             </div>
             <div class="fl ml10">
             	<input type="text" placeholder="来访时间"/>
@@ -225,7 +225,7 @@
             </table>
         </div>
         <div class="content_left mt30"><!--content_left  start-->
-        	<div class="mb10"><span class="span_ac ">热门推荐</span></div>
+        	<div class="mb10"><span class="span_ac ">热门推荐</span><a class="fr" href="#">更多》</a></div>
             <ul class="hotul clearfix">
             	<li>
                 	<div class="hot_img"><a href="./companyservice/com_register.html"><img src="styles/images/index/hot1.jpg"/></a></div>
@@ -471,7 +471,7 @@
                     <input type="date" id="gotodate"/>
                 </div>
                 <div style="padding-left:70px">
-                	<input type="submit" class="btn-cheng" value="搜索">
+                	<input type="submit" class="btn-cheng" value="搜索" onclick="window.open ('hcxx.html')">
                 </div>
             </form>
             <form class="reform" style="display:none">
@@ -497,7 +497,7 @@
                     <input type="text" id="offset"/>
                 </div>
                 <div style="padding-left:70px">
-                	<input type="submit" class="btn-cheng" value="搜索">
+                	<input type="submit" class="btn-cheng" value="搜索" onclick="window.open ('jd4.html')">
                 </div>
             </form>
         </div>
@@ -586,12 +586,14 @@
 	<script type="text/javascript" src="scripts/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
+	<script type="text/javascript" src="scripts/page/laydate/laydate.js"></script>
 	<script type="text/javascript">
 		$(function(){
 			$('.cp_info').plist({
 				template:'<a class="tc" href=xq?id={commodityId}.html><div class="cp"><img src={commodityImage}></div>{commodityTitle}<p class="cc">&yen;{commodityPrice}</p></a>',
 				jsonpSrc:'http://localhost:9088/jsonp/data.jsp?data:file=test.json'
 			});
+			
 		});
 	</script>
 <script type="text/javascript">
@@ -641,7 +643,7 @@
 			$(this).addClass("span_bold").siblings().removeClass("span_bold");
 			$(".menu").eq(index).show().siblings(".menu").hide();
 		});
-		$(".reserve span").click(function(){
+		$(".reserve>span").click(function(){
 			var index=$(this).index();
 			$(this).addClass("span_bold").siblings().removeClass("span_bold");
 			$(".reform").eq(index).show().siblings("form").hide();
@@ -656,6 +658,35 @@
 			$(this).addClass("span_bold").siblings().removeClass("span_bold");
 			$(".tip_item").eq(index).show().siblings(".tip_item").hide();
 		});
+		
+		laydate({
+			    elem: '#lf_date', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+			    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+			});
+			
+			 var start = {
+			    elem: '#startTime',
+			    min: laydate.now(), //设定最小日期为当前日期
+			    max: '2099-06-16 23:59:59', //最大日期
+			    istoday: false,
+			    choose: function(datas){
+			         end.min = datas; //开始日选好后，重置结束日的最小日期
+			         end.start = datas //将结束日的初始值设定为开始日
+			    }
+			};
+			var end = {
+			    elem: '#endTime',
+			    min: laydate.now(),
+			    max: '2099-06-16 23:59:59',
+			    istoday: false,
+			    choose: function(datas){
+			        start.max = datas; //结束日选好后，重置开始日的最大日期
+			    }
+			};
+			laydate(start);
+			laydate(end);
+		
+		
 	})
 </script>
 	
