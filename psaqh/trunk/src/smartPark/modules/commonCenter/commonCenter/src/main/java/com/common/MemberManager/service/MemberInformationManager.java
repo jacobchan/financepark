@@ -81,7 +81,7 @@ public interface MemberInformationManager extends BaseManager{
 	 * @return
 	 * @throws BusException
 	 */
-	 public MemberInformation getMemberInformationByLoginUser(MemberInformation o) throws BusException;
+	 public MemberInformation getMemberInformationByLoginUser(String userId) throws BusException;
 	 /** 修改电话		*/	 
 	    public MemberInformation updatePhone(
 	    		String memberId,
