@@ -195,7 +195,7 @@ input{font-family:"微软雅黑";}
 /**头**/
 .head-top{padding: 10px 0px;line-height: 20px;}
 .head-top a{color: #cdcdcd;margin-right: 10px;font-size: 13px;}
-.head-top a:hover{color: #fff;}
+.head-top a:hover{color: #fff !important;}
 .header-cen{background: #fff;border-bottom: 1px solid #e8e8e8;padding: 20px 0px;}
 .header-cen .logo{display: inline-block;height: 40px;border-right: 1px solid #e8e8e8;padding-right: 20px;}
 .party-change{float: left;margin-left: 20px;margin-top: 1px;height: 40px;}
