@@ -93,13 +93,33 @@
 <script>
 $(function(){
 	var arg=getQueryStringArgs();
-	$('.goods_img').filters({
-        template:'<img src={commodityImage}big.png>',
-        jsonpSrc:'http://localhost:9088/jsonp/data.jsp?data:file=cg_bg.json',
-        type:"commodityId",
-        val:arg.id
-    });		
-            
+	var params = ['commodityId='+arg.id];
+	var serviceURL = "http://localhost:8088/smartPark-webdev/esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommodity.json";
+	$.youi.ajaxUtils.ajax({
+		url:serviceURL,
+		data:params.join('&'),
+		jsonp:'data:jsonp',
+		dataType:'jsonp',
+		success:function(results){
+			if(results&&results.record){
+				$('.lh40').html(results.record.commodityTitle);
+				$('.ccheng').html("&yen;"+results.record.commodityPrice);
+				var commodityImage = results.record.commodityImage;
+				var images = commodityImage.split(',');
+				var htmls = [];
+				var y = parseInt(images.length/2);
+				for(var i=0;i<images.length;i++){
+					if(i==y){
+						htmls.push('<li class="active"><img width="55px" src=../filestore/'+images[i]+'></li>');
+						$('.goods_img').html('<img height="181px" src=../filestore/'+images[i]+'>');
+					}else{
+						htmls.push('<li><img width="55px" src=../filestore/'+images[i]+'></li>');
+					}
+				}
+				$('.goods_ul').html(htmls.join(''));
+			}
+		}
+	});
 });
 </script>
 <script>
