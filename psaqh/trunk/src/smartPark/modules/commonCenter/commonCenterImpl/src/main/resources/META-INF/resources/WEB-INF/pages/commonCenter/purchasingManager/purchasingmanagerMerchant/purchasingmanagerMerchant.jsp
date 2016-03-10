@@ -47,6 +47,7 @@
 			<youi:fieldText property="merchantLinkmanPhone"  caption="联系人电话" notNull="true"/>
 			<youi:fieldText property="merchantSendAddress"  caption="发货地址" notNull="true"/>
 			<youi:fieldText property="merchantReturnAddress"  caption="退货地址" notNull="true"/>
+			<youi:fieldSwfupload property="merchantLogo" caption="商户LOGO" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" fileUploadLimit="1" fileQueueLimit="1"/>
 			<youi:fieldHidden property="merchantId"  caption="商品ID"/>
 		</youi:fieldLayout>
 	</youi:form>
