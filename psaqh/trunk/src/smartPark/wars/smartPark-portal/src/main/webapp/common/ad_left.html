@@ -22,9 +22,9 @@
 			<dd><a href="grzx15.html">我的人脉</a></dd>
 			<dd><a href="grzx16.html">我的收益</a></dd>
 			<dt>极速采购</dt>
-			<dd>
+			<dd class="show-ul">
 				<a href="grzx18.html">我的订单 <i class="fa fa-angle-down ml10" style="font-size:16px"></i></a>
-				<ul class="undis">
+				<ul>
 					<li><a href="grzx18-2.html">退货</a></li>
 					<li class="active"><a href="grzx18-3.html">评价晒单</a></li>
 					<li><a href="grzx18-4.html">订单详情</a></li>
@@ -36,3 +36,11 @@
 			<dd><a href="grzx21.html">我发布的活动</a></dd>
 		</dl>
 	</div>
+	
+	<script>
+		$(function(){
+			$(".w200 .show-ul").click(function(){
+				$(this).find("ul").removeClass("undis");
+			})
+		})
+	</script>
