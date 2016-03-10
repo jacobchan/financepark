@@ -85,6 +85,11 @@
 		};					 
 		$('.hhf-submit').click(function(){
 			this.disabled=true;
+			if (window.confirm("您确定要修改吗?")) {
+				return true;
+				}else{
+				return false;
+				}
 			var memberId=$("#memberId").html();			
 			var memberPhoneNumber=$("#newmemberPhoneNumber").val();			
 			var params = ['memberId='+memberId+'','memberPhoneNumber='+memberPhoneNumber+''];
