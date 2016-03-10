@@ -31,6 +31,7 @@ import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCharge;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerOc;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSfpro;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerSfproDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerChargeManager;
@@ -247,5 +248,31 @@ public class PropertyservicemanagerSfproManagerImpl extends BaseManagerImpl impl
 			}
 		}
 	}
-
+	/**
+     * 获取当前登录用户一卡通号码
+     * @return
+     * @throws BusException
+     */
+    @EsbServiceMapping
+	public List<PropertyservicemanagerSfpro> getPayListByLoginUser() throws BusException {
+    	//先模拟一个登陆用户memberId=1，先在数据库插入memberId=1
+    	String m="1"; 
+    	return propertyservicemanagerSfproDao.getList("sfproId", m); 
+	}
+    /**
+     * 修改一付款绑定状态
+     * @return
+     * @throws BusException
+     */
+   @EsbServiceMapping
+    public PropertyservicemanagerSfpro updatePayStatus(
+    		@ServiceParam(name="sfproId") String sfproId,
+    		@ServiceParam(name="payStatus") String payStatus
+    		) throws BusException{   	
+	   PropertyservicemanagerSfpro pss = propertyservicemanagerSfproDao.get(sfproId);  
+    		
+	       pss.setPayStatus(payStatus);
+	    	return propertyservicemanagerSfproDao.save(pss);
+    		
+    }
 }
