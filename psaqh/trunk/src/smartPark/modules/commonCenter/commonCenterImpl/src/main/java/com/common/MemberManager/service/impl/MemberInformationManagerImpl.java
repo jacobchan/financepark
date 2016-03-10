@@ -89,6 +89,8 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 			@ConditionCollection(domainClazz=MemberInformation.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
 		PagerRecords pagerRecords = memberInformationDao.findByPager(pager, conditions, orders);
+		pagerRecords.getTotalCount();
+		Pager pager1=pagerRecords.getPager();
 		return pagerRecords;
 	}
     /**
@@ -192,12 +194,13 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	 * @return
 	 * @throws BusException
 	 */
-	@EsbServiceMapping(pubConditions={@PubCondition(property="updateUser",pubProperty="userId")})
-	public MemberInformation getMemberInformationByLoginUser(MemberInformation o)
+	//@EsbServiceMapping(pubConditions={@PubCondition(property="updateUser",pubProperty="userId")})
+    @EsbServiceMapping
+	public MemberInformation getMemberInformationByLoginUser(@ServiceParam(name="userId",pubProperty="userId") String userId)
 			throws BusException {
 		// TODO Auto-generated method stub	
 		
-		return memberInformationDao.get(o.getUpdateUser());
+		return memberInformationDao.get(userId);
 	}
 	@Override
 	public List<String> getAccountMenus(MemberInformation member) {
