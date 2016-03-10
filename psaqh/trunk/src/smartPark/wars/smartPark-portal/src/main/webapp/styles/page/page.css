@@ -594,7 +594,7 @@ border:1px #f3f3f3 solid;}
 .login_foot a{color:#B8B8B8;margin:0 20px;display:inline-block;font-size: 14px;}
 .login_foot a:hover{color: #666;}
 
-.kf_layer{width:200px;height:410px;position: fixed;right:0;top:20%;background: #fff;border:1px #FF6715 solid;color: #FF6715}
+.kf_layer{width:200px;height:410px;position:fixed;right:0;top:20%;background: #fff;border:1px #FF6715 solid;color: #FF6715;z-index: 7777;}
 .tel{padding-top:65px;background: url(../images/company/kf1.png) center 10px no-repeat;line-height: 20px}
 .kf_time{padding-top:50px;background: url(../images/company/kf2.png) center 5px no-repeat;line-height: 25px}
 .kfqq{background: url(../images/company/kfqq.png) no-repeat;display: inline-block;width: 136px;height: 32px;}
