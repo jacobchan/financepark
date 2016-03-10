@@ -71,12 +71,12 @@ public interface ActivityApplyManager extends BaseManager{
      * 获取当前登录用户参加活动集合
      * 
      */    
-    public List<ActivityApply> getParticipateActivityList() throws BusException;
+    public List<ActivityApply> getParticipateActivityList(String userId) throws BusException;
     /**
      * 获取当前登录用户发布活动集合
      * 
      */    
-    public List<ActivityApply> getPublishActivityList() throws BusException;
+    public List<ActivityApply> getPublishActivityList(String userId) throws BusException;
     /**
      * 根据活动主键查询报名名单
      * 
