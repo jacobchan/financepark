@@ -22,7 +22,12 @@ import com.gsoft.framework.core.dataobj.Domain;
 public class PropertyservicemanagerSfpro implements Domain{
 	
 	private static final long serialVersionUID = -900697343768001146L;
-	
+	@Column(name = "DUE_DATE_")
+	private String dueDate;//创建时间
+
+	@Column(name = "PAY_STATUS_")
+	@Length(max=12)
+	private String payStatus;//支付状态
 
 	@Column(name = "UPDATE_USER_")
 	@Length(max=36)
@@ -115,6 +120,23 @@ public class PropertyservicemanagerSfpro implements Domain{
 	}
 	
 	
+	public String getPayStatus() {
+		return payStatus;
+	}
+
+	public void setPayStatus(String payStatus) {
+		this.payStatus = payStatus;
+	}
+	
+
+	public String getDueDate() {
+		return dueDate;
+	}
+
+	public void setDueDate(String dueDate) {
+		this.dueDate = dueDate;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
