@@ -134,6 +134,17 @@
 		$(".close0").click(function(){
 			$(".pop_layer").hide();
 		});
+		
+		$(".btn-cheng").click(function(){
+			var arr=new Array();
+			$("#calendar .today").each(function(){
+				var ids=$(this).attr("id");
+				ids=ids.substr(9);
+				arr.push(ids);
+			});
+			alert(arr);
+		});
+		
 	})
 </script>
 </body>
