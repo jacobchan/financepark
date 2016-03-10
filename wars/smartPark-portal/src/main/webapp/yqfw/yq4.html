@@ -143,9 +143,7 @@ $(function(){
 			alert("请输入联系电话！");
 			return false;
 		}else{
-			if(isMobil(phone)){
-				
-			}else{
+			if(!isMobil(phone)){
 				alert("手机号格式不正确！");
 				return false;
 			}
