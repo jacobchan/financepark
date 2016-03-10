@@ -259,5 +259,50 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		return -1;
 	}
 	
+	@EsbServiceMapping(pubConditions={@PubCondition(property="memberName",pubProperty="userId")})
+	   	public List<MemberInformation> getMemberInformation() throws BusException {
+	       	//,先在数据库插入memberId=1
+	       	String m="1"; 
+	       	return memberInformationDao.getList("memberId", m); 
+	}
+
+	/**
+	 * 修改电话
+	 * @param memberId
+	 * @param memberPhoneNumber
+	 * @return
+	 * @throws BusException
+	 */
+   @EsbServiceMapping
+    public MemberInformation updatePhone(
+    		@ServiceParam(name="memberId") String memberId,
+    		@ServiceParam(name="memberPhoneNumber") String memberPhoneNumber
+    		) throws BusException{   	
+ 	        MemberInformation m = memberInformationDao.get(memberId);  
+    		
+    		m.setMemberPassword(memberPhoneNumber);
+	    	return memberInformationDao.save(m);
+    		
+    }
+	       /**
+	        * 修改密码
+	        * * @param memberId
+	          * @param memberPassword
+	        * @return
+	        * @throws BusException
+	        */
+	      @EsbServiceMapping
+	       public MemberInformation updatePassword(
+	       		@ServiceParam(name="memberId") String memberId,
+	       		@ServiceParam(name="memberPassword") String memberPassword
+	       		) throws BusException{   	
+	    	  MemberInformation m = memberInformationDao.get(memberId);  
+	       		
+	       		m.setMemberPassword(memberPassword);
+	   	    	return memberInformationDao.save(m);
+	       		
+	       }
+	    
+	
 
 }
