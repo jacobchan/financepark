@@ -40,11 +40,12 @@
 						<tr >
 							<td>
 							新手机号码
-							<a href="javascript:;" class="ml15 open-tanc" style="padding:0px 25px;">获取验证码</a>
+							
 							
 							</td>
 							<td>
-							  <input type='text' id="newmemberPhoneNumber" />							  
+							  <input type='text' id="newmemberPhoneNumber" />	
+							  <a href="javascript:;" class="ml15 open-tanc" style="padding:0px 25px;">获取验证码</a>						  
 							</td>
 						</tr>
 						<tr >
