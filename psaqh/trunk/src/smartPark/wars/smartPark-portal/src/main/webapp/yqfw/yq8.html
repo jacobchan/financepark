@@ -47,7 +47,7 @@
 							</tr>
 							<tr>
 								<td align="cneter">联系电话</td>
-								<td><input type="text"></td>
+								<td><input type="text" id="phone"></td>
 								<td align="center">提交方式</td>
 								<td>
 									<div class="tct-select">
@@ -184,7 +184,7 @@
 	<script type="text/javascript">
 		$(function(){
 			$(".hhf-submit").click(function(){
-				var obj={
+				/* var obj={
 					moverecComp:$("#moverecComp").val(),
 					moverecWay:$("#moverecWay").text(),
 					moverecUnit:$("#louyu").val()+$("#unit").val(),
@@ -192,8 +192,49 @@
 					moverecRemark:$("#moverecRemark").val()
 				};
 				var str=JSON.stringify(obj);
-				alert(str);
+				alert(str); */
+				var phone = $("#phone").val();
+				
+				if(phone=="" || phone.length==0){
+					alert("请输入联系电话！");
+					return false;
+				}else{
+					if(isMobil(phone)){
+						
+					}else{
+						alert("手机号格式不正确！");
+						return false;
+					}
+				}
+				
+				var params = ['moverecComp='+$("#moverecComp").val(),
+								'moverecWay=00',
+								'moverecUnit='+$("#louyu").val()+$("#unit").val(),
+								'moverecName='+$("#moverecName").val(),
+								'moverecPhone='+phone,
+								'moverecRemark='+$("#moverecRemark").val()];
+				var serviceURL = "http://localhost:8088/smartPark-web/esb/web/propertyservicemanagerMoverecManager/savePropertyservicemanagerMoverec.json";
+				
+				//公共方法
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					data:params.join('&'),
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(results){
+						if(results&&results.record){
+							alert("申请成功!");
+							window.location="/grzx/grzx11.html";
+						}
+					}
+				});
 			});
+			//校验手机号格式
+			function isMobil(s) {
+			    var patrn = /^(13[0-9]{9})|(14[0-9])|(18[0-9])|(15[0-9][0-9]{8})$/;
+			    if (!patrn.exec(s)) return false
+			    return true
+			}
 		});
 	</script>
 </body>
