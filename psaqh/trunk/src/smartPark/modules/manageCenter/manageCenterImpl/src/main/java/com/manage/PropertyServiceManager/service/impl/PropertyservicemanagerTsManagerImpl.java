@@ -23,10 +23,11 @@ import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSfpro;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTs;
+import com.manage.PropertyServiceManager.service.PropertyservicemanagerTsManager;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerBxDao;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerTsDao;
-import com.manage.PropertyServiceManager.service.PropertyservicemanagerTsManager;
 
 @Service("propertyservicemanagerTsManager")
 @Transactional
@@ -167,6 +168,30 @@ public class PropertyservicemanagerTsManagerImpl extends BaseManagerImpl impleme
 			propertyservicemanagerBxDao.save(bx);
 		}
 	}
+
+    @EsbServiceMapping
+   	public List<PropertyservicemanagerTs> getMemberInformationByLoginUser() throws BusException {
+       	//,先在数据库插入tsId=1
+       	String m="1"; 
+       	return propertyservicemanagerTsDao.getList("tsId", m); 
+   	}
+       /**
+        * 修改状态
+        * @return
+        * @throws BusException
+        */
+      @EsbServiceMapping
+       public PropertyservicemanagerTs updatepassword(
+       		@ServiceParam(name="memberId") String memberId,
+       		@ServiceParam(name="memberPassword") String memberPassword
+       		) throws BusException{   	
+   	   PropertyservicemanagerTs psm = propertyservicemanagerTsDao.get(memberId);  
+       		
+       		psm.setTsStatus(memberPassword);
+   	    	return propertyservicemanagerTsDao.save(psm);
+       		
+       }
+
     /**
 	 * 根据报修id查找接单状态下的派工记录
 	 * @param bxId
@@ -186,6 +211,7 @@ public class PropertyservicemanagerTsManagerImpl extends BaseManagerImpl impleme
 		}
 		return ts;		
 	}
+
 
     
 }
