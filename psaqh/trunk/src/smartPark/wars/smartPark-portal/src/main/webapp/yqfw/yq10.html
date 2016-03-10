@@ -46,7 +46,7 @@
 							</colgroup>
 							<tr>
 								<td align="center">企业姓名</td>
-								<td><input type="text"></td>
+								<td><input type="text" id="ocComp"></td>
 								<td></td>
 								<td></td>
 							</tr>
@@ -77,9 +77,9 @@
 								<td><label><input type="radio" checked="checked" class="mr5">到营业厅去领取</label> <span class="ml20 f12 c-o">领取地址：	t6航站楼－物业管理中心</span></td>
 							</tr>
 							<tr>
-								<td align="center">其他说明</td>
+								<td align="center" >其他说明</td>
 								<td colspan="3">
-									<textarea></textarea>
+									<textarea id="ocRemark"></textarea>
 								</td>
 							</tr>
 							<tr>
@@ -198,5 +198,41 @@
 	<!--***弹窗 end****************************************-->
 
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
+	
+	<script type="text/javascript">
+		$(function(){
+			$(".hhf-submit").click(function(){
+				
+				var time = +$('#timer').val();
+				
+				if(time=="" || time.length==0){
+					alert("请输入预约时间！");
+					return false;
+				}
+				
+				var params = ['ocComp='+$("#ocComp").val(),
+								'ocDate='+time,
+								'ocWay=00',
+								'ocStatus=00',
+								'ocRemark='+$("#ocRemark").val()];
+				
+				var serviceURL = "http://localhost:8088/smartPark-web/esb/web/propertyservicemanagerOcManager/savePropertyservicemanagerOc.json";
+				
+				//公共方法
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					data:params.join('&'),
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(results){
+						if(results&&results.record){
+							alert("申请成功!");
+							window.location="/grzx/grzx13.html";
+						}
+					}
+				});
+			});
+		});
+	</script>
 </body>
 </html>
