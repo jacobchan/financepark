@@ -217,7 +217,7 @@ input{font-family:"微软雅黑";}
 /**尾**/
 .bottom{background:#5E5E5E;color:#dadada;}
 .bottom a{color:#dadada; line-height:25px}
-.bottom a:hover{color: #fff;}
+.bottom a:hover{color: #fff !important;}
 .bottom dl{display: inline-block;margin-right:80px;float: left;}
 .bottom dl dt{margin-bottom: 20px;font-size: 14px;}
 .bottom dl dd{font-size:12px;}
