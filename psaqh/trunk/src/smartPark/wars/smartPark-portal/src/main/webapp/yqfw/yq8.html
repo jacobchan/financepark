@@ -211,13 +211,16 @@
 				var str=JSON.stringify(obj);
 				alert(str); */
 				var phone = $("#phone").val();
-				
+				var time = $('#timer').val();
 				if(phone=="" || phone.length==0){
 					alert("请输入联系电话！");
 					return false;
 				}else{
 					if(isMobil(phone)){
-						
+						if(time=="" || time.length==0){
+							alert("请输入搬家预约时间！");
+							return false;
+						}
 					}else{
 						alert("手机号格式不正确！");
 						return false;
@@ -229,6 +232,7 @@
 								'moverecUnit='+$("#louyu").val()+$("#unit").val(),
 								'moverecName='+$("#moverecName").val(),
 								'moverecPhone='+phone,
+								'moverecTime='+time,
 								'moverecRemark='+$("#moverecRemark").val()];
 				var serviceURL = "http://localhost:8088/smartPark-web/esb/web/propertyservicemanagerMoverecManager/savePropertyservicemanagerMoverec.json";
 				
