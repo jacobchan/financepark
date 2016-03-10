@@ -81,6 +81,17 @@
 						}
 					});
 				});
+			}else if(movstatus=='01'){
+				$.youi.messageUtils.confirm('确认放行?',function(){
+					$.youi.ajaxUtil.ajax({
+					url:'/esb/web/propertyservicemanagerMoverecManager/upMovById.json',
+					data:{id:selectedRecord.moverecId},
+					success:function(result){	
+						$elem('grid_propertyservicemanagerMoverec',pageId).grid('pReload');
+						alert("放行成功!");
+						}
+					});
+				});
 			}else{
 				alert("已处理成功!");
 			}	

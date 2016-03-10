@@ -21,6 +21,7 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
@@ -86,8 +87,9 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
    	    		throw new BusException("非企业用户没有权限申请！") ;
    	    	}
    	    	o.setMoverecStatus("00");
-   	    	//生成搬家发
+   	    	//生成搬家编号
    	    	o.setMoverecCode(BizCodeUtil.getInstance().getBizCodeDate("MOV"));
+   	    	o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
    	    	//保存并得到当前对象
    	    	return  propertyservicemanagerMoverecDao.save(o);
    	    	/*if(rec!=null){
@@ -141,12 +143,20 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
 		PropertyservicemanagerMoverec moverec = propertyservicemanagerMoverecDao.get(id) ;//得到搬家申请记录
 		
 		if(moverec!=null){
-				moverec.setMoverecStatus("01");
-	    		PropertyservicemanagerFxtdc propertyservicemanagerFxtdc = new PropertyservicemanagerFxtdc() ;
-	    		//设置搬家二维码状态为有效
-	    		propertyservicemanagerFxtdc.setFxtdcStatus("00");
-	        	propertyservicemanagerFxtdc.setPropertyservicemanagerMoverec(moverec);
-	        	propertyservicemanagerFxtdcManager.savePropertyservicemanagerFxtdc(propertyservicemanagerFxtdc);
+				String status = moverec.getMoverecStatus();
+				if(status.equals("00")){
+					moverec.setMoverecStatus("01");
+					moverec.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		    		PropertyservicemanagerFxtdc propertyservicemanagerFxtdc = new PropertyservicemanagerFxtdc() ;
+		    		//设置搬家二维码状态为有效
+		    		propertyservicemanagerFxtdc.setFxtdcStatus("00");
+		        	propertyservicemanagerFxtdc.setPropertyservicemanagerMoverec(moverec);
+		        	propertyservicemanagerFxtdcManager.savePropertyservicemanagerFxtdc(propertyservicemanagerFxtdc);
+				}else if(status.equals("01")){//放行
+					moverec.setMoverecStatus("02");
+					moverec.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+				}	
+				propertyservicemanagerMoverecDao.save(moverec);
 	    	}else{
 	    		throw new BusException("未找到记录!");
 	    	}
