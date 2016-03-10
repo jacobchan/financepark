@@ -31,7 +31,7 @@
 					<div class="clearfix-box" style="display:none;">
 						<div class="mt20 gr-txl clearfix lh30">
 							<div class="tct-select fl mr20" style="width:200px">
-								<div class="ic-select" style="background: transparent url(../images/yqfw/down.png) no-repeat scroll right center;">
+								<div class="ic-select" style="background: transparent url(../styles/images/yqfw/down.png) no-repeat scroll right center;">
 									<p class="c-b1">请选择订单项目</p>
 								</div>
 								<ul style="display: none;" class="select-nav">
@@ -191,6 +191,9 @@
 				$(this).addClass("active").siblings().removeClass("active");
 				$(".clearfix-box").hide();
 				$(".clearfix-box").eq($(this).index()).show();
+			})
+			$(".lq-show").click(function(){
+				$(".bg-tanc").show();
 			})
 		})
 	</script>
