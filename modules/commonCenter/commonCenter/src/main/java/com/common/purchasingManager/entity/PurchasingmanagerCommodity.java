@@ -103,7 +103,7 @@ public class PurchasingmanagerCommodity implements Domain{
     @JoinColumn(name="CATEGORY_ID_")
 	private com.common.purchasingManager.entity.PurchasingmanagerCategory purchasingmanagerCategory;//类目ID
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="MERCHANT_ID_")
 	private com.common.purchasingManager.entity.PurchasingmanagerMerchant purchasingmanagerMerchant;//商户ID
 	
