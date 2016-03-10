@@ -73,5 +73,5 @@ public interface MemberadrAddressManager extends BaseManager{
 	/**
      * 根据当前用户查询列表
      */
-    public List<MemberadrAddress> getMemberadrAddresssByUser() throws BusException;
+    public List<MemberadrAddress> getMemberadrAddresssByUser(String userId) throws BusException;
 }
