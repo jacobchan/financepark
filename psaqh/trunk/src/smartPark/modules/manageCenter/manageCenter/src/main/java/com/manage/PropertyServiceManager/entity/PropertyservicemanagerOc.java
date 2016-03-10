@@ -76,6 +76,9 @@ public class PropertyservicemanagerOc implements Domain{
 
 	@Column(name = "CREATE_TIME_")
 	private String createTime;//创建时间
+	@Column(name = "BIND_STATUS_")
+	@Length(max=12)
+	private String bindStatus;//绑定状态
 	
 	public String getOcCode() {
 		return ocCode;
@@ -179,6 +182,14 @@ public class PropertyservicemanagerOc implements Domain{
 	
 	
 	
+	public String getBindStatus() {
+		return bindStatus;
+	}
+
+	public void setBindStatus(String bindStatus) {
+		this.bindStatus = bindStatus;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
