@@ -13,6 +13,17 @@ $(function () {
 			$(this).parent().next(".ib-btn").attr("href","javascript:;");
 		}
 
+	});
+	$(".add-sh label").click(function(){
+		if($(this).children('input[name="address"]').prop("checked")){
+			if($(this).index()==1){
+				$(this).parent(".add-sh").find(".so1").show();
+				$(this).parent(".add-sh").find(".so2").hide();
+			}else{
+				$(this).parent(".add-sh").find(".so2").show();
+				$(this).parent(".add-sh").find(".so1").hide();
+			}
+		}
 	})
 	$(".check-btn .ib-btn").not(".bg-h").click(function(){
 		$(this).attr("href","yq2.html");
