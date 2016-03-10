@@ -40,7 +40,7 @@
 								<th>联系电话</th>
 								<th>操作</th>
 							</tr>
-							<tr>
+							<!-- <tr>
 								<td><a href="">123456789</a></td>
 								<td>2016-1-12</td>
 								<td>未受理</td>
@@ -71,7 +71,7 @@
 								<td>乔布斯</td>
 								<td>18659786621</td>
 								<td><a href="javascript:;" class="ac-show">取消</a></td>
-							</tr>
+							</tr> -->
 						</tbody></table>
 						<div class="fr page-list-a clearfix lh30 mt20 f12">
 							<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
@@ -135,11 +135,59 @@
 	<!--***弹窗 end****************************************-->
 	<script type="text/javascript">
 		$(function () {
-
 			$(".ac-show").click(function(e){
 				$(".bg-tanc").show();
-			})
-		})
+			});
+			
+			$.ajax({
+				url:'/smartPark-web/esb/web/propertyservicemanagerBxManager/getBxListforpage.json', 
+				success:function(result){
+					console.log(result);
+					if(result&&result.records){
+						_parseRecords(result.records);
+					}
+				}
+			});
+			
+		});
+		
+		//拼接列表
+		function _parseRecords(record){
+			for(var i=0;i<record.length;i++){
+				var bxStatus='';
+				var buttonHtml="<td><a href='javascript:;' class='ac-show'>取消</a></td>";
+				if(record[i].bxStatus='00'){
+					bxStatus='待受理';
+				}else if(record[i].bxStatus='01'){
+					bxStatus='已受理';
+				}else if(record[i].bxStatus='02'){
+					bxStatus='待接单';
+				}else if(record[i].bxStatus='03'){
+					bxStatus='已派工';
+				}else if(record[i].bxStatus='04'){
+					bxStatus='已完工';
+				}else if(record[i].bxStatus='05'){
+					bxStatus='已定价';
+					buttonHtml="<td><a href='javascript:;'>付款</a><span class='f12 ml5 mr5'>|</span><a href=''>申请重修</a></td>";
+				}else if(record[i].bxStatus='06'){
+					bxStatus='已付款';
+				}else if(record[i].bxStatus='07'){
+					bxStatus='已完成';
+				}else if(record[i].bxStatus='08'){
+					bxStatus='未受理';
+				}
+				var html="<tr>"+
+						"<td><a href=''>"+record[i].bxCode+"</a></td>"+
+						"<td>"+record[i].createTime+"</td>"+
+						"<td>"+bxStatus+"</td>"+
+						"<td>"+record[i].createUser+"</td>"+
+						"<td>18659786621</td>"+
+						buttonHtml+
+						"</tr>";
+				 $("tbody").append(html);
+	
+			}
+		};
 	</script>
 </body>
 <%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 

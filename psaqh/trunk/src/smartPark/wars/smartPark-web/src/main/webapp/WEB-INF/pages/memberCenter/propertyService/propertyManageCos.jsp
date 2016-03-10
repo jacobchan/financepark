@@ -40,38 +40,7 @@
 								<th>联系电话</th>
 								<th>操作</th>
 							</tr>
-							<tr>
-								<td><a href="">123456789</a></td>
-								<td>2016-1-12</td>
-								<td>是</td>
-								<td>乔布斯</td>
-								<td>18659786621</td>
-								<td><a href="javascript:;" class="ac-show">取消</a></td>
-							</tr>
-							<tr>
-								<td><a href="">123456789</a></td>
-								<td>2016-1-12</td>
-								<td>否</td>
-								<td>乔布斯</td>
-								<td>18659786621</td>
-								<td><a href="javascript:;" class="ac-show">取消</a></td>
-							</tr>
-							<tr>
-								<td><a href="">123456789</a></td>
-								<td>2016-1-12</td>
-								<td>是</td>
-								<td>乔布斯</td>
-								<td>18659786621</td>
-								<td>无效</td>
-							</tr>
-							<tr>
-								<td><a href="">123456789</a></td>
-								<td>2016-1-12</td>
-								<td>否</td>
-								<td>乔布斯</td>
-								<td>18659786621</td>
-								<td>已结束</td>
-							</tr>
+							
 						</tbody></table>
 						<div class="fr page-list-a clearfix lh30 mt20 f12">
 							<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
@@ -134,11 +103,56 @@
 	</div>
 	<!--***弹窗 end****************************************-->
 	<script type="text/javascript">
-		$(function () {
+		//读取当前用户投诉记录
+		$(function(){
+			$("#grzl").attr("class","");
+			$("#property").attr("class","active");
+			$.ajax({
+				url:'/smartPark-web/esb/web/propertyservicemanagerCosManager/getPropertyservicemanagerCoss.json',
+				success:function(result){
+					console.log(result.records);
+					if(result&&result.records){
+						_parseRecords(result.records);
+					}
+				}
+			});
 			$(".ac-show").click(function(){
 				$(".bg-tanc").show();
-			})
-		})
+			});
+		});
+		//格式化展示列表
+		function _parseRecords(record){
+			$("#count").append(record.length);
+			for(var i=0;i<record.length;i++){
+				var bool = "";
+				var status = "";
+				var crop = "";
+				if(record[i].cosBool=='0'){
+					bool = "是";
+				}else{
+					bool = "否";
+				}
+				if(record[i].cosStatus=='0'){
+					status = "待受理";
+					crop = "取消";
+				}else if(record[i].cosStatus=='1'){
+					status = "受理中";
+				}else if(record[i].cosStatus=='2'){
+					status = "已受理";
+				}else if(record[i].cosStatus=='3'){
+					status = "已退回";
+				}else if(record[i].cosStatus=='4'){
+					status = "已回访";
+				}else if(record[i].cosStatus=='5'){
+					status = "待评价";
+					crop = "评价";
+				}else if(record[i].cosStatus=='6'){
+					status = "已评价";
+				}
+				var html="<tr><td>"+record[i].cosCode+"</td><td>"+record[i].cosTime+"</td><td>"+bool+"</td><td>"+record[i].cosName+"</td><td>"+record[i].cosTelephone+"</td><td>"+status+"</td><td><a href='javascript:;' class='ac-show'>"+crop+"</a></td></tr>";
+				$("tbody").append(html);
+			}
+		};
 	</script>
 </body>
 <%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 
