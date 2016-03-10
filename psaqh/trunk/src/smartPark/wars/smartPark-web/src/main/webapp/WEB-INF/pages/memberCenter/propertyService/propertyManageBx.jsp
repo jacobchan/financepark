@@ -185,7 +185,9 @@
 						buttonHtml+
 						"</tr>";
 				 $("tbody").append(html);
-	
+				 $(".ac-show").click(function(e){
+						$(".bg-tanc").show();
+					});
 			}
 		};
 	</script>

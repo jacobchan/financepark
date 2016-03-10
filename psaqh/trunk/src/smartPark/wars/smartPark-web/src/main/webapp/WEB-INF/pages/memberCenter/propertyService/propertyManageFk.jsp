@@ -35,7 +35,7 @@
 							<tbody><tr>
 								<th>订单号</th>
 								<th>到访时间</th>
-								<th>到访时长</th>
+								<th>到访状态</th>
 								<th>访客姓名</th>
 								<th>访客电话</th>
 								<th>操作</th>
@@ -155,7 +155,7 @@
 				function star(ele){
 					$(ele).hover(function(){
 						var index=$(this).index()+1;
-						$(ele).removeClass("star1").addClass("star0")
+						$(ele).removeClass("star1").addClass("star0");
 						var arr=$(ele).toArray().slice(0,index);
 						for(var i=0;i<arr.length;i++){
 							arr[i].className="star1";
@@ -164,11 +164,42 @@
 				}
 			$(".ac-show").click(function(){
 				$(".bg-tanc.m1").show();
-			})
+			});
 			$(".ac-see").click(function(){
 				$(".bg-tanc.m2").show();
-			})
-		})
+			});
+			
+			$.ajax({
+				url:'/smartPark-web/esb/web/propertyservicemanagerFkcodeManager/getFkcodeListforpage.json', 
+				success:function(result){
+					console.log(result);
+					if(result&&result.records){
+						_parseRecords(result.records);
+					}
+				}
+			});
+		});
+		
+		//拼接列表
+		function _parseRecords(record){
+			for(var i=0;i<record.length;i++){
+				var html="<tr>"+
+						"<td><a href=''>"+record[i].fkcodeId+"</a></td>"+
+						"<td>"+record[i].fkcodeTime+"</td>"+
+						"<td>"+record[i].applyStatus+"</td>"+
+						"<td>"+record[i].fkcodeName+"</td>"+
+						"<td>"+record[i].fkcodeTelephone+"</td>"+
+						"<td><a href='javascript:;' class='ac-see'>查看二维码</a><span class='f12 ml5 mr5'>|</span><a href='javascript:;' class='ac-show'>取消访客</a></td>"+
+						"</tr>";
+				 $("tbody").append(html);
+				 $(".ac-show").click(function(){
+					 $(".bg-tanc.m1").show();
+				 });
+				 $(".ac-see").click(function(){
+					 $(".bg-tanc.m2").show();
+				 });
+			}
+		};
 	</script>
 </body>
 <%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 
