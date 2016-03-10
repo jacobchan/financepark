@@ -16,8 +16,7 @@
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/policyApply.html">政策申请</a></dd>
 			<dt>物业服务</dt>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/propertyService/propertyManageBx.html">物业报修</a></dd>
-			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/propertyService/propertycomplaints.html">物业投诉</a></dd>
-			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/propertyService/propertycomplaints.html">物业投诉</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/propertyService/propertyManageCos.html">物业投诉</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/propertyService/propertyManageFk.html">访客登记</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/propertyService/propertyManageMoverec.html">搬家放行</a></dd>
 			<dd><a href="querypayment.html">缴费查询</a></dd>

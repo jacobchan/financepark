@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/pages/common/memberCenterScriptAndCss.jsp"%>
 	<div style="background-color:#545454">
 		<div class="w1200 tr head-top clearfix">
-			<a>${account.loginName}</a>
+			<a>${user.loginName}</a>
 			<a href="<%=request.getContextPath()%>/member/memberCenter/logout.html">退出</a>
 		</div>
 	</div>
