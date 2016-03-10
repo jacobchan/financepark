@@ -22,9 +22,9 @@
         </div>
         <div class="clearfix">
             <div class="fl w75">
-                <ul class="square_ul">
+                <ul class="square_ul_office">
                     <li>
-                        <div class="cgimg"><img src="../styles/images/cg30/cg_w1.png"/></div>
+                        <div class="cgimg"><img src="file:///E:/filestore/uploadImages/201603/813fb050-139d-4ee1-a1f7-29dffc4f699b.png"/></div>
                         <a href="../cg30/cg_xq.html" class="c3">得力9091  文集金属网彩色文件夹</a>
                         <div class="mt5">
                             <span class="ccheng">8</span>元
@@ -113,7 +113,7 @@
         </div>
         <div class="clearfix">
             <div class="fl">
-                <ul class="square_ul">
+                <ul class="square_ul_clear">
                     <li>
                         <div class="cgimg"><img src="../styles/images/cg30/cg_q1.png"/></div>
                         <a href="../cg30/cg_xq.html" class="c3">得力909  文集金属网彩色文件夹</a>
@@ -198,7 +198,7 @@
         </div>
         <div class="clearfix">
             <div class="fl">
-                <ul class="square_ul">
+                <ul class="square_ul_home">
                     <li>
                         <div class="cgimg"><img src="../styles/images/cg30/cg_b1.png"/></div>
                         <a href="../cg30/cg_xq.html" class="c3">得力909  文集金属网彩色文件夹</a>
@@ -247,7 +247,7 @@
         </div>
         <div class="clearfix">
             <div class="fl">
-                <ul class="square_ul">
+                <ul class="square_ul_it">
                     <li>
                         <div class="cgimg"><img src="../styles/images/cg30/cg_it1.png"/></div>
                         <a href="../cg30/cg_xq.html" class="c3">得力909  文集金属网彩色文件夹</a>
@@ -296,7 +296,7 @@
         </div>
         <div class="clearfix">
             <div class="fl">
-                <ul class="square_ul">
+                <ul class="square_ul_phone">
                     <li>
                         <div class="cgimg"><img src="../styles/images/cg30/cg_sm1.png"/></div>
                         <a href="../cg30/cg_xq.html" class="c3">得力909  文集金属网彩色文件夹</a>
@@ -353,14 +353,16 @@
 <script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 <script type="text/javascript" src="../scripts/page/cg30com.js"></script>
 <script type="text/javascript">
+
         $(function(){
-            $('.square_ul>li').plist({
-                template:'<div class="cgimg"><img src={commodityImage}.png></div>'+
+        	var params = ['pager:pageIndex=1','pager:pageSize=6','commodityPrice=1000'];
+            $('.square_ul_office>li').plist({
+                template:'<div class="cgimg"><img width="231px" src=../filestore/{commodityCoverImage}></div>'+
                 		'<a href=../cg30/cg_xq.html?id={commodityId} class="c3">{commodityTitle}</a>'+
                 		'<div class="mt5"><span class="ccheng">{commodityPrice}</span>元'+
                 		'<a href=../cg30/shopcar.html?id={commodityId} class="fr"><img src="../styles/images/cg30/add.png"></a></div>'+
-                		'<div class="cg_tag"><img src={commodityBrand}.png></div>',
-                jsonpSrc:'http://localhost:9088/jsonp/data.jsp?data:file=cg_bg.json'
+                		'<div class="cg_tag"><img width="51px" src=../filestore/{purchasingmanagerMerchant.merchantLogo}></div>',
+                jsonpSrc:'http://localhost:8088/smartPark-webdev/esb/web/purchasingmanagerCommodityManager/getPagerPurchasingmanagerCommoditys.json?data:'+params.join('&')
             });
         });
 </script>
@@ -380,6 +382,27 @@
             var idx=$(this).index();
             $(".b2floor").eq(idx).toggleClass("hide");
         });
+        
+        /* var params = ['pager:pageIndex=1','pager:pageSize=6','commodityPrice=1000'];
+		var serviceURL = "http://localhost:8088/smartPark-web/esb/web/purchasingmanagerCommodityManager/getPagerPurchasingmanagerCommoditys.json";
+		$.youi.ajaxUtils.ajax({
+			url:serviceURL,
+			data:params.join('&'),
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(results){
+				if(results&&results.records){
+					var buff = "";
+					for(var i = 0;i<results.records.length;i++){
+						buff = buff+"<li><div class='cgimg'><img src='../styles/images/cg30/cg_w1.png'/></div><a href='../cg30/cg_xq.html' class='c3'>"+
+						results.records[i].commodityTitle+"</a><div class='mt5'><span class='ccheng'>"+results.records[i].commodityPrice+
+						"</span>元<a href='../cg30/shopcar.html' class='fr'><img src='../styles/images/cg30/add.png'/></a>"+
+						"</div><div class='cg_tag'><img src='../styles/images/cg30/cg_wtip.png'/></div></li>"
+					}
+					$('#office').html(buff);
+				}
+			}
+		}); */
     });
 </script>
 </body>
