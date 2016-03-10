@@ -60,7 +60,12 @@
 
 	<script type="text/javascript">
 
-	function apply(id){				
+	function apply(id){	
+		if (window.confirm("您确定要取消吗?")) {
+			return true;
+			}else{
+			return false;
+			}
 		var policyApplyStatus='2';
 		var policyApplyId=id;
 		var params = ['policyApplyId='+policyApplyId+'','policyApplyStatus='+policyApplyStatus+''];
@@ -81,7 +86,8 @@
 				
 				url:'/smartPark-web/esb/web/policyApplyManager/getPolicyApplyListByLoginUser.json',
 		//		url:'/smartPark-web/esb/web/policyApplyManager/getPolicyApplys.json',
-				success:function(result){					
+				success:function(result){	
+					confirm(111);
 					console.log(result.records);
 					if(result&&result.records){					
 						_parseRecords(result.records);						
@@ -91,14 +97,22 @@
 		});
 		//拼接卡号列表
 		function _parseRecords(record){		
-			for(var i=0;i<record.length;i++){
+			for(var i=0;i<record.length;i++){				
+				var status = "";								
+				if(record[i].policyApplyStatus=='0'){
+					status = "待受理";					
+				}else if(record[i].policyApplyStatus=='1'){
+					status = "已受理";
+				}else if(record[i].policyApplyStatus=='2'){
+					status = "已取消";
+				}
 				var html= "<tr>"+
 					      "<td width='111'>"+record[i].policyId+"</td>"+
                            "<td width='111'>"+record[i].nmIssuenews.policyType+"</td>"+
                           "<td width='111'>"+record[i].policyApplyContactPeople+"</td>"+
                           "<td width='111'>"+record[i].createTime+"</td>"+
                           "<td width='111'>"+record[i].nmIssueflow.issueFlowCStatus+"</td>"+
-                          "<td width='111'>"+record[i].policyApplyStatus+"</td>"+                          
+                          "<td width='111'>"+status+"</td>"+                          
                           "<td > <input type='button' value='取消'   onclick='apply("+record[i].policyApplyId+")' />"+                                   
                           " </tr>";
 				 $(".gt-table").append(html);	
