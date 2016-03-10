@@ -5,7 +5,6 @@
 	<title>Document</title>
 	<link href="../styles/base.css" type="text/css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
-	<link rel="stylesheet" type="text/css" href="../styles/page/awesome/css/font-awesome.min.css">
 	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
@@ -41,7 +40,20 @@
 					</div>
 					<div class="clearfix pt20">
 						<a href="javascript:;" class="a-c a-c-o">我要报名</a>
-						<a href="javascript:;" class="a-c a-c-p"><i class="fa fa-heart-o"></i> 收藏：183人</a>
+						<a href="javascript:;" class="a-c a-c-p"><img alt="收藏" src="../styles/images/czh/sc.png" border="0" class="mr5">收藏：183人</a>
+						<!-- JiaThis Button BEGIN -->
+						<style type="text/css">
+							.jiathis_style>div{box-sizing: content-box !important;}
+						</style>
+						<div class="jiathis_style_24x24 fr" style="margin-top:8px">
+							<span class="fl lh24">分享至：</span>
+							<a title="分享到微信" class="jiathis_button_weixin"><span class="jiathis_txt jtico jtico_weixin"></span></a>
+							<a title="分享到新浪微博" class="jiathis_button_tsina"><span class="jiathis_txt jtico jtico_tsina"></span></a>
+							<a title="分享到QQ空间" class="jiathis_button_qzone"><span class="jiathis_txt jtico jtico_qzone"></span></a>
+							<a style="" href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+						</div>
+						<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script><script type="text/javascript" src="http://v3.jiathis.com/code/plugin.client.js" charset="utf-8"></script>
+					<!-- JiaThis Button END -->
 					</div>
 				</div>
 			</div>
@@ -183,12 +195,12 @@
 		$(function(){
 			$(".slideBox").hover(function(){
 	      		clearInterval(timer);
-			},function(){ timer = setInterval(run,3000)})
-		})
-		$(".index-fr-nav li").click(function(){
-			$(".index-fr-nav li").removeClass("active");
-			$(this).addClass("active");
-			$(".ifn-group ul").eq($(this).index()).removeClass("undis").siblings().addClass("undis");
+			},function(){ timer = setInterval(run,3000)});
+
+			$("a.a-c-p").click(function(){
+				$(this).css("background-color","#ecebeb");
+				$(this).html('<img alt="收藏" src="../styles/images/czh/sc-o.png" border="0" class="mr10">已收藏');
+			})
 		});
 	</script>
 </body>

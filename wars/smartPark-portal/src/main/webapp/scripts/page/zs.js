@@ -29,7 +29,10 @@ $(function () {
 	    
 	/*弹出模态框*/
 	$(".sc-yy").click(function(){
-		$(".bg-tanc").show();
+		$(".bg-tanc.m1").show();
+	});
+	$(".now-btn").click(function(){
+		$(".bg-tanc.m2").show();
 	});
 	$(".tc-close").click(function(){
 		$(".bg-tanc").hide();
