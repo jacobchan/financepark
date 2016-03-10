@@ -11,6 +11,41 @@
 	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/adcom.js"></script>
+	<script type="text/javascript" src="../scripts/page/right.js"></script>
+	<script src="../scripts/page/birthday.js"></script>
+	<style type="text/css">
+		#birthday_container select{background:#fff;margin-right: 10px;line-height: 30px;border:1px solid #ddd;height: 30px;width: 100px;}
+		#birthday_container option{line-height: 24px;height: 24px;padding-left: 5px;border-left: 0px solid #ddd;}
+		#birthday_container select {
+		  /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+		  border: solid 1px #ddd;
+
+		  /*很关键：将默认的select选择框样式清除*/
+		  appearance:none;
+		  -moz-appearance:none;
+		  -webkit-appearance:none;
+
+		  /*在选择框的最右侧中间显示小箭头图片*/
+		 background: transparent url("../styles/images/yqfw/down.png") no-repeat scroll right center;
+
+
+		  /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+		  padding-right: 14px;
+		}
+		/*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+		#birthday_container select::-ms-expand { display: none; }
+	</style>
+	<script type="text/javascript">
+		$(function () {
+			$("a.c-o").on("click",function(){
+				$(this).parent("p").hide().siblings("p").show();
+			});
+			$(".open-tanc").click(function(){
+				$(".bg-tanc").show();
+			});
+			$("#birthday_container").birthday();
+		})
+	</script>
 	
 </head>
 <body style="background-color:#f4f4f4;">
@@ -37,7 +72,9 @@
 						</tr>
 						<tr>
 							<td>账号</td>
-							<td><span class="c-b1">8578778888 </span><span class="c-o">[更换手机号码]</span></td>
+							<td><p class="lh30"><span class="c-b1">8578778888 </span><a class="c-o" href="javascript:;">[更换手机号码]</a></p>
+								<p style="display:none"><input type="text"><a class="c-o ml20" href="javascript:;">返回</a></p>
+							</td>
 						</tr>
 						<tr>
 							<td>昵称</td>
@@ -49,7 +86,13 @@
 						</tr>
 						<tr>
 							<td>出生日期</td>
-							<td><input type="text"></td>
+							<td>
+								<div id="birthday_container">
+									<select name="year"></select>
+									<select name="month"></select>
+									<select name="day"></select>
+								</div>
+							</td>
 						</tr>
 						<tr>
 							<td>一句话介绍</td>
@@ -75,5 +118,29 @@
 	<!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
+	<!--***弹窗 start****************************************-->
+	<div class="bg-tanc">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<h3 class="mb10 f16 c-333" style="font-size:16px;"><b>加入园区</b></h3>
+			<table class="line-table cic-l-t wybx-tanc" style="font-size:14px;">
+				<colgroup>
+					<col width="110">
+					<col>
+				</colgroup>
+				<tbody>
+				<tr class="show2">
+					<td><b>企业邀请码</b></td>
+					<td><input style="width:400px" type="text"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td colspan="2"><a href="" class="ib-btn" style="width:120px;text-align:center;margin-top:10px;">加入企业</a></td>
+				</tr>
+			</tbody></table>
+		</div>
+	</div>
+	<!--***弹窗 end****************************************-->
+	
 </body>
 </html>

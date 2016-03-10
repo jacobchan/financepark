@@ -11,6 +11,20 @@
 	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+	<script>
+	$(function(){
+		$(".sel-add label").click(function(){
+			if($(this).children('input[name="address"]').prop("checked")){
+				if($(this).parent().index()==0){
+					$(this).parents(".sel-add").find(".input-show").addClass("undis");
+				}else{
+					$(this).parents(".sel-add").find(".input-show").removeClass("undis");
+				}
+			}
+		});
+	})
+	
+	</script>
 </head>
 <body>
 	<!--***top start****************************************-->
@@ -35,69 +49,24 @@
 							</colgroup>
 							<tr>
 								<td align="center">企业名称</td>
-								<td><input type="text" id="bxComp"></td>
-								<td align="center">报修方式</td>
-								<td>
-									<div class="tct-select">
-										<div class="ic-select">
-											<p id="bxWay">创立方2</p>
-										</div>
-										<ul style="display: none;" class="select-nav">
-											<li>创立方1</li>
-											<li>创立方2</li>
-											<li>创立方3</li>
-										</ul>
-									</div>
-								</td>
-							</tr>
-							<tr>
+								<td><input type="text"></td>
 								<td align="center">报修类型</td>
 								<td>
 									<div class="tct-select">
 										<div class="ic-select">
-											<p id="bxType">创立方2</p>
+											<p>空调类</p>
 										</div>
 										<ul style="display: none;" class="select-nav">
-											<li>创立方1</li>
-											<li>创立方2</li>
-											<li>创立方3</li>
-										</ul>
-									</div>
-								</td>
-								<td align="center">报修项目</td>
-								<td>
-									<div class="tct-select">
-										<div class="ic-select">
-											<p id="bxProject">创立方2</p>
-										</div>
-										<ul style="display: none;" class="select-nav">
-											<li>创立方1</li>
-											<li>创立方2</li>
-											<li>创立方3</li>
+											<li>空调类</li>
+											<li>水工类</li>
+											<li>木工类</li>
 										</ul>
 									</div>
 								</td>
 							</tr>
-							<tr>
-								<td align="center"  valign="top">地址选择</td>
-								<td colspan="3">
-									<div class="select-address active">
-										<p><span>联系人：李斯李斯</span><span class="ml20">联系电话：1825598541</span></p>
-										<p>园区地址：T4航站楼A302室</p>
-										<em class="s-a-select"></em>
-									</div>
-									<div class="select-address">
-										<p><span>联系人：李斯李斯</span><span class="ml20">联系电话：1825598541</span></p>
-										<p>园区地址：T4航站楼A302室</p>
-										<em class="s-a-select"></em>
-									</div>
-									<a href="javascript:;" class="fl mt15 open-tanc"><i class="fa fa-plus-circle mr5"></i>新增地址</a>
-								</td>
-							</tr>
-							
 							<tr>
 								<td align="center">相关描述</td>
-								<td colspan="3"><textarea id="bxRemark"></textarea></td>
+								<td colspan="3"><textarea></textarea></td>
 							</tr>
 							<tr>
 								<td align="center">相关附件</td>
@@ -109,6 +78,14 @@
 										<div for="unload" onmouseover="document.getElementById('upload').style.display='block';" class="set-file1">上传
 										<input type="file" onchange="document.getElementById('viewfile').value=this.value;this.style.display='none';" class="set-file" id="upload" /> </div> 
 									</div> 
+								</td>
+							</tr>
+							<tr>
+								<td valign="top">地址选择</td>
+								<td class="sel-add">
+									<p class="mb10"><label><input type="radio" name="address" class="mr5" checked="checked">默认地址（华侨城创意园e6栋）</label></p>
+									<p class="mb10"><label><input type="radio" name="address" class="mr5">其他地址</label></p>
+									<p class="mb10"><input type="text" class="input-show undis" placeholder="科技园a7"></p>
 								</td>
 							</tr>
 							<tr>
@@ -163,68 +140,6 @@
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
 
-	<!--***弹窗 start****************************************-->
-	<div class="bg-tanc">
-		<div class="tanc-con" style="top:50%;margin-top:-225px;">
-			<a href="javascript:;" class="tc-close"></a>
-			<h3 class="mb10"><b>新增地址</b></h3>
-			<table class="line-table cic-l-t wybx-tanc">
-				<colgroup>
-					<col width="110"></col>
-					<col></col>
-				</colgroup>
-				<tr class="label">
-					<td><b>地址类型</b></td>
-					<td>
-						<label><input type="radio" name="address" class="mr5" checked="checked">园区地址</label>
-						<label class="ml30"><input type="radio" name="address" class="mr5">非园区地址</label>
-					</td>
-				</tr>
-				<tr>
-					<td><b>姓名</b></td>
-					<td><input type="text"></td>
-				</tr>
-				<tr>
-					<td><b>电话</b></td>
-					<td><input type="text"></td>
-				</tr>
-				<tr class="show1">
-					<td><b>园区地址</b></td>
-					<td>
-						<div class="tct-select fl mr20" style="width:200px">
-							<div class="ic-select">
-								<p>园区地址2</p>
-							</div>
-							<ul style="display: none;" class="select-nav">
-								<li>园区地址1</li>
-								<li>园区地址2</li>
-								<li>园区地址3</li>
-							</ul>
-						</div>
-						<div class="tct-select fl" style="width:200px">
-							<div class="ic-select">
-								<p>创立方2</p>
-							</div>
-							<ul style="display: none;" class="select-nav">
-								<li>创立方1</li>
-								<li>创立方2</li>
-								<li>创立方3</li>
-							</ul>
-						</div>
-					</td>
-				</tr>
-				<tr class="show2 undis">
-					<td><b>地址信息</b></td>
-					<td><input type="text" style="width:450px;"></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td colspan="2"><a href="" class="ib-btn" style="width:120px;text-align:center;margin-top:10px;">保存</a></td>
-				</tr>
-			</table>
-		</div>
-	</div>
-	<!--***弹窗 end****************************************-->
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
 	<script type="text/javascript">
 		$(function(){
