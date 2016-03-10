@@ -57,7 +57,7 @@ public class PurchasingmanagerGenre implements Domain{
 	@Length(max=36)
 	private String updateUser;//修改人
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="sp__GENRE_ID_")
 	private com.common.purchasingManager.entity.PurchasingmanagerGenre purchasingmanagerGenre;//320_商品类别ID
 	
