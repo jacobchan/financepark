@@ -156,6 +156,7 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
     		return propertyservicemanagerBxDao.save(bx);
     	}else{
     		o.setBxCode(BizCodeUtil.getInstance().getBizCodeDate("BX"));
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return propertyservicemanagerBxDao.save(o);
     	}
     }
