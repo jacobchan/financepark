@@ -11,6 +11,7 @@
 	<script type="text/javascript" src="scripts/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
+	<script type="text/javascript" src="scripts/page/right.js"></script>
 </head>
 <body>
 	<!--***top start****************************************-->
@@ -52,7 +53,7 @@
             </div> 
            	<div class="bg-ff clearfix fl">
            		<form class='tc'>
-           			<h3 class="pb10 f16 lh24" style="border-bottom:1px solid #ecebeb;">预定信息</h3>
+           			<h3 class="pb10 f16 lh24 tl" style="border-bottom:1px solid #ecebeb;">预定信息</h3>
 	           		<table class="setting-table jdorder-tab mt10 tl">
 	           			<colgroup>
 	           				<col width="90"></col>
@@ -96,7 +97,7 @@
 	           				</td>
 	           			</tr>
 	           		</table>
-	           		<h3 class="pb10 f16 lh24" style="border-bottom:1px solid #ecebeb;">联系信息</h3>
+	           		<h3 class="pb10 f16 lh24 tl" style="border-bottom:1px solid #ecebeb;">联系信息</h3>
 	           		<table class="setting-table jdorder-tab mt10 lh30 tl">
 	           			<colgroup>
 	           				<col width="96"></col>
@@ -124,8 +125,94 @@
 	           				</td>
 	           			</tr>
 	           		</table>
-	           		<h3 class="pb10 pt20" style="border-bottom:1px solid #ecebeb;"></h3>
-	           		<input type="submit" class="ib-btn" value="提交订单">
+	           		<h3 class="pb10 f16 lh24 tl mt10" style="border-bottom:1px solid #ecebeb;">信用卡担保</h3>
+	           		<div class="hc-con-c mt20">
+	                    <p class="tl mt10 mb10">在2015-12-31至2038-01-19入住需要您提供信用卡担保。预定后无法变更取消，如未入住，将扣除全额房费作为违约金。</p>
+	                </div>
+	           		<table class="setting-table jdorder-tab mt10 lh30 tl">
+	           			<colgroup>
+	           				<col width="96"></col>
+	           				<col></col>
+	           			</colgroup>
+	           			<tr>
+	           				<td valign="top">信用卡号：</td>
+	           				<td>
+	           					<input type="text">
+	           				</td>
+	           			</tr>
+	           			<tr>
+	           				<td>有效期：</td>
+	           				<td>
+	           					<div class="tct-select fl mr10" style="width:115px">
+									<div class="ic-select">
+										<p>2016</p>
+									</div>
+									<ul style="display: none;" class="select-nav">
+										<li>2016</li>
+										<li>2017</li>
+										<li>2018</li>
+										<li>2019</li>
+										<li>2020</li>
+										<li>2021</li>
+									</ul>
+								</div>
+								<div class="tct-select fl" style="width:115px">
+									<div class="ic-select">
+										<p>1月</p>
+									</div>
+									<ul style="display: none;" class="select-nav">
+										<li>1月</li>
+										<li>2月</li>
+										<li>3月</li>
+										<li>4月</li>
+										<li>5月</li>
+										<li>6月</li>
+										<li>7月</li>
+										<li>8月</li>
+										<li>9月</li>
+										<li>10月</li>
+										<li>11月</li>
+										<li>12月</li>
+									</ul>
+								</div>
+	           					<span class="lh30 c-b1 ml10">（只接受有效期为当前月份之后的信用卡）</span>
+	           				</td>
+	           			</tr>
+	           			<tr>
+	           				<td>CW2码：</td>
+	           				<td>
+	           					<input type="text" style="width:115px;">
+	           					<span class="lh30 c-b1 ml10"><img src="styles/images/grzx/circle-red.png" class="mr5">信用卡背面紧跟在卡号末四位号码的后面印刷的3位数字</span>
+	           				</td>
+	           			</tr>
+	           			<tr>
+	           				<td>持卡人姓名：</td>
+	           				<td>
+	           					<input type="text" style="width:115px;">
+	           				</td>
+	           			</tr>
+	           			<tr>
+	           				<td>证件类型：</td>
+	           				<td>
+	           					<div class="tct-select fl" style="width:115px">
+									<div class="ic-select">
+										<p>身份证</p>
+									</div>
+									<ul style="display: none;" class="select-nav">
+										<li>身份证</li>
+										<li>港澳同胞证</li>
+										<li></li>
+									</ul>
+								</div>
+	           				</td>
+	           			</tr>
+	           			<tr>
+	           				<td>证件号码：</td>
+	           				<td><input type="text"></td>
+	           			</tr>
+	           		</table>
+	           		<h3 class="pb10 pt20 mb20" style="border-bottom:1px solid #ecebeb;"></h3>
+	           		<input type="submit" class="ib-btn mb50" value="提交订单">
            		</form>
            	</div>
 		</div>

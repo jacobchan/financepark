@@ -8,7 +8,7 @@ body{ font-family:"Lantinghei SC","Open Sans",Arial,"Hiragino Sans GB","Microsof
 .tct-select {position: relative;background: #FFF none repeat scroll 0% 0%;border: 1px solid #ecebeb;cursor: pointer;height: 30px;}
 .tct-select .ic-select{width:100%;background: url(../images/zs/input-select-p.png) no-repeat right center;padding-left: 10px;line-height: 28px;}
 .tct-select .ic-select p{padding-right: 35px;text-overflow:ellipsis; overflow:hidden; white-space:nowrap; font-size: 14px;}
-.tct-select .select-nav{position: absolute;left: 0px;top: 29px;width: 100%;border:1px solid #ecebeb;border-top: 0px;display: none;z-index: 2;}
+.tct-select .select-nav{position: absolute;left: 0px;top: 29px;width: 100%;border:1px solid #ecebeb;border-top: 0px;display: none;z-index: 2;max-height:187px;overflow-y:auto;background-color:#fff;}
 .tct-select .select-nav li{line-height: 30px;display: block;background-color: #fff;border-top: 1px dashed #ecebeb;padding:0px 10px;cursor: pointer;font-size: 14px;}
 .tct-select .select-nav li:hover{background-color: #d5d4d2;color: #666;}
 

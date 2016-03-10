@@ -11,6 +11,41 @@
 	<script type="text/javascript" src="scripts/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
+	<script src="scripts/page/laydate/laydate.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$(".see-all").click(function(){
+				if($(this).parents("thead").next("tbody").hasClass("undis")){
+					$(this).parents("thead").next("tbody").removeClass("undis");
+					$(this).html("收起所有仓位");
+				}else{
+					$(this).parents("thead").next("tbody").addClass("undis");
+					$(this).html("查看所有仓位");
+				}
+			});
+			var start = {
+			    elem: '#start',
+			    min: laydate.now(), //设定最小日期为当前日期
+			    max: '2099-06-16 23:59:59', //最大日期
+			    istoday: false,
+			    choose: function(datas){
+			         end.min = datas; //开始日选好后，重置结束日的最小日期
+			         end.start = datas //将结束日的初始值设定为开始日
+			    }
+			};
+			var end = {
+			    elem: '#end',
+			    min: laydate.now(),
+			    max: '2099-06-16 23:59:59',
+			    istoday: false,
+			    choose: function(datas){
+			        start.max = datas; //结束日选好后，重置开始日的最大日期
+			    }
+			};
+			laydate(start);
+			laydate(end);
+		})
+	</script>
 </head>
 <body>
 	<!--***top start****************************************-->
@@ -57,12 +92,12 @@
 			                <label class="mb10">
 			                    <span class="fl">出发日期</span>
 			                    <div class="calendar-input-wrap">
-			                    	<input type="text" class="pi-input" name="depDate" placeholder="yyyy-mm-dd" autocomplete="off">
+			                    	<input type="text" class="pi-input" name="depDate" placeholder="yyyy-mm-dd" autocomplete="off" id="start">
 			                    </div>
 			                </label>
 			                <label class="disabled">
 			                    <span class="fl">返程日期</span>
-			                    <div class="calendar-input-wrap"><span class="calendar-icon trigger-icon-654"></span><input type="text" class="pi-input J_EndDate trigger-node-654" name="arrDate" placeholder="yyyy-mm-dd" autocomplete="off"></div>
+			                    <div class="calendar-input-wrap"><span class="calendar-icon trigger-icon-654"></span><input type="text" class="pi-input J_EndDate trigger-node-654" name="arrDate" placeholder="yyyy-mm-dd" autocomplete="off" id="end"></div>
 			                </label>
 			            </div>
 			           	<div class="fr">
@@ -207,7 +242,7 @@
 				    				</td>
 				    			</tr>
 				    		</thead>
-				    		<tbody>
+				    		<tbody  class="undis">
 				    			<tr>
 				    				<td colspan="2"></td>
 				    				<td>
@@ -303,7 +338,7 @@
 				    				</td>
 				    			</tr>
 				    		</thead>
-				    		<tbody>
+				    		<tbody  class="undis">
 				    			<tr>
 				    				<td colspan="2"></td>
 				    				<td>

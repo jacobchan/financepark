@@ -142,7 +142,7 @@
 									<td>
 										<span>已完成</span><span class="f12 ml5 mr5">|</span>
 										<a href="grzx2-2.html">评价</a><span class="f12 ml5 mr5">|</span>
-										<a href="javascript:;" class="ac-show">发票领取</a>
+										<a href="javascript:;" class="lq-show">发票领取</a>
 									</td>
 								</tr>
 								<tr>
@@ -153,7 +153,7 @@
 									<td>
 										<span>已完成</span><span class="f12 ml5 mr5">|</span>
 										<a href="grzx2-2.html">评价</a><span class="f12 ml5 mr5">|</span>
-										<a href="javascript:;" class="ac-show">发票领取</a>
+										<a href="javascript:;" class="lq-show">发票领取</a>
 									</td>
 								</tr>
 								<tr>
@@ -186,6 +186,58 @@
 	<!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
+	
+	<!--***弹窗 start****************************************-->
+	<div class="bg-tanc">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<h3 class="mb10 f16 c-333" style="font-size:16px;"><b>领取发票</b></h3>
+			<table class="line-table cic-l-t wybx-tanc" style="font-size:14px;">
+				<colgroup>
+					<col width="110">
+					<col>
+				</colgroup>
+				<tbody><tr>
+					<td><b>单号</b></td>
+					<td>123456789</td>
+				</tr>
+				<tr class="label">
+					<td><b>发票抬头</b></td>
+					<td>
+						<label><input name="s-r" class="mr5"type="radio">个人</label>
+						<label class="ml30"><input name="s-r" checked="checked" class="mr5" type="radio">企业</label>
+					</td>
+				</tr>
+				<tr class="show2" >
+					<td><b>企业名称</b></td>
+					<td><input type="text" style="width:400px"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td class="add-sh">
+						<label><input name="address" class="mr5" checked="checked" type="radio">寄送到报修地址</label>
+						<label class="ml30"><input name="address" class="mr5" type="radio">自定义</label>
+						<textarea class="mt20 so1 undis"></textarea>
+						<div class="tct-select mt20 so2" style="width:400px;">
+							<div class="ic-select">
+								<p>文化创意园A302(张三 19855552222)</p>
+							</div>
+							<ul class="select-nav">
+								<li>文化创意园A302(张三 19855552222)</li>
+								<li>文化创意园A302(张三 19855552222)2</li>
+								<li>文化创意园A302(张三 19855552222)3</li>
+							</ul>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td colspan="2"><a href="" class="ib-btn" style="width:120px;text-align:center;margin-top:10px;">领取发票</a></td>
+				</tr>
+			</tbody></table>
+		</div>
+	</div>
+	<!--***弹窗 end****************************************-->
 	<script type="text/javascript">
 		$(function () {
 			$(".order-nav li").click(function(){
