@@ -97,11 +97,13 @@ input.ib-btn{border:1px solid #fa742c;line-height: 0px;}
 .undis{display: none;}
 .ig-nav{width: 100%;}
 .ig-nav a{color: #333;}
-.ig-nav li{width: 100%;position: relative;height: 91px;padding: 10px;}
+.ig-nav li{width: 100%;position: relative;height: 91px;padding: 10px;transition: all .4s}
+.ig-nav li a{display:inline-block;width:100%;height:100%;}
 .ig-nav li .in-photo{width: 115px;height: 71px;position: absolute;left: 10px;top: 10px;overflow: hidden;}
 .ig-nav li .fr{padding-left: 125px;font-size: 14px;line-height: 20px;max-height: 40px;float: left;margin-top: 5px;}
 .ig-nav li:hover{background-color: #f5f6f7;}
 .ig-nav li:hover a{color: #ff6715;}
+
 
 /**在线申请弹窗**/
 .bg-tanc{position: fixed;left: 0px;top:0px;width:100%;display: none;overflow-x: hidden;overflow-y: auto;bottom: 0px;right: 0px;z-index: 99;height: 100%;background: url(../images/zs/bg-o.png);background-repeat: repeat;}
@@ -182,7 +184,7 @@ a.add-btn:hover{background: #ffc000;border:1px solid #ffc000;color: #fff;}
 .w787{width: 787px;float: left;}
 .w413{width: 413px;float: right;}
 .zs-center-img{margin-top: 30px;padding-top: 30px;border-top: 1px solid #ecebeb;}
-.small-img{height: 328px; overflow: hidden;position: relative;text-align: center;color: #fff;float: left;margin-bottom: 15px;margin-right: 15px;}
+.small-img{transition: all .8s;height: 328px; overflow: hidden;position: relative;text-align: center;color: #fff;float: left;margin-bottom: 15px;margin-right: 15px;}
 .small-img>img{width: 100%;height: 100%;}
 .small-img .hover{width: 100%;height: 100%;position: absolute;left: 0px;top: 0px;text-align: center;background: rgba(0,0,0,0.3);display: none;}
 .small-img .hover img{margin-top: 120px;}
@@ -263,13 +265,14 @@ a.add-btn:hover{background: #ffc000;border:1px solid #ffc000;color: #fff;}
 
 
 /**创智汇首页**/
+<<<<<<< .mine
 .czh-index-child{margin-top: 45px;height: 160px;}
 .czh-index-child .cic-nav{text-align: center;width: 100%;}
-.czh-index-child .cic-nav li{float: left;width: 200px;border: 1px solid #ecebeb;height: 158px;background-color: #fff;border-left: 0px;}
+.czh-index-child .cic-nav li{float: left;width: 200px;border: 1px solid #ecebeb;height: 158px;background-color: #fff;border-left: 0px;transition:all 0.5s;}
 .czh-index-child .cic-nav li:first-child{border: 1px solid #ecebeb;}
 .czh-index-child .cic-nav li div{height: 60px;margin-top: 36px;}
 .czh-index-child .cic-nav li p{font-size: 16px;line-height: 22px;margin-top: 5px;color: #333;}
-.czh-index-child .cic-nav li:hover{-webkit-box-shadow:0px 0px 5px #c8c8c8;-moz-box-shadow:0px 0px 5px #c8c8c8;box-shadow: 0px 0px 5px #c8c8c8;}
+.czh-index-child .cic-nav li:hover{box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15);-webkit-box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15);-moz-box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15);}
 .czh-index-child .cic-nav li:hover p{color: #ff6715;}
 .czh-box{width: 285px;float: left;border:1px solid #ecebeb;}
 .czh-box:last-child{margin: 0px;}
