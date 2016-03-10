@@ -30,21 +30,24 @@
 							<colgroup>
 								<col width="150"></col>
 								<col width="150"></col>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="150"></col>
+								<col width="80"></col>
+								<col width="100"></col>
+								<col width="120"></col>
+								<col width="120"></col>
 								<col></col>
 							</colgroup>
-							<tbody><tr>
-								<th>订单号</th>
-								<th>投诉时间</th>
-								<th>是否需要回复</th>
-								<th>联系人</th>
-								<th>联系电话</th>
-								<th>操作</th>
-							</tr>
-							
-						</tbody></table>
+							<tbody id="czh-knowledge">
+								<tr>
+									<th>订单号</th>
+									<th>申请时间</th>
+									<th>状态</th>
+									<th>联系人</th>
+									<th>联系电话</th>
+									<th>投诉状态</th>
+									<th>操作</th>
+								</tr>
+							</tbody>
+						</table>
 						<div class="fr page-list-a clearfix lh30 mt20 f12">
 							<span class="mr20 fl">共有  <span id="count"></span> 条，每页显示： 50 条</span>
 							<a href="">首</a>
