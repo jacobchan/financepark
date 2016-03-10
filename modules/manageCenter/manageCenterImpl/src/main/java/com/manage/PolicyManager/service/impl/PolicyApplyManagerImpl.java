@@ -32,6 +32,7 @@ import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.PolicyManager.entity.PolicyApply;
 import com.manage.PolicyManager.dao.PolicyApplyDao;
 import com.manage.PolicyManager.service.PolicyApplyManager;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerOc;
 
 @Service("policyApplyManager")
 @Transactional
@@ -185,4 +186,30 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
 		}
 		return null;
 	}
-}
+	/**
+     * 获取当前登录用户申请的政策
+     * @return
+     * @throws BusException
+     */
+    @EsbServiceMapping
+	public List<PolicyApply> getPolicyApplyListByLoginUser() throws BusException {
+    	//先模拟一个登陆用户memberId=1，先在数据库插入memberId=1
+    	String m="1"; 
+    	return policyApplyDao.getList("memberId", m);}
+    
+    	 /**
+         * 修改政策流程状态
+         * @return
+         * @throws BusException
+         */
+       @EsbServiceMapping
+        public PolicyApply updatePolicyApplyStatus(
+        		@ServiceParam(name="policyApplyId") String policyApplyId,
+        		@ServiceParam(name="policyApplyStatus") String policyApplyStatus
+        		) throws BusException{   	
+    	   PolicyApply psm = policyApplyDao.get(policyApplyId);  
+        		psm.setPolicyApplyStatus(policyApplyStatus);
+    	    	return policyApplyDao.save(psm);
+        }
+	}
+
