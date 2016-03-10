@@ -68,7 +68,7 @@ public class MemberadrAddressManagerImpl extends BaseManagerImpl implements Memb
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+	@EsbServiceMapping(pubConditions={@PubCondition(property="memberId.memberId",pubProperty="userId")})
     public MemberadrAddress saveMemberadrAddress(MemberadrAddress o) throws BusException{
     	String memberadrAddressId = o.getAddressId();
     	boolean isUpdate = StringUtils.isNotEmpty(memberadrAddressId);
@@ -135,12 +135,12 @@ public class MemberadrAddressManagerImpl extends BaseManagerImpl implements Memb
     /**
      * 根据当前用户查询列表
      */
-    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
-	public List<MemberadrAddress> getMemberadrAddresssByUser()
+    @EsbServiceMapping
+	public List<MemberadrAddress> getMemberadrAddresssByUser(@ServiceParam(name="userId", pubProperty = "userId") String userId)
 			throws BusException {
 		// TODO Auto-generated method stub
        	//先模拟一个登陆用户，之后会修改
-    	MemberInformation member=memberInformationManager.getMemberInformationByLoginUser(null);
+    	MemberInformation member=memberInformationManager.getMemberInformation(userId);
     	List<MemberadrAddress> list=memberadrAddressDao.getList("memberId.memberId", member.getMemberId());
 		return list;
 	}
