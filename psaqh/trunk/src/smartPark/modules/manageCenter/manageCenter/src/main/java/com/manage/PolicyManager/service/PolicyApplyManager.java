@@ -12,6 +12,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.PolicyManager.entity.PolicyApply;
 
@@ -78,4 +80,13 @@ public interface PolicyApplyManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public EnterbusinessmanagerRz findEnterpriseByMemberId(String id) throws BusException;
+	/**
+     * 获取当前登录用户申请的政策    */
+	public List<PolicyApply> getPolicyApplyListByLoginUser() throws BusException;   	
+	/**
+     * 获取当前登录用户申请的政策   */  
+        public PolicyApply updatePolicyApplyStatus(
+        		 String policyApplyId,
+        		String policyApplyStatus
+        	) throws BusException;  	
 }
