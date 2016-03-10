@@ -9,7 +9,7 @@ a{color:#aaa}.inline_b{display:inline-block}.fw{font-weight:600}.prelative{posit
 .pagtion div{display:inline-block;border-radius:100px;width:12px;height:12px;border:1px #858585 solid;cursor:pointer;background:transparent;}
 .pagtion .pt1{background:#858585;}
 /*->index 主体*/
-.w882{width:882px;position:relative; overflow:hidden}.w294{width:294px;}
+.w882{width:882px;position:relative;}.w294{width:294px;}
 .i_tit span,.ii_tit span{display:inline-block;padding:15px 20px 15px 0;vertical-align: bottom;cursor:pointer}
 .ii_tit span:last-of-type{padding-right:0px}
 .ii_tit{color:#B1B1B1}.span_bold{color:#333;font-weight:600}

@@ -269,7 +269,7 @@ a.add-btn:hover{background: #ffc000;border:1px solid #ffc000;color: #fff;}
 
 .czh-index-child{margin-top: 45px;height: 160px;}
 .czh-index-child .cic-nav{text-align: center;width: 100%;}
-.czh-index-child .cic-nav li{float: left;width: 200px;border: 1px solid #ecebeb;height: 158px;background-color: #fff;border-left: 0px;transition:all 0.5s;}
+.czh-index-child .cic-nav li{float: left;width: 200px;border: 1px solid #ecebeb;height: 158px;border-left: 0px;transition:all 0.5s;}
 .czh-index-child .cic-nav li:first-child{border: 1px solid #ecebeb;}
 .czh-index-child .cic-nav li div{height: 60px;margin-top: 36px;}
 .czh-index-child .cic-nav li p{font-size: 16px;line-height: 22px;margin-top: 5px;color: #333;}
