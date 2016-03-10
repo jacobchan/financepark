@@ -82,9 +82,9 @@
     // 记录初始默认时间
     this.startDefDate = '';
     // 随机ID后缀
-    var suffix = '' == this.mOpts.suffix ? (new Date()).getTime() : this.mOpts.suffix;
+    var suffix = '';
     // 日期选择框DIV的ID
-    this.calendarId = 'calendar_' + suffix;
+    this.calendarId = 'calendar';
     // 日期列表DIV的ID
     this.dateListId = 'dateRangePicker_' + suffix;
     // 日期比较层
