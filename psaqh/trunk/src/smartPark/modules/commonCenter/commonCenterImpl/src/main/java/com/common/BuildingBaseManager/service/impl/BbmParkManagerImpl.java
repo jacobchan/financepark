@@ -102,5 +102,13 @@ public class BbmParkManagerImpl extends BaseManagerImpl implements BbmParkManage
     public boolean exsitBbmPark(String propertyName,Object value) throws BusException{
 		return bbmParkDao.exists(propertyName,value);
 	}
+    
+    @EsbServiceMapping
+	public void saveBbmParkList(@DomainCollection(domainClazz=BbmPark.class)List<BbmPark> list) throws BusException {
+		// TODO Auto-generated method stub
+		if(list.size()!=0){
+			
+		}
+	}
 
 }
