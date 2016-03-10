@@ -80,6 +80,7 @@ public class PurchasingmanagerMerchantManagerImpl extends BaseManagerImpl implem
     		pm.setMerchantLinkmanPhone(o.getMerchantLinkmanPhone());
     		pm.setMerchantSendAddress(o.getMerchantSendAddress());
     		pm.setMerchantReturnAddress(o.getMerchantReturnAddress());
+    		pm.setMerchantLogo(o.getMerchantLogo());
     		pm.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return purchasingmanagerMerchantDao.save(pm);
     	}else{//新增

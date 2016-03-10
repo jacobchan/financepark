@@ -4,8 +4,8 @@
 package com.common.purchasingManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
@@ -73,6 +73,18 @@ public class PurchasingmanagerMerchant implements Domain{
 	@Length(max=256)
 	private String merchantSendAddress;//发货地址
 	
+	@Column(name = "MERCHANT_LOGO_")
+	@Length(max=256)
+	private String merchantLogo;//商户LOGO
+
+	public String getMerchantLogo() {
+		return merchantLogo;
+	}
+
+	public void setMerchantLogo(String merchantLogo) {
+		this.merchantLogo = merchantLogo;
+	}
+
 	public String getCreateTime(){
 		return this.createTime;
 	}
