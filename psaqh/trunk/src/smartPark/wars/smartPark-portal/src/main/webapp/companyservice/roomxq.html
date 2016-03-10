@@ -235,11 +235,8 @@
 		$("#data_timer").on("click","td",function(){
 			if(this.className=="pasttd"){return ;}
 			$(this).toggleClass("clicktd");
-			var active=$(this).index();
-			var time=$(this).html();
-			var dates=$(".fc-day-header").eq(active).attr("data-date");
-			alert(dates+"  "+time);
 		});
+		
 		
 		$(".fc-next-button").on("click",this,function(){
 			cursor++;
@@ -320,6 +317,14 @@
 <script type="text/javascript">
 		
 			$('.btn-cheng').click(function(){
+				var arr=new Array();
+				$("#data_timer td.clicktd").each(function(){
+					var active=$(this).index();
+					var time=$(this).html();
+					var dates=$(".fc-day-header").eq(active).attr("data-date")+time;
+					arr.push(dates);
+				});
+				alert(arr);
 				
 				var params = ['enteringName='+$("#enteringName").val(),'enteringTelephone='+$("#enteringTelephone").val(),'propertyservicemanagerEntering.enteringId=402809cb53503f3b0153504068040001'];
 				alert(params);
