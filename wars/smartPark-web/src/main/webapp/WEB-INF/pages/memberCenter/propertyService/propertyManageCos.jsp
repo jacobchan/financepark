@@ -23,6 +23,9 @@
 							<div class="inp-box ml20"><input placeholder="订单号查询" type="text"><a class="fa fa-search" href=""></a></div>
 							<input value="搜索" class="hhf-submit f14 fr" type="button">
 						</div>
+						<div class="mt20 gr-txl clearfix lh30">
+							<a href="addcomplaints.html" class="hhf-submit f14 fr">我要投诉</a>
+						</div>
 						<table class="gt-table mt20">
 							<colgroup>
 								<col width="150"></col>
@@ -43,7 +46,7 @@
 							
 						</tbody></table>
 						<div class="fr page-list-a clearfix lh30 mt20 f12">
-							<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
+							<span class="mr20 fl">共有  <span id="count"></span> 条，每页显示： 50 条</span>
 							<a href="">首</a>
 							<a href=""><i class="fa fa-angle-left"></i></a>
 							<a>1</a>
@@ -147,7 +150,7 @@
 					status = "待评价";
 					crop = "评价";
 				}else if(record[i].cosStatus=='6'){
-					status = "已评价";
+					status = "已完成";
 				}
 				var html="<tr><td>"+record[i].cosCode+"</td><td>"+record[i].cosTime+"</td><td>"+bool+"</td><td>"+record[i].cosName+"</td><td>"+record[i].cosTelephone+"</td><td>"+status+"</td><td><a href='javascript:;' class='ac-show'>"+crop+"</a></td></tr>";
 				$("tbody").append(html);
