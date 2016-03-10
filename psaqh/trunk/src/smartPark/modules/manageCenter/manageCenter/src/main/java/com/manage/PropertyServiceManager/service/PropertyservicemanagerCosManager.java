@@ -12,8 +12,13 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.ServiceParam;
+
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.utils.BizCodeUtil;
+
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos;
 
 public interface PropertyservicemanagerCosManager extends BaseManager{
@@ -75,4 +80,19 @@ public interface PropertyservicemanagerCosManager extends BaseManager{
      * @param ids
      */
 	public void upCosbyId(String id,String code) throws BusException;
+	 /**
+     * 获取当前登录用户id
+     * @return
+     * @throws BusException
+     */  
+	public List<PropertyservicemanagerCos> getCosListByLoginUser() throws BusException ;    	 	
+    /**
+     * 修改状态
+     * @return
+     * @throws BusException
+     */  
+    public PropertyservicemanagerCos updateCosStatus(
+    		 String cosId,
+    		 String cosStatus
+    		) throws BusException;	
 }

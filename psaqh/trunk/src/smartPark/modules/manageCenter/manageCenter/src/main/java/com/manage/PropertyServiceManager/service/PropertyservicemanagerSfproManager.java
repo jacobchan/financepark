@@ -15,6 +15,7 @@ import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
 import com.gsoft.framework.esb.annotation.DomainCollection;
 import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCharge;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSfpro;
 
@@ -86,4 +87,11 @@ public interface PropertyservicemanagerSfproManager extends BaseManager{
 	 */
 	public void saveChargeSfpro(String chargeId,String chargeIsbool,String chargeCreatetime,
 			String chargeBedate,String chargeEndate,@DomainCollection(domainClazz=PropertyservicemanagerSfpro.class) List<PropertyservicemanagerSfpro> sfproList);
+//	查、询收费信息
+	public List<PropertyservicemanagerSfpro> getPayListByLoginUser() throws BusException;
+	//修改状态
+	 public PropertyservicemanagerSfpro updatePayStatus(
+	    		 String sfproId,
+	    		 String payStatus
+	    		) throws BusException;
 }
