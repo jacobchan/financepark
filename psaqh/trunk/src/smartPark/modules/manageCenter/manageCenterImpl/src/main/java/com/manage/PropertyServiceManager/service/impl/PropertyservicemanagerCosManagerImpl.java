@@ -20,6 +20,7 @@ import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
 import com.gsoft.utils.HttpSenderMsg;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSfpro;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerCosDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerCosManager;
 @Service("propertyservicemanagerCosManager")
@@ -134,4 +135,30 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
     	cos.setCosStatus(code);
     	propertyservicemanagerCosDao.save(cos);
 	}
+    /**
+     * 获取当前登录用户id
+     * @return
+     * @throws BusException
+     */
+    @EsbServiceMapping
+	public List<PropertyservicemanagerCos> getCosListByLoginUser() throws BusException {
+    	//先模拟一个登陆用户memberId，先在数据库插入memberId=1
+    	String m="1"; 
+    	return propertyservicemanagerCosDao.getList("memberId", m); 
+	}
+    /**
+     * 修改状态
+     * @return
+     * @throws BusException
+     */
+   @EsbServiceMapping
+    public PropertyservicemanagerCos updateCosStatus(
+    		@ServiceParam(name="cosId") String cosId,
+    		@ServiceParam(name="cosStatus") String cosStatus
+    		) throws BusException{   	
+	   PropertyservicemanagerCos psm = propertyservicemanagerCosDao.get(cosId);     		
+    		psm.setCosStatus(cosStatus);
+	    	return propertyservicemanagerCosDao.save(psm);
+    		
+    }
 }
