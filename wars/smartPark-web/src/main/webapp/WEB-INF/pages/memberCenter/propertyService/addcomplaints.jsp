@@ -126,7 +126,7 @@
 				success:function(result){
 					if(result&&result.record){
 						alert("提交成功");
-						window.location.href="<%=request.getContextPath()%>/memberCenter/propertyService/propertyManageCos.html";
+						window.location.href="<%=request.getContextPath()%>/member/memberCenter/propertyService/propertyManageCos.html";
 					}
 				}
 			});
