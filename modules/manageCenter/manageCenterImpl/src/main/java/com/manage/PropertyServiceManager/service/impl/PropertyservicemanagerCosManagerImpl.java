@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MemberManager.dao.MemberInformationDao;
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -28,6 +30,8 @@ import com.manage.PropertyServiceManager.service.PropertyservicemanagerCosManage
 public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implements PropertyservicemanagerCosManager{
 	@Autowired
 	private PropertyservicemanagerCosDao propertyservicemanagerCosDao;
+	@Autowired
+	private MemberInformationDao memberInformationDao;
 	
     /**
      * 查询列表
@@ -63,15 +67,12 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
     public PropertyservicemanagerCos savePropertyservicemanagerCos(PropertyservicemanagerCos o) throws BusException{
-//    	String propertyservicemanagerCosId = o.getPropertyservicemanagerCosId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerCosId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
+    	if(!"".equals(o.getUpdateUser()) && null!=o.getUpdateUser()){
+    		MemberInformation memberInformation = memberInformationDao.get(o.getUpdateUser());
+        	o.setMemberInformation(memberInformation);
+    	}
     	o.setCosCode(BizCodeUtil.getInstance().getBizCodeDate("WYTS"));
     	o.setCosStatus("0");
     	if("".equals(o.getCosTime()) || null==o.getCosTime()){
