@@ -51,7 +51,7 @@
 	text-align:center;
 	margin-top:0px;
 }
-.swf-fileItem>.footer>.file-type-jpg, .swf-fileItem>.footer>.file-type-jpeg{
+.swf-fileItem>.footer>.file-type-jpg, .swf-fileItem>.footer>.file-type-jpeg, .swf-fileItem>.footer>.file-type-png{
 	background-color:#CCFF00;
 }
 .swf-fileItem>.footer>div{
