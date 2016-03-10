@@ -156,11 +156,11 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
      * 获取当前登录用户发布活动集合
      * 
      */ 
-    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
-	public List<ActivityApply> getPublishActivityList() throws BusException {
+  
+	public List<ActivityApply> getPublishActivityList(@ServiceParam(name="userId",pubProperty = "userId") String userId) throws BusException {
 		// TODO Auto-generated method stub
     	//先模拟一个登陆用户，之后会修改
-    	MemberInformation member=memberInformationManager.
+    	MemberInformation member=memberInformationManager.getMemberInformation(userId);
     	//获取当前用户参加活动的list
     	List<ActivityApply> list=activityApplyDao.getList("memberId", member.getMemberId()); 	
 		return list;
