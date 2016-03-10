@@ -94,7 +94,7 @@
 $(function(){
 	var arg=getQueryStringArgs();
 	var params = ['commodityId='+arg.id];
-	var serviceURL = "http://localhost:8088/smartPark-webdev/esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommodity.json";
+	var serviceURL = "http://localhost:8088/smartPark-web/esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommodity.json";
 	$.youi.ajaxUtils.ajax({
 		url:serviceURL,
 		data:params.join('&'),
