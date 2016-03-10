@@ -4,10 +4,10 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.gsoft.smartPark</groupId> 
-	    <artifactId>smartPark</artifactId>
-	    <version>1.0.0-SNAPSHOT</version>
-	     <relativePath>../../</relativePath>
+		<groupId>com.gsoft.smartPark</groupId>
+		<artifactId>smartPark</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../../</relativePath>
 	</parent>
 
 	<artifactId>smartPark-common</artifactId>
@@ -34,14 +34,14 @@
 			<artifactId>gsoft-framework-core</artifactId>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.gsoft.framework</groupId>
 			<artifactId>gsoft-framework-context</artifactId>
 			<scope>compile</scope>
 		</dependency>
 
-		
+
 		<dependency>
 			<groupId>com.gsoft.framework</groupId>
 			<artifactId>gsoft-framework-security</artifactId>
@@ -55,18 +55,14 @@
 			<version>1.0.3.RELEASE</version>
 			<scope>compile</scope>
 		</dependency>
- 	 	 <dependency>
+		<dependency>
 			<groupId>com.artofsolving</groupId>
 			<artifactId>jodconverter</artifactId>
 			<version>2.2.1</version>
 		</dependency>
-		<!-- <dependency>
-	      <groupId>com.artofsolving</groupId>
-	     	 <artifactId>jodconverter-core</artifactId>
-	      	 <version>3.0-beta-4</version>
-	     	 <scope>system</scope>
-	      <systemPath>${project.basedir}/lib/jodconverter-core-3.0-beta-4.jar</systemPath> 
-	    </dependency> -->
+		<!-- <dependency> <groupId>com.artofsolving</groupId> <artifactId>jodconverter-core</artifactId> 
+			<version>3.0-beta-4</version> <scope>system</scope> <systemPath>${project.basedir}/lib/jodconverter-core-3.0-beta-4.jar</systemPath> 
+			</dependency> -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -77,25 +73,25 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.5.6</version>
 		</dependency>
-		
+
 		<dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.1.1</version>
-        </dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
 
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.5</version>
-        </dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.5</version>
+		</dependency>
 
-        <dependency>
-            <groupId>commons-httpclient</groupId>
-            <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
-        </dependency>
-	
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -105,6 +101,18 @@
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.2.0</version>
+		</dependency>
 		
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+
 	</dependencies>
 </project>
