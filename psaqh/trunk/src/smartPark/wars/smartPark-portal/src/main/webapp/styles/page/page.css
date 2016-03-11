@@ -81,8 +81,8 @@ a{color:#aaa}.inline_b{display:inline-block}.fw{font-weight:600}.prelative{posit
 .re_div{margin-bottom:20px}
 .city_huan{position:absolute;right:5px;top:15px;border:1px #ECECEC solid;border-left:none;height:50px;width:20px;}
 .huan{background:#999;color:#fff;position:absolute;right:-8px;top:14px;font-size: 12px;padding: 2px;border-radius:5px;cursor:pointer}
-.btn-cheng{padding:5px 20px;background:#ff5900;border:none;color:#fff;display:inline-block;cursor:pointer;border:1px #ff5900 solid}
-.btn-cheng:hover{background:#fff;color:#ff5900;border:1px #ff5900 solid}
+.btn-cheng{padding:5px 20px;background:#FA742C;border:none;color:#fff;display:inline-block;cursor:pointer;}
+.btn-cheng:hover{background:#ff5900;color:#fff !important;}
 .btn-chengk{padding:5px 20px;background:#fff;border:none;color:#ff5900;display:inline-block;cursor:pointer;border:1px #ff5900 solid}
 .btn-chengk:hover{background:#ff5900;color:#fff;border:1px #ff5900 solid}
 .btn-yellow{background:#FFD705;padding:5px 20px;border:none;color:#6B450A;display:inline-block;cursor:pointer;border-radius:5px}
@@ -582,11 +582,10 @@ background:url(../images/company/ab_ico.png) no-repeat}
 
 /*登录*/
 .loginbox{padding:100px 0 100px 850px;background:url(../images/index/logoin.jpg) 100px 100px no-repeat;}
-.w350{width:350px}
-.login_ul li{display:inline-block;float:left;width:50%;padding:10px;text-align:center;font-size:16px;color:#333;cursor:pointer;background:#F3F3F3;
-border:1px #f3f3f3 solid;}
-.login_ul li.active{color:#FB7730;background:#fff;border-color:#FB7730}
-.login_input{height:45px;border:1px #C8C8C8 solid;line-height:45px;padding:0 10px}
+.w350{width:350px;border:1px solid #efecec;}
+.login_ul li{display:inline-block;float:left;width:50%;padding:10px;text-align:center;font-size:16px;color:#333;cursor:pointer;background:#F3F3F3;}
+.login_ul li.active{color:#FB7730;background:#fff;}
+.login_input{height:45px;border-bottom:1px #efecec solid;line-height:45px;padding:0 20px}
 .login_input input{border:none;font-size:12px;display:inline-block;width:170px;padding-left:10px}
 .btn_yzm{display:inline-block;cursor:pointer;padding:3px 7px;border:1px #FB7730 solid;color:#FB7730;line-height:normal}
 .btn_yzm:hover{background:#FB7730;color:#fff}
