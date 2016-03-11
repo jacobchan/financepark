@@ -94,7 +94,7 @@ $(function(){
 				var obj = ['memberPhoneNumber='+memberPhoneNumber] ;
 				/* 判断手机号是否已经注册! */
 				$.youi.ajaxUtils.ajax({
-					url:"http://localhost:8088/smartPark-web/esb/web/memberInformationManager/exsitMobile.json",
+					url:baseUrl + "memberInformationManager/exsitMobile.json",
 					data:obj.join('&'),
 					jsonp:'data:jsonp',
 					dataType:'jsonp',
@@ -126,7 +126,7 @@ $(function(){
 							              "memberPassword="+memberPassword
 										 ];
 							$.youi.ajaxUtils.ajax({
-								url:"http://localhost:8088/smartPark-web/esb/web/memberInformationManager/saveReister.json",
+								url:baseUrl +"memberInformationManager/saveReister.json",
 								data:params.join('&'),
 								jsonp:'data:jsonp',
 								dataType:'jsonp',
