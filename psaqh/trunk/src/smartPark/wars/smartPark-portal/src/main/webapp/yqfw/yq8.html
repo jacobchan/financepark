@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/yqfwnews.js"></script>
 	<script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
+	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 	<script>
 		$(function(){
 			laydate({
@@ -179,52 +180,66 @@
 				};
 				var str=JSON.stringify(obj);
 				alert(str); */
-				var phone = $("#phone").val();
-				var time = $('#timer').val();
-				if(phone=="" || phone.length==0){
-					alert("请输入联系电话！");
-					return false;
-				}else{
-					if(isMobil(phone)){
-						if(time=="" || time.length==0){
-							alert("请输入搬家预约时间！");
-							return false;
-						}
-					}else{
-						alert("手机号格式不正确！");
-						return false;
-					}
-				}
-				
-				var params = ['moverecComp='+$("#moverecComp").val(),
-								'moverecWay=00',
-								'moverecUnit='+$("#louyu").val()+$("#unit").val(),
-								'moverecName='+$("#moverecName").val(),
-								'moverecPhone='+phone,
-								'moverecTime='+time,
-								'moverecRemark='+$("#moverecRemark").val()];
-				var serviceURL = "http://localhost:8088/smartPark-web/esb/web/propertyservicemanagerMoverecManager/savePropertyservicemanagerMoverec.json";
-				
-				//公共方法
+				//判断是否是企业员工
 				$.youi.ajaxUtils.ajax({
-					url:serviceURL,
-					data:params.join('&'),
-					jsonp:'data:jsonp',
-					dataType:'jsonp',
-					success:function(results){
-						if(results&&results.record){
-							alert("申请成功!");
-							window.location="/grzx/grzx11.html";
+				url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					if(result&&result.record){
+						var phone = $("#phone").val();
+						var time = $('#timer').val();
+						if(phone=="" || phone.length==0){
+							alert("请输入联系电话！");
+							return false;
+						}else{
+							if(isMobil(phone)){
+								if(time=="" || time.length==0){
+									alert("请输入搬家预约时间！");
+									return false;
+								}
+							}else{
+								alert("手机号格式不正确！");
+								return false;
+							}
 						}
-					}
-				});
-			});
+		
+						var params = ['moverecComp='+$("#moverecComp").val(),
+										'moverecWay=00',
+										'moverecUnit='+$("#louyu").val()+$("#unit").val(),
+										'moverecName='+$("#moverecName").val(),
+										'moverecPhone='+phone,
+										'moverecTime='+time,
+										'moverecRemark='+$("#moverecRemark").val()];
+						var serviceURL = baseUrl+"propertyservicemanagerMoverecManager/savePropertyservicemanagerMoverec.json";
+						
+						//公共方法
+					$.youi.ajaxUtils.ajax({
+						url:serviceURL,
+						data:params.join('&'),
+						jsonp:'data:jsonp',
+						dataType:'jsonp',
+						success:function(results){
+							if(results&&results.record){
+								alert("申请成功!");
+								window.location="/grzx/grzx11.html";
+							}
+						}
+					});
+				}else{
+					alert("您不是企业用户,暂时无法申请搬家,如有疑问请与客服人员联系!");
+					return false;
+				}
+			}
+		});
+			
 			//校验手机号格式
 			function isMobil(s) {
-			    var patrn = /^(13[0-9]{9})|(14[0-9])|(18[0-9])|(15[0-9][0-9]{8})$/;
-			    if (!patrn.exec(s)) return false
-			    return true
-			}
+			    	var patrn = /^(13[0-9]{9})|(14[0-9])|(18[0-9])|(15[0-9][0-9]{8})$/;
+			   		if (!patrn.exec(s)) return false
+			   	 	return true
+				}
+			});
 		});
 	</script>
 </body>

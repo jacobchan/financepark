@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/yqfwnews.js"></script>
 	<script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
+	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 	<script>
 		$(function(){
 			laydate({
@@ -45,7 +46,7 @@
 								<col></col>
 							</colgroup>
 							<tr>
-								<td align="center">企业姓名</td>
+								<td align="center">企业名称</td>
 								<td><input type="text" id="ocComp"></td>
 								<td></td>
 								<td></td>
@@ -171,32 +172,44 @@
 	<script type="text/javascript">
 		$(function(){
 			$(".hhf-submit").click(function(){
-				
-				var time = +$('#timer').val();
-				
-				if(time=="" || time.length==0){
-					alert("请输入预约时间！");
-					return false;
-				}
-				
-				var params = ['ocComp='+$("#ocComp").val(),
-								'ocDate='+time,
-								'ocWay=00',
-								'ocStatus=00',
-								'ocRemark='+$("#ocRemark").val()];
-				
-				var serviceURL = "http://localhost:8088/smartPark-web/esb/web/propertyservicemanagerOcManager/savePropertyservicemanagerOc.json";
-				
-				//公共方法
+				//判断是否是企业员工
 				$.youi.ajaxUtils.ajax({
-					url:serviceURL,
-					data:params.join('&'),
-					jsonp:'data:jsonp',
-					dataType:'jsonp',
-					success:function(results){
-						if(results&&results.record){
-							alert("申请成功!");
-							window.location="/grzx/grzx13.html";
+				url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					if(result&&result.record){
+							var time = +$('#timer').val();
+							
+							if(time=="" || time.length==0){
+								alert("请输入预约时间！");
+								return false;
+							}
+						
+							var params = ['ocComp='+$("#ocComp").val(),
+										'ocDate='+time,
+										'ocWay=00',
+										'ocStatus=00',
+										'ocRemark='+$("#ocRemark").val()];
+						
+							var serviceURL = baseUrl+"propertyservicemanagerOcManager/savePropertyservicemanagerOc.json";
+						
+							//公共方法
+							$.youi.ajaxUtils.ajax({
+								url:serviceURL,
+								data:params.join('&'),
+								jsonp:'data:jsonp',
+								dataType:'jsonp',
+								success:function(results){
+									if(results&&results.record){
+										alert("申请成功!");
+										window.location="/grzx/grzx13.html";
+									}
+								}
+							});
+						}else{
+							alert("您不是企业用户,暂时无法申请一卡通,如有疑问请与客服人员联系!");
+							return false;
 						}
 					}
 				});

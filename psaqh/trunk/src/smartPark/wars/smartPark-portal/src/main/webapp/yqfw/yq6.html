@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/yqfwnews.js"></script>
+	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 	<script>
 	$(function(){
 		$(".sel-add label").click(function(){
@@ -125,34 +126,47 @@
 				};
 				var str=JSON.stringify(obj);
 				alert(str); */
-				
 				/* if(!isLogin){alert("请登录");return;} */
-				var remark = $("#bxRemark").val();
-				if(remark=="" || remark.length==0){
-					alert("请输入相关描述！");
-					return false;
-				}
-				var params = ['bxComp='+$("#bxComp").val(),
-								//'bxWay='+$("#bxWay").text(),
-								'bxType=00',
-								//'bxProject='+$("#bxProject").text(),
-								'bxRemark='+remark,
-								'bxFujian='+$("#upload").val(),'bxStatus=00'];
-				var serviceURL = "http://localhost:8088/smartPark-web/esb/web/propertyservicemanagerBxManager/savePropertyservicemanagerBx.json";
-		
-				//公共方法
+				//判断是否是企业员工
 				$.youi.ajaxUtils.ajax({
-					url:serviceURL,
-					data:params.join('&'),
-					jsonp:'data:jsonp',
-					dataType:'jsonp',
-					success:function(results){
-						if(results&&results.record){
-							alert("申请成功!");
-							window.location="/grzx/grzx8.html";
+				url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					if(result&&result.record){
+						var remark = $("#bxRemark").val();
+						if(remark=="" || remark.length==0){
+							alert("请输入相关描述！");
+							return false;
 						}
+						var params = ['bxComp='+$("#bxComp").val(),
+										//'bxWay='+$("#bxWay").text(),
+										'bxType=00',
+										//'bxProject='+$("#bxProject").text(),
+										'bxRemark='+remark,
+										'bxFujian='+$("#upload").val(),'bxStatus=00'];
+						var serviceURL =baseUrl+"propertyservicemanagerBxManager/savePropertyservicemanagerBx.json";
+				
+						//公共方法
+						$.youi.ajaxUtils.ajax({
+							url:serviceURL,
+							data:params.join('&'),
+							jsonp:'data:jsonp',
+							dataType:'jsonp',
+							success:function(results){
+								if(results&&results.record){
+									alert("申请成功!");
+									window.location="/grzx/grzx8.html";
+								}
+							}
+						});
+					}else{
+						alert("您不是企业用户,暂时无法申请报修,如有疑问请与客服人员联系!");
+						return false;
 					}
-				});
+				}
+			});
+			
 				
 			});
 		});
