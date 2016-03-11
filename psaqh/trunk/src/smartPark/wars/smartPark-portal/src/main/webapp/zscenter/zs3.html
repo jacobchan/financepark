@@ -132,7 +132,7 @@
 		         ];
 				var newobj=obj.concat(on1);//拼接数组，将隐藏的政策ID与其他的字段拼接起来
 				$.youi.ajaxUtils.ajax({
-					url:"http://localhost:8088/smartPark-web/esb/web/policyApplyManager/savePolicyApply.json",
+					url:baseUrl +"policyApplyManager/savePolicyApply.json",
 					data:newobj.join('&'),
 					jsonp:'data:jsonp',
 					dataType:'jsonp',
