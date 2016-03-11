@@ -295,7 +295,7 @@ function GetRequest() {
 		var Request = new Object();
 		Request = GetRequest();
 		var commodityId = Request['id'];
-		var serviceURL = "http://localhost:8088/smartPark-web/esb/web/purchasingmanagerCommodityManager/getPagerPublicCommoditys.json?commodityId="
+		var serviceURL = baseUrl+"purchasingmanagerCommodityManager/getPagerPublicCommoditys.json?commodityId="
 				+ commodityId;
 		//	var serviceURL = "http://localhost:8088/smartPark-web/esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommodity.json?commodityId="+commodityId;
 		$.youi.ajaxUtils.ajax({
@@ -354,7 +354,7 @@ function GetRequest() {
     				}
     				string+="userorderAmount="+userorderAmount;
     			 
-    			   var serviceURL = "http://localhost:8088/smartPark-web/esb/web/publicutilitiesmanagerResoManager/savePublicResoOrderByList.json";
+    			   var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/savePublicResoOrderByList.json";
     				//公共方法
     				$.youi.ajaxUtils.ajax({
     					url:serviceURL,
