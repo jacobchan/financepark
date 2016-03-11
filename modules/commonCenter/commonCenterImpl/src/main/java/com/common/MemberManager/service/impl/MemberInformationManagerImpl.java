@@ -8,6 +8,7 @@ import java.util.Collection;
 
 //import javax.xml.crypto.Data;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,6 @@ import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.PasswordUtils;
 import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.util.StringUtils;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.framework.core.web.menu.IMenu;
 //import com.gsoft.framework.core.web.menu.IMenu;
@@ -148,25 +148,18 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	}
     /**
 	 * 用户注册
-	 * @param userName 用户名
 	 * @param passwd 密码
-	 * @param repasswd 重复密码
 	 * @param mobile 手机号
 	 * @throws BusException
 	 */
     @EsbServiceMapping
-	public void saveReister(@ServiceParam(name="userName") String userName,
-			@ServiceParam(name="passwd") String passwd,
-			@ServiceParam(name="repasswd") String repasswd,
+	public void saveReister(@ServiceParam(name="passwd") String passwd,
 			@ServiceParam(name="mobile") String mobile)
 			throws BusException {
-    	//判断该用户是否存在
-		MemberInformation memberInformationed = memberInformationDao.getObjectByUniqueProperty("memberName", userName);
-		if(memberInformationed==null){
 			//新增用户
 			//判断用户密码是否准确
-			if (!passwd.equals(repasswd))
-				throw new BusException("两次输入的密码不一致");
+			//if (!passwd.equals(repasswd))
+				//throw new BusException("两次输入的密码不一致");
 //				User user = new User();
 //				user.setLoginName(userName);
 //				user.setUserCaption(userName);
@@ -175,18 +168,28 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 //				user.setGroup("003");
 //				User saveuser = userManager.saveUser(user);
 			//保存用户同时insert youi_user
-//			if(saveuser!=null){
 				MemberInformation memberInformation = new MemberInformation();
-//				memberInformation.setMemberId(saveuser.getUserId());
-				memberInformation.setMemberName(userName);
-				memberInformation.setMemberPassword(PasswordUtils.md5Password(repasswd));
+				memberInformation.setMemberName(mobile);
+				memberInformation.setMemberPassword(PasswordUtils.md5Password(passwd));
 				memberInformation.setMemberPhoneNumber(mobile);
 				memberInformationDao.save(memberInformation);
-//			}
-	}else{
-		throw new BusException("该用户已存在!");
-		}
 	}
+    
+    /**
+	 * 判断手机号是否已经注册
+	 * @param mobile 注册手机号
+	 * @return
+	 */
+    @Override
+    @EsbServiceMapping
+    public String exsitMobile(@ServiceParam(name="mobile")String mobile) {
+    	//判断该用户是否存在
+    	MemberInformation memberInformationed = memberInformationDao.getObjectByUniqueProperty("memberPhoneNumber", mobile);
+    	if(memberInformationed != null){//存在返回true
+    		return "true" ;
+    	}
+    	return "false";
+    }
     
     /**
 	 * 获取用户基本信息
