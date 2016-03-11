@@ -6,8 +6,7 @@
 			<dt>个人中心</dt>
 			<dd  class="active"><a href="<%=request.getContextPath()%>/member/memberCenter/index.html">个人资料</a></dd>
 			<dd><a href="grzx2.html">订单中心</a></dd>
-			<dd><a href="updatephone.html">修改电话</a></dd>
-			<dd><a href="updatepassword.html">修改密码</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/securityCenter.html">安全中心</a></dd>
 			<dd><a href="grzx4.html">消息</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/addressBook.html">企业通讯录</a></dd>
 			<dd><a href="propertyservicemanagerOcbind.html">一卡通绑定</a></dd>
