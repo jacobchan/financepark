@@ -112,7 +112,10 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
     	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerEntreId);
     	
     	MemberInformation memberInformation=new MemberInformation();
-		memberInformation=memberInformationManager.getMemberInformation(o.getEnteringName());
+    	if(o.getUpdateUser()!=null){
+    		memberInformation=memberInformationManager.getMemberInformation(o.getUpdateUser());
+    	}
+		
 		//判断入驻申请人是否重复
 		List<PropertyservicemanagerEntrec> entrecList=new ArrayList<PropertyservicemanagerEntrec>();
 		Collection<Condition> conditions = new ArrayList<Condition>();

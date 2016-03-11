@@ -36,6 +36,19 @@ public interface PurchasingmanagerCommodityManager extends BaseManager{
 	public PagerRecords getPagerPurchasingmanagerCommoditys(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders) throws BusException;
+	
+	/**
+	 * 分页查询属于公共资源的商品
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	public PagerRecords getPagerPublicCommoditys(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders) throws BusException;
+	
     /**
      * 保存并返回对象
      */

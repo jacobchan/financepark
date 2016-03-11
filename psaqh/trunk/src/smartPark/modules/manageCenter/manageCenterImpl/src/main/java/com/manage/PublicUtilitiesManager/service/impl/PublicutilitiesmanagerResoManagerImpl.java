@@ -3,6 +3,7 @@
  */
 package com.manage.PublicUtilitiesManager.service.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
@@ -39,6 +40,7 @@ import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.utils.BizCodeUtil;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntering;
 import com.manage.PublicUtilitiesManager.entity.PublicutilitiesmanagerReso;
 import com.manage.PublicUtilitiesManager.dao.PublicutilitiesmanagerResoDao;
 import com.manage.PublicUtilitiesManager.service.PublicutilitiesmanagerResoManager;
@@ -132,7 +134,7 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
     /**
      *前台页面：用户预约公共资源,保存对象
      */
-    @EsbServiceMapping
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
     public List<PublicutilitiesmanagerReso> savePublicutilitiesmanagerResoList(List<PublicutilitiesmanagerReso> o) throws BusException{
     	String resoId = "";
     	List<PublicutilitiesmanagerReso> resoList=new ArrayList<PublicutilitiesmanagerReso>();
@@ -143,10 +145,16 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
         		//根据主键Id查询公共资源信息
         		PublicutilitiesmanagerReso preso=publicutilitiesmanagerResoDao.get(resoId);
         		preso.setResoStatus("02");//更新状态：02---已预约
+        		preso.setUpdateUser(pr.getUpdateUser());
+        		preso.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+        		preso.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
         		PublicutilitiesmanagerReso reso=publicutilitiesmanagerResoDao.save(preso);
         		resoList.add(reso);
         	}else{//新增
         		pr.setResoStatus("02");//02---已预约
+        		pr.setCreateUser(pr.getUpdateUser());
+        		pr.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+        		pr.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
         		PublicutilitiesmanagerReso reso=publicutilitiesmanagerResoDao.save(pr);//生成新的公共资源信息
         		resoList.add(reso);
         	}
@@ -193,62 +201,55 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
     	Collection<Order> order = new ArrayList<Order>();
     	condition.add(ConditionUtils.getCondition("parkBusinessTupe", Condition.EQUALS,"03"));//03:公共资源
     	List<PurchasingmanagerCommodity> commodityList=purchasingmanagerCommodityManager.getPurchasingmanagerCommoditys(condition, order);
-    	
-//    	for(PurchasingmanagerCommodity p:commodityList){
-//    		//根据商品信息实体查询商品扩展属性值表
-//    		Collection<Condition> conditions = new ArrayList<Condition>();
-//    		Collection<Order> orders = new ArrayList<Order>();
-//    		conditions.add(ConditionUtils.getCondition("purchasingmanagerCommodity", Condition.EQUALS,
-//    				p));
-//    		List<PurchasingmanagerCommodity> commodityExtendValueList=purchasingmanagerCommodityManager.getPurchasingmanagerCommodityExtendValues(conditions, orders);
-//    		for(PurchasingmanagerCommodityExtendValue value:commodityExtendValueList){
-//    			extendValueList.add(value);
-//    		}
-//    	}
     	return commodityList;
     }
+	
 	@Override
-	 @EsbServiceMapping
-	public OrdermanagerUserorder savePublicResoOrder(PublicutilitiesmanagerReso publicReso) throws BusException {
-//		publicResoList = this.savePublicutilitiesmanagerResoList(publicResoList);
-		List<PublicutilitiesmanagerReso> prList=new ArrayList<PublicutilitiesmanagerReso> ();
-		String resoId=publicReso.getResoId();
-		if(StringUtils.isNotEmpty(resoId)){
-			publicReso = publicutilitiesmanagerResoDao.get(resoId); 
-			prList.add(publicReso);
-			this.savePublicutilitiesmanagerResoList(prList);
-		}
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+	public OrdermanagerUserorder savePublicResoOrderByList(@ServiceParam(name="userorderAmount") String userorderAmount,@DomainCollection(domainClazz=PublicutilitiesmanagerReso.class) List<PublicutilitiesmanagerReso> publicResoList) throws BusException {
+		publicResoList = this.savePublicutilitiesmanagerResoList(publicResoList);
+//		List<PublicutilitiesmanagerReso> prList=new ArrayList<PublicutilitiesmanagerReso> ();
+//		String resoId=publicReso.getResoId();
+//		if(StringUtils.isNotEmpty(resoId)){
+//			PublicutilitiesmanagerReso publics = publicutilitiesmanagerResoDao.get(resoId); 
+//			publics.setUpdateUser(publicReso.getUpdateUser());
+//			prList.add(publics);
+//			this.savePublicutilitiesmanagerResoList(prList);
+//			publicReso=publics;
+//		}
 		
 		OrdermanagerUserorder o =new OrdermanagerUserorder();
-		o.setGenreId(publicReso.getCommodityId().getPurchasingmanagerGenre());
+		o.setGenreId(publicResoList.get(0).getCommodityId().getPurchasingmanagerGenre());
 		o.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("GGZY"));
 		o.setUserorderStatus("01");//01-未支付
-		o.setUserorderProject(publicReso.getCommodityId().getCommodityTitle());
+		o.setUserorderProject(publicResoList.get(0).getCommodityId().getCommodityTitle());
+		o.setUpdateUser(publicResoList.get(0).getUpdateUser());
+		o.setUserorderAmount(new BigDecimal(userorderAmount));
 		o = userOrderManager.saveOrdermanagerUserorder(o);
 		//保存订单明细列表
 		OrdermanagerCommoditydetail orderDetail = new OrdermanagerCommoditydetail();
 		orderDetail.setOrdermanagerUserorder(o);
-		orderDetail.setCommodityId(publicReso.getCommodityId().getCommodityId());
+		orderDetail.setCommodityId(publicResoList.get(0).getCommodityId().getCommodityId());
 		orderDetail.setCommoditydetailNum("1");
 		this.userOrderDetailManager.saveOrdermanagerCommoditydetail(orderDetail);
 		//保存订单扩展属性列表
-		PurchasingmanagerGenre pg = publicReso.getCommodityId().getPurchasingmanagerGenre();
+		PurchasingmanagerGenre pg = publicResoList.get(0).getCommodityId().getPurchasingmanagerGenre();
 		while(pg.getPurchasingmanagerGenre() != null){//获取最顶级商品类别
 			pg = pg.getPurchasingmanagerGenre();
 		}
 		StringBuffer publicResoIdBuff =  new StringBuffer();//公共资源ID
 		String dateStr =  "";//订单预定日期
 		StringBuffer timeStrBuff =  new StringBuffer();//订单预定时段
-//		for(int i = 0;i<publicResoList.size();i++){
-//			PublicutilitiesmanagerReso publicReso = publicResoList.get(i);
+		for(int i = 0;i<publicResoList.size();i++){
+			PublicutilitiesmanagerReso publicReso = publicResoList.get(i);
 			dateStr = publicReso.getResoDate();
 			timeStrBuff.append(publicReso.getResoTime());
 			publicResoIdBuff.append(publicReso.getResoId());
-//			if(i+1<publicResoList.size()){
-//				timeStrBuff.append(",");
-//				publicResoIdBuff.append(",");
-//			}
-//		}
+			if(i+1<publicResoList.size()){
+				timeStrBuff.append(",");
+				publicResoIdBuff.append(",");
+			}
+		}
 		//获取商品类别
 		Collection<Condition> conditions = new ArrayList<Condition>();
 		conditions.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.EQUALS, pg.getGenreId()));
@@ -271,6 +272,7 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 		
 		return o;
 	}
+	
 	
 	
 	/**
