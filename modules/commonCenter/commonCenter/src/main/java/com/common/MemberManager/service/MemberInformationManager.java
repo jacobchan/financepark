@@ -86,4 +86,12 @@ public interface MemberInformationManager extends BaseManager{
 		 * @throws BusException
 		 */
 	public MemberInformation getMemberInformationByLoginUser(String userId) throws BusException;
+	/**
+	 * 修改密码
+	 * @param password
+	 * @param confirmPassword
+	 * @param oldPassword
+	 * @throws BusException
+	 */
+	public void doModifyPassword(String password,String confirmPassword,String oldPassword,String userId) throws BusException;
 }
