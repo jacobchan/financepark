@@ -25,7 +25,7 @@
 		</div>
 		<div class="w1200 clearfix pt30 pb50">
 			<div class="fl w895">
-				<h3 class="h3-c-o">孵化器政策</h3>
+				<!-- <h3 class="h3-c-o">孵化器政策</h3>
 				<div class="index-group">
 					<h5>关于租金</h5>
 					<div class="ig-box">
@@ -62,8 +62,8 @@
 						<p>适政府为鼓励园区二次招商先租后售、园区招引的企业2016年度2017年两年内经审核认定后政府给予0.5元/㎡/天的租金补助。</p>
 						<a href="javascript:;" class="ib-btn">在线申请</a>
 					</div>
-				</div>
-			</div>
+				</div>-->
+			</div> 
 			<div class="fr w285"><div id="youi_page_right" class="youi-page-right clearfix"></div></div>
 		</div>
 	</div>
@@ -88,15 +88,15 @@
 							备注：如果贵司为已驻企业，请在线提报，如果贵司还未进入园区，请在线预约后再进行申请，谢谢！
 						</td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<td>公司楼栋及地址</td>
 						<td><input type="text" id="companyAdrress"></td>
-					</tr>
+					</tr> -->
 					<tr>
 						<td>联系人</td>
 						<td><input type="text" id="policyApplyContactPeople"></td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<td></td>
 						<td id="policyApplySex">
 							<label><input type="radio" name="sex" class="mr5" checked="checked" value="0">先生</label>
@@ -106,7 +106,7 @@
 					<tr>
 						<td>联系人职位</td>
 						<td><input type="text" id="policyApplyContactPosition"></td>
-					</tr>
+					</tr> -->
 					<tr>
 						<td>联系手机</td>
 						<td><input type="text" id="policyApplyContactTel"></td>
@@ -122,39 +122,76 @@
 		</div>
 	</div>
 	<!--***弹窗 end****************************************-->
-	<script>
+	<script type="text/javascript">
 		$(function(){
 			$("#submit-ib").click(function(){
-				var obj={
-					policyApplyConpanyName:$("#policyApplyConpanyName").val(),
-					companyAdrress:$("#companyAdrress").val(),
-					policyApplyContactPeople:$("#policyApplyContactPeople").val(),
-					policyApplySex:$("#policyApplySex input[name='sex']:checked").val(),//0-先生，1女士
-					policyApplyContactPosition:$("#policyApplyContactPosition").val(),
-					policyApplyContactTel:$("#policyApplyContactTel").val()
-					};
-				var str=JSON.stringify(obj);
-				alert(str);
+				var on1=[
+				 "policyApplyConpanyName="+$("#policyApplyConpanyName").val(),
+		         "policyApplyContactPeople="+$("#policyApplyContactPeople").val(),
+		         "policyApplyContactTel="+$("#policyApplyContactTel").val()
+		         ];
+				var newobj=obj.concat(on1);//拼接数组，将隐藏的政策ID与其他的字段拼接起来
+				$.youi.ajaxUtils.ajax({
+					url:"http://localhost:8088/smartPark-web/esb/web/policyApplyManager/savePolicyApply.json",
+					data:newobj.join('&'),
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(results){
+						$("#policyApplyConpanyName").val("");//将输入框内容置为空
+						$("#policyApplyContactPeople").val("");
+						$("#policyApplyContactTel").val("");
+						$(".bg-tanc").hide();//隐藏表单
+						alert("申请成功！");
+					}
+				});
 			});
-		})
+		});
 	</script>
-</body>
-<script type="text/javascript">
+	<script type="text/javascript">
+		$(function(){
+			$.youi.ajaxUtils.ajax({
+				url:'http://localhost:8088/smartPark-web/esb/web/nmIssuenewsManager/getNmIssuenewss.json',
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					if(result&&result.records){
+						_parseRecords(result.records);
+					}
+				}
+			});
+		});
+		//拼接政策新闻列表
+		function _parseRecords(record){
+			for(var i=0;i<record.length;i++){
+				var html="<div class='index-group'>"+
+							 "<h5>"+record[i].policyCaption+"</h5>"+
+	                    	 "<div class='ig-box'>"+
+		                    	 "<p>"+record[i].policyContent+"</p>"+
+		                    	 "<a href='javascript:;' class='ib-btn'>在线申请</a>"+
+		                    	 "<input type='hidden' class='hiddenId' value="+record[i].policyId+">"+
+	                		 "</div>"+
+                		 "</div>";
+				 $(".fl.w895").append(html);
+			}
+		};
+	</script>
+	<script type="text/javascript">
 		$(function () {
 			$(".index-fr-nav li").click(function(){
 				$(".index-fr-nav li").removeClass("active");
 				$(this).addClass("active");
 				$(".ifn-group ul").eq($(this).index()).removeClass("undis").siblings().addClass("undis");
 			});
-			$(".ib-btn").click(function(){
+			$(document).on("click",".ib-btn",function(){
+				obj=[
+				       "nmIssuenews.policyId="+$(this).siblings("input").val()//全局变量，获取当前政策ID
+				    ] ;
 				$(".bg-tanc").show();
 			});
+			
 			$(".tc-close").click(function(){
 				$(".bg-tanc").hide();
 			});
-			$('#youi_page_header').find(".index-head-nav li").removeClass("active");
-			$('#youi_page_header').find(".index-head-nav li").eq(1).addClass("active").find("dd").addClass("active");
 		})
-	
 	</script>
 </html>
