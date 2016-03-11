@@ -82,18 +82,20 @@ $(function(){
 <script type="text/javascript">
 		$(function(){
 			$("#register").click(function(){
-				var mobile = $("#mobile").val() ;
-				var passwd = $("#passwd").val() ;
+				var memberPhoneNumber = $("#mobile").val() ;
+				var memberPassword = $("#passwd").val() ;
 				var repasswd = $("#repasswd").val() ;
 				
 				var isMobile=/^(?:13\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;//手机号的格式
-				if(! isMobile.test(mobile)){
+				if(! isMobile.test(memberPhoneNumber)){
 					alert("请输入正确的手机号！") ;
 					return ;
 				}
+				var obj = ['memberPhoneNumber='+memberPhoneNumber] ;
 				/* 判断手机号是否已经注册! */
 				$.youi.ajaxUtils.ajax({
-					url:"http://localhost:8088/smartPark-web/esb/web/memberInformationManager/exsitMobile.json?mobile="+mobile,
+					url:"http://localhost:8088/smartPark-web/esb/web/memberInformationManager/exsitMobile.json",
+					data:obj.join('&'),
 					jsonp:'data:jsonp',
 					dataType:'jsonp',
 					success:function(result){
@@ -102,7 +104,7 @@ $(function(){
 							alert("此手机号已经注册了！");
 							return ;
 						}else{
-							if(passwd == '' || passwd==null){
+							if(memberPassword == '' || memberPassword==null){
 								alert("密码不能为空！") ;
 								return ;
 							}
@@ -110,14 +112,22 @@ $(function(){
 								alert("确认密码不能为空！") ;
 								return ;
 							}
+							if(memberPassword.length<6){
+								alert("密码长度不能小于6！") ;
+								return ;
+							}
 							
-							if(passwd != repasswd){
+							if(memberPassword != repasswd){
 								alert("两次密码输入不一致！") ;
 								return ;
 							}
-							var params = "?passwd="+passwd+"&mobile="+mobile;
+							var params = [
+							              "memberPhoneNumber="+memberPhoneNumber,
+							              "memberPassword="+memberPassword
+										 ];
 							$.youi.ajaxUtils.ajax({
-								url:"http://localhost:8088/smartPark-web/esb/web/memberInformationManager/saveReister.json"+params,
+								url:"http://localhost:8088/smartPark-web/esb/web/memberInformationManager/saveReister.json",
+								data:params.join('&'),
 								jsonp:'data:jsonp',
 								dataType:'jsonp',
 								success:function(results){
