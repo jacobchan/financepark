@@ -336,6 +336,8 @@ function GetRequest() {
 <script type="text/javascript">
 		    //提交预约
 			$('.btn-cheng').click(function(){
+				if(!isLogin){alert("请登录");return;}
+				
 				var arr=new Array();
 				$("#data_timer td.clicktd").each(function(){
 					var active=$(this).index();
