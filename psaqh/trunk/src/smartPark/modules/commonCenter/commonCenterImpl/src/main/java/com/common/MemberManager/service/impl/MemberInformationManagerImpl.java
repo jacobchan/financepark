@@ -153,8 +153,8 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	 * @throws BusException
 	 */
     @EsbServiceMapping
-	public void saveReister(@ServiceParam(name="passwd") String passwd,
-			@ServiceParam(name="mobile") String mobile)
+	public void saveReister(@ServiceParam(name="memberPassword") String passwd,
+			@ServiceParam(name="memberPhoneNumber") String mobile)
 			throws BusException {
 			//新增用户
 			//判断用户密码是否准确
@@ -182,7 +182,7 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	 */
     @Override
     @EsbServiceMapping
-    public String exsitMobile(@ServiceParam(name="mobile")String mobile) {
+    public String exsitMobile(@ServiceParam(name="memberPhoneNumber") String mobile) {
     	//判断该用户是否存在
     	MemberInformation memberInformationed = memberInformationDao.getObjectByUniqueProperty("memberPhoneNumber", mobile);
     	if(memberInformationed != null){//存在返回true
