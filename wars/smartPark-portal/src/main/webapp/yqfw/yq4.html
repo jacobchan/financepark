@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/yqfwnews.js"></script>
 	<script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
+	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 	<script>
 		$(function(){
 			laydate({
@@ -124,7 +125,7 @@ $(function(){
 						'fkcodeComp='+$("#company").val(),
 						'fkcodeTime='+$("#timer").val(),
 						'fkcodeRemark='+$("#userinfo").val()];
-		var serviceURL = "http://localhost:8088/smartPark-web/esb/web/propertyservicemanagerFkcodeManager/savePropertyservicemanagerFkcode.json";
+		var serviceURL = baseUrl+"propertyservicemanagerFkcodeManager/savePropertyservicemanagerFkcode.json";
 		
 		//公共方法
 		$.youi.ajaxUtils.ajax({
