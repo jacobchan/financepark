@@ -1,0 +1,20 @@
+{
+	"records":[{
+		"text":"展厅测试",
+		"value":1
+	},{
+		"text":"游泳池测试",
+		"value":2
+	},
+	{
+		"text":"公园测试",
+		"value":3
+	},
+	{
+		"text":"大楼测试",
+		"value":4
+	}
+	],
+	"record":{},
+	"totalCount":1
+}

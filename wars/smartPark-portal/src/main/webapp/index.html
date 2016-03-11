@@ -595,6 +595,10 @@
 				template:'<a class="tc" href=xq?id={commodityId}.html><div class="cp"><img src={commodityImage}></div>{commodityTitle}<p class="cc">&yen;{commodityPrice}</p></a>',
 				jsonpSrc:'http://localhost:9088/jsonp/data.jsp?data:file=test.json'
 			});
+			$('.select_list>ul').select({
+				template:'<li data-val={value}>{text}</li>',
+				jsonpSrc:'http://localhost:9088/jsonp/data.jsp?data:file=selector.json'
+			});
 			
 		});
 	</script>
@@ -622,11 +626,13 @@
 		$(".selectBox").on("click",function(){
 			$(".select_list").toggle();
 		});
-		$(".select_list li").click(function(){
+		$(".select_list").on("click","li",function(){
 			$(this).addClass("selected").siblings().removeClass("selected");
 			var selecttext=$(this).text();
-			$(".select_show").text(selecttext);
+			var val=$(this).attr("data-val");
+			$(".select_show").text(selecttext).attr("data-val",val); 
 		});
+			
 		
 		/*slide table*/
 		$(".icon_left").click(function(){
