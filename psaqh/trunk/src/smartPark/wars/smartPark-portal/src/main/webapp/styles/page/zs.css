@@ -324,6 +324,9 @@ a.a-c-p i{color: #ff6715;font-size: 20px;line-height: 40px;float: left;margin-le
 .act-intro{line-height: 40px;border:1px solid #ecebeb;background-color: #f9f9f9;border-left: 2px solid #ff6715;font-size: 20px;color: #222;padding-left: 20px;}
 .bd-box h4{font-weight: bold;font-size: 16px;color: #222;margin: 20px 0px;}
 .bd-box p{font-size: 14px;line-height: 24px;color: #222;}
+a.send-psw{display: inline-block;text-align: center;padding: 0px 10px;line-height: 30px;height: 30px;border:1px solid #ddd;color: #666;}
+a.send-psw:hover,a.send-psw.active{background: #e7e7e7;}
+
 
 /**创智讲堂**/
 .czh-park-nav.park-nav{background: #fff;border:1px solid #ff6715;padding: 0px;}
@@ -937,3 +940,17 @@ a.see-all:hover{color: #FF6715;}
 }
 /*清除ie的默认选择框样式清除，隐藏下拉箭头*/
 #birthday_container select::-ms-expand { display: none; }
+
+
+
+/**园区服务右边新闻**/
+.yqfw-news{border:1px solid #efecec;padding-bottom: 10px;margin-bottom: 20px;background: #fff;}
+.yqfw-news .yn-bd{border-bottom: 1px solid #efecec;line-height: 40px;padding:0px 15px;}
+.yqfw-news .yn-bd a:hover{color: #FF6715;}
+.yqfw-news .yn-nav1{display: inline-block;padding:0px 15px;width: 100%;}
+.yqfw-news li{width: 100%;border-bottom: 1px dashed #efecec;line-height: 24px;padding: 10px 0px;font-size: 14px;}
+.yqfw-news li a{color: #333;}
+.yqfw-news li a:hover{color: #FF6715;text-decoration: underline;}
+.yqfw-news li p{width: 100%;overflow: hidden;height: 24px;}
+.yqfw-news li p a{width: 70%;display:inline-block;overflow: hidden;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+

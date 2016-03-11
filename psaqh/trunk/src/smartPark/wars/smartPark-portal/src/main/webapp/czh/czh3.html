@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+	<script type="text/javascript" src="../scripts/page/right.js"></script>
 </head>
 <body>
 	<!--***top start****************************************-->
@@ -42,18 +43,19 @@
 						<a href="javascript:;" class="a-c a-c-o">我要报名</a>
 						<a href="javascript:;" class="a-c a-c-p"><img alt="收藏" src="../styles/images/czh/sc.png" border="0" class="mr5">收藏：183人</a>
 						<!-- JiaThis Button BEGIN -->
-						<style type="text/css">
-							.jiathis_style>div{box-sizing: content-box !important;}
-						</style>
-						<div class="jiathis_style_24x24 fr" style="margin-top:8px">
-							<span class="fl lh24">分享至：</span>
-							<a title="分享到微信" class="jiathis_button_weixin"><span class="jiathis_txt jtico jtico_weixin"></span></a>
-							<a title="分享到新浪微博" class="jiathis_button_tsina"><span class="jiathis_txt jtico jtico_tsina"></span></a>
-							<a title="分享到QQ空间" class="jiathis_button_qzone"><span class="jiathis_txt jtico jtico_qzone"></span></a>
-							<a style="" href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-						</div>
-						<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script><script type="text/javascript" src="http://v3.jiathis.com/code/plugin.client.js" charset="utf-8"></script>
-					<!-- JiaThis Button END -->
+							<style type="text/css">
+								.jiathis_style>div{box-sizing: content-box !important;}
+							</style>
+							<div class="jiathis_style_24x24 fr" style="margin-top:3px">
+								<span class="fl lh24">分享至：</span>
+								<a class="jiathis_button_tsina"></a>
+								<a class="jiathis_button_douban"></a>
+								<a class="jiathis_button_renren"></a>
+								<a class="jiathis_button_qzone"></a>
+								<a class="jiathis_button_weixin"></a>
+							</div>
+							<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+						<!-- JiaThis Button END -->
 					</div>
 				</div>
 			</div>
@@ -100,6 +102,39 @@
 	<!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
+	<!-- 弹窗  start-->
+	<div class="bg-tanc">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:400px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<h3 class="mb10 f20 c-333"><b>活动报名</b></h3>
+			<table class="line-table cic-l-t wybx-tanc" style="font-size:12px;">
+				<colgroup>
+					<col width="60%">
+					<col>
+				</colgroup>
+				<tbody>
+				<tr>
+					<td colspan="2"><input type="text" placeholder="请输入真实姓名" style="width:100%"></td>
+				</tr>
+				<tr class="show2">
+					<td><input type="text" placeholder="请输入有效的手机号码" style="width:100%"></td>
+					<td style="padding-left:10px;">
+						<a href="javascript:;" class="send-psw" style="width:100%">发送验证码</a>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type="text" placeholder="请输入验证码" style="width:100%">
+						<p style="color:#e04648" class="f12 mt5 undis">验证码错误，请重新输入验证码</p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="button" class="ib-btn" style="width:100%;margin-top:0px;" value="报名"></td>
+				</tr>
+			</tbody></table>
+		</div>
+	</div>
+	<!-- 弹窗  end -->
 	<script type="text/javascript" src="../scripts/page/banner.js"></script>
 	<script type="text/javascript">
 		$(function(){
@@ -110,7 +145,10 @@
 			$("a.a-c-p").click(function(){
 				$(this).css("background-color","#ecebeb");
 				$(this).html('<img alt="收藏" src="../styles/images/czh/sc-o.png" border="0" class="mr10">已收藏');
-			})
+			});
+			$("a.a-c-o").click(function(){
+				$(".bg-tanc").show();
+			});
 		});
 	</script>
 </body>
