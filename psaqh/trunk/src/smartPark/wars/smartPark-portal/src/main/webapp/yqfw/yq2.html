@@ -58,7 +58,7 @@
 							return;
 						}
 						var params=['propertyservicemanagerEntering.enteringId=40288ab553637ab1015363b830870022','enteringName='+enteringName,'enteringTelephone='+enteringTelephone];
-						var serviceURL = "http://localhost:8088/smartPark-web/esb/web/propertyservicemanagerEntrecManager/savePropertyservicemanagerEntrec.json";
+						var serviceURL = baseUrl+"propertyservicemanagerEntrecManager/savePropertyservicemanagerEntrec.json";
 						//公共方法
 						$.youi.ajaxUtils.ajax({
 							url:serviceURL,
@@ -153,8 +153,6 @@
 							<div><label>联系邮箱</label> <input type="text" id="enteringEmail"></div>
 							<div><label>备注</label> <textarea id="enteringNote"></textarea></div>
 							 <input type="button" value="提交" id="sub" class="hhf-submit" style="margin-left:160px;">
-								
-<!--  <a class="submitqqqq">提交</a>	 -->			
  </form>
 					</div>	
 				</div>
