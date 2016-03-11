@@ -55,7 +55,7 @@
             	<input type="text" placeholder="手机号码"/>
             </div>
             <div class="fl ml10">
-            	<input type="button" value="立即预约"/>
+            	<input id="reserveButton" type="button" value="立即预约"/>
             </div>
         </div>
     </form>
@@ -697,7 +697,35 @@
 		
 	})
 </script>
-	
+	<script type="text/javascript">
+		    //提交预约
+			$("#reserveButton").click(function(){
+				var recordMemberId=$(".select_show").text();
+				var visiteDate=$("#lf_date").val();
+				if(recordMemberId == null||recordMemberId==""){
+					alert("请选择参观项目");
+					return;
+				}
+				if(visiteDate ==null|| visiteDate==""){
+					alert("请填写预约日期");
+					return;
+				}
+				var params = ['visiteDate='+visiteDate,'recordMemberId='+recordMemberId];
+				var serviceURL = baseUrl+"reservationRecordManager/saveReservationRecord.json";
+				//公共方法
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					data:params.join('&'),
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(result){
+						if(result&&result.record){
+							alert("预约成功");
+						}
+					}
+				});
+			});
+	</script>
 	
 </body>
 </html>
