@@ -35,7 +35,7 @@
             <form class="login_form" style="display:none">
             	<div class="login_input mt15">
                 	<label class="f16">用户名</label>
-                    <input type="text" placeholder="请输入手机号码">
+                    <input type="text" placeholder="请输入手机号码" id="mobile">
                     <div class="btn_yzm f12 ml15">发送验证码</div>
                 </div>
                 <div class="login_input mt10">
@@ -44,13 +44,13 @@
                 </div>
                 <div class="login_input mt10">
                 	<label class="f16">密码</label>
-                    <input type="password">
+                    <input type="password" id="passwd">
                 </div>
                 <div class="login_input mt10">
-                	<label class="f16">确定密码</label>
-                    <input type="password">
+                	<label class="f16">确认密码</label>
+                    <input type="password" id="repasswd">
                 </div>
-                <div class="btn-cheng tc lh40 mt20 xiaoqishabi" style="display:block">注册</div>
+                <div class="btn-cheng tc lh40 mt20 xiaoqishabi" style="display:block" id="register">注册</div>
             </form>
         </div>
     </div>
@@ -78,6 +78,60 @@ $(function(){
 		$(".login_form").eq(index).show().siblings(".login_form").hide();
 	});
 });
+</script>
+<script type="text/javascript">
+		$(function(){
+			$("#register").click(function(){
+				var mobile = $("#mobile").val() ;
+				var passwd = $("#passwd").val() ;
+				var repasswd = $("#repasswd").val() ;
+				
+				var isMobile=/^(?:13\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;//手机号的格式
+				if(! isMobile.test(mobile)){
+					alert("请输入正确的手机号！") ;
+					return ;
+				}
+				/* 判断手机号是否已经注册! */
+				$.youi.ajaxUtils.ajax({
+					url:"http://localhost:8088/smartPark-web/esb/web/memberInformationManager/exsitMobile.json?mobile="+mobile,
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(result){
+						var flag = result.record.html ;//获取返回值
+						if(flag == 'true'){
+							alert("此手机号已经注册了！");
+							return ;
+						}else{
+							if(passwd == '' || passwd==null){
+								alert("密码不能为空！") ;
+								return ;
+							}
+							if(repasswd == '' || repasswd==null){
+								alert("确认密码不能为空！") ;
+								return ;
+							}
+							
+							if(passwd != repasswd){
+								alert("两次密码输入不一致！") ;
+								return ;
+							}
+							var params = "?passwd="+passwd+"&mobile="+mobile;
+							$.youi.ajaxUtils.ajax({
+								url:"http://localhost:8088/smartPark-web/esb/web/memberInformationManager/saveReister.json"+params,
+								jsonp:'data:jsonp',
+								dataType:'jsonp',
+								success:function(results){
+									$("#mobile").val("");//将输入框内容置为空
+									$("#passwd").val("") ;
+									$("#repasswd").val("") ;
+									alert("注册成功！");
+								}
+							});
+						}
+					}
+				});
+			}); 
+		})
 </script>
 </body>
 </html>
