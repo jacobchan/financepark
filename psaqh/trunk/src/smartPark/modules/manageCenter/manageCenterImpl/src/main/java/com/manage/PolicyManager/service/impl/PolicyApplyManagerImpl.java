@@ -82,7 +82,7 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
      * 保存对象
      * @param o 政策申请对象
      */
-    @EsbServiceMapping
+    @EsbServiceMapping(pubConditions={@PubCondition(property="createUser",pubProperty="userId")})
     public PolicyApply savePolicyApply(PolicyApply o) throws BusException{
     	
     	/*String policyApplyId = o.getPolicyApplyId();
