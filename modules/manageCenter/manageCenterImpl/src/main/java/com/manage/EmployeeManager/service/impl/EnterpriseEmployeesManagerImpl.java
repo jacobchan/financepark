@@ -193,4 +193,26 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 		EnterpriseEmployees enterpriseEmployees = enterpriseEmployeesDao.getObjectByUniqueProperty("member", member) ;
 		return enterpriseEmployees;
 	}
+	
+	/**
+	 * 通过当前登录用户查询是否是企业员工
+	 * @param o 企业员工表实体
+	 * @return
+	 * @throws BusException
+	 */
+	@EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",pubProperty="userId")})
+	public EnterpriseEmployees getEnterEmployforpage(EnterpriseEmployees o)
+			throws BusException {
+		String id = o.getMember().getMemberId();
+		if(id!=null){
+			EnterpriseEmployees enterpriseEmployees = enterpriseEmployeesDao.getObjectByUniqueProperty("member.memberId", id) ;
+			if(enterpriseEmployees!=null){
+				return enterpriseEmployees;
+			}else{
+				return null;
+			}
+		}else{
+			return null;
+		}
+	}
 }

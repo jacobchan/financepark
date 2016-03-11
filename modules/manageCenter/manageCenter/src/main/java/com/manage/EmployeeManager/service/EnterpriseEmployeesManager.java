@@ -82,4 +82,11 @@ public interface EnterpriseEmployeesManager extends BaseManager{
 	 */
 	public EnterpriseEmployees getEnterpriseEmployeesByMember(MemberInformation member) throws BusException;
 	
+	/**
+	 * 通过当前登录用户查询是否是企业员工
+	 * @param o 企业员工表实体
+	 * @return
+	 * @throws BusException
+	 */
+	public EnterpriseEmployees getEnterEmployforpage(EnterpriseEmployees o) throws BusException;
 }
