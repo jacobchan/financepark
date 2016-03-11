@@ -67,11 +67,16 @@ public interface MemberInformationManager extends BaseManager{
 	
 	/**
 	 * 用户注册
-	 * @param userName 用户名
 	 * @param passwd 密码
-	 * @param repasswd 重复密码
 	 * @param mobile 手机号
 	 * @throws BusException
 	 */
-	public void saveReister(String userName,String passwd,String repasswd,String mobile) throws BusException;
+	public void saveReister(String passwd,String mobile) throws BusException;
+	
+	/**
+	 * 判断手机号是否已经注册
+	 * @param mobile 注册手机号
+	 * @return
+	 */
+	public String exsitMobile(String mobile) ;
 }
