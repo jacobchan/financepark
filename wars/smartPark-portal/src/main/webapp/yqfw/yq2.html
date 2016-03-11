@@ -44,6 +44,39 @@
 						  	$(".ht-table tr th").eq(j).html(dm+"月"+dt+"日"+"<br/>"+weekDay[dw]); 
 						}
 					}
+					
+					 $(".hhf-submit").click(function(){
+						if(!isLogin){alert("请登录");return;}
+						var enteringName=$("#enteringName").val();
+						var enteringTelephone=$("#enteringTelephone").val();
+                        if(enteringName == null||enteringName == ""){
+							alert("请填写申请人");
+							return;
+						}
+                        if(enteringTelephone == null||enteringTelephone == ""){
+							alert("请填写申请人电话");
+							return;
+						}
+						var params=['propertyservicemanagerEntering.enteringId=40288ab553637ab1015363b830870022','enteringName='+enteringName,'enteringTelephone='+enteringTelephone];
+						var serviceURL = "http://localhost:8088/smartPark-web/esb/web/propertyservicemanagerEntrecManager/savePropertyservicemanagerEntrec.json";
+						//公共方法
+						$.youi.ajaxUtils.ajax({
+							url:serviceURL,
+							data:params.join('&'),
+							jsonp:'data:jsonp',
+							dataType:'jsonp',
+							success:function(results){
+								console.log(results);
+								if(results&&results.record){
+									alert("预约成功");
+								}
+							},error:function(XMLHttpRequest, textStatus, errorThrown){
+								alert(XMLHttpRequest);
+							}
+						});
+
+						
+					});
 					/*  $(".ht-table").plists({
 						template:'',
 						jsonpSrc:'http://localhost:8081/jsonp/data.jsp?data:file=yq2-test.json'
@@ -95,7 +128,7 @@
 								<th>12月31日<br/>星期四</th>
 								<th>预约说明</th>
 							</tr>
-							<tr>
+							<tr id="am">
 								<td>09：00-12：00</td>
 								<td><a href="javascript:;" class="em3">不可预约</a></td>
 								<td><a href="javascript:;" class="em1">可以预约（8个）</a></td>
@@ -104,7 +137,7 @@
 								<td><a href="javascript:;" class="em1">可以预约（12个）</a></td>
 								<td rowspan="2"><p class="lh20">温馨提示：线上预约后,请在预约的时间内到物业处凭预约短信办理相关事宜。</p></td>
 							</tr>
-							<tr>
+							<tr id="pm">
 								<td>14：00-17：00</td>
 								<td><a href="javascript:;" class="em3">不可预约</a></td>
 								<td><a href="javascript:;" class="em1">可以预约（8个）</a></td>
@@ -119,8 +152,10 @@
 							<div><label><em>*</em> 申请人电话</label> <input type="text" id="enteringTelephone"></div>
 							<div><label>联系邮箱</label> <input type="text" id="enteringEmail"></div>
 							<div><label>备注</label> <textarea id="enteringNote"></textarea></div>
-							<input type="submit" value="提交" class="hhf-submit" style="margin-left:160px;">
-						</form>
+							 <input type="button" value="提交" id="sub" class="hhf-submit" style="margin-left:160px;">
+								
+<!--  <a class="submitqqqq">提交</a>	 -->			
+ </form>
 					</div>	
 				</div>
 				<div class="fr w285" style="background-color:transparent">
