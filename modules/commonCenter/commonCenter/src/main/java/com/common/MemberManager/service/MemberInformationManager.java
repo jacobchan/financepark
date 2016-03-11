@@ -79,4 +79,11 @@ public interface MemberInformationManager extends BaseManager{
 	 * @return
 	 */
 	public String exsitMobile(String mobile) ;
+	  /**
+		 * 获取用户基本信息
+		 * @param user 登陆用户名
+		 * @return
+		 * @throws BusException
+		 */
+	public MemberInformation getMemberInformationByLoginUser(String userId) throws BusException;
 }
