@@ -68,9 +68,9 @@
         </ul>
         <div class="mt30 clearfix">
         	<div class="res_left">
-            	<ul>
+            	<ul id="carfix">
                 	<li class="clearfix">
-                    	<div class="fl"><img src="../styles/images/company/car1.jpg"/></div>
+                    	<!-- <div class="fl"><img src="../styles/images/company/car1.jpg"/></div>
                         <div class="fl ml30" style="width:535px">
                         	<a href="roomxq.html" class="span_bold f20">奔驰 威亭 9座商务车</a>
                             <div class="mt20 mb20">
@@ -85,9 +85,9 @@
                                 <img class="mr10" src="../styles/images/company/res_ico.png"/><span class="vm">联系电话：134534565756</span>
                                 <div class="jcbg f20 fr">&yen;500元/次</div>
                             </div>
-                        </div>
+                        </div> -->
                     </li>
-                    <li class="clearfix">
+                   <!--  <li class="clearfix">
                     	<div class="fl"><img src="../styles/images/company/car1.jpg"/></div>
                         <div class="fl ml30" style="width:535px">
                         	<a href="roomxq.html" class="span_bold f20">奔驰 威亭 9座商务车</a>
@@ -122,16 +122,16 @@
                                 <div class="jcbg f20 fr">&yen;160元/小时</div>
                             </div>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
                 <div class="tr pb25 pt15">
-                	<span class="cd7">找到相关结果约2016个</span>
+                	<!-- <span class="cd7">找到相关结果约2016个</span>
                     <div class="paging active ml25">1</div>
                     <div class="paging">2</div>
                     <div class="paging">3</div>
                     <div class="paging">4</div>
                     <div class="paging">5</div>
-                    <div class="paging paging_m">尾页</div>
+                    <div class="paging paging_m">尾页</div> -->
                 </div>
             </div>
             <div class="res_right">
@@ -183,5 +183,75 @@
 <script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 <script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 <script type="text/javascript" src="../scripts/page/kefu.js"></script>
+<script type="text/javascript">
+		$(function(){
+			
+			var serviceURL = "http://localhost:8088/smartPark-web/esb/web/purchasingmanagerCommodityManager/getPagerPublicCommoditys.json?purchasingmanagerGenre.genreId=40285e8153216adc0153217585b90002";
+			//公共方法
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(results){
+					if(results&&results.records){
+					//	alert("1122");
+				//	console.log(results);
+				   _parseRecords(results.records);
+				   _parseRecordCount(results);
+					}
+				}
+			});
+			
+		});
+		//拼接活动列表
+		
+		function _parseRecords(record){
+			for(var i=0;i<record.length;i++){
+				if(record[i].dwValue != null && record[i].zwValue != null){
+					var html="<li class='clearfix'><div class='fl'><img src='../styles/images/company/car1.jpg'></div>"+
+					"<div class='fl ml30' style='width:535px'><a href='roomxq.html?id="+record[i].commodityId+"' class='span_bold f20'>"+record[i].commodityTitle+"</a><div class='mt20 mb20'><div class='res_tip'>"+record[i].dwValue+"</div><div class='res_tip'>"+record[i].zwValue+"</div></div>"+
+					"<div style='height:55px'>"+record[i].commodityDescribe+"</div><div class='mt30'><img class='mr10' src='../styles/images/company/res_icon.png'/><span class='vm pr20'>"+record[i].merchantLinkman+"</span>"+
+					"<img class='mr10' src='../styles/images/company/res_ico.png'/><span class='vm'>联系电话："+record[i].merchantLinkmanPhone+"</span><div class='jcbg f20 fr'>"+record[i].commodityPrice+"元/小时</div>"+
+					"</div></div></li>";
+					 $("#carfix").append(html);
+				}else if(record[i].dwValue != null && record[i].zwValue == null){
+					var html="<li class='clearfix'><div class='fl'><img src='../styles/images/company/car1.jpg'></div>"+
+					"<div class='fl ml30' style='width:535px'><a href='roomxq.html?id="+record[i].commodityId+"' class='span_bold f20'>"+record[i].commodityTitle+"</a><div class='mt20 mb20'><div class='res_tip'>"+record[i].dwValue+"</div></div>"+
+					"<div style='height:55px'>"+record[i].commodityDescribe+"</div><div class='mt30'><img class='mr10' src='../styles/images/company/res_icon.png'/><span class='vm pr20'>"+record[i].merchantLinkman+"</span>"+
+					"<img class='mr10' src='../styles/images/company/res_ico.png'/><span class='vm'>联系电话："+record[i].merchantLinkmanPhone+"</span><div class='jcbg f20 fr'>"+record[i].commodityPrice+"元/小时</div>"+
+					"</div></div></li>";
+					 $("#carfix").append(html);
+				}else if(record[i].dwValue == null && record[i].zwValue != null){
+					var html="<li class='clearfix'><div class='fl'><img src='../styles/images/company/car1.jpg'></div>"+
+					"<div class='fl ml30' style='width:535px'><a href='roomxq.html?id="+record[i].commodityId+"' class='span_bold f20'>"+record[i].commodityTitle+"</a><div class='mt20 mb20'><div class='res_tip'>"+record[i].zwValue+"</div></div>"+
+					"<div style='height:55px'>"+record[i].commodityDescribe+"</div><div class='mt30'><img class='mr10' src='../styles/images/company/res_icon.png'/><span class='vm pr20'>"+record[i].merchantLinkman+"</span>"+
+					"<img class='mr10' src='../styles/images/company/res_ico.png'/><span class='vm'>联系电话："+record[i].merchantLinkmanPhone+"</span><div class='jcbg f20 fr'>"+record[i].commodityPrice+"元/小时</div>"+
+					"</div></div></li>";
+					 $("#carfix").append(html);
+				}else{
+					var html="<li class='clearfix'><div class='fl'><img src='../styles/images/company/car1.jpg'></div>"+
+					"<div class='fl ml30' style='width:535px'><a href='roomxq.html?id="+record[i].commodityId+"' class='span_bold f20'>"+record[i].commodityTitle+"</a><div class='mt20 mb20'>"+
+					"<div style='height:55px'>"+record[i].commodityDescribe+"</div><div class='mt30'><img class='mr10' src='../styles/images/company/res_icon.png'/><span class='vm pr20'>"+record[i].merchantLinkman+"</span>"+
+					"<img class='mr10' src='../styles/images/company/res_ico.png'/><span class='vm'>联系电话："+record[i].merchantLinkmanPhone+"</span><div class='jcbg f20 fr'>"+record[i].commodityPrice+"元/小时</div>"+
+					"</div></div></li>";
+					 $("#carfix").append(html);
+				}
+				
+			}
+		};
+		
+		function _parseRecordCount(record){
+			    var totalCount=record.totalCount;
+				var html="<span class='cd7'>找到相关结果约"+totalCount+"个"+
+				"<div class='paging active ml25'>1</div>"+
+				"<div class='paging'>2</div>"+
+				"<div class='paging'>3</div>"+
+				"<div class='paging'>4</div>"+
+				"<div class='paging'>5</div>"+
+				" <div class='paging paging_m'>尾页</div>";
+				 $('.pb25').append(html);
+		};
+		
+	</script>
 </body>
 </html>

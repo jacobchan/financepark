@@ -22,26 +22,25 @@
     <div class="mt30 clearfix">
     	<div class="fl ml10"><img src="../styles/images/company/eg.png"/></div>
         <div class="carxq fl">
-        	<span class="span_bold f20">对街大型LED广告位</span>
+        	<span class="span_bold f20" id="commodityName"></span>
             <div class="mt20 mb20">
-                <div class="res_tip">户外</div>
-                <div class="res_tip">A座</div>
-                <div class="res_tip">坐南朝东</div>
+                <div class="res_tip" id="dw">自动挡</div>
+                <div class="res_tip" id="zw">9人座</div>
+                <div class="res_tip" id="cp">车牌：杭AL8899</div>
 			</div>
-            
-            <p class="f12 mt50">
+           <div class="egbg"><span id="commodityPrice">&yen;</span>元&nbsp;<span class="f16">/1次</span></div>
+            <p class="f12 mt20" id="commodityDescribe">
             	此车仅供园区企业接送飞机使用<br/>
                 按照每次500元计算，此价格包含60KM的油费<br/>
                 师傅一名，工作2小时<br/>
-                如果超公里，按照每公里3元收费，超过2小时按照每小时50元收费<br/>
-                费，超过2小时按照每小时50元
+                如果超公里，按照每公里3元收费，超过2小时按照每小时50元收费。
             </p>
         </div>
         <div class="fl userxq">
         	<div><img src="../styles/images/company/man.png"/></div>
             <div class="mt40">
-            	<img src="../styles/images/company/res_icon.png" class="mr10"/><span class="vm">联系人：小周</span>
-                <div class="mt10"><img src="../styles/images/company/res_ico.png" class="mr10"/><span class="vm">联系电话：13456786986</span></div>
+            	<img src="../styles/images/company/res_icon.png" class="mr10"/><span class="vm" id="merchantName">联系人：小周</span>
+                <div class="mt10"><img src="../styles/images/company/res_ico.png" class="mr10"/><span class="vm" id="merchantPhone">联系电话：13456786986</span></div>
             </div>
         </div>
     </div>
@@ -207,6 +206,20 @@
 <script src='../scripts/page/date_week/fullcalendar.min.js'></script>
 <script src='../scripts/page/date_week/lang-all.js'></script>
 <script type="text/javascript" src="../scripts/page/kefu.js"></script>
+<Script  type="text/javascript">
+function GetRequest() {
+   var url = location.search; //获取url中"?"符后的字串
+   var theRequest = new Object();
+   if (url.indexOf("?") != -1) {
+      var str = url.substr(1);
+      strs = str.split("&");
+      for(var i = 0; i < strs.length; i ++) {
+         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+      }
+   }
+   return theRequest;
+}
+</Script>
 <script>
 
     $(document).ready(function() {
@@ -236,7 +249,6 @@
             var active=$(this).index();
             var time=$(this).html();
             var dates=$(".fc-day-header").eq(active).attr("data-date");
-            alert(dates+"  "+time);
         });
         
         $(".fc-next-button").on("click",this,function(){
@@ -278,14 +290,87 @@
 
 </script>
 <script>
-	$(function(){
-		$("#online").click(function(){
+	
+	$(function() {
+		var Request = new Object();
+		Request = GetRequest();
+		var commodityId = Request['id'];
+		var serviceURL = "http://localhost:8088/smartPark-web/esb/web/purchasingmanagerCommodityManager/getPagerPublicCommoditys.json?commodityId="
+				+ commodityId;
+		//	var serviceURL = "http://localhost:8088/smartPark-web/esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommodity.json?commodityId="+commodityId;
+		$.youi.ajaxUtils.ajax({
+			url : serviceURL,
+			jsonp : 'data:jsonp',
+			dataType : 'jsonp',
+			success : function(results) {
+				if (results && results.records) {
+					var records = results.records;
+					$('#commodityName').text(records[0].commodityTitle);
+					$('#commodityPrice').text(records[0].commodityPrice);
+					$('#commodityDescribe').html(records[0].commodityDescribe);
+					$('#merchantName')
+							.text("联系人：" + records[0].merchantLinkman);
+					$('#merchantPhone').text(
+							"联系电话：" + records[0].merchantLinkmanPhone);
+					if (records[0].dwValue != null) {
+						$('#dw').text(records[0].dwValue);
+					}
+					if (records[0].zwValue != null) {
+						$('#zw').text(records[0].zwValue);
+					}
+					if (records[0].cpValue != null) {
+						$('#cp').text(records[0].cpValue);
+					}
+				}
+			}
+		});
+
+		$("#online").click(function() {
 			$(".pop_layer").show();
 		});
-		$(".close0").click(function(){
+		$(".close0").click(function() {
 			$(".pop_layer").hide();
 		});
 	})
 </script>
+<script type="text/javascript">
+		    //提交预约
+			$('.btn-cheng').click(function(){
+				var arr=new Array();
+				$("#data_timer td.clicktd").each(function(){
+					var active=$(this).index();
+					var time=$(this).html();
+					var dates=$(".fc-day-header").eq(active).attr("data-date")+time;
+					arr.push(dates);
+				});
+                if(arr.length>0){
+            		var userorderAmount=$('#commodityPrice').text();
+    				arr=['402809cb53369ac80153369ebfbd0002','40288ab2533a1c9001533a2420510001'];
+    				var string ="";
+    				for(var i=0;i<arr.length;i++){
+    					string+="records["+i+"].resoId="+arr[i]+"&";
+    				}
+    				string+="userorderAmount="+userorderAmount;
+    			 
+    			   var serviceURL = "http://localhost:8088/smartPark-web/esb/web/publicutilitiesmanagerResoManager/savePublicResoOrderByList.json";
+    				//公共方法
+    				$.youi.ajaxUtils.ajax({
+    					url:serviceURL,
+    					data:string,
+    					jsonp:'data:jsonp',
+    					dataType:'jsonp',
+    					success:function(result){
+    						if(result&&result.record){
+    							alert("预约成功");
+    							$(".pop_layer").hide();
+    						}
+    					}
+    				});
+                }else{
+                	alert("请选择预约日期和时间段");
+                }				
+		
+			});
+	</script>
 </body>
 </html>
