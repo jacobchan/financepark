@@ -8,6 +8,7 @@
  * Date: 2016-2-16
  */
 var isLogin = false;
+var baseUrl = "http://localhost:8088/smartPark-web/esb/web/";
 $(function(){
 	var _passportBaseUrl = 'http://localhost:8088/smartPark-web/';
 	
