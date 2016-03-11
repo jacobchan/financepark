@@ -187,7 +187,7 @@ a, input, textarea { outline: 0 none; text-decoration: none;}
 
 /**public**/
 *{box-sizing:border-box;-moz-box-sizing: border-box;-webkit-box-sizing: border-box; -o-box-sizing: border-box; -ms-box-sizing: border-box;margin:0px;padding:0px;}
-body{ font-family:"微软雅黑","Microsoft YaHei",Helvetica,Arial,Tahoma;background-color:#fff; color:#676F7C; font-size: 14px;}
+body{ font-family:"Lantinghei SC","Open Sans",Arial,"Hiragino Sans GB","Microsoft YaHei","微软雅黑",STHeiti,"WenQuanYi Micro Hei",SimSun,sans-serif;background-color:#fff; color:#676F7C; font-size: 14px;}
 input{font-family:"微软雅黑";}
 .w1200{width: 1200px;margin: 0px auto;}
 
