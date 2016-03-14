@@ -20,11 +20,17 @@ import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.utils.BizCodeUtil;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
+import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.common.OrderManager.dao.OrdermanagerUserorderDao;
+import com.common.OrderManager.service.OrdermanagerCommoditydetailManager;
 import com.common.OrderManager.service.OrdermanagerUserorderManager;
+import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
+import com.common.purchasingManager.entity.PurchasingmanagerGenre;
+import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
 
 @Service("ordermanagerUserorderManager")
 @Transactional
@@ -33,6 +39,10 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	private OrdermanagerUserorderDao ordermanagerUserorderDao;
 	@Autowired
 	private MemberInformationManager memberInformationManager;
+	@Autowired
+	private PurchasingmanagerCommodityManager purchasingmanagerCommodityManager;
+	@Autowired
+	private OrdermanagerCommoditydetailManager ordermanagerCommoditydetailManager;
 	
     /**
      * 查询列表
@@ -133,5 +143,37 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		conditions.add(ConditionUtils.getCondition("ordermanagerOrdertype.ordertypeId", Condition.LIKE, "05"));
 		PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
+	}
+	
+	/**
+	 * 新增IT服务订单
+	 */
+    @Override
+    @EsbServiceMapping
+	public OrdermanagerUserorder saveITSerOrder(@ServiceParam(name="userId",pubProperty="userId") String userId,
+			@ServiceParam(name="commodityId") String commodityId) throws BusException {
+    	PurchasingmanagerCommodity commodity = purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
+		PurchasingmanagerGenre pg = commodity.getPurchasingmanagerGenre();
+		while(pg.getPurchasingmanagerGenre() != null){//获取最顶级商品类别
+			pg = pg.getPurchasingmanagerGenre();
+		}
+		OrdermanagerUserorder order = new OrdermanagerUserorder();
+		order.setUserorderAmount(commodity.getCommodityPrice());
+		order.setGenreId(pg);
+		order.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("ITFW"));
+		order.setUserorderStatus("01");//01-未支付
+		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		order.setCreateUser(userId);
+		order.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		order.setUpdateUser(userId);
+		order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		order = ordermanagerUserorderDao.save(order);
+		
+		OrdermanagerCommoditydetail orderDetail = new OrdermanagerCommoditydetail();
+		orderDetail.setOrdermanagerUserorder(order);
+		orderDetail.setCommodityId(commodityId);
+		orderDetail.setCommoditydetailNum("1");
+		ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
+		return order;
 	}
 }

@@ -95,4 +95,10 @@ public interface PurchasingmanagerGenreManager extends BaseManager{
      * @throws BusException
      */
 	public List<PurchasingmanagerGenre> getCommodityGenreList() throws BusException;
+	/**
+     * 获取IT服务的所有字类别列表
+     * @return
+     * @throws BusException
+     */
+	public List<PurchasingmanagerGenre> getITSubGenreList(String userId) throws BusException;
 }

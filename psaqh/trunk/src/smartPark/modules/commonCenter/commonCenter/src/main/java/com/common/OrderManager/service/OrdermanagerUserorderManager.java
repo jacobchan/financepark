@@ -72,4 +72,13 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	 */
 	public PagerRecords getPagerComSerOrders(Pager pager,
 			Collection<Condition> conditions, Collection<Order> orders) throws BusException;
+	
+	/**
+	 * 新增IT服务订单
+	 * @param userId 当前登录用户ID
+	 * @param commodityId 商品ID
+	 * @return
+	 * @throws BusException
+	 */
+	public OrdermanagerUserorder saveITSerOrder(String userId,String commodityId) throws BusException;
 }

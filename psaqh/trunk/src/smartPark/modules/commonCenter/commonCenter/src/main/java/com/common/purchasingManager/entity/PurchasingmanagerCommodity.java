@@ -3,9 +3,11 @@
  */
 package com.common.purchasingManager.entity;
 
-import javax.persistence.*;
-import org.hibernate.validator.*;
+import java.math.BigDecimal;
 
+import javax.persistence.*;
+
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
@@ -39,8 +41,7 @@ public class PurchasingmanagerCommodity implements Domain{
 	private String createUser;//创建人
 
 	@Column(name = "COMMODITY_PRICE_")
-	@Length(max=10)
-	private String commodityPrice;//标价
+	private BigDecimal commodityPrice;//标价
 
 	@Column(name = "COMMODITY_BRAND_")
 	@Length(max=128)
@@ -50,16 +51,14 @@ public class PurchasingmanagerCommodity implements Domain{
 	private String commodityDescribe;//描述
 
 	@Column(name = "COMMODITY_HIGHEST_PRICE_")
-	@Length(max=10)
-	private String commodityHighestPrice;//最高价
+	private BigDecimal commodityHighestPrice;//最高价
 
 	@Column(name = "COMMODITY_DOWN_TIME_")
 	@Length(max=20)
 	private String commodityDownTime;//下架时间
 
 	@Column(name = "COMMODITY_ORIGINAL_PRICE_")
-	@Length(max=10)
-	private String commodityOriginalPrice;//原价
+	private BigDecimal commodityOriginalPrice;//原价
 
 	@Column(name = "COMMODITY_STOCK_")
 	private String commodityStock;//库存
@@ -72,8 +71,7 @@ public class PurchasingmanagerCommodity implements Domain{
 	private String commodityUpTime;//上架时间
 
 	@Column(name = "COMMODITY_LOWEST_PRICE_")
-	@Length(max=10)
-	private String commodityLowestPrice;//最低价
+	private BigDecimal commodityLowestPrice;//最低价
 
 	@Column(name = "COMMODITY_ISNOT_DISPLAY_STOCK_")
 	@Length(max=1)
@@ -135,13 +133,6 @@ public class PurchasingmanagerCommodity implements Domain{
 	public void setCreateUser(String createUser){
 		this.createUser = createUser;
 	}
-	public String getCommodityPrice(){
-		return this.commodityPrice;
-	}
-	
-	public void setCommodityPrice(String commodityPrice){
-		this.commodityPrice = commodityPrice;
-	}
 	public String getCommodityBrand(){
 		return this.commodityBrand;
 	}
@@ -156,26 +147,12 @@ public class PurchasingmanagerCommodity implements Domain{
 	public void setCommodityDescribe(String commodityDescribe){
 		this.commodityDescribe = commodityDescribe;
 	}
-	public String getCommodityHighestPrice(){
-		return this.commodityHighestPrice;
-	}
-	
-	public void setCommodityHighestPrice(String commodityHighestPrice){
-		this.commodityHighestPrice = commodityHighestPrice;
-	}
 	public String getCommodityDownTime(){
 		return this.commodityDownTime;
 	}
 	
 	public void setCommodityDownTime(String commodityDownTime){
 		this.commodityDownTime = commodityDownTime;
-	}
-	public String getCommodityOriginalPrice(){
-		return this.commodityOriginalPrice;
-	}
-	
-	public void setCommodityOriginalPrice(String commodityOriginalPrice){
-		this.commodityOriginalPrice = commodityOriginalPrice;
 	}
 	public String getCommodityStock(){
 		return this.commodityStock;
@@ -197,13 +174,6 @@ public class PurchasingmanagerCommodity implements Domain{
 	
 	public void setCommodityUpTime(String commodityUpTime){
 		this.commodityUpTime = commodityUpTime;
-	}
-	public String getCommodityLowestPrice(){
-		return this.commodityLowestPrice;
-	}
-	
-	public void setCommodityLowestPrice(String commodityLowestPrice){
-		this.commodityLowestPrice = commodityLowestPrice;
 	}
 	public String getCommodityIsnotDisplayStock(){
 		return this.commodityIsnotDisplayStock;
@@ -263,7 +233,38 @@ public class PurchasingmanagerCommodity implements Domain{
 		return this.purchasingmanagerMerchant;
 	}
 	
-	
+	public BigDecimal getCommodityPrice() {
+		return commodityPrice;
+	}
+
+	public void setCommodityPrice(BigDecimal commodityPrice) {
+		this.commodityPrice = commodityPrice;
+	}
+
+	public BigDecimal getCommodityHighestPrice() {
+		return commodityHighestPrice;
+	}
+
+	public void setCommodityHighestPrice(BigDecimal commodityHighestPrice) {
+		this.commodityHighestPrice = commodityHighestPrice;
+	}
+
+	public BigDecimal getCommodityOriginalPrice() {
+		return commodityOriginalPrice;
+	}
+
+	public void setCommodityOriginalPrice(BigDecimal commodityOriginalPrice) {
+		this.commodityOriginalPrice = commodityOriginalPrice;
+	}
+
+	public BigDecimal getCommodityLowestPrice() {
+		return commodityLowestPrice;
+	}
+
+	public void setCommodityLowestPrice(BigDecimal commodityLowestPrice) {
+		this.commodityLowestPrice = commodityLowestPrice;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
