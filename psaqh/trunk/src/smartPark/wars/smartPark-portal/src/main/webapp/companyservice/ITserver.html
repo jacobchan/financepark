@@ -110,7 +110,7 @@
             <div class="taocan" data-commodity="1">
                 <div class="bgf1 mt20 p15">
                     <p class="cc">
-                        <span class="span_bold">优惠报价：</span>&nbsp;<span class="fw f22 mount" data-mount="69">&yen;69.00/次</span>
+                        <span class="span_bold">优惠报价：</span>&nbsp;<span class="fw f22 mount" data-mount="69" id="commodityPrice1">&yen;69.00/次</span>
                         （本次服务范围仅限软件维护，若涉及硬件则另收费）
                     </p>
                     <p class="cc mt15">
@@ -121,7 +121,7 @@
                 <form class="it_taocan mt30">
                     <div class="group_div clearfix">
                         <span class="span_bold fl mt10">选择套餐：</span>
-                        <ul class="it_select clearfix fl choose">
+                        <ul class="it_select clearfix fl choose" id="it_select1">
                             <li class="it_selected">
                                 <span>预约单次</span>
                                 <i class="sel_icon"></i>
@@ -142,7 +142,7 @@
                     </div>
                     <div class="group_div clearfix mt10">
                         <span class="span_bold fl mt10">问题类型：</span>
-                        <ul class="it_select clearfix fl goods">
+                        <ul class="it_select clearfix fl goods" id="commodityShow1">
                             <li class="it_selected" data-commodity="电脑">
                                 <span>电脑</span>
                                 <i class="sel_icon"></i>
@@ -225,7 +225,7 @@
             <div class="taocan" style="display:none" data-commodity="2">
                 <div class="bgf1 mt20 p15">
                     <p class="cc">
-                        <span class="span_bold">优惠报价：</span>&nbsp;<span class="fw f22 mount" data-mount="169">&yen;169.00/次</span>
+                        <span class="span_bold">优惠报价：</span>&nbsp;<span class="fw f22 mount" data-mount="169" id="commodityPrice2">&yen;169.00/次</span>
                         （本次服务范围仅限软件维护，若涉及硬件则另收费）
                     </p>
                     <!--<p class="cc mt15">
@@ -249,7 +249,7 @@
                     </div>
                     <div class="group_div clearfix mt20">
                         <span class="span_bold fl mt10">选择套餐：</span>
-                        <ul class="it_select clearfix fl choose">
+                        <ul class="it_select clearfix fl choose" id="it_select2">
                             <li>
                                 <span>预约单次</span>
                                 <i class="sel_icon"></i>
@@ -290,7 +290,7 @@
                     </div>
                     <div class="group_div clearfix mt10">
                         <span class="span_bold fl mt10">付款方式：</span>
-                        <ul class="it_select clearfix fl pay">
+                        <ul class="it_select clearfix fl pay" id="commodityShow2">
                             <li class="it_selected">季付
                             	<i class="sel_icon"></i>
                             </li>
@@ -338,7 +338,7 @@
             <div class="taocan" style="display:none" data-commodity="3">
                 <div class="bgf1 mt20 p15">
                     <p class="cc">
-                        <span class="span_bold">优惠报价：</span>&nbsp;<span class="fw f22 mount" data-mount="169">&yen;169.00/次</span>
+                        <span class="span_bold">优惠报价：</span>&nbsp;<span class="fw f22 mount" data-mount="169" id="commodityPrice3">&yen;169.00/次</span>
                         （本次服务范围仅限软件维护，若涉及硬件则另收费）
                     </p>
                     <!--<p class="cc mt15">
@@ -362,7 +362,7 @@
                     </div>
                     <div class="group_div clearfix mt20">
                         <span class="span_bold fl mt10">选择套餐：</span>
-                        <ul class="it_select clearfix fl choose">
+                        <ul class="it_select clearfix fl choose" id="it_select3">
                             <li>
                                 <span>预约单次</span>
                                 <i class="sel_icon"></i>
@@ -403,7 +403,7 @@
                     </div>
                     <div class="group_div clearfix mt10">
                         <span class="span_bold fl mt10">付款方式：</span>
-                        <ul class="it_select clearfix fl pay">
+                        <ul class="it_select clearfix fl pay" id="commodityShow3">
                             <li class="it_selected">季付
                             	<i class="sel_icon"></i>
                             </li>
@@ -451,7 +451,7 @@
             <div class="taocan" style="display:none" data-commodity="4">
                 <div class="bgf1 mt20 p15">
                     <p class="cc">
-                        <span class="span_bold">优惠报价：</span>&nbsp;<span class="fw f22 mount" data-mount="169">&yen;169.00/次</span>
+                        <span class="span_bold">优惠报价：</span>&nbsp;<span class="fw f22 mount" data-mount="169" id="commodityPrice4">&yen;169.00/次</span>
                         （本次服务范围仅限软件维护，若涉及硬件则另收费）
                     </p>
                     <!--<p class="cc mt15">
@@ -475,7 +475,7 @@
                     </div>
                     <div class="group_div clearfix mt20">
                         <span class="span_bold fl mt10">选择套餐：</span>
-                        <ul class="it_select clearfix fl choose">
+                        <ul class="it_select clearfix fl choose" id="it_select4">
                             <li>
                                 <span>预约单次</span>
                                 <i class="sel_icon"></i>
@@ -516,7 +516,7 @@
                     </div>
                     <div class="group_div clearfix mt10">
                         <span class="span_bold fl mt10">付款方式：</span>
-                        <ul class="it_select clearfix fl pay">
+                        <ul class="it_select clearfix fl pay" id="commodityShow4">
                             <li class="it_selected">季付
                             	<i class="sel_icon"></i>
                             </li>
@@ -681,6 +681,103 @@
 <script type="text/javascript" src="../scripts/page/kefu.js"></script>
 <script>
 $(function(){
+	var serviceURL = "http://220.249.113.12:8088/esb/web/purchasingmanagerGenreManager/getITSubGenreList.json";
+	$.youi.ajaxUtils.ajax({
+		url:serviceURL,
+		jsonp:'data:jsonp',
+		dataType:'jsonp',
+		success:function(results){
+			if(results&&results.records){
+				var htmls = [];
+				for(var i=0;i<results.records.length;i++){
+					if(i==0){
+						htmls.push('<li class="it_selected" data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
+						showCom(results.records[i].genreId,i+1);
+					}else{
+						htmls.push('<li data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
+					}
+				}
+				$('#it_select1').html(htmls.join(''));
+				htmls = [];
+				for(var i=0;i<results.records.length;i++){
+					if(i==1){
+						htmls.push('<li class="it_selected" data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
+						showCom(results.records[i].genreId,i+1);
+					}else{
+						htmls.push('<li data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
+					}
+				}
+				$('#it_select2').html(htmls.join(''));
+				htmls = [];
+				for(var i=0;i<results.records.length;i++){
+					if(i==2){
+						htmls.push('<li class="it_selected" data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
+						showCom(results.records[i].genreId,i+1);
+					}else{
+						htmls.push('<li data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
+					}
+				}
+				$('#it_select3').html(htmls.join(''));
+				htmls = [];
+				for(var i=0;i<results.records.length;i++){
+					if(i==3){
+						htmls.push('<li class="it_selected" data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
+						showCom(results.records[i].genreId,i+1);
+					}else{
+						htmls.push('<li data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
+					}
+				}
+				$('#it_select4').html(htmls.join(''));
+			}
+		}
+	});
+	
+	function showCom(genreId,y){
+		var serviceURL = "http://220.249.113.12:8088/esb/web/purchasingmanagerCommodityManager/getCommodityRecordsByGenreId.json";
+		$.youi.ajaxUtils.ajax({
+			url:serviceURL,
+			data:{genreId:genreId},
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(results){
+				if(results&&results.records){
+					var htmls = [];
+					for(var i=0;i<results.records.length;i++){
+						if(i==0){
+							htmls.push('<li class="it_selected" data-id="'+results.records[i].commodityId+
+									'" data-commodityPrice="'+results.records[i].commodityPrice+'"><span>'+
+									results.records[i].commodityTitle+'</span><i class="sel_icon"></i></li>');
+							$('#commodityShow'+y).parents(".taocan").attr("data-id",results.records[i].commodityId);
+							$('#commodityPrice'+y).html('&yen;'+results.records[i].commodityPrice+'/次');
+						}else{
+							htmls.push('<li data-id="'+results.records[i].commodityId+'" data-commodityPrice="'+results.records[i].commodityPrice+'"><span>'+
+									results.records[i].commodityTitle+'</span><i class="sel_icon"></i></li>');
+						}
+					}
+					$('#commodityShow'+y).html(htmls.join(''));
+				}
+				
+				$(".goods li").click(function(){
+					$(this).addClass("it_selected").siblings("li").removeClass("it_selected");
+					var val=$(this).attr("data-id");
+					$(this).parents(".taocan").attr("data-id",val);
+					var price=$(this).attr("data-commodityPrice");
+					var vv = $(this).parents(".taocan").attr("data-commodity");
+					$('#commodityPrice'+vv).html('&yen;'+price+'/次');
+				});
+				
+				$(".pay li").click(function(){
+					$(this).addClass("it_selected").siblings("li").removeClass("it_selected");
+					var val=$(this).attr("data-id");
+					$(this).parents(".taocan").attr("data-id",val);
+					var price=$(this).attr("data-commodityPrice");
+					var vv = $(this).parents(".taocan").attr("data-commodity");
+					$('#commodityPrice'+vv).html('&yen;'+price+'/次');
+				});
+			}
+		});
+	}
+	
 	$(".nav_1,.navsub").hover(function(){
 		$(".navsub").show();
 	},function(){
@@ -691,14 +788,7 @@ $(function(){
 		var ac=$(this).index();
 		$(".taocan").eq(ac).show().siblings(".taocan").hide();
 	});
-	$(".pay li").click(function(){
-		$(this).addClass("it_selected").siblings("li").removeClass("it_selected");
-	});
-	$(".goods li").click(function(){
-		$(this).addClass("it_selected").siblings("li").removeClass("it_selected");
-		var val=$(this).attr("data-commodity");
-		$(this).parents(".taocan").attr("data-commodity",val);
-	});
+	
 	/**/
 	$(".blend_ul li").click(function(){
 		var index=$(this).index();
@@ -732,43 +822,24 @@ $(function(){
 			}
 		});
 	}
+	
+	$('.btn-cheng').click(function(){
+		var commodityId = $(this).parents(".taocan").attr("data-id");
+		var params = ['commodityId='+commodityId];
+		var serviceURL = "http://220.249.113.12:8088/esb/web/ordermanagerUserorderManager/saveITSerOrder.json";
+		$.youi.ajaxUtils.ajax({
+			url:serviceURL,
+			data:params.join('&'),
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(results){
+				if(results&&results.record){
+					alert('请付款！');
+				}
+			}
+		});
+	});
 })
-</script>
-<script>
-	$(function(){
-		// $(".btn-cheng").on("click",this,function(){
-		// /*	var test=$(".taocan:visible").attr("data-commodity");
-		// 	alert(test);*/
-		// 	$.post(url,{
-		// 				userorderAmount:$(".taocan:visible .mount").attr("data-mount"),
-		// 				userorderProject:"IT服务",
-		// 				commodityId:$(".taocan:visible").attr("data-commodity")
-		// 				},function(){});
-		// });
-
-		$('.btn-cheng').click(function(){
-				var params = ['parkName=测试园区','parkIntroduce=园区简介','address=园区地址'];
-				console.log(123);
-				$.youi.ajaxUtils.ajax({
-					//url:'http://192.168.80.1:8088/gsoft-web/esb/web/userManager/getPagerUsers.json',
-					url:'http://localhost:9088/jsonp/data.jsp?data:file=users.json',
-					//url:'http://localhost:9088/jsonp/test.json',
-					data:params.join('&'),
-/* 					url:this.options.jsonpSrc, */
-					jsonp:'data:jsonp',
-					dataType:'jsonp',
-					success:function(results){
-						if(results&&results.records){
-							that._parseRecords(results.records);
-							alert("ok");
-						}
-					}
-				});
-			});
-
-
-
-	})
 </script>
 </body>
 </html>
