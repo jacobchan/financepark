@@ -26,9 +26,7 @@
   	<!-- 手工修改 ：根据需要配置加载的类-->
   	<!-- <context:component-scan base-package="com.common.OrderManager"/> -->
   	<context:component-scan base-package="com.common.MemberManager"/>
-  	<context:component-scan base-package="com.common.OrderManager"/>
-  	<context:component-scan base-package="com.common.MessageCenter"/>
-  	<context:component-scan base-package="com.gsoft.common"/>
+  	
   	
   	
 	<!-- Configurer that replaces ${...} placeholders with values from a properties file -->
@@ -68,8 +66,6 @@
 		<!-- 手工修改，根据需要配置加载的实体 -->
 		<property name="annotatedClasses">
 			<list>
-				<value>com.common.OrderManager.entity.OrdermanagerOrdertype</value>
-				
 				<value>com.common.MemberManager.entity.MemberInformation</value>	
 			</list>
 		</property>
