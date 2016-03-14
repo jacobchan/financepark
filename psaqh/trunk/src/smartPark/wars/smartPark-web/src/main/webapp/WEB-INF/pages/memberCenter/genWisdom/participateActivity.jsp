@@ -58,7 +58,8 @@
 		//拼接活动列表
 		function _parseRecords(record){
 			for(var i=0;i<record.length;i++){
-				var html="<div class='czh-box'>"+
+				var html="<a href='javascript:;' id='"+record[i].applyId+"' onclick='javascript:gotoDetails(this)'>"+
+						 "<div class='czh-box'>"+
                     	 "<img src='<%=request.getContextPath()%>/styles/images/czh/list-5.jpg'>"+
                 		 "<div class='czh-group' style='border-bottom:1px solid #ecebeb'>"+
                     	 "<h4>"+record[i].applyTitle+"</h4>"+
@@ -69,7 +70,8 @@
                     	 "<font class='cg-soan-btn' style='background:#FF6715'>相关文档</font>"+
                     	 "<span class='fr' style='color:#FF6715'>"+record[i].applyStatus+"</span>"+
                 		 "</div>"+
-            			 "</div>";
+            			 "</div>"+
+            			 "<a>";
 				 $(".clearfix .czh-knowledge").append(html);
 	
 			}
@@ -87,6 +89,10 @@
 			    	span.html("已结束");
 			    }
 			} 
+		};
+		//跳转方法
+		function gotoDetails(obj){
+			alert(obj.id+"跳转到详情页面");
 		}
 	</script>
 </body>
