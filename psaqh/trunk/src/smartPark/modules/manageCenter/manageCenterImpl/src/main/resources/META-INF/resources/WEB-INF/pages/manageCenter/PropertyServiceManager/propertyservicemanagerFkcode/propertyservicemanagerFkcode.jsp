@@ -15,19 +15,21 @@
 			<youi:fieldSelect property="member.memberId"  caption="会员姓名" 
 				src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
 			<%-- <youi:fieldSelect property="applyStatus"  caption="申请状态" convert="applyStatus" /> --%>	
+			<youi:fieldText property="fkCode"  caption="访客申请单号"  operator="LIKE"/>
 		</youi:fieldLayout>
 		<youi:button name="update" caption="修改" icon="edit" active="1"/>
 		<%-- <youi:button name="agree" caption="同意" icon="edit" active="1"/>
 		<youi:button name="refuse" caption="拒绝" icon="edit" active="1"/> --%>
 		
-		<youi:gridCol property="fkcodeName"  caption="联系人" width="100" align="center"/>
-		<youi:gridCol property="fkcodeSex"  caption="性别" convert="sex" width="50" align="center"/>
-		<youi:gridCol property="fkcodeTelephone"  caption="联系电话" width="150" align="center"/>
-		<youi:gridCol property="fkcodeTime"  caption="到访时间" width="100" align="center"/>
-		<youi:gridCol property="member.memberName"  caption="会员姓名" width="100" align="center"/>
-		<youi:gridCol property="fkcodeComp"  caption="到访企业" width="150" align="center"/>
+		<youi:gridCol property="fkcodeName"  caption="联系人" width="10%" align="center"/>
+		<youi:gridCol property="fkcodeSex"  caption="性别" convert="sex" width="8%" align="center"/>
+		<youi:gridCol property="fkcodeTelephone"  caption="联系电话" width="10%" align="center"/>
+		<youi:gridCol property="fkcodeTime"  caption="到访时间" width="12%" align="center"/>
+		<youi:gridCol property="fkCode"  caption="访客申请单号" width="12%" align="center"/>
+		<youi:gridCol property="member.memberName"  caption="会员姓名" width="10%" align="center"/>
+		<youi:gridCol property="fkcodeComp"  caption="到访企业" width="16%" align="center"/>
 		<%-- <youi:gridCol property="applyStatus"  caption="申请状态" width="100" align="center" convert="applyStatus"/> --%>
-		<youi:gridCol property="fkcodeRemark"  caption="访客说明" width="150"/>
+		<youi:gridCol property="fkcodeRemark"  caption="访客说明" width="22%"/>
 
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<%-- <youi:button name="edit" caption="修改"/> --%>

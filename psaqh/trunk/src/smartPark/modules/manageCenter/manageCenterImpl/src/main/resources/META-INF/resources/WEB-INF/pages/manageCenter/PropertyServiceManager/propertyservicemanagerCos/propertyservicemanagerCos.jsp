@@ -27,14 +27,15 @@
 				<youi:button name="acceptance" caption="受理" icon="search" active="1" />
 				<youi:button name="govisit" caption="回访" icon="save" active="1" />
 				<youi:button name="evaluate" caption="评价" icon="edit" active="1" />
-				<youi:gridCol property="cosCode" caption="投诉单号" width="16%" />
-				<youi:gridCol property="backcode" caption="回访单号" width="16%" />
-				<youi:gridCol property="cosContent" caption="投诉内容" width="15%" />
-				<youi:gridCol property="backrecord" caption="回访内容" width="15%" />
-				<youi:gridCol property="cosName" caption="投诉联系人" width="10%" />
-				<youi:gridCol property="cosStatus" caption="投诉状态" convert="acceptanceStatus" width="8%" />
-				<youi:gridCol property="cosTime" caption="投诉时间" width="10%" />
-				<youi:gridCol property="backtime" caption="回访时间" width="10%" />
+				<youi:gridCol property="cosCode" caption="投诉单号" width="15%" />
+				<youi:gridCol property="backcode" caption="回访单号" width="15%" />
+				<youi:gridCol property="cosContent" caption="投诉内容" width="14%" />
+				<youi:gridCol property="cosBool" caption="是否接受回访" convert="isAbleVisible" width="8%"/>
+				<youi:gridCol property="backrecord" caption="回访内容" width="14%" />
+				<youi:gridCol property="cosName" caption="投诉联系人" width="9%" />
+				<youi:gridCol property="cosStatus" caption="投诉状态" convert="acceptanceStatus" width="7%" />
+				<youi:gridCol property="cosTime" caption="投诉时间" width="9%" />
+				<youi:gridCol property="backtime" caption="回访时间" width="9%" />
 				<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 					<youi:button name="edit" caption="修改" />
 					<youi:button name="remove" caption="删除" />
@@ -137,23 +138,28 @@
 		var gridElement = $elem('grid_propertyservicemanagerCos',pageId),
 		selectedRecord = gridElement.grid('getSelectedRecord');
 		var cosstatus = selectedRecord.cosStatus;
-		if(cosstatus=='2' || cosstatus=='3'){
-			$.youi.messageUtils.confirm('确定此投诉已回访?',function(){
-				$.youi.ajaxUtil.ajax({
-				url:'/esb/web/propertyservicemanagerCosManager/upCosbyId.json',
-				data:{id:selectedRecord.cosId,code:'4'},
-				success:function(result){	
-					$elem('grid_propertyservicemanagerCos',pageId).grid('pReload');
-						alert("操作成功!");
-						$elem('recordVisit_cosId',pageId).fieldValue(selectedRecord.cosId);
-        				$elem('form_propertyservicenanagerBack',pageId).form('open');
-					}
+		var cosbool = selectedRecord.cosBool;
+		if(cosbool=='0'){
+			if(cosstatus=='2' || cosstatus=='3'){
+				$.youi.messageUtils.confirm('确定此投诉已回访?',function(){
+					$.youi.ajaxUtil.ajax({
+					url:'/esb/web/propertyservicemanagerCosManager/upCosbyId.json',
+					data:{id:selectedRecord.cosId,code:'4'},
+					success:function(result){	
+						$elem('grid_propertyservicemanagerCos',pageId).grid('pReload');
+							alert("操作成功!");
+							$elem('recordVisit_cosId',pageId).fieldValue(selectedRecord.cosId);
+        					$elem('form_propertyservicenanagerBack',pageId).form('open');
+						}
+					});
 				});
-			});
-		}else if(cosstatus=='4'){
-			alert("该记录已回访!");
+			}else if(cosstatus=='4'){
+				alert("该记录已回访!");
+			}else{
+				alert("该状态下不能作回访处理！");
+			}
 		}else{
-			alert("该状态下不能作回访处理！");
+			alert("该记录不接受回访！");
 		}
 	</youi:func>
 	<!-- 评价操作 -->

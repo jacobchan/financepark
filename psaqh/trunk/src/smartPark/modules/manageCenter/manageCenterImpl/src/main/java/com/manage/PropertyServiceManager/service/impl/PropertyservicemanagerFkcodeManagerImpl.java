@@ -21,8 +21,12 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.utils.BizCodeUtil;
+import com.gsoft.utils.HttpSenderMsg;
+import com.gsoft.utils.QRCodeUtil;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTwcrd;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerFkcodeDao;
@@ -82,11 +86,28 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
     	}else{//新增
     		//如果是新增，则要创建对应的二维码
     		//o.setApplyStatus("01");//默认申请状态为申请中
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setApplyTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setFkCode(BizCodeUtil.getInstance().getBizCodeDate("WYGV"));
     		fkcode = propertyservicemanagerFkcodeDao.save(o) ;//保存访客申请
+    		
+    		try {
+    			HttpSenderMsg.sendMsg(fkcode.getFkcodeTelephone(), "您提交访客申请："+fkcode.getFkCode()+"已成功，欢迎到来！");
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}
+
     		
     		PropertyservicemanagerTwcrd twcrd = new PropertyservicemanagerTwcrd() ;//申请成功后会生成对应的二维码
     		twcrd.setStatus("00");//00二维码状态为有效,01表示无效
     		twcrd.setPropertyservicemanagerFkcode(fkcode);//将访客申请set到对应的二维码中
+    		twcrd.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	/*	try {
+				QRCodeUtil.encode("", "");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+    		twcrd.setTwcrdAddrec("");*/
     		propertyservicemanagerTwcrdManager.savePropertyservicemanagerTwcrd(twcrd) ;//保存访客申请的二维码
     	}
     	return fkcode;
