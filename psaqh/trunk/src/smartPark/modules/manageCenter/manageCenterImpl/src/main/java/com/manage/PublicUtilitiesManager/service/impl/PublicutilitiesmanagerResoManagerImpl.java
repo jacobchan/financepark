@@ -322,10 +322,12 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 	 */
 	@EsbServiceMapping
 	public PagerRecords getPagerPublicCommoditys(Pager pager,//分页条件
-			@ConditionCollection(domainClazz=PurchasingmanagerGenre.class) Collection<Condition> conditions,//查询条件
-			@OrderCollection Collection<Order> orders)  throws BusException{
+			@ConditionCollection(domainClazz=PurchasingmanagerCommodity.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders,@ServiceParam(name="genreCode") String genreCode)  throws BusException{
 		// 查询属于公共资源的商品：genreCode=0301:会议室 ；genreCode=0302:车辆租赁；genreCode=0303:广告位
-		List<PurchasingmanagerGenre> purchasingmanagerGenreList=purchasingmanagerGenreManager.getPurchasingmanagerGenres(conditions, null);
+		Collection<Condition> conditionP = new ArrayList<Condition>();
+		conditionP.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS,genreCode));
+		List<PurchasingmanagerGenre> purchasingmanagerGenreList=purchasingmanagerGenreManager.getPurchasingmanagerGenres(conditionP, null);
 		String genreId="";
 		if(purchasingmanagerGenreList.size()>0){
 			genreId = purchasingmanagerGenreList.get(0).getGenreId();
@@ -333,10 +335,7 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 		
 		List<Record> records = new ArrayList<Record>();
 		// 查询公共资源下包含的商品
-		Collection<Condition> conditionP = new ArrayList<Condition>();
-		Collection<Order> OrderP = new ArrayList<Order>();
-		conditionP.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId",Condition.EQUALS,genreId));
-		PagerRecords pagerRecords = purchasingmanagerCommodityManager.getPagerPurchasingmanagerCommoditys(pager, conditionP, OrderP);
+		PagerRecords pagerRecords = purchasingmanagerCommodityManager.getPagerPurchasingmanagerCommoditys(pager, conditions, orders);
 		@SuppressWarnings("unchecked")
 		List<PurchasingmanagerCommodity> pcList=(List<PurchasingmanagerCommodity>) pagerRecords.getRecords();
 

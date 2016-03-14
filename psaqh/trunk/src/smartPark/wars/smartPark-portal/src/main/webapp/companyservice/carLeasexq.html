@@ -146,8 +146,7 @@ function GetRequest() {
 		var Request = new Object();
 		Request = GetRequest();
 		var commodityId = Request['id'];
-		var serviceURL = baseUrl+"purchasingmanagerCommodityManager/getPagerPublicCommoditys.json?commodityId="
-				+ commodityId;
+		var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommoditys.json?commodityId="+commodityId;
 		//	var serviceURL = "http://localhost:8088/smartPark-web/esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommodity.json?commodityId="+commodityId;
 		$.youi.ajaxUtils.ajax({
 			url : serviceURL,

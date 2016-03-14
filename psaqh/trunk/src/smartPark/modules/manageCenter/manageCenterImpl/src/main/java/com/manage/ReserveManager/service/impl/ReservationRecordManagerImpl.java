@@ -174,20 +174,33 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 		reservationRecordDao.save(o);
 	}
 	
-	/**
-	 *下拉框获取数据
-	 * */
+    /**
+     * 根据众创空间下的商品类别 genreCode=04:众创空间
+     */
 	@EsbServiceMapping
-	public List<Record> getRecordsByMulList() throws BusException{
+	public List<PurchasingmanagerCommodity> getCommodityByType(@ServiceParam(name="recordType") String recordType) throws BusException{
 		List<Record> recordList=new ArrayList<Record>();
-		List<Codeitem> list = codeItemDao.getList("codemap.code", "recordType");
-		for(int i=0;i<list.size();i++){
-			Codeitem co=list.get(i);
-			if(!co.getItemValue().equals("04") && !co.getItemValue().equals("02")){
-				Record record = new Record();
-				record.put("itemValue", co.getItemValue());
-				record.put("itemName", co.getItemCaption());
-				recordList.add(record);
+		Collection<Condition> conditions = new ArrayList<Condition>();
+		Collection<Condition> condition = new ArrayList<Condition>();
+		
+		if(recordType.equals("04")){//04:众创空间，查询商品表基础信息
+			conditions.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS, "04"));
+			// 查询属于众创空间的商品：genreCode=04
+			List<PurchasingmanagerGenre> purchasingmanagerGenreList=purchasingmanagerGenreManager.getPurchasingmanagerGenres(conditions, null);
+			String genreId="";
+			if(purchasingmanagerGenreList.size()>0){
+				genreId = purchasingmanagerGenreList.get(0).getGenreId();
+			}
+			if(StringUtils.isNotEmpty(genreId)){
+				// 查询众创空间下包含的商品类别
+				condition.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId",Condition.EQUALS,genreId));
+				List<PurchasingmanagerGenre> pgList = purchasingmanagerGenreManager.getPurchasingmanagerGenres(condition, null);
+				for(PurchasingmanagerGenre pg:pgList){
+					Record record = new Record();
+					record.put("itemValue", pg.getGenreId());
+					record.put("itemName", pg.getGenreName());
+					recordList.add(record);
+				}
 			}
 		}
 		return recordList;
