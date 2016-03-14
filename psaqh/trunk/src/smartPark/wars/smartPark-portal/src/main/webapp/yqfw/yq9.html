@@ -11,7 +11,7 @@
 	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/yqfwnews.js"></script>
-	
+	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 </head>
 <body>
 	<!--***top start****************************************-->
@@ -41,8 +41,8 @@
 							<tr>
 								<td align="center">接受回访</td>
 								<td>
-									<label><input name="yesNo" class="mr5" checked="checked" value="1" type="radio">是</label>
-									<label class="ml30"><input name="yesNo" class="mr5" value="0" type="radio">否</label>
+									<label><input name="yesNo" class="mr5" checked="checked" value="0" type="radio">是</label>
+									<label class="ml30"><input name="yesNo" class="mr5" value="1" type="radio">否</label>
 								</td>
 								<td></td>
 								<td></td>
@@ -77,14 +77,46 @@
 <script type="text/javascript">
 	$(function(){
 		$(".hhf-submit").click(function(){
-			var obj={
-					cosContent:$("#content").val(),
-					cosBool:$("input[name='yesNo']:checked").val(),
-					createUser:$("#name").val(),
-					cosTelephone:$("#telphone").val()
-					};
-			var str=JSON.stringify(obj);
-			alert(str);
+			var cosContent=$("#content").val();	
+			var cosBool=$('input[name="yesNo"]:checked').val();
+			alert(cosBool);
+			var cosName=$("#name").val();
+			var cosTelephone=$("#telphone").val();
+			if(cosContent=="" || cosContent.length==0){
+				alert("请输入投诉内容！");
+				return false;
+			}else{
+				if(cosBool=="0"){
+					if(cosName=="" || cosName.length==0){
+						alert("请输入联系人！");
+						return false;
+					}else if(cosTelephone=="" || cosTelephone.length==0){
+						alert("请输入联系人电话！");
+						return false;
+					}
+				}
+				var params = ['cosContent='+cosContent,
+								'cosBool='+cosBool,
+								'cosName='+cosName,
+								'cosTelephone='+cosTelephone];
+				var serviceURL = baseUrl+"propertyservicemanagerCosManager/savePropertyservicemanagerCos.json";
+				
+				//公共方法
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					data:params.join('&'),
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(results){
+						if(results&&results.record){
+							alert("提交成功");
+							window.location.href="/grzx/grzx9.html";
+						}
+					}
+				});
+			}
+			
+	
 		});
 	});
 </script>

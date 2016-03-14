@@ -108,7 +108,7 @@ $(function(){
 		var str=JSON.stringify(obj);
 		alert(str); */
 		var phone = $("#iphone").val();
-		
+		var sex = $(".sex-group span.active").index()+1;
 		if(phone=="" || phone.length==0){
 			alert("请输入联系电话！");
 			return false;
@@ -120,7 +120,7 @@ $(function(){
 		}
 		
 		var params = ['fkcodeName='+$("#user").val(),
-						'fkcodeSex='+$(".sex-group span.active").index(),
+						'fkcodeSex='+sex,
 						'fkcodeTelephone='+phone,
 						'fkcodeComp='+$("#company").val(),
 						'fkcodeTime='+$("#timer").val(),
