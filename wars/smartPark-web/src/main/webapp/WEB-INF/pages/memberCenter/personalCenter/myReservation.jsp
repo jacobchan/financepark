@@ -31,7 +31,7 @@
 								<th>状态</th>
 								<th>操作</th>
 							</tr>
-							<tr>
+							<!-- <tr>
 								<td><a href="">123456789</a></td>
 								<td>2016-1-12 17:30</td>
 								<td>展厅参观</td>
@@ -51,7 +51,7 @@
 								<td>展厅参观</td>
 								<td>已完成</td>
 								<td></td>
-							</tr>
+							</tr> -->
 						</tbody></table>
 						<div class="fr page-list-a clearfix lh30 mt20 f12">
 							<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
@@ -75,7 +75,7 @@
 			<a href="javascript:;" class="tc-close"></a>
 			<div class="w60 tc mt40" style="margin-left:20%">
 				<div class="mt20 mb20 f16 lh26">
-					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o"> [ 123456789 ] </span>吗？
+					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o recordId"> [ 123456789 ] </span>吗？
 				</div>
 				<p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p>
 				<input value="确定" class="hhf-submit" style="height:36px;" type="submit">
@@ -85,10 +85,48 @@
 	<!--***弹窗 end****************************************-->
 	<script type="text/javascript">
 		$(function () {
-			$(".ac-show").click(function(){
+			$.ajax({
+				url:'/smartPark-web/esb/web/reservationRecordManager/getReservationRecordsforpage.json', 
+				success:function(result){
+					console.log(result);
+					if(result&&result.records){
+						_parseRecords(result.records);
+					}
+				}
+			});
+		});
+		
+		//拼接列表
+		function _parseRecords(record){
+			var html="";
+			for(var i=0;i<record.length;i++){
+				var recordStatus=record[i].recordStatus;
+				var buttonHtml="<td><a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消预约</a></td>";
+				if(recordStatus=="01"){
+					recordStatus="已预约";
+				}else if(recordStatus=="02"){
+					recordStatus="已受理";
+				}else if(recordStatus=="03"){
+					recordStatus="已入驻";
+					buttonHtml="";
+				}
+				html+="<tr id='"+record[i].recordId+"'>"+
+					"<td><a href=''>"+record[i].recordId+"</a></td>"+
+					"<td>"+record[i].visiteDate+"</td>"+
+					"<td>"+record[i].recordMemberId+"</td>"+
+					"<td>"+recordStatus+"</td>"+
+					buttonHtml+
+					"</tr>";
+			}
+			 $("tbody").append(html);
+		};
+		
+		 function cancel(obj){
+				var me=obj.parentNode.parentNode;
+				var recordId=me.childNodes[0].childNodes[0].innerText; 
+				$(".recordId").html(recordId);
 				$(".bg-tanc.m1").show();
-			})
-		})
+			}
 	</script>
 </body>
 <%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 
