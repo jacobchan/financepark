@@ -78,6 +78,29 @@ public class PropertyservicemanagerFkcode implements Domain{
 	@Length(max=2)
 	private String applyStatus;//修改人
 	
+	@Column(name = "APPLY_TIME_")
+	private String applyTime;//访客申请时间
+	
+	@Column(name = "FK_CODE_")
+	@Length(max=50)
+	private String fkCode;//访客申请单号
+	
+	public String getFkCode() {
+		return fkCode;
+	}
+
+	public void setFkCode(String fkCode) {
+		this.fkCode = fkCode;
+	}
+
+	public String getApplyTime() {
+		return applyTime;
+	}
+
+	public void setApplyTime(String applyTime) {
+		this.applyTime = applyTime;
+	}
+
 	public String getApplyStatus() {
 		return applyStatus;
 	}
@@ -179,18 +202,34 @@ public class PropertyservicemanagerFkcode implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
-		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
-		result = prime * result + ((fkcodeComp == null) ? 0 : fkcodeComp.hashCode());
-		result = prime * result + ((fkcodeId == null) ? 0 : fkcodeId.hashCode());
-		result = prime * result + ((fkcodeSex == null) ? 0 : fkcodeSex.hashCode());
-		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
-		result = prime * result + ((fkcodeTelephone == null) ? 0 : fkcodeTelephone.hashCode());
-		result = prime * result + ((fkcodeName == null) ? 0 : fkcodeName.hashCode());
+		result = prime * result
+				+ ((applyStatus == null) ? 0 : applyStatus.hashCode());
+		result = prime * result
+				+ ((applyTime == null) ? 0 : applyTime.hashCode());
+		result = prime * result
+				+ ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result
+				+ ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result + ((fkCode == null) ? 0 : fkCode.hashCode());
+		result = prime * result
+				+ ((fkcodeComp == null) ? 0 : fkcodeComp.hashCode());
+		result = prime * result
+				+ ((fkcodeId == null) ? 0 : fkcodeId.hashCode());
+		result = prime * result
+				+ ((fkcodeName == null) ? 0 : fkcodeName.hashCode());
+		result = prime * result
+				+ ((fkcodeRemark == null) ? 0 : fkcodeRemark.hashCode());
+		result = prime * result
+				+ ((fkcodeSex == null) ? 0 : fkcodeSex.hashCode());
+		result = prime * result
+				+ ((fkcodeTelephone == null) ? 0 : fkcodeTelephone.hashCode());
+		result = prime * result
+				+ ((fkcodeTime == null) ? 0 : fkcodeTime.hashCode());
 		result = prime * result + ((member == null) ? 0 : member.hashCode());
-		result = prime * result + ((fkcodeRemark == null) ? 0 : fkcodeRemark.hashCode());
-		result = prime * result + ((fkcodeTime == null) ? 0 : fkcodeTime.hashCode());
-		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
+		result = prime * result
+				+ ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result
+				+ ((updateUser == null) ? 0 : updateUser.hashCode());
 		return result;
 	}
 	
@@ -202,16 +241,31 @@ public class PropertyservicemanagerFkcode implements Domain{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final PropertyservicemanagerFkcode other = (PropertyservicemanagerFkcode) obj;
+		PropertyservicemanagerFkcode other = (PropertyservicemanagerFkcode) obj;
+		if (applyStatus == null) {
+			if (other.applyStatus != null)
+				return false;
+		} else if (!applyStatus.equals(other.applyStatus))
+			return false;
+		if (applyTime == null) {
+			if (other.applyTime != null)
+				return false;
+		} else if (!applyTime.equals(other.applyTime))
+			return false;
 		if (createTime == null) {
 			if (other.createTime != null)
 				return false;
 		} else if (!createTime.equals(other.createTime))
 			return false;
-		if (updateTime == null) {
-			if (other.updateTime != null)
+		if (createUser == null) {
+			if (other.createUser != null)
 				return false;
-		} else if (!updateTime.equals(other.updateTime))
+		} else if (!createUser.equals(other.createUser))
+			return false;
+		if (fkCode == null) {
+			if (other.fkCode != null)
+				return false;
+		} else if (!fkCode.equals(other.fkCode))
 			return false;
 		if (fkcodeComp == null) {
 			if (other.fkcodeComp != null)
@@ -223,40 +277,40 @@ public class PropertyservicemanagerFkcode implements Domain{
 				return false;
 		} else if (!fkcodeId.equals(other.fkcodeId))
 			return false;
-		if (fkcodeSex == null) {
-			if (other.fkcodeSex != null)
-				return false;
-		} else if (!fkcodeSex.equals(other.fkcodeSex))
-			return false;
-		if (createUser == null) {
-			if (other.createUser != null)
-				return false;
-		} else if (!createUser.equals(other.createUser))
-			return false;
-		if (fkcodeTelephone == null) {
-			if (other.fkcodeTelephone != null)
-				return false;
-		} else if (!fkcodeTelephone.equals(other.fkcodeTelephone))
-			return false;
 		if (fkcodeName == null) {
 			if (other.fkcodeName != null)
 				return false;
 		} else if (!fkcodeName.equals(other.fkcodeName))
-			return false;
-		if (member == null) {
-			if (other.member != null)
-				return false;
-		} else if (!member.equals(other.member))
 			return false;
 		if (fkcodeRemark == null) {
 			if (other.fkcodeRemark != null)
 				return false;
 		} else if (!fkcodeRemark.equals(other.fkcodeRemark))
 			return false;
+		if (fkcodeSex == null) {
+			if (other.fkcodeSex != null)
+				return false;
+		} else if (!fkcodeSex.equals(other.fkcodeSex))
+			return false;
+		if (fkcodeTelephone == null) {
+			if (other.fkcodeTelephone != null)
+				return false;
+		} else if (!fkcodeTelephone.equals(other.fkcodeTelephone))
+			return false;
 		if (fkcodeTime == null) {
 			if (other.fkcodeTime != null)
 				return false;
 		} else if (!fkcodeTime.equals(other.fkcodeTime))
+			return false;
+		if (member == null) {
+			if (other.member != null)
+				return false;
+		} else if (!member.equals(other.member))
+			return false;
+		if (updateTime == null) {
+			if (other.updateTime != null)
+				return false;
+		} else if (!updateTime.equals(other.updateTime))
 			return false;
 		if (updateUser == null) {
 			if (other.updateUser != null)
