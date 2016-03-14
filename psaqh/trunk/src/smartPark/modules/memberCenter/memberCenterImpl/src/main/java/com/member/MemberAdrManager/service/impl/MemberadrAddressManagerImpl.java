@@ -72,18 +72,21 @@ public class MemberadrAddressManagerImpl extends BaseManagerImpl implements Memb
     public MemberadrAddress saveMemberadrAddress(MemberadrAddress o) throws BusException{
     	String memberadrAddressId = o.getAddressId();
     	boolean isUpdate = StringUtils.isNotEmpty(memberadrAddressId);
-    	if(isUpdate){//修改
-
-    	}else{//新增
-    		
-    	}
-		List<MemberadrAddress> memberadrAddresss=memberadrAddressDao.getList("memberId.memberId", o.getMemberId().getMemberId());
+    	
+		List<MemberadrAddress> memberadrAddresss=memberadrAddressDao.getList(new String[]{"memberId.memberId","addressStatus"},new String[]{ o.getMemberId().getMemberId(),"0"});
 		if(o.getAddressStatus().equals("0")){
     		for(MemberadrAddress ma:memberadrAddresss){
     			ma.setAddressStatus("1");//设置所有状态为非默认状态
     			memberadrAddressDao.save(ma);
     		}
 		}
+    	if(isUpdate){//修改
+    		MemberadrAddress ma=memberadrAddressDao.get(memberadrAddressId);
+    		ma.setAddressStatus(o.getAddressStatus());
+    		o=ma;
+    	}else{//新增
+    		
+    	}
     	return memberadrAddressDao.save(o);
     }
 
