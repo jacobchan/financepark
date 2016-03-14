@@ -51,10 +51,16 @@
 			 
 			$(".ic-select").click(function(){
 				$(this).next(".select-nav").toggle();
+				var recordType='04';//04:众创空间
+				$('.select-nav').select({
+					template:'<li data-val={commodityId}>{commodityName}</li>',
+					jsonpSrc:baseUrl+"reservationRecordManager/getRecordsByRecordType.json?recordType="+recordType
+				});
 			})
-			$(".select-nav li").click(function(){
+			$(document).on('click', '.select-nav li', function() {
 				$(".ic-select").find("p").text($(this).text()) ;
 				$(this).parent().hide();
+				$(".ic-select").find("p").attr("data-val",$(this).attr("data-val"));
 			})
 			$(function(){
 				$(".space-num .num-reduce").click(function(){
@@ -78,15 +84,35 @@
 			
 			
 			$(".now-btn").click(function(){
-				var obj={
-				fkcodeComp:$("#fkcodeComp").text(),
-				fkcodeDate:$("#fkcodeDate").val(),
-				fkcodeTime:$("#fkcodeTime").val(),
-				fkcodeName:$("#fkcodeName").val(),
-				fkcodeTelephone:$("#fkcodeTelephone").val()
-				};
-				var str=JSON.stringify(obj);
-				alert(str);
+				var recordType='04';//04:众创空间
+				var recordMemberId=$(".ic-select").find("p").attr("data-val");
+				var visiteDate=$("#fkcodeDate").val();
+				if(recordType == null||recordType==""){
+					alert("请选择参观项目");
+					return;
+				}
+				if(visiteDate ==null|| visiteDate==""){
+					alert("请填写来访日期");
+					return;
+				}
+				var params = ['visiteDate='+visiteDate,'recordType='+recordType,'recordMemberId='+recordMemberId];
+				var serviceURL = baseUrl+"reservationRecordManager/saveReservationRecord.json";
+				//公共方法
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					data:params.join('&'),
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(result){
+						if(result&&result.record){
+							alert("预约成功");
+							//$(".bg-tanc.m2").show();
+							$("#fkcodeDate").val('');
+							$(".ic-select").find("p").text('');
+						}
+					}
+				});
+				
 			});
 		})
 	</script>
@@ -120,12 +146,12 @@
 					<div class="input-con">
 						<div class="select-text">
 							<div class="ic-select">
-								<p id="fkcodeComp">富春硅谷--创立方</p>
+								<p id="fkcodeComp"></p>
 							</div>
 							<ul class="select-nav">
-								<li>富春硅谷--创立方1</li>
+								<!-- <li>富春硅谷--创立方1</li>
 								<li>富春硅谷--创立方2</li>
-								<li>富春硅谷--创立方3</li>
+								<li>富春硅谷--创立方3</li> -->
 							</ul>
 						</div>
 						<input type="text" placeholder="来访日期" id="fkcodeDate">
