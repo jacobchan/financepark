@@ -264,9 +264,16 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		// TODO Auto-generated method stub
 		return -1;
 	}
+	/**
+	 * 修改密码
+	 * @param password
+	 * @param confirmPassword
+	 * @param oldPassword
+	 * @throws BusException
+	 */
 	@EsbServiceMapping
-	public void doModifyPassword(@ServiceParam(name="password",pubProperty="password")String password,@ServiceParam(name="confirmPassword",pubProperty="confirmPassword") String confirmPassword,
-			@ServiceParam(name="oldPassword",pubProperty="oldPassword")String oldPassword,@ServiceParam(name="userId",pubProperty="userId")String userId) throws BusException {
+	public void doModifyPassword(@ServiceParam(name="password")String password,@ServiceParam(name="confirmPassword") String confirmPassword,
+			@ServiceParam(name="oldPassword")String oldPassword,@ServiceParam(name="userId",pubProperty="userId")String userId) throws BusException {
 		// TODO Auto-generated method stub
 		if(StringUtils.isEmpty(oldPassword)){
 			throw new BusException("旧密码不能为空！");
@@ -300,6 +307,31 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 
 		    member.setMemberPassword(PasswordUtils.md5Password(password));
 		    memberInformationDao.save(member);
+	}
+	
+	/**
+	 * 修改手机号码
+	 * @param memberPhoneNumber
+	 * @throws BusException
+	 */
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+	public void updatePhoneNumber(MemberInformation o) throws BusException {
+		// TODO Auto-generated method stub
+		MemberInformation member=null;
+	    try {
+	    	member = (MemberInformation)this.memberInformationDao.get(o.getUpdateUser());
+	    } catch (Exception e) {
+	      throw new BusException("查找用户ID[" + o.getUpdateUser() + "]出错！");
+	    }
+	    Assert.notNull(member, "未找到用户！");
+	    
+		if(!o.getMemberPhoneNumber().equals(member.getMemberPhoneNumber())){
+          if(memberInformationDao.exists("memberPhoneNumber",o.getMemberPhoneNumber() )){
+        	  throw new BusException("手机号码已被使用，请更换手机号码");
+		}
+		}
+		member.setMemberPhoneNumber(o.getMemberPhoneNumber());
+		memberInformationDao.save(member);
 	}
 
 }
