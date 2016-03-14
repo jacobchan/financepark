@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2016/3/11 14:17:21                           */
+/* Created on:     2016/3/14 15:15:39                           */
 /*==============================================================*/
 
 
@@ -683,8 +683,8 @@ create table sp_bbm_room_
    B_ROOM_NO_           varchar(10),
    B_ROOM_CAPTION_      varchar(256),
    B_STATUS_            varchar(2),
-   ROOM_TENEMENT_       char(10),
-   ROOM_HOST_           char(10),
+   ROOM_TENEMENT_       varchar(20),
+   ROOM_HOST_           varchar(20),
    Z_SALE_STATE_        varchar(2),
    W_WATER_CHARGE_      decimal(10,2),
    W_ENERY_CHARGE_      decimal(10,2),
@@ -1595,7 +1595,7 @@ create table sp_propertyservicemanager_oc
    CREATE_TIME_         datetime,
    APPLY_TIME_          varchar(20),
    OC_CODE_             varchar(50),
-   BIND_STATUS          varchar(2)
+   BIND_STATUS_         varchar(2)
 );
 
 alter table sp_propertyservicemanager_oc comment '330201一卡通办理申请记录';
@@ -1935,17 +1935,17 @@ alter table sp_recommend_member
 /*==============================================================*/
 create table sp_refund_order
 (
-   ORDER_ID_            char(10) not null,
-   sp__ORDER_ID_        char(10),
-   REFUND_ORDER_NO_     char(10),
-   REFUND_RECORD_       char(10),
-   REFUND_AMOUNT_       char(10),
-   FEE_AMOUNT_          char(10),
-   REFUND_ORDER_TYPE_   char(10),
-   REFUND_ORDER_TIME_   char(10),
-   PRE_COMEIN_TIME_     char(10),
-   IS_SUCESS_           char(10),
-   MAN_ID_              char(10)
+   ORDER_ID_            char(36) not null,
+   sp__ORDER_ID_        char(36),
+   REFUND_ORDER_NO_     varchar(32),
+   REFUND_RECORD_       varchar(1024),
+   REFUND_AMOUNT_       decimal(10,2),
+   FEE_AMOUNT_          decimal(10,2),
+   REFUND_ORDER_TYPE_   varchar(2),
+   REFUND_ORDER_TIME_   varchar(20),
+   PRE_COMEIN_TIME_     varchar(20),
+   IS_SUCESS_           varchar(2),
+   MAN_ID_              char(36)
 );
 
 alter table sp_refund_order
@@ -2097,8 +2097,8 @@ alter table sp_shoppingCar_group
 /*==============================================================*/
 create table sp_ticket_ctrancts
 (
-   REC_ID_              char(10) not null,
-   ITEM_ID_             char(10),
+   REC_ID_              char(36) not null,
+   ITEM_ID_             char(36),
    CONTRACTS_ID_        char(36)
 );
 
@@ -2110,13 +2110,13 @@ alter table sp_ticket_ctrancts
 /*==============================================================*/
 create table sp_ticket_order
 (
-   ORDER_ID_            char(10) not null,
+   ORDER_ID_            char(36) not null,
    MEMBER_ID_           char(36),
-   ORDER_NO_            char(10),
-   ORDER_TIME_          char(10),
-   ORDER_AMOUNT_        char(10),
-   ORDER_TYPE_          char(10),
-   PAY_TYPE_            char(10)
+   ORDER_NO_            varchar(32),
+   ORDER_TIME_          varchar(20),
+   ORDER_AMOUNT_        decimal(10,2),
+   ORDER_TYPE_          varchar(2),
+   PAY_TYPE_            varchar(2)
 );
 
 alter table sp_ticket_order
@@ -2127,10 +2127,10 @@ alter table sp_ticket_order
 /*==============================================================*/
 create table sp_ticket_order_item
 (
-   ITEM_ID_             char(10) not null,
-   ORDER_ID_            char(10),
-   TICKET_NO_           char(10),
-   TICKET_COUNT_        char(10)
+   ITEM_ID_             char(36) not null,
+   ORDER_ID_            char(36),
+   TICKET_NO_           varchar(64),
+   TICKET_COUNT_        int
 );
 
 alter table sp_ticket_order_item
