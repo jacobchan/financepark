@@ -33,6 +33,7 @@ import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
 import com.manage.ReserveManager.entity.ReservationRecord;
 import com.manage.ReserveManager.dao.ReservationRecordDao;
@@ -282,5 +283,19 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 		p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		reservationRecordDao.save(p);
     }
+    
+    /**
+     * 根据当前登录用户预约
+     */
+    @EsbServiceMapping
+	public List<ReservationRecord> getReservationRecordsforpage(
+			@ServiceParam(name="userId",pubProperty = "userId") String userId) throws BusException {
+		// TODO Auto-generated method stub
+    	//获取当前用户预约
+    	Collection<Condition> condition = new ArrayList<Condition>();
+    	condition.add(ConditionUtils.getCondition("createUser", Condition.EQUALS, userId));
+    	List<ReservationRecord> list =reservationRecordDao.commonQuery(condition, null);
+		return list;
+	}
 
 }
