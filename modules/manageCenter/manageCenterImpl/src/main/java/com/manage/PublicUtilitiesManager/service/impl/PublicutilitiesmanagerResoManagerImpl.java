@@ -343,7 +343,7 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 		for(PurchasingmanagerCommodity pc:pcList){
 			Record record = new Record();
 			record.put("commodityId",pc.getCommodityId());//商品ID
-			record.put("commodityTitle",pc.getCommodityId());//商品标题
+			record.put("commodityTitle",pc.getCommodityTitle());//商品标题
 			record.put("commodityPrice",pc.getCommodityPrice());//商品标价
 			record.put("commodityDescribe",pc.getCommodityDescribe());//商品描述
 			record.put("commodityImage",pc.getCommodityImage());//商品图像
