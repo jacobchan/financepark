@@ -48,8 +48,9 @@
     right: 0;
 }
 .i_pre,.i_next{ width:75px; height:142px;display:inline-block; }
-.i_pre{background:url(../images/company/date_left.png) no-repeat;}
-.i_next{background:url(../images/company/date_right.png) no-repeat;}
+.i_pre{background:url(../images/company/date_left.png) no-repeat;opacity: 0.6;}
+.i_next{background:url(../images/company/date_right.png) no-repeat; opacity: 0.6;}
+.i_pre:hover,.i_next:hover{opacity: 1}
 
 .ta_calendar td.ta_dateRangeSelected{
     background:#cbe6f5;
