@@ -29,10 +29,11 @@
 	  .oh{overflow: hidden;}
     </style>
     <script type="text/javascript">
-    	$(function () {
+    	function clickBox() {
     		$(".gr-czh-box").click(function(){
     			$(".gr-czh-box").removeClass("active");
     			$(this).addClass("active");
+    			refreshList();
     		})
 		    var sbysf_index = 0;
 		    var n=$(".gr-ck-group .gr-czh-box").length-4;
@@ -60,7 +61,11 @@
 		    $("#prev_btn1").click(function(){
 		        sbysf_scroll_down();
 		    });
-    	})
+    	};
+    	function refreshList(){
+    		var applyId=$(".gr-czh-box.active").attr('id');
+    		openApplyList(applyId);
+    	}
     </script>
 </head>
 <body style="background-color:#f4f4f4;">
@@ -132,7 +137,7 @@
 				console.log(result.records);
 				if(result&&result.records){
 					_parseRecords(result.records);
-					openApplyList(result.records);
+					openApplyList(result.records[0].applyId);
 				}
 			}
 		});
@@ -140,6 +145,7 @@
 	
 	//拼接活动列表
 	function _parseRecords(record){
+		var html="";
 		for(var i=0;i<record.length;i++){
 			var cls="";
 			if(i==0){
@@ -147,17 +153,17 @@
 			}else{
 				cls="gr-czh-box";
 			}
-			var html="<div class='"+cls+"'>"+
+			html+="<div class='"+cls+"' id='"+record[i].applyId+"'>"+
             		 "<img src='<%=request.getContextPath()%>/styles/images/czh/list-5.jpg'>"+
             		 " <a href=''><p>"+record[i].applyTitle+"</p></a>"+
        			 	 "</div>";
-			 $(".gr-ck-group").append(html);
-
-		}
+		};
+		 $(".gr-ck-group").append(html);
+		 clickBox();
 	};
 	
-	function openApplyList(record){
-		var params = ['applyId='+record[0].applyId];
+	function openApplyList(applyId){
+		var params = ['applyId='+applyId];
 		$.ajax({
 			url:'/smartPark-web/esb/web/activityApplyManager/getPublishActivityMembers.json',
 			data:params.join('&'),
@@ -171,14 +177,15 @@
 	
 	//拼接活动报名名单
 	function _parseApplyList(record){
+		var html="";
 		for(var i=0;i<record.length;i++){
-			var html="<li>"+
+			html+="<li>"+
 				 "<img src='<%=request.getContextPath()%>/styles/images/grzx/sl-i2.png' border='0' height='59' width='59'>"+
 				 "<br/>"+record[i].memberName+
 				 "</li>";
-
-			$(".img_list").append(html);
 		}
+		$(".clearfix.img_list").empty();
+		$(".img_list").append(html);
 	};
 	</script>
 </body>
