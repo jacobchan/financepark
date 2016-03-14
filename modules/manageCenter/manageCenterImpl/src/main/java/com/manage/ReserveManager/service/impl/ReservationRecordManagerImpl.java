@@ -104,9 +104,21 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
     public ReservationRecord saveReservationRecord(ReservationRecord o) throws BusException{
     	String recordId = o.getRecordId();
     	boolean isUpdate = StringUtils.isNotEmpty(recordId);
+    	String recordType=o.getRecordType();
     	if(isUpdate){//修改
     		ReservationRecord r=reservationRecordDao.get(recordId);
-    		r.setRecordMemberId(o.getRecordMemberId());
+    		//根据预约类型，查询出预约对象，并保存
+    		if(StringUtils.isNotEmpty(recordType) && recordType.equals("04")){//04:众创空间
+    			if(StringUtils.isNotEmpty(o.getRecordMemberId())){
+    				PurchasingmanagerCommodity pc=purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(o.getRecordMemberId());
+    				r.setRecordMemberId(pc.getCommodityTitle());
+    			}
+    			
+    		}else{
+    			List<Record> recordTy=this.getRecordsByRecordType(recordType);
+    			r.setRecordMemberId((String)recordTy.get(0).get("commodityName"));
+    			
+    		}
     		r.setRecordType(o.getRecordType());
     		r.setVisiteDate(o.getVisiteDate());
     		r.setUpdateUser(o.getUpdateUser());
@@ -114,6 +126,18 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
     		return reservationRecordDao.save(r);
     	}else{//新增
     		o.setRecordStatus("01");//待受理
+    		//根据预约类型，查询出预约对象，并保存
+    		if(StringUtils.isNotEmpty(recordType) && recordType.equals("04")){//04:众创空间
+    			if(StringUtils.isNotEmpty(o.getRecordMemberId())){
+    				PurchasingmanagerCommodity pc=purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(o.getRecordMemberId());
+    				o.setRecordMemberId(pc.getCommodityTitle());
+    			}
+    			
+    		}else{
+    			List<Record> recordTy=this.getRecordsByRecordType(recordType);
+    			o.setRecordMemberId((String)recordTy.get(0).get("commodityName"));
+    			
+    		}
         	o.setCreateUser(o.getUpdateUser());
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
@@ -171,6 +195,25 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 		o.setRecordStatus("02");//已授理
 		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		reservationRecordDao.save(o);
+	}
+	
+	/**
+	 *下拉框获取数据
+	 * */
+	@EsbServiceMapping
+	public List<Record> getRecordsByMulList() throws BusException{
+		List<Record> recordList=new ArrayList<Record>();
+		List<Codeitem> list = codeItemDao.getList("codemap.code", "recordType");
+		for(int i=0;i<list.size();i++){
+			Codeitem co=list.get(i);
+			if(!co.getItemValue().equals("04") && !co.getItemValue().equals("02")){
+				Record record = new Record();
+				record.put("itemValue", co.getItemValue());
+				record.put("itemName", co.getItemCaption());
+				recordList.add(record);
+			}
+		}
+		return recordList;
 	}
     
     /**
