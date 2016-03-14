@@ -95,7 +95,7 @@
                 	<span class="cc">&yen;1000/次</span>
                     <div class="clearfix">
                     	<span class="fl">经营范围变更</span>
-                        <a href="javascript:;" class="fr bs_shop"></a>
+                        <a href="javascript:;" class="fr bs_shop" data-id="" data-commodityTitle="" data-commodityPrice=""></a>
                     </div>
                 </div>
             </li>
@@ -175,7 +175,7 @@
         <ul class="blend_ul clearfix">
             <li class="active">评价</li>
             <li>咨询</li>
-            <div><li id="shoplist">购买清单</li></div>
+            <!-- <div><li id="shoplist">购买清单</li></div> -->
         </ul>
         <!---->
         <div class="blend_item">
@@ -276,7 +276,7 @@
                         <th>公司地址</th>
                     </tr>
                 </thead>
-                <tbody class="bgf1">
+                <tbody class="bgf1" id="shopCar">
                 	<tr>
                     	<td class="">
                             一般纳税人
@@ -372,25 +372,56 @@
 <script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 <script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 <script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
-<script type="text/javascript" src="../scripts/page/kefu.js"></script>
+<!-- <script type="text/javascript" src="../scripts/page/kefu.js"></script> -->
 <script>
 $(function(){
+	var serviceURL = "http://220.249.113.12:8088/esb/web/purchasingmanagerCommodityManager/getComChangeCommodityList.json";
+	$.youi.ajaxUtils.ajax({
+		url:serviceURL,
+		jsonp:'data:jsonp',
+		dataType:'jsonp',
+		success:function(results){
+			if(results&&results.records){
+				var htmls = [];
+				var htmlss = [];
+				for(var i=0;i<results.records.length;i++){
+					htmls.push('<li class="bs'+(i+1)+'"><div class="bgfff"><span class="cc">&yen;'+results.records[i].commodityPrice+'/次</span><div class="clearfix">'+
+					'<span class="fl">'+results.records[i].commodityTitle+'</span><a href="javascript:;" class="fr bs_shop" data-id="'+
+					results.records[i].commodityId+'" data-commodityTitle="'+results.records[i].commodityTitle+
+					'" data-commodityPrice="'+results.records[i].commodityPrice+'"></a></div></div></li>');
+					
+					htmlss.push('<li>'+results.records[i].commodityTitle+'&nbsp;&nbsp;<span class="cc">'+results.records[i].commodityPrice+
+					'</span>&nbsp;元/次&nbsp;<div class="shop0"></div></li>');
+				}
+				$('.bus_ul').html(htmls.join(''));
+				$('.shopul').html(htmlss.join(''));
+			}
+			var $layer=$(".pop_layer");
+			$(".bs_shop").click(function(){
+				var id = $(this).attr("data-id");
+				var commodityTitle = $(this).attr("data-commodityTitle");
+				var commodityPrice = $(this).attr("data-commodityPrice");
+				$('#shopCar').html('<tr><td class="">'+commodityTitle+'</td><td><span class="cc">'+commodityPrice+'</span>&nbsp;元/次</td><td>'+
+				'<div class="inline_b" style="overflow:hidden;margin-top:5px"><div class="cos_less">-</div>'+
+				'<div class="numbox">1</div><div class="cos_add">+</div></div></td><td><span class="cc">'+commodityPrice+'</span>&nbsp;元</td><td></td></tr>');
+				$layer.show();
+			});
+			/* $("#shoplist").click(function(){
+				$layer.show();
+			}); */
+			$(".pop_back").click(function(){
+				$layer.hide();
+			});
+		}
+	});
+    
 	$(".nav_1,.navsub").hover(function(){
 		$(".navsub").show();
 	},function(){
 		$(".navsub").hide();
 	});
 	/**/
-	var $layer=$(".pop_layer");
-	$(".bs_shop").click(function(){
-		$layer.show();
-	});
-	$("#shoplist").click(function(){
-		$layer.show();
-	});
-	$(".pop_back").click(function(){
-		$layer.hide();
-	});
+	
 	/**/
 	$(".blend_ul>li").click(function(){
 		var index=$(this).index();
