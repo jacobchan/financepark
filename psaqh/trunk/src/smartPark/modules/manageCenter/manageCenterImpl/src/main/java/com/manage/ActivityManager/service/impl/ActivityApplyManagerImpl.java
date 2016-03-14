@@ -156,7 +156,7 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
      * 获取当前登录用户发布活动集合
      * 
      */ 
-  
+    @EsbServiceMapping
 	public List<ActivityApply> getPublishActivityList(@ServiceParam(name="userId",pubProperty = "userId") String userId) throws BusException {
 		// TODO Auto-generated method stub
     	//先模拟一个登陆用户，之后会修改
