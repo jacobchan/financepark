@@ -40,7 +40,7 @@
 								<th>访客电话</th>
 								<th>操作</th>
 							</tr>
-							<tr>
+							<!-- <tr>
 								<td><a href="">123456789</a></td>
 								<td>2016-1-12 17:30</td>
 								<td>4个小时</td>
@@ -71,7 +71,7 @@
 								<td>乔布斯</td>
 								<td>18659786621</td>
 								<td><a href="javascript:;" class="ac-see">查看二维码</a><span class="f12 ml5 mr5">|</span><a href="javascript:;" class="ac-show">取消访客</a></td>
-							</tr>
+							</tr> -->
 						</tbody></table>
 						<div class="fr page-list-a clearfix lh30 mt20 f12">
 							<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>

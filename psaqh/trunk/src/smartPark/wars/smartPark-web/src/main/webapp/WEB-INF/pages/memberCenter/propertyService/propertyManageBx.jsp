@@ -125,7 +125,7 @@
 			<a href="javascript:;" class="tc-close"></a>
 			<div class="w60 tc mt40" style="margin-left:20%">
 				<div class="mt20 mb20 f16 lh26">
-					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o"> [ 123456789 ] </span>吗？
+					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o bxCode"> [ 123456789 ] </span>吗？
 				</div>
 				<p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p>
 				<input value="确定" class="hhf-submit" style="height:36px;" type="submit">
@@ -155,7 +155,7 @@
 		function _parseRecords(record){
 			for(var i=0;i<record.length;i++){
 				var bxStatus='';
-				var buttonHtml="<td><a href='javascript:;' class='ac-show'>取消</a></td>";
+				var buttonHtml="<td><a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消</a></td>";
 				if(record[i].bxStatus='00'){
 					bxStatus='待受理';
 				}else if(record[i].bxStatus='01'){
@@ -176,7 +176,7 @@
 				}else if(record[i].bxStatus='08'){
 					bxStatus='未受理';
 				}
-				var html="<tr>"+
+				var html="<tr id='"+record[i].bxId+"'>"+
 						"<td><a href=''>"+record[i].bxCode+"</a></td>"+
 						"<td>"+record[i].createTime+"</td>"+
 						"<td>"+bxStatus+"</td>"+
@@ -185,11 +185,14 @@
 						buttonHtml+
 						"</tr>";
 				 $("tbody").append(html);
-				 $(".ac-show").click(function(e){
-						$(".bg-tanc").show();
-					});
 			}
 		};
+		 function cancel(obj){
+				var me=obj.parentNode.parentNode;
+				var bxCode=me.childNodes[0].childNodes[0].innerText; 
+				$(".bxCode").html(bxCode);
+				$(".bg-tanc").show();
+			}
 	</script>
 </body>
 <%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 
