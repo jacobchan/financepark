@@ -163,15 +163,18 @@
 		//拼接政策新闻列表
 		function _parseRecords(record){
 			for(var i=0;i<record.length;i++){
-				var html="<div class='index-group'>"+
-							 "<h5>"+record[i].policyCaption+"</h5>"+
-	                    	 "<div class='ig-box'>"+
-		                    	 "<p>"+record[i].policyContent+"</p>"+
-		                    	 "<a href='javascript:;' class='ib-btn'>在线申请</a>"+
-		                    	 "<input type='hidden' class='hiddenId' value="+record[i].policyId+">"+
-	                		 "</div>"+
-                		 "</div>";
-				 $(".fl.w895").append(html);
+				var status = record[i].policyStatus ;
+				if(status == 1){//状态为1表示已发布，为0表示未发布
+					var html="<div class='index-group'>"+
+								 "<h5>"+record[i].policyCaption+"</h5>"+
+			               		 "<div class='ig-box'>"+
+				                   	 "<p>"+record[i].policyContent+"</p>"+
+				                   	 "<a href='javascript:;' class='ib-btn'>在线申请</a>"+
+				                   	 "<input type='hidden' class='hiddenId' value="+record[i].policyId+">"+
+			           			 "</div>"+
+		       				 "</div>";
+		 			$(".fl.w895").append(html);
+				}
 			}
 		};
 	</script>
