@@ -353,7 +353,6 @@
 <script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 <script type="text/javascript" src="../scripts/page/cg30com.js"></script>
 <script type="text/javascript">
-
         $(function(){
         	var params = ['pager:pageIndex=1','pager:pageSize=6','commodityPrice=1000'];
             $('.square_ul_office>li').plist({
@@ -364,46 +363,22 @@
                 		'<div class="cg_tag"><img width="51px" src=../filestore/{purchasingmanagerMerchant.merchantLogo}></div>',
                 jsonpSrc:'http://220.249.113.12:8088/esb/web/purchasingmanagerCommodityManager/getPagerPurchasingmanagerCommoditys.json?data:'+params.join('&')
             });
+            
+            $(".b1").hover(function(){
+                $(".b1mask").toggleClass("hide");
+            });
+            $(".b2").hover(function(){
+                $(".b2mask").toggleClass("hide");
+            });
+            $(".b1 li").hover(function(){
+                var idx=$(this).index();
+                $(".b1floor").eq(idx).toggleClass("hide");
+            });
+            $(".b2 li").hover(function(){
+                var idx=$(this).index();
+                $(".b2floor").eq(idx).toggleClass("hide");
+            });
         });
-</script>
-<script>
-    $(function(){
-        $(".b1").hover(function(){
-            $(".b1mask").toggleClass("hide");
-        });
-        $(".b2").hover(function(){
-            $(".b2mask").toggleClass("hide");
-        });
-        $(".b1 li").hover(function(){
-            var idx=$(this).index();
-            $(".b1floor").eq(idx).toggleClass("hide");
-        });
-        $(".b2 li").hover(function(){
-            var idx=$(this).index();
-            $(".b2floor").eq(idx).toggleClass("hide");
-        });
-        
-        /* var params = ['pager:pageIndex=1','pager:pageSize=6','commodityPrice=1000'];
-		var serviceURL = "http://localhost:8088/smartPark-web/esb/web/purchasingmanagerCommodityManager/getPagerPurchasingmanagerCommoditys.json";
-		$.youi.ajaxUtils.ajax({
-			url:serviceURL,
-			data:params.join('&'),
-			jsonp:'data:jsonp',
-			dataType:'jsonp',
-			success:function(results){
-				if(results&&results.records){
-					var buff = "";
-					for(var i = 0;i<results.records.length;i++){
-						buff = buff+"<li><div class='cgimg'><img src='../styles/images/cg30/cg_w1.png'/></div><a href='../cg30/cg_xq.html' class='c3'>"+
-						results.records[i].commodityTitle+"</a><div class='mt5'><span class='ccheng'>"+results.records[i].commodityPrice+
-						"</span>元<a href='../cg30/shopcar.html' class='fr'><img src='../styles/images/cg30/add.png'/></a>"+
-						"</div><div class='cg_tag'><img src='../styles/images/cg30/cg_wtip.png'/></div></li>"
-					}
-					$('#office').html(buff);
-				}
-			}
-		}); */
-    });
 </script>
 </body>
 </html>
