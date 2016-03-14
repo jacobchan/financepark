@@ -38,7 +38,7 @@
 						</tr>
 						<tr>
 							<td>账号</td>
-							<td><span class="c-b1">8578778888 </span><span class="c-o"><a href="updatephonenumber.html">[更换手机号码]</a></span></td>
+							<td><span class="c-b1">8578778888 </span><span class="c-o"><a href="personalCenter/securityCenter.html">[更换手机号码]</a></span></td>
 						</tr>
 						<tr>
 							<td>昵称</td>
