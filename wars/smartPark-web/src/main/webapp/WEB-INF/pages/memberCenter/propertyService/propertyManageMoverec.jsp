@@ -16,7 +16,7 @@
 				<div class="w1000">
 					<h3 class="per-h3">搬家放行列表</h3>
 					<div class="clearfix mt20 fklist">
-						<div class="gz-fx-box clearfix">
+						<!-- <div class="gz-fx-box clearfix">
 							<div class="gzb-thead">
 								<span class="c-o">订单号：44152444</span>
 								<a href="grzx11-2.html" class="fr f12">查看订单详情</a>
@@ -90,7 +90,7 @@
 								<p>· 办公桌椅</p>
 								<p><a href="">……</a></p>
 							</div>
-					</div> 
+					</div>  -->
 					</div>
 					<div class="fr page-list-a clearfix lh30 mt20 f12">
 						<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
