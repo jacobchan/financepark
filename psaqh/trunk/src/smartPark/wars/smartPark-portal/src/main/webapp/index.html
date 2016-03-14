@@ -30,15 +30,15 @@
         </div>
         <div class="clearfix">
         	<div class="fl selectBox">
-            	<input type="hidden" id="select_value"/>
-                <div class="select_show">展厅</div>
+            	<!-- <input type="hidden" id="select_value"/> -->
+                <div class="select_show"></div>
 				<div class="select_down"></div>
                 <div class="select_list">
                 	<ul>
-                    	<li>公园</li>
+                    	<!-- <li>公园</li>
                         <li>套房</li>
                         <li>游泳池</li>
-                        <li>大楼</li>
+                        <li>大楼</li> -->
                     </ul>
                 </div>
             </div>
@@ -595,10 +595,6 @@
 				template:'<a class="tc" href=xq?id={commodityId}.html><div class="cp"><img src={commodityImage}></div>{commodityTitle}<p class="cc">&yen;{commodityPrice}</p></a>',
 				jsonpSrc:'http://localhost:9088/jsonp/data.jsp?data:file=test.json'
 			});
-			$('.select_list>ul').select({
-				template:'<li data-val={value}>{text}</li>',
-				jsonpSrc:'http://localhost:9088/jsonp/data.jsp?data:file=selector.json'
-			});
 			
 		});
 	</script>
@@ -625,6 +621,10 @@
 		/*select_list*/
 		$(".selectBox").on("click",function(){
 			$(".select_list").toggle();
+			$('.select_list>ul').select({
+				template:'<li data-val={itemValue}>{itemName}</li>',
+				jsonpSrc:baseUrl+"reservationRecordManager/getRecordsByMulList.json"
+			});
 		});
 		$(".select_list").on("click","li",function(){
 			$(this).addClass("selected").siblings().removeClass("selected");
@@ -700,9 +700,11 @@
 	<script type="text/javascript">
 		    //提交预约
 			$("#reserveButton").click(function(){
-				var recordMemberId=$(".select_show").text();
+				var recordType=$(".select_show").attr("data-val");
+				var recordMemberId=recordType;
+				
 				var visiteDate=$("#lf_date").val();
-				if(recordMemberId == null||recordMemberId==""){
+				if(recordType == null||recordType==""){
 					alert("请选择参观项目");
 					return;
 				}
@@ -710,7 +712,7 @@
 					alert("请填写来访日期");
 					return;
 				}
-				var params = ['visiteDate='+visiteDate,'recordMemberId='+recordMemberId];
+				var params = ['visiteDate='+visiteDate,'recordType='+recordType,'recordMemberId='+recordMemberId];
 				var serviceURL = baseUrl+"reservationRecordManager/saveReservationRecord.json";
 				//公共方法
 				$.youi.ajaxUtils.ajax({
@@ -722,6 +724,7 @@
 						if(result&&result.record){
 							alert("预约成功");
 							$("#lf_date").val('');
+							$(".select_show").text('');
 						}
 					}
 				});
