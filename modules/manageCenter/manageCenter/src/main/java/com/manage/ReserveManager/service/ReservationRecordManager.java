@@ -13,6 +13,15 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+<<<<<<< .mine
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.ServiceParam;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
+=======
+>>>>>>> .r2188
 import com.manage.ReserveManager.entity.ReservationRecord;
 
 public interface ReservationRecordManager extends BaseManager{
@@ -92,10 +101,18 @@ public interface ReservationRecordManager extends BaseManager{
 	 * @throws BusException
 	 */
 	 public void cancelReservation(ReservationRecord o) throws BusException;
+	/**
+	 * 根据当前登录用户获取预约记录
+	 * @param userId
+	 * @return
+	 * @throws BusException
+	 */
+	public List<ReservationRecord> getReservationRecordsforpage(String userId) throws BusException;	 
 	 /**
 	  * 下拉框获取数据
 	  * @return
 	  * @throws BusException
 	  */
 	 public List<Record> getRecordsByMulList() throws BusException;
+
 }
