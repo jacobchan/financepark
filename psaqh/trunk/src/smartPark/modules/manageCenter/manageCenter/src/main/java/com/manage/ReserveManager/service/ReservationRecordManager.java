@@ -3,22 +3,16 @@
  */
 package com.manage.ReserveManager.service;
 
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
-import org.apache.poi.hssf.record.Record;
-
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.ConditionCollection;
-import com.gsoft.framework.esb.annotation.EsbServiceMapping;
-import com.gsoft.framework.esb.annotation.OrderCollection;
-import com.gsoft.framework.esb.annotation.ServiceParam;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
 import com.manage.ReserveManager.entity.ReservationRecord;
 
 public interface ReservationRecordManager extends BaseManager{
@@ -98,4 +92,10 @@ public interface ReservationRecordManager extends BaseManager{
 	 * @throws BusException
 	 */
 	 public void cancelReservation(ReservationRecord o) throws BusException;
+	 /**
+	  * 下拉框获取数据
+	  * @return
+	  * @throws BusException
+	  */
+	 public List<Record> getRecordsByMulList() throws BusException;
 }
