@@ -5,26 +5,28 @@ package com.manage.PublicUtilitiesManager.service.impl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.common.BuildingBaseManager.service.BbmRoomManager;
 import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
 import com.common.OrderManager.entity.OrdermanagerOrderprojecttypeValue;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.common.OrderManager.service.OrdermanagerCommoditydetailManager;
 import com.common.OrderManager.service.OrdermanagerOrderprojecttypeValueManager;
 import com.common.OrderManager.service.OrdermanagerUserorderManager;
-import com.common.purchasingManager.dao.PurchasingmanagerGenrePropertyDao;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
+import com.common.purchasingManager.entity.PurchasingmanagerCommodityExtend;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.common.purchasingManager.entity.PurchasingmanagerGenreProperty;
+import com.common.purchasingManager.service.PurchasingmanagerCommodityExtendManager;
 import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
+import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
 import com.common.purchasingManager.service.PurchasingmanagerGenrePropertyManager;
+import com.common.purchasingManager.service.PurchasingmanagerMerchantManager;
 import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -32,17 +34,19 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-import com.gsoft.framework.esb.annotation.*;
-import com.gsoft.framework.security.agt.entity.User;
+import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.DomainCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.PubCondition;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
-import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.utils.BizCodeUtil;
-import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntering;
-import com.manage.PublicUtilitiesManager.entity.PublicutilitiesmanagerReso;
 import com.manage.PublicUtilitiesManager.dao.PublicutilitiesmanagerResoDao;
+import com.manage.PublicUtilitiesManager.entity.PublicutilitiesmanagerReso;
 import com.manage.PublicUtilitiesManager.service.PublicutilitiesmanagerResoManager;
 
 @Service("publicutilitiesmanagerResoManager")
@@ -66,8 +70,14 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 	@Autowired
 	private OrdermanagerOrderprojecttypeValueManager orderprojectValueManager;
 	
-//	@Autowired
-//	private PurchasingmanagerCommodityExtendValueManager purchasingmanagerCommodityExtendValueManager;
+	@Autowired
+	private PurchasingmanagerMerchantManager purchasingmanagerMerchantManager;
+	
+	@Autowired
+	private PurchasingmanagerCommodityExtendManager purchasingmanagerCommodityExtendManager;
+
+	@Autowired
+	private PurchasingmanagerGenreManager purchasingmanagerGenreManager;
 	
 	
 	
@@ -306,5 +316,84 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 		}
 	}
 	
+	
+	/**
+	 * 查询属于公共资源的商品
+	 */
+	@EsbServiceMapping
+	public PagerRecords getPagerPublicCommoditys(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PurchasingmanagerGenre.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)  throws BusException{
+		// 查询属于公共资源的商品：genreCode=0301:会议室 ；genreCode=0302:车辆租赁；genreCode=0303:广告位
+		List<PurchasingmanagerGenre> purchasingmanagerGenreList=purchasingmanagerGenreManager.getPurchasingmanagerGenres(conditions, null);
+		String genreId="";
+		if(purchasingmanagerGenreList.size()>0){
+			genreId = purchasingmanagerGenreList.get(0).getGenreId();
+		}
+		
+		List<Record> records = new ArrayList<Record>();
+		// 查询公共资源下包含的商品
+		Collection<Condition> conditionP = new ArrayList<Condition>();
+		Collection<Order> OrderP = new ArrayList<Order>();
+		conditionP.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId",Condition.EQUALS,genreId));
+		PagerRecords pagerRecords = purchasingmanagerCommodityManager.getPagerPurchasingmanagerCommoditys(pager, conditionP, OrderP);
+		@SuppressWarnings("unchecked")
+		List<PurchasingmanagerCommodity> pcList=(List<PurchasingmanagerCommodity>) pagerRecords.getRecords();
+
+		for(PurchasingmanagerCommodity pc:pcList){
+			Record record = new Record();
+			record.put("commodityId",pc.getCommodityId());//商品ID
+			record.put("commodityTitle",pc.getCommodityId());//商品标题
+			record.put("commodityPrice",pc.getCommodityPrice());//商品标价
+			record.put("commodityDescribe",pc.getCommodityDescribe());//商品描述
+			record.put("commodityImage",pc.getCommodityImage());//商品图像
+			record.put("commodityCoverImage",pc.getCommodityCoverImage());//封面图片
+			record.put("merchantName",pc.getPurchasingmanagerMerchant().getMerchantName());//商户名称
+			record.put("merchantId",pc.getPurchasingmanagerMerchant().getMerchantId());//商户Id
+			record.put("merchantLinkman",pc.getPurchasingmanagerMerchant().getMerchantLinkman());//联系人电话
+			record.put("merchantLinkmanPhone",pc.getPurchasingmanagerMerchant().getMerchantLinkmanPhone());//联系人电话
+
+			PurchasingmanagerGenre pg = pc.getPurchasingmanagerGenre();
+			while(pg.getPurchasingmanagerGenre() != null){//获取最顶级商品类别
+				pg = pg.getPurchasingmanagerGenre();
+			}
+			//获取商品类别
+			Collection<Condition> condition = new ArrayList<Condition>();
+			List<PurchasingmanagerCommodityExtend> pceList=new ArrayList<PurchasingmanagerCommodityExtend>();
+			condition.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.EQUALS, pg.getGenreId()));
+			List<PurchasingmanagerGenreProperty> genrePropertyList = extensionPropertyManager.getPurchasingmanagerGenrePropertys(condition, null);
+			for(PurchasingmanagerGenreProperty genreProperty:genrePropertyList){
+				if("dw".equals(genreProperty.getGenrePropertyFieldName())){
+					//获取商品扩展属性
+					Collection<Condition> conditionE = new ArrayList<Condition>();
+					conditionE.add(ConditionUtils.getCondition("purchasingmanagerGenreProperty.genrePropertyId", Condition.EQUALS, genreProperty.getGenrePropertyId()));
+					conditionE.add(ConditionUtils.getCondition("commodity.commodityId", Condition.EQUALS, pc.getCommodityId()));
+					pceList=purchasingmanagerCommodityExtendManager.getPurchasingmanagerCommodityExtends(conditionE, null);
+					record.put("dwValue",pceList.size()>0?pceList.get(0).getCommodityExtendContent():null);//商品属性：档位
+				}else if("zw".equals(genreProperty.getGenrePropertyFieldName())){
+					//获取商品扩展属性
+					Collection<Condition> conditionE = new ArrayList<Condition>();
+					conditionE.add(ConditionUtils.getCondition("purchasingmanagerGenreProperty.genrePropertyId", Condition.EQUALS, genreProperty.getGenrePropertyId()));
+					conditionE.add(ConditionUtils.getCondition("commodity.commodityId", Condition.EQUALS, pc.getCommodityId()));
+					pceList=purchasingmanagerCommodityExtendManager.getPurchasingmanagerCommodityExtends(conditionE, null);
+					record.put("zwValue",pceList.size()>0?pceList.get(0).getCommodityExtendContent():null);//商品属性：座位
+				}else if("chepai".equals(genreProperty.getGenrePropertyFieldName())){
+					//获取商品扩展属性
+					Collection<Condition> conditionE = new ArrayList<Condition>();
+					conditionE.add(ConditionUtils.getCondition("purchasingmanagerGenreProperty.genrePropertyId", Condition.EQUALS, genreProperty.getGenrePropertyId()));
+					conditionE.add(ConditionUtils.getCondition("commodity.commodityId", Condition.EQUALS, pc.getCommodityId()));
+					pceList=purchasingmanagerCommodityExtendManager.getPurchasingmanagerCommodityExtends(conditionE, null);
+					record.put("cpValue",pceList.size()>0?pceList.get(0).getCommodityExtendContent():null);//商品属性：车牌
+				}
+			}
+			records.add(record);
+		}
+
+		pagerRecords.setRecords(records);
+
+
+		return pagerRecords;
+	}
+
 
 }

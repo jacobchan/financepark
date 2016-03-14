@@ -3,8 +3,8 @@
  */
 package com.manage.PublicUtilitiesManager.service;
 
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
@@ -14,7 +14,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.manage.PublicUtilitiesManager.entity.PublicutilitiesmanagerReso;
 
 public interface PublicutilitiesmanagerResoManager extends BaseManager{
@@ -37,6 +36,11 @@ public interface PublicutilitiesmanagerResoManager extends BaseManager{
 	 * @return 分页对象
 	 */
 	public PagerRecords getPagerPublicutilitiesmanagerResos(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders) throws BusException;
+	
+	
+	public PagerRecords getPagerPublicCommoditys(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders) throws BusException;
     /**
