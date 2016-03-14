@@ -46,13 +46,13 @@
             	<input type="text" id="lf_date" placeholder="来访日期"/>
             </div>
             <div class="fl ml10">
-            	<input type="text" placeholder="来访时间"/>
+            	<input type="text" id="lf_time" placeholder="来访时间"/>
             </div>
             <div class="fl ml10">
-            	<input type="text" placeholder="姓名"/>
+            	<input type="text" id="lf_name" placeholder="姓名"/>
             </div>
             <div class="fl ml10">
-            	<input type="text" placeholder="手机号码"/>
+            	<input type="text" id="lf_tel"  placeholder="手机号码"/>
             </div>
             <div class="fl ml10">
             	<input id="reserveButton" type="button" value="立即预约"/>
@@ -621,9 +621,10 @@
 		/*select_list*/
 		$(".selectBox").on("click",function(){
 			$(".select_list").toggle();
+			var recordType='04';//04:众创空间
 			$('.select_list>ul').select({
 				template:'<li data-val={itemValue}>{itemName}</li>',
-				jsonpSrc:baseUrl+"reservationRecordManager/getRecordsByMulList.json"
+				jsonpSrc:baseUrl+"reservationRecordManager/getRecordsByRecordType.json?recordType="+recordType
 			});
 		});
 		$(".select_list").on("click","li",function(){
@@ -700,9 +701,11 @@
 	<script type="text/javascript">
 		    //提交预约
 			$("#reserveButton").click(function(){
-				var recordType=$(".select_show").attr("data-val");
-				var recordMemberId=recordType;
-				
+				var recordType='04';//04:众创空间
+				var recordMemberId=$(".select_show").text();
+				var lfTime=$("#lf_time").val();
+				var lfName=$("#lf_name").val();
+				var lfTel=$("#lf_tel").val();
 				var visiteDate=$("#lf_date").val();
 				if(recordType == null||recordType==""){
 					alert("请选择参观项目");
@@ -724,6 +727,9 @@
 						if(result&&result.record){
 							alert("预约成功");
 							$("#lf_date").val('');
+							$("#lf_time").val('');
+							$("#lf_name").val('');
+							$("#lf_tel").val('');
 							$(".select_show").text('');
 						}
 					}

@@ -53,12 +53,12 @@
 				$(this).next(".select-nav").toggle();
 				var recordType='04';//04:众创空间
 				$('.select-nav').select({
-					template:'<li data-val={commodityId}>{commodityName}</li>',
+					template:'<li data-val={itemValue}>{itemName}</li>',
 					jsonpSrc:baseUrl+"reservationRecordManager/getRecordsByRecordType.json?recordType="+recordType
 				});
 			})
 			$(document).on('click', '.select-nav li', function() {
-				$(".ic-select").find("p").text($(this).text()) ;
+				$(".ic-select").find("p").text($(this).text());
 				$(this).parent().hide();
 				$(".ic-select").find("p").attr("data-val",$(this).attr("data-val"));
 			})
@@ -85,7 +85,10 @@
 			
 			$(".now-btn").click(function(){
 				var recordType='04';//04:众创空间
-				var recordMemberId=$(".ic-select").find("p").attr("data-val");
+				var recordMemberId=$(".ic-select").find("p").text();
+				var lfTime=$("#fkcodeTime").val();
+				var lfName=$("#fkcodeName").val();
+				var lfTel=$("#fkcodeTelephone").val();
 				var visiteDate=$("#fkcodeDate").val();
 				if(recordType == null||recordType==""){
 					alert("请选择参观项目");
@@ -108,6 +111,9 @@
 							alert("预约成功");
 							//$(".bg-tanc.m2").show();
 							$("#fkcodeDate").val('');
+							$("#fkcodeTime").val('');
+							$("#fkcodeName").val('');
+							$("#fkcodeTelephone").val('');
 							$(".ic-select").find("p").text('');
 						}
 					}
@@ -314,14 +320,14 @@
 			<div class="tct-input clearfix">
 				<input type="text" placeholder="杭州">
 				<div class="tct-select">
-					<div class="ic-select">
+					<!-- <div class="ic-select">
 						<p>创立方</p>
 					</div>
 					<ul class="select-nav">
 						<li>创立方1</li>
 						<li>创立方2</li>
 						<li>创立方3</li>
-					</ul>
+					</ul> -->
 				</div>
 				<input type="text" placeholder="预定日期" class="inp-time" id="startTime">
 				<input type="text" placeholder="截止日期" class="inp-time" id="endTime">
