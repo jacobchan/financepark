@@ -105,21 +105,9 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
     public ReservationRecord saveReservationRecord(ReservationRecord o) throws BusException{
     	String recordId = o.getRecordId();
     	boolean isUpdate = StringUtils.isNotEmpty(recordId);
-    	String recordType=o.getRecordType();
     	if(isUpdate){//修改
     		ReservationRecord r=reservationRecordDao.get(recordId);
-    		//根据预约类型，查询出预约对象，并保存
-    		if(StringUtils.isNotEmpty(recordType) && recordType.equals("04")){//04:众创空间
-    			if(StringUtils.isNotEmpty(o.getRecordMemberId())){
-    				PurchasingmanagerCommodity pc=purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(o.getRecordMemberId());
-    				r.setRecordMemberId(pc.getCommodityTitle());
-    			}
-    			
-    		}else{
-    			List<Record> recordTy=this.getRecordsByRecordType(recordType);
-    			r.setRecordMemberId((String)recordTy.get(0).get("commodityName"));
-    			
-    		}
+    		r.setRecordMemberId(o.getRecordMemberId());
     		r.setRecordType(o.getRecordType());
     		r.setVisiteDate(o.getVisiteDate());
     		r.setUpdateUser(o.getUpdateUser());
@@ -127,18 +115,6 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
     		return reservationRecordDao.save(r);
     	}else{//新增
     		o.setRecordStatus("01");//待受理
-    		//根据预约类型，查询出预约对象，并保存
-    		if(StringUtils.isNotEmpty(recordType) && recordType.equals("04")){//04:众创空间
-    			if(StringUtils.isNotEmpty(o.getRecordMemberId())){
-    				PurchasingmanagerCommodity pc=purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(o.getRecordMemberId());
-    				o.setRecordMemberId(pc.getCommodityTitle());
-    			}
-    			
-    		}else{
-    			List<Record> recordTy=this.getRecordsByRecordType(recordType);
-    			o.setRecordMemberId((String)recordTy.get(0).get("commodityName"));
-    			
-    		}
         	o.setCreateUser(o.getUpdateUser());
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
@@ -218,51 +194,33 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 	}
     
     /**
-     * 根据预约类型不同生成相应的招商预约记录
+     * 根据众创空间下的商品类别 genreCode=04:众创空间
      */
 	@EsbServiceMapping
 	public List<Record> getRecordsByRecordType(@ServiceParam(name="recordType") String recordType) throws BusException{
 		List<Record> recordList=new ArrayList<Record>();
 		Collection<Condition> conditions = new ArrayList<Condition>();
-		Collection<Order> orders = new ArrayList<Order>();
+		Collection<Condition> condition = new ArrayList<Condition>();
 		
 		if(recordType.equals("04")){//04:众创空间，查询商品表基础信息
 			conditions.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS, "04"));
 			// 查询属于众创空间的商品：genreCode=04
-			List<PurchasingmanagerGenre> purchasingmanagerGenreList=purchasingmanagerGenreManager.getPurchasingmanagerGenres(conditions, orders);
+			List<PurchasingmanagerGenre> purchasingmanagerGenreList=purchasingmanagerGenreManager.getPurchasingmanagerGenres(conditions, null);
 			String genreId="";
 			if(purchasingmanagerGenreList.size()>0){
 				genreId = purchasingmanagerGenreList.get(0).getGenreId();
 			}
 			if(StringUtils.isNotEmpty(genreId)){
-				// 查询众创空间下包含的商品
-				List<PurchasingmanagerCommodity> commodityList = purchasingmanagerCommodityManager.getCommodityRecordsByGenreId(genreId);
-				for(PurchasingmanagerCommodity pc:commodityList){
+				// 查询众创空间下包含的商品类别
+				condition.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId",Condition.EQUALS,genreId));
+				List<PurchasingmanagerGenre> pgList = purchasingmanagerGenreManager.getPurchasingmanagerGenres(condition, null);
+				for(PurchasingmanagerGenre pg:pgList){
 					Record record = new Record();
-					record.put("commodityId", pc.getCommodityId());
-					record.put("commodityName", pc.getCommodityTitle());
+					record.put("itemValue", pg.getGenreId());
+					record.put("itemName", pg.getGenreName());
 					recordList.add(record);
 				}
 			}
-
-		}else if(recordType.equals("02")){
-			//02:虚拟空间，查询单元表基础信息
-//			conditions.add(ConditionUtils.getCondition("status",Condition.EQUALS, "2"));//房间使用状态：2--未使用
-			List<BbmRoom> bbmRoomsList=bbmRoomManager.getBbmRooms(conditions, orders);
-			for(BbmRoom b:bbmRoomsList){
-				Record record = new Record();
-				record.put("commodityId", b.getRoomId());
-				record.put("commodityName", b.getRoomNo());
-				recordList.add(record);
-			}
-		}else{
-			//其他预约类型
-			List<Codeitem> list = codeItemDao.getList(new String[] {"codemap.code", "itemValue" }, new Object[] {
-					"recordType", recordType});// 预约类型
-			Record record = new Record();
-			record.put("commodityId", list.get(0).getItemCaption());
-			record.put("commodityName", list.get(0).getItemCaption());
-			recordList.add(record);
 		}
 		return recordList;
 	}
