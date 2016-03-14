@@ -90,7 +90,7 @@
 				var lfName=$("#fkcodeName").val();
 				var lfTel=$("#fkcodeTelephone").val();
 				var visiteDate=$("#fkcodeDate").val();
-				if(recordType == null||recordType==""){
+				if(recordMemberId == null||recordMemberId==""){
 					alert("请选择参观项目");
 					return;
 				}
@@ -98,6 +98,15 @@
 					alert("请填写来访日期");
 					return;
 				}
+				if(lfTel !=null&& lfTel!=""){
+					 if(isMobil(lfTel)){
+							
+						}else{
+							alert("手机号格式不正确！");
+							return false;
+						}
+				}
+               
 				var params = ['visiteDate='+visiteDate,'recordType='+recordType,'recordMemberId='+recordMemberId];
 				var serviceURL = baseUrl+"reservationRecordManager/saveReservationRecord.json";
 				//公共方法
@@ -109,6 +118,7 @@
 					success:function(result){
 						if(result&&result.record){
 							alert("预约成功");
+					//		window.location="/grzx/grzx8.html";
 							//$(".bg-tanc.m2").show();
 							$("#fkcodeDate").val('');
 							$("#fkcodeTime").val('');
@@ -118,6 +128,13 @@
 						}
 					}
 				});
+				
+				//校验手机号格式
+				function isMobil(s) {
+				    	var patrn = /^(13[0-9]{9})|(14[0-9])|(18[0-9])|(15[0-9][0-9]{8})$/;
+				   		if (!patrn.exec(s)) return false
+				   	 	return true
+					}
 				
 			});
 		})
