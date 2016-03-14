@@ -42,7 +42,7 @@ public interface PublicutilitiesmanagerResoManager extends BaseManager{
 	
 	public PagerRecords getPagerPublicCommoditys(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
-			Collection<Order> orders) throws BusException;
+			Collection<Order> orders,String genreCode) throws BusException;
     /**
      * 保存并返回对象
      */
