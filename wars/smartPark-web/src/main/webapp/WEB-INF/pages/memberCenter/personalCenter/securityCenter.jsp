@@ -54,7 +54,7 @@
 						<tr>
 							<td>新手机号码</td>
 							<td>
-								<input type="text" style="width:200px;"> <a href="javascript:;" class="ml15 open-tanc" style="padding:0px 25px;">获取验证码</a>
+								<input type="text" id="memberPhoneNumber" style="width:200px;"> <a href="javascript:;" class="ml15 open-tanc" style="padding:0px 25px;">获取验证码</a>
 							</td>
 						</tr>
 						<tr>
@@ -63,7 +63,7 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-								<input type="submit" value="修改" class="hhf-submit" style="height:36px; margin-left:100px" />
+								<input type="submit" value="修改" class="hhf-submit changePhoneNumber" style="height:36px; margin-left:100px" />
 							</td>
 						</tr>
 					</table>
@@ -74,6 +74,7 @@
 	<!--***bottom end****************************************-->
 	<script type="text/javascript">
 		$(function(){
+			//修改密码
 			$(".changePassword").click(function(){
 				var oldPassword=$("#oldPassword").val();
 				var password=$("#password").val();
@@ -91,6 +92,24 @@
 					}
 				});
 			});
+			
+			//修改手机号
+			$(".changePhoneNumber").click(function(){
+				var memberPhoneNumber=$("#memberPhoneNumber").val();
+				var params =['memberPhoneNumber='+memberPhoneNumber];
+				$.youi.ajaxUtils.ajax({
+					url:'/smartPark-web/esb/web/memberInformationManager/updatePhoneNumber.json',
+					data:params.join('&'),
+					success:function(result){
+						alert("修改成功！");
+						location.reload();
+					},
+					error:function(jqXHR, textStatus, errorThrown){
+						alert(jqXHR);
+					}
+				});
+				
+			});	
 		});	
 	</script>
 </body>
