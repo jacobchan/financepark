@@ -35,7 +35,7 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
     /**
      * 查询列表
      */
-    //@EsbServiceMapping
+    @EsbServiceMapping
     public List<PurchasingmanagerGenre> getPurchasingmanagerGenres() throws BusException{
     	return purchasingmanagerGenreDao.getAll();
     }
@@ -193,6 +193,16 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
 	public List<PurchasingmanagerGenre> getCommodityGenreList() throws BusException {
 		List<PurchasingmanagerGenre> list = new ArrayList<PurchasingmanagerGenre>();
 		list = purchasingmanagerGenreDao.getCommodityGenreList();
+		return list;
+	}
+	/**
+	 * 获取IT服务的所有字类别列表
+	 */
+	@Override
+	@EsbServiceMapping
+	public List<PurchasingmanagerGenre> getITSubGenreList(@ServiceParam(name="userId",pubProperty="userId") String userId)
+			throws BusException {
+		List<PurchasingmanagerGenre> list = purchasingmanagerGenreDao.getList("purchasingmanagerGenre.genreCode", "06");
 		return list;
 	}
 }

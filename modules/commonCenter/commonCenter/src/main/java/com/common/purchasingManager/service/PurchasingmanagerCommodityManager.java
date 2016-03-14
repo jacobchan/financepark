@@ -36,19 +36,6 @@ public interface PurchasingmanagerCommodityManager extends BaseManager{
 	public PagerRecords getPagerPurchasingmanagerCommoditys(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders) throws BusException;
-	
-	/**
-	 * 分页查询属于公共资源的商品
-	 * @param pager
-	 * @param conditions
-	 * @param orders
-	 * @return
-	 * @throws BusException
-	 */
-	public PagerRecords getPagerPublicCommoditys(Pager pager,//分页条件
-			Collection<Condition> conditions,//查询条件
-			Collection<Order> orders) throws BusException;
-	
     /**
      * 保存并返回对象
      */
@@ -87,4 +74,11 @@ public interface PurchasingmanagerCommodityManager extends BaseManager{
      * @param genreId:商品类别ID
      */
     public List<PurchasingmanagerCommodity> getCommodityRecordsByGenreId(String genreId) throws BusException;
+    /**
+     * 获取工商变更类别的所有商品列表
+     * @param userId
+     * @return
+     * @throws BusException
+     */
+    public List<PurchasingmanagerCommodity> getComChangeCommodityList(String userId) throws BusException;
 }
