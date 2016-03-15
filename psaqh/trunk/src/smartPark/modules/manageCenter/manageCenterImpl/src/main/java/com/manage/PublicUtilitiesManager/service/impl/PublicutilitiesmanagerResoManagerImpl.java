@@ -394,6 +394,15 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 
 		return pagerRecords;
 	}
-
-
+	
+	/**
+	 * 根据商品id获取资源可用状态
+	 */
+	@EsbServiceMapping
+	public List<PublicutilitiesmanagerReso> getPublicutilitiesmanagerResoByCommodityId(@ServiceParam(name="commodityId") String commodityId) throws BusException {
+		String[] parame = new String[]{"commodityId.commodityId"};
+		Object[] objval = new Object[]{commodityId};
+		List<PublicutilitiesmanagerReso> list = publicutilitiesmanagerResoDao.getList(parame, objval);
+		return list;
+	}
 }
