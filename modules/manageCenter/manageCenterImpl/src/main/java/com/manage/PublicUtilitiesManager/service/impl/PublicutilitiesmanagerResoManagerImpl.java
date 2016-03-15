@@ -369,21 +369,21 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 					conditionE.add(ConditionUtils.getCondition("purchasingmanagerGenreProperty.genrePropertyId", Condition.EQUALS, genreProperty.getGenrePropertyId()));
 					conditionE.add(ConditionUtils.getCondition("commodity.commodityId", Condition.EQUALS, pc.getCommodityId()));
 					pceList=purchasingmanagerCommodityExtendManager.getPurchasingmanagerCommodityExtends(conditionE, null);
-					record.put("dwValue",pceList.size()>0?pceList.get(0).getCommodityExtendContent():null);//商品属性：档位
+					record.put("dwValue",pceList.size()>0?pceList.get(0).getCommodityExtendContent():"");//商品属性：档位
 				}else if("zw".equals(genreProperty.getGenrePropertyFieldName())){
 					//获取商品扩展属性
 					Collection<Condition> conditionE = new ArrayList<Condition>();
 					conditionE.add(ConditionUtils.getCondition("purchasingmanagerGenreProperty.genrePropertyId", Condition.EQUALS, genreProperty.getGenrePropertyId()));
 					conditionE.add(ConditionUtils.getCondition("commodity.commodityId", Condition.EQUALS, pc.getCommodityId()));
 					pceList=purchasingmanagerCommodityExtendManager.getPurchasingmanagerCommodityExtends(conditionE, null);
-					record.put("zwValue",pceList.size()>0?pceList.get(0).getCommodityExtendContent():null);//商品属性：座位
+					record.put("zwValue",pceList.size()>0?pceList.get(0).getCommodityExtendContent():"");//商品属性：座位
 				}else if("chepai".equals(genreProperty.getGenrePropertyFieldName())){
 					//获取商品扩展属性
 					Collection<Condition> conditionE = new ArrayList<Condition>();
 					conditionE.add(ConditionUtils.getCondition("purchasingmanagerGenreProperty.genrePropertyId", Condition.EQUALS, genreProperty.getGenrePropertyId()));
 					conditionE.add(ConditionUtils.getCondition("commodity.commodityId", Condition.EQUALS, pc.getCommodityId()));
 					pceList=purchasingmanagerCommodityExtendManager.getPurchasingmanagerCommodityExtends(conditionE, null);
-					record.put("cpValue",pceList.size()>0?pceList.get(0).getCommodityExtendContent():null);//商品属性：车牌
+					record.put("cpValue",pceList.size()>0?pceList.get(0).getCommodityExtendContent():"");//商品属性：车牌
 				}
 			}
 			records.add(record);

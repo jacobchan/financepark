@@ -208,36 +208,12 @@
 		function _parseRecords(record){
 			var imageUrl="/filestore/";
 			for(var i=0;i<record.length;i++){
-				if(record[i].dwValue != null && record[i].zwValue != null){
 					var html="<li class='clearfix'><div class='fl'><img src='"+imageUrl+record[i].commodityImage+"' height='205' width='285'></div>"+
-					"<div class='fl ml30' style='width:535px'><a href='roomxq.html?id="+record[i].commodityId+"' class='span_bold f20'>"+record[i].commodityTitle+"</a><div class='mt20 mb20'><div class='res_tip'>"+record[i].dwValue+"</div><div class='res_tip'>"+record[i].zwValue+"</div></div>"+
+					"<div class='fl ml30' style='width:535px'><a href='roomxq.html?id="+record[i].commodityId+"' class='span_bold f20'>"+record[i].commodityTitle+"</a><div class='mt20 mb20'><div class='res_tip'>"+record[i].dwValue+"</div><div class='res_tip'>"+record[i].zwValue+"</div><div class='res_tip'>"+record[i].cpValue+"</div></div>"+
 					"<div style='height:55px'>"+record[i].commodityDescribe+"</div><div class='mt30'><img class='mr10' src='../styles/images/company/res_icon.png'/><span class='vm pr20'>"+record[i].merchantLinkman+"</span>"+
 					"<img class='mr10' src='../styles/images/company/res_ico.png'/><span class='vm'>联系电话："+record[i].merchantLinkmanPhone+"</span><div class='jcbg f20 fr'>"+record[i].commodityPrice+"元/小时</div>"+
 					"</div></div></li>";
 					 $("#carfix").append(html);
-				}else if(record[i].dwValue != null && record[i].zwValue == null){
-					var html="<li class='clearfix'><div class='fl'><img src='"+imageUrl+record[i].commodityImage+"' height='205' width='285'></div>"+
-					"<div class='fl ml30' style='width:535px'><a href='roomxq.html?id="+record[i].commodityId+"' class='span_bold f20'>"+record[i].commodityTitle+"</a><div class='mt20 mb20'><div class='res_tip'>"+record[i].dwValue+"</div></div>"+
-					"<div style='height:55px'>"+record[i].commodityDescribe+"</div><div class='mt30'><img class='mr10' src='../styles/images/company/res_icon.png'/><span class='vm pr20'>"+record[i].merchantLinkman+"</span>"+
-					"<img class='mr10' src='../styles/images/company/res_ico.png'/><span class='vm'>联系电话："+record[i].merchantLinkmanPhone+"</span><div class='jcbg f20 fr'>"+record[i].commodityPrice+"元/小时</div>"+
-					"</div></div></li>";
-					 $("#carfix").append(html);
-				}else if(record[i].dwValue == null && record[i].zwValue != null){
-					var html="<li class='clearfix'><div class='fl'><img src='"+imageUrl+record[i].commodityImage+"' height='205' width='285'></div>"+
-					"<div class='fl ml30' style='width:535px'><a href='roomxq.html?id="+record[i].commodityId+"' class='span_bold f20'>"+record[i].commodityTitle+"</a><div class='mt20 mb20'><div class='res_tip'>"+record[i].zwValue+"</div></div>"+
-					"<div style='height:55px'>"+record[i].commodityDescribe+"</div><div class='mt30'><img class='mr10' src='../styles/images/company/res_icon.png'/><span class='vm pr20'>"+record[i].merchantLinkman+"</span>"+
-					"<img class='mr10' src='../styles/images/company/res_ico.png'/><span class='vm'>联系电话："+record[i].merchantLinkmanPhone+"</span><div class='jcbg f20 fr'>"+record[i].commodityPrice+"元/小时</div>"+
-					"</div></div></li>";
-					 $("#carfix").append(html);
-				}else{
-					var html="<li class='clearfix'><div class='fl'><img src='"+imageUrl+record[i].commodityImage+"' height='205' width='285'></div>"+
-					"<div class='fl ml30' style='width:535px'><a href='roomxq.html?id="+record[i].commodityId+"' class='span_bold f20'>"+record[i].commodityTitle+"</a><div class='mt20 mb20'>"+
-					"<div style='height:55px'>"+record[i].commodityDescribe+"</div><div class='mt30'><img class='mr10' src='../styles/images/company/res_icon.png'/><span class='vm pr20'>"+record[i].merchantLinkman+"</span>"+
-					"<img class='mr10' src='../styles/images/company/res_ico.png'/><span class='vm'>联系电话："+record[i].merchantLinkmanPhone+"</span><div class='jcbg f20 fr'>"+record[i].commodityPrice+"元/小时</div>"+
-					"</div></div></li>";
-					 $("#carfix").append(html);
-				}
-				
 			}
 		};
 		

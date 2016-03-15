@@ -313,7 +313,7 @@ width:32px;height:32px;position:absolute;top:50%;right:0;margin-top:-16px;}
 .ri_ul .active{color:#FF6715;}
 .res_left{float:left;width:875px;border:1px #ECEBEB solid;}
 .res_left>ul>li{padding:25px 10px;border-bottom:1px #ECEBEB solid;}.res_left>ul>li:last-child{border:0}
-.res_tip{border:1px #FF6155 solid;padding:0px 8px;color:#FF6155;display:inline-block;margin-right:15px}
+.res_tip{padding:0px 8px;color:#FF6155;display:inline-block;margin-right:15px}
 .jcbg{background:url(../images/company/jcbg.png) no-repeat;width:145px;height:33px;color:#fff;text-align:center;line-height:33px}
 .paging{display:inline-block;padding:10px 15px;color:#333;border:1px #ECEBEB solid; margin-right:15px;cursor:pointer}
 .paging_m{padding:10px 5px; margin-right:40px}.paging.active{color:#fff;background:#FF6715;border:0;}
