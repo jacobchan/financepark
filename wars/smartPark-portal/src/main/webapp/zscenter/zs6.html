@@ -137,6 +137,16 @@
 					}
 				
 			});
+			$("#lf_time").on("click",function(){
+	            $(this).next(".time-nav").toggle();
+	        });
+			$(".time-nav").on("click","li",function(){
+	            $(this).addClass("selected").siblings().removeClass("selected");
+	            var selecttext=$(this).text();
+	            var val=$(this).attr("data-val");
+	            $("#lf_time").val(selecttext).attr("data-val",val); 
+	            $(this).parents(".time-nav").hide();
+	        });	
 		})
 	</script>
 </head>
@@ -145,23 +155,25 @@
 	<div id="youi_page_header" class="youi-page-header clearfix"></div>
 	<!--***top end****************************************-->
 	<!--banner---->
-	<div class="slideBox">
-		<ul class="clearfix  banner-nav">
-	    	<li><a href="javascript:;"><img src="../styles/images/zs/banner4.jpg"/></a></li>
-	        <li><a href="javascript:;"><img src="../styles/images/index/banner1.jpg"/></a></li>
-	        <li><a href="javascript:;"><img src="../styles/images/zs/banner4.jpg"/></a></li>
-	        <li><a href="javascript:;"><img src="../styles/images/index/banner1.jpg"/></a></li>
-	        <li><a href="javascript:;"><img src="../styles/images/zs/banner4.jpg"/></a></li>
-	        <li><a href="javascript:;"><img src="../styles/images/index/banner1.jpg"/></a></li>
-	    </ul>
-	    <div class="pagtion">
-	    	<div class="pt1"></div>
-	        <div></div>
-	        <div></div>
-	        <div></div>
-	        <div></div>
-	        <div></div>
-	    </div>
+	<div class="slide-container"> 
+		<div class="slideBox">
+			<ul class="clearfix  banner-nav">
+		    	<li><a href="javascript:;"><img src="../styles/images/zs/banner4.jpg"/></a></li>
+		        <li><a href="javascript:;"><img src="../styles/images/index/banner1.jpg"/></a></li>
+		        <li><a href="javascript:;"><img src="../styles/images/zs/banner4.jpg"/></a></li>
+		        <li><a href="javascript:;"><img src="../styles/images/index/banner1.jpg"/></a></li>
+		        <li><a href="javascript:;"><img src="../styles/images/zs/banner4.jpg"/></a></li>
+		        <li><a href="javascript:;"><img src="../styles/images/index/banner1.jpg"/></a></li>
+		    </ul>
+		    <div class="pagtion">
+		    	<div class="pt1"></div>
+		        <div></div>
+		        <div></div>
+		        <div></div>
+		        <div></div>
+		        <div></div>
+		    </div>
+		</div>
 	    <form class="visit_form">
 	        <div class="space-con">
 				<div class="sc-w960">
@@ -177,10 +189,34 @@
 								<li>富春硅谷--创立方3</li> -->
 							</ul>
 						</div>
-						<input type="text" placeholder="来访日期" id="fkcodeDate">
-						<input type="text" placeholder="来访时间" id="fkcodeTime">
-						<input type="text" placeholder="姓名" style="width:90px" id="fkcodeName">
-						<input type="text" placeholder="手机号码" id="fkcodeTelephone">
+						<div class="fl ml15"><input type="text" placeholder="来访日期" id="fkcodeDate"></div>
+						<style type="text/css">
+			                .select-time .time-nav{width: 100%;display: none;position: absolute;top: 40px;left: 0px;border: 1px solid #FB7730;z-index: 90;}
+			                .select-time .time-nav li{width: 100%;line-height: 20px;padding: 5px 10px;height: 30px;background: #fff;}
+			                .time-nav li{padding:10px;width:230px;height:40px;background:#fff;cursor:pointer;background:#fff}
+			                .time-nav li:hover{background:#FB7730;color:#fff;}
+			                .time-nav li.selected{background:#ccc;color:#fff;}
+			            </style>
+						<div class="fl ml15 select-time pr">
+			            	<input type="text" id="lf_time" placeholder="来访时间"/>
+			                 <div class="time-nav">
+			                    <ul>
+			                        <li>08:00</li>
+			                        <li>09:00</li>
+			                        <li>10:00</li>
+			                        <li>11:00</li>
+			                        <li>12:00</li>
+			                        <li>13:00</li>
+			                        <li>14:00</li>
+			                        <li>15:00</li>
+			                        <li>16:00</li>
+			                        <li>17:00</li>
+			                        <li>18:00</li>
+			                    </ul>
+			                </div>
+			            </div>
+						<div class="fl ml15"><input type="text" placeholder="姓名" style="width:90px" id="fkcodeName"></div>
+						<div class="fl ml15"><input type="text" placeholder="手机号码" id="fkcodeTelephone"></div>
 						<input type="button" value="立即预约" class="now-btn">
 					</div>
 				</div>
