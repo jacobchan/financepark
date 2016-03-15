@@ -146,10 +146,13 @@ function GetRequest() {
 		var Request = new Object();
 		Request = GetRequest();
 		var commodityId = Request['id'];
-		var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommoditys.json?genreCode=0302&commodityId="+commodityId;
+		var genreCode='0302';
+		var params = ['commodityId='+commodityId,'genreCode='+genreCode];
+		var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommoditys.json";
 		//	var serviceURL = "http://localhost:8088/smartPark-web/esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommodity.json?commodityId="+commodityId;
 		$.youi.ajaxUtils.ajax({
 			url : serviceURL,
+			data:params.join('&'),
 			jsonp : 'data:jsonp',
 			dataType : 'jsonp',
 			success : function(results) {
