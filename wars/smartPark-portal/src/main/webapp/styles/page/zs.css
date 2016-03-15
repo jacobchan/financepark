@@ -240,9 +240,11 @@ a.add-btn:hover{background: #ffc000;border:1px solid #ffc000;color: #fff;}
 .space-centent table.sc-comp td{padding: 0px;}
 .space-centent table.sc-comp td div{border:1px solid #ecebeb;padding: 25px; width:270px;margin-bottom: 40px;text-align: center;}
 
+.slide-container{width: 100%;height: 620px;position: relative;}
+
 
 /**轮播图**/
-.slideBox{position:relative;height: 640px;overflow: hidden;}
+.slideBox{position:relative;height: 100%;overflow:hidden;}
 .slideBox .banner-nav{width: 10000%;height: 100%}
 .slideBox .banner-nav>li{width: 100%;float: left;display: inline-block;height: 100%;}
 .slideBox .banner-nav>li img{width:100%;height:100%;}
@@ -253,10 +255,10 @@ a.add-btn:hover{background: #ffc000;border:1px solid #ffc000;color: #fff;}
 /**轮播图里的表单**/
 .space-con .sc-w960{width: 960px;padding: 20px;border-radius: 5px;background: rgba(0,0,0,0.5);position: absolute;bottom: 100px;left: 50%;margin-left: -465px;}
 .space-con .sc-w960 .sw-h3{background: url(../images/zs/cicle-bd.png) no-repeat left center;line-height: 30px;color: #fff;padding-left: 30px;font-size: 18px;margin-bottom: 10px;}
-.input-con input[type="text"]{padding: 9px 0px;line-height: 20px;padding-left: 10px;width: 125px;border:1px solid #fff;margin-right: 10px;height: 40px;}
+.input-con input[type="text"]{padding: 9px 0px;line-height: 20px;padding-left: 10px;width: 125px;border:1px solid #fff;height: 40px;}
 .space-con .sc-w960 .input-con .now-btn{width: 140px;background: #ffc000;font-weight: bold;font-size: 18px;color: #705501;border:1px solid #ffc000;float: right;height: 40px;}
 .space-con .sc-w960 .input-con .now-btn:hover{background: #fae000;border:1px solid #fae000;}
-.space-con .sc-w960 .input-con .select-text{position: relative;width: 232px;float: left;margin-right: 10px;background: #fff;}
+.space-con .sc-w960 .input-con .select-text{position: relative;width: 232px;float: left;background: #fff;}
 .space-con .sc-w960 .input-con .ic-select{cursor: pointer; width: 100%;height: 40px;background: url(../images/zs/input-select.png) no-repeat right top;line-height: 40px;padding-left: 10px;}
 .space-con .sc-w960 .input-con .ic-select p{padding-right: 35px;}
 .space-con .sc-w960 .input-con .select-nav{z-index: 2; position: absolute;left: 0px;top: 40px;width: 100%;border:1px solid #ecebeb;border-top: 0px;display: none;}
