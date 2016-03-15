@@ -159,6 +159,7 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	public void saveReister(@ServiceParam(name="memberPassword") String passwd,
 			@ServiceParam(name="memberPhoneNumber") String mobile)
 			throws BusException {
+    	System.out.println("this is no error");
 			//新增用户
 			//判断用户密码是否准确
 			//if (!passwd.equals(repasswd))
