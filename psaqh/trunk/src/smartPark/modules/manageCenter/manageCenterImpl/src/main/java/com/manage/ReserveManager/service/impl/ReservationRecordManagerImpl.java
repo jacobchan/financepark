@@ -4,15 +4,14 @@
 package com.manage.ReserveManager.service.impl;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.common.BuildingBaseManager.dao.BbmRoomDao;
-import com.common.BuildingBaseManager.entity.BbmRoom;
 import com.common.BuildingBaseManager.service.BbmRoomManager;
 import com.common.purchasingManager.dao.PurchasingmanagerCommodityDao;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
@@ -28,15 +27,17 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.PubCondition;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
-import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
-import com.manage.ReserveManager.entity.ReservationRecord;
 import com.manage.ReserveManager.dao.ReservationRecordDao;
+import com.manage.ReserveManager.entity.ReservationRecord;
 import com.manage.ReserveManager.service.ReservationRecordManager;
 
 @Service("reservationRecordManager")
@@ -175,15 +176,16 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 	}
 	
     /**
-     * 根据众创空间下的商品类别 genreCode=04:众创空间
+     * 根据众创空间下的商品类别下所有的商品 genreCode=04:众创空间
      */
 	@EsbServiceMapping
-	public List<PurchasingmanagerCommodity> getCommodityByType(@ServiceParam(name="recordType") String recordType) throws BusException{
-		List<Record> recordList=new ArrayList<Record>();
+	public List<PurchasingmanagerCommodity> getCommodityByGenreType(@ServiceParam(name="genreCode") String genreCode) throws BusException{
+		List<PurchasingmanagerCommodity> recordList=new ArrayList<PurchasingmanagerCommodity>();
 		Collection<Condition> conditions = new ArrayList<Condition>();
 		Collection<Condition> condition = new ArrayList<Condition>();
+		Collection<Condition> conditionC = new ArrayList<Condition>();
 		
-		if(recordType.equals("04")){//04:众创空间，查询商品表基础信息
+		if(genreCode.equals("04")){//04:众创空间，查询商品表基础信息
 			conditions.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS, "04"));
 			// 查询属于众创空间的商品：genreCode=04
 			List<PurchasingmanagerGenre> purchasingmanagerGenreList=purchasingmanagerGenreManager.getPurchasingmanagerGenres(conditions, null);
@@ -196,10 +198,10 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 				condition.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId",Condition.EQUALS,genreId));
 				List<PurchasingmanagerGenre> pgList = purchasingmanagerGenreManager.getPurchasingmanagerGenres(condition, null);
 				for(PurchasingmanagerGenre pg:pgList){
-					Record record = new Record();
-					record.put("itemValue", pg.getGenreId());
-					record.put("itemName", pg.getGenreName());
-					recordList.add(record);
+					String grId=pg.getGenreId();
+					conditionC.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId",Condition.EQUALS,grId));
+					recordList = purchasingmanagerCommodityManager.getPurchasingmanagerCommoditys(conditionC, null);
+					
 				}
 			}
 		}
