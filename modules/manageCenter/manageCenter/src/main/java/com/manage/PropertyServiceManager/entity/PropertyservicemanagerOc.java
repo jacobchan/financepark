@@ -8,6 +8,7 @@ import javax.persistence.*;
 import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberAdrManager.entity.MemberadrAddress;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: 一卡通办理申请记录
@@ -56,10 +57,10 @@ public class PropertyservicemanagerOc implements Domain{
 	@Column(name = "OC_DATE_")
 	@Length(max=20)
 	private String ocDate;//一卡通预约时间
-
-	@Column(name = "OC_ADDREE_")
-	@Length(max=36)
-	private String ocAddree;//选择地址
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "OC_ADDREE_")
+	private MemberadrAddress ocAddree;//选择地址
 
 	@Column(name = "CREATE_USER_")
 	@Length(max=36)
@@ -80,6 +81,25 @@ public class PropertyservicemanagerOc implements Domain{
 	@Length(max=12)
 	private String bindStatus;//绑定状态
 	
+	@Column(name = "APPLY_TIME_")
+	private String applyTime;//申请时间
+	
+	public MemberadrAddress getOcAddree() {
+		return ocAddree;
+	}
+
+	public void setOcAddree(MemberadrAddress ocAddree) {
+		this.ocAddree = ocAddree;
+	}
+
+	public String getApplyTime() {
+		return applyTime;
+	}
+
+	public void setApplyTime(String applyTime) {
+		this.applyTime = applyTime;
+	}
+
 	public String getOcCode() {
 		return ocCode;
 	}
@@ -144,13 +164,7 @@ public class PropertyservicemanagerOc implements Domain{
 	public void setOcDate(String ocDate){
 		this.ocDate = ocDate;
 	}
-	public String getOcAddree(){
-		return this.ocAddree;
-	}
 	
-	public void setOcAddree(String ocAddree){
-		this.ocAddree = ocAddree;
-	}
 	public String getCreateUser(){
 		return this.createUser;
 	}
@@ -195,6 +209,10 @@ public class PropertyservicemanagerOc implements Domain{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
+				+ ((applyTime == null) ? 0 : applyTime.hashCode());
+		result = prime * result
+				+ ((bindStatus == null) ? 0 : bindStatus.hashCode());
+		result = prime * result
 				+ ((createTime == null) ? 0 : createTime.hashCode());
 		result = prime * result
 				+ ((createUser == null) ? 0 : createUser.hashCode());
@@ -229,6 +247,16 @@ public class PropertyservicemanagerOc implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		PropertyservicemanagerOc other = (PropertyservicemanagerOc) obj;
+		if (applyTime == null) {
+			if (other.applyTime != null)
+				return false;
+		} else if (!applyTime.equals(other.applyTime))
+			return false;
+		if (bindStatus == null) {
+			if (other.bindStatus != null)
+				return false;
+		} else if (!bindStatus.equals(other.bindStatus))
+			return false;
 		if (createTime == null) {
 			if (other.createTime != null)
 				return false;

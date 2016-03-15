@@ -22,9 +22,11 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
+import com.gsoft.utils.HttpSenderMsg;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerOc;
 import com.manage.ActivityManager.entity.ActivityApply;
 import com.manage.ActivityManager.entity.ActivityApplylist;
@@ -115,8 +117,19 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
     		}
     	}else{//新增
     		//生成一卡通编号
-    		o.setOcCode(BizCodeUtil.getInstance().getBizCodeDate("OC"));
-    		return propertyservicemanagerOcDao.save(o);
+    		PropertyservicemanagerOc saveOc = null;
+    		o.setOcCode(BizCodeUtil.getInstance().getBizCodeDate("WYOC"));
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setApplyTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		saveOc = propertyservicemanagerOcDao.save(o);
+    		//发送短信给联系人
+    		try {
+    			HttpSenderMsg.sendMsg(saveOc.getOcAddree().getAddressPhone(), "您的一卡通申请已成功,申请单号："+saveOc.getOcCode()+"，请等待办卡完成！");
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}
+    		
+    		return saveOc;
     	}
     
     }

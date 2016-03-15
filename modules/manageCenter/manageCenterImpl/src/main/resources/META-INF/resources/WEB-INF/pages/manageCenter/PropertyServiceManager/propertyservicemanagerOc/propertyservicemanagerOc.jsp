@@ -18,13 +18,15 @@
 		</youi:fieldLayout>
 		
 		<youi:gridCol property="memberId"  caption="会员姓名" width="10%" renderer="renderer_memberId"/>
-		<youi:gridCol property="ocCode"  caption="一卡通申请编号" width="15%"/>
-		<youi:gridCol property="ocComp"  caption="所属企业名称" width="15%"/>
-		<youi:gridCol property="ocNumber"  caption="一卡通号码" width="15%"/>
-		<youi:gridCol property="ocDate"  caption="一卡通预约时间" width="12%"/>
-		<youi:gridCol property="ocAddree"  caption="选择地址" width="11%"/>
-		<youi:gridCol property="ocWay"  caption="一卡通办理方式"  convert="oc_way"  width="11%"/>
-		<youi:gridCol property="ocStatus"  caption="一卡通预约状态" convert="oc_status" width="11%" />
+		<youi:gridCol property="ocCode"  caption="一卡通申请编号" width="12%"/>
+		<youi:gridCol property="ocComp"  caption="所属企业名称" width="12%"/>
+		<youi:gridCol property="ocNumber"  caption="一卡通号码" width="12%"/>
+		<youi:gridCol property="ocDate"  caption="一卡通预约时间" width="10%"/>
+		<youi:gridCol property="ocAddree.addressName"  caption="联系人" width="10%"/>
+		<youi:gridCol property="ocAddree.addressPhone"  caption="联系人电话" width="10%"/>
+		<youi:gridCol property="ocAddree.addressDetail"  caption="联系人地址" width="10%"/>
+		<youi:gridCol property="ocWay"  caption="一卡通办理方式"  convert="oc_way"  width="7%"/>
+		<youi:gridCol property="ocStatus"  caption="一卡通预约状态" convert="oc_status" width="7%" />
 		<%-- <youi:gridCol property="ocRemark"  caption="一卡通其他说明" /> --%>
 		
 		<youi:button name="over" caption="处理预约" icon="edit" active="1"/>
