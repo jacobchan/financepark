@@ -335,6 +335,7 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 		
 		List<Record> records = new ArrayList<Record>();
 		// 查询公共资源下包含的商品
+		conditions.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId",Condition.EQUALS,genreId));
 		PagerRecords pagerRecords = purchasingmanagerCommodityManager.getPagerPurchasingmanagerCommoditys(pager, conditions, orders);
 		@SuppressWarnings("unchecked")
 		List<PurchasingmanagerCommodity> pcList=(List<PurchasingmanagerCommodity>) pagerRecords.getRecords();

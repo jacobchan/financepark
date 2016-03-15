@@ -6,6 +6,7 @@ package com.manage.ReserveManager.service;
 import java.util.Collection;
 import java.util.List;
 
+import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -105,11 +106,11 @@ public interface ReservationRecordManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public List<ReservationRecord> getReservationRecordsforpage(String userId) throws BusException;	 
-	 /**
-	  * 下拉框获取数据
-	  * @return
-	  * @throws BusException
-	  */
-	 public List<Record> getRecordsByMulList() throws BusException;
+	 /* 
+	 * @param genreCode 商品类别
+	 * @return
+	 * @throws BusException
+	 */
+	 public List<PurchasingmanagerCommodity> getCommodityByGenreType(String genreCode) throws BusException;
 
 }
