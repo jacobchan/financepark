@@ -69,9 +69,11 @@ public class CommonController {
 		    	File path = new File(root+"upload/"+DateUtils.getToday("yyyyMM"));
 		    	
 		        //原文件名存到平台fileStore表里
-//		    	 FileStore fileStore = fileStoreManager.storeFile(multipartFile.getOriginalFilename(), multipartFile.getInputStream());
-//		    	 fileStore.setFilePath(fileName);
-//		    	 fileStoreDao.save(fileStore);
+
+		    	 FileStore fileStore = fileStoreManager.storeFile(multipartFile.getOriginalFilename(), multipartFile.getInputStream(), null, null);
+		    	 FileStore fs=fileStoreManager.getFileStoreByPath(fileStore.getFilePath());
+				 fs.setFilePath(fileName);
+				 fileStoreDao.save(fs);
 		    	 if(!path.exists()){
 				  path.mkdirs();
 		    	}
@@ -91,9 +93,11 @@ public class CommonController {
 					  File path = new File(root+"upload/"+DateUtils.getToday("yyyyMM"));
 					 
 					  //原文件名存到平台fileStore表里
-//					  FileStore fileStore = fileStoreManager.storeFile(((DiskFileItem)item).getName(), ((DiskFileItem)item).getInputStream());
-//					  fileStore.setFilePath(fileName);
-//					  fileStoreDao.save(fileStore);
+					  FileStore fileStore = fileStoreManager.storeFile(((DiskFileItem)item).getName(), ((DiskFileItem)item).getInputStream(), null, null);
+					  FileStore fs=fileStoreManager.getFileStoreByPath(fileStore.getFilePath());
+					  fs.setFilePath(fileName);
+					  fileStoreDao.save(fs);
+
 					  if(!path.exists()){
 						  path.mkdirs();
 					  }
