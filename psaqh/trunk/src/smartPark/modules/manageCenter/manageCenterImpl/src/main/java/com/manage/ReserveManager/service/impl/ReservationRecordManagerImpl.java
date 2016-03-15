@@ -183,7 +183,6 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 		List<PurchasingmanagerCommodity> recordList=new ArrayList<PurchasingmanagerCommodity>();
 		Collection<Condition> conditions = new ArrayList<Condition>();
 		Collection<Condition> condition = new ArrayList<Condition>();
-		Collection<Condition> conditionC = new ArrayList<Condition>();
 		
 		if(genreCode.equals("04")){//04:众创空间，查询商品表基础信息
 			conditions.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS, "04"));
@@ -199,6 +198,7 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 				List<PurchasingmanagerGenre> pgList = purchasingmanagerGenreManager.getPurchasingmanagerGenres(condition, null);
 				for(PurchasingmanagerGenre pg:pgList){
 					String grId=pg.getGenreId();
+					Collection<Condition> conditionC = new ArrayList<Condition>();
 					conditionC.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId",Condition.EQUALS,grId));
 					List<PurchasingmanagerCommodity> pcList = purchasingmanagerCommodityManager.getPurchasingmanagerCommoditys(conditionC, null);
 					for(PurchasingmanagerCommodity pc:pcList){
