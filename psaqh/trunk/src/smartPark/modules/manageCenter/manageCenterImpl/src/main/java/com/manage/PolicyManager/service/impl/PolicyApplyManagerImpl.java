@@ -26,6 +26,7 @@ import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.utils.HttpSenderMsg;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
@@ -99,6 +100,7 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
     	if(StringUtils.isEmpty(enName)){//如果得到的企业名称为空
     		throw new BusException("非企业会员不能提交申请") ;
     	}
+    	PolicyApply policyApply = null ;
     	NmIssuenews nmIssuenews = o.getNmIssuenews() ;//得到政策新闻
     	if(nmIssuenews != null){
     		String nmIssuenewsId = nmIssuenews.getPolicyId() ;//得到政策新闻ID
@@ -108,9 +110,16 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
     			String nmIssuetypeId = nmIssuetype.getIssueTypeId() ;//得到政策类型的ID
     			NmIssueflow nmIssueflow = nmIssueflowManager.getStartFlow(nmIssuetypeId) ;//通过政策类型ID得到初始流程
     			o.setNmIssueflow(nmIssueflow);
+    			policyApply = policyApplyDao.save(o) ;
+    			try {
+    				HttpSenderMsg.sendMsg(policyApply.getPolicyApplyContactTel(), "尊敬的 "+policyApply.getPolicyApplyContactPeople()
+    						+" 用户，您已提交 "+policyApply.getNmIssuenews().getPolicyCaption()+" 的申请，当前处理流程为："+nmIssueflow.getIssueFlowCStatus()+",请耐心等待！");
+    			} catch (Exception e) {
+    				e.printStackTrace();
+    			}
     		}
     	}
-    	return policyApplyDao.save(o);
+    	return policyApply;
     }
     
     /**
@@ -128,7 +137,20 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
     	if(! flag){
     		NmIssueflow temp = nmIssueflowManager.getNextFlow(nmIssuetypeId, issueFlowId) ;
     		policyApply.setNmIssueflow(temp);
+    		try {
+    			HttpSenderMsg.sendMsg(policyApply.getPolicyApplyContactTel(), "尊敬的 "+policyApply.getPolicyApplyContactPeople()
+						+"用户，您申请的"+policyApply.getNmIssuenews().getPolicyCaption()+"的当前处理流程为："+temp.getIssueFlowCStatus()+",请耐心等待！");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
     	}else{
+    		try {
+    			HttpSenderMsg.sendMsg(policyApply.getPolicyApplyContactTel(), "尊敬的 "+policyApply.getPolicyApplyContactPeople()
+						+"用户，您已成功申请"+policyApply.getNmIssuenews().getPolicyCaption()+",谢谢您的支持！");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
     		throw new BusException("当前状态已经是最终状态！") ;
     	}
     	policyApplyDao.save(policyApply) ;
