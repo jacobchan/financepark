@@ -106,11 +106,10 @@ public interface ReservationRecordManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public List<ReservationRecord> getReservationRecordsforpage(String userId) throws BusException;	 
-	 /* 
-	 * @param genreCode 商品类别
-	 * @return
-	 * @throws BusException
-	 */
-	 public List<PurchasingmanagerCommodity> getCommodityByGenreType(String genreCode) throws BusException;
+	 /**
+     * 根据众创空间下的商品类别下所有的商品 
+     * @param genreCode=04:众创空间
+     */
+	public List<PurchasingmanagerCommodity> getCommodityByGenreType(String genreCode) throws BusException;
 
 }
