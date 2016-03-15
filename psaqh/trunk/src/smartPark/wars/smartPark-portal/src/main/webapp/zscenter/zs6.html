@@ -98,6 +98,12 @@
 					alert("请填写来访日期");
 					return;
 				}
+				if(visiteDate !=null && visiteDate!=""){
+					if(visiteTime ==null|| visiteTime==""){
+						alert("请填写来访时间");
+						return;
+					}
+				}
 				if(lfTel !=null&& lfTel!=""){
 					 if(isMobil(lfTel)){
 							
