@@ -4,6 +4,7 @@
 package com.manage.ActivityManager.entity;
 
 import javax.persistence.*;
+
 import org.hibernate.validator.*;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -80,6 +81,10 @@ public class ActivityApply implements Domain{
 	@Column(name = "CREATE_USER_")
 	@Length(max=36)
 	private String createUser;//创建人
+	
+	@Column(name = "ACTIVITY_IMAGE_")
+	@Length(max=100)
+	private String activityImage;//活动图片
 	
 	public String getApplyMaxuser(){
 		return this.applyMaxuser;
@@ -188,7 +193,14 @@ public class ActivityApply implements Domain{
 	}
 	
 	
-	
+	public String getActivityImage() {
+		return activityImage;
+	}
+
+	public void setActivityImage(String activityImage) {
+		this.activityImage = activityImage;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
