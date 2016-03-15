@@ -1166,7 +1166,8 @@ pickerDateRange.prototype.fillDate = function(year, month, index) {
                 }
 
                 if ( isDisabled ){
-                    tdClass = this.mOpts.theme + '_' + this.mOpts.disableGray;
+                    //tdClass = this.mOpts.theme + '_' + this.mOpts.disableGray;
+                	tdClass = "today";
                     deviation = '4';
                 }
 
