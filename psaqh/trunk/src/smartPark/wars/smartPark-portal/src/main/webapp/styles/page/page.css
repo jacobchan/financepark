@@ -493,7 +493,7 @@ background:url(../images/company/ab_ico.png) no-repeat}
 .b1f7{top: 410px;left: 811px;}
 .off{position:absolute;width:44px;height:58px;}.off:hover .hide{display:block;}
 .off_tip1{top:208px;right:308px;background:url(../images/zhyq/l1.png) no-repeat;}
-.off_tip2{top:345px;right:545px;background:url(../images/zhyq/l2.png) no-repeat;}
+.off_tip2{top:345px;right:545px;background:url(../images/zhyq/l2.png) no-repeat;cursor: pointer;}
 .off_tip3{top:208px;right:425px;background:url(../images/zhyq/l3.png) no-repeat;}
 .off_tip4{top:213px;right:585px;background:url(../images/zhyq/l4.png) no-repeat;}
 .off_tip5{top:288px;left:405px;background:url(../images/zhyq/l5.png) no-repeat;}
