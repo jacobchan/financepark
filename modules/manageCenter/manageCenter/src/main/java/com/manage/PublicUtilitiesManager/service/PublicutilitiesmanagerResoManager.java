@@ -31,6 +31,10 @@ public interface PublicutilitiesmanagerResoManager extends BaseManager{
      * 根据主键查询
      */
     public PublicutilitiesmanagerReso getPublicutilitiesmanagerReso(String id) throws BusException;
+    /**
+     * 根据商品id查询
+     */
+    public List<PublicutilitiesmanagerReso> getPublicutilitiesmanagerResoByCommodityId(String commodityId) throws BusException;
 	/**
 	 * 分页查询用户
 	 * @return 分页对象
