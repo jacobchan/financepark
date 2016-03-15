@@ -45,8 +45,30 @@
             <div class="fl ml10">
             	<input type="text" id="lf_date" placeholder="来访日期"/>
             </div>
-            <div class="fl ml10">
+            <style type="text/css">
+                .select-time .time-nav{width: 100%;display: none;position: absolute;top: 40px;left: 0px;border: 1px solid #FB7730;z-index: 90;}
+                .select-time .time-nav li{width: 100%;line-height: 20px;padding: 5px 10px;height: 30px;background: #fff;}
+                .time-nav li{padding:10px;width:230px;height:40px;background:#fff;cursor:pointer;background:#fff}
+                .time-nav li:hover{background:#FB7730;color:#fff;}
+                .time-nav li.selected{background:#ccc;color:#fff;}
+            </style>
+            <div class="fl ml10 select-time pr">
             	<input type="text" id="lf_time" placeholder="来访时间"/>
+                 <div class="time-nav">
+                    <ul>
+                        <li>08:00</li>
+                        <li>09:00</li>
+                        <li>10:00</li>
+                        <li>11:00</li>
+                        <li>12:00</li>
+                        <li>13:00</li>
+                        <li>14:00</li>
+                        <li>15:00</li>
+                        <li>16:00</li>
+                        <li>17:00</li>
+                        <li>18:00</li>
+                    </ul>
+                </div>
             </div>
             <div class="fl ml10">
             	<input type="text" id="lf_name" placeholder="姓名"/>
@@ -627,13 +649,22 @@
 				jsonpSrc:baseUrl+"reservationRecordManager/getRecordsByRecordType.json?recordType="+recordType
 			});
 		});
+        $("#lf_time").on("click",function(){
+            $(this).next(".time-nav").toggle();
+        });
 		$(".select_list").on("click","li",function(){
 			$(this).addClass("selected").siblings().removeClass("selected");
 			var selecttext=$(this).text();
 			var val=$(this).attr("data-val");
 			$(".select_show").text(selecttext).attr("data-val",val); 
 		});
-			
+		$(".time-nav").on("click","li",function(){
+            $(this).addClass("selected").siblings().removeClass("selected");
+            var selecttext=$(this).text();
+            var val=$(this).attr("data-val");
+            $("#lf_time").val(selecttext).attr("data-val",val); 
+            $(this).parents(".time-nav").hide();
+        });	
 		
 		/*slide table*/
 		$(".icon_left").click(function(){
