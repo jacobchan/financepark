@@ -35,17 +35,17 @@
 	<!-- form-政策新闻内容编辑 -->
 	<youi:form dialog="true" caption="政策新闻内容" id="form_nmIssuenews" 
 			action="esb/web/nmIssuenewsManager/saveNmIssuenews.json">
-		<youi:fieldLayout prefix="record" columns="2" labelWidths="100,100">
+		<youi:fieldLayout prefix="record" columns="2" labelWidths="120,120">
 			<youi:fieldHidden property="policyId"  caption="政策ID"/>
-			<youi:fieldText property="policyCaption"  caption="政策名称" column="2" notNull="true"/>
+			<youi:fieldText property="policyCaption"  caption="政策名称"  notNull="true"/>
 			<youi:fieldSelect property="policyType.issueTypeId" caption="发布类型" notNull="true"
 				src="esb/web/nmIssuetypeManager/getNmIssuetypes.json" code="issueTypeId" show="issueTypeCaption"/>
 			<youi:fieldSelect property="nmIssuetempalate.issueTempalateId" caption="发布模板" notNull="true"
-				src="esb/web/nmIssuetempalateManager/getNmIssuetempalates.json" code="issueTempalateId" show="issueTempalateCaption" parents="policyType.issueTypeId" parentsAlias="nmIssuetype.issueTypeId"/>
-			<youi:fieldArea property="policyContent"  caption="政策内容" column="2" rows="4" />
-			<youi:fieldText property="policyCome"  caption="政策发布人"/>
+				src="esb/web/nmIssuetempalateManager/getNmIssuetempalates.json" code="issueTempalateId" show="issueTempalateCaption" />
 			<youi:fieldSelect property="policyStatus"  caption="政策发布状态" convert="policyStatus" notNull="true"/>
+			<youi:fieldText property="policyCome"  caption="政策发布人"/>
 			<youi:fieldCalendar property="policyIssueDate"  caption="政策发布时间"/>
+			<youi:fieldArea property="policyContent"  caption="政策内容" column="2" rows="4" />
 		</youi:fieldLayout>
 	</youi:form>
 	
