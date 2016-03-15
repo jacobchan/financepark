@@ -53,8 +53,8 @@
 							</tr>
 							<tr>
 								<td align="center"  valign="top">地址选择</td>
-								<td colspan="3">
-									<div class="select-address active">
+								<td colspan="3" class="addressList">
+									<!-- <div class="select-address active">
 										<p><span>联系人：李斯李斯</span><span class="ml20">联系电话：1825598541</span></p>
 										<p>园区地址：T4航站楼A302室</p>
 										<em class="s-a-select"></em>
@@ -63,8 +63,8 @@
 										<p><span>联系人：李斯李斯</span><span class="ml20">联系电话：1825598541</span></p>
 										<p>园区地址：T4航站楼A302室</p>
 										<em class="s-a-select"></em>
-									</div>
-									<a href="javascript:;" class="fl mt15 open-tanc"><i class="fa fa-plus-circle mr5"></i>新增地址</a>
+									</div> 
+									<a href="javascript:;"class="fl mt15 open-tanc"><i class="fa fa-plus-circle mr5"></i>新增地址</a> -->
 								</td>
 							</tr>
 							<tr>
@@ -179,17 +179,19 @@
 				dataType:'jsonp',
 				success:function(result){
 					if(result&&result.record){
-							var time = +$('#timer').val();
-							
-							if(time=="" || time.length==0){
+							var addressId = $(".select-address.active")[0].getAttribute("id");
+							var time = $('#timer').val(); 
+						
+							 if(time=="" || time.length==0){
 								alert("请输入预约时间！");
 								return false;
-							}
+							 }
 						
 							var params = ['ocComp='+$("#ocComp").val(),
 										'ocDate='+time,
 										'ocWay=00',
 										'ocStatus=00',
+										'ocAddree.addressId='+addressId,
 										'ocRemark='+$("#ocRemark").val()];
 						
 							var serviceURL = baseUrl+"propertyservicemanagerOcManager/savePropertyservicemanagerOc.json";
@@ -215,6 +217,54 @@
 				});
 			});
 		});
+	</script>
+	
+	<script type="text/javascript">
+		$(function(){
+			$.youi.ajaxUtils.ajax({
+				url:baseUrl +"memberadrAddressManager/getMemAddforpage.json", 
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					if(result&&result.records){
+						_parseRecords(result.records);
+					}
+				}
+			});
+		});
+		//拼接地址
+		function _parseRecords(record){
+			var html="";
+			for(var i=0;i<record.length;i++){
+				if(record[i].addressStatus==0){	
+				 html+="<div class='select-address active' id="+record[i].addressId+">"+
+					"<p><span>联系人："+record[i].addressName+"</span><span class='ml20'>联系电话："+record[i].addressPhone+"</span></p>"+
+					"<p>园区地址："+record[i].addressDetail+"</p>"+
+					"<em class='s-a-select'></em>"+
+					"</div>"
+				}else{
+					 html+="<div class='select-address' id="+record[i].addressId+">"+
+						"<p><span>联系人："+record[i].addressName+"</span><span class='ml20'>联系电话："+record[i].addressPhone+"</span></p>"+
+						"<p>园区地址："+record[i].addressDetail+"</p>"+
+						"<em class='s-a-select'></em>"+
+						"</div>"
+				}
+			}
+			html+="<a href='javascript:;' class='fl open-tanc'><i class='fa fa-plus-circle mr5'></i>新增地址</a>";
+			$(".addressList").append(html);
+			activeclick();
+		};
+	</script>
+	<script type="text/javascript">
+		function activeclick(){
+			$(".select-address").click(function(){
+				$(this).parent().find(".select-address").removeClass("active");
+				$(this).addClass("active");
+			});
+			$(".open-tanc").click(function(){
+				$(".bg-tanc").show();
+			});
+		}
 	</script>
 </body>
 </html>
