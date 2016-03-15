@@ -200,8 +200,10 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 				for(PurchasingmanagerGenre pg:pgList){
 					String grId=pg.getGenreId();
 					conditionC.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId",Condition.EQUALS,grId));
-					recordList = purchasingmanagerCommodityManager.getPurchasingmanagerCommoditys(conditionC, null);
-					
+					List<PurchasingmanagerCommodity> pcList = purchasingmanagerCommodityManager.getPurchasingmanagerCommoditys(conditionC, null);
+					for(PurchasingmanagerCommodity pc:pcList){
+						recordList.add(pc);
+					}
 				}
 			}
 		}
