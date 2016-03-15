@@ -35,6 +35,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.web.view.DataModelAndView;
 import com.gsoft.framework.core.web.view.Message;
+import com.gsoft.framework.upload.dao.FileStoreDao;
 import com.gsoft.framework.upload.entity.FileStore;
 import com.gsoft.framework.upload.service.FileStoreManager;
 import com.gsoft.framework.util.DateUtils;
@@ -46,6 +47,8 @@ public class CommonController {
 	private String root;
 	@Autowired
 	private FileStoreManager fileStoreManager;
+	@Autowired
+	private FileStoreDao fileStoreDao;	
 	
 	@SuppressWarnings("rawtypes")
 	@RequestMapping("/upload.html")
@@ -62,11 +65,14 @@ public class CommonController {
 		    for (Entry entry : multipartFiles.entrySet()) {
 		    	key = (String)entry.getKey();
 		        MultipartFile multipartFile = (MultipartFile)multipartFiles.getFirst(key);
-		        //原文件名存到平台fileStore表里
-		        fileStoreManager.storeFile(multipartFile.getOriginalFilename(), multipartFile.getInputStream());
 		    	String fileName =  "upload/"+DateUtils.getToday("yyyyMM")+"/"+UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(multipartFile.getOriginalFilename());
 		    	File path = new File(root+"upload/"+DateUtils.getToday("yyyyMM"));
-		    	if(!path.exists()){
+		    	
+		        //原文件名存到平台fileStore表里
+		    	 FileStore fileStore = fileStoreManager.storeFile(multipartFile.getOriginalFilename(), multipartFile.getInputStream());
+		    	 fileStore.setFilePath(fileName);
+		    	 fileStoreDao.save(fileStore);
+		    	 if(!path.exists()){
 				  path.mkdirs();
 		    	}
 		    	File file = new File(root+fileName);
@@ -81,11 +87,13 @@ public class CommonController {
 			  List<DiskFileItem> items = upload.parseRequest(request);
 			  for (DiskFileItem item : items) {
 				  if(!(item.isFormField())){
-					  //原文件名存到平台fileStore表里
-					 fileStoreManager.storeFile(((DiskFileItem)item).getName(), ((DiskFileItem)item).getInputStream());
-
 					  String fileName =  "upload/"+DateUtils.getToday("yyyyMM")+"/"+UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(item.getName());
 					  File path = new File(root+"upload/"+DateUtils.getToday("yyyyMM"));
+					 
+					  //原文件名存到平台fileStore表里
+					  FileStore fileStore = fileStoreManager.storeFile(((DiskFileItem)item).getName(), ((DiskFileItem)item).getInputStream());
+					  fileStore.setFilePath(fileName);
+					  fileStoreDao.save(fileStore);
 					  if(!path.exists()){
 						  path.mkdirs();
 					  }
