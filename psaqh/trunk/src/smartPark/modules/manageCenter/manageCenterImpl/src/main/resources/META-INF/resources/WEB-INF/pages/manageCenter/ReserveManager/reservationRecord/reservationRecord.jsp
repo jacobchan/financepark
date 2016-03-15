@@ -17,11 +17,11 @@
 		<youi:button name="changeStatues" caption="预约授理" icon="edit" active="1"></youi:button> 
 		<youi:gridCol property="recordMemberId"  caption="预约对象"  width="10%" align="center"/>
 		<youi:gridCol property="recordType"  caption="预约类型" convert="recordType"  width="15%" align="center"/>
-		<youi:gridCol property="recordStatus"  caption="预约记录状态" convert="enterrecStatus"  width="15%" align="center"/>
+		<youi:gridCol property="recordStatus"  caption="预约记录状态" convert="enterrecStatus"  width="10%" align="center"/>
 	    <youi:gridCol property="visiteDate"  caption="来访日期"  width="10%" align="center" />
-	    <youi:gridCol property="visiteTime"  caption="来访时间"  width="20%" align="center"/>
+	    <youi:gridCol property="visiteTime"  caption="来访时间"  width="10%" align="center"/>
 	    <youi:gridCol property="recordCustomer"  caption="客服代表"  width="10%" align="center"/>
-		<youi:gridCol property="recordServiceTel"  caption="客服电话"  width="10%" align="center"/>
+		<youi:gridCol property="recordServiceTel"  caption="客服电话"  width="15%" align="center"/>
         <youi:gridCol property="updateTime"  caption="更新时间"  width="20%" align="center" orderBy="desc"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
@@ -33,7 +33,7 @@
 	<youi:form dialog="true" caption="预约记录" id="form_reservationRecord" action="esb/web/reservationRecordManager/saveReservationRecord.json">
 		<youi:fieldLayout prefix="record" labelWidths="100,100">
 		    <youi:fieldSelect property="recordType"  caption="预约类型" convert="recordType" notNull="true"/>
-		    <youi:fieldSelect property="recordMemberId"  caption="预约对象" src="esb/web/reservationRecordManager/getRecordsByRecordType.json" notNull="true" parents="recordType" parentsAlias="recordType" code="commodityName" show="commodityName"/>
+		    <youi:fieldSelect property="recordMemberId"  caption="预约对象" src="esb/web/reservationRecordManager/getRecordsByRecordType.json" notNull="true" parents="recordType" parentsAlias="recordType" code="itemName" show="itemName"/>
 		    <youi:fieldCalendar property="visiteDate"  caption="来访日期" width="120" notNull="true"/>
 		    <youi:fieldText property="visiteTime"  caption="来访时间"/>
 		  <%--  <youi:fieldSelect property="visiteTime"  caption="来访时间" convert="enteringTime" width="120" notNull="true"/>
