@@ -528,7 +528,7 @@
         <div class="content_right">
         	<div class="ii_tit hand"><span class="span_bold">会议室预定</span><span>园区巴士预定</span><span>园区专车预定</span></div>
             <ul class="hand_ul">
-            	<li>
+            	<!-- <li>
                 	<div class="fl"><img src="styles/images/index/img.jpg"/></div>
                     <div class="fl ml10">
                     	<div class="span_bold">创智中心2号楼</div>
@@ -551,7 +551,7 @@
                         <p class="cc f12">190元/小时</p>
                         <a class="handbtn" href="./companyservice/room.html">立即预定</a>
                     </div>
-                </li>
+                </li> -->
             </ul>
             <ul class="hand_ul" style="display:none">
             	<li>
@@ -613,10 +613,36 @@
 	<script type="text/javascript" src="scripts/page/laydate/laydate.js"></script>
 	<script type="text/javascript">
 		$(function(){
+			  var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommoditys.json?genreCode=0301";//0301:会议室
+				//公共方法
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(results){
+						if(results&&results.records){
+					   _parseRecords(results.records);
+						}
+					}
+				});
+				
+				function _parseRecords(record){
+					var imageUrl="/filestore/";
+					for(var i=0;i<3;i++){
+						   //http://localhost:8088/smartPark-web/ imageUrl
+							var html="<li><div class='fl'><img src='"+imageUrl+record[i].commodityImage+"' height='59' width='110'></div><div class='fl ml10'><div class='span_bold'>"+record[i].commodityTitle+"</div>"+
+							"<p class='cc f12'>"+record[i].commodityPrice+"元/小时</p><a class='handbtn' href='./companyservice/room.html'>立即预定</a></div></li>";
+							 $(".hand_ul").append(html);
+							 
+					}
+				};
+			
 			$('.cp_info').plist({
 				template:'<a class="tc" href=xq?id={commodityId}.html><div class="cp"><img src={commodityImage}></div>{commodityTitle}<p class="cc">&yen;{commodityPrice}</p></a>',
 				jsonpSrc:'http://localhost:9088/jsonp/data.jsp?data:file=test.json'
 			});
+			
+			
 			
 		});
 	</script>
@@ -725,8 +751,6 @@
 			};
 			laydate(start);
 			laydate(end);
-		
-		
 	})
 </script>
 	<script type="text/javascript">
