@@ -9,6 +9,7 @@ import java.util.Collection;
 //import javax.xml.crypto.Data;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,7 @@ import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.framework.core.web.menu.IMenu;
+import com.gsoft.utils.HttpSenderMsg;
 //import com.gsoft.framework.core.web.menu.IMenu;
 //import com.sun.star.setup.OSType;
 import com.common.MemberManager.entity.MemberInformation;
@@ -174,6 +176,11 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 				memberInformation.setMemberPassword(PasswordUtils.md5Password(passwd));
 				memberInformation.setMemberPhoneNumber(mobile);
 				memberInformationDao.save(memberInformation);
+				try {
+					HttpSenderMsg.sendMsg(memberInformation.getMemberPhoneNumber(), "尊敬的用户，您已经在富春硅谷平台上注册成功了！欢迎使用！");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 	}
     
     /**
