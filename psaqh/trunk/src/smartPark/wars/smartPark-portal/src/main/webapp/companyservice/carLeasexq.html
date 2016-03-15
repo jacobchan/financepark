@@ -131,13 +131,37 @@ function GetRequest() {
 }
 </Script>
 <script type="text/javascript">
-	var dateRange1 = new pickerDateRange('date1', {
-		aRecent30Days : true,
-		needCompare : false,
-		autoSubmit : false,
-		inputTrigger : 'input_trigger1',
-		theme : 'ta',
-		autoSubmit : true,
+	var numArray = new Array();
+	var Request = new Object();
+	Request = GetRequest();
+	var commodityId = Request['id'];
+	var params = ['commodityId='+commodityId];
+	var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPublicutilitiesmanagerResoByCommodityId.json";
+	$.youi.ajaxUtils.ajax({
+		url : serviceURL,
+		data:params.join('&'),
+		jsonp : 'data:jsonp',
+		dataType : 'jsonp',
+		async : false,
+		success : function(results) {
+			if (results && results.records) {
+				var records = results.records;
+				for(var i=0; i<records.length; i++){
+					if(records[i].resoStatus=='02'){
+						numArray.push(Number(records[i].resoDate.substring(records[i].resoDate.lastIndexOf("-")+1, records[i].resoDate.length)));
+					}
+				}
+			}
+			var dateRange1 = new pickerDateRange('date1', {
+				aRecent30Days : true,
+				needCompare : false,
+				autoSubmit : false,
+				inputTrigger : 'input_trigger1',
+				theme : 'ta',
+				autoSubmit : true,
+				disCertainDate : numArray
+			});
+		}
 	});
 </script>
 <script>
