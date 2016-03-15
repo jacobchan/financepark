@@ -17,7 +17,7 @@
 	    <youi:gridCol property="visiteDate"  caption="来访日期"  width="10%" align="center" orderBy="desc"/>
 		<youi:gridCol property="recordCustomer"  caption="客服代表"  width="10%" align="center"/>
 		<youi:gridCol property="recordServiceTel"  caption="客服电话"  width="10%" align="center"/>
-		<youi:gridCol property="visiteTime"  caption="实际来访时间"  width="20%" align="center"/>
+		<youi:gridCol property="visiteTime"  caption="来访时间"  width="20%" align="center"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -34,7 +34,7 @@
 		    <youi:fieldLabel property="recordCustomer"  caption="客服代表" />
 			<youi:fieldLabel property="recordServiceTel"  caption="客服电话" />
 			<youi:fieldSelect property="recordVisiteStatus"  caption="是否到访" convert="recordVisiteStatus" notNull="true"/>
-			 <youi:fieldCalendar property="visiteTime"  caption="实际来访时间" width="120" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss"/>
+			 <youi:fieldLabel property="visiteTime"  caption="来访时间" width="120"/>
 			<youi:fieldHidden property="recordId"  caption="预约记录ID"/>
 			<youi:fieldHidden property="recordStatus"  caption="预约记录状态"/>
 		</youi:fieldLayout>
@@ -47,8 +47,8 @@
 		    <youi:fieldLabel property="visiteDate"  caption="来访日期" width="120" />
 		    <youi:fieldLabel property="recordCustomer"  caption="客服代表" />
 			<youi:fieldLabel property="recordServiceTel"  caption="客服电话" />
-			<youi:fieldSelect property="recordVisiteStatus"  caption="是否到访" convert="recordVisiteStatus" notNull="true"/>
-			 <youi:fieldCalendar property="visiteTime"  caption="实际来访时间" width="120" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss"/>
+			 <youi:fieldLabel property="visiteTime"  caption="来访时间" width="120"/>
+			 <youi:fieldSelect property="recordVisiteStatus"  caption="是否到访" convert="recordVisiteStatus" notNull="true"/>
 			<youi:fieldHidden property="recordId"  caption="预约记录ID"/>
 			<youi:fieldHidden property="recordStatus"  caption="预约记录状态"/>
 		</youi:fieldLayout>
