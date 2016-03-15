@@ -734,7 +734,7 @@
 			$("#reserveButton").click(function(){
 				var recordType='04';//04:众创空间
 				var recordMemberId=$(".select_show").text();
-				var lfTime=$("#lf_time").val();
+				var visiteTime=$("#lf_time").val();
 				var lfName=$("#lf_name").val();
 				var lfTel=$("#lf_tel").val();
 				var visiteDate=$("#lf_date").val();
@@ -754,7 +754,7 @@
 							return false;
 						}
 				}
-				var params = ['visiteDate='+visiteDate,'recordType='+recordType,'recordMemberId='+recordMemberId];
+				var params = ['visiteDate='+visiteDate,'visiteTime='+visiteTime,'recordType='+recordType,'recordMemberId='+recordMemberId];
 				var serviceURL = baseUrl+"reservationRecordManager/saveReservationRecord.json";
 				//公共方法
 				$.youi.ajaxUtils.ajax({

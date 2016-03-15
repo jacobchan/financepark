@@ -86,7 +86,7 @@
 			$(".now-btn").click(function(){
 				var recordType='04';//04:众创空间
 				var recordMemberId=$(".ic-select").find("p").text();
-				var lfTime=$("#fkcodeTime").val();
+				var visiteTime=$("#lf_time").val();
 				var lfName=$("#fkcodeName").val();
 				var lfTel=$("#fkcodeTelephone").val();
 				var visiteDate=$("#fkcodeDate").val();
@@ -107,7 +107,7 @@
 						}
 				}
                
-				var params = ['visiteDate='+visiteDate,'recordType='+recordType,'recordMemberId='+recordMemberId];
+				var params = ['visiteDate='+visiteDate,'visiteTime='+visiteTime,'recordType='+recordType,'recordMemberId='+recordMemberId];
 				var serviceURL = baseUrl+"reservationRecordManager/saveReservationRecord.json";
 				//公共方法
 				$.youi.ajaxUtils.ajax({
@@ -121,7 +121,7 @@
 					//		window.location="/grzx/grzx8.html";
 							//$(".bg-tanc.m2").show();
 							$("#fkcodeDate").val('');
-							$("#fkcodeTime").val('');
+							$("#lf_time").val('');
 							$("#fkcodeName").val('');
 							$("#fkcodeTelephone").val('');
 							$(".ic-select").find("p").text('');
@@ -148,6 +148,62 @@
 	            $(this).parents(".time-nav").hide();
 	        });	
 		})
+	</script>
+	<script type="text/javascript">
+		$(function(){
+			var imageUrl="/filestore/"
+			var serviceURL = baseUrl+"reservationRecordManager/getCommodityByGenreType.json?genreCode=04";
+			//公共方法
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(results){
+					if(results&&results.records){
+				   _parseRecords(results.records);
+					}
+				}
+			});
+			
+			function _parseRecords(record){
+				for(var i=0;i<record.length;i++){
+					   //http://localhost:8088/smartPark-web/ imageUrl
+						var html="<li><div class='mb10'><img src='"+imageUrl+record[i].commodityImage+"' border='0'></div>"+
+						"<span>"+record[i].commodityTitle+"</span>";
+						 $(".space-centent ul").append(html);
+						 
+				}
+				    var sbysf_index = 0;
+				    var n=$(".space-centent ul li").length-3;
+				    function sbysf_scroll_up(){
+				        sbysf_index++;
+				        if(sbysf_index > n){
+				            sbysf_index = 0;
+				        }
+				        sbysf_show(sbysf_index);
+				    }
+				    function sbysf_scroll_down(){
+				        sbysf_index--;
+				        if(sbysf_index < 0){
+				            sbysf_index = n;
+				        }
+				        sbysf_show(sbysf_index);
+				    }
+				    function sbysf_show(j){
+				        var index = -(j*375);
+				        $(".space-centent ul").animate({left: index+'px'},200);
+				    }
+				    $(".space-centent .arrow-right").click(function(){
+				        sbysf_scroll_up();
+				    });
+				    $(".space-centent .arrow-left").click(function(){
+				        sbysf_scroll_down();
+				    });
+			};
+			
+		});
+
+		
 	</script>
 </head>
 <body>
@@ -243,11 +299,11 @@
 				<h3 class="tc">服务价格</h3>
 				<div class="w1200" style="overflow:hidden;">
 					<ul class="sc-nav">
-						<li>
+						<!--<li>
 							<div class="mb10"><img src="../styles/images/zs/eig1.jpg" border="0"></div>
 							<input type="text" placeholder="活动卡位800元/月" disabled="disabled" style="cursor:default"><a href="javascript:;" class="sc-yy" >预约</a>
 						</li>
-						<li>
+						 <li>
 							<div class="mb10"><img src="../styles/images/zs/eig2.jpg" border="0"></div>
 							<input type="text" placeholder="活动卡位800元/月" disabled="disabled" style="cursor:default"><a href="javascript:;" class="sc-yy">预约</a>
 						</li>
@@ -262,7 +318,7 @@
 						<li>
 							<div class="mb10"><img src="../styles/images/zs/eig3.jpg" border="0"></div>
 							<input type="text" placeholder="活动卡位800元/月" disabled="disabled" style="cursor:default"><a href="javascript:;" class="sc-yy">预约</a>
-						</li>
+						</li> -->
 					</ul>
 				</div>
 				
