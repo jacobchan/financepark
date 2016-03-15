@@ -19,9 +19,9 @@
 		<youi:gridCol property="recordType"  caption="预约类型" convert="recordType"  width="15%" align="center"/>
 		<youi:gridCol property="recordStatus"  caption="预约记录状态" convert="enterrecStatus"  width="15%" align="center"/>
 	    <youi:gridCol property="visiteDate"  caption="来访日期"  width="10%" align="center" />
+	    <youi:gridCol property="visiteTime"  caption="来访时间"  width="20%" align="center"/>
 	    <youi:gridCol property="recordCustomer"  caption="客服代表"  width="10%" align="center"/>
 		<youi:gridCol property="recordServiceTel"  caption="客服电话"  width="10%" align="center"/>
-        <youi:gridCol property="visiteTime"  caption="实际来访时间"  width="20%" align="center"/>
         <youi:gridCol property="updateTime"  caption="更新时间"  width="20%" align="center" orderBy="desc"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
@@ -35,6 +35,7 @@
 		    <youi:fieldSelect property="recordType"  caption="预约类型" convert="recordType" notNull="true"/>
 		    <youi:fieldSelect property="recordMemberId"  caption="预约对象" src="esb/web/reservationRecordManager/getRecordsByRecordType.json" notNull="true" parents="recordType" parentsAlias="recordType" code="commodityName" show="commodityName"/>
 		    <youi:fieldCalendar property="visiteDate"  caption="来访日期" width="120" notNull="true"/>
+		    <youi:fieldText property="visiteTime"  caption="来访时间"/>
 		  <%--  <youi:fieldSelect property="visiteTime"  caption="来访时间" convert="enteringTime" width="120" notNull="true"/>
 			 <youi:fieldSelect property="recordStatus"  caption="recordStatus" convert="enterrecStatus" width="100" notNull="true"/> --%>
 		<%-- <youi:fieldSelect property="recordVisiteStatus"  caption="是否到访" convert="recordVisiteStatus" notNull="true"/>
@@ -44,7 +45,6 @@
 			<youi:fieldHidden property="recordStatus"  caption="预约记录状态"/>
 			<youi:fieldHidden property="recordVisiteStatus"  caption="是否到访"/>
 			<youi:fieldHidden property="recordCustomer"  caption="客服代表"/>
-			<youi:fieldHidden property="visiteTime"  caption="实际来访时间"/>
 			<youi:fieldHidden property="recordServiceTel"  caption="客服电话"/>
 		</youi:fieldLayout>
 	</youi:form>
@@ -54,6 +54,7 @@
 		    <youi:fieldLabel property="recordType"  caption="预约类型" convert="recordType"/>
 		    <youi:fieldLabel property="recordMemberId"  caption="预约对象"/>
 		    <youi:fieldLabel property="visiteDate"  caption="来访日期" width="120" />
+		    <youi:fieldText property="visiteTime"  caption="来访时间"/>
 		    <%-- <youi:fieldCalendar property="visiteTime"  caption="实际来访时间" width="120" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss"/>
 			<youi:fieldSelect property="recordVisiteStatus"  caption="是否到访" convert="recordVisiteStatus"/> --%>
 			<youi:fieldText property="recordCustomer"  caption="客服代表" notNull="true"/>
@@ -61,7 +62,6 @@
 			<youi:fieldHidden property="recordId"  caption="预约记录ID"/>
 			<youi:fieldHidden property="recordStatus"  caption="预约记录状态"/>
 			<youi:fieldHidden property="recordVisiteStatus"  caption="是否到访"/>
-			<youi:fieldHidden property="visiteTime"  caption="实际来访时间"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
