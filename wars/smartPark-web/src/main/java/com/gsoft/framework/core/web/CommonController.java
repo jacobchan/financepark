@@ -57,7 +57,6 @@ public class CommonController {
 		}
 		String ret = "";
 		String key;
-		List fileStores = new ArrayList();
 		if (request instanceof MultipartHttpServletRequest) {
 		    MultiValueMap<String, MultipartFile> multipartFiles = ((MultipartHttpServletRequest)request).getMultiFileMap();
 		    for (Entry entry : multipartFiles.entrySet()) {
@@ -65,7 +64,6 @@ public class CommonController {
 		        MultipartFile multipartFile = (MultipartFile)multipartFiles.getFirst(key);
 		        //原文件名存到平台fileStore表里
 		        fileStoreManager.storeFile(multipartFile.getOriginalFilename(), multipartFile.getInputStream());
- 
 		    	String fileName =  "upload/"+DateUtils.getToday("yyyyMM")+"/"+UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(multipartFile.getOriginalFilename());
 		    	File path = new File(root+"upload/"+DateUtils.getToday("yyyyMM"));
 		    	if(!path.exists()){
