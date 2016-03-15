@@ -9,6 +9,7 @@
  */
 var isLogin = false;
 var baseUrl = "http://localhost:8088/smartPark-web/esb/web/";
+var cenUrl = 'http://localhost:8088/smartPark-web/';
 $(function(){
 	var _passportBaseUrl = 'http://localhost:8088/smartPark-web/';
 	
