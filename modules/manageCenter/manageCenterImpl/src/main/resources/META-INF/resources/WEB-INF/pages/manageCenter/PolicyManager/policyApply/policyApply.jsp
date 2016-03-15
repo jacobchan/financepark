@@ -31,11 +31,12 @@
 	<youi:form dialog="true" caption="-政策申请记录" id="form_policyApply" action="esb/web/policyApplyManager/savePolicyApply.json">
 		<youi:fieldLayout prefix="record" labelWidths="120,120">
 			<youi:fieldHidden property="policyApplyId"  caption="政策申请记录ID"/>
-			<youi:fieldText property="policyApplyContactPeople"  caption="联系人" />
+			<youi:fieldText property="policyApplyContactPeople"  caption="联系人" notNull="true"/>
 			<youi:fieldSelect property="member.memberId"  caption="会员姓名" 
 				src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName" />
 			<youi:fieldText property="policyApplyConpanyName"  caption="企业名称" readonly="true"/>
-			<youi:fieldText property="policyApplyContactTel"  caption="联系电话" />
+			<youi:fieldText property="policyApplyContactTel"  caption="联系电话" notNull="true"
+				expression="^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$" expressionMessage="手机号码格式不正确"/>
 			<youi:fieldSelect property="nmIssuenews.policyId"  caption="申请新闻名称" 
 				src="esb/web/nmIssuenewsManager/getNmIssuenewss.json" code="policyId" show="policyCaption" notNull="true"/>
 		</youi:fieldLayout>
