@@ -20,7 +20,7 @@
         <li class="active"><a href="carLeasexq.html">广告资源详情</a></li>
     </ul>
     <div class="mt30 clearfix">
-    	<div class="fl ml10"><img src="../styles/images/company/eg.png"/></div>
+    	<div class="fl ml10"><!-- <img src="../styles/images/company/eg.png"/> --></div>
         <div class="carxq fl">
         	<span class="span_bold f20" id="commodityName"></span>
             <div class="mt20 mb20">
@@ -29,7 +29,7 @@
                 <div class="res_tip" id="cp">车牌：杭AL8899</div>
 			</div>
            <div class="egbg"><span id="commodityPrice">&yen;</span>元&nbsp;<span class="f16">/1次</span></div>
-            <p class="f12 mt20" id="commodityDescribe">
+            <p class="f12 mt20" style="width:360px;" id="commodityDescribe">
             	此车仅供园区企业接送飞机使用<br/>
                 按照每次500元计算，此价格包含60KM的油费<br/>
                 师傅一名，工作2小时<br/>
@@ -294,6 +294,7 @@ function GetRequest() {
 	$(function() {
 		var Request = new Object();
 		Request = GetRequest();
+		var imageUrl="/filestore/";
 		var commodityId = Request['id'];
 		var genreCode='0303';
 		var params = ['commodityId='+commodityId,'genreCode='+genreCode];
@@ -307,6 +308,7 @@ function GetRequest() {
 			success : function(results) {
 				if (results && results.records) {
 					var records = results.records;
+					$('.ml10').append("<img src='"+imageUrl+records[0].commodityImage+"' height='261' width='385'/>");
 					$('#commodityName').text(records[0].commodityTitle);
 					$('#commodityPrice').text(records[0].commodityPrice);
 					$('#commodityDescribe').html(records[0].commodityDescribe);
