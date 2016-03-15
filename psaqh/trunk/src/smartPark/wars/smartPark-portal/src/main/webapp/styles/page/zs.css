@@ -639,7 +639,7 @@ i.star2{background:url(../images/company/star2.png) no-repeat;}
 .per-h4{border-left: 1px solid #ff6715;line-height: 18px;font-size: 16px;padding-left: 20px;}
 
 /**消息**/
-.w100p{float: left;background-color: #545454;color: #fff;width: 100px;min-height: 980px;text-align: center;padding: 20px 0px;}
+.w100p{float: left;background-color: #545454;color: #fff;width: 100px;min-height: 1040px;text-align: center;padding: 20px 0px;}
 .w100p ul li{display: block;width: 100%;line-height: 30px;font-size: 12px;}
 .w100p ul li>a{display: block;color: #fff;}
 .w100p ul li.active a,.w100p ul li:hover a{background-color: #ffffff;color: #333;cursor: pointer;}

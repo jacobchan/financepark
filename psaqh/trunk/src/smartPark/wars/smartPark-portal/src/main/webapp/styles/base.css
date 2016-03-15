@@ -226,7 +226,7 @@ input{font-family:"微软雅黑";}
 .bottom-partners a{margin-right: 20px;font-size: 12px;}
 
 /**个人中心**/
-.w200{width: 200px;background-color: #eeeeee;min-height: 980px;}
+.w200{width: 200px;background-color: #eeeeee;min-height:1040px;}
 .w1000{width: 998px;padding: 20px 50px;float: left;}
 .per-center-box{border:1px solid #ecebeb;background-color: #fff;}
 .per-center-box dl dt{font-size: 16px;font-weight: bold;line-height: 40px;padding: 10px 0px;padding-left: 50px;}
