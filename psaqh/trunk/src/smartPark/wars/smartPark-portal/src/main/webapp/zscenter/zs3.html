@@ -125,25 +125,58 @@
 	<script type="text/javascript">
 		$(function(){
 			$("#submit-ib").click(function(){
-				var on1=[
-				 "policyApplyConpanyName="+$("#policyApplyConpanyName").val(),
-		         "policyApplyContactPeople="+$("#policyApplyContactPeople").val(),
-		         "policyApplyContactTel="+$("#policyApplyContactTel").val()
-		         ];
-				var newobj=obj.concat(on1);//拼接数组，将隐藏的政策ID与其他的字段拼接起来
+				var obj=["nmIssuenews.policyId="+$("form").attr("class")];//获取当前政策ID
+				//判断是否是企业员工
 				$.youi.ajaxUtils.ajax({
-					url:baseUrl +"policyApplyManager/savePolicyApply.json",
-					data:newobj.join('&'),
-					jsonp:'data:jsonp',
-					dataType:'jsonp',
-					success:function(results){
-						$("#policyApplyConpanyName").val("");//将输入框内容置为空
-						$("#policyApplyContactPeople").val("");
-						$("#policyApplyContactTel").val("");
-						$(".bg-tanc").hide();//隐藏表单
-						alert("申请成功！");
+				url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					if(result&&result.record){
+						var policyApplyConpanyName = $("#policyApplyConpanyName").val();
+						var policyApplyContactPeople = $("#policyApplyContactPeople").val();
+						var policyApplyContactTel = $("#policyApplyContactTel").val() ;
+						if(policyApplyConpanyName == ""){
+							alert("请输入公司名称！") ;
+							return ;
+						}
+						if(policyApplyContactPeople == ""){
+							alert("请输入联系人！") ;
+							return ;
+						}
+						if(policyApplyContactTel == ""){
+							alert("请输入联系手机！") ;
+							return ;
+						}
+						var isMobile=/^(?:13\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;//手机号的格式
+						if(! isMobile.test(policyApplyContactTel)){
+							alert("请输入正确的手机号！") ;
+							return ;
+						}  
+						
+						var obj1=[
+						 "policyApplyConpanyName="+policyApplyConpanyName,
+				         "policyApplyContactPeople="+policyApplyContactPeople,
+				         "policyApplyContactTel="+policyApplyContactTel
+				         ];
+						var newobj=obj.concat(obj1);//拼接数组，将政策ID与其他的字段拼接起来
+						$.youi.ajaxUtils.ajax({
+							url:baseUrl +"policyApplyManager/savePolicyApply.json",
+							data:newobj.join('&'),
+							jsonp:'data:jsonp',
+							dataType:'jsonp',
+							success:function(results){
+								$("#policyApplyConpanyName").val("");//将输入框内容置为空
+								$("#policyApplyContactPeople").val("");
+								$("#policyApplyContactTel").val("");
+								$(".bg-tanc").hide();//隐藏表单
+								alert("申请成功！");
+							}
+						});
+					}else{
+						alert("非企业用户无法申请！") ;
 					}
-				});
+				}});
 			});
 		});
 	</script>
@@ -165,13 +198,12 @@
 			for(var i=0;i<record.length;i++){
 				var status = record[i].policyStatus ;
 				if(status == 1){//状态为1表示已发布，为0表示未发布
-					var html="<div class='index-group'>"+
+					var html="<div class='index-group' id="+record[i].policyId+">"+
 								 "<h5>"+record[i].policyCaption+"</h5>"+
 			               		 "<div class='ig-box'>"+
 				                   	 "<p>"+record[i].policyContent+"</p>"+
 				                   	 "<a href='javascript:;' class='ib-btn'>在线申请</a>"+
-				                   	 "<input type='hidden' class='hiddenId' value="+record[i].policyId+">"+
-			           			 "</div>"+
+ 			           			 "</div>"+
 		       				 "</div>";
 		 			$(".fl.w895").append(html);
 				}
@@ -186,9 +218,8 @@
 				$(".ifn-group ul").eq($(this).index()).removeClass("undis").siblings().addClass("undis");
 			});
 			$(document).on("click",".ib-btn",function(){
-				obj=[
-				       "nmIssuenews.policyId="+$(this).siblings("input").val()//全局变量，获取当前政策ID
-				    ] ;
+				obj = $(this).parent().parent().attr("id") ;
+				$(".bg-tanc").find("form").attr("class",obj);
 				$(".bg-tanc").show();
 			});
 			
