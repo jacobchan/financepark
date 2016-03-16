@@ -6,7 +6,17 @@
 <head>
 	<meta charset="UTF-8">
 	<title>个人资料</title>
-	
+	<script type="text/javascript">
+		$(function () {
+			$("a.c-o").on("click",function(){
+				$(this).parent("p").hide().siblings("p").show();
+			});
+			$(".open-tanc").click(function(){
+				$(".bg-tanc").show();
+			});
+			$("#birthday_container").birthday();
+		})
+	</script>	
 </head>
 <body style="background-color:#f4f4f4;">
 
@@ -50,7 +60,13 @@
 						</tr>
 						<tr>
 							<td>出生日期</td>
-							<td><input type="text" id="memberBirthdate"></td>
+							<td>
+								<div id="birthday_container">
+									<select name="year" id="year"></select>
+									<select name="month" id="month"></select>
+									<select name="day" id="day"></select>
+								</div>
+							</td>
 						</tr>
 						<tr>
 							<td>一句话介绍</td>
@@ -74,6 +90,29 @@
 		</div>
 	</div>
 	<!--***bottom end****************************************-->
+		<!--***弹窗 start****************************************-->
+	<div class="bg-tanc">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<h3 class="mb10 f16 c-333" style="font-size:16px;"><b>加入园区</b></h3>
+			<table class="line-table cic-l-t wybx-tanc" style="font-size:14px;">
+				<colgroup>
+					<col width="110">
+					<col>
+				</colgroup>
+				<tbody>
+				<tr class="show2">
+					<td><b>企业邀请码</b></td>
+					<td><input style="width:400px" type="text" id="companyInvitecode"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td colspan="2"><a class="ib-btn" style="width:120px;text-align:center;margin-top:10px;">加入企业</a></td>
+				</tr>
+			</tbody></table>
+		</div>
+	</div>
+	<!--***弹窗 end****************************************-->
 	<script type="text/javascript">
 		$(function(){
 			$.ajax({
@@ -93,7 +132,9 @@
 			$(".c-b1").html(record.memberPhoneNumber);
 			$("#memberNickname").val(record.memberNickname);
 			$("#memberName").val(record.memberName);
-			$("#memberBirthdate").val(record.memberBirthdate);
+			$("#year").val(record.memberBirthdate.substring(0,4));
+			$("#month").val(record.memberBirthdate.substring(5,7));
+			$("#day").val(record.memberBirthdate.substring(8,10));
 			$("#memberDescribe2").val(record.memberDescribe2);
 			$("#companyId").val(record.companyId);
 		};
@@ -104,7 +145,10 @@
 			var memberNickname=$("#memberNickname").val();
 			var memberPhoneNumber=$(".c-b1").html();
 			var memberName=$("#memberName").val();
-			var memberBirthdate=$("#memberBirthdate").val();
+			var year=$("#year").val();
+			var month=$("#month").val();
+			var day=$("#day").val();
+			var memberBirthdate=year+"-"+month+"-"+day;
 			var memberDescribe2=$("#memberDescribe2").val();
 			var companyId=$("#companyId").val();
 			var params = ['memberId='+memberId+'','memberNickname='+memberNickname+'','memberPhoneNumber='+memberPhoneNumber+'','memberName='+memberName+'','memberBirthdate='+memberBirthdate+'','memberDescribe2='+memberDescribe2+'','companyId='+companyId+''];
@@ -118,6 +162,14 @@
 					}
 				}
 			});
+		});	
+		
+		$('.ib-btn').click(function(){
+			this.disabled=true;
+			var memberId=$("#memberId").html();
+			var companyInvitecode=$("#companyInvitecode").val();
+			var params = ['memberId='+memberId+'','companyInvitecode='+companyInvitecode+''];
+			alert("加入企业！");
 		});	
 	</script>
 </body>
