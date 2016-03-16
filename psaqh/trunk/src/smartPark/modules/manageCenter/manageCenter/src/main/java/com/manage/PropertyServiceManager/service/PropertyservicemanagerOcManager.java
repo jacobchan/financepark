@@ -73,12 +73,15 @@ public interface PropertyservicemanagerOcManager extends BaseManager{
 	public boolean exsitPropertyservicemanagerOc(String propertyName,Object value) throws BusException;
 	/**
 	 * 获取当前登录用户一卡通号码
-	 * @param o 一卡通实体
-	 * @return
-	 * @throws BusException
 	 */
 	public List<PropertyservicemanagerOc> getPropertyservicemanagerOcListByLoginUser(PropertyservicemanagerOc o) throws BusException;
-	 public PropertyservicemanagerOc updateBindStatus(
-			 PropertyservicemanagerOc p
-	    		) throws BusException;
+	/**
+	 * 修改绑定状态 */
+	public PropertyservicemanagerOc updateBindStatus(PropertyservicemanagerOc p) throws BusException;
+	/**
+	 * 增加绑定卡号
+	 * @param ocNumber
+	 * @param bindStatus
+	 */
+	public PropertyservicemanagerOc addBindOc(String ocNumber, String  bindStatus)throws BusException;
 }
