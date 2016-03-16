@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,6 +54,8 @@ public class ActivityDocumentManagerImpl extends BaseManagerImpl implements Acti
 	private ActivityDocumentDao activityDocumentDao;
 	@Autowired
 	private FileStoreManager fileStoreManager;
+	@Value("#{configProperties['file.root.path']}")
+	private String root;
 
      
     /**
@@ -98,8 +101,10 @@ public class ActivityDocumentManagerImpl extends BaseManagerImpl implements Acti
 //    	}else{//新增
 //    		
 //    	}
-    	FileStore fs=fileStoreManager.getFileStoreByPath(o.getDocumentPath());
-    	o.setDocumentName(fs.getUploadFileName());
+    	if(o.getDocumentPath()!=null){
+        	FileStore fs=fileStoreManager.getFileStoreByPath(o.getDocumentPath());
+        	o.setDocumentName(fs.getUploadFileName());	
+    	}
     	return activityDocumentDao.save(o);
     }
 
@@ -139,8 +144,8 @@ public class ActivityDocumentManagerImpl extends BaseManagerImpl implements Acti
     	String getFilename = file.getName();
     	String parent=file.getParent();
     	String fileName = getFilename .substring(0,getFilename .lastIndexOf("."));
-    	DocConverter.getSwfPath("src/main/webapp/upload/"+filePath);
-    	String swfPath="upload/"+parent+"/"+fileName+".swf";
+    	DocConverter.getSwfPath(root+filePath);
+    	String swfPath=root+parent+"/"+fileName+".swf";
     	return swfPath;
 	
     }
