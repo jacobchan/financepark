@@ -53,7 +53,7 @@
             <div class="colorblock" style="background:#A2354A"></div><span class="vm">&nbsp;已预约（不可选）</span>
             <div class="colorblock" style="background:#4AA2D4"></div><span class="vm">&nbsp;空闲（可选）</span>
         </div>
-        <div id="resoIds" style=""></div>
+        <div id="resoIds" style="display:none;"></div>
 		<span class="date_title" id="date1"></span>
         <div class="tc mt50" id="commit">
         	<div class="btn-ck mr20" id="online">在线预约</div>
@@ -149,9 +149,9 @@
 			if (results && results.records) {
 				var records = results.records;
 				for(var i=0; i<records.length; i++){
+					//主键追加到隐藏域供预约使用
+					$("#resoIds").append(records[i].resoId+",");
 					if(records[i].resoStatus=='02'){
-						//主键追加到隐藏域供预约使用
-						$("#resoIds").append(records[i].resoId+",");
 						numArray.push(Number(records[i].resoDate.substring(records[i].resoDate.lastIndexOf("-")+1, records[i].resoDate.length)));
 					}
 				}
