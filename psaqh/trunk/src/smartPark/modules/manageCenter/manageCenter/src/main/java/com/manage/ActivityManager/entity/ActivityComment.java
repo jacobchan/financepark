@@ -30,7 +30,7 @@ public class ActivityComment implements Domain{
 	private String updateTime;//修改时间
 
 	@Column(name = "COMMENT_CONTENT_")
-	@Length(max=32)
+	@Length(max=1024)
 	private String commentContent;//评论内容
 
 	@Column(name = "COMMENT_TIME_")
