@@ -239,7 +239,7 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 		//保存订单明细列表
 		OrdermanagerCommoditydetail orderDetail = new OrdermanagerCommoditydetail();
 		orderDetail.setOrdermanagerUserorder(o);
-		orderDetail.setCommodityId(publicResoList.get(0).getCommodityId().getCommodityId());
+		orderDetail.setCommodityId(publicResoList.get(0).getCommodityId());
 		orderDetail.setCommoditydetailNum("1");
 		this.userOrderDetailManager.saveOrdermanagerCommoditydetail(orderDetail);
 		//保存订单扩展属性列表
