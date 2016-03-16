@@ -20,7 +20,7 @@
 					<h3 class="per-h3">一卡通绑定</h3>
 					<h4 class="f16 mt20">绑定信息</h4>
 					<div class="mt20">
-						<input class="bd-input" type="text" style="width:290px;" placeholder="请输入卡号">
+						<input class="bd-input" type="text" id="ocNumber" style="width:290px;" placeholder="请输入卡号">
 						<input value="绑定" class="hhf-submit bd" style="padding:0px 10px;height:30px;" type="button">
 					</div>
 
@@ -64,14 +64,13 @@
 		};
 	
 		$('.hhf-submit').click(function(){
-			this.disabled=true;
-			
-			var ocNumber=$("#ocNumber").val();
-			var memberId="40288ad7537422cc01537426c2dc0033";
-			var bindStatus=1;
-			var params = ['memberId='+memberId+'','bindStatus='+bindStatus+'','ocNumber='+ocNumber+''];
+			this.disabled=true;			
+			var ocNumber=$("#ocNumber").val();	
+			alert(ocNumber);
+			var bindStatus="1";
+			var params = ['bindStatus='+bindStatus+'','ocNumber='+ocNumber+''];
 			$.youi.ajaxUtils.ajax({
-				url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/savePropertyservicemanagerOc.json',
+				url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/addBindOc.json',
 				data:params.join('&'),
 				success:function(result){
 					if(result&&result.record){
@@ -83,7 +82,7 @@
 		});	 
 
 		function unbound(id){			
-		    alert(id);
+		   
 			var bindStatus=0;
 			var ocId=id;
 			var params = ['ocId='+ocId+'','bindStatus='+bindStatus+''];
