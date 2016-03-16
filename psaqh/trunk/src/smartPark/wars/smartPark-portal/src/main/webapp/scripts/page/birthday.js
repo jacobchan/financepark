@@ -16,14 +16,22 @@
     con = "";
     //添加月份
     for(i = 1;i <= 12; i++){
-    con += "<option value='"+i+"'>"+i+"月"+"</option>";
+    	if(i<10){
+    	    con += "<option value='0"+i+"'>"+i+"月"+"</option>";	
+    	}else{
+    		con += "<option value='"+i+"'>"+i+"月"+"</option>";	
+    	}
     }
     $month.append(con);
     con = "";
     //添加日期
     var n = MonHead[0];//默认显示第一月
     for(i = 1; i <= n; i++){
-    con += "<option value='"+i+"'>"+i+"日"+"</option>";
+    	if(i<10){
+    	    con += "<option value='0"+i+"'>"+i+"日"+"</option>";	
+    	}else{
+    		con += "<option value='"+i+"'>"+i+"日"+"</option>";	
+    	}
     }
     $day.append(con);
     $.fn.birthday.change($(this));
@@ -41,13 +49,21 @@
     if(selectedMonth == 2 && $.fn.birthday.IsRunYear(selectedYear)){//如果是闰年
     var c ="";
     for(var i = 1; i <= 29; i++){
-      c += "<option value='"+i+"'>"+i+"日"+"</option>";
+    	if(i<10){
+    	     c += "<option value='0"+i+"'>"+i+"日"+"</option>";
+    	}else{
+    		 c += "<option value='"+i+"'>"+i+"日"+"</option>";
+    	}
     }
     $day.append(c);
     }else {//如果不是闰年也没选2月份
     var c = "";
     for(var i = 1; i <= MonHead[selectedMonth-1]; i++){
-      c += "<option value='"+i+"'>"+i+"日"+"</option>";
+    	if(i<10){
+   	     c += "<option value='0"+i+"'>"+i+"日"+"</option>";
+   	}else{
+   		 c += "<option value='"+i+"'>"+i+"日"+"</option>";
+   	}
     }
     $day.append(c);
     }
