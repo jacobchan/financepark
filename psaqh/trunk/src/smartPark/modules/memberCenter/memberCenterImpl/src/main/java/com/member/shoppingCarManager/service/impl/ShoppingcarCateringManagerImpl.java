@@ -129,7 +129,7 @@ public class ShoppingcarCateringManagerImpl extends BaseManagerImpl implements S
 		for(ShoppingcarCatering shopCar:shopCarList){//保存订单明细
 			OrdermanagerCommoditydetail orderDetail = new OrdermanagerCommoditydetail();
 			orderDetail.setOrdermanagerUserorder(o);
-			orderDetail.setCommodityId(shopCar.getCommodityId().getCommodityId());
+			orderDetail.setCommodityId(shopCar.getCommodityId());
 			orderDetail.setCommoditydetailNum(shopCar.getCompanyCateringNum());
 			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
 		}
