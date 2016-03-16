@@ -203,15 +203,12 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
      * @throws BusException
      */
    @EsbServiceMapping
-    public PropertyservicemanagerOc updateBindStatus(
-    		@ServiceParam(name="ocId") String ocId,
-    		@ServiceParam(name="bindStatus") String bindStatus
-    		) throws BusException{   	
-    		PropertyservicemanagerOc psm = propertyservicemanagerOcDao.get(ocId);  
-    		
-    		psm.setOcStatus(bindStatus);
-	    	return propertyservicemanagerOcDao.save(psm);
-    		
+    public PropertyservicemanagerOc updateBindStatus(PropertyservicemanagerOc p) throws BusException{   	
+	   String ocId = p.getOcId();
+	   String bindStatus = p.getBindStatus();
+	   PropertyservicemanagerOc psm = propertyservicemanagerOcDao.get(ocId);    		
+       psm.setBindStatus(bindStatus);
+	   return propertyservicemanagerOcDao.save(psm);    		
     }
 
     
