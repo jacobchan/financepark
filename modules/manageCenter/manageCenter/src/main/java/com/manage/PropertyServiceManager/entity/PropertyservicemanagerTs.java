@@ -60,9 +60,6 @@ public class PropertyservicemanagerTs implements Domain{
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="BX_ID_")
 	private com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx propertyservicemanagerBx;//报修记录ID
-	@Column(name = "APPLICATION_DATE_")
-	private String applicationDate;//申请时间
-
 	
 	@Column(name = "TS_TIME_")
 	@Length(max=20)
@@ -149,14 +146,6 @@ public class PropertyservicemanagerTs implements Domain{
 	}
 	
 	
-	public String getApplicationDate() {
-		return applicationDate;
-	}
-
-	public void setApplicationDate(String applicationDate) {
-		this.applicationDate = applicationDate;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
