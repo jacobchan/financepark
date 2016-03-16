@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50710
 File Encoding         : 65001
 
-Date: 2016-03-01 11:15:52
+Date: 2016-03-16 14:39:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -58,3 +58,8 @@ INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e8153216adc01532178
 INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e8153216adc0153217889720010', null, '物业缴费', null, '2016-02-27 14:44:20', null, '2016-02-27 14:44:20', null, '08');
 INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e815321d109015321ddcb120001', '40285e815320d801015320da4be90001', '办公用品', null, '2016-02-27 16:34:56', null, '2016-02-27 16:34:56', null, null);
 INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e815321d109015321ddf7ce0002', '40285e815321d109015321ddcb120001', '文件册', null, '2016-02-27 16:35:08', null, '2016-02-27 16:35:08', null, null);
+INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e81533020490153303cef58000a', '40285e8153216adc015321783d6a000e', '预约单次', null, '2016-03-16 14:24:46', null, '2016-03-01 11:33:33', null, null);
+INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e81533020490153303d155c000b', '40285e8153216adc015321783d6a000e', '套餐一', null, '2016-03-01 11:33:42', null, '2016-03-01 11:33:42', null, null);
+INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e81533020490153303d298b000c', '40285e8153216adc015321783d6a000e', '套餐二', null, '2016-03-01 11:33:48', null, '2016-03-01 11:33:48', null, null);
+INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40285e81533020490153303d3b7f000d', '40285e8153216adc015321783d6a000e', '套餐三', null, '2016-03-01 11:33:52', null, '2016-03-01 11:33:52', null, null);
+INSERT INTO `sp_purchasingmanager_genre` VALUES (null, '40288082537d7a9201537e1961740002', null, '退货订单', null, '2016-03-16 14:25:05', null, '2016-03-16 14:25:05', null, '09');
