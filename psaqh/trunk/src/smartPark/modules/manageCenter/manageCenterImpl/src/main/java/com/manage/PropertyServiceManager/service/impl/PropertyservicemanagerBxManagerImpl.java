@@ -21,6 +21,9 @@ import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.common.purchasingManager.entity.PurchasingmanagerGenreProperty;
 import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
 import com.common.purchasingManager.service.PurchasingmanagerGenrePropertyManager;
+import com.gsoft.framework.codemap.entity.Codeitem;
+import com.gsoft.framework.codemap.service.CodeitemManager;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -32,8 +35,10 @@ import com.gsoft.framework.security.agt.entity.User;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.SecurityUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
+import com.gsoft.utils.HttpSenderMsg;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTs;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerBxDao;
@@ -57,6 +62,8 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 	private PropertyservicemanagerTsManager propertyservicemanagerTsManager;
 	@Autowired
 	private MemberInformationManager memberInformationManager;
+	@Autowired 
+	private CodeitemManager codeitemManager;
     /**
      * 查询列表
      */
@@ -93,72 +100,83 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
      */
     @EsbServiceMapping(pubConditions={@PubCondition(property="createUser",pubProperty="userId")})
     public PropertyservicemanagerBx savePropertyservicemanagerBx(PropertyservicemanagerBx o) throws BusException{
-//    	String propertyservicemanagerBxId = o.getPropertyservicemanagerBxId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerBxId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	//物业管理员定价生成订单
-    	if(o.getBxStatus().equals("05")){
-    		//获取报修单
-    		String bxId = o.getBxId();
-    		PropertyservicemanagerBx bx = propertyservicemanagerBxDao.get(bxId);
-    		//获取当前登录用户
-    		Object object = SecurityUtils.getPrincipal();
-    		User user = new User();
-    		if(object != null && object instanceof User){
-    			user = (User) object;
+    	String propertyservicemanagerBxId = o.getBxId();
+    	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerBxId);
+    	PropertyservicemanagerBx savebx = null;
+    	if(isUpdate){//修改
+    		//物业管理员定价生成订单
+        	if(o.getBxStatus().equals("05")){
+        		//获取报修单
+        		String bxId = o.getBxId();
+        		PropertyservicemanagerBx bx = propertyservicemanagerBxDao.get(bxId);
+        		//获取当前登录用户
+        		Object object = SecurityUtils.getPrincipal();
+        		User user = new User();
+        		if(object != null && object instanceof User){
+        			user = (User) object;
+        		}
+        		OrdermanagerUserorder order = new OrdermanagerUserorder();
+     
+        		//查询商品类别
+        		Collection<Condition> condition =  new ArrayList<Condition>();
+        		condition.add(ConditionUtils.getCondition("genreCode", Condition.EQUALS,"07"));
+        		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenres(condition, null).get(0);
+        		
+        		order.setGenreId(pg);
+        		order.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("BXOD"));
+        		order.setUserorderStatus("01");//01-未支付
+        		order.setCreateUser(user.getUserId());
+        		order.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+        		order.setUpdateUser(user.getUserId());
+        		order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+        		order.setUserorderBuyUser(user.getUserCaption());
+        		order.setMemberId(user.getUserId());
+        		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+        		order.setUserorderAmount(o.getBxAmount());
+        		ordermanagerUserorderManager.saveOrdermanagerUserorder(order);
+        		
+        		//保存订单扩展属性列表
+        		Collection<Condition> purcondition =  new ArrayList<Condition>();
+        		purcondition.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.EQUALS,pg.getGenreId()));
+        		List<PurchasingmanagerGenreProperty> genrePropertyList = purchasingmanagerGenrePropertyManager.getPurchasingmanagerGenrePropertys(purcondition,null);
+        		if(genrePropertyList.size()>0){
+    	    		for(PurchasingmanagerGenreProperty genreProperty:genrePropertyList){//保存订单扩展项信息
+    	    			OrdermanagerOrderprojecttypeValue orderExtendValue = new OrdermanagerOrderprojecttypeValue();
+    	    			orderExtendValue.setOrdermanagerUserorder(order);
+    	    			orderExtendValue.setGenrePropertyId(genreProperty);
+    	    			if("orderBxId".equals(genreProperty.getGenrePropertyFieldName())){
+    	    				orderExtendValue.setOrderprojecttypeValueFieldValue(bxId);
+    	    			}
+    	    			ordermanagerOrderprojecttypeValueManager.saveOrdermanagerOrderprojecttypeValue(orderExtendValue);
+    	    		}
+        		}
+        		//物业管理员定价，同时关闭派工记录
+        		PropertyservicemanagerTs ts =  propertyservicemanagerTsManager.getTsBybxId(bxId);
+        		ts.setTsStatus("03");
+        		propertyservicemanagerTsManager.savePropertyservicemanagerTs(ts);
+        		//保存报修记录
+        		bx.setBxStatus(o.getBxStatus());
+        		bx.setBxAmount(o.getBxAmount());
+        		savebx = propertyservicemanagerBxDao.save(bx);
+        	}else{
+        		return null;
+        	}
+    	}else{//新增
+   			o.setBxCode(BizCodeUtil.getInstance().getBizCodeDate("WYBX"));
+   			o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+   			o.setApplyTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+   			o.setBxStatus("00");
+   			savebx = propertyservicemanagerBxDao.save(o);
+   			try {
+   				//查询当前申请用户手机号
+   				String memberId = savebx.getCreateUser();
+   				MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
+    			HttpSenderMsg.sendMsg(memberInformation.getMemberPhoneNumber(), "您提交报修已成功，申请单号："+savebx.getBxCode()+"，请等待物业管理员审批！");
+    		} catch (Exception e) {
+    			e.printStackTrace();
     		}
-    		OrdermanagerUserorder order = new OrdermanagerUserorder();
- 
-    		//查询商品类别
-    		Collection<Condition> condition =  new ArrayList<Condition>();
-    		condition.add(ConditionUtils.getCondition("genreCode", Condition.EQUALS,"07"));
-    		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenres(condition, null).get(0);
-    		
-    		order.setGenreId(pg);
-    		order.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("WYBX"));
-    		order.setUserorderStatus("01");//01-未支付
-    		order.setCreateUser(user.getUserId());
-    		order.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    		order.setUpdateUser(user.getUserId());
-    		order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    		order.setUserorderBuyUser(user.getUserCaption());
-    		order.setMemberId(user.getUserId());
-    		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    		order.setUserorderAmount(o.getBxAmount());
-    		ordermanagerUserorderManager.saveOrdermanagerUserorder(order);
-    		
-    		//保存订单扩展属性列表
-    		Collection<Condition> purcondition =  new ArrayList<Condition>();
-    		purcondition.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.EQUALS,pg.getGenreId()));
-    		List<PurchasingmanagerGenreProperty> genrePropertyList = purchasingmanagerGenrePropertyManager.getPurchasingmanagerGenrePropertys(purcondition,null);
-    		if(genrePropertyList.size()>0){
-	    		for(PurchasingmanagerGenreProperty genreProperty:genrePropertyList){//保存订单扩展项信息
-	    			OrdermanagerOrderprojecttypeValue orderExtendValue = new OrdermanagerOrderprojecttypeValue();
-	    			orderExtendValue.setOrdermanagerUserorder(order);
-	    			orderExtendValue.setGenrePropertyId(genreProperty);
-	    			if("orderBxId".equals(genreProperty.getGenrePropertyFieldName())){
-	    				orderExtendValue.setOrderprojecttypeValueFieldValue(bxId);
-	    			}
-	    			ordermanagerOrderprojecttypeValueManager.saveOrdermanagerOrderprojecttypeValue(orderExtendValue);
-	    		}
-    		}
-    		//物业管理员定价，同时关闭派工记录
-    		PropertyservicemanagerTs ts =  propertyservicemanagerTsManager.getTsBybxId(bxId);
-    		ts.setTsStatus("03");
-    		propertyservicemanagerTsManager.savePropertyservicemanagerTs(ts);
-    		//保存报修记录
-    		bx.setBxStatus(o.getBxStatus());
-    		bx.setBxAmount(o.getBxAmount());
-    		return propertyservicemanagerBxDao.save(bx);
-    	}else{
-    		o.setBxCode(BizCodeUtil.getInstance().getBizCodeDate("BX"));
-    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    		return propertyservicemanagerBxDao.save(o);
-    	}
+   		}	
+    	return savebx;
     }
 
     /**
@@ -242,6 +260,29 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 		}
 		
 	}
-
+	
+	/**
+	 * 根据报修代码集
+	 * @param o 报修对象
+	 * @return
+	 * @throws BusException
+	 */
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId")})
+	public List<Record> getBxcodemapforpage(PropertyservicemanagerBx o) throws BusException{
+		List<Record> recordList=new ArrayList<Record>();
+		Collection<Condition> condition =  new ArrayList<Condition>();
+		Collection<Order> order = new ArrayList<Order>();
+		condition.add(ConditionUtils.getCondition("codemap.code", Condition.EQUALS,"bx_type"));
+		order.add(ConditionUtils.getOrder("itemValue", true));
+		List<Codeitem> list = codeitemManager.getCodeitems(condition, order);
+		for(int i=0;i<list.size();i++){
+				Codeitem co=list.get(i);
+				Record record = new Record();
+				record.put("itemValue", co.getItemValue());
+				record.put("itemName", co.getItemCaption());
+				recordList.add(record);
+			}	
+		return recordList;
+	}
     
 }

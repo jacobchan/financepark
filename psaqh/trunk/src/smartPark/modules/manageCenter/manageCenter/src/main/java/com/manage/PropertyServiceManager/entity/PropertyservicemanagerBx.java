@@ -41,7 +41,7 @@ public class PropertyservicemanagerBx implements Domain{
 	private String bxRemark;//描述
 
 	@Column(name = "BX_ADDRESS_")
-	@Length(max=36)
+	@Length(max=100)
 	private String bxAddress;//维修地址
 
 	@Column(name = "BX_WAY_")
@@ -84,6 +84,17 @@ public class PropertyservicemanagerBx implements Domain{
 	@Length(max=50)
 	private String bxCode;//报修单号
 	
+	@Column(name = "APPLY_TIME_")
+	private String applyTime;//申请时间
+	
+	public String getApplyTime() {
+		return applyTime;
+	}
+
+	public void setApplyTime(String applyTime) {
+		this.applyTime = applyTime;
+	}
+
 	public String getBxCode() {
 		return bxCode;
 	}
@@ -205,6 +216,8 @@ public class PropertyservicemanagerBx implements Domain{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
+				+ ((applyTime == null) ? 0 : applyTime.hashCode());
+		result = prime * result
 				+ ((bxAddress == null) ? 0 : bxAddress.hashCode());
 		result = prime * result
 				+ ((bxAmount == null) ? 0 : bxAmount.hashCode());
@@ -241,6 +254,11 @@ public class PropertyservicemanagerBx implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		PropertyservicemanagerBx other = (PropertyservicemanagerBx) obj;
+		if (applyTime == null) {
+			if (other.applyTime != null)
+				return false;
+		} else if (!applyTime.equals(other.applyTime))
+			return false;
 		if (bxAddress == null) {
 			if (other.bxAddress != null)
 				return false;
