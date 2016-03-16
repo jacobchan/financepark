@@ -168,25 +168,26 @@
 			});
 		}
 	});
-	$('#dateRangePreMonth_').click(function() {
-		alert("a");
-		$.youi.ajaxUtils.ajax({
-			url : serviceURL,
-			data:params.join('&'),
-			jsonp : 'data:jsonp',
-			dataType : 'jsonp',
-			async : false,
-			success : function(results) {
-				if (results && results.records) {
-					var records = results.records;
-					for(var i=0; i<records.length; i++){
-						if(records[i].resoStatus=='02'){
-							$("#resoIds").html(records[i].resoId);
-							numArray.push(Number(records[i].resoDate.substring(records[i].resoDate.lastIndexOf("-")+1, records[i].resoDate.length)));
+	$(function() {
+		$(".i_next").click(function() {
+			$.youi.ajaxUtils.ajax({
+				url : serviceURL,
+				data:params.join('&'),
+				jsonp : 'data:jsonp',
+				dataType : 'jsonp',
+				async : false,
+				success : function(results) {
+					if (results && results.records) {
+						var records = results.records;
+						for(var i=0; i<records.length; i++){
+							if(records[i].resoStatus=='02'){
+								$("#resoIds").html(records[i].resoId);
+								numArray.push(Number(records[i].resoDate.substring(records[i].resoDate.lastIndexOf("-")+1, records[i].resoDate.length)));
+							}
 						}
 					}
 				}
-			}
+			});
 		});
 	});
 </script>
