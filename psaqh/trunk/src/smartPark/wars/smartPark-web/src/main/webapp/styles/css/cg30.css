@@ -18,6 +18,16 @@ a{color:#aaa}.inline_b{display:inline-block}.fw{font-weight:600}.oh{ overflow:hi
 .banner{background:url(../images/cg30/banner.png) no-repeat;min-height:490px;height:auto; background-size:100% auto;}
 .square_ul li{width:290px;background-color:#fff;padding:0 15px 15px 15px;display:inline-block;float:left;;margin:10px 10px 0 0;position:relative}
 .square_ul li:hover{box-shadow:#ccc -2px 3px 5px 0px}
+.square_ul_office li{width:290px;background-color:#fff;padding:15px;display:inline-block;float:left;;margin:10px 10px 0 0;position:relative}
+.square_ul_office li:hover{box-shadow:#ccc -2px 3px 5px 0px}
+.square_ul_clear li{width:290px;background-color:#fff;padding:15px;display:inline-block;float:left;;margin:10px 10px 0 0;position:relative}
+.square_ul_clear li:hover{box-shadow:#ccc -2px 3px 5px 0px}
+.square_ul_home li{width:290px;background-color:#fff;padding:15px;display:inline-block;float:left;;margin:10px 10px 0 0;position:relative}
+.square_ul_home li:hover{box-shadow:#ccc -2px 3px 5px 0px}
+.square_ul_it li{width:290px;background-color:#fff;padding:15px;display:inline-block;float:left;;margin:10px 10px 0 0;position:relative}
+.square_ul_it li:hover{box-shadow:#ccc -2px 3px 5px 0px}
+.square_ul_phone li{width:290px;background-color:#fff;padding:15px;display:inline-block;float:left;;margin:10px 10px 0 0;position:relative}
+.square_ul_phone li:hover{box-shadow:#ccc -2px 3px 5px 0px}
 .cgimg{height:245px; text-align: center;line-height: 245px}
 .cg_tag{position:absolute;left:15px;top:15px}
 .info_tit{padding:10px 15px;font-size:18px;color:#333;position:absolute;top:-24px;left:32%;background:#f1f1f1}
