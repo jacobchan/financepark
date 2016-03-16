@@ -578,7 +578,7 @@ background:url(../images/company/ab_ico.png) no-repeat}
 .sf_cc li:hover,.sf_cc li.active{background: #FF6715;color:#fff;}
 
 /*登录*/
-.loginbox{padding:100px 0 100px 850px;background:url(../images/index/logoin.jpg) 100px 100px no-repeat;}
+.loginbox{padding:100px 0 100px 850px;background:url(../images/index/logoin.jpg) 100px 100px no-repeat;height: 600px;}
 .w350{width:350px;border:1px solid #efecec;}
 .login_ul li{display:inline-block;float:left;width:50%;padding:10px;text-align:center;font-size:16px;color:#333;cursor:pointer;background:#F3F3F3;line-height:30px;}
 .login_ul li.active{color:#FB7730;background:#fff;}
