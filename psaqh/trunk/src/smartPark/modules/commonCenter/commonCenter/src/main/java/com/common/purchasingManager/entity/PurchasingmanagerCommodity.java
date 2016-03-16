@@ -104,7 +104,7 @@ public class PurchasingmanagerCommodity implements Domain{
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="MERCHANT_ID_")
 	private com.common.purchasingManager.entity.PurchasingmanagerMerchant purchasingmanagerMerchant;//商户ID
-	
+
 	public String getUpdateUser(){
 		return this.updateUser;
 	}

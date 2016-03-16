@@ -128,9 +128,9 @@ public class PurchasingmanagerCommodityExtendManagerImpl extends BaseManagerImpl
 		PurchasingmanagerCommodity pc =  purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
 		//获得最上级商品类别
 		PurchasingmanagerGenre pg = pc.getPurchasingmanagerGenre();
-		while(pg.getPurchasingmanagerGenre() != null){
-			pg = pg.getPurchasingmanagerGenre();
-		}
+//		while(pg.getPurchasingmanagerGenre() != null){
+//			pg = pg.getPurchasingmanagerGenre();
+//		}
 		//根据类别ID获得商品类属性列表
 		Collection<Condition> conditions = new ArrayList<Condition>();
 		conditions.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.EQUALS, pg.getGenreId()));
@@ -182,5 +182,38 @@ public class PurchasingmanagerCommodityExtendManagerImpl extends BaseManagerImpl
 				purchasingmanagerCommodityExtendDao.save(pce);
 			}
 		}
+	}
+	/**
+     * 根据商品ID获取商品扩展属性
+     */
+	@Override
+	@EsbServiceMapping
+	public List<PurchasingmanagerCommodityExtend> getCommodityExtList(@ServiceParam(name="commodityId") String commodityId) 
+			throws BusException {
+		List<PurchasingmanagerCommodityExtend> commodityExtList = new ArrayList<PurchasingmanagerCommodityExtend>();
+		PurchasingmanagerCommodity pc =  purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
+		//获得最上级商品类别
+		PurchasingmanagerGenre pg = pc.getPurchasingmanagerGenre();
+//		while(pg.getPurchasingmanagerGenre() != null){
+//			pg = pg.getPurchasingmanagerGenre();
+//		}
+		//根据类别ID获得商品类属性列表
+		Collection<Condition> conditions = new ArrayList<Condition>();
+		conditions.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.EQUALS, pg.getGenreId()));
+		List<PurchasingmanagerGenreProperty> pgpList = purchasingmanagerGenrePropertyManager.getPurchasingmanagerGenrePropertys(conditions, null);
+		for(PurchasingmanagerGenreProperty pgp:pgpList){
+			PurchasingmanagerCommodityExtend pce = new PurchasingmanagerCommodityExtend();
+			//根据商品ID和商品类属性字段名获取商品扩展属性值列表
+			List<PurchasingmanagerCommodityExtend> pceList = purchasingmanagerCommodityExtendDao.getList(
+					new String[]{"commodity.commodityId","purchasingmanagerGenreProperty.genrePropertyFieldName"}, 
+					new String[]{commodityId,pgp.getGenrePropertyFieldName()});
+			if(pceList.size()>0){
+				pce = pceList.get(0);
+			}else{
+				pce.setPurchasingmanagerGenreProperty(pgp);
+			}
+			commodityExtList.add(pce);
+		}
+		return commodityExtList;
 	}
 }

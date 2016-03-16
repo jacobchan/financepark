@@ -4,10 +4,11 @@
 package com.common.OrderManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: 订单商品明细
@@ -39,10 +40,10 @@ public class OrdermanagerCommoditydetail implements Domain{
 
 	@Column(name = "UPDATE_TIME_")
 	private String updateTime;//修改时间
-
-	@Column(name = "COMMODITY_ID_")
-	@Length(max=36)
-	private String commodityId;//商品ID
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="COMMODITY_ID_")
+	private PurchasingmanagerCommodity commodityId;//商品ID
 
 	@Column(name = "CREATE_TIME_")
 	private String createTime;//创建时间
@@ -50,6 +51,7 @@ public class OrdermanagerCommoditydetail implements Domain{
 	@Column(name = "COMMODITYDETAIL_COMMODITY_ID_")
 	@Length(max=36)
 	private String commoditydetailCommodityId;//商户ID
+	
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "COMMODITYDETAIL_ID_")
@@ -95,13 +97,15 @@ public class OrdermanagerCommoditydetail implements Domain{
 	public void setUpdateTime(String updateTime){
 		this.updateTime = updateTime;
 	}
-	public String getCommodityId(){
-		return this.commodityId;
-	}
 	
-	public void setCommodityId(String commodityId){
+	public PurchasingmanagerCommodity getCommodityId() {
+		return commodityId;
+	}
+
+	public void setCommodityId(PurchasingmanagerCommodity commodityId) {
 		this.commodityId = commodityId;
 	}
+
 	public String getCreateTime(){
 		return this.createTime;
 	}

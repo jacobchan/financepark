@@ -12,6 +12,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 
 public interface OrdermanagerUserorderManager extends BaseManager{
@@ -81,4 +82,49 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public OrdermanagerUserorder saveITSerOrder(String userId,String commodityId) throws BusException;
+	/**
+	 * 新增工商变更订单
+	 * @param userId
+	 * @param orderDetailList
+	 * @return
+	 * @throws BusException
+	 */
+	public OrdermanagerUserorder saveComChangeOrder(String userId,
+			List<OrdermanagerCommoditydetail> orderDetailList) throws BusException;
+	/**
+	 * 新增公司注册订单
+	 * @param userId
+	 * @param orderDetailList
+	 * @return
+	 * @throws BusException
+	 */
+	public OrdermanagerUserorder saveComReisterOrder(String userId,
+			List<OrdermanagerCommoditydetail> orderDetailList) throws BusException;
+	/**
+	 * 新增代理记账订单
+	 * @param userId
+	 * @param orderDetailList
+	 * @return
+	 * @throws BusException
+	 */
+   	public OrdermanagerUserorder saveAgencyOrder(String userId,
+   			List<OrdermanagerCommoditydetail> orderDetailList) throws BusException;
+   	/**
+   	 * 新增法律服务订单
+   	 * @param userId
+   	 * @param orderDetailList
+   	 * @return
+   	 * @throws BusException
+   	 */
+   	public OrdermanagerUserorder saveLawSerOrder(String userId,
+   			List<OrdermanagerCommoditydetail> orderDetailList) throws BusException;
+   	/**
+   	 * 新增商标专利订单
+   	 * @param userId
+   	 * @param orderDetailList
+   	 * @return
+   	 * @throws BusException
+   	 */
+   	public OrdermanagerUserorder saveChopPatentOrder(String userId,
+   			List<OrdermanagerCommoditydetail> orderDetailList) throws BusException;
 }
