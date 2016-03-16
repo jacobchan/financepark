@@ -89,7 +89,7 @@
 				      "<td >"+record[i].ocDate+"</td>"+
 				      "<td>"+record[i].memberId+"</td>"+
 				      "<td>"+status+"</td>"+				    					    
-                      "<td > <input type='button' value='取消'   onclick='hhf("+record[i].ocId+")' class='hhf-submit' style='height:24px;'/>"+                               
+                      "<td > <input type='button' value='取消'   onclick='hhf(\""+record[i].ocId+"\")' class='hhf-submit' style='height:24px;'/>"+                               
                       " </tr>"; 
 			          $(".gt-table").append(html);	
 				  }
@@ -117,14 +117,7 @@
 				
 			}
 		};
-		function hhf(id){
-			if (window.confirm("您确定要取消吗?")) {
-				return true;
-			}
-			else{
-				return false;
-			}
-			
+		function hhf(id){			
 			var ocStatus='08';
 			var ocId=id;
 			var params = ['ocId='+ocId+'','ocStatus='+ocStatus+''];
