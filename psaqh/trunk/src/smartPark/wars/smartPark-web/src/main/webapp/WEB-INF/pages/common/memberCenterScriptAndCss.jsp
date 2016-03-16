@@ -12,6 +12,5 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/lib/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/lib/giui.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/js/right.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/js/adcom.js"></script>
   
 <script type="text/javascript"  src="<%=request.getContextPath()%>/scripts/js/birthday.js"></script>
