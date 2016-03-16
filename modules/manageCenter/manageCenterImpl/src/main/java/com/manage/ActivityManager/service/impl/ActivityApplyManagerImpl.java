@@ -216,6 +216,9 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
 		return activityDocuments;
 	}
     
+    /**
+     * 申请通过更改状态
+     */
     @EsbServiceMapping
 	public void updateApplyStatus(@ServiceParam(name="applyId") String id) throws BusException {
 		// TODO Auto-generated method stub
