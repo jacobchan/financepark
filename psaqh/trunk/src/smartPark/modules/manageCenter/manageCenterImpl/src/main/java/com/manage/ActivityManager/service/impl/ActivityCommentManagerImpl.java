@@ -18,6 +18,7 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.DateUtils;
 
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 
@@ -74,6 +75,7 @@ public class ActivityCommentManagerImpl extends BaseManagerImpl implements Activ
 //    	}else{//新增
 //    		
 //    	}
+    	o.setCommentTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     	return activityCommentDao.save(o);
     }
 
