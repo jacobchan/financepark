@@ -25,7 +25,6 @@
 			<youi:fieldHidden property="commentId"  caption="评论ID"/>
 			<youi:fieldSelect property="activityApply.applyId"  caption="活动" src="esb/web/activityApplyManager/getActivityApplys.json" code="applyId" show="applyTitle" notNull="ture"/>
 			<youi:fieldSelect property="commentMember"  caption="评论人" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName" notNull="ture"/>			
-			<youi:fieldCalendar property="commentTime"  caption="评论时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="ture"/>
 			<youi:fieldArea property="commentContent"  caption="评论内容" column="2"/>
 		</youi:fieldLayout>
 	</youi:form>
