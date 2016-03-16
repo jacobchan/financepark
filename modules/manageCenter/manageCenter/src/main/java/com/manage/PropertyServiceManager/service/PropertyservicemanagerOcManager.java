@@ -79,7 +79,6 @@ public interface PropertyservicemanagerOcManager extends BaseManager{
 	 */
 	public List<PropertyservicemanagerOc> getPropertyservicemanagerOcListByLoginUser(PropertyservicemanagerOc o) throws BusException;
 	 public PropertyservicemanagerOc updateBindStatus(
-	    		 String ocId,
-	    		 String bindStatus
+			 PropertyservicemanagerOc p
 	    		) throws BusException;
 }
