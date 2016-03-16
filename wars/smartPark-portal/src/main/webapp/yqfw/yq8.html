@@ -180,6 +180,7 @@
 				};
 				var str=JSON.stringify(obj);
 				alert(str); */
+				if(!isLogin){alert("请登录");return;} 
 				//判断是否是企业员工
 				$.youi.ajaxUtils.ajax({
 				url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
