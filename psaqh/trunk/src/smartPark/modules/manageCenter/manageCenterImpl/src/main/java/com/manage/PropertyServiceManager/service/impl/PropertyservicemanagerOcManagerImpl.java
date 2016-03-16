@@ -210,7 +210,18 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
        psm.setBindStatus(bindStatus);
 	   return propertyservicemanagerOcDao.save(psm);    		
     }
-
-    
-
+   /**
+	 * 增加绑定卡号
+	 * @param ocNumber
+	 * @param bindStatus
+	 */
+   @EsbServiceMapping
+   public PropertyservicemanagerOc addBindOc(
+		   @ServiceParam(name="ocNumber") String ocNumber,  
+		   @ServiceParam(name="bindStatus") String  bindStatus)
+			throws BusException {											
+	   PropertyservicemanagerOc psm = propertyservicemanagerOcDao. getObjectByUniqueProperty("ocNumber", ocNumber);   		
+       psm.setBindStatus(bindStatus);
+	   return propertyservicemanagerOcDao.save(psm);    		
+   }
 }
