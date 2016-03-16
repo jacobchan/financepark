@@ -54,6 +54,8 @@
             <div class="colorblock" style="background:#4AA2D4"></div><span class="vm">&nbsp;可预约</span>
             <div class="colorblock" style="background:#C0C0C0"></div><span class="vm">&nbsp;已过期</span>
         </div>
+        <div id="resoIds" style="display:none;"></div>
+        <span id="month" style="display:none;">3</span>
     	<table id="data_timer">
         	 <tr>
             	<td>8:00-9:00</td>
@@ -208,7 +210,7 @@
 <script src='../scripts/page/date_week/moment.min.js'></script>
 <script src='../scripts/page/date_week/fullcalendar.min.js'></script>
 <script src='../scripts/page/date_week/lang-all.js'></script>
-<script type="text/javascript" src="../scripts/page/kefu.js"></script>
+<!-- <script type="text/javascript" src="../scripts/page/kefu.js"></script> -->
 <Script  type="text/javascript">
 function GetRequest() {
    var url = location.search; //获取url中"?"符后的字串
@@ -241,6 +243,60 @@ function GetRequest() {
 				agenda: null, 
 			});
 		}
+		
+		var numArray = new Array();
+    	var Request = new Object();
+    	var resoTime = "";
+    	Request = GetRequest();
+    	var commodityId = Request['id'];
+    	var params = ['commodityId='+commodityId];
+    	var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPublicutilitiesmanagerResoByCommodityId.json";
+    	//根据商品id获取资源可用状态
+    	$.youi.ajaxUtils.ajax({
+    		url : serviceURL,
+    		data:params.join('&'),
+    		jsonp : 'data:jsonp',
+    		dataType : 'jsonp',
+    		async : false,
+    		success : function(results) {
+    			if (results && results.records) {
+    				var records = results.records;
+    				$("#resoIds").empty();
+    				for(var i=0; i<records.length; i++){
+    					if((Number(records[i].resoDate.substring(5,7)))==Number($("#month").html())){
+    						//主键追加到隐藏域供预约使用
+    						$("#resoIds").append(records[i].resoId+",");
+    						if(records[i].resoTime=='01'){
+    							resoTime = "8:00-9:00";
+    						}else if(records[i].resoTime=='02'){
+    							resoTime = "9:00-10:00";
+    						}else if(records[i].resoTime=='03'){
+    							resoTime = "10:00-11:00";
+    						}else if(records[i].resoTime=='04'){
+    							resoTime = "11:00-12:00";
+    						}else if(records[i].resoTime=='05'){
+    							resoTime = "12:00-13:00";
+    						}else if(records[i].resoTime=='06'){
+    							resoTime = "13:00-14:00";
+    						}else if(records[i].resoTime=='07'){
+    							resoTime = "14:00-15:00";
+    						}else if(records[i].resoTime=='08'){
+    							resoTime = "15:00-16:00";
+    						}else if(records[i].resoTime=='09'){
+    							resoTime = "16:00-17:00";
+    						}else{
+    							resoTime = "17:00-18:00";
+    						}
+    						if(records[i].resoStatus=='02'){
+    							numArray.push(records[i].resoDate.substring(5, 10)+"日"+resoTime+"已预订\n\n");
+    						}
+    					}
+    				}
+    				alert(numArray.toString().replace(",",""));
+    			}
+    		}
+    	});
+		
 		renderCalendar();
 		/**/
 		var today,cursor=0;
@@ -327,6 +383,7 @@ function GetRequest() {
 		});
 		
 		$("#online").click(function(){
+			alert("已预约id："+$("#resoIds").html().substring(0,$("#resoIds").html().length-1));
 			$(".pop_layer").show();
 		});
 		$(".close0").click(function(){
