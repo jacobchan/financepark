@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : loclhost
-Source Server Version : 50710
-Source Host           : localhost:3306
+Source Server         : 220.249.113.12
+Source Server Version : 50616
+Source Host           : 220.249.113.12:3306
 Source Database       : youi2
 
 Target Server Type    : MYSQL
-Target Server Version : 50710
+Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2016-03-01 11:37:42
+Date: 2016-03-16 14:43:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -46,9 +46,9 @@ CREATE TABLE `sp_purchasingmanager_commodity` (
   KEY `FK_Relationship_23` (`CATEGORY_ID_`),
   KEY `FK_Relationship_24` (`GENRE_ID_`),
   KEY `FK_Relationship_29` (`MERCHANT_ID_`),
+  CONSTRAINT `FK_Relationship_29` FOREIGN KEY (`MERCHANT_ID_`) REFERENCES `sp_purchasingmanager_merchant` (`MERCHANT_ID_`),
   CONSTRAINT `FK_Relationship_23` FOREIGN KEY (`CATEGORY_ID_`) REFERENCES `sp_purchasingmanager_category` (`CATEGORY_ID_`),
-  CONSTRAINT `FK_Relationship_24` FOREIGN KEY (`GENRE_ID_`) REFERENCES `sp_purchasingmanager_genre` (`GENRE_ID_`),
-  CONSTRAINT `FK_Relationship_29` FOREIGN KEY (`MERCHANT_ID_`) REFERENCES `sp_purchasingmanager_merchant` (`MERCHANT_ID_`)
+  CONSTRAINT `FK_Relationship_24` FOREIGN KEY (`GENRE_ID_`) REFERENCES `sp_purchasingmanager_genre` (`GENRE_ID_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='320301商品信息';
 
 -- ----------------------------
@@ -68,6 +68,3 @@ INSERT INTO `sp_purchasingmanager_commodity` VALUES (null, '40285e81533020490153
 INSERT INTO `sp_purchasingmanager_commodity` VALUES (null, '40285e815330204901533030e58e0007', null, '40285e815321ea3b015321ef06b80001', '40285e8153216adc01532177bed9000b', '法律服务', '1000.00', null, '法律服务', null, null, '2016-03-01 08:07:00', '2016-03-23 21:23:00', null, null, null, '1', null, null, '2016-03-01 11:20:24', null, '2016-03-01 11:20:24');
 INSERT INTO `sp_purchasingmanager_commodity` VALUES (null, '40285e8153302049015330329cf50008', null, '40285e815321ea3b015321ef06b80001', '40285e8153216adc01532177e899000c', '商标专利', '1000.00', null, '商标专利', null, null, '2016-03-01 15:18:00', '2016-03-23 21:23:00', null, null, null, '1', null, null, '2016-03-01 11:22:16', null, '2016-03-01 11:22:16');
 INSERT INTO `sp_purchasingmanager_commodity` VALUES (null, '40285e81533020490153303501730009', null, '40285e815321ea3b015321ef06b80001', '40285e8153216adc015321781137000d', '威客服务', '1000.00', null, '威客服务', null, null, '2016-03-01 09:12:00', '2016-03-23 21:23:00', null, null, null, '1', null, null, '2016-03-01 11:24:53', null, '2016-03-01 11:24:53');
-INSERT INTO `sp_purchasingmanager_commodity` VALUES (null, '40285e81533020490153303e0e19000e', null, '40285e81532c5e7701532c6cebf70006', '40285e81533020490153303cef58000a', '电脑', '69.00', null, '维修电脑', null, null, '2016-03-01 08:12:00', '2016-03-31 22:28:00', null, null, null, '1', null, null, '2016-03-01 11:34:46', null, '2016-03-01 11:34:46');
-INSERT INTO `sp_purchasingmanager_commodity` VALUES (null, '40285e81533020490153303ec317000f', null, '40285e81532c5e7701532c6cebf70006', '40285e81533020490153303cef58000a', '网络', '69.00', null, '维修网络', null, null, '2016-03-01 21:23:00', '2016-03-31 22:23:00', null, null, null, '1', null, null, '2016-03-01 11:35:32', null, '2016-03-01 11:35:32');
-INSERT INTO `sp_purchasingmanager_commodity` VALUES (null, '40285e81533020490153303fdbb60010', null, '40285e81532c5e7701532c6cebf70006', '40285e81533020490153303d155c000b', 'IT服务套餐一', '169.00', null, '设备小于10台', null, null, '2016-03-01 22:18:00', '2016-03-31 21:23:00', null, null, null, '1', null, null, '2016-03-01 11:36:44', null, '2016-03-01 11:36:44');
