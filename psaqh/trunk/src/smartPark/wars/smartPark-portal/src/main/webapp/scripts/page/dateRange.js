@@ -473,7 +473,7 @@ pickerDateRange.prototype.init = function(isCompare) {
         __method.calendar_endDate.setMonth(__method.calendar_endDate.getMonth() - 1, 1);
         __method.mOpts.endDate = __method.date2ymd(__method.calendar_endDate).join('-');
         
-      //根据商品id获取资源可用状态
+        //根据商品id获取资源可用状态
 		$.youi.ajaxUtils.ajax({
 			url : serviceURL,
 			data:params.join('&'),
@@ -483,15 +483,16 @@ pickerDateRange.prototype.init = function(isCompare) {
 			success : function(results) {
 				if (results && results.records) {
 					var records = results.records;
+					$("#resoIds").empty();
 					for(var i=0; i<records.length; i++){
-						//主键追加到隐藏域供预约使用
-						$("#resoIds").append(records[i].resoId+",");
 						if((Number(records[i].resoDate.substring(5,7)))==Number($("#month").html())){
+							//主键追加到隐藏域供预约使用
+							$("#resoIds").append(records[i].resoId+",");
 							if(records[i].resoStatus=='02'){
 								numArray.push(Number(records[i].resoDate.substring(records[i].resoDate.lastIndexOf("-")+1, records[i].resoDate.length)));
 							}
 						}else{
-							numArray.splice(0,numArray.length);
+							numArray.splice(i,numArray.length);
 						}
 					}
 				}
@@ -526,15 +527,16 @@ pickerDateRange.prototype.init = function(isCompare) {
 			success : function(results) {
 				if (results && results.records) {
 					var records = results.records;
+					$("#resoIds").empty();
 					for(var i=0; i<records.length; i++){
-						//主键追加到隐藏域供预约使用
-						$("#resoIds").append(records[i].resoId+",");
 						if((Number(records[i].resoDate.substring(5,7)))==Number($("#month").html())){
+							//主键追加到隐藏域供预约使用
+							$("#resoIds").append(records[i].resoId+",");
 							if(records[i].resoStatus=='02'){
 								numArray.push(Number(records[i].resoDate.substring(records[i].resoDate.lastIndexOf("-")+1, records[i].resoDate.length)));
 							}
 						}else{
-							numArray.splice(0,numArray.length);
+							numArray.splice(i,numArray.length);
 						}
 					}
 				}
