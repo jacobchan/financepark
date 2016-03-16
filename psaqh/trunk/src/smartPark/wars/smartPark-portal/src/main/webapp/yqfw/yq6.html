@@ -13,20 +13,7 @@
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/yqfwnews.js"></script>
 	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
-	<script>
-	$(function(){
-		$(".sel-add label").click(function(){
-			if($(this).children('input[name="address"]').prop("checked")){
-				if($(this).parent().index()==0){
-					$(this).parents(".sel-add").find(".input-show").addClass("undis");
-				}else{
-					$(this).parents(".sel-add").find(".input-show").removeClass("undis");
-				}
-			}
-		});
-	})
 	
-	</script>
 </head>
 <body>
 	<!--***top start****************************************-->
@@ -50,19 +37,19 @@
 								<col></col>
 							</colgroup>
 							<tr>
-								<td align="center" id="bxComp">企业名称</td>
-								<td><input type="text"></td>
+								<td align="center">企业名称</td>
+								<td><input type="text" id="bxComp"></td>
 								<td align="center">报修类型</td>
 								<td>
 									<div class="tct-select">
-										<div class="ic-select">
+										<!-- <div class="ic-select">
 											<p id="bxType">空调类</p>
 										</div>
 										<ul style="display: none;" class="select-nav">
 											<li>空调类</li>
 											<li>水工类</li>
 											<li>木工类</li>
-										</ul>
+										</ul> -->
 									</div>
 								</td>
 							</tr>
@@ -85,9 +72,9 @@
 							<tr>
 								<td valign="top">地址选择</td>
 								<td class="sel-add">
-									<p class="mb10"><label><input type="radio" name="address" class="mr5" checked="checked">默认地址（华侨城创意园e6栋）</label></p>
+									<!-- <p class="mb10"><label><input type="radio" name="address" class="mr5" checked="checked">默认地址（华侨城创意园e6栋）</label></p>
 									<p class="mb10"><label><input type="radio" name="address" class="mr5">其他地址</label></p>
-									<p class="mb10"><input type="text" class="input-show undis" placeholder="科技园a7"></p>
+									<p class="mb10"><input type="text" class="input-show undis" placeholder="科技园a7"></p> -->
 								</td>
 							</tr>
 							<tr>
@@ -126,7 +113,7 @@
 				};
 				var str=JSON.stringify(obj);
 				alert(str); */
-				/* if(!isLogin){alert("请登录");return;} */
+				 if(!isLogin){alert("请登录");return;} 
 				//判断是否是企业员工
 				$.youi.ajaxUtils.ajax({
 				url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
@@ -139,14 +126,19 @@
 							alert("请输入相关描述！");
 							return false;
 						}
+						var add = "";
+						if($('input[name="address"]')[0].getAttribute("value")==0){
+							add = result.record.rz.rzMem;
+						}else{
+							add = $('input[name="otheraddress"]').val();
+						}
 						var params = ['bxComp='+$("#bxComp").val(),
-										//'bxWay='+$("#bxWay").text(),
-										'bxType=00',
-										//'bxProject='+$("#bxProject").text(),
+										'bxType='+$("#bxType")[0].getAttribute("value"),
 										'bxRemark='+remark,
-										'bxFujian='+$("#upload").val(),'bxStatus=00'];
+										'bxAddress='+add,
+										'bxFujian='+$("#upload").val()];
 						var serviceURL =baseUrl+"propertyservicemanagerBxManager/savePropertyservicemanagerBx.json";
-				
+						alert(params);
 						//公共方法
 						$.youi.ajaxUtils.ajax({
 							url:serviceURL,
@@ -170,6 +162,86 @@
 				
 			});
 		});
+	</script>
+	<!-- 拼接报修类型 -->
+	<script type="text/javascript">
+		$(function(){
+				$.youi.ajaxUtils.ajax({
+					url:baseUrl +"propertyservicemanagerBxManager/getBxcodemapforpage.json", 
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(result){
+						if(result&&result.records){
+							_parseRecords(result.records);
+						}
+					}
+				});
+			});
+		function _parseRecords(record){
+				var html ="";
+				html=html+"<div class='ic-select'>"+
+				"<p id='bxType' value='"+record[0].itemValue+"'>"+record[0].itemName+"</p>"+
+				"</div>"+
+				"<ul style='display: none;' class='select-nav'>";
+				for(var i=0;i<record.length;i++){
+					html =html +"<li value='"+record[i].itemValue+"'>"+record[i].itemName+"</li>"
+				}
+					
+				html=html+"</ul> ";
+				$(".tct-select").append(html);
+				activeclick();
+		}
+	</script>
+	
+	<!-- 拼接报修地址 -->
+	<script type="text/javascript">
+		$(function(){
+				$.youi.ajaxUtils.ajax({
+					url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(result){
+						if(result&&result.record){
+							addressRecords(result.record);
+						}
+					}
+				});
+			});
+		function addressRecords(record){
+			var html = "<p class='mb10'><label><input type='radio' name='address' class='mr5' checked='checked' value='0'>默认地址:"+record.rz.rzMem+"</label></p>"+
+			"<p class='mb10'><label><input type='radio' name='address' class='mr5'>其他地址</label></p>"+
+			"<p class='mb10'><input type='text' name='otheraddress' class='input-show undis' placeholder='科技园a7'></p>";
+			$(".sel-add").append(html);
+			address();
+	}
+	</script>
+	<script type="text/javascript">
+		function activeclick(){
+			$(".ic-select").click(function(e){
+				$(".select-nav").hide();
+			    $(this).next(".select-nav").show();
+			    e.stopPropagation();//
+			});
+			$(".select-nav li").click(function(){
+				$(this).parents(".tct-select").find(".ic-select p").text($(this).text());
+				 var livale = "0"+$(this).val(); 
+				$(this).parents(".tct-select").find(".ic-select p")[0].setAttribute("value",livale);
+				$(this).parent().hide();
+			})
+		};
+		function address(){
+			$(".sel-add label").click(function(){
+				if($(this).children('input[name="address"]').prop("checked")){
+					if($(this).parent().index()==0){
+						$(this).parents(".sel-add").find(".input-show").addClass("undis");
+						$('input[name="address"]')[0].setAttribute("value","0");
+					}else{
+						$(this).parents(".sel-add").find(".input-show").removeClass("undis");
+						$('input[name="address"]')[0].setAttribute("value","1");
+					}
+				}
+			});
+		};
 	</script>
 </body>
 </html>

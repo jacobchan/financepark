@@ -107,6 +107,7 @@ $(function(){
 			};
 		var str=JSON.stringify(obj);
 		alert(str); */
+		if(!isLogin){alert("请登录");return;} 
 		var phone = $("#iphone").val();
 		var sex = $(".sex-group span.active").index()+1;
 		if(phone=="" || phone.length==0){
