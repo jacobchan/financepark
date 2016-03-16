@@ -53,6 +53,7 @@
             <div class="colorblock" style="background:#A2354A"></div><span class="vm">&nbsp;已预约（不可选）</span>
             <div class="colorblock" style="background:#4AA2D4"></div><span class="vm">&nbsp;空闲（可选）</span>
         </div>
+        <div id="resoIds" style=""></div>
 		<span class="date_title" id="date1"></span>
         <div class="tc mt50" id="commit">
         	<div class="btn-ck mr20" id="online">在线预约</div>
@@ -114,21 +115,21 @@
 <script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 <script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 <script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
-<script type="text/javascript" src="../scripts/page/kefu.js"></script>
+<!-- <script type="text/javascript" src="../scripts/page/kefu.js"></script> -->
 <script src="../scripts/page/dateRange.js"></script>
 <Script  type="text/javascript">
-function GetRequest() {
-   var url = location.search; //获取url中"?"符后的字串
-   var theRequest = new Object();
-   if (url.indexOf("?") != -1) {
-      var str = url.substr(1);
-      strs = str.split("&");
-      for(var i = 0; i < strs.length; i ++) {
-         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
-      }
-   }
-   return theRequest;
-}
+	function GetRequest() {
+   		var url = location.search; //获取url中"?"符后的字串
+   		var theRequest = new Object();
+   		if (url.indexOf("?") != -1) {
+      		var str = url.substr(1);
+      		strs = str.split("&");
+      		for(var i = 0; i < strs.length; i ++) {
+         		theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+      		}
+   		}
+   		return theRequest;
+	}
 </Script>
 <script type="text/javascript">
 	var numArray = new Array();
@@ -137,6 +138,7 @@ function GetRequest() {
 	var commodityId = Request['id'];
 	var params = ['commodityId='+commodityId];
 	var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPublicutilitiesmanagerResoByCommodityId.json";
+	//根据商品id获取资源可用状态
 	$.youi.ajaxUtils.ajax({
 		url : serviceURL,
 		data:params.join('&'),
@@ -148,6 +150,7 @@ function GetRequest() {
 				var records = results.records;
 				for(var i=0; i<records.length; i++){
 					if(records[i].resoStatus=='02'){
+						$("#resoIds").append(records[i].resoId+",");
 						numArray.push(Number(records[i].resoDate.substring(records[i].resoDate.lastIndexOf("-")+1, records[i].resoDate.length)));
 					}
 				}
@@ -162,6 +165,28 @@ function GetRequest() {
 				disCertainDate : numArray
 			});
 		}
+	});
+	$(function() {
+		$(".i_next").click(function() {
+			$.youi.ajaxUtils.ajax({
+				url : serviceURL,
+				data:params.join('&'),
+				jsonp : 'data:jsonp',
+				dataType : 'jsonp',
+				async : false,
+				success : function(results) {
+					if (results && results.records) {
+						var records = results.records;
+						for(var i=0; i<records.length; i++){
+							if(records[i].resoStatus=='02'){
+								$("#resoIds").html(records[i].resoId);
+								numArray.push(Number(records[i].resoDate.substring(records[i].resoDate.lastIndexOf("-")+1, records[i].resoDate.length)));
+							}
+						}
+					}
+				}
+			});
+		});
 	});
 </script>
 <script>
@@ -203,8 +228,13 @@ function GetRequest() {
 				}
 			}
 		});
-
+		
+		//在线预约点击事件
 		$("#online").click(function() {
+			//获取初始化已预订日期的预约状态主键集合
+			var resoIds = $("#resoIds").html();
+			var resoIdArray = resoIds.substring(0, resoIds.length-1);
+			alert(resoIdArray);
 			$(".pop_layer").show();
 		});
 		$(".close0").click(function() {
