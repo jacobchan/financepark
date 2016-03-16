@@ -54,6 +54,7 @@
             <div class="colorblock" style="background:#4AA2D4"></div><span class="vm">&nbsp;空闲（可选）</span>
         </div>
         <div id="resoIds" style="display:none;"></div>
+        <span id="month" style="display:none;"></span>
 		<span class="date_title" id="date1"></span>
         <div class="tc mt50" id="commit">
         	<div class="btn-ck mr20" id="online">在线预约</div>
@@ -132,6 +133,7 @@
 	}
 </Script>
 <script type="text/javascript">
+	$("#month").html(new Date().getMonth()+1);
 	var numArray = new Array();
 	var Request = new Object();
 	Request = GetRequest();
@@ -151,8 +153,12 @@
 				for(var i=0; i<records.length; i++){
 					//主键追加到隐藏域供预约使用
 					$("#resoIds").append(records[i].resoId+",");
-					if(records[i].resoStatus=='02'){
-						numArray.push(Number(records[i].resoDate.substring(records[i].resoDate.lastIndexOf("-")+1, records[i].resoDate.length)));
+					if((Number(records[i].resoDate.substring(5,7)))==Number($("#month").html())){
+						if(records[i].resoStatus=='02'){
+							numArray.push(Number(records[i].resoDate.substring(records[i].resoDate.lastIndexOf("-")+1, records[i].resoDate.length)));
+						}
+					}else{
+						numArray.splice(0,numArray.length);
 					}
 				}
 			}
@@ -167,28 +173,6 @@
 				disCertainDate : numArray
 			});
 		}
-	});
-	$(function() {
-		$(".i_next").click(function() {
-			$.youi.ajaxUtils.ajax({
-				url : serviceURL,
-				data:params.join('&'),
-				jsonp : 'data:jsonp',
-				dataType : 'jsonp',
-				async : false,
-				success : function(results) {
-					if (results && results.records) {
-						var records = results.records;
-						for(var i=0; i<records.length; i++){
-							if(records[i].resoStatus=='02'){
-								$("#resoIds").html(records[i].resoId);
-								numArray.push(Number(records[i].resoDate.substring(records[i].resoDate.lastIndexOf("-")+1, records[i].resoDate.length)));
-							}
-						}
-					}
-				}
-			});
-		});
 	});
 </script>
 <script>
