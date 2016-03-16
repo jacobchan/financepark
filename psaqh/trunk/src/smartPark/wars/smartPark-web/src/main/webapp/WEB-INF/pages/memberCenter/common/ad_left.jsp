@@ -9,7 +9,7 @@
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/securityCenter.html">安全中心</a></dd>
 			<dd><a href="grzx4.html">消息</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/addressBook.html">企业通讯录</a></dd>
-			<dd><a href="propertyservicemanagerOcbind.html">一卡通绑定</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/propertyManagerOcBind.html">一卡通绑定</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/myAdderss.html">我的地址</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/myReservation.html">我的预约</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/policyApply.html">政策申请</a></dd>
@@ -19,7 +19,7 @@
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/propertyService/propertyManageFk.html">访客登记</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/propertyService/propertyManageMoverec.html">搬家放行</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/propertyService/propertyManageCharge.html">缴费查询</a></dd>
-			<dd><a href="grzx13.html">一卡通办理</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/propertyService/propertyManageOc.html">一卡通办理</a></dd>
 			<dt>全民营销</dt>
 			<dd><a href="grzx15.html">我的人脉</a></dd>
 			<dd><a href="grzx16.html">我的收益</a></dd>
