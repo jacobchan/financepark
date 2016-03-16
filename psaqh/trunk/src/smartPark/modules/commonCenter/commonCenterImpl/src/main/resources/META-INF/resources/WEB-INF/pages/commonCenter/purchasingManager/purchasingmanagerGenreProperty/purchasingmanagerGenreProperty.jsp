@@ -30,6 +30,10 @@
 			<youi:fieldTree simple="false" popup="true" tree="${genreTree}" property="purchasingmanagerGenre.genreId" caption="商品类别" notNull="true"/>
 			<youi:fieldText property="genrePropertyDisplayName"  caption="显示名称" notNull="true"/>
 			<youi:fieldText property="genrePropertyFieldName"  caption="字段名称" notNull="true"/>
+			<youi:fieldText property="genrePropertyDefaultValue"  caption="默认值" />
+			<youi:fieldText property="genrePropertyFieldLength"  caption="字段长度" />
+			<youi:fieldSelect property="genrePropertyIsnotDisplay"  caption="是否显示" convert="bool" />
+			<youi:fieldText property="genrePropertyFieldType"  caption="字段类型" />
 			<youi:fieldHidden property="genrePropertyId"  caption="商品类别属性序列"/>
 		</youi:fieldLayout>
 	</youi:form>
