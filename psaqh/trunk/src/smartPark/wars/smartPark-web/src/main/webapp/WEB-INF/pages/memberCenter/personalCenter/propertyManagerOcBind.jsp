@@ -94,7 +94,7 @@
 		 		success:function(result){
 					if(result&&result.record){					
 						alert("修改成功");
-						//location.reload();
+						location.reload();
 					}
 				}
 			}); 
