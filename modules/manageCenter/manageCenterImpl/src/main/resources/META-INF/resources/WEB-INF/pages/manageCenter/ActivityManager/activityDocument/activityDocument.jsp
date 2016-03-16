@@ -29,9 +29,7 @@
 		<youi:fieldLayout prefix="record">
 			<youi:fieldHidden property="documentId"  caption="文档ID"/>
 			<youi:fieldSelect property="activityApply.applyId"  caption="活动" src="esb/web/activityApplyManager/getActivityApplys.json" code="applyId" show="applyTitle"/>
-			<youi:fieldSwfupload property="documentPath" column="2" caption="uploads"></youi:fieldSwfupload>
-			<%-- <youi:fieldText property="documentName"  caption="文档名"/>
-			<youi:fieldText property="documentPath"  caption="文档路径"/> --%>
+			<youi:fieldSwfupload property="documentPath"  caption="文档" uploadUrl="/common/upload.html" fileTypes="*.doc;*.xls;*.ppt"  fileTypesDescription="所有类型" fileSizeLimit="10240" fileUploadLimit="1" fileQueueLimit="1"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
