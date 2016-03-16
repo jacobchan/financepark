@@ -370,7 +370,6 @@
 								'endCompareDate':$('#' + __method.mOpts.endCompareDateId).val()
 								});
     });
-
     // 初始化开始
     this.init();
 	this.show(false, __method);
@@ -420,7 +419,6 @@ pickerDateRange.prototype.init = function(isCompare) {
 	var isNeedCompare = typeof(isCompare) != 'undefined'? isCompare && $("#" + __method.compareCheckboxId).attr('checked') : $("#" + __method.compareCheckboxId).attr('checked');
     // 清空日期列表的内容
     $("#" + this.dateListId).empty();
-	
     // 如果开始日期为空，则取当天的日期为开始日期
     var endDate = '' == this.mOpts.endDate ? (new Date()) : this.str2date(this.mOpts.endDate);
     // 日历结束时间
@@ -471,34 +469,88 @@ pickerDateRange.prototype.init = function(isCompare) {
 
     // 上一个月
     $('#' + this.preMonth).bind('click', function() {
+    	$("#month").html(__method.calendar_endDate.getMonth());
         __method.calendar_endDate.setMonth(__method.calendar_endDate.getMonth() - 1, 1);
         __method.mOpts.endDate = __method.date2ymd(__method.calendar_endDate).join('-');
-        __method.init(isCompare);
-		//如果是单月选择的时候，要控制input输入框 added by johnnyzheng 2011-12-19
-		if(1 == __method.mOpts.calendars){
-			if('' == $('#' + __method.startDateId).val()){
-				__method.changeInput(__method.startDateId);
+        
+      //根据商品id获取资源可用状态
+		$.youi.ajaxUtils.ajax({
+			url : serviceURL,
+			data:params.join('&'),
+			jsonp : 'data:jsonp',
+			dataType : 'jsonp',
+			async : false,
+			success : function(results) {
+				if (results && results.records) {
+					var records = results.records;
+					for(var i=0; i<records.length; i++){
+						//主键追加到隐藏域供预约使用
+						$("#resoIds").append(records[i].resoId+",");
+						if((Number(records[i].resoDate.substring(5,7)))==Number($("#month").html())){
+							if(records[i].resoStatus=='02'){
+								numArray.push(Number(records[i].resoDate.substring(records[i].resoDate.lastIndexOf("-")+1, records[i].resoDate.length)));
+							}
+						}else{
+							numArray.splice(0,numArray.length);
+						}
+					}
+				}
+				__method.mOpts.disCertainDate=numArray;
+				__method.init(isCompare);
+				//如果是单月选择的时候，要控制input输入框 added by johnnyzheng 2011-12-19
+				if(1 == __method.mOpts.calendars){
+					if('' == $('#' + __method.startDateId).val()){
+						__method.changeInput(__method.startDateId);
+					}
+					else{
+						__method.changeInput(__method.endDateId);
+					}
+				}
 			}
-			else{
-				__method.changeInput(__method.endDateId);
-			}
-		}
+		});	
         return false;
     });
     // 下一个月
     $('#' + this.nextMonth).bind('click', function() {
+    	$("#month").html(__method.calendar_endDate.getMonth()+2);
         __method.calendar_endDate.setMonth(__method.calendar_endDate.getMonth() + 1, 1);
         __method.mOpts.endDate = __method.date2ymd(__method.calendar_endDate).join('-');
-		__method.init(isCompare);
-		//如果是单月选择的时候，要控制input输入框 added by johnnyzheng 2011-12-19
-		if(1 == __method.mOpts.calendars){
-			if('' == $('#' + __method.startDateId).val()){
-				__method.changeInput(__method.startDateId);
+        
+        //根据商品id获取资源可用状态
+		$.youi.ajaxUtils.ajax({
+			url : serviceURL,
+			data:params.join('&'),
+			jsonp : 'data:jsonp',
+			dataType : 'jsonp',
+			async : false,
+			success : function(results) {
+				if (results && results.records) {
+					var records = results.records;
+					for(var i=0; i<records.length; i++){
+						//主键追加到隐藏域供预约使用
+						$("#resoIds").append(records[i].resoId+",");
+						if((Number(records[i].resoDate.substring(5,7)))==Number($("#month").html())){
+							if(records[i].resoStatus=='02'){
+								numArray.push(Number(records[i].resoDate.substring(records[i].resoDate.lastIndexOf("-")+1, records[i].resoDate.length)));
+							}
+						}else{
+							numArray.splice(0,numArray.length);
+						}
+					}
+				}
+				__method.mOpts.disCertainDate=numArray;
+				__method.init(isCompare);
+				//如果是单月选择的时候，要控制input输入框 added by johnnyzheng 2011-12-19
+				if(1 == __method.mOpts.calendars){
+					if('' == $('#' + __method.startDateId).val()){
+						__method.changeInput(__method.startDateId);
+					}
+					else{
+						__method.changeInput(__method.endDateId);
+					}
+				}
 			}
-			else{
-				__method.changeInput(__method.endDateId);
-			}
-		}
+		});
         return false;
     });
 	
