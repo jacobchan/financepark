@@ -3,38 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>我发布的活动</title>
+	<link rel="stylesheet" type="text/css" href="../styles/page/awesome/css/font-awesome.min.css">
 	<link href="../styles/base.css" type="text/css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
-	<link rel="stylesheet" type="text/css" href="../styles/page/awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../styles/page/grzxczh.css">
 	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/adcom.js"></script>
-     <style>
-	  .ccheng{color:#FF6715}.a_left,.a_right{width:40px;height:65px;cursor:pointer;position:absolute;margin-top:-32px;top:50%; opacity:0.7}
-	  .pn_btn{width: 42px;height: 64px;margin-top: 35px;}
-	  #prev_btn1{border-radius: 0px 10px 10px 0px;left: 10px;}
-	  #next_btn1{border-radius: 10px 0px 0px 10px;right: 13px;}
-	  .a_left:hover{background: rgba(255,255,255,0.6);}
-	  .a_right{background:rgba(255,255,255,0.2);right:0}
-	  .czh-box.active{border-color:#FF6715}.czh-box.active h4{color:#FF6715}
-	  .ac_box{border-bottom:1px #EFEEEE solid;}.ac_box a{padding:0 20px 0 0;color:#868686}
-	  .ac_box .active{color:#FF6715; text-decoration:underline}
-	  .img_list li{padding:20px;display:inline-block;float:left; text-align:center}
-	  .czh-knowledge{width: 100%;}
-	  .gr-czh-box{width: 204px;float: left;margin:10px;border:1px solid #fff;cursor: pointer;}
-	  .gr-czh-box img{width: 100%;po}
-	  .gr-czh-box:hover,.gr-czh-box.active{border:1px solid #FF6715;color: #FF6715;}
-	  .gr-czh-box:hover a,.gr-czh-box.active a{color: #FF6715;}
-	  .gr-czh-box p{font-size: 14px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;line-height: 40px;margin-left: 5px;}
-	  .gr-czh-box a{color: #333;}
-	  .gr-czh-box a:hover{color: #FF6715;text-decoration: underline;}
-	  .gr-ck-group{width: 1000%;position: relative;left: 0px;}
-	  .oh{overflow: hidden;}
-	  .place-table{width: 100%;border:1px solid #efecec;font-size: 16px;text-align: center;}
-	  .place-table tr td{border-bottom:1px solid #efecec;line-height: 30px;padding: 10px 0px;}
-    </style>
     <script type="text/javascript">
     	$(function () {
     		$(".gr-czh-box").click(function(){
@@ -84,31 +61,31 @@
 						<div class="clearfix czh-knowledge pr oh">
 							<div class="gr-ck-group">
 								<div class="gr-czh-box active">
-	                                <img src="../styles/images/czh/list-5.jpg">
+	                                <img src="../styles/images/czh/list-5.jpg" width="202" height="114">
 	                                <a href=""><p>孩子不宜过早玩的10种运动</p></a>
 	                            </div>
 	                            <div class="gr-czh-box">
-	                                <img src="../styles/images/czh/list-5.jpg">
+	                                <img src="../styles/images/czh/list-5.jpg" width="202" height="114">
 	                                <a href=""><p>孩子不宜过早玩的10种运动</p></a>
 	                            </div>
 	                            <div class="gr-czh-box">
-	                                <img src="../styles/images/czh/list-5.jpg">
+	                                <img src="../styles/images/czh/list-5.jpg" width="202" height="114">
 	                                <a href=""><p>孩子不宜过早玩的10种运动</p></a>
 	                            </div>
 	                            <div class="gr-czh-box">
-	                                <img src="../styles/images/czh/list-5.jpg">
+	                                <img src="../styles/images/czh/list-5.jpg" width="202" height="114">
 	                                <a href=""><p>孩子不宜过早玩的10种运动</p></a>
 	                            </div>
 	                            <div class="gr-czh-box">
-	                                <img src="../styles/images/czh/list-5.jpg">
+	                                <img src="../styles/images/czh/list-5.jpg" width="202" height="114">
 	                                <a href=""><p>孩子不宜过早玩的10种运动</p></a>
 	                            </div>
 	                            <div class="gr-czh-box">
-	                                <img src="../styles/images/czh/list-5.jpg">
+	                                <img src="../styles/images/czh/list-5.jpg" width="202" height="114">
 	                                <a href=""><p>孩子不宜过早玩的10种运动</p></a>
 	                            </div>
 	                            <div class="gr-czh-box">
-	                                <img src="../styles/images/czh/list-5.jpg">
+	                                <img src="../styles/images/czh/list-5.jpg" width="202" height="114">
 	                                <a href=""><p>孩子不宜过早玩的10种运动</p></a>
 	                            </div>
 							</div>
@@ -124,7 +101,20 @@
                          			$(this).addClass("active").siblings().removeClass("active");
                          			$(".clearfix.show").addClass("undis");
                          			$(".clearfix.show").eq($(this).index()).removeClass("undis");
-                         		})
+                         		});
+                         		$(".com_btn").on("click",function(){
+                         			$(this).hide();
+                         			$(this).parent().find(".dialog-show").show();
+                         			$(this).parent().find("p.cc").css("margin-top","-10px");
+                         		});
+                         		$(".dialog-cancel").on("click",function(){
+                         			$(this).parents(".dialog-box").find(".com_btn").show();
+                         			$(this).parents(".dialog-show").hide();
+                         			$(this).parents(".dialog-box").find("p.cc").css("margin-top","0px");
+                         		});
+                         		$(".dialog-close").on("click",function(){
+                         			$(this).parent(".comment").remove();
+                         		});
                          	})
                         </script>
                         <div class="mt40 ac_box pb20">
@@ -169,58 +159,88 @@
 						<div class="clearfix show undis">
 							<!--评论-->
 	                        <div class="comment mt20 clearfix pr">
+	                        	<a href="javascript:;" class="tc-close dialog-close"></a>
 	                        	<div class="fl">
-	                            	<img src="../styles/images/grzx/sl-i2.png"/>
+	                            	<img src="../styles/images/grzx/sl-i2.png" border="0" height="59" width="59"/>
 	                                <span class="pl15">斯大林</span>
 	                            </div>
-	                            <div class="fl ml40 com_info">
-	                            	<p>在这次活动中，我真的虚心学习到恒大，希望官方能多多举办，我一定会积极参加,奋斗粉搞</p>
-	                                <span class="cc">2016年1月18日 10：02</span>
-	                            </div>
-	                            <a class="a-c-o com_btn fr" href="javascript:;">回复</a>
-	                            <a href="javascript:;" class="tc-close" style="right:10px;top:5px;"></a>
-	                        </div>
-	                        <div class="reply mt20 clearfix">
-	                         	<div class="fl">
-	                            	<img src="../styles/images/grzx/sl-i2.png"/>
-	                                <span class="pl15">斯大林</span>
-	                            </div>
-	                            <div class="fl ml40 com_info">
-	                            	<p><span class="ccheng">@斯大林：</span>你的回复真好！</p>
-	                            </div>
-	                            <div class="fl ml40 mt30">
-	                            	<textarea placeholder="回复内容" class="reply_info"></textarea>
-	                                <div class="tr mt10">
-	                                	<a class="reply_btn a-c-o a-c-fill" href="javascript:;">发送</a>
-	                                    <a class="reply_btn" href="javascript:;">取消</a>
-	                                </div>
-	                                <span class="cc">2016年1月18日 10：02</span>
+	                            <div class="dialog-box clearfix pr">
+	                            	<a class="a-c-o com_btn" href="javascript:;">回复</a>
+                            		<div class="com_info f12 lh24">
+	                            		<p>在这次活动中，我真的虚心学习到恒大，希望官方能多多举办，我一定会积极参加,奋斗粉搞</p>
+	                            	</div>
+	                            	<div class="mt20 dialog-show">
+		                            	<textarea placeholder="回复内容" class="reply_info"></textarea>
+		                                <div class="tr mt10">
+		                                	<a class="reply_btn a-c-o a-c-fill" href="javascript:;">发送</a>
+		                                    <a class="reply_btn dialog-cancel" href="javascript:;">取消</a>
+		                                </div>
+		                            </div>
+	                            	<p class="cc f12 clearfix">2016年1月18日 10：02</p>
 	                            </div>
 	                        </div>
-	                         
-	                        <div class="comment mt20 clearfix">
-	                         	<div class="fl">
-	                            	<img src="../styles/images/grzx/sl-i2.png"/>
+	                        <div class="comment mt20 clearfix pr">
+	                        	<a href="javascript:;" class="tc-close dialog-close"></a>
+	                        	<div class="fl">
+	                            	<img src="../styles/images/grzx/sl-i2.png" border="0" height="59" width="59"/>
 	                                <span class="pl15">斯大林</span>
 	                            </div>
-	                            <div class="fl ml40 com_info">
-	                            	<p>在这次活动中，我真的虚心学习到恒大，希望官方能多多举办，我一定会积极参加,奋斗粉搞</p>
-	                                <span class="cc">2016年1月18日 10：02</span>
+	                            <div class="dialog-box clearfix pr">
+	                            	<a class="a-c-o com_btn" href="javascript:;">回复</a>
+                            		<div class="com_info f12 lh24">
+	                            		<p>在这次活动中，我真的虚心学习到恒大，希望官方能多多举办，我一定会积极参加,奋斗粉搞</p>
+	                            	</div>
+	                            	<div class="mt20 dialog-show">
+		                            	<textarea placeholder="回复内容" class="reply_info"></textarea>
+		                                <div class="tr mt10">
+		                                	<a class="reply_btn a-c-o a-c-fill" href="javascript:;">发送</a>
+		                                    <a class="reply_btn dialog-cancel" href="javascript:;">取消</a>
+		                                </div>
+		                            </div>
+	                            	<p class="cc f12 clearfix">2016年1月18日 10：02</p>
 	                            </div>
-	                            <a class="a-c-o com_btn fr" href="javascript:;">回复</a>
-	                            <a href="javascript:;" class="tc-close" style="right:10px;top:5px;"></a>
 	                        </div>
-	                        <div class="comment mt20 clearfix">
-	                         	<div class="fl">
-	                            	<img src="../styles/images/grzx/sl-i2.png"/>
+	                        <div class="comment mt20 clearfix pr">
+	                        	<a href="javascript:;" class="tc-close dialog-close"></a>
+	                        	<div class="fl">
+	                            	<img src="../styles/images/grzx/sl-i2.png" border="0" height="59" width="59"/>
 	                                <span class="pl15">斯大林</span>
 	                            </div>
-	                            <div class="fl ml40 com_info">
-	                            	<p>在这次活动中，我真的虚心学习到恒大，希望官方能多多举办，我一定会积极参加,奋斗粉搞</p>
-	                                <span class="cc">2016年1月18日 10：02</span>
+	                            <div class="dialog-box clearfix pr">
+	                            	<a class="a-c-o com_btn" href="javascript:;">回复</a>
+                            		<div class="com_info f12 lh24">
+	                            		<p>在这次活动中，我真的虚心学习到恒大，希望官方能多多举办，我一定会积极参加,奋斗粉搞</p>
+	                            	</div>
+	                            	<div class="mt20 dialog-show">
+		                            	<textarea placeholder="回复内容" class="reply_info"></textarea>
+		                                <div class="tr mt10">
+		                                	<a class="reply_btn a-c-o a-c-fill" href="javascript:;">发送</a>
+		                                    <a class="reply_btn dialog-cancel" href="javascript:;">取消</a>
+		                                </div>
+		                            </div>
+	                            	<p class="cc f12 clearfix">2016年1月18日 10：02</p>
 	                            </div>
-	                            <a class="a-c-o com_btn fr" href="javascript:;">回复</a>
-	                            <a href="javascript:;" class="tc-close" style="right:10px;top:5px;"></a>
+	                        </div>
+	                        <div class="comment mt20 clearfix pr">
+	                        	<a href="javascript:;" class="tc-close dialog-close"></a>
+	                        	<div class="fl">
+	                            	<img src="../styles/images/grzx/sl-i2.png" border="0" height="59" width="59"/>
+	                                <span class="pl15">斯大林</span>
+	                            </div>
+	                            <div class="dialog-box clearfix pr">
+	                            	<a class="a-c-o com_btn" href="javascript:;">回复</a>
+                            		<div class="com_info f12 lh24">
+	                            		<p>在这次活动中，我真的虚心学习到恒大，希望官方能多多举办，我一定会积极参加,奋斗粉搞</p>
+	                            	</div>
+	                            	<div class="mt20 dialog-show">
+		                            	<textarea placeholder="回复内容" class="reply_info"></textarea>
+		                                <div class="tr mt10">
+		                                	<a class="reply_btn a-c-o a-c-fill" href="javascript:;">发送</a>
+		                                    <a class="reply_btn dialog-cancel" href="javascript:;">取消</a>
+		                                </div>
+		                            </div>
+	                            	<p class="cc f12 clearfix">2016年1月18日 10：02</p>
+	                            </div>
 	                        </div>
 							<!---->
 	                        <div class="fr page-list-a clearfix lh30 mt20 f12">
