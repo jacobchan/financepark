@@ -5,14 +5,20 @@ package com.manage.PropertyServiceManager.service.impl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Collection;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.gsoft.entity.TempDemo;
+import com.gsoft.framework.codemap.dao.CodeitemDao;
+import com.gsoft.framework.codemap.entity.Codeitem;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -36,6 +42,8 @@ import com.manage.PropertyServiceManager.service.PropertyservicemanagerEnteringM
 public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl implements PropertyservicemanagerEnteringManager{
 	@Autowired
 	private PropertyservicemanagerEnteringDao propertyservicemanagerEnteringDao;
+	@Autowired
+	private CodeitemDao<Codeitem, String> codeItemDao;
 	
     /**
      * 查询列表
@@ -207,6 +215,51 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
     	}
 
     }
+    
+    /**
+	 * 前台展示可办理预约记录
+	 */
+    @EsbServiceMapping
+    public List<Record> getEnteringList(Pager pager)  throws BusException{
+		
+    	List<Record> enteringValueList=new ArrayList<Record>();
+    	Collection<Condition> conditions =new ArrayList<Condition>();
+    	Collection<Order> orders =new ArrayList<Order>();
+    	String now=DateUtils.getToday();
+    	pager.setPageSize(8);
+    	orders.add(ConditionUtils.getOrder("enteringDate", true));
+    	conditions.add(ConditionUtils.getCondition("enteringDate", Condition.RIGHT,now));
+    	PagerRecords pagerRecords = propertyservicemanagerEnteringDao.findByPager(pager, conditions, orders);
+    	@SuppressWarnings("unchecked")
+		List<PropertyservicemanagerEntering> enteringList = (List<PropertyservicemanagerEntering>)pagerRecords.getRecords();
+    	List<PropertyservicemanagerEntering> enteringLists=new ArrayList<PropertyservicemanagerEntering>();
+    	for(PropertyservicemanagerEntering pe:enteringList){
+    		if(pe.getEnteringTime().equals("AM")){
+    			Record record = new Record();
+    			record.put("enteringId",pe.getEnteringId());//ID
+    			record.put("enteringDate",pe.getEnteringDate());
+    			record.put("enteringRemain",pe.getEnteringRemain());//剩余预约数量
+    			record.put("enteringAlre",pe.getEnteringAlre());//已预约数量
+    			List<Codeitem> list = codeItemDao.getList(new String[] {"codemap.code", "itemValue" }, new Object[] { "enteringStatus",pe.getEnteringStatus()});
+    			record.put("enteringStatus",pe.getEnteringStatus());
+    			record.put("enteringStatusName",list.get(0).getItemCaption());
+    			enteringValueList.add(record);
+    		}else{
+    			enteringLists.add(pe);
+    		}
+    	}
+    	for(PropertyservicemanagerEntering pe:enteringLists){
+    		Record record = new Record();
+			record.put("enteringId",pe.getEnteringId());//ID
+			record.put("enteringRemain",pe.getEnteringRemain());//剩余预约数量
+			record.put("enteringAlre",pe.getEnteringAlre());//已预约数量
+			List<Codeitem> list = codeItemDao.getList(new String[] {"codemap.code", "itemValue" }, new Object[] { "enteringStatus",pe.getEnteringStatus()});
+			record.put("enteringStatus",list.get(0).getItemCaption());
+			enteringValueList.add(record);
+    	}
+    	return enteringValueList;
+    }
+    
 
 
 }
