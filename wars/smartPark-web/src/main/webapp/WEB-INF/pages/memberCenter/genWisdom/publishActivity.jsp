@@ -106,91 +106,8 @@
 						<!---->
 
 						<div class="clearfix show undis">
-							<!--评论-->
-	                        <div class="comment mt20 clearfix pr">
-	                        	<a href="javascript:;" class="tc-close dialog-close"></a>
-	                        	<div class="fl">
-	                            	<img src="<%=request.getContextPath()%>/styles/images/grzx/sl-i2.png" border="0" height="59" width="59"/>
-	                                <span class="pl15">斯大林</span>
-	                            </div>
-	                            <div class="dialog-box clearfix pr">
-	                            	<a class="a-c-o com_btn" href="javascript:;">回复</a>
-                            		<div class="com_info f12 lh24">
-	                            		<p>在这次活动中，我真的虚心学习到恒大，希望官方能多多举办，我一定会积极参加,奋斗粉搞</p>
-	                            	</div>
-	                            	<div class="mt20 dialog-show">
-		                            	<textarea placeholder="回复内容" class="reply_info"></textarea>
-		                                <div class="tr mt10">
-		                                	<a class="reply_btn a-c-o a-c-fill" href="javascript:;">发送</a>
-		                                    <a class="reply_btn dialog-cancel" href="javascript:;">取消</a>
-		                                </div>
-		                            </div>
-	                            	<p class="cc f12 clearfix">2016年1月18日 10：02</p>
-	                            </div>
-	                        </div>
-	                        <div class="comment mt20 clearfix pr">
-	                        	<a href="javascript:;" class="tc-close dialog-close"></a>
-	                        	<div class="fl">
-	                            	<img src="<%=request.getContextPath()%>/styles/images/grzx/sl-i2.png" border="0" height="59" width="59"/>
-	                                <span class="pl15">斯大林</span>
-	                            </div>
-	                            <div class="dialog-box clearfix pr">
-	                            	<a class="a-c-o com_btn" href="javascript:;">回复</a>
-                            		<div class="com_info f12 lh24">
-	                            		<p>在这次活动中，我真的虚心学习到恒大，希望官方能多多举办，我一定会积极参加,奋斗粉搞</p>
-	                            	</div>
-	                            	<div class="mt20 dialog-show">
-		                            	<textarea placeholder="回复内容" class="reply_info"></textarea>
-		                                <div class="tr mt10">
-		                                	<a class="reply_btn a-c-o a-c-fill" href="javascript:;">发送</a>
-		                                    <a class="reply_btn dialog-cancel" href="javascript:;">取消</a>
-		                                </div>
-		                            </div>
-	                            	<p class="cc f12 clearfix">2016年1月18日 10：02</p>
-	                            </div>
-	                        </div>
-	                        <div class="comment mt20 clearfix pr">
-	                        	<a href="javascript:;" class="tc-close dialog-close"></a>
-	                        	<div class="fl">
-	                            	<img src="<%=request.getContextPath()%>/styles/images/grzx/sl-i2.png" border="0" height="59" width="59"/>
-	                                <span class="pl15">斯大林</span>
-	                            </div>
-	                            <div class="dialog-box clearfix pr">
-	                            	<a class="a-c-o com_btn" href="javascript:;">回复</a>
-                            		<div class="com_info f12 lh24">
-	                            		<p>在这次活动中，我真的虚心学习到恒大，希望官方能多多举办，我一定会积极参加,奋斗粉搞</p>
-	                            	</div>
-	                            	<div class="mt20 dialog-show">
-		                            	<textarea placeholder="回复内容" class="reply_info"></textarea>
-		                                <div class="tr mt10">
-		                                	<a class="reply_btn a-c-o a-c-fill" href="javascript:;">发送</a>
-		                                    <a class="reply_btn dialog-cancel" href="javascript:;">取消</a>
-		                                </div>
-		                            </div>
-	                            	<p class="cc f12 clearfix">2016年1月18日 10：02</p>
-	                            </div>
-	                        </div>
-	                        <div class="comment mt20 clearfix pr">
-	                        	<a href="javascript:;" class="tc-close dialog-close"></a>
-	                        	<div class="fl">
-	                            	<img src="<%=request.getContextPath()%>/styles/images/grzx/sl-i2.png" border="0" height="59" width="59"/>
-	                                <span class="pl15">斯大林</span>
-	                            </div>
-	                            <div class="dialog-box clearfix pr">
-	                            	<a class="a-c-o com_btn" href="javascript:;">回复</a>
-                            		<div class="com_info f12 lh24">
-	                            		<p>在这次活动中，我真的虚心学习到恒大，希望官方能多多举办，我一定会积极参加,奋斗粉搞</p>
-	                            	</div>
-	                            	<div class="mt20 dialog-show">
-		                            	<textarea placeholder="回复内容" class="reply_info"></textarea>
-		                                <div class="tr mt10">
-		                                	<a class="reply_btn a-c-o a-c-fill" href="javascript:;">发送</a>
-		                                    <a class="reply_btn dialog-cancel" href="javascript:;">取消</a>
-		                                </div>
-		                            </div>
-	                            	<p class="cc f12 clearfix">2016年1月18日 10：02</p>
-	                            </div>
-	                        </div>
+							<div class="applyComments"></div>
+							<!--评论-->	                        
 							<!---->
 	                        <div class="fr page-list-a clearfix lh30 mt20 f12">
 								<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
@@ -287,7 +204,6 @@
 		$.ajax({
 			url:'/smartPark-web/esb/web/activityApplyManager/getPublishActivityList.json',
 			success:function(result){
-				console.log(result.records);
 				if(result&&result.records){
 					_parseRecords(result.records);
 					openApplyList(result.records[0].applyId);
@@ -317,12 +233,24 @@
 	
 	function openApplyList(applyId){
 		var params = ['applyId='+applyId];
+		//活动名单
 		$.ajax({
 			url:'/smartPark-web/esb/web/activityApplyManager/getPublishActivityMembers.json',
 			data:params.join('&'),
 			success:function(result){
 				if(result&&result.records){
 					_parseApplyList(result.records);
+				}
+			}
+		});	
+		//评论内容
+		$.ajax({
+			url:'/smartPark-web/esb/web/activityApplyManager/getPublishActivityComments.json',
+			data:params.join('&'),
+			success:function(result){
+				console.log(result);
+				if(result&&result.records){
+					_parseApplyComments(result.records);
 				}
 			}
 		});	
@@ -340,6 +268,36 @@
 		$(".clearfix.img_list").empty();
 		$(".clearfix.img_list").append(html);
 	};
+	
+	//拼接活动评论
+	function _parseApplyComments(record){
+		var html="";
+		for(var i=0;i<record.length;i++){
+			  html+="<div class='comment mt20 clearfix pr'>"+
+	        			"<a href='javascript:;' class='tc-close dialog-close'></a>"+
+	        			"<div class='fl'>"+
+	            			"<img src='<%=request.getContextPath()%>/styles/images/grzx/sl-i2.png' border='0' height='59' width='59'/>"+
+	                		"<span class='pl15'>斯大林</span>"+
+	           			"</div>"+
+	            		"<div class='dialog-box clearfix pr'>"+
+	            			"<a class='a-c-o com_btn' href='javascript:;'>回复</a>"+
+	        				"<div class='com_info f12 lh24'>"+
+	            				"<p>"+record[i].commentContent+"</p>"+
+	            			"</div>"+
+	            			"<div class='mt20 dialog-show'>"+
+	                			"<textarea placeholder='回复内容' class='reply_info'></textarea>"+
+	                   			"<div class='tr mt10'>"+
+	                    			"<a class='reply_btn a-c-o a-c-fill' href='javascript:;''>发送</a>"+
+	                       			"<a class='reply_btn dialog-cancel' href='javascript:;'>取消</a>"+
+	                  			"</div>"+
+	               			"</div>"+
+	            			"<p class='cc f12 clearfix'>"+record[i].commentTime+"</p>"+
+	           			"</div>"+
+       			 	"</div>";
+		};
+		$(".applyComments").empty();
+		$(".applyComments").append(html);
+	}
 	</script>
 </body>
 <%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 
