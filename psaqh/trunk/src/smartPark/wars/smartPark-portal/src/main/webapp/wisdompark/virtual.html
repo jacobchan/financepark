@@ -32,7 +32,7 @@ to {opacity:0;}
 	<img src="../styles/images/zhyq/2.jpg" style="width:100%"/>
     <div class="zznav">
     	<ul class="oh fl zzul">
-        	<li class="b1"><a href="#">创智中心1#楼</a>
+        	<li class="b"><a href="#">创智中心1#楼</a>
             	<ul class="subul">
                 	<li><a href="wp_login.html">F1</a></li>
                     <li><a href="wp_login.html">F2</a></li>
@@ -43,7 +43,7 @@ to {opacity:0;}
                     <li><a href="wp_login.html">F7</a></li>
                 </ul>
             </li>
-            <li class="b2"><a href="#">创智中心2#楼</a>
+            <li class="b"><a href="#">创智中心2#楼</a>
             	<ul class="subul">
                 	<li>F1</li>
                     <li>F2</li>
@@ -56,11 +56,11 @@ to {opacity:0;}
 					<li>F9</li>
                 </ul>
             </li>
-            <li><a href="#">创智中心3#楼</a></li>
-            <li><a href="#">创智中心4#楼</a></li>
-            <li><a href="#">创智中心5#楼</a></li>
-            <li><a href="#">创智中心6#楼</a></li>
-            <li><a href="#">创智中心7#楼</a></li>
+            <li class="b"><a href="#">创智中心3#楼</a></li>
+            <li class="b"><a href="#">创智中心4#楼</a></li>
+            <li class="b"><a href="#">创智中心5#楼</a></li>
+            <li class="b"><a href="#">创智中心6#楼</a></li>
+            <li class="b"><a href="#">创智中心7#楼</a></li>
         </ul>
         <div class="fl zz1"></div>
     </div>
@@ -101,21 +101,25 @@ to {opacity:0;}
 <script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 <script>
 	$(function(){
-		$(".b1").hover(function(){
-			$(".b1mask").toggleClass("hide");
-		});
-		$(".b2").hover(function(){
-			$(".b2mask").toggleClass("hide");
-		});
-		$(".b1 li").hover(function(){
+		$(document).on("mouseover mouseout",".zzul .b",function(){
+			/*console.log($(this).index())*/
+			if($(this).index()==0){
+				$(".b1mask").toggleClass("hide");
+
+			}else if($(this).index()==1){
+				$(".b2mask").toggleClass("hide");
+
+			}
+		});				
+		$(".zzul .b").eq(0).find("li").hover(function(){
 			var idx=$(this).index();
 			$(".b1floor").eq(idx).toggleClass("hide");
 		});
-		$(".b2 li").hover(function(){
+		$(".zzul .b").eq(1).find("li").hover(function(){
 			var idx=$(this).index();
 			$(".b2floor").eq(idx).toggleClass("hide");
 		});
-	});
+	})
 </script>
 </body>
 </html>
