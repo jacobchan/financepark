@@ -681,7 +681,7 @@
 <!-- <script type="text/javascript" src="../scripts/page/kefu.js"></script> -->
 <script>
 $(function(){
-	var serviceURL = "http://localhost:8088/smartPark-webdev/esb/web/purchasingmanagerGenreManager/getITSubGenreList.json";
+	var serviceURL = baseUrl+"purchasingmanagerGenreManager/getITSubGenreList.json";
 	$.youi.ajaxUtils.ajax({
 		url:serviceURL,
 		jsonp:'data:jsonp',
@@ -733,7 +733,7 @@ $(function(){
 	});
 	
 	function showCom(genreId,y){
-		var serviceURL = "http://localhost:8088/smartPark-webdev/esb/web/purchasingmanagerCommodityManager/getCommodityRecordsByGenreId.json";
+		var serviceURL = baseUrl+"purchasingmanagerCommodityManager/getCommodityRecordsByGenreId.json";
 		$.youi.ajaxUtils.ajax({
 			url:serviceURL,
 			data:{genreId:genreId},
@@ -826,7 +826,7 @@ $(function(){
 	$('.btn-cheng').click(function(){
 		var commodityId = $(this).parents(".taocan").attr("data-id");
 		var params = ['commodityId='+commodityId];
-		var serviceURL = "http://localhost:8088/smartPark-webdev/esb/web/ordermanagerUserorderManager/saveITSerOrder.json";
+		var serviceURL = baseUrl+"ordermanagerUserorderManager/saveITSerOrder.json";
 		$.youi.ajaxUtils.ajax({
 			url:serviceURL,
 			data:params.join('&'),
