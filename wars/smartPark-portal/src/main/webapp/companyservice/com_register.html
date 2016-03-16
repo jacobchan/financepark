@@ -106,7 +106,7 @@
     <div class="bgf1 pb30 pt30">
         <div class="w1200">
             <div class="pb15"><span class="f18 span_bold">服务内容</span></div>
-            <ul class="com_ul clearfix">
+            <ul class="com_ul clearfix" id="comRegister">
                 <li class="com11">
                     <div class="bgfff">
                         <span class="cc">&yen;1000</span>
@@ -312,37 +312,297 @@
 <div id="youi_page_footer" class="youi-page-footer"></div>
 <!--***bottom end****************************************-->
 <!--******************  code end  ****************************-->
-
+<!--遮罩层-->
+<div class="pop_layer">
+	<div class="bgfff offset1200" style="margin-top:-280px">
+    	<div class="order w960">
+        	<div class="f20 fw"><img src="../styles/images/company/order_ico.png"/>&nbsp;&nbsp;订单核对</div>
+            <div class="close1 pop_back" style="position:absolute;right:20px;top:35px"></div>
+            <table class="order_table mt30">
+            	<thead>
+                	<tr>
+                    	<th>购买产品</th>
+                        <th>单价</th>
+                        <th>数量</th>
+                        <th>价格</th>
+                        <th>公司地址</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="bgf1" id="shopCar">
+                	<tr>
+                    	<td class="">
+                            一般纳税人
+                        </td>
+                        <td><span class="cc">1000</span>&nbsp;元/次</td>
+                        <td>
+                        	<div class="inline_b" style="overflow:hidden;margin-top:5px">
+                            	<div class="cos_less">-</div>
+                                <div class="numbox">1</div>
+                                <div class="cos_add">+</div>
+                            </div>
+                        </td>
+                        <td><span class="cc">1000</span>&nbsp;元</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                    	<td class="">
+                            地址变更
+                        </td>
+                        <td><span class="cc">600</span>&nbsp;元/次</td>
+                        <td>
+                        	<div class="inline_b" style="overflow:hidden;margin-top:5px">
+                            	<div class="cos_less">-</div>
+                                <div class="numbox">1</div>
+                                <div class="cos_add">+</div>
+                            </div>
+                        </td>
+                        <td><span class="cc">600</span>&nbsp;元</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="tl mt30">
+            	<span class="c3 f18">相关服务组合</span>
+                <ul class="mt20 shopul clearfix">
+                	<li>股权/法人变更&nbsp;&nbsp;<span class="cc">1000</span>&nbsp;元/次&nbsp;<div class="shop0"></div></li>
+                    <li>股权/法人变更&nbsp;&nbsp;<span class="cc">1000</span>&nbsp;元/次&nbsp;<div class="shop0"></div></li>
+                    <li>股权/法人变更&nbsp;&nbsp;<span class="cc">1000</span>&nbsp;元/次&nbsp;<div class="shop0"></div></li>
+                </ul>
+            </div>
+            
+            <div class="tl mt30">
+            	<span class="f20">使用代金卷</span>
+            </div>
+            <table class="order_table">
+            	<thead class="bgf1">
+                	<tr>
+                    	<th></th>
+                    	<th>金额</th>
+                        <th>过期日期</th>
+                        <th>使用范围</th>
+                        <th>使用说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                	<tr>
+                    	<td style="width:50px" class="cc"><i class="fa fa-check-square-o" style="cursor:pointer"></i></td>
+                        <td class="w15">&yen;<span class="cc">100.00</span>元</td>
+                    	<td class="w15">2015-01-28</td>
+                        <td class="w20">全场通用</td>
+                        <td class="pl40 pr30">
+                        	<p class="tl">
+                            	1、订单金额达到2000元时才能使用本劵。<br/>
+                                2、购买特价产品不能使用本劵，本劵不与其他优惠共享。<br/>
+                                3、本劵只能使用一次。<br/>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+           
+        </div>
+        <div class="bgf1">
+        	<div class="w960 clearfix">
+                <ul class="order_ul clearfix fr">
+                	<li>
+                    	已优惠：&yen;<span class="cc">0.00</span>
+                    </li>
+                    <li>
+                    	应付金额：&yen;<span class="cc" id="payAmount">6588.00</span>
+                    </li>
+                    <li>
+                    	<a href="javascript:;" class="btn-cheng" id="btn-sumbit">提交订单</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
 <script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 <script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 <script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
-<script type="text/javascript" src="../scripts/page/kefu.js"></script>
+<!-- <script type="text/javascript" src="../scripts/page/kefu.js"></script> -->
 <script>
 $(function(){
-	$(".tab_ul li").click(function(){
-		var index=$(this).index();
-		$(this).addClass("active").siblings("li").removeClass("active");
-		$(".tabbox").eq(index).show().siblings(".tabbox").hide();
-	});
-	/**/
-	$(".nav_1,.navsub").hover(function(){
-		$(".navsub").show();
-	},function(){
-		$(".navsub").hide();
-	});
-	/**/
-	$(".blend_ul>li").click(function(){
-		var index=$(this).index();
-		$(this).addClass("active").siblings("li").removeClass("active");
-		$(".blend_item").eq(index).show().siblings(".blend_item").hide();
-	});
-	/**/
-	$(".add_ul").on("click","li",function(){
-		var html=$(this).remove();
-		$(".yet_ul").append(html);
-	});
+	
+	//加法函数  
+	function accAdd(arg1, arg2) {  
+	    var r1, r2, m;  
+	    try{  
+	        r1 = arg1.toString().split(".")[1].length;  
+	    }catch (e) {
+	        r1 = 0;  
+	    }
+	    try {
+	        r2 = arg2.toString().split(".")[1].length;  
+	    }catch (e) {  
+	        r2 = 0;  
+	    }  
+	    m = Math.pow(10, Math.max(r1, r2));  
+	    return (arg1 * m + arg2 * m) / m;  
+	}   
+	
+	//减法函数  
+	function Subtr(arg1, arg2) {  
+	    var r1, r2, m, n;  
+	    try {  
+	        r1 = arg1.toString().split(".")[1].length;  
+	    }catch (e) {  
+	        r1 = 0;  
+	    }  
+	    try {  
+	        r2 = arg2.toString().split(".")[1].length;  
+	    }catch (e) {  
+	        r2 = 0;  
+	    }  
+	    m = Math.pow(10, Math.max(r1, r2));  
+	     //动态控制精度长度  
+	    n = (r1 >= r2) ? r1 : r2;  
+	    return ((arg1 * m - arg2 * m) / m).toFixed(n);  
+	} 
+	
+	function click(){
+		$(".cos_add").click(function(){
+			var count = $(this).parents("tr").attr("data-num");
+			count++;
+			$(this).siblings(".numbox").text(count);
+			$(this).parents("tr").attr("data-num",count);
+			var comPrice = $(this).parents("tr").attr("data-commodityPrice");
+			var amount = parseFloat(count * comPrice);
+			$(this).parents("tr").find('#comAmount').html(amount);
+			var comAmount = $('#payAmount').html();
+			$('#payAmount').html(accAdd(comAmount,comPrice));
+		});
+		$(".cos_less").click(function(){
+			var count = $(this).parents("tr").attr("data-num");
+			if(count<=1){alert("购买数量不能小于1！");return ;}
+			count--;
+			$(this).siblings(".numbox").text(count);
+			$(this).parents("tr").attr("data-num",count);
+			var comPrice = $(this).parents("tr").attr("data-commodityPrice");
+			var amount = parseFloat(count * comPrice);
+			$(this).parents("tr").find('#comAmount').html(amount);
+			var comAmount = $('#payAmount').html();
+			$('#payAmount').html(Subtr(comAmount,comPrice));
+		});
+		$(".del").click(function(){
+			var id = $(this).parents("tr").attr("data-id");
+			var commodityTitle = $(this).parents("tr").attr("data-commodityTitle");
+			var commodityPrice = $(this).parents("tr").attr("data-commodityPrice");
+			$(this).parents("tr").remove();
+			$('#'+id+'shopul').show();
+			var amount = $(this).parents("tr").find('#comAmount').html();
+			var comAmount = $('#payAmount').html();
+			$('#payAmount').html(Subtr(comAmount,amount));
+			$('.shopul').html($('.shopul').html()+'<li id ="'+id+'shopul">'+commodityTitle+'&nbsp;&nbsp;<span class="cc">'+
+					commodityPrice+'</span>&nbsp;元/次&nbsp;<div class="shop0" data-id="'+id+
+					'"data-commodityTitle="'+commodityTitle+
+					'"data-commodityPrice="'+commodityPrice+'"></div></li>');
+			
+			$(".shop0").click(function(){
+				var id = $(this).attr("data-id");
+				var commodityTitle = $(this).attr("data-commodityTitle");
+				var commodityPrice = $(this).attr("data-commodityPrice");
+				$('#shopCar').html($('#shopCar').html()+'<tr data-id="'+id+'" data-num="1" data-commodityPrice="'+commodityPrice+
+				'" data-commodityTitle="'+commodityTitle+'"><td class="">'+commodityTitle+'</td><td><span class="cc">'+commodityPrice+'</span>&nbsp;元/次</td><td>'+
+				'<div class="inline_b" style="overflow:hidden;margin-top:5px"><div class="cos_less">-</div><div class="numbox">1</div>'+
+				'<div class="cos_add">+</div></div></td><td><span class="cc" id="comAmount">'+commodityPrice+
+				'</span>&nbsp;元</td><td></td><td><a class="del">删除</a></td></tr>');
+				
+				var comAmount = $('#payAmount').html();
+				$('#payAmount').html(accAdd(comAmount,commodityPrice));
+				$('#'+id+'shopul').remove();
+				click();
+			});
+			
+		});
+	}
+	
+	var serviceURL = baseUrl+"purchasingmanagerCommodityManager/getComReisterCommodityList.json";
+	$.youi.ajaxUtils.ajax({
+		url:serviceURL,
+		jsonp:'data:jsonp',
+		dataType:'jsonp',
+		success:function(results){
+			if(results&&results.records){
+				var htmls = [];
+				var htmlss = [];
+				for(var i=0;i<results.records.length;i++){
+                
+					htmls.push('<li class="com'+(i+1)+(i+1)+'"><div class="bgfff"><span class="cc">&yen;'+results.records[i].commodityPrice+'/次</span><div class="clearfix">'+
+					'<span class="fl">'+results.records[i].commodityTitle+'</span><a href="javascript:;" class="fr com_shop com_reg" data-id="'+
+					results.records[i].commodityId+'" data-commodityTitle="'+results.records[i].commodityTitle+
+					'" data-commodityPrice="'+results.records[i].commodityPrice+'"></a></div></div></li>');
+					
+					htmlss.push('<li id ="'+results.records[i].commodityId+'shopul">'+results.records[i].commodityTitle+'&nbsp;&nbsp;<span class="cc">'+
+					results.records[i].commodityPrice+'</span>&nbsp;元/次&nbsp;<div class="shop0" data-id="'+results.records[i].commodityId+
+					'"data-commodityTitle="'+results.records[i].commodityTitle+
+					'"data-commodityPrice="'+results.records[i].commodityPrice+'"></div></li>');
+				}
+				$('#comRegister').html(htmls.join(''));
+				$('.shopul').html(htmlss.join(''));
+			}
+			var $layer=$(".pop_layer");
+			$(".com_reg").click(function(){
+				var id = $(this).attr("data-id");
+				var commodityTitle = $(this).attr("data-commodityTitle");
+				var commodityPrice = $(this).attr("data-commodityPrice");
+				$('#shopCar').html('<tr data-id="'+id+'" data-num="1" data-commodityPrice="'+commodityPrice+'" data-commodityTitle="'+commodityTitle+
+				'"><td class="">'+commodityTitle+'</td><td><span class="cc">'+commodityPrice+'</span>&nbsp;元/次</td><td>'+
+				'<div class="inline_b" style="overflow:hidden;margin-top:5px"><div class="cos_less">-</div>'+
+				'<div class="numbox">1</div><div class="cos_add">+</div></div></td><td><span class="cc" id="comAmount">'+commodityPrice+
+				'</span>&nbsp;元</td><td></td><td><a class="del">删除</a></td></tr>');
+				$('#payAmount').html(commodityPrice);
+				$('#'+id+'shopul').remove();
+				$layer.show();
+				click();
+			});
+			$(".shop0").click(function(){
+				var id = $(this).attr("data-id");
+				var commodityTitle = $(this).attr("data-commodityTitle");
+				var commodityPrice = $(this).attr("data-commodityPrice");
+				$('#shopCar').html($('#shopCar').html()+'<tr data-id="'+id+'" data-num="1" data-commodityPrice="'+commodityPrice+
+				'" data-commodityTitle="'+commodityTitle+'"><td class="">'+commodityTitle+'</td><td><span class="cc">'+commodityPrice+'</span>&nbsp;元/次</td><td>'+
+				'<div class="inline_b" style="overflow:hidden;margin-top:5px"><div class="cos_less">-</div><div class="numbox">1</div>'+
+				'<div class="cos_add">+</div></div></td><td><span class="cc" id="comAmount">'+commodityPrice+
+				'</span>&nbsp;元</td><td></td><td><a class="del">删除</a></td></tr>');
+				
+				var comAmount = $('#payAmount').html();
+				$('#payAmount').html(accAdd(comAmount,commodityPrice));
+				$('#'+id+'shopul').remove();
+				click();
+			});
+			
+			$(".pop_back").click(function(){
+				$layer.hide();
+			});
+			
+			$(".tab_ul li").click(function(){
+				var index=$(this).index();
+				$(this).addClass("active").siblings("li").removeClass("active");
+				$(".tabbox").eq(index).show().siblings(".tabbox").hide();
+			});
+			$(".nav_1,.navsub").hover(function(){
+				$(".navsub").show();
+			},function(){
+				$(".navsub").hide();
+			});
+			$(".blend_ul>li").click(function(){
+				var index=$(this).index();
+				$(this).addClass("active").siblings("li").removeClass("active");
+				$(".blend_item").eq(index).show().siblings(".blend_item").hide();
+			});
+			$(".add_ul").on("click","li",function(){
+				var html=$(this).remove();
+				$(".yet_ul").append(html);
+			});
+		}
+	}); 
 	
 	/**/
 	star(".starbox1 i");
@@ -359,6 +619,33 @@ $(function(){
 			}
 		});
 	}
+	$('#btn-sumbit').click(function(){
+		var length = $('#shopCar').children("tr").length;
+		var params = '';
+		for(var i =0;i<length;i++){
+			var object = $('#shopCar').children("tr").get(i);
+			var commodityId = object[attribute = 'attributes'][attribute = 'data-id'][attribute = 'value'];
+			var num = object[attribute = 'attributes'][attribute = 'data-num'][attribute = 'value'];
+			if(i+1<length){
+				params = params+"records["+i+"].commodityId.commodityId="+commodityId+"&records["+i+"].commoditydetailNum="+num+"&";
+			}else{
+				params = params+"records["+i+"].commodityId.commodityId="+commodityId+"&records["+i+"].commoditydetailNum="+num;
+			}
+		}
+		var serviceURL = baseUrl+"ordermanagerUserorderManager/saveComReisterOrder.json";
+		
+		$.youi.ajaxUtils.ajax({
+			url:serviceURL,
+			data:params,
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(results){
+				if(results&&results.record){
+					alert('请付款！');
+				}
+			}
+		});
+	});
 })
 </script>
 </body>
