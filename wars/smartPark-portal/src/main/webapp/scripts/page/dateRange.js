@@ -471,7 +471,6 @@ pickerDateRange.prototype.init = function(isCompare) {
 
     // 上一个月
     $('#' + this.preMonth).bind('click', function() {
-    	alert("b");
         __method.calendar_endDate.setMonth(__method.calendar_endDate.getMonth() - 1, 1);
         __method.mOpts.endDate = __method.date2ymd(__method.calendar_endDate).join('-');
         __method.init(isCompare);
