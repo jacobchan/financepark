@@ -17,7 +17,9 @@ import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.framework.esb.annotation.ConditionCollection;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.PubCondition;
 import com.gsoft.framework.esb.annotation.ServiceParam;
+import com.gsoft.framework.security.fuc.service.RoleManager;
 import com.manage.EmployeeManager.dao.EnterpriseEmployeesDao;
 import com.manage.EmployeeManager.dao.EnterpriseRoleDao;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
@@ -34,6 +36,9 @@ public class EnterpriseRoleManagerImpl extends BaseManagerImpl implements
 	private MemberInformationDao memberInformationDao;
 	@Autowired
 	private EnterpriseEmployeesDao enterpriseEmployeesDao;
+	
+	@Autowired
+	private RoleManager roleManager;
 
 	@Override
 	public List<EnterpriseRole> getEnterpriseRoles() throws BusException {
@@ -72,16 +77,14 @@ public class EnterpriseRoleManagerImpl extends BaseManagerImpl implements
 	/**
 	 * 保存对象
 	 */
-	@EsbServiceMapping
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId")})
 	public EnterpriseRole saveEnterpriseRole(EnterpriseRole o)
 			throws BusException {
 		EnterpriseEmployees es = enterpriseEmployeesDao.get(o.getEmployees().getEmployeesId());
-		//根据会员填写的手机号码查询此会员是否存在
-		MemberInformation info = memberInformationDao.getObjectByUniqueProperty("memberPhoneNumber", "18062038519");
 		o.setEmployees(es);
-		o.setCreateUser(info.getMemberId());
+		o.setRole(roleManager.getRole("ROLE_QY_ADMIN"));
 		o.setCreateTime(new Timestamp(new Date().getTime()));
-		o.setUpdateUser(info.getMemberId());
+		o.setUpdateUser(o.getCreateUser());
 		o.setUpdateTime(new Timestamp(new Date().getTime()));
 		return enterpriseRoleDao.save(o);
 	}
