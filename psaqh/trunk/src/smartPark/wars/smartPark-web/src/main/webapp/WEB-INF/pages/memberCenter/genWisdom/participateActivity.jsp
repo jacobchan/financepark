@@ -60,7 +60,7 @@
 			for(var i=0;i<record.length;i++){
 				var html="<a href='javascript:;' id='"+record[i].applyId+"' onclick='javascript:gotoDetails(this)'>"+
 						 "<div class='czh-box'>"+
-                    	 "<img src='<%=request.getContextPath()%>/styles/images/czh/list-5.jpg'>"+
+                    	 "<img src='http://localhost:9088/filestore/"+record[i].activityImage+"'>"+
                 		 "<div class='czh-group' style='border-bottom:1px solid #ecebeb'>"+
                     	 "<h4>"+record[i].applyTitle+"</h4>"+
                     	 "<span>活动发起人："+record[i].memberId+"</span><br/>"+
