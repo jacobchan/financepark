@@ -7,10 +7,28 @@ $(function () {
 	$(".check-btn label").click(function(){
 		if($(this).children('input[type="checkbox"]').prop("checked")){
 			$(this).parent().next(".ib-btn").removeClass("bg-h");
+			$(this).parent().next(".ib-btn").attr("href","yq2.html");
 		}else{
 			$(this).parent().next(".ib-btn").addClass("bg-h");
+			$(this).parent().next(".ib-btn").attr("href","javascript:;");
+		}
+
+	});
+	$(".add-sh label").click(function(){
+		if($(this).children('input[name="address"]').prop("checked")){
+			if($(this).index()==1){
+				$(this).parent(".add-sh").find(".so1").show();
+				$(this).parent(".add-sh").find(".so2").hide();
+			}else{
+				$(this).parent(".add-sh").find(".so2").show();
+				$(this).parent(".add-sh").find(".so1").hide();
+			}
 		}
 	})
+	$(".check-btn .ib-btn").not(".bg-h").click(function(){
+		$(this).attr("href","yq2.html");
+	})
+
 	$(".ht-table td>a.em1").click(function(){
 		$(".ht-table td>a.em1").removeClass("active");
 		$(this).toggleClass("active");
