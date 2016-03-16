@@ -150,15 +150,14 @@
 		success : function(results) {
 			if (results && results.records) {
 				var records = results.records;
+				$("#resoIds").empty();
 				for(var i=0; i<records.length; i++){
-					//主键追加到隐藏域供预约使用
-					$("#resoIds").append(records[i].resoId+",");
 					if((Number(records[i].resoDate.substring(5,7)))==Number($("#month").html())){
+						//主键追加到隐藏域供预约使用
+						$("#resoIds").append(records[i].resoId+",");
 						if(records[i].resoStatus=='02'){
 							numArray.push(Number(records[i].resoDate.substring(records[i].resoDate.lastIndexOf("-")+1, records[i].resoDate.length)));
 						}
-					}else{
-						numArray.splice(0,numArray.length);
 					}
 				}
 			}
