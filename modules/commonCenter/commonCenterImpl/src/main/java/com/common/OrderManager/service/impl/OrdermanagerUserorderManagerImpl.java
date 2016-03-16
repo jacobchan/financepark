@@ -3,6 +3,7 @@
  */
 package com.common.OrderManager.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Collection;
 
@@ -31,6 +32,7 @@ import com.common.OrderManager.service.OrdermanagerUserorderManager;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
+import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
 
 @Service("ordermanagerUserorderManager")
 @Transactional
@@ -43,6 +45,8 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	private PurchasingmanagerCommodityManager purchasingmanagerCommodityManager;
 	@Autowired
 	private OrdermanagerCommoditydetailManager ordermanagerCommoditydetailManager;
+	@Autowired
+	private PurchasingmanagerGenreManager purchasingmanagerGenreManager;
 	
     /**
      * 查询列表
@@ -171,9 +175,170 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		
 		OrdermanagerCommoditydetail orderDetail = new OrdermanagerCommoditydetail();
 		orderDetail.setOrdermanagerUserorder(order);
-		orderDetail.setCommodityId(commodityId);
+		orderDetail.setCommodityId(commodity);
 		orderDetail.setCommoditydetailNum("1");
 		ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
 		return order;
 	}
+    
+    /**
+	 * 新增工商变更订单
+	 */
+    @Override
+    @EsbServiceMapping
+	public OrdermanagerUserorder saveComChangeOrder(@ServiceParam(name="userId",pubProperty="userId") String userId,
+			@DomainCollection(domainClazz=OrdermanagerCommoditydetail.class) List<OrdermanagerCommoditydetail> orderDetailList) throws BusException {
+    	BigDecimal userorderAmoun = BigDecimal.valueOf(0);
+    	for(OrdermanagerCommoditydetail orderDetail:orderDetailList){//计算订单金额
+    		PurchasingmanagerCommodity commodity = purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(orderDetail.getCommodityId().getCommodityId());
+    		userorderAmoun = userorderAmoun.add(commodity.getCommodityPrice().
+    				multiply(new BigDecimal(orderDetail.getCommoditydetailNum())));
+    	}
+		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("0502");
+		OrdermanagerUserorder order = new OrdermanagerUserorder();
+		order.setUserorderAmount(userorderAmoun);
+		order.setGenreId(pg);
+		order.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("GSBG"));
+		order.setUserorderStatus("01");//01-未支付
+		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		order.setCreateUser(userId);
+		order.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		order.setUpdateUser(userId);
+		order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		order = ordermanagerUserorderDao.save(order);
+		
+		for(OrdermanagerCommoditydetail orderDetail:orderDetailList){//保存订单明细
+			orderDetail.setOrdermanagerUserorder(order);
+			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
+		}
+		return order;
+	}
+    /**
+	 * 新增公司注册订单
+	 */
+    @Override
+    @EsbServiceMapping
+	public OrdermanagerUserorder saveComReisterOrder(@ServiceParam(name="userId",pubProperty="userId") String userId,
+			@DomainCollection(domainClazz=OrdermanagerCommoditydetail.class) List<OrdermanagerCommoditydetail> orderDetailList) throws BusException {
+    	BigDecimal userorderAmoun = BigDecimal.valueOf(0);
+    	for(OrdermanagerCommoditydetail orderDetail:orderDetailList){//计算订单金额
+    		PurchasingmanagerCommodity commodity = purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(orderDetail.getCommodityId().getCommodityId());
+    		userorderAmoun = userorderAmoun.add(commodity.getCommodityPrice().
+    				multiply(new BigDecimal(orderDetail.getCommoditydetailNum())));
+    	}
+		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("0501");
+		OrdermanagerUserorder order = new OrdermanagerUserorder();
+		order.setUserorderAmount(userorderAmoun);
+		order.setGenreId(pg);
+		order.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("GSZC"));
+		order.setUserorderStatus("01");//01-未支付
+		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		order.setCreateUser(userId);
+		order.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		order.setUpdateUser(userId);
+		order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		order = ordermanagerUserorderDao.save(order);
+		
+		for(OrdermanagerCommoditydetail orderDetail:orderDetailList){//保存订单明细
+			orderDetail.setOrdermanagerUserorder(order);
+			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
+		}
+		return order;
+	}
+    /**
+   	 * 新增代理记账订单
+   	 */
+    @Override
+    @EsbServiceMapping
+   	public OrdermanagerUserorder saveAgencyOrder(@ServiceParam(name="userId",pubProperty="userId") String userId,
+   			@DomainCollection(domainClazz=OrdermanagerCommoditydetail.class) List<OrdermanagerCommoditydetail> orderDetailList) throws BusException {
+       	BigDecimal userorderAmoun = BigDecimal.valueOf(0);
+       	for(OrdermanagerCommoditydetail orderDetail:orderDetailList){//计算订单金额
+       		PurchasingmanagerCommodity commodity = purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(orderDetail.getCommodityId().getCommodityId());
+       		userorderAmoun = userorderAmoun.add(commodity.getCommodityPrice().
+       				multiply(new BigDecimal(orderDetail.getCommoditydetailNum())));
+       	}
+   		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("0504");
+   		OrdermanagerUserorder order = new OrdermanagerUserorder();
+   		order.setUserorderAmount(userorderAmoun);
+   		order.setGenreId(pg);
+   		order.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("DLJZ"));
+   		order.setUserorderStatus("01");//01-未支付
+   		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+   		order.setCreateUser(userId);
+   		order.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+   		order.setUpdateUser(userId);
+   		order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+   		order = ordermanagerUserorderDao.save(order);
+   		
+   		for(OrdermanagerCommoditydetail orderDetail:orderDetailList){//保存订单明细
+   			orderDetail.setOrdermanagerUserorder(order);
+   			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
+   		}
+   		return order;
+   	}
+    /**
+   	 * 新增法律服务订单
+   	 */
+    @Override
+    @EsbServiceMapping
+   	public OrdermanagerUserorder saveLawSerOrder(@ServiceParam(name="userId",pubProperty="userId") String userId,
+   			@DomainCollection(domainClazz=OrdermanagerCommoditydetail.class) List<OrdermanagerCommoditydetail> orderDetailList) throws BusException {
+       	BigDecimal userorderAmoun = BigDecimal.valueOf(0);
+       	for(OrdermanagerCommoditydetail orderDetail:orderDetailList){//计算订单金额
+       		PurchasingmanagerCommodity commodity = purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(orderDetail.getCommodityId().getCommodityId());
+       		userorderAmoun = userorderAmoun.add(commodity.getCommodityPrice().
+       				multiply(new BigDecimal(orderDetail.getCommoditydetailNum())));
+       	}
+   		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("0505");
+   		OrdermanagerUserorder order = new OrdermanagerUserorder();
+   		order.setUserorderAmount(userorderAmoun);
+   		order.setGenreId(pg);
+   		order.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("FLFW"));
+   		order.setUserorderStatus("01");//01-未支付
+   		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+   		order.setCreateUser(userId);
+   		order.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+   		order.setUpdateUser(userId);
+   		order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+   		order = ordermanagerUserorderDao.save(order);
+   		
+   		for(OrdermanagerCommoditydetail orderDetail:orderDetailList){//保存订单明细
+   			orderDetail.setOrdermanagerUserorder(order);
+   			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
+   		}
+   		return order;
+   	}
+    /**
+   	 * 新增商标专利订单
+   	 */
+    @Override
+    @EsbServiceMapping
+   	public OrdermanagerUserorder saveChopPatentOrder(@ServiceParam(name="userId",pubProperty="userId") String userId,
+   			@DomainCollection(domainClazz=OrdermanagerCommoditydetail.class) List<OrdermanagerCommoditydetail> orderDetailList) throws BusException {
+       	BigDecimal userorderAmoun = BigDecimal.valueOf(0);
+       	for(OrdermanagerCommoditydetail orderDetail:orderDetailList){//计算订单金额
+       		PurchasingmanagerCommodity commodity = purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(orderDetail.getCommodityId().getCommodityId());
+       		userorderAmoun = userorderAmoun.add(commodity.getCommodityPrice().
+       				multiply(new BigDecimal(orderDetail.getCommoditydetailNum())));
+       	}
+   		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("0506");
+   		OrdermanagerUserorder order = new OrdermanagerUserorder();
+   		order.setUserorderAmount(userorderAmoun);
+   		order.setGenreId(pg);
+   		order.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("SBZL"));
+   		order.setUserorderStatus("01");//01-未支付
+   		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+   		order.setCreateUser(userId);
+   		order.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+   		order.setUpdateUser(userId);
+   		order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+   		order = ordermanagerUserorderDao.save(order);
+   		
+   		for(OrdermanagerCommoditydetail orderDetail:orderDetailList){//保存订单明细
+   			orderDetail.setOrdermanagerUserorder(order);
+   			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
+   		}
+   		return order;
+   	}
 }

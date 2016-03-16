@@ -81,4 +81,32 @@ public interface PurchasingmanagerCommodityManager extends BaseManager{
      * @throws BusException
      */
     public List<PurchasingmanagerCommodity> getComChangeCommodityList(String userId) throws BusException;
+    /**
+     * 获取公司注册类别的所有商品列表
+     * @param userId
+     * @return
+     * @throws BusException
+     */
+    public List<PurchasingmanagerCommodity> getComReisterCommodityList(String userId) throws BusException;
+    /**
+     * 获取代理记账类别的所有商品列表
+     * @param userId
+     * @return
+     * @throws BusException
+     */
+    public List<PurchasingmanagerCommodity> getAgencyCommodityList(String userId) throws BusException;
+    /**
+     * 获取法律服务类别的所有商品列表
+     * @param userId
+     * @return
+     * @throws BusException
+     */
+    public List<PurchasingmanagerCommodity> getLawSerCommodityList(String userId) throws BusException;
+    /**
+     * 获取商标专利类别的所有商品列表
+     * @param userId
+     * @return
+     * @throws BusException
+     */
+    public List<PurchasingmanagerCommodity> getChopPatentCommodityList(String userId) throws BusException;
 }

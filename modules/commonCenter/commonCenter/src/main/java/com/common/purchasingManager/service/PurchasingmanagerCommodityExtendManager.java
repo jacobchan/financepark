@@ -77,4 +77,11 @@ public interface PurchasingmanagerCommodityExtendManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public void saveCommodityExts(String commodityId,List<PurchasingmanagerCommodityExtend> commodityExtList) throws BusException; 
+	/**
+	 * 根据商品ID获取商品扩展属性
+	 * @param commodityId
+	 * @return
+	 * @throws BusException
+	 */
+	public List<PurchasingmanagerCommodityExtend> getCommodityExtList(String commodityId) throws BusException;
 }

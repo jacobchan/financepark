@@ -148,4 +148,36 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
 		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("purchasingmanagerGenre.genreCode", "0502");
 		return list;
 	}
+	/**
+     * 获取公司注册类别的所有商品列表
+     */
+	@EsbServiceMapping
+    public List<PurchasingmanagerCommodity> getComReisterCommodityList(@ServiceParam(name="userId",pubProperty="userId") String userId) throws BusException{
+		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("purchasingmanagerGenre.genreCode", "0501");
+		return list;
+	}
+	/**
+     * 获取代理记账类别的所有商品列表
+     */
+	@EsbServiceMapping
+    public List<PurchasingmanagerCommodity> getAgencyCommodityList(@ServiceParam(name="userId",pubProperty="userId") String userId) throws BusException{
+		List<PurchasingmanagerCommodity> list = purchasingmanagerCommodityDao.getList("purchasingmanagerGenre.genreCode", "0504");
+		return list;
+	}
+	/**
+     * 获取法律服务类别的所有商品列表
+     */
+	@EsbServiceMapping
+    public List<PurchasingmanagerCommodity> getLawSerCommodityList(@ServiceParam(name="userId",pubProperty="userId") String userId) throws BusException{
+		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("purchasingmanagerGenre.genreCode", "0505");
+		return list;
+	}
+	/**
+     * 获取商标专利类别的所有商品列表
+     */
+	@EsbServiceMapping
+    public List<PurchasingmanagerCommodity> getChopPatentCommodityList(@ServiceParam(name="userId",pubProperty="userId") String userId) throws BusException{
+		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("purchasingmanagerGenre.genreCode", "0506");
+		return list;
+	}
 }
