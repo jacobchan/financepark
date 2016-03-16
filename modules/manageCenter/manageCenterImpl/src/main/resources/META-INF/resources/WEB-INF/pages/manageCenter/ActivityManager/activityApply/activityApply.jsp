@@ -44,7 +44,8 @@
 			<youi:fieldCalendar property="startTime"  caption="活动开始时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="true"/>
 			<youi:fieldCalendar property="endTime"  caption="活动结束时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="true"/>
 			<youi:fieldSelect property="applyStatus"  caption="活动申请状态" convert="activityApplyStatus"/>
-			<youi:fieldArea property="commentContent"  caption="活动内容" notNull="true"/>
+			<youi:fieldSwfupload property="activityImage" caption="活动图片" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" />
+			<youi:fieldArea property="commentContent"  caption="活动内容" column="2" notNull="true"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
