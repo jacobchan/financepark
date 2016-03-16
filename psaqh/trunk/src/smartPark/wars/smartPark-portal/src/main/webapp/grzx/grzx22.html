@@ -3,43 +3,17 @@
 <head>
 	<meta charset="UTF-8">
 	<title>活动评论</title>
+	<link rel="stylesheet" type="text/css" href="../styles/page/awesome/css/font-awesome.min.css">
 	<link href="../styles/base.css" type="text/css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
-	<link rel="stylesheet" type="text/css" href="../styles/page/awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../styles/page/grzxczh.css">
 	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/adcom.js"></script>
-     <style>
-	   .ccheng{color:#FF6715}.a_left,.a_right{width:40px;height:65px;cursor:pointer;position:absolute;margin-top:-32px;top:50%; opacity:0.7}
-	  .pn_btn{width: 42px;height: 64px;margin-top: 35px;}
-	  #prev_btn1{border-radius: 0px 10px 10px 0px;left: 10px;}
-	  #next_btn1{border-radius: 10px 0px 0px 10px;right: 13px;}
-	  .a_left:hover{background: rgba(255,255,255,0.6);}
-	  .a_right{background:rgba(255,255,255,0.2);right:0}
-	  .czh-box.active{border-color:#FF6715}.czh-box.active h4{color:#FF6715}
-	  .ac_box{border-bottom:1px #EFEEEE solid;}.ac_box a{padding:0 20px 0 0;color:#868686}
-	  .ac_box .active{color:#FF6715; text-decoration:underline}
-	  .img_list li{padding:20px;display:inline-block;float:left; text-align:center}
-	  .czh-knowledge{width: 100%;overflow: hidden;}
-	  .gr-czh-box{width: 204px;float: left;margin:10px;border:1px solid #fff;cursor: pointer;}
-	  .gr-czh-box img{width: 100%;po}
-	  .gr-czh-box:hover,.gr-czh-box.active{border:1px solid #FF6715;color: #FF6715;}
-	  .gr-czh-box:hover a,.gr-czh-box.active a{color: #FF6715;}
-	  .gr-czh-box p{font-size: 14px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;line-height: 40px;margin-left: 5px;}
-	  .gr-czh-box a{color: #333;}
-	  .gr-czh-box a:hover{color: #FF6715;text-decoration: underline;}
-	  .gr-ck-group{width: 1000%;position: relative;left: 0px;}
-	  .oh{overflow: hidden;}
-	  .a-c-fill{background: #ff6715;color: #fff !important;}
-	  .a-c-fill:hover{background: #FF5900 !important;}
-	  .reply_btn:hover{background: #B8B8B8;color: #fff;}
-	  .fb-activity{border-left: 1px solid #efeeee;}
-	  .fb-activity ul li{padding: 10px 50px;line-height: 20px;font-size: 14px;float: left;background: #f4f4f4;border:1px solid #efeeee;cursor: pointer;border-left: none;}
-	  .fb-list-box{border:1px solid #efecec;margin-top: -1px;}
-	  .fb-list-box table td{padding: 10px 0px;}
-    </style>
+	<script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
+	
      <script type="text/javascript">
     	$(function () {
     		$(".gr-czh-box").click(function(){
@@ -72,6 +46,28 @@
 		    $("#prev_btn1").click(function(){
 		        sbysf_scroll_down();
 		    });
+
+		    var start = {
+			    elem: '#startTime',
+			    min: laydate.now(), //设定最小日期为当前日期
+			    max: '2099-06-16 23:59:59', //最大日期
+			    istoday: false,
+			    choose: function(datas){
+			         end.min = datas; //开始日选好后，重置结束日的最小日期
+			         end.start = datas //将结束日的初始值设定为开始日
+			    }
+			};
+			var end = {
+			    elem: '#endTime',
+			    min: laydate.now(),
+			    max: '2099-06-16 23:59:59',
+			    istoday: false,
+			    choose: function(datas){
+			        start.max = datas; //结束日选好后，重置开始日的最大日期
+			    }
+			};
+			laydate(start);
+			laydate(end);
     	})
     </script>
 </head>
@@ -84,7 +80,7 @@
 			<div class="per-center-box clearfix">
 				<div id="youi_page_left" class="fl clearfix"></div>
 				<div class="w1000">
-					<h3 class="per-h3"><span class="f14 c-333">创智汇 / </span><span class="f14 c-333">我发起的活动 / </span>发布新活动</h3>
+					<h3 class="per-h3"><a class="f14 c-333" href="">创智汇 / </a><a class="f14 c-333" href="">我发起的活动 / </a>发布新活动</h3>
 					<div class="clearfix mt40">
 						<div class="fb-activity">
 							<ul class="clearfix">
@@ -96,7 +92,7 @@
 						<div class="fb-list-box">
 							<table>
 								<colgroup>
-									<col width="120"></col>
+									<col width="130"></col>
 									<col></col>
 								</colgroup>
 								<tbody>
@@ -106,7 +102,7 @@
 									</tr>
 									<tr>
 										<th>活动时间</th>
-										<td><input type="text" placeholder="请选择开始时间"> 至 <input type="text" placeholder="请选择结束时间"></td>
+										<td><input type="text" placeholder="请选择开始时间" id="startTime"><span class="ml15 mr15">至</span><input type="text" placeholder="请选择结束时间" id="endTime"></td>
 									</tr>
 									<tr>
 										<th>截止报名时间</th>
@@ -119,7 +115,7 @@
 									<tr>
 										<th>活动封面</th>
 										<td>
-											<div class="photo-edit" style="width:200px;height:140px;">
+											<div class="photo-edit" style="width:200px;height:140px;padding:25px 10px;margin-left:0px;">
 												<input type="file">
 												<p>编辑 <span class="ml10">封面</span></p>
 												<p class="f12">封面图片大小建议：288*195</p>
@@ -132,11 +128,11 @@
 									</tr>
 									<tr>
 										<th>活动内容</th>
-										<td><div></div></td>
+										<td><div style="height:100px;"></div></td>
 									</tr>
 									<tr>
 										<td></td>
-										<td><a href="javascript:;" class="ib-btn">下一步</a></td>
+										<td><a href="javascript:;" class="ib-btn" style="padding:0px 40px;">下一步</a></td>
 									</tr>
 								</tbody>
 							</table>
