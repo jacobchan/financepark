@@ -150,11 +150,13 @@
 				var records = results.records;
 				for(var i=0; i<records.length; i++){
 					if(records[i].resoStatus=='02'){
+						//主键追加到隐藏域供预约使用
 						$("#resoIds").append(records[i].resoId+",");
 						numArray.push(Number(records[i].resoDate.substring(records[i].resoDate.lastIndexOf("-")+1, records[i].resoDate.length)));
 					}
 				}
 			}
+			//初始化pickerDateRange
 			var dateRange1 = new pickerDateRange('date1', {
 				aRecent30Days : true,
 				needCompare : false,
@@ -190,7 +192,6 @@
 	});
 </script>
 <script>
-
 	$(function() {
 		var Request = new Object();
 		Request = GetRequest();
@@ -199,7 +200,6 @@
 		var genreCode='0302';
 		var params = ['commodityId='+commodityId,'genreCode='+genreCode];
 		var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommoditys.json";
-		//	var serviceURL = "http://localhost:8088/smartPark-web/esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommodity.json?commodityId="+commodityId;
 		$.youi.ajaxUtils.ajax({
 			url : serviceURL,
 			data:params.join('&'),
