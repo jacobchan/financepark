@@ -72,4 +72,14 @@ public interface EnterbusinessmanagerRzManager extends BaseManager{
      * 根据楼栋信息更新预约记录状态
      */
 	public void updateEnteringStatus(String buildingId)throws BusException;
+	
+	/**
+	 * 根据名称查询企业
+	 * @param rzName 入驻企业名称
+	 * @return 符合条件的企业对象集合
+	 * @throws BusException
+	 * @author ZhuYL
+	 * @time 2016-03-17
+	 */
+	public List<EnterbusinessmanagerRz> findEnterbusinessmanagerRzByName(String rzName)throws BusException;
 }
