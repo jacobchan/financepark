@@ -89,15 +89,15 @@
 <!--tab切换内容-->
 <div class="tabbox">
 	<div class="w1200 pt20 pb20">
-    	<img src="../styles/images/company/czh.png"/>
+    	<img id="merchantLogo" src="../styles/images/company/czh.png"/>
         <span class="inline_b vm contact">
-        	<i class="fa fa-map-marker cc" style="padding-left:4px"></i>宝安区西乡街道黄田社区岗贝工业区<br/>
-            <i class="fa fa-internet-explorer cc"></i>http://www.szczh.com.cn<br/>
-            <i class="fa fa-phone cc" style="padding-left:3px"></i>0755-15637288
+        	<i class="fa fa-map-marker cc" style="padding-left:4px"></i><span id="merchantSendAddress">宝安区西乡街道黄田社区岗贝工业区</span><br/>
+            <i class="fa fa-internet-explorer cc"></i><span id="merchantUrl">http://www.szczh.com.cn</span><br/>
+            <i class="fa fa-phone cc" style="padding-left:3px"></i><span id="merchantLinkmanPhone">0755-15637288</span>
         </span>
         <span class="fr" style="width:630px">
-        	公司已经通过ISBO9FD001质量管理体系环境资源认证，构建了符合世界各个公司开立街坊四邻即可立即更换发生大幅缩水是个很反感复合风管很反感你放过风格很反感好烦活动
-            生大幅缩水是个很反感复合风管很反感你放过风格很反感好烦活动生大幅缩水是个很反感复合...
+        	<span id="merchantAbout">公司已经通过ISBO9FD001质量管理体系环境资源认证，构建了符合世界各个公司开立街坊四邻即可立即更换发生大幅缩水是个很反感复合风管很反感你放过风格很反感好烦活动
+            生大幅缩水是个很反感复合风管很反感你放过风格很反感好烦活动生大幅缩水是个很反感复合...</span>
             <div class="fr"><a href="javascript:;"><i class="fa fa-share-alt cc"></i></a></div>
         </span>
     </div>
@@ -326,7 +326,7 @@
 </div>
 <div class="tabbox" style="display:none">
 	
-    <div class="bgf1 pb30 pt30">
+    <!-- <div class="bgf1 pb30 pt30">
         <div class="w1200">
             <div class="pb15"><span class="f18 span_bold">服务内容</span></div>
             <ul class="patent_ul clearfix">
@@ -548,7 +548,7 @@
                 </li>
             </ul>
         </div>
-    </div>
+    </div> -->
     <div class="w1200">
         <div class="pt20">
             <span class="f18 span_bold">服务流程</span>
@@ -742,7 +742,7 @@
                 </ul>
             </div>
             
-            <div class="tl mt30">
+            <!-- <div class="tl mt30">
             	<span class="f20">使用代金卷</span>
             </div>
             <table class="order_table">
@@ -770,7 +770,7 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
            
         </div>
         <div class="bgf1">
@@ -900,6 +900,13 @@ $(function(){
 				var htmls = [];
 				var htmlss = [];
 				for(var i=0;i<results.records.length;i++){
+					if(i==0){
+						$('#merchantSendAddress').html(results.records[i].purchasingmanagerMerchant.merchantSendAddress);
+						$('#merchantLinkmanPhone').html(results.records[i].purchasingmanagerMerchant.merchantLinkmanPhone);
+						$('#merchantAbout').html(results.records[i].purchasingmanagerMerchant.merchantAbout);
+						$('#merchantUrl').html(results.records[i].purchasingmanagerMerchant.merchantUrl);
+						$('#merchantLogo').attr("src","../filestore/"+results.records[i].purchasingmanagerMerchant.merchantLogo);
+					}
                 
 					htmls.push('<li><div><div class="border pa_c1 tc"><span class="f20">'+results.records[i].commodityTitle+'</span>'+
 							'</div><div class="tc pt15 pb15"><span class="cc">&yen;'+results.records[i].commodityPrice+'</span><br/>'+
@@ -911,7 +918,8 @@ $(function(){
 							'<div class="add">+</div><div class="less">-</div></div><div class="f14 mt10">'+
 							'<div class="btn_h" data-id="'+results.records[i].commodityId+'" data-commodityTitle="'+results.records[i].commodityTitle+
 							'" data-commodityPrice="'+results.records[i].commodityPrice+'">&nbsp;立即购买&nbsp;</div>'+
-							'<div class="btn_cx">加入购物车</div></div></div></div></li>');
+							'<div class="btn_cx" data-id="'+results.records[i].commodityId+'" data-commodityTitle="'+results.records[i].commodityTitle+
+							'" data-commodityPrice="'+results.records[i].commodityPrice+'">加入购物车</div></div></div></div></li>');
 					
 					htmlss.push('<li id ="'+results.records[i].commodityId+'shopul">'+results.records[i].commodityTitle+'&nbsp;&nbsp;<span class="cc">'+results.records[i].commodityPrice+
 							'</span>&nbsp;元/次&nbsp;<div class="shop0" data-id="'+results.records[i].commodityId+
@@ -926,13 +934,32 @@ $(function(){
 					var id = $(this).attr("data-id");
 					var commodityTitle = $(this).attr("data-commodityTitle");
 					var commodityPrice = $(this).attr("data-commodityPrice");
-					$('#shopCar').html('<tr data-id="'+id+'" data-num="1" data-commodityPrice="'+commodityPrice+'" data-commodityTitle="'+commodityTitle+
+					var count=$(this).parent().prev().prev().val();
+					var amount = parseFloat(count * commodityPrice);
+					$('#shopCar').html('<tr data-id="'+id+'" data-num="'+count+'" data-commodityPrice="'+commodityPrice+'" data-commodityTitle="'+commodityTitle+
 					'"><td class="">'+commodityTitle+'</td><td><span class="cc">'+commodityPrice+'</span>&nbsp;元/次</td><td>'+
 					'<div class="inline_b" style="overflow:hidden;margin-top:5px"><div class="cos_less">-</div>'+
-					'<div class="numbox">1</div><div class="cos_add">+</div></div></td><td><span class="cc" id="comAmount">'+commodityPrice+
+					'<div class="numbox">'+count+'</div><div class="cos_add">+</div></div></td><td><span class="cc" id="comAmount">'+amount+
 					'</span>&nbsp;元</td><td></td><td><a class="del">删除</a></td></tr>');
 					
-					$('#payAmount').html(commodityPrice);
+					$('#payAmount').html(amount);
+					$('#'+id+'shopul').remove();
+					$layer.show();
+					click();
+				});
+				$(".btn_cx").click(function(){
+					var id = $(this).attr("data-id");
+					var commodityTitle = $(this).attr("data-commodityTitle");
+					var commodityPrice = $(this).attr("data-commodityPrice");
+					var count=$(this).parent().prev().prev().val();
+					var amount = parseFloat(count * commodityPrice);
+					$('#shopCar').html('<tr data-id="'+id+'" data-num="'+count+'" data-commodityPrice="'+commodityPrice+'" data-commodityTitle="'+commodityTitle+
+					'"><td class="">'+commodityTitle+'</td><td><span class="cc">'+commodityPrice+'</span>&nbsp;元/次</td><td>'+
+					'<div class="inline_b" style="overflow:hidden;margin-top:5px"><div class="cos_less">-</div>'+
+					'<div class="numbox">'+count+'</div><div class="cos_add">+</div></div></td><td><span class="cc" id="comAmount">'+amount+
+					'</span>&nbsp;元</td><td></td><td><a class="del">删除</a></td></tr>');
+					
+					$('#payAmount').html(amount);
 					$('#'+id+'shopul').remove();
 					$layer.show();
 					click();
@@ -975,12 +1002,12 @@ $(function(){
 					$(this).parent().prev().val(count);
 				});
 				/**/
-				$(".tab_ul li").click(function(){
+				/* $(".tab_ul li").click(function(){
 					var index=$(this).index();
 					$(this).addClass("active").siblings("li").removeClass("active");
 					$(".tabbox").eq(index).show().siblings(".tabbox").hide();
 			        $(".adapt_img img").eq(index).show().siblings("img").hide();
-				});
+				}); */
 				/**/
 				$(".nav_1,.navsub").hover(function(){
 					$(".navsub").show();
