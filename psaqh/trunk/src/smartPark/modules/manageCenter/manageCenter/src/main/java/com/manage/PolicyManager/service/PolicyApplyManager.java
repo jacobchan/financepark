@@ -82,11 +82,8 @@ public interface PolicyApplyManager extends BaseManager{
 	public EnterbusinessmanagerRz findEnterpriseByMemberId(String id) throws BusException;
 	/**
      * 获取当前登录用户申请的政策    */
-	public List<PolicyApply> getPolicyApplyListByLoginUser() throws BusException;   	
+	public List<PolicyApply> getPolicyApplyListByLoginUser(PolicyApply o)throws BusException;   	
 	/**
      * 获取当前登录用户申请的政策   */  
-        public PolicyApply updatePolicyApplyStatus(
-        		 String policyApplyId,
-        		String policyApplyStatus
-        	) throws BusException;  	
+        public PolicyApply updatePolicyApplyStatus(String policyApplyId) throws BusException;  	
 }
