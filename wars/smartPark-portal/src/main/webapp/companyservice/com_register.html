@@ -83,23 +83,23 @@
 <div class="bgf1 borderm "><!--tab切换导航-->
 	<div class="w1200">
     	<ul class="tab_ul clearfix">
-        	<li>园区本地资源</li>
-            <li class="active">在线资源[多有米]</li>
+        	<li class="active">园区本地资源</li>
+            <li>在线资源[多有米]</li>
         </ul>
     </div>
 </div>
 <!--tab切换内容-->
-<div class="tabbox" style="display:none">
+<div class="tabbox">
 	<div class="w1200 pt20 pb20">
-    	<img src="../styles/images/company/czh.png"/>
+    	<img id="merchantLogo" src="../styles/images/company/czh.png"/>
         <span class="inline_b vm contact">
-        	<i class="fa fa-map-marker cc" style="padding-left:4px"></i>宝安区西乡街道黄田社区岗贝工业区<br/>
-            <i class="fa fa-internet-explorer cc"></i>http://www.szczh.com.cn<br/>
-            <i class="fa fa-phone cc" style="padding-left:3px"></i>0755-15637288
+        	<i class="fa fa-map-marker cc" style="padding-left:4px"></i><span id="merchantSendAddress">宝安区西乡街道黄田社区岗贝工业区</span><br/>
+            <i class="fa fa-internet-explorer cc"></i><span id="merchantUrl">http://www.szczh.com.cn</span><br/>
+            <i class="fa fa-phone cc" style="padding-left:3px"></i><span id="merchantLinkmanPhone">0755-15637288</span>
         </span>
         <span class="fr" style="width:630px">
-        	公司已经通过ISBO9FD001质量管理体系环境资源认证，构建了符合世界各个公司开立街坊四邻即可立即更换发生大幅缩水是个很反感复合风管很反感你放过风格很反感好烦活动
-            生大幅缩水是个很反感复合风管很反感你放过风格很反感好烦活动生大幅缩水是个很反感复合...
+        	<span id="merchantAbout">公司已经通过ISBO9FD001质量管理体系环境资源认证，构建了符合世界各个公司开立街坊四邻即可立即更换发生大幅缩水是个很反感复合风管很反感你放过风格很反感好烦活动
+            生大幅缩水是个很反感复合风管很反感你放过风格很反感好烦活动生大幅缩水是个很反感复合...</span>
             <div class="fr"><a href="javascript:;"><i class="fa fa-share-alt cc"></i></a></div>
         </span>
     </div>
@@ -158,7 +158,7 @@
         </div>
     </div>
 </div>
-<div class="tabbox">
+<!-- <div class="tabbox" style="display:none">
     <div class="bgf1 pb30 pt30">
         <div class="w1200">
             <div class="pb15"><span class="f18 span_bold">注册公司</span></div>
@@ -219,7 +219,7 @@
             </ul>
         </div>
     </div>
-</div>
+</div> -->
 <!--tab切换内容    end  -->
 <div class="bgf1">
 	<div class="w1200">
@@ -373,7 +373,7 @@
                 </ul>
             </div>
             
-            <div class="tl mt30">
+           <!--  <div class="tl mt30">
             	<span class="f20">使用代金卷</span>
             </div>
             <table class="order_table">
@@ -401,7 +401,7 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
            
         </div>
         <div class="bgf1">
@@ -533,6 +533,14 @@ $(function(){
 				var htmls = [];
 				var htmlss = [];
 				for(var i=0;i<results.records.length;i++){
+					
+					if(i==0){
+						$('#merchantSendAddress').html(results.records[i].purchasingmanagerMerchant.merchantSendAddress);
+						$('#merchantLinkmanPhone').html(results.records[i].purchasingmanagerMerchant.merchantLinkmanPhone);
+						$('#merchantAbout').html(results.records[i].purchasingmanagerMerchant.merchantAbout);
+						$('#merchantUrl').html(results.records[i].purchasingmanagerMerchant.merchantUrl);
+						$('#merchantLogo').attr("src","../filestore/"+results.records[i].purchasingmanagerMerchant.merchantLogo);
+					}
                 
 					htmls.push('<li class="com'+(i+1)+(i+1)+'"><div class="bgfff"><span class="cc">&yen;'+results.records[i].commodityPrice+'/次</span><div class="clearfix">'+
 					'<span class="fl">'+results.records[i].commodityTitle+'</span><a href="javascript:;" class="fr com_shop com_reg" data-id="'+
@@ -582,11 +590,11 @@ $(function(){
 				$layer.hide();
 			});
 			
-			$(".tab_ul li").click(function(){
+			/* $(".tab_ul li").click(function(){
 				var index=$(this).index();
 				$(this).addClass("active").siblings("li").removeClass("active");
 				$(".tabbox").eq(index).show().siblings(".tabbox").hide();
-			});
+			}); */
 			$(".nav_1,.navsub").hover(function(){
 				$(".navsub").show();
 			},function(){
