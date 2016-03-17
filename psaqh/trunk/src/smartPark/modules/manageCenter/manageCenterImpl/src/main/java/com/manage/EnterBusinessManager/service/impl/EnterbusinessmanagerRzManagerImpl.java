@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.BuildingBaseManager.entity.BbmRoom;
+import com.common.BuildingBaseManager.service.BbmRoomManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -47,6 +49,8 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 	private EnterpriseEmployeesManager enterpriseEmployeesManager;
 	@Autowired
 	private EnterpriseRoleManager enterpriseRoleManager;
+	@Autowired
+	private BbmRoomManager bbmRoomManager;
 	
     /**
      * 查询列表
@@ -83,12 +87,21 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
      * 保存对象
      */
     @EsbServiceMapping
-    public EnterbusinessmanagerRz saveEnterbusinessmanagerRz(EnterbusinessmanagerRz o) throws BusException{
+    public EnterbusinessmanagerRz saveEnterbusinessmanagerRz(EnterbusinessmanagerRz o,@ServiceParam(name="roomId") String roomId) throws BusException{
     	String enterbusinessmanagerRzId = o.getRzId();
     	boolean isUpdate = StringUtils.isNotEmpty(enterbusinessmanagerRzId);
     	if(isUpdate){//修改
-    		
-    	}else{//新增
+    		if(StringUtils.isNotEmpty(roomId)){
+    			BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(roomId);
+    			o.setParkId(bbmRoom.getBbmPark().getParkId());
+    			o.setBuildingId(bbmRoom.getBbmBuilding().getBuildingId());
+    			o.setFloorId(bbmRoom.getBbmFloor().getFloorId());
+    			
+    			//更新单元基础信息企业
+    			bbmRoom.setRzId(o.getRzId());
+    			bbmRoomManager.saveBbmRoom(bbmRoom);
+    		}
+    	}else{//新增b
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd"));
     		o.setCreateUser("");
     	}

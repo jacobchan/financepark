@@ -8,6 +8,7 @@
         
         
 	<youi:func name="subpage_init" params="result">
+alert(result.html);
 	        var startDocument = "Paper";
 	        $('#documentViewer').FlexPaperViewer(
 	                { config : {

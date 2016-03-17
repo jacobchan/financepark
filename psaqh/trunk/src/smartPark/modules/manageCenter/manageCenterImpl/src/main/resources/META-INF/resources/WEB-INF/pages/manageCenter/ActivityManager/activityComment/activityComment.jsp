@@ -10,7 +10,7 @@
 			<youi:fieldText property="commentTime"  caption="评论时间"/>
 		</youi:fieldLayout>
 		<youi:gridCol property="activityApply.applyTitle"  caption="活动标题" width="20%"/>
-		<youi:gridCol property="commentMember"  caption="评论人" renderer="renderer_commentMember" width="20%"/>
+		<youi:gridCol property="commentMember.memberName"  caption="评论人"  width="20%"/>
 		<youi:gridCol property="commentTime"  caption="评论时间" width="10%"/>
 		<youi:gridCol property="commentContent"  caption="评论内容" width="50%"/>
 		<youi:gridCol width="100" fixed="true" property="button" type="button" caption="操作">
@@ -24,13 +24,13 @@
 		<youi:fieldLayout prefix="record" labelWidths="100,100">
 			<youi:fieldHidden property="commentId"  caption="评论ID"/>
 			<youi:fieldSelect property="activityApply.applyId"  caption="活动" src="esb/web/activityApplyManager/getActivityApplys.json" code="applyId" show="applyTitle" notNull="ture"/>
-			<youi:fieldSelect property="commentMember"  caption="评论人" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName" notNull="ture"/>			
+			<youi:fieldSelect property="commentMember.memberId"  caption="评论人" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName" notNull="ture"/>			
 			<youi:fieldArea property="commentContent"  caption="评论内容" column="2"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
 	<!--**********************************页面函数Start********************************-->
-	<youi:func name="renderer_commentMember" params="col,record">
+<%-- 	<youi:func name="renderer_commentMember" params="col,record">
  		var memberName = ""; 
 		$.youi.ajaxUtil.ajax({
 				url:'esb/web/memberInformationManager/getMemberInformation.json',
@@ -43,6 +43,6 @@
 				}
 			});
 		return memberName;
-	</youi:func>
+	</youi:func> --%>
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
