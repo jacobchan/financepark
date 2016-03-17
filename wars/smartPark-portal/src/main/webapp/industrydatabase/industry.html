@@ -3,91 +3,18 @@
 <head>
 	<meta charset="UTF-8">
 	<title>园区服务</title>
-	<link rel="stylesheet" type="text/css" href="../css/base.css">
-	<link rel="stylesheet" type="text/css" href="../css/zs.css">
-	<link rel="stylesheet" type="text/css" href="../css/awesome/css/font-awesome.min.css">
-	<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
-	<script src="../js/link.js"></script>
-	<script type="text/javascript" src="../js/right.js"></script>
+	<link rel="stylesheet" type="text/css" href="../styles/base.css">
+	<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
+	<link rel="stylesheet" type="text/css" href="../styles/awesome/css/font-awesome.min.css">
+	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+	<script type="text/javascript" src="../scripts/page/right.js"></script>
 </head>
 <body style="background-color:#f1f1f1;">
-	<!--***top start****************************************-->
-	<div style="background-color:#545454">
-		<div class="w1200 tr head-top clearfix">
-			<a href="">注册</a>
-			<a href="">登录</a>
-		</div>
-	</div>
-	<div class="header-cen clearfix">
-		<div class="w1200  clearfix">
-			<div class="logo fl">
-		    	<a href=""><img src="../images/logo_3.png" class="fl" style="margin-top:3px"/></a>		        
-		    </div>
-		   	<div class="party-change">
-		   		<a href=""><img src="../images/logo_1.png" class="fl" style="margin-top:2px;"/></a>
-		   		<a href="javascript:;" class="pc-click">[ 切换园区 ]</a>
-		   	</div>
-		    <ul class="index-head-nav">
-		    	<li><a href="#">首页</a></li>
-		        <li>
-		        	<a href="#">招商中心</a>
-		        	<dl>
-		        		<dt></dt>
-		        		<dd><a href="../zscenter/zs1.html">园区简介</a></dd>
-		        		<dd><a href="../zscenter/zs2.html">服务配套</a></dd>
-		        		<dd><a href="../zscenter/zs5.html">园区风采</a></dd>
-		        		<dd><a href="../zscenter/zs3.html">优惠政策</a></dd>
-		        		<dd><a href="../zscenter/zs4.html">园区资讯</a></dd>
-		        		<dd><a href="../zscenter/zs6.html">众创空间</a></dd>
-		        	</dl>
-		        </li>
-		        <li>
-		        	<a href="#">智慧园区</a>
-		        	<dl>
-		        		<dt></dt>
-			        	<dd><a href="">虚拟空间</a></dd>
-		        		<dd><a href="">智慧商业</a></dd>
-		        		<dd><a href="">安全园区</a></dd>
-		        		<dd><a href="">30采购</a></dd>
-	        		</dl>
-		        </li>
-		        <li>
-		        	<a href="#">园区服务</a>
-		        	<dl>
-		        		<dt></dt>
-		        		<dd><a href="">入驻服务</a></dd>
-		        		<dd><a href="">物业服务</a></dd>
-		        		<dd><a href="">公共资源</a></dd>
-		        		<dd><a href="">产业数据库</a></dd>
-		        	</dl>
-		        </li>
-		        <li><a href="#">企业服务</a></li>
-		        <li class="active">
-		        	<a href="#">创智汇</a>
-		        	<dl>
-		        		<dt></dt>
-		        		<dd><a href="">创智汇介绍</a></dd>
-		        		<dd><a href="">创智讲堂</a></dd>
-		        		<dd><a href="">硅谷创业营</a></dd>
-		        		<dd><a href="">积分商城</a></dd>
-		        	</dl>
-		        </li>
-		    </ul>
-		    <div class="fr search-see">
-			    <div class="fl">
-			    	<input type="text" class="input-search">
-			    </div>
-		    	<div class="fl">
-			    	<a href="" class="btn-search"></a>
-			    </div>
-		    </div>
-		    
-		   
-		</div>
-	</div>
-	<!--***top end****************************************-->
-	<!--banner---->
-	
+	<div id="youi_page_header" class="youi-page-header clearfix"></div>
 	<div class="yqfw-index-head">
 		<div class="w1200" style="padding-top:100px">
 			<table width="100%">
@@ -98,35 +25,34 @@
 				</colgroup>
 				<tr>
 					<td>
-						<img src="../images/yqfw/comp-l1.png" border="0" />
+						<img src="../styles/images/yqfw/comp-l1.png" border="0" />
 					</td>
 					<td>
-						<h3 class="lh30 f24 mb10">云立方</h3>
-						<p class='lh24 f16' style="width:500px">云立方致力于成为中国最好的企业文件管理及协作平台。通过云立方，用户可以对文件进行安全便捷的访问、共享和协作，同时，云立方为企业管理者提供了完善的文件管理机制、强大的用户访问控制以及最高级别的数据安全保障。</p>
+						<h3 id="rzName" class="lh30 f24 mb10"></h3>
+						<p id="rzRemark" class='lh24 f16' style="width:500px"></p>
 					</td>
 					<td class="f16 lh40">
-						<p><img src="../images/yqfw/clock.png" class="mr10">发布时间：2015/12/21  18:00:00</p>
-						<p><img src="../images/yqfw/e.png" class="mr10">浏览次数：102</p>
-						<p><img src="../images/yqfw/star.png" class="mr10">收藏次数：6</p>
+						<p><img src="../styles/images/yqfw/clock.png" class="mr10">发布时间：2015/12/21  18:00:00</p>
+						<p><img src="../styles/images/yqfw/e.png" class="mr10">浏览次数：102</p>
+						<p><img src="../styles/images/yqfw/star.png" class="mr10">收藏次数：6</p>
 					</td>
 				</tr>
 			</table>
 		</div>
 	</div>
-	<!--banner end---->
 	<div class="w100">
 		<div class="w1200 clearfix">
 			<div class="w795 fl">
 				<div class="lb-two clearfix">
 					<ul class="clearfix">
-						<li><img src="../images/yqfw/in1.png"></li>
-						<li><img src="../images/yqfw/in2.png"></li>
-						<li><img src="../images/yqfw/in3.png"></li>
-						<li><img src="../images/yqfw/in4.png"></li>
-						<li><img src="../images/yqfw/in5.png"></li>
-						<li><img src="../images/yqfw/in3.png"></li>
-						<li><img src="../images/yqfw/in4.png"></li>
-						<li><img src="../images/yqfw/in2.png"></li>
+						<li><img src="../styles/images/yqfw/in1.png"></li>
+						<li><img src="../styles/images/yqfw/in2.png"></li>
+						<li><img src="../styles/images/yqfw/in3.png"></li>
+						<li><img src="../styles/images/yqfw/in4.png"></li>
+						<li><img src="../styles/images/yqfw/in5.png"></li>
+						<li><img src="../styles/images/yqfw/in3.png"></li>
+						<li><img src="../styles/images/yqfw/in4.png"></li>
+						<li><img src="../styles/images/yqfw/in2.png"></li>
 					</ul>
 					<div class="lt-page">
 						<a href="javascript:;" style="left:0px;" class="lp-left"><i class="fa fa-angle-left"></i></a>
@@ -141,10 +67,7 @@
 				</div>
 				<div class="yqfw-com-intro">
 					<h3>公司介绍</h3>
-					<p>
-						云立方致力于成为中国最好的企业文件管理及协作平台。通过云立方，用户可以对文件进行安全便捷的访问、共享和协作，同时，云立方为企业管理者提供了完善的文件管理机制、强大的用户访问控制以及最高级别的数据安全保障。<br/>
-						产品特色：<br/>
-						1. 亿方云是团队文件协作新方式。亿方云的协作文件夹可以帮助企业建立跨部门，甚至跨公司的文件资料共享平台。一方面，将各部门化零为整至统一的组织架构中，降低了之前因为各自为战导致的较高的沟通成本；另一方面，企业可以利用该平台实现和客户的轻松文件...
+					<p id="introdaction">
 					</p>
 					<div class="yci-bottom"><i class="fa fa-angle-down"></i></div>
 				</div>
@@ -186,15 +109,15 @@
 						</div>
 						<div class="clearfix yin-group undis">
 							<div class="yin-box">
-								<img src="../images/yqfw/in3.png" width="260" height="180" border="0" />
+								<img src="../styles/images/yqfw/in3.png" width="260" height="180" border="0" />
 								<p class="mt10 mb10">投资好项目—宝贝王广场</p>
 							</div>
 							<div class="yin-box">
-								<img src="../images/yqfw/in4.png" width="260" height="180" border="0" />
+								<img src="../styles/images/yqfw/in4.png" width="260" height="180" border="0" />
 								<p class="mt10 mb10">投资就投宝贝王广场！</p>
 							</div>
 							<div class="yin-box">
-								<img src="../images/yqfw/in5.png" width="260" height="180" border="0" />
+								<img src="../styles/images/yqfw/in5.png" width="260" height="180" border="0" />
 								<p class="mt10 mb10">宝贝王广场，孩子的乐园！</p>
 							</div>
 						</div>
@@ -205,14 +128,14 @@
 									<col></col>
 								</colgroup>
 								<tr>
-									<td><img src="../images/yqfw/zz1.jpg" width="223"></td>
+									<td><img src="../styles/images/yqfw/zz1.jpg" width="223"></td>
 									<td>
 										<h4 class="f14 lh40 fb">技术专利</h4>
 										<p class="f12 lh24">技术领先、质量领先、服务领先、成本领先”的经营理念，以实现公司打造世界高分子复合膜材料领军企业的战略发展目标为己任。公司提供富有竞争力的薪酬，五险一金、带薪年假、过节费、张家港及苏州免费班车、免费住宿等福利待遇，完善的培训体系和晋升机制，优雅的工作环境，竭诚欢迎广大英才鼎力加盟，共创伟业。</p>
 									</td>
 								</tr>
 								<tr>
-									<td><img src="../images/yqfw/zz1.jpg" width="223"></td>
+									<td><img src="../styles/images/yqfw/zz1.jpg" width="223"></td>
 									<td>
 										<h4 class="f14 lh40 fb">技术专利</h4>
 										<p class="f12 lh24">技术领先、质量领先、服务领先、成本领先”的经营理念，以实现公司打造世界高分子复合膜材料领军企业的战略发展目标为己任。公司提供富有竞争力的薪酬，五险一金、带薪年假、过节费、张家港及苏州免费班车、免费住宿等福利待遇，完善的培训体系和晋升机制，优雅的工作环境，竭诚欢迎广大英才鼎力加盟，共创伟业。</p>
@@ -230,7 +153,7 @@
 										<col></col>
 									</colgroup>
 									<tr>
-										<td><img src="../images/yqfw/p1.png" width="71" /></td>
+										<td><img src="../styles/images/yqfw/p1.png" width="71" /></td>
 										<td>
 											<h4 class="f14 lh30">李三朵<em class="em-box ml5">创</em></h4>
 											<p class="f14 lh30">太喜欢这个项目了，关注！<span class="f12">(2015-11-18 17:34)</span></p>
@@ -238,7 +161,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td><img src="../images/yqfw/p1.png" width="71" /></td>
+										<td><img src="../styles/images/yqfw/p1.png" width="71" /></td>
 										<td>
 											<h4 class="f14 lh30">李三朵<em class="em-box ml5">创</em></h4>
 											<p class="f14 lh30">太喜欢这个项目了，关注！<span class="f12">(2015-11-18 17:34)</span></p>
@@ -254,14 +177,14 @@
 			</div>
 			<div class="w350 fr f12 lh26" style="color:#333;">
 				<div class="photo-radius">
-					<img src="../images/yqfw/p.png" border="0" />
+					<img src="../styles/images/yqfw/p.png" border="0" />
 				</div>
-				<h3 class="f16 c-o mb10 fb tc">王稼祥</h3>
+				<h3 id="managerName" class="f16 c-o mb10 fb tc"></h3>
 				<p class="tc">宝贝王广场项目投资 　创始人</p>
 				<p class="tc">出生于: 1978-11-16</p>
 				<p class="mt20 mb20">1964年9月10日生于浙江省杭州市，祖籍浙江省嵊州市（原嵊县）谷来镇， 阿里巴巴集团主要创始人，现担任阿里巴巴集团董事局主席、日本软银董事、TNC（大自然保护协会）中国理事会主席兼全球董事会成员、华谊兄弟董事、生命科学突破奖基金会董事。祖籍浙江省嵊州市（原嵊县）谷来镇， 阿里巴巴集团主要创始人，现担任阿里巴巴集团董事局主席、日本软银董事、TNC（大自然保护协会）中国理事会主席兼全球董事会成员、华谊兄弟董事、生命科学突破奖基金会董事。</p>
 				<h3 class="f16 c-o mb10 fb tc">关于公司</h3>
-				<p>行业：金融</p>
+				<p id="enTypeName">行业：</p>
 				<p>地址：杭州市</p>
 				<p>官网：www.bignix.com.cn</p>
 				<p>地图</p>
@@ -275,63 +198,8 @@
 			</div>
 		</div>
 	</div>
-	<!--***bottom start****************************************-->
-	<div class="bottom clearfix pb20">
-		<div class="w1200 pt50 index-bottom-nav">
-	    	<div class="clearfix">
-		    	<dl>
-		    		<dt><a href="#">关于我们</a></dt>
-		    		<dd><a href="#">富春硅谷简介</a></dd>
-		    		<dd><a href="#">联系我们</a></dd>
-		    		<dd><a href="#">园区新闻</a></dd>
-				</dl>
-				<dl>
-		        	<dt><a href="#" class="f14 mb20">园区服务平台</a></dt>
-		    		<dd><a href="#" >企业公园简介</a></dd>
-		    		<dd><a href="#">服务条款</a></dd>
-				</dl>
-				<dl>
-		    		<dt><a href="#">客服中心</a></dt>
-		    		<dd><a href="#">客户服务</a></dd>
-		    		<dd><a href="#">自助服务</a></dd>
-		    		<dd><a href="#">相关下载</a></dd>
-		    		<dd><a href="#">园区新闻</a></dd>
-		    	</dl>
-				<dl>
-		    		<dt><a href="#">运营合作方</a></dt>
-		    		<dd><a href="#">关注我们</a></dd>
-		    		<dd><a href="#">APP下载</a></dd>
-				</dl>
-				<dl>
-		    		<dt><a href="#">帮助中心</a></dt>
-		    		<dd><a href="#">常见问题</a></dd>
-		    		<dd><a href="#">意见反馈</a></dd>
-		        </dl>
-		        <div class="fr tc mt5 f12">
-		        	<div class="fl mr50">
-			        	<img src="../images/code.jpg" width="110">
-			            <p class="mt10">企业公园官方微信号</p>
-			        </div>
-		        	<div class="fl ml20">
-			        	<img src="../images/code.jpg" width="110">
-			            <p class="mt10">富春硅谷官方微信号</p>
-			        </div>
-		        </div>
-	        </div>
-	        <div class="mt40 clearfix">
-	        	<img src="../images/fot.png" class="fl mt20">
-	            <div class="fl mt10 ml15 bottom-partners">
-	            	<p class="f16">合作伙伴</p>
-	                <p>
-	                	<a href="#">马可波罗</a>  <a href="#">Onlylady女人志</a>  <a href="#">艺龙旅游指南</a>  <a href="#">欣欣旅游网</a>  <a href="#">马可波罗</a><a href="#">马可波罗</a>  <a href="#">Onlylady女人志</a>  <a href="#">艺龙旅游指南</a>  <a href="#">欣欣旅游网</a>  <a href="#">马可波罗</a><a href="#">马可波罗</a>  <a href="#">Onlylady女人志</a>  <a href="#">艺龙旅游指南</a>  <a href="#">欣欣旅游网</a>  <a href="#">马可波罗</a>
-	                </p>
-	                <div class="mt20 f12">©2014-2015杭州富春硅谷投资有限公司  版权所有  浙  B14231237号</div>
-	            </div>
-	        </div>
-	    </div>
-	</div>
-	<!--***bottom end****************************************-->
-	<script>
+	<div id="youi_page_footer" class="youi-page-footer"></div>
+	<script type="text/javascript">
 	    var lb_two_index = 0;
 	    var n=$(".lb-two ul li").length-2;
 	    var m=$(".lt-circle a").length;
@@ -394,6 +262,44 @@
 	    });
 	    $(".lt-page .lp-left").click(function(){
 	        lb_two_left();
+	    });
+	    function GetRequest() {
+	 	   var url = location.search; //获取url中"?"符后的字串
+	 	   var theRequest = new Object();
+	 	   if (url.indexOf("?") != -1) {
+	 	      var str = url.substr(1);
+	 	      strs = str.split("&");
+	 	      for(var i = 0; i < strs.length; i ++) {
+	 	         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+	 	      }
+	 	   }
+	 	   return theRequest;
+	 	}
+	    $(document).ready(function() {
+		    var Request = new Object();
+	    	var resoTime = "";
+	    	Request = GetRequest();
+	    	var rzId = Request['id'];
+	    	var params = ['rzId='+rzId];
+	    	var serviceURL = baseUrl+"enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json";
+	    	//根据商品id获取资源可用状态
+	    	$.youi.ajaxUtils.ajax({
+	    		url : serviceURL,
+	    		data:params.join('&'),
+	    		jsonp : 'data:jsonp',
+	    		dataType : 'jsonp',
+	    		async : false,
+	    		success : function(results) {
+	    			if (results && results.record) {
+	    				var record = results.record;
+	    				$("#rzName").html(record.rzName);
+	    				$("#rzRemark").html(record.rzRemark);
+	    				$("#introdaction").html(record.rzRemark);
+	    				$("#managerName").html(record.rzManager.memberName);
+	    				$("#enTypeName").append(record.enTypeId.enTypeName);
+	    			}
+	    		}
+	    	});
 	    });
     </script>
 </body>

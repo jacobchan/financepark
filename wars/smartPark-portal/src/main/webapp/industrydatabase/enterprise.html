@@ -58,7 +58,7 @@
 						alert("请输入企业名称");
 						return false;
 					}
-					//根据商品id获取资源可用状态
+					//根据企业名称搜索企业信息
 					$.youi.ajaxUtils.ajax({
 						url : serviceURL,
 						data:params.join('&'),
@@ -72,9 +72,9 @@
 									var a = (stringLen(records[i].rzName)>20)?stringCut(records[i].rzName, 20):records[i].rzName;
 									var enterDiv = '<div class="yqfu-com-centent">'+
 									'<div class="ycc-con"><img src="../styles/images/yqfw/comp1.png"></div>'+
-									'<a href="yq12.html"><p class="p-bottom">'+records[i].rzRemark+'</p></a>'+
+									'<a href="industry.html?id='+records[i].rzId+'"><p class="p-bottom">'+records[i].rzRemark+'</p></a>'+
 									'<div class="clearfix c-bottom lh24">'+
-									'<a href="yq12.html"><font class="c-o f14">'+a+'</font></a>'+
+									'<a href="industry.html?id='+records[i].rzId+'"><font class="c-o f14">'+a+'</font></a>'+
 									'<a href="javascript:;" class="yc-gz fr"><font class="f14">+</font>关注</a>'+
 									'<div class="clearfix c-p mt10">'+
 										'<span><img src="../styles/images/yqfw/map.png" class="mr5">武汉市</span>'+
@@ -91,8 +91,36 @@
 				});
 				
 				//企业列表
-				
-				
+				//获取所有企业信息
+				$("#enterprise").empty();
+				var serviceURL = baseUrl+"enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json";
+				$.youi.ajaxUtils.ajax({
+					url : serviceURL,
+					jsonp : 'data:jsonp',
+					dataType : 'jsonp',
+					async : false,
+					success : function(results) {
+						if (results && results.records) {
+							var records = results.records;
+							for(var i=0; i<records.length; i++){
+								var a = (stringLen(records[i].rzName)>20)?stringCut(records[i].rzName, 20):records[i].rzName;
+								var enterDiv = '<div class="yqfu-com-centent">'+
+								'<div class="ycc-con"><img src="../styles/images/yqfw/comp1.png"></div>'+
+								'<a href="industry.html?id='+records[i].rzId+'"><p class="p-bottom">'+records[i].rzRemark+'</p></a>'+
+								'<div class="clearfix c-bottom lh24">'+
+								'<a href="industry.html?id='+records[i].rzId+'"><font class="c-o f14">'+a+'</font></a>'+
+								'<a href="javascript:;" class="yc-gz fr"><font class="f14">+</font>关注</a>'+
+								'<div class="clearfix c-p mt10">'+
+									'<span><img src="../styles/images/yqfw/map.png" class="mr5">武汉市</span>'+
+									'<span style="margin: 0px 33px;">'+
+									'<img src="../styles/images/yqfw/user.png" class="mr5">'+records[i].rzManager.memberName+'</span>'+
+									'<span><img src="../styles/images/yqfw/ticket.png" class="mr5">'+records[i].enTypeId.enTypeName+'</span>'+
+								'</div></div></div>'
+								$("#enterprise").append(enterDiv);
+							}
+						}
+					}
+				});
 				//行业类型
 			});
 		</script>
