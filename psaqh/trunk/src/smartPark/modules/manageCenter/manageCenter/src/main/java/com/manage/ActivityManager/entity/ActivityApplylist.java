@@ -41,9 +41,17 @@ public class ActivityApplylist implements Domain{
 
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="APPLY_MEMBER_")
-	private MemberInformation applyMember;//报名人
+    @JoinColumn(name="MEMBER_ID_")
+	private MemberInformation member;//报名人
 
+	@Column(name = "APPLY_MEMBER_")
+	@Length(max=36)
+	private String applyMember;//联系人
+	
+	@Column(name = "APPLY_PHONE_")
+	@Length(max=36)
+	private String applyPhone;//联系电话
+	
 	@Column(name = "CREATE_USER_")
 	@Length(max=36)
 	private String createUser;//创建人
@@ -85,14 +93,32 @@ public class ActivityApplylist implements Domain{
 		this.updateTime = updateTime;
 	}
 	
+	
 
 
-	public MemberInformation getApplyMember() {
+
+	public MemberInformation getMember() {
+		return member;
+	}
+
+	public void setMember(MemberInformation member) {
+		this.member = member;
+	}
+
+	public String getApplyMember() {
 		return applyMember;
 	}
 
-	public void setApplyMember(MemberInformation applyMember) {
+	public void setApplyMember(String applyMember) {
 		this.applyMember = applyMember;
+	}
+
+	public String getApplyPhone() {
+		return applyPhone;
+	}
+
+	public void setApplyPhone(String applyPhone) {
+		this.applyPhone = applyPhone;
 	}
 
 	public String getCreateUser(){
