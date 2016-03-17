@@ -3,6 +3,7 @@
  */
 package com.common.NewsManager.service.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -28,6 +29,7 @@ import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.framework.esb.annotation.ConditionCollection;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.PubCondition;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 
 @Service("nmIssuenewsManager")
@@ -75,7 +77,7 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+    @EsbServiceMapping//(pubConditions={@PubCondition(property="policyCome",pubProperty="userId")})
     public NmIssuenews saveNmIssuenews(NmIssuenews o) throws BusException{
 //    	String nmIssuenewsId = o.getNmIssuenewsId();
 //    	boolean isUpdate = StringUtils.isNotEmpty(nmIssuenewsId);
@@ -145,5 +147,23 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 		//String status ;
 		//NmIssuenews nmIssuenews;
 	}
-
+	
+	/**
+	 * 得到所有的优惠政策
+	 * @return
+	 */
+	@Override
+	@EsbServiceMapping
+	public List<NmIssuenews> getAllPolicy() {
+		List<NmIssuenews> list = this.getNmIssuenewss() ;
+		List<NmIssuenews> policyList = new ArrayList<NmIssuenews>() ;
+		for(int i=0;i<list.size();i++){
+			NmIssuenews nm = list.get(i) ;
+			String typeCode = nm.getPolicyType().getIssueTypeCode() ;//得到当前新闻的发布类型的typeCode
+			if("02".equals(typeCode)){//02表示当前政策新闻的发布类型为优惠政策
+				policyList.add(nm) ;
+			}
+		}
+		return policyList;
+	}
 }
