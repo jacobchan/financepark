@@ -14,15 +14,50 @@
 		<script type="text/javascript" src="../scripts/page/right.js"></script>
 		<script type="text/javascript" src="../scripts/page/automatic.js"></script>
 		<script type="text/javascript">
+			//获取字符串长度（中文2，英文1）
+			function stringLen(str) {
+		        var realLength = 0, len = str.length, charCode = -1;
+		        for (var i = 0; i < len; i++) {
+		            charCode = str.charCodeAt(i);
+		            if (charCode >= 0 && charCode <= 128) realLength += 1;
+		            else realLength += 2;
+		        }
+		        return realLength;
+		    }
+			//截取超过长度的字符
+			function stringCut(str, len) {
+		        var str_length = 0;
+		        var str_len = 0;
+		        str_cut = new String();
+		        str_len = str.length;
+		        for (var i = 0; i < str_len; i++) {
+		            a = str.charAt(i);
+		            str_length++;
+		            if (escape(a).length > 4) {
+		                //中文字符的长度经编码之后大于4  
+		                str_length++;
+		            }
+		            str_cut = str_cut.concat(a);
+		            if (str_length >= len) {
+		                str_cut = str_cut.concat("...");
+		                return str_cut;
+		            }
+		        }
+		        //如果给定字符串小于指定长度，则返回源字符串；  
+		        if (str_length < len) {
+		            return str;
+		        }
+		    }
 			$(function() {
 				//按名称搜索企业
 				$(".yih-btn-search").click(function() {
-					var obj = {
-						rzName : $("#rzName").val()
-					};
-					var str = JSON.stringify(obj);					
-					var params = ['rzName='+$("#rzName").val()];
+					var txtName = $("#rzName").val();
+					var params = ['rzName='+txtName];
 					var serviceURL = baseUrl+"enterbusinessmanagerRzManager/findEnterbusinessmanagerRzByName.json";
+					if(txtName=='' || txtName.length==0){
+						alert("请输入企业名称");
+						return false;
+					}
 					//根据商品id获取资源可用状态
 					$.youi.ajaxUtils.ajax({
 						url : serviceURL,
@@ -34,8 +69,21 @@
 							if (results && results.records) {
 								var records = results.records;
 								for(var i=0; i<records.length; i++){
+									var a = (stringLen(records[i].rzName)>20)?stringCut(records[i].rzName, 20):records[i].rzName;
+									var enterDiv = '<div class="yqfu-com-centent">'+
+									'<div class="ycc-con"><img src="../styles/images/yqfw/comp1.png"></div>'+
+									'<a href="yq12.html"><p class="p-bottom">'+records[i].rzRemark+'</p></a>'+
+									'<div class="clearfix c-bottom lh24">'+
+									'<a href="yq12.html"><font class="c-o f14">'+a+'</font></a>'+
+									'<a href="javascript:;" class="yc-gz fr"><font class="f14">+</font>关注</a>'+
+									'<div class="clearfix c-p mt10">'+
+										'<span><img src="../styles/images/yqfw/map.png" class="mr5">武汉市</span>'+
+										'<span style="margin: 0px 33px;">'+
+										'<img src="../styles/images/yqfw/user.png" class="mr5">'+records[i].rzManager.memberName+'</span>'+
+										'<span><img src="../styles/images/yqfw/ticket.png" class="mr5">'+records[i].enTypeId.enTypeName+'</span>'+
+									'</div></div></div>'
 									$("#enterprise").empty();
-									$("#enterprise").append(records[i].rzName);
+									$("#enterprise").append(enterDiv);
 								}
 							}
 						}
@@ -131,23 +179,7 @@
 					</dl>
 				</div>
 				<div id="enterprise" class="clearfix">
-					<div class="yqfu-com-centent">
-						<div class="ycc-con">
-							<img src="../styles/images/yqfw/comp1.png">
-						</div>
-						<a href="yq12.html"><p class="p-bottom">宝贝王广场，中国第一儿童综合性，致力于打造儿童业“万达”，拥有潍坊、济南．．．</p></a>
-						<div class="clearfix c-bottom lh24">
-							<a href="yq12.html"><font class="c-o f14">宝贝王广场</font></a> <a
-								href="javascript:;" class="yc-gz fr"><font class="f14">+</font>
-								关注</a>
-							<div class="clearfix c-p mt10">
-								<span><img src="../styles/images/yqfw/map.png" class="mr5">武汉市</span>
-								<span style="margin: 0px 33px;"><img
-									src="../styles/images/yqfw/user.png" class="mr5">周胜南</span> <span><img
-									src="../styles/images/yqfw/ticket.png" class="mr5">金融</span>
-							</div>
-						</div>
-					</div>
+					
 				</div>
 				<div class="ycc-page clearfix">
 					<a href="" class="no-c"><i class="fa fa-angle-double-left"></i></a>
