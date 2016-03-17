@@ -102,12 +102,12 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
     	floor = bbmFloorManager.getBbmFloor(floorId) ;//获取楼层对象
     	BbmBuilding building = floor.getBbmBuilding() ;//获取楼栋对象
     	BbmPark park = building.getBbmPark() ;//获取园区对象
-    	String parkAddress = park.getAddress() ;//园区地址
+    	//String parkAddress = park.getAddress() ;//园区地址
     	String parkName = park.getParkName() ;//园区名字
     	String buildingNo = building.getBuildingNo() ;//楼栋编号
     	String floorNo = floor.getFloorNo() ;//楼层编号
     	String roomNo = o.getRoomNo() ;//单元编号
-    	String roomAddress = parkAddress+" "+parkName+" "+buildingNo+" "+floorNo+" "+roomNo ;//详细地址
+    	String roomAddress = parkName+buildingNo+floorNo+roomNo ;//详细地址
     	o.setBbmBuilding(building);
     	o.setBbmPark(park);
     	o.setRoomAddress(roomAddress);
