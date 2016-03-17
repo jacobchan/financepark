@@ -271,7 +271,7 @@ public class PropertyservicemanagerSfproManagerImpl extends BaseManagerImpl impl
     		) throws BusException{   	
 	   PropertyservicemanagerSfpro pss = propertyservicemanagerSfproDao.get(sfproId);  
     		
-	       pss.setPayStatus(payStatus);
+//	       pss.setPayStatus(payStatus);
 	    	return propertyservicemanagerSfproDao.save(pss);
     		
     }
