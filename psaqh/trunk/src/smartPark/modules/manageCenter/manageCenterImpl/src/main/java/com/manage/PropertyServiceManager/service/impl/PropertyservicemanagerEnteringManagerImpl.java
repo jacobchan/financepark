@@ -241,23 +241,31 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
     	
     	//获取当前用户信息
     	MemberInformation mem=memberInformationManager.getMemberInformation(userId);
-    	for(PropertyservicemanagerEntering pe:enteringList){
-    		if(pe.getEnteringTime().equals("AM")){
-    			Record record = new Record();
-    			record.put("enteringId",pe.getEnteringId());//ID
-    			record.put("enteringDate",pe.getEnteringDate());
-    			record.put("enteringRemain",pe.getEnteringRemain());//剩余预约数量
-    			record.put("enteringAlre",pe.getEnteringAlre());//已预约数量
-    			List<Codeitem> list = codeItemDao.getList(new String[] {"codemap.code", "itemValue" }, new Object[] { "enteringStatus",pe.getEnteringStatus()});
-    			record.put("enteringStatus",pe.getEnteringStatus());
-    			record.put("enteringStatusName",list.get(0).getItemCaption());
-    			record.put("memName",mem !=null?mem.getMemberName():"");
-    			record.put("memPhone",mem !=null?mem.getMemberPhoneNumber():"");
-    			enteringValueList.add(record);
-    		}else{
-    			enteringLists.add(pe);
-    		}
+    	if(enteringList.size()>0){
+    		for(PropertyservicemanagerEntering pe:enteringList){
+        		if(pe.getEnteringTime().equals("AM")){
+        			Record record = new Record();
+        			record.put("enteringId",pe.getEnteringId());//ID
+        			record.put("enteringDate",pe.getEnteringDate());
+        			record.put("enteringRemain",pe.getEnteringRemain());//剩余预约数量
+        			record.put("enteringAlre",pe.getEnteringAlre());//已预约数量
+        			List<Codeitem> list = codeItemDao.getList(new String[] {"codemap.code", "itemValue" }, new Object[] { "enteringStatus",pe.getEnteringStatus()});
+        			record.put("enteringStatus",pe.getEnteringStatus());
+        			record.put("enteringStatusName",list.get(0).getItemCaption());
+        			record.put("memName",mem !=null?mem.getMemberName():"");
+        			record.put("memPhone",mem !=null?mem.getMemberPhoneNumber():"");
+        			enteringValueList.add(record);
+        		}else{
+        			enteringLists.add(pe);
+        		}
+        	}
+    	}else{
+    		Record record = new Record();
+			record.put("memName",mem !=null?mem.getMemberName():"");
+			record.put("memPhone",mem !=null?mem.getMemberPhoneNumber():"");
+			enteringValueList.add(record);
     	}
+    	
     	for(PropertyservicemanagerEntering pe:enteringLists){
     		Record record = new Record();
 			record.put("enteringId",pe.getEnteringId());//ID
