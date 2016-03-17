@@ -3,26 +3,35 @@
  */
 package com.common.BuildingBaseManager.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
+import com.itextpdf.text.pdf.hyphenation.TernaryTree.Iterator;
+import com.common.BuildingBaseManager.entity.BbmBuilding;
+import com.common.BuildingBaseManager.entity.BbmFloor;
 import com.common.BuildingBaseManager.entity.BbmPark;
 import com.common.BuildingBaseManager.dao.BbmParkDao;
+import com.common.BuildingBaseManager.service.BbmBuildingManager;
+import com.common.BuildingBaseManager.service.BbmFloorManager;
 import com.common.BuildingBaseManager.service.BbmParkManager;
 
 @Service("bbmParkManager")
@@ -30,6 +39,10 @@ import com.common.BuildingBaseManager.service.BbmParkManager;
 public class BbmParkManagerImpl extends BaseManagerImpl implements BbmParkManager{
 	@Autowired
 	private BbmParkDao bbmParkDao;
+	@Autowired
+	private BbmBuildingManager bbmBuildingManager ;
+	@Autowired
+	private BbmFloorManager bbmFloorManager ;
 	
     /**
      * 查询列表
@@ -103,4 +116,37 @@ public class BbmParkManagerImpl extends BaseManagerImpl implements BbmParkManage
 		return bbmParkDao.exists(propertyName,value);
 	}
     
+    @Override
+    @EsbServiceMapping
+    public BbmPark getBbmParkByParkName(String parkName) {
+    	return bbmParkDao.getObjectByUniqueProperty("parkName", parkName);
+    }
+    
+    @Override
+    @EsbServiceMapping
+    public JSONArray getBuildingAndFloorByParkName(@ServiceParam(name="parkName") String parkName) {
+    	List<BbmBuilding> buildingList = null ;
+    	Map<String,List<BbmFloor>> map = new HashMap<String, List<BbmFloor>>() ;
+    	buildingList = bbmBuildingManager.getAllBuildingByParkName(parkName) ;
+    	for(int i=0;i<buildingList.size();i++){
+    		BbmBuilding building = buildingList.get(i) ;
+    		String buildingInfor = building.getBuildingId()+building.getBuildingNo() ;//得到楼栋ID+楼栋编号
+    		List<BbmFloor> floorList = bbmFloorManager.getBbmFloorByBuildingId(building.getBuildingId()) ;//得到楼层list
+    		map.put(buildingInfor, floorList) ;//将楼栋及对应的楼层put到map中
+    	}
+//    	System.out.println(map);
+//    	Set<BbmBuilding> keys = map.keySet() ;
+//    	java.util.Iterator<BbmBuilding> i = keys.iterator() ;
+//    	while(i.hasNext()){
+//    		BbmBuilding b = i.next() ;
+//    		System.out.print(b.getBuildingCaption()+":   ");
+//    		List<BbmFloor> values = map.get(b) ;
+//    		for(int n=0;n<values.size();n++){
+//    			System.out.print(values.get(n).getFloorCaption()+", ");
+//    		}
+//    		System.out.println();
+//    	}
+    	JSONArray json = JSONArray.fromObject(map);
+    	return json;
+    }
 }

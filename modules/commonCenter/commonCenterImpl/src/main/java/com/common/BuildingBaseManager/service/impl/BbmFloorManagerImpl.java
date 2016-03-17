@@ -3,6 +3,7 @@
  */
 package com.common.BuildingBaseManager.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -17,6 +18,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.common.BuildingBaseManager.entity.BbmBuilding;
 import com.common.BuildingBaseManager.entity.BbmFloor;
@@ -134,5 +137,22 @@ public class BbmFloorManagerImpl extends BaseManagerImpl implements BbmFloorMana
 		}
 		return null ;
 	}
-
+	/**
+	 * 通过楼栋ID得到楼层
+	 * @param buildingId 楼栋ID
+	 * @return
+	 * @throws BusException
+	 */
+	@Override
+	@EsbServiceMapping
+	public List<BbmFloor> getBbmFloorByBuildingId(@ServiceParam(name="buildingId") String buildingId)
+			throws BusException {
+		List<BbmFloor> list = null ;
+		if(StringUtils.isNotEmpty(buildingId)){
+			Collection<Condition> condition =  new ArrayList<Condition>();
+    		condition.add(ConditionUtils.getCondition("bbmBuilding.buildingId", Condition.EQUALS,buildingId));//创建查询条件
+			list = bbmFloorDao.commonQuery(condition, null) ;
+		}
+		return list;
+	}
 }
