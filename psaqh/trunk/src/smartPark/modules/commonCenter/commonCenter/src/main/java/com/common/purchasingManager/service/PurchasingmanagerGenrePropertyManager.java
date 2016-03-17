@@ -12,7 +12,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.common.purchasingManager.entity.PurchasingmanagerGenreProperty;
 
 public interface PurchasingmanagerGenrePropertyManager extends BaseManager{
@@ -63,4 +62,10 @@ public interface PurchasingmanagerGenrePropertyManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitPurchasingmanagerGenreProperty(String propertyName,Object value) throws BusException;
+	/**
+	 * 根据类别ID获取类别扩展属性列表
+	 * @param genreId
+	 * @return
+	 */
+	public List<PurchasingmanagerGenreProperty> getPurGenrePropertysByGenre(String genreId) throws BusException;
 }

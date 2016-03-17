@@ -25,14 +25,18 @@ import com.gsoft.utils.BizCodeUtil;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
 import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
+import com.common.OrderManager.entity.OrdermanagerOrderprojecttypeValue;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.common.OrderManager.dao.OrdermanagerUserorderDao;
 import com.common.OrderManager.service.OrdermanagerCommoditydetailManager;
+import com.common.OrderManager.service.OrdermanagerOrderprojecttypeValueManager;
 import com.common.OrderManager.service.OrdermanagerUserorderManager;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
+import com.common.purchasingManager.entity.PurchasingmanagerGenreProperty;
 import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
 import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
+import com.common.purchasingManager.service.PurchasingmanagerGenrePropertyManager;
 
 @Service("ordermanagerUserorderManager")
 @Transactional
@@ -47,6 +51,10 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	private OrdermanagerCommoditydetailManager ordermanagerCommoditydetailManager;
 	@Autowired
 	private PurchasingmanagerGenreManager purchasingmanagerGenreManager;
+	@Autowired
+	private PurchasingmanagerGenrePropertyManager purchasingmanagerGenrePropertyManager;
+	@Autowired
+	private OrdermanagerOrderprojecttypeValueManager ordermanagerOrderprojecttypeValueManager;
 	
     /**
      * 查询列表
@@ -155,9 +163,12 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     @Override
     @EsbServiceMapping
 	public OrdermanagerUserorder saveITSerOrder(@ServiceParam(name="userId",pubProperty="userId") String userId,
-			@ServiceParam(name="commodityId") String commodityId) throws BusException {
+			@ServiceParam(name="commodityId") String commodityId,@ServiceParam(name="faultDes") String faultDes,
+			@ServiceParam(name="userorderAdr") String userorderAdr) throws BusException {
     	PurchasingmanagerCommodity commodity = purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
 		PurchasingmanagerGenre pg = commodity.getPurchasingmanagerGenre();
+		//根据类别ID获取类别扩展属性列表
+		List<PurchasingmanagerGenreProperty> pgpList = purchasingmanagerGenrePropertyManager.getPurGenrePropertysByGenre(pg.getGenreId());
 		while(pg.getPurchasingmanagerGenre() != null){//获取最顶级商品类别
 			pg = pg.getPurchasingmanagerGenre();
 		}
@@ -166,6 +177,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		order.setGenreId(pg);
 		order.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("ITFW"));
 		order.setUserorderStatus("01");//01-未支付
+		order.setUserorderAdr(userorderAdr);
 		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		order.setCreateUser(userId);
 		order.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
@@ -178,6 +190,16 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		orderDetail.setCommodityId(commodity);
 		orderDetail.setCommoditydetailNum("1");
 		ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
+		
+		for(PurchasingmanagerGenreProperty pgp:pgpList){
+			if("faultDes".equals(pgp.getGenrePropertyFieldName())){
+				OrdermanagerOrderprojecttypeValue orderExc = new OrdermanagerOrderprojecttypeValue();
+				orderExc.setOrdermanagerUserorder(order);
+				orderExc.setGenrePropertyId(pgp);
+				orderExc.setOrderprojecttypeValueFieldValue(faultDes);
+				ordermanagerOrderprojecttypeValueManager.saveOrdermanagerOrderprojecttypeValue(orderExc);
+			}
+		}
 		return order;
 	}
     

@@ -108,5 +108,11 @@ public class PurchasingmanagerGenrePropertyManagerImpl extends BaseManagerImpl i
     public boolean exsitPurchasingmanagerGenreProperty(String propertyName,Object value) throws BusException{
 		return purchasingmanagerGenrePropertyDao.exists(propertyName,value);
 	}
+    //根据类别ID获取类别扩展属性列表
+	@Override
+	public List<PurchasingmanagerGenreProperty> getPurGenrePropertysByGenre(String genreId) throws BusException {
+		List<PurchasingmanagerGenreProperty> list = purchasingmanagerGenrePropertyDao.getList("purchasingmanagerGenre.genreId", genreId);
+		return list;
+	}
 
 }

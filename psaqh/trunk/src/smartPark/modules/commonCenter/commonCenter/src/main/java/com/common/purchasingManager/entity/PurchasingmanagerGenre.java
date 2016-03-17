@@ -25,6 +25,7 @@ public class PurchasingmanagerGenre implements Domain{
 	@Column(name = "PARK_BUSINESS_TUPE_")
 	@Length(max=2)
 	private String parkBusinessTupe;//园区商业类型
+	
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "GENRE_ID_")
@@ -61,79 +62,87 @@ public class PurchasingmanagerGenre implements Domain{
     @JoinColumn(name="sp__GENRE_ID_")
 	private com.common.purchasingManager.entity.PurchasingmanagerGenre purchasingmanagerGenre;//320_商品类别ID
 	
-	public String getParkBusinessTupe(){
-		return this.parkBusinessTupe;
+	public String getParkBusinessTupe() {
+		return parkBusinessTupe;
 	}
-	
-	public void setParkBusinessTupe(String parkBusinessTupe){
+
+	public void setParkBusinessTupe(String parkBusinessTupe) {
 		this.parkBusinessTupe = parkBusinessTupe;
 	}
-	public String getGenreId(){
-		return this.genreId;
+
+	public String getGenreId() {
+		return genreId;
 	}
-	
-	public void setGenreId(String genreId){
+
+	public void setGenreId(String genreId) {
 		this.genreId = genreId;
 	}
-	public String getGenreName(){
-		return this.genreName;
+
+	public String getGenreName() {
+		return genreName;
 	}
-	
-	public void setGenreName(String genreName){
+
+	public void setGenreName(String genreName) {
 		this.genreName = genreName;
 	}
-	public String getUpdateTime(){
-		return this.updateTime;
+
+	public String getUpdateTime() {
+		return updateTime;
 	}
-	
-	public void setUpdateTime(String updateTime){
+
+	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
-	public String getGenreCode(){
-		return this.genreCode;
+
+	public String getGenreCode() {
+		return genreCode;
 	}
-	
-	public void setGenreCode(String genreCode){
+
+	public void setGenreCode(String genreCode) {
 		this.genreCode = genreCode;
 	}
-	public String getCreateUser(){
-		return this.createUser;
+
+	public String getCreateUser() {
+		return createUser;
 	}
-	
-	public void setCreateUser(String createUser){
+
+	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
 	}
-	public String getCreateTime(){
-		return this.createTime;
+
+	public String getCreateTime() {
+		return createTime;
 	}
-	
-	public void setCreateTime(String createTime){
+
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	public String getGenreModuleUrl(){
-		return this.genreModuleUrl;
+
+	public String getGenreModuleUrl() {
+		return genreModuleUrl;
 	}
-	
-	public void setGenreModuleUrl(String genreModuleUrl){
+
+	public void setGenreModuleUrl(String genreModuleUrl) {
 		this.genreModuleUrl = genreModuleUrl;
 	}
-	public String getUpdateUser(){
-		return this.updateUser;
+
+	public String getUpdateUser() {
+		return updateUser;
 	}
-	
-	public void setUpdateUser(String updateUser){
+
+	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
 	}
-	
-	public void setPurchasingmanagerGenre(com.common.purchasingManager.entity.PurchasingmanagerGenre purchasingmanagerGenre){
+
+	public com.common.purchasingManager.entity.PurchasingmanagerGenre getPurchasingmanagerGenre() {
+		return purchasingmanagerGenre;
+	}
+
+	public void setPurchasingmanagerGenre(
+			com.common.purchasingManager.entity.PurchasingmanagerGenre purchasingmanagerGenre) {
 		this.purchasingmanagerGenre = purchasingmanagerGenre;
 	}
-	
-	public com.common.purchasingManager.entity.PurchasingmanagerGenre getPurchasingmanagerGenre(){
-		return this.purchasingmanagerGenre;
-	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
