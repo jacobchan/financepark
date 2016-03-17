@@ -125,7 +125,7 @@
 			<a href="javascript:;" class="tc-close"></a>
 			<div class="w60 tc mt40" style="margin-left:20%">
 				<div class="mt20 mb20 f16 lh26">
-					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o bxCode"> [ 123456789 ] </span>吗？
+					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> <span class="ifSure">确认要取消</span><span class="c-o bxCode"> [ 123456789 ] </span>吗？
 				</div>
 				<p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p>
 				<input value="确定" class="hhf-submit" style="height:36px;" type="submit">
@@ -168,7 +168,7 @@
 					bxStatus='已完工';
 				}else if(record[i].bxStatus='05'){
 					bxStatus='已定价';
-					buttonHtml="<td><a href='javascript:;'>付款</a><span class='f12 ml5 mr5'>|</span><a href=''>申请重修</a></td>";
+					buttonHtml="<td><a href='javascript:;'>付款</a><span class='f12 ml5 mr5'>|</span><a href='javascript:;' onclick='javascript:redeal(this)'>申请重修</a></td>";
 				}else if(record[i].bxStatus='06'){
 					bxStatus='已付款';
 				}else if(record[i].bxStatus='07'){
@@ -191,9 +191,42 @@
 				var me=obj.parentNode.parentNode;
 				var bxCode=me.childNodes[0].childNodes[0].innerText; 
 				$(".bxCode").html(bxCode);
+				$(".bxCode")[0].setAttribute("id",me.id);
 				$(".bg-tanc").show();
-			}
+			};
+		 function redeal(obj){
+				var me=obj.parentNode.parentNode;
+				var bxCode=me.childNodes[0].childNodes[0].innerText; 
+				$(".bxCode").html(bxCode);
+				$(".ifSure").text("确定要重新报修");
+				$(".bxCode")[0].setAttribute("id",me.id);
+				$(".bg-tanc").show();
+			};
 	</script>
+	<!-- 取消报修订单 -->
+	<script type="text/javascript">
+	$(function(){
+		$(".hhf-submit").click(function(){
+				var id=$(".bxCode")[0].getAttribute("id");
+			 	$.youi.ajaxUtils.ajax({
+					url:'/smartPark-web/esb/web/propertyservicemanagerBxManager/updateBxforpage.json',
+					data:'bxId='+id,
+					success:function(result){
+						if(result&&result.record){
+							if(result.record.bxStatus=='08'){
+								alert("取消成功!");
+							}else if(result.record.bxStatus=='01'){
+								alert("重新报修成功!");
+							}
+							
+							location.reload();
+						}
+					}
+				});
+			});
+		});
+	</script>
+	
 </body>
 <%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 
 </html>
