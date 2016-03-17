@@ -77,10 +77,8 @@
 		$(function(){
 			$.ajax({
 				
-				url:'/smartPark-web/esb/web/policyApplyManager/getPolicyApplyListByLoginUser.json',				
+				url:'/smartPark-web/esb/web/policyApplyManager/getPolicyApplyListByLoginUser.json',
 				success:function(result){	
-					alert(111);
-					console.log(result.records);
 					if(result&&result.records){					
 						_parseRecords(result.records);						
 					}
@@ -89,14 +87,18 @@
 		});
 		//拼接卡号列表
 		function _parseRecords(record){		
+
+			console.log(record);
 			for(var i=0;i<record.length;i++){				
 				var status = "";								
-				if(record[i].policyApplyStatus=='0'){
-					status = "待受理";					
-				}else if(record[i].policyApplyStatus=='1'){
-					status = "已受理";
+				if(record[i].policyApplyStatus=='1'){
+					status = "申请中";					
 				}else if(record[i].policyApplyStatus=='2'){
-					status = "已取消";
+					status = "申请成功";
+				}else if(record[i].policyApplyStatus=='3'){
+					status = "申请失败";
+				} else if(record[i].policyApplyStatus=='0'){
+					status = "取消";
 				} 
 				var html= "<tr>"+
 					      "<td width='111'>"+record[i].policyId+"</td>"+
@@ -104,7 +106,7 @@
                           "<td width='111'>"+record[i].policyApplyContactPeople+"</td>"+
                           "<td width='111'>"+record[i].createTime+"</td>"+
                           "<td width='88'>"+record[i].nmIssueflow.issueFlowCStatus+"</td>"+
-                          "<td width='66'>"+status+"</td>"+                          
+                          "<td width='88'>"+status+"</td>"+                          
                           "<td > <input type='button' value='取消'   onclick='apply(\""+record[i].policyApplyId+"\")' />"+                                   
                           " </tr>";
 				 $(".gt-table").append(html);	
