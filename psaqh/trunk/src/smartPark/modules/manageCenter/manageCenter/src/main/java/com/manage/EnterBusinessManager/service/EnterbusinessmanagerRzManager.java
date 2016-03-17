@@ -41,7 +41,7 @@ public interface EnterbusinessmanagerRzManager extends BaseManager{
     /**
      * 保存并返回对象
      */
-    public EnterbusinessmanagerRz saveEnterbusinessmanagerRz(EnterbusinessmanagerRz o) throws BusException;
+    public EnterbusinessmanagerRz saveEnterbusinessmanagerRz(EnterbusinessmanagerRz o,String roomId) throws BusException;
 
     /**
      * 删除对象

@@ -4,10 +4,13 @@
 package com.manage.ActivityManager.entity;
 
 import javax.persistence.*;
+
 import org.hibernate.validator.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberAdrManager.entity.MemberadrAddress;
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: -报名名单
@@ -36,9 +39,10 @@ public class ActivityApplylist implements Domain{
 	@Column(name = "UPDATE_TIME_")
 	private String updateTime;//修改时间
 
-	@Column(name = "APPLY_MEMBER_")
-	@Length(max=32)
-	private String applyMember;//报名人
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="APPLY_MEMBER_")
+	private MemberInformation applyMember;//报名人
 
 	@Column(name = "CREATE_USER_")
 	@Length(max=36)
@@ -80,13 +84,17 @@ public class ActivityApplylist implements Domain{
 	public void setUpdateTime(String updateTime){
 		this.updateTime = updateTime;
 	}
-	public String getApplyMember(){
-		return this.applyMember;
-	}
 	
-	public void setApplyMember(String applyMember){
+
+
+	public MemberInformation getApplyMember() {
+		return applyMember;
+	}
+
+	public void setApplyMember(MemberInformation applyMember) {
 		this.applyMember = applyMember;
 	}
+
 	public String getCreateUser(){
 		return this.createUser;
 	}

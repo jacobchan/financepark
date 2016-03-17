@@ -4,10 +4,12 @@
 package com.manage.ActivityManager.entity;
 
 import javax.persistence.*;
+
 import org.hibernate.validator.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: -活动评论
@@ -36,9 +38,9 @@ public class ActivityComment implements Domain{
 	@Column(name = "COMMENT_TIME_")
 	private String commentTime;//评论时间
 
-	@Column(name = "COMMENT_MEMBER_")
-	@Length(max=32)
-	private String commentMember;//评论人
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="COMMENT_MEMBER_")
+	private MemberInformation commentMember;//评论人
 
 	@Column(name = "CREATE_USER_")
 	@Length(max=36)
@@ -84,13 +86,16 @@ public class ActivityComment implements Domain{
 	public void setCommentTime(String commentTime){
 		this.commentTime = commentTime;
 	}
-	public String getCommentMember(){
-		return this.commentMember;
-	}
+
 	
-	public void setCommentMember(String commentMember){
+	public MemberInformation getCommentMember() {
+		return commentMember;
+	}
+
+	public void setCommentMember(MemberInformation commentMember) {
 		this.commentMember = commentMember;
 	}
+
 	public String getCreateUser(){
 		return this.createUser;
 	}

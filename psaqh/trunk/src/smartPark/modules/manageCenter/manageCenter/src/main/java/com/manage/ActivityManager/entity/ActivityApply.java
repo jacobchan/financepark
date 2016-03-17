@@ -9,6 +9,8 @@ import org.hibernate.validator.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberAdrManager.entity.MemberadrAddress;
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: -活动申请内容列表
@@ -49,9 +51,10 @@ public class ActivityApply implements Domain{
 	@Length(max=2)
 	private String applyStatus;//活动申请状态
 
-	@Column(name = "MEMBER_ID_")
-	@Length(max=36)
-	private String memberId;//会员用户ID
+
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="MEMBER_ID_")
+	private MemberInformation memberId;//会员用户
 
 	@Column(name = "APPLY_ORDER_NUMBER_")
 	@Length(max=32)
@@ -86,6 +89,16 @@ public class ActivityApply implements Domain{
 	@Length(max=100)
 	private String activityImage;//活动图片
 	
+	
+	
+	public MemberInformation getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(MemberInformation memberId) {
+		this.memberId = memberId;
+	}
+
 	public String getApplyMaxuser(){
 		return this.applyMaxuser;
 	}
@@ -135,13 +148,9 @@ public class ActivityApply implements Domain{
 	public void setApplyStatus(String applyStatus){
 		this.applyStatus = applyStatus;
 	}
-	public String getMemberId(){
-		return this.memberId;
-	}
 	
-	public void setMemberId(String memberId){
-		this.memberId = memberId;
-	}
+
+
 	public String getApplyOrderNumber(){
 		return this.applyOrderNumber;
 	}

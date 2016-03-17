@@ -3,15 +3,19 @@
  */
 package com.manage.EnterBusinessManager.entity;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 import org.hibernate.validator.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.BuildingBaseManager.entity.BbmRoom;
 import com.common.EnterpriceTypeManager.entity.EtypeEnterprisetype;
 import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
+import com.gsoft.framework.core.dataobj.tree.TreeNode;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
 /**
  * 实体: 入驻企业基本信息
@@ -63,6 +67,7 @@ public class EnterbusinessmanagerRz implements Domain{
 	@Column(name = "FLOOR_ID_")
 	@Length(max=36)
 	private String floorId;//所在楼层
+	
 
 	@Column(name = "RZ_BUSS_")
 	@Length(max=2)
@@ -100,6 +105,8 @@ public class EnterbusinessmanagerRz implements Domain{
 	
 	
 	
+
+
 	public String getRzName() {
 		return rzName;
 	}
