@@ -232,4 +232,20 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
        psm.setBindStatus("1");
 	   return propertyservicemanagerOcDao.save(psm);    		
    }
+   /**
+    * 修改一卡通预约状态
+    */
+	 @EsbServiceMapping	
+   public PropertyservicemanagerOc cancleOcStatus(@ServiceParam(name="ocId") String id)
+				throws BusException {
+		// TODO Auto-generated method stub	
+		PropertyservicemanagerOc o=propertyservicemanagerOcDao.get(id);
+		String ocStstus=o.getOcStatus();
+		if(ocStstus.equals("00")){
+			o.setOcStatus("08");
+	    }else{
+	    	 throw new BusException("只有在未办理时才能取消"); 
+	    }		
+		 return propertyservicemanagerOcDao.save(o); 
+	}
 }
