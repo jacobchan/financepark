@@ -662,7 +662,7 @@ i.star2{background:url(../images/company/star2.png) no-repeat;}
 .me-tz-show td a:hover{color: #ff6715;}
 
 /**企业通讯录**/
-.bd-input{border:1px solid #ecebeb;width: 200px;height: 30px;line-height: 20px;padding: 4px 10px;}
+.bd-input{border:1px solid #ecebeb !important;width: 200px;height: 30px !important;line-height: 20px;padding: 4px 10px;}
 .gt-table{border:1px solid #ecebeb;text-align: center;width: 100%;}
 .gt-table tr th{background-color: #f6f6f6;line-height: 30px;padding: 10px 0px;text-align: center;font-size: 14px;border-bottom:1px solid #ecebeb;}
 .gt-table tr td{border-bottom:1px solid #ecebeb;padding:5px 10px;color: #969696;font-size: 12px;line-height: 19px;height: 50px;overflow: hidden;}
@@ -949,3 +949,9 @@ a.see-all:hover{color: #FF6715;}
 .yqfw-news li p{width: 100%;overflow: hidden;height: 24px;}
 .yqfw-news li p a{width: 70%;display:inline-block;overflow: hidden;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
 
+
+
+/**个人中心-- 机票预订**/
+.ib-nav{border-left: 1px solid #FF6715}
+.ib-nav li{border:1px solid #FF6715;color: #FF6715;width: 105px;float: left;border-left: 0px;text-align: center;line-height: 28px;cursor: pointer;transition: all .4s linear;-moz-transition: width  all .4s;-webkit-transition:  all .4s;-o-transition: all .4s linear;}
+.ib-nav li:hover,.ib-nav li.active{background-color: #FF6715;color: #fff;}

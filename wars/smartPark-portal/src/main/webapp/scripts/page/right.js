@@ -62,7 +62,7 @@ $(function () {
 	$(".ic-select").click(function(e){
 		$(".select-nav").hide();
 	    $(this).next(".select-nav").show();
-	    e.stopPropagation();//闃绘�鍐掓场
+	    e.stopPropagation();//阻止冒泡
 	});
 	$("body").click(function(){
 	     $(".select-nav").hide();

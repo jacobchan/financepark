@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>订单中心</title>
+	<link href="../styles/base.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
+	<link rel="stylesheet" type="text/css" href="../styles/page/awesome/css/font-awesome.min.css">
+	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+	<script type="text/javascript" src="../scripts/page/adcom.js"></script>
+	<script type="text/javascript" src="../scripts/page/right.js"></script>
+	<style type="text/css">
+		.plane-box.message-box td{padding: 20px;vertical-align: top;color: #7c7c7c;}
+		.plane-box.message-box td p{margin-bottom: 15px;line-height: 20px;font-size: 12px;}
+		.plane-box.message-box td p:last-child{margin-bottom: 0px;}
+		.plane-box.message-box td a i{font-size: 22px; line-height:24px;}
+		.message-box thead th{border-bottom: 1px solid #efecec;line-height: 32px;font-size: 14px;padding: 0px 20px;}
+		.ib-btn{width: 144px;text-align: center;}
+		.ib-btn.tp-btn{background: #2be27e;}
+		.ib-btn.tp-btn:hover{background: #28d778;}
+		.ib-btn.fs-btn{background: #4bb6fa;}
+		.ib-btn.fs-btn:hover{background: #47aced;}
+	</style> 
+</head>
+<body style="background-color:#f4f4f4;">
+	<!--***top start****************************************-->
+	<div id="youi_page_header" class="youi-page-header clearfix"></div>
+	<!--***top end****************************************-->
+	<div class="w100">
+		<div class="w1200 clearfix pt30 pb50">
+			<div class="per-center-box clearfix">
+				<div id="youi_page_left" class="fl clearfix"></div>
+				<div class="w1000">
+					<h3 class="per-h3"><a href="grzx27.html" class="c-333 f12">酒店预订</a><span class="c-333 f12"> / </span>订单详情
+						<a href="grzx27.html" class="c-333 fr f14"><i class="fa fa-angle-left f20 mr5" style="font-size:18px;"></i>返回</a>
+					</h3>
+					<div class="clearfix mt20">
+						<table class="message-box w100 f12 plane-box">
+							<colgroup>
+								<col width="50%"></col>
+								<col></col>
+							</colgroup>
+							<tbody>
+								<tr>
+									<td>
+										<p>订单号：44152444</p>
+										<p>入住时间：2016-03-10</p>
+										<p>房间数量：1</p>
+										<p>是否担保：是</p>
+									</td>
+									<td>
+										<p>订单状态: 未付款</p>
+										<p>离店时间：2016-03-11</p>
+										<p>总金额：288 元</p>
+										<p>下单时间：2016年3月9日15:07:03</p>
+									</td>
+								</tr>
+								<tr><td colspan="2"><div  style="border-bottom:1px solid #efecec;"></div></td></tr>
+								<tr>
+									<td colspan="2">
+										<h4 class="c-333 f14 mb20 fb">入住登记</h4>
+										<div>
+											<span class="mr50">·  联系人：tfboys</span>
+											<span class="mr50">·  手机号码：15999887777</span>
+											<span class="mr50">·  邮箱：vanner999@163.com</span>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<table class="message-box w100 f12 plane-box">
+							<colgroup>
+								<col width="50%"></col>
+								<col></col>
+							</colgroup>
+							<thead>
+								<th colspan="2">担保信息</th>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<p>信用卡号：6225666733337777</p>
+										<p>CW2码：778</p>
+										<p>证件类型：身份证</p>
+									</td>
+									<td>
+										<p>有效期：15 / 12</p>
+										<p>持卡人姓名：TFBoys</p>
+										<p>证件号码：44889933330000333</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="tl">
+							<a href="javascript:;" class="ib-btn mr40">立即支付</a>
+							<a href="" class="pb-btn tc" style="width:135px;">取消订单</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--***bottom start****************************************-->
+	<div id="youi_page_footer" class="youi-page-footer"></div>
+	<!--***bottom end****************************************-->
+	
+	<!--***弹窗 start****************************************-->
+	<div class="bg-tanc m1">
+		<div class="tanc-con" style="top:50%;margin-top:-91px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="w100 tc mt40">
+				<div class="mt20 mb20 f16 lh26">
+					<img src="../styles/images/grzx/check.png" border="0" class="mr20">您的机票信息，已经发送到手机，请注意查收！
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--***弹窗 end****************************************-->
+	<script type="text/javascript">
+		$(function () {
+			$(".order-nav li").click(function(){
+				$(this).addClass("active").siblings().removeClass("active");
+				$(".clearfix-box").hide();
+				$(".clearfix-box").eq($(this).index()).show();
+			})
+			$(".ac-show").click(function(){
+				$(".bg-tanc.m1").show();
+			})
+			$(".fs-btn").click(function(){
+				$(".bg-tanc.m1").show();
+			})
+		})
+	</script>
+</body>
+</html>

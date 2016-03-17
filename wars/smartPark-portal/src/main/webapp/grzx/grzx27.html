@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>订单中心</title>
+	<link href="../styles/base.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
+	<link rel="stylesheet" type="text/css" href="../styles/page/awesome/css/font-awesome.min.css">
+	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+	<script type="text/javascript" src="../scripts/page/adcom.js"></script>
+	<script type="text/javascript" src="../scripts/page/right.js"></script>
+	<script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var start = {
+			    elem: '#startTime',
+			    min: '2000-01-01 23:59:59', //设定最小日期为当前日期
+			    max: '2099-06-16 23:59:59', //最大日期
+			    istoday: false,
+			    choose: function(datas){
+			         end.min = datas; //开始日选好后，重置结束日的最小日期
+			         end.start = datas //将结束日的初始值设定为开始日
+			    }
+			};
+			var end = {
+			    elem: '#endTime',
+			   	min: '2000-01-01 23:59:59',
+			    max: '2099-06-16 23:59:59',
+			    istoday: false,
+			    choose: function(datas){
+			        start.max = datas; //结束日选好后，重置开始日的最大日期
+			    }
+			};
+			laydate(start);
+			laydate(end);
+		})
+	</script>
+</head>
+<body style="background-color:#f4f4f4;">
+	<!--***top start****************************************-->
+	<div id="youi_page_header" class="youi-page-header clearfix"></div>
+	<!--***top end****************************************-->
+	<div class="w100">
+		<div class="w1200 clearfix pt30 pb50">
+			<div class="per-center-box clearfix">
+				<div id="youi_page_left" class="fl clearfix"></div>
+				<div class="w1000">
+					<h3 class="per-h3">酒店订单</h3>
+					<div class="clearfix-box">
+						<div class="mt20 gr-txl clearfix lh30">
+							<label class="fl mr20 f16">订单时间：</label>
+							<input class="laydate-icon bd-input fl" type="text" id="startTime"><span class="fl ml15 mr15">到</span>
+							<input class="laydate-icon bd-input fl" type="text" id="endTime">
+							<div class="fl ml20">
+								<ul class="ib-nav clearfix">
+									<li class="active">最近一个月</li>
+									<li>3个月</li>
+									<li>一年</li>
+								</ul>
+							</div>
+						</div>
+						<div class="clearfix">
+							<table class="gt-table mt20">
+								<colgroup>
+									<col width="140"></col>
+									<col width="120"></col>
+									<col width="120"></col>
+									<col width="100"></col>
+									<col width="140"></col>
+									<col width="100"></col>
+									<col width="80"></col>
+									<col></col>
+								</colgroup>
+								<tbody><tr>
+									<th>订单号</th>
+									<th>入住时间</th>
+									<th>离店时间</th>
+									<th>房间数量</th>
+									<th>总金额</th>
+									<th>是否担当</th>
+									<th>状态</th>
+									<th>操作</th>
+								</tr>
+								<tr>
+									<td><a href="">123456789</a></td>
+									<td>2016-1-12<br/>17:30</td>
+									<td>2016-1-13<br/>17:30</td>
+									<td>2</td>
+									<td>322.00元</td>
+									<td>否</td>
+									<td>已付款</td>
+									<td>
+										<a href="grzx25-2.html" class="ac-see">取消订单</a>
+									</td>
+								</tr>
+								<tr>
+									<td><a href="">123456789</a></td>
+									<td>2016-1-12<br/>17:30</td>
+									<td>2016-1-13<br/>17:30</td>
+									<td>2</td>
+									<td>322.00元</td>
+									<td>否</td>
+									<td>已入住</td>
+									<td>
+									</td>
+								</tr>
+								<tr>
+									<td><a href="">123456789</a></td>
+									<td>2016-1-12<br/>17:30</td>
+									<td>2016-1-13<br/>17:30</td>
+									<td>2</td>
+									<td>322.00元</td>
+									<td>否</td>
+									<td>未付款</td>
+									<td>
+										<a href="grzx25-2.html" class="ac-see">立即支付</a>
+									</td>
+								</tr>
+							</tbody></table>
+							<div class="fr page-list-a clearfix lh30 mt20 f12">
+								<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
+								<a href="">首</a>
+								<a href=""><i class="fa fa-angle-left"></i></a>
+								<a>1</a>
+								<a href=""><i class="fa fa-angle-right"></i></a>
+								<a href="">末</a>
+								<input class="bd-input fl ml10 mr10" style="width:40px;" type="text">
+								<a href="">Go</a>
+							</div>
+						</div>	
+					</div>
+						
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--***bottom start****************************************-->
+	<div id="youi_page_footer" class="youi-page-footer"></div>
+	<!--***bottom end****************************************-->
+	
+	<!--***弹窗 start****************************************-->
+	<div style="display: block;" class="bg-tanc m1">
+		<div class="tanc-con" style="top:50%;margin-top:-100px;width:450px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="tc mt40">
+				<div class="mt20 mb20 f16 lh26">
+					<img src="../styles/images/grzx/warn.png" class="mr20" border="0"> 确认要取消<span class="c-o"> [ 123456789 ] </span>订单吗？
+				</div>
+				<input value="确定" class="hhf-submit" style="height:36px;" type="submit">
+			</div>
+		</div>
+	</div>
+	<!--***弹窗 end****************************************-->
+	<script type="text/javascript">
+		$(function () {
+			$(".ac-show").click(function(){
+				$(".bg-tanc.m1").show();
+			})
+		})
+	</script>
+</body>
+</html>
