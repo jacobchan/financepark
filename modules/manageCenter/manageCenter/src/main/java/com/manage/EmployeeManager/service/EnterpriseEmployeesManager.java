@@ -13,6 +13,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 
 public interface EnterpriseEmployeesManager extends BaseManager{
@@ -89,4 +90,12 @@ public interface EnterpriseEmployeesManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public EnterpriseEmployees getEnterEmployforpage(EnterpriseEmployees o) throws BusException;
+	/**
+	 * 通过当前登录用户查询企业员工通讯录
+	 * @param o
+	 * @return
+	 * @throws BusException
+	 */
+	public List<EnterpriseEmployees> getEnterprisemaillist(EnterpriseEmployees o) throws BusException;
+	
 }
