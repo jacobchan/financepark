@@ -242,7 +242,7 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
     public PolicyApply updatePolicyApplyStatus(
         	@ServiceParam(name="policyApplyId") String policyApplyId) throws BusException{   	
        PolicyApply psm = policyApplyDao.get(policyApplyId);  
-       psm.setPolicyApplyStatus("2");
+       psm.setPolicyApplyStatus("0");
        return policyApplyDao.save(psm);
         }				
 	}
