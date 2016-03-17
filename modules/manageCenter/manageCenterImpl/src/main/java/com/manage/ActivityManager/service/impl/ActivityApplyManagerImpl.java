@@ -15,7 +15,6 @@ import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
-//import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
@@ -179,7 +178,7 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     	List<ActivityApplylist> activityApplylist=activityApplylistManager.getActivityApplylists(condition, null);
     	List<MemberInformation> members=new ArrayList<MemberInformation>();
     	for(ActivityApplylist aa:activityApplylist){
-    		MemberInformation member=aa.getApplyMember();
+    		MemberInformation member=aa.getMember();
     		members.add(member);
     	}
 		return members;
@@ -225,6 +224,24 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     	ActivityApply aa=activityApplyDao.get(id);
     	aa.setApplyStatus("01");
     	activityApplyDao.save(aa);
+	}
+    /**
+     * 根据创智慧类型获取活动
+     * @param type
+     * @return
+     * @throws BusException
+     */ 
+    @EsbServiceMapping
+	public List<ActivityApply> getActivityListByType(@ServiceParam(name="type")String type)
+			throws BusException {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+    	//先模拟一个登陆用户，之后会修改
+    	//获取当前用户参加活动的list
+    	Collection<Condition> condition = new ArrayList<Condition>();
+    //	condition.add(ConditionUtils.getCondition("applyMember.memberId", Condition.EQUALS, member.getMemberId()));
+    	List<ActivityApply> activityApplyList=activityApplyDao.commonQuery(condition, null);
+		return activityApplyList;
 	}
 
 }
