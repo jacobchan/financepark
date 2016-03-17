@@ -103,7 +103,26 @@
 				 $(".gt-table").append(html);	
 			}
 		};
-	
+		//增加绑定卡号
+		$('.hhf-submit').click(function(){
+			this.disabled=true;
+			
+			var ocNumber=$("#ocNumber").val();
+			var memberId="40288ad7537422cc01537426c2dc0033";
+			var bindStatus=1;
+			var params = ['memberId='+memberId+'','bindStatus='+bindStatus+'','ocNumber='+ocNumber+''];
+			$.youi.ajaxUtils.ajax({
+				url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/savePropertyservicemanagerOc.json',
+				data:params.join('&'),
+				success:function(result){
+					if(result&&result.record){
+						alert("增加成功");
+						location.reload();
+					}
+				}
+			});
+		});	 
+
 
 	
 	</script>
