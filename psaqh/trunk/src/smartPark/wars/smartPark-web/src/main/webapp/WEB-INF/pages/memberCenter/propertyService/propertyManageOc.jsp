@@ -65,8 +65,8 @@
 	
 		$(function(){
 			$.ajax({
-			//  url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/getPropertyservicemanagerOcListByLoginUser.json',
-				 url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/getPropertyservicemanagerOcs.json',
+			     url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/getPropertyservicemanagerOcListByLoginUser.json',
+			//	 url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/getPropertyservicemanagerOcs.json',
 				success:function(result){
 					
 					console.log(result.records);
@@ -117,13 +117,11 @@
 				
 			}
 		};
-		function hhf(id){			
-			var ocStatus='08';
-			var ocId=id;
-			var params = ['ocId='+ocId+'','ocStatus='+ocStatus+''];
+		function hhf(id){						
+			var ocId=id;			
 		     $.ajax({
-				url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/updateOcStatus.json',
-				data:params.join('&'),
+				url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/cancleOcStatus.json',
+				data:'ocId='+ocId+'',
 		 		success:function(result){
 					if(result&&result.record){					
 						alert("取消成功");
