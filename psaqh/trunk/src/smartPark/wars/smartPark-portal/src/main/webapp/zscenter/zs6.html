@@ -143,15 +143,18 @@
 					}
 				
 			});
-			$("#lf_time").on("click",function(){
-	            $(this).next(".time-nav").toggle();
+			$("#lf_time").on("click",function(e){
+				e.stopPropagation();
+	            $(this).next(".time-nav").show();	            
 	        });
+
 			$(".time-nav").on("click","li",function(){
 	            $(this).addClass("selected").siblings().removeClass("selected");
 	            var selecttext=$(this).text();
 	            var val=$(this).attr("data-val");
 	            $("#lf_time").val(selecttext).attr("data-val",val); 
 	            $(this).parents(".time-nav").hide();
+
 	        });	
 		})
 	</script>
