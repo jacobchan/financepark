@@ -63,7 +63,7 @@
                     	 "<img src='http://localhost:9088/filestore/"+record[i].activityImage+"'>"+
                 		 "<div class='czh-group' style='border-bottom:1px solid #ecebeb'>"+
                     	 "<h4>"+record[i].applyTitle+"</h4>"+
-                    	 "<span>活动发起人："+record[i].memberId+"</span><br/>"+
+                    	 "<span>活动发起人："+record[i].memberId.memberName+"</span><br/>"+
                     	 "<span>举办时间："+record[i].startTime+"至"+record[i].endTime+"</span>"+
                 		 "</div>"+
                 		 "<div class='czh-group'>"+
