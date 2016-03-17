@@ -78,10 +78,12 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	 * 新增IT服务订单
 	 * @param userId 当前登录用户ID
 	 * @param commodityId 商品ID
+	 * @param faultDes 故障描述
+	 * @param userorderAdr 联系地址
 	 * @return
 	 * @throws BusException
 	 */
-	public OrdermanagerUserorder saveITSerOrder(String userId,String commodityId) throws BusException;
+	public OrdermanagerUserorder saveITSerOrder(String userId,String commodityId,String faultDes,String userorderAdr) throws BusException;
 	/**
 	 * 新增工商变更订单
 	 * @param userId
