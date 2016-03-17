@@ -63,4 +63,11 @@ public interface BbmBuildingManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitBbmBuilding(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 通过园区名称获取该园区所有的楼栋
+	 * @param parkName 园区名称
+	 * @return
+	 */
+	public List<BbmBuilding> getAllBuildingByParkName(String parkName) throws BusException;
 }

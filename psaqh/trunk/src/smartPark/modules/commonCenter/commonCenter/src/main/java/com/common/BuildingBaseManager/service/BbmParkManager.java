@@ -5,6 +5,10 @@ package com.common.BuildingBaseManager.service;
 
 import java.util.List;
 import java.util.Collection;
+import java.util.Map;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -12,7 +16,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
+import com.common.BuildingBaseManager.entity.BbmBuilding;
+import com.common.BuildingBaseManager.entity.BbmFloor;
 import com.common.BuildingBaseManager.entity.BbmPark;
 
 public interface BbmParkManager extends BaseManager{
@@ -63,4 +68,18 @@ public interface BbmParkManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitBbmPark(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 根据园区名称查询
+	 * @param parkName 园区名称
+	 * @return
+	 */
+	public BbmPark getBbmParkByParkName(String parkName) ;
+	
+	/**
+	 * 根据园区名称得到楼栋及相应的楼层
+	 * @param parkName 园区名称
+	 * @return
+	 */
+	public JSONArray getBuildingAndFloorByParkName(String parkName) ;
 }
