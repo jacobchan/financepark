@@ -613,10 +613,14 @@
 	<script type="text/javascript" src="scripts/page/laydate/laydate.js"></script>
 	<script type="text/javascript">
 		$(function(){
-			  var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommoditys.json?genreCode=0301";//0301:会议室
+			 var params = ['genreCode=0301'];
+			  var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommoditys.json";//0301:会议室
+			  
+			 
 				//公共方法
 				$.youi.ajaxUtils.ajax({
 					url:serviceURL,
+					data:params.join('&'),
 					jsonp:'data:jsonp',
 					dataType:'jsonp',
 					success:function(results){
