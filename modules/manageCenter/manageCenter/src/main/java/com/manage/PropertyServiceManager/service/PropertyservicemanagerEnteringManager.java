@@ -46,7 +46,7 @@ public interface PropertyservicemanagerEnteringManager extends BaseManager{
 	 * 前台展示可办理预约记录
 	 */
 	@EsbServiceMapping
-	public List<Record> getEnteringList(Pager pager)  throws BusException;
+	public List<Record> getEnteringList(Pager pager,String userId)  throws BusException;
 	/**
 	 * 查询所有可以预约的预约记录
 	 * @return 
