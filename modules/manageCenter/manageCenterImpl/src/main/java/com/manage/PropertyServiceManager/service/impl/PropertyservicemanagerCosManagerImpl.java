@@ -1,15 +1,9 @@
-/**
- * 代码声明
- */
 package com.manage.PropertyServiceManager.service.impl;
-
 import java.util.List;
 import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.exception.BusException;
@@ -22,7 +16,6 @@ import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
 import com.gsoft.utils.HttpSenderMsg;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSfpro;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerCosDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerCosManager;
 @Service("propertyservicemanagerCosManager")
