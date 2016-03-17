@@ -171,15 +171,27 @@ public class PurchasingmanagerCommodityExtendManagerImpl extends BaseManagerImpl
 				purCE.setUpdateUser(user.getUserId());
 				purCE.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 				purchasingmanagerCommodityExtendDao.save(purCE);
-			}else{//新增
-				PurchasingmanagerCommodity pc = new PurchasingmanagerCommodity();
-				pc.setCommodityId(commodityId);
-				pce.setCommodity(pc);
-				pce.setCreateUser(user.getUserId());
-				pce.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-				pce.setUpdateUser(user.getUserId());
-				pce.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-				purchasingmanagerCommodityExtendDao.save(pce);
+			}else{
+				List<PurchasingmanagerCommodityExtend> purExList = purchasingmanagerCommodityExtendDao.getList(
+						new String[]{"commodity.commodityId","purchasingmanagerGenreProperty.genrePropertyId"}, 
+						new String[]{commodityId,pce.getPurchasingmanagerGenreProperty().getGenrePropertyId()});
+				
+				if(purExList.size()>0){//修改
+					PurchasingmanagerCommodityExtend purCE = purExList.get(0);
+					purCE.setCommodityExtendContent(pce.getCommodityExtendContent());
+					purCE.setUpdateUser(user.getUserId());
+					purCE.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+					purchasingmanagerCommodityExtendDao.save(purCE);
+				}else{//新增
+					PurchasingmanagerCommodity pc = new PurchasingmanagerCommodity();
+					pc.setCommodityId(commodityId);
+					pce.setCommodity(pc);
+					pce.setCreateUser(user.getUserId());
+					pce.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+					pce.setUpdateUser(user.getUserId());
+					pce.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+					purchasingmanagerCommodityExtendDao.save(pce);
+				}
 			}
 		}
 	}

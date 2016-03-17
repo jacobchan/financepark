@@ -19,7 +19,7 @@
 		<youi:gridCol width="30%" property="purchasingmanagerGenreProperty.genrePropertyDisplayName" caption="字段显示名称"/>
 		<youi:gridCol width="30%" property="purchasingmanagerGenreProperty.genrePropertyFieldName" caption="字段名称"/>
 		<youi:gridCol editor="fieldText" width="40%" property="commodityExtendContent"  caption="字段值"/>
-		<youi:gridCol width="0" property="purchasingmanagerGenreProperty.genrePropertyId" caption="字段名称"/>
+		<youi:gridCol width="0" property="purchasingmanagerGenreProperty.genrePropertyId" caption="类别属性ID"/>
 	</youi:grid>
 	
 	<!--**********************************页面函数Start********************************-->

@@ -76,6 +76,30 @@ public class PurchasingmanagerMerchant implements Domain{
 	@Column(name = "MERCHANT_LOGO_")
 	@Length(max=256)
 	private String merchantLogo;//商户LOGO
+	
+	@Column(name = "MERCHANT_URL_")
+	@Length(max=256)
+	private String merchantUrl;//商户网址
+	
+	@Column(name = "MERCHANT_ABOUT_")
+	@Length(max=2048)
+	private String merchantAbout;//商户简介
+
+	public String getMerchantUrl() {
+		return merchantUrl;
+	}
+
+	public void setMerchantUrl(String merchantUrl) {
+		this.merchantUrl = merchantUrl;
+	}
+
+	public String getMerchantAbout() {
+		return merchantAbout;
+	}
+
+	public void setMerchantAbout(String merchantAbout) {
+		this.merchantAbout = merchantAbout;
+	}
 
 	public String getMerchantLogo() {
 		return merchantLogo;
