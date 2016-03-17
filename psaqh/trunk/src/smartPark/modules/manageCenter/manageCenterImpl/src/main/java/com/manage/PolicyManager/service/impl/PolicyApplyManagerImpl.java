@@ -213,11 +213,25 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
      * @return
      * @throws BusException
      */
-    @EsbServiceMapping
-	public List<PolicyApply> getPolicyApplyListByLoginUser() throws BusException {
-    	//先模拟一个登陆用户memberId=1，先在数据库插入memberId=1
-    	String m="1"; 
-    	return policyApplyDao.getList("memberId", m);}
+    
+    	@EsbServiceMapping(pubConditions = {@PubCondition(property = "member.memberId", pubProperty = "userId")})
+    	public List<PolicyApply> getPolicyApplyListByLoginUser(PolicyApply o)
+       			throws BusException {
+       		//获取当前登录用户id
+       		String id = o.getMember().getMemberId();
+       		if(id!=null){
+       	    	//获取当前用户参加活动的list  	    	  	    	  	    	
+       	    	 List<PolicyApply> list=policyApplyDao.getList("member.memberId", id);
+       	    	 if(list.size()>0){
+       	    		 return list;
+       	    	 }else{
+       	    		 return null;
+       	    	 }
+       		}else{
+       			return null;
+       		}
+       		
+       	}
     
     	 /**
          * 修改政策流程状态
@@ -225,13 +239,11 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
          * @throws BusException
          */
        @EsbServiceMapping
-        public PolicyApply updatePolicyApplyStatus(
-        		@ServiceParam(name="policyApplyId") String policyApplyId,
-        		@ServiceParam(name="policyApplyStatus") String policyApplyStatus
-        		) throws BusException{   	
-    	   PolicyApply psm = policyApplyDao.get(policyApplyId);  
-        		psm.setPolicyApplyStatus(policyApplyStatus);
-    	    	return policyApplyDao.save(psm);
-        }
+    public PolicyApply updatePolicyApplyStatus(
+        	@ServiceParam(name="policyApplyId") String policyApplyId) throws BusException{   	
+       PolicyApply psm = policyApplyDao.get(policyApplyId);  
+       psm.setPolicyApplyStatus("2");
+       return policyApplyDao.save(psm);
+        }				
 	}
 
