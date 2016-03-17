@@ -23,6 +23,7 @@
 		<youi:gridCol property="roomCaption"  caption="单元说明" width="150" align="center"/>
 		<youi:gridCol property="roomHost"  caption="单元业主" width="100" align="center"/>
 		<youi:gridCol property="status"  caption="使用状态" width="100" align="center" convert="roomstatus"/>
+		<youi:gridCol property="roomAddress"  caption="详细地址" width="300" align="center"/>
 
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
