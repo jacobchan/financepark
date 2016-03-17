@@ -60,7 +60,7 @@
 
 	<script type="text/javascript">
 
-	function apply(id){			
+	 function apply(id){			
 		var policyApplyId=id;	
 	     $.ajax({
 			url:'/smartPark-web/esb/web/policyApplyManager/updatePolicyApplyStatus.json',
@@ -72,15 +72,14 @@
 				}
 			}
 		});
-	}
+	} 
 	
 		$(function(){
 			$.ajax({
 				
-				url:'/smartPark-web/esb/web/policyApplyManager/getPolicyApplyListByLoginUser.json',
-//				url:'/smartPark-web/esb/web/policyApplyManager/getPolicyApplys.json',
+				url:'/smartPark-web/esb/web/policyApplyManager/getPolicyApplyListByLoginUser.json',				
 				success:function(result){	
-					
+					alert(111);
 					console.log(result.records);
 					if(result&&result.records){					
 						_parseRecords(result.records);						
@@ -104,9 +103,9 @@
                           "<td width='111'>"+record[i].nmIssuenews.policyCaption+"</td>"+
                           "<td width='111'>"+record[i].policyApplyContactPeople+"</td>"+
                           "<td width='111'>"+record[i].createTime+"</td>"+
-                          "<td width='111'>"+record[i].nmIssueflow.issueFlowCStatus+"</td>"+
-                          "<td width='111'>"+status+"</td>"+                          
-                          "<td > <input type='button' value='取消'   onclick='apply(/""+record[i].policyApplyId+"/")' />"+                                   
+                          "<td width='88'>"+record[i].nmIssueflow.issueFlowCStatus+"</td>"+
+                          "<td width='66'>"+status+"</td>"+                          
+                          "<td > <input type='button' value='取消'   onclick='apply(\""+record[i].policyApplyId+"\")' />"+                                   
                           " </tr>";
 				 $(".gt-table").append(html);	
 			}
