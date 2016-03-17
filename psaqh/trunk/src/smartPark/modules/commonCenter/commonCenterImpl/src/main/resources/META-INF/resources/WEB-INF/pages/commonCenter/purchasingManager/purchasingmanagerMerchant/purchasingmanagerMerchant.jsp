@@ -9,7 +9,7 @@
 	</youi:subpage>
 	<!--**********************************子页面**********************************-->
 	
-	<youi:grid id="grid_purchasingmanagerMerchant" idKeys="merchantId" caption="商户信息表列表"  panel="false"
+	<youi:grid id="grid_purchasingmanagerMerchant" idKeys="merchantId,merchantUrl,merchantAbout" caption="商户信息表列表"  panel="false"
 				src="esb/web/purchasingmanagerMerchantManager/getPagerPurchasingmanagerMerchants.json" dataFormId="form_purchasingmanagerMerchant"
 				editSrc="esb/web/purchasingmanagerMerchantManager/getPurchasingmanagerMerchant.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/purchasingmanagerMerchantManager/removePurchasingmanagerMerchant.json">
@@ -47,7 +47,9 @@
 			<youi:fieldText property="merchantLinkmanPhone"  caption="联系人电话" notNull="true"/>
 			<youi:fieldText property="merchantSendAddress"  caption="发货地址" notNull="true"/>
 			<youi:fieldText property="merchantReturnAddress"  caption="退货地址" notNull="true"/>
+			<youi:fieldText property="merchantUrl"  caption="商户网址" />
 			<youi:fieldSwfupload property="merchantLogo" caption="商户LOGO" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" fileUploadLimit="1" fileQueueLimit="1"/>
+			<youi:fieldArea property="merchantAbout" column="2"  caption="商户简介" />
 			<youi:fieldHidden property="merchantId"  caption="商品ID"/>
 		</youi:fieldLayout>
 	</youi:form>
