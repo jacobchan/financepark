@@ -35,8 +35,8 @@
 	
 		$(function(){
 			$.ajax({
-			//  url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/getPropertyservicemanagerOcListByLoginUser.json',
-				 url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/getPropertyservicemanagerOcs.json',
+			  url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/getPropertyservicemanagerOcListByLoginUser.json',
+			//	 url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/getPropertyservicemanagerOcs.json',
 				success:function(result){
 					
 					console.log(result.records);
@@ -67,11 +67,10 @@
 			this.disabled=true;			
 			var ocNumber=$("#ocNumber").val();	
 			alert(ocNumber);
-			var bindStatus="1";
-			var params = ['bindStatus='+bindStatus+'','ocNumber='+ocNumber+''];
+						
 			$.youi.ajaxUtils.ajax({
 				url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/addBindOc.json',
-				data:params.join('&'),
+				data:'ocNumber='+ocNumber,
 				success:function(result){
 					if(result&&result.record){
 						alert("增加成功");
@@ -81,15 +80,12 @@
 			});
 		});	 
 
-		function unbound(id){			
-		   
-			var bindStatus=0;
-			var ocId=id;
-			var params = ['ocId='+ocId+'','bindStatus='+bindStatus+''];
+		function unbound(id){					   			
+			var ocId=id;			
 			$.youi.ajaxUtils.ajax({
 	//			url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/savePropertyservicemanagerOc.json',
 				url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/updateBindStatus.json',
-				data:params.join('&'),
+				data:'ocId='+ocId,
 		 		success:function(result){
 					if(result&&result.record){					
 						alert("修改成功");
