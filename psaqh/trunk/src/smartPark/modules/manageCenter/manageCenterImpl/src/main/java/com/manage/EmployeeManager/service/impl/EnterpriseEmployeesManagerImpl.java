@@ -3,6 +3,7 @@
  */
 package com.manage.EmployeeManager.service.impl;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Collection;
@@ -21,6 +22,7 @@ import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.security.fuc.dao.RoleDao;
 import com.gsoft.framework.security.fuc.entity.Role;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 import com.manage.EmployeeManager.entity.EnterpriseInvitation;
@@ -31,6 +33,8 @@ import com.manage.EmployeeManager.dao.EnterpriseRoleDao;
 import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
 import com.manage.EnterBusinessManager.dao.EnterbusinessmanagerRzDao;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCharge;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerOc;
 @Service("enterpriseEmployeesManager")
 @Transactional
 public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements EnterpriseEmployeesManager{
@@ -215,4 +219,17 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 			return null;
 		}
 	}
+	//获取当前用户公司员工的通讯录
+	 @EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",pubProperty="userId")})
+	public List<EnterpriseEmployees> getEnterprisemaillist(EnterpriseEmployees o) throws BusException{			
+		String id = o.getMember().getMemberId();
+		EnterpriseEmployees e = enterpriseEmployeesDao.getObjectByUniqueProperty("member.memberId", id);
+		EnterbusinessmanagerRz rz=e.getRz();
+		String rzId=rz.getRzId();
+		List<EnterpriseEmployees> list = enterpriseEmployeesDao.getList("rz.rzId", rzId);
+		return list;
+	 }
+	
+	
+	
 }
