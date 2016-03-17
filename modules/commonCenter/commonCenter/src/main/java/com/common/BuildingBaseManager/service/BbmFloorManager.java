@@ -12,6 +12,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.common.BuildingBaseManager.entity.BbmBuilding;
 import com.common.BuildingBaseManager.entity.BbmFloor;
 import com.common.BuildingBaseManager.entity.BbmPark;
 
@@ -71,4 +72,12 @@ public interface BbmFloorManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public BbmPark findBbmParkByBuildingId(String buildingId) throws BusException ;
+	
+	/**
+	 * 通过楼栋ID得到楼层
+	 * @param buildingId 楼栋ID
+	 * @return
+	 * @throws BusException
+	 */
+	public List<BbmFloor> getBbmFloorByBuildingId(String buildingId) throws BusException;
 }
