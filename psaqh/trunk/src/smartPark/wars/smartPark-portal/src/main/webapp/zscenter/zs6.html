@@ -175,7 +175,7 @@
 				for(var i=0;i<record.length;i++){
 					   //http://localhost:8088/smartPark-web/ imageUrl
 						var html="<li><div class='mb10'><img src='"+imageUrl+record[i].commodityImage+"' border='0'></div>"+
-						"<span>"+record[i].commodityTitle+"</span>";
+						"<span>"+record[i].purchasingmanagerGenre.genreName+"</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>"+record[i].commodityTitle+"</span>";
 						 $(".space-centent ul").append(html);
 						 
 				}
