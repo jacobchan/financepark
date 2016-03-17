@@ -145,11 +145,21 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
      *前台页面：用户预约公共资源,保存对象
      */
     @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
-    public List<PublicutilitiesmanagerReso> savePublicutilitiesmanagerResoList(List<PublicutilitiesmanagerReso> o) throws BusException{
+    public List<PublicutilitiesmanagerReso> savePublicutilitiesmanagerResoList(List<PublicutilitiesmanagerReso> o,String commodityId) throws BusException{
     	String resoId = "";
     	List<PublicutilitiesmanagerReso> resoList=new ArrayList<PublicutilitiesmanagerReso>();
+    	List<PublicutilitiesmanagerReso> reList=new ArrayList<PublicutilitiesmanagerReso>();
+    	PurchasingmanagerCommodity purchasingmanagerCommodity =new PurchasingmanagerCommodity();
     	for(PublicutilitiesmanagerReso pr:o){
-    		resoId = pr.getResoId();
+    		//根据商品id和可用日期查询是否存在公共资源预约
+    		String resoDate=pr.getResoDate();
+    		if(StringUtils.isNotEmpty(resoDate) && StringUtils.isNotEmpty(commodityId)){
+    			purchasingmanagerCommodity=purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
+    			reList=publicutilitiesmanagerResoDao.getList(new String[] {"resoDate","commodityId.commodityId"}, new  String[] {resoDate,commodityId});
+    		}
+    		if(reList.size()>0){
+    			resoId = reList.get(0).getResoId();
+    		}
     		boolean isUpdate = StringUtils.isNotEmpty(resoId);
         	if(isUpdate){//修改,更新预约状态
         		//根据主键Id查询公共资源信息
@@ -162,6 +172,7 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
         		resoList.add(reso);
         	}else{//新增
         		pr.setResoStatus("02");//02---已预约
+        		pr.setCommodityId(purchasingmanagerCommodity);
         		pr.setCreateUser(pr.getUpdateUser());
         		pr.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
         		pr.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
@@ -216,8 +227,8 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 	
 	@Override
 	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
-	public OrdermanagerUserorder savePublicResoOrderByList(@ServiceParam(name="userorderAmount") String userorderAmount,@DomainCollection(domainClazz=PublicutilitiesmanagerReso.class) List<PublicutilitiesmanagerReso> publicResoList) throws BusException {
-		publicResoList = this.savePublicutilitiesmanagerResoList(publicResoList);
+	public OrdermanagerUserorder savePublicResoOrderByList(@ServiceParam(name="userorderAmount") String userorderAmount,@ServiceParam(name="commodityId") String commodityId,@DomainCollection(domainClazz=PublicutilitiesmanagerReso.class) List<PublicutilitiesmanagerReso> publicResoList) throws BusException {
+		publicResoList = this.savePublicutilitiesmanagerResoList(publicResoList,commodityId);
 //		List<PublicutilitiesmanagerReso> prList=new ArrayList<PublicutilitiesmanagerReso> ();
 //		String resoId=publicReso.getResoId();
 //		if(StringUtils.isNotEmpty(resoId)){
