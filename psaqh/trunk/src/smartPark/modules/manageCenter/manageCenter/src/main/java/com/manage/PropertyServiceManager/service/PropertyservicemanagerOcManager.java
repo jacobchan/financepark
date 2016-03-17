@@ -84,4 +84,11 @@ public interface PropertyservicemanagerOcManager extends BaseManager{
 	 * @param bindStatus
 	 */
 	public PropertyservicemanagerOc addBindOc(String ocNumber, String  bindStatus)throws BusException;
+	/**
+	 * 取消一卡通预约
+	 * @param id
+	 * @param ocStatus
+	 * @throws BusException
+	 */
+	public void cancleOcStatus(String id)throws BusException;
 }
