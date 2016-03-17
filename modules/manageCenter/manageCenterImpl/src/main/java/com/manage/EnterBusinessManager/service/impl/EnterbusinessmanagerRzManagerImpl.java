@@ -1,33 +1,21 @@
-/**
- * 代码声明
- */
 package com.manage.EnterBusinessManager.service.impl;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.common.BuildingBaseManager.entity.BbmRoom;
 import com.common.BuildingBaseManager.service.BbmRoomManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
-//import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.security.fuc.entity.Role;
-import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 import com.manage.EmployeeManager.entity.EnterpriseRole;
 import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
@@ -37,7 +25,6 @@ import com.manage.EnterBusinessManager.dao.EnterbusinessmanagerRzDao;
 import com.manage.EnterBusinessManager.service.EnterbusinessmanagerRzManager;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerEntrecManager;
-
 @Service("enterbusinessmanagerRzManager")
 @Transactional
 public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implements EnterbusinessmanagerRzManager{
@@ -139,7 +126,6 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     @EsbServiceMapping
 	public void saveEnterbusinessmanagerRzBasicData(@ServiceParam(name="entrecId") String id)
 			throws BusException {
-		// TODO Auto-generated method stub
     	PropertyservicemanagerEntrec psme=propertyservicemanagerEntrecManager.getPropertyservicemanagerEntrec(id);
     	//根据入驻办理预约记录表数据新增入驻信息基本数据
     	EnterbusinessmanagerRz enterbusinessmanagerRz=new EnterbusinessmanagerRz();
@@ -161,7 +147,6 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     
     @EsbServiceMapping
 	public void updateEnteringStatus(@ServiceParam(name="rzId") String id) throws BusException {
-		// TODO Auto-generated method stub
     	EnterbusinessmanagerRz enterbusinessmanagerRz=enterbusinessmanagerRzDao.get(id);
 		String buildingId=enterbusinessmanagerRz.getBuildingId();
 		if(buildingId!=""&&buildingId!=null){
