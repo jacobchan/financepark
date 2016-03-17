@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.service.MemberInformationManager;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.codemap.dao.CodeitemDao;
@@ -44,6 +46,9 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
 	private PropertyservicemanagerEnteringDao propertyservicemanagerEnteringDao;
 	@Autowired
 	private CodeitemDao<Codeitem, String> codeItemDao;
+	
+	@Autowired
+	private MemberInformationManager memberInformationManager;
 	
     /**
      * 查询列表
@@ -220,7 +225,7 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
 	 * 前台展示可办理预约记录
 	 */
     @EsbServiceMapping
-    public List<Record> getEnteringList(Pager pager)  throws BusException{
+    public List<Record> getEnteringList(Pager pager,@ServiceParam(name="userId",pubProperty = "userId") String userId)  throws BusException{
 		
     	List<Record> enteringValueList=new ArrayList<Record>();
     	Collection<Condition> conditions =new ArrayList<Condition>();
@@ -233,6 +238,9 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
     	@SuppressWarnings("unchecked")
 		List<PropertyservicemanagerEntering> enteringList = (List<PropertyservicemanagerEntering>)pagerRecords.getRecords();
     	List<PropertyservicemanagerEntering> enteringLists=new ArrayList<PropertyservicemanagerEntering>();
+    	
+    	//获取当前用户信息
+    	MemberInformation mem=memberInformationManager.getMemberInformation(userId);
     	for(PropertyservicemanagerEntering pe:enteringList){
     		if(pe.getEnteringTime().equals("AM")){
     			Record record = new Record();
@@ -243,6 +251,8 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
     			List<Codeitem> list = codeItemDao.getList(new String[] {"codemap.code", "itemValue" }, new Object[] { "enteringStatus",pe.getEnteringStatus()});
     			record.put("enteringStatus",pe.getEnteringStatus());
     			record.put("enteringStatusName",list.get(0).getItemCaption());
+    			record.put("memName",mem !=null?mem.getMemberName():"");
+    			record.put("memPhone",mem !=null?mem.getMemberPhoneNumber():"");
     			enteringValueList.add(record);
     		}else{
     			enteringLists.add(pe);
@@ -255,6 +265,8 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
 			record.put("enteringAlre",pe.getEnteringAlre());//已预约数量
 			List<Codeitem> list = codeItemDao.getList(new String[] {"codemap.code", "itemValue" }, new Object[] { "enteringStatus",pe.getEnteringStatus()});
 			record.put("enteringStatus",list.get(0).getItemCaption());
+			record.put("memName",mem !=null?mem.getMemberName():"");
+			record.put("memPhone",mem !=null?mem.getMemberPhoneNumber():"");
 			enteringValueList.add(record);
     	}
     	return enteringValueList;
