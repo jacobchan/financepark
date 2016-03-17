@@ -88,4 +88,9 @@ public interface NmIssuenewsManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public boolean supportIssue(String issueTypeId,String status)throws BusException;
+	/**
+	 * 得到所有的优惠政策
+	 * @return
+	 */
+	public List<NmIssuenews> getAllPolicy() ;
 }
