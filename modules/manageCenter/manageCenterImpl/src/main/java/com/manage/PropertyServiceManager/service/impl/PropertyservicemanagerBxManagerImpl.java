@@ -284,5 +284,29 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 			}	
 		return recordList;
 	}
-    
+	/**
+	 * 前台用户发起报修单更改
+	 * @param bxId 报修单id
+	 * @return
+	 * @throws BusException
+	 */
+	@EsbServiceMapping
+	public PropertyservicemanagerBx updateBxforpage(@ServiceParam(name="bxId") String bxId) throws BusException{
+		PropertyservicemanagerBx bx = propertyservicemanagerBxDao.get(bxId);
+		if(bx!=null){
+	    	String bxstatus = bx.getBxStatus();
+	    	if(!bxstatus.equals("05")){
+	    		//取消报修订单
+	    		bx.setBxStatus("08");
+	    		bx.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+	    	}else if(bxstatus.equals("05")){
+	    		//重新报修--到已受理状态
+	    		bx.setBxStatus("01");
+	    		bx.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+	    	}
+	    	return propertyservicemanagerBxDao.save(bx);
+		}else{
+			throw new BusException("未查询到该报修单，如有疑问请与客服人员联系");
+		}
+	}
 }
