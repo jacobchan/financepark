@@ -187,12 +187,12 @@
                             <textarea class="wt_info" id="faultDes"></textarea>
                         </div>
                     </div>
-                    <div class="group_div clearfix mt15">
+                    <!-- <div class="group_div clearfix mt15">
                         <span class="span_bold fl">联系人：</span>
                         <div class="fl ml10">
                             <input type="text" placeholder="姓名" size="10"> <input type="text" class="ml10" placeholder="联系电话"> 
                         </div>
-                    </div>
+                    </div> -->
                     <!-- <div class="group_div clearfix mt15">
                         <span class="span_bold fl mt10">选择地区：</span>
                         <ul class="it_select clearfix fl">
@@ -206,7 +206,7 @@
                     <div class="group_div clearfix mt15">
                         <span class="span_bold fl">联系地址：</span>
                         <div class="fl ml10">
-                            <input type="text" size="40" placeholder="联系地址"> 
+                            <input type="text" size="40" id="userorderAdr1" placeholder="联系地址"> 
                         </div>
                     </div>
                     <div class="group_div clearfix mt15">
@@ -299,12 +299,12 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="group_div clearfix mt15">
+                   <!--  <div class="group_div clearfix mt15">
                         <span class="span_bold fl">联系人：</span>
                         <div class="fl ml10">
                             <input type="text" placeholder="姓名" size="10"> <input type="text" class="ml10" placeholder="联系电话"> 
                         </div>
-                    </div>
+                    </div> -->
                     <!-- <div class="group_div clearfix mt15">
                         <span class="span_bold fl mt10">选择地区：</span>
                         <ul class="it_select clearfix fl">
@@ -318,7 +318,7 @@
                     <div class="group_div clearfix mt15">
                         <span class="span_bold fl">联系地址：</span>
                         <div class="fl ml10">
-                            <input type="text" size="40" placeholder="联系地址"> 
+                            <input type="text" size="40" id="userorderAdr2" placeholder="联系地址"> 
                         </div>
                     </div>
                     <div class="group_div clearfix mt15">
@@ -412,12 +412,12 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="group_div clearfix mt15">
+                    <!-- <div class="group_div clearfix mt15">
                         <span class="span_bold fl">联系人：</span>
                         <div class="fl ml10">
                             <input type="text" placeholder="姓名" size="10"> <input type="text" class="ml10" placeholder="联系电话"> 
                         </div>
-                    </div>
+                    </div> -->
                     <!-- <div class="group_div clearfix mt15">
                         <span class="span_bold fl mt10">选择地区：</span>
                         <ul class="it_select clearfix fl">
@@ -431,7 +431,7 @@
                     <div class="group_div clearfix mt15">
                         <span class="span_bold fl">联系地址：</span>
                         <div class="fl ml10">
-                            <input type="text" size="40" placeholder="联系地址"> 
+                            <input type="text" size="40" id="userorderAdr3" placeholder="联系地址"> 
                         </div>
                     </div>
                     <div class="group_div clearfix mt15">
@@ -525,12 +525,12 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="group_div clearfix mt15">
+                    <!-- <div class="group_div clearfix mt15">
                         <span class="span_bold fl">联系人：</span>
                         <div class="fl ml10">
                             <input type="text" placeholder="姓名" size="10"> <input type="text" class="ml10" placeholder="联系电话"> 
                         </div>
-                    </div>
+                    </div> -->
                     <!-- <div class="group_div clearfix mt15">
                         <span class="span_bold fl mt10">选择地区：</span>
                         <ul class="it_select clearfix fl">
@@ -544,7 +544,7 @@
                     <div class="group_div clearfix mt15">
                         <span class="span_bold fl">联系地址：</span>
                         <div class="fl ml10">
-                            <input type="text" size="40" placeholder="联系地址"> 
+                            <input type="text" size="40" id="userorderAdr4" placeholder="联系地址"> 
                         </div>
                     </div>
                     <div class="group_div clearfix mt15">
@@ -847,8 +847,10 @@ $(function(){
 	
 	$('.btn-cheng').click(function(){
 		var commodityId = $(this).parents(".taocan").attr("data-id");
-		var faultDes = $('#faultDes').html();
-		var params = ['commodityId='+commodityId,'faultDes='+faultDes];
+		var y = $(this).parents(".taocan").attr("data-commodity");
+		var userorderAdr = $('#userorderAdr'+y).val();
+		var faultDes = $('#faultDes').val();
+		var params = ['commodityId='+commodityId,'faultDes='+faultDes,'userorderAdr='+userorderAdr];
 		var serviceURL = baseUrl+"ordermanagerUserorderManager/saveITSerOrder.json";
 		$.youi.ajaxUtils.ajax({
 			url:serviceURL,
