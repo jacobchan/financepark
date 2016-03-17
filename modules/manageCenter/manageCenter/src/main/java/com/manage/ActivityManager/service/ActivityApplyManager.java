@@ -68,32 +68,52 @@ public interface ActivityApplyManager extends BaseManager{
      */
 	public boolean exsitActivityApply(String propertyName,Object value) throws BusException;
     /**
-     * 获取当前登录用户参加活动集合
-     * 
-     */    
+     *  获取当前登录用户参加活动集合  
+     * @param userId
+     * @return
+     * @throws BusException
+     */
     public List<ActivityApply> getParticipateActivityList(String userId) throws BusException;
     /**
-     * 获取当前登录用户发布活动集合
-     * 
-     */    
+     * 获取当前登录用户发布活动集合  
+     * @param userId
+     * @return
+     * @throws BusException
+     */
     public List<ActivityApply> getPublishActivityList(String userId) throws BusException;
     /**
-     * 根据活动主键查询报名名单
-     * 
-     */    
+     *  根据活动主键查询报名名单   
+     * @param o
+     * @return
+     * @throws BusException
+     */
     public List<MemberInformation> getPublishActivityMembers(ActivityApply o) throws BusException;
     /**
-     * 根据活动主键查询活动评价
-     * 
-     */    
+     *  根据活动主键查询活动评价  
+     * @param o
+     * @return
+     * @throws BusException
+     */
     public List<ActivityComment> getPublishActivityComments(ActivityApply o) throws BusException;
     /**
-     * 根据活动主键查询文档
-     * 
-     */    
+     * 根据活动主键查询文档   
+     * @param o
+     * @return
+     * @throws BusException
+     */
     public List<ActivityDocument> getPublishActivityDocuments(ActivityApply o) throws BusException;
     /**
      * 申请通过更改状态
+     * @param id
+     * @throws BusException
      */
     public void updateApplyStatus(String id) throws BusException;
+ 
+    /**
+     * 根据创智慧类型获取活动
+     * @param type
+     * @return
+     * @throws BusException
+     */    
+    public List<ActivityApply> getActivityListByType(String type) throws BusException;
 }
