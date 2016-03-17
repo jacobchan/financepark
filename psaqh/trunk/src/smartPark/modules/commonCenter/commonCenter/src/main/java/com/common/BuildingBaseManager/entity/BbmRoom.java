@@ -123,6 +123,18 @@ public class BbmRoom implements Domain{
 	@Length(max=20)
 	private String roomTenement;//单元租户
 	
+	@Column(name = "ROOM_ADR_")
+	@Length(max=1024)
+	private String roomAddress;//详细地址
+	
+	public String getRoomAddress() {
+		return roomAddress;
+	}
+
+	public void setRoomAddress(String roomAddress) {
+		this.roomAddress = roomAddress;
+	}
+
 	public String getRoomHost() {
 		return roomHost;
 	}
