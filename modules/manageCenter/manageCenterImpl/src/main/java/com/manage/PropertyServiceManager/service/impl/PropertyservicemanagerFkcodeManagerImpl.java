@@ -213,4 +213,24 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
     		return null;
     	}
     }
+    
+    /**
+	 * 前台取消访客
+	 * @param fkcodeId
+	 * @return
+	 * @throws BusException
+	 */
+    @EsbServiceMapping
+	public PropertyservicemanagerFkcode getFkcodeforpage(@ServiceParam(name="fkcodeId") String fkcodeId) throws BusException{
+    	PropertyservicemanagerFkcode fkcode = propertyservicemanagerFkcodeDao.get(fkcodeId) ;
+    	if(fkcode!=null){
+    		PropertyservicemanagerTwcrd twcrd = propertyservicemanagerTwcrdManager.findTwcrdByFkcode(fkcode) ;//通过访客申请对象得到对应的二维码对象
+    		twcrd.setStatus("01");
+    		propertyservicemanagerTwcrdManager.savePropertyservicemanagerTwcrd(twcrd);
+    		return fkcode;
+    	}else{
+    		return null;
+    	}
+    	
+    }
 }
