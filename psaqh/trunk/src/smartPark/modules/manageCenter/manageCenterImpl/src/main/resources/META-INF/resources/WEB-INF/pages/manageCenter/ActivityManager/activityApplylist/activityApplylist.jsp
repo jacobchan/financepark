@@ -10,9 +10,11 @@
 			<youi:fieldCalendar property="applylistTime"  caption="报名时间"/>
 
 		</youi:fieldLayout>
-		<youi:gridCol property="activityApply.applyTitle"  caption="活动标题" width="33%"/>
-		<youi:gridCol property="applylistTime"  caption="报名时间" width="33%"/>
-		<youi:gridCol property="applyMember.memberName"  caption="报名人"  width="33%"/>
+		<youi:gridCol property="activityApply.applyTitle"  caption="活动标题" width="30%"/>
+		<youi:gridCol property="member.memberName"  caption="报名人"  width="20%"/>
+		<youi:gridCol property="applyMember"  caption="联系人"  width="20%"/>
+		<youi:gridCol property="applyPhone"  caption="联系电话"  width="15%"/>
+		<youi:gridCol property="applylistTime"  caption="报名时间" width="15%"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -24,7 +26,9 @@
 		<youi:fieldLayout prefix="record" labelWidths="100,100">
 			<youi:fieldHidden property="applylistId"  caption="报名名单ID"/>
 			<youi:fieldSelect property="activityApply.applyId"  caption="活动" src="esb/web/activityApplyManager/getActivityApplys.json" code="applyId" show="applyTitle" notNull="ture"/>
-			<youi:fieldSelect property="applyMember.memberId"  caption="报名人" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName" notNull="ture"/>
+			<youi:fieldSelect property="member.memberId"  caption="报名人" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName" notNull="ture"/>
+			<youi:fieldText property="applyMember" caption="联系人" notNull="ture"></youi:fieldText>
+			<youi:fieldText property="applyPhone" caption="联系电话"  notNull="ture" expression="^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$" expressionMessage="手机号码格式不正确"></youi:fieldText>
 			<youi:fieldCalendar property="applylistTime"  caption="报名时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="ture"/>
 		</youi:fieldLayout>
 	</youi:form>

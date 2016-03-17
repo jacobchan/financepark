@@ -13,7 +13,7 @@
 		<youi:gridCol property="commentMember.memberName"  caption="评论人"  width="20%"/>
 		<youi:gridCol property="commentTime"  caption="评论时间" width="10%"/>
 		<youi:gridCol property="commentContent"  caption="评论内容" width="50%"/>
-		<youi:gridCol width="100" fixed="true" property="button" type="button" caption="操作">
+		<youi:gridCol width="100" fixed="true" property="button" type="button" caption="操作" >
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
 		</youi:gridCol>
@@ -30,19 +30,6 @@
 	</youi:form>
 	
 	<!--**********************************页面函数Start********************************-->
-<%-- 	<youi:func name="renderer_commentMember" params="col,record">
- 		var memberName = ""; 
-		$.youi.ajaxUtil.ajax({
-				url:'esb/web/memberInformationManager/getMemberInformation.json',
-				data:'memberId='+record.commentMember,
-				async: false, 
-				success:function(result){
-					if(result.record!=""&&result.record!=null){
-						memberName=result.record.memberName;
-					}
-				}
-			});
-		return memberName;
-	</youi:func> --%>
+
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
