@@ -126,7 +126,7 @@
 			<a href="javascript:;" class="tc-close"></a>
 			<div class="w60 tc mt40" style="margin-left:20%">
 				<div class="mt20 mb20 f16 lh26">
-					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o"> [ 123456789 ] </span>吗？
+					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o fkCode"> [ 123456789 ] </span>吗？
 				</div>
 				<p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p>
 				<input value="确定" class="hhf-submit" style="height:36px;" type="submit">
@@ -183,23 +183,47 @@
 		//拼接列表
 		function _parseRecords(record){
 			for(var i=0;i<record.length;i++){
-				var html="<tr>"+
-						"<td><a href=''>"+record[i].fkcodeId+"</a></td>"+
+				var html="<tr id='"+record[i].fkcodeId+"'>"+
+						"<td><a href=''>"+record[i].fkCode+"</a></td>"+
 						"<td>"+record[i].fkcodeTime+"</td>"+
 						"<td>"+record[i].applyStatus+"</td>"+
 						"<td>"+record[i].fkcodeName+"</td>"+
 						"<td>"+record[i].fkcodeTelephone+"</td>"+
-						"<td><a href='javascript:;' class='ac-see'>查看二维码</a><span class='f12 ml5 mr5'>|</span><a href='javascript:;' class='ac-show'>取消访客</a></td>"+
+						"<td><a href='javascript:;' class='ac-see'>查看二维码</a><span class='f12 ml5 mr5'>|</span><a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消访客</a></td>"+
 						"</tr>";
 				 $("tbody").append(html);
-				 $(".ac-show").click(function(){
-					 $(".bg-tanc.m1").show();
-				 });
+				
 				 $(".ac-see").click(function(){
 					 $(".bg-tanc.m2").show();
 				 });
 			}
 		};
+		function cancel(obj){
+			var me=obj.parentNode.parentNode;
+			var fkCode=me.childNodes[0].childNodes[0].innerText; 
+			$(".fkCode").html(fkCode);
+			$(".fkCode")[0].setAttribute("id",me.id);
+			$(".bg-tanc.m1").show();
+		};
+	</script>
+	<!-- 取消访客 -->
+	<script type="text/javascript">
+	$(function(){
+		$(".hhf-submit").click(function(){
+				var id=$(".fkCode")[0].getAttribute("id");
+			 	$.youi.ajaxUtils.ajax({
+					url:'/smartPark-web/esb/web/propertyservicemanagerFkcodeManager/getFkcodeforpage.json',
+					data:'fkcodeId='+id,
+					success:function(result){
+						if(result&&result.record){
+							alert("取消成功!");
+							
+							location.reload();
+						}
+					}
+				});
+			});
+		});
 	</script>
 </body>
 <%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 
