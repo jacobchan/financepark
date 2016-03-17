@@ -1,4 +1,5 @@
 package com.manage.EnterBusinessManager.service.impl;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.security.fuc.entity.Role;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
@@ -155,4 +157,21 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 			propertyservicemanagerEntrecManager.savePropertyservicemanagerEntrec(psme);
 		}
 	}
+    
+    /**
+	 * 根据名称查询企业
+	 * @param rzName 入驻企业名称
+	 * @return 符合条件的企业对象集合
+	 * @throws BusException
+	 * @author ZhuYL
+	 * @time 2016-03-17
+	 */
+    @EsbServiceMapping
+	public List<EnterbusinessmanagerRz> findEnterbusinessmanagerRzByName(@ServiceParam(name="rzName") String rzName)throws BusException{
+    	Collection<Condition> condition = new ArrayList<Condition>();
+    	Collection<Order> order = new ArrayList<Order>();
+    	condition.add(ConditionUtils.getCondition("rzName", Condition.LIKE, rzName));
+    	List<EnterbusinessmanagerRz> list = enterbusinessmanagerRzDao.commonQuery(condition, order);
+    	return list;
+    }
 }
