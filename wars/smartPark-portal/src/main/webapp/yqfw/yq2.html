@@ -5,6 +5,7 @@
 	<title>Document</title>
 	<link href="../styles/base.css" type="text/css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
+		<script type="text/javascript" src="../scripts/page/zs.js"></script>
 	<link rel="stylesheet" type="text/css" href="../styles/page/awesome/css/font-awesome.min.css">
 	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
@@ -76,7 +77,9 @@
 							success:function(results){
 								console.log(results);
 								if(results&&results.record){
-									alert("预约成功");
+									//alert("预约成功");
+									$(".bg-tanc.m2").show();
+									window.location=cenUrl+"member/memberCenter/personalCenter/myReservation.html";
 								}
 							},error:function(XMLHttpRequest, textStatus, errorThrown){
 								alert(XMLHttpRequest);
@@ -177,7 +180,43 @@
 	</div>
 	<!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
+	
+	<div class="bg-tanc m2">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="w70 tc mt40" style="margin-left:15%">
+				<table>
+					<tr>
+						<td><img src="../styles/images/grzx/check.png" class="mr40 mb20" border="0"></td>
+						<td >
+							<h4 class="f24 fl c-333"> 您已预约成功！</h4>
+							<p class="f14 c-o fl mt20 mb20">如有问题，请拨打：0571-86508888</p>
+						</td>
+					<tr/>
+				</table>
+			</div>
+		</div>
+	</div>
 	<!--***bottom end****************************************-->
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
+	<script type="text/javascript">
+	var serviceURL = baseUrl+"propertyservicemanagerEnteringManager/getEnteringList.json";
+	var enteringId;
+	//根据商品id获取资源可用状态
+	$.youi.ajaxUtils.ajax({
+		url : serviceURL,
+		jsonp : 'data:jsonp',
+		dataType : 'jsonp',
+		async : false,
+		success : function(results) {
+			if (results && results.records) {
+				var record = results.records;
+				$("#enteringName").val(record[0].memName);
+				$("#enteringTelephone").val(record[0].memPhone);
+			}
+		}
+	});
+	
+</script>
 </body>
 </html>
