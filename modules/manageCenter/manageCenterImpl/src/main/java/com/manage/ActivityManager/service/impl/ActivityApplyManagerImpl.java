@@ -89,7 +89,7 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     	String applyId = o.getApplyId();
     	boolean isUpdate = StringUtils.isNotEmpty(applyId);
     	Collection<Condition> conditions=new ArrayList<Condition>();
-    	conditions.add(ConditionUtils.getCondition("memberId", Condition.EQUALS, o.getMemberId()));
+    	conditions.add(ConditionUtils.getCondition("memberId.memberId", Condition.EQUALS, o.getMemberId().getMemberId()));
     	conditions.add(ConditionUtils.getCondition("applyStatus", Condition.EQUALS,"00"));
     	List<ActivityApply> list=activityApplyDao.commonQuery(conditions, null);
     	if(list.size()>1){
@@ -144,7 +144,7 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     	MemberInformation member=memberInformationManager.getMemberInformation(userId);
     	//获取当前用户参加活动的list
     	Collection<Condition> condition = new ArrayList<Condition>();
-    	condition.add(ConditionUtils.getCondition("applyMember", Condition.EQUALS, member.getMemberId()));
+    	condition.add(ConditionUtils.getCondition("applyMember.memberId", Condition.EQUALS, member.getMemberId()));
     	List<ActivityApplylist> activityApplylist=activityApplylistManager.getActivityApplylists(condition, null);
     	List<ActivityApply> aalist=new ArrayList<ActivityApply>();
     	for(ActivityApplylist aal:activityApplylist){
@@ -162,7 +162,7 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     	//先模拟一个登陆用户，之后会修改
     	MemberInformation member=memberInformationManager.getMemberInformation(userId);
     	//获取当前用户参加活动的list
-    	List<ActivityApply> list=activityApplyDao.getList("memberId", member.getMemberId()); 	
+    	List<ActivityApply> list=activityApplyDao.getList("memberId.memberId", member.getMemberId()); 	
 		return list;
 	}
     /**
@@ -179,8 +179,8 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     	List<ActivityApplylist> activityApplylist=activityApplylistManager.getActivityApplylists(condition, null);
     	List<MemberInformation> members=new ArrayList<MemberInformation>();
     	for(ActivityApplylist aa:activityApplylist){
-    		String memberId=aa.getApplyMember();
-    		members.add(memberInformationManager.getMemberInformation(memberId));
+    		MemberInformation member=aa.getApplyMember();
+    		members.add(member);
     	}
 		return members;
 	}

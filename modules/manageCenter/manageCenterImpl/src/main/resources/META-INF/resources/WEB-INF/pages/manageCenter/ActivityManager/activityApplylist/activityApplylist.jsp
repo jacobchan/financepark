@@ -12,7 +12,7 @@
 		</youi:fieldLayout>
 		<youi:gridCol property="activityApply.applyTitle"  caption="活动标题" width="33%"/>
 		<youi:gridCol property="applylistTime"  caption="报名时间" width="33%"/>
-		<youi:gridCol property="applyMember"  caption="报名人" renderer="renderer_applyMember" width="33%"/>
+		<youi:gridCol property="applyMember.memberName"  caption="报名人"  width="33%"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -24,13 +24,13 @@
 		<youi:fieldLayout prefix="record" labelWidths="100,100">
 			<youi:fieldHidden property="applylistId"  caption="报名名单ID"/>
 			<youi:fieldSelect property="activityApply.applyId"  caption="活动" src="esb/web/activityApplyManager/getActivityApplys.json" code="applyId" show="applyTitle" notNull="ture"/>
-			<youi:fieldSelect property="applyMember"  caption="报名人" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName" notNull="ture"/>
+			<youi:fieldSelect property="applyMember.memberId"  caption="报名人" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName" notNull="ture"/>
 			<youi:fieldCalendar property="applylistTime"  caption="报名时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="ture"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
 	<!--**********************************页面函数Start********************************-->
-	<youi:func name="renderer_applyMember" params="col,record">
+<%-- 	<youi:func name="renderer_applyMember" params="col,record">
  		var memberName = ""; 
 		$.youi.ajaxUtil.ajax({
 				url:'esb/web/memberInformationManager/getMemberInformation.json',
@@ -43,6 +43,6 @@
 				}
 			});
 		return memberName;
-	</youi:func>
+	</youi:func> --%>
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
