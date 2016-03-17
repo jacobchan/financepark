@@ -90,5 +90,5 @@ public interface PropertyservicemanagerOcManager extends BaseManager{
 	 * @param ocStatus
 	 * @throws BusException
 	 */
-	public void cancleOcStatus(String id)throws BusException;
+	public PropertyservicemanagerOc cancleOcStatus(String id)throws BusException;
 }
