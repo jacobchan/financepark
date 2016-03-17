@@ -3,6 +3,7 @@
  */
 package com.common.BuildingBaseManager.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -17,17 +18,22 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.common.BuildingBaseManager.entity.BbmBuilding;
 import com.common.BuildingBaseManager.entity.BbmPark;
 import com.common.BuildingBaseManager.dao.BbmBuildingDao;
 import com.common.BuildingBaseManager.service.BbmBuildingManager;
+import com.common.BuildingBaseManager.service.BbmParkManager;
 
 @Service("bbmBuildingManager")
 @Transactional
 public class BbmBuildingManagerImpl extends BaseManagerImpl implements BbmBuildingManager{
 	@Autowired
 	private BbmBuildingDao bbmBuildingDao;
+	@Autowired
+	private BbmParkManager bbmParkManager ;
 	
     /**
      * 查询列表
@@ -107,5 +113,26 @@ public class BbmBuildingManagerImpl extends BaseManagerImpl implements BbmBuildi
     public boolean exsitBbmBuilding(String propertyName,Object value) throws BusException{
 		return bbmBuildingDao.exists(propertyName,value);
 	}
-
+    
+    /**
+	 * 通过园区名称获取该园区所有的楼栋
+	 * @param parkName 园区名称
+	 * @return
+	 */
+	@Override
+	@EsbServiceMapping
+	public List<BbmBuilding> getAllBuildingByParkName(@ServiceParam(name="parkName") String parkName)
+			throws BusException {
+		List<BbmBuilding> list = null ;
+		if(StringUtils.isNotEmpty(parkName)){
+			BbmPark park = bbmParkManager.getBbmParkByParkName(parkName) ;
+			if(park != null){
+				String parkId = park.getParkId() ;//得到园区ID
+				Collection<Condition> condition =  new ArrayList<Condition>();
+	    		condition.add(ConditionUtils.getCondition("bbmPark.parkId", Condition.EQUALS,parkId));//创建查询条件
+				list = bbmBuildingDao.commonQuery(condition, null) ;
+			}
+		}
+		return list;
+	}
 }
