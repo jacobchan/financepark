@@ -100,7 +100,7 @@
 			<a href="javascript:;" class="tc-close"></a>
 			<div class="w60 tc mt40" style="margin-left:20%">
 				<div class="mt20 mb20 f16 lh26">
-					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o"> [ 123456789 ] </span>吗？
+					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o cosCode"> [ 123456789 ] </span>吗？
 				</div>
 				<p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p>
 				<input value="确定" class="hhf-submit" style="height:36px;" type="submit">
@@ -155,10 +155,37 @@
 				}else if(record[i].cosStatus=='6'){
 					status = "已完成";
 				}
-				var html="<tr><td>"+record[i].cosCode+"</td><td>"+record[i].cosTime+"</td><td>"+bool+"</td><td>"+record[i].cosName+"</td><td>"+record[i].cosTelephone+"</td><td>"+status+"</td><td><a href='javascript:;' class='ac-show'>"+crop+"</a></td></tr>";
+				var html="<tr id='"+record[i].cosId+"'><td>"+record[i].cosCode+"</td><td>"+record[i].cosTime+"</td><td>"+bool+"</td><td>"+record[i].cosName+"</td><td>"+record[i].cosTelephone+"</td><td>"+status+"</td><td><a href='javascript:;' onclick='javascript:cancel(this)' class='ac-show'>"+crop+"</a></td></tr>";
 				$("tbody").append(html);
 			}
 		};
+		
+		 function cancel(obj){
+				var me=obj.parentNode.parentNode;
+				var cosCode=me.childNodes[0].innerText;
+				$(".cosCode").html(cosCode);
+				$(".cosCode")[0].setAttribute("id",me.id);
+				$(".bg-tanc").show();
+			};
+	</script>
+	
+	<!-- 取消投诉 -->
+	<script type="text/javascript">
+	$(function(){
+		$(".hhf-submit").click(function(){
+				var id=$(".cosCode")[0].getAttribute("id");
+			 	$.youi.ajaxUtils.ajax({
+					url:'/smartPark-web/esb/web/propertyservicemanagerCosManager/updateCosforpage.json',
+					data:'cosId='+id,
+					success:function(result){
+						if(result&&result.record){
+							alert("取消成功!");		
+							location.reload();
+						}
+					}
+				});
+			});
+		});
 	</script>
 </body>
 <%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 
