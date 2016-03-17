@@ -10,11 +10,13 @@ import java.util.Collection;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.dataobj.tree.TreeNode;
 //import com.gsoft.framework.security.DefaultLoginFormToken;
 //import com.gsoft.framework.security.IAgency;
@@ -152,14 +154,14 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
     /**
 	 * 用户注册
 	 * @param passwd 密码
+	 * @param passwd 重复密码
 	 * @param mobile 手机号
 	 * @throws BusException
 	 */
     @EsbServiceMapping
-	public void saveReister(@ServiceParam(name="memberPassword") String passwd,
+	public MemberInformation saveReister(@ServiceParam(name="memberPassword") String passwd,@ServiceParam(name="repasswd") String repasswd,
 			@ServiceParam(name="memberPhoneNumber") String mobile)
 			throws BusException {
-    	System.out.println("this is no error");
 			//新增用户
 			//判断用户密码是否准确
 			//if (!passwd.equals(repasswd))
@@ -172,33 +174,57 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 //				user.setGroup("003");
 //				User saveuser = userManager.saveUser(user);
 			//保存用户同时insert youi_user
+    			TempDemo td = this.exsitMobile(mobile) ;
+    			if(td.isFlag()){//为true表明手机号已经注册
+    				throw new BusException("此手机号已经注册了！") ;
+    			}
+    			if("".equals(passwd)){
+    				throw new BusException("密码不能为空！") ;
+    			}
+    			if("".equals(repasswd)){
+    				throw new BusException("确认密码不能为空！") ;
+    			}
+    			if(passwd.length() < 6){
+    				throw new BusException("密码长度不能小于6！") ;
+    			}
+    			if(passwd.length() > 16){
+    				throw new BusException("密码长度不能大于16！") ;
+    			}
+    			if(!passwd.equals(repasswd)){
+    				throw new BusException("两次密码输入不一致！") ;
+    			}
+    			
 				MemberInformation memberInformation = new MemberInformation();
 				memberInformation.setMemberName(mobile);
 				memberInformation.setMemberPassword(PasswordUtils.md5Password(passwd));
 				memberInformation.setMemberPhoneNumber(mobile);
-				memberInformationDao.save(memberInformation);
-				try {
+				MemberInformation member = memberInformationDao.save(memberInformation);
+				try {//发送短信
 					HttpSenderMsg.sendMsg(memberInformation.getMemberPhoneNumber(), "尊敬的用户，您已经在富春硅谷平台上注册成功了！欢迎使用！");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				return member ;
 	}
     
     /**
-	 * 判断手机号是否已经注册
-	 * @param mobile 注册手机号
-	 * @return
-	 */
-    @Override
-    @EsbServiceMapping
-    public String exsitMobile(@ServiceParam(name="memberPhoneNumber") String mobile) {
-    	//判断该用户是否存在
-    	MemberInformation memberInformationed = memberInformationDao.getObjectByUniqueProperty("memberPhoneNumber", mobile);
-    	if(memberInformationed != null){//存在返回true
-    		return "true" ;
-    	}
-    	return "false";
-    }
+  	 * 判断手机号是否已经注册
+  	 * @param mobile 注册手机号
+  	 * @return
+  	 */
+      @Override
+      @EsbServiceMapping
+      public TempDemo exsitMobile(@ServiceParam(name="memberPhoneNumber") String mobile) {
+      	//判断该用户是否存在
+      	TempDemo td = new TempDemo() ;//new 一个自定义对象
+      	MemberInformation memberInformationed = memberInformationDao.getObjectByUniqueProperty("memberPhoneNumber", mobile);
+      	if(memberInformationed != null){//存在，则将td中的flag设为true
+      		td.setFlag(true);
+      	}else{
+      		td.setFlag(false);
+      	}
+      	return td;
+      }
     
     /**
 	 * 获取用户基本信息
