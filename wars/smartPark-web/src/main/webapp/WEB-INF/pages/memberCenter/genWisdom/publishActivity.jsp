@@ -123,54 +123,7 @@
 
 						<div class="clearfix show undis">
 							<div class="clearfix czh-knowledge mt30">
-	                            <a href=""><div class="czh-box">
-	                                <img src="<%=request.getContextPath()%>/styles/images/czh/list-5.jpg">
-	                                <div class="czh-group" style="border-bottom:1px solid #ecebeb">
-	                                    <h4>UI设计-VIP课堂【云中帆教育】</h4>
-	                                    <span>月观看人数：12</span>
-	                                    <span class="fr">创智讲堂</span>
-	                                </div>
-	                                <div class="czh-group">
-	                                    <font class="cg-soan-btn">PPT</font>
-	                                </div>
-	                                <div class="new">NEW</div>
-	                            </div></a>
-	                            <a href=""><div class="czh-box">
-	                                <img src="<%=request.getContextPath()%>/styles/images/czh/list-5.jpg">
-	                                <div class="czh-group" style="border-bottom:1px solid #ecebeb">
-	                                    <h4>UI设计-VIP课堂【云中帆教育】</h4>
-	                                    <span>月观看人数：12</span>
-	                                    <span class="fr">创智讲堂</span>
-	                                </div>
-	                                <div class="czh-group">
-	                                    <font class="cg-soan-btn">PPT</font>
-	                                </div>
-	                                <div class="new">NEW</div>
-	                            </div></a>
-	                           <a href=""><div class="czh-box">
-	                                <img src="<%=request.getContextPath()%>/styles/images/czh/list-5.jpg">
-	                                <div class="czh-group" style="border-bottom:1px solid #ecebeb">
-	                                    <h4>UI设计-VIP课堂【云中帆教育】</h4>
-	                                    <span>月观看人数：12</span>
-	                                    <span class="fr">创智讲堂</span>
-	                                </div>
-	                                <div class="czh-group">
-	                                    <font class="cg-soan-btn">PPT</font>
-	                                </div>
-	                                <div class="new">NEW</div>
-	                            </div></a>
-	                            <a href=""><div class="czh-box">
-	                                <img src="<%=request.getContextPath()%>/styles/images/czh/list-5.jpg">
-	                                <div class="czh-group" style="border-bottom:1px solid #ecebeb">
-	                                    <h4>UI设计-VIP课堂【云中帆教育】</h4>
-	                                    <span>月观看人数：12</span>
-	                                    <span class="fr">创智讲堂</span>
-	                                </div>
-	                                <div class="czh-group">
-	                                    <font class="cg-soan-btn">PPT</font>
-	                                </div>
-	                                <div class="new">NEW</div>
-	                            </div></a>
+	                           
 	                        </div>
 						</div>
 						<div class="clearfix show undis">
@@ -248,9 +201,19 @@
 			url:'/smartPark-web/esb/web/activityApplyManager/getPublishActivityComments.json',
 			data:params.join('&'),
 			success:function(result){
-				console.log(result);
 				if(result&&result.records){
 					_parseApplyComments(result.records);
+				}
+			}
+		});	
+		//文档库
+		$.ajax({
+			url:'/smartPark-web/esb/web/activityApplyManager/getPublishActivityDocuments.json',
+			data:params.join('&'),
+			success:function(result){
+				console.log(result);
+				if(result&&result.records){
+					_parseApplyDocuments(result.records);
 				}
 			}
 		});	
@@ -277,7 +240,7 @@
 	        			"<a href='javascript:;' class='tc-close dialog-close'></a>"+
 	        			"<div class='fl'>"+
 	            			"<img src='<%=request.getContextPath()%>/styles/images/grzx/sl-i2.png' border='0' height='59' width='59'/>"+
-	                		"<span class='pl15'>斯大林</span>"+
+	                		"<span class='pl15'>"+record[i].commentMember.memberName+"</span>"+
 	           			"</div>"+
 	            		"<div class='dialog-box clearfix pr'>"+
 	            			"<a class='a-c-o com_btn' href='javascript:;'>回复</a>"+
@@ -297,6 +260,29 @@
 		};
 		$(".applyComments").empty();
 		$(".applyComments").append(html);
+	};
+	
+	//拼接文档库
+	function _parseApplyDocuments(record){
+		var html="";
+		for(var i=0;i<record.length;i++){
+			var documentName=record[i].documentName;
+			var dn=documentName.split('.');
+			  html+="<a href='javascript:;' id="+record[i].documentId+"><div class='czh-box'>"+
+		              "<img src='<%=request.getContextPath()%>/styles/images/czh/list-5.jpg'>"+
+		              "<div class='czh-group' style='border-bottom:1px solid #ecebeb'>"+
+		                 "<h4>"+dn[0]+"</h4>"+
+		                 "<span>月观看人数：12</span>"+
+		                 "<span class='fr'>创智讲堂</span>"+
+		              "</div>"+
+		              "<div class='czh-group'>"+
+		                "  <font class='cg-soan-btn'>"+dn[1]+"</font>"+
+		              "</div>"+
+		              "<div class='new'>NEW</div>"+
+		          	"</div></a>";
+		}
+		$(".clearfix.czh-knowledge.mt30").empty();
+		$(".clearfix.czh-knowledge.mt30").append(html);
 	}
 	</script>
 </body>
