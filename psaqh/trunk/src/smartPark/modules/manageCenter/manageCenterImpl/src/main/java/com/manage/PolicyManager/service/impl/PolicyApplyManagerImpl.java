@@ -241,9 +241,17 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
        @EsbServiceMapping
     public PolicyApply updatePolicyApplyStatus(
         	@ServiceParam(name="policyApplyId") String policyApplyId) throws BusException{   	
-       PolicyApply psm = policyApplyDao.get(policyApplyId);  
-       psm.setPolicyApplyStatus("0");
-       return policyApplyDao.save(psm);
+       PolicyApply p = policyApplyDao.get(policyApplyId);  
+       String applyStatus=p.getPolicyApplyStatus();
+       if(applyStatus.equals("1")){
+    	   p.setPolicyApplyStatus("0");
+    	   return policyApplyDao.save(p);
+       }  else{
+    	   
+    	   return null;
+       }
+	    
+       
         }				
 	}
 
