@@ -27,6 +27,7 @@ import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
 import com.gsoft.utils.HttpSenderMsg;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerOc;
 import com.manage.ActivityManager.entity.ActivityApply;
 import com.manage.ActivityManager.entity.ActivityApplylist;
@@ -179,14 +180,14 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
      * @return
      * @throws BusException
      */
-    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",pubProperty="userId")})
+    /*@EsbServiceMapping(pubConditions={@PubCondition(property="createUser",pubProperty="userId")})
 	public List<PropertyservicemanagerOc> getPropertyservicemanagerOcListByLoginUser(PropertyservicemanagerOc o) throws BusException {
     	//获取当前登录用户id
-    	String id = o.getMemberId();
+    	String id = o.getCreateUser();
     	if(id!=null){
 	    	//获取当前用户参加活动的list
 	    	Collection<Condition> condition = new ArrayList<Condition>();
-	    	condition.add(ConditionUtils.getCondition("memberId", Condition.EQUALS, id));
+	    	condition.add(ConditionUtils.getCondition("createUser", Condition.EQUALS, id));
 	    	List<PropertyservicemanagerOc> list = propertyservicemanagerOcDao.commonQuery(condition, null);
 	    	if(list.size()>0){
 	    		return list;
@@ -196,18 +197,25 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
     	}else{
     		return null;
     	}
+	}*/
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId")})
+    public List<PropertyservicemanagerOc> getPropertyservicemanagerOcListByLoginUser(PropertyservicemanagerOc o)
+			throws BusException {
+		//获取当前登录用户id
+		String id = o.getCreateUser();		
+		List<PropertyservicemanagerOc> list=propertyservicemanagerOcDao.getList("memberId", id);		
+		return list;
 	}
     /**
-     * 修改一卡通绑定状态
+     * 一卡通解绑
      * @return
      * @throws BusException
      */
    @EsbServiceMapping
     public PropertyservicemanagerOc updateBindStatus(PropertyservicemanagerOc p) throws BusException{   	
-	   String ocId = p.getOcId();
-	   String bindStatus = p.getBindStatus();
+	   String ocId = p.getOcId();	   
 	   PropertyservicemanagerOc psm = propertyservicemanagerOcDao.get(ocId);    		
-       psm.setBindStatus(bindStatus);
+       psm.setBindStatus("0");
 	   return propertyservicemanagerOcDao.save(psm);    		
     }
    /**
@@ -221,7 +229,7 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 		   @ServiceParam(name="bindStatus") String  bindStatus)
 			throws BusException {											
 	   PropertyservicemanagerOc psm = propertyservicemanagerOcDao. getObjectByUniqueProperty("ocNumber", ocNumber);   		
-       psm.setBindStatus(bindStatus);
+       psm.setBindStatus("1");
 	   return propertyservicemanagerOcDao.save(psm);    		
    }
 }
