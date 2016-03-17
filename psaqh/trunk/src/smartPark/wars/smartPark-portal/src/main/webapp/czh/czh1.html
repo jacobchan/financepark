@@ -243,5 +243,56 @@
 	        sbysf_scroll_down();
 	    });
 	</script>
+		<script type="text/javascript">
+	$(function(){
+		var serviceURL = baseUrl+"activityApplyManager/getActivityListByType.json?type=00";		
+		$.youi.ajaxUtils.ajax({
+			url:serviceURL,
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(results){
+				console.log(results);
+				if(results&&results.records){
+				_parseRecords(results.records);
+				}
+			}
+		});		
+	});
+	function _parseRecords(record){
+		var html='';
+		for(var i=0;i<record.length;i++){
+			html+="<li class='clearfix'>"+
+						"<div class='plg-photo'>"+
+						"<a href='#'><img src='../filestore/"+record[i].activityImage+"' width='288' height='195' border='0' width='100%'/></a>"+
+						"<em>创智游学</em>"+
+					"</div>"+
+					"<div class='plg-article pr' id='"+record[i].applyId+"'>"+
+						"<a href='../czh/czh3.html'><h3>"+record[i].applyTitle+"</h3></a>"+
+						"<p>"+record[i].commentContent+"</p>"+
+						"<div class='lh22 mt5 f12' style='color:#b1b1b1'>"+
+							"<span class='mr20'><img src='../styles/images/czh/clock.png' border='0' class='mr10'>"+record[i].startTime+"</span>"+
+							"<span><img src='../styles/images/czh/user.png' border='0' class='mr10'>发布人："+record[i].memberId.memberName+"</span><br/>"+
+							"<span><img src='../styles/images/czh/map.png' border='0' class='mr10'>杭州市富春硅谷园区公共会议室</span>"+
+						"</div>"+
+						"<a href='javascript:;' onclick='redirectPagePDF(this)'; class='a-c-g'>在线观看PDF/PPT <img src='../styles/images/czh/more.png'></a>"+
+						"<a  href='javascript:;' onclick='redirectPage(this)'; class='ib-btn'>我要报名</a>"+
+					"</div>"+
+				"</li>";
+		}
+		$('.pb-list-group').empty();
+		$('.pb-list-group').append(html);
+	};
+	function redirectPage(obj){
+		var applyId=obj.parentNode.id;
+		var url="../czh/czh3.html"+"?"+"applyId="+applyId; 
+		window.location.assign(url); 
+	}
+	function redirectPagePDF(obj){
+		var applyId=obj.parentNode.id;
+		var url="../czh/czh7.html"+"?"+"applyId="+applyId; 
+		window.location.assign(url); 
+	}
+	
+	</script>
 </body>
 </html>

@@ -36,7 +36,7 @@
 				<a href=""><span class="current">文档详情</span></a>
 			</div>
 			<div class="fl w900">				
-				<h3 class="f24 h40 mb10">传统企业互联网化方法论</h3>
+				<h3 class="f24 h40 mb10 documentName">传统企业互联网化方法论</h3>
 				<div class="clearfix text-header mb20">
 					<span><img src="../styles/images/czh/logo.png" border="0" height="29" width="90"></span>
 					<span><img src="../styles/images/czh/user-l.png" border="0" class="mr20">主讲人：刘海峰</span>
@@ -148,5 +148,31 @@
 	<!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
+		<script type="text/javascript">
+		$(function(){
+			var url=location.href; 
+			var tmp1=url.split("?")[1];  
+			var tmp2=tmp1.split("=")[1]; 
+			var applyId=tmp2;
+			var serviceURL = baseUrl+"activityApplyManager/getPublishActivityDocuments.json";
+			var params = ['applyId='+applyId];
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(results){
+					console.log(results);
+					if(results&&results.records){
+					_parseRecords(results.records);
+					}
+				}
+			});		
+		});
+		//活动详情赋值
+		function _parseRecords(record){
+			$(".documentName").html(record[0].documentName);
+		}
+	</script>
 </body>
 </html>

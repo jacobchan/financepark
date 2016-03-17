@@ -25,19 +25,19 @@
 				<a href=""><span class="current">活动详情页</span></a>
 			</div>
 			<div class="clearfix mb20">
-				<img src="../styles/images/czh/list-2.jpg" width="470" height="272" border="0" class="fl"/>
+				<img src="../styles/images/czh/list-2.jpg" width="470" height="272" border="0" class="fl activityImage"/>
 				<div class="fr">
-					<h3 class="h-bg">【报名倒计1天】参加创业松鼠！54小时碰撞创业火花</h3>
+					<h3 class="h-bg"></h3>
 					<div class="lh40 mt10 f14" style="color:#898989">
-						<span class="mr20"><img src="../styles/images/czh/clock-l.png" border="0" class="mr10">2015-11-10</span>
-						<span><img src="../styles/images/zs/map.png" border="0" class="mr10">杭州市富春硅谷园区公共会议室</span><br/>
-						<span><img src="../styles/images/czh/user-l.png" border="0" class="mr10">发布人：小周</span>
+						<span class="mr20"><img src="../styles/images/czh/clock-l.png" border="0" class="mr10"><span class="time"></span></span>
+						<span><img src="../styles/images/zs/map.png" border="0" class="mr10"><span class="address">杭州市富春硅谷园区公共会议室</span></span><br/>
+						<span><img src="../styles/images/czh/user-l.png" border="0" class="mr10"><span class="name"></span></span>
 						
 					</div>
 					<div class="tel-bd clearfix">
 						<img src="../styles/images/czh/logo.png" width="90" height="29" border="0" />
 						<span>联系电话：</span>
-						<i>15811703441</i>
+						<i class="phoneNumber"></i>
 					</div>
 					<div class="clearfix pt20">
 						<a href="javascript:;" class="a-c a-c-o">我要报名</a>
@@ -150,6 +150,35 @@
 				$(".bg-tanc").show();
 			});
 		});
+		$(function(){
+			var url=location.href; 
+			var tmp1=url.split("?")[1];  
+			var tmp2=tmp1.split("=")[1]; 
+			var applyId=tmp2;
+			var serviceURL = baseUrl+"activityApplyManager/getActivityApply.json";
+			var params = ['applyId='+applyId];
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(results){
+					if(results&&results.record){
+					_parseRecords(results.record);
+					}
+				}
+			});		
+		});
+		//活动详情赋值
+		function _parseRecords(record){
+			$(".activityImage").attr("src","../filestore/"+record.activityImage);
+			$(".h-bg").html(record.applyTitle);
+			$(".time").html(record.startTime);
+			//$(".address").html();
+			$(".name").html("发布人："+record.memberId.memberName);
+			$(".phoneNumber").html(record.memberId.memberPhoneNumber);
+			$(".bd-box").html(record.commentContent);
+		}
 	</script>
 </body>
 </html>
