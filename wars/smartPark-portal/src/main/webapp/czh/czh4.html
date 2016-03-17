@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/newscom.js"></script>
+	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 	<script type="text/javascript">
 		$(function () {
 			$(".park-nav li").click(function(){
@@ -42,7 +43,7 @@
 				</div>
 				<div class="park-box">
 					<ul class="pb-list-group">
-						<li>
+						<!-- <li>
 							<div class="plg-photo">
 								<a href="#"><img src="../styles/images/zs/big-nav-img1.png" border="0" width="100%"/></a>
 							</div>
@@ -273,7 +274,7 @@
 									<span><img src="../styles/images/zs/clock.png" border="0">2015-08-12 05:00至2015-12-12 24:00</span>
 								</h5>
 							</div>
-						</li>
+						</li>-->
 					</ul>
 				</div>
 			</div>	
@@ -283,5 +284,46 @@
 	<!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
+	<script type="text/javascript">
+	$(function(){
+		var serviceURL = baseUrl+"activityApplyManager/getActivityListByType.json?type=00";		
+		$.youi.ajaxUtils.ajax({
+			url:serviceURL,
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(results){
+				if(results&&results.records){
+				_parseRecords(results.records);
+				}
+			}
+		});		
+	});
+	function _parseRecords(record){
+		var html='';
+		for(var i=0;i<record.length;i++){
+			html+="<li>"+
+						"<div class='plg-photo'>"+
+							"<a href='#'><img src='../filestore/"+record[i].activityImage+"' border='0' width='100%''/></a>"+
+						"</div>"+
+						"<div class='plg-article'>"+
+							"<a href='javascript:;' onclick='redirectPage(this);' id='"+record[i].applyId+"'><h3>"+record[i].applyTitle+"</h3></a>"+
+							"<p>"+record[i].commentContent+"</p>"+
+							"<h5>"+
+								"<span><img src='../styles/images/zs/map.png' border='0'>杭州市</span>"+
+								"<span><img src='../styles/images/zs/user.png' border='0'>限制人数"+record[i].applyMaxuser+"人</span>"+
+								"<span><img src='../styles/images/zs/clock.png' border='0'>"+record[i].startTime+"至"+record[i].endTime+"</span>"+
+							"</h5>"+
+						"</div>"+
+					"</li>";
+		}
+		$('.pb-list-group').empty();
+		$('.pb-list-group').append(html);
+	}
+	function redirectPage(obj){
+		var applyId=obj.id;
+		var url="../czh/czh3.html"+"?"+"applyId="+applyId; 
+		window.location.assign(url); 
+	}
+	</script>	
 </body>
 </html>
