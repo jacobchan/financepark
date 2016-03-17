@@ -86,4 +86,11 @@ public interface PropertyservicemanagerBxManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public List<Record> getBxcodemapforpage(PropertyservicemanagerBx o) throws BusException;
+	/**
+	 * 前台用户发起报修单更改
+	 * @param bxId 报修单id
+	 * @return
+	 * @throws BusException
+	 */
+	public PropertyservicemanagerBx updateBxforpage(String bxId) throws BusException;
 }
