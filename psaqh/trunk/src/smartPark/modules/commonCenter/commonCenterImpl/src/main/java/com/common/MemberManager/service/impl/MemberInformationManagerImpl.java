@@ -18,19 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.dataobj.tree.TreeNode;
-//import com.gsoft.framework.security.DefaultLoginFormToken;
-//import com.gsoft.framework.security.IAgency;
-//import com.gsoft.framework.security.IRealmUserInfo;
-//import com.gsoft.framework.security.IRealmUserToken;
-//import com.gsoft.framework.security.IUser;
-//import com.gsoft.framework.security.IUserAdapter;
-//import com.gsoft.framework.security.agt.entity.User;
-//import com.gsoft.framework.security.agt.service.UserLoginService;
-//import com.gsoft.framework.security.agt.service.UserManager;
-//import com.gsoft.framework.core.dataobj.tree.TreeNode;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
-//import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
@@ -53,9 +42,11 @@ import com.gsoft.utils.HttpSenderMsg;
 //import com.gsoft.framework.core.web.menu.IMenu;
 //import com.sun.star.setup.OSType;
 import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.entity.MemberRole;
 import com.common.MemberManager.entity.MemberUserInfo;
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.service.MemberInformationManager;
+import com.common.MemberManager.service.MemberRoleManager;
 
 @Service("memberInformationManager")
 @Transactional
@@ -63,8 +54,8 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 ,UserLoginService<MemberInformation>,IUserAdapter<MemberInformation,DefaultLoginFormToken>,Ordered{
 	@Autowired
 	private MemberInformationDao memberInformationDao;
-//	@Autowired
-//	private UserManager userManager;
+	@Autowired
+	private MemberRoleManager memberRoleManager;
     /**
      * 查询列表
      */
@@ -86,7 +77,10 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
      */
     @EsbServiceMapping
     public MemberInformation getMemberInformation(@ServiceParam(name="memberId") String id)  throws BusException{
-    	return memberInformationDao.get(id);
+    	MemberInformation member = memberInformationDao.get(id);
+    	List<String> memberRoles = memberRoleManager.getRolesByMemberId(id);
+    	member.setRoleIds(memberRoles);
+    	return member;
     }
 	
 	@EsbServiceMapping
@@ -122,7 +116,11 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setUpdateUser(userName);
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-        	return memberInformationDao.save(o);
+    		
+        	MemberInformation member = memberInformationDao.save(o);
+        	//添加默认角色
+			this.setDefaultRole(member.getMemberId());
+        	return member;
     	}
     }
 
@@ -199,6 +197,8 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 				memberInformation.setMemberPassword(PasswordUtils.md5Password(passwd));
 				memberInformation.setMemberPhoneNumber(mobile);
 				MemberInformation member = memberInformationDao.save(memberInformation);
+				//添加默认角色
+				this.setDefaultRole(member.getMemberId());
 				try {//发送短信
 					HttpSenderMsg.sendMsg(memberInformation.getMemberPhoneNumber(), "尊敬的用户，您已经在富春硅谷平台上注册成功了！欢迎使用！");
 				} catch (Exception e) {
@@ -206,6 +206,17 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 				}
 				return member ;
 	}
+    
+    /**
+     * 添加会员的默认角色 默认会员角色 ROLE_MEMBER
+     * @param memberId 会员用户ID
+     */
+    private void setDefaultRole(String memberId){
+    	MemberRole memberRole = new MemberRole();
+    	memberRole.setMemberId(memberId);
+    	memberRole.setRoleId("ROLE_MEMBER");
+    	this.memberRoleManager.saveMemberRole(memberRole);
+    }
     
     /**
   	 * 判断手机号是否已经注册
@@ -266,6 +277,10 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		//因为2，登录类型是从哪里获取的？
 		String memberName = token.getUsername();
 		MemberInformation member = this.memberInformationDao.getObjectByUniqueProperty("memberName", memberName);
+//		Collection<Condition> conditions = new Collection<Condition>();
+//		conditions.add(Condition.)
+		List<String> roles = memberRoleManager.getRolesByMemberId(member.getMemberId()); 
+		member.setRoleIds(roles);
 		member.getPrincipalConfig().put("userId", member.getMemberId());
 		member.getPrincipalConfig().put("loginType", token.getLoginType());
 		return new MemberUserInfo(member);
