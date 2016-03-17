@@ -9,9 +9,11 @@
 				removeSrc="esb/web/nmIssuenewsManager/removeNmIssuenews.json">
 		<youi:fieldLayout columns="2" labelWidths="100,100">
 			<%-- <youi:fieldTree property="parentIssueTypeId" caption="上级发布类型" tree="${typeTree}" simple="false"/> --%>
+			
 			<youi:fieldText property="policyCaption"  caption="政策名称" operator="LIKE"/>
-			<youi:fieldSelect property="policyType.issueTypeId" caption="发布类型" 
-				src="esb/web/nmIssuetypeManager/getNmIssuetypes.json" code="issueTypeId" show="issueTypeCaption"/>
+			<youi:fieldTree property="policyType.issueTypeId" caption="发布类型" tree="${typeTree}" simple="false"/>
+			<%-- <youi:fieldSelect property="policyType.issueTypeId" caption="发布类型" 
+				src="esb/web/nmIssuetypeManager/getNmIssuetypes.json" code="issueTypeId" show="issueTypeCaption"/> --%>
 			<youi:fieldSelect property="nmIssuetempalate.issueTempalateId" caption="发布模板" 
 				src="esb/web/nmIssuetempalateManager/getNmIssuetempalates.json" code="issueTempalateId" show="issueTempalateCaption" />
 			<youi:fieldSelect property="policyStatus"  caption="政策发布状态" convert="policyStatus"/>
@@ -38,11 +40,12 @@
 		<youi:fieldLayout prefix="record" columns="2" labelWidths="120,120">
 			<youi:fieldHidden property="policyId"  caption="政策ID"/>
 			<youi:fieldText property="policyCaption"  caption="政策名称"  notNull="true"/>
-			<youi:fieldSelect property="policyType.issueTypeId" caption="发布类型" notNull="true"
-				src="esb/web/nmIssuetypeManager/getNmIssuetypes.json" code="issueTypeId" show="issueTypeCaption"/>
-			<youi:fieldSelect property="nmIssuetempalate.issueTempalateId" caption="发布模板" notNull="true"
+			<%-- <youi:fieldSelect property="policyType.issueTypeId" caption="发布类型" notNull="true"
+				src="esb/web/nmIssuetypeManager/getNmIssuetypes.json" code="issueTypeId" show="issueTypeCaption"/> --%>
+			<youi:fieldTree property="policyType.issueTypeId" caption="发布类型" tree="${typeTree}" simple="false" notNull="true"/>
+			<youi:fieldSelect property="nmIssuetempalate.issueTempalateId" caption="发布模板" 
 				src="esb/web/nmIssuetempalateManager/getNmIssuetempalates.json" code="issueTempalateId" show="issueTempalateCaption" />
-			<youi:fieldSelect property="policyStatus"  caption="政策发布状态" convert="policyStatus" notNull="true"/>
+			<youi:fieldSelect property="policyStatus"  caption="政策发布状态" convert="policyStatus" />
 			<youi:fieldText property="policyCome"  caption="政策发布人"/>
 			<youi:fieldCalendar property="policyIssueDate"  caption="政策发布时间"/>
 			<youi:fieldArea property="policyContent"  caption="政策内容" column="2" rows="4" />
