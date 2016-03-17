@@ -88,7 +88,7 @@
                 </div>
                 <div class="mt25">
                     <div class="inline_b">
-                        <label><span class="cc vm">*</span>&nbsp;联系邮箱</label>
+                        <label>&nbsp;&nbsp;&nbsp;联系邮箱</label>
                         <input type="text"/>
                     </div>
                     <div class="inline_b ml40">
@@ -172,7 +172,7 @@
 				disCertainDate : numArray
 			});
 		}
-	});
+	}); 
 </script>
 <script>
 	$(function() {
@@ -217,7 +217,7 @@
 			//获取初始化已预订日期的预约状态主键集合
 			var resoIds = $("#resoIds").html();
 			var resoIdArray = resoIds.substring(0, resoIds.length-1);
-			alert(resoIdArray);
+			//alert(resoIdArray);
 			$(".pop_layer").show();
 		});
 		$(".close0").click(function() {
@@ -234,26 +234,37 @@
 
 							var arr = new Array();
 							$("#calendar .today").each(function() {
-								var ids = $(this).attr("id");
-								ids = ids.substr(9);
-								arr.push(ids);
+								if($(this).attr("id")!=undefined){
+									var ids = $(this).attr("id");
+								var idss=ids.substring(ids.indexOf("-")+1, ids.lastIndexOf("-"));
+								if(idss.length==1){
+									var y=ids.substring(9,ids.indexOf("-"));
+									var m=idss;
+									var d=ids.substring(ids.lastIndexOf("-")+1,ids.length);
+									ids = y+"-0"+m+"-"+d;
+									arr.push(ids);
+								}else{
+									ids = ids.substr(9);
+									arr.push(ids);
+								}
+									
+									
+								}
 							});
 
 							if (arr.length > 0) {
 								var userorderAmount = $('#commodityPrice')
 										.text();
-								arr = [ '40288ab553647ad3015364a4b8450021',
-										'40288ab553647ad3015364a2e1e6001d' ];
 								var string = "";
 								for (var i = 0; i < arr.length; i++) {
-									string += "records[" + i + "].resoId="
+									string += "records[" + i + "].resoDate="
 											+ arr[i] + "&";
 								}
-								string += "userorderAmount=" + userorderAmount;
-
+								string += "userorderAmount=" + userorderAmount+"&"+"commodityId="+commodityId;
+								
 								var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/savePublicResoOrderByList.json";
 								//公共方法
-								$.youi.ajaxUtils.ajax({
+							  $.youi.ajaxUtils.ajax({
 									url : serviceURL,
 									data : string,
 									jsonp : 'data:jsonp',
@@ -262,9 +273,10 @@
 										if (result && result.record) {
 											alert("预约成功");
 											$(".pop_layer").hide();
+											window.location="carLeasexq.html?id="+commodityId;
 										}
 									}
-								});
+								});  
 							} else {
 								alert("请选择预约日期和时间段");
 							}

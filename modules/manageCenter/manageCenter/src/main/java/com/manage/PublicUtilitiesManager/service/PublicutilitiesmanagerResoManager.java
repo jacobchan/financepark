@@ -85,10 +85,10 @@ public interface PublicutilitiesmanagerResoManager extends BaseManager{
      * 前台页面：用户预约公共资源,保存对象
      *  @param List<PublicutilitiesmanagerReso> o  公共资源列表
      */
-	 public List<PublicutilitiesmanagerReso> savePublicutilitiesmanagerResoList(List<PublicutilitiesmanagerReso> o) throws BusException;
+	 public List<PublicutilitiesmanagerReso> savePublicutilitiesmanagerResoList(List<PublicutilitiesmanagerReso> o,String commodityId) throws BusException;
 	 
 	 
-	 public OrdermanagerUserorder savePublicResoOrderByList(String userorderAmount,List<PublicutilitiesmanagerReso> publicResoList) throws BusException;
+	 public OrdermanagerUserorder savePublicResoOrderByList(String userorderAmount,String commodityId,List<PublicutilitiesmanagerReso> publicResoList) throws BusException;
 	 /**
 	 /**
 	  * 取消订单
