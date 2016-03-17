@@ -6,6 +6,7 @@ package com.common.MemberManager.service;
 import java.util.List;
 import java.util.Collection;
 
+import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -71,14 +72,14 @@ public interface MemberInformationManager extends BaseManager{
 	 * @param mobile 手机号
 	 * @throws BusException
 	 */
-	public void saveReister(String passwd,String mobile) throws BusException;
+	public MemberInformation saveReister(String passwd,String repasswd,String mobile) throws BusException;
 	
 	/**
 	 * 判断手机号是否已经注册
 	 * @param mobile 注册手机号
 	 * @return
 	 */
-	public String exsitMobile(String mobile) ;
+	public TempDemo exsitMobile(String mobile) ;
 	  /**
 		 * 获取用户基本信息
 		 * @param user 登陆用户名
