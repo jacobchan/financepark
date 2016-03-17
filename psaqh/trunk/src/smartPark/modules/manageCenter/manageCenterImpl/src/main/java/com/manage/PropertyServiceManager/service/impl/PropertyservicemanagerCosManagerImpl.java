@@ -155,4 +155,27 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
 	    	return propertyservicemanagerCosDao.save(psm);
     		
     }
+   
+   /**
+    * 前台修改订单
+    * @param cosId
+    * @return
+    * @throws BusException
+    */
+ @SuppressWarnings("unused")
+@EsbServiceMapping
+   public PropertyservicemanagerCos updateCosforpage(@ServiceParam(name="cosId") String cosId) throws BusException{
+	   PropertyservicemanagerCos psm = propertyservicemanagerCosDao.get(cosId);
+	   String cosStatus = psm.getCosStatus();
+	   if(psm!=null){
+		   //取消投诉 
+		   if(cosStatus.equals("0")||cosStatus.equals("1")||cosStatus.equals("2")){
+			   psm.setCosStatus("3");
+			   psm.setUpdateTime("yyyy-MM-dd HH:mm:ss");
+		   }
+			return propertyservicemanagerCosDao.save(psm);
+	   }else{
+		   throw new BusException("未查询到投诉记录，如有疑问请与客服人员联系");
+	   } 
+   }
 }

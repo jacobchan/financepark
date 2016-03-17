@@ -95,4 +95,12 @@ public interface PropertyservicemanagerCosManager extends BaseManager{
     		 String cosId,
     		 String cosStatus
     		) throws BusException;	
+    /**
+     * 前台修改订单
+     * @param cosId
+     * @return
+     * @throws BusException
+     */
+    public PropertyservicemanagerCos updateCosforpage(String cosId) throws BusException ;    	 	
+  
 }
