@@ -60,18 +60,11 @@
 
 	<script type="text/javascript">
 
-	function apply(id){	
-		if (window.confirm("您确定要取消吗?")) {
-			return true;
-			}else{
-			return false;
-			}
-		var policyApplyStatus='2';
-		var policyApplyId=id;
-		var params = ['policyApplyId='+policyApplyId+'','policyApplyStatus='+policyApplyStatus+''];
+	function apply(id){			
+		var policyApplyId=id;	
 	     $.ajax({
 			url:'/smartPark-web/esb/web/policyApplyManager/updatePolicyApplyStatus.json',
-			 data:params.join('&'),
+			data:'policyApplyId='+policyApplyId,
 	 		success:function(result){
 				if(result&&result.record){					
 					alert("已取消");
@@ -85,9 +78,9 @@
 			$.ajax({
 				
 				url:'/smartPark-web/esb/web/policyApplyManager/getPolicyApplyListByLoginUser.json',
-		//		url:'/smartPark-web/esb/web/policyApplyManager/getPolicyApplys.json',
+//				url:'/smartPark-web/esb/web/policyApplyManager/getPolicyApplys.json',
 				success:function(result){	
-					confirm(111);
+					
 					console.log(result.records);
 					if(result&&result.records){					
 						_parseRecords(result.records);						
@@ -105,15 +98,15 @@
 					status = "已受理";
 				}else if(record[i].policyApplyStatus=='2'){
 					status = "已取消";
-				}
+				} 
 				var html= "<tr>"+
 					      "<td width='111'>"+record[i].policyId+"</td>"+
-                           "<td width='111'>"+record[i].nmIssuenews.policyType+"</td>"+
+                          "<td width='111'>"+record[i].nmIssuenews.policyCaption+"</td>"+
                           "<td width='111'>"+record[i].policyApplyContactPeople+"</td>"+
                           "<td width='111'>"+record[i].createTime+"</td>"+
                           "<td width='111'>"+record[i].nmIssueflow.issueFlowCStatus+"</td>"+
                           "<td width='111'>"+status+"</td>"+                          
-                          "<td > <input type='button' value='取消'   onclick='apply("+record[i].policyApplyId+")' />"+                                   
+                          "<td > <input type='button' value='取消'   onclick='apply(/""+record[i].policyApplyId+"/")' />"+                                   
                           " </tr>";
 				 $(".gt-table").append(html);	
 			}
