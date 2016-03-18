@@ -293,18 +293,23 @@
 	    		dataType : 'jsonp',
 	    		async : false,
 	    		success : function(results) {
-	    			if (results && results.record) {
+	    			if (results && results.records) {
 	    				var records = results.records;
+	    				$("#informationFinancing").empty();
 	    				for(var i=0; i<records.length; i++){
-	    					alert(records[i].financingName);
+	    					var financingMsg = "";
+	    					if(records[i].financingStatus=="1"){
+	    						financingMsg = records[i].financingTime.substring(0,4)+"年<p>"+records[i].financingTime.substring(5,7)+"月"+records[i].financingTime.substring(8,10)+"日</p>";
+	    					}else{
+	    						financingMsg = "发布中...";
+	    					}
 	    					var financingDiv = '<div class="yg-time">'+
-									'<div class="yt-pa">'+records[i].financingStatus+'…</div><em class="em-pa"></em>'+
+									'<div class="yt-pa">'+financingMsg+'</div><em class="em-pa"></em>'+
 									'<div class="clearfix">'+
 										'<span>'+records[i].financingSub+'</span><span>融资金额：<em class="c-o">'+records[i].financingAmount+'万元</em></span><span>融资估值：<em class="c-o">'+records[i].financingCost+'万元</em></span><span>可持股份：<em class="c-o">'+records[i].financingPre+'%</em></span>'+
 									'</div>'+
 									'<p>通过整合香港、深圳、广州、台湾各机场的航空资源和与DHL、FedEx、UPS、TNT、EMS各种形式深层次的合作，一直服务于业内货代同行，合作货代商遍布全国，共计有五千余家。</p>'+
-								'</div>'+
-							$("#informationFinancing").empty();
+								'</div>';
 							$("#informationFinancing").append(financingDiv);
 	    				}
 	    			}
