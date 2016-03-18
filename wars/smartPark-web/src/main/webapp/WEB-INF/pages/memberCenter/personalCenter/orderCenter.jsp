@@ -53,24 +53,12 @@
 	</div>
 	<!--***bottom start****************************************-->
 	<script type="text/javascript">
-	/*  function apply(id){			
-		var policyApplyId=id;	
-	     $.ajax({
-			url:'/smartPark-web/esb/web/policyApplyManager/updatePolicyApplyStatus.json',
-			data:'policyApplyId='+policyApplyId,
-	 		success:function(result){
-				if(result&&result.record){					
-					alert("已取消");
-					location.reload();
-				}
-			}
-		});
-	}  */
+	 
 	
 		$(function(){
 			$.ajax({
 				
-				url:'/smartPark-web/esb/web/ordermanagerUserorderManager/getOrderListByLoginUser.json',
+				url:baseUrl+'/esb/web/ordermanagerUserorderManager/getOrderListByLoginUser.json',
 				success:function(result){	
 					if(result&&result.records){					
 						_parseRecords(result.records);						
