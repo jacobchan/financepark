@@ -45,7 +45,7 @@
 	<script type="text/javascript">
 		$(function(){
 			$.ajax({
-				url:'/smartPark-web/esb/web/activityApplyManager/getParticipateActivityList.json',
+				url:baseUrl+'/esb/web/activityApplyManager/getParticipateActivityList.json',
 				success:function(result){
 					console.log(result.records);
 					if(result&&result.records){

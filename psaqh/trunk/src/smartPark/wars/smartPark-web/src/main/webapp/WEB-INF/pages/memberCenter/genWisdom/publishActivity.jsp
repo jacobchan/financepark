@@ -155,7 +155,7 @@
 	<script type="text/javascript">
 	$(function(){
 		$.ajax({
-			url:'/smartPark-web/esb/web/activityApplyManager/getPublishActivityList.json',
+			url:baseUrl+'/esb/web/activityApplyManager/getPublishActivityList.json',
 			success:function(result){
 				if(result&&result.records){
 					_parseRecords(result.records);
@@ -177,7 +177,7 @@
 			}
 			html+="<div class='"+cls+"' id='"+record[i].applyId+"'>"+
             		 "<img src='http://localhost:9088/filestore/"+record[i].activityImage+"' width='202' height='114'>"+
-            		 " <a href=''><p>"+record[i].applyTitle+"</p></a>"+
+            		 " <a  href='javascript:;' onclick='redirectPage(this)'><p>"+record[i].applyTitle+"</p></a>"+
        			 	 "</div>";
 		};
 		 $(".gr-ck-group").append(html);
@@ -268,7 +268,7 @@
 		for(var i=0;i<record.length;i++){
 			var documentName=record[i].documentName;
 			var dn=documentName.split('.');
-			  html+="<a href='javascript:;' id="+record[i].documentId+"><div class='czh-box'>"+
+			  html+="<a href='javascript:;' onclick='redirectPagePDF(this)' id="+record[i].documentId+"><div class='czh-box'>"+
 		              "<img src='<%=request.getContextPath()%>/styles/images/czh/list-5.jpg'>"+
 		              "<div class='czh-group' style='border-bottom:1px solid #ecebeb'>"+
 		                 "<h4>"+dn[0]+"</h4>"+
@@ -283,6 +283,14 @@
 		}
 		$(".clearfix.czh-knowledge.mt30").empty();
 		$(".clearfix.czh-knowledge.mt30").append(html);
+	}
+	function redirectPage(obj){
+		var id=obj.parentNode.id;
+		alert("点击动作待定...");
+	}
+	function redirectPagePDF(obj){
+		var id=obj.id;
+		alert("点击动作待定...");
 	}
 	</script>
 </body>
