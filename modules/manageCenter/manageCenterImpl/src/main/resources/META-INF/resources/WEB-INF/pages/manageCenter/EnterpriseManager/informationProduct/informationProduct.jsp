@@ -15,10 +15,10 @@
 			<youi:fieldText property="productType" caption="产品类别" />
 			<youi:fieldText property="productName" caption="产品名称" />
 		</youi:fieldLayout>
-		<youi:gridCol property="productContent" caption="产品描述" />
-		<youi:gridCol property="productRe" caption="企业" />
-		<youi:gridCol property="productType" caption="产品类别" />
-		<youi:gridCol property="productName" caption="产品名称" />
+		<youi:gridCol property="productRe" caption="企业信息" width="25%" />
+		<youi:gridCol property="productName" caption="产品名称" width="25%" />
+		<youi:gridCol property="productType" caption="产品类别" width="25%" />
+		<youi:gridCol property="productContent" caption="产品描述" width="25%" />
 		<youi:gridCol width="60" fixed="true" property="button" type="button"
 			caption="操作">
 			<youi:button name="edit" caption="修改" />

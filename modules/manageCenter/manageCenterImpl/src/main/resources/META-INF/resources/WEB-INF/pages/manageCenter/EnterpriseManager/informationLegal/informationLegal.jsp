@@ -31,7 +31,7 @@
 			<youi:fieldSelect property="legalRe" caption="企业信息" 
 				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzName"/>
 			<youi:fieldText property="legalName" caption="法人名称"/>
-			<youi:fieldSwfupload property="legalImage" caption="法人图像" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" fileUploadLimit="1" fileQueueLimit="1"/>
+			<youi:fieldSwfupload property="legalImage" caption="法人图像" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072"/>
 			<youi:fieldCalendar property="legalBirthday" caption="法人生日" notNull="true"
 				format="yyyy-MM-dd" />
 			<youi:fieldText property="legalBusiness" caption="法人职务"/>			

@@ -11,11 +11,11 @@
 		<youi:fieldSelect property="mediaRe" caption="企业信息" 
 			src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzName"/>
 		</youi:fieldLayout>
-		<youi:gridCol property="mediaTilurl" caption="文章URL_"/>
-		<youi:gridCol property="mediaTitle" caption="标题"/>
-		<youi:gridCol property="mediaStatus" caption="发布状态"/>
-		<youi:gridCol property="mediaRe" caption="企业信息"/>
-		<youi:gridCol property="mediaUrl" caption="图片URL"/>
+		<youi:gridCol property="mediaTilurl" caption="文章路径" width="25%"/>
+		<youi:gridCol property="mediaTitle" caption="标题" width="20%"/>
+		<youi:gridCol property="mediaStatus" caption="发布状态" width="5%"/>
+		<youi:gridCol property="mediaRe" caption="企业信息" width="20%"/>
+		<youi:gridCol property="mediaUrl" caption="图片URL" width="30%"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -31,7 +31,7 @@
 			<youi:fieldSelect property="mediaRe" caption="企业信息" 
 				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzName"/>
 			<youi:fieldHidden property="mediaId"  caption="ID"/>
-			<youi:fieldSwfupload property="mediaUrl" caption="媒体图片" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" fileUploadLimit="1" fileQueueLimit="1"/>
+			<youi:fieldSwfupload property="mediaUrl" caption="媒体图片" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072"/>
 		</youi:fieldLayout>
 	</youi:form>
 </youi:page>
