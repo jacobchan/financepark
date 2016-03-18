@@ -63,7 +63,7 @@
 		$(function(){
 			$.ajax({
 			  url:'/smartPark-web/esb/web/enterpriseEmployeesManager/getEnterprisemaillist.json',
-			//	url:'/smartPark-web/esb/web/enterpriseEmployeesManager/getEnterpriseEmployeess.json',
+		
 				success:function(result){					
 					console.log(result.records);
 					if(result&&result.records){					
@@ -79,7 +79,7 @@
 					var html= "<tr>"+
 				      "<td >"+record[i].employeesName+"</td>"+
 				      "<td >"+record[i].employeesTelephone+"</td>"+
-				      "<td >"+record[i].createTime+"</td>"+
+				      "<td >"+record[i].member.memberDescribe2+"</td>"+
 				      "<td>"+record[i].createTime+"</td>"+				      				    					    
                       " </tr>"; 
 			          $(".gt-table").append(html);					  								 				
