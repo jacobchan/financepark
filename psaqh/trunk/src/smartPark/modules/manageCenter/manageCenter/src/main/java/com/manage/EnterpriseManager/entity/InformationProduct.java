@@ -61,6 +61,30 @@ public class InformationProduct implements Domain{
 	@Length(max=36)
 	private String updateUser;//修改人
 	
+	@Column(name = "PRODUCT_BROWSE_COUNT_")
+	@Length(max=20)
+	private Integer productBrowseCount;//产品浏览次数
+
+	@Column(name = "PRODUCT_COLLECTION_COUNT_")
+	@Length(max=20)
+	private Integer productCollectionCount;//产品收藏次数
+	
+	public Integer getProductBrowseCount() {
+		return productBrowseCount;
+	}
+
+	public void setProductBrowseCount(Integer productBrowseCount) {
+		this.productBrowseCount = productBrowseCount;
+	}
+
+	public Integer getProductCollectionCount() {
+		return productCollectionCount;
+	}
+
+	public void setProductCollectionCount(Integer productCollectionCount) {
+		this.productCollectionCount = productCollectionCount;
+	}
+
 	public String getProductId(){
 		return this.productId;
 	}
