@@ -75,4 +75,10 @@ public interface NmIssuetypeManager extends BaseManager{
      * @throws BusException
      */
     public String codeExist(String code) throws BusException;
+    
+    /**
+     * 得到新闻公告的所有的子类型
+     * @return
+     */
+    public List<NmIssuetype> getNewsType() ;
 }
