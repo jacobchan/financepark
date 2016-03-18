@@ -57,6 +57,54 @@ public class InformationLegal implements Domain{
 	@Length(max=36)
 	private String rzId;//ID2
 	
+	@Column(name = "LEGAL_IMAGE_")
+	@Length(max=256)
+	private String legalImage;//法人图像
+
+	@Column(name = "LEGAL_BIRTHDAY_")
+	@Length(max=20)
+	private String legalBirthday;//法人生日
+	
+	@Column(name = "LEGAL_BUSINESS_")
+	@Length(max=256)
+	private String legalBusiness;//法人职务
+
+	@Column(name = "LEGAL_REMARK_")
+	@Length(max=256)
+	private String legalRemark;//法人简述
+	
+	public String getLegalImage() {
+		return legalImage;
+	}
+
+	public void setLegalImage(String legalImage) {
+		this.legalImage = legalImage;
+	}
+
+	public String getLegalBirthday() {
+		return legalBirthday;
+	}
+
+	public void setLegalBirthday(String legalBirthday) {
+		this.legalBirthday = legalBirthday;
+	}
+
+	public String getLegalBusiness() {
+		return legalBusiness;
+	}
+
+	public void setLegalBusiness(String legalBusiness) {
+		this.legalBusiness = legalBusiness;
+	}
+
+	public String getLegalRemark() {
+		return legalRemark;
+	}
+
+	public void setLegalRemark(String legalRemark) {
+		this.legalRemark = legalRemark;
+	}
+
 	public String getCreateUser(){
 		return this.createUser;
 	}
