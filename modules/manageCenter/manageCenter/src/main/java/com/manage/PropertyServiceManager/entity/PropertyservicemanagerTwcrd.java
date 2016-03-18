@@ -42,7 +42,7 @@ public class PropertyservicemanagerTwcrd implements Domain{
 	private String twcrdId;//二维码记录序列
 
 	@Column(name = "TWCRD_ADDREC_")
-	@Length(max=50)
+	@Length(max=200)
 	private String twcrdAddrec;//二维码URL地址
 	
 	@OneToOne(fetch = FetchType.EAGER)

@@ -33,7 +33,7 @@ public class PropertyservicemanagerFxtdc implements Domain{
 	private String createTime;//创建时间
 
 	@Column(name = "TWCRD_ADDREC_")
-	@Length(max=50)
+	@Length(max=200)
 	private String twcrdAddrec;//二维码URL地址
 
 	@Column(name = "CREATE_USER_")

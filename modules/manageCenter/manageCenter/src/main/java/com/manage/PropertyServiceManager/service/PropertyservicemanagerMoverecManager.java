@@ -6,13 +6,13 @@ package com.manage.PropertyServiceManager.service;
 import java.util.List;
 import java.util.Collection;
 
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerMoverec;
 
 public interface PropertyservicemanagerMoverecManager extends BaseManager{
@@ -76,4 +76,11 @@ public interface PropertyservicemanagerMoverecManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public List<PropertyservicemanagerMoverec> getMovListforpage(PropertyservicemanagerMoverec o) throws BusException;
+	/**
+	 * 查询搬家代码集
+	 * @param o 报修对象
+	 * @return
+	 * @throws BusException
+	 */
+	public List<Record> getMovcodemapforpage(PropertyservicemanagerMoverec o) throws BusException;
 }

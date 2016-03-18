@@ -8,11 +8,15 @@ import java.util.List;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
+import com.gsoft.framework.codemap.entity.Codeitem;
+import com.gsoft.framework.codemap.service.CodeitemManager;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -25,6 +29,9 @@ import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
+import com.gsoft.utils.HttpSenderMsg;
+import com.gsoft.utils.QRCodeUtil;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFxtdc;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerMoverec;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerFxtdcDao;
@@ -41,6 +48,10 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
 	private PropertyservicemanagerFxtdcManager propertyservicemanagerFxtdcManager ;
 	@Autowired
 	private MemberInformationManager memberInformationManager;
+	@Autowired 
+	private CodeitemManager codeitemManager;
+	@Value("#{configProperties['file.root.path']}")
+	private String root;
     /**
      * 查询列表
      */
@@ -78,29 +89,31 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
     @EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",pubProperty="userId")})
     public PropertyservicemanagerMoverec savePropertyservicemanagerMoverec(PropertyservicemanagerMoverec o) throws BusException{
     	String propertyservicemanagerMoverecId = o.getMoverecId();
+    	PropertyservicemanagerMoverec rec = null;
     	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerMoverecId);
    		if(isUpdate){//修改
-   			return propertyservicemanagerMoverecDao.save(o);
+   			rec = propertyservicemanagerMoverecDao.save(o);
    		}else{//新增
-   			String enName = o.getMoverecComp() ;//得到搬家企业名称
+   			/*String enName = o.getMoverecComp() ;//得到搬家企业名称
    	    	if(StringUtils.isEmpty(enName)){
    	    		throw new BusException("非企业用户没有权限申请！") ;
-   	    	}
+   	    	}*/
    	    	o.setMoverecStatus("00");
    	    	//生成搬家编号
-   	    	o.setMoverecCode(BizCodeUtil.getInstance().getBizCodeDate("MOV"));
+   	    	o.setMoverecCode(BizCodeUtil.getInstance().getBizCodeDate("WYMV"));
    	    	o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+   	    	o.setApplyTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
    	    	//保存并得到当前对象
-   	    	return  propertyservicemanagerMoverecDao.save(o);
-   	    	/*if(rec!=null){
-   	    		PropertyservicemanagerFxtdc propertyservicemanagerFxtdc = new PropertyservicemanagerFxtdc() ;
-   	        	propertyservicemanagerFxtdc.setPropertyservicemanagerMoverec(rec);
-   	        	propertyservicemanagerFxtdcManager.savePropertyservicemanagerFxtdc(propertyservicemanagerFxtdc);
-   	        	return rec;
-   	    	}else{
-   	    		return null;
-   	    	}*/
+   	    	rec =  propertyservicemanagerMoverecDao.save(o);
+   	    	try {
+    			HttpSenderMsg.sendMsg(rec.getMoverecPhone(), "尊敬的用户"+rec.getMoverecName()+"你好，"
+    					+"你的搬家预约已经成功提交，预约单号为【"+rec.getMoverecCode()+"】，预约结果请留意短信通知，"
+    					+ "或进入个人中心查看处理结果，感谢你对富春硅谷的支持！");
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}
    		}
+   		return rec;
     }
 
     /**
@@ -149,6 +162,14 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
 					moverec.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		    		PropertyservicemanagerFxtdc propertyservicemanagerFxtdc = new PropertyservicemanagerFxtdc() ;
 		    		//设置搬家二维码状态为有效
+		    		try {
+		    			String imgPath = root+"qrcode/";     
+		    	        String contents = moverec.getMoverecRemark();  
+						String url = QRCodeUtil.encode(contents, imgPath);
+						propertyservicemanagerFxtdc.setTwcrdAddrec(imgPath+url);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 		    		propertyservicemanagerFxtdc.setFxtdcStatus("00");
 		        	propertyservicemanagerFxtdc.setPropertyservicemanagerMoverec(moverec);
 		        	propertyservicemanagerFxtdcManager.savePropertyservicemanagerFxtdc(propertyservicemanagerFxtdc);
@@ -185,5 +206,29 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
     	}else{
     		return null;
     	}
+	}
+	
+	/**
+	 * 查询搬家代码集
+	 * @param o 搬家对象
+	 * @return
+	 * @throws BusException
+	 */
+	@EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",pubProperty="userId")})
+	public List<Record> getMovcodemapforpage(PropertyservicemanagerMoverec o) throws BusException{
+		List<Record> recordList=new ArrayList<Record>();
+		Collection<Condition> condition =  new ArrayList<Condition>();
+		Collection<Order> order = new ArrayList<Order>();
+		condition.add(ConditionUtils.getCondition("codemap.code", Condition.EQUALS,"oc_way"));
+		order.add(ConditionUtils.getOrder("itemValue", true));
+		List<Codeitem> list = codeitemManager.getCodeitems(condition, order);
+		for(int i=0;i<list.size();i++){
+				Codeitem co=list.get(i);
+				Record record = new Record();
+				record.put("itemValue", co.getItemValue());
+				record.put("itemName", co.getItemCaption());
+				recordList.add(record);
+			}	
+		return recordList;
 	}
 }

@@ -90,6 +90,17 @@ public class PropertyservicemanagerMoverec implements Domain{
 	@Length(max=36)
 	private String moverecFxmem;//放行人
 	
+	@Column(name = "APPLY_TIME_")
+	private String applyTime;//申请时间
+	
+	public String getApplyTime() {
+		return applyTime;
+	}
+
+	public void setApplyTime(String applyTime) {
+		this.applyTime = applyTime;
+	}
+
 	public String getMoverecFxmem() {
 		return moverecFxmem;
 	}
@@ -216,6 +227,8 @@ public class PropertyservicemanagerMoverec implements Domain{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
+				+ ((applyTime == null) ? 0 : applyTime.hashCode());
+		result = prime * result
 				+ ((createTime == null) ? 0 : createTime.hashCode());
 		result = prime * result
 				+ ((createUser == null) ? 0 : createUser.hashCode());
@@ -258,6 +271,11 @@ public class PropertyservicemanagerMoverec implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		PropertyservicemanagerMoverec other = (PropertyservicemanagerMoverec) obj;
+		if (applyTime == null) {
+			if (other.applyTime != null)
+				return false;
+		} else if (!applyTime.equals(other.applyTime))
+			return false;
 		if (createTime == null) {
 			if (other.createTime != null)
 				return false;
