@@ -114,10 +114,10 @@
 				</colgroup>
 				<tbody>
 				<tr>
-					<td colspan="2"><input type="text" placeholder="请输入真实姓名" style="width:100%"></td>
+					<td colspan="2"><input type="text" id="applyMember" placeholder="请输入真实姓名" style="width:100%"></td>
 				</tr>
 				<tr class="show2">
-					<td><input type="text" placeholder="请输入有效的手机号码" style="width:100%"></td>
+					<td><input type="text"  id="applyPhone" placeholder="请输入有效的手机号码" style="width:100%"></td>
 					<td style="padding-left:10px;">
 						<a href="javascript:;" class="send-psw" style="width:100%">发送验证码</a>
 					</td>
@@ -149,6 +149,29 @@
 			$("a.a-c-o").click(function(){
 				$(".bg-tanc").show();
 			});
+			//报名提交
+			$('.ib-btn').click(function(){
+				var url=location.href; 
+				var tmp1=url.split("?")[1];  
+				var tmp2=tmp1.split("=")[1]; 
+				var applyId=tmp2;
+				var applyMember=$("#applyMember").val();
+				var applyPhone=$("#applyPhone").val();
+				var serviceURL = baseUrl+"activityApplylistManager/saveActivityApplylistForPage.json";
+				var params = ['activityApply.applyId='+applyId,'applyMember='+applyMember,'applyPhone='+applyPhone];
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					data:params.join('&'),
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(results){
+						if(results&&results.record){
+							$(".bg-tanc").hide();
+							alert("报名成功！");
+						}
+					}
+				});	
+			});
 		});
 		$(function(){
 			var url=location.href; 
@@ -171,6 +194,7 @@
 		});
 		//活动详情赋值
 		function _parseRecords(record){
+			console.log(record);
 			$(".activityImage").attr("src","../filestore/"+record.activityImage);
 			$(".h-bg").html(record.applyTitle);
 			$(".time").html(record.startTime);
