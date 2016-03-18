@@ -382,5 +382,28 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		member.setMemberPhoneNumber(o.getMemberPhoneNumber());
 		memberInformationDao.save(member);
 	}
+	
+	/**
+	 * 用户登录
+	 * @param memberInformation 用户信息
+	 * @throws BusException
+	 */
+	@EsbServiceMapping
+	public MemberInformation userLogin(MemberInformation memberInformation) throws BusException{
+		
+		MemberInformation member = this.memberInformationDao.getObjectByUniqueProperty("memberName", memberInformation.getMemberPhoneNumber());
+		if(member == null){
+			throw new BusException("999999", "改用户不存在！");
+		}
+		if(!member.getPassword().equals(PasswordUtils.md5Password(memberInformation.getPassword()))){
+			throw new BusException("999999","密码错误");
+		}
+		
+		List<String> roles = memberRoleManager.getRolesByMemberId(member.getMemberId()); 
+		member.setRoleIds(roles);
+		member.getPrincipalConfig().put("userId", member.getMemberId());
+		return member;
+		
+	}
 
 }
