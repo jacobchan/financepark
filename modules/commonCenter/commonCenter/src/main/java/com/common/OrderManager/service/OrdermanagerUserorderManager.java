@@ -129,4 +129,6 @@ public interface OrdermanagerUserorderManager extends BaseManager{
    	 */
    	public OrdermanagerUserorder saveChopPatentOrder(String userId,
    			List<OrdermanagerCommoditydetail> orderDetailList) throws BusException;
+   	//获取当前登录用户投诉列表
+   	public List<OrdermanagerUserorder> getOrderListByLoginUser(OrdermanagerUserorder o) throws BusException;
 }
