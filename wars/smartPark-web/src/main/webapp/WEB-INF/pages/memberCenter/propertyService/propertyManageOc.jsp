@@ -65,8 +65,8 @@
 	
 		$(function(){
 			$.ajax({
-			     url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/getPropertyservicemanagerOcListByLoginUser.json',
-			//	 url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/getPropertyservicemanagerOcs.json',
+			     url:baseUrl+'/esb/web/propertyservicemanagerOcManager/getPropertyservicemanagerOcListByLoginUser.json',
+			
 				success:function(result){
 					
 					console.log(result.records);
