@@ -19,6 +19,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.common.NewsManager.entity.NmIssuetype;
@@ -171,5 +172,18 @@ public class NmIssuetypeManagerImpl extends BaseManagerImpl implements NmIssuety
 			return null;
 		}
 	}
-
+    /**
+     * 得到新闻公告的所有的子类型
+     * @return
+     */
+    @Override
+    @EsbServiceMapping
+    public List<NmIssuetype> getNewsType() {
+    	NmIssuetype type = nmIssuetypeDao.getObjectByUniqueProperty("issueTypeCode", "01") ;//01为新闻公告类型,得到新闻公告类型
+    	String typeId = type.getIssueTypeId() ;//得到新闻公告ID
+    	Collection<Condition> condition =  new ArrayList<Condition>();
+		condition.add(ConditionUtils.getCondition("parentIssueTypeId", Condition.EQUALS,typeId));
+		List<NmIssuetype> list = this.getNmIssuetypes(condition, null) ;//得到上级发布类型ID为typeId的所有发布类型
+    	return list;
+    }
 }

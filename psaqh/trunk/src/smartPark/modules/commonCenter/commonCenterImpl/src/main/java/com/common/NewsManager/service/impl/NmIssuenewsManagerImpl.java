@@ -31,6 +31,7 @@ import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.OrderCollection;
 import com.gsoft.framework.esb.annotation.PubCondition;
 import com.gsoft.framework.esb.annotation.ServiceParam;
+import com.gsoft.framework.util.ConditionUtils;
 
 @Service("nmIssuenewsManager")
 @Transactional
@@ -165,5 +166,23 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 			}
 		}
 		return policyList;
+	}
+	
+	/**
+	 * 通过发布类型ID，得到该类型下的所有新闻
+	 * @param issueTypeId 发布类型ID
+	 * @return
+	 */
+	@Override
+	@EsbServiceMapping
+	public List<NmIssuenews> getAllPolicyByTypeId(@ServiceParam(name="issueTypeId") String issueTypeId) {
+		Collection<Condition> condition =  new ArrayList<Condition>();
+		condition.add(ConditionUtils.getCondition("policyType.issueTypeId", Condition.EQUALS,issueTypeId));
+		List<NmIssuenews> list = this.getNmIssuenewss(condition, null) ;
+		if(list != null){
+			return list;
+		}else{
+			return new ArrayList<NmIssuenews>() ;
+		}
 	}
 }
