@@ -24,6 +24,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.HttpSenderMsg;
@@ -245,10 +246,11 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
        String applyStatus=p.getPolicyApplyStatus();
        if(applyStatus.equals("1")){
     	   p.setPolicyApplyStatus("0");
+    	   p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     	   return policyApplyDao.save(p);
        }  else{
     	   
-    	   return null;
+    	   throw new BusException("只有在未办理成功时才能取消"); 
        }
 	    
        
