@@ -54,7 +54,7 @@ public class ActivityApply implements Domain{
 
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="MEMBER_ID_")
-	private MemberInformation memberId;//会员用户
+	private MemberInformation memberId;//申请会员用户
 
 	@Column(name = "APPLY_ORDER_NUMBER_")
 	@Length(max=32)
@@ -89,8 +89,33 @@ public class ActivityApply implements Domain{
 	@Length(max=100)
 	private String activityImage;//活动图片
 	
+	@Column(name = "IS_RECOOMEND_")
+	@Length(max=2)
+	private String isRecoomend;//是否推荐
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="TYPE_ID_")
+	private com.manage.ActivityManager.entity.ApplayType applayType;//活动类型ID
 	
 	
+	
+	public com.manage.ActivityManager.entity.ApplayType getApplayType() {
+		return applayType;
+	}
+
+	public void setApplayType(
+			com.manage.ActivityManager.entity.ApplayType applayType) {
+		this.applayType = applayType;
+	}
+
+	public String getIsRecoomend() {
+		return isRecoomend;
+	}
+
+	public void setIsRecoomend(String isRecoomend) {
+		this.isRecoomend = isRecoomend;
+	}
+
 	public MemberInformation getMemberId() {
 		return memberId;
 	}
