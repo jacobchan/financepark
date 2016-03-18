@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <title>采购详情</title>
-<link href="../styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+<link href="../styles/page/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 <link href="../styles/base.css" type="text/css" rel="stylesheet">
+<link href="../styles/page/page.css" type="text/css" rel="stylesheet">
 <link href="../styles/page/cg30.css" type="text/css" rel="stylesheet">
 </head>
 
@@ -15,10 +16,20 @@
 <!--*******************************************-->
 
 <div class="w1200" style="position:relative">
-	<div class="pt5 pb5 f16"><a href="javascript:;" class="c3"><i class="fa fa-angle-left" style="font-size:20px"></i>&nbsp;&nbsp;返回</a></div>
+	<ul class="linknav clearfix mt20">
+    	<li><a href="#">30采购</a></li>
+        <li><a href="#">办公用品</a></li>
+        <li class="active"><a href="#">商品详情</a></li>
+    </ul>
     <div class="clearfix mt30">
     	<div class="fl goods_box tc">
-        	<div class="goods_img"><img src="../styles/images/cg30/cxq_big.png"/></div>
+        	<div class="goods_img">
+        		<img src="../styles/images/cg30/cg_w2.png" style="display:none" />
+        		<img src="../styles/images/cg30/cxq_big.png" style="display:none" />
+        		<img src="../styles/images/cg30/cxq_big.png"/>
+        		<img src="../styles/images/cg30/cxq_big.png" style="display:none" />
+        		<img src="../styles/images/cg30/cxq_big.png" style="display:none" />
+        	</div>
             <ul class="goods_ul">
             	<li><img src="../styles/images/cg30/cxq_sm1.jpg"/></li>
                 <li><img src="../styles/images/cg30/cxq_sm2.jpg"/></li>
@@ -91,6 +102,46 @@
 <script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 <script type="text/javascript" src="../scripts/page/cg30com.js"></script>
 <script>
+		$(function(){
+		$(".goods_ul>li").hover(function(){
+			var index=$(this).index();
+			$(this).addClass("active").siblings().removeClass("active");
+			$(".goods_img img").eq(index).show().siblings("img").hide();
+		});
+		$(".a_left").click(function(){
+			var cur=$(".goods_ul .active").index();
+			if(!cur){cur=4;}
+			else{cur--;};
+			$(".goods_ul li").eq(cur).addClass("active").siblings().removeClass("active");
+			$(".goods_img img").eq(cur).show().siblings("img").hide();
+		});
+		$(".a_right").click(function(){
+			var cur=$(".goods_ul .active").index();
+			if(cur==4){cur=0;}
+			else{cur++;};
+			$(".goods_ul li").eq(cur).addClass("active").siblings().removeClass("active");
+			$(".goods_img img").eq(cur).show().siblings("img").hide();
+		});
+
+
+		$(".btn_star").click(function(){
+			$(this).toggleClass("active").find("i").toggleClass("fa-star-o").toggleClass("fa-star")
+		});
+		$(".starbox i").hover(function(){
+			var index=$(this).index()+1;
+			console.log(index);
+			$(".starbox i").removeClass("star1").addClass("star0");
+			var arr=$(".starbox i").toArray().slice(0,index);
+			for(var i=0;i<arr.length;i++){
+				arr[i].className="star1";
+			}
+		});
+		$(".good_prop").click(function(){
+			$(this).addClass("active").siblings().removeClass("active");
+		});
+	});
+</script>
+<script>
 $(function(){
 	var arg=getQueryStringArgs();
 	var params = ['commodityId='+arg.id];
@@ -122,21 +173,6 @@ $(function(){
 	});
 });
 </script>
-<script>
-	$(function(){
-		$(".btn_star").click(function(){
-			$(this).toggleClass("active").find("i").toggleClass("fa-star-o").toggleClass("fa-star")
-		});
-		$(".starbox i").hover(function(){
-			var index=$(this).index()+1;
-			console.log(index);
-			$(".starbox i").removeClass("star1").addClass("star0");
-			var arr=$(".starbox i").toArray().slice(0,index);
-			for(var i=0;i<arr.length;i++){
-				arr[i].className="star1";
-			}
-		});
-	});
-</script>
+
 </body>
 </html>
