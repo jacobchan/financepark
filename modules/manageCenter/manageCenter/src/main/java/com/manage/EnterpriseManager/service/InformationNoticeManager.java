@@ -12,7 +12,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.EnterpriseManager.entity.InformationNotice;
 
 public interface InformationNoticeManager extends BaseManager{
@@ -63,4 +64,17 @@ public interface InformationNoticeManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitInformationNotice(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 根据企业id查询公告信息
+	 * @param noticeRe 入驻企业id
+	 * @return 符合条件的公告对象集合
+	 * @throws BusException
+	 * @author ZhuYL
+	 * @time 2016-03-18
+	 */
+	@EsbServiceMapping
+	public List<InformationNotice> findInformationNotice(
+			@ServiceParam(name = "noticeRe") String noticeRe)
+			throws BusException;
 }

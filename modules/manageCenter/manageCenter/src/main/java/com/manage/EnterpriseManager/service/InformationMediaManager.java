@@ -12,7 +12,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.EnterpriseManager.entity.InformationMedia;
 
 public interface InformationMediaManager extends BaseManager{
@@ -63,4 +64,17 @@ public interface InformationMediaManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitInformationMedia(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 根据企业id查询媒体信息
+	 * @param mediaRe 入驻企业id
+	 * @return 符合条件的媒体对象集合
+	 * @throws BusException
+	 * @author ZhuYL
+	 * @time 2016-03-18
+	 */
+	@EsbServiceMapping
+	public List<InformationMedia> findInformationMedia(
+			@ServiceParam(name = "mediaRe") String mediaRe)
+			throws BusException;
 }
