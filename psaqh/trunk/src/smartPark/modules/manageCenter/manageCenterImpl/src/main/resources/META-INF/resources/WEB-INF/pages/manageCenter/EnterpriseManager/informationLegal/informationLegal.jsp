@@ -26,17 +26,17 @@
 	
 	<!-- form-法人介绍编辑 -->
 	<youi:form dialog="true" caption="法人介绍" id="form_informationLegal" action="esb/web/informationLegalManager/saveInformationLegal.json">
-		<youi:fieldLayout prefix="record">
-			<youi:fieldHidden property="legalId"  caption="主键"/>
+		<youi:fieldLayout prefix="record" columns="1" labelWidths="120,120">
+			<youi:fieldHidden property="legalId" caption="主键"/>
 			<youi:fieldSelect property="legalRe" caption="企业信息" 
 				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json" code="rzId" show="rzName"/>
-			<youi:fieldText property="legalName"  caption="法人名称"/>
+			<youi:fieldText property="legalName" caption="法人名称"/>
 			<youi:fieldSwfupload property="legalImage" caption="法人图像" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" fileUploadLimit="1" fileQueueLimit="1"/>
 			<youi:fieldCalendar property="legalBirthday" caption="法人生日" notNull="true"
 				format="yyyy-MM-dd" />
-			<youi:fieldText property="legalBusiness"  caption="法人职务"/>			
-			<youi:fieldText property="legalTelephone"  caption="联系方式"/>
-			<youi:fieldText property="legalRemark"  caption="法人简介"/>
+			<youi:fieldText property="legalBusiness" caption="法人职务"/>			
+			<youi:fieldText property="legalTelephone" caption="联系方式"/>
+			<youi:fieldText property="legalRemark" caption="法人简介"/>
 		</youi:fieldLayout>
 	</youi:form>
 </youi:page>

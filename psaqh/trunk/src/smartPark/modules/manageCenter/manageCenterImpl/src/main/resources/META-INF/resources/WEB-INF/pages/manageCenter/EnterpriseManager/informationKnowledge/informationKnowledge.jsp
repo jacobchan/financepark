@@ -32,7 +32,7 @@
 	<youi:form dialog="true" caption="知识产权信息"
 		id="form_informationKnowledge"
 		action="esb/web/informationKnowledgeManager/saveInformationKnowledge.json">
-		<youi:fieldLayout prefix="record" labelWidths="120,120">
+		<youi:fieldLayout prefix="record" columns="1" labelWidths="120,120">
 			<youi:fieldHidden property="knowledgeId" caption="主键" />
 			<youi:fieldSelect property="knowledgeRe" caption="企业信息" notNull="true"
 				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json"
