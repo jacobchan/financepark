@@ -101,4 +101,11 @@ public interface MemberInformationManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public void updatePhoneNumber(MemberInformation o) throws BusException;
+	
+	/**
+	 * 用户登录
+	 * @param memberInformation 用户信息
+	 * @throws BusException
+	 */
+	public MemberInformation userLogin(MemberInformation memberInformation) throws BusException;
 }
