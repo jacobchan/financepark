@@ -128,4 +128,18 @@ public class PropertyservicemanagerTwcrdManagerImpl extends BaseManagerImpl impl
 			propertyservicemanagerTwcrdDao.save(twcrd) ;
 		}
 	}
+	
+	/**
+	 * 通过访客id找到对应的二维码
+	 * @param fkId
+	 * @return
+	 */
+	@EsbServiceMapping
+	public PropertyservicemanagerTwcrd findTwcrdById(@ServiceParam(name="fkcodeId") String fkcodeId) throws BusException{
+		PropertyservicemanagerTwcrd twcrd  =null;
+		if(StringUtils.isNotEmpty(fkcodeId)){
+			 twcrd = propertyservicemanagerTwcrdDao.getObjectByUniqueProperty("propertyservicemanagerFkcode.fkcodeId", fkcodeId) ;
+		}
+		return twcrd;
+	}
 }
