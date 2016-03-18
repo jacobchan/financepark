@@ -188,7 +188,7 @@
 		var params = ['applyId='+applyId];
 		//活动名单
 		$.ajax({
-			url:'/smartPark-web/esb/web/activityApplyManager/getPublishActivityMembers.json',
+			url:baseUrl+'/esb/web/activityApplyManager/getPublishActivityMembers.json',
 			data:params.join('&'),
 			success:function(result){
 				if(result&&result.records){
@@ -198,7 +198,7 @@
 		});	
 		//评论内容
 		$.ajax({
-			url:'/smartPark-web/esb/web/activityApplyManager/getPublishActivityComments.json',
+			url:baseUrl+'/esb/web/activityApplyManager/getPublishActivityComments.json',
 			data:params.join('&'),
 			success:function(result){
 				if(result&&result.records){
@@ -208,7 +208,7 @@
 		});	
 		//文档库
 		$.ajax({
-			url:'/smartPark-web/esb/web/activityApplyManager/getPublishActivityDocuments.json',
+			url:baseUrl+'/esb/web/activityApplyManager/getPublishActivityDocuments.json',
 			data:params.join('&'),
 			success:function(result){
 				console.log(result);
