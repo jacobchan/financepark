@@ -1,0 +1,123 @@
+<!doctype html>
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/pages/memberCenter/common/ad_head.jsp"%> 
+<%@ include file="/WEB-INF/pages/common/memberCenterScriptAndCss.jsp"%>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>政策申请</title>
+	<style>
+	  .ccheng{color:#FF6715}
+    </style>
+</head>
+<body style="background-color:#f4f4f4;">
+
+	<div class="w100">
+		<div class="w1200 clearfix pt30 pb50">
+			<div class="per-center-box clearfix">
+				<%@ include file="/WEB-INF/pages/memberCenter/common/ad_left.jsp"%> 
+				<div class="w1000">
+					<h3 class="per-h3">政策申请</h3>
+					<div class="clearfix mt40">
+						<table class="gt-table mt20">
+								<colgroup>
+									<col width="180">
+									<col width="180">
+									<col width="170">
+									<col width="180">
+									<col>
+								</colgroup>
+								<tbody><tr>
+									<th>订单号</th>
+									<th>订单项目</th>
+									<th>订单金额</th>
+									<th>下单时间</th>
+									<th>操作</th>
+								</tr>
+								<tr>
+									<td><a href="">123456789</a></td>
+									<td>物业报修</td>
+									<td>999元</td>
+									<td>2016-1-12 17:30：08</td>
+									<td>
+										<span>已完成</span><span class="f12 ml5 mr5">|</span>
+										<a href="grzx2-2.html">评价</a><span class="f12 ml5 mr5">|</span>
+										<a href="javascript:;" class="ac-show lq-show">发票领取</a>
+									</td>
+								</tr>								
+							</tbody></table>                      
+						<div class="fr page-list-a clearfix lh30 mt20 f12">
+							<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
+							<a href="">首</a>
+							<a href=""><i class="fa fa-angle-left"></i></a>
+							<a>1</a>
+							<a href=""><i class="fa fa-angle-right"></i></a>
+							<a href="">末</a>
+							<input class="bd-input fl ml10 mr10" style="width:40px;" type="text">
+							<a href="">Go</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--***bottom start****************************************-->
+	<script type="text/javascript">
+	/*  function apply(id){			
+		var policyApplyId=id;	
+	     $.ajax({
+			url:'/smartPark-web/esb/web/policyApplyManager/updatePolicyApplyStatus.json',
+			data:'policyApplyId='+policyApplyId,
+	 		success:function(result){
+				if(result&&result.record){					
+					alert("已取消");
+					location.reload();
+				}
+			}
+		});
+	}  */
+	
+		$(function(){
+			$.ajax({
+				
+				url:'/smartPark-web/esb/web/ordermanagerUserorderManager/getOrderListByLoginUser.json',
+				success:function(result){	
+					if(result&&result.records){					
+						_parseRecords(result.records);						
+					}
+				}
+			});
+		});
+		//拼接卡号列表
+		function _parseRecords(record){		
+
+			console.log(record);
+			for(var i=0;i<record.length;i++){				
+				var status = "";								
+				if(record[i].userorderStatus=='1'){
+					status = "申请中";					
+				}else if(record[i].userorderStatus=='2'){
+					status = "申请成功";
+				}else if(record[i].userorderStatus=='3'){
+					status = "申请失败";
+				} else if(record[i].userorderStatus=='0'){
+					status = "取消";
+				} 
+				var html= "<tr>"+
+					      "<td width='111'>"+record[i].userorderCode+"</td>"+
+                          "<td width='111'>"+record[i].userorderProject+"</td>"+
+                          "<td width='111'>"+record[i].userorderAmount+"</td>"+
+                          "<td width='111'>"+record[i].userorderTime+"</td>"+
+                          
+                          "<td width='88'>"+status+                          
+                          "<a href='javascript:;' onclick='javascript:cancel(this)' class='ac-show'>"+评价+"</a>"+
+                          "<a href='javascript:;' onclick='javascript:cancel(this)' class='ac-show'>"+发票领取+"</a></td>";
+              			 
+                          " </tr>";
+				 $(".gt-table").append(html);	
+			}
+		};	
+	</script>
+</body>
+<%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 
+</html>
