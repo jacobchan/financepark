@@ -3,7 +3,6 @@ package com.gsoft.framework.core.web;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.UUID;
@@ -29,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gsoft.framework.core.exception.BusException;
@@ -70,7 +68,8 @@ public class CommonController {
 		    	
 		        //原文件名存到平台fileStore表里
 
-		    	 FileStore fileStore = fileStoreManager.storeFile(multipartFile.getOriginalFilename(), multipartFile.getInputStream());
+		    	 FileStore fileStore = fileStoreManager.storeFile(multipartFile.getOriginalFilename(), 
+		    			 multipartFile.getInputStream(),null,multipartFile.getContentType());
 		    	 FileStore fs=fileStoreManager.getFileStoreByPath(fileStore.getFilePath());
 				 fs.setFilePath(fileName);
 				 fileStoreDao.save(fs);
@@ -93,7 +92,8 @@ public class CommonController {
 					  File path = new File(root+"upload/"+DateUtils.getToday("yyyyMM"));
 					 
 					  //原文件名存到平台fileStore表里
-					  FileStore fileStore = fileStoreManager.storeFile(((DiskFileItem)item).getName(), ((DiskFileItem)item).getInputStream());
+					  FileStore fileStore = fileStoreManager.storeFile(((DiskFileItem)item).getName(), ((DiskFileItem)item).getInputStream(),
+							  null,((DiskFileItem)item).getContentType());
 					  FileStore fs=fileStoreManager.getFileStoreByPath(fileStore.getFilePath());
 					  fs.setFilePath(fileName);
 					  fileStoreDao.save(fs);
