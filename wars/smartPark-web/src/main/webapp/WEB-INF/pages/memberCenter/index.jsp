@@ -116,7 +116,7 @@
 	<script type="text/javascript">
 		$(function(){
 			$.ajax({
-				url:'/smartPark-web/esb/web/memberInformationManager/getMemberInformationByLoginUser.json',
+				url:baseUrl+'/esb/web/memberInformationManager/getMemberInformationByLoginUser.json',
 				//async: false, 
 				success:function(result){
 					if(result&&result.record){
@@ -153,7 +153,7 @@
 			var companyId=$("#companyId").val();
 			var params = ['memberId='+memberId+'','memberNickname='+memberNickname+'','memberPhoneNumber='+memberPhoneNumber+'','memberName='+memberName+'','memberBirthdate='+memberBirthdate+'','memberDescribe2='+memberDescribe2+'','companyId='+companyId+''];
 			$.youi.ajaxUtils.ajax({
-				url:'/smartPark-web/esb/web/memberInformationManager/saveMemberInformation.json',
+				url:baseUrl+'/esb/web/memberInformationManager/saveMemberInformation.json',
 				data:params.join('&'),
 				success:function(result){
 					if(result&&result.record){
