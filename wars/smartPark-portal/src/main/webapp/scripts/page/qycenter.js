@@ -9,7 +9,7 @@
  */
 var isLogin = false;
 $(function(){
-	var _passportBaseUrl = 'http://localhost:8088/smartPark-web/';
+	var _passportBaseUrl = 'http://220.249.113.12:8088/';
 	
 	$('#youi_page_header').load($.youi.serverConfig.contextPath+'/common/qy_head.html');
 	$('#youi_page_left').load($.youi.serverConfig.contextPath+'/common/qy_left.html');
