@@ -275,10 +275,12 @@
 											$(".pop_layer").hide();
 											window.location="carLeasexq.html?id="+commodityId;
 										}
+									},error:function(XMLHttpRequest, textStatus, errorThrown){
+										alert(XMLHttpRequest);
 									}
 								});  
 							} else {
-								alert("请选择预约日期和时间段");
+								alert("请选择预约日期");
 							}
 
 						});

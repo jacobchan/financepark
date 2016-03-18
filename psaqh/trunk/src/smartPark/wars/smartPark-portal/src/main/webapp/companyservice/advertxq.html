@@ -283,12 +283,13 @@
     							resoTime = "17:00-18:00";
     						}
     						if(records[i].resoStatus=='02'){
+    							alert(i);
     							numArray.push(records[i].resoDate.substring(5, 10)+"日"+resoTime+"已预订\n\n");
-    							$("td").addClass(function(i){return "clicktd";});
+    						//	$("td").addClass(function(i){return "clicktd";});
     						}
     					}
     				}
-    				alert(numArray.toString().replace(",",""));
+    			alert(numArray.toString().replace(",",""));
     			}
     		}
     	});
@@ -390,48 +391,76 @@
 		$(".close0").click(function() {
 			$(".pop_layer").hide();
 		});
+		
+		  //提交预约
+		$('.btn-cheng').click(function(){
+			if(!isLogin){alert("请登录");return;}
+			
+			var dates=new Array();
+			var times=new Array();
+			$("#data_timer td.clicktd").each(function(){
+				var active=$(this).index();
+				var time=$(this).html();
+				if(time=='8:00-9:00'){
+					time = "01";
+				}else if(time == "9:00-10:00"){
+					time = '02';
+				}else if(time == "10:00-11:00"){
+					time = '03';
+				}else if(time == "11:00-12:00"){
+					time = '04';
+				}else if(time == "12:00-13:00"){
+					time = "05";
+				}else if(time == "13:00-14:00"){
+					time = "06";
+				}else if(time == "14:00-15:00"){
+					time = "07";
+				}else if(time == "15:00-16:00"){
+					time = "08";
+				}else if(time == "16:00-17:00"){
+					time = "09";
+				}else{
+					time = "10";
+				}
+				var date=$(".fc-day-header").eq(active).attr("data-date");
+				dates.push(date);
+				times.push(time);
+			});
+			if(dates.length>0){
+        		var userorderAmount=$('#commodityPrice').text();
+				var string ="";
+				for(var i=0;i<dates.length;i++){
+					string+="records["+i+"].resoDate="+dates[i]+"&";
+				}
+				for(var i=0;i<times.length;i++){
+					string+="records["+i+"].resoTime="+times[i]+"&";
+				}
+				string+="userorderAmount="+userorderAmount+"&"+"commodityId="+commodityId;
+				 alert(string);
+			   var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/savePublicResoOrderByList.json";
+				//公共方法
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					data:string,
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(result){
+						if(result&&result.record){
+							alert("预约成功");
+							$(".pop_layer").hide();
+							window.location="advertxq.html?id="+commodityId;
+						}
+					},error:function(XMLHttpRequest, textStatus, errorThrown){
+						alert(XMLHttpRequest);
+					}
+				});
+            }else{
+            	alert("请选择预约日期和时间段");
+            }				
+	
+		});
+		
 	})
 </script>
-<script type="text/javascript">
-		    //提交预约
-			$('.btn-cheng').click(function(){
-				if(!isLogin){alert("请登录");return;}
-				
-				var arr=new Array();
-				$("#data_timer td.clicktd").each(function(){
-					var active=$(this).index();
-					var time=$(this).html();
-					var dates=$(".fc-day-header").eq(active).attr("data-date")+time;
-					arr.push(dates);
-				});
-                if(arr.length>0){
-            		var userorderAmount=$('#commodityPrice').text();
-    				arr=['40288ab553647ad3015364a509e40023','40288ab553647ad3015364a343ad001f'];
-    				var string ="";
-    				for(var i=0;i<arr.length;i++){
-    					string+="records["+i+"].resoId="+arr[i]+"&";
-    				}
-    				string+="userorderAmount="+userorderAmount;
-    			 
-    			   var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/savePublicResoOrderByList.json";
-    				//公共方法
-    				$.youi.ajaxUtils.ajax({
-    					url:serviceURL,
-    					data:string,
-    					jsonp:'data:jsonp',
-    					dataType:'jsonp',
-    					success:function(result){
-    						if(result&&result.record){
-    							alert("预约成功");
-    							$(".pop_layer").hide();
-    						}
-    					}
-    				});
-                }else{
-                	alert("请选择预约日期和时间段");
-                }				
-		
-			});
-	</script>
 </body>
 </html>
