@@ -136,7 +136,7 @@
 	<script type="text/javascript">
 	$(function () {		
 		$.ajax({
-			url:'/smartPark-web/esb/web/propertyservicemanagerMoverecManager/getMovListforpage.json', 
+			url:baseUrl+'/esb/web/propertyservicemanagerMoverecManager/getMovListforpage.json', 
 			success:function(result){
 				console.log(result);
 				if(result&&result.records){
