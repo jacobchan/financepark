@@ -10,16 +10,8 @@
 	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/newscom.js"></script>
+	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
-	<script type="text/javascript">
-		$(function () {
-			$(".park-nav li").click(function(){
-				$(".park-nav li").removeClass("active");
-				$(this).addClass("active");
-				$(".park-box ul").eq($(this).index()).removeClass("undis").siblings().addClass("undis");
-			});
-		})
-	</script>
 </head>
 <body>
 	<!--***top start****************************************-->
@@ -31,19 +23,34 @@
 					<a href=""><span>首页</span></a><img src="../styles/images/zs/right-j-b.png" border="0" />
 					<a href=""><span>招商中心</span></a><img src="../styles/images/zs/right-j-b.png" border="0" />
 					<a href=""><span class="current">园区资讯</span></a>
-				</div>
+			</div>
 			<div class="fl w895">				
 				<div class="park-nav clearfix">
-					<ul>
-						<li class="active">园区公告</li>
+					<ul id="ui0">
+						<!-- <li class="active">园区公告</li>
 						<li>园区新闻</li>
-						<li>政策法规</li>
+						<li>政策法规</li> -->
 					</ul>
 				</div>
 				<div class="park-box">
-					<ul class="pb-list"></ul>
-					<ul class="pb-list-group undis">
-						<li>
+					<!--<ul class="pb-list-group undis">
+						 <li>
+								<div class="plg-photo">
+									<a href="#"><img src="../styles/images/zs/big-nav-img1.png" border="0" width="100%"/></a>
+								</div>
+								<div class="plg-article">
+									<a href=""><h3>杭州，一场无关情爱的风月无边</h3></a>
+									<p>由于贷款客户丢放鱼缸问题，温柔问题来集合。额外海投网由于天放鱼缸问题，温柔问题来集合。额外海投网</p>
+									<h5>
+										<span><img src="../styles/images/zs/map.png" border="0">杭州市</span>
+										<span><img src="../styles/images/zs/user.png" border="0">限制人数30人</span>
+										<span><img src="../styles/images/zs/clock.png" border="0">2015-08-12 05:00至2015-12-12 24:00</span>
+									</h5>
+								</div>
+						</li> -->
+					<!-- </ul>
+					<ul class="pb-list-group undis"> -->
+						<!-- <li>
 							<div class="plg-photo">
 								<a href="#"><img src="../styles/images/zs/big-nav-img1.png" border="0" width="100%"/></a>
 							</div>
@@ -98,10 +105,10 @@
 									<span><img src="../styles/images/zs/clock.png" border="0">2015-08-12 05:00至2015-12-12 24:00</span>
 								</h5>
 							</div>
-						</li>
-					</ul>
-					<ul class="pb-list-group undis">
-						<li>
+						</li> -->
+					<!-- </ul>
+					<ul class="pb-list-group undis"> -->
+						<!-- <li>
 							<div class="plg-photo">
 								<a href="#"><img src="../styles/images/zs/big-nav-img1.png" border="0" width="100%"/></a>								
 							</div>
@@ -128,8 +135,8 @@
 									<span><img src="../styles/images/zs/clock.png" border="0">2015-08-12 05:00至2015-12-12 24:00</span>
 								</h5>
 							</div>
-						</li>
-					</ul>
+						</li> 
+					</ul>-->
 				</div>
 			</div>	
 			<div class="fr w285"><div id="youi_page_right" class="youi-page-right clearfix"></div></div>
@@ -146,6 +153,73 @@
 			jsonpSrc:'http://localhost:8081/jsonp/data.jsp?data:file=zs4-test.json'	
 		});
 		
+	</script>
+	<script type="text/javascript">
+		$(function(){
+			$.youi.ajaxUtils.ajax({
+				url:baseUrl +"nmIssuetypeManager/getNewsType.json",//得到新闻发布类型
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					if(result&&result.records){
+						_parseRecords(result.records);
+					}
+				}
+			});
+		});
+		//拼接新闻公告列表
+		function _parseRecords(record){
+			for(var i=0;i<record.length;i++){
+				var html = "" ;
+				if(i == 0){
+					html = "<li class='active' id="+record[i].issueTypeId+">"+record[i].issueTypeCaption+"</li>" ;
+					getRecords(record[i].issueTypeId);//页面加载的时候查询当前类型的新闻
+				}else{
+					html = "<li id="+record[i].issueTypeId+">"+record[i].issueTypeCaption+"</li>" ;
+				}
+				
+		 		$("#ui0").append(html);
+			}
+				$(document).on("click",".park-nav li",function(){
+					$('.park-box').empty();
+					$(".park-nav li").removeClass("active");
+					$(this).addClass("active");
+					$(".park-box ul").eq($(this).index()).removeClass("undis").siblings().addClass("undis");
+					var typeId = $(this).attr("id") ;
+					getRecords(typeId) ;//每次点击新闻类型的时候，查询对应的新闻
+				});
+		}; 
+		function getRecords(issueTypeId,indexs){
+			var params=["issueTypeId="+issueTypeId];//当前政策类型ID
+			$.youi.ajaxUtils.ajax({
+				url:baseUrl +"nmIssuenewsManager/getAllPolicyByTypeId.json",
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					if(result&&result.records){
+						getHtml(result.records) ;
+					}
+				}
+			});
+		}
+		function getHtml(newsList){
+			var htmls="<ul class='pb-list-group'>";
+			for(var i=0;i<newsList.length;i++){
+				htmls += "<li>"+
+						/* 	"<div class='plg-photo'>"+
+								"<a href='#'><img src='../styles/images/zs/big-nav-img1.png' border='0' width='100%'/></a>"+
+							"<div>"+ */
+							"<div class='plg-article'>"+
+								"<a href=''><h3>"+newsList[i].policyCaption+"</h3></a>"+
+								"<p>"+newsList[i].policyContent+"</p>"+
+							"</div>"+
+						"</li>";
+			}
+			var htmlss="</ul>";
+			//console.log(htmls+htmlss);
+			$('.park-box').append(htmls+htmlss);
+		}
 	</script>
 </body>
 </html>
