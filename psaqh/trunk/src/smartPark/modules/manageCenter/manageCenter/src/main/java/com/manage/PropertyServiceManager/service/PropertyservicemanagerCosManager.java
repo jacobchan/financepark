@@ -12,14 +12,13 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.ServiceParam;
-
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.utils.BizCodeUtil;
-
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos;
+
+
 
 public interface PropertyservicemanagerCosManager extends BaseManager{
 
@@ -86,10 +85,13 @@ public interface PropertyservicemanagerCosManager extends BaseManager{
      * @throws BusException
      */  
 	public List<PropertyservicemanagerCos> getCosListByLoginUser(PropertyservicemanagerCos p) throws BusException ;    	 	
+   	
     /**
-     * 修改状态__ 
+     * 前台修改订单
+     * @param cosId
      * @return
      * @throws BusException
-     */  
-    public PropertyservicemanagerCos updateCosStatus(String cosId ) throws BusException;	
+     */
+    public PropertyservicemanagerCos updateCosforpage(String cosId) throws BusException ;    	 	
+  
 }
