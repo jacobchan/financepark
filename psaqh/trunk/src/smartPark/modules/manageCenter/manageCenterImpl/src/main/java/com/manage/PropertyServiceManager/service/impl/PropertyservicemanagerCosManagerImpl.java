@@ -1,9 +1,11 @@
 package com.manage.PropertyServiceManager.service.impl;
 import java.util.List;
 import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.exception.BusException;
@@ -12,6 +14,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
 import com.gsoft.utils.HttpSenderMsg;
@@ -155,7 +158,7 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
 		   //取消投诉 
 		   if(cosStatus.equals("0")||cosStatus.equals("1")||cosStatus.equals("2")){
 			   psm.setCosStatus("3");
-			   psm.setUpdateTime("yyyy-MM-dd HH:mm:ss");
+			   psm.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		   }
 			return propertyservicemanagerCosDao.save(psm);
 	   }else{
