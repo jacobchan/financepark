@@ -1,30 +1,21 @@
-/**
- * 代码声明
- */
 package com.manage.EnterpriseManager.service.impl;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
-//import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.manage.EnterpriseManager.entity.InformationKnowledge;
 import com.manage.EnterpriseManager.dao.InformationKnowledgeDao;
 import com.manage.EnterpriseManager.service.InformationKnowledgeManager;
-
 @Service("informationKnowledgeManager")
 @Transactional
 public class InformationKnowledgeManagerImpl extends BaseManagerImpl implements InformationKnowledgeManager{
@@ -103,4 +94,24 @@ public class InformationKnowledgeManagerImpl extends BaseManagerImpl implements 
 		return informationKnowledgeDao.exists(propertyName,value);
 	}
 
+    /**
+	 * 根据企业id查询知识产权信息
+	 * @param knowledgeRe 入驻企业id
+	 * @return 符合条件的知识产权对象集合
+	 * @throws BusException
+	 * @author ZhuYL
+	 * @time 2016-03-18
+	 */
+	@EsbServiceMapping
+	public List<InformationKnowledge> findInformationKnowledge(
+			@ServiceParam(name = "knowledgeRe") String knowledgeRe)
+			throws BusException {
+		Collection<Condition> condition = new ArrayList<Condition>();
+		Collection<Order> order = new ArrayList<Order>();
+		condition.add(ConditionUtils.getCondition("knowledgeRe",
+				Condition.EQUALS, knowledgeRe));
+		List<InformationKnowledge> list = informationKnowledgeDao
+				.commonQuery(condition, order);
+		return list;
+	}
 }

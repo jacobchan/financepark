@@ -1,30 +1,21 @@
-/**
- * 代码声明
- */
 package com.manage.EnterpriseManager.service.impl;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
-//import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.manage.EnterpriseManager.entity.InformationLegal;
 import com.manage.EnterpriseManager.dao.InformationLegalDao;
 import com.manage.EnterpriseManager.service.InformationLegalManager;
-
 @Service("informationLegalManager")
 @Transactional
 public class InformationLegalManagerImpl extends BaseManagerImpl implements InformationLegalManager{
@@ -103,4 +94,24 @@ public class InformationLegalManagerImpl extends BaseManagerImpl implements Info
 		return informationLegalDao.exists(propertyName,value);
 	}
 
+    /**
+	 * 根据企业id查询法人信息
+	 * @param legalRe 入驻企业id
+	 * @return 符合条件的法人对象集合
+	 * @throws BusException
+	 * @author ZhuYL
+	 * @time 2016-03-18
+	 */
+	@EsbServiceMapping
+	public List<InformationLegal> findInformationLegal(
+			@ServiceParam(name = "legalRe") String legalRe)
+			throws BusException {
+		Collection<Condition> condition = new ArrayList<Condition>();
+		Collection<Order> order = new ArrayList<Order>();
+		condition.add(ConditionUtils.getCondition("legalRe",
+				Condition.EQUALS, legalRe));
+		List<InformationLegal> list = informationLegalDao
+				.commonQuery(condition, order);
+		return list;
+	}
 }

@@ -1,30 +1,21 @@
-/**
- * 代码声明
- */
 package com.manage.EnterpriseManager.service.impl;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
-//import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.manage.EnterpriseManager.entity.InformationProduct;
 import com.manage.EnterpriseManager.dao.InformationProductDao;
 import com.manage.EnterpriseManager.service.InformationProductManager;
-
 @Service("informationProductManager")
 @Transactional
 public class InformationProductManagerImpl extends BaseManagerImpl implements InformationProductManager{
@@ -102,5 +93,25 @@ public class InformationProductManagerImpl extends BaseManagerImpl implements In
     public boolean exsitInformationProduct(String propertyName,Object value) throws BusException{
 		return informationProductDao.exists(propertyName,value);
 	}
-
+    
+    /**
+	 * 根据企业id查询产品信息
+	 * @param productRe 入驻企业id
+	 * @return 符合条件的产品对象集合
+	 * @throws BusException
+	 * @author ZhuYL
+	 * @time 2016-03-18
+	 */
+	@EsbServiceMapping
+	public List<InformationProduct> findInformationProduct(
+			@ServiceParam(name = "productRe") String productRe)
+			throws BusException {
+		Collection<Condition> condition = new ArrayList<Condition>();
+		Collection<Order> order = new ArrayList<Order>();
+		condition.add(ConditionUtils.getCondition("productRe",
+				Condition.EQUALS, productRe));
+		List<InformationProduct> list = informationProductDao
+				.commonQuery(condition, order);
+		return list;
+	}
 }
