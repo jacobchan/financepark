@@ -79,11 +79,11 @@
             	<div>
                     <div class="inline_b">
                         <label><span class="cc vm">*</span>&nbsp;联系人</label>
-                        <input type="text"/>
+                        <input type="text" id="reserveName"/>
                     </div>
                     <div class="inline_b ml40">
                         <label><span class="cc vm">*</span>&nbsp;联系电话</label>
-                        <input type="text"/>
+                        <input type="text" id="reserveTel"/>
                     </div>
                 </div>
                 <div class="mt25">
@@ -252,6 +252,21 @@
 								}
 							});
 
+							var reserveName=$("#reserveName").val();
+							var reserveTel=$("#reserveTel").val();
+							if(reserveName ==null||reserveName==""){
+								alert("请填联系人");
+								return;
+							}
+							if(reserveTel ==null||reserveTel==""){
+								alert("请填联系人电话");
+								return;
+							}else if(isMobil(reserveTel)){
+       							
+       						}else{
+       							alert("电话格式不正确！");
+       							return false;
+       						}
 							if (arr.length > 0) {
 								var userorderAmount = $('#commodityPrice')
 										.text();
@@ -283,6 +298,13 @@
 								alert("请选择预约日期");
 							}
 
+							//校验手机号格式
+							function isMobil(s) {
+							    	var patrn = /^(13[0-9]{9})|(14[0-9])|(18[0-9])|(15[0-9][0-9]{8})$/;
+							   		if (!patrn.exec(s)) return false
+							   	 	return true
+								}
+							
 						});
 
 	})
