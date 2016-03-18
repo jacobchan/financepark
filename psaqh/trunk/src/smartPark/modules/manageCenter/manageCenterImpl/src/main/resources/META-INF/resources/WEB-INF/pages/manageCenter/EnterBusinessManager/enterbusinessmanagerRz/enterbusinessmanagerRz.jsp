@@ -47,7 +47,8 @@
 			<youi:fieldText property="rzSign"  caption="企业码"/>
 			<youi:fieldText property="rzMem"  caption="会员信息"/>
 			<youi:fieldText property="rzTelephone"  caption="联系方式" expression="^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$" expressionMessage="手机号码格式不正确" />
-			<youi:fieldArea property="rzRemark"  caption="企业备注"/>
+			<youi:fieldArea property="rzRemark"  caption="企业备注"/>			
+			<youi:fieldSwfupload property="rzLogo" caption="企业logo" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
