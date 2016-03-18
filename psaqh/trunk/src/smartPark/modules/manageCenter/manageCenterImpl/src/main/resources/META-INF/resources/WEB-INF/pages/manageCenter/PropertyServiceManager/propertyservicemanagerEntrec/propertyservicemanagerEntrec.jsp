@@ -34,6 +34,7 @@
 		<%-- 	  <youi:fieldLabel property="enteringTelephone"  caption="入驻联系电话" expression="^1[3|4|5|8|9]{1}[0-9]{9,9}$" expressionMessage="请填写正确的手机号码" notNull="true"/> --%>
 			 <youi:fieldHidden property="memberId"  caption="会员用户ID"/>
 			 <youi:fieldHidden property="enterrecStatus"  caption="预约记录状态"/>
+			  <youi:fieldHidden property="enterrecCode"  caption="编号"/>
 			<youi:fieldSelect property="propertyservicemanagerEntering.enteringId"  caption="预约记录ID" src="esb/web/propertyservicemanagerEnteringManager/getPropertyservicemanagerEnteringsByStatus.json" code="enteringId" show="enteringId" notNull="true"/>
 			<youi:fieldHidden property="entrecId"  caption="入驻预约记录ID"/>
 <%-- 			<youi:fieldSelect property="enterrecStatus"  caption="预约记录状态" convert="enterrecStatus" notNull="true"/> --%>

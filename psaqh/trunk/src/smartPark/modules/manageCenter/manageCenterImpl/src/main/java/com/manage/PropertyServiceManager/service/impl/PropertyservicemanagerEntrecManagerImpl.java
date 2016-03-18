@@ -32,6 +32,7 @@ import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.utils.BizCodeUtil;
+import com.gsoft.utils.HttpSenderMsg;
 import com.manage.EnterBusinessManager.service.EnterbusinessmanagerRzManager;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerEnteringDao;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerEntrecDao;
@@ -168,11 +169,21 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
     			o.setMemberId(memberInformation);
     			o.setPropertyservicemanagerEntering(enteringBefore);
     			o.setEnterrecStatus("01");//01：已预约
+    			o.setEnterrecCode(BizCodeUtil.getInstance().getBizCodeDate("YYBH"));//生成入驻预约编号
     			o.setCreateUser(o.getUpdateUser());
     			o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     			o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     			//新增 入驻服务办理预约记录基础数据
-        		return propertyservicemanagerEntrecDao.save(o);
+    			o=propertyservicemanagerEntrecDao.save(o);
+    			//发送短信给联系人
+        		try {
+        			HttpSenderMsg.sendMsg(o.getEnteringTelephone(), "尊敬的"+o.getMemberId().getMemberName()+"你好，你的预约已经成功提交，预约单号为【"+o.getEnterrecCode()+"】,感谢你对富春硅谷的支持！");
+        		} catch (Exception e) {
+        			e.printStackTrace();
+        		}
+    			
+    			//新增 入驻服务办理预约记录基础数据
+        		return o;
     		}
     		
     	}
@@ -236,6 +247,12 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
 		if(entrec!=null && entrec.getEnterrecStatus().equals("02")){
 			//若该预约可预约状态变更为已授理，则更新企业入驻信息基本数据和企业会员信息
 			enterbusinessmanagerRzManager.saveEnterbusinessmanagerRzBasicData(entrec.getEntrecId());
+			//发送短信给联系人
+    		try {
+    			HttpSenderMsg.sendMsg(entrec.getEnteringTelephone(), "尊敬的"+entrec.getMemberId().getMemberName()+"你好，你的预约已经成功受理，受理编号为【"+entrec.getEnterrecCode()+"】,感谢你对富春硅谷的支持！");
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}
 			
 		}
 	}
