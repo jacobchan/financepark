@@ -283,13 +283,12 @@
     							resoTime = "17:00-18:00";
     						}
     						if(records[i].resoStatus=='02'){
-    							alert(i);
     							numArray.push(records[i].resoDate.substring(5, 10)+"日"+resoTime+"已预订\n\n");
     						//	$("td").addClass(function(i){return "clicktd";});
     						}
     					}
     				}
-    			alert(numArray.toString().replace(",",""));
+    		//	alert(numArray.toString().replace(",",""));
     			}
     		}
     	});
@@ -385,7 +384,7 @@
 		});
 
 		$("#online").click(function() {
-			alert("已预约id："+$("#resoIds").html().substring(0,$("#resoIds").html().length-1));
+	//		alert("已预约id："+$("#resoIds").html().substring(0,$("#resoIds").html().length-1));
 			$(".pop_layer").show();
 		});
 		$(".close0").click(function() {
