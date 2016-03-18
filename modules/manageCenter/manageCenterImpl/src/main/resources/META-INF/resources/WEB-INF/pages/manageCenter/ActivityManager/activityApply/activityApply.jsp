@@ -17,12 +17,14 @@
 		<youi:gridCol property="applyNumber"  caption="活动申请编号" width="100px"/>
 		<youi:gridCol property="applyOrderNumber"  caption="场地订单编号" width="100px"/>	
 		<youi:gridCol property="applyTitle"  caption="活动标题" width="150px"/>
+		<youi:gridCol property="applayType.typeName"  caption="活动类型" width="100px"/>
 		<youi:gridCol property="applyMaxuser"  caption="限制人数"  width="100px"/>
 		<youi:gridCol property="startTime"  caption="活动开始时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" width="100px"/>
 		<youi:gridCol property="endTime"  caption="活动结束时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" width="100px"/>
 		<youi:gridCol property="commentContent"  caption="活动内容" width="200px"/>
 
 		<youi:gridCol property="applyStatus"  caption="活动申请状态" convert="activityApplyStatus" width="100px" />
+		<youi:gridCol property="isRecoomend"  caption="是否推荐" convert="bool" width="100px"/>
 		<youi:gridCol property="memberId.memberName"  caption="会员用户"  width="200px"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
@@ -44,6 +46,8 @@
 			<youi:fieldCalendar property="startTime"  caption="活动开始时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="true"/>
 			<youi:fieldCalendar property="endTime"  caption="活动结束时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="true"/>
 			<youi:fieldSelect property="applyStatus"  caption="活动申请状态" convert="activityApplyStatus" notNull="true"/>
+			<youi:fieldSelect property="applayType.typeId"  caption="活动类型" src="esb/web/applayTypeManager/getApplayTypes.json" code="typeId" show="typeName" notNull="true"/>
+			<youi:fieldSelect property="isRecoomend"  caption="是否推荐" convert="bool"/>
 			<youi:fieldSwfupload property="activityImage" caption="活动图片" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" />
 			<youi:fieldArea property="commentContent"  caption="活动内容" column="2" notNull="true"/>
 		</youi:fieldLayout>

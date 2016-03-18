@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.service.MemberInformationManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -18,6 +20,7 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.DateUtils;
 
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 
@@ -30,6 +33,8 @@ import com.manage.ActivityManager.service.ActivityApplylistManager;
 public class ActivityApplylistManagerImpl extends BaseManagerImpl implements ActivityApplylistManager{
 	@Autowired
 	private ActivityApplylistDao activityApplylistDao;
+	@Autowired
+	private MemberInformationManager memberInformationManager;
 	
     /**
      * 查询列表
@@ -101,6 +106,21 @@ public class ActivityApplylistManagerImpl extends BaseManagerImpl implements Act
     
     public boolean exsitActivityApplylist(String propertyName,Object value) throws BusException{
 		return activityApplylistDao.exists(propertyName,value);
+	}
+    
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+	public ActivityApplylist saveActivityApplylistForPage(ActivityApplylist o)
+			throws BusException {
+		// TODO Auto-generated method stub
+    	MemberInformation member=memberInformationManager.getMemberInformation(o.getUpdateUser());
+    	o.setMember(member);
+    	o.setApplylistTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	o.setCreateUser(o.getUpdateUser());
+    	o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	o.setUpdateUser(o.getUpdateUser());
+    	o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	activityApplylistDao.save(o);
+		return o;
 	}
 
 }
