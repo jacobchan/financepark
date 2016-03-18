@@ -284,6 +284,7 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		member.setRoleIds(roles);
 		member.getPrincipalConfig().put("userId", member.getMemberId());
 		member.getPrincipalConfig().put("loginType", token.getLoginType());
+		member.getPrincipalConfig().put("redirect", token.getRedirect());
 		return new MemberUserInfo(member);
 	}
 	@Override
