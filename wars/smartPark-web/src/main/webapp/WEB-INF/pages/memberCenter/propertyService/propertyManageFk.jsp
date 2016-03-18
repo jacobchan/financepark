@@ -137,9 +137,9 @@
 		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
 			<a href="javascript:;" class="tc-close"></a>
 			<div class="w70 tc mt40" style="margin-left:15%">
-				<img src="<%=request.getContextPath()%>/styles/images/grzx/ewm.jpg" border="0" class="mb20"/> 
-				<p class="mb10">订单号：<span class="c-o"> [ 123456789 ] </span></p>
-				<p>到访时间：2016年1月21日15:30</p>
+				<img src="/styles/images/grzx/ewm.jpg" border="0" class="mb20 fkurl"/> 
+				<p class="mb10">订单号：<span class="c-o fkcodes"> [ 123456789 ] </span></p>
+				<p>到访时间：<span class="bftime">2016年1月21日15:30</span></p>
 				<a href="javascript:;" class="ib-btn">分享到手机</a>
 				<p class="c-o f12 mt20">提示:推送到手机，必须确保手机端已经安装我们的官方APP</p>
 			</div>
@@ -168,11 +168,10 @@
 			$(".ac-see").click(function(){
 				$(".bg-tanc.m2").show();
 			});
-			
 			$.ajax({
 				url:'/smartPark-web/esb/web/propertyservicemanagerFkcodeManager/getFkcodeListforpage.json', 
 				success:function(result){
-					console.log(result);
+					
 					if(result&&result.records){
 						_parseRecords(result.records);
 					}
@@ -189,13 +188,13 @@
 						"<td>"+record[i].applyStatus+"</td>"+
 						"<td>"+record[i].fkcodeName+"</td>"+
 						"<td>"+record[i].fkcodeTelephone+"</td>"+
-						"<td><a href='javascript:;' class='ac-see'>查看二维码</a><span class='f12 ml5 mr5'>|</span><a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消访客</a></td>"+
+						"<td><a href='javascript:;' onclick='javascript:qrcode(this)' class='ac-see'>查看二维码</a><span class='f12 ml5 mr5'>|</span><a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消访客</a></td>"+
 						"</tr>";
 				 $("tbody").append(html);
 				
-				 $(".ac-see").click(function(){
+			/* 	 $(".ac-see").click(function(){
 					 $(".bg-tanc.m2").show();
-				 });
+				 }); */
 			}
 		};
 		function cancel(obj){
@@ -204,6 +203,29 @@
 			$(".fkCode").html(fkCode);
 			$(".fkCode")[0].setAttribute("id",me.id);
 			$(".bg-tanc.m1").show();
+		};
+		function qrcode(obj){
+	 		var me=obj.parentNode.parentNode;
+		/* 	var fkCode=me.childNodes[0].childNodes[0].innerText; 
+			var bftime = me.childNodes[1].innerText;
+			var url = queryUrl(me.id); 
+			var url=""; */
+			$.youi.ajaxUtils.ajax({
+				url:'/smartPark-web/esb/web/propertyservicemanagerTwcrdManager/findTwcrdById.json',
+				data:'fkcodeId='+me.id,
+				success:function(result){
+					if(result&&result.record){
+						var fkCode=me.childNodes[0].childNodes[0].innerText; 
+						var bftime = me.childNodes[1].innerText;
+						var url = result.record.twcrdAddrec;
+						$(".fkcodes").html(fkCode);
+						$(".bftime").html(bftime);
+						$(".fkcodes")[0].setAttribute("id",me.id);
+						$(".fkurl")[0].setAttribute("src","/filestore/"+url);
+						$(".bg-tanc.m2").show();
+					}
+				}
+			});
 		};
 	</script>
 	<!-- 取消访客 -->
