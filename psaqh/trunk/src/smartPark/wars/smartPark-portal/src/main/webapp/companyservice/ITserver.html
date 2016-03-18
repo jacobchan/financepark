@@ -851,11 +851,14 @@ $(function(){
 		var y = $(this).parents(".taocan").attr("data-commodity");
 		var userorderAdr = $('#userorderAdr'+y).val();
 		var faultDes = $('#faultDes').val();
-		var params = ['commodityId='+commodityId,'faultDes='+faultDes,'userorderAdr='+userorderAdr];
+		var params = $.youi.parameterUtils.propertyParameter("commodityId",commodityId)+"&";
+		params = params+$.youi.parameterUtils.propertyParameter("faultDes",faultDes)+"&";
+		params = params+$.youi.parameterUtils.propertyParameter("userorderAdr",userorderAdr);
+		
 		var serviceURL = baseUrl+"ordermanagerUserorderManager/saveITSerOrder.json";
 		$.youi.ajaxUtils.ajax({
 			url:serviceURL,
-			data:params.join('&'),
+			data:params,
 			jsonp:'data:jsonp',
 			dataType:'jsonp',
 			success:function(results){
