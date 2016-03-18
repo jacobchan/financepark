@@ -12,7 +12,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.EnterpriseManager.entity.InformationFinancing;
 
 public interface InformationFinancingManager extends BaseManager{
@@ -63,4 +64,17 @@ public interface InformationFinancingManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitInformationFinancing(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 根据企业id查询融资信息
+	 * @param financingRe 入驻企业id
+	 * @return 符合条件的融资对象集合
+	 * @throws BusException
+	 * @author ZhuYL
+	 * @time 2016-03-17
+	 */
+	@EsbServiceMapping
+	public List<InformationFinancing> findInformationFinancing(
+			@ServiceParam(name = "financingRe") String financingRe)
+			throws BusException;
 }
