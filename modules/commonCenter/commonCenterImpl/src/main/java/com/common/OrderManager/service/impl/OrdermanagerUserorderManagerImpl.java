@@ -3,10 +3,7 @@
  */
 package com.common.OrderManager.service.impl;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.List;
 import java.util.Collection;
 
@@ -168,28 +165,6 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	public OrdermanagerUserorder saveITSerOrder(@ServiceParam(name="userId",pubProperty="userId") String userId,
 			@ServiceParam(name="commodityId") String commodityId,@ServiceParam(name="faultDes") String faultDes,
 			@ServiceParam(name="userorderAdr") String userorderAdr) throws BusException {
-    	try {
-			String aa = new String(userorderAdr.getBytes("ISO8859-1"));
-			System.out.println("aaaaaaaaaaaaaaaaaaa=="+aa);
-			String cc = new String(userorderAdr.getBytes("GBK"));
-			System.out.println("ccccccccccccccccccc=="+cc);
-			String dd = new String(userorderAdr.getBytes("UTF-8"));
-			System.out.println("ddddddddddddddddddd=="+dd);
-		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-    	try {
-			String bb = URLEncoder.encode(userorderAdr, "UTF-8");
-			System.out.println("bbbbbbbbbbbbbbbbbbb=="+bb);
-			String ee = URLDecoder.decode(userorderAdr, "UTF-8");
-			System.out.println("eeeeeeeeeeeeeeeeeee=="+ee);
-			String ff = URLDecoder.decode(bb, "UTF-8");
-			System.out.println("fffffffffffffffffff=="+ff);
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
     	PurchasingmanagerCommodity commodity = purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
 		PurchasingmanagerGenre pg = commodity.getPurchasingmanagerGenre();
 		//根据类别ID获取类别扩展属性列表
