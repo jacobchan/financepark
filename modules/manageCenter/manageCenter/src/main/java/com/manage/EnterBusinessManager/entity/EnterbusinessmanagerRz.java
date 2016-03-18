@@ -103,9 +103,53 @@ public class EnterbusinessmanagerRz implements Domain{
 	@Length(max=36)
 	private String parkId;//园区ID
 	
+	@Column(name = "RZ_LOGO_")
+	@Length(max=256)
+	private String rzLogo;//企业logo
 	
+	@Column(name = "RZ_TYPE_")
+	@Length(max=50)
+	private String rzType;//上市类型
 	
+	@Column(name = "RZ_PROPERTY_")
+	@Length(max=50)
+	private String rzProperty;//企业性质
+	
+	@Column(name = "RZ_URL_")
+	@Length(max=256)
+	private String rzUrl;//企业网址
 
+	public String getRzLogo() {
+		return rzLogo;
+	}
+
+	public void setRzLogo(String rzLogo) {
+		this.rzLogo = rzLogo;
+	}
+
+	public String getRzType() {
+		return rzType;
+	}
+
+	public void setRzType(String rzType) {
+		this.rzType = rzType;
+	}
+
+	public String getRzProperty() {
+		return rzProperty;
+	}
+
+	public void setRzProperty(String rzProperty) {
+		this.rzProperty = rzProperty;
+	}
+
+	public String getRzUrl() {
+		return rzUrl;
+	}
+
+	public void setRzUrl(String rzUrl) {
+		this.rzUrl = rzUrl;
+	}
 
 	public String getRzName() {
 		return rzName;
