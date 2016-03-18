@@ -124,13 +124,14 @@ public class QRCodeUtil {
 	 *            是否压缩LOGO
 	 * @throws Exception
 	 */
-	public static void encode(String content, String imgPath, String destPath,
+	public static String encode(String content, String imgPath, String destPath,
 			boolean needCompress) throws Exception {
 		BufferedImage image = QRCodeUtil.createImage(content, imgPath,
 				needCompress);
 		mkdirs(destPath);
 		String file = new Random().nextInt(99999999) + ".jpg";
 		ImageIO.write(image, FORMAT_NAME, new File(destPath + "/" + file));
+		return file;
 	}
 
 	/**
@@ -190,8 +191,9 @@ public class QRCodeUtil {
 	 *            存储地址
 	 * @throws Exception
 	 */
-	public static void encode(String content, String destPath) throws Exception {
-		QRCodeUtil.encode(content, null, destPath, false);
+	public static String encode(String content, String destPath) throws Exception {
+		String imgUrl = QRCodeUtil.encode(content, null, destPath, false);
+		return imgUrl;
 	}
 
 	/**
@@ -266,7 +268,8 @@ public class QRCodeUtil {
 	}
 
 	public static void main(String[] args) throws Exception {
-		String text = "http://www.yihaomen.com";
-		QRCodeUtil.encode(text, "G:\\光谷世界城\\IMG_5741.JPG", "c:/barcode", true);
+		String text = "http://www.baidu.com";
+		String imgUrl = QRCodeUtil.encode(text, "c:/barcode");
+		System.out.println(imgUrl);
 	}
 }
