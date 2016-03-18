@@ -119,6 +119,8 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
     	}else{//新增
     		//生成一卡通编号
     		PropertyservicemanagerOc saveOc = null;
+    		o.setOcWay("00");
+    		o.setOcStatus("00");
     		o.setOcCode(BizCodeUtil.getInstance().getBizCodeDate("WYOC"));
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setApplyTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
