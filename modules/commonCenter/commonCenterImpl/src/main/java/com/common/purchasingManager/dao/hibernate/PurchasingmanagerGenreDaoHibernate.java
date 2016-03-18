@@ -61,7 +61,7 @@ public class PurchasingmanagerGenreDaoHibernate extends
 	@Override
 	public List<PurchasingmanagerGenre> getCommodityGenreList() {
 		String hql = "from PurchasingmanagerGenre m where "
-				+ "m.genreCode != '07' and m.genreCode != '08' or m.genreCode is null";
+				+ "m.genreCode != '07' and m.genreCode != '08' and m.genreCode != '09' or m.genreCode is null";
 		return getHibernateTemplate().find(hql);
 	}
 }
