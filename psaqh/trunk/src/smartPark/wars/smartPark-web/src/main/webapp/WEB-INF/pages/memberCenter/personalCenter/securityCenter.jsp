@@ -81,7 +81,7 @@
 				var confirmPassword=$("#confirmPassword").val();
 				var params=['password='+password,'confirmPassword='+confirmPassword,'oldPassword='+oldPassword];
 			 	$.youi.ajaxUtils.ajax({
-					url:'/smartPark-web/esb/web/memberInformationManager/doModifyPassword.json',
+					url:baseUrl+'/esb/web/memberInformationManager/doModifyPassword.json',
 					data:params.join('&'),
 					success:function(result){
 						alert("修改成功！");
@@ -98,7 +98,7 @@
 				var memberPhoneNumber=$("#memberPhoneNumber").val();
 				var params =['memberPhoneNumber='+memberPhoneNumber];
 				$.youi.ajaxUtils.ajax({
-					url:'/smartPark-web/esb/web/memberInformationManager/updatePhoneNumber.json',
+					url:baseUrl+'/esb/web/memberInformationManager/updatePhoneNumber.json',
 					data:params.join('&'),
 					success:function(result){
 						alert("修改成功！");
