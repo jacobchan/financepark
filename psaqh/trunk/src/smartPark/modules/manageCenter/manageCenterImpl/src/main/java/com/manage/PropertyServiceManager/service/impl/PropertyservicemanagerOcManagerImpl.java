@@ -245,9 +245,12 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 		String ocStstus=o.getOcStatus();
 		if(ocStstus.equals("00")){
 			o.setOcStatus("08");
+			o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+			return propertyservicemanagerOcDao.save(o); 
 	    }else{
-	    	 throw new BusException("只有在未办理时才能取消"); 
+	    	 throw new BusException("只有在未办理成功时才能取消"); 
+	    	 
 	    }		
-		 return propertyservicemanagerOcDao.save(o); 
+		  
 	}
 }
