@@ -114,7 +114,7 @@
 			$("#grzl").attr("class","");
 			$("#property").attr("class","active");
 			$.ajax({
-				url:'/smartPark-web/esb/web/propertyservicemanagerCosManager/getPropertyservicemanagerCoss.json',
+				url:'/smartPark-web/esb/web/propertyservicemanagerCosManager/getCosListByLoginUser.json',
 				success:function(result){
 					console.log(result.records);
 					if(result&&result.records){
