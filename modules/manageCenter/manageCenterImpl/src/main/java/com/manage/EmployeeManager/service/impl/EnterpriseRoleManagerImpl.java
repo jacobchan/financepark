@@ -82,7 +82,7 @@ public class EnterpriseRoleManagerImpl extends BaseManagerImpl implements
 			throws BusException {
 		EnterpriseEmployees es = enterpriseEmployeesDao.get(o.getEmployees().getEmployeesId());
 		o.setEmployees(es);
-		o.setRole(roleManager.getRole("ROLE_QY_ADMIN"));
+		o.setRole(o.getRole());
 		o.setCreateTime(new Timestamp(new Date().getTime()));
 		o.setUpdateUser(o.getCreateUser());
 		o.setUpdateTime(new Timestamp(new Date().getTime()));
