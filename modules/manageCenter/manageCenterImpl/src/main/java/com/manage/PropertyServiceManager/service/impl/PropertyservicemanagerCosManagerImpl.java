@@ -135,27 +135,11 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
      * @throws BusException
      */
     @EsbServiceMapping
-	public List<PropertyservicemanagerCos> getCosListByLoginUser() throws BusException {
-    	//先模拟一个登陆用户memberId，先在数据库插入memberId=1
-    	String m="1"; 
-    	return propertyservicemanagerCosDao.getList("memberId", m); 
+	public List<PropertyservicemanagerCos> getCosListByLoginUser(PropertyservicemanagerCos p) throws BusException {
+    	String id = p.getCreateUser();	    	
+    	List<PropertyservicemanagerCos> list =propertyservicemanagerCosDao.getList("memberInformation.memberId", id);
+    	return list; 
 	}
-    /**
-     * 修改状态
-     * @return
-     * @throws BusException
-     */
-   @EsbServiceMapping
-    public PropertyservicemanagerCos updateCosStatus(
-    		@ServiceParam(name="cosId") String cosId,
-    		@ServiceParam(name="cosStatus") String cosStatus
-    		) throws BusException{   	
-	   PropertyservicemanagerCos psm = propertyservicemanagerCosDao.get(cosId);     		
-    		psm.setCosStatus(cosStatus);
-	    	return propertyservicemanagerCosDao.save(psm);
-    		
-    }
-   
    /**
     * 前台修改订单
     * @param cosId
