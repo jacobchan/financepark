@@ -85,22 +85,11 @@ public interface PropertyservicemanagerCosManager extends BaseManager{
      * @return
      * @throws BusException
      */  
-	public List<PropertyservicemanagerCos> getCosListByLoginUser() throws BusException ;    	 	
+	public List<PropertyservicemanagerCos> getCosListByLoginUser(PropertyservicemanagerCos p) throws BusException ;    	 	
     /**
-     * 修改状态
+     * 修改状态__ 
      * @return
      * @throws BusException
      */  
-    public PropertyservicemanagerCos updateCosStatus(
-    		 String cosId,
-    		 String cosStatus
-    		) throws BusException;	
-    /**
-     * 前台修改订单
-     * @param cosId
-     * @return
-     * @throws BusException
-     */
-    public PropertyservicemanagerCos updateCosforpage(String cosId) throws BusException ;    	 	
-  
+    public PropertyservicemanagerCos updateCosStatus(String cosId ) throws BusException;	
 }
