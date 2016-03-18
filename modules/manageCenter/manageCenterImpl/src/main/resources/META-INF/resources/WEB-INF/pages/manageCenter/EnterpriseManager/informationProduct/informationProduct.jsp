@@ -31,12 +31,12 @@
 		action="esb/web/informationProductManager/saveInformationProduct.json">
 		<youi:fieldLayout prefix="record" columns="1" labelWidths="120,120">
 			<youi:fieldHidden property="productId"  caption="主键"/>
-			<youi:fieldText property="productContent" caption="产品描述" />
-			<youi:fieldSelect property="productRe" caption="企业"
+			<youi:fieldSelect property="productRe" caption="企信息"
 				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json"
 				code="rzId" show="rzName" />
-			<youi:fieldText property="productType" caption="产品类别" />
 			<youi:fieldText property="productName" caption="产品名称" />
+			<youi:fieldText property="productType" caption="产品类别" />
+			<youi:fieldArea property="productContent" caption="产品描述" notNull="true" rows="8" column="20" />
 		</youi:fieldLayout>
 	</youi:form>
 </youi:page>
