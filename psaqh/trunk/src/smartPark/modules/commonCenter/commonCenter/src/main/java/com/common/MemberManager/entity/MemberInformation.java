@@ -195,6 +195,10 @@ public class MemberInformation implements Domain,IdUser, IUser,IMemberInfomation
 		this.roleIds = roleIds;
 	}
 	
+	public List<String> getRoleIds(){
+		return this.roleIds;
+	}
+	
 	
 	
 	@Override

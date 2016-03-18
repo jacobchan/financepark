@@ -119,7 +119,7 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
     		
         	MemberInformation member = memberInformationDao.save(o);
         	//添加默认角色
-			this.setDefaultRole(member.getMemberId());
+			this.setDefaultRole(member);
         	return member;
     	}
     }
@@ -198,7 +198,7 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 				memberInformation.setMemberPhoneNumber(mobile);
 				MemberInformation member = memberInformationDao.save(memberInformation);
 				//添加默认角色
-				this.setDefaultRole(member.getMemberId());
+				this.setDefaultRole(member);
 				try {//发送短信
 					HttpSenderMsg.sendMsg(memberInformation.getMemberPhoneNumber(), "尊敬的用户，您已经在富春硅谷平台上注册成功了！欢迎使用！");
 				} catch (Exception e) {
@@ -211,10 +211,11 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
      * 添加会员的默认角色 默认会员角色 ROLE_MEMBER
      * @param memberId 会员用户ID
      */
-    private void setDefaultRole(String memberId){
+    private void setDefaultRole(MemberInformation member){
     	MemberRole memberRole = new MemberRole();
-    	memberRole.setMemberId(memberId);
+    	memberRole.setMemberId(member.getMemberId());
     	memberRole.setRoleId("ROLE_MEMBER");
+    	member.roleIds().add("ROLE_MEMBER");
     	this.memberRoleManager.saveMemberRole(memberRole);
     }
     
