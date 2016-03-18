@@ -62,7 +62,7 @@
 	
 		$(function(){
 			$.ajax({
-			  url:'/smartPark-web/esb/web/enterpriseEmployeesManager/getEnterprisemaillist.json',
+			  url:baseUrl+'/esb/web/enterpriseEmployeesManager/getEnterprisemaillist.json',
 		
 				success:function(result){					
 					console.log(result.records);
