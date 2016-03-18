@@ -518,9 +518,11 @@ $(function(){
 			var commodityId = object[attribute = 'attributes'][attribute = 'data-id'][attribute = 'value'];
 			var num = object[attribute = 'attributes'][attribute = 'data-num'][attribute = 'value'];
 			if(i+1<length){
-				params = params+"records["+i+"].commodityId.commodityId="+commodityId+"&records["+i+"].commoditydetailNum="+num+"&";
+				params = params+$.youi.parameterUtils.propertyParameter("records["+i+"].commodityId.commodityId",commodityId)+"&";
+				params = params+$.youi.parameterUtils.propertyParameter("records["+i+"].commoditydetailNum",num)+"&";
 			}else{
-				params = params+"records["+i+"].commodityId.commodityId="+commodityId+"&records["+i+"].commoditydetailNum="+num;
+				params = params+$.youi.parameterUtils.propertyParameter("records["+i+"].commodityId.commodityId",commodityId)+"&";
+				params = params+$.youi.parameterUtils.propertyParameter("records["+i+"].commoditydetailNum",num);
 			}
 		}
 		var serviceURL = baseUrl+"ordermanagerUserorderManager/saveLawSerOrder.json";
