@@ -232,15 +232,46 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
      * @throws BusException
      */ 
     @EsbServiceMapping
-	public List<ActivityApply> getActivityListByType(@ServiceParam(name="type")String type)
+	public List<ActivityApply> getActivityListByType(ActivityApply o)
 			throws BusException {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
-    	//先模拟一个登陆用户，之后会修改
     	//获取当前用户参加活动的list
     	Collection<Condition> condition = new ArrayList<Condition>();
-    //	condition.add(ConditionUtils.getCondition("applyMember.memberId", Condition.EQUALS, member.getMemberId()));
+    	if(o.getApplayType()!=null){
+    		condition.add(ConditionUtils.getCondition("applayType.typeId", Condition.EQUALS,o.getApplayType().getTypeId()));	
+    	}
     	List<ActivityApply> activityApplyList=activityApplyDao.commonQuery(condition, null);
+		return activityApplyList;
+	}
+    /**
+     * 获取热门推荐活动 
+     * @param isRecoment
+     * @return
+     * @throws BusException
+     */
+    @EsbServiceMapping
+	public List<ActivityApply> getActivityListIsRecoment(@ServiceParam(name="isRecoment")String isRecoment)
+			throws BusException {
+		// TODO Auto-generated method stub
+    	Collection<Condition> condition = new ArrayList<Condition>();
+    	condition.add(ConditionUtils.getCondition("applayType.isRecoment", Condition.EQUALS,"0"));
+    	List<ActivityApply> activityApplyList=activityApplyDao.commonQuery(condition, null);
+		return activityApplyList;
+	}
+    /**
+     *  获取热门推荐活动 
+     * @param o
+     * @return
+     * @throws BusException
+     */
+    @EsbServiceMapping
+	public List<ActivityApply> getActivityListIsRecoomend(ActivityApply o)
+			throws BusException {
+		// TODO Auto-generated method stub
+    	Collection<Condition> condition = new ArrayList<Condition>();
+    	condition.add(ConditionUtils.getCondition("isRecoomend", Condition.EQUALS,"0"));
+     	List<ActivityApply> activityApplyList=activityApplyDao.commonQuery(condition, null);
 		return activityApplyList;
 	}
 
