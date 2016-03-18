@@ -17,10 +17,10 @@
 				convert="financingStatus" />
 		</youi:fieldLayout>
 		<youi:gridCol property="knowledgeRe" caption="企业信息" width="20%" />
-		<youi:gridCol property="knowledgeTitle" caption="标题"" width="20%" />
-		<youi:gridCol property="knowledgeUrl" caption="知识产权证书"" width="20%" />
-		<youi:gridCol property="knowledgeStatus" caption="发布状态"" convert="financingStatus" width="8%" />
-		<youi:gridCol property="knowledgeContent" caption="描述"" width="32%" />
+		<youi:gridCol property="knowledgeTitle" caption="标题" width="20%" />
+		<youi:gridCol property="knowledgeUrl" caption="知识产权证书" width="20%" />
+		<youi:gridCol property="knowledgeStatus" caption="发布状态" convert="financingStatus" width="8%" />
+		<youi:gridCol property="knowledgeContent" caption="描述" width="32%" />
 		<youi:gridCol width="60" fixed="true" property="button" type="button"
 			caption="操作">
 			<youi:button name="edit" caption="修改" />
