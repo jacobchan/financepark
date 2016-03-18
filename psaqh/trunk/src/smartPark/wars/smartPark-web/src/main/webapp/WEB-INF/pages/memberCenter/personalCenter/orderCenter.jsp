@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>政策申请</title>
+	<title>订单中心</title>
 	<style>
 	  .ccheng{color:#FF6715}
     </style>
@@ -17,7 +17,7 @@
 			<div class="per-center-box clearfix">
 				<%@ include file="/WEB-INF/pages/memberCenter/common/ad_left.jsp"%> 
 				<div class="w1000">
-					<h3 class="per-h3">政策申请</h3>
+					<h3 class="per-h3">订单中心</h3>
 					<div class="clearfix mt40">
 						<table class="gt-table mt20">
 								<colgroup>
@@ -34,17 +34,7 @@
 									<th>下单时间</th>
 									<th>操作</th>
 								</tr>
-								<tr>
-									<td><a href="">123456789</a></td>
-									<td>物业报修</td>
-									<td>999元</td>
-									<td>2016-1-12 17:30：08</td>
-									<td>
-										<span>已完成</span><span class="f12 ml5 mr5">|</span>
-										<a href="grzx2-2.html">评价</a><span class="f12 ml5 mr5">|</span>
-										<a href="javascript:;" class="ac-show lq-show">发票领取</a>
-									</td>
-								</tr>								
+														
 							</tbody></table>                      
 						<div class="fr page-list-a clearfix lh30 mt20 f12">
 							<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
