@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MemberManager.dao.MemberInformationDao;
+import com.common.MemberManager.entity.MemberInformation;
 import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
 import com.common.OrderManager.entity.OrdermanagerOrderprojecttypeValue;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
@@ -78,6 +80,9 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 
 	@Autowired
 	private PurchasingmanagerGenreManager purchasingmanagerGenreManager;
+	
+	@Autowired
+	private MemberInformationDao memberInformationDao;
 	
 	
 	
@@ -430,10 +435,39 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 	 * 根据商品id获取资源可用状态
 	 */
 	@EsbServiceMapping
-	public List<PublicutilitiesmanagerReso> getPublicutilitiesmanagerResoByCommodityId(@ServiceParam(name="commodityId") String commodityId) throws BusException {
+	public List<Record> getPublicutilitiesmanagerResoByCommodityId(@ServiceParam(name="userId",pubProperty = "userId") String userId,@ServiceParam(name="commodityId") String commodityId) throws BusException {
+		List<Record> recordList=new ArrayList<Record>();
+		MemberInformation memberInformation=new MemberInformation();
+		if(userId !=null){
+		  memberInformation=memberInformationDao.get(userId);
+		}
 		String[] parame = new String[]{"commodityId.commodityId"};
 		Object[] objval = new Object[]{commodityId};
 		List<PublicutilitiesmanagerReso> list = publicutilitiesmanagerResoDao.getList(parame, objval);
-		return list;
+		if(list.size()>0){
+			for(PublicutilitiesmanagerReso p:list){
+				Record record=new Record();
+				
+				record.put("resoId",p.getResoId());
+				record.put("resoStatus",p.getResoStatus());
+				record.put("commodityId",p.getCommodityId().getCommodityId());
+				record.put("resoDate",p.getResoDate());
+				record.put("resoTime",p.getResoTime());
+				record.put("name",memberInformation!=null?memberInformation.getMemberName():"");
+				record.put("phone",memberInformation!=null?memberInformation.getMemberPhoneNumber():"");
+				recordList.add(record);
+			}
+		}else{
+			Record record=new Record();
+			record.put("resoId","");
+			record.put("resoStatus","");
+			record.put("commodityId","");
+			record.put("resoDate","");
+			record.put("resoTime","");
+			record.put("name",memberInformation!=null?memberInformation.getMemberName():"");
+			record.put("phone",memberInformation!=null?memberInformation.getMemberPhoneNumber():"");
+			recordList.add(record);
+		}
+		return recordList;
 	}
 }

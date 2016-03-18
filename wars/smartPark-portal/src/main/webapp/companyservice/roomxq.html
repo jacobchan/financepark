@@ -172,11 +172,11 @@
             	<div>
                     <div class="inline_b">
                         <label><span class="cc vm">*</span>&nbsp;联系人</label>
-                        <input type="text" id="enteringName" name="enteringName"/>
+                        <input type="text" id="enteringName"/>
                     </div>
                     <div class="inline_b ml40">
                         <label><span class="cc vm">*</span>&nbsp;联系电话</label>
-                        <input type="text" id="enteringTelephone" name="enteringTelephone"/>
+                        <input type="text" id="enteringTelephone"/>
                     </div>
                 </div>
                 <div class="mt25">
@@ -263,6 +263,8 @@ function GetRequest() {
     				var records = results.records;
     				$("#resoIds").empty();
     				for(var i=0; i<records.length; i++){
+    					$("#enteringName").val(records[0].name);
+    					$("#enteringTelephone").val(records[0].phone);
     					if((Number(records[i].resoDate.substring(5,7)))==Number($("#month").html())){
     						//主键追加到隐藏域供预约使用
     						$("#resoIds").append(records[i].resoId+",");
@@ -393,6 +395,25 @@ function GetRequest() {
 		  //提交预约
 		$('.btn-cheng').click(function(){
 			if(!isLogin){alert("请登录");return;}
+			var enteringName=$("#enteringName").val();
+			var enteringTelephone=$("#enteringTelephone").val();
+            if(enteringName == null||enteringName == ""){
+				alert("请填写联系人人");
+				return;
+			}
+            if(enteringTelephone !=null&& enteringTelephone!=""){
+				 if(isMobil(enteringTelephone)){
+						
+					}else{
+						alert("电话格式不正确！");
+						return false;
+					}
+		    	}else{
+		    		alert("请填写联系人电话");
+				return;
+		    	}
+			
+			
 			
 			var dates=new Array();
 			var times=new Array();
@@ -434,7 +455,6 @@ function GetRequest() {
 					string+="records["+i+"].resoTime="+times[i]+"&";
 				}
 				string+="userorderAmount="+userorderAmount+"&"+"commodityId="+commodityId;
-			 alert(string);
 			   var serviceURL =baseUrl+"publicutilitiesmanagerResoManager/savePublicResoOrderByList.json";
 				//公共方法
 			 $.youi.ajaxUtils.ajax({
@@ -455,6 +475,13 @@ function GetRequest() {
             }else{
             	alert("请选择预约日期和时间段");
             }	
+			
+			//校验手机号格式
+			function isMobil(s) {
+			    	var patrn = /^(13[0-9]{9})|(14[0-9])|(18[0-9])|(15[0-9][0-9]{8})$/;
+			   		if (!patrn.exec(s)) return false
+			   	 	return true
+				}
 		});
 		
 	})

@@ -8,12 +8,14 @@ import java.util.List;
 
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.PublicUtilitiesManager.entity.PublicutilitiesmanagerReso;
 
 public interface PublicutilitiesmanagerResoManager extends BaseManager{
@@ -34,7 +36,7 @@ public interface PublicutilitiesmanagerResoManager extends BaseManager{
     /**
      * 根据商品id查询
      */
-    public List<PublicutilitiesmanagerReso> getPublicutilitiesmanagerResoByCommodityId(String commodityId) throws BusException;
+    public List<Record> getPublicutilitiesmanagerResoByCommodityId(String userId,String commodityId) throws BusException;
 	/**
 	 * 分页查询用户
 	 * @return 分页对象

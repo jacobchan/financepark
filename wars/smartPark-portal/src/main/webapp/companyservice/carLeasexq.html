@@ -152,6 +152,8 @@
 				var records = results.records;
 				$("#resoIds").empty();
 				for(var i=0; i<records.length; i++){
+					$("#reserveName").val(records[0].name);
+					$("#reserveTel").val(records[0].phone);
 					if((Number(records[i].resoDate.substring(5,7)))==Number($("#month").html())){
 						//主键追加到隐藏域供预约使用
 						$("#resoIds").append(records[i].resoId+",");
