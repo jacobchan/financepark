@@ -5,7 +5,7 @@
 		<dl>
 			<dt>个人中心</dt>
 			<dd  class="active"><a href="<%=request.getContextPath()%>/member/memberCenter/index.html">个人资料</a></dd>
-			<dd><a href="grzx2.html">订单中心</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/orderCenter.html">订单中心</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/securityCenter.html">安全中心</a></dd>
 			<dd><a href="grzx4.html">消息</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/enterprisemaillist.html">企业通讯录</a></dd>
