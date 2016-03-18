@@ -1,1 +1,1 @@
-var baseUrl="smartPark-web/";
+var baseUrl="/smartPark-web";
