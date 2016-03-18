@@ -82,7 +82,7 @@
 	<div class="w1200">
     	<ul class="tab_ul clearfix">
         	<li class="active">园区本地资源</li>
-            <li>在线资源[亿企管家]</li>
+            <li id="online">在线资源[亿企管家]</li>
         </ul>
     </div>
 </div>
@@ -597,7 +597,7 @@
         <ul class="blend_ul clearfix">
             <li class="active">评价</li>
             <li>咨询</li>
-            <div><li id="shoplist">购买清单</li></div>
+            <!-- <div><li id="shoplist">购买清单</li></div> -->
         </ul>
         <!---->
         <div class="blend_item">
@@ -1045,6 +1045,9 @@ $(function(){
 			}
 		});
 	}
+	$('#online').click(function(){
+		window.open("http://www.yiqiguanjia.com");
+	});
 	$('#btn-sumbit').click(function(){
 		if(!isLogin){alert("请登录");return;}
 		var length = $('#shopCar').children("tr").length;

@@ -84,7 +84,7 @@
 	<div class="w1200">
     	<ul class="tab_ul clearfix">
         	<li class="active">园区本地资源</li>
-            <li>在线资源[多有米]</li>
+            <li id="online" >在线资源[多有米]</li>
         </ul>
     </div>
 </div>
@@ -627,6 +627,9 @@ $(function(){
 			}
 		});
 	}
+	$('#online').click(function(){
+		window.open("http://www.duoyoumi.com");
+	});
 	$('#btn-sumbit').click(function(){
 		if(!isLogin){alert("请登录");return;}
 		var length = $('#shopCar').children("tr").length;
