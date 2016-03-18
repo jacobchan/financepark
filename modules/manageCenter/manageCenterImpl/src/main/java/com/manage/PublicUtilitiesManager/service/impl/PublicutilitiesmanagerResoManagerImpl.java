@@ -148,17 +148,37 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
     public List<PublicutilitiesmanagerReso> savePublicutilitiesmanagerResoList(List<PublicutilitiesmanagerReso> o,String commodityId) throws BusException{
     	String resoId = "";
     	List<PublicutilitiesmanagerReso> resoList=new ArrayList<PublicutilitiesmanagerReso>();
+    	List<PublicutilitiesmanagerReso> reListForCar=new ArrayList<PublicutilitiesmanagerReso>();
     	List<PublicutilitiesmanagerReso> reList=new ArrayList<PublicutilitiesmanagerReso>();
     	PurchasingmanagerCommodity purchasingmanagerCommodity =new PurchasingmanagerCommodity();
     	for(PublicutilitiesmanagerReso pr:o){
-    		//根据商品id和可用日期查询是否存在公共资源预约
+    		
     		String resoDate=pr.getResoDate();
-    		if(StringUtils.isNotEmpty(resoDate) && StringUtils.isNotEmpty(commodityId)){
+    		String resoTime=pr.getResoTime();
+    		if(StringUtils.isNotEmpty(resoDate) && StringUtils.isNotEmpty(resoTime) && StringUtils.isNotEmpty(commodityId)){
+    			//根据商品id和可用日期、可用时段查询是否存在公共资源预约：会议室和广告位
     			purchasingmanagerCommodity=purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
-    			reList=publicutilitiesmanagerResoDao.getList(new String[] {"resoDate","commodityId.commodityId"}, new  String[] {resoDate,commodityId});
+    			reList=publicutilitiesmanagerResoDao.getList(new String[] {"resoDate","resoTime","commodityId.commodityId"}, new  String[] {resoDate,resoTime,commodityId});
+    		}else if(StringUtils.isNotEmpty(resoDate) && StringUtils.isNotEmpty(commodityId)){
+    			//根据商品id和可用日期查询是否存在公共资源预约：车辆租赁
+    			purchasingmanagerCommodity=purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
+    			reListForCar=publicutilitiesmanagerResoDao.getList(new String[] {"resoDate","commodityId.commodityId"}, new  String[] {resoDate,commodityId});
     		}
     		if(reList.size()>0){
-    			resoId = reList.get(0).getResoId();
+    			//判断广告位或会议室是否被预约:02---已预约
+    			if(!reList.get(0).getResoStatus().equals("02")){
+    				resoId = reList.get(0).getResoId();
+    			}else{
+        			throw new BusException("该日期时段已被预约,请重新选择日期时段！");
+        		}
+    		}	
+    		if(reListForCar.size()>0){
+    			//判断车辆是否被预约
+    			if(!reListForCar.get(0).getResoStatus().equals("02")){
+    				resoId = reListForCar.get(0).getResoId();
+    			}else{
+        			throw new BusException("该日期时段已被预约,请重新选择日期时段！");
+        		}
     		}
     		boolean isUpdate = StringUtils.isNotEmpty(resoId);
         	if(isUpdate){//修改,更新预约状态

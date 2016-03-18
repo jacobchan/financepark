@@ -5,7 +5,6 @@
 	<title>Document</title>
 	<link href="../styles/base.css" type="text/css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
-		<script type="text/javascript" src="../scripts/page/zs.js"></script>
 	<link rel="stylesheet" type="text/css" href="../styles/page/awesome/css/font-awesome.min.css">
 	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
@@ -29,10 +28,6 @@
 			</div>
 			<script>
 				$(function(){
-					$(".em1").click(function(){
-						$(".em1").removeClass("active");
-						$(this).addClass("active");
-					})
 					var j=0;
 					var o=$(".ht-table tr th").length-1;
 					var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
@@ -51,22 +46,27 @@
 						if(!isLogin){alert("请登录");return;}
 						var enteringName=$("#enteringName").val();
 						var enteringTelephone=$("#enteringTelephone").val();
+						if(enteringId == null||enteringId == ""){
+							alert("请选择预约时间");
+							return;
+						}
                         if(enteringName == null||enteringName == ""){
 							alert("请填写申请人");
 							return;
 						}
                         if(enteringTelephone !=null&& enteringTelephone!=""){
-          					 if(isMobil(enteringTelephone)){
-          							
-          						}else{
-          							alert("电话格式不正确！");
-          							return false;
-          						}
-          			    	}else{
-          			    		alert("请填写申请人电话");
-   							return;
-          			    }
-						var params=['propertyservicemanagerEntering.enteringId=40288aae537e32a701537e3744030001','enteringName='+enteringName,'enteringTelephone='+enteringTelephone];
+       					 if(isMobil(enteringTelephone)){
+       							
+       						}else{
+       							alert("电话格式不正确！");
+       							return false;
+       						}
+       			    	}else{
+       			    		alert("请填写申请人电话");
+							return;
+       			    	}
+                      
+						var params=['propertyservicemanagerEntering.enteringId='+enteringId,'enteringName='+enteringName,'enteringTelephone='+enteringTelephone];
 						var serviceURL = baseUrl+"propertyservicemanagerEntrecManager/savePropertyservicemanagerEntrec.json";
 						//公共方法
 						$.youi.ajaxUtils.ajax({
@@ -77,21 +77,20 @@
 							success:function(results){
 								console.log(results);
 								if(results&&results.record){
-									//alert("预约成功");
-									$(".bg-tanc.m2").show();
-									window.location=cenUrl+"member/memberCenter/personalCenter/myReservation.html";
+									alert("预约成功");
+									window.location="yq2.html";
 								}
 							},error:function(XMLHttpRequest, textStatus, errorThrown){
 								alert(XMLHttpRequest);
 							}
 						});
-
 						//校验手机号格式
 						function isMobil(s) {
 						    	var patrn = /^(13[0-9]{9})|(14[0-9])|(18[0-9])|(15[0-9][0-9]{8})$/;
 						   		if (!patrn.exec(s)) return false
 						   	 	return true
 							}
+						
 					});
 					/*  $(".ht-table").plists({
 						template:'',
@@ -145,21 +144,21 @@
 								<th>预约说明</th>
 							</tr>
 							<tr id="am">
-								<td>09：00-12：00</td>
-								<td><a href="javascript:;" class="em3">不可预约</a></td>
+								<!-- <td>09：00-12：00</td>
+								<td><a href="javascript:;" class="em3"><span id='enteringId' style='display:none'>99</span>不可预约</a></td>
 								<td><a href="javascript:;" class="em1">可以预约（8个）</a></td>
 								<td><a href="javascript:;" class="em1">可以预约（10个）</a></td>
 								<td><a href="javascript:;" class="em2">预约已满</a></td>
 								<td><a href="javascript:;" class="em1">可以预约（12个）</a></td>
-								<td rowspan="2"><p class="lh20">温馨提示：线上预约后,请在预约的时间内到物业处凭预约短信办理相关事宜。</p></td>
+								<td rowspan="2"><p class="lh20">温馨提示：线上预约后,请在预约的时间内到物业处凭预约短信办理相关事宜。</p></td>  -->
 							</tr>
 							<tr id="pm">
-								<td>14：00-17：00</td>
+								<!-- <td>14：00-17：00</td>
 								<td><a href="javascript:;" class="em3">不可预约</a></td>
 								<td><a href="javascript:;" class="em1">可以预约（8个）</a></td>
 								<td><a href="javascript:;" class="em1">可以预约（10个）</a></td>
 								<td><a href="javascript:;" class="em1">可以预约（20个）</a></td>
-								<td><a href="javascript:;" class="em1">可以预约（12个）</a></td>
+								<td><a href="javascript:;" class="em1">可以预约（12个）</a></td> -->
 							</tr>
 						</table>
 						<h3 class="f16 lh22 pt10 pb10 mt40" style="border-bottom:1px solid #efebeb;">申请人基本信息</h3>
@@ -180,23 +179,6 @@
 	</div>
 	<!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
-	
-	<div class="bg-tanc m2">
-		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
-			<a href="javascript:;" class="tc-close"></a>
-			<div class="w70 tc mt40" style="margin-left:15%">
-				<table>
-					<tr>
-						<td><img src="../styles/images/grzx/check.png" class="mr40 mb20" border="0"></td>
-						<td >
-							<h4 class="f24 fl c-333"> 您已预约成功！</h4>
-							<p class="f14 c-o fl mt20 mb20">如有问题，请拨打：0571-86508888</p>
-						</td>
-					<tr/>
-				</table>
-			</div>
-		</div>
-	</div>
 	<!--***bottom end****************************************-->
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
 	<script type="text/javascript">
@@ -211,8 +193,48 @@
 		success : function(results) {
 			if (results && results.records) {
 				var record = results.records;
-				$("#enteringName").val(record[0].memName);
+				var amHtml="<td>09：00-12：00</td><td><a href='javascript:;' class='em3'>不可预约</a></td>";
+				var pmHtml="<td>14：00-17：00</td><td><a href='javascript:;' class='em3'>不可预约</a></td>";
+				var totalHtml="<td rowspan='2'><p class='lh20'>温馨提示：线上预约后,请在预约的时间内到物业处凭预约短信办理相关事宜。</p></td>";
+				$("#am").append(amHtml);
+				var html="";
+				var htmls="";
+				for(var i=0; i<record.length; i++){
+                $("#enteringName").val(record[0].memName);
 				$("#enteringTelephone").val(record[0].memPhone);
+					for(var i=0; i<4; i++){
+						if(record[i].enteringStatus=='01'){
+							html="<td><a href='javascript:;' class='em1'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+						}
+						else if(record[i].enteringStatus=='02'){
+							html="<td><a href='javascript:;' class='em2'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+						}else{
+							html="<td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+						}
+						
+						 $("#am").append(html);
+					}
+					$("#am").append(totalHtml);
+					$("#pm").append(pmHtml);
+					for(var i=4; i<record.length; i++){
+						if(record[i].enteringStatus=='01'){
+							htmls="<td><a href='javascript:;' class='em1'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+						}
+						else if(record[i].enteringStatus=='02'){
+							htmls="<td><a href='javascript:;' class='em2'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+						}else{
+							htmls="<td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+						}
+						$("#pm").append(htmls);
+					}
+				}
+				
+				$(document).on("click",".em1",function(){
+					$(".em1").removeClass("active");
+					$(this).addClass("active");
+					enteringId=$(this).find("span").text();
+				})
+
 			}
 		}
 	});
