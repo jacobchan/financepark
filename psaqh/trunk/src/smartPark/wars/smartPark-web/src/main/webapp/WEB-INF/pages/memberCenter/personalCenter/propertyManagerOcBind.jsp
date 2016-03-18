@@ -35,8 +35,7 @@
 	
 		$(function(){
 			$.ajax({
-			  url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/getPropertyservicemanagerOcListByLoginUser.json',
-			//	 url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/getPropertyservicemanagerOcs.json',
+			  url:baseUrl+'/esb/web/propertyservicemanagerOcManager/getPropertyservicemanagerOcListByLoginUser.json',
 				success:function(result){
 					
 					console.log(result.records);
@@ -69,7 +68,7 @@
 			alert(ocNumber);
 						
 			$.youi.ajaxUtils.ajax({
-				url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/addBindOc.json',
+				url:baseUrl+'/esb/web/propertyservicemanagerOcManager/addBindOc.json',
 				data:'ocNumber='+ocNumber,
 				success:function(result){
 					if(result&&result.record){

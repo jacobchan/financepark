@@ -62,7 +62,7 @@
 	<script type="text/javascript">
 	$(function(){		
 			$.ajax({
-				url:'/smartPark-web/esb/web/memberadrAddressManager/getMemberadrAddresssByUser.json', 
+				url:baseUrl+'/esb/web/memberadrAddressManager/getMemberadrAddresssByUser.json', 
 				success:function(result){
 					console.log(result);
 					if(result&&result.records){
@@ -82,7 +82,7 @@
 				var params =['addressName='+name+'','addressPhone='+phone+'','addressDetail='+address+'','addressStatus=1'];
 			
 			 	$.youi.ajaxUtils.ajax({
-					url:'/smartPark-web/esb/web/memberadrAddressManager/saveMemberadrAddress.json',
+					url:baseUrl+'/esb/web/memberadrAddressManager/saveMemberadrAddress.json',
 					data:params.join('&'),
 					success:function(result){
 						if(result&&result.record){
