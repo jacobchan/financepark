@@ -32,14 +32,15 @@
 	<youi:form dialog="true" caption="知识产权信息"
 		id="form_informationKnowledge"
 		action="esb/web/informationKnowledgeManager/saveInformationKnowledge.json">
-		<youi:fieldLayout prefix="record">
-			<youi:fieldSelect property="knowledgeRe" caption="企业信息"
+		<youi:fieldLayout prefix="record" labelWidths="120,120">
+			<youi:fieldHidden property="knowledgeId" caption="主键" />
+			<youi:fieldSelect property="knowledgeRe" caption="企业信息" notNull="true"
 				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json"
 				code="rzId" show="rzName" />
-			<youi:fieldText property="knowledgeTitle" caption="标题" />
-			<youi:fieldText property="knowledgeContent" caption="描述" />
-			<youi:fieldSwfupload property="knowledgeUrl" caption="知识产权证书" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" fileUploadLimit="1" fileQueueLimit="1"/>
-			<youi:fieldSelect property="knowledgeStatus" caption="发布状态" convert="financingStatus" />
+			<youi:fieldText property="knowledgeTitle" caption="标题" notNull="true" />			
+			<youi:fieldSwfupload property="knowledgeUrl" caption="知识产权证书" notNull="true" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" fileUploadLimit="1" fileQueueLimit="1"/>
+			<youi:fieldSelect property="knowledgeStatus" caption="发布状态" notNull="true" convert="financingStatus" />
+			<youi:fieldArea property="knowledgeContent" caption="描述" notNull="true" rows="8" column="20" />
 		</youi:fieldLayout>
 	</youi:form>
 </youi:page>
