@@ -36,7 +36,7 @@
 				format="yyyy-MM-dd" />
 			<youi:fieldText property="legalBusiness" caption="法人职务"/>			
 			<youi:fieldText property="legalTelephone" caption="联系方式"/>
-			<youi:fieldText property="legalRemark" caption="法人简介"/>
+			<youi:fieldArea property="legalRemark" caption="法人简介" notNull="true" rows="8" column="20"/>
 		</youi:fieldLayout>
 	</youi:form>
 </youi:page>
