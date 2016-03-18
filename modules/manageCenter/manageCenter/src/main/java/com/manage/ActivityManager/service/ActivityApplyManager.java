@@ -115,5 +115,12 @@ public interface ActivityApplyManager extends BaseManager{
      * @return
      * @throws BusException
      */    
-    public List<ActivityApply> getActivityListByType(String type) throws BusException;
+    public List<ActivityApply> getActivityListByType(ActivityApply o) throws BusException;
+    /**
+     *  获取推荐活动
+     * @param o
+     * @return
+     * @throws BusException
+     */
+    public List<ActivityApply> getActivityListIsRecoomend(ActivityApply o) throws BusException;
 }

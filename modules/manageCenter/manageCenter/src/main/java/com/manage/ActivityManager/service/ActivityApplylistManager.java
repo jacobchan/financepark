@@ -13,6 +13,7 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
 
+import com.manage.ActivityManager.entity.ActivityApply;
 import com.manage.ActivityManager.entity.ActivityApplylist;
 
 public interface ActivityApplylistManager extends BaseManager{
@@ -63,4 +64,11 @@ public interface ActivityApplylistManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitActivityApplylist(String propertyName,Object value) throws BusException;
+    /**
+     * 活动前端页面报名
+     * @param o
+     * @return
+     * @throws BusException
+     */
+	public ActivityApplylist saveActivityApplylistForPage(ActivityApplylist o) throws BusException;
 }
