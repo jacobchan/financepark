@@ -12,7 +12,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.EnterpriseManager.entity.InformationKnowledge;
 
 public interface InformationKnowledgeManager extends BaseManager{
@@ -63,4 +64,17 @@ public interface InformationKnowledgeManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitInformationKnowledge(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 根据企业id查询知识产权信息
+	 * @param knowledgeRe 入驻企业id
+	 * @return 符合条件的知识产权对象集合
+	 * @throws BusException
+	 * @author ZhuYL
+	 * @time 2016-03-18
+	 */
+	@EsbServiceMapping
+	public List<InformationKnowledge> findInformationKnowledge(
+			@ServiceParam(name = "knowledgeRe") String knowledgeRe)
+			throws BusException;
 }
