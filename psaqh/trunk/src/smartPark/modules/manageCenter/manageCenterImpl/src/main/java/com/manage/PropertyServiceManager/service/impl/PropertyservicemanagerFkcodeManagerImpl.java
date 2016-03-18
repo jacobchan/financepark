@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,6 +43,8 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
 	private PropertyservicemanagerTwcrdManager propertyservicemanagerTwcrdManager ;
 	@Autowired
 	private MemberInformationManager memberInformationManager;
+	@Value("#{configProperties['file.root.path']}")
+	private String root;
     /**
      * 查询列表
      */
@@ -101,13 +104,16 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
     		PropertyservicemanagerTwcrd twcrd = new PropertyservicemanagerTwcrd() ;//申请成功后会生成对应的二维码
     		twcrd.setStatus("00");//00二维码状态为有效,01表示无效
     		twcrd.setPropertyservicemanagerFkcode(fkcode);//将访客申请set到对应的二维码中
-    		twcrd.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    	/*	try {
-				QRCodeUtil.encode("", "");
+    		twcrd.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));	
+    		try {
+    			String imgPath = root+"qrcode/";     
+    	        String contents = "欢迎来访!";  
+				String url = QRCodeUtil.encode(contents, imgPath);
+				twcrd.setTwcrdAddrec(imgPath+url);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-    		twcrd.setTwcrdAddrec("");*/
+    		
     		propertyservicemanagerTwcrdManager.savePropertyservicemanagerTwcrd(twcrd) ;//保存访客申请的二维码
     	}
     	return fkcode;
