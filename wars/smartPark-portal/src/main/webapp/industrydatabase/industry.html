@@ -87,25 +87,9 @@
 					</ul>
 					<div class="clearfix">
 						<div class="clearfix yin-group undis">
-							<div class="yg-group-box">
-								<div class='yg-time'>
-									<div class="yt-pa">进行中…</div>
-									<em class="em-pa"></em>
-									<div class="clearfix">
-										<span>Pre-A</span><span>融资金额：<em class="c-o">500万元</em></span><span>融资估值：<em class="c-o">5000万元</em></span><span>可持股份：<em class="c-o">10%</em></span>
-									</div>
-									<p>通过整合香港、深圳、广州、台湾各机场的航空资源和与DHL、FedEx、UPS、TNT、EMS各种形式深层次的合作，一直服务于业内货代同行，合作货代商遍布全国，共计有五千余家。</p>
-								</div>
-								<div class='yg-time'>
-									<div class="yt-pa">2014年<p>10月</p></div>
-									<em class="em-pa"></em>
-									<div class="clearfix">
-										<span>天使轮</span><span>融资金额：<em class="c-o">100万元</em></span><span>投资主体：<em class="c-o">保密</em></span>
-									</div>
-									<p>通过整合香港、深圳、广州、台湾各机场的航空资源和与DHL、FedEx、UPS、TNT、EMS各种形式深层次的合作，一直服务于业内货代同行，合作货代商遍布全国，共计有五千余家。</p>
-								</div>
+							<div id="informationFinancing" class="yg-group-box">
+								
 							</div>
-							
 						</div>
 						<div class="clearfix yin-group undis">
 							<div class="yin-box">
@@ -282,7 +266,7 @@
 	    	var rzId = Request['id'];
 	    	var params = ['rzId='+rzId];
 	    	var serviceURL = baseUrl+"enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json";
-	    	//根据商品id获取资源可用状态
+	    	//根据企业id获取企业信息
 	    	$.youi.ajaxUtils.ajax({
 	    		url : serviceURL,
 	    		data:params.join('&'),
@@ -297,6 +281,32 @@
 	    				$("#introdaction").html(record.rzRemark);
 	    				$("#managerName").html(record.rzManager.memberName);
 	    				$("#enTypeName").append(record.enTypeId.enTypeName);
+	    			}
+	    		}
+	    	});
+	    	
+	    	//根据企业id获取融资信息
+	    	$.youi.ajaxUtils.ajax({
+	    		url : baseUrl+"informationFinancingManager/findInformationFinancing.json",
+	    		data : ['financingRe='+rzId].join('&'),
+	    		jsonp : 'data:jsonp',
+	    		dataType : 'jsonp',
+	    		async : false,
+	    		success : function(results) {
+	    			if (results && results.record) {
+	    				var records = results.records;
+	    				for(var i=0; i<records.length; i++){
+	    					alert(records[i].financingName);
+	    					var financingDiv = '<div class="yg-time">'+
+									'<div class="yt-pa">'+records[i].financingStatus+'…</div><em class="em-pa"></em>'+
+									'<div class="clearfix">'+
+										'<span>'+records[i].financingSub+'</span><span>融资金额：<em class="c-o">'+records[i].financingAmount+'万元</em></span><span>融资估值：<em class="c-o">'+records[i].financingCost+'万元</em></span><span>可持股份：<em class="c-o">'+records[i].financingPre+'%</em></span>'+
+									'</div>'+
+									'<p>通过整合香港、深圳、广州、台湾各机场的航空资源和与DHL、FedEx、UPS、TNT、EMS各种形式深层次的合作，一直服务于业内货代同行，合作货代商遍布全国，共计有五千余家。</p>'+
+								'</div>'+
+							$("#informationFinancing").empty();
+							$("#informationFinancing").append(financingDiv);
+	    				}
 	    			}
 	    		}
 	    	});
