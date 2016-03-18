@@ -114,7 +114,7 @@
 			$("#grzl").attr("class","");
 			$("#property").attr("class","active");
 			$.ajax({
-				url:'/smartPark-web/esb/web/propertyservicemanagerCosManager/getCosListByLoginUser.json',
+				url:baseUrl+'/esb/web/propertyservicemanagerCosManager/getCosListByLoginUser.json',
 				success:function(result){
 					console.log(result.records);
 					if(result&&result.records){
@@ -175,7 +175,7 @@
 		$(".hhf-submit").click(function(){
 				var id=$(".cosCode")[0].getAttribute("id");
 			 	$.youi.ajaxUtils.ajax({
-					url:'/smartPark-web/esb/web/propertyservicemanagerCosManager/updateCosforpage.json',
+					url:baseUrl+'/esb/web/propertyservicemanagerCosManager/updateCosforpage.json',
 					data:'cosId='+id,
 					success:function(result){
 						if(result&&result.record){
