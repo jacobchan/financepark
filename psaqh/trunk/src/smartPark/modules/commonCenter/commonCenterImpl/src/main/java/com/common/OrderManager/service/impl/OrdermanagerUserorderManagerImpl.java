@@ -165,6 +165,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	public OrdermanagerUserorder saveITSerOrder(@ServiceParam(name="userId",pubProperty="userId") String userId,
 			@ServiceParam(name="commodityId") String commodityId,@ServiceParam(name="faultDes") String faultDes,
 			@ServiceParam(name="userorderAdr") String userorderAdr) throws BusException {
+    	System.out.println("userorderAdr=="+userorderAdr);
     	PurchasingmanagerCommodity commodity = purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
 		PurchasingmanagerGenre pg = commodity.getPurchasingmanagerGenre();
 		//根据类别ID获取类别扩展属性列表
