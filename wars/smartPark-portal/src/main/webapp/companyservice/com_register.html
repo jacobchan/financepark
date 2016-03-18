@@ -227,7 +227,7 @@
         <ul class="blend_ul clearfix">
             <li class="active">评价</li>
             <li>咨询</li>
-            <div><li id="shoplist">购买清单</li></div>
+            <!-- <div><li id="shoplist">购买清单</li></div> -->
         </ul>
         <!---->
         <div class="blend_item">
@@ -628,6 +628,7 @@ $(function(){
 		});
 	}
 	$('#btn-sumbit').click(function(){
+		if(!isLogin){alert("请登录");return;}
 		var length = $('#shopCar').children("tr").length;
 		var params = '';
 		for(var i =0;i<length;i++){
@@ -649,7 +650,7 @@ $(function(){
 			dataType:'jsonp',
 			success:function(results){
 				if(results&&results.record){
-					alert('请付款！');
+					alert('订单提交成功！');
 				}
 			}
 		});

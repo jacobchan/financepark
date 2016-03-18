@@ -1046,6 +1046,7 @@ $(function(){
 		});
 	}
 	$('#btn-sumbit').click(function(){
+		if(!isLogin){alert("请登录");return;}
 		var length = $('#shopCar').children("tr").length;
 		var params = '';
 		for(var i =0;i<length;i++){
@@ -1067,7 +1068,7 @@ $(function(){
 			dataType:'jsonp',
 			success:function(results){
 				if(results&&results.record){
-					alert('请付款！');
+					alert('订单提交成功！');
 				}
 			}
 		});

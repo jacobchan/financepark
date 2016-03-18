@@ -846,6 +846,7 @@ $(function(){
 	}
 	
 	$('.btn-cheng').click(function(){
+		if(!isLogin){alert("请登录");return;}
 		var commodityId = $(this).parents(".taocan").attr("data-id");
 		var y = $(this).parents(".taocan").attr("data-commodity");
 		var userorderAdr = $('#userorderAdr'+y).val();
@@ -859,7 +860,7 @@ $(function(){
 			dataType:'jsonp',
 			success:function(results){
 				if(results&&results.record){
-					alert('请付款！');
+					alert('订单提交成功！');
 				}
 			}
 		});
