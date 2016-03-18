@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
-	<link href="styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+	<title>酒店详情</title>
+	<link href="styles/page/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 	<link href="styles/base.css" type="text/css" rel="stylesheet">
 	<link href="styles/page/zs.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="scripts/lib/jquery-1.9.1.min.js"></script>
@@ -11,7 +11,32 @@
 	<script type="text/javascript" src="scripts/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
-	<script src="scripts/page/right.js"></script>
+	<script type="text/javascript" src="scripts/page/laydate/laydate.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var start = {
+			    elem: '#startTime',
+			    min: laydate.now(), //设定最小日期为当前日期
+			    max: '2099-06-16 23:59:59', //最大日期
+			    istoday: false,
+			    choose: function(datas){
+			         end.min = datas; //开始日选好后，重置结束日的最小日期
+			         end.start = datas //将结束日的初始值设定为开始日
+			    }
+			};
+			var end = {
+			    elem: '#endTime',
+			   	min: laydate.now(),
+			    max: '2099-06-16 23:59:59',
+			    istoday: false,
+			    choose: function(datas){
+			        start.max = datas; //结束日选好后，重置开始日的最大日期
+			    }
+			};
+			laydate(start);
+			laydate(end);
+		})
+	</script>
 	<style type="text/css">
 		a.c-b1:hover{color: #FB7730;}
 		.jd-ig-nav li{padding: 10px 20px;}
@@ -24,9 +49,9 @@
 	<div class="w100">
 		<div class="w1200 clearfix pt30 pb50">
 			<div class="h-nav clearfix">
-				<a href=""><span>首页</span></a><img src="styles/images/zs/right-j-b.png" border="0">
-				<a href=""><span>国内酒店预订</span></a><img src="styles/images/zs/right-j-b.png" border="0">
-				<a href=""><span class="current">北京好苑建国酒店</span></a>
+				<a href="">首页</a><img src="styles/images/zs/right-j-b.png" border="0">
+				<a href="">国内酒店预订</a><img src="styles/images/zs/right-j-b.png" border="0">
+				<a href="" class="current">北京好苑建国酒店</a>
 			</div>
 			<div class="fl" style="width:890px;">
 				<div class="clearfix">
@@ -87,11 +112,11 @@
 					<span class="fl lh26">入住时段</span>
 					<div class="jd-bd-box ml10 fl clearfix" style="padding:2px 10px;">
 						<span class="fl lh20">入住</span>
-						<input type="text" style="width:160px;">
+						<input type="text" id="startTime" class="laydate-icon" style="width:160px;">
 					</div>
 					<div class="jd-bd-box ml10 fl clearfix" style="padding:2px 10px;">
 						<span class="fl lh20">离店</span>
-						<input type="text" style="width:160px;">
+						<input  type="text" id="endTime" class="laydate-icon" style="width:160px;">
 					</div>
    					<span class="ml30 mr20 fl f14 lh26">共1晚</span>
    					<input value="重新搜索" class="jd-sea-btn fl" type="submit">
@@ -415,7 +440,7 @@
 							</tr>
 							<tr>
 								<td>服务设施</td>
-								<td>免费旅游交通图(可赠送)<span>免费瓶装水</span><span>免费洗漱用品(6样以内)</span><span>免费报纸</span><span>中餐厅</span><span>西餐厅</span><span>咖啡厅</span><span>酒吧</td>
+								<td><span class="mr20"><font class="c-o">免费</font>旅游交通图(可赠送)</span><span class="mr20"><font class="c-o">免费</font>瓶装水</span><span class="mr20" class="mr20"><font class="c-o">免费</font>洗漱用品(6样以内)</span><span class="mr20"><font class="c-o">免费</font>报纸</span><span class="mr20">中餐厅</span><span class="mr20">西餐厅</span><span class="mr20">咖啡厅</span><span>酒吧</td>
 							</tr>
 						</tbody>
 					</table>
