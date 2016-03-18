@@ -93,4 +93,12 @@ public interface NmIssuenewsManager extends BaseManager{
 	 * @return
 	 */
 	public List<NmIssuenews> getAllPolicy() ;
+	
+	/**
+	 * 通过发布类型ID，得到该类型下的所有新闻
+	 * @param issueTypeId 发布类型ID
+	 * @return
+	 */
+	public List<NmIssuenews> getAllPolicyByTypeId(String issueTypeId) ;
+	
 }
