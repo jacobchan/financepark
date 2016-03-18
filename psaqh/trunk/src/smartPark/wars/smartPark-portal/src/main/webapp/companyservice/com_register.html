@@ -654,6 +654,7 @@ $(function(){
 			success:function(results){
 				if(results&&results.record){
 					alert('订单提交成功！');
+					$(".pop_layer").hide();
 				}
 			}
 		});
