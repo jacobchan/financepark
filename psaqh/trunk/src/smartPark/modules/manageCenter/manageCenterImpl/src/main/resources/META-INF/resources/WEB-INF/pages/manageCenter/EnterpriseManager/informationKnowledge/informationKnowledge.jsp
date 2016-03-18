@@ -38,7 +38,7 @@
 				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json"
 				code="rzId" show="rzName" />
 			<youi:fieldText property="knowledgeTitle" caption="标题" notNull="true" />			
-			<youi:fieldSwfupload property="knowledgeUrl" caption="知识产权证书" notNull="true" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" fileUploadLimit="1" fileQueueLimit="1"/>
+			<youi:fieldSwfupload property="knowledgeUrl" caption="知识产权证书" notNull="true" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072"/>
 			<youi:fieldSelect property="knowledgeStatus" caption="发布状态" notNull="true" convert="financingStatus" />
 			<youi:fieldArea property="knowledgeContent" caption="描述" notNull="true" rows="8" column="20" />
 		</youi:fieldLayout>
