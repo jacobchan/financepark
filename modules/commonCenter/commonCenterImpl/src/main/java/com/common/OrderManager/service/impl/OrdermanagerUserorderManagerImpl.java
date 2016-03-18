@@ -363,4 +363,15 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    		}
    		return order;
    	}
+    /**
+     * 获取当前登录用户投诉列表
+     * @return
+     * @throws BusException
+     */
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId")})
+	public List<OrdermanagerUserorder> getOrderListByLoginUser(OrdermanagerUserorder o) throws BusException {
+    	String id = o.getCreateUser();	    	
+    	List<OrdermanagerUserorder> list =ordermanagerUserorderDao.getList("memberId", id);
+    	return list; 
+	}
 }
