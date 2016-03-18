@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50538
+Source Server         : yuanqu
+Source Server Version : 50547
 Source Host           : localhost:3306
 Source Database       : youi2
 
 Target Server Type    : MYSQL
-Target Server Version : 50538
+Target Server Version : 50547
 File Encoding         : 65001
 
-Date: 2016-03-14 18:05:09
+Date: 2016-03-18 10:09:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -121,11 +121,10 @@ INSERT INTO `youi_codeitem` VALUES ('40288ab2531113db01531121c6d60002', '40288ab
 INSERT INTO `youi_codeitem` VALUES ('40288ab2531113db01531122be800003', '40288ab2531113db015311211cf40001', '2', '申请成功', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab2531113db01531122ec4c0004', '40288ab2531113db015311211cf40001', '3', '申请失败', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab2533a65bb01533a6de7480001', '40288acd52f2342b0152f2369e7a0003', '05', '已取消', null);
+INSERT INTO `youi_codeitem` VALUES ('40288ab3538754760153877ba7ab000a', '40288acb53314dd40153318f0c3b000f', '10', '17:00-18:00', null);
 INSERT INTO `youi_codeitem` VALUES ('40288abc531c24bb01531c2a88940002', '40288abc531c24bb01531c2a418c0001', '01', '可用', null);
 INSERT INTO `youi_codeitem` VALUES ('40288abc531c24bb01531c2ab6970003', '40288abc531c24bb01531c2a418c0001', '02', '已预订', null);
 INSERT INTO `youi_codeitem` VALUES ('40288abc531c24bb01531c2ad5960004', '40288abc531c24bb01531c2a418c0001', '03', '不可用', null);
-INSERT INTO `youi_codeitem` VALUES ('40288ac05374415b015374959a120004', '40288acb53314dd40153318d8a160009', '02', '已领卡', null);
-INSERT INTO `youi_codeitem` VALUES ('40288ac05374415b01537495b96f0005', '40288acb53314dd40153318d8a160009', '08', '取消', null);
 INSERT INTO `youi_codeitem` VALUES ('40288acb53314dd40153318dd747000a', '40288acb53314dd40153318d8a160009', '00', '待处理', null);
 INSERT INTO `youi_codeitem` VALUES ('40288acb53314dd40153318dfea0000b', '40288acb53314dd40153318d8a160009', '01', '已处理', null);
 INSERT INTO `youi_codeitem` VALUES ('40288acb53314dd40153318e94e7000d', '40288acb53314dd40153318e54d8000c', '00', '线上', null);
