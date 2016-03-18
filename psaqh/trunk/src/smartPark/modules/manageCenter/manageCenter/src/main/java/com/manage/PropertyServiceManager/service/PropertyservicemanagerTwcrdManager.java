@@ -72,8 +72,17 @@ public interface PropertyservicemanagerTwcrdManager extends BaseManager{
 	public PropertyservicemanagerTwcrd findTwcrdByFkcode(PropertyservicemanagerFkcode fkcode) ;
 	
 	/**
+	 * 通过访客id找到对应的二维码
+	 * @param fkId
+	 * @return
+	 */
+	public PropertyservicemanagerTwcrd findTwcrdById(String fkcodeId) throws BusException;
+	
+	/**
 	 * 根据二维码ID更新二维码状态
 	 * @param twcrdId 二维码id
 	 */
 	public void updateTwcrd(String twcrdId) ;
+	
+	
 }
