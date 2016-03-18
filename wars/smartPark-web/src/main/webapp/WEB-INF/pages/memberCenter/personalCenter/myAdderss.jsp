@@ -127,7 +127,7 @@
 		function removeAddress(obj){
 			var me=obj.parentNode.parentNode;
 		 	$.youi.ajaxUtils.ajax({
-				url:'/smartPark-web/esb/web/memberadrAddressManager/removeMemberadrAddress.json',
+				url:baseUrl+'/esb/web/memberadrAddressManager/removeMemberadrAddress.json',
 				data:'addressId='+me.id,
 				success:function(result){
 					me.remove();
@@ -140,7 +140,7 @@
 			var me=obj.parentNode.parentNode;
 			var params =['addressId='+me.id,'addressStatus=0'];
 		 	$.youi.ajaxUtils.ajax({
-				url:'/smartPark-web/esb/web/memberadrAddressManager/saveMemberadrAddress.json',
+				url:baseUrl+'/esb/web/memberadrAddressManager/saveMemberadrAddress.json',
 				data:params.join('&'),
 				success:function(result){
 					if(result&&result.record){

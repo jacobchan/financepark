@@ -86,7 +86,7 @@
 	<script type="text/javascript">
 		$(function () {
 			$.ajax({
-				url:'/smartPark-web/esb/web/reservationRecordManager/getReservationRecordsforpage.json', 
+				url:baseUrl+'/esb/web/reservationRecordManager/getReservationRecordsforpage.json', 
 				success:function(result){
 					console.log(result);
 					if(result&&result.records){

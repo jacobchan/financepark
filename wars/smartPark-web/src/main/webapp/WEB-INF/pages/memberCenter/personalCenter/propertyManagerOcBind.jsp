@@ -83,8 +83,7 @@
 		function unbound(id){					   			
 			var ocId=id;			
 			$.youi.ajaxUtils.ajax({
-	//			url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/savePropertyservicemanagerOc.json',
-				url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/updateBindStatus.json',
+				url:baseUrl+'/esb/web/propertyservicemanagerOcManager/updateBindStatus.json',
 				data:'ocId='+ocId,
 		 		success:function(result){
 					if(result&&result.record){					
