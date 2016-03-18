@@ -120,7 +120,7 @@
 		function hhf(id){						
 			var ocId=id;			
 		     $.ajax({
-				url:'/smartPark-web/esb/web/propertyservicemanagerOcManager/cancleOcStatus.json',
+				url:baseUrl+'/esb/web/propertyservicemanagerOcManager/cancleOcStatus.json',
 				data:'ocId='+ocId+'',
 		 		success:function(result){
 					if(result&&result.record){					

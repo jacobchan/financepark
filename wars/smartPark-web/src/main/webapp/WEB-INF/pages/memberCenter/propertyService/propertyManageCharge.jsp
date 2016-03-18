@@ -157,7 +157,7 @@
 			}
 		});
 		$.ajax({
-			url:'/smartPark-web/esb/web/propertyservicemanagerChargeManager/getChargeListforpage.json', 
+			url:baseUrl+'/esb/web/propertyservicemanagerChargeManager/getChargeListforpage.json', 
 			success:function(result){
 				console.log(result);
 				if(result&&result.records){
