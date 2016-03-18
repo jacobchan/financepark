@@ -133,11 +133,11 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
     	propertyservicemanagerCosDao.save(cos);
 	}
     /**
-     * 获取当前登录用户id
+     * 获取当前登录用户投诉列表
      * @return
      * @throws BusException
      */
-    @EsbServiceMapping
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId")})
 	public List<PropertyservicemanagerCos> getCosListByLoginUser(PropertyservicemanagerCos p) throws BusException {
     	String id = p.getCreateUser();	    	
     	List<PropertyservicemanagerCos> list =propertyservicemanagerCosDao.getList("memberInformation.memberId", id);
