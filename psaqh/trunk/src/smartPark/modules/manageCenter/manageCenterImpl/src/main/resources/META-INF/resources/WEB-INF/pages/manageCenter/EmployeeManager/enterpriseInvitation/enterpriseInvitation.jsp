@@ -11,11 +11,11 @@
 		<youi:fieldLayout columns="3" labelWidths="120,120,120">
 			<youi:fieldSelect property="enterbusinessmanagerRz.rzId"
 				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json"
-				code="rzId" show="rzMem" caption="入驻企业" tooltips="入驻企业" />
+				code="rzId" show="rzName" caption="入驻企业" tooltips="入驻企业" />
 			<youi:fieldText property="invitationTelephone" caption="会员电话" />
 			<youi:fieldText property="invitationCode" caption="企业邀请码" />
 		</youi:fieldLayout>
-		<youi:gridCol property="enterbusinessmanagerRz.rzMem" caption="入驻企业" width="280" />
+		<youi:gridCol property="enterbusinessmanagerRz.rzName" caption="入驻企业" width="280" />
 		<youi:gridCol property="invitationTelephone" caption="会员电话" width="120" />
 		<youi:gridCol property="invitationCode" caption="企业邀请码" width="160" />
 		<youi:gridCol width="60" fixed="true" property="button" type="button"
@@ -32,7 +32,7 @@
 			<youi:fieldHidden property="invitationId" caption="邀请记录系列" />
 			<youi:fieldSelect property="enterbusinessmanagerRz.rzId"
 				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json"
-				code="rzId" show="rzMem" caption="入驻企业" tooltips="入驻企业" />
+				code="rzId" show="rzName" caption="入驻企业" tooltips="入驻企业" />
 			<youi:fieldText property="invitationCode" readonly="true" caption="企业邀请码" />
 			<youi:fieldText property="invitationTelephone" caption="会员电话" />
 		</youi:fieldLayout>
