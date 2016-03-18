@@ -177,7 +177,7 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
     			o=propertyservicemanagerEntrecDao.save(o);
     			//发送短信给联系人
         		try {
-        			HttpSenderMsg.sendMsg(o.getEnteringTelephone(), "尊敬的"+o.getMemberId().getMemberName()+"你好，你的预约已经成功提交，预约单号为【"+o.getEnterrecCode()+"】,感谢你对富春硅谷的支持！");
+        			HttpSenderMsg.sendMsg(o.getEnteringTelephone(), "尊敬的"+o.getMemberId().getMemberName()+"你好，你的预约已经成功提交，预约单号为【"+o.getEnterrecCode()+"】,预约结果请留意短信通知,或进入个人中心查看处理结果,感谢你对富春硅谷的支持!");
         		} catch (Exception e) {
         			e.printStackTrace();
         		}
