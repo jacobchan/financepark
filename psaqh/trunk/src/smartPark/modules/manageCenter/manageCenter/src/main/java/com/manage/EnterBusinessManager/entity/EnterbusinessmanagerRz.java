@@ -118,6 +118,17 @@ public class EnterbusinessmanagerRz implements Domain{
 	@Column(name = "RZ_URL_")
 	@Length(max=256)
 	private String rzUrl;//企业网址
+	
+	@Column(name = "RZ_IMAGES_")
+	private String rzImages;//企业网址
+
+	public String getRzImages() {
+		return rzImages;
+	}
+
+	public void setRzImages(String rzImages) {
+		this.rzImages = rzImages;
+	}
 
 	public String getRzLogo() {
 		return rzLogo;
