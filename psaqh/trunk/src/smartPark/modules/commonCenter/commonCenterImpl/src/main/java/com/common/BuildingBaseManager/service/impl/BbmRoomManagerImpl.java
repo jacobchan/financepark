@@ -171,4 +171,14 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
     	}
     	return null;
     }
+    
+    /**
+	 * 通过单元ID的到单元信息
+	 * @param roomId
+	 * @return
+	 */
+    @EsbServiceMapping
+    public BbmRoom getRoomByRoomId(@ServiceParam(name="roomId") String roomId) {
+    	return bbmRoomDao.get(roomId);
+    }
 }
