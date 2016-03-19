@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.BuildingBaseManager.service.BbmRoomManager;
 import com.common.OrderManager.entity.OrdermanagerOrderprojecttypeValue;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.common.OrderManager.service.OrdermanagerUserorderManager;
@@ -31,7 +32,6 @@ import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCharge;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerOc;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSfpro;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerSfproDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerChargeManager;
@@ -50,6 +50,8 @@ public class PropertyservicemanagerSfproManagerImpl extends BaseManagerImpl impl
 	private PurchasingmanagerGenreManager purchasingmanagerGenreManager;
 	@Autowired
 	private PurchasingmanagerGenrePropertyManager purchasingmanagerGenrePropertyManager;
+	@Autowired
+	private BbmRoomManager bbmRoomManager;
 	
     /**
      * 查询列表
@@ -180,8 +182,8 @@ public class PropertyservicemanagerSfproManagerImpl extends BaseManagerImpl impl
 	@EsbServiceMapping
 	public void saveChargeSfpro(@ServiceParam(name="chargeId") String chargeId, @ServiceParam(name="chargeIsbool") String chargeIsbool,
 			@ServiceParam(name="chargeCreatetime") String chargeCreatetime, @ServiceParam(name="chargeBedate") String chargeBedate, 
-			@ServiceParam(name="chargeEndate") String chargeEndate,@DomainCollection(domainClazz=PropertyservicemanagerSfpro.class) 
-			List<PropertyservicemanagerSfpro> sfproList) {
+			@ServiceParam(name="chargeEndate") String chargeEndate,@ServiceParam(name="roomId") String roomId,
+			@DomainCollection(domainClazz=PropertyservicemanagerSfpro.class) List<PropertyservicemanagerSfpro> sfproList) {
 		PropertyservicemanagerCharge pc = new PropertyservicemanagerCharge();
 		BigDecimal chargeAmount = BigDecimal.valueOf(0);
 		for(PropertyservicemanagerSfpro ps:sfproList){
@@ -195,6 +197,7 @@ public class PropertyservicemanagerSfproManagerImpl extends BaseManagerImpl impl
 			pc.setChargeBedate(chargeBedate);
 			pc.setChargeEndate(chargeEndate);
 			pc.setChargeAmount(chargeAmount);
+			pc.setBbmRoom(bbmRoomManager.getBbmRoom(roomId));
 			pc = propertyservicemanagerChargeManager.savePropertyservicemanagerCharge(pc);
 			for(PropertyservicemanagerSfpro ps:sfproList){
 				if(StringUtils.isNotEmpty(ps.getSfproId())){//收费登记项目修改
@@ -227,6 +230,7 @@ public class PropertyservicemanagerSfproManagerImpl extends BaseManagerImpl impl
 			pc.setChargeCreatetime(chargeCreatetime);
 			pc.setChargeBedate(chargeBedate);
 			pc.setChargeEndate(chargeEndate);
+			pc.setBbmRoom(bbmRoomManager.getBbmRoom(roomId));
 			pc = propertyservicemanagerChargeManager.savePropertyservicemanagerCharge(pc);
 			for(PropertyservicemanagerSfpro ps:sfproList){
 				ps.setPropertyservicemanagerCharge(pc);
