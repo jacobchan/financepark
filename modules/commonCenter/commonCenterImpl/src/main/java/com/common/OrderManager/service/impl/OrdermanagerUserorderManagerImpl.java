@@ -177,6 +177,11 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		order.setGenreId(pg);
 		order.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("ITFW"));
 		order.setUserorderStatus("01");//01-未支付
+		if(StringUtils.isNotEmpty(userId)){
+			MemberInformation mem = memberInformationManager.getMemberInformation(userId);
+			order.setUserorderBuyUser(mem.getMemberName());
+		}
+   		order.setUserorderProject(pg.getGenreName());
 		order.setUserorderAdr(userorderAdr);
 		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		order.setCreateUser(userId);
@@ -222,6 +227,11 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		order.setGenreId(pg);
 		order.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("GSBG"));
 		order.setUserorderStatus("01");//01-未支付
+		if(StringUtils.isNotEmpty(userId)){
+			MemberInformation mem = memberInformationManager.getMemberInformation(userId);
+			order.setUserorderBuyUser(mem.getMemberName());
+		}
+   		order.setUserorderProject(pg.getGenreName());
 		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		order.setCreateUser(userId);
 		order.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
@@ -254,6 +264,11 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		order.setGenreId(pg);
 		order.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("GSZC"));
 		order.setUserorderStatus("01");//01-未支付
+		if(StringUtils.isNotEmpty(userId)){
+			MemberInformation mem = memberInformationManager.getMemberInformation(userId);
+			order.setUserorderBuyUser(mem.getMemberName());
+		}
+   		order.setUserorderProject(pg.getGenreName());
 		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		order.setCreateUser(userId);
 		order.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
@@ -286,6 +301,11 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    		order.setGenreId(pg);
    		order.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("DLJZ"));
    		order.setUserorderStatus("01");//01-未支付
+   		if(StringUtils.isNotEmpty(userId)){
+			MemberInformation mem = memberInformationManager.getMemberInformation(userId);
+			order.setUserorderBuyUser(mem.getMemberName());
+		}
+   		order.setUserorderProject(pg.getGenreName());
    		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
    		order.setCreateUser(userId);
    		order.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
@@ -318,6 +338,11 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    		order.setGenreId(pg);
    		order.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("FLFW"));
    		order.setUserorderStatus("01");//01-未支付
+   		if(StringUtils.isNotEmpty(userId)){
+			MemberInformation mem = memberInformationManager.getMemberInformation(userId);
+			order.setUserorderBuyUser(mem.getMemberName());
+		}
+   		order.setUserorderProject(pg.getGenreName());
    		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
    		order.setCreateUser(userId);
    		order.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
@@ -350,6 +375,11 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    		order.setGenreId(pg);
    		order.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("SBZL"));
    		order.setUserorderStatus("01");//01-未支付
+   		if(StringUtils.isNotEmpty(userId)){
+			MemberInformation mem = memberInformationManager.getMemberInformation(userId);
+			order.setUserorderBuyUser(mem.getMemberName());
+		}
+   		order.setUserorderProject(pg.getGenreName());
    		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
    		order.setCreateUser(userId);
    		order.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
