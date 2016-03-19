@@ -1,9 +1,4 @@
-/**
- *
- */
 package com.manage.EnterBusinessManager.entity;
-
-
 import javax.persistence.*;
 
 import org.hibernate.validator.*;
@@ -121,6 +116,41 @@ public class EnterbusinessmanagerRz implements Domain{
 	
 	@Column(name = "RZ_IMAGES_")
 	private String rzImages;//企业网址
+	
+	@Column(name = "PRODUCT_DISCRIPTIO_")
+	@Length(max=50)
+	private String productDiscriptio;//产品描述
+	
+	@Column(name = "ATTENTION_COUNT_")
+	@Length(max=256)
+	private String attentionCount;//关注次数
+	
+	@Column(name = "SCAN_COUNT_")
+	private String scanCount;//浏览次数
+
+	public String getProductDiscriptio() {
+		return productDiscriptio;
+	}
+
+	public void setProductDiscriptio(String productDiscriptio) {
+		this.productDiscriptio = productDiscriptio;
+	}
+
+	public String getAttentionCount() {
+		return attentionCount;
+	}
+
+	public void setAttentionCount(String attentionCount) {
+		this.attentionCount = attentionCount;
+	}
+
+	public String getScanCount() {
+		return scanCount;
+	}
+
+	public void setScanCount(String scanCount) {
+		this.scanCount = scanCount;
+	}
 
 	public BbmRoom getRoomId() {
 		return roomId;
