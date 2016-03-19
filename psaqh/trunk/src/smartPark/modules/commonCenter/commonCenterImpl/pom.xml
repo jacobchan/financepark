@@ -38,7 +38,7 @@
 		<dependency>
 			<groupId>com.gsoft.framework</groupId>
 			<artifactId>gsoft-framework-security</artifactId>
-			<version>1.0.3.RELEASE</version>
+			<version>${gsoft.framework.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		
