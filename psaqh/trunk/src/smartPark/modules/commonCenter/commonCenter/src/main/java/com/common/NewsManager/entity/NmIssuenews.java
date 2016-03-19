@@ -40,7 +40,6 @@ public class NmIssuenews implements Domain{
 	private String policyCome;//政策发布人
 
 	@Column(name = "POLICY_CONTENT_")
-	@Length(max=36)
 	private String policyContent;//政策内容
 
 	@Column(name = "POLICY_STATUS_")
