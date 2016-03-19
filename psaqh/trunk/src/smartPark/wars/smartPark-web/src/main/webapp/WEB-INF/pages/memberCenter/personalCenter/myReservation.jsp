@@ -113,7 +113,8 @@
 				html+="<tr id='"+record[i].recordId+"'>"+
 					"<td><a href=''>"+record[i].recordId+"</a></td>"+
 					"<td>"+record[i].visiteDate+"</td>"+
-					"<td>"+record[i].recordMemberId+"</td>"+
+					"展厅参观"+
+					//"<td>"+record[i].recordMemberId+"</td>"+没有预约项目字段，正在审批字段中；
 					"<td>"+recordStatus+"</td>"+
 					buttonHtml+
 					"</tr>";
