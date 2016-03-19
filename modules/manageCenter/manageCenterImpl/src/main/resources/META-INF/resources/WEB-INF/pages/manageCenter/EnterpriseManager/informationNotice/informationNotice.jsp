@@ -11,7 +11,7 @@
 			<youi:fieldCalendar property="noticeTime" caption="发布时间"/>
 			<youi:fieldText property="noticeTitle" caption="标题"/>
 		</youi:fieldLayout>
-	    <youi:gridCol property="noticeRe" caption="企业信息" width="20%"/>
+	    <youi:gridCol property="noticeRe" caption="企业信息" renderer="renderer_noticeRe" width="20%"/>
 		<youi:gridCol property="noticeSum" caption="收藏次数" width="10%"/>
 		<youi:gridCol property="noticeCount" caption="浏览次数" width="10%"/>
 		<youi:gridCol property="noticeTime" caption="发布时间" width="20%"/>
@@ -36,4 +36,18 @@
 			<youi:fieldArea property="noticeContent"  caption="内容" notNull="true" rows="8" column="20"/>
 		</youi:fieldLayout>
 	</youi:form>
+	<youi:func name="renderer_noticeRe" params="col,record">
+        if(record.noticeRe !="" && record.noticeRe !=null){
+	 		var rzName = ""; 
+			$.youi.ajaxUtil.ajax({
+				url:'esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json',
+				data:'rzId='+record.noticeRe,
+				async: false, 
+				success:function(result){
+					rzName=result.record.rzName;
+				}
+			});
+			return rzName;
+        }
+	</youi:func>
 </youi:page>
