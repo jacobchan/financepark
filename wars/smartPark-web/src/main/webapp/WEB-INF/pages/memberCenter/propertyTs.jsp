@@ -87,7 +87,7 @@
 	
 		$(function(){
 			$.ajax({
-				url:'/smartPark-web/esb/web/propertyservicemanagerTsManager/getTsListByLoginUser.json',
+				url:basrUrl+'propertyservicemanagerTsManager/getTsListByLoginUser.json',
 				success:function(result){
 				
 					console.log(result.records);
