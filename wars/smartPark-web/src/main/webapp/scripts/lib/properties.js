@@ -1,7 +1,7 @@
 //local
-var baseUrl="/smartPark-web/esb/web/";
+//var baseUrl="/smartPark-web/esb/web";
 //server
-//var baseUrl="/esb/web/";
+var baseUrl="/esb/web";
 //local image Url
 //var ImgUrl = "http://localhost:9088"
 //server image Url
