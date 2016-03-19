@@ -25,7 +25,6 @@ public class PropertyservicemanagerBx implements Domain{
 	
 	
 	@Column(name = "CREATE_TIME_")
-	@Length(max=20)
 	private String createTime;//创建时间
 
 	@Column(name = "UPDATE_USER_")
@@ -77,7 +76,6 @@ public class PropertyservicemanagerBx implements Domain{
 	private String bxStatus;//报修状态
 	
 	@Column(name = "UPDATE_TIME_")
-	@Length(max=20)
 	private String updateTime;//修改时间
 	
 	@Column(name = "BX_CODE_")
