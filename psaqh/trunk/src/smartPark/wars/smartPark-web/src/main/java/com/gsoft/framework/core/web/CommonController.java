@@ -11,6 +11,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItem;
@@ -84,9 +85,8 @@ public class CommonController {
 		  }else{
 			  FileItemFactory factory = new DiskFileItemFactory();
 			  ServletFileUpload upload = new ServletFileUpload(factory);
-			  @SuppressWarnings("unchecked")
-			  List<DiskFileItem> items = upload.parseRequest(request);
-			  for (DiskFileItem item : items) {
+			  List<FileItem> items = upload.parseRequest(request);
+			  for (FileItem item : items) {
 				  if(!(item.isFormField())){
 					  String fileName =  "upload/"+DateUtils.getToday("yyyyMM")+"/"+UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(item.getName());
 					  File path = new File(root+"upload/"+DateUtils.getToday("yyyyMM"));
@@ -140,9 +140,8 @@ public class CommonController {
 		  }else{
 			  FileItemFactory factory = new DiskFileItemFactory();
 			  ServletFileUpload upload = new ServletFileUpload(factory);
-			  @SuppressWarnings("unchecked")
-			  List<DiskFileItem> items = upload.parseRequest(request);
-			  for (DiskFileItem item : items) {
+			  List<FileItem> items = upload.parseRequest(request);
+			  for (FileItem item : items) {
 				  if(!(item.isFormField())){
 					  String fileName =  "uploadImages/"+DateUtils.getToday("yyyyMM")+"/"+UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(item.getName());
 					  File path = new File(root+"uploadImages/"+DateUtils.getToday("yyyyMM"));
