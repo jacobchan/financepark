@@ -99,6 +99,21 @@
 	<!--***bottom end****************************************-->
 
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
+	
+	<!-- 页面数据初始化 -->
+	<script type="text/javascript">
+	$.youi.ajaxUtils.ajax({
+		url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
+		jsonp:'data:jsonp',
+		dataType:'jsonp',
+		success:function(result){
+			if(result&&result.record){
+				$("#bxComp").val(result.record.rz.rzName);
+			}
+		}
+	});
+	</script>
+	
 	<script type="text/javascript">
 		$(function(){
 			$(".hhf-submit").click(function(){

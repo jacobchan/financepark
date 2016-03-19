@@ -48,29 +48,30 @@
 							<tr>
 								<td align="center">企业名称</td>
 								<td><input type="text" id="moverecComp"></td>
-								<td align="center">楼宇信息</td>
-								<td><input type="text" id="louyu"></td>
-							</tr>
-							<tr>
+								<!-- <td align="center">楼宇信息</td>
+								<td><input type="text" id="louyu"></td> -->
 								<td align="center">联系人</td>
 								<td><input type="text" id="moverecName"></td>
+							</tr>
+							<!-- <tr>
+								
 								<td align="center">单元号</td>
 								<td><input type="text" id="unit"></td>
-							</tr>
+							</tr> -->
 							<tr>
 								<td align="center">联系电话</td>
 								<td><input type="text" id="phone"></td>
 								<td align="center">提交方式</td>
 								<td>
 									<div class="tct-select">
-										<div class="ic-select">
+										<!-- <div class="ic-select">
 											<p id="moverecWay">创立方2</p>
 										</div>
 										<ul style="display: none;" class="select-nav">
 											<li>创立方1</li>
 											<li>创立方2</li>
 											<li>创立方3</li>
-										</ul>
+										</ul> -->
 									</div>
 								</td>
 							</tr>
@@ -106,68 +107,26 @@
 	<!--***bottom end****************************************-->
 
 	<!--***弹窗 start****************************************-->
-	<div class="bg-tanc">
-		<div class="tanc-con" style="top:50%;margin-top:-225px;">
-			<a href="javascript:;" class="tc-close"></a>
-			<h3 class="mb10"><b>新增地址</b></h3>
-			<table class="line-table cic-l-t wybx-tanc">
-				<colgroup>
-					<col width="110"></col>
-					<col></col>
-				</colgroup>
-				<tr class="label">
-					<td><b>地址类型</b></td>
-					<td>
-						<label><input type="radio" name="address" class="mr5" checked="checked">园区地址</label>
-						<label class="ml30"><input type="radio" name="address" class="mr5">非园区地址</label>
-					</td>
-				</tr>
-				<tr>
-					<td><b>姓名</b></td>
-					<td><input type="text"></td>
-				</tr>
-				<tr>
-					<td><b>电话</b></td>
-					<td><input type="text"></td>
-				</tr>
-				<tr class="show1">
-					<td><b>园区地址</b></td>
-					<td>
-						<div class="tct-select fl mr20" style="width:200px">
-							<div class="ic-select">
-								<p>园区地址2</p>
-							</div>
-							<ul style="display: none;" class="select-nav">
-								<li>园区地址1</li>
-								<li>园区地址2</li>
-								<li>园区地址3</li>
-							</ul>
-						</div>
-						<div class="tct-select fl" style="width:200px">
-							<div class="ic-select">
-								<p>创立方2</p>
-							</div>
-							<ul style="display: none;" class="select-nav">
-								<li>创立方1</li>
-								<li>创立方2</li>
-								<li>创立方3</li>
-							</ul>
-						</div>
-					</td>
-				</tr>
-				<tr class="show2 undis">
-					<td><b>地址信息</b></td>
-					<td><input type="text" style="width:450px;"></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td colspan="2"><a href="" class="ib-btn" style="width:120px;text-align:center;margin-top:10px;">保存</a></td>
-				</tr>
-			</table>
-		</div>
-	</div>
+	
 	<!--***弹窗 end****************************************-->
-	<script type="text/javascript" src="../scripts/page/right.js"></script>
+	<script type="text/javascript" src="../scripts/page/right.js"></script>、
+	
+	<!-- 页面初始化 -->
+	<script type="text/javascript">
+		$.youi.ajaxUtils.ajax({
+			url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(result){
+				if(result&&result.record){
+					$("#moverecComp").val(result.record.rz.rzName);
+					$("#phone").val(result.record.employeesTelephone);
+					$("#moverecName").val(result.record.employeesName);
+				}
+			}
+		});
+	</script>
+	
 	<script type="text/javascript">
 		$(function(){
 			$(".hhf-submit").click(function(){
@@ -206,8 +165,8 @@
 						}
 		
 						var params = ['moverecComp='+$("#moverecComp").val(),
-										'moverecWay=00',
-										'moverecUnit='+$("#louyu").val()+$("#unit").val(),
+										'moverecWay='+$("#moverecWay")[0].getAttribute("value"),
+										//'moverecUnit='+$("#louyu").val()+$("#unit").val(),
 										'moverecName='+$("#moverecName").val(),
 										'moverecPhone='+phone,
 										'moverecTime='+time,
@@ -242,6 +201,51 @@
 				}
 			});
 		});
+	</script>
+	
+	<!-- 拼接提交方式 -->
+	<script type="text/javascript">
+		$(function(){
+				$.youi.ajaxUtils.ajax({
+					url:baseUrl +"propertyservicemanagerMoverecManager/getMovcodemapforpage.json", 
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(result){
+						if(result&&result.records){
+							_parseRecords(result.records);
+						}
+					}
+				});
+			});
+		function _parseRecords(record){
+				var html ="";
+				html=html+"<div class='ic-select'>"+
+				"<p id='moverecWay' value='"+record[0].itemValue+"'>"+record[0].itemName+"</p>"+
+				"</div>"+
+				"<ul style='display: none;' class='select-nav'>";
+				for(var i=0;i<record.length;i++){
+					html =html +"<li value='"+record[i].itemValue+"'>"+record[i].itemName+"</li>"
+				}
+					
+				html=html+"</ul> ";
+				$(".tct-select").append(html);
+				activeclick();
+		}
+	</script>
+	<script type="text/javascript">
+		function activeclick(){
+			$(".ic-select").click(function(e){
+				$(".select-nav").hide();
+			    $(this).next(".select-nav").show();
+			    e.stopPropagation();//
+			});
+			$(".select-nav li").click(function(){
+				$(this).parents(".tct-select").find(".ic-select p").text($(this).text());
+				 var livale = "0"+$(this).val(); 
+				$(this).parents(".tct-select").find(".ic-select p")[0].setAttribute("value",livale);
+				$(this).parent().hide();
+			})
+		}
 	</script>
 </body>
 </html>

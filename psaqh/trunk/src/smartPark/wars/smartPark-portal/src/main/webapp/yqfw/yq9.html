@@ -74,6 +74,22 @@
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
+	
+	<!-- 页面数据初始化 -->
+	<script type="text/javascript">
+	$.youi.ajaxUtils.ajax({
+		url:baseUrl+"memberInformationManager/getMemberInformationByLoginUser.json", 
+		jsonp:'data:jsonp',
+		dataType:'jsonp',
+		success:function(result){
+			if(result&&result.record){
+				$("#name").val(result.record.memberName);
+				$("#telphone").val(result.record.memberPhoneNumber);
+			}
+		}
+	});
+	</script>
+	
 <script type="text/javascript">
 	$(function(){
 		$(".hhf-submit").click(function(){
