@@ -22,14 +22,14 @@
 		<youi:gridCol property="rzBuss"  caption="企业主营"  width="10%" align="center"/>
 		<youi:gridCol property="enTypeId.enTypeName"  caption="企业类型" width="10%" align="center"/>
 		<youi:gridCol property="rzSign"  caption="企业码" width="10%" align="center"/>
-		<youi:gridCol property="rzMem"  caption="会员信息" width="10%" align="center"/>
+		<youi:gridCol property="rzUrl"  caption="会员网址" width="10%" align="center"/>
 		<youi:gridCol property="rzTelephone"  caption="联系方式" width="10%" align="center"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
 		</youi:gridCol>
 	</youi:grid>
-	 
+	
 	<!-- form-入驻企业基本信息编辑 -->
 	<youi:form dialog="true" caption="入驻企业基本信息" id="form_enterbusinessmanagerRz" action="esb/web/enterbusinessmanagerRzManager/saveEnterbusinessmanagerRz.json">
 		<youi:fieldLayout prefix="record" labelWidths="100,100">
@@ -89,5 +89,5 @@
 		return buildingNo;
 
         }
-	</youi:func>上
+	</youi:func>
 </youi:page>
