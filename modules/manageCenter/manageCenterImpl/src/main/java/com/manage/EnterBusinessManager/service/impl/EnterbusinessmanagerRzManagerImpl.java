@@ -2,9 +2,11 @@ package com.manage.EnterBusinessManager.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.common.BuildingBaseManager.entity.BbmRoom;
 import com.common.BuildingBaseManager.service.BbmRoomManager;
 import com.gsoft.framework.core.exception.BusException;
@@ -75,28 +77,65 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     /**
      * 保存对象
      */
-    @EsbServiceMapping
-    public EnterbusinessmanagerRz saveEnterbusinessmanagerRz(EnterbusinessmanagerRz o,@ServiceParam(name="roomId") String roomId) throws BusException{
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+    public EnterbusinessmanagerRz saveEnterbusinessmanagerRz(EnterbusinessmanagerRz o) throws BusException{
     	String enterbusinessmanagerRzId = o.getRzId();
     	boolean isUpdate = StringUtils.isNotEmpty(enterbusinessmanagerRzId);
     	if(isUpdate){//修改
-    		if(StringUtils.isNotEmpty(roomId)){
-    			BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(roomId);
-    			o.setParkId(bbmRoom.getBbmPark().getParkId());
-    			o.setBuildingId(bbmRoom.getBbmBuilding().getBuildingId());
-    			o.setFloorId(bbmRoom.getBbmFloor().getFloorId());
-    			
+    		EnterbusinessmanagerRz rz = enterbusinessmanagerRzDao.get(enterbusinessmanagerRzId);
+    		if(rz.getRoomId() != null){
+    			if(!o.getRoomId().getRoomId().equals(rz.getRoomId().getRoomId())){
+        			BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(o.getRoomId().getRoomId());
+        			rz.setParkId(bbmRoom.getBbmPark().getParkId());
+        			rz.setBuildingId(bbmRoom.getBbmBuilding().getBuildingId());
+        			rz.setFloorId(bbmRoom.getBbmFloor().getFloorId());
+        			//更新单元基础信息企业
+        			bbmRoom.setRzId(enterbusinessmanagerRzId);
+        			bbmRoomManager.saveBbmRoom(bbmRoom);
+        		}
+    		}else{
+    			BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(o.getRoomId().getRoomId());
+    			rz.setParkId(bbmRoom.getBbmPark().getParkId());
+    			rz.setBuildingId(bbmRoom.getBbmBuilding().getBuildingId());
+    			rz.setFloorId(bbmRoom.getBbmFloor().getFloorId());
     			//更新单元基础信息企业
-    			bbmRoom.setRzId(o.getRzId());
+    			bbmRoom.setRzId(enterbusinessmanagerRzId);
     			bbmRoomManager.saveBbmRoom(bbmRoom);
     		}
-    	}else{//新增b
-    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd"));
-    		o.setCreateUser("");
+    		rz.setRoomId(o.getRoomId());
+    		rz.setRzManager(o.getRzManager());
+    		rz.setRzName(o.getRzName());
+    		rz.setRzDate(o.getRzDate());
+    		rz.setRzBuss(o.getRzBuss());
+    		rz.setEnTypeId(o.getEnTypeId());
+    		rz.setRzSign(o.getRzSign());
+    		rz.setRzUrl(o.getRzUrl());
+    		rz.setRzTelephone(o.getRzTelephone());
+    		rz.setRzRemark(o.getRzRemark());
+    		rz.setRzLogo(o.getRzLogo());
+    		rz.setRzImages(o.getRzImages());
+    		rz.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		rz.setUpdateUser(o.getUpdateUser());
+    		rz = enterbusinessmanagerRzDao.save(rz);
+    		return rz;
+    		
+    	}else{//新增
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setCreateUser(o.getUpdateUser());
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		
+        	BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(o.getRoomId().getRoomId());
+        	o.setParkId(bbmRoom.getBbmPark().getParkId());
+    		o.setBuildingId(bbmRoom.getBbmBuilding().getBuildingId());
+    		o.setFloorId(bbmRoom.getBbmFloor().getFloorId());
+    		o = enterbusinessmanagerRzDao.save(o);
+    		//更新单元基础信息企业
+    		bbmRoom.setRzId(o.getRzId());
+    		bbmRoomManager.saveBbmRoom(bbmRoom);
+        	
+        	return o;
     	}
-    	o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd"));
-    	o.setUpdateUser("");
-    	return enterbusinessmanagerRzDao.save(o);
+    	
     }
 
     /**
