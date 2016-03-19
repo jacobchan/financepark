@@ -221,7 +221,7 @@
 						$(".fkcodes").html(fkCode);
 						$(".bftime").html(bftime);
 						$(".fkcodes")[0].setAttribute("id",me.id);
-						$(".fkurl")[0].setAttribute("src","/filestore/"+url);
+						$(".fkurl")[0].setAttribute("src",ImgUrl+"/filestore/"+url);
 						$(".bg-tanc.m2").show();
 					}
 				}
