@@ -169,7 +169,7 @@
 				$(".bg-tanc.m2").show();
 			});
 			$.ajax({
-				url:baseUrl+'/esb/web/propertyservicemanagerFkcodeManager/getFkcodeListforpage.json', 
+				url:baseUrl+'/propertyservicemanagerFkcodeManager/getFkcodeListforpage.json', 
 				success:function(result){
 					
 					if(result&&result.records){
@@ -211,7 +211,7 @@
 			var url = queryUrl(me.id); 
 			var url=""; */
 			$.youi.ajaxUtils.ajax({
-				url:baseUrl+'/esb/web/propertyservicemanagerTwcrdManager/findTwcrdById.json',
+				url:baseUrl+'/propertyservicemanagerTwcrdManager/findTwcrdById.json',
 				data:'fkcodeId='+me.id,
 				success:function(result){
 					if(result&&result.record){
@@ -234,7 +234,7 @@
 		$(".hhf-submit").click(function(){
 				var id=$(".fkCode")[0].getAttribute("id");
 			 	$.youi.ajaxUtils.ajax({
-					url:baseUrl+'/esb/web/propertyservicemanagerFkcodeManager/getFkcodeforpage.json',
+					url:baseUrl+'/propertyservicemanagerFkcodeManager/getFkcodeforpage.json',
 					data:'fkcodeId='+id,
 					success:function(result){
 						if(result&&result.record){

@@ -35,7 +35,7 @@
 	
 		$(function(){
 			$.ajax({
-			  url:baseUrl+'/esb/web/propertyservicemanagerOcManager/getPropertyservicemanagerOcListByLoginUser.json',
+			  url:baseUrl+'/propertyservicemanagerOcManager/getPropertyservicemanagerOcListByLoginUser.json',
 				success:function(result){
 					
 					console.log(result.records);
@@ -68,7 +68,7 @@
 			alert(ocNumber);
 						
 			$.youi.ajaxUtils.ajax({
-				url:baseUrl+'/esb/web/propertyservicemanagerOcManager/addBindOc.json',
+				url:baseUrl+'/propertyservicemanagerOcManager/addBindOc.json',
 				data:'ocNumber='+ocNumber,
 				success:function(result){
 					if(result&&result.record){
@@ -82,7 +82,7 @@
 		function unbound(id){					   			
 			var ocId=id;			
 			$.youi.ajaxUtils.ajax({
-				url:baseUrl+'/esb/web/propertyservicemanagerOcManager/updateBindStatus.json',
+				url:baseUrl+'/propertyservicemanagerOcManager/updateBindStatus.json',
 				data:'ocId='+ocId,
 		 		success:function(result){
 					if(result&&result.record){					
