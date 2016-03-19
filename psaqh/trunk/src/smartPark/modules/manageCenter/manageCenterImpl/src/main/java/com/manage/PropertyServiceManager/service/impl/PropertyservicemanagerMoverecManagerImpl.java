@@ -166,7 +166,7 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
 		    			String imgPath = root+"qrcode/";     
 		    	        String contents = moverec.getMoverecRemark();  
 						String url = QRCodeUtil.encode(contents, imgPath);
-						propertyservicemanagerFxtdc.setTwcrdAddrec(url);
+						propertyservicemanagerFxtdc.setTwcrdAddrec("qrcode/"+url);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

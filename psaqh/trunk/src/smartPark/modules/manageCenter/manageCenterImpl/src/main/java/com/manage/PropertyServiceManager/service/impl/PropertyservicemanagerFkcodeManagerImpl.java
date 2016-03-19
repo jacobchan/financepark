@@ -109,7 +109,7 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
     			String imgPath = root+"qrcode/";     
     	        String contents = "欢迎来访!";  
 				String url = QRCodeUtil.encode(contents, imgPath);
-				twcrd.setTwcrdAddrec(url);
+				twcrd.setTwcrdAddrec("qrcode/"+url);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
