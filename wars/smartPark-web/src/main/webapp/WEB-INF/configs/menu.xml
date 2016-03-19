@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menus>
-	<!-- <menu id="010000" text="项目定制">
+	<menu id="010000" text="项目定制">
 		<menu id="010100" text="项目定制"  href="page/platform.codemng.codeProject/codeProject.html"></menu>
 		<menu id="010200" text="菜单模版定制"  href="page/platform.codemng.codeProject/codeProjectMenus.html"></menu>
 		<menu id="010103" text="模型设计"  href="page/platform.codepdm.pdm/pdm.html"></menu>
 		<menu id="010104" text="图标"  href="page/common/icon.html"></menu>
-	</menu> -->
+	</menu> 
 	<menu id="010000" text="企业管理">
 		<menu id="011000" text="企业行业类型" href="page/commonCenter.EnterpriceTypeManager.etypeEnterprisetype/etypeEnterprisetype.html"></menu>
 		<menu id="012000" text="企业员工信息" href="page/manageCenter.EmployeeManager.enterpriseEmployees/enterpriseEmployees.html"></menu>
@@ -42,6 +42,7 @@
 		<menu id="330702" text="活动报名管理" href="page/manageCenter.ActivityManager.activityApplylist/activityApplylist.html"></menu>
 		<menu id="330703" text="活动评论回复管理" href="page/manageCenter.ActivityManager.activityComment/activityComment.html"></menu>
 		<menu id="330704" text="活动文档管理" href="page/manageCenter.ActivityManager.activityDocument/activityDocument.html"></menu>
+		<menu id="330705" text="活动类型管理" href="page/manageCenter.ActivityManager.applayType/applayType.html"></menu>
 		<menu id="081100" text="投诉记录" href="page/manageCenter.PropertyServiceManager.propertyservicemanagerCos/propertyservicemanagerCos.html"></menu>
 		<menu id="081200" text="回访记录" href="page/manageCenter.PropertyServiceManager.propertyservicenanagerBack/propertyservicenanagerBack.html"></menu>
 		<menu id="330301" text="使用状态管理" href="page/manageCenter.PublicUtilitiesManager.publicutilitiesmanagerReso/publicutilitiesmanagerReso.html"></menu>
@@ -102,5 +103,15 @@
 		<menu id="340302" text="集采购物车" href="page/memberCenter.shoppingCarManager.shoppingcarGroup/shoppingcarGroup.html"></menu>
 		<menu id="340303" text="餐饮购物车" href="page/memberCenter.shoppingCarManager.shoppingcarCatering/shoppingcarCatering.html"></menu>
 		<menu id="340401" text="收藏夹" href="page/memberCenter.FavoritsManage.favoritsFavoritgoods/favoritsFavoritgoods.html"></menu>
+	</menu>
+	<menu id="350000" text="企业信息发布管理">
+		<menu id="350001" text="融资信息列表" href="page/manageCenter.EnterpriseManager.informationFinancing/informationFinancing.html"></menu>
+		<menu id="350002" text="知识产权信息列表" href="page/manageCenter.EnterpriseManager.informationKnowledge/informationKnowledge.html"></menu>
+		<menu id="350003" text="法人介绍列表" href="page/manageCenter.EnterpriseManager.informationLegal/informationLegal.html"></menu>
+		<menu id="350004" text="媒体报道信息列表" href="page/manageCenter.EnterpriseManager.informationMedia/informationMedia.html"></menu>
+		<menu id="350005" text="公告信息列表" href="page/manageCenter.EnterpriseManager.informationNotice/informationNotice.html"></menu>
+		<menu id="350006" text="产品信息列表" href="page/manageCenter.EnterpriseManager.informationProduct/informationProduct.html"></menu>
+		<menu id="350007" text="企业入驻管理" href="page/EnterBusinessManager.enterbusinessmanagerRz/enterbusinessmanagerRz.html"></menu>
+		
 	</menu>
 </menus>
