@@ -101,6 +101,7 @@
 <script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 <script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 <script type="text/javascript" src="../scripts/page/cg30com.js"></script>
+<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 <script>
 		$(function(){
 		$(".goods_ul>li").hover(function(){
@@ -145,7 +146,7 @@
 $(function(){
 	var arg=getQueryStringArgs();
 	var params = ['commodityId='+arg.id];
-	var serviceURL = "http://220.249.113.12:8088/esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommodity.json";
+	var serviceURL = baseUrl+"purchasingmanagerCommodityManager/getPurchasingmanagerCommodity.json";
 	$.youi.ajaxUtils.ajax({
 		url:serviceURL,
 		data:params.join('&'),
