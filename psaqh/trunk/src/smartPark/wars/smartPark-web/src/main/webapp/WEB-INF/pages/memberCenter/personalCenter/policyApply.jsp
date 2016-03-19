@@ -105,7 +105,7 @@
                           "<td width='111'>"+record[i].nmIssuenews.policyCaption+"</td>"+
                           "<td width='111'>"+record[i].policyApplyContactPeople+"</td>"+
                           "<td width='111'>"+record[i].createTime+"</td>"+
-                          "<td width='88'>"+record[i].nmIssueflow.issueFlowCStatus+"</td>"+
+                    //      "<td width='88'>"+record[i].nmIssueflow.issueFlowCStatus+"</td>"+
                           "<td width='88'>"+status+"</td>"+                          
                           "<td > <input type='button' value='取消'   onclick='apply(\""+record[i].policyApplyId+"\")' />"+                                   
                           " </tr>";
