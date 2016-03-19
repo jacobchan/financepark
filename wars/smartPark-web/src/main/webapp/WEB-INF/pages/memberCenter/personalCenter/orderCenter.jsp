@@ -58,7 +58,7 @@
 		$(function(){
 			$.ajax({
 				
-				url:baseUrl+'/esb/web/ordermanagerUserorderManager/getOrderListByLoginUser.json',
+				url:baseUrl+'/ordermanagerUserorderManager/getOrderListByLoginUser.json',
 				success:function(result){	
 					if(result&&result.records){					
 						_parseRecords(result.records);						
