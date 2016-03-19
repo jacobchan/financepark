@@ -3,19 +3,16 @@
  */
 package com.manage.EnterBusinessManager.entity;
 
-import java.util.List;
 
 import javax.persistence.*;
 
 import org.hibernate.validator.*;
-
 import org.hibernate.annotations.GenericGenerator;
 
 import com.common.BuildingBaseManager.entity.BbmRoom;
 import com.common.EnterpriceTypeManager.entity.EtypeEnterprisetype;
 import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
-import com.gsoft.framework.core.dataobj.tree.TreeNode;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
 /**
  * 实体: 入驻企业基本信息
@@ -68,6 +65,9 @@ public class EnterbusinessmanagerRz implements Domain{
 	@Length(max=36)
 	private String floorId;//所在楼层
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="ROOM_ID_")
+	private BbmRoom roomId;//默认单元
 
 	@Column(name = "RZ_BUSS_")
 	@Length(max=2)
@@ -121,6 +121,14 @@ public class EnterbusinessmanagerRz implements Domain{
 	
 	@Column(name = "RZ_IMAGES_")
 	private String rzImages;//企业网址
+
+	public BbmRoom getRoomId() {
+		return roomId;
+	}
+
+	public void setRoomId(BbmRoom roomId) {
+		this.roomId = roomId;
+	}
 
 	public String getRzImages() {
 		return rzImages;

@@ -12,7 +12,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.ServiceParam;
 
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 
@@ -41,7 +40,7 @@ public interface EnterbusinessmanagerRzManager extends BaseManager{
     /**
      * 保存并返回对象
      */
-    public EnterbusinessmanagerRz saveEnterbusinessmanagerRz(EnterbusinessmanagerRz o,String roomId) throws BusException;
+    public EnterbusinessmanagerRz saveEnterbusinessmanagerRz(EnterbusinessmanagerRz o) throws BusException;
 
     /**
      * 删除对象

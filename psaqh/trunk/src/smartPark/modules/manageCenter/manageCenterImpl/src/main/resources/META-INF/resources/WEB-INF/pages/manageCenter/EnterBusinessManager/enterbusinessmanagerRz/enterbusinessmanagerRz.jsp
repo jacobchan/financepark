@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
-	<youi:grid id="grid_enterbusinessmanagerRz" idKeys="rzId" caption="入驻企业基本信息列表"  panel="false"
+	<youi:grid id="grid_enterbusinessmanagerRz" idKeys="rzId,roomId.roomId" caption="入驻企业基本信息列表"  panel="false"
 				src="esb/web/enterbusinessmanagerRzManager/getPagerEnterbusinessmanagerRzs.json" dataFormId="form_enterbusinessmanagerRz"
 				editSrc="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/enterbusinessmanagerRzManager/removeEnterbusinessmanagerRz.json">
@@ -9,16 +9,18 @@
 			<youi:fieldSelect property="rzManager.memberId"  caption="企业管理员" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
 			<youi:fieldText property="rzName"  caption="企业名称"/>
 			<youi:fieldCalendar property="rzDate"  caption="入驻时间" format="yyyy-MM-dd" textFormat="yyyy-MM-dd"/>			
-			<youi:fieldSelect property="parkId"  caption="园区ID" src="esb/web/bbmParkManager/getBbmParks.json" code="parkId" show="parkName"/>
+			<%-- <youi:fieldSelect property="parkId"  caption="园区ID" src="esb/web/bbmParkManager/getBbmParks.json" code="parkId" show="parkName"/>
 			<youi:fieldSelect property="buildingId"  caption="楼栋ID" src="esb/web/bbmBuildingManager/getBbmBuildings.json" 
-								code="buildingId" show="buildingNo" parents="parkId" parentsAlias="parkId"/> 
+								code="buildingId" show="buildingNo" parents="parkId" parentsAlias="parkId"/>  --%>
+			<youi:fieldTree simple="false" popup="true" tree="${bbmRoomTree}" property="roomId.roomId"  caption="默认单元" onlyLeaf="true"/>
 			<youi:fieldText property="enTypeId"  caption="企业类型ID"/>
 			<youi:fieldText property="rzSign"  caption="企业码"/>
 		</youi:fieldLayout>
 		<youi:gridCol property="rzManager.memberName"  caption="企业管理员" width="10%" align="center"/>
 		<youi:gridCol property="rzDate"  caption="入驻时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" width="20%" align="center"/>
-		<youi:gridCol property="buildingId"  caption="楼栋"  renderer="renderer_buildingId" width="10%" align="center"/>
-		<youi:gridCol property="parkId"  caption="园区" renderer="renderer_parkId" width="10%" align="center"/>
+		<%-- <youi:gridCol property="buildingId"  caption="楼栋"  renderer="renderer_buildingId" width="10%" align="center"/>
+		<youi:gridCol property="parkId"  caption="园区" renderer="renderer_parkId" width="10%" align="center"/> --%>
+		<youi:gridCol property="roomId.roomNo"  caption="默认单元编号" width="10%" align="center"/>
 		<youi:gridCol property="rzBuss"  caption="企业主营"  width="10%" align="center"/>
 		<youi:gridCol property="enTypeId.enTypeName"  caption="企业类型" width="10%" align="center"/>
 		<youi:gridCol property="rzSign"  caption="企业码" width="10%" align="center"/>
@@ -38,8 +40,12 @@
 			<youi:fieldSelect property="rzManager.memberId"  caption="企业管理员" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName" notNull="true"/> 
 			<youi:fieldText property="rzName"  caption="企业名称" notNull="true"/>
 			<youi:fieldCalendar property="rzDate"  caption="入驻时间" format="yyyy-MM-dd" textFormat="yyyy-MM-dd" notNull="true"/>
-			<youi:fieldSelect property="parkId"  caption="园区" src="esb/web/bbmParkManager/getBbmParks.json" code="parkId" show="parkName" notNull="true"/>
-			<youi:fieldSelect property="buildingId"  caption="楼栋" src="esb/web/bbmBuildingManager/getBbmBuildings.json" code="buildingId" show="buildingNo" parents="parkId" parentsAlias="parkId" notNull="true"/>
+			<%-- <youi:fieldSelect property="parkId"  caption="园区" src="esb/web/bbmParkManager/getBbmParks.json" code="parkId" show="parkName" notNull="true"/>
+			<youi:fieldSelect property="buildingId"  caption="楼栋" src="esb/web/bbmBuildingManager/getBbmBuildings.json" 
+				code="buildingId" show="buildingNo" parents="parkId" parentsAlias="parkId" notNull="true"/> --%>
+				
+			<<youi:fieldTree simple="false" popup="true" tree="${bbmRoomTree}" property="roomId.roomId"  caption="默认单元" onlyLeaf="true"/>
+				
 			<youi:fieldSelect property="rzBuss"  caption="企业主营" convert="pubStatus"/>
 			<youi:fieldTree simple="false" popup="true" tree="${enetrTree}" property="enTypeId.enTypeId" caption="企业类型" onlyLeaf="true"/>
 			<youi:fieldText property="rzSign"  caption="企业码"/>
@@ -62,7 +68,7 @@
 	
 	<youi:func name="renderer_parkId" params="col,record">
 	if(record.parkId !="" && record.parkId !=null){
-	 	var parkName = ""; 
+	 	var parkName = "";
 		$.youi.ajaxUtil.ajax({
 				url:'esb/web/bbmParkManager/getBbmPark.json',
 				data:'parkId='+record.parkId,
