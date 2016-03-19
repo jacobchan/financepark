@@ -29,32 +29,27 @@
 			<youi:button name="remove" caption="删除"/>
 		</youi:gridCol>
 	</youi:grid>
-	
+	 
 	<!-- form-入驻企业基本信息编辑 -->
 	<youi:form dialog="true" caption="入驻企业基本信息" id="form_enterbusinessmanagerRz" action="esb/web/enterbusinessmanagerRzManager/saveEnterbusinessmanagerRz.json">
 		<youi:fieldLayout prefix="record" labelWidths="100,100">
 			<youi:fieldHidden property="rzId"  caption="ID"/>		
 			<youi:fieldHidden property="entrecId.entrecId"  caption="物业入驻记录"/>
-			 <youi:fieldSelect property="rzManager.memberId"  caption="企业管理员" src="esb/web/memberInformationManager/getMemberInformations.json" 
-			 					code="memberId" show="memberName" notNull="true"/> 
+			<youi:fieldSelect property="rzManager.memberId"  caption="企业管理员" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName" notNull="true"/> 
 			<youi:fieldText property="rzName"  caption="企业名称" notNull="true"/>
 			<youi:fieldCalendar property="rzDate"  caption="入驻时间" format="yyyy-MM-dd" textFormat="yyyy-MM-dd" notNull="true"/>
 			<youi:fieldSelect property="parkId"  caption="园区" src="esb/web/bbmParkManager/getBbmParks.json" code="parkId" show="parkName" notNull="true"/>
-			<youi:fieldSelect property="buildingId"  caption="楼栋" src="esb/web/bbmBuildingManager/getBbmBuildings.json" 
-								code="buildingId" show="buildingNo" parents="parkId" parentsAlias="parkId" notNull="true"/>
+			<youi:fieldSelect property="buildingId"  caption="楼栋" src="esb/web/bbmBuildingManager/getBbmBuildings.json" code="buildingId" show="buildingNo" parents="parkId" parentsAlias="parkId" notNull="true"/>
 			<youi:fieldSelect property="rzBuss"  caption="企业主营" convert="pubStatus"/>
 			<youi:fieldTree simple="false" popup="true" tree="${enetrTree}" property="enTypeId.enTypeId" caption="企业类型" onlyLeaf="true"/>
 			<youi:fieldText property="rzSign"  caption="企业码"/>
-			<youi:fieldText property="rzMem"  caption="会员信息"/>
+			<youi:fieldText property="rzUrl"  caption="企业网址"/>
 			<youi:fieldText property="rzTelephone"  caption="联系方式" expression="^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$" expressionMessage="手机号码格式不正确" />
 			<youi:fieldArea property="rzRemark"  caption="企业备注"/>			
 			<youi:fieldSwfupload property="rzLogo" caption="企业logo" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072"/>
+			<youi:fieldSwfupload property="rzImages" caption="企业宣传图" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072"/>
 		</youi:fieldLayout>
 	</youi:form>
-	
-	<!--**********************************页面函数Start********************************-->
-	
-	<!--**********************************页面函数End**********************************-->
 	<youi:func name="form_enterbusinessmanagerRz_afterSubmit" params="result">
 		$.youi.ajaxUtil.ajax({
 			url:'esb/web/enterbusinessmanagerRzManager/updateEnteringStatus.json',
