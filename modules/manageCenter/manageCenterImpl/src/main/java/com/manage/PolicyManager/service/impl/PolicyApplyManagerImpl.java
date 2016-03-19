@@ -101,6 +101,7 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
     	if(StringUtils.isEmpty(enName)){//如果得到的企业名称为空
     		throw new BusException("非企业会员不能提交申请") ;
     	}
+    	MemberInformation member = memberInformationManager.getMemberInformation(o.getCreateUser()) ;
     	PolicyApply policyApply = null ;
     	NmIssuenews nmIssuenews = o.getNmIssuenews() ;//得到政策新闻
     	if(nmIssuenews != null){
@@ -111,6 +112,7 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
     			String nmIssuetypeId = nmIssuetype.getIssueTypeId() ;//得到政策类型的ID
     			NmIssueflow nmIssueflow = nmIssueflowManager.getStartFlow(nmIssuetypeId) ;//通过政策类型ID得到初始流程
     			o.setNmIssueflow(nmIssueflow);
+    			o.setMember(member);
     			policyApply = policyApplyDao.save(o) ;
     			try {
     				HttpSenderMsg.sendMsg(policyApply.getPolicyApplyContactTel(), "尊敬的 "+policyApply.getPolicyApplyContactPeople()
