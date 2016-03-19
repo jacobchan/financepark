@@ -133,7 +133,7 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
         		order.setUpdateUser(user.getUserId());
         		order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
         		order.setUserorderBuyUser(memberInformation.getMemberName());
-        		order.setMemberId(user.getUserId());
+        		order.setMemberId(memberInformation.getMemberId());
         		order.setUserorderProject("物业报修");
         		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
         		order.setUserorderAmount(o.getBxAmount());
