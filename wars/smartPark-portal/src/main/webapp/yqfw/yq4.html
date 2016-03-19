@@ -56,17 +56,19 @@
 							<tr>
 								<td align="center">联系电话</td>
 								<td><input type="text" id="iphone"></td>
-								<td align="center">到访企业</td>
+								<!-- <td align="center">到访企业</td>
 								<td>
 									<input type="text" id="company">
-								</td>
+								</td> -->
+								<td align="center">到访时间</td>
+								<td><input type="text" id="timer"></td>
 							</tr>
-							<tr>
+							<!-- <tr>
 								<td align="center">到访时间</td>
 								<td><input type="text" id="timer"></td>
 								<td></td>
 								<td></td>
-							</tr>
+							</tr> -->
 							<tr>
 								<td align="center">访客说明</td>
 								<td colspan="3">
@@ -94,6 +96,21 @@
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
+	
+	<!-- 页面数据初始化 -->
+	<script type="text/javascript">
+	$.youi.ajaxUtils.ajax({
+		url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
+		jsonp:'data:jsonp',
+		dataType:'jsonp',
+		success:function(result){
+			if(result&&result.record){
+				$("#iphone").val(result.record.employeesName);
+				$("#user").val(result.record.employeesTelephone);
+			}
+		}
+	});
+	</script>
 <script>
 $(function(){
 	$(".hhf-submit").click(function(){
@@ -123,7 +140,7 @@ $(function(){
 		var params = ['fkcodeName='+$("#user").val(),
 						'fkcodeSex='+sex,
 						'fkcodeTelephone='+phone,
-						'fkcodeComp='+$("#company").val(),
+					//	'fkcodeComp='+$("#company").val(),
 						'fkcodeTime='+$("#timer").val(),
 						'fkcodeRemark='+$("#userinfo").val()];
 		var serviceURL = baseUrl+"propertyservicemanagerFkcodeManager/savePropertyservicemanagerFkcode.json";
