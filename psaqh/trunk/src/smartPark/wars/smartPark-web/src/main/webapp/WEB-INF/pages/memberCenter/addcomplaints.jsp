@@ -121,7 +121,7 @@
 				}
 			}
 			$.youi.ajaxUtils.ajax({
-				url:'/smartPark-web/esb/web/propertyservicemanagerCosManager/savePropertyservicemanagerCos.json',
+				url:baseUrl+'/esb/web/propertyservicemanagerCosManager/savePropertyservicemanagerCos.json',
 				data:'cosContent='+cosContent+'&cosBool='+cosBool+'&cosName='+cosName+'&cosTelephone='+cosTelephone,
 				success:function(result){
 					if(result&&result.record){
