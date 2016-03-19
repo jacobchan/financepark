@@ -155,7 +155,12 @@
 				}else if(record[i].cosStatus=='6'){
 					status = "已完成";
 				}
-				var html="<tr id='"+record[i].cosId+"'><td>"+record[i].cosCode+"</td><td>"+record[i].cosTime+"</td><td>"+bool+"</td><td>"+record[i].cosName+"</td><td>"+record[i].cosTelephone+"</td><td>"+status+"</td><td><a href='javascript:;' onclick='javascript:cancel(this)' class='ac-show'>"+crop+"</a></td></tr>";
+				var html="<tr id='"+record[i].cosId+"'><td>"+record[i].cosCode+"</td>"+
+				"<td>"+record[i].cosTime+"</td>"+
+				"<td>"+bool+"</td><td>"+record[i].cosName+"</td>"+
+				"<td>"+record[i].cosTelephone+"</td><td>"+status+"</td>"+
+				"<td><a href='javascript:;' onclick='javascript:cancel(this)' class='ac-show'>"+crop+"</a></td></tr>";
+				
 				$("tbody").append(html);
 			}
 		};
