@@ -103,6 +103,9 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
     	String propertyservicemanagerBxId = o.getBxId();
     	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerBxId);
     	PropertyservicemanagerBx savebx = null;
+    	//查询当前申请用户
+		String memberId = o.getCreateUser();
+		MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
     	if(isUpdate){//修改
     		//物业管理员定价生成订单
         	if(o.getBxStatus().equals("05")){
@@ -129,8 +132,9 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
         		order.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
         		order.setUpdateUser(user.getUserId());
         		order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-        		order.setUserorderBuyUser(user.getUserCaption());
+        		order.setUserorderBuyUser(memberInformation.getMemberName());
         		order.setMemberId(user.getUserId());
+        		order.setUserorderProject("物业报修");
         		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
         		order.setUserorderAmount(o.getBxAmount());
         		OrdermanagerUserorder saveorder = 	ordermanagerUserorderManager.saveOrdermanagerUserorder(order);
@@ -169,9 +173,6 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
    			o.setBxStatus("00");
    			savebx = propertyservicemanagerBxDao.save(o);
    			try {
-   				//查询当前申请用户手机号
-   				String memberId = savebx.getCreateUser();
-   				MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
     			HttpSenderMsg.sendMsg(memberInformation.getMemberPhoneNumber(), "您提交报修已成功，申请单号："+savebx.getBxCode()+"，请等待物业管理员审批！");
     		} catch (Exception e) {
     			e.printStackTrace();
