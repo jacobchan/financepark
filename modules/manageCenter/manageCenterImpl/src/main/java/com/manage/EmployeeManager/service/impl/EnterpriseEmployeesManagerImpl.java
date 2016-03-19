@@ -159,7 +159,7 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 					EnterpriseRole role = new EnterpriseRole();
 					
 					ems.setRz(rz);
-					ems.setMember(rz.getRzManager());
+					ems.setMember(info);
 					ems.setEmployeesName(info.getMemberName());
 					ems.setEmployeesTelephone(info.getMemberPhoneNumber());
 					ems.setEmployeesDepartment("1");
