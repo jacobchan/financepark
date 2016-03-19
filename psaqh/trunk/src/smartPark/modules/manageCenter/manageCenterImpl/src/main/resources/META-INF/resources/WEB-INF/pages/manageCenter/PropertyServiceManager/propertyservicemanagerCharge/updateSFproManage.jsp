@@ -29,6 +29,7 @@
 	<!--**********************************页面函数********************************-->
 	<!-- 行动作 -->
 	<youi:func name="func_form_chargeSubmit" >
+		var roomId = $elem('record_sFpro_bbmRoom_roomId',pageId).fieldValue();
 		var chargeId = $elem('record_sFpro_chargeId',pageId).fieldValue();
 		var chargeIsbool = $elem('record_sFpro_chargeIsbool',pageId).fieldValue();
 		var chargeCreatetime = $elem('record_sFpro_chargeCreatetime',pageId).fieldValue();
@@ -45,7 +46,7 @@
 			}
 		}
 		params = params+'chargeId='+chargeId+'&'+'chargeIsbool='+chargeIsbool+'&'+'chargeCreatetime='+chargeCreatetime+'&'+
-		'chargeBedate='+chargeBedate+'&'+'chargeEndate='+chargeEndate;
+		'chargeBedate='+chargeBedate+'&'+'chargeEndate='+chargeEndate+'&'+'roomId='+roomId;
 		$.youi.ajaxUtil.ajax({
 			url:'/esb/web/propertyservicemanagerSfproManager/saveChargeSfpro.json',
 			data:params,

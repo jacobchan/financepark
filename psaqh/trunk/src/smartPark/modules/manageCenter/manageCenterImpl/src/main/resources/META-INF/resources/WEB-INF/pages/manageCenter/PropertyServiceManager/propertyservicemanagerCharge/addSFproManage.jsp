@@ -6,7 +6,7 @@
 		action="esb/web/propertyservicemanagerChargeManager/savePropertyservicemanagerCharge.json">
 		<youi:fieldLayout prefix="record_sFpro" labelWidths="120,120">
 			<youi:fieldHidden property="chargeId"  caption="收费登记序列"/>
-			<youi:fieldTree simple="false" popup="true" tree="${bbmRoomTree}" property="bbmRoom.roomNo"  caption="单元编号" onlyLeaf="true"/>
+			<youi:fieldTree simple="false" popup="true" tree="${bbmRoomTree}" property="bbmRoom.roomId"  caption="单元编号" onlyLeaf="true"/>
 			<youi:fieldCalendar property="chargeCreatetime"  caption="登记日期" format="yyyy-MM-dd" textFormat="yyyy-MM-dd"/>
 			<youi:fieldCalendar property="chargeBedate"  caption="起始日期" format="yyyy-MM-dd" textFormat="yyyy-MM-dd"/>
 			<youi:fieldCalendar property="chargeEndate"  caption="截止日期" format="yyyy-MM-dd" textFormat="yyyy-MM-dd"/>
@@ -28,6 +28,7 @@
 	<!--**********************************页面函数********************************-->
 	<!-- 行动作 -->
 	<youi:func name="func_form_chargeSubmit" >
+		var roomId = $elem('record_sFpro_bbmRoom_roomId',pageId).fieldValue();
 		var chargeId = $elem('record_sFpro_chargeId',pageId).fieldValue();
 		var chargeIsbool = '1';
 		var chargeCreatetime = $elem('record_sFpro_chargeCreatetime',pageId).fieldValue();
@@ -44,7 +45,7 @@
 			}
 		}
 		params = params+'chargeId='+chargeId+'&'+'chargeIsbool='+chargeIsbool+'&'+'chargeCreatetime='+chargeCreatetime+'&'+
-		'chargeBedate='+chargeBedate+'&'+'chargeEndate='+chargeEndate;
+		'chargeBedate='+chargeBedate+'&'+'chargeEndate='+chargeEndate+'&'+'roomId='+roomId;
 		$.youi.ajaxUtil.ajax({
 			url:'/esb/web/propertyservicemanagerSfproManager/saveChargeSfpro.json',
 			data:params,
