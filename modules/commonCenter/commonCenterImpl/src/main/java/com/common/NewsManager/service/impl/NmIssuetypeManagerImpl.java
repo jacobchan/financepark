@@ -147,8 +147,8 @@ public class NmIssuetypeManagerImpl extends BaseManagerImpl implements NmIssuety
     public boolean exsitNmIssuetype(String propertyName,Object value) throws BusException{
 		return nmIssuetypeDao.exists(propertyName,value);
 	}
+    
     @EsbServiceMapping
-	@Override
 	public List<NmIssuetype> getChildren(@ServiceParam(name="issueTypeId") String parentId)
 			throws BusException {
 	    List<NmIssuetype> children ;
@@ -176,7 +176,6 @@ public class NmIssuetypeManagerImpl extends BaseManagerImpl implements NmIssuety
      * 得到新闻公告的所有的子类型
      * @return
      */
-    @Override
     @EsbServiceMapping
     public List<NmIssuetype> getNewsType() {
     	NmIssuetype type = nmIssuetypeDao.getObjectByUniqueProperty("issueTypeCode", "01") ;//01为新闻公告类型,得到新闻公告类型
