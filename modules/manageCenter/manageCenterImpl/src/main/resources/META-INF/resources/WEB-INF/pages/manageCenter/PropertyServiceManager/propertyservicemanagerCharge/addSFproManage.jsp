@@ -14,7 +14,7 @@
 		<youi:button name="chargeSubmit" caption="提交"></youi:button>
 		
 	</youi:form>
-	<youi:grid id="grid_sFproManage" idKeys="sfproId" caption="物业收费项目列表"  panel="false" scrollHeight="240"
+	<youi:grid id="grid_sFproManage" idKeys="sfproId" caption="物业收费项目列表"  panel="true" scrollHeight="240"
 				src="esb/web/propertyservicemanagerSfproManager/getPagerPropertyservicemanagerSfpros.json" dataFormId="form_sFproManage"
 				showCheckbox="true" 
 				submit="NOT" reset="NOT" usePager="false" editable="true">
