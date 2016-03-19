@@ -87,10 +87,11 @@
                           "<td width='111'>"+record[i].userorderAmount+"</td>"+
                           "<td width='111'>"+record[i].userorderTime+"</td>"+
                           
-                          "<td width='88'>"+status+                          
-                          "<a href='javascript:;' onclick='javascript:cancel(this)' class='ac-show'>"+评价+"</a>"+
-                          "<a href='javascript:;' onclick='javascript:cancel(this)' class='ac-show'>"+发票领取+"</a></td>";
-              			 
+                          "<td width='155'>"+status+                          
+                     
+                          "<a href='grzx2-2.html'>评价</a><span class='f12 ml5 mr5'>"+
+						  "<a href='javascript:;' class='ac-show lq-show'>发票领取</a>"+
+						  "</td>"+
                           " </tr>";
 				 $(".gt-table").append(html);	
 			}
