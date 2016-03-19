@@ -15,7 +15,7 @@
 			<youi:fieldText property="productType" caption="产品类别" />
 			<youi:fieldText property="productName" caption="产品名称" />
 		</youi:fieldLayout>
-		<youi:gridCol property="productRe" caption="企业信息" width="25%" />
+		<youi:gridCol property="productRe" caption="企业信息" renderer="renderer_productRe" width="25%" />
 		<youi:gridCol property="productName" caption="产品名称" width="25%" />
 		<youi:gridCol property="productType" caption="产品类别" width="25%" />
 		<youi:gridCol property="productContent" caption="产品描述" width="25%" />
@@ -39,4 +39,18 @@
 			<youi:fieldArea property="productContent" caption="产品描述" notNull="true" rows="8" column="20" />
 		</youi:fieldLayout>
 	</youi:form>
+	<youi:func name="renderer_productRe" params="col,record">
+        if(record.productRe !="" && record.productRe !=null){
+	 		var rzName = ""; 
+			$.youi.ajaxUtil.ajax({
+				url:'esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json',
+				data:'rzId='+record.productRe,
+				async: false, 
+				success:function(result){
+					rzName=result.record.rzName;
+				}
+			});
+			return rzName;
+        }
+	</youi:func>
 </youi:page>

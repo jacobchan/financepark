@@ -20,15 +20,14 @@
 			<youi:fieldSelect property="financingStatus" caption="发布状态"
 				convert="financingStatus" />
 		</youi:fieldLayout>
-		<youi:gridCol property="financingSub" caption="投资主体" width="15%" />
-		<youi:gridCol property="financingStatus" caption="发布状态" width="15%" />
+		<youi:gridCol property="financingRe" caption="企业信息" renderer="renderer_financingRe" width="15%" />
 		<youi:gridCol property="financingName" caption="融资企业名称" width="15%" />
 		<youi:gridCol property="financingTime" caption="融资时间" width="15%" />
 		<youi:gridCol property="financingCost" caption="融资估值" width="15%" />
 		<youi:gridCol property="financingPre" caption="持股比例" width="15%" />
-		<youi:gridCol property="financingRe" caption="企业信息" width="15%" />
 		<youi:gridCol property="financingAmount" caption="融资金额" width="15%" />
-		<youi:gridCol property="financingTp" caption="融资状态" width="15%" />
+		<youi:gridCol property="financingStatus" caption="发布状态" convert="financingStatus" width="15%" />
+		<youi:gridCol property="financingTp" caption="融资状态" convert="financingType" width="15%" />
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改" />
 			<youi:button name="remove" caption="删除" />
@@ -54,4 +53,18 @@
 				convert="financingType" />
 		</youi:fieldLayout>
 	</youi:form>
+	<youi:func name="renderer_financingRe" params="col,record">
+        if(record.financingRe !="" && record.financingRe !=null){
+	 		var rzName = ""; 
+			$.youi.ajaxUtil.ajax({
+				url:'esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json',
+				data:'rzId='+record.financingRe,
+				async: false, 
+				success:function(result){
+					rzName=result.record.rzName;
+				}
+			});
+			return rzName;
+        }
+	</youi:func>
 </youi:page>
