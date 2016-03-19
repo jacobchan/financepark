@@ -80,6 +80,17 @@ public class InformationFinancing implements Domain{
 	@Length(max=2)
 	private String financingSub;//投资主体
 	
+	@Column(name = "FINANCING_DESCRIBE_")
+	private String financingDescribe;//融资描述
+	
+	public String getFinancingDescribe() {
+		return financingDescribe;
+	}
+
+	public void setFinancingDescribe(String financingDescribe) {
+		this.financingDescribe = financingDescribe;
+	}
+
 	public String getUpdateTime(){
 		return this.updateTime;
 	}
