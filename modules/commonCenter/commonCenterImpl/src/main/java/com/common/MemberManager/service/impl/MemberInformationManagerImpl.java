@@ -276,8 +276,8 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		// TODO Auto-generated method stub
 		//疑问，token里面存值，是在什么地方存储的？，多种方式登录如何处理，如用邮箱登录，手机登录，用户名登录。
 		//因为2，登录类型是从哪里获取的？
-		String memberName = token.getUsername();
-		MemberInformation member = this.memberInformationDao.getObjectByUniqueProperty("memberName", memberName);
+		String phoneNumber = token.getUsername();
+		MemberInformation member = this.memberInformationDao.getObjectByUniqueProperty("memberPhoneNumber", phoneNumber);
 //		Collection<Condition> conditions = new Collection<Condition>();
 //		conditions.add(Condition.)
 		List<String> roles = memberRoleManager.getRolesByMemberId(member.getMemberId()); 
