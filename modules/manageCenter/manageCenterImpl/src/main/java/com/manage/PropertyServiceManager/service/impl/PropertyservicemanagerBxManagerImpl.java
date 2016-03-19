@@ -133,22 +133,23 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
         		order.setMemberId(user.getUserId());
         		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
         		order.setUserorderAmount(o.getBxAmount());
-        		ordermanagerUserorderManager.saveOrdermanagerUserorder(order);
-        		
-        		//保存订单扩展属性列表
-        		Collection<Condition> purcondition =  new ArrayList<Condition>();
-        		purcondition.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.EQUALS,pg.getGenreId()));
-        		List<PurchasingmanagerGenreProperty> genrePropertyList = purchasingmanagerGenrePropertyManager.getPurchasingmanagerGenrePropertys(purcondition,null);
-        		if(genrePropertyList.size()>0){
-    	    		for(PurchasingmanagerGenreProperty genreProperty:genrePropertyList){//保存订单扩展项信息
-    	    			OrdermanagerOrderprojecttypeValue orderExtendValue = new OrdermanagerOrderprojecttypeValue();
-    	    			orderExtendValue.setOrdermanagerUserorder(order);
-    	    			orderExtendValue.setGenrePropertyId(genreProperty);
-    	    			if("orderBxId".equals(genreProperty.getGenrePropertyFieldName())){
-    	    				orderExtendValue.setOrderprojecttypeValueFieldValue(bxId);
-    	    			}
-    	    			ordermanagerOrderprojecttypeValueManager.saveOrdermanagerOrderprojecttypeValue(orderExtendValue);
-    	    		}
+        		OrdermanagerUserorder saveorder = 	ordermanagerUserorderManager.saveOrdermanagerUserorder(order);
+        		if(saveorder!=null){
+	        		//保存订单扩展属性列表
+	        		Collection<Condition> purcondition =  new ArrayList<Condition>();
+	        		purcondition.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.EQUALS,pg.getGenreId()));
+	        		List<PurchasingmanagerGenreProperty> genrePropertyList = purchasingmanagerGenrePropertyManager.getPurchasingmanagerGenrePropertys(purcondition,null);
+	        		if(genrePropertyList.size()>0){
+	    	    		for(PurchasingmanagerGenreProperty genreProperty:genrePropertyList){//保存订单扩展项信息
+	    	    			OrdermanagerOrderprojecttypeValue orderExtendValue = new OrdermanagerOrderprojecttypeValue();
+	    	    			orderExtendValue.setOrdermanagerUserorder(saveorder);
+	    	    			orderExtendValue.setGenrePropertyId(genreProperty);
+	    	    			if("orderBxId".equals(genreProperty.getGenrePropertyFieldName())){
+	    	    				orderExtendValue.setOrderprojecttypeValueFieldValue(bxId);
+	    	    			}
+	    	    			ordermanagerOrderprojecttypeValueManager.saveOrdermanagerOrderprojecttypeValue(orderExtendValue);
+	    	    		}
+	        		}
         		}
         		//物业管理员定价，同时关闭派工记录
         		PropertyservicemanagerTs ts =  propertyservicemanagerTsManager.getTsBybxId(bxId);
