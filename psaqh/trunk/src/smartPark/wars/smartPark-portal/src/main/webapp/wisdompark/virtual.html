@@ -101,26 +101,35 @@ to {opacity:0;}
 <script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 <script>
 $(function(){
-	$(document).on("mouseover mouseout",".zzul .b",function(){
-		console.log($(this).index())
-		if($(this).index()==0){
+	$(document).on("mouseover",".zzul .b",function(){
+		//console.log($(this).index())
+		/* if($(this).index()==0){
 			$(".b1mask").toggleClass("hide");
 
 		}else if($(this).index()==1){
 			$(".b2mask").toggleClass("hide");
-		}
-		var buildingId = $(this).attr("id") ;
+		} */
+		var buildingId = $(this).parent().attr("id") ;
 		findFloorList(buildingId) ;
 		
-	});				
-	$(".zzul .b").eq(0).find("li").hover(function(){
+	});		
+	/* $(document).on("mouseover mouseout",".zzul .b:eq(0) li",function(){
+		var idx=$(this).index();
+		$(".b1floor").eq(idx).toggleClass("hide");
+	});
+	$(document).on("mouseover mouseout",".zzul .b:eq(1) li",function(){
+		var idx=$(this).index();
+		$(".b2floor").eq(idx).toggleClass("hide");
+	}); */
+
+	/* $(".zzul .b").eq(0).find("li").hover(function(){
 		var idx=$(this).index();
 		$(".b1floor").eq(idx).toggleClass("hide");
 	});
 	$(".zzul .b").eq(1).find("li").hover(function(){
 		var idx=$(this).index();
 		$(".b2floor").eq(idx).toggleClass("hide");
-	});
+	}); */
 })
 </script>
 
@@ -139,6 +148,13 @@ $(function(){
 				}
 			});
 		}); 
+		function _parseRecords(record){//record为楼栋的list
+				for(var i=0;i<record.length;i++){
+					var obj = record[i] ;
+					var html = "<li id="+obj.buildingId+"><a class='b' href='#'>"+obj.buildingNo+"</a><ul class='subul'></ul></li>"
+					$(".oh.fl.zzul").append(html);
+				}
+		} 
 		function findFloorList(buildingId){
 			var params = ["buildingId="+buildingId];
 			$.youi.ajaxUtils.ajax({
@@ -148,6 +164,7 @@ $(function(){
 				dataType:'jsonp',
 				success:function(result){
 					if(result&&result.records){
+						console.log(result.records) ;
 						var html = appendHtml(result.records) ;
 						$("#"+buildingId).find(".subul").empty();
 						$("#"+buildingId).find(".subul").append(html) ;
@@ -159,17 +176,10 @@ $(function(){
 			var html = "";
 			for(var i=0;i<record.length;i++){
 				var obj = record[i] ;
-				html += "<li id="+obj.floorId+"><a href='wp_login.html'>"+obj.floorNo+"</a></li>"
+				html += "<li id="+obj.floorId+"><a href='wp_login.html?floorId="+obj.floorId+"'>"+obj.floorNo+"</a></li>" ;
 			}
 			return html ;
 		}
-		function _parseRecords(record){//record为楼栋的list
-			for(var i=0;i<record.length;i++){
-				var obj = record[i] ;
-				var html = "<li class='b' id="+obj.buildingId+"><a href='#'>"+obj.buildingNo+"</a><ul class='subul'></ul></li>"
-				$(".oh.fl.zzul").append(html);
-			}
-		} 
 	</script>
 </body>
 </html>
