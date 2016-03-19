@@ -246,6 +246,10 @@
 	    				$("#introdaction").html(record.rzRemark);
 	    				$("#enTypeName").append(record.enTypeId.enTypeName);
 	    				$("#rzUrl").append("<a href='"+record.rzUrl+"' target='_blank'><font class='c-o f14'>"+record.rzUrl+"</font></a>");
+	    				$("#productDiv").html(record.productDiscriptio);
+	    				$("#noticeTime").append(record.rzDate);
+    					$("#noticeCount").append(record.attentionCount);
+    					$("#noticeSum").append(record.scanCount);
 	    				var images = record.rzImages.split(",");
 	    				//var count = images.match(/,/g).length;
 	    				for(var i=0; i<images.length; i++){
@@ -364,40 +368,40 @@
 	    	});
 	    	
 	    	//根据企业id获取公告信息
-	    	$.youi.ajaxUtils.ajax({
-	    		url : baseUrl+"informationNoticeManager/findInformationNotice.json",
-	    		data : ['noticeRe='+rzId].join('&'),
-	    		jsonp : 'data:jsonp',
-	    		dataType : 'jsonp',
-	    		async : false,
-	    		success : function(results) {
-	    			if (results && results.records) {
-	    				var records = results.records;
-	    				for(var i=0; i<records.length; i++){
-	    					$("#noticeTime").append(records[i].noticeTime);
-	    					$("#noticeCount").append(records[i].noticeCount);
-	    					$("#noticeSum").append(records[i].noticeSum);
-	    				}
-	    			}
-	    		}
-	    	});
+	    	//$.youi.ajaxUtils.ajax({
+	    	//	url : baseUrl+"informationNoticeManager/findInformationNotice.json",
+	    	//	data : ['noticeRe='+rzId].join('&'),
+	    	//	jsonp : 'data:jsonp',
+	    	//	dataType : 'jsonp',
+	    	//	async : false,
+	    	//	success : function(results) {
+	    	//		if (results && results.records) {
+	    	//			var records = results.records;
+	    	//			for(var i=0; i<records.length; i++){
+	    	//				$("#noticeTime").append(records[i].noticeTime);
+	    	//				$("#noticeCount").append(records[i].noticeCount);
+	    	//				$("#noticeSum").append(records[i].noticeSum);
+	    	//			}
+	    	//		}
+	    	//	}
+	    	//});
 	    	
 	    	//根据企业id获取产品信息
-	    	$.youi.ajaxUtils.ajax({
-	    		url : baseUrl+"informationProductManager/findInformationProduct.json",
-	    		data : ['productRe='+rzId].join('&'),
-	    		jsonp : 'data:jsonp',
-	    		dataType : 'jsonp',
-	    		async : false,
-	    		success : function(results) {
-	    			if (results && results.records) {
-	    				var records = results.records;
-	    				for(var i=0; i<records.length; i++){
-	    					$("#productDiv").html(records[i].productContent);
-	    				}
-	    			}
-	    		}
-	    	});
+	    	//$.youi.ajaxUtils.ajax({
+	    	//	url : baseUrl+"informationProductManager/findInformationProduct.json",
+	    	//	data : ['productRe='+rzId].join('&'),
+	    	//	jsonp : 'data:jsonp',
+	    	//	dataType : 'jsonp',
+	    	//	async : false,
+	    	//	success : function(results) {
+	    	//		if (results && results.records) {
+	    	//			var records = results.records;
+	    	//			for(var i=0; i<records.length; i++){
+	    	//				$("#productDiv").html(records[i].productContent);
+	    	//			}
+	    	//		}
+	    	//	}
+	    	//});
 	    });
     </script>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=0jBm0QtZ3t8BGclw0ujY0kFe"></script>
