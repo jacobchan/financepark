@@ -15,6 +15,7 @@ import com.gsoft.framework.core.service.BaseManager;
 import com.common.BuildingBaseManager.entity.BbmBuilding;
 import com.common.BuildingBaseManager.entity.BbmFloor;
 import com.common.BuildingBaseManager.entity.BbmPark;
+import com.common.BuildingBaseManager.entity.BbmRoom;
 
 public interface BbmFloorManager extends BaseManager{
 
@@ -80,4 +81,18 @@ public interface BbmFloorManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public List<BbmFloor> getBbmFloorByBuildingId(String buildingId) throws BusException;
+	
+	/**
+	 * 通过楼层Id获取该楼层所有的单元
+	 * @param floorId
+	 * @return
+	 */
+	public List<BbmRoom> getRoomByFloorId(String floorId) ;
+	
+	/**
+	 * 通过楼层id得到相关信息
+	 * @param floorId
+	 * @return
+	 */
+	public String getInforByFloorId(String floorId) ;
 }
