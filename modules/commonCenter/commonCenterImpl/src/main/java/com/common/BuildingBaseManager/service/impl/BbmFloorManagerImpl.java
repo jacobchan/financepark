@@ -24,9 +24,11 @@ import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.common.BuildingBaseManager.entity.BbmBuilding;
 import com.common.BuildingBaseManager.entity.BbmFloor;
 import com.common.BuildingBaseManager.entity.BbmPark;
+import com.common.BuildingBaseManager.entity.BbmRoom;
 import com.common.BuildingBaseManager.dao.BbmFloorDao;
 import com.common.BuildingBaseManager.service.BbmBuildingManager;
 import com.common.BuildingBaseManager.service.BbmFloorManager;
+import com.common.BuildingBaseManager.service.BbmRoomManager;
 
 @Service("bbmFloorManager")
 @Transactional
@@ -35,6 +37,8 @@ public class BbmFloorManagerImpl extends BaseManagerImpl implements BbmFloorMana
 	private BbmFloorDao bbmFloorDao;
 	@Autowired
 	private BbmBuildingManager bbmBuildingManager ;
+	@Autowired
+	private BbmRoomManager bbmRoomManager ;
 	
     /**
      * 查询列表
@@ -126,7 +130,6 @@ public class BbmFloorManagerImpl extends BaseManagerImpl implements BbmFloorMana
 	 * @return
 	 * @throws BusException
 	 */
-	@Override
 	@EsbServiceMapping
 	public BbmPark findBbmParkByBuildingId(@ServiceParam(name="buildingId") String buildingId) throws BusException {
 		if( ! "".equals(buildingId)){
@@ -143,7 +146,6 @@ public class BbmFloorManagerImpl extends BaseManagerImpl implements BbmFloorMana
 	 * @return
 	 * @throws BusException
 	 */
-	@Override
 	@EsbServiceMapping
 	public List<BbmFloor> getBbmFloorByBuildingId(@ServiceParam(name="buildingId") String buildingId)
 			throws BusException {
@@ -154,5 +156,39 @@ public class BbmFloorManagerImpl extends BaseManagerImpl implements BbmFloorMana
 			list = bbmFloorDao.commonQuery(condition, null) ;
 		}
 		return list;
+	}
+	
+	/**
+	 * 通过楼层Id获取该楼层所有的单元
+	 * @param floorId
+	 * @return
+	 */
+	@EsbServiceMapping
+	public List<BbmRoom> getRoomByFloorId(@ServiceParam(name="floorId") String floorId) {
+		Collection<Condition> condition =  new ArrayList<Condition>();
+		condition.add(ConditionUtils.getCondition("bbmFloor.floorId", Condition.EQUALS,floorId));//创建查询条件
+		List<BbmRoom> list = bbmRoomManager.getBbmRooms(condition, null) ;
+		if(list != null){
+			return list;
+		}else{
+			return new ArrayList<BbmRoom>() ;
+		}
+	}
+	
+	/**
+	 * 通过楼层id得到相关信息
+	 * @param floorId
+	 * @return
+	 */
+	@EsbServiceMapping
+	public String getInforByFloorId(@ServiceParam(name="floorId") String floorId) {
+		BbmFloor floor = bbmFloorDao.get(floorId) ;//获取当前楼层
+		BbmBuilding building = floor.getBbmBuilding() ;//获取楼层对应的楼栋
+		String floorCount = building.getAttributeFloorCount() ;//获取楼层量
+		String buildingNo = building.getBuildingNo() ;//得到楼栋编号
+		String floorNo = floor.getFloorNo() ;
+		String str = floorNo.substring(0, floorNo.length()-1) ;
+		String infor = buildingNo + "("+str+"/"+floorCount+")" ;
+		return infor;
 	}
 }
