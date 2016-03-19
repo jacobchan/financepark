@@ -44,7 +44,7 @@
 			<youi:fieldSelect property="buildingId"  caption="楼栋" src="esb/web/bbmBuildingManager/getBbmBuildings.json" 
 				code="buildingId" show="buildingNo" parents="parkId" parentsAlias="parkId" notNull="true"/> --%>
 				
-			<<youi:fieldTree simple="false" popup="true" tree="${bbmRoomTree}" property="roomId.roomId"  caption="默认单元" onlyLeaf="true"/>
+			<youi:fieldTree simple="false" popup="true" tree="${bbmRoomTree}" property="roomId.roomId"  caption="默认单元" onlyLeaf="true"/>
 				
 			<youi:fieldSelect property="rzBuss"  caption="企业主营" convert="pubStatus"/>
 			<youi:fieldTree simple="false" popup="true" tree="${enetrTree}" property="enTypeId.enTypeId" caption="企业类型" onlyLeaf="true"/>
