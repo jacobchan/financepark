@@ -22,15 +22,15 @@
 			<youi:fieldCalendar property="chargeCreatetime"  caption="登记日期" format="yyyy-MM-dd" textFormat="yyyy-MM-dd"/>
 			<youi:fieldCalendar property="chargeTime"  caption="缴费日期" format="yyyy-MM-dd" textFormat="yyyy-MM-dd"/>
 		</youi:fieldLayout>
-		<youi:gridCol property="ordermanagerUserorder.userorderCode"  caption="用户订单编号" width="15%"/>
-		<youi:gridCol property="bbmRoom.roomNo"  caption="单元编号"  width="15%"/>
-		<youi:gridCol property="chargeComp"  caption="收费企业名称"  width="10%"/>
-		<youi:gridCol property="chargeAmount"  caption="应缴费总额"  width="10%"/>
-		<youi:gridCol property="chargeIsbool"  caption="是否缴费"  width="10%" convert="bool"/>
-		<youi:gridCol property="chargeCreatetime"  caption="登记日期"  width="10%"/>
-		<youi:gridCol property="chargeTime"  caption="缴费日期"  width="10%"/>
-		<youi:gridCol property="chargeBedate"  caption="起始日期"  width="10%"/>
-		<youi:gridCol property="chargeEndate"  caption="截止日期"  width="10%"/>
+		<youi:gridCol property="userorder.userorderCode"  caption="用户订单编号" width="17%" align="center"/>
+		<youi:gridCol property="bbmRoom.roomNo"  caption="单元编号"  width="13%" align="center"/>
+		<youi:gridCol property="chargeComp"  caption="收费企业名称"  width="10%" align="center"/>
+		<youi:gridCol property="chargeAmount"  caption="应缴费总额"  width="10%" align="center"/>
+		<youi:gridCol property="chargeIsbool"  caption="是否缴费"  width="10%" convert="bool" align="center"/>
+		<youi:gridCol property="chargeCreatetime"  caption="登记日期"  width="10%" align="center"/>
+		<youi:gridCol property="chargeTime"  caption="缴费日期"  width="10%" align="center"/>
+		<youi:gridCol property="chargeBedate"  caption="起始日期"  width="10%" align="center"/>
+		<youi:gridCol property="chargeEndate"  caption="截止日期"  width="10%" align="center"/>
 		<youi:gridCol property="bbmRoom.roomId"  caption="单元Id"  width="0"/>
 		
 		<youi:button name="sFproAdd" caption="增加"/>
