@@ -15,61 +15,61 @@
 <div class="w1200 mhbg">
 	<a href="javascript:;" class="inline_b ml20"><i class="fa fa-angle-left cc fa-3x"></i></a>
 	<div class="hxpic">
-    	<div class="hx01 bgyellow">
+    	<div class="hx01" title="01" >
+            <div class="hx_square1 hx_tright " ></div>
+            <div class="hx_square1 hx_bright"></div>
+        </div>
+        <div class="hx02" title="02">
             <div class="hx_square1 hx_tright "></div>
             <div class="hx_square1 hx_bright"></div>
         </div>
-        <div class="hx02 bggreen">
-            <div class="hx_square1 hx_tright "></div>
-            <div class="hx_square1 hx_bright"></div>
-        </div>
-        <div class="hx03 bggreen">
+        <div class="hx03" title="03">
             <div class="hx_square2 hx_tright "></div>
         </div>
-        <div class="hx04 bgyellow"></div>
-        <div class="hx05 bgred"></div>
-        <div class="hx06 bggreen"></div>
-        <div class="hx07 bggreen"></div>
-        <div class="hx08 bgred"></div>
-        <div class="hx09 bggreen"></div>
-        <div class="hx10 bggreen"></div>
-        <div class="hx11 bgred">
+        <div class="hx04" title="04"></div>
+        <div class="hx05" title="05"></div>
+        <div class="hx06" title="06"></div>
+        <div class="hx07" title="07"></div>
+        <div class="hx08" title="08"></div>
+        <div class="hx09" title="09"></div>
+        <div class="hx10" title="10"></div>
+        <div class="hx11" title="11">
             <div class="hx_square1 hx_tleft "></div>
             <div class="hx_square1 hx_bleft"></div>
         </div>
-        <div class="hx12 bgyellow">
+        <div class="hx12" title="12">
             <div class="hx_square1 hx_tleft "></div>
             <div class="hx_square1 hx_bleft"></div>
         </div>
     </div>
     <div class="hxinfo">
     	<table class="tabel_hx">
-        	<tr><td colspan="2" class="into_tit">创智中心二号楼（5/9）</td></tr>
+        	<tr><td colspan="2" class="into_tit" align="center"></td></tr>
             <tr>
             	<td>房间名称：</td>
-                <td>2-504</td>
+                <td id="roomNo" align="left"></td>
             </tr>
             <tr>
             	<td>房间面积：</td>
-                <td>108.54平方米</td>
+                <td id="area" align="left"></td>
             </tr>
             <tr>
             	<td>朝&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;向：</td>
-                <td>朝南</td>
+                <td id="aspect" align="left"></td>
             </tr>
             <tr>
             	<td>户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型：</td>
-                <td>平层户型</td>
+                <td id="module" align="left"></td>
             </tr>
             <tr>
             	<td>装&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修：</td>
-                <td>毛坯</td>
+                <td id="furnish" align="left"></td>
             </tr>
             <tr>
             	<td>租&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;金：</td>
-                <td>8K/月</td>
+                <td id="price" align="left"></td>
             </tr>
-        </table>
+        </table> 
         <div class="mt20 tc">
             <div class="btn-cheng mr25" id="tj_pop">推荐</div>
             <div class="btn-chengk">预约</div>
@@ -160,7 +160,138 @@
 		$("#tj_pop").click(function(){
 			$(".pop_layer").show();
 		});
-	})
+	});
+	
 </script>
+<script type="text/javascript">
+		 $(function(){
+			var floorId = "" ;
+			floorId = getParam() ;
+			var params = ["floorId="+floorId];
+			$.youi.ajaxUtils.ajax({
+				url:baseUrl +"bbmFloorManager/getInforByFloorId.json",//通过楼层ID获取要用的信息
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					console.log(result) ;
+					$(".into_tit").text(result.record.html) ;
+					$.youi.ajaxUtils.ajax({
+						url:baseUrl +"bbmFloorManager/getRoomByFloorId.json",//通过楼层ID获取对应的楼层单元
+						data:params.join('&'),
+						jsonp:'data:jsonp',
+						dataType:'jsonp',
+						success:function(result){
+							 if(result&&result.records){
+								_parseRecords(result.records) ; 
+								appendHtml() ;
+							} 
+						}
+					}); 
+				}
+			}); 
+		}); 
+		function getParam() { 
+			var url = document.URL ; //获取页面的URL
+			var param = "" ;  
+			param = url.substring(url.lastIndexOf("=")+1,url.length) ; //获取页面的参数
+			return param ;
+		}
+		function _parseRecords(record){//record为单元的list
+			$(".hxpic >div").each(function(i){
+				if(i<record.length){
+					var roomNum = $(this).attr("title") ;//得到当前div的编号
+					var room = roomByNo(record,roomNum) ;
+					if(room){
+						var status = room.status ;
+						if(status == '00'){//00表示未售
+							$(this).addClass("bgred") ;
+						}else if(status == '01'){//01表示已售未招
+							$(this).addClass("bgyellow") ;
+						}else{
+							$(this).addClass("bggreen") ;
+						}
+						$(this).attr("id",room.roomId) ;
+					}
+				}else{
+					$(this).addClass("bgred") ;
+					$(this).attr("id","") ;
+				} 
+			});
+		} 
+		
+	 	function appendHtml(){
+			$(".hxpic >div").each(function(i){
+				$(this).click(function(){
+					var roomId = $(this).attr("id");
+					var html = "" ;
+					if(roomId){
+						var params=[
+							         "roomId="+roomId
+							       ];
+						$.youi.ajaxUtils.ajax({
+							url:baseUrl +"bbmRoomManager/getRoomByRoomId.json",
+							data:params.join('&'),
+							jsonp:'data:jsonp',
+							dataType:'jsonp',
+							success:function(results){
+								var record = results.record ;
+								//alert(record.roomNo) ;
+								if(record.roomNo){
+									$("#roomNo").text(record.roomNo) ;
+								}else{
+									$("#roomNo").text("") ;
+								}
+								if(record.area){
+									$("#area").text(record.area+" 平方米") ;
+								}else{
+									$("#area").text("") ;
+								}
+								if(record.aspect){
+									$("#aspect").text(record.aspect) ;
+								}else{
+									$("#aspect").text("") ;
+								}
+								if(record.roomModule){
+									$("#module").text(record.roomModule) ;
+								}else{
+									$("#module").text("") ;
+								}
+								if(record.furnish){
+									$("#furnish").text(record.furnish) ;
+								}else{
+									$("#furnish").text("") ;
+								}
+								if(record.salesPrice){
+									$("#price").text(record.salesPrice+"/月") ;
+								}else{
+									$("#price").text("") ;
+								}
+							}
+						});
+					}else{
+						$("#roomNo").text("") ;
+						$("#area").text("") ;
+						$("#aspect").text("") ;
+						$("#module").text("") ;
+						$("#furnish").text("") ;
+						$("#price").text("") ;
+					}
+				});
+			});
+		}
+		
+		function roomByNo(record,roomNum){//通过div编号得到对应的room
+			for(var i=0;i<record.length;i++){
+				var room = record[i] ;//得到当前单元
+				var roomNo = room.roomNo ;//得到当前单元编号
+				var num = roomNo.lastIndexOf("-");
+				roomNo = roomNo.substring(num+1) ;//得到当前编号的后两位
+				if(roomNo == roomNum){
+					return record[i] ;
+				}
+			}
+		}
+	</script>
 </body>
 </html>
