@@ -105,8 +105,8 @@
 		dataType:'jsonp',
 		success:function(result){
 			if(result&&result.record){
-				$("#iphone").val(result.record.employeesName);
-				$("#user").val(result.record.employeesTelephone);
+				$("#iphone").val(result.record.employeesTelephone);
+				$("#user").val(result.record.employeesName);
 			}
 		}
 	});
