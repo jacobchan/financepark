@@ -12,6 +12,11 @@
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
+	<style type="text/css">
+		.anchorBL{
+			display:none;
+		}
+	</style>
 </head>
 <body style="background-color:#f1f1f1;">
 	<div id="youi_page_header" class="youi-page-header clearfix"></div>
@@ -69,13 +74,13 @@
 				</div>
 				<div class="clearfix">
 					<ul class="yqfw-intro-nav clearfix">
-						<li>融资要求 <em></em></li>
+						<li class="active">融资要求 <em></em></li>
 						<li>媒体报道 <em></em></li>
 						<li>专利知识产权 <em></em></li>
-						<li class="active">项目评论 <em></em></li>
+						<li>项目评论 <em></em></li>
 					</ul>
 					<div class="clearfix">
-						<div class="clearfix yin-group undis">
+						<div class="clearfix yin-group">
 							<div id="informationFinancing" class="yg-group-box">
 								
 							</div>
@@ -86,7 +91,7 @@
 						<div id="knowledgeDiv" class="clearfix yin-group undis">
 							
 						</div>
-						<div class="clearfix yin-group">
+						<div class="clearfix yin-group undis">
 							<form class="yg-form">
 								<textarea placeholder="来说两句吧..."></textarea>
 								<input type="submit" value="提交评论"  class="yf-input mt10 mb10"/>
@@ -404,6 +409,7 @@
 		});
 		//, panel: "r-result"
 		local.search("武汉市洪山区珞狮北路117号华成大厦803");
+		$('#map div.anchorBL').hide();
 	</script>
 </body>
 </html>
