@@ -63,7 +63,7 @@
 	 function apply(id){			
 		var policyApplyId=id;	
 	     $.ajax({
-			url:baseUrl+'/esb/web/policyApplyManager/updatePolicyApplyStatus.json',
+			url:baseUrl+'/policyApplyManager/updatePolicyApplyStatus.json',
 			data:'policyApplyId='+policyApplyId,
 	 		success:function(result){
 				if(result&&result.record){					
@@ -77,7 +77,7 @@
 		$(function(){
 			$.ajax({
 				
-				url:baseUrl+'/esb/web/policyApplyManager/getPolicyApplyListByLoginUser.json',
+				url:baseUrl+'/policyApplyManager/getPolicyApplyListByLoginUser.json',
 				success:function(result){	
 					if(result&&result.records){					
 						_parseRecords(result.records);						

@@ -140,7 +140,7 @@
 			});
 			
 			$.ajax({
-				url:baseUrl+'/esb/web/propertyservicemanagerBxManager/getBxListforpage.json', 
+				url:baseUrl+'/propertyservicemanagerBxManager/getBxListforpage.json', 
 				success:function(result){
 					console.log(result);
 					if(result&&result.records){
@@ -209,7 +209,7 @@
 		$(".hhf-submit").click(function(){
 				var id=$(".bxCode")[0].getAttribute("id");
 			 	$.youi.ajaxUtils.ajax({
-					url:baseUrl+'/esb/web/propertyservicemanagerBxManager/updateBxforpage.json',
+					url:baseUrl+'/propertyservicemanagerBxManager/updateBxforpage.json',
 					data:'bxId='+id,
 					success:function(result){
 						if(result&&result.record){

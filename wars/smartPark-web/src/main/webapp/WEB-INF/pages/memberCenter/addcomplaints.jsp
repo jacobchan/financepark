@@ -121,7 +121,7 @@
 				}
 			}
 			$.youi.ajaxUtils.ajax({
-				url:baseUrl+'/esb/web/propertyservicemanagerCosManager/savePropertyservicemanagerCos.json',
+				url:baseUrl+'/propertyservicemanagerCosManager/savePropertyservicemanagerCos.json',
 				data:'cosContent='+cosContent+'&cosBool='+cosBool+'&cosName='+cosName+'&cosTelephone='+cosTelephone,
 				success:function(result){
 					if(result&&result.record){

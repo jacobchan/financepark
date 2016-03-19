@@ -62,7 +62,7 @@
 	<script type="text/javascript">
 	$(function(){		
 			$.ajax({
-				url:baseUrl+'/esb/web/memberadrAddressManager/getMemberadrAddresssByUser.json', 
+				url:baseUrl+'/memberadrAddressManager/getMemberadrAddresssByUser.json', 
 				success:function(result){
 					console.log(result);
 					if(result&&result.records){
@@ -82,7 +82,7 @@
 				var params =['addressName='+name+'','addressPhone='+phone+'','addressDetail='+address+'','addressStatus=1'];
 			
 			 	$.youi.ajaxUtils.ajax({
-					url:baseUrl+'/esb/web/memberadrAddressManager/saveMemberadrAddress.json',
+					url:baseUrl+'/memberadrAddressManager/saveMemberadrAddress.json',
 					data:params.join('&'),
 					success:function(result){
 						if(result&&result.record){
@@ -127,7 +127,7 @@
 		function removeAddress(obj){
 			var me=obj.parentNode.parentNode;
 		 	$.youi.ajaxUtils.ajax({
-				url:baseUrl+'/esb/web/memberadrAddressManager/removeMemberadrAddress.json',
+				url:baseUrl+'/memberadrAddressManager/removeMemberadrAddress.json',
 				data:'addressId='+me.id,
 				success:function(result){
 					me.remove();
@@ -140,7 +140,7 @@
 			var me=obj.parentNode.parentNode;
 			var params =['addressId='+me.id,'addressStatus=0'];
 		 	$.youi.ajaxUtils.ajax({
-				url:baseUrl+'/esb/web/memberadrAddressManager/saveMemberadrAddress.json',
+				url:baseUrl+'/memberadrAddressManager/saveMemberadrAddress.json',
 				data:params.join('&'),
 				success:function(result){
 					if(result&&result.record){

@@ -65,7 +65,7 @@
 	
 		$(function(){
 			$.ajax({
-			     url:baseUrl+'/esb/web/propertyservicemanagerOcManager/getPropertyservicemanagerOcListByLoginUser.json',
+			     url:baseUrl+'/propertyservicemanagerOcManager/getPropertyservicemanagerOcListByLoginUser.json',
 			
 				success:function(result){
 					
@@ -120,7 +120,7 @@
 		function hhf(id){						
 			var ocId=id;			
 		     $.ajax({
-				url:baseUrl+'/esb/web/propertyservicemanagerOcManager/cancleOcStatus.json',
+				url:baseUrl+'/propertyservicemanagerOcManager/cancleOcStatus.json',
 				data:'ocId='+ocId+'',
 		 		success:function(result){
 					if(result&&result.record){					
