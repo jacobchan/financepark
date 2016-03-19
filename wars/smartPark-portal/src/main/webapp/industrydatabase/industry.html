@@ -51,11 +51,7 @@
 						<a href="javascript:;" style="left:0px;" class="lp-left"><i class="fa fa-angle-left"></i></a>
 						<a href="javascript:;" style="right:0px;" class="lp-right"><i class="fa fa-angle-right"></i></a>
 					</div>
-					<div class="lt-circle clearfix">
-						<a href="javascript:;" class="current"></a>
-						<a href="javascript:;"></a>
-						<a href="javascript:;"></a>
-						<a href="javascript:;"></a>
+					<div id="imagesDiv" class="lt-circle clearfix">
 					</div>
 				</div>
 				<div class="yqfw-com-intro">
@@ -132,7 +128,7 @@
 				<p id="legalRemark" class="mt20 mb20"></p>
 				<h3 class="f16 c-o mb10 fb tc">关于公司</h3>
 				<p id="enTypeName">行业：</p>
-				<p id="rzAddress">地址：</p>
+				<p id="rzAddress">地址：武汉市洪山区珞狮北路117号华成大厦803</p>
 				<p id="rzUrl">官网：</p>
 				<p>地图</p>
 				<div id="map" style="height:220px; border:1px solid #ff6715">
@@ -240,12 +236,23 @@
 	    			if (results && results.record) {
 	    				var record = results.record;
 	    				$("#logo").attr("src", "/filestore/"+record.rzLogo);
-	    				$("#rzImages").html("<li><img src="../styles/images/yqfw/in1.png"></li>");
 	    				$("#rzName").html(record.rzName);
 	    				$("#rzRemark").html(record.rzRemark);
 	    				$("#introdaction").html(record.rzRemark);
 	    				$("#enTypeName").append(record.enTypeId.enTypeName);
 	    				$("#rzUrl").append("<a href='"+record.rzUrl+"' target='_blank'><font class='c-o f14'>"+record.rzUrl+"</font></a>");
+	    				var images = record.rzImages.split(",");
+	    				//var count = images.match(/,/g).length;
+	    				for(var i=0; i<images.length; i++){
+	    					$("#rzImages").append("<li><img src='/filestore/"+images[i]+"'></li>");
+	    				}
+	    				for(var j=0; j<images.length/2; j++){
+	    					if(j==0){
+	    						$("#imagesDiv").append("<a href='javascript:;' class='current'></a>");
+	    					}else{
+	    						$("#imagesDiv").append("<a href='javascript:;'></a>");
+	    					}
+	    				}
 	    			}
 	    		}
 	    	});
@@ -393,8 +400,9 @@
 		var map = new BMap.Map("map");//创建Map实例
 		map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
 		local = new BMap.LocalSearch(map, {
-			renderOptions: {map: map, panel: "r-result"}
+			renderOptions: {map: map}
 		});
+		//, panel: "r-result"
 		local.search("武汉市洪山区珞狮北路117号华成大厦803");
 	</script>
 </body>
