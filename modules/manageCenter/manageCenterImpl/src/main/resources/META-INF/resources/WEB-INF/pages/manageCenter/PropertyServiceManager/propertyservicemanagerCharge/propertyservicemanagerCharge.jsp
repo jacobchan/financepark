@@ -11,7 +11,7 @@
 		subpageId="updateSFproManage" height="600" caption="物业收费登记修改">
 	</youi:subpage>
 
-	<youi:grid id="grid_propertyservicemanagerCharge" idKeys="chargeId" caption="物业收费登记表列表"  panel="false" pageSize="2" add="NOT"
+	<youi:grid id="grid_propertyservicemanagerCharge" idKeys="chargeId,bbmRoom.roomNo" caption="物业收费登记表列表"  panel="false" pageSize="2" add="NOT"
 				src="esb/web/propertyservicemanagerChargeManager/getPagerPropertyservicemanagerCharges.json" dataFormId="form_propertyservicemanagerCharge"
 				editSrc="esb/web/propertyservicemanagerChargeManager/getPropertyservicemanagerCharge.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/propertyservicemanagerChargeManager/removePropertyservicemanagerCharge.json">
