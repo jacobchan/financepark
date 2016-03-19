@@ -25,8 +25,8 @@ public class EnterpriseRole implements Domain {
 	@Length(max = 36)
 	private String rId;// 角色主键
 	
-	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.MERGE)
-	@JoinColumn(name = "EMPLOYEES_ID", updatable=false)
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "EMPLOYEES_ID")
 	private EnterpriseEmployees employees;// 企业员工ID
 	
 	@ManyToOne(fetch = FetchType.EAGER)
