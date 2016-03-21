@@ -196,12 +196,48 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 	 * @param policyId 政策新闻ID
 	 * @return
 	 */
-	@Override
 	@EsbServiceMapping
-	public NmIssuenews getNewsByPolicyId(@ServiceParam(name="policyId")String policyId) throws BusException{
+	public NmIssuenews getNewsByPolicyId(@ServiceParam(name="policyId") String policyId) throws BusException{
 		if(StringUtils.isNotEmpty(policyId)){
 			return this.getNmIssuenews(policyId) ;
 		}
 		throw new BusException("policyId 不能为空！") ;
+	}
+	
+	/**
+	 * 通过政策新闻ID得到下一个政策新闻 
+	 * @param policyId 政策新闻ID
+	 * @return
+	 */
+	@EsbServiceMapping
+	public NmIssuenews getNextPolicyByPilicyId(@ServiceParam(name="policyId") String policyId) {
+		NmIssuenews nm = this.getNmIssuenews(policyId) ;//得到政策新闻
+		NmIssuetype type = nm.getPolicyType() ;//得到政策发布类型
+		String typeId = type.getIssueTypeId() ;//得到政策发布类型的ID
+		List<NmIssuenews> list = this.getAllPolicyByTypeId(typeId) ;//得到当前政策发布类型下面的所有已发布的政策新闻
+		int length = list.size() ;
+		int index = list.indexOf(nm) + 1;
+		if(index < length){
+			return list.get(index) ;
+		}
+		return null;
+	}
+	
+	/**
+	 * 通过政策新闻ID得到上一个政策新闻 
+	 * @param policyId 政策新闻ID
+	 * @return
+	 */
+	@EsbServiceMapping
+	public NmIssuenews getPrePolicyByPolicyId(@ServiceParam(name="policyId") String policyId) {
+		NmIssuenews nm = this.getNmIssuenews(policyId) ;//得到政策新闻
+		NmIssuetype type = nm.getPolicyType() ;//得到政策发布类型
+		String typeId = type.getIssueTypeId() ;//得到政策发布类型的ID
+		List<NmIssuenews> list = this.getAllPolicyByTypeId(typeId) ;//得到当前政策发布类型下面的所有已发布的政策新闻
+		int index = list.indexOf(nm) - 1;
+		if(index >= 0 ){
+			return list.get(index) ;
+		}
+		return null;
 	}
 }
