@@ -1,7 +1,8 @@
 <%@ taglib prefix="youi" uri="http://www.gisoft.cn/youi3" %>
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/css/base.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/css/zs.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/css/page.css">
+<%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/css/zs.css"> --%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/css/awesome/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/css/grzxczh.css">
 <%-- <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/js/link.js"></script> --%>
