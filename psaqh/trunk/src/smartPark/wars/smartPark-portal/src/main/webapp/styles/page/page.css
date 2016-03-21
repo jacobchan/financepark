@@ -604,18 +604,18 @@ background:url(../images/company/ab_ico.png) no-repeat}
 
 
 /**浮动**/
-.commonRight{position: fixed;right: 10px;z-index: 999;bottom: 0px;display: inline-block;}
-.commonRight .comRiglist,.commonRight .comRiglist li{width: 80px;padding: 0px;margin: 0px;list-style: none;}
-.commonRight .comRiglist li {width: 80px; margin-bottom: 10px; cursor: pointer;height: 68px;background-color: #e0e0e0;text-align: center; } 
+.commonRight{position: fixed;right: 10px;z-index: 999;bottom: 0px;display: inline-block;left: 50%;margin-left: 605px;}
+.commonRight .comRiglist,.commonRight .comRiglist li{width: 48px;padding: 0px;margin: 0px;list-style: none;}
+.commonRight .comRiglist li {width: 48px; margin-bottom: 7px; cursor: pointer;height: 40px;background-color: #e0e0e0;text-align: center; } 
 .comRiglist li i{background-image: url(../images/zhyq/fd-icons.png);display: inline-block;}
-.commonRight .comRiglist li.comRigli-top{background: transparent url(../images/zhyq/top-bg.png);height: 78px;}
-.comRigli-top .comRigli-icon{background-position: -1px -13px;width: 40px;height: 18px;margin-top: 35px;}
-.comRigli-top:hover .comRigli-icon{background-position: -40px -13px;}
-.comRigli-qq .comRigli-icon{background-position: -3px -51px;width: 36px;height: 38px;margin-top: 15px;}
-.comRigli-qq:hover .comRigli-icon{background-position: -43px -51px;}
-.comRigli-tel .comRigli-icon{background-position: -2px -101px;width: 36px;height: 38px;margin-top: 15px;}
-.comRigli-tel:hover .comRigli-icon{background-position: -40px -101px;}
-.comRighide-tel{position: absolute;background: transparent url(../images/zhyq/tel-bg.png);width: 176px;height: 146px;right: 80px;bottom: 10px;display: none;}
+.commonRight .comRiglist li.comRigli-top{background: transparent url(../images/zhyq/top-bg.png);height: 46px;}
+.comRigli-top .comRigli-icon{background-position: -1px 0px;width: 22px;height: 11px;margin-top: 22px;}
+.comRigli-top:hover .comRigli-icon{background-position: -28px 0px;}
+.comRigli-qq .comRigli-icon{background-position: -1px -38px;width: 22px;height: 22px;margin-top: 9px;}
+.comRigli-qq:hover .comRigli-icon{background-position: -28px -38px;}
+.comRigli-tel .comRigli-icon{background-position: -1px -85px;width: 22px;height: 22px;margin-top: 8px;}
+.comRigli-tel:hover .comRigli-icon{background-position: -28px -85px;}
+.comRighide-tel{position: absolute;background: transparent url(../images/zhyq/tel-bg.png);width: 176px;height: 146px;left: -176px;bottom: 7px;display: none;}
 .comRighide-tel h4{font-size: 14px;color: #FF6715;margin-top: 8px;line-height: 24px;margin-right: 10px;margin-bottom: 2px;}
 .comRighide-tel p{font-size: 16px;color:#333;line-height: 24px;margin-right: 10px;}
 .comRigli-tel:hover .comRighide-tel{display: block;}
