@@ -219,22 +219,27 @@
 				$(".ifn-group ul").eq($(this).index()).removeClass("undis").siblings().addClass("undis");
 			});
 			$(document).on("click",".ib-btn",function(){
-				$.youi.ajaxUtils.ajax({
-					url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
-					jsonp:'data:jsonp',
-					dataType:'jsonp',
-					success:function(result){
-						if(result&&result.record){
-							var obj = result.record ;
-							var name = obj.member.memberName;
-							var mobile = obj.member.memberPhoneNumber;
-							var rzName = obj.rz.rzName ;
-							$("#policyApplyConpanyName").val(rzName);
-							$("#policyApplyContactPeople").val(name);
-							$("#policyApplyContactTel").val(mobile) ;
+				if(!isLogin){
+					alert("匿名用户不能申请") ;
+					return ;
+				}else{
+					$.youi.ajaxUtils.ajax({
+						url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
+						jsonp:'data:jsonp',
+						dataType:'jsonp',
+						success:function(result){
+							if(result&&result.record){
+								var obj = result.record ;
+								var name = obj.member.memberName;
+								var mobile = obj.member.memberPhoneNumber;
+								var rzName = obj.rz.rzName ;
+								$("#policyApplyConpanyName").val(rzName);
+								$("#policyApplyContactPeople").val(name);
+								$("#policyApplyContactTel").val(mobile) ;
+							}
 						}
-					}
-				}) ;
+					}) ;
+				} 
 				obj = $(this).parent().parent().attr("id") ;
 				$(".bg-tanc").find("form").attr("class",obj);
 				$(".bg-tanc").show();
