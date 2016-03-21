@@ -101,4 +101,11 @@ public interface NmIssuenewsManager extends BaseManager{
 	 */
 	public List<NmIssuenews> getAllPolicyByTypeId(String issueTypeId) ;
 	
+	/**
+	 * 通过政策新闻ID得到当前的政策新闻（供前端调用） 
+	 * @param policyId 政策新闻ID
+	 * @return
+	 */
+	public NmIssuenews getNewsByPolicyId(String policyId) ;
+	
 }
