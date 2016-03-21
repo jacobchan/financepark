@@ -1,5 +1,4 @@
 ﻿<!--***top start****************************************-->
-<%@ include file="/WEB-INF/pages/common/memberCenterScriptAndCss.jsp"%>
 	<!--  -->
 	<script type="text/javascript">
 		function goProperties(gohref){
