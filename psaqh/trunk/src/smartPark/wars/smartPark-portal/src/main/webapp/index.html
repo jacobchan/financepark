@@ -816,7 +816,9 @@
 							$("#lf_name").val('');
 							$("#lf_tel").val('');
 							$(".select_show").text('');
-							window.location=cenUrl+"member/memberCenter/personalCenter/myReservation.html";
+							if (isLogin) {
+								window.location=cenUrl+"member/memberCenter/personalCenter/myReservation.html";
+							}
 						}
 					}
 				});
