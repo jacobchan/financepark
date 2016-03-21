@@ -582,18 +582,7 @@ background:url(../images/company/ab_ico.png) no-repeat}
 .sf_white li:hover,.sf_white li.active{background:#fff;color:#333;}
 .sf_cc li:hover,.sf_cc li.active{background: #FF6715;color:#fff;}
 
-/*登录*/
-.loginbox{padding:100px 0 100px 850px;background:url(../images/index/logoin.jpg) 100px 100px no-repeat;height: 600px;}
-.w350{width:350px;border:1px solid #efecec;}
-.login_ul li{display:inline-block;float:left;width:50%;padding:10px;text-align:center;font-size:16px;color:#333;cursor:pointer;background:#F3F3F3;line-height:30px;}
-.login_ul li.active{color:#FB7730;background:#fff;}
-.login_input{height:45px;border-bottom:1px #efecec solid;line-height:45px;padding:0 20px}
-.login_input input{border:none;font-size:12px;display:inline-block;width:170px;padding-left:10px}
-.btn_yzm{display:inline-block;cursor:pointer;padding:3px 7px;border:1px #FB7730 solid;color:#FB7730;line-height:normal}
-.btn_yzm:hover{background:#FB7730;color:#fff}
-.login_foot{border-top:1px #BFBFBF solid;padding-top:30px;}
-.login_foot a{color:#B8B8B8;margin:0 20px;display:inline-block;font-size: 14px;}
-.login_foot a:hover{color: #666;}
+
 
 .kf_layer{width:200px;height:410px;position:fixed;right:0;top:20%;background: #fff;border:1px #FF6715 solid;color: #FF6715;z-index: 7777;}
 .tel{padding-top:65px;background: url(../images/company/kf1.png) center 10px no-repeat;line-height: 20px}
