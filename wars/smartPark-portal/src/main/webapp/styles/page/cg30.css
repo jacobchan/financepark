@@ -91,9 +91,14 @@ display:block;position:absolute;bottom:0;right:0;background:url(../images/compan
 .pagebox1 li.active{background:#FF6715;color:#fff;border:1px #FF6715 solid;}
 
 
+/**结算**/
 
-
-
+.cg-pay-table th{padding: 15px 10px;border-bottom: 1px solid #efecec;font-size: 16px;text-align: center;}
+.cg-pay-table tr td{padding:10px;}
+.space-num{height: 22px;width: 84px;margin:0px auto;}
+.space-num a{display: block;width: 26px;float: left;font-size: 18px;color: #555;background: #d5d4d2;height: 22px;line-height: 18px;text-align: center;font-weight: bold;}
+.space-num a:hover{background: #ff6a00;color: #fff !important;}
+.num{border:1px solid #ecebeb;width: 30px;background: #fff;float: left;line-height: 20px;color: #555;text-align: center;border:1px solid #d5d4d2;height: 22px;}
 
 
 
