@@ -185,6 +185,15 @@
 		function _parseRecords(record){
 			var imageUrl="/filestore/";
 			for(var i=0;i<record.length;i++){
+				if(record[i].zwValue==undefined){
+					record[i].zwValue="";
+				}
+				if(record[i].dwValue==undefined){
+					record[i].dwValue="";
+				}
+				if(record[i].cpValue==undefined){
+					record[i].cpValue="";
+				}
 					var html="<li class='clearfix'><div class='fl'><img src='"+imageUrl+record[i].commodityImage+"' height='205' width='285'></div>"+
 					"<div class='fl ml30' style='width:535px'><a href='roomxq.html?id="+record[i].commodityId+"' class='span_bold f20'>"+record[i].commodityTitle+"</a><div class='mt20 mb20'><div class='res_tip'>"+record[i].dwValue+"</div><div class='res_tip'>"+record[i].zwValue+"</div><div class='res_tip'>"+record[i].cpValue+"</div></div>"+
 					"<div style='height:55px'>"+record[i].commodityDescribe+"</div><div class='mt30'><img class='mr10' src='../styles/images/company/res_icon.png'/><span class='vm pr20'>"+record[i].merchantLinkman+"</span>"+
