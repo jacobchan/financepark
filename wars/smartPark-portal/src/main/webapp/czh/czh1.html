@@ -317,7 +317,7 @@
 						"<em>创智游学</em>"+
 					"</div>"+
 					"<div class='plg-article pr' id='"+record[i].applyId+"'>"+
-						"<a href='../czh/czh3.html'><h3>"+record[i].applyTitle+"</h3></a>"+
+						"<a href='javascript:;'><h3>"+record[i].applyTitle+"</h3></a>"+
 						"<p>"+record[i].commentContent+"</p>"+
 						"<div class='lh22 mt5 f12' style='color:#b1b1b1'>"+
 							"<span class='mr20'><img src='../styles/images/czh/clock.png' border='0' class='mr10'>"+record[i].startTime+"</span>"+
@@ -339,6 +339,7 @@
 	}
 	function redirectPage(obj){
 		var applyId=obj.parentNode.id;
+		alert(applyId);
 		var url="../czh/czh3.html"+"?"+"applyId="+applyId; 
 		window.location.assign(url); 
 	}
