@@ -14,4 +14,5 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/js/right.js"></script>
   
 <script type="text/javascript"  src="<%=request.getContextPath()%>/scripts/js/birthday.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/lib/laydate/laydate.js"></script>
 <script type="text/javascript"  src="<%=request.getContextPath()%>/scripts/lib/properties.js"></script>
