@@ -78,6 +78,7 @@
 								if(results&&results.record){
 									alert("预约成功");
 									window.location="yq2.html";
+									//window.location=cenUrl+"member/memberCenter/index.html";
 								}
 							},error:function(XMLHttpRequest, textStatus, errorThrown){
 								alert(XMLHttpRequest);
@@ -201,6 +202,7 @@
 				for(var i=0; i<record.length; i++){
                 $("#enteringName").val(record[0].memName);
 				$("#enteringTelephone").val(record[0].memPhone);
+				if(record.length>4){
 					for(var i=0; i<4; i++){
 						if(record[i].enteringStatus=='01'){
 							html="<td><a href='javascript:;' class='em1'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
@@ -210,7 +212,6 @@
 						}else{
 							html="<td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
 						}
-						
 						 $("#am").append(html);
 					}
 					$("#am").append(totalHtml);
@@ -226,6 +227,19 @@
 						}
 						$("#pm").append(htmls);
 					}
+				}else{
+					if(record[i].enteringStatus=='01'){
+						html="<td><a href='javascript:;' class='em1'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+					}
+					else if(record[i].enteringStatus=='02'){
+						html="<td><a href='javascript:;' class='em2'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+					}else{
+						html="<td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+					}
+					
+					 $("#am").append(html);
+				}
+				
 				}
 				
 				$(document).on("click",".em1",function(){
