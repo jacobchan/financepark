@@ -96,7 +96,7 @@
 						</table>
 					</div>	
 				</div>
-				<p class="article-p-a mt40 c-b1">上篇：<a href="">习近平亲密接触新媒体释放什么信号</a><span class="fr">下篇：<a href="">习近平亲密接触新媒体释放什么信号</a></span></p>	
+				<p class="article-p-a mt40 c-b1" id="p1"> <!-- 上篇：<a href="">习近平亲密接触新媒体释放什么信号</a><span class="fr">下篇：<a href="">习近平亲密接触新媒体释放什么信号</a></span> --> </p>	
 			</div>
 			<div class="fr" style="width:295px;">
 				<div class="mb20">
@@ -159,6 +159,44 @@
 					   "</div>" ;
 			$("#id1").append(html) ;
 		}
+	</script>
+	<script type="text/javascript">
+		$(function(){
+			var policyId = "" ;
+			policyId = getParam() ;//当前政策类型ID
+			var params=["policyId="+policyId];
+			$.youi.ajaxUtils.ajax({
+				url:baseUrl +"nmIssuenewsManager/getPrePolicyByPolicyId.json",//得到上篇新闻
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					var record = result.record ;
+					if(record){
+						var html = "上篇：<a href='zs7.html?policyId="+record.policyId+"'>"+record.policyCaption+"</a>"
+						$("#p1").append(html) ;
+					}
+				}
+			});
+		});
+		$(function(){
+			var policyId = "" ;
+			policyId = getParam() ;//当前政策类型ID
+			var params=["policyId="+policyId];
+			$.youi.ajaxUtils.ajax({
+				url:baseUrl +"nmIssuenewsManager/getNextPolicyByPilicyId.json",//得到下篇新闻
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					var record = result.record ;
+					if(record){
+						var html = "<span class='fr'>下篇：<a href='zs7.html?policyId=" +record.policyId+"'>"+record.policyCaption+"</a></span>"
+						$("#p1").append(html) ;
+					}
+				}
+			});
+		});
 	</script>
 </body>
 </html>
