@@ -32,6 +32,7 @@ import com.gsoft.framework.esb.annotation.OrderCollection;
 import com.gsoft.framework.esb.annotation.PubCondition;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.StringUtils;
 
 @Service("nmIssuenewsManager")
 @Transactional
@@ -184,5 +185,19 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 		}else{
 			return new ArrayList<NmIssuenews>() ;
 		}
+	}
+	
+	/**
+	 * 通过政策新闻ID得到当前的政策新闻（供前端调用） 
+	 * @param policyId 政策新闻ID
+	 * @return
+	 */
+	@Override
+	@EsbServiceMapping
+	public NmIssuenews getNewsByPolicyId(@ServiceParam(name="policyId")String policyId) throws BusException{
+		if(StringUtils.isNotEmpty(policyId)){
+			return this.getNmIssuenews(policyId) ;
+		}
+		throw new BusException("policyId 不能为空！") ;
 	}
 }
