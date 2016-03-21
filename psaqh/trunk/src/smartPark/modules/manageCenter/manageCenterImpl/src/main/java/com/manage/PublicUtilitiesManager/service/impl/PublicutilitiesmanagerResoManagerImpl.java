@@ -389,14 +389,14 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 			record.put("merchantLinkman",pc.getPurchasingmanagerMerchant().getMerchantLinkman());//联系人电话
 			record.put("merchantLinkmanPhone",pc.getPurchasingmanagerMerchant().getMerchantLinkmanPhone());//联系人电话
 
-			PurchasingmanagerGenre pg = pc.getPurchasingmanagerGenre();
+		/*	PurchasingmanagerGenre pg = pc.getPurchasingmanagerGenre();
 			while(pg.getPurchasingmanagerGenre() != null){//获取最顶级商品类别
 				pg = pg.getPurchasingmanagerGenre();
-			}
+			}*/
 			//获取商品类别
 			Collection<Condition> condition = new ArrayList<Condition>();
 			List<PurchasingmanagerCommodityExtend> pceList=new ArrayList<PurchasingmanagerCommodityExtend>();
-			condition.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.EQUALS, pg.getGenreId()));
+			condition.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.EQUALS, pc.getPurchasingmanagerGenre().getGenreId()));
 			List<PurchasingmanagerGenreProperty> genrePropertyList = extensionPropertyManager.getPurchasingmanagerGenrePropertys(condition, null);
 			for(PurchasingmanagerGenreProperty genreProperty:genrePropertyList){
 				if("dw".equals(genreProperty.getGenrePropertyFieldName())){
