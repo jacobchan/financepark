@@ -585,30 +585,30 @@
             </ul>
         </div>
         <div class="content_right mt30">
-        	<div class="tips">
-            	<span class="span_bold">公告公示</span><span>园区新闻</span><span>政策法规</span>
-                <a href="javascript:;">更多》</a>
+        	<div class="tips" id="tips1">
+            	<!-- <span class="span_bold">公告公示</span><span>园区新闻</span><span>政策法规</span>
+                <a href="javascript:;">更多》</a> -->
             </div>
             <div class="tipbox tip_item">
-            	<ul>
+            	<!-- <ul>
                 	<li><a href="./zscenter/zs4.html">科技部关于《发展众创工作指引》...</a></li>
                     <li><a href="./zscenter/zs4.html">关于厦门市软件园二期公共自行车...</a></li>
-                </ul>
+                </ul> -->
             </div>
-            <div class="tipbox tip_item" style="display:none">
+           <!--  <div class="tipbox tip_item" style="display:none">
             	<ul>
                 	<li><a href="./zscenter/zs4.html">科技部关222于《发展众创工作指引》...</a></li>
                     <li><a href="./zscenter/zs4.html">关于厦门市软件园二期公共自行车...</a></li>
                 </ul>
-            </div>
+            </div> -->
             <div class="tips" style="border-top:none">
             	<span class="span_bold">优惠政策</span>
-                <a class="fr" href="javascript:;">更多》</a>
+                <a class="fr" href="./zscenter/zs3.html">更多》</a>
             </div>
             <div class="tipbox">
-            	<ul>
-                	<li><a href="./zscenter/zs4.html">杭州3年建100个特色小镇</a></li>
-                    <li><a href="./zscenter/zs4.html">杭州申办亚运会能否成功...</a></li>
+            	<ul id="ul2">
+                	<!-- <li><a href="./zscenter/zs4.html">杭州3年建100个特色小镇</a></li>
+                    <li><a href="./zscenter/zs4.html">杭州申办亚运会能否成功...</a></li> -->
                 </ul>
             </div>
             
@@ -623,6 +623,112 @@
 	<script type="text/javascript" src="scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
 	<script type="text/javascript" src="scripts/page/laydate/laydate.js"></script>
+	<script type="text/javascript">
+	/* 政策展示 */
+		$(function(){
+			$.youi.ajaxUtils.ajax({
+				url:baseUrl +"nmIssuetypeManager/getNewsType.json",//得到新闻发布类型
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					if(result&&result.records){
+						parse(result.records);
+					}
+				}
+			});
+		});
+		//拼接新闻公告列表
+		function parse(record){
+			var html = "" ;
+			for(var i=0;i<record.length;i++){
+				if(i == 0){
+					html += "<span class='span_bold' id="+record[i].issueTypeId+">"+record[i].issueTypeCaption+"</span>" ;
+					getRecords(record[i].issueTypeId);//页面加载的时候查询当前类型的新闻
+				}else{
+					html += "<span id="+record[i].issueTypeId+">"+record[i].issueTypeCaption+"</span>" ;
+				}
+			}
+			html += "<a href='./zscenter/zs4.html'>更多》</a>"
+		 	$("#tips1").append(html);
+		}
+		
+		function getRecords(issueTypeId){
+			var params=["issueTypeId="+issueTypeId];//当前政策类型ID
+			$.youi.ajaxUtils.ajax({
+				url:baseUrl +"nmIssuenewsManager/getAllPolicyByTypeId.json",
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					if(result&&result.records){
+						getHtml(result.records) ;
+					}
+				}
+			});
+		}
+		
+		function getHtml(record){
+      	 	var html = "<ul>" ;
+      	 	var length = record.length ;
+      	 	if(length > 3){//只显示前三条
+      	 		for(var i=0;i<3;i++){
+      	 			if(record[i].policyType.issueTypeCode=='0101'){//0101代表园区新闻
+	          	 		html += "<li>" +
+	          	 					"<a href='./zscenter/zs4.html'>"+record[i].policyCaption+"</a>"+
+	          	 				"</li>" ;
+      	 			}else{
+      	 				html += "<li>" +
+  	 								"<a href='./zscenter/zs7.html?policyId="+record[i].policyId+"'>"+record[i].policyCaption+"</a>"+
+  	 							"</li>" ;
+      	 			}
+          	 	}
+      	 	}else{
+				for(var i=0;i<record.length;i++){
+					if(record[i].policyType.issueTypeCode=='0101'){//0101代表园区新闻
+	          	 		html += "<li>" +
+	          	 					"<a href='./zscenter/zs4.html'>"+record[i].policyCaption+"</a>"+
+	          	 				"</li>" ;
+      	 			}else{
+      	 				html += "<li>" +
+  	 								"<a href='./zscenter/zs7.html?policyId="+record[i].policyId+"'>"+record[i].policyCaption+"</a>"+
+  	 							"</li>" ;
+      	 			}
+          	 	}
+      	 	}
+      	 	html += "</ul>" ;
+      	 	$(".tipbox.tip_item").append(html) ;
+        }
+	</script>
+	<script type="text/javascript">
+	/* 优惠政策 */
+		$(function(){
+			$.youi.ajaxUtils.ajax({
+				url:baseUrl +"nmIssuenewsManager/getAllPolicy.json",
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					if(result&&result.records){
+						getPolicy(result.records);
+					}
+				}
+			});
+		});
+		//拼接政策新闻列表
+		function getPolicy(record){
+			var html = "" ;
+			var length = record.length ;
+			if(length > 3){
+				for(var i=0;i<3;i++){
+					html += "<li><a href='./zscenter/zs3.html'>"+record[i].policyCaption+"</a></li>"
+				}
+			}else{
+				for(var i=0;i<record.length;i++){
+					html += "<li><a href='./zscenter/zs3.html'>"+record[i].policyCaption+"</a></li>"
+				}
+			}
+			$("#ul2").append(html) ;
+		};
+	</script>
 	<script type="text/javascript">
 		$(function(){
 			 var params = ['genreCode=0301'];
@@ -735,11 +841,20 @@
 			$(this).addClass("span_bold").siblings().removeClass("span_bold");
 			$(".hand_ul").eq(index).show().siblings("ul").hide();
 		});
-		$(".tips span").click(function(){
+		$(document).on("click",".tips span",function(){
 			var index=$(this).index();
 			$(this).addClass("span_bold").siblings().removeClass("span_bold");
 			$(".tip_item").eq(index).show().siblings(".tip_item").hide();
+			var typeId = $(this).attr("id") ;
+			$(".tip_item").empty() ;
+			getRecords(typeId) ;//每次点击新闻类型的时候，查询对应的新闻
 		});
+
+		/* $(".tips span").click(function(){
+			var index=$(this).index();
+			$(this).addClass("span_bold").siblings().removeClass("span_bold");
+			$(".tip_item").eq(index).show().siblings(".tip_item").hide();
+		}); */
 		
 		laydate({
 			    elem: '#lf_date', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
