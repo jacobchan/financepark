@@ -420,10 +420,6 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 					conditionE.add(ConditionUtils.getCondition("commodity.commodityId", Condition.EQUALS, pc.getCommodityId()));
 					pceList=purchasingmanagerCommodityExtendManager.getPurchasingmanagerCommodityExtends(conditionE, null);
 					record.put("cpValue",pceList.size()>0?pceList.get(0).getCommodityExtendContent():"");//商品属性：车牌
-				}else{
-					record.put("dwValue","");
-					record.put("zwValue","");
-					record.put("cpValue","");
 				}
 			}
 			records.add(record);
