@@ -151,7 +151,7 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 	}
 	
 	/**
-	 * 得到所有的优惠政策
+	 * 得到所有已发布的优惠政策
 	 * @return
 	 */
 	@Override
@@ -162,7 +162,7 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 		for(int i=0;i<list.size();i++){
 			NmIssuenews nm = list.get(i) ;
 			String typeCode = nm.getPolicyType().getIssueTypeCode() ;//得到当前新闻的发布类型的typeCode
-			if("02".equals(typeCode)){//02表示当前政策新闻的发布类型为优惠政策
+			if("02".equals(typeCode)&& "1".equals(nm.getPolicyStatus())){//02表示当前政策新闻的发布类型为优惠政策,1表示当前政策已发布
 				policyList.add(nm) ;
 			}
 		}
@@ -180,11 +180,15 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 		Collection<Condition> condition =  new ArrayList<Condition>();
 		condition.add(ConditionUtils.getCondition("policyType.issueTypeId", Condition.EQUALS,issueTypeId));
 		List<NmIssuenews> list = this.getNmIssuenewss(condition, null) ;
-		if(list != null){
-			return list;
-		}else{
-			return new ArrayList<NmIssuenews>() ;
+		List<NmIssuenews> newsList = new ArrayList<NmIssuenews>() ;
+		for(int i=0;i<list.size();i++){
+			NmIssuenews nm = list.get(i) ;
+			String policyStatus = nm.getPolicyStatus() ;//得到政策发布状态
+			if("1".equals(policyStatus)){//1表示当前政策发布状态为发布，0为未发布
+				newsList.add(nm) ;
+			}
 		}
+		return newsList ;
 	}
 	
 	/**
