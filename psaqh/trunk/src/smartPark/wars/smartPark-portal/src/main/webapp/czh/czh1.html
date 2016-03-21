@@ -287,7 +287,6 @@
 
 	//强烈推荐活动数据
 	function _parseRecoomends(record){
-		console.log(record);
 		var html='';
 		for(var i=0;i<record.length;i++){
 			 html+="<div class='czh-box mr20'>"+
@@ -309,26 +308,30 @@
 		$('.recoomends').append(html);	
 	}
 	function _parseRecords(record){
+		console.log(record);
 		var html='';
 		for(var i=0;i<record.length;i++){
-			html+="<li class='clearfix'>"+
+			html+="<li class='clearfix'><a href='javascript:;'>"+
 						"<div class='plg-photo'>"+
-						"<a href='#'><img src='../filestore/"+record[i].activityImage+"' width='288' height='195' border='0' width='100%'/></a>"+
-						"<em>创智游学</em>"+
-					"</div>"+
-					"<div class='plg-article pr' id='"+record[i].applyId+"'>"+
-						"<a href='javascript:;'><h3>"+record[i].applyTitle+"</h3></a>"+
-						"<p>"+record[i].commentContent+"</p>"+
-						"<div class='lh22 mt5 f12' style='color:#b1b1b1'>"+
-							"<span class='mr20'><img src='../styles/images/czh/clock.png' border='0' class='mr10'>"+record[i].startTime+"</span>"+
-							"<span><img src='../styles/images/czh/user.png' border='0' class='mr10'>发布人："+record[i].memberId.memberName+"</span><br/>"+
-							"<span><img src='../styles/images/czh/map.png' border='0' class='mr10'>杭州市富春硅谷园区公共会议室</span>"+
+							"<img src='../filestore/"+record[i].activityImage+"' border='0' width='100%'/>"+
+							"<em>创智游学</em>"+
 						"</div>"+
-						"<a href='javascript:;' onclick='redirectPagePDF(this)'; class='a-c-g'>在线观看PDF/PPT <img src='../styles/images/czh/more.png'></a>"+
-						"<a  href='javascript:;' onclick='redirectPage(this)'; class='ib-btn'>我要报名</a>"+
-					"</div>"+
-				"</li>";
+						"<div class='plg-article pr' id='"+record[i].applyId+"'>"+
+							"<h3>"+record[i].applyTitle+"</h3>"+
+							"<div class='lh30 mb5'><img src='../styles/images/czh/clock.png' border='0' class='mr10'>"+record[i].startTime+"</span>"+
+							"<div class='lh30 mb5'><img src='../styles/images/zs/map.png'  border='0' class='mr10'>深圳市南山区创意文化街</div>"+
+							"<div class='clearfix lh40' id='111'>"+
+								"<div class='fl'><img src='../styles/images/czh/zc.png'  border='0' width='25' height='25' class='mr10'>艾特众创</div>"+
+								"<div class='fr' >"+
+									"<span class='mr15'><img src='../styles/images/zs/user.png' border='0' class='mr10'>限制人数"+record[i].applyMaxuser+"人</span>|"+
+									"<span class='ml15 mr15'><img src='../styles/images/czh/heart-h.png' border='0' class='mr10'>2459</span>"+
+									"<a href='javascript:;' onclick='redirectPage(this)';  class='ib-btn' style='margin-top:0px;'>我要报名</a>"+
+								"</div>"+
+							"</div>"+
+						"</div></a>"+
+					"</li>";
 		}
+
 		$('.pb-list-group').empty();
 		$('.pb-list-group').append(html);
 	};
@@ -338,7 +341,7 @@
 		window.location.assign(url); 
 	}
 	function redirectPage(obj){
-		var applyId=obj.parentNode.id;
+		var applyId=obj.parentNode.parentNode.parentNode.parentNode.id;
 		var url="../czh/czh3.html"+"?"+"applyId="+applyId; 
 		window.location.assign(url); 
 	}
