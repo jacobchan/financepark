@@ -42,9 +42,19 @@
 
 
 .fb-activity{border-left: 1px solid #efeeee;}
-.fb-activity ul li{padding: 10px 50px;line-height: 20px;font-size: 14px;float: left;background: #f4f4f4;border:1px solid #efeeee;cursor: pointer;border-left: none;}
+.fb-activity ul li{padding: 10px 50px;line-height: 20px;font-size: 14px;float: left;background: #f4f4f4;border:1px solid #efeeee;border-left: none;}
 .fb-activity ul li.active{background: #fff;border-bottom: 1px solid #fff;color: #ff6715;}
-.fb-list-box{border:1px solid #efecec;margin-top: -1px;padding-top: 20px;}
+
+.fb-list-box{border:1px solid #efecec;margin-top: -1px;padding-top: 20px;min-height: 800px;}
 .fb-list-box table th{padding:15px 0px 15px 30px;line-height: 30px;vertical-align: top;}
 .fb-list-box table td{padding: 15px 0px;}
 .fb-list-box table td input[type="text"]{border:1px solid #efecec;line-height: 20px;height: 30px;padding: 0px 10px;width: 300px;}
+
+.flb-table td{border-bottom: 1px solid #efecec;padding: 15px 0px;}
+
+a.c-333:hover{text-decoration: underline;}
+.gr-czh-list{width: 204px;float: left;margin:10px 0px 10px 15px;border: 1px solid #efecec;cursor: pointer;transition: all .4s linear;-moz-transition: width  all .4s;-webkit-transition:  all .4s;-o-transition: all .4s linear;}
+.gr-czh-list:hover{border:1px solid #ff6715;}
+.gr-czh-list h3{font-size: 14px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;line-height: 34px;margin-left: 5px;}
+.gr-czh-list a.c-b1:hover{color: #FF6715;text-decoration: underline;}
+
