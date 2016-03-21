@@ -240,7 +240,11 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
     	List<PropertyservicemanagerEntering> enteringLists=new ArrayList<PropertyservicemanagerEntering>();
     	
     	//获取当前用户信息
-    	MemberInformation mem=memberInformationManager.getMemberInformation(userId);
+    	MemberInformation mem=new MemberInformation();
+    	if(StringUtils.isNotEmpty(userId) && userId !=null){
+    		mem=memberInformationManager.getMemberInformation(userId);
+    	}
+    	
     	if(enteringList.size()>0){
     		for(PropertyservicemanagerEntering pe:enteringList){
         		if(pe.getEnteringTime().equals("AM")){
