@@ -681,6 +681,38 @@
 <script type="text/javascript" src="../scripts/page/kefu.js"></script>
 <script>
 $(function(){
+	
+	var sURL = baseUrl+"memberInformationManager/getMemberInformationByLoginUser.json";
+	$.youi.ajaxUtils.ajax({
+		url:sURL,
+		jsonp:'data:jsonp',
+		dataType:'jsonp',
+		success:function(results){
+			if(results&&results.record){
+				showAddress(results.record.companyId);
+			}
+		}
+	});
+	
+	function showAddress(companyId){
+		var sURL = baseUrl+"enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json";
+		$.youi.ajaxUtils.ajax({
+			url:sURL,
+			data:{rzId:companyId},
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(results){
+				if(results&&results.record){
+					$('#userorderAdr1').val(results.record.roomId.roomAddress);
+					$('#userorderAdr2').val(results.record.roomId.roomAddress);
+					$('#userorderAdr3').val(results.record.roomId.roomAddress);
+					$('#userorderAdr4').val(results.record.roomId.roomAddress);
+				}
+			}
+		});
+	}
+	
+	
 	var serviceURL = baseUrl+"purchasingmanagerGenreManager/getITSubGenreList.json";
 	$.youi.ajaxUtils.ajax({
 		url:serviceURL,
@@ -865,6 +897,7 @@ $(function(){
 				if(results&&results.record){
 					alert('订单提交成功！');
 					$(".pop_layer").hide();
+					window.location.href=cenUrl+"member/memberCenter/nationalMarketing/myOrder.html";
 				}
 			}
 		});
