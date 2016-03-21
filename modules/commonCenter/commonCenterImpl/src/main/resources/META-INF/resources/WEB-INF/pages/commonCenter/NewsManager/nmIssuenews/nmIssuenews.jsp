@@ -46,7 +46,7 @@
 			<youi:fieldSelect property="nmIssuetempalate.issueTempalateId" caption="发布模板" 
 				src="esb/web/nmIssuetempalateManager/getNmIssuetempalates.json" code="issueTempalateId" show="issueTempalateCaption" />
 			<youi:fieldSelect property="policyStatus"  caption="政策发布状态" convert="policyStatus" notNull="true"/>
-			<youi:fieldText property="policyCome"  caption="政策发布人"/>
+			<youi:fieldText property="policyCome"  caption="政策发布人" notNull="true"/>
 			<youi:fieldCalendar property="policyIssueDate"  caption="政策发布时间" notNull="true"/>
 			<youi:fieldArea property="policyContent"  caption="政策内容" column="2" rows="4" notNull="true"/>
 		</youi:fieldLayout>
