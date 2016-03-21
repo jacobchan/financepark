@@ -13,6 +13,7 @@
 	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/newscom.js"></script>
+	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 	<script type="text/javascript">
 		var Ohref=window.location.href;
 		var Os=Ohref.split("?dataId=")[1];
@@ -40,12 +41,12 @@
 				<a href="" class="current">正文</a>
 			</div>
 			<div class="fl" style="width:875px;">	
-				<div class="article-con">
-					<h2 style="font-size:26px;" class="lh35 mb20">{policyCaption}</h2>
+				<div class="article-con" id="id1">
+					<!-- <h2 style="font-size:26px;" class="lh35 mb20">{policyCaption}</h2>
 					<h5 class="f12 mb20">{policyIssueDate}<span class="c-b1 ml10 mr10">|</span> 来源：{policyCome} <span class="c-b1 ml10 mr10">|</span><img src="../styles/images/zs/page.png" border="0" class="mr5"/>1999</h5>
 					<div class="article-con-p">
 						<p>{policyContent}</p>
-					</div>
+					</div> -->
 				</div>	
 				<div class="article-zan clearfix">
 					<div class="fl">
@@ -125,6 +126,39 @@
 			}) 
 			
 		})
+	</script>
+	<script type="text/javascript">
+		$(function(){
+			var policyId = "" ;
+			policyId = getParam() ;//当前政策类型ID
+			var params=["policyId="+policyId];
+			$.youi.ajaxUtils.ajax({
+				url:baseUrl +"nmIssuenewsManager/getNewsByPolicyId.json",
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					var record = result.record ;
+					getHtml(record) ;
+				}
+			});
+		});
+		/* 获取页面传过来的参数 */
+		function getParam() { 
+			var url = document.URL ; //获取页面的URL
+			var param = "" ;  
+			param = url.substring(url.lastIndexOf("=")+1,url.length) ; //获取页面的参数
+			return param ;
+		}
+		/* 拼接HTML */
+		function getHtml(record){
+			var html = "<h2 style='font-size:26px;' class='lh35 mb20'>"+record.policyCaption+"</h2>"+
+					   "<h5 class='f12 mb20'>"+record.policyIssueDate+"<span class='c-b1 ml10 mr10'>|</span> 来源："+record.policyCome+" <span class='c-b1 ml10 mr10'>|</span><img src='../styles/images/zs/page.png' border='0' class='mr5'/>1999</h5>"+
+					   "<div class='article-con-p'>"+
+					   "<p>"+record.policyContent+"</p>"+
+					   "</div>" ;
+			$("#id1").append(html) ;
+		}
 	</script>
 </body>
 </html>
