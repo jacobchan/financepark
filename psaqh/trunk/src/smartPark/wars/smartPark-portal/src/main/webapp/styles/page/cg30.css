@@ -36,9 +36,9 @@ a{color:#aaa}.inline_b{display:inline-block}.fw{font-weight:600}.oh{ overflow:hi
 
 
 /*办公用品*/
-.bb{border-bottom:1px #F1F1F1 solid}.type_ul{width: 1000px;overflow: hidden;height:35px}
-.type_ul li{width:180px; text-align:center;display:inline-block;float:left;color:#333;cursor:pointer;margin-bottom: 15px}
-.type_ul li:hover,.type_ul li.active,.tt_ul li:hover,.tt_ul li.active{color:#FF6715}
+.bb{border-bottom:1px #F1F1F1 solid}.type_ul{width: 1000px;height:47px}
+.type_ul li{width:180px; text-align:center;display:inline-block;float:left;color:#333;cursor:pointer;padding-bottom: 15px;font-size: 18px;line-height: 30px;}
+.type_ul li:hover,.type_ul li.active,.tt_ul li:hover,.tt_ul li.active{color:#FF6715;border-bottom: 3px solid #FF6715;}
 .tt_ul li{display:inline-block;float:left;color:#333;cursor:pointer;border-left:1px #E2E2E2 solid;padding:2px 15px}
 .tt_ul li:first-child{border:0}
 .checkbox_div{width:17px;height:17px;border:1px #E2E2E2 solid;background:#fff;display:inline-block;cursor:pointer}
