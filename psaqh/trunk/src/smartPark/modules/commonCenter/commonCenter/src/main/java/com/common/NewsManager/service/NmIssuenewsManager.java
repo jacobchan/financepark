@@ -108,4 +108,18 @@ public interface NmIssuenewsManager extends BaseManager{
 	 */
 	public NmIssuenews getNewsByPolicyId(String policyId) ;
 	
+	/**
+	 * 通过政策新闻ID得到上一个政策新闻 
+	 * @param policyId 政策新闻ID
+	 * @return
+	 */
+	public NmIssuenews getPrePolicyByPolicyId(String policyId);
+	
+	/**
+	 * 通过政策新闻ID得到下一个政策新闻 
+	 * @param policyId 政策新闻ID
+	 * @return
+	 */
+	public NmIssuenews getNextPolicyByPilicyId(String policyId) ;
+	
 }
