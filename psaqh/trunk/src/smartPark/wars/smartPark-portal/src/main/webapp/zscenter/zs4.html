@@ -141,20 +141,13 @@
 				if(news.policyType.issueTypeCode=='0101'){//0101代表园区新闻
 					flag = true ;
 					htmls += "<li>"+
-						 	/* "<div class='plg-photo'>"+
-								"<a href='#'><img src='../styles/images/zs/big-nav-img1.png' border='0' width='290' height='180'/></a>"+
-							"<div>"+  */
-							"<div class='plg-article'>"+
+						 	"<div class='plg-article'>"+
 								"<a href=''><h3>"+news.policyCaption+"</h3></a>"+
 								"<p>"+news.policyContent+"</p>"+
 							"</div>"+
 						"</li>";
 				}else{
-					/*  <ul class="pb-list">
-						<a href="zs7.html"><li>科技部关于《发展众创空间工作指引》的通知 <span class="fr">2015-12-24</span></li></a>
-						<a href="zs7.html"><li>定制公交开通啦！往来富春硅谷更便捷<span class="fr">2015-12-24</span></li></a>
-						</ul> --> */
-						flag = false ;
+					flag = false ;
 					htmls2 += "<a href='zs7.html'>"+
 								  "<li>"+news.policyCaption+"<span class='fr'>"+news.policyIssueDate+"</span>"+
 								  "</li>"+
@@ -162,7 +155,6 @@
 				}
 			}
 			var htmlss="</ul>";
-			//console.log(htmls+htmlss);
 			if(flag == true){
 				$('.park-box').append(htmls+htmlss);
 			}else{
