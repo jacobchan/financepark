@@ -2,6 +2,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/pages/include.jsp" %>
 <%@ include file="/WEB-INF/pages/memberCenter/common/ad_head.jsp"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <html>
 <head>
 <meta charset="utf-8">
@@ -9,7 +10,11 @@
 <link href="<%=request.getContextPath()%>/styles/css/base.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/styles/css/login.css" rel="stylesheet" type="text/css">
 </head>
-
+<shiro:authenticated>
+	<!-- authenticated -->
+	<input id="hasLogin" type="hidden" value="true" />
+	<jsp:forward page="index.html"></jsp:forward>
+</shiro:authenticated>
 <body>
 <div class="w1200">
 	<div class="loginbox">
