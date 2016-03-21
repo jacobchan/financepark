@@ -8,7 +8,6 @@
  * Date: 2016-2-16
  */
 var isLogin = false;
-var leftUrl = "http://220.249.113.12:9088/";
 var baseUrl = "http://220.249.113.12:8088/esb/web/";
 var cenUrl = 'http://220.249.113.12:8088/';
 $(function(){
