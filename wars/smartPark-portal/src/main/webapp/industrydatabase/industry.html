@@ -244,6 +244,7 @@
 	    				$("#rzName").html(record.rzName);
 	    				$("#rzRemark").html(record.rzRemark);
 	    				$("#introdaction").html(record.rzRemark);
+	    				$("#rzAddress").append(record.roomId.roomAddress);
 	    				$("#enTypeName").append(record.enTypeId.enTypeName);
 	    				$("#rzUrl").append("<a href='"+record.rzUrl+"' target='_blank'><font class='c-o f14'>"+record.rzUrl+"</font></a>");
 	    				$("#productDiv").html(record.productDiscriptio);
@@ -412,7 +413,8 @@
 			renderOptions: {map: map}
 		});
 		//, panel: "r-result"
-		local.search("武汉市洪山区珞狮北路117号华成大厦803");
+		alert($("#rzAddress").html().substring(3,$("#rzAddress").html().length));
+		local.search($("#rzAddress").html().substring(3,$("#rzAddress").html().length));
 		$('#map div.anchorBL').hide();
 	</script>
 </body>
