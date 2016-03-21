@@ -1,0 +1,158 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>结算购物车</title>
+<link href="../styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+<link href="../styles/base.css" type="text/css" rel="stylesheet">
+<link href="../styles/page/cg30.css" type="text/css" rel="stylesheet">
+</head>
+
+<body class="bgf1">
+<div id="youi_page_header" class="youi-page-header clearfix"></div>
+<!--***top end****************************************-->
+<!--content-->
+<!--*******************************************-->
+<div class="w1200" style="position:relative">
+	<div class="lh40 mt10 mb10" style="border-bottom:1px solid #c0c0c0">
+        <span class="mr10 f28">购物车</span><span class="f18">Shopping Cart</span>
+    </div>
+    <div class="w1200">
+        <p class="f16">全部商品 <span class="ccheng">2</span></p> 
+        <table class="bgfff w100 mt10 mb20 cg-pay-table tc">
+           <colgroup>
+               <col width="38"></col><col width="93"></col><col width="410"></col><col></col><col></col><col></col><col></col>
+           </colgroup>
+            <tbody>
+                <tr>
+                    <th colspan="2" style="text-align:left"><label><input type="checkbox" class="ml5 mr10">全选</label></th>
+                    <th style="text-align:left">商品</th>
+                    <th>单价</th>
+                    <th>数量</th>
+                    <th>小计（元）</th>
+                    <th>操作</th>
+                </tr>
+                <tr>
+                    <td align="right"><input type="checkbox"></td>
+                    <td style="padding-left:0px;"><img src="../styles/images/cg30/pay-photo.png" width="84" height="84"></td>
+                    <td align="left">
+                        <div class="w70 fl pr20">ESK iPhone6s钢化膜 苹果6高透膜 高清玻璃保护贴膜</div>
+                        <div class="w30 fl pr10">
+                            <p>颜色：钢化膜</p>
+                            <p>尺码：6/6s(4.7)</p>
+                        </div>
+                    </td>
+                    <td>25.00</td>
+                    <td>
+                        <div class="space-num">
+                            <a href="javascript:;" class="num-reduce">-</a>
+                            <input class="num" value="1" type="text">
+                            <a href="javascript:;" class="num-plus">+</a>
+                        </div>
+                    </td>
+                    <td>25.00</td>
+                    <td>
+                        <a href="">删除</a><br/>
+                        <a href="">收藏商品</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="like_box mb50">
+    	<ul class="like_ul clearfix">
+        	<li>
+            	<div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
+                <p>
+                	<span>富春硅谷gdf</span><br/>
+                    <span class="ccheng">9.9</span>元
+                </p>
+                <div class="f12 mt5">7788人好评</div>
+                <div class="btn_cheng">加入购物车</div>
+            </li>
+            <li>
+            	<div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
+                <p>
+                	<span>富春硅谷gdf</span><br/>
+                    <span class="ccheng">9.9</span>元
+                </p>
+                <div class="f12 mt5">7788人好评</div>
+                <div class="btn_cheng">加入购物车</div>
+            </li>
+            <li>
+            	<div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
+                <p>
+                	<span>富春硅谷gdf</span><br/>
+                    <span class="ccheng">9.9</span>元
+                </p>
+                <div class="f12 mt5">7788人好评</div>
+                <div class="btn_cheng">加入购物车</div>
+            </li>
+            <li>
+            	<div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
+                <p>
+                	<span>富春硅谷gdf</span><br/>
+                    <span class="ccheng">9.9</span>元
+                </p>
+                <div class="f12 mt5">7788人好评</div>
+                <div class="btn_cheng">加入购物车</div>
+            </li>
+            <li>
+            	<div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
+                <p>
+                	<span>富春硅谷gdf</span><br/>
+                    <span class="ccheng">9.9</span>元
+                </p>
+                <div class="f12 mt5">7788人好评</div>
+                <div class="btn_cheng">加入购物车</div>
+            </li>
+        </ul>
+    </div>
+    <div class="tc mt50"><img src="../styles/images/cg30/footbar.png"/></div>
+<!--w1200 end-->
+</div>
+<!--*******************************************-->
+    
+<!--***bottom start****************************************-->
+	<div id="youi_page_footer" class="youi-page-footer"></div>
+<!--***bottom end****************************************-->
+<!--******************  code end  ****************************-->
+<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+<script type="text/javascript" src="../scripts/page/cg30com.js"></script>
+<script>
+$(function(){
+	var arg=getQueryStringArgs();
+    $('.goods').filters({
+        template:'<img src={commodityImage}.png><span class="vm inline_b">'+
+        		 '<span class="c3 f18">{commodityTitle}&nbsp;&nbsp;橘黄色&nbsp;&nbsp;{commodityPrice}元</span><br/>'+
+        		 '<span class="c_green f28">已成功加入购物车！</span>'+
+        		 '</span>',
+        jsonpSrc:'http://localhost:9088/jsonp/data.jsp?data:file=cg_bg.json',
+        type:"commodityId",
+        val:arg.id
+    });
+});
+</script>
+<script>
+	$(function(){
+		$(".b1").hover(function(){
+			$(".b1mask").toggleClass("hide");
+		});
+		$(".b2").hover(function(){
+			$(".b2mask").toggleClass("hide");
+		});
+		$(".b1 li").hover(function(){
+			var idx=$(this).index();
+			$(".b1floor").eq(idx).toggleClass("hide");
+		});
+		$(".b2 li").hover(function(){
+			var idx=$(this).index();
+			$(".b2floor").eq(idx).toggleClass("hide");
+		});
+	});
+</script>
+</body>
+</html>

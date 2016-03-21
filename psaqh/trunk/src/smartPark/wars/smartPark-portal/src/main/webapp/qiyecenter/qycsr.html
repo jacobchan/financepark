@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>企业资料——企业创始人</title>
+<link rel="stylesheet" type="text/css" href="../styles/lib/bootstrap.css">
+<link href="../styles/base.css" type="text/css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../styles/page/main.css">
+<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+<script type="text/javascript" src="../scripts/page/qycenter.js"></script>
+</head>
+
+</head>
+
+<body class="page-header-fixed" style=" background-image:none">
+<!--***top start****************************************-->
+	<div id="youi_page_header" class="youi-page-header clearfix"></div>
+<!--***top end****************************************-->
+
+<div class="main">   
+	<!--***left start****************************************-->
+    <div id="youi_page_left" class="fl clearfix"></div>
+	<!--***right end****************************************-->
+	<div class="main-wrapper">
+    	<div class="main-wrapper-right" id="main-wrapper-right">
+        	<div class="main-title"><span>企业创始人</span></div>
+            
+            <div class="qiye_header-img clearfix">
+            	<div class="qiye_text"><span>头像</span></div>
+                <div class="upload_main">
+                    <img src="../styles/images/qiye/user-photo.png" border="0" class="fl" width="107" height="107"/>
+					<div class="photo-edit"><input type="file" />编辑<br/>头像</div>
+            	</div>
+            </div>
+            
+            
+            <div class="csr_xinxi clearfix">
+                <div class="qiye_fullname clearfix">
+                    <div class="qiye_nametex">姓名</div>
+                    <div class="name_input"><input type="text"></div>
+                </div>
+                
+                <div class="born_time clearfix">
+                    <div class="born_date">出生日期</div>
+                    <div class="born_input"><input type="text"></div>
+                </div>
+                
+                
+                <div class="qiye_jianjie clearfix">
+                    <div class="qiye_word">专利描述</div>
+                    <div class="word_input">
+                        <textarea></textarea>
+                        <div class="font_xianzhi">字数限制：0/200</div>
+                    
+                    </div>
+                </div>
+                
+                
+                <div class="meiti_save_btn"><input type="submit" value="保存" class="hhf-submit" style="height:40px;" /></div>
+            
+            </div>
+            
+          
+                
+
+        </div><!-- main-wrapper-right -->
+                   
+    </div><!-- Main Wrapper -->
+
+</div><!-- Main -->
+
+
+<script>
+/*获取浏览器的高度*/
+window.onload=function(){
+  var height = Math.max((document.documentElement.clientHeight -135), ($(".main-wrapper").height()));
+  document.getElementById('main-wrapper-right').style.height=height+'px';
+}
+</script>
+
+</body>
+</html>
