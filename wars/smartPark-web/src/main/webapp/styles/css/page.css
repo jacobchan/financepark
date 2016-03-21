@@ -313,19 +313,24 @@ width:32px;height:32px;position:absolute;top:50%;right:0;margin-top:-16px;}
 .ri_ul .active{color:#FF6715;}
 .res_left{float:left;width:875px;border:1px #ECEBEB solid;}
 .res_left>ul>li{padding:25px 10px;border-bottom:1px #ECEBEB solid;}.res_left>ul>li:last-child{border:0}
-.res_tip{border:1px #FF6155 solid;padding:0px 8px;color:#FF6155;display:inline-block;margin-right:15px}
+.res_tip{padding:0px 8px;color:#FF6155;display:inline-block;margin-right:15px}
 .jcbg{background:url(../images/company/jcbg.png) no-repeat;width:145px;height:33px;color:#fff;text-align:center;line-height:33px}
 .paging{display:inline-block;padding:10px 15px;color:#333;border:1px #ECEBEB solid; margin-right:15px;cursor:pointer}
 .paging_m{padding:10px 5px; margin-right:40px}.paging.active{color:#fff;background:#FF6715;border:0;}
 
 .res_right{float:right;width:285px;}
 .h3-bd{border: 1px solid #ddd;line-height: 30px;padding: 7px 20px;border-bottom: 0px;font-size: 17px;}
-.ifn-group{margin-top: -1px;border: 1px solid #ddd;padding: 10px;}
-.ig-nav li{width: 100%;margin-bottom: 25px;position: relative;height: 71px;}
-.in-photo{width: 115px;height: 71px;position: absolute;left:0px;top:0px;overflow:hidden;}
-.ig-nav li .fr{padding-left: 125px;font-size: 14px;line-height: 20px;max-height: 40px;}
-.ig-nav li .fr a{font-size:13px;color: #999;position: absolute;bottom: 0px;left: 120px;line-height: 16px;}
-.ig-nav li .fr a:hover{color: #ff6715;}
+.ifn-group{margin-top: -1px;border:1px solid #ecebeb;}
+.undis{display: none;}
+.ig-nav{width: 100%;}
+.ig-nav a{color: #333;}
+.ig-nav li{width: 100%;position: relative;height: 91px;padding: 10px;transition: all .4s linear;-moz-transition: width  all .4s;-webkit-transition:  all .4s;-o-transition: all .4s linear;}
+.ig-nav li a{display:inline-block;width:100%;height:100%;}
+.ig-nav li .in-photo{width: 115px;height: 71px;position: absolute;left: 10px;top: 10px;overflow: hidden;}
+.ig-nav li .fr{padding-left: 125px;font-size: 14px;line-height: 20px;max-height: 40px;float: left;margin-top: 5px;}
+.ig-nav li:hover{background-color: #f5f6f7;}
+.ig-nav li:hover a{color: #ff6715;}
+
 /*车辆等详情页面*/
 .egbg{background:url(../images/company/wenzibg.png) no-repeat;width:360px;height:67px;padding:15px 20px;color:#fff;font-size:30px}
 .carxq{margin:0 60px 0 40px;}
@@ -578,7 +583,7 @@ background:url(../images/company/ab_ico.png) no-repeat}
 .sf_cc li:hover,.sf_cc li.active{background: #FF6715;color:#fff;}
 
 /*登录*/
-.loginbox{padding:100px 0 100px 850px;background:url(../images/index/logoin.jpg) 100px 100px no-repeat;}
+.loginbox{padding:100px 0 100px 850px;background:url(../images/index/logoin.jpg) 100px 100px no-repeat;height: 600px;}
 .w350{width:350px;border:1px solid #efecec;}
 .login_ul li{display:inline-block;float:left;width:50%;padding:10px;text-align:center;font-size:16px;color:#333;cursor:pointer;background:#F3F3F3;line-height:30px;}
 .login_ul li.active{color:#FB7730;background:#fff;}
@@ -597,3 +602,33 @@ background:url(../images/company/ab_ico.png) no-repeat}
 .kfqq:hover{background: url(../images/company/kfqq1.png) no-repeat;}
 
 
+
+/**浮动**/
+.commonRight{position: fixed;right: 10px;z-index: 999;bottom: 0px;display: inline-block;}
+.commonRight .comRiglist,.commonRight .comRiglist li{width: 80px;padding: 0px;margin: 0px;list-style: none;}
+.commonRight .comRiglist li {width: 80px; margin-bottom: 10px; cursor: pointer;height: 68px;background-color: #e0e0e0;text-align: center; } 
+.comRiglist li i{background-image: url(../images/zhyq/fd-icons.png);display: inline-block;}
+.commonRight .comRiglist li.comRigli-top{background: transparent url(../images/zhyq/top-bg.png);height: 78px;}
+.comRigli-top .comRigli-icon{background-position: -1px -13px;width: 40px;height: 18px;margin-top: 35px;}
+.comRigli-top:hover .comRigli-icon{background-position: -40px -13px;}
+.comRigli-qq .comRigli-icon{background-position: -3px -51px;width: 36px;height: 38px;margin-top: 15px;}
+.comRigli-qq:hover .comRigli-icon{background-position: -43px -51px;}
+.comRigli-tel .comRigli-icon{background-position: -2px -101px;width: 36px;height: 38px;margin-top: 15px;}
+.comRigli-tel:hover .comRigli-icon{background-position: -40px -101px;}
+.comRighide-tel{position: absolute;background: transparent url(../images/zhyq/tel-bg.png);width: 176px;height: 146px;right: 80px;bottom: 10px;display: none;}
+.comRighide-tel h4{font-size: 14px;color: #FF6715;margin-top: 8px;line-height: 24px;margin-right: 10px;margin-bottom: 2px;}
+.comRighide-tel p{font-size: 16px;color:#333;line-height: 24px;margin-right: 10px;}
+.comRigli-tel:hover .comRighide-tel{display: block;}
+
+
+/**首页新闻**/
+.pb-list-group li{height: 180px;border:1px solid #ecebeb;margin-bottom: 30px;color: #333;background-color: #fff;}
+.pb-list-group li .plg-photo{width: 290px;float: left;overflow: hidden;position: relative;height: 100%;}
+.pb-list-group li .plg-photo img{width: 100%;height: 100%;}
+.pb-list-group li .plg-article{float: left;width: 570px;padding-left: 25px;}
+.pb-list-group li h3{line-height: 30px;font-size: 20px;color: #333;margin:15px 0px 10px;}
+.pb-list-group li p {height: 72px;line-height: 24px;overflow: hidden;color: #BBB;font-size: 15px;margin-bottom: 10px;}
+.pb-list-group li a:hover h3{color: #ff6715;}
+
+.pb-list-group li:hover{box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15); }
+.pb-list-group li .plg-photo em{position: absolute;left: 0px;top: 0px;line-height: 22px;padding: 0px 5px;font-size: 12px;color: #fff;background-color: #ff6715;}

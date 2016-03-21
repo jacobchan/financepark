@@ -2,7 +2,7 @@
 /* CSS 招商中心 PC端发布页样式*/
 
 *{margin:0px;padding:0px;}
-body{ font-family:"Lantinghei SC","Open Sans",Arial,"Hiragino Sans GB","Microsoft YaHei","微软雅黑",STHeiti,"WenQuanYi Micro Hei",SimSun,sans-serif; color:#333; font-size: 14px;}
+body{ font-family:"Microsoft YaHei","微软雅黑";color:#333; font-size: 14px;}
 
 /**下拉列表公共样式**/
 .tct-select {position: relative;background: #FFF none repeat scroll 0% 0%;border: 1px solid #ecebeb;cursor: pointer;height: 30px;}
@@ -109,8 +109,8 @@ input.ib-btn{border:1px solid #fa742c;line-height: 0px;}
 /**在线申请弹窗**/
 .bg-tanc{position: fixed;left: 0px;top:0px;width:100%;display: none;overflow-x: hidden;overflow-y: auto;bottom: 0px;right: 0px;z-index: 99;height: 100%;background: url(../images/zs/bg-o.png);background-repeat: repeat;}
 .bg-tanc .tanc-con{width:810px;display: block;background: #fff;margin:30px auto; position: relative;color: #888;box-shadow: 0px 0px 5px 3px rgba(83,83,83,0.8);padding: 40px 60px;-webkit-box-shadow: 0px 0px 5px 3px rgba(83,83,83,0.8);-moz-box-shadow: 0px 0px 5px 3px rgba(83,83,83,0.8);}
-.tc-close{background: url(../images/zs/close.png) no-repeat; width: 16px ;height: 16px;display: block;position: absolute;right: 30px;top:40px;}
-.tc-close:hover{background: url(../images/zs/close-o.png) no-repeat;}
+.tc-close{background: url(../images/zs/close.png) no-repeat; width: 16px ;height: 16px;display: block;position: absolute;right: 30px;top:40px;background-size: 100%}
+.tc-close:hover{background: url(../images/zs/close-o.png) no-repeat;background-size: 100%}
 .bg-tanc .tanc-con h3{border-bottom: 1px solid #ddd;line-height: 24px;font-size: 20px;padding-bottom: 16px;}
 .bg-tanc .tanc-con table.line-table{width: 100%;margin:0px auto;font-size: 16px;}
 .bg-tanc .tanc-con table.line-table td{padding: 10px 0px;}
@@ -144,9 +144,10 @@ a.add-btn:hover{background: #ffc000;border:1px solid #ffc000;color: #fff;}
 
 
 .h-nav{font-size: 15px;line-height: 24px;margin-bottom: 30px;}
-.h-nav span{float: left;color: #999;}
+.h-nav a{float: left;color: #999;}
 .h-nav img{height: 11px;float: left;margin:7px 8px 0px;}
-.h-nav span.current{color:#000;font-size: 16px;}
+.h-nav a:hover{color: #FF6714}
+.h-nav a.current{color:#000;font-size: 16px;}
 
 
 /**园区公告新闻**/
@@ -161,14 +162,7 @@ a.add-btn:hover{background: #ffc000;border:1px solid #ffc000;color: #fff;}
 .pb-list a:last-child li{border-bottom: 0px;}
 .h3-bd{border: 1px solid #ecebeb;line-height: 30px;padding: 7px 20px; border-bottom: 0px;font-size: 17px;}
 
-.pb-list-group li{height: 180px;border:1px solid #ecebeb;margin-bottom: 30px;color: #333;}
-.pb-list-group li .plg-photo{width: 290px;height: 100%;float: left;overflow: hidden;}
-.pb-list-group li .plg-article{float: left;width: 570px;padding-left: 25px;}
-.pb-list-group li h3{line-height: 60px;font-size: 20px;color: #333;}
-.pb-list-group li a:hover h3{color: #ff6715;}
-.pb-list-group li p{height: 72px;line-height: 24px;overflow: hidden;color: #bbb;font-size: 15px;margin-bottom: 10px;}
-.pb-list-group li h5 span{font-size: 13px;margin-right: 20px;line-height: 20px;}
-.pb-list-group li h5 span img{margin-right: 7px;}
+
 
 
 /**新闻正文**/
@@ -286,14 +280,20 @@ a.add-btn:hover{background: #ffc000;border:1px solid #ffc000;color: #fff;}
 .czh-box .czh-group h4{line-height: 40px;font-size: 16px;margin-bottom: 10px;overflow: hidden;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
 .czh-box .czh-group span{color: #b1b1b1;font-size: 12px;line-height: 32px;display: inline-block;height: 25px;}
 .czh-box .czh-group span img{font-size: 16px;line-height: 30px;margin-right: 5px;color: #5c5c5f;line-height: 24px;float: left;margin-top: 9px;}
-.czh-index-list{background-color: #fff;border:1px solid #ecebeb;border-bottom: 0px;margin-bottom: 20px;}
-.czh-index-list .pb-list-group li{border:0px;border-bottom: 1px solid #ecebeb;margin-bottom: 0px;padding:20px 10px;height: auto;}
-.czh-index-list .pb-list-group li .plg-photo{width: 288px;position: relative;}
-.czh-index-list .pb-list-group li .plg-photo em{position: absolute;left: 0px;top: 0px;line-height: 22px;padding: 0px 5px;font-size: 12px;color: #fff;background-color: #ff6715;}
-.czh-index-list .pb-list-group li h3{line-height: 30px;}
-.czh-index-list .pb-list-group li p{line-height: 22px;font-size: 12px;color: #666;margin-top: 12px;margin-bottom: 0px;}
+
+.pb-list-group li{height: 180px;border:1px solid #ecebeb;margin-bottom: 30px;color: #333;background-color: #fff;}
+.pb-list-group li .plg-photo{width: 290px;float: left;overflow: hidden;position: relative;height: 100%;}
+.pb-list-group li .plg-photo img{width: 100%;height: 100%;}
+.pb-list-group li .plg-article{float: left;width: 570px;padding-left: 25px;}
+.pb-list-group li h3{line-height: 30px;font-size: 20px;color: #333;margin:15px 0px 10px;}
+.pb-list-group li p {height: 72px;line-height: 24px;overflow: hidden;color: #BBB;font-size: 15px;margin-bottom: 10px;}
+.pb-list-group li a:hover h3{color: #ff6715;}
+
+.pb-list-group li:hover{box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15); }
+.pb-list-group li .plg-photo em{position: absolute;left: 0px;top: 0px;line-height: 22px;padding: 0px 5px;font-size: 12px;color: #fff;background-color: #ff6715;}
+
 a.a-c-g{color: #5fb41b;font-size: 14px;line-height: 23px;margin-top: 10px;display: block;}
-.czh-index-list a.ib-btn{position: absolute;right: 0px;bottom: 10px;}
+
 .cic-btn{background: rgba(0,0,0,0.1) no-repeat;height: 100%;width: 44px;text-align: center;cursor: pointer;}
 .cic-btn img{margin-top: 66px;}
 .cic-btn:hover{background: rgba(0,0,0,0.18);}
@@ -580,6 +580,7 @@ a.hhf-submit{display: inline-block;padding: 0px 25px;margin-left: 31px;}
 .yin-group table td{padding: 20px 0px;border-bottom: 1px solid #c9c9c9}
 .yin-group table tr:last-child td{border-bottom: 0px;}
 .c-333,a.c-333{color: #333;}
+a.c-333:hover{color: #ff6715;}
 
 .yg-form textarea{width: 100%;background: #fff;border:1px solid #c9c9c9;line-height: 20px;font-size: 14px;color: #676767;margin: 10px 0px;height: 160px;padding: 10px;resize:none;}
 .yf-input{padding: 0px 15px;height: 30px;background: #ff6715;color: #fff;border:0px;border-radius: 3px;font-size: 14px;float: right;}
@@ -661,7 +662,7 @@ i.star2{background:url(../images/company/star2.png) no-repeat;}
 .me-tz-show td a:hover{color: #ff6715;}
 
 /**企业通讯录**/
-.bd-input{border:1px solid #ecebeb;width: 200px;height: 30px;line-height: 20px;padding: 4px 10px;}
+.bd-input{border:1px solid #ecebeb !important;width: 200px;height: 30px !important;line-height: 20px;padding: 4px 10px;}
 .gt-table{border:1px solid #ecebeb;text-align: center;width: 100%;}
 .gt-table tr th{background-color: #f6f6f6;line-height: 30px;padding: 10px 0px;text-align: center;font-size: 14px;border-bottom:1px solid #ecebeb;}
 .gt-table tr td{border-bottom:1px solid #ecebeb;padding:5px 10px;color: #969696;font-size: 12px;line-height: 19px;height: 50px;overflow: hidden;}
@@ -751,14 +752,6 @@ a.a-btn-small:hover{background-color: #FF5900;}
 
 .pay-way{border:1px solid #ff6715;height: 30px;background: url(../images/grzx/pay.png) no-repeat right center;line-height: 28px;color: #ff6715;font-size: 14px;width: 200px;padding:0px 10px;}
 
-/*活动评论*/
-.comment,.reply{padding:15px;position:relative;border:1px #F0EFEF solid}
-.com_info{width:505px;}.cc{color:#BCBCBC}
-.com_btn{padding:3px 20px; display:inline-block;margin-top:20px}
-.com_close{position:absolute;top:2px;right:5px}
-.reply_info{border:1px #FF8544 solid;padding:5px;height:60px;width:685px}
-.reply_btn{padding:3px 20px; display:inline-block;border:1px #b8b8b8 solid;color:#b8b8b8}
-.new{color:#fff;background:#FF823E;padding:5px;display:inline-block;position:absolute;right:0;top:0}
 
 /**报修订单支付**/
 .bx-infor tr th {padding: 5px 20px;background-color: #eeeeee;line-height: 30px;border-bottom: 1px solid #ECEBEB;font-size: 14px;}
@@ -812,7 +805,7 @@ a.a-btn-small:hover{background-color: #FF5900;}
 .js-date .jd-bg-h input{line-height: 20px;border:0px;float: left;width: 80px;background: transparent;margin-left: 10px;}
 
 .jd-bd-box{border:1px solid #ecebeb;padding:4px 10px;}
-.jd-bd-box input{line-height: 20px;border:0px;float: left;width: 280px;background: transparent;margin-left: 10px;}
+.jd-bd-box input{line-height: 20px;border:0px;float: left;width: 280px;background-color: transparent;margin-left: 10px;}
 .jd-sea-btn{padding: 0px 40px;height: 30px;background: #82b4f2;color: #fff;border:0px;}
 .jd-sea-btn:hover{background: #68a2e9;}
 .jd-bd-select{border:1px solid #ecebeb;border-bottom: 0px;font-size: 12px;}
@@ -956,3 +949,9 @@ a.see-all:hover{color: #FF6715;}
 .yqfw-news li p{width: 100%;overflow: hidden;height: 24px;}
 .yqfw-news li p a{width: 70%;display:inline-block;overflow: hidden;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
 
+
+
+/**个人中心-- 机票预订**/
+.ib-nav{border-left: 1px solid #FF6715}
+.ib-nav li{border:1px solid #FF6715;color: #FF6715;width: 105px;float: left;border-left: 0px;text-align: center;line-height: 28px;cursor: pointer;transition: all .4s linear;-moz-transition: width  all .4s;-webkit-transition:  all .4s;-o-transition: all .4s linear;}
+.ib-nav li:hover,.ib-nav li.active{background-color: #FF6715;color: #fff;}
