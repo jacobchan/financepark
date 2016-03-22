@@ -8,7 +8,7 @@
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/orderCenter.html">订单中心</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/securityCenter.html">安全中心</a></dd>
 			<dd><a href="grzx4.html">消息</a></dd>
-			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/enterprisemaillist.html">企业通讯录</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/addressBook.html">企业通讯录</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/propertyManagerOcBind.html">一卡通绑定</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/myAdderss.html">我的地址</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/myReservation.html">我的预约</a></dd>
