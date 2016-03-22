@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>个人登录</title>
-<link href="../styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+<link href="../styles/page/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 <link href="../styles/base.css" type="text/css" rel="stylesheet">
 <link href="../styles/page/page.css" type="text/css" rel="stylesheet">
 </head>
@@ -114,22 +114,24 @@
         <form class="tj_form mt15">
         	<div>
         		<label>联系人姓名</label>
-                <input type="text" class="ml10">
+                <input type="text" class="ml10" id="name">
             </div>
-            <div style="margin-left:84px" class="mt10 mb10">
-        		<i class="fa fa-square-o tj_radio" style="width:13px;display:inline-block"></i>&nbsp;先生
+            <div style="margin-left:84px;color: #FB7730;display:none" id="disName" class="mt10 mb10">
+        		请填写联系人姓名
+            </div>
+            <div style="margin-left:84px" class="mt10 mb10" id="sex">
+        		<i class="fa tj_radio fa-check-square-o" style="width:13px;display:inline-block"></i>&nbsp;先生
                 <i class="fa fa-square-o tj_radio" style="width:13px;display:inline-block"></i>&nbsp;女士
             </div>
             <div class="mb10">
         		<label>联系人电话</label>
-                <input type="text" class="ml10">
+                <input type="text" class="ml10" id="phone">
+            </div>
+            <div style="margin-left:84px;color: #FB7730;display:none" id="disPhone" class="mt10 mb10">
+        		请填写正确手机号
             </div>
             <div class="mb15">
-        		<label>联系人姓名</label>
-                <input type="text" class="ml10">
-            </div>
-            <div class="mb15">
-        		<label>联系人电话</label>
+        		<label>职位</label>
                 <input type="text" class="ml10">
             </div>
             <div class="mb15">
@@ -138,7 +140,7 @@
             </div>
             <div class="mb15">
         		<label>&nbsp;</label>
-                <div class="ml10 btn-cheng">提交</div>
+                <div class="ml10 btn-cheng" id="subReferrer">提交</div>
             </div>
         </form>
     </div>
@@ -190,6 +192,32 @@
 					}); 
 				}
 			}); 
+			//预约提交事件
+			$("#subReferrer").click(function(){
+				if(!isLogin){alert("请登录");return;}
+				$("#disName").hide();
+				$("#disPhone").hide();
+				var isMobile=/^(?:13\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;//手机号的格式
+				var name = $("#name").val();
+				if(name==''){
+					$("#disName").show();
+					return false;
+				}
+				var phone = $("#phone").val();
+				if(phone==''){
+					$("#disPhone").html("手机号码不能为空");
+					$("#disPhone").show();
+					return false;
+				}else{
+					if(! isMobile.test(phone)){
+						$("#disPhone").html("请填写正确手机号");
+						$("#disPhone").show();
+						return false;
+					} 
+				}
+				
+			});
+			
 		}); 
 		function getParam() { 
 			var url = document.URL ; //获取页面的URL
