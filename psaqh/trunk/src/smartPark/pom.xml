@@ -109,6 +109,8 @@
 		<module>modules/commonCenter/commonCenter</module>
 		<module>modules/manageCenter/manageCenter</module>
 		<module>modules/memberCenter/memberCenter</module>
+		<module>modules/distribution/distribution</module>
+		<module>modules/distribution/distributionImpl</module>
 	</modules>
 
 	<build>
