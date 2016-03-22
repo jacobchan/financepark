@@ -1,0 +1,36 @@
+@CHARSET "UTF-8";
+
+.youi-button span{background-position:100px;background-repeat:no-repeat;}
+
+.youi-button  .youi-icon.search{background-position:-51px -55px;}
+
+.youi-xmenu .ui-menu-item .youi-icon.addRecord,
+.youi-button  .youi-icon.add,.youi-button  .youi-icon.addRecord{background-position:-73px -318px}
+
+.youi-xmenu .ui-menu-item .youi-icon.editRecord,
+.youi-button  .youi-icon.edit,.youi-button  .youi-icon.editRecord{background-position:-3px -127px;}
+
+.youi-xmenu .ui-menu-item .youi-icon.removeRecord,
+.youi-button  .youi-icon.remove,.youi-button  .youi-icon.removeRecord{background-position:-99px -318px;}
+
+.youi-button  .youi-icon.reset{background-position:-218px -79px;}
+.youi-button  .youi-icon.submit{background-position:-290px -55px;}
+.youi-button  .youi-icon.close,.youi-button  .youi-icon.closeDialog{background-position:-314px -55px;}
+.youi-button  .youi-icon.clear{background-position:-3px -317px;}
+
+.youi-button  .youi-icon.configs{background-position:-168px -245px;}
+.youi-button  .youi-icon.export,.youi-button  .youi-icon.auth{background-position:-98px -79px;}
+
+.youi-dialog-container  .youi-icon.dialog{background-position:-217px -56px;}
+
+.youi-icon.menubar{background-position:-240px -199px;}
+.active .youi-icon.menubar{background-position:-312px -199px;}
+/**
+.youi-button div.center{padding:0 5px;}
+.youi-button .add{padding-left:16px;background-image:url(icon/add-record.gif);}
+.youi-button .edit{padding-left:16px;background-image:url(icon/edit-record.gif);}
+.youi-button .remove{padding-left:16px;background-image:url(icon/remove-record.gif);}
+
+.youi-grid .youi-button .submit{padding-left:16px;background-image:url(icon/query.gif);}
+.youi-button .reset{padding-left:16px;background-image:url(icon/reset.gif);}
+*/
