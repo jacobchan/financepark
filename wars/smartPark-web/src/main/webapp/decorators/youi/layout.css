@@ -11,9 +11,11 @@ body{
 }
 
 .sys-logo{
-	width: 60px;
- 	height: 50px;
-	background:url(images/logo.png) no-repeat 5px 8px;
+	width: 310px;
+ 	height: 40px;
+ 	margin-top:5px;
+	background:url(images/logo2.png) no-repeat ;
+	background-size:auto 100%;
 }
 
 .youi-bootstrapLayout .layout-panel.panel-north {
