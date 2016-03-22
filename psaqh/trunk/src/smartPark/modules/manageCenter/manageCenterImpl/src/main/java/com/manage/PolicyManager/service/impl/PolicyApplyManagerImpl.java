@@ -86,43 +86,50 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
      */
     @EsbServiceMapping(pubConditions={@PubCondition(property="createUser",pubProperty="userId")})
     public PolicyApply savePolicyApply(PolicyApply o) throws BusException{
-    	
-    	/*String policyApplyId = o.getPolicyApplyId();
-    	boolean isUpdate = StringUtils.isNotEmpty(policyApplyId);
-    	//若isUpdate不为空，表示存在该对象，做修改操作
-    	if(isUpdate){
-    		if(o.getPolicyApplyStatus().equals("1")){//如果当前状态是1，则将其设置为2
-    			o.setPolicyApplyStatus("2");
-    		}
-    	}else{//isUpdate为空，表示不存在该对象，做新增操作
-    		
-    	}*/
+    	/*后台用于判断是否为企业会员*/
     	String enName = o.getPolicyApplyConpanyName() ;//得到企业名称
     	if(StringUtils.isEmpty(enName)){//如果得到的企业名称为空
     		throw new BusException("非企业会员不能提交申请") ;
     	}
-    	MemberInformation member = memberInformationManager.getMemberInformation(o.getCreateUser()) ;
-    	PolicyApply policyApply = null ;
-    	NmIssuenews nmIssuenews = o.getNmIssuenews() ;//得到政策新闻
-    	if(nmIssuenews != null){
-    		String nmIssuenewsId = nmIssuenews.getPolicyId() ;//得到政策新闻ID
-    		nmIssuenews = nmIssuenewsManager.getNmIssuenews(nmIssuenewsId) ;//得到政策新闻对象实体
-    		NmIssuetype nmIssuetype = nmIssuenews.getPolicyType();//得到政策类型
-    		if(nmIssuetype != null){
-    			String nmIssuetypeId = nmIssuetype.getIssueTypeId() ;//得到政策类型的ID
-    			NmIssueflow nmIssueflow = nmIssueflowManager.getStartFlow(nmIssuetypeId) ;//通过政策类型ID得到初始流程
-    			o.setNmIssueflow(nmIssueflow);
-    			o.setMember(member);
-    			policyApply = policyApplyDao.save(o) ;
-    			try {
-    				HttpSenderMsg.sendMsg(policyApply.getPolicyApplyContactTel(), "尊敬的 "+policyApply.getPolicyApplyContactPeople()
-    						+" 用户，您已提交 "+policyApply.getNmIssuenews().getPolicyCaption()+" 的申请，当前处理流程为："+nmIssueflow.getIssueFlowCStatus()+",请耐心等待！");
-    			} catch (Exception e) {
-    				e.printStackTrace();
-    			}
-    		}
+    	
+    	String policyApplyId = o.getPolicyApplyId();
+    	boolean isUpdate = StringUtils.isNotEmpty(policyApplyId);
+    	//若isUpdate不为空，表示存在该对象，做修改操作
+    	if(isUpdate){
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return policyApplyDao.save(o) ;
+    	}else{//isUpdate为空，表示不存在该对象，做新增操作
+    		String memberId = o.getCreateUser() ;
+        	MemberInformation member = null ;
+        	if(StringUtils.isEmpty(memberId)){
+        		member = memberInformationManager.getMemberInformation(o.getMember().getMemberId()) ;//后台调用
+        	}else{
+        		member = memberInformationManager.getMemberInformation(o.getCreateUser()) ;//前端调用
+        	}
+        	PolicyApply policyApply = null ;
+        	NmIssuenews nmIssuenews = o.getNmIssuenews() ;//得到政策新闻
+        	if(nmIssuenews != null){
+        		String nmIssuenewsId = nmIssuenews.getPolicyId() ;//得到政策新闻ID
+        		nmIssuenews = nmIssuenewsManager.getNmIssuenews(nmIssuenewsId) ;//得到政策新闻对象实体
+        		NmIssuetype nmIssuetype = nmIssuenews.getPolicyType();//得到政策类型
+        		if(nmIssuetype != null){
+        			String nmIssuetypeId = nmIssuetype.getIssueTypeId() ;//得到政策类型的ID
+        			NmIssueflow nmIssueflow = nmIssueflowManager.getStartFlow(nmIssuetypeId) ;//通过政策类型ID得到初始流程
+        			o.setNmIssueflow(nmIssueflow);
+        			o.setMember(member);
+        			o.setPolicyApplyStatus("1");//1为申请中
+        			o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+        			policyApply = policyApplyDao.save(o) ;
+        			try {
+        				HttpSenderMsg.sendMsg(policyApply.getPolicyApplyContactTel(), "尊敬的 "+policyApply.getPolicyApplyContactPeople()
+        						+" 用户，您已提交 "+policyApply.getNmIssuenews().getPolicyCaption()+" 的申请，当前处理流程为："+nmIssueflow.getIssueFlowCStatus()+",请耐心等待！");
+        			} catch (Exception e) {
+        				e.printStackTrace();
+        			}
+        		}
+        	}
+        	return policyApply;
     	}
-    	return policyApply;
     }
     
     /**
@@ -135,8 +142,7 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
     	PolicyApply policyApply = policyApplyDao.get(policyApplyId) ;//得到政策记录对象
     	String nmIssuetypeId =  policyApply.getNmIssuenews().getPolicyType().getIssueTypeId() ;//得到新闻类型ID
     	String issueFlowId = policyApply.getNmIssueflow().getIssueFlowId() ;//得到当前流程状态ID
-    	String currentStatus = policyApply.getNmIssueflow().getIssueFlowCStatus() ;//得到当前流程状态
-    	boolean flag = nmIssueflowManager.isFinally(nmIssuetypeId, currentStatus) ;//判断当前流程是否为最后一个
+    	boolean flag = this.isFinally(policyApplyId) ;//判断当前流程是否为最后一个
     	if(! flag){
     		NmIssueflow temp = nmIssueflowManager.getNextFlow(nmIssuetypeId, issueFlowId) ;
     		policyApply.setNmIssueflow(temp);
@@ -146,7 +152,7 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
+    		policyApplyDao.save(policyApply) ;
     	}else{
     		try {
     			HttpSenderMsg.sendMsg(policyApply.getPolicyApplyContactTel(), "尊敬的 "+policyApply.getPolicyApplyContactPeople()
@@ -154,9 +160,24 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-    		throw new BusException("当前状态已经是最终状态！") ;
     	}
-    	policyApplyDao.save(policyApply) ;
+    }
+    
+    /**
+     * 判断当前传过来的政策申请ID对应的流程是否为最终流程，是则返回true，否则返回false
+     * @param policyApplyId 政策申请ID
+     * @return
+     */
+    private boolean isFinally(String policyApplyId){
+    	PolicyApply policyApply = policyApplyDao.get(policyApplyId) ;//得到政策记录对象
+    	String nmIssuetypeId =  policyApply.getNmIssuenews().getPolicyType().getIssueTypeId() ;//得到新闻类型ID
+    	String currentStatus = policyApply.getNmIssueflow().getIssueFlowCStatus() ;//得到当前流程状态
+    	boolean flag = nmIssueflowManager.isFinally(nmIssuetypeId, currentStatus) ;//判断当前流程是否为最后一个
+    	if(flag){
+    		policyApply.setPolicyApplyStatus("2");//2为申请成功
+    		policyApplyDao.save(policyApply) ;
+    	}
+    	return flag ;
     }
 
     /**
@@ -236,26 +257,24 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
        		
        	}
     
-    	 /**
+     /**
          * 修改政策流程状态
          * @return
          * @throws BusException
          */
-       @EsbServiceMapping
-    public PolicyApply updatePolicyApplyStatus(
-        	@ServiceParam(name="policyApplyId") String policyApplyId) throws BusException{   	
-       PolicyApply p = policyApplyDao.get(policyApplyId);  
-       String applyStatus=p.getPolicyApplyStatus();
-       if(applyStatus.equals("1")){
-    	   p.setPolicyApplyStatus("0");
-    	   p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    	   return policyApplyDao.save(p);
-       }  else{
-    	   
-    	   throw new BusException("只有在未办理成功时才能取消"); 
-       }
-	    
-       
-        }				
-	}
+    @EsbServiceMapping
+    public PolicyApply updatePolicyApplyStatus(@ServiceParam(name="id") String policyApplyId) throws BusException{   	
+	    PolicyApply p = policyApplyDao.get(policyApplyId); 
+	    String status = p.getPolicyApplyStatus() ;
+	    if("1".equals(status)){
+	    	p.setPolicyApplyStatus("3");//3为申请失败
+	    	p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+	    	return policyApplyDao.save(p);
+	    }else if("2".equals(status)){
+	    	throw new BusException("当前状态无法拒绝申请！") ;
+	    }else{
+	    	throw new BusException("当前状态已经为拒绝申请！") ;
+	    }
+    }				
+}
 
