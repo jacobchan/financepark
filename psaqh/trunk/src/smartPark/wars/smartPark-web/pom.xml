@@ -316,7 +316,12 @@
 							<directory>src/main/resources/${package.target}/properties</directory>  
                             <targetPath>WEB-INF/classes</targetPath>
                             <filtering>true</filtering>
-                           </resource>
+                         </resource>
+                         <resource>
+							<directory>src/main/resources/${package.target}/keys</directory>  
+                            <targetPath>WEB-INF/classes</targetPath>
+                            <filtering>true</filtering>
+                         </resource>
 						<resource>
 							<directory>src/main/resources/${package.target}/spring</directory>  
                             <targetPath>WEB-INF/configs/spring</targetPath>  
