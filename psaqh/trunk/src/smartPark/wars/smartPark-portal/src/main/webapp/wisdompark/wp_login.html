@@ -120,8 +120,8 @@
         		请填写联系人姓名
             </div>
             <div style="margin-left:84px" class="mt10 mb10" id="sex">
-        		<i class="fa tj_radio fa-check-square-o" style="width:13px;display:inline-block"></i>&nbsp;先生
-                <i class="fa fa-square-o tj_radio" style="width:13px;display:inline-block"></i>&nbsp;女士
+        		<i class="fa tj_radio fa-check-square-o" style="width:13px;display:inline-block" data="0"></i>&nbsp;先生
+                <i class="fa fa-square-o tj_radio" style="width:13px;display:inline-block" data="1"></i>&nbsp;女士
             </div>
             <div class="mb10">
         		<label>联系人电话</label>
@@ -132,11 +132,11 @@
             </div>
             <div class="mb15">
         		<label>职位</label>
-                <input type="text" class="ml10">
+                <input type="text" class="ml10" id="memRole">
             </div>
             <div class="mb15">
         		<label>备注</label>
-                <textarea class="ml10"></textarea>
+                <textarea class="ml10" id="remark"></textarea>
             </div>
             <div class="mb15">
         		<label>&nbsp;</label>
@@ -192,7 +192,7 @@
 					}); 
 				}
 			}); 
-			//预约提交事件
+			//推荐提交事件
 			$("#subReferrer").click(function(){
 				if(!isLogin){alert("请登录");return;}
 				$("#disName").hide();
@@ -214,8 +214,36 @@
 						$("#disPhone").show();
 						return false;
 					} 
-				}
-				
+				}		
+				var memRole = $("#memRole").val();
+				var memSex = "0";
+				$("#sex").find("i").each(function(){
+					if($(this).attr("class")=="fa tj_radio fa-check-square-o"){
+						memSex = $(this).attr("data");
+						return false;
+					}
+				})
+				var remark = $("#remark").val();
+				var stringData="memName="+name+"&"+"memPhone="+phone+"&"+"memRole="+memRole+"&"+"memSex="+memSex+"&"+"remark="+remark;
+				var serviceURL = baseUrl+"recommendMemberManager/saveRecommendMember.json";
+				$(this).html("提交中...");
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					data:stringData,
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(result){
+						$(this).html("提交");
+						alert("预约成功");
+						$(".pop_layer").hide();
+						$("#name").val('');
+						$("#remark").val('');
+						$("#memRole").val('');
+						$("#phone").val('');
+					},error:function(XMLHttpRequest, textStatus, errorThrown){
+						alert(XMLHttpRequest);
+					}
+				});
 			});
 			
 		}); 
