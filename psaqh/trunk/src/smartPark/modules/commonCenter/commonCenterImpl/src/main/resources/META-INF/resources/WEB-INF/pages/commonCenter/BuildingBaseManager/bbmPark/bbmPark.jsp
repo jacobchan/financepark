@@ -19,6 +19,8 @@
 		<youi:gridCol property="parkIntroduce"  caption="园区简介" width="150"/>
 		<youi:gridCol property="manager"  caption="园区负责人" width="80" align="center"/>
 		<youi:gridCol property="backgroundImage"  caption="园区背景图URL" width="150" align="center"/>
+		<youi:gridCol property="createTime"  caption="创建时间" width="150" align="center"/>
+		<youi:gridCol property="updateTime"  caption="更新时间" width="150" align="center"/>
 
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
@@ -30,6 +32,8 @@
 	<youi:form dialog="true" caption="园区信息" id="form_bbmPark" action="esb/web/bbmParkManager/saveBbmPark.json">
 		<youi:fieldLayout prefix="record" labelWidths="120,120">
 			<youi:fieldHidden property="parkId"  caption="园区ID"/>
+			<youi:fieldHidden property="createTime"  caption="创建时间"/>
+			<youi:fieldHidden property="updateTime"  caption="更新时间"/>
 			<youi:fieldText property="parkName"  caption="园区名称" notNull="true" column="2"/>
 			<youi:fieldArea property="parkIntroduce"  caption="园区简介" column="2" rows="3" />
 			<youi:fieldText property="email"  caption="园区邮箱"/>
