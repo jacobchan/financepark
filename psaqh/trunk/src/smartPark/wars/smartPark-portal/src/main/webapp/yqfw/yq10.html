@@ -117,50 +117,54 @@
 				<tr class="label">
 					<td><b>地址类型</b></td>
 					<td>
-						<label><input type="radio" name="address" class="mr5" checked="checked">园区地址</label>
-						<label class="ml30"><input type="radio" name="address" class="mr5">非园区地址</label>
+						<label><input type="radio" name="address" class="mr5" checked="checked" value="0">园区地址</label>
+						<label class="ml30"><input type="radio" name="address" class="mr5" value="1">非园区地址</label>
 					</td>
 				</tr>
 				<tr>
 					<td><b>姓名</b></td>
-					<td><input type="text"></td>
+					<td><input type="text" id="addressName"></td>
 				</tr>
 				<tr>
 					<td><b>电话</b></td>
-					<td><input type="text"></td>
+					<td><input type="text" id="addressPhone"></td>
 				</tr>
 				<tr class="show1">
 					<td><b>园区地址</b></td>
 					<td>
-						<div class="tct-select fl mr20" style="width:200px">
-							<div class="ic-select">
+						<div class="tct-select fl mr20 bbmbud" style="width:160px">
+							<!-- <div class="ic-select">
 								<p>园区地址2</p>
 							</div>
 							<ul style="display: none;" class="select-nav">
 								<li>园区地址1</li>
 								<li>园区地址2</li>
 								<li>园区地址3</li>
-							</ul>
+							</ul> -->
 						</div>
-						<div class="tct-select fl" style="width:200px">
-							<div class="ic-select">
-								<p>创立方2</p>
+						<div class="tct-select fl bbmfloor" style="width:160px">
+						<div class="ic-select">
+								<p id="floorNo"></p>
 							</div>
+							<!-- 
 							<ul style="display: none;" class="select-nav">
 								<li>创立方1</li>
 								<li>创立方2</li>
 								<li>创立方3</li>
-							</ul>
+							</ul> -->
+						</div>
+						<div class="tct-select fl bbmfloor" style="margin-left: 20px;">
+							<input type="text" id="ad1" style="width:160px;height: 29px;">
 						</div>
 					</td>
 				</tr>
 				<tr class="show2 undis">
 					<td><b>地址信息</b></td>
-					<td><input type="text" style="width:450px;"></td>
+					<td><input type="text" style="width:450px;" id="ad2"></td>
 				</tr>
 				<tr>
 					<td></td>
-					<td colspan="2"><a href="" class="ib-btn" style="width:120px;text-align:center;margin-top:10px;">保存</a></td>
+					<td colspan="2"><a href="javascript:;" onclick="javascript:saveadd();" class="ib-btn" style="width:120px;text-align:center;margin-top:10px;">保存</a></td>
 				</tr>
 			</table>
 		</div>
@@ -271,6 +275,112 @@
 			activeclick();
 		};
 	</script>
+	
+	
+	<!--拼接新增地址-->
+	<script type="text/javascript">
+		function getbbmbud(){
+				//获取楼栋
+				$.youi.ajaxUtils.ajax({
+					url:baseUrl +"bbmBuildingManager/getBbmBuildings.json", 
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(result){
+						if(result&&result.records){
+							bbmBuild(result.records);
+						}
+					}
+				});
+			};
+		
+			function bbmBuild(record){
+				var html="";
+				html=html+"<div class='ic-select'>"+
+				"<p id='buildingNo' value='"+record[0].buildingId+"'>"+record[0].buildingNo+"</p>"+
+				"</div>"+
+				"<ul style='display: none;' class='select-nav'>";
+				for(var i=0;i<record.length;i++){
+					html =html +"<li value='"+record[i].buildingId+"'>"+record[i].buildingNo+"</li>"
+				}
+				html =html +"</ul>";
+				
+				$(".bbmbud").append(html);
+				liclick();
+			};
+			//初始化楼层地址
+			function getbbmfloor(){
+				 var html ="";
+				 html = html +"<ul style='display: none;' class='select-nav' id='floo'>"+
+				"</ul>";
+				
+				$(".bbmfloor").append(html);
+			};
+			//根据所选楼栋查询楼层信息
+			function getfloor(id){
+				var buildingId = id;
+				var params = ['buildingId='+buildingId];
+				$.youi.ajaxUtils.ajax({
+					url:baseUrl +"bbmFloorManager/getBbmFloorByBuildingId.json", 
+					data:params.join('&'),
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(result){
+						if(result&&result.records){
+							
+							$("#floorNo").text(result.records[0].floorNo);	
+							var html = "";
+							$("#floo").empty();
+							for(var i=0;i<result.records.length;i++){
+								html =html +"<li>"+result.records[i].floorNo+"</li>"
+							}
+							$("#floo").append(html);
+							 floorclick();
+						}
+					}
+				});
+			}	
+			//保存地址
+			
+			function saveadd(){
+				var bool = $('input[name="address"]:checked').val();
+				var addressName=$("#addressName").val();	
+				var addressPhone=$("#addressPhone").val();
+				var addressDetail ="";
+				if(bool=='0'){
+					 var a1 = $("#buildingNo").text();
+					 var a2 = $("#floorNo").text();
+					 var a3 = $("#ad1").val();
+					 addressDetail = a1+a2+a3;
+				}else if(bool=='1'){
+					addressDetail = $("#ad2").val();
+				}
+				if(!isMobil(addressPhone)){
+					alert("手机号格式不正确！");
+					return false;
+				}
+				
+				var params = ['addressName='+addressName,
+								'addressPhone='+addressPhone,
+								'addressDetail='+addressDetail];
+				var serviceURL = baseUrl+"memberadrAddressManager/saveMemberadrAddress.json";
+				
+				//公共方法
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					data:params.join('&'),
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(results){
+						if(results&&results.record){
+							alert("保存成功");
+							location.reload();
+						}
+					}
+				});
+			};
+	</script>
+	
+	
 	<script type="text/javascript">
 		function activeclick(){
 			$(".select-address").click(function(){
@@ -279,8 +389,51 @@
 			});
 			$(".open-tanc").click(function(){
 				$(".bg-tanc").show();
+				$(".bbmbud").empty();
+				$("#floorNo").empty();
+				getbbmbud();
+				getbbmfloor();
 			});
-		}
+		};
+		function liclick(){
+			$(".ic-select").click(function(e){
+				$(".select-nav").hide();
+			    $(this).next(".select-nav").show();
+			    e.stopPropagation();//阻止冒泡
+			});
+			$("body").click(function(){
+			     $(".select-nav").hide();
+			});
+			$(".select-nav li").click(function(){
+				$(this).parents(".tct-select").find(".ic-select p").text($(this).text()) ;
+				var lival = $(this)[0].getAttribute("value");
+				$(this).parents(".tct-select").find(".ic-select p")[0].setAttribute("value",lival);
+				getfloor(lival);
+				
+				$(this).parent().hide();
+			});
+		};
+		function floorclick(){
+			$(".ic-select").click(function(e){
+				$(".select-nav").hide();
+			    $(this).next(".select-nav").show();
+			    e.stopPropagation();//阻止冒泡
+			});
+			$("body").click(function(){
+			     $(".select-nav").hide();
+			});
+			$(".select-nav li").click(function(){
+				$(this).parents(".tct-select").find(".ic-select p").text($(this).text()) ;
+				$(this).parent().hide();
+			});
+		};
+		
+		//校验手机号格式
+		function isMobil(s) {
+		    var patrn = /^(13[0-9]{9})|(14[0-9])|(18[0-9])|(15[0-9][0-9]{8})$/;
+		    if (!patrn.exec(s)) return false
+		    return true
+		};
 	</script>
 </body>
 </html>
