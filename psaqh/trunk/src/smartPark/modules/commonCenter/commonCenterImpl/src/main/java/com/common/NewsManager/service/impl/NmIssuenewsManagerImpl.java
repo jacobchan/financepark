@@ -81,14 +81,16 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
      */
     @EsbServiceMapping//(pubConditions={@PubCondition(property="policyCome",pubProperty="userId")})
     public NmIssuenews saveNmIssuenews(NmIssuenews o) throws BusException{
-//    	String nmIssuenewsId = o.getNmIssuenewsId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(nmIssuenewsId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	return nmIssuenewsDao.save(o);
+    	String nmIssuenewsId = o.getPolicyId();
+    	boolean isUpdate = StringUtils.isNotEmpty(nmIssuenewsId);
+    	if(isUpdate){//修改
+    		return nmIssuenewsDao.save(o);
+    	}else{//新增
+    		o.setBrowseCount("0");
+    		o.setCaiCount("0");
+    		o.setDingCount("0");
+    		return nmIssuenewsDao.save(o);
+    	}
     }
 
     /**
@@ -239,5 +241,18 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 			return list.get(index) ;
 		}
 		return null;
+	}
+	
+	/**
+	 * 通过政策ID设置当前页面的浏览量
+	 * @param policyId 政策新闻ID
+	 * @return
+	 */
+	@EsbServiceMapping
+	public NmIssuenews setBrowseCountByPolicyId(@ServiceParam(name="policyId") String policyId) {
+		NmIssuenews nm = this.getNmIssuenews(policyId) ;
+		int count = Integer.parseInt(nm.getBrowseCount()) + 1 ;//获取当前政策的浏览量，转化为int型，再+1
+		nm.setBrowseCount(String.valueOf(count));
+		return nmIssuenewsDao.save(nm);
 	}
 }
