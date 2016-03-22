@@ -90,28 +90,27 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
      */
     @EsbServiceMapping
     public BbmRoom saveBbmRoom(BbmRoom o) throws BusException{
-//    	String bbmRoomId = o.getBbmRoomId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(bbmRoomId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
+    	String bbmRoomId = o.getRoomId();
+    	boolean isUpdate = StringUtils.isNotEmpty(bbmRoomId);
+    	
     	BbmFloor floor = o.getBbmFloor() ;//获取楼层对象，此时只包含一个楼层ID
     	String floorId = floor.getFloorId() ;//获取楼层ID
     	floor = bbmFloorManager.getBbmFloor(floorId) ;//获取楼层对象
     	BbmBuilding building = floor.getBbmBuilding() ;//获取楼栋对象
     	BbmPark park = building.getBbmPark() ;//获取园区对象
-    	//String parkAddress = park.getAddress() ;//园区地址
-    	String parkName = park.getParkName() ;//园区名字
-    	String buildingNo = building.getBuildingNo() ;//楼栋编号
-    	String floorNo = floor.getFloorNo() ;//楼层编号
-    	String roomNo = o.getRoomNo() ;//单元编号
-    	String roomAddress = parkName+buildingNo+floorNo+roomNo ;//详细地址
     	o.setBbmBuilding(building);
     	o.setBbmPark(park);
-    	o.setRoomAddress(roomAddress);
-    	return bbmRoomDao.save(o);
+    	if(isUpdate){//修改
+    		return bbmRoomDao.save(o);
+    	}else{//新增
+    		String parkName = park.getParkName() ;//园区名字
+        	String buildingNo = building.getBuildingNo() ;//楼栋编号
+        	String floorNo = floor.getFloorNo() ;//楼层编号
+        	String roomNo = o.getRoomNo() ;//单元编号
+        	String roomAddress = parkName+buildingNo+floorNo+roomNo ;//详细地址
+        	o.setRoomAddress(roomAddress);
+        	return bbmRoomDao.save(o);
+    	}
     }
 
     /**
