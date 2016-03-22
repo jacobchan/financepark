@@ -24,8 +24,9 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-import com.itextpdf.text.pdf.hyphenation.TernaryTree.Iterator;
 import com.common.BuildingBaseManager.entity.BbmBuilding;
 import com.common.BuildingBaseManager.entity.BbmFloor;
 import com.common.BuildingBaseManager.entity.BbmPark;
@@ -78,16 +79,17 @@ public class BbmParkManagerImpl extends BaseManagerImpl implements BbmParkManage
     /**
      * 保存对象
      */
-	@EsbServiceMapping(pubConditions={@PubCondition(property="address",pubProperty="userId")})
+	@EsbServiceMapping//(pubConditions={@PubCondition(property="address",pubProperty="userId")})
     public BbmPark saveBbmPark(BbmPark o) throws BusException{
-//    	String bbmParkId = o.getBbmParkId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(bbmParkId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	return bbmParkDao.save(o);
+    	String bbmParkId = o.getParkId();
+    	boolean isUpdate = StringUtils.isNotEmpty(bbmParkId);
+    	if(isUpdate){//修改
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return bbmParkDao.save(o);
+    	}else{//新增
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return bbmParkDao.save(o);
+    	}
     }
 
     /**
