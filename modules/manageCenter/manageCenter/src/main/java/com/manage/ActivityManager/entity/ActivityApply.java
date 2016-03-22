@@ -64,7 +64,7 @@ public class ActivityApply implements Domain{
 	private String updateTime;//修改时间
 
 	@Column(name = "COMMENT_CONTENT_")
-	private String commentContent;//评论内容
+	private String commentContent;//内容
 
 
 	@Column(name = "START_TIME_")
