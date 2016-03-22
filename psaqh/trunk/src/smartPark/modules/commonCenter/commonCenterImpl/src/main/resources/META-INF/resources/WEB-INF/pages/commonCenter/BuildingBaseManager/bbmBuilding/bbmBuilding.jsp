@@ -19,7 +19,8 @@
 		<youi:gridCol property="bbmPark.parkName" caption="所属园区" width="150" align="center"/>
 		<youi:gridCol property="buildingCaption"  caption="楼栋说明" width="150" align="center"/>
 		<youi:gridCol property="buildingImage"  caption="楼栋图片URL" width="150" align="center"/>
-
+		<youi:gridCol property="createTime"  caption="创建时间" width="150" align="center"/>
+		<youi:gridCol property="updateTime"  caption="更新时间" width="150" align="center"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -30,6 +31,8 @@
 	<youi:form dialog="true" caption="楼栋基础信息" id="form_bbmBuilding" action="esb/web/bbmBuildingManager/saveBbmBuilding.json">
 		<youi:fieldLayout prefix="record" columns="2" labelWidths="100,100">
 			<youi:fieldHidden property="buildingId"  caption="楼栋ID"/>
+			<youi:fieldHidden property="createTime"  caption="创建时间"/>
+			<youi:fieldHidden property="updateTime"  caption="更新时间"/>
 			<youi:fieldText property="buildingNo"  caption="楼栋编号" notNull="true"/>
 			<youi:fieldText property="attributeFloorCount"  caption="楼宇层数" notNull="true"/>
 			<youi:fieldText property="buildingUnitCount"  caption="楼宇单元数" notNull="true"/>
