@@ -123,4 +123,12 @@ public interface ActivityApplyManager extends BaseManager{
      * @throws BusException
      */
     public List<ActivityApply> getActivityListIsRecoomend(ActivityApply o) throws BusException;
+    
+    /**
+     * 个人中心活动发布保存
+     * @param o
+     * @return
+     * @throws BusException
+     */
+    public ActivityApply saveActivityApplyForPage(ActivityApply o) throws BusException;
 }
