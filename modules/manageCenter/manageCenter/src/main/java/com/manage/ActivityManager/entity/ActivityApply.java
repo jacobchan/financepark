@@ -32,6 +32,10 @@ public class ActivityApply implements Domain{
 	@Column(name = "END_TIME_")
 	@Length(max=32)
 	private String endTime;//结束时间
+	
+	@Column(name = "DEADLINE_")
+	@Length(max=32)
+	private String deadline;//结束时间
 
 	@Column(name = "COMMENT_TIME_")
 	private String commentTime;//评论时间
@@ -233,6 +237,15 @@ public class ActivityApply implements Domain{
 
 	public void setActivityImage(String activityImage) {
 		this.activityImage = activityImage;
+	}
+
+	
+	public String getDeadline() {
+		return deadline;
+	}
+
+	public void setDeadline(String deadline) {
+		this.deadline = deadline;
 	}
 
 	@Override
