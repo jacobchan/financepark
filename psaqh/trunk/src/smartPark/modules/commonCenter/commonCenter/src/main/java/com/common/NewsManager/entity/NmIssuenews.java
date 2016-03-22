@@ -54,6 +54,51 @@ public class NmIssuenews implements Domain{
     @JoinColumn(name="ISSUE_TEMPALATE_ID_")
 	private com.common.NewsManager.entity.NmIssuetempalate nmIssuetempalate;//发布模板ID
 	
+	@Column(name = "IMAGE_URL_")
+	@Length(max=100)
+	private String imageUrl;//政策新闻图片url
+	
+	@Column(name = "BROWSE_COUNT_")
+	private String browseCount;//政策新闻浏览次数
+	
+	@Column(name = "DING_COUNT_")
+	private String dingCount;//政策新闻顶的次数
+	
+	@Column(name = "CAI_COUNT_")
+	private String caiCount;//政策新闻踩的次数
+	
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public String getBrowseCount() {
+		return browseCount;
+	}
+
+	public void setBrowseCount(String browseCount) {
+		this.browseCount = browseCount;
+	}
+
+	public String getDingCount() {
+		return dingCount;
+	}
+
+	public void setDingCount(String dingCount) {
+		this.dingCount = dingCount;
+	}
+
+	public String getCaiCount() {
+		return caiCount;
+	}
+
+	public void setCaiCount(String caiCount) {
+		this.caiCount = caiCount;
+	}
+
 	public String getPolicyId(){
 		return this.policyId;
 	}
