@@ -21,7 +21,7 @@
 		</youi:fieldLayout>
 
 		<youi:gridCol property="policyCaption"  caption="政策名称" width="100" align="center"/>
-		<youi:gridCol property="nmIssuetempalate.issueTempalateCaption"  caption="政策名称" width="100" align="center"/>
+		<youi:gridCol property="nmIssuetempalate.issueTempalateCaption"  caption="模板名称" width="100" align="center"/>
 		<youi:gridCol property="policyType.issueTypeCaption"  caption="发布类型" width="100" align="center"/>
 		<youi:gridCol property="policyCome"  caption="政策发布人" width="100" align="center"/>
 		<youi:gridCol property="policyStatus"  caption="政策发布状态" width="100" align="center" convert="policyStatus"/>
