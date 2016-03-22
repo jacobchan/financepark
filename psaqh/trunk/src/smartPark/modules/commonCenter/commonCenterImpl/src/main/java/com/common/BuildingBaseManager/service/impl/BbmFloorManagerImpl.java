@@ -91,9 +91,9 @@ public class BbmFloorManagerImpl extends BaseManagerImpl implements BbmFloorMana
 //    	}else{//新增
 //    		
 //    	}
-    	BbmBuilding building = o.getBbmBuilding() ; //得到楼栋对象，此时漏洞对象里面只有ID
+    	BbmBuilding building = o.getBbmBuilding() ; //得到楼栋对象，此时楼栋对象里面只有ID
     	String buildingId = building.getBuildingId() ;//得到楼栋ID
-    	building = bbmBuildingManager.getBbmBuilding(buildingId) ; //通锅楼栋ID获取漏洞对象
+    	building = bbmBuildingManager.getBbmBuilding(buildingId) ; //通锅楼栋ID获取楼栋对象
     	BbmPark park = building.getBbmPark() ;//获取楼栋对象对应的园区信息
     	o.setBbmPark(park);//将园区信息set到楼层对象中
     	return bbmFloorDao.save(o);//保存楼层对象
