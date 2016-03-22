@@ -122,4 +122,11 @@ public interface NmIssuenewsManager extends BaseManager{
 	 */
 	public NmIssuenews getNextPolicyByPilicyId(String policyId) ;
 	
+	/**
+	 * 通过政策ID设置当前页面的浏览量
+	 * @param policyId 政策新闻ID
+	 * @return
+	 */
+	public NmIssuenews setBrowseCountByPolicyId(String policyId) ;
+	
 }
