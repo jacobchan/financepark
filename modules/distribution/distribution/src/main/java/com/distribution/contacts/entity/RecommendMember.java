@@ -54,7 +54,7 @@ public class RecommendMember implements Domain{
 	private String memPhone;//联系电话
 
 	@Column(name = "REG_TIME_")
-	@Length(max=2)
+	@Length(max=64)
 	private String regTime;//注册时间
 
 	@Column(name = "IS_BUY_")
@@ -74,6 +74,19 @@ public class RecommendMember implements Domain{
 	@Length(max=2)
 	private String isReg;//是否注册
 	
+	
+	/*private String remark;//备注
+	
+	
+	
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}*/
+
 	public String getMemRole(){
 		return this.memRole;
 	}
