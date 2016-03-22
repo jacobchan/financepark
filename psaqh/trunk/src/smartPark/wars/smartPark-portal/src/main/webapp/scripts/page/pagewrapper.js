@@ -10,6 +10,8 @@
 var isLogin = false;
 var baseUrl = "http://220.249.113.12:8088/esb/web/";
 var cenUrl = 'http://220.249.113.12:8088/';
+//var baseUrl = "http://localhost:8088/smartPark-web/esb/web/";
+//var cenUrl = 'http://localhost:8088/smartPark-web/';
 $(function(){
 //	var _passportBaseUrl = 'http://localhost:8088/smartPark-web/';
 	console.log($.youi.serverConfig.contextPath);
