@@ -44,7 +44,7 @@
 		</property>
 		<property name="cacheManager" ref="cacheManager"></property>
 	</bean>
-	
+	<bean id="rolesdeny" class="com.gsoft.framework.security.filter.RolesDeny"></bean>
 	<!-- 过滤器 -->
 	<bean id="shiroFilter" class="com.gsoft.framework.security.DefaultShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
@@ -66,9 +66,9 @@
 				/portal/** = anon
 				/index.html = authc
 				/page/** = authc
-				/memberCenter/**=authc
 				/member/*/logout.html=anon
-				/member/**=authcmember
+				/member/qiyeCenter/** = authcmember,rolesdeny[ROLE_QIYE]
+				/member/** = authcmember
 	        </value>
 		</property>
 		<!--  实现 com.gsoft.framework.core.security.UrlResourceManager接口，
