@@ -11,11 +11,11 @@
 		</youi:fieldLayout>
 		
 		<youi:gridCol property="parkName"  caption="园区名称" width="150" align="center"/>
-		<youi:gridCol property="email"  caption="园区邮箱" width="150"/>
+		<youi:gridCol property="email"  caption="园区邮箱" width="150" align="center"/>
 		<youi:gridCol property="buildDate"  caption="成立时间" width="100" align="center"/>
 		<youi:gridCol property="tel"  caption="联系电话" width="100" align="center"/>
 		<youi:gridCol property="mainIndustry"  caption="主导服务" width="150" align="center"/>
-		<youi:gridCol property="address"  caption="园区地址" width="150"/>
+		<youi:gridCol property="address"  caption="园区地址" width="150" align="center"/>
 		<youi:gridCol property="parkIntroduce"  caption="园区简介" width="150"/>
 		<youi:gridCol property="manager"  caption="园区负责人" width="80" align="center"/>
 		<youi:gridCol property="backgroundImage"  caption="园区背景图URL" width="150" align="center"/>
