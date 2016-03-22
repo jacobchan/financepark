@@ -21,6 +21,7 @@ import com.gsoft.framework.core.orm.PagerRecords;
 
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.util.StringUtils;
 
@@ -273,6 +274,27 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     	condition.add(ConditionUtils.getCondition("isRecoomend", Condition.EQUALS,"0"));
      	List<ActivityApply> activityApplyList=activityApplyDao.commonQuery(condition, null);
 		return activityApplyList;
+	}
+    
+    /**
+     * 个人中心活动发布保存
+     * @param o
+     * @return
+     * @throws BusException
+     */
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+	public ActivityApply saveActivityApplyForPage(ActivityApply o)
+			throws BusException {
+		// TODO Auto-generated method stub
+    	o.setMemberId(memberInformationManager.getMemberInformation(o.getUpdateUser()));
+    	o.setApplyStatus("00");//默认申请中
+    	o.setIsRecoomend("1");//默认不推荐
+    	//o.setApplayType(applayType);
+    	o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	o.setCreateUser(o.getUpdateUser());
+    	o.setUpdateUser(o.getUpdateUser());
+		return activityApplyDao.save(o);
 	}
 
 }
