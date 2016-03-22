@@ -231,7 +231,7 @@ input{font-family:"微软雅黑";}
 .per-center-box{border:1px solid #ecebeb;background-color: #fff;}
 .per-center-box dl dt{font-size: 16px;font-weight: bold;line-height: 40px;padding: 10px 0px;padding-left: 50px;}
 .per-center-box dl dd a{color: #737373;display: block;padding-left: 63px;line-height: 30px;height: 30px;font-size: 12px;}
-.per-center-box dl dd a:hover,.per-center-box dl dd.active>a{color:#fff;background:#fa742c;border-top:1px solid #efefef;border-bottom:1px solid #efefef;}
+.per-center-box dl dd a:hover,.per-center-box dl dd.active>a{color:#fff !important;background:#fa742c;border-top:1px solid #efefef;border-bottom:1px solid #efefef;}
 .per-center-box dl dd ul li a{padding-left: 75px;}
 .per-center-box dl dd ul li.active>a{ color:#fff;background:#fa742c;border-top:1px solid #efefef;border-bottom:1px solid #efefef;}
 
