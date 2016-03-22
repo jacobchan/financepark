@@ -35,6 +35,7 @@ import com.manage.EnterBusinessManager.dao.EnterbusinessmanagerRzDao;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCharge;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerOc;
+import com.manage.ReserveManager.entity.ReservationRecord;
 @Service("enterpriseEmployeesManager")
 @Transactional
 public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements EnterpriseEmployeesManager{
@@ -229,7 +230,19 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 		List<EnterpriseEmployees> list = enterpriseEmployeesDao.getList("rz.rzId", rzId);
 		return list;
 	 }
+		//通过名字获取当前用户公司员工的通讯录
+	 public List<EnterpriseEmployees> getEnterprisemaillistByName(
+			    @ServiceParam(name="userId",pubProperty = "userId") String userId,
+				@ServiceParam(name="employeesName") String employeesName) throws BusException {
+			// TODO Auto-generated method stub
+	    	//获取当前用户公司员工的通讯录
+	    	Collection<Condition> condition = new ArrayList<Condition>();
+	    	condition.add(ConditionUtils.getCondition("member.memberId", Condition.EQUALS, userId));
+	    	condition.add(ConditionUtils.getCondition("employeesName", Condition.EQUALS, employeesName));
+	    	
+	    	List<EnterpriseEmployees> list =enterpriseEmployeesDao.commonQuery(condition, null);
+			return list;
 	
-	
+	 }
 	
 }
