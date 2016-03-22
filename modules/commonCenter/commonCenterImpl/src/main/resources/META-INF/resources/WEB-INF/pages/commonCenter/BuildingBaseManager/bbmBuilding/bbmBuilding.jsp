@@ -18,7 +18,7 @@
 		<youi:gridCol property="buildingType"  caption="楼栋类别" width="100"  convert="buildingType" align="center"/>
 		<youi:gridCol property="bbmPark.parkName" caption="所属园区" width="150" align="center"/>
 		<youi:gridCol property="buildingCaption"  caption="楼栋说明" width="150" align="center"/>
-		<youi:gridCol property="buildingImage"  caption="楼栋图片URL" width="150"/>
+		<youi:gridCol property="buildingImage"  caption="楼栋图片URL" width="150" align="center"/>
 
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
