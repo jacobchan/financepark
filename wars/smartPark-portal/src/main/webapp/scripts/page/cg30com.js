@@ -7,8 +7,13 @@
  *
  * Date: 2016-2-16
  */
+var isLogin = false;
+var baseUrl = "http://220.249.113.12:8088/esb/web/";
+var cenUrl = 'http://220.249.113.12:8088/';
+//var baseUrl = "http://localhost:8088/smartPark-web/esb/web/";
+//var cenUrl = 'http://localhost:8088/smartPark-web/';
 $(function(){
-	var _passportBaseUrl = 'http://192.168.80.1:8088/gsoft-web/';
+	var _passportBaseUrl = cenUrl;
 	
 	$('#youi_page_header').load($.youi.serverConfig.contextPath+'/common/cgtop.html',function(){
 		$.getScript(_passportBaseUrl+'portal/userInfo.html',function(){
