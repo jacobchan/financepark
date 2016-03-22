@@ -133,13 +133,21 @@
 			policyId = getParam() ;//当前政策类型ID
 			var params=["policyId="+policyId];
 			$.youi.ajaxUtils.ajax({
-				url:baseUrl +"nmIssuenewsManager/getNewsByPolicyId.json",
+				url:baseUrl +"nmIssuenewsManager/setBrowseCountByPolicyId.json",//设置访问量
 				data:params.join('&'),
 				jsonp:'data:jsonp',
 				dataType:'jsonp',
 				success:function(result){
-					var record = result.record ;
-					getHtml(record) ;
+					$.youi.ajaxUtils.ajax({
+						url:baseUrl +"nmIssuenewsManager/getNewsByPolicyId.json",
+						data:params.join('&'),
+						jsonp:'data:jsonp',
+						dataType:'jsonp',
+						success:function(result){
+							var record = result.record ;
+							getHtml(record) ;
+						}
+					});
 				}
 			});
 		});
@@ -153,7 +161,7 @@
 		/* 拼接HTML */
 		function getHtml(record){
 			var html = "<h2 style='font-size:26px;' class='lh35 mb20'>"+record.policyCaption+"</h2>"+
-					   "<h5 class='f12 mb20'>"+record.policyIssueDate+"<span class='c-b1 ml10 mr10'>|</span> 来源："+record.policyCome+" <span class='c-b1 ml10 mr10'>|</span><img src='../styles/images/zs/page.png' border='0' class='mr5'/>1999</h5>"+
+					   "<h5 class='f12 mb20'>"+record.policyIssueDate+"<span class='c-b1 ml10 mr10'>|</span> 来源："+record.policyCome+" <span class='c-b1 ml10 mr10'>|</span><img src='../styles/images/zs/page.png' border='0' class='mr5'/>"+record.browseCount+"</h5>"+
 					   "<div class='article-con-p'>"+
 					   "<p>"+record.policyContent+"</p>"+
 					   "</div>" ;
