@@ -97,5 +97,5 @@ public interface EnterpriseEmployeesManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public List<EnterpriseEmployees> getEnterprisemaillist(EnterpriseEmployees o) throws BusException;
-	
+	 public List<EnterpriseEmployees> getEnterprisemaillistByName(String userId,String employeesName) throws BusException;
 }
