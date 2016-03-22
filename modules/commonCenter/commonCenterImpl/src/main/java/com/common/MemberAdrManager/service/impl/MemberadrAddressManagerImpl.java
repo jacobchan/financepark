@@ -74,18 +74,22 @@ public class MemberadrAddressManagerImpl extends BaseManagerImpl implements Memb
     	boolean isUpdate = StringUtils.isNotEmpty(memberadrAddressId);
     	
 		List<MemberadrAddress> memberadrAddresss=memberadrAddressDao.getList(new String[]{"memberId.memberId","addressStatus"},new String[]{ o.getMemberId().getMemberId(),"0"});
-		if(o.getAddressStatus().equals("0")){
-    		for(MemberadrAddress ma:memberadrAddresss){
-    			ma.setAddressStatus("1");//设置所有状态为非默认状态
-    			memberadrAddressDao.save(ma);
-    		}
+		if(o.getAddressStatus()!=null){
+			if(o.getAddressStatus().equals("0")){
+	    		for(MemberadrAddress ma:memberadrAddresss){
+	    			ma.setAddressStatus("1");//设置所有状态为非默认状态
+	    			memberadrAddressDao.save(ma);
+	    		}
+			}
 		}
     	if(isUpdate){//修改
     		MemberadrAddress ma=memberadrAddressDao.get(memberadrAddressId);
     		ma.setAddressStatus(o.getAddressStatus());
     		o=ma;
     	}else{//新增
-    		
+    		if(o.getAddressStatus()==null){
+    			o.setAddressStatus("01");
+    		}
     	}
     	return memberadrAddressDao.save(o);
     }
