@@ -13,7 +13,7 @@
 <shiro:authenticated>
 	<!-- authenticated -->
 	<input id="hasLogin" type="hidden" value="true" />
-	<jsp:forward page="index.html"></jsp:forward>
+	<jsp:forward page="member/memberCenter/index.html"></jsp:forward>
 </shiro:authenticated>
 <body>
 <div class="w1200">
@@ -86,6 +86,8 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/lib/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/lib/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/lib/giui.min.js"></script>
+<script type="text/javascript"  src="<%=request.getContextPath()%>/scripts/lib/properties.js"></script>
 <script type="text/javascript">
 $(function(){
 	$(".login_ul li").click(function(){
@@ -110,7 +112,7 @@ $(function(){
 				var obj = ['memberPhoneNumber='+memberPhoneNumber] ;
 				/* 判断手机号是否已经注册! */
 				$.youi.ajaxUtils.ajax({
-					url:baseUrl + "memberInformationManager/exsitMobile.json",
+					url:baseUrl + "/memberInformationManager/exsitMobile.json",
 					data:obj.join('&'),
 					jsonp:'data:jsonp',
 					dataType:'jsonp',
@@ -147,7 +149,7 @@ $(function(){
 							              "repasswd="+repasswd
 										 ];
 							$.youi.ajaxUtils.ajax({
-								url:baseUrl +"memberInformationManager/saveReister.json",
+								url:baseUrl +"/memberInformationManager/saveReister.json",
 								data:params.join('&'),
 								jsonp:'data:jsonp',
 								dataType:'jsonp',
