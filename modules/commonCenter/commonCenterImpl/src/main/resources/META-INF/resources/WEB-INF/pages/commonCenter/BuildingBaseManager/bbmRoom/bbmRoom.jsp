@@ -35,6 +35,7 @@
 	<youi:form dialog="true" caption="单元基础信息" id="form_bbmRoom" action="esb/web/bbmRoomManager/saveBbmRoom.json">
 		<youi:fieldLayout prefix="record">
 			<youi:fieldHidden property="roomId"  caption="单元ID"/>
+			<youi:fieldHidden property="roomAddress"  caption="详细地址"/>
 			<youi:fieldText property="roomNo"  caption="单元编号" notNull="true"/>
 			<youi:fieldSelect property="bbmFloor.floorId" caption="所属楼层" code="floorId" show="floorNo" notNull="true"
 				src="esb/web/bbmFloorManager/getBbmFloors.json" />
