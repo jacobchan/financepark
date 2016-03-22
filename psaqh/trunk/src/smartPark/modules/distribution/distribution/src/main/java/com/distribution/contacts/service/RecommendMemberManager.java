@@ -12,7 +12,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.distribution.contacts.entity.RecommendMember;
 
 public interface RecommendMemberManager extends BaseManager{
