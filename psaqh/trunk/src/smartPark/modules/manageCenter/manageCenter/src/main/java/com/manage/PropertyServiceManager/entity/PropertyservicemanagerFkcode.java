@@ -76,7 +76,7 @@ public class PropertyservicemanagerFkcode implements Domain{
 	
 	@Column(name = "APPLY_STATUS_")
 	@Length(max=2)
-	private String applyStatus;//修改人
+	private String applyStatus;//申请状态
 	
 	@Column(name = "APPLY_TIME_")
 	private String applyTime;//访客申请时间
