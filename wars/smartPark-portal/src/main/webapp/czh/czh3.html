@@ -93,7 +93,99 @@
 					</div>	
 				</div>
 				<div class="fr w285">
-					<div id="youi_page_right" class="youi-page-right clearfix"></div>
+					<div class="youi-page-right clearfix">
+						<ul class="index-fr-nav clearfix">
+							<li class="active">文档库</li>
+							<li>热门活动</li>
+							<li>即将进行</li>
+						</ul>
+						<div class="ifn-group">
+							<ul class="ig-nav">
+								<li>
+									<a href="">
+										<div class="in-photo">
+											<img src="../styles/images/zs/nav-img1.png" border="0" width="100%">
+										</div>
+										<div class="fr">
+											<p>杭州，一场无关情爱的风月无边月无</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<div class="in-photo">
+											<img src="../styles/images/zs/nav-img2.png" border="0" width="100%">
+										</div>
+										<div class="fr">
+											<p>杭州，一场无关情爱的风月无边月无</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<div class="in-photo">
+											<img src="../styles/images/zs/nav-img3.png" border="0" width="100%">
+										</div>
+										<div class="fr">
+											<p>杭州，一场无关情爱的风月无边月无</p>
+										</div>
+									</a>
+								</li>
+							</ul>
+							<ul class="ig-nav undis">
+								<li>
+									<a href=""><div class="in-photo">
+										<img src="../styles/images/zs/nav-img1.png" border="0" width="100%">
+									</div>
+									<div class="fr">
+										<p>杭州，一场无关情爱的风月</p>
+									</div></a>
+								</li>
+								<li>
+									<a href=""><div class="in-photo">
+										<img src="../styles/images/zs/nav-img2.png" border="0" width="100%">
+									</div>
+									<div class="fr">
+										<p>杭州，一场无关情爱的风月无边月无</p>
+									</div></a>
+								</li>
+								<li>
+									<a href=""><div class="in-photo">
+										<img src="../styles/images/zs/nav-img3.png" border="0" width="100%">
+									</div>
+									<div class="fr">
+										<p>杭州，一场无关情爱的风月无</p>
+									</div></a>
+								</li>
+							</ul>
+							<ul class="ig-nav undis">
+								<li>
+									<a href=""><div class="in-photo">
+										<img src="../styles/images/zs/nav-img1.png" border="0" width="100%">
+									</div>
+									<div class="fr">
+										<p>杭州，一场无关</p>
+									</div></a>
+								</li>
+								<li>
+									<a href=""><div class="in-photo">
+										<img src="../styles/images/zs/nav-img2.png" border="0" width="100%">
+									</div>
+									<div class="fr">
+										<p>杭州，一场无关情爱的</p>
+									</div></a>
+								</li>
+								<li>
+									<a href=""><div class="in-photo">
+										<img src="../styles/images/zs/nav-img3.png" border="0" width="100%">
+									</div>
+									<div class="fr">
+										<p>杭州，一场无关情爱的风月无边月无</p>
+									</div></a>
+								</li>
+							</ul>
+						</div>
+					</div>
 					<h2 class="f20 mt20 lh30">活动地点<a href="#" class="f14" style="color:#2578bf">（查看大图）</a></h2>
 				</div>
 			</div>
@@ -147,7 +239,26 @@
 				$(this).html('<img alt="收藏" src="../styles/images/czh/sc-o.png" border="0" class="mr10">已收藏');
 			});
 			$("a.a-c-o").click(function(){
-				$(".bg-tanc").show();
+				$(".bg-tanc").show();	
+			});
+			//根据活动主键获取相关文档
+			var url=location.href; 
+			var tmp1=url.split("?")[1];  
+			var tmp2=tmp1.split("=")[1]; 
+			var applyId=tmp2;
+			var params = ['applyId='+applyId];
+			var serviceURL = baseUrl+"activityApplyManager/getPublishActivityDocuments.json";
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(results){
+					console.log(results);
+					if(results&&results.records){
+						_parseActivityRecords(results.records);
+					}
+				}
 			});
 			//报名提交
 			$('.ib-btn').click(function(){
@@ -190,11 +301,22 @@
 					_parseRecords(results.record);
 					}
 				}
-			});		
+			});	
+			//获取文档列表
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(results){
+					if(results&&results.record){
+					_parseRecords(results.record);
+					}
+				}
+			});	
 		});
 		//活动详情赋值
 		function _parseRecords(record){
-			console.log(record);
 			$(".activityImage").attr("src","../filestore/"+record.activityImage);
 			$(".h-bg").html(record.applyTitle);
 			$(".time").html(record.startTime);
@@ -202,6 +324,30 @@
 			$(".name").html("发布人："+record.memberId.memberName);
 			$(".phoneNumber").html(record.memberId.memberPhoneNumber);
 			$(".bd-box").html(record.commentContent);
+		}
+		//文档库赋值
+		function _parseActivityRecords(record){
+			var html='';
+			for(var i=0;i<record.length;i++){
+				html+="<li>"+
+							"<a href='javascript:;' onclick='redirectPagePDF(this)'; id='"+record[i].activityApply.applyId+"' >"+
+								"<div class='in-photo'>"+
+									"<img src='../styles/images/zs/nav-img1.png' border='0' width='115' height='71'>"+
+								"</div>"+
+								"<div class='fr'>"+
+									"<p>"+record[i].documentName.split('.')[0]+"</p>"+
+								"</div>"+
+							"</a>"+
+					 "</li>";
+			}
+			$('.ifn-group ul').eq(0).empty();
+			$('.ifn-group ul').eq(0).append(html);
+		}
+		//文档跳转页面
+		function redirectPagePDF(obj){
+			var applyId=obj.id;
+			var url="../czh/czh7.html"+"?"+"applyId="+applyId; 
+			window.location.assign(url); 
 		}
 	</script>
 </body>
