@@ -215,6 +215,11 @@
 			<artifactId>smartPark-memberCenterImpl</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.gsoft.smartPark</groupId>
+			<artifactId>smartPark-distributionImpl</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 	
 	<profiles>
