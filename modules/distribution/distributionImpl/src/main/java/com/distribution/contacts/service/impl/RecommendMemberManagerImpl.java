@@ -3,6 +3,8 @@
  */
 package com.distribution.contacts.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Collection;
 
@@ -16,11 +18,8 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.distribution.contacts.entity.RecommendMember;
 import com.distribution.contacts.dao.RecommendMemberDao;
 import com.distribution.contacts.service.RecommendMemberManager;
@@ -65,15 +64,8 @@ public class RecommendMemberManagerImpl extends BaseManagerImpl implements Recom
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "memberId", pubProperty = "userId")})
     public RecommendMember saveRecommendMember(RecommendMember o) throws BusException{
-//    	String recommendMemberId = o.getRecommendMemberId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(recommendMemberId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
     	return recommendMemberDao.save(o);
     }
 
