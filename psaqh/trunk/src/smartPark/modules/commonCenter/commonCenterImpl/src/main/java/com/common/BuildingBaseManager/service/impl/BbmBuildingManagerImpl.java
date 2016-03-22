@@ -19,6 +19,7 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.common.BuildingBaseManager.entity.BbmBuilding;
@@ -78,14 +79,15 @@ public class BbmBuildingManagerImpl extends BaseManagerImpl implements BbmBuildi
      */
     @EsbServiceMapping
     public BbmBuilding saveBbmBuilding(BbmBuilding o) throws BusException{
-//    	String bbmBuildingId = o.getBbmBuildingId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(bbmBuildingId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	return bbmBuildingDao.save(o);
+    	String bbmBuildingId = o.getBuildingId();
+    	boolean isUpdate = StringUtils.isNotEmpty(bbmBuildingId);
+    	if(isUpdate){//修改
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return bbmBuildingDao.save(o);
+    	}else{//新增
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return bbmBuildingDao.save(o);
+    	}
     }
 
     /**
