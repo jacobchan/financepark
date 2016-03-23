@@ -1,0 +1,40 @@
+
+#doPoint .star10 {
+	background:url(star_small.gif) no-repeat 2px 0px
+}
+#doPoint .star9 {
+	background:url(star_small.gif) no-repeat 2px -20px
+}
+#doPoint .star8 {
+	background:url(star_small.gif) no-repeat 2px -40px
+}
+#doPoint .star7 {
+	background:url(star_small.gif) no-repeat 2px -60px
+}
+#doPoint .star6 {
+	background:url(star_small.gif) no-repeat 2px -80px
+}
+#doPoint .star5 {
+	background:url(star_small.gif) no-repeat 2px -100px
+}
+#doPoint .star4 {
+	background:url(star_small.gif) no-repeat 2px -120px
+}
+#doPoint .star3 {
+	background:url(star_small.gif) no-repeat 2px -140px
+}
+#doPoint .star2 {
+	background:url(star_small.gif) no-repeat 2px -160px
+}
+#doPoint .star1 {
+	background:url(star_small.gif) no-repeat 2px -180px
+}
+FORM {
+	margin:15px 0px 0px
+}
+FORM LABEL {
+	display:block;margin:5px 0px
+}
+FORM textAREA {
+	width:350px
+}
