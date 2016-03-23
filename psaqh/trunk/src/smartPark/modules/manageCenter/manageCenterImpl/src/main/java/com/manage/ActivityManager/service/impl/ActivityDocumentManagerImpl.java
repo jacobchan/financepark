@@ -140,12 +140,9 @@ public class ActivityDocumentManagerImpl extends BaseManagerImpl implements Acti
     	ActivityDocument ad=activityDocumentDao.get(id);
     	FileStore fs=fileStoreManager.getFileStoreByPath(ad.getDocumentPath());
     	String filePath=fs.getFilePath();
-    	File file = new File(filePath); 
-    	String getFilename = file.getName();
-    	String parent=file.getParent();
-    	String fileName = getFilename .substring(0,getFilename .lastIndexOf("."));
+    	String fileName = filePath .substring(0,filePath .lastIndexOf("."));
     	DocConverter.getSwfPath(root+filePath);
-    	String swfPath=root+parent+"/"+fileName+".swf";
+    	String swfPath=fileName+".swf";
     	return swfPath;
 	
     }
