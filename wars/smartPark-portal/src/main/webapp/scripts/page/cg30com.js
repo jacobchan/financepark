@@ -15,7 +15,7 @@ var cenUrl = 'http://220.249.113.12:8088/';
 $(function(){
 	var _passportBaseUrl = cenUrl;
 	
-	$('#youi_page_header').load($.youi.serverConfig.contextPath+'/common/cgtop.html',function(){
+	$('#youi_page_header').load($.youi.serverConfig.contextPath+'/common/cg_head.html',function(){
 		$.getScript(_passportBaseUrl+'portal/userInfo.html',function(){
 			var loc = encodeURIComponent(window.location.href);
 			if($.youi.serverConfig.authorization){
@@ -26,6 +26,6 @@ $(function(){
 			}
 		});
 	});
-	
+	$('#youi_page_top').load($.youi.serverConfig.contextPath+'/common/cg_top.html');
 	$('#youi_page_footer').load($.youi.serverConfig.contextPath+'/common/footer.html');
 });
