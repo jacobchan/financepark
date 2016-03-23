@@ -141,8 +141,10 @@
 						</td>
 					</tr>
 				</table>
-				<h3 class="lh40 f16 mt20">关联活动</h3>
-				<img src="../styles/images/czh/list-2.jpg" border="0" width="100%"/>
+					<h3 class="lh40 f16 mt20" >关联活动</h3>
+					<div id="associatedActivitiy">
+						<img src="../styles/images/czh/list-2.jpg" border="0" width="100%"/>
+					</div>
 			</div>
 		</div>
 	</div>
@@ -175,6 +177,9 @@
 			var documentPath=record.documentPath;
 			var params = ['documentId='+record.documentId];
 			$(".documentName").html(record.documentName.split('.')[0]);
+			//关联活动图片
+			var img="<img src='../filestore/"+record.activityApply.activityImage+"' border='0' width='288' height='195'/>";
+            $("#associatedActivitiy").empty().append(img);
 			$.youi.ajaxUtils.ajax({
 				url:baseUrl+'/activityDocumentManager/getViewDocument.json',
 				data:params.join('&'),
