@@ -93,5 +93,5 @@ public interface PropertyservicemanagerCosManager extends BaseManager{
      * @throws BusException
      */
     public PropertyservicemanagerCos updateCosforpage(String cosId) throws BusException ;    	 	
-  
+    public List<PropertyservicemanagerCos> getCoslistLikeCosCode(String userId,String cosCode) throws BusException;
 }
