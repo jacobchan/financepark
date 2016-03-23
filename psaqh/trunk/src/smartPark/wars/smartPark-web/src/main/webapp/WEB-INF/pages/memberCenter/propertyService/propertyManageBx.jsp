@@ -228,7 +228,7 @@
 	//根据订单号查询
 	$('.hhf-submit').click(function(){					
 		$(".aaa").empty();
-		 var employeesName=$("#bxCode").val(); 
+		 var bxCode=$("#bxCode").val(); 
 	      $.ajax({
 	    	 url:baseUrl+'/propertyservicemanagerBxManager/getEnterprisemaillistLikeBxCode.json',
 	    	 data:'bxCode='+bxCode,
