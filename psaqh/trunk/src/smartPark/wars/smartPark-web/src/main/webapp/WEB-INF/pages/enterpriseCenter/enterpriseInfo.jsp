@@ -5,7 +5,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>企業信息</title>
-		<%@ include file="/WEB-INF/pages/common/enterpriseScriptAndCss.jsp"%>
+		<%@ include file="/WEB-INF/pages/common/enterpriseScriptAddCss.jsp"%>
 	</head>
 	<body class="page-header-fixed" style=" background-image:none">
 		<%@ include file="/WEB-INF/pages/enterpriseCenter/common/ec_head.jsp"%>

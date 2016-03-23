@@ -16,16 +16,16 @@
 	<body>
 		<aside class="sidebar-menu fixed">
 			<div class="sidebar-menu-inner">
-	        	<div class="sidebar-menu-bread"><span><img src="../styles/images/qiye/icon_home.png"></span>企业管理中心</div>
+	        	<div class="sidebar-menu-bread"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_home.png"></span>企业管理中心</div>
 	        	<ul class="sidebar-menu-mainul">
 	                <li>
-	                    <a id="more">企业资料 <span class="down-icon"><img src="../styles/images/qiye/angle-down.png"></span></a>
+	                    <a id="more">企业资料 <span class="down-icon"><img src="<%=request.getContextPath()%>/styles/images/qiye/angle-down.png"></span></a>
 	                    <ul class="sidebar-menu-mainul2" id="more1">
-	                        <li><a href="qyzl.html"><span><img src="../styles/images/qiye/icon_xinxi.png"></span>企业信息</a></li>
-	                        <li><a href="qyrz.html"><span><img src="../styles/images/qiye/icon_rongzi.png"></span>融资信息</a></li>
-	                        <li><a href="zlzs.html"><span><img src="../styles/images/qiye/icon_zuanli.png"></span>专利/知识产权</a></li>
-	                        <li><a href="qycsr.html"><span><img src="../styles/images/qiye/icon_chuangshi.png"></span>企业创始人</a></li>
-	                        <li class="active"><a href="mtbd"><span><img src="../styles/images/qiye/icon_baodao.png"></span>媒体报道</a></li>
+	                        <li><a href="qyzl.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_xinxi.png"></span>企业信息</a></li>
+	                        <li><a href="qyrz.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_rongzi.png"></span>融资信息</a></li>
+	                        <li><a href="zlzs.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_zuanli.png"></span>专利/知识产权</a></li>
+	                        <li><a href="qycsr.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_chuangshi.png"></span>企业创始人</a></li>
+	                        <li class="active"><a href="mtbd"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_baodao.png"></span>媒体报道</a></li>
 	                    </ul>
 	                </li>
 	            	<li><a href="qytx.html">企业通讯录管理</a></li>
@@ -33,7 +33,7 @@
 	                <li><a href="qydd.html">订单中心</a></li>
 	                <li><a href="plxx.html">评论消息</a></li>
 	            </ul>
-	            <div class="sidebar-menu-return"><span><img src="../styles/images/qiye/icon_return.png"></span>返回个人中心</div>
+	            <div class="sidebar-menu-return"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_return.png"></span>返回个人中心</div>
 	        </div>
 		</aside>
 	</body>
