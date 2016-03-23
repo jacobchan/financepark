@@ -3,33 +3,48 @@
 <head>
 <meta charset="utf-8">
 <title>办公用品</title>
-<link href="../styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+<link href="../styles/page/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 <link href="../styles/base.css" type="text/css" rel="stylesheet">
+<link href="../styles/page/page.css" type="text/css" rel="stylesheet">
 <link href="../styles/page/cg30.css" type="text/css" rel="stylesheet">
 </head>
-
+<style type="text/css">
+    .nav_ul li:hover a{color: #FF5900;}
+</style>
 <body class="bgf1">
 <div id="youi_page_header" class="youi-page-header clearfix"></div>
 <!--***top end****************************************-->
 <!--content-->
 <!--*******************************************-->
+<div id="youi_page_top" class="youi-page-top clearfix"></div>
 <div class="w1200" style="position:relative">
-	<div class="pt5 pb5 f16"><a href="../cg30/index.html" class="c3"><i class="fa fa-angle-left" style="font-size:20px"></i>&nbsp;&nbsp;返回</a></div>
- 	<div class="bgfff pt20 pb20 mt5">
-    	<div class="clearfix bb">
-            <span class="fl">分类：</span>
-            <ul class="type_ul fl pb10">
-                <li>全部</li><li>签字笔</li><li>文件夹</li><li>胶水</li><li>剪刀</li><li>清洁用品</li>
-            </ul>
-            <a href="javascript:;" class="c3 fr">更多&nbsp;<i class="fa fa-angle-down" style="font-size:20px"></i></a>
+	<ul class="linknav clearfix mt10 mb10">
+        <li><a href="#">30云采购</a></li>
+        <li class="active">办公用品</li>
+    </ul>
+</div>
+ 	<div class="bgfff mt5">
+        <div class="clearfix bb lh22">
+            <div class="w1200 clearfix pt15">
+                <span class="fl f16">分类：</span>
+                <ul class="office-nav fl">
+                    <li class="active">全部</li><li>签字笔</li><li>文件夹</li><li>胶水</li><li>剪刀</li><li>清洁用品</li>
+                    <li>签字笔</li><li>文件夹</li><li>胶水</li><li>剪刀</li><li>清洁用品</li>
+                </ul>
+                <a href="javascript:;" class="c-b fr" onclick="$(this).prev().toggleClass('hauto');$(this).children('i').toggleClass('fa-angle-down fa-angle-up')">更多&nbsp;<i class="fa fa-angle-down" style="font-size:20px"></i></a>
+            </div>
         </div>
-        <div class="clearfix">
-        	<div class="fl mt10">品牌：</div>
-            <ul class="type_ul clearfix pt10">
-                <li class="active">全部</li><li>齐力</li><li>得力</li>
-            </ul>
+        <div class="w1200 lh22 pt15">
+            <div class="clearfix">
+                <div class="fl f16">品牌：</div>
+                <ul class="office-nav fl">
+                    <li class="active">全部</li><li>签字笔</li><li>文件夹</li><li>胶水</li><li>剪刀</li><li>清洁用品</li>
+                    <li>签字笔</li><li>文件夹</li><li>胶水</li><li>剪刀</li><li>清洁用品</li>
+                </ul>
+            </div>
         </div>
     </div>
+ <div class="w1200">
     <div class="clearfix mt30">
     	<div class="fl">
         	<ul class="tt_ul">
@@ -40,9 +55,9 @@
             </ul>
         </div>
         <div class="fr">
-        	<div class="checkbox_div ml20 vm"></div>&nbsp;&nbsp;<span class="vm">查看评价</span>
-            <div class="checkbox_div ml20 vm"></div>&nbsp;&nbsp;<span class="vm">仅显示特惠商品</span>
-            <div class="checkbox_div ml20 vm"></div>&nbsp;&nbsp;<span class="vm">仅显示有货商品</span>
+            <label class="mr20 cur"><input type="checkbox" class="mr5">查看评价</label>
+            <label class="mr20 cur"><input type="checkbox" class="mr5">仅显示特惠商品</label>
+            <label class="mr20 cur"><input type="checkbox" class="mr5">仅显示有货商品</label>
         </div>
     </div>
     <div class="mt15">
@@ -61,66 +76,116 @@
             <li></li>
         </ul>
         <div class="pagebox tc mt50">
-        	<ul class="inline_b" style="overflow:hidden">
-            	<li class="active">1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
+            <a href="" class="fa fa-angle-left f20"></a>
+        	<a href="" class="active">1</a>
+            <a href="">2</a>
+            <a href="">3</a>
+            <a href="">4</a>
+            <a href="">5</a>
+            <a href="" class="fa fa-angle-right f20"></a>
             </ul>
         </div>
     </div>
     <div class="split_line mt50">
     	<div class="f28 c3 tc">猜你喜欢</div>
     </div>
-    <div class="like_box mb50">
-    	<ul class="like_ul clearfix">
-        	<li>
-            	<div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
+    <div class="like_box mb50 oh">
+        <ul class="like_ul clearfix">
+            <li>
+                <div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
                 <p>
-                	<span>富春硅谷gdf</span><br/>
+                    <span>富春硅谷gdf</span><br/>
                     <span class="ccheng">9.9</span>元
                 </p>
                 <div class="f12 mt5">7788人好评</div>
                 <div class="btn_cheng">加入购物车</div>
             </li>
             <li>
-            	<div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
+                <div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
                 <p>
-                	<span>富春硅谷gdf</span><br/>
+                    <span>富春硅谷gdf</span><br/>
                     <span class="ccheng">9.9</span>元
                 </p>
                 <div class="f12 mt5">7788人好评</div>
                 <div class="btn_cheng">加入购物车</div>
             </li>
             <li>
-            	<div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
+                <div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
                 <p>
-                	<span>富春硅谷gdf</span><br/>
+                    <span>富春硅谷gdf</span><br/>
                     <span class="ccheng">9.9</span>元
                 </p>
                 <div class="f12 mt5">7788人好评</div>
                 <div class="btn_cheng">加入购物车</div>
             </li>
             <li>
-            	<div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
+                <div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
                 <p>
-                	<span>富春硅谷gdf</span><br/>
+                    <span>富春硅谷gdf</span><br/>
                     <span class="ccheng">9.9</span>元
                 </p>
                 <div class="f12 mt5">7788人好评</div>
                 <div class="btn_cheng">加入购物车</div>
             </li>
             <li>
-            	<div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
+                <div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
                 <p>
-                	<span>富春硅谷gdf</span><br/>
+                    <span>富春硅谷gdf</span><br/>
+                    <span class="ccheng">9.9</span>元
+                </p>
+                <div class="f12 mt5">7788人好评</div>
+                <div class="btn_cheng">加入购物车</div>
+            </li>
+            <li>
+                <div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
+                <p>
+                    <span>富春硅谷</span><br/>
+                    <span class="ccheng">100.9</span>元
+                </p>
+                <div class="f12 mt5">7788人好评</div>
+                <div class="btn_cheng">加入购物车</div>
+            </li>
+            <li>
+                <div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
+                <p>
+                    <span>富春硅谷gdf</span><br/>
+                    <span class="ccheng">9.9</span>元
+                </p>
+                <div class="f12 mt5">7788人好评</div>
+                <div class="btn_cheng">加入购物车</div>
+            </li>
+            <li>
+                <div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
+                <p>
+                    <span>富春硅谷gdf</span><br/>
+                    <span class="ccheng">9.9</span>元
+                </p>
+                <div class="f12 mt5">7788人好评</div>
+                <div class="btn_cheng">加入购物车</div>
+            </li>
+            <li>
+                <div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
+                <p>
+                    <span>富春硅谷gdf</span><br/>
+                    <span class="ccheng">9.9</span>元
+                </p>
+                <div class="f12 mt5">7788人好评</div>
+                <div class="btn_cheng">加入购物车</div>
+            </li>
+            <li>
+                <div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
+                <p>
+                    <span>富春硅谷gdf</span><br/>
                     <span class="ccheng">9.9</span>元
                 </p>
                 <div class="f12 mt5">7788人好评</div>
                 <div class="btn_cheng">加入购物车</div>
             </li>
         </ul>
+        <div class="lb-circle"> 
+           <!--  <span class="current"></span>
+           <span></span> -->
+        </div>
     </div>
     <div class="tc mt50"><img src="../styles/images/cg30/footbar.png"/></div>
 <!--w1200 end-->
@@ -164,7 +229,38 @@
 			var idx=$(this).index();
 			$(".b2floor").eq(idx).toggleClass("hide");
 		});
-	});
+        //轮播图
+        var htm="<span></span>";
+        var l=$(".like_box .like_ul li").size() /5;
+        for(var i=0;i<l;i++){
+            $(".lb-circle").append(htm);
+        } 
+        $(".lb-circle span:eq(0)").addClass("current");
+        var timer=setInterval("lb()",5000); 
+        $(".like_ul li").hover(function(){
+            clearInterval(timer);
+        },function(){
+             timer=setInterval("lb()",5000); 
+        });
+        $(document).on("click",".lb-circle span",function(){
+            clearInterval(timer);
+            $(this).addClass("current").siblings().removeClass("current");
+            lb();
+            timer=setInterval("lb()",5000); 
+        })
+    });
+    var len=0;
+    function lb(){
+        len++;
+        var l=$(".like_box .like_ul li").size() /5;
+        if(len>l-1){ 
+            len=0;
+        }
+        var m=-len*1200 +"px";
+        $(".lb-circle span").removeClass("current");
+        $(".lb-circle span").eq(len).addClass("current");
+        $(".like_box .like_ul").animate({left:m},1000);
+    }
 </script>
 </body>
 </html>

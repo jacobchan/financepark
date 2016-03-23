@@ -109,7 +109,7 @@
         <div class="pay-js-btn clearfix">
             <a href="javascript:;" class="fl ml30 c3 del-check">删除选中的商品</a>
             <div class="fr">
-                <span class="mr30 f14">已选择了2件商品</span>
+                <span class="mr30 f14">已选择了<span id="all-num">0</span>件商品</span>
                 <span class="mr30 f16">总价：<em class="ccheng">¥50.00</em></span>
                 <a href="" class="btn_cc1 fr">去结算</a>
             </div>
@@ -232,20 +232,7 @@
 <script type="text/javascript" src="../scripts/page/cg30com.js"></script>
 <script>
 	$(function(){
-		$(".b1").hover(function(){
-			$(".b1mask").toggleClass("hide");
-		});
-		$(".b2").hover(function(){
-			$(".b2mask").toggleClass("hide");
-		});
-		$(".b1 li").hover(function(){
-			var idx=$(this).index();
-			$(".b1floor").eq(idx).toggleClass("hide");
-		});
-		$(".b2 li").hover(function(){
-			var idx=$(this).index();
-			$(".b2floor").eq(idx).toggleClass("hide");
-		});
+        //减1
         $(".space-num .num-reduce").click(function(){
             var n=parseInt($(this).next("input").val());
             if(n>0){
@@ -254,6 +241,7 @@
                 alert("已经是0了")
             }
         })
+        //加1
         $(".space-num .num-plus").click(function(){
             var n=parseInt($(this).prev("input").val()) ;
             if(n<6 && n>-1){
@@ -262,13 +250,20 @@
                 alert("最大值了")
             }
         });
+
+        //全选
         $('input[name="all-check"]').click(function(){
             if($(this).prop("checked")){
                 $(this).parents(".cg-pay-table").find('input[name="single-check"]').prop("checked","checked");
+                var l=$(this).parents(".cg-pay-table").find('input[name="single-check"]').length;
+                $("#all-num").text(l);
             }else{
-                 $(this).parents(".cg-pay-table").find('input[name="single-check"]').prop("checked","");
+                $(this).parents(".cg-pay-table").find('input[name="single-check"]').prop("checked","");
+                $("#all-num").text(0);
             }
+            
         });
+        //反选
         $('input[name="single-check"]').click(function(){
             var i=0;
             $('input[name="single-check"]').each(function(){
@@ -278,22 +273,29 @@
                  i;
                 }
             })
+            $("#all-num").text(i);
             if(i== $('input[name="single-check"]').length){
                 $(this).parents(".cg-pay-table").find('input[name="all-check"]').prop("checked","checked");
              }else{
                 $(this).parents(".cg-pay-table").find('input[name="all-check"]').prop("checked","");
             }
         });
+
+        //删除这一排
         $(".a-del").click(function(){
             $(this).parents("tr").remove();
         });
+
+        //删除所选
         $(".del-check").click(function(){
             $('input[name="single-check"]').each(function(){
                 if($(this).prop("checked")){
                     $(this).parents("tr").remove();
                 }
             })
-        })
+        });
+
+        //轮播图
         var htm="<span></span>";
         var l=$(".like_box .like_ul li").size() /5;
         for(var i=0;i<l;i++){
@@ -301,11 +303,16 @@
         } 
         $(".lb-circle span:eq(0)").addClass("current");
         var timer=setInterval("lb()",5000); 
-
         $(".like_ul li").hover(function(){
             clearInterval(timer);
         },function(){
              timer=setInterval("lb()",5000); 
+        });
+        $(document).on("click",".lb-circle span",function(){
+            clearInterval(timer);
+            $(this).addClass("current").siblings().removeClass("current");
+            lb();
+            timer=setInterval("lb()",5000); 
         })
 	});
     var len=0;
