@@ -151,7 +151,7 @@ $(function(){
 		function _parseRecords(record){//record为楼栋的list
 				for(var i=0;i<record.length;i++){
 					var obj = record[i] ;
-					var html = "<li id="+obj.buildingId+"><a class='b' href='#'>"+obj.buildingNo+"</a><ul class='subul'></ul></li>"
+					var html = "<li id="+obj.buildingId+"><a class='b' href='#'>"+obj.buildingName+"</a><ul class='subul'></ul></li>"
 					$(".oh.fl.zzul").append(html);
 				}
 		} 
