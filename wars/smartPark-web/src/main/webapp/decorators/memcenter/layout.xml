@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+	<!-- 可选主题 -->
+	<panel id="header" jsp="header.jsp"></panel>
+	<panel id="left" jsp="left.jsp"></panel>
+	<panel id="content"></panel>
+	
+	<panel id="footer" jsp="footer.jsp"></panel>
+	
+</layout>
