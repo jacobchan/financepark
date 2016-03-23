@@ -8,12 +8,11 @@
         
         
 	<youi:func name="subpage_init" params="result">
-alert(result.html);
 	        var startDocument = "Paper";
 	        $('#documentViewer').FlexPaperViewer(
 	                { config : {
 
-	                    SWFFile :result.html,
+	                    SWFFile :portalFilestore+result.html,
 	                    Scale : 1,//缩放比例
 	                    ZoomTransition : 'easeOut',    //Flexpaper中缩放样式，它使用和Tweener一样的样式，默认参数值为easeOut.其他可选值包括: easenone, easeout, linear, easeoutquad
 	                    ZoomTime : 0.5,                //从一个缩放比例变为另外一个缩放比例需要花费的时间，该参数值应该为0或更大。
