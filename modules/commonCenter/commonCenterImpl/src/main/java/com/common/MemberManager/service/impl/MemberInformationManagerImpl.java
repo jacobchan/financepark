@@ -393,7 +393,7 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	@EsbServiceMapping
 	public MemberInformation userLogin(MemberInformation memberInformation) throws BusException{
 		
-		MemberInformation member = this.memberInformationDao.getObjectByUniqueProperty("memberName", memberInformation.getMemberPhoneNumber());
+		MemberInformation member = this.memberInformationDao.getObjectByUniqueProperty("memberPhoneNumber", memberInformation.getMemberPhoneNumber());
 		if(member == null){
 			throw new BusException("999999", "改用户不存在！");
 		}
