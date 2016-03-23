@@ -60,7 +60,7 @@ window.FlexPaperViewerEmbedding = window.$f = function(id, args) {
     window[instance] = flashembed(id, {
         src						    : _jsDirectory+"FlexPaperViewer.swf",
         version					    : [10, 0],
-        expressInstall			    : "js/expressinstall.swf",
+        expressInstall			    : "scripts/js/expressinstall.swf",
         wmode					    : _WMode
     },{
         ElementId               : id,
