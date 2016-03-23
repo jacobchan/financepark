@@ -9,6 +9,7 @@
 	</head>
 	<body class="page-header-fixed" style=" background-image:none">
 		<%@ include file="/WEB-INF/pages/enterpriseCenter/common/ec_head.jsp"%>
+		<%@ include file="/WEB-INF/pages/enterpriseCenter/common/ec_left.jsp"%>
 		<div id="youi_page_header" class="youi-page-header clearfix"></div>
 		<div class="main">    
 		    <div id="youi_page_left" class="fl clearfix"></div>
@@ -99,36 +100,36 @@
 	                            <li>
 	                                <div style="position:relative">
 	                                    <div class="overlay"></div>
-	                                    <img src="images/photo_list1.png">                                        
+	                                    <img src="<%=request.getContextPath()%>/styles/images/qiye/photo_list1.png">                                        
 	                                </div>
 	                            </li>
 	                            <li>
 	                                <div style="position:relative">
 	                                    <div class="overlay"></div>
-	                                    <img src="images/photo_list1.png">                                        
+	                                    <img src="<%=request.getContextPath()%>/styles/images/qiye/photo_list1.png">                                        
 	                                </div>
 	                            </li>
 	                            <li>
 	                                <div style="position:relative">
 	                                    <div class="overlay"></div>
-	                                    <img src="images/photo_list1.png">                                        
+	                                    <img src="<%=request.getContextPath()%>/styles/images/qiye/photo_list1.png">                                        
 	                                </div>
 	                            </li>
 	                            <li>
 	                                <div style="position:relative">
 	                                    <div class="overlay"></div>
-	                                    <img src="images/photo_list1.png">                                        
+	                                    <img src="<%=request.getContextPath()%>/styles/images/qiye/photo_list1.png">                                        
 	                                </div>
 	                            </li>
 	                            <li>
 	                                <div style="position:relative">
 	                                    <div class="overlay"></div>
-	                                    <img src="images/photo_list1.png">                                        
+	                                    <img src="<%=request.getContextPath()%>/styles/images/qiye/photo_list1.png">                                        
 	                                </div>
 	                            </li>
 	                            <li>
 	                                <div style="position:relative">
-	                                    <img src="images/add.png">
+	                                    <img src="<%=request.getContextPath()%>/styles/images/qiye/add.png">
 	                                    <div class="upload_pic"><input type="file"></div>
 	                                </div>
 	                            </li>
