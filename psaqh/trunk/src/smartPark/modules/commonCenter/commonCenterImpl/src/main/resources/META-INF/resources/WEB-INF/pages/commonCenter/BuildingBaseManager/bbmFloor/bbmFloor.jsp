@@ -10,12 +10,12 @@
 			<youi:fieldText property="floorCaption"  caption="楼层说明" operator="LIKE"/>
 			<youi:fieldSelect property="bbmPark.parkId" caption="所属园区" code="parkId" show="parkName"
 				src="esb/web/bbmParkManager/getBbmParks.json"/>
-			<youi:fieldSelect property="bbmBuilding.buildingId" caption="所属楼栋" code="buildingId" show="buildingNo"
+			<youi:fieldSelect property="bbmBuilding.buildingId" caption="所属楼栋" code="buildingId" show="buildingName"
 				src="esb/web/bbmBuildingManager/getBbmBuildings.json" />
 		</youi:fieldLayout>
 		<youi:gridCol property="floorNo"  caption="楼层编号" width="100" align="center"/>
 		<youi:gridCol property="bbmPark.parkName" caption="所属园区" width="100" align="center"/>
-		<youi:gridCol property="bbmBuilding.buildingNo" caption="所属楼栋" width="100" align="center"/>
+		<youi:gridCol property="bbmBuilding.buildingName" caption="所属楼栋" width="100" align="center"/>
 		<youi:gridCol property="floorRoomCount"  caption="楼层单元数量" width="100" align="center"/>
 		<youi:gridCol property="floorCaption"  caption="楼层说明" width="150" align="center"/>
 		<youi:gridCol property="floorImage"  caption="楼层布局图片" width="150" align="center"/>
@@ -31,7 +31,7 @@
 		<youi:fieldLayout prefix="record" columns="2" labelWidths="110,110">
 			<youi:fieldHidden property="floorId"  caption="楼层ID"/>
 			<youi:fieldText property="floorNo"  caption="楼层编号" notNull="true"/>
-			<youi:fieldSelect property="bbmBuilding.buildingId" caption="所属楼栋" code="buildingId" show="buildingNo"
+			<youi:fieldSelect property="bbmBuilding.buildingId" caption="所属楼栋" code="buildingId" show="buildingName"
 				src="esb/web/bbmBuildingManager/getBbmBuildings.json" notNull="true"/>
 			<youi:fieldText property="parkName" caption="所属园区"  readonly="true"/>
 			<youi:fieldText property="floorRoomCount"  caption="楼层单元数量"/>
