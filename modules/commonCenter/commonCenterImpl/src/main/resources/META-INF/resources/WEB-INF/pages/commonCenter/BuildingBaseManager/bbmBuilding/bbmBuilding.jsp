@@ -13,6 +13,7 @@
 				src="esb/web/bbmParkManager/getBbmParks.json"/>
 		</youi:fieldLayout>
 		<youi:gridCol property="buildingNo" caption="楼栋编号" width="80" align="center"/>
+		<youi:gridCol property="buildingName" caption="楼栋名称" width="120" align="center"/>
 		<youi:gridCol property="attributeFloorCount"  caption="楼栋层数" width="80" align="center"/>
 		<youi:gridCol property="buildingUnitCount"  caption="楼栋单元数" width="80" align="center"/>
 		<youi:gridCol property="buildingType"  caption="楼栋类别" width="100"  convert="buildingType" align="center"/>
@@ -34,6 +35,7 @@
 			<youi:fieldHidden property="createTime"  caption="创建时间"/>
 			<youi:fieldHidden property="updateTime"  caption="更新时间"/>
 			<youi:fieldText property="buildingNo"  caption="楼栋编号" notNull="true"/>
+			<youi:fieldText property="buildingName"  caption="楼栋名称" notNull="true"/>
 			<youi:fieldText property="attributeFloorCount"  caption="楼宇层数" notNull="true"/>
 			<youi:fieldText property="buildingUnitCount"  caption="楼宇单元数" notNull="true"/>
 			<youi:fieldSelect property="bbmPark.parkId" caption="所属园区" code="parkId" show="parkName"
