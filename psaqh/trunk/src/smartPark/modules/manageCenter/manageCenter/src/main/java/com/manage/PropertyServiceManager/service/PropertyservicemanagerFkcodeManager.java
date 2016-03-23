@@ -13,6 +13,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode;
 
 public interface PropertyservicemanagerFkcodeManager extends BaseManager{
@@ -90,5 +91,12 @@ public interface PropertyservicemanagerFkcodeManager extends BaseManager{
 	 * @return
 	 * @throws BusException
 	 */
-	public PropertyservicemanagerFkcode getFkcodeforpage(String fkcodeId) throws BusException; 
+	public PropertyservicemanagerFkcode getFkcodeforpage(String fkcodeId) throws BusException;
+	/**
+	 * 根据订单号模糊查询
+	 * @param fkCode订单号
+	 * @return userId当前用户id
+	 * @throws BusException
+	 */
+    public List<PropertyservicemanagerFkcode> getFkcodelistLikeFkcodeCode(String userId,String fkCode) throws BusException;
 }
