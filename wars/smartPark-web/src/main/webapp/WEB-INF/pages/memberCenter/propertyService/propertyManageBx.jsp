@@ -20,7 +20,7 @@
 							<label class="fl mr20 f16">申请时间：</label>
 							<input class="bd-input fl" type="text"><span class="fl ml15 mr15">到</span>
 							<input class="bd-input fl" type="text">
-							<div class="inp-box ml20"><input placeholder="订单号查询" type="text"><a class="fa fa-search" href=""></a></div>
+							<div class="inp-box ml20"><input placeholder="订单号查询" type="text" id="bxCode"><a class="fa fa-search" href=""></a></div>
 							<input value="搜索" class="hhf-submit f14 fr" type="button">
 						</div>
 						<table class="gt-table mt20">
@@ -176,7 +176,7 @@
 				}else if(record[i].bxStatus=='08'){
 					bxStatus='未受理';
 				}
-				var html="<tr id='"+record[i].bxId+"'>"+
+				var html="<tr id='"+record[i].bxId+"' class="aaa">"+
 						"<td><a href=''>"+record[i].bxCode+"</a></td>"+
 						"<td>"+record[i].createTime+"</td>"+
 						"<td>"+bxStatus+"</td>"+
@@ -225,6 +225,25 @@
 				});
 			});
 		});
+	//根据名字查询
+	$('.hhf-submit').click(function(){					
+		$(".aaa").empty();
+		 var employeesName=$("#bxCode").val(); 
+	      $.ajax({
+	    	 url:baseUrl+'/propertyservicemanagerBxManager/getEnterprisemaillistLikeBxCode.json',
+	    	 data:'bxCode='+bxCode,
+	    	 success:function(result){					
+					console.log(result.records);           
+					if(result&&result.records){			
+
+	
+						_parseRecords(result.records);		
+
+			
+					}
+				}
+		}); 
+	}); 
 	</script>
 	
 </body>
