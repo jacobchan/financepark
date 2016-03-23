@@ -330,7 +330,7 @@
 			var html='';
 			for(var i=0;i<record.length;i++){
 				html+="<li>"+
-							"<a href='javascript:;' onclick='redirectPagePDF(this)'; id='"+record[i].activityApply.applyId+"' >"+
+							"<a href='javascript:;' onclick='redirectPagePDF(this)'; id='"+record[i].documentId+"' >"+
 								"<div class='in-photo'>"+
 									"<img src='../styles/images/zs/nav-img1.png' border='0' width='115' height='71'>"+
 								"</div>"+
@@ -345,8 +345,8 @@
 		}
 		//文档跳转页面
 		function redirectPagePDF(obj){
-			var applyId=obj.id;
-			var url="../czh/czh7.html"+"?"+"applyId="+applyId; 
+			var documentId=obj.id;
+			var url="../czh/czh7.html"+"?"+"documentId="+documentId; 
 			window.location.assign(url); 
 		}
 	</script>
