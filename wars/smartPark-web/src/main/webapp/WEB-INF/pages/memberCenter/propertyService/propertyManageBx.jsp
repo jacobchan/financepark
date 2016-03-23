@@ -176,7 +176,7 @@
 				}else if(record[i].bxStatus=='08'){
 					bxStatus='未受理';
 				}
-				var html="<tr id='"+record[i].bxId+"' class="aaa">"+
+				var html="<tr id='"+record[i].bxId+"' class='aaa'>"+
 						"<td><a href=''>"+record[i].bxCode+"</a></td>"+
 						"<td>"+record[i].createTime+"</td>"+
 						"<td>"+bxStatus+"</td>"+
@@ -225,7 +225,7 @@
 				});
 			});
 		});
-	//根据名字查询
+	//根据订单号查询
 	$('.hhf-submit').click(function(){					
 		$(".aaa").empty();
 		 var employeesName=$("#bxCode").val(); 
