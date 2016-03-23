@@ -21,11 +21,11 @@
 	                <li>
 	                    <a id="more">企业资料 <span class="down-icon"><img src="<%=request.getContextPath()%>/styles/images/qiye/angle-down.png"></span></a>
 	                    <ul class="sidebar-menu-mainul2" id="more1">
-	                        <li class="active"><a href="/enterprise/info.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_xinxi.png"></span>企业信息</a></li>
-	                        <li><a href="/enterprise/financing.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_rongzi.png"></span>融资信息</a></li>
-	                        <li><a href="/enterprise/knowledge.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_zuanli.png"></span>专利/知识产权</a></li>
-	                        <li><a href="/enterprise/legal.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_chuangshi.png"></span>企业创始人</a></li>
-	                        <li><a href="/enterprise/media.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_baodao.png"></span>媒体报道</a></li>
+	                        <li class="active"><a href="<%=request.getContextPath()%>/enterprise/info.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_xinxi.png"></span>企业信息</a></li>
+	                        <li><a href="<%=request.getContextPath()%>/enterprise/financing.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_rongzi.png"></span>融资信息</a></li>
+	                        <li><a href="<%=request.getContextPath()%>/enterprise/knowledge.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_zuanli.png"></span>专利/知识产权</a></li>
+	                        <li><a href="<%=request.getContextPath()%>/enterprise/legal.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_chuangshi.png"></span>企业创始人</a></li>
+	                        <li><a href="<%=request.getContextPath()%>/enterprise/media.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_baodao.png"></span>媒体报道</a></li>
 	                    </ul>
 	                </li>
 	            	<li><a href="qytx.html">企业通讯录管理</a></li>
