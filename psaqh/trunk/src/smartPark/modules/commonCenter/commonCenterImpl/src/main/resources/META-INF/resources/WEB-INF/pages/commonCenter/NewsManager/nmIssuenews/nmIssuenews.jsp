@@ -27,7 +27,10 @@
 		<youi:gridCol property="policyStatus"  caption="政策发布状态" width="100" align="center" convert="policyStatus"/>
 		<youi:gridCol property="policyIssueDate"  caption="政策发布时间" width="100" align="center"/>
 		<youi:gridCol property="policyContent"  caption="政策内容" width="150" align="center"/>
-		
+		<youi:gridCol property="browseCount"  caption="浏览次数" width="100" align="center"/>
+		<youi:gridCol property="dingCount"  caption="顶的次数" width="100" align="center"/>
+		<youi:gridCol property="caiCount"  caption="踩的次数" width="100" align="center"/>
+		<youi:gridCol property="imageUrl"  caption="图片url" width="150" align="center"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -39,6 +42,9 @@
 			action="esb/web/nmIssuenewsManager/saveNmIssuenews.json">
 		<youi:fieldLayout prefix="record" columns="2" labelWidths="120,120">
 			<youi:fieldHidden property="policyId"  caption="政策ID"/>
+			<youi:fieldHidden property="browseCount"  caption="浏览次数"/>
+			<youi:fieldHidden property="dingCount"  caption="顶的次数"/>
+			<youi:fieldHidden property="caiCount"  caption="踩的次数"/>
 			<youi:fieldText property="policyCaption"  caption="政策名称"  notNull="true"/>
 			<%-- <youi:fieldSelect property="policyType.issueTypeId" caption="发布类型" notNull="true"
 				src="esb/web/nmIssuetypeManager/getNmIssuetypes.json" code="issueTypeId" show="issueTypeCaption"/> --%>
@@ -49,6 +55,7 @@
 			<youi:fieldText property="policyCome"  caption="政策发布人" notNull="true"/>
 			<youi:fieldCalendar property="policyIssueDate"  caption="政策发布时间" notNull="true"/>
 			<youi:fieldArea property="policyContent"  caption="政策内容" column="2" rows="4" notNull="true"/>
+			<youi:fieldText property="imageUrl"  caption="图片URL" column="2" />
 		</youi:fieldLayout>
 	</youi:form>
 	
