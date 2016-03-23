@@ -1,4 +1,5 @@
 package com.manage.PropertyServiceManager.service.impl;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -14,10 +15,12 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
 import com.gsoft.utils.HttpSenderMsg;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerCosDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerCosManager;
@@ -165,4 +168,16 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
 		   throw new BusException("未查询到投诉记录，如有疑问请与客服人员联系");
 	   } 
    }
+//通过订单号获取当前用户的报修单  模糊查询
+	@EsbServiceMapping
+	 public List<PropertyservicemanagerCos> getCoslistLikeCosCode(
+			 @ServiceParam(name="userId",pubProperty="userId") String userId,
+			@ServiceParam(name="cosCode") String cosCode) throws BusException {						 
+		Collection<Condition> condition = new ArrayList<Condition>();
+		condition.add(ConditionUtils.getCondition("cosCode", Condition.LIKE, cosCode));	
+		condition.add(ConditionUtils.getCondition("memberInformation.memberId", Condition.LIKE, userId));	
+		List<PropertyservicemanagerCos> list =propertyservicemanagerCosDao.commonQuery(condition, null);
+		return list;
+				
+	}
 }
