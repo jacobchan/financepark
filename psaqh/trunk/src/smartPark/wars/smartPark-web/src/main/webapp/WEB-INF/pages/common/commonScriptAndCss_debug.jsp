@@ -43,8 +43,8 @@
 <youi:script src="/scripts/3.0/youi/youi.flow.js"/>
 <youi:script src="/scripts/3.0/youi/youi.xmenu.js"/>
 <youi:script src="/scripts/3.0/youi/youi.palette.js"/>
-<youi:script src="/scripts/3.0/youi/youi.dbdesigner.js"/>
-<youi:script src="/scripts/3.0/youi/youi.cubeDesigner.js"/>
+<%-- <youi:script src="/scripts/3.0/youi/youi.dbdesigner.js"/>
+<youi:script src="/scripts/3.0/youi/youi.cubeDesigner.js"/> --%>
 
 <youi:script src="/scripts/3.0/youi/field/field.core.js"/>
 <youi:script src="/scripts/3.0/youi/field/field.layout.js"/>
@@ -70,7 +70,7 @@
 <youi:script src="/scripts/3.0/youi/field/field.spinner.js"/>
 <youi:script src="/scripts/3.0/youi/field/field.list.js"/>
 <youi:script src="/scripts/js/flexpaper.js"/>
-<youi:script src="/scripts/js/FlexPaperViewer.swf"/>
+<youi:script src="/scripts/lib/properties.js"/>
 
 <youi:style href="/styles/css/upload.css"/>
 <youi:style href="/styles/3.0/bootstrap.css"/>
