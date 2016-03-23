@@ -539,7 +539,8 @@ $(function(){
 						$('#merchantLinkmanPhone').html(results.records[i].purchasingmanagerMerchant.merchantLinkmanPhone);
 						$('#merchantAbout').html(results.records[i].purchasingmanagerMerchant.merchantAbout);
 						$('#merchantUrl').html(results.records[i].purchasingmanagerMerchant.merchantUrl);
-						$('#merchantLogo').attr("src","../filestore/"+results.records[i].purchasingmanagerMerchant.merchantLogo);
+						var image = cenUrl+"common/uploadImage.html?repository=/swfupload&path="+results.records[i].purchasingmanagerMerchant.merchantLogo+"&method=show";
+						$('#merchantLogo').attr("src",image);
 					}
                 
 					htmls.push('<li class="com'+(i+1)+(i+1)+'"><div class="bgfff"><span class="cc">&yen;'+results.records[i].commodityPrice+'/次</span><div class="clearfix">'+

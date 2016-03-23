@@ -905,7 +905,8 @@ $(function(){
 						$('#merchantLinkmanPhone').html(results.records[i].purchasingmanagerMerchant.merchantLinkmanPhone);
 						$('#merchantAbout').html(results.records[i].purchasingmanagerMerchant.merchantAbout);
 						$('#merchantUrl').html(results.records[i].purchasingmanagerMerchant.merchantUrl);
-						$('#merchantLogo').attr("src","../filestore/"+results.records[i].purchasingmanagerMerchant.merchantLogo);
+						var image = cenUrl+"common/uploadImage.html?repository=/swfupload&path="+results.records[i].purchasingmanagerMerchant.merchantLogo+"&method=show";
+						$('#merchantLogo').attr("src",image);
 					}
                 
 					htmls.push('<li><div><div class="border pa_c1 tc"><span class="f20">'+results.records[i].commodityTitle+'</span>'+
