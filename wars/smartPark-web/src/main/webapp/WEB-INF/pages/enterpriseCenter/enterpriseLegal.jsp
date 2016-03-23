@@ -7,11 +7,29 @@
 		<title>企業融资</title>
 		<%@ include file="/WEB-INF/pages/common/enterpriseScriptAddCss.jsp"%>
 		<script type="text/javascript">
-			/*获取浏览器的高度*/
-			window.onload=function(){
+			// 中文字符判断
+			function getStrLength(str) { 
+				var len = str.length; 
+			    var reLen = 0; 
+			    for (var i = 0; i < len; i++) {        
+			        if (str.charCodeAt(i) < 27 || str.charCodeAt(i) > 126) { 
+			            // 全角    
+			            reLen += 2; 
+			        } else { 
+			            reLen++; 
+			        } 
+			    } 
+			    return reLen;    
+			}
+			$(document).ready(function() {
+				$("#legalRemark").on('keyup', function() {
+				    var len = getStrLength(this.value);
+				    $("#currentCount").html(len);
+				});
+				
 				var height = Math.max((document.documentElement.clientHeight -135), ($(".main-wrapper").height()));
 			  	document.getElementById('main-wrapper-right').style.height=height+'px';
-			}
+			});
 		</script>
 	</head>
 	<body class="page-header-fixed" style=" background-image:none">
@@ -33,17 +51,25 @@
 		            <div class="csr_xinxi clearfix">
 		                <div class="qiye_fullname clearfix">
 		                    <div class="qiye_nametex">姓名</div>
-		                    <div class="name_input"><input type="text"></div>
+		                    <div class="name_input"><input id="legalName" name="legalName" type="text"></div>
 		                </div>
 		                <div class="born_time clearfix">
 		                    <div class="born_date">出生日期</div>
-		                    <div class="born_input"><input type="text"></div>
+		                    <div class="born_input"><input id="legalBirthday" name="legalBirthday" type="text"></div>
+		                </div>
+		                <div class="born_time clearfix">
+		                    <div class="born_date">手机号码</div>
+		                    <div class="born_input"><input id="legalTelephone" name="legalTelephone" type="text"></div>
+		                </div>
+		                <div class="born_time clearfix">
+		                    <div class="born_date">职位</div>
+		                    <div class="born_input"><input id="legalBusiness" name="legalBusiness" type="text"></div>
 		                </div>
 		                <div class="qiye_jianjie clearfix">
 		                    <div class="qiye_word">专利描述</div>
 		                    <div class="word_input">
-		                        <textarea></textarea>
-		                        <div class="font_xianzhi">字数限制：0/200</div>
+		                        <textarea id="legalRemark" name="legalRemark"></textarea>
+		                        <div class="font_xianzhi">字数限制：<span id="currentCount" style="color:red;">0</span>/256</div>
 		                    </div>
 		                </div>
 		                <div class="meiti_save_btn"><input type="submit" value="保存" class="hhf-submit" style="height:40px;" /></div>
