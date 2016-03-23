@@ -1,0 +1,60 @@
+@charset "utf-8";
+/* CSS 招商中心 PC端发布页样式*/
+.ccheng{color:#FF6715}.a_left,.a_right{width:40px;height:65px;cursor:pointer;position:absolute;margin-top:-32px;top:50%; opacity:0.7}
+.pn_btn{width: 42px;height: 64px;margin-top: 35px;}
+#prev_btn1{border-radius: 0px 10px 10px 0px;left: 10px;}
+#next_btn1{border-radius: 10px 0px 0px 10px;right: 13px;}
+.a_left:hover{background: rgba(255,255,255,0.6);}
+.a_right{background:rgba(255,255,255,0.2);right:0}
+.czh-box.active{border-color:#FF6715}.czh-box.active h4{color:#FF6715}
+.ac_box{border-bottom:1px #EFEEEE solid;}
+.ac_box a{padding:0 20px 0 0;color:#868686;font-size: 12px;}
+.ac_box .active{color:#FF6715; text-decoration:underline;font-size: 14px;}
+.img_list li{padding:20px;display:inline-block;float:left; text-align:center}
+.czh-knowledge{width: 100%;}
+.a-c-fill{background: #ff6715;color: #fff !important;transition: all 0.4s linear 0s;}
+.a-c-fill:hover{background: #FF5900 !important;}
+.reply_btn:hover{background: #B8B8B8;color: #fff;transition: all 0.4s linear 0s;}
+.gr-czh-box{width: 204px;float: left;margin:10px;border:1px solid #fff;cursor: pointer;}
+.gr-czh-box img{width: 100%;po}
+.gr-czh-box:hover,.gr-czh-box.active{border:1px solid #FF6715;color: #FF6715;}
+.gr-czh-box:hover a,.gr-czh-box.active a{color: #FF6715;}
+.gr-czh-box p{font-size: 14px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;line-height: 40px;margin-left: 5px;}
+.gr-czh-box a{color: #333;}
+.gr-czh-box a:hover{color: #FF6715;text-decoration: underline;}
+.gr-ck-group{width: 1000%;position: relative;left: 0px;}
+.oh{overflow: hidden;}
+.dialog-show{display: none;}
+.dialog-close{right:10px;top:8px;width:11px;height:11px;}
+.dialog-box{float:left;margin-left: 50px;width:685px;min-height:59px; }
+
+/*活动评论*/
+.comment,.reply{padding:15px;position:relative;border:1px #F0EFEF solid}
+.com_info{width:505px;}.cc{color:#8d8d8d}
+.com_btn{padding:3px 20px; display:inline-block;position: absolute;right: 0px;top: 50%;margin-top: -15px;}
+.com_close{position:absolute;top:2px;right:5px}
+.reply_info{border:1px #FF8544 solid;padding:5px;height:60px;width:100%;resize:none;font-size: 12px;}
+.reply_btn{padding:3px 20px; display:inline-block;border:1px #b8b8b8 solid;color:#b8b8b8}
+.new{color:#fff;background:#FF823E;padding:5px;display:inline-block;position:absolute;right:0;top:0}
+
+.place-table{width: 100%;border:1px solid #efecec;font-size: 16px;text-align: center;}
+.place-table tr td{border-bottom:1px solid #efecec;line-height: 30px;padding: 10px 0px;}
+
+
+.fb-activity{border-left: 1px solid #efeeee;}
+.fb-activity ul li{padding: 10px 50px;line-height: 20px;font-size: 14px;float: left;background: #f4f4f4;border:1px solid #efeeee;border-left: none;}
+.fb-activity ul li.active{background: #fff;border-bottom: 1px solid #fff;color: #ff6715;}
+
+.fb-list-box{border:1px solid #efecec;margin-top: -1px;padding-top: 20px;min-height: 800px;}
+.fb-list-box table th{padding:15px 0px 15px 30px;line-height: 30px;vertical-align: top;}
+.fb-list-box table td{padding: 15px 0px;}
+.fb-list-box table td input[type="text"]{border:1px solid #efecec;line-height: 20px;height: 30px;padding: 0px 10px;width: 300px;}
+
+.flb-table td{border-bottom: 1px solid #efecec;padding: 15px 0px;}
+
+a.c-333:hover{text-decoration: underline;}
+.gr-czh-list{width: 204px;float: left;margin:10px 0px 10px 15px;border: 1px solid #efecec;cursor: pointer;transition: all .4s linear;-moz-transition: width  all .4s;-webkit-transition:  all .4s;-o-transition: all .4s linear;}
+.gr-czh-list:hover{border:1px solid #ff6715;}
+.gr-czh-list h3{font-size: 14px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;line-height: 34px;margin-left: 5px;}
+.gr-czh-list a.c-b1:hover{color: #FF6715;text-decoration: underline;}
+
