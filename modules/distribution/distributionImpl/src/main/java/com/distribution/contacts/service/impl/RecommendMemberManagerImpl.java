@@ -7,7 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Collection;
+import java.util.Random;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.distribution.contacts.entity.RecommendMember;
 import com.distribution.contacts.dao.RecommendMemberDao;
@@ -66,6 +69,18 @@ public class RecommendMemberManagerImpl extends BaseManagerImpl implements Recom
      */
     @EsbServiceMapping(pubConditions = {@PubCondition(property = "memberId", pubProperty = "userId")})
     public RecommendMember saveRecommendMember(RecommendMember o) throws BusException{
+    	//生成推荐码10位数推荐码
+		int CODE_NUM = 10;
+		char[] charSequence = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();  
+		StringBuilder sRand = new StringBuilder(CODE_NUM);   
+		Random random = new Random();
+        for (int i = 0; i < CODE_NUM; i++) {    
+            // 取得一个随机字符    
+            int index = random.nextInt(charSequence.length);  
+            String tmp = String.valueOf(charSequence[index]);  
+            sRand.append(tmp);  
+        }
+        o.setRecCode(sRand.toString());
     	return recommendMemberDao.save(o);
     }
 
