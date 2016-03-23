@@ -21,9 +21,9 @@
 					<div class="mt20 gr-txl clearfix lh30">
 						<span class="f16">深圳市前海怕啥科技有限公司</span>
 						<div class="fr">
-							<input type="text" class="bd-input">
+							<input type="text" class="bd-input" id="employeesName">
 							<input value="查询" class="hhf-submit" type="button" style="padding:0px 20px;height:30px;">
-							<input value="全部" class="hhf-submit" type="button" style="padding:0px 20px;height:30px;">
+							<input value="全部" class="hhff-submit" type="button" style="padding:0px 20px;height:30px;">
 						</div>
 					</div>
 					<table class="gt-table mt20">
@@ -60,7 +60,7 @@
 	<script type="text/javascript">
 	
 	
-		$(function(){
+		/* $(function(){
 			$.ajax({
 			  url:baseUrl+'/enterpriseEmployeesManager/getEnterprisemaillist.json',
 		
@@ -71,12 +71,12 @@
 					}
 				}
 			});
-		});
+		}); */
 		
 		//拼接卡号列表
 		function _parseRecords(record){		
 	 		for(var i=0;i<record.length;i++){																									
-					var html= "<tr>"+
+					var html= "<tr class='aaa'>"+
 				      "<td >"+record[i].employeesName+"</td>"+
 				      "<td >"+record[i].employeesTelephone+"</td>"+
 				      "<td >"+record[i].member.memberDescribe2+"</td>"+
@@ -85,7 +85,46 @@
 			          $(".gt-table").append(html);					  								 				
 			}
 		};
+		//根据名字查询
+		$('.hhf-submit').click(function(){					
+			$(".aaa").empty();
+			 var employeesName=$("#employeesName").val(); 
+		      $.ajax({
+		    	 url:baseUrl
+
++'/enterpriseEmployeesManager/getEnterprisemaillistByName.json',
+		    	 data:'employeesName='+employeesName,
+		    	 success:function(result){					
+						console.log(result.records);           
+						if(result&&result.records){			
+
 		
+							_parseRecords(result.records);		
+
+				
+						}
+					}
+			}); 
+		}); 
+		//查询全部
+		$('.hhff-submit').click(function(){					
+			$(".aaa").empty();
+			 
+		      $.ajax({
+		    	 url:baseUrl
+
++'/enterpriseEmployeesManager/getEnterprisemaillist.json',
+		    	 data:'employeesName='+employeesName,
+		    	 success:function(result){					
+						console.log(result.records);           
+						if(result&&result.records){	
+							
+							_parseRecords(result.records);	
+							
+						}
+					}
+			}); 
+		}); 
 	
 		
 	</script>
