@@ -13,6 +13,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 
 public interface PropertyservicemanagerBxManager extends BaseManager{
@@ -93,4 +94,12 @@ public interface PropertyservicemanagerBxManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public PropertyservicemanagerBx updateBxforpage(String bxId) throws BusException;
+	
+	/**
+	 * //通过订单号获取当前用户的报修单  模糊查询
+	 * @param bxCode订单号
+	 * @return
+	 * @throws BusException
+	 */
+	public List<PropertyservicemanagerBx> getEnterprisemaillistLikeBxCode(String bxCode) throws BusException;
 }
