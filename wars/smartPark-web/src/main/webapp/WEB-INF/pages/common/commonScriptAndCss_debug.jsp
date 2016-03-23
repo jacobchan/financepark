@@ -46,8 +46,6 @@
 <youi:script src="/scripts/3.0/youi/youi.dbdesigner.js"/>
 <youi:script src="/scripts/3.0/youi/youi.cubeDesigner.js"/>
 
-<youi:script src="/scripts/3.0/youi/youi.reporting.js"/>
-
 <youi:script src="/scripts/3.0/youi/field/field.core.js"/>
 <youi:script src="/scripts/3.0/youi/field/field.layout.js"/>
 <youi:script src="/scripts/3.0/youi/field/field.autocomplete.js"/>
