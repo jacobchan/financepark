@@ -72,6 +72,18 @@ public class BbmBuilding implements Domain{
     @JoinColumn(name="PARK_ID_")
 	private com.common.BuildingBaseManager.entity.BbmPark bbmPark;//320_园区ID
 	
+	@Column(name = "BUILDING_NAME_")
+	@Length(max=32)
+	private String buildingName;//楼栋名称
+	
+	public String getBuildingName() {
+		return buildingName;
+	}
+
+	public void setBuildingName(String buildingName) {
+		this.buildingName = buildingName;
+	}
+
 	public String getBuildingNo(){
 		return this.buildingNo;
 	}
