@@ -39,6 +39,8 @@ import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
 import com.gsoft.utils.HttpSenderMsg;
+import com.manage.EmployeeManager.entity.EnterpriseEmployees;
+import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTs;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerBxDao;
@@ -310,5 +312,15 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 		}else{
 			throw new BusException("未查询到该报修单，如有疑问请与客服人员联系");
 		}
+	}
+	//通过订单号获取当前用户的报修单  模糊查询
+	@EsbServiceMapping
+	 public List<PropertyservicemanagerBx> getEnterprisemaillistLikeBxCode(		    
+			@ServiceParam(name="bxCode") String bxCode) throws BusException {						 
+		Collection<Condition> condition = new ArrayList<Condition>();
+		condition.add(ConditionUtils.getCondition("bxCode", Condition.LIKE, bxCode));			
+		List<PropertyservicemanagerBx> list =propertyservicemanagerBxDao.commonQuery(condition, null);
+		return list;
+				
 	}
 }
