@@ -1,0 +1,134 @@
+﻿
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>结算购物车</title>
+<link href="../styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+<link href="../styles/base.css" type="text/css" rel="stylesheet">
+<link href="../styles/page/cg30.css" type="text/css" rel="stylesheet">
+</head>
+
+<body class="bgf1">
+<div id="youi_page_header" class="youi-page-header clearfix"></div>
+<!--***top end****************************************-->
+<!--content-->
+<!--*******************************************-->
+<div class="w1200" style="position:relative">
+	<div class="lh40 mt20 mb10 f28 tc">
+        我的订单
+    </div>
+    <div class="bgfff pl20 pr20">
+        <table class="w100 mt10 mb20 cg-pay-table tc">
+           <colgroup>
+               <col width="93"></col><col width="410"></col><col width="150"></col><col width="150"></col><col width="150"></col><col></col>
+           </colgroup>
+            <tbody>
+                <tr>
+                    <th></th>
+                    <th style="text-align:left">商品</th>
+                    <th>单价</th>
+                    <th>数量</th>
+                    <th>小计（元）</th>
+                    <th><a href="pay.html" class="c3">返回修改购物车</a></th>
+                </tr>
+                <tr>
+                    <td style="padding-left:0px;"><img src="../styles/images/cg30/pay-photo.png" width="84" height="84"></td>
+                    <td align="left">
+                        <div class="w70 fl pr20">ESK iPhone6s钢化膜 苹果6高透膜 高清玻璃保护贴膜</div>
+                        <div class="w30 fl">
+                            <p>颜色：钢化膜</p>
+                            <p>尺码：6/6s(4.7)</p>
+                        </div>
+                    </td>
+                    <td>25.00</td>
+                    <td>1</td>
+                    <td>25.00</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="padding-left:0px;"><img src="../styles/images/cg30/pay-photo.png" width="84" height="84"></td>
+                    <td align="left">
+                        <div class="w70 fl pr20">ESK iPhone6s钢化膜 苹果6高透膜 高清玻璃保护贴膜</div>
+                        <div class="w30 fl">
+                            <p>颜色：钢化膜</p>
+                            <p>尺码：6/6s(4.7)</p>
+                        </div>
+                    </td>
+                    <td>25.00</td>
+                    <td>1</td>
+                    <td>25.00</td>
+                    <td></td>
+                </tr>
+                 <tr>
+                    <td style="padding-left:0px;"><img src="../styles/images/cg30/pay-photo.png" width="84" height="84"></td>
+                    <td align="left">
+                        <div class="w70 fl pr20">ESK iPhone6s钢化膜 苹果6高透膜 高清玻璃保护贴膜</div>
+                        <div class="w30 fl">
+                            <p>颜色：钢化膜</p>
+                            <p>尺码：6/6s(4.7)</p>
+                        </div>
+                    </td>
+                    <td>25.00</td>
+                    <td>1</td>
+                    <td>25.00</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="bgfff p20 mb20">
+        <div style="border-bottom:1px solid #efecec;" class="lh35">
+            <span class="f18">收货人信息</span><a href="" class="c3 f14 ml40">新增收货人</a>
+        </div>
+        <ul class="address-nav clearfix">
+            <li class="active">
+                <em class="s-a-select">默认</em>
+                <div class="clearfix"><span>姓名：赵璇</span><span class="fr">手机号码：1825598541</span></div>
+                <p>园区地址：T4航站楼A302室</p>
+            </li>
+            <li>
+                <em class="s-a-select">默认</em>
+                <div class="clearfix"><span>姓名：赵璇</span><span class="fr">手机号码：1825598541</span></div>
+                <p>园区地址：T4航站楼A302室</p>
+            </li>
+        </ul>
+    </div>
+    <div class="bgfff p20">
+        <div style="border-bottom:1px solid #efecec;" class="lh35">
+            <span class="f18">发票信息</span>
+        </div>
+        <div class="pt20 pb20">
+            <span>发票抬头：</span>
+            <input type="text" placeholder="填写发票信息" class="inp-bd">
+        </div>
+    </div>
+    <div class="pay-js-btn clearfix">
+        <div class="fr">
+            <span class="mr30 f16">总价：<em class="ccheng">¥50.00</em></span>
+            <a href="" class="btn_cc1 fr">去结算</a>
+        </div>
+    </div>
+    <div class="tc mt50"><img src="../styles/images/cg30/footbar.png"/></div>
+<!--w1200 end-->
+</div>
+<!--*******************************************-->
+    
+<!--***bottom start****************************************-->
+	<div id="youi_page_footer" class="youi-page-footer"></div>
+<!--***bottom end****************************************-->
+<!--******************  code end  ****************************-->
+<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+<script type="text/javascript" src="../scripts/page/cg30com.js"></script>
+<script>
+	$(function(){
+        $(document).on("click",".address-nav li" ,function(){
+            $(this).addClass("active").siblings().removeClass("active");
+        })
+	});
+</script>
+</body>
+</html>

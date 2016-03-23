@@ -25,7 +25,7 @@
            </colgroup>
             <tbody>
                 <tr>
-                    <th colspan="2" style="text-align:left"><label><input type="checkbox" class="ml5 mr10">全选</label></th>
+                    <th colspan="2" style="text-align:left"><label><input type="checkbox" class="ml5 mr10" name="all-check">全选</label></th>
                     <th style="text-align:left">商品</th>
                     <th>单价</th>
                     <th>数量</th>
@@ -33,11 +33,11 @@
                     <th>操作</th>
                 </tr>
                 <tr>
-                    <td align="right"><input type="checkbox"></td>
+                    <td align="right"><input type="checkbox"  name="single-check"></td>
                     <td style="padding-left:0px;"><img src="../styles/images/cg30/pay-photo.png" width="84" height="84"></td>
                     <td align="left">
                         <div class="w70 fl pr20">ESK iPhone6s钢化膜 苹果6高透膜 高清玻璃保护贴膜</div>
-                        <div class="w30 fl pr10">
+                        <div class="w30 fl">
                             <p>颜色：钢化膜</p>
                             <p>尺码：6/6s(4.7)</p>
                         </div>
@@ -52,14 +52,73 @@
                     </td>
                     <td>25.00</td>
                     <td>
-                        <a href="">删除</a><br/>
-                        <a href="">收藏商品</a>
+                        <p class="mb10"><a href="javascript:;" class="a-del">删除</a></p>
+                        <a href="javascript:;">收藏商品</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right"><input type="checkbox" name="single-check"></td>
+                    <td style="padding-left:0px;"><img src="../styles/images/cg30/pay-photo.png" width="84" height="84"></td>
+                    <td align="left">
+                        <div class="w70 fl pr20">ESK iPhone6s钢化膜 苹果6高透膜 高清玻璃保护贴膜</div>
+                        <div class="w30 fl">
+                            <p>颜色：钢化膜</p>
+                            <p>尺码：6/6s(4.7)</p>
+                        </div>
+                    </td>
+                    <td>25.00</td>
+                    <td>
+                        <div class="space-num">
+                            <a href="javascript:;" class="num-reduce">-</a>
+                            <input class="num" value="1" type="text">
+                            <a href="javascript:;" class="num-plus">+</a>
+                        </div>
+                    </td>
+                    <td>25.00</td>
+                    <td>
+                         <p class="mb10"><a href="javascript:;" class="a-del">删除</a></p>
+                        <a href="javascript:;">收藏商品</a>
+                    </td>
+                </tr>
+                 <tr>
+                    <td align="right"><input type="checkbox"  name="single-check"></td>
+                    <td style="padding-left:0px;"><img src="../styles/images/cg30/pay-photo.png" width="84" height="84"></td>
+                    <td align="left">
+                        <div class="w70 fl pr20">ESK iPhone6s钢化膜 苹果6高透膜 高清玻璃保护贴膜</div>
+                        <div class="w30 fl">
+                            <p>颜色：钢化膜</p>
+                            <p>尺码：6/6s(4.7)</p>
+                        </div>
+                    </td>
+                    <td>25.00</td>
+                    <td>
+                        <div class="space-num">
+                            <a href="javascript:;" class="num-reduce">-</a>
+                            <input class="num" value="1" type="text">
+                            <a href="javascript:;" class="num-plus">+</a>
+                        </div>
+                    </td>
+                    <td>25.00</td>
+                    <td>
+                        <p class="mb10"><a href="javascript:;" class="a-del">删除</a></p>
+                        <a href="javascript:;">收藏商品</a>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <div class="pay-js-btn clearfix">
+            <a href="javascript:;" class="fl ml30 c3 del-check">删除选中的商品</a>
+            <div class="fr">
+                <span class="mr30 f14">已选择了2件商品</span>
+                <span class="mr30 f16">总价：<em class="ccheng">¥50.00</em></span>
+                <a href="" class="btn_cc1 fr">去结算</a>
+            </div>
+        </div>
     </div>
-    <div class="like_box mb50">
+    <div class="split_line mt50">
+        <div class="f28 c3 tc">猜你喜欢</div>
+    </div>
+    <div class="like_box mb50 oh">
     	<ul class="like_ul clearfix">
         	<li>
             	<div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
@@ -106,7 +165,56 @@
                 <div class="f12 mt5">7788人好评</div>
                 <div class="btn_cheng">加入购物车</div>
             </li>
+            <li>
+                <div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
+                <p>
+                    <span>富春硅谷</span><br/>
+                    <span class="ccheng">100.9</span>元
+                </p>
+                <div class="f12 mt5">7788人好评</div>
+                <div class="btn_cheng">加入购物车</div>
+            </li>
+            <li>
+                <div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
+                <p>
+                    <span>富春硅谷gdf</span><br/>
+                    <span class="ccheng">9.9</span>元
+                </p>
+                <div class="f12 mt5">7788人好评</div>
+                <div class="btn_cheng">加入购物车</div>
+            </li>
+            <li>
+                <div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
+                <p>
+                    <span>富春硅谷gdf</span><br/>
+                    <span class="ccheng">9.9</span>元
+                </p>
+                <div class="f12 mt5">7788人好评</div>
+                <div class="btn_cheng">加入购物车</div>
+            </li>
+            <li>
+                <div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
+                <p>
+                    <span>富春硅谷gdf</span><br/>
+                    <span class="ccheng">9.9</span>元
+                </p>
+                <div class="f12 mt5">7788人好评</div>
+                <div class="btn_cheng">加入购物车</div>
+            </li>
+            <li>
+                <div class="like_img tc"><img src="../styles/images/cg30/cg_w2.png"/></div>
+                <p>
+                    <span>富春硅谷gdf</span><br/>
+                    <span class="ccheng">9.9</span>元
+                </p>
+                <div class="f12 mt5">7788人好评</div>
+                <div class="btn_cheng">加入购物车</div>
+            </li>
         </ul>
+        <div class="lb-circle"> 
+           <!--  <span class="current"></span>
+           <span></span> -->
+        </div>
     </div>
     <div class="tc mt50"><img src="../styles/images/cg30/footbar.png"/></div>
 <!--w1200 end-->
@@ -123,20 +231,6 @@
 <script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 <script type="text/javascript" src="../scripts/page/cg30com.js"></script>
 <script>
-$(function(){
-	var arg=getQueryStringArgs();
-    $('.goods').filters({
-        template:'<img src={commodityImage}.png><span class="vm inline_b">'+
-        		 '<span class="c3 f18">{commodityTitle}&nbsp;&nbsp;橘黄色&nbsp;&nbsp;{commodityPrice}元</span><br/>'+
-        		 '<span class="c_green f28">已成功加入购物车！</span>'+
-        		 '</span>',
-        jsonpSrc:'http://localhost:9088/jsonp/data.jsp?data:file=cg_bg.json',
-        type:"commodityId",
-        val:arg.id
-    });
-});
-</script>
-<script>
 	$(function(){
 		$(".b1").hover(function(){
 			$(".b1mask").toggleClass("hide");
@@ -152,7 +246,80 @@ $(function(){
 			var idx=$(this).index();
 			$(".b2floor").eq(idx).toggleClass("hide");
 		});
+        $(".space-num .num-reduce").click(function(){
+            var n=parseInt($(this).next("input").val());
+            if(n>0){
+                $(this).next("input").val(n-1);
+            }else{
+                alert("已经是0了")
+            }
+        })
+        $(".space-num .num-plus").click(function(){
+            var n=parseInt($(this).prev("input").val()) ;
+            if(n<6 && n>-1){
+                $(this).prev("input").val(n+1);
+            }else if(n==6){
+                alert("最大值了")
+            }
+        });
+        $('input[name="all-check"]').click(function(){
+            if($(this).prop("checked")){
+                $(this).parents(".cg-pay-table").find('input[name="single-check"]').prop("checked","checked");
+            }else{
+                 $(this).parents(".cg-pay-table").find('input[name="single-check"]').prop("checked","");
+            }
+        });
+        $('input[name="single-check"]').click(function(){
+            var i=0;
+            $('input[name="single-check"]').each(function(){
+                if($(this).prop("checked")){
+                   i++;
+                }else{
+                 i;
+                }
+            })
+            if(i== $('input[name="single-check"]').length){
+                $(this).parents(".cg-pay-table").find('input[name="all-check"]').prop("checked","checked");
+             }else{
+                $(this).parents(".cg-pay-table").find('input[name="all-check"]').prop("checked","");
+            }
+        });
+        $(".a-del").click(function(){
+            $(this).parents("tr").remove();
+        });
+        $(".del-check").click(function(){
+            $('input[name="single-check"]').each(function(){
+                if($(this).prop("checked")){
+                    $(this).parents("tr").remove();
+                }
+            })
+        })
+        var htm="<span></span>";
+        var l=$(".like_box .like_ul li").size() /5;
+        for(var i=0;i<l;i++){
+            $(".lb-circle").append(htm);
+        } 
+        $(".lb-circle span:eq(0)").addClass("current");
+        var timer=setInterval("lb()",5000); 
+
+        $(".like_ul li").hover(function(){
+            clearInterval(timer);
+        },function(){
+             timer=setInterval("lb()",5000); 
+        })
 	});
+    var len=0;
+    function lb(){
+        len++;
+        var l=$(".like_box .like_ul li").size() /5;
+        if(len>l-1){ 
+            len=0;
+        }
+        var m=-len*1200 +"px";
+        $(".lb-circle span").removeClass("current");
+        $(".lb-circle span").eq(len).addClass("current");
+        $(".like_box .like_ul").animate({left:m},1000);
+    }
 </script>
 </body>
 </html>
