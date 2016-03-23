@@ -20,8 +20,8 @@
 							<label class="fl mr20 f16">申请时间：</label>
 							<input class="bd-input fl" type="text"><span class="fl ml15 mr15">到</span>
 							<input class="bd-input fl" type="text">
-							<div class="inp-box ml20"><input placeholder="订单号查询" type="text"><a class="fa fa-search" href=""></a></div>
-							<input value="搜索" class="hhf-submit f14 fr" type="button">
+							<div class="inp-box ml20"><input placeholder="订单号查询" type="text" id="cosCode"><a class="fa fa-search" href=""></a></div>
+							<input value="搜索" class="hhf-submit" type="button">
 						</div>
 						<div class="mt20 gr-txl clearfix lh30">
 							<a href="addcomplaints.html" class="hhf-submit f14 fr">我要投诉</a>
@@ -59,36 +59,7 @@
 							<a href="">Go</a>
 						</div>
 					</div>
-					<!-- <div class="clearfix mt50">
-						<div class="mt20 gr-txl clearfix lh30">
-							<label class="fl mr20 f16">申请时间：</label>
-							<input class="bd-input fl" type="text"><span class="fl ml15 mr15">到</span>
-							<input class="bd-input fl" type="text">
-							<div class="inp-box ml20"><input placeholder="订单号查询" type="text"><a class="fa fa-search" href=""></a></div>
-							<input value="搜索" class="hhf-submit fr" type="button">
-						</div>
-						<table class="gt-table mt20">
-							<colgroup>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col></col>
-							</colgroup>
-							<tbody><tr>
-								<th>订单号</th>
-								<th>投诉时间</th>
-								<th>是否需要回复</th>
-								<th>联系人</th>
-								<th>联系电话</th>
-								<th>操作</th>
-							</tr>
-							<tr>
-								<td colspan="6">暂无记录</td>
-							</tr>
-						</tbody></table>
-					</div> -->
+					
 				</div>
 			</div>
 		</div>
@@ -155,7 +126,7 @@
 				}else if(record[i].cosStatus=='6'){
 					status = "已完成";
 				}
-				var html="<tr id='"+record[i].cosId+"'><td>"+record[i].cosCode+"</td>"+
+				var html="<tr id='"+record[i].cosId+"' class='aaa'><td>"+record[i].cosCode+"</td>"+
 				"<td>"+record[i].cosTime+"</td>"+
 				"<td>"+bool+"</td><td>"+record[i].cosName+"</td>"+
 				"<td>"+record[i].cosTelephone+"</td><td>"+status+"</td>"+
@@ -172,6 +143,23 @@
 				$(".cosCode")[0].setAttribute("id",me.id);
 				$(".bg-tanc").show();
 			};
+			//根据订单号查询
+			$('.hhf-submit').click(function(){	
+				
+				$(".aaa").empty();
+				 var cosCode=$("#cosCode").val(); 
+			      $.ajax({
+			    	 url:baseUrl+'/propertyservicemanagerCosManager/getCoslistLikeCosCode.json',
+			    	 data:'cosCode='+cosCode,
+			    	 success:function(result){		
+			    		 
+							console.log(result.records);           
+							if(result&&result.records){						
+								_parseRecords(result.records);							
+							}
+						}
+				}); 
+			}); 
 	</script>
 	
 	<!-- 取消投诉 -->
