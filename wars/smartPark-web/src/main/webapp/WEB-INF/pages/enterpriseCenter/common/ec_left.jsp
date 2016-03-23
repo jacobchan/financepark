@@ -8,7 +8,7 @@
 		<script type="text/javascript"> 
 			$(document).ready(function(){
 				$("#more").click(function(){
-					$("#more1").slideToggle("slow");
+					$("#moreul").slideToggle("slow");
 				});
 			});
 		</script>
@@ -20,7 +20,7 @@
 	        	<ul class="sidebar-menu-mainul">
 	                <li>
 	                    <a id="more">企业资料 <span class="down-icon"><img src="<%=request.getContextPath()%>/styles/images/qiye/angle-down.png"></span></a>
-	                    <ul class="sidebar-menu-mainul2" id="more1">
+	                    <ul id="moreul" class="sidebar-menu-mainul2">
 	                        <li class="active"><a href="<%=request.getContextPath()%>/enterprise/info.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_xinxi.png"></span>企业信息</a></li>
 	                        <li><a href="<%=request.getContextPath()%>/enterprise/financing.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_rongzi.png"></span>融资信息</a></li>
 	                        <li><a href="<%=request.getContextPath()%>/enterprise/knowledge.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_zuanli.png"></span>专利/知识产权</a></li>
