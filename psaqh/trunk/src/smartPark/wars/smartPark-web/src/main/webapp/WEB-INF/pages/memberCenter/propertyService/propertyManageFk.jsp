@@ -19,8 +19,8 @@
 						<div class="mt20 gr-txl clearfix lh30">
 							<label class="fl mr20 f16">申请时间：</label>
 							<input class="bd-input fl" type="text"><span class="fl ml15 mr15">到</span>
-							<input class="bd-input fl" type="text">
-							<div class="inp-box ml20"><input placeholder="订单号查询" type="text"><a class="fa fa-search" href=""></a></div>
+							<input class="bd-input fl" type="text" >
+							<div class="inp-box ml20"><input placeholder="订单号查询" type="text" id="fkCode"><a class="fa fa-search" href=""></a></div>
 							<input value="搜索" class="hhf-submit f14 fr" type="button">
 						</div>
 						<table class="gt-table mt20">
@@ -182,7 +182,7 @@
 		//拼接列表
 		function _parseRecords(record){
 			for(var i=0;i<record.length;i++){
-				var html="<tr id='"+record[i].fkcodeId+"'>"+
+				var html="<tr id='"+record[i].fkcodeId+"' class='aaa'>"+
 						"<td><a href=''>"+record[i].fkCode+"</a></td>"+
 						"<td>"+record[i].fkcodeTime+"</td>"+
 						"<td>"+record[i].applyStatus+"</td>"+
@@ -227,6 +227,23 @@
 				}
 			});
 		};
+		//根据订单号查询
+		$('.hhf-submit').click(function(){	
+			
+			$(".aaa").empty();
+			 var fkCode=$("#fkCode").val(); 
+		      $.ajax({
+		    	 url:baseUrl+'/propertyservicemanagerFkcodeManager/getFkcodelistLikeFkcodeCode.json',
+		    	 data:'fkCode='+fkCode,
+		    	 success:function(result){		
+		    		 
+						console.log(result.records);           
+						if(result&&result.records){						
+							_parseRecords(result.records);							
+						}
+					}
+			}); 
+		}); 
 	</script>
 	<!-- 取消访客 -->
 	<script type="text/javascript">
