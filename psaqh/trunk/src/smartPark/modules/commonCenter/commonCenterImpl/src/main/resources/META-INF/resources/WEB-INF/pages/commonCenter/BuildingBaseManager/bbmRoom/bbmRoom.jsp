@@ -10,14 +10,14 @@
 			<youi:fieldText property="roomCaption"  caption="单元说明" operator="LIKE"/>
 			<youi:fieldSelect property="bbmPark.parkId" caption="所属园区" code="parkId" show="parkName"
 				src="esb/web/bbmParkManager/getBbmParks.json"/>
-			<youi:fieldSelect property="bbmBuilding.buildingId" caption="所属楼栋" code="buildingId" show="buildingNo"
+			<youi:fieldSelect property="bbmBuilding.buildingId" caption="所属楼栋" code="buildingId" show="buildingName"
 				src="esb/web/bbmBuildingManager/getBbmBuildings.json" />
 			<youi:fieldSelect property="bbmFloor.floorId" caption="所属楼层" code="floorId" show="floorNo" 
 				src="esb/web/bbmFloorManager/getBbmFloors.json" />
 
 		</youi:fieldLayout>
 		<youi:gridCol property="bbmPark.parkName" caption="所属园区" width="100" align="center"/>
-		<youi:gridCol property="bbmBuilding.buildingNo" caption="所属楼栋" width="100" align="center"/>
+		<youi:gridCol property="bbmBuilding.buildingName" caption="所属楼栋" width="100" align="center"/>
 		<youi:gridCol property="bbmFloor.floorNo" caption="所属楼层" width="100" align="center"/>
 		<youi:gridCol property="roomNo"  caption="单元编号" width="100" align="center"/>
 		<youi:gridCol property="roomCaption"  caption="单元说明" width="150" align="center"/>
@@ -39,7 +39,7 @@
 			<youi:fieldText property="roomNo"  caption="单元编号" notNull="true"/>
 			<youi:fieldSelect property="bbmFloor.floorId" caption="所属楼层" code="floorId" show="floorNo" notNull="true"
 				src="esb/web/bbmFloorManager/getBbmFloors.json" />
-			<youi:fieldText property="buildingNo"  caption="所属楼栋" readonly="true"/>
+			<youi:fieldText property="buildingName"  caption="所属楼栋" readonly="true"/>
 			<youi:fieldText property="parkName"  caption="所属园区" readonly="true"/>
 			<%-- <youi:fieldSelect property="bbmPark.parkId" caption="所属园区" code="parkId" show="parkName"
 				src="esb/web/bbmParkManager/getBbmParks.json" notNull="true"/>
@@ -78,8 +78,8 @@
 				success:function(result){
 					var record = result.record;
 					$('#P_'+pageId+'_record_parkName').fieldValue('') ;//先将园区名称置空
-					$('#P_'+pageId+'_record_buildingNo').fieldValue('') ;//先将楼层编号置空
- 					$('#P_'+pageId+'_record_buildingNo').fieldValue(record.buildingNo);//将返回的对象里面的buildingNo赋值给楼层编号
+					$('#P_'+pageId+'_record_buildingName').fieldValue('') ;//先将楼层编号置空
+ 					$('#P_'+pageId+'_record_buildingName').fieldValue(record.buildingNo);//将返回的对象里面的buildingNo赋值给楼层编号
                     $('#P_'+pageId+'_record_parkName').fieldValue(record.bbmPark.parkName);//将返回的对象里面的bbmPark.parkName赋值给园区名称
                   } 
             });
