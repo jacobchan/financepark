@@ -231,13 +231,17 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 		return list;
 	 }
 		//通过名字获取当前用户公司员工的通讯录
+	 @EsbServiceMapping
 	 public List<EnterpriseEmployees> getEnterprisemaillistByName(
 			    @ServiceParam(name="userId",pubProperty = "userId") String userId,
 				@ServiceParam(name="employeesName") String employeesName) throws BusException {
 			// TODO Auto-generated method stub
 	    	//获取当前用户公司员工的通讯录
+		    EnterpriseEmployees e = enterpriseEmployeesDao.getObjectByUniqueProperty("member.memberId", userId);
+			EnterbusinessmanagerRz rz=e.getRz();
+			String rzId=rz.getRzId();
 	    	Collection<Condition> condition = new ArrayList<Condition>();
-	    	condition.add(ConditionUtils.getCondition("member.memberId", Condition.EQUALS, userId));
+	    	condition.add(ConditionUtils.getCondition("rz.rzId", Condition.EQUALS, rzId));
 	    	condition.add(ConditionUtils.getCondition("employeesName", Condition.EQUALS, employeesName));
 	    	
 	    	List<EnterpriseEmployees> list =enterpriseEmployeesDao.commonQuery(condition, null);
