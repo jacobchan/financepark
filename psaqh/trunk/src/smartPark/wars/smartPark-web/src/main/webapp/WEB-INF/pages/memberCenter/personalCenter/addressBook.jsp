@@ -90,9 +90,7 @@
 			$(".aaa").empty();
 			 var employeesName=$("#employeesName").val(); 
 		      $.ajax({
-		    	 url:baseUrl
-
-+'/enterpriseEmployeesManager/getEnterprisemaillistByName.json',
+		    	 url:baseUrl+'/enterpriseEmployeesManager/getEnterprisemaillistByName.json',
 		    	 data:'employeesName='+employeesName,
 		    	 success:function(result){					
 						console.log(result.records);           
@@ -111,9 +109,7 @@
 			$(".aaa").empty();
 			 
 		      $.ajax({
-		    	 url:baseUrl
-
-+'/enterpriseEmployeesManager/getEnterprisemaillist.json',
+		    	 url:baseUrl+'/enterpriseEmployeesManager/getEnterprisemaillist.json',
 		    	 data:'employeesName='+employeesName,
 		    	 success:function(result){					
 						console.log(result.records);           
