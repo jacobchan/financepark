@@ -35,7 +35,7 @@ public class ActivityApply implements Domain{
 	
 	@Column(name = "DEADLINE_")
 	@Length(max=32)
-	private String deadline;//结束时间
+	private String deadline;//报名截至时间
 
 	@Column(name = "COMMENT_TIME_")
 	private String commentTime;//评论时间
