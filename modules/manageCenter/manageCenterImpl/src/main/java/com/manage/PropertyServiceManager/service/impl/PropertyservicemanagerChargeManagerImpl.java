@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
 import com.common.OrderManager.dao.OrdermanagerUserorderDao;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
@@ -25,6 +24,9 @@ import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.manage.EmployeeManager.dao.EnterpriseEmployeesDao;
+import com.manage.EmployeeManager.entity.EnterpriseEmployees;
+import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCharge;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerChargeDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerChargeManager;
@@ -41,6 +43,9 @@ public class PropertyservicemanagerChargeManagerImpl extends BaseManagerImpl imp
 	private PropertyservicemanagerSfproManager propertyservicemanagerSfproManager;
 	@Autowired
 	private MemberInformationManager memberInformationManager;
+	@Autowired
+	private  EnterpriseEmployeesDao   enterpriseEmployeesDao;
+	
     /**
      * 查询列表
      */
@@ -138,7 +143,7 @@ public class PropertyservicemanagerChargeManagerImpl extends BaseManagerImpl imp
 		if(id!=null){
 	    	//获取当前用户参加活动的list
 	    	Collection<Condition> condition = new ArrayList<Condition>();
-	    	condition.add(ConditionUtils.getCondition("createUser", Condition.EQUALS, id));
+	    	condition.add(ConditionUtils.getCondition("userorder.memberId", Condition.EQUALS, id));
 	    	List<PropertyservicemanagerCharge> list = propertyservicemanagerChargeDao.commonQuery(condition, null);
 	    	if(list.size()>0){
 	    		return list;
@@ -149,5 +154,18 @@ public class PropertyservicemanagerChargeManagerImpl extends BaseManagerImpl imp
 			return null;
 		}
 	}
-
+  //通过订单号获取当前用户的缴费记录  模糊查询
+    @EsbServiceMapping
+	 public List<PropertyservicemanagerCharge> getChargelistLikeUserorderCode(
+			 @ServiceParam(name="userId",pubProperty="userId") String userId,
+			@ServiceParam(name="userorderCode") String userorderCode) throws BusException {	
+//      EnterpriseEmployees e = enterpriseEmployeesDao.getObjectByUniqueProperty("userorder.memberId", userId);
+//	    EnterbusinessmanagerRz rz=e.getRz();
+//      String rzName=rz.getRzName();
+		Collection<Condition> condition = new ArrayList<Condition>();
+//		condition.add(ConditionUtils.getCondition("rzName", Condition.EQUALS, rzName));	
+		condition.add(ConditionUtils.getCondition("userorder.userorderCode", Condition.LIKE, userorderCode));	
+		List<PropertyservicemanagerCharge> list =propertyservicemanagerChargeDao.commonQuery(condition, null);
+		return list;
+    }
 }
