@@ -263,13 +263,16 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 	    @EsbServiceMapping
 		 public List<PropertyservicemanagerOc> getOclistLikeOcCode(
 				 @ServiceParam(name="userId",pubProperty="userId") String userId,
-				@ServiceParam(name="ocCode") String ocCode) throws BusException {	
+				@ServiceParam(name="ocCode") String ocCode,
+				@ServiceParam(name="startTime") String startTime,
+				@ServiceParam(name="endTime") String endTime) throws BusException {	
 	        EnterpriseEmployees e = enterpriseEmployeesDao.getObjectByUniqueProperty("member.memberId", userId);
 		    EnterbusinessmanagerRz rz=e.getRz();
 	        String rzName=rz.getRzName();
 			Collection<Condition> condition = new ArrayList<Condition>();
 			condition.add(ConditionUtils.getCondition("ocComp", Condition.EQUALS, rzName));	
-			condition.add(ConditionUtils.getCondition("ocCode", Condition.LIKE, ocCode));	
+			condition.add(ConditionUtils.getCondition("ocCode", Condition.LIKE, ocCode));
+			condition.add(ConditionUtils.getCondition("ocDate", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
 			List<PropertyservicemanagerOc> list =propertyservicemanagerOcDao.commonQuery(condition, null);
 			return list;
 	    }
