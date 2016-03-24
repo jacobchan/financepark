@@ -37,6 +37,17 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	public PagerRecords getPagerOrdermanagerUserorders(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders) throws BusException;
+	
+	
+	/**
+	 * 分页查询公共资源的订单
+	 * @return 分页对象
+	 */
+	public PagerRecords getPagerOrdermanagerUserordersForPublic(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders) throws BusException;
+	
+	
     /**
      * 保存并返回对象
      */

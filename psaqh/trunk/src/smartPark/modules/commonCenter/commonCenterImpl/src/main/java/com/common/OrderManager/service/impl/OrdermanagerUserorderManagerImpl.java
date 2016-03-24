@@ -4,6 +4,7 @@
 package com.common.OrderManager.service.impl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -84,6 +85,39 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	public PagerRecords getPagerOrdermanagerUserorders(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
+		PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
+	
+	 /**
+     * 分页查询公共资源的订单
+     */
+	@EsbServiceMapping
+	public PagerRecords getPagerOrdermanagerUserordersForPublic(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)  throws BusException{
+		
+		//查询属于公共资源的的所有商品:genreCode= 03
+		Collection<Condition> condition = new ArrayList<Condition>();
+		condition.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS,"03"));
+		List<PurchasingmanagerGenre> purchasingmanagerGenreList=purchasingmanagerGenreManager.getPurchasingmanagerGenres(condition, null);
+		String genreId="";
+//		List<String> list = new ArrayList<String>();
+		if(purchasingmanagerGenreList.size()>0){
+			genreId = purchasingmanagerGenreList.get(0).getGenreId();
+		}
+		condition.clear();
+		condition.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId",Condition.EQUALS,genreId));
+		purchasingmanagerGenreList=purchasingmanagerGenreManager.getPurchasingmanagerGenres(condition, null);
+		int i=0;
+		String[] genreIdArray=new String[purchasingmanagerGenreList.size()];
+		for(PurchasingmanagerGenre pg:purchasingmanagerGenreList){
+			String genreIds=pg.getGenreId();
+//			list.add(genreIds);
+			genreIdArray[i]=genreIds;
+			i++;
+		}
+		conditions.add(ConditionUtils.getCondition("genreId.genreId",Condition.IN,genreIdArray));
 		PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
