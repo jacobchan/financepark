@@ -23,6 +23,9 @@
 			    return reLen;    
 			}
 			$(document).ready(function() {
+				//CKEDITOR.replace('editorrzRemark');
+			  	var editor = CKEDITOR.replace('editorproductDiscriptio');
+			  	editor.updateElement();
 				$("#rzRemark").on('keyup', function() {
 				    var len = getStrLength(this.value);
 				    $("#currentCount").html(len);
@@ -42,6 +45,7 @@
 										$("#rzName").val(result.record.rzName);
 				    					$("#rzUrl").val(result.record.rzUrl);
 				    					$("#rzRemark").val(result.record.rzRemark);
+				    					CKEDITOR.instances['editorproductDiscriptio'].setData(result.record.rzRemark);
 				    					$("#enTypeName").val(result.record.enTypeId.enTypeName);
 				    					$("#editorproductDiscriptio").val(result.record.productDiscriptio);
 				    					$("#currentCount").html(getStrLength(result.record.rzRemark));
@@ -63,9 +67,6 @@
 						}
 					}
 				});
-			  	//CKEDITOR.replace('editorrzRemark');
-			  	var editor = CKEDITOR.replace('editorproductDiscriptio');
-			  	editor.updateElement();
 			  	$(".save_btn").click(function(){
 			  		var rzId=$("#financingRe").html();
 			  		var roomId=$("#roomId").val();
@@ -75,7 +76,6 @@
 					var rzRemark=$("#rzRemark").val();
 					var rzLogo = $("#rzLogo").attr("src");
 					var productDiscriptio=editor.getData();
-					alert(editor.getData());
 					var params = ['rzId='+rzId+'','rzLogo='+rzLogo+'','roomId.roomId='+roomId+'','rzName='+rzName+'','rzRemark='+rzRemark+'','rzUrl='+rzUrl+'','enTypeName='+enTypeName+'','productDiscriptio='+productDiscriptio+''];
 					$.youi.ajaxUtils.ajax({
 						url:baseUrl+'/enterbusinessmanagerRzManager/updateEnterbusinessmanagerRz.json',
