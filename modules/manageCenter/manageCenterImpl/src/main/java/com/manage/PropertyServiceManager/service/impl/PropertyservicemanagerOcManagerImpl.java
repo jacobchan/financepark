@@ -28,9 +28,13 @@ import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
 import com.gsoft.utils.HttpSenderMsg;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCharge;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerOc;
 import com.manage.ActivityManager.entity.ActivityApply;
 import com.manage.ActivityManager.entity.ActivityApplylist;
+import com.manage.EmployeeManager.dao.EnterpriseEmployeesDao;
+import com.manage.EmployeeManager.entity.EnterpriseEmployees;
+import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerOcDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerOcManager;
          
@@ -41,6 +45,8 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 	private PropertyservicemanagerOcDao propertyservicemanagerOcDao;
 	@Autowired
 	private MemberInformationManager memberInformationManager;
+	@Autowired
+	private EnterpriseEmployeesDao enterpriseEmployeesDao;
 	/**
      * 修改一卡通预约状态
      */
@@ -253,4 +259,18 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 	    }		
 		  
 	}
+	//通过订单号获取当前用户的一卡通申请记录  模糊查询
+	    @EsbServiceMapping
+		 public List<PropertyservicemanagerOc> getOclistLikeOcCode(
+				 @ServiceParam(name="userId",pubProperty="userId") String userId,
+				@ServiceParam(name="ocCode") String ocCode) throws BusException {	
+	        EnterpriseEmployees e = enterpriseEmployeesDao.getObjectByUniqueProperty("member.memberId", userId);
+		    EnterbusinessmanagerRz rz=e.getRz();
+	        String rzName=rz.getRzName();
+			Collection<Condition> condition = new ArrayList<Condition>();
+			condition.add(ConditionUtils.getCondition("ocComp", Condition.EQUALS, rzName));	
+			condition.add(ConditionUtils.getCondition("ocCode", Condition.LIKE, ocCode));	
+			List<PropertyservicemanagerOc> list =propertyservicemanagerOcDao.commonQuery(condition, null);
+			return list;
+	    }
 }
