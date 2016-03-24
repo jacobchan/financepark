@@ -2,9 +2,11 @@ package com.manage.EnterpriseManager.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -56,7 +58,7 @@ public class InformationLegalManagerImpl extends BaseManagerImpl implements Info
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+    @EsbServiceMapping(pubConditions={@PubCondition(property="createUser",pubProperty="userId")})
     public InformationLegal saveInformationLegal(InformationLegal o) throws BusException{
 //    	String informationLegalId = o.getInformationLegalId();
 //    	boolean isUpdate = StringUtils.isNotEmpty(informationLegalId);
