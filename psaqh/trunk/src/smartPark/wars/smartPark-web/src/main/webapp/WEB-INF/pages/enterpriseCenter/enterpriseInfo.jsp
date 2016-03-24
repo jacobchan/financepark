@@ -50,10 +50,25 @@
 						}
 					}
 				});
-			  	CKEDITOR.replace('editorrzRemark');
+			  	//CKEDITOR.replace('editorrzRemark');
 			  	CKEDITOR.replace('editorproductDiscriptio');
 			  	$(".save_btn").click(function(){
-					alert("aaa");
+			  		var rzName=$("#rzName").val();
+					var rzUrl=$("#rzUrl").val();
+					var enTypeName=$("#enTypeName").val();
+					var rzRemark=$("#rzRemark").val();
+					var productDiscriptio=$("#productDiscriptio").val();
+					var params = ['rzName='+rzName+'','rzRemark='+rzRemark+'','rzUrl='+rzUrl+'','enTypeName='+enTypeName+'','productDiscriptio='+productDiscriptio+''];
+					$.youi.ajaxUtils.ajax({
+						url:baseUrl+'/enterbusinessmanagerRzManager/saveEnterbusinessmanagerRz.json',
+						data:params.join('&'),
+						success:function(result){
+							if(result && result.record){
+								alert("修改成功");
+								location.reload();
+							}
+						}
+					});
 				});
 			});
 		</script>
@@ -135,12 +150,12 @@
                 		</div>
             		</div>
            		<div class="jiesao_word">
-	           		<div class="qiye_js">
+	           		<!--<div class="qiye_js">
 	                	<div class="qiye_jieshao"><span>公司介绍</span></div>
 	                    <div class="edit_tool">
 	                    	<textarea id="editorrzRemark" name="rzRemark" cols="20" rows="5" class="ckeditor"></textarea>
 	                    </div>
-	                </div>
+	                </div>-->
 	                <div class="qiye_ms">
 	                	<div class="qiye_miaoshu"><span>产品描述</span></div>
 	                    <div class="edit_tool">
