@@ -191,4 +191,14 @@ public class BbmFloorManagerImpl extends BaseManagerImpl implements BbmFloorMana
 		String infor = buildingNo + "("+str+"/"+floorCount+")" ;
 		return infor;
 	}
+	
+	/**
+	 * 通过楼层id得到楼层
+	 * @param floorId 楼层id
+	 * @return
+	 */
+	@EsbServiceMapping
+	public BbmFloor getFloorByFloorId(@ServiceParam(name="floorId") String floorId) {
+		return bbmFloorDao.get(floorId);
+	}
 }
