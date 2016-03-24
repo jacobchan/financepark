@@ -126,7 +126,7 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
     	String buildingNo = building.getBuildingNo() ;
     	String floorNo = floor.getFloorNo() ;
     	String prefix = buildingNo + "-" + floorNo + "-" ;
-    	String format = "([A-Za-z0-9]+)-([A-Za-z0-9]+)-([A-Za-z0-9]+)" ;
+    	String format = "([A-Za-z0-9]+)-([A-Za-z0-9]+)-([0-9]+)" ;//正则表达式，规定roomNo的格式为：字符-字符-字符，字符为英文或数字
     	if(roomNo.matches(format)){
     		String[] str = roomNo.split("-") ;
     		if(str.length == 3){
@@ -134,13 +134,19 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
     			if(!prefix.equals(temp)){
     				throw new BusException("单元编号前缀必须为：楼栋编号-楼层编号-") ;
     			}else{
+    				boolean flag = false ;
     				try{
     					int num = Integer.parseInt(str[2]) ;
     					if(num <= 0 || num > 12){
-    						throw new BusException("单元编号后两位必须在01到12之间！") ;
+    						flag = true ;
+    						throw new BusException("") ;
     					}
     				}catch(BusException be){
-    					throw new BusException("单元编号的后两位必须是数字！") ;
+    					if(flag){
+    						throw new BusException("单元编号后两位必须在01到12之间！") ;
+    					}else{
+    						throw new BusException("单元编号的后两位必须是数字！") ;
+    					}
     				}
     			}
     		}else{
