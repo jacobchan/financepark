@@ -53,12 +53,13 @@
 			  	//CKEDITOR.replace('editorrzRemark');
 			  	CKEDITOR.replace('editorproductDiscriptio');
 			  	$(".save_btn").click(function(){
+			  		var rzId=$("#financingRe").val();
 			  		var rzName=$("#rzName").val();
 					var rzUrl=$("#rzUrl").val();
 					var enTypeName=$("#enTypeName").val();
 					var rzRemark=$("#rzRemark").val();
 					var productDiscriptio=$("#productDiscriptio").val();
-					var params = ['rzName='+rzName+'','rzRemark='+rzRemark+'','rzUrl='+rzUrl+'','enTypeName='+enTypeName+'','productDiscriptio='+productDiscriptio+''];
+					var params = ['rzId='+rzId+'','rzName='+rzName+'','rzRemark='+rzRemark+'','rzUrl='+rzUrl+'','enTypeName='+enTypeName+'','productDiscriptio='+productDiscriptio+''];
 					$.youi.ajaxUtils.ajax({
 						url:baseUrl+'/enterbusinessmanagerRzManager/saveEnterbusinessmanagerRz.json',
 						data:params.join('&'),
@@ -95,13 +96,6 @@
 		                <div class="qiye_fullname ">
 		                    <div class="qiye_nametex">企业全称</div>
 		                    <div class="name_input"><input id="rzName" name="rzName" type="text"></div>
-		                </div>
-		                <div class="qiye_jianjie ">
-		                    <div class="qiye_word">企业简介</div>
-		                    <div class="word_input">
-		                        <textarea id="rzRemark" name="rzRemark"></textarea>
-		                        <div class="font_xianzhi">字数限制：<span id="currentCount" style="color:red;">0</span>/200</div>
-		                    </div>
 		                </div>
 		                <!--
 		                <div class="qiye_address">
@@ -148,6 +142,13 @@
 								</select>
 							</div>
                 		</div>
+                		<div class="qiye_jianjie ">
+		                    <div class="qiye_word">公司介绍</div>
+		                    <div class="word_input">
+		                        <textarea id="rzRemark" name="rzRemark"></textarea>
+		                        <div class="font_xianzhi">字数限制：<span id="currentCount" style="color:red;">0</span>/200</div>
+		                    </div>
+		                </div>
             		</div>
            		<div class="jiesao_word">
 	           		<!--<div class="qiye_js">

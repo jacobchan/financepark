@@ -75,7 +75,7 @@ height:100%; position:fixed;}
 .qiye_js{ width:100%; height:406px; padding-left:75px; margin-bottom:30px;}
 .qiye_jieshao, .qiye_miaoshu, .qiye_xiangce{width:100px; height:30px; float:left;}
 .edit_tool{ width:600px; height:300px; background:#cccccc; float:left}
-.qiye_ms{width:100%; height:400px; padding-left:75px;}
+.qiye_ms{width:100%; height:300px; padding-left:75px;}
 
 .qiye_photo{ width:100%; margin:20px 0; height:auto; display:inline-block;}
 .photo_list{ float:left;height:auto; width:80%;}
