@@ -9,12 +9,13 @@
 	</youi:subpage>
 	<!--**********************************子页面**********************************-->
 	
-	<youi:grid id="grid_purchasingmanagerMerchant" idKeys="merchantId,merchantUrl,merchantAbout" caption="商户信息表列表"  panel="false"
-				src="esb/web/purchasingmanagerMerchantManager/getPagerPurchasingmanagerMerchants.json" dataFormId="form_purchasingmanagerMerchant"
+	<youi:grid id="grid_publicResoMerchant" idKeys="merchantId,merchantUrl,merchantAbout" caption="商户信息表列表"  panel="false"
+				src="esb/web/purchasingmanagerMerchantManager/getPagerPublicResoMerchants.json" dataFormId="form_publicResoMerchant"
 				editSrc="esb/web/purchasingmanagerMerchantManager/getPurchasingmanagerMerchant.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/purchasingmanagerMerchantManager/removePurchasingmanagerMerchant.json">
 		<youi:fieldLayout labelWidths="120,120">
-			<youi:fieldTree simple="false" popup="true" tree="${genreTree}" property="merchantType.genreId" caption="商户类型" onlyLeaf="true"/>
+			<youi:fieldSelect property="merchantType.genreId" src="esb/web/purchasingmanagerGenreManager/getPublicResoOrderTypes.json" 
+				show="genreName" code="genreId" caption="商户类型"/>
 			<youi:fieldText property="merchantName"  caption="商户名称"/>
 			<youi:fieldText property="merchantEnterpriseName"  caption="企业名称"/>
 		</youi:fieldLayout>
@@ -35,12 +36,13 @@
 	</youi:grid>
 	
 	<!-- form-商户信息表编辑 -->
-	<youi:form dialog="true" caption="商户信息表" id="form_purchasingmanagerMerchant" 
+	<youi:form dialog="true" caption="商户信息表" id="form_publicResoMerchant" 
 		action="esb/web/purchasingmanagerMerchantManager/savePurchasingmanagerMerchant.json">
 		<youi:fieldLayout prefix="record" labelWidths="110,110" >
 			<youi:fieldText property="merchantName"  caption="商户名称" notNull="true"/>
 			<youi:fieldText property="merchantEnterpriseName"  caption="企业名称" notNull="true"/>
-			<youi:fieldTree simple="false" popup="true" tree="${genreTree}" property="merchantType.genreId" caption="商户类型" notNull="true" onlyLeaf="true"/>
+			<youi:fieldSelect property="merchantType.genreId" src="esb/web/purchasingmanagerGenreManager/getPublicResoOrderTypes.json" 
+				show="genreName" code="genreId" caption="商户类型"/>
 			<youi:fieldText property="merchantLinkman"  caption="联系人" notNull="true"/>
 			<youi:fieldText property="merchantLinkmanPhone"  caption="联系人电话" notNull="true"/>
 			<youi:fieldText property="merchantSendAddress"  caption="发货地址" notNull="true"/>
