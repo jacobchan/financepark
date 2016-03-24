@@ -23,7 +23,6 @@
 			    return reLen;    
 			}
 			$(document).ready(function() {
-				$("#currentCount").html(getStrLength($("#rzRemark").val()));
 				$("#rzRemark").on('keyup', function() {
 				    var len = getStrLength(this.value);
 				    $("#currentCount").html(len);
@@ -44,6 +43,7 @@
 				    					$("#rzUrl").val(result.record.rzUrl);
 				    					$("#rzRemark").val(result.record.rzRemark);
 				    					$("#enTypeName").val(result.record.enTypeId.enTypeName);
+				    					$("#currentCount").html(getStrLength(result.record.rzRemark));
 									}
 								}
 							});
