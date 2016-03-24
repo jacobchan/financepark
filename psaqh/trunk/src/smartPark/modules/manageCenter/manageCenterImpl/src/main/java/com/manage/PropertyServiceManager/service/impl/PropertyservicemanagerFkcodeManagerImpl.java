@@ -258,12 +258,16 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
     @EsbServiceMapping
 	 public List<PropertyservicemanagerFkcode> getFkcodelistLikeFkcodeCode(
 			 @ServiceParam(name="userId",pubProperty="userId") String userId,
-			@ServiceParam(name="fkCode") String fkCode) throws BusException {						 
+			@ServiceParam(name="fkCode") String fkCode,
+			@ServiceParam(name="startTime") String startTime,
+			@ServiceParam(name="endTime") String endTime) throws BusException {							 
 		Collection<Condition> condition = new ArrayList<Condition>();
 		condition.add(ConditionUtils.getCondition("fkCode", Condition.LIKE, fkCode));	
-		condition.add(ConditionUtils.getCondition("member.memberId", Condition.LIKE, userId));	
+		condition.add(ConditionUtils.getCondition("member.memberId", Condition.EQUALS, userId));
+		condition.add(ConditionUtils.getCondition("fkcodeTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
 		List<PropertyservicemanagerFkcode> list =propertyservicemanagerFkcodeDao.commonQuery(condition, null);
 		return list;
 				
 	}
+    
 }
