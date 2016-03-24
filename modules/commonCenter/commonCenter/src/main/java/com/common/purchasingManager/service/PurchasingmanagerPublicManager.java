@@ -126,12 +126,14 @@ public interface PurchasingmanagerPublicManager extends BaseManager{
     /**
      *保存会议室及其会议室商品扩展属性
      * @param roomId 会议室地址
-     * @param roomContain 会议室容纳人数
+     * @param roomContain 会议室规模人数
+     * @param roomType 会议室类型人数：视屏会议室，普通会议室
+     * @param roomProjector 会议室投影仪：有 ，无
      * @param o 商品实体
      * @return
      * @throws BusException
      */
-    public void saveCommodityAndPropertyForRoom(String roomId,String roomContain,PurchasingmanagerCommodity o);
+    public void saveCommodityAndPropertyForRoom(String roomId,String roomContain,String roomType,String roomProjector,PurchasingmanagerCommodity o);
     
     /**
      *保存车辆及其车辆商品扩展属性
