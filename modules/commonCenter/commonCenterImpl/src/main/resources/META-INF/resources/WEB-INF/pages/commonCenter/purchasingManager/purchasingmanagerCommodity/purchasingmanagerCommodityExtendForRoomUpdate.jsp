@@ -10,7 +10,9 @@
 			<youi:fieldText property="commodityTitle"  caption="标题" notNull="true"/>
 			<youi:fieldText property="commodityPrice"  caption="标价" notNull="true"/>
 			<youi:fieldTree simple="false" popup="true" tree="${bbmRoomTree}" property="bbmRoom.roomId"  caption="会议室地址" onlyLeaf="true" notNull="true"/>
-			<youi:fieldText property="roomContain"  caption="容纳人数" notNull="true"/>
+			<youi:fieldText property="roomContain"  caption="规模人数" notNull="true"/>
+			<youi:fieldSelect property="roomType"  caption="会议室类型" convert="roomType" notNull="true"/>
+			<youi:fieldSelect property="roomProjector"  caption="是否有投影仪" convert="roomProjector" notNull="true"/>
 		    <youi:fieldSelect property="purchasingmanagerGenre.genreId" caption="商品类别"  src="esb/web/purchasingmanagerPublicManager/getRecordsByGenreCode.json" parents="genreCode" parentsAlias="genreCode" notNull="true" code="genreId" show="genreName"/>
 			<youi:fieldSelect property="purchasingmanagerMerchant.merchantId" caption="所属商户" src="esb/web/purchasingmanagerMerchantManager/getMerchantsByGenre.json" parents="purchasingmanagerGenre.genreId" parentsAlias="purchasingmanagerGenre.genreId" notNull="true" code="merchantId" show="merchantName"/>
 			<youi:fieldSwfupload property="commodityImage" caption="图像" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" />
@@ -50,8 +52,14 @@
 			success:function(result){
 				var record = result.records;
 				for(var i=0;i<record.length;i++){
-					if(record[i].purchasingmanagerGenreProperty.genrePropertyFieldName=='rs'){
+					if(record[i].purchasingmanagerGenreProperty.genrePropertyFieldName=='gm'){
 				       $elem('record_sFpro_roomContain',pageId).fieldValue(record[i].commodityExtendContent);
+				    }
+				    if(record[i].purchasingmanagerGenreProperty.genrePropertyFieldName=='lx'){
+				       $elem('record_sFpro_roomType',pageId).fieldValue(record[i].commodityExtendContent);
+				    }
+				    if(record[i].purchasingmanagerGenreProperty.genrePropertyFieldName=='tyy'){
+				       $elem('record_sFpro_roomProjector',pageId).fieldValue(record[i].commodityExtendContent);
 				    }
 				  }
 			}
@@ -66,6 +74,8 @@
 		var commodityPrice = $elem('record_sFpro_commodityPrice',pageId).fieldValue();
 	    var roomId = $elem('record_sFpro_bbmRoom_roomId',pageId).fieldValue();
 	    var roomContain = $elem('record_sFpro_roomContain',pageId).fieldValue();
+	    var roomType = $elem('record_sFpro_roomType',pageId).fieldValue();
+	    var roomProjector = $elem('record_sFpro_roomProjector',pageId).fieldValue();
 	    var genreId = $elem('record_sFpro_purchasingmanagerGenre_genreId',pageId).fieldValue();
 	    var merchantId = $elem('record_sFpro_purchasingmanagerMerchant_merchantId',pageId).fieldValue();
 		var commodityImage = $elem('record_sFpro_commodityImage',pageId).fieldValue();
@@ -84,7 +94,15 @@
 		   return false;
 		}
 		if(!roomContain || roomContain==''){
-		   alert("容纳人数不能为空");
+		   alert("规模人数不能为空");
+		   return false;
+		}
+		if(!roomType || roomType==''){
+		   alert("会议室类型不能为空");
+		   return false;
+		}
+		if(!roomProjector || roomProjector==''){
+		   alert("会议室投影仪不能为空");
 		   return false;
 		}
 		if(!genreId || genreId==''){
@@ -100,7 +118,7 @@
 		   return false;
 		}
 		var params = '';
-		params = params+'commodityId='+commodityId+'&'+'commodityTitle='+commodityTitle+'&'+'commodityPrice='+commodityPrice+'&'+'roomId='+roomId+'&'+'roomContain='+roomContain+'&'+
+		params = params+'commodityId='+commodityId+'&'+'commodityTitle='+commodityTitle+'&'+'commodityPrice='+commodityPrice+'&'+'roomId='+roomId+'&'+'roomContain='+roomContain+'&'+'roomType='+roomType+'&'+'roomProjector='+roomProjector+'&'
 		'purchasingmanagerGenre.genreId='+genreId+'&'+'purchasingmanagerMerchant.merchantId='+merchantId+'&'+'commodityImage='+commodityImage+'&'+'commodityCoverImage='+commodityCoverImage+'&'+'commodityDescribe='+commodityDescribe;
 		$.youi.ajaxUtil.ajax({
 			url:'/esb/web/purchasingmanagerPublicManager/saveCommodityAndPropertyForRoom.json',

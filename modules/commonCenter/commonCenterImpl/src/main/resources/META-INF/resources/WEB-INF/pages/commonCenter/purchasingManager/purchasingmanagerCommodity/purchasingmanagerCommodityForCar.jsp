@@ -41,7 +41,7 @@
 		    <youi:fieldHidden property="genreCode"  caption="车辆" defaultValue="0302"/>
 			<youi:fieldText property="commodityTitle"  caption="标题" notNull="true"/>
 			<youi:fieldText property="commodityPrice"  caption="标价" notNull="true"/>
-			<youi:fieldText property="stalls" caption="档位" notNull="true"/>
+			<youi:fieldText property="stalls" caption="档位" convert="stalls" notNull="true"/>
 			<youi:fieldText property="seat"  caption="座位" notNull="true"/>
 			<youi:fieldText property="licensePlate"  caption="车牌" notNull="true"/>
 			 <youi:fieldSelect property="purchasingmanagerGenre.genreId" caption="商品类别"  src="esb/web/purchasingmanagerPublicManager/getRecordsByGenreCode.json" parents="genreCode" parentsAlias="genreCode" notNull="true" code="genreId" show="genreName"/>
