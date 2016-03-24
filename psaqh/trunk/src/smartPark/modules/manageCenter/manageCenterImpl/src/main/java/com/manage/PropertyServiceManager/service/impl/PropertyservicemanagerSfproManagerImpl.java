@@ -221,7 +221,7 @@ public class PropertyservicemanagerSfproManagerImpl extends BaseManagerImpl impl
     		userOrder.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("WYJF"));
     		userOrder.setUserorderStatus("01");//01-未支付
     		//获取物业缴费类别对象
-    		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("08");
+    		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","08");
     		userOrder.setGenreId(pg);
     		userOrder = ordermanagerUserorderManager.saveOrdermanagerUserorder(userOrder);
     		pc.setUserorder(userOrder);
