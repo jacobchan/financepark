@@ -20,7 +20,7 @@
 							<label class="fl mr20 f16">申请时间：</label>
 							<input class="bd-input fl" type="text"><span class="fl ml15 mr15">到</span>
 							<input class="bd-input fl" type="text">
-							<div class="inp-box ml20"><input placeholder="订单号查询" type="text"><a class="fa fa-search" href=""></a></div>
+							<div class="inp-box ml20"><input placeholder="订单号查询" type="text" id="userorderCode"><a class="fa fa-search" href=""></a></div>
 							<input value="搜索" class="hhf-submit f14 fr" type="button">
 						</div>
 						<table class="gt-table mt20">
@@ -40,38 +40,8 @@
 								<th>截止日期</th>
 								<th>操作</th>
 							</tr>
-							<!-- <tr>
-								<td><a href="">123456789</a></td>
-								<td>水电费</td>
-								<td>180元</td>
-								<td>未缴费</td>
-								<td>2016-1-12</td>
-								<td><a href="javascript:;" class="ac-see">付款</a></td>
-							</tr>
-							<tr>
-								<td><a href="">123456789</a></td>
-								<td>水电费</td>
-								<td>180元</td>
-								<td>未缴费</td>
-								<td>2016-1-12</td>
-								<td><a href="javascript:;" class="ac-see">付款</a></td>
-							</tr> -->
-							<tr>
-								<td><a href="">123456789</a></td>
-								<td>水电费</td>
-								<td>180元</td>
-								<td>未缴费</td>
-								<td>2016-1-12</td>
-								<td><a href="javascript:;" class="ac-see lq-fp">领取发票</a></td>
-							</tr>
-							<tr>
-								<td><a href="">123456789</a></td>
-								<td>水电费</td>
-								<td>180元</td>
-								<td>未缴费</td>
-								<td>2016-1-12</td>
-								<td><a href="javascript:;" class="ac-see">已开发票</a></td>
-							</tr>
+							
+							
 						</tbody></table>
 						<div class="fr page-list-a clearfix lh30 mt20 f12">
 							<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
@@ -180,7 +150,7 @@
 				buttonHtml="<td><a href='javascript:;' class='ac-see lq-fp'>领取发票</a></td>";
 			}
 			
-			var html="<tr id='"+record[i].chargeId+"'>"+
+			var html="<tr id='"+record[i].chargeId+"' class='aaa'>"+
 				 	 "<td><a href=''>"+record[i].userorder.userorderCode+"</a></td>"+
 					 "<td>"+record[i].userorder.userorderProject+"</td>"+
 					 "<td>"+record[i].chargeAmount+"元</td>"+
@@ -195,6 +165,23 @@
 		var me=obj.parentNode.parentNode;
 		alert(me.id+"          付款功能后续添加！");
 	}
+	//根据订单号查询
+	$('.hhf-submit').click(function(){	
+		
+		$(".aaa").empty();
+		 var userorderCode=$("#userorderCode").val(); 
+	      $.ajax({
+	    	 url:baseUrl+'/propertyservicemanagerChargeManager/getChargelistLikeUserorderCode.json',
+	    	 data:'userorderCode='+userorderCode,
+	    	 success:function(result){		
+	    		 
+					console.log(result.records);           
+					if(result&&result.records){						
+						_parseRecords(result.records);							
+					}
+				}
+		}); 
+	}); 
 	</script>
 </body>
 <%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 
