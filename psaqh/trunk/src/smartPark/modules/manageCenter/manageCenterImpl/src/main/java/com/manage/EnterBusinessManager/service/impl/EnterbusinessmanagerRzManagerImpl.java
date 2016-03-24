@@ -137,6 +137,19 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     	}
     	
     }
+	
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId")})
+    public EnterbusinessmanagerRz updateEnterbusinessmanagerRz(EnterbusinessmanagerRz o) throws BusException{
+		EnterbusinessmanagerRz r = enterbusinessmanagerRzDao.get(o.getRzId());
+		BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(o.getRoomId().getRoomId());
+		r.setRzLogo(o.getRzLogo());
+		r.setRzName(o.getRzName());
+		r.setRoomId(bbmRoom);
+		r.setRzUrl(o.getRzUrl());
+		r.setRzRemark(o.getRzRemark());
+		r.setProductDiscriptio(o.getProductDiscriptio());
+		return enterbusinessmanagerRzDao.save(r);
+	}
 
     /**
      * 删除对象
