@@ -172,10 +172,13 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
 	@EsbServiceMapping
 	 public List<PropertyservicemanagerCos> getCoslistLikeCosCode(
 			 @ServiceParam(name="userId",pubProperty="userId") String userId,
-			@ServiceParam(name="cosCode") String cosCode) throws BusException {						 
+			@ServiceParam(name="cosCode") String cosCode,
+			@ServiceParam(name="startTime") String startTime,
+			@ServiceParam(name="endTime") String endTime) throws BusException {						 
 		Collection<Condition> condition = new ArrayList<Condition>();
 		condition.add(ConditionUtils.getCondition("cosCode", Condition.LIKE, cosCode));	
-		condition.add(ConditionUtils.getCondition("memberInformation.memberId", Condition.LIKE, userId));	
+		condition.add(ConditionUtils.getCondition("memberInformation.memberId", Condition.EQUALS, userId));
+		condition.add(ConditionUtils.getCondition("cosTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
 		List<PropertyservicemanagerCos> list =propertyservicemanagerCosDao.commonQuery(condition, null);
 		return list;
 				
