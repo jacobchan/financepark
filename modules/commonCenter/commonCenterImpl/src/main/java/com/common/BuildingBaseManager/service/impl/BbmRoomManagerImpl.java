@@ -100,19 +100,56 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
     	BbmPark park = building.getBbmPark() ;//获取园区对象
     	o.setBbmBuilding(building);
     	o.setBbmPark(park);
+    	vilidateForRoomNo(floor,building,o.getRoomNo()) ;
     	if(isUpdate){//修改
     		return bbmRoomDao.save(o);
     	}else{//新增
+    		String parkAddress = park.getAddress() ;//园区地址
     		String parkName = park.getParkName() ;//园区名字
         	String buildingNo = building.getBuildingNo() ;//楼栋编号
         	String floorNo = floor.getFloorNo() ;//楼层编号
         	String roomNo = o.getRoomNo() ;//单元编号
-        	String roomAddress = parkName+buildingNo+floorNo+roomNo ;//详细地址
+        	String roomAddress = parkAddress+parkName+buildingNo+floorNo+roomNo ;//详细地址
         	o.setRoomAddress(roomAddress);
         	return bbmRoomDao.save(o);
     	}
     }
-
+    
+    /**
+     * 验证后台传过来的单元编号的格式！
+     * @param floor
+     * @param building
+     * @param roomNo
+     * @throws BusException
+     */
+    private void vilidateForRoomNo(BbmFloor floor,BbmBuilding building,String roomNo) throws BusException{
+    	String buildingNo = building.getBuildingNo() ;
+    	String floorNo = floor.getFloorNo() ;
+    	String prefix = buildingNo + "-" + floorNo + "-" ;
+    	String format = "([A-Za-z0-9]+)-([A-Za-z0-9]+)-([A-Za-z0-9]+)" ;
+    	if(roomNo.matches(format)){
+    		String[] str = roomNo.split("-") ;
+    		if(str.length == 3){
+    			String temp = str[0]+"-"+str[1]+"-" ;
+    			if(!prefix.equals(temp)){
+    				throw new BusException("单元编号前缀必须为：楼栋编号-楼层编号-") ;
+    			}else{
+    				try{
+    					int num = Integer.parseInt(str[2]) ;
+    					if(num <= 0 || num > 12){
+    						throw new BusException("单元编号后两位必须在01到12之间！") ;
+    					}
+    				}catch(BusException be){
+    					throw new BusException("单元编号的后两位必须是数字！") ;
+    				}
+    			}
+    		}else{
+    			throw new BusException("单元编号格式不正确") ;
+    		}
+    	}else{
+			throw new BusException("单元编号格式不正确") ;
+		}
+    }
     /**
      * 删除对象
      */
