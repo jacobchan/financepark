@@ -158,13 +158,16 @@ public class PropertyservicemanagerChargeManagerImpl extends BaseManagerImpl imp
     @EsbServiceMapping
 	 public List<PropertyservicemanagerCharge> getChargelistLikeUserorderCode(
 			 @ServiceParam(name="userId",pubProperty="userId") String userId,
-			@ServiceParam(name="userorderCode") String userorderCode) throws BusException {	
+			@ServiceParam(name="userorderCode") String userorderCode,
+			@ServiceParam(name="startTime") String startTime,
+			@ServiceParam(name="endTime") String endTime) throws BusException {		
         EnterpriseEmployees e = enterpriseEmployeesDao.getObjectByUniqueProperty("member.memberId", userId);
 	    EnterbusinessmanagerRz rz=e.getRz();
         String rzName=rz.getRzName();
 		Collection<Condition> condition = new ArrayList<Condition>();
 		condition.add(ConditionUtils.getCondition("chargeComp", Condition.EQUALS, rzName));	
-		condition.add(ConditionUtils.getCondition("userorder.userorderCode", Condition.LIKE, userorderCode));	
+		condition.add(ConditionUtils.getCondition("userorder.userorderCode", Condition.LIKE, userorderCode));
+		condition.add(ConditionUtils.getCondition("chargeEndate", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
 		List<PropertyservicemanagerCharge> list =propertyservicemanagerChargeDao.commonQuery(condition, null);
 		return list;
     }
