@@ -29,6 +29,34 @@
 				
 				var height = Math.max((document.documentElement.clientHeight -135), ($(".main-wrapper").height()));
 			  	document.getElementById('main-wrapper-right').style.height=height+'px';
+			  	
+			  	$.ajax({
+					url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
+					success:function(result){
+						if(result&&result.record){
+							_parseRecords(result.record);
+						}
+					}
+				});
+			});
+			$('.hhf-submit').click(function(){
+				var legalRe=$("#legalRe").html();
+				var legalName=$("#legalName").val();
+				var legalBirthday=$("#legalBirthday").val();
+				var legalTelephone=$("#legalTelephone").val();
+				var legalBusiness=$("#legalBusiness").val();
+				var legalRemark=$("#legalRemark").val();
+				var params = ['legalRe='+legalRe+'','legalName='+legalName+'','legalBirthday='+legalBirthday+'','legalTelephone='+legalTelephone+'','legalBusiness='+legalBusiness+'','legalRemark='+legalRemark+''];
+				$.youi.ajaxUtils.ajax({
+					url:baseUrl+'/informationLegalManager/saveInformationLegal.json',
+					data:params.join('&'),
+					success:function(result){
+						if(result && result.record){
+							alert("修改成功");
+							location.reload();
+						}
+					}
+				});
 			});
 		</script>
 	</head>
@@ -44,6 +72,7 @@
 		            <div class="qiye_header-img clearfix">
 		            	<div class="qiye_text"><span>头像</span></div>
 		                <div class="upload_main">
+		                	<span class="" id="legalRe" style="display:none;"></span>
 		                    <img src="../styles/images/qiye/user-photo.png" border="0" class="fl" width="107" height="107"/>
 							<div class="photo-edit"><input type="file" />编辑<br/>头像</div>
 		            	</div>
