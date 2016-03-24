@@ -36,7 +36,7 @@ public class MemCenterLayout extends AbstractLayout {
 		htmls.append(appendJsp(pagecontext,"header.jsp"));
 		
 		//构建菜单
-		htmls.append("<div class=\"layout-content\"><div class=\"container\"><div class=\"static-html\">");
+		htmls.append("<div class=\"w100\"><div class=\"w1200 clearfix pt30 pb50\"><div class=\"per-center-box clearfix\">");
 		htmls.append(appendJsp(pagecontext,"left.jsp"));
 		//构建内容开始
 		htmls.append("<div class=\"right\">");
