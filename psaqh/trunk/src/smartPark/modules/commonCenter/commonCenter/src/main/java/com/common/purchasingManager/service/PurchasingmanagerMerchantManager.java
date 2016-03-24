@@ -69,4 +69,55 @@ public interface PurchasingmanagerMerchantManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public List<PurchasingmanagerMerchant> getMerchantsByGenre(String genreId)  throws BusException;
+	/**
+	 * 获取会议室所属商户列表
+	 * @return
+	 * @throws BusException
+	 */
+	public List<PurchasingmanagerMerchant> getMeetRoomMerchants() throws BusException;
+	/**
+	 * 获取车辆租赁所属商户列表
+	 * @return
+	 * @throws BusException
+	 */
+	public List<PurchasingmanagerMerchant> getCarRentalMerchants() throws BusException;
+	/**
+	 * 获取广告位所属商户列表
+	 * @return
+	 * @throws BusException
+	 */
+	public List<PurchasingmanagerMerchant> getAdsenseMerchants() throws BusException;
+	/**
+	 * 获取公共资源类型的商户列表
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	public PagerRecords getPagerPublicResoMerchants(Pager pager,
+			Collection<Condition> conditions, Collection<Order> orders)
+			throws BusException;
+	/**
+	 * 获取采购类型的商户列表
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	public PagerRecords getPagerPurMerchants(Pager pager,
+			Collection<Condition> conditions, Collection<Order> orders)
+			throws BusException;
+	/**
+	 * 获取企业服务类型的商户列表
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	public PagerRecords getPagerCompSerMerchants(Pager pager,
+			Collection<Condition> conditions, Collection<Order> orders)
+			throws BusException;
 }

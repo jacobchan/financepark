@@ -109,4 +109,25 @@ public interface PurchasingmanagerCommodityManager extends BaseManager{
      * @throws BusException
      */
     public List<PurchasingmanagerCommodity> getChopPatentCommodityList(String userId) throws BusException;
+    /**
+     * 保存会议室
+     * @param o
+     * @return
+     * @throws BusException
+     */
+	public PurchasingmanagerCommodity saveMeetRoomCommodity(PurchasingmanagerCommodity o) throws BusException;
+	/**
+	 * 保存广告位
+	 * @param o
+	 * @return
+	 * @throws BusException
+	 */
+	public PurchasingmanagerCommodity saveAdsenseCommodity(PurchasingmanagerCommodity o) throws BusException;
+	/**
+	 * 保存车辆租赁
+	 * @param o
+	 * @return
+	 * @throws BusException
+	 */
+	public PurchasingmanagerCommodity saveCarRentalCommodity(PurchasingmanagerCommodity o) throws BusException;
 }
