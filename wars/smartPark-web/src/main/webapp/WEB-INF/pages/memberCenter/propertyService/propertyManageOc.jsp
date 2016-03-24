@@ -25,10 +25,7 @@
 							<input class="bd-input fl" type="text" id="endTime">
 							<div class="inp-box ml20"><input placeholder="订单号查询" type="text" id="ocCode"><a class="fa fa-search" href=""></a></div>
 							<input value="搜索" class="hhf-submit f14 fr" type="button">
-						</div>
-						
-					   
-					    
+						</div>											   					    
 						<table class="gt-table mt20" border="0">
                         <tr>
 					     	<td width="111">订单号 </td>
@@ -37,11 +34,8 @@
                          	<!-- <td width="111">预约用户          </td> -->
                          	<td width="111">状态        </td>
                          	<td width="111">操作  </td>
-                         </tr>
-                           
-                         </table>
-
-                        
+                         </tr>                          
+                         </table>                     
 						<div class="fr page-list-a clearfix lh30 mt20 f12">
 							<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
 							<a href="">首</a>
@@ -50,8 +44,7 @@
 							<a href=""><i class="fa fa-angle-right"></i></a>
 							<a href="">末</a>
 							<input class="bd-input fl ml10 mr10" style="width:40px;" type="text">
-							<a href="">Go</a>
-							
+							<a href="">Go</a>							
 						</div>
 					</div>
 				</div>
@@ -75,8 +68,7 @@
 					}
 				}
 			});
-		});
-		
+		});		
 		//拼接卡号列表
 		function _parseRecords(record){		
 	 		for(var i=0;i<record.length;i++){
@@ -112,9 +104,7 @@
 				      "<td width='111' >"+status+"</td>"+                    
                       " </tr>"; 
 			 		$(".gt-table").append(html);	
-				}
-				 
-				
+				}				 				
 			}
 		};
 		function hhf(id){						
@@ -137,12 +127,11 @@
 			 var ocCode=$("#ocCode").val(); 
 			 var startTime=$("#startTime").val(); 
 			 var endTime=$("#endTime").val(); 
-			 params=['ocCode='+ocCode+'','startTime='+startTime+'','endTime='+endTime+'']
+			 params=['ocCode='+ocCode+'','startTime='+startTime+'','endTime='+endTime+''];
 		      $.ajax({
 		    	 url:baseUrl+'/propertyservicemanagerOcManager/getOclistLikeOcCode.json',		    	
 		    	 data:params.join('&'),
-		    	 success:function(result){		
-		    		 
+		    	 success:function(result){				    		 
 						console.log(result.records);           
 						if(result&&result.records){						
 							_parseRecords(result.records);							
