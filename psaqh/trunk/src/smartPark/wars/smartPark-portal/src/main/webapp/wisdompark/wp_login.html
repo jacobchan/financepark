@@ -255,7 +255,6 @@
 		}
 		function _parseRecords(record){//record为单元的list
 			$(".hxpic >div").each(function(i){
-				if(i<record.length){
 					var roomNum = $(this).attr("title") ;//得到当前div的编号
 					var room = roomByNo(record,roomNum) ;
 					if(room){
@@ -268,11 +267,10 @@
 							$(this).addClass("bggreen") ;
 						}
 						$(this).attr("id",room.roomId) ;
-					}
-				}else{
-					$(this).addClass("bgred") ;
-					$(this).attr("id","") ;
-				} 
+					}else{
+						$(this).addClass("bgred") ;
+						$(this).attr("id","") ;
+					} 
 			});
 		} 
 		
