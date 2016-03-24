@@ -23,7 +23,7 @@
 							<label class="fl mr20 f16">申请时间：</label>
 							<input class="bd-input fl" type="text"><span class="fl ml15 mr15">到</span>
 							<input class="bd-input fl" type="text">
-							<div class="inp-box ml20"><input placeholder="订单号查询" type="text"><a class="fa fa-search" href=""></a></div>
+							<div class="inp-box ml20"><input placeholder="订单号查询" type="text" id="ocCode"><a class="fa fa-search" href=""></a></div>
 							<input value="搜索" class="hhf-submit f14 fr" type="button">
 						</div>
 						
@@ -103,7 +103,7 @@
 					  else if(record[i].ocStatus=='08'){
 						  status = "已取消";
 					  }	
-					  var html= "<tr>"+
+					  var html= "<tr class='aaa'>"+
 				      "<td width='111'>"+record[i].ocCode+"</td>"+
 				      "<td width='111'>"+record[i].ocComp+"</td>"+
 				      "<td width='111'>"+record[i].ocDate+"</td>"+
@@ -130,7 +130,23 @@
 				}
 			});
 		}
-	
+		//根据订单号查询
+		$('.hhf-submit').click(function(){	
+			
+			$(".aaa").empty();
+			 var ocCode=$("#ocCode").val(); 
+		      $.ajax({
+		    	 url:baseUrl+'/propertyservicemanagerOcManager/getOclistLikeOcCode.json',
+		    	 data:'ocCode='+ocCode,
+		    	 success:function(result){		
+		    		 
+						console.log(result.records);           
+						if(result&&result.records){						
+							_parseRecords(result.records);							
+						}
+					}
+			}); 
+		}); 
 		
 	</script>
 </body>
