@@ -98,5 +98,5 @@ public interface PropertyservicemanagerFkcodeManager extends BaseManager{
 	 * @return userId当前用户id
 	 * @throws BusException
 	 */
-    public List<PropertyservicemanagerFkcode> getFkcodelistLikeFkcodeCode(String userId,String fkCode) throws BusException;
+    public List<PropertyservicemanagerFkcode> getFkcodelistLikeFkcodeCode(String userId,String fkCode,String startTime,String endTime) throws BusException;
 }
