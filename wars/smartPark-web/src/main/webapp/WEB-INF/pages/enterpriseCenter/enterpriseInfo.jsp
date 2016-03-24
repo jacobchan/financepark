@@ -8,7 +8,26 @@
 		<%@ include file="/WEB-INF/pages/common/enterpriseScriptAddCss.jsp"%>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript">
+			// 中文字符判断
+			function getStrLength(str) { 
+				var len = str.length; 
+			    var reLen = 0; 
+			    for (var i = 0; i < len; i++) {        
+			        if (str.charCodeAt(i) < 27 || str.charCodeAt(i) > 126) { 
+			            // 全角    
+			            reLen += 2; 
+			        } else { 
+			            reLen++; 
+			        } 
+			    } 
+			    return reLen;    
+			}
 			$(document).ready(function() {
+				$("#currentCount").html(getStrLength($("#rzRemark").val()));
+				$("#rzRemark").on('keyup', function() {
+				    var len = getStrLength(this.value);
+				    $("#currentCount").html(len);
+				});
 			  	$.ajax({
 					url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
 					success:function(result){
@@ -23,6 +42,7 @@
 										$("#rzName").val(result.record.rzName);
 				    					$("#rzUrl").val(result.record.rzUrl);
 				    					$("#rzRemark").val(result.record.rzRemark);
+				    					$("#enTypeName").val(result.record.enTypeId.enTypeName);
 									}
 								}
 							});
@@ -63,7 +83,7 @@
 		                    <div class="qiye_word">企业简介</div>
 		                    <div class="word_input">
 		                        <textarea id="rzRemark" name="rzRemark"></textarea>
-		                        <div class="font_xianzhi">字数限制：0/200</div>
+		                        <div class="font_xianzhi">字数限制：<span id="currentCount" style="color:red;">0</span>/200</div>
 		                    </div>
 		                </div>
 		                <div class="qiye_address">
@@ -105,11 +125,11 @@
 								<div class="ic-select">
 									<p class="c-b1">互联网技术</p>
 								</div>
-								<ul style="display: none;" class="select-nav">
-									<li>互联网技术1</li>
-									<li>互联网技术2</li>
-									<li>互联网技术3</li>
-								</ul>
+								<select id="enTypeName" name="enTypeName" style="display: none;" class="select-nav">
+									<option value="1">互联网技术1</option>
+									<option value="2">互联网技术2</option>
+									<option value="3">互联网技术3</option>
+								</select>
 							</div>
                 		</div>
             		</div>
