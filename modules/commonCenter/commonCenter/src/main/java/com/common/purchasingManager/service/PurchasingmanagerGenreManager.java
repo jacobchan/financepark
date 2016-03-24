@@ -88,7 +88,7 @@ public interface PurchasingmanagerGenreManager extends BaseManager{
 	 * @return
 	 * @throws BusException
 	 */
-    public PurchasingmanagerGenre getGenreByUniqueProperty(String genreCode) throws BusException;
+    public PurchasingmanagerGenre getGenreByUniqueProperty(String paramString,Object paramObject) throws BusException;
     /**
      * 获取所有商品类别列表
      * @return
@@ -101,4 +101,20 @@ public interface PurchasingmanagerGenreManager extends BaseManager{
      * @throws BusException
      */
 	public List<PurchasingmanagerGenre> getITSubGenreList(String userId) throws BusException;
+	/**
+	 * 获取公共资源的所有类别列表
+	 * @param userId
+	 * @return
+	 * @throws BusException
+	 */
+	public List<PurchasingmanagerGenre> getPublicResoOrderTypes(String userId)
+			throws BusException;
+	/**
+	 * 获取企业服务的所有类别列表
+	 * @param userId
+	 * @return
+	 * @throws BusException
+	 */
+	public List<PurchasingmanagerGenre> getCompSerOrderTypes(String userId)
+			throws BusException;
 }
