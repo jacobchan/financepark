@@ -239,9 +239,7 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
 		// TODO Auto-generated method stub
     	//获取当前用户参加活动的list
     	Collection<Condition> condition = new ArrayList<Condition>();
-    	if(o.getApplayType()!=null){
-    		condition.add(ConditionUtils.getCondition("applayType.typeId", Condition.EQUALS,o.getApplayType().getTypeId()));	
-    	}
+    	condition.add(ConditionUtils.getCondition("applayType.isRecoment", Condition.EQUALS,"0"));	
     	List<ActivityApply> activityApplyList=activityApplyDao.commonQuery(condition, null);
 		return activityApplyList;
 	}
