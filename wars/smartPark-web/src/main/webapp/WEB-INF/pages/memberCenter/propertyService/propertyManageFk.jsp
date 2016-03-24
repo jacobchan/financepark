@@ -18,8 +18,8 @@
 					<div class="clearfix">
 						<div class="mt20 gr-txl clearfix lh30">
 							<label class="fl mr20 f16">申请时间：</label>
-							<input class="bd-input fl" type="text"><span class="fl ml15 mr15">到</span>
-							<input class="bd-input fl" type="text" >
+							<input class="bd-input fl" type="text" id="startTime"><span class="fl ml15 mr15">到</span>
+							<input class="bd-input fl" type="text" id="endTime">
 							<div class="inp-box ml20"><input placeholder="订单号查询" type="text" id="fkCode"><a class="fa fa-search" href=""></a></div>
 							<input value="搜索" class="hhf-submit f14 fr" type="button">
 						</div>
@@ -146,6 +146,7 @@
 		</div>
 	</div>
 	<!--***弹窗 end****************************************-->
+	<script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
 	<script type="text/javascript">
 		$(function () {
 			star(".starbox1 i");
@@ -228,15 +229,16 @@
 			});
 		};
 		//根据订单号查询
-		$('.hhf-submit').click(function(){	
-			
+		$('.hhf-submit').click(function(){				
 			$(".aaa").empty();
 			 var fkCode=$("#fkCode").val(); 
+			 var startTime=$("#startTime").val(); 
+			 var endTime=$("#endTime").val(); 
+			 params=['fkCode='+fkCode+'','startTime='+startTime+'','endTime='+endTime+'']
 		      $.ajax({
 		    	 url:baseUrl+'/propertyservicemanagerFkcodeManager/getFkcodelistLikeFkcodeCode.json',
-		    	 data:'fkCode='+fkCode,
-		    	 success:function(result){		
-		    		 
+		    	 data:params.join('&'),
+		    	 success:function(result){				    		 
 						console.log(result.records);           
 						if(result&&result.records){						
 							_parseRecords(result.records);							
@@ -263,6 +265,22 @@
 				});
 			});
 		});
+	$(function(){
+		laydate({
+		    elem: '#startTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+		    format: 'YYYY-MM-DD hh:mm:ss', //日期格式
+	        istime: true, //是否开启时间选择
+		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+		});
+	})
+	$(function(){
+		laydate({
+		    elem: '#endTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+		    format: 'YYYY-MM-DD hh:mm:ss', //日期格式
+	        istime: true, //是否开启时间选择
+		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+		});
+	})
 	</script>
 </body>
 <%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 
