@@ -38,6 +38,7 @@
 								data : ['rzId='+result.record.companyId].join('&'),
 								success:function(result){
 									if(result&&result.record){
+										$("#rzLogo").attr("src","/filestore/"+result.record.rzLogo);
 										$("#financingRe").html(result.record.rzId);
 										$("#rzName").val(result.record.rzName);
 				    					$("#rzUrl").val(result.record.rzUrl);
@@ -69,6 +70,7 @@
 		        	<span class="" id="financingRe" style="display:none;"></span>
 		            <div class="qiye_logo">
 		            	<div class="qiye_text"><span>企业logo</span></div>
+		            	<div class="photo-edit" id="destination"><img id="rzLogo" src="" width="107" height="107"/></div>
 		                <div class="upload_main">
 		                    <div class="qiye_pic">添加标志</div>
 		                    <div class="upload_input"><input type="file"></div>
@@ -86,6 +88,7 @@
 		                        <div class="font_xianzhi">字数限制：<span id="currentCount" style="color:red;">0</span>/200</div>
 		                    </div>
 		                </div>
+		                <!--
 		                <div class="qiye_address">
 		                    <div class="qiye_word">地址</div>
 		                    <div class="select_address">
@@ -115,6 +118,7 @@
 		                        </div>
 		                    </div>
 		                </div>
+		                -->
 		                <div class="qiye_web">
 		                    <div class="qiye_webtex">官方网站</div>
 		                    <div class="web_input"><input id="rzUrl" name="rzUrl" type="text"></div>
@@ -122,9 +126,6 @@
 		                <div class="qiye_address">
 		                    <div class="qiye_word">所在行业</div>
                             <div class="tct-select fl mr20" style="width:290px">
-								<div class="ic-select">
-									<p class="c-b1">互联网技术</p>
-								</div>
 								<select id="enTypeName" name="enTypeName" style="display: none;" class="select-nav">
 									<option value="1">互联网技术1</option>
 									<option value="2">互联网技术2</option>
@@ -136,11 +137,15 @@
            		<div class="jiesao_word">
 	           		<div class="qiye_js">
 	                	<div class="qiye_jieshao"><span>公司介绍</span></div>
-	                    <textarea id="editorrzRemark" name="rzRemark" cols="20" rows="5" class="ckeditor"></textarea>
+	                    <div class="edit_tool">
+	                    	<textarea id="editorrzRemark" name="rzRemark" cols="20" rows="5" class="ckeditor"></textarea>
+	                    </div>
 	                </div>
 	                <div class="qiye_ms">
 	                	<div class="qiye_miaoshu"><span>产品描述</span></div>
-	                    <textarea id="editorproductDiscriptio" name="productDiscriptio" cols="20" rows="5" class="ckeditor"></textarea>
+	                    <div class="edit_tool">
+	                    	<textarea id="editorproductDiscriptio" name="productDiscriptio" cols="20" rows="5" class="ckeditor"></textarea>
+	                    </div>
 	                </div>
 				</div>
            		<div class="qiye_photo">
