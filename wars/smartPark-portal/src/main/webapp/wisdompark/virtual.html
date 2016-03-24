@@ -62,7 +62,7 @@ to {opacity:0;}
             <li><a href="#">创智中心6#楼</a></li>
             <li><a href="#">创智中心7#楼</a></li>  -->
         </ul>
-        <div class="fl zz1"></div>
+        <!-- <div class="fl zz1"></div> -->
     </div>
 	
 	<div class="maskset">
@@ -164,7 +164,6 @@ $(function(){
 				dataType:'jsonp',
 				success:function(result){
 					if(result&&result.records){
-						console.log(result.records) ;
 						var html = appendHtml(result.records) ;
 						$("#"+buildingId).find(".subul").empty();
 						$("#"+buildingId).find(".subul").append(html) ;
