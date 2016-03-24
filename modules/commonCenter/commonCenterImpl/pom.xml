@@ -43,6 +43,13 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>com.gsoft.framework</groupId>
+			<artifactId>gsoft-framework-codemap</artifactId>
+			<version>${gsoft.framework.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 		</dependency>
