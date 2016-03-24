@@ -28,6 +28,8 @@ import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
 import com.gsoft.utils.HttpSenderMsg;
 import com.gsoft.utils.QRCodeUtil;
+import com.manage.EmployeeManager.entity.EnterpriseEmployees;
+import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTwcrd;
@@ -44,6 +46,8 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
 	private PropertyservicemanagerTwcrdManager propertyservicemanagerTwcrdManager ;
 	@Autowired
 	private MemberInformationManager memberInformationManager;
+	@Autowired
+	private EnterpriseEmployeesManager enterpriseEmployeesManager;
 	@Value("#{configProperties['file.root.path']}")
 	private String root;
     /**
@@ -93,6 +97,16 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setApplyTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setFkCode(BizCodeUtil.getInstance().getBizCodeDate("WYGV"));
+    		//查询登陆人所在企业
+    		EnterpriseEmployees em = null;
+    		Collection<Condition> conditions = new ArrayList<Condition>();
+	    	conditions.add(ConditionUtils.getCondition("member.memberId", Condition.EQUALS, o.getMember().getMemberId()));
+    		List<EnterpriseEmployees> employlist =  enterpriseEmployeesManager.getEnterpriseEmployeess(conditions, null);
+    		if(employlist.size()>0){
+    			em = employlist.get(0);
+    			o.setFkcodeComp(em.getRz().getRzId());//保存所在企业id
+    		}
+    		
     		fkcode = propertyservicemanagerFkcodeDao.save(o) ;//保存访客申请
     		
     		try {
