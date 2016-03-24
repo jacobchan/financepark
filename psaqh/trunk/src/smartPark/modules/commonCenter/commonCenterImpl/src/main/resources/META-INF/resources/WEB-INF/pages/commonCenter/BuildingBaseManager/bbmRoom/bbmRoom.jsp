@@ -48,7 +48,7 @@
 			<youi:fieldSelect property="bbmFloor.floorId" caption="所属楼层" code="floorId" show="floorCaption" notNull="true"
 				src="esb/web/bbmFloorManager/getBbmFloors.json" parents="bbmBuilding.buildingId" parentsAlias="bbmBuilding.buildingId"/> --%>
 			<youi:fieldText property="roomCaption"  caption="单元说明"/>
-			<youi:fieldSelect property="status"  caption="使用状态" convert="roomstatus"/>
+			<youi:fieldSelect property="status"  caption="使用状态" convert="roomstatus" notNull="true"/>
 			<youi:fieldText property="roomHost"  caption="单元业主" notNull="true"/>
 			
 			<youi:fieldHidden property="roomTenement"  caption="单元租户"/>
