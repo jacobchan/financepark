@@ -91,4 +91,12 @@ public interface PropertyservicemanagerOcManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public PropertyservicemanagerOc cancleOcStatus(String id)throws BusException;
+	/**
+	 * 通过订单号获取当前用户的一卡通申请记录  模糊查询
+	 * @param userId
+	 * @param ocCode
+	 * @return
+	 * @throws BusException
+	 */
+	public List<PropertyservicemanagerOc> getOclistLikeOcCode(String userId,String ocCode) throws BusException;
 }
