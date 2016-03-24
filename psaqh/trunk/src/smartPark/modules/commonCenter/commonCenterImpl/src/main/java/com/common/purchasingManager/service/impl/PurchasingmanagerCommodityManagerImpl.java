@@ -21,14 +21,18 @@ import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
+import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.common.purchasingManager.dao.PurchasingmanagerCommodityDao;
 import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
+import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
 
 @Service("purchasingmanagerCommodityManager")
 @Transactional
 public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl implements PurchasingmanagerCommodityManager{
 	@Autowired
 	private PurchasingmanagerCommodityDao purchasingmanagerCommodityDao;
+	@Autowired
+	private PurchasingmanagerGenreManager purchasingmanagerGenreManager;
 	
     /**
      * 查询列表
@@ -85,6 +89,102 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
     		pc.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return purchasingmanagerCommodityDao.save(pc);
     	}else{//新增
+    		o.setCreateUser(o.getUpdateUser());
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return purchasingmanagerCommodityDao.save(o);
+    	}
+    }
+	/**
+     * 保存会议室
+     */
+	@Override
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+    public PurchasingmanagerCommodity saveMeetRoomCommodity(PurchasingmanagerCommodity o) throws BusException{
+    	String commodityId = o.getCommodityId();
+		boolean isUpdate = StringUtils.isNotEmpty(commodityId);
+    	if(isUpdate){//修改
+    		PurchasingmanagerCommodity pc = purchasingmanagerCommodityDao.get(commodityId); 
+    		pc.setCommodityTitle(o.getCommodityTitle());
+    		pc.setCommodityPrice(o.getCommodityPrice());
+    		pc.setPurchasingmanagerMerchant(o.getPurchasingmanagerMerchant());
+    		pc.setCommodityStock(o.getCommodityStock());
+    		pc.setCommodityIsnotDisplayStock(o.getCommodityIsnotDisplayStock());
+    		pc.setCommodityUpTime(o.getCommodityUpTime());
+    		pc.setCommodityDownTime(o.getCommodityDownTime());
+    		pc.setCommodityImage(o.getCommodityImage());
+    		pc.setCommodityCoverImage(o.getCommodityCoverImage());
+    		pc.setCommodityDescribe(o.getCommodityDescribe());
+    		pc.setUpdateUser(o.getUpdateUser());
+    		pc.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return purchasingmanagerCommodityDao.save(pc);
+    	}else{//新增
+    		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","0301");
+    		o.setPurchasingmanagerGenre(pg);
+    		o.setCreateUser(o.getUpdateUser());
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return purchasingmanagerCommodityDao.save(o);
+    	}
+    }
+	/**
+     * 保存车辆租赁
+     */
+	@Override
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+    public PurchasingmanagerCommodity saveCarRentalCommodity(PurchasingmanagerCommodity o) throws BusException{
+    	String commodityId = o.getCommodityId();
+		boolean isUpdate = StringUtils.isNotEmpty(commodityId);
+    	if(isUpdate){//修改
+    		PurchasingmanagerCommodity pc = purchasingmanagerCommodityDao.get(commodityId); 
+    		pc.setCommodityTitle(o.getCommodityTitle());
+    		pc.setCommodityPrice(o.getCommodityPrice());
+    		pc.setPurchasingmanagerMerchant(o.getPurchasingmanagerMerchant());
+    		pc.setCommodityStock(o.getCommodityStock());
+    		pc.setCommodityIsnotDisplayStock(o.getCommodityIsnotDisplayStock());
+    		pc.setCommodityUpTime(o.getCommodityUpTime());
+    		pc.setCommodityDownTime(o.getCommodityDownTime());
+    		pc.setCommodityImage(o.getCommodityImage());
+    		pc.setCommodityCoverImage(o.getCommodityCoverImage());
+    		pc.setCommodityDescribe(o.getCommodityDescribe());
+    		pc.setUpdateUser(o.getUpdateUser());
+    		pc.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return purchasingmanagerCommodityDao.save(pc);
+    	}else{//新增
+    		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","0302");
+    		o.setPurchasingmanagerGenre(pg);
+    		o.setCreateUser(o.getUpdateUser());
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return purchasingmanagerCommodityDao.save(o);
+    	}
+    }
+	/**
+     * 保存广告位
+     */
+	@Override
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+    public PurchasingmanagerCommodity saveAdsenseCommodity(PurchasingmanagerCommodity o) throws BusException{
+    	String commodityId = o.getCommodityId();
+		boolean isUpdate = StringUtils.isNotEmpty(commodityId);
+    	if(isUpdate){//修改
+    		PurchasingmanagerCommodity pc = purchasingmanagerCommodityDao.get(commodityId); 
+    		pc.setCommodityTitle(o.getCommodityTitle());
+    		pc.setCommodityPrice(o.getCommodityPrice());
+    		pc.setPurchasingmanagerMerchant(o.getPurchasingmanagerMerchant());
+    		pc.setCommodityStock(o.getCommodityStock());
+    		pc.setCommodityIsnotDisplayStock(o.getCommodityIsnotDisplayStock());
+    		pc.setCommodityUpTime(o.getCommodityUpTime());
+    		pc.setCommodityDownTime(o.getCommodityDownTime());
+    		pc.setCommodityImage(o.getCommodityImage());
+    		pc.setCommodityCoverImage(o.getCommodityCoverImage());
+    		pc.setCommodityDescribe(o.getCommodityDescribe());
+    		pc.setUpdateUser(o.getUpdateUser());
+    		pc.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return purchasingmanagerCommodityDao.save(pc);
+    	}else{//新增
+    		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","0303");
+    		o.setPurchasingmanagerGenre(pg);
     		o.setCreateUser(o.getUpdateUser());
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));

@@ -179,12 +179,12 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
 		return list;
 	}
 	/**
-	 * 根据类别唯一编号获取对象
+	 * 根据类别唯一属性获取对象
 	 */
 	@Override
-	public PurchasingmanagerGenre getGenreByUniqueProperty(String genreCode)
+	public PurchasingmanagerGenre getGenreByUniqueProperty(String paramString,Object paramObject)
 			throws BusException {
-		return purchasingmanagerGenreDao.getObjectByUniqueProperty("genreCode", genreCode);
+		return purchasingmanagerGenreDao.getObjectByUniqueProperty(paramString, paramObject);
 	}
 	/**
 	 * 获取所有商品类别列表
@@ -196,13 +196,33 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
 		return list;
 	}
 	/**
-	 * 获取IT服务的所有字类别列表
+	 * 获取IT服务的所有类别列表
 	 */
 	@Override
 	@EsbServiceMapping
 	public List<PurchasingmanagerGenre> getITSubGenreList(@ServiceParam(name="userId",pubProperty="userId") String userId)
 			throws BusException {
 		List<PurchasingmanagerGenre> list = purchasingmanagerGenreDao.getList("purchasingmanagerGenre.genreCode", "06");
+		return list;
+	}
+	/**
+	 * 获取公共资源的所有类别列表
+	 */
+	@Override
+	@EsbServiceMapping
+	public List<PurchasingmanagerGenre> getPublicResoOrderTypes(@ServiceParam(name="userId",pubProperty="userId") String userId)
+			throws BusException {
+		List<PurchasingmanagerGenre> list = purchasingmanagerGenreDao.getList("purchasingmanagerGenre.genreCode", "03");
+		return list;
+	}
+	/**
+	 * 获取企业服务的所有类别列表
+	 */
+	@Override
+	@EsbServiceMapping
+	public List<PurchasingmanagerGenre> getCompSerOrderTypes(@ServiceParam(name="userId",pubProperty="userId") String userId)
+			throws BusException {
+		List<PurchasingmanagerGenre> list = purchasingmanagerGenreDao.getList("purchasingmanagerGenre.genreCode", "05");
 		return list;
 	}
 }
