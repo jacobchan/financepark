@@ -95,4 +95,11 @@ public interface BbmFloorManager extends BaseManager{
 	 * @return
 	 */
 	public String getInforByFloorId(String floorId) ;
+	
+	/**
+	 * 通过楼层id得到楼层
+	 * @param floorId 楼层id
+	 * @return
+	 */
+	public BbmFloor getFloorByFloorId(String floorId) ;
 }
