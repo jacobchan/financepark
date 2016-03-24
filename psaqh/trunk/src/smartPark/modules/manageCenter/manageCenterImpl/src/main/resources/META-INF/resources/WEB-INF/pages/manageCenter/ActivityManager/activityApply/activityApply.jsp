@@ -1,5 +1,16 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
+<script type="text/javascript">
+function validateTime(startTime,endTime){
+	var oDate1 = new Date(startTime);
+    var oDate2 = new Date(endTime);
+    if(oDate1.getTime() > oDate2.getTime()){
+        return -1;
+    } else {
+    	return 1;
+    }
+} 
+</script>
 <youi:page>
 	<youi:grid id="grid_activityApply" idKeys="applyId" caption="-活动申请内容列表列表"  panel="false"
 				src="esb/web/activityApplyManager/getPagerActivityApplys.json" dataFormId="form_activityApply"
@@ -45,6 +56,7 @@
 			<youi:fieldSelect property="memberId.memberId"  caption="会员用户" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName" notNull="true"/>
 			<youi:fieldCalendar property="startTime"  caption="活动开始时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="true"/>
 			<youi:fieldCalendar property="endTime"  caption="活动结束时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="true"/>
+			<youi:fieldCalendar property="deadline"  caption="报名截至时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="true"/>
 			<youi:fieldSelect property="applyStatus"  caption="活动申请状态" convert="activityApplyStatus" notNull="true"/>
 			<youi:fieldSelect property="applayType.typeId"  caption="活动类型" src="esb/web/applayTypeManager/getApplayTypes.json" code="typeId" show="typeName" notNull="true"/>
 			<youi:fieldSelect property="isRecoomend"  caption="是否推荐" convert="bool"/>
@@ -54,7 +66,6 @@
 	</youi:form>
 	
 	<!--**********************************页面函数Start********************************-->
-
 	<youi:func name="func_grid_pass">
 		var gridElement=$elem("grid_activityApply",pageId);
 		var selectedRecord=gridElement.grid("getSelectedRecord");
@@ -70,6 +81,17 @@
 			alert("状态为申请中的活动才可以通过！")
 		}
 		
+	</youi:func>
+	<youi:func name="form_activityApply_beforeSubmit">//校验
+		var startTime=$elem('record_startTime',pageId).fieldValue();
+		var endTime=$elem('record_endTime',pageId).fieldValue();
+		var flag=validateTime(startTime,endTime);
+      	if(flag==-1){
+			         alert("活动结束时间应该大于活动开始时间");
+					  return false;
+			       }
+  
+        return true;
 	</youi:func>
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
