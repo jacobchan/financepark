@@ -100,37 +100,37 @@ to {opacity:0;}
 <script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 <script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 <script>
-$(function(){
-	$(document).on("mouseover",".zzul .b",function(){
-		//console.log($(this).index())
-		/* if($(this).index()==0){
-			$(".b1mask").toggleClass("hide");
-
-		}else if($(this).index()==1){
-			$(".b2mask").toggleClass("hide");
-		} */
-		var buildingId = $(this).parent().attr("id") ;
-		findFloorList(buildingId) ;
-		
-	});		
-	/* $(document).on("mouseover mouseout",".zzul .b:eq(0) li",function(){
-		var idx=$(this).index();
-		$(".b1floor").eq(idx).toggleClass("hide");
+	$(function(){
+		$(document).on("mouseover",".zzul .b",function(){
+			//console.log($(this).index())
+			/* if($(this).index()==0){
+				$(".b1mask").toggleClass("hide");
+	
+			}else if($(this).index()==1){
+				$(".b2mask").toggleClass("hide");
+			} */
+			var buildingId = $(this).parent().attr("id") ;
+			findFloorList(buildingId) ;
+			
+		});		
+		/* $(document).on("mouseover mouseout",".zzul .b:eq(0) li",function(){
+			var idx=$(this).index();
+			$(".b1floor").eq(idx).toggleClass("hide");
+		});
+		$(document).on("mouseover mouseout",".zzul .b:eq(1) li",function(){
+			var idx=$(this).index();
+			$(".b2floor").eq(idx).toggleClass("hide");
+		}); */
+	
+	/* 	$(".zzul .b").eq(0).find("li").hover(function(){
+			var idx=$(this).index();
+			$(".b1floor").eq(idx).toggleClass("hide");
+		});
+		$(".zzul .b").eq(1).find("li").hover(function(){
+			var idx=$(this).index();
+			$(".b2floor").eq(idx).toggleClass("hide");
+		}); */
 	});
-	$(document).on("mouseover mouseout",".zzul .b:eq(1) li",function(){
-		var idx=$(this).index();
-		$(".b2floor").eq(idx).toggleClass("hide");
-	}); */
-
-	/* $(".zzul .b").eq(0).find("li").hover(function(){
-		var idx=$(this).index();
-		$(".b1floor").eq(idx).toggleClass("hide");
-	});
-	$(".zzul .b").eq(1).find("li").hover(function(){
-		var idx=$(this).index();
-		$(".b2floor").eq(idx).toggleClass("hide");
-	}); */
-})
 </script>
 
 	<script type="text/javascript">
