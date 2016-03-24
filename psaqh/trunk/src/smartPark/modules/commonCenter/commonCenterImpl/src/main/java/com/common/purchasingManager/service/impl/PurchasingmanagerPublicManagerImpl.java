@@ -23,6 +23,8 @@ import com.common.purchasingManager.service.PurchasingmanagerCommodityExtendMana
 import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
 import com.common.purchasingManager.service.PurchasingmanagerGenrePropertyManager;
 import com.common.purchasingManager.service.PurchasingmanagerPublicManager;
+import com.gsoft.framework.codemap.entity.Codeitem;
+import com.gsoft.framework.codemap.service.CodeitemManager;
 import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -61,6 +63,9 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 	
 	@Autowired
 	private PurchasingmanagerCommodityExtendDao purchasingmanagerCommodityExtendDao;
+	
+	@Autowired 
+	private CodeitemManager codeitemManager;
 	
     /**
      * 查询列表
@@ -208,19 +213,46 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 	@Override
 	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
 	public void saveCommodityAndPropertyForRoom(@ServiceParam(name="roomId") String roomId,@ServiceParam(name="roomContain") String roomContain,
-			PurchasingmanagerCommodity o) {
+			@ServiceParam(name="roomType") String roomType,@ServiceParam(name="roomProjector") String roomProjector,PurchasingmanagerCommodity o) {
 		BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(roomId);
 		String roomAddress="";
 		if(bbmRoom != null){
 			//获取单元默认地址
 			roomAddress=bbmRoom.getRoomAddress();
 		}
-		String genreCode="0301";//会议室类别编号
-		//获取会议室扩展属性
-		List<PurchasingmanagerCommodityExtend> pceList=this.getPagerCommodityExtsByGenreId(genreCode);
+		
+		String roomTypeName="";//会议室类型
+		if(roomType !=null){//会议室类型：01--视频会议室，02---普通会议室
+			Collection<Condition> condition =  new ArrayList<Condition>();
+			condition.add(ConditionUtils.getCondition("codemap.code", Condition.EQUALS,"roomType"));
+			condition.add(ConditionUtils.getCondition("itemValue", Condition.EQUALS,roomType));
+			List<Codeitem> list = codeitemManager.getCodeitems(condition, null);
+			if(list.size()>0){
+				roomTypeName=list.get(0).getItemCaption();
+			}
+		}
+		
+		String roomProjectorName="";//投影仪有无
+		if(roomProjector !=null){//投影仪有无：01--有，02---无
+			Collection<Condition> condition =  new ArrayList<Condition>();
+			condition.add(ConditionUtils.getCondition("codemap.code", Condition.EQUALS,"roomProjector"));
+			condition.add(ConditionUtils.getCondition("itemValue", Condition.EQUALS,roomProjector));
+			List<Codeitem> list = codeitemManager.getCodeitems(condition, null);
+			if(list.size()>0){
+				roomProjectorName=list.get(0).getItemCaption();
+			}
+		}
 		
 		String commodityId = o.getCommodityId();
 		boolean isUpdate = StringUtils.isNotEmpty(commodityId);
+		
+		boolean dzFlag=true;
+		boolean gmFlag=true;
+		boolean lxFlag=true;
+		boolean tyyFlag=true;
+		List<PurchasingmanagerCommodityExtend> peList=new ArrayList<PurchasingmanagerCommodityExtend>();
+		
+		
     	if(isUpdate){//修改
     		PurchasingmanagerCommodity pc = purchasingmanagerCommodityDao.get(commodityId); 
     		pc.setCommodityTitle(o.getCommodityTitle());
@@ -240,27 +272,56 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     			for(PurchasingmanagerCommodityExtend pce:purExList){
     				if("dz".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
     					pce.setCommodityExtendContent(roomAddress);//保存会议室地址属性
-    				}else if("rs".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(roomContain);//保存会议室容纳人数
+    					dzFlag=false;
+    				}else if("gm".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(roomContain);//保存会议室规模
+    					gmFlag=false;
+    				}else if("lx".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(roomTypeName);//保存会议室类型
+    					lxFlag=false;
+    				}else if("tyy".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(roomProjectorName);//保存会议室投影仪
+    					tyyFlag=false;
     				}
     				pce.setUpdateUser(o.getUpdateUser());
     				pce.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    				purchasingmanagerCommodityExtendManager.savePurchasingmanagerCommodityExtend(pce);
+    				peList.add(pce);
     			}
+    			if(dzFlag){
+	    			throw new BusException("请先添加会议室的地址属性");
+	    		}else if(gmFlag){
+	    			throw new BusException("请先添加会议室的规模人数属性");
+	    		}else if(lxFlag){
+	    			throw new BusException("请先添加会议室的类型属性");
+	    		}else if(tyyFlag){
+	    			throw new BusException("请先添加会议室的投影仪属性");
+	    		}else{
+	    			purchasingmanagerCommodityExtendDao.save(peList);//保存会议室扩展属性列表
+	    		}
     		}else{
-    			throw new BusException("请先添加会议室的扩展属性");
+    			throw new BusException("请先添加会议室的全部扩展属性：会议室地址、规模人数、类型、投影仪");
     		}
     		
     		
     	}else{//新增
     		o=purchasingmanagerCommodityDao.save(o);
-    		
+    		//获取会议室扩展属性
+    		String genreCode="0301";//会议室类别编号
+    		List<PurchasingmanagerCommodityExtend> pceList=this.getPagerCommodityExtsByGenreId(genreCode);
     		if(pceList.size()>0){
     			for(PurchasingmanagerCommodityExtend pce:pceList){
     				if("dz".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
     					pce.setCommodityExtendContent(roomAddress);//保存会议室地址属性
-    				}else if("rs".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(roomContain);//保存会议室容纳人数
+    					dzFlag=false;
+    				}else if("gm".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(roomContain);//保存会议室规模
+    					gmFlag=false;
+    				}else if("lx".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(roomTypeName);//保存会议室类型
+    					lxFlag=false;
+    				}else if("tyy".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(roomProjectorName);//保存会议室投影仪
+    					tyyFlag=false;
     				}
     				PurchasingmanagerCommodity pc = new PurchasingmanagerCommodity();
     				pc.setCommodityId(o.getCommodityId());
@@ -269,10 +330,22 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     				pce.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     				pce.setUpdateUser(o.getUpdateUser());
     				pce.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    				purchasingmanagerCommodityExtendManager.savePurchasingmanagerCommodityExtend(pce);
+    				peList.add(pce);
     			}
+    			if(dzFlag){
+	    			throw new BusException("请先添加会议室的地址属性");
+	    		}else if(gmFlag){
+	    			throw new BusException("请先添加会议室的规模人数属性");
+	    		}else if(lxFlag){
+	    			throw new BusException("请先添加会议室的类型属性");
+	    		}else if(tyyFlag){
+	    			throw new BusException("请先添加会议室的投影仪属性");
+	    		}else{
+	    			purchasingmanagerCommodityExtendDao.save(peList);//保存会议室扩展属性列表
+	    		}
+    			
     		}else{
-    			throw new BusException("请先添加会议室的扩展属性");
+    			throw new BusException("请先添加会议室的全部扩展属性：会议室地址、规模人数、类型、投影仪");
     		}
     	}
 		
@@ -292,10 +365,17 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 		if(object != null && object instanceof User){
 			user = (User) object;
 		}
-		o=purchasingmanagerCommodityDao.save(o);
-		String genreCode="0302";//车辆类别编号
-		//获取车辆室扩展属性
-		List<PurchasingmanagerCommodityExtend> pceList=this.getPagerCommodityExtsByGenreId(genreCode);
+		String stallsName="";//档位名称
+		if(stalls !=null){//档位
+			Collection<Condition> condition =  new ArrayList<Condition>();
+			condition.add(ConditionUtils.getCondition("codemap.code", Condition.EQUALS,"stalls"));
+			condition.add(ConditionUtils.getCondition("itemValue", Condition.EQUALS,stalls));
+			List<Codeitem> list = codeitemManager.getCodeitems(condition, null);
+			if(list.size()>0){
+				stallsName=list.get(0).getItemCaption();
+			}
+		}
+		
 		String commodityId = o.getCommodityId();
 		boolean isUpdate = StringUtils.isNotEmpty(commodityId);
 		
@@ -322,7 +402,7 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     		if(purExList.size()>0){
     			for(PurchasingmanagerCommodityExtend pce:purExList){
     				if("dw".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(stalls);//保存车辆档位属性
+    					pce.setCommodityExtendContent(stallsName);//保存车辆档位属性
     					dwFlag=false;
     				}else if("zw".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
     					pce.setCommodityExtendContent(seat);//保存车辆座位属性
@@ -345,13 +425,18 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 	    			purchasingmanagerCommodityExtendDao.save(peList);//保存车辆扩展属性列表
 	    		}
     		}else{
-    			throw new BusException("请先添加车辆的全部扩展属性：档位、座位和车牌等");
+    			throw new BusException("请先添加车辆的全部扩展属性：档位、座位和车牌");
     		}
     	}else{//增加
+    		
+    		o=purchasingmanagerCommodityDao.save(o);
+    		//获取车辆室扩展属性
+    		String genreCode="0302";//车辆类别编号
+    		List<PurchasingmanagerCommodityExtend> pceList=this.getPagerCommodityExtsByGenreId(genreCode);
     		if(pceList.size()>0){
     			for(PurchasingmanagerCommodityExtend pce:pceList){
     				if("dw".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(stalls);//保存车辆档位属性
+    					pce.setCommodityExtendContent(stallsName);//保存车辆档位属性
     					dwFlag=false;
     				}else if("zw".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
     					pce.setCommodityExtendContent(seat);//保存车辆座位属性
@@ -380,7 +465,7 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 	    		}
     			
     		}else{
-    			throw new BusException("请先添加车辆的全部扩展属性：档位、座位和车牌等");
+    			throw new BusException("请先添加车辆的全部扩展属性：档位、座位和车牌");
     		}
     	}
 		
@@ -389,6 +474,7 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 
 
 	}
+		
 
 	/**
 	 * 根据商品类别ID获取相应的商品信息
