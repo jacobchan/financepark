@@ -43,6 +43,7 @@
 				    					$("#rzUrl").val(result.record.rzUrl);
 				    					$("#rzRemark").val(result.record.rzRemark);
 				    					$("#enTypeName").val(result.record.enTypeId.enTypeName);
+				    					$("#editorproductDiscriptio").val(result.record.productDiscriptio);
 				    					$("#currentCount").html(getStrLength(result.record.rzRemark));
 									}
 								}
@@ -50,18 +51,34 @@
 						}
 					}
 				});
+			  	$.ajax({
+					url:baseUrl+'/bbmRoomManager/getBbmRooms.json',
+					success:function(results){
+						if (results && results.records) {
+		    				var records = results.records;
+		    				$("#roomId").find("option").remove();
+		    				for(var i=0; i<records.length; i++){
+		    					$("#roomId").append("<option value='"+records[i].roomId+"'>"+records[i].roomNo+"</option>");
+		    				}
+						}
+					}
+				});
 			  	//CKEDITOR.replace('editorrzRemark');
-			  	CKEDITOR.replace('editorproductDiscriptio');
+			  	var editor = CKEDITOR.replace('editorproductDiscriptio');
+			  	editor.updateElement();
 			  	$(".save_btn").click(function(){
-			  		var rzId=$("#financingRe").val();
+			  		var rzId=$("#financingRe").html();
+			  		var roomId=$("#roomId").val();
 			  		var rzName=$("#rzName").val();
 					var rzUrl=$("#rzUrl").val();
 					var enTypeName=$("#enTypeName").val();
 					var rzRemark=$("#rzRemark").val();
-					var productDiscriptio=$("#productDiscriptio").val();
-					var params = ['rzId='+rzId+'','rzName='+rzName+'','rzRemark='+rzRemark+'','rzUrl='+rzUrl+'','enTypeName='+enTypeName+'','productDiscriptio='+productDiscriptio+''];
+					var rzLogo = $("#rzLogo").attr("src");
+					var productDiscriptio=editor.getData();
+					alert(editor.getData());
+					var params = ['rzId='+rzId+'','rzLogo='+rzLogo+'','roomId.roomId='+roomId+'','rzName='+rzName+'','rzRemark='+rzRemark+'','rzUrl='+rzUrl+'','enTypeName='+enTypeName+'','productDiscriptio='+productDiscriptio+''];
 					$.youi.ajaxUtils.ajax({
-						url:baseUrl+'/enterbusinessmanagerRzManager/saveEnterbusinessmanagerRz.json',
+						url:baseUrl+'/enterbusinessmanagerRzManager/updateEnterbusinessmanagerRz.json',
 						data:params.join('&'),
 						success:function(result){
 							if(result && result.record){
@@ -97,37 +114,12 @@
 		                    <div class="qiye_nametex">企业全称</div>
 		                    <div class="name_input"><input id="rzName" name="rzName" type="text"></div>
 		                </div>
-		                <!--
 		                <div class="qiye_address">
 		                    <div class="qiye_word">地址</div>
 		                    <div class="select_address">
-		                        <div class="select_lou">
-		                            <div class="tct-select fl mr20" style="width:290px">
-										<div class="ic-select">
-											<p class="c-b1">所在楼</p>
-										</div>
-										<ul style="display: none;" class="select-nav">
-											<li>园区1楼</li>
-											<li>园区2楼</li>
-											<li>园区3楼</li>
-										</ul>
-									</div>
-		                        </div>
-		                        <div class="select_lou2">
-		                           <div class="tct-select fl mr20" style="width:290px">
-										<div class="ic-select">
-											<p class="c-b1">所在层</p>
-										</div>
-										<ul style="display: none;" class="select-nav">
-											<li>园区1层</li>
-											<li>园区2层</li>
-											<li>园区3层</li>
-										</ul>
-									</div>
-		                        </div>
+		                        <select id="roomId" name="roomId.roomId" class="select-nav"></select>
 		                    </div>
 		                </div>
-		                -->
 		                <div class="qiye_web">
 		                    <div class="qiye_webtex">官方网站</div>
 		                    <div class="web_input"><input id="rzUrl" name="rzUrl" type="text"></div>
@@ -135,11 +127,7 @@
 		                <div class="qiye_address">
 		                    <div class="qiye_word">所在行业</div>
                             <div class="tct-select fl mr20" style="width:290px">
-								<select id="enTypeName" name="enTypeName" style="display: none;" class="select-nav">
-									<option value="1">互联网技术1</option>
-									<option value="2">互联网技术2</option>
-									<option value="3">互联网技术3</option>
-								</select>
+                            	<select id="enTypeName" name="enTypeId.enTypeName" class="select-nav"></select>
 							</div>
                 		</div>
                 		<div class="qiye_jianjie ">
