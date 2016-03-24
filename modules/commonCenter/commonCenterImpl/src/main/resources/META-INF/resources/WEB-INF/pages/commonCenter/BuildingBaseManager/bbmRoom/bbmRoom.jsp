@@ -72,15 +72,39 @@
 	<!-- 楼层发生变化时，对应的楼栋，园区也发生变化 -->
 		<youi:func name = "record_bbmFloor_floorId_change">
       		var floorId = $('#P_'+pageId+'_record_bbmFloor_floorId').fieldValue();//获取当前选中楼栋的id
+      		var room = $('#P_'+pageId+'_record_roomNo').fieldValue();//获取当前选中单元编号，若为修改，则这里有值，为添加就没有值
 			$.youi.ajaxUtil.ajax({
 				url:'/esb/web/bbmRoomManager/findBbmBuildingByFloorId.json',
 				data:{floorId:floorId},
 				success:function(result){
 					var record = result.record;
+					var buildingNo = record.buildingNo ;
 					$('#P_'+pageId+'_record_parkName').fieldValue('') ;//先将园区名称置空
 					$('#P_'+pageId+'_record_buildingName').fieldValue('') ;//先将楼层编号置空
- 					$('#P_'+pageId+'_record_buildingName').fieldValue(record.buildingNo);//将返回的对象里面的buildingNo赋值给楼层编号
+ 					$('#P_'+pageId+'_record_buildingName').fieldValue(record.buildingName);//将返回的对象里面的buildingName赋值给楼栋编号
                     $('#P_'+pageId+'_record_parkName').fieldValue(record.bbmPark.parkName);//将返回的对象里面的bbmPark.parkName赋值给园区名称
+                 	$.youi.ajaxUtil.ajax({
+						url:'/esb/web/bbmFloorManager/getFloorByFloorId.json',
+						data:{floorId:floorId},
+						success:function(result){
+							var record = result.record;
+							var floorNo = record.floorNo ;
+							var prefix = buildingNo + '-' + floorNo + '-' ;
+							if(room){
+								var temp = room.lastIndexOf('-')+1 ;
+								var r = room.substring(0,temp);
+								if(prefix == r){
+									
+								}else{
+									$('#P_'+pageId+'_record_roomNo').fieldValue('') ;//先将单元编号置空
+									$('#P_'+pageId+'_record_roomNo').fieldValue(prefix);//将编号前缀赋给roomNo
+								}
+							}else{
+								$('#P_'+pageId+'_record_roomNo').fieldValue('') ;//先将单元编号置空
+								$('#P_'+pageId+'_record_roomNo').fieldValue(prefix);//将编号前缀赋给roomNo
+							}
+						}
+					});
                   } 
             });
    	 </youi:func>
@@ -90,6 +114,51 @@
 			var bbmRoom = $elem('form_bbmRoom',pageId);
 			bbmRoom.form('close');
 			$elem('grid_bbmRoom',pageId).grid('pReload');
-	</youi:func>
+	 </youi:func>
+	 <%-- <youi:func name = "form_bbmRoom_beforeSubmit">
+		var room = $('#P_'+pageId+'_record_roomNo').fieldValue();//获取当前选中单元编号
+		var floorId = $('#P_'+pageId+'_record_bbmFloor_floorId').fieldValue();//获取当前选中楼栋的id
+		var flag = '1' ;
+		$.youi.ajaxUtil.ajax({
+			url:'/esb/web/bbmRoomManager/findBbmBuildingByFloorId.json',
+			data:{floorId:floorId},
+			success:function(results){
+				var records = results.record;
+				var buildingNo = records.buildingNo ;
+                $.youi.ajaxUtil.ajax({
+					url:'/esb/web/bbmFloorManager/getFloorByFloorId.json',
+					data:{floorId:floorId},
+					success:function(result){
+						var record = result.record;
+						var floorNo = record.floorNo ;
+						var prefix = buildingNo + '-' + floorNo + '-' ;
+						var temp = room.lastIndexOf('-')+1 ;
+						var r = room.substring(0,temp);
+						var str = room.substring(temp) ;
+						var num = parseInt(str, 10) ;
+						if(str.length == 0){
+							flag = '2' ;
+							alert('请输入单元编号后两位！') ;
+						}
+						if(0>=num || num >12){
+							flag = '2' ;
+							alert('单元编号后两位只能介于01到12之间') ;
+						}
+						if(r != prefix){
+							flag = '2' ;
+							alert('单元编号格式不正确！') ;
+						}
+				       if(flag == '1'){
+				       alert(11111);
+				       		return true ;
+				       }else {
+				       alert(2222);
+				       		return false ;
+				       } 
+					}
+				});
+             } 
+        });
+	 </youi:func> --%>
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
