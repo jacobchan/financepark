@@ -12,6 +12,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCharge;
 
 public interface PropertyservicemanagerChargeManager extends BaseManager{
@@ -69,4 +71,7 @@ public interface PropertyservicemanagerChargeManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public List<PropertyservicemanagerCharge> getChargeListforpage(PropertyservicemanagerCharge o) throws BusException;
+	//通过订单号获取当前用户的缴费记录  模糊查询
+    
+	 public List<PropertyservicemanagerCharge> getChargelistLikeUserorderCode(String userId,String userorderCode) throws BusException;
 }
