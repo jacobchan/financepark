@@ -37,17 +37,17 @@
 							$("#legalRe").html(result.record.companyId);
 							$.ajax({
 								url:baseUrl+'/informationLegalManager/findInformationLegal.json',
-								data : ['legalRe='+$("#legalRe").html()].join('&'),
+								data : ['legalRe='+result.record.companyId].join('&'),
 								success:function(result){
 									if(result&&result.record){
 										$("#legalRe").html(result.record.legalRe);
 										$("#legalImage").attr("src","/filestore/"+records.legalImage);
 										$("#legalId").html(result.record.legalId);
-				    					$("#legalName").val(records.legalName);
-				    					$("#legalBusiness").val(records.legalBusiness);
-				    					$("#legalBirthday").val(records.legalBirthday);
-				    					$("#legalTelephone").val(records.legalTelephone);
-				    					$("#legalRemark").val(records.legalRemark);
+				    					$("#legalName").val(result.record.legalName);
+				    					$("#legalBusiness").val(result.record.legalBusiness);
+				    					$("#legalBirthday").val(result.record.legalBirthday);
+				    					$("#legalTelephone").val(result.record.legalTelephone);
+				    					$("#legalRemark").val(result.record.legalRemark);
 									}
 								}
 							});
@@ -69,6 +69,14 @@
 						success:function(result){
 							if(result && result.record){
 								alert("修改成功");
+								$("#legalRe").html();
+								$("#legalImage").attr("src","");
+								$("#legalId").html();
+		    					$("#legalName").val();
+		    					$("#legalBusiness").val();
+		    					$("#legalBirthday").val();
+		    					$("#legalTelephone").val();
+		    					$("#legalRemark").val();
 								location.reload();
 							}
 						}

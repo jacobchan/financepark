@@ -6,6 +6,36 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>企業信息</title>
 		<%@ include file="/WEB-INF/pages/common/enterpriseScriptAddCss.jsp"%>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/ckeditor/ckeditor.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+			  	$.ajax({
+					url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
+					success:function(result){
+						if(result&&result.record){
+							$("#financingRe").html(result.record.companyId);
+							$.ajax({
+								url:baseUrl+'/enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json',
+								data : ['rzId='+result.record.companyId].join('&'),
+								success:function(result){
+									if(result&&result.record){
+										$("#financingRe").html(result.record.rzId);
+										$("#rzName").val(result.record.rzName);
+				    					$("#rzUrl").val(result.record.rzUrl);
+				    					$("#rzRemark").val(result.record.rzRemark);
+									}
+								}
+							});
+						}
+					}
+				});
+			  	CKEDITOR.replace('editorrzRemark');
+			  	CKEDITOR.replace('editorproductDiscriptio');
+			  	$(".save_btn").click(function(){
+					alert("aaa");
+				});
+			});
+		</script>
 	</head>
 	<body class="page-header-fixed" style=" background-image:none">
 		<%@ include file="/WEB-INF/pages/enterpriseCenter/common/ec_head.jsp"%>
@@ -16,6 +46,7 @@
 			<div class="main-wrapper">
 		    	<div class="main-wrapper-right">
 		        	<div class="main-title"><span>企业资料修改</span></div>
+		        	<span class="" id="financingRe" style="display:none;"></span>
 		            <div class="qiye_logo">
 		            	<div class="qiye_text"><span>企业logo</span></div>
 		                <div class="upload_main">
@@ -26,12 +57,12 @@
 		            <div class="xiangxi_xinxi">
 		                <div class="qiye_fullname ">
 		                    <div class="qiye_nametex">企业全称</div>
-		                    <div class="name_input"><input type="text"></div>
+		                    <div class="name_input"><input id="rzName" name="rzName" type="text"></div>
 		                </div>
 		                <div class="qiye_jianjie ">
 		                    <div class="qiye_word">企业简介</div>
 		                    <div class="word_input">
-		                        <textarea></textarea>
+		                        <textarea id="rzRemark" name="rzRemark"></textarea>
 		                        <div class="font_xianzhi">字数限制：0/200</div>
 		                    </div>
 		                </div>
@@ -66,7 +97,7 @@
 		                </div>
 		                <div class="qiye_web">
 		                    <div class="qiye_webtex">官方网站</div>
-		                    <div class="web_input"><input type="text"></div>
+		                    <div class="web_input"><input id="rzUrl" name="rzUrl" type="text"></div>
 		                </div>
 		                <div class="qiye_address">
 		                    <div class="qiye_word">所在行业</div>
@@ -85,11 +116,11 @@
            		<div class="jiesao_word">
 	           		<div class="qiye_js">
 	                	<div class="qiye_jieshao"><span>公司介绍</span></div>
-	                    <div class="edit_tool"></div>
+	                    <textarea id="editorrzRemark" name="rzRemark" cols="20" rows="5" class="ckeditor"></textarea>
 	                </div>
 	                <div class="qiye_ms">
 	                	<div class="qiye_miaoshu"><span>产品描述</span></div>
-	                    <div class="edit_tool"></div>
+	                    <textarea id="editorproductDiscriptio" name="productDiscriptio" cols="20" rows="5" class="ckeditor"></textarea>
 	                </div>
 				</div>
            		<div class="qiye_photo">
@@ -97,30 +128,6 @@
 	                    <div class="qiye_xiangce"><span>企业相册</span></div>
 	                    <div class="photo_list">
 	                        <ul>
-	                            <li>
-	                                <div style="position:relative">
-	                                    <div class="overlay"></div>
-	                                    <img src="<%=request.getContextPath()%>/styles/images/qiye/photo_list1.png">                                        
-	                                </div>
-	                            </li>
-	                            <li>
-	                                <div style="position:relative">
-	                                    <div class="overlay"></div>
-	                                    <img src="<%=request.getContextPath()%>/styles/images/qiye/photo_list1.png">                                        
-	                                </div>
-	                            </li>
-	                            <li>
-	                                <div style="position:relative">
-	                                    <div class="overlay"></div>
-	                                    <img src="<%=request.getContextPath()%>/styles/images/qiye/photo_list1.png">                                        
-	                                </div>
-	                            </li>
-	                            <li>
-	                                <div style="position:relative">
-	                                    <div class="overlay"></div>
-	                                    <img src="<%=request.getContextPath()%>/styles/images/qiye/photo_list1.png">                                        
-	                                </div>
-	                            </li>
 	                            <li>
 	                                <div style="position:relative">
 	                                    <div class="overlay"></div>
