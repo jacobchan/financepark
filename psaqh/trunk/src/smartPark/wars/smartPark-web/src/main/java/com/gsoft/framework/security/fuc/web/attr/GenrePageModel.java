@@ -27,12 +27,12 @@ import org.springframework.ui.ModelMap;
 	@Autowired
 	private PurchasingmanagerGenreManager purchasingmanagerGenreManager;
 	/**
-	 * 商品类别查询页面
+	 * 采购商品类别查询页面
 	 * @param request
 	 * @param dataIn
 	 * @return
 	 */
-	public ModelMap purchasingmanagerGenre(
+	public ModelMap purGenre(
 			HttpServletRequest request,
 			DataIn<PurchasingmanagerGenre> dataIn){
 		ModelMap modelMap = new ModelMap();
@@ -42,12 +42,12 @@ import org.springframework.ui.ModelMap;
 	}
 	
 	/**
-	 * 商品类别新增页面
+	 * 采购商品类别新增页面
 	 * @param request
 	 * @param dataIn
 	 * @return
 	 */
-	public ModelMap addPurchasingmanagerGenre(
+	public ModelMap addPurGenre(
 			HttpServletRequest request,
 			DataIn<PurchasingmanagerGenre> dataIn){
 		ModelMap modelMap = new ModelMap();
