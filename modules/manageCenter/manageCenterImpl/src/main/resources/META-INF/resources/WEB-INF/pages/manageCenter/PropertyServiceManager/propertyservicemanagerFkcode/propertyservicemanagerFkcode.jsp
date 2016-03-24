@@ -27,7 +27,7 @@
 		<youi:gridCol property="fkcodeTime"  caption="到访时间" width="12%" align="center"/>
 		<youi:gridCol property="fkCode"  caption="访客申请单号" width="12%" align="center"/>
 		<youi:gridCol property="member.memberName"  caption="会员姓名" width="10%" align="center"/>
-		<youi:gridCol property="fkcodeComp"  caption="到访企业" width="16%" align="center"/>
+		<youi:gridCol property="fkcodeComp"  caption="到访企业" width="16%" align="center" renderer="renderer_compId"/>
 		<%-- <youi:gridCol property="applyStatus"  caption="申请状态" width="100" align="center" convert="applyStatus"/> --%>
 		<youi:gridCol property="fkcodeRemark"  caption="访客说明" width="22%"/>
 
@@ -68,6 +68,23 @@
 		</youi:fieldLayout>
 	</youi:form>
 	<!--**********************************页面函数Start********************************-->
+	
+		<!-- 获取企业名称 -->
+		<youi:func name="renderer_compId" params="col,record">
+ 			var memberName = ""; 
+			$.youi.ajaxUtil.ajax({
+					url:'esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json',
+					data:'rzId='+record.fkcodeComp,
+					async: false, 
+					success:function(result){
+						if(result.record!=""&&result.record!=null){
+							memberName=result.record.rzName;
+						}
+					}
+				});
+			return memberName;
+		</youi:func>
+	
 	<!-- 会员发生变化时，对应的企业名称也发生变化 -->
 		<youi:func name = "record_member_memberId_change">
       		var memberId = $('#P_'+pageId+'_record_member_memberId').fieldValue();//获取当前选中会员的id
@@ -77,7 +94,7 @@
 				success:function(result){
 					var record = result.record;
 					$('#P_'+pageId+'_record_fkcodeComp').fieldValue('') ;//先将公司名称置空
-                    $('#P_'+pageId+'_record_fkcodeComp').fieldValue(record.rzName);//将返回的对象里面的enName赋值给公司名称
+                    $('#P_'+pageId+'_record_fkcodeComp').fieldValue(record.rzId);//将返回的对象里面的enName赋值给公司名称
                   } 
             });
 			$.youi.ajaxUtil.ajax({
