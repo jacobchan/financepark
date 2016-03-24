@@ -118,6 +118,29 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     		return ordermanagerUserorderDao.save(o);
     	}
     }
+	/**
+     * 修改订单
+     */
+	@Override
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+    public OrdermanagerUserorder saveOrder(OrdermanagerUserorder o) throws BusException{
+    	String userorderId = o.getUserorderId();
+    	boolean isUpdate = StringUtils.isNotEmpty(userorderId);
+    	if(isUpdate){//修改
+    		OrdermanagerUserorder order = ordermanagerUserorderDao.get(userorderId);
+    		order.setUserorderProject(o.getUserorderProject());
+    		order.setUserorderAmount(o.getUserorderAmount());
+    		order.setUserorderStatus(o.getUserorderStatus());
+    		order.setUserorderPayMode(o.getUserorderPayMode());
+    		if(o.getGenreId() != null){
+    			order.setGenreId(o.getGenreId());
+    		}
+    		order.setUpdateUser(o.getUpdateUser());
+    		order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return ordermanagerUserorderDao.save(order);
+    	}
+		return o;
+    }
 
     /**
      * 删除对象
@@ -152,7 +175,31 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	public PagerRecords getPagerComSerOrders(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
-		conditions.add(ConditionUtils.getCondition("ordermanagerOrdertype.ordertypeId", Condition.LIKE, "05"));
+		conditions.add(ConditionUtils.getCondition("genreId.genreCode", Condition.LIKE, "05"));
+		PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
+	/**
+	 * 获取公共资源订单列表
+	 */
+	@Override
+	@EsbServiceMapping
+	public PagerRecords getPagerPublicResoOrders(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)  throws BusException{
+		conditions.add(ConditionUtils.getCondition("genreId.genreCode", Condition.LIKE, "03"));
+		PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
+	/**
+	 * 获取采购商品订单列表
+	 */
+	@Override
+	@EsbServiceMapping
+	public PagerRecords getPagerPurOrders(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)  throws BusException{
+		conditions.add(ConditionUtils.getCondition("genreId.genreCode", Condition.LIKE, "01"));
 		PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
@@ -177,12 +224,12 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		order.setGenreId(pg);
 		order.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("ITFW"));
 		order.setUserorderStatus("01");//01-未支付
+		order.setUserorderAdr(userorderAdr);
 		if(StringUtils.isNotEmpty(userId)){
 			MemberInformation mem = memberInformationManager.getMemberInformation(userId);
 			order.setUserorderBuyUser(mem.getMemberName());
 		}
    		order.setUserorderProject(pg.getGenreName());
-		order.setUserorderAdr(userorderAdr);
 		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		order.setCreateUser(userId);
 		order.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
@@ -221,7 +268,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     		userorderAmoun = userorderAmoun.add(commodity.getCommodityPrice().
     				multiply(new BigDecimal(orderDetail.getCommoditydetailNum())));
     	}
-		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("0502");
+		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","0502");
 		OrdermanagerUserorder order = new OrdermanagerUserorder();
 		order.setUserorderAmount(userorderAmoun);
 		order.setGenreId(pg);
@@ -258,7 +305,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     		userorderAmoun = userorderAmoun.add(commodity.getCommodityPrice().
     				multiply(new BigDecimal(orderDetail.getCommoditydetailNum())));
     	}
-		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("0501");
+		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","0501");
 		OrdermanagerUserorder order = new OrdermanagerUserorder();
 		order.setUserorderAmount(userorderAmoun);
 		order.setGenreId(pg);
@@ -295,7 +342,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
        		userorderAmoun = userorderAmoun.add(commodity.getCommodityPrice().
        				multiply(new BigDecimal(orderDetail.getCommoditydetailNum())));
        	}
-   		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("0504");
+   		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","0504");
    		OrdermanagerUserorder order = new OrdermanagerUserorder();
    		order.setUserorderAmount(userorderAmoun);
    		order.setGenreId(pg);
@@ -332,7 +379,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
        		userorderAmoun = userorderAmoun.add(commodity.getCommodityPrice().
        				multiply(new BigDecimal(orderDetail.getCommoditydetailNum())));
        	}
-   		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("0505");
+   		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","0505");
    		OrdermanagerUserorder order = new OrdermanagerUserorder();
    		order.setUserorderAmount(userorderAmoun);
    		order.setGenreId(pg);
@@ -369,7 +416,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
        		userorderAmoun = userorderAmoun.add(commodity.getCommodityPrice().
        				multiply(new BigDecimal(orderDetail.getCommoditydetailNum())));
        	}
-   		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("0506");
+   		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","0506");
    		OrdermanagerUserorder order = new OrdermanagerUserorder();
    		order.setUserorderAmount(userorderAmoun);
    		order.setGenreId(pg);
@@ -393,15 +440,4 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    		}
    		return order;
    	}
-    /**
-     * 获取当前登录用户投诉列表
-     * @return
-     * @throws BusException
-     */
-    @EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId")})
-	public List<OrdermanagerUserorder> getOrderListByLoginUser(OrdermanagerUserorder o) throws BusException {
-    	String id = o.getCreateUser();	    	
-    	List<OrdermanagerUserorder> list =ordermanagerUserorderDao.getList("memberId", id);
-    	return list; 
-	}
 }

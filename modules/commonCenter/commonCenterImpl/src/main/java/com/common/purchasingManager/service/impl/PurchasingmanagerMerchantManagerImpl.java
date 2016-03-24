@@ -16,6 +16,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
@@ -64,6 +65,36 @@ public class PurchasingmanagerMerchantManagerImpl extends BaseManagerImpl implem
 		PagerRecords pagerRecords = purchasingmanagerMerchantDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
+	//获取公共资源类型的商户列表
+	@Override
+	@EsbServiceMapping
+	public PagerRecords getPagerPublicResoMerchants(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PurchasingmanagerMerchant.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)  throws BusException{
+		conditions.add(ConditionUtils.getCondition("merchantType.genreCode", Condition.LIKE, "03"));
+		PagerRecords pagerRecords = purchasingmanagerMerchantDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
+	//获取采购类型的商户列表
+	@Override
+	@EsbServiceMapping
+	public PagerRecords getPagerPurMerchants(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PurchasingmanagerMerchant.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)  throws BusException{
+		conditions.add(ConditionUtils.getCondition("merchantType.genreCode", Condition.LIKE, "01"));
+		PagerRecords pagerRecords = purchasingmanagerMerchantDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
+	//获取企业服务类型的商户列表
+	@Override
+	@EsbServiceMapping
+	public PagerRecords getPagerCompSerMerchants(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PurchasingmanagerMerchant.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)  throws BusException{
+		conditions.add(ConditionUtils.getCondition("merchantType.genreCode", Condition.LIKE, "05"));
+		PagerRecords pagerRecords = purchasingmanagerMerchantDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
     /**
      * 保存对象
      */
@@ -86,10 +117,34 @@ public class PurchasingmanagerMerchantManagerImpl extends BaseManagerImpl implem
     		pm.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return purchasingmanagerMerchantDao.save(pm);
     	}else{//新增
-    		PurchasingmanagerGenre pg= purchasingmanagerGenreManager.getPurchasingmanagerGenre(o.getMerchantType().getGenreId());
-    		if(pg != null){
-    			o.setMerchantType(pg);
-    		}
+    		o.setCreateUser(o.getUpdateUser());
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return purchasingmanagerMerchantDao.save(o);
+    	}
+    }
+	/**
+     * 保存采购商户
+     */
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+    public PurchasingmanagerMerchant savePurMerchant(PurchasingmanagerMerchant o) throws BusException{
+    	String merchantId = o.getMerchantId();
+    	boolean isUpdate = StringUtils.isNotEmpty(merchantId);
+    	if(isUpdate){//修改
+    		PurchasingmanagerMerchant pm = purchasingmanagerMerchantDao.get(merchantId);
+    		pm.setMerchantName(o.getMerchantName());
+    		pm.setMerchantEnterpriseName(o.getMerchantEnterpriseName());
+    		pm.setMerchantLinkman(o.getMerchantLinkman());
+    		pm.setMerchantLinkmanPhone(o.getMerchantLinkmanPhone());
+    		pm.setMerchantSendAddress(o.getMerchantSendAddress());
+    		pm.setMerchantReturnAddress(o.getMerchantReturnAddress());
+    		pm.setMerchantLogo(o.getMerchantLogo());
+    		pm.setMerchantUrl(o.getMerchantUrl());
+    		pm.setMerchantAbout(o.getMerchantAbout());
+    		pm.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return purchasingmanagerMerchantDao.save(pm);
+    	}else{//新增
+    		o.setMerchantType(purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode", "01"));
     		o.setCreateUser(o.getUpdateUser());
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
@@ -132,6 +187,36 @@ public class PurchasingmanagerMerchantManagerImpl extends BaseManagerImpl implem
     	while(pg.getPurchasingmanagerGenre() != null){
     		pg = pg.getPurchasingmanagerGenre();
     	}
+		List<PurchasingmanagerMerchant> list = purchasingmanagerMerchantDao.getList("merchantType.genreId", pg.getGenreId());
+		return list;
+	}
+    /**
+     * 获取会议室所属商户列表
+     */
+    @Override
+    @EsbServiceMapping
+	public List<PurchasingmanagerMerchant> getMeetRoomMerchants()  throws BusException{
+    	PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","0301");
+		List<PurchasingmanagerMerchant> list = purchasingmanagerMerchantDao.getList("merchantType.genreId", pg.getGenreId());
+		return list;
+	}
+    /**
+     * 获取车辆租赁所属商户列表
+     */
+    @Override
+    @EsbServiceMapping
+	public List<PurchasingmanagerMerchant> getCarRentalMerchants()  throws BusException{
+    	PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","0302");
+		List<PurchasingmanagerMerchant> list = purchasingmanagerMerchantDao.getList("merchantType.genreId", pg.getGenreId());
+		return list;
+	}
+    /**
+     * 获取广告位所属商户列表
+     */
+    @Override
+    @EsbServiceMapping
+	public List<PurchasingmanagerMerchant> getAdsenseMerchants()  throws BusException{
+    	PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","0303");
 		List<PurchasingmanagerMerchant> list = purchasingmanagerMerchantDao.getList("merchantType.genreId", pg.getGenreId());
 		return list;
 	}
