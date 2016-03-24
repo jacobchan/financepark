@@ -73,5 +73,5 @@ public interface PropertyservicemanagerChargeManager extends BaseManager{
 	public List<PropertyservicemanagerCharge> getChargeListforpage(PropertyservicemanagerCharge o) throws BusException;
 	//通过订单号获取当前用户的缴费记录  模糊查询
     
-	 public List<PropertyservicemanagerCharge> getChargelistLikeUserorderCode(String userId,String userorderCode) throws BusException;
+	 public List<PropertyservicemanagerCharge> getChargelistLikeUserorderCode(String userId,String userorderCode,String startTime,String endTime) throws BusException;
 }
