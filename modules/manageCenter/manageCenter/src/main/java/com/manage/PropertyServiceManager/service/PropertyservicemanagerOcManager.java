@@ -98,5 +98,5 @@ public interface PropertyservicemanagerOcManager extends BaseManager{
 	 * @return
 	 * @throws BusException
 	 */
-	public List<PropertyservicemanagerOc> getOclistLikeOcCode(String userId,String ocCode) throws BusException;
+	public List<PropertyservicemanagerOc> getOclistLikeOcCode(String userId,String ocCode,String startTime,String endTime) throws BusException;
 }
