@@ -6,6 +6,72 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>企業融资</title>
 		<%@ include file="/WEB-INF/pages/common/enterpriseScriptAddCss.jsp"%>
+		<script type="text/javascript">
+			// 中文字符判断
+			function getStrLength(str) { 
+				var len = str.length; 
+			    var reLen = 0; 
+			    for (var i = 0; i < len; i++) {        
+			        if (str.charCodeAt(i) < 27 || str.charCodeAt(i) > 126) { 
+			            // 全角    
+			            reLen += 2; 
+			        } else { 
+			            reLen++; 
+			        } 
+			    } 
+			    return reLen;    
+			}
+			$(document).ready(function() {
+				$('#moreul li a').click(function(){
+			        $('#moreul li').removeClass('active');
+			        $(this).parent().addClass('active');
+			   	});
+				$("#knowledgeContent").on('keyup', function() {
+				    var len = getStrLength(this.value);
+				    $("#currentCount").html(len);
+				});
+				$.ajax({
+					url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
+					success:function(result){
+						if(result&&result.record){
+							$("#financingRe").html(result.record.companyId);
+							//根据企业id获取融资信息
+					    	$.ajax({
+					    		url : baseUrl+"/informationKnowledgeManager/findInformationKnowledge.json",
+					    		data : ['knowledgeRe='+result.record.companyId].join('&'),
+					    		success : function(results) {
+					    			if (results && results.records) {
+					    				var records = results.records;
+					    				$("#knowledgeDiv").empty();
+					    				for(var i=0; i<records.length; i++){
+					    					var knowledgeDiv = '<li>'+
+					                            '<div class="mt_list">'+
+					                                '<div class="list_pic"><img src="/filestore/'+records[i].knowledgeUrl+'"></div>'+
+					                                '<div class="list_tex">'+
+					                                    '<table>'+
+					                                        '<tr>'+
+					                                            '<td colspan="2" height="40" valign="middle" align="left"><a class="tit">'+records[i].knowledgeTitle+'</a></td>'+
+					                                        '</tr>'+
+					                                        '<tr>'+
+					                                            '<td colspan="2" height="42" valign="top" align="left"><span class="baodao_main">'+records[i].knowledgeContent+'</span></td>'+
+					                                        '</tr>'+
+					                                        '<tr>'+
+					                                            '<td height="40" valign="middle" align="left"><a href="javascript:void(0);"><span>编辑</span></a>丨<a href="javascript:void(0);">删除</a></td>'+
+					                                        '</tr>'+
+					                                    '</table>'+
+					                                '</div>'+
+					                            '</div>'+
+					                        '</li>';
+					    					$("#knowledgeDiv").html(knowledgeDiv);
+					    				}
+					    			}
+					    		}
+					    	});
+						}
+					}
+				});
+			});
+		</script>
 	</head>
 	<body class="page-header-fixed" style=" background-image:none">
 		<%@ include file="/WEB-INF/pages/enterpriseCenter/common/ec_head.jsp"%>
@@ -34,51 +100,15 @@
 			        	<div class="qiye_jianjie ">
 			                <div class="qiye_word">专利描述</div>
 			               	<div class="word_input">
-			                    <textarea></textarea>
-			                	<div class="font_xianzhi">字数限制：0/200</div>
+			                    <textarea id="knowledgeContent" name="knowledgeContent"></textarea>
+			                	<div class="font_xianzhi">字数限制：<span id="currentCount" style="color:red;">0</span>/200</div>
 			            	</div>
 			            </div>
 			            <div class="meiti_save_btn"><input type="submit" value="保存" class="hhf-submit" style="height:40px;" /></div>           
 			            <div class="main-title"><span>专利&nbsp;/&nbsp;知识产权列表</span></div>
 						<div class="baodao_list zuanli">
-		                	<ul>
-		                        <li>
-		                            <div class="mt_list">
-		                                <div class="list_pic"><img src="../styles/images/qiye/qiye_zheng.png"></div>
-		                                <div class="list_tex">                               	
-		                                    <table>
-		                                        <tr>
-		                                            <td colspan="2" height="40" valign="middle" align="left"><a class="tit">我的专利名称</a></td>
-		                                        </tr>
-		                                        <tr>
-		                                            <td colspan="2" height="42" valign="top" align="left"><span class="baodao_main">神州知识产权15年只做一件事，为企业提供全方位的知识产权服务，为企业的发展保驾护航。因为专注，所以专业。公司具有强大的行政资源和专业优势，对于查询很难审批通过的商标或者已经驳回的商标，可以给出专业的建议方案，保证商标可以注册成功。</span></td>
-		                                        </tr>                                       
-		                                        <tr>
-		                                            <td height="40" valign="middle" align="left"><a href="javascript:void(0);"><span>编辑</span></a>丨<a href="javascript:void(0);">删除</a></td>
-		                                        </tr>
-		                                    </table>
-		                                </div>
-		                            </div>
-		                        </li>
-		                        <li>
-		                            <div class="mt_list">
-		                                <div class="list_pic"><img src="../styles/images/qiye/qiye_zheng.png"></div>
-		                                <div class="list_tex">                               	
-		                                    <table>
-		                                        <tr>
-		                                            <td colspan="2" height="40" valign="middle" align="left"><a class="tit">我的专利名称</a></td>
-		                                        </tr>
-		                                        <tr>
-		                                            <td colspan="2" height="42" valign="top" align="left"><span class="baodao_main">神州知识产权15年只做一件事，为企业提供全方位的知识产权服务，为企业的发展保驾护航。因为专注，所以专业。公司具有强大的行政资源和专业优势，对于查询很难审批通过的商标或者已经驳回的商标，可以给出专业的建议方案，保证商标可以注册成功。</span></td>
-		                                        </tr>                                        
-		                                        <tr>
-		                                            <td height="40" valign="middle" align="left"><a href="javascript:void(0);"><span>编辑</span></a>丨<a href="javascript:void(0);">删除</a></td>
-		                                            <td height="40" valign="middle" align="right"></td>
-		                                        </tr>
-		                                    </table>
-		                                </div>
-		                            </div>
-		                        </li>                   
+		                	<ul id="knowledgeDiv">
+		                        
 		                    </ul>
 		                </div>
 		            </div>
