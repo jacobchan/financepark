@@ -16,6 +16,7 @@ import com.common.OrderManager.service.OrdermanagerCommoditydetailManager;
 import com.common.OrderManager.service.OrdermanagerUserorderManager;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
+import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -39,6 +40,8 @@ public class ShoppingcarGroupManagerImpl extends BaseManagerImpl implements Shop
 	private OrdermanagerCommoditydetailManager ordermanagerCommoditydetailManager;
 	@Autowired
 	private PurchasingmanagerCommodityManager purchasingmanagerCommodityManager;
+	@Autowired
+	private PurchasingmanagerGenreManager purchasingmanagerGenreManager;
 	
     /**
      * 查询列表
@@ -122,10 +125,9 @@ public class ShoppingcarGroupManagerImpl extends BaseManagerImpl implements Shop
 		if(shopCarList.size() == 0){
 			throw new BusException("购物车不能为空！");
 		}
-		String commodityId = shopCarList.get(0).getCommodityId().getCommodityId();
-		PurchasingmanagerGenre pg = purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId).getPurchasingmanagerGenre();
-		while(pg.getPurchasingmanagerGenre() != null){//获取最顶级商品类别
-			pg = pg.getPurchasingmanagerGenre();
+		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(shopCarList.get(0).getCommodityId().getGenreId());
+		while(pg.getGenreId() != null){//获取最顶级商品类别
+			pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(pg.getGenreId());
 		}
 		o.setGenreId(pg);
 		o.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("CG"));
