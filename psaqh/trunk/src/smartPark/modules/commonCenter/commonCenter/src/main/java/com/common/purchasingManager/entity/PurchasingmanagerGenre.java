@@ -134,12 +134,12 @@ public class PurchasingmanagerGenre implements Domain{
 		this.updateUser = updateUser;
 	}
 
-	public String getparendId() {
+	public String getPagrenId() {
 		return pagrenId;
 	}
 
-	public void setParentId(String parendId) {
-		this.pagrenId = parendId;
+	public void setPagrenId(String pagrenId) {
+		this.pagrenId = pagrenId;
 	}
 
 	@Override
