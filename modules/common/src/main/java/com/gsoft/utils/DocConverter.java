@@ -11,7 +11,11 @@ import com.artofsolving.jodconverter.DocumentConverter;
 import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
- 
+ /**
+  * 文档转pdf浏览类
+  * @author xtc
+  *
+  */
 public class DocConverter {
     private static final int environment = 1;// 环境1：windows,2:linux(涉及pdf2swf路径问题)
     private String fileString;
