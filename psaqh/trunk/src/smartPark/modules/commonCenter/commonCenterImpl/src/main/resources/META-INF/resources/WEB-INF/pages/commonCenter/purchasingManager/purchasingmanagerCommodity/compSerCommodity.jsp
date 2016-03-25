@@ -8,12 +8,13 @@
 	</youi:subpage>
 	<!--**********************************子页面**********************************-->
 	<youi:grid id="grid_purchasingmanagerCommodity" idKeys="commodityId" caption="商品信息列表"  panel="false"
-				src="esb/web/purchasingmanagerCommodityManager/getPagerPurCommoditys.json" dataFormId="form_purchasingmanagerCommodity"
+				src="esb/web/purchasingmanagerCommodityManager/getPagerCompSerCommoditys.json" dataFormId="form_purchasingmanagerCommodity"
 				editSrc="esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommodity.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/purchasingmanagerCommodityManager/removePurchasingmanagerCommodity.json">
 		<youi:fieldLayout labelWidths="120,120">
 			<youi:fieldText property="commodityTitle"  caption="标题"/>
-			<youi:fieldTree simple="false" popup="true" tree="${genreTree}" property="purchasingmanagerGenre.genreId" caption="商品类别" onlyLeaf="true"/>
+			<youi:fieldSelect property="purchasingmanagerGenre.genreId" show="genreName" code="genreId"
+				src="esb/web/purchasingmanagerGenreManager/getCompSerOrderTypes.json" caption="类别"/>
 			<youi:fieldText property="purchasingmanagerMerchant.merchantName"  caption="商户名称"/>
 		</youi:fieldLayout>
 		
@@ -42,8 +43,11 @@
 			<youi:fieldText property="commodityTitle"  caption="标题" notNull="true"/>
 			<youi:fieldText property="commodityPrice"  caption="标价" notNull="true"/>
 			<youi:fieldTree simple="false" popup="true" tree="${genreTree}" property="purchasingmanagerGenre.genreId" caption="商品类别" onlyLeaf="true" notNull="true"/>
+			<youi:fieldSelect property="purchasingmanagerGenre.genreId" show="genreName" code="genreId" notNull="true"
+				src="esb/web/purchasingmanagerGenreManager/getCompSerOrderTypes.json" caption="类别"/>
 			<youi:fieldSelect property="purchasingmanagerMerchant.merchantId" show="merchantName" code="merchantId" notNull="true"
-				src="esb/web/purchasingmanagerMerchantManager/getPurMerchants.json" caption="所属商户"/>
+				src="esb/web/purchasingmanagerMerchantManager/getMerchantsByGenre.json" caption="所属商户"
+				parents="purchasingmanagerGenre.genreId" parentsAlias="purchasingmanagerGenre.genreId"/>
 			<youi:fieldText property="commodityStock"  caption="库存"/>
 			<youi:fieldSelect property="commodityIsnotDisplayStock" convert="bool"  caption="是否显示库存" notNull="true"/>
 			<youi:fieldCalendar property="commodityUpTime"  caption="上架时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="true"/>
