@@ -76,7 +76,7 @@ import org.springframework.ui.ModelMap;
 			HttpServletRequest request,
 			DataIn<PurchasingmanagerGenre> dataIn){
 		ModelMap modelMap = new ModelMap();
-		List<PurchasingmanagerGenre> genres = purchasingmanagerGenreManager.getCompSerOrderTypes("");
+		List<PurchasingmanagerGenre> genres = purchasingmanagerGenreManager.getCompSerGenres();
 		GenreHtmlTreeNode genreTree = ParkTreeUtils.listToGenreTree(genres, null, "商品类别");
 		genreTree.setId("tree_genre_root");
 		modelMap.addAttribute("genreTree", genreTree);
