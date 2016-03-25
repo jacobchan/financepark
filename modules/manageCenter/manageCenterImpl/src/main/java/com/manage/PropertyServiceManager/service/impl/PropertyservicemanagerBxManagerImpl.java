@@ -39,6 +39,7 @@ import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
 import com.gsoft.utils.HttpSenderMsg;
+import com.manage.EmployeeManager.dao.EnterpriseEmployeesDao;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
@@ -64,6 +65,8 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 	private PropertyservicemanagerTsManager propertyservicemanagerTsManager;
 	@Autowired
 	private MemberInformationManager memberInformationManager;
+	@Autowired
+	private EnterpriseEmployeesDao enterpriseEmployeesDao;
 	@Autowired 
 	private CodeitemManager codeitemManager;
     /**
@@ -250,9 +253,12 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 		//获取当前登录用户id
 		String id = o.getCreateUser();
 		if(id!=null){
-	    	//获取当前用户参加活动的list
+	    	//根据当前用户获取公司保修的list
+			EnterpriseEmployees e = enterpriseEmployeesDao.getObjectByUniqueProperty("member.memberId", id);
+		    EnterbusinessmanagerRz rz=e.getRz();
+	        String rzName=rz.getRzName();
 	    	Collection<Condition> condition = new ArrayList<Condition>();
-	    	condition.add(ConditionUtils.getCondition("createUser", Condition.EQUALS, id));
+	    	condition.add(ConditionUtils.getCondition("bxComp", Condition.LIKE, rzName));
 	    	 List<PropertyservicemanagerBx> list = propertyservicemanagerBxDao.commonQuery(condition, null);
 	    	 if(list.size()>0){
 	    		 return list;
@@ -315,10 +321,18 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 	}
 	//通过订单号获取当前用户的报修单  模糊查询
 	@EsbServiceMapping
-	 public List<PropertyservicemanagerBx> getEnterprisemaillistLikeBxCode(		    
-			@ServiceParam(name="bxCode") String bxCode) throws BusException {						 
+	 public List<PropertyservicemanagerBx> getEnterprisemaillistLikeBxCode(
+		    @ServiceParam(name="userId",pubProperty="userId") String userId,
+			@ServiceParam(name="bxCode") String bxCode,
+			@ServiceParam(name="startTime") String startTime,
+			@ServiceParam(name="endTime") String endTime) throws BusException {	
+		EnterpriseEmployees e = enterpriseEmployeesDao.getObjectByUniqueProperty("member.memberId", userId);
+	    EnterbusinessmanagerRz rz=e.getRz();
+        String rzName=rz.getRzName();
 		Collection<Condition> condition = new ArrayList<Condition>();
-		condition.add(ConditionUtils.getCondition("bxCode", Condition.LIKE, bxCode));			
+		condition.add(ConditionUtils.getCondition("bxCode", Condition.LIKE, bxCode));
+		condition.add(ConditionUtils.getCondition("bxComp", Condition.LIKE, rzName));
+		condition.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
 		List<PropertyservicemanagerBx> list =propertyservicemanagerBxDao.commonQuery(condition, null);
 		return list;
 				
