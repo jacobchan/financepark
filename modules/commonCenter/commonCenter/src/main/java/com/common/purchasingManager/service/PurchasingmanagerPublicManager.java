@@ -6,6 +6,7 @@ package com.common.purchasingManager.service;
 import java.util.Collection;
 import java.util.List;
 
+import com.common.ExtentionAtrManager.entity.MeetingEntity;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodityExtend;
 import com.gsoft.framework.core.dataobj.Record;
@@ -133,7 +134,7 @@ public interface PurchasingmanagerPublicManager extends BaseManager{
      * @return
      * @throws BusException
      */
-    public void saveCommodityAndPropertyForRoom(String roomId,String roomContain,String roomType,String roomProjector,PurchasingmanagerCommodity o);
+    public void saveCommodityAndPropertyForRoom(PurchasingmanagerCommodity o);
     
     /**
      *保存车辆及其车辆商品扩展属性
@@ -144,7 +145,7 @@ public interface PurchasingmanagerPublicManager extends BaseManager{
      * @return
      * @throws BusException
      */
-    public void saveCommodityAndPropertyForCar(String stalls,String seat,String licensePlate,PurchasingmanagerCommodity o);
+    public void saveCommodityAndPropertyForCar(PurchasingmanagerCommodity o);
     
     /**
      * 根据商品genreCode来获取商品类别

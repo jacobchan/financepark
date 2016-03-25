@@ -4,13 +4,21 @@
 package com.common.purchasingManager.entity;
 
 import java.math.BigDecimal;
-import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.Length;
 
+import com.common.ExtentionAtrManager.entity.CarEntity;
 import com.common.ExtentionAtrManager.entity.MeetingEntity;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
@@ -96,10 +104,16 @@ public class PurchasingmanagerCommodity implements Domain{
 	private String commodityCoverImage;//封面图片
 	
 	/**
-	 * 会议室的扩张属性
+	 * 会议室的扩展属性
 	 */
 	@Transient
 	private MeetingEntity meetingRoom;
+	
+	/**
+	 * 车辆的扩展属性
+	 */
+	@Transient
+	private CarEntity car;
 	
 //	/**
 //	 * 会议室的扩张属性
@@ -119,6 +133,14 @@ public class PurchasingmanagerCommodity implements Domain{
 //	public void setExtndValues(List<PurchasingmanagerCommodityExtend> extndValues) {
 //		this.extndValues = extndValues;
 //	}
+
+	public CarEntity getCar() {
+		return car;
+	}
+
+	public void setCar(CarEntity car) {
+		this.car = car;
+	}
 
 	public MeetingEntity getMeetingRoom() {
 		return meetingRoom;

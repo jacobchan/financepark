@@ -13,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.common.BuildingBaseManager.entity.BbmRoom;
 import com.common.BuildingBaseManager.service.BbmRoomManager;
+import com.common.ExtentionAtrManager.entity.CarEntity;
+import com.common.ExtentionAtrManager.entity.MeetingEntity;
+import com.common.ExtentionAtrManager.service.impl.ExtentionAtrManagerImpl;
 import com.common.purchasingManager.dao.PurchasingmanagerCommodityDao;
 import com.common.purchasingManager.dao.PurchasingmanagerCommodityExtendDao;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
@@ -66,6 +69,9 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 	
 	@Autowired 
 	private CodeitemManager codeitemManager;
+	
+	@Autowired 
+	private ExtentionAtrManagerImpl extentionAtrManagerImpl;
 	
     /**
      * 查询列表
@@ -212,34 +218,34 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 	//保存会议室商品及其扩展属性
 	@Override
 	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
-	public void saveCommodityAndPropertyForRoom(@ServiceParam(name="roomId") String roomId,@ServiceParam(name="roomContain") String roomContain,
-			@ServiceParam(name="roomType") String roomType,@ServiceParam(name="roomProjector") String roomProjector,PurchasingmanagerCommodity o) {
-		BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(roomId);
-		String roomAddress="";
+	public void saveCommodityAndPropertyForRoom(PurchasingmanagerCommodity o) {
+		MeetingEntity meetingRoom=o.getMeetingRoom();
+		String adr=meetingRoom.getAdr();//获取会议室地址
+		BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(adr);
 		if(bbmRoom != null){
 			//获取单元默认地址
-			roomAddress=bbmRoom.getRoomAddress();
+			adr=bbmRoom.getRoomAddress();
 		}
 		
-		String roomTypeName="";//会议室类型
-		if(roomType !=null){//会议室类型：01--视频会议室，02---普通会议室
+		String lx=meetingRoom.getLx();//会议室类型
+		if(lx !=null){//会议室类型：01--视频会议室，02---普通会议室
 			Collection<Condition> condition =  new ArrayList<Condition>();
 			condition.add(ConditionUtils.getCondition("codemap.code", Condition.EQUALS,"roomType"));
-			condition.add(ConditionUtils.getCondition("itemValue", Condition.EQUALS,roomType));
+			condition.add(ConditionUtils.getCondition("itemValue", Condition.EQUALS,lx));
 			List<Codeitem> list = codeitemManager.getCodeitems(condition, null);
 			if(list.size()>0){
-				roomTypeName=list.get(0).getItemCaption();
+				lx=list.get(0).getItemCaption();
 			}
 		}
 		
-		String roomProjectorName="";//投影仪有无
-		if(roomProjector !=null){//投影仪有无：01--有，02---无
+		String tyy=meetingRoom.getTyy();//投影仪有无
+		if(tyy !=null){//投影仪有无：01--有，02---无
 			Collection<Condition> condition =  new ArrayList<Condition>();
 			condition.add(ConditionUtils.getCondition("codemap.code", Condition.EQUALS,"roomProjector"));
-			condition.add(ConditionUtils.getCondition("itemValue", Condition.EQUALS,roomProjector));
+			condition.add(ConditionUtils.getCondition("itemValue", Condition.EQUALS,tyy));
 			List<Codeitem> list = codeitemManager.getCodeitems(condition, null);
 			if(list.size()>0){
-				roomProjectorName=list.get(0).getItemCaption();
+				tyy=list.get(0).getItemCaption();
 			}
 		}
 		
@@ -268,19 +274,20 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     		
     		// 根据商品ID获取商品扩展属性
     		List<PurchasingmanagerCommodityExtend> purExList = purchasingmanagerCommodityExtendManager.getCommodityExtList(commodityId);
+    		
     		if(purExList.size()>0){
     			for(PurchasingmanagerCommodityExtend pce:purExList){
-    				if("dz".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(roomAddress);//保存会议室地址属性
+    				if(meetingRoom.getAdrfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(adr);//保存会议室地址属性
     					dzFlag=false;
-    				}else if("gm".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(roomContain);//保存会议室规模
+    				}else if(meetingRoom.getGmfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(meetingRoom.getGm());//保存会议室规模
     					gmFlag=false;
-    				}else if("lx".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(roomTypeName);//保存会议室类型
+    				}else if(meetingRoom.getLxfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(lx);//保存会议室类型
     					lxFlag=false;
-    				}else if("tyy".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(roomProjectorName);//保存会议室投影仪
+    				}else if(meetingRoom.getTyyfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(tyy);//保存会议室投影仪
     					tyyFlag=false;
     				}
     				pce.setUpdateUser(o.getUpdateUser());
@@ -310,17 +317,17 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     		List<PurchasingmanagerCommodityExtend> pceList=this.getPagerCommodityExtsByGenreId(genreCode);
     		if(pceList.size()>0){
     			for(PurchasingmanagerCommodityExtend pce:pceList){
-    				if("dz".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(roomAddress);//保存会议室地址属性
+    				if(meetingRoom.getAdrfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(adr);//保存会议室地址属性
     					dzFlag=false;
-    				}else if("gm".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(roomContain);//保存会议室规模
+    				}else if(meetingRoom.getGmfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(meetingRoom.getGm());//保存会议室规模
     					gmFlag=false;
-    				}else if("lx".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(roomTypeName);//保存会议室类型
+    				}else if(meetingRoom.getLxfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(lx);//保存会议室类型
     					lxFlag=false;
-    				}else if("tyy".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(roomProjectorName);//保存会议室投影仪
+    				}else if(meetingRoom.getTyyfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(tyy);//保存会议室投影仪
     					tyyFlag=false;
     				}
     				/*PurchasingmanagerCommodity pc = new PurchasingmanagerCommodity();
@@ -357,22 +364,22 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 	//保存车辆商品及其扩展属性
 	@Override
 	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
-	public void saveCommodityAndPropertyForCar(@ServiceParam(name="stalls") String stalls,@ServiceParam(name="seat") String seat,
-			@ServiceParam(name="licensePlate") String licensePlate,PurchasingmanagerCommodity o) {
+	public void saveCommodityAndPropertyForCar(PurchasingmanagerCommodity o) {
 		//获取当前登录用户
 		Object object = SecurityUtils.getPrincipal();
 		User user = new User();
 		if(object != null && object instanceof User){
 			user = (User) object;
 		}
-		String stallsName="";//档位名称
-		if(stalls !=null){//档位
+		CarEntity car=o.getCar();
+		String dw=car.getDw();//档位名称
+		if(dw !=null){//档位
 			Collection<Condition> condition =  new ArrayList<Condition>();
 			condition.add(ConditionUtils.getCondition("codemap.code", Condition.EQUALS,"stalls"));
-			condition.add(ConditionUtils.getCondition("itemValue", Condition.EQUALS,stalls));
+			condition.add(ConditionUtils.getCondition("itemValue", Condition.EQUALS,dw));
 			List<Codeitem> list = codeitemManager.getCodeitems(condition, null);
 			if(list.size()>0){
-				stallsName=list.get(0).getItemCaption();
+				dw=list.get(0).getItemCaption();
 			}
 		}
 		
@@ -401,14 +408,14 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     		List<PurchasingmanagerCommodityExtend> purExList = purchasingmanagerCommodityExtendManager.getCommodityExtList(commodityId);
     		if(purExList.size()>0){
     			for(PurchasingmanagerCommodityExtend pce:purExList){
-    				if("dw".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(stallsName);//保存车辆档位属性
+    				if(car.getDwfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(dw);//保存车辆档位属性
     					dwFlag=false;
-    				}else if("zw".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(seat);//保存车辆座位属性
+    				}else if(car.getZwfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(car.getZw());//保存车辆座位属性
     					zwFlag=false;
-    				}else if("chepai".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(licensePlate);//保存车辆车牌属性
+    				}else if(car.getCpfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(car.getChepai());//保存车辆车牌属性
     					chepaiFlag=false;
     				}
     				pce.setUpdateUser(o.getUpdateUser());
@@ -435,14 +442,14 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     		List<PurchasingmanagerCommodityExtend> pceList=this.getPagerCommodityExtsByGenreId(genreCode);
     		if(pceList.size()>0){
     			for(PurchasingmanagerCommodityExtend pce:pceList){
-    				if("dw".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(stallsName);//保存车辆档位属性
+    				if(car.getDwfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(dw);//保存车辆档位属性
     					dwFlag=false;
-    				}else if("zw".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(seat);//保存车辆座位属性
+    				}else if(car.getZwfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(car.getZw());//保存车辆座位属性
     					zwFlag=false;
-    				}else if("chepai".equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(licensePlate);//保存车辆车牌属性
+    				}else if(car.getCpfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(car.getChepai());//保存车辆车牌属性
     					chepaiFlag=false;
     				}
     				/*PurchasingmanagerCommodity pc = new PurchasingmanagerCommodity();

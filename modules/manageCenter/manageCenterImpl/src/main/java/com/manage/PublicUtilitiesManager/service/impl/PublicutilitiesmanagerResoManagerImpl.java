@@ -359,7 +359,7 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 	@EsbServiceMapping
 	public PagerRecords getPagerPublicCommoditys(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=PurchasingmanagerCommodity.class) Collection<Condition> conditions,//查询条件
-			@OrderCollection Collection<Order> orders,@ServiceParam(name="genreCode") String genreCode)  throws BusException{
+			@OrderCollection Collection<Order> orders,@ServiceParam(name="genreCode") String genreCode,@ServiceParam(name="pege") String page)  throws BusException{
 		// 查询属于公共资源的商品：genreCode=0301:会议室 ；genreCode=0302:车辆租赁；genreCode=0303:广告位
 		Collection<Condition> conditionP = new ArrayList<Condition>();
 		conditionP.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS,genreCode));
@@ -372,6 +372,9 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 		List<Record> records = new ArrayList<Record>();
 		// 查询公共资源下包含的商品
 		conditions.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId",Condition.EQUALS,genreId));
+		String pageIndex = org.apache.commons.lang.StringUtils.defaultIfEmpty(page, "1");
+		pager.setPageIndex(Integer.valueOf(pageIndex));
+		pager.setPageSize(4);
 		PagerRecords pagerRecords = purchasingmanagerCommodityManager.getPagerPurchasingmanagerCommoditys(pager, conditions, orders);
 		@SuppressWarnings("unchecked")
 		List<PurchasingmanagerCommodity> pcList=(List<PurchasingmanagerCommodity>) pagerRecords.getRecords();
