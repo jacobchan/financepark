@@ -65,6 +65,7 @@ public class InformationKnowledgeManagerImpl extends BaseManagerImpl implements 
 //    	}else{//新增
 //    		
 //    	}
+    	o.setCreateUser(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
     	return informationKnowledgeDao.save(o);
     }
 
@@ -110,6 +111,7 @@ public class InformationKnowledgeManagerImpl extends BaseManagerImpl implements 
 		Collection<Order> order = new ArrayList<Order>();
 		condition.add(ConditionUtils.getCondition("knowledgeRe",
 				Condition.EQUALS, knowledgeRe));
+		order.add(ConditionUtils.getOrder("createTime", true));
 		List<InformationKnowledge> list = informationKnowledgeDao
 				.commonQuery(condition, order);
 		return list;
