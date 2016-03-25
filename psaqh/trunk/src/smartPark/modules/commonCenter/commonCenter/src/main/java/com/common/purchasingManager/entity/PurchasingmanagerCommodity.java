@@ -11,6 +11,7 @@ import javax.persistence.*;
 import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.ExtentionAtrManager.entity.MeetingEntity;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: 商品信息
@@ -94,18 +95,40 @@ public class PurchasingmanagerCommodity implements Domain{
 	@Length(max=256)
 	private String commodityCoverImage;//封面图片
 	
+	/**
+	 * 会议室的扩张属性
+	 */
 	@Transient
-	private List<PurchasingmanagerCommodityExtend> extndValues;
+	private MeetingEntity meetingRoom;
 	
-	public List<PurchasingmanagerCommodityExtend> getExtndValues() {
-		return extndValues;
+//	/**
+//	 * 会议室的扩张属性
+//	 */
+//	@Transient
+//	private carEntity car;
+	
+	
+	
+//	@Transient
+//	private List<PurchasingmanagerCommodityExtend> extndValues;
+//	
+//	public List<PurchasingmanagerCommodityExtend> getExtndValues() {
+//		return extndValues;
+//	}
+//
+//	public void setExtndValues(List<PurchasingmanagerCommodityExtend> extndValues) {
+//		this.extndValues = extndValues;
+//	}
+
+	public MeetingEntity getMeetingRoom() {
+		return meetingRoom;
 	}
 
-	public void setExtndValues(List<PurchasingmanagerCommodityExtend> extndValues) {
-		this.extndValues = extndValues;
+	public void setMeetingRoom(MeetingEntity meetingRoom) {
+		this.meetingRoom = meetingRoom;
 	}
 
-//	@ManyToOne(fetch = FetchType.EAGER)
+	//	@ManyToOne(fetch = FetchType.EAGER)
 	@Column(name="GENRE_ID_")
 	private String genreId;//商品类别ID
 	
