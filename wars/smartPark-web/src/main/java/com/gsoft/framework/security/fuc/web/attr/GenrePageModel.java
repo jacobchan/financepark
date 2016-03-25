@@ -60,7 +60,7 @@ import org.springframework.ui.ModelMap;
 	 * @return
 	 */
 	private GenreHtmlTreeNode getGenreHtmlTreeNode() {
-		//获取所有的采购、餐饮、IT服务类别列表
+		//获取所有的采购类别列表
 		List<PurchasingmanagerGenre> genres = purchasingmanagerGenreManager.getPurGenres();
 		GenreHtmlTreeNode genreTree = ParkTreeUtils.listToGenreTree(genres, null, "商品类别");
 		genreTree.setId("tree_genre_root");
@@ -93,7 +93,7 @@ import org.springframework.ui.ModelMap;
 			HttpServletRequest request,
 			DataIn<PurchasingmanagerGenre> dataIn){
 		ModelMap modelMap = new ModelMap();
-		List<PurchasingmanagerGenre> genres = purchasingmanagerGenreManager.getCompSerOrderTypes("");
+		List<PurchasingmanagerGenre> genres = purchasingmanagerGenreManager.getCompSerGenres();
 		GenreHtmlTreeNode genreTree = ParkTreeUtils.listToGenreTree(genres, null, "商品类别");
 		genreTree.setId("tree_genre_root");
 		modelMap.addAttribute("genreTree", genreTree);
