@@ -126,4 +126,12 @@ public interface PurchasingmanagerMerchantManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public List<PurchasingmanagerMerchant> getPurMerchants() throws BusException;
+	/**
+	 * 保存采购商户
+	 * @param o
+	 * @return
+	 * @throws BusException
+	 */
+	public PurchasingmanagerMerchant savePurMerchant(PurchasingmanagerMerchant o)
+			throws BusException;
 }
