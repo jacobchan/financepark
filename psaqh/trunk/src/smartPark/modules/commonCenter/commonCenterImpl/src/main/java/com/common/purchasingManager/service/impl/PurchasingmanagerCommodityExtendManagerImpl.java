@@ -185,7 +185,7 @@ public class PurchasingmanagerCommodityExtendManagerImpl extends BaseManagerImpl
 				}else{//新增
 					PurchasingmanagerCommodity pc = new PurchasingmanagerCommodity();
 					pc.setCommodityId(commodityId);
-					pce.setCommodity(pc);
+					pce.setCommodityId(commodityId);
 					pce.setCreateUser(user.getUserId());
 					pce.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 					pce.setUpdateUser(user.getUserId());
@@ -205,7 +205,9 @@ public class PurchasingmanagerCommodityExtendManagerImpl extends BaseManagerImpl
 		List<PurchasingmanagerCommodityExtend> commodityExtList = new ArrayList<PurchasingmanagerCommodityExtend>();
 		PurchasingmanagerCommodity pc =  purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
 		//获得最上级商品类别
+
 		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(pc.getGenreId());
+
 //		while(pg.getPurchasingmanagerGenre() != null){
 //			pg = pg.getPurchasingmanagerGenre();
 //		}
@@ -228,4 +230,23 @@ public class PurchasingmanagerCommodityExtendManagerImpl extends BaseManagerImpl
 		}
 		return commodityExtList;
 	}
+	
+	/**
+	 * 
+	 * @param fieldName 字段名称
+	 * @param commdityId 商品ID
+	 * @return 只能查询一条数据，如果多条返回错误信息
+	 * @throws BusException
+	 */
+	@EsbServiceMapping
+    public PurchasingmanagerCommodityExtend getPurchasingmanagerCommodityExtends(String fieldName,String commdityId) throws BusException{
+		List<PurchasingmanagerCommodityExtend> queryList = this.purchasingmanagerCommodityExtendDao.getList(new String[]{"commodityId","purchasingmanagerGenreProperty.genrePropertyFieldName"}, 
+				new String[]{commdityId,fieldName});
+		if(queryList.size() == 1){
+			return queryList.get(0);
+		}
+		else{
+			return null;
+		}
+    }
 }
