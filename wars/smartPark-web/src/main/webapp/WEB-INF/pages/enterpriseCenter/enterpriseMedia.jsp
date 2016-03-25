@@ -8,6 +8,10 @@
 		<%@ include file="/WEB-INF/pages/common/enterpriseScriptAddCss.jsp"%>
 		<script type="text/javascript">
 			$(document).ready(function() {
+				$('.sidebar-menu-mainul2 li a').click(function(){
+			        $('.sidebar-menu-mainul2 li').removeClass('active');
+			        $(this).parent().addClass('active');
+			   	});
 				$.ajax({
 					url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
 					success:function(result){
@@ -71,10 +75,12 @@
 		<%@ include file="/WEB-INF/pages/enterpriseCenter/common/ec_left.jsp"%>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				$('.sidebar-menu-mainul2 li a').click(function(){
-			        $('.sidebar-menu-mainul2 li').removeClass('active');
-			        $(this).parent().addClass('active');
-			   	});
+				$('.sidebar-menu-mainul2').delegate('li', 'click', function() {
+					$('.sidebar-menu-mainul2').find('li').each(function(i, dom) {
+			            $(this).removeClass('active');
+			        });
+			        $(this).addClass('active');
+			    });
 			});
 		</script>
 		<div id="youi_page_header" class="youi-page-header clearfix"></div>
