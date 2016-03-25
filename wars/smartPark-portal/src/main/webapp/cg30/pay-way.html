@@ -1,0 +1,96 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>结算购物车</title>
+<link href="../styles/base.css" type="text/css" rel="stylesheet">
+<link href="../styles/page/cg30.css" type="text/css" rel="stylesheet">
+</head>
+
+<body class="bgf1">
+<div id="youi_page_header" class="youi-page-header clearfix"></div>
+<!--***top end****************************************-->
+<!--content-->
+<!--*******************************************-->
+<div class="w1200">
+	<ul class="linknav clearfix mt10 mb10 lh30">
+        <li><a href="#">30云采购</a></li>
+        <li class="active">采购需求</li>
+    </ul>
+    <div class="bgfff c3">
+        <div class="clearfix pl30 pr30 pt20 pb20 bb">
+            <div class="fl f14 lh30">
+                <p>订单编号：x0093777299933</p>
+                <p>订单类型：企业采购</p>
+            </div>
+            <div class="fr f16 lh22 mt20">
+                <p>应付金额：¥ <span class="ccheng">8999.45</span></p>
+            </div>
+        </div>
+        <div class="clearfix pl30 pr30 pt20 pb20">
+            <p class="lh30 f16">支付方式选择</p>
+            <div class="bd-box mt10">
+                <ul class="clearfix">
+                    <li class="active">银行卡支付</li>
+                    <li>第三方支付</li>
+                </ul>
+                <div class="clearfix p30" style="padding-bottom:10px;">
+                    <div class="un-show dis">
+                        <label class="active"><input type="radio" name="bank" checked="checked"><img src="../styles/images/cg30/bank_01.png" alt="中国工商银行"></label>
+                        <label><input type="radio" name="bank"><img src="../styles/images/cg30/bank_02.png" alt="中国银行"></label>
+                        <label><input type="radio" name="bank"><img src="../styles/images/cg30/bank_03.png" alt="招商银行"></label>
+                        <label><input type="radio" name="bank"><img src="../styles/images/cg30/bank_04.png" alt="中国建设银行"></label>
+                        <label><input type="radio" name="bank"><img src="../styles/images/cg30/bank_05.png" alt="中国农业银行"></label>
+                        <label><input type="radio" name="bank"><img src="../styles/images/cg30/bank_06.png" alt="浦发银行"></label>
+                        <label><input type="radio" name="bank"><img src="../styles/images/cg30/bank_07.png" alt="兴业银行"></label>
+                        <label><input type="radio" name="bank"><img src="../styles/images/cg30/bank_08.png" alt="广发银行"></label>
+                        <label><input type="radio" name="bank"><img src="../styles/images/cg30/bank_09.png" alt="中国民生银行"></label>
+                        <label><input type="radio" name="bank"><img src="../styles/images/cg30/bank_10.png" alt="交通银行"></label>
+                        <label><input type="radio" name="bank"><img src="../styles/images/cg30/bank_11.png" alt="中信银行"></label>
+                        <label><input type="radio" name="bank"><img src="../styles/images/cg30/bank_12.png" alt="杭州银行"></label>
+                        <label><input type="radio" name="bank"><img src="../styles/images/cg30/bank_13.png" alt="中国光大银行"></label>
+                        <label><input type="radio" name="bank"><img src="../styles/images/cg30/bank_14.png" alt="上海银行"></label>
+                        <label><input type="radio" name="bank"><img src="../styles/images/cg30/bank_15.png" alt="宁波银行"></label>
+                        <label><input type="radio" name="bank"><img src="../styles/images/cg30/bank_16.png" alt="平安银行"></label>
+                        <label><input type="radio" name="bank"><img src="../styles/images/cg30/bank_17.png" alt="北京农商银行"></label>
+                        <label><input type="radio" name="bank"><img src="../styles/images/cg30/bank_18.png" alt="富滇银行"></label>
+                        <label><input type="radio" name="bank"><img src="../styles/images/cg30/bank_19.png" alt="中国邮政储蓄银行"></label>
+                    </div>
+                    <div class="un-show">
+                        <label class="active"><input type="radio" name="other" checked="checked"><img src="../styles/images/cg30/other_01.png" alt="支付宝"></label>
+                        <label><input type="radio" name="other"><img src="../styles/images/cg30/other_02.png" alt="微信支付"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="mt20">
+                <a href="" class="btn_cc1 fr" style="height:48px;line-height:46px;">下一步</a>
+            </div>
+        </div>
+    </div>
+    <div class="tc mt50"><img src="../styles/images/cg30/footbar.png"/></div>
+<!--w1200 end-->
+</div>
+<!--*******************************************-->
+    
+<!--***bottom start****************************************-->
+	<div id="youi_page_footer" class="youi-page-footer"></div>
+<!--***bottom end****************************************-->
+<!--******************  code end  ****************************-->
+<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+<script type="text/javascript" src="../scripts/page/cg30com.js"></script>
+<script>
+	$(function(){
+        $(".bd-box li").click(function(){
+            $(this).addClass("active").siblings().removeClass("active");
+            $(".un-show").eq($(this).index()).addClass("dis").siblings().removeClass("dis");
+        });
+         $(".bd-box .un-show label").click(function(){
+            $(this).addClass("active").siblings().removeClass("active");
+        })
+    })
+</script>
+</body>
+</html>
