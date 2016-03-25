@@ -120,4 +120,10 @@ public interface PurchasingmanagerMerchantManager extends BaseManager{
 	public PagerRecords getPagerCompSerMerchants(Pager pager,
 			Collection<Condition> conditions, Collection<Order> orders)
 			throws BusException;
+	/**
+	 * 获取采购商品所属商户列表
+	 * @return
+	 * @throws BusException
+	 */
+	public List<PurchasingmanagerMerchant> getPurMerchants() throws BusException;
 }

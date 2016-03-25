@@ -127,7 +127,7 @@ public class PurchasingmanagerCommodityExtendManagerImpl extends BaseManagerImpl
 		List<PurchasingmanagerCommodityExtend> commodityExtList = new ArrayList<PurchasingmanagerCommodityExtend>();
 		PurchasingmanagerCommodity pc =  purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
 		//获得最上级商品类别
-		PurchasingmanagerGenre pg = pc.getPurchasingmanagerGenre();
+		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(pc.getGenreId());
 //		while(pg.getPurchasingmanagerGenre() != null){
 //			pg = pg.getPurchasingmanagerGenre();
 //		}
@@ -205,7 +205,7 @@ public class PurchasingmanagerCommodityExtendManagerImpl extends BaseManagerImpl
 		List<PurchasingmanagerCommodityExtend> commodityExtList = new ArrayList<PurchasingmanagerCommodityExtend>();
 		PurchasingmanagerCommodity pc =  purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
 		//获得最上级商品类别
-		PurchasingmanagerGenre pg = pc.getPurchasingmanagerGenre();
+		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(pc.getGenreId());
 //		while(pg.getPurchasingmanagerGenre() != null){
 //			pg = pg.getPurchasingmanagerGenre();
 //		}

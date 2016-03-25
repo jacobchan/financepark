@@ -118,7 +118,7 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     		PurchasingmanagerCommodity pc = purchasingmanagerCommodityDao.get(commodityId); 
     		pc.setCommodityTitle(o.getCommodityTitle());
     		pc.setCommodityPrice(o.getCommodityPrice());
-    		pc.setPurchasingmanagerGenre(o.getPurchasingmanagerGenre());
+    		pc.setGenreId(o.getGenreId());
     		pc.setPurchasingmanagerMerchant(o.getPurchasingmanagerMerchant());
     		pc.setCommodityStock(o.getCommodityStock());
     		pc.setCommodityIsnotDisplayStock(o.getCommodityIsnotDisplayStock());
@@ -257,7 +257,7 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     		PurchasingmanagerCommodity pc = purchasingmanagerCommodityDao.get(commodityId); 
     		pc.setCommodityTitle(o.getCommodityTitle());
     		pc.setCommodityPrice(o.getCommodityPrice());
-    		pc.setPurchasingmanagerGenre(o.getPurchasingmanagerGenre());
+    		pc.setGenreId(o.getGenreId());
     		pc.setPurchasingmanagerMerchant(o.getPurchasingmanagerMerchant());
     		pc.setCommodityImage(o.getCommodityImage());
     		pc.setCommodityCoverImage(o.getCommodityCoverImage());
@@ -388,7 +388,7 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     		PurchasingmanagerCommodity pc = purchasingmanagerCommodityDao.get(commodityId); 
     		pc.setCommodityTitle(o.getCommodityTitle());
     		pc.setCommodityPrice(o.getCommodityPrice());
-    		pc.setPurchasingmanagerGenre(o.getPurchasingmanagerGenre());
+    		pc.setGenreId(o.getGenreId());
     		pc.setPurchasingmanagerMerchant(o.getPurchasingmanagerMerchant());
     		pc.setCommodityImage(o.getCommodityImage());
     		pc.setCommodityCoverImage(o.getCommodityCoverImage());

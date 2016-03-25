@@ -130,4 +130,26 @@ public interface PurchasingmanagerCommodityManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public PurchasingmanagerCommodity saveCarRentalCommodity(PurchasingmanagerCommodity o) throws BusException;
+	/**
+	 * 获取采购类别的所有商品列表
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	public PagerRecords getPagerPurCommoditys(Pager pager,
+			Collection<Condition> conditions, Collection<Order> orders)
+			throws BusException;
+	/**
+	 * 获取企业服务类别的所有商品列表
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	public PagerRecords getPagerCompSerCommoditys(Pager pager,
+			Collection<Condition> conditions, Collection<Order> orders)
+			throws BusException;
 }
