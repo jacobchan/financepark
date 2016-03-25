@@ -1,19 +1,7 @@
-<!doctype html>
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/pages/memberCenter/common/ad_head.jsp"%> 
-<%@ include file="/WEB-INF/pages/common/memberCenterScriptAndCss.jsp"%>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>个人资料</title>
-	
-</head>
-<body style="background-color:#f4f4f4;">
-
-	<div class="w100">
-		<div class="w1200 clearfix pt30 pb50">
-			<div class="per-center-box clearfix">
-			<%@ include file="/WEB-INF/pages/memberCenter/common/ad_left.jsp"%> 
+<%@ include file="/WEB-INF/pages/include.jsp" %>
+<youi:html title="我的地址">
+	<youi:body decorator="memcenter">  
 				<div class="w1000">
 					<h3 class="per-h3">我的地址</h3>
 					<div class="mt30 addressList">
@@ -21,9 +9,7 @@
 					</div>	
 					<a href="javascript:;" class="add-box ga-edit"><i class="fa fa-plus mr20"></i>新增地址</a>
 				</div>
-			</div>
-		</div>
-	</div>
+			</youi:body>
 	<!--***bottom end****************************************-->
 		<!--***弹窗 start****************************************-->
 	<div class="bg-tanc">
@@ -150,6 +136,4 @@
 			}); 
 		}
 	</script>
-</body>
-<%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 
-</html>
+</youi:html>

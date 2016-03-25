@@ -1,21 +1,7 @@
-<!doctype html>
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/pages/memberCenter/common/ad_head.jsp"%> 
-<%@ include file="/WEB-INF/pages/common/memberCenterScriptAndCss.jsp"%>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>政策申请</title>
-	<style>
-	  .ccheng{color:#FF6715}
-    </style>
-</head>
-<body style="background-color:#f4f4f4;">
-
-	<div class="w100">
-		<div class="w1200 clearfix pt30 pb50">
-			<div class="per-center-box clearfix">
-				<%@ include file="/WEB-INF/pages/memberCenter/common/ad_left.jsp"%> 
+<%@ include file="/WEB-INF/pages/include.jsp" %>
+<youi:html title="政策申请">
+	<youi:body decorator="memcenter"> 
 				<div class="w1000">
 					<h3 class="per-h3">政策申请</h3>
 					<div class="clearfix mt40">
@@ -53,9 +39,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
+		</youi:body>
 	<!--***bottom start****************************************-->
 
 	<script type="text/javascript">
@@ -113,6 +97,4 @@
 			}
 		};	
 	</script>
-</body>
-<%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 
-</html>
+</youi:html>
