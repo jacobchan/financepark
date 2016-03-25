@@ -119,12 +119,8 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
     @EsbServiceMapping
     public void removePurchasingmanagerGenre(@ServiceParam(name="genreId") String id) throws BusException{
     	PurchasingmanagerGenre pg = purchasingmanagerGenreDao.get(id);
-    	if("01".equals(pg.getGenreCode())){
-    		throw new BusException("不能删除急速采购类别！");
-    	}else if("02".equals(pg.getGenreCode())){
-    		throw new BusException("不能删除餐饮类别！");
-    	}else if("06".equals(pg.getGenreCode())){
-    		throw new BusException("不能删除IT服务类别！");
+    	if(pg.getGenreCode() != null){
+    		throw new BusException("不能删除预定义类别！");
     	}else{
     		purchasingmanagerGenreDao.remove(id);
     	}
