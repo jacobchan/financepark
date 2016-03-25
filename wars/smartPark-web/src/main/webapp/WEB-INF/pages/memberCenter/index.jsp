@@ -1,33 +1,8 @@
-<!doctype html>
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/pages/memberCenter/common/ad_head.jsp"%> 
-<%@ include file="/WEB-INF/pages/common/memberCenterScriptAndCss.jsp"%>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>个人资料</title>
-	<script type="text/javascript">
-		$(function () {
-			$("a.c-o").on("click",function(){
-				$(this).parent("p").hide().siblings("p").show();
-			});
-			$(".open-tanc").click(function(){
-				$(".bg-tanc").show();
-			});
-			$("#birthday_container").birthday();
-		})
-	</script>	
-</head>
-<body style="background-color:#f4f4f4;">
+<%@ include file="/WEB-INF/pages/include.jsp" %>
+<youi:html title="个人资料">
+	<youi:body decorator="memcenter"> 
 
-
-	<!--***top end****************************************-->
-	<div class="w100">
-		<div class="w1200 clearfix pt30 pb50">
-			<div class="per-center-box clearfix">
-			<%@ include file="/WEB-INF/pages/memberCenter/common/ad_left.jsp"%> 
-
-		
 				<div class="w1000">
 					<h3 class="per-h3">基本资料</h3>
 					<table class="setting-table grst-table">
@@ -86,33 +61,32 @@
 						</tr>
 					</table>
 				</div>
-			</div>
-		</div>
-	</div>
+	
 	<!--***bottom end****************************************-->
 		<!--***弹窗 start****************************************-->
-	<div class="bg-tanc">
-		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
-			<a href="javascript:;" class="tc-close"></a>
-			<h3 class="mb10 f16 c-333" style="font-size:16px;"><b>加入园区</b></h3>
-			<table class="line-table cic-l-t wybx-tanc" style="font-size:14px;">
-				<colgroup>
-					<col width="110">
-					<col>
-				</colgroup>
-				<tbody>
-				<tr class="show2">
-					<td><b>企业邀请码</b></td>
-					<td><input style="width:400px" type="text" id="companyInvitecode"></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td colspan="2"><a class="ib-btn" style="width:120px;text-align:center;margin-top:10px;">加入企业</a></td>
-				</tr>
-			</tbody></table>
+		<div class="bg-tanc">
+			<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+				<a href="javascript:;" class="tc-close"></a>
+				<h3 class="mb10 f16 c-333" style="font-size:16px;"><b>加入园区</b></h3>
+				<table class="line-table cic-l-t wybx-tanc" style="font-size:14px;">
+					<colgroup>
+						<col width="110">
+						<col>
+					</colgroup>
+					<tbody>
+					<tr class="show2">
+						<td><b>企业邀请码</b></td>
+						<td><input style="width:400px" type="text" id="companyInvitecode"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td colspan="2"><a class="ib-btn" style="width:120px;text-align:center;margin-top:10px;">加入企业</a></td>
+					</tr>
+				</tbody></table>
+			</div>
 		</div>
-	</div>
 	<!--***弹窗 end****************************************-->
+	</youi:body>
 	<script type="text/javascript">
 		$(function(){
 			$.ajax({
@@ -311,6 +285,15 @@
 		    }
 		});
 		</script>
-</body>
-<%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 
-</html>
+		<script type="text/javascript">
+		$(function () {
+			$("a.c-o").on("click",function(){
+				$(this).parent("p").hide().siblings("p").show();
+			});
+			$(".open-tanc").click(function(){
+				$(".bg-tanc").show();
+			});
+			$("#birthday_container").birthday();
+		})
+	</script>	
+</youi:html>
