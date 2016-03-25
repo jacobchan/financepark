@@ -23,9 +23,11 @@ import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.common.BuildingBaseManager.entity.BbmBuilding;
+import com.common.BuildingBaseManager.entity.BbmFloor;
 import com.common.BuildingBaseManager.entity.BbmPark;
 import com.common.BuildingBaseManager.dao.BbmBuildingDao;
 import com.common.BuildingBaseManager.service.BbmBuildingManager;
+import com.common.BuildingBaseManager.service.BbmFloorManager;
 import com.common.BuildingBaseManager.service.BbmParkManager;
 
 @Service("bbmBuildingManager")
@@ -35,6 +37,8 @@ public class BbmBuildingManagerImpl extends BaseManagerImpl implements BbmBuildi
 	private BbmBuildingDao bbmBuildingDao;
 	@Autowired
 	private BbmParkManager bbmParkManager ;
+	@Autowired
+	private BbmFloorManager bbmFloorManager ;
 	
     /**
      * 查询列表
@@ -65,6 +69,7 @@ public class BbmBuildingManagerImpl extends BaseManagerImpl implements BbmBuildi
 	public PagerRecords getPagerBbmBuildings(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=BbmBuilding.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
+		orders.add(ConditionUtils.getOrder("buildingNo", true));
 		PagerRecords pagerRecords = bbmBuildingDao.findByPager(pager, conditions, orders);
 //		List<BbmBuilding> buildings = pagerRecords.getRecords();
 //		for(BbmBuilding building:buildings){
@@ -81,10 +86,30 @@ public class BbmBuildingManagerImpl extends BaseManagerImpl implements BbmBuildi
     public BbmBuilding saveBbmBuilding(BbmBuilding o) throws BusException{
     	String bbmBuildingId = o.getBuildingId();
     	boolean isUpdate = StringUtils.isNotEmpty(bbmBuildingId);
+    	List<BbmBuilding> list = this.getBbmBuildings() ;
     	if(isUpdate){//修改
+    		for(int i=0;i<list.size();i++){//遍历所有楼栋
+    			String buildingId = list.get(i).getBuildingId() ;
+    			if(bbmBuildingId.equals(buildingId)){
+    				
+    			}else{
+    				String buildingNo = list.get(i).getBuildingNo() ; 
+        			String buildingName = list.get(i).getBuildingName() ;
+        			if(o.getBuildingNo().equals(buildingNo) || o.getBuildingName().equals(buildingName)){//如果楼栋名称和编号跟新增的都相同，则拒绝添加
+        				throw new BusException("此楼栋名称或编号已经存在！") ;
+        			}
+    			}
+    		}
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return bbmBuildingDao.save(o);
     	}else{//新增
+    		for(int i=0;i<list.size();i++){//遍历所有楼栋
+    			String buildingNo = list.get(i).getBuildingNo() ; 
+    			String buildingName = list.get(i).getBuildingName() ;
+    			if(o.getBuildingNo().equals(buildingNo) || o.getBuildingName().equals(buildingName)){//如果楼栋名称和编号跟新增的都相同，则拒绝添加
+    				throw new BusException("此楼栋名称或编号已经存在！") ;
+    			}
+    		}
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return bbmBuildingDao.save(o);
     	}
@@ -132,9 +157,12 @@ public class BbmBuildingManagerImpl extends BaseManagerImpl implements BbmBuildi
 				String parkId = park.getParkId() ;//得到园区ID
 				Collection<Condition> condition =  new ArrayList<Condition>();
 	    		condition.add(ConditionUtils.getCondition("bbmPark.parkId", Condition.EQUALS,parkId));//创建查询条件
-				list = bbmBuildingDao.commonQuery(condition, null) ;
+	    		Collection<Order> orders = new ArrayList<Order>();
+	    		orders.add(ConditionUtils.getOrder("buildingNo", true));
+				list = bbmBuildingDao.commonQuery(condition, orders) ;
 			}
 		}
 		return list;
 	}
+	
 }
