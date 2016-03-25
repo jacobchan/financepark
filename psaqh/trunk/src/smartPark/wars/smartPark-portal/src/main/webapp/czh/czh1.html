@@ -277,7 +277,7 @@
 		var html='';
 		for(var i=0;i<record.length;i++){
 			html+="<li>"+
-					"<a href='javascript:;' onclick='redirectPageType(this)'; id="+record[i].typeId+"><div><img src='../filestore/"+record[i].typeIcon+"' border='0'/></div>"+
+					"<a href='javascript:;' onclick='redirectPageType(this)'; id="+record[i].typeId+"><div><img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].typeIcon+"&method=show' border='0'/></div>"+
 					"<p>"+record[i].typeName+"</p></a>"+
 				  "</li>";
 		}
@@ -290,7 +290,7 @@
 		var html='';
 		for(var i=0;i<record.length;i++){
 			 html+="<div class='czh-box mr20'>"+
-						"<img src='../filestore/"+record[i].activityImage+"' width='288' height='195'>"+
+						"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityImage+"&method=show' width='288' height='195'>"+
 						"<div class='czh-group' style='border-bottom:1px solid #ecebeb' id="+record[i].applyId+">"+
 							"<a href='javascript:;' onclick='redirectPage(this)'><h4>"+record[i].applyTitle+"</h4></a>"+
 							"<span><img src='../styles/images/czh/clock.png'  class='mr5'>"+record[i].startTime+"</span>"+
@@ -308,12 +308,11 @@
 		$('.recoomends').append(html);	
 	}
 	function _parseRecords(record){
-		console.log(record);
 		var html='';
 		for(var i=0;i<record.length;i++){
 			html+="<li class='clearfix'><a href='javascript:;'>"+
 						"<div class='plg-photo'>"+
-							"<img src='../filestore/"+record[i].activityImage+"' border='0' width='100%'/>"+
+							"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityImage+"&method=show' border='0' width='100%'/>"+
 							"<em>"+record[i].applayType.typeName+"</em>"+
 						"</div>"+
 						"<div class='plg-article pr' id='"+record[i].applyId+"'>"+
