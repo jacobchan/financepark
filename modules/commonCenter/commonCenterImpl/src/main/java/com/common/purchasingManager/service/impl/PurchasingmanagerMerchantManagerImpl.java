@@ -128,6 +128,7 @@ public class PurchasingmanagerMerchantManagerImpl extends BaseManagerImpl implem
 	/**
      * 保存采购商户
      */
+	@Override
 	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
     public PurchasingmanagerMerchant savePurMerchant(PurchasingmanagerMerchant o) throws BusException{
     	String merchantId = o.getMerchantId();
