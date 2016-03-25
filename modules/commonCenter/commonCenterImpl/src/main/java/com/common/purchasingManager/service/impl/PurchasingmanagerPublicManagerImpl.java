@@ -103,7 +103,7 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 		if(purchasingmanagerGenreList.size()>0){
 			genreId = purchasingmanagerGenreList.get(0).getGenreId();
 		}
-		conditions.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId",Condition.EQUALS,genreId));
+		conditions.add(ConditionUtils.getCondition("genreId",Condition.EQUALS,genreId));
 		PagerRecords pagerRecords = purchasingmanagerCommodityDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
@@ -259,8 +259,8 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     		pc.setCommodityPrice(o.getCommodityPrice());
     		pc.setGenreId(o.getGenreId());
     		pc.setPurchasingmanagerMerchant(o.getPurchasingmanagerMerchant());
-    		pc.setCommodityImage(o.getCommodityImage());
-    		pc.setCommodityCoverImage(o.getCommodityCoverImage());
+    		pc.setCommodityImage(StringUtils.isNotEmpty(o.getCommodityImage())?o.getCommodityImage():null);
+    		pc.setCommodityCoverImage(StringUtils.isNotEmpty(o.getCommodityCoverImage())?o.getCommodityCoverImage():null);
     		pc.setCommodityDescribe(o.getCommodityDescribe());
     		pc.setUpdateUser(o.getUpdateUser());
     		pc.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
@@ -323,9 +323,9 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     					pce.setCommodityExtendContent(roomProjectorName);//保存会议室投影仪
     					tyyFlag=false;
     				}
-    				PurchasingmanagerCommodity pc = new PurchasingmanagerCommodity();
-    				pc.setCommodityId(o.getCommodityId());
-    				pce.setCommodity(pc);
+    				/*PurchasingmanagerCommodity pc = new PurchasingmanagerCommodity();
+    				pc.setCommodityId(o.getCommodityId());*/
+    				pce.setCommodityId(o.getCommodityId());
     				pce.setCreateUser(o.getUpdateUser());
     				pce.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     				pce.setUpdateUser(o.getUpdateUser());
@@ -445,9 +445,9 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     					pce.setCommodityExtendContent(licensePlate);//保存车辆车牌属性
     					chepaiFlag=false;
     				}
-    				PurchasingmanagerCommodity pc = new PurchasingmanagerCommodity();
-    				pc.setCommodityId(o.getCommodityId());
-    				pce.setCommodity(pc);
+    				/*PurchasingmanagerCommodity pc = new PurchasingmanagerCommodity();
+    				pc.setCommodityId(o.getCommodityId());*/
+    				pce.setCommodityId(o.getCommodityId());
     				pce.setCreateUser(user.getUserId());
     				pce.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     				pce.setUpdateUser(user.getUserId());
