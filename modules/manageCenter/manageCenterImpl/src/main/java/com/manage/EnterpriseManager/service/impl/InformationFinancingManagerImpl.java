@@ -74,6 +74,7 @@ public class InformationFinancingManagerImpl extends BaseManagerImpl implements
 		// }else{//新增
 		//
 		// }
+		o.setCreateUser(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
 		return informationFinancingDao.save(o);
 	}
 
@@ -126,6 +127,7 @@ public class InformationFinancingManagerImpl extends BaseManagerImpl implements
 		Collection<Order> order = new ArrayList<Order>();
 		condition.add(ConditionUtils.getCondition("financingRe",
 				Condition.EQUALS, financingRe));
+		order.add(ConditionUtils.getOrder("createTime", true));
 		List<InformationFinancing> list = informationFinancingDao
 				.commonQuery(condition, order);
 		return list;

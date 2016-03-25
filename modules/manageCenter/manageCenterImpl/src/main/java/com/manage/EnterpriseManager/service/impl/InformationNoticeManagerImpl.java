@@ -65,6 +65,7 @@ public class InformationNoticeManagerImpl extends BaseManagerImpl implements Inf
 //    	}else{//新增
 //    		
 //    	}
+    	o.setCreateUser(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
     	return informationNoticeDao.save(o);
     }
 
@@ -110,6 +111,7 @@ public class InformationNoticeManagerImpl extends BaseManagerImpl implements Inf
 		Collection<Order> order = new ArrayList<Order>();
 		condition.add(ConditionUtils.getCondition("noticeRe",
 				Condition.EQUALS, noticeRe));
+		order.add(ConditionUtils.getOrder("createTime", true));
 		List<InformationNotice> list = informationNoticeDao
 				.commonQuery(condition, order);
 		return list;

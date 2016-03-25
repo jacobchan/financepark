@@ -67,6 +67,7 @@ public class InformationLegalManagerImpl extends BaseManagerImpl implements Info
 //    	}else{//新增
 //    		
 //    	}
+    	o.setCreateUser(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
     	return informationLegalDao.save(o);
     }
 
@@ -112,6 +113,7 @@ public class InformationLegalManagerImpl extends BaseManagerImpl implements Info
 		Collection<Order> order = new ArrayList<Order>();
 		condition.add(ConditionUtils.getCondition("legalRe",
 				Condition.EQUALS, legalRe));
+		order.add(ConditionUtils.getOrder("createTime", true));
 		List<InformationLegal> list = informationLegalDao
 				.commonQuery(condition, order);
 		return list;

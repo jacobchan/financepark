@@ -65,6 +65,7 @@ public class InformationProductManagerImpl extends BaseManagerImpl implements In
 //    	}else{//新增
 //    		
 //    	}
+    	o.setCreateUser(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
     	return informationProductDao.save(o);
     }
 
@@ -110,6 +111,7 @@ public class InformationProductManagerImpl extends BaseManagerImpl implements In
 		Collection<Order> order = new ArrayList<Order>();
 		condition.add(ConditionUtils.getCondition("productRe",
 				Condition.EQUALS, productRe));
+		order.add(ConditionUtils.getOrder("createTime", true));
 		List<InformationProduct> list = informationProductDao
 				.commonQuery(condition, order);
 		return list;
