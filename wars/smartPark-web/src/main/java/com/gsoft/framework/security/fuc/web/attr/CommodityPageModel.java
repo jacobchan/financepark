@@ -125,5 +125,17 @@ import org.springframework.ui.ModelMap;
 		modelMap.addAttribute("genreTree", genreTree);
 		return modelMap;
 	}
+	//企业服务商品页面
+	public ModelMap compSerCommodity(
+			HttpServletRequest request,
+			DataIn<PurchasingmanagerGenre> dataIn){
+		ModelMap modelMap = new ModelMap();
+		//活动所有的商品类别列表
+		List<PurchasingmanagerGenre> genres = purchasingmanagerGenreManager.getCompSerGenres();
+		GenreHtmlTreeNode genreTree = ParkTreeUtils.listToGenreTree(genres, null, "类别");
+		genreTree.setId("tree_genre_root");
+		modelMap.addAttribute("genreTree", genreTree);
+		return modelMap;
+	}
  }
 
