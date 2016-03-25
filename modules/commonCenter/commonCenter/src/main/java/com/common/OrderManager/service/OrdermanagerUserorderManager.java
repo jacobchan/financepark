@@ -170,4 +170,11 @@ public interface OrdermanagerUserorderManager extends BaseManager{
    	public PagerRecords getPagerPurOrders(Pager pager,
 			Collection<Condition> conditions, Collection<Order> orders)
 			throws BusException;
+   	/**
+   	 * 获取当前登录用户投诉列表
+   	 * @param o
+   	 * @return
+   	 * @throws BusException
+   	 */
+   	public List<OrdermanagerUserorder> getOrderListByLoginUser(OrdermanagerUserorder o) throws BusException;
 }
