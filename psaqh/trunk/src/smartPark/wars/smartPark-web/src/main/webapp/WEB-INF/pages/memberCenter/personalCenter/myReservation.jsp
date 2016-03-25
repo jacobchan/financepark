@@ -1,18 +1,7 @@
-<!doctype html>
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/pages/memberCenter/common/ad_head.jsp"%> 
-<%@ include file="/WEB-INF/pages/common/memberCenterScriptAndCss.jsp"%>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>我的预约</title>
-	
-</head>
-<body style="background-color:#f4f4f4;">
-	<div class="w100">
-		<div class="w1200 clearfix pt30 pb50">
-			<div class="per-center-box clearfix">
-				<%@ include file="/WEB-INF/pages/memberCenter/common/ad_left.jsp"%> 
+<%@ include file="/WEB-INF/pages/include.jsp" %>
+<youi:html title="我的预约">
+	<youi:body decorator="memcenter"> 
 				<div class="w1000">
 					<h3 class="per-h3">我的预约列表</h3>
 					<div class="clearfix">
@@ -65,10 +54,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-	
 	<!--***弹窗 start****************************************-->
 	<div class="bg-tanc m1">
 		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
@@ -83,6 +68,7 @@
 		</div>
 	</div>
 	<!--***弹窗 end****************************************-->
+</youi:body>
 	<script type="text/javascript">
 		$(function () {
 			$.ajax({
@@ -129,6 +115,4 @@
 				$(".bg-tanc.m1").show();
 			}
 	</script>
-</body>
-<%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 
-</html>
+</youi:html>

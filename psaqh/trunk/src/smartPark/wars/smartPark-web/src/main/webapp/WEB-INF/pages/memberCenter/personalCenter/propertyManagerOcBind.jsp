@@ -1,21 +1,7 @@
-<!doctype html>
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/pages/memberCenter/common/ad_head.jsp"%> 
-<%@ include file="/WEB-INF/pages/common/memberCenterScriptAndCss.jsp"%>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>一卡用绑定</title>
-	<style>
-	  .ccheng{color:#FF6715}
-    </style>
-</head>
-<body style="background-color:#f4f4f4;">
-
-	<div class="w100">
-		<div class="w1200 clearfix pt30 pb50">
-			<div class="per-center-box clearfix">
-				<%@ include file="/WEB-INF/pages/memberCenter/common/ad_left.jsp"%> 
+<%@ include file="/WEB-INF/pages/include.jsp" %>
+<youi:html title="一卡通绑定">
+	<youi:body decorator="memcenter">  
 			<div class="w1000">
 					<h3 class="per-h3">一卡通绑定</h3>
 					<h4 class="f16 mt20">绑定信息</h4>
@@ -26,9 +12,7 @@
 
 				</div>
 
-			</div>
-		</div>
-	</div>
+		</youi:body>
 	<!--***bottom start****************************************-->
 
 	<script type="text/javascript">
@@ -93,6 +77,4 @@
 			}); 
 		}		
 	</script>
-</body>
-<%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 
-</html>
+</youi:html>

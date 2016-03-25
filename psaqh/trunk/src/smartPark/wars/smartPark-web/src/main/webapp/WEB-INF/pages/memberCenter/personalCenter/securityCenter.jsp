@@ -1,21 +1,7 @@
-<!doctype html>
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/pages/memberCenter/common/ad_head.jsp"%> 
-<%@ include file="/WEB-INF/pages/common/memberCenterScriptAndCss.jsp"%>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>安全中心</title>
-	
-</head>
-<body style="background-color:#f4f4f4;">
-
-
-	<!--***top end****************************************-->
-	<div class="w100">
-		<div class="w1200 clearfix pt30 pb50">
-			<div class="per-center-box clearfix">
-			<%@ include file="/WEB-INF/pages/memberCenter/common/ad_left.jsp"%> 
+<%@ include file="/WEB-INF/pages/include.jsp" %>
+<youi:html title="安全中心">
+	<youi:body decorator="memcenter"> 
 				<div class="w1000">
 					<h3 class="per-h3">基本资料</h3>
 					<h4 class="per-h4 mt20">密码安全</h4>
@@ -68,9 +54,7 @@
 						</tr>
 					</table>
 				</div>	
-			</div>
-		</div>
-	</div>
+		</youi:body>
 	<!--***bottom end****************************************-->
 	<script type="text/javascript">
 		$(function(){
@@ -112,6 +96,4 @@
 			});	
 		});	
 	</script>
-</body>
-<%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 
-</html>
+</youi:html>
