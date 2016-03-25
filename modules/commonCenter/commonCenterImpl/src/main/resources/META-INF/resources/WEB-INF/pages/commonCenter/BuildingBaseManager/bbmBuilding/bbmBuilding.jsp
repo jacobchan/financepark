@@ -36,8 +36,10 @@
 			<youi:fieldHidden property="updateTime"  caption="更新时间"/>
 			<youi:fieldText property="buildingNo"  caption="楼栋编号" notNull="true"/>
 			<youi:fieldText property="buildingName"  caption="楼栋名称" notNull="true"/>
-			<youi:fieldText property="attributeFloorCount"  caption="楼宇层数" notNull="true"/>
-			<youi:fieldText property="buildingUnitCount"  caption="楼宇单元数" notNull="true"/>
+			<youi:fieldText property="attributeFloorCount"  caption="楼宇层数" notNull="true" 
+										expression="^\d{0,32}$" expressionMessage="请输入数字!"/>
+			<youi:fieldText property="buildingUnitCount"  caption="楼宇单元数" notNull="true" 
+										expression="^\d{0,32}$" expressionMessage="请输入数字!"/>
 			<youi:fieldSelect property="bbmPark.parkId" caption="所属园区" code="parkId" show="parkName"
 				src="esb/web/bbmParkManager/getBbmParks.json" notNull="true"/>
 			<youi:fieldSelect property="buildingType"  caption="楼栋类别" convert="buildingType"/>
