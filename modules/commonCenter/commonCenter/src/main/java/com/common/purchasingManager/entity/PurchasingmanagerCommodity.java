@@ -4,6 +4,7 @@
 package com.common.purchasingManager.entity;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -93,16 +94,27 @@ public class PurchasingmanagerCommodity implements Domain{
 	@Length(max=256)
 	private String commodityCoverImage;//封面图片
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="GENRE_ID_")
-	private com.common.purchasingManager.entity.PurchasingmanagerGenre purchasingmanagerGenre;//商品类别ID
+	@Transient
+	private List<PurchasingmanagerCommodityExtend> extndValues;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="CATEGORY_ID_")
-	private com.common.purchasingManager.entity.PurchasingmanagerCategory purchasingmanagerCategory;//类目ID
+	public List<PurchasingmanagerCommodityExtend> getExtndValues() {
+		return extndValues;
+	}
+
+	public void setExtndValues(List<PurchasingmanagerCommodityExtend> extndValues) {
+		this.extndValues = extndValues;
+	}
+
+//	@ManyToOne(fetch = FetchType.EAGER)
+	@Column(name="GENRE_ID_")
+	private String genreId;//商品类别ID
+	
+//	@ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name="CATEGORY_ID_")
+//	private com.common.purchasingManager.entity.PurchasingmanagerCategory purchasingmanagerCategory;//类目ID
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="MERCHANT_ID_")
+	@JoinColumn(name="MERCHANT_ID_")
 	private com.common.purchasingManager.entity.PurchasingmanagerMerchant purchasingmanagerMerchant;//商户ID
 
 	public String getUpdateUser(){
@@ -211,20 +223,20 @@ public class PurchasingmanagerCommodity implements Domain{
 		this.commodityCoverImage = commodityCoverImage;
 	}
 	
-	public void setPurchasingmanagerGenre(com.common.purchasingManager.entity.PurchasingmanagerGenre purchasingmanagerGenre){
-		this.purchasingmanagerGenre = purchasingmanagerGenre;
+	public void setGenreId(String genreId){
+		this.genreId = genreId;
 	}
 	
-	public com.common.purchasingManager.entity.PurchasingmanagerGenre getPurchasingmanagerGenre(){
-		return this.purchasingmanagerGenre;
+	public String getGenreId(){
+		return this.genreId;
 	}
-	public void setPurchasingmanagerCategory(com.common.purchasingManager.entity.PurchasingmanagerCategory purchasingmanagerCategory){
-		this.purchasingmanagerCategory = purchasingmanagerCategory;
-	}
-	
-	public com.common.purchasingManager.entity.PurchasingmanagerCategory getPurchasingmanagerCategory(){
-		return this.purchasingmanagerCategory;
-	}
+//	public void setPurchasingmanagerCategory(com.common.purchasingManager.entity.PurchasingmanagerCategory purchasingmanagerCategory){
+//		this.purchasingmanagerCategory = purchasingmanagerCategory;
+//	}
+//	
+//	public com.common.purchasingManager.entity.PurchasingmanagerCategory getPurchasingmanagerCategory(){
+//		return this.purchasingmanagerCategory;
+//	}
 	public void setPurchasingmanagerMerchant(com.common.purchasingManager.entity.PurchasingmanagerMerchant purchasingmanagerMerchant){
 		this.purchasingmanagerMerchant = purchasingmanagerMerchant;
 	}

@@ -76,20 +76,21 @@ public class PurchasingmanagerCommodityExtend implements Domain{
 	@Length(max=2)
 	private String parkBusinessTupe;//园区商业类型
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="GENRE_PROPERTY_ID_")
-	private com.common.purchasingManager.entity.PurchasingmanagerGenreProperty purchasingmanagerGenreProperty;//商品类别属性序列
+//	@ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name="GENRE_PROPERTY_ID_")
+//	private com.common.purchasingManager.entity.PurchasingmanagerGenreProperty purchasingmanagerGenreProperty;//商品类别属性序列
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="COMMODITY_ID_")
-	private com.common.purchasingManager.entity.PurchasingmanagerCommodity commodity;//商品序列
+	private String PropertyId;
+	
+//	@ManyToOne(fetch = FetchType.LAZY)
+    @Column(name="COMMODITY_ID_")
+	private String commodityId;//商品序列
 
-	public com.common.purchasingManager.entity.PurchasingmanagerCommodity getCommodity() {
-		return commodity;
+	public String getCommodityId() {
+		return commodityId;
 	}
-	public void setCommodity(
-			com.common.purchasingManager.entity.PurchasingmanagerCommodity commodity) {
-		this.commodity = commodity;
+	public void setCommodityId(String commodityId) {
+		this.commodityId = commodityId;
 	}
 	public String getGenreId(){
 		return this.genreId;
@@ -190,12 +191,12 @@ public class PurchasingmanagerCommodityExtend implements Domain{
 		this.parkBusinessTupe = parkBusinessTupe;
 	}
 	
-	public void setPurchasingmanagerGenreProperty(com.common.purchasingManager.entity.PurchasingmanagerGenreProperty purchasingmanagerGenreProperty){
-		this.purchasingmanagerGenreProperty = purchasingmanagerGenreProperty;
+	public void setPropertyId(String propertyId){
+		this.PropertyId = propertyId;
 	}
 	
-	public com.common.purchasingManager.entity.PurchasingmanagerGenreProperty getPurchasingmanagerGenreProperty(){
-		return this.purchasingmanagerGenreProperty;
+	public String getPropertyId(){
+		return this.PropertyId;
 	}
 	
 	
