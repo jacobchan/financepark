@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/pages/include.jsp" %>
-<youi:html>
+<youi:html title="物业投诉">
 	<youi:body decorator="memcenter"> 
 				<div class="w1000">
 					<h3 class="per-h3">物业投诉列表</h3>
