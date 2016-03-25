@@ -206,7 +206,7 @@ i.star0{background:url(../images/company/star0.png) no-repeat;}
 i.star1{background:url(../images/company/star1.png) no-repeat;}
 /*评价*/
 .w770{width:770px}
-.evaluation{width:770px;height:160px;padding:10px;}
+.evaluation{width:770px;height:160px;padding:10px;border:1px solid #c9c9c9;resize:none;}
 .record_ul li{overflow:hidden;padding:20px 0;border-bottom:1px #C9C9C9 solid}
 .record_ul li:last-child{border:none}
 .record_info{display:inline-block; vertical-align:middle}
