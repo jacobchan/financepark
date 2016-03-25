@@ -101,17 +101,16 @@ to {opacity:0;}
 <script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 <script>
 	$(function(){
-		$(document).on("mouseover",".zzul .b",function(){
+		$(document).on("mouseover mouseout",".zzul .b",function(){
 			//console.log($(this).index())
-			/* if($(this).index()==0){
-				$(".b1mask").toggleClass("hide");
-	
-			}else if($(this).index()==1){
-				$(".b2mask").toggleClass("hide");
-			} */
 			var buildingId = $(this).parent().attr("id") ;
 			findFloorList(buildingId) ;
-			
+			if($(this).parent().index()==0){
+				$(".b1mask").toggleClass("hide");
+	
+			}else if($(this).parent().index()==1){
+				$(".b2mask").toggleClass("hide");
+			}
 		});		
 		/* $(document).on("mouseover mouseout",".zzul .b:eq(0) li",function(){
 			var idx=$(this).index();
