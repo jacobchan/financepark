@@ -185,10 +185,10 @@ public class BbmFloorManagerImpl extends BaseManagerImpl implements BbmFloorMana
 		BbmFloor floor = bbmFloorDao.get(floorId) ;//获取当前楼层
 		BbmBuilding building = floor.getBbmBuilding() ;//获取楼层对应的楼栋
 		String floorCount = building.getAttributeFloorCount() ;//获取楼层量
-		String buildingNo = building.getBuildingNo() ;//得到楼栋编号
+		String buildingName = building.getBuildingName() ;//得到楼栋编号
 		String floorNo = floor.getFloorNo() ;
 		String str = floorNo.substring(0, floorNo.length()-1) ;
-		String infor = buildingNo + "("+str+"/"+floorCount+")" ;
+		String infor = buildingName + "("+str+"/"+floorCount+")" ;
 		return infor;
 	}
 	
