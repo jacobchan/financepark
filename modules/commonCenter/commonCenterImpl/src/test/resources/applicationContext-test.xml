@@ -25,7 +25,8 @@
   	
   	<!-- 手工修改 ：根据需要配置加载的类-->
   	<!-- <context:component-scan base-package="com.common.OrderManager"/> -->
-  	<context:component-scan base-package="com.common.MemberManager"/>
+  	<!-- <context:component-scan base-package="com.common.MemberManager"/> -->
+  	<context:component-scan base-package="com.common.ExtentionAtrManager"/>
   	
   	
   	
