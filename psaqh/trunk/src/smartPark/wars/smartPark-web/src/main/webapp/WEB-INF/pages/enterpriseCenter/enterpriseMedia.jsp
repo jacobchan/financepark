@@ -8,8 +8,8 @@
 		<%@ include file="/WEB-INF/pages/common/enterpriseScriptAddCss.jsp"%>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				$('#moreul li a').click(function(){
-			        $('#moreul li').removeClass('active');
+				$('.sidebar-menu-mainul2 li a').click(function(){
+			        $('.sidebar-menu-mainul2 li').removeClass('active');
 			        $(this).parent().addClass('active');
 			   	});
 				$.ajax({
@@ -28,11 +28,11 @@
 					    				for(var i=0; i<records.length; i++){
 					    					var mediaDiv = '<li>'+
 					                            '<div class="mt_list">'+
-					                                '<div class="list_pic"><img src="/filestore/'+records[i].mediaTilurl+'"></div>'+
+					                                '<div class="list_pic"><img src="/filestore/'+records[i].mediaUrl+'"></div>'+
 					                                '<div class="list_tex">'+
 					                                    '<table>'+
 					                                        '<tr>'+
-					                                            '<td colspan="2" height="40" valign="middle" align="left"><a class="tit">'+records[i].mediaTitle+'</a></td>'+
+					                                            '<td colspan="2" height="40" valign="middle" align="left"><a class="tit" href="'+records[i].mediaTilurl+'" target="_blank">'+records[i].mediaTitle+'</a></td>'+
 					                                        '</tr>'+
 					                                        '<tr>'+
 					                                            '<td height="40" valign="middle" align="left"><a href="javascript:void(0);"><span>编辑</span></a>丨<a href="javascript:void(0);">删除</a></td>'+

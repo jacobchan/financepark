@@ -24,8 +24,8 @@
 			}
 			$(document).ready(function() {
 				//CKEDITOR.replace('editorrzRemark');
-				$('#moreul li a').click(function(){
-			        $('#moreul li').removeClass('active');
+				$('.sidebar-menu-mainul2 li a').click(function(){
+			        $('.sidebar-menu-mainul2 li').removeClass('active');
 			        $(this).parent().addClass('active');
 			   	});
 				
