@@ -34,7 +34,8 @@
 			<youi:fieldSelect property="bbmBuilding.buildingId" caption="所属楼栋" code="buildingId" show="buildingName"
 				src="esb/web/bbmBuildingManager/getBbmBuildings.json" notNull="true"/>
 			<youi:fieldText property="parkName" caption="所属园区"  readonly="true"/>
-			<youi:fieldText property="floorRoomCount"  caption="楼层单元数量" notNull="true"/>
+			<youi:fieldText property="floorRoomCount"  caption="楼层单元数量" notNull="true"
+									expression="^\d{0,32}$" expressionMessage="请输入数字!"/>
 			<youi:fieldText property="floorCaption"  caption="楼层说明" column="2"/>
 			<youi:fieldText property="floorImage" caption="楼层布局图片" column="2"/>
 			
