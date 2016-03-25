@@ -62,6 +62,17 @@ public class PurchasingmanagerGenre implements Domain{
 	@Length(max=36)
 	private String pagrenId;//320_商品类别ID
 	
+	@Transient
+	private PurchasingmanagerGenre parentGenre;//上级类别
+	
+	public PurchasingmanagerGenre getParentGenre() {
+		return parentGenre;
+	}
+
+	public void setParentGenre(PurchasingmanagerGenre parentGenre) {
+		this.parentGenre = parentGenre;
+	}
+
 	public String getParkBusinessTupe() {
 		return parkBusinessTupe;
 	}

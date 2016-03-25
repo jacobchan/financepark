@@ -8,24 +8,21 @@
 	</youi:subpage>
 	<!--**********************************子页面**********************************-->
 	<youi:grid id="grid_purchasingmanagerCommodity" idKeys="commodityId" caption="商品信息列表"  panel="false"
-				src="esb/web/purchasingmanagerCommodityManager/getPagerPurchasingmanagerCommoditys.json" dataFormId="form_purchasingmanagerCommodity"
+				src="esb/web/purchasingmanagerCommodityManager/getPagerAdsenseCommoditys.json" dataFormId="form_purchasingmanagerCommodity"
 				editSrc="esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommodity.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/purchasingmanagerCommodityManager/removePurchasingmanagerCommodity.json">
 		<youi:fieldLayout labelWidths="120,120">
 			<youi:fieldText property="commodityTitle"  caption="标题"/>
 			<youi:fieldText property="purchasingmanagerMerchant.merchantName"  caption="商户名称"/>
-			<youi:fieldHidden property="purchasingmanagerGenre.genreCode" caption="商品类别编码" defaultValue="0303" />
 		</youi:fieldLayout>
 		
-		<youi:gridCol property="commodityTitle"  caption="标题" align="center" width="15%"/>
-		<youi:gridCol property="purchasingmanagerMerchant.merchantName"  caption="商户名称" align="center" width="9%"/>
-		<youi:gridCol property="purchasingmanagerGenre.genreName"  caption="商品类别" align="center" width="8%"/>
+		<youi:gridCol property="commodityTitle"  caption="标题" align="center" width="16%"/>
+		<youi:gridCol property="purchasingmanagerMerchant.merchantName"  caption="商户名称" align="center" width="16%"/>
 		<youi:gridCol property="commodityPrice"  caption="标价" align="center" width="8%"/>
 		<youi:gridCol property="commodityStock"  caption="库存" align="center" width="8%"/>
 		<youi:gridCol property="commodityDescribe"  caption="描述" align="center" width="22%"/>
 		<youi:gridCol property="commodityUpTime"  caption="上架时间" align="center" width="15%"/>
 		<youi:gridCol property="commodityDownTime"  caption="下架时间" align="center" width="15%"/>
-		<youi:gridCol property="purchasingmanagerGenre.genreId"  caption="商品类别" align="center" width="0"/>
 		
 		<youi:button name="commodity_extend" active="1" caption="商品扩展属性"/>
 		<%-- <youi:button name="veiwCommodity" active="1" caption="查看详情"/> --%>
@@ -78,7 +75,6 @@
 	<youi:func name="func_grid_commodity_extend">
 		var selectRecord = $elem('grid_purchasingmanagerCommodity',pageId).grid('getSelectedRecord');
 		var commodityId = selectRecord['commodityId'];
-		var genreId = selectRecord['purchasingmanagerGenre.genreId'];
 		$elem('subpage_sb_commodity_extend',pageId).subpage('open',{commodityId:commodityId},null,{commodityId:commodityId});
 	</youi:func>
 	<youi:func name="func_grid_veiwCommodity">
