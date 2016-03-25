@@ -4,8 +4,8 @@
 	<!-- 页面描述： -->
 	<!--**********************************子页面**********************************-->
 	<youi:subpage caption="新增类别" height="100"
-		width="780" subpageId="addPurGenre"
-		src="page/commonCenter.purchasingManager.purchasingmanagerGenre/addPurGenre.html?purchasingmanagerGenre.genreId={pruGenreId}"
+		width="780" subpageId="addCompSerGenre"
+		src="page/commonCenter.purchasingManager.purchasingmanagerGenre/addCompSerGenre.html?purchasingmanagerGenre.genreId={pruGenreId}"
 		formAction="esb/web/purchasingmanagerGenreManager/savePurchasingmanagerGenre.json">
 	</youi:subpage>
 	<!--**********************************子页面**********************************-->
@@ -27,12 +27,12 @@
 			<youi:fieldText width="120" styleClass="autoAlign" property="genreName" caption="类别名称" notNull="true"/>
 			<youi:fieldLabel  styleClass="autoAlign"  property="purchasingmanagerGenre.genreName" caption="上级类别" />
 		</youi:fieldLayout>
-		<youi:button icon="add" name="addPurGenre" caption="新增类别" />
+		<youi:button icon="add" name="addCompSerGenre" caption="新增类别" />
 	</youi:form>
 	<!--**********************************页面内容********************************-->
 	<!--**********************************页面函数********************************-->
 
-	<youi:func name="func_form_addPurGenre">
+	<youi:func name="func_form_addCompSerGenre">
 		var genreName = $elem('form_genre',pageId).form('fieldValue','genreName');
 		var genreId = $elem('form_genre',pageId).form('fieldValue','genreId');
 		var genreTree = $elem('tree_genre',pageId);
@@ -40,10 +40,10 @@
 		if(selectedNode&&selectedNode.hasClass('root')){
 			genreId='';
 		}
-		$elem('subpage_addPurGenre',pageId).subpage('open',{pruGenreId:genreId},null,{pruGenreId:genreId});
+		$elem('subpage_addCompSerGenre',pageId).subpage('open',{pruGenreId:genreId},null,{pruGenreId:genreId});
 	</youi:func>
 
-	<youi:func name="subpage_addPurGenre_afterSubmit" params="results">
+	<youi:func name="subpage_addCompSerGenre_afterSubmit" params="results">
 		if(results&&results.record){
 			//增加树节点
 			var genreTree = $elem('tree_genre',pageId),
