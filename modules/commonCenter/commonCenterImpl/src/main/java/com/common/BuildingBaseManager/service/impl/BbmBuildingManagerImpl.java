@@ -69,6 +69,8 @@ public class BbmBuildingManagerImpl extends BaseManagerImpl implements BbmBuildi
 	public PagerRecords getPagerBbmBuildings(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=BbmBuilding.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
+		orders.add(ConditionUtils.getOrder("bbmPark.parkName", true));
+		orders.add(ConditionUtils.getOrder("buildingName", true));
 		orders.add(ConditionUtils.getOrder("buildingNo", true));
 		PagerRecords pagerRecords = bbmBuildingDao.findByPager(pager, conditions, orders);
 //		List<BbmBuilding> buildings = pagerRecords.getRecords();
@@ -87,6 +89,7 @@ public class BbmBuildingManagerImpl extends BaseManagerImpl implements BbmBuildi
     	String bbmBuildingId = o.getBuildingId();
     	boolean isUpdate = StringUtils.isNotEmpty(bbmBuildingId);
     	List<BbmBuilding> list = this.getBbmBuildings() ;
+    	BbmPark park = bbmParkManager.getBbmPark(o.getBbmPark().getParkId()) ;
     	if(isUpdate){//修改
     		for(int i=0;i<list.size();i++){//遍历所有楼栋
     			String buildingId = list.get(i).getBuildingId() ;
@@ -95,8 +98,9 @@ public class BbmBuildingManagerImpl extends BaseManagerImpl implements BbmBuildi
     			}else{
     				String buildingNo = list.get(i).getBuildingNo() ; 
         			String buildingName = list.get(i).getBuildingName() ;
-        			if(o.getBuildingNo().equals(buildingNo) || o.getBuildingName().equals(buildingName)){//如果楼栋名称和编号跟新增的都相同，则拒绝添加
-        				throw new BusException("此楼栋名称或编号已经存在！") ;
+        			String parkName = list.get(i).getBbmPark().getParkName() ;
+        			if(park.getParkName().equals(parkName) && (o.getBuildingNo().equals(buildingNo) || o.getBuildingName().equals(buildingName))){//如果楼栋名称和编号跟新增的都相同，则拒绝添加
+        				throw new BusException("此园区的楼栋名称或编号已经存在！") ;
         			}
     			}
     		}
@@ -106,8 +110,9 @@ public class BbmBuildingManagerImpl extends BaseManagerImpl implements BbmBuildi
     		for(int i=0;i<list.size();i++){//遍历所有楼栋
     			String buildingNo = list.get(i).getBuildingNo() ; 
     			String buildingName = list.get(i).getBuildingName() ;
-    			if(o.getBuildingNo().equals(buildingNo) || o.getBuildingName().equals(buildingName)){//如果楼栋名称和编号跟新增的都相同，则拒绝添加
-    				throw new BusException("此楼栋名称或编号已经存在！") ;
+    			String parkName = list.get(i).getBbmPark().getParkName() ;
+    			if(park.getParkName().equals(parkName) && (o.getBuildingNo().equals(buildingNo) || o.getBuildingName().equals(buildingName))){//如果楼栋名称和编号跟新增的都相同，则拒绝添加
+    				throw new BusException("此园区的楼栋名称或编号已经存在！") ;
     			}
     		}
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
