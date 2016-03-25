@@ -161,6 +161,18 @@ public class PurchasingmanagerCommodity implements Domain{
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="MERCHANT_ID_")
 	private com.common.purchasingManager.entity.PurchasingmanagerMerchant purchasingmanagerMerchant;//商户ID
+	
+	@Transient
+	private PurchasingmanagerGenre purchasingmanagerGenre;//商品类型
+
+	public PurchasingmanagerGenre getPurchasingmanagerGenre() {
+		return purchasingmanagerGenre;
+	}
+
+	public void setPurchasingmanagerGenre(
+			PurchasingmanagerGenre purchasingmanagerGenre) {
+		this.purchasingmanagerGenre = purchasingmanagerGenre;
+	}
 
 	public String getUpdateUser(){
 		return this.updateUser;
