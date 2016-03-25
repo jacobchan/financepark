@@ -1,18 +1,7 @@
-<!doctype html>
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/pages/memberCenter/common/ad_head.jsp"%> 
-<%@ include file="/WEB-INF/pages/common/memberCenterScriptAndCss.jsp"%>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>缴费查询</title>
-	
-</head>
-<body style="background-color:#f4f4f4;">
-	<div class="w100">
-		<div class="w1200 clearfix pt30 pb50">
-			<div class="per-center-box clearfix">
-				<%@ include file="/WEB-INF/pages/memberCenter/common/ad_left.jsp"%> 
+<%@ include file="/WEB-INF/pages/include.jsp" %>
+<youi:html>
+	<youi:body decorator="memcenter"> 
 				<div class="w1000">
 					<h3 class="per-h3">缴费查询列表</h3>
 					<div class="clearfix">
@@ -54,11 +43,7 @@
 							<a href="">Go</a>
 						</div>
 					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
+				</div>	
 	<!--***弹窗 start****************************************-->
 	<div class="bg-tanc">
 		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
@@ -110,6 +95,7 @@
 		</div>
 	</div>
 	<!--***弹窗 end****************************************-->
+</youi:body>
 	<script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
 	<script type="text/javascript">
 	$(function () {
@@ -203,6 +189,4 @@
 		});
 	})
 	</script>
-</body>
-<%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 
-</html>
+</youi:html>
