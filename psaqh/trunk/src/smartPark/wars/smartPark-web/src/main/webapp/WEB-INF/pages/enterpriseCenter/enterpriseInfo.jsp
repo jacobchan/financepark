@@ -24,6 +24,11 @@
 			}
 			$(document).ready(function() {
 				//CKEDITOR.replace('editorrzRemark');
+				$('#moreul li a').click(function(){
+			        $('#moreul li').removeClass('active');
+			        $(this).parent().addClass('active');
+			   	});
+				
 			  	var editor = CKEDITOR.replace('editorproductDiscriptio');
 			  	editor.updateElement();
 				$("#rzRemark").on('keyup', function() {
@@ -45,7 +50,7 @@
 										$("#rzName").val(result.record.rzName);
 				    					$("#rzUrl").val(result.record.rzUrl);
 				    					$("#rzRemark").val(result.record.rzRemark);
-				    					CKEDITOR.instances['editorproductDiscriptio'].setData(result.record.rzRemark);
+				    					editor.setData(result.record.productDiscriptio);
 				    					$("#enTypeName").val(result.record.enTypeId.enTypeName);
 				    					$("#editorproductDiscriptio").val(result.record.productDiscriptio);
 				    					$("#currentCount").html(getStrLength(result.record.rzRemark));

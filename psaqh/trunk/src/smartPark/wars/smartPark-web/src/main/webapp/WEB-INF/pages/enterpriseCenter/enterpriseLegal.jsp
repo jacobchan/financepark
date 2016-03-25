@@ -22,6 +22,10 @@
 			    return reLen;    
 			}
 			$(document).ready(function() {
+				$('#moreul li a').click(function(){
+			        $('#moreul li').removeClass('active');
+			        $(this).parent().addClass('active');
+			   	});
 				$("#legalRemark").on('keyup', function() {
 				    var len = getStrLength(this.value);
 				    $("#currentCount").html(len);
