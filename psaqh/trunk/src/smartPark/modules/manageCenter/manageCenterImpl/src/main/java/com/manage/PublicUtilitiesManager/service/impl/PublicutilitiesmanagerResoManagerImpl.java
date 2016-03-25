@@ -265,7 +265,8 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 //		}
 		
 		OrdermanagerUserorder o =new OrdermanagerUserorder();
-		o.setGenreId(publicResoList.get(0).getCommodityId().getPurchasingmanagerGenre());
+		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(publicResoList.get(0).getCommodityId().getGenreId());
+		o.setGenreId(pg);
 		o.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("GGZY"));
 		o.setUserorderStatus("01");//01-未支付
 		o.setUserorderProject(publicResoList.get(0).getCommodityId().getCommodityTitle());
@@ -279,9 +280,8 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 		orderDetail.setCommoditydetailNum("1");
 		this.userOrderDetailManager.saveOrdermanagerCommoditydetail(orderDetail);
 		//保存订单扩展属性列表
-		PurchasingmanagerGenre pg = publicResoList.get(0).getCommodityId().getPurchasingmanagerGenre();
-		while(pg.getPurchasingmanagerGenre() != null){//获取最顶级商品类别
-			pg = pg.getPurchasingmanagerGenre();
+		while(pg.getGenreId() != null){//获取最顶级商品类别
+			pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(pg.getGenreId());
 		}
 		StringBuffer publicResoIdBuff =  new StringBuffer();//公共资源ID
 		String dateStr =  "";//订单预定日期
@@ -396,7 +396,7 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 			//获取商品类别
 			Collection<Condition> condition = new ArrayList<Condition>();
 			List<PurchasingmanagerCommodityExtend> pceList=new ArrayList<PurchasingmanagerCommodityExtend>();
-			condition.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.EQUALS, pc.getPurchasingmanagerGenre().getGenreId()));
+			condition.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.EQUALS, pc.getGenreId()));
 			List<PurchasingmanagerGenreProperty> genrePropertyList = extensionPropertyManager.getPurchasingmanagerGenrePropertys(condition, null);
 			for(PurchasingmanagerGenreProperty genreProperty:genrePropertyList){
 				if("dw".equals(genreProperty.getGenrePropertyFieldName())){
