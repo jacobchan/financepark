@@ -176,7 +176,7 @@
 				cls="gr-czh-box";
 			}
 			html+="<div class='"+cls+"' id='"+record[i].applyId+"'>"+
-            		 "<img src='http://localhost:9088/filestore/"+record[i].activityImage+"' width='202' height='114'>"+
+            		 "<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityImage+"&method=show' width='202' height='114'>"+
             		 " <a  href='javascript:;' onclick='redirectPage(this)'><p>"+record[i].applyTitle+"</p></a>"+
        			 	 "</div>";
 		};
