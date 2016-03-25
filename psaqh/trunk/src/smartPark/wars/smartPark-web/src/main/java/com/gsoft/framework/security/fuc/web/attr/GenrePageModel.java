@@ -56,15 +56,48 @@ import org.springframework.ui.ModelMap;
 		return modelMap;
 	}
 	/**
-	 * 获取采购、餐饮、IT服务类别树对象
+	 * 获取采购类别树对象
 	 * @return
 	 */
 	private GenreHtmlTreeNode getGenreHtmlTreeNode() {
 		//获取所有的采购、餐饮、IT服务类别列表
-		List<PurchasingmanagerGenre> genres = purchasingmanagerGenreManager.getPurFoodGenres();
+		List<PurchasingmanagerGenre> genres = purchasingmanagerGenreManager.getPurGenres();
 		GenreHtmlTreeNode genreTree = ParkTreeUtils.listToGenreTree(genres, null, "商品类别");
 		genreTree.setId("tree_genre_root");
 		return genreTree;
+	}
+	/**
+	 * 企业服务类别查询页面
+	 * @param request
+	 * @param dataIn
+	 * @return
+	 */
+	public ModelMap compSerGenre(
+			HttpServletRequest request,
+			DataIn<PurchasingmanagerGenre> dataIn){
+		ModelMap modelMap = new ModelMap();
+		List<PurchasingmanagerGenre> genres = purchasingmanagerGenreManager.getCompSerOrderTypes("");
+		GenreHtmlTreeNode genreTree = ParkTreeUtils.listToGenreTree(genres, null, "商品类别");
+		genreTree.setId("tree_genre_root");
+		modelMap.addAttribute("genreTree", genreTree);
+		return modelMap;
+	}
+	
+	/**
+	 * 企业服务类别新增页面
+	 * @param request
+	 * @param dataIn
+	 * @return
+	 */
+	public ModelMap addCompSerGenre(
+			HttpServletRequest request,
+			DataIn<PurchasingmanagerGenre> dataIn){
+		ModelMap modelMap = new ModelMap();
+		List<PurchasingmanagerGenre> genres = purchasingmanagerGenreManager.getCompSerOrderTypes("");
+		GenreHtmlTreeNode genreTree = ParkTreeUtils.listToGenreTree(genres, null, "商品类别");
+		genreTree.setId("tree_genre_root");
+		modelMap.addAttribute("genreTree", genreTree);
+		return modelMap;
 	}
  }
 
