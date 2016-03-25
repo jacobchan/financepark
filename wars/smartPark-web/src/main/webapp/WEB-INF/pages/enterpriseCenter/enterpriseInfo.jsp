@@ -23,12 +23,7 @@
 			    return reLen;    
 			}
 			$(document).ready(function() {
-				//CKEDITOR.replace('editorrzRemark');
-				$('.sidebar-menu-mainul2 li a').click(function(){
-			        $('.sidebar-menu-mainul2 li').removeClass('active');
-			        $(this).parent().addClass('active');
-			   	});
-				
+				//CKEDITOR.replace('editorrzRemark');		
 			  	var editor = CKEDITOR.replace('editorproductDiscriptio');
 			  	editor.updateElement();
 				$("#rzRemark").on('keyup', function() {
@@ -99,6 +94,14 @@
 	<body class="page-header-fixed" style=" background-image:none">
 		<%@ include file="/WEB-INF/pages/enterpriseCenter/common/ec_head.jsp"%>
 		<%@ include file="/WEB-INF/pages/enterpriseCenter/common/ec_left.jsp"%>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('.sidebar-menu-mainul2 li a').click(function(){
+			        $('.sidebar-menu-mainul2 li').removeClass('active');
+			        $(this).parent().addClass('active');
+			   	});
+			});
+		</script>
 		<div id="youi_page_header" class="youi-page-header clearfix"></div>
 		<div class="main">    
 		    <div id="youi_page_left" class="fl clearfix"></div>
