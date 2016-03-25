@@ -33,7 +33,7 @@
 	                <li><a href="qydd.html">订单中心</a></li>
 	                <li><a href="plxx.html">评论消息</a></li>
 	            </ul>
-	            <div class="sidebar-menu-return"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_return.png"></span>返回个人中心</div>
+	            <div class="sidebar-menu-return"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_return.png"></span><a href="<%=request.getContextPath()%>/member/memberCenter/index.html">返回个人中心</a></div>
 	        </div>
 		</aside>
 	</body>
