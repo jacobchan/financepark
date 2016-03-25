@@ -205,6 +205,7 @@
 			});
 			//报名提交
 			$('.ib-btn').click(function(){
+				if(!isLogin){alert("请登录");return;}
 				var url=location.href; 
 				var tmp1=url.split("?")[1];  
 				var tmp2=tmp1.split("=")[1]; 
@@ -260,7 +261,7 @@
 		});
 		//活动详情赋值
 		function _parseRecords(record){
-			$(".activityImage").attr("src","../filestore/"+record.activityImage);
+			$(".activityImage").attr("src",cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record.activityImage+"&method=show");
 			$(".h-bg").html(record.applyTitle);
 			$(".time").html(record.startTime);
 			//$(".address").html();
