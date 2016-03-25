@@ -3,6 +3,7 @@
  */
 package com.common.purchasingManager.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -92,8 +93,13 @@ public class PurchasingmanagerMerchantManagerImpl extends BaseManagerImpl implem
 	public PagerRecords getPagerCompSerMerchants(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=PurchasingmanagerMerchant.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
-		String[] buff = new String[]{"0501","0502","0503","0504","0505","0506","0507"};
-		conditions.add(ConditionUtils.getCondition("merchantType.genreCode", Condition.IN, buff));
+		List<PurchasingmanagerGenre> pgList = purchasingmanagerGenreManager.getCompSerOrderTypes("");
+		List<String> list = new ArrayList<String>();
+		for(PurchasingmanagerGenre pg:pgList){
+			list.add(pg.getGenreId());
+		}
+		String[] buff = (String[])list.toArray(new String[list.size()]);
+		conditions.add(ConditionUtils.getCondition("merchantType.genreId", Condition.IN, buff));
 		PagerRecords pagerRecords = purchasingmanagerMerchantDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
