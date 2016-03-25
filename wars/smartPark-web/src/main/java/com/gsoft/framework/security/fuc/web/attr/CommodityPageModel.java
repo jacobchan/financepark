@@ -54,7 +54,7 @@ import org.springframework.ui.ModelMap;
 		return modelMap;
 	}
 	
-	public ModelMap purchasingmanagerCommodityExtendForRoom(
+	public ModelMap purchasingmanagerCommodityForRoom(
 			HttpServletRequest request,
 			DataIn<PurchasingmanagerGenre> dataIn){
 		ModelMap modelMap = new ModelMap();
@@ -82,14 +82,7 @@ import org.springframework.ui.ModelMap;
 		return modelMap;
 	}
 	
-	public ModelMap purchasingmanagerCommodityExtendForRoomUpdate(
-			HttpServletRequest request,
-			DataIn<PurchasingmanagerGenre> dataIn){
-		ModelMap modelMap = new ModelMap();
-		BbmRoomHtmlTreeNode bbmRoomTree = getBbmRoomTree();
-		modelMap.addAttribute("bbmRoomTree", bbmRoomTree);
-		return modelMap;
-	}
+	
 	
 	
 	/**
