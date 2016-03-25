@@ -5,7 +5,7 @@
 	<!--**********************************子页面**********************************-->
 	<youi:subpage caption="新增类别" height="100"
 		width="780" subpageId="addCompSerGenre"
-		src="page/commonCenter.purchasingManager.purchasingmanagerGenre/addCompSerGenre.html?purchasingmanagerGenre.genreId={pruGenreId}"
+		src="page/commonCenter.purchasingManager.purchasingmanagerGenre/addCompSerGenre.html?pagrenId={pruGenreId}"
 		formAction="esb/web/purchasingmanagerGenreManager/savePurchasingmanagerGenre.json">
 	</youi:subpage>
 	<!--**********************************子页面**********************************-->
@@ -49,10 +49,10 @@
 			var genreTree = $elem('tree_genre',pageId),
 				record = results.record,
 				relTreeNode;
-			if(!record.purchasingmanagerGenre){
+			if(!record.pagrenId){
 				relTreeNode = genreTree.find('li.treeNode:first');
 			}else{
-				relTreeNode = genreTree.find('li.treeNode#'+record.purchasingmanagerGenre.genreId);
+				relTreeNode = genreTree.find('li.treeNode#'+record.pagrenId);
 			}
 			genreTree.tree('addNode',relTreeNode,record.genreId,record.genreName);
 			$(this).form('close');
