@@ -69,6 +69,9 @@ public class BbmFloorManagerImpl extends BaseManagerImpl implements BbmFloorMana
 	public PagerRecords getPagerBbmFloors(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=BbmFloor.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
+		orders.add(ConditionUtils.getOrder("bbmPark.parkName", true));
+		orders.add(ConditionUtils.getOrder("bbmBuilding.buildingName", true));
+		orders.add(ConditionUtils.getOrder("floorNo", true));
 		PagerRecords pagerRecords = bbmFloorDao.findByPager(pager, conditions, orders);
 //		List<BbmFloor> floors = pagerRecords.getRecords();
 //		for(BbmFloor floor:floors){
@@ -84,19 +87,44 @@ public class BbmFloorManagerImpl extends BaseManagerImpl implements BbmFloorMana
      */
     @EsbServiceMapping
     public BbmFloor saveBbmFloor(BbmFloor o) throws BusException{
-//    	String bbmFloorId = o.getFloorId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(bbmFloorId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
+    	String bbmFloorId = o.getFloorId();
+    	boolean isUpdate = StringUtils.isNotEmpty(bbmFloorId);
     	BbmBuilding building = o.getBbmBuilding() ; //得到楼栋对象，此时楼栋对象里面只有ID
     	String buildingId = building.getBuildingId() ;//得到楼栋ID
-    	building = bbmBuildingManager.getBbmBuilding(buildingId) ; //通锅楼栋ID获取楼栋对象
+    	building = bbmBuildingManager.getBbmBuilding(buildingId) ; //通过楼栋ID获取楼栋对象
     	BbmPark park = building.getBbmPark() ;//获取楼栋对象对应的园区信息
-    	o.setBbmPark(park);//将园区信息set到楼层对象中
-    	return bbmFloorDao.save(o);//保存楼层对象
+    	int size = Integer.parseInt(building.getAttributeFloorCount()) ;//获取楼层数量
+    	List<BbmFloor> floor = this.getBbmFloorByBuildingId(buildingId) ;
+    	if(isUpdate){//修改
+    		for(int i=0;i<floor.size();i++){
+    			if(bbmFloorId.equals(floor.get(i).getFloorId())){
+    				
+    			}else{
+    				String buildingName = floor.get(i).getBbmBuilding().getBuildingName() ;
+    				String floorNo = floor.get(i).getFloorNo() ;
+    				if(building.getBuildingName().equals(buildingName) && o.getFloorNo().equals(floorNo)){
+    					throw new BusException("此楼栋下的该楼层已存在！") ;
+    				}
+    			}
+    		}
+    		o.setBbmBuilding(building);
+    		o.setBbmPark(park);//将园区信息set到楼层对象中
+        	return bbmFloorDao.save(o);//保存楼层对象
+    	}else{//新增
+    		if(floor.size() >= size){
+    			throw new BusException("该栋楼的楼层数量已经满了！") ;
+    		}
+    		for(int i=0;i<floor.size();i++){
+    				String buildingName = floor.get(i).getBbmBuilding().getBuildingName() ;
+    				String floorNo = floor.get(i).getFloorNo() ;
+    				if(building.getBuildingName().equals(buildingName) && o.getFloorNo().equals(floorNo)){
+    					throw new BusException("此楼栋下的该楼层已存在！") ;
+    				}
+    		}
+    		o.setBbmBuilding(building);
+    		o.setBbmPark(park);//将园区信息set到楼层对象中
+        	return bbmFloorDao.save(o);//保存楼层对象
+    	}
     }
 
     /**
@@ -153,7 +181,9 @@ public class BbmFloorManagerImpl extends BaseManagerImpl implements BbmFloorMana
 		if(StringUtils.isNotEmpty(buildingId)){
 			Collection<Condition> condition =  new ArrayList<Condition>();
     		condition.add(ConditionUtils.getCondition("bbmBuilding.buildingId", Condition.EQUALS,buildingId));//创建查询条件
-			list = bbmFloorDao.commonQuery(condition, null) ;
+    		Collection<Order> orders = new ArrayList<Order>();
+    		orders.add(ConditionUtils.getOrder("floorNo", true));
+    		list = bbmFloorDao.commonQuery(condition, orders) ;
 		}
 		return list;
 	}
