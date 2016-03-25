@@ -1,76 +1,7 @@
-<!doctype html>
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/pages/memberCenter/common/ad_head.jsp"%> 
-<%@ include file="/WEB-INF/pages/common/memberCenterScriptAndCss.jsp"%>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>我发布的活动</title>
-    <script type="text/javascript">
-	 	$(function(){
-	 		$(".ac_box").on("click","span a",function(){
-	 			$(this).addClass("active").siblings().removeClass("active");
-	 			$(".clearfix.show").addClass("undis");
-	 			$(".clearfix.show").eq($(this).index()).removeClass("undis");
-	 		});
-	 		$(".com_btn").on("click",function(){
-	 			$(this).hide();
-	 			$(this).parent().find(".dialog-show").show();
-	 			$(this).parent().find("p.cc").css("margin-top","-10px");
-	 		});
-	 		$(".dialog-cancel").on("click",function(){
-	 			$(this).parents(".dialog-box").find(".com_btn").show();
-	 			$(this).parents(".dialog-show").hide();
-	 			$(this).parents(".dialog-box").find("p.cc").css("margin-top","0px");
-	 		});
-	 		$(".dialog-close").on("click",function(){
-	 			$(this).parent(".comment").remove();
-	 		});
-	 	});
-    	function clickBox() {
-    		$(".gr-czh-box").click(function(){
-    			$(".gr-czh-box").removeClass("active");
-    			$(this).addClass("active");
-    			refreshList();
-    		});
-		    var sbysf_index = 0;
-		    var n=$(".gr-ck-group .gr-czh-box").length-4;
-		    function sbysf_scroll_up(){
-		        sbysf_index++;
-		        if(sbysf_index > n){
-		            sbysf_index = 0;
-		        }
-		        sbysf_show(sbysf_index);
-		    }
-		    function sbysf_scroll_down(){
-		        sbysf_index--;
-		        if(sbysf_index < 0){
-		            sbysf_index = n;
-		        }
-		        sbysf_show(sbysf_index);
-		    }
-		    function sbysf_show(j){
-		        var index = -(j*224);
-		        $(".gr-ck-group").animate({left: index+'px'},200);
-		    }
-		    $("#next_btn1").click(function(){
-		        sbysf_scroll_up();
-		    });
-		    $("#prev_btn1").click(function(){
-		        sbysf_scroll_down();
-		    });
-    	};
-    	function refreshList(){
-    		var applyId=$(".gr-czh-box.active").attr('id');
-    		openApplyList(applyId);
-    	}
-    </script>
-</head>
-<body style="background-color:#f4f4f4;">
-	<div class="w100">
-		<div class="w1200 clearfix pt30 pb50">
-			<div class="per-center-box clearfix">
-				<%@ include file="/WEB-INF/pages/memberCenter/common/ad_left.jsp"%> 
+<%@ include file="/WEB-INF/pages/include.jsp" %>
+<youi:html title="我发布的活动">
+	<youi:body decorator="memcenter"> 
 				<div class="w1000">
 					<h3 class="per-h3">我发布的活动</h3>
 					<div class="clearfix mt40">
@@ -149,9 +80,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
+		</youi:body>
 	<script type="text/javascript">
 	$(function(){
 		$.ajax({
@@ -293,6 +222,63 @@
 		alert("点击动作待定...");
 	}
 	</script>
-</body>
-<%@ include file="/WEB-INF/pages/memberCenter/common/ad_foot.jsp"%> 
-</html>
+	<script type="text/javascript">
+	 	$(function(){
+	 		$(".ac_box").on("click","span a",function(){
+	 			$(this).addClass("active").siblings().removeClass("active");
+	 			$(".clearfix.show").addClass("undis");
+	 			$(".clearfix.show").eq($(this).index()).removeClass("undis");
+	 		});
+	 		$(".com_btn").on("click",function(){
+	 			$(this).hide();
+	 			$(this).parent().find(".dialog-show").show();
+	 			$(this).parent().find("p.cc").css("margin-top","-10px");
+	 		});
+	 		$(".dialog-cancel").on("click",function(){
+	 			$(this).parents(".dialog-box").find(".com_btn").show();
+	 			$(this).parents(".dialog-show").hide();
+	 			$(this).parents(".dialog-box").find("p.cc").css("margin-top","0px");
+	 		});
+	 		$(".dialog-close").on("click",function(){
+	 			$(this).parent(".comment").remove();
+	 		});
+	 	});
+    	function clickBox() {
+    		$(".gr-czh-box").click(function(){
+    			$(".gr-czh-box").removeClass("active");
+    			$(this).addClass("active");
+    			refreshList();
+    		});
+		    var sbysf_index = 0;
+		    var n=$(".gr-ck-group .gr-czh-box").length-4;
+		    function sbysf_scroll_up(){
+		        sbysf_index++;
+		        if(sbysf_index > n){
+		            sbysf_index = 0;
+		        }
+		        sbysf_show(sbysf_index);
+		    }
+		    function sbysf_scroll_down(){
+		        sbysf_index--;
+		        if(sbysf_index < 0){
+		            sbysf_index = n;
+		        }
+		        sbysf_show(sbysf_index);
+		    }
+		    function sbysf_show(j){
+		        var index = -(j*224);
+		        $(".gr-ck-group").animate({left: index+'px'},200);
+		    }
+		    $("#next_btn1").click(function(){
+		        sbysf_scroll_up();
+		    });
+		    $("#prev_btn1").click(function(){
+		        sbysf_scroll_down();
+		    });
+    	};
+    	function refreshList(){
+    		var applyId=$(".gr-czh-box.active").attr('id');
+    		openApplyList(applyId);
+    	}
+    </script>
+</youi:html>
