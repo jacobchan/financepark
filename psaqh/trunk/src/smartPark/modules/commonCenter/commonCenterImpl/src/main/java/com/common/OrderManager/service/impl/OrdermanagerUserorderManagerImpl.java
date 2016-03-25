@@ -209,7 +209,8 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	public PagerRecords getPagerComSerOrders(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
-		conditions.add(ConditionUtils.getCondition("genreId.genreCode", Condition.LIKE, "05"));
+		String[] buff = new String[]{"0501","0502","0503","0504","0505","0506","0507"};
+		conditions.add(ConditionUtils.getCondition("genreId.genreCode", Condition.IN, buff));
 		PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
@@ -221,7 +222,8 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	public PagerRecords getPagerPublicResoOrders(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
-		conditions.add(ConditionUtils.getCondition("genreId.genreCode", Condition.LIKE, "03"));
+		String[] buff = new String[]{"0301","0302","0303"};
+		conditions.add(ConditionUtils.getCondition("genreId.genreCode", Condition.IN, buff));
 		PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
@@ -233,7 +235,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	public PagerRecords getPagerPurOrders(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
-		conditions.add(ConditionUtils.getCondition("genreId.genreCode", Condition.LIKE, "01"));
+		conditions.add(ConditionUtils.getCondition("genreId.genreCode", Condition.EQUALS, "01"));
 		PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
@@ -247,11 +249,11 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 			@ServiceParam(name="commodityId") String commodityId,@ServiceParam(name="faultDes") String faultDes,
 			@ServiceParam(name="userorderAdr") String userorderAdr) throws BusException {
     	PurchasingmanagerCommodity commodity = purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
-		PurchasingmanagerGenre pg = commodity.getPurchasingmanagerGenre();
+		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(commodity.getGenreId());
 		//根据类别ID获取类别扩展属性列表
 		List<PurchasingmanagerGenreProperty> pgpList = purchasingmanagerGenrePropertyManager.getPurGenrePropertysByGenre(pg.getGenreId());
-		while(pg.getPurchasingmanagerGenre() != null){//获取最顶级商品类别
-			pg = pg.getPurchasingmanagerGenre();
+		while(pg.getPagrenId() != null){//获取最顶级商品类别
+			pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(pg.getPagrenId());
 		}
 		OrdermanagerUserorder order = new OrdermanagerUserorder();
 		order.setUserorderAmount(commodity.getCommodityPrice());

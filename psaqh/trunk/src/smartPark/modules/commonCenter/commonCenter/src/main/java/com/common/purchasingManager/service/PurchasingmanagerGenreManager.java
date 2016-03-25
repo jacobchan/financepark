@@ -117,4 +117,10 @@ public interface PurchasingmanagerGenreManager extends BaseManager{
 	 */
 	public List<PurchasingmanagerGenre> getCompSerOrderTypes(String userId)
 			throws BusException;
+	/**
+	 * 获取所有的采购类别列表
+	 * @return
+	 * @throws BusException
+	 */
+	public List<PurchasingmanagerGenre> getPurGenres() throws BusException;
 }

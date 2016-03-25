@@ -17,6 +17,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
@@ -76,7 +77,7 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
     		PurchasingmanagerCommodity pc = purchasingmanagerCommodityDao.get(commodityId); 
     		pc.setCommodityTitle(o.getCommodityTitle());
     		pc.setCommodityPrice(o.getCommodityPrice());
-    		pc.setPurchasingmanagerGenre(o.getPurchasingmanagerGenre());
+    		pc.setGenreId(o.getGenreId());
     		pc.setPurchasingmanagerMerchant(o.getPurchasingmanagerMerchant());
     		pc.setCommodityStock(o.getCommodityStock());
     		pc.setCommodityIsnotDisplayStock(o.getCommodityIsnotDisplayStock());
@@ -120,7 +121,7 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
     		return purchasingmanagerCommodityDao.save(pc);
     	}else{//新增
     		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","0301");
-    		o.setPurchasingmanagerGenre(pg);
+    		o.setGenreId(pg.getGenreId());
     		o.setCreateUser(o.getUpdateUser());
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
@@ -152,7 +153,7 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
     		return purchasingmanagerCommodityDao.save(pc);
     	}else{//新增
     		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","0302");
-    		o.setPurchasingmanagerGenre(pg);
+    		o.setGenreId(pg.getGenreId());
     		o.setCreateUser(o.getUpdateUser());
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
@@ -184,7 +185,7 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
     		return purchasingmanagerCommodityDao.save(pc);
     	}else{//新增
     		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","0303");
-    		o.setPurchasingmanagerGenre(pg);
+    		o.setGenreId(pg.getGenreId());
     		o.setCreateUser(o.getUpdateUser());
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
@@ -279,5 +280,38 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
     public List<PurchasingmanagerCommodity> getChopPatentCommodityList(@ServiceParam(name="userId",pubProperty="userId") String userId) throws BusException{
 		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("purchasingmanagerGenre.genreCode", "0506");
 		return list;
+	}
+	//获取采购类别的所有商品列表
+	@Override
+	@EsbServiceMapping
+	public PagerRecords getPagerPurCommoditys(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PurchasingmanagerCommodity.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)  throws BusException{
+		List<PurchasingmanagerGenre> pgList = purchasingmanagerGenreManager.getPurGenres();
+		List<String> genreIdList = new ArrayList<String>();
+		for(PurchasingmanagerGenre pg:pgList){
+			genreIdList.add(pg.getGenreId());
+		}
+		String[] buff = (String[])genreIdList.toArray(new String[genreIdList.size()]);
+		conditions.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.IN, buff));
+		PagerRecords pagerRecords = purchasingmanagerCommodityDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
+	//获取企业服务类别的所有商品列表
+	@Override
+	@EsbServiceMapping
+	public PagerRecords getPagerCompSerCommoditys(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PurchasingmanagerCommodity.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)  throws BusException{
+		//获取企业服务的所有类别
+		List<PurchasingmanagerGenre> pgList = purchasingmanagerGenreManager.getCompSerOrderTypes("");
+		List<String> genreIdList = new ArrayList<String>();
+		for(PurchasingmanagerGenre pg:pgList){
+			genreIdList.add(pg.getGenreId());
+		}
+		String[] buff = (String[])genreIdList.toArray(new String[genreIdList.size()]);
+		conditions.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.IN, buff));
+		PagerRecords pagerRecords = purchasingmanagerCommodityDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
 	}
 }

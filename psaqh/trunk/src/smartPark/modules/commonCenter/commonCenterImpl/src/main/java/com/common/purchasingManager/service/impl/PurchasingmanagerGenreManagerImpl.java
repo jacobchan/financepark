@@ -4,6 +4,7 @@
 package com.common.purchasingManager.service.impl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Collection;
 
@@ -97,9 +98,8 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
     		return purchasingmanagerGenreDao.save(pg);
     	
     	}else{//新增
-    		if(o.getPurchasingmanagerGenre() != null){
-    			PurchasingmanagerGenre pg = purchasingmanagerGenreDao.get(o.getPurchasingmanagerGenre().getGenreId());
-    			o.setPurchasingmanagerGenre(pg);
+    		if(o.getGenreId() != null){
+    			o.setGenreId(o.getGenreId());
     		}
     		o.setCreateUser(o.getUpdateUser());
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
@@ -142,6 +142,54 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
     public boolean exsitPurchasingmanagerGenre(String propertyName,Object value) throws BusException{
 		return purchasingmanagerGenreDao.exists(propertyName,value);
 	}
+    /**
+	 * 获取所有的采购类别列表
+	 */
+	@Override
+	public List<PurchasingmanagerGenre> getPurGenres() throws BusException {
+		PurchasingmanagerGenre pg = purchasingmanagerGenreDao.getObjectByUniqueProperty("genreCode", "01");
+		List<PurchasingmanagerGenre> returnList = new ArrayList<PurchasingmanagerGenre>();
+		List<PurchasingmanagerGenre> list = purchasingmanagerGenreDao.getAll();
+		for(Iterator<PurchasingmanagerGenre> iterator = list.iterator(); iterator.hasNext();) {
+			PurchasingmanagerGenre node = (PurchasingmanagerGenre) iterator.next();
+            // 一、根据传入的某个父节点ID,遍历该父节点的所有子节点
+            if (pg.getGenreId()==node.getGenreId()) {
+                recursionFn(list, node,returnList);
+            }
+        }
+		return returnList;
+	}
+	private void recursionFn(List<PurchasingmanagerGenre> list, PurchasingmanagerGenre node,List<PurchasingmanagerGenre> returnList) {
+        List<PurchasingmanagerGenre> childList = getChildList(list, node);// 得到子节点列表
+        if (hasChild(list, node)) {// 判断是否有子节点
+            returnList.add(node);
+            Iterator<PurchasingmanagerGenre> it = childList.iterator();
+            while (it.hasNext()) {
+            	PurchasingmanagerGenre n = (PurchasingmanagerGenre) it.next();
+                recursionFn(list, n,returnList);
+            }
+        } else {
+            returnList.add(node);
+        }
+    }
+     
+    // 得到子节点列表
+    private List<PurchasingmanagerGenre> getChildList(List<PurchasingmanagerGenre> list, PurchasingmanagerGenre node) {
+        List<PurchasingmanagerGenre> nodeList = new ArrayList<PurchasingmanagerGenre>();
+        Iterator<PurchasingmanagerGenre> it = list.iterator();
+        while (it.hasNext()) {
+        	PurchasingmanagerGenre n = (PurchasingmanagerGenre) it.next();
+        	if (n.getGenreId() == node.getGenreId()) {
+                nodeList.add(n);
+            }
+        }
+        return nodeList;
+    }
+ 
+    // 判断是否有子节点
+    private boolean hasChild(List<PurchasingmanagerGenre> list, PurchasingmanagerGenre node) {
+        return getChildList(list, node).size() > 0 ? true : false;
+    }
 	/**
 	 * 获取所有的采购、餐饮、IT服务类别列表
 	 */
@@ -172,7 +220,7 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
 		List<PurchasingmanagerGenre> list = new ArrayList<PurchasingmanagerGenre>();
 		List<PurchasingmanagerGenre> pgList = getPurchasingmanagerGenres();
 		for(PurchasingmanagerGenre pg:pgList){
-			if(pg.getPurchasingmanagerGenre() == null){
+			if(pg.getGenreId() == null){
 				list.add(pg);
 			}
 		}

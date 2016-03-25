@@ -71,7 +71,8 @@ public class PurchasingmanagerMerchantManagerImpl extends BaseManagerImpl implem
 	public PagerRecords getPagerPublicResoMerchants(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=PurchasingmanagerMerchant.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
-		conditions.add(ConditionUtils.getCondition("merchantType.genreCode", Condition.LIKE, "03"));
+		String[] buff = new String[]{"0301","0302","0303"};
+		conditions.add(ConditionUtils.getCondition("merchantType.genreCode", Condition.IN, buff));
 		PagerRecords pagerRecords = purchasingmanagerMerchantDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
@@ -81,7 +82,7 @@ public class PurchasingmanagerMerchantManagerImpl extends BaseManagerImpl implem
 	public PagerRecords getPagerPurMerchants(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=PurchasingmanagerMerchant.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
-		conditions.add(ConditionUtils.getCondition("merchantType.genreCode", Condition.LIKE, "01"));
+		conditions.add(ConditionUtils.getCondition("merchantType.genreCode", Condition.EQUALS, "01"));
 		PagerRecords pagerRecords = purchasingmanagerMerchantDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
@@ -91,7 +92,8 @@ public class PurchasingmanagerMerchantManagerImpl extends BaseManagerImpl implem
 	public PagerRecords getPagerCompSerMerchants(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=PurchasingmanagerMerchant.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
-		conditions.add(ConditionUtils.getCondition("merchantType.genreCode", Condition.LIKE, "05"));
+		String[] buff = new String[]{"0501","0502","0503","0504","0505","0506","0507"};
+		conditions.add(ConditionUtils.getCondition("merchantType.genreCode", Condition.IN, buff));
 		PagerRecords pagerRecords = purchasingmanagerMerchantDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
@@ -184,9 +186,19 @@ public class PurchasingmanagerMerchantManagerImpl extends BaseManagerImpl implem
     @EsbServiceMapping
 	public List<PurchasingmanagerMerchant> getMerchantsByGenre(@ServiceParam(name="purchasingmanagerGenre.genreId") String genreId)  throws BusException{
     	PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(genreId);
-    	while(pg.getPurchasingmanagerGenre() != null){
-    		pg = pg.getPurchasingmanagerGenre();
-    	}
+    	while(pg.getPagrenId() != null){//获取最顶级商品类别
+			pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(pg.getPagrenId());
+		}
+		List<PurchasingmanagerMerchant> list = purchasingmanagerMerchantDao.getList("merchantType.genreId", pg.getGenreId());
+		return list;
+	}
+    /**
+     * 获取采购商品所属商户列表
+     */
+    @Override
+    @EsbServiceMapping
+	public List<PurchasingmanagerMerchant> getPurMerchants()  throws BusException{
+    	PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","01");
 		List<PurchasingmanagerMerchant> list = purchasingmanagerMerchantDao.getList("merchantType.genreId", pg.getGenreId());
 		return list;
 	}
