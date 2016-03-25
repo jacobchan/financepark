@@ -87,6 +87,13 @@ public class BbmParkManagerImpl extends BaseManagerImpl implements BbmParkManage
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return bbmParkDao.save(o);
     	}else{//新增
+    		List<BbmPark> list = this.getBbmParks() ;//得到所有的园区
+    		for(int i=0;i<list.size();i++){//遍历每个园区，
+    			String parkName = list.get(i).getParkName() ;//得到他们的园区名称
+    			if(o.getParkName().equals(parkName)){//如果新增的园区名称已经存在，则要抛异常！
+    				throw new BusException("此园区已经存在！") ;
+    			}
+    		}
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return bbmParkDao.save(o);
     	}
