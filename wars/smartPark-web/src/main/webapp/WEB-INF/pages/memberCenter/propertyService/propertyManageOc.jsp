@@ -63,7 +63,7 @@
 				      "<td >"+record[i].ocCode+"</td>"+
 				      "<td >"+record[i].ocComp+"</td>"+
 				      "<td >"+record[i].ocDate+"</td>"+
-				      "<td>"+record[i].memberId+"</td>"+
+				      "<td>"+record[i].createUser+"</td>"+
 				      "<td>"+status+"</td>"+				    					    
                       "<td > <input type='button' value='取消'   onclick='hhf(\""+record[i].ocId+"\")' class='hhf-submit' style='height:24px;'/>"+                               
                       " </tr>"; 
