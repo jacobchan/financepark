@@ -17,6 +17,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.common.BuildingBaseManager.entity.BbmBuilding;
@@ -64,6 +65,10 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
 	public PagerRecords getPagerBbmRooms(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=BbmRoom.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
+		orders.add(ConditionUtils.getOrder("bbmPark.parkName", true));
+		orders.add(ConditionUtils.getOrder("bbmBuilding.buildingName", true));
+		orders.add(ConditionUtils.getOrder("bbmBuilding.buildingNo", true));
+		orders.add(ConditionUtils.getOrder("roomNo", true));
 		PagerRecords pagerRecords = bbmRoomDao.findByPager(pager, conditions, orders);
 		//@SuppressWarnings("unchecked")
 //		List<BbmRoom> rooms = pagerRecords.getRecords();
@@ -101,9 +106,34 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
     	o.setBbmBuilding(building);
     	o.setBbmPark(park);
     	vilidateForRoomNo(floor,building,o.getRoomNo()) ;
+    	int count = Integer.parseInt(floor.getFloorRoomCount()) ;//获取楼层单元的数量
+    	List<BbmRoom> room = bbmFloorManager.getRoomByFloorId(floorId) ;//得到当前楼层下的所有room
     	if(isUpdate){//修改
+    		for(int i=0;i<room.size();i++){
+    			if(bbmRoomId.equals(room.get(i).getRoomId())){
+    				
+    			}else{
+    				String buildingName = room.get(i).getBbmBuilding().getBuildingName() ;//楼栋名称
+    				String floorNo = room.get(i).getBbmFloor().getFloorNo() ;//楼层编号
+    				String roomNo = room.get(i).getRoomNo() ;//单元编号
+    				if(building.getBuildingName().equals(buildingName) && floor.getFloorNo().equals(floorNo) && o.getRoomNo().equals(roomNo)){
+    					throw new BusException("此楼栋的该楼层的该单元已存在！") ;
+    				}
+    			}
+    		}
     		return bbmRoomDao.save(o);
     	}else{//新增
+    		if(room.size() >= count){
+    			throw new BusException("楼层单元已满！") ;
+    		}
+    		for(int i=0;i<room.size();i++){
+    			String buildingName = room.get(i).getBbmBuilding().getBuildingName() ;//楼栋名称
+    			String floorNo = room.get(i).getBbmFloor().getFloorNo() ;//楼层编号
+    			String roomNo = room.get(i).getRoomNo() ;//单元编号
+    			if(building.getBuildingName().equals(buildingName) && floor.getFloorNo().equals(floorNo) && o.getRoomNo().equals(roomNo)){
+    				throw new BusException("此楼栋的该楼层的该单元已存在！") ;
+    			}
+    		}
     		String parkAddress = park.getAddress() ;//园区地址
     		String parkName = park.getParkName() ;//园区名字
         	String buildingNo = building.getBuildingNo() ;//楼栋编号
