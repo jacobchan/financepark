@@ -92,7 +92,7 @@
 						<a href="">Go</a>
 					</div>				
 				</div>
-		</youi:body>
+
 	
 	<!--***弹窗 start****************************************-->
 	<div class="bg-tanc m1">
@@ -120,6 +120,7 @@
 		</div>
 	</div>
 	<!--***弹窗 end****************************************-->
+</youi:body>
 	<script type="text/javascript">
 	$(function () {		
 		$.ajax({

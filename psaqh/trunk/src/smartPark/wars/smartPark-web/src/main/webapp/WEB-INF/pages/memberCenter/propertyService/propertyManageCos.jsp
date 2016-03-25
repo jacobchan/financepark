@@ -50,7 +50,7 @@
 					</div>
 					
 				</div>
-</youi:body>
+
 	<!--***弹窗 start****************************************-->
 	<div class="bg-tanc">
 		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
@@ -65,6 +65,7 @@
 		</div>
 	</div>
 	<!--***弹窗 end****************************************-->
+</youi:body>
 	<script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
 	<script type="text/javascript">
 		//读取当前用户投诉记录
