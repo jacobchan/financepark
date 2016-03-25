@@ -104,7 +104,7 @@
 						</tbody></table>
 					</div> -->
 				</div>
-		</youi:body>
+	
 	
 	<!--***弹窗 start****************************************-->
 	<div class="bg-tanc">
@@ -120,6 +120,7 @@
 		</div>
 	</div>
 	<!--***弹窗 end****************************************-->
+</youi:body>
 	<script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
 	<script type="text/javascript">
 		$(function () {
