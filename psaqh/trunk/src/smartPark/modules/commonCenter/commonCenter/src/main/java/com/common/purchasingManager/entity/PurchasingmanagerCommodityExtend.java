@@ -80,16 +80,15 @@ public class PurchasingmanagerCommodityExtend implements Domain{
     @JoinColumn(name="GENRE_PROPERTY_ID_")
 	private com.common.purchasingManager.entity.PurchasingmanagerGenreProperty purchasingmanagerGenreProperty;//商品类别属性序列
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="COMMODITY_ID_")
-	private com.common.purchasingManager.entity.PurchasingmanagerCommodity commodity;//商品序列
+//	@ManyToOne(fetch = FetchType.LAZY)
+	@Column(name="COMMODITY_ID_")
+	private String commodityId;//商品序列
 
-	public com.common.purchasingManager.entity.PurchasingmanagerCommodity getCommodity() {
-		return commodity;
+	public String getCommodityId() {
+		return commodityId;
 	}
-	public void setCommodity(
-			com.common.purchasingManager.entity.PurchasingmanagerCommodity commodity) {
-		this.commodity = commodity;
+	public void setCommodityId(String commodityId) {
+		this.commodityId = commodityId;
 	}
 	public String getGenreId(){
 		return this.genreId;
