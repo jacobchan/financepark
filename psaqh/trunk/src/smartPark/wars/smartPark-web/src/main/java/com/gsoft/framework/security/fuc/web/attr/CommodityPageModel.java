@@ -119,5 +119,18 @@ import org.springframework.ui.ModelMap;
 		bbmRoomTree.setId("tree_bbmRoom_root");
 		return bbmRoomTree;
 	}
+	
+	//采购商品页面
+	public ModelMap purCommodity(
+			HttpServletRequest request,
+			DataIn<PurchasingmanagerGenre> dataIn){
+		ModelMap modelMap = new ModelMap();
+		//活动所有的商品类别列表
+		List<PurchasingmanagerGenre> genres = purchasingmanagerGenreManager.getPurGenres();
+		GenreHtmlTreeNode genreTree = ParkTreeUtils.listToGenreTree(genres, null, "商品类别");
+		genreTree.setId("tree_genre_root");
+		modelMap.addAttribute("genreTree", genreTree);
+		return modelMap;
+	}
  }
 
