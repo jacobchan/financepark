@@ -18,6 +18,6 @@ private ExtentionAtrManager extentionAtrManager;
 	
 	@Test
 	public void test(){
-		this.extentionAtrManager.testMethod();
+//		this.extentionAtrManager.testMethod();
 	} 
 }

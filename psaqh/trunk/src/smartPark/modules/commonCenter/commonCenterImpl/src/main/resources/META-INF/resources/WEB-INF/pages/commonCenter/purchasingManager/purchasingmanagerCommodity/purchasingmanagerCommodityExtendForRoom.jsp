@@ -7,13 +7,13 @@
 		<youi:fieldLayout prefix="record_sFpro" labelWidths="120,120">
 		    <youi:fieldHidden property="genreCode"  caption="会议室" defaultValue="0301"/>
 			<youi:fieldText property="commodityTitle"  caption="标题" notNull="true"/>
-			<youi:fieldText property="commodityPrice"  caption="标价" notNull="true"/>
+			<youi:fieldText property="commodityPrice"  caption="标价" expression="^[0-9]*$" expressionMessage="请输入正确数值" notNull="true"/>
 			<youi:fieldTree simple="false" popup="true" tree="${bbmRoomTree}" property="bbmRoom.roomId"  caption="会议室地址" onlyLeaf="true" notNull="true"/>
-			<youi:fieldText property="roomContain"  caption="规模人数" notNull="true"/>
+			<youi:fieldText property="meetingRoom.gm"  caption="规模人数" notNull="true"/>
 			<youi:fieldSelect property="roomType"  caption="会议室类型" convert="roomType" notNull="true"/>
 			<youi:fieldSelect property="roomProjector"  caption="是否有投影仪" convert="roomProjector" notNull="true"/>
-			<youi:fieldSelect property="purchasingmanagerGenre.genreId" caption="商品类别"  src="esb/web/purchasingmanagerPublicManager/getRecordsByGenreCode.json" parents="genreCode" parentsAlias="genreCode" notNull="true" code="genreId" show="genreName"/>
-			<youi:fieldSelect property="purchasingmanagerMerchant.merchantId" caption="所属商户" src="esb/web/purchasingmanagerMerchantManager/getMerchantsByGenre.json" parents="purchasingmanagerGenre.genreId" parentsAlias="purchasingmanagerGenre.genreId" notNull="true" code="merchantId" show="merchantName"/>
+			<youi:fieldSelect property="genreId" caption="商品类别"  src="esb/web/purchasingmanagerPublicManager/getRecordsByGenreCode.json" parents="genreCode" parentsAlias="genreCode" notNull="true" code="genreId" show="genreName"/>
+			<youi:fieldSelect property="purchasingmanagerMerchant.merchantId" caption="所属商户" src="esb/web/purchasingmanagerMerchantManager/getMerchantsByGenre.json" parents="genreId" parentsAlias="genreId" notNull="true" code="merchantId" show="merchantName"/>
 			<youi:fieldSwfupload property="commodityImage" caption="图像" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" />
 			<youi:fieldSwfupload property="commodityCoverImage"  caption="封面图片" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" fileUploadLimit="1" fileQueueLimit="1"/>
 			<youi:fieldArea property="commodityDescribe"  caption="描述" column="2" notNull="true"/>
@@ -42,10 +42,10 @@
 		var commodityTitle = $elem('record_sFpro_commodityTitle',pageId).fieldValue();
 		var commodityPrice = $elem('record_sFpro_commodityPrice',pageId).fieldValue();
 	    var roomId = $elem('record_sFpro_bbmRoom_roomId',pageId).fieldValue();
-	    var roomContain = $elem('record_sFpro_roomContain',pageId).fieldValue();
+	    var roomContain = $elem('record_sFpro_meetingRoom_gm',pageId).fieldValue();
 	    var roomType = $elem('record_sFpro_roomType',pageId).fieldValue();
 	    var roomProjector = $elem('record_sFpro_roomProjector',pageId).fieldValue();
-	    var genreId = $elem('record_sFpro_purchasingmanagerGenre_genreId',pageId).fieldValue();
+	    var genreId = $elem('record_sFpro_genreId',pageId).fieldValue();
 	    var merchantId = $elem('record_sFpro_purchasingmanagerMerchant_merchantId',pageId).fieldValue();
 		var commodityImage = $elem('record_sFpro_commodityImage',pageId).fieldValue();
 		var commodityCoverImage = $elem('record_sFpro_commodityCoverImage',pageId).fieldValue();
@@ -86,10 +86,12 @@
 		   alert("描述不能为空");
 		   return false;
 		}
-		
+		alert(merchantId);
 		var params = '';
-		params = params+'commodityId='+commodityId+'&'+'commodityTitle='+commodityTitle+'&'+'commodityPrice='+commodityPrice+'&'+'roomId='+roomId+'&'+'roomContain='+roomContain+'&'+'roomType='+roomType+'&'+'roomProjector='+roomProjector+'&'
-		'purchasingmanagerGenre.genreId='+genreId+'&'+'purchasingmanagerMerchant.merchantId='+merchantId+'&'+'commodityImage='+commodityImage+'&'+'commodityCoverImage='+commodityCoverImage+'&'+'commodityDescribe='+commodityDescribe;
+		params = params+'commodityTitle='+commodityTitle+'&'+'commodityPrice='+commodityPrice+'&'+'adr='+roomId+'&'+'meetingRoom.gm='+roomContain+'&'+'lx='+roomType+'&'+'tyy='+roomProjector+'&'+
+		'genreId='+genreId+'&'+'purchasingmanagerMerchant.merchantId='+merchantId+'&'+'commodityImage='+commodityImage+'&'+'commodityCoverImage='+commodityCoverImage+'&'+'commodityDescribe='+commodityDescribe;
+		alert(params);
+		
 		$.youi.ajaxUtil.ajax({
 			url:'/esb/web/purchasingmanagerPublicManager/saveCommodityAndPropertyForRoom.json',
 			data:params,
