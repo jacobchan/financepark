@@ -58,9 +58,9 @@ public class PurchasingmanagerGenre implements Domain{
 	@Length(max=36)
 	private String updateUser;//修改人
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="sp__GENRE_ID_")
-	private com.common.purchasingManager.entity.PurchasingmanagerGenre purchasingmanagerGenre;//320_商品类别ID
+	@Column(name="sp__GENRE_ID_")
+	@Length(max=36)
+	private String pagrenId;//320_商品类别ID
 	
 	public String getParkBusinessTupe() {
 		return parkBusinessTupe;
@@ -134,13 +134,12 @@ public class PurchasingmanagerGenre implements Domain{
 		this.updateUser = updateUser;
 	}
 
-	public com.common.purchasingManager.entity.PurchasingmanagerGenre getPurchasingmanagerGenre() {
-		return purchasingmanagerGenre;
+	public String getparendId() {
+		return pagrenId;
 	}
 
-	public void setPurchasingmanagerGenre(
-			com.common.purchasingManager.entity.PurchasingmanagerGenre purchasingmanagerGenre) {
-		this.purchasingmanagerGenre = purchasingmanagerGenre;
+	public void setParentId(String parendId) {
+		this.pagrenId = parendId;
 	}
 
 	@Override
