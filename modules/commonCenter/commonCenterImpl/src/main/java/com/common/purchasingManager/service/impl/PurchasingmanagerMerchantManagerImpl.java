@@ -186,7 +186,7 @@ public class PurchasingmanagerMerchantManagerImpl extends BaseManagerImpl implem
     @EsbServiceMapping
 	public List<PurchasingmanagerMerchant> getMerchantsByGenre(@ServiceParam(name="genreId") String genreId)  throws BusException{
     	PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(genreId);
-    	while(pg.getPagrenId() != null){//获取最顶级商品类别
+    	while(pg.getGenreCode() == null){//获取有编码的商品类别
 			pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(pg.getPagrenId());
 		}
 		List<PurchasingmanagerMerchant> list = purchasingmanagerMerchantDao.getList("merchantType.genreId", pg.getGenreId());

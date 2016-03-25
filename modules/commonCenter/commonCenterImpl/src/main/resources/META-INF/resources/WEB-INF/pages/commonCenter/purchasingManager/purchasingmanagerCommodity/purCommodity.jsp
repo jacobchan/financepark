@@ -13,7 +13,7 @@
 				removeSrc="esb/web/purchasingmanagerCommodityManager/removePurchasingmanagerCommodity.json">
 		<youi:fieldLayout labelWidths="120,120">
 			<youi:fieldText property="commodityTitle"  caption="标题"/>
-			<youi:fieldTree simple="false" popup="true" tree="${genreTree}" property="purchasingmanagerGenre.genreId" caption="商品类别" onlyLeaf="true"/>
+			<youi:fieldTree simple="false" popup="true" tree="${genreTree}" property="genreId" caption="商品类别" onlyLeaf="true"/>
 			<youi:fieldText property="purchasingmanagerMerchant.merchantName"  caption="商户名称"/>
 		</youi:fieldLayout>
 		
@@ -25,7 +25,7 @@
 		<youi:gridCol property="commodityDescribe"  caption="描述" align="center" width="22%"/>
 		<youi:gridCol property="commodityUpTime"  caption="上架时间" align="center" width="15%"/>
 		<youi:gridCol property="commodityDownTime"  caption="下架时间" align="center" width="15%"/>
-		<youi:gridCol property="purchasingmanagerGenre.genreId"  caption="商品类别" align="center" width="0"/>
+		<youi:gridCol property="genreId"  caption="商品类别" align="center" width="0"/>
 		
 		<youi:button name="commodity_extend" active="1" caption="商品扩展属性"/>
 		<%-- <youi:button name="veiwCommodity" active="1" caption="查看详情"/> --%>
@@ -41,7 +41,7 @@
 		<youi:fieldLayout prefix="record" labelWidths="120,120">
 			<youi:fieldText property="commodityTitle"  caption="标题" notNull="true"/>
 			<youi:fieldText property="commodityPrice"  caption="标价" notNull="true"/>
-			<youi:fieldTree simple="false" popup="true" tree="${genreTree}" property="purchasingmanagerGenre.genreId" caption="商品类别" onlyLeaf="true" notNull="true"/>
+			<youi:fieldTree simple="false" popup="true" tree="${genreTree}" property="genreId" caption="商品类别" onlyLeaf="true" notNull="true"/>
 			<youi:fieldSelect property="purchasingmanagerMerchant.merchantId" show="merchantName" code="merchantId" notNull="true"
 				src="esb/web/purchasingmanagerMerchantManager/getPurMerchants.json" caption="所属商户"/>
 			<youi:fieldText property="commodityStock"  caption="库存"/>
@@ -79,7 +79,7 @@
 	<youi:func name="func_grid_commodity_extend">
 		var selectRecord = $elem('grid_purchasingmanagerCommodity',pageId).grid('getSelectedRecord');
 		var commodityId = selectRecord['commodityId'];
-		var genreId = selectRecord['purchasingmanagerGenre.genreId'];
+		var genreId = selectRecord['genreId'];
 		$elem('subpage_sb_commodity_extend',pageId).subpage('open',{commodityId:commodityId},null,{commodityId:commodityId});
 	</youi:func>
 	<youi:func name="func_grid_veiwCommodity">

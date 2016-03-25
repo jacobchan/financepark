@@ -329,6 +329,12 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
 		String[] buff = (String[])genreIdList.toArray(new String[genreIdList.size()]);
 		conditions.add(ConditionUtils.getCondition("genreId", Condition.IN, buff));
 		PagerRecords pagerRecords = purchasingmanagerCommodityDao.findByPager(pager, conditions, orders);
+		@SuppressWarnings("unchecked")
+		List<PurchasingmanagerCommodity> pcList = pagerRecords.getRecords();
+		for(PurchasingmanagerCommodity pc:pcList){
+			PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(pc.getGenreId());
+			pc.setPurchasingmanagerGenre(pg);
+		}
 		return pagerRecords;
 	}
 	//获取企业服务类别的所有商品列表
