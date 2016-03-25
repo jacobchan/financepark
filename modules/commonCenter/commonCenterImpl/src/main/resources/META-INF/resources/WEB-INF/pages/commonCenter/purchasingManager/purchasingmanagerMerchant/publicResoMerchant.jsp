@@ -42,7 +42,7 @@
 			<youi:fieldText property="merchantName"  caption="商户名称" notNull="true"/>
 			<youi:fieldText property="merchantEnterpriseName"  caption="企业名称" notNull="true"/>
 			<youi:fieldSelect property="merchantType.genreId" src="esb/web/purchasingmanagerGenreManager/getPublicResoOrderTypes.json" 
-				show="genreName" code="genreId" caption="商户类型"/>
+				show="genreName" code="genreId" caption="商户类型" notNull="true"/>
 			<youi:fieldText property="merchantLinkman"  caption="联系人" notNull="true"/>
 			<youi:fieldText property="merchantLinkmanPhone"  caption="联系人电话" notNull="true"/>
 			<youi:fieldText property="merchantSendAddress"  caption="发货地址" notNull="true"/>

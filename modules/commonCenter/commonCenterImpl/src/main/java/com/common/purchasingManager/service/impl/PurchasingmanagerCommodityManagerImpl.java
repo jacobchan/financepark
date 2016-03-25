@@ -66,6 +66,39 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
 		PagerRecords pagerRecords = purchasingmanagerCommodityDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
+	//获取所有的会议室列表
+	@Override
+	@EsbServiceMapping
+	public PagerRecords getPagerMeetRoomCommoditys(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PurchasingmanagerCommodity.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)  throws BusException{
+		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","0301");
+		conditions.add(ConditionUtils.getCondition("genreId", Condition.EQUALS, pg.getGenreId()));
+		PagerRecords pagerRecords = purchasingmanagerCommodityDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
+	//获取所有的车辆列表
+	@Override
+	@EsbServiceMapping
+	public PagerRecords getPagerCarRentalCommoditys(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PurchasingmanagerCommodity.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)  throws BusException{
+		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","0302");
+		conditions.add(ConditionUtils.getCondition("genreId", Condition.EQUALS, pg.getGenreId()));
+		PagerRecords pagerRecords = purchasingmanagerCommodityDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
+	//获取所有的广告位列表
+	@Override
+	@EsbServiceMapping
+	public PagerRecords getPagerAdsenseCommoditys(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PurchasingmanagerCommodity.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)  throws BusException{
+		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","0303");
+		conditions.add(ConditionUtils.getCondition("genreId", Condition.EQUALS, pg.getGenreId()));
+		PagerRecords pagerRecords = purchasingmanagerCommodityDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
     /**
      * 保存对象
      */
@@ -281,6 +314,7 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
 		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("purchasingmanagerGenre.genreCode", "0506");
 		return list;
 	}
+	
 	//获取采购类别的所有商品列表
 	@Override
 	@EsbServiceMapping
@@ -293,7 +327,7 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
 			genreIdList.add(pg.getGenreId());
 		}
 		String[] buff = (String[])genreIdList.toArray(new String[genreIdList.size()]);
-		conditions.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.IN, buff));
+		conditions.add(ConditionUtils.getCondition("genreId", Condition.IN, buff));
 		PagerRecords pagerRecords = purchasingmanagerCommodityDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
@@ -310,7 +344,7 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
 			genreIdList.add(pg.getGenreId());
 		}
 		String[] buff = (String[])genreIdList.toArray(new String[genreIdList.size()]);
-		conditions.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.IN, buff));
+		conditions.add(ConditionUtils.getCondition("genreId", Condition.IN, buff));
 		PagerRecords pagerRecords = purchasingmanagerCommodityDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}

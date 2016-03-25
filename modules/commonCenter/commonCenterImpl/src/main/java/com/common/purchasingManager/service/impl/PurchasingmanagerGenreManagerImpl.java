@@ -73,7 +73,12 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
      */
     @EsbServiceMapping
     public PurchasingmanagerGenre getPurchasingmanagerGenre(@ServiceParam(name="genreId") String id)  throws BusException{
-    	return purchasingmanagerGenreDao.get(id);
+    	PurchasingmanagerGenre pg = purchasingmanagerGenreDao.get(id);
+    	if(pg.getPagrenId() != null){
+    		PurchasingmanagerGenre parentGenre =  purchasingmanagerGenreDao.get(pg.getPagrenId());
+    		pg.setParentGenre(parentGenre);
+    	}
+    	return pg;
     }
 	
 	@EsbServiceMapping
@@ -98,8 +103,8 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
     		return purchasingmanagerGenreDao.save(pg);
     	
     	}else{//新增
-    		if(o.getGenreId() != null){
-    			o.setGenreId(o.getGenreId());
+    		if(o.getPagrenId() != null){
+    			o.setPagrenId(o.getPagrenId());
     		}
     		o.setCreateUser(o.getUpdateUser());
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
@@ -143,6 +148,23 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
 		return purchasingmanagerGenreDao.exists(propertyName,value);
 	}
     /**
+   	 * 获取所有的企业服务类别列表
+   	 */
+   	@Override
+   	public List<PurchasingmanagerGenre> getCompSerGenres() throws BusException {
+   		PurchasingmanagerGenre pg = purchasingmanagerGenreDao.getObjectByUniqueProperty("genreCode", "05");
+   		List<PurchasingmanagerGenre> returnList = new ArrayList<PurchasingmanagerGenre>();
+   		List<PurchasingmanagerGenre> list = purchasingmanagerGenreDao.getAll();
+   		for(Iterator<PurchasingmanagerGenre> iterator = list.iterator(); iterator.hasNext();) {
+   			PurchasingmanagerGenre node = (PurchasingmanagerGenre) iterator.next();
+               // 一、根据传入的某个父节点ID,遍历该父节点的所有子节点
+               if (pg.getGenreId().equals(node.getGenreId())) {
+                   recursionFn(list, node,returnList);
+               }
+           }
+   		return returnList;
+   	}
+    /**
 	 * 获取所有的采购类别列表
 	 */
 	@Override
@@ -153,7 +175,7 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
 		for(Iterator<PurchasingmanagerGenre> iterator = list.iterator(); iterator.hasNext();) {
 			PurchasingmanagerGenre node = (PurchasingmanagerGenre) iterator.next();
             // 一、根据传入的某个父节点ID,遍历该父节点的所有子节点
-            if (pg.getGenreId()==node.getGenreId()) {
+            if (pg.getGenreId().equals(node.getGenreId())) {
                 recursionFn(list, node,returnList);
             }
         }
@@ -179,7 +201,7 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
         Iterator<PurchasingmanagerGenre> it = list.iterator();
         while (it.hasNext()) {
         	PurchasingmanagerGenre n = (PurchasingmanagerGenre) it.next();
-        	if (n.getGenreId() == node.getGenreId()) {
+        	if (node.getGenreId().equals(n.getPagrenId())) {
                 nodeList.add(n);
             }
         }
@@ -250,7 +272,8 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
 	@EsbServiceMapping
 	public List<PurchasingmanagerGenre> getITSubGenreList(@ServiceParam(name="userId",pubProperty="userId") String userId)
 			throws BusException {
-		List<PurchasingmanagerGenre> list = purchasingmanagerGenreDao.getList("purchasingmanagerGenre.genreCode", "06");
+		PurchasingmanagerGenre pg = purchasingmanagerGenreDao.getObjectByUniqueProperty("genreCode", "06");
+		List<PurchasingmanagerGenre> list = purchasingmanagerGenreDao.getList("pagrenId", pg.getGenreId());
 		return list;
 	}
 	/**
@@ -260,7 +283,8 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
 	@EsbServiceMapping
 	public List<PurchasingmanagerGenre> getPublicResoOrderTypes(@ServiceParam(name="userId",pubProperty="userId") String userId)
 			throws BusException {
-		List<PurchasingmanagerGenre> list = purchasingmanagerGenreDao.getList("purchasingmanagerGenre.genreCode", "03");
+		PurchasingmanagerGenre pg = purchasingmanagerGenreDao.getObjectByUniqueProperty("genreCode", "03");
+		List<PurchasingmanagerGenre> list = purchasingmanagerGenreDao.getList("pagrenId", pg.getGenreId());
 		return list;
 	}
 	/**
@@ -270,7 +294,24 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
 	@EsbServiceMapping
 	public List<PurchasingmanagerGenre> getCompSerOrderTypes(@ServiceParam(name="userId",pubProperty="userId") String userId)
 			throws BusException {
-		List<PurchasingmanagerGenre> list = purchasingmanagerGenreDao.getList("purchasingmanagerGenre.genreCode", "05");
+		PurchasingmanagerGenre pg = purchasingmanagerGenreDao.getObjectByUniqueProperty("genreCode", "05");
+		List<PurchasingmanagerGenre> list = purchasingmanagerGenreDao.getList("pagrenId", pg.getGenreId());
+		return list;
+	}
+	//获取订单项
+	@Override
+	@EsbServiceMapping
+	public List<PurchasingmanagerGenre> getGenreProject(@ServiceParam(name="userId",pubProperty="userId") String userId){
+		PurchasingmanagerGenre pg1 = purchasingmanagerGenreDao.getObjectByUniqueProperty("genreCode", "03");
+		PurchasingmanagerGenre pg2 = purchasingmanagerGenreDao.getObjectByUniqueProperty("genreCode", "04");
+		PurchasingmanagerGenre pg3 = purchasingmanagerGenreDao.getObjectByUniqueProperty("genreCode", "05");
+		PurchasingmanagerGenre pg4 = purchasingmanagerGenreDao.getObjectByUniqueProperty("genreCode", "06");
+		String[] buff = new String[]{pg1.getGenreId(),pg2.getGenreId(),pg3.getGenreId(),pg4.getGenreId()};
+		Collection<Condition> conditions = new ArrayList<Condition>();
+		conditions.add(ConditionUtils.getCondition("pagrenId", Condition.IN, buff));
+		List<PurchasingmanagerGenre> list = purchasingmanagerGenreDao.commonQuery(conditions, null);
+		PurchasingmanagerGenre pg5 = purchasingmanagerGenreDao.getObjectByUniqueProperty("genreCode", "02");
+		list.add(pg5);
 		return list;
 	}
 }

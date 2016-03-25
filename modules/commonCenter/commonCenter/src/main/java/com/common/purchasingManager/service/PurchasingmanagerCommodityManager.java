@@ -152,4 +152,37 @@ public interface PurchasingmanagerCommodityManager extends BaseManager{
 	public PagerRecords getPagerCompSerCommoditys(Pager pager,
 			Collection<Condition> conditions, Collection<Order> orders)
 			throws BusException;
+	/**
+	 * 获取所有的会议室列表
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	public PagerRecords getPagerMeetRoomCommoditys(Pager pager,
+			Collection<Condition> conditions, Collection<Order> orders)
+			throws BusException;
+	/**
+	 * 获取所有的车辆列表
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	public PagerRecords getPagerCarRentalCommoditys(Pager pager,
+			Collection<Condition> conditions, Collection<Order> orders)
+			throws BusException;
+	/**
+	 * 获取所有的广告位列表
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	public PagerRecords getPagerAdsenseCommoditys(Pager pager,
+			Collection<Condition> conditions, Collection<Order> orders)
+			throws BusException;
 }
