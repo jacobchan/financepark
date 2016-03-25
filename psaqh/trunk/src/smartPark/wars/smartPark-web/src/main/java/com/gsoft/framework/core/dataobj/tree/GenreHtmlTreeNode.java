@@ -27,8 +27,8 @@ public class GenreHtmlTreeNode extends HtmlTreeNode{
 	private void injectGenreFromDomain(PurchasingmanagerGenre genre){
 		setId(genre.getGenreId());
 		setText(genre.getGenreName());
-		if(genre.getGenreId() != null){
-			setParentId(genre.getGenreId());
+		if(genre.getPagrenId() != null){
+			setParentId(genre.getPagrenId());
 		}
 	}
  }
