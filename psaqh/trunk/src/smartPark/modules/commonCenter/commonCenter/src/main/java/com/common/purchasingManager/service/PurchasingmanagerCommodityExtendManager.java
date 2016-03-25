@@ -84,4 +84,13 @@ public interface PurchasingmanagerCommodityExtendManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public List<PurchasingmanagerCommodityExtend> getCommodityExtList(String commodityId) throws BusException;
+	
+	/**
+	 * 根据字段名称和商品ID 获取唯一值
+	 * @param fieldName 字段名称
+	 * @param commdityId 商品ID
+	 * @return
+	 * @throws BusException
+	 */
+	public PurchasingmanagerCommodityExtend getPurchasingmanagerCommodityExtends(String fieldName,String commdityId) throws BusException;
 }
