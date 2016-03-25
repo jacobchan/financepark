@@ -101,5 +101,5 @@ public interface PropertyservicemanagerBxManager extends BaseManager{
 	 * @return
 	 * @throws BusException
 	 */
-	public List<PropertyservicemanagerBx> getEnterprisemaillistLikeBxCode(String bxCode) throws BusException;
+	public List<PropertyservicemanagerBx> getEnterprisemaillistLikeBxCode(String userId,String bxCode,String startTime,String endTime) throws BusException;
 }
