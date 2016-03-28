@@ -3,6 +3,6 @@
 /* 修改表序号:     320301		                               */
 /* 修改表名称:     sp_memberInfomation                            */
 /*==============================================================*/
-ALTER TABLE `test`.`tree_test` ADD COLUMN `test` varchar(256);
+ALTER TABLE `test`.`tree_test` ADD COLUMN `test` varchar(256) ;
 
 
