@@ -46,7 +46,7 @@
 		
 		var param = ''+'commodity.commodityId='+commodityId;
 		$.youi.ajaxUtil.ajax({
-			url:'/esb/web/purchasingmanagerCommodityExtendManager/getPagerCommodityExts.json',
+			url:'/esb/web/purchasingmanagerCommodityExtendManager/getCommodityExtList.json',
 			data:param,
 			success:function(result){
 				var record = result.records;
