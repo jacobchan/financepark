@@ -55,7 +55,9 @@
 			<youi:fieldText property="policyCome"  caption="政策发布人" notNull="true"/>
 			<youi:fieldCalendar property="policyIssueDate"  caption="政策发布时间" notNull="true"/>
 			<youi:fieldArea property="policyContent"  caption="政策内容" column="2" rows="4" notNull="true"/>
-			<youi:fieldText property="imageUrl"  caption="图片URL" column="2" />
+			<%-- <youi:fieldText property="imageUrl"  caption="图片URL" column="2" /> --%>
+			<youi:fieldSwfupload property="imageUrl" caption="图片URL" uploadUrl="/common/uploadImage.html" 
+				fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="10240" />
 		</youi:fieldLayout>
 	</youi:form>
 	
