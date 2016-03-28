@@ -6,8 +6,15 @@ import com.gsoft.framework.core.service.BaseManager;
 
 public interface ExtentionAtrManager extends BaseManager {
 	/**Jack
-	 * 根据商品获取会议室的扩张属性的内容
+	 * 根据商品获取会议室的扩展属性的内容
 	 * @param commdity 商品
 	 */
 	public void setMeetingRoomExtendValue(PurchasingmanagerCommodity commdity) throws BusException;
+	/**
+	 * 根据商品获取代理记账扩展属性的内容
+	 * @param commdity
+	 * @throws BusException
+	 */
+	public void setAgencyBookExtendValue(PurchasingmanagerCommodity commdity)
+			throws BusException;
 }
