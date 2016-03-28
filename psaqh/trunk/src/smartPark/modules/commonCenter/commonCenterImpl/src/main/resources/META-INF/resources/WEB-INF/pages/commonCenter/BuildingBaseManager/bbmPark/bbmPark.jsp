@@ -42,7 +42,9 @@
 			<youi:fieldText property="manager"  caption="园区负责人" />
 			<youi:fieldText property="mainIndustry"  caption="主导服务" column="2"/>
 			<youi:fieldText property="address"  caption="园区地址" column="2"/>
-			<youi:fieldText property="backgroundImage"  caption="园区背景图URL" column="2"/>
+			<%-- <youi:fieldText property="backgroundImage"  caption="园区背景图URL" column="2"/> --%>
+			<youi:fieldSwfupload property="backgroundImage" caption="园区背景图URL" uploadUrl="/common/uploadImage.html" 
+				fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="10240" />
 		</youi:fieldLayout>
 	</youi:form>
 	
