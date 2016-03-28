@@ -538,25 +538,6 @@ $(function(){
 			
 		});
 	}
-	function getServiceTerm(commodityId){
-		var serviceURL = baseUrl+"purchasingmanagerCommodityExtendManager/getCommodityExtList.json";
-		$.youi.ajaxUtils.ajax({
-			url:serviceURL,
-			data:{commodityId:commodityId},
-			jsonp:'data:jsonp',
-			dataType:'jsonp',
-			success:function(results){
-				if(results&&results.records){
-					for(var i=0;i<results.records.length;i++){
-						if("serviceTerm"==results.records[i].purchasingmanagerGenreProperty.genrePropertyFieldName){
-							var serviceTerm = results.records[i].commodityExtendContent;
-							$('#'+commodityId).html(serviceTerm);
-						}
-					}
-				}
-			}
-		});
-	}
 	
 	var serviceURL = baseUrl+"purchasingmanagerCommodityManager/getAgencyCommodityList.json";
 	$.youi.ajaxUtils.ajax({
@@ -569,8 +550,8 @@ $(function(){
 				var htmlss = [];
 				for(var i=0;i<results.records.length;i++){
 					htmls.push('<tr><td class="ab_use2"></td><td><div class="ab_proinfo c3 f16">'+results.records[i].commodityTitle+'</div></td>'+
-							'<td class="w50"><div class="p15 c3"><span>'+results.records[i].commodityPrice+'元/</span><span id='+
-							results.records[i].commodityId+'>1年</span><div class="inline_b fr ml30">'+
+							'<td class="w50"><div class="p15 c3"><span>'+results.records[i].commodityPrice+'元/</span><span>'+
+							results.records[i].agencyBook.serviceTerm+'</span><div class="inline_b fr ml30">'+
 							'<a href="javascript:;" class="ab_shop" data-id="'+results.records[i].commodityId+
 					'"data-commodityTitle="'+results.records[i].commodityTitle+'"data-commodityPrice="'+results.records[i].commodityPrice+
 					'"></a></div><span class="cc inline_b fr mr50">杭州</span></div></td></tr>');
@@ -579,8 +560,6 @@ $(function(){
 					'</span>&nbsp;元/次&nbsp;<div class="shop0" data-id="'+results.records[i].commodityId+
 					'"data-commodityTitle="'+results.records[i].commodityTitle+
 					'"data-commodityPrice="'+results.records[i].commodityPrice+'"></div></li>');
-					
-					getServiceTerm(results.records[i].commodityId);
 				}
 				$('.ab_pro').html(htmls.join(''));
 				$('.shopul').html(htmlss.join(''));
