@@ -185,4 +185,15 @@ public class NmIssuetypeManagerImpl extends BaseManagerImpl implements NmIssuety
 		List<NmIssuetype> list = this.getNmIssuetypes(condition, null) ;//得到上级发布类型ID为typeId的所有发布类型
     	return list;
     }
+    
+    /**
+     * 通过政策发布类型code得到当前政策
+     * @param issueTypeCode 政策发布类型code
+     * @return
+     */
+    @EsbServiceMapping
+    public NmIssuetype getIssueTypeByIssueTypeCode(String issueTypeCode) {
+    	NmIssuetype type = nmIssuetypeDao.getObjectByUniqueProperty("issueTypeCode", issueTypeCode) ;//得到政策发布类型
+    	return type;
+    }
 }
