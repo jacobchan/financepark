@@ -44,7 +44,7 @@
 					    					var style = "";
 					    					if(records[i].financingStatus=="1"){
 					    						financingMsg = records[i].financingTime.substring(0,4)+"年"+records[i].financingTime.substring(5,7)+"月";
-					    						style = "yg-time history_time";
+					    						style = "yg-time            ";
 					    					}else{
 					    						financingMsg = "进行中...";
 					    						style = "yg-time";
@@ -67,21 +67,19 @@
 					}
 				});
 				$(".hhf-submit").click(function(){
-			  		var rzId=$("#financingRe").html();
-			  		var roomId=$("#roomId").val();
-			  		var rzName=$("#rzName").val();
-					var rzUrl=$("#rzUrl").val();
-					var enTypeName=$("#enTypeName").val();
-					var rzRemark=$("#rzRemark").val();
-					var rzLogo = $("#rzLogo").attr("src");
-					var productDiscriptio=editor.getData();
-					var params = ['rzId='+rzId+'','rzLogo='+rzLogo+'','roomId.roomId='+roomId+'','rzName='+rzName+'','rzRemark='+rzRemark+'','rzUrl='+rzUrl+'','enTypeName='+enTypeName+'','productDiscriptio='+productDiscriptio+''];
+			  		var financingRe=$("#financingRe").html();
+			  		var financingAmount=$("#financingAmount").val();
+			  		var financingCost=$("#financingCost").val();
+					var financingPre=$("#financingPre").val();
+					var financingTime=$("#financingTime").val();
+					var financingDescribe=$("#financingDescribe").val();
+					var params = ['financingRe='+financingRe+'','financingAmount='+financingAmount+'','financingCost='+financingCost+'','financingPre='+financingPre+'','financingTime='+financingTime+'','financingDescribe='+financingDescribe+''];
 					$.youi.ajaxUtils.ajax({
-						url:baseUrl+'/enterbusinessmanagerRzManager/updateEnterbusinessmanagerRz.json',
+						url:baseUrl+'/informationFinancingManager/saveInformationFinancing.json',
 						data:params.join('&'),
 						success:function(result){
 							if(result && result.record){
-								alert("修改成功");
+								alert("保存成功");
 								location.reload();
 							}
 						}
@@ -111,6 +109,7 @@
 	        		<div class="main-title"><span>融资信息</span></div>
 	        		<span id="financingRe" style="display:none;"></span>
 	            	<div class="xiangxi_xinxi mt40">
+	            		<span class="" id="financingRe" style="display:none;"></span>
 						<div class="qiye_address">
 	                    	<div class="qiye_word">融资轮次</div>
                             <div class="tct-select fl mr20" style="width:290px">
@@ -126,26 +125,23 @@
                         </div>
 		                <div class="rongzi_je">
 		                    <div class="qiye_rzje">融资金额</div>
-		                    <div class="web_input"><input type="text"></div>
+		                    <div class="web_input"><input id="financingAmount" name="financingAmount" type="text"></div>
 		                </div>
 		                <div class="rongzi_gz">
 		                    <div class="qiye_rzgz">融资估值</div>
-		                    <div class="web_input"><input type="text"></div>
+		                    <div class="web_input"><input id="financingCost" name="financingCost" type="text"></div>
 		                </div>
 		                <div class="kechi_gf">
 		                    <div class="qiye_kcgf">可持股份</div>
-		                    <div class="web_input"><input type="text"></div>
+		                    <div class="web_input"><input id="financingPre" name="financingPre" type="text"></div>
 		                </div>
 		                <div class="rongzi_time">
 		                	<div class="qiye_rzsj">融资时间</div>
 		                    <div class="rongzi_chose">
-		                    	<div class="time_input"><input type="text"></div>
-		                        <span class="time_to">到</span>
-		                        <div class="time_input"><input type="text"></div>
-		                        <div class="search_time"><a href="javascript:void(0);">搜索</a></div>
+		                    	<div class="time_input"><input id="financingTime" name="financingTime" type="text"></div>
 		                    </div>
 		                </div>
-		                <div class="rongzi_js ">
+		                <div class="rongzi_js">
 		                    <div class="qiye_word">融资介绍</div>
 		                    <div class="word_input">
 		                        <textarea id="financingDescribe" name="financingDescribe"></textarea>

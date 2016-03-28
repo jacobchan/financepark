@@ -120,7 +120,7 @@
 		            	</div>
 		            </div>
 		            <div class="xiangxi_xinxi">
-		                <div class="qiye_fullname ">
+		                <div class="qiye_fullname">
 		                    <div class="qiye_nametex">企业全称</div>
 		                    <div class="name_input"><input id="rzName" name="rzName" type="text"></div>
 		                </div>
