@@ -72,6 +72,7 @@ public class PurchasingmanagerGenrePropertyManagerImpl extends BaseManagerImpl i
     		pgp.setGenrePropertyDisplayName(o.getGenrePropertyDisplayName());
     		pgp.setGenrePropertyFieldName(o.getGenrePropertyFieldName());
     		pgp.setPurchasingmanagerGenre(o.getPurchasingmanagerGenre());
+    		pgp.setCategory(o.getCategory());
     		pgp.setUpdateUser(o.getUpdateUser());
     		pgp.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return purchasingmanagerGenrePropertyDao.save(pgp);

@@ -21,6 +21,7 @@ import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.common.ExtentionAtrManager.service.ExtentionAtrManager;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.common.purchasingManager.dao.PurchasingmanagerCommodityDao;
@@ -34,6 +35,8 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
 	private PurchasingmanagerCommodityDao purchasingmanagerCommodityDao;
 	@Autowired
 	private PurchasingmanagerGenreManager purchasingmanagerGenreManager;
+	@Autowired
+	private ExtentionAtrManager extentionAtrManager;
 	
     /**
      * 查询列表
@@ -299,6 +302,9 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
     public List<PurchasingmanagerCommodity> getAgencyCommodityList(@ServiceParam(name="userId",pubProperty="userId") String userId) throws BusException{
 		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode", "0504");
 		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("genreId", pg.getGenreId());
+		for(PurchasingmanagerCommodity pc :list){
+			extentionAtrManager.setAgencyBookExtendValue(pc);
+		}
 		return list;
 	}
 	/**
