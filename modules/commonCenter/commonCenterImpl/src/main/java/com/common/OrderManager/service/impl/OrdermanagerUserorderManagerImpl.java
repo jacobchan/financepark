@@ -262,7 +262,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(commodity.getGenreId());
 		//根据类别ID获取类别扩展属性列表
 		List<PurchasingmanagerGenreProperty> pgpList = purchasingmanagerGenrePropertyManager.getPurGenrePropertysByGenre(pg.getGenreId());
-		while(pg.getPagrenId() != null){//获取最顶级商品类别
+		while(pg.getGenreCode() != null){//获取有类别编码的上级商品类别
 			pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(pg.getPagrenId());
 		}
 		OrdermanagerUserorder order = new OrdermanagerUserorder();
