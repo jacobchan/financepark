@@ -260,7 +260,7 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
        @ServiceParam(name="commodityId.purchasingmanagerGenre.genreId") String genreId) throws BusException{
 		List<PurchasingmanagerCommodity> list=new ArrayList<PurchasingmanagerCommodity>();
 		if(StringUtils.isNotEmpty(genreId)){
-			list = purchasingmanagerCommodityDao.getList("purchasingmanagerGenre.genreId", genreId);
+			list = purchasingmanagerCommodityDao.getList("genreId", genreId);
 		}
 		return list;
 	}
@@ -270,7 +270,7 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
      */
 	@EsbServiceMapping
     public List<PurchasingmanagerCommodity> getCommodityRecordsByGenreId(@ServiceParam(name="genreId") String genreId) throws BusException{
-		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("purchasingmanagerGenre.genreId", genreId);
+		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("genreId", genreId);
 		return list;
 	}
 	
@@ -279,7 +279,8 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
      */
 	@EsbServiceMapping
     public List<PurchasingmanagerCommodity> getComChangeCommodityList(@ServiceParam(name="userId",pubProperty="userId") String userId) throws BusException{
-		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("purchasingmanagerGenre.genreCode", "0502");
+		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode", "0502");
+		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("genreId", pg.getGenreId());
 		return list;
 	}
 	/**
@@ -287,7 +288,8 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
      */
 	@EsbServiceMapping
     public List<PurchasingmanagerCommodity> getComReisterCommodityList(@ServiceParam(name="userId",pubProperty="userId") String userId) throws BusException{
-		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("purchasingmanagerGenre.genreCode", "0501");
+		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode", "0501");
+		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("genreId", pg.getGenreId());
 		return list;
 	}
 	/**
@@ -295,7 +297,8 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
      */
 	@EsbServiceMapping
     public List<PurchasingmanagerCommodity> getAgencyCommodityList(@ServiceParam(name="userId",pubProperty="userId") String userId) throws BusException{
-		List<PurchasingmanagerCommodity> list = purchasingmanagerCommodityDao.getList("purchasingmanagerGenre.genreCode", "0504");
+		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode", "0504");
+		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("genreId", pg.getGenreId());
 		return list;
 	}
 	/**
@@ -303,7 +306,8 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
      */
 	@EsbServiceMapping
     public List<PurchasingmanagerCommodity> getLawSerCommodityList(@ServiceParam(name="userId",pubProperty="userId") String userId) throws BusException{
-		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("purchasingmanagerGenre.genreCode", "0505");
+		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode", "0505");
+		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("genreId", pg.getGenreId());
 		return list;
 	}
 	/**
@@ -311,7 +315,8 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
      */
 	@EsbServiceMapping
     public List<PurchasingmanagerCommodity> getChopPatentCommodityList(@ServiceParam(name="userId",pubProperty="userId") String userId) throws BusException{
-		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("purchasingmanagerGenre.genreCode", "0506");
+		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode", "0506");
+		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("genreId", pg.getGenreId());
 		return list;
 	}
 	
