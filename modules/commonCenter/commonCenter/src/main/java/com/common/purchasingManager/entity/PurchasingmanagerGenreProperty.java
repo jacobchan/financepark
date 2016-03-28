@@ -59,6 +59,10 @@ public class PurchasingmanagerGenreProperty implements Domain{
 	@Column(name = "GENRE_PROPERTY_ISNOT_MUST_")
 	@Length(max=1)
 	private String genrePropertyIsnotMust;//是否必须
+	
+	@Column(name = "CATEGORY_")
+	@Length(max=2)
+	private String category;//所属分类
 
 	@Column(name = "UPDATE_USER_")
 	@Length(max=36)
@@ -72,6 +76,14 @@ public class PurchasingmanagerGenreProperty implements Domain{
     @JoinColumn(name="GENRE_ID_")
 	private com.common.purchasingManager.entity.PurchasingmanagerGenre purchasingmanagerGenre;//商品类别ID
 	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	public String getGenrePropertyFieldLength(){
 		return this.genrePropertyFieldLength;
 	}
