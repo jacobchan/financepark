@@ -13,6 +13,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 
 import com.manage.ActivityManager.entity.ActivityApply;
 import com.manage.ActivityManager.entity.ActivityApplylist;
@@ -116,8 +117,16 @@ public interface ActivityApplyManager extends BaseManager{
      * @throws BusException
      */    
     public List<ActivityApply> getActivityListByType(ActivityApply o) throws BusException;
+    
     /**
      *  获取推荐活动
+     * @param isRecoment
+     * @return
+     * @throws BusException
+     */
+    public List<ActivityApply> getActivityListIsRecoment(String isRecoment) throws BusException;
+    /**
+     *  获取类型为推荐的活动
      * @param o
      * @return
      * @throws BusException
