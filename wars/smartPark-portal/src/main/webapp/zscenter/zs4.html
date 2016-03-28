@@ -141,10 +141,12 @@
 				if(news.policyType.issueTypeCode=='0101'){//0101代表园区新闻
 					flag = true ;
 					htmls += "<li>"+
+					'<a href=""><div class="plg-photo"><img src="../styles/images/zs/big-nav-img1.png" border="0" width="100%"/></div>'+
 						 	"<div class='plg-article'>"+
 								"<a href=''><h3>"+news.policyCaption+"</h3></a>"+
 								"<p>"+news.policyContent+"</p>"+
 							"</div>"+
+							"</a>"+
 						"</li>";
 				}else{
 					flag = false ;
