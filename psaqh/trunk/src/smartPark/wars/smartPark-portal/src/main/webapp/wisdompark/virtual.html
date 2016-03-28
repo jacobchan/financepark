@@ -113,15 +113,18 @@ to {opacity:0;}
 				$(".b2mask").removeClass("hide");
 			}
 		});
-		$(document).on("mouseout",".zzul .lin .b",function(){
+		$(document).on("mouseout",".zzul .lin",function(){
 			$(".b1mask").addClass("hide");
 			$(".b2mask").addClass("hide");
+			$(".b1floor").eq(0).addClass("hide");
+			$(".b2floor").eq(0).addClass("hide");
 		});
 		$(document).on("mouseover",".maskset",function(){
 			$(".b1mask").addClass("hide");
 			$(".b2mask").addClass("hide");
 			$(".b1floor").addClass("hide");
 			$(".b2floor").addClass("hide");
+			//$(".b1floor").eq(0).addClass("hide");
 		});
 
 		$(document).on("mouseover",".zzul .lin:eq(0) li",function(){
