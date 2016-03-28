@@ -268,7 +268,7 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
 	@EsbServiceMapping
 	public List<PurchasingmanagerGenre> getITSubGenreList(@ServiceParam(name="userId",pubProperty="userId") String userId)
 			throws BusException {
-		PurchasingmanagerGenre pg = purchasingmanagerGenreDao.getObjectByUniqueProperty("genreCode", "06");
+		PurchasingmanagerGenre pg = purchasingmanagerGenreDao.getObjectByUniqueProperty("genreCode", "0508");
 		List<PurchasingmanagerGenre> list = purchasingmanagerGenreDao.getList("pagrenId", pg.getGenreId());
 		return list;
 	}

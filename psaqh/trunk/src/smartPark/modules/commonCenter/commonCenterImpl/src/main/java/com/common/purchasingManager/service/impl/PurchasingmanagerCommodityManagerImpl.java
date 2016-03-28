@@ -344,7 +344,7 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
 			@ConditionCollection(domainClazz=PurchasingmanagerCommodity.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
 		//获取企业服务的所有类别
-		List<PurchasingmanagerGenre> pgList = purchasingmanagerGenreManager.getCompSerOrderTypes("");
+		List<PurchasingmanagerGenre> pgList = purchasingmanagerGenreManager.getCompSerGenres();
 		List<String> genreIdList = new ArrayList<String>();
 		for(PurchasingmanagerGenre pg:pgList){
 			genreIdList.add(pg.getGenreId());
