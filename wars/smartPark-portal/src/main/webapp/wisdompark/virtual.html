@@ -101,25 +101,37 @@ to {opacity:0;}
 <script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 <script>
 	$(function(){
-		$(document).on("mouseover mouseout",".zzul .b",function(){
+		$(document).on("mouseover",".b",function(){
 			//console.log($(this).index())
 			var buildingId = $(this).parent().attr("id") ;
 			findFloorList(buildingId) ;
-			if($(this).parent().index()==0){
-				$(".b1mask").toggleClass("hide");
-	
-			}else if($(this).parent().index()==1){
-				$(".b2mask").toggleClass("hide");
+		});	
+		$(document).on("mouseover",".zzul .lin",function(){
+			if($(this).index()==0){
+				$(".b1mask").removeClass("hide");
+			}else if($(this).index()==1){
+				$(".b2mask").removeClass("hide");
 			}
-		});		
-		/* $(document).on("mouseover mouseout",".zzul .b:eq(0) li",function(){
-			var idx=$(this).index();
-			$(".b1floor").eq(idx).toggleClass("hide");
 		});
-		$(document).on("mouseover mouseout",".zzul .b:eq(1) li",function(){
+		$(document).on("mouseout",".zzul .lin .b",function(){
+			$(".b1mask").addClass("hide");
+			$(".b2mask").addClass("hide");
+		});
+		$(document).on("mouseover",".maskset",function(){
+			$(".b1mask").addClass("hide");
+			$(".b2mask").addClass("hide");
+			$(".b1floor").addClass("hide");
+			$(".b2floor").addClass("hide");
+		});
+
+		$(document).on("mouseover",".zzul .lin:eq(0) li",function(){
 			var idx=$(this).index();
-			$(".b2floor").eq(idx).toggleClass("hide");
-		}); */
+			$(".b1floor").eq(idx).removeClass("hide").siblings().addClass("hide");
+		});
+		$(document).on("mouseover",".zzul .lin:eq(1) li",function(){
+			var idx=$(this).index();
+			$(".b2floor").eq(idx).removeClass("hide").siblings().addClass("hide");
+		});
 	
 	/* 	$(".zzul .b").eq(0).find("li").hover(function(){
 			var idx=$(this).index();
@@ -150,7 +162,7 @@ to {opacity:0;}
 		function _parseRecords(record){//record为楼栋的list
 				for(var i=0;i<record.length;i++){
 					var obj = record[i] ;
-					var html = "<li id="+obj.buildingId+"><a class='b' href='#'>"+obj.buildingName+"</a><ul class='subul'></ul></li>"
+					var html = "<li class='lin' id="+obj.buildingId+"><a class='b' href='#'>"+obj.buildingName+"</a><ul class='subul'></ul></li>"
 					$(".oh.fl.zzul").append(html);
 				}
 		} 
@@ -177,6 +189,9 @@ to {opacity:0;}
 				html += "<li id="+obj.floorId+"><a href='wp_login.html?floorId="+obj.floorId+"'>"+obj.floorNo+"</a></li>" ;
 			}
 			return html ;
+		}
+		function a(){
+			location.href="www.baidu.com";
 		}
 	</script>
 </body>
