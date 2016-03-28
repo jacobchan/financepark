@@ -20,5 +20,14 @@ $(function(){
         }else{
             $(".comRigli-top").fadeOut();
         }
+        var h=$("body").height()-(document.documentElement.clientHeight+407);
+        var t=($("body").height()-627)+"px";
+        //console.log(h);
+        if($(window).scrollTop()<=h){
+        	//console.log(h);
+            $(".commonRight").css({"position":"fixed","top":"auto","bottom":"73px"});
+        }else{
+            $(".commonRight").css({"position":"absolute","bottom":"auto","top":t});
+        }
     });
 });
