@@ -4,6 +4,21 @@
 	<youi:body decorator="memcenter">
 				<div class="w1000">
 					<h3 class="per-h3">订单中心</h3>
+					<div class="mt20 gr-txl clearfix lh30">
+							<div class="tct-select fl mr20" style="width:200px">
+								<div class="ic-select" style="background: transparent url(../images/yqfw/down.png) no-repeat scroll right center;">
+									<p class="c-b1">请选择订单项目</p>
+								</div>
+								<ul style="display: none;" class="select-nav">
+									<li>园区地址1</li>
+									<li>园区地址2</li>
+									<li>园区地址3</li>
+								</ul>
+							</div>
+							<div class="inp-box ml20" style="width:300px;"><input placeholder="请输入相关的信息，如：“物业”"  id="userorderProject" type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
+							<input value="搜索" class="hhf-submit f14 fl ml20" type="button">
+						</div>
+					
 					<div class="clearfix mt40">
 						<table class="gt-table mt20">
 								<colgroup>
@@ -36,12 +51,9 @@
 				</div>
 			</youi:body>
 	<!--***bottom start****************************************-->
-	<script type="text/javascript">
-	 
-	
+	<script type="text/javascript">		
 		$(function(){
-			$.ajax({
-				
+			$.ajax({				
 				url:baseUrl+'/ordermanagerUserorderManager/getOrderListByLoginUser.json',
 				success:function(result){	
 					if(result&&result.records){					
@@ -52,7 +64,6 @@
 		});
 		//拼接卡号列表
 		function _parseRecords(record){		
-
 			console.log(record);
 			for(var i=0;i<record.length;i++){				
 				var status = "";								
@@ -65,20 +76,37 @@
 				} else if(record[i].userorderStatus=='0'){
 					status = "取消";
 				} 
-				var html= "<tr>"+
+				var html= "<tr class='aaa'>"+
 					      "<td width='111'>"+record[i].userorderCode+"</td>"+
                           "<td width='111'>"+record[i].userorderProject+"</td>"+
                           "<td width='111'>"+record[i].userorderAmount+"</td>"+
-                          "<td width='111'>"+record[i].userorderTime+"</td>"+
-                          
-                          "<td width='155'>"+status+                          
-                     
+                          "<td width='111'>"+record[i].userorderTime+"</td>"+                         
+                          "<td width='155'>"+status+                                              
                           "<a href='grzx2-2.html'>评价</a><span class='f12 ml5 mr5'>"+
 						  "<a href='javascript:;' class='ac-show lq-show'>发票领取</a>"+
 						  "</td>"+
                           " </tr>";
 				 $(".gt-table").append(html);	
 			}
-		};	
+		};
+		//根据订单项目模糊查询
+		$('.hhf-submit').click(function(){	
+			$(".aaa").empty();
+			 var userorderProject=$("#userorderProject").val();
+			 var userorderProject1=$("#userorderProject1").val();
+			 alert(userorderProject);
+			 params=['userorderProject='+userorderProject+'','userorderProject1='+userorderProject1+''];
+		      $.ajax({
+		    	 url:baseUrl+'/ordermanagerUserorderManager/getOrderlistLikeUserorderProject.json',
+		    	 data:params.join('&'),
+		    	 success:function(result){					
+						console.log(result.records);           
+						if(result&&result.records){	
+							alert(111);
+							_parseRecords(result.records);					
+						}
+					}
+			}); 
+		}); 
 	</script>
 </youi:html>
