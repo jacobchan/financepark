@@ -126,7 +126,7 @@ public class PurchasingmanagerCommodityExtendManagerImpl extends BaseManagerImpl
 			throws BusException {
 		List<PurchasingmanagerCommodityExtend> commodityExtList = new ArrayList<PurchasingmanagerCommodityExtend>();
 		PurchasingmanagerCommodity pc =  purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
-		//获得最上级商品类别
+		//获得商品类别
 		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(pc.getGenreId());
 //		while(pg.getPurchasingmanagerGenre() != null){
 //			pg = pg.getPurchasingmanagerGenre();
@@ -134,12 +134,13 @@ public class PurchasingmanagerCommodityExtendManagerImpl extends BaseManagerImpl
 		//根据类别ID获得商品类属性列表
 		Collection<Condition> conditions = new ArrayList<Condition>();
 		conditions.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.EQUALS, pg.getGenreId()));
+		conditions.add(ConditionUtils.getCondition("category", Condition.EQUALS, "01"));//01-商品扩展属性
 		List<PurchasingmanagerGenreProperty> pgpList = purchasingmanagerGenrePropertyManager.getPurchasingmanagerGenrePropertys(conditions, null);
 		for(PurchasingmanagerGenreProperty pgp:pgpList){
 			PurchasingmanagerCommodityExtend pce = new PurchasingmanagerCommodityExtend();
 			//根据商品ID和商品类属性字段名获取商品扩展属性值列表
 			List<PurchasingmanagerCommodityExtend> pceList = purchasingmanagerCommodityExtendDao.getList(
-					new String[]{"commodityId","purchasingmanagerGenreProperty.genrePropertyFieldName"}, 
+					new String[]{"commodity.commodityId","purchasingmanagerGenreProperty.genrePropertyFieldName"}, 
 					new String[]{commodityId,pgp.getGenrePropertyFieldName()});
 			if(pceList.size()>0){
 				pce = pceList.get(0);
@@ -173,7 +174,7 @@ public class PurchasingmanagerCommodityExtendManagerImpl extends BaseManagerImpl
 				purchasingmanagerCommodityExtendDao.save(purCE);
 			}else{
 				List<PurchasingmanagerCommodityExtend> purExList = purchasingmanagerCommodityExtendDao.getList(
-						new String[]{"commodityId","purchasingmanagerGenreProperty.genrePropertyId"}, 
+						new String[]{"commodity.commodityId","purchasingmanagerGenreProperty.genrePropertyId"}, 
 						new String[]{commodityId,pce.getPurchasingmanagerGenreProperty().getGenrePropertyId()});
 				
 				if(purExList.size()>0){//修改
@@ -219,7 +220,7 @@ public class PurchasingmanagerCommodityExtendManagerImpl extends BaseManagerImpl
 			PurchasingmanagerCommodityExtend pce = new PurchasingmanagerCommodityExtend();
 			//根据商品ID和商品类属性字段名获取商品扩展属性值列表
 			List<PurchasingmanagerCommodityExtend> pceList = purchasingmanagerCommodityExtendDao.getList(
-					new String[]{"commodityId","purchasingmanagerGenreProperty.genrePropertyFieldName"}, 
+					new String[]{"commodity.commodityId","purchasingmanagerGenreProperty.genrePropertyFieldName"}, 
 					new String[]{commodityId,pgp.getGenrePropertyFieldName()});
 			if(pceList.size()>0){
 				pce = pceList.get(0);
