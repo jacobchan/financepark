@@ -105,7 +105,7 @@
 	<!--***bottom end****************************************-->
 
 	<!--***弹窗 start****************************************-->
-	<div class="bg-tanc">
+	<div class="bg-tanc m1">
 		<div class="tanc-con" style="top:50%;margin-top:-225px;">
 			<a href="javascript:;" class="tc-close"></a>
 			<h3 class="mb10"><b>新增地址</b></h3>
@@ -169,6 +169,23 @@
 			</table>
 		</div>
 	</div>
+	
+		<div class="bg-tanc m2">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="w70 tc mt40" style="margin-left:15%">
+				<table>
+					<tr>
+						<td><img src="../styles/images/grzx/check.png" class="mr40 mb20" border="0"></td>
+						<td >
+							<h4 class="f24 fl c-333"> 您已预约成功！</h4>
+							<p class="f14 c-o fl mt20 mb20">如有问题，请拨打：0571-86508888</p>
+						</td>
+					<tr/>
+				</table>
+			</div>
+		</div>
+	</div>
 	<!--***弹窗 end****************************************-->
 
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
@@ -191,7 +208,8 @@
 
 		$(function(){
 			$(".hhf-submit").click(function(){
-				if(!isLogin){alert("请登录");return;} 
+				if(!isLogin){$(".f24.fl.c-333").text("请登录!");
+				$(".bg-tanc.m2").show();return;} 
 				//判断是否是企业员工
 				$.youi.ajaxUtils.ajax({
 				url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
@@ -203,7 +221,8 @@
 							var time = $('#timer').val(); 
 						
 							 if(time=="" || time.length==0){
-								alert("请输入预约时间！");
+								$(".f24.fl.c-333").text("请输入预约时间!");
+								$(".bg-tanc.m2").show();
 								return false;
 							 }
 						
@@ -224,13 +243,14 @@
 								dataType:'jsonp',
 								success:function(results){
 									if(results&&results.record){
-										alert("申请成功!");
+										$(".bg-tanc.m2").show();
 										window.location=cenUrl+"member/memberCenter/propertyService/propertyManageOc.html";
 									}
 								}
 							});
 						}else{
-							alert("您不是企业用户,暂时无法申请一卡通,如有疑问请与客服人员联系!");
+							$(".f24.fl.c-333").text("您不是企业用户,暂时无法申请一卡通,如有疑问请与客服人员联系!");
+							$(".bg-tanc.m2").show();
 							return false;
 						}
 					}
@@ -355,7 +375,8 @@
 					addressDetail = $("#ad2").val();
 				}
 				if(!isMobil(addressPhone)){
-					alert("手机号格式不正确！");
+					$(".f24.fl.c-333").text("手机号格式不正确！");
+					$(".bg-tanc.m2").show();
 					return false;
 				}
 				
@@ -372,7 +393,8 @@
 					dataType:'jsonp',
 					success:function(results){
 						if(results&&results.record){
-							alert("保存成功");
+							$(".f24.fl.c-333").text("保存成功!");
+							$(".bg-tanc.m2").show();
 							location.reload();
 						}
 					}
@@ -388,7 +410,7 @@
 				$(this).addClass("active");
 			});
 			$(".open-tanc").click(function(){
-				$(".bg-tanc").show();
+				$(".bg-tanc.m1").show();
 				$(".bbmbud").empty();
 				$("#floorNo").empty();
 				getbbmbud();
