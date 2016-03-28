@@ -94,7 +94,9 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
      */
     @EsbServiceMapping
     public PurchasingmanagerCommodity getPurchasingmanagerCommodity(@ServiceParam(name="commodityId") String id)  throws BusException{
-    	return purchasingmanagerCommodityDao.get(id);
+    	PurchasingmanagerCommodity o=purchasingmanagerCommodityDao.get(id);
+    	extentionAtrManagerImpl.setMeetingRoomExtendValue(o);
+    	return o;
     }
 	
 	@EsbServiceMapping
@@ -221,14 +223,14 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 	public void saveCommodityAndPropertyForRoom(PurchasingmanagerCommodity o) {
 		MeetingEntity meetingRoom=o.getMeetingRoom();
 		String adr=meetingRoom.getAdr();//获取会议室地址
-		BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(adr);
+		/*BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(adr);
 		if(bbmRoom != null){
 			//获取单元默认地址
 			adr=bbmRoom.getRoomAddress();
-		}
+		}*/
 		
 		String lx=meetingRoom.getLx();//会议室类型
-		if(lx !=null){//会议室类型：01--视频会议室，02---普通会议室
+		/*if(lx !=null){//会议室类型：01--视频会议室，02---普通会议室
 			Collection<Condition> condition =  new ArrayList<Condition>();
 			condition.add(ConditionUtils.getCondition("codemap.code", Condition.EQUALS,"roomType"));
 			condition.add(ConditionUtils.getCondition("itemValue", Condition.EQUALS,lx));
@@ -236,10 +238,10 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 			if(list.size()>0){
 				lx=list.get(0).getItemCaption();
 			}
-		}
+		}*/
 		
 		String tyy=meetingRoom.getTyy();//投影仪有无
-		if(tyy !=null){//投影仪有无：01--有，02---无
+		/*if(tyy !=null){//投影仪有无：01--有，02---无
 			Collection<Condition> condition =  new ArrayList<Condition>();
 			condition.add(ConditionUtils.getCondition("codemap.code", Condition.EQUALS,"roomProjector"));
 			condition.add(ConditionUtils.getCondition("itemValue", Condition.EQUALS,tyy));
@@ -247,7 +249,7 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 			if(list.size()>0){
 				tyy=list.get(0).getItemCaption();
 			}
-		}
+		}*/
 		
 		String commodityId = o.getCommodityId();
 		boolean isUpdate = StringUtils.isNotEmpty(commodityId);
