@@ -36,8 +36,10 @@
 			<youi:fieldText property="parkName" caption="所属园区"  readonly="true"/>
 			<youi:fieldText property="floorRoomCount"  caption="楼层单元数量" notNull="true"
 									expression="^\d{0,32}$" expressionMessage="请输入数字!"/>
-			<youi:fieldText property="floorCaption"  caption="楼层说明" column="2"/>
-			<youi:fieldText property="floorImage" caption="楼层布局图片" column="2"/>
+			<youi:fieldText property="floorCaption"  caption="楼层说明"/>
+			<%-- <youi:fieldText property="floorImage" caption="楼层布局图片" column="2"/> --%>
+			<youi:fieldSwfupload property="floorImage" caption="楼层布局图片" uploadUrl="/common/uploadImage.html" 
+				fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="10240" />
 			
 			<%-- <youi:fieldHidden property="roomNo" caption="招商房间编号"/>
 			<youi:fieldHidden property="useStatus" caption="招商使用状态"/>

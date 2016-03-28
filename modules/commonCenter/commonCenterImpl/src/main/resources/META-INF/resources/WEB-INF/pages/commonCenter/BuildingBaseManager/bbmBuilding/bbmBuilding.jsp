@@ -44,7 +44,9 @@
 				src="esb/web/bbmParkManager/getBbmParks.json" notNull="true"/>
 			<youi:fieldSelect property="buildingType"  caption="楼栋类别" convert="buildingType"/>
 			<youi:fieldText property="buildingCaption"  caption="楼宇说明"/>
-			<youi:fieldText property="buildingImage"  caption="楼栋图片URL" column="2"/>
+			<%-- <youi:fieldText property="buildingImage"  caption="楼栋图片URL" column="2"/> --%>
+			<youi:fieldSwfupload property="buildingImage" caption="楼栋图片URL" uploadUrl="/common/uploadImage.html" 
+				fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="10240" />
 		</youi:fieldLayout>
 	</youi:form>
 	
