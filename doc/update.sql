@@ -5,7 +5,7 @@
 /*==============================================================*/
 ALTER TABLE `test`.`tree_test` ADD COLUMN `test` varchar(256) ;
 
-ALTER TABLE `sp_purchasingmanager_genre`
-ADD COLUMN `CATEGORY_`  char(2) NULL AFTER `GENRE_CODE_`;
+ALTER TABLE `sp_purchasingmanager_genre_property`
+ADD COLUMN `CATEGORY_`  char(2) NULL AFTER `CREATE_TIME_`;
 
 
