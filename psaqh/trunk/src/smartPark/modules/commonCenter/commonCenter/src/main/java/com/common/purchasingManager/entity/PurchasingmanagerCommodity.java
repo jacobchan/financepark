@@ -18,6 +18,7 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.Length;
 
+import com.common.ExtentionAtrManager.entity.AgencyBookEntity;
 import com.common.ExtentionAtrManager.entity.CarEntity;
 import com.common.ExtentionAtrManager.entity.MeetingEntity;
 import com.gsoft.framework.core.dataobj.Domain;
@@ -103,36 +104,32 @@ public class PurchasingmanagerCommodity implements Domain{
 	@Length(max=256)
 	private String commodityCoverImage;//封面图片
 	
-	/**
-	 * 会议室的扩展属性
-	 */
+	@Column(name="GENRE_ID_")
+	private String genreId;//商品类别ID
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="MERCHANT_ID_")
+	private com.common.purchasingManager.entity.PurchasingmanagerMerchant purchasingmanagerMerchant;//商户ID
+	
 	@Transient
-	private MeetingEntity meetingRoom;
+	private PurchasingmanagerGenre purchasingmanagerGenre;//商品类型
 	
-	/**
-	 * 车辆的扩展属性
-	 */
 	@Transient
-	private CarEntity car;
+	private MeetingEntity meetingRoom;//会议室的扩展属性
 	
-//	/**
-//	 * 会议室的扩张属性
-//	 */
-//	@Transient
-//	private carEntity car;
+	@Transient
+	private CarEntity car;//车辆的扩展属性
 	
-	
-	
-//	@Transient
-//	private List<PurchasingmanagerCommodityExtend> extndValues;
-//	
-//	public List<PurchasingmanagerCommodityExtend> getExtndValues() {
-//		return extndValues;
-//	}
-//
-//	public void setExtndValues(List<PurchasingmanagerCommodityExtend> extndValues) {
-//		this.extndValues = extndValues;
-//	}
+	@Transient
+	private AgencyBookEntity agencyBook;//代理记账的扩展属性
+
+	public AgencyBookEntity getAgencyBook() {
+		return agencyBook;
+	}
+
+	public void setAgencyBook(AgencyBookEntity agencyBook) {
+		this.agencyBook = agencyBook;
+	}
 
 	public CarEntity getCar() {
 		return car;
@@ -149,21 +146,6 @@ public class PurchasingmanagerCommodity implements Domain{
 	public void setMeetingRoom(MeetingEntity meetingRoom) {
 		this.meetingRoom = meetingRoom;
 	}
-
-	//	@ManyToOne(fetch = FetchType.EAGER)
-	@Column(name="GENRE_ID_")
-	private String genreId;//商品类别ID
-	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name="CATEGORY_ID_")
-//	private com.common.purchasingManager.entity.PurchasingmanagerCategory purchasingmanagerCategory;//类目ID
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="MERCHANT_ID_")
-	private com.common.purchasingManager.entity.PurchasingmanagerMerchant purchasingmanagerMerchant;//商户ID
-	
-	@Transient
-	private PurchasingmanagerGenre purchasingmanagerGenre;//商品类型
 
 	public PurchasingmanagerGenre getPurchasingmanagerGenre() {
 		return purchasingmanagerGenre;
