@@ -37,7 +37,7 @@
 						<a href="zs7.html"><li>科技部关于《发展众创空间工作指引》的通知 <span class="fr">2015-12-24</span></li></a>
 						<a href="zs7.html"><li>定制公交开通啦！往来富春硅谷更便捷<span class="fr">2015-12-24</span></li></a>
 					</ul> -->
-					<ul class="pb-list-group undis">
+					<!-- <ul class="pb-list-group undis">
 						 <li onclick='window.open("czh/czh3.html");'>
 							<div class="plg-photo">
 								<img src="../styles/images/zs/big-nav-img1.png" border="0" width="100%"/>
@@ -50,8 +50,8 @@
 								</h5>
 							</div>
 						</li>
-					</ul>
-					<ul class="pb-list-group undis">
+					</ul> -->
+					<!-- <ul class="pb-list-group undis">
 						 <li onclick='window.open("czh/czh3.html");'>
 							<div class="plg-photo">
 								<img src="../styles/images/zs/big-nav-img1.png" border="0" width="100%"/>
@@ -64,7 +64,7 @@
 								</h5>
 							</div>
 						</li>
-					</ul>
+					</ul> -->
 				</div>
 			</div>	
 			<div class="fr w285"><div id="youi_page_right" class="youi-page-right clearfix"></div></div>
@@ -141,13 +141,17 @@
 				if(news.policyType.issueTypeCode=='0101'){//0101代表园区新闻
 					flag = true ;
 					htmls += "<li>"+
-					'<a href=""><div class="plg-photo"><img src="../styles/images/zs/big-nav-img1.png" border="0" width="100%"/></div>'+
-						 	"<div class='plg-article'>"+
-								"<a href=''><h3>"+news.policyCaption+"</h3></a>"+
-								"<p>"+news.policyContent+"</p>"+
-							"</div>"+
-							"</a>"+
-						"</li>";
+								'<a href="">' +
+									'<div class="plg-photo">'+
+										"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+news.imageUrl+"&method=show' border='0' width='100%'>"+
+									"</div>"+
+							/* '<img src="../styles/images/zs/big-nav-img1.png" border="0" width="100%"/></div>'+ */
+						 		"<div class='plg-article'>"+
+									"<a href=''><h3>"+news.policyCaption+"</h3></a>"+
+									"<p>"+news.policyContent+"</p>"+
+								"</div>"+
+								"</a>"+
+							"</li>";
 				}else{
 					flag = false ;
 					htmls2 += "<a href='zs7.html?policyId="+news.policyId+"'>"+
