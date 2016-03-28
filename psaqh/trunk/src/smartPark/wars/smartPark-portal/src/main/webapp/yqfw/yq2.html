@@ -28,20 +28,53 @@
 			</div>
 			<script>
 				$(function(){
-					var j=0;
-					var o=$(".ht-table tr th").length-1;
-					var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-					for(j=1;j<o;j++){
-						for(var i=0;i<j;i++){
-							var dd = new Date();
-						  	dd = new Date(dd.getTime() + 60*60*24*1000 *i); 
-						  	var dm=dd.getMonth()+1;
-						  	var dt=dd.getDate();
-						  	var dw=dd.getDay();	
-						  	$(".ht-table tr th").eq(j).html(dm+"月"+dt+"日"+"<br/>"+weekDay[dw]); 
+					var j=0,num=0;
+					var o=$(".ht-table tr th").length;//得到th有多少个；
+					var dd,dm,dt,dw;
+					var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];//将得到的0-7转化为星期
+					changeDate(num);
+					//鼠标移上去时出现左右按钮
+					$(".pr").hover(function(){
+						$(this).children(".ht-table").nextAll().toggle();
+					});
+					//左按钮
+					$(".cd-prev").click(function(){
+						var n=$(this).parent().find(".ht-table th").eq(1).text().replace(/[^0-9]/ig,"-");//取得第一个th里的时间
+						var m1=n.split("-")[0];
+						var d1=n.split("-")[1];
+						dd = new Date();
+					  	dm=dd.getMonth()+1;
+					  	dt=dd.getDate();
+					  	if(m1==dm && d1==dt){
+					  		alert("只能预约今天及以后的日期");
+					  	}else{
+					  		num--;
+					  		console.log(num);
+							changeDate(num);
+					  	}
+					});
+					//右按钮
+					$(".cd-next").click(function(){
+						num++;
+						console.log(num);
+						changeDate(num);
+					})
+					//7个日期的变化公共部分
+					function changeDate(num){
+						var z=7;
+						for(j=1;j<o;j++){
+							for(var i=0;i<j;i++){
+								var dd = new Date();
+							  	dd = new Date(dd.getTime() + 60*60*24*1000 *(i+z*num)); 
+							  	console.log(i+z*num);
+							  	dm=dd.getMonth()+1;
+							  	dt=dd.getDate();
+							  	dw=dd.getDay();	
+							  	$(".ht-table tr th").eq(j).html(dm+"月"+dt+"日"+"<br/>"+weekDay[dw]); 
+							}
 						}
-					}
-					
+					};
+
 					 $(".hhf-submit").click(function(){
 						if(!isLogin){alert("请登录");return;}
 						var enteringName=$("#enteringName").val();
@@ -119,48 +152,58 @@
 							<span class="hbb-span"><em class="em2"></em> 预约已满</span>
 							<span class="hbb-span"><em class="em3"></em> 不可预约</span>
 						</div>
-						<table class="ht-table">
-							<colgroup>
-								<col width="124"></col>
-								<col width="14%"></col>
-								<col width="14%"></col>
-								<col width="14%"></col>
-								<col width="14%"></col>
-								<col width="14%"></col>
-								<col width="15%"></col>
-							</colgroup>
-							<tr>
-								<th style="padding:0px;">
-									<div class="xx"> 
-										<span>日期</span> 
-										<em>时间</em> 
-									</div>
-								</th>
-								<th>12月27日<br/>星期日</th>
-								<th>12月28日<br/>星期一</th>
-								<th>12月29日<br/>星期二</th>
-								<th>12月30日<br/>星期三</th>
-								<th>12月31日<br/>星期四</th>
-								<th>预约说明</th>
-							</tr>
-							<tr id="am">
-								<!-- <td>09：00-12：00</td>
-								<td><a href="javascript:;" class="em3"><span id='enteringId' style='display:none'>99</span>不可预约</a></td>
-								<td><a href="javascript:;" class="em1">可以预约（8个）</a></td>
-								<td><a href="javascript:;" class="em1">可以预约（10个）</a></td>
-								<td><a href="javascript:;" class="em2">预约已满</a></td>
-								<td><a href="javascript:;" class="em1">可以预约（12个）</a></td>
-								<td rowspan="2"><p class="lh20">温馨提示：线上预约后,请在预约的时间内到物业处凭预约短信办理相关事宜。</p></td>  -->
-							</tr>
-							<tr id="pm">
-								<!-- <td>14：00-17：00</td>
-								<td><a href="javascript:;" class="em3">不可预约</a></td>
-								<td><a href="javascript:;" class="em1">可以预约（8个）</a></td>
-								<td><a href="javascript:;" class="em1">可以预约（10个）</a></td>
-								<td><a href="javascript:;" class="em1">可以预约（20个）</a></td>
-								<td><a href="javascript:;" class="em1">可以预约（12个）</a></td> -->
-							</tr>
-						</table>
+						<div class="pr">
+							<table class="ht-table">
+								<colgroup>
+									<col width="102"></col>
+									<col width="107"></col>
+									<col width="107"></col>
+									<col width="107"></col>
+									<col width="107"></col>
+									<col width="107"></col>
+									<col width="107"></col>
+									<col></col>
+								</colgroup>
+								<tr>
+									<th style="padding:0px;">
+										<div class="xx"> 
+											<span>日期</span> 
+											<em>时间</em> 
+										</div>
+									</th>
+									<th>12月27日<br/>星期日</th>
+									<th>12月28日<br/>星期一</th>
+									<th>12月29日<br/>星期二</th>
+									<th>12月30日<br/>星期三</th>
+									<th>12月31日<br/>星期四</th>
+									<th>1月01日<br/>星期五</th>
+									<th>1月02日<br/>星期六</th>
+								</tr>
+								<tr id="am">
+									<td>09：00-12：00</td>
+									<td><a href="javascript:;" class="em3"><span id='enteringId' style='display:none'>99</span>不可预约</a></td>
+									<td><a href="javascript:;" class="em1">可以预约<br/>（8个）</a></td>
+									<td><a href="javascript:;" class="em1">可以预约<br/>（10个）</a></td>
+									<td><a href="javascript:;" class="em2">预约已满</a></td>
+									<td><a href="javascript:;" class="em1">可以预约<br/>（12个）</a></td>
+									<td><a href="javascript:;" class="em2">预约已满</a></td>
+									<td><a href="javascript:;" class="em1">可以预约<br/>（12个）</a></td>
+								</tr>
+								<tr id="pm">
+									<td>14：00-17：00</td>
+									<td><a href="javascript:;" class="em3">不可预约</a></td>
+									<td><a href="javascript:;" class="em1">可以预约<br/>（8个）</a></td>
+									<td><a href="javascript:;" class="em1">可以预约<br/>（10个）</a></td>
+									<td><a href="javascript:;" class="em1">可以预约<br/>（20个）</a></td>
+									<td><a href="javascript:;" class="em1">可以预约<br/>（12个）</a></td>
+									<td><a href="javascript:;" class="em2">预约已满</a></td>
+									<td><a href="javascript:;" class="em1">可以预约<br/>（12个）</a></td>
+								</tr>
+							</table>
+							<div class="change-date cd-prev"><img src="../styles/images/yqfw/left-angle.png"></div>
+							<div class="change-date cd-next"><img src="../styles/images/yqfw/right-angle.png"></div>							
+						</div>
+						
 						<h3 class="f16 lh22 pt10 pb10 mt40" style="border-bottom:1px solid #efebeb;">申请人基本信息</h3>
 						<form class="ht-hb-form">
 							<div><label><em>*</em> 申请人</label> <input type="text" id="enteringName"></div>
@@ -168,7 +211,7 @@
 							<div><label>联系邮箱</label> <input type="text" id="enteringEmail"></div>
 							<div><label>备注</label> <textarea id="enteringNote"></textarea></div>
 							 <input type="button" value="提交" id="sub" class="hhf-submit" style="margin-left:160px;">
- </form>
+						</form>
 					</div>	
 				</div>
 				<div class="fr w285" style="background-color:transparent">
@@ -180,6 +223,41 @@
 	<!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
+	
+	<!--***弹窗 start****************************************-->
+	<div class="bg-tanc m1">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="tc mt40">
+				<div class="mt20 mb20 f16 lh26">
+					<img src="../styles/images/yqfw/correct.png" border="0" class="mr20"/>
+				</div>
+				<p class="mb10 f16">您已经成功提交申请，请到会员中心查看申请状态。</p>
+				<p><span class="c-o f24 tc-time">3 </span>秒后，系统将自动跳转</p>
+				<p class="mt10"><a href="" class="c-6">手动跳转 ></a></p>
+				<div class="clearfix mt30">
+					<a href="" class="c-6"><i class="fa fa-home mr10" style="font-size:24px;"></i>返回首页</a>
+					<span class="f14 ml20 mr20 c-6">|</span>
+					<a href="" class="c-6"><i class="fa fa-user mr10" style="font-size:20px;"></i>个人中心</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="bg-tanc m2">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="tc mt40">
+				<div class="mt20 mb20 f16 lh26">
+					<img src="../styles/images/yqfw/error.png" border="0" class="mr20"/>
+				</div>
+				<p class="mb10 f16">您已经成功提交申请，请到会员中心查看申请状态。</p>
+				<p><span class="c-o f24 tc-time">3 </span>秒后，系统将自动跳转 <a href="" class="c-b1 ml10">手动跳转 ></a></p>
+			</div>
+		</div>
+	</div>
+	<!--***弹窗 end****************************************-->
+	
+
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
 	<script type="text/javascript">
 	var serviceURL = baseUrl+"propertyservicemanagerEnteringManager/getEnteringList.json";
@@ -252,6 +330,23 @@
 		}
 	});
 	
+		$(function(){
+			if($(".bg-tanc.m1").css("display")=="none" || $(".bg-tanc.m2").css("display")=="none"){
+				return false;
+			}else{
+				var timer=setInterval("jump()",1000);
+			}
+		})
+		var a=3;
+		function jump(){
+			if(a>1){
+				a--;
+				$(".tc-time").text(a);
+			}else{
+				location.href="../grzx/grzx1.html";
+			}
+			
+		}
 </script>
 </body>
 </html>
