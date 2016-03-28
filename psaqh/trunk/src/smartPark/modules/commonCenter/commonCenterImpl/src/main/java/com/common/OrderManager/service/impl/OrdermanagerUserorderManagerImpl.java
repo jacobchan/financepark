@@ -209,8 +209,13 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	public PagerRecords getPagerComSerOrders(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
-		String[] buff = new String[]{"0501","0502","0503","0504","0505","0506","0507"};
-		conditions.add(ConditionUtils.getCondition("genreId.genreCode", Condition.IN, buff));
+		List<PurchasingmanagerGenre> pgList = purchasingmanagerGenreManager.getCompSerOrderTypes("");
+		List<String> genreIdList = new ArrayList<String>();
+		for(PurchasingmanagerGenre pg:pgList){
+			genreIdList.add(pg.getGenreId());
+		}
+		String[] buff = (String[])genreIdList.toArray(new String[genreIdList.size()]);
+		conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.IN, buff));
 		PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
@@ -222,7 +227,12 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	public PagerRecords getPagerPublicResoOrders(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
-		String[] buff = new String[]{"0301","0302","0303"};
+		List<PurchasingmanagerGenre> pgList = purchasingmanagerGenreManager.getPublicResoOrderTypes("");
+		List<String> genreIdList = new ArrayList<String>();
+		for(PurchasingmanagerGenre pg:pgList){
+			genreIdList.add(pg.getGenreId());
+		}
+		String[] buff = (String[])genreIdList.toArray(new String[genreIdList.size()]);
 		conditions.add(ConditionUtils.getCondition("genreId.genreCode", Condition.IN, buff));
 		PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
