@@ -70,6 +70,26 @@
 			</div>
 		</div>
 	</div>
+	
+	<!--***弹窗 start****************************************-->
+		<div class="bg-tanc m2">
+			<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+				<a href="javascript:;" class="tc-close"></a>
+				<div class="w70 tc mt40" style="margin-left:15%">
+					<table>
+						<tr>
+							<td><img src="../styles/images/grzx/check.png" class="mr40 mb20" border="0"></td>
+							<td >
+								<h4 class="f24 fl c-333">投诉提交成功!</h4>
+								<p class="f14 c-o fl mt20 mb20">如有问题，请拨打：0571-86508888</p>
+							</td>
+						<tr/>
+					</table>
+				</div>
+			</div>
+		</div>
+	<!--***弹窗 end****************************************-->
+	
 	<!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
@@ -93,21 +113,25 @@
 <script type="text/javascript">
 	$(function(){
 		$(".hhf-submit").click(function(){
-			if(!isLogin){alert("请登录");return;} 
+			if(!isLogin){$(".f24.fl.c-333").text("请登录!");
+			$(".bg-tanc.m2").show();return;} 
 			var cosContent=$("#content").val();	
 			var cosBool=$('input[name="yesNo"]:checked').val();
 			var cosName=$("#name").val();
 			var cosTelephone=$("#telphone").val();
 			if(cosContent=="" || cosContent.length==0){
-				alert("请输入投诉内容！");
+				$(".f24.fl.c-333").text("请输入投诉内容！");
+				$(".bg-tanc.m2").show();
 				return false;
 			}else{
 				if(cosBool=="0"){
 					if(cosName=="" || cosName.length==0){
-						alert("请输入联系人！");
+						$(".f24.fl.c-333").text("请输入联系人！");
+						$(".bg-tanc.m2").show();
 						return false;
 					}else if(cosTelephone=="" || cosTelephone.length==0){
-						alert("请输入联系人电话！");
+						$(".f24.fl.c-333").text("请输入联系人电话！");
+						$(".bg-tanc.m2").show();
 						return false;
 					}
 				}
@@ -125,7 +149,7 @@
 					dataType:'jsonp',
 					success:function(results){
 						if(results&&results.record){
-							alert("提交成功");
+							$(".bg-tanc.m2").show();
 							window.location.href=cenUrl+"member/memberCenter/propertyService/propertyManageCos.html";
 						}
 					}
