@@ -16,7 +16,7 @@ a{color:#aaa}.inline_b{display:inline-block}.fw{font-weight:600}.prelative{posit
 .span_ac{font-size:20px;color:#FF6618}.cc{color:#FF6618}.cfff{color:#fff;}.c3{color:#333}.cd7{color:#d7d7d7}.caaa{color:#aaa;}.ccheng{color:#F9BF45}.czz{color:#E43C3F}
 .layout_table,.layout_table td{border:1px #EBEBEB solid;}
 .layout_table td{padding:20px;width:33.3%;vertical-align:top;}
-.layout_table td:hover{box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15);cursor: pointer;transition:all .4s;}
+.layout_table td:hover{box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15); cursor: pointer;transition:all .4s;}
 .layout_table td:hover a{color: #FF5900;}
 .layout_table td>a{display:block;color:#333;}.layout_table{width:100%}
 /*table->*/.item{padding-left:85px;padding-top:20px}.item p{color:#B4B4B4;margin-top:10px}.item a{color:#333}
@@ -448,7 +448,7 @@ background:url(../images/company/ab_ico.png) no-repeat}
 ******智慧园区*************
 ******办公
 */
-.mhbg{background:url(../images/zhyq/mhbg.png) no-repeat;position:relative;height:711px; box-shadow:#333 0 5px 10px 0;padding-top:55px}
+.mhbg{background:url(../images/zhyq/mhbg.png) no-repeat;position:relative;height:711px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15); padding-top:55px}
 .hxpic{background:url(../images/zhyq/hxpic.png) no-repeat;position:absolute;top:180px;left:20px;width:848px;height:257px}
 .hx01{width:175px;height:100px;position:absolute;right:2px;top:7px;opacity:0.6}
 .hx02{width:183px;height:122px;position:absolute;right:2px;top:130px;opacity:0.6}
@@ -593,7 +593,7 @@ background:url(../images/company/ab_ico.png) no-repeat}
 
 
 /**浮动**/
-.commonRight{position: fixed;right: 10px;z-index: 999;bottom: 0px;display: inline-block;left: 50%;margin-left: 605px;}
+.commonRight{position: fixed;right: 10px;z-index: 999;bottom: 73px;display: inline-block;left: 50%;margin-left: 605px;}
 .commonRight .comRiglist,.commonRight .comRiglist li{width: 48px;padding: 0px;margin: 0px;list-style: none;}
 .commonRight .comRiglist li {width: 48px; margin-bottom: 7px; cursor: pointer;height: 40px;background-color: #e0e0e0;text-align: center; } 
 .comRiglist li i{background-image: url(../images/zhyq/fd-icons.png);display: inline-block;}
@@ -611,13 +611,13 @@ background:url(../images/company/ab_ico.png) no-repeat}
 
 
 /**首页新闻**/
-.pb-list-group li{height: 180px;border:1px solid #ecebeb;margin-bottom: 30px;color: #333;background-color: #fff;}
+.pb-list-group li{height: 180px;border:1px solid #ecebeb;margin-bottom: 30px;color: #333;background-color: #fff;cursor: pointer;}
 .pb-list-group li .plg-photo{width: 290px;float: left;overflow: hidden;position: relative;height: 100%;}
 .pb-list-group li .plg-photo img{width: 100%;height: 100%;}
-.pb-list-group li .plg-article{float: left;width: 570px;padding-left: 25px;}
-.pb-list-group li h3{line-height: 30px;font-size: 20px;color: #333;margin:15px 0px 10px;}
-.pb-list-group li p {height: 72px;line-height: 24px;overflow: hidden;color: #BBB;font-size: 15px;margin-bottom: 10px;}
-.pb-list-group li a:hover h3{color: #ff6715;}
-
-.pb-list-group li:hover{box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15); }
 .pb-list-group li .plg-photo em{position: absolute;left: 0px;top: 0px;line-height: 22px;padding: 0px 5px;font-size: 12px;color: #fff;background-color: #ff6715;}
+.pb-list-group li .plg-article{float: left;width: 570px;padding-left: 25px;}
+.pb-list-group li h3{line-height: 30px;font-size: 20px;margin:15px 0px 10px;}
+.pb-list-group li p {height: 72px;line-height: 24px;overflow: hidden;color: #BBB;font-size: 15px;margin-bottom: 10px;}
+.pb-list-group li:hover{box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15); }
+.pb-list-group li:hover h3{color: #ff6715;}
+
