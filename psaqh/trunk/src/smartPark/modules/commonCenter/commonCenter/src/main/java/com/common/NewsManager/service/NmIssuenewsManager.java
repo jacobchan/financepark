@@ -129,4 +129,11 @@ public interface NmIssuenewsManager extends BaseManager{
 	 */
 	public NmIssuenews setBrowseCountByPolicyId(String policyId) ;
 	
+	/**
+	 * 通过政策类型的Code得到当前政策下面的所有新闻
+	 * @param issueTypeCode 政策类型code
+	 * @return
+	 */
+	public List<NmIssuenews> getNmIssuenewsByIssueTypeCode(String issueTypeCode) ;
+	
 }
