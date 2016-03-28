@@ -9,7 +9,7 @@
 	<!--**********************************页面样式End**********************************-->
 	<!-- form-商品信息扩展编辑 -->
 	<youi:grid id="grid_purCommodityExtend" idKeys="commodityExtendId" caption="商品扩展信息"  panel="false" scrollHeight="240"
-				src="esb/web/purchasingmanagerCommodityExtendManager/getPagerCommodityExts.json" dataFormId="form_sFproManage"
+				src="esb/web/purchasingmanagerCommodityExtendManager/getCommodityExtList.json" dataFormId="form_sFproManage"
 				saveRowsSrcs="esb/web/purchasingmanagerCommodityExtendManager/saveCommodityExts.json"
 				showCheckbox="false" 
 				submit="NOT" reset="NOT" save="保存" usePager="fasle" editable="true" >

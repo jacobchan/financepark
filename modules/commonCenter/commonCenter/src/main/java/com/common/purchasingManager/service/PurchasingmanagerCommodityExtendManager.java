@@ -68,7 +68,7 @@ public interface PurchasingmanagerCommodityExtendManager extends BaseManager{
 	 * @return
 	 * @throws BusException
 	 */
-	public List<PurchasingmanagerCommodityExtend> getPagerCommodityExts(String commodityId) throws BusException; 
+	public List<PurchasingmanagerCommodityExtend> getCommodityExtList(String commodityId) throws BusException; 
 	
 	/**
 	 * 保存商品扩展属性
@@ -77,13 +77,6 @@ public interface PurchasingmanagerCommodityExtendManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public void saveCommodityExts(String commodityId,List<PurchasingmanagerCommodityExtend> commodityExtList) throws BusException; 
-	/**
-	 * 根据商品ID获取商品扩展属性
-	 * @param commodityId
-	 * @return
-	 * @throws BusException
-	 */
-	public List<PurchasingmanagerCommodityExtend> getCommodityExtList(String commodityId) throws BusException;
 	
 	/**
 	 * 根据字段名称和商品ID 获取唯一值
