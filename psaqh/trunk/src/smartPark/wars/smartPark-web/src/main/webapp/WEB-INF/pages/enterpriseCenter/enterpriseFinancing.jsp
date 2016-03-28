@@ -66,6 +66,27 @@
 						}
 					}
 				});
+				$(".hhf-submit").click(function(){
+			  		var rzId=$("#financingRe").html();
+			  		var roomId=$("#roomId").val();
+			  		var rzName=$("#rzName").val();
+					var rzUrl=$("#rzUrl").val();
+					var enTypeName=$("#enTypeName").val();
+					var rzRemark=$("#rzRemark").val();
+					var rzLogo = $("#rzLogo").attr("src");
+					var productDiscriptio=editor.getData();
+					var params = ['rzId='+rzId+'','rzLogo='+rzLogo+'','roomId.roomId='+roomId+'','rzName='+rzName+'','rzRemark='+rzRemark+'','rzUrl='+rzUrl+'','enTypeName='+enTypeName+'','productDiscriptio='+productDiscriptio+''];
+					$.youi.ajaxUtils.ajax({
+						url:baseUrl+'/enterbusinessmanagerRzManager/updateEnterbusinessmanagerRz.json',
+						data:params.join('&'),
+						success:function(result){
+							if(result && result.record){
+								alert("修改成功");
+								location.reload();
+							}
+						}
+					});
+				});
 			});
 		</script>
 	</head>
@@ -73,14 +94,14 @@
 		<%@ include file="/WEB-INF/pages/enterpriseCenter/common/ec_head.jsp"%>
 		<%@ include file="/WEB-INF/pages/enterpriseCenter/common/ec_left.jsp"%>
 		<script type="text/javascript">
-			$(document).ready(function() {
-				$('.sidebar-menu-mainul2').delegate('li', 'click', function() {
-					$('.sidebar-menu-mainul2').find('li').each(function(i, dom) {
-			            $(this).removeClass('active');
-			        });
-			        $(this).addClass('active');
-			    });
-			});
+		$(document).ready(function() {
+			$('.sidebar-menu-mainul2').delegate('li', 'click', function() {
+				$('.sidebar-menu-mainul2').find('li').each(function(i, dom) {
+		            $(this).removeClass('active');
+		        });
+				$(".sidebar-menu-mainul2 li").eq(2).addClass("active");
+		    });
+		});
 		</script>
 		<div id="youi_page_header" class="youi-page-header clearfix"></div>
 		<div class="main">

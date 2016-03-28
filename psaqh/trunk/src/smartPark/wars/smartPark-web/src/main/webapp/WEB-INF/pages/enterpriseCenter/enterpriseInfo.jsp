@@ -100,7 +100,7 @@
 					$('.sidebar-menu-mainul2').find('li').each(function(i, dom) {
 			            $(this).removeClass('active');
 			        });
-			        $(this).addClass('active');
+					$(".sidebar-menu-mainul2 li").eq(1).addClass("active");
 			    });
 			});
 		</script>
