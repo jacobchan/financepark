@@ -172,7 +172,7 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 	}
 	
 	/**
-	 * 通过发布类型ID，得到该类型下的所有新闻
+	 * 通过发布类型ID，得到该类型下的所有已发布的新闻
 	 * @param issueTypeId 发布类型ID
 	 * @return
 	 */
@@ -254,5 +254,20 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 		int count = Integer.parseInt(nm.getBrowseCount()) + 1 ;//获取当前政策的浏览量，转化为int型，再+1
 		nm.setBrowseCount(String.valueOf(count));
 		return nmIssuenewsDao.save(nm);
+	}
+	
+	/**
+	 * 通过政策类型的Code得到当前政策下面的所有新闻，包括已发布和未发布
+	 * @param issueTypeCode 政策类型code
+	 * @return
+	 */
+	@EsbServiceMapping
+	public List<NmIssuenews> getNmIssuenewsByIssueTypeCode(@ServiceParam(name="issueTypeCode") String issueTypeCode) {
+		NmIssuetype type = issuetypeManager.getIssueTypeByIssueTypeCode(issueTypeCode) ; //得到政策发布类型
+		String issueTypeId = type.getIssueTypeId() ;//得到政策发布类型的ID
+		Collection<Condition> condition =  new ArrayList<Condition>();
+		condition.add(ConditionUtils.getCondition("policyType.issueTypeId", Condition.EQUALS,issueTypeId));
+		List<NmIssuenews> list = this.getNmIssuenewss(condition, null) ;
+		return list;
 	}
 }
