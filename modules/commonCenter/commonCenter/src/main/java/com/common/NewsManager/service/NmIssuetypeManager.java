@@ -81,4 +81,11 @@ public interface NmIssuetypeManager extends BaseManager{
      * @return
      */
     public List<NmIssuetype> getNewsType() ;
+    
+    /**
+     * 通过政策发布类型code得到当前政策
+     * @param issueTypeCode 政策发布类型code
+     * @return
+     */
+    public NmIssuetype getIssueTypeByIssueTypeCode(String issueTypeCode) ;
 }
