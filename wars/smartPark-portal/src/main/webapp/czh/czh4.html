@@ -224,7 +224,7 @@
 	function _parseRecords(record){
 		var html='';
 		for(var i=0;i<record.length;i++){
-			html+="<li>"+
+			html+="<li onclick='openPage(this)' id='"+record[i].applyId+"'>"+
 						"<div class='plg-photo'>"+
 							"<a href='#'><img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityImage+"&method=show' border='0' width='100%''/></a>"+
 						"</div>"+
@@ -246,6 +246,11 @@
 		var applyId=obj.id;
 		var url="../czh/czh3.html"+"?"+"applyId="+applyId; 
 		window.location.assign(url); 
+	}
+	function openPage(obj){
+		var applyId=obj.id;
+		var url="../czh/czh3.html"+"?"+"applyId="+applyId; 
+		window.open(url); 
 	}
 	</script>	
 </body>
