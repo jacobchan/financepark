@@ -310,7 +310,7 @@
 	function _parseRecords(record){
 		var html='';
 		for(var i=0;i<record.length;i++){
-			html+="<li class='clearfix' onclick='window.open('../czh/czh3.html');'>"+
+			html+="<li class='clearfix' onclick='openPage(this)' id='"+record[i].applyId+"'>"+
 						"<div class='plg-photo'>"+
 							"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityImage+"&method=show' border='0' width='100%'/>"+
 							"<em>"+record[i].applayType.typeName+"</em>"+
@@ -341,7 +341,6 @@
 	}
 	function redirectPage(obj){
 		var applyId=obj.parentNode.id;
-		alert(applyId);
 		var url="../czh/czh3.html"+"?"+"applyId="+applyId; 
 		window.location.assign(url); 
 	}
@@ -350,7 +349,11 @@
 		var url="../czh/czh7.html"+"?"+"applyId="+applyId; 
 		window.location.assign(url); 
 	}
-	
+	function openPage(obj){
+		var applyId=obj.id;
+		var url="../czh/czh3.html"+"?"+"applyId="+applyId; 
+		window.open(url); 
+	}
 	</script>
 </body>
 </html>
