@@ -239,12 +239,12 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
 		// TODO Auto-generated method stub
     	//获取当前用户参加活动的list
     	Collection<Condition> condition = new ArrayList<Condition>();
-    	condition.add(ConditionUtils.getCondition("applayType.isRecoment", Condition.EQUALS,"0"));	
+    	condition.add(ConditionUtils.getCondition("applayType.typeId", Condition.EQUALS,o.getApplayType().getTypeId()));	
     	List<ActivityApply> activityApplyList=activityApplyDao.commonQuery(condition, null);
 		return activityApplyList;
 	}
     /**
-     * 获取热门推荐活动 
+     * 获取类型为推荐的活动 
      * @param isRecoment
      * @return
      * @throws BusException
@@ -259,7 +259,7 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
 		return activityApplyList;
 	}
     /**
-     *  获取热门推荐活动 
+     *  获取强烈推荐活动 
      * @param o
      * @return
      * @throws BusException
