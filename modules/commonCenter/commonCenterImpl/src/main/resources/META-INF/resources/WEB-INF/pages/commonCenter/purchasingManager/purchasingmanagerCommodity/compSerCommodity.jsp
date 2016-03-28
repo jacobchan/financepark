@@ -7,7 +7,7 @@
 		src="page/commonCenter.purchasingManager.purchasingmanagerCommodityExtend/purchasingmanagerCommodityExtend.html?commodity.commodityId={commodityId}">
 	</youi:subpage>
 	<!--**********************************子页面**********************************-->
-	<youi:grid id="grid_purchasingmanagerCommodity" idKeys="commodityId" caption="商品信息列表"  panel="false"
+	<youi:grid id="grid_purchasingmanagerCommodity" idKeys="commodityId,purchasingmanagerMerchant.merchantId" caption="商品信息列表"  panel="false"
 				src="esb/web/purchasingmanagerCommodityManager/getPagerCompSerCommoditys.json" dataFormId="form_purchasingmanagerCommodity"
 				editSrc="esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommodity.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/purchasingmanagerCommodityManager/removePurchasingmanagerCommodity.json">
@@ -44,7 +44,7 @@
 			<youi:fieldTree simple="false" popup="true" tree="${genreTree}" property="genreId" caption="类别" onlyLeaf="true" notNull="true"/>
 			<youi:fieldSelect property="purchasingmanagerMerchant.merchantId" show="merchantName" code="merchantId" notNull="true"
 				src="esb/web/purchasingmanagerMerchantManager/getMerchantsByGenre.json" caption="所属商户"
-				parents="genreId" parentsAlias="purchasingmanagerGenre.genreId"/>
+				parents="genreId" parentsAlias="genreId"/>
 			<youi:fieldText property="commodityStock"  caption="库存"/>
 			<youi:fieldSelect property="commodityIsnotDisplayStock" convert="bool"  caption="是否显示库存" notNull="true"/>
 			<youi:fieldCalendar property="commodityUpTime"  caption="上架时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="true"/>
@@ -77,6 +77,11 @@
 	</youi:form>-->
 	
 	<!--**********************************页面函数Start********************************-->
+<%-- 	<youi:func name="form_purchasingmanagerCommodity_afterSubmit">
+		var purForm = $elem('form_purchasingmanagerCommodity',pageId);
+		purForm.form('close');
+		$elem('grid_purchasingmanagerCommodity',pageId).grid('pReload');
+	</youi:func> --%>
 	<youi:func name="func_grid_commodity_extend">
 		var selectRecord = $elem('grid_purchasingmanagerCommodity',pageId).grid('getSelectedRecord');
 		var commodityId = selectRecord['commodityId'];
