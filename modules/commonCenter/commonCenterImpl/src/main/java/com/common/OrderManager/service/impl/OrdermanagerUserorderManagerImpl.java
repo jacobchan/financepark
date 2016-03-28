@@ -507,23 +507,13 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     @EsbServiceMapping					
 	 public List<OrdermanagerUserorder> getOrderlistLikeUserorderProject(
 			 @ServiceParam(name="userId",pubProperty="userId") String userId,
-			 @ServiceParam(name="userorderProject") String userorderProject) 
-
-throws BusException {		
-		MemberInformation member=memberInformationManager.getMemberInformation
-
-(userId);
+			 @ServiceParam(name="userorderProject") String userorderProject) throws BusException {		
+		MemberInformation member=memberInformationManager.getMemberInformation(userId);
 		String memberName=member.getMemberName();
 		Collection<Condition> condition = new ArrayList<Condition>();
-		condition.add(ConditionUtils.getCondition("userorderBuyUser", 
-
-Condition.EQUALS, memberName));	
-		condition.add(ConditionUtils.getCondition("userorderProject", 
-
-Condition.LIKE, userorderProject));
-		List<OrdermanagerUserorder> list =ordermanagerUserorderDao.commonQuery
-
-(condition, null);
+		condition.add(ConditionUtils.getCondition("userorderBuyUser", Condition.EQUALS, memberName));	
+		condition.add(ConditionUtils.getCondition("userorderProject", Condition.LIKE, userorderProject));
+		List<OrdermanagerUserorder> list =ordermanagerUserorderDao.commonQuery(condition, null);
 		return list;
     }
 
