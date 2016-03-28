@@ -12,6 +12,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 
@@ -171,10 +173,19 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 			Collection<Condition> conditions, Collection<Order> orders)
 			throws BusException;
    	/**
-   	 * 获取当前登录用户投诉列表
+   	 * 获取当前登录用户订单列表
    	 * @param o
    	 * @return
    	 * @throws BusException
    	 */
    	public List<OrdermanagerUserorder> getOrderListByLoginUser(OrdermanagerUserorder o) throws BusException;
+    
+   	/**
+   	 * 通过订单号获取当前用户的订单记录  模糊查询
+   	 * @param userId
+   	 * @param userorderProject
+   	 * @return
+   	 * @throws BusException
+   	 */
+   	public List<OrdermanagerUserorder> getOrderlistLikeUserorderProject(String userId, String userorderProject) throws BusException;
 }
