@@ -35,7 +35,7 @@
 					                                            '<td colspan="2" height="40" valign="middle" align="left"><a class="tit" href="'+records[i].mediaTilurl+'" target="_blank">'+records[i].mediaTitle+'</a></td>'+
 					                                        '</tr>'+
 					                                        '<tr>'+
-					                                            '<td height="40" valign="middle" align="left"><a href="javascript:void(0);"><span>编辑</span></a>丨<a href="javascript:void(0);">删除</a></td>'+
+					                                            '<td height="40" valign="middle" align="left"><a href="javascript:void(0);"><span>编辑</span></a>丨<a href=\'javascript:removeMedia("'+records[i].mediaId+'");\'>删除</a></td>'+
 					                                            '<td height="40" valign="middle" align="right"><span class="color_hui">'+records[i].createTime+'</span></td>'+
 					                                        '</tr>'+
 					                                    '</table>'+
@@ -68,6 +68,23 @@
 					});
 				});
 			});
+			//删除专利
+			function removeMedia(obj){
+			 	$.youi.ajaxUtils.ajax({
+					url:baseUrl+'/informationMediaManager/removeInformationMedia.json',
+					data:'mediaId='+obj,
+					success:function(result){
+						alert("删除成功");
+						location.reload();
+					}
+				});
+			}
+			//修改地址
+			function updateMedia(obj1, obj2, obj3){
+				$("#knowledgeRe").html(obj1);
+		  		$("#knowledgeTitle").val(obj2);
+		  		$("#knowledgeContent").val(obj3);
+			}
 		</script>
 	</head>
 	<body class="page-header-fixed" style=" background-image:none">
