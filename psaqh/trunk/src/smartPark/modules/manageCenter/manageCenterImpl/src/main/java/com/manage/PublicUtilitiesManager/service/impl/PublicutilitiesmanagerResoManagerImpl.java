@@ -458,9 +458,9 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 		@SuppressWarnings("unchecked")
 		List<PurchasingmanagerCommodity> pcList=(List<PurchasingmanagerCommodity>) pagerRecords.getRecords();
 
-		for(PurchasingmanagerCommodity pc:pcList){
-			extentionAtrManager.setMeetingRoomExtendValue(pc);
-		}
+//		for(PurchasingmanagerCommodity pc:pcList){
+//			extentionAtrManager.setMeetingRoomExtendValue(pc);
+//		}
 
 
 
