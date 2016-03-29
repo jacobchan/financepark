@@ -14,7 +14,7 @@
 				editSrc="esb/web/purchasingmanagerMerchantManager/getPurchasingmanagerMerchant.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/purchasingmanagerMerchantManager/removePurchasingmanagerMerchant.json">
 		<youi:fieldLayout labelWidths="120,120">
-			<youi:fieldTree simple="false" popup="true" tree="${genreTree}" property="merchantType.genreId" caption="商户类型" onlyLeaf="true"/>
+			<youi:fieldTree simple="false" popup="true" tree="${genreTree}" property="merchantType.genreId" caption="商户类型" />
 			<youi:fieldText property="merchantName"  caption="商户名称"/>
 			<youi:fieldText property="merchantEnterpriseName"  caption="企业名称"/>
 		</youi:fieldLayout>
