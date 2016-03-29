@@ -9,7 +9,7 @@
 	<!--**********************************子页面**********************************-->
 	<youi:grid id="grid_purchasingmanagerCommodity" idKeys="commodityId" caption="商品信息列表"  panel="false"
 				src="esb/web/purchasingmanagerPublicManager/getPagerPurchasingmanagerCommoditys.json" dataFormId="form_purchasingmanagerCommodity"
-				editSrc="esb/web/purchasingmanagerPublicManager/getPurchasingmanagerCommodity.json" edit="NOT" remove="NOT" showCheckbox="true"
+				editSrc="esb/web/purchasingmanagerPublicManager/getPurchasingmanagerCommodityLed.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/purchasingmanagerPublicManager/removePurchasingmanagerCommodity.json">
 		<youi:fieldLayout labelWidths="120,120">
 			<youi:fieldHidden property="genreCode"  caption="广告位" defaultValue="0303"/>
@@ -38,13 +38,16 @@
 	
 	<!-- form-商品信息编辑 -->
 	<youi:form dialog="true" caption="商品信息" id="form_purchasingmanagerCommodity" 
-		action="esb/web/purchasingmanagerPublicManager/savePurchasingmanagerCommodity.json">
+		action="esb/web/purchasingmanagerPublicManager/saveCommodityAndPropertyForLed.json">
 		<youi:fieldLayout prefix="record" labelWidths="120,120">
 		    <youi:fieldHidden property="genreCode"  caption="广告" defaultValue="0303"/>
 			<youi:fieldText property="commodityTitle"  caption="标题" notNull="true"/>
-			<youi:fieldText property="commodityPrice"  caption="标价" notNull="true"/>
-			 <youi:fieldSelect property="purchasingmanagerGenre.genreId" caption="商品类别"  src="esb/web/purchasingmanagerPublicManager/getRecordsByGenreCode.json" parents="genreCode" parentsAlias="genreCode" notNull="true" code="genreId" show="genreName"/>
-			<youi:fieldSelect property="purchasingmanagerMerchant.merchantId" caption="所属商户" src="esb/web/purchasingmanagerMerchantManager/getMerchantsByGenre.json" parents="purchasingmanagerGenre.genreId" parentsAlias="purchasingmanagerGenre.genreId" notNull="true" code="merchantId" show="merchantName"/>
+			<youi:fieldText property="commodityPrice"  caption="标价" notNull="true"/>		
+			<youi:fieldText property="billboard.size" caption="尺寸" notNull="true"/>
+			<youi:fieldText property="billboard.unit"  caption="单位" notNull="true"/>
+			<youi:fieldText property="billboard.loopType"  caption="轮播方式" notNull="true"/>			
+			<youi:fieldSelect property="genreId" caption="商品类别"  src="esb/web/purchasingmanagerPublicManager/getRecordsByGenreCode.json" parents="genreCode" parentsAlias="genreCode" notNull="true" code="genreId" show="genreName"/>
+			<youi:fieldSelect property="purchasingmanagerMerchant.merchantId" caption="所属商户" src="esb/web/purchasingmanagerMerchantManager/getMerchantsByGenre.json" parents="genreId" parentsAlias="genreId" notNull="true" code="merchantId" show="merchantName"/>
 			<youi:fieldSwfupload property="commodityImage" caption="图像" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" />
 			<youi:fieldSwfupload property="commodityCoverImage"  caption="封面图片" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" fileUploadLimit="1" fileQueueLimit="1"/>
 			<youi:fieldArea property="commodityDescribe"  caption="描述" column="2" notNull="true"/>
