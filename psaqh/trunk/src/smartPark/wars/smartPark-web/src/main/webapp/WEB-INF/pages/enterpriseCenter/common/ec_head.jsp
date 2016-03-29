@@ -11,8 +11,8 @@
 	            </form>
 	        </div>
 	        <div id="user_info" class="top_name">
-	            <a href="">登录</a>
-				<a href="../login.html">注册</a>
+	            <a>${user.loginName}</a>
+				<a href="<%=request.getContextPath()%>/member/memberCenter/logout.html">退出</a>
 	        </div>
 	    </div>  
 	</div>
