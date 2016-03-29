@@ -30,7 +30,7 @@
 					url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
 					success:function(result){
 						if(result&&result.record){
-							$("#financingRe").html(result.record.companyId);
+							$("#knowledgeRe").html(result.record.companyId);
 							//根据企业id获取融资信息
 					    	$.ajax({
 					    		url : baseUrl+"/informationKnowledgeManager/findInformationKnowledge.json",
@@ -110,7 +110,7 @@
 			            <div class="xiangxi_baodao">
 			                <div class="qiye_fullname ">
 			                    <div class="qiye_nametex">专利名称</div>
-			                    <div class="name_input"><input id="" name="" type="text"></div>
+			                    <div class="name_input"><input id="knowledgeTitle" name="knowledgeTitle" type="text"></div>
 			                </div>
 			        	<div class="qiye_jianjie ">
 			                <div class="qiye_word">专利描述</div>
