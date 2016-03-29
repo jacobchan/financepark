@@ -36,7 +36,7 @@
             	<div class="login_input mt15">
                 	<label class="f16">用&nbsp;户&nbsp;名</label>
                     <input type="text" placeholder="请输入手机号码" id="mobile">
-                    <a href="" class="c3">发送验证码</a>
+                    <a id="sendMobileCaptcha" style="cursor: pointer;" class="c3">发送验证码</a>
                 </div>
                 <div class="login_input mt10">
                 	<label class="f16">验&nbsp;证&nbsp;码</label>
@@ -76,6 +76,20 @@ $(function(){
 		var index=$(this).index();
 		$(this).addClass("active").siblings().removeClass("active");
 		$(".login_form").eq(index).show().siblings(".login_form").hide();
+	});
+	
+	$('#sendMobileCaptcha').click(function(){
+		$('#sendMobileCaptcha').attr('disabled',true);
+		var memberPhoneNumber = $("#mobile").val() ;
+		$.youi.ajaxUtils.ajax({
+			url:baseUrl + "memberInformationManager/sendMobileCaptcha.json",
+			data:{mobile:memberPhoneNumber},
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(result){
+				alert('发送成功');
+			}
+		});
 	});
 });
 </script>
