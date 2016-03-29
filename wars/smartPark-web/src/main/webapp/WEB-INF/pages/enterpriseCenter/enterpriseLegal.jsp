@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>企業融资</title>
+		<title>企业法人</title>
 		<%@ include file="/WEB-INF/pages/common/enterpriseScriptAddCss.jsp"%>
 		<script type="text/javascript">
 			// 中文字符判断
