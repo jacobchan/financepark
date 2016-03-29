@@ -50,7 +50,9 @@ public class ExtentionAtrManagerImpl implements ExtentionAtrManager {
 	 * @return
 	 */
 	private String getExtendValue(String fieldName,String commdityId){
-		return purchasingmanagerCommodityExtendManager.getPurchasingmanagerCommodityExtends(fieldName, commdityId).getCommodityExtendContent();
+		String extendValue=purchasingmanagerCommodityExtendManager.getPurchasingmanagerCommodityExtends(fieldName, commdityId).getCommodityExtendContent();
+		
+		return extendValue !=null?extendValue:"";
 	}
 
 }
