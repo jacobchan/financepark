@@ -41,8 +41,8 @@
 		<youi:fieldLayout prefix="record" labelWidths="120,120">
 			<youi:fieldText property="commodityTitle"  caption="标题" notNull="true"/>
 			<youi:fieldText property="commodityPrice"  caption="标价" notNull="true"/>
-			<youi:fieldTree simple="false" popup="true" tree="${genreTree}" property="purchasingmanagerGenre.genreId" caption="商品类别" onlyLeaf="true" notNull="true"/>
-			<youi:fieldSelect property="purchasingmanagerMerchant.merchantId" show="merchantName" code="merchantId" notNull="true"
+			<youi:fieldTree simple="false" popup="true" tree="${genreTree}" property="genreId" caption="商品类别" notNull="true"/>
+			<youi:fieldSelect property="purchasingmanagerMerchant.merchantId" show="merchantName" code="merchantId"
 				src="esb/web/purchasingmanagerMerchantManager/getMerchantsByGenre.json" caption="所属商户"
 				parents="purchasingmanagerGenre.genreId" parentsAlias="purchasingmanagerGenre.genreId"/>
 			<youi:fieldText property="commodityStock"  caption="库存"/>

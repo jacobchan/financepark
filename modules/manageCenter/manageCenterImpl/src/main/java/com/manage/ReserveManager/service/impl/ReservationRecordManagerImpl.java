@@ -176,7 +176,7 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 	}
 	
     /**
-     * 根据众创空间下的商品类别下所有的商品 genreCode=04:众创空间
+     * 根据隶属于工位的所有的商品 genreCode=040101:工位
      */
 	@EsbServiceMapping
 	public List<PurchasingmanagerCommodity> getCommodityByGenreType(@ServiceParam(name="genreCode") String genreCode) throws BusException{
@@ -184,34 +184,27 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 		Collection<Condition> conditions = new ArrayList<Condition>();
 		Collection<Condition> condition = new ArrayList<Condition>();
 		
-		if(genreCode.equals("04")){//04:众创空间，查询商品表基础信息
-			conditions.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS, "04"));
-			// 查询属于众创空间的商品：genreCode=04
+		if(genreCode.equals("040101")){//04:众创空间，查询商品表基础信息
+			conditions.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS,genreCode));
 			List<PurchasingmanagerGenre> purchasingmanagerGenreList=purchasingmanagerGenreManager.getPurchasingmanagerGenres(conditions, null);
 			String genreId="";
 			if(purchasingmanagerGenreList.size()>0){
 				genreId = purchasingmanagerGenreList.get(0).getGenreId();
 			}
 			if(StringUtils.isNotEmpty(genreId)){
-				// 查询众创空间下包含的商品类别
-				condition.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId",Condition.EQUALS,genreId));
-				List<PurchasingmanagerGenre> pgList = purchasingmanagerGenreManager.getPurchasingmanagerGenres(condition, null);
-				for(PurchasingmanagerGenre pg:pgList){
-					String grId=pg.getGenreId();
-					Collection<Condition> conditionC = new ArrayList<Condition>();
-					conditionC.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId",Condition.EQUALS,grId));
-					List<PurchasingmanagerCommodity> pcList = purchasingmanagerCommodityManager.getPurchasingmanagerCommoditys(conditionC, null);
-					for(PurchasingmanagerCommodity pc:pcList){
-						recordList.add(pc);
-					}
+				// 查询隶属于创立方的商品
+				condition.add(ConditionUtils.getCondition("genreId",Condition.EQUALS,genreId));
+				List<PurchasingmanagerCommodity> pcList = purchasingmanagerCommodityManager.getPurchasingmanagerCommoditys(condition, null);
+				for(PurchasingmanagerCommodity pc:pcList){
+					recordList.add(pc);
 				}
 			}
 		}
 		return recordList;
 	}
-    
+	
     /**
-     * 根据众创空间下的商品类别 genreCode=04:众创空间
+     * 根据隶属于创立方的所有的商品 genreCode=0401:创立方
      */
 	@EsbServiceMapping
 	public List<Record> getRecordsByRecordType(@ServiceParam(name="recordType") String recordType) throws BusException{
@@ -219,22 +212,21 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 		Collection<Condition> conditions = new ArrayList<Condition>();
 		Collection<Condition> condition = new ArrayList<Condition>();
 		
-		if(recordType.equals("04")){//04:众创空间，查询商品表基础信息
-			conditions.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS, "04"));
-			// 查询属于众创空间的商品：genreCode=04
+		if(recordType.equals("0401")){//0401:创立方，查询商品表基础信息
+			conditions.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS, recordType));
 			List<PurchasingmanagerGenre> purchasingmanagerGenreList=purchasingmanagerGenreManager.getPurchasingmanagerGenres(conditions, null);
 			String genreId="";
 			if(purchasingmanagerGenreList.size()>0){
 				genreId = purchasingmanagerGenreList.get(0).getGenreId();
 			}
 			if(StringUtils.isNotEmpty(genreId)){
-				// 查询众创空间下包含的商品类别
-				condition.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId",Condition.EQUALS,genreId));
-				List<PurchasingmanagerGenre> pgList = purchasingmanagerGenreManager.getPurchasingmanagerGenres(condition, null);
-				for(PurchasingmanagerGenre pg:pgList){
+				// 查询隶属于创立方的商品
+				condition.add(ConditionUtils.getCondition("genreId",Condition.EQUALS,genreId));
+				List<PurchasingmanagerCommodity> pcList = purchasingmanagerCommodityManager.getPurchasingmanagerCommoditys(condition, null);
+				for(PurchasingmanagerCommodity pg:pcList){
 					Record record = new Record();
-					record.put("itemValue", pg.getGenreId());
-					record.put("itemName", pg.getGenreName());
+					record.put("itemValue", pg.getCommodityId());
+					record.put("itemName", pg.getCommodityTitle());
 					recordList.add(record);
 				}
 			}

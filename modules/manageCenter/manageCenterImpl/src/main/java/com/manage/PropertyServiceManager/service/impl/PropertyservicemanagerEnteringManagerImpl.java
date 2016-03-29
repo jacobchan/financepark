@@ -231,7 +231,7 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
     	Collection<Condition> conditions =new ArrayList<Condition>();
     	Collection<Order> orders =new ArrayList<Order>();
     	String now=DateUtils.getToday();
-    	pager.setPageSize(8);
+    	pager.setPageSize(12);
     	orders.add(ConditionUtils.getOrder("enteringDate", true));
     	conditions.add(ConditionUtils.getCondition("enteringDate", Condition.RIGHT,now));
     	PagerRecords pagerRecords = propertyservicemanagerEnteringDao.findByPager(pager, conditions, orders);
