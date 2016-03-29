@@ -140,7 +140,7 @@ public class PurchasingmanagerCommodityExtendManagerImpl extends BaseManagerImpl
 			PurchasingmanagerCommodityExtend pce = new PurchasingmanagerCommodityExtend();
 			//根据商品ID和商品类属性字段名获取商品扩展属性值列表
 			List<PurchasingmanagerCommodityExtend> pceList = purchasingmanagerCommodityExtendDao.getList(
-					new String[]{"commodity.commodityId","purchasingmanagerGenreProperty.genrePropertyFieldName"}, 
+					new String[]{"commodityId","purchasingmanagerGenreProperty.genrePropertyFieldName"}, 
 					new String[]{commodityId,pgp.getGenrePropertyFieldName()});
 			if(pceList.size()>0){
 				pce = pceList.get(0);
@@ -174,7 +174,7 @@ public class PurchasingmanagerCommodityExtendManagerImpl extends BaseManagerImpl
 				purchasingmanagerCommodityExtendDao.save(purCE);
 			}else{
 				List<PurchasingmanagerCommodityExtend> purExList = purchasingmanagerCommodityExtendDao.getList(
-						new String[]{"commodity.commodityId","purchasingmanagerGenreProperty.genrePropertyId"}, 
+						new String[]{"commodityId","purchasingmanagerGenreProperty.genrePropertyId"}, 
 						new String[]{commodityId,pce.getPurchasingmanagerGenreProperty().getGenrePropertyId()});
 				
 				if(purExList.size()>0){//修改
@@ -184,8 +184,6 @@ public class PurchasingmanagerCommodityExtendManagerImpl extends BaseManagerImpl
 					purCE.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 					purchasingmanagerCommodityExtendDao.save(purCE);
 				}else{//新增
-					PurchasingmanagerCommodity pc = new PurchasingmanagerCommodity();
-					pc.setCommodityId(commodityId);
 					pce.setCommodityId(commodityId);
 					pce.setCreateUser(user.getUserId());
 					pce.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
