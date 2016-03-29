@@ -9,7 +9,7 @@
 	<div style="background-color:#545454">
 		<div class="w1200 tr head-top clearfix">
 			<a>${user.loginName}</a>
-			<a href="<%=request.getContextPath()%>/member/memberCenter/logout.html">退出</a>
+			<a href="http://localhost:9088/index.html">退出</a>
 		</div>
 	</div>
 	<div class="header-cen clearfix">
