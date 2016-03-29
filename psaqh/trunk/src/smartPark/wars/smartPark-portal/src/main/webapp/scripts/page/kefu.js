@@ -13,8 +13,11 @@ $(function(){
 	$("body").append(htmls);
 	$(document).on("click",".commonRight .comRigli-top",function(){
 		$('body,html').animate({scrollTop:0},800);
-	})
-    $(window).scroll(function() {    
+	});
+    if($("body").height()<672){
+        $(".commonRight").css({"position":"absolute","bottom":"auto","top":"440px"});
+    }
+    $(window).scroll(function() {   
         if($(window).scrollTop()>100){
             $(".comRigli-top").fadeIn();
         }else{
