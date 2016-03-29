@@ -185,4 +185,42 @@ public interface PurchasingmanagerCommodityManager extends BaseManager{
 	public PagerRecords getPagerAdsenseCommoditys(Pager pager,
 			Collection<Condition> conditions, Collection<Order> orders)
 			throws BusException;
+	/**
+	 * 获取所有的创立方列表
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	public PagerRecords getPagerCcuCommoditys(Pager pager,
+			Collection<Condition> conditions, Collection<Order> orders)
+			throws BusException;
+	/**
+	 * 获取所有的工位列表
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	public PagerRecords getPagerStationCommoditys(Pager pager,
+			Collection<Condition> conditions, Collection<Order> orders)
+			throws BusException;
+	/**
+	 * 保存创立方
+	 * @param o
+	 * @return
+	 * @throws BusException
+	 */
+	public PurchasingmanagerCommodity saveCcuCommodity(PurchasingmanagerCommodity o)
+			throws BusException;
+	/**
+	 * 保存工位
+	 * @param o
+	 * @return
+	 * @throws BusException
+	 */
+	public PurchasingmanagerCommodity saveStationCommodity(PurchasingmanagerCommodity o)
+			throws BusException;
 }
