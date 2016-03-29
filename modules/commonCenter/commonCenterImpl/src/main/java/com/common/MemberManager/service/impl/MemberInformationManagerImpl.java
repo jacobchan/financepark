@@ -3,19 +3,15 @@
  */
 package com.common.MemberManager.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Collection;
 
-//import javax.xml.crypto.Data;
-
-
-
-
+import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.dataobj.tree.TreeNode;
 import com.gsoft.framework.core.exception.BusException;
@@ -39,8 +35,6 @@ import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.framework.core.web.menu.IMenu;
 import com.gsoft.utils.HttpSenderMsg;
-//import com.gsoft.framework.core.web.menu.IMenu;
-//import com.sun.star.setup.OSType;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.entity.MemberRole;
 import com.common.MemberManager.entity.MemberUserInfo;
@@ -89,7 +83,7 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 			@OrderCollection Collection<Order> orders)  throws BusException{
 		PagerRecords pagerRecords = memberInformationDao.findByPager(pager, conditions, orders);
 		pagerRecords.getTotalCount();
-		Pager pager1=pagerRecords.getPager();
+//		Pager pager1=pagerRecords.getPager();
 		return pagerRecords;
 	}
     /**
@@ -149,6 +143,21 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
     public boolean exsitMemberInformation(String propertyName,Object value) throws BusException{
 		return memberInformationDao.exists(propertyName,value);
 	}
+    //发送手机验证码
+    @Override
+    @EsbServiceMapping
+   	public void sendMobileCaptcha(@ServiceParam(name="mobile") String mobile)throws BusException {
+    	Random random = new Random(new Date().getTime());
+		Long code = Math.abs(random.nextLong() % 999999);
+		String captcha = org.apache.commons.lang.StringUtils.leftPad(code.toString(), 6, '0');
+    	try {
+			HttpSenderMsg.sendMsg(mobile, "注册验证码为"+captcha+"【智慧园区】");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
     /**
 	 * 用户注册
 	 * @param passwd 密码
