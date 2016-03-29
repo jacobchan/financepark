@@ -66,4 +66,52 @@ public class EnterpriseInfoController {
 			HttpServletResponse response){
 		return new ModelAndView("enterpriseCenter/enterpriseMedia");
 	}
+	
+	/**
+	 * 企业通讯录
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/book.html")
+	public ModelAndView enterpriseBook(HttpServletRequest request,
+			HttpServletResponse response){
+		return new ModelAndView("enterpriseCenter/enterpriseBook");
+	}
+	
+	/**
+	 * 企业码
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/code.html")
+	public ModelAndView enterpriseCode(HttpServletRequest request,
+			HttpServletResponse response){
+		return new ModelAndView("enterpriseCenter/enterpriseCode");
+	}
+	
+	/**
+	 * 企业订单
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/order.html")
+	public ModelAndView enterpriseOrder(HttpServletRequest request,
+			HttpServletResponse response){
+		return new ModelAndView("enterpriseCenter/enterpriseOrder");
+	}
+	
+	/**
+	 * 企业评论
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/reply.html")
+	public ModelAndView enterpriseReply(HttpServletRequest request,
+			HttpServletResponse response){
+		return new ModelAndView("enterpriseCenter/enterpriseReply");
+	}
 }
