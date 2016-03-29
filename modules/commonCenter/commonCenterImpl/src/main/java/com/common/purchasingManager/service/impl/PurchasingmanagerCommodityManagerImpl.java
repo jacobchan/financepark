@@ -102,6 +102,28 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
 		PagerRecords pagerRecords = purchasingmanagerCommodityDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
+	//获取所有的创立方列表
+	@Override
+	@EsbServiceMapping
+	public PagerRecords getPagerCcuCommoditys(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PurchasingmanagerCommodity.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)  throws BusException{
+		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","0401");
+		conditions.add(ConditionUtils.getCondition("genreId", Condition.EQUALS, pg.getGenreId()));
+		PagerRecords pagerRecords = purchasingmanagerCommodityDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
+	//获取所有的工位列表
+	@Override
+	@EsbServiceMapping
+	public PagerRecords getPagerStationCommoditys(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PurchasingmanagerCommodity.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)  throws BusException{
+		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","040101");
+		conditions.add(ConditionUtils.getCondition("genreId", Condition.EQUALS, pg.getGenreId()));
+		PagerRecords pagerRecords = purchasingmanagerCommodityDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
     /**
      * 保存对象
      */
@@ -221,6 +243,70 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
     		return purchasingmanagerCommodityDao.save(pc);
     	}else{//新增
     		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","0303");
+    		o.setGenreId(pg.getGenreId());
+    		o.setCreateUser(o.getUpdateUser());
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return purchasingmanagerCommodityDao.save(o);
+    	}
+    }
+	/**
+     * 保存创立方
+     */
+	@Override
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+    public PurchasingmanagerCommodity saveCcuCommodity(PurchasingmanagerCommodity o) throws BusException{
+    	String commodityId = o.getCommodityId();
+		boolean isUpdate = StringUtils.isNotEmpty(commodityId);
+    	if(isUpdate){//修改
+    		PurchasingmanagerCommodity pc = purchasingmanagerCommodityDao.get(commodityId); 
+    		pc.setCommodityTitle(o.getCommodityTitle());
+    		pc.setCommodityPrice(o.getCommodityPrice());
+    		pc.setPurchasingmanagerMerchant(o.getPurchasingmanagerMerchant());
+    		pc.setCommodityStock(o.getCommodityStock());
+    		pc.setCommodityIsnotDisplayStock(o.getCommodityIsnotDisplayStock());
+    		pc.setCommodityUpTime(o.getCommodityUpTime());
+    		pc.setCommodityDownTime(o.getCommodityDownTime());
+    		pc.setCommodityImage(o.getCommodityImage());
+    		pc.setCommodityCoverImage(o.getCommodityCoverImage());
+    		pc.setCommodityDescribe(o.getCommodityDescribe());
+    		pc.setUpdateUser(o.getUpdateUser());
+    		pc.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return purchasingmanagerCommodityDao.save(pc);
+    	}else{//新增
+    		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","0401");
+    		o.setGenreId(pg.getGenreId());
+    		o.setCreateUser(o.getUpdateUser());
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return purchasingmanagerCommodityDao.save(o);
+    	}
+    }
+	/**
+     * 保存工位
+     */
+	@Override
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+    public PurchasingmanagerCommodity saveStationCommodity(PurchasingmanagerCommodity o) throws BusException{
+    	String commodityId = o.getCommodityId();
+		boolean isUpdate = StringUtils.isNotEmpty(commodityId);
+    	if(isUpdate){//修改
+    		PurchasingmanagerCommodity pc = purchasingmanagerCommodityDao.get(commodityId); 
+    		pc.setCommodityTitle(o.getCommodityTitle());
+    		pc.setCommodityPrice(o.getCommodityPrice());
+    		pc.setPurchasingmanagerMerchant(o.getPurchasingmanagerMerchant());
+    		pc.setCommodityStock(o.getCommodityStock());
+    		pc.setCommodityIsnotDisplayStock(o.getCommodityIsnotDisplayStock());
+    		pc.setCommodityUpTime(o.getCommodityUpTime());
+    		pc.setCommodityDownTime(o.getCommodityDownTime());
+    		pc.setCommodityImage(o.getCommodityImage());
+    		pc.setCommodityCoverImage(o.getCommodityCoverImage());
+    		pc.setCommodityDescribe(o.getCommodityDescribe());
+    		pc.setUpdateUser(o.getUpdateUser());
+    		pc.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return purchasingmanagerCommodityDao.save(pc);
+    	}else{//新增
+    		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","040101");
     		o.setGenreId(pg.getGenreId());
     		o.setCreateUser(o.getUpdateUser());
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
