@@ -66,22 +66,30 @@
 						}
 					}
 				});
+				$(".hhf-submit").click(function(){
+			  		var knowledgeRe=$("#knowledgeRe").html();
+			  		var knowledgeTitle=$("#knowledgeTitle").val();
+			  		var knowledgeContent=$("#knowledgeContent").val();
+					var params = ['knowledgeRe='+knowledgeRe+'','knowledgeTitle='+knowledgeTitle+'','knowledgeContent='+knowledgeContent+''];
+					$.youi.ajaxUtils.ajax({
+						url:baseUrl+'/informationKnowledgeManager/saveInformationKnowledge.json',
+						data:params.join('&'),
+						success:function(result){
+							if(result && result.record){
+								alert("保存成功");
+								$("#knowledgeTitle").val();
+						  		$("#knowledgeContent").val();
+								location.reload();
+							}
+						}
+					});
+				});
 			});
 		</script>
 	</head>
 	<body class="page-header-fixed" style=" background-image:none">
 		<%@ include file="/WEB-INF/pages/enterpriseCenter/common/ec_head.jsp"%>
 		<%@ include file="/WEB-INF/pages/enterpriseCenter/common/ec_left.jsp"%>
-		<script type="text/javascript">
-		$(document).ready(function() {
-			$('.sidebar-menu-mainul2').delegate('li', 'click', function() {
-				$('.sidebar-menu-mainul2').find('li').each(function(i, dom) {
-		            $(this).removeClass('active');
-		        });
-				$(".sidebar-menu-mainul2 li").eq(3).addClass("active");
-		    });
-		});
-		</script>
 		<div id="youi_page_header" class="youi-page-header clearfix"></div>
 		<div class="main">
     		<div id="youi_page_left" class="fl clearfix"></div>
@@ -89,6 +97,7 @@
     			<div class="main-wrapper-right">
         			<div class="main-title"><span>媒体报道</span></div>
 			        <div class="qiye_fm">
+			        	<span class="" id="knowledgeRe" style="display:none;"></span>
 			            <div class="qiye_text"><span>专利图片</span></div>
 			            <div>
 			                <div class="img_upload"><img src="../styles/images/qiye/img_none.png"><br><p>图片未上传</p></div>
@@ -101,7 +110,7 @@
 			            <div class="xiangxi_baodao">
 			                <div class="qiye_fullname ">
 			                    <div class="qiye_nametex">专利名称</div>
-			                    <div class="name_input"><input type="text"></div>
+			                    <div class="name_input"><input id="" name="" type="text"></div>
 			                </div>
 			        	<div class="qiye_jianjie ">
 			                <div class="qiye_word">专利描述</div>
