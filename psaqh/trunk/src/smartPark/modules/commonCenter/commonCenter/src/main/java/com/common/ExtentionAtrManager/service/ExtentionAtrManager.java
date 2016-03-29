@@ -17,4 +17,10 @@ public interface ExtentionAtrManager extends BaseManager {
 	 */
 	public void setAgencyBookExtendValue(PurchasingmanagerCommodity commdity)
 			throws BusException;
+	
+	/**
+	 * 根据商品获取广告位的扩展属性的内容
+	 * @param commdity 商品
+	 */
+	public void setMeetingLedExtendValue(PurchasingmanagerCommodity commdity)throws BusException;
 }
