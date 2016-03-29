@@ -42,7 +42,7 @@
 					                                '</div>'+
 					                            '</div>'+
 					                        '</li>';
-					    					$("#mediaDiv").html(mediaDiv);
+					    					$("#mediaDiv").append(mediaDiv);
 					    				}
 					    			}
 					    		}
