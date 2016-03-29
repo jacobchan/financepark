@@ -275,6 +275,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 			MemberInformation mem = memberInformationManager.getMemberInformation(userId);
 			order.setUserorderBuyUser(mem.getMemberName());
 		}
+		order.setMemberId(userId);
    		order.setUserorderProject(pg.getGenreName());
 		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		order.setCreateUser(userId);
@@ -324,6 +325,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 			MemberInformation mem = memberInformationManager.getMemberInformation(userId);
 			order.setUserorderBuyUser(mem.getMemberName());
 		}
+		order.setMemberId(userId);
    		order.setUserorderProject(pg.getGenreName());
 		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		order.setCreateUser(userId);
@@ -361,6 +363,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 			MemberInformation mem = memberInformationManager.getMemberInformation(userId);
 			order.setUserorderBuyUser(mem.getMemberName());
 		}
+		order.setMemberId(userId);
    		order.setUserorderProject(pg.getGenreName());
 		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		order.setCreateUser(userId);
@@ -398,6 +401,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 			MemberInformation mem = memberInformationManager.getMemberInformation(userId);
 			order.setUserorderBuyUser(mem.getMemberName());
 		}
+   		order.setMemberId(userId);
    		order.setUserorderProject(pg.getGenreName());
    		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
    		order.setCreateUser(userId);
@@ -435,6 +439,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 			MemberInformation mem = memberInformationManager.getMemberInformation(userId);
 			order.setUserorderBuyUser(mem.getMemberName());
 		}
+   		order.setMemberId(userId);
    		order.setUserorderProject(pg.getGenreName());
    		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
    		order.setCreateUser(userId);
@@ -472,6 +477,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 			MemberInformation mem = memberInformationManager.getMemberInformation(userId);
 			order.setUserorderBuyUser(mem.getMemberName());
 		}
+   		order.setMemberId(userId);
    		order.setUserorderProject(pg.getGenreName());
    		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
    		order.setCreateUser(userId);
