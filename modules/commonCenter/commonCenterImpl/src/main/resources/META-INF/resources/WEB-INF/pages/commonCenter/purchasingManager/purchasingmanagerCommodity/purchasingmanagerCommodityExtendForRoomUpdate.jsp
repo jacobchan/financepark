@@ -35,17 +35,23 @@
 			data:params,
 			success:function(result){
 				var record = result.record;
+				alert(record.meetingRoom.gm);
 				$elem('record_sFpro_commodityTitle',pageId).fieldValue(record.commodityTitle);
 				$elem('record_sFpro_commodityPrice',pageId).fieldValue(record.commodityPrice);
 				$elem('record_sFpro_genreId',pageId).fieldValue(record.genreId);
 				$elem('record_sFpro_purchasingmanagerMerchant_merchantId',pageId).fieldValue(record.purchasingmanagerMerchant.merchantId);
-				$elem('record_sFpro_commodityImage',pageId).fieldValue(record.commodityImage);
-				$elem('record_sFpro_commodityCoverImage',pageId).fieldValue(record.commodityCoverImage);
+				if(record.commodityImage != null){
+				   $elem('record_sFpro_commodityImage',pageId).fieldValue(record.commodityImage);
+				}
+				if(record.commodityImage != null){
+				   $elem('record_sFpro_commodityCoverImage',pageId).fieldValue(record.commodityCoverImage);
+				}
 				$elem('record_sFpro_commodityDescribe',pageId).fieldValue(record.commodityDescribe);
-				$elem('record_sFpro_meetingRoom_adr',pageId).fieldValue(record.meetingRoom.adr);
 				$elem('record_sFpro_meetingRoom_gm',pageId).fieldValue(record.meetingRoom.gm);
 				$elem('record_sFpro_meetingRoom_lx',pageId).fieldValue(record.meetingRoom.lx);
 				$elem('record_sFpro_meetingRoom_tyy',pageId).fieldValue(record.meetingRoom.tyy);
+				var gm=$elem('record_sFpro_meetingRoom_gm',pageId).fieldValue();
+				
 			}
 		});
 		

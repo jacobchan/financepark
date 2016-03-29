@@ -369,8 +369,8 @@ function GetRequest() {
 					$('#commodityName').text(records[0].commodityTitle);
 					$('#commodityPrice').text(records[0].commodityPrice);
 					$('#commodityDescribe').html(records[0].commodityDescribe);
-					$('#merchantName').text("联系人："+records[0].merchantLinkman);
-					$('#merchantPhone').text("联系电话："+records[0].merchantLinkmanPhone);
+					$('#merchantName').text("联系人："+records[0].purchasingmanagerMerchant.merchantLinkman);
+					$('#merchantPhone').text("联系电话："+records[0].purchasingmanagerMerchant.merchantLinkmanPhone);
 					if(records[0].dwValue != null){
 						$('#dw').text(records[0].dwValue);
 					}
