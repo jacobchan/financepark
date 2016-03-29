@@ -21,7 +21,7 @@
 			    } 
 			    return reLen;    
 			}
-			//删除地址
+			//删除专利
 			function removeKnowledge(obj){
 			 	$.youi.ajaxUtils.ajax({
 					url:baseUrl+'/informationKnowledgeManager/removeInformationKnowledge.json',
@@ -31,6 +31,12 @@
 						location.reload();
 					}
 				});
+			}
+			//修改地址
+			function updateKnowledge(obj1, obj2, obj3){
+				$("#knowledgeRe").html(obj1);
+		  		$("#knowledgeTitle").val(obj2);
+		  		$("#knowledgeContent").val(obj3);
 			}
 			$(document).ready(function() {
 				$("#knowledgeContent").on('keyup', function() {
@@ -63,7 +69,7 @@
 					                                            '<td colspan="2" height="42" valign="top" align="left"><span class="baodao_main">'+records[i].knowledgeContent+'</span></td>'+
 					                                        '</tr>'+
 					                                        '<tr>'+
-					                                            '<td height="40" valign="middle" align="left"><a href="javascript:void(0);"><span>编辑</span></a>丨<a href=\'javascript:removeKnowledge("'+records[i].knowledgeId+'");\'>删除</a></td>'+
+					                                            '<td height="40" valign="middle" align="left"><a href=\'javascript:removeKnowledge("'+records[i].knowledgeId+'", "'+records[i].knowledgeTitle+'", "'+records[i].knowledgeContent+'");\'><span>编辑</span></a>丨<a href=\'javascript:removeKnowledge("'+records[i].knowledgeId+'");\'>删除</a></td>'+
 					                                        '</tr>'+
 					                                    '</table>'+
 					                                '</div>'+
