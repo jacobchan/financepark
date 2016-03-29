@@ -104,7 +104,14 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
         	if(StringUtils.isEmpty(memberId)){
         		member = memberInformationManager.getMemberInformation(o.getMember().getMemberId()) ;//后台调用
         	}else{
-        		member = memberInformationManager.getMemberInformation(o.getCreateUser()) ;//前端调用
+        		//前端调用
+        		member = memberInformationManager.getMemberInformation(o.getCreateUser()) ;
+        		EnterpriseEmployees e = new EnterpriseEmployees() ;
+        		e.setMember(member);
+        		EnterpriseEmployees enterpriseEmployees = enterpriseEmployeesManager.getEnterEmployforpage(e) ;//判断当前用户是否为企业会员
+        		if(enterpriseEmployees == null){
+        			throw new BusException("非企业会员不能提交申请！") ;
+        		}
         	}
         	PolicyApply policyApply = null ;
         	NmIssuenews nmIssuenews = o.getNmIssuenews() ;//得到政策新闻
