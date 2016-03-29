@@ -67,7 +67,7 @@ public class InformationLegalManagerImpl extends BaseManagerImpl implements Info
 //    	}else{//新增
 //    		
 //    	}
-    	o.setCreateUser(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
+    	o.setCreateTime(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
     	return informationLegalDao.save(o);
     }
 

@@ -2,9 +2,11 @@ package com.manage.EnterpriseManager.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -56,7 +58,7 @@ public class InformationNoticeManagerImpl extends BaseManagerImpl implements Inf
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId")})
     public InformationNotice saveInformationNotice(InformationNotice o) throws BusException{
 //    	String informationNoticeId = o.getInformationNoticeId();
 //    	boolean isUpdate = StringUtils.isNotEmpty(informationNoticeId);
@@ -65,7 +67,7 @@ public class InformationNoticeManagerImpl extends BaseManagerImpl implements Inf
 //    	}else{//新增
 //    		
 //    	}
-    	o.setCreateUser(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
+    	o.setCreateTime(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
     	return informationNoticeDao.save(o);
     }
 

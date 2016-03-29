@@ -2,9 +2,11 @@ package com.manage.EnterpriseManager.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -56,7 +58,7 @@ public class InformationKnowledgeManagerImpl extends BaseManagerImpl implements 
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId")})
     public InformationKnowledge saveInformationKnowledge(InformationKnowledge o) throws BusException{
 //    	String informationKnowledgeId = o.getInformationKnowledgeId();
 //    	boolean isUpdate = StringUtils.isNotEmpty(informationKnowledgeId);
@@ -65,7 +67,8 @@ public class InformationKnowledgeManagerImpl extends BaseManagerImpl implements 
 //    	}else{//新增
 //    		
 //    	}
-    	o.setCreateUser(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
+    	o.setKnowledgeStatus("1");
+    	o.setCreateTime(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
     	return informationKnowledgeDao.save(o);
     }
 
