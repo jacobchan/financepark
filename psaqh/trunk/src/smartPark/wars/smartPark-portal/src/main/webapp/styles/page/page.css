@@ -481,9 +481,9 @@ background:url(../images/company/ab_ico.png) no-repeat}
 /*th*/
 .zznav{position:absolute;top:0;left:0;right:0;z-index:100;}
 .zznav>ul>li{display:inline-block;float:left;position:relative}
-.zznav a{color:#fff;padding:10px;background:rgba(0,0,0,0.5);display:block}.zznav a.active{ background:transparent;}
+.zznav a{color:#fff;padding:10px;background:rgba(0,0,0,0.5);display:block;line-height: 20px;}.zznav a.active{ background:transparent;}
 .zz{background:rgba(0,0,0,0.5);height:40px;width:calc(100% - 282px)}
-.zz1{background:rgba(0,0,0,0.5);height:40px;width:calc(100% - 750px)}
+/* .zz1{background:rgba(0,0,0,0.5);height:40px;width:calc(100% - 750px)} */
 .zznav a.active{color:#FF4E00;background: transparent;}
 .zzul>li:hover .subul{display:block;} .subul{display:none}
 .subul>li{text-align:center;background:rgba(0,0,0,0.5);color:#fff;padding:5px 0;cursor:pointer}
@@ -621,3 +621,13 @@ background:url(../images/company/ab_ico.png) no-repeat}
 .pb-list-group li:hover{box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15); }
 .pb-list-group li:hover h3{color: #ff6715;}
 
+
+
+/**园区全景**/
+.zznav .pa{cursor: pointer;}
+.zznav .pa img{display: none;}
+.zznav .pa:hover img{display: inline-block;}
+.znav-pa1{left: 68px;top: 508px;background: url(../images/zhyq/i21.png) no-repeat left center;padding-left:22px;width: 130px;height: 44px;}
+.znav-pa1:hover{background: url(../images/zhyq/i20.png) no-repeat left center;}
+.znav-pa2{left: 120px;top: 406px;padding-left:12px;width: 92px;height: 30px;}
+.znav-pa3{left: 160px;top: 328px;padding-left:12px;width: 132px;height: 30px;}

@@ -9,7 +9,7 @@
 <link href="styles/page/page.css" type="text/css" rel="stylesheet">
 
 </head>
-<body>
+<body onclick="abc()">
 	<div id="youi_page_header" class="youi-page-header clearfix"></div>
 	<!--banner-->
 <div class="slideBox">
@@ -797,22 +797,26 @@
 				jsonpSrc:baseUrl+"reservationRecordManager/getRecordsByRecordType.json?recordType="+recordType
 			});
 		});
-        $("#lf_time").on("click",function(){
-            $(this).next(".time-nav").toggle();
-        });
+        
 		$(".select_list").on("click","li",function(){
 			$(this).addClass("selected").siblings().removeClass("selected");
 			var selecttext=$(this).text();
 			var val=$(this).attr("data-val");
 			$(".select_show").text(selecttext).attr("data-val",val); 
 		});
-		$(".time-nav").on("click","li",function(){
+        //选时间
+		$("#lf_time").on("click",function(e){
+            e.stopPropagation();
+            $(this).next(".time-nav").show();               
+        });
+        $(".time-nav").on("click","li",function(){
             $(this).addClass("selected").siblings().removeClass("selected");
             var selecttext=$(this).text();
             var val=$(this).attr("data-val");
             $("#lf_time").val(selecttext).attr("data-val",val); 
             $(this).parents(".time-nav").hide();
-        });	
+
+        }); 
 		
 		/*slide table*/
 		$(".icon_left").click(function(){
@@ -882,6 +886,8 @@
 			};
 			laydate(start);
 			laydate(end);
+
+           
 	})
 </script>
 	<script type="text/javascript">
@@ -945,9 +951,7 @@
 				   		if (!patrn.exec(s)) return false
 				   	 	return true
 					}
-				$("body").bind("click", function(){
-	           		$(".time-nav").hide();
-	         	});
+				
 			});
 	</script>
 	<script type="text/javascript">
@@ -997,6 +1001,10 @@
 			var url="../czh/czh3.html"+"?"+"applyId="+applyId; 
 			window.location.assign(url); 
 		}
+
+        function abc(){
+            $(".time-nav").hide();
+        }
 	</script>
 </body>
 </html>
