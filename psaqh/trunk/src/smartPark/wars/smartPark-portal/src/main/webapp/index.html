@@ -752,9 +752,9 @@
 					var imageUrl="/filestore/";
 					for(var i=0;i<3;i++){
 						   //http://localhost:8088/smartPark-web/ imageUrl
-							var html="<li><div class='fl'><img src='"+imageUrl+record[i].commodityImage+"' height='59' width='110'></div><div class='fl ml10'><div class='span_bold'>"+record[i].commodityTitle+"</div>"+
+							/* var html="<li><div class='fl'><img src='"+imageUrl+record[i].commodityImage+"' height='59' width='110'></div><div class='fl ml10'><div class='span_bold'>"+record[i].commodityTitle+"</div>"+
 							"<p class='cc f12'>"+record[i].commodityPrice+"元/小时</p><a class='handbtn' href='./companyservice/room.html'>立即预定</a></div></li>";
-							 $(".hand_ul").append(html);
+							 $(".hand_ul").append(html); */
 							 
 					}
 				};
@@ -791,7 +791,7 @@
 		/*select_list*/
 		$(".selectBox").on("click",function(){
 			$(".select_list").toggle();
-			var recordType='04';//04:众创空间
+			var recordType='0401';//04:众创空间
 			$('.select_list>ul').select({
 				template:'<li data-val={itemValue}>{itemName}</li>',
 				jsonpSrc:baseUrl+"reservationRecordManager/getRecordsByRecordType.json?recordType="+recordType
