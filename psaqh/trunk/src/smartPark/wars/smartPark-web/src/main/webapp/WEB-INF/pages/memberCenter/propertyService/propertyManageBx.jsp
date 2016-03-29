@@ -131,7 +131,6 @@
 			$.ajax({
 				url:baseUrl+'/propertyservicemanagerBxManager/getBxListforpage.json', 
 				success:function(result){
-					console.log(result);
 					if(result&&result.records){
 						_parseRecords(result.records);
 					}
