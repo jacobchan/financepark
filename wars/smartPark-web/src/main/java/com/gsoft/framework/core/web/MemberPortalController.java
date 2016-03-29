@@ -40,7 +40,7 @@ public class MemberPortalController {
 		String requestUrl = request.getRequestURL().toString();
 		String requestUri = request.getServletPath();
 		
-		String mcUrl = requestUrl.substring(0, requestUrl.length()-requestUri.length())+"/member/memberCenter/index.html";
+		String mcUrl = requestUrl.substring(0, requestUrl.length()-requestUri.length())+"/member/memberCenter/personalCenter/personInfo.html";
 		
 		if(account!=null && account.getPrincipalConfig().containsKey("loginType")){
 			jsonpBuilder.append("$.youi.serverConfig.authorization='"+esbSecurityManager.encryptSecurityInfo(null)+"';")
