@@ -1,9 +1,13 @@
 package com.gsoft.framework.core.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.gsoft.framework.security.AccountPrincipal;
+import com.gsoft.framework.util.SecurityUtils;
 @Controller
 @RequestMapping("/enterprise")
 public class EnterpriseInfoController {
@@ -16,7 +20,10 @@ public class EnterpriseInfoController {
 	@RequestMapping(value = "/info.html")
 	public ModelAndView enterpriseInfo(HttpServletRequest request,
 			HttpServletResponse response){
-		return new ModelAndView("enterpriseCenter/enterpriseInfo");
+		ModelAndView model = new ModelAndView("enterpriseCenter/enterpriseInfo");
+		AccountPrincipal account = SecurityUtils.getAccount();
+		model.addObject("user", account);
+		return model;
 	}
 	
 	/**
@@ -28,7 +35,10 @@ public class EnterpriseInfoController {
 	@RequestMapping(value = "/financing.html")
 	public ModelAndView enterpriseFinancing(HttpServletRequest request,
 			HttpServletResponse response){
-		return new ModelAndView("enterpriseCenter/enterpriseFinancing");
+		ModelAndView model = new ModelAndView("enterpriseCenter/enterpriseFinancing");
+		AccountPrincipal account = SecurityUtils.getAccount();
+		model.addObject("user", account);
+		return model;
 	}
 	
 	/**
@@ -40,7 +50,10 @@ public class EnterpriseInfoController {
 	@RequestMapping(value = "/knowledge.html")
 	public ModelAndView enterpriseKnowledge(HttpServletRequest request,
 			HttpServletResponse response){
-		return new ModelAndView("enterpriseCenter/enterpriseKnowledge");
+		ModelAndView model = new ModelAndView("enterpriseCenter/enterpriseKnowledge");
+		AccountPrincipal account = SecurityUtils.getAccount();
+		model.addObject("user", account);
+		return model;
 	}
 	
 	/**
@@ -52,7 +65,10 @@ public class EnterpriseInfoController {
 	@RequestMapping(value = "/legal.html")
 	public ModelAndView enterpriseLegal(HttpServletRequest request,
 			HttpServletResponse response){
-		return new ModelAndView("enterpriseCenter/enterpriseLegal");
+		ModelAndView model = new ModelAndView("enterpriseCenter/enterpriseLegal");
+		AccountPrincipal account = SecurityUtils.getAccount();
+		model.addObject("user", account);
+		return model;
 	}
 	
 	/**
@@ -64,7 +80,10 @@ public class EnterpriseInfoController {
 	@RequestMapping(value = "/media.html")
 	public ModelAndView enterpriseMedia(HttpServletRequest request,
 			HttpServletResponse response){
-		return new ModelAndView("enterpriseCenter/enterpriseMedia");
+		ModelAndView model = new ModelAndView("enterpriseCenter/enterpriseMedia");
+		AccountPrincipal account = SecurityUtils.getAccount();
+		model.addObject("user", account);
+		return model;
 	}
 	
 	/**
@@ -76,7 +95,10 @@ public class EnterpriseInfoController {
 	@RequestMapping(value = "/book.html")
 	public ModelAndView enterpriseBook(HttpServletRequest request,
 			HttpServletResponse response){
-		return new ModelAndView("enterpriseCenter/enterpriseBook");
+		ModelAndView model = new ModelAndView("enterpriseCenter/enterpriseBook");
+		AccountPrincipal account = SecurityUtils.getAccount();
+		model.addObject("user", account);
+		return model;
 	}
 	
 	/**
@@ -88,7 +110,10 @@ public class EnterpriseInfoController {
 	@RequestMapping(value = "/code.html")
 	public ModelAndView enterpriseCode(HttpServletRequest request,
 			HttpServletResponse response){
-		return new ModelAndView("enterpriseCenter/enterpriseCode");
+		ModelAndView model = new ModelAndView("enterpriseCenter/enterpriseCode");
+		AccountPrincipal account = SecurityUtils.getAccount();
+		model.addObject("user", account);
+		return model;
 	}
 	
 	/**
@@ -100,7 +125,10 @@ public class EnterpriseInfoController {
 	@RequestMapping(value = "/order.html")
 	public ModelAndView enterpriseOrder(HttpServletRequest request,
 			HttpServletResponse response){
-		return new ModelAndView("enterpriseCenter/enterpriseOrder");
+		ModelAndView model = new ModelAndView("enterpriseCenter/enterpriseOrder");
+		AccountPrincipal account = SecurityUtils.getAccount();
+		model.addObject("user", account);
+		return model;
 	}
 	
 	/**
@@ -112,6 +140,9 @@ public class EnterpriseInfoController {
 	@RequestMapping(value = "/reply.html")
 	public ModelAndView enterpriseReply(HttpServletRequest request,
 			HttpServletResponse response){
-		return new ModelAndView("enterpriseCenter/enterpriseReply");
+		ModelAndView model = new ModelAndView("enterpriseCenter/enterpriseReply");
+		AccountPrincipal account = SecurityUtils.getAccount();
+		model.addObject("user", account);
+		return model;
 	}
 }
