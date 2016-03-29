@@ -13,16 +13,17 @@
 						<tr>
 							<td>原密码</td>
 							<td>
-								<input type="password" style="width:200px;" id="oldPassword"> <span class="c-o ml20 undis">原始密码不正确！</span>
+								<input type="password" style="width:200px;" class="w1" id="oldPassword"> <span class="c-o ml20 undis">原始密码不正确！</span>
 							</td>
 						</tr>
 						<tr>
 							<td>新密码</td>
-							<td><input type="password" style="width:200px;" id="password"></td>
+							<td><input type="password" style="width:200px;" class="w1" id="password">
+							</td>
 						</tr>
 						<tr>
 							<td>确认密码</td>
-							<td><input type="password" style="width:200px;" id="confirmPassword"></td>
+							<td><input type="password" style="width:200px;" class="w1" id="confirmPassword"></td>
 						</tr>
 						<tr>
 							<td colspan="2">
