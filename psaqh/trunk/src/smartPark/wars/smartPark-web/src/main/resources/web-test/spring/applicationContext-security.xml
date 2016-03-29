@@ -28,7 +28,7 @@
 	</bean>
 	
 	<!-- 会员页面过滤器 -->
-	<bean id="authcmember" class="com.gsoft.member.base.security.MemberFormAuthenticationFilter">
+	<bean id="authcmember" class="com.gsoft.framework.security.filter.MemberFormAuthenticationFilter">
 		<!-- 启用校验码控制 -->
 		<property name="vcodeCheck" value="false"></property>
 		<property name="authParam" value="projectId"></property>
