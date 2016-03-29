@@ -142,8 +142,17 @@
 			this.disabled=true;
 			var memberId=$("#memberId").html();
 			var companyInvitecode=$("#companyInvitecode").val();
-			var params = ['memberId='+memberId+'','companyInvitecode='+companyInvitecode+''];
-			alert("加入企业！");
+			var params = ['memberId='+memberId+'','code='+companyInvitecode+''];
+			$.youi.ajaxUtils.ajax({
+				url:baseUrl+'/enterpriseEmployeesManager/acceptEnterpriseInvitation.json',
+				data:params.join('&'),
+				success:function(result){
+					if(result&&result.record){
+						alert(result.record.html);
+						location.reload();
+					}
+				}
+			});
 		});	
 	</script>
 		<script type="text/javascript">
