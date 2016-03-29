@@ -23,7 +23,8 @@ $(function(){
 				console.log('user authorization = '+$.youi.serverConfig.authorization);
 				$('#user_info:first').append('<a href="'+cenUrl+'portal/logout.html?redirect='+loc+'">退出</a>');
 			}else{
-				$('#user_info:first a:first').attr('href',cenUrl+'member/portal/login.html?redirect='+loc);
+				$('#user_info:first a:first').attr('href',cenUrl+'member/memberCenter/login.html?redirect='+loc);
+				$('#user_info a').eq(1).attr('href',cenUrl+'member/memberCenter/login.html?redirect='+loc+'&type=regist');
 				isLogin = false;
 			}
 		});
