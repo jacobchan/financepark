@@ -26,6 +26,14 @@ public interface PurchasingmanagerPublicManager extends BaseManager{
      */
     public List<PurchasingmanagerCommodity> getPurchasingmanagerCommoditys() throws BusException;
     
+    
+    
+    /**
+     * 根据主键查询广告位
+     */
+    public PurchasingmanagerCommodity getPurchasingmanagerCommodityLed(String id) throws BusException;
+    
+    
     /**
      * 条件查询列表
      */
@@ -146,6 +154,17 @@ public interface PurchasingmanagerPublicManager extends BaseManager{
      * @throws BusException
      */
     public void saveCommodityAndPropertyForCar(PurchasingmanagerCommodity o);
+    
+    
+    /**
+     * 保存广告位及其车辆商品扩展属性
+     * @param size 尺寸
+     * @param unit 单位
+     * @param loopType 轮播方式
+     * @param o 商品实体
+     * @throws BusException
+     */
+    public void saveCommodityAndPropertyForLed(PurchasingmanagerCommodity o) throws BusException;
     
     /**
      * 根据商品genreCode来获取商品类别

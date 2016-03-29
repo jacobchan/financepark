@@ -18,8 +18,15 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.Length;
 
+
+
+import com.common.ExtentionAtrManager.entity.Billboard;
+
+
 import com.common.ExtentionAtrManager.entity.AgencyBookEntity;
+
 import com.common.ExtentionAtrManager.entity.CarEntity;
+
 import com.common.ExtentionAtrManager.entity.MeetingEntity;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
@@ -114,14 +121,49 @@ public class PurchasingmanagerCommodity implements Domain{
 	@Transient
 	private PurchasingmanagerGenre purchasingmanagerGenre;//商品类型
 	
+
+
+	/**
+	 * 广告位的扩张属性
+	 */
+	@Transient
+	private Billboard billboard;
+	
+	
+	
+	
+
+	/**
+	 * 车辆的扩展属性
+	 */
+
 	@Transient
 	private MeetingEntity meetingRoom;//会议室的扩展属性
 	
+
+
+//	/**
+//	 * 会议室的扩张属性
+//	 */
+//	@Transient
+//	private carEntity car;
 	@Transient
 	private CarEntity car;//车辆的扩展属性
+
 	
 	@Transient
 	private AgencyBookEntity agencyBook;//代理记账的扩展属性
+
+
+
+	public Billboard getBillboard() {
+		return billboard;
+	}
+
+	public void setBillboard(Billboard billboard) {
+		this.billboard = billboard;
+	}
+
 
 	public AgencyBookEntity getAgencyBook() {
 		return agencyBook;
@@ -138,6 +180,7 @@ public class PurchasingmanagerCommodity implements Domain{
 	public void setCar(CarEntity car) {
 		this.car = car;
 	}
+
 
 	public MeetingEntity getMeetingRoom() {
 		return meetingRoom;
