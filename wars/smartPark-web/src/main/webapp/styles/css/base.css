@@ -12,8 +12,8 @@ caption, th{text-align: left;}
 h1, h2, h3, h4, h5, h6{ font-weight: normal;}
 input, button, textarea, select{font-size: 100%; cursor: pointer;}
 q:before, q:after{content: '';}
-a, input, textarea { outline: 0 none; text-decoration: none;}
-
+a, input, textarea { outline: 0 none;  text-decoration: none;}
+/* a, input, password { outline: 0 none; height: 30px;  border: 1px solid #ecebeb; text-decoration: none;} */
 /*clearfix */
 .clearfix:after{content: "."; display: block; height: 0; clear: both; visibility: hidden;}
 .clearfix{display: inline-block;}
@@ -21,6 +21,7 @@ a, input, textarea { outline: 0 none; text-decoration: none;}
 .clearfix{display: block;}
 
 /*width height*/
+.w1{height: 30px;  border: 1px solid #ecebeb;}
 .w10{width: 10%;}
 .w15{width: 15%;}
 .w19{width: 19%;}
