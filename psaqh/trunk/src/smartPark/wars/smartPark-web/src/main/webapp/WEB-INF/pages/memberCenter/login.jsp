@@ -96,9 +96,27 @@ $(function(){
 		$(".login_form").eq(index).show().siblings(".login_form").hide();
 	});
 });
+function registClick(){
+	$(".login_ul li").eq(1).addClass("active").siblings().removeClass("active");
+	$(".login_form").eq(1).show().siblings(".login_form").hide();
+};
 </script>
 <script type="text/javascript">
 		$(function(){
+			var url=location.href; 
+			var tmp1=url.split("?")[1]; 
+			var tmp2='';
+			var tmp3='';
+			if(tmp1!=''&&tmp1!=null){
+				 tmp2=tmp1.split("&")[1]; 
+			}
+			if(tmp2!=''&&tmp2!=null){
+				tmp3=tmp2.split("=")[1]; 
+			}
+			if(tmp3=='regist'){
+				registClick();
+			}
+			
 			$("#register").click(function(){
 				var memberPhoneNumber = $("#mobile").val() ;
 				var memberPassword = $("#passwd").val() ;
