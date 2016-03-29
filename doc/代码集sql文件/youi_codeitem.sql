@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50538
 File Encoding         : 65001
 
-Date: 2016-03-29 17:19:00
+Date: 2016-03-29 18:05:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -119,6 +119,8 @@ INSERT INTO `youi_codeitem` VALUES ('40288aaf53c12a7b0153c1a9341f0002', '40288aa
 INSERT INTO `youi_codeitem` VALUES ('40288aaf53c12a7b0153c1a966310003', '40288aaf53c12a7b0153c1a8f86c0001', '02', '普通会议室', null);
 INSERT INTO `youi_codeitem` VALUES ('40288aaf53c12a7b0153c1aa18b60005', '40288aaf53c12a7b0153c1a9bfed0004', '01', '有', null);
 INSERT INTO `youi_codeitem` VALUES ('40288aaf53c12a7b0153c1aa31030006', '40288aaf53c12a7b0153c1a9bfed0004', '02', '无', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aaf53c1bd660153c1d181b00005', '40288aaf53c1bd660153c1d146e30004', '01', '商品扩展属性', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aaf53c1bd660153c1d1b8110006', '40288aaf53c1bd660153c1d146e30004', '02', '订单扩展属性', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab1538cb28f01538ccd47a90001', '40288ab252f905180152f908e1d30001', '02', '已售已招', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab252f905180152f909de230002', '40288ab252f905180152f908e1d30001', '00', '未售', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab252f905180152f90a172a0003', '40288ab252f905180152f908e1d30001', '01', '已售待招', null);

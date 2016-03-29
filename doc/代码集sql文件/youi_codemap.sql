@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50538
 File Encoding         : 65001
 
-Date: 2016-03-29 17:19:07
+Date: 2016-03-29 18:05:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -58,6 +58,7 @@ INSERT INTO `youi_codemap` VALUES ('40288aaf52fca91d0152fcae28580006', 'saleStat
 INSERT INTO `youi_codemap` VALUES ('40288aaf52fca91d0152fcaf96140009', 'policyStatus ', '政策新闻发布状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aaf53c12a7b0153c1a8f86c0001', 'roomType', '会议室类型', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aaf53c12a7b0153c1a9bfed0004', 'roomProjector', '是否有投影仪', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288aaf53c1bd660153c1d146e30004', 'category', '扩散属性所属分类', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab252f905180152f908e1d30001', 'roomstatus', '房间使用状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab2531113db015311211cf40001', 'policyApplyStatus', '政策申请状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288abc531c24bb01531c2a418c0001', 'resoStatus', '资源状态', '1', null);
