@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50547
+Source Server Version : 50538
 Source Host           : localhost:3306
-Source Database       : youi
+Source Database       : youi2
 
 Target Server Type    : MYSQL
-Target Server Version : 50547
+Target Server Version : 50538
 File Encoding         : 65001
 
-Date: 2016-03-29 11:58:35
+Date: 2016-03-29 17:19:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -59,9 +59,9 @@ INSERT INTO `youi_codeitem` VALUES ('40288aad5307d0a6015307f1af4c0004', '40288aa
 INSERT INTO `youi_codeitem` VALUES ('40288aad5307d0a6015307f24b760006', '40288aad5307d0a6015307f207980005', '00', '方式一', null);
 INSERT INTO `youi_codeitem` VALUES ('40288aad5307d0a6015307f283450007', '40288aad5307d0a6015307f207980005', '01', '方式二', null);
 INSERT INTO `youi_codeitem` VALUES ('40288aad5307d0a6015307f2be460008', '40288aad5307d0a6015307f207980005', '02', '方式三', null);
-INSERT INTO `youi_codeitem` VALUES ('40288aad5307d0a6015307f350b2000a', '40288aad5307d0a6015307f3190a0009', '00', '类型一', null);
-INSERT INTO `youi_codeitem` VALUES ('40288aad5307d0a6015307f379d5000b', '40288aad5307d0a6015307f3190a0009', '01', '类型二', null);
-INSERT INTO `youi_codeitem` VALUES ('40288aad5307d0a6015307f3a8a1000c', '40288aad5307d0a6015307f3190a0009', '02', '类型三', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aad5307d0a6015307f350b2000a', '40288aad5307d0a6015307f3190a0009', '00', '空调类', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aad5307d0a6015307f379d5000b', '40288aad5307d0a6015307f3190a0009', '01', '水工类', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aad5307d0a6015307f3a8a1000c', '40288aad5307d0a6015307f3190a0009', '02', '木工类', null);
 INSERT INTO `youi_codeitem` VALUES ('40288aad5307d0a6015307f445eb000e', '40288aad5307d0a6015307f3fb47000d', '00', '项目一', null);
 INSERT INTO `youi_codeitem` VALUES ('40288aad5307d0a6015307f46394000f', '40288aad5307d0a6015307f3fb47000d', '01', '项目二', null);
 INSERT INTO `youi_codeitem` VALUES ('40288aad5307d0a6015307f48a9a0010', '40288aad5307d0a6015307f3fb47000d', '02', '项目三', null);
@@ -115,6 +115,10 @@ INSERT INTO `youi_codeitem` VALUES ('40288aaf52fca91d0152fcae76860007', '40288aa
 INSERT INTO `youi_codeitem` VALUES ('40288aaf52fca91d0152fcaeb1660008', '40288aaf52fca91d0152fcae28580006', '1', '可以预订', null);
 INSERT INTO `youi_codeitem` VALUES ('40288aaf52fca91d0152fcafec23000a', '40288aaf52fca91d0152fcaf96140009', '0', '未发布', null);
 INSERT INTO `youi_codeitem` VALUES ('40288aaf52fca91d0152fcb00920000b', '40288aaf52fca91d0152fcaf96140009', '1', '已发布', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aaf53c12a7b0153c1a9341f0002', '40288aaf53c12a7b0153c1a8f86c0001', '01', '视频会议室', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aaf53c12a7b0153c1a966310003', '40288aaf53c12a7b0153c1a8f86c0001', '02', '普通会议室', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aaf53c12a7b0153c1aa18b60005', '40288aaf53c12a7b0153c1a9bfed0004', '01', '有', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aaf53c12a7b0153c1aa31030006', '40288aaf53c12a7b0153c1a9bfed0004', '02', '无', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab1538cb28f01538ccd47a90001', '40288ab252f905180152f908e1d30001', '02', '已售已招', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab252f905180152f909de230002', '40288ab252f905180152f908e1d30001', '00', '未售', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab252f905180152f90a172a0003', '40288ab252f905180152f908e1d30001', '01', '已售待招', null);
@@ -122,10 +126,11 @@ INSERT INTO `youi_codeitem` VALUES ('40288ab2531113db01531121c6d60002', '40288ab
 INSERT INTO `youi_codeitem` VALUES ('40288ab2531113db01531122be800003', '40288ab2531113db015311211cf40001', '2', '申请成功', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab2531113db01531122ec4c0004', '40288ab2531113db015311211cf40001', '3', '申请失败', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab2533a65bb01533a6de7480001', '40288acd52f2342b0152f2369e7a0003', '05', '已取消', null);
-INSERT INTO `youi_codeitem` VALUES ('40288ab3538754760153877ba7ab000a', '40288acb53314dd40153318f0c3b000f', '10', '17:00-18:00', null);
 INSERT INTO `youi_codeitem` VALUES ('40288abc531c24bb01531c2a88940002', '40288abc531c24bb01531c2a418c0001', '01', '可用', null);
 INSERT INTO `youi_codeitem` VALUES ('40288abc531c24bb01531c2ab6970003', '40288abc531c24bb01531c2a418c0001', '02', '已预订', null);
 INSERT INTO `youi_codeitem` VALUES ('40288abc531c24bb01531c2ad5960004', '40288abc531c24bb01531c2a418c0001', '03', '不可用', null);
+INSERT INTO `youi_codeitem` VALUES ('40288ac05374415b015374959a120004', '40288acb53314dd40153318d8a160009', '02', '已领卡', null);
+INSERT INTO `youi_codeitem` VALUES ('40288ac05374415b01537495b96f0005', '40288acb53314dd40153318d8a160009', '08', '取消', null);
 INSERT INTO `youi_codeitem` VALUES ('40288acb53314dd40153318dd747000a', '40288acb53314dd40153318d8a160009', '00', '待处理', null);
 INSERT INTO `youi_codeitem` VALUES ('40288acb53314dd40153318dfea0000b', '40288acb53314dd40153318d8a160009', '01', '已处理', null);
 INSERT INTO `youi_codeitem` VALUES ('40288acb53314dd40153318e94e7000d', '40288acb53314dd40153318e54d8000c', '00', '线上', null);
@@ -183,12 +188,6 @@ INSERT INTO `youi_codeitem` VALUES ('40288acd52f2342b0152f240a9110031', '40288ac
 INSERT INTO `youi_codeitem` VALUES ('40288acd52f2342b0152f27803fa0033', '40288acd52f2342b0152f277c39b0032', '00', '不可预约', null);
 INSERT INTO `youi_codeitem` VALUES ('40288acd52f2342b0152f27832e30034', '40288acd52f2342b0152f277c39b0032', '01', '可以预约', null);
 INSERT INTO `youi_codeitem` VALUES ('40288acd52f2342b0152f27863960035', '40288acd52f2342b0152f277c39b0032', '02', '预约已满', null);
-INSERT INTO `youi_codeitem` VALUES ('40288ad153c05dcd0153c06ef6d90002', '40288ad153c05dcd0153c06e7a880001', '01', '视频会议室', null);
-INSERT INTO `youi_codeitem` VALUES ('40288ad153c05dcd0153c06f22b50003', '40288ad153c05dcd0153c06e7a880001', '02', '普通会议室', null);
-INSERT INTO `youi_codeitem` VALUES ('40288ad153c05dcd0153c06fbd0e0005', '40288ad153c05dcd0153c06f804b0004', '01', '有', null);
-INSERT INTO `youi_codeitem` VALUES ('40288ad153c05dcd0153c06fdc760006', '40288ad153c05dcd0153c06f804b0004', '02', '无', null);
-INSERT INTO `youi_codeitem` VALUES ('40288ad153c05dcd0153c08530ee0008', '40288ad153c05dcd0153c08505e70007', '01', '手动挡', null);
-INSERT INTO `youi_codeitem` VALUES ('40288ad153c05dcd0153c08552d00009', '40288ad153c05dcd0153c08505e70007', '02', '自动挡', null);
 INSERT INTO `youi_codeitem` VALUES ('4028d0815094e93f01509526a09c0011', '4028d0815094e93f01509519de3e0010', 'default', '普通项目', null);
 INSERT INTO `youi_codeitem` VALUES ('4028d0815094e93f01509526ce0a0012', '4028d0815094e93f01509519de3e0010', 'esb', 'esb项目', null);
 INSERT INTO `youi_codeitem` VALUES ('4028d0815094e93f015095270f7b0013', '4028d0815094e93f01509519de3e0010', 'esbsso', '带SSO的ESB项目', null);

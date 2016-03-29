@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50547
+Source Server Version : 50538
 Source Host           : localhost:3306
-Source Database       : youi
+Source Database       : youi2
 
 Target Server Type    : MYSQL
-Target Server Version : 50547
+Target Server Version : 50538
 File Encoding         : 65001
 
-Date: 2016-03-29 11:58:42
+Date: 2016-03-29 17:19:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -56,6 +56,8 @@ INSERT INTO `youi_codemap` VALUES ('40288aae5322165501532219eb9d0002', 'building
 INSERT INTO `youi_codemap` VALUES ('40288aaf52fca91d0152fcabefdb0001', 'floorUsingStatus', '楼层使用状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aaf52fca91d0152fcae28580006', 'saleState', '销售状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aaf52fca91d0152fcaf96140009', 'policyStatus ', '政策新闻发布状态', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288aaf53c12a7b0153c1a8f86c0001', 'roomType', '会议室类型', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288aaf53c12a7b0153c1a9bfed0004', 'roomProjector', '是否有投影仪', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab252f905180152f908e1d30001', 'roomstatus', '房间使用状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab2531113db015311211cf40001', 'policyApplyStatus', '政策申请状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288abc531c24bb01531c2a418c0001', 'resoStatus', '资源状态', '1', null);
@@ -71,9 +73,6 @@ INSERT INTO `youi_codemap` VALUES ('40288acd52f2342b0152f237f5540006', 'ITorderS
 INSERT INTO `youi_codemap` VALUES ('40288acd52f2342b0152f238261a0007', 'tenementOrderStatus', '物业订单状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288acd52f2342b0152f238669e0008', 'resourceOrderStatus', '公共资源订单状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288acd52f2342b0152f277c39b0032', 'enteringStatus', '可预约状态', '1', null);
-INSERT INTO `youi_codemap` VALUES ('40288ad153c05dcd0153c06e7a880001', 'roomType', '会议室类型', '1', null);
-INSERT INTO `youi_codemap` VALUES ('40288ad153c05dcd0153c06f804b0004', 'roomProjector', '是否有投影仪', '1', null);
-INSERT INTO `youi_codemap` VALUES ('40288ad153c05dcd0153c08505e70007', 'stalls', '车辆档位', '1', null);
 INSERT INTO `youi_codemap` VALUES ('4028d0815094e93f01509519de3e0010', 'codeProjectType', '项目类型', '1', null);
 INSERT INTO `youi_codemap` VALUES ('4028d08150a1df4a0150a208fc1c0007', 'moduleWebType', 'war模块类型', '1', null);
 INSERT INTO `youi_codemap` VALUES ('4028d08150f3d9900150f408a1a70001', 'adapterGroup', '适配器类型', '1', null);
