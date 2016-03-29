@@ -69,7 +69,7 @@
 					                                            '<td colspan="2" height="42" valign="top" align="left"><span class="baodao_main">'+records[i].knowledgeContent+'</span></td>'+
 					                                        '</tr>'+
 					                                        '<tr>'+
-					                                            '<td height="40" valign="middle" align="left"><a href=\'javascript:removeKnowledge("'+records[i].knowledgeId+'", "'+records[i].knowledgeTitle+'", "'+records[i].knowledgeContent+'");\'><span>编辑</span></a>丨<a href=\'javascript:removeKnowledge("'+records[i].knowledgeId+'");\'>删除</a></td>'+
+					                                            '<td height="40" valign="middle" align="left"><a href=\'javascript:updateKnowledge("'+records[i].knowledgeId+'", "'+records[i].knowledgeTitle+'", "'+records[i].knowledgeContent+'");\'><span>编辑</span></a>丨<a href=\'javascript:removeKnowledge("'+records[i].knowledgeId+'");\'>删除</a></td>'+
 					                                        '</tr>'+
 					                                    '</table>'+
 					                                '</div>'+
