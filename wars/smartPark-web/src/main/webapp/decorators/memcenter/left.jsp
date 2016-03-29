@@ -4,7 +4,7 @@
 	<div class="w200 fl">
 		<dl>
 			<dt>个人中心</dt>
-			<dd  class="active"><a href="<%=request.getContextPath()%>/member/memberCenter/index.html">个人资料</a></dd>
+			<dd  class="active"><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/personInfo.html">个人资料</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/orderCenter.html">订单中心</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/securityCenter.html">安全中心</a></dd>
 			<dd><a href="grzx4.html">消息</a></dd>
