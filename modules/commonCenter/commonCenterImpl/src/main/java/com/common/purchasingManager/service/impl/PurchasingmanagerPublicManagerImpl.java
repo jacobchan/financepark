@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.common.BuildingBaseManager.entity.BbmRoom;
 import com.common.BuildingBaseManager.service.BbmRoomManager;
+import com.common.ExtentionAtrManager.entity.Billboard;
 import com.common.ExtentionAtrManager.entity.CarEntity;
 import com.common.ExtentionAtrManager.entity.MeetingEntity;
 import com.common.ExtentionAtrManager.service.impl.ExtentionAtrManagerImpl;
@@ -99,6 +100,20 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     	return o;
     }
 	
+    
+    
+    /**
+     * 根据主键查询广告位
+     */
+    @EsbServiceMapping
+    public PurchasingmanagerCommodity getPurchasingmanagerCommodityLed(@ServiceParam(name="commodityId") String id)  throws BusException{
+    	PurchasingmanagerCommodity o=purchasingmanagerCommodityDao.get(id);
+    	extentionAtrManagerImpl.setMeetingLedExtendValue(o);
+    	return o;
+    }
+	
+    
+    
 	@EsbServiceMapping
 	public PagerRecords getPagerPurchasingmanagerCommoditys(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=PurchasingmanagerCommodity.class) Collection<Condition> conditions,//查询条件
@@ -233,7 +248,7 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 		/*if(lx !=null){//会议室类型：01--视频会议室，02---普通会议室
 			Collection<Condition> condition =  new ArrayList<Condition>();
 			condition.add(ConditionUtils.getCondition("codemap.code", Condition.EQUALS,"roomType"));
-			condition.add(ConditionUtils.getCondition("itemValue", Condition.EQUALS,lx));
+			condition.add(ConditionUtils.getCondit	ion("itemValue", Condition.EQUALS,lx));
 			List<Codeitem> list = codeitemManager.getCodeitems(condition, null);
 			if(list.size()>0){
 				lx=list.get(0).getItemCaption();
@@ -406,6 +421,8 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     		pc.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o=purchasingmanagerCommodityDao.save(pc);
     		
+    		
+    		
     		// 根据商品ID获取商品扩展属性
     		List<PurchasingmanagerCommodityExtend> purExList = purchasingmanagerCommodityExtendManager.getCommodityExtList(commodityId);
     		if(purExList.size()>0){
@@ -478,12 +495,114 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     		}
     	}
 		
-		
-
-
-
 	}
+	
+	/**
+     * 保存广告位及其车辆商品扩展属性
+     * @param size 尺寸
+     * @param unit 单位
+     * @param loopType 轮播方式
+     * @param o 商品实体
+     * @throws BusException
+     */
+	@Override
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+	public void saveCommodityAndPropertyForLed(PurchasingmanagerCommodity o) {
+		Billboard billboard = o.getBillboard();
+		String commodityId = o.getCommodityId();
+		boolean isUpdate = StringUtils.isNotEmpty(commodityId);
 		
+		boolean sizeFlag = true;
+		boolean unitFlag = true;
+		boolean loopTypeFlag = true;
+		List<PurchasingmanagerCommodityExtend> peList=new ArrayList<PurchasingmanagerCommodityExtend>();
+		
+    	if(isUpdate){//修改
+    		PurchasingmanagerCommodity pc = purchasingmanagerCommodityDao.get(commodityId); 
+    		pc.setCommodityTitle(o.getCommodityTitle());
+    		pc.setCommodityPrice(o.getCommodityPrice());
+    		pc.setGenreId(o.getGenreId());
+    		pc.setPurchasingmanagerMerchant(o.getPurchasingmanagerMerchant());
+    		pc.setCommodityImage(o.getCommodityImage());
+    		pc.setCommodityCoverImage(o.getCommodityCoverImage());
+    		pc.setCommodityDescribe(o.getCommodityDescribe());
+    		pc.setUpdateUser(o.getUpdateUser());
+    		pc.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o=purchasingmanagerCommodityDao.save(pc);
+    		
+    		
+    		// 根据商品ID获取商品扩展属性
+    		List<PurchasingmanagerCommodityExtend> purExList = purchasingmanagerCommodityExtendManager.getCommodityExtList(commodityId);
+    		if(purExList.size()>0){
+    			for(PurchasingmanagerCommodityExtend pce:purExList){
+    				if(billboard.getSizefieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(billboard.getSize());//保存会议室地址属性
+    					sizeFlag=false;
+    				}else if(billboard.getUnitfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(billboard.getUnit());//保存会议室规模
+    					unitFlag=false;
+    				}else if(billboard.getLoopTypefieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(billboard.getLoopType());//保存会议室类型
+    					loopTypeFlag=false;
+    				}
+    				pce.setUpdateUser(o.getUpdateUser());
+    				pce.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    				peList.add(pce);
+    			}
+    			if(sizeFlag){
+	    			throw new BusException("请先添加广告位尺寸属性");
+	    		}else if(unitFlag){
+	    			throw new BusException("请先添加广告位单位属性");
+	    		}else if(loopTypeFlag){
+	    			throw new BusException("请先添加广告位轮播方式属性");
+	    		}else{
+	    			purchasingmanagerCommodityExtendDao.save(peList);//保存广告位扩展属性列表
+	    		}
+    		}else{
+    			throw new BusException("请先添加广告位的全部扩展属性：尺寸、单位和轮播方式等");
+    		}
+    	}else{//新增
+    		o=purchasingmanagerCommodityDao.save(o);
+    		//获取会议室扩展属性
+    		String genreCode="0303";//广告位类别编号
+    		List<PurchasingmanagerCommodityExtend> pceList=this.getPagerCommodityExtsByGenreId(genreCode);
+    		if(pceList.size()>0){
+    			for(PurchasingmanagerCommodityExtend pce:pceList){
+    				if(billboard.getSizefieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(billboard.getSize());//保存会议室地址属性
+    					sizeFlag=false;
+    				}else if(billboard.getUnitfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(billboard.getUnit());//保存会议室规模
+    					unitFlag=false;
+    				}else if(billboard.getLoopTypefieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(billboard.getLoopType());//保存会议室类型
+    					loopTypeFlag=false;
+    				}
+    				
+    				PurchasingmanagerCommodity pc = new PurchasingmanagerCommodity();
+    				pc.setCommodityId(o.getCommodityId());
+    				pce.setCommodityId(o.getCommodityId());
+    				pce.setCreateUser(o.getUpdateUser());
+    				pce.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    				pce.setUpdateUser(o.getUpdateUser());
+    				pce.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    				peList.add(pce);
+    			}
+    			if(sizeFlag){
+	    			throw new BusException("请先添加广告位尺寸属性");
+	    		}else if(unitFlag){
+	    			throw new BusException("请先添加广告位单位属性");
+	    		}else if(loopTypeFlag){
+	    			throw new BusException("请先添加广告位轮播方式属性");
+	    		}else{
+	    			purchasingmanagerCommodityExtendDao.save(peList);//保存广告位扩展属性列表
+	    		}
+    		}else{
+    			throw new BusException("请先添加广告位的全部扩展属性：尺寸、单位和轮播方式等");
+    		}
+    		
+    	}
+	}
 
 	/**
 	 * 根据商品类别ID获取相应的商品信息
