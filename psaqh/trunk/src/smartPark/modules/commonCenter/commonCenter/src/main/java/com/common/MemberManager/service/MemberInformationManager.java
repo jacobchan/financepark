@@ -13,8 +13,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.EsbServiceMapping;
-import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.common.MemberManager.entity.MemberInformation;
 
 public interface MemberInformationManager extends BaseManager{
@@ -108,4 +106,10 @@ public interface MemberInformationManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public MemberInformation userLogin(MemberInformation memberInformation) throws BusException;
+	/**
+	 * 发送手机验证码
+	 * @param mobile
+	 * @throws BusException
+	 */
+	public void sendMobileCaptcha(String mobile) throws BusException;
 }

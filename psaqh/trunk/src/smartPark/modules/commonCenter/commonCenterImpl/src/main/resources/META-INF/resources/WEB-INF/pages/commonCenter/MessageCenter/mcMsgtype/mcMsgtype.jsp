@@ -10,8 +10,8 @@
 			<youi:fieldTree property="msgTypeParent" caption="消息类型上级" tree="${typeTree}" simple="false"/>
 			<youi:fieldText property="msgTypeCaption"  caption="消息类型名称" operator="LIKE"/>
 		</youi:fieldLayout>
-		<youi:gridCol property="parentTypeCaption"  caption="消息类型上级" width="40%" align="center"/>
-		<youi:gridCol property="msgTypeCaption"  caption="消息类型名称" width="40%" align="center"/>
+		<youi:gridCol property="parentTypeCaption"  caption="消息类型上级" width="50%" align="center"/>
+		<youi:gridCol property="msgTypeCaption"  caption="消息类型名称" width="50%" align="center"/>
 		<%-- <youi:gridCol property="msgTypeStatus"  caption="消息类型状态" width="30%"/> --%>
 
 		<youi:gridCol width="80" fixed="true" property="button" type="button" caption="操作">
