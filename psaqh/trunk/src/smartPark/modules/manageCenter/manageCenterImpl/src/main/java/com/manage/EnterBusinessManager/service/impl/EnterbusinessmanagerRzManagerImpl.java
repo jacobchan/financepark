@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.common.BuildingBaseManager.entity.BbmRoom;
 import com.common.BuildingBaseManager.service.BbmRoomManager;
+import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.service.MemberInformationManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -16,6 +18,7 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.security.fuc.entity.Role;
+import com.gsoft.framework.security.fuc.service.RoleManager;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
@@ -42,6 +45,11 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 	private EnterpriseRoleManager enterpriseRoleManager;
 	@Autowired
 	private BbmRoomManager bbmRoomManager;
+	@Autowired
+	private RoleManager roleManager;
+	
+	@Autowired
+	private MemberInformationManager memberInformationManager;
 	
     /**
      * 查询列表
@@ -192,10 +200,14 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     	enterpriseEmployees.setEmployeesTelephone(er.getRzTelephone());
     	enterpriseEmployees.setMember(er.getRzManager());
     	enterpriseEmployees=enterpriseEmployeesManager.saveEnterpriseEmployees(enterpriseEmployees);
+    	//修改用户的企业ID
+    	MemberInformation member = memberInformationManager.getMemberInformation(er.getRzManager().getMemberId());
+    	member.setCompanyId(er.getRzId());
+    	memberInformationManager.saveMemberInformation(member);
     	//企业员工默认为管理员角色
     	EnterpriseRole enterpriseRole=new EnterpriseRole();
     	enterpriseRole.setEmployees(enterpriseEmployees);
-    	enterpriseRole.setRole(new Role());
+    	enterpriseRole.setRole(roleManager.getRole("ROLE_QY_ADMIN"));
     	enterpriseRoleManager.saveEnterpriseRole(enterpriseRole);
 	}
     
