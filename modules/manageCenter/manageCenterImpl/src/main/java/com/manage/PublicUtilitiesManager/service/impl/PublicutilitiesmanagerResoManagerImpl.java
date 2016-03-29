@@ -283,7 +283,7 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 		orderDetail.setCommoditydetailNum("1");
 		this.userOrderDetailManager.saveOrdermanagerCommoditydetail(orderDetail);
 		//保存订单扩展属性列表
-		while(pg.getGenreId() != null){//获取最顶级商品类别
+		if(pg.getGenreId() != null){//获取最顶级商品类别
 			pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(pg.getGenreId());
 		}
 		StringBuffer publicResoIdBuff =  new StringBuffer();//公共资源ID
@@ -458,10 +458,10 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 		@SuppressWarnings("unchecked")
 		List<PurchasingmanagerCommodity> pcList=(List<PurchasingmanagerCommodity>) pagerRecords.getRecords();
 
-//		for(PurchasingmanagerCommodity pc:pcList){
-//			extentionAtrManager.setMeetingRoomExtendValue(pc);
-//		}
-
+		/*for(PurchasingmanagerCommodity pc:pcList){
+			extentionAtrManager.setMeetingRoomExtendValue(pc);
+		}
+*/
 
 
 		return pagerRecords;
