@@ -23,10 +23,9 @@
 			}
 			//删除地址
 			function removeKnowledge(obj){
-				var kId = obj.id.split("_")[0];
 			 	$.youi.ajaxUtils.ajax({
 					url:baseUrl+'/informationKnowledgeManager/removeInformationKnowledge.json',
-					data:'knowledgeId='+kId,
+					data:'knowledgeId='+obj,
 					success:function(result){
 						alert("删除成功");
 					}
@@ -63,7 +62,7 @@
 					                                            '<td colspan="2" height="42" valign="top" align="left"><span class="baodao_main">'+records[i].knowledgeContent+'</span></td>'+
 					                                        '</tr>'+
 					                                        '<tr>'+
-					                                            '<td height="40" valign="middle" align="left"><a href="javascript:void(0);"><span>编辑</span></a>丨<a id="'+records[i].knowledgeId+'_remove" href="javascript:removeKnowledge(this);">删除</a></td>'+
+					                                            '<td height="40" valign="middle" align="left"><a href="javascript:void(0);"><span>编辑</span></a>丨<a href=\'javascript:removeKnowledge("'+records[i].knowledgeId+'");\'>删除</a></td>'+
 					                                        '</tr>'+
 					                                    '</table>'+
 					                                '</div>'+
