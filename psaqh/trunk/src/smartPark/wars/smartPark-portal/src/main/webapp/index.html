@@ -35,7 +35,7 @@
 				<div class="select_down"></div>
                 <div class="select_list">
                 	<ul>
-                    	<!-- <li>公园</li>
+                        <!-- <li>公园</li>
                         <li>套房</li>
                         <li>游泳池</li>
                         <li>大楼</li> -->
@@ -789,7 +789,8 @@
 			timer=setInterval(change,3000);	
 		});
 		/*select_list*/
-		$(".selectBox").on("click",function(){
+		$(".selectBox").on("click",function(e){
+            e.stopPropagation();
 			$(".select_list").toggle();
 			var recordType='0401';//04:众创空间
 			$('.select_list>ul').select({
@@ -807,7 +808,7 @@
         //选时间
 		$("#lf_time").on("click",function(e){
             e.stopPropagation();
-            $(this).next(".time-nav").show();               
+            $(this).next(".time-nav").toggle();               
         });
         $(".time-nav").on("click","li",function(){
             $(this).addClass("selected").siblings().removeClass("selected");
@@ -981,6 +982,7 @@
 
         function abc(){
             $(".time-nav").hide();
+            $(".select_list").hide();
         }
 	</script>
 </body>
