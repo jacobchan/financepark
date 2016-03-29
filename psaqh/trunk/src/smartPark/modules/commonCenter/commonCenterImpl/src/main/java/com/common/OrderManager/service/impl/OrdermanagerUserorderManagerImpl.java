@@ -136,6 +136,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     		if(o.getUserorderStatus() != null){
     			order.setUserorderStatus(o.getUserorderStatus());
     		}
+    		order.setMemberId(o.getUpdateUser());
     		order.setUpdateUser(o.getUpdateUser());
     		order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return ordermanagerUserorderDao.save(order);
