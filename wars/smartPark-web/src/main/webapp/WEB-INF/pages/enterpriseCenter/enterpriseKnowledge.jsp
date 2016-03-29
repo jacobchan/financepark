@@ -28,6 +28,7 @@
 					data:'knowledgeId='+obj,
 					success:function(result){
 						alert("删除成功");
+						location.reload();
 					}
 				});
 			}
