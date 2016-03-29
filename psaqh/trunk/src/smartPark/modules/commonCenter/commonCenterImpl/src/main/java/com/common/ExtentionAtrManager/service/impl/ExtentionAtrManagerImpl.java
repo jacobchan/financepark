@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.common.ExtentionAtrManager.entity.AgencyBookEntity;
+import com.common.ExtentionAtrManager.entity.Billboard;
 import com.common.ExtentionAtrManager.entity.MeetingEntity;
 import com.common.ExtentionAtrManager.service.ExtentionAtrManager;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
@@ -39,6 +40,27 @@ public class ExtentionAtrManagerImpl implements ExtentionAtrManager {
 		AgencyBookEntity agencyBook = new AgencyBookEntity();
 		agencyBook.setServiceTerm(getExtendValue(agencyBook.getServiceTermfieldName(),commdity.getCommodityId()));
 		commdity.setAgencyBook(agencyBook);
+	}
+	
+	/**
+	 * 根据商品获取广告位的扩展属性的内容
+	 * @param commdity 商品
+	 */
+	public void setMeetingLedExtendValue(PurchasingmanagerCommodity commdity)throws BusException{
+		Billboard billboard = new Billboard();
+		//获取广告位尺寸
+		String size = billboard.getSizefieldName();
+		size = this.getExtendValue(size,commdity.getCommodityId());
+		billboard.setSize(size);
+		//获取广告位轮播方式
+		String loopTypeName = billboard.getLoopTypefieldName();
+		String loopType = this.getExtendValue(loopTypeName,commdity.getCommodityId());
+		billboard.setLoopType(loopType);
+		//获取广告位轮播单位
+		String unitName = billboard.getUnitfieldName();
+		String unit = this.getExtendValue(unitName,commdity.getCommodityId());
+		billboard.setUnit(unit);
+		commdity.setBillboard(billboard);
 	}
 	
 	
