@@ -10,6 +10,20 @@
 				$("#more").click(function(){
 					$("#moreul").slideToggle("slow");
 				});
+				
+				var urlstr = location.href;
+			  	var urlstatus=false;
+				$(".sidebar-menu-mainul2 li").each(function (){
+					if ((urlstr + '/').indexOf($(this).find("a").attr('href')) > -1 && $(this).find("a").attr('href')!='') {
+						$(this).addClass('active');
+						urlstatus = true;
+					} else {
+					   	$(this).removeClass('active');
+					}
+				});
+				if (!urlstatus) {
+					$(".sidebar-menu-mainul2 li").eq(0).addClass('active');
+				}
 			});
 		</script>
 	</head>
@@ -28,10 +42,10 @@
 	                        <li><a href="<%=request.getContextPath()%>/enterprise/media.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_baodao.png"></span>媒体报道</a></li>
 	                    </ul>
 	                </li>
-	            	<li><a href="qytx.html">企业通讯录管理</a></li>
-	                <li><a href="qyyqm.html">企业邀请码</a></li>
-	                <li><a href="qydd.html">订单中心</a></li>
-	                <li><a href="plxx.html">评论消息</a></li>
+	            	<li><a href="<%=request.getContextPath()%>/enterprise/book.html">企业通讯录管理</a></li>
+	                <li><a href="<%=request.getContextPath()%>/enterprise/code.html">企业邀请码</a></li>
+	                <li><a href="<%=request.getContextPath()%>/enterprise/order.html">订单中心</a></li>
+	                <li><a href="<%=request.getContextPath()%>/enterprise/reply.html">评论消息</a></li>
 	            </ul>
 	            <a href="<%=request.getContextPath()%>/member/memberCenter/index.html"><div class="sidebar-menu-return"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_return.png"></span>返回个人中心</div></a>
 	        </div>

@@ -73,16 +73,6 @@
 	<body class="page-header-fixed" style=" background-image:none">
 		<%@ include file="/WEB-INF/pages/enterpriseCenter/common/ec_head.jsp"%>
 		<%@ include file="/WEB-INF/pages/enterpriseCenter/common/ec_left.jsp"%>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$('.sidebar-menu-mainul2').delegate('li', 'click', function() {
-					$('.sidebar-menu-mainul2').find('li').each(function(i, dom) {
-			            $(this).removeClass('active');
-			        });
-					$(".sidebar-menu-mainul2 li").eq(5).addClass("active");
-			    });
-			});
-		</script>
 		<div id="youi_page_header" class="youi-page-header clearfix"></div>
 		<div class="main">    
 			<div id="youi_page_left" class="fl clearfix"></div>
