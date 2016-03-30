@@ -41,7 +41,7 @@
 		<youi:button active="1" name="commodityUpdate" caption="修改"/>
 		<%-- <youi:button name="veiwCommodity" active="1" caption="查看详情"/> --%>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
-		   <%--  <youi:button name="edit" caption="修改"/> --%>
+		   <%--  <youi:button name="edit" caption="修改"/>  --%>
 			<youi:button name="remove" caption="删除"/>
 		</youi:gridCol>
 	</youi:grid>
@@ -54,7 +54,7 @@
 			<youi:fieldText property="commodityTitle"  caption="标题" notNull="true"/>
 			<youi:fieldText property="commodityPrice"  caption="标价" expression="^[0-9]*$" expressionMessage="请输入正确数值" notNull="true"/>
 			<youi:fieldTree simple="false" popup="true" tree="${bbmRoomTree}" property="meetingRoom.adr"  caption="会议室地址" onlyLeaf="true" notNull="true"/>
-			<youi:fieldText property="meetingRoom.gm"  caption="规模人数" notNull="true"/>
+			<youi:fieldSelect property="meetingRoom.gm"  caption="规模人数" convert="roomGm" notNull="true"/>
 			<youi:fieldSelect property="meetingRoom.lx"  caption="会议室类型" convert="roomType" notNull="true"/>
 			<youi:fieldSelect property="meetingRoom.tyy"  caption="是否有投影仪" convert="roomProjector" notNull="true"/>
 			<youi:fieldSelect property="genreId" caption="商品类别"  src="esb/web/purchasingmanagerPublicManager/getRecordsByGenreCode.json" parents="genreCode" parentsAlias="genreCode" notNull="true" code="genreId" show="genreName"/>

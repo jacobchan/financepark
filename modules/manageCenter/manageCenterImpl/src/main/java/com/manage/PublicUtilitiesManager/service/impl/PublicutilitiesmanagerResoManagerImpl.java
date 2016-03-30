@@ -440,7 +440,7 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 	@EsbServiceMapping
 	public PagerRecords getPagerPublicCommoditys(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=PurchasingmanagerCommodity.class) Collection<Condition> conditions,//查询条件
-			@OrderCollection Collection<Order> orders,@ServiceParam(name="genreCode") String genreCode,@ServiceParam(name="pege") String page)  throws BusException{
+			@OrderCollection Collection<Order> orders,@ServiceParam(name="genreCode") String genreCode,@ServiceParam(name="page") String page)  throws BusException{
 		// 查询属于公共资源的商品：genreCode=0301:会议室 ；genreCode=0302:车辆租赁；genreCode=0303:广告位
 		Collection<Condition> conditionP = new ArrayList<Condition>();
 		conditionP.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS,genreCode));
@@ -458,10 +458,15 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 		@SuppressWarnings("unchecked")
 		List<PurchasingmanagerCommodity> pcList=(List<PurchasingmanagerCommodity>) pagerRecords.getRecords();
 
-		/*for(PurchasingmanagerCommodity pc:pcList){
-			extentionAtrManager.setMeetingRoomExtendValue(pc);
+
+		for(PurchasingmanagerCommodity pc:pcList){
+			if(genreCode.equals("0301")){//会议室
+				extentionAtrManager.setMeetingRoomExtendValue(pc);
+			}else if(genreCode.equals("0302")){//车辆
+				extentionAtrManager.setCarExtendValue(pc);
+			}
 		}
-*/
+
 
 
 		return pagerRecords;

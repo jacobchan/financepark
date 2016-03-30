@@ -27,9 +27,9 @@
 		<youi:gridCol property="commodityDownTime"  caption="下架时间" align="center" width="15%"/>
 		<youi:gridCol property="purchasingmanagerGenre.genreId"  caption="商品类别" align="center" width="0"/>
 		
-		<%-- <youi:button active="1" name="commodityUpdate" caption="修改"/> --%>
+		<youi:button active="1" name="commodityUpdate" caption="修改"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
-			<youi:button name="edit" caption="修改"/> 
+			<%-- <youi:button name="edit" caption="修改"/>  --%>
 			<youi:button name="remove" caption="删除"/>
 		</youi:gridCol>
 	</youi:grid>
