@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50538
 File Encoding         : 65001
 
-Date: 2016-03-29 18:05:40
+Date: 2016-03-30 14:18:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -65,6 +65,7 @@ INSERT INTO `youi_codemap` VALUES ('40288abc531c24bb01531c2a418c0001', 'resoStat
 INSERT INTO `youi_codemap` VALUES ('40288acb53314dd40153318d8a160009', 'oc_status', '一卡通预约状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288acb53314dd40153318e54d8000c', 'oc_way', '一卡通办理方式', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288acb53314dd40153318f0c3b000f', 'resoTime', '可用时段', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288acb53c628690153c6297f9a0001', 'roomGm', '会议室规模', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288acd52f2342b0152f23628bf0001', 'businessType', '园区商品类型', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288acd52f2342b0152f23664670002', 'orderType', '订单类型', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288acd52f2342b0152f2369e7a0003', 'commodityOrderStatus', '商品订单状态', '1', null);
