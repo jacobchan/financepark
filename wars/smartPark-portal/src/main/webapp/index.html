@@ -623,7 +623,7 @@
 	<script type="text/javascript" src="scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
 	<script type="text/javascript" src="scripts/page/laydate/laydate.js"></script>
-	<script type="text/javascript">
+ 	<script type="text/javascript">
 	/* 政策展示 */
 		$(function(){
 			$.youi.ajaxUtils.ajax({
@@ -750,13 +750,13 @@
 				
 				function _parseRecords(record){
 					var imageUrl="/filestore/";
-					for(var i=0;i<3;i++){
+				 	for(var i=0;i<record.length;i++){
 						   //http://localhost:8088/smartPark-web/ imageUrl
 							/* var html="<li><div class='fl'><img src='"+imageUrl+record[i].commodityImage+"' height='59' width='110'></div><div class='fl ml10'><div class='span_bold'>"+record[i].commodityTitle+"</div>"+
 							"<p class='cc f12'>"+record[i].commodityPrice+"元/小时</p><a class='handbtn' href='./companyservice/room.html'>立即预定</a></div></li>";
 							 $(".hand_ul").append(html); */
 							 
-					}
+					} 
 				};
 			
 			$('.cp_info').plist({
@@ -865,10 +865,9 @@
 		    elem: '#lf_date', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
 		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 		});
-       
 	})
 </script>
-	<script type="text/javascript">
+ 	<script type="text/javascript">
 		    //提交预约
 			$("#reserveButton").click(function(){
 				var recordType='04';//04:众创空间
@@ -935,7 +934,7 @@
 	<script type="text/javascript">
 		$(function(){
 			//园区推荐活动数据
-			var serviceURL = baseUrl+"activityApplyManager/getActivityListByType.json";		
+			var serviceURL = baseUrl+"activityApplyManager/getActivityListIsRecoment.json";		
 			$.youi.ajaxUtils.ajax({
 				url:serviceURL,
 				jsonp:'data:jsonp',
@@ -952,7 +951,7 @@
 			for(var i=0;i<record.length;i++){
 				html+="<li class='clearfix'><a href='javascript:;'>"+
 							"<div class='plg-photo'>"+
-								"<img src='../filestore/"+record[i].activityImage+"' border='0' width='100%'/>"+
+								"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityImage+"&method=show' border='0' width='100%'/>"+
 								"<em>"+record[i].applayType.typeName+"</em>"+
 							"</div>"+
 							"<div class='plg-article pr' id='"+record[i].applyId+"'>"+
