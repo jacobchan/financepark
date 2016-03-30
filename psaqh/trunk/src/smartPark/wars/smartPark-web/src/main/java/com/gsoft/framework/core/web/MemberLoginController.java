@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,8 @@ public class MemberLoginController {
 
 	@Autowired(required=false)
 	private IMemberService memberService;//会员服务
-	
+	@Value("#{configProperties['proUrl']}")
+	private String prourl;
 	/**
 	 * 会员登录页面跳转
 	 * @param request
@@ -72,7 +74,8 @@ public class MemberLoginController {
 		//shiro退出
 		org.apache.shiro.SecurityUtils.getSubject().logout();
 		try {
-			WebUtils.issueRedirect(request, response, "/member/"+loginType+"/login.html");
+			//WebUtils.issueRedirect(request, response, "/member/"+loginType+"/login.html");
+			WebUtils.issueRedirect(request, response, prourl);
 		} catch (IOException e) {
 //			e.printStackTrace();
 		}
