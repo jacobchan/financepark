@@ -155,6 +155,14 @@ public interface PurchasingmanagerPublicManager extends BaseManager{
      */
     public void saveCommodityAndPropertyForCar(PurchasingmanagerCommodity o);
     
+    /**
+     *保存工位及其扩展属性
+     * @param o 商品实体
+     * @return
+     * @throws BusException
+     */
+    public void saveCommodityAndPropertyForGw(PurchasingmanagerCommodity o) throws BusException;
+    
     
     /**
      * 保存广告位及其车辆商品扩展属性

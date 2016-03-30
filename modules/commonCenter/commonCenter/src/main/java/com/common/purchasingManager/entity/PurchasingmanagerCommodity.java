@@ -20,13 +20,13 @@ import org.hibernate.validator.Length;
 
 
 
+
 import com.common.ExtentionAtrManager.entity.Billboard;
 
 
 import com.common.ExtentionAtrManager.entity.AgencyBookEntity;
-
 import com.common.ExtentionAtrManager.entity.CarEntity;
-
+import com.common.ExtentionAtrManager.entity.GwEntity;
 import com.common.ExtentionAtrManager.entity.MeetingEntity;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
@@ -153,8 +153,20 @@ public class PurchasingmanagerCommodity implements Domain{
 	
 	@Transient
 	private AgencyBookEntity agencyBook;//代理记账的扩展属性
+	
+	
+	@Transient
+	private GwEntity gw;//工位的扩展属性
 
 
+
+	public GwEntity getGw() {
+		return gw;
+	}
+
+	public void setGw(GwEntity gw) {
+		this.gw = gw;
+	}
 
 	public Billboard getBillboard() {
 		return billboard;

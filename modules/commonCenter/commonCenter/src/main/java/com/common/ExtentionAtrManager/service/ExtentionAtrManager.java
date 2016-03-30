@@ -11,6 +11,16 @@ public interface ExtentionAtrManager extends BaseManager {
 	 */
 	public void setMeetingRoomExtendValue(PurchasingmanagerCommodity commdity) throws BusException;
 	/**
+	 * 根据商品获取车辆的扩展属性的内容
+	 * @param commdity 商品
+	 */
+	public void setCarExtendValue(PurchasingmanagerCommodity commdity) throws BusException;
+	/**
+	 * 根据商品获取工位的扩展属性的内容
+	 * @param commdity 商品
+	 */
+	public void setGwExtendValue(PurchasingmanagerCommodity commdity) throws BusException;
+	/**
 	 * 根据商品获取代理记账扩展属性的内容
 	 * @param commdity
 	 * @throws BusException
