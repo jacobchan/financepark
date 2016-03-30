@@ -1,16 +1,19 @@
 package com.gsoft.framework.core.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
+import com.common.EnterpriceTypeManager.service.EtypeEnterprisetypeManager;
 import com.gsoft.framework.security.AccountPrincipal;
 import com.gsoft.framework.util.SecurityUtils;
 @Controller
 @RequestMapping("/enterprise")
 public class EnterpriseInfoController {
+	@Autowired
+	private EtypeEnterprisetypeManager etypeEnterprisetypeManager;
+	
 	/**
 	 * 企业信息
 	 * @param request
