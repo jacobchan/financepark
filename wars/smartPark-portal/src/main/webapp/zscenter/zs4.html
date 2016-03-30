@@ -66,9 +66,9 @@
 						</li>
 					</ul> -->
 					<!-- 没有数据时显示图片 star-->
-					<div class="tc pt50 pb50">
+					<!-- <div class="tc pt50 pb50">
 	                    <img src="../styles/images/none3.png" border="0"/>
-	                </div>
+	                </div> -->
 	                <!-- 没有数据时显示图片 end-->
 				</div>
 			</div>	
@@ -122,7 +122,7 @@
 					getRecords(typeId) ;//每次点击新闻类型的时候，查询对应的新闻
 				});
 		}; 
-		function getRecords(issueTypeId,indexs){
+		function getRecords(issueTypeId){
 			var params=["issueTypeId="+issueTypeId];//当前政策类型ID
 			$.youi.ajaxUtils.ajax({
 				url:baseUrl +"nmIssuenewsManager/getAllPolicyByTypeId.json",
@@ -130,8 +130,14 @@
 				jsonp:'data:jsonp',
 				dataType:'jsonp',
 				success:function(result){
+					console.log(result) ;
 					if(result&&result.records){
-						getHtml(result.records) ;
+						if(result.records.length>0){
+							getHtml(result.records) ;
+						}else{
+							var html = '<div class="tc pt50 pb50"><img src="../styles/images/none3.png" border="0"/></div>' ;
+							$('.park-box').append(html) ;
+						}
 					}
 				}
 			});
@@ -150,7 +156,6 @@
 									'<div class="plg-photo">'+
 										"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+news.imageUrl+"&method=show' border='0' width='100%'>"+
 									"</div>"+
-							/* '<img src="../styles/images/zs/big-nav-img1.png" border="0" width="100%"/></div>'+ */
 						 		"<div class='plg-article'>"+
 									"<a href=''><h3>"+news.policyCaption+"</h3></a>"+
 									"<p>"+news.policyContent+"</p>"+
