@@ -63,7 +63,8 @@
 		<menu id="120005" text="会议室管理" href="page/commonCenter.purchasingManager.purchasingmanagerCommodity/purchasingmanagerCommodityForRoom.html"></menu>
 		<menu id="120006" text="广告位管理" href="page/commonCenter.purchasingManager.purchasingmanagerCommodity/purchasingmanagerCommodityForAdv.html"></menu>
 		<menu id="120007" text="车辆管理" href="page/commonCenter.purchasingManager.purchasingmanagerCommodity/purchasingmanagerCommodityForCar.html"></menu>
-		<menu id="120008" text="订单管理" href="page/manageCenter.PublicUtilitiesManager.publicutilitiesmanagerReso/ordermanagerUserorderForPublic.html"></menu>
+		<menu id="120008" text="工位管理" href="page/commonCenter.purchasingManager.purchasingmanagerCommodity/purchasingmanagerCommodityForGw.html"></menu>
+		<menu id="120009" text="订单管理" href="page/manageCenter.PublicUtilitiesManager.publicutilitiesmanagerReso/ordermanagerUserorderForPublic.html"></menu>
 	</menu>
 	<menu id="025000" text="招商预约管理">
 			<menu id="025100" text="预约分配管理" href="page/manageCenter.ReserveManager.reservationRecord/reservationRecord.html"></menu>
