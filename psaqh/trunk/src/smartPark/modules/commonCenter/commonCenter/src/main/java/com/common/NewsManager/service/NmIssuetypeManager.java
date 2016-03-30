@@ -12,6 +12,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 
 import com.common.NewsManager.entity.NmIssuetype;
 
@@ -80,7 +81,7 @@ public interface NmIssuetypeManager extends BaseManager{
      * 得到新闻公告的所有的子类型
      * @return
      */
-    public List<NmIssuetype> getNewsType() ;
+    public List<NmIssuetype> getNewsType(String userId) ;
     
     /**
      * 通过政策发布类型code得到当前政策
