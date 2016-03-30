@@ -157,34 +157,64 @@
 			$(".ac-see").click(function(){
 				$(".bg-tanc.m2").show();
 			});
-			$.ajax({
+			 $.ajax({
 				url:baseUrl+'/propertyservicemanagerFkcodeManager/getFkcodeListforpage.json', 
-				success:function(result){
-					
+				success:function(result){					
 					if(result&&result.records){
 						_parseRecords(result.records);
 					}
 				}
-			});
-		});
-		
+			}); 			
+		});		
 		//拼接列表
 		function _parseRecords(record){
 			for(var i=0;i<record.length;i++){
-				var html="<tr id='"+record[i].fkcodeId+"' class='aaa'>"+
+				var id = record[i].fkcodeId ;
+				var html="<tr id='"+id +"' class='aaa'>"+
 						"<td><a href=''>"+record[i].fkCode+"</a></td>"+
-						"<td>"+record[i].fkcodeTime+"</td>"+
-						"<td>"+record[i].applyStatus+"</td>"+
-						"<td>"+record[i].fkcodeName+"</td>"+
+						"<td>"+record[i].fkcodeTime+"</td>" +	
+						"<td class='"+id+"'></td>"+
+					"<td>"+record[i].fkcodeName+"</td>"+
 						"<td>"+record[i].fkcodeTelephone+"</td>"+
 						"<td><a href='javascript:;' onclick='javascript:qrcode(this)' class='ac-see'>查看二维码</a><span class='f12 ml5 mr5'>|</span><a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消访客</a></td>"+
 						"</tr>";
-				 $("tbody").append(html);
+				aa(record[i].fkcodeId);
 				
+				 $("tbody").append(html);				
 			/* 	 $(".ac-see").click(function(){
 					 $(".bg-tanc.m2").show();
 				 }); */
 			}
+		};
+		function aa(aa){
+			var fkcodeId = aa;
+			var status ='' ;
+			//alert(aa);
+			 $.ajax({
+					url:baseUrl+'/propertyservicemanagerTwcrdManager/findTwcrdById.json', 
+					data:'fkcodeId='+fkcodeId,
+					success:function(result){
+						console.log(result) ;
+						if(result&&result.record){
+							var id = result.record.propertyservicemanagerFkcode.fkcodeId;
+							status = _TwcrdlistRecords(result.record);
+							$('.'+id).text(status) ;						
+						}
+					}
+				}); 
+		}; 
+		//获得到访statusa
+		function _TwcrdlistRecords(record){	
+			//console.log(record) ;
+				var status='';			
+				if(record.status=='00'){
+					status = "未到访";
+				}else if(record.status=='01'){
+					status = "未到访";
+				}else if(record.status=='02'){
+					status = "已到访";
+				}								
+				return status;			
 		};
 		function cancel(obj){
 			var me=obj.parentNode.parentNode;
@@ -222,7 +252,7 @@
 			 var fkCode=$("#fkCode").val(); 
 			 var startTime=$("#startTime").val(); 
 			 var endTime=$("#endTime").val(); 
-			 params=['fkCode='+fkCode+'','startTime='+startTime+'','endTime='+endTime+'']
+			 params=['fkCode='+fkCode+'','startTime='+startTime+'','endTime='+endTime+''],
 		      $.ajax({
 		    	 url:baseUrl+'/propertyservicemanagerFkcodeManager/getFkcodelistLikeFkcodeCode.json',
 		    	 data:params.join('&'),
@@ -245,8 +275,7 @@
 					data:'fkcodeId='+id,
 					success:function(result){
 						if(result&&result.record){
-							alert("取消成功!");
-							
+							alert("取消成功!");						
 							location.reload();
 						}
 					}
