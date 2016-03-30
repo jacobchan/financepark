@@ -83,10 +83,10 @@
 	    var commodityId = $elem('record_sFpro_commodityId',pageId).fieldValue();
 		var commodityTitle = $elem('record_sFpro_commodityTitle',pageId).fieldValue();
 		var commodityPrice = $elem('record_sFpro_commodityPrice',pageId).fieldValue();
-	    var roomId = $elem('record_sFpro_bbmRoom_roomId',pageId).fieldValue();
-	    var roomContain = $elem('record_sFpro_roomContain',pageId).fieldValue();
-	    var roomType = $elem('record_sFpro_roomType',pageId).fieldValue();
-	    var roomProjector = $elem('record_sFpro_roomProjector',pageId).fieldValue();
+	    var roomId = $elem('record_sFpro_meetingRoom_adr',pageId).fieldValue();
+	    var roomContain = $elem('record_sFpro_meetingRoom_gm',pageId).fieldValue();
+	    var roomType = $elem('record_sFpro_meetingRoom_lx',pageId).fieldValue();
+	    var roomProjector = $elem('record_sFpro_meetingRoom_tyy',pageId).fieldValue();
 	    var genreId = $elem('record_sFpro_genreId',pageId).fieldValue();
 	    var merchantId = $elem('record_sFpro_purchasingmanagerMerchant_merchantId',pageId).fieldValue();
 		var commodityImage = $elem('record_sFpro_commodityImage',pageId).fieldValue();
