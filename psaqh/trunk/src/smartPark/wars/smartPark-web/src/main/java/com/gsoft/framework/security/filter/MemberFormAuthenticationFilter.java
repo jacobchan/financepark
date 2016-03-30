@@ -58,9 +58,15 @@ public class MemberFormAuthenticationFilter extends DefaultFormAuthenticationFil
 	      MemberInformation mem = (MemberInformation) subject.getPrincipal();
 	      params.put("memberInfoMation", mem);
 	      params.put("companyId", mem.getCompanyId());
-	      EnterbusinessmanagerRz rz = enterbusinessmanagerRzManager.getEnterbusinessmanagerRz(mem.getCompanyId());
-	      params.put("companyName", rz.getRzName());
-	      params.put("companyAdr", rz.getRoomId().getRoomAddress());
+	      if(mem.getCompanyId() == null){
+	    	  params.put("companyName", "");
+		      params.put("companyAdr", ""); 
+	      }else{
+	    	  EnterbusinessmanagerRz rz = enterbusinessmanagerRzManager.getEnterbusinessmanagerRz(mem.getCompanyId());
+		      params.put("companyName", rz.getRzName());
+		      params.put("companyAdr", rz.getRoomId().getRoomAddress()); 
+	      }
+	     
 	      params.put("authorization", this.esbSecurityManager.encryptSecurityInfo(null));
 	      Map results = new HashMap();
 	      response.setContentType("application/json;charset=UTF-8");
