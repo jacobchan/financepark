@@ -2,9 +2,8 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
 	<!--**********************************子页面**********************************-->
-	<youi:subpage caption="商品扩展信息" 
-		width="800" subpageId="sb_commodity_extend"
-		src="page/commonCenter.purchasingManager.purchasingmanagerCommodityExtend/purchasingmanagerCommodityExtend.html?commodity.commodityId={commodityId}">
+	<youi:subpage
+		src="page/commonCenter.purchasingManager.purchasingmanagerCommodity/purchasingmanagerCommodityExtendForGwUpdate.html?commodityId={commodityId}" subpageId="updateCommodity" height="600" caption="会议室及其扩展属性修改">
 	</youi:subpage>
 	<!--**********************************子页面**********************************-->
 	<youi:grid id="grid_purchasingmanagerCommodity" idKeys="commodityId" caption="商品信息列表"  panel="false"
@@ -61,9 +60,11 @@
 		var genreId = selectRecord['purchasingmanagerGenre.genreId'];
 		$elem('subpage_sb_commodity_extend',pageId).subpage('open',{commodityId:commodityId},null,{commodityId:commodityId});
 	</youi:func>
-	<youi:func name="func_grid_veiwCommodity">
+	<youi:func name="func_grid_commodityUpdate">
 		var selectRecord = $elem('grid_purchasingmanagerCommodity',pageId).grid('getSelectedRecord');
-		$elem('form_purchasingmanagerCommodity_view',pageId).form("reset").form('fillRecord',selectRecord).form('open');
+		var commodityId = selectRecord['commodityId'];
+		var subpageElement = $elem('subpage_updateCommodity',pageId);
+		subpageElement.subpage('open',{commodityId:commodityId},null,{commodityId:commodityId});
 	</youi:func>
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
