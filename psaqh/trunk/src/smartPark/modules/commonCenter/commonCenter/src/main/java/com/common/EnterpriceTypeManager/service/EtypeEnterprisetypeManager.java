@@ -66,4 +66,11 @@ public interface EtypeEnterprisetypeManager extends BaseManager{
 	public boolean exsitEtypeEnterprisetype(String propertyName,Object value) throws BusException;
 	
 	public List<EtypeEnterprisetype> getChildren(String parentId) throws BusException;
+	
+	/**
+	 * 获取企业类型JSon
+	 * @return
+	 * @throws BusException
+	 */
+	public String findEnterpriseTypeTree() throws BusException;
 }
