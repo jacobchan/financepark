@@ -15,7 +15,8 @@
 						if(result&&result.record){
 							$("#financingRe").html(result.record.companyId);
 							$.ajax({
-								url:baseUrl+'/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json',
+								url:baseUrl+'/enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json',
+								data : ['rzId='+result.record.companyId].join('&'),
 								success : function(results) {
 					    			if (results && results.records) {
 					    				var records = results.records;
