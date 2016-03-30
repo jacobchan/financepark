@@ -7,9 +7,36 @@
 		}
 	</script>
 	<div style="background-color:#545454">
-		<div class="w1200 tr head-top clearfix">
-			<a>${user.loginName}</a>
-			<a href="http://localhost:9088/index.html">退出</a>
+		<div class="w1200 head-top clearfix">
+				<div class="fl" style="color:#cdcdcd">
+					欢迎访问富春硅谷！
+				</div>
+				<div class="fr">
+				<div class="fl">
+					<span href="" class="brcd">服务支持
+						<div class="fwtel pa">
+							<p style="border-bottom:1px solid #efecec;">招商电话<span class="ml10">0571-86508888</span></p>
+							<p>物业电话<span class="ml10">0571-87192899</span></p>
+						</div>
+					</span>
+					<span href="" class="brcd">微信
+						<div class="wximg pa">
+							<img src="<%=request.getContextPath()%>/styles/images/wxcode.jpg" class="mt15 mb15"/>
+						</div>
+					</span>
+					<span href="" class="brcd">APP下载
+						<div class="apptel pa">
+							<h3>下载企业公园客户端</h3>
+							<a href=""><img src="<%=request.getContextPath()%>/styles/images/ios.png" border="0" class="mr10"/>APP Store</a>
+							<a href=""><img src="<%=request.getContextPath()%>/styles/images/andriod.png" border="0" class="mr10"/>Android</a>
+						</div>
+					</span>
+				</div>
+				<div id="user_info" class="fr">
+					<a href="#">登录</a>
+					<a href="#">注册</a>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="header-cen clearfix">
