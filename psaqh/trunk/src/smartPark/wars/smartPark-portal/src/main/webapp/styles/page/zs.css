@@ -642,6 +642,12 @@ i.star0{background:url(../images/company/star0.png) no-repeat;}
 i.star1{background:url(../images/company/star1.png) no-repeat;}
 i.star2{background:url(../images/company/star2.png) no-repeat;}
 
+/**订单中心的订单详情**/
+.order-table{border:1px solid #efecec;width: 100%;}
+.ot-head{background-color: #EEE;line-height: 30px;padding: 5px 20px;}
+.order-table td{padding: 10px 0px;color: #7c7c7c;border-bottom: 1px solid #efecec;vertical-align: top;}
+.order-table tr:last-child td{border-bottom: 0px;}
+
 /*安全中心*/
 .per-h4{border-left: 1px solid #ff6715;line-height: 18px;font-size: 16px;padding-left: 20px;}
 
