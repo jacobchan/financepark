@@ -185,17 +185,17 @@
 		function _parseRecords(record){
 			var imageUrl="/filestore/";
 			for(var i=0;i<record.length;i++){
-				/* if(record[i].zwValue==undefined){
-					record[i].zwValue="";
+				if(record[i].meetingRoom.lx==undefined){
+					record[i].meetingRoom.lx="";
 				}
-				if(record[i].dwValue==undefined){
-					record[i].dwValue="";
+				if(record[i].meetingRoom.gm==undefined){
+					record[i].meetingRoom.gm="";
 				}
-				if(record[i].cpValue==undefined){
-					record[i].cpValue="";
-				} */
+				if(record[i].meetingRoom.tyy==undefined){
+					record[i].meetingRoom.tyy="";
+				}
 					var html="<li class='clearfix'><div class='fl'><img src='"+imageUrl+record[i].commodityImage+"' height='205' width='285'></div>"+
-					"<div class='fl ml30' style='width:535px'><a href='roomxq.html?id="+record[i].commodityId+"' class='span_bold f20'>"+record[i].commodityTitle+"</a>"+
+					"<div class='fl ml30' style='width:535px'><a href='roomxq.html?id="+record[i].commodityId+"' class='span_bold f20'>"+record[i].commodityTitle+"</a><div class='mt20 mb20'><div class='res_tip'>"+record[i].meetingRoom.lx+"</div><div class='res_tip'>"+record[i].meetingRoom.gm+"</div><div class='res_tip'>投影仪："+record[i].meetingRoom.tyy+"</div></div>"+
 					"<div style='height:55px'>"+record[i].commodityDescribe+"</div><div class='mt30'><img class='mr10' src='../styles/images/company/res_icon.png'/><span class='vm pr20'>"+record[i].purchasingmanagerMerchant.merchantLinkman+"</span>"+
 					"<img class='mr10' src='../styles/images/company/res_ico.png'/><span class='vm'>联系电话："+record[i].purchasingmanagerMerchant.merchantLinkmanPhone+"</span><div class='jcbg f20 fr'>"+record[i].commodityPrice+"元/小时</div>"+
 					"</div></div></li>";

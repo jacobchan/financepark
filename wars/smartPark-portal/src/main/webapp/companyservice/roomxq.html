@@ -371,14 +371,14 @@ function GetRequest() {
 					$('#commodityDescribe').html(records[0].commodityDescribe);
 					$('#merchantName').text("联系人："+records[0].purchasingmanagerMerchant.merchantLinkman);
 					$('#merchantPhone').text("联系电话："+records[0].purchasingmanagerMerchant.merchantLinkmanPhone);
-					if(records[0].dwValue != null){
-						$('#dw').text(records[0].dwValue);
+					if(records[0].meetingRoom.lx!= null){
+						$('#dw').text(records[0].meetingRoom.lx);
 					}
-					if(records[0].zwValue != null){
-						$('#zw').text(records[0].zwValue);
+					if(records[0].meetingRoom.gm != null){
+						$('#zw').text(records[0].meetingRoom.gm);
 					}
-					if(records[0].cpValue != null){
-						$('#cp').text(records[0].cpValue);
+					if(records[0].meetingRoom.tyy != null){
+						$('#cp').text("投影仪："+records[0].meetingRoom.tyy);
 					}
 				}
 			}
