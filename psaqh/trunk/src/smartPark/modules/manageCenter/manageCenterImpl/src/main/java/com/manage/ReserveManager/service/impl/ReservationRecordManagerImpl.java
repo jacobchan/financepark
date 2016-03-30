@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.common.BuildingBaseManager.dao.BbmRoomDao;
 import com.common.BuildingBaseManager.service.BbmRoomManager;
+import com.common.ExtentionAtrManager.service.ExtentionAtrManager;
 import com.common.purchasingManager.dao.PurchasingmanagerCommodityDao;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
@@ -66,6 +67,9 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 	
 	@Autowired
 	private PurchasingmanagerGenreManager purchasingmanagerGenreManager;
+	
+	@Autowired
+	private ExtentionAtrManager extentionAtrManager;
 	
 	
     /**
@@ -184,7 +188,7 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 		Collection<Condition> conditions = new ArrayList<Condition>();
 		Collection<Condition> condition = new ArrayList<Condition>();
 		
-		if(genreCode.equals("040101")){//04:众创空间，查询商品表基础信息
+		if(genreCode.equals("040101")){//040101:工位，查询商品表基础信息
 			conditions.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS,genreCode));
 			List<PurchasingmanagerGenre> purchasingmanagerGenreList=purchasingmanagerGenreManager.getPurchasingmanagerGenres(conditions, null);
 			String genreId="";
@@ -192,10 +196,11 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 				genreId = purchasingmanagerGenreList.get(0).getGenreId();
 			}
 			if(StringUtils.isNotEmpty(genreId)){
-				// 查询隶属于创立方的商品
+				// 查询隶属于工位的商品
 				condition.add(ConditionUtils.getCondition("genreId",Condition.EQUALS,genreId));
 				List<PurchasingmanagerCommodity> pcList = purchasingmanagerCommodityManager.getPurchasingmanagerCommoditys(condition, null);
 				for(PurchasingmanagerCommodity pc:pcList){
+					extentionAtrManager.setGwExtendValue(pc);
 					recordList.add(pc);
 				}
 			}
@@ -211,6 +216,10 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 		List<Record> recordList=new ArrayList<Record>();
 		Collection<Condition> conditions = new ArrayList<Condition>();
 		Collection<Condition> condition = new ArrayList<Condition>();
+		String genreCode="0401";
+		if(StringUtils.isEmpty(recordType) || recordType ==null){
+			recordType=genreCode;
+		}
 		
 		if(recordType.equals("0401")){//0401:创立方，查询商品表基础信息
 			conditions.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS, recordType));

@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.common.ExtentionAtrManager.entity.AgencyBookEntity;
 import com.common.ExtentionAtrManager.entity.Billboard;
+import com.common.ExtentionAtrManager.entity.CarEntity;
+import com.common.ExtentionAtrManager.entity.GwEntity;
 import com.common.ExtentionAtrManager.entity.MeetingEntity;
 import com.common.ExtentionAtrManager.service.ExtentionAtrManager;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
@@ -30,6 +32,28 @@ public class ExtentionAtrManagerImpl implements ExtentionAtrManager {
 		mettingRoom.setLx(this.getExtendValue(mettingRoom.getLxfieldName(),commdity.getCommodityId()));
 		mettingRoom.setTyy(this.getExtendValue(mettingRoom.getTyyfieldName(),commdity.getCommodityId()));
 		commdity.setMeetingRoom(mettingRoom);
+	}
+	
+	/**
+	 * 根据商品获取车辆的扩展属性的内容
+	 * @param commdity 商品
+	 */
+	public void setCarExtendValue(PurchasingmanagerCommodity commdity)throws BusException{
+		CarEntity car = new CarEntity();
+		car.setDw(this.getExtendValue(car.getDwfieldName(),commdity.getCommodityId()));
+		car.setZw(this.getExtendValue(car.getZwfieldName(),commdity.getCommodityId()));
+		car.setChepai(this.getExtendValue(car.getCpfieldName(),commdity.getCommodityId()));
+		commdity.setCar(car);
+	}
+	
+	/**
+	 * 根据商品获取工位的扩展属性的内容
+	 * @param commdity 商品
+	 */
+	public void setGwExtendValue(PurchasingmanagerCommodity commdity)throws BusException{
+		GwEntity gw = new GwEntity();
+		gw.setCommodityId(this.getExtendValue(gw.getCommodityIdfieldName(),commdity.getCommodityId()));
+		commdity.setGw(gw);
 	}
 	/**
 	 * 根据商品获取代理记账扩展属性的内容
