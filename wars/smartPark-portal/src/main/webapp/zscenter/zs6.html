@@ -181,7 +181,7 @@
 			function _parseRecords(record){
 				for(var i=0;i<record.length;i++){
 					   //http://localhost:8088/smartPark-web/ imageUrl
-						var html="<li><div class='mb10'><img src='../filestore/"+record[i].commodityImage+"' border='0'></div>"+
+						var html="<li><div class='mb10'><img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].commodityImage+"&method=show' border='0'></div>"+
 						"<input type='text' placeholder='活动卡位"+record[i].commodityPrice+ "元/月' disabled='disabled' style='cursor:default'>&nbsp;&nbsp<span>"+record[i].gw.commodityId+"</span>-<span>"+record[i].commodityTitle+"</span>";
 						 $(".space-centent ul").append(html);
 						 
