@@ -163,6 +163,8 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     				o.getCar().setDw(dw);
     			}
     		}
+    	}else if(genreCode !=null &&genreCode.equals("040101")){//工位
+    		extentionAtrManagerImpl.setGwExtendValue(o);;
     	}
     	
     	return o;
