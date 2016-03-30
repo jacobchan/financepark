@@ -38,10 +38,15 @@ public interface PurchasingmanagerPublicManager extends BaseManager{
      * 条件查询列表
      */
     public List<PurchasingmanagerCommodity> getPurchasingmanagerCommoditys(Collection<Condition> conditions,Collection<Order> orders) throws BusException;
+    
+    /**
+     * 公共资源修改页面获取初始数据
+     */
+    public PurchasingmanagerCommodity getPurchasingmanagerCommodityForPublic(String genreCode,String id)  throws BusException;    
     /**
      * 根据主键查询
      */
-    public PurchasingmanagerCommodity getPurchasingmanagerCommodity(String id) throws BusException;
+    public PurchasingmanagerCommodity getPurchasingmanagerCommodity(String genreCode,String id) throws BusException;
 	/**
 	 * 分页查询用户
 	 * @return 分页对象

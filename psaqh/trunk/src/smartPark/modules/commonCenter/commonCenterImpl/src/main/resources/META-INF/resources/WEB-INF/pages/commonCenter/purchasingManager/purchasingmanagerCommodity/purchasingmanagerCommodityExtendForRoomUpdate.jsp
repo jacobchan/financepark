@@ -10,7 +10,7 @@
 			<youi:fieldText property="commodityTitle"  caption="标题" notNull="true"/>
 			<youi:fieldText property="commodityPrice"  caption="标价" notNull="true"/>
 			<youi:fieldTree simple="false" popup="true" tree="${bbmRoomTree}" property="meetingRoom.adr"  caption="会议室地址" onlyLeaf="true" notNull="true"/>
-			<youi:fieldText property="meetingRoom.gm"  caption="规模人数" notNull="true"/>
+			<youi:fieldSelect property="meetingRoom.gm"  caption="规模人数" convert="roomGm" notNull="true"/>
 			<youi:fieldSelect property="meetingRoom.lx"  caption="会议室类型" convert="roomType" notNull="true"/>
 			<youi:fieldSelect property="meetingRoom.tyy"  caption="是否有投影仪" convert="roomProjector" notNull="true"/>
 		    <youi:fieldSelect property="genreId" caption="商品类别"  src="esb/web/purchasingmanagerPublicManager/getRecordsByGenreCode.json" parents="genreCode" parentsAlias="genreCode" notNull="true" code="genreId" show="genreName"/>
@@ -29,28 +29,29 @@
 		$elem('record_sFpro_commodityId',pageId).fieldValue(record.commodityId);
 		var commodityId=$elem('record_sFpro_commodityId',pageId).fieldValue();
 		var params = '';
-		params = params+'commodityId='+commodityId;
+	    var genreCode = $elem('record_sFpro_genreCode',pageId).fieldValue();
+		params = params+'genreCode='+genreCode+'&'+'commodityId='+commodityId;
 			$.youi.ajaxUtil.ajax({
-			url:'/esb/web/purchasingmanagerPublicManager/getPurchasingmanagerCommodity.json',
+			url:'/esb/web/purchasingmanagerPublicManager/getPurchasingmanagerCommodityForPublic.json',
 			data:params,
 			success:function(result){
 				var record = result.record;
-				alert(record.meetingRoom.gm);
 				$elem('record_sFpro_commodityTitle',pageId).fieldValue(record.commodityTitle);
 				$elem('record_sFpro_commodityPrice',pageId).fieldValue(record.commodityPrice);
 				$elem('record_sFpro_genreId',pageId).fieldValue(record.genreId);
 				$elem('record_sFpro_purchasingmanagerMerchant_merchantId',pageId).fieldValue(record.purchasingmanagerMerchant.merchantId);
-				if(record.commodityImage != null){
-				   $elem('record_sFpro_commodityImage',pageId).fieldValue(record.commodityImage);
-				}
-				if(record.commodityImage != null){
-				   $elem('record_sFpro_commodityCoverImage',pageId).fieldValue(record.commodityCoverImage);
-				}
-				$elem('record_sFpro_commodityDescribe',pageId).fieldValue(record.commodityDescribe);
 				$elem('record_sFpro_meetingRoom_gm',pageId).fieldValue(record.meetingRoom.gm);
 				$elem('record_sFpro_meetingRoom_lx',pageId).fieldValue(record.meetingRoom.lx);
 				$elem('record_sFpro_meetingRoom_tyy',pageId).fieldValue(record.meetingRoom.tyy);
-				var gm=$elem('record_sFpro_meetingRoom_gm',pageId).fieldValue();
+				$elem('record_sFpro_commodityDescribe',pageId).fieldValue(record.commodityDescribe);
+				if(record.commodityImage != null){
+				   $elem('record_sFpro_commodityImage',pageId).fieldValue(record.commodityImage);
+				}
+				if(record.commodityCoverImage != null){
+				   $elem('record_sFpro_commodityCoverImage',pageId).fieldValue(record.commodityCoverImage);
+				}
+				
+				
 				
 			}
 		});
@@ -128,7 +129,7 @@
 		   return false;
 		}
 		var params = '';
-		params = params+'commodityId='+commodityId+'&'+'commodityTitle='+commodityTitle+'&'+'commodityPrice='+commodityPrice+'&'+'roomId='+roomId+'&'+'roomContain='+roomContain+'&'+'roomType='+roomType+'&'+'roomProjector='+roomProjector+'&'+
+		params = params+'commodityId='+commodityId+'&'+'commodityTitle='+commodityTitle+'&'+'commodityPrice='+commodityPrice+'&'+'meetingRoom.adr='+roomId+'&'+'meetingRoom.gm='+roomContain+'&'+'meetingRoom.lx='+roomType+'&'+'meetingRoom.tyy='+roomProjector+'&'+
 		'genreId='+genreId+'&'+'purchasingmanagerMerchant.merchantId='+merchantId+'&'+'commodityImage='+commodityImage+'&'+'commodityCoverImage='+commodityCoverImage+'&'+'commodityDescribe='+commodityDescribe;
 		$.youi.ajaxUtil.ajax({
 			url:'/esb/web/purchasingmanagerPublicManager/saveCommodityAndPropertyForRoom.json',

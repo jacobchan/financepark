@@ -95,12 +95,78 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
      * 根据主键查询
      */
     @EsbServiceMapping
-    public PurchasingmanagerCommodity getPurchasingmanagerCommodity(@ServiceParam(name="commodityId") String id)  throws BusException{
+    public PurchasingmanagerCommodity getPurchasingmanagerCommodity(@ServiceParam(name="genreCode") String genreCode,@ServiceParam(name="commodityId") String id)  throws BusException{
     	PurchasingmanagerCommodity o=purchasingmanagerCommodityDao.get(id);
-    	extentionAtrManagerImpl.setMeetingRoomExtendValue(o);
+    	if(genreCode !=null &&genreCode.equals("0301")){//会议室
+    		extentionAtrManagerImpl.setMeetingRoomExtendValue(o);
+    	}else if(genreCode !=null &&genreCode.equals("0302")){//车辆
+    		extentionAtrManagerImpl.setCarExtendValue(o);
+    	}
+    	
     	return o;
     }
 	
+    
+    /**
+     * 公共资源修改页面获取初始数据
+     */
+    @EsbServiceMapping
+    public PurchasingmanagerCommodity getPurchasingmanagerCommodityForPublic(@ServiceParam(name="genreCode") String genreCode,@ServiceParam(name="commodityId") String id)  throws BusException{
+    	PurchasingmanagerCommodity o=purchasingmanagerCommodityDao.get(id);
+    	if(genreCode !=null &&genreCode.equals("0301")){//会议室
+    		extentionAtrManagerImpl.setMeetingRoomExtendValue(o);
+    		String lx=o.getMeetingRoom().getLx();
+    		if(lx !=null){//会议室类型：01--视频会议室，02---普通会议室
+    			Collection<Condition> condition =  new ArrayList<Condition>();
+    			condition.add(ConditionUtils.getCondition("codemap.code", Condition.EQUALS,"roomType"));
+    			condition.add(ConditionUtils.getCondition("itemCaption", Condition.EQUALS,lx));
+    			List<Codeitem> list = codeitemManager.getCodeitems(condition, null);
+    			if(list.size()>0){
+    				lx=list.get(0).getItemValue();
+    				o.getMeetingRoom().setLx(lx);
+    			}
+    		}
+    		
+    		String tyy=o.getMeetingRoom().getTyy();
+    		if(tyy !=null){//投影仪有无：01--有，02---无
+    			Collection<Condition> condition =  new ArrayList<Condition>();
+    			condition.add(ConditionUtils.getCondition("codemap.code", Condition.EQUALS,"roomProjector"));
+    			condition.add(ConditionUtils.getCondition("itemCaption", Condition.EQUALS,tyy));
+    			List<Codeitem> list = codeitemManager.getCodeitems(condition, null);
+    			if(list.size()>0){
+    				tyy=list.get(0).getItemValue();
+    				o.getMeetingRoom().setTyy(tyy);
+    			}
+    		}
+    		
+    		String gm=o.getMeetingRoom().getGm();
+    		if(gm !=null){//会议室规模
+    			Collection<Condition> condition =  new ArrayList<Condition>();
+    			condition.add(ConditionUtils.getCondition("codemap.code", Condition.EQUALS,"roomGm"));
+    			condition.add(ConditionUtils.getCondition("itemCaption", Condition.EQUALS,gm));
+    			List<Codeitem> list = codeitemManager.getCodeitems(condition, null);
+    			if(list.size()>0){
+    				gm=list.get(0).getItemValue();
+    				o.getMeetingRoom().setGm(gm);
+    			}
+    		}
+    	}else if(genreCode !=null &&genreCode.equals("0302")){//车辆
+    		extentionAtrManagerImpl.setCarExtendValue(o);
+    		String dw=o.getCar().getDw();
+    		if(dw !=null){//车辆档位
+    			Collection<Condition> condition =  new ArrayList<Condition>();
+    			condition.add(ConditionUtils.getCondition("codemap.code", Condition.EQUALS,"stalls"));
+    			condition.add(ConditionUtils.getCondition("itemCaption", Condition.EQUALS,dw));
+    			List<Codeitem> list = codeitemManager.getCodeitems(condition, null);
+    			if(list.size()>0){
+    				dw=list.get(0).getItemValue();
+    				o.getCar().setDw(dw);
+    			}
+    		}
+    	}
+    	
+    	return o;
+    }
     
     
     /**
@@ -256,6 +322,17 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 			}
 		}
 		
+		String gm=meetingRoom.getGm();//会议室规模
+		if(gm !=null){//
+			Collection<Condition> condition =  new ArrayList<Condition>();
+			condition.add(ConditionUtils.getCondition("codemap.code", Condition.EQUALS,"roomGm"));
+			condition.add(ConditionUtils.getCondition("itemValue", Condition.EQUALS,gm));
+			List<Codeitem> list = codeitemManager.getCodeitems(condition, null);
+			if(list.size()>0){
+				gm=list.get(0).getItemCaption();
+			}
+		}
+		
 		String tyy=meetingRoom.getTyy();//投影仪有无
 		if(tyy !=null){//投影仪有无：01--有，02---无
 			Collection<Condition> condition =  new ArrayList<Condition>();
@@ -299,7 +376,7 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     					pce.setCommodityExtendContent(adr);//保存会议室地址属性
     					dzFlag=false;
     				}else if(meetingRoom.getGmfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(meetingRoom.getGm());//保存会议室规模
+    					pce.setCommodityExtendContent(gm);//保存会议室规模
     					gmFlag=false;
     				}else if(meetingRoom.getLxfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
     					pce.setCommodityExtendContent(lx);//保存会议室类型
@@ -339,7 +416,7 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     					pce.setCommodityExtendContent(adr);//保存会议室地址属性
     					dzFlag=false;
     				}else if(meetingRoom.getGmfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(meetingRoom.getGm());//保存会议室规模
+    					pce.setCommodityExtendContent(gm);//保存会议室规模
     					gmFlag=false;
     				}else if(meetingRoom.getLxfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
     					pce.setCommodityExtendContent(lx);//保存会议室类型
@@ -505,8 +582,6 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     		pc.setUpdateUser(o.getUpdateUser());
     		pc.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o=purchasingmanagerCommodityDao.save(pc);
-    		
-    		
     		
     		// 根据商品ID获取商品扩展属性
     		List<PurchasingmanagerCommodityExtend> purExList = purchasingmanagerCommodityExtendManager.getCommodityExtList(commodityId);
