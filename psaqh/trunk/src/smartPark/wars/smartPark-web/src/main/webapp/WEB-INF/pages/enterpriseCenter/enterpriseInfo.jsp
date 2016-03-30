@@ -6,6 +6,10 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>企业信息</title>
 		<%@ include file="/WEB-INF/pages/common/enterpriseScriptAddCss.jsp"%>
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/ztree/css/demo.css" type="text/css">
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+		<script type="text/javascript" src="<%=request.getContextPath()%>/ztree/js/jquery.ztree.core.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/ztree/js/jquery.ztree.excheck.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript">
 			// 中文字符判断
@@ -22,7 +26,77 @@
 			    } 
 			    return reLen;    
 			}
+			
+			var setting = {
+				check: {
+					enable: true,
+					chkStyle: "radio",
+					radioType: "all"
+				},
+				view: {
+					dblClickExpand: false
+				},
+				data: {
+					simpleData: {
+						enable: true
+					}
+				},
+				callback: {
+					onClick: onClick,
+					onCheck: onCheck
+				}
+			};
+
+			var zNodes = "";
+
+			function onClick(e, treeId, treeNode) {
+				var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+				zTree.checkNode(treeNode, !treeNode.checked, null, true);
+				return false;
+			}
+
+			function onCheck(e, treeId, treeNode) {
+				var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+				nodes = zTree.getCheckedNodes(true),
+				v = "";
+				m = "";
+				for (var i=0, l=nodes.length; i<l; i++) {
+					v += nodes[i].id + ",";
+					m += nodes[i].name + ",";
+				}
+				if (v.length > 0 ) v = v.substring(0, v.length-1);
+				if (m.length > 0 ) m = m.substring(0, m.length-1);
+				$("#enTypeId").val(v);
+				$("#enTypeName").val(m);
+			}
+
+			function showMenu() {
+				var cityObj = $("#enTypeName");
+				var cityOffset = $("#enTypeName").offset();
+				$("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+				$("body").bind("mousedown", onBodyDown);
+			}
+			function hideMenu() {
+				$("#menuContent").fadeOut("fast");
+				$("body").unbind("mousedown", onBodyDown);
+			}
+			function dataJson(data) {
+				zNodes = eval("[" + data + "]");
+				$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			}
+			function onBodyDown(event) {
+				if (!(event.target.id == "menuBtn" || event.target.id == "enTypeName" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+					hideMenu();
+				}
+			}
+			
 			$(document).ready(function() {
+				$.ajax({
+					url:baseUrl+'/etypeEnterprisetypeManager/findEnterpriseTypeTree.json',
+					success:function(result){
+						dataJson(result.record.html);
+					}
+				});
 				//CKEDITOR.replace('editorrzRemark');		
 			  	var editor = CKEDITOR.replace('editorproductDiscriptio');
 			  	editor.updateElement();
@@ -46,6 +120,7 @@
 				    					$("#rzUrl").val(result.record.rzUrl);
 				    					$("#rzRemark").val(result.record.rzRemark);
 				    					editor.setData(result.record.productDiscriptio);
+				    					$("#enTypeId").val(result.record.enTypeId.enTypeId);
 				    					$("#enTypeName").val(result.record.enTypeId.enTypeName);
 				    					$("#editorproductDiscriptio").val(result.record.productDiscriptio);
 				    					$("#currentCount").html(getStrLength(result.record.rzRemark));
@@ -72,11 +147,11 @@
 			  		var roomId=$("#roomId").val();
 			  		var rzName=$("#rzName").val();
 					var rzUrl=$("#rzUrl").val();
-					var enTypeName=$("#enTypeName").val();
+					var enTypeId=$("#enTypeId").val();
 					var rzRemark=$("#rzRemark").val();
 					var rzLogo = $("#rzLogo").attr("src");
 					var productDiscriptio=editor.getData();
-					var params = ['rzId='+rzId+'','rzLogo='+rzLogo+'','roomId.roomId='+roomId+'','rzName='+rzName+'','rzRemark='+rzRemark+'','rzUrl='+rzUrl+'','enTypeName='+enTypeName+'','productDiscriptio='+productDiscriptio+''];
+					var params = ['rzId='+rzId+'','rzLogo='+rzLogo+'','roomId.roomId='+roomId+'','rzName='+rzName+'','rzRemark='+rzRemark+'','rzUrl='+rzUrl+'','enTypeId.enTypeId='+enTypeId+'','productDiscriptio='+productDiscriptio+''];
 					$.youi.ajaxUtils.ajax({
 						url:baseUrl+'/enterbusinessmanagerRzManager/updateEnterbusinessmanagerRz.json',
 						data:params.join('&'),
@@ -126,8 +201,9 @@
 		                </div>
 		                <div class="qiye_address">
 		                    <div class="qiye_word">所在行业</div>
-                            <div class="tct-select fl mr20" style="width:290px">
-                            	<select id="enTypeName" name="enTypeId.enTypeName" class="select-nav"></select>
+                            <div class="web_input">
+                            	<input id="enTypeId" name="enTypeId.enTypeId" style="display:none;" />
+                            	<input id="enTypeName" name="enTypeId.enTypeName" onclick="showMenu();" />
 							</div>
                 		</div>
                 		<div class="qiye_jianjie ">
@@ -178,6 +254,9 @@
            			</div>
         		</div>    
     		</div>
+		</div>
+		<div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+			<ul id="treeDemo" class="ztree" style="margin-top:0; width:180px; height: 300px;"></ul>
 		</div>
 	</body>
 </html>
