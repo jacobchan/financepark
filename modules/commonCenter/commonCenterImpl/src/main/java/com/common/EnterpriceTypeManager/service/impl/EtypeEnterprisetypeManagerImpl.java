@@ -109,4 +109,27 @@ public class EtypeEnterprisetypeManagerImpl extends BaseManagerImpl implements E
 	
 		return etypeEnterprisetypeDao.commonQuery(conditions, orders);
 	}
+    
+    /**
+	 * 获取企业类型JSon
+	 * @return
+	 * @throws BusException
+	 */
+    @EsbServiceMapping
+	public String findEnterpriseTypeTree() throws BusException{
+		StringBuffer resultJson = new StringBuffer();
+		String json = "";
+		List<EtypeEnterprisetype> sc = etypeEnterprisetypeDao.getAll();
+		if (sc.size() > 0) {
+			for (int i = 0; i < sc.size(); i++) {
+				if(!"".equals(sc.get(i).getEtypeEnterprisetype()) && null!=sc.get(i).getEtypeEnterprisetype()){
+					resultJson.append("{id:'" + sc.get(i).getEnTypeId() + "', pId:'" + sc.get(i).getEtypeEnterprisetype().getEnTypeId() + "', name:'" + sc.get(i).getEnTypeName() + "'},");
+				}else{
+					resultJson.append("{id:'" + sc.get(i).getEnTypeId() + "', pId:'', name:'" + sc.get(i).getEnTypeName() + "', open:true, nocheck:true},");
+				}
+			}
+			json = resultJson.substring(0, resultJson.length() - 1);
+		}
+		return json;
+	}
 }
