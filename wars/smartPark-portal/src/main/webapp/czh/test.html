@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>分页测试</title>
+<link href="../styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+<link href="../styles/base.css" type="text/css" rel="stylesheet">
+<link href="../styles/page/page.css" type="text/css" rel="stylesheet">
+<link href="../styles/page/pageGroup.css"  rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<div id="youi_page_header" class="youi-page-header clearfix"></div>
+<!--***top end****************************************-->
+<!--content-->
+<div class="w1200 pt20">
+	<ul class="linknav clearfix">
+    	<li><a href="#">首页</a></li>
+        <li><a href="#">企业服务</a></li>
+        <li class="active"><a href="#">公共资源</a></li>
+    </ul>
+    <!--车辆租凭-->
+    <div class="res_item mb40">
+        <div class="mt30 clearfix">
+        	<div class="res_left">
+            	<ul id="carfix">
+
+                  
+                </ul>
+			    <div id="pageGro" class="cb">
+					
+				</div>
+            </div>
+            <div class="res_right">
+                <div id="youi_page_right" class="youi-page-right clearfix"></div>
+            </div>
+        </div>
+    </div><!--res_item  end-->
+    <!--车辆租凭-->
+</div>
+<!--***bottom start****************************************-->
+<div id="youi_page_footer" class="youi-page-footer"></div>
+<!--***bottom end****************************************-->
+<!--******************  code end  ****************************-->
+
+<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+<script type="text/javascript" src="../scripts/page/newscom.js"></script>
+<script type="text/javascript" src="../scripts/page/kefu.js"></script> 
+<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+<!-- <script type="text/javascript" src="../scripts/page/pageGroup.js"></script> -->
+<script type="text/javascript">
+		function refreshData(pageIndex,pageSize){
+			var serviceURL = baseUrl+"activityApplyManager/getPagerActivityApplys.json";
+			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				jsonp:'data:jsonp',
+				data:params.join('&'),
+				dataType:'jsonp',
+				success:function(results){
+					if(results&&results.records){
+						_parseRecords(results.records);
+					}
+				}
+			});
+		}
+		
+		function _parseRecords(record){
+			var html='';
+			for(var i=0;i<record.length;i++){
+				html+="<li class='clearfix'>"+record[i].applyTitle+"</li>";
+			}
+			$('#carfix').empty();
+			$('#carfix').append(html);
+		}
+		
+		
+		
+	</script>
+	<script type="text/javascript">
+		var j;
+		var page=0;
+		var nowPage=0;//当前页
+		var listNum=1;//每页显示数
+		var PagesLen;//总页数
+		var PageNum=4;//分页链接接数(5个)
+		onload=function(){
+			var serviceURL = baseUrl+"activityApplyManager/getPagerActivityApplys.json";
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(results){
+					if(results&&results.records){
+						j=results.totalCount;
+						PagesLen=Math.ceil(j/listNum);
+						refreshData(PagesLen,listNum);
+						//分页链接变换
+						strS='<a href="###" onclick="upPage(0)">首页</a>  '
+						var PageNum_2=PageNum%2==0?Math.ceil(PageNum/2)+1:Math.ceil(PageNum/2)
+						var PageNum_3=PageNum%2==0?Math.ceil(PageNum/2):Math.ceil(PageNum/2)+1
+						var strC="",startPage,endPage;
+						if (PageNum>=PagesLen) {startPage=0;endPage=PagesLen-1}
+						else if (nowPage<PageNum_2){startPage=0;endPage=PagesLen-1>PageNum?PageNum:PagesLen-1}//首页
+						else {startPage=nowPage+PageNum_3>=PagesLen?PagesLen-PageNum-1: nowPage-PageNum_2+1;var t=startPage+PageNum;endPage=t>PagesLen?PagesLen-1:t}
+						for (var i=startPage;i<=endPage;i++){
+						 if (i==nowPage)strC+='<a href="###" style="color:red;font-weight:700;" onclick="refreshData('+i+','+listNum+')">'+(i+1)+'</a> '
+						 else strC+='<a href="###" onclick="refreshData('+i+','+listNum+')">'+(i+1)+'</a> '
+						}
+						strE=' <a href="###" onclick="refreshData('+(PagesLen-1)+','+listNum+')">尾页</a>  ';
+						strE2=nowPage+1+"/"+PagesLen+"页"+"  共"+j+"条";
+						$('#pageGro').empty().append(strS+strC+strE+strE2);
+					}
+				}
+			});	
+
+		}
+</script>
+</body>
+</html>
