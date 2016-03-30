@@ -1,5 +1,6 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
+<script type="text/javascript" src="<%=request.getContextPath()%>/ckeditor/ckeditor.js"></script>
 
 <youi:page>
 
@@ -26,7 +27,7 @@
 		<youi:gridCol property="policyCome"  caption="政策发布人" width="100" align="center"/>
 		<youi:gridCol property="policyStatus"  caption="政策发布状态" width="100" align="center" convert="policyStatus"/>
 		<youi:gridCol property="policyIssueDate"  caption="政策发布时间" width="100" align="center"/>
-		<youi:gridCol property="policyContent"  caption="政策内容" width="150" align="center"/>
+		<%-- <youi:gridCol property="policyContent"  caption="政策内容" width="150" align="center"/> --%>
 		<youi:gridCol property="browseCount"  caption="浏览次数" width="100" align="center"/>
 		<youi:gridCol property="dingCount"  caption="顶的次数" width="100" align="center"/>
 		<youi:gridCol property="caiCount"  caption="踩的次数" width="100" align="center"/>
@@ -39,8 +40,8 @@
 	
 	<!-- form-政策新闻内容编辑 -->
 	<youi:form dialog="true" caption="政策新闻内容" id="form_nmIssuenews" 
-			action="esb/web/nmIssuenewsManager/saveNmIssuenews.json">
-		<youi:fieldLayout prefix="record" columns="2" labelWidths="120,120">
+			action="esb/web/nmIssuenewsManager/saveNmIssuenews.json" width="1100">
+		<youi:fieldLayout prefix="record" columns="2" labelWidths="120,120" >
 			<youi:fieldHidden property="policyId"  caption="政策ID"/>
 			<youi:fieldHidden property="browseCount"  caption="浏览次数"/>
 			<youi:fieldHidden property="dingCount"  caption="顶的次数"/>
@@ -54,32 +55,14 @@
 			<youi:fieldSelect property="policyStatus"  caption="政策发布状态" convert="policyStatus" notNull="true"/>
 			<youi:fieldText property="policyCome"  caption="政策发布人" notNull="true"/>
 			<youi:fieldCalendar property="policyIssueDate"  caption="政策发布时间" notNull="true"/>
-			<youi:fieldArea property="policyContent"  caption="政策内容" column="2" rows="4" notNull="true"/>
-			<%-- <youi:fieldText property="imageUrl"  caption="图片URL" column="2" /> --%>
+			<%-- <youi:fieldArea property="policyContent"  caption="政策内容" column="2" rows="4" notNull="true"/> --%>
 			<youi:fieldSwfupload property="imageUrl" caption="图片URL" uploadUrl="/common/uploadImage.html" 
 				fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="10240" />
+			<youi:fieldCustom column="2" custom="fieldCkeditor" customOptions="{}" property="policyContent"  caption="政策内容"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
 	<!--**********************************页面函数Start********************************-->
-	<youi:func name="init">
-		var formEle = $elem('form_nmIssuenews',pageId);
-		
-		$elem('record_tempalateParams',pageId).children(':first').keyup(function(){
-		var tempalateParams = $elem('record_tempalateParams',pageId).fieldValue();
-		var tempalateId = $elem('record_nmIssuetempalate_issueTempalateId',pageId).fieldValue();
-		
-		if(tempalateParams&&tempalateId){
-			$.youi.ajaxUtil.ajax({
-					url:'esb/web/nmIssuetempalateManager/genPolicyContent.json',
-					data:'paramStr='+tempalateParams+'&nmIssuetempalateId='+tempalateId,
-					success:function(result){
-						$elem('record_policyContent',pageId).fieldValue(result.record.html);
-					}
-			});
-		}
-		});
-	</youi:func>
 	
 	<!-- 表单提交后刷新页面 -->
 	<youi:func name = "form_nmIssuenews_afterSubmit">
@@ -87,5 +70,6 @@
 			formNmIssuenews.form('close');
 			$elem('grid_nmIssuenews',pageId).grid('pReload');
 	</youi:func>
+	
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
