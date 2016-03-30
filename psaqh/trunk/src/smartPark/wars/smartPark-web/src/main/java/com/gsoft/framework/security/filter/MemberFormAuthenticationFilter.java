@@ -58,7 +58,7 @@ public class MemberFormAuthenticationFilter extends DefaultFormAuthenticationFil
 	      MemberInformation mem = (MemberInformation) subject.getPrincipal();
 	      params.put("memberInfoMation", mem);
 	      params.put("companyId", mem.getCompanyId());
-	      if(mem.getCompanyId() == null){
+	      if(StringUtils.isEmpty(mem.getCompanyId())){
 	    	  params.put("companyName", "");
 		      params.put("companyAdr", ""); 
 	      }else{
