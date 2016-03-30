@@ -150,6 +150,7 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     public EnterbusinessmanagerRz updateEnterbusinessmanagerRz(EnterbusinessmanagerRz o) throws BusException{
 		EnterbusinessmanagerRz r = enterbusinessmanagerRzDao.get(o.getRzId());
 		BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(o.getRoomId().getRoomId());
+		r.setEnTypeId(o.getEnTypeId());
 		r.setRzLogo(o.getRzLogo());
 		r.setRzName(o.getRzName());
 		r.setRoomId(bbmRoom);
