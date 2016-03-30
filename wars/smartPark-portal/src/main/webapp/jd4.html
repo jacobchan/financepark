@@ -13,7 +13,7 @@
 	<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
 	<script type="text/javascript" src="scripts/page/laydate/laydate.js"></script>
 	<script type="text/javascript">
-		$(function(){
+/* 		$(function(){
 			var start = {
 			    elem: '#startTime',
 			    min: laydate.now(), //设定最小日期为当前日期
@@ -35,7 +35,7 @@
 			};
 			laydate(start);
 			laydate(end);
-		})
+		}) */
 	</script>
 	<style type="text/css">
 		a.c-b1:hover{color: #FB7730;}
@@ -51,7 +51,7 @@
 			<div class="h-nav clearfix">
 				<a href="">首页</a><img src="styles/images/zs/right-j-b.png" border="0">
 				<a href="">国内酒店预订</a><img src="styles/images/zs/right-j-b.png" border="0">
-				<a href="" class="current">北京好苑建国酒店</a>
+				<a href="" id="currentHotel1" class="current">北京好苑建国酒店</a>
 			</div>
 			<div class="fl" style="width:890px;">
 				<div class="clearfix">
@@ -61,8 +61,8 @@
 							<col width="200"></col>
 						</colgroup>
 						<tr>
-							<td class="f24">北京好苑建国酒店</td>
-							<td align="center"><span class="f24 c-o">¥618</span>起</td>
+							<td class="f24" id="currentHotel2">北京好苑建国酒店</td>
+							<td align="center"><span class="f24 c-o" id="minprice">¥618</span>起</td>
 						</tr>
 						<tr>
 							<td>
@@ -71,7 +71,7 @@
 										<i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i>
 									</span>
 								</p>
-								<p>位于[建国门]北京市东城区建国门内大街17号(朝阳门南小街与建国门内大街交汇处北侧路北) </p>
+								<p id="hotelAddr">位于[建国门]北京市东城区建国门内大街17号(朝阳门南小街与建国门内大街交汇处北侧路北) </p>
 							</td>
 							<td align="center">
 								<a href="" class="ib-btn" style="margin-top:0px;">立即预订</a>
@@ -87,7 +87,7 @@
 						</colgroup>
 						<tbody>
 							<tr>
-								<td rowspan="2"><div style="width:350px;"><img src="styles/images/jd-i1.jpg" width="100%"></div></td>
+								<td rowspan="2"><div style="width:350px;"><img id="majorPicture" src="styles/images/jd-i1.jpg" width="100%"></div></td>
 								<td><div style="width:150px;"><img src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
 								<td><div style="width:200px;"><img src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
 								<td><div style="width:160px;"><img src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
@@ -112,16 +112,17 @@
 					<span class="fl lh26">入住时段</span>
 					<div class="jd-bd-box ml10 fl clearfix" style="padding:2px 10px;">
 						<span class="fl lh20">入住</span>
-						<input type="text" id="startTime" class="laydate-icon" style="width:160px;">
+						<input type="text" id="tm1" class="laydate-icon" style="width:160px;">
 					</div>
 					<div class="jd-bd-box ml10 fl clearfix" style="padding:2px 10px;">
 						<span class="fl lh20">离店</span>
-						<input  type="text" id="endTime" class="laydate-icon" style="width:160px;">
+						<input  type="text" id="tm2" class="laydate-icon" style="width:160px;">
 					</div>
-   					<span class="ml30 mr20 fl f14 lh26">共1晚</span>
-   					<input value="重新搜索" class="jd-sea-btn fl" type="submit">
+   					<span class="ml30 mr20 fl f14 lh26" id="totalTime">共1晚</span>
+   					<input type="hidden" value="" id="hid">
+   					<input value="重新搜索" class="jd-sea-btn fl" type="submit" onclick="getRooms()">
 				</div>
-				<div class="clearfix">
+				<div class="clearfix" id="roomlist">
 					<table class="hcxx-table mb20">
 			    		<colgroup>
 			    			<col width="47%"></col>
@@ -134,14 +135,14 @@
 			    		<thead>
 			    			<tr>
 			    			<th><span class="fl ml30">房型</span></th>
-			    			<th><span class="fl">早餐</span></th>
+			    			<th><span class="fl">房态</span></th>
 			    			<th><span class="fl">宽带</span></th>
 			    			<th><span class="fl">取消政策</span></th>
 			    			<th><span class="fl">房价</span></th>
-			    			<th><span class="fl">返现</span></th>
+			    			<th width="12%"><span class="fl">&nbsp;</span></th>
 			    		</tr></thead>
 			    	</table>
-					<div class="jd-order-room">
+					<!-- <div class="jd-order-room">
 						<table>
 							<colgroup>
 								<col width="121"></col>
@@ -209,214 +210,8 @@
 								</tr>
 							</tfoot>
 						</table>
-					</div>
-					<div class="jd-order-room">
-						<table>
-							<colgroup>
-								<col width="121"></col>
-								<col width="101"></col>
-								<col></col>
-							</colgroup>
-							<tbody>
-								<tr>
-									<td valign="top"><img src="styles/images/jd-p3.jpg" width="100" height="75"></td>
-									<td style="border-right:1px solid #ecebeb;" valign="top">
-										<p class="mb25 lh20 f12 mt10">商务标间 <a class="fa fa-angle-down room-show ml20" href="javascript:;"></a></p>
-										<p class="f12"><span class="c-b1 mr5">28㎡ </span>| 大/双</p>
-									</td>
-									<td>
-										<table class="room-detail">
-											<colgroup>
-												<col width="26%"></col>
-												<col width="10%"></col>
-												<col width="10%"></col>
-												<col width="12%"></col>
-												<col width="12%"></col>
-												<col width="10%"></col>
-												<col></col>
-											</colgroup>
-											<tr>
-												<td>不含早（今日特惠）<i class="fa fa-gift c-o"></i></td>
-												<td>无早</td>
-												<td>免费wifi</td>
-												<td>免费取消</td>
-												<td><span class="c-o f20">¥618</span></td>
-												<td><em class="em-circle">返</em><span class="c-y">￥38</span></td>
-												<td><a href="" class="hhf-submit lh28">预订</a></td>
-											</tr>
-											<tr>
-												<td>不含早</td>
-												<td>无早</td>
-												<td>免费wifi</td>
-												<td>免费取消</td>
-												<td><span class="c-o f20">¥1000</span></td>
-												<td><em class="em-circle">返</em><span class="c-y">￥38</span></td>
-												<td><a href="" class="hhf-submit lh28">预订</a></td>
-											</tr>
-										</table>
-									</td>
-								</tr>
-								<tr>
-									<td cospan="3" height="20"></td>
-								</tr>
-							</tbody>
-							<tfoot>
-								<tr>
-									<td colspan="2">
-										<img src="styles/images/jd-p3.jpg" width="100" height="75" class="fl mr10 mb10">
-										<img src="styles/images/jd-p3.jpg" width="100" height="75" class="fl mr10 mb10">
-										<img src="styles/images/jd-p3.jpg" width="100" height="75" class="fl mr10 mb10">
-										<img src="styles/images/jd-p3.jpg" width="100" height="75" class="fl mr10 mb10">
-									</td>
-									<td>
-										<div class="ml50 f14 lh24 mr30">
-											<p class="mb10"><span>建筑面积:28平方米</span><span class="ml50">床型:大/双床</span></p>
-											<p>其他</p>
-											<p>大床：135cm*200cm或200cm*200cm；或双床：120cm*200cm；无线免费，有线收费（除10层行政楼层）收费标准：30元人民币/天; 4-9,11; </p>
-										</div>
-									</td>
-								</tr>
-							</tfoot>
-						</table>
-					</div>
-					<div class="jd-order-room">
-						<table>
-							<colgroup>
-								<col width="121"></col>
-								<col width="101"></col>
-								<col></col>
-							</colgroup>
-							<tbody>
-								<tr>
-									<td valign="top"><img src="styles/images/jd-p3.jpg" width="100" height="75"></td>
-									<td style="border-right:1px solid #ecebeb;" valign="top">
-										<p class="mb25 lh20 f12 mt10">商务标间 <a class="fa fa-angle-down room-show ml20" href="javascript:;"></a></p>
-										<p class="f12"><span class="c-b1 mr5">28㎡ </span>| 大/双</p>
-									</td>
-									<td>
-										<table class="room-detail">
-											<colgroup>
-												<col width="26%"></col>
-												<col width="10%"></col>
-												<col width="10%"></col>
-												<col width="12%"></col>
-												<col width="12%"></col>
-												<col width="10%"></col>
-												<col></col>
-											</colgroup>
-											<tr>
-												<td>不含早（今日特惠）<i class="fa fa-gift c-o"></i></td>
-												<td>无早</td>
-												<td>免费wifi</td>
-												<td>免费取消</td>
-												<td><span class="c-o f20">¥618</span></td>
-												<td><em class="em-circle">返</em><span class="c-y">￥38</span></td>
-												<td><a href="" class="hhf-submit lh28">预订</a></td>
-											</tr>
-											<tr>
-												<td>不含早</td>
-												<td>无早</td>
-												<td>免费wifi</td>
-												<td>免费取消</td>
-												<td><span class="c-o f20">¥1000</span></td>
-												<td><em class="em-circle">返</em><span class="c-y">￥38</span></td>
-												<td><a href="" class="hhf-submit lh28">预订</a></td>
-											</tr>
-										</table>
-									</td>
-								</tr>
-								<tr>
-									<td cospan="3" height="20"></td>
-								</tr>
-							</tbody>
-							<tfoot>
-								<tr>
-									<td colspan="2">
-										<img src="styles/images/jd-p3.jpg" width="100" height="75" class="fl mr10 mb10">
-										<img src="styles/images/jd-p3.jpg" width="100" height="75" class="fl mr10 mb10">
-										<img src="styles/images/jd-p3.jpg" width="100" height="75" class="fl mr10 mb10">
-										<img src="styles/images/jd-p3.jpg" width="100" height="75" class="fl mr10 mb10">
-									</td>
-									<td>
-										<div class="ml50 f14 lh24 mr30">
-											<p class="mb10"><span>建筑面积:28平方米</span><span class="ml50">床型:大/双床</span></p>
-											<p>其他</p>
-											<p>大床：135cm*200cm或200cm*200cm；或双床：120cm*200cm；无线免费，有线收费（除10层行政楼层）收费标准：30元人民币/天; 4-9,11; </p>
-										</div>
-									</td>
-								</tr>
-							</tfoot>
-						</table>
-					</div>
-					<div class="jd-order-room">
-						<table>
-							<colgroup>
-								<col width="121"></col>
-								<col width="101"></col>
-								<col></col>
-							</colgroup>
-							<tbody>
-								<tr>
-									<td valign="top"><img src="styles/images/jd-p3.jpg" width="100" height="75"></td>
-									<td style="border-right:1px solid #ecebeb;" valign="top">
-										<p class="mb25 lh20 f12 mt10">商务标间 <a class="fa fa-angle-down room-show ml20" href="javascript:;"></a></p>
-										<p class="f12"><span class="c-b1 mr5">28㎡ </span>| 大/双</p>
-									</td>
-									<td>
-										<table class="room-detail">
-											<colgroup>
-												<col width="26%"></col>
-												<col width="10%"></col>
-												<col width="10%"></col>
-												<col width="12%"></col>
-												<col width="12%"></col>
-												<col width="10%"></col>
-												<col></col>
-											</colgroup>
-											<tr>
-												<td>不含早（今日特惠）<i class="fa fa-gift c-o"></i></td>
-												<td>无早</td>
-												<td>免费wifi</td>
-												<td>免费取消</td>
-												<td><span class="c-o f20">¥618</span></td>
-												<td><em class="em-circle">返</em><span class="c-y">￥38</span></td>
-												<td><a href="" class="hhf-submit lh28">预订</a></td>
-											</tr>
-											<tr>
-												<td>不含早</td>
-												<td>无早</td>
-												<td>免费wifi</td>
-												<td>免费取消</td>
-												<td><span class="c-o f20">¥1000</span></td>
-												<td><em class="em-circle">返</em><span class="c-y">￥38</span></td>
-												<td><a href="" class="hhf-submit lh28">预订</a></td>
-											</tr>
-										</table>
-									</td>
-								</tr>
-								<tr>
-									<td cospan="3" height="20"></td>
-								</tr>
-							</tbody>
-							<tfoot>
-								<tr>
-									<td colspan="2">
-										<img src="styles/images/jd-p3.jpg" width="100" height="75" class="fl mr10 mb10">
-										<img src="styles/images/jd-p3.jpg" width="100" height="75" class="fl mr10 mb10">
-										<img src="styles/images/jd-p3.jpg" width="100" height="75" class="fl mr10 mb10">
-										<img src="styles/images/jd-p3.jpg" width="100" height="75" class="fl mr10 mb10">
-									</td>
-									<td>
-										<div class="ml50 f14 lh24 mr30">
-											<p class="mb10"><span>建筑面积:28平方米</span><span class="ml50">床型:大/双床</span></p>
-											<p>其他</p>
-											<p>大床：135cm*200cm或200cm*200cm；或双床：120cm*200cm；无线免费，有线收费（除10层行政楼层）收费标准：30元人民币/天; 4-9,11; </p>
-										</div>
-									</td>
-								</tr>
-							</tfoot>
-						</table>
-					</div>
+					</div> -->
+
 				</div>
 				<div class="clearfix">
 					<h1 class="mt20 mb20 f24">酒店设施</h1>
@@ -425,8 +220,8 @@
 							<col width="110"></col>
 							<col></col>
 						</colgroup>
-						<tbody>
-							<tr>
+						<tbody id="hotelOverview">
+							<!-- <tr>
 								<td>酒店概况</td>
 								<td>酒店开业时间1996-01-01 最近装修时间2007-01-01</td>
 							</tr>
@@ -441,7 +236,7 @@
 							<tr>
 								<td>服务设施</td>
 								<td><span class="mr20"><font class="c-o">免费</font>旅游交通图(可赠送)</span><span class="mr20"><font class="c-o">免费</font>瓶装水</span><span class="mr20" class="mr20"><font class="c-o">免费</font>洗漱用品(6样以内)</span><span class="mr20"><font class="c-o">免费</font>报纸</span><span class="mr20">中餐厅</span><span class="mr20">西餐厅</span><span class="mr20">咖啡厅</span><span>酒吧</td>
-							</tr>
+							</tr> -->
 						</tbody>
 					</table>
 				</div>
@@ -486,7 +281,7 @@
 				</div>
 				<div class="clearfix">
 					<h1 class="mt20 mb20 f24">酒店介绍</h1>
-					<p class="jd-ss pt20 lh24 f12">北京好苑建国酒店 位于建国门北京市东城区建国门内大街17号(朝阳门南小街与建国门内大街交汇处北侧路北)， 北京好苑建国酒店预订电话：400-666-5511北京好苑建国酒店位于北京市中心的东长安街上，西临东方广场，东近光华长安大厦，邻近国贸商圈、天安门及故宫博物院，与王府井商业步行街咫尺相望，周边商务旅游环境优越。酒店不同规格的客房，为宾客提供舒适的商务空间。不同规格的会议厅、大宴会厅和风味独</p>
+					<p id="hotelContent" class="jd-ss pt20 lh24 f12">北京好苑建国酒店 位于建国门北京市东城区建国门内大街17号(朝阳门南小街与建国门内大街交汇处北侧路北)， 北京好苑建国酒店预订电话：400-666-5511北京好苑建国酒店位于北京市中心的东长安街上，西临东方广场，东近光华长安大厦，邻近国贸商圈、天安门及故宫博物院，与王府井商业步行街咫尺相望，周边商务旅游环境优越。酒店不同规格的客房，为宾客提供舒适的商务空间。不同规格的会议厅、大宴会厅和风味独</p>
 				</div>	
 				<div class="clearfix">
 					<h1 class="mt20 mb20 f24">酒店点评</h1>
@@ -494,8 +289,8 @@
 						<table width="100%">
 							<tbody><tr>
 								<td style="border-right:1px dashed #ecebeb" align="center" width="15%">
-									<p class="f24 c-b1"><span class="c-o" style="font-size:48px;">4.3</span>/5.0</p>
-									<p class="f12 c-b1">来自37人评论</p>
+									<p class="f24 c-b1"><span class="c-o haoping" style="font-size:48px;">4.3</span>/5.0</p>
+									<p class="f12 c-b1" id="comment1">来自37人评论</p>
 								</td>
 								<td style="border-right:1px dashed #ecebeb" width="50%">
 									<div class="ml10">
@@ -537,7 +332,7 @@
 							</tr>
 						</tbody></table>
 					</div>
-					<div class="clearfix lh30 f12 pl30 pr10" style="background-color:#f6f6f6;"><span class="f14">住客点评</span> <a href="" class="c-o fr">查看全部37条点评 》</a></div>
+					<div class="clearfix lh30 f12 pl30 pr10" style="background-color:#f6f6f6;"><span class="f14">住客点评</span> <a href="" class="c-o fr" id="comment2">查看全部37条点评 》</a></div>
 					<div class="clearfix">
 						<table class="f12 sug-table-nav">
 							<tr>
@@ -619,8 +414,8 @@
 			</div>
 			<div class="fr w285">
 				<div class="clearfix mb20">
-					<span class="f12 mb15"><span class="c-o f20">4.5</span>/5.0</span>
-					<span>来自37条评论</span>
+					<span class="f12 mb15"><span class="c-o f20 haoping">4.5</span>/5.0</span>
+					<span id="comment">来自37条评论</span>
 					<a href="" class="fr c-b1 f12">更多》</a>
 				</div>
 				<div style="background-color:#f6f6f6;" class="lh40">
@@ -685,13 +480,221 @@
 	<!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
+	<script type="text/javascript" src="scripts/page/laydate/laydate.js"></script>
+	<script type="text/javascript" src="scripts/cityselector/fixdiv.js"></script>
+	<script type="text/javascript" src="scripts/cityselector/address.js"></script>
 	<script type="text/javascript">
-		$(function  () {
-			$(".room-show").click(function(){
-				$(this).toggleClass("fa-angle-down").toggleClass("fa-angle-up");
-				$(this).parents("tbody").next("tfoot").toggle();
-			})
-		})
+	function GetRequest() {
+	   var url = decodeURI(location.search); //获取url中"?"符后的字串
+	   var theRequest = new Object();
+	   if (url.indexOf("?") != -1) {
+	      var str = url.substr(1);
+	      strs = str.split("&");
+	      for(var i = 0; i < strs.length; i ++) {
+	         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+	      }
+	   }
+	   return theRequest;
+	}
+	//获取房型数据
+	function getRooms(){
+		$("#roomlist .jd-order-room").remove();
+		var hid = $("#hid").val();
+		var tm1 = $("#tm1").val();
+		var tm2 = $("#tm2").val();
+		if(tm2<tm1) {
+			alert("离店时间必须大于入住时间！");
+			return ;
+		}
+		var params = ['hid='+hid,'tm1=' + tm1,'tm2='+tm2];
+		var serviceURL = baseUrl+"hotelInfoService/getHotelData.json";
+		//公共方法
+		$.youi.ajaxUtils.ajax({
+			url:serviceURL,
+			data:params.join('&'),
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(result){
+				if(result&&result.records){
+					var record = result.records;//roomlist
+					for(var i=0 ; i<record.length; i++){
+						parseRecord_(record[i]);				
+					}
+				}
+			}
+		});
+	}
+	//解析room json
+	function parseRecord_(record){
+		var imgs = eval(record.img);
+		var plans = record.plans;
+		var html_ = "";
+		html_ += "<div class='jd-order-room'><table><colgroup><col width='121'></col><col width='101'></col><col></col></colgroup>";
+		html_ += "<tbody><tr><td valign='top'><img src='";
+		//判断是否有图片数据
+		if(imgs != null) html_ += "http://tp1.znimg.com/"+imgs[0].spic;
+		else html_ += "styles/images/jd-p3.jpg";
+		html_ += "' width='100' height='75'></td>";
+		html_ += "<td style='border-right:1px solid #ecebeb;' valign='top'>";
+		html_ += "<p class='mb25 lh20 f12 mt10'>"+record.title+"<a class='fa fa-angle-down room-show ml20' href='javascript:;'></a></p>";
+		html_ += "<p class='f12'><span class='c-b1 mr5'>";
+		//需要判断是否提供房间面积数据
+		if(record.area==null) html_ += " "+record.bed+"</p></td>";
+		else html_ += record.area +"㎡</span>| "+record.bed+"</p></td>";
+		html_ += "<td><table class='room-detail' style='margin-top:0px;'>";				
+		html_ += "<colgroup><col width='26%'></col><col width='10%'></col><col width='10%'></col><col width='12%'></col><col width='12%'></col><col width='10%'></col><col></col></colgroup>";
+		//房型的销售计划
+		for(var i = 0 ;i < plans.length;i++){
+			var date = eval(plans[i].date);
+			html_ += "<tr> <td>"+ plans[i].planname +"<i class='fa fa-gift c-o'></i></td>";
+			//房态判断
+			if(plans[i].status==0) html_ += "<td>有房</td>";
+			else html_ += "<td>无房</td>";
+			html_ += "<td>"+ record.adsl +"</td>";
+			html_ += "<td>";
+			if(plans[i].iscard==0) html_ += "免费取消";
+			else html_ += "<a href='' Title='"+plans[i].carddesc+"'>担保</a>";
+			html_ += "</td>";
+			
+			//html_ += "<td><em class='em-circle'>返</em><span class='c-y'>￥0</span></td>";
+			if(plans[i].status==0){
+				html_ += "<td><span class='c-o f20'>¥"+date[0].price+"</span></td>";
+				html_ += "<td><a href='javascript:bookHotel("+record.rid+","+plans[i].planid+")' class='hhf-submit lh28'>预订</a></td></tr>";
+			}else{
+				html_ += "<td><span class='c-o f20'>¥ 0</span></td>";
+				html_ += "<td><a disabled='disabled' style='background:#7b7674;' href='javascript:void(0)' class='hhf-submit lh28'>预订</a></td></tr>";
+			}
+				
+		}
+		html_ += "</table></td></tr><tr><td cospan='3' height='20'></td></tr></tbody>";
+		html_ += "<tfoot><tr><td colspan='2'>";
+		//当存在图片时，陈列出来
+		if(imgs != null){
+			for(var j=0; j<imgs.length;j++){
+				html_ += "<img src='"+"http://tp1.znimg.com/"+imgs[j].imgurl+"' width='100' height='75' class='fl mr10 mb10'>";
+				if(j>=4) break;
+			}
+		}
+		html_ += "</td>";
+		html_ += "<td><div class='ml50 f14 lh24 mr30'>";
+		html_ += "<p class='mb10'><span>建筑面积:";
+		if(record.area==null) html_ += "平方米</span><span class='ml50'>床型:"+record.bed+"</span></p>";
+		else html_ += record.area+"平方米</span><span class='ml50'>床型:"+record.bed+"</span></p>";
+		html_ += "<p>楼层："+record.floor+"</p>";		
+		html_ += "<p>其他: "+record.notes+"</p></div></td>";			
+		html_ += "</tr></tfoot></table></div>";
+		$("#roomlist").append(html_);	
+		
+	}
+	$(function  () {
+		/* $(".room-show").click(function(){
+			$(this).toggleClass("fa-angle-down").toggleClass("fa-angle-up");
+			$(this).parents("tbody").next("tfoot").toggle();
+		}); */
+		$("#roomlist").on('click', '.room-show', function() {
+			$(this).toggleClass("fa-angle-down").toggleClass("fa-angle-up");
+			$(this).parents("tbody").next("tfoot").toggle();
+		});
+		var Request = new Object();
+		Request = GetRequest();
+		var commodityId=Request['id'];
+		var hid = Request['hid'];
+		var tm1 = Request['tm1'];
+		var tm2 = Request['tm2'];
+		$("#hid").val(hid);
+		$("#tm1").val(tm1);
+		$("#tm2").val(tm2);
+		var params = ['hid=' + hid];
+		var serviceURL = baseUrl+"hotelInfoService/getHotelInfo.json";
+		//公共方法
+		$.youi.ajaxUtils.ajax({
+			url:serviceURL,
+			data:params.join('&'),
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(result){
+				if(result&&result.records){
+					var hotel = result.records[0];
+					/* 酒店基本信息 */
+					$("#currentHotel1").html(hotel.hotelname);
+					$("#currentHotel2").html(hotel.hotelname);
+					$("#minprice").html("¥"+hotel.min_jiage);
+					$("#hotelAddr").html(hotel.address);
+					$(".haoping").html(hotel.haoping_num);
+					$("#comment").html("来自"+ hotel.df_scores+"条评论");
+					$("#comment1").html("来自"+ hotel.df_scores+"条评论");
+					$("#comment2").html("查看全部"+ hotel.df_scores+"条评论");
+					$(".starbox1").empty();
+					for(var i=0; i<hotel.xingji;i++){
+						$(".starbox1").append("<i class='star1'>");
+					}
+					$("#majorPicture").attr("src",hotel.picture);
+					/* 酒店介绍部分 */
+					var html_part = "<tr><td>酒店概况</td>";
+					html_part += "<td>"+hotel.jianshu+"</td></tr>";
+					html_part += "<tr><td>服务设施</td>";
+					html_part += "<td>"+hotel.service+"</td></tr>";
+					html_part += "<tr><td>地理位置</td>";
+					var traffics = hotel.traffic.split(/[ -]/);
+					html_part += "<td>"
+					for(var j=0;j<traffics.length;j++){
+						html_part += traffics[j] + "<br>";
+					}
+					html_part += "</td></tr>";
+					html_part += "<tr><td>交通指南</td>";
+					html_part += "<td>";
+					var strs = new Array();
+					strs = hotel.traffic_zhinan.split(";");
+					for(var j=0;j<strs.length;j++){
+						html_part += strs[j] + "<br>";
+					}
+					html_part += "</td></tr>";
+					$("#hotelOverview").append(html_part);
+					$("#hotelContent").html(hotel.content);
+					getRooms();
+				}
+			}
+		});
+		//定义时间日期控件
+		laydate({
+		    elem: '#tm1', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+		});
+		laydate({
+		    elem: '#tm2', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+		});
+		var start = {
+		    elem: '#startTime',
+		    min: laydate.now(), //设定最小日期为当前日期
+		    max: '2099-06-16 23:59:59', //最大日期
+		    istoday: false,
+		    choose: function(datas){
+		         end.min = datas; //开始日选好后，重置结束日的最小日期
+		         end.start = datas //将结束日的初始值设定为开始日
+		    }
+		};
+		var end = {
+		    elem: '#endTime',
+		    min: laydate.now(),
+		    max: '2099-06-16 23:59:59',
+		    istoday: false,
+		    choose: function(datas){
+		        start.max = datas; //结束日选好后，重置开始日的最大日期
+		    }
+		};
+		laydate(start);
+		laydate(end);
+			
+	});
+	//跳转到订单页面
+	function bookHotel(rid,pid){
+		var hid = $("#hid").val();
+		var tm1 = $("#tm1").val();
+		var tm2 = $("#tm2").val();
+		window.open(encodeURI("jd2.html?hid="+hid+"&tm1="+tm1+"&tm2="+tm2+"&rid="+rid+"&pid="+pid));
+	}
+	
 	</script>
 </body>
 </html>

@@ -31,67 +31,75 @@
 				<div class="tct-select fl js-s clearfix">
 					<div class="ic-select">
 						<span class="fl lh30 mr10">目的地</span>
-						<p>创立方2</p>
+						<p><input type="text" onblur="" value="" style="width: 110px;height: 28px;"
+							id="city_name" name="city_name" mod="address|notice"
+							mod_address_source="hotel" mod_address_suggest=""
+							mod_address_reference="cityid" placeholder="中文/拼音" /></p>
+						<input id="cityid" name="cityid" type="hidden" value="{$cityid}" />
+						<div id="jsContainer" class="jsContainer" style="height:0">
+						    <div id="tuna_alert" style="display:none;position:absolute;z-index:999;overflow:hidden;"></div>
+						    <div id="tuna_jmpinfo" style="visibility:hidden;position:absolute;z-index:120;"></div>
+				    	</div>
 					</div>
-					<ul style="display: none;" class="select-nav">
+					<!-- <ul style="display: none;" class="select-nav">
 						<li>创立方1</li>
 						<li>创立方2</li>
 						<li>创立方3</li>
-					</ul>
+					</ul> -->
 				</div>
 				<div class="js-date ml10 fl clearfix">
-					<div class="jd-bg-h"><span class="fl">入住</span><input type="text"></div>
+					<div class="jd-bg-h"><span class="fl">入住</span><input id="tm1" type="text"></div>
 					<span class="fl ml10 mr10">—</span>
-					<div class="jd-bg-h"><span class="fl">离店</span><input type="text"></div>
-					<span class="fl ml50 lh22">共一晚</span>
+					<div class="jd-bg-h"><span class="fl">离店</span><input id="tm2" type="text"></div>
+					<span class="fl ml50 lh22" id="totalTime">共一晚</span>
 					<a href="" class="fr ml10"><img src="styles/images/close.png" border="0" style="margin-top:3px;"></a>
 				</div>
 				<div class="jd-bd-box ml10 fl clearfix">
 					<span class="fl">关键词</span>
 					<input type="text">
 				</div>
-				<input type="submit" value="立即搜索" class="jd-sea-btn fr">
+				<input type="submit" value="立即搜索" class="jd-sea-btn fr" onclick="query()">
 			</div>
 			<div class="clearfix jd-bd-select mt20">
 				<div class="jbk-bt clearfix">
 					<span class="jbk-span fl">价格区间</span>
 					<span class="ml50 mr50 c-o fl">不限</span>
 					<div class="fl">
-						<label><input type="checkbox" name="price"><span class="fl"> 低于￥150</span></label>
-						<label><input type="checkbox" name="price"><span class="fl"> ￥151－300</span></label>
-						<label><input type="checkbox" name="price"><span class="fl"> ￥301-450</span></label>
-						<label><input type="checkbox" name="price"><span class="fl"> ￥451－600</span></label>
-						<label><input type="checkbox" name="price"><span class="fl"> ￥600以上</span></label>
-						<div class="fl jbs-qu">自定义<input type="text" class="ml10"><span class="ml5 mr5">—</span><input type="text"></div>
+						<label><input type="checkbox" name="price" value="1"><span class="fl"> 低于￥150</span></label>
+						<label><input type="checkbox" name="price" value="150"><span class="fl"> ￥151－300</span></label>
+						<label><input type="checkbox" name="price" value="300"><span class="fl"> ￥301-450</span></label>
+						<label><input type="checkbox" name="price" value="450"><span class="fl"> ￥451－600</span></label>
+						<label><input type="checkbox" name="price" value="600"><span class="fl"> ￥600以上</span></label>
+						<div class="fl jbs-qu">自定义<input type="text" class="ml10" id="minprice"><span class="ml5 mr5">—</span><input type="text" id="maxprice"></div>
 					</div>
 				</div>
 				<div class="jbk-bt clearfix">
 					<span class="jbk-span fl">酒店星级</span>
 					<span class="ml50 mr50 c-o fl">不限</span>
 					<div class="fl">
-						<label><input type="checkbox" name="star"> 二星级／经济型</label>
-						<label><input type="checkbox" name="star"> 三星级／舒适型</label>
-						<label><input type="checkbox" name="star"> 四星级／高档型</label>
-						<label><input type="checkbox" name="star"> 五星级／豪华型</label>
+						<label><input type="checkbox" name="star" value="2"> 二星级／经济型</label>
+						<label><input type="checkbox" name="star" value="3"> 三星级／舒适型</label>
+						<label><input type="checkbox" name="star" value="4"> 四星级／高档型</label>
+						<label><input type="checkbox" name="star" value="5"> 五星级／豪华型</label>
 					</div>
 				</div>
 			</div>
-			<h5 class="f12 mt20 mb20 lh30"><span class="f14 c-o">10758</span> 家酒店满足条件</h5>
+			<h5 class="f12 mt20 mb20 lh30"><span class="f14 c-o" id="totalRecord">10758</span> 家酒店满足条件</h5>
 			<div class="fl" style="width:880px;">
 				<div class="czh-search clearfix jd-cs" style="font-size:14px;">
 					<ul class="fl">
-						<li class="active">热门推荐</li>
-						<li>价格 <i class="fa fa-angle-down ml20" style="font-size:18px;"></i></li>
-						<li>评分 <i class="fa fa-angle-down ml20" style="font-size:18px;"></i></li>
+						<li id="remen" class="active"><a href="javascript:query(1)">热门推荐</a></li>
+						<li id="jiage"><a href="javascript:query(2)">价格</a><i class="fa fa-angle-down ml20" style="font-size:18px;"></i></li>
+						<li id="pingfen"><a href="javascript:query(4)">评分</a> <i class="fa fa-angle-down ml20" style="font-size:18px;"></i></li>
 					</ul>
 					<div class="fr clearfix f12">
 						<label class="fl"><input type="checkbox" name="th" class="mr10 fl" style="margin-top:12px;"><span class="fl">特惠</span></label>
 						<label class="ml20 mr20 fl"><input type="checkbox" name="th" class="mr10 fl" style="margin-top:12px;"><span class="fl">免担保</span></label>
 					</div>
 				</div>
-				<div class="clearfix">
+				<div class="clearfix" id="hotelblock">
 					<div class="jd-order-group">
-						<table>
+						<!-- <table>
 							<colgroup>
 								<col width="180"></col>
 								<col width="490"></col>
@@ -120,139 +128,12 @@
 									<p><span class="c-o f20">￥618 </span>起</p>
 								</td>
 							</tr>
-						</table>
-					</div>
-					<div class="jd-order-group">
-						<table>
-							<colgroup>
-								<col width="180"></col>
-								<col width="490"></col>
-								<col></col>
-								<col width="110"></col>
-							</colgroup>
-							<tr>
-								<td><img src="styles/images/jd-p1.jpg" width="160" height="120"></td>
-								<td>
-									<div class="mb25">
-										<span class="lh30 f16 mr10">北京好苑建国酒店 </span>
-										<span class="starbox1"><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i></span>
-									</div>
-									<p class="mb25 lh20 f12">位于建国门，北京市东城区建国门内大街17号(朝阳门南小街与建国门内...</p>
-									<p class="c-b1 f12">
-										<span class="mr20"><i class="fa fa-wifi"></i> 无线上网</span>
-										<span class="mr20"><i class="fa fa-wifi"></i> 无线上网</span>
-										<span class="mr20"><i class="fa fa-wifi"></i> 接机服务</span>
-									</p>
-								</td>
-								<td valign="top" style="border-right:1px solid #ecebeb">
-									<p class="f12 mb15"><span class="c-o f20">4.5</span>/5.0</p>
-									<p class="c-824 f12">来自37条评论</p>
-								</td>
-								<td align="center">
-									<p><span class="c-o f20">￥618 </span>起</p>
-								</td>
-							</tr>
-						</table>
-					</div>
-					<div class="jd-order-group">
-						<table>
-							<colgroup>
-								<col width="180"></col>
-								<col width="490"></col>
-								<col></col>
-								<col width="110"></col>
-							</colgroup>
-							<tr>
-								<td><img src="styles/images/jd-p1.jpg" width="160" height="120"></td>
-								<td>
-									<div class="mb25">
-										<span class="lh30 f16 mr10">北京好苑建国酒店 </span>
-										<span class="starbox1"><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i></span>
-									</div>
-									<p class="mb25 lh20 f12">位于建国门，北京市东城区建国门内大街17号(朝阳门南小街与建国门内...</p>
-									<p class="c-b1 f12">
-										<span class="mr20"><i class="fa fa-wifi"></i> 无线上网</span>
-										<span class="mr20"><i class="fa fa-wifi"></i> 无线上网</span>
-										<span class="mr20"><i class="fa fa-wifi"></i> 接机服务</span>
-									</p>
-								</td>
-								<td valign="top" style="border-right:1px solid #ecebeb">
-									<p class="f12 mb15"><span class="c-o f20">4.5</span>/5.0</p>
-									<p class="c-824 f12">来自37条评论</p>
-								</td>
-								<td align="center">
-									<p><span class="c-o f20">￥618 </span>起</p>
-								</td>
-							</tr>
-						</table>
-					</div>
-					<div class="jd-order-group">
-						<table>
-							<colgroup>
-								<col width="180"></col>
-								<col width="490"></col>
-								<col></col>
-								<col width="110"></col>
-							</colgroup>
-							<tr>
-								<td><img src="styles/images/jd-p1.jpg" width="160" height="120"></td>
-								<td>
-									<div class="mb25">
-										<span class="lh30 f16 mr10">北京好苑建国酒店 </span>
-										<span class="starbox1"><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i></span>
-									</div>
-									<p class="mb25 lh20 f12">位于建国门，北京市东城区建国门内大街17号(朝阳门南小街与建国门内...</p>
-									<p class="c-b1 f12">
-										<span class="mr20"><i class="fa fa-wifi"></i> 无线上网</span>
-										<span class="mr20"><i class="fa fa-wifi"></i> 无线上网</span>
-										<span class="mr20"><i class="fa fa-wifi"></i> 接机服务</span>
-									</p>
-								</td>
-								<td valign="top" style="border-right:1px solid #ecebeb">
-									<p class="f12 mb15"><span class="c-o f20">4.5</span>/5.0</p>
-									<p class="c-824 f12">来自37条评论</p>
-								</td>
-								<td align="center">
-									<p><span class="c-o f20">￥618 </span>起</p>
-								</td>
-							</tr>
-						</table>
-					</div>
-					<div class="jd-order-group">
-						<table>
-							<colgroup>
-								<col width="180"></col>
-								<col width="490"></col>
-								<col></col>
-								<col width="110"></col>
-							</colgroup>
-							<tr>
-								<td><img src="styles/images/jd-p1.jpg" width="160" height="120"></td>
-								<td>
-									<div class="mb25">
-										<span class="lh30 f16 mr10">北京好苑建国酒店 </span>
-										<span class="starbox1"><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i></span>
-									</div>
-									<p class="mb25 lh20 f12">位于建国门，北京市东城区建国门内大街17号(朝阳门南小街与建国门内...</p>
-									<p class="c-b1 f12">
-										<span class="mr20"><i class="fa fa-wifi"></i> 无线上网</span>
-										<span class="mr20"><i class="fa fa-wifi"></i> 无线上网</span>
-										<span class="mr20"><i class="fa fa-wifi"></i> 接机服务</span>
-									</p>
-								</td>
-								<td valign="top" style="border-right:1px solid #ecebeb">
-									<p class="f12 mb15"><span class="c-o f20">4.5</span>/5.0</p>
-									<p class="c-824 f12">来自37条评论</p>
-								</td>
-								<td align="center">
-									<p><span class="c-o f20">￥618 </span>起</p>
-								</td>
-							</tr>
-						</table>
+						</table> -->
+						<div align="center">抱歉，暂时找不到数据...</div>
 					</div>
 				</div>
 				<div class="ycc-page clearfix fr" style="text-align:right">
-					<span class="c-b1 mr30 f12">找到相关结果约299个</span><a href="" class="no-c"><i class="fa fa-angle-double-left"></i></a><a href="" class="current">1</a><a href="">2</a><a href="">3</a><a href=""><i class="fa fa-angle-double-right"></i></a>
+					<span class="c-b1 mr30 f12" id="totalPage">找到相关结果约299个</span><a href="" class="no-c"><i class="fa fa-angle-double-left"></i></a><a href="" class="current">1</a><a href="">2</a><a href="">3</a><a href=""><i class="fa fa-angle-double-right"></i></a>
 				</div>
 			</div>
 			<div class="fr w285">
@@ -294,5 +175,200 @@
 	<!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
+	
+	<script type="text/javascript" src="scripts/lib/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="scripts/lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="scripts/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="scripts/lib/giui.min.js"></script>
+	<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
+	<script type="text/javascript" src="scripts/page/laydate/laydate.js"></script>
+	
+	<script type="text/javascript" src="scripts/cityselector/fixdiv.js"></script>
+	<script type="text/javascript" src="scripts/cityselector/address.js"></script>
+	<script type="text/javascript">
+		function GetRequest() {
+			/* url=decodeURI(location.href);
+			var tmp1=url.split("?")[1]; */
+		   var url = decodeURI(location.search); //获取url中"?"符后的字串
+		   var theRequest = new Object();
+		   if (url.indexOf("?") != -1) {
+		      var str = url.substr(1);
+		      strs = str.split("&");
+		      for(var i = 0; i < strs.length; i ++) {
+		         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+		      }
+		   }
+		   return theRequest;
+		}
+		//计算时间间隔（天数）
+		function GetDateDiff(startDate,endDate){
+		    var startTime = new Date(Date.parse(startDate.replace(/-/g,   "/"))).getTime();     
+		    var endTime = new Date(Date.parse(endDate.replace(/-/g,   "/"))).getTime();     
+		    var dates = Math.abs((startTime - endTime))/(1000*60*60*24);     
+		    return  dates;    
+		}
+		//设置标注住几天
+		function setDiffTime(tm1,tm2){
+			$("#totalTime").empty();
+			$("#totalTime").html("共"+GetDateDiff(tm1,tm2)+"晚");
+		}
+		//搜索
+		function query(){
+			//alert(arguments[0]);//argument 隐含参数对象
+			var cityname = $("#city_name").val();
+			var cityid = $("#cityid").val();
+			tm1 = $("#tm1").val();
+			tm2 = $("#tm2").val();
+			var minprice = 0;
+			var maxprice = 999999;
+			var pricelist = $("input[name=price]");
+			for(var i=0; i<pricelist.length; i++){
+				if(pricelist[i].checked) {
+					if(minprice == 0){
+						minprice = pricelist[i].value;
+						maxprice = Number(pricelist[i].value) + Number(150);
+					}
+					if((pricelist[i].value + 150) > maxprice){
+						maxprice = Number(pricelist[i].value) + Number(150);
+					}
+				}
+			}
+/* 			minprice = $("minprice").val()==""?minprice:$("minprice").val();
+			maxprice = $("maxprice").val()==""?maxprice:$("maxprice").val(); */
+			var star = $("input[name=star]");
+			var rank = -1;
+			for(var i=0;i<star.length;i++){
+				if(star[i].checked) rank = star[i].value;
+			}
+			var params;
+			if(arguments.length == 0){//直接搜索
+				if(rank == -1) params = ['minprice='+minprice,'maxprice='+maxprice,'cid='+cityid];
+				else params = ['minprice='+minprice,'maxprice='+maxprice,'cid='+cityid,'rank='+rank];
+			}else if(arguments.length==1){//选择酒店排序方式搜索
+				$(".active").removeClass("active");
+				if(arguments[0]==1) $("#remen").attr("class","active");
+				if(arguments[0]==2) $("#jiage").attr("class","active");
+				if(arguments[0]==4) $("#pingfen").attr("class","active");
+				if(rank == -1) params = ['px='+arguments[0],'minprice='+minprice,'maxprice='+maxprice,'cid='+cityid];
+				else params = ['px='+arguments[0],'minprice='+minprice,'maxprice='+maxprice,'cid='+cityid,'rank='+rank];
+			}else if(arguments.length==2){//翻页
+				if(rank == -1) params = ['px='+arguments[0],'pagesize='+arguments[1],'minprice='+minprice,'maxprice='+maxprice,'cid='+cityid];
+				else params = ['px='+arguments[0],'pagesize='+arguments[1],'minprice='+minprice,'maxprice='+maxprice,'cid='+cityid,'rank='+rank];
+			}
+						
+			var serviceURL = baseUrl+"hotelInfoService/searchHotelByConditions.json";
+			setDiffTime(tm1,tm2);
+			//公共方法
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					if(result&&result.records){
+						var record = result.records;
+						parseRecord_(record);
+					}
+				}
+			});
+		}
+		//查询结果js构建
+		function parseRecord_(record){
+			if(record.length > 0){
+				$(".jd-order-group").remove();
+				$("#totalRecord").html(record[0].totalput);
+				$("#totalPage").empty();
+				$("#totalPage").html("共" + record[0].totalpg + "页");
+			}			
+			for(var i=1;i<record.length;i++){//record[0] 存放返回的头文件信息，包括记录数，页数等
+				var hotel = record[i];
+				var html = "<div class='jd-order-group'><table><colgroup><col width='180'></col><col width='490'></col><col></col><col width='110'></col></colgroup>";
+					html += "<tr><td><a href='javascript:gotoHotelInfo("+hotel.ID+")'><img src='"+hotel.Picture+"' width='160' height='120'></a></td>";
+					html += "<td><div class='mb25'><span class='lh30 f16 mr10' onclick='gotoHotelInfo("+hotel.ID+")'>" + hotel.HotelName + "</span>";
+					html += "<span class='starbox1'>";
+					for(var j=0;j < hotel.xingji; j++){
+						html += "<i class='star1'></i>";
+					}
+					html += "</span></div>";
+					html += "<p class='mb25 lh20 f12'>"+hotel.Address+"</p>"
+					html += "<p class='c-b1 f12'>";		
+					html += "<span class='mr20'><i class='fa fa-wifi'></i> 无线上网</span> <span class='mr20'><i class='fa fa-wifi'></i> 无线上网</span><span class='mr20'><i class='fa fa-wifi'></i> 接机服务</span>";
+					html += "</p></td>";
+					html += "<td valign='top' style='border-right:1px solid #ecebeb'>";
+					html += "<p class='f12 mb15'><span class='c-o f20'>"+hotel.haoping_num+"</span>/5.0</p>";
+					html += "<p class='c-824 f12'>来自"+hotel.df_scores+"条评论</p></td>";
+					html += "<td align='center'><p><span class='c-o f20'>￥"+hotel.min_jiage+" </span>起</p></td>";
+					html += "</tr></table></div>";
+				$("#hotelblock").append(html);
+			}
+		}
+		//跳转到酒店详情页
+		function gotoHotelInfo(hid){
+			var tm1 = $("#tm1").val();
+			var tm2 = $("#tm2").val();
+			window.open(encodeURI("jd4.html?hid="+hid+"&tm1="+tm1+"&tm2="+tm2));
+		}
+		//dom载入方法
+		$(function  () {
+			var Request = new Object();
+			Request = GetRequest();
+			var commodityId=Request['id'];
+			var cityname = Request['cityname'];
+			var cityid = Request['cityid'];
+			var tm1 = Request['tm1'];
+			var tm2 = Request['tm2'];
+			$("#city_name").val(cityname);
+			$("#cityid").val(cityid);
+			$("#tm1").val(tm1);
+			$("#tm2").val(tm2);
+			setDiffTime(tm1,tm2);
+			var params = ['pagesize=8','px=1','cid='+cityid];
+			var serviceURL = baseUrl+"hotelInfoService/searchHotelByConditions.json";
+			//公共方法
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					if(result&&result.records){
+						var record = result.records;
+						parseRecord_(record);
+					}
+				}
+			});
+			
+			laydate({
+			    elem: '#tm1', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+			    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+			});
+			laydate({
+			    elem: '#tm2', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+			    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+			});
+			var start = {
+			    elem: '#startTime',
+			    min: laydate.now(), //设定最小日期为当前日期
+			    max: '2099-06-16 23:59:59', //最大日期
+			    istoday: false,
+			    choose: function(datas){
+			         end.min = datas; //开始日选好后，重置结束日的最小日期
+			         end.start = datas //将结束日的初始值设定为开始日
+			    }
+			};
+			var end = {
+			    elem: '#endTime',
+			    min: laydate.now(),
+			    max: '2099-06-16 23:59:59',
+			    istoday: false,
+			    choose: function(datas){
+			        start.max = datas; //结束日选好后，重置开始日的最大日期
+			    }
+			};
+			laydate(start);
+			laydate(end);
+		})
+	</script>
+	
 </body>
 </html>
