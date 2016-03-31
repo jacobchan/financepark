@@ -12,6 +12,7 @@ import com.common.ExtentionAtrManager.entity.LawserverEntity;
 import com.common.ExtentionAtrManager.entity.MeetingEntity;
 import com.common.ExtentionAtrManager.service.ExtentionAtrManager;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
+import com.common.purchasingManager.entity.PurchasingmanagerCommodityExtend;
 import com.common.purchasingManager.service.PurchasingmanagerCommodityExtendManager;
 import com.gsoft.framework.core.exception.BusException;
 
@@ -107,7 +108,11 @@ public class ExtentionAtrManagerImpl implements ExtentionAtrManager {
 	 * @return
 	 */
 	private String getExtendValue(String fieldName,String commdityId){
-		String extendValue=purchasingmanagerCommodityExtendManager.getPurchasingmanagerCommodityExtends(fieldName, commdityId).getCommodityExtendContent();
+		PurchasingmanagerCommodityExtend purExtend = purchasingmanagerCommodityExtendManager.getPurchasingmanagerCommodityExtends(fieldName, commdityId);
+		String extendValue = "";
+		if(purExtend != null){
+			extendValue=purExtend.getCommodityExtendContent();
+		}
 		
 		return extendValue !=null?extendValue:"";
 	}

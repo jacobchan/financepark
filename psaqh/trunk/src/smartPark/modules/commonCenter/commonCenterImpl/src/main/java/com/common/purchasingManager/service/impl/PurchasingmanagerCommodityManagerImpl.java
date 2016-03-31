@@ -403,7 +403,7 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
 		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode", "0505");
 		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("genreId", pg.getGenreId());
 		for(PurchasingmanagerCommodity pc :list){
-			extentionAtrManager.setAgencyBookExtendValue(pc);
+			extentionAtrManager.setLawserverExtendValue(pc);
 		}
 		return list;
 	}
