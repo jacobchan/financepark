@@ -93,7 +93,8 @@
                     </div>
                     <div class="inline_b ml40">
                         <label>&nbsp;&nbsp;&nbsp;增值服务</label>
-                        <input type="checkbox" class="vm"/><span class="vm c3">司机</span>
+                       <!--  <input type="checkbox" class="vm"/><span class="vm c3">司机</span> -->
+                        <label class="ib-checkbox" style="width:auto"><input type="checkbox" class="vm mr5"/>司机</label>
                     </div>
                 </div>
                 <div class="mt25">
@@ -232,35 +233,33 @@
 								alert("请登录");
 								return;
 							}
-alert(1212);
 							var arr = new Array();
 							$("#calendar .today").each(function() {
-								alert(111);
 								if($(this).attr("id")!=undefined){
-									alert(122);
-									var ids = $(this).attr("id");
-									alert(133);
+								var ids = $(this).attr("id");
 								var idss=ids.substring(ids.indexOf("-")+1, ids.lastIndexOf("-"));
-								alert(4);
 								if(idss.length==1){
-									alert(5);
 									var y=ids.substring(9,ids.indexOf("-"));
 									var m=idss;
 									var d=ids.substring(ids.lastIndexOf("-")+1,ids.length);
 									ids = y+"-0"+m+"-"+d;
 									arr.push(ids);
 								}else{
-									alert(6);
 									ids = ids.substr(9);
 									arr.push(ids);
 								}
-								alert(arr);
 									
 								}
 							});
 
 							var reserveName=$("#reserveName").val();
 							var reserveTel=$("#reserveTel").val();
+							var driver='';
+						    if($(".ib-checkbox").children('input[type="checkbox"]').is(":checked")){
+						    	driver='01';
+					          }else{
+					            driver='00';
+					         }
 							if(reserveName ==null||reserveName==""){
 								alert("请填联系人");
 								return;
@@ -282,7 +281,7 @@ alert(1212);
 									string += "records[" + i + "].resoDate="
 											+ arr[i] + "&";
 								}
-								string += "userorderAmount=" + userorderAmount+"&"+"commodityId="+commodityId;
+								string += "userorderAmount=" + userorderAmount+"&"+"commodityId="+commodityId+"&"+"addService="+driver;
 								
 								var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/savePublicResoOrderByList.json";
 								//公共方法
@@ -292,7 +291,6 @@ alert(1212);
 									jsonp : 'data:jsonp',
 									dataType : 'jsonp',
 									success : function(result) {
-										alert(result+"===="+result.record);
 										if (result && result.record) {
 											alert("预约成功");
 											$(".pop_layer").hide();
