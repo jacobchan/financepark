@@ -235,148 +235,169 @@
 	var iscard = 0; //1是担保 0不担保
 	var carddesc; //担保描述
 	var roomPrice=1;
-		function GetRequest() {
-		   var url = decodeURI(location.search); //获取url中"?"符后的字串
-		   var theRequest = new Object();
-		   if (url.indexOf("?") != -1) {
-		      var str = url.substr(1);
-		      strs = str.split("&");
-		      for(var i = 0; i < strs.length; i ++) {
-		         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
-		      }
+	function GetRequest() {
+	   var url = decodeURI(location.search); //获取url中"?"符后的字串
+	   var theRequest = new Object();
+	   if (url.indexOf("?") != -1) {
+	      var str = url.substr(1);
+	      strs = str.split("&");
+	      for(var i = 0; i < strs.length; i ++) {
+	         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+	      }
+	   }
+	   return theRequest;
+	}
+	//计算时间间隔（天数）
+	function GetDateDiff(startDate,endDate){
+	    var startTime = new Date(Date.parse(startDate.replace(/-/g,   "/"))).getTime();     
+	    var endTime = new Date(Date.parse(endDate.replace(/-/g,   "/"))).getTime();     
+	    var dates = Math.abs((startTime - endTime))/(1000*60*60*24);     
+	    return  dates;    
+	}
+	//校验手机号格式
+	function isMobil(s) {
+    	var patrn = /^(13[0-9]{9})|(14[0-9])|(18[0-9])|(15[0-9][0-9]{8})$/;
+   		if (!patrn.exec(s)) return false
+   	 	return true
+	}
+	//重新载入
+	function reload(){
+		window.location.href=encodeURI("jd2.html?hid="+$("#hid").val()+"&tm1="+$("#tm1").val()+"&tm2="+$("#tm2").val()+"&rid="+$("#rid").val()+"&pid="+$("#pid").val()); 
+	}
+	//判断担保
+	function decideRule(){
+		/* var now = new Date();
+		var now_1 = new Date();//当前时间加1天
+		now_1.setTime(now.getTime()+24*60*60*1000);
+		var a = now.getFullYear()+"-" + (now.getMonth()+1) + "-" + now.getDate();
+		var b = now_1.getFullYear()+"-" + (now_1.getMonth()+1) + "-" + now_1.getDate();
+		var start;
+		var end;			
+		if(stattime!="" && endtime!=""){
+			start = new Date(a+" "+stattime); 
+			end = new Date(a+" "+endtime);
+			alert(start.getHours()+":" + (start.getMinutes()) + "-" + start.getDate());
+			alert(end.getHours()+"-" + (end.getMinutes()) + "-" + end.getDate());
+		} */
+		var start = stattime.split(":")[0];
+		var end = endtime.split(":")[0];
+		if(parseInt(0)<parseInt(start) && parseInt(start)<parseInt(8)) start = parseInt(start) + parseInt(24);
+		if(parseInt(0)<parseInt(end) && parseInt(end)<parseInt(8)) end = parseInt(end) + parseInt(24);
+		
+		var room_num = $("#roomNum").text();
+		var arrivetime = $("input:radio:checked").val();
+		var arrive;
+		if(arrivetime == "06:00") arrive = parseInt(30);
+		else if(arrivetime == "20:00") arrive = parseInt(20);
+		else if(arrivetime == "24:00") arrive = parseInt(24);
+		//判断cardrule节点中的值
+		if(status==1){
+		   if(norule==1){ //无条件担保
+			iscard=1;
+		   }else if(romms!=0 && room_num>=romms){ //房间大于romms需担保
+		       iscard=1;
+		   }else if(stattime!='' && endtime!='' && start <=arrive && arrive<=end){ //几点到店时间担保 
+		       iscard=1;
+		   }else{
+			   iscard=0;
 		   }
-		   return theRequest;
 		}
-		//计算时间间隔（天数）
-		function GetDateDiff(startDate,endDate){
-		    var startTime = new Date(Date.parse(startDate.replace(/-/g,   "/"))).getTime();     
-		    var endTime = new Date(Date.parse(endDate.replace(/-/g,   "/"))).getTime();     
-		    var dates = Math.abs((startTime - endTime))/(1000*60*60*24);     
-		    return  dates;    
+		if(iscard==1) {
+			if($("#creditTable").length<=0)
+			addCredit();
+			$("#cardrule").html(carddesc);
+		}else $(".creditCard").remove();
+		//判断房间数量，天数，房总价
+		$(".addcustomer").remove();
+		var html_ = "";
+		for(var i=1; i<room_num; i++){
+			html_ += "<tr class='customers addcustomer'><td valign='top'></td>";
+			html_ += "<td><input type='text'><p class='lh20 c-b1 mt10 mb10'>每个房间只需填写1位，请确保所填姓名与入住时所持证件保持一致 </p></td></tr>";
 		}
-		//重新载入
-		function reload(){
-			window.location.href=encodeURI("jd2.html?hid="+$("#hid").val()+"&tm1="+$("#tm1").val()+"&tm2="+$("#tm2").val()+"&rid="+$("#rid").val()+"&pid="+$("#pid").val()); 
-		}
-		//判断担保
-		function decideRule(){
-			/* var now = new Date();
-			var now_1 = new Date();//当前时间加1天
-			now_1.setTime(now.getTime()+24*60*60*1000);
-			var a = now.getFullYear()+"-" + (now.getMonth()+1) + "-" + now.getDate();
-			var b = now_1.getFullYear()+"-" + (now_1.getMonth()+1) + "-" + now_1.getDate();
-			var start;
-			var end;			
-			if(stattime!="" && endtime!=""){
-				start = new Date(a+" "+stattime); 
-				end = new Date(a+" "+endtime);
-				alert(start.getHours()+":" + (start.getMinutes()) + "-" + start.getDate());
-				alert(end.getHours()+"-" + (end.getMinutes()) + "-" + end.getDate());
-			} */
-			var start = stattime.split(":")[0];
-			var end = endtime.split(":")[0];
-			if(parseInt(0)<parseInt(start) && parseInt(start)<parseInt(8)) start = parseInt(start) + parseInt(24);
-			if(parseInt(0)<parseInt(end) && parseInt(end)<parseInt(8)) end = parseInt(end) + parseInt(24);
-			
-			var room_num = $("#roomNum").text();
-			var arrivetime = $("input:radio:checked").val();
-			var arrive;
-			if(arrivetime == "06:00") arrive = parseInt(30);
-			else if(arrivetime == "20:00") arrive = parseInt(20);
-			else if(arrivetime == "24:00") arrive = parseInt(24);
-			//判断cardrule节点中的值
-			if(status==1){
-			   if(norule==1){ //无条件担保
-				iscard=1;
-			   }else if(romms!=0 && room_num>=romms){ //房间大于romms需担保
-			       iscard=1;
-			   }else if(stattime!='' && endtime!='' && start <=arrive && arrive<=end){ //几点到店时间担保 
-			       iscard=1;
-			   }else{
-				   iscard=0;
-			   }
+		$(".customers").after(html_);
+		tm1 = $("#tm1").val();
+		tm2 = $("#tm2").val();
+		var dayNum = GetDateDiff(tm1,tm2);
+		$(".price").html("￥"+ roomPrice*room_num);
+	}
+	//add creditcard 
+	function addCredit(){
+		var html_ = "<h3 class='pb10 f16 lh24 tl mt10 creditCard' style='border-bottom:1px solid #ecebeb;'>信用卡担保</h3>";
+		html_ += "<div class='hc-con-c mt20 creditCard'>";
+      		html_ += "<p id='cardrule' class='tl mt10 mb10'>在2015-12-31至2038-01-19入住需要您提供信用卡担保。预定后无法变更取消，如未入住，将扣除全额房费作为违约金。</p></div>"
+           html_ += "<table id='creditTable' class='setting-table jdorder-tab mt10 lh30 tl creditCard'>";
+      		html_ += "<colgroup><col width='96'></col><col></col></colgroup>";
+      		html_ += "<tr><td valign='top'>信用卡号：</td><td><input id='pucardno' type='text'></td></tr>";
+      		html_ += "<tr><td>有效期：</td><td>";
+      		html_ += "<div class='tct-select fl mr10' style='width:115px'>";
+      		html_ += "<div class='ic-select'><p id='puyear'>2016</p></div>";
+		html_ += "<ul style='display: none;' class='select-nav'><li>2016</li><li>2017</li><li>2018</li><li>2019</li><li>2020</li><li>2021</li></ul></div>";		
+		html_ += "<div class='tct-select fl' style='width:115px'>";		
+		html_ += "<div class='ic-select'><p id='pumonth'>01</p></div>";	
+		html_ += "<ul style='display: none;' class='select-nav'><li>01</li><li>02</li><li>03</li><li>04</li>";		
+		html_ += "<li>05</li><li>06</li><li>07</li><li>08</li><li>09</li><li>10</li><li>11</li><li>12</li></ul></div>"	;			
+		html_ += "<span class='lh30 c-b1 ml10'>（只接受有效期为当前月份之后的信用卡）</span></td></tr>"
+		html_ += "<tr><td>CW2码：</td><td>";
+		html_ += "<input id='pucode' type='text' style='width:115px;'>";
+      		html_ += "<span class='lh30 c-b1 ml10'><img src='styles/images/grzx/circle-red.png' class='mr5'>信用卡背面紧跟在卡号末四位号码的后面印刷的3位数字</span></td></tr>";
+      		html_ += "<tr><td>持卡人姓名：</td><td><input id='puname' type='text' style='width:115px;'></td></tr>";	
+      		html_ += "<tr><td>证件类型：</td><td><div class='tct-select fl' style='width:115px'>";
+      		html_ += "<div class='ic-select'><p id='puidtype' value='0'>身份证</p></div>";
+		html_ += "<ul style='display: ;' class='select-nav'><li value='0'>身份证</li><li value='1'>护照</li><li value='2'>其他</li></ul></div></td></tr>";
+		html_ += "<tr><td>证件号码：</td><td><input id='puidno' type='text'></td></tr></table>";
+      		$("#customerInfo").after(html_);	
+	}
+	//订单提交
+	function submitBook(){
+		if(!isLogin){alert("请先登录");return;}
+		var params;
+		var guest = "";
+		$(".customers input:text").each(function(index){
+			//校验入住人
+			if(this.value==null||this.value==""){
+				$(this).after("<span><font color='#FF0000'>*入住人不能为空</font></span>");
+				return ;
 			}
-			if(iscard==1) {
-				if($("#creditTable").length<=0)
-				addCredit();
-				$("#cardrule").html(carddesc);
-			}else $(".creditCard").remove();
-			//判断房间数量，天数，房总价
-			$(".addcustomer").remove();
-			var html_ = "";
-			for(var i=1; i<room_num; i++){
-				html_ += "<tr class='customers addcustomer'><td valign='top'></td>";
-				html_ += "<td><input type='text'><p class='lh20 c-b1 mt10 mb10'>每个房间只需填写1位，请确保所填姓名与入住时所持证件保持一致 </p></td></tr>";
+			guest += this.value + ",";
+		});
+		var tmp = guest.substring(0, guest.length-1);
+		if($("#mobile").val()!=null&&$("#mobile").val()!=""){
+			if(!isMobil($("#mobile").val())){
+				$("#mobile").after("<font color='#FF0000'>*请输入正确的手机号码</font>");
+				return ;
 			}
-			$(".customers").after(html_);
-			tm1 = $("#tm1").val();
-			tm2 = $("#tm2").val();
-			var dayNum = GetDateDiff(tm1,tm2);
-			$(".price").html("￥"+ roomPrice*room_num);
+		}else{
+			$("#mobile").after("<font color='#FF0000'>*手机号码不能为空</font>");
+			return ;
 		}
-		//add creditcard 
-		function addCredit(){
-			var html_ = "<h3 class='pb10 f16 lh24 tl mt10 creditCard' style='border-bottom:1px solid #ecebeb;'>信用卡担保</h3>";
-			html_ += "<div class='hc-con-c mt20 creditCard'>";
-       		html_ += "<p id='cardrule' class='tl mt10 mb10'>在2015-12-31至2038-01-19入住需要您提供信用卡担保。预定后无法变更取消，如未入住，将扣除全额房费作为违约金。</p></div>"
-            html_ += "<table id='creditTable' class='setting-table jdorder-tab mt10 lh30 tl creditCard'>";
-       		html_ += "<colgroup><col width='96'></col><col></col></colgroup>";
-       		html_ += "<tr><td valign='top'>信用卡号：</td><td><input id='pucardno' type='text'></td></tr>";
-       		html_ += "<tr><td>有效期：</td><td>";
-       		html_ += "<div class='tct-select fl mr10' style='width:115px'>";
-       		html_ += "<div class='ic-select'><p id='puyear'>2016</p></div>";
-			html_ += "<ul style='display: none;' class='select-nav'><li>2016</li><li>2017</li><li>2018</li><li>2019</li><li>2020</li><li>2021</li></ul></div>";		
-			html_ += "<div class='tct-select fl' style='width:115px'>";		
-			html_ += "<div class='ic-select'><p id='pumonth'>01</p></div>";	
-			html_ += "<ul style='display: none;' class='select-nav'><li>01</li><li>02</li><li>03</li><li>04</li>";		
-			html_ += "<li>05</li><li>06</li><li>07</li><li>08</li><li>09</li><li>10</li><li>11</li><li>12</li></ul></div>"	;			
-			html_ += "<span class='lh30 c-b1 ml10'>（只接受有效期为当前月份之后的信用卡）</span></td></tr>"
-			html_ += "<tr><td>CW2码：</td><td>";
-			html_ += "<input id='pucode' type='text' style='width:115px;'>";
-       		html_ += "<span class='lh30 c-b1 ml10'><img src='styles/images/grzx/circle-red.png' class='mr5'>信用卡背面紧跟在卡号末四位号码的后面印刷的3位数字</span></td></tr>";
-       		html_ += "<tr><td>持卡人姓名：</td><td><input id='puname' type='text' style='width:115px;'></td></tr>";	
-       		html_ += "<tr><td>证件类型：</td><td><div class='tct-select fl' style='width:115px'>";
-       		html_ += "<div class='ic-select'><p id='puidtype' value='0'>身份证</p></div>";
-			html_ += "<ul style='display: ;' class='select-nav'><li value='0'>身份证</li><li value='1'>护照</li><li value='2'>其他</li></ul></div></td></tr>";
-			html_ += "<tr><td>证件号码：</td><td><input id='puidno' type='text'></td></tr></table>";
-       		$("#customerInfo").after(html_);	
-		}
-		//订单提交
-		function submitBook(){
-			var params;
-			var guest = "";
-			$(".customers input:text").each(function(index){
-				guest += this.value + ",";
-			});
-			var tmp = guest.substring(0, guest.length-1);
-			if($("#creditTable").length>0){				
-				params = ['hid='+$("#hid").val(),'rid=' + $("#rid").val(),'pid='+$("#pid").val(),
-				              'tm1='+$("#tm1").val(),'tm2='+$("#tm2").val(),'latetime='+$("input:radio:checked").val(),
-				              'rm='+$("#roomNum").text(),'guest='+tmp,'mobile='+$("#mobile").val(),
-				              'pucardno='+$("#pucardno").val(),'puyear='+$("#puyear").text(),'pucode='+$("#pucode").val(),
-				              'pumonth='+$("#pumonth").text(),'puname='+$("#puname").val(),'puidtype='+$("#puidtype").text(),
-				              'puidno='+$("#puidno").val()];
-			}else{
-				params = ['hid='+$("#hid").val(),'rid=' + $("#rid").val(),'pid='+$("#pid").val(),
+		if($("#creditTable").length>0){
+			params = ['hid='+$("#hid").val(),'rid=' + $("#rid").val(),'pid='+$("#pid").val(),
 			              'tm1='+$("#tm1").val(),'tm2='+$("#tm2").val(),'latetime='+$("input:radio:checked").val(),
-			              'rm='+$("#roomNum").text(),'guest='+tmp,'mobile='+$("#mobile").val()];
-			}
-			serviceURL = baseUrl+"hotelOrderService/postBook.json";
-			$.youi.ajaxUtils.ajax({
-				url:serviceURL,
-				data:params.join('&'),
-				jsonp:'data:jsonp',
-				dataType:'jsonp',
-				success:function(result){
-					if(result&&result.records){
-						var record = result.records;
-						if(record[0].orderid!=0)
-							window.open("jd3.html");
-						else alert(record[0].error);
-					}
-				}
-			});
+			              'rm='+$("#roomNum").text(),'guest='+tmp,'mobile='+$("#mobile").val(),
+			              'pucardno='+$("#pucardno").val(),'puyear='+$("#puyear").text(),'pucode='+$("#pucode").val(),
+			              'pumonth='+$("#pumonth").text(),'puname='+$("#puname").val(),'puidtype='+$("#puidtype").text(),
+			              'puidno='+$("#puidno").val()];
+		}else{
+			params = ['hid='+$("#hid").val(),'rid=' + $("#rid").val(),'pid='+$("#pid").val(),
+		              'tm1='+$("#tm1").val(),'tm2='+$("#tm2").val(),'latetime='+$("input:radio:checked").val(),
+		              'rm='+$("#roomNum").text(),'guest='+tmp,'mobile='+$("#mobile").val()];
 		}
+		serviceURL = baseUrl+"hotelOrderService/postBook.json";
+		$.youi.ajaxUtils.ajax({
+			url:serviceURL,
+			data:params.join('&'),
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(result){
+				if(result&&result.records){
+					var record = result.records;
+					if(record[0].orderid!=0)
+						window.open("jd3.html");
+					else alert(record[0].error);
+				}
+			}
+		});
+	}
 		//dom载入方法
 		$(function  () {
 			$(".tc").on("click",".ic-select",function(e){

@@ -689,6 +689,7 @@
 	});
 	//跳转到订单页面
 	function bookHotel(rid,pid){
+		if(!isLogin){alert("请先登录");return;}
 		var hid = $("#hid").val();
 		var tm1 = $("#tm1").val();
 		var tm2 = $("#tm2").val();
