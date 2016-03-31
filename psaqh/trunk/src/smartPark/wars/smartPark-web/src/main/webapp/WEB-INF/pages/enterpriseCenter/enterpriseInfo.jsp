@@ -26,7 +26,8 @@
 			    } 
 			    return reLen;    
 			}
-			
+			var zNodes = "";
+			var roomNodes = "";
 			var setting = {
 				check: {
 					enable: true,
@@ -46,15 +47,30 @@
 					onCheck: onCheck
 				}
 			};
-
-			var zNodes = "";
-
+			var rooms = {
+				check: {
+					enable: true,
+					chkStyle: "radio",
+					radioType: "all"
+				},
+				view: {
+					dblClickExpand: false
+				},
+				data: {
+					simpleData: {
+						enable: true
+					}
+				},
+				callback: {
+					onClick: roomClick,
+					onCheck: roomCheck
+				}
+			};
 			function onClick(e, treeId, treeNode) {
 				var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 				zTree.checkNode(treeNode, !treeNode.checked, null, true);
 				return false;
 			}
-
 			function onCheck(e, treeId, treeNode) {
 				var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
 				nodes = zTree.getCheckedNodes(true),
@@ -69,35 +85,70 @@
 				$("#enTypeId").val(v);
 				$("#enTypeName").val(m);
 			}
-
+			function roomClick(e, treeId, treeNode) {
+				var zTree = $.fn.zTree.getZTreeObj("treeRoom");
+				zTree.checkNode(treeNode, !treeNode.checked, null, true);
+				return false;
+			}
+			function roomCheck(e, treeId, treeNode) {
+				var zTree = $.fn.zTree.getZTreeObj("treeRoom"),
+				nodes = zTree.getCheckedNodes(true),
+				k = "";
+				l = "";
+				for (var i=0, l=nodes.length; i<l; i++) {
+					k += nodes[i].id + ",";
+					l += nodes[i].name + ",";
+				}
+				if (k.length > 0 ) k = k.substring(0, k.length-1);
+				if (l.length > 0 ) l = l.substring(0, l.length-1);
+				$("#roomId").val(k);
+				$("#roomAddress").val(l);
+			}
 			function showMenu() {
 				var cityObj = $("#enTypeName");
 				var cityOffset = $("#enTypeName").offset();
 				$("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
 				$("body").bind("mousedown", onBodyDown);
 			}
+			function showRoom() {
+				var roomObj = $("#roomId");
+				var roomOffset = $("#roomId").offset();
+				$("#roomContent").css({left:roomOffset.left + "px", top:roomOffset.top + roomObj.outerHeight() + "px"}).slideDown("fast");
+				$("body").bind("mousedown", onBodyRoom);
+			}
 			function hideMenu() {
 				$("#menuContent").fadeOut("fast");
 				$("body").unbind("mousedown", onBodyDown);
 			}
+			function hideRoom() {
+				$("#roomContent").fadeOut("fast");
+				$("body").unbind("mousedown", onBodyRoom);
+			}
 			function dataJson(data) {
 				zNodes = eval("[" + data + "]");
 				$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			}
+			function roomJson(data) {
+				roomNodes = eval("[" + data + "]");
+				$.fn.zTree.init($("#treeRoom"), rooms, roomNodes);
 			}
 			function onBodyDown(event) {
 				if (!(event.target.id == "menuBtn" || event.target.id == "enTypeName" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
 					hideMenu();
 				}
 			}
-			
+			function onBodyRoom(event) {
+				if (!(event.target.id == "menuBtn" || event.target.id == "roomAddress" || event.target.id == "roomContent" || $(event.target).parents("#roomContent").length>0)) {
+					hideRoom();
+				}
+			}
 			$(document).ready(function() {
 				$.ajax({
 					url:baseUrl+'/etypeEnterprisetypeManager/findEnterpriseTypeTree.json',
 					success:function(result){
 						dataJson(result.record.html);
 					}
-				});
-				//CKEDITOR.replace('editorrzRemark');		
+				});	
 			  	var editor = CKEDITOR.replace('editorproductDiscriptio');
 			  	editor.updateElement();
 				$("#rzRemark").on('keyup', function() {
@@ -122,8 +173,20 @@
 				    					editor.setData(result.record.productDiscriptio);
 				    					$("#enTypeId").val(result.record.enTypeId.enTypeId);
 				    					$("#enTypeName").val(result.record.enTypeId.enTypeName);
+				    					$("#roomId").val(result.record.roomId.roomId);
+				    					$("#roomAddress").val(result.record.roomId.roomAddress);
 				    					$("#editorproductDiscriptio").val(result.record.productDiscriptio);
 				    					$("#currentCount").html(getStrLength(result.record.rzRemark));
+				    					
+				    					$.ajax({
+											url:baseUrl+'/bbmRoomManager/getRoomByRzId.json',
+											data : ['rzId='+result.record.companyId].join('&'),
+											success:function(result){
+												if(result&&result.record){
+													roomJson(result.record.html);
+												}
+											}
+				    					});
 									}
 								}
 							});
@@ -137,7 +200,7 @@
 		    				var records = results.records;
 		    				$("#roomId").find("option").remove();
 		    				for(var i=0; i<records.length; i++){
-		    					$("#roomId").append("<option value='"+records[i].roomId+"'>"+records[i].roomNo+"</option>");
+		    					$("#roomId").append("<li value='"+records[i].roomId+"'>"+records[i].roomAdr+"</li>");
 		    				}
 						}
 					}
@@ -191,8 +254,9 @@
 		                </div>
 		                <div class="qiye_address">
 		                    <div class="qiye_word">地址</div>
-		                    <div class="select_address">
-		                        <select id="roomId" name="roomId.roomId" class="select-nav"></select>
+		                    <div class="web_input">
+		                        <input id="roomId" name="roomId.roomId" style="display:none;" />
+                            	<input id="roomAddress" name="roomId.roomAddress" onclick="showMenu();" />
 		                    </div>
 		                </div>
 		                <div class="qiye_web">
@@ -203,7 +267,7 @@
 		                    <div class="qiye_word">所在行业</div>
                             <div class="web_input">
                             	<input id="enTypeId" name="enTypeId.enTypeId" style="display:none;" />
-                            	<input id="enTypeName" name="enTypeId.enTypeName" onclick="showMenu();" />
+                            	<input id="enTypeName" name="enTypeId.enTypeName" onclick="showRoom();" />
 							</div>
                 		</div>
                 		<div class="qiye_jianjie ">
@@ -214,13 +278,8 @@
 		                    </div>
 		                </div>
             		</div>
+            	</div>
            		<div class="jiesao_word">
-	           		<!--<div class="qiye_js">
-	                	<div class="qiye_jieshao"><span>公司介绍</span></div>
-	                    <div class="edit_tool">
-	                    	<textarea id="editorrzRemark" name="rzRemark" cols="20" rows="5" class="ckeditor"></textarea>
-	                    </div>
-	                </div>-->
 	                <div class="qiye_ms">
 	                	<div class="qiye_miaoshu"><span>产品描述</span></div>
 	                    <div class="edit_tool">
@@ -255,8 +314,13 @@
         		</div>    
     		</div>
 		</div>
+		<!-- 行业类型下拉 -->
 		<div id="menuContent" class="menuContent" style="display:none; position: absolute;">
 			<ul id="treeDemo" class="ztree" style="margin-top:0; width:180px; height: 300px;"></ul>
+		</div>
+		<!-- 单元地址下拉 -->
+		<div id="roomContent" class="menuContent" style="display:none; position: absolute;">
+			<ul id="treeRoom" class="ztree" style="margin-top:0; width:180px; height: 300px;"></ul>
 		</div>
 	</body>
 </html>
