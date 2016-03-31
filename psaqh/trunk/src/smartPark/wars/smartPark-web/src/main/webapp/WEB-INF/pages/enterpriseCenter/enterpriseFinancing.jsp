@@ -1,11 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/pages/include.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>企业融资</title>
 		<%@ include file="/WEB-INF/pages/common/enterpriseScriptAddCss.jsp"%>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
 		<script type="text/javascript">
 			// 中文字符判断
 			function getStrLength(str) { 
@@ -90,6 +91,17 @@
 						}
 					});
 				});
+				var start = {
+					elem: '#financingTime',
+					min: '2000-01-01 23:59:59', //设定最小日期为当前日期
+					max: '2099-06-16 23:59:59', //最大日期
+					istoday: false,
+					choose: function(datas){
+					    end.min = datas; //开始日选好后，重置结束日的最小日期
+					    end.start = datas; //将结束日的初始值设定为开始日
+					}
+				};
+				laydate(start);
 			});
 		</script>
 	</head>
@@ -133,7 +145,9 @@
 		                <div class="rongzi_time">
 		                	<div class="qiye_rzsj">融资时间</div>
 		                    <div class="rongzi_chose">
-		                    	<div class="time_input"><input id="financingTime" name="financingTime" type="text"></div>
+		                    	<div class="time_input">
+		                    		<input id="financingTime" name="financingTime" placeholder="请选择融资时间" class="laydate-icon" type="text" />
+		                    	</div>
 		                    </div>
 		                </div>
 		                <div class="rongzi_js">
