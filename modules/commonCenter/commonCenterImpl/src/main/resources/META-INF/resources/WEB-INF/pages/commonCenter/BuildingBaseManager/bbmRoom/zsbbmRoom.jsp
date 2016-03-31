@@ -25,15 +25,15 @@
 		<youi:gridCol property="roomHost"  caption="单元业主" width="100" align="center"/>
 		<youi:gridCol property="status"  caption="使用状态" width="100" align="center" convert="roomstatus"/>
 
-		<youi:gridCol property="aspect"  caption="招商_朝向"/>
-		<youi:gridCol property="salesPrice"  caption="招商_单价"/>
-		<youi:gridCol property="rebate"  caption="招商_折扣"/>
-		<youi:gridCol property="furnish"  caption="招商_装修"/>
-		<youi:gridCol property="lowerPrice"  caption="招商_底价"/>
-		<youi:gridCol property="roomModule"  caption="招商_户型"/>
-		<youi:gridCol property="saleState"  caption="招商_销售状态" convert="saleState" width="100"/>
-		<youi:gridCol property="area"  caption="招商_房间面积" width="100"/>
-		<youi:gridCol property="roomName"  caption="招商_房间名称" width="100"/>
+		<youi:gridCol property="aspect"  caption="招商_朝向" align="center"/>
+		<youi:gridCol property="salesPrice"  caption="招商_单价" align="center"/>
+		<youi:gridCol property="rebate"  caption="招商_折扣" align="center"/>
+		<youi:gridCol property="furnish"  caption="招商_装修" align="center"/>
+		<youi:gridCol property="lowerPrice"  caption="招商_底价" align="center"/>
+		<youi:gridCol property="roomModule"  caption="招商_户型" align="center"/>
+		<youi:gridCol property="saleState"  caption="招商_销售状态" convert="saleState" width="100" align="center"/>
+		<youi:gridCol property="area"  caption="招商_房间面积" width="100" align="center"/>
+		<youi:gridCol property="roomName"  caption="招商_房间名称" width="100" align="center"/>
 		
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改" />
