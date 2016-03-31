@@ -1,11 +1,7 @@
-/**
- * 代码声明
- */
 package com.manage.EnterpriseManager.service;
-
 import java.util.List;
 import java.util.Collection;
-
+import com.gsoft.framework.codemap.entity.Codeitem;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -15,9 +11,7 @@ import com.gsoft.framework.core.service.BaseManager;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.EnterpriseManager.entity.InformationFinancing;
-
 public interface InformationFinancingManager extends BaseManager{
-
     /**
      * 查询列表
      */
@@ -76,5 +70,18 @@ public interface InformationFinancingManager extends BaseManager{
 	@EsbServiceMapping
 	public List<InformationFinancing> findInformationFinancing(
 			@ServiceParam(name = "financingRe") String financingRe)
+			throws BusException;
+	
+	/**
+	 * 获取代码集
+	 * @param code 代码名称
+	 * @return 符合条件的代码集对象集合
+	 * @throws BusException
+	 * @author ZhuYL
+	 * @time 2016-03-31
+	 */
+	@EsbServiceMapping
+	public List<Codeitem> findCodeitem(
+			@ServiceParam(name = "code") String code)
 			throws BusException;
 }
