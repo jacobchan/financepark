@@ -21,12 +21,14 @@ import org.hibernate.validator.Length;
 
 
 
+
 import com.common.ExtentionAtrManager.entity.Billboard;
 
 
 import com.common.ExtentionAtrManager.entity.AgencyBookEntity;
 import com.common.ExtentionAtrManager.entity.CarEntity;
 import com.common.ExtentionAtrManager.entity.GwEntity;
+import com.common.ExtentionAtrManager.entity.LawserverEntity;
 import com.common.ExtentionAtrManager.entity.MeetingEntity;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
@@ -40,7 +42,6 @@ import com.gsoft.framework.core.dataobj.Domain;
 public class PurchasingmanagerCommodity implements Domain{
 	
 	private static final long serialVersionUID = 8253809380013528572L;
-	
 
 	@Column(name = "UPDATE_USER_")
 	@Length(max=36)
@@ -121,44 +122,32 @@ public class PurchasingmanagerCommodity implements Domain{
 	@Transient
 	private PurchasingmanagerGenre purchasingmanagerGenre;//商品类型
 	
-
-
-	/**
-	 * 广告位的扩张属性
-	 */
 	@Transient
-	private Billboard billboard;
-	
-	
-	
-	
-
-	/**
-	 * 车辆的扩展属性
-	 */
+	private Billboard billboard;//广告位的扩张属性
 
 	@Transient
 	private MeetingEntity meetingRoom;//会议室的扩展属性
 	
-
-
-//	/**
-//	 * 会议室的扩张属性
-//	 */
-//	@Transient
-//	private carEntity car;
 	@Transient
 	private CarEntity car;//车辆的扩展属性
 
-	
 	@Transient
 	private AgencyBookEntity agencyBook;//代理记账的扩展属性
 	
+	@Transient
+	private LawserverEntity lawserver;//法律服务的扩展属性
 	
 	@Transient
 	private GwEntity gw;//工位的扩展属性
 
 
+	public LawserverEntity getLawserver() {
+		return lawserver;
+	}
+
+	public void setLawserver(LawserverEntity lawserver) {
+		this.lawserver = lawserver;
+	}
 
 	public GwEntity getGw() {
 		return gw;
