@@ -8,7 +8,7 @@
  * Date: 2016-2-16
  */
 $(function(){
-	var cenUrl = 'http://220.249.113.12:8088/';
+	var cenUrl = 'http://192.168.10.58:8088/';
 	
 	$('#youi_page_header').load($.youi.serverConfig.contextPath+'/common/ad_head.html',function(){
 		$.getScript(cenUrl+'portal/userInfo.html',function(){
