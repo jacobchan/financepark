@@ -3,6 +3,7 @@
  */
 package com.common.BuildingBaseManager.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -253,4 +254,28 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
     public BbmRoom getRoomByRoomId(@ServiceParam(name="roomId") String roomId) {
     	return bbmRoomDao.get(roomId);
     }
+    
+    /**
+	 * 通过企业ID获取单元信息
+	 * @param rzId
+	 * @return
+	 */
+    @EsbServiceMapping
+    public String getRoomByRzId(@ServiceParam(name="rzId") String rzId) throws BusException{
+    	StringBuffer resultJson = new StringBuffer();
+		String json = "";
+		
+		Collection<Condition> conditions = new ArrayList<Condition>();
+		Collection<Order> orders = new ArrayList<Order>();
+		conditions.add(ConditionUtils.getCondition("rzId", Condition.EQUALS, rzId));
+		List<BbmRoom> roomList = bbmRoomDao.commonQuery(conditions, orders);
+		if(roomList.size()>0){
+			for(int i=0; i<roomList.size(); i++){
+				resultJson.append("{id:'" + roomList.get(i).getRoomId() + "', pId:'', name:'" + roomList.get(i).getRoomAddress() + "'},");
+			}
+			json = resultJson.substring(0, resultJson.length() - 1);
+		}
+		
+		return json;
+	}
 }
