@@ -879,7 +879,9 @@
 			$(".tip_item").empty() ;
 			getRecords(typeId) ;//每次点击新闻类型的时候，查询对应的新闻
 		});
-
+        $(".close0").click(function(){
+            $(".pop_layer").hide();
+        });
 		/* $(".tips span").click(function(){
 			var index=$(this).index();
 			$(this).addClass("span_bold").siblings().removeClass("span_bold");
