@@ -24,12 +24,6 @@
             		<span class="cc">公共资源</span>
                 </a>
             </li>
-            <!-- <ul class="navsub clearfix fl">
-                	<li><a href="advert.html">广告位资源</a></li>
-                    <li><a href="carLease.html">车辆租凭</a></li>
-                    <li><a href="carVip.html">园区专车</a></li>
-                    <li><a href="room.html">会议室预定</a></li>
-            </ul> -->
             <li class="nav_2">
             	<a href="com_register.html">
             		<span class="cc">公司注册</span>
@@ -91,51 +85,6 @@
                     <td class="w50">
                     	<div class="p15 c3">
                             <span>2016元/年</span>
-                            <div class="inline_b fr ml30"><a href="javascript:;" class="ab_shop"></a></div>
-                            <span class="cc inline_b fr mr50">杭州</span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                	<td class="ab_use2"></td>
-                    <td>
-                    	<div class="ab_proinfo c3 f16">
-                        	小规模纳税人
-                        </div>
-                    </td>
-                    <td class="w50">
-                    	<div class="p15 c3">
-                            <span>2016元/年</span>
-                            <div class="inline_b fr ml30"><a href="javascript:;" class="ab_shop"></a></div>
-                            <span class="cc inline_b fr mr50">杭州</span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                	<td class="ab_use1"></td>
-                    <td>
-                    	<div class="ab_proinfo c3 f16">
-                        	一般纳税人
-                        </div>
-                    </td>
-                    <td class="w50">
-                    	<div class="p15 c3">
-                            <span>2313元/年</span>
-                            <div class="inline_b fr ml30"><a href="javascript:;" class="ab_shop"></a></div>
-                            <span class="cc inline_b fr mr50">杭州</span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                	<td class="ab_use1"></td>
-                    <td>
-                    	<div class="ab_proinfo c3 f16">
-                        	一般纳税人
-                        </div>
-                    </td>
-                    <td class="w50">
-                    	<div class="p15 c3">
-                            <span>5888元/两年</span>
                             <div class="inline_b fr ml30"><a href="javascript:;" class="ab_shop"></a></div>
                             <span class="cc inline_b fr mr50">杭州</span>
                         </div>
@@ -242,7 +191,6 @@
         <ul class="blend_ul clearfix">
             <li class="active">评价</li>
             <li>咨询</li>
-            <!-- <div><li id="shoplist">购买清单</li></div> -->
         </ul>
         <!---->
         <div class="blend_item">
@@ -277,25 +225,12 @@
                             <span class="record_info ml20 c3 lh24">
                                 <div>李三朵<i class="chuang"></i></div>
                                 <p>真心不错！好评！！！<span>(2016-11-12 17:34)</span></p>
-                                <div class="cd7 fw">交易金额：&yen;99.00</div>
+                                <!-- <div class="cd7 fw">交易金额：&yen;99.00</div> -->
                             </span>
                         </div>
-                        <div class="fr c3 mt50">
+                        <!-- <div class="fr c3 mt50">
                              <span class="zan"></span><span class="pr10 pl5">(0)赞</span><span class="pl10" id="reply">回复</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="fl">
-                            <img src="../styles/images/company/user.png"/>
-                            <span class="record_info ml20 c3 lh24">
-                                <div>李三朵<i class="chuang"></i></div>
-                                <p>真心不错！好评！！！<span>(2016-11-12 17:34)</span></p>
-                                <div class="cd7 fw">交易金额：&yen;99.00</div>
-                            </span>
-                        </div>
-                        <div class="fr c3 mt50">
-                             <span class="zan"></span><span class="pr10 pl5">(0)赞</span><span class="pl10" id="reply">回复</span>
-                        </div>
+                        </div> -->
                     </li>
                 </ul>
             </div>
@@ -310,7 +245,7 @@
             <div>
             	<span class="c3">声明：</span>
                 <p class="mt20">
-                	你可以在购买前对产品包装、颜色、运输、库存等方面进行咨询，我们有专业人进行回复！因厂家随时会更改一些产品的包装、颜色、产地等参数，所以该回复仅在当前
+                	你可以在购买前进行咨询，我们有专业人进行回复！该回复仅在当前
                     提问者有效，其他网友仅提供参考！
                 </p>
                 <p class="mt20">
@@ -550,7 +485,7 @@ $(function(){
 				var htmls = [];
 				var htmlss = [];
 				for(var i=0;i<results.records.length;i++){
-					htmls.push('<tr><td style="background:#F0F0F0 url(http://localhost:8088/smartPark-web/common/uploadImage.html?repository=/swfupload&path='+
+					htmls.push('<tr><td style="background:#F0F0F0 url('+cenUrl+'common/uploadImage.html?repository=/swfupload&path='+
 							results.records[i].commodityImage+'&method=show) center center no-repeat;width:78px;"></td><td><div class="ab_proinfo c3 f16">'+
 							results.records[i].commodityTitle+'</div></td>'+
 							'<td class="w50"><div class="p15 c3"><span>'+results.records[i].commodityPrice+'元/</span><span>'+

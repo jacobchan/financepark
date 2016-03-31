@@ -34,12 +34,6 @@
             		<span class="cc">公共资源</span>
                 </a>
             </li>
-            <!-- <ul class="navsub clearfix fl">
-                	<li><a href="advert.html">广告位资源</a></li>
-                    <li><a href="carLease.html">车辆租凭</a></li>
-                    <li><a href="carVip.html">园区专车</a></li>
-                    <li><a href="room.html">会议室预定</a></li>
-            </ul> -->
             <li class="nav_2">
             	<a href="com_register.html">
             		<span class="cc">公司注册</span>
@@ -96,51 +90,6 @@
                     <div class="clearfix">
                     	<span class="fl">经营范围变更</span>
                         <a href="javascript:;" class="fr bs_shop" data-id="" data-commodityTitle="" data-commodityPrice=""></a>
-                    </div>
-                </div>
-            </li>
-            <li class="bs2">
-            	<div class="bgfff">
-                	<span class="cc">&yen;1000/次</span>
-                    <div class="clearfix">
-                    	<span class="fl">经营范围变更</span>
-                        <a href="javascript:;" class="fr bs_shop"></a>
-                    </div>
-                </div>
-            </li>
-            <li class="bs3">
-            	<div class="bgfff">
-                	<span class="cc">&yen;1000/次</span>
-                    <div class="clearfix">
-                    	<span class="fl">经营范围变更</span>
-                        <a href="javascript:;" class="fr bs_shop"></a>
-                    </div>
-                </div>
-            </li>
-            <li class="bs4">
-            	<div class="bgfff">
-                	<span class="cc">&yen;1000/次</span>
-                    <div class="clearfix">
-                    	<span class="fl">经营范围变更</span>
-                        <a href="javascript:;" class="fr bs_shop"></a>
-                    </div>
-                </div>
-            </li>
-            <li class="bs5">
-            	<div class="bgfff">
-                	<span class="cc">&yen;1000/次</span>
-                    <div class="clearfix">
-                    	<span class="fl">经营范围变更</span>
-                        <a href="javascript:;" class="fr bs_shop"></a>
-                    </div>
-                </div>
-            </li>
-            <li class="bs6">
-            	<div class="bgfff">
-                	<span class="cc">&yen;1000/次</span>
-                    <div class="clearfix">
-                    	<span class="fl">经营范围变更</span>
-                        <a href="javascript:;" class="fr bs_shop"></a>
                     </div>
                 </div>
             </li>
@@ -210,25 +159,12 @@
                             <span class="record_info ml20 c3 lh24">
                                 <div>李三朵<i class="chuang"></i></div>
                                 <p>真心不错！好评！！！<span>(2016-11-12 17:34)</span></p>
-                                <div class="cd7 fw">交易金额：&yen;99.00</div>
+                                <!-- <div class="cd7 fw">交易金额：&yen;99.00</div> -->
                             </span>
                         </div>
-                        <div class="fr c3 mt50">
+                        <!-- <div class="fr c3 mt50">
                              <span class="zan"></span><span class="pr10 pl5">(0)赞</span><span class="pl10" id="reply">回复</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="fl">
-                            <img src="../styles/images/company/user.png"/>
-                            <span class="record_info ml20 c3 lh24">
-                                <div>李三朵<i class="chuang"></i></div>
-                                <p>真心不错！好评！！！<span>(2016-11-12 17:34)</span></p>
-                                <div class="cd7 fw">交易金额：&yen;99.00</div>
-                            </span>
-                        </div>
-                        <div class="fr c3 mt50">
-                             <span class="zan"></span><span class="pr10 pl5">(0)赞</span><span class="pl10" id="reply">回复</span>
-                        </div>
+                        </div> -->
                     </li>
                 </ul>
             </div>
@@ -243,7 +179,7 @@
             <div>
             	<span class="c3">声明：</span>
                 <p class="mt20">
-                	你可以在购买前对产品包装、颜色、运输、库存等方面进行咨询，我们有专业人进行回复！因厂家随时会更改一些产品的包装、颜色、产地等参数，所以该回复仅在当前
+                	你可以在购买前进行咨询，我们有专业人进行回复！该回复仅在当前
                     提问者有效，其他网友仅提供参考！
                 </p>
                 <p class="mt20">
@@ -482,7 +418,7 @@ $(function(){
 				var htmls = [];
 				var htmlss = [];
 				for(var i=0;i<results.records.length;i++){
-					htmls.push('<li style="background:url(http://localhost:8088/smartPark-web/common/uploadImage.html?repository=/swfupload&path='+
+					htmls.push('<li style="background:url('+cenUrl+'common/uploadImage.html?repository=/swfupload&path='+
 					results.records[i].commodityImage+'&method=show) no-repeat;"><div class="bgfff"><span class="cc">&yen;'+results.records[i].commodityPrice+'/次</span><div class="clearfix">'+
 					'<span class="fl">'+results.records[i].commodityTitle+'</span><a href="javascript:;" class="fr bs_shop" data-id="'+
 					results.records[i].commodityId+'" data-commodityTitle="'+results.records[i].commodityTitle+
