@@ -110,7 +110,7 @@ public class ExtentionAtrManagerImpl implements ExtentionAtrManager {
 	private String getExtendValue(String fieldName,String commdityId){
 		PurchasingmanagerCommodityExtend purExtend = purchasingmanagerCommodityExtendManager.getPurchasingmanagerCommodityExtends(fieldName, commdityId);
 		String extendValue = "";
-		if(purExtend != null){
+		if( null!= purExtend){
 			extendValue=purExtend.getCommodityExtendContent();
 		}
 		
