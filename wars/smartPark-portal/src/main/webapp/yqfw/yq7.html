@@ -11,7 +11,7 @@
 	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
-	
+	<script type="text/javascript" src="../scripts/page/url.js"></script>
 </head>
 <body>
 	<!--***top start****************************************-->
@@ -60,32 +60,80 @@
 					</colgroup>
 					<tr>
 						<td>
-							<a href="yq4.html"><div class="tfp-box"><img src="../styles/images/yqfw/wy_photo_1.jpg"><div class="tfp-box-bg"><span><img src="../styles/images/yqfw/icon1.png"><p>访客管理</p></span></div></div></a>
-							<a href="javascript:openURL();"><div class="tfp-box"><img src="../styles/images/yqfw/wy_photo_5.jpg"><div class="tfp-box-bg"><span><img src="../styles/images/yqfw/icon4.png"><p>费用查询</p></span></div></div></a>
+							<a href="javascript:openURL(4);"><div class="tfp-box"><img src="../styles/images/yqfw/wy_photo_1.jpg"><div class="tfp-box-bg"><span><img src="../styles/images/yqfw/icon1.png"><p>访客管理</p></span></div></div></a>
+							<a href="javascript:openURL(0);"><div class="tfp-box"><img src="../styles/images/yqfw/wy_photo_5.jpg"><div class="tfp-box-bg"><span><img src="../styles/images/yqfw/icon4.png"><p>费用查询</p></span></div></div></a>
 						</td>
 						<td>
-							<a href="yq9.html"><div class="tfp-box"><img src="../styles/images/yqfw/wy_photo_2.jpg"><div class="tfp-box-bg"><span><img src="../styles/images/yqfw/icon2.png"><p>物业投诉</p></span></div></div></a>
-							<a href="#"><div class="tfp-box"><img src="../styles/images/yqfw/wy_photo_7.jpg"><div class="tfp-box-bg"><span><img src="../styles/images/yqfw/icon5.png"><p>停车卡充值缴费</p></span></div></div></a>
+							<a href="javascript:openURL(9);"><div class="tfp-box"><img src="../styles/images/yqfw/wy_photo_2.jpg"><div class="tfp-box-bg"><span><img src="../styles/images/yqfw/icon2.png"><p>物业投诉</p></span></div></div></a>
+							<a href="javascript:openURL();"><div class="tfp-box"><img src="../styles/images/yqfw/wy_photo_7.jpg"><div class="tfp-box-bg"><span><img src="../styles/images/yqfw/icon5.png"><p>停车卡充值缴费</p></span></div></div></a>
 						</td>
 						<td>
-							<a href="yq6.html"><div class="tfp-box"><img src="../styles/images/yqfw/wy_photo_3.jpg"><div class="tfp-box-bg"><span><img src="../styles/images/yqfw/icon3.png"><p>物业报修</p></span></div></div></a>
-							<a href="yq8.html"><div class="tfp-box"><img src="../styles/images/yqfw/wy_photo_4.jpg"><div class="tfp-box-bg"><span><img src="../styles/images/yqfw/icon6.png"><p>搬家放行申请</p></span></div></div></a>
-							<a href="yq10.html"><div class="tfp-box" style="margin-right:0px;"><img src="../styles/images/yqfw/wy_photo_6.jpg"><div class="tfp-box-bg"><span><img src="../styles/images/yqfw/icon7.png"><p>一卡通办理</p></span></div></div></a>
+							<a href="javascript:openURL(6);"><div class="tfp-box"><img src="../styles/images/yqfw/wy_photo_3.jpg"><div class="tfp-box-bg"><span><img src="../styles/images/yqfw/icon3.png"><p>物业报修</p></span></div></div></a>
+							<a href="javascript:openURL(8);"><div class="tfp-box"><img src="../styles/images/yqfw/wy_photo_4.jpg"><div class="tfp-box-bg"><span><img src="../styles/images/yqfw/icon6.png"><p>搬家放行申请</p></span></div></div></a>
+							<a href="javascript:openURL(10);"><div class="tfp-box" style="margin-right:0px;"><img src="../styles/images/yqfw/wy_photo_6.jpg"><div class="tfp-box-bg"><span><img src="../styles/images/yqfw/icon7.png"><p>一卡通办理</p></span></div></div></a>
 						</td>
 					</tr>
 				</table>
 			</div>
 		</div>
 	</div>
+	
+	<!--***弹窗 start****************************************-->
+		<div class="bg-tanc m2">
+			<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+				<a href="javascript:;" class="tc-close"></a>
+				<div class="w70 tc mt40" style="margin-left:15%">
+					<table>
+						<tr>
+							<td><img src="../styles/images/grzx/check.png" class="mr40 mb20" border="0"></td>
+							<td >
+								<h4 class="f24 fl c-333">请登录!</h4>
+								<!-- <h4 class="f24 fl c-333"> 还有<span class="tt">0</span>秒关闭弹出框</h4> -->
+								<p class="f14 c-o fl mt20 mb20">如有问题，请拨打：0571-86508888</p>
+							</td>
+						<tr/>
+					</table>
+				</div>
+			</div>
+		</div>
+	<!--***弹窗 end****************************************-->
+	
 	<!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
-	<script type="text/javascript" src="../scripts/pagae/banner.js"></script>
-	<script type="text/javascript" src="../scripts/pagae/right.js"></script>
+	<script type="text/javascript" src="../scripts/page/banner.js"></script>
+	<script type="text/javascript" src="../scripts/page/right.js"></script>
 	<script>
 	   function openURL(url){
-		   window.location=cenUrl+"member/memberCenter/propertyService/propertyManageCharge.html";
-	  }
+		   if(!isLogin){
+			   $(".bg-tanc.m2").show();
+			 	 return false;
+			}
+		   if(url=='0'){
+		  	 window.location=cenUrl+"member/memberCenter/propertyService/propertyManageCharge.html";
+		   }else if(url=='6'||url=='8'||url=='10'){
+			 //判断是否是企业员工
+				$.youi.ajaxUtils.ajax({
+				url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					if(result&&result.record){
+						window.location="yq"+url+".html";
+						}else{
+							$(".f24.fl.c-333").text("您不是企业用户,暂时无法申请报修,如有疑问请与客服人员联系!");
+							$(".bg-tanc.m2").show();
+						}
+					}
+				});
+		   }else if(url=='4'||url=='9'){
+			   window.location="yq"+url+".html";
+		   }else{
+			   $(".f24.fl.c-333").text("敬请期待!");
+				$(".bg-tanc.m2").show();
+		   }
+			   
+	  };
  </script>
 </body>
 </html>
