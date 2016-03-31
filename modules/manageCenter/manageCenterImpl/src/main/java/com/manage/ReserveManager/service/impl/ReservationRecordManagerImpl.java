@@ -201,6 +201,12 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 				List<PurchasingmanagerCommodity> pcList = purchasingmanagerCommodityManager.getPurchasingmanagerCommoditys(condition, null);
 				for(PurchasingmanagerCommodity pc:pcList){
 					extentionAtrManager.setGwExtendValue(pc);
+					String commodityName=pc.getGw().getCommodityId();
+		    		if(commodityName !=null){
+		    			PurchasingmanagerCommodity c=purchasingmanagerCommodityDao.get(commodityName); 
+		    			commodityName=c.getCommodityTitle();
+		    			pc.getGw().setCommodityId(commodityName);
+		    		}
 					recordList.add(pc);
 				}
 			}
