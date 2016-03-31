@@ -8,8 +8,8 @@
  * Date: 2016-2-16
  */
 var isLogin = false;
-var baseUrl = "http://220.249.113.12:8088/esb/web/";
-var cenUrl = 'http://220.249.113.12:8088/';
+var baseUrl = "http://192.168.10.58:8088/esb/web/";
+var cenUrl = 'http://192.168.10.58:8088/';
 //var baseUrl = "http://localhost:8088/smartPark-web/esb/web/";
 //var cenUrl = 'http://localhost:8088/smartPark-web/';
 $(function(){
