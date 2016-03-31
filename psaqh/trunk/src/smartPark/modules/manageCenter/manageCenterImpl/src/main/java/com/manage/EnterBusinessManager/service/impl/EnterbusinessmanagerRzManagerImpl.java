@@ -2,11 +2,9 @@ package com.manage.EnterBusinessManager.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.common.BuildingBaseManager.entity.BbmRoom;
 import com.common.BuildingBaseManager.service.BbmRoomManager;
 import com.common.MemberManager.entity.MemberInformation;
@@ -17,7 +15,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
-import com.gsoft.framework.security.fuc.entity.Role;
 import com.gsoft.framework.security.fuc.service.RoleManager;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
