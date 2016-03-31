@@ -384,6 +384,7 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
 	/**
      * 获取代理记账类别的所有商品列表
      */
+	@Override
 	@EsbServiceMapping
     public List<PurchasingmanagerCommodity> getAgencyCommodityList(@ServiceParam(name="userId",pubProperty="userId") String userId) throws BusException{
 		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode", "0504");
@@ -396,10 +397,14 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
 	/**
      * 获取法律服务类别的所有商品列表
      */
+	@Override
 	@EsbServiceMapping
     public List<PurchasingmanagerCommodity> getLawSerCommodityList(@ServiceParam(name="userId",pubProperty="userId") String userId) throws BusException{
 		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode", "0505");
 		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("genreId", pg.getGenreId());
+		for(PurchasingmanagerCommodity pc :list){
+			extentionAtrManager.setAgencyBookExtendValue(pc);
+		}
 		return list;
 	}
 	/**

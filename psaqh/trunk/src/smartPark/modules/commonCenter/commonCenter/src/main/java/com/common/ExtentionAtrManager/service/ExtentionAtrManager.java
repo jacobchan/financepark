@@ -33,4 +33,11 @@ public interface ExtentionAtrManager extends BaseManager {
 	 * @param commdity 商品
 	 */
 	public void setMeetingLedExtendValue(PurchasingmanagerCommodity commdity)throws BusException;
+	/**
+	 * 根据商品获取法律服务扩展属性的内容
+	 * @param commdity
+	 * @throws BusException
+	 */
+	public void setLawserverExtendValue(PurchasingmanagerCommodity commdity)
+			throws BusException;
 }

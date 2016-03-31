@@ -1,7 +1,7 @@
 package com.common.ExtentionAtrManager.entity;
 
 /**
- * 车辆商品扩展属性
+ * 代理记账扩展属性
  * @author jack
  *
  */

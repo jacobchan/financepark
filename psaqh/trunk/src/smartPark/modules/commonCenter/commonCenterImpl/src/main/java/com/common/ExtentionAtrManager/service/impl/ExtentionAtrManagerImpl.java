@@ -8,6 +8,7 @@ import com.common.ExtentionAtrManager.entity.AgencyBookEntity;
 import com.common.ExtentionAtrManager.entity.Billboard;
 import com.common.ExtentionAtrManager.entity.CarEntity;
 import com.common.ExtentionAtrManager.entity.GwEntity;
+import com.common.ExtentionAtrManager.entity.LawserverEntity;
 import com.common.ExtentionAtrManager.entity.MeetingEntity;
 import com.common.ExtentionAtrManager.service.ExtentionAtrManager;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
@@ -66,6 +67,16 @@ public class ExtentionAtrManagerImpl implements ExtentionAtrManager {
 		commdity.setAgencyBook(agencyBook);
 	}
 	
+	/**
+	 * 根据商品获取法律服务扩展属性的内容
+	 * @param commdity 商品
+	 */
+	@Override
+	public void setLawserverExtendValue(PurchasingmanagerCommodity commdity)throws BusException{
+		LawserverEntity lawserver = new LawserverEntity();
+		lawserver.setSerTerm(getExtendValue(lawserver.getSerTermfieldName(),commdity.getCommodityId()));
+		commdity.setLawserver(lawserver);
+	}
 	/**
 	 * 根据商品获取广告位的扩展属性的内容
 	 * @param commdity 商品
