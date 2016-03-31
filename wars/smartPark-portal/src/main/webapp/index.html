@@ -944,8 +944,7 @@
 					dataType:'jsonp',
 					success:function(result){
 						if(result&&result.record){
-							alert("预约成功");
-							$(".bg-tanc.m2").show();
+							$(".pop_layer").show();
 							$("#lf_date").val('');
 							$("#lf_time").val('');
 							$("#lf_name").val('');

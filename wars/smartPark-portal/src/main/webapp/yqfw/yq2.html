@@ -71,7 +71,8 @@
 							  	dm=dd.getMonth()+1;
 							  	dt=dd.getDate();
 							  	dw=dd.getDay();	
-							  	$(".ht-table tr th").eq(j).html(dm+"月"+dt+"日"+"<br/>"+weekDay[dw]); 
+							  	$(".ht-table tr th").eq(j).html(dm+"月"+dt+"日"+"<br/>"+weekDay[dw]);
+							  	
 							}
 						}
 					};
@@ -273,53 +274,37 @@
 			if (results && results.records) {
 				var record = results.records;
 			
-				
-				
-				var amHtml="<td>09：00-12：00</td><td><a href='javascript:;' class='em3'>不可预约</a></td>";
+				var amHtml="<td>09：00-12：00</td><td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>99</span>不可预约</a></td>";
 				var pmHtml="<td>14：00-17：00</td><td><a href='javascript:;' class='em3'>不可预约</a></td>";
-			//	var totalHtml="<td rowspan='2'><p class='lh20'>温馨提示：线上预约后,请在预约的时间内到物业处凭预约短信办理相关事宜。</p></td>";
 				$("#am").append(amHtml);
+				$("#pm").append(pmHtml);
 				var html="";
 				var htmls="";
 				for(var i=0; i<record.length; i++){
                 $("#enteringName").val(record[0].memName);
 				$("#enteringTelephone").val(record[0].memPhone);
-				if(record.length>6){
-					for(var i=0; i<6; i++){
-						if(record[i].enteringStatus=='01'){
-							html="<td><a href='javascript:;' class='em1'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-						}
-						else if(record[i].enteringStatus=='02'){
-							html="<td><a href='javascript:;' class='em2'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-						}else{
-							html="<td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-						}
-						 $("#am").append(html);
-					}
-				//	$("#am").append(totalHtml);
-					$("#pm").append(pmHtml);
-					for(var i=6; i<record.length; i++){
-						if(record[i].enteringStatus=='01'){
-							htmls="<td><a href='javascript:;' class='em1'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-						}
-						else if(record[i].enteringStatus=='02'){
-							htmls="<td><a href='javascript:;' class='em2'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-						}else{
-							htmls="<td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-						}
-						$("#pm").append(htmls);
-					}
-				}else{
+				if(record[i].enteringTime=='AM'){
 					if(record[i].enteringStatus=='01'){
 						html="<td><a href='javascript:;' class='em1'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-					}
+				    }
 					else if(record[i].enteringStatus=='02'){
 						html="<td><a href='javascript:;' class='em2'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
 					}else{
 						html="<td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
 					}
+					$("#am").append(html);
+				}
 					
-					 $("#am").append(html);
+				if(record[i].enteringTime=='PM'){
+					if(record[i].enteringStatus=='01'){
+						htmls="<td><a href='javascript:;' class='em1'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+					}
+					else if(record[i].enteringStatus=='02'){
+						htmls="<td><a href='javascript:;' class='em2'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+					}else{
+						htmls="<td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+					}
+					$("#pm").append(htmls);
 				}
 				
 				}

@@ -251,6 +251,7 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
         			Record record = new Record();
         			record.put("enteringId",pe.getEnteringId());//ID
         			record.put("enteringDate",pe.getEnteringDate());
+        			record.put("enteringTime",pe.getEnteringTime());
         			record.put("enteringRemain",pe.getEnteringRemain());//剩余预约数量
         			record.put("enteringAlre",pe.getEnteringAlre());//已预约数量
         			List<Codeitem> list = codeItemDao.getList(new String[] {"codemap.code", "itemValue" }, new Object[] { "enteringStatus",pe.getEnteringStatus()});
@@ -275,6 +276,7 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
 			record.put("enteringId",pe.getEnteringId());//ID
 			record.put("enteringRemain",pe.getEnteringRemain());//剩余预约数量
 			record.put("enteringAlre",pe.getEnteringAlre());//已预约数量
+			record.put("enteringTime",pe.getEnteringTime());
 			List<Codeitem> list = codeItemDao.getList(new String[] {"codemap.code", "itemValue" }, new Object[] { "enteringStatus",pe.getEnteringStatus()});
 			record.put("enteringStatus",pe.getEnteringStatus());
 			record.put("enteringStatusName",list.get(0).getItemCaption());
