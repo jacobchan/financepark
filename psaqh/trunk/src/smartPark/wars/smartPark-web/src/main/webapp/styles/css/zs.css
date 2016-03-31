@@ -429,7 +429,8 @@ a.ib-btn.bg-h{background: #b5b5b5;}
 .ht-hb-form div textarea{resize:none;border:1px solid #ecebeb;padding:10px;height: 100px;width: 250px;}
 .hhf-submit{background: #fa742c;height: 30px;padding: 0px 30px;text-align: center;border:1px solid #ff6715;color: #fff;}
 .hhf-submit:hover{background: #ff5900;}
-
+.hhff-submit{background: #fa742c;height: 30px;padding: 0px 30px;text-align: center;border:1px solid #ff6715;color: #fff;}
+.hhff-submit:hover{background: #ff5900;}
 /**访客管理**/
 .setting-table{width: 100%}
 .setting-table td{padding: 10px;font-size: 14px;}
