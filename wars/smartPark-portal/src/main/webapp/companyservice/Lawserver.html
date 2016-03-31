@@ -32,12 +32,6 @@
             		<span class="cc">公共资源</span>
                 </a>
             </li>
-            <!-- <ul class="navsub clearfix fl">
-                	<li><a href="advert.html">广告位资源</a></li>
-                    <li><a href="carLease.html">车辆租凭</a></li>
-                    <li><a href="carVip.html">园区专车</a></li>
-                    <li><a href="room.html">会议室预定</a></li>
-            </ul> -->
             <li class="nav_2">
             	<a href="com_register.html">
             		<span class="cc">公司注册</span>
@@ -157,25 +151,12 @@
                             <span class="record_info ml20 c3 lh24">
                                 <div>李三朵<i class="chuang"></i></div>
                                 <p>真心不错！好评！！！<span>(2016-11-12 17:34)</span></p>
-                                <div class="cd7 fw">交易金额：&yen;99.00</div>
+                               <!--  <div class="cd7 fw">交易金额：&yen;99.00</div> -->
                             </span>
                         </div>
-                        <div class="fr c3 mt50">
+                        <!-- <div class="fr c3 mt50">
                              <span class="zan"></span><span class="pr10 pl5">(0)赞</span><span class="pl10" id="reply">回复</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="fl">
-                            <img src="../styles/images/company/user.png"/>
-                            <span class="record_info ml20 c3 lh24">
-                                <div>李三朵<i class="chuang"></i></div>
-                                <p>真心不错！好评！！！<span>(2016-11-12 17:34)</span></p>
-                                <div class="cd7 fw">交易金额：&yen;99.00</div>
-                            </span>
-                        </div>
-                        <div class="fr c3 mt50">
-                             <span class="zan"></span><span class="pr10 pl5">(0)赞</span><span class="pl10" id="reply">回复</span>
-                        </div>
+                        </div> -->
                     </li>
                 </ul>
             </div>
@@ -190,7 +171,7 @@
             <div>
             	<span class="c3">声明：</span>
                 <p class="mt20">
-                	你可以在购买前对产品包装、颜色、运输、库存等方面进行咨询，我们有专业人进行回复！因厂家随时会更改一些产品的包装、颜色、产地等参数，所以该回复仅在当前
+                	你可以在购买前进行咨询，我们有专业人进行回复！该回复仅在当前
                     提问者有效，其他网友仅提供参考！
                 </p>
                 <p class="mt20">
@@ -428,8 +409,10 @@ $(function(){
 				var htmlss = [];
 				for(var i=0;i<results.records.length;i++){
 					if(i==0){
-						htmls.push('<span class="span_bold f20">'+results.records[i].commodityTitle+'</span><p class="f13 c3 mt20 mb20">你只需关注前路，我们帮你扫清路障</p>'+
-								'<span class="span_bold f20">&yen;'+results.records[i].commodityPrice+'</span><p class="caaa mt10 mb10">（服务期：三个月）</p>'+
+						htmls.push('<span class="span_bold f20">'+results.records[i].commodityTitle+'</span><p class="f13 c3 mt20 mb20">'+
+								results.records[i].commodityDescribe+'</p>'+
+								'<span class="span_bold f20">&yen;'+results.records[i].commodityPrice+'</span><p class="caaa mt10 mb10">（服务期：'+
+								results.records[i].lawserver.serTerm+'）</p>'+
 								'<a href="javascript:;" class="btn-cheng inline_b law_pop" data-id="'+
 								results.records[i].commodityId+'" data-commodityTitle="'+results.records[i].commodityTitle+
 								'" data-commodityPrice="'+results.records[i].commodityPrice+'">立即购买</a>');
