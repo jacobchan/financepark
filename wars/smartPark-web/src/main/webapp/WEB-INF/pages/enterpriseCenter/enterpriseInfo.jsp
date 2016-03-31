@@ -72,10 +72,10 @@
 				return false;
 			}
 			function onCheck(e, treeId, treeNode) {
-				var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
-				nodes = zTree.getCheckedNodes(true),
-				v = "";
-				m = "";
+				var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+				var nodes = zTree.getCheckedNodes(true);
+				var v = "";
+				var m = "";
 				for (var i=0, l=nodes.length; i<l; i++) {
 					v += nodes[i].id + ",";
 					m += nodes[i].name + ",";
@@ -91,18 +91,18 @@
 				return false;
 			}
 			function roomCheck(e, treeId, treeNode) {
-				var zTree = $.fn.zTree.getZTreeObj("treeRoom"),
-				nodes = zTree.getCheckedNodes(true),
-				k = "";
-				l = "";
-				for (var i=0, l=nodes.length; i<l; i++) {
-					k += nodes[i].id + ",";
-					l += nodes[i].name + ",";
+				var roomTree = $.fn.zTree.getZTreeObj("treeRoom");
+				var nodesRoom = roomTree.getCheckedNodes(true);
+				var k = "";
+				var n = "";
+				for (var j=0, l=nodesRoom.length; j<l; j++) {
+					k += nodesRoom[j].id + ",";
+					n += nodesRoom[j].name + ",";
 				}
 				if (k.length > 0 ) k = k.substring(0, k.length-1);
-				if (l.length > 0 ) l = l.substring(0, l.length-1);
+				if (n.length > 0 ) n = n.substring(0, n.length-1);
 				$("#roomId").val(k);
-				$("#roomAddress").val(l);
+				$("#roomAddress").val(n);
 			}
 			function showMenu() {
 				var cityObj = $("#enTypeName");
@@ -111,8 +111,8 @@
 				$("body").bind("mousedown", onBodyDown);
 			}
 			function showRoom() {
-				var roomObj = $("#roomId");
-				var roomOffset = $("#roomId").offset();
+				var roomObj = $("#roomAddress");
+				var roomOffset = $("#roomAddress").offset();
 				$("#roomContent").css({left:roomOffset.left + "px", top:roomOffset.top + roomObj.outerHeight() + "px"}).slideDown("fast");
 				$("body").bind("mousedown", onBodyRoom);
 			}
@@ -170,17 +170,17 @@
 										$("#rzName").val(result.record.rzName);
 				    					$("#rzUrl").val(result.record.rzUrl);
 				    					$("#rzRemark").val(result.record.rzRemark);
-				    					editor.setData(result.record.productDiscriptio);
 				    					$("#enTypeId").val(result.record.enTypeId.enTypeId);
 				    					$("#enTypeName").val(result.record.enTypeId.enTypeName);
 				    					$("#roomId").val(result.record.roomId.roomId);
 				    					$("#roomAddress").val(result.record.roomId.roomAddress);
 				    					$("#editorproductDiscriptio").val(result.record.productDiscriptio);
+				    					editor.setData(result.record.productDiscriptio);
 				    					$("#currentCount").html(getStrLength(result.record.rzRemark));
 				    					
 				    					$.ajax({
 											url:baseUrl+'/bbmRoomManager/getRoomByRzId.json',
-											data : ['rzId='+result.record.companyId].join('&'),
+											data : ['rzId='+$("#financingRe").html()].join('&'),
 											success:function(result){
 												if(result&&result.record){
 													roomJson(result.record.html);
@@ -256,7 +256,7 @@
 		                    <div class="qiye_word">地址</div>
 		                    <div class="web_input">
 		                        <input id="roomId" name="roomId.roomId" style="display:none;" />
-                            	<input id="roomAddress" name="roomId.roomAddress" onclick="showMenu();" />
+                            	<input id="roomAddress" name="roomId.roomAddress" onclick="showRoom();" />
 		                    </div>
 		                </div>
 		                <div class="qiye_web">
@@ -267,7 +267,7 @@
 		                    <div class="qiye_word">所在行业</div>
                             <div class="web_input">
                             	<input id="enTypeId" name="enTypeId.enTypeId" style="display:none;" />
-                            	<input id="enTypeName" name="enTypeId.enTypeName" onclick="showRoom();" />
+                            	<input id="enTypeName" name="enTypeId.enTypeName" onclick="showMenu();" />
 							</div>
                 		</div>
                 		<div class="qiye_jianjie ">
@@ -316,11 +316,11 @@
 		</div>
 		<!-- 行业类型下拉 -->
 		<div id="menuContent" class="menuContent" style="display:none; position: absolute;">
-			<ul id="treeDemo" class="ztree" style="margin-top:0; width:180px; height: 300px;"></ul>
+			<ul id="treeDemo" class="ztree" style="margin-top:0; width:285px; height: 300px;"></ul>
 		</div>
 		<!-- 单元地址下拉 -->
 		<div id="roomContent" class="menuContent" style="display:none; position: absolute;">
-			<ul id="treeRoom" class="ztree" style="margin-top:0; width:180px; height: 300px;"></ul>
+			<ul id="treeRoom" class="ztree" style="margin-top:0; width:285px; height: 200px;"></ul>
 		</div>
 	</body>
 </html>
