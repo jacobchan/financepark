@@ -30,11 +30,11 @@
 		<youi:gridCol property="bbmFloor.floorNo" caption="所属楼层" width="100" align="center"/>
 		<youi:gridCol property="roomHost"  caption="单元业主" width="100" align="center"/>
 		<youi:gridCol property="roomTenement"  caption="单元租户"  width="100" align="center"/>
-		<youi:gridCol property="status"  caption="使用状态" convert="roomstatus" width="150px"/>
-		<youi:gridCol property="rentCharge"  caption="物业_租金" width="150px"/>
-		<youi:gridCol property="eneryCharge"  caption="物业_电费" width="150px"/>
-		<youi:gridCol property="waterCharge"  caption="物业_水费" width="150px"/>	
-		<youi:gridCol property="propertyCharge"  caption="物业_物业费" width="150px"/>		
+		<youi:gridCol property="status"  caption="使用状态" convert="roomstatus" width="150px" align="center"/>
+		<youi:gridCol property="rentCharge"  caption="物业_租金" width="150px" align="center"/>
+		<youi:gridCol property="eneryCharge"  caption="物业_电费" width="150px" align="center"/>
+		<youi:gridCol property="waterCharge"  caption="物业_水费" width="150px" align="center"/>	
+		<youi:gridCol property="propertyCharge"  caption="物业_物业费" width="150px" align="center"/>		
 		
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">	
 		<youi:button name="edit" caption="修改"/>		
