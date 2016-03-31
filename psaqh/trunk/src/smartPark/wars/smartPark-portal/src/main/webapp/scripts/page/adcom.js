@@ -8,16 +8,16 @@
  * Date: 2016-2-16
  */
 $(function(){
-	var _passportBaseUrl = 'http://220.249.113.12:8088/';
+	var cenUrl = 'http://220.249.113.12:8088/';
 	
 	$('#youi_page_header').load($.youi.serverConfig.contextPath+'/common/ad_head.html',function(){
-		$.getScript(_passportBaseUrl+'portal/userInfo.html',function(){
+		$.getScript(cenUrl+'portal/userInfo.html',function(){
 			var loc = encodeURIComponent(window.location.href);
 			if($.youi.serverConfig.authorization){
 				console.log('user authorization = '+$.youi.serverConfig.authorization);
-				$('#user_info:first').append('<a href="'+_passportBaseUrl+'portal/logout.html?redirect='+loc+'">退出</a>');
+				$('#user_info:first').append('<a href="'+cenUrl+'portal/logout.html?redirect='+loc+'">退出</a>');
 			}else{
-				$('#user_info:first a:first').attr('href',_passportBaseUrl+'member/portal/login.html?redirect='+loc);
+				$('#user_info:first a:first').attr('href',cenUrl+'member/portal/login.html?redirect='+loc);
 			}
 		});
 	});
