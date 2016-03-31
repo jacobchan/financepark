@@ -69,12 +69,14 @@
 				});
 				$(".hhf-submit").click(function(){
 			  		var financingRe=$("#financingRe").html();
+			  		var financingName=$("#financingName").val();
 			  		var financingAmount=$("#financingAmount").val();
 			  		var financingCost=$("#financingCost").val();
 					var financingPre=$("#financingPre").val();
 					var financingTime=$("#financingTime").val();
 					var financingDescribe=$("#financingDescribe").val();
-					var params = ['financingRe='+financingRe+'','financingAmount='+financingAmount+'','financingCost='+financingCost+'','financingPre='+financingPre+'','financingTime='+financingTime+'','financingDescribe='+financingDescribe+''];
+					var financingSub=$('#roundFinancing li.selected').attr("data-id");
+					var params = ['financingRe='+financingRe+'','financingName='+financingName+'','financingAmount='+financingAmount+'','financingCost='+financingCost+'','financingPre='+financingPre+'','financingTime='+financingTime+'','financingDescribe='+financingDescribe+'','financingSub='+financingSub+''];
 					$.youi.ajaxUtils.ajax({
 						url:baseUrl+'/informationFinancingManager/saveInformationFinancing.json',
 						data:params.join('&'),
@@ -102,6 +104,30 @@
 					}
 				};
 				laydate(start);
+				
+				$.ajax({
+					url:baseUrl+'/informationFinancingManager/findCodeitem.json?code=roundFinancing',
+					success:function(result){
+						if(result&&result.records){
+							var records = result.records;
+							$("#roundFinancing").empty();
+							for(var i=0; i<records.length; i++){
+								$("#roundFinancing").append("<li data-id='"+records[i].itemId+"' data-val='"+records[i].itemValue+"'>"+records[i].itemCaption+"</li>");
+							}
+						}
+					}
+				});
+				
+				$(".qiye_address").on("click",function(){
+					$("#roundFinancing").toggle();
+				});
+		        
+				$("#roundFinancing").on("click","li",function(){
+					$(this).addClass("selected").siblings().removeClass("selected");
+					var selecttext = $(this).text();
+					var val = $(this).attr("data-val");
+					$(".c-b1").text(selecttext).attr("data-val",val);
+				});
 			});
 		</script>
 	</head>
@@ -114,22 +140,21 @@
 			<div class="main-wrapper">
 	    		<div class="main-wrapper-right mb40">
 	        		<div class="main-title"><span>融资信息</span></div>
-	        		<span id="financingRe" style="display:none;"></span>
 	            	<div class="xiangxi_xinxi mt40">
-	            		<span class="" id="financingRe" style="display:none;"></span>
+	            		<span id="financingRe" style="display:none;"></span>
 						<div class="qiye_address">
 	                    	<div class="qiye_word">融资轮次</div>
-                            <div class="tct-select fl mr20" style="width:290px">
-								<div class="ic-select" >
-									<p class="c-b1">天使轮</p>
+	                    	<div class="tct-select fl mr20" style="width:290px">
+		                    	<div class="ic-select">
+									<p class="c-b1"></p>
 								</div>
-								<ul style="display: none;" class="select-nav">
-									<li>天使轮1</li>
-									<li>天使轮2</li>
-									<li>天使轮3</li>
-								</ul>
+								<ul id="roundFinancing" style="display: none;" class="select-nav"></ul>
 							</div>
                         </div>
+                        <div class="rongzi_rzmc">
+		                    <div class="qiye_rzmc">融资企业名称</div>
+		                    <div class="web_input"><input id="financingName" name="financingName" type="text"></div>
+		                </div>
 		                <div class="rongzi_je">
 		                    <div class="qiye_rzje">融资金额</div>
 		                    <div class="web_input"><input id="financingAmount" name="financingAmount" type="text"></div>
