@@ -70,14 +70,12 @@ public class InformationFinancing implements Domain{
 	private String createUser;//创建人
 
 	@Column(name = "FINANCING_STATUS_")
-	@Length(max=2)
 	private String financingStatus;//发布状态
 
 	@Column(name = "CREATE_TIME_")
 	private String createTime;//创建时间
 
 	@Column(name = "FINANCING_SUB_")
-	@Length(max=2)
 	private String financingSub;//投资主体
 	
 	@Column(name = "FINANCING_DESCRIBE_")
