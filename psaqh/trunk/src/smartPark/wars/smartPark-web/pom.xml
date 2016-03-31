@@ -254,6 +254,12 @@
 				<package.target>web-test</package.target>
 			</properties>
 		</profile>
+		<profile>
+			<id>weblocal</id>
+			<properties>
+				<package.target>web-local</package.target>
+			</properties>
+		</profile>
 	</profiles>
 	
 	<build>
