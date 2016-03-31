@@ -20,3 +20,4 @@ ADD COLUMN `BUILDING_NAME_`  varchar(32)  NULL;
 
 
 
+alter table sp_information_financing modify column FINANCING_SUB_ varchar(36);
