@@ -99,8 +99,8 @@
 				html+="<tr id='"+record[i].recordId+"'>"+
 					"<td><a href=''>"+record[i].recordId+"</a></td>"+
 					"<td>"+record[i].visiteDate+"</td>"+
-				
-					"<td>"+record[i].recordType+"</td>"
+					"<td>"+"创立方1"+"</td>"+
+				//	"<td>"+record[i].recordType+"</td>"
 					"<td>"+recordStatus+"</td>"+
 					buttonHtml+
 					"</tr>";
