@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>分页测试</title>
+<link href="../styles/page/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+<link href="../styles/base.css" type="text/css" rel="stylesheet">
+<link href="../styles/page/page.css" type="text/css" rel="stylesheet">
+<style>
+*{ margin:0; padding:0; list-style:none;}
+a{ text-decoration:none;}
+a:hover{ text-decoration:none;}
+.tcdPageCode{padding: 15px 20px;text-align: left;color: #ccc;text-align:center;}
+.tcdPageCode a{display: inline-block;color: #428bca;display: inline-block;height: 25px;	line-height: 25px;	padding: 0 10px;border: 1px solid #ddd;	margin: 0 2px;border-radius: 4px;vertical-align: middle;}
+.tcdPageCode a:hover{text-decoration: none;border: 1px solid #428bca;}
+.tcdPageCode span.current{display: inline-block;height: 25px;line-height: 25px;padding: 0 10px;margin: 0 2px;color: #fff;background-color: #428bca;	border: 1px solid #428bca;border-radius: 4px;vertical-align: middle;}
+.tcdPageCode span.disabled{	display: inline-block;height: 25px;line-height: 25px;padding: 0 10px;margin: 0 2px;	color: #bfbfbf;background: #f2f2f2;border: 1px solid #bfbfbf;border-radius: 4px;vertical-align: middle;}
+</style>
+</head>
+
+<body>
+<div id="youi_page_header" class="youi-page-header clearfix"></div>
+<!--***top end****************************************-->
+<!--content-->
+<div class="w1200 pt20">
+	<ul class="linknav clearfix">
+    	<li><a href="#">首页</a></li>
+        <li><a href="#">企业服务</a></li>
+        <li class="active"><a href="#">公共资源</a></li>
+    </ul>
+    <!--车辆租凭-->
+    <div class="res_item mb40">
+        <div class="mt30 clearfix">
+        	<div class="res_left">
+            	<ul id="carfix">
+
+                  
+                </ul>
+			    <div class="tcdPageCode">
+					
+				</div>
+            </div>
+            <div class="res_right">
+                <div id="youi_page_right" class="youi-page-right clearfix"></div>
+            </div>
+        </div>
+    </div><!--res_item  end-->
+    <!--车辆租凭-->
+</div>
+<!--***bottom start****************************************-->
+<div id="youi_page_footer" class="youi-page-footer"></div>
+<!--***bottom end****************************************-->
+<!--******************  code end  ****************************-->
+
+<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+<script type="text/javascript" src="../scripts/page/newscom.js"></script>
+<script type="text/javascript" src="../scripts/page/kefu.js"></script> 
+<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+<script type="text/javascript" src="../scripts/page/jquery.page.js"></script>
+<script type="text/javascript">
+	var pageSize=2,
+		pageCount=2;
+		$(".tcdPageCode").createPage({
+		    pageCount:pageCount,
+		    current:1,
+		    backFn:function(p){
+		       alert(pageCount);
+		        refreshData(p,pageSize);
+		    }
+		});
+		function refreshData(pageIndex,pageSize){
+			var serviceURL = baseUrl+"activityApplyManager/getPagerActivityApplys.json";
+			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				jsonp:'data:jsonp',
+				data:params.join('&'),
+				dataType:'jsonp',
+				success:function(results){
+					pageCount=Math.ceil(results.totalCount/pageSize);
+					if(results&&results.records){
+						_parseRecords(results.records);
+					}
+				}
+			});
+		}
+		
+		function _parseRecords(record){
+			var html='';
+			for(var i=0;i<record.length;i++){
+				html+="<li class='clearfix'>"+record[i].applyTitle+"</li>";
+			}
+			$('#carfix').empty();
+			$('#carfix').append(html);
+		}	
+	</script>
+</body>
+</html>
