@@ -107,7 +107,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 			genreId = purchasingmanagerGenreList.get(0).getGenreId();
 		}
 		condition.clear();
-		condition.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId",Condition.EQUALS,genreId));
+		condition.add(ConditionUtils.getCondition("pagrenId",Condition.EQUALS,genreId));
 		purchasingmanagerGenreList=purchasingmanagerGenreManager.getPurchasingmanagerGenres(condition, null);
 		int i=0;
 		String[] genreIdArray=new String[purchasingmanagerGenreList.size()];
