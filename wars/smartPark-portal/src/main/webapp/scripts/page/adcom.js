@@ -8,7 +8,7 @@
  * Date: 2016-2-16
  */
 $(function(){
-	var _passportBaseUrl = 'http://192.168.80.1:8088/gsoft-web/';
+	var _passportBaseUrl = 'http://220.249.113.12:8088/';
 	
 	$('#youi_page_header').load($.youi.serverConfig.contextPath+'/common/ad_head.html',function(){
 		$.getScript(_passportBaseUrl+'portal/userInfo.html',function(){
