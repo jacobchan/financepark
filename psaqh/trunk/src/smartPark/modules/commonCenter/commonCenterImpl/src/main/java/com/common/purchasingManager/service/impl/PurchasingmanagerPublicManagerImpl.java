@@ -164,7 +164,7 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     			}
     		}
     	}else if(genreCode !=null &&genreCode.equals("040101")){//工位
-    		extentionAtrManagerImpl.setGwExtendValue(o);;
+    		extentionAtrManagerImpl.setGwExtendValue(o);
     	}
     	
     	return o;
@@ -465,11 +465,11 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     public void saveCommodityAndPropertyForGw(PurchasingmanagerCommodity o) throws BusException{
 		//获取工位所属创立方Id
 		GwEntity gw=o.getGw();
-		String commodityName="";
+		/*String commodityName="";
 		if(gw.getCommodityId() !=null){
 			PurchasingmanagerCommodity c=purchasingmanagerCommodityDao.get(gw.getCommodityId()); 
 			commodityName=c.getCommodityTitle();
-		}
+		}*/
 		
 		boolean gwFlag=true;
 		List<PurchasingmanagerCommodityExtend> peList=new ArrayList<PurchasingmanagerCommodityExtend>();
@@ -495,7 +495,7 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     		if(purExList.size()>0){
     			for(PurchasingmanagerCommodityExtend pce:purExList){
     				if(gw.getCommodityIdfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(commodityName);//保存工位创立方Id属性
+    					pce.setCommodityExtendContent(gw.getCommodityId());//保存工位创立方Id属性
     					gwFlag=false;
     				}
     				pce.setUpdateUser(o.getUpdateUser());
@@ -520,7 +520,7 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     		if(pceList.size()>0){
     			for(PurchasingmanagerCommodityExtend pce:pceList){
     				if(gw.getCommodityIdfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(commodityName);//保存工位创立方Id属性
+    					pce.setCommodityExtendContent(gw.getCommodityId());//保存工位创立方Id属性
     					gwFlag=false;
     				}
     				pce.setCommodityId(o.getCommodityId());
