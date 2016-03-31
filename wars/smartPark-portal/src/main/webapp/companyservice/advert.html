@@ -161,7 +161,7 @@
 					 $("#carfix").append(html);  */
 				var html = '';	 
 				html+=  '<li class="clearfix">';	
-				html+= '<div class="fl"><img src="'+cenUrl+'common/uploadImage.html?repository=/swfupload&path='+record[i].commodityImage+'&method=show" height="205" width="285"></div>';
+				html+= '<div class="fl"><img src="'+cenUrl+'common/uploadImage.html?repository=/swfupload&path='+record[i].commodityCoverImage+'&method=show" height="205" width="285"></div>';
 				html+= '<div class="fl ml30" style="width:535px">';
 					html+= '<a href="advertxq.html?id='+record[i].commodityId+'" class="span_bold f20">'+record[i].commodityTitle+'</a>';
 					html+= '<div class="mt20 mb20">';
@@ -183,7 +183,7 @@
 		};
 		//拼接
 		function _parseRecordCount(totalCount){	
-			    var totalPage=Math.ceil(totalCount/2);
+			    var totalPage=Math.ceil(totalCount/3);
 			    var html = '';
 			    var index =0;
 			    html+="<span class='cd7' id='cb7'>找到相关结果约"+totalCount+"个"
