@@ -3,7 +3,7 @@
 <youi:page>
 	<!--**********************************子页面**********************************-->
 	<youi:subpage
-		src="page/commonCenter.purchasingManager.purchasingmanagerCommodity/purchasingmanagerCommodityExtendForGwUpdate.html?commodityId={commodityId}" subpageId="updateCommodity" height="600" caption="会议室及其扩展属性修改">
+		src="page/commonCenter.purchasingManager.purchasingmanagerCommodity/purchasingmanagerCommodityExtendForGwUpdate.html?commodityId={commodityId}" subpageId="updateCommodity" height="600" caption="工位及其扩展属性修改">
 	</youi:subpage>
 	<!--**********************************子页面**********************************-->
 	<youi:grid id="grid_purchasingmanagerCommodity" idKeys="commodityId" caption="商品信息列表"  panel="false"
@@ -17,9 +17,9 @@
 		</youi:fieldLayout>
 		
 		<youi:gridCol property="commodityTitle"  caption="标题" align="center" width="15%"/>
-		<youi:gridCol property="purchasingmanagerMerchant.merchantName"  caption="商户名称" align="center" width="9%"/>
+		<%-- <youi:gridCol property="purchasingmanagerMerchant.merchantName"  caption="商户名称" align="center" width="9%"/> --%>
 		<youi:gridCol property="commodityPrice"  caption="标价" align="center" width="8%"/>
-		<youi:gridCol property="commodityStock"  caption="库存" align="center" width="8%"/>
+		<%-- <youi:gridCol property="commodityStock"  caption="库存" align="center" width="8%"/> --%>
 		<youi:gridCol property="commodityDescribe"  caption="描述" align="center" width="22%"/>
 		<youi:gridCol property="commodityUpTime"  caption="上架时间" align="center" width="15%"/>
 		<youi:gridCol property="commodityDownTime"  caption="下架时间" align="center" width="15%"/>

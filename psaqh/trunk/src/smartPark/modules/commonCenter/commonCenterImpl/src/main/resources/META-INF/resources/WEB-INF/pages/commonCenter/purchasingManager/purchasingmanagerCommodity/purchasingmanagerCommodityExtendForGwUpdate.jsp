@@ -39,7 +39,6 @@
 				$elem('record_sFpro_commodityTitle',pageId).fieldValue(record.commodityTitle);
 				$elem('record_sFpro_commodityPrice',pageId).fieldValue(record.commodityPrice);
 				$elem('record_sFpro_genreId',pageId).fieldValue(record.genreId);
-				$elem('record_sFpro_purchasingmanagerMerchant_merchantId',pageId).fieldValue(record.purchasingmanagerMerchant.merchantId);
 				$elem('record_sFpro_gw_commodityId',pageId).fieldValue(record.gw.commodityId);
 				$elem('record_sFpro_commodityDescribe',pageId).fieldValue(record.commodityDescribe);
 				if(record.commodityImage != null){
@@ -91,7 +90,7 @@
 		}
 		var params = '';
 		params = params+'commodityId='+commodityId+'&'+'commodityTitle='+commodityTitle+'&'+'commodityPrice='+commodityPrice+'&'+'gw.commodityId='+commodityName+'&'+
-		'genreId='+genreId+'&'+'purchasingmanagerMerchant.merchantId='+merchantId+'&'+'commodityImage='+commodityImage+'&'+'commodityCoverImage='+commodityCoverImage+'&'+'commodityDescribe='+commodityDescribe;
+		'genreId='+genreId+'&'+'commodityImage='+commodityImage+'&'+'commodityCoverImage='+commodityCoverImage+'&'+'commodityDescribe='+commodityDescribe;
 		$.youi.ajaxUtil.ajax({
 			url:'/esb/web/purchasingmanagerPublicManager/saveCommodityAndPropertyForGw.json',
 			data:params,
