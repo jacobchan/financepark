@@ -408,6 +408,49 @@ $(function(){
 		});
 	}
 	
+	function showCar(id){
+		var serviceURL = baseUrl+"purchasingmanagerCommodityManager/getComChangeCommodityList.json";
+		$.youi.ajaxUtils.ajax({
+			url:serviceURL,
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(results){
+				if(results&&results.records){
+					var htmlss = [];
+					for(var i=0;i<results.records.length;i++){
+						if(id != results.records[i].commodityId){
+							htmlss.push('<li id ="'+results.records[i].commodityId+'shopul">'+
+							results.records[i].commodityTitle+'&nbsp;&nbsp;<span class="cc">'+results.records[i].commodityPrice+
+							'</span>&nbsp;元/次&nbsp;<div class="shop0" data-id="'+results.records[i].commodityId+
+							'"data-commodityTitle="'+results.records[i].commodityTitle+
+							'" data-commodityPrice="'+results.records[i].commodityPrice+'"></div></li>');
+						}
+					}
+					$('.shopul').html(htmlss.join(''));
+				}
+				var $layer=$(".pop_layer");
+				$(".shop0").click(function(){
+					var id = $(this).attr("data-id");
+					var commodityTitle = $(this).attr("data-commodityTitle");
+					var commodityPrice = $(this).attr("data-commodityPrice");
+					$('#shopCar').html($('#shopCar').html()+'<tr data-id="'+id+'" data-num="1" data-commodityPrice="'+commodityPrice+
+					'" data-commodityTitle="'+commodityTitle+'"><td class="">'+commodityTitle+'</td><td><span class="cc">'+commodityPrice+'</span>&nbsp;元/次</td><td>'+
+					'<div class="inline_b" style="overflow:hidden;margin-top:5px"><div class="cos_less">-</div><div class="numbox">1</div>'+
+					'<div class="cos_add">+</div></div></td><td><span class="cc" id="comAmount">'+commodityPrice+
+					'</span>&nbsp;元</td><td></td><td><a class="del" style="cursor:pointer">删除</a></td></tr>');
+					
+					var comAmount = $('#payAmount').html();
+					$('#payAmount').html(accAdd(comAmount,commodityPrice));
+					$('#'+id+'shopul').remove();
+					click();
+				});
+				$(".pop_back").click(function(){
+					$layer.hide();
+				});
+			}
+		});
+	}
+	
 	var serviceURL = baseUrl+"purchasingmanagerCommodityManager/getComChangeCommodityList.json";
 	$.youi.ajaxUtils.ajax({
 		url:serviceURL,
@@ -423,14 +466,8 @@ $(function(){
 					'<span class="fl">'+results.records[i].commodityTitle+'</span><a href="javascript:;" class="fr bs_shop" data-id="'+
 					results.records[i].commodityId+'" data-commodityTitle="'+results.records[i].commodityTitle+
 					'" data-commodityPrice="'+results.records[i].commodityPrice+'"></a></div></div></li>');
-					
-					htmlss.push('<li id ="'+results.records[i].commodityId+'shopul">'+results.records[i].commodityTitle+'&nbsp;&nbsp;<span class="cc">'+results.records[i].commodityPrice+
-					'</span>&nbsp;元/次&nbsp;<div class="shop0" data-id="'+results.records[i].commodityId+
-					'"data-commodityTitle="'+results.records[i].commodityTitle+
-					'" data-commodityPrice="'+results.records[i].commodityPrice+'"></div></li>');
 				}
 				$('.bus_ul').html(htmls.join(''));
-				$('.shopul').html(htmlss.join(''));
 			}
 			var $layer=$(".pop_layer");
 			$(".bs_shop").click(function(){
@@ -442,30 +479,11 @@ $(function(){
 				'<div class="inline_b" style="overflow:hidden;margin-top:5px"><div class="cos_less">-</div>'+
 				'<div class="numbox">1</div><div class="cos_add">+</div></div></td><td><span class="cc" id="comAmount">'+commodityPrice+
 				'</span>&nbsp;元</td><td></td><td><a class="del" style="cursor:pointer">删除</a></td></tr>');
-				
 				$('#payAmount').html(commodityPrice);
-				$('#'+id+'shopul').remove();
+				showCar(id);
 				$layer.show();
 				click();
 			});
-			$(".shop0").click(function(){
-				var id = $(this).attr("data-id");
-				var commodityTitle = $(this).attr("data-commodityTitle");
-				var commodityPrice = $(this).attr("data-commodityPrice");
-				$('#shopCar').html($('#shopCar').html()+'<tr data-id="'+id+'" data-num="1" data-commodityPrice="'+commodityPrice+
-				'" data-commodityTitle="'+commodityTitle+'"><td class="">'+commodityTitle+'</td><td><span class="cc">'+commodityPrice+'</span>&nbsp;元/次</td><td>'+
-				'<div class="inline_b" style="overflow:hidden;margin-top:5px"><div class="cos_less">-</div><div class="numbox">1</div>'+
-				'<div class="cos_add">+</div></div></td><td><span class="cc" id="comAmount">'+commodityPrice+
-				'</span>&nbsp;元</td><td></td><td><a class="del" style="cursor:pointer">删除</a></td></tr>');
-				
-				var comAmount = $('#payAmount').html();
-				$('#payAmount').html(accAdd(comAmount,commodityPrice));
-				$('#'+id+'shopul').remove();
-				click();
-			});
-			/* $("#shoplist").click(function(){
-				$layer.show();
-			}); */
 			$(".pop_back").click(function(){
 				$layer.hide();
 			});
