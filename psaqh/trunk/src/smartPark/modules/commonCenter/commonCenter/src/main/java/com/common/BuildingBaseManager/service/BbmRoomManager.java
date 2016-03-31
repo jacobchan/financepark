@@ -77,12 +77,19 @@ public interface BbmRoomManager extends BaseManager{
 	 * @param roomId 单元ID
 	 * @return
 	 */
-	public BbmFloor findBbmFloorByRoomId(String roomId) ;
+	public BbmFloor findBbmFloorByRoomId(String roomId);
 	
 	/**
 	 * 通过单元ID的到单元信息
 	 * @param roomId
 	 * @return
 	 */
-	public BbmRoom getRoomByRoomId(String roomId) ;
+	public BbmRoom getRoomByRoomId(String roomId);
+	
+	/**
+	 * 通过企业ID获取单元信息
+	 * @param rzId
+	 * @return
+	 */
+	public String getRoomByRzId(String rzId) throws BusException;
 }
