@@ -264,6 +264,7 @@ width:32px;height:32px;position:absolute;top:50%;right:0;margin-top:-16px;}
 .bus_info{border:1px #D7D7D7 solid;padding:25px 15px;position:relative}
 .bus_info>span{position:absolute;top:-10px;left:5px;background:#fff}
 .shopul li{display:inline-block;float:left;padding:0 40px;border-left:1px #aaa solid}.shopul li:first-child{padding-left:0;border:0;}
+.shopul li:nth-child(4){padding-left:0;border:0;}
 .shop0{background:url(../images/company/shop0.png) no-repeat;width:25px;height:20px;display:inline-block;cursor:pointer}
 .shop0:hover{background:url(../images/company/shop1.png) no-repeat;}
 .bs_busico{background:url(../images/company/bus_ico.png) center center no-repeat;width:300px;height:240px}
