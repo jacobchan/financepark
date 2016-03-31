@@ -174,8 +174,6 @@
 								alert("申请成功！");
 							}
 						});
-					}else{
-						alert("非企业用户无法申请！") ;
 					}
 				}});
 			});
@@ -196,13 +194,16 @@
 		});
 		//拼接政策新闻列表
 		function _parseRecords(record){
+			if(record.length == 0){
+				$(".fl.w895").append("<div><p>暂时还没有任何的政策哦！</p></div>");
+				return ;
+			}
 			for(var i=0;i<record.length;i++){
 				var status = record[i].policyStatus ;
 				if(status == 1){//状态为1表示已发布，为0表示未发布
 					var html="<div class='index-group' id="+record[i].policyId+">"+
 								 "<h5>"+record[i].policyCaption+"</h5>"+
-			               		 "<div class='ig-box'>"+
-				                   	 "<p>"+record[i].policyContent+"</p>"+
+			               		 "<div class='ig-box'>"+record[i].policyContent+
 				                   	 "<a href='javascript:;' class='ib-btn'>在线申请</a>"+
  			           			 "</div>"+
 		       				 "</div>";
