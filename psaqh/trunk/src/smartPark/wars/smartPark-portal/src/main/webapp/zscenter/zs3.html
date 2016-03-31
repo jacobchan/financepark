@@ -219,8 +219,11 @@
 				$(".ifn-group ul").eq($(this).index()).removeClass("undis").siblings().addClass("undis");
 			});
 			$(document).on("click",".ib-btn",function(){
+				
+				obj = $(this).parent().parent().attr("id") ;
+				$(".bg-tanc").find("form").attr("class",obj);
 				if(!isLogin){
-					alert("匿名用户不能申请") ;
+					alert("匿名用户不能申请！") ;
 					return ;
 				}else{
 					$.youi.ajaxUtils.ajax({
@@ -236,15 +239,15 @@
 								$("#policyApplyConpanyName").val(rzName);
 								$("#policyApplyContactPeople").val(name);
 								$("#policyApplyContactTel").val(mobile) ;
+								$(".bg-tanc").show();
+							}else{
+								alert("非企业会员不能申请哦！") ;
+								return ;
 							}
 						}
 					}) ;
 				} 
-				obj = $(this).parent().parent().attr("id") ;
-				$(".bg-tanc").find("form").attr("class",obj);
-				$(".bg-tanc").show();
 			});
-			
 			$(".tc-close").click(function(){
 				$(".bg-tanc").hide();
 			});
