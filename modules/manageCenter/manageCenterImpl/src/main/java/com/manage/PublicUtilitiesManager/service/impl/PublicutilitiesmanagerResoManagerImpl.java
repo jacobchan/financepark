@@ -253,7 +253,7 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 	
 	@Override
 	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
-	public OrdermanagerUserorder savePublicResoOrderByList(@ServiceParam(name="userorderAmount") String userorderAmount,@ServiceParam(name="commodityId") String commodityId,@DomainCollection(domainClazz=PublicutilitiesmanagerReso.class) List<PublicutilitiesmanagerReso> publicResoList) throws BusException {
+	public OrdermanagerUserorder savePublicResoOrderByList(@ServiceParam(name="addService") String addService,@ServiceParam(name="userorderAmount") String userorderAmount,@ServiceParam(name="commodityId") String commodityId,@DomainCollection(domainClazz=PublicutilitiesmanagerReso.class) List<PublicutilitiesmanagerReso> publicResoList) throws BusException {
 		publicResoList = this.savePublicutilitiesmanagerResoList(publicResoList,commodityId);
 //		List<PublicutilitiesmanagerReso> prList=new ArrayList<PublicutilitiesmanagerReso> ();
 //		String resoId=publicReso.getResoId();
@@ -311,6 +311,14 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 				orderExtendValue.setOrderprojecttypeValueFieldValue(timeStrBuff.toString());
 			}else if("publicResoId".equals(genreProperty.getGenrePropertyFieldName())){
 				orderExtendValue.setOrderprojecttypeValueFieldValue(publicResoIdBuff.toString());
+			}else if("driver".equals(genreProperty.getGenrePropertyFieldName())){
+				if(addService.equals("01")){//01：有增值服务：司机
+					orderExtendValue.setOrderprojecttypeValueFieldValue(addService);
+				}
+			}else if("tea".equals(genreProperty.getGenrePropertyFieldName())){
+				if(addService.equals("01")){//01：有增值服务：茶水
+					orderExtendValue.setOrderprojecttypeValueFieldValue(addService);
+				}
 			}
 			this.orderprojectValueManager.saveOrdermanagerOrderprojecttypeValue(orderExtendValue);
 			
@@ -318,6 +326,7 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 		}
 		
 		return o;
+		
 	}
 	
 	

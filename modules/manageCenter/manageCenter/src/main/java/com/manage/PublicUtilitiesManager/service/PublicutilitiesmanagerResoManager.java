@@ -92,7 +92,7 @@ public interface PublicutilitiesmanagerResoManager extends BaseManager{
 	 public List<PublicutilitiesmanagerReso> savePublicutilitiesmanagerResoList(List<PublicutilitiesmanagerReso> o,String commodityId) throws BusException;
 	 
 	 
-	 public OrdermanagerUserorder savePublicResoOrderByList(String userorderAmount,String commodityId,List<PublicutilitiesmanagerReso> publicResoList) throws BusException;
+	 public OrdermanagerUserorder savePublicResoOrderByList(String addService,String userorderAmount,String commodityId,List<PublicutilitiesmanagerReso> publicResoList) throws BusException;
 	 /**
 	 /**
 	  * 取消订单
