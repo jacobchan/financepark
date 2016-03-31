@@ -186,7 +186,7 @@
                     </div>
                     <div class="inline_b ml40">
                         <label>&nbsp;&nbsp;&nbsp;增值服务</label>
-                        <label class="ib-checkbox" style="width:auto"><input type="checkbox" class="vm mr5"/>司机</label>
+                        <label class="ib-checkbox" style="width:auto"><input type="checkbox" class="vm mr5"/>茶水</label>
                     </div>
                     <!--
                        $(".btn-cheng").click(function(){
@@ -359,7 +359,6 @@ function GetRequest() {
 <script>
 	$(function(){
 		var Request = new Object();
-		var imageUrl="/filestore/";
 		Request = GetRequest();
 		var commodityId=Request['id'];
 		var genreCode='0301';
@@ -400,14 +399,19 @@ function GetRequest() {
 		$(".close0").click(function(){
 			$(".pop_layer").hide();
 		});
-		
 		  //提交预约
 		$('.btn-cheng').click(function(){
 			if(!isLogin){alert("请登录");return;}
 			var enteringName=$("#enteringName").val();
 			var enteringTelephone=$("#enteringTelephone").val();
+			var tea='';
+		    if($(".ib-checkbox").children('input[type="checkbox"]').is(":checked")){
+		    	tea='01';
+	          }else{
+	            tea='00';
+	         }
             if(enteringName == null||enteringName == ""){
-				alert("请填写联系人人");
+				alert("请填写联系人!");
 				return;
 			}
             if(enteringTelephone !=null&& enteringTelephone!=""){
@@ -463,7 +467,7 @@ function GetRequest() {
 				for(var i=0;i<times.length;i++){
 					string+="records["+i+"].resoTime="+times[i]+"&";
 				}
-				string+="userorderAmount="+userorderAmount+"&"+"commodityId="+commodityId;
+				string+="userorderAmount="+userorderAmount+"&"+"commodityId="+commodityId+"&"+"addService="+tea;
 			   var serviceURL =baseUrl+"publicutilitiesmanagerResoManager/savePublicResoOrderByList.json";
 				//公共方法
 			 $.youi.ajaxUtils.ajax({
