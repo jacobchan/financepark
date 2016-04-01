@@ -15,9 +15,9 @@
 						<table class="gt-table mt20" border="0">
                         <tr>
 					     	<td width="111">订单号 </td>
-                         	<td width="111">企业名称    </td>
-                         	<td width="111">预约时间          </td>
-                         	<!-- <td width="111">预约用户          </td> -->
+                         	<!-- <td width="111">企业名称    </td> -->
+                         	<td width="111">预约时间    </td>
+                         	 <td width="111">预约用户  </td> 
                          	<td width="111">状态        </td>
                          	<td width="111">操作  </td>
                          </tr>                          
@@ -53,24 +53,11 @@
 				}
 			});
 		});		
-		//拼接卡号列表
+		//拼接列表
 		function _parseRecords(record){		
 	 		for(var i=0;i<record.length;i++){
-				var status = "";								
-				if(record[i].ocStatus=='00'){
-					status = "待处理";					
-					var html= "<tr>"+
-				      "<td >"+record[i].ocCode+"</td>"+
-				      "<td >"+record[i].ocComp+"</td>"+
-				      "<td >"+record[i].ocDate+"</td>"+
-				      "<td>"+record[i].createUser+"</td>"+
-				      "<td>"+status+"</td>"+				    					    
-                      "<td > <input type='button' value='取消'   onclick='hhf(\""+record[i].ocId+"\")' class='hhf-submit' style='height:24px;'/>"+                               
-                      " </tr>"; 
-			          $(".gt-table").append(html);	
-				  }
-				  else 
-				  {   
+				var status = "";	
+				var button = "";	
 					  if(record[i].ocStatus=='01'){
 						  status = "已处理";
 					  }else if(record[i].ocStatus=='02'){
@@ -78,17 +65,19 @@
 					  }	
 					  else if(record[i].ocStatus=='08'){
 						  status = "已取消";
+					  }else if(record[i].ocStatus=='00'){
+						  status = "待处理";
+						  button="<a href='#' onclick='hhf(\""+record[i].ocId+"\")'>取消</a>";
 					  }	
 					  var html= "<tr class='aaa'>"+
 				      "<td width='111'>"+record[i].ocCode+"</td>"+
 				      "<td width='111'>"+record[i].ocComp+"</td>"+
 				      "<td width='111'>"+record[i].ocDate+"</td>"+
-				 //     "<td width='111'>"+record[i].memberId+"</td>"+
+				 //    "<td width='111'>"+record[i].memberId+"</td>"+
 				      "<td width='111'>"+status+"</td>"+				    
-				      "<td width='111' >"+status+"</td>"+                    
+				      "<td width='111' >"+button+"</td>"+                    
                       " </tr>"; 
-			 		$(".gt-table").append(html);	
-				}				 				
+			 		$(".gt-table").append(html);									 				
 			}
 		};
 		function hhf(id){						
