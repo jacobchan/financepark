@@ -27,7 +27,22 @@
 				<a href="">合同主体变更</a><img src="../styles/images/zs/right-j-b.png" border="0" />
 				<a href="" class="current">在线预约</a>
 			</div>
+			<Script  type="text/javascript">
+function GetRequest() {
+   var url = location.search; //获取url中"?"符后的字串
+   var theRequest = new Object();
+   if (url.indexOf("?") != -1) {
+      var str = url.substr(1);
+      strs = str.split("&");
+      for(var i = 0; i < strs.length; i ++) {
+         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+      }
+   }
+   return theRequest;
+}
+</Script>
 			<script>
+			
 				$(function(){
 					var j=0,num=0;
 					var o=$(".ht-table tr th").length;//得到th有多少个；
@@ -77,10 +92,14 @@
 						}
 					};
 
+					var Request = new Object();
+			    	Request = GetRequest();
+			    	var enteringType = Request['enteringType'];
 					 $(".hhf-submit").click(function(){
 						if(!isLogin){alert("请登录");return;}
 						var enteringName=$("#enteringName").val();
 						var enteringTelephone=$("#enteringTelephone").val();
+						alert(enteringType);
 						if(enteringId == null||enteringId == ""){
 							alert("请选择预约时间");
 							return;
@@ -101,7 +120,7 @@
 							return;
        			    	}
                       
-						var params=['propertyservicemanagerEntering.enteringId='+enteringId,'enteringName='+enteringName,'enteringTelephone='+enteringTelephone];
+						var params=['propertyservicemanagerEntering.enteringId='+enteringId,'enteringName='+enteringName,'enteringTelephone='+enteringTelephone,'enteringType='+enteringType];
 						var serviceURL = baseUrl+"propertyservicemanagerEntrecManager/savePropertyservicemanagerEntrec.json";
 						//公共方法
 						$.youi.ajaxUtils.ajax({
@@ -112,7 +131,7 @@
 							success:function(results){
 								if(results&&results.record){
 									alert("预约成功");
-									window.location="yq2.html";
+									window.location="yq2.html?enteringType="+enteringType;
 									//window.location=cenUrl+"member/memberCenter/index.html";
 								}
 							},error:function(XMLHttpRequest, textStatus, errorThrown){

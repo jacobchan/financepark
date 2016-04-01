@@ -26,6 +26,10 @@ public class PropertyservicemanagerEntrec implements Domain{
 	@Column(name = "ENTERREC_STATUS_")
 	@Length(max=2)
 	private String enterrecStatus;//预约记录状态
+	
+	@Column(name = "ENTERING_TYPE_")
+	@Length(max=2)
+	private String enteringType;//入驻申请状态
 
 	@Column(name = "CREATE_TIME_")
 	private String createTime;//创建时间
@@ -176,6 +180,16 @@ public class PropertyservicemanagerEntrec implements Domain{
 
 	
 	
+	public String getEnteringType() {
+		return enteringType;
+	}
+
+	public void setEnteringType(String enteringType) {
+		this.enteringType = enteringType;
+	}
+
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -194,6 +208,8 @@ public class PropertyservicemanagerEntrec implements Domain{
 						.hashCode());
 		result = prime * result
 				+ ((enteringTime == null) ? 0 : enteringTime.hashCode());
+		result = prime * result
+				+ ((enteringType == null) ? 0 : enteringType.hashCode());
 		result = prime * result
 				+ ((enterrecCode == null) ? 0 : enterrecCode.hashCode());
 		result = prime * result
@@ -251,6 +267,11 @@ public class PropertyservicemanagerEntrec implements Domain{
 			if (other.enteringTime != null)
 				return false;
 		} else if (!enteringTime.equals(other.enteringTime))
+			return false;
+		if (enteringType == null) {
+			if (other.enteringType != null)
+				return false;
+		} else if (!enteringType.equals(other.enteringType))
 			return false;
 		if (enterrecCode == null) {
 			if (other.enterrecCode != null)
