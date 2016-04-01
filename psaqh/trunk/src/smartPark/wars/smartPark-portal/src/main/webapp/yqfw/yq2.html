@@ -99,7 +99,6 @@ function GetRequest() {
 						if(!isLogin){alert("请登录");return;}
 						var enteringName=$("#enteringName").val();
 						var enteringTelephone=$("#enteringTelephone").val();
-						alert(enteringType);
 						if(enteringId == null||enteringId == ""){
 							alert("请选择预约时间");
 							return;
@@ -130,12 +129,13 @@ function GetRequest() {
 							dataType:'jsonp',
 							success:function(results){
 								if(results&&results.record){
-									alert("预约成功");
+									$(".bg-tanc.m1").show();
 									window.location="yq2.html?enteringType="+enteringType;
 									//window.location=cenUrl+"member/memberCenter/index.html";
 								}
 							},error:function(XMLHttpRequest, textStatus, errorThrown){
 								alert(XMLHttpRequest);
+								$(".bg-tanc.m2").show();
 							}
 						});
 						//校验手机号格式
