@@ -119,7 +119,7 @@
 <script type="text/javascript">
 		$(function(){
 			
-			var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommoditys.json?genreCode=0303&indexPage=1";//0303:广告位
+			var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/goPage.json?genreCode=0303&indexPage=1";//0303:广告位
 			//公共方法
 			$.youi.ajaxUtils.ajax({
 				url:serviceURL,
@@ -203,7 +203,7 @@
 		
 		//翻页方法
 		function isPage(index){
-			var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommoditys.json?genreCode=0303&indexPage="+index+"";//0303:广告位
+			var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/goPage.json?genreCode=0303&indexPage="+index+"";//0303:广告位
 			//公共方法
 			$.youi.ajaxUtils.ajax({
 				url:serviceURL,
