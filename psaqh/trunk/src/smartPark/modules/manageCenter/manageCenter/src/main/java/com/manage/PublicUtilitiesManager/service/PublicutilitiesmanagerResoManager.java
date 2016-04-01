@@ -49,7 +49,21 @@ public interface PublicutilitiesmanagerResoManager extends BaseManager{
 	public PagerRecords getPagerPublicCommoditys(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders,String genreCode) throws BusException;
-
+	
+	/**
+	 *	广告室分页方法
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @param genreCode
+	 * @param indexPage
+	 * @return
+	 * @throws BusException
+	 */
+	public PagerRecords goPage(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders,String genreCode,String indexPage) throws BusException;
+	
     /**
      * 保存并返回对象
      */
