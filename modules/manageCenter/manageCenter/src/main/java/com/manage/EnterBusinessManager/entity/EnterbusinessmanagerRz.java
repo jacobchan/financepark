@@ -79,7 +79,7 @@ public class EnterbusinessmanagerRz implements Domain{
 	private EtypeEnterprisetype enTypeId;//企业类型ID
 
 	@Column(name = "RZ_SIGN_")
-	@Length(max=8)
+	@Length(max=32)
 	private String rzSign;//企业码
 
 	@Column(name = "RZ_MEM_")
