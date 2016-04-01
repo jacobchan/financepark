@@ -70,6 +70,8 @@
 						}
 					});
 				});
+				$("#moreul").slideDown("slow");
+			  	$("#moreul > li:eq(4)").addClass("active");
 			});
 			//删除专利
 			function removeMedia(obj){
@@ -103,11 +105,15 @@
 		        	<div class="main-title"><span>媒体报道</span></div>
 		            <div class="qiye_fm">
 		            	<span class="" id="mediaRe" style="display:none;"></span>
-		            	<div class="qiye_text"><span>封面图片</span></div>
-		                <div class="upload_main">
-		                    <div class="fengmian_pic"><img src="../styles/images/qiye/add_fmpic.png"></div>
-		                    <div class="upload_input_fm"><input type="file"></div>
-		            	</div>
+		            	<div class="qiye_text"><span>媒体图片</span></div>
+		                <div>
+			                <div class="img_upload"><img src="../styles/images/qiye/img_none.png"><br><p>图片未上传</p></div>
+			                    <div class="upload_main">            	
+			                        <div class="fengmian_pic"><img src="../styles/images/qiye/add_fmpic.png"></div>
+			                        <div class="upload_input_fm1"><input type="file"></div>
+			                    </div>
+			                </div>
+			            </div>
 		            </div>
 		            <div class="xiangxi_baodao">
 		                <div class="qiye_fullname ">

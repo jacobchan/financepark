@@ -226,6 +226,8 @@
 						}
 					});
 				});
+			  	$("#moreul").slideDown("slow");
+			  	$("#moreul > li:eq(0)").addClass("active");
 			});
 		</script>
 	</head>

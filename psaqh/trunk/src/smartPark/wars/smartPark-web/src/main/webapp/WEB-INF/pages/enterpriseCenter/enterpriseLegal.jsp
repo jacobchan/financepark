@@ -89,6 +89,9 @@
 					}
 				};
 				laydate(start);
+				
+				$("#moreul").slideDown("slow");
+			  	$("#moreul > li:eq(3)").addClass("active");
 			});
 		</script>
 	</head>
