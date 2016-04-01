@@ -476,6 +476,46 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 		return pagerRecords;
 	}
 	
+	
+	
+	/**
+	 * 查询属于公共资源的商品
+	 */
+	@EsbServiceMapping
+	public PagerRecords goPage(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PurchasingmanagerCommodity.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders,@ServiceParam(name="genreCode") String genreCode,
+			@ServiceParam(name="indexPage") String indexPage)  throws BusException{
+		// 查询属于公共资源的商品：genreCode=0301:会议室 ；genreCode=0302:车辆租赁；genreCode=0303:广告位
+		Collection<Condition> conditionP = new ArrayList<Condition>();
+		conditionP.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS,genreCode));
+		List<PurchasingmanagerGenre> purchasingmanagerGenreList=purchasingmanagerGenreManager.getPurchasingmanagerGenres(conditionP, null);
+		String genreId="";
+		if(purchasingmanagerGenreList.size()>0){
+			genreId = purchasingmanagerGenreList.get(0).getGenreId();
+		}
+		// 查询公共资源下包含的商品
+		conditions.add(ConditionUtils.getCondition("genreId",Condition.EQUALS,genreId));
+		//String pageIndex = org.apache.commons.lang.StringUtils.defaultIfEmpty(page, "1");
+		pager.setPageIndex(Integer.valueOf(indexPage));
+		pager.setPageSize(3);
+		PagerRecords pagerRecords = purchasingmanagerCommodityManager.getPagerPurchasingmanagerCommoditys(pager, conditions, orders);
+		@SuppressWarnings("unchecked")
+		List<PurchasingmanagerCommodity> pcList=(List<PurchasingmanagerCommodity>) pagerRecords.getRecords();
+
+
+		for(PurchasingmanagerCommodity pc:pcList){
+			if("0303".equals(genreCode)){
+				//广告位
+				extentionAtrManager.setMeetingLedExtendValue(pc);
+			}
+		}
+
+
+
+		return pagerRecords;
+	}
+	
 	/**
 	 * 根据商品id获取资源可用状态
 	 */
@@ -510,7 +550,7 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 			record.put("resoDate","");
 			record.put("resoTime","");
 			record.put("name",memberInformation!=null?memberInformation.getMemberName():"");
-			record.put("phone",memberInformation!=null?memberInformation.getMemberPhoneNumber():"");
+			record.put("phone",memberInformation!=null?memberInformation.getMemberPhoneNumber():"");	
 			recordList.add(record);
 		}
 		return recordList;
