@@ -106,6 +106,10 @@
 						return;
 					}
 				}
+				if(lfName ==null|| lfName==""){
+					alert("请填写姓名");
+					return;
+				}
 				if(lfTel !=null&& lfTel!=""){
 					 if(isMobil(lfTel)){
 							
@@ -113,6 +117,8 @@
 							alert("手机号格式不正确！");
 							return false;
 						}
+				}else{
+					alert("请填写手机号码");
 				}
                
 				var params = ['visiteDate='+visiteDate,'visiteTime='+visiteTime,'recordType='+recordType,'recordMemberId='+recordMemberId];
