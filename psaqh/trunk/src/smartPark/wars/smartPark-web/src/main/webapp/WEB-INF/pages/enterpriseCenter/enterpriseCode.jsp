@@ -43,6 +43,15 @@
 					}
 				});
 			});
+			function updateCode(rzId){
+				$.ajax({
+					url:baseUrl+'/enterbusinessmanagerRzManager/updateEnteringSign.json',
+					data : ['rzId='+rzId].join('&'),
+					success : function(result) {
+						$(".color_orange").html(result.record.rzSign);
+					}
+				});
+			}
 		</script>
 	</head>
 	<body class="page-header-fixed" style="background-image:none">
