@@ -104,6 +104,8 @@
 						}
 					});
 				});
+				$("#moreul").slideDown("slow");
+			  	$("#moreul > li:eq(2)").addClass("active");
 			});
 		</script>
 	</head>
@@ -115,9 +117,9 @@
     		<div id="youi_page_left" class="fl clearfix"></div>
 			<div class="main-wrapper">
     			<div class="main-wrapper-right">
-        			<div class="main-title"><span>媒体报道</span></div>
+    				<input id="knowledgeId" name="knowledgeId" style="display:none;" type="text">
+        			<div class="main-title"><span>专利/知识产权</span></div>
 			        <div class="qiye_fm">
-			        	<input id="knowledgeId" name="knowledgeId" style="display:none;" type="text">
 			        	<span class="" id="knowledgeRe" style="display:none;"></span>
 			            <div class="qiye_text"><span>专利图片</span></div>
 			            <div>

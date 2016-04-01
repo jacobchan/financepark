@@ -31,7 +31,7 @@
 					                            '</tr>'+
 					                            '<tr>'+
 					                            	'<td><a href="javascript:updateCode(\''+record.rzId+'\');" class="yqm_btn">更新邀请码</a></td>'+
-					                                '<td><a href="javascript:void(0);" class="yqm_btn">发送邀请码</a></td>'+
+					                                '<td><a href="javascript:sendCode();" class="yqm_btn">发送邀请码</a></td>'+
 					                            '</tr>'+
 					                        '</table>'+ 
 					                    '</li>';
@@ -42,6 +42,21 @@
 						}
 					}
 				});
+			  	$(".tc-close").click(function(){
+					$(".bg-tanc").hide();
+				});
+			  	$(".ib-btn").click(function(){
+					var phoneArr = $("#enterprisePhone").val();
+					var code = $(".color_orange").html();
+					var phone = phoneArr.split(",");
+					for(var i=0; i<phone.length; i++){
+						if (!$("#mobile").val().match(/^(((13[0-9]{1})|150|151|152|153|155|156|158|159)+\d{8})$/)) { 
+							
+						}
+					}
+				});
+			  	$("#moreul").slideUp("slow");
+			  	$(".sidebar-menu-mainul > li:eq(2)").addClass("active");
 			});
 			function updateCode(rzId){
 				$.ajax({
@@ -51,6 +66,9 @@
 						$(".color_orange").html(result.record.rzSign);
 					}
 				});
+			}
+			function sendCode(){
+				$(".bg-tanc").show();
 			}
 		</script>
 	</head>
@@ -70,6 +88,29 @@
 		            </div>
 		        </div>   
 		    </div>
+		</div>
+		
+		<div class="bg-tanc">
+			<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+				<a href="javascript:;" class="tc-close"></a>
+				<h3 class="mb10 f16 c-333" style="font-size:16px;"><b>发送邀请码</b></h3>
+				<table class="line-table cic-l-t wybx-tanc" style="font-size:14px;">
+					<colgroup>
+						<col width="110">
+						<col>
+					</colgroup>
+					<tbody>
+						<tr class="show2">
+							<td><b>手机号码</b></td>
+							<td><input style="width:400px" type="text" id="enterprisePhone" name="enterprisePhone"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td colspan="2"><a class="ib-btn" style="width:120px;text-align:center;margin-top:10px;">发送</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</body>
 </html>

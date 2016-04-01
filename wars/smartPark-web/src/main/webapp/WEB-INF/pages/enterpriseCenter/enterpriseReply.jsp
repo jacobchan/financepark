@@ -9,6 +9,9 @@
 			$(document).ready(function() {
 				var height = Math.max((document.documentElement.clientHeight - 135),($(".main-wrapper").height()));
 				document.getElementById('main-wrapper-right').style.height = height + 'px';
+				
+				$("#moreul").slideUp("slow");
+			  	$(".sidebar-menu-mainul > li:eq(3)").addClass("active");
 			});
 		</script>
 	</head>
