@@ -547,8 +547,8 @@
             </form>
         </div>
         <div class="content_right">
-        	<div class="ii_tit hand"><span class="span_bold">会议室预定</span><span>园区巴士预定</span><span>园区专车预定</span></div>
-            <ul class="hand_ul">
+        	<div class="ii_tit hand"><span class="span_bold">会议室预定</span><span>车辆预定</span><span>园区专车预定</span></div>
+            <ul class="hand_ul" id="roomPage">
             	<!-- <li>
                 	<div class="fl"><img src="styles/images/index/img.jpg"/></div>
                     <div class="fl ml10">
@@ -574,8 +574,8 @@
                     </div>
                 </li> -->
             </ul>
-            <ul class="hand_ul" style="display:none">
-            	<li>
+            <ul class="hand_ul" id="carPage" style="display:none">
+            	<!-- <li>
                 	<div class="fl circle"></div>
                     <div class="fl ml15 lh22">
                     	<span class="span_bold">行政服务中心至硅谷小镇</span>
@@ -590,7 +590,7 @@
                         <div class="cc f12">玉长城->红郡山庄</div>
                         <a href="./companyservice/carLease.html" class="handbtn">立即预定</a>
                     </div>
-                </li>
+                </li> -->
             </ul>
         </div>
         <div class="content_right mt30">
@@ -780,7 +780,7 @@
 						   //http://localhost:8088/smartPark-web/ imageUrl
 							 var html="<li><div class='fl'><img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].commodityImage+"&method=show' height='59' width='110'></div><div class='fl ml10'><div class='span_bold'>"+record[i].commodityTitle+"</div>"+
 							"<p class='cc f12'>"+record[i].commodityPrice+"元/小时</p><a class='handbtn' href='./companyservice/room.html'>立即预定</a></div></li>";
-							 $(".hand_ul").append(html);
+							 $("#roomPage").append(html);
 							 
 					} 
 				};
@@ -794,6 +794,40 @@
 			
 		});
 	</script>
+	
+     <script type="text/javascript">
+		$(function(){
+			 var params = ['genreCode=0302'];
+			  var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommoditys.json";//0302:车辆
+			  
+			 
+				//公共方法
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					data:params.join('&'),
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(results){
+						if(results&&results.records){
+					   _parseRecords(results.records);
+						}
+					}
+				});
+				
+				function _parseRecords(record){
+					//var imageUrl="/filestore/";
+				 	for(var i=0;i<3;i++){
+						   //http://localhost:8088/smartPark-web/ imageUrl
+							 var html="<li><div class='fl'><img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].commodityImage+"&method=show' height='59' width='110'></div><div class='fl ml10'><div class='span_bold'>"+record[i].commodityTitle+"</div>"+
+							"<p class='cc f12'>"+record[i].commodityPrice+"元/小时</p><a class='handbtn' href='./companyservice/carLease.html'>立即预定</a></div></li>";
+							 $("#carPage").append(html);
+							 
+					} 
+				};
+			
+		});
+	</script>
+                
 <script type="text/javascript">
 	$(function () {
 		/*banner*/
