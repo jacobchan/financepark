@@ -70,7 +70,7 @@ public class CommonController {
 		        //原文件名存到平台fileStore表里
 
 		    	 FileStore fileStore = fileStoreManager.storeFile(multipartFile.getOriginalFilename(), 
-		    			 multipartFile.getInputStream(),null,multipartFile.getContentType());
+		    			 multipartFile.getInputStream());
 		    	 FileStore fs=fileStoreManager.getFileStoreByPath(fileStore.getFilePath());
 				 fs.setFilePath(fileName);
 				 fileStoreDao.save(fs);
@@ -92,8 +92,7 @@ public class CommonController {
 					  File path = new File(root+"upload/"+DateUtils.getToday("yyyyMM"));
 					 
 					  //原文件名存到平台fileStore表里
-					  FileStore fileStore = fileStoreManager.storeFile(((DiskFileItem)item).getName(), ((DiskFileItem)item).getInputStream(),
-							  null,((DiskFileItem)item).getContentType());
+					  FileStore fileStore = fileStoreManager.storeFile(((DiskFileItem)item).getName(), ((DiskFileItem)item).getInputStream());
 					  FileStore fs=fileStoreManager.getFileStoreByPath(fileStore.getFilePath());
 					  fs.setFilePath(fileName);
 					  fileStoreDao.save(fs);
