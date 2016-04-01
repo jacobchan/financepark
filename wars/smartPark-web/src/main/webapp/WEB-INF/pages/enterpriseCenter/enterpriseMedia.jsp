@@ -35,7 +35,7 @@
 					                                            '<td colspan="2" height="40" valign="middle" align="left"><a class="tit" href="'+records[i].mediaTilurl+'" target="_blank">'+records[i].mediaTitle+'</a></td>'+
 					                                        '</tr>'+
 					                                        '<tr>'+
-					                                            '<td height="40" valign="middle" align="left"><a href="javascript:void(0);"><span>编辑</span></a>丨<a href=\'javascript:removeMedia("'+records[i].mediaId+'");\'>删除</a></td>'+
+					                                            '<td height="40" valign="middle" align="left"><a href=\'javascript:updateMedia("'+records[i].mediaId+'", "'+records[i].mediaRe+'", "'+records[i].mediaTitle+'", "'+records[i].mediaTilurl+'");\'><span>编辑</span></a>丨<a href=\'javascript:removeMedia("'+records[i].mediaId+'");\'>删除</a></td>'+
 					                                            '<td height="40" valign="middle" align="right"><span class="color_hui">'+records[i].createTime+'</span></td>'+
 					                                        '</tr>'+
 					                                    '</table>'+
@@ -51,18 +51,21 @@
 					}
 				});
 				
-				$(".save_btn").click(function(){
+				$(".hhf-submit").click(function(){
+					var mediaId=$("#mediaId").val();
 			  		var mediaRe=$("#mediaRe").html();
 			  		var mediaTitle=$("#mediaTitle").val();
 			  		var mediaTilurl=$("#mediaTilurl").val();
-					var params = ['mediaRe='+mediaRe+'','mediaTitle='+mediaTitle+'','mediaTilurl='+mediaTilurl+''];
+					var params = ['mediaId='+mediaId+'','mediaRe='+mediaRe+'','mediaTitle='+mediaTitle+'','mediaTilurl='+mediaTilurl+''];
 					$.youi.ajaxUtils.ajax({
 						url:baseUrl+'/informationMediaManager/saveInformationMedia.json',
 						data:params.join('&'),
 						success:function(result){
 							if(result && result.record){
-								alert("修改成功");
-								location.reload();
+								$("#mediaTitle").val();
+								$("#mediaTilurl").val();
+								alert("保存成功");
+								window.location.reload();
 							}
 						}
 					});
@@ -80,10 +83,11 @@
 				});
 			}
 			//修改地址
-			function updateMedia(obj1, obj2, obj3){
-				$("#knowledgeRe").html(obj1);
-		  		$("#knowledgeTitle").val(obj2);
-		  		$("#knowledgeContent").val(obj3);
+			function updateMedia(obj0, obj1, obj2, obj3){
+				$("#mediaId").val(obj0);
+				$("#mediaRe").html(obj1);
+		  		$("#mediaTitle").val(obj2);
+		  		$("#mediaTilurl").val(obj3);
 			}
 		</script>
 	</head>
@@ -95,6 +99,7 @@
 			<div id="youi_page_left" class="fl clearfix"></div>
 			<div class="main-wrapper">
 		    	<div class="main-wrapper-right">
+		    		<input id="mediaId" name="mediaId" style="display:none;" type="text">
 		        	<div class="main-title"><span>媒体报道</span></div>
 		            <div class="qiye_fm">
 		            	<span class="" id="mediaRe" style="display:none;"></span>
@@ -113,9 +118,7 @@
 		                    <div class="qiye_linktex">链接地址</div>
 		                    <div class="link_input"><input id="mediaTilurl" name="mediaTilurl" type="text"></div>
 		                </div>
-		                <div class="photo_btn">
-                            <div class="save_btn"><a>保存</a></div>
-                        </div>
+		                <div class="meiti_save_btn"><input type="submit" value="保存" class="hhf-submit" style="height:40px;" /></div>
 		                <div class="main-title"><span>媒体报道列表</span></div>
 		                <div class="baodao_list">
 		                	<ul id="mediaDiv">

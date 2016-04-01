@@ -6,7 +6,6 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>企业融资</title>
 		<%@ include file="/WEB-INF/pages/common/enterpriseScriptAddCss.jsp"%>
-		<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
 		<script type="text/javascript">
 			// 中文字符判断
 			function getStrLength(str) { 
@@ -21,6 +20,29 @@
 			        } 
 			    } 
 			    return reLen;    
+			}
+			//删除专利
+			function removeFinancing(obj){
+			 	$.youi.ajaxUtils.ajax({
+					url:baseUrl+'/informationFinancingManager/removeInformationFinancing.json',
+					data:'financingId='+obj,
+					success:function(result){
+						alert("删除成功");
+						location.reload();
+					}
+				});
+			}
+			//修改地址
+			function updateFinancing(obj0, obj1, obj2, obj3, obj4, obj5, obj6, obj7){
+				$("#financingId").val(obj0);
+				$("#financingRe").html(obj1);
+				$("#financingName").val(obj2);
+				$("#financingAmount").val(obj3);
+		  		$("#financingCost").val(obj4);
+				$("#financingPre").val(obj5);
+				$("#financingTime").val(obj6);
+				$("#financingDescribe").val(obj7);
+				$("#currentCount").html(getStrLength(obj7));
 			}
 			$(document).ready(function() {
 				$("#financingDescribe").on('keyup', function() {
@@ -42,22 +64,36 @@
 					    				$("#informationFinancing").empty();
 					    				for(var i=0; i<records.length; i++){
 					    					var financingMsg = "";
-					    					var style = "";
+					    					var cssStyle = "";
+					    					var itemCaption = "";
+					    					var financingAmount=records[i].financingAmount;
+					    					var financingCost=records[i].financingCost;
+					    					var financingPre=records[i].financingPre;
+					    					var financingDescribe=records[i].financingDescribe;
+					    					var financingSub=records[i].financingSub;
 					    					if(records[i].financingStatus=="1"){
 					    						financingMsg = records[i].financingTime.substring(0,4)+"年"+records[i].financingTime.substring(5,7)+"月";
-					    						style = "yg-time            ";
+					    						cssStyle = "yg-time history_time";
 					    					}else{
 					    						financingMsg = "进行中...";
-					    						style = "yg-time";
+					    						cssStyle = "yg-time";
 					    					}
-					    					var financingDiv = '<div class="'+style+'">'+
+					    					$.ajax({
+					    						url:baseUrl+'/codeitemManager/getCodeitem.json?itemId='+financingSub,
+					    						success:function(result){
+					    							if(result&&result.record){
+					    								itemCaption = result.record.itemCaption;
+					    							}
+					    						}
+					    					});
+					    					var financingDiv = '<div class="'+cssStyle+'">'+
 												'<div class="yt-pa"><span>'+financingMsg+'</span></div>'+
 												'<em class="em-pa_active"></em>'+
 												'<div class="clearfix active">'+
-													'<span>'+records[i].financingSub+'</span><span>融资金额：<em class="c-o">'+records[i].financingAmount+'万元</em></span><span>融资估值：<em class="c-o">'+records[i].financingCost+'万元</em></span><span>可持股份：<em class="c-o">'+records[i].financingPre+'%</em></span>'+
+													'<span>'+itemCaption+'</span><span>融资金额：<em class="c-o">'+financingAmount+'万元</em></span><span>融资估值：<em class="c-o">'+financingCost+'万元</em></span><span>可持股份：<em class="c-o">'+financingPre+'%</em></span>'+
 												'</div>'+
-												'<p>'+records[i].financingDescribe+'</p>'+
-				                                '<p class="mt10"><a href="javascript:;">编辑</a>&nbsp;丨&nbsp;<a href="javascript:;">删除</a></p>'+
+												'<p>'+financingDescribe+'</p>'+
+				                                '<p class="mt10"><a href="javascript:updateFinancing(\''+records[i].financingId+'\',\''+records[i].financingRe+'\',\''+records[i].financingName+'\',\''+records[i].financingAmount+'\',\''+records[i].financingCost+'\',\''+records[i].financingPre+'\',\''+records[i].financingTime+'\',\''+records[i].financingDescribe+'\');">编辑</a>&nbsp;丨&nbsp;<a href="javascript:removeFinancing(\''+records[i].financingId+'\');">删除</a></p>'+
 											'</div>';
 											$("#informationFinancing").append(financingDiv);
 					    				}
@@ -68,6 +104,7 @@
 					}
 				});
 				$(".hhf-submit").click(function(){
+					var financingId=$("#financingId").val();
 			  		var financingRe=$("#financingRe").html();
 			  		var financingName=$("#financingName").val();
 			  		var financingAmount=$("#financingAmount").val();
@@ -76,13 +113,14 @@
 					var financingTime=$("#financingTime").val();
 					var financingDescribe=$("#financingDescribe").val();
 					var financingSub=$('#roundFinancing li.selected').attr("data-id");
-					var params = ['financingRe='+financingRe+'','financingName='+financingName+'','financingAmount='+financingAmount+'','financingCost='+financingCost+'','financingPre='+financingPre+'','financingTime='+financingTime+'','financingDescribe='+financingDescribe+'','financingSub='+financingSub+''];
+					var params = ['financingId='+financingId+'','financingRe='+financingRe+'','financingName='+financingName+'','financingAmount='+financingAmount+'','financingCost='+financingCost+'','financingPre='+financingPre+'','financingTime='+financingTime+'','financingDescribe='+financingDescribe+'','financingSub='+financingSub+''];
 					$.youi.ajaxUtils.ajax({
 						url:baseUrl+'/informationFinancingManager/saveInformationFinancing.json',
 						data:params.join('&'),
 						success:function(result){
 							if(result && result.record){
 								alert("保存成功");
+								$("#financingName").val();
 								$("#financingAmount").val();
 						  		$("#financingCost").val();
 								$("#financingPre").val();
@@ -139,6 +177,7 @@
 	    	<div id="youi_page_left" class="fl clearfix"></div>
 			<div class="main-wrapper">
 	    		<div class="main-wrapper-right mb40">
+	    			<input id="financingId" name="financingId" style="display:none;" type="text">
 	        		<div class="main-title"><span>融资信息</span></div>
 	            	<div class="xiangxi_xinxi mt40">
 	            		<span id="financingRe" style="display:none;"></span>
@@ -151,8 +190,8 @@
 								<ul id="roundFinancing" style="display: none;" class="select-nav"></ul>
 							</div>
                         </div>
-                        <div class="rongzi_rzmc">
-		                    <div class="qiye_rzmc">融资企业名称</div>
+                        <div class="rongzi_je">
+		                    <div class="qiye_rzje">融资企业名称</div>
 		                    <div class="web_input"><input id="financingName" name="financingName" type="text"></div>
 		                </div>
 		                <div class="rongzi_je">
