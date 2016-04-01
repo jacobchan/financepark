@@ -2,9 +2,16 @@ package com.manage.EnterBusinessManager.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.common.BuildingBaseManager.dao.BbmBuildingDao;
+import com.common.BuildingBaseManager.dao.BbmFloorDao;
+import com.common.BuildingBaseManager.entity.BbmBuilding;
+import com.common.BuildingBaseManager.entity.BbmFloor;
 import com.common.BuildingBaseManager.entity.BbmRoom;
 import com.common.BuildingBaseManager.service.BbmRoomManager;
 import com.common.MemberManager.entity.MemberInformation;
@@ -34,6 +41,10 @@ import com.manage.PropertyServiceManager.service.PropertyservicemanagerEntrecMan
 public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implements EnterbusinessmanagerRzManager{
 	@Autowired
 	private EnterbusinessmanagerRzDao enterbusinessmanagerRzDao;
+	@Autowired
+	private BbmBuildingDao bbmBuildingDao;
+	@Autowired
+	private BbmFloorDao bbmFloorDao;
 	@Autowired
 	private PropertyservicemanagerEntrecManager propertyservicemanagerEntrecManager;
 	@Autowired
@@ -235,5 +246,59 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     	condition.add(ConditionUtils.getCondition("rzName", Condition.LIKE, rzName));
     	List<EnterbusinessmanagerRz> list = enterbusinessmanagerRzDao.commonQuery(condition, order);
     	return list;
+    }
+    
+    /**
+	 * 根据ID更新企业码
+	 * @param rzId 入驻企业Id
+	 * @throws BusException
+	 * @author ZhuYL
+	 * @time 2016-03-31
+	 */
+    @EsbServiceMapping
+	public EnterbusinessmanagerRz updateEnteringSign(@ServiceParam(name="rzId") String rzId) throws BusException{
+    	EnterbusinessmanagerRz rz = enterbusinessmanagerRzDao.get(rzId);
+    	BbmBuilding build = null;
+    	BbmFloor floor = null;
+    	StringBuffer numberCode = new StringBuffer();
+    	if(null!=rz && !"".equals(rz.getBuildingId()) && null!=rz.getBuildingId()){
+    		build = bbmBuildingDao.get(rz.getBuildingId());
+    		numberCode.append(build.getBuildingNo());
+    	}
+    	if(null!=rz && !"".equals(rz.getFloorId()) && null!=rz.getFloorId()){
+    		floor = bbmFloorDao.get(rz.getFloorId());
+    		numberCode.append(floor.getFloorNo());
+    	}
+    	rz.setRzSign(numberCode.toString().replaceAll("-", "")+random(4));
+    	EnterbusinessmanagerRz eb = enterbusinessmanagerRzDao.save(rz);
+    	return eb;
+	}
+    
+    /**
+     * 获取指定位数不重复随机数
+     * @param n
+     * @return
+     */
+    public static String random(int n) {
+        if (n < 1 || n > 10) {
+            throw new IllegalArgumentException("cannot random " + n + " bit number");
+        }
+        Random ran = new Random();
+        if (n == 1) {
+            return String.valueOf(ran.nextInt(10));
+        }
+        int bitField = 0;
+        char[] chs = new char[n];
+        for (int i = 0; i < n; i++) {
+            while(true) {
+                int k = ran.nextInt(10);
+                if( (bitField & (1 << k)) == 0) {
+                    bitField |= 1 << k;
+                    chs[i] = (char)(k + '0');
+                    break;
+                }
+            }
+        }
+        return new String(chs);
     }
 }
