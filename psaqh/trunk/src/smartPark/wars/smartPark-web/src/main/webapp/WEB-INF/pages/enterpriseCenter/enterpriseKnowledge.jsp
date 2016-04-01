@@ -33,10 +33,12 @@
 				});
 			}
 			//修改地址
-			function updateKnowledge(obj1, obj2, obj3){
+			function updateKnowledge(obj0, obj1, obj2, obj3){
+				$("#knowledgeId").val(obj0);
 				$("#knowledgeRe").html(obj1);
 		  		$("#knowledgeTitle").val(obj2);
 		  		$("#knowledgeContent").val(obj3);
+		  		$("#currentCount").html(getStrLength(obj3));
 			}
 			$(document).ready(function() {
 				$("#knowledgeContent").on('keyup', function() {
@@ -69,7 +71,7 @@
 					                                            '<td colspan="2" height="42" valign="top" align="left"><span class="baodao_main">'+records[i].knowledgeContent+'</span></td>'+
 					                                        '</tr>'+
 					                                        '<tr>'+
-					                                            '<td height="40" valign="middle" align="left"><a href=\'javascript:updateKnowledge("'+records[i].knowledgeId+'", "'+records[i].knowledgeTitle+'", "'+records[i].knowledgeContent+'");\'><span>编辑</span></a>丨<a href=\'javascript:removeKnowledge("'+records[i].knowledgeId+'");\'>删除</a></td>'+
+					                                            '<td height="40" valign="middle" align="left"><a href=\'javascript:updateKnowledge("'+records[i].knowledgeId+'", "'+records[i].knowledgeRe+'", "'+records[i].knowledgeTitle+'", "'+records[i].knowledgeContent+'");\'><span>编辑</span></a>丨<a href=\'javascript:removeKnowledge("'+records[i].knowledgeId+'");\'>删除</a></td>'+
 					                                        '</tr>'+
 					                                    '</table>'+
 					                                '</div>'+
@@ -84,19 +86,20 @@
 					}
 				});
 				$(".hhf-submit").click(function(){
+					var knowledgeId=$("#knowledgeId").val();
 			  		var knowledgeRe=$("#knowledgeRe").html();
 			  		var knowledgeTitle=$("#knowledgeTitle").val();
 			  		var knowledgeContent=$("#knowledgeContent").val();
-					var params = ['knowledgeRe='+knowledgeRe+'','knowledgeTitle='+knowledgeTitle+'','knowledgeContent='+knowledgeContent+''];
+					var params = ['knowledgeId='+knowledgeId+'','knowledgeRe='+knowledgeRe+'','knowledgeTitle='+knowledgeTitle+'','knowledgeContent='+knowledgeContent+''];
 					$.youi.ajaxUtils.ajax({
 						url:baseUrl+'/informationKnowledgeManager/saveInformationKnowledge.json',
 						data:params.join('&'),
 						success:function(result){
 							if(result && result.record){
-								alert("保存成功");
 								$("#knowledgeTitle").val();
 						  		$("#knowledgeContent").val();
-								location.reload();
+								alert("保存成功");
+								window.location.reload();
 							}
 						}
 					});
@@ -114,6 +117,7 @@
     			<div class="main-wrapper-right">
         			<div class="main-title"><span>媒体报道</span></div>
 			        <div class="qiye_fm">
+			        	<input id="knowledgeId" name="knowledgeId" style="display:none;" type="text">
 			        	<span class="" id="knowledgeRe" style="display:none;"></span>
 			            <div class="qiye_text"><span>专利图片</span></div>
 			            <div>
@@ -136,7 +140,7 @@
 			                	<div class="font_xianzhi">字数限制：<span id="currentCount" style="color:red;">0</span>/200</div>
 			            	</div>
 			            </div>
-			            <div class="meiti_save_btn"><input type="submit" value="保存" class="hhf-submit" style="height:40px;" /></div>           
+			            <div class="meiti_save_btn"><input type="submit" value="保存" class="hhf-submit" style="height:40px;" /></div>
 			            <div class="main-title"><span>专利&nbsp;/&nbsp;知识产权列表</span></div>
 						<div class="baodao_list zuanli">
 		                	<ul id="knowledgeDiv">

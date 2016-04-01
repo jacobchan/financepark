@@ -39,15 +39,17 @@
 								url:baseUrl+'/informationLegalManager/findInformationLegal.json',
 								data : ['legalRe='+result.record.companyId].join('&'),
 								success:function(result){
-									if(result&&result.record){
-										$("#legalRe").html(result.record.legalRe);
-										$("#legalImage").attr("src","/filestore/"+records.legalImage);
-										$("#legalId").html(result.record.legalId);
-				    					$("#legalName").val(result.record.legalName);
-				    					$("#legalBusiness").val(result.record.legalBusiness);
-				    					$("#legalBirthday").val(result.record.legalBirthday);
-				    					$("#legalTelephone").val(result.record.legalTelephone);
-				    					$("#legalRemark").val(result.record.legalRemark);
+									if(result&&result.records){
+										var record = result.records;
+					    				for(var i=0; i<record.length; i++){
+											$("#legalImage").attr("src","/filestore/"+record[i].legalImage);
+											$("#legalId").val(record[i].legalId);
+					    					$("#legalName").val(record[i].legalName);
+					    					$("#legalBusiness").val(record[i].legalBusiness);
+					    					$("#legalBirthday").val(record[i].legalBirthday);
+					    					$("#legalTelephone").val(record[i].legalTelephone);
+					    					$("#legalRemark").val(record[i].legalRemark);
+					    				}
 									}
 								}
 							});
@@ -56,32 +58,37 @@
 				});
 			  	
 			  	$(".hhf-submit").click(function(){
+			  		var legalId=$("#legalId").val();
 					var legalRe=$("#legalRe").html();
 					var legalName=$("#legalName").val();
 					var legalBirthday=$("#legalBirthday").val();
 					var legalTelephone=$("#legalTelephone").val();
 					var legalBusiness=$("#legalBusiness").val();
 					var legalRemark=$("#legalRemark").val();
-					var params = ['legalRe='+legalRe+'','legalName='+legalName+'','legalBirthday='+legalBirthday+'','legalTelephone='+legalTelephone+'','legalBusiness='+legalBusiness+'','legalRemark='+legalRemark+''];
+					var params = ['legalId='+legalId+'','legalRe='+legalRe+'','legalName='+legalName+'','legalBirthday='+legalBirthday+'','legalTelephone='+legalTelephone+'','legalBusiness='+legalBusiness+'','legalRemark='+legalRemark+''];
 					$.youi.ajaxUtils.ajax({
 						url:baseUrl+'/informationLegalManager/saveInformationLegal.json',
 						data:params.join('&'),
 						success:function(result){
 							if(result && result.record){
 								alert("修改成功");
-								$("#legalRe").html();
-								$("#legalImage").attr("src","");
-								$("#legalId").html();
-		    					$("#legalName").val();
-		    					$("#legalBusiness").val();
-		    					$("#legalBirthday").val();
-		    					$("#legalTelephone").val();
-		    					$("#legalRemark").val();
 								location.reload();
 							}
 						}
 					});
 				});
+			  	
+			  	var start = {
+					elem: '#legalBirthday',
+					min: '1800-01-01 00:00:00', //设定最小日期为当前日期
+					max: '2099-12-31 23:59:59', //最大日期
+					istoday: false,
+					choose: function(datas){
+						end.min = datas; //开始日选好后，重置结束日的最小日期
+						end.start = datas; //将结束日的初始值设定为开始日
+					}
+				};
+				laydate(start);
 			});
 		</script>
 	</head>
@@ -110,7 +117,7 @@
 		                </div>
 		                <div class="born_time clearfix">
 		                    <div class="born_date">出生日期</div>
-		                    <div class="born_input"><input id="legalBirthday" name="legalBirthday" type="text"></div>
+		                    <div class="born_input"><input id="legalBirthday" name="legalBirthday" readonly="readonly" placeholder="请选择出生日期" class="laydate-icon" type="text"></div>
 		                </div>
 		                <div class="born_time clearfix">
 		                    <div class="born_date">手机号码</div>

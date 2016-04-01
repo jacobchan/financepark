@@ -220,7 +220,7 @@
 						data:params.join('&'),
 						success:function(result){
 							if(result && result.record){
-								alert("修改成功");
+								alert("保存成功");
 								location.reload();
 							}
 						}
@@ -241,10 +241,9 @@
 		        	<span class="" id="financingRe" style="display:none;"></span>
 		            <div class="qiye_logo">
 		            	<div class="qiye_text"><span>企业logo</span></div>
-		            	<div class="photo-edit" id="destination"><img id="rzLogo" src="" width="107" height="107"/></div>
 		                <div class="upload_main">
-		                    <div class="qiye_pic">添加标志</div>
-		                    <div class="upload_input"><input type="file"></div>
+		                    <img id="rzLogo" src="" border="0" class="fl" width="107" height="107"/>
+		                    <div class="photo-edit"><input type="file" />编辑<br/>logo</div>
 		            	</div>
 		            </div>
 		            <div class="xiangxi_xinxi">
