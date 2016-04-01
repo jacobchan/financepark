@@ -665,3 +665,10 @@ background:url(../images/company/ab_ico.png) no-repeat}
 .znav-pa16{left: 265px;top: 348px;}
 .znav-pa17{left: 588px;top: 582px;}
 
+/**room**/
+.ru-title{width:140px;text-align:center;float: left;height: 35px;line-height: 35px;background: #f6f6f6;}
+.ru-options{width: 815px;float: left;word-wrap:break-word;height: 35px;overflow: hidden;}
+.ru-options.hauto{height: auto;}
+.ri-totle{width: 155px;line-height: 35px;height: 35px;float: left;padding-left: 15px;}
+.ru-options li{line-height: 19px;cursor: pointer;padding: 8px 0px;}
+.ru-more{float: right;padding-right: 20px;line-height: 35px;width:88px;display: inline-block;}

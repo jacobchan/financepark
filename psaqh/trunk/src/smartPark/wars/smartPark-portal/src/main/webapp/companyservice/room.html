@@ -28,17 +28,22 @@
     </div>
     <!--会议室-->
     <div class="res_item mb40">
-        <div class="ri_ul clearfix">
+        <div class="ri_ul clearfix" style="background:#f6f6f6;">
             <div class="ru-title">所属楼栋</div>
-            <ul class="ru-options">
-                <li class="active">全部</li>
-                <li>创智中心1号楼</li>
-                <li>创智中心2号楼</li>
-                <li>创智中心3号楼</li>
-                <li>创智中心4号楼</li>
-                <li>创智中心1号楼</li>
-            </ul>
-            <div class="ru-more"><a href="javascript:;" class="span_bold">更多 <i class="fa fa-chevron-down"></i></a></div>
+            <div class="fl" style="background:#fff;">
+                <div class="ri-totle active">全部</div>
+                <ul class="ru-options">
+                    <li>创智中心1号楼</li>
+                    <li>创智中心2号楼</li>
+                    <li>创智中心3号楼</li>
+                    <li>创智中心4号楼</li>
+                    <li>创智中心1号楼</li>
+                    <li>创智中心3号楼</li>
+                    <li>创智中心4号楼</li>
+                    <li>创智中心1号楼</li>
+                </ul>
+                <div class="ru-more"><a href="javascript:;" class="span_bold">更多 <i class="fa fa-chevron-down"></i></a></div>
+            </div>
         </div>
         <div class="ri_ul clearfix">
             <div class="ru-title">所属楼层</div>
@@ -50,31 +55,33 @@
         </div>
         <div class="ri_ul clearfix">
             <div class="ru-title">会议室类型</div>
+            <div class="ri-totle active">全部</div>
             <ul class="ru-options">
-                <li class="active">全部</li>
                 <li>视频会议室</li>
                 <li>普通会议室</li>
             </ul>
         </div>
         <div class="ri_ul clearfix">
             <div class="ru-title">投影仪</div>
+            <div class="ri-totle active">不限</div>
             <ul class="ru-options">
-                <li class="active">不限</li>
                 <li>有</li>
                 <li>无</li>
             </ul>
             
         </div>
-        <div class="ri_ul clearfix">
+        <div class="ri_ul clearfix" style="background:#f6f6f6;">
             <div class="ru-title">会议室规模</div>
-            <ul class="ru-options">
-                <li class="active">不限</li>
-                <li>10人以下</li>
-                <li>10-30人</li>
-                <li>30-60人</li>
-                <li>50人以上</li>
-            </ul>
-            <div class="ru-more"><a href="javascript:;" class="span_bold">更多 <i class="fa fa-chevron-down"></i></a></div>
+            <div class="fl" style="background:#fff;">
+                <div class="ri-totle active">不限</div>
+                <ul class="ru-options">
+                    <li>10人以下</li>
+                    <li>10-30人</li>
+                    <li>30-60人</li>
+                    <li>50人以上</li>
+                </ul>
+                <div class="ru-more"><a href="javascript:;" class="span_bold">更多 <i class="fa fa-chevron-down"></i></a></div>
+            </div>
         </div>
         <div class="mt30 clearfix">
         	<div class="res_left">
@@ -262,6 +269,9 @@ var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommod
         $(function(){
             $(document).on("click",".ru-options li" ,function(){
                 $(this).addClass("active").siblings().removeClass("active");
+            });
+            $(".ru-more").click(function(){
+                $(this).prev().toggleClass("hauto");
             })
         })
     </script>
