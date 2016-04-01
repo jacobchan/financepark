@@ -288,7 +288,6 @@
                         <th>单价</th>
                         <th>数量</th>
                         <th>价格</th>
-                        <th>公司地址</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -306,23 +305,6 @@
                             </div>
                         </td>
                         <td><span class="cc">1000</span>&nbsp;元</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                    	<td class="">
-                            地址变更
-                        </td>
-                        <td><span class="cc">600</span>&nbsp;元/次</td>
-                        <td>
-                        	<div class="inline_b" style="overflow:hidden;margin-top:5px">
-                            	<div class="cos_less">-</div>
-                                <div class="numbox">1</div>
-                                <div class="cos_add">+</div>
-                            </div>
-                        </td>
-                        <td><span class="cc">600</span>&nbsp;元</td>
-                        <td></td>
                         <td></td>
                     </tr>
                 </tbody>
@@ -475,7 +457,7 @@ $(function(){
 				'" data-commodityTitle="'+commodityTitle+'"><td class="">'+commodityTitle+'</td><td><span class="cc">'+commodityPrice+'</span>&nbsp;元/次</td><td>'+
 				'<div class="inline_b" style="overflow:hidden;margin-top:5px"><div class="cos_less">-</div><div class="numbox">1</div>'+
 				'<div class="cos_add">+</div></div></td><td><span class="cc" id="comAmount">'+commodityPrice+
-				'</span>&nbsp;元</td><td></td><td><a class="del" style="cursor:pointer">删除</a></td></tr>');
+				'</span>&nbsp;元</td><td><a class="del" style="cursor:pointer">删除</a></td></tr>');
 				
 				var comAmount = $('#payAmount').html();
 				$('#payAmount').html(accAdd(comAmount,commodityPrice));
@@ -513,10 +495,8 @@ $(function(){
 							'<div class="f18 mt10"><span class="c3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数量：</span>'+
 							'<input type="text" class="pt_count c3 vm" value="1" readonly><div class="inline_b vm tc">'+
 							'<div class="add">+</div><div class="less">-</div></div><div class="f14 mt10">'+
-							'<div class="btn_h" data-id="'+results.records[i].commodityId+'" data-commodityTitle="'+results.records[i].commodityTitle+
-							'" data-commodityPrice="'+results.records[i].commodityPrice+'">&nbsp;立即购买&nbsp;</div>'+
-							'<div class="btn_cx" data-id="'+results.records[i].commodityId+'" data-commodityTitle="'+results.records[i].commodityTitle+
-							'" data-commodityPrice="'+results.records[i].commodityPrice+'">加入购物车</div></div></div></div></li>');
+							'<div class="btn_cx" style="margin-left:40px;" data-id="'+results.records[i].commodityId+'" data-commodityTitle="'+results.records[i].commodityTitle+
+							'" data-commodityPrice="'+results.records[i].commodityPrice+'">立即购买</div></div></div></div></li>');
 					
 					htmlss.push('<li id ="'+results.records[i].commodityId+'shopul">'+results.records[i].commodityTitle+'&nbsp;&nbsp;<span class="cc">'+results.records[i].commodityPrice+
 							'</span>&nbsp;元/次&nbsp;<div class="shop0" data-id="'+results.records[i].commodityId+
@@ -537,7 +517,7 @@ $(function(){
 					'"><td class="">'+commodityTitle+'</td><td><span class="cc">'+commodityPrice+'</span>&nbsp;元/次</td><td>'+
 					'<div class="inline_b" style="overflow:hidden;margin-top:5px"><div class="cos_less">-</div>'+
 					'<div class="numbox">'+count+'</div><div class="cos_add">+</div></div></td><td><span class="cc" id="comAmount">'+amount+
-					'</span>&nbsp;元</td><td></td><td><a class="del" style="cursor:pointer">删除</a></td></tr>');
+					'</span>&nbsp;元</td><td><a class="del" style="cursor:pointer">删除</a></td></tr>');
 					
 					$('#payAmount').html(amount);
 					$('#'+id+'shopul').remove();
@@ -554,7 +534,7 @@ $(function(){
 					'"><td class="">'+commodityTitle+'</td><td><span class="cc">'+commodityPrice+'</span>&nbsp;元/次</td><td>'+
 					'<div class="inline_b" style="overflow:hidden;margin-top:5px"><div class="cos_less">-</div>'+
 					'<div class="numbox">'+count+'</div><div class="cos_add">+</div></div></td><td><span class="cc" id="comAmount">'+amount+
-					'</span>&nbsp;元</td><td></td><td><a class="del" style="cursor:pointer">删除</a></td></tr>');
+					'</span>&nbsp;元</td><td><a class="del" style="cursor:pointer">删除</a></td></tr>');
 					
 					$('#payAmount').html(amount);
 					$('#'+id+'shopul').remove();
@@ -569,7 +549,7 @@ $(function(){
 					'" data-commodityTitle="'+commodityTitle+'"><td class="">'+commodityTitle+'</td><td><span class="cc">'+commodityPrice+'</span>&nbsp;元/次</td><td>'+
 					'<div class="inline_b" style="overflow:hidden;margin-top:5px"><div class="cos_less">-</div><div class="numbox">1</div>'+
 					'<div class="cos_add">+</div></div></td><td><span class="cc" id="comAmount">'+commodityPrice+
-					'</span>&nbsp;元</td><td></td><td><a class="del" style="cursor:pointer">删除</a></td></tr>');
+					'</span>&nbsp;元</td><td><a class="del" style="cursor:pointer">删除</a></td></tr>');
 					
 					var comAmount = $('#payAmount').html();
 					$('#payAmount').html(accAdd(comAmount,commodityPrice));
