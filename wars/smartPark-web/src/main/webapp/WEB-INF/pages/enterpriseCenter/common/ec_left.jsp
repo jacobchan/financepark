@@ -11,19 +11,30 @@
 					$("#moreul").slideToggle("slow");
 				});
 				
-				var urlstr = location.href;
-			  	var urlstatus=false;
-				$(".sidebar-menu-mainul2 li").each(function (){
-					if ((urlstr + '/').indexOf($(this).find("a").attr('href')) > -1 && $(this).find("a").attr('href')!='') {
-						$(this).addClass('active');
-						urlstatus = true;
-					} else {
-					   	$(this).removeClass('active');
-					}
+				//var urlstr = location.href;
+			  	//var urlstatus=false;
+				//$(".sidebar-menu-mainul2 li").each(function (){
+				//	if ((urlstr + '/').indexOf($(this).find("a").attr('href')) > -1 && $(this).find("a").attr('href')!='') {
+				//		$(this).addClass('active');
+				//		urlstatus = true;
+				//	} else {
+				//	   	$(this).removeClass('active');
+				//	}
+				//});
+				//if (!urlstatus) {
+				//	$(".sidebar-menu-mainul2 li").eq(0).addClass('active');
+				//}
+				
+				$(".sidebar-menu-mainul>li:eq(0) li").click(function(){
+			        $("#moreul").slideDown("slow");
+			        $(this).addClass("active").siblings().removeClass("active");
+			        $(this).parents("li").siblings().removeClass("active");
+			    });
+			    $(".sidebar-menu-mainul > li").not(':eq(0)').click(function(){
+			        $("#moreul").slideUp("slow");
+			        $("#moreul li").removeClass("active");
+			        $(this).addClass("active").siblings().removeClass("active");
 				});
-				if (!urlstatus) {
-					$(".sidebar-menu-mainul2 li").eq(0).addClass('active');
-				}
 			});
 		</script>
 	</head>
