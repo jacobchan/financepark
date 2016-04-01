@@ -1,6 +1,7 @@
 <%@ taglib prefix="youi" uri="http://www.gisoft.cn/youi3" %>
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/lib/bootstrap.css">
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/base.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/css/zs.css">
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/page/main.css">
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/lib/jquery-1.9.1.min.js"></script>
 <!-- <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.select.js"></script> -->
