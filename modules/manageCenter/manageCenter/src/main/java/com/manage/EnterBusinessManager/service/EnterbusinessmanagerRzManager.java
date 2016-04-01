@@ -14,7 +14,9 @@ import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.PubCondition;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
 
 public interface EnterbusinessmanagerRzManager extends BaseManager{
 
@@ -84,4 +86,13 @@ public interface EnterbusinessmanagerRzManager extends BaseManager{
 	 * @time 2016-03-17
 	 */
 	public List<EnterbusinessmanagerRz> findEnterbusinessmanagerRzByName(String rzName)throws BusException;
+
+	/**
+	 * 根据ID更新企业码
+	 * @param rzId 入驻企业Id
+	 * @throws BusException
+	 * @author ZhuYL
+	 * @time 2016-03-31
+	 */
+	public EnterbusinessmanagerRz updateEnteringSign(String rzId) throws BusException;
 }
