@@ -21,13 +21,14 @@
 						}
 					}
 				});
-			  	
 			  	$.ajax({
 					url:serviceURL,
+					data:['companyId='+$("#companyId").val()].join('&'),
 					success:function(result){
+						$("#totalCount").html(result.totalCount);
 						pageCount=Math.ceil(result.totalCount/pageSize);
 						refreshData(1,pageSize);
-						$(".page-list-a").createPage({
+						$(".tcdPageCode").createPage({
 							pageCount:pageCount,
 							current:1,
 							backFn:function(p){
@@ -39,7 +40,7 @@
 				});
 			});
 			function refreshData(pageIndex,pageSize){
-				var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+				var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'companyId='+$("#companyId").val()];
 				$.ajax({
 					url:serviceURL,
 					data:params.join('&'),
@@ -74,6 +75,25 @@
 				$('#bookDiv').empty();
 				$('#bookDiv').append(html);
 			}
+			function searchByName(){
+				$.ajax({
+					url:serviceURL,
+					data:['companyId='+$("#companyId").val(),'memberName='+$("#memberName").val()].join('&'),
+					success:function(result){
+						$("#totalCount").html(result.totalCount);
+						pageCount=Math.ceil(result.totalCount/pageSize);
+						refreshData(1,pageSize);
+						$(".tcdPageCode").createPage({
+							pageCount:pageCount,
+							current:1,
+							backFn:function(p){
+							   	this.pageCount=pageCount;
+							    refreshData(p,pageSize);
+							}
+						});
+					}
+				});
+			}
 		</script>
 	</head>
 	<body class="page-header-fixed" style="background-image:none">
@@ -87,9 +107,9 @@
 		    		<input id="companyId" name="companyId" type="text" style="display:none;" />
 		        	<div class="main-title"><span>企业通讯录管理</span></div>
 		            <div class="phone_book">
-		            	<div class="total_p color_orange">通讯录共有&nbsp;88&nbsp;人</div>
-		                <div class="search_name"><input type="text" placeholder="姓名搜索"></div>
-		                <div class="search_ipt"><a href="javascript:void(0);">搜索</a></div>
+		            	<div class="total_p color_orange">通讯录共有&nbsp;<span id="totalCount"></span>&nbsp;人</div>
+		                <div class="search_name"><input id="memberName" name="memberName" type="text" placeholder="姓名搜索"></div>
+		                <div class="search_ipt"><a href="javascript:searchByName();">搜索</a></div>
 		                <div class="show_all"><a href="javascript:void(0);">显示全部</a></div>
 		                <div class="upload_out"><a href="javascript:void(0);">导出到Excel</a></div>
 		            </div>
@@ -97,7 +117,7 @@
 		            	<ul id="bookDiv">
 		                    
 		                </ul>
-		                <div class="fr page-list-a clearfix lh30 mt20 f12 mb30">
+		                <div class="tcdPageCode fr">
 		                    
 						</div>
 		            </div>
