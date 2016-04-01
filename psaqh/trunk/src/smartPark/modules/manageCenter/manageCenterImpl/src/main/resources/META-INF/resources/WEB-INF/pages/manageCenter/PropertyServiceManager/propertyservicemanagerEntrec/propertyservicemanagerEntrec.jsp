@@ -19,6 +19,7 @@
 
 		<youi:gridCol property="propertyservicemanagerEntering.enteringTime"  caption="预约时间段" width="20%" convert="enteringTime" align="center"/>
 		<youi:gridCol property="enterrecStatus"  caption="预约记录状态" convert="enterrecStatus" width="15%" align="center"/>
+		<youi:gridCol property="enteringType"  caption="申请类型" convert="enteringType" width="15%" align="center"/>
 		<youi:gridCol property="propertyservicemanagerEntering.enteringDate"  caption="预约时间日期" width="20%" align="center" orderBy="desc"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>

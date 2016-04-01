@@ -7,7 +7,7 @@ $(function () {
 	$(".check-btn label").click(function(){
 		if($(this).children('input[type="checkbox"]').prop("checked")){
 			$(this).parent().next(".ib-btn").removeClass("bg-h");
-			$(this).parent().next(".ib-btn").attr("href","yq2.html");
+			$(this).parent().next(".ib-btn").attr("href","yq2.html?enteringType=01");
 		}else{
 			$(this).parent().next(".ib-btn").addClass("bg-h");
 			$(this).parent().next(".ib-btn").attr("href","javascript:;");
@@ -26,7 +26,7 @@ $(function () {
 		}
 	})
 	$(".check-btn .ib-btn").not(".bg-h").click(function(){
-		$(this).attr("href","yq2.html");
+		$(this).attr("href","yq2.html?enteringType=01");
 	})
 
 	$(".ht-table td>a.em1").click(function(){
