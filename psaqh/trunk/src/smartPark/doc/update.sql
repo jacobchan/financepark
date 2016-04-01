@@ -21,3 +21,4 @@ ADD COLUMN `BUILDING_NAME_`  varchar(32)  NULL;
 
 
 alter table sp_information_financing modify column FINANCING_SUB_ varchar(36);
+ALTER TABLE `sp_propertyservicemanager_entrec` ADD COLUMN `ENTERING_TYPE_` varchar(2);
