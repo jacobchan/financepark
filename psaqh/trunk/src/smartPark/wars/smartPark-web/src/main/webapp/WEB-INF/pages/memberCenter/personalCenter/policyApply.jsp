@@ -44,8 +44,10 @@
 
 	<script type="text/javascript">
 
-	 function apply(id){			
-		var policyApplyId=id;	
+	 function cancel(id){
+		
+		var policyApplyId=id;
+		
 	     $.ajax({
 			url:baseUrl+'/policyApplyManager/updatePolicyApplyStatus.json',
 			data:'policyApplyId='+policyApplyId,
@@ -59,8 +61,7 @@
 	} 
 	
 		$(function(){
-			$.ajax({
-				
+			$.ajax({				
 				url:baseUrl+'/policyApplyManager/getPolicyApplyListByLoginUser.json',
 				success:function(result){	
 					if(result&&result.records){					
@@ -74,9 +75,11 @@
 
 			console.log(record);
 			for(var i=0;i<record.length;i++){				
-				var status = "";								
+				var status = "";
+				var button = "";
 				if(record[i].policyApplyStatus=='1'){
-					status = "申请中";					
+					status = "申请中";	
+					button="<a href='#'   onclick='cancel(\""+record[i].policyApplyId+"\")'> 取消</a>";
 				}else if(record[i].policyApplyStatus=='2'){
 					status = "申请成功";
 				}else if(record[i].policyApplyStatus=='3'){
@@ -91,7 +94,7 @@
                           "<td width='111'>"+record[i].createTime+"</td>"+
                           "<td width='88'>"+record[i].nmIssueflow.issueFlowCStatus+"</td>"+
                           "<td width='88'>"+status+"</td>"+                          
-                          "<td > <input type='button' value='取消'   onclick='apply(\""+record[i].policyApplyId+"\")' />"+                                   
+                          "<td >" +button+"</td>"+
                           " </tr>";
 				 $(".gt-table").append(html);	
 			}
