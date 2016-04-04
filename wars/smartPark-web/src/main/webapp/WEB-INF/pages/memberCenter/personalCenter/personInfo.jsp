@@ -16,14 +16,17 @@
 						</tr>
 						<tr>
 							<td>头像</td>
-							<td>
-								<div class="photo-edit" id="destination"><img src="<%=request.getContextPath()%>/styles/images/grzx/user-photo.png"  width="107" height="107"/></div>
-								<div class="photo-edit"><input type="file" id="imgUpload" name="imgUpload" draggable="true" accept=".png,.jpg"/>编辑<br/>头像</div>
+							<td>				   
+							    <div class="photo-edit" id="destination"><input type="file" id="imgUpload" name="imgUpload" draggable="true" accept=".png,.jpg"/>
+								  <div class="photoedit" style="left:22px">
+								  <img src="<%=request.getContextPath()%>/styles/images/grzx/user-photo.png"  width="107" height="107"/>
+								  </div>
+								</div>  
 							</td>
 						</tr>
 						<tr>
 							<td>账号</td>
-							<td><span class="c-b1">8578778888 </span><span class="c-o"><a href="personalCenter/securityCenter.html">[更换手机号码]</a></span></td>
+							<td><span class="c-b1">888888888 </span><span class="c-o"><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/securityCenter.html">[更换手机号码]</a></span></td>
 						</tr>
 						<tr>
 							<td>昵称</td>
@@ -110,9 +113,26 @@
 			$("#month").val(record.memberBirthdate.substring(5,7));
 			$("#day").val(record.memberBirthdate.substring(8,10));
 			$("#memberDescribe2").val(record.memberDescribe2);
-			$("#companyId").val(record.companyId);
+			getRzName(record.companyId);//获得公司名字
 		};
-		
+		function getRzName(companyId){
+			var id=companyId;
+			 $.ajax({
+					url:baseUrl+'/enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json', 
+					data:'rzId='+id,
+					success:function(result){
+						console.log(result);
+						if(result&&result.record){
+							_rzRecords(result.record);												
+						}
+					}
+				}); 
+		}; 
+		//获得公司名字
+		function _rzRecords(record){											
+			$("#companyId").val(record.rzName);
+			
+		};
 		$('.hhf-submit').click(function(){
 			this.disabled=true;
 			var memberId=$("#memberId").html();
