@@ -464,7 +464,7 @@ a.ib-btn.bg-h{background: #b5b5b5;}
 .wybx-tanc b{color: #333;}
 .wybx-tanc tr td .tct-select .ic-select{background: url("../images/yqfw/down.png") no-repeat right center;}
 a.open-tanc{display: inline-block;padding: 0px 10px;border:1px solid #fa742c;background-color: #fff;height: 30px;line-height: 28px;text-align: center;color: #fa742c;}
-a.open-tanc:hover{color:#fff;background-color: #fa742c;transition: all .4s linear;-moz-transition: width  all .4s;-webkit-transition:  all .4s;-o-transition: all .4s linear; }
+a.open-tanc:hover{color:#fff!important;background-color: #fa742c;transition: all .4s linear;-moz-transition: width  all .4s;-webkit-transition:  all .4s;-o-transition: all .4s linear; }
 
 
 /**物业服务**/
