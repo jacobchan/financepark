@@ -95,4 +95,12 @@ public interface EnterbusinessmanagerRzManager extends BaseManager{
 	 * @time 2016-03-31
 	 */
 	public EnterbusinessmanagerRz updateEnteringSign(String rzId) throws BusException;
+	/**
+	  * //获取当前用户公司名字
+	  * @param userId
+	 
+	  * @return
+	  * @throws BusException
+	  */ 
+	 public EnterbusinessmanagerRz getCompanyIdName(String userId) throws BusException;
 }
