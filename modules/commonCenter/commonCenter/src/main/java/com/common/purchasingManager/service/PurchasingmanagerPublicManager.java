@@ -6,7 +6,6 @@ package com.common.purchasingManager.service;
 import java.util.Collection;
 import java.util.List;
 
-import com.common.ExtentionAtrManager.entity.MeetingEntity;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodityExtend;
 import com.gsoft.framework.core.dataobj.Record;
@@ -16,7 +15,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 
 public interface PurchasingmanagerPublicManager extends BaseManager{
@@ -59,6 +57,11 @@ public interface PurchasingmanagerPublicManager extends BaseManager{
      */
     public PurchasingmanagerCommodity savePurchasingmanagerCommodity(PurchasingmanagerCommodity o) throws BusException;
 
+    /**
+     * 查询商品代码集:roomType：会议室类型 ；roomProjector投影仪；roomGm:会议室规模人数
+     * @param recordType 代码集编码
+     */
+	public List<Record> getRecordsByExtendValue(@ServiceParam(name="recordType") String recordType) throws BusException;
     /**
      * 删除对象
      */
