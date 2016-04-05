@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : chuangyeyuan
-Source Server Version : 50629
-Source Host           : 192.168.10.58 :3306
+Source Server         : localhost
+Source Server Version : 50538
+Source Host           : localhost:3306
 Source Database       : youi2
 
 Target Server Type    : MYSQL
-Target Server Version : 50629
+Target Server Version : 50538
 File Encoding         : 65001
 
-Date: 2016-04-01 11:10:33
+Date: 2016-04-05 10:23:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -126,6 +126,7 @@ INSERT INTO `youi_codeitem` VALUES ('40288ab2531113db01531121c6d60002', '40288ab
 INSERT INTO `youi_codeitem` VALUES ('40288ab2531113db01531122be800003', '40288ab2531113db015311211cf40001', '2', '申请成功', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab2531113db01531122ec4c0004', '40288ab2531113db015311211cf40001', '3', '申请失败', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab2533a65bb01533a6de7480001', '40288acd52f2342b0152f2369e7a0003', '05', '已取消', null);
+INSERT INTO `youi_codeitem` VALUES ('40288ab353e434450153e43af0d20001', '40288ab2531113db015311211cf40001', '4', '已取消', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab553cfaceb0153cfc7813c0002', '40288ab553cfaceb0153cfc693e00001', '01', '入驻申请', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab553cfaceb0153cfc7db950003', '40288ab553cfaceb0153cfc693e00001', '02', '装修申请', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab553cfaceb0153cfc82c130004', '40288ab553cfaceb0153cfc693e00001', '03', '合同主体变更', null);
