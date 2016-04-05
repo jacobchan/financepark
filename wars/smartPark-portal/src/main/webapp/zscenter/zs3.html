@@ -5,7 +5,7 @@
 	<title>Document</title>
 	<link href="../styles/base.css" type="text/css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
-	<link rel="stylesheet" type="text/css" href="../styles/awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../styles/page/awesome/css/font-awesome.min.css">
 	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
@@ -196,7 +196,7 @@
 		//拼接政策新闻列表
 		function _parseRecords(record){
 			if(record.length == 0){
-				$(".fl.w895").append("<div><p>暂时还没有任何的政策优惠哦！</p></div>");
+				$(".fl.w895").append("<div><p><h2>暂时还没有任何的政策优惠哦！</h2></p></div>");
 				return ;
 			}
 			for(var i=0;i<record.length;i++){
