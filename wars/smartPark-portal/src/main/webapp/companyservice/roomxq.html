@@ -374,7 +374,11 @@ function GetRequest() {
 			success:function(results){
 				if(results&&results.records){
 					var records=results.records;
-					$('.ml10').append("<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+records[0].commodityImage+"&method=show' height='261' width='385'/>");
+					var imageUrl="../styles/images/index/room.jpg";
+					if(records[0].commodityImage !=null && records[0].commodityImage!=""){
+						   imageUrl=cenUrl+"common/uploadImage.html?repository=/swfupload&path="+records[0].commodityImage+"&method=show";
+					}
+					$('.ml10').append("<img src='"+imageUrl+"' height='261' width='385'/>");
 					$('#commodityName').text(records[0].commodityTitle);
 					$('#commodityPrice').text(records[0].commodityPrice);
 					$('#commodityDescribe').html(records[0].commodityDescribe);
