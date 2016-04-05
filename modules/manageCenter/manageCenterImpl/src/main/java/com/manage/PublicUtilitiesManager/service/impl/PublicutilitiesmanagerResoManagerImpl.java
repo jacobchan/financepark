@@ -447,7 +447,8 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 	@EsbServiceMapping
 	public PagerRecords getPagerPublicCommoditys(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=PurchasingmanagerCommodity.class) Collection<Condition> conditions,//查询条件
-			@OrderCollection Collection<Order> orders,@ServiceParam(name="genreCode") String genreCode)  throws BusException{
+			@OrderCollection Collection<Order> orders,@ServiceParam(name="genreCode") String genreCode,@ServiceParam(name="roomType") String roomType,
+			@ServiceParam(name="roomProjector") String roomProjector,@ServiceParam(name="roomGm") String roomGm)  throws BusException{
 		// 查询属于公共资源的商品：genreCode=0301:会议室 ；genreCode=0302:车辆租赁；genreCode=0303:广告位
 		Collection<Condition> conditionP = new ArrayList<Condition>();
 		conditionP.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS,genreCode));
@@ -461,18 +462,64 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 		PagerRecords pagerRecords = purchasingmanagerCommodityManager.getPagerPurchasingmanagerCommoditys(pager, conditions, orders);
 		@SuppressWarnings("unchecked")
 		List<PurchasingmanagerCommodity> pcList=(List<PurchasingmanagerCommodity>) pagerRecords.getRecords();
-
+		List<PurchasingmanagerCommodity> pcLists=new ArrayList<PurchasingmanagerCommodity> ();
 
 		for(PurchasingmanagerCommodity pc:pcList){
 			if(genreCode.equals("0301")){//会议室
 				extentionAtrManager.setMeetingRoomExtendValue(pc);
+				if(StringUtils.isNotEmpty(roomType) && StringUtils.isNotEmpty(roomProjector) && StringUtils.isNotEmpty(roomGm)){
+					if(pc.getMeetingRoom().getLx().equals(roomType) && pc.getMeetingRoom().getTyy().equals(roomProjector) && pc.getMeetingRoom().getGm().equals(roomGm)){
+						pcLists.add(pc);
+					}
+				}else if(StringUtils.isNotEmpty(roomType) && StringUtils.isNotEmpty(roomProjector)){
+					if(pc.getMeetingRoom().getLx().equals(roomType) && pc.getMeetingRoom().getTyy().equals(roomProjector)){
+						pcLists.add(pc);
+					}
+				}else if(StringUtils.isNotEmpty(roomType) && StringUtils.isNotEmpty(roomGm)){
+					if(pc.getMeetingRoom().getLx().equals(roomType) && pc.getMeetingRoom().getGm().equals(roomGm)){
+						pcLists.add(pc);
+					}
+				}else if(StringUtils.isNotEmpty(roomProjector) && StringUtils.isNotEmpty(roomGm)){
+					if(pc.getMeetingRoom().getTyy().equals(roomProjector) && pc.getMeetingRoom().getGm().equals(roomGm)){
+						pcLists.add(pc);
+					}
+				}else if(StringUtils.isNotEmpty(roomType)){
+					if(pc.getMeetingRoom().getLx().equals(roomType)){
+						pcLists.add(pc);
+					}
+				}else if(StringUtils.isNotEmpty(roomProjector)){
+					if(pc.getMeetingRoom().getTyy().equals(roomProjector)){
+						pcLists.add(pc);
+					}
+				}else if(StringUtils.isNotEmpty(roomGm)){
+					if(pc.getMeetingRoom().getGm().equals(roomGm)){
+						pcLists.add(pc);
+					}
+				}else{
+					pcLists.add(pc);
+				}
+				
+				
 			}else if(genreCode.equals("0302")){//车辆
 				extentionAtrManager.setCarExtendValue(pc);
+				if(StringUtils.isNotEmpty(roomType) && StringUtils.isNotEmpty(roomGm)){
+					if(pc.getCar().getDw().equals(roomType) && pc.getCar().getZw().equals(roomGm)){
+						pcLists.add(pc);
+					}
+				}else if(StringUtils.isNotEmpty(roomType)){//档位
+					if(pc.getCar().getDw().equals(roomType)){
+						pcLists.add(pc);
+					}
+				}else if(StringUtils.isNotEmpty(roomGm)){//车辆乘坐人数
+					if(pc.getCar().getZw().equals(roomGm)){
+						pcLists.add(pc);
+					}
+				}else{
+					pcLists.add(pc);
+				}
 			}
 		}
-
-
-
+		pagerRecords.setRecords(pcLists);
 		return pagerRecords;
 	}
 	
