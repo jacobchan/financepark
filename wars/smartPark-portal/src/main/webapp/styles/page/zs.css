@@ -354,7 +354,9 @@ a.send-psw:hover,a.send-psw.active{background: #e7e7e7;}
 .cic-trip div span{color: #959595;}
 .bg-tanc .tanc-con table.cic-l-t td input[type="text"]{width: 200px;}
 .bg-tanc .tanc-con table.cic-l-t td textarea{width: 100%;resize:none;border:1px solid #ddd;padding: 10px;line-height: 20px;}
-table.cic-l-t .file-bd{}
+.speed-sort li{float: left;margin-right: 20px;border:1px solid #d5d4d2;padding: 0px 20px;line-height: 30px;font-size: 14px;margin-bottom: 20px;cursor: pointer;}
+.speed-sort li.active{background: url(../images/czh/current.png) no-repeat right bottom;border:1px solid #ff6715;color: #ff6715; }
+
 
 
 /**滚动条**/
