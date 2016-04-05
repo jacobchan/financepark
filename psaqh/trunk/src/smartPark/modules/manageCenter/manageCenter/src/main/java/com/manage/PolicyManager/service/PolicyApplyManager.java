@@ -67,7 +67,7 @@ public interface PolicyApplyManager extends BaseManager{
 	public boolean exsitPolicyApply(String propertyName,Object value) throws BusException;
 	  
     /**
-     * 更新政策申请状态
+     * 更新政策流程状态
      * @param policyApplyId，政策申请记录ID
      * @throws BusException
      */
@@ -84,6 +84,14 @@ public interface PolicyApplyManager extends BaseManager{
      * 获取当前登录用户申请的政策    */
 	public List<PolicyApply> getPolicyApplyListByLoginUser(PolicyApply o)throws BusException;   	
 	/**
-     * 获取当前登录用户申请的政策   */  
-        public PolicyApply updatePolicyApplyStatus(String policyApplyId) throws BusException;  	
+     * 修改政策申请状态  */  
+    public PolicyApply updatePolicyApplyStatus(String policyApplyId) throws BusException;  	
+    
+    /**
+     * 取消政策申请，前端调用
+     * @param policyApplyId，政策申请记录ID
+     * @return
+     * @throws BusException
+     */
+    public PolicyApply cancelApply(String policyApplyId) throws BusException ;
 }
