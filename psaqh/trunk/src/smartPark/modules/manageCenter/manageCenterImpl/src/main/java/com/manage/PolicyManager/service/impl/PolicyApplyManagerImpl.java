@@ -295,7 +295,7 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
      * @throws BusException
      */
     @EsbServiceMapping
-	public PolicyApply cancelApply(String policyApplyId) throws BusException {
+	public PolicyApply cancelApply(@ServiceParam(name="policyApplyId") String policyApplyId) throws BusException {
 		 PolicyApply p = policyApplyDao.get(policyApplyId); 
 		 String status = p.getPolicyApplyStatus() ;//得到政策申请状态
 		 if("1".equals(status)){//若当前状态为申请中
