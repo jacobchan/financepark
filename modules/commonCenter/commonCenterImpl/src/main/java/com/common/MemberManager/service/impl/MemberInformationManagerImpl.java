@@ -3,15 +3,17 @@
  */
 package com.common.MemberManager.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Collection;
-
 import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.dataobj.tree.TreeNode;
 import com.gsoft.framework.core.exception.BusException;
@@ -28,6 +30,7 @@ import com.gsoft.framework.security.IUser;
 import com.gsoft.framework.security.IUserAdapter;
 import com.gsoft.framework.security.agt.service.UserLoginService;
 import com.gsoft.framework.util.Assert;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.PasswordUtils;
 import com.gsoft.framework.util.SecurityUtils;
@@ -416,5 +419,41 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		return member;
 		
 	}
+	    
+	/**
+	 * //获取当前用户公司员工的通讯录
+	 * @param userId
+	 * @return
+	 * @throws BusException
+	 */
+		 @EsbServiceMapping
+		public List<MemberInformation> getPhoneNumberlist(@ServiceParam(name="userId",pubProperty="userId") String userId) throws BusException{						
+			MemberInformation m = memberInformationDao.getObjectByUniqueProperty("memberId", userId);
+			String companyId=m.getCompanyId();
+			Collection<Condition> condition = new ArrayList<Condition>();
+			condition.add(ConditionUtils.getCondition("companyId", Condition.EQUALS, companyId));
+			List<MemberInformation> list = memberInformationDao.commonQuery(condition, null);
+			return list;
+		 }
+			
+		 /**
+		  * //通过名字获取当前用户公司员工的通讯录
+		  * @param userId
+		  * @param memberName
+		  * @return
+		  * @throws BusException
+		  */
+		 @EsbServiceMapping
+		 public List<MemberInformation> getPhoneNumberlistByName(
+				    @ServiceParam(name="userId",pubProperty = "userId") String userId,
+					@ServiceParam(name="memberName") String memberName) throws BusException {
+			    MemberInformation m = memberInformationDao.getObjectByUniqueProperty("memberId", userId);
+				String companyId=m.getCompanyId();
+				Collection<Condition> condition = new ArrayList<Condition>();
+				condition.add(ConditionUtils.getCondition("companyId", Condition.EQUALS, companyId));
+				condition.add(ConditionUtils.getCondition("memberName", Condition.LIKE, memberName));
+				List<MemberInformation> list = memberInformationDao.commonQuery(condition, null);
+				return list;
+		 }
 
 }
