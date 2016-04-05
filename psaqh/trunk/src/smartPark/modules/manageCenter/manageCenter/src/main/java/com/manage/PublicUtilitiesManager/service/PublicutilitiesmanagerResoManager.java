@@ -113,4 +113,23 @@ public interface PublicutilitiesmanagerResoManager extends BaseManager{
 	  * @param OrdermanagerUserorder o  订单ID
 	  */
 	 public void updateUserorderStatus(OrdermanagerUserorder o) throws BusException;
+	 
+	 
+	 /**
+	  * 根据商品ID，日期返回资源状态
+	  * @param commodityId
+	  * @param updateTime
+	  * @return
+	  * @throws BusException
+	  */
+	 public List<PublicutilitiesmanagerReso> findDateResoList(String commodityId,String resoDate) throws BusException;
+
+	 /**
+	  * 根据商品ID，月份返回资源状态
+	  * @param commodityId
+	  * @param Month
+	  * @return
+	  * @throws BusException
+	  */
+	 public List<PublicutilitiesmanagerReso> findMonthResoList(String commodityId,String month) throws BusException;
 }
