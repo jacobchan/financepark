@@ -47,7 +47,8 @@
         </div>
         <div class="ri_ul clearfix">
             <div class="ru-title">所属楼层</div>
-            <select id="floor" class="active">
+            <select id="floor">
+             <!-- <select id="floor" class="active"> -->
                 <option>全部</option>
                 <option>1楼</option>
                 <option>2楼</option>
@@ -306,21 +307,28 @@ var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommod
                 var type=$(this).parents(".ri_ul").find("div:eq(0)").text();
                 var selectText=$(this).text();
                 var val=$(this).attr("data-val");
-                if(val=="00"){
-                	roomType="";
-                	roomProjector="";
-                    roomGm="";
-                }else{
-		              if(type=="会议室类型"){
-		              	roomType=selectText;
-		              }
-		              if(type=="投影仪"){
-		              	roomProjector=selectText;
-		              }
-		              if(type=="会议室规模"){
-		              	roomGm=selectText;
-		              }
-                }
+              if(type=="会议室类型"){
+            	  if(val=="00"){
+            		  roomType="";
+            	  }else{
+            		  roomType=selectText;
+            	  }
+              }
+              if(type=="投影仪"){
+            	  if(val=="00"){
+            		  roomProjector="";
+            	  }else{
+            		  roomProjector=selectText;
+            	  }
+              }
+              if(type=="会议室规模"){
+            	  if(val=="00"){
+            		  roomGm="";
+            	  }else{
+            		  roomGm=selectText;
+            	  }
+              	
+              }
                 var pageSize=3;
                 var pageCount=1;
                 var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommoditys.json?genreCode=0301";//0301:会议室

@@ -391,7 +391,10 @@ function GetRequest() {
 						$('#zw').text(records[0].meetingRoom.gm);
 					}
 					if(records[0].meetingRoom.tyy != null){
-						$('#cp').text("投影仪："+records[0].meetingRoom.tyy);
+						if(records[0].meetingRoom.tyy=="有"){
+							$('#cp').text("投影仪");
+						}
+						
 					}
 				}
 			}
