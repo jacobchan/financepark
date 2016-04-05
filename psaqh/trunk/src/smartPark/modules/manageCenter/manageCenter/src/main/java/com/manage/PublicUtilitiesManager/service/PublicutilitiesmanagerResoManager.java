@@ -15,6 +15,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.OrderCollection;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.PublicUtilitiesManager.entity.PublicutilitiesmanagerReso;
 
@@ -48,7 +50,8 @@ public interface PublicutilitiesmanagerResoManager extends BaseManager{
 	
 	public PagerRecords getPagerPublicCommoditys(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
-			Collection<Order> orders,String genreCode) throws BusException;
+			Collection<Order> orders,String genreCode,String roomType,String roomProjector,String roomGm) throws BusException;
+	
 	
 	/**
 	 *	广告室分页方法
