@@ -100,7 +100,7 @@ a{color:#aaa}.inline_b{display:inline-block}.fw{font-weight:600}.prelative{posit
 .hand_ul li:hover{background: #f6f6f6;}
 a.handbtn{display:inline-block;border:1px #FF803B solid;padding:0px 3px;color:#FF803B;background:#fff;font-size:12px;transition: all .4s}
 a.handbtn:hover{background: #FF803B;color: #fff !important;}
-.tips,.tipbox{border:1px #EBEBEB solid;padding:20px 15px;}.tipbox{border-top:none}
+.tips,.tipbox{border:1px #EBEBEB solid;padding:20px 15px;height: 104px;}.tipbox{border-top:none}
 .tips span{padding-right:15px;cursor:pointer}
 .tipbox ul li{ list-style:inside disc}.tipbox a{color:#565656}
 /*activity*/
@@ -404,9 +404,13 @@ width:32px;height:32px;position:absolute;top:50%;right:0;margin-top:-16px;}
 /*
 *******威客服务
 */
+
 .com_shop,.bs_shop,.com_shop{background: url(../images/company/shopcar.png) no-repeat;display: inline-block;width: 20px;height: 20px}
 .com_shop:hover,.bs_shop:hover,.com_shop:hover{background: url(../images/company/shopcar2.png) no-repeat;}
-
+.wk1{background:url(../images/company/wk_img1.jpg) no-repeat}
+.wk2{background:url(../images/company/wk_img2.jpg) no-repeat}
+.wk3{background:url(../images/company/wk_img3.jpg) no-repeat}
+.wk4{background:url(../images/company/wk_img4.jpg) no-repeat}
 .layer_zz{background:rgba(0,0,0,0.5);position:absolute;left:0;right:0;top:0px;height:210px}
 .com_ul li:hover>.layer_zz{display:none}
 .wkc_ul li{width:25%;float:left;display:inline-block;padding-top:180px;text-align:center;position:relative}
@@ -565,7 +569,7 @@ background:url(../images/company/ab_ico.png) no-repeat}
 .btn-red{background:#DD2F29;color:#fff;border-radius:3px;display:inline-block;padding:5px 15px}
 .newer{background:url(../images/zhyq/sprite-food-icons.png) no-repeat;width:42px;height:42px;position:absolute;right:0;top:0;}
 
-.hand_ul .order{position:absolute;background:rgba(0,0,0,0.5);top:0;bottom:0;left:0;right:0}
+.hand_ul .order{position:absolute;background:rgba(0,0,0,0.5);top:0;bottom:0;left:0;right:0;height: }
 .od_tip{display:inline-block;background:#F4F4F4;color:000;padding:4px 10px;border-radius:3px}
 .tx_ul{width:200px;border-radius:7px; overflow:hidden}.tx_ul li{padding:10px 15px;background:#F1C646;color:#fff;border-bottom:1px #E1BC4E solid;}
 .tx_ul li.active{color:#E71B23}
