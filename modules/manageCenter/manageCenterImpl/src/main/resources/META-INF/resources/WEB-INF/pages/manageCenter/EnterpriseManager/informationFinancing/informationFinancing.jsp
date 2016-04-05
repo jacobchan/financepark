@@ -39,7 +39,7 @@
 		action="esb/web/informationFinancingManager/saveInformationFinancing.json">
 		<youi:fieldLayout prefix="record" columns="1" labelWidths="120,120">
 			<youi:fieldHidden property="financingId"  caption="ID"/>
-			<youi:fieldText property="financingSub" caption="投资主体" />
+			<youi:fieldSelect property="financingSub" caption="投资主体" convert="roundFinancing" />
 			<youi:fieldSelect property="financingRe" caption="企业信息"
 				src="esb/web/enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json"
 				code="rzId" show="rzName" />
