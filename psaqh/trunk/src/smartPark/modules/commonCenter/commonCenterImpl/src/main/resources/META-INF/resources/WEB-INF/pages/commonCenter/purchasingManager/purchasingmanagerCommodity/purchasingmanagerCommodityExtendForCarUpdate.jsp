@@ -10,7 +10,7 @@
 			<youi:fieldText property="commodityTitle"  caption="标题" notNull="true"/>
 			<youi:fieldText property="commodityPrice"  caption="标价" notNull="true"/>
 			<youi:fieldSelect property="car.dw" caption="档位" convert="stalls" notNull="true"/>
-			<youi:fieldText property="car.zw"  caption="座位" notNull="true"/>
+			<youi:fieldSelect property="car.zw"  caption="座位" convert="seat" notNull="true"/>
 			<youi:fieldText property="car.chepai"  caption="车牌" notNull="true"/>
 		    <youi:fieldSelect property="genreId" caption="商品类别"  src="esb/web/purchasingmanagerPublicManager/getRecordsByGenreCode.json" parents="genreCode" parentsAlias="genreCode" notNull="true" code="genreId" show="genreName"/>
 			<youi:fieldSelect property="purchasingmanagerMerchant.merchantId" caption="所属商户" src="esb/web/purchasingmanagerMerchantManager/getMerchantsByGenre.json" parents="genreId" parentsAlias="genreId" notNull="true" code="merchantId" show="merchantName"/>

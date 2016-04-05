@@ -106,7 +106,37 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     	return o;
     }
 	
-    
+    /**
+     * 查询商品代码集:roomType：会议室类型 ；roomProjector投影仪；roomGm:会议室规模人数
+     */
+    @EsbServiceMapping
+	public List<Record> getRecordsByExtendValue(@ServiceParam(name="recordType") String recordType) throws BusException{
+    	List<Record> recordList=new ArrayList<Record>();
+    	if(recordType !=null){
+    		Collection<Condition> condition =  new ArrayList<Condition>();
+    		Collection<Order> order = new ArrayList<Order>();
+    		order.add(ConditionUtils.getOrder("itemValue", true));
+    		condition.add(ConditionUtils.getCondition("codemap.code", Condition.EQUALS,recordType));
+    		List<Codeitem> list = codeitemManager.getCodeitems(condition, null);
+    		Record record1 = new Record();
+    		if(recordType.equals("roomType") || recordType.equals("stalls")){
+    			record1.put("itemValue", "00");
+    			record1.put("itemName", "全部");
+    		}else{
+    			record1.put("itemValue", "00");
+    			record1.put("itemName", "不限");
+    		}
+			recordList.add(record1);
+    		for(int i=0;i<list.size();i++){
+    			Record record = new Record();
+    			record.put("itemValue", list.get(i).getItemValue());
+    			record.put("itemName", list.get(i).getItemCaption());
+    			recordList.add(record);
+    		}
+    	}
+    	return recordList;
+    }
+
     /**
      * 公共资源修改页面获取初始数据
      */
@@ -161,6 +191,17 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     			if(list.size()>0){
     				dw=list.get(0).getItemValue();
     				o.getCar().setDw(dw);
+    			}
+    		}
+    		String zw=o.getCar().getZw();
+    		if(zw !=null){//车辆座位
+    			Collection<Condition> condition =  new ArrayList<Condition>();
+    			condition.add(ConditionUtils.getCondition("codemap.code", Condition.EQUALS,"seat"));
+    			condition.add(ConditionUtils.getCondition("itemCaption", Condition.EQUALS,zw));
+    			List<Codeitem> list = codeitemManager.getCodeitems(condition, null);
+    			if(list.size()>0){
+    				zw=list.get(0).getItemValue();
+    				o.getCar().setZw(zw);;
     			}
     		}
     	}else if(genreCode !=null &&genreCode.equals("040101")){//工位
@@ -563,6 +604,16 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 				dw=list.get(0).getItemCaption();
 			}
 		}
+		String zw=car.getZw();//座位名称
+		if(zw !=null){//座位
+			Collection<Condition> condition =  new ArrayList<Condition>();
+			condition.add(ConditionUtils.getCondition("codemap.code", Condition.EQUALS,"seat"));
+			condition.add(ConditionUtils.getCondition("itemValue", Condition.EQUALS,zw));
+			List<Codeitem> list = codeitemManager.getCodeitems(condition, null);
+			if(list.size()>0){
+				zw=list.get(0).getItemCaption();
+			}
+		}
 		
 		String commodityId = o.getCommodityId();
 		boolean isUpdate = StringUtils.isNotEmpty(commodityId);
@@ -593,7 +644,7 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     					pce.setCommodityExtendContent(dw);//保存车辆档位属性
     					dwFlag=false;
     				}else if(car.getZwfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(car.getZw());//保存车辆座位属性
+    					pce.setCommodityExtendContent(zw);//保存车辆座位属性
     					zwFlag=false;
     				}else if(car.getCpfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
     					pce.setCommodityExtendContent(car.getChepai());//保存车辆车牌属性
@@ -627,7 +678,7 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     					pce.setCommodityExtendContent(dw);//保存车辆档位属性
     					dwFlag=false;
     				}else if(car.getZwfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
-    					pce.setCommodityExtendContent(car.getZw());//保存车辆座位属性
+    					pce.setCommodityExtendContent(zw);//保存车辆座位属性
     					zwFlag=false;
     				}else if(car.getCpfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
     					pce.setCommodityExtendContent(car.getChepai());//保存车辆车牌属性
