@@ -103,13 +103,13 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
     /**
      * 保存对象
      */
-    @EsbServiceMapping(pubConditions={@PubCondition(property="createUser",pubProperty="userId")})
+    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",pubProperty="userId")})
     public PropertyservicemanagerBx savePropertyservicemanagerBx(PropertyservicemanagerBx o) throws BusException{
     	String propertyservicemanagerBxId = o.getBxId();
     	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerBxId);
     	PropertyservicemanagerBx savebx = null;
     	//查询当前申请用户
-		String memberId = o.getCreateUser();
+		String memberId = o.getMemberId();
 		MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
     	if(isUpdate){//修改
     		//物业管理员定价生成订单
@@ -173,6 +173,7 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
         	}
     	}else{//新增
    			o.setBxCode(BizCodeUtil.getInstance().getBizCodeDate("WYBX"));
+   			o.setCreateUser(memberId);
    			o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
    			o.setApplyTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
    			o.setBxStatus("00");
@@ -247,11 +248,11 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 	 * @return
 	 * @throws BusException
 	 */
-	@EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId")})
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "memberId", pubProperty = "userId")})
 	public List<PropertyservicemanagerBx> getBxListforpage(PropertyservicemanagerBx o)
 			throws BusException {
 		//获取当前登录用户id
-		String id = o.getCreateUser();
+		String id = o.getMemberId();
 		if(id!=null){
 	    	//根据当前用户获取公司保修的list
 			EnterpriseEmployees e = enterpriseEmployeesDao.getObjectByUniqueProperty("member.memberId", id);
