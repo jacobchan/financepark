@@ -311,7 +311,6 @@ var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommod
                 		
                 			function refreshData(pageIndex,pageSize,carType,zwType){
                 			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'roomType='+carType,'roomGm='+zwType];
-                			alert(params);
                 			$.youi.ajaxUtils.ajax({
                 				url:serviceURL,
                 				jsonp:'data:jsonp',
