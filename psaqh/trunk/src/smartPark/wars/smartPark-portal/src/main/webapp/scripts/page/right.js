@@ -4,16 +4,7 @@ $(function () {
 		$(this).addClass("active");
 		$(".ifn-group ul").eq($(this).index()).removeClass("undis").siblings().addClass("undis");
 	});
-	$(".check-btn label").click(function(){
-		if($(this).children('input[type="checkbox"]').prop("checked")){
-			$(this).parent().next(".ib-btn").removeClass("bg-h");
-			$(this).parent().next(".ib-btn").attr("href","yq2.html?enteringType=01");
-		}else{
-			$(this).parent().next(".ib-btn").addClass("bg-h");
-			$(this).parent().next(".ib-btn").attr("href","javascript:;");
-		}
-
-	});
+	
 	$(".add-sh label").click(function(){
 		if($(this).children('input[name="address"]').prop("checked")){
 			if($(this).index()==1){
