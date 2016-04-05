@@ -100,7 +100,7 @@ a{color:#aaa}.inline_b{display:inline-block}.fw{font-weight:600}.prelative{posit
 .hand_ul li:hover{background: #f6f6f6;}
 a.handbtn{display:inline-block;border:1px #FF803B solid;padding:0px 3px;color:#FF803B;background:#fff;font-size:12px;transition: all .4s}
 a.handbtn:hover{background: #FF803B;color: #fff !important;}
-.tips,.tipbox{border:1px #EBEBEB solid;padding:20px 15px;height: 104px;}.tipbox{border-top:none}
+.tips,.tipbox{border:1px #EBEBEB solid;padding:20px 15px;}.tipbox{border-top:none;min-height: 136px;}
 .tips span{padding-right:15px;cursor:pointer}
 .tipbox ul li{ list-style:inside disc}.tipbox a{color:#565656}
 /*activity*/
