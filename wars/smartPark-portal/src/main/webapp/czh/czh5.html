@@ -12,7 +12,7 @@
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 	<script type="text/javascript" src="../scripts/page/url.js"></script>
-	
+	<script type="text/javascript" src="../scripts/page/right.js"></script>
 </head>
 <body style="background-color:#f9f9f9;">
 	<!--***top start****************************************-->
@@ -48,8 +48,8 @@
 					<td>办公申请</td>
 				</tr>
 				<tr>
-					<td><a href="javascript:;" class="ib-btn">立即申请</a></td>
-					<td><a href="javascript:;" class="ib-btn">立即申请</a></td>
+					<td><a href="javascript:;" class="ib-btn open-m1">立即申请</a></td>
+					<td><a href="javascript:;" class="ib-btn open-m2">立即申请</a></td>
 					<td><a href="javascript:;" class="ib-btn">立即申请</a></td>
 				</tr>
 			</table>
@@ -111,7 +111,60 @@
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
 	<!--***弹窗 start****************************************-->
-	<div class="bg-tanc">
+	<div class="bg-tanc m1">
+		<div class="tanc-con">
+			<a href="javascript:;" class="tc-close"></a>
+			<h3 class="mb10"><b>创业加速计划</b></h3>
+			<table class="line-table cic-l-t">
+				<colgroup>
+					<col width="110"></col>
+					<col></col>
+				</colgroup>
+				<tr>
+					<td>项目类型 <em style="color:#de0101">*</em></td>
+					<td>
+						<div class="tct-select fl mr20" style="width:300px;">
+							<div class="ic-select" style="background: transparent url(../styles/images/yqfw/down.png) no-repeat scroll right center;">
+								<p class="c-b1">请选择订单项目</p>
+							</div>
+							<ul style="display: none;" class="select-nav">
+								<li>园区地址1</li>
+								<li>园区地址2</li>
+								<li>园区地址3</li>
+							</ul>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>项目简介<em style="color:#de0101">*</em></td>
+					<td><textarea style="height:140px;"></textarea></td>
+				</tr>
+				<tr>
+					<td>是否融资<em style="color:#de0101">*</em></td>
+					<td><div class="sex-group mt10 mb10"><span class="active">是</span><span class="">否</span></div></td>
+				</tr>
+				<tr>
+					<td valign="top">请选择需要<em style="color:#de0101">*</em><br/>的导师类型</td>
+					<td>
+						<ul class="speed-sort">
+							<li class="active">技术指导</li>
+							<li>股权配置</li>
+							<li>风险控制</li>
+							<li>企业管理</li>
+						</ul>
+						<div class="f12">
+							<input type="text" placeholder="您还可以输入自定义的导师类型" style="width:215px;">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><a href="" class="ib-btn">提交预约</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="bg-tanc m2">
 		<div class="tanc-con">
 			<a href="javascript:;" class="tc-close"></a>
 			<h3 class="mb10"><b>申请融资</b></h3>
@@ -181,15 +234,22 @@
 				$(this).addClass("active");
 				$(".ifn-group ul").eq($(this).index()).removeClass("undis").siblings().addClass("undis");
 			});
-			$(".ib-btn").click(function(){
+			$(".ib-btn.open-m1").click(function(){
+				$(".bg-tanc.m1").show();
+				
+			});
+			$(".ib-btn.open-m2").click(function(){
 				$('body').css("overflow","hidden");
-				$(".bg-tanc").show();
+				$(".bg-tanc.m2").show();
 				
 			});
 			$(".tc-close").click(function(){
 				$('body').css("overflow","auto");
 				$(".bg-tanc").hide();
 			});
+			$(document).on("click",".speed-sort li",function(){
+				$(this).addClass("active").siblings().removeClass("active");
+			})
 		})
 		
 	</script>
