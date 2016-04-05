@@ -5,7 +5,7 @@
 	<title>园区服务</title>
 	<link rel="stylesheet" type="text/css" href="../styles/base.css">
 	<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
-	<link rel="stylesheet" type="text/css" href="../styles/awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../styles/page/awesome/css/font-awesome.min.css">
 	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
@@ -30,7 +30,7 @@
 				</colgroup>
 				<tr>
 					<td>
-						<img id="logo" src="../styles/images/yqfw/comp-l1.png" width="218" height="252" border="0" />
+						<div class="indu-logo"><img id="logo" src="../styles/images/yqfw/comp-l1.png" border="0" /></div>
 					</td>
 					<td>
 						<h3 id="rzName" class="lh30 f24 mb10"></h3>
@@ -123,7 +123,7 @@
 					
 				</div>
 			</div>
-			<div class="w350 fr f12 lh26" style="color:#333;">
+			<div class="w350 fr f12 lh26 pr" style="color:#333;">
 				<div class="photo-radius">
 					<img id="legalImage" src="" border="0" />
 				</div>
@@ -136,14 +136,18 @@
 				<p id="rzAddress">地址：</p>
 				<p id="rzUrl">官网：</p>
 				<p>地图</p>
-				<div id="map" style="height:220px; border:1px solid #ff6715">
+				<div id="map" style="height:153px; border:1px solid #ff6715">
 					
 				</div>
 				<div id="r-result"></div>
 				<p class="mt20">
-					<a href="" class="hhf-submit" style="line-height:28px;">产业对接</a>
+					<a href="javascript:;" class="hhf-submit open-d" style="line-height:28px;">产业对接</a>
 					<a href="" class="hhf-submit" style="line-height:28px;">收藏公司</a>
 				</p>
+				<div class="dialog-con">
+					<textarea placeholder="请在此处输入你想对该公司负责人说的话..."></textarea>
+					<p class="tc"><a href="">回复</a></p>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -212,6 +216,9 @@
 	    $(".lt-page .lp-left").click(function(){
 	        lb_two_left();
 	    });
+	    $(".open-d").click(function(){
+	    	$(".dialog-con").toggle();
+	    })
 	    function GetRequest() {
 	 	   var url = location.search; //获取url中"?"符后的字串
 	 	   var theRequest = new Object();

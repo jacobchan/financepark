@@ -547,13 +547,13 @@ a.yc-gz:hover,a.yc-gz.active{background: #ff6715;color: #fff;border:1px solid #f
 
 /**园区服务-媒体报道**/
 .w795{width: 795px;margin-top: 30px;}
-.w350{width: 350px;background-color: #f8f8f8;border-radius: 5px;border:1px solid #bebebe;margin: 30px 0px;padding:30px;}
+.w350{width: 350px;background-color: #f8f8f8;border-radius: 5px;border:1px solid #bebebe;margin: 30px 0px;padding:30px 34px;}
 .yqfw-com-intro{background-color: #f8f8f8;position: relative;padding: 10px 40px 10px 18px;margin-bottom: 10px;}
 .yqfw-com-intro h3{color: #ff6715;line-height: 36px;font-size: 16px;font-weight: bold;}
 .yqfw-com-intro p{font-size: 12px;color: #333;line-height: 24px;height: 96px;overflow: hidden;}
 .yqfw-com-intro .yci-bottom{position: absolute;right: 5px;width: 30px;text-align: center;font-size: 18px;height: 24px;line-height: 24px;bottom: 10px;background-color: #dedede;cursor: pointer;color: #a6a6a6;}
 .yqfw-com-intro .yci-bottom:hover{background: #ff6715;color: #fff;}
-.photo-radius{width: 165px;height: 165px;overflow: hidden;border-radius: 50%;margin:0px auto 30px;}
+.photo-radius{width: 160px;height: 160px;overflow: hidden;border-radius: 50%;margin:0px auto 30px;}
 .photo-radius img{width: 100%;}
 a.hhf-submit{display: inline-block;padding: 0px 25px;margin-left: 31px;}
 .yqfw-intro-nav{width: 100%;}
@@ -594,6 +594,13 @@ a.c-333:hover{color: #ff6715;}
 .yf-input:hover{background: #ff5900;}
 .yin-group .em-box{display: inline-block;width: 20px;height: 20px;text-align: center;line-height: 20px;background: #ff6715;color: #fff;border-radius: 20px;font-size: 14px;}
 
+.indu-logo{background: url(../images/yqfw/logo-bg.png)no-repeat; width: 218px;height: 252px;text-align: center;display: table-cell;vertical-align: middle;}
+.indu-logo img{max-width: 160px;height: 160px;}
+
+.dialog-con{background: url(../images/yqfw/cyl-bg.png)no-repeat;padding: 10px;width: 280px;height: 173px;position: absolute;bottom: 63px;display: none;}
+.dialog-con textarea{border:0px;height: 115px;width: 100%;resize:none;}
+.dialog-con a{color: #333;font-size: 14px;line-height: 24px;}
+.dialog-con a:hover{color: #ff6715;text-decoration: underline;}
 
 /**创智汇 文档详情**/
 .text-header span{padding-right: 20px;margin-right: 20px;line-height: 30px;border-right:1px solid #ecebeb;display: inline-block;}
