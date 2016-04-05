@@ -90,35 +90,40 @@
             <div class="server pr" >
                 <table class="layout_table">
                     <tr>
-                        <td>
+                        <td onclick="openURL(5);">
                             <div class="item rz_icon1">
-                                <a href="./yqfw/yq5.html" class="f20">入驻申请</a>
+                                <!-- <a href="./yqfw/yq5.html" class="f20">入驻申请</a> -->
+                                <a href="javascript:;" class="f20">入驻申请</a>
                                 <p>是园区业主（住户）在入住园区前必须办理的手续</p>
                             </div>
                         </td>
-                        <td>
+                        <td onclick="openURL(5);">
                             <div class="item rz_icon2">
-                                <a href="./yqfw/yq5.html" class="f20">装修申请</a>
+                                <!-- <a href="./yqfw/yq5.html" class="f20">装修申请</a> -->
+                                <a href="javascript:;" class="f20">装修申请</a>
                                 <p>园区业主对物业进行装饰、装修前，请预约"装修申请"业务</p>
                             </div>
                         </td>
-                        <td>
+                        <td onclick="openURL(1);">
                             <div class="item rz_icon3">
-                                <a href="./yqfw/yq1.html" class="f20">合同主体变更</a>
+                                <!-- <a href="./yqfw/yq1.html" class="f20">合同主体变更</a> -->
+                                 <a href="javascript:;" class="f20">合同主体变更</a>
                                 <p>业主因业务转让、转租或公司名称变更，而申请变更所拥有或使用的物业...</p>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td onclick="openURL(2);">
                             <div class="item rz_icon4">
-                                <a href="./yqfw/yq2.html" class="f20">客户续约</a>
+                               <!--  <a href="./yqfw/yq2.html" class="f20">客户续约</a> -->
+                                <a href="javascript:;" class="f20">客户续约</a>
                                 <p>园区企业在合同期满前一个月可办理续租手续</p>
                             </div>
                         </td>
-                        <td>
+                        <td onclick="openURL(2);">
                             <div class="item rz_icon5">
-                                <a href="./yqfw/yq2.html" class="f20">客户退租</a>
+                                <!-- <a href="./yqfw/yq2.html" class="f20">客户退租</a> -->
+                                <a href="javascript:;" class="f20">客户退租</a>
                                 <p>园区企业提出退租要求，由租售部责任销售员负责协助用户办理退租手续</p>
                             </div>
                         </td>
@@ -748,7 +753,7 @@
 							}
 						}
 					});
-			   }else if(url=='4'||url=='9'){
+			   }else if(url=='4'||url=='9'||url=='5'||url=='1'||url=='2'){
 				   window.location="yqfw/yq"+url+".html";
 			   }else{
 				   $(".f24.fl.c-333").text("敬请期待!");
