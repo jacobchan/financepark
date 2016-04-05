@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>会议室预定</title>
+<link href="../styles/page/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+<link href="../styles/base.css" type="text/css" rel="stylesheet">
+<link href="../styles/page/page.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+<div id="youi_page_header" class="youi-page-header clearfix"></div>
+<!--***top end****************************************-->
+<!--content-->
+<div class="w1200 pt20">
+	<ul class="linknav clearfix">
+    	<li><a href="#">首页</a></li>
+        <li><a href="#">企业服务</a></li>
+        <li class="active"><a href="#">公共资源</a></li>
+    </ul>
+    <div class="resbox clearfix">
+        <ul class="res_ul clearfix fr">
+            <li><a href="carLease.html">车辆租凭</a></li>
+            <li class="active"><a href="carVip.html">停车位缴费</a></li>
+            <li><a href="advert.html">广告资源预定</a></li>
+            <li><a href="room.html">会议室预定</a></li>
+        </ul>
+    </div>
+    <!--停车位缴费-->
+    <div class="res_item mb40">
+        <div><img src="../styles/images/company/head-top.jpg"/></div>
+        <div class="clearfix mt30">
+            <div class="res_left p20">
+                <table class="setting-table">
+                    <colgroup>
+                        <col width="80">
+                        <col>
+                        <col width="120">
+                        <col>
+                    </colgroup>
+                    <tbody><tr id="">
+                        <td align="center">企业名称</td>
+                        <td><input id="user" type="text"></td>
+                        <td align="center">联系人</td>
+                        <td><input id="user" type="text"></td>
+                    </tr>
+                    <tr>
+                        <td align="center">公司楼栋</td>
+                        <td><input id="iphone" type="text"></td>
+                        <td align="center">联系方式</td>
+                        <td>
+                            <input type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">开始时间</td>
+                        <td colspan="3">
+                            <input class="laydate-icon fl" type="text"  placeholder="请选择日期" style="width:180px;" id="startTime">
+                            <div class="fl ml10 select-time pr">
+                                <input placeholder="请选择时间" type="text"  style="width:180px;" >
+                                 <div style="top:30px;" class="time-nav">
+                                    <ul>
+                                        <li>08:00</li>
+                                        <li>09:00</li>
+                                        <li>10:00</li>
+                                        <li>11:00</li>
+                                        <li>12:00</li>
+                                        <li>13:00</li>
+                                        <li>14:00</li>
+                                        <li>15:00</li>
+                                        <li>16:00</li>
+                                        <li>17:00</li>
+                                        <li>18:00</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">结束时间</td>
+                        <td colspan="3">
+                            <input class="laydate-icon fl" type="text"  placeholder="请选择日期" style="width:180px;" id="endTime">
+                            <div class="fl ml10 select-time pr">
+                                <input placeholder="请选择时间" type="text" style="width:180px;">
+                                 <div style="top:30px;" class="time-nav">
+                                    <ul>
+                                        <li>08:00</li>
+                                        <li>09:00</li>
+                                        <li>10:00</li>
+                                        <li>11:00</li>
+                                        <li>12:00</li>
+                                        <li>13:00</li>
+                                        <li>14:00</li>
+                                        <li>15:00</li>
+                                        <li>16:00</li>
+                                        <li>17:00</li>
+                                        <li>18:00</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" valign="top">车位数量</td>
+                        <td colspan="3"><input type="text" style="width:120px;"><p class="f12 cc mt15">费用说明：25元／小时</p></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input value="在线预订" class="btn-cheng" type="submit" style="width:120px;height:40px;"></td>
+                    </tr>
+                </tbody></table> 
+            </div>
+            <div class="res_right">
+                <div id="youi_page_right" class="youi-page-right clearfix"></div>
+            </div> 
+        </div>
+        
+    </div><!--res_item  end-->
+    <!--停车位缴费-->
+
+</div>
+<!--***bottom start****************************************-->
+<div id="youi_page_footer" class="youi-page-footer"></div>
+<!--***bottom end****************************************-->
+
+
+<!--**浮窗 star**-->
+
+
+<!--**浮窗 end**-->
+
+<!--******************  code end  ****************************-->
+
+<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+<script type="text/javascript" src="../scripts/page/newscom.js"></script>
+<script type="text/javascript" src="../scripts/page/kefu.js"></script>
+<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+<script type="text/javascript" src="../scripts/page/url.js"></script>
+<script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
+<script type="text/javascript" src="../scripts/page/jquery.page.js"></script>
+
+
+    <script type="text/javascript">
+        $(function(){
+            $(document).on("click",".ru-options li" ,function(){
+                $(this).addClass("active").siblings().removeClass("active");
+            });
+            $(".ru-more").click(function(){
+                $(this).find("a").toggleClass("active");
+                $(this).find("i").toggleClass("fa-angle-down fa-angle-up")
+                $(this).prev().toggleClass("hauto");
+            });
+            //选时间
+            $(".select-time input[type='text']").on("click",function(e){
+                e.stopPropagation();
+                $(this).next(".time-nav").toggle();               
+            });
+            $(".time-nav").on("click","li",function(){
+                $(this).addClass("selected").siblings().removeClass("selected");
+                var selecttext=$(this).text();
+                var val=$(this).attr("data-val");
+                $(this).parents(".time-nav").prev().val(selecttext).attr("data-val",val); 
+                $(this).parents(".time-nav").hide();
+
+            }); 
+            var start = {
+                elem: '#startTime',
+                min: laydate.now(), //设定最小日期为当前日期
+                max: '2099-06-16 23:59:59', //最大日期
+                istoday: false,
+                choose: function(datas){
+                     end.min = datas; //开始日选好后，重置结束日的最小日期
+                     end.start = datas //将结束日的初始值设定为开始日
+                }
+            };
+            var end = {
+                elem: '#endTime',
+                min: laydate.now(),
+                max: '2099-06-16 23:59:59',
+                istoday: false,
+                choose: function(datas){
+                    start.max = datas; //结束日选好后，重置开始日的最大日期
+                }
+            };
+            laydate(start);
+            laydate(end);
+        })
+    </script>
+</body>
+</html>
