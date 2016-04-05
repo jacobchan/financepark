@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>酒店订单提交</title>
 	<link href="styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 	<link href="styles/base.css" type="text/css" rel="stylesheet">
 	<link href="styles/page/zs.css" type="text/css" rel="stylesheet">
@@ -351,12 +351,13 @@
 	//订单提交
 	function submitBook(){
 		if(!isLogin){alert("请先登录");return;}
+		$(".font").remove();
 		var params;
 		var guest = "";
 		$(".customers input:text").each(function(index){
 			//校验入住人
 			if(this.value==null||this.value==""){
-				$(this).after("<span><font color='#FF0000'>*入住人不能为空</font></span>");
+				$(this).after("<font class='font' color='#FF0000'>*入住人不能为空</font>");
 				return ;
 			}
 			guest += this.value + ",";
@@ -364,11 +365,11 @@
 		var tmp = guest.substring(0, guest.length-1);
 		if($("#mobile").val()!=null&&$("#mobile").val()!=""){
 			if(!isMobil($("#mobile").val())){
-				$("#mobile").after("<font color='#FF0000'>*请输入正确的手机号码</font>");
+				$("#mobile").after("<font class='font' color='#FF0000'>*请输入正确的手机号码</font>");
 				return ;
 			}
 		}else{
-			$("#mobile").after("<font color='#FF0000'>*手机号码不能为空</font>");
+			$("#mobile").after("<font class='font' color='#FF0000'>*手机号码不能为空</font>");
 			return ;
 		}
 		if($("#creditTable").length>0){
