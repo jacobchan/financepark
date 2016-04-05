@@ -42,7 +42,7 @@
                     <li>创智中心4号楼</li>
                     <li>创智中心1号楼</li>
                 </ul>
-                <div class="ru-more"><a href="javascript:;" class="span_bold">更多 <i class="fa fa-chevron-down"></i></a></div>
+                <div class="ru-more"><a href="javascript:;" class="span_bold">更多 <i class="fa fa-angle-down f18"></i></a></div>
             </div>
         </div>
         <div class="ri_ul clearfix">
@@ -80,7 +80,7 @@
                     <li>30-60人</li>
                     <li>50人以上</li>
                 </ul>
-                <div class="ru-more"><a href="javascript:;" class="span_bold">更多 <i class="fa fa-chevron-down"></i></a></div>
+                <div class="ru-more"><a href="javascript:;" class="span_bold">更多 <i class="fa fa-angle-down f18"></i></a></div>
             </div>
         </div>
         <div class="mt30 clearfix">
@@ -275,6 +275,8 @@ var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommod
                 $(this).addClass("active").siblings().removeClass("active");
             });
             $(".ru-more").click(function(){
+                $(this).find("a").toggleClass("active");
+                $(this).find("i").toggleClass("fa-angle-down fa-angle-up")
                 $(this).prev().toggleClass("hauto");
             })
         })
