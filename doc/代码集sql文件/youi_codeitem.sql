@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50538
 File Encoding         : 65001
 
-Date: 2016-04-05 10:23:41
+Date: 2016-04-05 16:40:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -127,6 +127,9 @@ INSERT INTO `youi_codeitem` VALUES ('40288ab2531113db01531122be800003', '40288ab
 INSERT INTO `youi_codeitem` VALUES ('40288ab2531113db01531122ec4c0004', '40288ab2531113db015311211cf40001', '3', '申请失败', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab2533a65bb01533a6de7480001', '40288acd52f2342b0152f2369e7a0003', '05', '已取消', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab353e434450153e43af0d20001', '40288ab2531113db015311211cf40001', '4', '已取消', null);
+INSERT INTO `youi_codeitem` VALUES ('40288ab353e461150153e592d3b90009', '40288ab353e461150153e5929da60008', '01', '5座以下', null);
+INSERT INTO `youi_codeitem` VALUES ('40288ab353e461150153e592f48f000a', '40288ab353e461150153e5929da60008', '02', '5-9座', null);
+INSERT INTO `youi_codeitem` VALUES ('40288ab353e461150153e5934c62000b', '40288ab353e461150153e5929da60008', '03', '9座以上', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab553cfaceb0153cfc7813c0002', '40288ab553cfaceb0153cfc693e00001', '01', '入驻申请', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab553cfaceb0153cfc7db950003', '40288ab553cfaceb0153cfc693e00001', '02', '装修申请', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab553cfaceb0153cfc82c130004', '40288ab553cfaceb0153cfc693e00001', '03', '合同主体变更', null);

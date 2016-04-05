@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : chuangyeyuan
-Source Server Version : 50629
-Source Host           : 192.168.10.58 :3306
+Source Server         : localhost
+Source Server Version : 50538
+Source Host           : localhost:3306
 Source Database       : youi2
 
 Target Server Type    : MYSQL
-Target Server Version : 50629
+Target Server Version : 50538
 File Encoding         : 65001
 
-Date: 2016-04-01 11:10:42
+Date: 2016-04-05 16:39:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -59,6 +59,7 @@ INSERT INTO `youi_codemap` VALUES ('40288aaf52fca91d0152fcae28580006', 'saleStat
 INSERT INTO `youi_codemap` VALUES ('40288aaf52fca91d0152fcaf96140009', 'policyStatus ', '政策新闻发布状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab252f905180152f908e1d30001', 'roomstatus', '房间使用状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab2531113db015311211cf40001', 'policyApplyStatus', '政策申请状态', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288ab353e461150153e5929da60008', 'seat', '座位', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab553cfaceb0153cfc693e00001', 'enteringType', '入驻申请类型', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288abc531c24bb01531c2a418c0001', 'resoStatus', '资源状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288acb53314dd40153318d8a160009', 'oc_status', '一卡通预约状态', '1', null);
