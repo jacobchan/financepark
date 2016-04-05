@@ -54,8 +54,7 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 	@Autowired
 	private BbmRoomManager bbmRoomManager;
 	@Autowired
-	private RoleManager roleManager;
-	
+	private RoleManager roleManager;	
 	@Autowired
 	private MemberInformationManager memberInformationManager;
 	
@@ -301,4 +300,19 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
         }
         return new String(chs);
     }
+    /**
+	  * //获取当前用户公司名字
+	  * @param userId
+	 
+	  * @return
+	  * @throws BusException
+	  */
+	 @EsbServiceMapping
+	 public EnterbusinessmanagerRz getCompanyIdName(
+			    @ServiceParam(name="userId",pubProperty = "userId") String userId) throws BusException {
+		    MemberInformation m = memberInformationManager.getMemberInformation(userId);
+			String companyId=m.getCompanyId();
+			EnterbusinessmanagerRz e=enterbusinessmanagerRzDao.get(companyId);
+			return e;
+	 }
 }
