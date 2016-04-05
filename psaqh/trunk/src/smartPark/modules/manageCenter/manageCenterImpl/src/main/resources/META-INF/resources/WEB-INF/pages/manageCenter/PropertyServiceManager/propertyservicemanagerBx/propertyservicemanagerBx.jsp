@@ -26,17 +26,18 @@
 					<youi:button name="pay" caption="支付订单" icon="edit" active="1"/>
 					<youi:button name="redeal" caption="重修" icon="edit" active="1"/>
 					
-				<youi:gridCol property="createUser"  caption="报修人" width="7%" renderer="renderer_memberId"/>	
+				<youi:gridCol property="member.memberName"  caption="报修人" width="7%"/>
+				<youi:gridCol property="member.memberPhoneNumber"  caption="报修联系方式" width="7%"/>
 				<youi:gridCol property="bxCode"  caption="报修单号" width="10%"/>
-				<youi:gridCol property="bxComp"  caption="企业名称" width="9%"/>
-				<youi:gridCol property="bxAddress"  caption="维修地址" width="9%"/>
-				<youi:gridCol property="bxStatus"  caption="报修状态" convert="bx_status" width="9%"/>
-				<youi:gridCol property="bxWay"  caption="报修方式" width="7%" convert="bx_way"/>
-				<youi:gridCol property="bxType"  caption="报修类型" width="7%" convert="bx_type"/>
-				<youi:gridCol property="bxProject"  caption="报修项目" width="7%" convert="bx_project"/>
+				<youi:gridCol property="bxComp"  caption="企业名称" width="10%"/>
+				<youi:gridCol property="bxAddress"  caption="维修地址" width="10%"/>
+				<youi:gridCol property="bxStatus"  caption="报修状态" convert="bx_status" width="10%"/>
+				<%-- <youi:gridCol property="bxWay"  caption="报修方式" width="7%" convert="bx_way"/> --%>
+				<youi:gridCol property="bxType"  caption="报修类型" width="8%" convert="bx_type"/>
+				<%-- <youi:gridCol property="bxProject"  caption="报修项目" width="7%" convert="bx_project"/> --%>
 				<youi:gridCol property="bxRemark"  caption="描述" width="20%"/>
-				<youi:gridCol property="bxAmount"  caption="维修总价" 	width="8%"/>
-				<youi:gridCol property="bxFujian"  caption="附件" width="7%"/>
+				<youi:gridCol property="bxAmount"  caption="维修总价" 	width="9%"/>
+				<youi:gridCol property="bxFujian"  caption="附件" width="8%"/>
 			
 				<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 					<youi:button name="edit" caption="修改"/>
@@ -66,7 +67,7 @@
 		<youi:fieldLayout prefix="record" labelWidths="120,120">
 			<youi:fieldHidden property="bxId" caption="ID"/>
 			<%-- <youi:fieldText property="bxComp"  caption="企业名称"/> --%>
-			<youi:fieldSelect property="createUser"  caption="会员姓名"
+			<youi:fieldSelect property="memberId"  caption="会员姓名"
 				src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
 			<youi:fieldLabel property="bxComp"  caption="企业名称" />
 			<youi:fieldLabel property="bxAddress"  caption="维修地址"/>
@@ -143,11 +144,11 @@
 		</youi:func>  --%>
 		
 		<!-- 获取用户名称 -->
-		<youi:func name="renderer_memberId" params="col,record">
+	<%-- 	<youi:func name="renderer_memberId" params="col,record">
  			var memberName = ""; 
 			$.youi.ajaxUtil.ajax({
 					url:'esb/web/memberInformationManager/getMemberInformation.json',
-					data:'memberId='+record.createUser,
+					data:'memberId='+record.memberId,
 					async: false, 
 					success:function(result){
 						if(result.record!=""&&result.record!=null){
@@ -156,11 +157,11 @@
 					}
 				});
 			return memberName;
-		</youi:func>
+		</youi:func> --%>
 		
 		<!-- 会员发生变化时，对应的企业名称也发生变化 -->
-		<youi:func name = "record_createUser_change">
-      		var memberId = $('#P_'+pageId+'_record_createUser').fieldValue();//获取当前选中会员的id
+		<youi:func name = "record_memberId_change">
+      		var memberId = $('#P_'+pageId+'_record_memberId').fieldValue();//获取当前选中会员的id
 			$.youi.ajaxUtil.ajax({
 				url:'/esb/web/policyApplyManager/findEnterpriseByMemberId.json',
 				data:{memberId:memberId},

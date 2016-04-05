@@ -92,12 +92,21 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
     public PropertyservicemanagerBx getPropertyservicemanagerBx(@ServiceParam(name="bxId") String id)  throws BusException{
     	return propertyservicemanagerBxDao.get(id);
     }
-	
+    
+    @SuppressWarnings("unchecked")
 	@EsbServiceMapping
 	public PagerRecords getPagerPropertyservicemanagerBxs(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=PropertyservicemanagerBx.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
-		PagerRecords pagerRecords = propertyservicemanagerBxDao.findByPager(pager, conditions, orders);
+		PagerRecords pagerRecords = propertyservicemanagerBxDao.findByPager(pager, conditions, orders);	
+		List<PropertyservicemanagerBx> bxlist = pagerRecords.getRecords();
+		for(PropertyservicemanagerBx bx : bxlist){
+			if(StringUtils.isNotEmpty(bx.getMemberId())){
+				String memberId = bx.getMemberId();
+				MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
+				bx.setMember(memberInformation);
+			}
+		}
 		return pagerRecords;
 	}
     /**
