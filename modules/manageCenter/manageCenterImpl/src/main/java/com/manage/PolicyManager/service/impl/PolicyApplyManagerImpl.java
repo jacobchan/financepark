@@ -27,6 +27,7 @@ import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.utils.BizCodeUtil;
 import com.gsoft.utils.HttpSenderMsg;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
@@ -122,6 +123,7 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
         		if(nmIssuetype != null){
         			String nmIssuetypeId = nmIssuetype.getIssueTypeId() ;//得到政策类型的ID
         			NmIssueflow nmIssueflow = nmIssueflowManager.getStartFlow(nmIssuetypeId) ;//通过政策类型ID得到初始流程
+        			o.setApplyCode(BizCodeUtil.getInstance().getBizCodeDate("ZCSQ"));
         			o.setNmIssueflow(nmIssueflow);
         			o.setMember(member);
         			o.setPolicyApplyStatus("1");//1为申请中
@@ -140,7 +142,7 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
     }
     
     /**
-     * 更新新政策申请状态
+     * 更新新政策流程状态
      * @param policyApplyId，政策申请记录ID
      * @throws BusException
      */
@@ -265,7 +267,7 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
        	}
     
      /**
-         * 修改政策流程状态
+         * 修改政策申请状态
          * @return
          * @throws BusException
          */
@@ -282,6 +284,25 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
 	    }else{
 	    	throw new BusException("当前状态已经为拒绝申请！") ;
 	    }
-    }				
+    }
+    
+	 /**
+     * 取消政策申请，前端调用
+     * @param policyApplyId，政策申请记录ID
+     * @return
+     * @throws BusException
+     */
+    @EsbServiceMapping
+	public PolicyApply cancelApply(String policyApplyId) throws BusException {
+		 PolicyApply p = policyApplyDao.get(policyApplyId); 
+		 String status = p.getPolicyApplyStatus() ;//得到政策申请状态
+		 if("1".equals(status)){//若当前状态为申请中
+		    	p.setPolicyApplyStatus("4");//4为已取消，相当于前端取消申请
+		    	p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		    	return policyApplyDao.save(p);
+		 }else{
+		    	throw new BusException("当前状态无法取消申请！") ;
+		 }
+	}				
 }
 
