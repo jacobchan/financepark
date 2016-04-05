@@ -15,6 +15,7 @@
 		<youi:button name="refuse" caption="拒绝申请" icon="edit" active="1"/>
 		<youi:button name="deal" caption="处理任务" icon="edit" active="1"/>
 		
+		<youi:gridCol property="applyCode"  caption="政策申请单号" width="190" align="center"/>
 		<youi:gridCol property="policyApplyContactPeople"  caption="联系人" width="100" align="center"/>
 		<youi:gridCol property="member.memberName"  caption="会员姓名" width="100" align="center"/>
 		<youi:gridCol property="policyApplyConpanyName"  caption="企业名称" width="150" align="center"/>
@@ -31,8 +32,8 @@
 	<!-- form--政策申请记录编辑 -->
 	<youi:form dialog="true" caption="-政策申请记录" id="form_policyApply" action="esb/web/policyApplyManager/savePolicyApply.json">
 		<youi:fieldLayout prefix="record" labelWidths="120,120">
-			<youi:fieldHidden property="policyApplyId"  caption="政策申请记录ID"/>
 			<youi:fieldHidden property="policyApplyStatus"  caption="申请状态"/>
+			<youi:fieldHidden property="applyCode"  caption="政策申请单号"/>
 			<youi:fieldHidden property="nmIssueflow.issueFlowId"  caption="流程状态"/>
 			<youi:fieldText property="policyApplyContactPeople"  caption="联系人" notNull="true"/>
 			<youi:fieldSelect property="member.memberId"  caption="会员姓名" 
