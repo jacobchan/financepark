@@ -495,7 +495,7 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 			genreId = purchasingmanagerGenreList.get(0).getGenreId();
 		}
 		// 查询公共资源下包含的商品
-		conditions.add(ConditionUtils.getCondition("genreId",Condition.EQUALS,genreId));
+		conditions.add(ConditionUtils.getCondition("genreId",Condition.BETWEEN,genreId));
 		//String pageIndex = org.apache.commons.lang.StringUtils.defaultIfEmpty(page, "1");
 		pager.setPageIndex(Integer.valueOf(indexPage));
 		pager.setPageSize(3);
@@ -555,4 +555,39 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 		}
 		return recordList;
 	}
+	
+	/**
+	  * 根据商品ID，日期返回资源状态
+	  * @param commodityId
+	  * @param updateTime
+	  * @return
+	  * @throws BusException
+	  */
+	@EsbServiceMapping
+	 public List<PublicutilitiesmanagerReso> findDateResoList(@ServiceParam(name="commodityId") String commodityId,@ServiceParam(name="resoDate") String resoDate ) throws BusException{
+		 List<PublicutilitiesmanagerReso> resoList=publicutilitiesmanagerResoDao.getList(new String[] {"resoDate","commodityId.commodityId"}, new  String[] {resoDate,commodityId});
+		 return resoList;
+	 }
+	
+	/**
+	  * 根据商品ID，日期返回资源状态
+	  * @param commodityId
+	  * @param updateTime
+	  * @return
+	  * @throws BusException
+	  */
+	@EsbServiceMapping
+	 public List<PublicutilitiesmanagerReso> findMonthResoList(@ServiceParam(name="commodityId") String commodityId,@ServiceParam(name="month") String month ) throws BusException{
+		// List<PublicutilitiesmanagerReso> resoList=publicutilitiesmanagerResoDao.getList(new String[] {"resoDate","commodityId.commodityId"}, new  String[] {resoDate,commodityId});
+		String[] m = month.split(",");
+		String startMonth = m[0]+"-"+m[1]+"-01";
+		String endMonth = m[0]+"-"+m[1]+"-31";
+		Collection<Condition> conditions = new ArrayList<Condition>();
+		conditions.add(ConditionUtils.getCondition("commodityId.commodityId",Condition.EQUALS, commodityId));
+		conditions.add(ConditionUtils.getCondition("resoDate",
+				Condition.BETWEEN, startMonth + Condition.BETWEEN_SPLIT
+						+ endMonth));
+		List<PublicutilitiesmanagerReso> resoList = publicutilitiesmanagerResoDao.commonQuery(conditions, null);
+		return resoList;
+	 }
 }
