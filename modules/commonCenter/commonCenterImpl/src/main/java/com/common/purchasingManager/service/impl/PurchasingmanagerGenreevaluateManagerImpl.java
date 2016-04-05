@@ -118,6 +118,23 @@ public class PurchasingmanagerGenreevaluateManagerImpl extends BaseManagerImpl i
 		pgv.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		return purchasingmanagerGenreevaluateDao.save(pgv);
 	}
+	//提交咨询
+	@Override
+	@EsbServiceMapping
+    public PurchasingmanagerGenreevaluate savePurGenreConsult(@ServiceParam(name="userId",pubProperty="userId") String userId,
+    		@ServiceParam(name="genreCode") String genreCode,@ServiceParam(name="content") String content) throws BusException{
+		PurchasingmanagerGenreevaluate pgv = new PurchasingmanagerGenreevaluate();
+		pgv.setContent(content);
+		pgv.setType("02");//02-咨询
+		PurchasingmanagerGenre purGenre = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode", genreCode);
+		pgv.setPurGenre(purGenre);
+		pgv.setCreateUser(userId);
+		pgv.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		pgv.setMember(userId);
+		pgv.setUpdateUser(userId);
+		pgv.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		return purchasingmanagerGenreevaluateDao.save(pgv);
+	}
 	//根据商品类别编码获取评论列表
 	@SuppressWarnings("unchecked")
 	@Override

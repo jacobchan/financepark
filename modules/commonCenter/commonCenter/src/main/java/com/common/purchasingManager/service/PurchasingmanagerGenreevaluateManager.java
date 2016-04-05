@@ -91,4 +91,14 @@ public interface PurchasingmanagerGenreevaluateManager extends BaseManager{
 	public PagerRecords getPagerPurGenreEvaluatesByCode(Pager pager,
 			Collection<Condition> conditions, Collection<Order> orders,
 			String genreCode) throws BusException;
+	/**
+	 * 提交咨询
+	 * @param userId
+	 * @param genreCode
+	 * @param content
+	 * @return
+	 * @throws BusException
+	 */
+	public PurchasingmanagerGenreevaluate savePurGenreConsult(String userId,
+			String genreCode, String content) throws BusException;
 }
