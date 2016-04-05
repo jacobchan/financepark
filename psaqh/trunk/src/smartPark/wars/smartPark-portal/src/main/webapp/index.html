@@ -126,23 +126,23 @@
                 </table>
             </div>
             <div class="server pr" style="display:none">
-            	<div class="icon_left"></div>
-                <div class="icon_right"></div>
+            	<!-- <div class="icon_left"></div>
+                <div class="icon_right"></div> -->
                 <table class="layout_table">
                     <tr>
-                        <td>
+                        <td onclick="openURL(4);">
                             <div class="item wy_ico1">
-                                <a href="./yqfw/yq4.html" class="f20">访客管理</a>
+                                <a href="javascript:;" class="f20">访客管理</a>
                                 <p>是园区业主（住户）在入住园区前必须办理的手续</p>
                             </div>
                         </td>
-                        <td>
+                        <td onclick="openURL(9);">
                             <div class="item wy_ico2">
-                                <a href="./yqfw/yq9.html" class="f20">物业投诉</a>
+                                <a href="javascript:;" class="f20">物业投诉</a>
                                 <p>园区业主对物业进行装饰、装修前，请预约"装修申请"业务</p>
                             </div>
                         </td>
-                        <td>
+                        <td onclick="openURL(0);">
                             <div class="item wy_ico3">
                                 <a href="javascript:;" class="f20">费用查询</a>
                                 <p>业主因业务转让、转租或公司名称变更，而申请变更所拥有或使用的物业...</p>
@@ -150,27 +150,27 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                       <!--  <td>
                             <div class="item wy_ico4">
                                 <a href="./yqfw/yq10.html" class="f20">停车卡缴费</a>
                                 <p>园区企业在合同期满前一个月可办理续租手续</p>
                             </div>
-                        </td>
-                        <td>
+                        </td> -->
+                        <td onclick="openURL(8);">
                             <div class="item wy_ico5">
-                                <a href="./yqfw/yq8.html" class="f20">搬家放行</a>
+                                <a href="javascript:;" class="f20">搬家放行</a>
                                 <p>园区企业提出退租要求，由租售部责任销售员负责协助用户办理退租手续</p>
                             </div>
                         </td>
-                        <td>
+                        <td onclick="openURL(6);">
                             <div class="item wy_ico6">
-                                <a href="./yqfw/yq6.html" class="f20">物业报修</a>
+                                <a href="javascript:;" class="f20">物业报修</a>
                                 <p>园区企业提出退租要求，由租售部责任销售员负责协助用户办理退租手续</p>
                             </div>
                         </td>
                     </tr>
                 </table>
-                <table class="layout_table" style="display:none;height:317px;border:0;">
+               <!--  <table class="layout_table" style="display:none;height:317px;border:0;">
                     <tr>
                         <td style="height:158px;width:293px;display:block">
                             <div class="item wy_ico7">
@@ -179,7 +179,7 @@
                             </div>
                         </td>
 					</tr>
-                </table>
+                </table> -->
             </div>
         </div><!--content_left  end-->
         <div class="content_left mt30">
@@ -724,6 +724,38 @@
       	 	html += "</ul>" ;
       	 	$(".tipbox.tip_item").append(html) ;
         }
+		
+		function openURL(url){
+			   if(!isLogin){
+				   $(".f24.fl.c-333").text("请登录!");
+				   $(".pop_layer").show();
+				 	 return false;
+				}
+			   if(url=='0'){
+			  	 window.location=cenUrl+"member/memberCenter/propertyService/propertyManageCharge.html";
+			   }else if(url=='6'||url=='8'||url=='10'){
+				 //判断是否是企业员工
+					$.youi.ajaxUtils.ajax({
+					url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(result){
+						if(result&&result.record){
+							window.location="yqfw/yq"+url+".html";
+							}else{
+								$(".f24.fl.c-333").text("您不是企业用户,暂时无法申请报修,如有疑问请与客服人员联系!");
+								$(".pop_layer").show();
+							}
+						}
+					});
+			   }else if(url=='4'||url=='9'){
+				   window.location="yqfw/yq"+url+".html";
+			   }else{
+				   $(".f24.fl.c-333").text("敬请期待!");
+					$(".pop_layer").show();
+			   }
+				   
+		  };
 	</script>
 	<script type="text/javascript">
 	/* 优惠政策 */
