@@ -59,7 +59,7 @@ public class Entrepreneurship implements Domain{
 
 	@Column(name = "MEMBER_ID_")
 	@Length(max=36)
-	private String memberId;//会员用户ID
+	private String memberId;//申请人
 
 	@Column(name = "CREATE_TIME_")
 	private String createTime;//创建时间
