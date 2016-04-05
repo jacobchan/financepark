@@ -292,9 +292,9 @@
                 <a class="fr" href="./czh/czh1.html">更多》</a>
             </div>
             <ul class="czh_ul clearfix">
-            	<li><a href="javascript:;"><img src="styles/images/index/czh1.jpg"/></a><div class="f18">创智讲堂</div></li>
-                <li><a href="javascript:;"><img src="styles/images/index/czh2.jpg"/></a><div class="f18">硅谷训练营</div></li>
-                <li><a href="javascript:;"><img src="styles/images/index/czh3.jpg"/></a><div class="f18">积分商城</div></li>
+            	<li onclick="loadURL('/czh/czh4.html');"><a href="javascript:;"><img src="styles/images/index/czh1.jpg"/></a><div class="f18">创智讲堂</div></li>
+                <li onclick="loadURL('/czh/czh5.html');"><a href="javascript:;"><img src="styles/images/index/czh2.jpg"/></a><div class="f18">硅谷创业营</div></li>
+                <li onclick="loadURL('/czh/czh4.html?typeId=40288aa9538d6fef01538d8580c20006');"><a href="javascript:;"><img src="styles/images/index/czh3.jpg"/></a><div class="f18">积分商城</div></li>
             </ul>
         </div>
         <div class="content_left mt30">
@@ -729,6 +729,10 @@
       	 	html += "</ul>" ;
       	 	$(".tipbox.tip_item").append(html) ;
         }
+		
+		function loadURL(url){
+			window.location=url;
+		};
 		
 		function openURL(url){
 			   if(!isLogin){
