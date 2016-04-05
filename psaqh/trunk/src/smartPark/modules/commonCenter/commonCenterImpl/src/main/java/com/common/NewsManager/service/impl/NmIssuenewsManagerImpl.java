@@ -151,7 +151,7 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 	}
 	
 	/**
-	 * 得到所有已发布的优惠政策
+	 * 得到所有已发布的优惠政策下面的孵化器政策
 	 * @return
 	 */
 	@Override
