@@ -113,14 +113,14 @@
                         </td>
                     </tr>
                     <tr>
-                        <td onclick="openURL(2);">
+                        <td onclick="openURL(40);">
                             <div class="item rz_icon4">
                                <!--  <a href="./yqfw/yq2.html" class="f20">客户续约</a> -->
                                 <a href="javascript:;" class="f20">客户续约</a>
                                 <p>园区企业在合同期满前一个月可办理续租手续</p>
                             </div>
                         </td>
-                        <td onclick="openURL(2);">
+                        <td onclick="openURL(50);">
                             <div class="item rz_icon5">
                                 <!-- <a href="./yqfw/yq2.html" class="f20">客户退租</a> -->
                                 <a href="javascript:;" class="f20">客户退租</a>
@@ -771,6 +771,12 @@
 					});
 			   }else if(url=='4'||url=='9'||url=='5'||url=='1'||url=='2'){
 				   window.location="yqfw/yq"+url+".html";
+			   }else if(url=='40'){
+				   window.location="yqfw/yq2.html?enteringType=04";
+				   
+			   }else if(url=='50'){
+				   window.location="yqfw/yq2.html?enteringType=05";
+				   
 			   }else{
 				   $(".f24.fl.c-333").text("敬请期待!");
 					$(".pop_layer").show();
