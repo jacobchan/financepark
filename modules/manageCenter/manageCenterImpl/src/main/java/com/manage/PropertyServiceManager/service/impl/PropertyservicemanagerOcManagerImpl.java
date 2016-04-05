@@ -34,6 +34,7 @@ import com.manage.ActivityManager.entity.ActivityApply;
 import com.manage.ActivityManager.entity.ActivityApplylist;
 import com.manage.EmployeeManager.dao.EnterpriseEmployeesDao;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
+import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerOcDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerOcManager;
@@ -47,6 +48,8 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 	private MemberInformationManager memberInformationManager;
 	@Autowired
 	private EnterpriseEmployeesDao enterpriseEmployeesDao;
+	@Autowired
+	private EnterpriseEmployeesManager enterpriseEmployeesManager;
 	/**
      * 修改一卡通预约状态
      */
@@ -124,20 +127,27 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
     		}
     	}else{//新增
     		//生成一卡通编号
+    		Collection<Condition> condition = new ArrayList<Condition>();
+			condition.add(ConditionUtils.getCondition("member.memberId", Condition.EQUALS, o.getMemberId()));	
+    		List<EnterpriseEmployees> employees = enterpriseEmployeesManager.getEnterpriseEmployeess(condition, null);
     		PropertyservicemanagerOc saveOc = null;
-    		o.setOcWay("00");
-    		o.setOcStatus("00");
-    		o.setOcCode(BizCodeUtil.getInstance().getBizCodeDate("WYOC"));
-    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    		o.setApplyTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    		saveOc = propertyservicemanagerOcDao.save(o);
-    		//发送短信给联系人
-    		try {
-    			HttpSenderMsg.sendMsg(saveOc.getOcAddree().getAddressPhone(), "您的一卡通申请已成功,申请单号："+saveOc.getOcCode()+"，请等待办卡完成！");
-    		} catch (Exception e) {
-    			e.printStackTrace();
-    		}
-    		
+    		if(employees.size()>0){
+	    		o.setOcComp(employees.get(0).getRz().getRzName());
+	    		o.setOcWay("00");
+	    		o.setOcStatus("00");
+	    		o.setOcCode(BizCodeUtil.getInstance().getBizCodeDate("WYOC"));
+	    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+	    		o.setApplyTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+	    		saveOc = propertyservicemanagerOcDao.save(o);
+	    		//发送短信给联系人
+	    		try {
+	    			HttpSenderMsg.sendMsg(saveOc.getOcAddree().getAddressPhone(), "您的一卡通申请已成功,申请单号："+saveOc.getOcCode()+"，请等待办卡完成！");
+	    		} catch (Exception e) {
+	    			e.printStackTrace();
+	    		}
+    		}else{
+    			throw new BusException("您不是企业会员!");
+    		}	
     		return saveOc;
     	}
     
