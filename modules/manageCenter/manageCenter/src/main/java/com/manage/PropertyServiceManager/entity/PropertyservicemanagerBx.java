@@ -10,6 +10,7 @@ import javax.persistence.*;
 import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: 物业报修记录
@@ -89,6 +90,17 @@ public class PropertyservicemanagerBx implements Domain{
 	@Length(max=36)
 	private String memberId;//报修人
 	
+	@Transient
+	private MemberInformation member;
+	
+	public MemberInformation getMember() {
+		return member;
+	}
+
+	public void setMember(MemberInformation member) {
+		this.member = member;
+	}
+
 	public String getMemberId() {
 		return memberId;
 	}
@@ -248,6 +260,7 @@ public class PropertyservicemanagerBx implements Domain{
 				+ ((createTime == null) ? 0 : createTime.hashCode());
 		result = prime * result
 				+ ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result + ((member == null) ? 0 : member.hashCode());
 		result = prime * result
 				+ ((memberId == null) ? 0 : memberId.hashCode());
 		result = prime * result
@@ -335,6 +348,11 @@ public class PropertyservicemanagerBx implements Domain{
 			if (other.createUser != null)
 				return false;
 		} else if (!createUser.equals(other.createUser))
+			return false;
+		if (member == null) {
+			if (other.member != null)
+				return false;
+		} else if (!member.equals(other.member))
 			return false;
 		if (memberId == null) {
 			if (other.memberId != null)
