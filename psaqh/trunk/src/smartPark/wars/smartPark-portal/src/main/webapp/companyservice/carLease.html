@@ -28,19 +28,35 @@
     </div>
     <!--车辆租凭-->
     <div class="res_item mb40">
-        <ul class="ri_ul clearfix" id="carType">
+    <!--     <ul class="ri_ul clearfix" id="carType">
             <div><li>车辆类型</li></div>
             <li class="active">全部</li>
             <li>自动挡</li>
             <li>手动挡</li>
-        </ul>
-        <ul class="ri_ul clearfix">
+        </ul> -->
+          <div class="ri_ul clearfix">
+            <div class="ru-title">车辆类型</div>
+            <ul class="ru-options" id="carType">
+               <!--  <li class="active">全部</li>
+                <li>视频会议室</li>
+                <li>普通会议室</li> -->
+            </ul>
+        </div>
+           <div class="ri_ul clearfix">
+            <div class="ru-title">乘坐人数</div>
+            <ul class="ru-options" id="zwType">
+               <!--  <li class="active">全部</li>
+                <li>视频会议室</li>
+                <li>普通会议室</li> -->
+            </ul>
+        </div>
+        <!-- <ul class="ri_ul clearfix">
             <div><li>乘坐人数</li></div>
             <li class="active">不限</li>
             <li>5座以下</li>
             <li>5-9座</li>
             <li>9座以上</li>
-        </ul>
+        </ul> -->
         <div class="mt30 clearfix">
         	<!-- <div class="res_left">
            
@@ -142,12 +158,18 @@
 <script type="text/javascript" src="../scripts/page/jquery.page.js"></script>
 <script type="text/javascript">
 $(function(){
+	var carType='stalls';//carType:车辆档位
+	 $('#carType').select({
+			template:'<li data-val={itemValue}>{itemName}</li>',
+			jsonpSrc:baseUrl+"purchasingmanagerPublicManager/getRecordsByExtendValue.json?recordType="+carType
+});
 	
-	/* $('#carType').plist({
-		template:'<li data-val={itemValue}>{itemName}</li>',
-		jsonpSrc:baseUrl+"reservationRecordManager/getRecordsByRecordType.json?recordType="+0401
+		var zwType='seat';//zwType:车辆乘坐人数
+		 $('#zwType').select({
+				template:'<li data-val={itemValue}>{itemName}</li>',
+				jsonpSrc:baseUrl+"purchasingmanagerPublicManager/getRecordsByExtendValue.json?recordType="+zwType
 	});
-	 */
+	 
 });
 	</script>
 <script type="text/javascript">
@@ -233,5 +255,111 @@ var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommod
 		}; */
 		
 	</script>
+	 <script type="text/javascript">
+        $(function(){
+            $(document).on("load",".ru-options",function(){
+                $(".ru-options li:eq(0)").addClass("active");
+            })
+        	var carType="";
+            var zwType="";
+            $(document).on("click",".ru-options li" ,function(){
+                $(this).addClass("active").siblings().removeClass("active");
+                var type=$(this).parents(".ri_ul").find("div:eq(0)").text();
+                var selectText=$(this).text();
+                var val=$(this).attr("data-val");
+              if(type=="车辆类型"){
+            	  if(val=="00"){
+            		  carType="";
+            	  }else{
+            		  carType=selectText;
+            	  }
+            	 
+              }
+              if(type=="乘坐人数"){
+            	  if(val=="00"){
+            		  zwType="";
+            	  }else{
+            		  zwType=selectText;
+            	  }
+            	  
+              }
+                var pageSize=3;
+                var pageCount=1;
+                var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommoditys.json?genreCode=0302";//0302:车辆租赁
+                		$(function(){
+                			//公共方法
+                			$.youi.ajaxUtils.ajax({
+                				url:serviceURL,
+                				jsonp:'data:jsonp',
+                				dataType:'jsonp',
+                				success:function(results){
+                					pageCount=Math.ceil(results.totalCount/pageSize);
+                					 refreshData(1,pageSize,carType,zwType);
+                						$(".tcdPageCode").createPage({
+                						    pageCount:pageCount,
+                						    current:1,
+                						    backFn:function(p){
+                						       this.pageCount=pageCount;
+                						        refreshData(p,pageSize,carType,zwType);
+                						    }
+                						});
+                				}
+                			});
+                			
+                		});
+                		//拼接活动列表
+                		
+                			function refreshData(pageIndex,pageSize,carType,zwType){
+                			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'roomType='+carType,'roomGm='+zwType];
+                			alert(params);
+                			$.youi.ajaxUtils.ajax({
+                				url:serviceURL,
+                				jsonp:'data:jsonp',
+                				data:params.join('&'),
+                				dataType:'jsonp',
+                				success:function(results){
+                					if(results&&results.records){
+                						$('.tc').hide();
+                						 _parseRecords(results.records);
+                					}
+                				}
+                			});
+                		}
+                		
+                		function _parseRecords(record){
+                			var html='';
+                			for(var i=0;i<record.length;i++){
+                			 	if(record[i].car.dw==undefined){
+                			 		record[i].car.dw="";
+                				}
+                				if(record[i].car.zw==undefined){
+                					record[i].car.zw="";
+                				}
+                				if(record[i].car.chepai==undefined){
+                					record[i].car.chepai="";
+                				} 
+                				var imageUrl="../styles/images/index/car.jpg";
+                				if(record[i].commodityImage !=null && record[i].commodityImage!=""){
+                					   imageUrl=cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].commodityImage+"&method=show";
+                				}
+                				html+="<li class='clearfix'><div class='fl'><img src='"+imageUrl+"' height='205' width='285'></div>"+
+                					"<div class='fl ml30' style='width:535px'><a href='carLeasexq.html?id="+record[i].commodityId+"' class='span_bold f20'>"+record[i].commodityTitle+"</a><div class='mt20 mb20'><div class='res_tip'>"+record[i].car.dw+"</div><div class='res_tip'>"+record[i].car.zw+"</div><div class='res_tip'>"+record[i].car.chepai+"</div></div>"+
+                					"<div style='height:55px'>"+record[i].commodityDescribe+"</div><div class='mt30'><img class='mr10' src='../styles/images/company/res_icon.png'/><span class='vm pr20'>"+record[i].purchasingmanagerMerchant.merchantLinkman+"</span>"+
+                					"<img class='mr10' src='../styles/images/company/res_ico.png'/><span class='vm'>联系电话："+record[i].purchasingmanagerMerchant.merchantLinkmanPhone+"</span><div class='jcbg f20 fr'>"+record[i].commodityPrice+"元/小时</div>"+
+                					"</div></div></li>";
+                				
+                			}
+                			$('#carfix').empty();
+                			$("#carfix").append(html);
+                		};
+            });
+            $(".ru-more").click(function(){
+                $(this).find("a").toggleClass("active");
+                $(this).find("i").toggleClass("fa-angle-down fa-angle-up")
+                $(this).prev().toggleClass("hauto");
+            })
+        })
+    </script>
+	
 </body>
 </html>
