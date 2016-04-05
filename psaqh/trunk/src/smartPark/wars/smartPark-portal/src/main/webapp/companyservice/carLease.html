@@ -28,7 +28,7 @@
     </div>
     <!--车辆租凭-->
     <div class="res_item mb40">
-        <ul class="ri_ul clearfix">
+        <ul class="ri_ul clearfix" id="carType">
             <div><li>车辆类型</li></div>
             <li class="active">全部</li>
             <li>自动挡</li>
@@ -141,6 +141,16 @@
 <script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 <script type="text/javascript" src="../scripts/page/jquery.page.js"></script>
 <script type="text/javascript">
+$(function(){
+	
+	/* $('#carType').plist({
+		template:'<li data-val={itemValue}>{itemName}</li>',
+		jsonpSrc:baseUrl+"reservationRecordManager/getRecordsByRecordType.json?recordType="+0401
+	});
+	 */
+});
+	</script>
+<script type="text/javascript">
 var pageSize=3;
 var pageCount=1;
 var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommoditys.json?genreCode=0302";//0302:车辆租赁
@@ -195,7 +205,11 @@ var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommod
 				if(record[i].car.chepai==undefined){
 					record[i].car.chepai="";
 				} 
-				html+="<li class='clearfix'><div class='fl'><img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].commodityImage+"&method=show' height='205' width='285'></div>"+
+				var imageUrl="../styles/images/index/car.jpg";
+				if(record[i].commodityImage !=null && record[i].commodityImage!=""){
+					   imageUrl=cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].commodityImage+"&method=show";
+				}
+				html+="<li class='clearfix'><div class='fl'><img src='"+imageUrl+"' height='205' width='285'></div>"+
 					"<div class='fl ml30' style='width:535px'><a href='carLeasexq.html?id="+record[i].commodityId+"' class='span_bold f20'>"+record[i].commodityTitle+"</a><div class='mt20 mb20'><div class='res_tip'>"+record[i].car.dw+"</div><div class='res_tip'>"+record[i].car.zw+"</div><div class='res_tip'>"+record[i].car.chepai+"</div></div>"+
 					"<div style='height:55px'>"+record[i].commodityDescribe+"</div><div class='mt30'><img class='mr10' src='../styles/images/company/res_icon.png'/><span class='vm pr20'>"+record[i].purchasingmanagerMerchant.merchantLinkman+"</span>"+
 					"<img class='mr10' src='../styles/images/company/res_ico.png'/><span class='vm'>联系电话："+record[i].purchasingmanagerMerchant.merchantLinkmanPhone+"</span><div class='jcbg f20 fr'>"+record[i].commodityPrice+"元/小时</div>"+
