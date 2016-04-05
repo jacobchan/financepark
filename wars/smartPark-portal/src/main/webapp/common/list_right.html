@@ -133,32 +133,27 @@
 				//console.log(news) ;
 				if(news.policyType.issueTypeCode=='0101'){//0101代表园区新闻
 					flag = true ;
-					/* <li>
-					<a href="">
-						<div class="in-photo">
-							<img src="../styles/images/zs/nav-img1.png" border="0" width="100%">
-						</div>
-						<div class="fr">
-							<p>杭州，一场无关情爱的风月无边月无</p>
-						</div>
-					</a>
-				</li> */
-				html_1 += "<li>"+
-								'<a href="../zscenter/zs4.html">' +
-									'<div class="in-photo">'+
-										"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+news.imageUrl+"&method=show' border='0' width='100%'>"+
+					if(i < 3){//取前三条
+						html_1 += "<li>"+
+									'<a href="../zscenter/zs4.html">' +
+										'<div class="in-photo">'+
+											"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+news.imageUrl+"&method=show' border='0' width='100%'>"+
+										"</div>"+
+							 		"<div class='fr'>"+
+										"<p>"+news.policyCaption+"</p>"
 									"</div>"+
-						 		"<div class='fr'>"+
-									"<p>"+news.policyCaption+"</p>"
-								"</div>"+
-								"</a>"+
-							"</li>";
+									"</a>"+
+								"</li>";
+					}
+					
 				}else{
 					flag = false ;
-					html_2 += "<a href='../zscenter/zs7.html?policyId="+news.policyId+"'>"+
-								  "<li>"+news.policyCaption+
-								  "</li>"+
-							  "</a>" ;
+					if(i<5){//取前五条
+						html_2 += "<a href='../zscenter/zs7.html?policyId="+news.policyId+"'>"+
+									  "<li>"+news.policyCaption+
+									  "</li>"+
+								  "</a>" ;
+					}
 				}
 			}
 			var htmlss="</ul>";
