@@ -70,14 +70,7 @@
 		        	</dl>
 		        </li>
 		    </ul>
-		    <div class="fr search-see">
-			    <div class="fl">
-			    	<input type="text" class="input-search">
-			    </div>
-		    	<div class="fl">
-			    	<a href="" class="btn-search"></a>
-			    </div>
-		    </div>
+	
 		    
 		   
 		</div>
