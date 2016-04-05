@@ -24,9 +24,7 @@
 								<th>申请状态</th>
 								<th>操作</th>
 							</tr>														
-						</tbody></table>
-
-                        
+						</tbody></table>                       
 						<div class="fr page-list-a clearfix lh30 mt20 f12">
 							<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
 							<a href="">首</a>
@@ -43,13 +41,12 @@
 	<!--***bottom start****************************************-->
 
 	<script type="text/javascript">
-
-	 function cancel(id){
-		
-		var policyApplyId=id;
-		
+	//取消政策申请，前端调用
+	 function cancel(id){		
+		var policyApplyId=id;	
+		alert(policyApplyId);
 	     $.ajax({
-			url:baseUrl+'/policyApplyManager/updatePolicyApplyStatus.json',
+			url:baseUrl+'/policyApplyManager/cancelApply.json',
 			data:'policyApplyId='+policyApplyId,
 	 		success:function(result){
 				if(result&&result.record){					
@@ -70,7 +67,7 @@
 				}
 			});
 		});
-		//拼接卡号列表
+		//拼接列表
 		function _parseRecords(record){		
 
 			console.log(record);
@@ -84,11 +81,11 @@
 					status = "申请成功";
 				}else if(record[i].policyApplyStatus=='3'){
 					status = "申请失败";
-				} else if(record[i].policyApplyStatus=='0'){
+				} else if(record[i].policyApplyStatus=='4'){
 					status = "取消";
 				} 
 				var html= "<tr>"+
-					      "<td width='111'>"+record[i].policyId+"</td>"+
+					      "<td width='111'>"+record[i].ApplyCode+"</td>"+
                           "<td width='111'>"+record[i].nmIssuenews.policyCaption+"</td>"+
                           "<td width='111'>"+record[i].policyApplyContactPeople+"</td>"+
                           "<td width='111'>"+record[i].createTime+"</td>"+
@@ -100,4 +97,20 @@
 			}
 		};	
 	</script>
+	<script type="text/javascript">
+	//取消政策申请，前端调用
+	 function cancel(id){		
+		var policyApplyId=id;	
+		$.ajax({				
+			url:baseUrl+'/policyApplyManager/cancelApply.json',
+			data:'policyApplyId='+policyApplyId,
+			success:function(result){
+				if(result&&result.record){					
+					alert("已取消");
+					location.reload();
+				}
+			}
+		});
+	}; 
+	 </script>
 </youi:html>
