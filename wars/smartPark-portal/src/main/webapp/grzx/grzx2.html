@@ -135,14 +135,14 @@
 									<th>操作</th>
 								</tr>
 								<tr>
-									<td><a href="">123456789</a></td>
+									<td><a href="grzx2-3.html">123456789</a></td>
 									<td>物业报修</td>
 									<td>999元</td>
 									<td>2016-1-12 17:30：08</td>
 									<td>
-										<span>已完成</span><span class="f12 ml5 mr5">|</span>
-										<a href="grzx2-2.html">评价</a><span class="f12 ml5 mr5">|</span>
-										<a href="javascript:;" class="lq-show">发票领取</a>
+										<a href="../cg30/pay-way.html">付款</a><span class="f12 ml5 mr5">|</span>
+										<!-- <a href="grzx2-2.html">评价</a><span class="f12 ml5 mr5">|</span> -->
+										<a href="javascript:;" class="cancle-show">取消</a>
 									</td>
 								</tr>
 								<tr>
@@ -152,7 +152,7 @@
 									<td>2016-1-12 17:30：08</td>
 									<td>
 										<span>已完成</span><span class="f12 ml5 mr5">|</span>
-										<a href="grzx2-2.html">评价</a><span class="f12 ml5 mr5">|</span>
+										<!-- <a href="grzx2-2.html">评价</a><span class="f12 ml5 mr5">|</span> -->
 										<a href="javascript:;" class="lq-show">发票领取</a>
 									</td>
 								</tr>
@@ -187,7 +187,7 @@
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
 	
-	<!--***弹窗 start****************************************-->
+	<!--***定去发票 弹窗 start****************************************-->
 	<div class="bg-tanc">
 		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
 			<a href="javascript:;" class="tc-close"></a>
@@ -237,6 +237,20 @@
 			</tbody></table>
 		</div>
 	</div>
+	<!--*** 弹窗 end****************************************-->
+	<!--*** 取消弹窗 start****************************************-->
+	<div class="bg-tanc m1">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="w60 tc mt40" style="margin-left:20%">
+				<div class="mt20 mb20 f16 lh26">
+					<img src="../styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o"> [ 123456789 ] </span>吗？
+				</div>
+				<p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p>
+				<input value="确定" class="hhf-submit" style="height:36px;" type="submit">
+			</div>
+		</div>
+	</div>
 	<!--***弹窗 end****************************************-->
 	<script type="text/javascript">
 		$(function () {
@@ -248,6 +262,9 @@
 			$(".lq-show").click(function(){
 				$(".bg-tanc").show();
 			})
+			$(".cancle-show").click(function(){
+				$(".bg-tanc.m1").show();
+			}) 
 		})
 	</script>
 </body>
