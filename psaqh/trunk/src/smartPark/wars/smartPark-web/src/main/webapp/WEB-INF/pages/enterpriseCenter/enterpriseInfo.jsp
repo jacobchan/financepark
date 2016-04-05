@@ -215,6 +215,32 @@
 					var rzLogo = $("#rzLogo").attr("src");
 					var productDiscriptio=editor.getData();
 					var params = ['rzId='+rzId+'','rzLogo='+rzLogo+'','roomId.roomId='+roomId+'','rzName='+rzName+'','rzRemark='+rzRemark+'','rzUrl='+rzUrl+'','enTypeId.enTypeId='+enTypeId+'','productDiscriptio='+productDiscriptio+''];
+					//url正则表达式
+					var urlRegex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+					if(rzName=="" || rzName.trim().length==0){
+						alert("企业名称不能为空！");
+						return false;
+					}
+					if(roomId=="" || roomId.trim().length==0){
+						alert("地址不能为空！");
+						return false;
+					}
+					if(rzUrl=="" || !urlRegex.test(rzUrl)){
+						alert("网址输入错误！");
+						return false;
+					}
+					if(enTypeId=="" || enTypeId.trim().length==0){
+						alert("行业类型不能为空！");
+						return false;
+					}
+					if(rzRemark=="" || rzRemark.trim().length==0){
+						alert("公司介绍不能为空！");
+						return false;
+					}
+					if(productDiscriptio=="" || productDiscriptio.trim().length==0){
+						alert("产品描述不能为空！");
+						return false;
+					}
 					$.youi.ajaxUtils.ajax({
 						url:baseUrl+'/enterbusinessmanagerRzManager/updateEnterbusinessmanagerRz.json',
 						data:params.join('&'),
