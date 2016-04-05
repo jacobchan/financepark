@@ -21,7 +21,7 @@
 	<div class="w100">
 		<div class="w1200 clearfix pt30 pb50">
 			<div class="h-nav clearfix">
-					<a href="">首页</a><img src="../styles/images/zs/right-j-b.png" border="0" />
+					<a href="../index.html">首页</a><img src="../styles/images/zs/right-j-b.png" border="0" />
 					<a href="">招商中心</a><img src="../styles/images/zs/right-j-b.png" border="0" />
 					<a href="" class="current">园区资讯</a>
 			</div>
@@ -119,8 +119,8 @@
 					$(".park-nav li").removeClass("active");
 					$(this).addClass("active");
 					$(".park-box ul").eq($(this).index()).removeClass("undis").siblings().addClass("undis");
-					var typeId = $(this).attr("id") ;
-					getRecords(typeId) ;//每次点击新闻类型的时候，查询对应的新闻
+					var issueTypeId = $(this).attr("id") ;
+					getRecords(issueTypeId) ;//每次点击新闻类型的时候，查询对应的新闻
 				});
 		}; 
 		function getRecords(issueTypeId){
@@ -131,7 +131,7 @@
 				jsonp:'data:jsonp',
 				dataType:'jsonp',
 				success:function(result){
-					console.log(result) ;
+					//console.log(result) ;
 					if(result&&result.records){
 						if(result.records.length>0){
 							getHtml(result.records) ;
