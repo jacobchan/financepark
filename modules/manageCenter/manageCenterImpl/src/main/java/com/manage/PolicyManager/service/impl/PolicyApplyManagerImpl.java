@@ -281,8 +281,10 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
 	    	return policyApplyDao.save(p);
 	    }else if("2".equals(status)){
 	    	throw new BusException("当前状态无法拒绝申请！") ;
-	    }else{
+	    }else if("3".equals(status)){
 	    	throw new BusException("当前状态已经为拒绝申请！") ;
+	    }else{
+	    	throw new BusException("已取消的申请无法拒绝！") ;
 	    }
     }
     
