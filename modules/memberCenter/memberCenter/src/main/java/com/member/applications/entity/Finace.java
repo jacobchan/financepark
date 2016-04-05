@@ -78,7 +78,7 @@ public class Finace implements Domain{
 
 	@Column(name = "MEMBER_ID_")
 	@Length(max=36)
-	private String memberId;//会员用户ID
+	private String memberId;//申请人
 
 	@Column(name = "AMOUNT_START_")
 	@Length(max=10)

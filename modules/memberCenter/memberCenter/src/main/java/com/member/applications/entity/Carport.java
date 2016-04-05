@@ -63,7 +63,7 @@ public class Carport implements Domain{
 
 	@Column(name = "MEMBER_ID_")
 	@Length(max=36)
-	private String memberId;//会员用户ID
+	private String memberId;//申请人
 
 	@Column(name = "UPDATE_USER_")
 	@Length(max=36)
