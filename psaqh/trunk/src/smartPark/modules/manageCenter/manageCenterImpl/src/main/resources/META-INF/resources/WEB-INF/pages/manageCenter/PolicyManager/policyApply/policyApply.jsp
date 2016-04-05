@@ -60,7 +60,9 @@
 		var gridElement = $elem('grid_policyApply',pageId),
         selectedRecord = gridElement.grid('getSelectedRecord');
 		var policyApplyStatus = selectedRecord.policyApplyStatus;
-		if(policyApplyStatus == '3'){
+ 		if(policyApplyStatus == '4'){
+			alert("当前政策申请已取消，无法处理流程！") ;
+		}else if(policyApplyStatus == '3'){
 			alert("当前政策已经申请失败，无法处理流程！") ;
 		}else if(policyApplyStatus == '2'){
 			alert("当前政策流程已经处理完，无需再处理！") ;
@@ -96,8 +98,10 @@
 				});
 			}else if(policyApplyStatus=='2'){
 				alert("申请成功的状态无法拒绝申请!");
-			}else{
+			}else if(policyApplyStatus=='3'){
 				alert("申请状态已经是申请失败了！");
+			}else{
+				alert("申请为已取消，无法拒绝！");
 			}	
 		</youi:func>
 		
