@@ -85,6 +85,18 @@ public class PropertyservicemanagerBx implements Domain{
 	@Column(name = "APPLY_TIME_")
 	private String applyTime;//申请时间
 	
+	@Column(name = "MEMBERID_")
+	@Length(max=36)
+	private String memberId;//报修人
+	
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
 	public String getApplyTime() {
 		return applyTime;
 	}
@@ -237,6 +249,8 @@ public class PropertyservicemanagerBx implements Domain{
 		result = prime * result
 				+ ((createUser == null) ? 0 : createUser.hashCode());
 		result = prime * result
+				+ ((memberId == null) ? 0 : memberId.hashCode());
+		result = prime * result
 				+ ((updateTime == null) ? 0 : updateTime.hashCode());
 		result = prime * result
 				+ ((updateUser == null) ? 0 : updateUser.hashCode());
@@ -321,6 +335,11 @@ public class PropertyservicemanagerBx implements Domain{
 			if (other.createUser != null)
 				return false;
 		} else if (!createUser.equals(other.createUser))
+			return false;
+		if (memberId == null) {
+			if (other.memberId != null)
+				return false;
+		} else if (!memberId.equals(other.memberId))
 			return false;
 		if (updateTime == null) {
 			if (other.updateTime != null)
