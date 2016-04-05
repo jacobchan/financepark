@@ -84,6 +84,18 @@ public class PolicyApply implements Domain{
     @JoinColumn(name="POLICY_APPLY_ISSUEFLOW_")
 	private NmIssueflow nmIssueflow;//流程状态
 	
+	@Column(name = "POLICY_APPLY_CODE_")
+	@Length(max=50)
+	private String applyCode;//政策申请单号
+	
+	public String getApplyCode() {
+		return applyCode;
+	}
+
+	public void setApplyCode(String applyCode) {
+		this.applyCode = applyCode;
+	}
+
 	public NmIssuenews getNmIssuenews() {
 		return nmIssuenews;
 	}
