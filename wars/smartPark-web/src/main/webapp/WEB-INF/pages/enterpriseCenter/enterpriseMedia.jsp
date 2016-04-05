@@ -28,7 +28,7 @@
 					    				for(var i=0; i<records.length; i++){
 					    					var mediaDiv = '<li>'+
 					                            '<div class="mt_list">'+
-					                                '<div class="list_pic"><img src="/filestore/'+records[i].mediaUrl+'"></div>'+
+					                                '<div class="list_pic"><img src="http://220.249.113.12:8088/common/uploadImage.html?repository=/swfupload&path='+records[i].mediaUrl+'&method=show"></div>'+
 					                                '<div class="list_tex">'+
 					                                    '<table>'+
 					                                        '<tr>'+
@@ -106,14 +106,10 @@
 		            <div class="qiye_fm">
 		            	<span class="" id="mediaRe" style="display:none;"></span>
 		            	<div class="qiye_text"><span>媒体图片</span></div>
-		                <div>
-			                <div class="img_upload"><img src="../styles/images/qiye/img_none.png"><br><p>图片未上传</p></div>
-			                    <div class="upload_main">            	
-			                        <div class="fengmian_pic"><img src="../styles/images/qiye/add_fmpic.png"></div>
-			                        <div class="upload_input_fm1"><input type="file"></div>
-			                    </div>
-			                </div>
-			            </div>
+		                <div class="upload_main">
+		                    <img id="rzLogo" src="" border="0" class="fl" width="107" height="107"/>
+		                    <div class="photo-edit"><input type="file" />编辑<br/>logo</div>
+		            	</div>
 		            </div>
 		            <div class="xiangxi_baodao">
 		                <div class="qiye_fullname ">

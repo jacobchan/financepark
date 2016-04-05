@@ -61,7 +61,7 @@
 					    				for(var i=0; i<records.length; i++){
 					    					var knowledgeDiv = '<li>'+
 					                            '<div class="mt_list">'+
-					                                '<div class="list_pic"><img src="/filestore/'+records[i].knowledgeUrl+'"></div>'+
+					                                '<div class="list_pic"><img src="http://localhost:9088/filestore/'+records[i].knowledgeUrl+'"></div>'+
 					                                '<div class="list_tex">'+
 					                                    '<table>'+
 					                                        '<tr>'+
