@@ -60,17 +60,20 @@
 					</colgroup>
 					<tr>
 						<td>
-							<a href="yq5.html">
+							<!-- <a href="yq5.html"> -->
+							<a href="javascript:openURL(5);">
 								<div class="tfp-box" style="width:685px;max-width:100%;"><img src="../styles/images/yqfw/wy_photo_8.jpg" style="width:685px;">
 									<div class="tfp-box-bg"><span><img src="../styles/images/yqfw/icon8.png"><p>入驻申请</p></span></div>
 								</div>
 							</a>
-							<a href="yq1.html">
+							<!-- <a href="yq1.html"> -->
+							<a href="javascript:openURL(1);">
 								<div class="tfp-box"><img src="../styles/images/yqfw/wy_photo_10.jpg">
 									<div class="tfp-box-bg"><span><img src="../styles/images/yqfw/icon10.png"><p>合同主体变更</p></span></div>
 								</div>
 							</a>
-							<a href="yq15.html">
+							<!-- <a href="yq15.html"> -->
+							<a href="javascript:openURL(15);">
 								<div class="tfp-box" style="margin-right:0px;">
 									<img src="../styles/images/yqfw/wy_photo_11.jpg"><div class="tfp-box-bg"><span>
 									<img src="../styles/images/yqfw/icon11.png"><p>客户续约</p></span></div>
@@ -78,12 +81,14 @@
 							</a>
 						</td>
 						<td>
-							<a href="yq16.html">
+							<!-- <a href="yq16.html"> -->
+							<a href="javascript:openURL(16);">
 								<div class="tfp-box"><img src="../styles/images/yqfw/wy_photo_9.jpg">
 									<div class="tfp-box-bg"><span><img src="../styles/images/yqfw/icon9.png"><p>装修申请</p></span></div>
 								</div>
 							</a>
-							<a href="yq14.html">
+							<!-- <a href="yq14.html"> -->
+							<a href="javascript:openURL(14);">
 								<div class="tfp-box"><img src="../styles/images/yqfw/wy_photo_12.jpg">
 									<div class="tfp-box-bg"><span><img src="../styles/images/yqfw/icon12.png"><p>客户退租</p></span></div>
 								</div>
@@ -96,8 +101,39 @@
 	</div>
 	<!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
+	<!--***弹窗 start****************************************-->
+		<div class="bg-tanc m2">
+			<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+				<a href="javascript:;" class="tc-close"></a>
+				<div class="w70 tc mt40" style="margin-left:15%">
+					<table>
+						<tr>
+							<td><img src="../styles/images/grzx/check.png" class="mr40 mb20" border="0"></td>
+							<td >
+								<h4 class="f24 fl c-333">请登录!</h4>
+								<!-- <h4 class="f24 fl c-333"> 还有<span class="tt">0</span>秒关闭弹出框</h4> -->
+								<p class="f14 c-o fl mt20 mb20">如有问题，请拨打：0571-86508888</p>
+							</td>
+						<tr/>
+					</table>
+				</div>
+			</div>
+		</div>
+	<!--***弹窗 end****************************************-->
 	<!--***bottom end****************************************-->
 	<script type="text/javascript" src="../scripts/page/banner.js"></script>
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
+	<script>
+	   function openURL(url){
+		   if(!isLogin){
+			   $(".bg-tanc.m2").show();
+			 	 return;
+			}
+	        if(url=='1'||url=='5'||url=='14'||url=='15'||url=='16'){
+			   window.location="yq"+url+".html";
+		   }
+			   
+	  };
+ </script>
 </body>
 </html>
