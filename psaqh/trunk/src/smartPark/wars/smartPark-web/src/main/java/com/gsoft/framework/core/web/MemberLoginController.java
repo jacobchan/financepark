@@ -64,7 +64,7 @@ public class MemberLoginController {
 			//重定向到首页
 			return new ModelAndView("redirect:/member/"+loginType+"/index.html");
 		}
-		return new ModelAndView(loginType+"/login");
+		return new ModelAndView("/member/"+loginType+"/login");
 	}
 	
 	@RequestMapping(value = "/{loginType}/logout.html")
