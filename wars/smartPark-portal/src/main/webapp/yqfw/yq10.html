@@ -46,12 +46,12 @@
 								<col width="120"></col>
 								<col></col>
 							</colgroup>
-							<tr>
+							<!-- <tr>
 								<td align="center">企业名称</td>
 								<td><input type="text" id="ocComp"></td>
 								<td></td>
 								<td></td>
-							</tr>
+							</tr> -->
 							<tr>
 								<td align="center"  valign="top">地址选择</td>
 								<td colspan="3" class="addressList">
@@ -192,7 +192,7 @@
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
 	
 	<!-- 页面数据初始化 -->
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		$.youi.ajaxUtils.ajax({
 			url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
 			jsonp:'data:jsonp',
@@ -203,7 +203,7 @@
 				}
 			}
 		});
-	</script>
+	</script> -->
 	
 	<script type="text/javascript">
 
@@ -227,7 +227,7 @@
 								return false;
 							 }
 						
-							var params = ['ocComp='+$("#ocComp").val(),
+							var params = [//'ocComp='+$("#ocComp").val(),
 										'ocDate='+time,
 										//'ocWay=00',
 										//'ocStatus=00',
