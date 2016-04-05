@@ -5,11 +5,11 @@
 		<div class="w1000">
 					<h3 class="per-h3">企业通讯录</h3>
 					<div class="mt20 gr-txl clearfix lh30">
-						<span class="f16">深圳市前海怕啥科技有限公司</span>
+						<span class="f16" id="companyName"></span>
 						<div class="fr">
-							<input type="text" class="bd-input" id="employeesName">
+							<input type="text" class="bd-input" id="memberName" placeholder="请输入姓名">
 							<input value="查询" class="hhf-submit" type="button" style="padding:0px 20px;height:30px;">
-							<input value="全部" class="hhff-submit" type="button" style="padding:0px 20px;height:30px;">
+							
 						</div>
 					</div>
 					<table class="gt-table mt20">
@@ -43,10 +43,9 @@
 	<script type="text/javascript">
 	
 	
-		/* $(function(){
+		  $(function(){
 			$.ajax({
-			  url:baseUrl+'/enterpriseEmployeesManager/getEnterprisemaillist.json',
-		
+			  url:baseUrl+'/memberInformationManager/getPhoneNumberlist.json',		
 				success:function(result){					
 					console.log(result.records);
 					if(result&&result.records){					
@@ -54,15 +53,15 @@
 					}
 				}
 			});
-		}); */
+		});  
 		
 		//拼接卡号列表
 		function _parseRecords(record){		
 	 		for(var i=0;i<record.length;i++){																									
 					var html= "<tr class='aaa'>"+
-				      "<td >"+record[i].employeesName+"</td>"+
-				      "<td >"+record[i].employeesTelephone+"</td>"+
-				      "<td >"+record[i].member.memberDescribe2+"</td>"+
+				      "<td >"+record[i].memberName+"</td>"+
+				      "<td >"+record[i].memberPhoneNumber+"</td>"+
+				      "<td >"+record[i].memberDescribe2+"</td>"+
 				      "<td>"+record[i].createTime+"</td>"+				      				    					    
                       " </tr>"; 
 			          $(".gt-table").append(html);					  								 				
@@ -71,39 +70,35 @@
 		//根据名字查询
 		$('.hhf-submit').click(function(){					
 			$(".aaa").empty();
-			 var employeesName=$("#employeesName").val(); 
+			 var memberName=$("#memberName").val(); 
 		      $.ajax({
-		    	 url:baseUrl+'/enterpriseEmployeesManager/getEnterprisemaillistByName.json',
-		    	 data:'employeesName='+employeesName,
+		    	 url:baseUrl+'/memberInformationManager/getPhoneNumberlistByName.json',
+		    	 data:'memberName='+memberName,
 		    	 success:function(result){					
 						console.log(result.records);           
-						if(result&&result.records){			
-
+						if(result&&result.records){					
+							_parseRecords(result.records);						
+						}
+					}
+			}); 
+		}); 
+		$(function(){
+			$.ajax({
+			  url:baseUrl+'/enterbusinessmanagerRzManager/getCompanyIdName.json',		
+				success:function(result){					
+					console.log(result.record);
+					if(result&&result.record){					
+						_companyRecords(result.record);						
+					}
+				}
+			});
+		}); 
 		
-							_parseRecords(result.records);		
-
-				
-						}
-					}
-			}); 
-		}); 
-		//查询全部
-		$('.hhff-submit').click(function(){					
-			$(".aaa").empty();
-			 
-		      $.ajax({
-		    	 url:baseUrl+'/enterpriseEmployeesManager/getEnterprisemaillist.json',
-		    	 data:'employeesName='+employeesName,
-		    	 success:function(result){					
-						console.log(result.records);           
-						if(result&&result.records){	
-							
-							_parseRecords(result.records);	
-							
-						}
-					}
-			}); 
-		}); 
+		//公司名字
+		function _companyRecords(record){	
+			var companyName=record.rzName;
+			$("#companyName").text(companyName);
+		};
 	
 		
 	</script>
