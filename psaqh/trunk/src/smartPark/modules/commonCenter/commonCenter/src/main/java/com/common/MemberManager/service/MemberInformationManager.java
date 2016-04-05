@@ -13,6 +13,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.common.MemberManager.entity.MemberInformation;
 
 public interface MemberInformationManager extends BaseManager{
@@ -112,4 +114,21 @@ public interface MemberInformationManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public void sendMobileCaptcha(String mobile) throws BusException;
+	/**
+	 * //获取当前用户公司员工的通讯录
+	 * @param userId
+	 * @return
+	 * @throws BusException
+	 */
+		 
+	public List<MemberInformation> getPhoneNumberlist(String userId) throws BusException;
+		 /**
+		  * //通过名字获取当前用户公司员工的通讯录
+		  * @param userId
+		  * @param memberName
+		  * @return
+		  * @throws BusException
+		  */
+		
+	 public List<MemberInformation> getPhoneNumberlistByName(String userId, String memberName) throws BusException;
 }
