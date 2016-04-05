@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.common.NewsManager.dao.NmIssueflowDao;
 import com.common.NewsManager.dao.NmIssuenewsDao;
 import com.common.NewsManager.entity.NmIssueflow;
 import com.common.NewsManager.entity.NmIssuenews;
@@ -29,7 +28,6 @@ import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.framework.esb.annotation.ConditionCollection;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.OrderCollection;
-import com.gsoft.framework.esb.annotation.PubCondition;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.StringUtils;
@@ -164,7 +162,7 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 		for(int i=0;i<list.size();i++){
 			NmIssuenews nm = list.get(i) ;
 			String typeCode = nm.getPolicyType().getIssueTypeCode() ;//得到当前新闻的发布类型的typeCode
-			if("02".equals(typeCode)&& "1".equals(nm.getPolicyStatus())){//02表示当前政策新闻的发布类型为优惠政策,1表示当前政策已发布
+			if("0201".equals(typeCode)&& "1".equals(nm.getPolicyStatus())){//0201表示当前政策新闻的发布类型为优惠政策下的孵化器政策,1表示当前政策已发布
 				policyList.add(nm) ;
 			}
 		}
