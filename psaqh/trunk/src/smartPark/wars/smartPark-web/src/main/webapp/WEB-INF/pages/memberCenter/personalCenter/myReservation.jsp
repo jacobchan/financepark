@@ -120,6 +120,8 @@
 			<a href="javascript:;" class="tc-close"></a>
 			<div class="w60 tc mt40" style="margin-left:20%">
 				<div class="mt20 mb20 f16 lh26">
+				<span id="enterCode" style="display:none"></span>
+				<span id="enterStatus" style="display:none"></span>
 					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o recordId"> [ 123456789 ] </span>吗？
 				</div>
 				<p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p>
@@ -166,8 +168,8 @@
 					buttonHtml="";
 				}
 				html+="<tr id='"+record[i].recordId+"'>"+
-					/* "<td><a href=''>"+record[i].recordCode+"</a></td>"+ */
-					"<td>"+record[i].recordCode+"</td>"+
+					 "<td><a href=''>"+record[i].recordCode+"</a></td>"+ 
+					 /*"<td>"+record[i].recordCode+"</td>"+*/
 					"<td>"+record[i].visiteDate+"&nbsp;"+record[i].visiteTime+"</td>"+
 					"<td>"+record[i].recordMemberId+"</td>"+
 				//	"<td>"+record[i].recordType+"</td>"
@@ -223,7 +225,7 @@
 				}else if(enteringType=="05"){
 					enteringType="客户退租";
 				}
-				var buttonHtml="<td><a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消预约</a></td>";
+				var buttonHtml="<td id="+record[i].enterrecStatus+"><a href='javascript:;' class='ac-show' onclick='javascript:cancelForEnter(this)'>取消预约</a></td>";
 				if(recordStatus=="01"){
 					recordStatus="待受理";
 				}else if(recordStatus=="02"){
@@ -235,9 +237,9 @@
 				}else if(recordStatus=="05"){
 					recordStatus="未到访";
 				}
-				html+="<tr id='"+record[i].recordId+"'>"+
-					/* "<td><a href=''>"+record[i].enterrecCode+"</a></td>"+ */
-					"<td>"+record[i].enterrecCode+"</td>"+
+				html+="<tr id='"+record[i].entrecId+"'>"+
+					 "<td><a href=''>"+record[i].enterrecCode+"</a></td>"+ 
+					 /*"<td>"+record[i].enterrecCode+"</td>"+*/
 					"<td>"+record[i].propertyservicemanagerEntering.enteringDate+"&nbsp;"+enteringTime+"</td>"+
 					"<td>"+enteringType+"</td>"+
 					"<td>"+recordStatus+"</td>"+
@@ -250,9 +252,36 @@
 		
 		 function cancelForEnter(obj){
 				var me=obj.parentNode.parentNode;
-				var recordId=me.childNodes[0].childNodes[0].innerText; 
-				$(".recordId").html(recordId);
+				var enterrecCode=me.childNodes[0].childNodes[0].innerText; 
+				$(".recordId").html(enterrecCode);
+				$("#enterCode").val(me.id);
+				$("#enterStatus").val(obj.parentNode.id);
 				$(".bg-tanc.m1").show();
 			}
+	</script>
+	
+	<!-- 取消报修订单 -->
+	<script type="text/javascript">
+	$(function(){
+		$(".hhf-submit").click(function(){
+				var enterCode=$("#enterCode").val();
+				var enterStatus=$("#enterStatus").val();
+				alert(enterCode);
+				alert(enterStatus);
+				if(enterStatus == '01'){
+			 	$.youi.ajaxUtils.ajax({
+					url:baseUrl+'/propertyservicemanagerEntrecManager/cancelReservation.json',
+					data:'entrecId='+enterCode,
+					success:function(result){
+							alert("取消成功!");
+							location.reload();
+						}
+				});
+				}else{
+		            alert("该状态不能进行取消操作");
+
+		        }
+			});
+		});
 	</script>
 </youi:html>
