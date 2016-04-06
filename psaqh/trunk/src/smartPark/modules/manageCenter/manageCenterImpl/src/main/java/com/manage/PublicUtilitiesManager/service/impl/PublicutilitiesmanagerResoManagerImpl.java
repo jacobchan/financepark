@@ -542,7 +542,7 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 			genreId = purchasingmanagerGenreList.get(0).getGenreId();
 		}
 		// 查询公共资源下包含的商品
-		conditions.add(ConditionUtils.getCondition("genreId",Condition.BETWEEN,genreId));
+		conditions.add(ConditionUtils.getCondition("genreId",Condition.EQUALS,genreId));
 		//String pageIndex = org.apache.commons.lang.StringUtils.defaultIfEmpty(page, "1");
 		pager.setPageIndex(Integer.valueOf(indexPage));
 		pager.setPageSize(3);
