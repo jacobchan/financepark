@@ -681,8 +681,10 @@
  	<script type="text/javascript">
 	/* 政策展示 */
 		$(function(){
+			var params=["issueTypeCode=01"];
 			$.youi.ajaxUtils.ajax({
 				url:baseUrl +"nmIssuetypeManager/getNewsType.json",//得到新闻发布类型
+				data:params.join('&'),
 				jsonp:'data:jsonp',
 				dataType:'jsonp',
 				success:function(result){
@@ -811,8 +813,10 @@
 	<script type="text/javascript">
 	/* 优惠政策 */
 		$(function(){
+			var params=["issueTypeCode=02"];//02表示优惠政策
 			$.youi.ajaxUtils.ajax({
-				url:baseUrl +"nmIssuenewsManager/getAllPolicy.json",
+				url:baseUrl +"nmIssuetypeManager/getNewsType.json",//得到优惠政策的子类型
+				data:params.join('&'),
 				jsonp:'data:jsonp',
 				dataType:'jsonp',
 				success:function(result){
@@ -828,11 +832,11 @@
 			var length = record.length ;
 			if(length > 5){
 				for(var i=0;i<5;i++){
-					html += "<li><a href='./zscenter/zs3.html'>"+record[i].policyCaption+"</a></li>"
+					html += "<li><a href='./zscenter/zs3.html'>"+record[i].issueTypeCaption+"</a></li>"
 				}
 			}else{
 				for(var i=0;i<record.length;i++){
-					html += "<li><a href='./zscenter/zs3.html'>"+record[i].policyCaption+"</a></li>"
+					html += "<li><a href='./zscenter/zs3.html'>"+record[i].issueTypeCaption+"</a></li>"
 				}
 			}
 			$("#ul2").append(html) ;
