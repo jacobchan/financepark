@@ -12,11 +12,11 @@
 			<youi:fieldSelect property="genreId" caption="商品类别"  src="esb/web/purchasingmanagerPublicManager/getRecordsByGenreCode.json" parents="genreCode" parentsAlias="genreCode" notNull="true" code="genreId" show="genreName"/>
 		   <youi:fieldSelect property="gw.commodityId" show="itemName" code="itemValue"
 				src="esb/web/reservationRecordManager/getRecordsByRecordType.json" notNull="true" caption="所属创立方"/>
-			<youi:fieldSelect property="purchasingmanagerMerchant.merchantId" show="merchantName" code="merchantId"
+		<%-- 	<youi:fieldSelect property="purchasingmanagerMerchant.merchantId" show="merchantName" code="merchantId"
 				src="esb/web/purchasingmanagerMerchantManager/getMerchantsByGenre.json" caption="所属商户"
-				parents="genreId" parentsAlias="genreId"/>
+				parents="genreId" parentsAlias="genreId"/> --%>
 			<youi:fieldSwfupload property="commodityImage" caption="图像" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" />
-			<youi:fieldSwfupload property="commodityCoverImage"  caption="封面图片" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" fileUploadLimit="1" fileQueueLimit="1"/>
+			<%-- <youi:fieldSwfupload property="commodityCoverImage"  caption="封面图片" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" fileUploadLimit="1" fileQueueLimit="1"/> --%>
 			<youi:fieldArea property="commodityDescribe"  caption="描述" column="2" notNull="true"/>
 		</youi:fieldLayout>
 		<youi:button name="chargeSubmit" caption="提交"></youi:button>
@@ -44,9 +44,9 @@
 				if(record.commodityImage != null){
 				   $elem('record_sFpro_commodityImage',pageId).fieldValue(record.commodityImage);
 				}
-				if(record.commodityCoverImage != null){
+				<!-- if(record.commodityCoverImage != null){
 				   $elem('record_sFpro_commodityCoverImage',pageId).fieldValue(record.commodityCoverImage);
-				}
+				} -->
 				
 				
 				
@@ -62,9 +62,9 @@
 		var commodityPrice = $elem('record_sFpro_commodityPrice',pageId).fieldValue();
 	    var commodityName = $elem('record_sFpro_gw_commodityId',pageId).fieldValue();
 	    var genreId = $elem('record_sFpro_genreId',pageId).fieldValue();
-	    var merchantId = $elem('record_sFpro_purchasingmanagerMerchant_merchantId',pageId).fieldValue();
+	<!--     var merchantId = $elem('record_sFpro_purchasingmanagerMerchant_merchantId',pageId).fieldValue(); -->
 		var commodityImage = $elem('record_sFpro_commodityImage',pageId).fieldValue();
-		var commodityCoverImage = $elem('record_sFpro_commodityCoverImage',pageId).fieldValue();
+		<!-- var commodityCoverImage = $elem('record_sFpro_commodityCoverImage',pageId).fieldValue(); -->
 		var commodityDescribe = $elem('record_sFpro_commodityDescribe',pageId).fieldValue();
 		if(!commodityTitle || commodityTitle==''){
 		   alert("标题不能为空");
@@ -90,7 +90,7 @@
 		}
 		var params = '';
 		params = params+'commodityId='+commodityId+'&'+'commodityTitle='+commodityTitle+'&'+'commodityPrice='+commodityPrice+'&'+'gw.commodityId='+commodityName+'&'+
-		'genreId='+genreId+'&'+'commodityImage='+commodityImage+'&'+'commodityCoverImage='+commodityCoverImage+'&'+'commodityDescribe='+commodityDescribe;
+		'genreId='+genreId+'&'+'commodityImage='+commodityImage+'&'+'commodityDescribe='+commodityDescribe;
 		$.youi.ajaxUtil.ajax({
 			url:'/esb/web/purchasingmanagerPublicManager/saveCommodityAndPropertyForGw.json',
 			data:params,
