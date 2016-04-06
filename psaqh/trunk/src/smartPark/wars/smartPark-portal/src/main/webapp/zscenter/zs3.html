@@ -26,7 +26,7 @@
 		</div>
 		<div class="w1200 clearfix pt30 pb50">
 			<div class="fl w895">
-				<h3 class="h3-c-o">孵化器政策</h3><!-- 
+				<!-- <h3 class="h3-c-o">孵化器政策</h3>
 				<div class="index-group">
 					<h5>关于租金</h5>
 					<div class="ig-box">
@@ -72,9 +72,9 @@
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
 	<!--***弹窗 start****************************************-->
-	<div class="bg-tanc">
+	<div class="bg-tanc m1">
 		<div class="tanc-con" style="margin-top:-252px;top:50%;">
-			<a href="javascript:;" class="tc-close"></a>
+			<a href="javascript:;" class="tc-close tc-close1"></a>
 			<form>
 				<h3>填写在线预约单</h3>
 				<table class="line-table">
@@ -139,20 +139,24 @@
 						var policyApplyContactPeople = $("#policyApplyContactPeople").val();
 						var policyApplyContactTel = $("#policyApplyContactTel").val() ;
 						if(policyApplyConpanyName == ""){
-							alert("请输入公司名称！") ;
-							return ;
+							$(".f24.fl.c-333").text("请输入公司名称！");
+							$(".bg-tanc.m2").show();
+							return false;
 						}
 						if(policyApplyContactPeople == ""){
-							alert("请输入联系人！") ;
+							$(".f24.fl.c-333").text("请输入联系人！");
+							$(".bg-tanc.m2").show();
 							return ;
 						}
 						if(policyApplyContactTel == ""){
-							alert("请输入联系手机！") ;
+							$(".f24.fl.c-333").text("请输入联系手机！");
+							$(".bg-tanc.m2").show();
 							return ;
 						}
 						var isMobile=/^(?:13\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;//手机号的格式
 						if(! isMobile.test(policyApplyContactTel)){
-							alert("请输入正确的手机号！") ;
+							$(".f24.fl.c-333").text("请输入正确的手机号！");
+							$(".bg-tanc.m2").show();
 							return ;
 						}  
 						
@@ -171,8 +175,9 @@
 								$("#policyApplyConpanyName").val("");//将输入框内容置为空
 								$("#policyApplyContactPeople").val("");
 								$("#policyApplyContactTel").val("");
-								$(".bg-tanc").hide();//隐藏表单
-								alert("申请成功！");
+								$(".bg-tanc.m1").hide();//隐藏表单
+								$(".f24.fl.c-333").text("申请成功！");
+								$(".bg-tanc.m2").show();
 							}
 						});
 					}
@@ -189,6 +194,7 @@
 				success:function(result){
 					if(result&&result.records){
 						_parseRecords(result.records);
+						//console.log(result.records) ;
 					}
 				}
 			});
@@ -199,6 +205,7 @@
 				$(".fl.w895").append("<div><p><h2>暂时还没有任何的政策优惠哦！</h2></p></div>");
 				return ;
 			}
+			$(".fl.w895").append("<h3 class='h3-c-o'>"+record[0].policyType.issueTypeCaption+"</h3>");
 			for(var i=0;i<record.length;i++){
 				var status = record[i].policyStatus ;
 				if(status == 1){//状态为1表示已发布，为0表示未发布
@@ -223,9 +230,10 @@
 			$(document).on("click",".ib-btn",function(){
 				
 				obj = $(this).parent().parent().attr("id") ;
-				$(".bg-tanc").find("form").attr("class",obj);
+				$(".bg-tanc.m1").find("form").attr("class",obj);
 				if(!isLogin){
-					alert("匿名用户不能申请！") ;
+					$(".f24.fl.c-333").text("匿名用户不能申请！");
+					$(".bg-tanc.m2").show();
 					return ;
 				}else{
 					$.youi.ajaxUtils.ajax({
@@ -241,18 +249,42 @@
 								$("#policyApplyConpanyName").val(rzName);
 								$("#policyApplyContactPeople").val(name);
 								$("#policyApplyContactTel").val(mobile) ;
-								$(".bg-tanc").show();
+								$(".bg-tanc.m1").show();
 							}else{
-								alert("非企业会员不能申请哦！") ;
+								$(".f24.fl.c-333").text("非企业会员不能申请哦！");
+								$(".bg-tanc.m2").show();
 								return ;
 							}
 						}
 					}) ;
 				} 
 			});
-			$(".tc-close").click(function(){
-				$(".bg-tanc").hide();
+			$(".tc-close1").click(function(){
+				$(".m1").hide();
+			});
+			$(".tc-close2").click(function(){
+				$(".m2").hide();
 			});
 		})
 	</script>
+	<!--***弹窗 start****************************************-->
+		<div class="bg-tanc m2">
+			<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+				<a href="javascript:;" class="tc-close tc-close2"></a>
+				<div class="w70 tc mt40" style="margin-left:15%">
+					<table>
+						<tr>
+							<td><img src="../styles/images/grzx/check.png" class="mr40 mb20" border="0"></td>
+							<td >
+								<h4 class="f24 fl c-333"></h4>
+								<!-- <h4 class="f24 fl c-333"> 还有<span class="tt">0</span>秒关闭弹出框</h4> -->
+								<p class="f14 c-o fl mt20 mb20">如有问题，请拨打：0571-86508888</p>
+							</td>
+						<tr/>
+					</table>
+				</div>
+			</div>
+		</div>
+	<!--***弹窗 end****************************************-->
+	
 </html>
