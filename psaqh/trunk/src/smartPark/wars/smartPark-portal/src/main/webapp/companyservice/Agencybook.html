@@ -7,6 +7,15 @@
 <link href="../styles/base.css" type="text/css" rel="stylesheet">
 <link href="../styles/page/page.css" type="text/css" rel="stylesheet">
 <link href="../styles/page/zs.css" type="text/css" rel="stylesheet" >
+<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+<script type="text/javascript" src="../scripts/page/kefu.js"></script>
+<script type="text/javascript" src="../scripts/page/url.js"></script>
+<script type="text/javascript" src="../scripts/page/right.js"></script>
+<script type="text/javascript" src="../scripts/companyservice/Agencybook.js"></script>
 </head>
 
 <body>
@@ -226,12 +235,8 @@
                             <span class="record_info ml20 c3 lh24">
                                 <div>李三朵<i class="chuang"></i></div>
                                 <p>真心不错！好评！！！<span>(2016-11-12 17:34)</span></p>
-                                <!-- <div class="cd7 fw">交易金额：&yen;99.00</div> -->
                             </span>
                         </div>
-                        <!-- <div class="fr c3 mt50">
-                             <span class="zan"></span><span class="pr10 pl5">(0)赞</span><span class="pl10" id="reply">回复</span>
-                        </div> -->
                     </li>
                 </ul>
             </div>
@@ -246,8 +251,7 @@
             <div>
             	<span class="c3">声明：</span>
                 <p class="mt20">
-                	你可以在购买前进行咨询，我们有专业人进行回复！该回复仅在当前
-                    提问者有效，其他网友仅提供参考！
+                	你可以在购买前进行咨询，我们有专业人进行回复！该回复仅在当前提问者有效，其他网友仅提供参考！
                 </p>
                 <p class="mt20">
                 	咨询回复的工作时间为：周一至周五，9:00-18:00,请耐心等待工作人员回复
@@ -282,9 +286,7 @@
                 </thead>
                 <tbody class="bgf1" id="shopCar">
                 	<tr>
-                    	<td class="">
-                            一般纳税人
-                        </td>
+                    	<td class="">一般纳税人</td>
                         <td><span class="cc">1000</span>&nbsp;元/次</td>
                         <td>
                         	<div class="inline_b" style="overflow:hidden;margin-top:5px">
@@ -297,9 +299,7 @@
                         <td></td>
                     </tr>
                     <tr>
-                    	<td class="">
-                            地址变更
-                        </td>
+                    	<td class="">地址变更</td>
                         <td><span class="cc">600</span>&nbsp;元/次</td>
                         <td>
                         	<div class="inline_b" style="overflow:hidden;margin-top:5px">
@@ -372,6 +372,24 @@
     </div>
 </div>
 <!--***弹窗 start****************************************-->
+<div class="bg-tanc m1">
+	<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+		<a href="javascript:;" class="tc-close"></a>
+		<div class="tc mt40">
+			<div class="mt20 mb20 f16 lh26">
+				<img src="../styles/images/yqfw/correct.png" border="0" class="mr20"/>
+			</div>
+			<p class="mb10 f16">您已经成功提交订单，请到会员中心查看。</p>
+			<p><span class="c-o f24 tc-time" id="ti-m1">3 </span>秒后，系统将自动跳转</p>
+			<p class="mt10"><a style="cursor:pointer;" onclick="jump();" class="c-6">手动跳转 ></a></p>
+			<div class="clearfix mt30">
+				<a href="" class="c-6"><i class="fa fa-home mr10" style="font-size:24px;"></i>返回首页</a>
+				<span class="f14 ml20 mr20 c-6">|</span>
+				<a href="" class="c-6"><i class="fa fa-user mr10" style="font-size:20px;"></i>个人中心</a>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="bg-tanc m2">
 	<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
 		<a href="javascript:;" class="tc-close"></a>
@@ -390,338 +408,5 @@
 	</div>
 </div>
 <!--***弹窗 end****************************************-->
-<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
-<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
-<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
-<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
-<script type="text/javascript" src="../scripts/page/kefu.js"></script>
-<script type="text/javascript" src="../scripts/page/url.js"></script>
-<script type="text/javascript" src="../scripts/page/right.js"></script>
-<script>
-$(function(){
-	//加法函数  
-	function accAdd(arg1, arg2) {  
-	    var r1, r2, m;  
-	    try{  
-	        r1 = arg1.toString().split(".")[1].length;  
-	    }catch (e) {
-	        r1 = 0;  
-	    }
-	    try {
-	        r2 = arg2.toString().split(".")[1].length;  
-	    }catch (e) {  
-	        r2 = 0;  
-	    }  
-	    m = Math.pow(10, Math.max(r1, r2));  
-	    return (arg1 * m + arg2 * m) / m;  
-	}   
-	
-	//减法函数  
-	function Subtr(arg1, arg2) {  
-	    var r1, r2, m, n;  
-	    try {  
-	        r1 = arg1.toString().split(".")[1].length;  
-	    }catch (e) {  
-	        r1 = 0;  
-	    }  
-	    try {  
-	        r2 = arg2.toString().split(".")[1].length;  
-	    }catch (e) {  
-	        r2 = 0;  
-	    }  
-	    m = Math.pow(10, Math.max(r1, r2));  
-	     //动态控制精度长度  
-	    n = (r1 >= r2) ? r1 : r2;  
-	    return ((arg1 * m - arg2 * m) / m).toFixed(n);  
-	} 
-	
-	function click(){
-		$(".cos_add").click(function(){
-			var count = $(this).parents("tr").attr("data-num");
-			count++;
-			$(this).siblings(".numbox").text(count);
-			$(this).parents("tr").attr("data-num",count);
-			var comPrice = $(this).parents("tr").attr("data-commodityPrice");
-			var amount = parseFloat(count * comPrice);
-			$(this).parents("tr").find('#comAmount').html(amount);
-			var comAmount = $('#payAmount').html();
-			$('#payAmount').html(accAdd(comAmount,comPrice));
-		});
-		$(".cos_less").click(function(){
-			var count = $(this).parents("tr").attr("data-num");
-			if(count<=1){alert("购买数量不能小于1！");return ;}
-			count--;
-			$(this).siblings(".numbox").text(count);
-			$(this).parents("tr").attr("data-num",count);
-			var comPrice = $(this).parents("tr").attr("data-commodityPrice");
-			var amount = parseFloat(count * comPrice);
-			$(this).parents("tr").find('#comAmount').html(amount);
-			var comAmount = $('#payAmount').html();
-			$('#payAmount').html(Subtr(comAmount,comPrice));
-		});
-		$(".del").click(function(){
-			var id = $(this).parents("tr").attr("data-id");
-			var commodityTitle = $(this).parents("tr").attr("data-commodityTitle");
-			var commodityPrice = $(this).parents("tr").attr("data-commodityPrice");
-			$(this).parents("tr").remove();
-			$('#'+id+'shopul').show();
-			var amount = $(this).parents("tr").find('#comAmount').html();
-			var comAmount = $('#payAmount').html();
-			$('#payAmount').html(Subtr(comAmount,amount));
-			$('.shopul').html($('.shopul').html()+'<li id ="'+id+'shopul">'+commodityTitle+'&nbsp;&nbsp;<span class="cc">'+
-					commodityPrice+'</span>&nbsp;元/次&nbsp;<div class="shop0" data-id="'+id+
-					'"data-commodityTitle="'+commodityTitle+
-					'"data-commodityPrice="'+commodityPrice+'"></div></li>');
-			
-			$(".shop0").click(function(){
-				var id = $(this).attr("data-id");
-				var commodityTitle = $(this).attr("data-commodityTitle");
-				var commodityPrice = $(this).attr("data-commodityPrice");
-				$('#shopCar').html($('#shopCar').html()+'<tr data-id="'+id+'" data-num="1" data-commodityPrice="'+commodityPrice+
-				'" data-commodityTitle="'+commodityTitle+'"><td class="">'+commodityTitle+'</td><td><span class="cc">'+commodityPrice+'</span>&nbsp;元/次</td><td>'+
-				'<div class="inline_b" style="overflow:hidden;margin-top:5px"><div class="cos_less">-</div><div class="numbox">1</div>'+
-				'<div class="cos_add">+</div></div></td><td><span class="cc" id="comAmount">'+commodityPrice+
-				'</span>&nbsp;元</td><td></td><td><a class="del" style="cursor:pointer">删除</a></td></tr>');
-				
-				var comAmount = $('#payAmount').html();
-				$('#payAmount').html(accAdd(comAmount,commodityPrice));
-				$('#'+id+'shopul').remove();
-				click();
-			});
-			
-		});
-	}
-	
-	var serviceURL = baseUrl+"purchasingmanagerCommodityManager/getAgencyCommodityList.json";
-	$.youi.ajaxUtils.ajax({
-		url:serviceURL,
-		jsonp:'data:jsonp',
-		dataType:'jsonp',
-		success:function(results){
-			if(results&&results.records){
-				var htmls = [];
-				var htmlss = [];
-				for(var i=0;i<results.records.length;i++){
-					htmls.push('<tr><td style="background:#F0F0F0 url('+cenUrl+'common/uploadImage.html?repository=/swfupload&path='+
-							results.records[i].commodityImage+'&method=show) center center no-repeat;width:78px;"></td><td><div class="ab_proinfo c3 f16">'+
-							results.records[i].commodityTitle+'</div></td>'+
-							'<td class="w50"><div class="p15 c3"><span>'+results.records[i].commodityPrice+'元/</span><span>'+
-							results.records[i].agencyBook.serviceTerm+'</span><div class="inline_b fr ml30">'+
-							'<a href="javascript:;" class="ab_shop" data-id="'+results.records[i].commodityId+
-					'"data-commodityTitle="'+results.records[i].commodityTitle+'"data-commodityPrice="'+results.records[i].commodityPrice+
-					'"></a></div><span class="cc inline_b fr mr50">杭州</span></div></td></tr>');
-					
-					htmlss.push('<li id ="'+results.records[i].commodityId+'shopul">'+results.records[i].commodityTitle+'&nbsp;&nbsp;<span class="cc">'+results.records[i].commodityPrice+
-					'</span>&nbsp;元/次&nbsp;<div class="shop0" data-id="'+results.records[i].commodityId+
-					'"data-commodityTitle="'+results.records[i].commodityTitle+
-					'"data-commodityPrice="'+results.records[i].commodityPrice+'"></div></li>');
-				}
-				$('.ab_pro').html(htmls.join(''));
-				$('.shopul').html(htmlss.join(''));
-			}
-			var $layer=$(".pop_layer");
-			$(".ab_shop").click(function(){
-				if(!isLogin){
-				   $(".bg-tanc.m2").show();
-				 	 return;
-				}
-				var id = $(this).attr("data-id");
-				var commodityTitle = $(this).attr("data-commodityTitle");
-				var commodityPrice = $(this).attr("data-commodityPrice");
-				$('#shopCar').html('<tr data-id="'+id+'" data-num="1" data-commodityPrice="'+commodityPrice+'" data-commodityTitle="'+commodityTitle+
-				'"><td class="">'+commodityTitle+'</td><td><span class="cc">'+commodityPrice+'</span>&nbsp;元/次</td><td>'+
-				'<div class="inline_b" style="overflow:hidden;margin-top:5px"><div class="cos_less">-</div>'+
-				'<div class="numbox">1</div><div class="cos_add">+</div></div></td><td><span class="cc" id="comAmount">'+commodityPrice+
-				'</span>&nbsp;元</td><td></td><td><a class="del" style="cursor:pointer">删除</a></td></tr>');
-				
-				$('#payAmount').html(commodityPrice);
-				$('#'+id+'shopul').remove();
-				$layer.show();
-				click();
-			});
-			$(".shop0").click(function(){
-				var id = $(this).attr("data-id");
-				var commodityTitle = $(this).attr("data-commodityTitle");
-				var commodityPrice = $(this).attr("data-commodityPrice");
-				$('#shopCar').html($('#shopCar').html()+'<tr data-id="'+id+'" data-num="1" data-commodityPrice="'+commodityPrice+
-				'" data-commodityTitle="'+commodityTitle+'"><td class="">'+commodityTitle+'</td><td><span class="cc">'+commodityPrice+'</span>&nbsp;元/次</td><td>'+
-				'<div class="inline_b" style="overflow:hidden;margin-top:5px"><div class="cos_less">-</div><div class="numbox">1</div>'+
-				'<div class="cos_add">+</div></div></td><td><span class="cc" id="comAmount">'+commodityPrice+
-				'</span>&nbsp;元</td><td></td><td><a class="del" style="cursor:pointer">删除</a></td></tr>');
-				
-				var comAmount = $('#payAmount').html();
-				$('#payAmount').html(accAdd(comAmount,commodityPrice));
-				$('#'+id+'shopul').remove();
-				click();
-			});
-			$(".pop_back").click(function(){
-				$layer.hide();
-			});
-			
-			$(".nav_1,.navsub").hover(function(){
-				$(".navsub").show();
-			},function(){
-				$(".navsub").hide();
-			});
-			$(".blend_ul>li").click(function(){
-				var index=$(this).index();
-				$(this).addClass("active").siblings("li").removeClass("active");
-				$(".blend_item").eq(index).show().siblings(".blend_item").hide();
-			});
-		}
-	}); 
-	
-	
-	/**/
-	star(".starbox1 i");
-	star(".starbox2 i");
-	star(".starbox3 i");
-	star(".starbox4 i");
-	function star(ele){
-		$(ele).hover(function(){
-			var index=$(this).index()+1;
-			$(ele).removeClass("star1").addClass("star0")
-			var arr=$(ele).toArray().slice(0,index);
-			for(var i=0;i<arr.length;i++){
-				arr[i].className="star1";
-			}
-		});
-	}
-	$('#btn-sumbit').click(function(){
-		if(!isLogin){
-		   $(".bg-tanc.m2").show();
-		 	 return;
-		}
-		var length = $('#shopCar').children("tr").length;
-		var params = '';
-		for(var i =0;i<length;i++){
-			var object = $('#shopCar').children("tr").get(i);
-			var commodityId = object[attribute = 'attributes'][attribute = 'data-id'][attribute = 'value'];
-			var num = object[attribute = 'attributes'][attribute = 'data-num'][attribute = 'value'];
-			if(i+1<length){
-				params = params+$.youi.parameterUtils.propertyParameter("records["+i+"].commodityId.commodityId",commodityId)+"&";
-				params = params+$.youi.parameterUtils.propertyParameter("records["+i+"].commoditydetailNum",num)+"&";
-			}else{
-				params = params+$.youi.parameterUtils.propertyParameter("records["+i+"].commodityId.commodityId",commodityId)+"&";
-				params = params+$.youi.parameterUtils.propertyParameter("records["+i+"].commoditydetailNum",num);
-			}
-		}
-		var serviceURL = baseUrl+"ordermanagerUserorderManager/saveAgencyOrder.json";
-		
-		$.youi.ajaxUtils.ajax({
-			url:serviceURL,
-			data:params,
-			jsonp:'data:jsonp',
-			dataType:'jsonp',
-			success:function(results){
-				if(results&&results.record){
-					alert('订单提交成功！');
-					$(".pop_layer").hide();
-					window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
-				}
-			}
-		});
-	});
-	var genreCode = "0504";
-	var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/getPagerPurGenreEvaluatesByCode.json";
-	$.youi.ajaxUtils.ajax({
-		url:serviceURL,
-		data:{genreCode:genreCode},
-		jsonp:'data:jsonp',
-		dataType:'jsonp',
-		success:function(results){
-			if(results&&results.records){
-				var htmls = [];
-				for(var i=0;i<results.records.length;i++){
-					htmls.push('<li><div class="fl"><img src="../styles/images/company/user.png"/><span class="record_info ml20 c3 lh24">'+
-					'<div>'+results.records[i].memberInformation.memberName+'<i class="chuang"></i></div><p>'+results.records[i].content
-					+'<span>('+results.records[i].createTime+')</span></p></span></div></li>');
-				}
-				$('.record_ul').html(htmls.join(''));
-			}
-		}
-	}); 
-	$('#evaluate').click(function(){
-		if(!isLogin){
-		   $(".bg-tanc.m2").show();
-		 	 return;
-		}
-		
-		var overallSatisfaction = 0;
-		var arr=$('.starbox1 i').toArray();
-		for(var i=0;i<arr.length;i++){
-			if(arr[i].className=="star1"){
-				overallSatisfaction++;
-			}
-		}
-		var reactionRate = 0;
-		var arr=$('.starbox2 i').toArray();
-		for(var i=0;i<arr.length;i++){
-			if(arr[i].className=="star1"){
-				reactionRate++;
-			}
-		}
-		var serviceAttitude = 0;
-		var arr=$('.starbox3 i').toArray();
-		for(var i=0;i<arr.length;i++){
-			if(arr[i].className=="star1"){
-				serviceAttitude++;
-			}
-		}
-		var costPerformance = 0;
-		var arr=$('.starbox4 i').toArray();
-		for(var i=0;i<arr.length;i++){
-			if(arr[i].className=="star1"){
-				costPerformance++;
-			}
-		}
-		
-		
-		var evaluateContent = $('#evaluateContent').val();
-		var params = $.youi.parameterUtils.propertyParameter("overallSatisfaction",overallSatisfaction)+"&";
-		params = params+$.youi.parameterUtils.propertyParameter("reactionRate",reactionRate)+"&";
-		params = params+$.youi.parameterUtils.propertyParameter("serviceAttitude",serviceAttitude)+"&";
-		params = params+$.youi.parameterUtils.propertyParameter("costPerformance",costPerformance)+"&";
-		params = params+$.youi.parameterUtils.propertyParameter("genreCode",genreCode)+"&";
-		params = params+$.youi.parameterUtils.propertyParameter("evaluateContent",evaluateContent);
-		
-		var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/savePurGenreEvaluate.json";
-		$.youi.ajaxUtils.ajax({
-			url:serviceURL,
-			data:params,
-			jsonp:'data:jsonp',
-			dataType:'jsonp',
-			success:function(results){
-				if(results&&results.record){
-					alert('评论成功！');
-					location.reload([true]);
-				}
-			}
-		});
-	});
-	
-	$('#consult').click(function(){
-		if(!isLogin){
-		   $(".bg-tanc.m2").show();
-		 	 return;
-		}
-		var content = $('#consultContent').val();
-		var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/savePurGenreConsult.json";
-		$.youi.ajaxUtils.ajax({
-			url:serviceURL,
-			data:{content:content,genreCode:genreCode},
-			jsonp:'data:jsonp',
-			dataType:'jsonp',
-			success:function(results){
-				if(results&&results.record){
-					alert('提交成功！');
-					location.reload([true]);
-				}
-			}
-		});
-	});
-})
-</script>
 </body>
 </html>
