@@ -517,6 +517,8 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 				}else{
 					pcLists.add(pc);
 				}
+			}else if(genreCode.equals("0303")){//广告
+				pcLists.add(pc);
 			}
 		}
 		pagerRecords.setRecords(pcLists);
