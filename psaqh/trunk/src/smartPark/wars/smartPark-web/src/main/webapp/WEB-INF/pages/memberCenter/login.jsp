@@ -184,7 +184,6 @@ function registClick(){
 			}); 
 		});
 		function openUrl(){
-			alert("sadasd");
 			var url=Portal+"/findpsw.html"; 
 			window.location.assign(url); 
 		};
