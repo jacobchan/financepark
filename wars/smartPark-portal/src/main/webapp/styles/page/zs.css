@@ -718,7 +718,7 @@ i.star2{background:url(../images/company/star2.png) no-repeat;}
 .gz-fx-box:nth-child(2n){float: right;}
 .gz-fx-box .gzb-thead{background-color: #eeeeee;padding: 5px 20px;line-height: 30px;font-size: 14px;}
 .gz-fx-box .gzb-thead a{color: #737373;}
-.gz-fx-box .gzb-thead a:hover{color: #333;text-decoration: underline;}
+.gz-fx-box .gzb-thead a:hover{text-decoration: underline;color: #ff6715;}
 .gz-fx-box .w60{padding:0px 20px;line-height: 20px;font-size: 12px;color: #7d7d7d;margin:20px 0px;}
 .gz-fx-box .w60 p{margin-bottom: 10px;}
 .gz-fx-box .w40{border-left: 1px solid #f1f0f0;padding: 0px 20px;width: 40%;font-size: 12px;color: #7d7d7d;margin:20px 0px;}
@@ -727,6 +727,7 @@ i.star2{background:url(../images/company/star2.png) no-repeat;}
 .gz-fx-box .w40 .p1 i{font-size: 20px;margin-right: 6px;}
 .gz-fx-box .w40 a{color: #333;}
 .gz-fx-box .w40 a:hover{color: #ff6715;text-decoration: underline;}
+.gz-fx-box table{color: #7d7d7d; font-size: 12px;}
  
  /**我的人脉**/
 .rm-mb{margin-bottom: 15px;}
@@ -780,13 +781,14 @@ a.a-btn-small:hover{background-color: #FF5900;}
 .bx-infor tr td textarea{resize:none;width: 795px;height: 100px;padding:7px 10px;line-height: 20px;border:1px solid #efecec;}
 .bx-infor tr td .set-file1 {background: #fff;border:1px solid #ed7034;transition: all .4s linear;-moz-transition: width  all .4s;-webkit-transition:  all .4s;-o-transition: all .4s linear;color: #ed7034;}
 .bx-infor tr td .set-file1:hover{color: #fff;background:#ed7034;}
+
 /**政策申请**/
 .jc-nav li{float: left;padding-right: 40px;}
 .jc-nav li:last-child{padding-right: 0px;}
 .bd-dash{text-align: left; color: #666;padding: 10px 0px;line-height: 30px;border-bottom:1px dashed #d5d4d2;margin-left: 40px;margin-right: 40px;font-size: 14px;font-weight: bold;}
-.pb-btn{font-size: 15px;height: 40px;padding: 0px 30px;background: #54514f none repeat scroll 0% 0%;line-height: 40px;display: inline-block;margin-top: 20px;color: #FFF;}
-.pb-btn:hover{background: #333;}
-
+.pb-btn{font-size: 15px;height: 40px;padding: 0px 30px;background: #707070 none repeat scroll 0% 0%;line-height: 40px;display: inline-block;margin-top: 20px;color: #FFF;}
+.pb-btn:hover{background: #555;}
+.fx-two{display: none;}
 
 /**航程信息**/
 .hc-con-h{background: #f6f6f6;padding:15px;position: relative;}
@@ -980,3 +982,9 @@ a.see-all:hover{color: #FF6715;}
 
 .c-6{color: #666;}
 a.c-6:hover{color: #FF6715;}
+
+/**a标签**/
+.ib-btn.tp-btn{background: #2be27e;}
+.ib-btn.tp-btn:hover{background: #28d778;}
+.ib-btn.fs-btn{background: #4bb6fa;}
+.ib-btn.fs-btn:hover{background: #47aced;}
