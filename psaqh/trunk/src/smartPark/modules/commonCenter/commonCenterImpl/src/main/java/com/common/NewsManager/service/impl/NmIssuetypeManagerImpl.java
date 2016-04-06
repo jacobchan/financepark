@@ -177,8 +177,8 @@ public class NmIssuetypeManagerImpl extends BaseManagerImpl implements NmIssuety
      * @return
      */
     @EsbServiceMapping
-    public List<NmIssuetype> getNewsType(@ServiceParam(name="userId",pubProperty = "userId") String userId) {
-    	NmIssuetype type = nmIssuetypeDao.getObjectByUniqueProperty("issueTypeCode", "01") ;//01为新闻公告类型,得到新闻公告类型
+    public List<NmIssuetype> getNewsType(@ServiceParam(name="issueTypeCode") String issueTypeCode) {
+    	NmIssuetype type = nmIssuetypeDao.getObjectByUniqueProperty("issueTypeCode", issueTypeCode) ;//01为新闻公告类型,02为优惠政策
     	if(type != null){
     		String typeId = type.getIssueTypeId() ;//得到新闻公告ID
     		Collection<Condition> condition =  new ArrayList<Condition>();
