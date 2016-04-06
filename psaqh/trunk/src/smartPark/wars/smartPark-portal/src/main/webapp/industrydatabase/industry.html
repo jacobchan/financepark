@@ -161,12 +161,32 @@
 				</p>
 				<div class="dialog-con">
 					<textarea placeholder="请在此处输入你想对该公司负责人说的话..."></textarea>
-					<p class="tc"><a href="">回复</a></p>
+					<p class="tc"><a href="javascript:;" onclick="$('.bg-tanc.m1').show();$('#ti-m1').text('5');a=5;timer1=setInterval('jump1()',1000);">回复</a></p>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div id="youi_page_footer" class="youi-page-footer"></div>
+	<!--***弹窗 start****************************************-->
+	<div class="bg-tanc m1">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="tc mt40">
+				<div class="mt20 mb20 f16 lh26">
+					<img src="../styles/images/yqfw/correct.png" border="0" class="mr20"/>
+				</div>
+				<p class="mb10 f16">您已经成功提交申请，请到会员中心查看申请状态。</p>
+				<p><span class="c-o f24 tc-time mr5" id="ti-m1">5</span>秒后，系统将自动跳转</p>
+				<!-- <p class="mt10"><a href="" class="c-6">手动跳转 ></a></p> -->
+				<div class="clearfix mt15 pt15" style="border-top:1px solid #efecec">
+					<a href="javascript:;" class="ib-btn" style="width:120px;">前往查看</a>
+					<span class="ml30 mr30"></span>
+					<a href="javascript:;" class="ib-btn fs-btn" style="width:120px;">返回</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--***弹窗 end****************************************-->
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=0jBm0QtZ3t8BGclw0ujY0kFe"></script>
 	<script type="text/javascript">
 	    var lb_two_index = 0;
@@ -440,5 +460,21 @@
 	    	//});
 	    });
     </script>
+
+	<script type="text/javascript">
+			var a;
+			function jump1(){
+				if(a>1){
+					a--;
+					$("#ti-m1").text(a);
+				}else{
+					window.location="../grzx/grzx1.html";
+				}		
+			}
+			$(".tc-close").click(function(){
+				 clearInterval(timer1); 
+			 })
+	</script>
+
 </body>
 </html>
