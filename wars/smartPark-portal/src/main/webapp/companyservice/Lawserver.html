@@ -6,6 +6,7 @@
 <link href="../styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 <link href="../styles/base.css" type="text/css" rel="stylesheet">
 <link href="../styles/page/page.css" type="text/css" rel="stylesheet">
+<link href="../styles/page/zs.css" type="text/css" rel="stylesheet" >
 </head>
 
 <body>
@@ -279,6 +280,25 @@
         </div>
     </div>
 </div>
+<!--***弹窗 start****************************************-->
+<div class="bg-tanc m2">
+	<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+		<a href="javascript:;" class="tc-close"></a>
+		<div class="w70 tc mt40" style="margin-left:15%">
+			<table>
+				<tr>
+					<td><img src="../styles/images/grzx/check.png" class="mr40 mb20" border="0"></td>
+					<td >
+						<h4 class="f24 fl c-333">请登录!</h4>
+						<!-- <h4 class="f24 fl c-333"> 还有<span class="tt">0</span>秒关闭弹出框</h4> -->
+						<p class="f14 c-o fl mt20 mb20">如有问题，请拨打：0571-86508888</p>
+					</td>
+				<tr/>
+			</table>
+		</div>
+	</div>
+</div>
+<!--***弹窗 end****************************************-->
 <script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
 <script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
@@ -286,6 +306,7 @@
 <script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 <script type="text/javascript" src="../scripts/page/kefu.js"></script>
 <script type="text/javascript" src="../scripts/page/url.js"></script>
+<script type="text/javascript" src="../scripts/page/right.js"></script>
 <script>
 $(function(){
 	//加法函数  
@@ -416,6 +437,10 @@ $(function(){
 			/**/
 			var $layer=$(".pop_layer");
 			$(".law_pop").click(function(){
+				if(!isLogin){
+				   $(".bg-tanc.m2").show();
+				 	 return;
+				}
 				var id = $(this).attr("data-id");
 				var commodityTitle = $(this).attr("data-commodityTitle");
 				var commodityPrice = $(this).attr("data-commodityPrice");
@@ -476,7 +501,10 @@ $(function(){
 		});
 	}
 	$('#btn-sumbit').click(function(){
-		if(!isLogin){alert("请登录");return;}
+		if(!isLogin){
+		   $(".bg-tanc.m2").show();
+		 	 return;
+		}
 		var length = $('#shopCar').children("tr").length;
 		var params = '';
 		for(var i =0;i<length;i++){
@@ -527,7 +555,10 @@ $(function(){
 		}
 	}); 
 	$('#evaluate').click(function(){
-		if(!isLogin){alert("请登录");return;}
+		if(!isLogin){
+		   $(".bg-tanc.m2").show();
+		 	 return;
+		}
 		
 		var overallSatisfaction = 0;
 		var arr=$('.starbox1 i').toArray();
@@ -583,7 +614,10 @@ $(function(){
 	});
 	
 	$('#consult').click(function(){
-		if(!isLogin){alert("请登录");return;}
+		if(!isLogin){
+		   $(".bg-tanc.m2").show();
+		 	 return;
+		}
 		var content = $('#consultContent').val();
 		var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/savePurGenreConsult.json";
 		$.youi.ajaxUtils.ajax({
