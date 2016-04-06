@@ -30,6 +30,7 @@ import com.gsoft.utils.HttpSenderMsg;
 import com.gsoft.utils.QRCodeUtil;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
+import com.manage.PolicyManager.entity.PolicyApply;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTwcrd;
@@ -242,16 +243,17 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
 	 * @throws BusException
 	 */
     @EsbServiceMapping
-	public PropertyservicemanagerFkcode getFkcodeforpage(@ServiceParam(name="fkcodeId") String fkcodeId) throws BusException{
+	public PropertyservicemanagerFkcode cancelStatus(@ServiceParam(name="fkcodeId") String fkcodeId) throws BusException{
     	PropertyservicemanagerFkcode fkcode = propertyservicemanagerFkcodeDao.get(fkcodeId) ;
     	if(fkcode!=null){
     		PropertyservicemanagerTwcrd twcrd = propertyservicemanagerTwcrdManager.findTwcrdByFkcode(fkcode) ;//通过访客申请对象得到对应的二维码对象
-    		twcrd.setStatus("01");
+    		twcrd.setStatus("03");
     		propertyservicemanagerTwcrdManager.savePropertyservicemanagerTwcrd(twcrd);
     		return fkcode;
     	}else{
     		return null;
     	}
+    	
     	
     }
     //通过订单号获取当前用户的访客记录  模糊查询
