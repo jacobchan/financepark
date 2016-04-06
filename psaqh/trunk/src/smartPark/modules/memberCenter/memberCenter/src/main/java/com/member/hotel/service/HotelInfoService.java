@@ -42,7 +42,7 @@ public interface HotelInfoService extends BaseManager{
 																									// pagesize每页显示几条评论
 																									// page第几页
 	// 某酒店的评论
-	public List<JsonNode> getHotelComment(String hid,int ...nums) throws BusException;
+	public List<JsonNode> getHotelComment(String hid,String nums) throws BusException;
 
 	// 某酒店的图片
 	public List<JsonNode> getHotelPic(String hid) throws BusException;
