@@ -552,7 +552,7 @@
             </form>
         </div>
         <div class="content_right">
-        	<div class="ii_tit hand"><span class="span_bold">会议室预定</span><span>车辆预定</span><span>园区专车预定</span></div>
+        	<div class="ii_tit hand"><span class="span_bold">会议室预定</span><span>车辆预定</span><span>广告资源预定</span></div>
             <ul class="hand_ul" id="roomPage" style="min-height:304px;">
             	<!-- <li>
                 	<div class="fl"><img src="styles/images/index/img.jpg"/></div>
@@ -580,6 +580,24 @@
                 </li> -->
             </ul>
             <ul class="hand_ul" id="carPage" style="display:none;min-height:304px;">
+            	<!-- <li>
+                	<div class="fl circle"></div>
+                    <div class="fl ml15 lh22">
+                    	<span class="span_bold">行政服务中心至硅谷小镇</span>
+                        <div class="cc f12">行政服务中->富春硅谷</div>
+                        <a href="./companyservice/carLease.html" class="handbtn">立即预定</a>
+                    </div>
+                </li>
+                <li>
+                	<div class="fl circle"></div>
+                    <div class="fl ml15 lh22">
+                    	<span class="span_bold">506夜班车</span>
+                        <div class="cc f12">玉长城->红郡山庄</div>
+                        <a href="./companyservice/carLease.html" class="handbtn">立即预定</a>
+                    </div>
+                </li> -->
+            </ul>
+             <ul class="hand_ul" id="advPage" style="display:none;min-height:304px;">
             	<!-- <li>
                 	<div class="fl circle"></div>
                     <div class="fl ml15 lh22">
@@ -834,12 +852,12 @@
 					dataType:'jsonp',
 					success:function(results){
 						if(results&&results.records){
-					   _parseRecords(results.records);
+					   _sparseRecords(results.records);
 						}
 					}
 				});
 				
-				function _parseRecords(record){
+				function _sparseRecords(record){
 					//var imageUrl="/filestore/";
 				 	for(var i=0;i<3;i++){
 						   var imageUrl="styles/images/index/room.jpg";
@@ -878,12 +896,12 @@
 					dataType:'jsonp',
 					success:function(results){
 						if(results&&results.records){
-					   _parseRecords(results.records);
+					   _parseRecordss(results.records);
 						}
 					}
 				});
 				
-				function _parseRecords(record){
+				function _parseRecordss(record){
 				
 					for(var i=0;i<3;i++){
 						var imageUrl="styles/images/index/car.jpg";
@@ -900,7 +918,42 @@
 			
 		});
 	</script>
-                
+	
+	    <script type="text/javascript">
+		$(function(){
+			  var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/goPage.json?genreCode=0303&indexPage=1";//0303:广告
+			  
+			 
+				//公共方法
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(results){
+						if(results&&results.records){
+					   _parseRecord(results.records);
+						}
+					}
+				});
+				
+				function _parseRecord(record){
+				
+					for(var i=0;i<3;i++){
+						var imageUrl="styles/images/index/ad1.jpg";
+					    if(record[i].commodityImage !=null && record[i].commodityImage!=""){
+						   imageUrl=cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].commodityImage+"&method=show";
+					   }
+						   //http://localhost:8088/smartPark-web/ imageUrl
+							 var html="<li><div class='fl'><img src='"+imageUrl+"' height='59' width='110'></div><div class='fl ml10'><div class='span_bold'><a href='./companyservice/advertxq.html?id="+record[i].commodityId+"'>"+record[i].commodityTitle+"</a></div>"+
+							"<p class='cc f12'>"+record[i].commodityPrice+"元/小时</p><a class='handbtn' href='./companyservice/advertxq.html?id="+record[i].commodityId+"'>立即预定</a></div></li>";
+							 $("#advPage").append(html);
+							 
+					} 
+				};
+			
+		});
+	</script>
+	
 <script type="text/javascript">
 	$(function () {
 		/*banner*/
