@@ -95,7 +95,7 @@ a{color:#aaa}.inline_b{display:inline-block}.fw{font-weight:600}.prelative{posit
 .czh_ul li:hover div{display:block}
 .czh_ul a{display:block;width:100%;}
 /*right 会议室预定....*/
-.hand_ul{border:1px #F3F2F2 solid;border-bottom:none;}
+.hand_ul{border:1px #F3F2F2 solid;}
 .hand_ul li{border-bottom:1px #F3F2F2 solid;padding:20px 10px;overflow:hidden;position:relative;cursor: pointer;}
 .hand_ul li:hover{background: #f6f6f6;}
 a.handbtn{display:inline-block;border:1px #FF803B solid;padding:0px 3px;color:#FF803B;background:#fff;font-size:12px;transition: all .4s}

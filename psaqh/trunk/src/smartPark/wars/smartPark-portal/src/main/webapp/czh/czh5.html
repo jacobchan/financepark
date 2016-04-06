@@ -13,6 +13,7 @@
 	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 	<script type="text/javascript" src="../scripts/page/url.js"></script>
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
+	<script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
 </head>
 <body style="background-color:#f9f9f9;">
 	<!--***top start****************************************-->
@@ -50,7 +51,7 @@
 				<tr>
 					<td><a href="javascript:;" class="ib-btn open-m1">立即申请</a></td>
 					<td><a href="javascript:;" class="ib-btn open-m2">立即申请</a></td>
-					<td><a href="javascript:;" class="ib-btn">立即申请</a></td>
+					<td><a href="javascript:;" class="ib-btn open-m3">立即申请</a></td>
 				</tr>
 			</table>
 			<div class="clearfix">
@@ -220,6 +221,50 @@
 			</table>
 		</div>
 	</div>
+	<div class="bg-tanc m3">
+		<div class="tanc-con" style="top:50%;margin-top:-250px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<h3 class="mb10"><b>办公申请</b></h3>
+			<table class="line-table cic-l-t">
+				<colgroup>
+					<col width="110"></col>
+					<col></col>
+				</colgroup>
+				<tr>
+					<td>企业名称</td>
+					<td><input type="text" style="width:300px"></td>
+				</tr>
+				<tr>
+					<td>企业规模</td>
+					<td>
+						<div class="tct-select fl mr20" style="width:150px;">
+							<div class="ic-select" style="background: transparent url(../styles/images/yqfw/down.png) no-repeat scroll right center;">
+								<p class="c-b1">&nbsp;</p>
+							</div>
+							<ul style="display: none;" class="select-nav">
+								<li>大</li>
+								<li>中</li>
+								<li>小</li>
+							</ul>
+						</div>
+					</td>
+				</tr>
+				
+				<tr>
+					<td valign="top">日期进驻<br/>日期</td>
+					<td><input type="text" placeholder="来访日期" id="fkcodeDate"></td>
+				</tr>
+				<tr>
+					<td valign="top">业务简介</td>
+					<td><textarea style="height:140px;"></textarea></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><a href="" class="ib-btn tc" style="width:120px;">提交</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
 	<!--***弹窗 end****************************************-->
 	<script type="text/javascript" src="../scripts/page/banner.js"></script>
 	<script type="text/javascript">
@@ -241,6 +286,10 @@
 				$(".bg-tanc.m2").show();
 				
 			});
+			$(".ib-btn.open-m3").click(function(){
+				$(".bg-tanc.m3").show();
+				
+			});
 			$(".tc-close").click(function(){
 				$('body').css("overflow","auto");
 				$(".bg-tanc").hide();
@@ -248,6 +297,10 @@
 			$(document).on("click",".speed-sort li",function(){
 				$(this).addClass("active").siblings().removeClass("active");
 			})
+			laydate({
+			    elem: '#fkcodeDate', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+			    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+			});
 		})
 		
 	</script>
