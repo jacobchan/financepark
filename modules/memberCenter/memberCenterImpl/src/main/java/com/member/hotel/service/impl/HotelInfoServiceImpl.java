@@ -128,7 +128,7 @@ public class HotelInfoServiceImpl extends BaseManagerImpl implements HotelInfoSe
 	             if(type.equals("class java.lang.String")){   //如果type是类类型，则前面包含"class "，后面跟类名
 	                 Method m = conditions.getClass().getMethod("get"+name2);
 	                 String value = (String) m.invoke(conditions);    //调用getter方法获取属性值
-	                 if(value != null){
+	                 if(value != null && !"".equals(value)){
 	                	 params.put(name1, value);
 	                 }
 	             }
