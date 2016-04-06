@@ -4,6 +4,13 @@
 	<youi:body decorator="memcenter"> 
 				<div class="w1000">
 					<h3 class="per-h3">我的预约列表</h3>
+					<div class="clearfix mt20 mb20">
+						<ul class="order-nav">
+							<li class="active">我的预约</li>
+							<li>入驻申请预约</li>
+						</ul>
+					</div>
+					<div class="clearfix-box">
 					<div class="clearfix">
 						<table class="gt-table mt20">
 							<colgroup>
@@ -13,14 +20,14 @@
 								<col width="180"></col>
 								<col></col>
 							</colgroup>
-							<tbody><tr>
+							<tbody id="myRecord"><!--<tr>
 								<th>预约单号</th>
 								<th>预约时间</th>
 								<th>预约项目</th>
 								<th>状态</th>
 								<th>操作</th>
 							</tr>
-							<!-- <tr>
+							 <tr>
 								<td><a href="">123456789</a></td>
 								<td>2016-1-12 17:30</td>
 								<td>展厅参观</td>
@@ -53,6 +60,59 @@
 							<a href="">Go</a>
 						</div>
 					</div>
+					</div>
+					
+					<div class="clearfix-box" style="display:none;">
+					<div class="clearfix">
+						<table class="gt-table mt20">
+							<colgroup>
+								<col width="180"></col>
+								<col width="180"></col>
+								<col width="180"></col>
+								<col width="180"></col>
+								<col></col>
+							</colgroup>
+							<tbody id="enterRecord"><!--<tr>
+								<th>入驻单号</th>
+								<th>预约时间</th>
+								<th>预约项目</th>
+								<th>状态</th>
+								<th>操作</th>
+							</tr>
+							 <!-- <tr>
+								<td><a href="">123456789</a></td>
+								<td>2016-1-12 17:30</td>
+								<td>展厅参观</td>
+								<td>未受理</td>
+								<td><a href="javascript:;" class="ac-show">取消预约</a></td>
+							</tr>
+							<tr>
+								<td><a href="">123456789</a></td>
+								<td>2016-1-12 17:30</td>
+								<td>展厅参观</td>
+								<td>已受理</td>
+								<td><a href="javascript:;" class="ac-show">取消预约</a></td>
+							</tr>
+							<tr>
+								<td><a href="">123456789</a></td>
+								<td>2016-1-12 17:30</td>
+								<td>展厅参观</td>
+								<td>已完成</td>
+								<td></td>
+							</tr> -->
+						</tbody></table>
+						<div class="fr page-list-a clearfix lh30 mt20 f12">
+							<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
+							<a href="">首</a>
+							<a href=""><i class="fa fa-angle-left"></i></a>
+							<a>1</a>
+							<a href=""><i class="fa fa-angle-right"></i></a>
+							<a href="">末</a>
+							<input class="bd-input fl ml10 mr10" style="width:40px;" type="text">
+							<a href="">Go</a>
+						</div>
+					</div>
+					</div>
 				</div>
 	<!--***弹窗 start****************************************-->
 	<div class="bg-tanc m1">
@@ -69,11 +129,67 @@
 	</div>
 	<!--***弹窗 end****************************************-->
 </youi:body>
-	<script type="text/javascript" src="scripts/page/url.js"></script>
+<script type="text/javascript">
+		$(function () {
+			$(".order-nav li").click(function(){
+				$(this).addClass("active").siblings().removeClass("active");
+				$(".clearfix-box").hide();
+				$(".clearfix-box").eq($(this).index()).show();
+			})
+		})
+	</script>
 	<script type="text/javascript">
 		$(function () {
 			$.ajax({
 				url:baseUrl+'/reservationRecordManager/getReservationRecordsforpage.json', 
+				success:function(result){
+					console.log(result);
+					if(result&&result.records){
+						_parseRecord(result.records);
+					}
+				}
+			});
+		});
+		
+		//拼接列表
+		function _parseRecord(record){
+			var html="<tr><th>入驻单号</th><th>预约时间</th><th>预约项目</th><th>状态</th><th>操作</th></tr>";
+			for(var i=0;i<record.length;i++){
+				var recordStatus=record[i].recordStatus;
+				var buttonHtml="<td><a href='javascript:;' class='ac-show' onclick='javascript:cancelForEnter(this)'>取消预约</a></td>";
+				if(recordStatus=="01"){
+					recordStatus="已预约";
+				}else if(recordStatus=="02"){
+					recordStatus="已受理";
+				}else if(recordStatus=="03"){
+					recordStatus="已入驻";
+					buttonHtml="";
+				}
+				html+="<tr id='"+record[i].recordId+"'>"+
+					"<td><a href=''>"+record[i].recordCode+"</a></td>"+
+					"<td>"+record[i].visiteDate+"&nbsp;"+record[i].visiteTime+"</td>"+
+					"<td>"+record[i].recordMemberId+"</td>"+
+				//	"<td>"+record[i].recordType+"</td>"
+					"<td>"+recordStatus+"</td>"+
+					buttonHtml+
+					"</tr>";
+			}
+			 $("#myRecord").empty();
+			 $("#myRecord").append(html);
+		};
+		
+		 function cancel(obj){
+				var me=obj.parentNode.parentNode;
+				var recordId=me.childNodes[0].childNodes[0].innerText; 
+				$(".recordId").html(recordId);
+				$(".bg-tanc.m1").show();
+			}
+	</script>
+	
+	<script type="text/javascript">
+		$(function () {
+			$.ajax({
+				url:baseUrl+'/propertyservicemanagerEntrecManager/getPropertyservicemanagerEntrecs.json', 
 				success:function(result){
 					console.log(result);
 					if(result&&result.records){
@@ -85,31 +201,52 @@
 		
 		//拼接列表
 		function _parseRecords(record){
-			var html="";
+			var html="<tr><th>预约单号</th><th>预约时间</th><th>预约项目</th><th>状态</th><th>操作</th></tr>";
 			for(var i=0;i<record.length;i++){
-				var recordStatus=record[i].recordStatus;
+				var recordStatus=record[i].enterrecStatus;
+				var enteringType=record[i].enteringType;
+				var enteringTime=record[i].propertyservicemanagerEntering.enteringTime;
+				if(enteringTime=="AM"){
+					enteringTime="09:00-12:00";
+				}else if(enteringTime=="PM"){
+					enteringTime="14:00-17:00";
+				}
+				if(enteringType=="01"){
+					enteringType="入驻申请";
+				}else if(enteringType=="02"){
+					enteringType="装修申请";
+				}else if(enteringType=="03"){
+					enteringType="合同主体变更";
+				}else if(enteringType=="04"){
+					enteringType="客户续约";
+				}else if(enteringType=="05"){
+					enteringType="客户退租";
+				}
 				var buttonHtml="<td><a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消预约</a></td>";
 				if(recordStatus=="01"){
-					recordStatus="已预约";
+					recordStatus="待受理";
 				}else if(recordStatus=="02"){
 					recordStatus="已受理";
 				}else if(recordStatus=="03"){
-					recordStatus="已入驻";
-					buttonHtml="";
+					recordStatus="已到访";
+				}else if(recordStatus=="04"){
+					recordStatus="已取消";
+				}else if(recordStatus=="05"){
+					recordStatus="未到访";
 				}
 				html+="<tr id='"+record[i].recordId+"'>"+
-					"<td><a href=''>"+record[i].recordCode+"</a></td>"+
-					"<td>"+record[i].visiteDate+"</td>"+
-					"<td>"+record[i].recordMemberId+"</td>"+
-				//	"<td>"+record[i].recordType+"</td>"
+					"<td><a href=''>"+record[i].enterrecCode+"</a></td>"+
+					"<td>"+record[i].propertyservicemanagerEntering.enteringDate+"&nbsp;"+enteringTime+"</td>"+
+					"<td>"+enteringType+"</td>"+
 					"<td>"+recordStatus+"</td>"+
 					buttonHtml+
 					"</tr>";
 			}
-			 $("tbody").append(html);
+			 $("#enterRecord").empty();
+			 $("#enterRecord").append(html);
 		};
 		
-		 function cancel(obj){
+		 function cancelForEnter(obj){
 				var me=obj.parentNode.parentNode;
 				var recordId=me.childNodes[0].childNodes[0].innerText; 
 				$(".recordId").html(recordId);
