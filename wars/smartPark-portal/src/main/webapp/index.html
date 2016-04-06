@@ -636,10 +636,10 @@
             <div class="close0 fr"></div>
             <table class="w100 mt40 c3">
                 <tr>
-                    <td width="25%" align="right"><img src="styles/images/grzx/check.png" class="mr40 mb20" border="0"></td>
+                    <td width="28%" align="right"><img src="styles/images/grzx/check.png" class="mr40 mb20" border="0"></td>
                     <td >
-                        <h4 class="f24 fl c-333"> 您已预约成功！</h4>
-                        <p class="f14 cc fl mt20 mb20">如有问题，请拨打：0571-86508888</p>
+                        <h4 class="f24 c-333"> 您已预约成功！</h4>
+                        <p class="f14 cc mt20 mb20">如有问题，请拨打：0571-86508888</p>
                     </td>
                 </tr>
             </table>
@@ -748,7 +748,7 @@
 		
 		function openURL(url){
 			   if(!isLogin){
-				   $(".f24.fl.c-333").text("请登录!");
+				   $(".f24.c-333").text("请登录!");
 				   $(".pop_layer").show();
 				 	 return false;
 				}
@@ -764,7 +764,7 @@
 						if(result&&result.record){
 							window.location="yqfw/yq"+url+".html";
 							}else{
-								$(".f24.fl.c-333").text("您不是企业用户,暂时无法申请!");
+								$(".f24.c-333").text("您不是企业用户,暂时无法申请!");
 								$(".pop_layer").show();
 							}
 						}
