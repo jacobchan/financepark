@@ -167,8 +167,10 @@
 	
  	<script type="text/javascript">
 		$(function(){
+			var params=["issueTypeCode=01"];
 			$.youi.ajaxUtils.ajax({
 				url:baseUrl +"nmIssuetypeManager/getNewsType.json",//得到新闻发布类型
+				data:params.join('&'),
 				jsonp:'data:jsonp',
 				dataType:'jsonp',
 				success:function(result){
