@@ -166,7 +166,8 @@
 					buttonHtml="";
 				}
 				html+="<tr id='"+record[i].recordId+"'>"+
-					"<td><a href=''>"+record[i].recordCode+"</a></td>"+
+					/* "<td><a href=''>"+record[i].recordCode+"</a></td>"+ */
+					"<td>"+record[i].recordCode+"</td>"+
 					"<td>"+record[i].visiteDate+"&nbsp;"+record[i].visiteTime+"</td>"+
 					"<td>"+record[i].recordMemberId+"</td>"+
 				//	"<td>"+record[i].recordType+"</td>"
@@ -235,7 +236,8 @@
 					recordStatus="未到访";
 				}
 				html+="<tr id='"+record[i].recordId+"'>"+
-					"<td><a href=''>"+record[i].enterrecCode+"</a></td>"+
+					/* "<td><a href=''>"+record[i].enterrecCode+"</a></td>"+ */
+					"<td>"+record[i].enterrecCode+"</td>"+
 					"<td>"+record[i].propertyservicemanagerEntering.enteringDate+"&nbsp;"+enteringTime+"</td>"+
 					"<td>"+enteringType+"</td>"+
 					"<td>"+recordStatus+"</td>"+
