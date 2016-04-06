@@ -51,13 +51,24 @@
 			<div class="w795 fl">
 				<div class="lb-two clearfix">
 					<ul id="rzImages" class="clearfix">
-						
+						<li><img src="../styles/images/yqfw/in1.png"></li>
+						<li><img src="../styles/images/yqfw/in2.png"></li>
+						<li><img src="../styles/images/yqfw/in3.png"></li>
+						<li><img src="../styles/images/yqfw/in4.png"></li>
+						<li><img src="../styles/images/yqfw/in5.png"></li>
+						<li><img src="../styles/images/yqfw/in3.png"></li>
+						<li><img src="../styles/images/yqfw/in4.png"></li>
+						<li><img src="../styles/images/yqfw/in2.png"></li>
 					</ul>
 					<div class="lt-page">
 						<a href="javascript:;" style="left:0px;" class="lp-left"><i class="fa fa-angle-left"></i></a>
 						<a href="javascript:;" style="right:0px;" class="lp-right"><i class="fa fa-angle-right"></i></a>
 					</div>
 					<div id="imagesDiv" class="lt-circle clearfix">
+						<a href="javascript:;" class="current"></a>
+						<a href="javascript:;"></a>
+						<a href="javascript:;"></a>
+						<a href="javascript:;"></a>
 					</div>
 				</div>
 				<div class="yqfw-com-intro">
@@ -82,13 +93,19 @@
 					</ul>
 					<div class="clearfix">
 						<div id="informationFinancing" class="clearfix yin-group">
-
+							<div class="tc" style="background:#f6f6f6;height:600px;">
+			                    <img src="../styles/images/none1.png" border="0" style="margin-top:200px;" />
+			                </div>
 						</div>
 						<div id="mediaDiv" class="clearfix yin-group undis">
-							
+							<div class="tc" style="background:#f6f6f6;height:600px;">
+			                    <img src="../styles/images/none1.png" border="0" style="margin-top:200px;" />
+			                </div>
 						</div>
 						<div id="knowledgeDiv" class="clearfix yin-group undis">
-							
+							<div class="tc" style="background:#f6f6f6;height:600px;">
+			                    <img src="../styles/images/none1.png" border="0" style="margin-top:200px;" />
+			                </div>
 						</div>
 						<div class="clearfix yin-group undis">
 							<form class="yg-form">
@@ -123,7 +140,7 @@
 			</div>
 			<div class="w350 fr f12 lh26 pr" style="color:#333;">
 				<div class="photo-radius">
-					<img id="legalImage" src="" border="0" />
+					<img id="legalImage" src="../styles/images/fot.png" border="0" />
 				</div>
 				<h3 id="legalName" class="f16 c-o mb10 fb tc"></h3>
 				<p id="legalBusiness" class="tc"></p>
@@ -257,17 +274,21 @@
 	    				$("#noticeTime").append(record.rzDate);
     					$("#noticeCount").append(record.attentionCount);
     					$("#noticeSum").append(record.scanCount);
-	    				var images = record.rzImages.split(",");
-	    				for(var i=0; i<images.length; i++){
-	    					$("#rzImages").append("<li><img src='/filestore/"+images[i]+"'></li>");
-	    				}
-	    				for(var j=0; j<images.length/2; j++){
-	    					if(j==0){
-	    						$("#imagesDiv").append("<a href='javascript:;' class='current'></a>");
-	    					}else{
-	    						$("#imagesDiv").append("<a href='javascript:;'></a>");
-	    					}
-	    				}
+    					if(null!=record.rzImages){
+    						var images = record.rzImages.split(",");
+    						$("#rzImages").empty();
+    						$("#imagesDiv").empty();
+    	    				for(var i=0; i<images.length; i++){
+    	    					$("#rzImages").append("<li><img src='/filestore/"+images[i]+"'></li>");
+    	    				}
+    	    				for(var j=0; j<images.length/2; j++){
+    	    					if(j==0){
+    	    						$("#imagesDiv").append("<a href='javascript:;' class='current'></a>");
+    	    					}else{
+    	    						$("#imagesDiv").append("<a href='javascript:;'></a>");
+    	    					}
+    	    				}	
+    					}
 	    			}
 	    			var map = new BMap.Map("map");//创建Map实例
     				map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
@@ -419,8 +440,5 @@
 	    	//});
 	    });
     </script>
-	<script type="text/javascript">
-		
-	</script>
 </body>
 </html>
