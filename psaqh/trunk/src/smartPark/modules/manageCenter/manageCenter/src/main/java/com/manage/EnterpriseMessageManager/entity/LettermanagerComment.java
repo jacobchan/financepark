@@ -28,6 +28,10 @@ public class LettermanagerComment implements Domain{
 	@Column(name = "RZ_ID_")
 	@Length(max=36)
 	private String rzId;//ID
+	
+	@Column(name = "RMEMBER_ID_")
+	@Length(max=36)
+	private String memberId;//ID
 
 	@Column(name = "CREATE_TIME_")
 	private String createTime;//创建时间
