@@ -69,6 +69,7 @@
 	</div>
 	<!--***弹窗 end****************************************-->
 </youi:body>
+	<script type="text/javascript" src="scripts/page/url.js"></script>
 	<script type="text/javascript">
 		$(function () {
 			$.ajax({
@@ -97,9 +98,9 @@
 					buttonHtml="";
 				}
 				html+="<tr id='"+record[i].recordId+"'>"+
-					"<td><a href=''>"+record[i].recordId+"</a></td>"+
+					"<td><a href=''>"+record[i].recordCode+"</a></td>"+
 					"<td>"+record[i].visiteDate+"</td>"+
-					"<td>"+"创立方1"+"</td>"+
+					"<td>"+record[i].recordMemberId+"</td>"+
 				//	"<td>"+record[i].recordType+"</td>"
 					"<td>"+recordStatus+"</td>"+
 					buttonHtml+
