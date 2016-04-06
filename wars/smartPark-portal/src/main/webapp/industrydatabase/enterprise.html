@@ -123,6 +123,58 @@
 					}
 				});
 				//行业类型
+				$.youi.ajaxUtils.ajax({
+					url : baseUrl+'/etypeEnterprisetypeManager/findEnterpriseTypeTree.json',
+					jsonp : 'data:jsonp',
+					dataType : 'jsonp',
+					async : false,
+					success:function(result){
+						var json = eval("[" + result.record.html + "]");
+						var enterpriseTypeDiv ='<dd>';
+						for(var i=0; i<json.length; i++){
+							$("#enterpriseTypeDiv").empty();
+							if(json[i].pId!=""){
+								enterpriseTypeDiv+=json[i].name+"<span>|</span>";
+							}
+						}
+						var lastJson = enterpriseTypeDiv.substring(0, enterpriseTypeDiv.lastIndexOf("<span>|</span>", enterpriseTypeDiv.length));
+						$("#enterpriseTypeDiv").html(lastJson+'</dd><div class="sub-bottom"><i class="fa fa-angle-down"></i></div>');
+					}
+				});
+				
+				//上市类型
+				$.youi.ajaxUtils.ajax({
+					url : baseUrl+'/informationFinancingManager/findCodeitem.json?code=rzType',
+					jsonp : 'data:jsonp',
+					dataType : 'jsonp',
+					async : false,
+					success:function(result){
+						if(result&&result.records){
+							var records = result.records;
+							$("#belistedDiv").empty();
+							for(var i=0; i<records.length; i++){
+								$("#belistedDiv").append("<dd data-id='"+records[i].itemId+"' data-val='"+records[i].itemValue+"'>"+records[i].itemCaption+"</dd>");
+							}
+						}
+					}
+				});
+				
+				//公司性质
+				$.youi.ajaxUtils.ajax({
+					url : baseUrl+'/informationFinancingManager/findCodeitem.json?code=rzProperty',
+					jsonp : 'data:jsonp',
+					dataType : 'jsonp',
+					async : false,
+					success:function(result){
+						if(result&&result.records){
+							var records = result.records;
+							$("#enterpriseNatureDiv").empty();
+							for(var i=0; i<records.length; i++){
+								$("#enterpriseNatureDiv").append("<dd data-id='"+records[i].itemId+"' data-val='"+records[i].itemValue+"'>"+records[i].itemCaption+"</dd>");
+							}
+						}
+					}
+				});
 			});
 		</script>
 	</head>
@@ -150,31 +202,8 @@
 						<dd>
 							<label><input type="checkbox"> 全部</label>
 						</dd>
-						<div class="w860">
-							<dd>
-								计算机<span>|</span>互联网<span>|</span>通信<span>|</span>电子
-							</dd>
-							<dd>
-								会计<span>|</span>金融<span>|</span>银行<span>|</span>保险
-							</dd>
-							<dd>
-								贸易<span>|</span>消费<span>|</span>制造<span>|</span>运营
-							</dd>
-							<dd>
-								制药<span>|</span>医疗
-							</dd>
-							<dd>
-								广告<span>|</span>媒体
-							</dd>
-							<dd>
-								制药<span>|</span>医疗
-							</dd>
-							<dd>
-								制药<span>|</span>医疗
-							</dd>
-							<div class="sub-bottom">
-								<i class="fa fa-angle-down"></i>
-							</div>
+						<div id="enterpriseTypeDiv" class="w860">
+							
 						</div>
 					</dl>
 					<dl class="clearfix">
@@ -182,12 +211,7 @@
 						<dd>
 							<label><input type="checkbox"> 全部</label>
 						</dd>
-						<div class="w860">
-							<dd>主板</dd>
-							<dd>中小板</dd>
-							<dd>创业板</dd>
-							<dd>新三板</dd>
-							<dd>未上市</dd>
+						<div id="belistedDiv" class="w860">
 						</div>
 					</dl>
 					<dl class="clearfix">
@@ -195,15 +219,7 @@
 						<dd>
 							<label><input type="checkbox"> 全部</label>
 						</dd>
-						<div class="w860">
-							<dd>外资（欧美）</dd>
-							<dd>外资（非欧美）</dd>
-							<dd>合资</dd>
-							<dd>国企</dd>
-							<dd>民营</dd>
-							<dd>政府机关</dd>
-							<dd>事业单位</dd>
-							<dd>非盈利机构</dd>
+						<div id="enterpriseNatureDiv" class="w860">
 						</div>
 					</dl>
 				</div>
