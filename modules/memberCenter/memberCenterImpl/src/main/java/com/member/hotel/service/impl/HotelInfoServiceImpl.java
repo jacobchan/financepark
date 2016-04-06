@@ -313,7 +313,7 @@ public class HotelInfoServiceImpl extends BaseManagerImpl implements HotelInfoSe
 	}
 
 	@EsbServiceMapping
-	public List<JsonNode> getHotelComment(String hid, int... nums)
+	public List<JsonNode> getHotelComment(@ServiceParam(name="hid") String hid, @ServiceParam(name="nums") String nums)
 			throws BusException {
 		String result = "";
 		List<JsonNode> resultList = new ArrayList<JsonNode>();
@@ -322,8 +322,8 @@ public class HotelInfoServiceImpl extends BaseManagerImpl implements HotelInfoSe
 	    params.put("agent_id", agent_id);
 	    params.put("agent_md", agent_md);
 	    params.put("hid", hid);
-	    if (nums.length > 0) {
-	    	params.put("nums", nums[0]);
+	    if (nums!=null&&!"".equals(nums)) {
+	    	params.put("nums", nums);
 		}
 	    try
 	    {
