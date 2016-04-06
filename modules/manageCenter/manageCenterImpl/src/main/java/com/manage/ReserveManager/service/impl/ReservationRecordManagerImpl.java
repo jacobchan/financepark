@@ -37,6 +37,7 @@ import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
+import com.gsoft.utils.BizCodeUtil;
 import com.manage.ReserveManager.dao.ReservationRecordDao;
 import com.manage.ReserveManager.entity.ReservationRecord;
 import com.manage.ReserveManager.service.ReservationRecordManager;
@@ -120,6 +121,7 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
     		return reservationRecordDao.save(r);
     	}else{//新增
     		o.setRecordStatus("01");//待受理
+    		o.setRecordCode(BizCodeUtil.getInstance().getBizCodeDate("YYDH"));//生成预约单号
         	o.setCreateUser(o.getUpdateUser());
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
@@ -272,7 +274,6 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
     @EsbServiceMapping
 	public List<ReservationRecord> getReservationRecordsforpage(
 			@ServiceParam(name="userId",pubProperty = "userId") String userId) throws BusException {
-		// TODO Auto-generated method stub
     	//获取当前用户预约
     	Collection<Condition> condition = new ArrayList<Condition>();
     	condition.add(ConditionUtils.getCondition("createUser", Condition.EQUALS, userId));

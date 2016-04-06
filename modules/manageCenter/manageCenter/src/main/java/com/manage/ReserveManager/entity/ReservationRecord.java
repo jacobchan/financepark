@@ -4,8 +4,8 @@
 package com.manage.ReserveManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
@@ -26,6 +26,10 @@ public class ReservationRecord implements Domain{
 	@Column(name = "RECORD_ID")
 	@Length(max=36)
 	private String recordId;//预约记录ID
+	
+	@Column(name = "RECORD_CODE_")
+	@Length(max=32)
+	private String recordCode;//预约单号
 
 	@Column(name = "CREATE_USER_")
 	@Length(max=36)
@@ -167,26 +171,45 @@ public class ReservationRecord implements Domain{
 	
 	
 	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((recordId == null) ? 0 : recordId.hashCode());
-		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
-		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
-		result = prime * result + ((recordServiceTel == null) ? 0 : recordServiceTel.hashCode());
-		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
-		result = prime * result + ((recordType == null) ? 0 : recordType.hashCode());
-		result = prime * result + ((recordCustomer == null) ? 0 : recordCustomer.hashCode());
-		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
-		result = prime * result + ((visiteDate == null) ? 0 : visiteDate.hashCode());
-		result = prime * result + ((recordMemberId == null) ? 0 : recordMemberId.hashCode());
-		result = prime * result + ((recordVisiteStatus == null) ? 0 : recordVisiteStatus.hashCode());
-		result = prime * result + ((recordStatus == null) ? 0 : recordStatus.hashCode());
-		result = prime * result + ((visiteTime == null) ? 0 : visiteTime.hashCode());
+		result = prime * result
+				+ ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result
+				+ ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result
+				+ ((recordCode == null) ? 0 : recordCode.hashCode());
+		result = prime * result
+				+ ((recordCustomer == null) ? 0 : recordCustomer.hashCode());
+		result = prime * result
+				+ ((recordId == null) ? 0 : recordId.hashCode());
+		result = prime * result
+				+ ((recordMemberId == null) ? 0 : recordMemberId.hashCode());
+		result = prime
+				* result
+				+ ((recordServiceTel == null) ? 0 : recordServiceTel.hashCode());
+		result = prime * result
+				+ ((recordStatus == null) ? 0 : recordStatus.hashCode());
+		result = prime * result
+				+ ((recordType == null) ? 0 : recordType.hashCode());
+		result = prime
+				* result
+				+ ((recordVisiteStatus == null) ? 0 : recordVisiteStatus
+						.hashCode());
+		result = prime * result
+				+ ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result
+				+ ((updateUser == null) ? 0 : updateUser.hashCode());
+		result = prime * result
+				+ ((visiteDate == null) ? 0 : visiteDate.hashCode());
+		result = prime * result
+				+ ((visiteTime == null) ? 0 : visiteTime.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -195,66 +218,71 @@ public class ReservationRecord implements Domain{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final ReservationRecord other = (ReservationRecord) obj;
-		if (recordId == null) {
-			if (other.recordId != null)
+		ReservationRecord other = (ReservationRecord) obj;
+		if (createTime == null) {
+			if (other.createTime != null)
 				return false;
-		} else if (!recordId.equals(other.recordId))
+		} else if (!createTime.equals(other.createTime))
 			return false;
 		if (createUser == null) {
 			if (other.createUser != null)
 				return false;
 		} else if (!createUser.equals(other.createUser))
 			return false;
-		if (createTime == null) {
-			if (other.createTime != null)
+		if (recordCode == null) {
+			if (other.recordCode != null)
 				return false;
-		} else if (!createTime.equals(other.createTime))
-			return false;
-		if (recordServiceTel == null) {
-			if (other.recordServiceTel != null)
-				return false;
-		} else if (!recordServiceTel.equals(other.recordServiceTel))
-			return false;
-		if (updateUser == null) {
-			if (other.updateUser != null)
-				return false;
-		} else if (!updateUser.equals(other.updateUser))
-			return false;
-		if (recordType == null) {
-			if (other.recordType != null)
-				return false;
-		} else if (!recordType.equals(other.recordType))
+		} else if (!recordCode.equals(other.recordCode))
 			return false;
 		if (recordCustomer == null) {
 			if (other.recordCustomer != null)
 				return false;
 		} else if (!recordCustomer.equals(other.recordCustomer))
 			return false;
-		if (updateTime == null) {
-			if (other.updateTime != null)
+		if (recordId == null) {
+			if (other.recordId != null)
 				return false;
-		} else if (!updateTime.equals(other.updateTime))
-			return false;
-		if (visiteDate == null) {
-			if (other.visiteDate != null)
-				return false;
-		} else if (!visiteDate.equals(other.visiteDate))
+		} else if (!recordId.equals(other.recordId))
 			return false;
 		if (recordMemberId == null) {
 			if (other.recordMemberId != null)
 				return false;
 		} else if (!recordMemberId.equals(other.recordMemberId))
 			return false;
-		if (recordVisiteStatus == null) {
-			if (other.recordVisiteStatus != null)
+		if (recordServiceTel == null) {
+			if (other.recordServiceTel != null)
 				return false;
-		} else if (!recordVisiteStatus.equals(other.recordVisiteStatus))
+		} else if (!recordServiceTel.equals(other.recordServiceTel))
 			return false;
 		if (recordStatus == null) {
 			if (other.recordStatus != null)
 				return false;
 		} else if (!recordStatus.equals(other.recordStatus))
+			return false;
+		if (recordType == null) {
+			if (other.recordType != null)
+				return false;
+		} else if (!recordType.equals(other.recordType))
+			return false;
+		if (recordVisiteStatus == null) {
+			if (other.recordVisiteStatus != null)
+				return false;
+		} else if (!recordVisiteStatus.equals(other.recordVisiteStatus))
+			return false;
+		if (updateTime == null) {
+			if (other.updateTime != null)
+				return false;
+		} else if (!updateTime.equals(other.updateTime))
+			return false;
+		if (updateUser == null) {
+			if (other.updateUser != null)
+				return false;
+		} else if (!updateUser.equals(other.updateUser))
+			return false;
+		if (visiteDate == null) {
+			if (other.visiteDate != null)
+				return false;
+		} else if (!visiteDate.equals(other.visiteDate))
 			return false;
 		if (visiteTime == null) {
 			if (other.visiteTime != null)
@@ -263,7 +291,15 @@ public class ReservationRecord implements Domain{
 			return false;
 		return true;
 	}
-	
+
+	public String getRecordCode() {
+		return recordCode;
+	}
+
+	public void setRecordCode(String recordCode) {
+		this.recordCode = recordCode;
+	}
+
 	public String toString(){
 		return super.toString();
 	}
