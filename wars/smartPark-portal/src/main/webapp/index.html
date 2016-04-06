@@ -847,8 +847,8 @@
 							   imageUrl=cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].commodityImage+"&method=show";
 						   } 
 						 
-							 var html="<li><div class='fl'><img src='"+imageUrl+"' height='59' width='110'></div><div class='fl ml10'><div class='span_bold'>"+record[i].commodityTitle+"</div>"+
-							"<p class='cc f12'>"+record[i].commodityPrice+"元/小时</p><a class='handbtn' href='./companyservice/room.html'>立即预定</a></div></li>";
+							 var html="<li><div class='fl'><img src='"+imageUrl+"' height='59' width='110'></div><div class='fl ml10'><div class='span_bold'><a href='./companyservice/roomxq.html?id="+record[i].commodityId+"'>"+record[i].commodityTitle+"</a></div>"+
+							"<p class='cc f12'>"+record[i].commodityPrice+"元/小时</p><a class='handbtn' href='./companyservice/roomxq.html?id="+record[i].commodityId+"'>立即预定</a></div></li>";
 							 $("#roomPage").append(html);
 							 
 					} 
@@ -891,8 +891,8 @@
 						   imageUrl=cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].commodityImage+"&method=show";
 					   }
 						   //http://localhost:8088/smartPark-web/ imageUrl
-							 var html="<li><div class='fl'><img src='"+imageUrl+"' height='59' width='110'></div><div class='fl ml10'><div class='span_bold'>"+record[i].commodityTitle+"</div>"+
-							"<p class='cc f12'>"+record[i].commodityPrice+"元/小时</p><a class='handbtn' href='./companyservice/carLease.html'>立即预定</a></div></li>";
+							 var html="<li><div class='fl'><img src='"+imageUrl+"' height='59' width='110'></div><div class='fl ml10'><div class='span_bold'><a href='./companyservice/carLeasexq.html?id="+record[i].commodityId+"'>"+record[i].commodityTitle+"</a></div>"+
+							"<p class='cc f12'>"+record[i].commodityPrice+"元/小时</p><a class='handbtn' href='./companyservice/carLeasexq.html?id="+record[i].commodityId+"'>立即预定</a></div></li>";
 							 $("#carPage").append(html);
 							 
 					} 
