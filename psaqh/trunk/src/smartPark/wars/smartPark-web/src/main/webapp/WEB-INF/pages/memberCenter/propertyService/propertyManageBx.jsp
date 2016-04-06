@@ -1,9 +1,10 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/pages/include.jsp" %>
+
 <youi:html title="物业报修">
 	<youi:body decorator="memcenter"> 
 				<div class="w1000">
-					<h3 class="per-h3">物业报修列表</h3>
+					<h3 class="per-h3">物业报修列表<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要报修</a></h3>
 					<div class="clearfix">
 						<div class="mt20 gr-txl clearfix lh30">
 							<label class="fl mr20 f16">申请时间：</label>
@@ -121,7 +122,8 @@
 	</div>
 	<!--***弹窗 end****************************************-->
 </youi:body>
-	<script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/scripts/page/laydate/laydate.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/scripts/lib/properties.js"></script>
 	<script type="text/javascript">
 		$(function () {
 			$(".ac-show").click(function(e){
@@ -168,7 +170,7 @@
 						"<td><a href=''>"+record[i].bxCode+"</a></td>"+
 						"<td>"+record[i].applyTime+"</td>"+
 						"<td>"+bxStatus+"</td>"+
-						"<td>"+record[i].createUser+"</td>"+
+						"<td>"+record[i].memberId+"</td>"+
 						"<td>18659786621</td>"+
 						buttonHtml+
 						"</tr>";
@@ -248,5 +250,10 @@
 		});
 	})
 	</script>
-	
+	<script type="text/javascript">
+		$("#a1").click(function(){
+			
+			location.href = Portal + "yqfw/yq6.html" ;
+		})	
+</script>
 </youi:html>
