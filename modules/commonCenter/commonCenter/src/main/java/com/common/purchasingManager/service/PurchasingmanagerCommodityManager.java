@@ -223,4 +223,12 @@ public interface PurchasingmanagerCommodityManager extends BaseManager{
 	 */
 	public PurchasingmanagerCommodity saveStationCommodity(PurchasingmanagerCommodity o)
 			throws BusException;
+	/**
+	 * 获取威客服务类别的所有商品列表
+	 * @param userId
+	 * @return
+	 * @throws BusException
+	 */
+	public List<PurchasingmanagerCommodity> getWkserverCommodityList(String userId)
+			throws BusException;
 }
