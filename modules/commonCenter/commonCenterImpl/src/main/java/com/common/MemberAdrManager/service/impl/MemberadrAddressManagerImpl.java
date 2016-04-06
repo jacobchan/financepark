@@ -84,7 +84,18 @@ public class MemberadrAddressManagerImpl extends BaseManagerImpl implements Memb
 		}
     	if(isUpdate){//修改
     		MemberadrAddress ma=memberadrAddressDao.get(memberadrAddressId);
-    		ma.setAddressStatus(o.getAddressStatus());
+    		if(StringUtils.isNotEmpty(o.getAddressStatus())){
+    			ma.setAddressStatus(o.getAddressStatus());
+    		}
+    		if(StringUtils.isNotEmpty(o.getAddressName())){
+    			ma.setAddressName(o.getAddressName());
+    		}
+    		if(StringUtils.isNotEmpty(o.getAddressPhone())){
+    			ma.setAddressPhone(o.getAddressPhone());
+    		}
+    		if(StringUtils.isNotEmpty(o.getAddressDetail())){
+    			ma.setAddressDetail(o.getAddressDetail());
+    		}
     		o=ma;
     	}else{//新增
     		if(o.getAddressStatus()==null){
