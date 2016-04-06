@@ -82,41 +82,8 @@ $(function () {
 	$(".yc-gz").click(function(){
 		$(this).toggleClass("active");
 	});
-	$(".sub-bottom").click(function(){
-		if($(this).children("i").hasClass("fa-angle-down")){
-			$(this).children("i").removeClass("fa-angle-down").addClass("fa-angle-up")
-			$(this).parents("dl").css("height","auto");
-			$(this).parent(".w860").addClass("w860-bg");
-		}else{
-			$(this).children("i").removeClass("fa-angle-up").addClass("fa-angle-down")
-			$(this).parents("dl").css("height","44px");
-			$(this).parent(".w860").removeClass("w860-bg");
-		}
-	})
-	$(".w860 dd").click(function(){
-		$(this).toggleClass("active");
-		var m=$(this).parent().find("dd").size();
-		var n=0;
-		$(this).parent().find("dd").each(function(){
-	      if($(this).hasClass("active")){
-	      	n++;
-	      }else{
-	      	n=n;
-	      }
-	    });
-	    if(m == n){
-	    	$(this).parents("dl").find("dd input[type='checkbox']").prop("checked",true);
-	    }else{
-	    	$(this).parents("dl").find("dd input[type='checkbox']").prop("checked",false);
-	    }
-	});
-	$(".yqfw-com-list dd input[type='checkbox']").click(function(){
-	   if($(this).prop("checked")){
-			$(this).parents("dl").find(".w860 dd").addClass("active");
-		}else{
-			$(this).parents("dl").find(".w860 dd").removeClass("active");
-		}
-	});
+	
+	
 
 	$(".yqfw-intro-nav li").click(function(){
 		$(this).addClass("active").siblings().removeClass("active");
