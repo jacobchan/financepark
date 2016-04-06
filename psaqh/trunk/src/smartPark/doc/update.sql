@@ -25,3 +25,5 @@ alter table sp_enterbusinessmanager_rz modify column RZ_SIGN_ varchar(32);
 ALTER TABLE `sp_propertyservicemanager_entrec` ADD COLUMN `ENTERING_TYPE_` varchar(2);
 /*新增报修人字段*/
 ALTER TABLE `sp_propertyservicemanager_bx` ADD COLUMN `MEMBERID_` varchar(36)  NULL;
+
+ALTER TABLE `sp_reservation_record` ADD COLUMN `RECORD_CODE_` varchar(32);
