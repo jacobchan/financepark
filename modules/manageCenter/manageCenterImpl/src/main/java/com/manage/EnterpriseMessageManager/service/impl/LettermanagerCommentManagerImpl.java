@@ -16,11 +16,8 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.manage.EnterpriseMessageManager.entity.LettermanagerComment;
 import com.manage.EnterpriseMessageManager.dao.LettermanagerCommentDao;
 import com.manage.EnterpriseMessageManager.service.LettermanagerCommentManager;
@@ -65,7 +62,7 @@ public class LettermanagerCommentManagerImpl extends BaseManagerImpl implements 
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "memberId", pubProperty = "userId")})
     public LettermanagerComment saveLettermanagerComment(LettermanagerComment o) throws BusException{
 //    	String lettermanagerCommentId = o.getLettermanagerCommentId();
 //    	boolean isUpdate = StringUtils.isNotEmpty(lettermanagerCommentId);
@@ -74,6 +71,7 @@ public class LettermanagerCommentManagerImpl extends BaseManagerImpl implements 
 //    	}else{//新增
 //    		
 //    	}
+    	o.setCommentTime(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
     	return lettermanagerCommentDao.save(o);
     }
 
