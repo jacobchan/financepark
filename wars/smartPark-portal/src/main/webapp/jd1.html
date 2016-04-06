@@ -94,7 +94,7 @@
 						<li id="pingfen"><a href="javascript:query(4)">评分</a> <i class="fa fa-angle-down ml20" style="font-size:18px;"></i></li>
 					</ul>
 					<div class="fr clearfix f12">
-						<label class="fl"><input type="checkbox" name="th" class="mr10 fl" style="margin-top:12px;"><span class="fl">特惠</span></label>
+						<label class="fl"><input id="promotion" type="checkbox" name="th" class="mr10 fl" style="margin-top:12px;"><span class="fl">特惠</span></label>
 						<label class="ml20 mr20 fl"><input type="checkbox" name="th" class="mr10 fl" style="margin-top:12px;"><span class="fl">免担保</span></label>
 					</div>
 				</div>
@@ -213,13 +213,48 @@
 			$("#totalTime").empty();
 			$("#totalTime").html("共"+GetDateDiff(tm1,tm2)+"晚");
 		}
+		//日期对比 a为开始日期b为结束日期 a>b false a<b true
+		function compareDate(a, b) {
+		    var arr = a.split("-");
+		    var starttime = new Date(arr[0], arr[1], arr[2]);
+		    var starttimes = starttime.getTime();
+
+		    var arrs = b.split("-");
+		    var lktime = new Date(arrs[0], arrs[1], arrs[2]);
+		    var lktimes = lktime.getTime();
+
+		    if (starttimes > lktimes) {
+		        return false;
+		    }
+		    else
+		        return true;
+		}
 		//搜索
 		function query(){
 			//alert(arguments[0]);//argument 隐含参数对象
 			var cityname = $("#city_name").val();
 			var cityid = $("#cityid").val();
+			//时间
 			tm1 = $("#tm1").val();
 			tm2 = $("#tm2").val();
+			var today = new Date();
+			var month = Number(today.getMonth()) + Number(1);
+			var todayDate = today.getFullYear()+"-"+month+"-"+today.getDate();
+			if(!compareDate(todayDate,tm1)){
+				alert("所选日期不能小于当前日期。");
+				return ;
+			}
+			if(!compareDate(tm1,tm2)){
+				alert("入住时间不能大于离店时间。");
+				return ;
+			}
+			//是否特惠
+			var promotion = "";
+			var promotionlist = $("input[name=th]");
+			if(promotionlist[0].checked){
+				promotion = 1;
+			}
+			//价格过滤
 			var minprice = 0;
 			var maxprice = 999999;
 			var pricelist = $("input[name=price]");
@@ -234,8 +269,7 @@
 					}
 				}
 			}
-/* 			minprice = $("minprice").val()==""?minprice:$("minprice").val();
-			maxprice = $("maxprice").val()==""?maxprice:$("maxprice").val(); */
+			//星级过滤
 			var star = $("input[name=star]");
 			var rank = -1;
 			for(var i=0;i<star.length;i++){
@@ -243,18 +277,18 @@
 			}
 			var params;
 			if(arguments.length == 0){//直接搜索
-				if(rank == -1) params = ['minprice='+minprice,'maxprice='+maxprice,'cid='+cityid];
-				else params = ['minprice='+minprice,'maxprice='+maxprice,'cid='+cityid,'rank='+rank];
+				if(rank == -1) params = ['minprice='+minprice,'maxprice='+maxprice,'cid='+cityid,'promotion='+promotion];
+				else params = ['minprice='+minprice,'maxprice='+maxprice,'cid='+cityid,'promotion='+promotion,'rank='+rank];
 			}else if(arguments.length==1){//选择酒店排序方式搜索
 				$(".active").removeClass("active");
 				if(arguments[0]==1) $("#remen").attr("class","active");
 				if(arguments[0]==2) $("#jiage").attr("class","active");
 				if(arguments[0]==4) $("#pingfen").attr("class","active");
-				if(rank == -1) params = ['px='+arguments[0],'minprice='+minprice,'maxprice='+maxprice,'cid='+cityid];
-				else params = ['px='+arguments[0],'minprice='+minprice,'maxprice='+maxprice,'cid='+cityid,'rank='+rank];
+				if(rank == -1) params = ['px='+arguments[0],'minprice='+minprice,'maxprice='+maxprice,'cid='+cityid,'promotion='+promotion];
+				else params = ['px='+arguments[0],'minprice='+minprice,'maxprice='+maxprice,'cid='+cityid,'promotion='+promotion,'rank='+rank];
 			}else if(arguments.length==2){//翻页
-				if(rank == -1) params = ['px='+arguments[0],'pagesize='+arguments[1],'minprice='+minprice,'maxprice='+maxprice,'cid='+cityid];
-				else params = ['px='+arguments[0],'pagesize='+arguments[1],'minprice='+minprice,'maxprice='+maxprice,'cid='+cityid,'rank='+rank];
+				if(rank == -1) params = ['px='+arguments[0],'pagesize='+arguments[1],'minprice='+minprice,'maxprice='+maxprice,'cid='+cityid,'promotion='+promotion];
+				else params = ['px='+arguments[0],'pagesize='+arguments[1],'minprice='+minprice,'maxprice='+maxprice,'cid='+cityid,'promotion='+promotion,'rank='+rank];
 			}
 						
 			var serviceURL = baseUrl+"hotelInfoService/searchHotelByConditions.json";
