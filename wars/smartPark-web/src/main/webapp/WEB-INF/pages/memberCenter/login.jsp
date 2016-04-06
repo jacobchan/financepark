@@ -9,7 +9,6 @@
 <title>登录/注册</title>
 <link href="<%=request.getContextPath()%>/styles/css/base.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/styles/css/login.css" rel="stylesheet" type="text/css">
-<link href="<%=request.getContextPath()%>/styles/css/page.css" rel="stylesheet" type="text/css">
 </head>
 <shiro:authenticated>
 	<!-- authenticated -->
