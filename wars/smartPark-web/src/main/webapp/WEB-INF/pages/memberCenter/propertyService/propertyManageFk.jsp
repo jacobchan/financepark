@@ -124,7 +124,7 @@
 		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
 			<a href="javascript:;" class="tc-close"></a>
 			<div class="w70 tc mt40" style="margin-left:15%">
-				<img src="/styles/images/grzx/ewm.jpg" border="0" class="mb20 fkurl"/> 
+				<img src="/styles/images/grzx/ewm.jpg" border="0" class="mb20 fkurl" style="width: 45%;"/> 
 				<p class="mb10">订单号：<span class="c-o fkcodes"> [ 123456789 ] </span></p>
 				<p>到访时间：<span class="bftime">2016年1月21日15:30</span></p>
 				<a href="javascript:;" class="ib-btn">分享到手机</a>
@@ -240,7 +240,7 @@
 						$(".fkcodes").html(fkCode);
 						$(".bftime").html(bftime);
 						$(".fkcodes")[0].setAttribute("id",me.id);
-						$(".fkurl")[0].setAttribute("src",ImgUrl+"common/down.html?repository=/swfupload&path="+url);
+						$(".fkurl")[0].setAttribute("src",ImgUrl+"/common/down.html?repository=/swfupload&path="+url);
 						$(".bg-tanc.m2").show();
 					}
 				}
