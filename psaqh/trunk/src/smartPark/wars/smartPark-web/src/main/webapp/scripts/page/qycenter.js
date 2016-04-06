@@ -8,10 +8,10 @@
  * Date: 2016-2-16
  */
 var isLogin = false;
-var baseUrl = "http://220.249.113.12:8088/esb/web/";
-var cenUrl = 'http://220.249.113.12:8088/';
-var proUrl = 'http://220.249.113.12:9088/';
 
+var baseUrl = "http://192.168.10.58:8088/esb/web/";
+var cenUrl = 'http://192.168.10.58:8088/';
+var proUrl = 'http://192.168.10.58:9088/';
 $(function(){
 	var _passportBaseUrl = cenUrl;
 	
