@@ -105,10 +105,10 @@
 				<div class="clearfix jd-list mt20 mb20" style="font-size:14px;">
 					<ul class="fl">
 						<li class="current">酒店房型</li>
-						<li>酒店详解</li>
-						<li>酒店图片</li>
-						<li>酒店点评</li>
-						<li>问答</li>
+						<li><a href="#tag2">酒店设施</a></li>
+						<li><a href="#tag3">酒店政策</a></li>
+						<li><a href="#tag4">酒店简介</a></li>
+						<li><a href="#tag5">酒店点评</a></li>
 					</ul>
 				</div>
 				<div class="clearfix mb20 f12">
@@ -216,7 +216,7 @@
 					</div> -->
 
 				</div>
-				<div class="clearfix">
+				<div class="clearfix" id="tag2">
 					<h1 class="mt20 mb20 f24">酒店设施</h1>
 					<table class="jd-ss">
 						<colgroup>
@@ -243,7 +243,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="clearfix">
+				<div class="clearfix" id="tag3">
 					<h3 class="mt20 mb20 f24">酒店政策</h3>
 					<table class="jd-ss">
 						<colgroup>
@@ -282,11 +282,11 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="clearfix">
+				<div class="clearfix" id="tag4">
 					<h1 class="mt20 mb20 f24">酒店介绍</h1>
 					<p id="hotelContent" class="jd-ss pt20 lh24 f12">北京好苑建国酒店 位于建国门北京市东城区建国门内大街17号(朝阳门南小街与建国门内大街交汇处北侧路北)， 北京好苑建国酒店预订电话：400-666-5511北京好苑建国酒店位于北京市中心的东长安街上，西临东方广场，东近光华长安大厦，邻近国贸商圈、天安门及故宫博物院，与王府井商业步行街咫尺相望，周边商务旅游环境优越。酒店不同规格的客房，为宾客提供舒适的商务空间。不同规格的会议厅、大宴会厅和风味独</p>
 				</div>	
-				<div class="clearfix">
+				<div class="clearfix" id="tag5">
 					<h1 class="mt20 mb20 f24">酒店点评</h1>
 					<div style="border-top:1px solid #ecebeb;border-bottom:1px solid #ecebeb;" class="pt20 pb20">
 						<table width="100%">
@@ -499,6 +499,13 @@
 	   }
 	   return theRequest;
 	}
+	//计算时间间隔（天数）
+	function GetDateDiff(startDate,endDate){
+	    var startTime = new Date(Date.parse(startDate.replace(/-/g,   "/"))).getTime();     
+	    var endTime = new Date(Date.parse(endDate.replace(/-/g,   "/"))).getTime();     
+	    var dates = Math.abs((startTime - endTime))/(1000*60*60*24);     
+	    return  dates;    
+	}
 	//获取房型数据
 	function getRooms(){
 		$("#roomlist .jd-order-room").remove();
@@ -509,6 +516,8 @@
 			alert("离店时间必须大于入住时间！");
 			return ;
 		}
+		$("#totalTime").empty();
+		$("#totalTime").html("共"+GetDateDiff(tm1,tm2)+"晚");
 		var params = ['hid='+hid,'tm1=' + tm1,'tm2='+tm2];
 		var serviceURL = baseUrl+"hotelInfoService/getHotelData.json";
 		//公共方法

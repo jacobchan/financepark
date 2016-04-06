@@ -1133,7 +1133,35 @@
 			var cityId = $("#cityid").val();
 			var tm1 = $("#overdate").val();
 			var tm2 = $("#leavedate").val();
-			window.open(encodeURI("jd1.html?cityname="+cityname+"&cityid="+cityId+"&tm1="+tm1+"&tm2="+tm2));
+			var today = new Date();
+			var month = Number(today.getMonth()) + Number(1);
+			var todayDate = today.getFullYear()+"-"+month+"-"+today.getDate();
+			if(!compareDate(todayDate,tm1)){
+				alert("所选日期不能小于当前日期。");
+				return ;
+			}
+			if(compareDate(tm1,tm2)){
+				window.open(encodeURI("jd1.html?cityname="+cityname+"&cityid="+cityId+"&tm1="+tm1+"&tm2="+tm2));
+			}else{
+				alert("入住时间不能大于离店时间。");
+			}
+			
+		}
+      //日期对比 a为开始日期b为结束日期 a>b false a<b true
+		function compareDate(a, b) {
+		    var arr = a.split("-");
+		    var starttime = new Date(arr[0], arr[1], arr[2]);
+		    var starttimes = starttime.getTime();
+
+		    var arrs = b.split("-");
+		    var lktime = new Date(arrs[0], arrs[1], arrs[2]);
+		    var lktimes = lktime.getTime();
+
+		    if (starttimes > lktimes) {
+		        return false;
+		    }
+		    else
+		        return true;
 		}
 	</script>
 </body>
