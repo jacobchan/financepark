@@ -66,10 +66,10 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
     /**
      * 保存对象
      */
-    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "memberInformation.memberId", pubProperty = "userId")})
     public PropertyservicemanagerCos savePropertyservicemanagerCos(PropertyservicemanagerCos o) throws BusException{
-    	if(!"".equals(o.getUpdateUser()) && null!=o.getUpdateUser()){
-    		MemberInformation memberInformation = memberInformationDao.get(o.getUpdateUser());
+    	if(!"".equals(o.getMemberInformation().getMemberId())&& null!=o.getMemberInformation().getMemberId()){
+    		MemberInformation memberInformation = memberInformationDao.get(o.getMemberInformation().getMemberId());
         	o.setMemberInformation(memberInformation);
     	}
     	o.setCosCode(BizCodeUtil.getInstance().getBizCodeDate("WYTS"));
