@@ -356,60 +356,6 @@
 									</div>
 								</td>
 							</tr>
-							<tr>
-								<td width="40" align="center">
-									<img src="styles/images/p.jpg" border="0" width="20" height="20">
-								</td>
-								<td width="115" align="right">
-									<div class="pt10 pb10 pr20" style="border-right:1px solid #ecebeb;">
-										<p>138****2931</p>
-										<p class="c-b1">商务标间</p>
-										<p class="c-b1">2014-07-05</p>
-									</div>
-								</td>
-								<td>
-									<div class="ml20">
-										<p class="c-o">"来自android的点评"</p>
-										<p>交通方便，离地铁1号线约50米。</p>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td width="40" align="center">
-									<img src="styles/images/p.jpg" border="0" width="20" height="20">
-								</td>
-								<td width="115" align="right">
-									<div class="pt10 pb10 pr20" style="border-right:1px solid #ecebeb;">
-										<p>138****2931</p>
-										<p class="c-b1">商务标间</p>
-										<p class="c-b1">2014-07-05</p>
-									</div>
-								</td>
-								<td>
-									<div class="ml20">
-										<p class="c-o">"来自android的点评"</p>
-										<p>交通方便，离地铁1号线约50米。</p>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td width="40" align="center">
-									<img src="styles/images/p.jpg" border="0" width="20" height="20">
-								</td>
-								<td width="115" align="right">
-									<div class="pt10 pb10 pr20" style="border-right:1px solid #ecebeb;">
-										<p>138****2931</p>
-										<p class="c-b1">商务标间</p>
-										<p class="c-b1">2014-07-05</p>
-									</div>
-								</td>
-								<td>
-									<div class="ml20">
-										<p class="c-o">"来自android的点评"</p>
-										<p>交通方便，离地铁1号线约50米。</p>
-									</div>
-								</td>
-							</tr>
 
 						</table>
 					</div>
@@ -618,7 +564,7 @@
 		$("#tm2").val(tm2);
 		var params = ['hid=' + hid];
 		var serviceURL = baseUrl+"hotelInfoService/getHotelInfo.json";
-		//公共方法
+		//获取酒店详情
 		$.youi.ajaxUtils.ajax({
 			url:serviceURL,
 			data:params.join('&'),
@@ -664,6 +610,33 @@
 					$("#hotelOverview").append(html_part);
 					$("#hotelContent").html(hotel.content);
 					getRooms();
+				}
+			}
+		});
+		//获取酒店评论
+		params = ['hid=' + hid,'nums=' + 5];
+		$.youi.ajaxUtils.ajax({
+			url:baseUrl+"hotelInfoService/getHotelComment.json",
+			data:params.join('&'),
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(result){
+				if(result&&result.records){
+					$(".sug-table-nav").empty();
+					var comments = result.records;
+					for(var i=0;i<comments.length;i++){
+						var html_ = "";
+						html_ += "<tr><td width='40' align='center'><img src='styles/images/p.jpg' border='0' width='20' height='20'></td>";
+						html_ += "<td width='115' align='right'><div class='pt10 pb10 pr20' style='border-right:1px solid #ecebeb;'>";
+						html_ += "<p>"+comments[i].username+"</p>";
+						html_ += "<p class='c-b1'>"+comments[i].hotelname+"</p>";
+						var date = new Date();
+						date.setTime(comments[i].time*1000);
+						html_ += "<p class='c-b1'>"+date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+"</p></div></td>";
+						html_ += "<td><div class='ml20'><p class='c-o'></p>";
+						html_ += "<p>"+comments[i].content+"</p></div></td></tr>";
+						$(".sug-table-nav").append(html_);
+					}
 				}
 			}
 		});
