@@ -132,6 +132,8 @@ function GetRequest() {
 							success:function(results){
 								if(results&&results.record){
 									$(".bg-tanc.m1").show();
+									$('#ti-m1').text('5');
+									a=5;
 									timer1=setInterval("jump1()",1000);
 									/* window.location="yq2.html?enteringType="+enteringType; */
 									//window.location=cenUrl+"member/memberCenter/index.html";
@@ -139,6 +141,8 @@ function GetRequest() {
 							},error:function(XMLHttpRequest, textStatus, errorThrown){
 								alert(XMLHttpRequest);
 								$(".bg-tanc.m2").show();
+								$('#ti-m2').text('5');
+								b=5;
 								timer2=setInterval("jump2()",1000);
 							}
 						});
@@ -170,7 +174,7 @@ function GetRequest() {
 						alert(str);
 					}); */
 				});
-				var a=3,b=3;
+				var a,b;
 				function jump1(){
 					if(a>1){
 						a--;
@@ -280,12 +284,12 @@ function GetRequest() {
 					<img src="../styles/images/yqfw/correct.png" border="0" class="mr20"/>
 				</div>
 				<p class="mb10 f16">您已经成功提交申请，请到会员中心查看申请状态。</p>
-				<p><span class="c-o f24 tc-time" id="ti-m1">3 </span>秒后，系统将自动跳转</p>
-				<p class="mt10"><a href="" class="c-6">手动跳转 ></a></p>
-				<div class="clearfix mt30">
-					<a href="" class="c-6"><i class="fa fa-home mr10" style="font-size:24px;"></i>返回首页</a>
-					<span class="f14 ml20 mr20 c-6">|</span>
-					<a href="" class="c-6"><i class="fa fa-user mr10" style="font-size:20px;"></i>个人中心</a>
+				<p><span class="c-o f24 tc-time mr5" id="ti-m1">5 </span>秒后，系统将自动跳转</p>
+				<!-- <p class="mt10"><a href="" class="c-6">手动跳转 ></a></p> -->
+				<div class="clearfix mt15 pt15" style="border-top:1px solid #efecec">
+					<a href="javascript:;" class="ib-btn" style="width:120px;">前往查看</a>
+					<span class="ml30 mr30"></span>
+					<a href="javascript:;" class="ib-btn fs-btn" style="width:120px;">返回</a>
 				</div>
 			</div>
 		</div>
@@ -298,7 +302,7 @@ function GetRequest() {
 					<img src="../styles/images/yqfw/error.png" border="0" class="mr20"/>
 				</div>
 				<p class="mb10 f16">你还不是园区内的企业用户，无法进行物业报修操作！</p>
-				<p><span class="c-o f24 tc-time" id="ti-m2">3 </span>秒后，系统将自动跳转 <a href="" class="c-b1 ml10">手动跳转 ></a></p>
+				<p><span class="c-o f24 tc-time mr5" id="ti-m2">5</span>秒后，系统将自动跳转 <a href="" class="c-b1 ml10">手动跳转 ></a></p>
 			</div>
 		</div>
 	</div>
