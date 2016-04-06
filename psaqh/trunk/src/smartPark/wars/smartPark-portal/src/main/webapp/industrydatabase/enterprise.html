@@ -12,7 +12,6 @@
 		<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 		<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 		<script type="text/javascript" src="../scripts/page/url.js"></script>
-		<script type="text/javascript" src="../scripts/page/right.js"></script>
 		<script type="text/javascript" src="../scripts/page/automatic.js"></script>
 		<script type="text/javascript">
 			//获取字符串长度（中文2，英文1）
@@ -240,3 +239,42 @@
 		<div id="youi_page_footer" class="youi-page-footer"></div>
 	</body>
 </html>
+<script>
+	$(function(){
+		$(document).on("click",".w860 dd",function(){
+			$(this).toggleClass("active");
+			var m=$(this).parent().find("dd").size();
+			var n=0;
+			$(this).parent().find("dd").each(function(){
+		      if($(this).hasClass("active")){
+		      	n++;
+		      }else{
+		      	n=n;
+		      }
+		    });
+		    if(m == n){
+		    	$(this).parents("dl").find("dd input[type='checkbox']").prop("checked",true);
+		    }else{
+		    	$(this).parents("dl").find("dd input[type='checkbox']").prop("checked",false);
+		    }
+		});
+		$(document).on("click",".yqfw-com-list dd input[type='checkbox']",function(){
+		   if($(this).prop("checked")){
+				$(this).parents("dl").find(".w860 dd").addClass("active");
+			}else{
+				$(this).parents("dl").find(".w860 dd").removeClass("active");
+			}
+		});
+		$(document).on("click",".sub-bottom",function(){
+			if($(this).children("i").hasClass("fa-angle-down")){
+				$(this).children("i").removeClass("fa-angle-down").addClass("fa-angle-up")
+				$(this).parents("dl").css("height","auto");
+				$(this).parent(".w860").addClass("w860-bg");
+			}else{
+				$(this).children("i").removeClass("fa-angle-up").addClass("fa-angle-down")
+				$(this).parents("dl").css("height","44px");
+				$(this).parent(".w860").removeClass("w860-bg");
+			}
+		})
+	})
+</script>
