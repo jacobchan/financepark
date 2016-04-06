@@ -81,3 +81,6 @@ INSERT INTO `youi_codemap` VALUES ('4028d08151f126740151f184dbe80001', 'sex', '�
 INSERT INTO `youi_codemap` VALUES ('ff80808152f2fa0a0152f316e17d0006', 'enteringTime', '预约办理时段', '1', null);
 INSERT INTO `youi_codemap` VALUES ('ff80808152f2fa0a0152f38940d40009', 'bool', '是否', '1', null);
 INSERT INTO `youi_codemap` VALUES ('ff80808152f2fa0a0152f38b08a7000c', 'merchant_type', '商户类型', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288aaa538d8ce201538e0dc0890001', 'rzType', '上市类型', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288aaa538d8ce201538e0f9a010007', 'rzProperty', '企业性质', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288ac653cad0250153cad4e2920001', 'roundFinancing', '融资伦次', '1', null);
