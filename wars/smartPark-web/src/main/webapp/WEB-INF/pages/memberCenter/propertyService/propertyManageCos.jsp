@@ -3,7 +3,7 @@
 <youi:html title="物业投诉">
 	<youi:body decorator="memcenter"> 
 				<div class="w1000">
-					<h3 class="per-h3">物业投诉列表</h3>
+					<h3 class="per-h3">物业投诉列表物业报修列表<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要投诉</a></h3>
 					<div class="clearfix">
 						<div class="mt20 gr-txl clearfix lh30">
 							<label class="fl mr20 f16">申请时间：</label>
@@ -66,7 +66,9 @@
 	</div>
 	<!--***弹窗 end****************************************-->
 </youi:body>
-	<script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
+	
+	<script type="text/javascript" src="<%=request.getContextPath() %>/scripts/page/laydate/laydate.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/scripts/lib/properties.js"></script>
 	<script type="text/javascript">
 		//读取当前用户投诉记录
 		$(function(){
@@ -176,7 +178,7 @@
 	        istime: true, //是否开启时间选择
 		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 		});
-	})
+	});
 	$(function(){
 		laydate({
 		    elem: '#endTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
@@ -184,6 +186,12 @@
 	        istime: true, //是否开启时间选择
 		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 		});
-	})
+	});
+	//点击跳转到投诉页面
+	$("#a1").click(function(){
+		
+		location.href = Portal + "yqfw/yq9.html" ;
+	})	
 	</script>
+	
 </youi:html>
