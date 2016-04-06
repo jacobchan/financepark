@@ -43,6 +43,7 @@
 			<youi:fieldText property="recordServiceTel"  caption="客服电话"/> --%>
 			<youi:fieldHidden property="recordId"  caption="预约记录ID"/>
 			<youi:fieldHidden property="recordStatus"  caption="预约记录状态"/>
+			<youi:fieldHidden property="recordCode"  caption="预约单号"/>
 			<youi:fieldHidden property="recordVisiteStatus"  caption="是否到访"/>
 			<youi:fieldHidden property="recordCustomer"  caption="客服代表"/>
 			<youi:fieldHidden property="recordServiceTel"  caption="客服电话"/>
