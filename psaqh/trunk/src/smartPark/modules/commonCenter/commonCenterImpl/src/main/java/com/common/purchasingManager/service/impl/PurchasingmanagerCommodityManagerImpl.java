@@ -416,6 +416,16 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
 		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("genreId", pg.getGenreId());
 		return list;
 	}
+	/**
+     * 获取威客服务类别的所有商品列表
+     */
+	@Override
+	@EsbServiceMapping
+    public List<PurchasingmanagerCommodity> getWkserverCommodityList(@ServiceParam(name="userId",pubProperty="userId") String userId) throws BusException{
+		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode", "0507");
+		List<PurchasingmanagerCommodity> list= purchasingmanagerCommodityDao.getList("genreId", pg.getGenreId());
+		return list;
+	}
 	
 	//获取采购类别的所有商品列表
 	@Override
