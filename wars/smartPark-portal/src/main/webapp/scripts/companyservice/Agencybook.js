@@ -8,6 +8,7 @@ function countdown(i){
     	jump();
     }
 }
+//跳转页面
 function jump(){
 	window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
 }
