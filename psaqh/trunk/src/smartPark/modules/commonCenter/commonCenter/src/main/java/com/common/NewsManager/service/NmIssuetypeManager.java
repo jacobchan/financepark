@@ -78,10 +78,10 @@ public interface NmIssuetypeManager extends BaseManager{
     public String codeExist(String code) throws BusException;
     
     /**
-     * 得到新闻公告的所有的子类型
+     * 得到政策新闻的所有的子类型通过issueTypeCode
      * @return
      */
-    public List<NmIssuetype> getNewsType(String userId) ;
+    public List<NmIssuetype> getNewsType(String issueTypeCode) ;
     
     /**
      * 通过政策发布类型code得到当前政策
