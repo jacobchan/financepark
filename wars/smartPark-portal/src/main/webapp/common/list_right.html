@@ -129,18 +129,23 @@
 			var html_2 = "<ul class='pb-list'>" ;
 			var flag = false ;
 			for(var i=0;i<newsList.length;i++){
-				var news = newsList[i] ;
+				var title = newsList[i].policyCaption.toString() ;
+  	 			var len = title.length ;
 				//console.log(news) ;
-				if(news.policyType.issueTypeCode=='0101'){//0101代表园区新闻
+				if(newsList[i].policyType.issueTypeCode=='0101'){//0101代表园区新闻
 					flag = true ;
+					if(len > 21){
+	      	 			title = title.substring(0,21) ;
+						title += "..." ;
+	  	 			}
 					if(i < 3){//取前三条
 						html_1 += "<li>"+
 									'<a href="../zscenter/zs4.html">' +
 										'<div class="in-photo">'+
-											"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+news.imageUrl+"&method=show' border='0' width='100%'>"+
+											"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+newsList[i].imageUrl+"&method=show' border='0' width='100%'>"+
 										"</div>"+
 							 		"<div class='fr'>"+
-										"<p>"+news.policyCaption+"</p>"
+										"<p>"+title+"</p>"
 									"</div>"+
 									"</a>"+
 								"</li>";
@@ -148,9 +153,13 @@
 					
 				}else{
 					flag = false ;
+					if(len > 17){
+	      	 			title = title.substring(0,17) ;
+						title += "..." ;
+	  	 			}
 					if(i<5){//取前五条
-						html_2 += "<a href='../zscenter/zs7.html?policyId="+news.policyId+"'>"+
-									  "<li>"+news.policyCaption+
+						html_2 += "<a href='../zscenter/zs7.html?policyId="+newsList[i].policyId+"'>"+
+									  "<li>"+title+
 									  "</li>"+
 								  "</a>" ;
 					}
