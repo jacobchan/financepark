@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50538
 File Encoding         : 65001
 
-Date: 2016-04-05 16:40:02
+Date: 2016-04-06 17:02:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -45,6 +45,21 @@ INSERT INTO `youi_codeitem` VALUES ('40283f8153168c33015316f387d90003', '40283f8
 INSERT INTO `youi_codeitem` VALUES ('40283f8153168c33015316f3c08e0004', '40283f8153168c33015316f2fa9c0001', '03', '微信', null);
 INSERT INTO `youi_codeitem` VALUES ('4028808253bbee0e0153bbf96c320002', '4028808253bbee0e0153bbf92e470001', '01', '商品扩展属性', null);
 INSERT INTO `youi_codeitem` VALUES ('4028808253bbee0e0153bbf98c9a0003', '4028808253bbee0e0153bbf92e470001', '02', '订单扩展属性', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e0e28ab0002', '40288aaa538d8ce201538e0dc0890001', '01', '主板', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e0e489c0003', '40288aaa538d8ce201538e0dc0890001', '02', '中小板', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e0e649a0004', '40288aaa538d8ce201538e0dc0890001', '03', '创业板', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e0ee8100005', '40288aaa538d8ce201538e0dc0890001', '04', '新三板', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e0f07e00006', '40288aaa538d8ce201538e0dc0890001', '05', '未上市', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e0fcf5d0008', '40288aaa538d8ce201538e0f9a010007', '01', '外资（欧美）', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e0ffe150009', '40288aaa538d8ce201538e0f9a010007', '02', '外资（非欧美）', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e104c25000a', '40288aaa538d8ce201538e0f9a010007', '03', '合资', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e106389000b', '40288aaa538d8ce201538e0f9a010007', '04', '国企', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e109350000c', '40288aaa538d8ce201538e0f9a010007', '05', '民营', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e10bd0e000d', '40288aaa538d8ce201538e0f9a010007', '06', '政府机关', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e10d59e000e', '40288aaa538d8ce201538e0f9a010007', '07', '事业单位', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e113a48000f', '40288aaa538d8ce201538e0f9a010007', '08', '非盈利机构', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aaa53ea226d0153eacdff600003', '40288aaa53ea226d0153eacdb5d80002', '01', '手动挡', null);
+INSERT INTO `youi_codeitem` VALUES ('40288aaa53ea226d0153eace22500004', '40288aaa53ea226d0153eacdb5d80002', '02', '自动挡', null);
 INSERT INTO `youi_codeitem` VALUES ('40288aad53078875015307bf3fb60002', '40288aad53078875015307bebcbe0001', '1', '已发布', null);
 INSERT INTO `youi_codeitem` VALUES ('40288aad53078875015307bf6a7c0003', '40288aad53078875015307bebcbe0001', '2', '未发布', null);
 INSERT INTO `youi_codeitem` VALUES ('40288aad53078875015307c023650005', '40288aad53078875015307bfe6520004', '1', '融资完成', null);
@@ -138,6 +153,11 @@ INSERT INTO `youi_codeitem` VALUES ('40288ab553cfaceb0153cfc8c9f60006', '40288ab
 INSERT INTO `youi_codeitem` VALUES ('40288abc531c24bb01531c2a88940002', '40288abc531c24bb01531c2a418c0001', '01', '可用', null);
 INSERT INTO `youi_codeitem` VALUES ('40288abc531c24bb01531c2ab6970003', '40288abc531c24bb01531c2a418c0001', '02', '已预订', null);
 INSERT INTO `youi_codeitem` VALUES ('40288abc531c24bb01531c2ad5960004', '40288abc531c24bb01531c2a418c0001', '03', '不可用', null);
+INSERT INTO `youi_codeitem` VALUES ('40288ac653cad0250153cad520fe0002', '40288ac653cad0250153cad4e2920001', '01', 'Pre-A', null);
+INSERT INTO `youi_codeitem` VALUES ('40288ac653cad0250153cad556b50003', '40288ac653cad0250153cad4e2920001', '02', 'Pre-B', null);
+INSERT INTO `youi_codeitem` VALUES ('40288ac653cad0250153cad695d50004', '40288ac653cad0250153cad4e2920001', '03', 'Pre-C', null);
+INSERT INTO `youi_codeitem` VALUES ('40288ac653cad0250153cad6c1b90005', '40288ac653cad0250153cad4e2920001', '04', '天使轮', null);
+INSERT INTO `youi_codeitem` VALUES ('40288ac653cad0250153cad6e4fb0006', '40288ac653cad0250153cad4e2920001', '05', '种子轮', null);
 INSERT INTO `youi_codeitem` VALUES ('40288acb53314dd40153318dd747000a', '40288acb53314dd40153318d8a160009', '00', '待处理', null);
 INSERT INTO `youi_codeitem` VALUES ('40288acb53314dd40153318dfea0000b', '40288acb53314dd40153318d8a160009', '01', '已处理', null);
 INSERT INTO `youi_codeitem` VALUES ('40288acb53314dd40153318e94e7000d', '40288acb53314dd40153318e54d8000c', '00', '线上', null);
@@ -214,21 +234,3 @@ INSERT INTO `youi_codeitem` VALUES ('ff80808152f2fa0a0152f38b9b48000d', 'ff80808
 INSERT INTO `youi_codeitem` VALUES ('ff80808152f2fa0a0152f38bf0fc000e', 'ff80808152f2fa0a0152f38b08a7000c', '02', '招商部门', null);
 INSERT INTO `youi_codeitem` VALUES ('ff80808152f2fa0a0152f38c7a4e000f', 'ff80808152f2fa0a0152f38b08a7000c', '03', '企业服务供应商', null);
 INSERT INTO `youi_codeitem` VALUES ('ff80808153cad5550153cb79ee380027', '40288ab252f905180152f908e1d30001', '02', '已售已招', null);
-INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e0e28ab0002', '40288aaa538d8ce201538e0dc0890001', '01', '主板', null);
-INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e0e489c0003', '40288aaa538d8ce201538e0dc0890001', '02', '中小板', null);
-INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e0e649a0004', '40288aaa538d8ce201538e0dc0890001', '03', '创业板', null);
-INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e0ee8100005', '40288aaa538d8ce201538e0dc0890001', '04', '新三板', null);
-INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e0f07e00006', '40288aaa538d8ce201538e0dc0890001', '05', '未上市', null);
-INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e0fcf5d0008', '40288aaa538d8ce201538e0f9a010007', '01', '外资（欧美）', null);
-INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e0ffe150009', '40288aaa538d8ce201538e0f9a010007', '02', '外资（非欧美）', null);
-INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e104c25000a', '40288aaa538d8ce201538e0f9a010007', '03', '合资', null);
-INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e106389000b', '40288aaa538d8ce201538e0f9a010007', '04', '国企', null);
-INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e109350000c', '40288aaa538d8ce201538e0f9a010007', '05', '民营', null);
-INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e10bd0e000d', '40288aaa538d8ce201538e0f9a010007', '06', '政府机关', null);
-INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e10d59e000e', '40288aaa538d8ce201538e0f9a010007', '07', '事业单位', null);
-INSERT INTO `youi_codeitem` VALUES ('40288aaa538d8ce201538e113a48000f', '40288aaa538d8ce201538e0f9a010007', '08', '非盈利机构', null);
-INSERT INTO `youi_codeitem` VALUES ('40288ac653cad0250153cad520fe0002', '40288ac653cad0250153cad4e2920001', '01', 'Pre-A', null);
-INSERT INTO `youi_codeitem` VALUES ('40288ac653cad0250153cad556b50003', '40288ac653cad0250153cad4e2920001', '02', 'Pre-B', null);
-INSERT INTO `youi_codeitem` VALUES ('40288ac653cad0250153cad695d50004', '40288ac653cad0250153cad4e2920001', '03', 'Pre-C', null);
-INSERT INTO `youi_codeitem` VALUES ('40288ac653cad0250153cad6c1b90005', '40288ac653cad0250153cad4e2920001', '04', '天使轮', null);
-INSERT INTO `youi_codeitem` VALUES ('40288ac653cad0250153cad6e4fb0006', '40288ac653cad0250153cad4e2920001', '05', '种子轮', null);

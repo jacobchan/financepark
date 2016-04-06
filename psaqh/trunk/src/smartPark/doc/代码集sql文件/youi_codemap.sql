@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50538
 File Encoding         : 65001
 
-Date: 2016-04-05 16:39:51
+Date: 2016-04-06 17:02:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,6 +34,9 @@ CREATE TABLE `youi_codemap` (
 INSERT INTO `youi_codemap` VALUES ('2c9dc604391da4c701391daaedc80001', 'codemapType', '代码集类型', '1', '');
 INSERT INTO `youi_codemap` VALUES ('40283f8153168c33015316f2fa9c0001', 'payWay', '支付方式', '1', null);
 INSERT INTO `youi_codemap` VALUES ('4028808253bbee0e0153bbf92e470001', 'category', '扩散属性所属分类', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288aaa538d8ce201538e0dc0890001', 'rzType', '上市类型', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288aaa538d8ce201538e0f9a010007', 'rzProperty', '企业性质', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288aaa53ea226d0153eacdb5d80002', 'stalls', '档位', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aad53078875015307bebcbe0001', 'financingStatus', '发布状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aad53078875015307bfe6520004', 'financingType', '融资状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aad53078875015307c09d610007', 'recordType', '预约类型', '1', null);
@@ -62,6 +65,7 @@ INSERT INTO `youi_codemap` VALUES ('40288ab2531113db015311211cf40001', 'policyAp
 INSERT INTO `youi_codemap` VALUES ('40288ab353e461150153e5929da60008', 'seat', '座位', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab553cfaceb0153cfc693e00001', 'enteringType', '入驻申请类型', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288abc531c24bb01531c2a418c0001', 'resoStatus', '资源状态', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288ac653cad0250153cad4e2920001', 'roundFinancing', '融资伦次', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288acb53314dd40153318d8a160009', 'oc_status', '一卡通预约状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288acb53314dd40153318e54d8000c', 'oc_way', '一卡通办理方式', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288acb53314dd40153318f0c3b000f', 'resoTime', '可用时段', '1', null);
@@ -81,6 +85,3 @@ INSERT INTO `youi_codemap` VALUES ('4028d08151f126740151f184dbe80001', 'sex', '�
 INSERT INTO `youi_codemap` VALUES ('ff80808152f2fa0a0152f316e17d0006', 'enteringTime', '预约办理时段', '1', null);
 INSERT INTO `youi_codemap` VALUES ('ff80808152f2fa0a0152f38940d40009', 'bool', '是否', '1', null);
 INSERT INTO `youi_codemap` VALUES ('ff80808152f2fa0a0152f38b08a7000c', 'merchant_type', '商户类型', '1', null);
-INSERT INTO `youi_codemap` VALUES ('40288aaa538d8ce201538e0dc0890001', 'rzType', '上市类型', '1', null);
-INSERT INTO `youi_codemap` VALUES ('40288aaa538d8ce201538e0f9a010007', 'rzProperty', '企业性质', '1', null);
-INSERT INTO `youi_codemap` VALUES ('40288ac653cad0250153cad4e2920001', 'roundFinancing', '融资伦次', '1', null);
