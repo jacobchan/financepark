@@ -27,3 +27,5 @@ ALTER TABLE `sp_propertyservicemanager_entrec` ADD COLUMN `ENTERING_TYPE_` varch
 ALTER TABLE `sp_propertyservicemanager_bx` ADD COLUMN `MEMBERID_` varchar(36)  NULL;
 
 ALTER TABLE `sp_reservation_record` ADD COLUMN `RECORD_CODE_` varchar(32);
+
+ALTER TABLE `sp_lettermanager_comment` ADD COLUMN `MEMBER_ID_` varchar(36);
