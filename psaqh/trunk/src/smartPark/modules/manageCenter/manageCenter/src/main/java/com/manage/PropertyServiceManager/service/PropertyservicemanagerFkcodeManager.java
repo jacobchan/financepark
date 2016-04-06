@@ -91,7 +91,7 @@ public interface PropertyservicemanagerFkcodeManager extends BaseManager{
 	 * @return
 	 * @throws BusException
 	 */
-	public PropertyservicemanagerFkcode getFkcodeforpage(String fkcodeId) throws BusException;
+	public PropertyservicemanagerFkcode cancelStatus(String fkcodeId) throws BusException;
 	/**
 	 * 根据订单号模糊查询
 	 * @param fkCode订单号
