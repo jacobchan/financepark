@@ -109,7 +109,7 @@
 						</div>
 						<div class="clearfix yin-group undis">
 							<form class="yg-form">
-								<textarea placeholder="来说两句吧..."></textarea>
+								<textarea id="commentContent" name="commentContent" placeholder="来说两句吧..."></textarea>
 								<input type="submit" value="提交评论"  class="yf-input mt10 mb10"/>
 								<table width="100%">
 									<colgroup>
@@ -122,14 +122,6 @@
 											<h4 class="f14 lh30">李三朵<em class="em-box ml5">创</em></h4>
 											<p class="f14 lh30">太喜欢这个项目了，关注！<span class="f12">(2015-11-18 17:34)</span></p>
 											<p class="tr f12 lh30"><a href="javascript:;" class="c-333"><i class="fa fa-thumbs-o-up c-o mr5" style="font-size:17px"></i>(0)赞</a><span class="ml10 mr10 c-o">|</span><a href="javscript:;" class="c-333">回复</a></p>
-										</td>
-									</tr>
-									<tr>
-										<td><img src="../styles/images/yqfw/p1.png" width="71" /></td>
-										<td>
-											<h4 class="f14 lh30">李三朵<em class="em-box ml5">创</em></h4>
-											<p class="f14 lh30">太喜欢这个项目了，关注！<span class="f12">(2015-11-18 17:34)</span></p>
-											<p class="tr f12"><a href="javascript:;" class="c-333"><i class="fa fa-thumbs-o-up c-o mr5" style="font-size:17px"></i>(0)赞</a><span class="ml10 mr10 c-o">|</span><a href="javscript:;" class="c-333">回复</a></p>
 										</td>
 									</tr>
 								</table>
@@ -254,6 +246,28 @@
 	    $(".open-d").click(function(){
 	    	$(".dialog-con").toggle();
 	    })
+	    $(".yf-input").click(function(){
+	    	var Request = new Object();
+	    	Request = GetRequest();
+	    	var rzId = Request['id'];
+	    	var commentContent = $("#commentContent").val();
+	    	if(commentContent=="" || commentContent.trim().length==0){
+	    		alert("评论内容不能为空！");
+	    		return false;
+	    	}
+	    	$.youi.ajaxUtils.ajax({
+	    		url : baseUrl+"lettermanagerCommentManager/saveLettermanagerComment.json",
+	    		data : ['commentContent='+commentContent, 'commentEnterprise='+rzId].join('&'),
+	    		jsonp : 'data:jsonp',
+	    		dataType : 'jsonp',
+	    		async : false,
+	    		success : function(results) {
+	    			if (results && results.records && results.records.length>0) {
+	    				
+	    			}
+	    		}
+	    	});
+	    });
 	    function GetRequest() {
 	 	   var url = location.search; //获取url中"?"符后的字串
 	 	   var theRequest = new Object();
@@ -329,7 +343,7 @@
 	    		dataType : 'jsonp',
 	    		async : false,
 	    		success : function(results) {
-	    			if (results && results.records) {
+	    			if (results && results.records && results.records.length>0) {
 	    				var records = results.records;
 	    				$("#informationFinancing").empty();
 	    				var financingDiv ='<div class="yg-group-box">';
@@ -361,7 +375,7 @@
 	    		dataType : 'jsonp',
 	    		async : false,
 	    		success : function(results) {
-	    			if (results && results.records) {
+	    			if (results && results.records && results.records.length>0) {
 	    				var records = results.records;
 	    				$("#mediaDiv").empty();
 	    				for(var i=0; i<records.length; i++){
@@ -383,7 +397,7 @@
 	    		dataType : 'jsonp',
 	    		async : false,
 	    		success : function(results) {
-	    			if (results && results.records) {
+	    			if (results && results.records && results.records.length>0) {
 	    				var records = results.records;
 	    				var knowledgeDiv = '';
 	    				var head = '<table width="100%"><colgroup><col width="260"></col><col></col></colgroup>';
@@ -410,7 +424,7 @@
 	    		dataType : 'jsonp',
 	    		async : false,
 	    		success : function(results) {
-	    			if (results && results.records) {
+	    			if (results && results.records && results.records.length>0) {
 	    				var records = results.records;
 	    				for(var i=0; i<records.length; i++){
 	    					$("#legalImage").attr("src","/filestore/"+records[i].legalImage);
