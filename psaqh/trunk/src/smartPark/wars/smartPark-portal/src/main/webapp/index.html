@@ -701,8 +701,8 @@
 		function getHtml(record){
       	 	var html = "<ul>" ;
       	 	var length = record.length ;
-      	 	if(length > 3){//只显示前三条
-      	 		for(var i=0;i<3;i++){
+      	 	if(length > 5){//只显示前五条
+      	 		for(var i=0;i<5;i++){
       	 			var title = record[i].policyCaption.toString() ;
       	 			var len = title.length ;
       	 			if(len > 16){
