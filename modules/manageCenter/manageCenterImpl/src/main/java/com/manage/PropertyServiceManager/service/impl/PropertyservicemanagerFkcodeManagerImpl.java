@@ -271,5 +271,17 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
 		return list;
 				
 	}
+    /**
+	 * 根据当前用户分页查询
+	 * @return 分页对象
+	 */
+    @EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	public PagerRecords getPagerFkcodes(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PropertyservicemanagerFkcode.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)
+			throws BusException {
+    	PagerRecords pagerRecords = propertyservicemanagerFkcodeDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
     
 }
