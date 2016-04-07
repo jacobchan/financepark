@@ -17,16 +17,17 @@
 						<tr>
 							<td>头像</td>
 							<td>				   
-							    <div class="photo-edit" id="destination"><input type="file" id="imgUpload" name="imgUpload" draggable="true" accept=".png,.jpg"/>
-								  <div class="photoedit" style="left:22px">
+							    <%-- <div class="photo-edit" id="destination"><input type="file" id="imgUpload" name="imgUpload" draggable="true" accept=".png,.jpg"/>
+								  
+								</div>   --%>
+								<div class="photoedit" style="left:22px">
 								  <img src="<%=request.getContextPath()%>/styles/images/grzx/user-photo.png"  width="107" height="107"/>
 								  </div>
-								</div>  
 							</td>
 						</tr>
 						<tr>
 							<td>账号</td>
-							<td><span class="c-b1">888888888 </span><span class="c-o"><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/securityCenter.html">[更换手机号码]</a></span></td>
+							<td><span class="c-b1"> </span><span class="c-o"><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/securityCenter.html">[更换手机号码]</a></span></td>
 						</tr>
 						<tr>
 							<td>昵称</td>
@@ -88,7 +89,29 @@
 				</tbody></table>
 			</div>
 		</div>
+			
 	<!--***弹窗 end****************************************-->
+	<!--***弹窗 start****************************************-->
+	<!-- <div class="bgtanc m2">
+			<div class="tanccon" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+				<a href="javascript:;" class="tc-close"></a>
+				<div class="w70 tc mt40" style="margin-left:15%">
+					<table>
+						<tr>
+							<td><img src="../styles/images/grzx/check.png" class="mr40 mb20" border="0"></td>
+							<td >
+								<h4 class="f24 fl c-333">请登录!</h4>
+								<h4 class="f24 fl c-333"> 还有<span class="tt">0</span>秒关闭弹出框</h4>
+								<p class="f14 c-o fl mt20 mb20">如有问题，请拨打：0571-86508888</p>
+							</td>
+						<tr/>
+					</table>
+				</div>
+			</div>
+		</div> -->
+			
+	<!--***弹窗 end****************************************-->
+	
 	</youi:body>
 	<script type="text/javascript">
 		$(function(){			
@@ -157,7 +180,7 @@
 				}
 			});
 		});	
-		
+		//加入企业
 		$('.ib-btn').click(function(){
 			this.disabled=true;
 			var memberId=$("#memberId").html();
@@ -168,7 +191,9 @@
 				data:params.join('&'),
 				success:function(result){
 					if(result&&result.record){
-						alert(result.record.html);
+						//alert(result.record.html);
+						/* $(".f24.fl.c-333").text("您不是企业用户,暂时无法申请!");
+						$(".bgtanc.m2").show(); */
 						location.reload();
 					}
 				}
