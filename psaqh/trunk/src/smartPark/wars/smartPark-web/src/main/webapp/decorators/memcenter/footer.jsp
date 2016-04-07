@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/pages/common/memberCenterScriptAndCss.jsp"%>
+<%-- <%@ include file="/WEB-INF/pages/common/memberCenterScriptAndCss.jsp"%> --%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<div class="bottom clearfix pb20">
 		<div class="w1200 pt50 index-bottom-nav">
