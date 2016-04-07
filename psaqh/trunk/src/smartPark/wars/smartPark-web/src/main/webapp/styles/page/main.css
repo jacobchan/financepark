@@ -1,6 +1,6 @@
 *{box-sizing:border-box;-moz-box-sizing: border-box;-webkit-box-sizing: border-box; -o-box-sizing: border-box; -ms-box-sizing: border-box;margin:0px;padding:0px;}
 body,html{margin:0;padding:0;height:100%}
-body{font-size:14px;background-color:#f5f5f5;font-family:Raleway,sans-serif;color:#666;-webkit-font-smoothing:antialiased}
+body{font-size:14px;background-color:#f5f5f5;color:#666;-webkit-font-smoothing:antialiased}
 a{color:#4c5f70;outline:0}
 a:focus,a:hover{text-decoration:none;outline:0}
 ul{padding:0;margin:0; list-style:none;}
@@ -27,7 +27,7 @@ ul{padding:0;margin:0; list-style:none;}
 .sidebar-menu{position:absolute;display:block;float:left;top:0;bottom:0;left:0;z-index:2;padding-top:54px;padding-bottom:35px;width:250px;background-color:#2d2b29;
 height:100%; position:fixed;}
 .sidebar-menu-inner{ width:250px; height:auto;}
-.sidebar-menu-bread{ width:250px; height:50px; line-height:50px; font-size:14px; color:#FFFFFF; text-align:center; margin-top:20px;}
+.sidebar-menu-bread{ width:250px; height:50px; line-height:50px; font-size:16px; color:#FFFFFF; text-align:center; margin-top:20px;}
 .sidebar-menu-bread span{ margin-right:20px;}
 .sidebar-menu-mainul{ width:250px}
 .sidebar-menu-mainul li{width:250px;text-align:left;padding:10px 0; line-height:30px; cursor:pointer;}
