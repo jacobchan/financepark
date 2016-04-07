@@ -50,8 +50,18 @@
 					var code = $(".color_orange").html();
 					var phone = phoneArr.split(",");
 					for(var i=0; i<phone.length; i++){
-						if (!$("#mobile").val().match(/^(((13[0-9]{1})|150|151|152|153|155|156|158|159)+\d{8})$/)) { 
-							
+						if (!phone[i].match(/^(((13[0-9]{1})|150|151|152|153|155|156|158|159|170|181|182|183|185|186|189)+\d{8})$/)) { 
+							alert("手机号码不正确！");
+						}else{
+							$.ajax({
+								url:baseUrl+'/informationFinancingManager/sendEnterpriseCode.json',
+								data : ['mobile='+phoneArr, 'code='+code].join('&'),
+								success : function(result) {
+					    			if (result && result.record) {
+					    				alert(result.record.html);
+					    			}
+								}
+							});
 						}
 					}
 				});
@@ -106,7 +116,7 @@
 						</tr>
 						<tr>
 							<td></td>
-							<td colspan="2"><a class="ib-btn" style="width:120px;text-align:center;margin-top:10px;">发送</a></td>
+							<td colspan="2"><a href="javascript:;" class="ib-btn" style="width:120px;text-align:center;margin-top:10px;">发送</a></td>
 						</tr>
 					</tbody>
 				</table>
