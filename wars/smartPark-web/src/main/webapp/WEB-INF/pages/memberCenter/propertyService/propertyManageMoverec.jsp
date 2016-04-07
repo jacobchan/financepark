@@ -3,7 +3,7 @@
 <youi:html title="搬家放行">
 	<youi:body decorator="memcenter">  
 				<div class="w1000">
-					<h3 class="per-h3">搬家放行列表</h3>
+					<h3 class="per-h3">搬家放行列表<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要搬家</a></h3>
 					<div class="clearfix mt20 fklist">
 						<!-- <div class="gz-fx-box clearfix">
 							<div class="gzb-thead">
@@ -165,4 +165,10 @@
 		}
 	};
 	</script>
+	<script type="text/javascript">
+	    //点击跳转到搬家申请页面
+		$("#a1").click(function(){			
+			location.href = proUrl + "yqfw/yq8.html" ;
+		})	
+     </script>
 </youi:html>
