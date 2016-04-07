@@ -84,4 +84,16 @@ public interface InformationFinancingManager extends BaseManager{
 	public List<Codeitem> findCodeitem(
 			@ServiceParam(name = "code") String code)
 			throws BusException;
+	
+	/**
+	 * 发送企业码
+	 * @param mobile 手机号码
+	 * @param code 企业码
+	 * @return 发送状态
+	 * @throws BusException
+	 * @author ZhuYL
+	 * @time 2016-04-06
+	 */
+	@EsbServiceMapping
+	public String sendEnterpriseCode(@ServiceParam(name = "mobile") String mobile, @ServiceParam(name = "code") String code) throws BusException, Exception;
 }
