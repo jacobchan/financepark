@@ -184,8 +184,27 @@ public interface OrdermanagerUserorderManager extends BaseManager{
    	 * 通过订单号获取当前用户的订单记录  模糊查询
    	 * @param userId
    	 * @param userorderProject
+   	 * @param userorderCode
    	 * @return
    	 * @throws BusException
    	 */
-   	public List<OrdermanagerUserorder> getOrderlistLikeUserorderProject(String userId, String userorderProject) throws BusException;
+   	public List<OrdermanagerUserorder> getOrderlistLikeUserorderProject(String userId, String userorderProject,String userorderCode,String userorderStatus) throws BusException;
+	/**
+   	 * 通过订单号获取当前用户的历史订单记录  模糊查询
+   	 * @param userId
+   	 * @param userorderProject
+   	 * @param userorderCode
+   	 * @return
+   	 * @throws BusException
+   	 */
+   	public List<OrdermanagerUserorder> getHospitalOrderlist(String userId, String userorderProject,String userorderCode,String userorderStatus) throws BusException;
+
+   	/**
+     * 取消状态，前端调用
+     * @param policyApplyId，政策申请记录ID
+     * @return
+     * @throws BusException
+     */
+    @EsbServiceMapping
+	public OrdermanagerUserorder cancelStatus(String id) throws BusException ;
 }
