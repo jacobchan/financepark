@@ -7,15 +7,15 @@
 					<div class="mt20 gr-txl clearfix lh30">
 							<div class="tct-select fl mr20" style="width:200px">
 								<div class="ic-select" style="background: transparent url(../images/yqfw/down.png) no-repeat scroll right center;">
-									<p class="c-b1">请选择订单项目</p>
+									<p class="c-b1" id="userorderCode">请选择订单项目</p>
 								</div>
-								<ul style="display: none;" class="select-nav">
+								<ul style="display: none;" class="select-nav" >
 									<li>园区地址1</li>
 									<li>园区地址2</li>
 									<li>园区地址3</li>
 								</ul>
 							</div>
-							<div class="inp-box ml20" style="width:300px;"><input placeholder="请输入相关的信息，如：“物业”"  id="userorderProject" type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
+							<div class="inp-box ml20" style="width:300px;"><input placeholder="请输入订单号"  id="userorderCode" type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
 							<input value="搜索" class="hhf-submit f14 fl ml20" type="button">
 						</div>
 					
@@ -33,6 +33,7 @@
 									<th>订单项目</th>
 									<th>订单金额</th>
 									<th>下单时间</th>
+									<th>订单状态</th>
 									<th>操作</th>
 								</tr>
 														
@@ -52,7 +53,7 @@
 			</youi:body>
 	<!--***bottom start****************************************-->
 	<script type="text/javascript">		
-		$(function(){
+	   $(function(){
 			$.ajax({				
 				url:baseUrl+'/ordermanagerUserorderManager/getOrderListByLoginUser.json',
 				success:function(result){	
@@ -62,28 +63,29 @@
 				}
 			});
 		});
-		//拼接卡号列表
+		//拼接列表
 		function _parseRecords(record){		
 			console.log(record);
 			for(var i=0;i<record.length;i++){				
-				var status = "";								
-				if(record[i].userorderStatus=='1'){
-					status = "申请中";					
-				}else if(record[i].userorderStatus=='2'){
-					status = "申请成功";
-				}else if(record[i].userorderStatus=='3'){
-					status = "申请失败";
-				} else if(record[i].userorderStatus=='0'){
-					status = "取消";
-				} 
+				var status = "";
+				var button = "";
+				if(record[i].userorderStatus=='01'){
+					status = "待付款";	
+					button = "<a href='grzx2-2.html'>付款</a>";
+				}else if(record[i].userorderStatus=='02'){
+					status = "已付款";
+					button = "<a href='grzx2-2.html'>评价</a><a href='grzx2-2.html'>评价</a>";
+				}else if(record[i].userorderStatus=='03'){
+					status = "已完成";					
+				}
 				var html= "<tr class='aaa'>"+
-					      "<td width='111'>"+record[i].userorderCode+"</td>"+
-                          "<td width='111'>"+record[i].userorderProject+"</td>"+
-                          "<td width='111'>"+record[i].userorderAmount+"</td>"+
-                          "<td width='111'>"+record[i].userorderTime+"</td>"+                         
-                          "<td width='155'>"+status+                                              
-                          "<a href='grzx2-2.html'>评价</a><span class='f12 ml5 mr5'>"+
-						  "<a href='javascript:;' class='ac-show lq-show'>发票领取</a>"+
+					      "<td>"+record[i].userorderCode+"</td>"+
+                          "<td>"+record[i].userorderProject+"</td>"+
+                          "<td>"+record[i].userorderAmount+"</td>"+
+                          "<td>"+record[i].userorderTime+"</td>"+                         
+                          "<td>"+status+"</td>"+                          
+                          "<td>"+   button+                                           
+                         
 						  "</td>"+
                           " </tr>";
 				 $(".gt-table").append(html);	
@@ -93,20 +95,51 @@
 		$('.hhf-submit').click(function(){	
 			$(".aaa").empty();
 			 var userorderProject=$("#userorderProject").val();
-			 var userorderProject1=$("#userorderProject1").val();
+			 var userorderCode=$("#userorderCode").text();
+		//	 var  myselect= myselect.options[index].text;
 			 alert(userorderProject);
-			 params=['userorderProject='+userorderProject+'','userorderProject1='+userorderProject1+''];
+			 alert(myselect); 
+			 params=['userorderProject='+userorderProject+'','userorderCode='+userorderCode+''];
 		      $.ajax({
 		    	 url:baseUrl+'/ordermanagerUserorderManager/getOrderlistLikeUserorderProject.json',
 		    	 data:params.join('&'),
 		    	 success:function(result){					
 						console.log(result.records);           
 						if(result&&result.records){	
-							alert(111);
+							
 							_parseRecords(result.records);					
 						}
 					}
 			}); 
 		}); 
+		//下拉选项目名称
+ 		$(function(){
+			$.ajax({				
+				url:baseUrl+'/purchasingmanagerGenreManager/getGenreProject.json',
+				success:function(result){	
+					if(result&&result.records){					
+						_selectRecords(result.records);						
+					}
+				}
+			});
+		});
+		//拼接列表
+		function _selectRecords(record){		
+			console.log(record);
+			for(var i=0;i<record.length;i++){				
+				var html= "<li>"+record[i].genreName+"</li>";                                                                                  
+				 $(".select-nav").append(html);	
+			}
+			$(".ic-select").click(function(e){
+				$(".select-nav").hide();
+			    $(this).next(".select-nav").show();
+			    e.stopPropagation();//阻止冒泡
+			});
+			$(".select-nav li").click(function(){
+				$(this).parents(".tct-select").find(".ic-select p").text($(this).text()) ;
+				$(this).parent().hide();
+			});
+		}; 
 	</script>
+	
 </youi:html>
