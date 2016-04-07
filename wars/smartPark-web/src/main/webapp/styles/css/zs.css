@@ -86,7 +86,7 @@ body{ font-family:"Microsoft YaHei","微软雅黑";color:#333; font-size: 14px;}
 .index-group h5{font-size: 16px;line-height: 20px;margin:25px 0px;}
 .index-group .ig-box{border:1px solid #ecebeb;padding: 20px;line-height: 28px;font-size: 14px;color: #333333;}
 .index-group .ig-box .ib-p-o{font-size: 12px;margin-top: 5px;}
-.ib-btn,a.ib-btn{font-size: 15px;height: 40px;padding: 0px 30px;background: #fa742c;line-height: 40px;display: inline-block;margin-top: 20px;color: #fff;}
+.ib-btn,a.ib-btn{font-size: 15px;height: 40px;padding: 0px 30px;background: #fa742c;line-height: 40px;display: inline-block;margin-top: 20px;color: #fff!important;}
 input.ib-btn{border:1px solid #fa742c;line-height: 0px;}
 .ib-btn:hover,a.ib-btn:hover{background: #ff5900;}
 .index-group .ig-box .ib-h3-circle{background:url(../images/zs/circle.png) no-repeat left center; line-height: 30px;padding-left: 22px;font-size: 17px;}
