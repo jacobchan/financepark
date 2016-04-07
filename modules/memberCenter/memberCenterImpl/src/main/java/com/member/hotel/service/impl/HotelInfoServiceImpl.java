@@ -346,7 +346,7 @@ public class HotelInfoServiceImpl extends BaseManagerImpl implements HotelInfoSe
 	}
 
 	@EsbServiceMapping
-	public List<JsonNode> getHotelPic(String hid) throws BusException {
+	public List<JsonNode> getHotelPic(@ServiceParam(name="hid") String hid) throws BusException {
 		String result = "";
 		List<JsonNode> resultList = new ArrayList<JsonNode>();
 		Map<String,Object> params = new HashMap();
@@ -360,6 +360,7 @@ public class HotelInfoServiceImpl extends BaseManagerImpl implements HotelInfoSe
 	      ObjectMapper objectMapper = new ObjectMapper();
 	      JsonNode resultJson = objectMapper.readTree(result);
 	      JsonNode reqHeader = resultJson.get("retHeader");
+	      resultList.add(reqHeader);
 	      JsonNode reqdata = resultJson.get("reqdata");
 	      if (resultJson.get("retmsg").asText().equals("1")) {
 	    	  for (Iterator it = reqdata.elements(); it.hasNext(); ){
