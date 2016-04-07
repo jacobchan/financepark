@@ -3,7 +3,7 @@
 <youi:html title="访客登记">
 	<youi:body decorator="memcenter"> 
 				<div class="w1000">
-					<h3 class="per-h3">访客登记列表</h3>
+					<h3 class="per-h3">访客登记列表<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要邀请访客</a></h3>
 					<div class="clearfix">
 						<div class="mt20 gr-txl clearfix lh30">
 							<label class="fl mr20 f16">申请时间：</label>
@@ -324,7 +324,7 @@
 	        istime: true, //是否开启时间选择
 		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 		});
-	})
+	});
 	$(function(){
 		laydate({
 		    elem: '#endTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
@@ -332,6 +332,12 @@
 	        istime: true, //是否开启时间选择
 		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 		});
-	})
+	});
 	</script>
+	<script type="text/javascript">
+	    //点击跳转到访客申请页面
+		$("#a1").click(function(){			
+			location.href = proUrl + "yqfw/yq4.html" ;
+		})	
+     </script>
 </youi:html>
