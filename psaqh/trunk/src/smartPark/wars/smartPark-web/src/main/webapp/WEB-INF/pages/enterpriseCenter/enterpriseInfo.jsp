@@ -305,40 +305,41 @@
 		                    </div>
 		                </div>
             		</div>
-            	</div>
-           		<div class="jiesao_word">
-	                <div class="qiye_ms">
-	                	<div class="qiye_miaoshu"><span>产品描述</span></div>
-	                    <div class="edit_tool">
-	                    	<textarea id="editorproductDiscriptio" name="productDiscriptio" cols="20" rows="5" class="ckeditor"></textarea>
-	                    </div>
-	                </div>
-				</div>
-           		<div class="qiye_photo">
-	                <div class="qiye_xc">
-	                    <div class="qiye_xiangce"><span>企业相册</span></div>
-	                    <div class="photo_list">
-	                        <ul>
-	                            <li>
-	                                <div style="position:relative">
-	                                    <div class="overlay"></div>
-	                                    <img src="<%=request.getContextPath()%>/styles/images/qiye/photo_list1.png">                                        
-	                                </div>
-	                            </li>
-	                            <li>
-	                                <div style="position:relative">
-	                                    <img src="<%=request.getContextPath()%>/styles/images/qiye/add.png">
-	                                    <div class="upload_pic"><input type="file"></div>
-	                                </div>
-	                            </li>
-                        	</ul>
-                         	<div class="photo_btn">
-                            	<div class="save_btn"><a>保存</a></div>
-                            	<div class="quxiao_btn"><a>取消</a></div>
-                        	</div>
-                		</div>
-           			</div>
-        		</div>    
+            	
+	           		<div class="jiesao_word">
+		                <div class="qiye_ms">
+		                	<div class="qiye_miaoshu"><span>产品描述</span></div>
+		                    <div class="edit_tool">
+		                    	<textarea id="editorproductDiscriptio" name="productDiscriptio" cols="20" rows="5" class="ckeditor"></textarea>
+		                    </div>
+		                </div>
+					</div>
+	           		<div class="qiye_photo">
+		                <div class="qiye_xc">
+		                    <div class="qiye_xiangce"><span>企业相册</span></div>
+		                    <div class="photo_list">
+		                        <ul>
+		                            <li>
+		                                <div style="position:relative">
+		                                    <div class="overlay"></div>
+		                                    <img src="<%=request.getContextPath()%>/styles/images/qiye/photo_list1.png">                                        
+		                                </div>
+		                            </li>
+		                            <li>
+		                                <div style="position:relative">
+		                                    <img src="<%=request.getContextPath()%>/styles/images/qiye/add.png">
+		                                    <div class="upload_pic"><input type="file"></div>
+		                                </div>
+		                            </li>
+	                        	</ul>
+	                         	<div class="photo_btn">
+	                            	<div class="save_btn"><a>保存</a></div>
+	                            	<div class="quxiao_btn"><a>取消</a></div>
+	                        	</div>
+	                		</div>
+	           			</div>
+	        		</div>    
+	    			</div>
     		</div>
 		</div>
 		<!-- 行业类型下拉 -->
