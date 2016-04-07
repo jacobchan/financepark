@@ -100,7 +100,7 @@ input.ib-btn{border:1px solid #fa742c;line-height: 0px;}
 .index-fr-nav li{float: left;line-height: 24px;cursor: pointer; color: #666;border:1px solid #ecebeb;font-size: 14px;padding: 7px 0px;width:33.33333333%;text-align: center;border-left: 1px solid #fff;border-bottom: 1px solid #ff6714;}
 .index-fr-nav li:first-child{border-left: 1px solid #ecebeb;}
 .index-fr-nav li.active{border:1px solid #ff6714;border-bottom: 1px solid #fff;color: #ff6714;}
-.ifn-group{margin-top: -1px;border:1px solid #ecebeb;}
+.ifn-group{margin-top: -1px;border:1px solid #ecebeb;min-height: 275px;}
 .undis{display: none;}
 .ig-nav{width: 100%;}
 .ig-nav a{color: #333;}

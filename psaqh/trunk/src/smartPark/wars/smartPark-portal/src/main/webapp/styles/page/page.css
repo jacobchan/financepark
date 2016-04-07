@@ -321,7 +321,7 @@ width:32px;height:32px;position:absolute;top:50%;right:0;margin-top:-16px;}
 
 .res_right{float:right;width:285px;}
 .h3-bd{border: 1px solid #ddd;line-height: 30px;padding: 7px 20px;border-bottom: 0px;font-size: 17px;}
-.ifn-group{margin-top: -1px;border:1px solid #ecebeb;}
+.ifn-group{margin-top: -1px;border:1px solid #ecebeb;min-height: 275px;}
 .index-fr-nav{width: 100%;}
 .index-fr-nav li{float: left;line-height: 24px;cursor: pointer; color: #666;border:1px solid #ecebeb;font-size: 14px;padding: 7px 0px;width:33.33333333%;text-align: center;border-left: 1px solid #fff;border-bottom: 1px solid #ff6714;}
 .index-fr-nav li:first-child{border-left: 1px solid #ecebeb;}
