@@ -1,13 +1,14 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/pages/include.jsp" %>
 <youi:html title="我的地址">
-	<youi:body decorator="memcenter">  
+	<youi:body decorator="memcenter"> 
+				 
 				<div class="w1000">
 					<h3 class="per-h3">我的地址</h3>
 					<div class="mt30 addressList">
-						
+					
 					</div>	
-					<a href="javascript:;" class="add-box ga-edit"><i class="fa fa-plus mr20"></i>新增地址</a>
+					<div href="#" class="add-box ga-edit"><i class="fa fa-plus mr20"></i>新增地址</a>
 				</div>
 			</youi:body>
 	<!--***bottom end****************************************-->
@@ -118,13 +119,14 @@
 		function _parseRecords(record){
 			var html="";
 			for(var i=0;i<record.length;i++){
+				
 				if(record[i].addressStatus==0){			
 					  html+="<div class='gr-address active' id="+record[i].addressId+">"+
 							"<div class='clearfix pl40 pr40'><span>姓名："+record[i].addressName+"</span><span class='fr'>手机号码："+record[i].addressPhone+"</span></div>"+
 							"<div class='pl40 pr40 mt5 mb10'>园区地址："+record[i].addressDetail+"</div>"+
 							"<div class='pl20 pr20 lh35 tr f12' style='border-top:1px solid #ebecec'>"+
 							"<a href='javascript:;' class='mr10 ga-edit' onclick='javascript:editAdd(this)'>编辑</a>"+
-							"<a href='javascript:remove();''>删除</a>"+
+							/* "<a href='javascript:remove();''>删除</a>"+ */
 							"</div>"+
 							"<em class='s-a-select'>默认</em>"+
 							"</div>"
@@ -330,8 +332,8 @@
 			//校验手机号格式
 			function isMobil(s) {
 			    var patrn = /^(13[0-9]{9})|(14[0-9])|(18[0-9])|(15[0-9][0-9]{8})$/;
-			    if (!patrn.exec(s)) return false
-			    return true
+			    if (!patrn.exec(s)){ return false;}
+			    else{return true;}
 			};
 	</script>
 </youi:html>
