@@ -58,7 +58,7 @@ public class LettermanagerLetter implements Domain{
 	private String createTime;//创建时间
 
 	@Column(name = "LETTER_RECIPIENT_ID")
-	@Length(max=32)
+	@Length(max=36)
 	private String letterRecipientId;//接收人ID
 	
 	public String getUpdateUser(){

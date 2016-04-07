@@ -4,10 +4,11 @@
 package com.manage.EnterpriseMessageManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: 评论
@@ -29,9 +30,9 @@ public class LettermanagerComment implements Domain{
 	@Length(max=36)
 	private String rzId;//ID
 	
-	@Column(name = "RMEMBER_ID_")
-	@Length(max=36)
-	private String memberId;//ID
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="MEMBER_ID_")
+	private MemberInformation member;//会员id
 
 	@Column(name = "CREATE_TIME_")
 	private String createTime;//创建时间
@@ -147,8 +148,14 @@ public class LettermanagerComment implements Domain{
 		this.commentId = commentId;
 	}
 	
-	
-	
+	public MemberInformation getMember() {
+		return member;
+	}
+
+	public void setMember(MemberInformation member) {
+		this.member = member;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
