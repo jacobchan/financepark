@@ -20,7 +20,7 @@
 		<menu id="350004" text="媒体报道" href="page/manageCenter.EnterpriseManager.informationMedia/informationMedia.html"></menu>
 		<menu id="350005" text="公告信息" href="page/manageCenter.EnterpriseManager.informationNotice/informationNotice.html"></menu>
 		<menu id="350006" text="产品信息" href="page/manageCenter.EnterpriseManager.informationProduct/informationProduct.html"></menu>
-		<menu id="350007" text="企业入驻管理" href="page/EnterBusinessManager.enterbusinessmanagerRz/enterbusinessmanagerRz.html"></menu>
+		<menu id="350007" text="企业入驻管理" href="page/manageCenter.EnterBusinessManager.enterbusinessmanagerRz/enterbusinessmanagerRz.html"></menu>
 	</menu>
 	<menu id="320100" text="园区基础">
 		<menu id="320101" text="园区管理" href="page/commonCenter.BuildingBaseManager.bbmPark/bbmPark.html"></menu>
