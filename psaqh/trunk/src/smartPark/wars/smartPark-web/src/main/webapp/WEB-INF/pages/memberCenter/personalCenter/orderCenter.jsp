@@ -55,7 +55,7 @@
 	<script type="text/javascript">		
 	   $(function(){
 			$.ajax({				
-				url:baseUrl+'/ordermanagerUserorderManager/getOrderListByLoginUser.json',
+				url:baseUrl+'ordermanagerUserorderManager/getOrderListByLoginUser.json',
 				success:function(result){	
 					if(result&&result.records){					
 						_parseRecords(result.records);						
@@ -101,7 +101,7 @@
 			 alert(myselect); 
 			 params=['userorderProject='+userorderProject+'','userorderCode='+userorderCode+''];
 		      $.ajax({
-		    	 url:baseUrl+'/ordermanagerUserorderManager/getOrderlistLikeUserorderProject.json',
+		    	 url:baseUrl+'ordermanagerUserorderManager/getOrderlistLikeUserorderProject.json',
 		    	 data:params.join('&'),
 		    	 success:function(result){					
 						console.log(result.records);           
@@ -115,7 +115,7 @@
 		//下拉选项目名称
  		$(function(){
 			$.ajax({				
-				url:baseUrl+'/purchasingmanagerGenreManager/getGenreProject.json',
+				url:baseUrl+'purchasingmanagerGenreManager/getGenreProject.json',
 				success:function(result){	
 					if(result&&result.records){					
 						_selectRecords(result.records);						

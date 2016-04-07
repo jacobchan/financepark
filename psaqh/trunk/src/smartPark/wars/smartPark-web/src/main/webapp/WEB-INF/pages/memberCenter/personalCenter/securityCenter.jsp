@@ -66,7 +66,7 @@
 				var confirmPassword=$("#confirmPassword").val();
 				var params=['password='+password,'confirmPassword='+confirmPassword,'oldPassword='+oldPassword];
 			 	$.youi.ajaxUtils.ajax({
-					url:baseUrl+'/memberInformationManager/doModifyPassword.json',
+					url:baseUrl+'memberInformationManager/doModifyPassword.json',
 					data:params.join('&'),
 					success:function(result){
 						alert("修改成功！");
@@ -83,7 +83,7 @@
 				var memberPhoneNumber=$("#memberPhoneNumber").val();
 				var params =['memberPhoneNumber='+memberPhoneNumber];
 				$.youi.ajaxUtils.ajax({
-					url:baseUrl+'/memberInformationManager/updatePhoneNumber.json',
+					url:baseUrl+'memberInformationManager/updatePhoneNumber.json',
 					data:params.join('&'),
 					success:function(result){
 						alert("修改成功！");
