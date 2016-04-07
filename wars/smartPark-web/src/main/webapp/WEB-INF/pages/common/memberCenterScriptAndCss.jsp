@@ -16,3 +16,4 @@
 	<script type="text/javascript"  src="<%=request.getContextPath()%>/scripts/page/birthday.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
 	<script type="text/javascript"  src="<%=request.getContextPath()%>/scripts/page/url.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/fileUpload/plupload.full.min.js"></script>
