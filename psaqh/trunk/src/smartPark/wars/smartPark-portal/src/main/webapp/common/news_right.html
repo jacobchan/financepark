@@ -55,6 +55,7 @@
 				if(len > 3){
 					len = 3 ;
 				}
+				var html = "" ;
 				for(var i=0;i<len;i++){
 					var title = record[i].policyCaption.toString() ;
 	  	 			var leng = title.length ;
@@ -62,7 +63,7 @@
 	      	 			title = title.substring(0,21) ;
 						title += "..." ;
 	  	 			}
-					var html = "<li>"+
+					html += "<li>"+
 									"<a href='../zscenter/zs7.html?policyId="+record[i].policyId+"' target='_blank'>"+
 										'<div class="in-photo">'+
 											"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].imageUrl+"&method=show' border='0' width='100%'>"+
@@ -72,8 +73,9 @@
 										'</div>'+
 									'</a>'+
 								'</li>' ;
-					$(".ig-nav").append(html) ;
 				}
+				$(".ig-nav").empty("") ;
+				$(".ig-nav").append(html) ;
 			}
 		</script> 
 			
