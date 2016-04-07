@@ -338,7 +338,7 @@
 	    		success : function(results) {
 	    			if (results && results.record) {
 	    				var record = results.record;
-	    				$("#logo").attr("src", "/filestore/"+record.rzLogo);
+	    				$("#logo").attr("src", cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record.rzLogo+"&method=show");
 	    				$("#rzName").html(record.rzName);
 	    				$("#rzRemark").html(record.rzRemark);
 	    				$("#introdaction").html(record.rzRemark);
@@ -347,8 +347,16 @@
 	    				$("#rzUrl").append("<a href='"+record.rzUrl+"' target='_blank'><font class='c-o f14'>"+record.rzUrl+"</font></a>");
 	    				$("#productDiv").html(record.productDiscriptio);
 	    				$("#noticeTime").append(record.rzDate);
-    					$("#noticeCount").append(record.attentionCount);
-    					$("#noticeSum").append(record.scanCount);
+    					if(record.attentionCount!=null && record.attentionCount!=""){
+    						$("#noticeCount").append(record.attentionCount);
+    					}else{
+    						$("#noticeCount").append("202");
+    					}
+    					if(record.scanCount!=null && record.scanCount!=""){
+    						$("#noticeSum").append(record.scanCount);
+    					}else{
+    						$("#noticeSum").append("238");
+    					}
     					if(null!=record.rzImages){
     						var images = record.rzImages.split(",");
     						$("#rzImages").empty();
@@ -444,8 +452,12 @@
 	    				var head = '<table width="100%"><colgroup><col width="260"></col><col></col></colgroup>';
 	    				$("#knowledgeDiv").empty();
 	    				for(var i=0; i<records.length; i++){
+	    					var imgsrc = "../styles/images/yqfw/zz1.jpg";
+	    					if(records[i].knowledgeUrl.length!=0){
+	    						imgsrc = cenUrl+"common/uploadImage.html?repository=/swfupload&path="+records[i].knowledgeUrl+"&method=show";
+	    					}
 	    					knowledgeDiv += '<tr>'+
-	    						'<td><img src="/filestore/'+records[i].knowledgeUrl+'" width="223"></td>'+
+	    						'<td><img src="'+imgsrc+'" width="223"></td>'+
 								'<td>'+
 									'<h4 class="f14 lh40 fb">'+records[i].knowledgeTitle+'</h4>'+
 									'<p class="f12 lh24">'+records[i].knowledgeContent+'</p>'+
