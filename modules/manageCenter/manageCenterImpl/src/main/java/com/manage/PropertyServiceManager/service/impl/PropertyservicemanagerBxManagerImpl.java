@@ -270,11 +270,16 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 	    	Collection<Condition> condition = new ArrayList<Condition>();
 	    	condition.add(ConditionUtils.getCondition("bxComp", Condition.LIKE, rzName));
 	    	 List<PropertyservicemanagerBx> list = propertyservicemanagerBxDao.commonQuery(condition, null);
-	    	 if(list.size()>0){
+	    		for(PropertyservicemanagerBx bx : list){
+	    			if(StringUtils.isNotEmpty(bx.getMemberId())){
+	    				String memberId = bx.getMemberId();
+	    				MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
+	    				bx.setMember(memberInformation);
+	    			}
+	    		}
+	    		 
 	    		 return list;
-	    	 }else{
-	    		 return null;
-	    	 }
+	    	 
 		}else{
 			return null;
 		}
