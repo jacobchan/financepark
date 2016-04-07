@@ -7,7 +7,7 @@
 			<dd  class="active"><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/personInfo.html">个人资料</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/orderCenter.html">订单中心</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/securityCenter.html">安全中心</a></dd>
-			<dd><a href="grzx4.html">消息</a></dd>
+			<dd><a href="">消息</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/addressBook.html">企业通讯录</a></dd>
 			<%-- <dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/propertyManagerOcBind.html">一卡通绑定</a></dd> --%>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/myAdderss.html">我的地址</a></dd>
@@ -32,7 +32,7 @@
 					<li><a href="grzx18-4.html">订单详情</a></li>
 				</ul>
 			</dd>
-			<dd><a href="grzx19.html">退货处理</a></dd>
+			<dd><a href="">退货处理</a></dd>
 			<dt>创智汇</dt>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/genWisdom/releaseActivity.html">发布活动</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/genWisdom/participateActivity.html">我参加的活动</a></dd>
