@@ -110,20 +110,9 @@
 						<div class="clearfix yin-group undis">
 							<form class="yg-form">
 								<textarea id="commentContent" name="commentContent" placeholder="来说两句吧..."></textarea>
-								<input type="submit" value="提交评论"  class="yf-input mt10 mb10"/>
-								<table width="100%">
-									<colgroup>
-										<col width="95"></col>
-										<col></col>
-									</colgroup>
-									<tr>
-										<td><img src="../styles/images/yqfw/p1.png" width="71" /></td>
-										<td>
-											<h4 class="f14 lh30">李三朵<em class="em-box ml5">创</em></h4>
-											<p class="f14 lh30">太喜欢这个项目了，关注！<span class="f12">(2015-11-18 17:34)</span></p>
-											<p class="tr f12 lh30"><a href="javascript:;" class="c-333"><i class="fa fa-thumbs-o-up c-o mr5" style="font-size:17px"></i>(0)赞</a><span class="ml10 mr10 c-o">|</span><a href="javscript:;" class="c-333">回复</a></p>
-										</td>
-									</tr>
+								<a href="javascript:subComment();" class="yf-input mt10 mb10" style="line-height:28px;">提交评论</a>
+								<table id="commentDiv" width="100%">
+									
 								</table>
 							</form>
 						</div>
@@ -152,8 +141,8 @@
 					<a href="" class="hhf-submit" style="line-height:28px;">收藏公司</a>
 				</p>
 				<div class="dialog-con">
-					<textarea placeholder="请在此处输入你想对该公司负责人说的话..."></textarea>
-					<p class="tc"><a href="javascript:;" onclick="$('.bg-tanc.m1').show();$('#ti-m1').text('5');a=5;timer1=setInterval('jump1()',1000);">回复</a></p>
+					<textarea id="letterContent" name="letterContent" placeholder="请在此处输入你想对该公司负责人说的话..."></textarea>
+					<p class="tc"><a href="javascript:;" onclick="subLetter();">回复</a></p>
 				</div>
 			</div>
 		</div>
@@ -245,9 +234,11 @@
 	    });
 	    $(".open-d").click(function(){
 	    	$(".dialog-con").toggle();
-	    })
-	    $(".yf-input").click(function(){
-	    	var Request = new Object();
+	    });
+	    //保存评论
+		function subComment(){
+			var Request = new Object();
+	    	var resoTime = "";
 	    	Request = GetRequest();
 	    	var rzId = Request['id'];
 	    	var commentContent = $("#commentContent").val();
@@ -256,18 +247,68 @@
 	    		return false;
 	    	}
 	    	$.youi.ajaxUtils.ajax({
-	    		url : baseUrl+"lettermanagerCommentManager/saveLettermanagerComment.json",
-	    		data : ['commentContent='+commentContent, 'commentEnterprise='+rzId].join('&'),
+				url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
+				jsonp : 'data:jsonp',
+	    		dataType : 'jsonp',
+				success:function(result){
+					if(result&&result.record){
+						$.youi.ajaxUtils.ajax({
+				    		url : baseUrl+"lettermanagerCommentManager/getLettermanagerComments.json",
+							data : ['commentEnterprise='+rzId,'member.memberId='+result.record.memberId].join('&'),
+							jsonp : 'data:jsonp',
+				    		dataType : 'jsonp',
+							success:function(results){
+								if(results&&results.records&&results.records.length>0){
+									alert("不能重复评论！");
+								}else{
+									$.youi.ajaxUtils.ajax({
+							    		url : baseUrl+"lettermanagerCommentManager/saveLettermanagerComment.json",
+							    		data : ['commentEnterprise='+rzId,'commentContent='+commentContent].join('&'),
+							    		jsonp : 'data:jsonp',
+							    		dataType : 'jsonp',
+							    		success : function(result) {
+							    			if(result && result.record){
+							    				alert("评论提交成功！");
+							    				$("#commentContent").val();
+							    				window.location.reload();
+							    			}
+							    		}
+							    	});
+								}
+							}
+						});
+					}
+				}
+			});
+	    }
+	    //保存私信
+		function subLetter(){
+			var Request = new Object();
+	    	var resoTime = "";
+	    	Request = GetRequest();
+	    	var rzId = Request['id'];
+	    	var letterContent = $("#letterContent").val();
+	    	if(letterContent=="" || letterContent.trim().length==0){
+	    		alert("评论内容不能为空！");
+	    		return false;
+	    	}
+	    	$.youi.ajaxUtils.ajax({
+	    		url : baseUrl+"lettermanagerLetterManager/saveLettermanagerLetter.json",
+	    		data : ['letterEnterpriseId='+rzId,'letterContent='+letterContent].join('&'),
 	    		jsonp : 'data:jsonp',
 	    		dataType : 'jsonp',
-	    		async : false,
-	    		success : function(results) {
-	    			if (results && results.records && results.records.length>0) {
-	    				
+	    		success : function(result) {
+	    			if(result && result.record){
+	    				alert("私信提交成功！");
+	    				$("#letterContent").val();
+	    				$('.bg-tanc.m1').show();
+	    				$('#ti-m1').text('5');
+	    				a=5;
+	    				timer1=setInterval('jump1();',1000);
 	    			}
 	    		}
 	    	});
-	    });
+	    }
 	    function GetRequest() {
 	 	   var url = location.search; //获取url中"?"符后的字串
 	 	   var theRequest = new Object();
@@ -437,6 +478,33 @@
 	    		}
 	    	});
 	    	
+	    	//根据企业评论
+	    	$.youi.ajaxUtils.ajax({
+	    		url : baseUrl+"lettermanagerCommentManager/getLettermanagerComments.json",
+	    		data : ['commentEnterprise='+rzId].join('&'),
+	    		jsonp : 'data:jsonp',
+	    		dataType : 'jsonp',
+	    		async : false,
+	    		success : function(results) {
+	    			var comment = '<colgroup><col width="95"></col><col></col></colgroup>';
+	    			if (results && results.records && results.records.length>0) {
+	    				var records = results.records;
+	    				$("#commentDiv").empty();
+	    				for(var i=0; i<records.length; i++){
+	    					comment+='<tr>'+
+										'<td><img src="../styles/images/yqfw/p1.png" width="71" /></td>'+
+										'<td>'+
+											'<h4 class="f14 lh30">'+records[i].member.memberName+'<em class="em-box ml5">创</em></h4>'+
+											'<p class="f14 lh30">'+records[i].commentContent+'<span class="f12">('+records[i].commentTime+')</span></p>'+
+											'<!--<p class="tr f12 lh30"><a href="javascript:;" class="c-333"><i class="fa fa-thumbs-o-up c-o mr5" style="font-size:17px"></i>(0)赞</a><span class="ml10 mr10 c-o">|</span><a href="javscript:;" class="c-333">回复</a></p>-->'+
+										'</td>'+
+									'</tr>';
+	    				}
+	    				$("#commentDiv").append(comment);
+	    			}
+	    		}
+	    	});
+	    	
 	    	//根据企业id获取公告信息
 	    	//$.youi.ajaxUtils.ajax({
 	    	//	url : baseUrl+"informationNoticeManager/findInformationNotice.json",
@@ -482,7 +550,8 @@
 					a--;
 					$("#ti-m1").text(a);
 				}else{
-					window.location="../grzx/grzx1.html";
+					//window.location="../grzx/grzx1.html";
+					clearInterval(timer1); 
 				}		
 			}
 			$(".tc-close").click(function(){
