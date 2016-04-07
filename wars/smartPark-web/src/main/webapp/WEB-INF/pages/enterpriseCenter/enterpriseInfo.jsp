@@ -165,7 +165,7 @@
 								data : ['rzId='+result.record.companyId].join('&'),
 								success:function(result){
 									if(result&&result.record){
-										$("#rzLogo").attr("src","http://localhost:9088/filestore/"+result.record.rzLogo);
+										//$("#rzLogo").attr("src","http://localhost:9088/filestore/"+result.record.rzLogo);
 										$("#financingRe").html(result.record.rzId);
 										$("#rzName").val(result.record.rzName);
 				    					$("#rzUrl").val(result.record.rzUrl);
@@ -270,7 +270,7 @@
 		            <div class="qiye_logo">
 		            	<div class="qiye_text"><span>企业logo</span></div>
 		                <div class="upload_main">
-		                    <img id="rzLogo" src="" border="0" class="fl" width="107" height="107"/>
+		                    <img id="rzLogo" src="../styles/images/qiye/user-photo.png" border="0" class="fl" width="107" height="107"/>
 		                    <div class="photo-edit"><input type="file" />编辑<br/>logo</div>
 		            	</div>
 		            </div>
