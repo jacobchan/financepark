@@ -169,6 +169,6 @@ public class InformationFinancingManagerImpl extends BaseManagerImpl implements 
 	 */
 	@EsbServiceMapping
 	public String sendEnterpriseCode(@ServiceParam(name = "mobile") String mobile, @ServiceParam(name = "code") String code) throws BusException, Exception{
-		return HttpSenderMsg.sendMsg(mobile, "您的企业邀请码为："+code+"欢迎加入！");
+		return HttpSenderMsg.sendMsg(mobile, "您的企业邀请码为："+code+"，欢迎加入！");
 	}
 }
