@@ -514,15 +514,59 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     @EsbServiceMapping					
 	 public List<OrdermanagerUserorder> getOrderlistLikeUserorderProject(
 			 @ServiceParam(name="userId",pubProperty="userId") String userId,
-			 @ServiceParam(name="userorderProject") String userorderProject) throws BusException {		
+			 @ServiceParam(name="userorderProject") String userorderProject,
+			 @ServiceParam(name="userorderCode") String userorderCode,
+			 @ServiceParam(name="userorderStatus") String userorderStatus) throws BusException {		
 		MemberInformation member=memberInformationManager.getMemberInformation(userId);
 		String memberName=member.getMemberName();
 		Collection<Condition> condition = new ArrayList<Condition>();
 		condition.add(ConditionUtils.getCondition("userorderBuyUser", Condition.EQUALS, memberName));	
 		condition.add(ConditionUtils.getCondition("userorderProject", Condition.LIKE, userorderProject));
+		condition.add(ConditionUtils.getCondition("userorderCode", Condition.LIKE, userorderCode));	
+		condition.add(ConditionUtils.getCondition("userorderStatus", Condition.EQUALS, userorderStatus));
 		List<OrdermanagerUserorder> list =ordermanagerUserorderDao.commonQuery(condition, null);
 		return list;
     }
-
+    /**
+   	 * 通过订单号获取当前用户的历史订单记录  模糊查询
+   	 * @param userId
+   	 * @param userorderProject
+   	 * @return
+   	 * @throws BusException
+   	 */
+    @EsbServiceMapping					
+	 public List<OrdermanagerUserorder> getHospitalOrderlist(
+			 @ServiceParam(name="userId",pubProperty="userId") String userId,
+			 @ServiceParam(name="userorderProject") String userorderProject,
+			 @ServiceParam(name="userorderCode") String userorderCode,
+			 @ServiceParam(name="userorderStatus") String userorderStatus) throws BusException {		
+		MemberInformation member=memberInformationManager.getMemberInformation(userId);
+		String memberName=member.getMemberName();
+		Collection<Condition> condition = new ArrayList<Condition>();
+		condition.add(ConditionUtils.getCondition("userorderBuyUser", Condition.EQUALS, memberName));	
+		condition.add(ConditionUtils.getCondition("userorderProject", Condition.LIKE, userorderProject));
+		condition.add(ConditionUtils.getCondition("userorderCode", Condition.LIKE, userorderCode));	
+		condition.add(ConditionUtils.getCondition("userorderStatus", Condition.NOT_EQUALS, userorderStatus));
+		List<OrdermanagerUserorder> list =ordermanagerUserorderDao.commonQuery(condition, null);
+		return list;
+    }
+    /**
+     * 取消状态，前端调用
+     * @param id，
+     * @return
+     * @throws BusException
+     */
+    @EsbServiceMapping
+	public OrdermanagerUserorder cancelStatus(@ServiceParam(name="id") String id) throws BusException{
+    	OrdermanagerUserorder p = ordermanagerUserorderDao.get(id) ;
+		 String status = p.getUserorderStatus() ;//得到订单状态
+		 if("01".equals(status)){//若当前状态为未支付
+		    	p.setUserorderStatus("08");//08为已取消，相当于前端取消申请
+		    	p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		    	return ordermanagerUserorderDao.save(p);
+		 }else{
+		    	throw new BusException("当前状态无法取消申请！") ;
+		 }
+	}		
 
 }
