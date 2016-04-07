@@ -152,6 +152,86 @@ public class ShoppingcarCompanyserverManagerImpl extends BaseManagerImpl impleme
 		return o;
 	}
     /**
+	 * 新增威客服务订单
+	 */
+    @Override
+    @EsbServiceMapping
+	public OrdermanagerUserorder saveWKserviceOrder(@ServiceParam(name="userId",pubProperty="userId") String userId,
+			@DomainCollection(domainClazz=ShoppingcarCompanyserver.class) List<ShoppingcarCompanyserver> shopCarList) throws BusException {
+		if(shopCarList.size() == 0){
+			throw new BusException("购物车不能为空！");
+		}
+		OrdermanagerUserorder order = new OrdermanagerUserorder();
+		ShoppingcarCompanyserver scs = shoppingcarCompanyserverDao.get(shopCarList.get(0).getCompanyServerId());
+		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(scs.getCommodityId().getGenreId());
+		order.setGenreId(pg);
+		order.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("WKFW"));
+		order.setUserorderStatus("01");//01-未支付
+		BigDecimal userorderAmoun = BigDecimal.valueOf(0);
+    	for(ShoppingcarCompanyserver shopCar:shopCarList){//计算订单金额
+    		shopCar = shoppingcarCompanyserverDao.get(shopCar.getCompanyServerId());
+    		userorderAmoun = userorderAmoun.add(shopCar.getCommodityId().getCommodityPrice().
+    				multiply(new BigDecimal(shopCar.getCompanyCateringNum())));
+    	}
+		order.setUserorderAmount(userorderAmoun);
+		if(StringUtils.isNotEmpty(userId)){
+			MemberInformation mem = memberInformationManager.getMemberInformation(userId);
+			order.setUserorderBuyUser(mem.getMemberName());
+		}
+   		order.setUserorderProject(pg.getGenreName());
+		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		order.setCreateUser(userId);
+		order.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		order.setUpdateUser(userId);
+		order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		order = ordermanagerUserorderManager.saveOrdermanagerUserorder(order);
+		for(ShoppingcarCompanyserver shopCar:shopCarList){//保存订单明细
+			shopCar = shoppingcarCompanyserverDao.get(shopCar.getCompanyServerId());
+			OrdermanagerCommoditydetail orderDetail = new OrdermanagerCommoditydetail();
+			orderDetail.setOrdermanagerUserorder(order);
+			orderDetail.setCommodityId(shopCar.getCommodityId());
+			orderDetail.setCommoditydetailNum(shopCar.getCompanyCateringNum());
+			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
+		}
+		return order;
+	}
+    //查询当前用户的购物车列表
+    @Override
+    @EsbServiceMapping
+    public List<ShoppingcarCompanyserver> getShopCarList(
+    		@ServiceParam(name="userId",pubProperty="userId") String userId,
+    		@ServiceParam(name="genreCode") String genreCode){
+    	PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode", genreCode);
+    	String[] aa = {"memberId.memberId","commodityId.genreId"};
+    	String[] bb = {userId,pg.getGenreId()};
+    	List<ShoppingcarCompanyserver> shopCarLis = shoppingcarCompanyserverDao.getList(aa, bb);
+    	return shopCarLis;
+    }
+    //修改购物车
+    @Override
+    @EsbServiceMapping
+    public ShoppingcarCompanyserver modifyShopCar(
+    		@ServiceParam(name="userId",pubProperty="userId") String userId,
+    		@ServiceParam(name="id") String id,
+    		@ServiceParam(name="num") String num){
+    	ShoppingcarCompanyserver shopCar = shoppingcarCompanyserverDao.get(id);
+    	BigDecimal big_num = new BigDecimal(num);
+    	BigDecimal shopCarAmount = big_num.multiply(shopCar.getCommodityId().getCommodityPrice());
+    	shopCar.setCompanyCateringNum(num);
+    	shopCar.setCompanyCateringUnivalence(shopCarAmount);
+		shopCar.setUpdateUser(userId);
+		shopCar.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	return shoppingcarCompanyserverDao.save(shopCar);
+    }
+    //删除购物车
+    @Override
+    @EsbServiceMapping
+    public void delShopCar(
+    		@ServiceParam(name="userId",pubProperty="userId") String userId,
+    		@ServiceParam(name="id") String id){
+    	shoppingcarCompanyserverDao.remove(id);
+    }
+    /**
 	 * 添加购物车
 	 */
     @Override
