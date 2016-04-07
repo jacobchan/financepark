@@ -107,6 +107,8 @@
 			});
 			
 			$(".ga-edit").click(function(){
+				$("#addressName").val('');	
+				$("#addressPhone").val('');
 				$(".bg-tanc.m1").show();
 				$(".bbmbud").empty();
 				$("#floorNo").empty();
