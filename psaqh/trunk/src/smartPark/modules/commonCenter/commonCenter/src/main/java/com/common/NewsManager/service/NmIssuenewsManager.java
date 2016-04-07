@@ -12,6 +12,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.OrderCollection;
 import com.common.NewsManager.entity.NmIssueflow;
 import com.common.NewsManager.entity.NmIssuenews;
 
@@ -130,10 +132,22 @@ public interface NmIssuenewsManager extends BaseManager{
 	public NmIssuenews setBrowseCountByPolicyId(String policyId) ;
 	
 	/**
-	 * 通过政策类型的Code得到当前政策下面的所有新闻
+	 * 通过政策类型的Code得到当前政策下面已发布的所有新闻
 	 * @param issueTypeCode 政策类型code
 	 * @return
 	 */
 	public List<NmIssuenews> getNmIssuenewsByIssueTypeCode(String issueTypeCode) ;
+	
+	/**
+	 * 分页查找，所有已发布的优惠政策下面的孵化器政策
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	public PagerRecords getPagerAllPolicy(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=NmIssuenews.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)  throws BusException ;
 	
 }
