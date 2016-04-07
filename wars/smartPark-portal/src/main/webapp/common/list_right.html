@@ -140,7 +140,7 @@
 	  	 			}
 					if(i < 3){//取前三条
 						html_1 += "<li>"+
-									'<a href="../zscenter/zs4.html">' +
+									"<a href='../zscenter/zs7.html?policyId="+newsList[i].policyId+"'>"+
 										'<div class="in-photo">'+
 											"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+newsList[i].imageUrl+"&method=show' border='0' width='100%'>"+
 										"</div>"+
@@ -184,7 +184,7 @@
 				dataType:'jsonp',
 				success:function(result){
 					if(result&&result.records){
-						console.log(result.records) ;
+						//console.log(result.records) ;
 						appendHtml(result.records);
 					}
 				}
