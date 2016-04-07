@@ -255,7 +255,7 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 	}
 	
 	/**
-	 * 通过政策类型的Code得到当前政策下面的所有新闻，包括已发布和未发布
+	 * 通过政策类型的Code得到当前政策下面已发布的所有新闻
 	 * @param issueTypeCode 政策类型code
 	 * @return
 	 */
@@ -265,7 +265,26 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 		String issueTypeId = type.getIssueTypeId() ;//得到政策发布类型的ID
 		Collection<Condition> condition =  new ArrayList<Condition>();
 		condition.add(ConditionUtils.getCondition("policyType.issueTypeId", Condition.EQUALS,issueTypeId));
+		condition.add(ConditionUtils.getCondition("policyStatus", Condition.EQUALS,"1"));//1表示当前政策已发布，0为未发布
 		List<NmIssuenews> list = this.getNmIssuenewss(condition, null) ;
 		return list;
+	}
+	
+	/**
+	 * 分页查找，所有已发布的优惠政策下面的孵化器政策
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	@EsbServiceMapping
+	public PagerRecords getPagerAllPolicy(Pager pager,
+			Collection<Condition> conditions, Collection<Order> orders)
+			throws BusException {
+		conditions.add(ConditionUtils.getCondition("policyType.issueTypeCode", Condition.EQUALS,"0201"));//0201为当前优惠政策下面的孵化器政策
+		conditions.add(ConditionUtils.getCondition("policyStatus", Condition.EQUALS,"1"));//1表示当前政策已发布，0为未发布
+		PagerRecords pagerRecords = nmIssuenewsDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
 	}
 }
