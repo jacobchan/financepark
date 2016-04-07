@@ -183,7 +183,7 @@
 			var params=['applyTitle='+applyTitle,'startTime='+startTime,'endTime='+endTime,'deadline='+deadline,'applyMaxuser='+applyMaxuser,'applyOrderNumber='+applyOrderNumber,'commentContent='+commentContent,'activityImage='+imgUpload,];
 			//保存
 			$.ajax({
-				url:baseUrl+'/activityApplyManager/saveActivityApplyForPage.json',
+				url:baseUrl+'activityApplyManager/saveActivityApplyForPage.json',
 				data:params.join('&'),
 				success:function(result){
 					if(result&&result.record){
