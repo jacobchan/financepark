@@ -26,9 +26,13 @@
 					    				var records = results.records;
 					    				$("#mediaDiv").empty();
 					    				for(var i=0; i<records.length; i++){
+					    					var imgsrc = "../styles/images/qiye/photo_list1.png";
+					    					if(records[i].mediaUrl.length!=0){
+					    						imgsrc = cenUrl+"common/uploadImage.html?repository=/swfupload&path="+records[i].mediaUrl+"&method=show";
+					    					}
 					    					var mediaDiv = '<li>'+
 					                            '<div class="mt_list">'+
-					                                '<div class="list_pic"><img src="http://220.249.113.12:8088/common/uploadImage.html?repository=/swfupload&path='+records[i].mediaUrl+'&method=show"></div>'+
+					                                '<div class="list_pic"><img src="'+imgsrc+'"></div>'+
 					                                '<div class="list_tex">'+
 					                                    '<table>'+
 					                                        '<tr>'+
