@@ -3,7 +3,7 @@
 <youi:html title="一卡通办理">
 	<youi:body decorator="memcenter">  
 				<div class="w1000">
-					<h3 class="per-h3">一卡用绑定</h3>
+					<h3 class="per-h3">一卡用绑定<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要申请一卡通</a></h3>
 					<div class="clearfix mt40" rules=none>
 						<div class="mt20 gr-txl clearfix lh30">
 							<label class="fl mr20 f16">申请时间：</label>
@@ -130,4 +130,10 @@
 		})
 		
 	</script>
+	<script type="text/javascript">
+	    //点击跳转到一卡通申请页面
+		$("#a1").click(function(){			
+			location.href = proUrl + "yqfw/yq10.html" ;
+		})	
+     </script>
 </youi:html>
