@@ -175,7 +175,7 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 					
 					info.setCompanyInvitecode(code);
 					info.setCompanyId(rz.getRzId());					
-					MemberInformation m =  memberInformationDao.save(info);
+					memberInformationDao.save(info);
 					
 					List<Role> le = roleDao.getList(roleparams, rolevalues);
 					role.setEmployees(emed);
