@@ -49,21 +49,25 @@
 					var phoneArr = $("#enterprisePhone").val();
 					var code = $(".color_orange").html();
 					var phone = phoneArr.split(",");
+					var regPhone = /^1[3|5|8][0-9]\d{4,8}$/;
 					for(var i=0; i<phone.length; i++){
-						if (!phone[i].match(/^(((13[0-9]{1})|150|151|152|153|155|156|158|159|170|181|182|183|185|186|189)+\d{8})$/)) { 
+						if (!regPhone.test(phone[i])) { 
 							alert("手机号码不正确！");
-						}else{
-							$.ajax({
-								url:baseUrl+'/informationFinancingManager/sendEnterpriseCode.json',
-								data : ['mobile='+phoneArr, 'code='+code].join('&'),
-								success : function(result) {
-					    			if (result && result.record) {
-					    				alert(result.record.html);
-					    			}
-								}
-							});
+							return false;
 						}
 					}
+					$.ajax({
+						url:baseUrl+'/informationFinancingManager/sendEnterpriseCode.json',
+						data : ['mobile='+phoneArr, 'code='+code].join('&'),
+						success : function(result) {
+			    			if (result && result.record) {
+			    				var msg = result.record.html.split(",");
+			    				if(msg[1].substring(0,1)==0){
+			    					alert("手机号码："+phoneArr+"\n\n发送时间："+msg[0].substring(0,4)+"年"+msg[0].substring(4,6)+"月"+msg[0].substring(6,8)+"日 "+msg[0].substring(8,10)+":"+msg[0].substring(10,12)+":"+msg[0].substring(12,14)+"\n\n发送状态：成功！");
+			    				}
+			    			}
+						}
+					});
 				});
 			  	$("#moreul").slideUp("slow");
 			  	$(".sidebar-menu-mainul > li:eq(2)").addClass("active");
