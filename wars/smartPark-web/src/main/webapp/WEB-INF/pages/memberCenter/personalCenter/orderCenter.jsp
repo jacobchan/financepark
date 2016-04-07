@@ -3,16 +3,24 @@
 <youi:html title="订单中心">
 	<youi:body decorator="memcenter">
 				<div class="w1000">
-					<h3 class="per-h3">订单中心</h3>
+					<h3 class="per-h3">我的订单</h3>
+					<div class="clearfix mt20 mb20">
+						<ul class="order-nav">
+							<li class="active"><span class="pend">待处理订单</span></li>
+							<li><span class="hospital">历史订单</span></li>
+						</ul>
+					</div>
+					
 					<div class="mt20 gr-txl clearfix lh30">
 							<div class="tct-select fl mr20" style="width:200px">
-								<div class="ic-select" style="background: transparent url(../images/yqfw/down.png) no-repeat scroll right center;">
-									<p class="c-b1" id="userorderCode">请选择订单项目</p>
+								<div class="ic-select" style="background: url(<%=request.getContextPath()%>/styles/images/yqfw/down.png) no-repeat scroll right center;">
+									<p class="c-b1" id="userorderProject">请选择订单项目</p>
+									<%--   <img src="<%=request.getContextPath()%>/styles/images/yqfw/down.png" />  --%>
 								</div>
 								<ul style="display: none;" class="select-nav" >
-									<li>园区地址1</li>
+									<!-- <li>园区地址1</li>
 									<li>园区地址2</li>
-									<li>园区地址3</li>
+									<li>园区地址3</li> -->
 								</ul>
 							</div>
 							<div class="inp-box ml20" style="width:300px;"><input placeholder="请输入订单号"  id="userorderCode" type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
@@ -33,7 +41,7 @@
 									<th>订单项目</th>
 									<th>订单金额</th>
 									<th>下单时间</th>
-									<th>订单状态</th>
+									
 									<th>操作</th>
 								</tr>
 														
@@ -52,10 +60,13 @@
 				</div>
 			</youi:body>
 	<!--***bottom start****************************************-->
-	<script type="text/javascript">		
+	<script type="text/javascript">	
+	//页面初始化显示未完成订单
 	   $(function(){
+		   var userorderStatus="01";
 			$.ajax({				
-				url:baseUrl+'ordermanagerUserorderManager/getOrderListByLoginUser.json',
+				url:baseUrl+'/ordermanagerUserorderManager/getOrderlistLikeUserorderProject.json',
+				data:'userorderStatus='+userorderStatus,
 				success:function(result){	
 					if(result&&result.records){					
 						_parseRecords(result.records);						
@@ -63,50 +74,79 @@
 				}
 			});
 		});
-		//拼接列表
+		////页面初始化显示未完成订单      拼接列表
 		function _parseRecords(record){		
 			console.log(record);
 			for(var i=0;i<record.length;i++){				
 				var status = "";
 				var button = "";
 				if(record[i].userorderStatus=='01'){
-					status = "待付款";	
-					button = "<a href='grzx2-2.html'>付款</a>";
+					//status = "待付款";	
+					button = "<a href='grzx2-2.html'>付款</a><span class='f12 ml5 mr5'>|</span><a href='#'   onclick='cancel(\""+record[i].userorderId+"\")'> 取消</a>";
 				}else if(record[i].userorderStatus=='02'){
-					status = "已付款";
-					button = "<a href='grzx2-2.html'>评价</a><a href='grzx2-2.html'>评价</a>";
+					//status = "已付款";
+					button = "已付款<span class='f12 ml5 mr5'>|</span><a href='grzx2-2.html'>评价</a>";
 				}else if(record[i].userorderStatus=='03'){
-					status = "已完成";					
+					//status = "已完成";					
+				}else if(record[i].userorderStatus=='08'){
+					status = "已取消";					
 				}
 				var html= "<tr class='aaa'>"+
 					      "<td>"+record[i].userorderCode+"</td>"+
                           "<td>"+record[i].userorderProject+"</td>"+
                           "<td>"+record[i].userorderAmount+"</td>"+
-                          "<td>"+record[i].userorderTime+"</td>"+                         
-                          "<td>"+status+"</td>"+                          
-                          "<td>"+   button+                                           
-                         
+                          "<td>"+record[i].userorderTime+"</td>"+                                                                        
+                          "<td>"+status  + button+                                                                    
 						  "</td>"+
                           " </tr>";
 				 $(".gt-table").append(html);	
 			}
 		};
+		//显示未完成订单    
+		$('.pend').click(function(){
+			$(".aaa").empty();
+			   var userorderStatus="01";
+				$.ajax({				
+					url:baseUrl+'/ordermanagerUserorderManager/getOrderlistLikeUserorderProject.json',
+					data:'userorderStatus='+userorderStatus,
+					success:function(result){	
+						if(result&&result.records){					
+							_parseRecords(result.records);						
+						}
+					}
+				});
+			});
+			
+		//显示历史订单      
+		$('.hospital').click(function(){
+			$(".aaa").empty();
+			   var userorderStatus="01";
+				$.ajax({				
+					url:baseUrl+'/ordermanagerUserorderManager/getHospitalOrderlist.json',
+					data:'userorderStatus='+userorderStatus,
+					success:function(result){	
+						if(result&&result.records){					
+							_parseRecords(result.records);						
+						}
+					}
+				});
+			});
+			
 		//根据订单项目模糊查询
 		$('.hhf-submit').click(function(){	
 			$(".aaa").empty();
-			 var userorderProject=$("#userorderProject").val();
-			 var userorderCode=$("#userorderCode").text();
-		//	 var  myselect= myselect.options[index].text;
-			 alert(userorderProject);
-			 alert(myselect); 
+			 var userorderProject=$("#userorderProject").text();
+			 if(userorderProject=="请选择订单项目"){
+				 userorderProject="";		 				 
+			 }
+			 var userorderCode=$("#userorderCode").val();		
 			 params=['userorderProject='+userorderProject+'','userorderCode='+userorderCode+''];
 		      $.ajax({
-		    	 url:baseUrl+'ordermanagerUserorderManager/getOrderlistLikeUserorderProject.json',
+		    	 url:baseUrl+'/ordermanagerUserorderManager/getOrderlistLikeUserorderProject.json',
 		    	 data:params.join('&'),
 		    	 success:function(result){					
 						console.log(result.records);           
-						if(result&&result.records){	
-							
+						if(result&&result.records){								
 							_parseRecords(result.records);					
 						}
 					}
@@ -115,7 +155,7 @@
 		//下拉选项目名称
  		$(function(){
 			$.ajax({				
-				url:baseUrl+'purchasingmanagerGenreManager/getGenreProject.json',
+				url:baseUrl+'/purchasingmanagerGenreManager/getGenreProject.json',
 				success:function(result){	
 					if(result&&result.records){					
 						_selectRecords(result.records);						
@@ -123,7 +163,7 @@
 				}
 			});
 		});
-		//拼接列表
+		
 		function _selectRecords(record){		
 			console.log(record);
 			for(var i=0;i<record.length;i++){				
@@ -140,6 +180,26 @@
 				$(this).parent().hide();
 			});
 		}; 
+		//取消订单，前端调用
+		 function cancel(id){		
+					
+			$.ajax({				
+				url:baseUrl+'/ordermanagerUserorderManager/cancelStatus.json',
+				data:'id='+id,
+				success:function(result){
+					if(result&&result.record){					
+						alert("已取消");
+						location.reload();
+					}
+				}
+			});
+		}; 
 	</script>
-	
+		<script type="text/javascript">
+		$(function () {
+			$(".order-nav li").click(function(){
+				$(this).addClass("active").siblings().removeClass("active");			
+			})		
+		})
+	</script>
 </youi:html>
