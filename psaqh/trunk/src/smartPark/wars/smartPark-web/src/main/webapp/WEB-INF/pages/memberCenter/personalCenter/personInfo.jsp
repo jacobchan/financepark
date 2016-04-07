@@ -17,12 +17,12 @@
 						<tr>
 							<td>头像</td>
 							<td>				   
-							    <%-- <div class="photo-edit" id="destination"><input type="file" id="imgUpload" name="imgUpload" draggable="true" accept=".png,.jpg"/>
-								  
-								</div>   --%>
+							    <div class="photo-edit" id="destination">
+							    	<input type="file" id="imgUpload" name="imgUpload" draggable="true" accept=".png,.jpg"/>
+								</div>
 								<div class="photoedit" style="left:22px">
-								  <img src="<%=request.getContextPath()%>/styles/images/grzx/user-photo.png"  width="107" height="107"/>
-								  </div>
+									<img id="headImg" src="<%=request.getContextPath()%>/styles/images/grzx/user-photo.png"  width="107" height="107"/>
+								</div>
 							</td>
 						</tr>
 						<tr>
@@ -158,26 +158,36 @@
 		};
 		$('.hhf-submit').click(function(){
 			this.disabled=true;
-			var memberId=$("#memberId").html();
-			var memberNickname=$("#memberNickname").val();
-			var memberPhoneNumber=$(".c-b1").html();
-			var memberName=$("#memberName").val();
-			var year=$("#year").val();
-			var month=$("#month").val();
-			var day=$("#day").val();
-			var memberBirthdate=year+"-"+month+"-"+day;
-			var memberDescribe2=$("#memberDescribe2").val();
-			var companyId=$("#companyId").val();
-			var params = ['memberId='+memberId+'','memberNickname='+memberNickname+'','memberPhoneNumber='+memberPhoneNumber+'','memberName='+memberName+'','memberBirthdate='+memberBirthdate+'','memberDescribe2='+memberDescribe2+'','companyId='+companyId+''];
-			$.youi.ajaxUtils.ajax({
-				url:baseUrl+'memberInformationManager/saveMemberInformation.json',
-				data:params.join('&'),
-				success:function(result){
-					if(result&&result.record){
-						alert("修改成功");
-						location.reload();
-					}
-				}
+			var flg = false;
+			var memberHeadPortrait = "";
+			//调用实例对象的start()方法开始上传文件，当然你也可以在其他地方调用该方法
+			uploader.start(); 
+			uploader.bind('FileUploaded',function(up, files,info) {
+				var response = $.parseJSON(info.response);
+               	if ("0"==response.status){
+               		memberHeadPortrait = response.fileUrl[0];
+               		var memberId=$("#memberId").html();
+    				var memberNickname=$("#memberNickname").val();
+    				var memberPhoneNumber=$(".c-b1").html();
+    				var memberName=$("#memberName").val();
+    				var year=$("#year").val();
+    				var month=$("#month").val();
+    				var day=$("#day").val();
+    				var memberBirthdate=year+"-"+month+"-"+day;
+    				var memberDescribe2=$("#memberDescribe2").val();
+    				var companyId=$("#companyId").val();
+    				var params = ['memberHeadPortrait='+memberHeadPortrait+'','memberId='+memberId+'','memberNickname='+memberNickname+'','memberPhoneNumber='+memberPhoneNumber+'','memberName='+memberName+'','memberBirthdate='+memberBirthdate+'','memberDescribe2='+memberDescribe2+'','companyId='+companyId+''];
+    				$.youi.ajaxUtils.ajax({
+    					url:baseUrl+'memberInformationManager/saveMemberInformation.json',
+    					data:params.join('&'),
+    					success:function(result){
+    						if(result&&result.record){
+    							alert("修改成功");
+    							location.reload();
+    						}
+    					}
+    				});
+               	}
 			});
 		});	
 		//加入企业
@@ -201,143 +211,58 @@
 		});	
 	</script>
 		<script type="text/javascript">
-		//处理file input加载的图片文件
-		$(document).ready(function(e) {
-		    //判断浏览器是否有FileReader接口
-		    if(typeof FileReader =='undefined')
-		    {
-		       $("#destination").css({'background':'none'}).html('亲,您的浏览器还不支持HTML5的FileReader接口,无法使用图片本地预览,请更新浏览器获得最好体验');
-		        //如果浏览器是ie
-		        if($.browser.msie===true)
-		        {
-		            //ie6直接用file input的value值本地预览
-		            if($.browser.version==6)
-		            {
-		                $("#imgUpload").change(function(event){                        
-		                      //ie6下怎么做图片格式判断?
-		                      var src = event.target.value;
-		                      //var src = document.selection.createRange().text;        //选中后 selection对象就产生了 这个对象只适合ie
-		                      var img = '<img src="'+src+'" width="107px" height="107px" />';
-		                      $("#destination").empty().append(img);
-		                  });
-		            }
-		            //ie7,8使用滤镜本地预览
-		            else if($.browser.version==7 || $.browser.version==8)
-		            {
-		                $("#imgUpload").change(function(event){
-		                      $(event.target).select();
-		                      var src = document.selection.createRange().text;
-		                      var dom = document.getElementById('destination');
-		                      //使用滤镜 成功率高
-		                      dom.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src= src;
-		                      dom.innerHTML = '';
-		                      //使用和ie6相同的方式 设置src为绝对路径的方式 有些图片无法显示 效果没有使用滤镜好
-		                      /*var img = '<img src="'+src+'" width="200px" height="200px" />';
-		                      $("#destination").empty().append(img);*/
-		                 });
-		            }
-		        }
-		        //如果是不支持FileReader接口的低版本firefox 可以用getAsDataURL接口
-		        else if($.browser.mozilla===true)
-		        {
-		            $("#imgUpload").change(function(event){
-		                //firefox2.0没有event.target.files这个属性 就像ie6那样使用value值 但是firefox2.0不支持绝对路径嵌入图片 放弃firefox2.0
-		                //firefox3.0开始具备event.target.files这个属性 并且开始支持getAsDataURL()这个接口 一直到firefox7.0结束 不过以后都可以用HTML5的FileReader接口了
-		                if(event.target.files)
-		                {
-		                  //console.log(event.target.files);
-		                  for(var i=0;i<event.target.files.length;i++)
-		                  {    
-		                        var img = '<img src="'+event.target.files.item(i).getAsDataURL()+'" width="107px" height="107px"/>';
-		                      $("#destination").empty().append(img);
-		                  }
-		                }
-		                else
-		                {
-		                    //console.log(event.target.value);
-		                    //$("#imgPreview").attr({'src':event.target.value});
-		                }
-		                });
-		        }
-		    }
-		    else
-		    {
-		        // version 1
-		        /*$("#imgUpload").change(function(e){
-		          var file = e.target.files[0];
-		          var fReader = new FileReader();
-		          //console.log(fReader);
-		          //console.log(file);
-		          fReader.onload=(function(var_file)
-		          {
-		              return function(e)
-		              {
-		                  $("#imgPreview").attr({'src':e.target.result,'alt':var_file.name});
-		              }
-		          })(file);
-		          fReader.readAsDataURL(file);
-		          });*/
-		          
-		          //单图上传 version 2 
-		          /*$("#imgUpload").change(function(e){
-		                var file = e.target.files[0];
-		                var reader = new FileReader();  
-		                reader.onload = function(e){
-		                    //displayImage($('bd'),e.target.result);
-		                    //alert('load');
-		                    $("#imgPreview").attr({'src':e.target.result});
-		                }
-		                reader.readAsDataURL(file);
-		              });*/
-		          //多图上传 input file控件里指定multiple属性 e.target是dom类型
-		           $("#imgUpload").change(function(e){  
-		                   for(var i=0;i<e.target.files.length;i++)
-		                       {
-		                           var file = e.target.files.item(i);
-		                        //允许文件MIME类型 也可以在input标签中指定accept属性
-		                        //console.log(/^image\/.*$/i.test(file.type));
-		                        if(!(/^image\/.*$/i.test(file.type)))
-		                        {
-		                            continue;            //不是图片 就跳出这一次循环
-		                        }
-		                        
-		                        //实例化FileReader API
-		                        var freader = new FileReader();
-		                        freader.readAsDataURL(file);
-		                        freader.onload=function(e)
-		                        {
-		                            var img = '<img src="'+e.target.result+'" width="107px" height="107px"/>';
-		                            $("#destination").empty().append(img);
-		                        }
-		                       }
-		               });
-		               
-		          //处理图片拖拽的代码
-		          var destDom = document.getElementById('destination');
-		          destDom.addEventListener('dragover',function(event){
-		              event.stopPropagation();
-		              event.preventDefault();
-		              },false);
-		              
-		          destDom.addEventListener('drop',function(event){
-		              event.stopPropagation();
-		              event.preventDefault();
-		              var img_file = event.dataTransfer.files.item(0);                //获取拖拽过来的文件信息 暂时取一个
-		              //console.log(event.dataTransfer.files.item(0).type);
-		              if(!(/^image\/.*$/.test(img_file.type)))
-		              {
-		                  alert('您还未拖拽任何图片过来,或者您拖拽的不是图片文件');
-		                  return false;
-		              }
-		              fReader = new FileReader();
-		              fReader.readAsDataURL(img_file);
-		              fReader.onload = function(event){
-		                  destDom.innerHTML='';
-		                  destDom.innerHTML = '<img src="'+event.target.result+'" width="107px" height="107px"/>';    
-		                  };
-		          },false);
-		    }
-		});
+		var uploader = new plupload.Uploader(
+				{
+					runtimes : 'html5,flash,silverlight',//设置运行环境，会按设置的顺序，可以选择的值有html5,gears,flash,silverlight,browserplus,html
+					browse_button : 'imgUpload',
+					flash_swf_url : '../../scripts/fileUpload/Moxie.swf',
+					silverlight_xap_url : '../../scripts/fileUpload/Moxie.xap',
+					url : 'http://localhost:8088/smartPark-web/fileUpload/goUpload.html',//上传文件路径
+					max_file_size : '400kb', //最大只能上传400kb的文件
+					prevent_duplicates : true, //不允许选取重复文件
+					//此处是控制上传组件是否允许多文件选择还是单文件选择：true/多文件；false/单文件
+					multi_selection: false,
+					filters : [ {
+						title : 'Image files',
+						extensions : 'jpg,gif,png'
+					} ],
+					init : {
+						FilesAdded : function(up, files) {
+							//此处用户图片的回显（可根据自己的业务修改）
+							previewImage(files[0], function(imgsrc) {
+								$("#headImg").attr("src",imgsrc);
+							});
+						}
+					}
+				});
+
+		uploader.init();
+
+		//图片回显预览
+		function previewImage(file, callback) {//file为plupload事件监听函数参数中的file对象,callback为预览图片准备完成的回调函数
+			if (!file || !/image\//.test(file.type))
+				return; //确保文件是图片
+			if (file.type == 'image/gif') {//gif使用FileReader进行预览,因为mOxie.Image只支持jpg和png
+				var fr = new mOxie.FileReader();
+				fr.onload = function() {
+					callback(fr.result);
+					fr.destroy();
+					fr = null;
+				}
+				fr.readAsDataURL(file.getSource());
+			} else {
+				var preloader = new mOxie.Image();
+				preloader.onload = function() {
+					var imgsrc = preloader.type == 'image/jpeg' ? preloader
+							.getAsDataURL('image/jpeg', 80) : preloader
+							.getAsDataURL(); //得到图片src,实质为一个base64编码的数据
+					callback && callback(imgsrc); //callback传入的参数为预览图片的url
+					preloader.destroy();
+					preloader = null;
+				};
+				preloader.load(file.getSource());
+			}
+		}
 		</script>
 		<script type="text/javascript">
 		$(function () {
