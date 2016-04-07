@@ -73,7 +73,7 @@
 								<col></col>
 							</colgroup>
 							<tbody id="enterRecord"><!--<tr>
-								<th>入驻单号</th>
+								<th>预约单号</th>
 								<th>预约时间</th>
 								<th>预约项目</th>
 								<th>状态</th>
@@ -155,7 +155,7 @@
 		
 		//拼接列表
 		function _parseRecord(record){
-			var html="<tr><th>入驻单号</th><th>预约时间</th><th>预约项目</th><th>状态</th><th>操作</th></tr>";
+			var html="<tr><th>预约单号</th><th>预约时间</th><th>预约项目</th><th>状态</th><th>操作</th></tr>";
 			for(var i=0;i<record.length;i++){
 				var recordStatus=record[i].recordStatus;
 				var buttonHtml="<td><a href='javascript:;' class='ac-show' onclick='javascript:cancelForEnter(this)'>取消预约</a></td>";
@@ -164,7 +164,7 @@
 				}else if(recordStatus=="02"){
 					recordStatus="已受理";
 				}else if(recordStatus=="03"){
-					recordStatus="已入驻";
+				recordStatus="已入驻";
 					buttonHtml="";
 				}
 				html+="<tr id='"+record[i].recordId+"'>"+
