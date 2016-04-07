@@ -170,6 +170,13 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 					ems.setUpdateTime(new Timestamp(new Date().getTime()));
 					EnterpriseEmployees emed =  enterpriseEmployeesDao.save(ems);
 					
+					
+					
+					
+					info.setCompanyInvitecode(code);
+					info.setCompanyId(rz.getRzId());					
+					MemberInformation m =  memberInformationDao.save(info);
+					
 					List<Role> le = roleDao.getList(roleparams, rolevalues);
 					role.setEmployees(emed);
 					role.setRole(le.get(0));
