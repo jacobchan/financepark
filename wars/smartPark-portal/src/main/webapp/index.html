@@ -663,12 +663,8 @@
             </table>
         </div>
     </div>
-    <div class="pop_layer pl2">
-        <div class="online_box clearfix" style="width:320px;height:110px;margin-left:-160px;margin-top:-55px;padding:30px;border-radius:5px;background:rgba(255,255,255,0.85)">
-            <div class="close0 fr"></div>
-            <p class="tc cc mt20">请登录后重试！</p>
-        </div>
-    </div>
+
+    
 	<script type="text/javascript" src="scripts/lib/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/bootstrap.min.js"></script>
@@ -1081,7 +1077,10 @@
 		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 		});
 
-        
+        //关闭toast
+        $(".close-toast").click(function(){
+            $(this).parent(".toast").hide();
+        })
 	})
 </script>
  	<script type="text/javascript">
@@ -1244,22 +1243,30 @@
 		        return true;
 		}
 
+
+
         //pop_layer pl2弹窗出来后，一秒自动关闭,请再调用弹窗pl2的时候调用该方法
         var pltime,timer;
         function closeTanc(){
             if(pltime>1){
                 pltime--;
             }else{
-                $(".pop_layer.pl2").hide();
+                $(".toast").hide();
             }       
         }
+
         //调用方法如下，哪里调用就放哪里
         /**
             clearInterval(timer);
-            $(".pop_layer.pl2").show();
+            $(".toast").show();
             pltime=1;
             timer=setInterval("closeTanc()",1000);
         */
 	</script>
+    <!-- 弹出层样式 -->
+    <div class="toast clearfix">
+        <div class="close-toast fr"></div>
+        <p class="tc cc mt25 f14">请登录后重试！</p>
+    </div>
 </body>
 </html>
