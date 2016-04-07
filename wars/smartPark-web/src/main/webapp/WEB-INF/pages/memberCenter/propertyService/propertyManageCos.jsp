@@ -105,7 +105,7 @@
 				}else if(record[i].cosStatus=='2'){
 					status = "已受理";
 				}else if(record[i].cosStatus=='3'){
-					status = "已退回";
+					status = "已取消";
 				}else if(record[i].cosStatus=='4'){
 					status = "已回访";
 				}else if(record[i].cosStatus=='5'){
@@ -162,7 +162,7 @@
 					data:'cosId='+id,
 					success:function(result){
 						if(result&&result.record){
-							alert("取消成功!");		
+							//alert("取消成功!");		
 							location.reload();
 						}
 					}
