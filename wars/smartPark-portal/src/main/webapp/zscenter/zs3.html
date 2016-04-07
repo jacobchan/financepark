@@ -134,7 +134,7 @@
 				dataType:'jsonp',
 				success:function(result){
 					if(result&&result.record){
-						console.log(result.record) ;
+						//console.log(result.record) ;
 						var policyApplyConpanyName = $("#policyApplyConpanyName").val();
 						var policyApplyContactPeople = $("#policyApplyContactPeople").val();
 						var policyApplyContactTel = $("#policyApplyContactTel").val() ;
@@ -186,7 +186,7 @@
 		});
 	</script>
 	<script type="text/javascript">
-		$(function(){
+		/* $(function(){
 			$.youi.ajaxUtils.ajax({
 				url:baseUrl +"nmIssuenewsManager/getAllPolicy.json",
 				jsonp:'data:jsonp',
@@ -198,15 +198,51 @@
 					}
 				}
 			});
+		}); */
+		$(function(){
+			var params=["issueTypeCode=02"];//02表示优惠政策
+			$.youi.ajaxUtils.ajax({
+				url:baseUrl +"nmIssuetypeManager/getNewsType.json",//得到优惠政策的子类型
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					if(result&&result.records){
+						//console.log(result.records) ;
+						_parseRecords(result.records);
+					}
+				}
+			});
 		});
 		//拼接政策新闻列表
 		function _parseRecords(record){
 			if(record.length == 0){
 				$(".fl.w895").append("<div><p><h2>暂时还没有任何的政策优惠哦！</h2></p></div>");
 				return ;
+			}else{
+				for(var i=0;i<record.length;i++){
+					var issueTypeCode = record[i].issueTypeCode ;
+					var t = "<h3 class='h3-c-o' id='"+issueTypeCode+"'>"+record[i].issueTypeCaption+"</h3>" ;
+					$(".fl.w895").append(t);
+					var params=["issueTypeCode="+issueTypeCode];
+					$.youi.ajaxUtils.ajax({
+						url:baseUrl +"nmIssuenewsManager/getNmIssuenewsByIssueTypeCode.json",//得到优惠政策的子类型
+						data:params.join('&'),
+						jsonp:'data:jsonp',
+						dataType:'jsonp',
+						success:function(result){
+							if(result&&result.records){
+								console.log(result.records) ;
+								getH(result.records) ;
+							}
+						}
+					});
+				}
 			}
-			$(".fl.w895").append("<h3 class='h3-c-o'>"+record[0].policyType.issueTypeCaption+"</h3>");
+		};
+	 	function getH(record){
 			for(var i=0;i<record.length;i++){
+				var issueTypeCode = record[i].policyType.issueTypeCode ;
 				var status = record[i].policyStatus ;
 				if(status == 1){//状态为1表示已发布，为0表示未发布
 					var html="<div class='index-group' id="+record[i].policyId+">"+
@@ -215,10 +251,15 @@
 				                   	 "<a href='javascript:;' class='ib-btn'>在线申请</a>"+
  			           			 "</div>"+
 		       				 "</div>";
-		 			$(".fl.w895").append(html);
+		       		$(".w895 >h3").each(function(i){
+						var id = $(this).attr("id") ;
+						if(id == issueTypeCode){
+							$("#"+id).after(html) ;
+						}		
+					});
 				}
-			}
-		};
+			} 
+		} 
 	</script>
 	<script type="text/javascript">
 		$(function () {
