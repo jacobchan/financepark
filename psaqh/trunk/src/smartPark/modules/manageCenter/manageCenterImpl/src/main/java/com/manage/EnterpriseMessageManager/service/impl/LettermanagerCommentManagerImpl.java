@@ -62,7 +62,7 @@ public class LettermanagerCommentManagerImpl extends BaseManagerImpl implements 
     /**
      * 保存对象
      */
-    @EsbServiceMapping(pubConditions = {@PubCondition(property = "memberId", pubProperty = "userId")})
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "member.memberId", pubProperty = "userId")})
     public LettermanagerComment saveLettermanagerComment(LettermanagerComment o) throws BusException{
 //    	String lettermanagerCommentId = o.getLettermanagerCommentId();
 //    	boolean isUpdate = StringUtils.isNotEmpty(lettermanagerCommentId);
