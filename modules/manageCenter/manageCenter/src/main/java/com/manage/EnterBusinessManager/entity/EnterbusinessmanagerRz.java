@@ -118,7 +118,6 @@ public class EnterbusinessmanagerRz implements Domain{
 	private String rzImages;//企业网址
 	
 	@Column(name = "PRODUCT_DISCRIPTIO_")
-	@Length(max=50)
 	private String productDiscriptio;//产品描述
 	
 	@Column(name = "ATTENTION_COUNT_")
