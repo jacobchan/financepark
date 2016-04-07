@@ -2,7 +2,7 @@
 		<h3 class="h3-bd">热点新闻</h3>
 			<div class="ifn-group">
 				<ul class="ig-nav">
-					<li>
+				<!-- 	<li>
 						<a href="" target="_blank">
 							<div class="in-photo">
 								<img src="../styles/images/zs/nav-img1.png" border="0" width="100%">
@@ -31,6 +31,49 @@
 								<p>杭州，一场无关情爱的风月无边月无</p>
 							</div>
 						</a>
-					</li>
+					</li> -->
 				</ul>
 			</div>
+		<script type="text/javascript">
+			$(function(){
+					var params=["issueTypeCode=0101"];//0101代表园区新闻
+					$.youi.ajaxUtils.ajax({
+						url:baseUrl +"nmIssuenewsManager/getNmIssuenewsByIssueTypeCode.json",//得到优惠政策的子类型
+						data:params.join('&'),
+						jsonp:'data:jsonp',
+						dataType:'jsonp',
+						success:function(result){
+							if(result&&result.records){
+								console.log(result.records) ;
+								getHt(result.records) ;
+							}
+						}
+					});
+			});
+			function getHt(record){
+				var len = record.length ;
+				if(len > 3){
+					len = 3 ;
+				}
+				for(var i=0;i<len;i++){
+					var title = record[i].policyCaption.toString() ;
+	  	 			var leng = title.length ;
+	  	 			if(leng > 21){
+	      	 			title = title.substring(0,21) ;
+						title += "..." ;
+	  	 			}
+					var html = "<li>"+
+									"<a href='../zscenter/zs7.html?policyId="+record[i].policyId+"' target='_blank'>"+
+										'<div class="in-photo">'+
+											"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].imageUrl+"&method=show' border='0' width='100%'>"+
+										'</div>'+
+										'<div class="fr">'+
+											"<p>"+title+"</p>"
+										'</div>'+
+									'</a>'+
+								'</li>' ;
+					$(".ig-nav").append(html) ;
+				}
+			}
+		</script> 
+			
