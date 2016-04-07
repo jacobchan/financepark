@@ -257,3 +257,9 @@ input{font-family:"微软雅黑";}
 .tcdPageCode span{display: inline-block;width: 35px;height: 35px;line-height: 33px; color: #333;border: 1px solid #ECEBEB;margin:0px 7px;border-radius: 2px;vertical-align: middle;}
 .tcdPageCode span.current{color: #FFF;background: #FF6715 none repeat scroll 0% 0%;border: 1px solid #FF6715;}
 .tcdPageCode span.disabled{	color: #bfbfbf;background: #f2f2f2;border: 1px solid #bfbfbf;cursor: default;}
+
+
+/**弹窗样式**/
+.toast{width:320px;height:110px;margin-left:-160px; top:50%;left:50%;margin-top:-55px;padding:20px;border-radius:5px;background:rgba(255,255,255,0.85);position:fixed;display: none;}
+.close-toast{background: url(images/zs/close.png) no-repeat;width: 16px;height: 16px;display: inline-table;cursor: pointer;}
+.close-toast:hover{background: url(images/zs/close-o.png) no-repeat;}
