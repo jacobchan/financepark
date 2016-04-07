@@ -230,7 +230,7 @@
 	                    	<div class="qiye_word">融资轮次</div>
 	                    	<div class="tct-select fl mr20" style="width:290px">
 		                    	<div class="ic-select">
-									<p class="c-b1"></p>
+									<p class="c-b1">&nbsp;</p>
 								</div>
 								<ul id="roundFinancing" style="display: none;" class="select-nav"></ul>
 							</div>
