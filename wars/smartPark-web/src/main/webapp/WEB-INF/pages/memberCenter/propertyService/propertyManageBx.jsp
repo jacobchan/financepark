@@ -115,7 +115,7 @@
 				<div class="mt20 mb20 f16 lh26">
 					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> <span class="ifSure">确认要取消</span><span class="c-o bxCode"> [ 123456789 ] </span>吗？
 				</div>
-				<p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p>
+				
 				<input value="确定" class="hhf-submit" style="height:36px;" type="submit">
 			</div>
 		</div>
@@ -205,9 +205,9 @@
 					success:function(result){
 						if(result&&result.record){
 							if(result.record.bxStatus=='08'){
-								alert("取消成功!");
+								//alert("取消成功!");
 							}else if(result.record.bxStatus=='01'){
-								alert("重新报修成功!");
+								//alert("重新报修成功!");
 							}
 							
 							location.reload();
