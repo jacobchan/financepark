@@ -122,9 +122,9 @@
 				<div class="mt20 mb20 f16 lh26">
 				<span id="enterCode" style="display:none"></span>
 				<span id="enterStatus" style="display:none"></span>
-					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o recordId"> [ 123456789 ] </span>吗？
+					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<!-- <span class="c-o recordId"> [ 123456789 ] </span> -->吗？
 				</div>
-				<p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p>
+				<!-- <p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p> -->
 				<input value="确定" class="hhf-submit" style="height:36px;" type="submit">
 			</div>
 		</div>
@@ -266,8 +266,7 @@
 		$(".hhf-submit").click(function(){
 				var enterCode=$("#enterCode").val();
 				var enterStatus=$("#enterStatus").val();
-				alert(enterCode);
-				alert(enterStatus);
+				
 				if(enterStatus == '01'){
 			 	$.youi.ajaxUtils.ajax({
 					url:baseUrl+'/propertyservicemanagerEntrecManager/cancelReservation.json',
