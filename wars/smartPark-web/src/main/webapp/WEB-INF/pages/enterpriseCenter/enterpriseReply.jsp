@@ -12,6 +12,47 @@
 				
 				$("#moreul").slideUp("slow");
 			  	$(".sidebar-menu-mainul > li:eq(3)").addClass("active");
+			  	
+			  	$.ajax({
+					url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
+					success:function(result){
+						if(result&&result.record){
+							$("#companyId").val(result.record.companyId);
+						}
+					}
+				});
+			  	//根据企业评论
+		    	$.youi.ajaxUtils.ajax({
+		    		url : baseUrl+"lettermanagerCommentManager/getLettermanagerComments.json",
+		    		data : ['commentEnterprise='+$("#companyId").val()].join('&'),
+		    		success : function(results) {
+		    			var comment = '';
+		    			if (results && results.records && results.records.length>0) {
+		    				var records = results.records;
+		    				$("#commentDiv").empty();
+		    				for(var i=0; i<records.length; i++){
+		    					comment+='<div class="fl" style="width: 80%">'+
+									'<div class="pinglun_ren">'+
+										'<table>'+
+											'<tr>'+
+												'<td>'+
+													'<img src="../styles/images/qiye/qiye/sl-i2.png" width="30" height="30">'+
+												'</td>'+
+												'<td>'+
+													'<span>'+records[i].member.memberName+'：</span>'+
+												'</td>'+
+											'</tr>'+
+										'</table>'+
+									'</div>'+
+									'<div class="pinglun_main">'+records[i].commentContent+'</div>'+
+									'<div class="pinglun_time">'+records[i].commentTime+'</div>'+
+								'</div>'+
+								'<a class="a-c-o fr reply_anniu" href="javascript:;">回复</a>';
+		    				}
+		    				$("#commentDiv").append(comment);
+		    			}
+		    		}
+		    	});
 			});
 		</script>
 	</head>
@@ -23,29 +64,14 @@
 			<div id="youi_page_left" class="fl clearfix"></div>
 			<div class="main-wrapper">
 				<div class="main-wrapper-right mb40" id="main-wrapper-right">
+					<input id="companyId" name="companyId" type="text" style="display:none;" />
 					<div class="main-title">
 						<span>评论消息</span>
 					</div>
 					<div class="all_pinglun">
 						<div class="qiye_pinglun">
-							<div class="comment clearfix pr">
-								<div class="fl" style="width: 80%">
-									<div class="pinglun_ren">
-										<table>
-											<tr>
-												<td>
-													<img src="../styles/../styles/images/qiye/qiye/sl-i2.png" width="30" height="30">
-												</td>
-												<td>
-													<span>斯大林：</span>
-												</td>
-											</tr>
-										</table>
-									</div>
-									<div class="pinglun_main">在这次活动的过程中真的可以学到不少东西，希望官方能够举办更多类似的活动，我一定会积极的参加在这次活动的过程中真的可以学到不少东西，希望官方能够举办更多类似的活动，我一定会积极的参加在这次活动的过程中真的可以学到不少东西，希望官方能够举办更多类似的活动，我一定会积极的参加</div>
-									<div class="pinglun_time">2016年1月18日10:02:2</div>
-								</div>
-								<a class="a-c-o fr reply_anniu" href="javascript:;">回复</a>
+							<div id="commentDiv" class="comment clearfix pr">
+								
 							</div>
 							<div class="reply mt30 clearfix">
 								<div class="pinglun_ren">
