@@ -42,7 +42,7 @@
 	
 		$(function(){
 			$.ajax({
-			     url:baseUrl+'/propertyservicemanagerOcManager/getPropertyservicemanagerOcListByLoginUser.json',
+			     url:baseUrl+'propertyservicemanagerOcManager/getPropertyservicemanagerOcListByLoginUser.json',
 			
 				success:function(result){
 					
@@ -83,7 +83,7 @@
 		function hhf(id){						
 			var ocId=id;			
 		     $.ajax({
-				url:baseUrl+'/propertyservicemanagerOcManager/cancleOcStatus.json',
+				url:baseUrl+'propertyservicemanagerOcManager/cancleOcStatus.json',
 				data:'ocId='+ocId+'',
 		 		success:function(result){
 					if(result&&result.record){					
@@ -102,7 +102,7 @@
 			 var endTime=$("#endTime").val(); 
 			 params=['ocCode='+ocCode+'','startTime='+startTime+'','endTime='+endTime+''];
 		      $.ajax({
-		    	 url:baseUrl+'/propertyservicemanagerOcManager/getOclistLikeOcCode.json',		    	
+		    	 url:baseUrl+'propertyservicemanagerOcManager/getOclistLikeOcCode.json',		    	
 		    	 data:params.join('&'),
 		    	 success:function(result){				    		 
 						console.log(result.records);           

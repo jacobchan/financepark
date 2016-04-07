@@ -158,7 +158,7 @@
 				$(".bg-tanc.m2").show();
 			});
 			 $.ajax({
-				url:baseUrl+'/propertyservicemanagerFkcodeManager/getFkcodeListforpage.json', 
+				url:baseUrl+'propertyservicemanagerFkcodeManager/getFkcodeListforpage.json', 
 				success:function(result){					
 					if(result&&result.records){
 						_parseRecords(result.records);
@@ -191,7 +191,7 @@
 			var status ='' ;
 			//alert(aa);
 			 $.ajax({
-					url:baseUrl+'/propertyservicemanagerTwcrdManager/findTwcrdById.json', 
+					url:baseUrl+'propertyservicemanagerTwcrdManager/findTwcrdById.json', 
 					data:'fkcodeId='+fkcodeId,
 					success:function(result){
 						console.log(result) ;
@@ -230,7 +230,7 @@
 			var url = queryUrl(me.id); 
 			var url=""; */
 			$.youi.ajaxUtils.ajax({
-				url:baseUrl+'/propertyservicemanagerTwcrdManager/findTwcrdById.json',
+				url:baseUrl+'propertyservicemanagerTwcrdManager/findTwcrdById.json',
 				data:'fkcodeId='+me.id,
 				success:function(result){
 					if(result&&result.record){
@@ -240,7 +240,7 @@
 						$(".fkcodes").html(fkCode);
 						$(".bftime").html(bftime);
 						$(".fkcodes")[0].setAttribute("id",me.id);
-						$(".fkurl")[0].setAttribute("src",ImgUrl+"/common/down.html?repository=/swfupload&path="+url);
+						$(".fkurl")[0].setAttribute("src",cenUrl+"common/down.html?repository=/swfupload&path="+url);
 						$(".bg-tanc.m2").show();
 					}
 				}
@@ -254,7 +254,7 @@
 			 var endTime=$("#endTime").val(); 
 			 params=['fkCode='+fkCode+'','startTime='+startTime+'','endTime='+endTime+''],
 		      $.ajax({
-		    	 url:baseUrl+'/propertyservicemanagerFkcodeManager/getFkcodelistLikeFkcodeCode.json',
+		    	 url:baseUrl+'propertyservicemanagerFkcodeManager/getFkcodelistLikeFkcodeCode.json',
 		    	 data:params.join('&'),
 		    	 success:function(result){				    		 
 						console.log(result.records);           
@@ -271,7 +271,7 @@
 		$(".hhf-submit").click(function(){
 				var id=$(".fkCode")[0].getAttribute("id");
 			 	$.youi.ajaxUtils.ajax({
-					url:baseUrl+'/propertyservicemanagerFkcodeManager/getFkcodeforpage.json',
+					url:baseUrl+'propertyservicemanagerFkcodeManager/getFkcodeforpage.json',
 					data:'fkcodeId='+id,
 					success:function(result){
 						if(result&&result.record){

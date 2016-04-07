@@ -114,7 +114,7 @@
 			}
 		});
 		$.ajax({
-			url:baseUrl+'/propertyservicemanagerChargeManager/getChargeListforpage.json', 
+			url:baseUrl+'propertyservicemanagerChargeManager/getChargeListforpage.json', 
 			success:function(result){
 				console.log(result);
 				if(result&&result.records){
@@ -161,7 +161,7 @@
 		 var endTime=$("#endTime").val(); 
 		 params=['userorderCode='+userorderCode+'','startTime='+startTime+'','endTime='+endTime+''];
 	      $.ajax({
-	    	 url:baseUrl+'/propertyservicemanagerChargeManager/getChargelistLikeUserorderCode.json',
+	    	 url:baseUrl+'propertyservicemanagerChargeManager/getChargelistLikeUserorderCode.json',
 	    	 data:params.join('&'),
 	    	 success:function(result){		
 	    		 

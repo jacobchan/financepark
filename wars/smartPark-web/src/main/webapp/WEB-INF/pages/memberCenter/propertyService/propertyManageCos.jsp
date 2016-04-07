@@ -66,14 +66,14 @@
 </youi:body>
 	
 	<script type="text/javascript" src="<%=request.getContextPath() %>/scripts/page/laydate/laydate.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath() %>/scripts/lib/properties.js"></script>
+	<%-- <script type="text/javascript" src="<%=request.getContextPath() %>/scripts/lib/properties.js"></script> --%>
 	<script type="text/javascript">
 		//读取当前用户投诉记录
 		$(function(){
 			$("#grzl").attr("class","");
 			$("#property").attr("class","active");
 			$.ajax({
-				url:baseUrl+'/propertyservicemanagerCosManager/getCosListByLoginUser.json',
+				url:baseUrl+'propertyservicemanagerCosManager/getCosListByLoginUser.json',
 				success:function(result){
 					console.log(result.records);
 					if(result&&result.records){
@@ -140,7 +140,7 @@
 				 var endTime=$("#endTime").val(); 
 				 params=['cosCode='+cosCode+'','startTime='+startTime+'','endTime='+endTime+''];
 			      $.ajax({
-			    	 url:baseUrl+'/propertyservicemanagerCosManager/getCoslistLikeCosCode.json',
+			    	 url:baseUrl+'propertyservicemanagerCosManager/getCoslistLikeCosCode.json',
 			    	 data:params.join('&'),
 			    	 success:function(result){					    		 
 							console.log(result.records);           
@@ -158,7 +158,7 @@
 		$(".hhf-submit").click(function(){
 				var id=$(".cosCode")[0].getAttribute("id");
 			 	$.youi.ajaxUtils.ajax({
-					url:baseUrl+'/propertyservicemanagerCosManager/updateCosforpage.json',
+					url:baseUrl+'propertyservicemanagerCosManager/updateCosforpage.json',
 					data:'cosId='+id,
 					success:function(result){
 						if(result&&result.record){
@@ -188,7 +188,7 @@
 	//点击跳转到投诉页面
 	$("#a1").click(function(){
 		
-		location.href = Portal + "yqfw/yq9.html" ;
+		location.href = proUrl + "yqfw/yq9.html" ;
 	})	
 	</script>
 	
