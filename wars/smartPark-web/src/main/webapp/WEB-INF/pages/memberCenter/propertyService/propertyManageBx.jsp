@@ -170,8 +170,8 @@
 						"<td><a href=''>"+record[i].bxCode+"</a></td>"+
 						"<td>"+record[i].applyTime+"</td>"+
 						"<td>"+bxStatus+"</td>"+
-						"<td>"+"张三"+"</td>"+
-						//"<td>"+record[i].member.memberName+"</td>"+
+						//"<td>"+"张三"+"</td>"+
+						"<td>"+record[i].member.memberName+"</td>"+
 						"<td>18659786621</td>"+
 						buttonHtml+
 						"</tr>";
