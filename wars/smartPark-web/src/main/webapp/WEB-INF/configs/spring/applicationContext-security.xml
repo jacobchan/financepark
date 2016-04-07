@@ -67,7 +67,7 @@
 				/index.html = authc
 				/page/** = authc
 				/member/*/logout.html=anon
-				/enterprise/** = authcmember,rolesdeny[ROLE_QY_ADMIN]
+				/member/qiyeCenter/** = authcmember,rolesdeny[ROLE_QIYE]
 				/member/** = authcmember
 	        </value>
 		</property>
