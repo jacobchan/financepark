@@ -72,4 +72,13 @@ public interface ShoppingcarCompanyserverManager extends BaseManager{
 	 */
 	public OrdermanagerUserorder saveCompSerOrder(OrdermanagerUserorder o,
 			List<ShoppingcarCompanyserver> shopCarList) throws BusException;
+	/**
+	 * 添加购物车
+	 * @param userId
+	 * @param commodityId
+	 * @return
+	 * @throws BusException
+	 */
+	public ShoppingcarCompanyserver addShoppingcarCompanyserver(String userId,
+			String commodityId) throws BusException;
 }
