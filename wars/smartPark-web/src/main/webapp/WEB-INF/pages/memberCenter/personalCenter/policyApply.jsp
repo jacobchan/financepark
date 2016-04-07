@@ -46,7 +46,7 @@
 		var policyApplyId=id;	
 		alert(policyApplyId);
 	     $.ajax({
-			url:baseUrl+'/policyApplyManager/cancelApply.json',
+			url:baseUrl+'policyApplyManager/cancelApply.json',
 			data:'policyApplyId='+policyApplyId,
 	 		success:function(result){
 				if(result&&result.record){					
@@ -59,7 +59,7 @@
 	
 		$(function(){
 			$.ajax({				
-				url:baseUrl+'/policyApplyManager/getPolicyApplyListByLoginUser.json',
+				url:baseUrl+'policyApplyManager/getPolicyApplyListByLoginUser.json',
 				success:function(result){	
 					if(result&&result.records){					
 						_parseRecords(result.records);						
@@ -102,7 +102,7 @@
 	 function cancel(id){		
 		var policyApplyId=id;	
 		$.ajax({				
-			url:baseUrl+'/policyApplyManager/cancelApply.json',
+			url:baseUrl+'policyApplyManager/cancelApply.json',
 			data:'policyApplyId='+policyApplyId,
 			success:function(result){
 				if(result&&result.record){					

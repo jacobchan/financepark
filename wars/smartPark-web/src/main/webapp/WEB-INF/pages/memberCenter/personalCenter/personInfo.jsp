@@ -93,7 +93,7 @@
 	<script type="text/javascript">
 		$(function(){			
 			$.ajax({
-				url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
+				url:baseUrl+'memberInformationManager/getMemberInformationByLoginUser.json',
 				//async: false, 
 				success:function(result){
 					if(result&&result.record){
@@ -118,7 +118,7 @@
 		function getRzName(companyId){
 			var id=companyId;
 			 $.ajax({
-					url:baseUrl+'/enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json', 
+					url:baseUrl+'enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json', 
 					data:'rzId='+id,
 					success:function(result){
 						console.log(result);
@@ -147,7 +147,7 @@
 			var companyId=$("#companyId").val();
 			var params = ['memberId='+memberId+'','memberNickname='+memberNickname+'','memberPhoneNumber='+memberPhoneNumber+'','memberName='+memberName+'','memberBirthdate='+memberBirthdate+'','memberDescribe2='+memberDescribe2+'','companyId='+companyId+''];
 			$.youi.ajaxUtils.ajax({
-				url:baseUrl+'/memberInformationManager/saveMemberInformation.json',
+				url:baseUrl+'memberInformationManager/saveMemberInformation.json',
 				data:params.join('&'),
 				success:function(result){
 					if(result&&result.record){
@@ -164,7 +164,7 @@
 			var companyInvitecode=$("#companyInvitecode").val();
 			var params = ['memberId='+memberId+'','code='+companyInvitecode+''];
 			$.youi.ajaxUtils.ajax({
-				url:baseUrl+'/enterpriseEmployeesManager/acceptEnterpriseInvitation.json',
+				url:baseUrl+'enterpriseEmployeesManager/acceptEnterpriseInvitation.json',
 				data:params.join('&'),
 				success:function(result){
 					if(result&&result.record){

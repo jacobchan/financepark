@@ -143,7 +143,7 @@
 	<script type="text/javascript">
 		$(function () {
 			$.ajax({
-				url:baseUrl+'/reservationRecordManager/getReservationRecordsforpage.json', 
+				url:baseUrl+'reservationRecordManager/getReservationRecordsforpage.json', 
 				success:function(result){
 					console.log(result);
 					if(result&&result.records){
@@ -192,7 +192,7 @@
 	<script type="text/javascript">
 		$(function () {
 			$.ajax({
-				url:baseUrl+'/propertyservicemanagerEntrecManager/getPropertyservicemanagerEntrecs.json', 
+				url:baseUrl+'propertyservicemanagerEntrecManager/getPropertyservicemanagerEntrecs.json', 
 				success:function(result){
 					console.log(result);
 					if(result&&result.records){
@@ -269,7 +269,7 @@
 				
 				if(enterStatus == '01'){
 			 	$.youi.ajaxUtils.ajax({
-					url:baseUrl+'/propertyservicemanagerEntrecManager/cancelReservation.json',
+					url:baseUrl+'propertyservicemanagerEntrecManager/cancelReservation.json',
 					data:'entrecId='+enterCode,
 					success:function(result){
 							alert("取消成功!");

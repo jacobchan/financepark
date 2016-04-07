@@ -96,7 +96,7 @@
 	<script type="text/javascript">
 	$(function(){		
 			$.ajax({
-				url:baseUrl+'/memberadrAddressManager/getMemberadrAddresssByUser.json', 
+				url:baseUrl+'memberadrAddressManager/getMemberadrAddresssByUser.json', 
 				success:function(result){
 					console.log(result);
 					if(result&&result.records){
@@ -148,7 +148,7 @@
 		function removeAddress(obj){
 			var me=obj.parentNode.parentNode;
 		 	$.youi.ajaxUtils.ajax({
-				url:baseUrl+'/memberadrAddressManager/removeMemberadrAddress.json',
+				url:baseUrl+'memberadrAddressManager/removeMemberadrAddress.json',
 				data:'addressId='+me.id,
 				success:function(result){
 					me.remove();
@@ -161,7 +161,7 @@
 			var me=obj.parentNode.parentNode;
 			var params =['addressId='+me.id,'addressStatus=0'];
 		 	$.youi.ajaxUtils.ajax({
-				url:baseUrl+'/memberadrAddressManager/saveMemberadrAddress.json',
+				url:baseUrl+'memberadrAddressManager/saveMemberadrAddress.json',
 				data:params.join('&'),
 				success:function(result){
 					if(result&&result.record){
@@ -175,7 +175,7 @@
 		function editAdd(obj){
 			var me=obj.parentNode.parentNode;
 			$.youi.ajaxUtils.ajax({
-				url:baseUrl+'/memberadrAddressManager/getMemberadrAddress.json',
+				url:baseUrl+'memberadrAddressManager/getMemberadrAddress.json',
 				data:'addressId='+me.id,
 				success:function(result){
 					$(".bg-tanc.m1")[0].setAttribute("value",me.id);
@@ -196,7 +196,7 @@
 		function getbbmbud(){
 				//获取楼栋
 				$.youi.ajaxUtils.ajax({
-					url:baseUrl +"/bbmBuildingManager/getBbmBuildings.json", 
+					url:baseUrl +"bbmBuildingManager/getBbmBuildings.json", 
 					success:function(result){
 						if(result&&result.records){
 							bbmBuild(result.records);
@@ -232,7 +232,7 @@
 				var buildingId = id;
 				var params = ['buildingId='+buildingId];
 				$.youi.ajaxUtils.ajax({
-					url:baseUrl +"/bbmFloorManager/getBbmFloorByBuildingId.json", 
+					url:baseUrl +"bbmFloorManager/getBbmFloorByBuildingId.json", 
 					data:params.join('&'),
 					success:function(result){
 						if(result&&result.records){
@@ -278,7 +278,7 @@
 				var params = ['addressId='+addressId,'addressName='+addressName,
 								'addressPhone='+addressPhone,
 								'addressDetail='+addressDetail];
-				var serviceURL = baseUrl+"/memberadrAddressManager/saveMemberadrAddress.json";
+				var serviceURL = baseUrl+"memberadrAddressManager/saveMemberadrAddress.json";
 				
 				//公共方法
 				$.youi.ajaxUtils.ajax({

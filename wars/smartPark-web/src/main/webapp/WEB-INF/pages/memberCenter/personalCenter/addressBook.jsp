@@ -45,7 +45,7 @@
 	
 		  $(function(){
 			$.ajax({
-			  url:baseUrl+'/memberInformationManager/getPhoneNumberlist.json',		
+			  url:baseUrl+'memberInformationManager/getPhoneNumberlist.json',		
 				success:function(result){					
 					console.log(result.records);
 					if(result&&result.records){					
@@ -72,7 +72,7 @@
 			$(".aaa").empty();
 			 var memberName=$("#memberName").val(); 
 		      $.ajax({
-		    	 url:baseUrl+'/memberInformationManager/getPhoneNumberlistByName.json',
+		    	 url:baseUrl+'memberInformationManager/getPhoneNumberlistByName.json',
 		    	 data:'memberName='+memberName,
 		    	 success:function(result){					
 						console.log(result.records);           
@@ -84,7 +84,7 @@
 		}); 
 		$(function(){
 			$.ajax({
-			  url:baseUrl+'/enterbusinessmanagerRzManager/getCompanyIdName.json',		
+			  url:baseUrl+'enterbusinessmanagerRzManager/getCompanyIdName.json',		
 				success:function(result){					
 					console.log(result.record);
 					if(result&&result.record){					
