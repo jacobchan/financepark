@@ -122,19 +122,16 @@
 			        <div class="qiye_fm">
 			        	<span class="" id="knowledgeRe" style="display:none;"></span>
 			            <div class="qiye_text"><span>专利图片</span></div>
-			            <div>
-			                <div class="img_upload"><img src="../styles/images/qiye/img_none.png"><br><p>图片未上传</p></div>
-			                    <div class="upload_main">            	
-			                        <div class="fengmian_pic"><img src="../styles/images/qiye/add_fmpic.png"></div>
-			                        <div class="upload_input_fm1"><input type="file"></div>
-			                    </div>
-			                </div>
+			            <div class="upload_main">
+		                    <img id="rzLogo" src="../styles/images/qiye/user-photo.png" border="0" class="fl" width="107" height="107"/>
+		                    <div class="photo-edit"><input type="file" />编辑<br/>图片</div>
+		            	</div>
+		            </div>
+			        <div class="xiangxi_baodao">
+			        	<div class="qiye_fullname ">
+			            	<div class="qiye_nametex">专利名称</div>
+			                <div class="name_input"><input id="knowledgeTitle" name="knowledgeTitle" type="text"></div>
 			            </div>
-			            <div class="xiangxi_baodao">
-			                <div class="qiye_fullname ">
-			                    <div class="qiye_nametex">专利名称</div>
-			                    <div class="name_input"><input id="knowledgeTitle" name="knowledgeTitle" type="text"></div>
-			                </div>
 			        	<div class="qiye_jianjie ">
 			                <div class="qiye_word">专利描述</div>
 			               	<div class="word_input">
