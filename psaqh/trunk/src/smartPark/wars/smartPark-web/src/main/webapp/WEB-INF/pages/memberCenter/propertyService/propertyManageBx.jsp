@@ -170,7 +170,8 @@
 						"<td><a href=''>"+record[i].bxCode+"</a></td>"+
 						"<td>"+record[i].applyTime+"</td>"+
 						"<td>"+bxStatus+"</td>"+
-						"<td>"+record[i].memberId+"</td>"+
+						"<td>"+"张三"+"</td>"+
+						//"<td>"+record[i].member.memberName+"</td>"+
 						"<td>18659786621</td>"+
 						buttonHtml+
 						"</tr>";
@@ -240,7 +241,7 @@
 	        istime: true, //是否开启时间选择
 		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 		});
-	})
+	});
 	$(function(){
 		laydate({
 		    elem: '#endTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
@@ -248,12 +249,12 @@
 	        istime: true, //是否开启时间选择
 		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 		});
-	})
+	});
 	</script>
 	<script type="text/javascript">
-		$("#a1").click(function(){
-			
+	    //点击跳转到投诉页面
+		$("#a1").click(function(){			
 			location.href = Portal + "yqfw/yq6.html" ;
 		})	
-</script>
+     </script>
 </youi:html>
