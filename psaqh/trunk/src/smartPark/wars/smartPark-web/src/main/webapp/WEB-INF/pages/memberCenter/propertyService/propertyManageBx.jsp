@@ -123,7 +123,7 @@
 	<!--***弹窗 end****************************************-->
 </youi:body>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/scripts/page/laydate/laydate.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath() %>/scripts/lib/properties.js"></script>
+	<%-- <script type="text/javascript" src="<%=request.getContextPath() %>/scripts/lib/properties.js"></script> --%>
 	<script type="text/javascript">
 		$(function () {
 			$(".ac-show").click(function(e){
@@ -131,7 +131,7 @@
 			});
 			
 			$.ajax({
-				url:baseUrl+'/propertyservicemanagerBxManager/getBxListforpage.json', 
+				url:baseUrl+'propertyservicemanagerBxManager/getBxListforpage.json', 
 				success:function(result){
 					if(result&&result.records){
 						_parseRecords(result.records);
@@ -200,7 +200,7 @@
 		$(".hhf-submit").click(function(){
 				var id=$(".bxCode")[0].getAttribute("id");
 			 	$.youi.ajaxUtils.ajax({
-					url:baseUrl+'/propertyservicemanagerBxManager/updateBxforpage.json',
+					url:baseUrl+'propertyservicemanagerBxManager/updateBxforpage.json',
 					data:'bxId='+id,
 					success:function(result){
 						if(result&&result.record){
@@ -224,7 +224,7 @@
 		 var endTime=$("#endTime").val(); 
 		 params=['bxCode='+bxCode+'','startTime='+startTime+'','endTime='+endTime+''];
 	      $.ajax({
-	    	 url:baseUrl+'/propertyservicemanagerBxManager/getEnterprisemaillistLikeBxCode.json',
+	    	 url:baseUrl+'propertyservicemanagerBxManager/getEnterprisemaillistLikeBxCode.json',
 	    	 data:params.join('&'),
 	    	 success:function(result){					
 					console.log(result.records);           
@@ -254,7 +254,7 @@
 	<script type="text/javascript">
 	    //点击跳转到投诉页面
 		$("#a1").click(function(){			
-			location.href = Portal + "yqfw/yq6.html" ;
+			location.href = proUrl + "yqfw/yq6.html" ;
 		})	
      </script>
 </youi:html>
