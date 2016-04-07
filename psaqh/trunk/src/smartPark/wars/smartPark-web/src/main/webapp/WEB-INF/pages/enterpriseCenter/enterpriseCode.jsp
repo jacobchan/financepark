@@ -54,6 +54,16 @@
 						if (!regPhone.test(phone[i])) { 
 							alert("手机号码不正确！");
 							return false;
+						}else{
+							$.youi.ajaxUtils.ajax({
+	    						url:baseUrl+'/enterpriseInvitationManager/saveEnterpriseInvitation.json',
+	    						data:['enterbusinessmanagerRz.rzId='+$("#rzId").val(), 'invitationCode='+code, 'invitationTelephone='+phone[i]].join('&'),
+	    						success:function(result){
+	    							if(result && result.record){
+	    								return true;
+	    							}
+	    						}
+	    					});
 						}
 					}
 					$.ajax({
