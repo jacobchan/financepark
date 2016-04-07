@@ -87,7 +87,8 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/lib/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/lib/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/lib/giui.min.js"></script>
-<script type="text/javascript"  src="<%=request.getContextPath()%>/scripts/lib/properties.js"></script>
+<%-- <script type="text/javascript"  src="<%=request.getContextPath()%>/scripts/lib/properties.js"></script> --%>
+<script type="text/javascript"  src="<%=request.getContextPath()%>/scripts/page/url.js"></script>
 <script type="text/javascript">
 $(function(){
 	$(".login_ul li").click(function(){
@@ -130,7 +131,7 @@ function registClick(){
 				var obj = ['memberPhoneNumber='+memberPhoneNumber] ;
 				/* 判断手机号是否已经注册! */
 				$.youi.ajaxUtils.ajax({
-					url:baseUrl + "/memberInformationManager/exsitMobile.json",
+					url:baseUrl + "memberInformationManager/exsitMobile.json",
 					data:obj.join('&'),
 					jsonp:'data:jsonp',
 					dataType:'jsonp',
@@ -167,7 +168,7 @@ function registClick(){
 							              "repasswd="+repasswd
 										 ];
 							$.youi.ajaxUtils.ajax({
-								url:baseUrl +"/memberInformationManager/saveReister.json",
+								url:baseUrl +"memberInformationManager/saveReister.json",
 								data:params.join('&'),
 								jsonp:'data:jsonp',
 								dataType:'jsonp',
@@ -184,7 +185,7 @@ function registClick(){
 			}); 
 		});
 		function openUrl(){
-			var url=Portal+"/findpsw.html"; 
+			var url=proUrl+"findpsw.html"; 
 			window.location.assign(url); 
 		};
 </script>
