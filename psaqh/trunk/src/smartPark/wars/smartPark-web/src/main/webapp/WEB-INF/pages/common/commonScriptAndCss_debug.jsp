@@ -1,6 +1,6 @@
 <%@ taglib prefix="youi" uri="http://www.gisoft.cn/youi3" %>
 
-<link type="image/x-icon" rel="shortcut icon" href="<%= request.getContextPath() %>/favicon.ico" />	
+<link type="image/x-icon" rel="shortcut icon" href="<%=request.getContextPath()%>/favicon.ico" />	
 <link rel="Shortcut Icon" href="favicon.ico" />
 
 <youi:script src="/scripts/3.0/lib/jquery.js"/>
@@ -70,7 +70,7 @@
 <youi:script src="/scripts/3.0/youi/field/field.spinner.js"/>
 <youi:script src="/scripts/3.0/youi/field/field.list.js"/>
 <youi:script src="/scripts/js/flexpaper.js"/>
-<youi:script src="/scripts/lib/properties.js"/>
+<youi:script src="/scripts/page/url.js"/>
 
 <youi:style href="/styles/css/upload.css"/>
 <youi:style href="/styles/3.0/bootstrap.css"/>
