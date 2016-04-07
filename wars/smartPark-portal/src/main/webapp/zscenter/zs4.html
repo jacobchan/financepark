@@ -153,13 +153,18 @@
 				var news = newsList[i] ;
 				if(news.policyType.issueTypeCode=='0101'){//0101代表园区新闻
 					flag = true ;
+					var temp = news.policyContent ;
+					var start = temp.indexOf("<p>");
+					var end = temp.indexOf("</p>");
+					var content = temp.substring(start,end+4) ;
+					//console.log(content) ;
 					htmls += "<li>"+
 								"<a href='zs7.html?policyId="+news.policyId+"'>"+
 									'<div class="plg-photo">'+
 										"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+news.imageUrl+"&method=show' border='0' width='100%'>"+
 									"</div>"+
 						 		"<div class='plg-article'>"+
-									"<a href='zs7.html?policyId="+news.policyId+"'><h3>"+news.policyCaption+"</h3></a>"+news.policyContent+
+									"<a href='zs7.html?policyId="+news.policyId+"'><h3>"+news.policyCaption+"</h3></a>"+content+
 								"</div>"+
 								"</a>"+
 							"</li>";
