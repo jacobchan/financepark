@@ -45,7 +45,13 @@
 						success:function(result){
 							if(result&&result.records){
 								console.log(result.records) ;
-								getHt(result.records) ;
+								var record = result.records ;
+								if(record.length==0){
+									$(".ig-nav").empty("") ;
+									$(".ig-nav").append("<li><p>目前还没有新闻，敬请期待！</p></li>") ;
+								}else{
+									getHt(result.records) ;
+								}
 							}
 						}
 					});
