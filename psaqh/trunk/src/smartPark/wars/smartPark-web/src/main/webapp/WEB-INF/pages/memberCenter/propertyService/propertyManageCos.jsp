@@ -12,9 +12,7 @@
 							<div class="inp-box ml20"><input placeholder="订单号查询" type="text" id="cosCode"><a class="fa fa-search" href=""></a></div>
 							<input value="搜索" class="hhf-submit" type="button">
 						</div>
-						<div class="mt20 gr-txl clearfix lh30">
-							<a href="addcomplaints.html" class="hhf-submit f14 fr">我要投诉</a>
-						</div>
+						
 						<table class="gt-table mt20">
 							<colgroup>
 								<col width="150"></col>
@@ -29,7 +27,7 @@
 								<tr>
 									<th>订单号</th>
 									<th>申请时间</th>
-									<th>状态</th>
+									<th>是否回访</th>
 									<th>联系人</th>
 									<th>联系电话</th>
 									<th>投诉状态</th>
