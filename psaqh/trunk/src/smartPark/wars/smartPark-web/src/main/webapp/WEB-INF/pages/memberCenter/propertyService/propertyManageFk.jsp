@@ -21,14 +21,14 @@
 								<col width="150"></col>
 								<col></col>
 							</colgroup>
-							<tbody><tr>
+							<tbody><!-- <tr>
 								<th>订单号</th>
 								<th>到访时间</th>
 								<th>到访状态</th>
 								<th>访客姓名</th>
 								<th>访客电话</th>
 								<th>操作</th>
-							</tr>
+							</tr> -->
 							<!-- <tr>
 								<td><a href="">123456789</a></td>
 								<td>2016-1-12 17:30</td>
@@ -62,15 +62,15 @@
 								<td><a href="javascript:;" class="ac-see">查看二维码</a><span class="f12 ml5 mr5">|</span><a href="javascript:;" class="ac-show">取消访客</a></td>
 							</tr> -->
 						</tbody></table>
-						<div class="fr page-list-a clearfix lh30 mt20 f12">
-							<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
+						<div class="tcdPageCode fr">
+							<!-- <span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
 							<a href="">首</a>
 							<a href=""><i class="fa fa-angle-left"></i></a>
 							<a>1</a>
 							<a href=""><i class="fa fa-angle-right"></i></a>
 							<a href="">末</a>
 							<input class="bd-input fl ml10 mr10" style="width:40px;" type="text">
-							<a href="">Go</a>
+							<a href="">Go</a> -->
 						</div>
 					</div>
 					<!-- <div class="clearfix mt50">
@@ -124,7 +124,7 @@
 		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
 			<a href="javascript:;" class="tc-close"></a>
 			<div class="w70 tc mt40" style="margin-left:15%">
-				<img src="/styles/images/grzx/ewm.jpg" border="0" class="mb20 fkurl" style="width: 45%;"/> 
+				<img src="<%=request.getContextPath()%>/styles/images/grzx/ewm.jpg" border="0" class="mb20 fkurl" style="width: 45%;"/> 
 				<p class="mb10">订单号：<span class="c-o fkcodes"> [ 123456789 ] </span></p>
 				<p>到访时间：<span class="bftime">2016年1月21日15:30</span></p>
 				<a href="javascript:;" class="ib-btn">分享到手机</a>
@@ -134,8 +134,12 @@
 	</div>
 	<!--***弹窗 end****************************************-->
 </youi:body>
-	<script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 	<script type="text/javascript">
+	var pageSize=5;
+	var pageCount=1;
+	var serviceURL = baseUrl+'propertyservicemanagerFkcodeManager/getPagerFkcodes.json';
 		$(function () {
 			star(".starbox1 i");
 				star(".starbox2 i");
@@ -157,17 +161,49 @@
 			$(".ac-see").click(function(){
 				$(".bg-tanc.m2").show();
 			});
+			
 			 $.ajax({
-				url:baseUrl+'propertyservicemanagerFkcodeManager/getFkcodeListforpage.json', 
-				success:function(result){					
-					if(result&&result.records){
+				url:serviceURL, 
+				success:function(results){	
+								pageCount=Math.ceil(results.totalCount/pageSize);
+								 refreshData(1,pageSize);
+									$(".tcdPageCode").createPage({
+									    pageCount:pageCount,
+									    current:1,
+									    backFn:function(p){
+									       this.pageCount=pageCount;
+									        refreshData(p,pageSize);
+									    }
+									});			
+				/* 	if(result&&result.records){
 						_parseRecords(result.records);
-					}
+					} */
 				}
 			}); 			
-		});		
+		});	
+		
+		
+		//分页列表
+		function refreshData(pageIndex,pageSize){
+			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+			$.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				success:function(results){
+					if(results&&results.records){
+						 _parseRecords(results.records);
+					}
+				}
+			});
+		}
+		
 		//拼接列表
 		function _parseRecords(record){
+			//$("tbody").find('tr:eq(1)').html("");	
+			$("tbody").empty();
+		  	var ht = "<tr><th>订单号</th><th>到访时间</th>"+
+				"<th>到访状态</th><th>访客姓名</th><th>访客电话</th><th>操作</th>";
+			$("tbody").append(ht);
 			for(var i=0;i<record.length;i++){
 				var id = record[i].fkcodeId ;
 				var html="<tr id='"+id +"' class='aaa'>"+
@@ -179,7 +215,6 @@
 						"<td><a href='javascript:;' onclick='javascript:qrcode(this)' class='ac-see'>查看二维码</a><span class='f12 ml5 mr5'>|</span><a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消访客</a></td>"+
 						"</tr>";
 				aa(record[i].fkcodeId);
-				
 				 $("tbody").append(html);				
 			/* 	 $(".ac-see").click(function(){
 					 $(".bg-tanc.m2").show();
@@ -257,7 +292,7 @@
 		    	 url:baseUrl+'propertyservicemanagerFkcodeManager/getFkcodelistLikeFkcodeCode.json',
 		    	 data:params.join('&'),
 		    	 success:function(result){				    		 
-						console.log(result.records);           
+						/* console.log(result.records);   */         
 						if(result&&result.records){						
 							_parseRecords(result.records);							
 						}
