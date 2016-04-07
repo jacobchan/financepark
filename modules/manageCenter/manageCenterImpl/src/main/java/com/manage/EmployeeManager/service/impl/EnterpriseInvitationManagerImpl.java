@@ -16,11 +16,8 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.manage.EmployeeManager.entity.EnterpriseInvitation;
 import com.manage.EmployeeManager.dao.EnterpriseInvitationDao;
 import com.manage.EmployeeManager.service.EnterpriseInvitationManager;
@@ -65,7 +62,7 @@ public class EnterpriseInvitationManagerImpl extends BaseManagerImpl implements 
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId")})
     public EnterpriseInvitation saveEnterpriseInvitation(EnterpriseInvitation o) throws BusException{
 //    	String enterpriseInvitationId = o.getEnterpriseInvitationId();
 //    	boolean isUpdate = StringUtils.isNotEmpty(enterpriseInvitationId);
