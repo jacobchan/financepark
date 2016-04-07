@@ -3,7 +3,7 @@
 <youi:html title="政策申请">
 	<youi:body decorator="memcenter"> 
 				<div class="w1000">
-					<h3 class="per-h3">政策申请</h3>
+					<h3 class="per-h3">政策申请<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要申请政策</a></h3>
 					<div class="clearfix mt40">
 						<table class="gt-table mt20">
 							<colgroup>
@@ -113,4 +113,10 @@
 		});
 	}; 
 	 </script>
+	 <script type="text/javascript">
+	    //点击跳转到政策申请页面
+		$("#a1").click(function(){			
+			location.href = proUrl + "zscenter/zs3.html" ;
+		})	
+     </script>
 </youi:html>
