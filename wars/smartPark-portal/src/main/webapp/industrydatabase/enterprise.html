@@ -138,7 +138,7 @@
 					success : function(result){
 						pageCount=Math.ceil(result.totalCount/pageSize);
 						refreshData(1,pageSize);
-						$(".ycc-page").createPage({
+						$(".tcdPageCode").createPage({
 							pageCount:pageCount,
 							current:1,
 							backFn:function(p){
@@ -287,10 +287,7 @@
 	                </div>
 	                <!-- 没有数据时显示图片 end-->
 				</div>
-				<div class="ycc-page clearfix">
-					<!--<a href="" class="no-c"><i class="fa fa-angle-double-left"></i></a>
-					<a href="" class="current">1</a><a href="">2</a><a href="">3</a>
-					<a href=""><i class="fa fa-angle-double-right"></i></a>-->
+				<div class="tcdPageCode">
 				</div>
 			</div>
 		</div>
