@@ -82,22 +82,22 @@
 					<table class="mt20 table-photo">
 						<colgroup>
 							<col width="360"></col>
-							<col width="160"></
-
-							col>
+							<col width="160"></col>
 							<col width="210"></col>
 							<col width="160"></col>
 						</colgroup>
 						<tbody>
 							<tr>
 								<td rowspan="2"><div style="width:350px;"><img id="majorPicture" src="styles/images/jd-i1.jpg" width="100%"></div></td>
-								<td><div style="width:150px;"><img src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
-								<td><div style="width:200px;"><img src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
-								<td><div style="width:160px;"><img src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
+								<td><div style="width:150px;"><img class="hotelPic" src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
+								<td><div style="width:200px;"><img class="hotelPic" src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
+								<td><div style="width:160px;"><img class="hotelPic" src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
 							</tr>
 							<tr>
-								<td colspan="2"><div style="width:360px;"><img src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
-								<td><div style="width:160px;"><img src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
+								<!-- <td colspan="2"><div style="width:360px;"><img class="hotelPic" src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td> -->
+								<td><div style="width:150px;"><img class="hotelPic" src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
+								<td><div style="width:200px;"><img class="hotelPic" src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
+								<td><div style="width:160px;"><img class="hotelPic" src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
 							</tr>
 						</tbody>
 					</table>
@@ -586,7 +586,6 @@
 					for(var i=0; i<hotel.xingji;i++){
 						$(".starbox1").append("<i class='star1'>");
 					}
-					$("#majorPicture").attr("src",hotel.picture);
 					/* 酒店介绍部分 */
 					var html_part = "<tr><td>酒店概况</td>";
 					html_part += "<td>"+hotel.jianshu+"</td></tr>";
@@ -610,6 +609,22 @@
 					$("#hotelOverview").append(html_part);
 					$("#hotelContent").html(hotel.content);
 					getRooms();
+				}
+			}
+		});
+		//获取酒店图片
+		$.youi.ajaxUtils.ajax({
+			url:baseUrl+"hotelInfoService/getHotelPic.json",
+			data:params.join('&'),
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(result){
+				if(result&&result.records){
+					var pic = result.records;
+					$("#majorPicture").attr("src",pic[1].pic500);
+					$(".hotelPic").each(function(index){
+						$(this).attr("src",pic[index+2].pic160);
+					});
 				}
 			}
 		});
