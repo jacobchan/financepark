@@ -29,7 +29,7 @@
 	<script type="text/javascript">
 		$(function(){
 			$.ajax({
-				url:baseUrl+'/activityApplyManager/getParticipateActivityList.json',
+				url:baseUrl+'activityApplyManager/getParticipateActivityList.json',
 				success:function(result){
 					console.log(result.records);
 					if(result&&result.records){

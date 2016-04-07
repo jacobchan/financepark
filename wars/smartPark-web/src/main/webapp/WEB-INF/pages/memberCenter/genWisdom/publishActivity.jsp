@@ -84,7 +84,7 @@
 	<script type="text/javascript">
 	$(function(){
 		$.ajax({
-			url:baseUrl+'/activityApplyManager/getPublishActivityList.json',
+			url:baseUrl+'activityApplyManager/getPublishActivityList.json',
 			success:function(result){
 				if(result&&result.records){
 					_parseRecords(result.records);
@@ -117,7 +117,7 @@
 		var params = ['applyId='+applyId];
 		//活动名单
 		$.ajax({
-			url:baseUrl+'/activityApplyManager/getPublishActivityMembers.json',
+			url:baseUrl+'activityApplyManager/getPublishActivityMembers.json',
 			data:params.join('&'),
 			success:function(result){
 				if(result&&result.records){
@@ -127,7 +127,7 @@
 		});	
 		//评论内容
 		$.ajax({
-			url:baseUrl+'/activityApplyManager/getPublishActivityComments.json',
+			url:baseUrl+'activityApplyManager/getPublishActivityComments.json',
 			data:params.join('&'),
 			success:function(result){
 				if(result&&result.records){
@@ -137,7 +137,7 @@
 		});	
 		//文档库
 		$.ajax({
-			url:baseUrl+'/activityApplyManager/getPublishActivityDocuments.json',
+			url:baseUrl+'activityApplyManager/getPublishActivityDocuments.json',
 			data:params.join('&'),
 			success:function(result){
 				console.log(result);
