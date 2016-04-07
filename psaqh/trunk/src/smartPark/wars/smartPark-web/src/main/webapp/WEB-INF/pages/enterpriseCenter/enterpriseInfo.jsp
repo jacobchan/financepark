@@ -165,7 +165,7 @@
 								data : ['rzId='+result.record.companyId].join('&'),
 								success:function(result){
 									if(result&&result.record){
-										$("#rzLogo").attr("src","/filestore/"+result.record.rzLogo);
+										$("#rzLogo").attr("src","http://localhost:9088/filestore/"+result.record.rzLogo);
 										$("#financingRe").html(result.record.rzId);
 										$("#rzName").val(result.record.rzName);
 				    					$("#rzUrl").val(result.record.rzUrl);

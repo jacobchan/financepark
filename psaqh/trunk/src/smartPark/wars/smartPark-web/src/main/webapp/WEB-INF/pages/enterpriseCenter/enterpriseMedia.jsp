@@ -107,8 +107,8 @@
 		            	<span class="" id="mediaRe" style="display:none;"></span>
 		            	<div class="qiye_text"><span>媒体图片</span></div>
 		                <div class="upload_main">
-		                    <img id="rzLogo" src="" border="0" class="fl" width="107" height="107"/>
-		                    <div class="photo-edit"><input type="file" />编辑<br/>logo</div>
+		                    <img id="rzLogo" src="../styles/images/qiye/user-photo.png" border="0" class="fl" width="107" height="107"/>
+		                    <div class="photo-edit"><input type="file" />编辑<br/>图片</div>
 		            	</div>
 		            </div>
 		            <div class="xiangxi_baodao">
