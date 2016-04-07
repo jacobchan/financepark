@@ -81,4 +81,35 @@ public interface ShoppingcarCompanyserverManager extends BaseManager{
 	 */
 	public ShoppingcarCompanyserver addShoppingcarCompanyserver(String userId,
 			String commodityId) throws BusException;
+	/**
+	 * 查询当前用户的购物车列表
+	 * @param userId
+	 * @param genreCode
+	 * @return
+	 */
+	public List<ShoppingcarCompanyserver> getShopCarList(String userId,
+			String genreCode);
+	/**
+	 * 修改购物车
+	 * @param userId
+	 * @param id
+	 * @param num
+	 * @return
+	 */
+	public ShoppingcarCompanyserver modifyShopCar(String userId, String id, String num);
+	/**
+	 * 删除购物车
+	 * @param userId
+	 * @param id
+	 */
+	public void delShopCar(String userId, String id);
+	/**
+	 * 新增威客服务订单
+	 * @param userId
+	 * @param shopCarList
+	 * @return
+	 * @throws BusException
+	 */
+	public OrdermanagerUserorder saveWKserviceOrder(String userId,
+			List<ShoppingcarCompanyserver> shopCarList) throws BusException;
 }
