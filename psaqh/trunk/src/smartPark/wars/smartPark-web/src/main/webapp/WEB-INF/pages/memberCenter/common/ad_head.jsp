@@ -3,7 +3,7 @@
 	<script type="text/javascript">
 		function goProperties(gohref){
 			//alert(Portal);
-			window.location.href=Portal+gohref; 
+			window.location.href=proUrl+gohref; 
 		}
 	</script>
 	<div style="background-color:#545454">
