@@ -173,7 +173,7 @@ public class NmIssuetypeManagerImpl extends BaseManagerImpl implements NmIssuety
 		}
 	}
     /**
-     * 得到新闻公告的所有的子类型
+     * 得到政策新闻的所有的子类型通过issueTypeCode
      * @return
      */
     @EsbServiceMapping
