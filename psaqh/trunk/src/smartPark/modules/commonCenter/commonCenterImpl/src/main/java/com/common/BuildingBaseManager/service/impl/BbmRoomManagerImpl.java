@@ -139,8 +139,10 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
     		String parkName = park.getParkName() ;//园区名字
         	String buildingNo = building.getBuildingNo() ;//楼栋编号
         	String floorNo = floor.getFloorNo() ;//楼层编号
+        	String temp = floorNo.substring(0, floorNo.length()-1) ;
         	String roomNo = o.getRoomNo() ;//单元编号
-        	String roomAddress = parkAddress+parkName+buildingNo+floorNo+roomNo ;//详细地址
+        	String roomNoTemp = roomNo.substring(roomNo.lastIndexOf("-")+1) ;
+        	String roomAddress = parkAddress+parkName+buildingNo+"栋"+temp+roomNoTemp+"室" ;//详细地址
         	o.setRoomAddress(roomAddress);
         	return bbmRoomDao.save(o);
     	}
