@@ -3,6 +3,7 @@
  */
 package com.member.shoppingCarManager.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Collection;
 
@@ -10,11 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.service.MemberInformationManager;
 import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.common.OrderManager.service.OrdermanagerCommoditydetailManager;
 import com.common.OrderManager.service.OrdermanagerUserorderManager;
+import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
+import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
 import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -23,6 +28,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
 import com.member.shoppingCarManager.entity.ShoppingcarCompanyserver;
@@ -40,6 +47,10 @@ public class ShoppingcarCompanyserverManagerImpl extends BaseManagerImpl impleme
 	private OrdermanagerCommoditydetailManager ordermanagerCommoditydetailManager;
 	@Autowired
 	private PurchasingmanagerGenreManager purchasingmanagerGenreManager;
+	@Autowired
+	private PurchasingmanagerCommodityManager purchasingmanagerCommodityManager;
+	@Autowired
+	private MemberInformationManager memberInformationManager;
 	
     /**
      * 查询列表
@@ -139,6 +150,45 @@ public class ShoppingcarCompanyserverManagerImpl extends BaseManagerImpl impleme
 			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
 		}
 		return o;
+	}
+    /**
+	 * 添加购物车
+	 */
+    @Override
+    @EsbServiceMapping
+	public ShoppingcarCompanyserver addShoppingcarCompanyserver(
+			@ServiceParam(name="userId",pubProperty="userId") String userId,
+			@ServiceParam(name="commodityId") String commodityId) throws BusException {
+    	if(StringUtils.isEmpty(userId)){
+    		throw new BusException("用户未登录，不能添加购物车！");
+    	}
+    	PurchasingmanagerCommodity purCommodity = purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
+    	String[] aa = {"memberId.memberId","commodityId.commodityId"};
+    	String[] bb = {userId,commodityId};
+    	List<ShoppingcarCompanyserver> shopCarLis = shoppingcarCompanyserverDao.getList(aa, bb);
+    	if(shopCarLis.size()>0){
+    		ShoppingcarCompanyserver shopCar = shopCarLis.get(0);
+    		String num = shopCar.getCompanyCateringNum();
+    		int i = Integer.parseInt(num)+1;	
+			shopCar.setCompanyCateringNum(String.valueOf(i));
+			BigDecimal shopCarAmount = shopCar.getCompanyCateringUnivalence().add((purCommodity.getCommodityPrice()));
+			shopCar.setCompanyCateringUnivalence(shopCarAmount);
+			shopCar.setUpdateUser(userId);
+			shopCar.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+			return shoppingcarCompanyserverDao.save(shopCar);
+    	}else{
+    		ShoppingcarCompanyserver shopCar = new ShoppingcarCompanyserver();
+    		shopCar.setCommodityId(purCommodity);
+    		MemberInformation memberId = memberInformationManager.getMemberInformation(userId);
+    		shopCar.setMemberId(memberId);
+    		shopCar.setCompanyCateringNum("1");
+    		shopCar.setCompanyCateringUnivalence(purCommodity.getCommodityPrice());
+    		shopCar.setCreateUser(userId);
+    		shopCar.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		shopCar.setUpdateUser(userId);
+			shopCar.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return shoppingcarCompanyserverDao.save(shopCar);
+    	}
 	}
 
 }

@@ -3,6 +3,8 @@
  */
 package com.member.shoppingCarManager.entity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.*;
 
 import org.hibernate.validator.*;
@@ -26,11 +28,10 @@ public class ShoppingcarCompanyserver implements Domain{
 
 	@Column(name = "COMPANY_CATERING_AMOUNT_")
 	@Length(max=16)
-	private String companyCateringNum;//餐饮数量
+	private String companyCateringNum;//数量
 
 	@Column(name = "COMPANY_CATERING_UNIVALENCE_")
-	@Length(max=16)
-	private String companyCateringUnivalence;//餐饮单价
+	private BigDecimal companyCateringUnivalence;//价格
 
 	@Column(name = "UPDATE_USER_")
 	@Length(max=36)
@@ -68,13 +69,14 @@ public class ShoppingcarCompanyserver implements Domain{
 		this.companyCateringNum = companyCateringNum;
 	}
 
-	public String getCompanyCateringUnivalence(){
-		return this.companyCateringUnivalence;
+	public BigDecimal getCompanyCateringUnivalence() {
+		return companyCateringUnivalence;
 	}
-	
-	public void setCompanyCateringUnivalence(String companyCateringUnivalence){
+
+	public void setCompanyCateringUnivalence(BigDecimal companyCateringUnivalence) {
 		this.companyCateringUnivalence = companyCateringUnivalence;
 	}
+
 	public String getUpdateUser(){
 		return this.updateUser;
 	}
