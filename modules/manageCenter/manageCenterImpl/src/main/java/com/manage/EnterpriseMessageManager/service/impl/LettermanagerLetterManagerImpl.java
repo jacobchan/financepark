@@ -1,35 +1,28 @@
-/**
- * 代码声明
- */
 package com.manage.EnterpriseMessageManager.service.impl;
-
 import java.util.List;
 import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
-//import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
+import com.manage.EnterBusinessManager.dao.EnterbusinessmanagerRzDao;
+import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.EnterpriseMessageManager.entity.LettermanagerLetter;
 import com.manage.EnterpriseMessageManager.dao.LettermanagerLetterDao;
 import com.manage.EnterpriseMessageManager.service.LettermanagerLetterManager;
-
 @Service("lettermanagerLetterManager")
 @Transactional
 public class LettermanagerLetterManagerImpl extends BaseManagerImpl implements LettermanagerLetterManager{
 	@Autowired
 	private LettermanagerLetterDao lettermanagerLetterDao;
+	@Autowired
+	private EnterbusinessmanagerRzDao enterbusinessmanagerRzDao;
 	
     /**
      * 查询列表
@@ -65,7 +58,7 @@ public class LettermanagerLetterManagerImpl extends BaseManagerImpl implements L
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId")})
     public LettermanagerLetter saveLettermanagerLetter(LettermanagerLetter o) throws BusException{
 //    	String lettermanagerLetterId = o.getLettermanagerLetterId();
 //    	boolean isUpdate = StringUtils.isNotEmpty(lettermanagerLetterId);
@@ -74,6 +67,9 @@ public class LettermanagerLetterManagerImpl extends BaseManagerImpl implements L
 //    	}else{//新增
 //    		
 //    	}
+    	EnterbusinessmanagerRz enter = enterbusinessmanagerRzDao.get(o.getLetterEnterpriseId());
+    	o.setLetterRecipientId(enter.getRzManager().getMemberId());
+    	o.setLetterTime(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
     	return lettermanagerLetterDao.save(o);
     }
 

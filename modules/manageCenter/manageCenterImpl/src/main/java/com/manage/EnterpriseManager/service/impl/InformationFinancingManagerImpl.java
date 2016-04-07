@@ -2,9 +2,11 @@ package com.manage.EnterpriseManager.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.gsoft.framework.codemap.dao.CodemapDao;
 import com.gsoft.framework.codemap.entity.Codeitem;
 import com.gsoft.framework.core.dao.QuerySql;
@@ -16,6 +18,7 @@ import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.utils.HttpSenderMsg;
 import com.manage.EnterpriseManager.entity.InformationFinancing;
 import com.manage.EnterpriseManager.dao.InformationFinancingDao;
 import com.manage.EnterpriseManager.service.InformationFinancingManager;
@@ -153,5 +156,19 @@ public class InformationFinancingManagerImpl extends BaseManagerImpl implements 
 		QuerySql sql = new QuerySql("select * from youi_codeitem where CODEMAP_ID = (select CODEMAP_ID from youi_codemap WHERE CODE=?)", values);
 		List<Codeitem> item = codemapDao.getListByQuerySql(sql, Codeitem.class);
 		return item;
+	}
+	
+	/**
+	 * 发送企业码
+	 * @param mobile 手机号码
+	 * @param code 企业码
+	 * @return 发送状态
+	 * @throws BusException
+	 * @author ZhuYL
+	 * @time 2016-04-06
+	 */
+	@EsbServiceMapping
+	public String sendEnterpriseCode(@ServiceParam(name = "mobile") String mobile, @ServiceParam(name = "code") String code) throws BusException, Exception{
+		return HttpSenderMsg.sendMsg(mobile, "您的企业邀请码为："+code+"欢迎加入！");
 	}
 }
