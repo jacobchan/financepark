@@ -90,6 +90,11 @@ function click(){
             var comPrice = $(this).parents("tr").attr("data-commodityPrice");
 			var amount = parseFloat((n-1) * comPrice);
 			$(this).parents("tr").find('#comAmount').html(amount);
+			var amount = 0;
+            $('input[name="single-check"]').each(function(){
+	           	 amount = accAdd(amount,$(this).parents("tr").find('#comAmount').html());
+	        });
+            $('.ccheng').html('¥'+amount);
         }else{
             alert("已经是0了");
         }
@@ -104,6 +109,11 @@ function click(){
             var comPrice = $(this).parents("tr").attr("data-commodityPrice");
 			var amount = parseFloat((n+1) * comPrice);
 			$(this).parents("tr").find('#comAmount').html(amount);
+			var amount = 0;
+            $('input[name="single-check"]').each(function(){
+	           	 amount = accAdd(amount,$(this).parents("tr").find('#comAmount').html());
+	        });
+            $('.ccheng').html('¥'+amount);
         }else if(n==100){
             alert("最大值了");
         }
@@ -171,7 +181,7 @@ $(function(){
 								' <th style="text-align:left">商品</th><th>单价</th><th>数量</th><th>小计（元）</th><th>操作</th></tr><tr>');
 					}
 					var image = cenUrl+"common/uploadImage.html?repository=/swfupload&path="+results.records[i].commodityId.commodityImage+"&method=show";
-					htmls.push('<tr data-id="'+results.records[i].companyServerId+'" data-commodityPrice="'+results.records[i].commodityId.commodityPrice+
+					htmls.push('<tr name="shop_car" data-id="'+results.records[i].companyServerId+'" data-commodityPrice="'+results.records[i].commodityId.commodityPrice+
 							'"><td align="right"><input type="checkbox"  name="single-check"></td>'+
 							' <td style="padding-left:0px;"><img src="'+image+'" width="84" height="84"></td>'+
 							'<td align="left"><div class="w70 fl pr20">'+results.records[i].commodityId.commodityTitle+'</div></td><td>'+
@@ -187,19 +197,18 @@ $(function(){
 	}); 
 	//提交订单
 	$('#settlement').click(function(){
-		var length = $('#shoppingcart').children("tr").length;
+		var i=0;
 		var params = '';
-		for(var i = 2;i<length;i++){
-			var object = $('#shoppingcart').children("tr").get(i);
-			var id = object[attribute = 'attributes'][attribute = 'data-id'][attribute = 'value'];
-			if(i+1<length){
-				params = params+$.youi.parameterUtils.propertyParameter("records["+(i-2)+"].companyServerId",id)+"&";
-			}else{
-				params = params+$.youi.parameterUtils.propertyParameter("records["+(i-2)+"].companyServerId",id);
+		$('tr[name="shop_car"]').each(function(){
+			var id = $(this).attr("data-id");
+			if(i > 0){
+				params = params+"&";
 			}
-		}
-		var serviceURL = baseUrl+"shoppingcarCompanyserverManager/saveWKserviceOrder.json";
+			params = params+$.youi.parameterUtils.propertyParameter("records["+i+"].companyServerId",id);
+			i++;
+        });
 		
+		var serviceURL = baseUrl+"shoppingcarCompanyserverManager/saveWKserviceOrder.json";
 		$.youi.ajaxUtils.ajax({
 			url:serviceURL,
 			data:params,
@@ -208,6 +217,7 @@ $(function(){
 			success:function(results){
 				if(results&&results.record){
 					alert('订单提交成功！');
+					window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
 				}
 			}
 		});
