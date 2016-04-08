@@ -75,6 +75,18 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
     	@OrderCollection Collection<Order> orders) throws BusException{
     	return propertyservicemanagerEntrecDao.commonQuery(conditions, orders);
     }
+    
+    /**
+     *个人中心查询我的入驻申请预约
+     */
+    @EsbServiceMapping
+	public PagerRecords getPropertyservicemanagerEntrecsForReserve(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PropertyservicemanagerEntrec.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders,@ServiceParam(name="userId",pubProperty = "userId") String userId)  throws BusException{
+    	conditions.add(ConditionUtils.getCondition("createUser", Condition.EQUALS, userId));
+		PagerRecords pagerRecords = propertyservicemanagerEntrecDao.findByPager(pager, conditions, orders);		
+		return pagerRecords;
+	}
     /**
      * 根据主键查询
      */

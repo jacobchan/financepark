@@ -12,7 +12,10 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntering;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
 import com.manage.ReserveManager.entity.ReservationRecord;
@@ -32,6 +35,14 @@ public interface PropertyservicemanagerEntrecManager extends BaseManager{
      * 根据主键查询
      */
     public PropertyservicemanagerEntrec getPropertyservicemanagerEntrec(String id) throws BusException;
+    
+	/**
+	 * 个人中心分页查询我的入驻申请预约
+	 * @return
+	 */
+    public PagerRecords getPropertyservicemanagerEntrecsForReserve(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+		    Collection<Order> orders,String userId)  throws BusException;
 	/**
 	 * 分页查询用户
 	 * @return 分页对象
