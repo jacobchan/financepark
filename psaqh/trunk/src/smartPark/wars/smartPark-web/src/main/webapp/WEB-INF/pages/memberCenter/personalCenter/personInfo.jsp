@@ -17,11 +17,16 @@
 						<tr>
 							<td>头像</td>
 							<td>				   
-							    <div class="photo-edit" id="destination">
+							    <%-- <div class="photo-edit" id="destination">
 							    	<input type="file" id="imgUpload" name="imgUpload" draggable="true" accept=".png,.jpg"/>
 								</div>
 								<div class="photoedit" style="left:22px">
 									<img id="headImg" src="<%=request.getContextPath()%>/styles/images/grzx/user-photo.png"  width="107" height="107"/>
+								</div> --%>
+								<style>
+							    .photo-edit img{width:100%;height:100%;}
+							    </style>				   
+							     <div class="photo-edit" id="destination" style="background:url(<%=request.getContextPath()%>/styles/images/grzx/user-photo.png);padding:0px;"><input type="file" id="imgUpload" name="imgUpload" draggable="true" accept=".png,.jpg"/>
 								</div>
 							</td>
 						</tr>
