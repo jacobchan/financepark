@@ -275,25 +275,19 @@
 				<div class="yqfw-com-list">
 					<dl class="clearfix dl-one">
 						<dt>行业</dt>
-						<dd>
-							<label><input type="checkbox"> 全部</label>
-						</dd>
+						<dd class="active dl-all">全部</dd>
 						<div id="enterpriseTypeDiv" class="w860">
 						</div>
 					</dl>
 					<dl class="clearfix">
 						<dt>上市类型</dt>
-						<dd>
-							<label><input type="checkbox"> 全部</label>
-						</dd>
+						<dd class="active dl-all">全部</dd>
 						<div id="belistedDiv" class="w860">
 						</div>
 					</dl>
 					<dl class="clearfix">
 						<dt>公司性质</dt>
-						<dd>
-							<label><input type="checkbox"> 全部</label>
-						</dd>
+						<dd class="active dl-all">全部</dd>
 						<div id="enterpriseNatureDiv" class="w860">
 						</div>
 					</dl>
@@ -314,35 +308,21 @@
 <script>
 	$(function(){
 		$(document).on("click",".w860 dd",function(){
-			$(this).toggleClass("active");
-			var m=$(this).parent().find("dd").size();
-			var n=0;
-			$(this).parent().find("dd").each(function(){
-		      if($(this).hasClass("active")){
-		      	n++;
-		      }else{
-		      	n=n;
-		      }
-		    });
-		    if(m == n){
-		    	$(this).parents("dl").find("dd input[type='checkbox']").prop("checked",true);
-		    }else{
-		    	$(this).parents("dl").find("dd input[type='checkbox']").prop("checked",false);
-		    }
+			$(this).parent(".w860").prev(".dl-all").removeClass("active");
+			$(this).addClass("active").siblings("dd").removeClass("active");
 		});
-		$(document).on("click",".yqfw-com-list dd input[type='checkbox']",function(){
-		   if($(this).prop("checked")){
-				$(this).parents("dl").find(".w860 dd").addClass("active");
-			}else{
-				$(this).parents("dl").find(".w860 dd").removeClass("active");
-			}
+		$(document).on("click",".yqfw-com-list .dl-all",function(){
+			$(this).addClass("active");
+			$(this).next(".w860").find("dd").removeClass("active");
 		});
 		$(document).on("click",".sub-bottom",function(){
 			if($(this).children("i").hasClass("fa-angle-down")){
+				$(this).addClass("active");
 				$(this).children("i").removeClass("fa-angle-down").addClass("fa-angle-up")
 				$(this).parents("dl").css("height","auto");
 				$(this).parent(".w860").addClass("w860-bg");
 			}else{
+				$(this).removeClass("active");
 				$(this).children("i").removeClass("fa-angle-up").addClass("fa-angle-down")
 				$(this).parents("dl").css("height","44px");
 				$(this).parent(".w860").removeClass("w860-bg");
