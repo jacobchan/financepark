@@ -72,9 +72,9 @@
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
 	<!--***弹窗 start****************************************-->
-	<div class="bg-tanc m1">
+	<div class="bg-tanc">
 		<div class="tanc-con" style="margin-top:-252px;top:50%;">
-			<a href="javascript:;" class="tc-close tc-close1"></a>
+			<a href="javascript:;" class="tc-close"></a>
 			<form>
 				<h3>填写在线预约单</h3>
 				<table class="line-table">
@@ -134,29 +134,24 @@
 				dataType:'jsonp',
 				success:function(result){
 					if(result&&result.record){
-						//console.log(result.record) ;
 						var policyApplyConpanyName = $("#policyApplyConpanyName").val();
 						var policyApplyContactPeople = $("#policyApplyContactPeople").val();
 						var policyApplyContactTel = $("#policyApplyContactTel").val() ;
 						if(policyApplyConpanyName == ""){
-							$(".f24.fl.c-333").text("请输入公司名称！");
-							$(".bg-tanc.m2").show();
-							return false;
+							close("请输入公司名称！");
+							return ;
 						}
 						if(policyApplyContactPeople == ""){
-							$(".f24.fl.c-333").text("请输入联系人！");
-							$(".bg-tanc.m2").show();
+							close("请输入联系人！");
 							return ;
 						}
 						if(policyApplyContactTel == ""){
-							$(".f24.fl.c-333").text("请输入联系手机！");
-							$(".bg-tanc.m2").show();
+							close("请输入联系手机！");
 							return ;
 						}
 						var isMobile=/^(?:13\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;//手机号的格式
 						if(! isMobile.test(policyApplyContactTel)){
-							$(".f24.fl.c-333").text("请输入正确的手机号！");
-							$(".bg-tanc.m2").show();
+							close("请输入正确的手机号！");
 							return ;
 						}  
 						
@@ -175,9 +170,8 @@
 								$("#policyApplyConpanyName").val("");//将输入框内容置为空
 								$("#policyApplyContactPeople").val("");
 								$("#policyApplyContactTel").val("");
-								$(".bg-tanc.m1").hide();//隐藏表单
-								$(".f24.fl.c-333").text("申请成功！");
-								$(".bg-tanc.m2").show();
+								$(".bg-tanc").hide();//隐藏表单
+								close("申请成功！");
 							}
 						});
 					}
@@ -208,7 +202,6 @@
 				dataType:'jsonp',
 				success:function(result){
 					if(result&&result.records){
-						//console.log(result.records) ;
 						_parseRecords(result.records);
 					}
 				}
@@ -248,7 +241,7 @@
 					var html="<div class='index-group' id="+record[i].policyId+">"+
 								 "<h5>"+record[i].policyCaption+"</h5>"+
 			               		 "<div class='ig-box'>"+record[i].policyContent+
-				                   	 "<a href='javascript:;' class='ib-btn'>在线申请</a>"+
+				                   	 "<a href='javascript:;' class='ib-btn ib-1' >在线申请</a>"+
  			           			 "</div>"+
 		       				 "</div>";
 		       		$(".w895 >h3").each(function(i){
@@ -268,13 +261,12 @@
 				$(this).addClass("active");
 				$(".ifn-group ul").eq($(this).index()).removeClass("undis").siblings().addClass("undis");
 			});
-			$(document).on("click",".ib-btn",function(){
+			$(document).on("click",".ib-1",function(){
 				
 				obj = $(this).parent().parent().attr("id") ;
-				$(".bg-tanc.m1").find("form").attr("class",obj);
+				$(".bg-tanc").find("form").attr("class",obj);
 				if(!isLogin){
-					$(".f24.fl.c-333").text("匿名用户不能申请！");
-					$(".bg-tanc.m2").show();
+					close("匿名用户不能申请！");
 					return ;
 				}else{
 					$.youi.ajaxUtils.ajax({
@@ -290,42 +282,43 @@
 								$("#policyApplyConpanyName").val(rzName);
 								$("#policyApplyContactPeople").val(name);
 								$("#policyApplyContactTel").val(mobile) ;
-								$(".bg-tanc.m1").show();
+								$(".bg-tanc").show();
 							}else{
-								$(".f24.fl.c-333").text("非企业会员不能申请哦！");
-								$(".bg-tanc.m2").show();
+								close("非企业会员不能申请哦！");
 								return ;
 							}
 						}
 					}) ;
 				} 
 			});
-			$(".tc-close1").click(function(){
-				$(".m1").hide();
-			});
-			$(".tc-close2").click(function(){
-				$(".m2").hide();
+			$(".tc-close").click(function(){
+				$(".bg-tanc").hide();
 			});
 		})
+		
+		var pltime,timer;
+        function closeTanc(){
+            if(pltime>1){
+                pltime--;
+            }else{
+                $(".toast").hide();
+            }       
+        }
+        function close(content){
+	        clearInterval(timer);
+	        $(".tc.mt25.f14").empty() ;
+	        $(".tc.mt25.f14").append(content) ;
+	        $(".toast").show();
+	        pltime=1;
+	        timer=setInterval("closeTanc()",1000);
+        }
 	</script>
 	<!--***弹窗 start****************************************-->
-		<div class="bg-tanc m2">
-			<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
-				<a href="javascript:;" class="tc-close tc-close2"></a>
-				<div class="w70 tc mt40" style="margin-left:15%">
-					<table>
-						<tr>
-							<td><img src="../styles/images/grzx/check.png" class="mr40 mb20" border="0"></td>
-							<td >
-								<h4 class="f24 fl c-333"></h4>
-								<!-- <h4 class="f24 fl c-333"> 还有<span class="tt">0</span>秒关闭弹出框</h4> -->
-								<p class="f14 c-o fl mt20 mb20">如有问题，请拨打：0571-86508888</p>
-							</td>
-						<tr/>
-					</table>
-				</div>
-			</div>
-		</div>
+	<!-- 弹出层样式 -->
+    <div class="toast clearfix">
+        <div class="close-toast fr"></div>
+        <p class="tc mt25 f14" style="color:#ff6715"></p>
+    </div>
 	<!--***弹窗 end****************************************-->
 	
 </html>
