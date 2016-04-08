@@ -125,6 +125,7 @@ public class EtypeEnterprisetypeManagerImpl extends BaseManagerImpl implements E
 		Collection<Condition> conditions = new ArrayList<Condition>();
 		Collection<Order> orders = new ArrayList<Order>();
 		conditions.add(ConditionUtils.getCondition("etypeEnterprisetype.enTypeId", Condition.EQUALS, pId));
+		orders.add(ConditionUtils.getOrder("enTypeId", true));
 		List<EtypeEnterprisetype> sc = etypeEnterprisetypeDao.commonQuery(conditions, orders);
 		if (sc.size() > 0) {
 			for (int i = 0; i < sc.size(); i++) {
