@@ -97,9 +97,9 @@
                                 <p>是园区业主（住户）在入住园区前必须办理的手续</p>
                             </div>
                         </td>
-                        <td onclick="openURL(5);">
+                        <td onclick="openURL(16);">
                             <div class="item rz_icon2">
-                                <!-- <a href="./yqfw/yq5.html" class="f20">装修申请</a> -->
+                                <!-- <a href="./yqfw/yq16.html" class="f20">装修申请</a> -->
                                 <a href="javascript:;" class="f20">装修申请</a>
                                 <p>园区业主对物业进行装饰、装修前，请预约"装修申请"业务</p>
                             </div>
@@ -113,14 +113,14 @@
                         </td>
                     </tr>
                     <tr>
-                        <td onclick="openURL(40);">
+                        <td onclick="openURL(15);">
                             <div class="item rz_icon4">
-                               <!--  <a href="./yqfw/yq2.html" class="f20">客户续约</a> -->
+                               <!--  <a href="./yqfw/yq15.html" class="f20">客户续约</a> -->
                                 <a href="javascript:;" class="f20">客户续约</a>
                                 <p>园区企业在合同期满前一个月可办理续租手续</p>
                             </div>
                         </td>
-                        <td onclick="openURL(50);">
+                        <td onclick="openURL(14);">
                             <div class="item rz_icon5">
                                 <!-- <a href="./yqfw/yq2.html" class="f20">客户退租</a> -->
                                 <a href="javascript:;" class="f20">客户退租</a>
@@ -773,14 +773,8 @@
 							}
 						}
 					});
-			   }else if(url=='4'||url=='9'||url=='5'||url=='1'||url=='2'){
+			   }else if(url=='4'||url=='9'||url=='15'||url=='16'||url=='1'||url=='14'){
 				   window.location="yqfw/yq"+url+".html";
-			   }else if(url=='40'){
-				   window.location="yqfw/yq2.html?enteringType=04";
-				   
-			   }else if(url=='50'){
-				   window.location="yqfw/yq2.html?enteringType=05";
-				   
 			   }else{
 				   $(".f24.c-333").text("敬请期待!");
 					$(".pop_layer").show();
@@ -852,8 +846,7 @@
 				});
 				
 				function _sparseRecords(record){
-					//var imageUrl="/filestore/";
-				 	for(var i=0;i<3;i++){
+				 	for(var i=0;i<record.length;i++){
 						   var imageUrl="styles/images/index/room.jpg";
 						    if(record[i].commodityImage !=null && record[i].commodityImage!=""){
 							   imageUrl=cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].commodityImage+"&method=show";
@@ -898,7 +891,7 @@
 				
 				function _parseRecordss(record){
 				
-					for(var i=0;i<3;i++){
+					for(var i=0;i<record.length;i++){
 						var imageUrl="styles/images/index/car.jpg";
 					    if(record[i].commodityImage !=null && record[i].commodityImage!=""){
 						   imageUrl=cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].commodityImage+"&method=show";
@@ -934,7 +927,7 @@
 				
 				function _parseRecord(record){
 				
-					for(var i=0;i<3;i++){
+					for(var i=0;i<record.length;i++){
 						var imageUrl="styles/images/index/ad1.jpg";
 					    if(record[i].commodityImage !=null && record[i].commodityImage!=""){
 						   imageUrl=cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].commodityImage+"&method=show";

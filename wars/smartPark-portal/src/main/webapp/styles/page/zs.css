@@ -407,7 +407,8 @@ a.send-psw:hover,a.send-psw.active{background: #e7e7e7;}
 .ht-bd-box .hbb-clearfix div:last-child p{position: absolute;z-index:3;}
 .ht-bd-box .hbb-clearfix div em{position: absolute;left: -16px;color: #FFF;background: #ff6715; width: 30px;height: 30px;text-align: center;line-height: 30px;display: block;font-size: 14px;border-radius: 30px;}
 .ht-bd-box label{cursor: pointer;}
-.ht-bf-tb{padding: 30px 0px;border-top:1px solid #ecebeb;border-bottom:1px solid #ecebeb;margin:90px 0px 20px;}
+/* .ht-bf-tb{padding: 30px 0px;border-top:1px solid #ecebeb;border-bottom:1px solid #ecebeb;margin:90px 0px 20px;} */
+.ht-bf-tb{margin:90px 0px 20px;}
 a.ib-btn.bg-h{background: #b5b5b5;}
 
 /**2**/
