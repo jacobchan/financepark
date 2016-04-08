@@ -192,6 +192,7 @@ public class ShoppingcarCompanyserverManagerImpl extends BaseManagerImpl impleme
 			orderDetail.setCommodityId(shopCar.getCommodityId());
 			orderDetail.setCommoditydetailNum(shopCar.getCompanyCateringNum());
 			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
+			shoppingcarCompanyserverDao.remove(shopCar.getCompanyServerId());
 		}
 		return order;
 	}
