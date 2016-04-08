@@ -82,10 +82,10 @@
 				var button = "";
 				if(record[i].userorderStatus=='01'){
 					//status = "待付款";	
-					button = "<a href='grzx2-2.html'>付款</a><span class='f12 ml5 mr5'>|</span><a href='#'   onclick='cancel(\""+record[i].userorderId+"\")'> 取消</a>";
+					button = "<a href=''>付款</a><span class='f12 ml5 mr5'>|</span><a href='#'   onclick='cancel(\""+record[i].userorderId+"\")'> 取消</a>";
 				}else if(record[i].userorderStatus=='02'){
 					//status = "已付款";
-					button = "已付款<span class='f12 ml5 mr5'>|</span><a href='grzx2-2.html'>评价</a>";
+					button = "已付款<span class='f12 ml5 mr5'>|</span><a href=''>评价</a>";
 				}else if(record[i].userorderStatus=='03'){
 					//status = "已完成";					
 				}else if(record[i].userorderStatus=='08'){
