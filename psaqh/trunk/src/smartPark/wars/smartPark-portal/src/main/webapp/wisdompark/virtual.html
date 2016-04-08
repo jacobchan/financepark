@@ -117,8 +117,8 @@ to {opacity:0;}
 		$(document).on("mouseout",".zzul .lin",function(){
 			$(".b1mask").addClass("hide");
 			$(".b2mask").addClass("hide");
-			$(".b1floor").eq(0).addClass("hide");
-			$(".b2floor").eq(0).addClass("hide");
+			$(".b1floor").eq(2).addClass("hide");
+			$(".b2floor").eq(2).addClass("hide");
 		});
 		$(document).on("mouseover",".maskset",function(){
 			$(".b1mask").addClass("hide");
@@ -129,11 +129,11 @@ to {opacity:0;}
 		});
 
 		$(document).on("mouseover",".zzul .lin:eq(0) li",function(){
-			var idx=$(this).index();
+			var idx=$(this).index()+2;
 			$(".b1floor").eq(idx).removeClass("hide").siblings().addClass("hide");
 		});
 		$(document).on("mouseover",".zzul .lin:eq(1) li",function(){
-			var idx=$(this).index();
+			var idx=$(this).index()+2;
 			$(".b2floor").eq(idx).removeClass("hide").siblings().addClass("hide");
 		});
 	
@@ -190,7 +190,12 @@ to {opacity:0;}
 			var html = "";
 			for(var i=0;i<record.length;i++){
 				var obj = record[i] ;
-				html += "<li id="+obj.floorId+"><a href='wp_login.html?floorId="+obj.floorId+"'>"+obj.floorNo+"</a></li>" ;
+				var num = obj.floorNo ;
+				if(num == "1F" || num == "2F"){
+					
+				}else{
+					html += "<li id="+obj.floorId+"><a href='wp_login.html?floorId="+obj.floorId+"'>"+obj.floorNo+"</a></li>" ;
+				}
 			}
 			return html ;
 		}
