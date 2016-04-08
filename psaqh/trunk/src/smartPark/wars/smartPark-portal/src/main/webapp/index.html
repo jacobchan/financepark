@@ -1068,7 +1068,7 @@
 
         //关闭toast
         $(".close-toast").click(function(){
-            $(this).parent(".toast").hide();
+            $(".toast").hide();
         })
 	})
 </script>
@@ -1253,9 +1253,12 @@
         */
 	</script>
     <!-- 弹出层样式 -->
-    <div class="toast clearfix">
-        <div class="close-toast fr"></div>
-        <p class="tc mt25 f14" style="color:#ff6715">请登录后重试！</p>
+    <div class="toast" style="display:block">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715">请登录后重试！</p>
+        </div>
+        
     </div>
 </body>
 </html>

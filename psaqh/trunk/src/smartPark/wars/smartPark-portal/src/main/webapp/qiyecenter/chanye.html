@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>企业中心-产业链对接</title>
+<link rel="stylesheet" type="text/css" href="../styles/lib/bootstrap.css">
+<link href="../styles/base.css" type="text/css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../styles/page/main.css">
+<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+<script type="text/javascript" src="../scripts/page/qycenter.js"></script>
+<script type="text/javascript" src="../scripts/page/right.js"></script>
+</head>
+
+
+
+<script>
+$(document).ready( function() {
+	var $submenu = $('.sidebar-menu-mainul2');
+	var $mainmenu = $('.sidebar-menu-mainul');
+	var $actmenu = $('.activmenu');
+	$submenu.hide();
+	$actmenu.show();
+	$mainmenu.on('click', 'li', function() {
+		$(this).siblings().find('.sidebar-menu-mainul2').slideUp();
+		$(this).find('.sidebar-menu-mainul2').slideToggle();
+	});
+	
+<!--点击按钮显示全部文字 回复按钮显示回复区域js-->	
+	$(document).ready(function(){
+		$(".show_more").click(function(){
+			$(this).parent().find("a").toggleClass("show_iconup");	
+			$(this).parent().find("p").toggleClass("show");
+		});
+	
+		$(".reply_anniu").click(function(){
+			$(this).parents(".chanye_row").find(".reply_content").show();
+			$(this).parents(".chanye_row").find(".chanye_btn").hide();
+	  	});
+		
+		$(".reply_btn").click(function(){
+			$(this).parents(".chanye_row").find(".reply_content").hide();
+			$(this).parents(".chanye_row").find(".chanye_btn").show();
+	  	});
+		
+  		$(".chanye_row").last().css("border-bottom", "none"); 
+
+	});
+	
+});
+</script>
+
+</head>
+
+<body class="page-header-fixed" style=" background-image:none">
+<!--***top start****************************************-->
+    <div id="youi_page_header" class="youi-page-header clearfix"></div>
+<!--***top end****************************************-->
+    
+<div class="main">    
+    <div id="youi_page_left" class="fl clearfix"></div>
+	<div class="main-wrapper">
+    	<div class="main-wrapper-right mb30" id="main-wrapper-right">
+        	<div class="main-title"><span>产业链对接</span></div>
+            <div class="all_pinglun">
+                <div class="qiye_pinglun">
+                        <!--评论-->
+                        <div class="chanye_main">
+                        
+                        
+                         <!--回复样式--> 
+                        	<div class="chanye_row">
+                            	<div class="fl"><img src="images/sl-i2.png"></div>
+                                <div class="chanye_words">
+                                	<span class="speaker">斯大林：</span>
+                                    <div class="chanye_con">
+                                        <p class="chanye_tex fl show">我发现你们家的产品非常符合我们采购的需求，我们在生产的某一环节需要用到，希望和你尽快取得联，我们在生产的某一环节需要用到，希望和你尽快取得联，我们在生产的某我们在生产的某一环节需要用到，希望和你尽快取得联，我们在生产的某一环节需要用到，希望和你尽快取得联，我们在生产的某一环节需要用到，希望和你尽快取得联，我们在
+    生产的某一环节需要用到，希望和你尽快取得联</p>   
+                                        <a class="show_more" href="javascript:;"></a>
+                                    </div>
+                                    
+                                    <div class="reply_content">
+                                        <div class="reply_kuang1">
+                                            <span class="color_orange fl">回复@斯大林：</span>
+                                            <textarea placeholder="一起做大做强！...发送一起做大做强！..." class="fl"></textarea>
+                                    	</div>
+                                        <div class="tr mt10">
+                                            <a class="reply_btn a-c-o mr10" href="javascript:;">发送</a>
+                                            <a class="reply_btn" href="javascript:;">取消</a>
+                                        </div>
+                                    
+                                    </div>
+                                    <span class="speaktime">2016年1月18日10:02:2</span>
+                                </div>
+                                <div class="chanye_btn">
+                                	<a class="a-c-o fr reply_anniu mb10" href="javascript:;">回复</a>
+                                    <a class="delete_anniu fr" href="javascript:;">删除</a>
+                                </div>
+                            </div>
+
+                        
+                        	
+                     
+                         
+              
+                         
+                    
+                        <!--回复样式--> 
+                        	<div class="chanye_row">
+                            	<div class="fl"><img src="images/sl-i2.png"></div>
+                                <div class="chanye_words">
+                                	<span class="speaker">斯大林：</span>
+                                    <div class="chanye_con">
+                                        <p class="chanye_tex fl show">我发现你们家的产品非常符合我们采购的需求，我们在生产的某一环节需要用到，希望和你尽快取得联，我们在生产的某一环节需要用到，希望和你尽快取得联，我们在生产的某我们在生产的某一环节需要用到，希望和你尽快取得联，我们在生产的某一环节需要用到，希望和你尽快取得联，我们在生产的某一环节需要用到，希望和你尽快取得联，我们在
+    生产的某一环节需要用到，希望和你尽快取得联</p>   
+                                        <a class="show_more" href="javascript:;"></a>
+                                    </div>
+                                    
+                                    <div class="reply_content">
+                                        <div class="reply_kuang1">
+                                            <span class="color_orange fl">回复@斯大林：</span>
+                                            <textarea placeholder="一起做大做强！...发送一起做大做强！..." class="fl"></textarea>
+                                    	</div>
+                                        <div class="tr mt10">
+                                            <a class="reply_btn a-c-o mr10" href="javascript:;">发送</a>
+                                            <a class="reply_btn" href="javascript:;">取消</a>
+                                        </div>
+                                    
+                                    </div>
+                                    <span class="speaktime">2016年1月18日10:02:2</span>
+                                </div>
+                                <div class="chanye_btn">
+                                	<a class="a-c-o fr reply_anniu mb10" href="javascript:;">回复</a>
+                                    <a class="delete_anniu fr" href="javascript:;">删除</a>
+                                </div>
+                            </div>
+
+                        
+                        	<div class="fr page-list-a clearfix lh30 mt20 f12 pr25">
+                                <span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
+                                <a href="">首</a>
+                                <a href=""><i class="fa fa-angle-left"></i></a>
+                                <a>1</a>
+                                <a href=""><i class="fa fa-angle-right"></i></a>
+                                <a href="">末</a>
+                                <input class="bd-input fl ml10 mr10" style="width:40px;" type="text">
+                                <a href="">Go</a>
+							</div>
+                        </div>
+                          
+                         
+                        
+                </div>
+            </div>
+            
+          
+            
+            
+            
+          
+          
+
+        </div><!-- main-wrapper-right -->
+                   
+    </div><!-- Main Wrapper -->
+
+</div><!-- Main -->
+
+<script>
+/*获取浏览器的高度*/
+window.onload=function(){
+  var height = Math.max(document.documentElement.clientHeight, document.body.offsetHeight);
+  document.getElementById('main-wrapper-right').style.minHeight=height*6/7+'px';
+}
+</script>
+</body>
+</html>
