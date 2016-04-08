@@ -295,6 +295,7 @@ var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommod
                 				jsonp:'data:jsonp',
                 				dataType:'jsonp',
                 				success:function(results){
+                					if(results.totalCount >0){
                 					pageCount=Math.ceil(results.totalCount/pageSize);
                 					 refreshData(1,pageSize,carType,zwType);
                 						$(".tcdPageCode").createPage({
@@ -305,6 +306,7 @@ var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommod
                 						        refreshData(p,pageSize,carType,zwType);
                 						    }
                 						});
+                				}
                 				}
                 			});
                 			
