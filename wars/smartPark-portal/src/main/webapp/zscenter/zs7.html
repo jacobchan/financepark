@@ -159,6 +159,7 @@
 		}
 		/* 拼接HTML */
 		function getHtml(record){
+			$('title')[0].innerHTML=record.policyCaption ;//给标题赋值
 			var html = "<h2 style='font-size:26px;' class='lh35 mb20'>"+record.policyCaption+"</h2>"+
 					   "<h5 class='f12 mb20'>"+record.policyIssueDate+"<span class='c-b1 ml10 mr10'>|</span> 来源："+record.policyCome+" <span class='c-b1 ml10 mr10'>|</span><img src='../styles/images/zs/page.png' border='0' class='mr5'/>"+record.browseCount+"</h5>"+
 					   "<div class='article-con-p'>"+
