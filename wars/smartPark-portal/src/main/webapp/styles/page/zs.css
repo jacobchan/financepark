@@ -114,6 +114,7 @@ input.ib-btn{border:1px solid #fa742c;line-height: 0px;}
 
 /**在线申请弹窗**/
 .bg-tanc{position: fixed;left: 0px;top:0px;width:100%;display: none;overflow-x: hidden;overflow-y: auto;bottom: 0px;right: 0px;z-index: 99;height: 100%;background: url(../images/zs/bg-o.png);background-repeat: repeat;}
+.bg-tanc table{line-height: 30px;}
 .bg-tanc .tanc-con{width:810px;display: block;background: #fff;margin:30px auto; position: relative;color: #888;box-shadow: 0px 0px 5px 3px rgba(83,83,83,0.8);padding: 40px 60px;-webkit-box-shadow: 0px 0px 5px 3px rgba(83,83,83,0.8);-moz-box-shadow: 0px 0px 5px 3px rgba(83,83,83,0.8);}
 .tc-close{background: url(../images/zs/close.png) no-repeat; width: 16px ;height: 16px;display: block;position: absolute;right: 30px;top:40px;background-size: 100%}
 .tc-close:hover{background: url(../images/zs/close-o.png) no-repeat;background-size: 100%}
@@ -127,7 +128,6 @@ table.line-table .set-line span.set-span { float:right; display: inline-block;}
 table.line-table .set-file {  position:absolute; left:0px; width:102px; top:0; height:30px; filter:alpha(opacity=0); opacity:0; cursor: pointer; } 
 table.line-table .set-file1 {float:left; margin-right:20px; z-index:1; width:102px; height:30px; line-height:30px; border:1px solid #fa742c; text-align: center; cursor: pointer;color: #fa742c;text-align: center;} 
 .bg-tanc .tanc-con table.line-table td  input[type="text"].set-inputstyle{border:1px solid #ddd; width:458px; float:left; height:30px; line-height:30px; background:#FFF; z-index:99 } 
-
 
 /**临时预约弹窗**/
 .bg-tanc .tanc-con.tanc-con-two{width: 1200px; }
@@ -532,7 +532,7 @@ to {margin-left: 0px;}
 .yqfw-com-list dd label{cursor: pointer;}
 .yqfw-com-list dd label input{margin-top: 2px;float: left;margin-top: 5px;margin-right: 5px;}
 .yqfw-com-list .sub-bottom{position: absolute;top: 7px;height: 30px;background: #dedede;cursor: pointer;color: #a6a6a6;right:0px;width: 50px;font-size: 20px;text-align: center;}
-.yqfw-com-list .sub-bottom:hover{background: #ff6715;color: #fff;}
+.yqfw-com-list .sub-bottom:hover,.yqfw-com-list .sub-bottom.active{background: #ff6715;color: #fff;}
 
 .yqfu-com-centent{width: 285px;margin-right: 20px;float: left;background: #fff;margin-bottom: 20px;}
 .yqfu-com-centent:nth-child(4n){margin: 0px;}
@@ -1020,3 +1020,10 @@ a.c-6:hover{color: #FF6715;}
 @keyframes fadeIn {
 100% {opacity: 1;}
 }
+
+/**错误提示**/
+p.error{color: #f92e3f;line-height: 20px;font-size: 12px;margin-top: 5px;}
+input[type="text"].error{border:1px solid #f82e3e !important;}
+.tct-select.error{border:1px solid #f82e3e !important;}
+textarea.error{border:1px solid #f82e3e !important;}
+input[type="password"].error{border:1px solid #f82e3e !important;}
