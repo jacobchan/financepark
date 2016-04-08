@@ -269,7 +269,7 @@
 						}
 						$(this).attr("id",room.roomId) ;
 					}else{
-						$(this).addClass("bgred") ;
+						$(this).addClass("bg-3c") ;
 						$(this).attr("id","") ;
 					} 
 			});
@@ -331,6 +331,7 @@
 						$("#module").text("") ;
 						$("#furnish").text("") ;
 						$("#price").text("") ;
+						close("暂时还没有该单元的信息哦！") ;
 					}
 				});
 			});
@@ -347,6 +348,29 @@
 				}
 			}
 		}
+		
+		var pltime,timer;
+        function closeTanc(){
+            if(pltime>1){
+                pltime--;
+            }else{
+                $(".toast").hide();
+            }       
+        }
+        function close(content){
+	        clearInterval(timer);
+	        $(".tc.mt25.f14").empty() ;
+	        $(".tc.mt25.f14").append(content) ;
+	        $(".toast").show();
+	        pltime=1;
+	        timer=setInterval("closeTanc()",1000);
+        }
 	</script>
+	    <!-- 弹出层样式 -->
+        <div class="toast clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f14" style="color:#ff6715"></p>
+        </div>
+	
 </body>
 </html>
