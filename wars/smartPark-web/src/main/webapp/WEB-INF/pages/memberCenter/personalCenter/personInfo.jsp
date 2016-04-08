@@ -72,18 +72,18 @@
 			<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
 				<a href="javascript:;" class="tc-close"></a>
 				<h3 class="mb10 f16 c-333" style="font-size:16px;"><b>加入园区</b></h3>
-				<table class="line-table cic-l-t wybx-tanc" style="font-size:14px;">
+				<table class="line-table cic-l-t " style="font-size:14px;">
 					<colgroup>
 						<col width="110">
 						<col>
 					</colgroup>
 					<tbody>
-					<tr class="show2">
-						<td><b>企业邀请码</b></td>
-						<td><input style="width:400px" type="text" id="companyInvitecode"></td>
-					</tr>
-					<tr>
-						<td></td>
+					<tr class="show2" >
+						<td ><b>企业邀请码</b></td>
+						<td><input style="width:150px" type="text" id="companyInvitecode"></td>
+						<td><span class="c-o aa"></span></td>
+					</tr>					
+					<tr>						
 						<td colspan="2"><a class="ib-btn" style="width:120px;text-align:center;margin-top:10px;">加入企业</a></td>
 					</tr>
 				</tbody></table>
@@ -101,8 +101,8 @@
 							<td></td>
 							<td >
 								
-								<h3 class="f14 c-o fl mt20 mb20"> 还有<span class="tt">0</span>秒关闭弹出框</h3>
-								
+								<h3 class="f14 c-o fl mt20 mb20"> </h3>
+								<!-- <h3 class="f14 c-o fl mt20 mb20"> 还有<span class="tt">0</span>秒关闭弹出框</h3> -->
 							</td>
 						<tr/>
 					</table>
@@ -211,9 +211,20 @@
 		});	
 		//加入企业
 		$('.ib-btn').click(function(){
+			
 			this.disabled=true;
 			var memberId=$("#memberId").html();
 			var companyInvitecode=$("#companyInvitecode").val();
+			if(companyInvitecode){
+				
+					
+			}else{
+				
+				$(".c-o.aa").text("企业码为空");
+				 
+				return false;
+			}
+			
 			var params = ['memberId='+memberId+'','code='+companyInvitecode+''];
 			$.youi.ajaxUtils.ajax({
 				url:baseUrl+'enterpriseEmployeesManager/acceptEnterpriseInvitation.json',
@@ -221,8 +232,8 @@
 				success:function(result){
 					if(result&&result.record){
 						//alert(result.record.html);
-						$(".f14.c-o.fl.mt20.mb20").text(result.record.html);
-						$(".bgtanc").show(); 	
+						$(".c-o.aa").text(result.record.html);
+						$(".c-o.aa").show(); 	
 						//location.reload();
 					}
 				}
@@ -298,9 +309,9 @@
 			});
 			$("#birthday_container").birthday();
 			
-			$(".tcclose").click(function(){
+			/* $(".tcclose").click(function(){
 				$(".bgtanc").hide();
-			});
+			}); */
 		})
 	</script>	
 </youi:html>
