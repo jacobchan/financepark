@@ -382,20 +382,21 @@
     </div>
 </div>
 <!--***弹窗 start****************************************-->
-<div class="bg-tanc m2">
+<div class="bg-tanc m1">
 	<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
 		<a href="javascript:;" class="tc-close"></a>
-		<div class="w70 tc mt40" style="margin-left:15%">
-			<table>
-				<tr>
-					<td><img src="../styles/images/grzx/check.png" class="mr40 mb20" border="0"></td>
-					<td >
-						<h4 class="f24 fl c-333">请登录!</h4>
-						<!-- <h4 class="f24 fl c-333"> 还有<span class="tt">0</span>秒关闭弹出框</h4> -->
-						<p class="f14 c-o fl mt20 mb20">如有问题，请拨打：0571-86508888</p>
-					</td>
-				<tr/>
-			</table>
+		<div class="tc mt40">
+			<div class="mt20 mb20 f16 lh26">
+				<img src="../styles/images/yqfw/correct.png" border="0" class="mr20"/>
+			</div>
+			<p class="mb10 f16">您已经成功提交订单，请到会员中心查看。</p>
+			<p><span class="c-o f24 tc-time" id="ti-m1">3 </span>秒后，系统将自动跳转</p>
+			<p class="mt10"><a style="cursor:pointer;" onclick="jump();" class="c-6">手动跳转 ></a></p>
+			<div class="clearfix mt30">
+				<a style="cursor:pointer;" onclick="jumpIndex();"  class="c-6"><i class="fa fa-home mr10" style="font-size:24px;"></i>返回首页</a>
+				<span class="f14 ml20 mr20 c-6">|</span>
+				<a style="cursor:pointer;" onclick="jumpPerson();"  class="c-6"><i class="fa fa-user mr10" style="font-size:20px;"></i>个人中心</a>
+			</div>
 		</div>
 	</div>
 </div>
