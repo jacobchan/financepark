@@ -114,13 +114,9 @@
 		                <div class="upload_out"><a href="javascript:void(0);">导出到Excel</a></div>
 		            </div>
 		            <div class="phone_no">
-		            	<ul id="bookDiv">
-		                    
-		                </ul>
-		                <div class="tcdPageCode fr">
-		                    
-						</div>
+		            	<ul id="bookDiv"></ul>
 		            </div>
+		            <div class="tcdPageCode fr"></div>
 		        </div>   
 		    </div>
 		</div>
