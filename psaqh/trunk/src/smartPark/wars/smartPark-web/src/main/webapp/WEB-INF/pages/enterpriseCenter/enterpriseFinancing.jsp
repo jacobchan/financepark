@@ -44,58 +44,69 @@
 				$("#financingDescribe").val(obj7);
 				$("#currentCount").html(getStrLength(obj7));
 			}
+			function caption(cssStyle,financingMsg,financingId,
+					financingRe,financingName,financingAmount,
+					financingCost,financingPre,financingTime,financingDescribe,financingSub){
+				$.youi.ajaxUtils.ajax({
+					url:baseUrl+'/codeitemManager/getCodeitem.json?itemId='+financingSub,
+					success:function(result){
+						if(result&&result.record){
+							var itemCaption = result.record.itemCaption;
+							var financingDiv = '<div class="'+cssStyle+'">'+
+								'<div class="yt-pa"><span>'+financingMsg+'</span></div>'+
+								'<em class="em-pa_active"></em>'+
+								'<div class="clearfix active">'+
+									'<span>'+itemCaption+'</span><span>融资金额：<em class="c-o">'+financingAmount+'万元</em></span><span>融资估值：<em class="c-o">'+financingCost+'万元</em></span><span>可持股份：<em class="c-o">'+financingPre+'%</em></span>'+
+								'</div>'+
+								'<p>'+financingDescribe+'</p>'+
+                                '<p class="mt10"><a href="javascript:updateFinancing(\''+financingId+'\',\''+financingRe+'\',\''+financingName+'\',\''+financingAmount+'\',\''+financingCost+'\',\''+financingPre+'\',\''+financingTime+'\',\''+financingDescribe+'\');">编辑</a>&nbsp;丨&nbsp;<a href="javascript:removeFinancing(\''+financingId+'\');">删除</a></p>'+
+							'</div>';
+							$("#informationFinancing").append(financingDiv);
+						}
+					}
+				});
+			}
 			$(document).ready(function() {
 				$("#financingDescribe").on('keyup', function() {
 				    var len = getStrLength(this.value);
 				    $("#currentCount").html(len);
 				});
-				$.ajax({
+				$.youi.ajaxUtils.ajax({
 					url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
 					success:function(result){
 						if(result&&result.record){
 							$("#financingRe").html(result.record.companyId);
 							//根据企业id获取融资信息
-					    	$.ajax({
+					    	$.youi.ajaxUtils.ajax({
 					    		url : baseUrl+"/informationFinancingManager/findInformationFinancing.json",
 					    		data : ['financingRe='+result.record.companyId].join('&'),
 					    		success : function(results) {
 					    			if (results && results.records) {
-					    				var records = results.records;
+					    				var record = results.records;
 					    				$("#informationFinancing").empty();
-					    				for(var i=0; i<records.length; i++){
+					    				for(var i=0; i<record.length; i++){
 					    					var financingMsg = "";
 					    					var cssStyle = "";
-					    					var itemCaption = "";
-					    					var financingAmount=records[i].financingAmount;
-					    					var financingCost=records[i].financingCost;
-					    					var financingPre=records[i].financingPre;
-					    					var financingDescribe=records[i].financingDescribe;
-					    					var financingSub=records[i].financingSub;
-					    					if(records[i].financingStatus=="1"){
-					    						financingMsg = records[i].financingTime.substring(0,4)+"年"+records[i].financingTime.substring(5,7)+"月";
+					    					var financingId=record[i].financingId;
+					    					var financingRe=record[i].financingRe;
+					    					var financingName=record[i].financingName;
+					    					var financingAmount=record[i].financingAmount;
+					    					var financingCost=record[i].financingCost;
+					    					var financingPre=record[i].financingPre;
+					    					var financingDescribe=record[i].financingDescribe;
+					    					var financingSub=record[i].financingSub;
+					    					var financingTime=record[i].financingTime;
+					    					var financingStatus=record[i].financingStatus;
+					    					if(financingStatus=="1"){
+					    						financingMsg = financingTime.substring(0,4)+"年"+financingTime.substring(5,7)+"月";
 					    						cssStyle = "yg-time history_time";
 					    					}else{
 					    						financingMsg = "进行中...";
 					    						cssStyle = "yg-time";
 					    					}
-					    					$.ajax({
-					    						url:baseUrl+'/codeitemManager/getCodeitem.json?itemId='+financingSub,
-					    						success:function(result){
-					    							if(result&&result.record){
-					    								itemCaption = result.record.itemCaption;
-					    							}
-					    						}
-					    					});
-					    					var financingDiv = '<div class="'+cssStyle+'">'+
-												'<div class="yt-pa"><span>'+financingMsg+'</span></div>'+
-												'<em class="em-pa_active"></em>'+
-												'<div class="clearfix active">'+
-													'<span>'+itemCaption+'</span><span>融资金额：<em class="c-o">'+financingAmount+'万元</em></span><span>融资估值：<em class="c-o">'+financingCost+'万元</em></span><span>可持股份：<em class="c-o">'+financingPre+'%</em></span>'+
-												'</div>'+
-												'<p>'+financingDescribe+'</p>'+
-				                                '<p class="mt10"><a href="javascript:updateFinancing(\''+records[i].financingId+'\',\''+records[i].financingRe+'\',\''+records[i].financingName+'\',\''+records[i].financingAmount+'\',\''+records[i].financingCost+'\',\''+records[i].financingPre+'\',\''+records[i].financingTime+'\',\''+records[i].financingDescribe+'\');">编辑</a>&nbsp;丨&nbsp;<a href="javascript:removeFinancing(\''+records[i].financingId+'\');">删除</a></p>'+
-											'</div>';
-											$("#informationFinancing").append(financingDiv);
+					    					caption(cssStyle,financingMsg,financingId,
+					    							financingRe,financingName,financingAmount,
+					    							financingCost,financingPre,financingTime,financingDescribe,financingSub);
 					    				}
 					    			}
 					    		}
