@@ -164,6 +164,10 @@ function click(){
     });
 }
 $(function(){
+	//关闭toast
+    $(".close-toast").click(function(){
+        $(".toast").hide();
+    });
   //购物车展示
 	var genreCode = "0507";
 	var serviceURL = baseUrl+"shoppingcarCompanyserverManager/getShopCarList.json";
@@ -197,6 +201,11 @@ $(function(){
 	}); 
 	//提交订单
 	$('#settlement').click(function(){
+		if(!isLogin){
+            $(".toast").show();
+            setTimeout('$(".toast").hide();',1000);//1秒=1000
+		 	return;
+		}
 		var i=0;
 		var params = '';
 		$('tr[name="shop_car"]').each(function(){

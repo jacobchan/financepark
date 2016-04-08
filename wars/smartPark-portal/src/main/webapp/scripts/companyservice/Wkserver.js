@@ -28,6 +28,10 @@ function addShopCar(id){
 };
 //页面加载方法
 $(function(){
+	//关闭toast
+    $(".close-toast").click(function(){
+        $(".toast").hide();
+    });
 	$(".tab_ul li").click(function(){
 		var index=$(this).index();
 		$(this).addClass("active").siblings("li").removeClass("active");
@@ -107,8 +111,9 @@ $(function(){
 	//评论提交方法
 	$('#evaluate').click(function(){
 		if(!isLogin){
-		   $(".bg-tanc.m2").show();
-		 	 return;
+            $(".toast").show();
+            setTimeout('$(".toast").hide();',1000);//1秒=1000
+		 	return;
 		}
 		var overallSatisfaction = 0;
 		var arr=$('.starbox1 i').toArray();
@@ -164,8 +169,9 @@ $(function(){
 	//咨询提交方法
 	$('#consult').click(function(){
 		if(!isLogin){
-		   $(".bg-tanc.m2").show();
-		 	 return;
+            $(".toast").show();
+            setTimeout('$(".toast").hide();',1000);//1秒=1000
+		 	return;
 		}
 		var content = $('#consultContent').val();
 		var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/savePurGenreConsult.json";

@@ -126,6 +126,10 @@ function star(ele){
 
 //页面加载方法
 $(function(){
+	//关闭toast
+    $(".close-toast").click(function(){
+        $(".toast").hide();
+    });
 	//商品展示
 	var serviceURL = baseUrl+"purchasingmanagerCommodityManager/getAgencyCommodityList.json";
 	$.youi.ajaxUtils.ajax({
@@ -228,8 +232,9 @@ $(function(){
 	//商品购买提交方法
 	$('#btn-sumbit').click(function(){
 		if(!isLogin){
-		   $(".bg-tanc.m2").show();
-		 	 return;
+            $(".toast").show();
+            setTimeout('$(".toast").hide();',1000);//1秒=1000
+		 	return;
 		}
 		var length = $('#shopCar').children("tr").length;
 		var params = '';
@@ -264,12 +269,9 @@ $(function(){
 	//评论提交方法
 	$('#evaluate').click(function(){
 		if(!isLogin){
-//		   $(".bg-tanc.m2").show();
-		   clearInterval(timer);
-           $(".toast").show();
-           pltime=1;
-           timer=setInterval("closeTanc()",1000);
-		   return;
+            $(".toast").show();
+            setTimeout('$(".toast").hide();',1000);//1秒=1000
+		 	return;
 		}
 		var overallSatisfaction = 0;
 		var arr=$('.starbox1 i').toArray();
@@ -325,8 +327,9 @@ $(function(){
 	//咨询提交方法
 	$('#consult').click(function(){
 		if(!isLogin){
-		   $(".bg-tanc.m2").show();
-		 	 return;
+            $(".toast").show();
+            setTimeout('$(".toast").hide();',1000);//1秒=1000
+		 	return;
 		}
 		var content = $('#consultContent').val();
 		var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/savePurGenreConsult.json";
