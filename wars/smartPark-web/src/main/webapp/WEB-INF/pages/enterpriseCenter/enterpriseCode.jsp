@@ -79,7 +79,7 @@
 						}
 					});
 				});
-			  	//$("#moreul").slideUp("slow");
+			  	$("#moreul").slideUp("slow");
 			  	$(".sidebar-menu-mainul > li:eq(2)").addClass("active");
 			});
 			function updateCode(rzId){
