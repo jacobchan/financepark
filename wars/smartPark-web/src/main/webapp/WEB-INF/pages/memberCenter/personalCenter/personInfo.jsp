@@ -17,16 +17,11 @@
 						<tr>
 							<td>头像</td>
 							<td>				   
-							    <%-- <div class="photo-edit" id="destination">
+							    <div class="photo-edit" id="destination">
 							    	<input type="file" id="imgUpload" name="imgUpload" draggable="true" accept=".png,.jpg"/>
 								</div>
 								<div class="photoedit" style="left:22px">
 									<img id="headImg" src="<%=request.getContextPath()%>/styles/images/grzx/user-photo.png"  width="107" height="107"/>
-								</div> --%>
-								<style>
-							    .photo-edit img{width:100%;height:100%;}
-							    </style>				   
-							     <div class="photo-edit" id="destination" style="background:url(<%=request.getContextPath()%>/styles/images/grzx/user-photo.png);padding:0px;"><input type="file" id="imgUpload" name="imgUpload" draggable="true" accept=".png,.jpg"/>
 								</div>
 							</td>
 						</tr>
@@ -164,36 +159,52 @@
 		$('.hhf-submit').click(function(){
 			this.disabled=true;
 			var flg = false;
-			var memberHeadPortrait = "";
-			//调用实例对象的start()方法开始上传文件，当然你也可以在其他地方调用该方法
-			uploader.start(); 
-			uploader.bind('FileUploaded',function(up, files,info) {
-				var response = $.parseJSON(info.response);
-               	if ("0"==response.status){
-               		memberHeadPortrait = response.fileUrl[0];
-               		var memberId=$("#memberId").html();
-    				var memberNickname=$("#memberNickname").val();
-    				var memberPhoneNumber=$(".c-b1").html();
-    				var memberName=$("#memberName").val();
-    				var year=$("#year").val();
-    				var month=$("#month").val();
-    				var day=$("#day").val();
-    				var memberBirthdate=year+"-"+month+"-"+day;
-    				var memberDescribe2=$("#memberDescribe2").val();
-    				var companyId=$("#companyId").val();
-    				var params = ['memberHeadPortrait='+memberHeadPortrait+'','memberId='+memberId+'','memberNickname='+memberNickname+'','memberPhoneNumber='+memberPhoneNumber+'','memberName='+memberName+'','memberBirthdate='+memberBirthdate+'','memberDescribe2='+memberDescribe2+'','companyId='+companyId+''];
-    				$.youi.ajaxUtils.ajax({
-    					url:baseUrl+'memberInformationManager/saveMemberInformation.json',
-    					data:params.join('&'),
-    					success:function(result){
-    						if(result&&result.record){
-    							alert("修改成功");
-    							location.reload();
-    						}
-    					}
-    				});
-               	}
-			});
+			var memberHeadPortrait = $("#headImg").attr("src");
+			var memberId=$("#memberId").html();
+			var memberNickname=$("#memberNickname").val();
+			var memberPhoneNumber=$(".c-b1").html();
+			var memberName=$("#memberName").val();
+			var year=$("#year").val();
+			var month=$("#month").val();
+			var day=$("#day").val();
+			var memberBirthdate=year+"-"+month+"-"+day;
+			var memberDescribe2=$("#memberDescribe2").val();
+			var companyId=$("#companyId").val();
+			//检查是否有选择头像图片
+			var fileCount = uploader.files.length;
+			if(fileCount>0){
+				//调用实例对象的start()方法开始上传文件，当然你也可以在其他地方调用该方法
+				uploader.start(); 
+				uploader.bind('FileUploaded',function(up, files,info) {
+					var response = $.parseJSON(info.response);
+	               	if ("0"==response.status){
+	               		memberHeadPortrait = response.fileUrl[0];
+	    				var params = ['memberHeadPortrait='+memberHeadPortrait+'','memberId='+memberId+'','memberNickname='+memberNickname+'','memberPhoneNumber='+memberPhoneNumber+'','memberName='+memberName+'','memberBirthdate='+memberBirthdate+'','memberDescribe2='+memberDescribe2+'','companyId='+companyId+''];
+	    				$.youi.ajaxUtils.ajax({
+	    					url:baseUrl+'memberInformationManager/saveMemberInformation.json',
+	    					data:params.join('&'),
+	    					success:function(result){
+	    						if(result&&result.record){
+	    							alert("修改成功");
+	    							location.reload();
+	    						}
+	    					}
+	    				});
+	               	}
+				});
+			}else{
+				var params = ['memberHeadPortrait='+memberHeadPortrait+'','memberId='+memberId+'','memberNickname='+memberNickname+'','memberPhoneNumber='+memberPhoneNumber+'','memberName='+memberName+'','memberBirthdate='+memberBirthdate+'','memberDescribe2='+memberDescribe2+'','companyId='+companyId+''];
+				$.youi.ajaxUtils.ajax({
+					url:baseUrl+'memberInformationManager/saveMemberInformation.json',
+					data:params.join('&'),
+					success:function(result){
+						if(result&&result.record){
+							alert("修改成功");
+							location.reload();
+						}
+					}
+				});
+			}
 		});	
 		//加入企业
 		$('.ib-btn').click(function(){
@@ -208,7 +219,7 @@
 					if(result&&result.record){
 						//alert(result.record.html);
 						/* $(".f24.fl.c-333").text("您不是企业用户,暂时无法申请!");
-						$(".bgtanc.m2").show(); */
+						$(".bgtanc.m2").show(); */	
 						location.reload();
 					}
 				}
@@ -222,11 +233,16 @@
 					browse_button : 'imgUpload',
 					flash_swf_url : '../../scripts/fileUpload/Moxie.swf',
 					silverlight_xap_url : '../../scripts/fileUpload/Moxie.xap',
-					url : 'http://localhost:8088/smartPark-web/fileUpload/goUpload.html',//上传文件路径
+					url : cenUrl+'fileUpload/goUpload.html',//上传文件路径
 					max_file_size : '400kb', //最大只能上传400kb的文件
 					prevent_duplicates : true, //不允许选取重复文件
 					//此处是控制上传组件是否允许多文件选择还是单文件选择：true/多文件；false/单文件
 					multi_selection: false,
+					//给后台传入参数
+					multipart_params: {
+						//上传标识 0：图片上传;1：文件上传
+						fileFlg:"0"
+					},
 					filters : [ {
 						title : 'Image files',
 						extensions : 'jpg,gif,png'
