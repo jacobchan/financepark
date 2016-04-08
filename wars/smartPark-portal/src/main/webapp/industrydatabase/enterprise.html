@@ -86,6 +86,9 @@
 						'</div></div></div>'
 						$("#enterprise").append(enterDiv);
 					}
+				}else{
+					//无记录隐藏分页条
+					$(".tcdPageCode").hide();
 				}
 			}
 			function findEnterpriseTree(pId){
@@ -302,8 +305,7 @@
 	                </div>
 	                <!-- 没有数据时显示图片 end-->
 				</div>
-				<div class="tcdPageCode">
-				</div>
+				<div class="tcdPageCode"></div>
 			</div>
 		</div>
 		<div id="youi_page_footer" class="youi-page-footer"></div>
