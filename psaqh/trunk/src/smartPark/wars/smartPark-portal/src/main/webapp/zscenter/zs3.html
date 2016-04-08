@@ -86,7 +86,7 @@
 						<td valign="top">公司名称</td>
 						<td>
 							<input type="text" id="policyApplyConpanyName">
-							<p>请填写公司名称</p>
+							<!-- <p>请填写公司名称</p> -->
 						</td>
 						<td rowspan="6" style="color:#fb4a4a">
 							备注：如果贵司为已驻企业，请在线提报，如果贵司还未进入园区，请在线预约后再进行申请，谢谢！
@@ -183,19 +183,6 @@
 		});
 	</script>
 	<script type="text/javascript">
-		/* $(function(){
-			$.youi.ajaxUtils.ajax({
-				url:baseUrl +"nmIssuenewsManager/getAllPolicy.json",
-				jsonp:'data:jsonp',
-				dataType:'jsonp',
-				success:function(result){
-					if(result&&result.records){
-						_parseRecords(result.records);
-						//console.log(result.records) ;
-					}
-				}
-			});
-		}); */
 		$(function(){
 			var params=["issueTypeCode=02"];//02表示优惠政策
 			$.youi.ajaxUtils.ajax({
@@ -234,6 +221,14 @@
 						}
 					});
 				}
+				$(".w895 >h3").each(function(i){
+					
+					var id = $(this).attr("id") ;
+					if(i==1){
+						var htm = '<div class="index-group mb30 mt40"><img src="../styles/images/zs/con2.jpg" /></div>';
+						$("#"+id).before(htm) ;
+					}
+				});
 			}
 		};
 	 	function getH(record){
@@ -251,14 +246,18 @@
 						var id = $(this).attr("id") ;
 						if(id == issueTypeCode){
 							$("#"+id).after(html) ;
-						}		
+						}
 					});
 				}
-			} 
+			}
 		} 
 	</script>
 	<script type="text/javascript">
 		$(function () {
+			//点击关闭弹窗
+			$(".close-toast").click(function(){
+		            $(".toast").hide();
+		    })
 			$(".index-fr-nav li").click(function(){
 				$(".index-fr-nav li").removeClass("active");
 				$(this).addClass("active");
@@ -299,7 +298,7 @@
 			});
 		})
 		
-		var pltime,timer;
+	 	var pltime,timer;
         function closeTanc(){
             if(pltime>1){
                 pltime--;
@@ -309,8 +308,8 @@
         }
         function close(content){
 	        clearInterval(timer);
-	        $(".tc.mt25.f14").empty() ;
-	        $(".tc.mt25.f14").append(content) ;
+	        $(".tc.mt25.f18").empty() ;
+	        $(".tc.mt25.f18").append(content) ;
 	        $(".toast").show();
 	        pltime=1;
 	        timer=setInterval("closeTanc()",1000);
@@ -318,9 +317,11 @@
 	</script>
 	<!--***弹窗 start****************************************-->
 	<!-- 弹出层样式 -->
-    <div class="toast clearfix">
-        <div class="close-toast fr"></div>
-        <p class="tc mt25 f14" style="color:#ff6715"></p>
+    <div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715"></p>
+        </div>
     </div>
 	<!--***弹窗 end****************************************-->
 	
