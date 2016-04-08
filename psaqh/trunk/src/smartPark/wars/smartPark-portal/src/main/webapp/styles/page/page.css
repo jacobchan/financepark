@@ -518,7 +518,8 @@ background:url(../images/company/ab_ico.png) no-repeat}
 .off_tip6{top:355px;left:255px;}
 .off_tip7{top:393px;left:135px;}
 .off_info:before{content: "";display: inline-block;position: absolute;border: 8px transparent solid;border-right-color:rgba(255,103,21,0.7);top:50%;left:-16px;margin-top: -8px;}
-.off_info{display:inline-block;background:rgba(255,103,21,0.7);color:#fff;width:197px;height:84px;text-align:center;padding-top:10px;position:absolute;top:-20px;left:58px;line-height:22px;font-size: 14px; }
+.off_info{display:inline-block;background:rgba(255,103,21,0.7);color:#fff;width:197px;height:84px;text-align:center;padding-top:10px;position:absolute;top:-20px;left:55px;line-height:22px;font-size: 14px; }
+.off_info p,.off_info h3{color: #fff;}
 .off_line1{background:url(../images/zhyq/line1.png) no-repeat;width:81px;height:43px;position:absolute;top:-43px;left:20px;}
 
 .bus{position:absolute;width:54px;height:71px;display:inline-block;background: url(../images/zhyq/bus-icons.png)no-repeat;}
