@@ -182,21 +182,24 @@
 				});*/
 				//行业类型
 				$.youi.ajaxUtils.ajax({
-					url : baseUrl+'/etypeEnterprisetypeManager/findEnterpriseTypeTree.json',
+					url : baseUrl+'/etypeEnterprisetypeManager/getParentEnterpriseType.json',
 					jsonp : 'data:jsonp',
 					dataType : 'jsonp',
 					async : false,
 					success:function(result){
-						var json = eval("[" + result.record.html + "]");
-						var enterpriseTypeDiv ='<dd>';
-						for(var i=0; i<json.length; i++){
-							$("#enterpriseTypeDiv").empty();
-							if(json[i].pId!=""){
+						var record = result.records;
+						for(var i=0; i<record.length; i++){
+							alert(record[i].enTypeId);
+							/*var json = eval("[" + result.record.html + "]");
+							var enterpriseTypeDiv ='<dd>';
+							for(var i=0; i<json.length; i++){
+								$("#enterpriseTypeDiv").empty();
+								json[i].id
 								enterpriseTypeDiv+=json[i].name+"<span>|</span>";
 							}
+							var lastJson = enterpriseTypeDiv.substring(0, enterpriseTypeDiv.lastIndexOf("<span>|</span>", enterpriseTypeDiv.length));
+							$("#enterpriseTypeDiv").html(lastJson+'</dd><div class="sub-bottom"><i class="fa fa-angle-down"></i></div>');*/
 						}
-						var lastJson = enterpriseTypeDiv.substring(0, enterpriseTypeDiv.lastIndexOf("<span>|</span>", enterpriseTypeDiv.length));
-						$("#enterpriseTypeDiv").html(lastJson+'</dd><div class="sub-bottom"><i class="fa fa-angle-down"></i></div>');
 					}
 				});
 				
