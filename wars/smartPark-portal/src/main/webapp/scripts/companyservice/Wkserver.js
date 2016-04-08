@@ -1,4 +1,3 @@
-
 var genreCode = "0507";
 //评论星级
 function star(ele){

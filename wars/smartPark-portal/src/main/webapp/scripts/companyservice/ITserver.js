@@ -1,3 +1,25 @@
+//定时跳转
+function countdown(i){
+	$("#ti-m1").text(i);
+    i = i - 1;
+    if(i > 0) {
+        setTimeout("countdown("+i+")", 1000);
+    }else{
+    	jump();
+    }
+}
+//跳转订单中心
+function jump(){
+	window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
+}
+//跳转个人中心
+function jumpPerson(){
+	window.location.href=cenUrl+"member/memberCenter/personalCenter/personInfo.html";
+}
+//跳转首页
+function jumpIndex(){
+	window.location.href=cenUrl;
+}
 function showCom(genreId,y){
 	var serviceURL = baseUrl+"purchasingmanagerCommodityManager/getCommodityRecordsByGenreId.json";
 	$.youi.ajaxUtils.ajax({

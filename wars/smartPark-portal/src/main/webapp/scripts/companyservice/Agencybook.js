@@ -8,9 +8,17 @@ function countdown(i){
     	jump();
     }
 }
-//跳转页面
+//跳转订单中心
 function jump(){
 	window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
+}
+//跳转个人中心
+function jumpPerson(){
+	window.location.href=cenUrl+"member/memberCenter/personalCenter/personInfo.html";
+}
+//跳转首页
+function jumpIndex(){
+	window.location.href=cenUrl;
 }
 //加法函数  
 function accAdd(arg1, arg2) {  
