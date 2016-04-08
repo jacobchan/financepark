@@ -10,10 +10,7 @@
 			var pageCount=1;
 			var serviceURL = baseUrl+"/memberInformationManager/getPagerMemberInformations.json";
 			$(document).ready(function() {
-				var height = Math.max((document.documentElement.clientHeight -135), ($(".main-wrapper").height()));
-				document.getElementById('main-wrapper-right').style.height=height+'px';
-				
-			  	$.ajax({
+				$.ajax({
 					url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
 					success:function(result){
 						if(result&&result.record){
