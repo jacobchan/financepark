@@ -104,15 +104,27 @@ public class EtypeEnterprisetypeManagerImpl extends BaseManagerImpl implements E
 	}
     
     /**
+	 * 获取父级企业类型
+	 * @return
+	 * @throws BusException
+	 */
+	public List<EtypeEnterprisetype> getParentEnterpriseType() throws BusException{
+		return etypeEnterprisetypeDao.getEtypeEnterprisetypeList();
+	}
+    
+    /**
 	 * 获取企业类型JSon
 	 * @return
 	 * @throws BusException
 	 */
     @EsbServiceMapping
-	public String findEnterpriseTypeTree() throws BusException{
+	public String findEnterpriseTypeTree(@ServiceParam(name="pId") String pId) throws BusException{
 		StringBuffer resultJson = new StringBuffer();
 		String json = "";
-		List<EtypeEnterprisetype> sc = etypeEnterprisetypeDao.getEtypeEnterprisetypeList();
+		Collection<Condition> conditions = new ArrayList<Condition>();
+		Collection<Order> orders = new ArrayList<Order>();
+		conditions.add(ConditionUtils.getCondition("etypeEnterprisetype.enTypeId", Condition.EQUALS, pId));
+		List<EtypeEnterprisetype> sc = etypeEnterprisetypeDao.commonQuery(conditions, orders);
 		if (sc.size() > 0) {
 			for (int i = 0; i < sc.size(); i++) {
 				if(!"".equals(sc.get(i).getEtypeEnterprisetype()) && null!=sc.get(i).getEtypeEnterprisetype()){
