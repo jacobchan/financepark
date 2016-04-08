@@ -5,7 +5,7 @@
 	<!--**********************************子页面**********************************-->
 	<youi:subpage caption="新增订单类型" height="110"
 		width="780" subpageId="addOrderType"
-		src="page/commonCenter.OrderManager.ordermanagerUserorder/orderTypeAdd.html?purchasingmanagerGenre.genreId={pruGenreId}"
+		src="page/commonCenter.OrderManager.ordermanagerUserorder/orderTypeAdd.html?pagrenId={pruGenreId}"
 		formAction="esb/web/purchasingmanagerGenreManager/savePurchasingmanagerGenre.json">
 	</youi:subpage>
 	<!--**********************************子页面**********************************-->
