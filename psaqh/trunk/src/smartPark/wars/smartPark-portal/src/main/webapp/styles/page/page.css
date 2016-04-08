@@ -476,7 +476,7 @@ background:url(../images/company/ab_ico.png) no-repeat}
 .hx_square1{width:15px;height:9px;background:rgba(255,255,255,0.9);position:absolute;}
 .hx_square2{width:30px;height:18px;background:rgba(255,255,255,0.9);position:absolute;}
 .hx_tright{top:0;right:0px;}.hx_bright{bottom:0;right:0px;}.hx_tleft{top:0;left:0px;}.hx_bleft{bottom:0;left:0px;}
-.bgred{background:#FF0000}.bgyellow{background:#FFC600}.bggreen{background:#12FF00}
+.bgred{background:#FF0000}.bgyellow{background:#FFC600}.bggreen{background:#12FF00}.bg-3c{background:#3c3c3c;}
 
 .hxinfo{float:right;width:300px;}
 .tabel_hx{width:258px;margin:0 auto;color:#333}.tabel_hx td{padding:8px;background:#EFEFEF}.tabel_hx tr{border-top:2px #FAFCFD solid}
