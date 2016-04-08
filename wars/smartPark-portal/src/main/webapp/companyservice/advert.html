@@ -31,69 +31,16 @@
         <div class="mt30 clearfix">
         	<div class="res_left">
             	<ul id="carfix">
-                	<!-- <li class="clearfix">
-                    	<div class="fl"><img src="../styles/images/company/ad1.jpg"/></div>
-                        <div class="fl ml30" style="width:535px">
-                        	<a href="advertxq.html" class="span_bold f20">对街大型LED广告位</a>
-                            <div class="mt20 mb20">
-                            	<div class="res_tip">自动挡</div>
-                                <div class="res_tip">9人座</div>
-                            </div>
-                            <div style="height:55px">
-                            	此车仅供园区企业接送飞机使用，按照每次500元计算。此价格包含80KM油费，师傅一名工作2小时，如果是超公里使用，按照没公立5元计算。
-                            </div>
-                            <div class="mt30">
-                            	<img class="mr10" src="../styles/images/company/res_icon.png"/><span class="vm pr20">联系人：小州</span>
-                                <img class="mr10" src="../styles/images/company/res_ico.png"/><span class="vm">联系电话：134534565756</span>
-                            </div>
-                        </div> 
-                    </li>-->
-                   <!--  <li class="clearfix">
-                    	<div class="fl"><img src="../styles/images/company/ad2.jpg"/></div>
-                        <div class="fl ml30" style="width:535px">
-                        	<a href="advertxq.html" class="span_bold f20">对街大型LED广告位</a>
-                            <div class="mt20 mb20">
-                            	<div class="res_tip">自动挡</div>
-                                <div class="res_tip">9人座</div>
-                            </div>
-                            <div style="height:55px">
-                            	此车仅供园区企业接送飞机使用，按照每次500元计算。此价格包含80KM油费，师傅一名工作2小时，如果是超公里使用，按照没公立5元计算。
-                            </div>
-                            <div class="mt30">
-                            	<img class="mr10" src="../styles/images/company/res_icon.png"/><span class="vm pr20">联系人：小州</span>
-                                <img class="mr10" src="../styles/images/company/res_ico.png"/><span class="vm">联系电话：134534565756</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="clearfix">
-                    	<div class="fl"><img src="../styles/images/company/ad1.jpg"/></div>
-                        <div class="fl ml30" style="width:535px">
-                        	<a href="advertxq.html" class="span_bold f20">对街大型LED广告位</a>
-                            <div class="mt20 mb20">
-                            	<div class="res_tip">自动挡</div>
-                                <div class="res_tip">9人座</div>
-                            </div>
-                            <div style="height:55px">
-                            	此车仅供园区企业接送飞机使用，按照每次500元计算。此价格包含80KM油费，师傅一名工作2小时，如果是超公里使用，按照没公立5元计算。
-                            </div>
-                            <div class="mt30">
-                            	<img class="mr10" src="../styles/images/company/res_icon.png"/><span class="vm pr20">联系人：小州</span>
-                                <img class="mr10" src="../styles/images/company/res_ico.png"/><span class="vm">联系电话：134534565756</span>
-                            </div>
-                        </div>
-                    </li> -->
-                    
+            	
                 </ul>
-                <div class="tr pb25 pt15">
-                	<!-- <span class="cd7">找到相关结果约2016个</span>
-                    <div class="paging active ml25">1</div>
-                    <div class="paging">2</div>
-                    <div class="paging">3</div>
-                    <div class="paging">4</div>
-                    <div class="paging">5</div>
-                    <div class="paging paging_m">尾页</div> -->
+                
+             	<div class="tr pb25 pt15">
+                </div>
+                <div class="tc" style="background:#f6f6f6;height:600px;">
+                    <img src="../styles/images/none1.png" border="0" style="margin-top:200px;" />
                 </div>
             </div>
+            <!-- 没有数据时显示图片 end-->
             <div class="res_right">
                 <div id="youi_page_right" class="youi-page-right clearfix"></div>
             </div>
@@ -114,12 +61,17 @@
 <script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 <script type="text/javascript" src="../scripts/page/newscom.js"></script>
 <script type="text/javascript" src="../scripts/page/kefu.js"></script> 
-<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 <script type="text/javascript" src="../scripts/page/url.js"></script>
+<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+<!-- <script type="text/javascript" src="../scripts/page/jquery.page.js"></script> -->
+
 <script type="text/javascript">
 		$(function(){
 			
-			var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/goPage.json?genreCode=0303&indexPage=1";//0303:广告位
+			//var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/goPage.json?genreCode=0303&indexPage=1";//0303:广告位
+			var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommoditys.json?genreCode=0303";//0302:车辆租赁
+			var pageSize=3;
+            var pageCount=1;
 			//公共方法
 			$.youi.ajaxUtils.ajax({
 				url:serviceURL,
@@ -127,18 +79,20 @@
 				dataType:'jsonp',
 				success:function(results){
 					
+					
 					if(results&&results.records){
-					//	alert("1122");
-				//	console.log(results);
 					//拼接内容
+					$('.tc').hide();
 				   _parseRecords(results.records);
 					//拼接分页
 				   _parseRecordCount(results.totalCount);
-					}
+					} 
 				}
 			});
 			
 		});
+		
+		
 		//拼接活动列表
 		
 		function _parseRecords(record){
@@ -154,15 +108,13 @@
 				if(record[i].cpValue==undefined){
 					record[i].cpValue="";
 				}
-				/* var html="<li class='clearfix'><div class='fl'><img src='"+imageUrl+record[i].commodityImage+"' height='205' width='285'></div>"+
-					"<div class='fl ml30' style='width:535px'><a href='advertxq.html?id="+record[i].commodityId+"' class='span_bold f20'>"+record[i].commodityTitle+"</a><div class='mt20 mb20'><div class='res_tip'>"+record[i].dwValue+"</div><div class='res_tip'>"+record[i].zwValue+"</div><div class='res_tip'>"+record[i].cpValue+"</div></div>"+
-					"<div style='height:55px'>"+record[i].commodityDescribe+"</div><div class='mt30'><img class='mr10' src='../styles/images/company/res_icon.png'/><span class='vm pr20'>"+record[i].merchantLinkman+"</span>"+
-					"<img class='mr10' src='../styles/images/company/res_ico.png'/><span class='vm'>联系电话："+record[i].merchantLinkmanPhone+"</span><div class='jcbg f20 fr'>"+record[i].commodityPrice+"元/小时</div>"+
-					"</div></div></li>";
-					 $("#carfix").append(html);  */
+				var imageUrl="../styles/images/index/ad1.jpg";
+				if(record[i].commodityImage !=null && record[i].commodityImage!=""){
+					   imageUrl=cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].commodityImage+"&method=show";
+				}
 				var html = '';	 
 				html+=  '<li class="clearfix">';	
-				html+= '<div class="fl"><img src="'+cenUrl+'common/uploadImage.html?repository=/swfupload&path='+record[i].commodityCoverImage+'&method=show" height="205" width="285"></div>';
+				html+= '<div class="fl"><img src="'+imageUrl+'" height="205" width="285"></div>';
 				html+= '<div class="fl ml30" style="width:535px">';
 					html+= '<a href="advertxq.html?id='+record[i].commodityId+'" class="span_bold f20">'+record[i].commodityTitle+'</a>';
 					html+= '<div class="mt20 mb20">';
