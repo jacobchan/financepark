@@ -230,12 +230,20 @@
 		$(".close0").click(function() {
 			$(".pop_layer").hide();
 		});
+		
+		  //关闭toast
+        $(".close-toast").click(function(){
+            $(".toast").hide();
+        })
 
 		$(".btn-cheng")
 				.click(
 						function() {
 							if (!isLogin) {
-								alert("请登录");
+								clearInterval(timer);
+					            $(".toast").show();
+					            pltime=2;
+					            timer=setInterval("closeTanc()",1000)
 								return;
 							}
 							var arr = new Array();
@@ -259,12 +267,10 @@
 
 							var reserveName=$("#reserveName").val();
 							var reserveTel=$("#reserveTel").val();
-							var driver='';
+							var driver=false;
 						    if($(".ib-checkbox").children('input[type="checkbox"]').is(":checked")){
-						    	driver='01';
-					          }else{
-					            driver='00';
-					         }
+						    	driver=true;
+					          }
 							if(reserveName ==null||reserveName==""){
 								alert("请填联系人");
 								return;
@@ -319,6 +325,25 @@
 						});
 
 	})
+	
+	   //toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
+        var pltime,timer;
+        function closeTanc(){
+            if(pltime>1){
+                pltime--;
+            }else{
+                $(".toast").hide();
+            }       
+        }
 </script>
+
+ <!-- 弹出层样式 -->
+    <div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715">请登录后重试！</p>
+        </div>
+        
+    </div>
 </body>
 </html>
