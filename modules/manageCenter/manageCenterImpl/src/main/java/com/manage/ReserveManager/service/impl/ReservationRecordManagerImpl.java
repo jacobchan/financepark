@@ -272,13 +272,16 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
      * 根据当前登录用户预约
      */
     @EsbServiceMapping
-	public List<ReservationRecord> getReservationRecordsforpage(
+	public PagerRecords getReservationRecordsforpage(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=ReservationRecord.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders,
 			@ServiceParam(name="userId",pubProperty = "userId") String userId) throws BusException {
     	//获取当前用户预约
-    	Collection<Condition> condition = new ArrayList<Condition>();
-    	condition.add(ConditionUtils.getCondition("createUser", Condition.EQUALS, userId));
-    	List<ReservationRecord> list =reservationRecordDao.commonQuery(condition, null);
-		return list;
+    	conditions.add(ConditionUtils.getCondition("createUser", Condition.EQUALS, userId));
+    	PagerRecords pagerRecords = reservationRecordDao.findByPager(pager, conditions, orders);
+//    	List<ReservationRecord> list =reservationRecordDao.commonQuery(condition, null);
+		return pagerRecords;
 	}
+    
 
 }
