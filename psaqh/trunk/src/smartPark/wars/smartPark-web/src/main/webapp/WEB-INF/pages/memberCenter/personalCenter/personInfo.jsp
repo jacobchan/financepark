@@ -92,23 +92,23 @@
 			
 	<!--***弹窗 end****************************************-->
 	<!--***弹窗 start****************************************-->
-	<!-- <div class="bgtanc m2">
+	 <div class="bgtanc ">
 			<div class="tanccon" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
-				<a href="javascript:;" class="tc-close"></a>
+				<a href="javascript:;" class="tcclose"></a>
 				<div class="w70 tc mt40" style="margin-left:15%">
 					<table>
 						<tr>
-							<td><img src="../styles/images/grzx/check.png" class="mr40 mb20" border="0"></td>
+							<td></td>
 							<td >
-								<h4 class="f24 fl c-333">请登录!</h4>
-								<h4 class="f24 fl c-333"> 还有<span class="tt">0</span>秒关闭弹出框</h4>
-								<p class="f14 c-o fl mt20 mb20">如有问题，请拨打：0571-86508888</p>
+								
+								<h3 class="f14 c-o fl mt20 mb20"> 还有<span class="tt">0</span>秒关闭弹出框</h3>
+								
 							</td>
 						<tr/>
 					</table>
 				</div>
 			</div>
-		</div> -->
+		</div> 
 			
 	<!--***弹窗 end****************************************-->
 	
@@ -185,7 +185,8 @@
 	    					data:params.join('&'),
 	    					success:function(result){
 	    						if(result&&result.record){
-	    							alert("修改成功");
+	    							$(".f14.c-o.fl.mt20.mb20").text("修改成功");
+	    							$(".bgtanc").show(); 
 	    							location.reload();
 	    						}
 	    					}
@@ -199,7 +200,9 @@
 					data:params.join('&'),
 					success:function(result){
 						if(result&&result.record){
-							alert("修改成功");
+							$(".f14.c-o.fl.mt20.mb20").text("修改成功");
+							$(".bgtanc").show(); 	
+							
 							location.reload();
 						}
 					}
@@ -218,9 +221,9 @@
 				success:function(result){
 					if(result&&result.record){
 						//alert(result.record.html);
-						/* $(".f24.fl.c-333").text("您不是企业用户,暂时无法申请!");
-						$(".bgtanc.m2").show(); */	
-						location.reload();
+						$(".f14.c-o.fl.mt20.mb20").text(result.record.html);
+						$(".bgtanc").show(); 	
+						//location.reload();
 					}
 				}
 			});
@@ -294,6 +297,10 @@
 				$(".bg-tanc").show();
 			});
 			$("#birthday_container").birthday();
+			
+			$(".tcclose").click(function(){
+				$(".bgtanc").hide();
+			});
 		})
 	</script>	
 </youi:html>
