@@ -346,7 +346,7 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
      */
 	@EsbServiceMapping
     public List<PurchasingmanagerCommodity> getCommodityRecordsByRecordType(
-       @ServiceParam(name="commodityId.purchasingmanagerGenre.genreId") String genreId) throws BusException{
+       @ServiceParam(name="commodityId.genreId") String genreId) throws BusException{
 		List<PurchasingmanagerCommodity> list=new ArrayList<PurchasingmanagerCommodity>();
 		if(StringUtils.isNotEmpty(genreId)){
 			list = purchasingmanagerCommodityDao.getList("genreId", genreId);
