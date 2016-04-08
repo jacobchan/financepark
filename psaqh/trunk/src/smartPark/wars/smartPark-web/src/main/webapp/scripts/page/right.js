@@ -55,6 +55,9 @@ $(function () {
 	$(".tc-close").click(function(){
 		$(".bg-tanc").hide();
 	});
+	$(".tcclose").click(function(){
+		$(".bgtanc").hide();
+	});
 	$(".select-address").click(function(){
 		$(this).parent().find(".select-address").removeClass("active");
 		$(this).addClass("active");
