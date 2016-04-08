@@ -105,7 +105,10 @@ public interface ReservationRecordManager extends BaseManager{
 	 * @return
 	 * @throws BusException
 	 */
-	public List<ReservationRecord> getReservationRecordsforpage(String userId) throws BusException;	 
+	public PagerRecords getReservationRecordsforpage(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders,
+			String userId) throws BusException;
 	 /**
      * 根据众创空间下的商品类别下所有的商品 
      * @param genreCode=04:众创空间
