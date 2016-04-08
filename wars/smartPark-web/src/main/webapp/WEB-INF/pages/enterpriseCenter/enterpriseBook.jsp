@@ -58,7 +58,7 @@
 					html+='<li>'+
 							'<table>'+
 		                    	'<tr>'+
-		                        	'<td rowspan="4" width="110"><img src="../styles/../styles/images/qiye/qiye/user-photo.png"></td>'+
+		                        	'<td rowspan="4" width="110"><img src="../styles/images/qiye/user-photo.png"></td>'+
 		                    	'</tr>'+
 		                    	'<tr>'+
 		                       		'<td align="left" valign="middle" class="pl20 hide_dian"><span class="f16 color_41 user_name">'+record[i].memberName+'</span><span class="f14 color_6 tel">联系方式：'+record[i].memberPhoneNumber+'</span></td>'+
@@ -66,9 +66,9 @@
 			                    '<tr>'+
 			                        '<td align="left" valign="middle" class="pl20"><span class="f14 color_6 hide_dian">'+record[i].memberDescribe2+'</span></td>'+
 			                    '</tr>'+
-			                    '<tr>'+
+			                    '<!--<tr>'+
 			                        '<td align="left" valign="middle" class="pl20"><span class="f12 color_41"><a href="javascript:void(0);">编辑</a>&nbsp;丨&nbsp;<a href="javascript:void(0);">设置权限</a>&nbsp;丨&nbsp;<a href="javascript:void(0);">删除</a></span></td>'+
-			                    '</tr>'+
+			                    '</tr>-->'+
 		                	'</table>'+
 		            	'</li>';
 				}
