@@ -29,3 +29,5 @@ ALTER TABLE `sp_propertyservicemanager_bx` ADD COLUMN `MEMBERID_` varchar(36)  N
 ALTER TABLE `sp_reservation_record` ADD COLUMN `RECORD_CODE_` varchar(32);
 
 ALTER TABLE `sp_lettermanager_comment` ADD COLUMN `MEMBER_ID_` varchar(36);
+
+ALTER TABLE `sp_policy_apply` ADD COLUMN `POLICY_APPLY_CODE_` varchar(50);
