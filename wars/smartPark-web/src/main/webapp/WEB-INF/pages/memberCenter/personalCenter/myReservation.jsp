@@ -192,7 +192,7 @@
 	<script type="text/javascript">
 		$(function () {
 			$.ajax({
-				url:baseUrl+'propertyservicemanagerEntrecManager/getPropertyservicemanagerEntrecs.json', 
+				url:baseUrl+'propertyservicemanagerEntrecManager/getPropertyservicemanagerEntrecsForReserve.json', 
 				success:function(result){
 					console.log(result);
 					if(result&&result.records){
@@ -260,27 +260,5 @@
 			}
 	</script>
 	
-	<!-- 取消报修订单 -->
-	<script type="text/javascript">
-	$(function(){
-		$(".hhf-submit").click(function(){
-				var enterCode=$("#enterCode").val();
-				var enterStatus=$("#enterStatus").val();
-				
-				if(enterStatus == '01'){
-			 	$.youi.ajaxUtils.ajax({
-					url:baseUrl+'propertyservicemanagerEntrecManager/cancelReservation.json',
-					data:'entrecId='+enterCode,
-					success:function(result){
-							alert("取消成功!");
-							location.reload();
-						}
-				});
-				}else{
-		            alert("该状态不能进行取消操作");
-
-		        }
-			});
-		});
-	</script>
+	
 </youi:html>
