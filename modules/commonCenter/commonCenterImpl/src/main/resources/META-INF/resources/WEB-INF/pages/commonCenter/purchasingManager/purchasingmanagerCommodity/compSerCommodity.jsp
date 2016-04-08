@@ -45,13 +45,12 @@
 			<youi:fieldSelect property="purchasingmanagerMerchant.merchantId" show="merchantName" code="merchantId" notNull="true"
 				src="esb/web/purchasingmanagerMerchantManager/getMerchantsByGenre.json" caption="所属商户"
 				parents="genreId" parentsAlias="genreId"/>
-			<youi:fieldText property="commodityStock"  caption="库存"/>
-			<youi:fieldSelect property="commodityIsnotDisplayStock" convert="bool"  caption="是否显示库存" notNull="true"/>
-			<youi:fieldCalendar property="commodityUpTime"  caption="上架时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="true"/>
-			<youi:fieldCalendar property="commodityDownTime"  caption="下架时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="true"/>
+			<%-- <youi:fieldText property="commodityStock"  caption="库存"/>
+			<youi:fieldSelect property="commodityIsnotDisplayStock" convert="bool"  caption="是否显示库存" notNull="true"/> --%>
+			<youi:fieldCalendar property="commodityUpTime"  caption="上架时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" />
+			<youi:fieldCalendar property="commodityDownTime"  caption="下架时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss"/>
 			<youi:fieldSwfupload property="commodityImage" caption="图像" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" />
-			<youi:fieldSwfupload property="commodityCoverImage"  caption="封面图片" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" fileUploadLimit="1" fileQueueLimit="1"/>
-			<youi:fieldArea property="commodityDescribe"  caption="描述" column="2" notNull="true"/>
+			<youi:fieldArea property="commodityDescribe"  caption="描述" column="2" />
 			<youi:fieldHidden property="commodityId"  caption="商品ID"/>
 		</youi:fieldLayout>
 	</youi:form>
