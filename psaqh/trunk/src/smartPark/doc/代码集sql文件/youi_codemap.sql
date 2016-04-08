@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50538
 File Encoding         : 65001
 
-Date: 2016-04-06 17:02:10
+Date: 2016-04-08 10:36:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -64,6 +64,13 @@ INSERT INTO `youi_codemap` VALUES ('40288ab252f905180152f908e1d30001', 'roomstat
 INSERT INTO `youi_codemap` VALUES ('40288ab2531113db015311211cf40001', 'policyApplyStatus', '政策申请状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab353e461150153e5929da60008', 'seat', '座位', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab553cfaceb0153cfc693e00001', 'enteringType', '入驻申请类型', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288ab753f378770153f3abff250001', ' sfproName', '物业收费项目 ', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288ab753f378770153f3b1679b0006', 'applyStatus', '访客申请状态', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288ab753f378770153f3b2cfba000a', 'moverec_status', '搬家申请状态', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288ab753f378770153f3b3f210000f', 'fx_status', '二维码状态', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288ab753f378770153f3b5f0300014', 'roomType', '会议室类型', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288ab753f378770153f3b6c6060017', 'roomProjector', '是否有投影仪', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288ab753f378770153f3b7ce3a001a', 'roomGm', '会议室规模', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288abc531c24bb01531c2a418c0001', 'resoStatus', '资源状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ac653cad0250153cad4e2920001', 'roundFinancing', '融资伦次', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288acb53314dd40153318d8a160009', 'oc_status', '一卡通预约状态', '1', null);
