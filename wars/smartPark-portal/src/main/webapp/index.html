@@ -840,7 +840,8 @@
 	</script>
 	<script type="text/javascript">
 		$(function(){
-			 var params = ['genreCode=0301'];
+			var pageSize=3;
+			 var params = ['genreCode=0301','pager:pageSize='+pageSize];
 			  var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommoditys.json";//0301:会议室
 			  
 			 
@@ -884,7 +885,8 @@
 	
      <script type="text/javascript">
 		$(function(){
-			 var params = ['genreCode=0302'];
+			 var pageSize=3;
+			 var params = ['genreCode=0302','pager:pageSize='+pageSize];
 			  var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommoditys.json";//0302:车辆
 			  
 			 
