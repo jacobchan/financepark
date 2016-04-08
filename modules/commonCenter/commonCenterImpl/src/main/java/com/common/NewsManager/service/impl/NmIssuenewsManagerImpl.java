@@ -271,7 +271,7 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 	}
 	
 	/**
-	 * 分页查找，所有已发布的优惠政策下面的孵化器政策
+	 * 分页查找，所有已发布的新闻公告
 	 * @param pager
 	 * @param conditions
 	 * @param orders
@@ -280,9 +280,11 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 	 */
 	@EsbServiceMapping
 	public PagerRecords getPagerAllPolicy(Pager pager,
-			Collection<Condition> conditions, Collection<Order> orders)
+			@ConditionCollection(domainClazz=NmIssuenews.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders,
+			@ServiceParam(name="issueTypeCode") String issueTypeCode)
 			throws BusException {
-		conditions.add(ConditionUtils.getCondition("policyType.issueTypeCode", Condition.EQUALS,"0201"));//0201为当前优惠政策下面的孵化器政策
+		conditions.add(ConditionUtils.getCondition("policyType.issueTypeCode", Condition.EQUALS,issueTypeCode));//0201为当前优惠政策下面的孵化器政策
 		conditions.add(ConditionUtils.getCondition("policyStatus", Condition.EQUALS,"1"));//1表示当前政策已发布，0为未发布
 		PagerRecords pagerRecords = nmIssuenewsDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
