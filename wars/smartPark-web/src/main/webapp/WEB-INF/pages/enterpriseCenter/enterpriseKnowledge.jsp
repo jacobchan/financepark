@@ -60,7 +60,7 @@
 					    				$("#knowledgeDiv").empty();
 					    				for(var i=0; i<records.length; i++){
 					    					var imgsrc = "../styles/images/qiye/photo_list1.png";
-					    					if(records[i].knowledgeUrl.length!=0){
+					    					if(records[i].knowledgeUrl!=null && records[i].knowledgeUrl!=""){
 					    						imgsrc = cenUrl+"common/uploadImage.html?repository=/swfupload&path="+records[i].knowledgeUrl+"&method=show";
 					    					}
 					    					var knowledgeDiv = '<li>'+
