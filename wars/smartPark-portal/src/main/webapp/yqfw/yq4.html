@@ -94,7 +94,7 @@
 	</div>
 	
 	<!--***弹窗 start****************************************-->
-	<div class="bg-tanc m2">
+	<!-- <div class="bg-tanc m2">
 		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
 			<a href="javascript:;" class="tc-close"></a>
 			<div class="w70 tc mt40" style="margin-left:15%">
@@ -109,7 +109,13 @@
 				</table>
 			</div>
 		</div>
-	</div>
+	</div> -->
+	<div class="toast">
+        <div class="toast-con clearfix">
+            	<div class="close-toast fr"></div>
+           	 <p class="tc mt25 f18" style="color:#ff6715">请登录后重试！</p>
+        	</div>       
+    </div>
 	<!--***弹窗 end****************************************-->
 	
 	<!--***bottom start****************************************-->
@@ -144,19 +150,39 @@ $(function(){
 			};
 		var str=JSON.stringify(obj);
 		alert(str); */
-		if(!isLogin){$(".f24.fl.c-333").text("请登录!");
-		$(".bg-tanc.m2").show();return;} 
+		if(!isLogin){
+			clearInterval(timer);
+           	$(".toast").show();
+           	pltime=1;
+           	timer=setInterval("closeTanc()",1000);
+		} 
 		var phone = $("#iphone").val();
 		var sex = $(".sex-group span.active").index()+1;
+		var time = $("#timer").val();
 		if(phone=="" || phone.length==0){
-			$(".f24.fl.c-333").text("请输入联系电话！");
-			$(".bg-tanc.m2").show();
+			clearInterval(timer);
+			$(".tc.mt25").text("请输入联系电话！");
+           	$(".toast").show();
+           	pltime=1;
+           	timer=setInterval("closeTanc()",1000);
 			return false;
 		}else{
 			if(!isMobil(phone)){
-				$(".f24.fl.c-333").text("手机号格式不正确！");
-				$(".bg-tanc.m2").show();
+				clearInterval(timer);
+				$(".tc.mt25").text("手机号格式不正确!");
+	           	$(".toast").show();
+	           	pltime=1;
+	           	timer=setInterval("closeTanc()",1000);
 				return false;
+			}else{
+				if(time=="" || time.length==0){
+					clearInterval(timer);
+					$(".tc.mt25").text("请输入到访时间!");
+		           	$(".toast").show();
+		           	pltime=1;
+		           	timer=setInterval("closeTanc()",1000);
+					return false;
+				}
 			}
 		}
 		
@@ -189,6 +215,28 @@ $(function(){
 	    return true
 	}
 })
+</script>
+ <script type="text/javascript">
+		//toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
+		 var pltime,timer;
+		 function closeTanc(){
+		     if(pltime>1){
+		         pltime--;
+		     }else{
+		         $(".toast").hide();
+		     }       
+		 };
+		 //关闭toast
+	        $(".close-toast").click(function(){
+	            $(".toast").hide();
+	        });
+		 //调用方法如下，哪里调用就放哪里
+		 /**
+		     clearInterval(timer);
+		     $(".toast").show();
+		     pltime=1;
+		     timer=setInterval("closeTanc()",1000);
+		 */
 </script>
 </body>
 </html>
