@@ -1,23 +1,14 @@
-/**
- * 代码声明
- */
 package com.common.EnterpriceTypeManager.service;
-
 import java.util.List;
 import java.util.Collection;
-
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.ServiceParam;
-
 import com.common.EnterpriceTypeManager.entity.EtypeEnterprisetype;
-
 public interface EtypeEnterprisetypeManager extends BaseManager{
-
     /**
      * 查询列表
      */
@@ -68,9 +59,16 @@ public interface EtypeEnterprisetypeManager extends BaseManager{
 	public List<EtypeEnterprisetype> getChildren(String parentId) throws BusException;
 	
 	/**
-	 * 获取企业类型JSon
+	 * 获取父级企业类型
 	 * @return
 	 * @throws BusException
 	 */
-	public String findEnterpriseTypeTree() throws BusException;
+	public List<EtypeEnterprisetype> getParentEnterpriseType() throws BusException;
+	
+	/**
+	 * 获取子级企业类型JSon
+	 * @return
+	 * @throws BusException
+	 */
+	public String findEnterpriseTypeTree(String pId) throws BusException;
 }
