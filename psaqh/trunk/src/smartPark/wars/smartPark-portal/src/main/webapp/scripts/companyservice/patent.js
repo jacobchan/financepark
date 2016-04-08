@@ -147,8 +147,9 @@ $(function(){
 				var $layer=$(".pop_layer");
 				$(".btn_cx").click(function(){
 					if(!isLogin){
-					   $(".bg-tanc.m2").show();
-					 	 return;
+			            $(".toast").show();
+			            setTimeout('$(".toast").hide();',1000);//1秒=1000
+					 	return;
 					}
 					var id = $(this).attr("data-id");
 					var commodityTitle = $(this).attr("data-commodityTitle");

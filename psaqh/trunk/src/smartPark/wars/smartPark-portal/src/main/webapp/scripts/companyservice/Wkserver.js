@@ -81,8 +81,9 @@ $(function(){
 			}
 			$(".com_shop").click(function(){
 				if(!isLogin){
-				   $(".bg-tanc.m2").show();
-				 	 return;
+		            $(".toast").show();
+		            setTimeout('$(".toast").hide();',1000);//1秒=1000
+				 	return;
 				}
 				var id = $(this).attr("data-id");
 				addShopCar(id);
