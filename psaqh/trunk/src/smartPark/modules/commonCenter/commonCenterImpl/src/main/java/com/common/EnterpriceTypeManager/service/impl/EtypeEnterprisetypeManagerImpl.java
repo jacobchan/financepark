@@ -108,6 +108,7 @@ public class EtypeEnterprisetypeManagerImpl extends BaseManagerImpl implements E
 	 * @return
 	 * @throws BusException
 	 */
+    @EsbServiceMapping
 	public List<EtypeEnterprisetype> getParentEnterpriseType() throws BusException{
 		return etypeEnterprisetypeDao.getEtypeEnterprisetypeList();
 	}
