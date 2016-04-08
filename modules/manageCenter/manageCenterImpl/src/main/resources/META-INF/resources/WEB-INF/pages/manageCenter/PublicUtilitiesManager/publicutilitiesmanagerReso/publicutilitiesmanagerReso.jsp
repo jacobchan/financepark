@@ -35,6 +35,10 @@
 			<youi:fieldSelect property="resoTime"  caption="可用时段" convert="resoTime" notNull="true"/>
 			<youi:fieldSelect property="resoStatus"  caption="资源状态" convert="resoStatus"/>
 			<youi:fieldHidden property="resoId"  caption="资源状态序列" />
+			<youi:fieldHidden property="updateTime"  caption="更新时间" />
+			<youi:fieldHidden property="updateUser"  caption="更新人" />
+			<youi:fieldHidden property="createUser"  caption="创建人" />
+			<youi:fieldHidden property="createTime"  caption="创建时间" />
 			<%-- <youi:fieldHidden property="resoStatus"  caption="资源状态"/> --%>
 		</youi:fieldLayout>
 	</youi:form>
