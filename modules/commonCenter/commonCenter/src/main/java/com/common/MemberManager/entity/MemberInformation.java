@@ -56,7 +56,7 @@ public class MemberInformation implements Domain,IdUser, IUser,IMemberInfomation
 	private String memberId;//会员用户ID
 
 	@Column(name = "MEMBER_HEAD_PORTRAIT_")
-	@Length(max=32)
+	@Length(max=256)
 	private String memberHeadPortrait;//头像
 
 	@Column(name = "MEMBER_PHONE_NUMBER_")
