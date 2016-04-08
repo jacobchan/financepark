@@ -101,6 +101,10 @@ function star(ele){
 	});
 }
 $(function(){
+	//关闭toast
+    $(".close-toast").click(function(){
+        $(".toast").hide();
+    });
 	var serviceURL = baseUrl+"purchasingmanagerCommodityManager/getChopPatentCommodityList.json";
 	$.youi.ajaxUtils.ajax({
 		url:serviceURL,
@@ -231,8 +235,9 @@ $(function(){
 	});
 	$('#btn-sumbit').click(function(){
 		if(!isLogin){
-		   $(".bg-tanc.m2").show();
-		 	 return;
+            $(".toast").show();
+            setTimeout('$(".toast").hide();',1000);//1秒=1000
+		 	return;
 		}
 		var length = $('#shopCar').children("tr").length;
 		var params = '';
@@ -285,8 +290,9 @@ $(function(){
 	}); 
 	$('#evaluate').click(function(){
 		if(!isLogin){
-		   $(".bg-tanc.m2").show();
-		 	 return;
+            $(".toast").show();
+            setTimeout('$(".toast").hide();',1000);//1秒=1000
+		 	return;
 		}
 		
 		var overallSatisfaction = 0;
@@ -343,8 +349,9 @@ $(function(){
 	
 	$('#consult').click(function(){
 		if(!isLogin){
-		   $(".bg-tanc.m2").show();
-		 	 return;
+            $(".toast").show();
+            setTimeout('$(".toast").hide();',1000);//1秒=1000
+		 	return;
 		}
 		var content = $('#consultContent').val();
 		var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/savePurGenreConsult.json";

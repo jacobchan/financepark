@@ -9,6 +9,10 @@ function star(ele){
 	});
 }
 $(function(){
+	//关闭toast
+    $(".close-toast").click(function(){
+        $(".toast").hide();
+    });
 	$(".nav_1,.navsub").hover(function(){
 		$(".navsub").show();
 	},function(){
@@ -61,8 +65,9 @@ $(function(){
 	}); 
 	$('#evaluate').click(function(){
 		if(!isLogin){
-		   $(".bg-tanc.m2").show();
-		 	 return;
+            $(".toast").show();
+            setTimeout('$(".toast").hide();',1000);//1秒=1000
+		 	return;
 		}
 		
 		var overallSatisfaction = 0;
@@ -94,7 +99,6 @@ $(function(){
 			}
 		}
 		
-		
 		var evaluateContent = $('#evaluateContent').val();
 		var params = $.youi.parameterUtils.propertyParameter("overallSatisfaction",overallSatisfaction)+"&";
 		params = params+$.youi.parameterUtils.propertyParameter("reactionRate",reactionRate)+"&";
@@ -120,8 +124,9 @@ $(function(){
 	
 	$('#consult').click(function(){
 		if(!isLogin){
-		   $(".bg-tanc.m2").show();
-		 	 return;
+            $(".toast").show();
+            setTimeout('$(".toast").hide();',1000);//1秒=1000
+		 	return;
 		}
 		var content = $('#consultContent').val();
 		var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/savePurGenreConsult.json";
