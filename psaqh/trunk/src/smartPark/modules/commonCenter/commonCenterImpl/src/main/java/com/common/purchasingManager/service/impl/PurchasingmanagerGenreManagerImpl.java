@@ -63,7 +63,7 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
     	condition.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS, "03"));// 查询属于公共资源的商品：genreCode=03
     	List<PurchasingmanagerGenre> purchasingmanagerGenreList=purchasingmanagerGenreDao.commonQuery(condition, order);
     	if(purchasingmanagerGenreList.size()>0){
-    		conditions.add(ConditionUtils.getCondition("purchasingmanagerGenre",Condition.EQUALS, purchasingmanagerGenreList.get(0)));// 查询公共资源下包含的商品
+    		conditions.add(ConditionUtils.getCondition("pagrenId",Condition.EQUALS, purchasingmanagerGenreList.get(0).getGenreId()));// 查询公共资源下包含的商品
     	}
     	return purchasingmanagerGenreDao.commonQuery(conditions, orders);
     }
