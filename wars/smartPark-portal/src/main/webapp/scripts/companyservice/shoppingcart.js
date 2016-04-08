@@ -247,8 +247,8 @@ $(function(){
 			dataType:'jsonp',
 			success:function(results){
 				if(results&&results.record){
-					alert('订单提交成功！');
-					window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
+					$(".bg-tanc.m1").show();
+					countdown(3);
 				}
 			}
 		});
