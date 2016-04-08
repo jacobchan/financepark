@@ -1,85 +1,122 @@
-﻿<!doctype html>
+<!doctype html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<title>我的购物车</title>
-	<link href="../styles/page/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+	<link href="../styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 	<link href="../styles/base.css" type="text/css" rel="stylesheet">
 	<link href="../styles/page/page.css" type="text/css" rel="stylesheet">
+	<link href="../styles/page/zs.css" type="text/css" rel="stylesheet" >
 	<link href="../styles/page/cg30.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
-	<script type="text/javascript" src="../scripts/page/cg30com.js"></script>
+	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+	<script type="text/javascript" src="../scripts/page/kefu.js"></script>
 	<script type="text/javascript" src="../scripts/page/url.js"></script>
+	<script type="text/javascript" src="../scripts/page/right.js"></script>
 	<script type="text/javascript" src="../scripts/companyservice/shoppingcart.js"></script>
+	<style>
+		.cc{color:#FF6618};
+	</style>
 </head>
 
-<body class="bgf1">
+<body>
 <div id="youi_page_header" class="youi-page-header clearfix"></div>
 <!--***top end****************************************-->
-<!--content-->
-<!--*******************************************-->
-<div class="w1200" style="position:relative">
-	<div class="clearfix pt10 pb10 lh30">
-        <ul class="linknav clearfix fl">
-            <li><a href="../index.html">首页</a></li>
-            <li><a href="Wkserver.html">企业服务</a></li>
-            <li><a href="Wkserver.html">威客服务</a></li>
-            <li class="active">我的购物车</li>
+<!--banner-->
+<div class="bgf1">
+<div class="w1200 bgfff">
+	<div class="adapt_img">
+    	<img src="../styles/images/company/banner_wk.png"/>
+    </div>
+    <div class="nav_box">
+    	 
+    	<ul class="clearfix">
+        	<li class="nav_1">
+            	<a href="carLease.html"><span class="cc">公共资源</span></a>
+            </li>
+            <li class="nav_2">
+            	<a href="com_register.html"><span class="cc">公司注册</span></a>
+            </li>
+            <li class="nav_3">
+            	<a href="Business.html"><span class="cc">工商变更</span></a>
+            </li>
+            <li class="nav_4">
+            	<a href="HRshebao.html"><span class="cc">人事社保</span></a>
+            </li>
+            <li class="nav_5">
+            	<a href="Agencybook.html"><span class="cc">代理记账</span></a>
+            </li>
+            <li class="nav_6">
+            	<a href="Lawserver.html"><span class="cc">法律服务</span></a>
+            </li>
+            <li class="nav_7">
+            	<a href="patent.html"><span class="cc">商标专利</span></a>
+            </li>
+            <li class="nav_8 active">
+            	<a href="Wkserver.html"><span class="cc">威客服务</span></a>
+            </li>
+            <li class="nav_9">
+            	<a href="ITserver.html"><span class="cc">IT服务</span></a>
+            </li>
         </ul>
-        <a href="Wkserver.html" class="f20 fr">继续购物 <i class="fa fa-angle-right"></i><i class="fa fa-angle-right"></i></a>
     </div>
-    <div class="w1200" style="margin-bottom:60px;">
-        <table class="bgfff w100 mb20 cg-pay-table tc">
-           <colgroup>
-               <col width="38"></col><col width="93"></col><col width="410"></col><col></col><col></col><col></col><col></col>
-           </colgroup>
-            <tbody id="shoppingcart">
-                <tr>
-                    <th colspan="2" style="text-align:left"><label><input type="checkbox" class="ml5 mr10" name="all-check">全选</label></th>
-                    <th style="text-align:left">商品</th>
-                    <th>单价</th>
-                    <th>数量</th>
-                    <th>小计（元）</th>
-                    <th>操作</th>
-                </tr>
-                <tr>
-                    <td align="right"><input type="checkbox"  name="single-check"></td>
-                    <td style="padding-left:0px;"><img src="../styles/images/cg30/pay-photo.png" width="84" height="84"></td>
-                    <td align="left">
-                        <div class="w70 fl pr20">ESK iPhone6s钢化膜 苹果6高透膜 高清玻璃保护贴膜</div>
-                        <div class="w30 fl">
-                            <p>颜色：钢化膜</p>
-                            <p>尺码：6/6s(4.7)</p>
-                        </div>
-                    </td>
-                    <td>25.00</td>
-                    <td>
-                        <div class="space-num">
-                            <a href="javascript:;" class="num-reduce">-</a>
-                            <input class="num" value="1" type="text">
-                            <a href="javascript:;" class="num-plus">+</a>
-                        </div>
-                    </td>
-                    <td>25.00</td>
-                    <td><p class="mb10"><a href="javascript:;" class="a-del">删除</a></p></td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="pay-js-btn clearfix">
-            <a href="javascript:;" class="fl ml30 c3 del-check">删除选中的商品</a>
-            <div class="fr">
-                <span class="mr30 f14">已选择了<span id="all-num">0</span>件商品</span>
-                <span class="mr30 f16">总价：<em class="ccheng">¥0.00</em></span>
-                <a style="cursor: pointer;" id="settlement" class="btn_cc1 fr">去结算</a>
-            </div>
-        </div>
-    </div>
-<!--w1200 end-->
 </div>
-<!--*******************************************-->
+</div>
+<!--content-->
+<div class="tabbox">
+	<div class="bgf1 pb30 pt30">
+	   <div class="w1200" style="margin-bottom:60px;">
+	        <table class="bgfff w100 mb20 cg-pay-table tc">
+	           <colgroup>
+	               <col width="38"></col><col width="93"></col><col width="410"></col><col></col><col></col><col></col><col></col>
+	           </colgroup>
+	            <tbody id="shoppingcart">
+	                <tr>
+	                    <th colspan="2" style="text-align:left"><label><input type="checkbox" class="ml5 mr10" name="all-check">全选</label></th>
+	                    <th style="text-align:left">商品</th>
+	                    <th>单价</th>
+	                    <th>数量</th>
+	                    <th>小计（元）</th>
+	                    <th>操作</th>
+	                </tr>
+	                <tr>
+	                    <td align="right"><input type="checkbox"  name="single-check"></td>
+	                    <td style="padding-left:0px;"><img src="../styles/images/cg30/pay-photo.png" width="84" height="84"></td>
+	                    <td align="left">
+	                        <div class="w70 fl pr20">ESK iPhone6s钢化膜 苹果6高透膜 高清玻璃保护贴膜</div>
+	                        <div class="w30 fl">
+	                            <p>颜色：钢化膜</p>
+	                            <p>尺码：6/6s(4.7)</p>
+	                        </div>
+	                    </td>
+	                    <td>25.00</td>
+	                    <td>
+	                        <div class="space-num">
+	                            <a href="javascript:;" class="num-reduce">-</a>
+	                            <input class="num" value="1" type="text">
+	                            <a href="javascript:;" class="num-plus">+</a>
+	                        </div>
+	                    </td>
+	                    <td>25.00</td>
+	                    <td><p class="mb10"><a href="javascript:;" class="a-del">删除</a></p></td>
+	                </tr>
+	            </tbody>
+	        </table>
+	        <div class="pay-js-btn clearfix">
+	            <a href="javascript:;" class="fl ml30 c3 del-check">删除选中的商品</a>
+	            <div class="fr">
+	                <span class="mr30 f14">已选择了<span id="all-num">0</span>件商品</span>
+	                <span class="mr30 f16">总价：<em class="ccheng">¥0.00</em></span>
+	                <a style="cursor: pointer;" id="settlement" class="btn_cc1 fr">去结算</a>
+	            </div>
+	        </div>
+	    </div>
+    </div>
+</div>
+<!--***弹窗 start****************************************-->
 <div class="bg-tanc m1">
 	<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
 		<a href="javascript:;" class="tc-close"></a>
