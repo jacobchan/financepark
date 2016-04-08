@@ -99,7 +99,7 @@
 			$.ajax({
 				url:baseUrl+'memberadrAddressManager/getMemberadrAddresssByUser.json', 
 				success:function(result){
-					console.log(result);
+					//console.log(result);
 					if(result&&result.records){
 						_parseRecords(result.records);
 					}
@@ -240,7 +240,7 @@
 					data:params.join('&'),
 					success:function(result){
 						if(result&&result.records){
-							
+
 							$("#floorNo").text(result.records[0].floorNo);	
 							var html = "";
 							$("#floo").empty();
@@ -269,7 +269,7 @@
 					 var a1 = $("#buildingNo").text();
 					 var a2 = $("#floorNo").text();
 					 var a3 = $("#ad1").val();
-					 addressDetail = a1+a2+a3;
+					 addressDetail = a1+"栋"+a2+"室"+a3;
 				}else if(bool=='1'){
 					addressDetail = $("#ad2").val();
 				}
@@ -309,12 +309,26 @@
 				     $(".select-nav").hide();
 				});
 				$(".select-nav li").click(function(){
-					$(this).parents(".tct-select").find(".ic-select p").text($(this).text()) ;
 					var lival = $(this)[0].getAttribute("value");
-					$(this).parents(".tct-select").find(".ic-select p")[0].setAttribute("value",lival);
+					var params = ['buildingId='+lival];
+					var as =$(this);
+					$.ajax({
+						url:baseUrl +"bbmBuildingManager/getBbmBuilding.json", 
+						data:params.join('&'),
+						success:function(result){
+							if(result&&result.record){
+									var  a = result.record.bbmPark.address;
+									var na = result.record.bbmPark.parkName;
+									var budingNo = result.record.buildingNo;
+									var add =a+na+budingNo;	
+									as.parents(".tct-select").find(".ic-select p").text(add);
+								}
+							}
+					});
+					//$(this).parents(".tct-select").find(".ic-select p").text(add);
+					as.parents(".tct-select").find(".ic-select p")[0].setAttribute("value",lival);
 					getfloor(lival);
-					
-					$(this).parent().hide();
+					as.parent().hide();	
 				});
 			};
 			function floorclick(){
