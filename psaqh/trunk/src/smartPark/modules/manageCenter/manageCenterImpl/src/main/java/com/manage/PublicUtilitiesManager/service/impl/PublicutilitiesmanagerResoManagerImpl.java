@@ -312,11 +312,11 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 			}else if("publicResoId".equals(genreProperty.getGenrePropertyFieldName())){
 				orderExtendValue.setOrderprojecttypeValueFieldValue(publicResoIdBuff.toString());
 			}else if("driver".equals(genreProperty.getGenrePropertyFieldName())){
-				if(addService.equals("01")){//01：有增值服务：司机
+				if(addService.equals("true")){//01：有增值服务：司机
 					orderExtendValue.setOrderprojecttypeValueFieldValue(addService);
 				}
 			}else if("tea".equals(genreProperty.getGenrePropertyFieldName())){
-				if(addService.equals("01")){//01：有增值服务：茶水
+				if(addService.equals("true")){//01：有增值服务：茶水
 					orderExtendValue.setOrderprojecttypeValueFieldValue(addService);
 				}
 			}
