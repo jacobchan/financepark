@@ -629,6 +629,7 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 	 public List<PublicutilitiesmanagerReso> findMonthResoList(@ServiceParam(name="commodityId") String commodityId,@ServiceParam(name="month") String month ) throws BusException{
 		// List<PublicutilitiesmanagerReso> resoList=publicutilitiesmanagerResoDao.getList(new String[] {"resoDate","commodityId.commodityId"}, new  String[] {resoDate,commodityId});
 		String[] m = month.split(",");
+		//时间格式 eg:2016-03-01
 		String startMonth = m[0]+"-"+m[1]+"-01";
 		String endMonth = m[0]+"-"+m[1]+"-31";
 		Collection<Condition> conditions = new ArrayList<Condition>();
