@@ -252,7 +252,9 @@
 					status = "未到访";
 				}else if(record.status=='02'){
 					status = "已到访";
-				}								
+				}else if(record.status=='03'){
+					status = "已取消";
+				}
 				return status;			
 		};
 		function cancel(obj){
@@ -311,7 +313,7 @@
 		$(".hhf-submit").click(function(){
 				var id=$(".fkCode")[0].getAttribute("id");
 			 	$.youi.ajaxUtils.ajax({
-					url:baseUrl+'propertyservicemanagerFkcodeManager/getFkcodeforpage.json',
+					url:baseUrl+'propertyservicemanagerFkcodeManager/cancelStatus.json',
 					data:'fkcodeId='+id,
 					success:function(result){
 						if(result&&result.record){
