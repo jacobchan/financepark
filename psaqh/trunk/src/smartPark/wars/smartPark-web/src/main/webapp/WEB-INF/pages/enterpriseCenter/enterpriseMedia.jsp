@@ -27,7 +27,7 @@
 					    				$("#mediaDiv").empty();
 					    				for(var i=0; i<records.length; i++){
 					    					var imgsrc = "../styles/images/qiye/photo_list1.png";
-					    					if(records[i].mediaUrl.length!=0){
+					    					if(records[i].mediaUrl!=null && records[i].mediaUrl!=""){
 					    						imgsrc = cenUrl+"common/uploadImage.html?repository=/swfupload&path="+records[i].mediaUrl+"&method=show";
 					    					}
 					    					var mediaDiv = '<li>'+
