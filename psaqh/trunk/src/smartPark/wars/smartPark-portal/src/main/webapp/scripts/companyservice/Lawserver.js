@@ -1,21 +1,7 @@
-//定时跳转
-function countdown(i){
-	$("#ti-m1").text(i);
-    i = i - 1;
-    if(i > 0) {
-        setTimeout("countdown("+i+")", 1000);
-    }else{
-    	jump();
-    }
-}
-//跳转页面
-function jump(){
-	window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
-}
 //加法函数  
 function accAdd(arg1, arg2) {  
     var r1, r2, m;  
-    try{ 
+    try{  
         r1 = arg1.toString().split(".")[1].length;  
     }catch (e) {
         r1 = 0;  
@@ -27,11 +13,12 @@ function accAdd(arg1, arg2) {
     }  
     m = Math.pow(10, Math.max(r1, r2));  
     return (arg1 * m + arg2 * m) / m;  
-}
+}   
+
 //减法函数  
 function Subtr(arg1, arg2) {  
     var r1, r2, m, n;  
-    try { 
+    try {  
         r1 = arg1.toString().split(".")[1].length;  
     }catch (e) {  
         r1 = 0;  
@@ -45,17 +32,8 @@ function Subtr(arg1, arg2) {
      //动态控制精度长度  
     n = (r1 >= r2) ? r1 : r2;  
     return ((arg1 * m - arg2 * m) / m).toFixed(n);  
-}
-//toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
-var pltime,timer;
-function closeTanc(){
-    if(pltime>1){
-        pltime--;
-    }else{
-        $(".toast").hide();
-    }       
-}
-//商品增加减少删除
+} 
+
 function click(){
 	$(".cos_add").click(function(){
 		var count = $(this).parents("tr").attr("data-num");
@@ -112,7 +90,6 @@ function click(){
 		
 	});
 }
-//评论星级
 function star(ele){
 	$(ele).hover(function(){
 		var index=$(this).index()+1;
@@ -123,11 +100,8 @@ function star(ele){
 		}
 	});
 }
-
-//页面加载方法
 $(function(){
-	//商品展示
-	var serviceURL = baseUrl+"purchasingmanagerCommodityManager/getAgencyCommodityList.json";
+	var serviceURL = baseUrl+"purchasingmanagerCommodityManager/getLawSerCommodityList.json";
 	$.youi.ajaxUtils.ajax({
 		url:serviceURL,
 		jsonp:'data:jsonp',
@@ -137,25 +111,32 @@ $(function(){
 				var htmls = [];
 				var htmlss = [];
 				for(var i=0;i<results.records.length;i++){
-					htmls.push('<tr><td style="background:#F0F0F0 url('+cenUrl+'common/uploadImage.html?repository=/swfupload&path='+
-							results.records[i].commodityImage+'&method=show) center center no-repeat;width:78px;"></td><td><div class="ab_proinfo c3 f16">'+
-							results.records[i].commodityTitle+'</div></td>'+
-							'<td class="w50"><div class="p15 c3"><span>'+results.records[i].commodityPrice+'元/</span><span>'+
-							results.records[i].agencyBook.serviceTerm+'</span><div class="inline_b fr ml30">'+
-							'<a href="javascript:;" class="ab_shop" data-id="'+results.records[i].commodityId+
-					'"data-commodityTitle="'+results.records[i].commodityTitle+'"data-commodityPrice="'+results.records[i].commodityPrice+
-					'"></a></div><span class="cc inline_b fr mr50">杭州</span></div></td></tr>');
-					
-					htmlss.push('<li id ="'+results.records[i].commodityId+'shopul">'+results.records[i].commodityTitle+'&nbsp;&nbsp;<span class="cc">'+results.records[i].commodityPrice+
-					'</span>&nbsp;元/次&nbsp;<div class="shop0" data-id="'+results.records[i].commodityId+
-					'"data-commodityTitle="'+results.records[i].commodityTitle+
-					'"data-commodityPrice="'+results.records[i].commodityPrice+'"></div></li>');
+					if(i==0){
+						htmls.push('<span class="span_bold f20">'+results.records[i].commodityTitle+'</span><p class="f13 c3 mt20 mb20">'+
+								results.records[i].commodityDescribe+'</p>'+
+								'<span class="span_bold f20">&yen;'+results.records[i].commodityPrice+'</span><p class="caaa mt10 mb10">（服务期：'+
+								results.records[i].lawserver.serTerm+'）</p>'+
+								'<a href="javascript:;" class="btn-cheng inline_b law_pop" data-id="'+
+								results.records[i].commodityId+'" data-commodityTitle="'+results.records[i].commodityTitle+
+								'" data-commodityPrice="'+results.records[i].commodityPrice+'">立即购买</a>');
+						htmlss.push('<li id ="'+results.records[i].commodityId+'shopul">'+results.records[i].commodityTitle+
+								'&nbsp;&nbsp;<span class="cc">'+results.records[i].commodityPrice+
+								'</span>&nbsp;元/次&nbsp;<div class="shop0" data-id="'+results.records[i].commodityId+
+								'"data-commodityTitle="'+results.records[i].commodityTitle+
+								'"data-commodityPrice="'+results.records[i].commodityPrice+'"></div></li>');
+					}
 				}
-				$('.ab_pro').html(htmls.join(''));
+				$('.layer').html(htmls.join(''));
 				$('.shopul').html(htmlss.join(''));
 			}
+			$(".nav_1,.navsub").hover(function(){
+				$(".navsub").show();
+			},function(){
+				$(".navsub").hide();
+			});
+			/**/
 			var $layer=$(".pop_layer");
-			$(".ab_shop").click(function(){
+			$(".law_pop").click(function(){
 				if(!isLogin){
 				   $(".bg-tanc.m2").show();
 				 	 return;
@@ -192,40 +173,24 @@ $(function(){
 			$(".pop_back").click(function(){
 				$layer.hide();
 			});
-			
-			$(".nav_1,.navsub").hover(function(){
-				$(".navsub").show();
-			},function(){
-				$(".navsub").hide();
+			$("i.fa").click(function(){
+				$(this).toggleClass("fa-check-square-o").toggleClass("fa-square-o");
 			});
+			/**/
 			$(".blend_ul>li").click(function(){
 				var index=$(this).index();
 				$(this).addClass("active").siblings("li").removeClass("active");
 				$(".blend_item").eq(index).show().siblings(".blend_item").hide();
 			});
 		}
-	}); 
-	//评论列表展示
-	var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/getPagerPurGenreEvaluatesByCode.json";
-	$.youi.ajaxUtils.ajax({
-		url:serviceURL,
-		data:{genreCode:"0504"},
-		jsonp:'data:jsonp',
-		dataType:'jsonp',
-		success:function(results){
-			if(results&&results.records){
-				var htmls = [];
-				for(var i=0;i<results.records.length;i++){
-					htmls.push('<li><div class="fl"><img src="../styles/images/company/user.png"/><span class="record_info ml20 c3 lh24">'+
-					'<div>'+results.records[i].memberInformation.memberName+'<i class="chuang"></i></div><p>'+results.records[i].content
-					+'<span>('+results.records[i].createTime+')</span></p></span></div></li>');
-				}
-				$('.record_ul').html(htmls.join(''));
-			}
-		}
-	}); 
+	});
 	
-	//商品购买提交方法
+	/**/
+	star(".starbox1 i");
+	star(".starbox2 i");
+	star(".starbox3 i");
+	star(".starbox4 i");
+	
 	$('#btn-sumbit').click(function(){
 		if(!isLogin){
 		   $(".bg-tanc.m2").show();
@@ -245,7 +210,7 @@ $(function(){
 				params = params+$.youi.parameterUtils.propertyParameter("records["+i+"].commoditydetailNum",num);
 			}
 		}
-		var serviceURL = baseUrl+"ordermanagerUserorderManager/saveAgencyOrder.json";
+		var serviceURL = baseUrl+"ordermanagerUserorderManager/saveLawSerOrder.json";
 		
 		$.youi.ajaxUtils.ajax({
 			url:serviceURL,
@@ -254,23 +219,38 @@ $(function(){
 			dataType:'jsonp',
 			success:function(results){
 				if(results&&results.record){
+					alert('订单提交成功！');
 					$(".pop_layer").hide();
-					$(".bg-tanc.m1").show();
-					countdown(3);
+					window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
 				}
 			}
 		});
 	});
-	//评论提交方法
+	var genreCode = "0505";
+	var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/getPagerPurGenreEvaluatesByCode.json";
+	$.youi.ajaxUtils.ajax({
+		url:serviceURL,
+		data:{genreCode:genreCode},
+		jsonp:'data:jsonp',
+		dataType:'jsonp',
+		success:function(results){
+			if(results&&results.records){
+				var htmls = [];
+				for(var i=0;i<results.records.length;i++){
+					htmls.push('<li><div class="fl"><img src="../styles/images/company/user.png"/><span class="record_info ml20 c3 lh24">'+
+					'<div>'+results.records[i].memberInformation.memberName+'<i class="chuang"></i></div><p>'+results.records[i].content
+					+'<span>('+results.records[i].createTime+')</span></p></span></div></li>');
+				}
+				$('.record_ul').html(htmls.join(''));
+			}
+		}
+	}); 
 	$('#evaluate').click(function(){
 		if(!isLogin){
-//		   $(".bg-tanc.m2").show();
-		   clearInterval(timer);
-           $(".toast").show();
-           pltime=1;
-           timer=setInterval("closeTanc()",1000);
-		   return;
+		   $(".bg-tanc.m2").show();
+		 	 return;
 		}
+		
 		var overallSatisfaction = 0;
 		var arr=$('.starbox1 i').toArray();
 		for(var i=0;i<arr.length;i++){
@@ -305,7 +285,7 @@ $(function(){
 		params = params+$.youi.parameterUtils.propertyParameter("reactionRate",reactionRate)+"&";
 		params = params+$.youi.parameterUtils.propertyParameter("serviceAttitude",serviceAttitude)+"&";
 		params = params+$.youi.parameterUtils.propertyParameter("costPerformance",costPerformance)+"&";
-		params = params+$.youi.parameterUtils.propertyParameter("genreCode","0504")+"&";
+		params = params+$.youi.parameterUtils.propertyParameter("genreCode",genreCode)+"&";
 		params = params+$.youi.parameterUtils.propertyParameter("evaluateContent",evaluateContent);
 		
 		var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/savePurGenreEvaluate.json";
@@ -322,7 +302,7 @@ $(function(){
 			}
 		});
 	});
-	//咨询提交方法
+	
 	$('#consult').click(function(){
 		if(!isLogin){
 		   $(".bg-tanc.m2").show();
@@ -332,7 +312,7 @@ $(function(){
 		var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/savePurGenreConsult.json";
 		$.youi.ajaxUtils.ajax({
 			url:serviceURL,
-			data:{content:content,genreCode:"0504"},
+			data:{content:content,genreCode:genreCode},
 			jsonp:'data:jsonp',
 			dataType:'jsonp',
 			success:function(results){
@@ -343,8 +323,4 @@ $(function(){
 			}
 		});
 	});
-	star(".starbox1 i");
-	star(".starbox2 i");
-	star(".starbox3 i");
-	star(".starbox4 i");
 });
