@@ -752,12 +752,12 @@
 		
 		function openURL(url){
 			   if(!isLogin){
-				   /* $(".f24.c-333").text("请登录!");
-				   $(".pop_layer.pl1").show(); */
-				   clearInterval(timer);
+				   $(".f24.c-333").text("请登录!");
+				   $(".pop_layer.pl1").show();
+				   /*clearInterval(timer);
 		            $(".toast").show();
 		            pltime=2;
-		            timer=setInterval("closeTanc()",1000);
+		            timer=setInterval("closeTanc()",1000);*/
 				 	 return false;
 				}
 			   if(url=='0'){
@@ -1253,7 +1253,7 @@
         */
 	</script>
     <!-- 弹出层样式 -->
-    <div class="toast" style="display:block">
+    <div class="toast">
         <div class="toast-con clearfix">
             <div class="close-toast fr"></div>
             <p class="tc mt25 f18" style="color:#ff6715">请登录后重试！</p>
