@@ -366,7 +366,11 @@
 			success : function(results) {
 				if (results && results.records) {
 					var records = results.records;
-					$('.ml10').append("<img src='"+imageUrl+records[0].commodityImage+"' height='261' width='385'/>");
+					var imageUrl="../styles/images/index/ad1.jpg";
+					if(records[0].commodityImage !=null && records[0].commodityImage!=""){
+						   imageUrl=cenUrl+"common/uploadImage.html?repository=/swfupload&path="+records[0].commodityImage+"&method=show";
+					}
+					$('.ml10').append("<img src='"+imageUrl+"' height='261' width='385'/>");
 					$('#commodityName').text(records[0].commodityTitle);
 					$('#commodityPrice').text(records[0].commodityPrice);
 					$('#commodityDescribe').html(records[0].commodityDescribe);
@@ -374,14 +378,15 @@
 							.text("联系人：" + records[0].purchasingmanagerMerchant.merchantLinkman);
 					$('#merchantPhone').text(
 							"联系电话：" + records[0].purchasingmanagerMerchant.merchantLinkmanPhone);
-					if (records[0].dwValue != null) {
-						$('#dw').text(records[0].dwValue);
+					if(records[0].billboard.size!= null){
+						$('#dw').text(records[0].billboard.size);
 					}
-					if (records[0].zwValue != null) {
-						$('#zw').text(records[0].zwValue);
+					if(records[0].billboard.loopType != null){
+						$('#zw').text(records[0].billboard.loopType);
 					}
-					if (records[0].cpValue != null) {
-						$('#cp').text(records[0].cpValue);
+					if(records[0].billboard.unit != null){
+						$('#cp').text(records[0].billboard.unit);
+						
 					}
 				}
 			}
