@@ -412,12 +412,10 @@ function GetRequest() {
 			if(!isLogin){alert("请登录");return;}
 			var enteringName=$("#enteringName").val();
 			var enteringTelephone=$("#enteringTelephone").val();
-			var tea='';
+			var tea=false;
 		    if($(".ib-checkbox").children('input[type="checkbox"]').is(":checked")){
-		    	tea='01';
-	          }else{
-	            tea='00';
-	         }
+		    	tea=true;
+	          }
             if(enteringName == null||enteringName == ""){
 				alert("请填写联系人!");
 				return;
