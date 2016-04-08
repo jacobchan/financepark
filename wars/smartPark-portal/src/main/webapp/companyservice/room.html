@@ -88,8 +88,8 @@
         <div class="mt30 clearfix">
         	<div class="res_left">
             	<ul id="carfix">
-                	<li class="clearfix">
-                    	<!-- <div class="fl"><img src="../styles/images/company/car1.jpg"/></div>
+                	<!--<li class="clearfix">
+                    	 <div class="fl"><img src="../styles/images/company/car1.jpg"/></div>
                         <div class="fl ml30" style="width:535px">
                         	<a href="roomxq.html" class="span_bold f20">奔驰 威亭 9座商务车</a>
                             <div class="mt20 mb20">
@@ -104,8 +104,8 @@
                                 <img class="mr10" src="../styles/images/company/res_ico.png"/><span class="vm">联系电话：134534565756</span>
                                 <div class="jcbg f20 fr">&yen;500元/次</div>
                             </div>
-                        </div> -->
-                    </li>
+                        </div>
+                    </li> -->
                    <!--  <li class="clearfix">
                     	<div class="fl"><img src="../styles/images/company/car1.jpg"/></div>
                         <div class="fl ml30" style="width:535px">
@@ -218,16 +218,18 @@ var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommod
 				success:function(results){
 				//   _parseRecordCount(results);
 				//	 $('.pb25').append(html);
-						pageCount=Math.ceil(results.totalCount/pageSize);
-						 refreshData(1,pageSize);
-							$(".tcdPageCode").createPage({
-							    pageCount:pageCount,
-							    current:1,
-							    backFn:function(p){
-							       this.pageCount=pageCount;
-							        refreshData(p,pageSize);
-							    }
-							});
+				if(results.totalCount >0){
+					pageCount=Math.ceil(results.totalCount/pageSize);
+					 refreshData(1,pageSize);
+						$(".tcdPageCode").createPage({
+						    pageCount:pageCount,
+						    current:1,
+						    backFn:function(p){
+						       this.pageCount=pageCount;
+						        refreshData(p,pageSize);
+						    }
+						});
+				}
 				}
 			});
 			
