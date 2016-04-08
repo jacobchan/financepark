@@ -6,6 +6,7 @@
 <link href="../styles/base.css" type="text/css" rel="stylesheet">
 <link href="../styles/page/page.css" type="text/css" rel="stylesheet">
 <link href="../styles/page/fullcalendar.css" rel="stylesheet" type="text/css">
+<link href="../styles/page/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
@@ -409,6 +410,7 @@ function GetRequest() {
 		$("#online").click(function(){
 			//alert("已预约id："+$("#resoIds").html().substring(0,$("#resoIds").html().length-1));
 			$(".pop_layer").show();
+			$(".pop_layer.pl1").hide();
 		});
 		$(".close0").click(function(){
 			$(".pop_layer").hide();
@@ -496,8 +498,8 @@ function GetRequest() {
 					dataType:'jsonp',
 					success:function(result){
 						if(result&&result.record){
-							alert("预约成功");
 							$(".pop_layer").hide();
+							$(".pop_layer.pl1").show();
 							window.location="roomxq.html?id="+commodityId;
 						}
 					},error:function(XMLHttpRequest, textStatus, errorThrown){
@@ -536,6 +538,22 @@ function GetRequest() {
             <p class="tc mt25 f18" style="color:#ff6715">请登录后重试！</p>
         </div>
         
+    </div>
+    
+    <!-- 弹窗 -->
+    <div class="pop_layer pl1">
+        <div class="online_box clearfix" style="width:550px;height:212px;margin-left:-275px;margin-top:-111px;padding:30px;">
+            <div class="close0 fr"></div>
+            <table class="w100 mt40 c3">
+                <tr>
+                    <td width="28%" align="right"><img src="../styles/images/grzx/check.png" class="mr40 mb20" border="0"></td>
+                    <td >
+                        <h4 class="f24 c-333"> 您已预约成功！</h4>
+                        <p class="f14 cc mt20 mb20">如有问题，请拨打：0571-86508888</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </body>
 </html>
