@@ -1,6 +1,6 @@
 *{box-sizing:border-box;-moz-box-sizing: border-box;-webkit-box-sizing: border-box; -o-box-sizing: border-box; -ms-box-sizing: border-box;margin:0px;padding:0px;}
 body,html{margin:0;padding:0;height:100%}
-body{font-size:14px;background-color:#f5f5f5;color:#666;-webkit-font-smoothing:antialiased}
+body{font-size:14px;background-color:#f5f5f5;color:#666;}
 a{color:#4c5f70;outline:0}
 a:focus,a:hover{text-decoration:none;outline:0}
 ul{padding:0;margin:0; list-style:none;}
@@ -61,7 +61,7 @@ height:100%; position:fixed;}
 .qiye_fullname, .qiye_address, .qiye_web, .qiye_link, .born_time, .rongzi_je, .rongzi_gz, .kechi_gf, .rongzi_time{ width:100%; height:30px; padding-left:75px;clear:both; line-height:30px;margin-bottom:25px;}
 .qiye_nametex, .qiye_word, .qiye_webtex, .qiye_linktex, .born_date, .qiye_rzje, .qiye_rzgz, .qiye_kcgf, .qiye_rzsj{width:100px; height:32px; float:left; color:#2d2b29; font-size:14px;}
 .name_input, .web_input, .link_input{ width:289px; height:32px; border:1px solid #ecebeb; float:left}
-.name_input input, .web_input input, .link_input input{ width:285px; height:24px; border:0; padding:0 5px; color:#2d2b29; font-size:12px; margin:0}
+.name_input input, .web_input input, .link_input input{ width:285px;border:0; padding:0 5px; color:#2d2b29; font-size:12px; margin:0;height: 30px;}
 
 .qiye_jianjie, .rongzi_js{ width:100%; height:140px; padding-left:75px;margin-bottom:25px;}
 .word_input{ width:80%; border:1px solid #ecebeb; height:140px; float:left;}
