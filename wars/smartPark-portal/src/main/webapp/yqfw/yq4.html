@@ -202,7 +202,11 @@ $(function(){
 			dataType:'jsonp',
 			success:function(results){
 				if(results&&results.record){
-					$(".bg-tanc.m2").show();
+					clearInterval(timer);
+					$(".tc.mt25").text("申请成功!");
+		           	$(".toast").show();
+		           	pltime=1;
+		           	timer=setInterval("closeTanc()",1000);
 					window.location=cenUrl+"member/memberCenter/propertyService/propertyManageFk.html";
 				}
 			}
