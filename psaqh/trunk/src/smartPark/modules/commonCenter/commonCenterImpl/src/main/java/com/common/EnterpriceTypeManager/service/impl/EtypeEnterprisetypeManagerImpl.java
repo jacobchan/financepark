@@ -1,19 +1,12 @@
-/**
- * 代码声明
- */
 package com.common.EnterpriceTypeManager.service.impl;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
-//import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
@@ -24,7 +17,6 @@ import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.common.EnterpriceTypeManager.entity.EtypeEnterprisetype;
 import com.common.EnterpriceTypeManager.dao.EtypeEnterprisetypeDao;
 import com.common.EnterpriceTypeManager.service.EtypeEnterprisetypeManager;
-
 @Service("etypeEnterprisetypeManager")
 @Transactional
 public class EtypeEnterprisetypeManagerImpl extends BaseManagerImpl implements EtypeEnterprisetypeManager{
@@ -96,7 +88,8 @@ public class EtypeEnterprisetypeManagerImpl extends BaseManagerImpl implements E
 		return etypeEnterprisetypeDao.exists(propertyName,value);
 	}
     
-    public List<EtypeEnterprisetype> getChildren(
+    @SuppressWarnings("unused")
+	public List<EtypeEnterprisetype> getChildren(
 			@ServiceParam(name="enTypeId") String parentId) throws BusException {
 		Collection<Condition> conditions = new ArrayList<Condition>();
 		Collection<Order> orders = new ArrayList<Order>();
@@ -119,7 +112,7 @@ public class EtypeEnterprisetypeManagerImpl extends BaseManagerImpl implements E
 	public String findEnterpriseTypeTree() throws BusException{
 		StringBuffer resultJson = new StringBuffer();
 		String json = "";
-		List<EtypeEnterprisetype> sc = etypeEnterprisetypeDao.getAll();
+		List<EtypeEnterprisetype> sc = etypeEnterprisetypeDao.getEtypeEnterprisetypeList();
 		if (sc.size() > 0) {
 			for (int i = 0; i < sc.size(); i++) {
 				if(!"".equals(sc.get(i).getEtypeEnterprisetype()) && null!=sc.get(i).getEtypeEnterprisetype()){
