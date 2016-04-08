@@ -39,7 +39,7 @@
 					}
 				});
 			  	
-			  	//$("#moreul").slideUp("slow");
+			  	$("#moreul").slideUp("slow");
 			  	$(".sidebar-menu-mainul > li:eq(1)").addClass("active");
 			});
 			function refreshData(pageIndex,pageSize){

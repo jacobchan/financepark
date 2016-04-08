@@ -112,7 +112,7 @@
 					var financingPre=$("#financingPre").val();
 					var financingTime=$("#financingTime").val();
 					var financingDescribe=$("#financingDescribe").val();
-					var financingSub=$('#roundFinancing li.selected').attr("data-val");
+					var financingSub=$('#roundFinancing li.selected').attr("data-id");
 					var params = ['financingId='+financingId+'','financingRe='+financingRe+'','financingName='+financingName+'','financingAmount='+financingAmount+'','financingCost='+financingCost+'','financingPre='+financingPre+'','financingTime='+financingTime+'','financingDescribe='+financingDescribe+'','financingSub='+financingSub+''];
 					//金额正则表达式
 					var regex = /^\d+\.?\d{0,2}$/;
