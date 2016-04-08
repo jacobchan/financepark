@@ -328,6 +328,12 @@ function GetRequest() {
 				$("#data_timer").html(htmls);
 			}
 		});
+		
+		  //关闭toast
+        $(".close-toast").click(function(){
+            $(".toast").hide();
+        })
+		
 		$(".fc-prev-button").on("click",this,function(){
 			cursor--;
 			var flag=judgment();
@@ -409,7 +415,14 @@ function GetRequest() {
 		});
 		  //提交预约
 		$('.btn-cheng').click(function(){
-			if(!isLogin){alert("请登录");return;}
+			if(!isLogin){
+			
+				clearInterval(timer);
+	            $(".toast").show();
+	            pltime=2;
+	            timer=setInterval("closeTanc()",1000)
+				return;
+				}
 			var enteringName=$("#enteringName").val();
 			var enteringTelephone=$("#enteringTelephone").val();
 			var tea=false;
@@ -504,6 +517,25 @@ function GetRequest() {
 		});
 		
 	})
+	
+	      //toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
+        var pltime,timer;
+        function closeTanc(){
+            if(pltime>1){
+                pltime--;
+            }else{
+                $(".toast").hide();
+            }       
+        }
 </script>
+
+   <!-- 弹出层样式 -->
+    <div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715">请登录后重试！</p>
+        </div>
+        
+    </div>
 </body>
 </html>
