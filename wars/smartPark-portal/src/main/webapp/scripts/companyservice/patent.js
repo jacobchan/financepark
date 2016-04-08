@@ -122,6 +122,27 @@ function star(ele){
 		}
 	});
 }
+//评论列表展示
+function evaluate(){
+	var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/getPagerPurGenreEvaluatesByCode.json";
+	$.youi.ajaxUtils.ajax({
+		url:serviceURL,
+		data:{genreCode:"0506"},
+		jsonp:'data:jsonp',
+		dataType:'jsonp',
+		success:function(results){
+			if(results&&results.records){
+				var htmls = [];
+				for(var i=0;i<results.records.length;i++){
+					htmls.push('<li><div class="fl"><img src="../styles/images/company/user.png"/><span class="record_info ml20 c3 lh24">'+
+					'<div>'+results.records[i].memberInformation.memberName+'<i class="chuang"></i></div><p>'+results.records[i].content
+					+'<span>('+results.records[i].createTime+')</span></p></span></div></li>');
+				}
+				$('.record_ul').html(htmls.join(''));
+			}
+		}
+	});
+}
 $(function(){
 	//关闭toast
     $(".close-toast").click(function(){
@@ -293,24 +314,7 @@ $(function(){
 		});
 	});
 	var genreCode = "0506";
-	var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/getPagerPurGenreEvaluatesByCode.json";
-	$.youi.ajaxUtils.ajax({
-		url:serviceURL,
-		data:{genreCode:genreCode},
-		jsonp:'data:jsonp',
-		dataType:'jsonp',
-		success:function(results){
-			if(results&&results.records){
-				var htmls = [];
-				for(var i=0;i<results.records.length;i++){
-					htmls.push('<li><div class="fl"><img src="../styles/images/company/user.png"/><span class="record_info ml20 c3 lh24">'+
-					'<div>'+results.records[i].memberInformation.memberName+'<i class="chuang"></i></div><p>'+results.records[i].content
-					+'<span>('+results.records[i].createTime+')</span></p></span></div></li>');
-				}
-				$('.record_ul').html(htmls.join(''));
-			}
-		}
-	}); 
+	evaluate();
 	$('#evaluate').click(function(){
 		if(!isLogin){
             $(".toast").show();
@@ -363,8 +367,11 @@ $(function(){
 			dataType:'jsonp',
 			success:function(results){
 				if(results&&results.record){
-					alert('评论成功！');
-					location.reload([true]);
+					$('#toast_text').html('评论成功！');
+					$('#evaluateContent').val('');
+					$(".toast").show();
+		            setTimeout('$(".toast").hide();',1000);//1秒=1000
+					evaluate();
 				}
 			}
 		});
@@ -385,8 +392,10 @@ $(function(){
 			dataType:'jsonp',
 			success:function(results){
 				if(results&&results.record){
-					alert('提交成功！');
-					location.reload([true]);
+					$('#toast_text').html('提交成功！');
+					$('#consultContent').val('');
+					$(".toast").show();
+		            setTimeout('$(".toast").hide();',1000);//1秒=1000
 				}
 			}
 		});
