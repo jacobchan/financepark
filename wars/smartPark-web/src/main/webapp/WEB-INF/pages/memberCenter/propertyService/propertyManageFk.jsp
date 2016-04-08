@@ -206,9 +206,13 @@
 			$("tbody").append(ht);
 			for(var i=0;i<record.length;i++){
 				var id = record[i].fkcodeId ;
+				var time = record[i].fkcodeTime ;
+				if(time){
+					time = time.substring(0,10) ;
+				}
 				var html="<tr id='"+id +"' class='aaa'>"+
 						"<td><a href=''>"+record[i].fkCode+"</a></td>"+
-						"<td>"+record[i].fkcodeTime+"</td>" +	
+						"<td>"+time+"</td>" +	
 						"<td class='"+id+"'></td>"+
 					"<td>"+record[i].fkcodeName+"</td>"+
 						"<td>"+record[i].fkcodeTelephone+"</td>"+
@@ -282,7 +286,8 @@
 			});
 		};
 		//根据订单号查询
-		$('.hhf-submit').click(function(){				
+		$('.hhf-submit').click(function(){
+				
 			$(".aaa").empty();
 			 var fkCode=$("#fkCode").val(); 
 			 var startTime=$("#startTime").val(); 
