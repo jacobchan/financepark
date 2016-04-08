@@ -5,10 +5,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>企业码</title>
 		<%@ include file="/WEB-INF/pages/common/enterpriseScriptAddCss.jsp"%>
+		<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/page/zs.css">
 		<script type="text/javascript">
 			$(document).ready(function() {
-				var height = Math.max((document.documentElement.clientHeight -135), ($(".main-wrapper").height()));
-				document.getElementById('main-wrapper-right').style.height=height+'px';
 			  	$.ajax({
 					url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
 					success:function(result){
