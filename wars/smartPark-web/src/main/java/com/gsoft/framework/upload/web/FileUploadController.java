@@ -63,20 +63,21 @@ public class FileUploadController {
 	public void goUpload(HttpServletRequest request,
 			HttpServletResponse response){
 		
-		List<String> urlList = null;
+		List<String> urlList = new ArrayList<String>();
 		try {
-			request.setAttribute("root", root);
+			//获取上传的类型的标识 0:图片类型 ;1:文件类型 
+			//TODO 后续完善
+			String fileFlg = request.getParameter("fileFlg");
+			//执行上传操作，返回带有文件URL的集合
 			urlList = this.uploadFile(request, response);
-			for(int i=0;i<urlList.size();i++){
-				System.out.println(urlList.get(i)); 
-			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			urlList.clear();
 		}
 		
 		try {
 			 JSONObject jsObject = new JSONObject();
 			 if(urlList.size()>0){
+				 //返回回调的文件url集合
 				 jsObject.put( "status", "0" );
 				 jsObject.put( "fileUrl", urlList);
 			 }else{
@@ -85,7 +86,6 @@ public class FileUploadController {
 			 String reString = jsObject.toString();
              response.getWriter().write(reString);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
