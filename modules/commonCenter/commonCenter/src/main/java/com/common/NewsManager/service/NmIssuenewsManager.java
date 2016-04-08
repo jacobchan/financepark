@@ -148,6 +148,6 @@ public interface NmIssuenewsManager extends BaseManager{
 	 */
 	public PagerRecords getPagerAllPolicy(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=NmIssuenews.class) Collection<Condition> conditions,//查询条件
-			@OrderCollection Collection<Order> orders)  throws BusException ;
+			@OrderCollection Collection<Order> orders,String issueTypeCode)  throws BusException ;
 	
 }
