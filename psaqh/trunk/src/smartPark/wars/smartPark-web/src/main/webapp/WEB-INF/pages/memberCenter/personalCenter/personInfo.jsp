@@ -92,26 +92,19 @@
 			
 	<!--***弹窗 end****************************************-->
 	<!--***弹窗 start****************************************-->
-	 <div class="bgtanc ">
-			<div class="tanccon" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
-				<a href="javascript:;" class="tcclose"></a>
-				<div class="w70 tc mt40" style="margin-left:15%">
-					<table>
-						<tr>
-							<td></td>
-							<td >
-								
-								<h3 class="f14 c-o fl mt20 mb20"> </h3>
-								<!-- <h3 class="f14 c-o fl mt20 mb20"> 还有<span class="tt">0</span>秒关闭弹出框</h3> -->
-							</td>
-						<tr/>
-					</table>
-				</div>
-			</div>
-		</div> 
-			
-	<!--***弹窗 end****************************************-->
 	
+		<!-- 弹出层样式 -->
+     <div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
+        </div> 
+        
+    </div>
+    	
+	
+	<!--***弹窗 end****************************************-->
+
 	</youi:body>
 	<script type="text/javascript">
 		$(function(){			
@@ -184,10 +177,9 @@
 	    					url:baseUrl+'memberInformationManager/saveMemberInformation.json',
 	    					data:params.join('&'),
 	    					success:function(result){
-	    						if(result&&result.record){
-	    							$(".f14.c-o.fl.mt20.mb20").text("修改成功");
-	    							$(".bgtanc").show(); 
-	    							location.reload();
+	    						if(result&&result.record){	    						
+	    							$(".toast").show(); 
+	    							setTimeout(function(){window.location; },800);
 	    						}
 	    					}
 	    				});
@@ -199,11 +191,9 @@
 					url:baseUrl+'memberInformationManager/saveMemberInformation.json',
 					data:params.join('&'),
 					success:function(result){
-						if(result&&result.record){
-							$(".f14.c-o.fl.mt20.mb20").text("修改成功");
-							$(".bgtanc").show(); 	
-							
-							location.reload();
+						if(result&&result.record){							
+							$(".toast").show(); 
+							setTimeout(function(){location.reload(); },800);
 						}
 					}
 				});
@@ -231,10 +221,10 @@
 				data:params.join('&'),
 				success:function(result){
 					if(result&&result.record){
-						//alert(result.record.html);
+						
 						$(".c-o.aa").text(result.record.html);
 						$(".c-o.aa").show(); 	
-						//location.reload();
+						
 					}
 				}
 			});
