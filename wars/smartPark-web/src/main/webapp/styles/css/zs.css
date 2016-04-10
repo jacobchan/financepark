@@ -974,3 +974,7 @@ a.see-all:hover{color: #FF6715;}
 .ib-nav{border-left: 1px solid #FF6715}
 .ib-nav li{border:1px solid #FF6715;color: #FF6715;width: 105px;float: left;border-left: 0px;text-align: center;line-height: 28px;cursor: pointer;transition: all .4s linear;-moz-transition: width  all .4s;-webkit-transition:  all .4s;-o-transition: all .4s linear;}
 .ib-nav li:hover,.ib-nav li.active{background-color: #FF6715;color: #fff;}
+/**个人中心-- 弹窗**/	
+.toast { background: rgba(0,0,0,0.5);position: fixed;display: none; z-index: 99999;left: 0px;right: 0px;top: 0px; bottom: 0px;}
+.toast .toast-con { width: 320px;height: 110px;margin-left: -160px;top: 50%;left: 50%; margin-top: -55px;position: absolute;padding: 20px;border-radius: 5px;background: rgb(255,255,255);}
+.clearfix:after {content: ".";display: block;height: 0;clear: both;visibility: hidden;}
