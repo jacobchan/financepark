@@ -179,7 +179,7 @@
 	    					success:function(result){
 	    						if(result&&result.record){	    						
 	    							$(".toast").show(); 
-	    							setTimeout(function(){window.location; },800);
+	    							setTimeout(function(){location.reload(); },600);
 	    						}
 	    					}
 	    				});
@@ -193,7 +193,7 @@
 					success:function(result){
 						if(result&&result.record){							
 							$(".toast").show(); 
-							setTimeout(function(){location.reload(); },800);
+							setTimeout(function(){location.reload(); },600);
 						}
 					}
 				});
