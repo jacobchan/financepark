@@ -57,12 +57,20 @@
 		
 		//拼接卡号列表
 		function _parseRecords(record){		
-	 		for(var i=0;i<record.length;i++){																									
+	 		for(var i=0;i<record.length;i++){
+	 			  var memberDescribe2="";
+	 			 var createTime="";
+	 			   if(record[i].memberDescribe2==""){
+	 				   memberDescribe2="";
+	 			   }
+	 			  if(record[i].memberDescribe2==""){
+	 				 createTime="";
+	 			   }
 					var html= "<tr class='aaa'>"+
 				      "<td >"+record[i].memberName+"</td>"+
 				      "<td >"+record[i].memberPhoneNumber+"</td>"+
-				      "<td >"+record[i].memberDescribe2+"</td>"+
-				      "<td>"+record[i].createTime+"</td>"+				      				    					    
+				      "<td >"+memberDescribe2+"</td>"+
+				      "<td>"+createTime+"</td>"+				      				    					    
                       " </tr>"; 
 			          $(".gt-table").append(html);					  								 				
 			}
