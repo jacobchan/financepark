@@ -36,6 +36,7 @@ import com.manage.ActivityManager.service.ActivityApplyManager;
 import com.manage.ActivityManager.service.ActivityApplylistManager;
 import com.manage.ActivityManager.service.ActivityCommentManager;
 import com.manage.ActivityManager.service.ActivityDocumentManager;
+import com.mysql.jdbc.Util;
 
 @Service("activityApplyManager")
 @Transactional
@@ -238,6 +239,9 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
     	//获取当前用户参加活动的list
+    	if(StringUtils.isEmpty(o.getApplyId())){
+    		return this.getActivityApplys();
+    	}
     	Collection<Condition> condition = new ArrayList<Condition>();
     	condition.add(ConditionUtils.getCondition("applayType.typeId", Condition.EQUALS,o.getApplayType().getTypeId()));	
     	List<ActivityApply> activityApplyList=activityApplyDao.commonQuery(condition, null);
