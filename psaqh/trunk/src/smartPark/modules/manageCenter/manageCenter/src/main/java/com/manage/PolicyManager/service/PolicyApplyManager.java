@@ -94,4 +94,11 @@ public interface PolicyApplyManager extends BaseManager{
      * @throws BusException
      */
     public PolicyApply cancelApply(String policyApplyId) throws BusException ;
+    /**
+	 * 根据当前用户分页查询
+	 * @return 分页对象
+	 */
+	public PagerRecords getPagerPolicyApply(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders) throws BusException;
 }
