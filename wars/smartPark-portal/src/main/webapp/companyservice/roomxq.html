@@ -406,11 +406,48 @@ function GetRequest() {
 				}
 			}
 		});
-		
+		//在线预约
 		$("#online").click(function(){
+			var dates=new Array();
+			var times=new Array();
+			$("#data_timer td.clicktd").each(function(){
+				var active=$(this).index();
+				var time=$(this).html();
+				if(time=='8:00-9:00'){
+					time = "01";
+				}else if(time == "9:00-10:00"){
+					time = '02';
+				}else if(time == "10:00-11:00"){
+					time = '03';
+				}else if(time == "11:00-12:00"){
+					time = '04';
+				}else if(time == "12:00-13:00"){
+					time = "05";
+				}else if(time == "13:00-14:00"){
+					time = "06";
+				}else if(time == "14:00-15:00"){
+					time = "07";
+				}else if(time == "15:00-16:00"){
+					time = "08";
+				}else if(time == "16:00-17:00"){
+					time = "09";
+				}else{
+					time = "10";
+				}
+				var date=$(".fc-day-header").eq(active).attr("data-date");
+				dates.push(date);
+				times.push(time);
+			});
+			if(dates.length>0){
+				$(".pop_layer").show();
+				$(".pop_layer.pl1").hide();
+			}else{
+				$("#msg").text("请选择预约日期和时间段");
+				$(".toast").show();
+				
+			}
 			//alert("已预约id："+$("#resoIds").html().substring(0,$("#resoIds").html().length-1));
-			$(".pop_layer").show();
-			$(".pop_layer.pl1").hide();
+			
 		});
 		$(".close0").click(function(){
 			$(".pop_layer").hide();
@@ -418,8 +455,8 @@ function GetRequest() {
 		  //提交预约
 		$('.btn-cheng').click(function(){
 			if(!isLogin){
-			
 				clearInterval(timer);
+				$("#msg").text("请登录后重试！");
 	            $(".toast").show();
 	            pltime=2;
 	            timer=setInterval("closeTanc()",1000)
@@ -507,7 +544,8 @@ function GetRequest() {
 					}
 				});
             }else{
-            	alert("请选择预约日期和时间段");
+            	$("#msg").text("请选择预约日期和时间段");
+				$(".toast").show();
             }	
 			
 			//校验手机号格式
@@ -535,7 +573,7 @@ function GetRequest() {
     <div class="toast">
         <div class="toast-con clearfix">
             <div class="close-toast fr"></div>
-            <p class="tc mt25 f18" style="color:#ff6715">请登录后重试！</p>
+            <p class="tc mt25 f18" style="color:#ff6715" id="msg">请登录后重试！</p>
         </div>
         
     </div>
