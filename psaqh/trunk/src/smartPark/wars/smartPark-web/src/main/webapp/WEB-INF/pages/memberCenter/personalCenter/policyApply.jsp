@@ -25,16 +25,7 @@
 								<th>操作</th>
 							</tr>														
 						</tbody></table>                       
-						<div class="fr page-list-a clearfix lh30 mt20 f12">
-							<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
-							<a href="">首</a>
-							<a href=""><i class="fa fa-angle-left"></i></a>
-							<a>1</a>
-							<a href=""><i class="fa fa-angle-right"></i></a>
-							<a href="">末</a>
-							<input class="bd-input fl ml10 mr10" style="width:40px;" type="text">
-							<a href="">Go</a>
-						</div>
+						<div class="tcdPageCode fr"></div>
 					</div>
 				</div>
 				<div class="toast">
@@ -48,7 +39,70 @@
 		
 	<!--***bottom start****************************************-->
 
+	
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 	<script type="text/javascript">
+	var pageSize=5;
+	var pageCount=1;
+	var serviceURL = baseUrl+'policyApplyManager/getPagerPolicyApply.json';
+		$(function () {
+			star(".starbox1 i");
+				star(".starbox2 i");
+				star(".starbox3 i");
+				star(".starbox4 i");
+				function star(ele){
+					$(ele).hover(function(){
+						var index=$(this).index()+1;
+						$(ele).removeClass("star1").addClass("star0");
+						var arr=$(ele).toArray().slice(0,index);
+						for(var i=0;i<arr.length;i++){
+							arr[i].className="star1";
+						}
+					});
+				}
+			$(".ac-show").click(function(){
+				$(".bg-tanc.m1").show();
+			});
+			$(".ac-see").click(function(){
+				$(".bg-tanc.m2").show();
+			});
+			
+			 $.ajax({
+				url:serviceURL, 
+				success:function(results){	
+								pageCount=Math.ceil(results.totalCount/pageSize);
+								
+								 refreshData(1,pageSize);
+									$(".tcdPageCode").createPage({
+									    pageCount:pageCount,
+									    current:1,
+									    backFn:function(p){
+									       this.pageCount=pageCount;
+									        refreshData(p,pageSize);
+									    }
+									});			
+				/* 	if(result&&result.records){
+						_parseRecords(result.records);
+					} */
+				}
+			}); 			
+		});	
+		
+		
+		//分页列表
+		function refreshData(pageIndex,pageSize){
+			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+			$.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				success:function(results){
+					if(results&&results.records){
+						 _parseRecords(results.records);
+					}
+				}
+			});
+		}
 	//取消政策申请，前端调用
 	 function cancel(id){		
 		var policyApplyId=id;	
@@ -66,7 +120,7 @@
 		});
 	} 
 	
-		$(function(){
+	/* 	$(function(){
 			$.ajax({				
 				url:baseUrl+'policyApplyManager/getPolicyApplyListByLoginUser.json',
 				success:function(result){	
@@ -75,12 +129,12 @@
 					}
 				}
 			});
-		});
+		}); */
 		//拼接列表
 		function _parseRecords(record){		
 
 			console.log(record);
-			
+			$("tbody").empty();
 			for(var i=0;i<record.length;i++){				
 				var status = "";
 				var button = "";
