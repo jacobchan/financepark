@@ -6,7 +6,7 @@
 			window.location.href=proUrl+gohref; 
 		}
 		function login(){
-			window.location.href=cenUrl+"/member/memberCenter/login.html";
+			window.location.href=cenUrl+"member/memberCenter/login.html";
 		}
 	</script>
 	<div style="background-color:#545454">
