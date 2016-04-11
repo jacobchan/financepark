@@ -1088,32 +1088,38 @@
 				var lfTel=$("#lf_tel").val();
 				var visiteDate=$("#lf_date").val();
 				if(recordMemberId == null||recordMemberId==""){
-					alert("请选择参观项目");
+					$("#msg").text("请选择参观项目");
+		    		$(".toast").show();
 					return;
 				}
 				if(visiteDate ==null|| visiteDate==""){
-					alert("请填写来访日期");
+					$("#msg").text("请填写来访日期");
+		    		$(".toast").show();
 					return;
 				}
 				if(visiteDate !=null && visiteDate!=""){
 					if(visiteTime ==null|| visiteTime==""){
-						alert("请填写来访时间");
+						$("#msg").text("请填写来访时间");
+			    		$(".toast").show();
 						return;
 					}
 				}
 				if(lfName ==null|| lfName==""){
-					alert("请填写姓名");
+					$("#msg").text("请填写姓名");
+		    		$(".toast").show();
 					return;
 				}
 				if(lfTel !=null&& lfTel!=""){
 					 if(isMobil(lfTel)){
 							
 						}else{
-							alert("手机号格式不正确！");
+							$("#msg").text("手机号格式不正确！");
+				    		$(".toast").show();
 							return false;
 						}
 				}else{
-					alert("请填写手机号码");
+					$("#msg").text("请填写手机号码");
+		    		$(".toast").show();
 					return;
 				}
 				var params = ['visiteDate='+visiteDate,'visiteTime='+visiteTime,'recordType='+recordType,'recordMemberId='+recordMemberId];
@@ -1262,7 +1268,7 @@
     <div class="toast">
         <div class="toast-con clearfix">
             <div class="close-toast fr"></div>
-            <p class="tc mt25 f18" style="color:#ff6715">请登录后重试！</p>
+            <p class="tc mt25 f18" style="color:#ff6715" id="msg">请登录后重试！</p>
         </div>
         
     </div>
