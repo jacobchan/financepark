@@ -20,7 +20,7 @@
 								<th>申请人</th>
 								<th>申请时间</th>
 								
-								<th>流程状态</th>
+								
 								<th>申请状态</th>
 								<th>操作</th>
 							</tr>														
@@ -71,9 +71,15 @@
 		function _parseRecords(record){		
 
 			console.log(record);
+			
 			for(var i=0;i<record.length;i++){				
 				var status = "";
 				var button = "";
+				var ApplyCode="";
+				if(record[i].ApplyCode=""){
+					var ApplyCode="";					
+				}else{
+					ApplyCode=record[i].ApplyCode;}
 				if(record[i].policyApplyStatus=='1'){
 					status = "申请中";	
 					button="<a href='#'   onclick='cancel(\""+record[i].policyApplyId+"\")'> 取消</a>";
@@ -85,11 +91,11 @@
 					status = "取消";
 				} 
 				var html= "<tr>"+
-					      "<td width='111'>"+record[i].ApplyCode+"</td>"+
+					      "<td width='111'>"+ApplyCode+"</td>"+
                           "<td width='111'>"+record[i].nmIssuenews.policyCaption+"</td>"+
                           "<td width='111'>"+record[i].policyApplyContactPeople+"</td>"+
                           "<td width='111'>"+record[i].createTime+"</td>"+
-                          "<td width='88'>"+record[i].nmIssueflow.issueFlowCStatus+"</td>"+
+                          
                           "<td width='88'>"+status+"</td>"+                          
                           "<td >" +button+"</td>"+
                           " </tr>";
