@@ -121,7 +121,9 @@ function click(){
 			$(this).parents("tr").find('#comAmount').html(amount);
 			var amount = 0;
             $('input[name="single-check"]').each(function(){
-	           	 amount = accAdd(amount,$(this).parents("tr").find('#comAmount').html());
+            	if($(this).prop("checked")){
+            		amount = accAdd(amount,$(this).parents("tr").find('#comAmount').html());
+            	}
 	        });
             $('.ccheng').html('¥'+amount);
         }else{
@@ -140,7 +142,9 @@ function click(){
 			$(this).parents("tr").find('#comAmount').html(amount);
 			var amount = 0;
             $('input[name="single-check"]').each(function(){
-	           	 amount = accAdd(amount,$(this).parents("tr").find('#comAmount').html());
+            	if($(this).prop("checked")){
+            		amount = accAdd(amount,$(this).parents("tr").find('#comAmount').html());
+            	}
 	        });
             $('.ccheng').html('¥'+amount);
         }else if(n==100){
