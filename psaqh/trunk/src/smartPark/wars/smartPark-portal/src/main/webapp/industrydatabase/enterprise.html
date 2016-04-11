@@ -20,7 +20,9 @@
 			var serviceURL = baseUrl+"enterbusinessmanagerRzManager/getPagerEnterbusinessmanagerRzs.json";
 			//获取字符串长度（中文2，英文1）
 			function stringLen(str) {
-		        var realLength = 0, len = str.length, charCode = -1;
+		        var realLength = 0;
+		        var len = str != null ? str.length:0;
+		        var charCode = -1;
 		        for (var i = 0; i < len; i++) {
 		            charCode = str.charCodeAt(i);
 		            if (charCode >= 0 && charCode <= 128) realLength += 1;
