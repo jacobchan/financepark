@@ -221,7 +221,14 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 			throws BusException {
 		//获取当前登录用户id
 		String id = o.getCreateUser();		
-		List<PropertyservicemanagerOc> list=propertyservicemanagerOcDao.getList("memberId", id);		
+		List<PropertyservicemanagerOc> list=propertyservicemanagerOcDao.getList("memberId", id);
+		for(PropertyservicemanagerOc oc : list){
+			if(StringUtils.isNotEmpty(oc.getMemberId())){
+				String memberId = oc.getMemberId();
+				MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
+				oc.setMember(memberInformation);
+			}
+		}
 		return list;
 	}
     /**
