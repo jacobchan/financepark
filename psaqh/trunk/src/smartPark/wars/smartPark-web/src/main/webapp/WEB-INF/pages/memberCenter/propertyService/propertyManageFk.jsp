@@ -1,3 +1,4 @@
+
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/pages/include.jsp" %>
 <youi:html title="访客登记">
@@ -21,88 +22,13 @@
 								<col width="150"></col>
 								<col></col>
 							</colgroup>
-							<tbody><!-- <tr>
-								<th>订单号</th>
-								<th>到访时间</th>
-								<th>到访状态</th>
-								<th>访客姓名</th>
-								<th>访客电话</th>
-								<th>操作</th>
-							</tr> -->
-							<!-- <tr>
-								<td><a href="">123456789</a></td>
-								<td>2016-1-12 17:30</td>
-								<td>4个小时</td>
-								<td>乔布斯</td>
-								<td>18659786621</td>
-								<td><a href="javascript:;" class="ac-see">查看二维码</a><span class="f12 ml5 mr5">|</span><a href="javascript:;" class="ac-show">取消访客</a></td>
-							</tr>
-							<tr>
-								<td><a href="">123456789</a></td>
-								<td>2016-1-12 17:30</td>
-								<td>4个小时</td>
-								<td>乔布斯</td>
-								<td>18659786621</td>
-								<td><a href="javascript:;" class="ac-see">查看二维码</a><span class="f12 ml5 mr5">|</span><a href="javascript:;" class="ac-show">取消访客</a></td>
-							</tr>
-							<tr>
-								<td><a href="">123456789</a></td>
-								<td>2016-1-12 17:30</td>
-								<td>4个小时</td>
-								<td>乔布斯</td>
-								<td>18659786621</td>
-								<td><a href="javascript:;" class="ac-see">查看二维码</a><span class="f12 ml5 mr5">|</span><a href="javascript:;" class="ac-show">取消访客</a></td>
-							</tr>
-							<tr>
-								<td><a href="">123456789</a></td>
-								<td>2016-1-12 17:30</td>
-								<td>4个小时</td>
-								<td>乔布斯</td>
-								<td>18659786621</td>
-								<td><a href="javascript:;" class="ac-see">查看二维码</a><span class="f12 ml5 mr5">|</span><a href="javascript:;" class="ac-show">取消访客</a></td>
-							</tr> -->
+							<tbody>
 						</tbody></table>
 						<div class="tcdPageCode fr">
-							<!-- <span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
-							<a href="">首</a>
-							<a href=""><i class="fa fa-angle-left"></i></a>
-							<a>1</a>
-							<a href=""><i class="fa fa-angle-right"></i></a>
-							<a href="">末</a>
-							<input class="bd-input fl ml10 mr10" style="width:40px;" type="text">
-							<a href="">Go</a> -->
+							
 						</div>
 					</div>
-					<!-- <div class="clearfix mt50">
-						<div class="mt20 gr-txl clearfix lh30">
-							<label class="fl mr20 f16">申请时间：</label>
-							<input class="bd-input fl" type="text"><span class="fl ml15 mr15">到</span>
-							<input class="bd-input fl" type="text">
-							<div class="inp-box ml20"><input placeholder="订单号查询" type="text"><a class="fa fa-search" href=""></a></div>
-							<input value="搜索" class="hhf-submit fr" type="button">
-						</div>
-						<table class="gt-table mt20">
-							<colgroup>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="120"></col>
-								<col width="150"></col>
-								<col></col>
-							</colgroup>
-							<tbody><tr>
-								<th>订单号</th>
-								<th>到访时间</th>
-								<th>到访时长</th>
-								<th>访客姓名</th>
-								<th>访客电话</th>
-								<th>操作</th>
-							</tr>
-							<tr>
-								<td colspan="6">暂无记录</td>
-							</tr>
-						</tbody></table>
-					</div> -->
+				
 				</div>
 
 
