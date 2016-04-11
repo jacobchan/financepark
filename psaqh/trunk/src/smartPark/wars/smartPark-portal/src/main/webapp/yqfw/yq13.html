@@ -60,7 +60,7 @@
 					</colgroup>
 					<tr>
 						<td>
-							<!-- <a href="yq5.html"> -->
+							<!-- <a href="yq5.html?enteringType=01"> -->
 							<a href="javascript:openURL(5);">
 								<div class="tfp-box" style="width:685px;max-width:100%;"><img src="../styles/images/yqfw/wy_photo_8.jpg" style="width:685px;">
 									<div class="tfp-box-bg"><span><img src="../styles/images/yqfw/icon8.png"><p>入驻申请</p></span></div>
@@ -129,9 +129,21 @@
 			   $(".bg-tanc.m2").show();
 			 	 return;
 			}
-	        if(url=='1'||url=='5'||url=='14'||url=='15'||url=='16'){
-			   window.location="yq"+url+".html";
+	        if(url=='5'){
+			   window.location="yq"+url+".html?enteringType=01";
 		   }
+	        if(url=='16'){
+				   window.location="yq"+url+".html?enteringType=02";
+			   }
+	        if(url=='1'){
+				   window.location="yq"+url+".html?enteringType=03";
+			   }
+	        if(url=='15'){
+				   window.location="yq"+url+".html?enteringType=04";
+			   }
+	        if(url=='14'){
+				   window.location="yq"+url+".html?enteringType=05";
+			   }
 			   
 	  };
  </script>
