@@ -494,7 +494,7 @@ background:url(../images/company/ab_ico.png) no-repeat}
 .wl-850 div{width:48px;height:46px;margin-right: 10px;float: left;}
 
 /*th*/
-.zznav{position:absolute;top:0;left:0;right:0;z-index:100000;}
+.zznav{position:absolute;top:0;left:0;right:0;z-index:100;}
 .zznav>ul>li{display:inline-block;float:left;position:relative}
 .zznav a{color:#fff;padding:10px;background:rgba(0,0,0,0.5);display:block;line-height: 20px;}.zznav a.active{ background:transparent;}
 .zz{background:rgba(0,0,0,0.5);height:40px;width:calc(100% - 282px)}
@@ -506,7 +506,7 @@ background:url(../images/company/ab_ico.png) no-repeat}
 .subul a{background:none;padding:0;}
 
 .maskset:hover .b1mask:hover{display: block !important;}
-.maskset div{position:absolute;z-index: 999;}.hide{display:none;}
+.maskset div{position:absolute;z-index: 9;}.hide{display:none;}
 .b1mask{top:88px;left: 696px;}.b2mask{top:64px;left:102px;}
 .b2f1{top: 509px;left:159px;}.b2f2{top: 467px;left:159px;}.b2f3{top: 424px;left:163px;}.b2f4{top: 376px;left: 143px;}.b2f5{top: 330px;left: 145px}
 .b2f6{top: 285px;left: 145px;}.b2f7{top: 239px;left:147px;}.b2f8{top: 192px;left:146px;}.b2f9{top: 145px;left: 145px;}.b1f1{top: 545px;left: 809px}
