@@ -239,7 +239,7 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
     	//获取当前用户参加活动的list
-    	if(StringUtils.isEmpty(o.getApplyId())){
+    	if(StringUtils.isEmpty(o.getApplayType().getTypeId())){
     		return this.getActivityApplys();
     	}
     	Collection<Condition> condition = new ArrayList<Condition>();
