@@ -12,9 +12,13 @@
 .login_foot{border-top:1px #BFBFBF solid;padding-top:30px;}
 .login_foot a{color:#B8B8B8;margin:0 20px;display:inline-block;font-size: 14px;}
 .login_foot a:hover{color: #666;}
-.c3{color: #333;}
-a.c3:hover{color: #FB7730;}
-.btn-cheng{padding:5px 20px;background:#FA742C;border:none;color:#fff;display:inline-block;cursor:pointer;}
+.c3{color: #333;}.co{color: #ea7b40;}
+a.c3:hover,a.co:hover{color: #FF6714;}
+.lh50{line-height: 50px;}
+.bd{border-bottom: 1px solid #efecec;}
+.btn-cheng{background:#FA742C;border:none;color:#fff;display:inline-block;cursor:pointer;}
 .btn-cheng:hover{background:#ff5900;color:#fff !important;}
-.pb-btn{font-size: 14px;height: 40px;padding: 0px 20px;background: #707070 none repeat scroll 0% 0%;line-height: 40px;display: inline-block;color: #FFF;}
-.pb-btn:hover{background: #555;}
+.pb-btn{background: #707070 none repeat scroll 0% 0%;display: inline-block;color: #FFF;}
+.pb-btn:hover{background: #555;color:#fff !important;}
+
+.message-yz{line-height: 45px;color: #c0c0c0;position: absolute;left: -1px; display: none; top: 45px;z-index: 2;text-align: center;font-size: 12px;width: 350px;border:1px solid #efecec;border-top: 0px;background: #fff;}
