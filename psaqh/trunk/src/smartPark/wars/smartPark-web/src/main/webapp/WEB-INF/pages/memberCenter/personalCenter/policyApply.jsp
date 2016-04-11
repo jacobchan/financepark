@@ -37,7 +37,15 @@
 						</div>
 					</div>
 				</div>
+				<div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
+        </div> 
+        
+    </div>
 		</youi:body>
+		
 	<!--***bottom start****************************************-->
 
 	<script type="text/javascript">
@@ -50,8 +58,9 @@
 			data:'policyApplyId='+policyApplyId,
 	 		success:function(result){
 				if(result&&result.record){					
-					alert("已取消");
-					location.reload();
+					$(".tc.mt25.f18").text("取消成功");
+					$(".toast").show(); 
+					setTimeout(function(){location.reload(); },1000);
 				}
 			}
 		});
