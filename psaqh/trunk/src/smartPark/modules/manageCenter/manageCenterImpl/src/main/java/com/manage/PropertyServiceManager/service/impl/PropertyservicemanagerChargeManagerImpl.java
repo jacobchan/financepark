@@ -27,6 +27,7 @@ import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.EmployeeManager.dao.EnterpriseEmployeesDao;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCharge;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerChargeDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerChargeManager;
@@ -171,4 +172,16 @@ public class PropertyservicemanagerChargeManagerImpl extends BaseManagerImpl imp
 		List<PropertyservicemanagerCharge> list =propertyservicemanagerChargeDao.commonQuery(condition, null);
 		return list;
     }
+    /**
+	 * 根据当前用户分页查询
+	 * @return 分页对象
+	 */
+    @EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	public PagerRecords getPagerCharge(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PropertyservicemanagerCharge.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)
+			throws BusException {
+    	PagerRecords pagerRecords = propertyservicemanagerChargeDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
 }
