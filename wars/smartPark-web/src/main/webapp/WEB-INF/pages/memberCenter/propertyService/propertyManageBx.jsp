@@ -30,80 +30,11 @@
 								<th>联系电话</th>
 								<th>操作</th>
 							</tr>
-							<!-- <tr>
-								<td><a href="">123456789</a></td>
-								<td>2016-1-12</td>
-								<td>未受理</td>
-								<td>乔布斯</td>
-								<td>18659786621</td>
-								<td><a href="javascript:;" class="ac-show">取消</a></td>
-							</tr>
-							<tr>
-								<td><a href="">123456789</a></td>
-								<td>2016-1-12</td>
-								<td>已派工</td>
-								<td>乔布斯</td>
-								<td>18659786621</td>
-								<td><a href="javascript:;" class="ac-show">取消</a></td>
-							</tr>
-							<tr>
-								<td><a href="">123456789</a></td>
-								<td>2016-1-12</td>
-								<td>已完工</td>
-								<td>乔布斯</td>
-								<td>18659786621</td>
-								<td><a href="javascript:;">付款</a><span class="f12 ml5 mr5">|</span><a href="">申请重修</a></td>
-							</tr>
-							<tr>
-								<td><a href="">123456789</a></td>
-								<td>2016-1-12</td>
-								<td>已结束</td>
-								<td>乔布斯</td>
-								<td>18659786621</td>
-								<td><a href="javascript:;" class="ac-show">取消</a></td>
-							</tr> -->
+							
 						</tbody></table>
-						<div class="fr page-list-a clearfix lh30 mt20 f12">
-							<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
-							<a href="">首</a>
-							<a href=""><i class="fa fa-angle-left"></i></a>
-							<a>1</a>
-							<a href=""><i class="fa fa-angle-right"></i></a>
-							<a href="">末</a>
-							<input class="bd-input fl ml10 mr10" style="width:40px;" type="text">
-							<a href="">Go</a>
-						</div>
+						<div class="tcdPageCode fr"></div>
 					</div>
-					<!-- <div class="clearfix mt50">
-						<div class="mt20 gr-txl clearfix lh30">
-							<label class="fl mr20 f16">申请时间：</label>
-							<input class="bd-input fl" type="text"><span class="fl ml15 mr15">到</span>
-							<input class="bd-input fl" type="text">
-							<div class="inp-box ml20"><input placeholder="订单号查询" type="text"><a class="fa fa-search" href=""></a></div>
-							<input value="搜索" class="hhf-submit fr" type="button">
-						</div>
-						<table class="gt-table mt20">
-							<colgroup>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col></col>
-							</colgroup>
-							<tbody><tr>
-								<th>订单号</th>
-								<th>申请时间</th>
-								<th>状态</th>
-								<th>联系人</th>
-								<th>联系电话</th>
-								<th>操作</th>
-							</tr>
-							<tr>
-								<td colspan="6">暂无记录</td>
-							</tr>
-						</tbody></table>
-					</div> -->
+					
 				</div>
 	
 	
@@ -132,7 +63,69 @@
 	<script type="text/javascript" src="<%=request.getContextPath() %>/scripts/page/laydate/laydate.js"></script>
 	<%-- <script type="text/javascript" src="<%=request.getContextPath() %>/scripts/lib/properties.js"></script> --%>
 	<script type="text/javascript">
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
+	<script type="text/javascript">
+	var pageSize=5;
+	var pageCount=1;
+	var serviceURL = baseUrl+'propertyservicemanagerBxManager/getPagerBx.json';
 		$(function () {
+			star(".starbox1 i");
+				star(".starbox2 i");
+				star(".starbox3 i");
+				star(".starbox4 i");
+				function star(ele){
+					$(ele).hover(function(){
+						var index=$(this).index()+1;
+						$(ele).removeClass("star1").addClass("star0");
+						var arr=$(ele).toArray().slice(0,index);
+						for(var i=0;i<arr.length;i++){
+							arr[i].className="star1";
+						}
+					});
+				}
+			$(".ac-show").click(function(){
+				$(".bg-tanc.m1").show();
+			});
+			$(".ac-see").click(function(){
+				$(".bg-tanc.m2").show();
+			});
+			
+			 $.ajax({
+				url:serviceURL, 
+				success:function(results){	
+								pageCount=Math.ceil(results.totalCount/pageSize);
+								
+								 refreshData(1,pageSize);
+									$(".tcdPageCode").createPage({
+									    pageCount:pageCount,
+									    current:1,
+									    backFn:function(p){
+									       this.pageCount=pageCount;
+									        refreshData(p,pageSize);
+									    }
+									});			
+				/* 	if(result&&result.records){
+						_parseRecords(result.records);
+					} */
+				}
+			}); 			
+		});	
+		
+		
+		//分页列表
+		function refreshData(pageIndex,pageSize){
+			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+			$.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				success:function(results){
+					if(results&&results.records){
+						 _parseRecords(results.records);
+					}
+				}
+			});
+		/* $(function () {
 			$(".ac-show").click(function(e){
 				$(".bg-tanc").show();
 			});
@@ -146,7 +139,7 @@
 				}
 			});
 			
-		});
+		}); */
 		
 		//拼接列表
 		function _parseRecords(record){
