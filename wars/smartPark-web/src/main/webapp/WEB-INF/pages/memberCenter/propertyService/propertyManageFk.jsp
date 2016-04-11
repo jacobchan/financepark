@@ -132,6 +132,13 @@
 			</div>
 		</div>
 	</div>
+		<div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
+        </div> 
+        
+    </div>
 	<!--***弹窗 end****************************************-->
 </youi:body>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
@@ -257,13 +264,13 @@
 				}
 				return status;			
 		};
-		function cancel(obj){
+		/* function cancel(obj){
 			var me=obj.parentNode.parentNode;
 			var fkCode=me.childNodes[0].childNodes[0].innerText; 
 			$(".fkCode").html(fkCode);
 			$(".fkCode")[0].setAttribute("id",me.id);
 			$(".bg-tanc.m1").show();
-		};
+		}; */
 		function qrcode(obj){
 	 		var me=obj.parentNode.parentNode;
 		/* 	var fkCode=me.childNodes[0].childNodes[0].innerText; 
@@ -317,8 +324,9 @@
 					data:'fkcodeId='+id,
 					success:function(result){
 						if(result&&result.record){
-							alert("取消成功!");						
-							location.reload();
+							$(".tc.mt25.f18").text("取消成功");
+							$(".toast").show(); 
+							setTimeout(function(){location.reload(); },1000);
 						}
 					}
 				});
