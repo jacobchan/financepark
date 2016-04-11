@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2016/3/14 15:15:39                           */
+/* Created on:     2016/4/11 10:32:04                           */
 /*==============================================================*/
 
 
@@ -49,6 +49,11 @@ alter table sp_activity_document
 
 drop table if exists sp_activity_document;
 
+alter table sp_applay_type
+   drop primary key;
+
+drop table if exists sp_applay_type;
+
 alter table sp_bbm_building_
    drop primary key;
 
@@ -73,6 +78,11 @@ alter table sp_building_rate
    drop primary key;
 
 drop table if exists sp_building_rate;
+
+alter table sp_carport
+   drop primary key;
+
+drop table if exists sp_carport;
 
 alter table sp_dis_rate_config
    drop primary key;
@@ -99,6 +109,11 @@ alter table sp_enterprise_role
 
 drop table if exists sp_enterprise_role;
 
+alter table sp_entrepreneurship
+   drop primary key;
+
+drop table if exists sp_entrepreneurship;
+
 alter table sp_etype_enterprisetype
    drop primary key;
 
@@ -108,6 +123,11 @@ alter table sp_favorits_favoritGoods
    drop primary key;
 
 drop table if exists sp_favorits_favoritGoods;
+
+alter table sp_finace
+   drop primary key;
+
+drop table if exists sp_finace;
 
 alter table sp_hotel_order
    drop primary key;
@@ -174,6 +194,10 @@ alter table sp_mc_msgType_
 
 drop table if exists sp_mc_msgType_;
 
+drop index Relationship_47_FK on sp_memberAdr_address;
+
+drop index 320701_320703_FK on sp_memberAdr_address;
+
 alter table sp_memberAdr_address
    drop primary key;
 
@@ -193,6 +217,11 @@ alter table sp_member_information
    drop primary key;
 
 drop table if exists sp_member_information;
+
+alter table sp_member_role
+   drop primary key;
+
+drop table if exists sp_member_role;
 
 alter table sp_nm_issueFlow_
    drop primary key;
@@ -313,6 +342,11 @@ alter table sp_purchasingManager_genre
    drop primary key;
 
 drop table if exists sp_purchasingManager_genre;
+
+alter table sp_purchasingManager_genreEvaluate
+   drop primary key;
+
+drop table if exists sp_purchasingManager_genreEvaluate;
 
 alter table sp_purchasingManager_genre_property
    drop primary key;
@@ -511,6 +545,7 @@ create table sp_activity_apply
 (
    APPLY_ID_            char(36) not null,
    MEMBER_ID_           char(36),
+   TYPE_ID_             char(36),
    APPLY_TITLE_         varchar(32),
    COMMENT_CONTENT_     varchar(32),
    COMMENT_TIME_        datetime,
@@ -520,6 +555,9 @@ create table sp_activity_apply
    APPLY_ORDER_NUMBER_  varchar(32),
    START_TIME_          varchar(32),
    END_TIME_            varchar(32),
+   IS_RECOOMEND_        varchar(2),
+   ACTIVITY_IMAGE_      varchar(256),
+   DEADLINE_            varchar(20),
    CREATE_TIME_         datetime,
    UPDATE_TIME_         datetime,
    UPDATE_USER_         char(36),
@@ -539,7 +577,9 @@ create table sp_activity_applyList
    APPLYLIST_ID_        char(36) not null,
    APPLY_ID_            char(36),
    APPLYLIST_TIME_      datetime,
+   MEMBER_ID_           char(36),
    APPLY_MEMBER_        varchar(32),
+   APPLY_PHONE_         varchar(20),
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
@@ -557,6 +597,7 @@ alter table sp_activity_applyList
 create table sp_activity_comment
 (
    COMMENT_ID           char(36) not null,
+   sp__COMMENT_ID       char(36),
    APPLY_ID_            char(36),
    COMMENT_CONTENT_     varchar(32),
    COMMENT_TIME_        datetime,
@@ -593,6 +634,21 @@ alter table sp_activity_document
    add primary key (DOCUMENT_ID_);
 
 /*==============================================================*/
+/* Table: sp_applay_type                                        */
+/*==============================================================*/
+create table sp_applay_type
+(
+   TYPE_ID_             char(36) not null,
+   TYPE_NAME_           varchar(32),
+   TYPE__ICON_          varchar(128),
+   TYPE_CODE_           varchar(10),
+   IS_RECOMENT_         varchar(2)
+);
+
+alter table sp_applay_type
+   add primary key (TYPE_ID_);
+
+/*==============================================================*/
 /* Table: sp_bbm_building_                                      */
 /*==============================================================*/
 create table sp_bbm_building_
@@ -610,7 +666,8 @@ create table sp_bbm_building_
    CREATE_USER_         char(36),
    UPDATE_USER_         char(36),
    BUILDING_IMAGE_      varchar(100),
-   DIS_RATE_            decimal(10,2)
+   DIS_RATE_            decimal(10,2),
+   BUILDING_NAME_       varchar(256)
 );
 
 alter table sp_bbm_building_ comment '320102楼栋基础信息';
@@ -701,6 +758,7 @@ create table sp_bbm_room_
    PARK_ID_             char(36),
    BUILDING_ID_         char(36),
    DIS_RATE_            decimal(10,2),
+   ROOM_ADR_            varchar(1024),
    UPDATE_TIME_         datetime,
    CREATE_TIME_         datetime,
    CREATE_USER_         char(36),
@@ -726,6 +784,32 @@ create table sp_building_rate
 
 alter table sp_building_rate
    add primary key (REC_ID_);
+
+/*==============================================================*/
+/* Table: sp_carport                                            */
+/*==============================================================*/
+create table sp_carport
+(
+   ID_                  char(36) not null,
+   MEMBER_ID_           char(36),
+   CP_LINK_MAN_         varchar(128) not null,
+   CP_LINK_TEL_         varchar(20) not null,
+   CP_BEGION_TIME_      varchar(20) not null,
+   CP_ENTD_TIME_        varchar(20) not null,
+   CP_EN_NAME_          varchar(256) not null,
+   CP_EN_ADR_           varchar(256) not null,
+   CP_COUNT_            int,
+   UPDATE_TIME_         datetime,
+   CREATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   UPDATE_USER_         char(36),
+   PARK_ID_             char(36),
+   APPLAY_STATUS_       varchar(2) not null,
+   APPLAY_NO_           varchar(20) not null
+);
+
+alter table sp_carport
+   add primary key (ID_);
 
 /*==============================================================*/
 /* Table: sp_dis_rate_config                                    */
@@ -763,7 +847,15 @@ create table sp_enterbusinessmanager_rz
    RZ_NAME_             varchar(128),
    PARK_ID_             char(36),
    BUILDING_ID_         char(36),
-   FLOOR_ID_            char(36)
+   FLOOR_ID_            char(36),
+   ROOM_ID_             char(36),
+   RZ_LOG_              varchar(256),
+   RZ_TYPE_             varchar(2),
+   RZ_PROPERTY_         varchar(2),
+   PRODUCT_DISCRIPTION_ text,
+   ATTENTION_COUNT_     int,
+   SCAN_COUNT_          int,
+   RZ_IMAGES_           varchar(128)
 );
 
 alter table sp_enterbusinessmanager_rz comment '330101入驻企业基本信息';
@@ -782,6 +874,7 @@ create table sp_enterprise_employees
    EMPLOYEES_NAME       varchar(32),
    EMPLOYEES_TELEPHONE  varchar(16),
    EMPLOYEES_DEPARTMENT varchar(2),
+   JOIN_DATE_           varchar(20),
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
@@ -818,9 +911,8 @@ alter table sp_enterprise_invitation
 /*==============================================================*/
 create table sp_enterprise_role
 (
-   R_ID_                char(36) not null,
-   EMPLOYEES_ID         char(36),
-   ROLEID               char(36),
+   MEMBER_ID_           char(36) not null,
+   ROLE_ID_             char(36) not null,
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
@@ -830,7 +922,31 @@ create table sp_enterprise_role
 alter table sp_enterprise_role comment '330403企业会员角色表';
 
 alter table sp_enterprise_role
-   add primary key (R_ID_);
+   add primary key (MEMBER_ID_, ROLE_ID_);
+
+/*==============================================================*/
+/* Table: sp_entrepreneurship                                   */
+/*==============================================================*/
+create table sp_entrepreneurship
+(
+   ID_                  char(36) not null,
+   MEMBER_ID_           char(36),
+   PROJECT_TYPE_        varchar(2) not null,
+   PROJECT_DIS_         varchar(1024) not null,
+   IS_FINACE_           varchar(1) not null,
+   TEACHER_TYPE_        varchar(2) not null,
+   DEFINE_TEACHER_TYPE_ varchar(128),
+   PARK_ID_             char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   UPDATE_USER_         char(36),
+   APPLAY_STATUS_       varchar(2) not null,
+   APPLAY_NO_           varchar(20) not null
+);
+
+alter table sp_entrepreneurship
+   add primary key (ID_);
 
 /*==============================================================*/
 /* Table: sp_etype_enterprisetype                               */
@@ -870,6 +986,34 @@ alter table sp_favorits_favoritGoods comment '340401-商品收藏表';
 
 alter table sp_favorits_favoritGoods
    add primary key (FAVORIT_GOODS_ID_, COMMODITY_ID_);
+
+/*==============================================================*/
+/* Table: sp_finace                                             */
+/*==============================================================*/
+create table sp_finace
+(
+   ID_                  char(36) not null,
+   MEMBER_ID_           char(36),
+   COMPANY_NAME_        varchar(256) not null,
+   COMPANY_ADR_         varchar(256) not null,
+   AMOUNT_START_        decimal(10,2) not null,
+   AMOUNT_END_          decimal(10,2) not null,
+   SHARE_RATE_          int not null,
+   BUSINESS_DIS_        varchar(1024),
+   COMPANY_MERITE_      varchar(1024),
+   COR_TEAM_            varchar(256),
+   BP_URL_              varchar(256),
+   PARK_ID_             char(36),
+   UPDATE_TIME_         datetime,
+   CREATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   UPDATE_USER_         char(36),
+   APPLAY_STATUS_       varchar(2) not null,
+   APPLAY_NO_           varchar(20) not null
+);
+
+alter table sp_finace
+   add primary key (ID_);
 
 /*==============================================================*/
 /* Table: sp_hotel_order                                        */
@@ -918,6 +1062,7 @@ create table sp_information_financing
    FINANCING_TIME_      varchar(32),
    FINANCING_STATUS_    varchar(2),
    FINANCING_RE_        varchar(32),
+   FINANCING_DESCRIBE_  text,
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
@@ -962,6 +1107,10 @@ create table sp_information_legal
    LEGAL_NAME_          varchar(64),
    LEGAL_TELEPHONE_     varchar(16),
    LEGAL_RE_            varchar(32),
+   LEGAL_BUSINESS_      varchar(20),
+   LEGAL_BIRTHDAY_      varchar(20),
+   LEGAL_REMARK_        varchar(1024),
+   LEGAL_IMAGE_         varchar(128),
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
@@ -1173,10 +1322,26 @@ create table sp_memberAdr_address
    UPDATE_USER_         char(36)
 );
 
-alter table sp_memberAdr_address comment '340101-我的地址';
+alter table sp_memberAdr_address comment '320703-我的地址';
 
 alter table sp_memberAdr_address
    add primary key (ADDRESS_ID_);
+
+/*==============================================================*/
+/* Index: 320701_320703_FK                                      */
+/*==============================================================*/
+create index 320701_320703_FK on sp_memberAdr_address
+(
+   MEMBER_ID_
+);
+
+/*==============================================================*/
+/* Index: Relationship_47_FK                                    */
+/*==============================================================*/
+create index Relationship_47_FK on sp_memberAdr_address
+(
+   
+);
 
 /*==============================================================*/
 /* Table: sp_member_comment                                     */
@@ -1249,6 +1414,19 @@ alter table sp_member_information
    add primary key (MEMBER_ID_);
 
 /*==============================================================*/
+/* Table: sp_member_role                                        */
+/*==============================================================*/
+create table sp_member_role
+(
+   ID_                  char(36) not null,
+   MEMBER_ID_           char(36),
+   ROLE_ID_             char(36) not null
+);
+
+alter table sp_member_role
+   add primary key (ID_, ROLE_ID_);
+
+/*==============================================================*/
 /* Table: sp_nm_issueFlow_                                      */
 /*==============================================================*/
 create table sp_nm_issueFlow_
@@ -1285,6 +1463,10 @@ create table sp_nm_issueNews_
    POLICY_COME_         varchar(36),
    POLICY_ISSUE_DATE_   varchar(20),
    POLICY_STATUS_       char(2),
+   CAI_COUNT_           int,
+   DING_COUNT_          int,
+   BROWSE_COUNT_        int,
+   IMAGE_URL_           varchar(128),
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
@@ -1361,7 +1543,8 @@ create table sp_policy_apply
    CREATE_TIME_         datetime,
    POLICY_APPLY_STATUS_ varchar(2),
    POLICY_APPLY_ISSUENEWS_ char(36),
-   POLICY_APPLY_ISSUEFLOW_ char(36)
+   POLICY_APPLY_ISSUEFLOW_ char(36),
+   POLICY_APPLY_CODE_   varchar(20)
 );
 
 alter table sp_policy_apply comment '330801-政策申请记录';
@@ -1492,7 +1675,8 @@ create table sp_propertyservicemanager_entrec
    CREATE_USER_         char(36),
    CREATE_TIME_         datetime,
    ENTERREC_CODE_       varchar(36),
-   APPLY_TIME_          varchar(20)
+   APPLY_TIME_          varchar(20),
+   ENTERING_TYPE_       varchar(2)
 );
 
 alter table sp_propertyservicemanager_entrec comment '330202入驻服务办理预约记录表';
@@ -1515,6 +1699,7 @@ create table sp_propertyservicemanager_fkcode_
    FKCODE_COMP_         varchar(36),
    FKCODE_REMARK_       varchar(300),
    APPLY_TIME_          varchar(20),
+   FK_CODE_             varchar(20),
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
@@ -1696,7 +1881,6 @@ create table sp_propertyservicenanager_back
    BACK_ID_             varchar(36) not null,
    COS_ID_              varchar(36),
    BACK_CODE_           varchar(32),
-   BACK_RECORD_         varchar(300),
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
@@ -1835,6 +2019,29 @@ alter table sp_purchasingManager_genre
    add primary key (GENRE_ID_);
 
 /*==============================================================*/
+/* Table: sp_purchasingManager_genreEvaluate                    */
+/*==============================================================*/
+create table sp_purchasingManager_genreEvaluate
+(
+   GENREEVALUATE_ID_    char(36) not null,
+   PUR_GENRE_           char(36),
+   TYPE_                varchar(2),
+   OVERALL_SATISFACTION_ varchar(1),
+   REACTION_RATE_       varchar(1),
+   SERVICE_ATTITUDE_    varchar(1),
+   COST_PERFORMANCE_    varchar(1),
+   CONTENT_             varchar(1024),
+   MEMBER_              char(36),
+   CREATE_TIME_         datetime,
+   CREATE_USER_         char(36),
+   UPDATE_TIME_         datetime,
+   UPDATE_USER_         char(36)
+);
+
+alter table sp_purchasingManager_genreEvaluate
+   add primary key (GENREEVALUATE_ID_);
+
+/*==============================================================*/
 /* Table: sp_purchasingManager_genre_property                   */
 /*==============================================================*/
 create table sp_purchasingManager_genre_property
@@ -1848,6 +2055,7 @@ create table sp_purchasingManager_genre_property
    GENRE_PROPERTY_ISNOT_DISPLAY_ varchar(1),
    GENRE_PROPERTY_DEFAULT_VALUE_ varchar(128),
    GENRE_PROPERTY_FIELD_LENGTH_ int,
+   CATEGORY_            varchar(2),
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
@@ -1874,6 +2082,8 @@ create table sp_purchasingManager_merchant
    MERCHANT_LINKMAN_PHONE_ varchar(16),
    PARK_BUSINESS_TUPE_  char(2),
    MERCHANT_LOGO_       varchar(256),
+   MERCHANT_ABOUT_      varchar(1024),
+   MERCHANT_URL_        varchar(64),
    UPDATE_USER_         char(36),
    UPDATE_TIME_         datetime,
    CREATE_USER_         char(36),
@@ -2163,11 +2373,17 @@ alter table sp_OrderManager_userOrder add constraint FK_Relationship_8 foreign k
 alter table sp_OrderManager_userOrder add constraint FK_Relationship_82 foreign key (GENRE_ID_)
       references sp_purchasingManager_genre (GENRE_ID_) on delete restrict on update restrict;
 
+alter table sp_activity_apply add constraint FK_330705_330701 foreign key (TYPE_ID_)
+      references sp_applay_type (TYPE_ID_) on delete restrict on update restrict;
+
 alter table sp_activity_apply add constraint FK_Relationship_54 foreign key (MEMBER_ID_)
       references sp_member_information (MEMBER_ID_) on delete restrict on update restrict;
 
 alter table sp_activity_applyList add constraint FK_Relationship_52 foreign key (APPLY_ID_)
       references sp_activity_apply (APPLY_ID_) on delete restrict on update restrict;
+
+alter table sp_activity_comment add constraint FK_Relationship_30 foreign key (sp__COMMENT_ID)
+      references sp_activity_comment (COMMENT_ID) on delete restrict on update restrict;
 
 alter table sp_activity_comment add constraint FK_Relationship_53 foreign key (APPLY_ID_)
       references sp_activity_apply (APPLY_ID_) on delete restrict on update restrict;
@@ -2187,6 +2403,9 @@ alter table sp_bbm_room_ add constraint FK_320103_320104 foreign key (FLOOR_ID_)
 alter table sp_bbm_room_ add constraint FK_Relationship_37 foreign key (RZ_ID_)
       references sp_enterbusinessmanager_rz (RZ_ID_) on delete restrict on update restrict;
 
+alter table sp_carport add constraint FK_320701_340701 foreign key (MEMBER_ID_)
+      references sp_member_information (MEMBER_ID_) on delete restrict on update restrict;
+
 alter table sp_enterbusinessmanager_rz add constraint FK_Relationship_57 foreign key (en_type_id_)
       references sp_etype_enterprisetype (en_type_id_) on delete restrict on update restrict;
 
@@ -2202,10 +2421,16 @@ alter table sp_enterprise_employees add constraint FK_Relationship_48 foreign ke
 alter table sp_enterprise_invitation add constraint FK_Relationship_10 foreign key (RZ_ID_)
       references sp_enterbusinessmanager_rz (RZ_ID_) on delete restrict on update restrict;
 
+alter table sp_entrepreneurship add constraint FK_320701_340703 foreign key (MEMBER_ID_)
+      references sp_member_information (MEMBER_ID_) on delete restrict on update restrict;
+
 alter table sp_etype_enterprisetype add constraint FK_Relationship_5 foreign key (sp__en_type_id_)
       references sp_etype_enterprisetype (en_type_id_) on delete restrict on update restrict;
 
 alter table sp_favorits_favoritGoods add constraint FK_Relationship_80 foreign key (MEMBER_ID_)
+      references sp_member_information (MEMBER_ID_) on delete restrict on update restrict;
+
+alter table sp_finace add constraint FK_320701_340702 foreign key (MEMBER_ID_)
       references sp_member_information (MEMBER_ID_) on delete restrict on update restrict;
 
 alter table sp_hotel_order add constraint FK_320701_340601 foreign key (MEMBER_ID_)
@@ -2244,9 +2469,6 @@ alter table sp_mc_msgDatas_ add constraint FK_320202_320203 foreign key (MSG_TEM
 alter table sp_mc_msgTempalate_ add constraint FK_320201_320202 foreign key (MSG_TYPE_ID_)
       references sp_mc_msgType_ (MSG_TYPE_ID_) on delete restrict on update restrict;
 
-alter table sp_memberAdr_address add constraint FK_320701_340101 foreign key (MEMBER_ID_)
-      references sp_member_information (MEMBER_ID_) on delete restrict on update restrict;
-
 alter table sp_member_comment add constraint FK_Relationship_6 foreign key (MEMBER_ID_)
       references sp_member_information (MEMBER_ID_) on delete restrict on update restrict;
 
@@ -2257,6 +2479,9 @@ alter table sp_member_contracts add constraint FK_320701_340102 foreign key (MEM
       references sp_member_information (MEMBER_ID_) on delete restrict on update restrict;
 
 alter table sp_member_information add constraint FK_320702_320701 foreign key (PARENT_MEMBER_ID_)
+      references sp_member_information (MEMBER_ID_) on delete restrict on update restrict;
+
+alter table sp_member_role add constraint FK_320701_320702 foreign key (MEMBER_ID_)
       references sp_member_information (MEMBER_ID_) on delete restrict on update restrict;
 
 alter table sp_nm_issueFlow_ add constraint FK_320601_360203 foreign key (ISSUE_TYPE_ID_)
