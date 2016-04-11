@@ -93,6 +93,13 @@
 			</div>
 		</div>
 	</div>
+	<div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
+        </div> 
+        
+    </div>
 	<!--***弹窗 end****************************************-->
 	<script type="text/javascript">
 	$(function(){		
@@ -150,13 +157,18 @@
 		};
 		//删除地址
 		function removeAddress(obj){
+			//$(".tc.mt25.f18").text("删除成功");
 			var me=obj.parentNode.parentNode;
 		 	$.youi.ajaxUtils.ajax({
 				url:baseUrl+'memberadrAddressManager/removeMemberadrAddress.json',
 				data:'addressId='+me.id,
 				success:function(result){
 					me.remove();
-					alert("删除成功");
+				//	$(".toast").show(); 
+					$(".tc.mt25.f18").text("删除成功");
+					$(".toast").show(); 
+					setTimeout(function(){location.reload(); },500);	
+					
 				}
 			});
 		}
@@ -290,9 +302,8 @@
 					data:params.join('&'),
 					success:function(results){
 						if(results&&results.record){
-							$(".f24.fl.c-333").text("保存成功!");
-							$(".bg-tanc.m2").show();
-							location.reload();
+							location.reload()
+							
 						}
 					}
 				});
