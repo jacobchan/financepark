@@ -12,6 +12,16 @@ public class MeetingEntity {
 	private String lx; //lx
 	private String tyy; //tyy
 	
+	private String tea; //增值服务：茶水
+	
+	public String getTea() {
+		return tea;
+	}
+
+	public void setTea(String tea) {
+		this.tea = tea;
+	}
+
 	public String getAdrfieldName() {
 		return "dz";
 	}
@@ -26,6 +36,10 @@ public class MeetingEntity {
 	
 	public String getTyyfieldName() {
 		return "tyy";
+	}
+	
+	public String getTeafieldName() {
+		return "tea";
 	}
 	
 	public String getAdr() {
