@@ -35,6 +35,7 @@ import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.PolicyManager.entity.PolicyApply;
 import com.manage.PolicyManager.dao.PolicyApplyDao;
 import com.manage.PolicyManager.service.PolicyApplyManager;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerOc;
 
 @Service("policyApplyManager")
@@ -305,6 +306,18 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
 		 }else{
 		    	throw new BusException("当前状态无法取消申请！") ;
 		 }
-	}				
+	}
+    /**
+	 * 根据当前用户分页查询
+	 * @return 分页对象
+	 */
+    @EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	public PagerRecords getPagerPolicyApply(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PolicyApply.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)
+			throws BusException {
+    	PagerRecords pagerRecords = policyApplyDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
 }
 
