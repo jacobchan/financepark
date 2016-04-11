@@ -62,6 +62,13 @@
 			</div>
 		</div>
 	</div>
+	<div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
+        </div> 
+        
+    </div>
 	<!--***弹窗 end****************************************-->
 </youi:body>
 	
@@ -118,7 +125,7 @@
 				"<td>"+record[i].cosTime+"</td>"+
 				"<td>"+bool+"</td><td>"+record[i].cosName+"</td>"+
 				"<td>"+record[i].cosTelephone+"</td><td>"+status+"</td>"+
-				"<td><a href='javascript:;' onclick='javascript:cancel(this)' class='ac-show'>"+crop+"</a></td></tr>";
+				"<td><a href='javascript:;' onclick='javascript:cancel(\""+record[i].cosId+"\")' class='ac-show'>"+crop+"</a></td></tr>";
 				
 				$("tbody").append(html);
 			}
@@ -154,21 +161,22 @@
 	
 	<!-- 取消投诉 -->
 	<script type="text/javascript">
-	$(function(){
-		$(".hhf-submit").click(function(){
-				var id=$(".cosCode")[0].getAttribute("id");
+	function cancel(cosId){
+				
 			 	$.youi.ajaxUtils.ajax({
 					url:baseUrl+'propertyservicemanagerCosManager/updateCosforpage.json',
-					data:'cosId='+id,
+					data:'cosId='+cosId,
 					success:function(result){
 						if(result&&result.record){
-							//alert("取消成功!");		
-							location.reload();
+
+							$(".tc.mt25.f18").text("取消成功");
+							$(".toast").show(); 
+							setTimeout(function(){location.reload(); },1000);
 						}
 					}
 				});
-			});
-		});
+			}
+		
 	$(function(){
 		laydate({
 		    elem: '#startTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
