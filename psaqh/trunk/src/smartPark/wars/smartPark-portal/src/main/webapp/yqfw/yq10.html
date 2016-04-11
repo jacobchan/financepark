@@ -198,7 +198,7 @@
 
 		$(function(){
 			$(".hhf-submit").click(function(){
-				f(!isLogin){
+				if(!isLogin){
 					clearInterval(timer);
 		           	$(".toast").show();
 		           	pltime=1;
