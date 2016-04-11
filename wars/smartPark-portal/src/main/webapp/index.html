@@ -284,7 +284,7 @@
             	<span class="span_ac ">热门活动</span>
             </div>
             <ul class="pb-list-group">
-                <li class="clearfix" onclick='window.open("czh/czh3.html");'>
+<!--                 <li class="clearfix" onclick='window.open("czh/czh3.html");'>
                     <div class="plg-photo">
                         <img src="../styles/images/czh/list-1.jpg" border="0" width="100%"/>
                         <em>创智游学</em>
@@ -340,7 +340,7 @@
                             </div>
                         </div>
                     </div>
-                </li>
+                </li> -->
             </ul>
         </div>
         
@@ -1161,7 +1161,7 @@
 		function _parseRecords(record){
 			var html='';
 			for(var i=0;i<record.length;i++){
-				html+="<li class='clearfix' onclick='redirectPage(this)'; id='"+record[i].applyId+"'><a href='javascript:;'>"+
+				html+="<li class='clearfix' onclick='redirectPage(this)'; id='"+record[i].applyId+"'>"+
 							"<div class='plg-photo'>"+
 								"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityImage+"&method=show' border='0' width='100%'/>"+
 								"<em>"+record[i].applayType.typeName+"</em>"+
@@ -1175,10 +1175,10 @@
 									"<div class='fr' >"+
 										"<span class='mr15'><img src='../styles/images/zs/user.png' border='0' class='mr10'>限制人数"+record[i].applyMaxuser+"人</span>|"+
 										"<span class='ml15 mr15'><img src='../styles/images/czh/heart-h.png' border='0' class='mr10'>2459</span>"+
-										"<a href='javascript:;' class='ib-btn' style='margin-top:0px;'>我要报名</a>"+
+										"<a href='javascript:;' class='ib-btn lh30' style='margin-top:0px;'>我要报名</a>"+
 									"</div>"+
 								"</div>"+
-							"</div></a>"+
+							"</div>"+
 						"</li>";
 			}
 
