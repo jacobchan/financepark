@@ -97,8 +97,15 @@ function singleCheck(){
     $("#all-num").text(i);
     if(i== $('input[name="single-check"]').length){
         $('.cg-pay-table').find('input[name="all-check"]').prop("checked","checked");
-     }else{
-    	 $('.cg-pay-table').find('input[name="all-check"]').prop("checked","");
+    }else{
+    	$('.cg-pay-table').find('input[name="all-check"]').prop("checked","");
+    }
+    if(i>0){
+    	$('#settlement').attr("style","cursor:pointer;background:#FF6715;border:1px #FF6715 solid");
+    	$('#settlement').attr("onclick","settlement();");
+    }else{
+    	$('#settlement').attr("style","cursor:default;background:#e5e5e5;border:1px #e5e5e5 solid");
+    	$('#settlement').attr("onclick","");
     }
 }
 function click(){
@@ -152,10 +159,14 @@ function click(){
 	           	 amount = accAdd(amount,$(this).parents("tr").find('#comAmount').html());
 	        });
             $('.ccheng').html('¥'+amount);
+            $('#settlement').attr("style","cursor:pointer;background:#FF6715;border:1px #FF6715 solid");
+            $('#settlement').attr("onclick","settlement();");
         }else{
             $(this).parents(".cg-pay-table").find('input[name="single-check"]').prop("checked","");
             $("#all-num").text(0);
             $('.ccheng').html('¥0.00');
+            $('#settlement').attr("style","cursor:default;background:#e5e5e5;border:1px #e5e5e5 solid");
+            $('#settlement').attr("onclick","");
         }
         
         
@@ -184,6 +195,38 @@ function click(){
         });
         singleCheck();
     });
+}
+//提交订单
+function settlement(){
+	if(!isLogin){
+        $(".toast").show();
+        setTimeout('$(".toast").hide();',1000);//1秒=1000
+	 	return;
+	}
+	var i=0;
+	var params = '';
+	$('tr[name="shop_car"]').each(function(){
+		var id = $(this).attr("data-id");
+		if(i > 0){
+			params = params+"&";
+		}
+		params = params+$.youi.parameterUtils.propertyParameter("records["+i+"].companyServerId",id);
+		i++;
+    });
+	
+	var serviceURL = baseUrl+"shoppingcarCompanyserverManager/saveWKserviceOrder.json";
+	$.youi.ajaxUtils.ajax({
+		url:serviceURL,
+		data:params,
+		jsonp:'data:jsonp',
+		dataType:'jsonp',
+		success:function(results){
+			if(results&&results.record){
+				$(".bg-tanc.m1").show();
+				countdown(3);
+			}
+		}
+	});
 }
 $(function(){
 	//关闭toast
@@ -221,36 +264,4 @@ $(function(){
 			click();
 		}
 	}); 
-	//提交订单
-	$('#settlement').click(function(){
-		if(!isLogin){
-            $(".toast").show();
-            setTimeout('$(".toast").hide();',1000);//1秒=1000
-		 	return;
-		}
-		var i=0;
-		var params = '';
-		$('tr[name="shop_car"]').each(function(){
-			var id = $(this).attr("data-id");
-			if(i > 0){
-				params = params+"&";
-			}
-			params = params+$.youi.parameterUtils.propertyParameter("records["+i+"].companyServerId",id);
-			i++;
-        });
-		
-		var serviceURL = baseUrl+"shoppingcarCompanyserverManager/saveWKserviceOrder.json";
-		$.youi.ajaxUtils.ajax({
-			url:serviceURL,
-			data:params,
-			jsonp:'data:jsonp',
-			dataType:'jsonp',
-			success:function(results){
-				if(results&&results.record){
-					$(".bg-tanc.m1").show();
-					countdown(3);
-				}
-			}
-		});
-	});
 });
