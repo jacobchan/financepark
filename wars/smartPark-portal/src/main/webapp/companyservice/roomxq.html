@@ -473,18 +473,21 @@ var commodityId;
 		    	tea=true;
 	          }
             if(enteringName == null||enteringName == ""){
-				alert("请填写联系人!");
+				$("#msg").text("请填写联系人");
+				$(".toast").show();
 				return;
 			}
             if(enteringTelephone !=null&& enteringTelephone!=""){
 				 if(isMobil(enteringTelephone)){
 						
 					}else{
-						alert("电话格式不正确！");
+						$("#msg").text("电话格式不正确！");
+						$(".toast").show();
 						return false;
 					}
 		    	}else{
-		    		alert("请填写联系人电话");
+		    		$("#msg").text("请填写联系人电话");
+		    		$(".toast").show();
 				return;
 		    	}
 			
