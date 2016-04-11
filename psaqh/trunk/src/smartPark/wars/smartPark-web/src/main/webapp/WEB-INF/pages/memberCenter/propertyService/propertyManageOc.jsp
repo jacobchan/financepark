@@ -35,6 +35,13 @@
 					</div>
 				</div>
 			</youi:body>
+				<div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
+        </div> 
+        
+    </div>
 	<!--***bottom start****************************************-->
     <script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
 	<script type="text/javascript">
@@ -87,8 +94,9 @@
 				data:'ocId='+ocId+'',
 		 		success:function(result){
 					if(result&&result.record){					
-						alert("取消成功");
-						location.reload();
+						$(".tc.mt25.f18").text("取消成功");
+						$(".toast").show(); 
+						setTimeout(function(){location.reload(); },1000);
 					}
 				}
 			});
