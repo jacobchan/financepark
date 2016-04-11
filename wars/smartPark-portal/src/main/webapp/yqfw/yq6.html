@@ -96,6 +96,24 @@
 	</div>
 	
 	<!--***弹窗 start****************************************-->
+	<div class="bg-tanc m2">
+				<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+					<a href="javascript:;" class="tc-close"></a>
+					<div class="tc mt40">
+						<div class="mt20 mb20 f16 lh26">
+							<img src="../styles/images/yqfw/correct.png" border="0" class="mr20"/>
+						</div>
+						<p class="mb10 f16">您已经申请成功，请到会员中心查看。</p>
+						<p><span class="c-o f24 tc-time" id="ti-m1">3 </span>秒后，系统将自动跳转</p>
+						<p class="mt10"><a style="cursor:pointer;" onclick="jump();" class="c-6">手动跳转 ></a></p>
+						<div class="clearfix mt30">
+							<a style="cursor:pointer;" onclick="jumpIndex();"  class="c-6"><i class="fa fa-home mr10" style="font-size:24px;"></i>返回首页</a>
+							<span class="f14 ml20 mr20 c-6">|</span>
+							<a style="cursor:pointer;" onclick="jumpPerson();"  class="c-6"><i class="fa fa-user mr10" style="font-size:20px;"></i>个人中心</a>
+						</div>
+					</div>
+				</div>
+		</div>
 	<div class="toast">
         <div class="toast-con clearfix">
             	<div class="close-toast fr"></div>
@@ -181,12 +199,8 @@
 							dataType:'jsonp',
 							success:function(results){
 								if(results&&results.record){
-									clearInterval(timer);
-									$(".tc.mt25").text("申请成功!");
-						           	$(".toast").show();
-						           	pltime=1;
-						           	timer=setInterval("closeTanc()",1000);
-									window.location=cenUrl+"member/memberCenter/propertyService/propertyManageBx.html";
+									$(".bg-tanc.m2").show();
+									countdown(3);
 								}
 							}
 						});
@@ -306,6 +320,28 @@
 		     pltime=1;
 		     timer=setInterval("closeTanc()",1000);
 		 */
+		//定时跳转
+		 function countdown(i){
+		 	$("#ti-m1").text(i);
+		     i = i - 1;
+		     if(i > 0) {
+		         setTimeout("countdown("+i+")", 1000);
+		     }else{
+		     	jump();
+		     }
+		 }
+		 //跳转报修
+		 function jump(){
+		 	window.location.href=cenUrl+"member/memberCenter/propertyService/propertyManageBx.html";
+		 }
+		 //跳转个人中心
+		 function jumpPerson(){
+		 	window.location.href=cenUrl+"member/memberCenter/personalCenter/personInfo.html";
+		 }
+		 //跳转首页
+		 function jumpIndex(){
+		 	window.location.href=cenUrl;
+		 }
 </script>
 </body>
 </html>
