@@ -26,9 +26,9 @@
         <div class="carxq fl">
         	<span class="span_bold f20" id="commodityName"></span>
             <div class="mt20 mb20">
-                <div class="res_tip" id="dw">自动挡</div>
-                <div class="res_tip" id="zw">9人座</div>
-                <div class="res_tip" id="cp">车牌：杭AL8899</div>
+                <div class="res_tip" id="dw"></div>
+                <div class="res_tip" id="zw"></div>
+                <div class="res_tip" id="cp"></div>
 			</div>
             <div class="egbg"><span id="commodityPrice">&yen;</span>元&nbsp;<span class="f16">/小时</span></div>
             <p class="f12 mt20" style="width:360px;" id="commodityDescribe">
@@ -206,15 +206,12 @@
 							.text("联系人：" + records[0].purchasingmanagerMerchant.merchantLinkman);
 					$('#merchantPhone').text(
 							"联系电话：" + records[0].purchasingmanagerMerchant.merchantLinkmanPhone);
-					if (records[0].dwValue != null) {
-						$('#dw').text(records[0].dwValue);
+					if (records[0].billboard != null) {
+						$('#dw').text(records[0].billboard.size);
+						$('#zw').text(records[0].billboard.loopType);
+						$("#cp").text(records[0].billboard.unit);
 					}
-					if (records[0].zwValue != null) {
-						$('#zw').text(records[0].zwValue);
-					}
-					if (records[0].cpValue != null) {
-						$('#cp').text(records[0].cpValue);
-					}
+					
 				}
 			}
 		});
