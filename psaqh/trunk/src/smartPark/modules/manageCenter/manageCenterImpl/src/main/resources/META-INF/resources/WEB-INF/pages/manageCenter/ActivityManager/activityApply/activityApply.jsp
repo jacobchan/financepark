@@ -1,5 +1,6 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
+<script type="text/javascript" src="<%=request.getContextPath()%>/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
 function validateTime(startTime,endTime){
 	var oDate1 = new Date(startTime);
@@ -32,7 +33,7 @@ function validateTime(startTime,endTime){
 		<youi:gridCol property="applyMaxuser"  caption="限制人数"  width="100px"/>
 		<youi:gridCol property="startTime"  caption="活动开始时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" width="100px"/>
 		<youi:gridCol property="endTime"  caption="活动结束时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" width="100px"/>
-		<youi:gridCol property="commentContent"  caption="活动内容" width="200px"/>
+		<%-- <youi:gridCol property="commentContent"  caption="活动内容" width="200px"/> --%>
 
 		<youi:gridCol property="applyStatus"  caption="活动申请状态" convert="activityApplyStatus" width="100px" />
 		<youi:gridCol property="isRecoomend"  caption="是否推荐" convert="bool" width="100px"/>
@@ -45,9 +46,10 @@ function validateTime(startTime,endTime){
 	</youi:grid>
 	
 	<!-- form--活动申请内容列表编辑 -->
-	<youi:form dialog="true" caption="-活动申请内容列表" id="form_activityApply" action="esb/web/activityApplyManager/saveActivityApply.json">
-		<youi:fieldLayout prefix="record" labelWidths="100,100">
+	<youi:form dialog="true" caption="-活动申请内容列表" id="form_activityApply" action="esb/web/activityApplyManager/saveActivityApply.json" width="1100">
+		<youi:fieldLayout prefix="record" labelWidths="120,120">
 			<youi:fieldHidden property="applyId"  caption="活动申请ID"/>
+			<%-- <youi:fieldHidden property="commentContent"  caption="活动内容"/> --%>
 			<youi:fieldText property="applyNumber"  caption="活动申请编号"/>
 			<youi:fieldSelect property="applyOrderNumber"  caption="场地编号" src="esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommoditys.json"
 								code="commodityId"	show="commodityTitle" />
@@ -61,7 +63,8 @@ function validateTime(startTime,endTime){
 			<youi:fieldSelect property="applayType.typeId"  caption="活动类型" src="esb/web/applayTypeManager/getApplayTypes.json" code="typeId" show="typeName" notNull="true"/>
 			<youi:fieldSelect property="isRecoomend"  caption="是否推荐" convert="bool"/>
 			<youi:fieldSwfupload property="activityImage" caption="活动图片" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" />
-			<youi:fieldArea property="commentContent"  caption="活动内容" column="2" notNull="true"/>
+			<%-- <youi:fieldArea property="commentContent"  caption="活动内容" column="2" notNull="true"/> --%>
+			<youi:fieldCustom column="2" custom="fieldCkeditor" customOptions="{}" property="commentContent"  caption="活动内容"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
