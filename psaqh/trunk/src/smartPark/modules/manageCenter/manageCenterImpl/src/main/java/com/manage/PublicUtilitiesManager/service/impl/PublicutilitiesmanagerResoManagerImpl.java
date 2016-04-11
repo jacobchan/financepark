@@ -523,6 +523,8 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 					pcLists.add(pc);
 				}
 			}else if(genreCode.equals("0303")){//广告
+				//填充广告位扩展属性
+				extentionAtrManager.setMeetingLedExtendValue(pc);
 				pcLists.add(pc);
 			}
 		}
