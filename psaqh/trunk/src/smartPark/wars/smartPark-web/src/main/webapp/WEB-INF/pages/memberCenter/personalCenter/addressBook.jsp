@@ -62,10 +62,12 @@
 	 			 var createTime="";
 	 			   if(record[i].memberDescribe2==""){
 	 				   memberDescribe2="";
-	 			   }
+	 			   }else{
+	 				  memberDescribe2=record[i].memberDescribe2;}
 	 			  if(record[i].memberDescribe2==""){
 	 				 createTime="";
-	 			   }
+	 			   }else{
+	 				  createTime=record[i].createTime;}
 					var html= "<tr class='aaa'>"+
 				      "<td >"+record[i].memberName+"</td>"+
 				      "<td >"+record[i].memberPhoneNumber+"</td>"+
