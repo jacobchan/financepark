@@ -5,6 +5,9 @@
 			//alert(Portal);
 			window.location.href=proUrl+gohref; 
 		}
+		function login(){
+			window.location.href=cenUrl+"/member/memberCenter/login.html";
+		}
 	</script>
 	<div style="background-color:#545454">
 		<div class="w1200 head-top clearfix">
@@ -33,8 +36,8 @@
 					</span>
 				</div>
 				<div id="user_info" class="fr">
-					<a href="#">登录</a>
-					<a href="#">注册</a>
+					<a style="cursor: pointer;" onclick="login();">登录</a>
+					<a style="cursor: pointer;" onclick="login();">注册</a>
 				</div>
 			</div>
 		</div>
