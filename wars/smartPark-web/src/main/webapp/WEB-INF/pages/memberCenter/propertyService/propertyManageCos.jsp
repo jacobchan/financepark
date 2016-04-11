@@ -35,15 +35,8 @@
 								</tr>
 							</tbody>
 						</table>
-						<div class="fr page-list-a clearfix lh30 mt20 f12">
-							<span class="mr20 fl">共有  <span id="count"></span> 条，每页显示： 50 条</span>
-							<a href="">首</a>
-							<a href=""><i class="fa fa-angle-left"></i></a>
-							<a>1</a>
-							<a href=""><i class="fa fa-angle-right"></i></a>
-							<a href="">末</a>
-							<input class="bd-input fl ml10 mr10" style="width:40px;" type="text">
-							<a href="">Go</a>
+						<div class="tcdPageCode fr">
+							
 						</div>
 					</div>
 					
@@ -74,9 +67,71 @@
 	
 	<script type="text/javascript" src="<%=request.getContextPath() %>/scripts/page/laydate/laydate.js"></script>
 	<%-- <script type="text/javascript" src="<%=request.getContextPath() %>/scripts/lib/properties.js"></script> --%>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 	<script type="text/javascript">
+	var pageSize=5;
+	var pageCount=1;
+	var serviceURL = baseUrl+'propertyservicemanagerCosManager/getPagerFkcodes.json';
+		$(function () {
+			star(".starbox1 i");
+				star(".starbox2 i");
+				star(".starbox3 i");
+				star(".starbox4 i");
+				function star(ele){
+					$(ele).hover(function(){
+						var index=$(this).index()+1;
+						$(ele).removeClass("star1").addClass("star0");
+						var arr=$(ele).toArray().slice(0,index);
+						for(var i=0;i<arr.length;i++){
+							arr[i].className="star1";
+						}
+					});
+				}
+			$(".ac-show").click(function(){
+				$(".bg-tanc.m1").show();
+			});
+			$(".ac-see").click(function(){
+				$(".bg-tanc.m2").show();
+			});
+			
+			 $.ajax({
+				url:serviceURL, 
+				success:function(results){	
+								pageCount=Math.ceil(results.totalCount/pageSize);
+								
+								 refreshData(1,pageSize);
+									$(".tcdPageCode").createPage({
+									    pageCount:pageCount,
+									    current:1,
+									    backFn:function(p){
+									       this.pageCount=pageCount;
+									        refreshData(p,pageSize);
+									    }
+									});			
+				/* 	if(result&&result.records){
+						_parseRecords(result.records);
+					} */
+				}
+			}); 			
+		});	
+		
+		
+		//分页列表
+		function refreshData(pageIndex,pageSize){
+			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+			$.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				success:function(results){
+					if(results&&results.records){
+						 _parseRecords(results.records);
+					}
+				}
+			});
+		}
 		//读取当前用户投诉记录
-		$(function(){
+		/* $(function(){
 			$("#grzl").attr("class","");
 			$("#property").attr("class","active");
 			$.ajax({
@@ -91,10 +146,11 @@
 			$(".ac-show").click(function(){
 				$(".bg-tanc").show();
 			});
-		});
+		}); */
 		//格式化展示列表
 		function _parseRecords(record){
-			$("#count").append(record.length);
+			$("tbody").empty();
+		//	$("#count").append(record.length);
 			for(var i=0;i<record.length;i++){
 				var bool = "";
 				var status = "";
@@ -108,6 +164,7 @@
 					status = "待受理";
 					crop = "取消";
 				}else if(record[i].cosStatus=='1'){
+					crop = "取消";
 					status = "受理中";
 				}else if(record[i].cosStatus=='2'){
 					status = "已受理";
