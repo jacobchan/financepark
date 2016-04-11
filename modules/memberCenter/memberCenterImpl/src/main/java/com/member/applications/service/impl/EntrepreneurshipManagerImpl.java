@@ -200,8 +200,6 @@ public class EntrepreneurshipManagerImpl extends BaseManagerImpl implements Entr
 		//申请编号
 		String applayNo = BizCodeUtil.getInstance().getBizCodeDate("ITFW");
 		o.setApplayNo(applayNo);
-		//申请时间
-		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		//创建时间
 		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		//创建返回保存成功返回的实体
