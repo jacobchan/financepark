@@ -71,9 +71,9 @@
 					  }	
 					  var html= "<tr class='aaa'>"+
 				      "<td width='111'>"+record[i].ocCode+"</td>"+
-				      "<td width='111'>"+record[i].ocComp+"</td>"+
+				
 				      "<td width='111'>"+record[i].ocDate+"</td>"+
-				 //    "<td width='111'>"+record[i].memberId+"</td>"+
+				     "<td width='111'>"+record[i].member.memberName+"</td>"+
 				      "<td width='111'>"+status+"</td>"+				    
 				      "<td width='111' >"+button+"</td>"+                    
                       " </tr>"; 
