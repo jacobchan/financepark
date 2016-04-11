@@ -52,7 +52,7 @@
 	//取消政策申请，前端调用
 	 function cancel(id){		
 		var policyApplyId=id;	
-		alert(policyApplyId);
+		
 	     $.ajax({
 			url:baseUrl+'policyApplyManager/cancelApply.json',
 			data:'policyApplyId='+policyApplyId,
