@@ -197,7 +197,7 @@
 	<script type="text/javascript">
 		$(function () {
 			$.ajax({
-				url:baseUrl+'propertyservicemanagerEntrecManager/getPropertyservicemanagerEntrecs.json', 
+				url:baseUrl+'propertyservicemanagerEntrecManager/getPropertyservicemanagerEntrecsForReserve.json', 
 				success:function(result){
 					console.log(result);
 					if(result&&result.records){
