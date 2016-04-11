@@ -20,20 +20,14 @@
 					    			if (result && result.record) {
 					    				var record = result.record;
 					    				$("#codeDiv").empty();
-					    				var codeStr = '<li>'+
-					                    	'<table>'+
-					                        	'<tr>'+
-					                            	'<td colspan="2"><p style=" width:100%; max-height:16px; overflow:hidden;display:inline-block;line-height:16px;text-overflow:ellipsis;white-space:nowrap;">企业全称：'+record.rzName+'</p></td>'+
-					                            '</tr>'+
-					                            '<tr>'+
-					                            	'<td colspan="2">企业邀请码：<span class="color_orange">'+record.rzSign+'</span></td>'+
-					                            '</tr>'+
-					                            '<tr>'+
-					                            	'<td><a href="javascript:updateCode(\''+record.rzId+'\');" class="yqm_btn">更新邀请码</a></td>'+
-					                                '<td><a href="javascript:sendCode();" class="yqm_btn">发送邀请码</a></td>'+
-					                            '</tr>'+
-					                        '</table>'+ 
-					                    '</li>';
+					    				var codeStr = '<div class="yqm_left">'+
+							                    '<span class="yqm_01">企业邀请码：<font id="rzSign">'+record.rzSign+'</font></span>'+
+							                    '<span class="yam_02">（特别说明：为安全起见，可自行刷新更换邀请码刷新后，之前的邀请码将即刻失效。）</span>'+
+							                '</div>'+
+							                '<div class="yqm_right">'+
+							                    '<a href="javascript:sendCode();" class="a-b a-b-fill mb15">发送邀请码</a>'+
+							                    '<a href="javascript:updateCode(\''+record.rzId+'\');" class="a-b a-b-fill">更新邀请码</a>'+
+							                '</div>';
 										$("#codeDiv").append(codeStr);
 									}
 								}
@@ -46,7 +40,7 @@
 				});
 			  	$(".ib-btn").click(function(){
 					var phoneArr = $("#enterprisePhone").val();
-					var code = $(".color_orange").html();
+					var code = $("#rzSign").html();
 					var phone = phoneArr.split(",");
 					var regPhone = /^1[3|5|8][0-9]\d{4,8}$/;
 					for(var i=0; i<phone.length; i++){
@@ -80,13 +74,36 @@
 				});
 			  	$("#moreul").slideUp("slow");
 			  	$(".sidebar-menu-mainul > li:eq(2)").addClass("active");
+			  	
+			  	//获取邀请记录
+			  	$.ajax({
+					url:baseUrl+'/enterpriseInvitationManager/getPagerEnterpriseInvitations.json',
+					data : ['rzId='+$("#rzId").val()].join('&'),
+					success : function(result) {
+		    			if (result && result.records) {
+		    				var record = result.records;
+		    				$("#invication").empty();
+		    				var codeStr = '<tr class="th"><td>邀请码</td><td>手机号码</td><td>邀请状态</td><td>邀请时间</td><td>操作</td></tr>';
+		    				for(var i=0; i<record.length; i++){
+		    					codeStr+='<tr>'+
+			                        '<td>'+record[i].invitationCode+'</td>'+
+			                        '<td>'+record[i].invitationTelephone+'</td>'+
+			                        '<td>已邀请</td>'+
+			                        '<td>'+record[i].createTime+'</td>'+
+			                        '<td><a href="javascript:;">取消邀请</a><span></span><a href="javascript:;">重新邀请</a></td>'+
+			                    '</tr>';
+		    				}
+		    				$("#invication").append(codeStr);
+						}
+					}
+				});
 			});
 			function updateCode(rzId){
 				$.ajax({
 					url:baseUrl+'/enterbusinessmanagerRzManager/updateEnteringSign.json',
 					data : ['rzId='+rzId].join('&'),
 					success : function(result) {
-						$(".color_orange").html(result.record.rzSign);
+						$("#rzSign").html(result.record.rzSign);
 					}
 				});
 			}
@@ -105,14 +122,25 @@
 		    	<div class="main-wrapper-right" id="main-wrapper-right">
 		    		<input id="rzId" name="rzId" type="text" style="display:none;" />
 		        	<div class="main-title"><span>企业邀请码</span></div>
-		            <div class="qy_yqm">
-		            	<ul id="codeDiv">
-		                </ul>
+		            <div id="codeDiv" class="qy_yqm"></div>
+		        </div>
+		        <div class="yam_tab">
+		            <table>
+		                <tbody id="invication"></tbody>
+		            </table>
+		            <div class="fr page-list-a clearfix lh30 mt20 f12">
+		                <span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
+		                <a href="">首</a>
+		                <a href=""><i class="fa fa-angle-left"></i></a>
+		                <a>1</a>
+		                <a href=""><i class="fa fa-angle-right"></i></a>
+		                <a href="">末</a>
+		                <input class="bd-input fl ml10 mr10" style="width:40px;" type="text">
+		                <a href="">Go</a>
 		            </div>
-		        </div>   
+		        </div>
 		    </div>
 		</div>
-		
 		<div class="bg-tanc">
 			<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
 				<a href="javascript:;" class="tc-close"></a>
