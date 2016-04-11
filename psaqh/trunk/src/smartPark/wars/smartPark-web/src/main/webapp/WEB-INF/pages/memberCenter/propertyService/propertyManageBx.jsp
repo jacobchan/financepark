@@ -120,6 +120,13 @@
 			</div>
 		</div>
 	</div>
+	<div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
+        </div> 
+        
+    </div>
 	<!--***弹窗 end****************************************-->
 </youi:body>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/scripts/page/laydate/laydate.js"></script>
@@ -145,7 +152,7 @@
 		function _parseRecords(record){
 			for(var i=0;i<record.length;i++){
 				var bxStatus='';
-				var buttonHtml="<td><a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消</a></td>";
+				var buttonHtml="<td><a href='javascript:;' class='ac-show' onclick='javascript:cancel(\""+record[i].bxId+"\")'>取消</a></td>";
 				if(record[i].bxStatus=='00'){
 					bxStatus='待受理';
 				}else if(record[i].bxStatus=='01'){
@@ -158,13 +165,13 @@
 					bxStatus='已完工';
 				}else if(record[i].bxStatus=='05'){
 					bxStatus='已定价';
-					buttonHtml="<td><a href='javascript:;'>付款</a><span class='f12 ml5 mr5'>|</span><a href='javascript:;' onclick='javascript:redeal(this)'>申请重修</a></td>";
+					buttonHtml="<td><a href='javascript:;'>付款</a><span class='f12 ml5 mr5'>|</span><a href='javascript:;' onclick='javascript:redeal(\""+record[i].bxId+"\")'>申请重修</a></td>";
 				}else if(record[i].bxStatus=='06'){
 					bxStatus='已付款';
 				}else if(record[i].bxStatus=='07'){
 					bxStatus='已完成';
 				}else if(record[i].bxStatus=='08'){
-					bxStatus='未受理';
+					bxStatus='已取消';
 				}
 				var html="<tr id='"+record[i].bxId+"' class='aaa'>"+
 						"<td><a href=''>"+record[i].bxCode+"</a></td>"+
@@ -196,26 +203,32 @@
 	</script>
 	<!-- 取消报修订单 -->
 	<script type="text/javascript">
-	$(function(){
-		$(".hhf-submit").click(function(){
-				var id=$(".bxCode")[0].getAttribute("id");
+	
+		 function cancel(bxId){
+			 
 			 	$.youi.ajaxUtils.ajax({
 					url:baseUrl+'propertyservicemanagerBxManager/updateBxforpage.json',
-					data:'bxId='+id,
+					data:'bxId='+bxId,
 					success:function(result){
 						if(result&&result.record){
 							if(result.record.bxStatus=='08'){
-								//alert("取消成功!");
+								
+								$(".tc.mt25.f18").text("取消成功");
+								$(".toast").show(); 
+								setTimeout(function(){location.reload(); },1000);
 							}else if(result.record.bxStatus=='01'){
-								//alert("重新报修成功!");
+								
+								$(".tc.mt25.f18").text("重新报修成功");
+								$(".toast").show(); 
+								setTimeout(function(){location.reload(); },1000);
 							}
 							
 							location.reload();
 						}
 					}
 				});
-			});
-		});
+			}
+		
 	//根据订单号查询
 	$('.hhf-submit').click(function(){					
 		$(".aaa").empty();
