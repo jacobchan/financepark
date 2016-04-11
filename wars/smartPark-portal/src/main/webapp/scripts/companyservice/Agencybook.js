@@ -246,20 +246,16 @@ $(function(){
             setTimeout('$(".toast").hide();',1000);//1秒=1000
 		 	return;
 		}
-		var length = $('#shopCar').children("tr").length;
 		var params = '';
-		for(var i =0;i<length;i++){
-			var object = $('#shopCar').children("tr").get(i);
-			var commodityId = object[attribute = 'attributes'][attribute = 'data-id'][attribute = 'value'];
-			var num = object[attribute = 'attributes'][attribute = 'data-num'][attribute = 'value'];
-			if(i+1<length){
-				params = params+$.youi.parameterUtils.propertyParameter("records["+i+"].commodityId.commodityId",commodityId)+"&";
-				params = params+$.youi.parameterUtils.propertyParameter("records["+i+"].commoditydetailNum",num)+"&";
-			}else{
-				params = params+$.youi.parameterUtils.propertyParameter("records["+i+"].commodityId.commodityId",commodityId)+"&";
-				params = params+$.youi.parameterUtils.propertyParameter("records["+i+"].commoditydetailNum",num);
-			}
-		}
+		var i =0;
+		$('#shopCar').children("tr").each(function(){
+			var commodityId = $(this).attr("data-id");
+			var num = $(this).attr("data-num");
+			params = params+$.youi.parameterUtils.propertyParameter("records["+i+"].commodityId.commodityId",commodityId)+"&";
+			params = params+$.youi.parameterUtils.propertyParameter("records["+i+"].commoditydetailNum",num)+"&";
+			i++;
+	    });
+		
 		var serviceURL = baseUrl+"ordermanagerUserorderManager/saveAgencyOrder.json";
 		
 		$.youi.ajaxUtils.ajax({
