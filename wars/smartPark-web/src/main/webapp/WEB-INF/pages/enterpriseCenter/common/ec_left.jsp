@@ -9,10 +9,21 @@
 	<body>
 		<aside class="sidebar-menu fixed">
 			<div class="sidebar-menu-inner">
-	        	<div class="sidebar-menu-bread"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_home.png"></span>企业管理中心</div>
+	        	<%-- <div class="sidebar-menu-bread">
+	        		<img src="<%=request.getContextPath()%>/styles/images/qiye/icon_home.png">
+	        		<span style="">企业管理中心</span
+	        	</div> --%>
+	        	<a>
+	            	<div class="sidebar-menu-bread">
+	            		<img src="<%=request.getContextPath()%>/styles/images/qiye/icon_home.png" style="margin-top: -4px;">
+	            		<span> 企业管理中心</span>
+	            	</div>
+	            </a>
 	        	<ul class="sidebar-menu-mainul">
 	                <li>
-	                    <a id="more">企业资料 <span class="down-icon"><img src="<%=request.getContextPath()%>/styles/images/qiye/angle-down.png"></span></a>
+	                    <a id="more">
+	                    	企业资料<span class="down-icon"><img src="<%=request.getContextPath()%>/styles/images/qiye/angle-down.png"></span>
+                    	</a>
 	                    <ul id="moreul" class="sidebar-menu-mainul2">
 	                        <li><a href="<%=request.getContextPath()%>/enterprise/info.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_xinxi.png"></span>企业信息</a></li>
 	                        <li><a href="<%=request.getContextPath()%>/enterprise/financing.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_rongzi.png"></span>融资信息</a></li>
@@ -23,10 +34,14 @@
 	                </li>
 	            	<li><a href="<%=request.getContextPath()%>/enterprise/book.html">企业通讯录管理</a></li>
 	                <li><a href="<%=request.getContextPath()%>/enterprise/code.html">企业邀请码</a></li>
-	                <!-- <li><a href="<%=request.getContextPath()%>/enterprise/order.html">订单中心</a></li> -->
 	                <li><a href="<%=request.getContextPath()%>/enterprise/reply.html">评论消息</a></li>
 	            </ul>
-	            <a href="<%=request.getContextPath()%>/member/memberCenter/index.html"><div class="sidebar-menu-return"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_return.png"></span>返回个人中心</div></a>
+	            <a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/personInfo.html">
+	            	<div class="sidebar-menu-return">
+	            		<img src="<%=request.getContextPath()%>/styles/images/qiye/icon_return.png">
+	            		<span> 返回个人中心</span>
+	            	</div>
+	            </a>
 	        </div>
 		</aside>
 	</body>
