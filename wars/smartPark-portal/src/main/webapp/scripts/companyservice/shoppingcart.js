@@ -209,15 +209,13 @@ function settlement(){
 	}
 	var i=0;
 	var params = '';
-	$('tr[name="shop_car"]').each(function(){
-		var id = $(this).attr("data-id");
-		if(i > 0){
-			params = params+"&";
-		}
-		params = params+$.youi.parameterUtils.propertyParameter("records["+i+"].companyServerId",id);
-		i++;
-    });
-	
+	$('input[name="single-check"]').each(function(){
+        if($(this).prop("checked")){
+	    	var id = $(this).parents("tr").attr("data-id");
+     		params = params+$.youi.parameterUtils.propertyParameter("records["+i+"].companyServerId",id)+"&";
+     		i++;
+        }
+	});
 	var serviceURL = baseUrl+"shoppingcarCompanyserverManager/saveWKserviceOrder.json";
 	$.youi.ajaxUtils.ajax({
 		url:serviceURL,
