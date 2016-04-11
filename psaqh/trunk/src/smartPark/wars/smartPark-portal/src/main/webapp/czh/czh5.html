@@ -112,7 +112,7 @@
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
 	<!--***弹窗 start****************************************-->
-	<div class="bg-tanc m1" style="display:block">
+	<div class="bg-tanc m1" >
 		<div class="tanc-con">
 			<a href="javascript:;" class="tc-close"></a>
 			<h3 class="mb10"><b>创业加速计划</b></h3>
@@ -124,41 +124,48 @@
 				<tr>
 					<td valign="top">项目类型 <em style="color:#de0101">*</em></td>
 					<td>
-						<div class="tct-select mr20" style="width:300px;">
-							<div class="ic-select" style="background: transparent url(../styles/images/yqfw/down.png) no-repeat scroll right center;">
+						<div class="tct-select mr20" style="width:300px;" id="codeProjectType">
+							<!-- <div class="ic-select" style="background: transparent url(../styles/images/yqfw/down.png) no-repeat scroll right center;">
 								<p class="c-b1">请选择订单项目</p>
 							</div>
-							<ul style="display: none;" class="select-nav">
+							<ul style="display: none;" class="select-nav" id="codeProjectType">
 								<li>园区地址1</li>
 								<li>园区地址2</li>
 								<li>园区地址3</li>
-							</ul>
+							</ul> -->
 						</div>
 					</td>
 				</tr>
 				<tr>
 					<td valign="top">项目简介<em style="color:#de0101">*</em></td>
-					<td><textarea style="height:140px;"></textarea></td>
+					<td><textarea style="height:140px;" id="projectDis"></textarea></td>
 				</tr>
 				<tr>
 					<td valign="top">是否融资<em style="color:#de0101">*</em></td>
-					<td><div class="sex-group mt10 mb10"><span class="active">是</span><span class="">否</span></div></td>
+					<td>
+						<div class="sex-group mt10 mb10" id="isFinace">
+							<!-- <span class="active">是</span>
+							<span class="">否</span> -->
+						</div>
+					</td>
 				</tr>
 				<tr>
 					<td valign="top">请选择需要<em style="color:#de0101">*</em><br/>的导师类型</td>
 					<td>
-						<ul class="speed-sort">
-							<li class="active">技术指导</li>
+						<ul class="speed-sort" id="teacherType">
+							<!-- <li class="active">技术指导</li>
 							<li>股权配置</li>
 							<li>风险控制</li>
 							<li>企业管理</li>
-							<li style="padding:0px 20px 0px 0px;"><input type="text" placeholder="您还可以输入自定义的导师类型" style="width:195px;border:0px"></li>
+							<li style="padding:0px 20px 0px 0px;">
+								<input type="text" placeholder="您还可以输入自定义的导师类型" style="width:195px;border:0px">
+							</li> -->
 						</ul>
 					</td>
 				</tr>
 				<tr>
 					<td></td>
-					<td><a href="" class="ib-btn">提交预约</a></td>
+					<td><a href="javascript:void(0);" class="ib-btn" id="spEntrepreneurshipSubmit">提交预约</a></td>
 				</tr>
 			</table>
 		</div>
@@ -265,44 +272,18 @@
 			</table>
 		</div>
 	</div>
+	 <!-- 弹出层样式未登录 -->
+    <div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715">请登录后重试！</p>
+        </div>
+    </div>
 	<!--***弹窗 end****************************************-->
 	<script type="text/javascript" src="../scripts/page/banner.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			$(".slideBox").hover(function(){
-	      		clearInterval(timer);
-			},function(){ timer = setInterval(run,3000)});
-			$(".index-fr-nav li").click(function(){
-				$(".index-fr-nav li").removeClass("active");
-				$(this).addClass("active");
-				$(".ifn-group ul").eq($(this).index()).removeClass("undis").siblings().addClass("undis");
-			});
-			$(".ib-btn.open-m1").click(function(){
-				$(".bg-tanc.m1").show();
-				
-			});
-			$(".ib-btn.open-m2").click(function(){
-				$('body').css("overflow","hidden");
-				$(".bg-tanc.m2").show();
-				
-			});
-			$(".ib-btn.open-m3").click(function(){
-				$(".bg-tanc.m3").show();
-				
-			});
-			$(".tc-close").click(function(){
-				$('body').css("overflow","auto");
-				$(".bg-tanc").hide();
-			});
-			$(document).on("click",".speed-sort li",function(){
-				$(this).addClass("active").siblings().removeClass("active");
-			})
-			laydate({
-			    elem: '#fkcodeDate', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
-			    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
-			});
-		})
-		
-	</script>
+	
+	<!--***创业加速计划引用JS****************************************-->
+	<script type="text/javascript" src="../scripts/entrepreneurship/entrepreneurship.js"></script>
+	
 </body>
 </html>
