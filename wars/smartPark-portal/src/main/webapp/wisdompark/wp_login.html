@@ -393,18 +393,20 @@
         }
         function close(content){
 	        clearInterval(timer);
-	        $(".tc.mt25.f14").empty() ;
-	        $(".tc.mt25.f14").append(content) ;
+	        $(".tc.mt25.f18").empty() ;
+	        $(".tc.mt25.f18").append(content) ;
 	        $(".toast").show();
 	        pltime=1;
 	        timer=setInterval("closeTanc()",1000);
         }
 	</script>
-	    <!-- 弹出层样式 -->
-        <div class="toast clearfix">
+	<!-- 弹出层样式 -->
+    <div class="toast">
+        <div class="toast-con clearfix">
             <div class="close-toast fr"></div>
-            <p class="tc mt25 f14" style="color:#ff6715"></p>
+            <p class="tc mt25 f18" style="color:#ff6715"></p>
         </div>
+    </div>
 	
 </body>
 </html>
