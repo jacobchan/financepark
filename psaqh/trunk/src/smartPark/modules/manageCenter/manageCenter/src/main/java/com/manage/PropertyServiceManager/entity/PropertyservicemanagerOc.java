@@ -9,6 +9,7 @@ import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.common.MemberAdrManager.entity.MemberadrAddress;
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: 一卡通办理申请记录
@@ -84,20 +85,49 @@ public class PropertyservicemanagerOc implements Domain{
 	@Column(name = "APPLY_TIME_")
 	private String applyTime;//申请时间
 	
-	public MemberadrAddress getOcAddree() {
-		return ocAddree;
+	@Transient
+	private MemberInformation member;
+	
+	
+	
+	public String getOcNumber() {
+		return ocNumber;
 	}
 
-	public void setOcAddree(MemberadrAddress ocAddree) {
-		this.ocAddree = ocAddree;
+	public void setOcNumber(String ocNumber) {
+		this.ocNumber = ocNumber;
 	}
 
-	public String getApplyTime() {
-		return applyTime;
+	public String getOcStatus() {
+		return ocStatus;
 	}
 
-	public void setApplyTime(String applyTime) {
-		this.applyTime = applyTime;
+	public void setOcStatus(String ocStatus) {
+		this.ocStatus = ocStatus;
+	}
+
+	public String getOcRemark() {
+		return ocRemark;
+	}
+
+	public void setOcRemark(String ocRemark) {
+		this.ocRemark = ocRemark;
+	}
+
+	public String getOcWay() {
+		return ocWay;
+	}
+
+	public void setOcWay(String ocWay) {
+		this.ocWay = ocWay;
+	}
+
+	public String getOcComp() {
+		return ocComp;
+	}
+
+	public void setOcComp(String ocComp) {
+		this.ocComp = ocComp;
 	}
 
 	public String getOcCode() {
@@ -108,100 +138,96 @@ public class PropertyservicemanagerOc implements Domain{
 		this.ocCode = ocCode;
 	}
 
-	public String getOcNumber(){
-		return this.ocNumber;
+	public String getUpdateUser() {
+		return updateUser;
 	}
-	
-	public void setOcNumber(String ocNumber){
-		this.ocNumber = ocNumber;
-	}
-	public String getOcStatus(){
-		return this.ocStatus;
-	}
-	
-	public void setOcStatus(String ocStatus){
-		this.ocStatus = ocStatus;
-	}
-	public String getOcRemark(){
-		return this.ocRemark;
-	}
-	
-	public void setOcRemark(String ocRemark){
-		this.ocRemark = ocRemark;
-	}
-	public String getOcWay(){
-		return this.ocWay;
-	}
-	
-	public void setOcWay(String ocWay){
-		this.ocWay = ocWay;
-	}
-	public String getOcComp(){
-		return this.ocComp;
-	}
-	
-	public void setOcComp(String ocComp){
-		this.ocComp = ocComp;
-	}
-	public String getUpdateUser(){
-		return this.updateUser;
-	}
-	
-	public void setUpdateUser(String updateUser){
+
+	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
 	}
-	public String getUpdateTime(){
-		return this.updateTime;
+
+	public String getUpdateTime() {
+		return updateTime;
 	}
-	
-	public void setUpdateTime(String updateTime){
+
+	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
-	public String getOcDate(){
-		return this.ocDate;
+
+	public String getOcDate() {
+		return ocDate;
 	}
-	
-	public void setOcDate(String ocDate){
+
+	public void setOcDate(String ocDate) {
 		this.ocDate = ocDate;
 	}
-	
-	public String getCreateUser(){
-		return this.createUser;
+
+	public MemberadrAddress getOcAddree() {
+		return ocAddree;
 	}
-	
-	public void setCreateUser(String createUser){
+
+	public void setOcAddree(MemberadrAddress ocAddree) {
+		this.ocAddree = ocAddree;
+	}
+
+	public String getCreateUser() {
+		return createUser;
+	}
+
+	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
 	}
-	public String getMemberId(){
-		return this.memberId;
+
+	public String getMemberId() {
+		return memberId;
 	}
-	
-	public void setMemberId(String memberId){
+
+	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public String getOcId(){
-		return this.ocId;
+
+	public String getOcId() {
+		return ocId;
 	}
-	
-	public void setOcId(String ocId){
+
+	public void setOcId(String ocId) {
 		this.ocId = ocId;
 	}
-	public String getCreateTime(){
-		return this.createTime;
+
+	public String getCreateTime() {
+		return createTime;
 	}
-	
-	public void setCreateTime(String createTime){
+
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	
-	
-	
+
 	public String getBindStatus() {
 		return bindStatus;
 	}
 
 	public void setBindStatus(String bindStatus) {
 		this.bindStatus = bindStatus;
+	}
+
+	public String getApplyTime() {
+		return applyTime;
+	}
+
+	public void setApplyTime(String applyTime) {
+		this.applyTime = applyTime;
+	}
+
+	public MemberInformation getMember() {
+		return member;
+	}
+
+	public void setMember(MemberInformation member) {
+		this.member = member;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
@@ -216,6 +242,7 @@ public class PropertyservicemanagerOc implements Domain{
 				+ ((createTime == null) ? 0 : createTime.hashCode());
 		result = prime * result
 				+ ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result + ((member == null) ? 0 : member.hashCode());
 		result = prime * result
 				+ ((memberId == null) ? 0 : memberId.hashCode());
 		result = prime * result
@@ -237,7 +264,7 @@ public class PropertyservicemanagerOc implements Domain{
 				+ ((updateUser == null) ? 0 : updateUser.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -266,6 +293,11 @@ public class PropertyservicemanagerOc implements Domain{
 			if (other.createUser != null)
 				return false;
 		} else if (!createUser.equals(other.createUser))
+			return false;
+		if (member == null) {
+			if (other.member != null)
+				return false;
+		} else if (!member.equals(other.member))
 			return false;
 		if (memberId == null) {
 			if (other.memberId != null)
