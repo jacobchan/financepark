@@ -32,6 +32,7 @@ import com.gsoft.utils.BizCodeUtil;
 import com.gsoft.utils.HttpSenderMsg;
 import com.gsoft.utils.QRCodeUtil;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCharge;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFxtdc;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerMoverec;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerFxtdcDao;
@@ -231,4 +232,16 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
 			}	
 		return recordList;
 	}
+	 /**
+		 * 根据当前用户分页查询
+		 * @return 分页对象
+		 */
+	    @EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",operator=Condition.EQUALS,pubProperty="userId")})
+		public PagerRecords getPagerMoverec(Pager pager,//分页条件
+				@ConditionCollection(domainClazz=PropertyservicemanagerMoverec.class) Collection<Condition> conditions,//查询条件
+				@OrderCollection Collection<Order> orders)
+				throws BusException {
+	    	PagerRecords pagerRecords = propertyservicemanagerMoverecDao.findByPager(pager, conditions, orders);
+			return pagerRecords;
+		}
 }
