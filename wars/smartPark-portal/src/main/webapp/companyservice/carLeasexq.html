@@ -221,12 +221,35 @@
 		
 		//在线预约点击事件
 		$("#online").click(function() {
-			//获取初始化已预订日期的预约状态主键集合
-			var resoIds = $("#resoIds").html();
-			var resoIdArray = resoIds.substring(0, resoIds.length-1);
-			//alert(resoIdArray);
-			$(".pop_layer").show();
-			$(".pop_layer.pl1").hide();
+			var arr = new Array();
+			$("#calendar .today").each(function() {
+				if($(this).attr("id")!=undefined){
+				var ids = $(this).attr("id");
+				var idss=ids.substring(ids.indexOf("-")+1, ids.lastIndexOf("-"));
+				if(idss.length==1){
+					var y=ids.substring(9,ids.indexOf("-"));
+					var m=idss;
+					var d=ids.substring(ids.lastIndexOf("-")+1,ids.length);
+					ids = y+"-0"+m+"-"+d;
+					arr.push(ids);
+				}else{
+					ids = ids.substr(9);
+					arr.push(ids);
+				}
+					
+				}
+			});
+			if (arr.length > 0) {
+				//获取初始化已预订日期的预约状态主键集合
+				var resoIds = $("#resoIds").html();
+				var resoIdArray = resoIds.substring(0, resoIds.length-1);
+				//alert(resoIdArray);
+				$(".pop_layer").show();
+				$(".pop_layer.pl1").hide();
+			}else{
+				$("#msg").text("请选择时段");
+				$(".toast").show(); 
+			}
 		});
 		$(".close0").click(function() {
 			$(".pop_layer").hide();
@@ -242,6 +265,7 @@
 						function() {
 							if (!isLogin) {
 								clearInterval(timer);
+								$("#msg").text("请登录后重试！");
 					            $(".toast").show();
 					            pltime=2;
 					            timer=setInterval("closeTanc()",1000)
@@ -313,7 +337,8 @@
 									}
 								});  
 							} else {
-								alert("请选择预约日期");
+								$("#msg").text("请选择时段");
+								$(".toast").show();
 							}
 
 							//校验手机号格式
@@ -342,7 +367,7 @@
     <div class="toast">
         <div class="toast-con clearfix">
             <div class="close-toast fr"></div>
-            <p class="tc mt25 f18" style="color:#ff6715">请登录后重试！</p>
+            <p class="tc mt25 f18" style="color:#ff6715" id="msg">请登录后重试！</p>
         </div>
         
     </div>
@@ -362,5 +387,7 @@
             </table>
         </div>
     </div>
+    
+   
 </body>
 </html>
