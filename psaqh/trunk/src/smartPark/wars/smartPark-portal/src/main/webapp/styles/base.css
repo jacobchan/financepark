@@ -264,3 +264,15 @@ input{font-family:"微软雅黑";}
 .toast .toast-con{width:320px;height:110px;margin-left:-160px; top:50%;left:50%;margin-top:-55px;position: absolute;padding:20px;border-radius:5px;background: rgb(255,255,255);}
 .close-toast{background: url(images/zs/close.png) no-repeat;width: 16px;height: 16px;display: inline-table;cursor: pointer;}
 .close-toast:hover{background: url(images/zs/close-o.png) no-repeat;}
+
+
+/**bg-tanc**/
+.bg-tanc{position: fixed;left: 0px;top:0px;width:100%;display: none;overflow-x: hidden;overflow-y: auto;bottom: 0px;right: 0px;z-index: 99;height: 100%;background: rgba(0,0,0,0.5);}
+.bg-tanc .tanc-con{width:810px;display: block;background: #fff;margin:30px auto; position: relative;color: #888;box-shadow: 0px 0px 5px 3px rgba(83,83,83,0.8);padding: 40px 60px;-webkit-box-shadow: 0px 0px 5px 3px rgba(83,83,83,0.8);-moz-box-shadow: 0px 0px 5px 3px rgba(83,83,83,0.8);}
+.tc-close{background: url(images/zs/close.png) no-repeat; width: 16px ;height: 16px;display: block;position: absolute;right: 30px;top:40px;background-size: 100%}
+.tc-close:hover{background: url(images/zs/close-o.png) no-repeat;background-size: 100%}
+.ib-btn,a.ib-btn{font-size: 15px;height: 40px;padding: 0px 30px;background: #fa742c;line-height: 40px;display: inline-block;margin-top: 20px;color: #fff;}
+input.ib-btn{border:1px solid #fa742c;line-height: 0px;}
+.ib-btn:hover,a.ib-btn:hover{background: #ff5900;color: #fff !important;}
+.ib-btn.fs-btn{background: #4bb6fa;}
+.ib-btn.fs-btn:hover{background: #47aced;color: #fff !important;}
