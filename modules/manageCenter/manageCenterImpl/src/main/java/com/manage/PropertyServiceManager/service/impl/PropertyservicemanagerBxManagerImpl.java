@@ -352,4 +352,16 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 		return list;
 				
 	}
+	/**
+	 * 根据当前用户分页查询
+	 * @return 分页对象
+	 */
+    @EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	public PagerRecords getPagerBx(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PropertyservicemanagerBx.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)
+			throws BusException {
+    	PagerRecords pagerRecords = propertyservicemanagerBxDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
 }
