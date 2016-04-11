@@ -997,10 +997,10 @@ a.c-6:hover{color: #FF6715;}
 .ib-btn.fs-btn:hover{background: #47aced;}
 
 /**加载样式**/
-#contain {width: 300px;height: 100px;position: absolute;top: 0;right: 0;left: 0; bottom: 0;margin: auto;opacity: 0;animation: fadeIn 1s 1;animation-fill-mode: forwards;z-index:999;}
+#contain {width: 200px;height: 100px;position: absolute;top: 0;right: 0;left: 0; bottom: 0;margin: auto;opacity: 0;animation: fadeIn 1s 1;animation-fill-mode: forwards;z-index:999;}
 .wrap {animation: rotate 1000ms infinite ease-in-out alternate, zindex 2000ms infinite ease-in-out;position: absolute;z-index: 0;}
-.part {width: 70px;height: 70px;background-color:#ff800e;border-radius: 50%;animation: scale 1000ms infinite ease-in-out alternate;animation-delay: -500ms; transform: scale(0.5);}
-.part:after {content: '';width: 70px;height: 10px;background: #eee;position: absolute;top: 130px;border-radius: 50%;}
+.part {width: 50px;height: 50px;background-color:#ff800e;border-radius: 50%;animation: scale 1000ms infinite ease-in-out alternate;animation-delay: -500ms; transform: scale(0.5);}
+.part:after {content: '';width: 50px;height: 8px;background: #eee;position: absolute;top: 55px;border-radius: 50%;}
 #wrap2 {animation-delay: -1000ms;}
 #part2 {background-color: #fe844f;animation-delay: -1500ms;}
 #wrap3 {animation-delay: -1500ms;}
@@ -1008,7 +1008,7 @@ a.c-6:hover{color: #FF6715;}
 #wrap4 {animation-delay: -2500ms;}
 #part4 {background-color: #f4b500;animation-delay: -3000ms;}
 @keyframes rotate {
-100% {transform: translateX(150px);}
+100% {transform: translateX(100px);}
 }
 @keyframes scale {
 100% {transform: scale(1);}
