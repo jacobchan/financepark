@@ -94,4 +94,11 @@ public interface PropertyservicemanagerCosManager extends BaseManager{
      */
     public PropertyservicemanagerCos updateCosforpage(String cosId) throws BusException ;    	 	
     public List<PropertyservicemanagerCos> getCoslistLikeCosCode(String userId,String cosCode,String startTime,String endTime) throws BusException;
+    /**
+	 * 根据当前用户分页查询
+	 * @return 分页对象
+	 */
+	public PagerRecords getPagerFkcodes(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders) throws BusException;
 }
