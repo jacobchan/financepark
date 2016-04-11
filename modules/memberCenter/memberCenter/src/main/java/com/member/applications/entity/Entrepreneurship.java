@@ -24,7 +24,7 @@ public class Entrepreneurship implements Domain{
 
 	@Column(name = "APPLAY_STATUS_")
 	@Length(max=2)
-	private String applayStatus;//申请状态
+	private String applayStatus;//申请状态 01:申请中 ；02:完成
 
 	@Column(name = "APPLAY_NO_")
 	@Length(max=20)
@@ -47,8 +47,12 @@ public class Entrepreneurship implements Domain{
 
 	@Column(name = "TEACHER_TYPE_")
 	@Length(max=128)
-	private String teacherType;//导师类型
+	private String teacherType;//导师类型(01技术指导;02股权配置;03风险控制;04企业管理;05自定义类型	)
 
+	@Column(name = "DEFINE_TEACHER_TYPE_")
+	@Length(max=128)
+	private String defineTeacherType;//自定义导师类型
+	
 	@Column(name = "PROJECT_DIS_")
 	@Length(max=1024)
 	private String projectDis;//项目简介
@@ -165,8 +169,14 @@ public class Entrepreneurship implements Domain{
 		this.isFinace = isFinace;
 	}
 	
-	
-	
+	public String getDefineTeacherType() {
+		return defineTeacherType;
+	}
+
+	public void setDefineTeacherType(String defineTeacherType) {
+		this.defineTeacherType = defineTeacherType;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -184,6 +194,7 @@ public class Entrepreneurship implements Domain{
 		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((isFinace == null) ? 0 : isFinace.hashCode());
+		result = prime * result + ((defineTeacherType == null) ? 0 : defineTeacherType.hashCode());
 		return result;
 	}
 	
@@ -260,6 +271,11 @@ public class Entrepreneurship implements Domain{
 			if (other.isFinace != null)
 				return false;
 		} else if (!isFinace.equals(other.isFinace))
+			return false;
+		if (defineTeacherType == null) {
+			if (other.defineTeacherType != null)
+				return false;
+		} else if (!defineTeacherType.equals(other.defineTeacherType))
 			return false;
 		return true;
 	}

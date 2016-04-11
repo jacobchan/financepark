@@ -3,16 +3,16 @@
  */
 package com.member.applications.service;
 
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.member.applications.entity.Entrepreneurship;
 
 public interface EntrepreneurshipManager extends BaseManager{
@@ -63,4 +63,28 @@ public interface EntrepreneurshipManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitEntrepreneurship(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 根据代码集查找项目类型
+	 * @return
+	 */
+	public List<Record> getProjectType() throws BusException;
+	
+	/**
+	 * 是否融资代码集查询(0:是;1:否)
+	 * @return
+	 */
+	public List<Record> getBool() throws BusException;
+	
+	/**
+	 * 导师类型代码集查询
+	 * @return
+	 */
+	public List<Record> getTeacherType() throws BusException;
+	
+	/**
+	 * 保存创业加速计划的申请
+	 * @return
+	 */
+	public Entrepreneurship goSaveEntrepreneurship(Entrepreneurship o,String teacherTypeFlg)  throws BusException;
 }
