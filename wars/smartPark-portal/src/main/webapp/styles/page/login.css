@@ -5,7 +5,7 @@
 .login_ul li{display:inline-block;float:left;width:50%;padding:10px;text-align:center;font-size:16px;color:#333;cursor:pointer;background:#F3F3F3;line-height:30px;}
 .login_ul li.active{color:#FB7730;background:#fff;}
 .login_input{height:45px;border-bottom:1px #efecec solid;line-height:45px;padding:0 15px}
-.login_input label{width: 70px;display: inline-block;}
+/* .login_input label{width: 70px;display: inline-block;} */
 .login_input input{border:none;font-size:12px;display:inline-block;width:150px;padding-left:10px}
 .btn_yzm{display:inline-block;cursor:pointer;padding:3px 7px;border:1px #FB7730 solid;color:#FB7730;line-height:normal}
 .btn_yzm:hover{background:#FB7730;color:#fff}
@@ -16,3 +16,5 @@
 a.c3:hover{color: #FB7730;}
 .btn-cheng{padding:5px 20px;background:#FA742C;border:none;color:#fff;display:inline-block;cursor:pointer;}
 .btn-cheng:hover{background:#ff5900;color:#fff !important;}
+.pb-btn{font-size: 14px;height: 40px;padding: 0px 20px;background: #707070 none repeat scroll 0% 0%;line-height: 40px;display: inline-block;color: #FFF;}
+.pb-btn:hover{background: #555;}
