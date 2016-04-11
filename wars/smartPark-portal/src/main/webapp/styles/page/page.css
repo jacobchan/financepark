@@ -494,7 +494,7 @@ background:url(../images/company/ab_ico.png) no-repeat}
 .wl-850 div{width:48px;height:46px;margin-right: 10px;float: left;}
 
 /*th*/
-.zznav{position:absolute;top:0;left:0;right:0;z-index:100;}
+.zznav{position:absolute;top:0;left:0;right:0;z-index:100000;}
 .zznav>ul>li{display:inline-block;float:left;position:relative}
 .zznav a{color:#fff;padding:10px;background:rgba(0,0,0,0.5);display:block;line-height: 20px;}.zznav a.active{ background:transparent;}
 .zz{background:rgba(0,0,0,0.5);height:40px;width:calc(100% - 282px)}
