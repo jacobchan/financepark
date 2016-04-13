@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  * giui JavaScript Library v3.0.0
  * 
  *
@@ -10,7 +10,10 @@
 var isLogin = false;
 $(function(){
 	console.log($.youi.serverConfig.contextPath);
+	var pageType =$('#youi_page_header').attr('dataType');
+	var pageId =$('#youi_page_header').attr('dataId');
 	$('#youi_page_header').load($.youi.serverConfig.contextPath+'/common/header.html',function(){
+		$('.index-head-nav li:eq('+pageType+')').addClass('active').find('dd:eq('+pageId+')').addClass('active');
 		$.getScript(cenUrl+'portal/userInfo.html',function(){
 			var loc = encodeURIComponent(window.location.href);
 			if($.youi.serverConfig.authorization){
@@ -22,8 +25,9 @@ $(function(){
 				$('#user_info a').eq(1).attr('href',cenUrl+'member/memberCenter/login.html?redirect='+loc+'&type=regist');
 				isLogin = false;
 			}
-		});
+		});	
 	});
+		
 	$('#youi_page_right').load($.youi.serverConfig.contextPath+'/common/news_right.html');
 	$('#youi_page_rg').load($.youi.serverConfig.contextPath+'/common/news_yqfw.html');
 	$('#youi_page_footer').load($.youi.serverConfig.contextPath+'/common/footer.html');
