@@ -87,6 +87,17 @@ public class OrdermanagerUserorder implements Domain{
 	@Column(name = "USERORDER_ADR_")
 	@Length(max=256)
 	private String userorderAdr;//发货地址
+	
+	@Transient
+	private String status;//订单中文显示状态
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public String getCreateTime(){
 		return this.createTime;
