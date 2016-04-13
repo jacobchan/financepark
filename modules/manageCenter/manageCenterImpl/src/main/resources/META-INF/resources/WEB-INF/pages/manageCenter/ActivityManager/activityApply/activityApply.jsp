@@ -31,8 +31,8 @@ function validateTime(startTime,endTime){
 		<youi:gridCol property="applyTitle"  caption="活动标题" width="150px"/>
 		<youi:gridCol property="applayType.typeName"  caption="活动类型" width="100px"/>
 		<youi:gridCol property="applyMaxuser"  caption="限制人数"  width="100px"/>
-		<youi:gridCol property="startTime"  caption="活动开始时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" width="100px"/>
-		<youi:gridCol property="endTime"  caption="活动结束时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" width="100px"/>
+		<youi:gridCol property="startTime"  caption="活动开始时间" format="yyyy-MM-dd" textFormat="yyyy-MM-dd" width="100px"/>
+		<youi:gridCol property="endTime"  caption="活动结束时间" format="yyyy-MM-dd" textFormat="yyyy-MM-dd" width="100px"/>
 		<%-- <youi:gridCol property="commentContent"  caption="活动内容" width="200px"/> --%>
 
 		<youi:gridCol property="applyStatus"  caption="活动申请状态" convert="activityApplyStatus" width="100px" />
@@ -56,9 +56,9 @@ function validateTime(startTime,endTime){
 			<youi:fieldText property="applyTitle"  caption="活动标题" notNull="true"/>
 			<youi:fieldText property="applyMaxuser"  caption="限制人数" expressionMessage="请输入整数" expression="^[1-9]\d*$" notNull="true"/>
 			<youi:fieldSelect property="memberId.memberId"  caption="会员用户" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName" notNull="true"/>
-			<youi:fieldCalendar property="startTime"  caption="活动开始时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="true"/>
-			<youi:fieldCalendar property="endTime"  caption="活动结束时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="true"/>
-			<youi:fieldCalendar property="deadline"  caption="报名截至时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="true"/>
+			<youi:fieldCalendar property="startTime"  caption="活动开始时间" format="yyyy-MM-dd" textFormat="yyyy-MM-dd" notNull="true"/>
+			<youi:fieldCalendar property="endTime"  caption="活动结束时间" format="yyyy-MM-dd" textFormat="yyyy-MM-dd" notNull="true"/>
+			<youi:fieldCalendar property="deadline"  caption="报名截至时间" format="yyyy-MM-dd" textFormat="yyyy-MM-dd" notNull="true"/>
 			<youi:fieldSelect property="applyStatus"  caption="活动申请状态" convert="activityApplyStatus" notNull="true"/>
 			<youi:fieldSelect property="applayType.typeId"  caption="活动类型" src="esb/web/applayTypeManager/getApplayTypes.json" code="typeId" show="typeName" notNull="true"/>
 			<youi:fieldSelect property="isRecoomend"  caption="是否推荐" convert="bool"/>
