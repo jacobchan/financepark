@@ -97,6 +97,10 @@ public class ActivityApply implements Domain{
 	@Length(max=2)
 	private String isRecoomend;//是否推荐
 	
+	@Column(name = "APPLAY_ADR_")
+	@Length(max=256)
+	private String activityAdr;//活动地址
+	
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="TYPE_ID_")
 	private com.manage.ActivityManager.entity.ApplayType applayType;//活动类型ID
