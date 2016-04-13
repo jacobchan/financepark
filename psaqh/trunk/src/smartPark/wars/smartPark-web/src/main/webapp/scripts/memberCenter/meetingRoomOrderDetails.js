@@ -24,7 +24,7 @@ $(function(){
 				var buff = [];
 				var length = publicResoIdTime.split(",").length;
 				for(var i = 0;i<length;i++){
-					buff.push('<p>预定时段：'+publicResoIdTime.split(',')[i]+'</p>');
+					buff.push('<p>预订时段：'+publicResoIdTime.split(',')[i]+'</p>');
 				}
 				$('#contextlist').html(buff.join(''));
 			}
