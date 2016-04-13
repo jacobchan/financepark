@@ -43,6 +43,7 @@ import com.manage.EmployeeManager.dao.EnterpriseEmployeesDao;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTs;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerBxDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerBxManager;
@@ -352,16 +353,25 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 		return list;
 				
 	}
-	/**
-	 * 根据当前用户分页查询
-	 * @return 分页对象
-	 */
-    @EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",operator=Condition.EQUALS,pubProperty="userId")})
-	public PagerRecords getPagerBx(Pager pager,//分页条件
-			@ConditionCollection(domainClazz=PropertyservicemanagerBx.class) Collection<Condition> conditions,//查询条件
-			@OrderCollection Collection<Order> orders)
-			throws BusException {
-    	PagerRecords pagerRecords = propertyservicemanagerBxDao.findByPager(pager, conditions, orders);
-		return pagerRecords;
-	}
+	 /**
+		 * 根据当前用户分页查询
+		 * @return 分页对象
+		 */
+	    @SuppressWarnings("unchecked")
+	    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+		public PagerRecords getPagerBxs(Pager pager,//分页条件
+				@ConditionCollection(domainClazz=PropertyservicemanagerBx.class) Collection<Condition> conditions,//查询条件
+				@OrderCollection Collection<Order> orders)
+				throws BusException {
+	    	PagerRecords pagerRecords = propertyservicemanagerBxDao.findByPager(pager, conditions, orders);
+	    	List<PropertyservicemanagerBx> bxlist = pagerRecords.getRecords();
+	    	for(PropertyservicemanagerBx bx : bxlist){
+    			if(StringUtils.isNotEmpty(bx.getMemberId())){
+    				String memberId = bx.getMemberId();
+    				MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
+    				bx.setMember(memberInformation);
+    			}
+    		}
+			return pagerRecords;
+		}
 }
