@@ -3,6 +3,8 @@
  */
 package com.member.applications.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -11,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.service.MemberInformationManager;
 import com.gsoft.framework.codemap.entity.Codeitem;
 import com.gsoft.framework.codemap.service.CodeitemManager;
 import com.gsoft.framework.core.dataobj.Record;
@@ -40,6 +44,8 @@ public class EntrepreneurshipManagerImpl extends BaseManagerImpl implements Entr
 	private EntrepreneurshipDao entrepreneurshipDao;
 	@Autowired 
 	private CodeitemManager codeitemManager;
+	@Autowired
+	private MemberInformationManager memberInformationManager;
 	
     /**
      * 查询列表
@@ -68,8 +74,20 @@ public class EntrepreneurshipManagerImpl extends BaseManagerImpl implements Entr
 	@EsbServiceMapping
 	public PagerRecords getPagerEntrepreneurships(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=Entrepreneurship.class) Collection<Condition> conditions,//查询条件
-			@OrderCollection Collection<Order> orders)  throws BusException{
+			@OrderCollection Collection<Order> orders)  throws BusException, ParseException{
 		PagerRecords pagerRecords = entrepreneurshipDao.findByPager(pager, conditions, orders);
+		SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		//格式化时间跟用户名查找
+		for(int i=0;i<pagerRecords.getRecords().size();i++){
+			Entrepreneurship entrepreneurship= (Entrepreneurship) pagerRecords.getRecords().get(i);
+			//变换时间格式
+			String createTime = sdf.format(sdf.parse(entrepreneurship.getCreateTime())).toString();
+			entrepreneurship.setCreateTime(createTime);
+			//根据memberId获取用户名
+			String memberId = entrepreneurship.getMemberId();
+			MemberInformation memberInformation  = memberInformationManager.getMemberInformation(memberId);
+			entrepreneurship.setMember(memberInformation);
+		}
 		return pagerRecords;
 	}
     /**
@@ -204,7 +222,32 @@ public class EntrepreneurshipManagerImpl extends BaseManagerImpl implements Entr
 		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		//创建返回保存成功返回的实体
 		Entrepreneurship saveEntrepreneurship = this.saveEntrepreneurship(o);
-	return saveEntrepreneurship;
-		
+		return saveEntrepreneurship;
 	}
+	
+	/**
+	 * 获取整个数据的totalCount
+	 */
+	@EsbServiceMapping
+	public List<Record> getTotalCount(
+			@ConditionCollection(domainClazz=Entrepreneurship.class) Collection<Condition> conditions)  throws BusException{
+		List<Record> recordList=new ArrayList<Record>();
+		List<Entrepreneurship> entrepreneurshipsList = this.getEntrepreneurships(conditions, null);
+		Record record = new Record();
+		record.put("totalCount", entrepreneurshipsList.size());
+		recordList.add(record);
+		return recordList;
+	}
+	
+	 /**
+     * 取消操作
+     */
+    @EsbServiceMapping
+    public Entrepreneurship goCancel(@ServiceParam(name="id") String id) throws BusException{
+    	//获取加速申请的信息
+    	Entrepreneurship entrepreneurship = this.getEntrepreneurship(id);
+    	//更改申请标识为03：取消
+    	entrepreneurship.setApplayStatus("03");
+    	return entrepreneurshipDao.save(entrepreneurship);
+    }
 }
