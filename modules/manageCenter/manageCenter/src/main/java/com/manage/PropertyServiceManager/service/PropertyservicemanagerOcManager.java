@@ -99,4 +99,12 @@ public interface PropertyservicemanagerOcManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public List<PropertyservicemanagerOc> getOclistLikeOcCode(String userId,String ocCode,String startTime,String endTime) throws BusException;
+	/**
+	 *前台 根据当前用户分页查询
+	 * @return 分页对象
+	 */
+	public PagerRecords getPagerOc(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders) throws BusException;
+
 }
