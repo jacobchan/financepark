@@ -978,3 +978,9 @@ a.see-all:hover{color: #FF6715;}
 .toast { background: rgba(0,0,0,0.5);position: fixed;display: none; z-index: 99999;left: 0px;right: 0px;top: 0px; bottom: 0px;}
 .toast .toast-con { width: 320px;height: 110px;margin-left: -160px;top: 50%;left: 50%; margin-top: -55px;position: absolute;padding: 20px;border-radius: 5px;background: rgb(255,255,255);}
 .clearfix:after {content: ".";display: block;height: 0;clear: both;visibility: hidden;}
+
+/**订单中心的订单详情**/
+.order-table{border:1px solid #efecec;width: 100%;}
+.ot-head{background-color: #EEE;line-height: 30px;padding: 5px 20px;}
+.order-table td{padding: 10px 0px;color: #7c7c7c;border-bottom: 1px solid #efecec;vertical-align: top;}
+.order-table tr:last-child td{border-bottom: 0px;}
