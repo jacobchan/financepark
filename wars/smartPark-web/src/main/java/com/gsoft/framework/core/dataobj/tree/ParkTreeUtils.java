@@ -1,6 +1,7 @@
  package com.gsoft.framework.core.dataobj.tree;
  
 import com.common.EnterpriceTypeManager.entity.EtypeEnterprisetype;
+import com.common.MessageCenter.entity.McMsgtype;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class ParkTreeUtils{
 	   return root;
 	}
    
- //商品类别树
+   //企业类型树
    public static EnterprisetypeTreeNode listToEnterTree(
 			List<EtypeEnterprisetype> list, String rootId, String rootText) {
 	   EnterprisetypeTreeNode root = new EnterprisetypeTreeNode(rootId, rootText);
@@ -41,6 +42,18 @@ public class ParkTreeUtils{
 	   List<TreeNode> treeList = new ArrayList<TreeNode>();
 	   for (EtypeEnterprisetype enter : list) {
 		   treeList.add(new EnterprisetypeTreeNode(enter));
+	   }
+	   makeHtmlTree(root, treeList, 0, 0);
+	   return root;
+	}
+   //消息类型树
+   public static MsgTypeHtmlTreeNode listToMsgType(
+			List<McMsgtype> list, String rootId, String rootText) {
+	   MsgTypeHtmlTreeNode root = new MsgTypeHtmlTreeNode(rootId, rootText);
+	   root.setGroup("root");
+	   List<TreeNode> treeList = new ArrayList<TreeNode>();
+	   for (McMsgtype type : list) {
+		   treeList.add(new MsgTypeHtmlTreeNode(type));
 	   }
 	   makeHtmlTree(root, treeList, 0, 0);
 	   return root;
