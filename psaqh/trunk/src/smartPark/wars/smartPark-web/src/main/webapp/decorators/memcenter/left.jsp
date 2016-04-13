@@ -4,7 +4,7 @@
 	<div class="w200 fl">
 		<dl>
 			<dt>个人中心</dt>
-			<dd  class="active"><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/personInfo.html">个人资料</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/personInfo.html">个人资料</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/orderCenter.html">订单中心</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/securityCenter.html">安全中心</a></dd>
 			<dd><a href="">消息</a></dd>
@@ -47,7 +47,13 @@
 	<script type="text/javascript">
 	  $(function (){
 		      var urlstr = location.href;
+		      var vv = urlstr.split("?")[0];
   			  var urlstatus=false;
+  			  if(vv == cenUrl+"member/memberCenter/personalCenter/meetingRoomOrderDetails.html"||
+  					vv == cenUrl+"member/memberCenter/personalCenter/carOrderDetails.html"||
+  					vv == cenUrl+"member/memberCenter/personalCenter/adsenseOrderDetails.html"){
+  				urlstr = cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
+    	  	  };
 		      $(".w200 dd").each(function (){
 		    	    if ((urlstr + '/').indexOf($(this).find("a").attr('href')) > -1&&$(this).find("a").attr('href')!='') {
 		    	      $(this).addClass('active'); urlstatus = true;
