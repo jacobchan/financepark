@@ -22,16 +22,7 @@
                          	<td width="111">操作  </td>
                          </tr>                          
                          </table>                     
-						<div class="fr page-list-a clearfix lh30 mt20 f12">
-							<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
-							<a href="">首</a>
-							<a href=""><i class="fa fa-angle-left"></i></a>
-							<a>1</a>
-							<a href=""><i class="fa fa-angle-right"></i></a>
-							<a href="">末</a>
-							<input class="bd-input fl ml10 mr10" style="width:40px;" type="text">
-							<a href="">Go</a>							
-						</div>
+					<div class="tcdPageCode fr"></div>
 					</div>
 				</div>
 			</youi:body>
@@ -43,25 +34,63 @@
         
     </div>
 	<!--***bottom start****************************************-->
-    <script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
+   <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 	<script type="text/javascript">
+	var pageSize=10;
+	var pageCount=1;
+	var currentIndex = 1;
+	var serviceURL = baseUrl+'propertyservicemanagerOcManager/getPagerOc.json';
+	$(function () {
+		
+		//分页页码显示
+		 $.ajax({
+			url:serviceURL, 
+			success:function(results){	
+							pageCount=Math.ceil(results.totalCount/pageSize);//页数
+							
+							 refreshData(1,pageSize);
+								$(".tcdPageCode").createPage({
+								    pageCount:pageCount,
+								    current:1,
+								    backFn:function(p){
+								    	currentIndex = p;
+								       this.pageCount=pageCount;
+								        refreshData(p,pageSize);
+								    }
+								});			
+			/* 	if(result&&result.records){
+					_parseRecords(result.records);
+				} */
+			}
+		}); 			
+	});	
 	
 	
-		$(function(){
-			$.ajax({
-			     url:baseUrl+'propertyservicemanagerOcManager/getPropertyservicemanagerOcListByLoginUser.json',
-			
-				success:function(result){
-					
-					console.log(result.records);
-					if(result&&result.records){					
-						_parseRecords(result.records);						
-					}
+	//分页列表
+	function refreshData(pageIndex,pageSize){
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+		$.ajax({
+			url:serviceURL,
+			data:params.join('&'),
+			success:function(results){
+				if(results&&results.records){
+					 _parseRecords(results.records);
 				}
-			});
-		});		
+			}
+		});
+	}
 		//拼接列表
-		function _parseRecords(record){		
+		function _parseRecords(record){	
+			$("tbody").empty();
+			ht="<tr>"+
+	     	"<td>订单号       </td>"+
+         	"<td>预约时间    </td>"+
+         	"<td>预约用户  </td> "+
+         	"<td>状态           </td>"+
+         	"<td>操作          </td>"+
+            "</tr>";
+            $(".gt-table").append(ht);
 	 		for(var i=0;i<record.length;i++){
 				var status = "";	
 				var button = "";	
@@ -94,9 +123,8 @@
 				data:'ocId='+ocId+'',
 		 		success:function(result){
 					if(result&&result.record){					
-						$(".tc.mt25.f18").text("取消成功");
-						$(".toast").show(); 
-						setTimeout(function(){location.reload(); },1000);
+						close("取消成功");
+						
 					}
 				}
 			});
@@ -127,7 +155,7 @@
 		        istime: true, //是否开启时间选择
 			    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 			});
-		})
+		});
 		$(function(){
 			laydate({
 			    elem: '#endTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
@@ -135,8 +163,14 @@
 		        istime: true, //是否开启时间选择
 			    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 			});
-		})
-		
+		});
+		function close(content){		        
+	        $(".tc.mt25.f18").empty() ;
+	        $(".tc.mt25.f18").append(content) ;
+	        $(".toast").show();		      		        		       				
+			setTimeout(function(){$(".toast").hide(); },1000);
+			refreshData(currentIndex,pageSize);
+      }
 	</script>
 	<script type="text/javascript">
 	    //点击跳转到一卡通申请页面
