@@ -40,7 +40,7 @@
 		firstCss : 'first', //起始样式
 		lastCss : 'last', //结束样式
 		clickCss : 'today', //点击样式
-        disableGray : 'dateRangeGray', // 非当前月的日期样式
+        disableGray : 'dateRangeWhite', // 非当前月的日期样式
         isToday : 'dateRangeToday', // 今天日期的样式
         joinLineId : 'joinLine',
         isSingleDay : false,
