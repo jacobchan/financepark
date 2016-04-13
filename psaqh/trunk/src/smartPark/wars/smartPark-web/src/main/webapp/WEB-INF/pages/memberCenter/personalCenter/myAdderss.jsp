@@ -1,14 +1,16 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/pages/include.jsp" %>
 <youi:html title="我的地址">
-	<youi:body decorator="memcenter">  
+	<youi:body decorator="memcenter"> 
+				 
 				<div class="w1000">
 					<h3 class="per-h3">我的地址</h3>
 					<div class="mt30 addressList">
-						
 					</div>	
-					<a href="javascript:;" class="add-box ga-edit"><i class="fa fa-plus mr20"></i>新增地址</a>
+					<a href="#" class="add-box ga-edit"><i class="fa fa-plus mr20"></i>新增地址</a>
+					<div class="tcdPageCode fr"></div>
 				</div>
+				
 			</youi:body>
 	<!--***bottom end****************************************-->
 		<!--***弹窗 start****************************************-->
@@ -40,25 +42,13 @@
 					<td><b>园区地址</b></td>
 					<td>
 						<div class="tct-select fl mr20 bbmbud" style="width:160px">
-							<!-- <div class="ic-select">
-								<p>园区地址2</p>
-							</div>
-							<ul style="display: none;" class="select-nav">
-								<li>园区地址1</li>
-								<li>园区地址2</li>
-								<li>园区地址3</li>
-							</ul> -->
+							
 						</div>
 						<div class="tct-select fl bbmfloor" style="width:160px">
 						<div class="ic-select">
 								<p id="floorNo"></p>
 							</div>
-							<!-- 
-							<ul style="display: none;" class="select-nav">
-								<li>创立方1</li>
-								<li>创立方2</li>
-								<li>创立方3</li>
-							</ul> -->
+							
 						</div>
 						<div class="tct-select fl bbmfloor" style="margin-left: 20px;">
 							<input type="text" id="ad1" style="width:160px;height: 29px;">
@@ -92,16 +82,55 @@
 			</div>
 		</div>
 	</div>
-	<div class="toast">
-        <div class="toast-con clearfix">
-            	<div class="close-toast fr"></div>
-           	 <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
-        	</div>       
-    </div>
 	<!--***弹窗 end****************************************-->
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 	<script type="text/javascript">
+	var pageSize=4;
+	var pageCount=1;
+	var currentIndex = 1;
+	var serviceURL = baseUrl+'memberadrAddressManager/getPagergetPagerAddress.json';
+	$(function () {
+		
+		//分页页码显示
+		 $.ajax({
+			url:serviceURL, 
+			success:function(results){	
+							pageCount=Math.ceil(results.totalCount/pageSize);//页数
+							
+							 refreshData(1,pageSize);
+								$(".tcdPageCode").createPage({
+								    pageCount:pageCount,
+								    current:1,
+								    backFn:function(p){
+								    	currentIndex = p;
+								       this.pageCount=pageCount;
+								        refreshData(p,pageSize);
+								    }
+								});			
+			/* 	if(result&&result.records){
+					_parseRecords(result.records);
+				} */
+			}
+		}); 			
+	});	
+	
+	
+	//分页列表
+	function refreshData(pageIndex,pageSize){
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+		$.ajax({
+			url:serviceURL,
+			data:params.join('&'),
+			success:function(results){
+				if(results&&results.records){
+					 _parseRecords(results.records);
+				}
+			}
+		});
+	}
 	$(function(){		
-			$.ajax({
+			/* $.ajax({
 				url:baseUrl+'memberadrAddressManager/getMemberadrAddresssByUser.json', 
 				success:function(result){
 					//console.log(result);
@@ -109,7 +138,7 @@
 						_parseRecords(result.records);
 					}
 				}
-			});
+			}); */
 			
 			$(".ga-edit").click(function(){
 				$("#addressName").val('');	
@@ -123,9 +152,12 @@
 		});
 		
 		//拼接地址列表
-		function _parseRecords(record){
+		function _parseRecords(record){		
+			$(".addressList").empty();
+		//	$("ab").empty();			
 			var html="";
 			for(var i=0;i<record.length;i++){
+				
 				if(record[i].addressStatus==0){			
 					  html+="<div class='gr-address active' id="+record[i].addressId+">"+
 							"<div class='clearfix pl40 pr40'><span>姓名："+record[i].addressName+"</span><span class='fr'>手机号码："+record[i].addressPhone+"</span></div>"+
@@ -154,20 +186,13 @@
 		};
 		//删除地址
 		function removeAddress(obj){
-			//$(".tc.mt25.f18").text("删除成功");
 			var me=obj.parentNode.parentNode;
 		 	$.youi.ajaxUtils.ajax({
 				url:baseUrl+'memberadrAddressManager/removeMemberadrAddress.json',
 				data:'addressId='+me.id,
 				success:function(result){
 					me.remove();
-				//	$(".toast").show(); 
-					clearInterval(timer);
-					$(".tc.mt25").text("删除成功!");
-		         	$(".toast").show();
-		         	pltime=1;
-		         	timer=setInterval("closeTanc()",1000);
-					
+					alert("删除成功");
 				}
 			});
 		}
@@ -285,11 +310,8 @@
 					addressDetail = $("#ad2").val();
 				}
 				if(!isMobil(addressPhone)){
-					clearInterval(timer);
-					$(".tc.mt25").text("手机号格式不正确!");
-		         	$(".toast").show();
-		         	pltime=1;
-		         	timer=setInterval("closeTanc()",1000);
+					$(".f24.fl.c-333").text("手机号格式不正确！");
+					$(".bg-tanc.m2").show();
 					return false;
 				}
 				
@@ -304,12 +326,9 @@
 					data:params.join('&'),
 					success:function(results){
 						if(results&&results.record){
-							clearInterval(timer);
-							//$(".tc.mt25").text("手机号格式不正确!");
-				         	$(".toast").show();
-				         	pltime=1;
-				         	timer=setInterval("closeTanc()",1000);
-				         	location.reload();
+							$(".f24.fl.c-333").text("保存成功!");
+							$(".bg-tanc.m2").show();
+							location.reload();
 						}
 					}
 				});
@@ -364,31 +383,9 @@
 			};
 			//校验手机号格式
 			function isMobil(s) {
-			    	var patrn = /^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
-			   		if (!patrn.exec(s)) return false
-			   	 	return true
+			    var patrn = /^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+			    if (!patrn.exec(s)){ return false;}
+			    else{return true;}
 			};
 	</script>
-	<script type="text/javascript">
-		//toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
-		 var pltime,timer;
-		 function closeTanc(){
-		     if(pltime>1){
-		         pltime--;
-		     }else{
-		         $(".toast").hide();
-		     }       
-		 };
-		 //关闭toast
-	        $(".close-toast").click(function(){
-	            $(".toast").hide();
-	        });
-		 //调用方法如下，哪里调用就放哪里
-		 /**
-		     clearInterval(timer);
-		     $(".toast").show();
-		     pltime=1;
-		     timer=setInterval("closeTanc()",1000);
-		 */
-</script>
 </youi:html>
