@@ -7,6 +7,7 @@
 <link href="styles/page/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 <link href="styles/base.css" type="text/css" rel="stylesheet">
 <link href="styles/page/page.css" type="text/css" rel="stylesheet">
+<link href="styles/cityselector/cityselector.css" type="text/css" rel="stylesheet">
 
 </head>
 <body>
@@ -481,19 +482,15 @@
                 <div style="padding-left:70px">
                 	<input type="submit" class="btn-cheng" value="搜索" onclick="window.open ('hcxx.html')">
                 </div>
-            </form>
+            </form> 
             <form class="reform" style="display:none">
             	<div class="re_div">
+            		<input id="cityid" name="cityid" type="hidden" value="{$cityid}" />
                 	<label for="city_name">入住城市</label>
-                	<input type="text" onblur="" value=""
-							id="city_name" name="city_name" mod="address|notice"
-							mod_address_source="hotel" mod_address_suggest=""
-							mod_address_reference="cityid" placeholder="中文/拼音" />
-					<input id="cityid" name="cityid" type="hidden" value="{$cityid}" />
-					<div id="jsContainer" class="jsContainer" style="height:0">
-					    <div id="tuna_alert" style="display:none;position:absolute;z-index:999;overflow:hidden;"></div>
-					    <div id="tuna_jmpinfo" style="visibility:hidden;position:absolute;z-index:120;"></div>
-				    </div>
+                	<input type="text" value=""	id="city_name" name="city_name"/>
+                	<div id="suggest" class="ac_results"></div>
+                	
+					<!-- <input type="hidden" name="gotoCity" id="gotoCity" value="" /> -->					
                     <!-- <input type="text" id="gotocity"/> -->
                 </div>
                 <div style="position:relative">
@@ -638,8 +635,11 @@
 	<script type="text/javascript" src="scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
 	<script type="text/javascript" src="scripts/page/laydate/laydate.js"></script>
-	<script type="text/javascript" src="scripts/cityselector/fixdiv.js"></script>
-	<script type="text/javascript" src="scripts/cityselector/address.js"></script>
+	<script type="text/javascript" src="scripts/cityselector/aircity.js"></script>
+	<script type="text/javascript" src="scripts/cityselector/hotelcity.js"></script>
+	<script type="text/javascript" src="scripts/cityselector/j.dimensions.js"></script>
+	<script type="text/javascript" src="scripts/cityselector/j.suggest.js"></script>
+	
 	<script type="text/javascript" src="scripts/page/url.js"></script>
  	<script type="text/javascript">
 	/* 政策展示 */
@@ -1059,6 +1059,12 @@
 		laydate({
 		    elem: '#leavedate', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
 		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+		});
+		
+		$("#city_name").suggest(Hcitys, {
+			hot_list : Hcommoncitys,
+			dataContainer : '#cityid',
+			attachObject : '#suggest'
 		});
 
         //关闭toast
