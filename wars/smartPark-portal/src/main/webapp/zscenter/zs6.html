@@ -64,7 +64,10 @@
 	        
 			$(".now-btn").click(function(){
 				var recordType='04';//04:众创空间
-				var recordMemberId=$(".ic-select").find("p").text();
+				var recordMemberId=$("#fkcodeComp").text();
+				if(recordMemberId=="请选择项目"){
+					recordMemberId="";
+				}
 				var visiteTime=$("#lf_time").val();
 				var lfName=$("#fkcodeName").val();
 				var lfTel=$("#fkcodeTelephone").val();
@@ -118,12 +121,6 @@
 					//		alert("预约成功");
 					//		window.location="/grzx/grzx8.html";
 							$(".bg-tanc.m2").show();
-							$("#fkcodeDate").val('');
-							$("#lf_time").val('');
-							$("#fkcodeName").val('');
-							$("#fkcodeTelephone").val('');
-							$(".ic-select").find("p").text('');
-							
 							a=3;
 							timer1=setInterval("jump1()",1000);
 						}
@@ -161,6 +158,8 @@
 				}else{
 					if (isLogin) {
 						window.location=cenUrl+"member/memberCenter/personalCenter/myReservation.html";
+					}else{
+						window.location="zs6.html";
 					}
 				}		
 			}
@@ -259,7 +258,7 @@
 					<div class="input-con">
 						<div class="select-text">
 							<div class="ic-select">
-								<p id="fkcodeComp"></p>
+								<p id="fkcodeComp">请选择项目</p>
 							</div>
 							<ul class="select-nav">
 								<!-- <li>富春硅谷--创立方1</li>
