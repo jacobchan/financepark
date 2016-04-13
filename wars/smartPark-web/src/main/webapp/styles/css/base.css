@@ -258,3 +258,5 @@ input{font-family:"微软雅黑";}
 .tcdPageCode span.current{color: #FFF;background: #FF6715 none repeat scroll 0% 0%;border: 1px solid #FF6715;}
 .tcdPageCode span.disabled{	color: #bfbfbf;background: #f2f2f2;border: 1px solid #bfbfbf;cursor: default;}
 .tcdPageCode i{line-height:33px;}
+/**鼠标手势**/
+.custor{cursor: pointer;}
