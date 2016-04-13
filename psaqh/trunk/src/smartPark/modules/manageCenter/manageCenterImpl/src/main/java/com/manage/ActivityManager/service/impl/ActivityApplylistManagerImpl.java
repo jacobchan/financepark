@@ -112,15 +112,20 @@ public class ActivityApplylistManagerImpl extends BaseManagerImpl implements Act
 	public ActivityApplylist saveActivityApplylistForPage(ActivityApplylist o)
 			throws BusException {
 		// TODO Auto-generated method stub
-    	MemberInformation member=memberInformationManager.getMemberInformation(o.getUpdateUser());
-    	o.setMember(member);
-    	o.setApplylistTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    	o.setCreateUser(o.getUpdateUser());
-    	o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    	o.setUpdateUser(o.getUpdateUser());
-    	o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    	activityApplylistDao.save(o);
-		return o;
+    	List<ActivityApplylist> applist = activityApplylistDao.getList(new String[]{"activityApply.applyId","applyPhone"},new String[]{o.getActivityApply().getApplyId(),o.getApplyPhone()});
+    	if(applist.size()<=0){
+	    	MemberInformation member=memberInformationManager.getMemberInformation(o.getUpdateUser());
+	    	o.setMember(member);
+	    	o.setApplylistTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+	    	o.setCreateUser(o.getUpdateUser());
+	    	o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+	    	o.setUpdateUser(o.getUpdateUser());
+	    	o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+	    	activityApplylistDao.save(o);
+			return o;
+    	}else{
+    		return null;
+    	}
 	}
 
 }
