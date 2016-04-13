@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.security.AccountPrincipal;
 import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.util.StringUtils;
-import com.gsoft.member.base.entity.IMember;
 import com.gsoft.member.base.service.IMemberService;
 
 /**
@@ -58,11 +58,11 @@ public class MemberLoginController {
 		//切换登录
 		AccountPrincipal account = SecurityUtils.getAccount();
 		HttpSession session = request.getSession();
-		if(account instanceof IMember){
-			String currentLoginType = ((IMember)account).getLoginType();
-			if(currentLoginType!=null&&!currentLoginType.equals(loginType)){
-				//已经登录其他类型,切换登录
-			}
+		if(account instanceof MemberInformation){
+//			String currentLoginType = ((IMember)account).getLoginType();
+//			if(currentLoginType!=null&&!currentLoginType.equals(loginType)){
+//				//已经登录其他类型,切换登录
+//			}
 			//重定向到首页
 			return new ModelAndView("redirect:/member/"+loginType+"/index.html");
 		}
