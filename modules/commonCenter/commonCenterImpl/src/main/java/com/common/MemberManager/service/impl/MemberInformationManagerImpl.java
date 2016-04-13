@@ -53,6 +53,8 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	private MemberInformationDao memberInformationDao;
 	@Autowired
 	private MemberRoleManager memberRoleManager;
+	//@Autowired
+//	private  EnterbusinessmanagerRzManager enterbusinessmanagerRzManager
     /**
      * 查询列表
      */
@@ -99,6 +101,7 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
     	String userName=SecurityUtils.getAccount().getLoginName();
     	if(isUpdate){//修改
     		MemberInformation mi= memberInformationDao.get(memberInformationId);
+    		mi.setMemberHeadPortrait(o.getMemberHeadPortrait());
     		mi.setMemberPhoneNumber(o.getMemberPhoneNumber());
     		mi.setMemberName(o.getMemberName());
     		mi.setMemberNickname(o.getMemberNickname());
@@ -109,6 +112,7 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
     		mi.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return memberInformationDao.save(mi);
     	}else{//新增
+    		
     		o.setCreateUser(userName);
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setUpdateUser(userName);
@@ -455,5 +459,29 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 				List<MemberInformation> list = memberInformationDao.commonQuery(condition, null);
 				return list;
 		 }
+		 /**
+			 *前台 根据当前用户分页查询
+			 * @return 分页对象
+			 */
+		            @SuppressWarnings("unchecked")
+			    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+				public PagerRecords getPager(Pager pager,//分页条件
+						@ConditionCollection(domainClazz=MemberInformation.class) Collection<Condition> conditions,//查询条件
+						@OrderCollection Collection<Order> orders)
+						throws BusException {
+			    	PagerRecords pagerRecords = memberInformationDao.findByPager(pager, conditions, orders);
+			    	List<MemberInformation> list = pagerRecords.getRecords();
+			    	for(MemberInformation info : list){
+		    			if(StringUtils.isNotEmpty(info.getMemberId())){
+		    				String  companyId= info.getCompanyId();
+		    			//	EnterbusinessmanagerRz rz = enterbusinessmanagerRzManager.getEnterbusinessmanagerRz(companyId);
+		    			//	rz.setMember(memberInformation);
+		    			}
+		    		}
+			    	
+					return pagerRecords;
+				}
+
+
 
 }
