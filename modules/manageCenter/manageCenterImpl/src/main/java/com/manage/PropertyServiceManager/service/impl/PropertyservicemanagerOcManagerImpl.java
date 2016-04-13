@@ -293,4 +293,25 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 			List<PropertyservicemanagerOc> list =propertyservicemanagerOcDao.commonQuery(condition, null);
 			return list;
 	    }
+	    /**
+		 * 前台根据当前用户分页查询
+		 * @return 分页对象
+		 */
+	    @SuppressWarnings("unchecked")
+	    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+		public PagerRecords getPagerOc(Pager pager,//分页条件
+				@ConditionCollection(domainClazz=PropertyservicemanagerOc.class) Collection<Condition> conditions,//查询条件
+				@OrderCollection Collection<Order> orders)
+				throws BusException {
+	    	PagerRecords pagerRecords = propertyservicemanagerOcDao.findByPager(pager, conditions, orders);
+	    	List<PropertyservicemanagerBx> bxlist = pagerRecords.getRecords();
+	    	for(PropertyservicemanagerBx bx : bxlist){
+    			if(StringUtils.isNotEmpty(bx.getMemberId())){
+    				String memberId = bx.getMemberId();
+    				MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
+    				bx.setMember(memberInformation);
+    			}
+    		}
+	    	return pagerRecords;
+		}
 }

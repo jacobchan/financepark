@@ -31,6 +31,7 @@ import com.gsoft.utils.QRCodeUtil;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
 import com.manage.PolicyManager.entity.PolicyApply;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTwcrd;
@@ -275,13 +276,22 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
 	 * 根据当前用户分页查询
 	 * @return 分页对象
 	 */
+    @SuppressWarnings("unchecked")
     @EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",operator=Condition.EQUALS,pubProperty="userId")})
 	public PagerRecords getPagerFkcodes(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=PropertyservicemanagerFkcode.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)
 			throws BusException {
     	PagerRecords pagerRecords = propertyservicemanagerFkcodeDao.findByPager(pager, conditions, orders);
-		return pagerRecords;
+    	List<PropertyservicemanagerFkcode> bxlist = pagerRecords.getRecords();
+    	for(PropertyservicemanagerFkcode bx : bxlist){
+			if(StringUtils.isNotEmpty(bx.getFkcodeId())){
+				String fkcodeId = bx.getFkcodeId();
+				PropertyservicemanagerTwcrd twcrd = propertyservicemanagerTwcrdManager.getPropertyservicemanagerTwcrd(fkcodeId);
+				bx.setTwcrd(twcrd);
+			}
+		}
+    	return pagerRecords;
 	}
     
 }
