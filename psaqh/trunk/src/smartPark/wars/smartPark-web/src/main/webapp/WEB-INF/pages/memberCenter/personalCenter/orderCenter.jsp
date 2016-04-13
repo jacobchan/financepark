@@ -58,6 +58,13 @@
 						</div>
 					</div>
 				</div>
+		<div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
+        </div> 
+        
+    </div>			
 			</youi:body>
 	<!--***bottom start****************************************-->
 	<script type="text/javascript">	
@@ -199,12 +206,19 @@
 				data:'id='+id,
 				success:function(result){
 					if(result&&result.record){					
-						alert("已取消");
-						location.reload();
+						close("已取消");
+						//location.reload();
 					}
 				}
 			});
 		}; 
+		function close(content){		        
+	        $(".tc.mt25.f18").empty() ;
+	        $(".tc.mt25.f18").append(content) ;
+	        $(".toast").show();		      		        		       				
+			setTimeout(function(){$(".toast").hide(); },1000);
+			refreshData(currentIndex,pageSize);
+      }
 	</script>
 		<script type="text/javascript">
 		$(function () {
