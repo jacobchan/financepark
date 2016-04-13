@@ -85,6 +85,10 @@ public class PropertyservicemanagerFkcode implements Domain{
 	@Length(max=50)
 	private String fkCode;//访客申请单号
 	
+	@Transient 
+	private PropertyservicemanagerTwcrd twcrd;
+	
+	
 	public String getFkCode() {
 		return fkCode;
 	}
@@ -198,6 +202,16 @@ public class PropertyservicemanagerFkcode implements Domain{
 	
 	
 	
+	public PropertyservicemanagerTwcrd getTwcrd() {
+		return twcrd;
+	}
+
+	public void setTwcrd(PropertyservicemanagerTwcrd twcrd) {
+		this.twcrd = twcrd;
+	}
+
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -226,13 +240,14 @@ public class PropertyservicemanagerFkcode implements Domain{
 		result = prime * result
 				+ ((fkcodeTime == null) ? 0 : fkcodeTime.hashCode());
 		result = prime * result + ((member == null) ? 0 : member.hashCode());
+		result = prime * result + ((twcrd == null) ? 0 : twcrd.hashCode());
 		result = prime * result
 				+ ((updateTime == null) ? 0 : updateTime.hashCode());
 		result = prime * result
 				+ ((updateUser == null) ? 0 : updateUser.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -306,6 +321,11 @@ public class PropertyservicemanagerFkcode implements Domain{
 			if (other.member != null)
 				return false;
 		} else if (!member.equals(other.member))
+			return false;
+		if (twcrd == null) {
+			if (other.twcrd != null)
+				return false;
+		} else if (!twcrd.equals(other.twcrd))
 			return false;
 		if (updateTime == null) {
 			if (other.updateTime != null)
