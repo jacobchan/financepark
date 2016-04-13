@@ -1072,6 +1072,9 @@
 			$("#reserveButton").click(function(){
 				var recordType='04';//04:众创空间
 				var recordMemberId=$(".select_show").text();
+				if(recordMemberId=="请选择项目"){
+					recordMemberId="";
+				}
 				var visiteTime=$("#lf_time").val();
 				var lfName=$("#lf_name").val();
 				var lfTel=$("#lf_tel").val();
@@ -1122,11 +1125,6 @@
 					success:function(result){
 						if(result&&result.record){
 							$(".pop_layer.pl1").show();
-							$("#lf_date").val('');
-							$("#lf_time").val('');
-							$("#lf_name").val('');
-							$("#lf_tel").val('');
-							$(".select_show").text('');
 							a=3;
 							timer1=setInterval("jump1()",1000);
 						}
@@ -1150,6 +1148,8 @@
 				}else{
 					if (isLogin) {
 						window.location=cenUrl+"member/memberCenter/personalCenter/myReservation.html";
+					}else{
+						window.location="index.html";
 					}
 				}		
 			}
