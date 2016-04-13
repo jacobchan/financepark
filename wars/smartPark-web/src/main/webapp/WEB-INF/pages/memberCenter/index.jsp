@@ -1,6 +1,6 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/url.js"></script>
 <script>
-	var redirect = '${account.redirect}';
+	var redirect = '${redirect}';
 	if(!redirect){
 		redirect = proUrl;
 	}
