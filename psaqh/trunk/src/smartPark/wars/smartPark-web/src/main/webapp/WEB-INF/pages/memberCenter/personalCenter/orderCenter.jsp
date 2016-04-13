@@ -61,6 +61,16 @@
 			</youi:body>
 	<!--***bottom start****************************************-->
 	<script type="text/javascript">	
+	
+	function viewOrder(userorderCode,genreCode){
+		if(genreCode == "0301"){
+			window.location.href=cenUrl+"member/memberCenter/personalCenter/meetingRoomOrderDetails.html?userorderCode="+userorderCode;
+		}else if(genreCode == "0302"){
+			window.location.href=cenUrl+"member/memberCenter/personalCenter/carOrderDetails.html?userorderCode="+userorderCode;
+		}else if(genreCode == "0303"){
+			window.location.href=cenUrl+"member/memberCenter/personalCenter/adsenseOrderDetails.html?userorderCode="+userorderCode;
+		}
+	};
 	//页面初始化显示未完成订单
 	   $(function(){
 		   var userorderStatus="01";
@@ -91,8 +101,9 @@
 				}else if(record[i].userorderStatus=='08'){
 					status = "已取消";					
 				}
+				var method = "viewOrder(\""+record[i].userorderCode+"\",\""+record[i].genreId.genreCode+"\");";
 				var html= "<tr class='aaa'>"+
-					      "<td>"+record[i].userorderCode+"</td>"+
+					      "<td><a class='custor' onclick='"+method+"'>"+record[i].userorderCode+"</a></td>"+
                           "<td>"+record[i].userorderProject+"</td>"+
                           "<td>"+record[i].userorderAmount+"</td>"+
                           "<td>"+record[i].userorderTime+"</td>"+                                                                        
