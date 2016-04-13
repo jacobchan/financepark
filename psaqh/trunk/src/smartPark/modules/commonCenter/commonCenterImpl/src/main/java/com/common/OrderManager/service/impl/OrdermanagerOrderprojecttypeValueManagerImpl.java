@@ -16,11 +16,8 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.common.OrderManager.entity.OrdermanagerOrderprojecttypeValue;
 import com.common.OrderManager.dao.OrdermanagerOrderprojecttypeValueDao;
 import com.common.OrderManager.service.OrdermanagerOrderprojecttypeValueManager;
@@ -102,5 +99,33 @@ public class OrdermanagerOrderprojecttypeValueManagerImpl extends BaseManagerImp
     public boolean exsitOrdermanagerOrderprojecttypeValue(String propertyName,Object value) throws BusException{
 		return ordermanagerOrderprojecttypeValueDao.exists(propertyName,value);
 	}
+    
+    /**
+     * 根据订单ID获取订单扩展属性列表
+     */
+    @Override
+    public List<OrdermanagerOrderprojecttypeValue> getOovListByOrder(String userorderId) throws BusException{
+    	return ordermanagerOrderprojecttypeValueDao.getList("ordermanagerUserorder.userorderId", userorderId);
+    }
+    
+    /**
+	 * 根据字段名称和订单ID获取唯一扩展属性
+	 * @param fieldName 字段名称
+	 * @param orderId 商品ID
+	 * @return 只能查询一条数据，如果多条返回错误信息
+	 * @throws BusException
+	 */
+    @Override
+    public OrdermanagerOrderprojecttypeValue getOovExtend(String fieldName,String orderId) throws BusException{
+		List<OrdermanagerOrderprojecttypeValue> oovList = ordermanagerOrderprojecttypeValueDao.getList(
+				new String[]{"ordermanagerUserorder.userorderId","genrePropertyId.genrePropertyFieldName"}, 
+				new String[]{orderId,fieldName});
+		if(oovList.size() == 1){
+			return oovList.get(0);
+		}
+		else{
+			return null;
+		}
+    }
 
 }

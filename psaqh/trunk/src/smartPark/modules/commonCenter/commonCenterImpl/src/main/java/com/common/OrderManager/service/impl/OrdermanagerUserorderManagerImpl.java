@@ -25,6 +25,7 @@ import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
+import com.common.ExtentionAtrManager.service.ExtentionAtrManager;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
 import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
@@ -60,6 +61,8 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	private OrdermanagerOrderprojecttypeValueManager ordermanagerOrderprojecttypeValueManager;
 	@Autowired
 	private CodeitemDao<Codeitem, String> codeItemDao;
+	@Autowired
+	private ExtentionAtrManager extentionAtrManager;
 	
     /**
      * 查询列表
@@ -238,7 +241,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 			genreIdList.add(pg.getGenreId());
 		}
 		String[] buff = (String[])genreIdList.toArray(new String[genreIdList.size()]);
-		conditions.add(ConditionUtils.getCondition("genreId.genreCode", Condition.IN, buff));
+		conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.IN, buff));
 		PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
@@ -588,7 +591,14 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    			}
    		} 
     	order.setStatus(status);
+    	if("0301".equals(order.getGenreId().getGenreCode())){
+    		extentionAtrManager.setMeetingOrderExtendValue(order);
+    	}else if("0302".equals(order.getGenreId().getGenreCode())){
+    		extentionAtrManager.setCarOrderExtendValue(order);
+    	}else if("0303".equals(order.getGenreId().getGenreCode())){
+    		extentionAtrManager.setAdsenseOrderExtendValue(order);
+    	}
+    	
     	return order;
     }
-
 }

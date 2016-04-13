@@ -10,6 +10,9 @@ import javax.persistence.*;
 import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.ExtentionAtrManager.entity.AdsenseOrderEntity;
+import com.common.ExtentionAtrManager.entity.CarOrderEntity;
+import com.common.ExtentionAtrManager.entity.MeetingOrderEntity;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
@@ -90,6 +93,39 @@ public class OrdermanagerUserorder implements Domain{
 	
 	@Transient
 	private String status;//订单中文显示状态
+	
+	@Transient
+	private MeetingOrderEntity mettingOrder;//会议室订单扩展属性
+	
+	@Transient
+	private CarOrderEntity carOrder;//车辆租赁订单扩展属性
+	
+	@Transient
+	private AdsenseOrderEntity adsenseOrder;//广告位订单扩展属性
+
+	public CarOrderEntity getCarOrder() {
+		return carOrder;
+	}
+
+	public void setCarOrder(CarOrderEntity carOrder) {
+		this.carOrder = carOrder;
+	}
+
+	public AdsenseOrderEntity getAdsenseOrder() {
+		return adsenseOrder;
+	}
+
+	public void setAdsenseOrder(AdsenseOrderEntity adsenseOrder) {
+		this.adsenseOrder = adsenseOrder;
+	}
+
+	public MeetingOrderEntity getMettingOrder() {
+		return mettingOrder;
+	}
+
+	public void setMettingOrder(MeetingOrderEntity mettingOrder) {
+		this.mettingOrder = mettingOrder;
+	}
 
 	public String getStatus() {
 		return status;
