@@ -56,6 +56,7 @@
 					if(result&&result.records){
 						var records = result.records ;
 						if(records.length == 0){
+							$("#ly1").empty() ;
 							if(issueTypeCode == "0101"){
 								$("#ly1").append("<ul class='ig-nav'><li><p>暂时还没有任何新闻，敬请期待！</p></li></ul>") ;
 							}else if(issueTypeCode == "0102"){
