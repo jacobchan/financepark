@@ -194,6 +194,7 @@
 				"onclick='javascript:cancelStatus(\""+record[i].recordId+"\",\""+record[i].recordCode+"\",\""+record[i].recordStatus+"\")'>取消预约</a></td>";
 				if(recordStatus=="01"){
 					recordStatus="已预约";
+					buttonHtml="";
 				}else if(recordStatus=="02"){
 					recordStatus="已受理";
 				}else if(recordStatus=="03"){
