@@ -22,11 +22,13 @@ import org.hibernate.validator.Length;
 
 
 
+
 import com.common.ExtentionAtrManager.entity.Billboard;
 
 
 import com.common.ExtentionAtrManager.entity.AgencyBookEntity;
 import com.common.ExtentionAtrManager.entity.CarEntity;
+import com.common.ExtentionAtrManager.entity.ClfEntity;
 import com.common.ExtentionAtrManager.entity.GwEntity;
 import com.common.ExtentionAtrManager.entity.LawserverEntity;
 import com.common.ExtentionAtrManager.entity.MeetingEntity;
@@ -139,7 +141,18 @@ public class PurchasingmanagerCommodity implements Domain{
 	
 	@Transient
 	private GwEntity gw;//工位的扩展属性
+	
+	@Transient
+	private ClfEntity clf;//创立方的扩展属性
 
+
+	public ClfEntity getClf() {
+		return clf;
+	}
+
+	public void setClf(ClfEntity clf) {
+		this.clf = clf;
+	}
 
 	public LawserverEntity getLawserver() {
 		return lawserver;
