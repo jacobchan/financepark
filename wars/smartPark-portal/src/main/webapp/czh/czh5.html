@@ -180,37 +180,37 @@
 					<col></col>
 				</colgroup>
 				<tr>
-					<td valign="top">公司名称</td>
-					<td><input type="text"></td>
+					<td valign="top">公司名称<em style="color:#de0101">*</em></td>
+					<td><input type="text" id="companyName"></td>
 				</tr>
 				<tr>
-					<td valign="top">主页地址</td>
-					<td><input type="text"></td>
+					<td valign="top">主页地址<em style="color:#de0101">*</em></td>
+					<td><input type="text" id="companyUrl"></td>
 				</tr>
 				<tr>
-					<td valign="top">融资额度</td>
-					<td><input type="text" style="width:100px;"> —— <input type="text" style="width:100px;"></td>
+					<td valign="top">融资额度<em style="color:#de0101">*</em></td>
+					<td><input type="text" style="width:100px;" id="amountStart"> —— <input type="text" style="width:100px;" id="amountEnd"></td>
 				</tr>
 				<tr>
-					<td valign="top">股份占比</td>
+					<td valign="top">股份占比<em style="color:#de0101">*</em></td>
 					<td>
-						<input type="text" style="width:100px;"> %
+						<input type="text" style="width:100px;" id="shareRate"> %
 					</td>
 				</tr>
 				<tr>
-					<td valign="top">业务简介</td>
-					<td><textarea style="height:140px;"></textarea></td>
+					<td valign="top">业务简介<em style="color:#de0101">*</em></td>
+					<td><textarea style="height:140px;" id="businessDis"></textarea></td>
 				</tr>
 				<tr>
-					<td valign="top">公司优势</td>
-					<td><textarea style="height:140px;"></textarea></td>
+					<td valign="top">公司优势<em style="color:#de0101">*</em></td>
+					<td><textarea style="height:140px;" id="companyMerite"></textarea></td>
 				</tr>
 				<tr>
-					<td valign="top">核心成员</td>
-					<td><textarea></textarea></td>
+					<td valign="top">核心成员<em style="color:#de0101">*</em></td>
+					<td><textarea id="corTeam"></textarea></td>
 				</tr>
 				<tr>
-					<td valign="top">上传bp</td>
+					<td valign="top">上传bp<em style="color:#de0101">*</em></td>
 					<td>
 						<div class="set-line clearfix"> 
 							<span class="set-span"> 
@@ -223,7 +223,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"><a href="" class="ib-btn">提交预约</a></td>
+					<td colspan="2"><a href="javascript:void(0);" class="ib-btn" id="finaceSubmit">提交预约</a></td>
 				</tr>
 			</table>
 		</div>

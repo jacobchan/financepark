@@ -26,8 +26,20 @@ $(function(){
 			}
 		});
 		$(".ib-btn.open-m2").click(function(){
-			$('body').css("overflow","hidden");
-			$(".bg-tanc.m2").show();
+			//判断用户是否登录了
+			if(!isLogin){
+				clearInterval(timer);
+   				$(".toast").show();
+   				pltime=2;
+   				timer=setInterval("closeTanc()",1000);
+				return false;
+			}else{
+				$('body').css("overflow","hidden");
+				$(".bg-tanc.m2").show();
+				//融资申请（公司名称、主页地址加载）
+				onloadCompanyData();
+			}
+			
 			
 		});
 		$(".ib-btn.open-m3").click(function(){
@@ -51,7 +63,7 @@ $(function(){
             $(".toast").hide();
         })
 		
-		//提交预约按钮操作
+		//创业加速计划提交预约按钮操作
 		$("#spEntrepreneurshipSubmit").click(function(){
 			//项目类型
 			var projectType = $(".ic-select p").attr("data");
@@ -86,7 +98,6 @@ $(function(){
 				alert("请选择导师类型");
 				return false;
 			}
-			console.log(teacherType);
 			var params = ['projectType='+projectType,'projectDis='+projectDis,'isFinace='+isFinace,'teacherType='+teacherType,'teacherTypeFlg='+teacherTypeFlg];
 			$.youi.ajaxUtils.ajax({
 				url:baseUrl+"entrepreneurshipManager/goSaveEntrepreneurship.json", 
@@ -94,14 +105,116 @@ $(function(){
 				dataType:'jsonp',
 				data:params.join('&'),
 				success:function(results){
-					console.log(results);
 					if(results&&results.record){
 						window.location.href=cenUrl+"member/memberCenter/personalCenter/policyApply.html";
 					}
 				}
 			});
 		});
-	})
+	});
+
+	//限制融资额度（起）只能为数字
+	$("#amountStart").on("input",function(){
+		var amountStart=$(this).val();
+		var reg=/^[+]?(([0-9]*\.[1-9]{0,2})|([0-9]*))$/;
+		if(!reg.test(amountStart)){
+			var subString=amountStart.substr(0,amountStart.length-1);
+			$(this).val(subString);
+		}
+	});
+	
+	//限制融资额度（止）只能为数字
+	$("#amountEnd").on("input",function(){
+		var amountEnd=$(this).val();
+		var reg=/^[+]?(([0-9]*\.[1-9]{0,2})|([0-9]*))$/;
+		if(!reg.test(amountEnd)){
+			var subString=amountEnd.substr(0,amountEnd.length-1);
+			$(this).val(subString);
+		}
+	});
+	
+	//股份占比只能为数字
+	$("#shareRate").on("input",function(){
+		var shareRate=$(this).val();
+		var reg=/^[+]?(([0-9]*\.[1-9])|([0-9]*))$/;
+		if(!reg.test(shareRate)){
+			var subString=shareRate.substr(0,shareRate.length-1);
+			$(this).val(subString);
+		}
+	});
+	
+	//融资申请提交预约按钮操作
+	$("#finaceSubmit").click(function(){
+		//公司名称
+		var companyName = $("#companyName").val();
+		if(companyName==""){
+			alert("请填写公司名称");
+			return false;
+		}
+		
+		//主页地址
+		var companyUrl = $("#companyUrl").val();
+		if(companyUrl==""){
+			alert("请填写主页地址");
+			return false;
+		}
+		//融资额度（起）
+		var amountStart = $("#amountStart").val();
+		if(amountStart==""){
+			alert("请填写融资额度");
+			return false;
+		}
+		//融资额度（止）
+		var amountEnd = $("#amountEnd").val();
+		if(amountEnd==""){
+			alert("请填写融资额度");
+			return false;
+		}
+		//股份占比
+		var shareRate = $("#shareRate").val();
+		if(shareRate==""){
+			alert("请填写股份占比");
+			return false;
+		}else{
+			//判断比例是否大于100
+			if(shareRate>100){
+				alert("股份占比不能大于100%");
+				return false;
+			}
+		}
+		//业务简介
+		var businessDis = $("#businessDis").val();
+		if(businessDis==""){
+			alert("请填写业务简介");
+			return false;
+		}
+		//公司优势
+		var companyMerite = $("#companyMerite").val();
+		if(companyMerite==""){
+			alert("请填写公司优势");
+			return false;
+		}
+		//核心成员
+		var corTeam = $("#corTeam").val();
+		if(corTeam==""){
+			alert("请填写核心成员");
+			return false;
+		}
+		var params = ['companyName='+companyName,'companyUrl='+companyUrl,'amountStart='+amountStart,
+		              'amountEnd='+amountEnd,'shareRate='+shareRate,'businessDis='+businessDis,
+		              'companyMerite='+companyMerite,'corTeam='+corTeam];
+		$.youi.ajaxUtils.ajax({
+			url:baseUrl+"finaceManager/goSaveFinace.json", 
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			data:params.join('&'),
+			success:function(results){
+				if(results&&results.record){
+					window.location.href=cenUrl+"member/memberCenter/personalCenter/policyApply.html";
+				}
+			}
+		});
+	});
 	
 	//项目类型加载数据
 	function onloadProjectTypesData(){
@@ -152,7 +265,6 @@ $(function(){
 			dataType:'jsonp',
 			success:function(result){
 				var teacherTypeList = result.records;
-				console.log(teacherTypeList);
 				var html = "";
 					for(var index=0;index<teacherTypeList.length;index++){
 						if(teacherTypeList[index].itemValue=="05"){
@@ -168,6 +280,22 @@ $(function(){
 						}
 					}
 				$("#teacherType").html(html);
+			}
+		});
+	}
+	
+	//融资申请（公司名称、主页地址加载）
+	function onloadCompanyData(){
+		$.youi.ajaxUtils.ajax({
+			url:baseUrl+"finaceManager/getCompanyData.json", 
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(result){
+				var companyList = result.records;
+				if(companyList.length>0){
+					$("#companyName").val(companyList[0].rzName);
+					$("#companyUrl").val(companyList[0].rzUrl);
+				}
 			}
 		});
 	}
