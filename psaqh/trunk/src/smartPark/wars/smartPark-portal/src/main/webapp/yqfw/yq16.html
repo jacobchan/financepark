@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -16,7 +16,7 @@
 </head>
 <body style="background-color:#f4f4f4">
 	<!--***top start****************************************-->
-	<div id="youi_page_header" class="youi-page-header clearfix"></div>
+	<div id="youi_page_header" class="youi-page-header clearfix" dataType="3" dataId="0"></div>
 	<!--***top end****************************************-->
 	<div class="w100">
 		<div class="w1200 clearfix pt30 pb50">
@@ -73,7 +73,7 @@
 							<p class="f12">暂无</p> -->
 						</div>
 						<div class="check-btn">
-							<p class="f12 lh20"><label style="cursor:pointer"><input type="checkbox" class="fl mr5" style="margin-top:2px;">我已阅读流程说明并已了解申请流程</label></p>
+							<p class="f12 lh20"><label style="cursor:pointer"><input autocomplete="off" id="test" type="checkbox" class="fl mr5" style="margin-top:2px;">我已阅读流程说明并已了解申请流程</label></p>
 							<a href="javascript:;" class="ib-btn bg-h">在线预约</a>
 						</div>
 					</div>	
@@ -89,16 +89,19 @@
 	<!--***bottom end****************************************-->
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
 	<script>
-	$(".check-btn label").click(function(){
-		if($(this).children('input[type="checkbox"]').prop("checked")){
-			$(this).parent().next(".ib-btn").removeClass("bg-h");
-			$(this).parent().next(".ib-btn").attr("href","yq2.html?enteringType=02");
-		}else{
-			$(this).parent().next(".ib-btn").addClass("bg-h");
-			$(this).parent().next(".ib-btn").attr("href","javascript:;");
-		}
 
-	});
+	$(function(){
+		$(".check-btn label").click(function(){
+			if($(this).children('input[type="checkbox"]').prop("checked")){
+				$(this).parent().next(".ib-btn").removeClass("bg-h");
+				$(this).parent().next(".ib-btn").attr("href","yq2.html?enteringType=02");
+			}else{
+				$(this).parent().next(".ib-btn").addClass("bg-h");
+				$(this).parent().next(".ib-btn").attr("href","javascript:;");
+			}
+		});
+	})
+	
 	</script>
 </body>
 </html>
