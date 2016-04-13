@@ -74,6 +74,12 @@
     </div>
 </div>
 
+	<div class="toast">
+        <div class="toast-con clearfix">
+            	<div class="close-toast fr"></div>
+           	 <p class="tc mt25 f18" style="color:#ff6715">请登录后重试！</p>
+        	</div>       
+   </div>
 
 
 <!--***bottom start****************************************-->
@@ -125,7 +131,12 @@ function registClick(){
 				
 				var isMobile=/^(?:13\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;//手机号的格式
 				if(! isMobile.test(memberPhoneNumber)){
-					alert("请输入正确的手机号！") ;
+					//alert("请输入正确的手机号！") ;
+					clearInterval(timer);
+					$(".tc.mt25").text("请输入正确的手机号！");
+		           	$(".toast").show();
+		           	pltime=1;
+		           	timer=setInterval("closeTanc()",1000);
 					return ;
 				}
 				var obj = ['memberPhoneNumber='+memberPhoneNumber] ;
@@ -138,28 +149,57 @@ function registClick(){
 					success:function(result){
 					 	var flag = result.record.flag ;//获取返回值
 						if(flag == true){
-							alert("此手机号已经注册了！");
+							//alert("此手机号已经注册了！");
+							clearInterval(timer);
+							$(".tc.mt25").text("此手机号已经注册了！");
+				           	$(".toast").show();
+				           	pltime=3;
+				           	timer=setInterval("closeTanc()",1000);
 							return ;
 						}else{
 							if(memberPassword == '' || memberPassword==null){
-								alert("密码不能为空！") ;
+								//alert("密码不能为空！") ;
+								clearInterval(timer);
+								$(".tc.mt25").text("密码不能为空！");
+					           	$(".toast").show();
+					           	pltime=1;
+					           	timer=setInterval("closeTanc()",1000);
 								return ;
 							}
 							if(repasswd == '' || repasswd==null){
-								alert("确认密码不能为空！") ;
+								//alert("确认密码不能为空！") ;
+								clearInterval(timer);
+								$(".tc.mt25").text("确认密码不能为空！");
+					           	$(".toast").show();
+					           	pltime=1;
+					           	timer=setInterval("closeTanc()",1000);
 								return ;
 							}
 							if(memberPassword.length<6){
-								alert("密码长度不能小于6！") ;
+								clearInterval(timer);
+								$(".tc.mt25").text("密码长度不能小于6！");
+					           	$(".toast").show();
+					           	pltime=1;
+					           	timer=setInterval("closeTanc()",1000);
+								//alert("密码长度不能小于6！") ;
 								return ;
 							}
 							if(memberPassword.length>16){
-								alert("密码长度不能大于16！") ;
+								//alert("密码长度不能大于16！") ;
+								clearInterval(timer);
+								$(".tc.mt25").text("密码长度不能大于16！");
+					           	$(".toast").show();
+					           	pltime=1;
+					           	timer=setInterval("closeTanc()",1000);
 								return ;
 							}
 							
 							if(memberPassword != repasswd){
-								alert("两次密码输入不一致！") ;
+								//alert("两次密码输入不一致！") ;
+								$(".tc.mt25").text("两次密码输入不一致！");
+					           	$(".toast").show();
+					           	pltime=1;
+					           	timer=setInterval("closeTanc()",1000);
 								return ;
 							}
 							var params = [
@@ -176,7 +216,12 @@ function registClick(){
 									$("#mobile").val("");//将输入框内容置为空
 									$("#passwd").val("") ;
 									$("#repasswd").val("") ;
-									alert("注册成功！");
+									//var url = cenUrl+"/smartPark-web/member/memberCenter/login.html";
+									$(".tc.mt25").text("注册成功！");
+					           		$(".toast").show();
+					           		pltime=1;
+					           		timer=setInterval("closeTanc()",1000);
+									location.reload();
 								}
 							});
 						} 
@@ -188,6 +233,28 @@ function registClick(){
 			var url=proUrl+"findpsw.html"; 
 			window.location.assign(url); 
 		};
+</script>
+<script type="text/javascript">
+		//toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
+		 var pltime,timer;
+		 function closeTanc(){
+		     if(pltime>1){
+		         pltime--;
+		     }else{
+		         $(".toast").hide();
+		     }       
+		 };
+		 //关闭toast
+	        $(".close-toast").click(function(){
+	            $(".toast").hide();
+	        });
+		 //调用方法如下，哪里调用就放哪里
+		 /**
+		     clearInterval(timer);
+		     $(".toast").show();
+		     pltime=1;
+		     timer=setInterval("closeTanc()",1000);
+		 */
 </script>
 </body>
 </html>
