@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>园区资讯</title>
 	<link href="../styles/base.css" type="text/css" rel="stylesheet">
+	<link href="../styles/page/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
 	<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
@@ -13,6 +14,7 @@
 	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
 	<script type="text/javascript" src="../scripts/page/url.js"></script>
+	<script type="text/javascript" src="../scripts/page/jquery.page.js"></script>
 </head>
 <body>
 	<!--***top start****************************************-->
@@ -28,52 +30,36 @@
 
 			<div class="fl w895">				
 				<div class="park-nav clearfix">
-					<ul id="ui0">
-						<!--  <li class="active">园区公告</li>
-						<li>园区新闻</li>
-						<li>政策法规</li> -->
+					<ul class="ull">
+					
 					</ul>
 				</div>
 				<div class="park-box">
-					<!-- <ul class="pb-list">
-						<a href="zs7.html"><li>科技部关于《发展众创空间工作指引》的通知 <span class="fr">2015-12-24</span></li></a>
-						<a href="zs7.html"><li>定制公交开通啦！往来富春硅谷更便捷<span class="fr">2015-12-24</span></li></a>
-					</ul> -->
-					<!-- <ul class="pb-list-group undis">
-						 <li onclick='window.open("czh/czh3.html");'>
-							<div class="plg-photo">
-								<img src="../styles/images/zs/big-nav-img1.png" border="0" width="100%"/>
-							</div>
-							<div class="plg-article">
-								<h3>杭州，一场无关情爱的风月无边</h3>
-								<p>由于贷款客户丢放鱼缸问题，温柔问题来集合。额外海投网由于天放鱼缸问题，温柔问题来集合。额外海投网</p>
-								<h5>
-									<span class="mr10 c-b1"><img src="../styles/images/zs/clock.png" border="0" class="mr10 ">2015-08-12 05:00至2015-12-12 24:00</span>
-								</h5>
-							</div>
-						</li>
-					</ul> -->
-					<!-- <ul class="pb-list-group undis">
-						 <li onclick='window.open("czh/czh3.html");'>
-							<div class="plg-photo">
-								<img src="../styles/images/zs/big-nav-img1.png" border="0" width="100%"/>
-							</div>
-							<div class="plg-article">
-								<h3>杭州，一场无关情爱的风月无边</h3>
-								<p>由于贷款客户丢放鱼缸问题，温柔问题来集合。额外海投网由于天放鱼缸问题，温柔问题来集合。额外海投网</p>
-								<h5>
-									<span class="mr10 c-b1"><img src="../styles/images/zs/clock.png" border="0" class="mr10 ">2015-08-12 05:00至2015-12-12 24:00</span>
-								</h5>
-							</div>
-						</li>
-					</ul> -->
-					<!-- 没有数据时显示图片 star-->
-					<!-- <div class="tc pt50 pb50">
-	                    <img src="../styles/images/none3.png" border="0"/>
-	                </div> -->
-	                <!-- 没有数据时显示图片 end-->
+					<ul class='pb-list-group' id="01"></ul>
+					<ul class='pb-list undis' id="02"></ul>
+					<ul class='pb-list undis' id="03"></ul>
 				</div>
-			</div>	
+				<div class="tcdPageCode fr" id="11"></div>
+				<div class="tcdPageCode fr" id="22"></div>
+				<div class="tcdPageCode fr" id="33"></div>
+			</div>
+			<!--这里自己调用 页面加载动态效果-->	
+			 <div class="clearfix undis" id="loading">
+				<div id="contain">
+				    <div class='wrap' id='wrap1'>
+				    	<div class='part' id='part1'></div>
+				    </div>
+				    <div class='wrap' id='wrap2'>
+				    	<div class='part' id='part2'></div>
+				    </div>
+				    <div class='wrap' id='wrap3'>
+				    	<div class='part' id='part3'></div>
+				    </div>
+				    <div class='wrap' id='wrap4'>
+				    	<div class='part' id='part4'></div>
+				    </div>
+				</div>
+			</div>				
 			<div class="fr w285"><div id="youi_page_right" class="youi-page-right clearfix"></div></div>
 		</div>
 	</div>
@@ -89,101 +75,224 @@
 		});*/
 		
 	</script>
+	
 	<script type="text/javascript">
 		$(function(){
 			var params=["issueTypeCode=01"];
 			$.youi.ajaxUtils.ajax({
-				url:baseUrl +"nmIssuetypeManager/getNewsType.json",//得到新闻发布类型
-				data:params.join('&'),
+				url:baseUrl +"nmIssuetypeManager/getNewsType.json",
 				jsonp:'data:jsonp',
+				data:params.join('&'),
 				dataType:'jsonp',
-				success:function(result){
-					if(result&&result.records){
-						_parseRecords(result.records);
-					}
+				success:function(results){
+					getList(results.records) ;
 				}
 			});
 		});
-		//拼接新闻公告列表
-		function _parseRecords(record){
-			for(var i=0;i<record.length;i++){
-				var html = "" ;
+		
+		function getList(records){
+			var len = records.length ;
+			var html = "" ;
+			for(var i=0;i<len;i++){
+				var issueTypeCode = records[i].issueTypeCode ;
+				var title = records[i].issueTypeCaption ;
 				if(i == 0){
-					html = "<li class='active' id="+record[i].issueTypeId+">"+record[i].issueTypeCaption+"</li>" ;
-					getRecords(record[i].issueTypeId);//页面加载的时候查询当前类型的新闻
+					html = "<li class='active' id="+issueTypeCode+">"+title+"</li>" ;
 				}else{
-					html = "<li id="+record[i].issueTypeId+">"+record[i].issueTypeCaption+"</li>" ;
+					html = "<li id="+issueTypeCode+">"+title+"</li>" ;
 				}
-				
-		 		$("#ui0").append(html);
+		 		$(".ull").append(html);
 			}
-				$(document).on("click",".park-nav li",function(){
-					$('.park-box').empty();
-					$(".park-nav li").removeClass("active");
-					$(this).addClass("active");
-					$(".park-box ul").eq($(this).index()).removeClass("undis").siblings().addClass("undis");
-					var issueTypeId = $(this).attr("id") ;
-					getRecords(issueTypeId) ;//每次点击新闻类型的时候，查询对应的新闻
-				});
-		}; 
-		function getRecords(issueTypeId){
-			var params=["issueTypeId="+issueTypeId];//当前政策类型ID
-			$.youi.ajaxUtils.ajax({
-				url:baseUrl +"nmIssuenewsManager/getAllPolicyByTypeId.json",
-				data:params.join('&'),
-				jsonp:'data:jsonp',
-				dataType:'jsonp',
-				success:function(result){
-					//console.log(result) ;
-					if(result&&result.records){
-						if(result.records.length>0){
-							getHtml(result.records) ;
-						}else{
-							var html = '<div class="tc pt50 pb50"><img src="../styles/images/none3.png" border="0"/></div>' ;
-							$('.park-box').append(html) ;
-						}
-					}
-				}
-			});
 		}
-		function getHtml(newsList){
-			var htmls="<ul class='pb-list-group'>";
-			var htmls2="<ul class='pb-list'>";
-			var flag = false ;
-			for(var i=0;i<newsList.length;i++){
-				var news = newsList[i] ;
-				if(news.policyType.issueTypeCode=='0101'){//0101代表园区新闻
-					flag = true ;
-					var temp = news.policyContent ;
-					var start = temp.indexOf("<p>");
-					var end = temp.indexOf("</p>");
-					var content = temp.substring(start,end+4) ;
-					//console.log(content) ;
-					htmls += "<li>"+
-								"<a href='zs7.html?policyId="+news.policyId+"'>"+
+		
+		$(function(){
+			$("#loading").removeClass("undis") ;
+			var pageSize=3;
+		    var pageCount=1;
+		    var serviceURL = baseUrl+"nmIssuenewsManager/getPagerAllPolicy.json?issueTypeCode=0101";
+			$.youi.ajaxUtils.ajax({
+ 				url:serviceURL,
+ 				jsonp:'data:jsonp',
+ 				dataType:'jsonp',
+ 				success:function(results){
+ 					if(results.totalCount >0){
+ 						pageCount=Math.ceil(results.totalCount/pageSize);
+ 						refreshData(1,pageSize);
+ 						$("#11").createPage({
+ 						    pageCount:pageCount,
+ 						    current:1,
+ 						    backFn:function(p){
+ 						       this.pageCount=pageCount;
+ 						        refreshData(p,pageSize);
+ 						    }
+ 						});
+ 					}
+ 				}
+ 			});
+				
+	        function refreshData(pageIndex,pageSize){
+	 			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+	 			$.youi.ajaxUtils.ajax({
+	 				url:serviceURL,
+	 				jsonp:'data:jsonp',
+	 				data:params.join('&'),
+	 				dataType:'jsonp',
+	 				success:function(results){
+	 					if(results&&results.records){
+	 						getHtml(results.records);
+	 					}
+	 				}
+	 			});
+	 		}
+		         
+	         function getHtml(newsList){
+	         	$("#01").empty() ;
+	         	$("#11").show() ;
+	         	$("#22").hide() ;
+	         	$("#33").hide() ;
+	         	$("#loading").addClass("undis") ;
+	         	for(var i=0;i<newsList.length;i++){
+	         		var news = newsList[i] ;
+	         		var temp = news.policyContent ;
+	 				var start = temp.indexOf("<p>");
+	 				var end = temp.indexOf("</p>");
+	 				var content = temp.substring(start,end+4) ;
+	 				var html = "<li>"+
+				    				"<a href='zs7.html?policyId="+news.policyId+"'>"+
 									'<div class="plg-photo">'+
 										"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+news.imageUrl+"&method=show' border='0' width='100%'>"+
 									"</div>"+
-						 		"<div class='plg-article'>"+
-									"<a href='zs7.html?policyId="+news.policyId+"'><h3>"+news.policyCaption+"</h3></a>"+content+
-								"</div>"+
-								"</a>"+
-							"</li>";
-				}else{
-					flag = false ;
-					htmls2 += "<a href='zs7.html?policyId="+news.policyId+"'>"+
-								  "<li>"+news.policyCaption+"<span class='fr'>"+news.policyIssueDate+"</span>"+
-								  "</li>"+
-							  "</a>" ;
-				}
+						 			"<div class='plg-article'>"+
+										"<a href='zs7.html?policyId="+news.policyId+"'><h3>"+news.policyCaption+"</h3>"+content+"</a>"+
+										"</div>"+
+									"</a>"+
+								"</li>";
+					$("#01").append(html) ;
+	         	}
+	 		}
+		});
+		$(function(){
+			var pageSize=2;
+		    var pageCount=1;
+		    var serviceURL = baseUrl+"nmIssuenewsManager/getPagerAllPolicy.json?issueTypeCode=0102";
+			$.youi.ajaxUtils.ajax({
+ 				url:serviceURL,
+ 				jsonp:'data:jsonp',
+ 				dataType:'jsonp',
+ 				success:function(results){
+ 					if(results.totalCount >0){
+ 						pageCount=Math.ceil(results.totalCount/pageSize);
+ 						refreshData(1,pageSize);
+ 						$("#22").createPage({
+ 						    pageCount:pageCount,
+ 						    current:1,
+ 						    backFn:function(p){
+ 						       this.pageCount=pageCount;
+ 						        refreshData(p,pageSize);
+ 						    }
+ 						});
+ 					}
+ 				}
+ 			});
+				
+	        function refreshData(pageIndex,pageSize){
+	 			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+	 			$.youi.ajaxUtils.ajax({
+	 				url:serviceURL,
+	 				jsonp:'data:jsonp',
+	 				data:params.join('&'),
+	 				dataType:'jsonp',
+	 				success:function(results){
+	 					if(results&&results.records){
+	 						getHtml(results.records);
+	 					}
+	 				}
+	 			});
+	 		}
+		         
+	         function getHtml(newsList){
+	         	$("#02").empty() ; 
+	         	for(var i=0;i<newsList.length;i++){
+	         		var news = newsList[i] ;
+	 				var html = "<a href='zs7.html?policyId="+news.policyId+"'>"+
+					 			 "<li>"+news.policyCaption+"<span class='fr'>"+news.policyIssueDate+"</span></li>"+
+				  				"</a>";
+					$("#02").append(html) ;
+	         	}
+	 		}
+		});
+		$(function(){
+			var pageSize=2;
+		    var pageCount=1;
+		    var serviceURL = baseUrl+"nmIssuenewsManager/getPagerAllPolicy.json?issueTypeCode=0103";
+			$.youi.ajaxUtils.ajax({
+ 				url:serviceURL,
+ 				jsonp:'data:jsonp',
+ 				dataType:'jsonp',
+ 				success:function(results){
+ 					if(results.totalCount >0){
+ 						pageCount=Math.ceil(results.totalCount/pageSize);
+ 						refreshData(1,pageSize);
+ 						$("#33").createPage({
+ 						    pageCount:pageCount,
+ 						    current:1,
+ 						    backFn:function(p){
+ 						       this.pageCount=pageCount;
+ 						        refreshData(p,pageSize);
+ 						    }
+ 						});
+ 					}
+ 				}
+ 			});
+				
+	        function refreshData(pageIndex,pageSize){
+	 			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+	 			$.youi.ajaxUtils.ajax({
+	 				url:serviceURL,
+	 				jsonp:'data:jsonp',
+	 				data:params.join('&'),
+	 				dataType:'jsonp',
+	 				success:function(results){
+	 					if(results&&results.records){
+	 						getHtml(results.records);
+	 					}
+	 				}
+	 			});
+	 		}
+		         
+	         function getHtml(newsList){
+	         	$("#03").empty() ; 
+	         	for(var i=0;i<newsList.length;i++){
+	         		var news = newsList[i] ;
+	 				var html = "<a href='zs7.html?policyId="+news.policyId+"'>"+
+					 			 "<li>"+news.policyCaption+"<span class='fr'>"+news.policyIssueDate+"</span></li>"+
+				  				"</a>";
+					$("#03").append(html) ;
+	         	}
+	 		}
+		});
+		
+		$(document).on("click",".park-nav li",function(){
+			$(".park-nav li").removeClass("active");
+			$(this).addClass("active");
+			$(".park-box ul").eq($(this).index()).removeClass("undis").siblings().addClass("undis");
+			var issueTypeCode = $(this).attr("id") ;
+			if(issueTypeCode == "0101"){
+				$("#11").show() ;
+				$("#22").hide() ;
+				$("#33").hide() ;
 			}
-			var htmlss="</ul>";
-			if(flag == true){
-				$('.park-box').append(htmls+htmlss);
-			}else{
-				$('.park-box').append(htmls2+htmlss);
+			if(issueTypeCode == "0102"){
+				$("#11").hide() ;
+				$("#22").show() ;
+				$("#33").hide() ;
 			}
-		}
+			if(issueTypeCode == "0103"){
+				$("#11").hide() ;
+				$("#22").hide() ;
+				$("#33").show() ;
+			}
+		});
 	</script>
 </body>
 </html>
