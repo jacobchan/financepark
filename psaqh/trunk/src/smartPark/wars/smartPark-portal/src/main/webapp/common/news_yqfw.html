@@ -20,9 +20,9 @@
 			</ul>
 		</div>
 		<div class="yqfw-news">
-			<div class="yn-bd">最新公告 <a href="" class="c-333 f12 fr">更多》</a></div>
-			<ul class="yn-nav1">
-				<li>
+			<div class="yn-bd">最新公告 <a href="../zscenter/zs4.html" class="c-333 f12 fr">更多》</a></div>
+			<ul class="yn-nav1" id="zxgg_1">
+				<!-- <li>
 					<p><a href="" class="c-333">杭州，一场无关情爱的风sjl,fd...</a> <span class="fr f12 c-b1">2015-10-22</span></p>
 				</li>
 				<li>
@@ -36,24 +36,24 @@
 				</li>
 				<li>
 					<p><a href="" class="c-333">杭州，一场无关情爱的风sjl,fd...</a> <span class="fr f12 c-b1">2015-10-22</span></p>
-				</li>
+				</li> -->
 			</ul>
 		</div>
 		
-		<Script  type="text/javascript">
-function GetRequest() {
-   var url = location.search; //获取url中"?"符后的字串
-   var theRequest = new Object();
-   if (url.indexOf("?") != -1) {
-      var str = url.substr(1);
-      strs = str.split("&");
-      for(var i = 0; i < strs.length; i ++) {
-         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
-      }
-   }
-   return theRequest;
-}
-</Script>
+		<script  type="text/javascript">
+			function GetRequest() {
+			   var url = location.search; //获取url中"?"符后的字串
+			   var theRequest = new Object();
+			   if (url.indexOf("?") != -1) {
+			      var str = url.substr(1);
+			      strs = str.split("&");
+			      for(var i = 0; i < strs.length; i ++) {
+			         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+			      }
+			   }
+			   return theRequest;
+			}
+		</script>
 		<script type="text/javascript">
 		var Request = new Object();
     	Request = GetRequest();
@@ -98,4 +98,46 @@ function GetRequest() {
 				$("#file").empty("") ;
 				$("#file").append(html) ;
 			}
-		</script> 
+		</script>
+		<script type="text/javascript">
+			$(function(){
+				var params=["issueTypeCode=0102"];
+				$.youi.ajaxUtils.ajax({
+					url:baseUrl +"nmIssuenewsManager/getNmIssuenewsByIssueTypeCode.json",//得到新闻发布类型
+					data:params.join('&'),
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(result){
+						if(result&&result.records){
+							appendHtml_1(result.records)
+						}
+					}
+				});
+			});
+			function appendHtml_1(records){
+				var len = records.length ;
+				if(len == 0){
+					$("#zxgg_1").append("<li>暂时还没有任何公告哦！</li>") ;
+				}else if(len > 5){
+					$("#zxgg_1").empty() ;
+					len == 5 ;
+				}
+				var html = "" ;
+				for(var i=0;i<len;i++){
+					var news = records[i] ;
+					var title = news.policyCaption;
+					var id = news.policyId ;
+					if(title.length > 10){
+						title.substring(0,10) ;
+						title += "..." ;
+					}
+					html += "<li>"+
+								"<p>"+
+									"<a href='../zscenter/zs7.html?policyId="+id+"' class='c-333'>"+title+"</a>"+ 
+									"<span class='fr f12 c-b1'>"+news.policyIssueDate+"</span>"+
+								"</p>"+
+							"</li>" ;
+				}
+				$("#zxgg_1").append(html) ;
+			}
+</script>
