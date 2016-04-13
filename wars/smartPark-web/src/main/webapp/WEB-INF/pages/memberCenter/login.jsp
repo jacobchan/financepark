@@ -217,6 +217,7 @@ function registClick(){
 									$("#passwd").val("") ;
 									$("#repasswd").val("") ;
 									//var url = cenUrl+"/smartPark-web/member/memberCenter/login.html";
+									clearInterval(timer);
 									$(".tc.mt25").text("注册成功！");
 					           		$(".toast").show();
 					           		pltime=1;
