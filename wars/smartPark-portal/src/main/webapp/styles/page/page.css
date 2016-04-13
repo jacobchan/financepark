@@ -110,11 +110,11 @@ a{color:#aaa}.inline_b{display:inline-block}.fw{font-weight:600}.prelative{posit
 .hand_ul{border:1px #F3F2F2 solid;}
 .hand_ul li{border-bottom:1px #F3F2F2 solid;padding:20px 10px;overflow:hidden;position:relative;cursor: pointer;}
 .hand_ul li:hover{background: #f6f6f6;}
-a.handbtn{display:inline-block;border:1px #FF803B solid;padding:0px 3px;color:#FF803B;background:#fff;font-size:12px;transition: all .4s}
+a.handbtn{display:inline-block;border:1px #FF803B solid;padding:0px 3px;color:#FF803B;background:#fff;font-size:12px;transition: all .4s;line-height: 24px;}
 a.handbtn:hover{background: #FF803B;color: #fff !important;}
-.tips,.tipbox{border:1px #EBEBEB solid;padding:20px 15px;}.tipbox{border-top:none;min-height: 136px;}
+.tips,.tipbox{border:1px #EBEBEB solid;padding:20px 15px;}.tipbox{border-top:none;min-height: 136px;padding: 10px 15px;}
 .tips span{padding-right:15px;cursor:pointer}
-.tipbox ul li{ list-style:inside disc}.tipbox a{color:#565656}
+.tipbox ul li{ list-style:inside disc;line-height: 26px;}.tipbox a{color:#565656}
 /*activity*/
 .activity li{padding:45px 20px; overflow:hidden}.activity{border:1px #EBEBEB solid}
 .activity_img{width:220px;height:153px;}.activity_img img{width:100%;height:auto}
@@ -347,6 +347,12 @@ width:32px;height:32px;position:absolute;top:50%;right:0;margin-top:-16px;}
 .ig-nav li .fr{padding-left: 125px;font-size: 14px;line-height: 20px;max-height: 40px;float: left;margin-top: 5px;}
 .ig-nav li:hover{background-color: #f5f6f7;}
 .ig-nav li:hover a{color: #ff6715;}
+.yn-nav1{padding:0px 15px;width: 100%;}
+.yn-nav1 li{width: 100%;border-bottom: 1px dashed #efecec;line-height: 24px;padding: 10px 0px;font-size: 14px;}
+.yn-nav1 li a{color: #333;}
+.yn-nav1 li a:hover{color: #FF6715;text-decoration: underline;}
+.yn-nav1 li p{width: 100%;overflow: hidden;height: 24px;}
+.yn-nav1 li p a{width: 70%;display:inline-block;overflow: hidden;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
 
 /*车辆等详情页面*/
 .egbg{background:url(../images/company/wenzibg.png) no-repeat;width:360px;height:67px;padding:15px 20px;color:#fff;font-size:30px}
