@@ -37,7 +37,7 @@ a{color:#aaa}.inline_b{display:inline-block}.fw{font-weight:600}.prelative{posit
 .wy_ico6{background:url(../images/index/wy_ico6.png) 8px 43% no-repeat;}
 .wy_ico7{background:url(../images/index/wy_ico7.png) 8px 43% no-repeat;}
 
-/*table->*/.item1{padding-top:45px;text-align:center}.item1 a{color:#333}
+/*table->*/.item1{padding-top:45px;text-align:center}.item1 a{color:#333;white-space: nowrap;}
 .kj_icon1{background:url(../images/index/kj1.png) top center no-repeat;}
 .kj_icon2{background:url(../images/index/kj2.png) top center no-repeat;}
 .kj_icon3{background:url(../images/index/kj3.png) top center no-repeat;}
