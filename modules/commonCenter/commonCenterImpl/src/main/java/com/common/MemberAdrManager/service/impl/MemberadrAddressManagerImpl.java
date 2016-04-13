@@ -179,5 +179,19 @@ public class MemberadrAddressManagerImpl extends BaseManagerImpl implements Memb
 		}
 			return list;	
 		}
+    /**
+	 *前台 根据当前用户分页查询
+	 * @return 分页对象
+	 */
+            @SuppressWarnings("unchecked")
+	    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+		public PagerRecords getPagergetPagerAddress(Pager pager,//分页条件
+				@ConditionCollection(domainClazz=MemberadrAddress.class) Collection<Condition> conditions,//查询条件
+				@OrderCollection Collection<Order> orders)
+				throws BusException {
+	    	PagerRecords pagerRecords = memberadrAddressDao.findByPager(pager, conditions, orders);	    	
+			return pagerRecords;
+		}
+
     
 }
