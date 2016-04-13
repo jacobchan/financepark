@@ -1,170 +1,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-			<ul class="index-fr-nav clearfix">
-				<li class="active">热门活动</li>
+			<ul class="index-fr-nav clearfix" id="ly">
+				<!-- <li class="active">热门活动</li>
 				<li>即将进行</li>
-				<li>文档库</li>
+				<li>文档库</li> -->
 			</ul>
-			<div class="ifn-group">
-				<ul class="ig-nav">
-					<li>
-						<a href="">
-							<div class="in-photo">
-								<img src="../styles/images/zs/nav-img1.png" border="0" width="100%">
-							</div>
-							<div class="fr">
-								<p>杭州，一场无关情爱的风月无边月无</p>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<div class="in-photo">
-								<img src="../styles/images/zs/nav-img2.png" border="0" width="100%">
-							</div>
-							<div class="fr">
-								<p>杭州，一场无关情爱的风月无边月无</p>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<div class="in-photo">
-								<img src="../styles/images/zs/nav-img3.png" border="0" width="100%">
-							</div>
-							<div class="fr">
-								<p>杭州，一场无关情爱的风月无边月无</p>
-							</div>
-						</a>
-					</li>
-				</ul>
-				<ul class="yn-nav1 undis">
-					<li>
-						<p><a href="" class="c-333">杭州，一场无关情爱的风sjl,fd...</a> <span class="fr f12 c-b1">2015-10-22</span></p>
-					</li>
-					<li>
-						<p><a href="" class="c-333">杭州，一场无关情爱的风sjl,fd...</a> <span class="fr f12 c-b1">2015-10-22</span></p>
-					</li>
-					<li>
-						<p><a href="" class="c-333">杭州，一场无关情爱的风sjl,fd...</a> <span class="fr f12 c-b1">2015-10-22</span></p>
-					</li>
-					<li>
-						<p><a href="" class="c-333">杭州，一场无关情爱的风sjl,fd...</a> <span class="fr f12 c-b1">2015-10-22</span></p>
-					</li>
-					<li>
-						<p><a href="" class="c-333">杭州，一场无关情爱的风sjl,fd...</a> <span class="fr f12 c-b1">2015-10-22</span></p>
-					</li>
-					<li>
-						<p><a href="" class="c-333">杭州，一场无关情爱的风sjl,fd...</a> <span class="fr f12 c-b1">2015-10-22</span></p>
-					</li>
-				</ul>
-				<ul class="yn-nav1 undis">
-					<li>
-						<p><a href="" class="c-333">杭州，一场无关情爱的风sjl,fd...</a> <span class="fr f12 c-b1">2015-10-22</span></p>
-					</li>
-					<li>
-						<p><a href="" class="c-333">杭州，一场无关情爱的风sjl,fd...</a> <span class="fr f12 c-b1">2015-10-22</span></p>
-					</li>
-					<li>
-						<p><a href="" class="c-333">杭州，一场无关情爱的风sjl,fd...</a> <span class="fr f12 c-b1">2015-10-22</span></p>
-					</li>
-					<li>
-						<p><a href="" class="c-333">杭州，一场无关情爱的风sjl,fd...</a> <span class="fr f12 c-b1">2015-10-22</span></p>
-					</li>
-					<li>
-						<p><a href="" class="c-333">杭州，一场无关情爱的风sjl,fd...</a> <span class="fr f12 c-b1">2015-10-22</span></p>
-					</li>
-					<li>
-						<p><a href="" class="c-333">杭州，一场无关情爱的风sjl,fd...</a> <span class="fr f12 c-b1">2015-10-22</span></p>
-					</li>
-				</ul>
+			<div class="ifn-group" id="ly1">
 			</div>
 	<script>
-		$(function(){
-			$(".index-fr-nav li").click(function(){
-				$(".index-fr-nav li").removeClass("active");
-				$(this).addClass("active");
-				$(".ifn-group ul").eq($(this).index()).removeClass("undis").siblings().addClass("undis");
-			});
-		})
-		
-		/*$(document).on("click",".index-fr-nav li",function(){
-			$('.ifn-group').empty();
+		$(document).on("click",".index-fr-nav li",function(){
 			$(".index-fr-nav li").removeClass("active");
 			$(this).addClass("active");
-			$(".ifn-group ul").eq($(this).index()).removeClass("undis").siblings().addClass("undis");
-			var issueTypeId = $(this).attr("id") ;
-			getNews(issueTypeId) ;//每次点击新闻类型的时候，查询对应的新闻
-			//console.log(typeId) ;
+			//$(".ifn-group ul").eq($(this).index()).removeClass("undis").siblings().addClass("undis");
+			var issueTypeCode = $(this).attr("id") ;
+			//console.log(issueTypeCode) ;
+			getN_1(issueTypeCode) ;
 		});
 		
-		function getNews(issueTypeId){
-			var params=["issueTypeId="+issueTypeId];//当前政策类型ID
-			$.youi.ajaxUtils.ajax({
-				url:baseUrl +"nmIssuenewsManager/getAllPolicyByTypeId.json",
-				data:params.join('&'),
-				jsonp:'data:jsonp',
-				dataType:'jsonp',
-				success:function(result){
-					if(result&&result.records){
-						if(result.records.length>0){
-							appendHtmls(result.records) ;
-						}
-					}
-				}
-			});
-		}
-		function appendHtmls(newsList){
-			var html_1 = "<ul class='ig-nav'>" ;
-			var html_2 = "<ul class='pb-list'>" ;
-			var flag = false ;
-			for(var i=0;i<newsList.length;i++){
-				var title = newsList[i].policyCaption.toString() ;
-  	 			var len = title.length ;
-				//console.log(news) ;
-				if(newsList[i].policyType.issueTypeCode=='0101'){//0101代表园区新闻
-					flag = true ;
-					if(len > 21){
-	      	 			title = title.substring(0,21) ;
-						title += "..." ;
-	  	 			}
-					if(i < 3){//取前三条
-						html_1 += "<li>"+
-									"<a href='../zscenter/zs7.html?policyId="+newsList[i].policyId+"'>"+
-										'<div class="in-photo">'+
-											"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+newsList[i].imageUrl+"&method=show' border='0' width='100%'>"+
-										"</div>"+
-							 		"<div class='fr'>"+
-										"<p>"+title+"</p>"
-									"</div>"+
-									"</a>"+
-								"</li>";
-					}
-					
-				}else{
-					flag = false ;
-					if(len > 17){
-	      	 			title = title.substring(0,17) ;
-						title += "..." ;
-	  	 			}
-					if(i<5){//取前五条
-						html_2 += "<a href='../zscenter/zs7.html?policyId="+newsList[i].policyId+"'>"+
-									  "<li>"+title+
-									  "</li>"+
-								  "</a>" ;
-					}
-				}
-			}
-			var htmlss="</ul>";
-			if(flag == true){
-				$('.ifn-group').append(html_1+htmlss);
-			}else{
-				$('.ifn-group').append(html_2+htmlss);
-			}
-		}*/
-	</script>
-	
- 	<script type="text/javascript">
-		/*$(function(){
+		$(function(){
 			var params=["issueTypeCode=01"];
 			$.youi.ajaxUtils.ajax({
 				url:baseUrl +"nmIssuetypeManager/getNewsType.json",//得到新闻发布类型
@@ -173,23 +25,101 @@
 				dataType:'jsonp',
 				success:function(result){
 					if(result&&result.records){
-						//console.log(result.records) ;
-						appendHtml(result.records);
+						var records = result.records ;
+						appendHtml_l(records);
 					}
 				}
 			});
 		});
 		
-		function appendHtml(record){
+		function appendHtml_l(record){
 			for(var i=0;i<record.length;i++){
 				var html = "" ;
 				if(i == 0){
-					html = "<li class='active' id='"+ record[i].issueTypeId +"'>"+ record[i].issueTypeCaption +"</li>"
-					getNews(record[i].issueTypeId);//页面加载的时候查询当前类型的新闻
+					html = "<li class='active' id='"+ record[i].issueTypeCode +"'>"+ record[i].issueTypeCaption +"</li>"
+					getN_1(record[i].issueTypeCode) ;
 				}else{
-					html = "<li id='"+ record[i].issueTypeId +"'>"+ record[i].issueTypeCaption +"</li>"
+					html = "<li id='"+ record[i].issueTypeCode +"'>"+ record[i].issueTypeCaption +"</li>"
 				}
-				$(".index-fr-nav.clearfix").append(html) ;
+				$("#ly").append(html) ;
 			}
-		} 	*/
+		}
+		
+ 		function getN_1(issueTypeCode){
+			var params=["issueTypeCode="+issueTypeCode];
+			$.youi.ajaxUtils.ajax({
+				url:baseUrl +"nmIssuenewsManager/getNmIssuenewsByIssueTypeCode.json",
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					if(result&&result.records){
+						var records = result.records ;
+						if(records.length == 0){
+							if(issueTypeCode == "0101"){
+								$("#ly1").append("<ul class='ig-nav'><li><p>暂时还没有任何新闻，敬请期待！</p></li></ul>") ;
+							}else if(issueTypeCode == "0102"){
+								$("#ly1").append("<ul class='yn-nav1'><li><p>暂时还没有任何公告，敬请期待！</p></li></ul>") ;
+							}else if(issueTypeCode == "0103"){
+								$("#ly1").append("<ul class='yn-nav1'><li><p>暂时还没有任何法规，敬请期待！</p></li></ul>") ;
+							}
+						}else{
+							appendN_1(issueTypeCode,result.records) ;
+						}
+					}
+				}
+			});			
+		}
+		function appendN_1(issueTypeCode,records){
+			$("#ly1").empty() ;
+			var ul_1 = "<ul class='ig-nav'>" ;
+			var ul_2 = "<ul class='yn-nav1'>" ;
+			var ul_3 = "</ul>" ;
+			var html = "" ;
+			if(issueTypeCode == "0101"){
+				var len = records.length ;
+				if(len > 3){
+					len = 3 ;
+				}
+				for(var i=0;i<len;i++){
+					var title = records[i].policyCaption.toString() ;
+					var length = title.length ;
+					if(length > 21){
+	      	 			title = title.substring(0,21) ;
+						title += "..." ;
+	  	 			}
+					html += "<li>"+
+								"<a href='../zscenter/zs7.html?policyId="+records[i].policyId+"'>"+
+									"<div class='in-photo'>"+
+										"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+records[i].imageUrl+"&method=show' border='0' width='100%'>"+
+									"</div>"+
+									"<div class='fr'>"+
+									"<p>"+title+"</p>"+
+									"</div>"+
+								"</a>"+
+							"</li>" ;
+				}
+				$(".ifn-group").append(ul_1+html+ul_3) ;
+			}else{
+				var len = records.length ;
+				if(len > 5){
+					len = 5 ;
+				}
+				for(var i=0;i<len;i++){
+					var title = records[i].policyCaption.toString() ;
+					var length = title.length ;
+					if(length > 17){
+	      	 			title = title.substring(0,17) ;
+						title += "..." ;
+	  	 			}
+					html += "<li>"+
+								"<p>"+
+									"<a href='../zscenter/zs7.html?policyId="+records[i].policyId+"' class='c-333'>"+title+"</a>"+
+									"<span class='fr f12 c-b1'>"+records[i].policyIssueDate+"</span>"+
+								"</p>"+
+							"</li>"
+				}
+				$(".ifn-group").append(ul_2+html+ul_3) ;
+			}
+		} 
 	</script> 
