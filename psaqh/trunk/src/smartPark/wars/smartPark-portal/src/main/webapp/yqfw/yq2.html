@@ -173,6 +173,16 @@ function GetRequest() {
 						alert(str);
 					}); */
 				});
+				
+				//跳转订单中心
+				function jumpOrder(){
+					window.location=cenUrl+"member/memberCenter/personalCenter/myReservation.html";
+				}
+				//返回
+				function jumpBack(){
+					window.location="yq2.html?enteringType="+enteringType; 
+				}
+				
 				var a,b;
 				function jump1(){
 					if(a>1){
@@ -286,9 +296,9 @@ function GetRequest() {
 				<p><span class="c-o f24 tc-time mr5" id="ti-m1">5 </span>秒后，系统将自动跳转</p>
 				<!-- <p class="mt10"><a href="" class="c-6">手动跳转 ></a></p> -->
 				<div class="clearfix mt15 pt15" style="border-top:1px solid #efecec">
-					<a href="javascript:;" class="ib-btn" style="width:120px;">前往查看</a>
+					<a style="cursor:pointer;" onclick="jumpOrder();" class="ib-btn" style="width:120px;">前往查看</a>
 					<span class="ml30 mr30"></span>
-					<a href="javascript:;" class="ib-btn fs-btn" style="width:120px;">返回</a>
+					<a style="cursor:pointer;" onclick="jumpBack();" class="ib-btn fs-btn" style="width:120px;">返回</a>
 				</div>
 			</div>
 		</div>
