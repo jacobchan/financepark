@@ -38,6 +38,7 @@ import com.gsoft.framework.upload.dao.FileStoreDao;
 import com.gsoft.framework.upload.entity.FileStore;
 import com.gsoft.framework.upload.service.FileStoreManager;
 import com.gsoft.framework.util.DateUtils;
+import com.manage.FileManager.service.FileUploadManager;
 
 @Controller
 @RequestMapping("/common")
@@ -46,6 +47,8 @@ public class CommonController {
 	private String root;
 	@Autowired
 	private FileStoreManager fileStoreManager;
+	@Autowired
+	private FileUploadManager fileDownManager;
 	@Autowired
 	private FileStoreDao fileStoreDao;	
 	
@@ -227,6 +230,11 @@ public class CommonController {
 			fis.close();
 			sos.flush();
 			sos.close();
+			//文件下载，保存下载次数
+			if("fileDown".equals(request.getParameter("type"))){
+				String fileId=request.getParameter("fileId");
+				fileDownManager.saveFileUploadForDownNum(fileId);
+			}
 		}
 		return null;
 	}
