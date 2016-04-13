@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gsoft.framework.security.AccountPrincipal;
 import com.gsoft.framework.util.SecurityUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.member.base.entity.IMember;
 import com.gsoft.member.base.service.IMemberService;
 
@@ -45,7 +47,7 @@ public class MemberLoginController {
 	public ModelAndView login(HttpServletRequest request,
 			HttpServletResponse response,
 			@PathVariable("loginType") String loginType){
-		
+		String redirect = request.getParameter("redirect");
 		//会员登录类型
 		
 		//支持手机号，登录名，邮箱登录
@@ -55,7 +57,7 @@ public class MemberLoginController {
 		//捧客登录,开放注册
 		//切换登录
 		AccountPrincipal account = SecurityUtils.getAccount();
-		
+		HttpSession session = request.getSession();
 		if(account instanceof IMember){
 			String currentLoginType = ((IMember)account).getLoginType();
 			if(currentLoginType!=null&&!currentLoginType.equals(loginType)){
@@ -64,6 +66,7 @@ public class MemberLoginController {
 			//重定向到首页
 			return new ModelAndView("redirect:/member/"+loginType+"/index.html");
 		}
+		session.setAttribute("redirect", redirect);
 		return new ModelAndView(loginType+"/login");
 	}
 	
@@ -87,7 +90,14 @@ public class MemberLoginController {
 			HttpServletResponse response,
 			@PathVariable("loginType") String loginType){
 		ModelAndView model = new ModelAndView(loginType+"/index");
-		
+		//HttpSession session = request.getSession();
+		//String redirect = session.getAttribute("redirect").toString();
+		String redirect = request.getSession().getAttribute("redirect")!=null?request.getSession().getAttribute("redirect").toString():null;
+		if(StringUtils.isNotEmpty(redirect)){
+			model.addObject("redirect", redirect);
+		}else{
+			model.addObject("redirect", "");
+		}
 		AccountPrincipal account = SecurityUtils.getAccount();
 		model.addObject("loginType", loginType);
 		model.addObject("account", account.getPrincipalConfig());
