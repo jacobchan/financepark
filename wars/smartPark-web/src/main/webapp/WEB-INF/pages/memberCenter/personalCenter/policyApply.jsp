@@ -3,7 +3,7 @@
 <youi:html title="政策申请">
 	<youi:body decorator="memcenter"> 
 				<div class="w1000">
-					<h3 class="per-h3">政策申请<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要申请政策</a></h3>
+					<h3 class="per-h3">我的政策<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要申请政策</a></h3>
 					<div class="clearfix mt40">
 						<table class="gt-table mt20">
 							<colgroup>
@@ -35,6 +35,13 @@
         </div> 
         
     </div>
+    <div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
+        </div> 
+        
+    </div>
 		</youi:body>
 		
 	<!--***bottom start****************************************-->
@@ -45,64 +52,47 @@
 	<script type="text/javascript">
 	var pageSize=5;
 	var pageCount=1;
+	var currentIndex = 1;
 	var serviceURL = baseUrl+'policyApplyManager/getPagerPolicyApply.json';
-		$(function () {
-			star(".starbox1 i");
-				star(".starbox2 i");
-				star(".starbox3 i");
-				star(".starbox4 i");
-				function star(ele){
-					$(ele).hover(function(){
-						var index=$(this).index()+1;
-						$(ele).removeClass("star1").addClass("star0");
-						var arr=$(ele).toArray().slice(0,index);
-						for(var i=0;i<arr.length;i++){
-							arr[i].className="star1";
-						}
-					});
-				}
-			$(".ac-show").click(function(){
-				$(".bg-tanc.m1").show();
-			});
-			$(".ac-see").click(function(){
-				$(".bg-tanc.m2").show();
-			});
-			
-			 $.ajax({
-				url:serviceURL, 
-				success:function(results){	
-								pageCount=Math.ceil(results.totalCount/pageSize);
-								
-								 refreshData(1,pageSize);
-									$(".tcdPageCode").createPage({
-									    pageCount:pageCount,
-									    current:1,
-									    backFn:function(p){
-									       this.pageCount=pageCount;
-									        refreshData(p,pageSize);
-									    }
-									});			
-				/* 	if(result&&result.records){
-						_parseRecords(result.records);
-					} */
-				}
-			}); 			
-		});	
+$(function () {
 		
-		
-		//分页列表
-		function refreshData(pageIndex,pageSize){
-			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
-			$.ajax({
-				url:serviceURL,
-				data:params.join('&'),
-				success:function(results){
-					if(results&&results.records){
-						 _parseRecords(results.records);
-					}
+		//分页页码显示
+		 $.ajax({
+			url:serviceURL, 
+			success:function(results){	
+							pageCount=Math.ceil(results.totalCount/pageSize);//页数
+							
+							 refreshData(1,pageSize);
+								$(".tcdPageCode").createPage({
+								    pageCount:pageCount,
+								    current:1,
+								    backFn:function(p){
+								    	currentIndex = p;
+								       this.pageCount=pageCount;
+								        refreshData(p,pageSize);
+								    }
+								});			
+			/* 	if(result&&result.records){
+					_parseRecords(result.records);
+				} */
+			}
+		}); 			
+	});	
+	
+	
+	//分页列表
+	function refreshData(pageIndex,pageSize){
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+		$.ajax({
+			url:serviceURL,
+			data:params.join('&'),
+			success:function(results){
+				if(results&&results.records){
+					 _parseRecords(results.records);
 				}
-			});
-		}
+			}
+		});
+	}
 	//取消政策申请，前端调用
 	 function cancel(id){		
 		var policyApplyId=id;	
@@ -120,19 +110,18 @@
 		});
 	} 
 	
-	/* 	$(function(){
-			$.ajax({				
-				url:baseUrl+'policyApplyManager/getPolicyApplyListByLoginUser.json',
-				success:function(result){	
-					if(result&&result.records){					
-						_parseRecords(result.records);						
-					}
-				}
-			});
-		}); */
+	
 		//拼接列表
 		function _parseRecords(record){		
-
+			ht="<tr>"+
+				"<th>申请编号</th>"+
+				"<th>政策类型</th>"+
+				"<th>申请人</th>"+
+				"<th>申请时间</th>	"+							
+				"<th>申请状态</th>"+
+				"<th>操作</th>"+
+			    "</tr>";
+			    $(".gt-table").append(ht);
 			console.log(record);
 			$("tbody").empty();
 			for(var i=0;i<record.length;i++){				
@@ -171,12 +160,19 @@
 			data:'policyApplyId='+policyApplyId,
 			success:function(result){
 				if(result&&result.record){					
-					alert("已取消");
-					location.reload();
+					close("已取消");
+					
 				}
 			}
 		});
 	}; 
+	 function close(content){		        
+	        $(".tc.mt25.f18").empty() ;
+	        $(".tc.mt25.f18").append(content) ;
+	        $(".toast").show();		      		        		       				
+			setTimeout(function(){$(".toast").hide(); },1000);
+			refreshData(currentIndex,pageSize);
+   }
 	 </script>
 	 <script type="text/javascript">
 	    //点击跳转到政策申请页面
