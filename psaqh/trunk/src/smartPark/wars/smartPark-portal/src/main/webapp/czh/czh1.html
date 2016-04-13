@@ -312,10 +312,10 @@
 	function _parseRecoomends(record){
 		var html='';
 		for(var i=0;i<record.length;i++){
-			 html+="<div class='czh-box mr20'>"+
-						"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityImage+"&method=show' width='288' height='195'>"+
+			 html+="<div class='czh-box mr20' id='"+record[i].applyId+"'>"+
+						"<img src='"+cenUrl+"filestore/"+record[i].activityImage+"' width='288' height='195'>"+
 						"<div class='czh-group' style='border-bottom:1px solid #ecebeb' id="+record[i].applyId+">"+
-							"<a href='javascript:;' onclick='redirectPage(this)'><h4>"+record[i].applyTitle+"</h4></a>"+
+							"<a href='javascript:;' onclick='rePage(this)'><h4>"+record[i].applyTitle+"</h4></a>"+
 							"<span><img src='../styles/images/czh/clock.png'  class='mr5'>"+record[i].startTime+"</span>"+
 							"<span class='fr'><img src=''../styles/images/czh/user.png'  class='mr5'>366</span>"+
 							"<span style='border-left:1px solid #ecefef;line-height:16px;height:16px;margin-top:8px;' class='ml10 mr10 fr'></span>"+
@@ -335,7 +335,7 @@
 		for(var i=0;i<record.length;i++){
 			html+="<li class='clearfix' onclick='openPage(this)' id='"+record[i].applyId+"'>"+
 						"<div class='plg-photo'>"+
-							"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityImage+"&method=show' border='0' width='100%'/>"+
+							"<img src='"+cenUrl+"filestore/"+record[i].activityImage+"' border='0' width='100%'/>"+
 							"<em>"+record[i].applayType.typeName+"</em>"+
 						"</div>"+
 						"<div class='plg-article pr' >"+
@@ -347,7 +347,7 @@
 								"<div class='fr' id='"+record[i].applyId+"'>"+
 									"<span class='mr15'><img src='../styles/images/zs/user.png' border='0' class='mr10'>限制人数"+record[i].applyMaxuser+"人</span>|"+
 									"<span class='ml15 mr15'><img src='../styles/images/czh/heart-h.png' border='0' class='mr10'>2459</span>"+
-									"<a href='javascript:;' onclick='redirectPage(this)';  class='ib-btn' style='margin-top:0px;'>我要报名</a>"+
+									"<a href='javascript:;'  class='ib-btn' style='margin-top:0px;'>我要报名</a>"+
 								"</div>"+
 							"</div>"+
 						"</div>"+
@@ -362,10 +362,10 @@
 		var url="../czh/czh4.html"+"?"+"typeId="+typeId; 
 		window.location.assign(url); 
 	}
-	function redirectPage(obj){
+	function rePage(obj){
 		var applyId=obj.parentNode.id;
 		var url="../czh/czh3.html"+"?"+"applyId="+applyId; 
-		//window.location.assign(url); 
+		window.location.assign(url); 
 	}
 	function redirectPagePDF(obj){
 		var applyId=obj.parentNode.id;
