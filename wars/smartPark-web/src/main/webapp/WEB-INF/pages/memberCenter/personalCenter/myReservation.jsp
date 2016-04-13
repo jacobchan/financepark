@@ -260,6 +260,8 @@
 					enteringType="客户续约";
 				}else if(enteringType=="05"){
 					enteringType="客户退租";
+				}else if(enteringType=="05"){
+					enteringType="入驻成功";
 				}
 				var buttonHtml="<td id="+record[i].enterrecStatus+"><a href='javascript:;' class='ac-show' onclick='javascript:cancelForEnter(\""+record[i].entrecId+"\",\""+record[i].enterrecCode+"\",\""+record[i].enterrecStatus+"\")'>取消预约</a></td>";
 				if(recordStatus=="01"){
