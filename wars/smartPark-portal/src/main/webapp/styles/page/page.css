@@ -113,6 +113,8 @@ a{color:#aaa}.inline_b{display:inline-block}.fw{font-weight:600}.prelative{posit
 .huan{background:#999;color:#fff;position:absolute;right:-8px;top:14px;font-size: 12px;padding: 2px;border-radius:5px;cursor:pointer}
 .btn-cheng{padding:5px 20px;background:#FA742C;border:none;color:#fff;display:inline-block;cursor:pointer;}
 .btn-cheng:hover{background:#ff5900;color:#fff !important;}
+.btn-disabled{padding:5px 20px;background:#ccc;border:none;color:#fff;display:inline-block;cursor:pointer;}
+.btn-disabled:hover{background:#c1c1c1;color:#fff !important;}
 .btn-chengk{padding:5px 20px;background:#fff;border:none;color:#ff5900;display:inline-block;cursor:pointer;border:1px #ff5900 solid}
 .btn-chengk:hover{background:#ff5900;color:#fff;border:1px #ff5900 solid}
 .btn-yellow{background:#FFD705;padding:5px 20px;border:none;color:#6B450A;display:inline-block;cursor:pointer;border-radius:5px}
