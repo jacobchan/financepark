@@ -102,31 +102,43 @@
 	<!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***弹窗 start****************************************-->
-		<div class="bg-tanc m2">
-			<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
-				<a href="javascript:;" class="tc-close"></a>
-				<div class="w70 tc mt40" style="margin-left:15%">
-					<table>
-						<tr>
-							<td><img src="../styles/images/grzx/check.png" class="mr40 mb20" border="0"></td>
-							<td >
-								<h4 class="f24 fl c-333">请登录!</h4>
-								<!-- <h4 class="f24 fl c-333"> 还有<span class="tt">0</span>秒关闭弹出框</h4> -->
-								<p class="f14 c-o fl mt20 mb20">如有问题，请拨打：0571-86508888</p>
-							</td>
-						<tr/>
-					</table>
-				</div>
-			</div>
-		</div>
+		    <!-- 弹出层样式 -->
+    <div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715" id="msg">请登录后重试！</p>
+        </div>
+        
+    </div>
 	<!--***弹窗 end****************************************-->
 	<!--***bottom end****************************************-->
 	<script type="text/javascript" src="../scripts/page/banner.js"></script>
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
+	<script type="text/javascript">
+	$(function () {
+        //关闭toast
+        $(".close-toast").click(function(){
+            $(".toast").hide();
+        })
+	})
+	
+	 var pltime,timer;
+    function closeTanc(){
+        if(pltime>1){
+            pltime--;
+        }else{
+            $(".toast").hide();
+        }       
+    }
+</script>
 	<script>
+    //toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
 	   function openURL(url){
 		   if(!isLogin){
-			   $(".bg-tanc.m2").show();
+			   clearInterval(timer);
+	            $(".toast").show();
+	            pltime=2;
+	            timer=setInterval("closeTanc()",1000);
 			 	 return;
 			}
 	        if(url=='5'){
