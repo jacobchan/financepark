@@ -42,6 +42,7 @@
 		clickCss : 'today', //点击样式
         disableGray : 'dateRangeGray', // 非当前月的日期样式
         isToday : 'dateRangeToday', // 今天日期的样式
+        noneWhite:'dateRangeWhite' // 表格里非当前月的日期样式
         joinLineId : 'joinLine',
         isSingleDay : false,
         defaultText : ' 至 ',
@@ -1163,10 +1164,10 @@ pickerDateRange.prototype.fillDate = function(year, month, index) {
     var tdClass = '', deviation = 0, ymd = '';
     for(var d = dateBegin; d.getTime() <= dateEnd.getTime(); d.setDate(d.getDate() + 1)) {
         if(d.getTime() < firstDayOfMonth.getTime()) { // 当前月之前的日期
-            tdClass = this.mOpts.theme + '_' + this.mOpts.disableGray;
+            tdClass = this.mOpts.theme + '_' + this.mOpts.noneWhite;
             deviation = '-1';
         } else if(d.getTime() > lastDayOfMonth.getTime()) { // 当前月之后的日期
-            tdClass = this.mOpts.theme + '_' + this.mOpts.disableGray;
+            tdClass = this.mOpts.theme + '_' + this.mOpts.noneWhite;
             deviation = '1';
         } else if((this.mOpts.stopToday == true && d.getTime() < today.getTime()) || d.getTime() < __method.mOpts.minValidDate * 1000 || ('' !== __method.mOpts.maxValidDate && d.getTime() > __method.mOpts.maxValidDate * 1000)) { // 当前时间之后的日期，或者开启统计之前的日期
             tdClass = this.mOpts.theme + '_' + this.mOpts.disableGray;
