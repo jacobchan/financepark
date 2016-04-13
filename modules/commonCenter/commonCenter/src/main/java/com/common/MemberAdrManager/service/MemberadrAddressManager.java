@@ -81,4 +81,11 @@ public interface MemberadrAddressManager extends BaseManager{
      * @throws BusException
      */
     public List<MemberadrAddress> getMemAddforpage(MemberadrAddress o) throws BusException;
+    /**
+	 *前台 根据当前用户分页查询
+	 * @return 分页对象
+	 */
+	public PagerRecords getPagergetPagerAddress(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders) throws BusException;
 }
