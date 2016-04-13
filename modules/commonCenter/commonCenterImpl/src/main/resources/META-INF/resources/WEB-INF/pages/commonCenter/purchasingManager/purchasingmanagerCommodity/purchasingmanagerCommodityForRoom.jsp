@@ -27,14 +27,11 @@
 			<youi:fieldText property="purchasingmanagerMerchant.merchantName"  caption="商户名称"/>
 		</youi:fieldLayout>
 		
-		<youi:gridCol property="commodityTitle"  caption="标题" align="center" width="15%"/>
-		<youi:gridCol property="purchasingmanagerMerchant.merchantName"  caption="商户名称" align="center" width="9%"/>
+		<youi:gridCol property="commodityTitle"  caption="标题" align="center" width="20%"/>
+		<youi:gridCol property="purchasingmanagerMerchant.merchantName"  caption="商户名称" align="center" width="20%"/>
 	<%-- 	<youi:gridCol property="purchasingmanagerGenre.genreName"  caption="商品类别" align="center" width="8%"/> --%>
-		<youi:gridCol property="commodityPrice"  caption="标价" align="center" width="8%"/>
-		<youi:gridCol property="commodityStock"  caption="库存" align="center" width="8%"/>
-		<youi:gridCol property="commodityDescribe"  caption="描述" align="center" width="22%"/>
-		<youi:gridCol property="commodityUpTime"  caption="上架时间" align="center" width="15%"/>
-		<youi:gridCol property="commodityDownTime"  caption="下架时间" align="center" width="15%"/>
+		<youi:gridCol property="commodityPrice"  caption="标价" align="center" width="10%"/>
+		<youi:gridCol property="commodityDescribe"  caption="描述" align="center" width="30%"/>
 		<youi:gridCol property="genreId"  caption="商品类别" align="center" width="0"/>
 		
 		<%-- <youi:button name="commodityAdd" caption="增加"/> --%>

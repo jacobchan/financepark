@@ -15,7 +15,6 @@
 			<youi:fieldArea property="commodityDescribe"  caption="描述" column="2" notNull="true"/>
 		</youi:fieldLayout>
 		<youi:button name="chargeSubmit" caption="提交"></youi:button>
-		
 	</youi:form>
 	
    <!--**********************************页面函数********************************-->

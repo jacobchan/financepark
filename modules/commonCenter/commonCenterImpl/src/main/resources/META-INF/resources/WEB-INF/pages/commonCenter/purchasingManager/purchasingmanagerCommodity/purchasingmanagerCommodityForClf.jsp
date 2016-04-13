@@ -15,11 +15,9 @@
 			<youi:fieldText property="commodityTitle"  caption="标题"/>
 		</youi:fieldLayout>
 		
-		<youi:gridCol property="commodityTitle"  caption="标题" align="center" width="15%"/>
-		<youi:gridCol property="commodityPrice"  caption="标价" align="center" width="8%"/>
-		<youi:gridCol property="commodityDescribe"  caption="描述" align="center" width="22%"/>
-		<youi:gridCol property="commodityUpTime"  caption="上架时间" align="center" width="15%"/>
-		<youi:gridCol property="commodityDownTime"  caption="下架时间" align="center" width="15%"/>
+		<youi:gridCol property="commodityTitle"  caption="标题" align="center" width="20%"/>
+		<youi:gridCol property="commodityPrice"  caption="标价" align="center" width="10%"/>
+		<youi:gridCol property="commodityDescribe"  caption="描述" align="center" width="30%"/>
 		<youi:gridCol property="purchasingmanagerGenre.genreId"  caption="商品类别" align="center" width="0"/>
 		
 		<youi:button active="1" name="commodityUpdate" caption="修改"/>
