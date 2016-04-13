@@ -1,14 +1,13 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/pages/include.jsp" %>
 <youi:html title="我的地址">
-	<youi:body decorator="memcenter"> 
-				 
+	<youi:body decorator="memcenter">  
 				<div class="w1000">
 					<h3 class="per-h3">我的地址</h3>
 					<div class="mt30 addressList">
-					
+						
 					</div>	
-					<div href="#" class="add-box ga-edit"><i class="fa fa-plus mr20"></i>新增地址</a>
+					<a href="javascript:;" class="add-box ga-edit"><i class="fa fa-plus mr20"></i>新增地址</a>
 				</div>
 			</youi:body>
 	<!--***bottom end****************************************-->
@@ -95,10 +94,9 @@
 	</div>
 	<div class="toast">
         <div class="toast-con clearfix">
-            <div class="close-toast fr"></div>
-            <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
-        </div> 
-        
+            	<div class="close-toast fr"></div>
+           	 <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
+        	</div>       
     </div>
 	<!--***弹窗 end****************************************-->
 	<script type="text/javascript">
@@ -128,7 +126,6 @@
 		function _parseRecords(record){
 			var html="";
 			for(var i=0;i<record.length;i++){
-				
 				if(record[i].addressStatus==0){			
 					  html+="<div class='gr-address active' id="+record[i].addressId+">"+
 							"<div class='clearfix pl40 pr40'><span>姓名："+record[i].addressName+"</span><span class='fr'>手机号码："+record[i].addressPhone+"</span></div>"+
@@ -165,9 +162,11 @@
 				success:function(result){
 					me.remove();
 				//	$(".toast").show(); 
-					$(".tc.mt25.f18").text("删除成功");
-					$(".toast").show(); 
-					setTimeout(function(){location.reload(); },500);	
+					clearInterval(timer);
+					$(".tc.mt25").text("删除成功!");
+		         	$(".toast").show();
+		         	pltime=1;
+		         	timer=setInterval("closeTanc()",1000);
 					
 				}
 			});
@@ -286,8 +285,11 @@
 					addressDetail = $("#ad2").val();
 				}
 				if(!isMobil(addressPhone)){
-					$(".f24.fl.c-333").text("手机号格式不正确！");
-					$(".bg-tanc.m2").show();
+					clearInterval(timer);
+					$(".tc.mt25").text("手机号格式不正确!");
+		         	$(".toast").show();
+		         	pltime=1;
+		         	timer=setInterval("closeTanc()",1000);
 					return false;
 				}
 				
@@ -302,8 +304,12 @@
 					data:params.join('&'),
 					success:function(results){
 						if(results&&results.record){
-							location.reload()
-							
+							clearInterval(timer);
+							//$(".tc.mt25").text("手机号格式不正确!");
+				         	$(".toast").show();
+				         	pltime=1;
+				         	timer=setInterval("closeTanc()",1000);
+				         	location.reload();
 						}
 					}
 				});
@@ -358,9 +364,31 @@
 			};
 			//校验手机号格式
 			function isMobil(s) {
-			    var patrn = /^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
-			    if (!patrn.exec(s)){ return false;}
-			    else{return true;}
+			    	var patrn = /^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+			   		if (!patrn.exec(s)) return false
+			   	 	return true
 			};
 	</script>
+	<script type="text/javascript">
+		//toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
+		 var pltime,timer;
+		 function closeTanc(){
+		     if(pltime>1){
+		         pltime--;
+		     }else{
+		         $(".toast").hide();
+		     }       
+		 };
+		 //关闭toast
+	        $(".close-toast").click(function(){
+	            $(".toast").hide();
+	        });
+		 //调用方法如下，哪里调用就放哪里
+		 /**
+		     clearInterval(timer);
+		     $(".toast").show();
+		     pltime=1;
+		     timer=setInterval("closeTanc()",1000);
+		 */
+</script>
 </youi:html>
