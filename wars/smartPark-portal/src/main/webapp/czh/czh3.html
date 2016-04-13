@@ -31,7 +31,7 @@
 					<h3 class="h-bg"></h3>
 					<div class="lh40 mt10 f14" style="color:#898989">
 						<span class="mr20"><img src="../styles/images/czh/clock-l.png" border="0" class="mr10"><span class="time"></span></span>
-						<span><img src="../styles/images/zs/map.png" border="0" class="mr10"><span class="address">杭州市富春硅谷园区公共会议室</span></span><br/>
+						<span><img src="../styles/images/zs/map.png" border="0" class="mr10"><span class="address" id="activityAdr">杭州市富春硅谷园区公共会议室</span></span><br/>
 						<span><img src="../styles/images/czh/user-l.png" border="0" class="mr10"><span class="name"></span></span>
 						
 					</div>
@@ -246,6 +246,7 @@
 			$(".name").html("发布人："+record.memberId.memberName);
 			$(".phoneNumber").html(record.memberId.memberPhoneNumber);
 			$(".bd-box").html(record.commentContent);
+			$("#activityAdr").html(record.activityAdr);
 		}
 		//文档库赋值
 		function _parseActivityRecords(record){
