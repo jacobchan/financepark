@@ -26,7 +26,9 @@ import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.framework.esb.annotation.ConditionCollection;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.PubCondition;
 import com.gsoft.framework.esb.annotation.ServiceParam;
+import com.gsoft.framework.util.DateUtils;
 
 @Service("mcMsgtempalateManager")
 @Transactional
@@ -68,24 +70,36 @@ public class McMsgtempalateManagerImpl extends BaseManagerImpl implements McMsgt
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
     public McMsgtempalate saveMcMsgtempalate(McMsgtempalate o) throws BusException{
     	String mcMsgtempalateId = o.getMsgTempalateId();
     	boolean isUpdate = com.gsoft.framework.util.StringUtils.isNotEmpty(mcMsgtempalateId);
     	if(isUpdate){//修改
-    		McMsgtempalate msgTempalate = getMsgTempalate(o.getUniqueCode());
+    		McMsgtempalate msgTempalate = mcMsgtempalateDao.getObjectByUniqueProperty("uniqueCode", o.getUniqueCode());
     		if(msgTempalate!=null&&!mcMsgtempalateId.equals(msgTempalate.getMsgTempalateId())){
     			throw new BusException("唯一码已经存在");
     		}
+    		McMsgtempalate mmp = mcMsgtempalateDao.get(mcMsgtempalateId);
+    		mmp.setUniqueCode(o.getUniqueCode());
+    		mmp.setMcMsgtype(o.getMcMsgtype());
+    		mmp.setMsgTempalateCaption(o.getMsgTempalateCaption());
+    		mmp.setMsgTempalateContent(o.getMsgTempalateContent());
+    		mmp.setUpdateUser(o.getUpdateUser());
+    		mmp.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return mcMsgtempalateDao.save(mmp);
+    		
     	}else{//新增
     		if(mcMsgtempalateDao.exists("uniqueCode", o.getUniqueCode())){
     			throw new BusException("唯一码已经存在");
     		}
+    		o.setCreateUser(o.getUpdateUser());
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return mcMsgtempalateDao.save(o);
     	}
-		if(!MessageTempCode.contant(o.getUniqueCode())){
-			throw new BusException("唯一码不存在存在");
-		}
-    	return mcMsgtempalateDao.save(o);
+//		if(!MessageTempCode.contant(o.getUniqueCode())){
+//			throw new BusException("唯一码不存在存在");
+//		}
     }
 
     /**
