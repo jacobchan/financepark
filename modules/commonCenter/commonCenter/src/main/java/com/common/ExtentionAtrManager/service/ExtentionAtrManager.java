@@ -1,5 +1,6 @@
 package com.common.ExtentionAtrManager.service;
 
+import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.service.BaseManager;
@@ -46,5 +47,26 @@ public interface ExtentionAtrManager extends BaseManager {
 	 * @throws BusException
 	 */
 	public void setLawserverExtendValue(PurchasingmanagerCommodity commdity)
+			throws BusException;
+	/**
+	 * 根据会议室订单获取会议室订单的扩展属性的内容
+	 * @param order
+	 * @throws BusException
+	 */
+	public void setMeetingOrderExtendValue(OrdermanagerUserorder order)
+			throws BusException;
+	/**
+	 * 根据车辆租赁订单获取订单的扩展属性的内容
+	 * @param order
+	 * @throws BusException
+	 */
+	public void setCarOrderExtendValue(OrdermanagerUserorder order)
+			throws BusException;
+	/**
+	 * 根据广告位订单获取订单的扩展属性的内容
+	 * @param order
+	 * @throws BusException
+	 */
+	public void setAdsenseOrderExtendValue(OrdermanagerUserorder order)
 			throws BusException;
 }

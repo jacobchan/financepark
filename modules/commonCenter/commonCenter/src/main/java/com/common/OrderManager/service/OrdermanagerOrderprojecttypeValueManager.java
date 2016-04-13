@@ -12,7 +12,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.common.OrderManager.entity.OrdermanagerOrderprojecttypeValue;
 
 public interface OrdermanagerOrderprojecttypeValueManager extends BaseManager{
@@ -63,4 +62,21 @@ public interface OrdermanagerOrderprojecttypeValueManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitOrdermanagerOrderprojecttypeValue(String propertyName,Object value) throws BusException;
+	/**
+	 * 根据订单ID获取订单扩展属性列表
+	 * @param userorderId
+	 * @return
+	 * @throws BusException
+	 */
+	public List<OrdermanagerOrderprojecttypeValue> getOovListByOrder(String userorderId)
+			throws BusException;
+	/**
+	 * 根据字段名称和订单ID获取唯一扩展属性
+	 * @param fieldName
+	 * @param orderId
+	 * @return
+	 * @throws BusException
+	 */
+	public OrdermanagerOrderprojecttypeValue getOovExtend(String fieldName,
+			String orderId) throws BusException;
 }
