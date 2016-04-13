@@ -601,4 +601,28 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     	
     	return order;
     }
+    
+    
+    /**
+  	 * 	通过code，状态,查询订单
+  	 * @param userId
+  	 * @param genreCode
+  	 * @param userorderStatus
+  	 * @return
+  	 * @throws BusException
+  	 */
+      @EsbServiceMapping
+  	public List<OrdermanagerUserorder> getOrderlistforPage( @ServiceParam(name="userId",pubProperty="userId") String userId,
+  			@ServiceParam(name="genreCode") String genreCode,@ServiceParam(name="userorderStatus") String userorderStatus) throws BusException {
+      	PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode",genreCode);
+      	Collection<Condition> condition = new ArrayList<Condition>();
+      	MemberInformation member=memberInformationManager.getMemberInformation(userId);
+  		String memberId=member.getMemberId();
+  		condition.add(ConditionUtils.getCondition("memberId", Condition.EQUALS, memberId));
+  		condition.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, pg.getGenreId()));
+  		condition.add(ConditionUtils.getCondition("userorderStatus", Condition.EQUALS, userorderStatus));
+  		List<OrdermanagerUserorder> list =ordermanagerUserorderDao.commonQuery(condition, null);
+  		return list;
+  	}		
+    
 }
