@@ -51,11 +51,11 @@
 										</tr>
 										<tr>
 											<th>活动地点</th>
-											<td><input type="text" id="applyOrderNumber"></td>
+											<td><input type="text" id="activityAdr"></td>
 										</tr>
 										<tr>
 											<th>活动内容</th>
-											<td><textarea id="editorproductDiscriptio" name="productDiscriptio" cols="20" rows="5" class="ckeditor"></textarea></td>
+											<td><textarea id="editorproductDiscriptio" name="editorproductDiscriptio" cols="20" rows="5" class="ckeditor"></textarea></td>
 										</tr>
 										<tr>
 											<td></td>
@@ -89,7 +89,7 @@
 											<td></td>
 										</tr>
 										<tr>
-											<td colspan="2">
+											<!-- <td colspan="2">
 												<div class="gr-czh-list">
 					                                <img src="../styles/images/czh/list-5.jpg" height="114" width="202">
 					                                <h3><a href="" class="c-333">孩子不宜过早玩的10种运动</a></h3>
@@ -115,7 +115,7 @@
 					                                <h3><a href="" class="c-333">孩子不宜过早玩的10种运动</a></h3>
 					                                <p class="f12 mb5"><a href="javascript:;" class="c-b1 ml5 mr10">编辑</a> <a href="javascript:;" class="c-b1">删除</a></p>
 					                            </div>
-											</td>
+											</td> -->
 										</tr>
 									</tbody>
 								</table>
@@ -131,8 +131,8 @@
 										<col width="23.5%"></col>
 										<col></col>
 									</colgroup>
-									<tbody>
-										<tr align="center" class="f14 c-333">
+									<tbody class="activeroom">
+										<!-- <tr align="center" class="f14 c-333">
 											<td colspan="2">地点</td>
 											<td>时间</td>
 											<td>价格</td>
@@ -158,7 +158,7 @@
 											<td>2016-03-12 08:00 - 18:00</td>
 											<td>588</td>
 											<td><a href="" class="c-333">查看场地详情</a></td>
-										</tr>
+										</tr> -->
 									</tbody>
 								</table>
 								<a href="javascript:;" class="ib-btn tc ml20 mr30 mb30" style="width:110px;" id="submit">保存</a>
@@ -168,7 +168,14 @@
 						
                     </div>  
 				</div>
+				
 			</youi:body>
+			<div class="toast">
+		        	<div class="toast-con clearfix">
+		            	<div class="close-toast fr"></div>
+		           	 <p class="tc mt25 f18" style="color:#ff6715">请登录后重试！</p>
+		        	</div>       
+   			</div>
 	<!--***bottom start****************************************-->
 	<!--***bottom end****************************************-->
 	<script type="text/javascript">
@@ -180,8 +187,10 @@
 			var deadline=$("#enddate").val();
 			var applyMaxuser=$("#applyMaxuser").val();
 			var imgUpload=$("#headImg").attr("src");
-			var applyOrderNumber = $("#applyOrderNumber").val();
+			var activityAdr = $("#activityAdr").val();
+			var applyOrderNumber = $('input[name="com"]:checked').attr("id");
 			var commentContent = editor.getData();
+		
 			
 			//检查是否有选择头像图片
 			var fileCount = uploader.files.length;
@@ -193,28 +202,37 @@
 					var response = $.parseJSON(info.response);
 	               	if ("0"==response.status){
 	               		imgUpload = response.fileUrl[0];
-	               		var params=['applyTitle='+applyTitle,'startTime='+startTime,'endTime='+endTime,'deadline='+deadline,'applyMaxuser='+applyMaxuser,'applyOrderNumber='+applyOrderNumber,'commentContent='+commentContent,'activityImage='+imgUpload,];
+	               		//var params=['applyTitle='+applyTitle,'startTime='+startTime,'endTime='+endTime,'deadline='+deadline,'applyMaxuser='+applyMaxuser,'applyOrderNumber='+applyOrderNumber,'activityImage='+imgUpload,'commentContent='+commentContent];
 	    				//保存
-	    				$.ajax({
+	    				$.youi.ajaxUtils.ajax({
 	    					url:baseUrl+'activityApplyManager/saveActivityApplyForPage.json',
-	    					data:params.join('&'),
+	    					data:{applyTitle:applyTitle,startTime:startTime,endTime:endTime,deadline:deadline,applyMaxuser:applyMaxuser,activityAdr:activityAdr,applyOrderNumber:applyOrderNumber,activityImage:imgUpload,commentContent:commentContent},
 	    					success:function(result){
 	    						if(result&&result.record){
-	    							alert("发布成功");
+	    							//alert("发布成功");
+	    							clearInterval(timer);
+									$(".tc.mt25").text("发布成功！");
+					           		$(".toast").show();
+					           		pltime=1;
+					           		timer=setInterval("closeTanc()",1000);
 	    						}
 	    					}
 	    				});
 	               	}
 				});
 			}else{
-				var params=['applyTitle='+applyTitle,'startTime='+startTime,'endTime='+endTime,'deadline='+deadline,'applyMaxuser='+applyMaxuser,'applyOrderNumber='+applyOrderNumber,'commentContent='+commentContent,'activityImage='+imgUpload,];
+				//var params=['applyTitle='+applyTitle,'startTime='+startTime,'endTime='+endTime,'deadline='+deadline,'applyMaxuser='+applyMaxuser,'applyOrderNumber='+applyOrderNumber,'activityImage='+imgUpload,'commentContent='+commentContent];
 				//保存
-				$.ajax({
+				$.youi.ajaxUtils.ajax({
 					url:baseUrl+'activityApplyManager/saveActivityApplyForPage.json',
-					data:params.join('&'),
+					data:{applyTitle:applyTitle,startTime:startTime,endTime:endTime,deadline:deadline,applyMaxuser:applyMaxuser,activityAdr:activityAdr,applyOrderNumber:applyOrderNumber,activityImage:imgUpload,commentContent:commentContent},
 					success:function(result){
 						if(result&&result.record){
-							alert("发布成功");
+							clearInterval(timer);
+							$(".tc.mt25").text("发布成功！");
+			           		$(".toast").show();
+			           		pltime=1;
+			           		timer=setInterval("closeTanc()",1000);
 						}
 					}
 				});
@@ -359,8 +377,86 @@
 				$(this).addClass("active");
 				$(".fb-list-box").eq($(this).index()).show().siblings().hide();
 			});
-    		var editor = CKEDITOR.replace('editorproductDiscriptio');
-	  		editor.updateElement();
-    	
     </script>
+    
+    <script type="text/javascript">
+		$(function(){
+			$.ajax({
+				url:baseUrl+'/ordermanagerUserorderManager/getOrderlistforPage.json',
+				data:['userorderStatus=01','genreCode=0301'].join('&'),
+				success:function(result){
+					if(result&&result.records){
+						roomRecords(result.records);
+					}
+				}
+			});
+		});
+	
+	//拼接会议室
+	function roomRecords(record){
+		$(".activeroom").empty();
+	  	var ht = "<tr align='center' class='f14 c-333'><td colspan='2'>地点</td>"+
+		"<td>时间</td><td>价格</td><td>操作</td></tr>";
+		$(".activeroom").append(ht);
+		
+		for(var i=0;i<record.length;i++){
+			var html="";
+			if(i==0){
+				html+="<tr><td><input type='checkbox' name='com' id="+record[i].userorderId+"></td><td align='left' style='padding-left: 50px;'>"+record[i].userorderProject+"</td>"+
+				"<td>2016-03-12 08:00 - 18:00</td><td>"+record[i].userorderAmount+"元/小时</td>"+
+				"<td><a href='"+proUrl+"companyservice/room.html' class='c-333'>查看场地详情</a></td></tr>";
+			}else{
+				html+="<tr><td><input type='checkbox' name='com' id="+record[i].userorderId+"></td><td align='left' style='padding-left: 50px;'>"+record[i].userorderProject+"</td>"+
+				"<td>2016-03-12 08:00 - 18:00</td><td>"+record[i].userorderAmount+"元/小时</td>"+
+				"<td><a href='"+proUrl+"companyservice/room.html' class='c-333'>查看场地详情</a></td></tr>";
+			}
+			$(".activeroom").append(html);
+			//aa();
+		}
+		
+
+	}
+	</script>
+	<script type="text/javascript">
+		var editor = CKEDITOR.replace('editorproductDiscriptio');
+		editor.updateElement();
+		$(document).on("click",".activeroom input",function(){
+                if($(this).attr('checked')){
+                    //$(this).attr('checked',true).siblings().attr('checked',false);
+                    //$(this).attr('checked',false);
+                    $(this).attr('checked',false);
+                 // $(".activeroom input").siblings().attr('checked',false);
+             
+                    
+                }else{
+                	$(this).attr('checked',true);
+                	//$(".activeroom input").siblings().attr('checked',false);
+               
+				
+                }
+ 
+        });
+	</script>
+	<script type="text/javascript">
+		//toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
+		 var pltime,timer;
+		 function closeTanc(){
+		     if(pltime>1){
+		         pltime--;
+		     }else{
+		         $(".toast").hide();
+		     }       
+		 };
+		 //关闭toast
+	        $(".close-toast").click(function(){
+	            $(".toast").hide();
+	        });
+		 //调用方法如下，哪里调用就放哪里
+		 /**
+		     clearInterval(timer);
+		     $(".toast").show();
+		     pltime=1;
+		     timer=setInterval("closeTanc()",1000);
+		 */
+	</script>
 </youi:html>
