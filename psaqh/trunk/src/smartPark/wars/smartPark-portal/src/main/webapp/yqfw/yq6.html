@@ -264,7 +264,15 @@
 				});
 			});
 		function addressRecords(record){
-			var html = "<p class='mb10'><label><input type='radio' name='address' class='mr5' checked='checked' value='0'>默认地址:"+record.rz.roomId.roomAddress+"</label></p>"+
+			var add =""; 
+			var room = record.rz.roomId.roomAddress;
+			if(room!=''&&room!=null){
+				add = room;
+			}else{
+				add = "无默认地址";
+			}
+			
+			var html = "<p class='mb10'><label><input type='radio' name='address' class='mr5' checked='checked' value='0'>默认地址:"+add+"</label></p>"+
 			"<p class='mb10'><label><input type='radio' name='address' class='mr5'>其他地址</label></p>"+
 			"<p class='mb10'><input type='text' name='otheraddress' class='input-show undis' placeholder='科技园a7'></p>";
 			$(".sel-add").append(html);
