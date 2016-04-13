@@ -31,9 +31,9 @@
 							<tr>
 								<td>
 									<p class="c-333 f14">订单内容</p>
-									<p>订单日期：<span class="c-o" id="publicResoIdDate"></span></p>
+									<p>预订日期：<span class="c-o" id="publicResoIdDate"></span></p>
 									<div id="contextlist">
-										<p>预定时段：</p>
+										<p>预订时段：</p>
 									</div>
 								</td>
 							</tr>
