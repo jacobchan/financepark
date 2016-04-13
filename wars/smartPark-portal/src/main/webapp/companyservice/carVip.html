@@ -2,20 +2,33 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>会议室预定</title>
+<title>车位预定</title>
 <link href="../styles/page/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 <link href="../styles/base.css" type="text/css" rel="stylesheet">
 <link href="../styles/page/page.css" type="text/css" rel="stylesheet">
+
+
+<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
+<script type="text/javascript" src="../scripts/page/newscom.js"></script>
+<script type="text/javascript" src="../scripts/page/kefu.js"></script>
+<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
+<script type="text/javascript" src="../scripts/page/url.js"></script>
+<script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
+<script type="text/javascript" src="../scripts/page/jquery.page.js"></script>
+
 </head>
 
 <body>
-<div id="youi_page_header" class="youi-page-header clearfix" dataType="3" dataId="2"></div>
+<div id="youi_page_header" class="youi-page-header clearfix"></div>
 <!--***top end****************************************-->
 <!--content-->
 <div class="w1200 pt20">
 	<ul class="linknav clearfix">
     	<li><a href="#">首页</a></li>
-        <li><a href="#">园区服务</a></li>
+        <li><a href="#">企业服务</a></li>
         <li class="active"><a href="#">公共资源</a></li>
     </ul>
     <div class="resbox clearfix">
@@ -40,16 +53,16 @@
                     </colgroup>
                     <tbody><tr id="">
                         <td align="center">企业名称</td>
-                        <td><input id="user" type="text"></td>
+                        <td><input id="cpEnName" type="text"></td>
                         <td align="center">联系人</td>
-                        <td><input id="user" type="text"></td>
+                        <td><input id="cpLinkMan" type="text"></td>
                     </tr>
                     <tr>
-                        <td align="center">公司楼栋</td>
-                        <td><input id="iphone" type="text"></td>
+                        <td align="center">公司地址</td>
+                        <td><input id="cpEnAdr" type="text"></td>
                         <td align="center">联系方式</td>
                         <td>
-                            <input type="text">
+                            <input type="text" id="cpLinkTel">
                         </td>
                     </tr>
                     <tr>
@@ -59,7 +72,7 @@
                             <div class="fl ml10 select-time pr">
                                 <input placeholder="请选择时间" type="text"  style="width:180px;" >
                                  <div style="top:30px;" class="time-nav">
-                                    <ul>
+                                    <ul id="cpBegionTime">
                                         <li>08:00</li>
                                         <li>09:00</li>
                                         <li>10:00</li>
@@ -83,7 +96,7 @@
                             <div class="fl ml10 select-time pr">
                                 <input placeholder="请选择时间" type="text" style="width:180px;">
                                  <div style="top:30px;" class="time-nav">
-                                    <ul>
+                                    <ul id="cpEntdTime">
                                         <li>08:00</li>
                                         <li>09:00</li>
                                         <li>10:00</li>
@@ -102,11 +115,14 @@
                     </tr>
                     <tr>
                         <td align="center" valign="top">车位数量</td>
-                        <td colspan="3"><input type="text" style="width:120px;"><p class="f12 cc mt15">费用说明：25元／小时</p></td>
+                        <td colspan="3"><input type="text" id="cpCount" style="width:120px;"><p class="f12 cc mt15">费用说明：25元／小时</p></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input value="在线预订" class="btn-cheng" type="submit" style="width:120px;height:40px;"></td>
+                        <td>
+                        	<input value="在线预订" id="sub" class="btn-cheng"  type="submit" style="width:120px;height:40px;">
+                        	<p class="f16 cc mt15" id="submsg" style="display:none">请登录后，提交预约!</p>
+                        </td>
                     </tr>
                 </tbody></table> 
             </div>
@@ -131,19 +147,10 @@
 
 <!--******************  code end  ****************************-->
 
-<script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
-<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
-<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
-<script type="text/javascript" src="../scripts/page/newscom.js"></script>
-<script type="text/javascript" src="../scripts/page/kefu.js"></script>
-<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
-<script type="text/javascript" src="../scripts/page/url.js"></script>
-<script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
-<script type="text/javascript" src="../scripts/page/jquery.page.js"></script>
 
 
     <script type="text/javascript">
+     
         $(function(){
             $(document).on("click",".ru-options li" ,function(){
                 $(this).addClass("active").siblings().removeClass("active");
@@ -187,7 +194,126 @@
             };
             laydate(start);
             laydate(end);
-        })
+            
+           
+         	
+	   		//关闭提示div	
+            $(".close").click(function(){
+            	$(".pop_layer.pl1").hide();
+            });
+            $(".close-toast").click(function(){
+            	$(".toast").hide();
+           	});
+            
+            //提交方法
+            $("#sub").click(function(){
+            	if (!isLogin) {
+					$("#msg").text("请登录后重试！");
+		            $(".toast").show();
+					return;
+				} 
+            	var cpEnName = $("#cpEnName").val();
+            	var cpLinkMan = $("#cpLinkMan").val();
+            	var cpLinkTel = $("#cpLinkTel").val();
+            	var cpCount = $("#cpCount").val();
+            	var cpEntdTime = $("#endTime").val()+" "+$("#cpEntdTime").find("li.selected").html();
+            	var cpBegionTime = $("#startTime").val()+" "+$("#cpBegionTime").find("li.selected").html();
+            	var cpEnAdr = $("#cpEnAdr").val();
+            	if(cpEnName==''){
+            		$("#msg").text("请填写企业名称");
+		            $(".toast").show();
+					return;
+            	}else if(cpLinkMan==''){
+            		$("#msg").text("请填写联系人");
+		            $(".toast").show();
+					return;
+            	}else if(cpLinkTel==''){
+            		$("#msg").text("请填写联系方式");
+		            $(".toast").show();
+					return;
+            	}else if(cpCount==''){
+            		$("#msg").text("请填写车位数");
+		            $(".toast").show();
+					return;
+            	}else if(cpEnAdr==''){
+            		$("#msg").text("请填写公司地址");
+		            $(".toast").show();
+					return;
+            	}
+            	//提交
+            	var params = ['cpEnName='+cpEnName,'cpLinkMan='+cpLinkMan,'cpLinkTel='+cpLinkTel,'cpCount='+cpCount,'cpEntdTime='+cpEntdTime,'cpBegionTime='+cpBegionTime,'cpEnAdr='+cpEnAdr];
+            	var serviceURL = baseUrl+"carportManager/saveCarport.json";
+            	$.youi.ajaxUtils.ajax({
+	            	url : serviceURL,
+					data : params.join('&'),
+					jsonp : 'data:jsonp',
+					dataType : 'jsonp',
+					success : function(result) {
+						$(".pop_layer.pl1").show();
+					},error:function(XMLHttpRequest, textStatus, errorThrown){
+						alert(XMLHttpRequest);
+					}
+            	});	
+            });
+        });
+        //获得公司名字
+        function _parseRecords(record){
+			var rzId=record.companyId;
+			var params = ['rzId='+rzId];
+			var serviceURL = baseUrl+'enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json';
+			$.youi.ajaxUtils.ajax({
+		    url : serviceURL,
+			data : params.join('&'),
+			jsonp : 'data:jsonp',
+			dataType : 'jsonp',
+			success : function(result) {
+				if(result&&result.record){
+					$("#cpEnName").val(result.record.rzName);
+				}
+			},error:function(XMLHttpRequest, textStatus, errorThrown){
+				alert(XMLHttpRequest);
+			}
+		  	});	
+		};
+		
+		
+		window.onload=function(){
+			// 获取登录信息
+ 	   		$.youi.ajaxUtils.ajax({
+			url:baseUrl+'memberInformationManager/getMemberInformationByLoginUser.json',
+			jsonp : 'data:jsonp',
+			dataType : 'jsonp',
+			success:function(result){
+				if(result&&result.record){
+					_parseRecords(result.record);
+				}
+			}
+			});
+		}
     </script>
+    
+    <!-- 弹出层样式 -->
+    <div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715" id="msg">请登录后重试！</p>
+        </div>
+    </div>
+    
+     <!-- 弹窗 -->
+    <div class="pop_layer pl1">
+        <div class="online_box clearfix" style="width:550px;height:212px;margin-left:-275px;margin-top:-111px;padding:30px;">
+            <div class="close0 fr"></div>
+            <table class="w100 mt40 c3">
+                <tr>
+                    <td width="28%" align="right" class="close"><img src="../styles/images/grzx/check.png" class="mr40 mb20" border="0"></td>
+                    <td >
+                        <h4 class="f24 c-333"> 您已预约成功！</h4>
+                        <p class="f14 cc mt20 mb20">如有问题，请拨打：0571-86508888</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </body>
 </html>
