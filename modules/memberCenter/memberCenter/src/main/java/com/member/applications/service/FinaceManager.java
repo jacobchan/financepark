@@ -3,8 +3,9 @@
  */
 package com.member.applications.service;
 
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -12,7 +13,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.member.applications.entity.Finace;
 
 public interface FinaceManager extends BaseManager{
@@ -63,4 +63,18 @@ public interface FinaceManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitFinace(String propertyName,Object value) throws BusException;
+	
+	/**
+   	 * 融资申请页面加载开始获取公司名称和主页地址
+   	 * 根据登录信息里面的企业ID进行查找
+   	 * @param userId
+   	 * @return
+   	 */
+   	public List<Map<String,String>> getCompanyData(String userId)  throws BusException;
+   	
+	/**
+	 * 融资申请
+	 * @return
+	 */
+	public Finace goSaveFinace(Finace o)  throws BusException;
 }
