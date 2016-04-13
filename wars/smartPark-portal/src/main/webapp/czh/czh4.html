@@ -151,6 +151,47 @@
 		</div>
 	</div>
 	<!--***bottom start****************************************-->
+	<!-- 弹窗  start-->
+	
+	<div class="toast">
+        <div class="toast-con clearfix">
+            	<div class="close-toast fr"></div>
+           	 <p class="tc mt25 f18" style="color:#ff6715">请登录后重试！</p>
+        	</div>       
+    </div>
+	
+	<div class="bg-tanc">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:400px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<h3 class="mb10 f20 c-333"><b>活动报名</b></h3>
+			<table class="line-table cic-l-t wybx-tanc" style="font-size:12px;">
+				<colgroup>
+					<col width="60%">
+					<col>
+				</colgroup>
+				<tbody>
+				<tr>
+					<td colspan="2"><input type="text" id="applyMember" placeholder="请输入真实姓名" style="width:100%"></td>
+				</tr>
+				<tr class="show2">
+					<td><input type="text"  id="applyPhone" placeholder="请输入有效的手机号码" style="width:100%"></td>
+					<!-- <td style="padding-left:10px;">
+						<a href="javascript:;" class="send-psw" style="width:100%">发送验证码</a>
+					</td> -->
+				</tr>
+				<!-- <tr>
+					<td colspan="2">
+						<input type="text" placeholder="请输入验证码" style="width:100%">
+						<p style="color:#e04648" class="f12 mt5 undis">验证码错误，请重新输入验证码</p>
+					</td>
+				</tr> -->
+				<tr>
+					<td colspan="2"><input type="button" class="ib-btn bm" style="width:100%;margin-top:0px;" value="报名"></td>
+				</tr>
+			</tbody></table>
+		</div>
+	</div>
+	<!-- 弹窗  end -->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
 	<script type="text/javascript">
@@ -208,14 +249,13 @@
 	//拼接活动数据列表
 	function parseActivityList(typeId){
 		var params = ['applayType.typeId='+typeId];
-		var serviceURL = baseUrl+"activityApplyManager/getActivityListByType.json";		
+		var serviceURL = baseUrl+"activityApplyManager/getActivityListByType.json";	
 		$.youi.ajaxUtils.ajax({
 			url:serviceURL,
 			jsonp:'data:jsonp',
 			data:params.join('&'),
 			dataType:'jsonp',
 			success:function(results){
-				console.log(results);
 				if(results&&results.records){
 				_parseRecords(results.records);
 				}
@@ -228,7 +268,7 @@
 		for(var i=0;i<record.length;i++){
 			html+="<li onclick='openPage(this)' id='"+record[i].applyId+"'>"+
 						"<div class='plg-photo'>"+
-							"<a href='#'><img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityImage+"&method=show' border='0' width='100%''/></a>"+
+							"<a href='#'><img src='"+cenUrl+"filestore/"+record[i].activityImage+"' border='0' width='100%''/></a>"+
 							"<em>"+record[i].applayType.typeName+"</em>"+
 							"</div>"+
 							"<div class='plg-article pr'>"+
@@ -240,7 +280,7 @@
 									"<div class='fr' >"+
 										"<span class='mr15'><img src='../styles/images/zs/user.png' border='0' class='mr10'>限制人数"+record[i].applyMaxuser+"人</span>|"+
 										"<span class='ml15 mr15'><img src='../styles/images/czh/heart-h.png' border='0' class='mr10'>2459</span>"+
-										"<a href='javascript:;' class='ib-btn' style='margin-top:0px;'>我要报名</a>"+
+										"<a href='javascript:;' class='ib-btn acc' style='margin-top:0px;'>我要报名</a>"+
 									"</div>"+
 								"</div>"+
 							"</div></a>"+
@@ -248,6 +288,16 @@
 		}
 		$('.pb-list-group').empty();
 		$('.pb-list-group').append(html);
+		$(".ib-btn.acc").click(function(e){
+			$(".bg-tanc").attr("id",$(this).parents("li").attr("id"));
+			$("#applyMember").val('');
+			$("#applyPhone").val('');
+			$(".bg-tanc").show();
+			e.stopPropagation();	
+		});
+		$(".tc-close").click(function(){
+			$(".bg-tanc").hide();
+		});
 	}
 	function redirectPage(obj){
 		var applyId=obj.id;
@@ -259,6 +309,83 @@
 		var url="../czh/czh3.html"+"?"+"applyId="+applyId; 
 		window.open(url); 
 	}
+	
 	</script>	
+	<script type="text/javascript">
+	//报名提交
+	$('.ib-btn.bm').click(function(){
+		  if(!isLogin){
+			   clearInterval(timer);
+	            $(".toast").show();
+	            pltime=2;
+	            timer=setInterval("closeTanc()",1000);
+			 	 return false;
+			}
+		  	var applyId = $(".bg-tanc").attr("id");
+		 	var applyMember=$("#applyMember").val();
+			var applyPhone=$("#applyPhone").val();
+			if(!isMobil(applyPhone)){
+				clearInterval(timer);
+				$(".tc.mt25").text("请输入正确的手机号！");
+	           	$(".toast").show();
+	           	pltime=1;
+	           	timer=setInterval("closeTanc()",1000);
+				return false;
+			}
+			var serviceURL = baseUrl+"activityApplylistManager/saveActivityApplylistForPage.json";
+			var params = ['activityApply.applyId='+applyId,'applyMember='+applyMember,'applyPhone='+applyPhone];
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(results){
+					if(results&&results.record){
+						clearInterval(timer);
+						$(".tc.mt25").text("报名成功!");
+			         	$(".toast").show();
+			         	pltime=2;
+			         	timer=setInterval("closeTanc()",1000);
+			         	$(".bg-tanc").hide();
+					}else{
+						clearInterval(timer);
+						$(".tc.mt25").text("您已报名成功!");
+			         	$(".toast").show();
+			         	pltime=2;
+			         	timer=setInterval("closeTanc()",1000);
+			         	$(".bg-tanc").hide();
+					}
+				}
+			});			  
+	});
+	//校验手机号格式
+	function isMobil(s) {
+	    	var patrn = /^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+	   		if (!patrn.exec(s)) return false
+	   	 	return true
+		}
+	</script>
+	<script type="text/javascript">
+		//toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
+		 var pltime,timer;
+		 function closeTanc(){
+		     if(pltime>1){
+		         pltime--;
+		     }else{
+		         $(".toast").hide();
+		     }       
+		 };
+		 //关闭toast
+	        $(".close-toast").click(function(){
+	            $(".toast").hide();
+	        });
+		 //调用方法如下，哪里调用就放哪里
+		 /**
+		     clearInterval(timer);
+		     $(".toast").show();
+		     pltime=1;
+		     timer=setInterval("closeTanc()",1000);
+		 */
+</script>
 </body>
 </html>
