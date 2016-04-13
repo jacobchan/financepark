@@ -3,13 +3,18 @@
  */
 package com.manage.ActivityManager.entity;
 
-import javax.persistence.*;
-
-import org.hibernate.validator.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.Length;
 
-import com.common.MemberAdrManager.entity.MemberadrAddress;
 import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
@@ -107,6 +112,14 @@ public class ActivityApply implements Domain{
 	
 	
 	
+	public String getActivityAdr() {
+		return activityAdr;
+	}
+
+	public void setActivityAdr(String activityAdr) {
+		this.activityAdr = activityAdr;
+	}
+
 	public com.manage.ActivityManager.entity.ApplayType getApplayType() {
 		return applayType;
 	}
