@@ -40,7 +40,8 @@
 		firstCss : 'first', //起始样式
 		lastCss : 'last', //结束样式
 		clickCss : 'today', //点击样式
-        disableGray : 'dateRangeWhite', // 非当前月的日期样式
+        disableGray : 'dateRangeGray', // 非当前月的日期样式
+        noneMonth:'dateRangeWhite', //展示的表格中非当前日期的样式
         isToday : 'dateRangeToday', // 今天日期的样式
         joinLineId : 'joinLine',
         isSingleDay : false,
@@ -82,9 +83,9 @@
     // 记录初始默认时间
     this.startDefDate = '';
     // 随机ID后缀
-    var suffix = '';
+    var suffix = '' == this.mOpts.suffix ? (new Date()).getTime() : this.mOpts.suffix;
     // 日期选择框DIV的ID
-    this.calendarId = 'calendar';
+    this.calendarId = 'calendar_' + suffix;
     // 日期列表DIV的ID
     this.dateListId = 'dateRangePicker_' + suffix;
     // 日期比较层
@@ -370,6 +371,7 @@
 								'endCompareDate':$('#' + __method.mOpts.endCompareDateId).val()
 								});
     });
+
     // 初始化开始
     this.init();
 	this.show(false, __method);
@@ -419,6 +421,7 @@ pickerDateRange.prototype.init = function(isCompare) {
 	var isNeedCompare = typeof(isCompare) != 'undefined'? isCompare && $("#" + __method.compareCheckboxId).attr('checked') : $("#" + __method.compareCheckboxId).attr('checked');
     // 清空日期列表的内容
     $("#" + this.dateListId).empty();
+	
     // 如果开始日期为空，则取当天的日期为开始日期
     var endDate = '' == this.mOpts.endDate ? (new Date()) : this.str2date(this.mOpts.endDate);
     // 日历结束时间
@@ -469,90 +472,34 @@ pickerDateRange.prototype.init = function(isCompare) {
 
     // 上一个月
     $('#' + this.preMonth).bind('click', function() {
-    	$("#month").html(__method.calendar_endDate.getMonth());
         __method.calendar_endDate.setMonth(__method.calendar_endDate.getMonth() - 1, 1);
         __method.mOpts.endDate = __method.date2ymd(__method.calendar_endDate).join('-');
-        
-        //根据商品id获取资源可用状态
-		$.youi.ajaxUtils.ajax({
-			url : serviceURL,
-			data:params.join('&'),
-			jsonp : 'data:jsonp',
-			dataType : 'jsonp',
-			async : false,
-			success : function(results) {
-				if (results && results.records) {
-					var records = results.records;
-					$("#resoIds").empty();
-					for(var i=0; i<records.length; i++){
-						if((Number(records[i].resoDate.substring(5,7)))==Number($("#month").html())){
-							//主键追加到隐藏域供预约使用
-							$("#resoIds").append(records[i].resoId+",");
-							if(records[i].resoStatus=='02'){
-								numArray.push(Number(records[i].resoDate.substring(records[i].resoDate.lastIndexOf("-")+1, records[i].resoDate.length)));
-							}
-						}else{
-							numArray.splice(i,numArray.length);
-						}
-					}
-				}
-				__method.mOpts.disCertainDate=numArray;
-				__method.init(isCompare);
-				//如果是单月选择的时候，要控制input输入框 added by johnnyzheng 2011-12-19
-				if(1 == __method.mOpts.calendars){
-					if('' == $('#' + __method.startDateId).val()){
-						__method.changeInput(__method.startDateId);
-					}
-					else{
-						__method.changeInput(__method.endDateId);
-					}
-				}
+        __method.init(isCompare);
+		//如果是单月选择的时候，要控制input输入框 added by johnnyzheng 2011-12-19
+		if(1 == __method.mOpts.calendars){
+			if('' == $('#' + __method.startDateId).val()){
+				__method.changeInput(__method.startDateId);
 			}
-		});	
+			else{
+				__method.changeInput(__method.endDateId);
+			}
+		}
         return false;
     });
     // 下一个月
     $('#' + this.nextMonth).bind('click', function() {
-    	$("#month").html(__method.calendar_endDate.getMonth()+2);
         __method.calendar_endDate.setMonth(__method.calendar_endDate.getMonth() + 1, 1);
         __method.mOpts.endDate = __method.date2ymd(__method.calendar_endDate).join('-');
-        
-        //根据商品id获取资源可用状态
-		$.youi.ajaxUtils.ajax({
-			url : serviceURL,
-			data:params.join('&'),
-			jsonp : 'data:jsonp',
-			dataType : 'jsonp',
-			async : false,
-			success : function(results) {
-				if (results && results.records) {
-					var records = results.records;
-					$("#resoIds").empty();
-					for(var i=0; i<records.length; i++){
-						if((Number(records[i].resoDate.substring(5,7)))==Number($("#month").html())){
-							//主键追加到隐藏域供预约使用
-							$("#resoIds").append(records[i].resoId+",");
-							if(records[i].resoStatus=='02'){
-								numArray.push(Number(records[i].resoDate.substring(records[i].resoDate.lastIndexOf("-")+1, records[i].resoDate.length)));
-							}
-						}else{
-							numArray.splice(i,numArray.length);
-						}
-					}
-				}
-				__method.mOpts.disCertainDate=numArray;
-				__method.init(isCompare);
-				//如果是单月选择的时候，要控制input输入框 added by johnnyzheng 2011-12-19
-				if(1 == __method.mOpts.calendars){
-					if('' == $('#' + __method.startDateId).val()){
-						__method.changeInput(__method.startDateId);
-					}
-					else{
-						__method.changeInput(__method.endDateId);
-					}
-				}
+		__method.init(isCompare);
+		//如果是单月选择的时候，要控制input输入框 added by johnnyzheng 2011-12-19
+		if(1 == __method.mOpts.calendars){
+			if('' == $('#' + __method.startDateId).val()){
+				__method.changeInput(__method.startDateId);
 			}
-		});
+			else{
+				__method.changeInput(__method.endDateId);
+			}
+		}
         return false;
     });
 	
@@ -1163,10 +1110,10 @@ pickerDateRange.prototype.fillDate = function(year, month, index) {
     var tdClass = '', deviation = 0, ymd = '';
     for(var d = dateBegin; d.getTime() <= dateEnd.getTime(); d.setDate(d.getDate() + 1)) {
         if(d.getTime() < firstDayOfMonth.getTime()) { // 当前月之前的日期
-            tdClass = this.mOpts.theme + '_' + this.mOpts.disableGray;
+            tdClass = this.mOpts.theme + '_' + this.mOpts.noneMonth;
             deviation = '-1';
         } else if(d.getTime() > lastDayOfMonth.getTime()) { // 当前月之后的日期
-            tdClass = this.mOpts.theme + '_' + this.mOpts.disableGray;
+            tdClass = this.mOpts.theme + '_' + this.mOpts.noneMonth;
             deviation = '1';
         } else if((this.mOpts.stopToday == true && d.getTime() < today.getTime()) || d.getTime() < __method.mOpts.minValidDate * 1000 || ('' !== __method.mOpts.maxValidDate && d.getTime() > __method.mOpts.maxValidDate * 1000)) { // 当前时间之后的日期，或者开启统计之前的日期
             tdClass = this.mOpts.theme + '_' + this.mOpts.disableGray;
@@ -1220,8 +1167,7 @@ pickerDateRange.prototype.fillDate = function(year, month, index) {
                 }
 
                 if ( isDisabled ){
-                    //tdClass = this.mOpts.theme + '_' + this.mOpts.disableGray;
-                	tdClass = "today";
+                    tdClass = this.mOpts.theme + '_' + this.mOpts.disableGray;
                     deviation = '4';
                 }
 
