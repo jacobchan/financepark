@@ -82,6 +82,13 @@
 			</div>
 		</div>
 	</div>
+	<div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
+        </div> 
+        
+    </div>
 	<!--***弹窗 end****************************************-->
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
@@ -192,7 +199,7 @@
 				data:'addressId='+me.id,
 				success:function(result){
 					me.remove();
-					alert("删除成功");
+					close("删除成功");
 				}
 			});
 		}
@@ -205,7 +212,7 @@
 				data:params.join('&'),
 				success:function(result){
 					if(result&&result.record){
-						location.reload();
+						close("设置成功");
 					}
 				}
 			}); 
@@ -328,7 +335,10 @@
 						if(results&&results.record){
 							$(".f24.fl.c-333").text("保存成功!");
 							$(".bg-tanc.m2").show();
-							location.reload();
+							//location.reload();
+							setTimeout(function(){$(".bg-tanc.m1").hide(); },100);
+							setTimeout(function(){$(".bg-tanc.m2").hide(); },1000);
+							refreshData(currentIndex,pageSize);
 						}
 					}
 				});
@@ -387,5 +397,12 @@
 			    if (!patrn.exec(s)){ return false;}
 			    else{return true;}
 			};
+			function close(content){		        
+		        $(".tc.mt25.f18").empty() ;
+		        $(".tc.mt25.f18").append(content) ;
+		        $(".toast").show();		      		        		       				
+				setTimeout(function(){$(".toast").hide(); },1000);
+				refreshData(currentIndex,pageSize);
+	      }
 	</script>
 </youi:html>
