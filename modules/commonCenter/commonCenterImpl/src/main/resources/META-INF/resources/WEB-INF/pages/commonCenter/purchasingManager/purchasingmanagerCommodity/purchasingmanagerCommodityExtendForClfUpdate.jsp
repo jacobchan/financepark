@@ -81,7 +81,7 @@
 		params = params+'commodityId='+commodityId+'&'+'commodityTitle='+commodityTitle+'&'+'commodityPrice='+commodityPrice+'&'+'clf.adr='+adr+'&'+
 		'genreId='+genreId+'&'+'commodityImage='+commodityImage+'&'+'commodityDescribe='+commodityDescribe;
 		$.youi.ajaxUtil.ajax({
-			url:'/esb/web/purchasingmanagerPublicManager/saveCommodityAndPropertyForGw.json',
+			url:'/esb/web/purchasingmanagerPublicManager/saveCommodityAndPropertyForClf.json',
 			data:params,
 			success:function(result){
 				var record = result.record;
