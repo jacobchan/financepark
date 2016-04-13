@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <title>会议室预定详情</title>
+<link href="../styles/page/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 <link href="../styles/base.css" type="text/css" rel="stylesheet">
 <link href="../styles/page/page.css" type="text/css" rel="stylesheet">
 <link href="../styles/page/fullcalendar.css" rel="stylesheet" type="text/css">
-<link href="../styles/page/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
 </head>
 
 <body>
-<div id="youi_page_header" class="youi-page-header clearfix"></div>
+<div id="youi_page_header" class="youi-page-header clearfix" dataType="3" dataId="2"></div>
 <!--***top end****************************************-->
 <!--content-->
 <div class="bgf1">
@@ -569,7 +569,9 @@ var commodityId;
 			   		if (!patrn.exec(s)) return false
 			   	 	return true
 				}
+                
 		});
+
 		  
 		 $(".tc-close").click(function(){     
             $(".bg-tanc").hide(); 

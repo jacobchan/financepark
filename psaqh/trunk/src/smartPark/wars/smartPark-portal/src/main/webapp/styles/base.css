@@ -240,13 +240,12 @@ input{font-family:"微软雅黑";}
 .brcd .pa:before{content: "";display: inline-block;position: absolute;border: 7px transparent solid;border-bottom-color: #fff;top:-14px;left:50%;margin-left: -7px}
 .brcd:hover{color: #fff;}
 .brcd:hover .pa{display: block}
-.brcd .wximg{right:150px;}
-.brcd .apptel{width: 140px;right: 80px;}
+.brcd .wximg{right:145px;}
+.brcd .apptel{width: 140px;right: 70px;}
 .brcd .apptel h3{color: #333;font-size: 12px;line-height: 40px;}
 .brcd .apptel a{text-align: left;width: 104px;height: 30px;padding-left: 10px;background: #ff6715;color: #fff;display: block;line-height: 30px;margin:0px auto 10px ;}
 .brcd .apptel a:hover{background: #FF5900;}
-.brcd .fwtel{width: 200px;right:155px;}
-.brcd .fwtel:before{left: 30%;}
+.brcd .fwtel{width: 230px;right:175px;}
 .brcd .fwtel p{text-align: center;font-size: 12px;line-height: 38px;color: #333;}
 
 
