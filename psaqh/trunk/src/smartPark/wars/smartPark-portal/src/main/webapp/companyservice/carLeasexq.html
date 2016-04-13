@@ -3,10 +3,12 @@
 <head>
 <meta charset="utf-8">
 <title>车辆租凭详情</title>
+<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
 <link href="../styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 <link href="../styles/base.css" type="text/css" rel="stylesheet">
 <link href="../styles/page/page.css" type="text/css" rel="stylesheet">
 <link href="../styles/page/dateRange.css" rel="stylesheet" type="text/css">
+
 </head>
 
 <body>
@@ -22,7 +24,7 @@
         <li class="active"><a href="carLeasexq.html">车辆租凭详情</a></li>
     </ul>
     <div class="mt30 clearfix">
-    	<div class="fl ml10"><!-- <img src="../styles/images/company/eg.png"/> --></div>
+    	<div class="fl ml10" id="picUrl"><!-- <img src="../styles/images/company/eg.png"/> --></div>
         <div class="carxq fl">
         	<span class="span_bold f20" id="commodityName"></span>
             <div class="mt20 mb20">
@@ -179,10 +181,11 @@
 	}); 
 </script>
 <script>
+var commodityId;
 	$(function() {
 		var Request = new Object();
 		Request = GetRequest();
-		var commodityId = Request['id'];
+		commodityId = Request['id'];
 		var genreCode='0302';
 		var params = ['commodityId='+commodityId,'genreCode='+genreCode];
 		var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommoditys.json";
@@ -198,7 +201,7 @@
 					if(records[0].commodityImage !=null && records[0].commodityImage!=""){
 						   imageUrl=cenUrl+"common/uploadImage.html?repository=/swfupload&path="+records[0].commodityImage+"&method=show";
 					}
-					$('.ml10').append("<img src='"+imageUrl+"' height='261' width='385'/>");
+					$('#picUrl').append("<img src='"+imageUrl+"' height='261' width='385'/>");
 					$('#commodityName').text(records[0].commodityTitle);
 					$('#commodityPrice').text(records[0].commodityPrice);
 					$('#commodityDescribe').html(records[0].commodityDescribe);
@@ -297,16 +300,19 @@
 						    	driver=true;
 					          }
 							if(reserveName ==null||reserveName==""){
-								alert("请填联系人");
+								$("#msg").text("请填联系人");
+								$(".toast").show();
 								return;
 							}
 							if(reserveTel ==null||reserveTel==""){
-								alert("请填联系人电话");
+								$("#msg").text("请填联系人电话");
+								$(".toast").show();
 								return;
 							}else if(isMobil(reserveTel)){
        							
        						}else{
-       							alert("电话格式不正确！");
+       							$("#msg").text("电话格式不正确！");
+								$(".toast").show();
        							return false;
        						}
 							if (arr.length > 0) {
@@ -329,11 +335,18 @@
 									success : function(result) {
 										if (result && result.record) {
 											$(".pop_layer").hide();
-											$(".pop_layer.pl1").show();
-											window.location="carLeasexq.html?id="+commodityId;
+											$(".bg-tanc.m1").show();
+											$('#ti-m1').text('5');
+											a=5;
+											timer1=setInterval("jump1()",1000);
 										}
 									},error:function(XMLHttpRequest, textStatus, errorThrown){
-										alert(XMLHttpRequest);
+										$(".pop_layer").hide();
+										$("#errorText").text(XMLHttpRequest);
+										$(".bg-tanc.m2").show();
+										$('#ti-m2').text('5');
+										b=5;
+										timer2=setInterval("jump2()",1000);
 									}
 								});  
 							} else {
@@ -349,9 +362,42 @@
 								}
 							
 						});
+		  
+        $(".tc-close").click(function(){     
+            $(".bg-tanc").hide(); 
+            clearInterval(timer1);
+            clearInterval(timer2);
+        })
 
-	})
+	});
 	
+	var a,b,timer1,timer2;
+	function jump1(){
+		if(a>1){
+			a--;
+			$("#ti-m1").text(a);
+		}else{
+			window.location=cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
+		}		
+	}
+	function jump2(){
+		if(b>1){
+			b--;
+			$("#ti-m2").text(b);
+		}else{
+			window.location="carLeasexq.html?id="+commodityId;
+		}		
+	}
+	
+	
+	//跳转订单中心
+	function jumpOrder(){
+		window.location=cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
+	}
+	//返回
+	function jumpBack(){
+		window.location="carLeasexq.html?id="+commodityId;
+	}
 	   //toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
         var pltime,timer;
         function closeTanc(){
@@ -387,7 +433,37 @@
             </table>
         </div>
     </div>
-    
+     	<!--***弹窗 start****************************************-->
+	<div class="bg-tanc m1">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="tc mt40">
+				<div class="mt20 mb20 f16 lh26">
+					<img src="../styles/images/yqfw/correct.png" border="0" class="mr20"/>
+				</div>
+				<p class="mb10 f16">您已经成功提交申请，请到会员中心查看申请状态。</p>
+				<p><span class="c-o f24 tc-time mr5" id="ti-m1">5 </span>秒后，系统将自动跳转</p>
+				<!-- <p class="mt10"><a href="" class="c-6">手动跳转 ></a></p> -->
+				<div class="clearfix mt15 pt15" style="border-top:1px solid #efecec">
+					<a style="cursor:pointer;" onclick="jumpOrder();" class="ib-btn" style="width:120px;">前往查看</a>
+					<span class="ml30 mr30"></span>
+					<a style="cursor:pointer;" onclick="jumpBack();"  class="ib-btn fs-btn" style="width:120px;">返回</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="bg-tanc m2">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="tc mt40">
+				<div class="mt20 mb20 f16 lh26">
+					<img src="../styles/images/yqfw/error.png" border="0" class="mr20"/>
+				</div>
+				<p class="mb10 f16" id="errorText">你还不是园区内的企业用户，无法进行物业报修操作！</p>
+				<p><span class="c-o f24 tc-time mr5" id="ti-m2">5</span>秒后，系统将自动跳转 <a href="" class="c-b1 ml10">手动跳转 ></a></p>
+			</div>
+		</div>
+	</div>
    
 </body>
 </html>
