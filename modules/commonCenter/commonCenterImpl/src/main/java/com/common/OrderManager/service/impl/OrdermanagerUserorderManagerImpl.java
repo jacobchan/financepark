@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gsoft.framework.codemap.dao.CodeitemDao;
+import com.gsoft.framework.codemap.entity.Codeitem;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -56,6 +58,8 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	private PurchasingmanagerGenrePropertyManager purchasingmanagerGenrePropertyManager;
 	@Autowired
 	private OrdermanagerOrderprojecttypeValueManager ordermanagerOrderprojecttypeValueManager;
+	@Autowired
+	private CodeitemDao<Codeitem, String> codeItemDao;
 	
     /**
      * 查询列表
@@ -567,6 +571,24 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		 }else{
 		    	throw new BusException("当前状态无法取消申请！") ;
 		 }
-	}		
+	}
+    /**
+     * 根据订单编号获取订单
+     */
+    @Override
+    @EsbServiceMapping
+    public OrdermanagerUserorder getOrderByCode(@ServiceParam(name="userorderCode") String userorderCode)  throws BusException{
+    	OrdermanagerUserorder order = ordermanagerUserorderDao.getObjectByUniqueProperty("userorderCode", userorderCode);
+    	String status = "";
+    	List<Codeitem> codeitemList = codeItemDao.getList("codemap.code", "serviceOrderStatus");//企业服务状态
+    	for(int y = 0;y<codeitemList.size();y++){
+   			Codeitem codeitem = codeitemList.get(y);
+   			if(codeitem.getItemValue().equals(order.getUserorderStatus())){
+   				status = codeitem.getItemCaption();
+   			}
+   		} 
+    	order.setStatus(status);
+    	return order;
+    }
 
 }

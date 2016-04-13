@@ -207,4 +207,12 @@ public interface OrdermanagerUserorderManager extends BaseManager{
      */
     @EsbServiceMapping
 	public OrdermanagerUserorder cancelStatus(String id) throws BusException ;
+    /**
+     * 根据订单编号获取订单
+     * @param userorderCode
+     * @return
+     * @throws BusException
+     */
+    public OrdermanagerUserorder getOrderByCode(String userorderCode)
+			throws BusException;
 }
