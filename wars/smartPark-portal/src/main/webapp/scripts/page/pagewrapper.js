@@ -9,7 +9,6 @@
  */
 var isLogin = false;
 $(function(){
-	console.log($.youi.serverConfig.contextPath);
 	var pageType =$('#youi_page_header').attr('dataType');
 	var pageId =$('#youi_page_header').attr('dataId');
 	$('#youi_page_header').load($.youi.serverConfig.contextPath+'/common/header.html',function(){
