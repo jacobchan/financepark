@@ -60,7 +60,11 @@
 	background:#C0C0C0;
     cursor: default;
 }
-
+.ta_calendar td.ta_dateRangeWhite{
+    color: #333;border:1px solid #efecec;
+	background:#fff;
+    cursor: default;
+}
 .ta_calendar td.first,.ta_calendar td.today{
 	background:#A43548;color:#fff;
 }
