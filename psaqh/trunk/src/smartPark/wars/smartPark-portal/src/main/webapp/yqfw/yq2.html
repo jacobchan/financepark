@@ -65,7 +65,10 @@ function GetRequest() {
 					  	dm=dd.getMonth()+1;
 					  	dt=dd.getDate();
 					  	if(m1==dm && d1==dt){
-					  		alert("只能预约今天及以后的日期");
+					  		clearInterval(timer);
+				            $(".toast").show();
+				            pltime=1;
+				            timer=setInterval("closeTanc()",1000);
 					  	}else{
 					  		num--;
 					  		console.log(num);
@@ -200,6 +203,14 @@ function GetRequest() {
 						window.location="yq2.html?enteringType="+enteringType; 
 					}		
 				}
+				var pltime,timer;
+		        function closeTanc(){
+		            if(pltime>1){
+		                pltime--;
+		            }else{
+		                $(".toast").hide();
+		            }       
+		        }
 			</script>
 			<div class="clearfix">
 				<div class="fl w895">				
@@ -315,6 +326,14 @@ function GetRequest() {
 			</div>
 		</div>
 	</div>
+
+	<div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715" id="msg">只能选择今天及以后的日期</p>
+        </div>
+        
+    </div>
 	<!--***弹窗 end****************************************-->
 	
 
