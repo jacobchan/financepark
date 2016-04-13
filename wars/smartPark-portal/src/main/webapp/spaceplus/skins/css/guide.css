@@ -1,0 +1,59 @@
+/* CSS Document */
+
+/*引导页*/
+.guideBox{ position:relative; width:100%; height:100%; overflow:hidden;}
+.time{ position:fixed; right:1rem; top:0px; background:url(../bg/bg_time.png) no-repeat; width:8.74rem; height:2.7rem; background-size:8.74rem 2.7rem; color:#fff; z-index:999;}
+.time dt{width:50%; line-height:2.7rem; font-size:1.0rem;text-align:center;}
+.time dd{width:50%; font-size:.8rem; padding-top:.2rem;text-align:left; line-height:1.1rem}
+.i-lightBo{ width:32rem; height:20rem; background:url(../bg/bg_guide_1.png) no-repeat center center;background-size:32rem 20rem; position:absolute;left:50%; top:50%; margin-left:-16rem; margin-top:-10rem;  z-index:2; display:inline-block}
+.i-circle{ width:20rem; height:20rem; background:url(../icons/ico_guide-3.png) no-repeat center center;  background-size:20rem 20rem;position:absolute; z-index:3; display:inline-block; left:50%; top:50%; margin-left:-10rem; margin-top:-10rem;
+animation:circle_1 60s linear infinite normal;
+-moz-animation:circle_1 60s linear infinite normal;/* Firefox: */
+-webkit-animation:circle_1 60s linear infinite normal;/* Safari and Chrome: */
+-o-animation:circle_1 60s linear infinite normal;/* Opera: */
+}
+
+.i-txt{ width:16.2rem; height:13.5rem; display:inline-block; position:absolute;left:50%; top:50%; margin-left:-8.1rem; margin-top:-6.75rem; z-index:1; background:url(../icons/ico_guide-2.png) no-repeat center center; background-size:16.2rem 13.5rem;
+animation:txt_1 10s linear infinite alternate;
+-moz-animation:txt_1 10s linear infinite alternate;/* Firefox: */
+-webkit-animation:txt_1 10s linear infinite alternate;/* Safari and Chrome: */
+-o-animation:txt_1 10s linear infinite alternate;/* Opera: */
+}
+
+.i-btn{width:6rem; height:6rem; display:inline-block; position:absolute;left:50%; top:50%; margin-left:-3rem; margin-top:-3rem; z-index:3; background:url(../icons/ico_guide-1.png) no-repeat center center; background-size:6rem 6rem; border-radius:6rem;
+animation:btn_1 3s ease  infinite ;
+-moz-animation:btn_1 3s ease infinite ;/* Firefox: */
+-webkit-animation:btn_1 3s ease infinite ;/* Safari and Chrome: */
+-o-animation:btn_1 3s ease infinite ;/* Opera: */}
+
+@-webkit-keyframes circle_1 {
+  0%{-webkit-transform:rotate(0deg);transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); transform: rotate(360deg);}
+}
+
+@keyframes circle_1 {
+  0%{-webkit-transform:rotate(0deg);transform: rotate(0deg);}
+  100% {-webkit-transform: rotate(360deg);transform: rotate(360deg);}
+}
+
+@-webkit-keyframes txt_1 {
+  0%{-webkit-transform:scale(.8);transform:scale(.8);}
+  100% {-webkit-transform:scale(1);transform:scale(1);}
+}
+
+@keyframes txt_1 {
+  0%{-webkit-transform:scale(.8);transform:scale(.8);}
+  100% {-webkit-transform:scale(1);transform:scale(1);}
+}
+
+@-webkit-keyframes btn_1 {
+  0%{-webkit-transform:scale(1);transform:scale(1);}  
+  90%{-webkit-transform:scale(1);transform:scale(1); box-shadow:0 0 0 #397BF0;}
+  100% {-webkit-transform:scale(.9);transform:scale(.9);box-shadow:0 0 3rem #397BF0;}
+}
+
+@keyframes btn_1 {
+  0%{-webkit-transform:scale(1);transform:scale(1);}  
+  90%{-webkit-transform:scale(1);transform:scale(1);box-shadow:0 0 0 #397BF0;}
+  100% {-webkit-transform:scale(.9);transform:scale(.9);box-shadow:0 0 3rem #397BF0;}
+}

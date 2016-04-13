@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0;">
+<meta name="format-detection" content="telephone=no;email=no;">
+<meta name="apple-mobile-web-app-capable" content="yes"><!-- home screen app 全屏 -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black"><!-- 状态栏 -->
+<link rel="stylesheet" type="text/css" href="skins/css/public.css">
+<link rel="stylesheet" type="text/css" href="skins/css/index.css">
+
+<title>富春硅谷</title>
+
+</head>
+
+<body>
+
+<div class="indexBox">
+	<h1>公共资源</h1>
+  <img src="skins/bg/bg_space-s-5.jpg" width="100%" style="position:relative; z-index:1;"/>
+    
+    <div class="space-s-5">
+    	<a href="#" class="a-sp5-1"></a>
+        <a href="#" class="a-sp5-2"></a>
+        <a href="#" class="a-sp5-3"></a>
+        <a href="#" class="a-sp5-4"></a>
+        <a href="#" class="a-sp5-5"></a>
+    </div>
+    
+    
+    
+    <a href="space-1.html" class="a-backHome">
+    	<i class="i-backPrve"></i>
+        <span>返回</span>
+    </a>
+    
+    
+    <div class="fade"></div>
+    <div class="PopBox" style="width:80%">
+    	<h2><a href="#" class=" fr"><i class="i-close"></i></a><span>云计算介绍</span></h2>
+        <div class="PopBoxWapper">
+        	<div class="huiyi mg1 dn">
+            	<div class="BigImgList">
+                	<ul>
+                        <li><img src="skins/images/sp5-huiyi1.jpg"/></li>
+                        <li><img src="skins/images/sp5-huiyi2.jpg"/></li>
+                        <li><img src="skins/images/sp5-huiyi3.jpg"/></li>
+                    </ul>
+                </div>
+           	  	
+          </div>
+            <div class="shiping mg1 dn">
+            	<div class="BigImgList">
+            	<ul>
+                        <li><img src="skins/images/sp5-shiping1.jpg"/></li>
+                        <li><img src="skins/images/sp5-shiping2.jpg"/></li>
+                    </ul>
+                 </div>   
+          	</div>
+            <div class="zulin mg1 dn">
+            	<div class="BigImgList">
+            	   <ul>
+                        <li><img src="skins/images/sp5-zulin1.jpg"/></li>
+                        <li><img src="skins/images/sp5-zulin2.jpg"/></li>
+                        <li><img src="skins/images/sp5-zulin3.jpg"/></li>
+                        <li><img src="skins/images/sp5-zulin4.jpg"/></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="yundong mg1 dn">
+            	<div class="BigImgList">
+            	   <ul>
+                        <li><img src="skins/images/sp5-yundong1.jpg"/></li>
+                        <li><img src="skins/images/sp5-yundong2.jpg"/></li>
+                        <li><img src="skins/images/sp5-yundong3.jpg"/></li>
+                        <li><img src="skins/images/sp5-yundong4.jpg"/></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="car mg1 dn">
+            	<div class="BigImgList">
+            	   <ul>
+                        <li><img src="skins/images/sp5-car1.jpg"/></li>
+                        <li><img src="skins/images/sp5-car2.jpg"/></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+
+
+
+
+
+<script src="skins/js/jquery-1.11.3.min.js"></script>
+<script src="skins/js/common.js"></script>
+<script>
+$(function(){
+	
+
+	$(".space-s-2 li").on('touchstart',function(){
+		var inum=$(this).index();
+		
+		$(this).removeClass('hsbg').siblings().addClass('hsbg');
+		//$(".space-s-1Txt li").eq(inum).show().siblings().hide();
+	});
+	
+	
+	$(".a-sp5-1").on('touchstart',function(){		
+		$(".PopBox h2 span").html('租赁中心');
+		$(".PopBox").addClass('show');
+		$(".fade,.zulin").show();	
+	});
+	
+	$(".a-sp5-2").on('touchstart',function(){		
+		$(".PopBox h2 span").html('公共会议室');
+		$(".PopBox").addClass('show');
+		//$(".fade,.huiyi").show();	
+		$(".fade,.huiyi").show();
+	});
+	
+	$(".a-sp5-3").on('touchstart',function(){		
+		$(".PopBox h2 span").html('运动会所');
+		$(".PopBox").addClass('show');
+		$(".fade,.yundong").show();	
+	});
+	
+	$(".a-sp5-4").on('touchstart',function(){		
+		$(".PopBox h2 span").html('视频会议');
+		$(".PopBox").addClass('show');
+		$(".fade,.shiping").show();	
+	});
+	
+	$(".a-sp5-5").on('touchstart',function(){		
+		$(".PopBox h2 span").html('车辆服务');
+		$(".PopBox").addClass('show');
+		$(".fade,.car").show();	
+	});
+	
+	
+	
+	$(".PopBox h2 .i-close").on('touchstart',function(){
+		$(".fade,.dn").hide();
+		$(".PopBox").removeClass('show');	
+	});
+	
+	
+		
+});
+</script>
+
+</body>
+</html>

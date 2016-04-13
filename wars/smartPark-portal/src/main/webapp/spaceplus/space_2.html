@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0;">
+<meta name="format-detection" content="telephone=no;email=no;">
+<meta name="apple-mobile-web-app-capable" content="yes"><!-- home screen app 全屏 -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black"><!-- 状态栏 -->
+<link rel="stylesheet" type="text/css" href="skins/css/public.css">
+<link rel="stylesheet" type="text/css" href="skins/css/index.css">
+
+<title>富春硅谷</title>
+
+</head>
+
+<body>
+
+<div class="indexBox">
+	<h1>云办公</h1>
+  <img src="skins/bg/bg_space-s-2.jpg" width="100%" style="position:relative; z-index:1;"/>
+    
+    <div class="space-s-2">
+    	<ul>
+            <li><a href="#" class="sp-a1"><i class="sp-2-ico1"></i></a></li>
+            <li><a href="#" class="sp-a2"><i class="sp-2-ico2"></i></a></li>
+            <li><a href="#" class="sp-a3"><i class="sp-2-ico3"></i></a></li>
+            <li><a href="#" class="sp-a4"><i class="sp-2-ico4"></i></a></li>
+            <li><a href="#" class="sp-a5"><i class="sp-2-ico5"></i></a></li>
+        </ul>
+    </div>
+    
+    
+    
+    <a href="space-1.html" class="a-backHome">
+    	<i class="i-backPrve"></i>
+        <span>返回</span>
+    </a>
+    
+    
+    <div class="fade"></div>
+    <div class="PopBox" style="width:80%">
+    	<h2><a href="#" class=" fr"><i class="i-close"></i></a><span>云计算介绍</span></h2>
+        <div class="PopBoxWapper">
+        	<div class="shanglv dn">
+            	
+           	  <div class="slBox1">
+                <p class="fz_12 col_blue">规范差旅行为，差旅成本最高可直降 30%</p>
+                <a href="skins/icons/ico_32.png"><img src="skins/icons/ico_32.png" width="100%" class="mt_10"/></a>       
+                <p class="fz_12 col_blue mt_15">专业全面服务，全球资源整合</p>  
+                <a href="skins/icons/ico_33.png"><img src="skins/icons/ico_33.png" width="100%" class="mt_10"/></a>     </div>	
+            </div>
+            <div class="yuncaigou dn">
+            	<div class="slBox1">
+                <a href="skins/icons/ico_38.png"><img src="skins/images/img_38.png" width="100%" class="mt_10"/></a>     
+                </div>
+          	</div>
+            <div class="wuliu dn">
+            	<div class="txList">
+                	<ul style="display:block">
+                        <li><img src="skins/images/img_35.jpg"/><span>顺丰配送</span></li>
+                        <li><img src="skins/images/img_36.jpg"/><span>智能快递柜</span></li>
+                        <li><img src="skins/images/img_37.jpg"/><span>园内点对点（O2O）配送</span></li>
+                    </ul>
+                    
+                 </div>   
+                
+            </div>
+            
+            <div class="guanai dn">
+            	<div class="txList">
+               	  <ul style="display:block">
+                        <li><img src="skins/images/guanai_1.jpg"/><span>员工体检中心</span></li>
+                        <li><img src="skins/images/guanai_2.jpg"/><span>儿童云托管</span></li>
+                        <li><img src="skins/images/guanai_3.jpg"/><span>员工成长基金</span></li>
+                        <li><img src="skins/images/guanai_4.jpg"/><span>员工活动中心</span></li>
+                        <li><img src="skins/images/guanai_5.jpg"/><span>富春硅谷商学院</span></li>
+                    </ul>
+                    
+              </div> 
+          </div>
+            
+            <div class="weike dn">
+            	<div class="slBox1"> <img src="skins/images/weike.png" width="100%"/></div>
+       	    </div>
+            
+            
+        </div>
+    </div>
+    
+    
+</div>
+
+
+
+
+
+<script src="skins/js/jquery-1.11.3.min.js"></script>
+<script src="skins/js/common.js"></script>
+<script>
+$(function(){
+	
+
+	$(".space-s-2 li").on('touchstart',function(){
+		var inum=$(this).index();
+		
+		$(this).removeClass('hsbg').siblings().addClass('hsbg');
+		//$(".space-s-1Txt li").eq(inum).show().siblings().hide();
+	});
+	
+	
+	$(".sp-a2").on('touchstart',function(){		
+		$(".PopBox h2 span").html('商旅');
+		$(".PopBox").removeClass('bgBlack');
+		$(".PopBox").addClass('show');
+		$(".fade,.shanglv").show();	
+	});
+	
+	$(".sp-a1").on('touchstart',function(){		
+		$(".PopBox h2 span").html('30云采购介绍');
+		$(".PopBox").removeClass('bgBlack');
+		$(".PopBox").addClass('show');
+		$(".fade,.yuncaigou").show();	
+	});
+	
+	$(".sp-a5").on('touchstart',function(){		
+		$(".PopBox h2 span").html('物流介绍');
+		$(".PopBox").removeClass('bgBlack');
+		$(".PopBox").addClass('show');
+		$(".fade,.wuliu").show();	
+	});
+	
+	$(".PopBox h2 .i-close").on('touchstart',function(){
+		$(".fade,.shanglv,.yuncaigou,.wuliu").hide();
+		$(".PopBox").removeClass('show');	
+	});
+	
+	$(".sp-a3").on('touchstart',function(){		
+		$(".PopBox h2 span").html('员工关爱');
+		$(".PopBox").removeClass('bgBlack');
+		$(".PopBox").addClass('show');
+		$(".fade,.guanai").show();	
+	});
+	
+	$(".sp-a4").on('touchstart',function(){		
+		$(".PopBox h2 span").html('威客');
+		$(".PopBox").addClass('show');
+		$(".PopBox").addClass('bgBlack');
+		$(".fade,.weike").show();	
+	});
+	
+	
+	
+		
+});
+</script>
+
+</body>
+</html>
