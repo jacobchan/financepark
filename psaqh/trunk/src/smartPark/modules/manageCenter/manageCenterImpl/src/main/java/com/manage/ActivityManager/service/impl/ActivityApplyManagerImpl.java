@@ -18,24 +18,23 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.util.StringUtils;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.manage.ActivityManager.entity.ActivityApply;
 import com.manage.ActivityManager.entity.ActivityApplylist;
 import com.manage.ActivityManager.entity.ActivityComment;
 import com.manage.ActivityManager.entity.ActivityDocument;
+import com.manage.ActivityManager.entity.ApplayType;
 import com.manage.ActivityManager.dao.ActivityApplyDao;
 import com.manage.ActivityManager.service.ActivityApplyManager;
 import com.manage.ActivityManager.service.ActivityApplylistManager;
 import com.manage.ActivityManager.service.ActivityCommentManager;
 import com.manage.ActivityManager.service.ActivityDocumentManager;
+import com.manage.ActivityManager.service.ApplayTypeManager;
 import com.mysql.jdbc.Util;
 
 @Service("activityApplyManager")
@@ -51,6 +50,8 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
 	private ActivityCommentManager activityCommentManager;
 	@Autowired
 	private ActivityDocumentManager activityDocumentManager;
+	@Autowired
+	private ApplayTypeManager applayTypeManager;
     /**
      * 查询列表
      */
@@ -145,7 +146,7 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     	MemberInformation member=memberInformationManager.getMemberInformation(userId);
     	//获取当前用户参加活动的list
     	Collection<Condition> condition = new ArrayList<Condition>();
-    	condition.add(ConditionUtils.getCondition("applyMember.memberId", Condition.EQUALS, member.getMemberId()));
+    	condition.add(ConditionUtils.getCondition("member.memberId", Condition.EQUALS, member.getMemberId()));
     	List<ActivityApplylist> activityApplylist=activityApplylistManager.getActivityApplylists(condition, null);
     	List<ActivityApply> aalist=new ArrayList<ActivityApply>();
     	for(ActivityApplylist aal:activityApplylist){
@@ -292,6 +293,11 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     	o.setApplyStatus("00");//默认申请中
     	o.setIsRecoomend("1");//默认不推荐
     	//o.setApplayType(applayType);
+    	//获取所有类型
+    	List<ApplayType>  typelist = applayTypeManager.getApplayTypes();
+    	if(typelist.size()>0){
+    		o.setApplayType(typelist.get(0));
+    	}	
     	o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     	o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     	o.setCreateUser(o.getUpdateUser());
