@@ -788,7 +788,17 @@
 							}
 						}
 					});
-			   }else if(url=='4'||url=='9'||url=='15'||url=='16'||url=='1'||url=='14'||url=='5'){
+			   }else if(url=='5'){
+				   window.location="yqfw/yq"+url+".html?enteringType=01";
+			   }else if(url=='16'){
+					   window.location="yqfw/yq"+url+".html?enteringType=02";
+			   }else if(url=='1'){
+					   window.location="yqfw/yq"+url+".html?enteringType=03";
+			   }else if(url=='15'){
+					   window.location="yqfw/yq"+url+".html?enteringType=04";
+			   }else if(url=='14'){
+					   window.location="yqfw/yq"+url+".html?enteringType=05";
+			   }else if(url=='4'||url=='9'){
 				   window.location="yqfw/yq"+url+".html";
 			   }else{
 				   clearInterval(timer);
@@ -873,7 +883,7 @@
 						    var link =  "location.href='./companyservice/roomxq.html?id="+record[i].commodityId+"'";
 						 
 							 var html="<li onclick="+link+"><div class='fl'><img src='"+imageUrl+"' height='59' width='110'></div><div class='fl ml10'><div class='span_bold'>"+record[i].commodityTitle+"</div>"+
-							"<p class='cc f12'>"+record[i].commodityPrice+"元/小时</p>立即预定</div></li>";
+							"<p class='cc f12'>"+record[i].commodityPrice+"元/小时</p><a class='handbtn' href='./companyservice/roomxq.html?id="+record[i].commodityId+"'>立即预定</a></div></li>";
 							 $("#roomPage").append(html);
 							 
 					} 
@@ -1138,9 +1148,8 @@
 							$("#lf_name").val('');
 							$("#lf_tel").val('');
 							$(".select_show").text('');
-							if (isLogin) {
-								window.location=cenUrl+"member/memberCenter/personalCenter/myReservation.html";
-							}
+							a=3;
+							timer1=setInterval("jump1()",1000);
 						}
 					}
 				});
@@ -1154,6 +1163,17 @@
 					}
 				
 			});
+		    
+			var a,timer1;
+			function jump1(){
+				if(a>1){
+					a--;
+				}else{
+					if (isLogin) {
+						window.location=cenUrl+"member/memberCenter/personalCenter/myReservation.html";
+					}
+				}		
+			}
 	</script>
 	<script type="text/javascript">
 		$(function(){

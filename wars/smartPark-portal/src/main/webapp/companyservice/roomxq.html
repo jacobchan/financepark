@@ -595,6 +595,15 @@ var commodityId;
 			window.location="roomxq.html?id="+commodityId;
 		}		
 	}
+	
+	//跳转订单中心
+	function jumpOrder(){
+		window.location=cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
+	}
+	//返回
+	function jumpBack(){
+		window.location="roomxq.html?id="+commodityId;
+	}
 	      //toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
         var pltime,timer;
         function closeTanc(){
@@ -642,9 +651,9 @@ var commodityId;
 				<p><span class="c-o f24 tc-time mr5" id="ti-m1">5 </span>秒后，系统将自动跳转</p>
 				<!-- <p class="mt10"><a href="" class="c-6">手动跳转 ></a></p> -->
 				<div class="clearfix mt15 pt15" style="border-top:1px solid #efecec">
-					<a href="javascript:;" class="ib-btn" style="width:120px;">前往查看</a>
+					<a style="cursor:pointer;" onclick="jumpOrder();" class="ib-btn" style="width:120px;">前往查看</a>
 					<span class="ml30 mr30"></span>
-					<a href="javascript:;" class="ib-btn fs-btn" style="width:120px;">返回</a>
+					<a style="cursor:pointer;" onclick="jumpBack();"  class="ib-btn fs-btn" style="width:120px;">返回</a>
 				</div>
 			</div>
 		</div>
