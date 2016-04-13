@@ -36,7 +36,7 @@ public interface CarportManager extends BaseManager{
 	 */
 	public PagerRecords getPagerCarports(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
-			Collection<Order> orders) throws BusException;
+			Collection<Order> orders,String indexPage) throws BusException;
     /**
      * 保存并返回对象
      */
@@ -63,4 +63,6 @@ public interface CarportManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitCarport(String propertyName,Object value) throws BusException;
+	
+	
 }
