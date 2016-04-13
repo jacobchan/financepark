@@ -4,10 +4,11 @@
 package com.member.applications.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: 340703创业加速申请
@@ -24,7 +25,7 @@ public class Entrepreneurship implements Domain{
 
 	@Column(name = "APPLAY_STATUS_")
 	@Length(max=2)
-	private String applayStatus;//申请状态 01:申请中 ；02:完成
+	private String applayStatus;//申请状态 01:申请中 ；02:完成；03：取消
 
 	@Column(name = "APPLAY_NO_")
 	@Length(max=20)
@@ -76,6 +77,17 @@ public class Entrepreneurship implements Domain{
 	@Column(name = "IS_FINACE_")
 	@Length(max=1)
 	private String isFinace;//是否融资
+
+	@Transient
+	private MemberInformation member;
+	
+	public MemberInformation getMember() {
+		return member;
+	}
+
+	public void setMember(MemberInformation member) {
+		this.member = member;
+	}
 	
 	public String getApplayStatus(){
 		return this.applayStatus;
