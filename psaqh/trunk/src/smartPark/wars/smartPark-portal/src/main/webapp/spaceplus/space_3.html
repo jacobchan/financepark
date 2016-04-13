@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0;">
+<meta name="format-detection" content="telephone=no;email=no;">
+<meta name="apple-mobile-web-app-capable" content="yes"><!-- home screen app 全屏 -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black"><!-- 状态栏 -->
+<link rel="stylesheet" type="text/css" href="skins/css/public.css">
+<link rel="stylesheet" type="text/css" href="skins/css/index.css">
+
+<title>富春硅谷</title>
+
+</head>
+
+<body>
+
+<div class="indexBox">
+	<h1>企业互联网化改造  </h1>
+  	<img src="skins/bg/bg_space-3.jpg" width="100%" style="position:relative; z-index:1;"/>
+    
+    <div class="space-s-3">
+    	<i class="sp-3-ico"></i>
+        <a href="javascript:;" class="a-sp3-T a-sp3-a1"></a>
+        <a href="javascript:;" class="a-sp3-T a-sp3-a2"></a>
+        <a href="javascript:;" class="a-sp3-T a-sp3-a3"></a>
+    </div>
+    
+    <div class="fade"></div>
+    <div class="PopBox" style="width:80%">
+    	<h2><a href="#" class=" fr"><i class="i-close"></i></a><span>云计算介绍</span></h2>
+        <div class="PopBoxWapper">
+        	<div class="zixun">
+            	<p>和君咨询为各类企业、组织和政府提供有实效的思想、知识和解决方案，累计服务客户3000多家，在数十个行业里积累有丰富的案例和实战经验。曾荣获北京管理咨询公司综合实力排名第一、中国咨询业第一品牌等称号。2013年，和君咨询成为全球第一家由国际管理咨询协会理事会（ICMCI）认证的管理咨询公司。和君咨询作为富春硅谷的战略合作伙伴，为园内企业提供战略研究及智力支持。</p>                
+            </div>
+            <div class="daxue">
+            	<p style="width:28%; float:left;"><img src="skins/images/img_13.jpg" width="100%"/></p>
+                <p style=" width:68%; float:right; overflow:auto; height:15rem; padding-right:.2rem;">杭州电子科技大学是一所电子信息特色突出，经管学科优势明显，工、理、经、管、文、法、艺等多学科相互渗透的教学研究型大学。2000年开始实行省部共建、省管为主的管理体制，并被浙江省列为重点建设的教学研究型大学。2007年12月25日，学校成为浙江省与国防科工委共建高校，是浙江省唯一一所与国防科工委共建的高校，也是国防科工委共建高校中第一所信息技术类高校。2011年，浙江省与国防科技工业局签署协议，明确在“十二五”期间继续共建杭州电子科技大学。学校建有下沙、文一、东岳、下沙东及信息工程学院临安新校区共五个校区，占地面积2500余亩，现有普通全日制在校生28000余人，教职员工2200余人。杭州电子科技大学为富春硅谷战略合作伙伴，将为园内企业输送专业型人才，并在电子信息科技方面为企业提供专业性指导。</p>
+            </div>
+            <div class="jiangtang">
+            	<div class="jtList">
+                	<ul>
+                        <li><img src="skins/images/img_14.jpg" />
+                        	<span>第1期</span>
+                        	<p><b>主讲嘉宾:</b>摩根大通中国投行主席   龚方雄先生</p>
+                            <p><b>课程主题</b>:当前经济形势与企业金融策略</p>
+                        </li>
+                        <li><img src="skins/images/img_15.jpg" />
+                        	<span>第2期</span>
+                        	<p><b>主讲嘉宾:</b>和君咨询合伙人  刘海峰先生</p>
+                            <p><b>课程主题</b>:传统企业的互联网改造与提升</p>
+                        </li>
+                        <li><img src="skins/images/img_16.jpg" />
+                        	<span>第3期</span>
+                        	<p><b>主讲嘉宾:</b>杭州电子科技大学机械学院 </p>
+                            <p><b>课程主题</b>:沈国强教授及其团队</p>
+                        </li>
+                        <li><img src="skins/images/img_17.jpg" />
+                        	<span>第4期</span>
+                        	<p><b>主讲嘉宾:</b>和君高级合伙人  刘海峰先生</p>
+                            <p><b>课程主题</b>:互联网时代的组织模式创新</p>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <a href="space-1.html" class="a-backHome">
+    	<i class="i-backPrve"></i>
+        <span>返回</span>
+    </a>
+    
+    
+</div>
+
+
+
+
+
+<script src="skins/js/jquery-1.11.3.min.js"></script>
+<script src="skins/js/common.js"></script>
+<script>
+$(function(){
+	
+
+	$(".a-sp3-a1").on('touchstart',function(){		
+		$(".PopBox h2 span").html('和君咨询');
+		$(".PopBox").addClass('show');
+		$(".fade,.zixun").show();	
+	});
+	
+	$(".a-sp3-a2").on('touchstart',function(){		
+		$(".PopBox h2 span").html('创智讲堂精彩回顾');
+		$(".PopBox").addClass('show');
+		$(".fade,.jiangtang").show();	
+	});
+	
+	$(".a-sp3-a3").on('touchstart',function(){		
+		$(".PopBox h2 span").html('杭州电子科技大学');
+		$(".PopBox").addClass('show');
+		$(".fade,.daxue").show();	
+	});
+	
+	$(".PopBox h2 .i-close").on('touchstart',function(){
+		$(".fade,.zixun,.daxue,.jiangtang").hide();
+		$(".PopBox").removeClass('show');	
+	});
+	
+	
+	
+		
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0;">
+<meta name="format-detection" content="telephone=no;email=no;">
+<meta name="apple-mobile-web-app-capable" content="yes"><!-- home screen app 全屏 -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black"><!-- 状态栏 -->
+<link rel="stylesheet" type="text/css" href="skins/css/public.css">
+<link rel="stylesheet" type="text/css" href="skins/css/index.css">
+
+<title>富春硅谷</title>
+
+</head>
+
+<body>
+
+<div class="indexBox">
+	<h1>敏捷金融</h1>
+  <img src="skins/bg/bg_space-s-1.jpg" width="100%" style="position:relative; z-index:1;"/>
+    
+    <div class="space-s-1">
+    	<ul>
+            <li><a href="javascript:;"><i class="sp-s-1-ico1"></i><span>硅谷银行</span><em><i class="sp-s-e-1"></i></em></a></li>
+            <li><a href="javascript:;"><i class="sp-s-1-ico2"></i><span>p2p</span><em><i class="sp-s-e-2"></i></em></a></li>
+            <li><a href="javascript:;"><i class="sp-s-1-ico3"></i><span>小贷</span><em><i class="sp-s-e-3"></i></em></a></li>
+            <li><a href="javascript:;"><i class="sp-s-1-ico4"></i><span>产业基金</span><em><i class="sp-s-e-5"></i></em></a></li>
+            <li><a href="javascript:;"><i class="sp-s-1-ico5"></i><span>担保</span><em><i class="sp-s-e-4"></i></em></a></li>
+            <li><a href="javascript:;"><i class="sp-s-1-ico6"></i><span>众筹</span><em><i class="sp-s-e-6"></i></em></a></li>
+        </ul>
+    </div>
+    
+    <div class="space-s-1Txt">
+    	<ul>
+            <li style="display:block">&nbsp;</li>
+            <li> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;友金所是用友软件（股票代码：600588）与深圳力合金融控股等三家公司共同发起设，。作为用友集团成员企业，友金所致力于提供专业的全流程金融信息服务，打造安全、便捷、可信的综合性投融资平台，为投资客户提供安全、本息担保、收益稳健的互联网理财服务，，友金所为富春硅谷战略合作单位，为园区企业提供多种融资渠道。
+</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;深圳亚联财小额贷款有限公司是由香港亚洲联合财务有限公司于2007年在深圳开设的一家专业小额贷款服务机构。亚洲联合财务有限公司成立于1991年，现为新鸿基有限公司成员之一。新鸿基有限公司是香港上市公司（香港联交所股票代码：86），以其能提供多元化金融服务而受广泛认识。亚联财为富春硅谷战略合作单位，为园内企业提供小额贷款服务，助力企业成长发展。
+</li>
+			<li>&nbsp;</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;深圳市中小企业融资担保集团有限公司成立于1999年12月28日，是深圳市政府为解决中小企业融资难、扶持中小企业健康发展而设立的专业担保机构。深圳担保集团可为中小企业提供贷款担保、委托贷款、保函、投资、政府专项资金担保、典当、小额贷款、发债担保、票据担保、上市融资担保、委托评审、融资顾问咨询等一站式、链条化综合融资担保服务，作为富春硅谷的战略合作伙伴，深圳担保集团竭诚为广大客户提供方便、快捷、及时、配套的专业化担保服务，愿成为中小企业发展道路上的忠实伙伴！
+</li>
+            
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;大家投—深圳市创国网络科技有限公司旗下股权众筹平台，是中国首个“众筹模式”天使投资与创业项目私募股权投融资对接平台，企业可以以出让公司或项目股权的方式进行众筹融资，助力初创及中小型企业成长发展。大家投为富春硅谷战略合作伙伴，为园内企业提供多种金融融资解决方案。
+
+</li>
+        </ul>
+    </div>
+    
+    <a href="space-1.html" class="a-backHome">
+    	<i class="i-backPrve"></i>
+        <span>返回</span>
+    </a>
+    
+    
+</div>
+
+
+
+
+
+<script src="skins/js/jquery-1.11.3.min.js"></script>
+<script src="skins/js/common.js"></script>
+<script>
+$(function(){
+	
+
+	$(".space-s-1 li").on('touchstart',function(){
+		var inum=$(this).index();
+		$(this).removeClass('op3').addClass('act').siblings().removeClass('act').addClass('op3');
+		$(".space-s-1Txt li").eq(inum).show().siblings().hide();
+	});
+	
+		
+});
+</script>
+
+</body>
+</html>

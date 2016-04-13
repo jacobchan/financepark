@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0;">
+<meta name="format-detection" content="telephone=no;email=no;">
+<meta name="apple-mobile-web-app-capable" content="yes"><!-- home screen app 全屏 -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black"><!-- 状态栏 -->
+<link rel="stylesheet" type="text/css" href="skins/css/public.css">
+<link rel="stylesheet" type="text/css" href="skins/css/index.css">
+
+<title>富春硅谷</title>
+
+</head>
+
+<body>
+
+<div class="indexBox">
+	<h1>政务通</h1>
+  <img src="skins/bg/bg_space-s-1.jpg" width="100%" style="position:relative; z-index:1;"/>
+    
+    <div class="space-s-4">
+    	<ul>
+            <li>
+                <img src="skins/images/img_18.jpg"/>            
+                <span>工商</span>
+                <div class="spIn">
+                    <h3>工商注册：</h3>
+                    <p>提供工商注册、工商代办服务。</p>
+                </div>
+                <a href="javascript:;" class="a-sp4-close"><i class="i-sp4-close"></i></a>
+            </li>
+            <li>
+                <img src="skins/images/img_19.jpg"/>            
+                <span>税务</span>
+                <div class="spIn">
+                    <h3>税务代办：</h3>
+                    <p>纳税申报，税务筹划，税务咨询。</p>
+                </div>
+                <a href="javascript:;" class="a-sp4-close"><i class="i-sp4-close"></i></a>
+            </li>
+            <li>
+                <img src="skins/images/img_20.jpg"/>            
+                <span>法务</span>
+                <div class="spIn">
+                    <h3>法务：</h3>
+                    <p>富春硅谷战略伙伴大成律所，隆安律所为企业提供全天候法律咨询及事务处理。</p>
+                </div>
+                <a href="javascript:;" class="a-sp4-close"><i class="i-sp4-close"></i></a>
+            </li>
+            <li>
+                <img src="skins/images/img_21.jpg"/>            
+                <span>商标</span>
+                <div class="spIn">
+                    <h3>商标注册：</h3>
+                    <p>商标使用人取得商标专用权的前提和条件，只有经核准注册的商标，才受法律保护。 </p>
+                </div>
+                <a href="javascript:;" class="a-sp4-close"><i class="i-sp4-close"></i></a>
+            </li>
+            <li>
+                <img src="skins/images/img_22.jpg"/>            
+                <span>专利</span>
+                <div class="spIn">
+                    <h3>专利申请：</h3>
+                    <p>是获得专利权的必须程序。专利权的获得，要由申请人向国家专利机关提出申请，经国家专利机关批准并颁发证书。</p>
+                </div>
+                <a href="javascript:;" class="a-sp4-close"><i class="i-sp4-close"></i></a>
+            </li>
+            <li>
+                <img src="skins/images/img_23.jpg"/>            
+                <span>消防</span>
+                <div class="spIn">
+                    <h3>代办消防：</h3>
+                    <p>提供灭火系统设计及安装工程、代办各种消防业务审批及备案服务。 </p>
+                </div>
+                <a href="javascript:;" class="a-sp4-close"><i class="i-sp4-close"></i></a>
+            </li>
+            <li>
+                <img src="skins/images/img_24.jpg"/>            
+                <span>版权</span>
+                <div class="spIn">
+                    <h3>版权登记：</h3>
+                    <p>包括软件著作权登记，作品著作权登记。 </p>
+                </div>
+                <a href="javascript:;" class="a-sp4-close"><i class="i-sp4-close"></i></a>
+            </li>
+            <li>
+                <img src="skins/images/img_25.jpg"/>            
+                <span>资质认定</span>
+                <div class="spIn">
+                    <h3>资质认定：</h3>
+                    <p>指的是“软件产品登记”和“软件企业认证”，一般简称为双软企业认证。 </p>
+                </div>
+                <a href="javascript:;" class="a-sp4-close"><i class="i-sp4-close"></i></a>
+            </li>
+        </ul>
+    </div>
+    
+    
+    
+    
+    <a href="space-1.html" class="a-backHome">
+    	<i class="i-backPrve"></i>
+        <span>返回</span>
+    </a>
+    
+    
+</div>
+
+
+
+
+
+<script src="skins/js/jquery-1.11.3.min.js"></script>
+<script src="skins/js/common.js"></script>
+<script>
+$(function(){
+	
+
+	$(".space-s-4 ul li img").on('touchstart',function(){
+		$(".spIn,.a-sp4-close").hide();
+		$(this).parents("li").find(".spIn,.a-sp4-close").show();
+	});
+	
+	$(".a-sp4-close").on('touchstart',function(){
+		$(".spIn,.a-sp4-close").hide();
+		
+	});
+	
+		
+});
+</script>
+
+</body>
+</html>

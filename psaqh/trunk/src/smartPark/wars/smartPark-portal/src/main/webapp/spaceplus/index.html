@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0;">
+<meta name="format-detection" content="telephone=no;email=no;">
+<meta name="apple-mobile-web-app-capable" content="yes"><!-- home screen app 全屏 -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black"><!-- 状态栏 -->
+<link rel="stylesheet" type="text/css" href="skins/css/public.css">
+<link rel="stylesheet" type="text/css" href="skins/css/guide.css">
+
+<title>富春硅谷</title>
+
+</head>
+
+<body>
+<a href="home.html" class="goHome">
+<div class="guideBox">
+    <img src="skins/bg/bg_guide.jpg" width="100%" style="position:relative; z-index:1;"/>
+    <div class="time">
+        <dl class="d-box">
+            <dt class="b-flex" id="time">20:10</dt>
+            <dd><em class="date-m">2</em>月<em class="date-d">5</em>日<br><em class="date-w">星期四</em></dd>
+        </dl>
+    </div>
+    <i class="i-lightBo"></i>
+    <i class="i-circle"></i>
+    <i class="i-txt"></i>
+    <i class="i-btn"></i>
+</div>
+
+</a>
+
+<script src="skins/js/jquery-1.11.3.min.js"></script>
+<script src="skins/js/common.js"></script>
+<script>
+$(function(){
+	var myDate = new Date();
+	myDate.getMonth();       //获取当前月份(0-11,0代表1月)
+	myDate.getDate();        //获取当前日(1-31)
+	myDate.getDay();         //获取当前星期X(0-6,0代表星期天)
+	myDate.getHours();       //获取当前小时数(0-23)
+	myDate.getMinutes();     //获取当前分钟数(0-59)
+
+	var mm=myDate.getMinutes(),smm=0;
+	
+	/* if(mm<10){
+		smm="0"+mm;
+	} */
+	
+	$("#time").html(myDate.getHours()+":"+mm);
+	$(".date-m").html(myDate.getMonth()+1);	
+	$(".date-d").html(myDate.getDate());	
+	var gd=myDate.getDay(),xqj='';
+	if(gd==0){
+		xqj="日"	;
+	}else if(gd==1){
+		xqj="一"	;
+	}else if(gd==2){
+		xqj="二"	;
+	}else if(gd==3){
+		xqj="三"	;
+	}else if(gd==4){
+		xqj="四"	;
+	}else if(gd==5){
+		xqj="五"	;
+	}else if(gd==6){
+		xqj="六"	;
+	}
+	
+	$(".date-w").html('星期'+xqj);	
+});
+</script>
+
+</body>
+</html>
