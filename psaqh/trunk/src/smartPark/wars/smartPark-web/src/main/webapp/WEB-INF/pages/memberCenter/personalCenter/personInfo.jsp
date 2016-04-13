@@ -122,6 +122,7 @@
 		
 		function _parseRecords(record){
 			$("#memberId").html(record.memberId);
+			$("#headImg").attr("src",cenUrl+"filestore/"+record.memberHeadPortrait);
 			$(".c-b1").html(record.memberPhoneNumber);
 			$("#memberNickname").val(record.memberNickname);
 			$("#memberName").val(record.memberName);
@@ -137,7 +138,6 @@
 					url:baseUrl+'enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json', 
 					data:'rzId='+id,
 					success:function(result){
-						console.log(result);
 						if(result&&result.record){
 							_rzRecords(result.record);												
 						}
