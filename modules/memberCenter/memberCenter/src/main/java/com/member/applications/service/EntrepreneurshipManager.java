@@ -3,6 +3,7 @@
  */
 package com.member.applications.service;
 
+import java.text.ParseException;
 import java.util.Collection;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.member.applications.entity.Entrepreneurship;
 
 public interface EntrepreneurshipManager extends BaseManager{
@@ -36,7 +38,7 @@ public interface EntrepreneurshipManager extends BaseManager{
 	 */
 	public PagerRecords getPagerEntrepreneurships(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
-			Collection<Order> orders) throws BusException;
+			Collection<Order> orders) throws BusException, ParseException;
     /**
      * 保存并返回对象
      */
@@ -87,4 +89,16 @@ public interface EntrepreneurshipManager extends BaseManager{
 	 * @return
 	 */
 	public Entrepreneurship goSaveEntrepreneurship(Entrepreneurship o,String teacherTypeFlg)  throws BusException;
+	
+	/**
+	 * 获取整个数据的totalCount
+	 * @param conditions
+	 */
+	public List<Record> getTotalCount(Collection<Condition> conditions)  throws BusException;
+	
+	/**
+     * 取消操作
+     * @param id
+     */
+    public Entrepreneurship goCancel(@ServiceParam(name="id") String id) throws BusException;
 }
