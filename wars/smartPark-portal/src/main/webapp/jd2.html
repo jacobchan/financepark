@@ -452,8 +452,8 @@
 					                  	$("#roomInfo").empty();
 					                  	$("#roomInfo").html("您预订的房型："+record[i].title+" ["+plans[j].planname+",均价"+date[0].price+"]");
 					                  	$(".bg-eb").append("每日价格：");
-					                  	for(var i=0 ;i<date.length;i++){
-					                  		$(".bg-eb").append("<p class='lh20'>"+date[i].day+" : ￥ "+date[i].price+"</p>");
+					                  	for(var k=0 ;k<date.length;k++){
+					                  		$(".bg-eb").append("<p class='lh20'>"+date[k].day+" : ￥ "+date[k].price+"</p>");
 					                  	}
 					                  	//判断是否担保
 					                  	var cardrule = plans[j].cardrule;
