@@ -20,36 +20,6 @@
 			    elem: '#fkcodeDate', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
 			    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 			});
-			/* laydate({
-			    elem: '#fkcodeTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
-			    format: 'YYYY-MM-DD hh:mm:ss', //日期格式
-		        istime: true, //是否开启时间选择
-			    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
-			});
-			 */
-			
-			 var start = {
-			    elem: '#startTime',
-			    min: laydate.now(), //设定最小日期为当前日期
-			    max: '2099-06-16 23:59:59', //最大日期
-			    istoday: false,
-			    choose: function(datas){
-			         end.min = datas; //开始日选好后，重置结束日的最小日期
-			         end.start = datas //将结束日的初始值设定为开始日
-			    }
-			};
-			var end = {
-			    elem: '#endTime',
-			    min: laydate.now(),
-			    max: '2099-06-16 23:59:59',
-			    istoday: false,
-			    choose: function(datas){
-			        start.max = datas; //结束日选好后，重置开始日的最大日期
-			    }
-			};
-			laydate(start);
-			laydate(end);
-			 
 			 
 			$(".ic-select").click(function(){
 				$(this).next(".select-nav").toggle();
@@ -88,6 +58,9 @@
 	        $(".close-toast").click(function(){
 	            $(".toast").hide();
 	        })
+	        $(".tc-close").click(function(){
+				$(".bg-tanc.m1").hide();
+			});
 	        
 			$(".now-btn").click(function(){
 				var recordType='04';//04:众创空间
@@ -150,10 +123,9 @@
 							$("#fkcodeName").val('');
 							$("#fkcodeTelephone").val('');
 							$(".ic-select").find("p").text('');
-							if(isLogin){
-								window.location=cenUrl+"member/memberCenter/personalCenter/myReservation.html";
-							}
 							
+							a=3;
+							timer1=setInterval("jump1()",1000);
 						}
 					}
 				});
@@ -164,6 +136,7 @@
 				   		if (!patrn.exec(s)) return false
 				   	 	return true
 					}
+				
 				
 			});
 			$("#lf_time").on("click",function(e){
@@ -180,6 +153,21 @@
 
 	        });	
 		})
+		
+		var a,timer1;
+			function jump1(){
+				if(a>1){
+					a--;
+				}else{
+					if (isLogin) {
+						window.location=cenUrl+"member/memberCenter/personalCenter/myReservation.html";
+					}
+				}		
+			}
+			
+			function reserve() {
+		    	$(".bg-tanc.m1").show();
+			}
 	</script>
 	<script type="text/javascript">
 		$(function(){
@@ -200,7 +188,7 @@
 				for(var i=0;i<record.length;i++){
 					   //http://localhost:8088/smartPark-web/ imageUrl
 						var html="<li><div class='mb10'><img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].commodityImage+"&method=show' border='0'></div>"+
-						"<input type='text' placeholder='活动卡位"+record[i].commodityPrice+ "元/月' disabled='disabled' style='cursor:default'>&nbsp;&nbsp<span>"+record[i].gw.commodityId+"</span>";
+						"<input type='text' placeholder='活动卡位"+record[i].commodityPrice+ "元/月' disabled='disabled' style='cursor:default'><a style='cursor:pointer;' onclick='reserve()' class='sc-yy'>预约</a></li>";
 						 $(".space-centent ul").append(html);
 						 
 				}
@@ -457,79 +445,47 @@
 	</div>
 	<!-- 弹窗 -->
 	<div class="bg-tanc m1">
-		<div class="tanc-con tanc-con-two clearfix" style="top: 50%;margin-top: -200px;">
+	<div class="tanc-con" style="top:50%;margin-top:-250px;">
 			<a href="javascript:;" class="tc-close"></a>
-			<h3>预订临时工位</h3>
-			<div class="tct-input clearfix">
-				<input type="text" placeholder="杭州">
-				<div class="tct-select">
-					<!-- <div class="ic-select">
-						<p>创立方</p>
-					</div>
-					<ul class="select-nav">
-						<li>创立方1</li>
-						<li>创立方2</li>
-						<li>创立方3</li>
-					</ul> -->
-				</div>
-				<input type="text" placeholder="预定日期" class="inp-time" id="startTime">
-				<input type="text" placeholder="截止日期" class="inp-time" id="endTime">
-				<input type="submit" value="搜索">
-			</div>
-			<table class="tct-table fl">
+			<h3 class="mb10"><b>办公申请</b></h3>
+			<table class="line-table cic-l-t">
 				<colgroup>
-					<col width="280"></col>
-					<col width="280"></col>
-					<col width="280"></col>
+					<col width="110"></col>
+					<col></col>
 				</colgroup>
-				<thead>
-					<th>产品</th>
-					<th>单价</th>
-					<th>数量</th>
-				</thead>
 				<tr>
-					<td>创立方</td>
-					<td>100/㎡</td>
-					<td>售罄</td>
+					<td valign="top">企业名称</td>
+					<td><input type="text" style="width:300px"></td>
 				</tr>
 				<tr>
-					<script type="text/javascript">
-						
-					</script>
-					<td>创立方</td>
-					<td>100/㎡</td>
-					<td><div class="space-num"><a href="javascript:;" class="num-reduce">-</a><input type="text" class="num" value="1"><a href="javascript:;" class="num-plus">+</a></div></td>
-				</tr>
-				<tr>
-					<td>创立方</td>
-					<td>100/㎡</td>
-					<td><div class="space-num"><a href="javascript:;" class="num-reduce">-</a><input type="text" class="num" value="1"><a href="javascript:;" class="num-plus">+</a></div></td>
-				</tr>
-			</table>
-			<table class="tct-table fr" style="width:220px;">
-				<colgroup>
-					<col width="220"></col>
-				</colgroup>
-				<thead>
-					<th>已选工位</th>
-				</thead>
-				<tr>
-					<td style="font-size:12px;color:#222;">
-						<div class="clearfix pb10" style="border-bottom:1px dashed #ddd">
-							<div class="fl">
-								<p>创立方</p>
-								<p>100/㎡</p>
+					<td valign="top">企业规模</td>
+					<td>
+						<div class="tct-select mr20" style="width:150px;">
+							<div class="ic-select" style="background: transparent url(../styles/images/yqfw/down.png) no-repeat scroll right center;">
+								<p class="c-b1">&nbsp;</p>
 							</div>
-							<div class="fr mt20">
-								1 x
-							</div>
+							<ul style="display: none;" class="select-nav">
+								<li>大</li>
+								<li>中</li>
+								<li>小</li>
+							</ul>
 						</div>
-						<p class="tr mt10">合计：<span style="color:#ff5809">100元</span></p>
-						<a href="" class="ib-btn" style="margin-top:1px;height:32px;line-height:32px;">提交订单</a>
 					</td>
 				</tr>
+				
+				<tr>
+					<td valign="top">日期进驻<br/>日期</td>
+					<td><input type="text" placeholder="来访日期" id="fkcodeDate"></td>
+				</tr>
+				<tr>
+					<td valign="top">业务简介</td>
+					<td><textarea style="height:140px;"></textarea></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><a href="" class="ib-btn tc" style="width:120px;">提交</a></td>
+				</tr>
 			</table>
-			<p class="tc mt20"><a href="" class="add-btn">添加</a></p>
 		</div>
 	</div>
 	

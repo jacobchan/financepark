@@ -31,8 +31,8 @@ $(function(){
 			
 		});
 		$(".ib-btn.open-m3").click(function(){
-			$(".bg-tanc.m3").show();
-			
+			//$(".bg-tanc.m3").show();
+			window.location="../zscenter/zs6.html";
 		});
 		$(".tc-close").click(function(){
 			$('body').css("overflow","auto");
