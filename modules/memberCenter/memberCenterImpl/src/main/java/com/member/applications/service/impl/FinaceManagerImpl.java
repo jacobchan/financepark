@@ -3,26 +3,37 @@
  */
 package com.member.applications.service.impl;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MemberManager.dao.MemberInformationDao;
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
-import com.gsoft.framework.esb.annotation.*;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
-import com.member.applications.entity.Finace;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.PubCondition;
+import com.gsoft.framework.esb.annotation.ServiceParam;
+import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.StringUtils;
+import com.gsoft.utils.BizCodeUtil;
+import com.manage.EnterBusinessManager.dao.EnterbusinessmanagerRzDao;
+import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.member.applications.dao.FinaceDao;
+import com.member.applications.entity.Finace;
 import com.member.applications.service.FinaceManager;
 
 @Service("finaceManager")
@@ -30,6 +41,10 @@ import com.member.applications.service.FinaceManager;
 public class FinaceManagerImpl extends BaseManagerImpl implements FinaceManager{
 	@Autowired
 	private FinaceDao finaceDao;
+	@Autowired
+	private EnterbusinessmanagerRzDao enterbusinessmanagerRzDao;
+	@Autowired
+	private MemberInformationDao memberInformationDao;
 	
     /**
      * 查询列表
@@ -103,4 +118,51 @@ public class FinaceManagerImpl extends BaseManagerImpl implements FinaceManager{
 		return finaceDao.exists(propertyName,value);
 	}
 
+    /**
+   	 * 融资申请页面加载开始获取公司名称和主页地址
+   	 * 根据登录信息里面的企业ID进行查找
+   	 * @return
+   	 * @throws BusException
+   	 */
+   	@EsbServiceMapping
+   	public List<Map<String,String>> getCompanyData(@ServiceParam(name="userId",pubProperty="userId") String userId)  throws BusException{
+   		List<Map<String,String>> reListMap = new ArrayList<Map<String,String>>();
+   		Map<String,String> reMap = new HashMap<String,String>();
+   		//根据用户ID查询自己相关的企业
+   		MemberInformation  memberInformation = memberInformationDao.get(userId);
+   		String companyId = memberInformation.getCompanyId();
+   		//判断此个用户是否存在企业
+   		if(StringUtils.isNotEmpty(companyId)){
+   			//根据企业ID进行查找相关的企业信息
+   			EnterbusinessmanagerRz enterbusinessmanagerRz = enterbusinessmanagerRzDao.get(companyId);
+   			//查找的企业信息不为空的情况，开始返回数据的封装
+   			if(null!=enterbusinessmanagerRz){
+   				//公司名称
+   				reMap.put("rzName", enterbusinessmanagerRz.getRzName());
+   				//主页地址
+   				reMap.put("rzUrl", enterbusinessmanagerRz.getRzUrl());
+   				reListMap.add(reMap);
+   			}
+   		}
+   		return reListMap;
+   	}
+   	
+    /**
+	 * 融资申请
+	 * @return
+	 * @throws BusException
+	 */
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId"),@PubCondition(property = "memberId", pubProperty = "userId")})
+	public Finace goSaveFinace(Finace o)  throws BusException{
+		//创建时间
+		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		//申请状态
+		o.setApplayStatus("01");
+		//申请编号
+		String applayNo = BizCodeUtil.getInstance().getBizCodeDate("ITFW");
+		o.setApplayNo(applayNo);
+		//创建返回保存成功返回的实体
+		Finace saveFinace = this.saveFinace(o);
+		return saveFinace;
+	}
 }
