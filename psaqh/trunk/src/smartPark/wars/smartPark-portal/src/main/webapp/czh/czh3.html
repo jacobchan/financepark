@@ -77,6 +77,12 @@
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
 	<!-- 弹窗  start-->
+	<div class="toast">
+        <div class="toast-con clearfix">
+            	<div class="close-toast fr"></div>
+           	 <p class="tc mt25 f18" style="color:#ff6715">请登录后重试！</p>
+        	</div>       
+    </div>
 	<div class="bg-tanc">
 		<div class="tanc-con" style="top:50%;margin-top:-225px;width:400px;padding:40px 30px;">
 			<a href="javascript:;" class="tc-close"></a>
@@ -92,16 +98,16 @@
 				</tr>
 				<tr class="show2">
 					<td><input type="text"  id="applyPhone" placeholder="请输入有效的手机号码" style="width:100%"></td>
-					<td style="padding-left:10px;">
+					<!-- <td style="padding-left:10px;">
 						<a href="javascript:;" class="send-psw" style="width:100%">发送验证码</a>
-					</td>
+					</td> -->
 				</tr>
-				<tr>
+				<!-- <tr>
 					<td colspan="2">
 						<input type="text" placeholder="请输入验证码" style="width:100%">
 						<p style="color:#e04648" class="f12 mt5 undis">验证码错误，请重新输入验证码</p>
 					</td>
-				</tr>
+				</tr> -->
 				<tr>
 					<td colspan="2"><input type="button" class="ib-btn" style="width:100%;margin-top:0px;" value="报名"></td>
 				</tr>
@@ -144,13 +150,27 @@
 			});
 			//报名提交
 			$('.ib-btn').click(function(){
-				if(!isLogin){alert("请登录");return;}
+				 if(!isLogin){
+					   clearInterval(timer);
+			            $(".toast").show();
+			            pltime=2;
+			            timer=setInterval("closeTanc()",1000);
+					 	 return false;
+					}
 				var url=location.href; 
 				var tmp1=url.split("?")[1];  
 				var tmp2=tmp1.split("=")[1]; 
 				var applyId=tmp2;
 				var applyMember=$("#applyMember").val();
 				var applyPhone=$("#applyPhone").val();
+				if(!isMobil(applyPhone)){
+					clearInterval(timer);
+					$(".tc.mt25").text("请输入正确的手机号！");
+		           	$(".toast").show();
+		           	pltime=1;
+		           	timer=setInterval("closeTanc()",1000);
+					return false;
+				}
 				var serviceURL = baseUrl+"activityApplylistManager/saveActivityApplylistForPage.json";
 				var params = ['activityApply.applyId='+applyId,'applyMember='+applyMember,'applyPhone='+applyPhone];
 				$.youi.ajaxUtils.ajax({
@@ -160,13 +180,32 @@
 					dataType:'jsonp',
 					success:function(results){
 						if(results&&results.record){
-							$(".bg-tanc").hide();
-							alert("报名成功！");
+							clearInterval(timer);
+							$(".tc.mt25").text("报名成功!");
+				         	$(".toast").show();
+				         	pltime=2;
+				         	timer=setInterval("closeTanc()",1000);
+				         	$(".bg-tanc").hide();
+						}else{
+							clearInterval(timer);
+							$(".tc.mt25").text("您已报名成功!");
+				         	$(".toast").show();
+				         	pltime=2;
+				         	timer=setInterval("closeTanc()",1000);
+				         	$(".bg-tanc").hide();
 						}
 					}
 				});	
 			});
 		});
+		
+		//校验手机号格式
+		function isMobil(s) {
+		    	var patrn = /^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+		   		if (!patrn.exec(s)) return false
+		   	 	return true
+		};
+		
 		$(function(){
 			var url=location.href; 
 			var tmp1=url.split("?")[1];  
@@ -200,7 +239,7 @@
 		});
 		//活动详情赋值
 		function _parseRecords(record){
-			$(".activityImage").attr("src",cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record.activityImage+"&method=show");
+			$(".activityImage").attr("src",cenUrl+"filestore/"+record.activityImage);
 			$(".h-bg").html(record.applyTitle);
 			$(".time").html(record.startTime);
 			//$(".address").html();
@@ -233,5 +272,28 @@
 			window.location.assign(url); 
 		}
 	</script>
+	
+	<script type="text/javascript">
+		//toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
+		 var pltime,timer;
+		 function closeTanc(){
+		     if(pltime>1){
+		         pltime--;
+		     }else{
+		         $(".toast").hide();
+		     }       
+		 };
+		 //关闭toast
+	        $(".close-toast").click(function(){
+	            $(".toast").hide();
+	        });
+		 //调用方法如下，哪里调用就放哪里
+		 /**
+		     clearInterval(timer);
+		     $(".toast").show();
+		     pltime=1;
+		     timer=setInterval("closeTanc()",1000);
+		 */
+</script>
 </body>
 </html>
