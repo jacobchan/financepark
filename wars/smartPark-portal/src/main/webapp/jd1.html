@@ -6,6 +6,7 @@
 	<link href="styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 	<link href="styles/base.css" type="text/css" rel="stylesheet">
 	<link href="styles/page/zs.css" type="text/css" rel="stylesheet">
+	<link href="styles/page/cityselector.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="scripts/lib/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/bootstrap.min.js"></script>
@@ -32,15 +33,9 @@
 				<div class="tct-select fl js-s clearfix">
 					<div class="ic-select">
 						<span class="fl lh30 mr10">目的地</span>
-						<p><input type="text" onblur="" value="" style="width: 110px;height: 28px;"
-							id="city_name" name="city_name" mod="address|notice"
-							mod_address_source="hotel" mod_address_suggest=""
-							mod_address_reference="cityid" placeholder="中文/拼音" /></p>
+						<p><input type="text" value="" style="width: 110px;height: 28px;" id="city_name" name="city_name"/></p>
 						<input id="cityid" name="cityid" type="hidden" value="{$cityid}" />
-						<div id="jsContainer" class="jsContainer" style="height:0">
-						    <div id="tuna_alert" style="display:none;position:absolute;z-index:999;overflow:hidden;"></div>
-						    <div id="tuna_jmpinfo" style="visibility:hidden;position:absolute;z-index:120;"></div>
-				    	</div>
+						<div id="suggest" class="ac_results"></div>
 					</div>
 					<!-- <ul style="display: none;" class="select-nav">
 						<li>创立方1</li>
@@ -184,8 +179,10 @@
 	<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
 	<script type="text/javascript" src="scripts/page/laydate/laydate.js"></script>
 	
-	<script type="text/javascript" src="scripts/cityselector/fixdiv.js"></script>
-	<script type="text/javascript" src="scripts/cityselector/address.js"></script>
+	<script type="text/javascript" src="scripts/cityselector/aircity.js"></script>
+	<script type="text/javascript" src="scripts/cityselector/hotelcity.js"></script>
+	<script type="text/javascript" src="scripts/cityselector/j.dimensions.js"></script>
+	<script type="text/javascript" src="scripts/cityselector/j.suggest.js"></script>
 	<script type="text/javascript">
 		function GetRequest() {
 			/* url=decodeURI(location.href);
@@ -345,6 +342,11 @@
 		}
 		//dom载入方法
 		$(function  () {
+			$("#city_name").suggest(Hcitys, {
+				hot_list : Hcommoncitys,
+				dataContainer : '#cityid',
+				attachObject : '#suggest'
+			});
 			var Request = new Object();
 			Request = GetRequest();
 			var commodityId=Request['id'];
