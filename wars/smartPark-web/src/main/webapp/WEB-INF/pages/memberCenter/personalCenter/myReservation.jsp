@@ -8,6 +8,7 @@
 						<ul class="order-nav">
 							<li class="active">我的预约</li>
 							<li>入驻申请预约</li>
+							<li>车位预约</li>
 						</ul>
 					</div>
 					<div class="clearfix-box">
@@ -110,6 +111,35 @@
 							<a href="">末</a>
 							<input class="bd-input fl ml10 mr10" style="width:40px;" type="text">
 							<a href="">Go</a>
+						</div>
+					</div>
+					</div>
+					
+					
+					
+					<div class="clearfix-box" style="display:none;">
+					<div class="clearfix">
+						<table class="gt-table mt20">
+							<colgroup>
+								<col width="180"></col>
+								<col width="180"></col>
+								<col width="180"></col>
+								<col width="180"></col>
+								<col></col>
+							</colgroup>
+							<tbody id="carVipRecord">
+							</tbody>
+						</table>
+						<div class="fr page-list-a clearfix lh30 mt20 f12">
+							<span class="mr20 fl" id="carConPage">共有 0 条，每页显示： 10 条</span>
+							<input type="hidden" id="carCutPage">
+							<a href="javascript:void(0)" onclick="carPage(1,0)">首</a>
+							<a href="javascript:void(0)" onclick="carPage(0,'x')"><i class="fa fa-angle-left"></i></a>
+							<a id="carIndexPage">1</a>
+							<a href="javascript:void(0)" onclick="carPage(0,'y')"><i class="fa fa-angle-right"></i></a>
+							<a href="javascript:void(0);" onclick="" id="carEndPage">末</a>
+							<input class="bd-input fl ml10 mr10" style="width:40px;" type="text" id="goPage">
+							<a href="javascript:void(0);" onclick="goPage()">Go</a>
 						</div>
 					</div>
 					</div>
@@ -302,6 +332,138 @@
 			      }
 			} 
 	</script>
+	<!--车位预约展示  -->
+	<script type="text/javascript">
+	var pageSize=10;
+	//翻页查询
+	$(function () {
+		var serviceURL = baseUrl+'carportManager/getPagerCarports.json?indexPage=1';
+		$.ajax({
+			url:serviceURL, 
+			success:function(result){
+				console.log(result);
+				if(result&&result.records){
+					if(result.totalCount>0){
+						//总页数
+						pageCount=Math.ceil(result.totalCount/pageSize);
+						$("#carEndPage").attr("onclick","carPage("+pageCount+",0)");
+						$("#carConPage").html("共有 "+pageCount+" 页，每页显示： 10 条");
+						$("#carCutPage").val(pageCount);
+						_carVipRecords(result.records);
+					}
+					
+				}
+			}
+		});
+	});
 	
+	function _carVipRecords(record){
+		var html="<tr><th>预约单号</th><th>预约时间</th><th>预约项目</th><th>状态</th><th>操作</th></tr>";	
+		for(var i=0;i<record.length;i++){
+			var cpBegionTime=record[i].cpBegionTime;
+			var cpEntdTime=record[i].cpEntdTime;
+			var applayNo=record[i].applayNo;
+			var applayStatus = record[i].applayStatus;
+			var id = record[i].id;
+			html+= '<tr>';
+			html+= '<td>'+applayNo+'</td>';
+			html+= '<td>'+cpBegionTime+'</td> ';
+			html+= '<td>车位预约</td> ';
+			if(applayStatus=='1'){
+				html+= '<td>已受理</td> ';
+				html+= '<td><a href="javascript:void(0)" onclick="vipCancel(\''+id+'\',this)">取消预约</a></td> ';
+			}else{
+				html+= '<td>已取消</td> ';
+				html+= '<td><a href="javascript:void(0)">已取消</a></td> ';
+			}
+			html+= '</tr>';
+			$("#carVipRecord").empty();
+			$("#carVipRecord").append(html);
+		}
+	}
+	
+	function vipCancel(vipId,o){
+		$.youi.ajaxUtils.ajax({
+			url:baseUrl+"carportManager/saveCarport.json",
+			//cancelReservation
+			data:'id='+vipId,
+			success:function(result){
+				alert("取消成功!");
+				$(o).html('已取消');
+				$(o).removeAttr('onclick');
+				$(o).parent().prev().html('已取消');
+				//location.reload();
+			}
+		});
+	}
+	//翻页方法
+	function carPage(index,type){
+		//获取当前页数
+		var carIndexPage = $("#carIndexPage").html();
+		//获取总页数
+		var carCutPage = $("#carCutPage").val();
+		var indexPage = 0;
+		var isok = false;
+		if(type=='x'){//前翻
+			carIndexPage = parseInt(carIndexPage)-1;
+			if(carIndexPage>=1){
+				indexPage = carIndexPage;
+				isok =true;
+			}
+		}else if(type=='y'){
+			carIndexPage = parseInt(carIndexPage)+1;
+			if(carIndexPage<=carCutPage){
+				indexPage = carIndexPage;
+				isok =true;
+			}
+		}else{
+			indexPage = index;
+			isok =true;
+		}
+		if(isok){
+			var serviceURL = baseUrl+'carportManager/getPagerCarports.json?indexPage='+indexPage+'';
+			$.ajax({
+				url:serviceURL, 
+				success:function(result){
+					console.log(result);
+					if(result&&result.records){
+						if(result.totalCount>0){
+							//当前页
+							var carIndexPage = $("#carIndexPage").html(indexPage);
+							_carVipRecords(result.records);
+						}
+						
+					}
+				}
+			});
+		}
+	}
+	
+	function goPage(){
+		var goPage = $("#goPage").val();
+		//获取当前页数
+		var carIndexPage = $("#carIndexPage").html();
+		//获取总页数
+		var carCutPage = $("#carCutPage").val();
+		if(goPage>=1&&goPage<=carCutPage){
+			var serviceURL = baseUrl+'carportManager/getPagerCarports.json?indexPage='+goPage+'';
+			$.ajax({
+				url:serviceURL, 
+				success:function(result){
+					console.log(result);
+					if(result&&result.records){
+						if(result.totalCount>0){
+							//当前页
+							$("#carIndexPage").html(goPage);
+							_carVipRecords(result.records);
+						}
+						
+					}
+				}
+			});
+		}
+		
+	}
+	</script>
 
 </youi:html>
