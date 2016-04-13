@@ -46,7 +46,7 @@ function validateTime(startTime,endTime){
 	</youi:grid>
 	
 	<!-- form--活动申请内容列表编辑 -->
-	<youi:form dialog="true" caption="-活动申请内容列表" id="form_activityApply" action="esb/web/activityApplyManager/saveActivityApply.json" width="1100">
+	<youi:form dialog="true" caption="-活动申请内容列表" id="form_activityApply" action="esb/web/activityApplyManager/saveActivityApply.json" width="1100" height="500">
 		<youi:fieldLayout prefix="record" labelWidths="120,120">
 			<youi:fieldHidden property="applyId"  caption="活动申请ID"/>
 			<%-- <youi:fieldHidden property="commentContent"  caption="活动内容"/> --%>
