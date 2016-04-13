@@ -75,6 +75,14 @@ a{color:#aaa}.inline_b{display:inline-block}.fw{font-weight:600}.prelative{posit
 .mall-nav li:hover{box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15); -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);cursor: pointer;transition:all .4s;}
 .mall-nav li:nth-child(3n){margin-right: 0px;}
 
+
+/*入驻服务,物业服务*/
+.service ul li{width: 33.3%; height:155px; float:left; border:1px solid #ecebeb; padding:20px;    vertical-align: top;}
+.service ul li:hover{box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);cursor: pointer;transition: all .4s;}
+.service ul li:hover a{color:#ff5900!important}
+.padding ul li{ width:286px; height:240px; margin-right:8px; border:1px solid #ecebeb; margin-bottom:8px; float:left}
+.padding ul li:hover{box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);cursor: pointer;transition: all .4s; }
+
 .cp{height:150px;line-height:150px}
 .st_dian{table-layout:fixed;}.st_dian td{line-height:60px}
 /*reform -->*/
