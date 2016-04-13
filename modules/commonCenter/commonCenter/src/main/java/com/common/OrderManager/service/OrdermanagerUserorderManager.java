@@ -215,4 +215,13 @@ public interface OrdermanagerUserorderManager extends BaseManager{
      */
     public OrdermanagerUserorder getOrderByCode(String userorderCode)
 			throws BusException;
+    /**
+	 * 	通过code，状态,查询订单
+	 * @param userId
+	 * @param genreCode
+	 * @param userorderStatus
+	 * @return
+	 * @throws BusException
+	 */
+   	public List<OrdermanagerUserorder> getOrderlistforPage(String userId,String genreCode,String userorderStatus) throws BusException;
 }
