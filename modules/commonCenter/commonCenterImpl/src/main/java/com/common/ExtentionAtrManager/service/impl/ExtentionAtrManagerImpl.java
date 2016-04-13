@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.common.ExtentionAtrManager.entity.AgencyBookEntity;
 import com.common.ExtentionAtrManager.entity.Billboard;
 import com.common.ExtentionAtrManager.entity.CarEntity;
+import com.common.ExtentionAtrManager.entity.ClfEntity;
 import com.common.ExtentionAtrManager.entity.GwEntity;
 import com.common.ExtentionAtrManager.entity.LawserverEntity;
 import com.common.ExtentionAtrManager.entity.MeetingEntity;
@@ -56,6 +57,16 @@ public class ExtentionAtrManagerImpl implements ExtentionAtrManager {
 		GwEntity gw = new GwEntity();
 		gw.setCommodityId(this.getExtendValue(gw.getCommodityIdfieldName(),commdity.getCommodityId()));
 		commdity.setGw(gw);
+	}
+	
+	/**
+	 * 根据商品获取创立方的扩展属性的内容
+	 * @param commdity 商品
+	 */
+	public void setClfExtendValue(PurchasingmanagerCommodity commdity)throws BusException{
+		ClfEntity clf = new ClfEntity();
+		clf.setAdr(this.getExtendValue(clf.getAdrfieldName(),commdity.getCommodityId()));
+		commdity.setClf(clf);;
 	}
 	/**
 	 * 根据商品获取代理记账扩展属性的内容

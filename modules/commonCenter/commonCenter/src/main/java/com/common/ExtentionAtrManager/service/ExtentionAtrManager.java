@@ -20,6 +20,13 @@ public interface ExtentionAtrManager extends BaseManager {
 	 * @param commdity 商品
 	 */
 	public void setGwExtendValue(PurchasingmanagerCommodity commdity) throws BusException;
+	
+	/**
+	 * 根据商品获取创立方的扩展属性的内容
+	 * @param commdity 商品
+	 */
+	public void setClfExtendValue(PurchasingmanagerCommodity commdity) throws BusException;
+	
 	/**
 	 * 根据商品获取代理记账扩展属性的内容
 	 * @param commdity
