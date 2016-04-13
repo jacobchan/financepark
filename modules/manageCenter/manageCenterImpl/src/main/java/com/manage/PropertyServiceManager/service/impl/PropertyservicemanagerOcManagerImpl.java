@@ -304,12 +304,12 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 				@OrderCollection Collection<Order> orders)
 				throws BusException {
 	    	PagerRecords pagerRecords = propertyservicemanagerOcDao.findByPager(pager, conditions, orders);
-	    	List<PropertyservicemanagerBx> bxlist = pagerRecords.getRecords();
-	    	for(PropertyservicemanagerBx bx : bxlist){
-    			if(StringUtils.isNotEmpty(bx.getMemberId())){
-    				String memberId = bx.getMemberId();
+	    	List<PropertyservicemanagerOc> list = pagerRecords.getRecords();
+	    	for(PropertyservicemanagerOc oc : list){
+    			if(StringUtils.isNotEmpty(oc.getMemberId())){
+    				String memberId = oc.getMemberId();
     				MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
-    				bx.setMember(memberInformation);
+    				oc.setMember(memberInformation);
     			}
     		}
 	    	return pagerRecords;
