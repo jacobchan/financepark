@@ -51,9 +51,9 @@ public class Finace implements Domain{
 	@Column(name = "SHARE_RATE_")
 	private String shareRate;//股份占比
 
-	@Column(name = "COMPANY_ADR_")
+	@Column(name = "COMPANY_URL_")
 	@Length(max=256)
-	private String companyAdr;//公司地址
+	private String companyUrl;//主页地址
 
 	@Column(name = "APPLAY_STATUS_")
 	@Length(max=2)
@@ -148,12 +148,12 @@ public class Finace implements Domain{
 	public void setShareRate(String shareRate){
 		this.shareRate = shareRate;
 	}
-	public String getCompanyAdr(){
-		return this.companyAdr;
+	public String getCompanyUrl(){
+		return this.companyUrl;
 	}
 	
-	public void setCompanyAdr(String companyAdr){
-		this.companyAdr = companyAdr;
+	public void setCompanyUrl(String companyUrl){
+		this.companyUrl = companyUrl;
 	}
 	public String getApplayStatus(){
 		return this.applayStatus;
@@ -233,7 +233,7 @@ public class Finace implements Domain{
 		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
 		result = prime * result + ((companyName == null) ? 0 : companyName.hashCode());
 		result = prime * result + ((shareRate == null) ? 0 : shareRate.hashCode());
-		result = prime * result + ((companyAdr == null) ? 0 : companyAdr.hashCode());
+		result = prime * result + ((companyUrl == null) ? 0 : companyUrl.hashCode());
 		result = prime * result + ((applayStatus == null) ? 0 : applayStatus.hashCode());
 		result = prime * result + ((companyMerite == null) ? 0 : companyMerite.hashCode());
 		result = prime * result + ((bpUrl == null) ? 0 : bpUrl.hashCode());
@@ -295,10 +295,10 @@ public class Finace implements Domain{
 				return false;
 		} else if (!shareRate.equals(other.shareRate))
 			return false;
-		if (companyAdr == null) {
-			if (other.companyAdr != null)
+		if (companyUrl == null) {
+			if (other.companyUrl != null)
 				return false;
-		} else if (!companyAdr.equals(other.companyAdr))
+		} else if (!companyUrl.equals(other.companyUrl))
 			return false;
 		if (applayStatus == null) {
 			if (other.applayStatus != null)
