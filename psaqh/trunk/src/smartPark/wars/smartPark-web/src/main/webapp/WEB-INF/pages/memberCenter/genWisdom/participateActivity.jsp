@@ -76,7 +76,8 @@
 		};
 		//跳转方法
 		function gotoDetails(obj){
-			alert(obj.id+"跳转到详情页面");
+			//alert(obj.id+"跳转到详情页面");
+			window.location.href=proUrl+"czh/czh3.html?applyId="+obj.id;
 		}
 	</script>
 </youi:html>
