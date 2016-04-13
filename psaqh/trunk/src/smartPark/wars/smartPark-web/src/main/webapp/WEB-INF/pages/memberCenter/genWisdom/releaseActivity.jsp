@@ -190,8 +190,72 @@
 			var activityAdr = $("#activityAdr").val();
 			var applyOrderNumber = $('input[name="com"]:checked').attr("id");
 			var commentContent = editor.getData();
-		
-			
+			if(applyTitle==''||applyTitle==null){
+				clearInterval(timer);
+				$(".tc.mt25").text("请输入活动标题！");
+           		$(".toast").show();
+           		pltime=1;
+           		timer=setInterval("closeTanc()",1000);
+           		return false;
+			}
+			if(startTime==''||startTime==null){
+				clearInterval(timer);
+				$(".tc.mt25").text("请输入活动开始时间！");
+           		$(".toast").show();
+           		pltime=1;
+           		timer=setInterval("closeTanc()",1000);
+           		return false;
+			}
+			if(endTime==''||endTime==null){
+				clearInterval(timer);
+				$(".tc.mt25").text("请输入活动开始时间！");
+           		$(".toast").show();
+           		pltime=1;
+           		timer=setInterval("closeTanc()",1000);
+           		return false;
+			}
+			if(deadline==''||deadline==null){
+				clearInterval(timer);
+				$(".tc.mt25").text("请输入报名结束时间！");
+           		$(".toast").show();
+           		pltime=1;
+           		timer=setInterval("closeTanc()",1000);
+           		return false;
+			}
+			if(applyMaxuser==''||applyMaxuser==null){
+				clearInterval(timer);
+				$(".tc.mt25").text("活动人数限制！");
+           		$(".toast").show();
+           		pltime=1;
+           		timer=setInterval("closeTanc()",1000);
+           		return false;
+			}else{
+				var reg = /^[1-9]\d*$/;     
+				if(!reg.test(applyMaxuser)){
+					clearInterval(timer);
+					$(".tc.mt25").text("请输入正确数字！");
+	           		$(".toast").show();
+	           		pltime=1;
+	           		timer=setInterval("closeTanc()",1000);
+	           		return false;
+				}
+			}
+			if(activityAdr==''||activityAdr==null){
+				clearInterval(timer);
+				$(".tc.mt25").text("请输入活动地址！");
+           		$(".toast").show();
+           		pltime=1;
+           		timer=setInterval("closeTanc()",1000);
+           		return false;
+			}
+			if(applyOrderNumber==''||applyOrderNumber==null){
+				clearInterval(timer);
+				$(".tc.mt25").text("请选择活动场地！");
+           		$(".toast").show();
+           		pltime=1;
+           		timer=setInterval("closeTanc()",1000);
+           		return false;
+			}
 			//检查是否有选择头像图片
 			var fileCount = uploader.files.length;
 			//alert(fileCount);
