@@ -124,6 +124,7 @@
 							</div>
 							<div class="fb-list-box undis">
 								<table class="flb-table mt30 c-b1 f12 tc"  width="100%">
+								<div class="per-h3" style="padding-bottom:0px;border-bottom: 0px;"><a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>新增场地</a></div>
 									<colgroup>
 										<col width="60"></col>
 										<col width="23.5%"></col>
@@ -486,20 +487,16 @@
 		editor.updateElement();
 		$(document).on("click",".activeroom input",function(){
                 if($(this).attr('checked')){
-                    //$(this).attr('checked',true).siblings().attr('checked',false);
-                    //$(this).attr('checked',false);
                     $(this).attr('checked',false);
-                 // $(".activeroom input").siblings().attr('checked',false);
-             
-                    
                 }else{
+                $(this).parents("tr").siblings().find("input").attr('checked',false);
                 	$(this).attr('checked',true);
-                	//$(".activeroom input").siblings().attr('checked',false);
-               
-				
                 }
  
         });
+		$("#a1").click(function(){			
+			location.href = proUrl + "companyservice/room.html" ;
+		})	
 	</script>
 	<script type="text/javascript">
 		//toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
