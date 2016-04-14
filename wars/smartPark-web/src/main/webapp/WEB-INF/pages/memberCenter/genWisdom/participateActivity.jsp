@@ -44,7 +44,7 @@
 			for(var i=0;i<record.length;i++){
 				var html="<a href='javascript:;' id='"+record[i].applyId+"' onclick='javascript:gotoDetails(this)'>"+
 						 "<div class='czh-box'>"+
-                    	 "<img src='"+cenUrl+"filestore/"+record[i].activityImage+"'style='width: 220px; height: 123px;'>"+
+						 "<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityImage+"&method=show'>"+
                 		 "<div class='czh-group' style='border-bottom:1px solid #ecebeb'>"+
                     	 "<h4>"+record[i].applyTitle+"</h4>"+
                     	 "<span>活动发起人："+record[i].memberId.memberName+"</span><br/>"+
