@@ -453,7 +453,7 @@
 	    				$("#knowledgeDiv").empty();
 	    				for(var i=0; i<records.length; i++){
 	    					var imgsrc = "../styles/images/yqfw/zz1.jpg";
-	    					if(records[i].knowledgeUrl.length!=0){
+	    					if(records[i].knowledgeUrl !=null && records[i].knowledgeUrl != "" && records[i].knowledgeUrl.length!=0){
 	    						imgsrc = cenUrl+"common/uploadImage.html?repository=/swfupload&path="+records[i].knowledgeUrl+"&method=show";
 	    					}
 	    					knowledgeDiv += '<tr>'+
