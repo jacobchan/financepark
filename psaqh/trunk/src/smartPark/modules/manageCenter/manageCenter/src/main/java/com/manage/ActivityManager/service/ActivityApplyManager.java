@@ -7,16 +7,14 @@ import java.util.List;
 import java.util.Collection;
 
 import com.common.MemberManager.entity.MemberInformation;
+import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.ServiceParam;
-
 import com.manage.ActivityManager.entity.ActivityApply;
-import com.manage.ActivityManager.entity.ActivityApplylist;
 import com.manage.ActivityManager.entity.ActivityComment;
 import com.manage.ActivityManager.entity.ActivityDocument;
 
@@ -103,6 +101,13 @@ public interface ActivityApplyManager extends BaseManager{
      * @throws BusException
      */
     public List<ActivityDocument> getPublishActivityDocuments(ActivityApply o) throws BusException;
+    /**
+     * 根据活动主键查询活动场地 
+     * @param o
+     * @return
+     * @throws BusException
+     */
+    public List<OrdermanagerUserorder> getPublishActivityOrder(ActivityApply o) throws BusException;
     /**
      * 申请通过更改状态
      * @param id
