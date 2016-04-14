@@ -141,7 +141,7 @@
 				var buttonHtml='';
 				if(record[i].bxStatus=='00'){
 					bxStatus='待受理';
-					buttonHtml="<td><a href='javascript:;' class='ac-show' onclick='javascript:cancel(\""+record[i].bxId+"\")'>取消</a></td>";
+					buttonHtml="<a href='javascript:;' class='ac-show' onclick='javascript:cancel(\""+record[i].bxId+"\")'>取消</a>";
 				}else if(record[i].bxStatus=='01'){
 					bxStatus='已受理';
 				}else if(record[i].bxStatus=='02'){
@@ -167,7 +167,7 @@
 						//"<td>"+"张三"+"</td>"+
 						"<td>"+record[i].member.memberName+"</td>"+
 						"<td>18659786621</td>"+
-						buttonHtml+
+						"<td>"+buttonHtml+"</td>"
 						"</tr>";
 				 $("tbody").append(html);
 			}
