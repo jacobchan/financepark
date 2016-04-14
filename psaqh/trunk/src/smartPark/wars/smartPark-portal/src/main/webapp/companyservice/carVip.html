@@ -159,9 +159,11 @@
 	            $(".toast").hide();
 	        }       
 	    }
-	    function jump1(){
-			if(a>1){
-				a--;
+	    function jump1(i){
+	    	$("#ti-m1").text(i);
+	    	i = i - 1;
+			if(i>0){
+				setTimeout("jump1("+i+")", 1000);
 			}else{
 				window.location=cenUrl+"member/memberCenter/personalCenter/myReservation.html";
 			}		
@@ -306,10 +308,10 @@
 					jsonp : 'data:jsonp',
 					dataType : 'jsonp',
 					success : function(result) {
-						$("#msg").text("提交成功！");
-			            $(".toast").show();
-						a=3;
-						timer2=setInterval("jump1()",1000);
+						$(".bg-tanc.m1").show();
+						jump1(3);
+						/* a=3;
+						timer2=setInterval("jump1()",1000); */
 					},error:function(XMLHttpRequest, textStatus, errorThrown){
 						//alert(XMLHttpRequest);
 					}
@@ -362,19 +364,23 @@
     </div>
     
      <!-- 弹窗 -->
-     <div class="pop_layer pl1">
-        <div class="online_box clearfix" style="width:550px;height:212px;margin-left:-275px;margin-top:-111px;padding:30px;">
-            <div class="close0 fr"></div>
-            <table class="w100 mt40 c3">
-                <tr>
-                    <td width="28%" align="right" class="close"><img src="../styles/images/grzx/check.png" class="mr40 mb20" border="0"></td>
-                    <td >
-                        <h4 class="f24 c-333"> 您已预约成功！</h4>
-                        <p class="f14 cc mt20 mb20">如有问题，请拨打：0571-86508888</p>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div> 
+     <div class="bg-tanc m1">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+		<a href="javascript:;" class="tc-close"></a>
+		<div class="tc mt40">
+			<div class="mt20 mb20 f16 lh26">
+				<img src="../styles/images/yqfw/correct.png" border="0" class="mr20"/>
+			</div>
+			<p class="mb10 f16">您已经成功提交订单，请到会员中心查看。</p>
+			<p><span class="c-o f24 tc-time" id="ti-m1">3 </span>秒后，系统将自动跳转</p>
+			<p class="mt10"><a style="cursor:pointer;" onclick="jump();" class="c-6">手动跳转 ></a></p>
+			<div class="clearfix mt30">
+				<a style="cursor:pointer;" onclick="jumpIndex();"  class="c-6"><i class="fa fa-home mr10" style="font-size:24px;"></i>返回首页</a>
+				<span class="f14 ml20 mr20 c-6">|</span>
+				<a style="cursor:pointer;" onclick="jumpPerson();"  class="c-6"><i class="fa fa-user mr10" style="font-size:20px;"></i>个人中心</a>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>
