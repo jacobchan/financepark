@@ -71,6 +71,66 @@ function GetRequest() {
 				            timer=setInterval("closeTanc()",1000);
 					  	}else{
 					  		num--;
+					  		var serviceURL = baseUrl+"propertyservicemanagerEnteringManager/getEnteringList.json";
+							var pageIndex=num+1;
+							var params = ['pager:pageIndex='+pageIndex];
+							var enteringId;
+							//根据商品id获取资源可用状态
+							$.youi.ajaxUtils.ajax({
+								url : serviceURL,
+								jsonp : 'data:jsonp',
+								data:params.join('&'),
+								dataType : 'jsonp',
+								async : false,
+								success : function(results) {
+									if (results && results.records) {
+										var record = results.records;
+										$("#am").empty();
+										$("#pm").empty();
+										var amHtml="<td>09：00-12：00</td><td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>99</span>不可预约</a></td>";
+										var pmHtml="<td>14：00-17：00</td><td><a href='javascript:;' class='em3'>不可预约</a></td>";
+										$("#am").append(amHtml);
+										$("#pm").append(pmHtml);
+										var html="";
+										var htmls="";
+										for(var i=0; i<record.length; i++){
+						                $("#enteringName").val(record[0].memName);
+										$("#enteringTelephone").val(record[0].memPhone);
+										if(record[i].enteringTime=='AM'){
+											if(record[i].enteringStatus=='01'){
+												html="<td><a href='javascript:;' class='em1'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+										    }
+											else if(record[i].enteringStatus=='02'){
+												html="<td><a href='javascript:;' class='em2'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+											}else{
+												html="<td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+											}
+											$("#am").append(html);
+										}
+											
+										if(record[i].enteringTime=='PM'){
+											if(record[i].enteringStatus=='01'){
+												htmls="<td><a href='javascript:;' class='em1'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+											}
+											else if(record[i].enteringStatus=='02'){
+												htmls="<td><a href='javascript:;' class='em2'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+											}else{
+												htmls="<td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+											}
+											$("#pm").append(htmls);
+										}
+										
+										}
+										
+										$(document).on("click",".em1",function(){
+											$(".em1").removeClass("active");
+											$(this).addClass("active");
+											enteringId=$(this).find("span").text();
+										})
+
+									}
+								}
+							});
 					  		console.log(num);
 							changeDate(num);
 					  	}
@@ -78,6 +138,66 @@ function GetRequest() {
 					//右按钮
 					$(".cd-next").click(function(){
 						num++;
+						var serviceURL = baseUrl+"propertyservicemanagerEnteringManager/getEnteringList.json";
+						var pageIndex=num+1;
+						var params = ['pager:pageIndex='+pageIndex];
+						var enteringId;
+						//根据商品id获取资源可用状态
+						$.youi.ajaxUtils.ajax({
+							url : serviceURL,
+							jsonp : 'data:jsonp',
+							data:params.join('&'),
+							dataType : 'jsonp',
+							async : false,
+							success : function(results) {
+								if (results && results.records) {
+									var record = results.records;
+									$("#am").empty();
+									$("#pm").empty();
+									var amHtml="<td>09：00-12：00</td><td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>99</span>不可预约</a></td>";
+									var pmHtml="<td>14：00-17：00</td><td><a href='javascript:;' class='em3'>不可预约</a></td>";
+									$("#am").append(amHtml);
+									$("#pm").append(pmHtml);
+									var html="";
+									var htmls="";
+									for(var i=0; i<record.length; i++){
+					                $("#enteringName").val(record[0].memName);
+									$("#enteringTelephone").val(record[0].memPhone);
+									if(record[i].enteringTime=='AM'){
+										if(record[i].enteringStatus=='01'){
+											html="<td><a href='javascript:;' class='em1'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+									    }
+										else if(record[i].enteringStatus=='02'){
+											html="<td><a href='javascript:;' class='em2'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+										}else{
+											html="<td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+										}
+										$("#am").append(html);
+									}
+										
+									if(record[i].enteringTime=='PM'){
+										if(record[i].enteringStatus=='01'){
+											htmls="<td><a href='javascript:;' class='em1'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+										}
+										else if(record[i].enteringStatus=='02'){
+											htmls="<td><a href='javascript:;' class='em2'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+										}else{
+											htmls="<td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+										}
+										$("#pm").append(htmls);
+									}
+									
+									}
+									
+									$(document).on("click",".em1",function(){
+										$(".em1").removeClass("active");
+										$(this).addClass("active");
+										enteringId=$(this).find("span").text();
+									})
+
+								}
+							}
+						});
 						console.log(num);
 						changeDate(num);
 					})
@@ -97,29 +217,43 @@ function GetRequest() {
 							}
 						}
 					};
-
+				    //关闭toast
+			        $(".close-toast").click(function(){
+			            $(".toast").hide();
+			        })
 					
 					 $(".hhf-submit").click(function(){	
-						if(!isLogin){alert("请登录");return;}
+						 if(!isLogin){
+							   clearInterval(timer);
+							    $("#msg").text("请登录后重试！");
+					            $(".toast").show();
+					            pltime=2;
+					            timer=setInterval("closeTanc()",1000);
+							 	return false;
+							}
 						var enteringName=$("#enteringName").val();
 						var enteringTelephone=$("#enteringTelephone").val();
 						if(enteringId == null||enteringId == ""){
-							alert("请选择预约时间");
+							$("#msg").text("请选择预约时间");
+       			    		$(".toast").show();
 							return;
 						}
                         if(enteringName == null||enteringName == ""){
-							alert("请填写申请人");
+							$("#msg").text("请填写申请人");
+       			    		$(".toast").show();
 							return;
 						}
                         if(enteringTelephone !=null&& enteringTelephone!=""){
        					 if(isMobil(enteringTelephone)){
        							
        						}else{
-       							alert("电话格式不正确！");
+       							$("#msg").text("电话格式不正确！");
+           			    		$(".toast").show();
        							return false;
        						}
        			    	}else{
-       			    		alert("请填写申请人电话");
+       			    		$("#msg").text("请填写申请人电话");
+       			    		$(".toast").show();
 							return;
        			    	}
                       
@@ -222,6 +356,7 @@ function GetRequest() {
 							<span class="hbb-span"><em class="em1"></em> 可以预约</span>
 							<span class="hbb-span"><em class="em2"></em> 预约已满</span>
 							<span class="hbb-span"><em class="em3"></em> 不可预约</span>
+							<span id="nextPage" style="display:none"></span>
 						</div>
 						<div class="pr">
 							<table class="ht-table">
@@ -340,11 +475,14 @@ function GetRequest() {
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
 	<script type="text/javascript">
 	var serviceURL = baseUrl+"propertyservicemanagerEnteringManager/getEnteringList.json";
+	var pageIndex=1;
+	var params = ['pager:pageIndex='+pageIndex];
 	var enteringId;
 	//根据商品id获取资源可用状态
 	$.youi.ajaxUtils.ajax({
 		url : serviceURL,
 		jsonp : 'data:jsonp',
+		data:params.join('&'),
 		dataType : 'jsonp',
 		async : false,
 		success : function(results) {
@@ -397,7 +535,7 @@ function GetRequest() {
 	});
 	
 		
-		
 </script>
+
 </body>
 </html>
