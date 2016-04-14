@@ -4,10 +4,11 @@
 package com.member.applications.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: 340702融资申请
@@ -91,6 +92,17 @@ public class Finace implements Domain{
 	@Column(name = "APPLAY_NO_")
 	@Length(max=20)
 	private String applayNo;//申请编号
+	
+	@Transient
+	private MemberInformation member;
+	
+	public MemberInformation getMember() {
+		return member;
+	}
+
+	public void setMember(MemberInformation member) {
+		this.member = member;
+	}
 	
 	public String getCreateTime(){
 		return this.createTime;
