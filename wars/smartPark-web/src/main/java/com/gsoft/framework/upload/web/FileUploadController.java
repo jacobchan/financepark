@@ -9,14 +9,27 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.regexp.recompile;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -24,7 +37,12 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gsoft.framework.security.AccountPrincipal;
+import com.gsoft.framework.upload.dao.FileStoreDao;
+import com.gsoft.framework.upload.entity.FileStore;
+import com.gsoft.framework.upload.service.FileStoreManager;
+import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.SecurityUtils;
+import com.manage.FileManager.service.FileUploadManager;
 
 /**
  * 文件上传处理（文件和图片）
@@ -36,6 +54,10 @@ import com.gsoft.framework.util.SecurityUtils;
 public class FileUploadController {
 	@Value("#{configProperties['file.root.path']}")
 	private String root;
+	@Autowired
+	private FileStoreManager fileStoreManager;
+	@Autowired
+	private FileStoreDao fileStoreDao;	
 	
 	/**
 	 * 上传页面的跳转
@@ -57,11 +79,13 @@ public class FileUploadController {
 	 * @param request
 	 * @param response
 	 * @return
+	 * @throws FileUploadException 
+	 * @throws IllegalStateException 
 	 * @throws IOException 
 	 */
 	@RequestMapping(value = "/goUpload.html")
 	public void goUpload(HttpServletRequest request,
-			HttpServletResponse response){
+			HttpServletResponse response) throws IllegalStateException, FileUploadException{
 		
 		List<String> urlList = new ArrayList<String>();
 		try {
@@ -69,7 +93,7 @@ public class FileUploadController {
 			//TODO 后续完善
 			String fileFlg = request.getParameter("fileFlg");
 			//执行上传操作，返回带有文件URL的集合
-			urlList = this.uploadFile(request, response);
+			urlList = this.uploadImage(request, response);
 		} catch (IOException e) {
 			urlList.clear();
 		}
@@ -146,6 +170,45 @@ public class FileUploadController {
 				}
 			}
 		}
+		return urlList;
+	}
+	
+	public List<String> uploadImage(HttpServletRequest  request,HttpServletResponse response) throws IllegalStateException, IOException, FileUploadException{
+		List<String> urlList = new ArrayList<String>();
+//		String ret = "";
+		String key;
+		if (request instanceof MultipartHttpServletRequest) {
+		    MultiValueMap<String, MultipartFile> multipartFiles = ((MultipartHttpServletRequest)request).getMultiFileMap();
+		    for (Entry entry : multipartFiles.entrySet()) {
+		    	key = (String)entry.getKey();
+		        MultipartFile multipartFile = (MultipartFile)multipartFiles.getFirst(key);
+		    	String fileName =  "uploadImages/"+DateUtils.getToday("yyyyMM")+"/"+UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(multipartFile.getOriginalFilename());
+		    	File path = new File(root+"uploadImages/"+DateUtils.getToday("yyyyMM"));
+		    	if(!path.exists()){
+				  path.mkdirs();
+		    	}
+		    	File file = new File(root+fileName);
+		    	FileUtils.copyInputStreamToFile(multipartFile.getInputStream(),file);
+		    	urlList.add(fileName);
+		    }
+		  }else{
+			  FileItemFactory factory = new DiskFileItemFactory();
+			  ServletFileUpload upload = new ServletFileUpload(factory);
+			  List<FileItem> items = upload.parseRequest(request);
+			  for (FileItem item : items) {
+				  if(!(item.isFormField())){
+					  String fileName =  "uploadImages/"+DateUtils.getToday("yyyyMM")+"/"+UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(item.getName());
+					  File path = new File(root+"uploadImages/"+DateUtils.getToday("yyyyMM"));
+					  if(!path.exists()){
+						  path.mkdirs();
+					  }
+					  File file = new File(root+fileName);
+					  FileUtils.copyInputStreamToFile(item.getInputStream(),file);
+					  urlList.add(fileName);
+				  }
+			  }
+		   }
+		
 		return urlList;
 	}
 	
