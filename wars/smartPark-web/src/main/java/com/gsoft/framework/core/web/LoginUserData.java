@@ -18,7 +18,6 @@ import com.common.MessageCenter.service.McMsgdatasManager;
 import com.gsoft.entity.MessageService;
 import com.gsoft.framework.core.web.controller.BaseDataController;
 import com.gsoft.framework.core.web.view.DataModelAndView;
-import com.gsoft.framework.esb.annotation.ServiceParam;
 
 @Controller
 @RequestMapping("/web/loginUser")
