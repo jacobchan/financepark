@@ -27,7 +27,7 @@ function validateTime(startTime,endTime){
 			<youi:fieldSelect property="memberId.memberId"  caption="会员用户" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>		
 		</youi:fieldLayout>
 		<youi:gridCol property="applyNumber"  caption="活动申请编号" width="100px"/>
-		<youi:gridCol property="activityAdr"  caption="活动地址" width="100px" notNull="true"/>
+		<youi:gridCol property="activityAdr"  caption="活动地址" width="100px"/>
 		<youi:gridCol property="applyOrderNumber"  caption="场地订单编号" width="100px"/>	
 		<youi:gridCol property="applyTitle"  caption="活动标题" width="150px"/>
 		<youi:gridCol property="applayType.typeName"  caption="活动类型" width="100px"/>
