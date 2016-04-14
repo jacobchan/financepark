@@ -235,7 +235,7 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
     	orders.add(ConditionUtils.getOrder("enteringDate", true));
     	conditions.add(ConditionUtils.getCondition("enteringDate", Condition.RIGHT,now));
     	PagerRecords pagerRecords = propertyservicemanagerEnteringDao.findByPager(pager, conditions, orders);
-    	@SuppressWarnings("unchecked")
+    	String total=String.valueOf(pagerRecords.getTotalCount());
 		List<PropertyservicemanagerEntering> enteringList = (List<PropertyservicemanagerEntering>)pagerRecords.getRecords();
     	List<PropertyservicemanagerEntering> enteringLists=new ArrayList<PropertyservicemanagerEntering>();
     	
@@ -257,6 +257,7 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
         			List<Codeitem> list = codeItemDao.getList(new String[] {"codemap.code", "itemValue" }, new Object[] { "enteringStatus",pe.getEnteringStatus()});
         			record.put("enteringStatus",pe.getEnteringStatus());
         			record.put("enteringStatusName",list.size()>0?list.get(0).getItemCaption():"");
+        			record.put("total",total);
         			record.put("memName",mem !=null?mem.getMemberName():"");
         			record.put("memPhone",mem !=null?mem.getMemberPhoneNumber():"");
         			enteringValueList.add(record);
@@ -277,6 +278,7 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
 			record.put("enteringRemain",pe.getEnteringRemain());//剩余预约数量
 			record.put("enteringAlre",pe.getEnteringAlre());//已预约数量
 			record.put("enteringTime",pe.getEnteringTime());
+			record.put("total",total);
 			List<Codeitem> list = codeItemDao.getList(new String[] {"codemap.code", "itemValue" }, new Object[] { "enteringStatus",pe.getEnteringStatus()});
 			record.put("enteringStatus",pe.getEnteringStatus());
 			record.put("enteringStatusName",list.size()>0?list.get(0).getItemCaption():"");
