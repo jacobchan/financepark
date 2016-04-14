@@ -17,7 +17,7 @@ $(function(){
 			var loc = encodeURIComponent(window.location.href);
 			if($.youi.serverConfig.authorization){
 				isLogin = true;
-				console.log('user authorization = '+$.youi.serverConfig.authorization);
+				//console.log('user authorization = '+$.youi.serverConfig.authorization);
 				$('#user_info:first').append('<a href="'+cenUrl+'portal/logout.html?redirect='+loc+'">退出</a>');
 			}else{
 				$('#user_info:first a:first').attr('href',cenUrl+'member/memberCenter/login.html?redirect='+loc);
