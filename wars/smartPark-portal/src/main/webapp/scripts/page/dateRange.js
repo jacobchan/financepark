@@ -484,6 +484,8 @@ pickerDateRange.prototype.init = function(isCompare) {
 			success : function(results) {
 				if (results && results.records) {
 					var records = results.records;
+					
+					
 					$("#resoIds").empty();
 					for(var i=0; i<records.length; i++){
 						if((Number(records[i].resoDate.substring(5,7)))==Number($("#month").html())){
@@ -493,7 +495,7 @@ pickerDateRange.prototype.init = function(isCompare) {
 								numArray.push(Number(records[i].resoDate.substring(records[i].resoDate.lastIndexOf("-")+1, records[i].resoDate.length)));
 							}
 						}else{
-							numArray.splice(i,numArray.length);
+							numArray.splice(i-1,numArray.length-1);
 						}
 					}
 				}
