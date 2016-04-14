@@ -317,8 +317,11 @@
 					addressDetail = $("#ad2").val();
 				}
 				if(!isMobil(addressPhone)){
-					$(".f24.fl.c-333").text("手机号格式不正确！");
-					$(".bg-tanc.m2").show();
+					clearInterval(timer);
+					$(".tc.mt25").text("手机号格式不正确!");
+		         	$(".toast").show();
+		         	pltime=1;
+		         	timer=setInterval("closeTanc()",1000);
 					return false;
 				}
 				
@@ -333,11 +336,13 @@
 					data:params.join('&'),
 					success:function(results){
 						if(results&&results.record){
-							$(".f24.fl.c-333").text("保存成功!");
-							$(".bg-tanc.m2").show();
+							clearInterval(timer);
+				         	$(".toast").show();
+				         	pltime=1;
+				         	timer=setInterval("closeTanc()",1000);
 							//location.reload();
 							setTimeout(function(){$(".bg-tanc.m1").hide(); },100);
-							setTimeout(function(){$(".bg-tanc.m2").hide(); },1000);
+							//setTimeout(function(){$(".bg-tanc.m2").hide(); },1000);
 							refreshData(currentIndex,pageSize);
 						}
 					}
@@ -404,5 +409,27 @@
 				setTimeout(function(){$(".toast").hide(); },1000);
 				refreshData(currentIndex,pageSize);
 	      }
+	</script>
+	<script type="text/javascript">
+		//toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
+		 var pltime,timer;
+		 function closeTanc(){
+		     if(pltime>1){
+		         pltime--;
+		     }else{
+		         $(".toast").hide();
+		     }       
+		 };
+		 //关闭toast
+	        $(".close-toast").click(function(){
+	            $(".toast").hide();
+	        });
+		 //调用方法如下，哪里调用就放哪里
+		 /**
+		     clearInterval(timer);
+		     $(".toast").show();
+		     pltime=1;
+		     timer=setInterval("closeTanc()",1000);
+		 */
 	</script>
 </youi:html>
