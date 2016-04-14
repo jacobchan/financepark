@@ -4,10 +4,8 @@
 package com.common.MemberManager.service.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Collection;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
@@ -44,6 +42,7 @@ import com.common.MemberManager.entity.MemberUserInfo;
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.service.MemberInformationManager;
 import com.common.MemberManager.service.MemberRoleManager;
+import com.common.MessageCenter.service.McMsgdatasManager;
 
 @Service("memberInformationManager")
 @Transactional
@@ -53,8 +52,8 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	private MemberInformationDao memberInformationDao;
 	@Autowired
 	private MemberRoleManager memberRoleManager;
-	//@Autowired
-//	private  EnterbusinessmanagerRzManager enterbusinessmanagerRzManager
+	@Autowired
+	private McMsgdatasManager mcMsgdatasManager;
     /**
      * 查询列表
      */
@@ -150,20 +149,7 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
     public boolean exsitMemberInformation(String propertyName,Object value) throws BusException{
 		return memberInformationDao.exists(propertyName,value);
 	}
-    //发送手机验证码
-    @Override
-    @EsbServiceMapping
-   	public void sendMobileCaptcha(@ServiceParam(name="mobile") String mobile)throws BusException {
-    	Random random = new Random(new Date().getTime());
-		Long code = Math.abs(random.nextLong() % 999999);
-		String captcha = org.apache.commons.lang.StringUtils.leftPad(code.toString(), 6, '0');
-    	try {
-			HttpSenderMsg.sendMsg(mobile, "注册验证码为"+captcha+"【智慧园区】");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
+    
     
     /**
 	 * 用户注册
@@ -473,7 +459,7 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 			    	List<MemberInformation> list = pagerRecords.getRecords();
 			    	for(MemberInformation info : list){
 		    			if(StringUtils.isNotEmpty(info.getMemberId())){
-		    				String  companyId= info.getCompanyId();
+//		    				String  companyId= info.getCompanyId();
 		    			//	EnterbusinessmanagerRz rz = enterbusinessmanagerRzManager.getEnterbusinessmanagerRz(companyId);
 		    			//	rz.setMember(memberInformation);
 		    			}
