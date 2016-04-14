@@ -68,21 +68,21 @@ $(function(){
 			//项目类型
 			var projectType = $(".ic-select p").attr("data");
 			if(projectType=="NODATA"){
-				alert("请选择项目类型");
+				showMessage("请选择项目类型");
 				return false;
 			}
 			
 			//项目简介
 			var projectDis = $("#projectDis").val();
 			if(projectDis==""){
-				alert("请填写项目简介");
+				showMessage("请填写项目简介");
 				return false;
 			}
 			
 			//是否融资选择
 			var isFinace = $("#isFinace").find("span.active").attr("data");
 			if(isFinace==""){
-				alert("请选择是否融资");
+				showMessage("请选择是否融资");
 				return false;
 			}
 			
@@ -95,7 +95,7 @@ $(function(){
 			}
 			
 			if(teacherType==""){
-				alert("请选择导师类型");
+				showMessage("请选择导师类型");
 				return false;
 			}
 			var params = ['projectType='+projectType,'projectDis='+projectDis,'isFinace='+isFinace,'teacherType='+teacherType,'teacherTypeFlg='+teacherTypeFlg];
@@ -148,56 +148,56 @@ $(function(){
 		//公司名称
 		var companyName = $("#companyName").val();
 		if(companyName==""){
-			alert("请填写公司名称");
+			showMessage("请填写公司名称");
 			return false;
 		}
 		
 		//主页地址
 		var companyUrl = $("#companyUrl").val();
 		if(companyUrl==""){
-			alert("请填写主页地址");
+			showMessage("请填写主页地址");
 			return false;
 		}
 		//融资额度（起）
 		var amountStart = $("#amountStart").val();
 		if(amountStart==""){
-			alert("请填写融资额度");
+			showMessage("请填写融资额度");
 			return false;
 		}
 		//融资额度（止）
 		var amountEnd = $("#amountEnd").val();
 		if(amountEnd==""){
-			alert("请填写融资额度");
+			showMessage("请填写融资额度");
 			return false;
 		}
 		//股份占比
 		var shareRate = $("#shareRate").val();
 		if(shareRate==""){
-			alert("请填写股份占比");
+			showMessage("请填写股份占比");
 			return false;
 		}else{
 			//判断比例是否大于100
 			if(shareRate>100){
-				alert("股份占比不能大于100%");
+				showMessage("股份占比不能大于100%");
 				return false;
 			}
 		}
 		//业务简介
 		var businessDis = $("#businessDis").val();
 		if(businessDis==""){
-			alert("请填写业务简介");
+			showMessage("请填写业务简介");
 			return false;
 		}
 		//公司优势
 		var companyMerite = $("#companyMerite").val();
 		if(companyMerite==""){
-			alert("请填写公司优势");
+			showMessage("请填写公司优势");
 			return false;
 		}
 		//核心成员
 		var corTeam = $("#corTeam").val();
 		if(corTeam==""){
-			alert("请填写核心成员");
+			showMessage("请填写核心成员");
 			return false;
 		}
 		var params = ['companyName='+companyName,'companyUrl='+companyUrl,'amountStart='+amountStart,
@@ -329,4 +329,13 @@ $(function(){
         }else{
             $(".toast").hide();
         }       
+    }
+    
+    //显示信息
+    function showMessage(message){
+    	clearInterval(timer);
+		$(".toast").show();
+		$(".toast p").html(message);
+		pltime=1;
+		timer=setInterval("closeTanc()",1000);
     }
