@@ -98,6 +98,6 @@ public interface PropertyservicemanagerMoverecManager extends BaseManager{
 	 * @return
 	 * @throws BusException
 	 */
-    @EsbServiceMapping
-	public PropertyservicemanagerMoverec cancelStatus(@ServiceParam(name="moverecId") String moverecId) throws BusException;
+    
+	public PropertyservicemanagerMoverec cancelStatus( String moverecId) throws BusException;
 }
