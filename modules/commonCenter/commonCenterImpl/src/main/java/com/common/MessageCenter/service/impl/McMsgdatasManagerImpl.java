@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,7 @@ import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.security.PrincipalConfig;
 import com.gsoft.framework.security.agt.entity.User;
 import com.gsoft.framework.util.DateUtils;
+import com.gsoft.utils.HttpSenderMsg;
 
 @Service("mcMsgdatasManager")
 @Transactional
@@ -221,6 +223,50 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 		}	
 		mcMsgdatas.setSendStatus("0");// 初始发送状态默认值
 		return mcMsgdatas;
+	}
+	//发送消息
+	@Override
+	public Boolean smsSend(String code, Map<String, Object> params,
+			String recUser, String phone) {
+		Boolean success = true;
+		McMsgtempalate mmt = msgtempalateManager.getMsgTempalate(code);
+		if(mmt != null){
+			String content = mmt.getMsgTempalateContent();
+			for (Entry<String, Object> entry : params.entrySet()) {
+				content = content.replace("@"+entry.getKey(), entry.getValue().toString());
+			}
+			McMsgdatas mmd = new McMsgdatas();
+			try{
+				String result = HttpSenderMsg.sendMsg(phone, content);
+				if("999999".equals(result)){
+//					bp.setStatus("02"); //发送状态 待发送
+//					bp.setSendMode("02");//预发送
+//					bp.setValid("01");//01-有效
+					success =  false;
+				}else{
+//					bp.setStatus("01"); //发送状态 成功
+//					bp.setValid("01");
+				}
+			}catch (Exception e) {
+//				bp.setStatus("02"); //发送状态 待发送
+//				bp.setSendMode("02");//预发送
+//				bp.setValid("01");
+				success =  false;
+			}
+			mmd.setReceive(recUser);
+			mmd.setMsgCaption(mmt.getMsgTempalateCaption());
+			mmd.setMsgContent(content);
+			mmd.setMsgType(mmt.getMcMsgtype().getMsgTypeCaption());
+			mmd.setSendStatus("02");//02-发送成功
+			mmd.setCreateUser(recUser);
+			mmd.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+			mmd.setUpdateUser(recUser);
+			mmd.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+			mcMsgdatasDao.save(mmd);
+			return success;
+		}else{
+			return false;
+		}
 	}
 
 }
