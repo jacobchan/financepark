@@ -56,7 +56,8 @@
 						<tr>
 							<td>公司</td>
 							<td>
-								<input type="text" readonly="readonly" id="companyId">
+								<input type="text" readonly="readonly" id="companyName">
+								<hidden type="text" readonly="readonly" id="companyId">
 								<a href="javascript:;" class="ml15 open-tanc"><i class="fa fa-plus-circle mr5"></i>加入企业</a>
 							</td>
 						</tr>
@@ -132,6 +133,7 @@
 			$("#month").val(record.memberBirthdate.substring(5,7));
 			$("#day").val(record.memberBirthdate.substring(8,10));
 			$("#memberDescribe2").val(record.memberDescribe2);
+			$("#companyId").val(record.companyId);
 			if(record.companyId != ""){
 				getRzName(record.companyId);//获得公司名字
 			}
@@ -151,7 +153,7 @@
 		}; 
 		//获得公司名字
 		function _rzRecords(record){											
-			$("#companyId").val(record.rzName);
+			$("#companyName").val(record.rzName);
 			
 		};
 		$('.hhf-submit').click(function(){
