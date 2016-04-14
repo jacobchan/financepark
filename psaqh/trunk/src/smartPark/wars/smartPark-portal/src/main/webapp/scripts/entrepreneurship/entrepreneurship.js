@@ -226,10 +226,9 @@ $(function(){
 				var codeProjectTypeList = result.records;
 				var html = "";
 					html += '<div class="ic-select" style="background: transparent url(../styles/images/yqfw/down.png) no-repeat scroll right center;">'
-					html += '	<p class="c-b1" data="NODATA">请选择订单项目</p>'
+					html += '	<p class="c-b1" data="NODATA">请选择项目类型</p>'
 					html += '</div>'
 					html += '<ul style="display: none;" class="select-nav">'
-					html += '	<li data="NODATA">请选择订单项目</li>'
 					for(var index=0;index<codeProjectTypeList.length;index++){
 						html += '	<li data='+codeProjectTypeList[index].itemValue+'>'+codeProjectTypeList[index].itemName+'</li>'
 					}
