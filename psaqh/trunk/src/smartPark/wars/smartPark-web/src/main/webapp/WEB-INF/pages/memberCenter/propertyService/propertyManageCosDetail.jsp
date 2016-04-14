@@ -100,7 +100,7 @@ $(function () {
 				}
 				if(record[i].cosStatus=='0'){
 					status = "待受理";
-					crop = "取消";
+					crop = "<a href='' class='pb-btn tc' style='width:120px;' onclick='javascript:cancel(\""+record[i].cosId+"\")' >"+crop+"</a>";
 				}else if(record[i].cosStatus=='1'){
 					status = "受理中";
 				}else if(record[i].cosStatus=='2'){
@@ -111,20 +111,11 @@ $(function () {
 					status = "已回访";
 				}else if(record[i].cosStatus=='5'){
 					status = "待评价";
-					crop = "评价";
+					crop = "<a href='' class='pb-btn tc' style='width:120px;'  >"+"评价"+"</a>";
 				}else if(record[i].cosStatus=='6'){
 					status = "已完成";
 				}
-				var html=/* "<tr id='"+record[i].cosId+"' class='aaa'><td>"+record[i].cosCode+"</td>"+
-				"<td>"+record[i].cosTime+"</td>"+
-				"<td>"+bool+"</td><td>"+record[i].cosName+"</td>"+
-				"<td>"+record[i].cosTelephone+"</td><td>"+status+"</td>"+
-				"<td><a href='javascript:;' onclick='javascript:cancel(this)' class='ac-show'>"+crop+"</a></td></tr>"; */
-				/* "<div class='ot-head'>"+
-				"<span class='c-333 f14' >订单号：wybx20160321983343</span>"+
-				"<span style='margin-left: 10px;' >已付款</span>"+
-				"<font class='fr' >2016年2月18日14:09:04</font>"+
-			    "</div>"; */
+				var html=
 			"<div class='clearfix mt20'>"+
 			"<div class='ot-head'>"+
 			"<span class='c-333 f14' >投诉单号："+record[i].cosCode+"</span>"+
@@ -140,26 +131,21 @@ $(function () {
 					"<tbody>"+
 						"<tr>"+
 							"<td>"+
-								"<p>投诉内容："+record[i].cosContent+"</p>"+
-							//	"<p>报修地址：T4创业园A201(李 四  15999889999)</p>"+
-							"</td>"+
-						
+								"<p>投诉内容："+record[i].cosContent+"</p>"+							
+							"</td>"+						
 						"</tr>"+
 						"<tr>"+
 						"<td>"+
 							"<p>投诉人："+record[i].cosName+"</p>"+
-							"<p>投诉电话："+record[i].cosTelephone+"</p>"+
-						//	"<p>报修地址：T4创业园A201(李 四  15999889999)</p>"+
-						"</td>"+
-					
-					"</tr>"+
-						
+							"<p>投诉电话："+record[i].cosTelephone+"</p>"+						
+						"</td>"+					
+					"</tr>"+						
 					"</tbody>"+
 				"</table>"+
 			"</div>"+ 
 			  "<div class='fr f12'>"+
 				//"<span class='mr30'> 订单总计费用：<font class='f24 c-o'>1200元</font></span>"+
-				"<a href='' class='pb-btn tc' style='width:120px;' onclick='javascript:cancel(\""+record[i].cosId+"\")' >"+crop+"</a>"+
+				crop+
 			//	"<input type='submit' value='"+crop+"' class='hhf-submit' onclick='javascript:cancel(\""+record[i].cosId+"\")'  style='height:36px;' />"+
 			"</div>"+  
 		"</div>	";
