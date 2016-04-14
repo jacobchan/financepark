@@ -753,7 +753,7 @@ a.a-btn-small{background-color: #ff6715;font-size: 12px;height: 20px;line-height
 a.a-btn-small:hover{background-color: #FF5900;}
 
 /**我的订单**/
-.order-nav li{float: left;margin-right: 30px;font-size: 14px;color: #969696;min-width: 80px;}
+.order-nav li{float: left;margin-right: 30px;font-size: 14px;color: #969696;min-width: 100px;}
 .order-nav li:hover, .order-nav li.active{color: #333;font-size: 16px;/* text-decoration: underline; */cursor: pointer;}
 .st-order{width: 100%;border:1px solid #ecebeb;font-size: 12px;margin-top: 30px;}
 .st-order tr td{border-right:1px solid #ecebeb;padding: 10px 20px;text-align: center;color: #969696;}
