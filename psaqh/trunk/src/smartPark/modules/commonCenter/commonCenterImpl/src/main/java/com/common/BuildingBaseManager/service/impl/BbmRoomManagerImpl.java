@@ -122,6 +122,8 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
     				}
     			}
     		}
+    		String roomAddress = getRoomAddress(park,building,floor,o) ;
+        	o.setRoomAddress(roomAddress);
     		return bbmRoomDao.save(o);
     	}else{//新增
     		if(room.size() >= count){
@@ -135,17 +137,30 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
     				throw new BusException("此楼栋的该楼层的该单元已存在！") ;
     			}
     		}
-    		String parkAddress = park.getAddress() ;//园区地址
-    		String parkName = park.getParkName() ;//园区名字
-        	String buildingNo = building.getBuildingNo() ;//楼栋编号
-        	String floorNo = floor.getFloorNo() ;//楼层编号
-        	String temp = floorNo.substring(0, floorNo.length()-1) ;
-        	String roomNo = o.getRoomNo() ;//单元编号
-        	String roomNoTemp = roomNo.substring(roomNo.lastIndexOf("-")+1) ;
-        	String roomAddress = parkAddress+parkName+buildingNo+"栋"+temp+roomNoTemp+"室" ;//详细地址
+    		String roomAddress = getRoomAddress(park,building,floor,o) ;
         	o.setRoomAddress(roomAddress);
         	return bbmRoomDao.save(o);
     	}
+    }
+    
+    /**
+     * 得到单元的详细地址
+     * @param park
+     * @param building
+     * @param floor
+     * @param o
+     * @return
+     */
+    private String getRoomAddress(BbmPark park,BbmBuilding building,BbmFloor floor,BbmRoom o){
+    	String parkAddress = park.getAddress() ;//园区地址
+		String parkName = park.getParkName() ;//园区名字
+    	String buildingNo = building.getBuildingNo() ;//楼栋编号
+    	String floorNo = floor.getFloorNo() ;//楼层编号
+    	String temp = floorNo.substring(0, floorNo.length()-1) ;
+    	String roomNo = o.getRoomNo() ;//单元编号
+    	String roomNoTemp = roomNo.substring(roomNo.lastIndexOf("-")+1) ;
+    	String roomAddress = parkAddress+parkName+buildingNo+"栋"+temp+roomNoTemp+"室" ;//详细地址
+    	return roomAddress ;
     }
     
     /**
