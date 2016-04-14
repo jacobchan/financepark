@@ -39,6 +39,7 @@ public class InformationFinancing implements Domain{
 	@Column(name = "FINANCING_TIME_")
 	@Length(max=32)
 	private String financingTime;//融资时间
+	
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "FINANCING_ID_")
@@ -81,6 +82,17 @@ public class InformationFinancing implements Domain{
 	@Column(name = "FINANCING_DESCRIBE_")
 	private String financingDescribe;//融资描述
 	
+	@Transient
+	private String financingSubValue;//投资主体
+	
+	public String getFinancingSubValue() {
+		return financingSubValue;
+	}
+
+	public void setFinancingSubValue(String financingSubValue) {
+		this.financingSubValue = financingSubValue;
+	}
+
 	public String getFinancingDescribe() {
 		return financingDescribe;
 	}

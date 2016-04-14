@@ -115,7 +115,7 @@ public class EnterbusinessmanagerRz implements Domain{
 	private String rzUrl;//企业网址
 	
 	@Column(name = "RZ_IMAGES_")
-	private String rzImages;//企业网址
+	private String rzImages;//企业宣传图
 	
 	@Column(name = "PRODUCT_DISCRIPTIO_")
 	private String productDiscriptio;//产品描述
