@@ -53,6 +53,7 @@
 			<youi:fieldSelect property="status"  caption="使用状态" convert="roomstatus"/>
 			<youi:fieldText property="roomHost"  caption="单元业主" notNull="true"/>
 			
+			<youi:fieldHidden property="roomAddress"  caption="详细地址"/>
 			<youi:fieldHidden property="roomTenement"  caption="单元租户"/>
 			<youi:fieldHidden property="rentCharge"  caption="物业_租金"/>
 			<youi:fieldHidden property="eneryCharge"  caption="物业_电费" />
