@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Collection;
 
 import com.common.MemberManager.entity.MemberInformation;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -73,7 +74,7 @@ public interface EnterpriseEmployeesManager extends BaseManager{
 	 * @throws BusException
 	 * @author Zhuyl
 	 */
-	public String acceptEnterpriseInvitation(MemberInformation member, String code) throws BusException;
+	public Record acceptEnterpriseInvitation(MemberInformation member, String code) throws BusException;
 	
 	/**
 	 * 通过会员查询对应的企业会员
