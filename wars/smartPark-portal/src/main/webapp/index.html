@@ -1123,9 +1123,8 @@
 					success:function(result){
 						if(result&&result.record){
 							$(".pop_layer.pl1").show();
-							if (isLogin) {
-								window.location=cenUrl+"member/memberCenter/personalCenter/myReservation.html";
-							}
+							a=3;
+							timer1=setInterval("jump1()",1000);
 						}
 					}
 				});
@@ -1139,6 +1138,19 @@
 					}
 				
 			});
+		    
+			var a,timer1;
+			function jump1(){
+				if(a>1){
+					a--;
+				}else{
+					if (isLogin) {
+						window.location=cenUrl+"member/memberCenter/personalCenter/myReservation.html";
+					}else{
+						window.location="index.html";
+					}
+				}		
+			}
 	</script>
 	<script type="text/javascript">
 		$(function(){
