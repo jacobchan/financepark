@@ -57,8 +57,8 @@ public class LoginUserData extends BaseDataController {
 	 */
 	@RequestMapping("/registerUser.json")
 	public DataModelAndView registerNew(HttpServletRequest request,
-			@ServiceParam(name="memberPassword") String passwd,@ServiceParam(name="repasswd") String repasswd,
-			@ServiceParam(name="memberPhoneNumber") String phone,@RequestParam("captcha")String captcha){
+			@RequestParam("memberPassword") String passwd,@RequestParam("repasswd") String repasswd,
+			@RequestParam("memberPhoneNumber") String phone,@RequestParam("captcha")String captcha){
 		String sessionCaptcha = (String) request.getSession().getAttribute("phone_captcha");
 		if(StringUtils.isEmpty(sessionCaptcha)){ 
 			return new DataModelAndView("请先获取短信验证码");
