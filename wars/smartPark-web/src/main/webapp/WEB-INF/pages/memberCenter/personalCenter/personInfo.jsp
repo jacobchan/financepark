@@ -124,7 +124,7 @@
 		
 		function _parseRecords(record){
 			$("#memberId").html(record.memberId);
-			$("#headImg").attr("src",cenUrl+"filestore/"+record.memberHeadPortrait);
+			$("#headImg").attr("src",cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record.memberHeadPortrait+"&method=show");
 			$(".c-b1").html(record.memberPhoneNumber);
 			$("#memberNickname").val(record.memberNickname);
 			$("#memberName").val(record.memberName);
@@ -132,7 +132,10 @@
 			$("#month").val(record.memberBirthdate.substring(5,7));
 			$("#day").val(record.memberBirthdate.substring(8,10));
 			$("#memberDescribe2").val(record.memberDescribe2);
-			getRzName(record.companyId);//获得公司名字
+			if(record.companyId != ""){
+				getRzName(record.companyId);//获得公司名字
+			}
+			
 		};
 		function getRzName(companyId){
 			var id=companyId;
