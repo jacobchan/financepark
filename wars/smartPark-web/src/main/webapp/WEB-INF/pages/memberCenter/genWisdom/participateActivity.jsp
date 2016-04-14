@@ -44,7 +44,7 @@
 			for(var i=0;i<record.length;i++){
 				var html="<a href='javascript:;' id='"+record[i].applyId+"' onclick='javascript:gotoDetails(this)'>"+
 						 "<div class='czh-box'>"+
-						 "<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityImage+"&method=show'>"+
+						 "<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityImage+"&method=show' style='width: 220px; height: 123px;'>"+
                 		 "<div class='czh-group' style='border-bottom:1px solid #ecebeb'>"+
                     	 "<h4>"+record[i].applyTitle+"</h4>"+
                     	 "<span>活动发起人："+record[i].memberId.memberName+"</span><br/>"+
@@ -69,8 +69,10 @@
 			    	span.html("申请中");
 			    }else if(text=="01"){
 			    	span.html("进行中");
-			    }else if(text=="01"){
+			    }else if(text=="02"){
 			    	span.html("已结束");
+			    }else if(text=="03"){
+			    	span.html("已取消");
 			    }
 			} 
 		};
