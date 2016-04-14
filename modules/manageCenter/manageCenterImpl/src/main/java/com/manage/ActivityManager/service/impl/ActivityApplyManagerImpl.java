@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
+import com.common.OrderManager.entity.OrdermanagerUserorder;
+import com.common.OrderManager.service.OrdermanagerUserorderManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -24,6 +26,7 @@ import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.utils.BizCodeUtil;
 import com.manage.ActivityManager.entity.ActivityApply;
 import com.manage.ActivityManager.entity.ActivityApplylist;
 import com.manage.ActivityManager.entity.ActivityComment;
@@ -52,6 +55,8 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
 	private ActivityDocumentManager activityDocumentManager;
 	@Autowired
 	private ApplayTypeManager applayTypeManager;
+	@Autowired
+	private OrdermanagerUserorderManager ordermanagerUserorderManager;
     /**
      * 查询列表
      */
@@ -219,6 +224,21 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
 	}
     
     /**
+     * 根据活动主键查询活动场地 
+     * 
+     */   
+    @EsbServiceMapping
+	public List<OrdermanagerUserorder> getPublishActivityOrder(ActivityApply o)
+			throws BusException {
+		// TODO Auto-generated method stub
+    	ActivityApply aa=activityApplyDao.get(o.getApplyId());
+    	Collection<Condition> condition = new ArrayList<Condition>();
+    	condition.add(ConditionUtils.getCondition("userorderId", Condition.EQUALS,aa.getApplyOrderNumber()));
+    	List<OrdermanagerUserorder> ordermanagerUserorder=ordermanagerUserorderManager.getOrdermanagerUserorders(condition, null);
+		return ordermanagerUserorder;
+	}
+    
+    /**
      * 申请通过更改状态
      */
     @EsbServiceMapping
@@ -245,6 +265,7 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     	}
     	Collection<Condition> condition = new ArrayList<Condition>();
     	condition.add(ConditionUtils.getCondition("applayType.typeId", Condition.EQUALS,o.getApplayType().getTypeId()));	
+    	condition.add(ConditionUtils.getCondition("applyStatus", Condition.EQUALS,"01"));
     	List<ActivityApply> activityApplyList=activityApplyDao.commonQuery(condition, null);
 		return activityApplyList;
 	}
@@ -275,6 +296,7 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
 		// TODO Auto-generated method stub
     	Collection<Condition> condition = new ArrayList<Condition>();
     	condition.add(ConditionUtils.getCondition("isRecoomend", Condition.EQUALS,"0"));
+    	condition.add(ConditionUtils.getCondition("applyStatus", Condition.EQUALS,"01"));
      	List<ActivityApply> activityApplyList=activityApplyDao.commonQuery(condition, null);
 		return activityApplyList;
 	}
@@ -297,7 +319,8 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     	List<ApplayType>  typelist = applayTypeManager.getApplayTypes();
     	if(typelist.size()>0){
     		o.setApplayType(typelist.get(0));
-    	}	
+    	}
+    	o.setApplyNumber(BizCodeUtil.getInstance().getBizCodeDate("GRHD"));
     	o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     	o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     	o.setCreateUser(o.getUpdateUser());
