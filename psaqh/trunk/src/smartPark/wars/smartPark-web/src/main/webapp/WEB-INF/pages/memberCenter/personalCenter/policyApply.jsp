@@ -28,8 +28,18 @@
 	<script type="text/javascript">
 
 		$(function(){
+			$(function () {
+				$(".order-nav li").click(function(){
+					$(this).addClass("active").siblings().removeClass("active");			
+				})		
+			})
+			//页面默认加载创业加速申请加载
 			jump1();
 		});
 
+		 //点击跳转到政策申请页面
+		$("#a1").click(function(){			
+			location.href = proUrl + "zscenter/zs3.html" ;
+		})	
      </script>
 </youi:html>
