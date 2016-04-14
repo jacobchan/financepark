@@ -1159,7 +1159,7 @@
 		    		$(".toast").show();
 					return;
 				}
-				var params = ['visiteDate='+visiteDate,'visiteTime='+visiteTime,'recordType='+recordType,'recordMemberId='+recordMemberId];
+				var params = ['visiteDate='+visiteDate,'visiteName='+lfName,'visiteTel='+lfTel,'visiteTime='+visiteTime,'recordType='+recordType,'recordMemberId='+recordMemberId];
 				var serviceURL = baseUrl+"reservationRecordManager/saveReservationRecord.json";
 				//公共方法
 				$.youi.ajaxUtils.ajax({
