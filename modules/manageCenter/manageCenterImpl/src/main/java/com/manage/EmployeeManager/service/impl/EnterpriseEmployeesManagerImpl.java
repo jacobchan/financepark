@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.entity.MemberInformation;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -133,8 +134,9 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 	 * @author Zhuyl
 	 */
     @EsbServiceMapping
-	public String acceptEnterpriseInvitation(MemberInformation member, @ServiceParam(name="code") String code) throws BusException{
-		String msg = "";
+	public Record acceptEnterpriseInvitation(MemberInformation member, @ServiceParam(name="code") String code) throws BusException{
+    	Record record = new Record();
+    	String msg = "";
 		MemberInformation info = memberInformationDao.get(member.getMemberId());
 		//根据rzId获取入驻企业
 		EnterbusinessmanagerRz rz = enterbusinessmanagerRzDao.getObjectByUniqueProperty("rzSign", code);
@@ -185,18 +187,26 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 					role.setUpdateUser(info.getMemberId());
 					role.setUpdateTime(new Timestamp(new Date().getTime()));
 					enterpriseRoleDao.save(role);
-					
-					msg = info.getMemberName()+"成功入驻企业"+rz.getRzMem();
+					msg = info.getMemberName()+"成功入驻企业"+rz.getRzName();
+					record.put("flag", 1);
+					record.put("msg", msg);
+					record.put("reName", rz.getRzName());
 				}else{
 					msg = "已接受此邀请成为企业员工，请勿重复操作！";
+					record.put("msg", msg);
+					record.put("flag", 0);
 				}
 			}else{
 				msg = "无此企业邀请信息！";
+				record.put("msg", msg);
+				record.put("flag", 0);
 			}
 		}else{
 			msg = "手机号码不存在！";
+			record.put("msg", msg);
+			record.put("flag", 0);
 		}
-		return msg;
+		return record;
 	}
     
 	@Override
