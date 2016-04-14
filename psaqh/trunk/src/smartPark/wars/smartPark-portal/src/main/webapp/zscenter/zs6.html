@@ -73,38 +73,56 @@
 				var lfTel=$("#fkcodeTelephone").val();
 				var visiteDate=$("#fkcodeDate").val();
 				if(recordMemberId == null||recordMemberId==""){
-					$("#msg").text("请选择参观项目");
-		    		$(".toast").show();
+		    		clearInterval(timer);
+		    		$("#msg").text("请选择参观项目");
+	    	        $(".toast").show();
+	    	        pltime=2;
+	    	        timer=setInterval("closeTanc()",1000);
 					return;
 				}
 				if(visiteDate ==null|| visiteDate==""){
+					clearInterval(timer);
 					$("#msg").text("请填写来访日期");
-		    		$(".toast").show();
+	    	        $(".toast").show();
+	    	        pltime=2;
+	    	        timer=setInterval("closeTanc()",1000);
 					return;
 				}
 				if(visiteDate !=null && visiteDate!=""){
 					if(visiteTime ==null|| visiteTime==""){
+						clearInterval(timer);
 						$("#msg").text("请填写来访时间");
-			    		$(".toast").show();
+		    	        $(".toast").show();
+		    	        pltime=2;
+		    	        timer=setInterval("closeTanc()",1000);
 						return;
 					}
 				}
 				if(lfName ==null|| lfName==""){
+					clearInterval(timer);
 					$("#msg").text("请填写姓名");
-		    		$(".toast").show();
+	    	        $(".toast").show();
+	    	        pltime=2;
+	    	        timer=setInterval("closeTanc()",1000);
 					return;
 				}
 				if(lfTel !=null&& lfTel!=""){
 					 if(isMobil(lfTel)){
 							
 						}else{
+							clearInterval(timer);
 							$("#msg").text("手机号格式不正确！");
-				    		$(".toast").show();
+			    	        $(".toast").show();
+			    	        pltime=2;
+			    	        timer=setInterval("closeTanc()",1000);
 							return false;
 						}
 				}else{
+					clearInterval(timer);
 					$("#msg").text("请填写手机号码");
-		    		$(".toast").show();
+	    	        $(".toast").show();
+	    	        pltime=2;
+	    	        timer=setInterval("closeTanc()",1000);
 					return;
 				}
                
@@ -167,6 +185,16 @@
 			function reserve() {
 		    	$(".bg-tanc.m1").show();
 			}
+			
+			 //toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
+	        var pltime,timer;
+	        function closeTanc(){
+	            if(pltime>1){
+	                pltime--;
+	            }else{
+	                $(".toast").hide();
+	            }       
+	        }
 	</script>
 	<script type="text/javascript">
 		$(function(){
