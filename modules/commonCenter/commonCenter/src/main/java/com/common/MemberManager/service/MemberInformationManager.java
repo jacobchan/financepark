@@ -123,4 +123,13 @@ public interface MemberInformationManager extends BaseManager{
 		  */
 		
 	 public List<MemberInformation> getPhoneNumberlistByName(String userId, String memberName) throws BusException;
+	 /**
+		 *前台 根据当前用户分页查询
+		 * @return 分页对象
+		 */
+		public PagerRecords getPager(Pager pager,//分页条件
+				Collection<Condition> conditions,//查询条件
+				Collection<Order> orders) throws BusException;
+	 //获得公司id
+	 public MemberInformation getCompanyId(MemberInformation m)throws BusException;
 }
