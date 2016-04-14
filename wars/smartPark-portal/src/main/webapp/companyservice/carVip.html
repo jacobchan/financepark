@@ -150,7 +150,23 @@
 
 
     <script type="text/javascript">
-     
+	  //toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
+	    var a,pltime,timer,timer2;;
+	    function closeTanc(){
+	        if(pltime>1){
+	            pltime--;
+	        }else{
+	            $(".toast").hide();
+	        }       
+	    }
+	    function jump1(){
+			if(a>1){
+				a--;
+			}else{
+				window.location=cenUrl+"member/memberCenter/personalCenter/myReservation.html";
+			}		
+		}
+	    
         $(function(){
             $(document).on("click",".ru-options li" ,function(){
                 $(this).addClass("active").siblings().removeClass("active");
@@ -207,39 +223,80 @@
             
             //提交方法
             $("#sub").click(function(){
+            	var isMobile=/^(?:13\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;//手机号的格式
+            	var isNum = /^\+?[1-9][0-9]*$/;
             	if (!isLogin) {
 					$("#msg").text("请登录后重试！");
 		            $(".toast").show();
+		            pltime=2;
+		            timer=setInterval("closeTanc()",1000)
 					return;
 				} 
             	var cpEnName = $("#cpEnName").val();
             	var cpLinkMan = $("#cpLinkMan").val();
             	var cpLinkTel = $("#cpLinkTel").val();
             	var cpCount = $("#cpCount").val();
-            	var cpEntdTime = $("#endTime").val()+" "+$("#cpEntdTime").find("li.selected").html();
-            	var cpBegionTime = $("#startTime").val()+" "+$("#cpBegionTime").find("li.selected").html();
             	var cpEnAdr = $("#cpEnAdr").val();
+            	
             	if(cpEnName==''){
             		$("#msg").text("请填写企业名称");
 		            $(".toast").show();
+		            pltime=2;
+		            timer=setInterval("closeTanc()",1000)
 					return;
             	}else if(cpLinkMan==''){
             		$("#msg").text("请填写联系人");
 		            $(".toast").show();
+		            pltime=2;
+		            timer=setInterval("closeTanc()",1000)
 					return;
-            	}else if(cpLinkTel==''){
-            		$("#msg").text("请填写联系方式");
-		            $(".toast").show();
-					return;
-            	}else if(cpCount==''){
+            	}else if(!isNum.test(cpCount)){
             		$("#msg").text("请填写车位数");
 		            $(".toast").show();
+		            pltime=2;
+		            timer=setInterval("closeTanc()",1000)
 					return;
             	}else if(cpEnAdr==''){
             		$("#msg").text("请填写公司地址");
 		            $(".toast").show();
+		            pltime=2;
+		            timer=setInterval("closeTanc()",1000)
+					return;
+            	}else if(!isMobile.test(cpLinkTel)){
+            		$("#msg").text("请填写正确联系方式");
+		            $(".toast").show();
+		            pltime=2;
+		            timer=setInterval("closeTanc()",1000)
+					return ;
+				}else if($("#startTime").val()==''){
+            		$("#msg").text("请选择开始时间");
+		            $(".toast").show();
+		            pltime=2;
+		            timer=setInterval("closeTanc()",1000)
+					return;
+            	}else if($("#cpBegionTime").find("li.selected").html()==undefined){
+            		$("#msg").text("请选择开始时段");
+		            $(".toast").show();
+		            pltime=2;
+		            timer=setInterval("closeTanc()",1000)
+					return;
+            	}else if($("#endTime").val()==''){
+            		$("#msg").text("请选择结束时间");
+		            $(".toast").show();
+		            pltime=2;
+		            timer=setInterval("closeTanc()",1000)
+					return;
+            	}else if($("#cpEntdTime").find("li.selected").html()==undefined){
+            		$("#msg").text("请选择结束时段");
+		            $(".toast").show();
+		            pltime=2;
+		            timer=setInterval("closeTanc()",1000)
 					return;
             	}
+            	
+            	var cpEntdTime = $("#endTime").val()+" "+$("#cpEntdTime").find("li.selected").html();
+            	var cpBegionTime = $("#startTime").val()+" "+$("#cpBegionTime").find("li.selected").html();
+            	
             	//提交
             	var params = ['cpEnName='+cpEnName,'cpLinkMan='+cpLinkMan,'cpLinkTel='+cpLinkTel,'cpCount='+cpCount,'cpEntdTime='+cpEntdTime,'cpBegionTime='+cpBegionTime,'cpEnAdr='+cpEnAdr];
             	var serviceURL = baseUrl+"carportManager/saveCarport.json";
@@ -249,9 +306,12 @@
 					jsonp : 'data:jsonp',
 					dataType : 'jsonp',
 					success : function(result) {
-						$(".pop_layer.pl1").show();
+						$("#msg").text("提交成功！");
+			            $(".toast").show();
+						a=3;
+						timer2=setInterval("jump1()",1000);
 					},error:function(XMLHttpRequest, textStatus, errorThrown){
-						alert(XMLHttpRequest);
+						//alert(XMLHttpRequest);
 					}
             	});	
             });
@@ -290,6 +350,7 @@
 			}
 			});
 		}
+		
     </script>
     
     <!-- 弹出层样式 -->
@@ -301,7 +362,7 @@
     </div>
     
      <!-- 弹窗 -->
-    <div class="pop_layer pl1">
+     <div class="pop_layer pl1">
         <div class="online_box clearfix" style="width:550px;height:212px;margin-left:-275px;margin-top:-111px;padding:30px;">
             <div class="close0 fr"></div>
             <table class="w100 mt40 c3">
@@ -314,6 +375,6 @@
                 </tr>
             </table>
         </div>
-    </div>
+    </div> 
 </body>
 </html>
