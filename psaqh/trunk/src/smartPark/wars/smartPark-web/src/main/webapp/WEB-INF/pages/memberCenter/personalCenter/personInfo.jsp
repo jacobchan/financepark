@@ -23,6 +23,7 @@
 								<div class="photoedit" style="left:22px">
 									<img id="headImg" src="<%=request.getContextPath()%>/styles/images/grzx/user-photo.png"  width="107" height="107"/>
 								</div> --%>
+								<input type="hidden" id="memberHeadPortrait" >
 								<img id="headImg" src="<%=request.getContextPath()%>/styles/images/grzx/user-photo.png" border="0" class="fl" width="107" height="107"/>
 								<div class="photo-edit"><input type="file" id="imgUpload" name="imgUpload" draggable="true" accept=".png,.jpg"/>编辑<br/>头像</div>
 							</td>
@@ -126,6 +127,7 @@
 		function _parseRecords(record){
 			$("#memberId").html(record.memberId);
 			$("#headImg").attr("src",cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record.memberHeadPortrait+"&method=show");
+			$("#memberHeadPortrait").val(record.memberHeadPortrait);
 			$(".c-b1").html(record.memberPhoneNumber);
 			$("#memberNickname").val(record.memberNickname);
 			$("#memberName").val(record.memberName);
@@ -159,7 +161,6 @@
 		$('.hhf-submit').click(function(){
 			this.disabled=true;
 			var flg = false;
-			var memberHeadPortrait = $("#headImg").attr("src");
 			var memberId=$("#memberId").html();
 			var memberNickname=$("#memberNickname").val();
 			var memberPhoneNumber=$(".c-b1").html();
@@ -178,7 +179,7 @@
 				uploader.bind('FileUploaded',function(up, files,info) {
 					var response = $.parseJSON(info.response);
 	               	if ("0"==response.status){
-	               		memberHeadPortrait = response.fileUrl[0];
+	               		var memberHeadPortrait = response.fileUrl[0];
 	    				var params = ['memberHeadPortrait='+memberHeadPortrait+'','memberId='+memberId+'','memberNickname='+memberNickname+'','memberPhoneNumber='+memberPhoneNumber+'','memberName='+memberName+'','memberBirthdate='+memberBirthdate+'','memberDescribe2='+memberDescribe2+'','companyId='+companyId+''];
 	    				$.youi.ajaxUtils.ajax({
 	    					url:baseUrl+'memberInformationManager/saveMemberInformation.json',
@@ -193,6 +194,7 @@
 	               	}
 				});
 			}else{
+				var memberHeadPortrait = $("#memberHeadPortrait").val();
 				var params = ['memberHeadPortrait='+memberHeadPortrait+'','memberId='+memberId+'','memberNickname='+memberNickname+'','memberPhoneNumber='+memberPhoneNumber+'','memberName='+memberName+'','memberBirthdate='+memberBirthdate+'','memberDescribe2='+memberDescribe2+'','companyId='+companyId+''];
 				$.youi.ajaxUtils.ajax({
 					url:baseUrl+'memberInformationManager/saveMemberInformation.json',
