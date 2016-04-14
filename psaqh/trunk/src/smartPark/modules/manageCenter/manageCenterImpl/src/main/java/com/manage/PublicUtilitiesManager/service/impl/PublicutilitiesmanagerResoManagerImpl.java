@@ -290,14 +290,15 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 			pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(pg.getGenreId());
 		}
 		StringBuffer publicResoIdBuff =  new StringBuffer();//公共资源ID
-		String dateStr =  "";//订单预定日期
+		StringBuffer dateStrBuff =new StringBuffer();;//订单预定日期
 		StringBuffer timeStrBuff =  new StringBuffer();//订单预定时段
 		for(int i = 0;i<publicResoList.size();i++){
 			PublicutilitiesmanagerReso publicReso = publicResoList.get(i);
-			dateStr = publicReso.getResoDate();
+			dateStrBuff.append(publicReso.getResoDate());
 			timeStrBuff.append(publicReso.getResoTime());
 			publicResoIdBuff.append(publicReso.getResoId());
 			if(i+1<publicResoList.size()){
+				dateStrBuff.append(",");
 				timeStrBuff.append(",");
 				publicResoIdBuff.append(",");
 			}
@@ -311,7 +312,7 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 			orderExtendValue.setOrdermanagerUserorder(o);
 			orderExtendValue.setGenrePropertyId(genreProperty);
 			if("publicResoIdDate".equals(genreProperty.getGenrePropertyFieldName())){
-				orderExtendValue.setOrderprojecttypeValueFieldValue(dateStr);
+				orderExtendValue.setOrderprojecttypeValueFieldValue(dateStrBuff.toString());
 			}else if("publicResoIdTime".equals(genreProperty.getGenrePropertyFieldName())){
 				orderExtendValue.setOrderprojecttypeValueFieldValue(timeStrBuff.toString());
 			}else if("publicResoId".equals(genreProperty.getGenrePropertyFieldName())){
