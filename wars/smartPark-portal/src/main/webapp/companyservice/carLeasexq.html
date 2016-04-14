@@ -250,8 +250,11 @@ var commodityId;
 				$(".pop_layer").show();
 				$(".pop_layer.pl1").hide();
 			}else{
+				clearInterval(timer);
 				$("#msg").text("请选择时段");
-				$(".toast").show(); 
+		    	$(".toast").show();
+		    	pltime=2;
+	            timer=setInterval("closeTanc()",1000);
 			}
 		});
 		$(".close0").click(function() {
@@ -300,19 +303,28 @@ var commodityId;
 						    	driver=true;
 					          }
 							if(reserveName ==null||reserveName==""){
+								clearInterval(timer);
 								$("#msg").text("请填联系人");
-								$(".toast").show();
+	       			    		$(".toast").show();
+	       			    		pltime=2;
+					            timer=setInterval("closeTanc()",1000);
 								return;
 							}
 							if(reserveTel ==null||reserveTel==""){
+								clearInterval(timer);
 								$("#msg").text("请填联系人电话");
-								$(".toast").show();
+	       			    		$(".toast").show();
+	       			    		pltime=2;
+					            timer=setInterval("closeTanc()",1000);
 								return;
 							}else if(isMobil(reserveTel)){
        							
        						}else{
+       							clearInterval(timer);
        							$("#msg").text("电话格式不正确！");
-								$(".toast").show();
+	       			    		$(".toast").show();
+	       			    		pltime=2;
+					            timer=setInterval("closeTanc()",1000);
        							return false;
        						}
 							if (arr.length > 0) {
@@ -350,8 +362,11 @@ var commodityId;
 									}
 								});  
 							} else {
+								clearInterval(timer);
 								$("#msg").text("请选择时段");
-								$(".toast").show();
+	       			    		$(".toast").show();
+	       			    		pltime=2;
+					            timer=setInterval("closeTanc()",1000);
 							}
 
 							//校验手机号格式
@@ -398,15 +413,15 @@ var commodityId;
 	function jumpBack(){
 		window.location="carLeasexq.html?id="+commodityId;
 	}
-	   //toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
-        var pltime,timer;
-        function closeTanc(){
-            if(pltime>1){
-                pltime--;
-            }else{
-                $(".toast").hide();
-            }       
-        }
+	 //toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
+    var pltime,timer;
+    function closeTanc(){
+        if(pltime>1){
+            pltime--;
+        }else{
+            $(".toast").hide();
+        }       
+    }
 </script>
 
  <!-- 弹出层样式 -->
