@@ -239,7 +239,7 @@
 		});
 		//活动详情赋值
 		function _parseRecords(record){
-			$(".activityImage").attr("src",cenUrl+"filestore/"+record.activityImage);
+			$(".activityImage").attr("src",cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record.activityImage+"&method=show");
 			$(".h-bg").html(record.applyTitle);
 			$(".time").html(record.startTime);
 			//$(".address").html();
