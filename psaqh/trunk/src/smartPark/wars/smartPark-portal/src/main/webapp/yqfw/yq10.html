@@ -241,6 +241,14 @@
 					           	timer=setInterval("closeTanc()",1000);
 								return false;
 							 }
+							 if(addressId=="" || addressId.length==0){
+									clearInterval(timer);
+									$(".tc.mt25").text("请选择地址!");
+						           	$(".toast").show();
+						           	pltime=1;
+						           	timer=setInterval("closeTanc()",1000);
+									return false;
+								 }
 						
 							var params = [//'ocComp='+$("#ocComp").val(),
 										'ocDate='+time,
