@@ -184,7 +184,7 @@ public class MemberadrAddressManagerImpl extends BaseManagerImpl implements Memb
 	 * @return 分页对象
 	 */
             @SuppressWarnings("unchecked")
-	    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId.memberId",operator=Condition.EQUALS,pubProperty="userId")})
 		public PagerRecords getPagergetPagerAddress(Pager pager,//分页条件
 				@ConditionCollection(domainClazz=MemberadrAddress.class) Collection<Condition> conditions,//查询条件
 				@OrderCollection Collection<Order> orders)
