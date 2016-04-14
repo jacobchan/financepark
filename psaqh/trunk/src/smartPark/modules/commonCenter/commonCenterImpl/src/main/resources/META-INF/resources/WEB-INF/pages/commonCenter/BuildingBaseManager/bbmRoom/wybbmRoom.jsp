@@ -68,6 +68,7 @@
 			<youi:fieldText property="waterCharge"  caption="物业_水费" width="150px"/>
 			<youi:fieldText property="propertyCharge"  caption="物业_物业费" width="150px"/>
 			
+			<youi:fieldHidden property="roomAddress"  caption="详细地址"/>
 			<youi:fieldHidden property="saleState"  caption="招商_销售状态" />
 			<youi:fieldHidden property="aspect"  caption="招商_朝向"/>		
 			<youi:fieldHidden property="salesPrice"  caption="招商_单价"/>
