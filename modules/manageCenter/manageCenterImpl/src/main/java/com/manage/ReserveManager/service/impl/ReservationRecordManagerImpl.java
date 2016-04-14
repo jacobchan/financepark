@@ -117,6 +117,8 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
     		r.setRecordType(o.getRecordType());
     		r.setVisiteDate(o.getVisiteDate());
     		r.setUpdateUser(o.getUpdateUser());
+    		r.setVisiteName(o.getVisiteName());
+    		r.setVisiteTel(o.getVisiteTel());
     		r.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return reservationRecordDao.save(r);
     	}else{//新增

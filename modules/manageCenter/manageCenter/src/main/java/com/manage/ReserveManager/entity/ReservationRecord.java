@@ -41,6 +41,16 @@ public class ReservationRecord implements Domain{
 	@Column(name = "RECORD_SERVICE_TEL")
 	@Length(max=32)
 	private String recordServiceTel;//客服电话
+	
+	@Column(name = "VISITE_NAME_")
+	@Length(max=32)
+	private String visiteName;//来访姓名
+
+	
+	@Column(name = "VISITE_TEL_")
+	@Length(max=32)
+	private String visiteTel;//联系电话
+
 
 	@Column(name = "UPDATE_USER_")
 	@Length(max=36)
@@ -77,101 +87,8 @@ public class ReservationRecord implements Domain{
 	@Length(max=20)
 	private String visiteTime;//到访时间
 	
-	public String getRecordId(){
-		return this.recordId;
-	}
 	
-	public void setRecordId(String recordId){
-		this.recordId = recordId;
-	}
-	public String getCreateUser(){
-		return this.createUser;
-	}
-	
-	public void setCreateUser(String createUser){
-		this.createUser = createUser;
-	}
-	public String getCreateTime(){
-		return this.createTime;
-	}
-	
-	public void setCreateTime(String createTime){
-		this.createTime = createTime;
-	}
-	public String getRecordServiceTel(){
-		return this.recordServiceTel;
-	}
-	
-	public void setRecordServiceTel(String recordServiceTel){
-		this.recordServiceTel = recordServiceTel;
-	}
-	public String getUpdateUser(){
-		return this.updateUser;
-	}
-	
-	public void setUpdateUser(String updateUser){
-		this.updateUser = updateUser;
-	}
-	public String getRecordType(){
-		return this.recordType;
-	}
-	
-	public void setRecordType(String recordType){
-		this.recordType = recordType;
-	}
-	public String getRecordCustomer(){
-		return this.recordCustomer;
-	}
-	
-	public void setRecordCustomer(String recordCustomer){
-		this.recordCustomer = recordCustomer;
-	}
-	public String getUpdateTime(){
-		return this.updateTime;
-	}
-	
-	public void setUpdateTime(String updateTime){
-		this.updateTime = updateTime;
-	}
-	public String getVisiteDate(){
-		return this.visiteDate;
-	}
-	
-	public void setVisiteDate(String visiteDate){
-		this.visiteDate = visiteDate;
-	}
-	public String getRecordMemberId(){
-		return this.recordMemberId;
-	}
-	
-	public void setRecordMemberId(String recordMemberId){
-		this.recordMemberId = recordMemberId;
-	}
-	public String getRecordVisiteStatus(){
-		return this.recordVisiteStatus;
-	}
-	
-	public void setRecordVisiteStatus(String recordVisiteStatus){
-		this.recordVisiteStatus = recordVisiteStatus;
-	}
-	public String getRecordStatus(){
-		return this.recordStatus;
-	}
-	
-	public void setRecordStatus(String recordStatus){
-		this.recordStatus = recordStatus;
-	}
-	public String getVisiteTime(){
-		return this.visiteTime;
-	}
-	
-	public void setVisiteTime(String visiteTime){
-		this.visiteTime = visiteTime;
-	}
-	
-	
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -206,9 +123,15 @@ public class ReservationRecord implements Domain{
 		result = prime * result
 				+ ((visiteDate == null) ? 0 : visiteDate.hashCode());
 		result = prime * result
+				+ ((visiteName == null) ? 0 : visiteName.hashCode());
+		result = prime * result
+				+ ((visiteTel == null) ? 0 : visiteTel.hashCode());
+		result = prime * result
 				+ ((visiteTime == null) ? 0 : visiteTime.hashCode());
 		return result;
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -284,6 +207,16 @@ public class ReservationRecord implements Domain{
 				return false;
 		} else if (!visiteDate.equals(other.visiteDate))
 			return false;
+		if (visiteName == null) {
+			if (other.visiteName != null)
+				return false;
+		} else if (!visiteName.equals(other.visiteName))
+			return false;
+		if (visiteTel == null) {
+			if (other.visiteTel != null)
+				return false;
+		} else if (!visiteTel.equals(other.visiteTel))
+			return false;
 		if (visiteTime == null) {
 			if (other.visiteTime != null)
 				return false;
@@ -292,13 +225,199 @@ public class ReservationRecord implements Domain{
 		return true;
 	}
 
+
+
+	public String getRecordId() {
+		return recordId;
+	}
+
+
+
+	public void setRecordId(String recordId) {
+		this.recordId = recordId;
+	}
+
+
+
 	public String getRecordCode() {
 		return recordCode;
 	}
 
+
+
 	public void setRecordCode(String recordCode) {
 		this.recordCode = recordCode;
 	}
+
+
+
+	public String getCreateUser() {
+		return createUser;
+	}
+
+
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+
+
+	public String getCreateTime() {
+		return createTime;
+	}
+
+
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
+
+
+	public String getRecordServiceTel() {
+		return recordServiceTel;
+	}
+
+
+
+	public void setRecordServiceTel(String recordServiceTel) {
+		this.recordServiceTel = recordServiceTel;
+	}
+
+
+
+	public String getVisiteName() {
+		return visiteName;
+	}
+
+
+
+	public void setVisiteName(String visiteName) {
+		this.visiteName = visiteName;
+	}
+
+
+
+	public String getVisiteTel() {
+		return visiteTel;
+	}
+
+
+
+	public void setVisiteTel(String visiteTel) {
+		this.visiteTel = visiteTel;
+	}
+
+
+
+	public String getUpdateUser() {
+		return updateUser;
+	}
+
+
+
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
+	}
+
+
+
+	public String getRecordType() {
+		return recordType;
+	}
+
+
+
+	public void setRecordType(String recordType) {
+		this.recordType = recordType;
+	}
+
+
+
+	public String getRecordCustomer() {
+		return recordCustomer;
+	}
+
+
+
+	public void setRecordCustomer(String recordCustomer) {
+		this.recordCustomer = recordCustomer;
+	}
+
+
+
+	public String getUpdateTime() {
+		return updateTime;
+	}
+
+
+
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
+	}
+
+
+
+	public String getVisiteDate() {
+		return visiteDate;
+	}
+
+
+
+	public void setVisiteDate(String visiteDate) {
+		this.visiteDate = visiteDate;
+	}
+
+
+
+	public String getRecordMemberId() {
+		return recordMemberId;
+	}
+
+
+
+	public void setRecordMemberId(String recordMemberId) {
+		this.recordMemberId = recordMemberId;
+	}
+
+
+
+	public String getRecordVisiteStatus() {
+		return recordVisiteStatus;
+	}
+
+
+
+	public void setRecordVisiteStatus(String recordVisiteStatus) {
+		this.recordVisiteStatus = recordVisiteStatus;
+	}
+
+
+
+	public String getRecordStatus() {
+		return recordStatus;
+	}
+
+
+
+	public void setRecordStatus(String recordStatus) {
+		this.recordStatus = recordStatus;
+	}
+
+
+
+	public String getVisiteTime() {
+		return visiteTime;
+	}
+
+
+
+	public void setVisiteTime(String visiteTime) {
+		this.visiteTime = visiteTime;
+	}
+
+
 
 	public String toString(){
 		return super.toString();
