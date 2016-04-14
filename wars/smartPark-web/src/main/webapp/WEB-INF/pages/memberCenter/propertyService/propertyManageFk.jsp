@@ -10,7 +10,7 @@
 							<input class="bd-input fl" type="text" id="startTime"><span class="fl ml15 mr15">到</span>
 							<input class="bd-input fl" type="text" id="endTime">
 							<div class="inp-box ml20"><input placeholder="订单号查询" type="text" id="fkCode"><a class="fa fa-search" href=""></a></div>
-							<input value="搜索" class="hhf-submit f14 fr" type="button">
+							<input value="搜索" class="hhf-submit a f14 fr" type="button">
 						</div>
 						<table class="gt-table mt20">
 							<colgroup>
@@ -79,7 +79,7 @@
 							<input class="bd-input fl" type="text"><span class="fl ml15 mr15">到</span>
 							<input class="bd-input fl" type="text">
 							<div class="inp-box ml20"><input placeholder="订单号查询" type="text"><a class="fa fa-search" href=""></a></div>
-							<input value="搜索" class="hhf-submit fr" type="button">
+							<input value="搜索" class="hhf-submit a fr" type="button">
 						</div>
 						<table class="gt-table mt20">
 							<colgroup>
@@ -116,7 +116,7 @@
 					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o fkCode"> [ 123456789 ] </span>吗？
 				</div>
 				<!-- <p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p> -->
-				<input value="确定" class="hhf-submit" style="height:36px;" type="submit">
+				<input value="确定" class="hhf-submit c" style="height:36px;" type="submit">
 			</div>
 		</div>
 	</div>
@@ -278,7 +278,7 @@ $(function () {
 			});
 		};
 		//根据订单号查询
-		$('.hhf-submit').click(function(){
+		$('.hhf-submit.a').click(function(){
 			
 			$(".aaa").empty();
 			 var fkCode=$("#fkCode").val(); 
@@ -300,7 +300,7 @@ $(function () {
 	<!-- 取消访客 -->
 	<script type="text/javascript">
 	$(function(){
-		$(".hhf-submit").click(function(){
+		$(".hhf-submit.c").click(function(){
 			
 				var id=$(".fkCode")[0].getAttribute("id");
 			 	$.youi.ajaxUtils.ajax({
@@ -332,6 +332,7 @@ $(function () {
 		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 		});
 	});
+	//弹窗
 	 function close(content){		        
 	        $(".tc.mt25.f18").empty() ;
 	        $(".tc.mt25.f18").append(content) ;
@@ -341,7 +342,7 @@ $(function () {
    }
 	  $(function () {
 			
-			$(".hhf-submit").click(function(){
+			$(".hhf-submit.c").click(function(){
 				$(".bg-tanc.m1").hide();
 			});									
 		}) 
