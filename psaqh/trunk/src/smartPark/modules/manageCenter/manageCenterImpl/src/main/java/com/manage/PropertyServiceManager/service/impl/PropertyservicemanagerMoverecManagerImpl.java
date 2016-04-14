@@ -33,12 +33,16 @@ import com.gsoft.utils.HttpSenderMsg;
 import com.gsoft.utils.QRCodeUtil;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCharge;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFxtdc;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerMoverec;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTwcrd;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerFxtdcDao;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerMoverecDao;
+import com.manage.PropertyServiceManager.dao.PropertyservicemanagerTwcrdDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerFxtdcManager;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerMoverecManager;
+import com.manage.PropertyServiceManager.service.PropertyservicemanagerTwcrdManager;
 
 @Service("propertyservicemanagerMoverecManager")
 @Transactional
@@ -49,6 +53,8 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
 	private PropertyservicemanagerFxtdcManager propertyservicemanagerFxtdcManager ;
 	@Autowired
 	private MemberInformationManager memberInformationManager;
+	@Autowired
+	private PropertyservicemanagerTwcrdDao propertyservicemanagerTwcrdDao;
 	@Autowired 
 	private CodeitemManager codeitemManager;
 	@Value("#{configProperties['file.root.path']}")
@@ -244,4 +250,19 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
 	    	PagerRecords pagerRecords = propertyservicemanagerMoverecDao.findByPager(pager, conditions, orders);
 			return pagerRecords;
 		}
+	    /**
+		 * 前台取消访客
+		 * @param moverecId
+		 * @return
+		 * @throws BusException
+		 */
+	    @EsbServiceMapping
+		public PropertyservicemanagerMoverec cancelStatus(@ServiceParam(name="moverecId") String moverecId) throws BusException{
+	    	PropertyservicemanagerMoverec moverec = propertyservicemanagerMoverecDao.get(moverecId);
+	    	String moverecStatus=moverec.getMoverecStatus();
+	    	if(moverecStatus=="00"){
+	    		moverec.setMoverecStatus("03");	
+	    	}	    	
+			return moverec;	    	    		    	
+	    }
 }
