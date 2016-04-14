@@ -184,7 +184,7 @@
                 </div>
                 <div class="mt25">
                     <div class="inline_b">
-                        <label><span class="cc vm">*</span>&nbsp;联系邮箱</label>
+                        <label><span class="cc vm"></span>&nbsp;联系邮箱</label>
                         <input type="text"/>
                     </div>
                     <div class="inline_b ml40">
@@ -446,8 +446,11 @@ var commodityId;
 				$(".pop_layer").show();
 				$(".pop_layer.pl1").hide();
 			}else{
+				clearInterval(timer);
 				$("#msg").text("请选择预约日期和时间段");
-				$(".toast").show();
+	            $(".toast").show();
+	            pltime=2;
+	            timer=setInterval("closeTanc()",1000)
 				
 			}
 			//alert("已预约id："+$("#resoIds").html().substring(0,$("#resoIds").html().length-1));
@@ -473,22 +476,31 @@ var commodityId;
 		    	tea=true;
 	          }
             if(enteringName == null||enteringName == ""){
-				$("#msg").text("请填写联系人");
-				$(".toast").show();
+            	clearInterval(timer);
+            	$("#msg").text("请填写联系人");
+	            $(".toast").show();
+	            pltime=2;
+	            timer=setInterval("closeTanc()",1000)
 				return;
 			}
             if(enteringTelephone !=null&& enteringTelephone!=""){
 				 if(isMobil(enteringTelephone)){
 						
 					}else{
+						clearInterval(timer);
 						$("#msg").text("电话格式不正确！");
-						$(".toast").show();
-						return false;
+			            $(".toast").show();
+			            pltime=2;
+			            timer=setInterval("closeTanc()",1000)
+						return;
 					}
 		    	}else{
+		    		clearInterval(timer);
 		    		$("#msg").text("请填写联系人电话");
-		    		$(".toast").show();
-				return;
+		            $(".toast").show();
+		            pltime=2;
+		            timer=setInterval("closeTanc()",1000)
+				    return;
 		    	}
 			
 			
@@ -559,8 +571,11 @@ var commodityId;
 					}
 				});
             }else{
+            	clearInterval(timer);
             	$("#msg").text("请选择预约日期和时间段");
-				$(".toast").show();
+	            $(".toast").show();
+	            pltime=2;
+	            timer=setInterval("closeTanc()",1000)
             }	
 			
 			//校验手机号格式
