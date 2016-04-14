@@ -111,4 +111,14 @@ public interface McMsgdatasManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public McMsgdatas buildMsgData(String uniqueCode,Map<String,String> replaceMap) throws BusException;
+	/**
+	 * 发送消息
+	 * @param code 模板代码 
+	 * @param params 模板中需要替换的参数
+	 * @param recUser 
+	 * @param phone 机号码
+	 * @return
+	 */
+	public Boolean smsSend(String code, Map<String, Object> params,
+			String recUser, String phone);
 }
