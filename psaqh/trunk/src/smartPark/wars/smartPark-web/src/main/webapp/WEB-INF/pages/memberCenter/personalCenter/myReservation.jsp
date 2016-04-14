@@ -272,8 +272,12 @@
 					recordStatus="已到访";
 				}else if(recordStatus=="04"){
 					recordStatus="已取消";
+					buttonHtml="";
 				}else if(recordStatus=="05"){
 					recordStatus="未到访";
+				}else if(recordStatus=="06"){
+					recordStatus="已入驻";
+					buttonHtml="";
 				}
 				html+="<tr id='"+record[i].entrecId+"'>"+
 					 "<td><a href=''>"+record[i].enterrecCode+"</a></td>"+ 
