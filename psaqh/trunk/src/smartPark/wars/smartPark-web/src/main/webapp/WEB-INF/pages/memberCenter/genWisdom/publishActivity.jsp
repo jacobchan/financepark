@@ -25,13 +25,13 @@
                          	})
                         </script>
                         <div class="mt40 ac_box pb20">
-                         	<span><a class="active" href="javascript:;">报名的名单</a><a href="javascript:;">活动评论</a><a href="javascript:;">文档库</a><a href="javascript:;">场地选择</a></span>
+                         	<span><a class="active" href="javascript:;">报名的名单</a><!-- <a href="javascript:;">活动评论</a> --><a href="javascript:;">文档库</a><a href="javascript:;">场地选择</a></span>
                             <a href="javascript:;" class="ccheng fr">导出为Excel文档>></a>
                         </div>
                         <div class="clearfix show">
                          	<ul class="clearfix img_list">
 	                        </ul>
-	                         <a href="" class="table-more">加载更多</a>
+	                         <!-- <a href="" class="table-more">加载更多</a> -->
                         </div>
                          
 						<!---->
@@ -52,11 +52,11 @@
 							</div>
 						</div>
 
-						<div class="clearfix show undis">
+						<!-- <div class="clearfix show undis">
 							<div class="clearfix czh-knowledge mt30">
 	                           
 	                        </div>
-						</div>
+						</div> -->
 						<div class="clearfix show undis">
 							<table class="place-table mt30">
 								<colgroup>
@@ -66,15 +66,15 @@
 									<col width="25%"></col>
 								</colgroup>
 								<tbody>
-									<tr>
+									<!-- <tr>
 										<td>地点</td>
 										<td>时间</td>
 										<td>价格</td>
 										<td>操作</td>
-									</tr>
-									<tr>
+									</tr> -->
+									<!-- <tr>
 										<td colspan="4"><a class="f12 c-333" href="">暂无场地，前往预定>></a></td>
-									</tr>
+									</tr> -->
 								</tbody>
 							</table>
 						</div>
@@ -126,7 +126,7 @@
 			}
 		});	
 		//评论内容
-		$.ajax({
+		/* $.ajax({
 			url:baseUrl+'activityApplyManager/getPublishActivityComments.json',
 			data:params.join('&'),
 			success:function(result){
@@ -134,26 +134,45 @@
 					_parseApplyComments(result.records);
 				}
 			}
-		});	
+		});	 */
 		//文档库
 		$.ajax({
 			url:baseUrl+'activityApplyManager/getPublishActivityDocuments.json',
 			data:params.join('&'),
 			success:function(result){
-				console.log(result);
+				//console.log(result);
 				if(result&&result.records){
 					_parseApplyDocuments(result.records);
 				}
 			}
 		});	
+		//活动地点
+		$.ajax({
+			url:baseUrl+'activityApplyManager/getPublishActivityOrder.json',
+			data:params.join('&'),
+			success:function(result){
+				//console.log(result);
+				if(result&&result.records){
+					_parseApplyorder(result.records);
+				}
+			}
+		});	
+		
 	};
 	
 	//拼接活动报名名单
 	function _parseApplyList(record){
 		var html="";
 		for(var i=0;i<record.length;i++){
+			var memberHeadPortrait ="";
+			var add = record[i].memberHeadPortrait;
+			if(add!=''&&add!=null){
+				memberHeadPortrait = cenUrl+"common/uploadImage.html?repository=/swfupload&path="+add+"&method=show";
+			}else{
+				memberHeadPortrait = cenUrl+"styles/images/grzx/sl-i2.png";
+			}
 			html+="<li>"+
-				 "<img src='<%=request.getContextPath()%>/styles/images/grzx/sl-i2.png' border='0' height='59' width='59'>"+
+				 "<img src="+memberHeadPortrait+" border='0' height='59' width='59'>"+
 				 "<br/>"+record[i].memberName+
 				 "</li>";
 		};
@@ -213,9 +232,25 @@
 		$(".clearfix.czh-knowledge.mt30").empty();
 		$(".clearfix.czh-knowledge.mt30").append(html);
 	}
+	
+	//拼接活动场地
+	function _parseApplyorder(record){
+		$("tbody").empty();
+		 var head = "<tr><td>地点</td><td>时间</td>"+
+				"<td>价格</td><td>操作</td></tr>";
+		$("tbody").append(head);
+		var html="";
+		for(var i=0;i<record.length;i++){
+			html+="<tr><td align='left' style='padding-left: 75px;'>"+record[i].userorderProject+"</td>"+
+			"<td>2016-03-12 08:00 - 18:00</td><td>"+record[i].userorderAmount+"元/小时</td>"+
+			"<td><a href='"+proUrl+"companyservice/room.html' class='c-333'>查看场地详情</a></td></tr>";
+		}
+		$("tbody").append(html);
+	}
+	
 	function redirectPage(obj){
 		var id=obj.parentNode.id;
-		alert("点击动作待定...");
+		window.location.href=proUrl+"czh/czh3.html?applyId="+id;
 	}
 	function redirectPagePDF(obj){
 		var id=obj.id;
