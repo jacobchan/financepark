@@ -636,7 +636,37 @@
             </table>
         </div>
     </div>
-
+	<div class="bg-tanc">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:400px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<h3 class="mb10 f20 c-333"><b>活动报名</b></h3>
+			<table class="line-table w100" style="font-size:12px;">
+				<colgroup>
+					<col width="60%">
+					<col>
+				</colgroup>
+				<tbody>
+				<tr>
+					<td colspan="2"><input type="text" id="applyMember" placeholder="请输入真实姓名" style="width:100%"></td>
+				</tr>
+				<tr class="show2">
+					<td><input type="text"  id="applyPhone" placeholder="请输入有效的手机号码" style="width:100%"></td>
+					<!-- <td style="padding-left:10px;">
+						<a href="javascript:;" class="send-psw" style="width:100%">发送验证码</a>
+					</td> -->
+				</tr>
+				<!-- <tr>
+					<td colspan="2">
+						<input type="text" placeholder="请输入验证码" style="width:100%">
+						<p style="color:#e04648" class="f12 mt5 undis">验证码错误，请重新输入验证码</p>
+					</td>
+				</tr> -->
+				<tr>
+					<td colspan="2"><input type="button" class="ib-btn bm" style="width:100%;margin-top:0px;" value="报名"></td>
+				</tr>
+			</tbody></table>
+		</div>
+	</div>
     
 	<script type="text/javascript" src="scripts/lib/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/jquery-ui.min.js"></script>
@@ -1201,7 +1231,7 @@
 									"<div class='fr' >"+
 										"<span class='mr15'><img src='../styles/images/zs/user.png' border='0' class='mr10'>限制人数"+record[i].applyMaxuser+"人</span>|"+
 										"<span class='ml15 mr15'><img src='../styles/images/czh/heart-h.png' border='0' class='mr10'>2459</span>"+
-										"<a href='javascript:;' class='ib-btn lh30' style='margin-top:0px;'>我要报名</a>"+
+										"<a href='javascript:;' class='ib-btn lh30 acc' style='margin-top:0px;'>我要报名</a>"+
 									"</div>"+
 								"</div>"+
 							"</div>"+
@@ -1210,6 +1240,16 @@
 
 			$('.pb-list-group').empty();
 			$('.pb-list-group').append(html);
+			$(".ib-btn.lh30.acc").click(function(e){
+				$(".bg-tanc").attr("id",$(this).parents("li").attr("id"));
+				$("#applyMember").val('');
+				$("#applyPhone").val('');
+				$(".bg-tanc").show();
+				e.stopPropagation();	
+			});
+			$(".tc-close").click(function(){
+				$(".bg-tanc").hide();
+			});
 		};
 		function redirectPage(obj){
 			var applyId=obj.id;
@@ -1277,6 +1317,60 @@
             pltime=1;
             timer=setInterval("closeTanc()",1000);
         */
+        
+    	//报名提交
+    	$('.ib-btn.bm').click(function(){
+    		  if(!isLogin){
+    			   clearInterval(timer);
+    	            $(".toast").show();
+    	            pltime=2;
+    	            timer=setInterval("closeTanc()",1000);
+    			 	 return false;
+    			}
+    		  	var applyId = $(".bg-tanc").attr("id");
+    		 	var applyMember=$("#applyMember").val();
+    			var applyPhone=$("#applyPhone").val();
+    			if(!isMobil(applyPhone)){
+    				clearInterval(timer);
+    				$(".tc.mt25").text("请输入正确的手机号！");
+    	           	$(".toast").show();
+    	           	pltime=1;
+    	           	timer=setInterval("closeTanc()",1000);
+    				return false;
+    			}
+    			var serviceURL = baseUrl+"activityApplylistManager/saveActivityApplylistForPage.json";
+    			var params = ['activityApply.applyId='+applyId,'applyMember='+applyMember,'applyPhone='+applyPhone];
+    			$.youi.ajaxUtils.ajax({
+    				url:serviceURL,
+    				data:params.join('&'),
+    				jsonp:'data:jsonp',
+    				dataType:'jsonp',
+    				success:function(results){
+    					if(results&&results.record){
+    						clearInterval(timer);
+    						$(".tc.mt25").text("报名成功!");
+    			         	$(".toast").show();
+    			         	pltime=2;
+    			         	timer=setInterval("closeTanc()",1000);
+    			         	$(".bg-tanc").hide();
+    					}else{
+    						clearInterval(timer);
+    						$(".tc.mt25").text("您已报名成功!");
+    			         	$(".toast").show();
+    			         	pltime=2;
+    			         	timer=setInterval("closeTanc()",1000);
+    			         	$(".bg-tanc").hide();
+    					}
+    				}
+    			});			  
+    	});
+        
+      //校验手机号格式
+    	function isMobil(s) {
+    	    	var patrn = /^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+    	   		if (!patrn.exec(s)) return false
+    	   	 	return true
+    		}
 	</script>
     <!-- 弹出层样式 -->
     <div class="toast">
