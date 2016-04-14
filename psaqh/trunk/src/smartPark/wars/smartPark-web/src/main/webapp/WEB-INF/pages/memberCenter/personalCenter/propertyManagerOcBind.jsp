@@ -36,7 +36,7 @@
 				var html = "";
 				 if(record[i].bindStatus=='1'){						
 					var html="<div class='mt20'>"+
-							  "<img src='../images/grzx/check.png' border='0' />"+
+							  //"<img src='../images/grzx/check.png' border='0' />"+
 							  "<span class='ml30 mr30'>已绑定卡号：<font class='c-o'>"+record[i].ocNumber+"</font></span>"+
 							  "<input value='解除绑定' class='hhf-submit' style='padding:0px 10px;height:26px;' type='button' value='解绑'   onclick='unbound(\""+record[i].ocId+"\")'>"+
 							  "</div>";
