@@ -1,16 +1,16 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/pages/include.jsp" %>
-<youi:html title="物业投诉">
+<youi:html title="物业投诉详情">
 	<youi:body decorator="memcenter"> 
 					
 	<div class="w1000">
-			<h3 class="per-h3">物业投诉列表</h3>					
+			<h3 class="per-h3">物业投诉详情列表</h3>					
 			<div class="clearfixa a">											
 			</div>														    
 	</div>
 				<!-- //分页页码显示 -->
         <div class="tcdPageCode fr">
-							每页四条
+							
 		</div>
 		
 
