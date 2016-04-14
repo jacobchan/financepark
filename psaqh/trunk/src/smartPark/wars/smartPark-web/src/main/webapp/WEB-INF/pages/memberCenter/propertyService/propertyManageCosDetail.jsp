@@ -46,8 +46,7 @@
 	var pageCount=1;
 	var currentIndex = 1;
 	var serviceURL = baseUrl+'propertyservicemanagerCosManager/getPagerFkcodes.json';
-	var currentIndex = 1;
-	$(function () {
+$(function () {
 		
 		//分页页码显示
 		 $.ajax({
@@ -88,6 +87,7 @@
 	}
 		//格式化展示列表
 		function _parseRecords(record){
+			$(".clearfixa.a").empty();
 			$("#count").append(record.length);
 			for(var i=0;i<record.length;i++){
 				var bool = "";
@@ -159,8 +159,8 @@
 			"</div>"+ 
 			  "<div class='fr f12'>"+
 				//"<span class='mr30'> 订单总计费用：<font class='f24 c-o'>1200元</font></span>"+
-				"<a href='' class='pb-btn tc' style='width:120px;'>"+crop+"</a>"+
-			//	"<input type='submit' value='"+crop+"' class='hhf-submit' style='height:36px;' />"+
+				"<a href='' class='pb-btn tc' style='width:120px;' onclick='javascript:cancel(\""+record[i].cosId+"\")' >"+crop+"</a>"+
+			//	"<input type='submit' value='"+crop+"' class='hhf-submit' onclick='javascript:cancel(\""+record[i].cosId+"\")'  style='height:36px;' />"+
 			"</div>"+  
 		"</div>	";
 				$(".clearfixa.a").append(html);
@@ -198,9 +198,7 @@
 					data:'cosId='+cosId,
 					success:function(result){
 						if(result&&result.record){
-
-							close("取消成功");
-							
+							close("取消成功");							
 						}
 					}
 				});
