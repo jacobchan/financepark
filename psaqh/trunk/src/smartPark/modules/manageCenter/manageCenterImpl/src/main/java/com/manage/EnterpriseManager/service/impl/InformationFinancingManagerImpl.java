@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gsoft.framework.codemap.dao.CodeitemDao;
 import com.gsoft.framework.codemap.dao.CodemapDao;
 import com.gsoft.framework.codemap.entity.Codeitem;
 import com.gsoft.framework.core.dao.QuerySql;
@@ -24,10 +25,12 @@ import com.manage.EnterpriseManager.dao.InformationFinancingDao;
 import com.manage.EnterpriseManager.service.InformationFinancingManager;
 @Service("informationFinancingManager")
 @Transactional
-@SuppressWarnings("rawtypes")
 public class InformationFinancingManagerImpl extends BaseManagerImpl implements InformationFinancingManager {
 	@Autowired
 	private InformationFinancingDao informationFinancingDao;
+	@Autowired
+	private CodeitemDao<Codeitem, String> codeItemDao;
+	@SuppressWarnings("rawtypes")
 	@Autowired
 	private CodemapDao codemapDao;
 
@@ -139,6 +142,17 @@ public class InformationFinancingManagerImpl extends BaseManagerImpl implements 
 		order.add(ConditionUtils.getOrder("createTime", true));
 		List<InformationFinancing> list = informationFinancingDao
 				.commonQuery(condition, order);
+		for(InformationFinancing infin:list){
+			String financingSubValue = "";
+	    	List<Codeitem> codeitemList = codeItemDao.getList("codemap.code", "rzType");//投资类型
+	    	for(int y = 0;y<codeitemList.size();y++){
+	   			Codeitem codeitem = codeitemList.get(y);
+	   			if(codeitem.getItemValue().equals(infin.getFinancingSub())){
+	   				financingSubValue = codeitem.getItemCaption();
+	   			}
+	   		} 
+	    	infin.setFinancingSubValue(financingSubValue);
+		}
 		return list;
 	}
 	
@@ -150,11 +164,11 @@ public class InformationFinancingManagerImpl extends BaseManagerImpl implements 
 	 * @author ZhuYL
 	 * @time 2016-03-31
 	 */
-	@SuppressWarnings("unchecked")
 	@EsbServiceMapping
 	public List<Codeitem> findCodeitem(@ServiceParam(name = "code") String code) throws BusException{
 		Object[] values = new Object[]{code};
 		QuerySql sql = new QuerySql("select * from youi_codeitem where CODEMAP_ID = (select CODEMAP_ID from youi_codemap WHERE CODE=?)", values);
+		@SuppressWarnings("unchecked")
 		List<Codeitem> item = codemapDao.getListByQuerySql(sql, Codeitem.class);
 		return item;
 	}
