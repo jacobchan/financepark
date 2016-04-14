@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
 import com.gsoft.framework.codemap.entity.Codeitem;
@@ -45,7 +46,7 @@ public class EntrepreneurshipManagerImpl extends BaseManagerImpl implements Entr
 	@Autowired 
 	private CodeitemManager codeitemManager;
 	@Autowired
-	private MemberInformationManager memberInformationManager;
+	private MemberInformationDao memberInformationDao;
 	
     /**
      * 查询列表
@@ -85,7 +86,7 @@ public class EntrepreneurshipManagerImpl extends BaseManagerImpl implements Entr
 			entrepreneurship.setCreateTime(createTime);
 			//根据memberId获取用户名
 			String memberId = entrepreneurship.getMemberId();
-			MemberInformation memberInformation  = memberInformationManager.getMemberInformation(memberId);
+			MemberInformation memberInformation  = memberInformationDao.get(memberId);
 			entrepreneurship.setMember(memberInformation);
 		}
 		return pagerRecords;

@@ -3,6 +3,8 @@
  */
 package com.member.applications.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -15,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.entity.MemberInformation;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -33,6 +36,7 @@ import com.gsoft.utils.BizCodeUtil;
 import com.manage.EnterBusinessManager.dao.EnterbusinessmanagerRzDao;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.member.applications.dao.FinaceDao;
+import com.member.applications.entity.Entrepreneurship;
 import com.member.applications.entity.Finace;
 import com.member.applications.service.FinaceManager;
 
@@ -45,6 +49,7 @@ public class FinaceManagerImpl extends BaseManagerImpl implements FinaceManager{
 	private EnterbusinessmanagerRzDao enterbusinessmanagerRzDao;
 	@Autowired
 	private MemberInformationDao memberInformationDao;
+	
 	
     /**
      * 查询列表
@@ -73,8 +78,20 @@ public class FinaceManagerImpl extends BaseManagerImpl implements FinaceManager{
 	@EsbServiceMapping
 	public PagerRecords getPagerFinaces(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=Finace.class) Collection<Condition> conditions,//查询条件
-			@OrderCollection Collection<Order> orders)  throws BusException{
+			@OrderCollection Collection<Order> orders)  throws BusException, ParseException{
 		PagerRecords pagerRecords = finaceDao.findByPager(pager, conditions, orders);
+		SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		//格式化时间跟用户名查找
+		for(int i=0;i<pagerRecords.getRecords().size();i++){
+			Finace finace= (Finace) pagerRecords.getRecords().get(i);
+			//变换时间格式
+			String createTime = sdf.format(sdf.parse(finace.getCreateTime())).toString();
+			finace.setCreateTime(createTime);
+			//根据memberId获取用户名
+			String memberId = finace.getMemberId();
+			MemberInformation memberInformation  = memberInformationDao.get(memberId);
+			finace.setMember(memberInformation);
+		}
 		return pagerRecords;
 	}
     /**
@@ -165,4 +182,30 @@ public class FinaceManagerImpl extends BaseManagerImpl implements FinaceManager{
 		Finace saveFinace = this.saveFinace(o);
 		return saveFinace;
 	}
+	
+	/**
+	 * 获取整个数据的totalCount
+	 */
+	@EsbServiceMapping
+	public List<Record> getTotalCount(
+			@ConditionCollection(domainClazz=Entrepreneurship.class) Collection<Condition> conditions)  throws BusException{
+		List<Record> recordList=new ArrayList<Record>();
+		List<Finace> finaceList = this.getFinaces(conditions, null);
+		Record record = new Record();
+		record.put("totalCount", finaceList.size());
+		recordList.add(record);
+		return recordList;
+	}
+	
+	 /**
+     * 取消操作
+     */
+    @EsbServiceMapping
+    public Finace goCancel(@ServiceParam(name="id") String id) throws BusException{
+    	//获取融资申请的信息
+    	Finace finace = this.getFinace(id);
+    	//更改申请标识为03：取消
+    	finace.setApplayStatus("03");
+    	return finaceDao.save(finace);
+    }
 }
