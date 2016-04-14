@@ -860,8 +860,13 @@
 							   imageUrl=cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].commodityImage+"&method=show";
 						   } 
 						    var link =  "location.href='./companyservice/roomxq.html?id="+record[i].commodityId+"'";
-						 
-							 var html="<li onclick="+link+"><div class='fl'><img src='"+imageUrl+"' height='59' width='110'></div><div class='fl ml10'><div class='span_bold'>"+record[i].commodityTitle+"</div>"+
+						    var title=record[i].commodityTitle;
+						    var leng = title.length ;
+						    if(leng > 10){
+						    	title = title.substring(0,10) ;
+						    	title += "..." ;
+			  	 			}
+							 var html="<li onclick="+link+"><div class='fl'><img src='"+imageUrl+"' height='59' width='110'></div><div class='fl ml10'><div class='span_bold'>"+title+"</div>"+
 							"<p class='cc f12'>"+record[i].commodityPrice+"元/小时</p>立即预定</div></li>";
 							 $("#roomPage").append(html);
 							 
@@ -899,7 +904,13 @@
 					   }
 						   //http://localhost:8088/smartPark-web/ imageUrl
 						     var link =  "location.href='./companyservice/carLeasexq.html?id="+record[i].commodityId+"'";
-							 var html="<li onclick="+link+"><div class='fl'><img src='"+imageUrl+"' height='59' width='110'></div><div class='fl ml10'><div class='span_bold'>"+record[i].commodityTitle+"</div>"+
+						     var title=record[i].commodityTitle;
+							    var leng = title.length ;
+							    if(leng > 10){
+							    	title = title.substring(0,10) ;
+							    	title += "..." ;
+				  	 			}
+							 var html="<li onclick="+link+"><div class='fl'><img src='"+imageUrl+"' height='59' width='110'></div><div class='fl ml10'><div class='span_bold'>"+title+"</div>"+
 							"<p class='cc f12'>"+record[i].commodityPrice+"元/小时</p><a class='handbtn' href='./companyservice/carLeasexq.html?id="+record[i].commodityId+"'>立即预定</a></div></li>";
 							 $("#carPage").append(html);
 							 
@@ -935,7 +946,13 @@
 					   }
 						   //http://localhost:8088/smartPark-web/ imageUrl
 						    var link =  "location.href='./companyservice/advertxq.html?id="+record[i].commodityId+"'";
-							 var html="<li onclick="+link+"><div class='fl'><img src='"+imageUrl+"' height='59' width='110'></div><div class='fl ml10'><div class='span_bold'>"+record[i].commodityTitle+"</div>"+
+						    var title=record[i].commodityTitle;
+						    var leng = title.length ;
+						    if(leng > 10){
+						    	title = title.substring(0,10) ;
+						    	title += "..." ;
+			  	 			}
+							 var html="<li onclick="+link+"><div class='fl'><img src='"+imageUrl+"' height='59' width='110'></div><div class='fl ml10'><div class='span_bold'>"+title+"</div>"+
 							"<p class='cc f12'>"+record[i].commodityPrice+"元/小时</p><a class='handbtn' href='./companyservice/advertxq.html?id="+record[i].commodityId+"'>立即预定</a></div></li>";
 							 $("#advPage").append(html);
 							 
