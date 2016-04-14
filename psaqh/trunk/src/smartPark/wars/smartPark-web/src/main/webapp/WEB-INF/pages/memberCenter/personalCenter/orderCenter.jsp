@@ -25,6 +25,7 @@
 							</div>
 							<div class="inp-box ml20" style="width:300px;"><input placeholder="请输入订单号"  id="userorderCode" type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
 							<input value="搜索" class="hhf-submit f14 fl ml20" type="button">
+							<input value="搜索全部" class="hhf-submit f14 fl ml20 all" type="button">
 						</div>
 					
 					<div class="clearfix mt40">
@@ -151,13 +152,31 @@
 			});
 			
 		//根据订单项目模糊查询
-		$('.hhf-submit').click(function(){	
+		$('.hhf-submit.f14.fl.ml20').click(function(){	
 			$(".aaa").empty();
 			 var userorderProject=$("#userorderProject").text();
 			 if(userorderProject=="请选择订单项目"){
 				 userorderProject="";		 				 
 			 }
 			 var userorderCode=$("#userorderCode").val();		
+			 params=['userorderProject='+userorderProject+'','userorderCode='+userorderCode+''];
+		      $.ajax({
+		    	 url:baseUrl+'/ordermanagerUserorderManager/getOrderlistLikeUserorderProject.json',
+		    	 data:params.join('&'),
+		    	 success:function(result){					
+						console.log(result.records);           
+						if(result&&result.records){								
+							_parseRecords(result.records);					
+						}
+					}
+			}); 
+		}); 
+		//查询全部
+		$('.hhf-submit.f14.fl.ml20.all').click(function(){	
+			$(".aaa").empty();
+			 var userorderProject="";
+			 
+			 var userorderCode="";		
 			 params=['userorderProject='+userorderProject+'','userorderCode='+userorderCode+''];
 		      $.ajax({
 		    	 url:baseUrl+'/ordermanagerUserorderManager/getOrderlistLikeUserorderProject.json',
