@@ -53,12 +53,12 @@
             <form class="login_form" style="display:none">
             	<div class="login_input mt15">
                 	<label class="f16">用户名</label>
-                    <input type="text" placeholder="请输入手机号码" id="mobile">
-                    <a href="" style="color:#FB7730;">发送验证码</a>
+                    <input type="text" style="width: 140px;" placeholder="请输入手机号码" id="mobile">
+                    <a href="javascript:;" style="color:#FB7730;" id="sendMobileCaptcha">获取验证码</a>
                 </div>
                 <div class="login_input mt10">
                 	<label class="f16">验证码</label>
-                    <input type="text">
+                    <input type="text" id="captcha">
                 </div>
                 <div class="login_input mt10">
                 	<label class="f16">密码</label>
@@ -109,6 +109,18 @@ function registClick(){
 };
 </script>
 <script type="text/javascript">
+		function enableSmsButton(sec,processText,enableText){
+			$('#sendMobileCaptcha').html(processText + '(' + sec + ')');
+			if(sec <= 0){
+				$('#sendMobileCaptcha').html(enableText);
+				$('#sendMobileCaptcha').attr('disabled',false);
+			}
+			else{
+				setTimeout(function(){
+					enableSmsButton(sec - 1,processText,enableText);
+				},1000);
+			}
+		}
 		$(function(){
 			var url=location.href; 
 			var tmp1=url.split("?")[1]; 
@@ -124,13 +136,32 @@ function registClick(){
 				registClick();
 			}
 			
+			$('#sendMobileCaptcha').click(function(){
+				/* $('#sendMobileCaptcha').attr('disabled',true); */
+				var memberPhoneNumber = $("#mobile").val() ;
+				$.youi.ajaxUtils.ajax({
+					url:cenUrl + "web/loginUser/registerCaptcha.json",
+					data:{phone:memberPhoneNumber},
+					success:function(results){
+						var capt = results.record.html;
+						if(!/^\d{6}$/.test(capt)){
+							enableSmsButton(3,capt,'重新获取');
+							return;
+						}else{
+							enableSmsButton(60,'发送成功','重新获取');
+						}
+					}
+				});
+			});
+			
 			$("#register").click(function(){
 				var memberPhoneNumber = $("#mobile").val() ;
 				var memberPassword = $("#passwd").val() ;
 				var repasswd = $("#repasswd").val() ;
+				var captcha = $("#captcha").val();
 				
 				var isMobile=/^(?:13\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;//手机号的格式
-				if(! isMobile.test(memberPhoneNumber)){
+				if(!isMobile.test(memberPhoneNumber)){
 					//alert("请输入正确的手机号！") ;
 					clearInterval(timer);
 					$(".tc.mt25").text("请输入正确的手机号！");
@@ -205,24 +236,26 @@ function registClick(){
 							var params = [
 							              "memberPhoneNumber="+memberPhoneNumber,
 							              "memberPassword="+memberPassword,
-							              "repasswd="+repasswd
+							              "repasswd="+repasswd,
+							              "captcha="+captcha
 										 ];
 							$.youi.ajaxUtils.ajax({
-								url:baseUrl +"memberInformationManager/saveReister.json",
+								url:cenUrl +"web/loginUser/registerUser.json",
 								data:params.join('&'),
-								jsonp:'data:jsonp',
-								dataType:'jsonp',
 								success:function(results){
-									$("#mobile").val("");//将输入框内容置为空
-									$("#passwd").val("") ;
-									$("#repasswd").val("") ;
-									//var url = cenUrl+"/smartPark-web/member/memberCenter/login.html";
-									clearInterval(timer);
-									$(".tc.mt25").text("注册成功！");
+									var capt = results.record.html;
+									if(!/^\d{6}$/.test(capt)){
+										$(".tc.mt25").text(capt);
+									}else{
+										$(".tc.mt25").text("注册成功！");
+										$("#mobile").val("");//将输入框内容置为空
+										$("#passwd").val("") ;
+										$("#repasswd").val("") ;
+										$("#captcha").val("") ;
+										setTimeout("location.reload();", 1000);
+									}
 					           		$(".toast").show();
-					           		pltime=1;
-					           		timer=setInterval("closeTanc()",1000);
-									location.reload();
+					           		setTimeout("$('.toast').hide();", 1000);
 								}
 							});
 						} 
