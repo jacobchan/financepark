@@ -48,6 +48,13 @@
 			</div>
 		</div>
 	</div>
+	<div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
+        </div> 
+        
+    </div>
 	<!--***弹窗 end****************************************-->
 </youi:body>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
@@ -117,6 +124,8 @@
 	function _parseRecords(record){
 		$(".fklist").empty();	
 		for(var i=0;i<record.length;i++){
+			var id = record[i].moverecId ;
+			
 			var status="";
 			var button=""; 
 			var moverecStatus="";
@@ -137,41 +146,69 @@
 				moverecTime="";
 			}
 			
-			  var html="<div class='gz-fx-box clearfix'>"+
+			  var html="<div class='gz-fx-box clearfix' id='"+id +"'  >"+
 						    "<div class='gzb-thead'>"+
-							"<span class='c-o'>订单号："+record[i].moverecCode+"</span>"+
-							"<a href='javascript:;' class='fr f12'><i class='fa fa-file-text-o mr10 f20' style='font-size:20px;margin-top:5px;'></i>查看订单详情</a>"+					
+						        "<span class='c-o'>订单号："+record[i].moverecCode+"</span>"+
+							    "<a href='javascript:;' class='fr f12'><i class='fa fa-file-text-o mr10 f20' style='font-size:20px;margin-top:5px;'></i>查看订单详情</a>"+					
 						    "</div>"+ 						   						  
-						"<div class='fx-one p20'>"+
-					      "<table class='w100 lh30'>"+
-							 "<tr>"+
-								"<td>"+
-								 "<p class='f14 c-333'>"+record[i].moverecComp+"</p>"+
-								 "<p>"+moverecTime+"</p>"+
-								"</td>"+
-								"<td><p>"+moverecStatus+"</p></td>"+
-							 "</tr>"+							
-					       "</table>"+
-					       "<div>"+button+"</div>"+ 							
-						"</div>"+
-						"<div class='fx-two p20 lh30 undis'>"+							
-							"<p>放行物品描述</p>"+							
-							"<p>"+record[i].moverecRemark+"</p>"+							 							
-						"</div>"+
+							"<div class='fx-one p20'>"+
+					      	  "<table class='w100 lh30'>"+
+							    "<tr>"+
+								  "<td>"+
+								 	"<p class='f14 c-333'>"+record[i].moverecComp+"</p>"+
+								    "<p>"+moverecTime+"</p>"+
+								  "</td>"+
+								  "<td><p>"+moverecStatus+"</p></td>"+
+							     "</tr>"+							
+					           "</table>"+
+					           "<div>"+button+"</div>"+ 							
+						    "</div>"+
+						    "<div class='fx-two p20 lh30 undis'>"+							
+							    "<p>放行物品描述</p>"+							
+							    "<p>"+record[i].moverecRemark+"</p>"+							 							
+						    "</div>"+
 					"</div>";
 			  $(".fklist").append(html);				
 		}
 	};
 	//取消弹窗
 	function cancel(obj){
-		var me=obj.parentNode.parentNode;
+		var me=obj.parentNode.parentNode.parentNode;//找到父节点
+		
+		//alert(me.id);
 		var moverec=me.childNodes[0].childNodes[0].innerText; 
 		$(".moverec").html(moverec);
-		$(".moverec")[0].setAttribute("id",me.i3d);
+		$(".moverec")[0].setAttribute("id",me.id);//给弹窗设置id
 		$(".bg-tanc.m1").show();
 	};
-	//点击确认取消
-	
+	//点击确认取消搬家预约
+	$(function(){
+		$(".hhf-submit").click(function(){
+			
+				var id=$(".moverec")[0].getAttribute("id");
+				
+			 	$.ajax({
+					url:baseUrl+'propertyservicemanagerMoverecManager/cancelStatus.json',
+					data:'moverecId='+id,
+					success:function(result){
+						if(result&&result.record){
+							//$(".bg-tanc.m1").close();
+							close("取消成功!");						
+							
+						}
+					}
+				});
+			});
+		});
+	//取消弹窗
+	 function close(content){		        
+	        $(".tc.mt25.f18").empty() ;
+	        $(".tc.mt25.f18").append(content) ;
+	        $(".toast").show();	
+	        setTimeout(function(){$(".bg-tanc.m1").hide(); },100);
+			setTimeout(function(){$(".toast").hide(); },1000);
+			refreshData(currentIndex,pageSize);
+  }
 	</script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/right.js"></script>
 	<script type="text/javascript">
@@ -187,24 +224,7 @@
 				$(this).parents(".gz-fx-box").find(".fx-one").slideToggle("fast");
 			})
 		})
-		$(function(){
-		$(".hhf-submit").click(function(){
-			
-				var id=$(".moverec")[0].getAttribute("id");
-				alert(id);
-			 	$.youi.ajaxUtils.ajax({
-					url:baseUrl+'propertyservicemanagermoverecManager/cancelStatus.json',
-					data:'moverecId='+id,
-					success:function(result){
-						if(result&&result.record){
-							//$(".bg-tanc.m1").close();
-							close("取消成功!");						
-							
-						}
-					}
-				});
-			});
-		});
+		
 	</script>
 	<script type="text/javascript">
 	    //点击跳转到搬家申请页面
