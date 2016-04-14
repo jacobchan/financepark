@@ -51,10 +51,6 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
 	private PropertyservicemanagerMoverecDao propertyservicemanagerMoverecDao;
 	@Autowired
 	private PropertyservicemanagerFxtdcManager propertyservicemanagerFxtdcManager ;
-	@Autowired
-	private MemberInformationManager memberInformationManager;
-	@Autowired
-	private PropertyservicemanagerTwcrdDao propertyservicemanagerTwcrdDao;
 	@Autowired 
 	private CodeitemManager codeitemManager;
 	@Value("#{configProperties['file.root.path']}")
@@ -260,9 +256,11 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
 		public PropertyservicemanagerMoverec cancelStatus(@ServiceParam(name="moverecId") String moverecId) throws BusException{
 	    	PropertyservicemanagerMoverec moverec = propertyservicemanagerMoverecDao.get(moverecId);
 	    	String moverecStatus=moverec.getMoverecStatus();
-	    	if(moverecStatus=="00"){
-	    		moverec.setMoverecStatus("03");	
-	    	}	    	
-			return moverec;	    	    		    	
+	    	if(moverecStatus.equals("00")){
+	    		moverec.setMoverecStatus("03");
+	    		
+	    	}	
+	    	PropertyservicemanagerMoverec p=propertyservicemanagerMoverecDao.save(moverec);
+			return p;	    	    		    	
 	    }
 }
