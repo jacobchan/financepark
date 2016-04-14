@@ -3,16 +3,23 @@
  */
 package com.member.applications.service;
 
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.ServiceParam;
+import com.member.applications.entity.Entrepreneurship;
 import com.member.applications.entity.Finace;
 
 public interface FinaceManager extends BaseManager{
@@ -36,7 +43,7 @@ public interface FinaceManager extends BaseManager{
 	 */
 	public PagerRecords getPagerFinaces(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
-			Collection<Order> orders) throws BusException;
+			Collection<Order> orders) throws BusException, ParseException;
     /**
      * 保存并返回对象
      */
@@ -77,4 +84,14 @@ public interface FinaceManager extends BaseManager{
 	 * @return
 	 */
 	public Finace goSaveFinace(Finace o)  throws BusException;
+	
+	/**
+	 * 获取整个数据的totalCount
+	 */
+	public List<Record> getTotalCount(Collection<Condition> conditions)  throws BusException;
+	
+	 /**
+     * 取消操作
+     */
+    public Finace goCancel(String id) throws BusException;
 }
