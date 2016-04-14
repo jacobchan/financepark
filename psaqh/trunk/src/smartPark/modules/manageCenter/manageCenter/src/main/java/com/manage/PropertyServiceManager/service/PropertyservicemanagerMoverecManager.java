@@ -13,6 +13,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerMoverec;
 
 public interface PropertyservicemanagerMoverecManager extends BaseManager{
@@ -90,4 +92,12 @@ public interface PropertyservicemanagerMoverecManager extends BaseManager{
 	public PagerRecords getPagerMoverec(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders) throws BusException;
+	/**
+	 * 前台取消访客
+	 * @param moverecId
+	 * @return
+	 * @throws BusException
+	 */
+    @EsbServiceMapping
+	public PropertyservicemanagerMoverec cancelStatus(@ServiceParam(name="moverecId") String moverecId) throws BusException;
 }
