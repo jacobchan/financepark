@@ -1,5 +1,4 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-我是融资申请
 <div class="clearfix">
 	<table class="gt-table mt20">
 		<colgroup>
@@ -10,39 +9,105 @@
 			<col width="120">
 			<col width="120">
 		</colgroup>
-		<tbody><tr>
-			<th>申请编号</th>
-			<th>政策类型</th>
-			<th>申请人</th>
-			<th>申请时间</th>
-			<th>状态</th>
-			<th>操作</th>
-		</tr>
-		<tr>
-			<td><a href="">12349</a></td>
-			<td>孵化器\租金</td>
-			<td>鲁智深</td>
-			<td>2016-02-01 10:30 </td>
-			<td>未办理</td>
-			<td><a href="javascript:;" class="ac-cancle">取消</a></td>
-		</tr>
-		<tr>
-			<td><a href="">12789</a></td>
-			<td>孵化器\租金</td>
-			<td>鲁智深</td>
-			<td>2016-02-01 10:30 </td>
-			<td>未办理</td>
-			<td><a href="javascript:;" class="ac-see">重新提交</a></td>
-		</tr>
-	</tbody></table>
-	<div class="fr page-list-a clearfix lh30 mt20 f12">
-		<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
-		<a href="">首</a>
-		<a href=""><i class="fa fa-angle-left"></i></a>
-		<a>1</a>
-		<a href=""><i class="fa fa-angle-right"></i></a>
-		<a href="">末</a>
-		<input class="bd-input fl ml10 mr10" style="width:40px;" type="text">
-		<a href="">Go</a>
-	</div>
+		<tbody>
+			<tr>
+				<th>申请编号</th>
+				<th>政策类型</th>
+				<th>申请人</th>
+				<th>申请时间</th>
+				<th>状态</th>
+				<th>操作</th>
+			</tr>
+		</tbody>
+	</table>
+	<div class="tcdPageCode fr"></div>
 </div>
+<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
+<script type="text/javascript">  
+	$(function(){
+		loadData();
+	});
+	
+	//加载数据
+	function loadData(){
+		var pageSize=50;
+		var pageCount=1;
+		$.youi.ajaxUtils.ajax({
+			url : baseUrl + "finaceManager/getTotalCount.json",
+			success : function(results) {
+				var totalCount=results.records[0].totalCount;
+				pageCount = Math.ceil(totalCount / pageSize);
+				//开始勾画页面
+				refreshData(1, pageSize);
+				$(".tcdPageCode").createPage({
+					pageCount : pageCount,
+					current : 1,
+					backFn : function(p) {
+						this.pageCount = pageCount;
+						refreshData(p, pageSize);
+					}
+				});
+			}
+		});
+	}
+	
+	//分页列表开始显示
+	function refreshData(pageIndex, pageSize) {
+		var params = [ 'pager:pageIndex=' + pageIndex,'pager:pageSize=' + pageSize ];
+		$.youi.ajaxUtils.ajax({
+			url : baseUrl + "finaceManager/getPagerFinaces.json",
+			data : params.join('&'),
+			success : function(results) {
+				if (results && results.records) {
+					_parseRecords(results.records);
+				}
+			}
+		});
+	}
+	
+	//拼接列表
+	function _parseRecords(recordList){
+		var headHtml = "";
+			headHtml+='<tr>'
+			headHtml+='	<th>申请编号</th>'
+			headHtml+='	<th>政策类型</th>'
+			headHtml+='	<th>申请人</th>'
+			headHtml+='	<th>申请时间</th>'
+			headHtml+='	<th>状态</th>'
+			headHtml+='	<th>操作</th>'
+			headHtml+='</tr>'
+			var html = "";
+		for (var index = 0; index < recordList.length; index++) {
+			html += '<tr>'
+			html += '	<td><a href="">'+ recordList[index].applayNo+ '</a></td>'
+			html += '	<td>融资申请</td>'
+			html += '	<td>'+ recordList[index].member.memberName+ '</td>'
+			html += '	<td>'+ recordList[index].createTime+ '</td>'
+			if(recordList[index].applayStatus=="01"){
+				html += '	<td>未办理</td>'
+				html += '	<td><a href="javascript:cancel(\''+recordList[index].id+'\');" class="ac-cancle">取消</a></td>'
+			}else if(recordList[index].applayStatus=="02"){
+				html += '	<td>已完成</td>'
+				html += '	<td></td>'
+			}else if(recordList[index].applayStatus=="03"){
+				html += '	<td>已取消</td>'
+					html += '	<td></td>'
+				}
+			html += '</tr>'
+		}
+		$("tbody").html(headHtml+html);
+	};
+	
+	//取消操作
+	function cancel(id){
+		var params = [ 'id=' + id ];
+		$.youi.ajaxUtils.ajax({
+			url : baseUrl + "finaceManager/goCancel.json",
+			data : params.join('&'),
+			success : function(results) {
+				loadData();
+			}
+		});
+	}
+	
+</script>
