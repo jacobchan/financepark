@@ -153,8 +153,9 @@
 	  //toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
 	    var a,pltime,timer,timer2;;
 	    function closeTanc(){
+	    	  pltime--;
 	        if(pltime>1){
-	            pltime--;
+	        	setTimeout("closeTanc()", 1000);
 	        }else{
 	            $(".toast").hide();
 	        }       
