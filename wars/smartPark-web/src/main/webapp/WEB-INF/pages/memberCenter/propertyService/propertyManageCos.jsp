@@ -74,7 +74,7 @@
 	var pageCount=1;
 	var currentIndex = 1;
 	var serviceURL = baseUrl+'propertyservicemanagerCosManager/getPagerFkcodes.json';
-	var currentIndex = 1;
+	
 	$(function () {
 		
 		//分页页码显示
@@ -156,7 +156,9 @@
 				}else if(record[i].cosStatus=='6'){
 					status = "已完成";
 				}
-				var html="<tr id='"+record[i].cosId+"' class='aaa'><td>"+record[i].cosCode+"</td>"+
+				var html="<tr id='"+record[i].cosId+"' class='aaa'><td>"+
+				"<a href='<%=request.getContextPath()%>/member/memberCenter/propertyService/propertyManageCosDetail.html'>"+record[i].cosCode+"</a>"+
+				"</td>"+
 				"<td>"+record[i].cosTime+"</td>"+
 				"<td>"+bool+"</td><td>"+record[i].cosName+"</td>"+
 				"<td>"+record[i].cosTelephone+"</td><td>"+status+"</td>"+
