@@ -282,10 +282,12 @@
 			}
 		});	
 		
-		//园区推荐活动数据
-		var serviceURL = baseUrl+"activityApplyManager/getActivityListIsRecoment.json";		
+		//园区所有活动数据
+		var serviceURL = baseUrl+"activityApplyManager/getPagerActivityApplys.json";
+		var params = ['applyStatus=01']
 		$.youi.ajaxUtils.ajax({
 			url:serviceURL,
+			data:params.join('&'),
 			jsonp:'data:jsonp',
 			dataType:'jsonp',
 			success:function(results){
