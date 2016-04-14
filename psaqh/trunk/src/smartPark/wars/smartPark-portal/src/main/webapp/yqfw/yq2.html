@@ -46,12 +46,12 @@ function GetRequest() {
 	    	var enteringType = Request['enteringType'];
 	    	var a,b;
 				$(function(){
-					var j=0,num=0;
+					var j=0,num=0,pageCount=1;
 					var timer1,timer2;
 					var o=$(".ht-table tr th").length;//得到th有多少个；
 					var dd,dm,dt,dw;
 					var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];//将得到的0-7转化为星期
-					changeDate(num);
+					changeDate(num,1000);
 					//鼠标移上去时出现左右按钮
 					$(".pr").hover(function(){
 						$(this).children(".ht-table").nextAll().toggle();
@@ -66,6 +66,7 @@ function GetRequest() {
 					  	dt=dd.getDate();
 					  	if(m1==dm && d1==dt){
 					  		clearInterval(timer);
+					  		$("#msg").text("只能选择今天及以后的日期");
 				            $(".toast").show();
 				            pltime=1;
 				            timer=setInterval("closeTanc()",1000);
@@ -73,7 +74,9 @@ function GetRequest() {
 					  		num--;
 					  		var serviceURL = baseUrl+"propertyservicemanagerEnteringManager/getEnteringList.json";
 							var pageIndex=num+1;
-							var params = ['pager:pageIndex='+pageIndex];
+							pageCount=$("#pageTotal").val();
+							var pageSize=12;
+							var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
 							var enteringId;
 							//根据商品id获取资源可用状态
 							$.youi.ajaxUtils.ajax({
@@ -84,6 +87,7 @@ function GetRequest() {
 								async : false,
 								success : function(results) {
 									if (results && results.records) {
+										pageCount=Math.ceil(results.totalCount/pageSize);
 										var record = results.records;
 										$("#am").empty();
 										$("#pm").empty();
@@ -132,15 +136,17 @@ function GetRequest() {
 								}
 							});
 					  		console.log(num);
-							changeDate(num);
+							changeDate(num,1000);
 					  	}
 					});
 					//右按钮
 					$(".cd-next").click(function(){
 						num++;
+						pageCount=$("#pageTotal").val();
 						var serviceURL = baseUrl+"propertyservicemanagerEnteringManager/getEnteringList.json";
 						var pageIndex=num+1;
-						var params = ['pager:pageIndex='+pageIndex];
+						var pageSize=12;
+						var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
 						var enteringId;
 						//根据商品id获取资源可用状态
 						$.youi.ajaxUtils.ajax({
@@ -199,32 +205,42 @@ function GetRequest() {
 							}
 						});
 						console.log(num);
-						changeDate(num);
+						changeDate(num,pageCount);
 					})
 					//7个日期的变化公共部分
-					function changeDate(num){
-						var z=7;
-						for(j=1;j<o;j++){
-							for(var i=0;i<j;i++){
-								var dd = new Date();
-							  	dd = new Date(dd.getTime() + 60*60*24*1000 *(i+z*num)); 
-							  	console.log(i+z*num);
-							  	dm=dd.getMonth()+1;
-							  	dt=dd.getDate();
-							  	dw=dd.getDay();	
-							  	$(".ht-table tr th").eq(j).html(dm+"月"+dt+"日"+"<br/>"+weekDay[dw]);
-							  	
+					function changeDate(num,pageCount){
+						
+			            if(num+1>pageCount){
+			            	clearInterval(timer);
+			            	$("#msg").text("已经是最后一页了");
+				            $(".toast").show();
+				            pltime=1;
+				            timer=setInterval("closeTanc()",1000);
+			            }else{
+			        		var z=7;
+							for(j=1;j<o;j++){
+								for(var i=0;i<j;i++){
+									var dd = new Date();
+								  	dd = new Date(dd.getTime() + 60*60*24*1000 *(i+z*num)); 
+								  	dm=dd.getMonth()+1;
+								  	dt=dd.getDate();
+								  	dw=dd.getDay();	
+								  	$(".ht-table tr th").eq(j).html(dm+"月"+dt+"日"+"<br/>"+weekDay[dw]);
+								  	
+								}
 							}
-						}
+			            }
+				
 					};
 				    //关闭toast
 			        $(".close-toast").click(function(){
+			        	clearInterval(timer);
 			            $(".toast").hide();
 			        })
 					
 					 $(".hhf-submit").click(function(){	
 						 if(!isLogin){
-							   clearInterval(timer);
+							    clearInterval(timer);
 							    $("#msg").text("请登录后重试！");
 					            $(".toast").show();
 					            pltime=2;
@@ -234,26 +250,38 @@ function GetRequest() {
 						var enteringName=$("#enteringName").val();
 						var enteringTelephone=$("#enteringTelephone").val();
 						if(enteringId == null||enteringId == ""){
+							clearInterval(timer);
 							$("#msg").text("请选择预约时间");
        			    		$(".toast").show();
+       			    	    pltime=2;
+				            timer=setInterval("closeTanc()",1000);
 							return;
 						}
                         if(enteringName == null||enteringName == ""){
+                        	clearInterval(timer);
 							$("#msg").text("请填写申请人");
        			    		$(".toast").show();
+       			    	     pltime=2;
+				             timer=setInterval("closeTanc()",1000);
 							return;
 						}
                         if(enteringTelephone !=null&& enteringTelephone!=""){
        					 if(isMobil(enteringTelephone)){
        							
        						}else{
+       							clearInterval(timer);
        							$("#msg").text("电话格式不正确！");
            			    		$(".toast").show();
+           			    		pltime=2;
+    				            timer=setInterval("closeTanc()",1000);
        							return false;
        						}
        			    	}else{
+       			    		clearInterval(timer);
        			    		$("#msg").text("请填写申请人电话");
        			    		$(".toast").show();
+       			    		pltime=2;
+				            timer=setInterval("closeTanc()",1000);
 							return;
        			    	}
                       
@@ -422,6 +450,7 @@ function GetRequest() {
 				</div>
 				<div class="fr w285" style="background-color:transparent">
 					<div id="youi_page_rg" class="youi-page-rg clearfix"></div>
+					<span id="pageTotal" style="display:none"></span>
 				</div>
 			</div>
 		</div>
@@ -476,7 +505,8 @@ function GetRequest() {
 	<script type="text/javascript">
 	var serviceURL = baseUrl+"propertyservicemanagerEnteringManager/getEnteringList.json";
 	var pageIndex=1;
-	var params = ['pager:pageIndex='+pageIndex];
+	var pageSize=12;
+	var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
 	var enteringId;
 	//根据商品id获取资源可用状态
 	$.youi.ajaxUtils.ajax({
@@ -488,7 +518,8 @@ function GetRequest() {
 		success : function(results) {
 			if (results && results.records) {
 				var record = results.records;
-			
+			     var pageCount=Math.ceil(record[0].total/pageSize);
+			     $("#pageTotal").val(pageCount);
 				var amHtml="<td>09：00-12：00</td><td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>99</span>不可预约</a></td>";
 				var pmHtml="<td>14：00-17：00</td><td><a href='javascript:;' class='em3'>不可预约</a></td>";
 				$("#am").append(amHtml);
