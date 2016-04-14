@@ -16,13 +16,15 @@
 		<youi:button name="cancelReservation" caption="取消预约" icon="edit" active="1"></youi:button> 
 		<youi:button name="changeStatues" caption="预约授理" icon="edit" active="1"></youi:button> 
 		<youi:gridCol property="recordMemberId"  caption="预约对象"  width="10%" align="center"/>
-		<youi:gridCol property="recordType"  caption="预约类型" convert="recordType"  width="15%" align="center"/>
+		<youi:gridCol property="recordType"  caption="预约类型" convert="recordType"  width="10%" align="center"/>
 		<youi:gridCol property="recordStatus"  caption="预约记录状态" convert="enterrecStatus"  width="10%" align="center"/>
+		 <youi:gridCol property="visiteName"  caption="来访姓名"  width="10%" align="center" />
+	    <youi:gridCol property="visiteTel"  caption="联系电话"  width="10%" align="center"/>
 	    <youi:gridCol property="visiteDate"  caption="来访日期"  width="10%" align="center" />
 	    <youi:gridCol property="visiteTime"  caption="来访时间"  width="10%" align="center"/>
 	    <youi:gridCol property="recordCustomer"  caption="客服代表"  width="10%" align="center"/>
-		<youi:gridCol property="recordServiceTel"  caption="客服电话"  width="15%" align="center"/>
-        <youi:gridCol property="updateTime"  caption="更新时间"  width="20%" align="center" orderBy="desc"/>
+		<youi:gridCol property="recordServiceTel"  caption="客服电话"  width="10%" align="center"/>
+        <youi:gridCol property="updateTime"  caption="更新时间"  width="10%" align="center" orderBy="desc"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
@@ -43,6 +45,8 @@
 			<youi:fieldText property="recordServiceTel"  caption="客服电话"/> --%>
 			<youi:fieldHidden property="recordId"  caption="预约记录ID"/>
 			<youi:fieldHidden property="recordStatus"  caption="预约记录状态"/>
+			<youi:fieldHidden property="visiteName"  caption="来访姓名"/>
+			<youi:fieldHidden property="visiteTel"  caption="联系电话" />
 			<youi:fieldHidden property="recordCode"  caption="预约单号"/>
 			<youi:fieldHidden property="recordVisiteStatus"  caption="是否到访"/>
 			<youi:fieldHidden property="recordCustomer"  caption="客服代表"/>
@@ -54,6 +58,8 @@
 		<youi:fieldLayout prefix="records" labelWidths="100,100">
 		    <youi:fieldLabel property="recordType"  caption="预约类型" convert="recordType"/>
 		    <youi:fieldLabel property="recordMemberId"  caption="预约对象"/>
+		    <youi:fieldLabel property="visiteName"  caption="来访姓名"/>
+		    <youi:fieldLabel property="visiteTel"  caption="联系电话"/>
 		    <youi:fieldLabel property="visiteDate"  caption="来访日期" width="120" />
 		    <youi:fieldText property="visiteTime"  caption="来访时间"/>
 		    <%-- <youi:fieldCalendar property="visiteTime"  caption="实际来访时间" width="120" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss"/>
