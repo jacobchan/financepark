@@ -115,10 +115,6 @@
 	$(function(){
 		method() ;
 	});
-	//刷新数据的方法
-	function realoadPage(){}
-	
-	
 	function method(){
 		$.ajax({
 			url:baseUrl+'memberInformationManager/getMemberInformationByLoginUser.json',
@@ -139,16 +135,14 @@
 			$(".c-b1").html(record.memberPhoneNumber);
 			$("#memberNickname").val(record.memberNickname);
 			$("#memberName").val(record.memberName);
-			if(record.memberBirthdate != ""){
+			if(record.memberBirthdate != null){
 				$("#year").val(record.memberBirthdate.substring(0,4));
 				$("#month").val(record.memberBirthdate.substring(5,7));
 				$("#day").val(record.memberBirthdate.substring(8,10));
 			}
 			$("#memberDescribe2").val(record.memberDescribe2);
 			$("#companyId").val(record.companyId);
-			console.log("id="+record.companyId) ;
-			if(record.companyId != ""){
-				//alert(record.companyId) ;
+			if(record.companyId != null){
 				getRzName(record.companyId);//获得公司名字
 				$("#ly1").hide() ;
 			}
