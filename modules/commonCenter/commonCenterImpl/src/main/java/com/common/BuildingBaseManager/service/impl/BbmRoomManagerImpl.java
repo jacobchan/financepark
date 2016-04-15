@@ -295,4 +295,18 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
 		
 		return json;
 	}
+    /**
+	 * 通过企业ID获取单元列表
+	 * @param rzId
+	 * @return
+	 */
+    @Override
+    @EsbServiceMapping
+    public List<BbmRoom> getRoomListByRzId(@ServiceParam(name="rzId") String rzId) throws BusException{
+		Collection<Condition> conditions = new ArrayList<Condition>();
+		Collection<Order> orders = new ArrayList<Order>();
+		conditions.add(ConditionUtils.getCondition("rzId", Condition.EQUALS, rzId));
+		List<BbmRoom> roomList = bbmRoomDao.commonQuery(conditions, orders);
+		return roomList;
+	}
 }

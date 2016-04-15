@@ -12,11 +12,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.EsbServiceMapping;
-import com.gsoft.framework.esb.annotation.PubCondition;
-import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
 
 public interface EnterbusinessmanagerRzManager extends BaseManager{
 
@@ -45,7 +41,7 @@ public interface EnterbusinessmanagerRzManager extends BaseManager{
      */
     public EnterbusinessmanagerRz saveEnterbusinessmanagerRz(EnterbusinessmanagerRz o) throws BusException;
     
-    public EnterbusinessmanagerRz updateEnterbusinessmanagerRz(EnterbusinessmanagerRz o) throws BusException;
+//    public EnterbusinessmanagerRz updateEnterbusinessmanagerRz(EnterbusinessmanagerRz o) throws BusException;
 
     /**
      * 删除对象
@@ -103,4 +99,23 @@ public interface EnterbusinessmanagerRzManager extends BaseManager{
 	  * @throws BusException
 	  */ 
 	 public EnterbusinessmanagerRz getCompanyIdName(String userId) throws BusException;
+	/**
+	 * 修改企业信息
+	 * @param userId
+	 * @param rzId
+	 * @param rzLogo
+	 * @param roomId
+	 * @param rzName
+	 * @param rzRemark
+	 * @param rzUrl
+	 * @param enTypeId
+	 * @param productDiscriptio
+	 * @param rzImages
+	 * @return
+	 * @throws BusException
+	 */
+	 public EnterbusinessmanagerRz updateEnterbusinessmanagerRz(String userId,
+			String rzId, String rzLogo, String roomId, String rzName,
+			String rzRemark, String rzUrl, String enTypeId,
+			String productDiscriptio, String rzImages) throws BusException;
 }

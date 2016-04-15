@@ -71,4 +71,10 @@ public interface EtypeEnterprisetypeManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public String findEnterpriseTypeTree(String pId) throws BusException;
+	/**
+	 * 获取子级企业类型
+	 * @return
+	 * @throws BusException
+	 */
+	public List<EtypeEnterprisetype> getSubEnterpriseTypeList() throws BusException;
 }

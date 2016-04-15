@@ -92,4 +92,11 @@ public interface BbmRoomManager extends BaseManager{
 	 * @return
 	 */
 	public String getRoomByRzId(String rzId) throws BusException;
+	/**
+	 * 通过企业ID获取单元列表
+	 * @param rzId
+	 * @return
+	 * @throws BusException
+	 */
+	public List<BbmRoom> getRoomListByRzId(String rzId) throws BusException;
 }

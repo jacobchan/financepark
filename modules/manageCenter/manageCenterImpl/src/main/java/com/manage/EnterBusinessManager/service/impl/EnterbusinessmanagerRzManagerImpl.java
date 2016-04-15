@@ -14,6 +14,8 @@ import com.common.BuildingBaseManager.entity.BbmBuilding;
 import com.common.BuildingBaseManager.entity.BbmFloor;
 import com.common.BuildingBaseManager.entity.BbmRoom;
 import com.common.BuildingBaseManager.service.BbmRoomManager;
+import com.common.EnterpriceTypeManager.entity.EtypeEnterprisetype;
+import com.common.EnterpriceTypeManager.service.EtypeEnterprisetypeManager;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
 import com.gsoft.framework.core.exception.BusException;
@@ -57,6 +59,8 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 	private RoleManager roleManager;	
 	@Autowired
 	private MemberInformationManager memberInformationManager;
+	@Autowired
+	private EtypeEnterprisetypeManager etypeEnterprisetypeManager;
 	
     /**
      * 查询列表
@@ -155,18 +159,32 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     	}
     	
     }
-	
-	@EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId")})
-    public EnterbusinessmanagerRz updateEnterbusinessmanagerRz(EnterbusinessmanagerRz o) throws BusException{
-		EnterbusinessmanagerRz r = enterbusinessmanagerRzDao.get(o.getRzId());
-		BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(o.getRoomId().getRoomId());
-		r.setEnTypeId(o.getEnTypeId());
-		r.setRzLogo(o.getRzLogo());
-		r.setRzName(o.getRzName());
+	//修改企业信息
+	@Override
+	@EsbServiceMapping
+    public EnterbusinessmanagerRz updateEnterbusinessmanagerRz(@ServiceParam(name="userId",pubProperty="userId") String userId,
+    		@ServiceParam(name="rzId") String rzId,@ServiceParam(name="rzLogo") String rzLogo,
+    		@ServiceParam(name="roomId") String roomId,@ServiceParam(name="rzName") String rzName,
+    		@ServiceParam(name="rzRemark") String rzRemark,@ServiceParam(name="rzUrl") String rzUrl,
+    		@ServiceParam(name="enTypeId") String enTypeId,@ServiceParam(name="productDiscriptio") String productDiscriptio,
+    		@ServiceParam(name="rzImages") String rzImages) throws BusException{
+		EnterbusinessmanagerRz r = enterbusinessmanagerRzDao.get(rzId);
+		BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(roomId);
+		EtypeEnterprisetype enType = etypeEnterprisetypeManager.getEtypeEnterprisetype(enTypeId);
+		r.setEnTypeId(enType);
+		if(StringUtils.isNotEmpty(rzLogo)){
+			r.setRzLogo(rzLogo);
+		}
+		if(StringUtils.isNotEmpty(rzImages)){
+			r.setRzImages(rzImages);
+		}
+		r.setRzName(rzName);
 		r.setRoomId(bbmRoom);
-		r.setRzUrl(o.getRzUrl());
-		r.setRzRemark(o.getRzRemark());
-		r.setProductDiscriptio(o.getProductDiscriptio());
+		r.setRzUrl(rzUrl);
+		r.setRzRemark(rzRemark);
+		r.setProductDiscriptio(productDiscriptio);
+		r.setUpdateUser(userId);
+		r.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		return enterbusinessmanagerRzDao.save(r);
 	}
 

@@ -112,7 +112,16 @@ public class EtypeEnterprisetypeManagerImpl extends BaseManagerImpl implements E
 	public List<EtypeEnterprisetype> getParentEnterpriseType() throws BusException{
 		return etypeEnterprisetypeDao.getEtypeEnterprisetypeList();
 	}
-    
+    /**
+	 * 获取子级企业类型
+	 * @return
+	 * @throws BusException
+	 */
+    @Override
+    @EsbServiceMapping
+	public List<EtypeEnterprisetype> getSubEnterpriseTypeList() throws BusException{
+    	return etypeEnterprisetypeDao.getSubEnterpriseTypeList();
+	}
     /**
 	 * 获取企业类型JSon
 	 * @return
