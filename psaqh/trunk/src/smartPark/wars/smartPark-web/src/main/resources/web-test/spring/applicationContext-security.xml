@@ -69,6 +69,7 @@
 				/member/*/logout.html=anon
 				/member/qiyeCenter/** = authcmember,rolesdeny[ROLE_QIYE]
 				/member/** = authcmember
+				/enterprise/** = authcmember
 	        </value>
 		</property>
 		<!--  实现 com.gsoft.framework.core.security.UrlResourceManager接口，
