@@ -51,11 +51,11 @@ function validateTime(startTime,endTime){
 		<youi:fieldLayout prefix="record" labelWidths="120,120">
 			<youi:fieldHidden property="applyId"  caption="活动申请ID"/>
 			<%-- <youi:fieldHidden property="commentContent"  caption="活动内容"/> --%>
-			<youi:fieldText property="applyNumber"  caption="活动申请编号"/>
-			<youi:fieldText property="activityAdr"  caption="活动地址" notNull="true"/>
-			<youi:fieldSelect property="applyOrderNumber"  caption="场地编号" src="esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommoditys.json"
-								code="commodityId"	show="commodityTitle" />
+			<youi:fieldHidden property="applyNumber"  caption="活动申请编号"/>
 			<youi:fieldText property="applyTitle"  caption="活动标题" notNull="true"/>
+			<youi:fieldText property="activityAdr"  caption="活动地址" notNull="true"/>
+			<%-- <youi:fieldSelect property="applyOrderNumber"  caption="场地编号" src="esb/web/purchasingmanagerCommodityManager/getPurchasingmanagerCommoditys.json"
+								code="commodityId"	show="commodityTitle" /> --%>
 			<youi:fieldText property="applyMaxuser"  caption="限制人数" expressionMessage="请输入整数" expression="^[1-9]\d*$" notNull="true"/>
 			<youi:fieldSelect property="memberId.memberId"  caption="会员用户" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName" notNull="true"/>
 			<youi:fieldCalendar property="startTime"  caption="活动开始时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="true"/>
