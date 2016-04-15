@@ -13,6 +13,13 @@
 				</div>
 
 		</youi:body>
+		<div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
+        </div> 
+        
+    </div>
 	<!--***bottom start****************************************-->
 
 	<script type="text/javascript">
@@ -48,15 +55,13 @@
 	
 		$('.hhf-submit').click(function(){
 			this.disabled=true;			
-			var ocNumber=$("#ocNumber").val();	
-			alert(ocNumber);
-						
+			var ocNumber=$("#ocNumber").val();				
 			$.youi.ajaxUtils.ajax({
 				url:baseUrl+'propertyservicemanagerOcManager/addBindOc.json',
 				data:'ocNumber='+ocNumber,
 				success:function(result){
 					if(result&&result.record){
-						alert("增加成功");
+						close("增加成功");
 						location.reload();
 					}
 				}
@@ -75,6 +80,13 @@
 					}
 				}
 			}); 
-		}		
+		}
+		 function close(content){		        
+		        $(".tc.mt25.f18").empty() ;
+		        $(".tc.mt25.f18").append(content) ;
+		        $(".toast").show();		      		        		       				
+				setTimeout(function(){$(".toast").hide(); },1000);
+				//refreshData(currentIndex,pageSize);
+	      }
 	</script>
 </youi:html>
