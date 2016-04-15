@@ -8,4 +8,9 @@ public interface EtypeEnterprisetypeDao extends Dao<EtypeEnterprisetype, String>
 	 * @return
 	 */
 	public List<EtypeEnterprisetype> getEtypeEnterprisetypeList();
+	/**
+	 * 获取子级企业类型
+	 * @return
+	 */
+	public List<EtypeEnterprisetype> getSubEnterpriseTypeList();
 }

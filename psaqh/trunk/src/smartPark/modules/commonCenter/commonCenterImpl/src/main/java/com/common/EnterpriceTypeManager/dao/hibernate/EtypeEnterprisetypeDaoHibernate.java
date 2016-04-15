@@ -17,4 +17,11 @@ public class EtypeEnterprisetypeDaoHibernate extends
 		String hql = "from EtypeEnterprisetype where etypeEnterprisetype.enTypeId is null";
 		return getHibernateTemplate().find(hql);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<EtypeEnterprisetype> getSubEnterpriseTypeList() {
+		String hql = "from EtypeEnterprisetype where etypeEnterprisetype.enTypeId is not null";
+		return getHibernateTemplate().find(hql);
+	}
 }
