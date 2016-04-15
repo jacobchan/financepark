@@ -130,6 +130,5 @@ public interface MemberInformationManager extends BaseManager{
 		public PagerRecords getPager(Pager pager,//分页条件
 				Collection<Condition> conditions,//查询条件
 				Collection<Order> orders) throws BusException;
-	 //获得公司id
-	 public MemberInformation getCompanyId(MemberInformation m)throws BusException;
+	
 }
