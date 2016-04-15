@@ -252,10 +252,10 @@ function registClick(){
 										$("#passwd").val("") ;
 										$("#repasswd").val("") ;
 										$("#captcha").val("") ;
-										setTimeout("location.reload();", 1000);
+										setTimeout("location.reload();", 2000);
 									}
 					           		$(".toast").show();
-					           		setTimeout("$('.toast').hide();", 1000);
+					           		setTimeout("$('.toast').hide();", 2000);
 								}
 							});
 						} 
