@@ -131,7 +131,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     /**
      * 保存订单
      */
-	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "memberId", pubProperty = "userId")})
     public OrdermanagerUserorder saveOrdermanagerUserorder(OrdermanagerUserorder o) throws BusException{
     	String userorderId = o.getUserorderId();
     	boolean isUpdate = StringUtils.isNotEmpty(userorderId);
@@ -143,7 +143,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     		if(o.getUserorderStatus() != null){
     			order.setUserorderStatus(o.getUserorderStatus());
     		}
-    		order.setMemberId(o.getUpdateUser());
+    		//order.setMemberId(o.getUpdateUser());
     		order.setUpdateUser(o.getUpdateUser());
     		order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return ordermanagerUserorderDao.save(order);
@@ -152,9 +152,9 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    		o.setMemberId(o.getUpdateUser());
-    		if(StringUtils.isNotEmpty(o.getUpdateUser())){
-    			MemberInformation mem = memberInformationManager.getMemberInformation(o.getUpdateUser());
+    		//o.setMemberId(o.getUpdateUser());
+    		if(StringUtils.isNotEmpty(o.getMemberId())){
+    			MemberInformation mem = memberInformationManager.getMemberInformation(o.getMemberId());
     			o.setUserorderBuyUser(mem.getMemberName());
     		}
     		return ordermanagerUserorderDao.save(o);
@@ -524,10 +524,9 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 			 @ServiceParam(name="userorderProject") String userorderProject,
 			 @ServiceParam(name="userorderCode") String userorderCode,
 			 @ServiceParam(name="userorderStatus") String userorderStatus) throws BusException {		
-		MemberInformation member=memberInformationManager.getMemberInformation(userId);
-		String memberName=member.getMemberName();
+		
 		Collection<Condition> condition = new ArrayList<Condition>();
-		condition.add(ConditionUtils.getCondition("userorderBuyUser", Condition.EQUALS, memberName));	
+		condition.add(ConditionUtils.getCondition("memberId", Condition.EQUALS, userId));	
 		condition.add(ConditionUtils.getCondition("userorderProject", Condition.LIKE, userorderProject));
 		condition.add(ConditionUtils.getCondition("userorderCode", Condition.LIKE, userorderCode));	
 		condition.add(ConditionUtils.getCondition("userorderStatus", Condition.EQUALS, userorderStatus));
