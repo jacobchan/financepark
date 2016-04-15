@@ -636,6 +636,28 @@
             </table>
         </div>
     </div>
+	
+	
+	<!-- 弹窗 -->
+    	<div class="bg-tanc m1">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="tc mt40">
+				<div class="mt20 mb20 f16 lh26">
+					<img src="../styles/images/yqfw/correct.png" border="0" class="mr20"/>
+				</div>
+				<p class="mb10 f16">您已经成功提交申请，请到会员中心查看申请状态。</p>
+				<p><span class="c-o f24 tc-time mr5" id="ti-m1">5 </span>秒后，系统将自动跳转</p>
+				<!-- <p class="mt10"><a href="" class="c-6">手动跳转 ></a></p> -->
+				<div class="clearfix mt15 pt15" style="border-top:1px solid #efecec">
+					<a style="cursor:pointer;" onclick="jumpOrder();" class="ib-btn" style="width:120px;">前往查看</a>
+					<span class="ml30 mr30"></span>
+					<a style="cursor:pointer;" onclick="jumpBack();"  class="ib-btn fs-btn" style="width:120px;">返回</a>
+				</div>
+			</div>
+		</div>
+	</div>
+    
 	<div class="bg-tanc">
 		<div class="tanc-con" style="top:50%;margin-top:-225px;width:400px;padding:40px 30px;">
 			<a href="javascript:;" class="tc-close"></a>
@@ -1047,7 +1069,7 @@
 			getRecords(typeId) ;//每次点击新闻类型的时候，查询对应的新闻
 		});
         $(".close0").click(function(){
-            $(".pop_layer").hide();
+        	$(".pop_layer.pl1").hide();
         });
 		/* $(".tips span").click(function(){
 			var index=$(this).index();
@@ -1155,9 +1177,17 @@
 					dataType:'jsonp',
 					success:function(result){
 						if(result&&result.record){
-							$(".pop_layer.pl1").show();
-							a=3;
-							timer1=setInterval("jump1()",1000);
+							if (isLogin) {
+								$(".bg-tanc.m1").show();
+								$('#ti-m1').text('5');
+								a=5;
+								timer1=setInterval("jump1()",1000);
+							}else{
+								$(".pop_layer.pl1").show();
+								a=3;
+								timer1=setInterval("jump1()",1000);
+							}
+							
 						}
 					}
 				});
@@ -1176,6 +1206,7 @@
 			function jump1(){
 				if(a>1){
 					a--;
+					$("#ti-m1").text(a);
 				}else{
 					if (isLogin) {
 						window.location=cenUrl+"member/memberCenter/personalCenter/myReservation.html";
@@ -1183,6 +1214,15 @@
 						window.location="index.html";
 					}
 				}		
+			}
+			
+			//跳转我的预约
+			function jumpOrder(){
+				window.location=cenUrl+"member/memberCenter/personalCenter/myReservation.html";
+			}
+			//返回
+			function jumpBack(){
+				window.location="index.html";
 			}
 	</script>
 	<script type="text/javascript">
