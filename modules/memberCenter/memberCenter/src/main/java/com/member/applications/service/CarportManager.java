@@ -40,7 +40,7 @@ public interface CarportManager extends BaseManager{
     /**
      * 保存并返回对象
      */
-    public Carport saveCarport(Carport o) throws BusException;
+    public Carport saveCarport(Carport o,String userorderAmount) throws BusException;
 
     /**
      * 删除对象
