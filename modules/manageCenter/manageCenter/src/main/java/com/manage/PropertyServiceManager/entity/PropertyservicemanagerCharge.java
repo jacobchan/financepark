@@ -93,6 +93,14 @@ public class PropertyservicemanagerCharge implements Domain{
     @JoinColumn(name="MEMBER_ID_")
 	private MemberInformation memberInformation;//会员ID
 	
+	public MemberInformation getMemberInformation() {
+		return memberInformation;
+	}
+
+	public void setMemberInformation(MemberInformation memberInformation) {
+		this.memberInformation = memberInformation;
+	}
+
 	public String getUpdateTime() {
 		return updateTime;
 	}
