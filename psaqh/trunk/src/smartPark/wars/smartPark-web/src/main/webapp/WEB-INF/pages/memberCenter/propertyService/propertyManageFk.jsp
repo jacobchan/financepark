@@ -357,7 +357,7 @@ $(function () {
 	        $(".tc.mt25.f18").empty() ;
 	        $(".tc.mt25.f18").append(content) ;
 	        $(".toast").show();		      		        		       				
-			setTimeout(function(){$(".toast").hide(); },1000);
+			setTimeout(function(){$(".toast").hide(); },2000);
 			refreshData(currentIndex,pageSize);
    }
 	  $(function () {
