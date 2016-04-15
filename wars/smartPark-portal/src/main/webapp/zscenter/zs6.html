@@ -60,6 +60,7 @@
 	        })
 	        $(".tc-close").click(function(){
 				$(".bg-tanc.m1").hide();
+				$(".bg-tanc.m3").hide();
 			});
 	        
 			$(".now-btn").click(function(){
@@ -138,9 +139,16 @@
 						if(result&&result.record){
 					//		alert("预约成功");
 					//		window.location="/grzx/grzx8.html";
-							$(".bg-tanc.m2").show();
-							a=3;
-							timer1=setInterval("jump1()",1000);
+							if (isLogin) {
+								$(".bg-tanc.m3").show();
+								$('#ti-m1').text('5');
+								a=5;
+								timer1=setInterval("jump1()",1000);
+							}else{
+								$(".bg-tanc.m2").show();
+								a=3;
+								timer1=setInterval("jump1()",1000);
+							}
 						}
 					}
 				});
@@ -173,6 +181,7 @@
 			function jump1(){
 				if(a>1){
 					a--;
+					$("#ti-m1").text(a);
 				}else{
 					if (isLogin) {
 						window.location=cenUrl+"member/memberCenter/personalCenter/myReservation.html";
@@ -195,6 +204,15 @@
 	                $(".toast").hide();
 	            }       
 	        }
+	        
+	      //跳转我的预约
+			function jumpOrder(){
+				window.location=cenUrl+"member/memberCenter/personalCenter/myReservation.html";
+			}
+			//返回
+			function jumpBack(){
+				window.location="zs6.html";
+			}
 	</script>
 	<script type="text/javascript">
 		$(function(){
@@ -524,6 +542,25 @@
         </div>
         
     </div>
+    
+    <div class="bg-tanc m3">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="tc mt40">
+				<div class="mt20 mb20 f16 lh26">
+					<img src="../styles/images/yqfw/correct.png" border="0" class="mr20"/>
+				</div>
+				<p class="mb10 f16">您已经成功提交申请，请到会员中心查看申请状态。</p>
+				<p><span class="c-o f24 tc-time mr5" id="ti-m1">5 </span>秒后，系统将自动跳转</p>
+				<!-- <p class="mt10"><a href="" class="c-6">手动跳转 ></a></p> -->
+				<div class="clearfix mt15 pt15" style="border-top:1px solid #efecec">
+					<a style="cursor:pointer;" onclick="jumpOrder();" class="ib-btn" style="width:120px;">前往查看</a>
+					<span class="ml30 mr30"></span>
+					<a style="cursor:pointer;" onclick="jumpBack();"  class="ib-btn fs-btn" style="width:120px;">返回</a>
+				</div>
+			</div>
+		</div>
+	</div>
 	
 	<div class="bg-tanc m2">
 		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
