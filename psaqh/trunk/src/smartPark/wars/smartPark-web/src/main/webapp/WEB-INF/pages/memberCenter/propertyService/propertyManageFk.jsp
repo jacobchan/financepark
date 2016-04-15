@@ -194,30 +194,47 @@ $(function () {
 		  	var ht = "<tr><th>订单号</th><th>到访时间</th>"+
 				"<th>到访状态</th><th>访客姓名</th><th>访客电话</th><th>操作</th>";
 			$("tbody").append(ht);
+			
 			for(var i=0;i<record.length;i++){
 				var id = record[i].fkcodeId ;
 				var time = record[i].fkcodeTime ;
+				cancelbutton="";
 				if(time){
 					time = time.substring(0,10) ;
+				}
+				if(record[i].dksataus=="00"){
+					status = "未到访";
+					cancelbutton="<span class='f12 ml5 mr5'>|</span><a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消访客</a>";
+				}else if(record[i].dksataus=='01'){
+					status = "未到访";
+					cancelbutton="<span class='f12 ml5 mr5'>|</span><a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消访客</a>";
+				}else if(record[i].dksataus=='02'){
+					status = "已到访";
+				}else if(record[i].dksataus=='03'){
+					status = "已取消";
 				}
 				var html="<tr id='"+id +"' class='aaa'>"+
 						"<td><a href=''>"+record[i].fkCode+"</a></td>"+
 						"<td>"+time+"</td>" +	
-						"<td class='"+id+"'></td>"+
-					"<td>"+record[i].fkcodeName+"</td>"+
+						"<td class='"+id+"'>"+status+"</td>"+
+					    "<td>"+record[i].fkcodeName+"</td>"+
 						"<td>"+record[i].fkcodeTelephone+"</td>"+
-						"<td><a href='javascript:;' onclick='javascript:qrcode(this)' class='ac-see'>查看二维码</a><span class='f12 ml5 mr5'>|</span><a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消访客</a></td>"+
+						"<td><a href='javascript:;' onclick='javascript:qrcode(this)' class='ac-see'>查看二维码</a><span class='f12 ml5 mr5'>|</span>"+cancelbutton+"</td>"+
 						"</tr>";
-				aa(record[i].fkcodeId);
+						var status1=aa(record[i].fkcodeId,status);
+				// alert(record[i].dksataus);
+				         //alert(status1);
 				 $("tbody").append(html);				
 			/* 	 $(".ac-see").click(function(){
 					 $(".bg-tanc.m2").show();
 				 }); */
 			}
 		};
-		function aa(aa){
+		function aa(aa,status){
 			var fkcodeId = aa;
 			var status ='' ;
+			
+			
 			//close(aa);
 			 $.ajax({
 					url:baseUrl+'propertyservicemanagerTwcrdManager/findTwcrdById.json', 
@@ -227,7 +244,10 @@ $(function () {
 						if(result&&result.record){
 							var id = result.record.propertyservicemanagerFkcode.fkcodeId;
 							status = _TwcrdlistRecords(result.record);
-							$('.'+id).text(status) ;						
+							$('.'+id).text(status) ;
+							//alert(status);
+							return status;
+							
 						}
 					}
 				}); 
