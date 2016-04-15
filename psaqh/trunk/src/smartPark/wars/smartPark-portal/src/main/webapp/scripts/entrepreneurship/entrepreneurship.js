@@ -170,6 +170,10 @@ $(function(){
 			showMessage("请填写融资额度");
 			return false;
 		}
+		if(amountStart>=amountEnd){
+			showMessage("请填写融资额度");
+			return false;
+		}
 		//股份占比
 		var shareRate = $("#shareRate").val();
 		if(shareRate==""){
