@@ -276,7 +276,9 @@
 					dataType:'jsonp',
 					success:function(result){
 						$(this).html("提交");
-						alert("预约成功");
+						$("#msg").html("预约成功！");
+						$(".toast").show();
+						setTimeout('$(".toast").hide();',2000);
 						$(".pop_layer").hide();
 						$("#name").val('');
 						$("#remark").val('');
