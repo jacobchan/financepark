@@ -64,7 +64,7 @@
 		                <div class="meiti_save_btn"><input type="submit" value="保存" class="hhf-submit" style="height:40px;" /></div>
 		            </div>
 					<div class="rozi_main">
-						<div class="clearfix yin-group undis">
+						<div class="clearfix yin-group">
 							<div id="informationFinancing" class="yg-group-box">
 								
 							</div>

@@ -139,6 +139,16 @@ function registClick(){
 			$('#sendMobileCaptcha').click(function(){
 				/* $('#sendMobileCaptcha').attr('disabled',true); */
 				var memberPhoneNumber = $("#mobile").val() ;
+				var isMobile=/^(?:13\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;//手机号的格式
+				if(!isMobile.test(memberPhoneNumber)){
+					//alert("请输入正确的手机号！") ;
+					clearInterval(timer);
+					$(".tc.mt25").text("请输入正确的手机号！");
+		           	$(".toast").show();
+		           	pltime=2;
+		           	timer=setInterval("closeTanc()",2000);
+					return ;
+				}
 				$.youi.ajaxUtils.ajax({
 					url:cenUrl + "web/loginUser/registerCaptcha.json",
 					data:{phone:memberPhoneNumber},
