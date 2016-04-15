@@ -26,37 +26,67 @@
 							<th>加入时间</th>
 						</tr>												
 					</table>
-					<div class="fr page-list-a clearfix lh30 mt20 f12">
-						<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
-						<a href="">首</a>
-						<a href=""><i class="fa fa-angle-left"></i></a>
-						<a>1</a>
-						<a href=""><i class="fa fa-angle-right"></i></a>
-						<a href="">末</a>
-						<input type="text" class="bd-input fl ml10 mr10" style="width:40px;">
-						<a href="">Go</a>
-					</div>
+					<div class="tcdPageCode fr"></div>
 				</div>
 		</youi:body>
 	<!--***bottom start****************************************-->
 
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 	<script type="text/javascript">
-	
-	
-		  $(function(){
-			$.ajax({
-			  url:baseUrl+'memberInformationManager/getPhoneNumberlist.json',		
-				success:function(result){					
-					console.log(result.records);
-					if(result&&result.records){					
-						_parseRecords(result.records);						
-					}
+	var pageSize=10;
+	var pageCount=1;
+	var currentIndex = 1;
+	var serviceURL = baseUrl+'memberInformationManager/getPager.json';	
+ 	$(function () {		
+		//分页页码显示
+		 $.ajax({
+			url:serviceURL, 
+			success:function(results){	
+							pageCount=Math.ceil(results.totalCount/pageSize);//页数
+							
+							 refreshData(1,pageSize);
+								$(".tcdPageCode").createPage({
+								    pageCount:pageCount,
+								    current:1,
+								    backFn:function(p){
+								    	currentIndex = p;
+								       this.pageCount=pageCount;
+								        refreshData(p,pageSize);
+								    }
+								});			
+			// 	if(result&&result.records){
+					_parseRecords(result.records);
+				//} 
+			}
+		}); 			
+	});			
+	//分页列表
+	function refreshData(pageIndex,pageSize){
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+		$.ajax({
+			url:serviceURL,
+			data:params.join('&'),
+			success:function(results){
+				if(results&&results.records){
+					 _parseRecords(results.records);
 				}
-			});
-		});  
-		
+			}
+		});
+	}  	
+	
 		//拼接卡号列表
-		function _parseRecords(record){		
+		function _parseRecords(record){	
+			
+			$(".gt-table").empty();	
+			ht=
+				"<tr>"+
+					"<th>姓名</th>"+
+					"<th>联系电话</th>"+
+					"<th>一句话简介</th>"+
+					"<th>加入时间</th>"+
+			   "</tr>";
+			   $(".gt-table").append(ht);
 	 		for(var i=0;i<record.length;i++){
 	 			  var memberDescribe2="";
 	 			 var createTime="";
