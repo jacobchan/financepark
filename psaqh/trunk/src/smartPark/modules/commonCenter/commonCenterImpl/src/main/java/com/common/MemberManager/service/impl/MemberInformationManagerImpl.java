@@ -4,14 +4,21 @@
 package com.common.MemberManager.service.impl;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MemberManager.dao.MemberInformationDao;
+import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.entity.MemberRole;
+import com.common.MemberManager.entity.MemberUserInfo;
+import com.common.MemberManager.service.MemberInformationManager;
+import com.common.MemberManager.service.MemberRoleManager;
+import com.common.MessageCenter.service.McMsgdatasManager;
 import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.dataobj.tree.TreeNode;
 import com.gsoft.framework.core.exception.BusException;
@@ -19,7 +26,13 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.framework.core.web.menu.IMenu;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.PubCondition;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.security.DefaultLoginFormToken;
 import com.gsoft.framework.security.IAgency;
 import com.gsoft.framework.security.IRealmUserInfo;
@@ -33,16 +46,7 @@ import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.PasswordUtils;
 import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.util.StringUtils;
-import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-import com.gsoft.framework.core.web.menu.IMenu;
 import com.gsoft.utils.HttpSenderMsg;
-import com.common.MemberManager.entity.MemberInformation;
-import com.common.MemberManager.entity.MemberRole;
-import com.common.MemberManager.entity.MemberUserInfo;
-import com.common.MemberManager.dao.MemberInformationDao;
-import com.common.MemberManager.service.MemberInformationManager;
-import com.common.MemberManager.service.MemberRoleManager;
-import com.common.MessageCenter.service.McMsgdatasManager;
 
 @Service("memberInformationManager")
 @Transactional
@@ -100,7 +104,7 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
     	String userName=SecurityUtils.getAccount().getLoginName();
     	if(isUpdate){//修改
     		MemberInformation mi= memberInformationDao.get(memberInformationId);
-    		mi.setMemberHeadPortrait(o.getMemberHeadPortrait());
+    		
     		mi.setMemberPhoneNumber(o.getMemberPhoneNumber());
     		mi.setMemberName(o.getMemberName());
     		mi.setMemberNickname(o.getMemberNickname());
@@ -445,21 +449,53 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 				List<MemberInformation> list = memberInformationDao.commonQuery(condition, null);
 				return list;
 		 }
-		 /**
-			 *前台 根据当前用户分页查询
-			 * @return 分页对象
-			 */
-		          //  @SuppressWarnings("unchecked")
-			    @EsbServiceMapping
-				public PagerRecords getPager(Pager pager,//分页条件
-						@ConditionCollection(domainClazz=MemberInformation.class) Collection<Condition> conditions,//查询条件
-						@OrderCollection Collection<Order> orders,
-						@ServiceParam(name="userId",pubProperty="userId") String userId)
-						throws BusException {
-			    	MemberInformation m = memberInformationDao.getObjectByUniqueProperty("memberId", userId);
-			    	String companyId=m.getCompanyId();
-			    	conditions.add(ConditionUtils.getCondition("companyId", Condition.EQUALS, companyId));
-			    	PagerRecords pagerRecords = memberInformationDao.findByPager(pager, conditions, orders);			    				    	
-					return pagerRecords;
-				}		
+ /**
+	 *前台 根据当前用户分页企业通讯录查询
+	 * @return 分页对象
+	*/
+	//@SuppressWarnings("unchecked")
+     @EsbServiceMapping
+    public PagerRecords getPager(Pager pager,//分页条件
+		@ConditionCollection(domainClazz=MemberInformation.class) Collection<Condition> conditions,//查询条件
+		@OrderCollection Collection<Order> orders,
+		@ServiceParam(name="userId",pubProperty="userId") String userId)
+		throws BusException {
+      //根据用户id获取当前用户 
+	  MemberInformation m = memberInformationDao.getObjectByUniqueProperty("memberId", userId);
+	  //获取公司id
+	  String companyId=m.getCompanyId();
+	  //添加条件 （根据公司id查询）
+	  conditions.add(ConditionUtils.getCondition("companyId", Condition.EQUALS, companyId));
+	  PagerRecords pagerRecords = memberInformationDao.findByPager(pager, conditions, orders);			    				    	
+	  return pagerRecords;
+	}
+    
+     /**
+      * 个人中心-个人资料（修改）
+	  * @param o
+	  * @return
+	  * @throws BusException
+      */
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+    public MemberInformation updateMemberInformation(MemberInformation o) throws BusException{
+    	
+    	//根据现有的用户ID，查出该用户的基本信息，进行其他信息的修改
+    	String memberId = o.getMemberId();
+		MemberInformation mi= this.getMemberInformation(memberId);
+		//头像
+		mi.setMemberHeadPortrait(o.getMemberHeadPortrait());
+    	//昵称
+		mi.setMemberNickname(o.getMemberNickname());
+    	//真实姓名
+		mi.setMemberName(o.getMemberName());
+    	//出生日期
+		mi.setMemberBirthdate(o.getMemberBirthdate());
+    	//介绍
+		mi.setMemberDescribe2(o.getMemberDescribe2());
+		//更新时间
+		mi.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		//开始进行更新操作
+		MemberInformation reMemberInformation = this.saveMemberInformation(mi);	
+		return reMemberInformation;		    	
+	}
 }
