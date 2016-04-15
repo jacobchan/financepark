@@ -96,8 +96,52 @@
 	</div>
 	<!--***弹窗 end****************************************-->
 </youi:body>
-	<script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 	<script type="text/javascript">
+	var pageSize=10;
+	var pageCount=1;
+	var currentIndex = 1;
+	var serviceURL = baseUrl+'propertyservicemanagerChargeManager/getPagerCharge.json';
+	$(function () {		
+		//分页页码显示
+		 $.ajax({
+			url:serviceURL, 
+			success:function(results){	
+							pageCount=Math.ceil(results.totalCount/pageSize);//页数
+							
+							 refreshData(1,pageSize);
+								$(".tcdPageCode").createPage({
+								    pageCount:pageCount,
+								    current:1,
+								    backFn:function(p){
+								    	currentIndex = p;
+								       this.pageCount=pageCount;
+								        refreshData(p,pageSize);
+								    }
+								});			
+			/* 	if(result&&result.records){
+					_parseRecords(result.records);
+				} */
+			}
+		}); 			
+	});	
+	
+	
+	//分页列表
+	function refreshData(pageIndex,pageSize){
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+		$.ajax({
+			url:serviceURL,
+			data:params.join('&'),
+			success:function(results){
+				if(results&&results.records){
+					 _parseRecords(results.records);
+				}
+			}
+		});
+	}
+		
 	$(function () {
 		$(".lq-fp").click(function(){
 			$(".bg-tanc").show();
@@ -113,7 +157,7 @@
 				}
 			}
 		});
-		$.ajax({
+	/* 	$.ajax({
 			url:baseUrl+'propertyservicemanagerChargeManager/getChargeListforpage.json', 
 			success:function(result){
 				console.log(result);
@@ -122,7 +166,7 @@
 				}
 			}
 		});
-	});
+ */	});
 	
 	//拼接列表
 	function _parseRecords(record){
