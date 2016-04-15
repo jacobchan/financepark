@@ -658,7 +658,7 @@
 		</div>
 	</div>
     
-	<div class="bg-tanc">
+	<div class="bg-tanc m2">
 		<div class="tanc-con" style="top:50%;margin-top:-225px;width:400px;padding:40px 30px;">
 			<a href="javascript:;" class="tc-close"></a>
 			<h3 class="mb10 f20 c-333"><b>活动报名</b></h3>
@@ -1267,14 +1267,14 @@
 			$('.pb-list-group').empty();
 			$('.pb-list-group').append(html);
 			$(".ib-btn.lh30.acc").click(function(e){
-				$(".bg-tanc").attr("id",$(this).parents("li").attr("id"));
+				$(".bg-tanc.m2").attr("id",$(this).parents("li").attr("id"));
 				$("#applyMember").val('');
 				$("#applyPhone").val('');
-				$(".bg-tanc").show();
+				$(".bg-tanc.m2").show();
 				e.stopPropagation();	
 			});
 			$(".tc-close").click(function(){
-				$(".bg-tanc").hide();
+				$(".bg-tanc.m2").hide();
 			});
 		};
 		function redirectPage(obj){
@@ -1353,7 +1353,7 @@
     	            timer=setInterval("closeTanc()",1000);
     			 	 return false;
     			}
-    		  	var applyId = $(".bg-tanc").attr("id");
+    		  	var applyId = $(".bg-tanc.m2").attr("id");
     		 	var applyMember=$("#applyMember").val();
     			var applyPhone=$("#applyPhone").val();
     			if(!isMobil(applyPhone)){
@@ -1378,14 +1378,14 @@
     			         	$(".toast").show();
     			         	pltime=2;
     			         	timer=setInterval("closeTanc()",1000);
-    			         	$(".bg-tanc").hide();
+    			         	$(".bg-tanc.m2").hide();
     					}else{
     						clearInterval(timer);
     						$(".tc.mt25").text("您已报名成功!");
     			         	$(".toast").show();
     			         	pltime=2;
     			         	timer=setInterval("closeTanc()",1000);
-    			         	$(".bg-tanc").hide();
+    			         	//$(".bg-tanc").hide();
     					}
     				}
     			});			  
