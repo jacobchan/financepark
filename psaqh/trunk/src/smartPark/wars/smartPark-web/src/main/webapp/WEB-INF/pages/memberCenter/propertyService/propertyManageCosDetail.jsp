@@ -100,7 +100,7 @@ $(function () {
 				}
 				if(record[i].cosStatus=='0'){
 					status = "待受理";
-					crop = "<a href='' class='pb-btn tc' style='width:120px;' onclick='javascript:cancel(\""+record[i].cosId+"\")' >"+crop+"</a>";
+					crop = "<a href='' class='pb-btn tc' style='width:120px;' onclick='javascript:cancel(\""+record[i].cosId+"\")' >取消</a>";
 				}else if(record[i].cosStatus=='1'){
 					status = "受理中";
 				}else if(record[i].cosStatus=='2'){
@@ -111,7 +111,8 @@ $(function () {
 					status = "已回访";
 				}else if(record[i].cosStatus=='5'){
 					status = "待评价";
-					crop = "<a href='' class='pb-btn tc' style='width:120px;'  >"+"评价"+"</a>";
+					crop = "<a href='' class='pb-btn tc' style='width:120px;'  >评价</a>";
+					
 				}else if(record[i].cosStatus=='6'){
 					status = "已完成";
 				}
@@ -146,6 +147,7 @@ $(function () {
 			  "<div class='fr f12'>"+
 				//"<span class='mr30'> 订单总计费用：<font class='f24 c-o'>1200元</font></span>"+
 				crop+
+				
 			//	"<input type='submit' value='"+crop+"' class='hhf-submit' onclick='javascript:cancel(\""+record[i].cosId+"\")'  style='height:36px;' />"+
 			"</div>"+  
 		"</div>	";
