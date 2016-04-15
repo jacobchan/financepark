@@ -129,6 +129,6 @@ public interface MemberInformationManager extends BaseManager{
 		 */
 		public PagerRecords getPager(Pager pager,//分页条件
 				Collection<Condition> conditions,//查询条件
-				Collection<Order> orders) throws BusException;
-	
+				Collection<Order> orders, String userId) throws BusException;
+		
 }
