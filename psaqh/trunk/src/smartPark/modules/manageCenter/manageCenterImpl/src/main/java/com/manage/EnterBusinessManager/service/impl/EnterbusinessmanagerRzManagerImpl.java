@@ -106,6 +106,7 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
         			rz.setFloorId(bbmRoom.getBbmFloor().getFloorId());
         			//更新单元基础信息企业
         			bbmRoom.setRzId(enterbusinessmanagerRzId);
+        			bbmRoom.setStatus("02");//已售已招
         			bbmRoomManager.saveBbmRoom(bbmRoom);
         		}
     		}else{
@@ -115,6 +116,7 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     			rz.setFloorId(bbmRoom.getBbmFloor().getFloorId());
     			//更新单元基础信息企业
     			bbmRoom.setRzId(enterbusinessmanagerRzId);
+    			bbmRoom.setStatus("02");//已售已招
     			bbmRoomManager.saveBbmRoom(bbmRoom);
     		}
     		rz.setRoomId(o.getRoomId());
@@ -146,6 +148,7 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     		o = enterbusinessmanagerRzDao.save(o);
     		//更新单元基础信息企业
     		bbmRoom.setRzId(o.getRzId());
+    		bbmRoom.setStatus("02");//已售已招
     		bbmRoomManager.saveBbmRoom(bbmRoom);
         	
         	return o;
