@@ -264,6 +264,9 @@ input{font-family:"微软雅黑";}
 .close-toast{background: url(images/zs/close.png) no-repeat;width: 16px;height: 16px;display: inline-table;cursor: pointer;}
 .close-toast:hover{background: url(images/zs/close-o.png) no-repeat;}
 
+.error-toast{width:250px;position: absolute;background: rgba(255,103,21,0.9);top: -40px;left: 50%;margin-left: -125px;color: #fff;padding: 10px;line-height: 30px;font-size: 16px;text-align: center;opacity: 0;}
+
+
 
 /**bg-tanc**/
 .bg-tanc{position: fixed;left: 0px;top:0px;width:100%;display: none;overflow-x: hidden;overflow-y: auto;bottom: 0px;right: 0px;z-index: 9999;height: 100%;background: rgba(0,0,0,0.5);}
