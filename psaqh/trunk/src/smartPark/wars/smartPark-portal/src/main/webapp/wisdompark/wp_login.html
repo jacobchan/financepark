@@ -222,9 +222,21 @@
 					}); 
 				}
 			}); 
+			
+			//关闭事件
+			
+			$("#close").click(function(){
+				$(".toast").hide();
+			})
+			
 			//推荐提交事件
 			$("#subReferrer").click(function(){
-				if(!isLogin){alert("请登录");return;}
+				if(!isLogin){
+					$("#msg").html("请登录后重试！");
+					$(".toast").show();
+					setTimeout('$(".toast").hide();',2000);
+					return;
+				}
 				$("#disName").hide();
 				$("#disPhone").hide();
 				var isMobile=/^(?:13\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;//手机号的格式
@@ -403,8 +415,8 @@
 	<!-- 弹出层样式 -->
     <div class="toast">
         <div class="toast-con clearfix">
-            <div class="close-toast fr"></div>
-            <p class="tc mt25 f18" style="color:#ff6715"></p>
+            <div class="close-toast fr" id="close"></div>
+            <p class="tc mt25 f18" style="color:#ff6715" id="msg"></p>
         </div>
     </div>
 	
