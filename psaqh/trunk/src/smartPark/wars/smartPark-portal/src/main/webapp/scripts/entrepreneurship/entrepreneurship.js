@@ -337,9 +337,7 @@ $(function(){
     
     //显示信息
     function showMessage(message){
-    	clearInterval(timer);
-		$(".toast").show();
-		$(".toast p").html(message);
-		pltime=1;
-		timer=setInterval("closeTanc()",1000);
+    	$(".error-toast").animate({top:"20px",opacity:"1"});
+    	$(".error-toast p").html(message);
+		setTimeout(function(){$(".error-toast").animate({top:"-40px",opacity:"0"})},2000);
     }
