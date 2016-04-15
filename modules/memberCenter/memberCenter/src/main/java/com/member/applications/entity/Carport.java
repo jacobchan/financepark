@@ -81,7 +81,7 @@ public class Carport implements Domain{
 	private String cpEntdTime;//结束时间
 
 	@Column(name = "APPLAY_NO_")
-	@Length(max=20)
+	@Length(max=36)
 	private String applayNo;//申请编号
 	
 	public String getUpdateTime(){
