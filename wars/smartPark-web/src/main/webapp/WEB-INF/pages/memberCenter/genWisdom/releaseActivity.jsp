@@ -447,7 +447,7 @@
     <script type="text/javascript">
 		$(function(){
 			$.ajax({
-				url:baseUrl+'/ordermanagerUserorderManager/getOrderlistforPage.json',
+				url:baseUrl+'ordermanagerUserorderManager/getOrderlistforPage.json',
 				data:['userorderStatus=01','genreCode=0301'].join('&'),
 				success:function(result){
 					if(result&&result.records){
