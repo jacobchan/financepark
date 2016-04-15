@@ -39,6 +39,7 @@
 			<youi:fieldText property="roomNo"  caption="单元编号" notNull="true"/>
 			<youi:fieldSelect property="bbmFloor.floorId" caption="所属楼层" code="floorId" show="floorNo" notNull="true"
 				src="esb/web/bbmFloorManager/getBbmFloors.json" />
+			<%-- <youi:fieldTree simple="false" popup="true" tree="${bbmRoomTree}" property="bbmFloor.floorId"  caption="所属楼层" onlyLeaf="true"/> --%>
 			<youi:fieldText property="buildingName"  caption="所属楼栋" readonly="true"/>
 			<youi:fieldText property="parkName"  caption="所属园区" readonly="true"/>
 			<%-- <youi:fieldSelect property="bbmPark.parkId" caption="所属园区" code="parkId" show="parkName"
@@ -51,6 +52,7 @@
 			<youi:fieldSelect property="status"  caption="使用状态" convert="roomstatus" notNull="true"/>
 			<youi:fieldText property="roomHost"  caption="单元业主" notNull="true"/>
 			
+			<youi:fieldHidden property="rzId"  caption="企业ID"/>
 			<youi:fieldHidden property="roomTenement"  caption="单元租户"/>
 			<youi:fieldHidden property="rentCharge"  caption="物业_租金"/>
 			<youi:fieldHidden property="floor"  caption="所属楼层" />
