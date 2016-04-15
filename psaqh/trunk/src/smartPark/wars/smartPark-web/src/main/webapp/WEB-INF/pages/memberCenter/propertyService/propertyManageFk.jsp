@@ -127,7 +127,7 @@
 				<img src="<%=request.getContextPath()%>/styles/images/grzx/ewm.jpg" border="0" class="mb20 fkurl" style="width: 45%;"/> 
 				<p class="mb10">订单号：<span class="c-o fkcodes"> [ 123456789 ] </span></p>
 				<p>到访时间：<span class="bftime">2016年1月21日15:30</span></p>
-				<a href="javascript:;" class="ib-btn">分享到手机</a>
+			<!-- 	<a href="javascript:;" class="ib-btn">分享到手机</a> -->
 				<p class="c-o f12 mt20">提示:推送到手机，必须确保手机端已经安装我们的官方APP</p>
 			</div>
 		</div>
