@@ -449,25 +449,17 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 			 *前台 根据当前用户分页查询
 			 * @return 分页对象
 			 */
-		            @SuppressWarnings("unchecked")
-			    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+		          //  @SuppressWarnings("unchecked")
+			    @EsbServiceMapping
 				public PagerRecords getPager(Pager pager,//分页条件
 						@ConditionCollection(domainClazz=MemberInformation.class) Collection<Condition> conditions,//查询条件
-						@OrderCollection Collection<Order> orders)
+						@OrderCollection Collection<Order> orders,
+						@ServiceParam(name="userId",pubProperty="userId") String userId)
 						throws BusException {
-			    	PagerRecords pagerRecords = memberInformationDao.findByPager(pager, conditions, orders);
-			    	List<MemberInformation> list = pagerRecords.getRecords();
-			    	for(MemberInformation info : list){
-		    			if(StringUtils.isNotEmpty(info.getMemberId())){
-//		    				String  companyId= info.getCompanyId();
-		    			//	EnterbusinessmanagerRz rz = enterbusinessmanagerRzManager.getEnterbusinessmanagerRz(companyId);
-		    			//	rz.setMember(memberInformation);
-		    			}
-		    		}
-			    	
+			    	MemberInformation m = memberInformationDao.getObjectByUniqueProperty("memberId", userId);
+			    	String companyId=m.getCompanyId();
+			    	conditions.add(ConditionUtils.getCondition("companyId", Condition.EQUALS, companyId));
+			    	PagerRecords pagerRecords = memberInformationDao.findByPager(pager, conditions, orders);			    				    	
 					return pagerRecords;
-				}
-
-
-
+				}		
 }
