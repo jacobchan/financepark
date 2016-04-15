@@ -6,7 +6,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>企业信息</title>
 		<%@ include file="/WEB-INF/pages/common/enterpriseScriptAddCss.jsp"%>
-		<link rel="stylesheet" href="<%=request.getContextPath()%>/ztree/css/demo.css" type="text/css">
+		<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/page/zs.css">
+		<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/ztree/css/demo.css" type="text/css"> --%>
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
 		<script type="text/javascript" src="<%=request.getContextPath()%>/ztree/js/jquery.ztree.core.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/ztree/js/jquery.ztree.excheck.js"></script>
@@ -26,13 +27,13 @@
 		            <div class="qiye_logo">
 		            	<div class="qiye_text"><span>企业logo</span></div>
 		                <div class="upload_main">
-		                    <div class="photo-edit" id="destination" style="width:168px;height:168px;margin-left:0px;">
+		                	<div class="photoedit" style="float: left;">
+								<img id="headImg" src="<%=request.getContextPath()%>/common/uploadImage.html?repository=/swfupload&path=${rzLogo }&method=show" width="168" height="168"/>
+							</div>
+		                    <div class="photo-edit" id="destination" style="width:168px;height:168px;float: left;">
 							    <input type="file" id="imgUpload" name="imgUpload" draggable="true" accept=".png,.jpg"/>
 							    <p>编辑 图像</p>
-								<p class="f12">封面图片大小建议：288*195</p>
-							</div>
-							<div class="photoedit" style="left:22px;">
-								<img id="headImg" src="<%=request.getContextPath()%>/common/uploadImage.html?repository=/swfupload&path=${rzLogo }&method=show" width="168" height="168"/>
+								<p class="f12" style="font-family:微软雅黑; ">图片大小建议：288*195</p>
 							</div>
 		            	</div>
 		            </div>
@@ -41,24 +42,30 @@
 		                    <div class="qiye_nametex">企业全称</div>
 		                    <div class="name_input"><input id="rzName" name="rzName" type="text" value="${rzName }"></div>
 		                </div>
-		                <div class="qiye_address">
-		                    <div class="qiye_word">地址</div>
-		                    <div class="web_input">
-		                        <input id="roomId" name="roomId.roomId" style="display:none;" value="${roomId }"/>
-                            	<input id="roomAddress" name="roomId.roomAddress" onclick="showRoom();" value="${roomAddress }"/>
-		                    </div>
-		                </div>
 		                <div class="qiye_web">
 		                    <div class="qiye_webtex">官方网站</div>
 		                    <div class="web_input"><input id="rzUrl" name="rzUrl" type="text" value="${rzUrl }"></div>
 		                </div>
 		                <div class="qiye_address">
 		                    <div class="qiye_word">所在行业</div>
-                            <div class="web_input">
-                            	<input id="enTypeId" name="enTypeId.enTypeId" style="display:none;" value="${enTypeId }"/>
-                            	<input id="enTypeName" name="enTypeId.enTypeName" onclick="showMenu();" value="${enTypeName }"/>
+		                    <div id="qiye_enType" class="tct-select fl mr20" style="width: 125px;">
+		                    	<div class="ic-select">
+									<p class="c-b1" id="enTypeName" >${enTypeName }</p>
+									<input id="enTypeId" style="display:none;" value="${enTypeId }"/>
+								</div>
+								<ul id="enTypeNamesing" style="display: none;" class="select-nav"></ul>
 							</div>
                 		</div>
+                		<div class="qiye_address">
+		                    <div class="qiye_word">地址</div>
+	                    	<div id="qiye_address" class="tct-select fl mr20" >
+		                    	<div class="ic-select">
+									<p class="c-b1" id="roomAddress" >${roomAddress }</p>
+									<input id="roomId" style="display:none;" value="${roomId }"/>
+								</div>
+								<ul id="roomAddressing" style="display: none;" class="select-nav"></ul>
+							</div>
+		                </div>
                 		<div class="qiye_jianjie ">
 		                    <div class="qiye_word">公司介绍</div>
 		                    <div class="word_input">
@@ -80,7 +87,16 @@
 		                <div class="qiye_xc">
 		                    <div class="qiye_xiangce"><span>企业相册</span></div>
 		                    <div class="photo_list">
-		                        <ul>
+			                    <div class="photoedit" style="float: left;">
+									<img id="qiyeheadImg" src="<%=request.getContextPath()%>/common/uploadImage.html?repository=/swfupload&path=${qiyeheadImg }&method=show" width="220" height="168"/>
+								</div>
+			                    <div class="photo-edit" style="width:220px;height:168px;float: left;margin-bottom: 50px;">
+								    <img style="height:168px; vertical-align:middle;border:0 none;" src="<%=request.getContextPath()%>/styles/images/qiye/add.png">
+                                    <div class="upload_pic">
+                                    	<input type="file" id="qiye_xiangce" name="qiye_xiangce" draggable="true" accept=".png,.jpg"/>
+                                    </div>
+								</div>
+		                       <%--  <ul>
 		                            <li>
 		                                <div style="position:relative">
 		                                    <div class="overlay"></div>
@@ -95,10 +111,10 @@
 		                                    </div>
 		                                </div>
 		                            </li>
-	                        	</ul>
+	                        	</ul> --%>
 	                         	<div class="photo_btn">
 	                            	<div class="save_btn"><a>保存</a></div>
-	                            	<div class="quxiao_btn"><a>取消</a></div>
+	                            	<!-- <div class="quxiao_btn"><a>取消</a></div> -->
 	                        	</div>
 	                		</div>
 	           			</div>
@@ -113,6 +129,13 @@
 		<!-- 单元地址下拉 -->
 		<div id="roomContent" class="menuContent" style="display:none; position: absolute;">
 			<ul id="treeRoom" class="ztree" style="margin-top:0; width:285px; height: 200px;"></ul>
+		</div>
+		<!-- 弹出层样式 -->
+		<div class="toast">
+		    <div class="toast-con clearfix">
+		        <div class="close-toast fr"></div>
+		        <p class="tc mt25 f18" id="toast_text" style="color:#ff6715">请登录后重试！</p>
+		    </div>
 		</div>
 	</body>
 	<script type="text/javascript">
@@ -172,8 +195,6 @@
 				preloader.load(file.getSource());
 			}
 		}
-	</script>
-	<script type="text/javascript">
 		var uploader = new plupload.Uploader({
 			runtimes : 'html5,flash,silverlight',//设置运行环境，会按设置的顺序，可以选择的值有html5,gears,flash,silverlight,browserplus,html
 			browse_button : 'imgUpload',
@@ -229,6 +250,9 @@
 				};
 				preloader.load(file.getSource());
 			}
+		}
+		function sumbit(){
+			
 		}
 	</script>
 </html>
