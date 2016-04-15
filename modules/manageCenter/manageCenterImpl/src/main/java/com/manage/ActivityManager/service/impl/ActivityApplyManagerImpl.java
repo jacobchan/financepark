@@ -15,6 +15,7 @@ import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.common.OrderManager.service.OrdermanagerUserorderManager;
+import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -23,7 +24,6 @@ import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
-import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
@@ -57,6 +57,8 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
 	private ApplayTypeManager applayTypeManager;
 	@Autowired
 	private OrdermanagerUserorderManager ordermanagerUserorderManager;
+	@Autowired
+	private PurchasingmanagerCommodityManager purchasingmanagerCommodityManager;
     /**
      * 查询列表
      */
@@ -86,6 +88,14 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
 			@ConditionCollection(domainClazz=ActivityApply.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
 		PagerRecords pagerRecords = activityApplyDao.findByPager(pager, conditions, orders);
+		/*List<ActivityApply> list = pagerRecords.getRecords();
+		for(ActivityApply app : list){
+			if(StringUtils.isNotEmpty(app.getApplyOrderNumber())){
+				String commodityId = app.getApplyOrderNumber();
+				PurchasingmanagerCommodity comm =  purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
+				app.setCommAdd(comm.getCommodityTitle());
+			}
+		}*/
 		return pagerRecords;
 	}
     /**
@@ -103,12 +113,15 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     		throw new BusException("当前用户有申请还在审核中,请等管理员审批后再申请！");
     	}
     	if(isUpdate){//修改
-    	
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     	}else{//新增
     		//活动申请选了场地要生成会议室订单
     		if(StringUtils.isNotEmpty(o.getApplyOrderNumber())){
     			System.out.println("****************活动申请选了场地要生成会议室订单******************");
     		}
+    		o.setApplyNumber(BizCodeUtil.getInstance().getBizCodeDate("GRHD"));
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+        	o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     	}
     	return activityApplyDao.save(o);
     }
