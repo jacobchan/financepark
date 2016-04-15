@@ -166,7 +166,7 @@
 			if(i>0){
 				setTimeout("jump1("+i+")", 1000);
 			}else{
-				window.location=cenUrl+"member/memberCenter/personalCenter/myReservation.html";
+				window.location=cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
 			}		
 		}
 	    
@@ -290,9 +290,15 @@
             	
             	var cpEntdTime = $("#endTime").val()+" "+$("#cpEntdTime").find("li.selected").html();
             	var cpBegionTime = $("#startTime").val()+" "+$("#cpBegionTime").find("li.selected").html();
+            	//计算相时间（小时）
+            	var regTime = /(\d{4})-(\d{1,2})-(\d{1,2})( \d{1,2}:\d{1,2})/g;
+            	var interval = Math.abs(Date.parse(cpBegionTime.replace(regTime, "$2-$3-$1$4")) - Date.parse(cpEntdTime.replace(regTime, "$2-$3-$1$4")))/1000;
+            	var h = Math.floor(interval / 3600);
+            	//订单金额： 小时*车辆数*每小时单据（25）
+            	var userorderAmount = h*cpCount*25;
             	
             	//提交
-            	var params = ['cpEnName='+cpEnName,'cpLinkMan='+cpLinkMan,'cpLinkTel='+cpLinkTel,'cpCount='+cpCount,'cpEntdTime='+cpEntdTime,'cpBegionTime='+cpBegionTime,'cpEnAdr='+cpEnAdr];
+            	var params = ['cpEnName='+cpEnName,'cpLinkMan='+cpLinkMan,'cpLinkTel='+cpLinkTel,'cpCount='+cpCount,'cpEntdTime='+cpEntdTime,'cpBegionTime='+cpBegionTime,'cpEnAdr='+cpEnAdr,'userorderAmount='+userorderAmount];
             	var serviceURL = baseUrl+"carportManager/saveCarport.json";
             	$.youi.ajaxUtils.ajax({
 	            	url : serviceURL,
