@@ -5,13 +5,14 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>评论信息</title>
 		<%@ include file="/WEB-INF/pages/common/enterpriseScriptAddCss.jsp"%>
+		<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/page/zs.css">
 		<script type="text/javascript">
 			$(document).ready(function() {
 				var height = Math.max((document.documentElement.clientHeight - 135),($(".main-wrapper").height()));
 				document.getElementById('main-wrapper-right').style.height = height + 'px';
 				
-				$("#moreul").slideUp("slow");
-			  	$(".sidebar-menu-mainul > li:eq(3)").addClass("active");
+				/* $("#moreul").slideUp("slow"); */
+			  	$("#moreul > li:eq(7)").addClass("active");
 			  	
 			  	$.ajax({
 					url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
