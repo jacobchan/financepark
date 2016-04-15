@@ -492,12 +492,12 @@
                 	<input type="submit" class="btn-cheng" value="搜索" onclick="window.open ('hcxx.html')">
                 </div>
             </form> 
-            <form class="reform" style="display:none">
-            	<div class="re_div">
+            <form class="reform" style="display:none;" onkeydown="if(event.keyCode==13)return false;">
+            	<div class="re_div"  style="position: relative;">
             		<input id="cityid" name="cityid" type="hidden" value="{$cityid}" />
                 	<label for="city_name">入住城市</label>
                 	<input type="text" value=""	id="city_name" name="city_name"/>
-                	<div id="suggest" class="ac_results"></div>
+                	<div id="suggest" class="ac_results index_position"></div>
                 	
 					<!-- <input type="hidden" name="gotoCity" id="gotoCity" value="" /> -->					
                     <!-- <input type="text" id="gotocity"/> -->
@@ -520,7 +520,7 @@
                     <input type="text" id="offset"/>
                 </div>
                 <div style="padding-left:70px">
-                	<input type="submit" class="btn-cheng" value="搜索" onclick="gotoHotel()">
+                	<input type="Button" class="btn-cheng" value="搜索" onclick="gotoHotel()">
                 </div>
             </form>
         </div>
@@ -1332,13 +1332,22 @@
 			var month = Number(today.getMonth()) + Number(1);
 			var todayDate = today.getFullYear()+"-"+month+"-"+today.getDate();
 			if(!compareDate(todayDate,tm1)){
-				alert("所选日期不能小于当前日期。");
-				return ;
+				clearInterval(timer);
+				$("#msg").text("所选日期不能小于当前日期。");
+    	        $(".toast").show();
+    	        pltime=2;
+    	        timer=setInterval("closeTanc()",1000);
+				return false;
 			}
 			if(compareDate(tm1,tm2)){
 				window.open(encodeURI("jd1.html?cityname="+cityname+"&cityid="+cityId+"&tm1="+tm1+"&tm2="+tm2));
 			}else{
-				alert("入住时间不能大于离店时间。");
+				clearInterval(timer);
+				$("#msg").text("入住时间不能大于离店时间。");
+    	        $(".toast").show();
+    	        pltime=2;
+    	        timer=setInterval("closeTanc()",1000);
+				return false;
 			}
 			
 		}
