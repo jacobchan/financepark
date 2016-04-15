@@ -5,6 +5,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>企业通讯录</title>
 		<%@ include file="/WEB-INF/pages/common/enterpriseScriptAddCss.jsp"%>
+		<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/page/zs.css">
 		<script type="text/javascript">
 			var pageSize=4;
 			var pageCount=1;
@@ -36,8 +37,8 @@
 					}
 				});
 			  	
-			  	$("#moreul").slideUp("slow");
-			  	$(".sidebar-menu-mainul > li:eq(1)").addClass("active");
+			  	/* $("#moreul").slideUp("slow"); */
+			  	$("#moreul > li:eq(5)").addClass("active");
 			});
 			function refreshData(pageIndex,pageSize){
 				var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'companyId='+$("#companyId").val()];
