@@ -11,6 +11,7 @@ import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.common.BuildingBaseManager.entity.BbmRoom;
+import com.common.MemberManager.entity.MemberInformation;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
@@ -87,7 +88,11 @@ public class PropertyservicemanagerCharge implements Domain{
 	@Column(name = "RZ_ID_")
 	@Length(max=36)
 	private String rzId;//ID
-
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="MEMBER_ID_")
+	private MemberInformation memberInformation;//会员ID
+	
 	public String getUpdateTime() {
 		return updateTime;
 	}
