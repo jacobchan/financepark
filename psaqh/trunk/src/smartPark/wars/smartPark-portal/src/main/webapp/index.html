@@ -730,42 +730,19 @@
       	 	var html = "<ul>" ;
       	 	var length = record.length ;
       	 	if(length > 5){//只显示前五条
-      	 		for(var i=0;i<5;i++){
-      	 			var title = record[i].policyCaption.toString() ;
-      	 			var len = title.length ;
-      	 			if(len > 16){
-	      	 			title = title.substring(0,16) ;
-						title += "..." ;
-      	 			}
-      	 			if(record[i].policyType.issueTypeCode=='0101'){//0101代表园区新闻
-	          	 		html += "<li>" +
-	          	 					"<a href='./zscenter/zs4.html'>"+title+"</a>"+
-	          	 				"</li>" ;
-      	 			}else{
-      	 				html += "<li>" +
-  	 								"<a href='./zscenter/zs7.html?policyId="+record[i].policyId+"'>"+title+"</a>"+
-  	 							"</li>" ;
-      	 			}
-          	 	}
-      	 	}else{
-				for(var i=0;i<record.length;i++){
-					var title = record[i].policyCaption.toString() ;
-      	 			var len = title.length ;
-      	 			if(len > 16){
-	      	 			title = title.substring(0,16) ;
-						title += "..." ;
-      	 			}
-					if(record[i].policyType.issueTypeCode=='0101'){//0101代表园区新闻
-	          	 		html += "<li>" +
-	          	 					"<a href='./zscenter/zs7.html?policyId="+record[i].policyId+"'>"+title+"</a>"+
-	          	 				"</li>" ;
-      	 			}else{
-      	 				html += "<li>" +
-  	 								"<a href='./zscenter/zs7.html?policyId="+record[i].policyId+"'>"+title+"</a>"+
-  	 							"</li>" ;
-      	 			}
-          	 	}
+      	 		length = 5 ;
       	 	}
+			for(var i=0;i<length;i++){
+				var title = record[i].policyCaption.toString() ;
+   	 			var len = title.length ;
+   	 			if(len > 16){
+     	 			title = title.substring(0,16) ;
+					title += "..." ;
+   	 			}
+       	 		html += "<li>" +
+       	 					"<a href='./zscenter/zs7.html?policyId="+record[i].policyId+"'>"+title+"</a>"+
+       	 				"</li>" ;
+         	}
       	 	html += "</ul>" ;
       	 	$(".tipbox.tip_item").append(html) ;
         }
