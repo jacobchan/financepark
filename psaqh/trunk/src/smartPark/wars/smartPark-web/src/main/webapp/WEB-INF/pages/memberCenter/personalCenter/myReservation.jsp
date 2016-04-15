@@ -199,7 +199,7 @@
 					recordStatus="已受理";
 				}else if(recordStatus=="03"){
 				    recordStatus="已入驻";
-					buttonHtml="";
+					buttonHtml="<td></td>";
 				}else if(recordStatus=="08"){
 				    recordStatus="已取消";
 				}
@@ -260,7 +260,7 @@
 					enteringType="客户续约";
 				}else if(enteringType=="05"){
 					enteringType="客户退租";
-				}else if(enteringType=="05"){
+				}else if(enteringType=="06"){
 					enteringType="入驻成功";
 				}
 				var buttonHtml="<td id="+record[i].enterrecStatus+"><a href='javascript:;' class='ac-show' onclick='javascript:cancelForEnter(\""+record[i].entrecId+"\",\""+record[i].enterrecCode+"\",\""+record[i].enterrecStatus+"\")'>取消预约</a></td>";
@@ -277,7 +277,7 @@
 					recordStatus="未到访";
 				}else if(recordStatus=="06"){
 					recordStatus="已入驻";
-					buttonHtml="";
+					buttonHtml="<td id="+record[i].enterrecStatus+"></td>";
 				}
 				html+="<tr id='"+record[i].entrecId+"'>"+
 					 "<td><a href=''>"+record[i].enterrecCode+"</a></td>"+ 
