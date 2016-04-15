@@ -6,6 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>媒体报道</title>
 		<%@ include file="/WEB-INF/pages/common/enterpriseScriptAddCss.jsp"%>
+		<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/page/zs.css">
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$('.sidebar-menu-mainul2 li a').click(function(){
