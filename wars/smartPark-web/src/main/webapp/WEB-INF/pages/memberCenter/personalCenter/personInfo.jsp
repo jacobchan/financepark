@@ -191,7 +191,7 @@
 	               		var memberHeadPortrait = response.fileUrl[0];
 	    				var params = ['memberHeadPortrait='+memberHeadPortrait+'','memberId='+memberId+'','memberNickname='+memberNickname+'','memberPhoneNumber='+memberPhoneNumber+'','memberName='+memberName+'','memberBirthdate='+memberBirthdate+'','memberDescribe2='+memberDescribe2+'','companyId='+companyId+''];
 	    				$.youi.ajaxUtils.ajax({
-	    					url:baseUrl+'memberInformationManager/saveMemberInformation.json',
+	    					url:baseUrl+'memberInformationManager/updateMemberInformation.json',
 	    					data:params.join('&'),
 	    					success:function(result){
 	    						if(result&&result.record){	    						
@@ -206,7 +206,7 @@
 				var memberHeadPortrait = $("#memberHeadPortrait").val();
 				var params = ['memberHeadPortrait='+memberHeadPortrait+'','memberId='+memberId+'','memberNickname='+memberNickname+'','memberPhoneNumber='+memberPhoneNumber+'','memberName='+memberName+'','memberBirthdate='+memberBirthdate+'','memberDescribe2='+memberDescribe2+'','companyId='+companyId+''];
 				$.youi.ajaxUtils.ajax({
-					url:baseUrl+'memberInformationManager/saveMemberInformation.json',
+					url:baseUrl+'memberInformationManager/updateMemberInformation.json',
 					data:params.join('&'),
 					success:function(result){
 						if(result&&result.record){							
