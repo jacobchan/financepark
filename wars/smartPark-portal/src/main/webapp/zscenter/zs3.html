@@ -92,15 +92,18 @@
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
 	<!--***弹窗 start****************************************-->
+	<style>
+		.line-table input[type="text"]{width:100% !important;}
+	</style>
 	<div class="bg-tanc">
-		<div class="tanc-con" style="margin-top:-252px;top:50%;">
+		<div class="tanc-con" style="margin-top:-252px;top:50%;width:420px;padding:40px;">
 			<a href="javascript:;" class="tc-close"></a>
 			<form>
 				<h3>填写在线预约单</h3>
 				<table class="line-table">
 					<colgroup>
-						<col width="140"></col>
-						<col width="240"></col>
+						<col width="90"></col>
+						<col width="250"></col>
 					</colgroup>
 					<tr>
 						<td valign="top">公司名称</td>
@@ -108,9 +111,9 @@
 							<input type="text" id="policyApplyConpanyName">
 							<!-- <p>请填写公司名称</p> -->
 						</td>
-						<td rowspan="6" style="color:#fb4a4a">
+						<!-- <td rowspan="6" style="color:#fb4a4a">
 							备注：如果贵司为已驻企业，请在线提报，如果贵司还未进入园区，请在线预约后再进行申请，谢谢！
-						</td>
+						</td> -->
 					</tr>
 					<!-- <tr>
 						<td>公司楼栋及地址</td>
@@ -228,7 +231,7 @@
 			}else{
 				for(var i=0;i<record.length;i++){
 					var issueTypeCode = record[i].issueTypeCode ;
-					var t = "<h3 class='h3-c-o' id='"+issueTypeCode+"'>"+record[i].issueTypeCaption+"</h3>" ;
+					var t = "<h3 class='h3-c-o mt20' id='"+issueTypeCode+"'>"+record[i].issueTypeCaption+"</h3>" ;
 					$(".fl.w895").append(t);
 					var params=["issueTypeCode="+issueTypeCode];
 					$.youi.ajaxUtils.ajax({
@@ -244,14 +247,14 @@
 						}
 					});
 				}
-				$(".w895 >h3").each(function(i){
+				/* $(".w895 >h3").each(function(i){
 					
 					var id = $(this).attr("id") ;
 					if(i==1){
 						var htm = '<div class="index-group mb30 mt40"><img src="../styles/images/zs/con2.jpg" /></div>';
 						$("#"+id).before(htm) ;
 					}
-				});
+				}); */
 			}
 		};
 	 	function getH(record){
