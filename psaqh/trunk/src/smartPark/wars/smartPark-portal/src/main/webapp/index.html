@@ -277,9 +277,9 @@
                 <a class="fr" href="./czh/czh1.html">更多》</a>
             </div>
             <ul class="czh_ul clearfix">
-            	<li onclick="loadURL('/czh/czh4.html');" style="cursor:pointer"><a href="javascript:;"><img src="styles/images/index/czh1.jpg"/></a><div class="f18">创智讲堂</div></li>
+            	<!-- <li onclick="loadURL('/czh/czh4.html');" style="cursor:pointer"><a href="javascript:;"><img src="styles/images/index/czh1.jpg"/></a><div class="f18">创智讲堂</div></li>
                 <li onclick="loadURL('/czh/czh5.html');" style="cursor:pointer"><a href="javascript:;"><img src="styles/images/index/czh2.jpg"/></a><div class="f18">硅谷创业营</div></li>
-                <li onclick="loadURL('/czh/czh4.html?typeId=40288aa9538d6fef01538d8580c20006');" style="cursor:pointer"><a href="javascript:;"><img src="styles/images/index/czh3.jpg"/></a><div class="f18">园区活动</div></li>
+                <li onclick="loadURL('/czh/czh4.html?typeId=40288aa9538d6fef01538d8580c20006');" style="cursor:pointer"><a href="javascript:;"><img src="styles/images/index/czh3.jpg"/></a><div class="f18">园区活动</div></li> -->
             </ul>
         </div>
         <div class="content_left mt30">
@@ -1224,6 +1224,36 @@
 			function jumpBack(){
 				window.location="index.html";
 			}
+	</script>
+	<script type="text/javascript">
+		$(function(){
+			//园区推荐活动类型top4
+			var serviceURL = baseUrl+"applayTypeManager/getApplayTypes.json";	
+			var postData = {'isRecoment':0,orderBy:'desc:typeCode'};	
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				data:postData,
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(results){
+					if(results&&results.records){
+						types(results.records);
+					}
+				}
+			});			
+		});
+		//拼接类型数据
+		function types(record){
+			var html='';
+			for(var i=0;i<1;i++){
+				html+="<li onclick='loadURL(\"/czh/czh4.html\")' style='cursor:pointer'><a href='javascript:;''><img src='styles/images/index/czh1.jpg'/></a><div class='f18'>创智讲堂</div></li>"+
+				  " <li onclick='loadURL(\"/czh/czh5.html\")' style='cursor:pointer'><a href='javascript:;'><img src='styles/images/index/czh2.jpg'/></a><div class='f18'>硅谷创业营</div></li>"+
+			       " <li onclick='loadURL(\"/czh/czh4.html?typeId="+record[i].typeId+"\")' style='cursor:pointer'><a href='javascript:;'><img src='styles/images/index/czh3.jpg'/></a><div class='f18'>园区活动</div></li>";
+		     
+			}
+			$('.czh_ul').empty();
+			$('.czh_ul').append(html);
+		};
 	</script>
 	<script type="text/javascript">
 		$(function(){
