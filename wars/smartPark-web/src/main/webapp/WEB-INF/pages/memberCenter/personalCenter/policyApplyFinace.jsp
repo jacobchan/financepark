@@ -91,8 +91,8 @@
 				html += '	<td></td>'
 			}else if(recordList[index].applayStatus=="03"){
 				html += '	<td>已取消</td>'
-					html += '	<td></td>'
-				}
+				html += '	<td></td>'
+			}
 			html += '</tr>'
 		}
 		$("tbody").html(headHtml+html);
