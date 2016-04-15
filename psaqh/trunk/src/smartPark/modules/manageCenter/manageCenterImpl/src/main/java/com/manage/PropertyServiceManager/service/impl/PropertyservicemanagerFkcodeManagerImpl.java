@@ -282,7 +282,19 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
 			@ConditionCollection(domainClazz=PropertyservicemanagerFkcode.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)
 			throws BusException {
-    	PagerRecords pagerRecords = propertyservicemanagerFkcodeDao.findByPager(pager, conditions, orders);   	
+    	PagerRecords pagerRecords = propertyservicemanagerFkcodeDao.findByPager(pager, conditions, orders); 
+    	@SuppressWarnings("unchecked")
+		List<PropertyservicemanagerFkcode> list = pagerRecords.getRecords();
+    	for(PropertyservicemanagerFkcode fk : list){
+			if(StringUtils.isNotEmpty(fk.getFkcodeId())){
+				String fkcode = fk.getFkcodeId();
+				Collection<Condition> condition = new ArrayList<Condition>();
+				condition.add(ConditionUtils.getCondition("propertyservicemanagerFkcode.fkcodeId", Condition.EQUALS,fkcode));
+				List<PropertyservicemanagerTwcrd> twcrd = propertyservicemanagerTwcrdManager.getPropertyservicemanagerTwcrds(condition, null) ;//通过访客申请对象得到对应的二维码对象
+				fk.setDksataus(twcrd.get(0).getStatus());
+													
+			}
+		}
     	return pagerRecords;
 	}
     
