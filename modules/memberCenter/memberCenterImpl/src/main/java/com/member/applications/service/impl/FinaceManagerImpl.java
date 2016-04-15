@@ -176,7 +176,7 @@ public class FinaceManagerImpl extends BaseManagerImpl implements FinaceManager{
 		//申请状态
 		o.setApplayStatus("01");
 		//申请编号
-		String applayNo = BizCodeUtil.getInstance().getBizCodeDate("ITFW");
+		String applayNo = BizCodeUtil.getInstance().getBizCodeDate("RZSQ");
 		o.setApplayNo(applayNo);
 		//创建返回保存成功返回的实体
 		Finace saveFinace = this.saveFinace(o);
