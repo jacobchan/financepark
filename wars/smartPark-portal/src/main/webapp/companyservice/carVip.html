@@ -244,56 +244,47 @@
             	if(cpEnName==''){
             		$("#msg").text("请填写企业名称");
 		            $(".toast").show();
-		            pltime=2;
-		            timer=setInterval("closeTanc()",1000)
+		            setTimeout('$(".toast").hide();',1000);
 					return;
             	}else if(cpLinkMan==''){
             		$("#msg").text("请填写联系人");
 		            $(".toast").show();
-		            pltime=2;
-		            timer=setInterval("closeTanc()",1000)
+		            setTimeout('$(".toast").hide();',1000);
 					return;
             	}else if(!isNum.test(cpCount)){
             		$("#msg").text("请填写车位数");
 		            $(".toast").show();
-		            pltime=2;
-		            timer=setInterval("closeTanc()",1000)
+		            setTimeout('$(".toast").hide();',1000);
 					return;
             	}else if(cpEnAdr==''){
             		$("#msg").text("请填写公司地址");
 		            $(".toast").show();
-		            pltime=2;
-		            timer=setInterval("closeTanc()",1000)
+		            setTimeout('$(".toast").hide();',1000);
 					return;
             	}else if(!isMobile.test(cpLinkTel)){
             		$("#msg").text("请填写正确联系方式");
 		            $(".toast").show();
-		            pltime=2;
-		            timer=setInterval("closeTanc()",1000)
+		            setTimeout('$(".toast").hide();',1000);
 					return ;
 				}else if($("#startTime").val()==''){
             		$("#msg").text("请选择开始时间");
 		            $(".toast").show();
-		            pltime=2;
-		            timer=setInterval("closeTanc()",1000)
+		            setTimeout('$(".toast").hide();',1000);
 					return;
             	}else if($("#cpBegionTime").find("li.selected").html()==undefined){
             		$("#msg").text("请选择开始时段");
 		            $(".toast").show();
-		            pltime=2;
-		            timer=setInterval("closeTanc()",1000)
+		            setTimeout('$(".toast").hide();',1000);
 					return;
             	}else if($("#endTime").val()==''){
             		$("#msg").text("请选择结束时间");
 		            $(".toast").show();
-		            pltime=2;
-		            timer=setInterval("closeTanc()",1000)
+		            setTimeout('$(".toast").hide();',1000);
 					return;
             	}else if($("#cpEntdTime").find("li.selected").html()==undefined){
             		$("#msg").text("请选择结束时段");
 		            $(".toast").show();
-		            pltime=2;
-		            timer=setInterval("closeTanc()",1000)
+		            setTimeout('$(".toast").hide();',1000);
 					return;
             	}
             	
