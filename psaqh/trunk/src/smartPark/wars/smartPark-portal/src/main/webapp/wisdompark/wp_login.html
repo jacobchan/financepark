@@ -206,7 +206,7 @@
 				jsonp:'data:jsonp',
 				dataType:'jsonp',
 				success:function(result){
-					console.log(result) ;
+					//console.log(result) ;
 					$(".into_tit").text(result.record.html) ;
 					$.youi.ajaxUtils.ajax({
 						url:baseUrl +"bbmFloorManager/getRoomByFloorId.json",//通过楼层ID获取对应的楼层单元
@@ -323,8 +323,8 @@
 							dataType:'jsonp',
 							success:function(results){
 								var record = results.record ;
+								//console.log(record) ;
 								$("#loading").addClass("undis") ;
-								//alert(record.roomNo) ;
 								if(record.roomNo){
 									$("#roomNo").text(record.roomNo) ;
 								}else{
