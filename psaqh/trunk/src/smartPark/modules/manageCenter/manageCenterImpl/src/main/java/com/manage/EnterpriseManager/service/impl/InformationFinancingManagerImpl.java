@@ -144,7 +144,7 @@ public class InformationFinancingManagerImpl extends BaseManagerImpl implements 
 				.commonQuery(condition, order);
 		for(InformationFinancing infin:list){
 			String financingSubValue = "";
-	    	List<Codeitem> codeitemList = codeItemDao.getList("codemap.code", "rzType");//投资类型
+	    	List<Codeitem> codeitemList = codeItemDao.getList("codemap.code", "roundFinancing");//投资类型
 	    	for(int y = 0;y<codeitemList.size();y++){
 	   			Codeitem codeitem = codeitemList.get(y);
 	   			if(codeitem.getItemValue().equals(infin.getFinancingSub())){
