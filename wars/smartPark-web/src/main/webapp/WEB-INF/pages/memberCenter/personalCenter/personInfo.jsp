@@ -58,8 +58,8 @@
 							<td>公司</td>
 							<td>
 								<input type="text" readonly="readonly" id="companyName">
-								<hidden type="text" readonly="readonly" id="companyId">
-								<a href="javascript:;" class="ml15 open-tanc"><i class="fa fa-plus-circle mr5"></i>加入企业</a>
+								<input type="hidden" readonly="readonly" id="companyId">
+								<a href="javascript:;" class="ml15 open-tanc" id="ly1"><i class="fa fa-plus-circle mr5"></i>加入企业</a>
 							</td>
 						</tr>
 						<tr>
@@ -111,18 +111,26 @@
 
 	</youi:body>
 	<script type="text/javascript">
-		$(function(){			
-			$.ajax({
-				url:baseUrl+'memberInformationManager/getMemberInformationByLoginUser.json',
-				//async: false, 
-				success:function(result){
-					if(result&&result.record){
-						_parseRecords(result.record);
-					}
+	//pageLoad Method
+	$(function(){
+		method() ;
+	});
+	//刷新数据的方法
+	function realoadPage(){}
+	
+	
+	function method(){
+		$.ajax({
+			url:baseUrl+'memberInformationManager/getMemberInformationByLoginUser.json',
+			//async: false, 
+			success:function(result){
+				if(result&&result.record){
+					console.log(result.record) ;
+					_parseRecords(result.record);
+					
 				}
-			});
+			}
 		});
-		
 		
 		function _parseRecords(record){
 			$("#memberId").html(record.memberId);
@@ -131,13 +139,18 @@
 			$(".c-b1").html(record.memberPhoneNumber);
 			$("#memberNickname").val(record.memberNickname);
 			$("#memberName").val(record.memberName);
-			$("#year").val(record.memberBirthdate.substring(0,4));
-			$("#month").val(record.memberBirthdate.substring(5,7));
-			$("#day").val(record.memberBirthdate.substring(8,10));
+			if(record.memberBirthdate != ""){
+				$("#year").val(record.memberBirthdate.substring(0,4));
+				$("#month").val(record.memberBirthdate.substring(5,7));
+				$("#day").val(record.memberBirthdate.substring(8,10));
+			}
 			$("#memberDescribe2").val(record.memberDescribe2);
 			$("#companyId").val(record.companyId);
+			console.log("id="+record.companyId) ;
 			if(record.companyId != ""){
+				//alert(record.companyId) ;
 				getRzName(record.companyId);//获得公司名字
+				$("#ly1").hide() ;
 			}
 			
 		};
@@ -158,6 +171,8 @@
 			$("#companyName").val(record.rzName);
 			
 		};
+	}
+		
 		$('.hhf-submit').click(function(){
 			this.disabled=true;
 			var flg = false;
@@ -210,17 +225,13 @@
 		});	
 		//加入企业
 		$('.ib-btn').click(function(){
-			
 			this.disabled=true;
 			var memberId=$("#memberId").html();
 			var companyInvitecode=$("#companyInvitecode").val();
 			if(companyInvitecode){
-				
 					
 			}else{
-				
 				$(".c-o.aa").text("企业码为空");
-				 
 				return false;
 			}
 			
@@ -230,10 +241,15 @@
 				data:params.join('&'),
 				success:function(result){
 					if(result&&result.record){
-						
-						$(".c-o.aa").text(result.record.html);
-						$(".c-o.aa").show(); 	
-						
+						console.log(result.record) ;
+						var record = result.record ;
+						if(record.flag == '0'){
+							$(".c-o.aa").text(record.msg);
+						}else{
+							method() ;
+							$(".bg-tanc").hide() ;
+							
+						}
 					}
 				}
 			});
@@ -304,9 +320,13 @@
 				$(this).parent("p").hide().siblings("p").show();
 			});
 			$(".open-tanc").click(function(){
+				$(".c-o.aa").text("") ;
+				$("#companyInvitecode").val("") ;
 				$(".bg-tanc").show();
 			});
 			$("#birthday_container").birthday();
+			
+			$("#companyName")
 			
 			/* $(".tcclose").click(function(){
 				$(".bgtanc").hide();
