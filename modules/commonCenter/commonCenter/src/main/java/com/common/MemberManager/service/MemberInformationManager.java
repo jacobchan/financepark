@@ -13,6 +13,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.PubCondition;
 import com.common.MemberManager.entity.MemberInformation;
 
 public interface MemberInformationManager extends BaseManager{
@@ -130,5 +132,12 @@ public interface MemberInformationManager extends BaseManager{
 		public PagerRecords getPager(Pager pager,//分页条件
 				Collection<Condition> conditions,//查询条件
 				Collection<Order> orders, String userId) throws BusException;
+		 /**
+		   *  个人中心-个人资料（修改）
+		   * @param o
+		   * @return
+		   * @throws BusException	   */				    
+	    
+	    public MemberInformation updateMemberInformation(MemberInformation o) throws BusException;
 		
 }
