@@ -63,39 +63,39 @@
             <div class="hx_square1 hx_bleft"></div>
         </div>
     </div>
-    <div class="hxinfo">
+    <div class="hxinfo" id="ws">
     	<table class="tabel_hx">
         	<tr><td colspan="2" class="into_tit" align="center"></td></tr>
             <tr>
             	<td>房间名称：</td>
-                <td id="roomNo" align="left"></td>
+                <td class="roomNo" align="left"></td>
             </tr>
             <tr>
             	<td>房间面积：</td>
-                <td id="area" align="left"></td>
+                <td class="area" align="left"></td>
             </tr>
             <tr>
             	<td>朝&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;向：</td>
-                <td id="aspect" align="left"></td>
+                <td class="aspect" align="left"></td>
             </tr>
             <tr>
             	<td>户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型：</td>
-                <td id="module" align="left"></td>
+                <td class="module" align="left"></td>
             </tr>
             <tr>
             	<td>装&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修：</td>
-                <td id="furnish" align="left"></td>
+                <td class="furnish" align="left"></td>
             </tr>
             <tr>
             	<td>租&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;金：</td>
-                <td id="price" align="left"></td>
+                <td class="price" align="left"></td>
             </tr>
         </table> 
         <div class="mt20 tc">
             <div class="btn-cheng mr25" id="tj_pop">推荐</div>
             <div class="btn-chengk">预约</div>
         </div>
-        <div class="mt30">
+       <!--  <div class="mt30">
         	<span class="f16 cc fw">装修方案</span>
             <ul class="ty_ul clearfix mt15">
             	<li>
@@ -120,6 +120,42 @@
                     </p>
                 </li>
             </ul>
+        </div> -->
+    </div>
+    <div class="hxinfo undis" id="ys">
+    	<table class="tabel_hx">
+        	<tr><td colspan="2" class="into_tit" align="center"></td></tr>
+            <tr>
+            	<td>公司名称：</td>
+                <td  class="left"><a href="" id="rzName"></a></td>
+            </tr>
+            <tr>
+            	<td>房间名称：</td>
+                <td class="roomNo" align="left"></td>
+            </tr>
+            <tr>
+            	<td>房间面积：</td>
+                <td class="area" align="left"></td>
+            </tr>
+            <tr>
+            	<td>朝&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;向：</td>
+                <td class="aspect" align="left"></td>
+            </tr>
+            <tr>
+            	<td>户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型：</td>
+                <td class="module" align="left"></td>
+            </tr>
+            <tr>
+            	<td>装&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修：</td>
+                <td class="furnish" align="left"></td>
+            </tr>
+            <tr>
+            	<td>租&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;金：</td>
+                <td class="price" align="left"></td>
+            </tr>
+        </table> 
+        <div class="mt20 tc">
+            <div class="btn-cheng mr25" ><a href="" id="ck">查看</a></div>
         </div>
     </div>
 	<ul class="clearfix wl-850">
@@ -337,37 +373,66 @@
 							dataType:'jsonp',
 							success:function(results){
 								var record = results.record ;
-								//console.log(record) ;
+								console.log(record) ;
+								if(record.status == "02"){//01表示已售已招
+									
+									$("#ws").addClass("undis") ;
+									$("#ys").removeClass("undis") ;
+									var rzId = record.rzId ;
+									if(rzId == null){
+										$("#rzName").text("") ;
+									}else{
+										var params=["rzId="+rzId];
+										$.youi.ajaxUtils.ajax({
+											url:baseUrl +"enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json",
+											data:params.join('&'),
+											jsonp:'data:jsonp',
+											dataType:'jsonp',
+											success:function(results){
+												var rz = results.record ;
+												var rzName = rz.rzName ;
+												var id = rz.rzId ;
+												console.log(rzName) ;
+												$("#rzName").text(rzName) ;
+												$("#rzName").attr("href","../industrydatabase/industry.html?id="+id) ;
+												$("#ck").attr("href","../industrydatabase/industry.html?id="+id) ;
+											}
+										});
+									}
+								}else{
+									$("#ys").addClass("undis") ;
+									$("#ws").removeClass("undis") ;
+								}
 								$("#loading").addClass("undis") ;
 								if(record.roomNo){
-									$("#roomNo").text(record.roomNo) ;
+									$(".roomNo").text(record.roomNo) ;
 								}else{
-									$("#roomNo").text("") ;
+									$(".roomNo").text("") ;
 								}
 								if(record.area){
-									$("#area").text(record.area+" 平方米") ;
+									$(".area").text(record.area+" 平方米") ;
 								}else{
-									$("#area").text("") ;
+									$(".area").text("") ;
 								}
 								if(record.aspect){
-									$("#aspect").text(record.aspect) ;
+									$(".aspect").text(record.aspect) ;
 								}else{
-									$("#aspect").text("") ;
+									$(".aspect").text("") ;
 								}
 								if(record.roomModule){
-									$("#module").text(record.roomModule) ;
+									$(".module").text(record.roomModule) ;
 								}else{
-									$("#module").text("") ;
+									$(".module").text("") ;
 								}
 								if(record.furnish){
-									$("#furnish").text(record.furnish) ;
+									$(".furnish").text(record.furnish) ;
 								}else{
-									$("#furnish").text("") ;
+									$(".furnish").text("") ;
 								}
 								if(record.salesPrice){
-									$("#price").text(record.salesPrice+"/月") ;
+									$(".price").text(record.salesPrice+"/月") ;
 								}else{
-									$("#price").text("") ;
+									$(".price").text("") ;
 								}
 							}
 						});
