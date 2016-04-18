@@ -76,7 +76,8 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
         	o.setMemberInformation(memberInformation);
     	}
     	o.setCosCode(BizCodeUtil.getInstance().getBizCodeDate("WYTS"));
-    	o.setCosStatus("0");
+    	//待受理
+    	o.setCosStatus("01");
     	if("".equals(o.getCosTime()) || null==o.getCosTime()){
     		o.setCosTime(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
     	}
@@ -155,110 +156,117 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
     * @return
     * @throws BusException
     */
- @SuppressWarnings("unused")
-@EsbServiceMapping
-   public PropertyservicemanagerCos updateCosforpage(@ServiceParam(name="cosId") String cosId) throws BusException{
-	   PropertyservicemanagerCos psm = propertyservicemanagerCosDao.get(cosId);
-	   String cosStatus = psm.getCosStatus();
-	   if(psm!=null){
-		   //取消投诉 
-		   if(cosStatus.equals("0")||cosStatus.equals("1")||cosStatus.equals("2")){
-			   psm.setCosStatus("3");
-			   psm.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-		   }
-			return propertyservicemanagerCosDao.save(psm);
-	   }else{
-		   throw new BusException("未查询到投诉记录，如有疑问请与客服人员联系");
-	   } 
-   }
-//通过订单号获取当前用户的报修单  模糊查询
+    @SuppressWarnings("unused")
+    @EsbServiceMapping
+    public PropertyservicemanagerCos updateCosforpage(@ServiceParam(name="cosId") String cosId) throws BusException{
+	    PropertyservicemanagerCos psm = propertyservicemanagerCosDao.get(cosId);
+	    String cosStatus = psm.getCosStatus();
+	    if(psm!=null){
+		    //取消投诉 
+		    if("01".equals(cosStatus)){
+		    	psm.setCosStatus("03");
+		    	psm.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		    }else{
+		    	throw new BusException("该状态下的订单不允许取消操作");
+		    }
+		    return propertyservicemanagerCosDao.save(psm);
+	    }else{
+	    	throw new BusException("该状态下的订单不允许取消操作");
+	    } 
+    }
+	//通过订单号获取当前用户的报修单  模糊查询
 	@EsbServiceMapping
-	 public List<PropertyservicemanagerCos> getCoslistLikeCosCode(
-			 @ServiceParam(name="userId",pubProperty="userId") String userId,
-			@ServiceParam(name="cosCode") String cosCode,
-			@ServiceParam(name="startTime") String startTime,
-			@ServiceParam(name="endTime") String endTime) throws BusException {						 
+	public List<PropertyservicemanagerCos> getCoslistLikeCosCode(
+		@ServiceParam(name="userId",pubProperty="userId") String userId,
+		@ServiceParam(name="cosCode") String cosCode,
+		@ServiceParam(name="startTime") String startTime,
+		@ServiceParam(name="endTime") String endTime) throws BusException {		
+		
 		Collection<Condition> condition = new ArrayList<Condition>();
 		condition.add(ConditionUtils.getCondition("cosCode", Condition.LIKE, cosCode));	
 		condition.add(ConditionUtils.getCondition("memberInformation.memberId", Condition.EQUALS, userId));
 		condition.add(ConditionUtils.getCondition("cosTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
 		List<PropertyservicemanagerCos> list =propertyservicemanagerCosDao.commonQuery(condition, null);
+		
 		return list;
-				
 	}
 	 /**
-		 * 根据当前用户分页查询
-		 * @return 分页对象
-		 */
-	    @EsbServiceMapping(pubConditions={@PubCondition(property="memberInformation.memberId",operator=Condition.EQUALS,pubProperty="userId")})
-	   
-		public PagerRecords getPagerCos(Pager pager,//分页条件
-				@ConditionCollection(domainClazz=PropertyservicemanagerCos.class) Collection<Condition> conditions,//查询条件
-				@OrderCollection Collection<Order> orders)
-				throws BusException {  
-	    	PagerRecords pagerRecords = propertyservicemanagerCosDao.findByPager(pager, conditions, orders);  	
-	    	return pagerRecords;
-		}
-	    
-	    
-	    /**
-	     * 受理保存对象
-	     * 修改投诉状态标识，添加回访记录
-	     */
-	    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
-	    public PropertyservicemanagerCos acceptancePropertyservicemanagerCos(PropertyservicemanagerCos o) throws BusException{
-	    	//查出该条投诉的基本信息
-	    	PropertyservicemanagerCos savePropertyservicemanagerCos = propertyservicemanagerCosDao.get(o.getCosId());
-	    	
-	    	//投诉受理状态
-	    	savePropertyservicemanagerCos.setCosStatus("02");
-	    	//修改时间
-	    	savePropertyservicemanagerCos.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-	    	//回访记录
-	    	String backrecord = o.getBackrecord();
-	    	savePropertyservicemanagerCos.setBackrecord(backrecord);
-	    	//回访时间
-	    	savePropertyservicemanagerCos.setBacktime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-	    	return propertyservicemanagerCosDao.save(savePropertyservicemanagerCos);
-	    }
-	    
-	    /**
-	     * 受理拒绝保存对象
-	     * 修改投诉状态标识，添加拒绝原因记录
-	     */
-	    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
-	    public PropertyservicemanagerCos rejectPropertyservicemanagerCos(PropertyservicemanagerCos o) throws BusException{
+	 * 根据当前用户分页查询
+	 * @return 分页对象
+	 */
+    @EsbServiceMapping(pubConditions={@PubCondition(property="memberInformation.memberId",operator=Condition.EQUALS,pubProperty="userId")})
+   
+	public PagerRecords getPagerCos(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PropertyservicemanagerCos.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)
+			throws BusException {  
+    	PagerRecords pagerRecords = propertyservicemanagerCosDao.findByPager(pager, conditions, orders);  	
+    	return pagerRecords;
+	}
+    
+    
+    /**
+     * 受理保存对象
+     * 修改投诉状态标识，添加回访记录
+     */
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+    public PropertyservicemanagerCos acceptancePropertyservicemanagerCos(PropertyservicemanagerCos o) throws BusException{
+    	//查出该条投诉的基本信息
+    	PropertyservicemanagerCos savePropertyservicemanagerCos = propertyservicemanagerCosDao.get(o.getCosId());
+    	
+    	//投诉受理状态
+    	savePropertyservicemanagerCos.setCosStatus("02");
+    	//修改时间
+    	savePropertyservicemanagerCos.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	//回访记录
+    	String backrecord = o.getBackrecord();
+    	savePropertyservicemanagerCos.setBackrecord(backrecord);
+    	//回访时间
+    	savePropertyservicemanagerCos.setBacktime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	
+    	//发送信息 TODO
+    	return propertyservicemanagerCosDao.save(savePropertyservicemanagerCos);
+    }
+    
+    /**
+     * 受理拒绝保存对象
+     * 修改投诉状态标识，添加拒绝原因记录
+     */
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+    public PropertyservicemanagerCos rejectPropertyservicemanagerCos(PropertyservicemanagerCos o) throws BusException{
 
-	    	//查出该条投诉的基本信息
-	    	PropertyservicemanagerCos savePropertyservicemanagerCos = propertyservicemanagerCosDao.get(o.getCosId());
-	    	//投诉受理状态
-	    	savePropertyservicemanagerCos.setCosStatus("04");
-	    	//修改时间
-	    	savePropertyservicemanagerCos.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-	    	//拒绝原因
-	    	String backRemark = o.getBackRemark();
-	    	savePropertyservicemanagerCos.setBackRemark(backRemark);
-	    	//回访时间
-	    	savePropertyservicemanagerCos.setBacktime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-	    	return propertyservicemanagerCosDao.save(savePropertyservicemanagerCos);
-	    }
-	    /**
-		 *  /**
-		 * 根据当前用户分页查询 根据投诉单号模糊查询（ 前台个人中心）
-		 */
-		 
-	    @EsbServiceMapping(pubConditions={@PubCondition(property="memberInformation.memberId",operator=Condition.EQUALS,pubProperty="userId")})	   
-		public PagerRecords getPagerLikeCos(Pager pager,//分页条件
-				@ConditionCollection(domainClazz=PropertyservicemanagerCos.class) Collection<Condition> conditions,//查询条件
-				@OrderCollection Collection<Order> orders,
-				@ServiceParam(name="startTime") String startTime,
-				@ServiceParam(name="endTime") String endTime,
-				@ServiceParam(name="coslikeCode") String coslikeCode)
-				throws BusException {  
-	    	conditions.add(ConditionUtils.getCondition("cosCode", Condition.LIKE, coslikeCode));
-	        //conditions.add(ConditionUtils.getCondition("cosCode", Condition.EQUALS, cosCode));
-	    	conditions.add(ConditionUtils.getCondition("cosTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
-	    	PagerRecords pagerRecords = propertyservicemanagerCosDao.findByPager(pager, conditions, orders);  	
-	    	return pagerRecords;
-		}
+    	//查出该条投诉的基本信息
+    	PropertyservicemanagerCos savePropertyservicemanagerCos = propertyservicemanagerCosDao.get(o.getCosId());
+    	//投诉受理状态
+    	savePropertyservicemanagerCos.setCosStatus("04");
+    	//修改时间
+    	savePropertyservicemanagerCos.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	//拒绝原因
+    	String backRemark = o.getBackRemark();
+    	savePropertyservicemanagerCos.setBackRemark(backRemark);
+    	//回访时间
+    	savePropertyservicemanagerCos.setBacktime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	//发送信息 TODO
+    	
+    	return propertyservicemanagerCosDao.save(savePropertyservicemanagerCos);
+    }
+    /**
+	 *  /**
+	 * 根据当前用户分页查询 根据投诉单号模糊查询（ 前台个人中心）
+	 */
+	 
+    @EsbServiceMapping(pubConditions={@PubCondition(property="memberInformation.memberId",operator=Condition.EQUALS,pubProperty="userId")})	   
+	public PagerRecords getPagerLikeCos(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PropertyservicemanagerCos.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders,
+			@ServiceParam(name="startTime") String startTime,
+			@ServiceParam(name="endTime") String endTime,
+			@ServiceParam(name="coslikeCode") String coslikeCode)
+			throws BusException {  
+    	conditions.add(ConditionUtils.getCondition("cosCode", Condition.LIKE, coslikeCode));
+        //conditions.add(ConditionUtils.getCondition("cosCode", Condition.EQUALS, cosCode));
+    	conditions.add(ConditionUtils.getCondition("cosTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+    	PagerRecords pagerRecords = propertyservicemanagerCosDao.findByPager(pager, conditions, orders);  	
+    	return pagerRecords;
+	}
 }
