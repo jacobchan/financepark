@@ -83,9 +83,10 @@ public interface PropertyservicemanagerEntrecManager extends BaseManager{
     /**
      * 取消预约申请，将待受理状态变更为已取消
      * @param propertyservicemanagerEntrec
+     * @return 
      * @throws BusException
      */
-    public void cancelReservation(PropertyservicemanagerEntrec o) throws BusException;
+    public PropertyservicemanagerEntrec cancelReservation(PropertyservicemanagerEntrec o) throws BusException;
     
     /**
 	 * 修改入驻服务申请时，判断预约记录Id是否变更
@@ -94,4 +95,11 @@ public interface PropertyservicemanagerEntrecManager extends BaseManager{
 	 *  @param after:变更后可办理预约记录
 	 * */
 	public PropertyservicemanagerEntrec entringIdChange(PropertyservicemanagerEntrec o,PropertyservicemanagerEntering before,PropertyservicemanagerEntering after) throws BusException;
+	/**
+	 *前台 根据当前用户分页查询
+	 * @return 分页对象
+	 */
+	public PagerRecords getPager(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders) throws BusException;
 }
