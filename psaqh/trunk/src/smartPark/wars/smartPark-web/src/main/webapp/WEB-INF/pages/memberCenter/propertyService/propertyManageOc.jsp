@@ -130,24 +130,48 @@
 			});
 		}
 		//根据订单号查询
-		$('.hhf-submit').click(function(){	
-			
-			$(".aaa").empty();
-			 var ocCode=$("#ocCode").val(); 
+			 $('.hhf-submit').click(function(){	
+		var ocCode=$("#ocCode").val();
+		//alert(ocCode);
+		var startTime=$("#startTime").val(); 
+		var endTime=$("#endTime").val(); 			
+		var params = ['ocLikeCode='+ocCode,'startTime='+startTime,'endTime='+endTime];
+		$.ajax({
+			url:baseUrl+'propertyservicemanagerOcManager/getPagerLikeOc.json',
+			data:params.join('&'),
+			success:function(results){	
+				pageCount=Math.ceil(results.totalCount/pageSize);//页数				
+				//alert(pageCount);
+				 refreshData_query(1,pageSize);
+					$(".tcdPageCode").createPage({
+					    pageCount:pageCount,
+					    current:1,
+					    backFn:function(p){
+					    	currentIndex = p;
+					       this.pageCount=pageCount;
+					       refreshData_query(p,pageSize);
+					    }
+					});			
+              }
+        }); 			
+    });	
+		//根据订单号查询 分页列表
+		function refreshData_query(pageIndex,pageSize){
+			var ocCode=$("#ocCode").val();	
 			 var startTime=$("#startTime").val(); 
 			 var endTime=$("#endTime").val(); 
-			 params=['ocCode='+ocCode+'','startTime='+startTime+'','endTime='+endTime+''];
-		      $.ajax({
-		    	 url:baseUrl+'propertyservicemanagerOcManager/getOclistLikeOcCode.json',		    	
-		    	 data:params.join('&'),
-		    	 success:function(result){				    		 
-						console.log(result.records);           
-						if(result&&result.records){						
-							_parseRecords(result.records);							
-						}
+			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'ocLikeCode='+ocCode,'startTime='+startTime,'endTime='+endTime];
+			$.ajax({
+				url:baseUrl+'propertyservicemanagerOcManager/getPagerLikeOc.json',
+				data:params.join('&'),
+				success:function(results){
+					if(results&&results.records){
+						 _parseRecords(results.records);
 					}
-			}); 
-		}); 
+				}
+			});
+		}
+	 
 		$(function(){
 			laydate({
 			    elem: '#startTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
