@@ -68,7 +68,7 @@ public interface PurchasingmanagerMerchantManager extends BaseManager{
 	 * @return
 	 * @throws BusException
 	 */
-	public List<PurchasingmanagerMerchant> getMerchantsByGenre(String genreId)  throws BusException;
+	public List<PurchasingmanagerMerchant> getMerchantsByGenre(String genreId,String genreCode)  throws BusException;
 	/**
 	 * 获取会议室所属商户列表
 	 * @return
