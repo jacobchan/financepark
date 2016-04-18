@@ -2,7 +2,7 @@
  a.c-333{color: #333;}
  a.c-333:hover{color: #ff6715;}
  .undis{display: none;}
- .w550{width: 550px;text-align: center;margin:0px auto;margin-top: 100px;}
+ .w550{width: 550px;min-height: 345px;text-align: center;margin:0px auto;margin-top: 95px;}
  .fpsw-nav li{float: left;height: 30px;cursor: pointer;color: #595959;font-size: 14px;line-height: 30px;text-align: center;background: #f6f6f6;}
  .fpsw-nav li em{margin-right: 10px;width: 20px;height: 20px;line-height: 20px;display: inline-block;color: #fff;background: #c3c3c3;border-radius:50%;font-size: 13px;text-align: center;}
  .fpsw-nav li.active em{background: #fb7730;}
