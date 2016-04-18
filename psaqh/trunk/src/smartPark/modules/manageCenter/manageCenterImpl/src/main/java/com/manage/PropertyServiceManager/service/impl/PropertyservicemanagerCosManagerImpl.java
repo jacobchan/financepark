@@ -192,7 +192,7 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
 		 */
 	    @EsbServiceMapping(pubConditions={@PubCondition(property="memberInformation.memberId",operator=Condition.EQUALS,pubProperty="userId")})
 	   
-		public PagerRecords getPagerFkcodes(Pager pager,//分页条件
+		public PagerRecords getPagerCos(Pager pager,//分页条件
 				@ConditionCollection(domainClazz=PropertyservicemanagerCos.class) Collection<Condition> conditions,//查询条件
 				@OrderCollection Collection<Order> orders)
 				throws BusException {  
