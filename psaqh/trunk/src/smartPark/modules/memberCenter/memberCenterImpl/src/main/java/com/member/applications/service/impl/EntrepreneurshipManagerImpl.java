@@ -71,7 +71,7 @@ public class EntrepreneurshipManagerImpl extends BaseManagerImpl implements Entr
     	return entrepreneurshipDao.get(id);
     }
 	
-	@EsbServiceMapping
+	@EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
 	public PagerRecords getPagerEntrepreneurships(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=Entrepreneurship.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException, ParseException{
@@ -228,7 +228,7 @@ public class EntrepreneurshipManagerImpl extends BaseManagerImpl implements Entr
 	/**
 	 * 获取整个数据的totalCount
 	 */
-	@EsbServiceMapping
+	@EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
 	public List<Record> getTotalCount(
 			@ConditionCollection(domainClazz=Entrepreneurship.class) Collection<Condition> conditions)  throws BusException{
 		List<Record> recordList=new ArrayList<Record>();
