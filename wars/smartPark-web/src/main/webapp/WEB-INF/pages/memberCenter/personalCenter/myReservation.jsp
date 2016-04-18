@@ -3,17 +3,17 @@ myReservation.jspmyReservation.jsp<%@ page language="java" pageEncoding="UTF-8"%
 <youi:html title="我的预约">
 	<youi:body decorator="memcenter"> 
 				<div class="w1000">
-					<h3 class="per-h3">我的预约列表</h3>
+					<h3 class="per-h3">我的预约列表<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要申请政策</a></h3>
 					<div class="clearfix mt20 mb20">
 						<ul class="order-nav">
-							<li class="active">众创空间预约</li>
-							<li>入驻服务预约</li>
-							<!-- <li>车位预约</li> -->
+							<li class="active" onclick="jump0();"><span class="pend">众创空间预约</span></li>
+							<li class="active" onclick="jump1();"><span class="pend">入驻服务预约</span></li>
+							<!-- <li onclick="jump2();"><span class="hospital">车位预约</span></li> -->
 						</ul>
 					</div>
 					
 					<div id="loadData"></div>
-				</div>		
+				</div>	
 </youi:body>
 <script type="text/javascript">
 	//众创空间预约
@@ -22,7 +22,7 @@ myReservation.jspmyReservation.jsp<%@ page language="java" pageEncoding="UTF-8"%
 	}
 	//入驻服务预约
 	function jump1(){
-    	$("#loadData").load(cenUrl+"member/memberCenter/personalCenter/policyApplySpEntrepreneurship.html");  
+    	$("#loadData").load(cenUrl+"member/memberCenter/personalCenter/myReservation_Entrec.html");  
 	}		
 	$(function () {
 		$(".order-nav li").click(function(){
@@ -48,10 +48,11 @@ myReservation.jspmyReservation.jsp<%@ page language="java" pageEncoding="UTF-8"%
 			}else if(getRequest()=="2"){
 				$(".order-nav li").eq(1).addClass("active").siblings().removeClass("active");
 				jump2();
-			}else{
+			}
+			 else{
 				$(".order-nav li").eq(0).addClass("active").siblings().removeClass("active");
 				jump0();
-			}
+			} 
 		});
 
 		 //点击跳转到政策申请页面
