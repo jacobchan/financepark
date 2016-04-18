@@ -95,16 +95,16 @@ var pageCount=1;
 			html += '	<td>'+ recordList[index].nmIssuenews.policyCaption+ '</td>'
 			html += '	<td>'+ recordList[index].policyApplyContactPeople+ '</td>'
 			html += '	<td>'+ recordList[index].createTime+ '</td>'
-			if(recordList[index].policyApplyStatus=="1"){
+			if(recordList[index].policyApplyStatus=="01"){
 				html += '	<td>未办理</td>'
 				html += '	<td><a href="javascript:cancel(\''+recordList[index].policyApplyId+'\');" class="ac-cancle">取消</a></td>'
-			}else if(recordList[index].policyApplyStatus=="2"){
+			}else if(recordList[index].policyApplyStatus=="02"){
 				html += '	<td>申请成功</td>'
 				html += '	<td></td>'
-			}else if(recordList[index].policyApplyStatus=="3"){
+			}else if(recordList[index].policyApplyStatus=="03"){
 				html += '	<td>申请失败</td>'
 				html += '	<td></td>'
-			}else if(recordList[index].policyApplyStatus=="4"){
+			}else if(recordList[index].policyApplyStatus=="04"){
 				html += '	<td>已取消</td>'
 				html += '	<td></td>'
 			}
