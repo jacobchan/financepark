@@ -151,26 +151,40 @@
 
     <script type="text/javascript">
 	  //toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
-	    var a,pltime,timer,timer2;;
-	    function closeTanc(){
-	    	  pltime--;
-	        if(pltime>1){
-	        	setTimeout("closeTanc()", 1000);
-	        }else{
-	            $(".toast").hide();
-	        }       
-	    }
 	    function jump1(i){
 	    	$("#ti-m1").text(i);
 	    	i = i - 1;
 			if(i>0){
-				setTimeout("jump1("+i+")", 1000);
+				setTimeout("jump1("+i+")", 2000);
 			}else{
 				window.location=cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
 			}		
 		}
 	    
         $(function(){
+        	//页面初始化加载公司名称
+        	$.getScript(cenUrl+'portal/userInfo.html',function(){
+				if($.youi.serverConfig.authorization){
+					$.youi.ajaxUtils.ajax({
+						url:baseUrl+'memberInformationManager/getMemberInformationByLoginUser.json',
+						jsonp : 'data:jsonp',
+						dataType : 'jsonp',
+						success:function(result){
+							if(result&&result.record){
+								if(null==result.record.companyId){
+									banStyle("入驻企业用户可预留车位！");
+								}else{
+									_parseRecords(result.record);
+								}
+							}
+						}
+						});
+				}else{
+					//登录失败
+					banStyle("请登录后，提交预约!");
+				}
+			})
+        	
             $(document).on("click",".ru-options li" ,function(){
                 $(this).addClass("active").siblings().removeClass("active");
             });
@@ -231,8 +245,7 @@
             	if (!isLogin) {
 					$("#msg").text("请登录后重试！");
 		            $(".toast").show();
-		            pltime=2;
-		            timer=setInterval("closeTanc()",1000)
+		            setTimeout('$(".toast").hide();',2000);
 					return;
 				} 
             	var cpEnName = $("#cpEnName").val();
@@ -244,47 +257,47 @@
             	if(cpEnName==''){
             		$("#msg").text("请填写企业名称");
 		            $(".toast").show();
-		            setTimeout('$(".toast").hide();',1000);
+		            setTimeout('$(".toast").hide();',2000);
 					return;
             	}else if(cpLinkMan==''){
             		$("#msg").text("请填写联系人");
 		            $(".toast").show();
-		            setTimeout('$(".toast").hide();',1000);
+		            setTimeout('$(".toast").hide();',2000);
 					return;
             	}else if(!isNum.test(cpCount)){
             		$("#msg").text("请填写车位数");
 		            $(".toast").show();
-		            setTimeout('$(".toast").hide();',1000);
+		            setTimeout('$(".toast").hide();',2000);
 					return;
             	}else if(cpEnAdr==''){
             		$("#msg").text("请填写公司地址");
 		            $(".toast").show();
-		            setTimeout('$(".toast").hide();',1000);
+		            setTimeout('$(".toast").hide();',2000);
 					return;
             	}else if(!isMobile.test(cpLinkTel)){
             		$("#msg").text("请填写正确联系方式");
 		            $(".toast").show();
-		            setTimeout('$(".toast").hide();',1000);
+		            setTimeout('$(".toast").hide();',2000);
 					return ;
 				}else if($("#startTime").val()==''){
             		$("#msg").text("请选择开始时间");
 		            $(".toast").show();
-		            setTimeout('$(".toast").hide();',1000);
+		            setTimeout('$(".toast").hide();',2000);
 					return;
             	}else if($("#cpBegionTime").find("li.selected").html()==undefined){
             		$("#msg").text("请选择开始时段");
 		            $(".toast").show();
-		            setTimeout('$(".toast").hide();',1000);
+		            setTimeout('$(".toast").hide();',2000);
 					return;
             	}else if($("#endTime").val()==''){
             		$("#msg").text("请选择结束时间");
 		            $(".toast").show();
-		            setTimeout('$(".toast").hide();',1000);
+		            setTimeout('$(".toast").hide();',2000);
 					return;
             	}else if($("#cpEntdTime").find("li.selected").html()==undefined){
             		$("#msg").text("请选择结束时段");
 		            $(".toast").show();
-		            setTimeout('$(".toast").hide();',1000);
+		            setTimeout('$(".toast").hide();',2000);
 					return;
             	}
             	
@@ -292,7 +305,7 @@
             	var cpBegionTime = $("#startTime").val()+" "+$("#cpBegionTime").find("li.selected").html();
             	//计算相时间（小时）
             	var regTime = /(\d{4})-(\d{1,2})-(\d{1,2})( \d{1,2}:\d{1,2})/g;
-            	var interval = Math.abs(Date.parse(cpBegionTime.replace(regTime, "$2-$3-$1$4")) - Date.parse(cpEntdTime.replace(regTime, "$2-$3-$1$4")))/1000;
+            	var interval = Math.abs(Date.parse(cpBegionTime.replace(regTime, "$2-$3-$1$4")) - Date.parse(cpEntdTime.replace(regTime, "$2-$3-$1$4")))/2000;
             	var h = Math.floor(interval / 3600);
             	//订单金额： 小时*车辆数*每小时单据（25）
             	var userorderAmount = h*cpCount*25;
@@ -309,13 +322,14 @@
 						$(".bg-tanc.m1").show();
 						jump1(3);
 						/* a=3;
-						timer2=setInterval("jump1()",1000); */
+						timer2=setInterval("jump1()",2000); */
 					},error:function(XMLHttpRequest, textStatus, errorThrown){
 						//alert(XMLHttpRequest);
 					}
             	});	
             });
         });
+        
         //获得公司名字
         function _parseRecords(record){
 			var rzId=record.companyId;
@@ -335,31 +349,14 @@
 			}
 		  	});	
 		};
-		$(function(){
-			$.getScript(cenUrl+'portal/userInfo.html',function(){
-				if($.youi.serverConfig.authorization){
-					//登录成功
-					
-				}
-				else{
-					//登录失败
-				}
-			})
-		})
 		
-		/* window.onload=function(){
-			// 获取登录信息
- 	   		$.youi.ajaxUtils.ajax({
-			url:baseUrl+'memberInformationManager/getMemberInformationByLoginUser.json',
-			jsonp : 'data:jsonp',
-			dataType : 'jsonp',
-			success:function(result){
-				if(result&&result.record){
-					_parseRecords(result.record);
-				}
-			}
-			});
-		} */
+		//禁用样式
+		function banStyle(msg){
+			$("#submsg").show();
+			$("#submsg").html(msg);
+			$("#sub").attr("disabled","disabled");
+			$("#sub").attr("style","background: #BEBEBE;width:120px;height:40px;")
+		}
 		
     </script>
     
@@ -388,7 +385,7 @@
 				<a style="cursor:pointer;" onclick="jumpPerson();"  class="c-6"><i class="fa fa-user mr10" style="font-size:20px;"></i>个人中心</a>
 			</div>
 		</div>
-	</div>
-</div>
+		</div>
+	 </div>
 </body>
 </html>
