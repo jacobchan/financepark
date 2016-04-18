@@ -88,7 +88,7 @@ function _parseRecords(records){
 	}
 }
 function findEnterpriseTree(pId){
-	$("#enterpriseTypeDiv").empty();
+	
 	$.youi.ajaxUtils.ajax({
 		url : baseUrl+'/etypeEnterprisetypeManager/findEnterpriseTypeTree.json',
 		data : ['pId='+pId].join('&'),
@@ -228,6 +228,7 @@ $(function() {
 		dataType : 'jsonp',
 		async : false,
 		success:function(result){
+			$("#enterpriseTypeDiv").empty();
 			var record = result.records;
 			for(var i=0; i<record.length; i++){
 				findEnterpriseTree(record[i].enTypeId);
