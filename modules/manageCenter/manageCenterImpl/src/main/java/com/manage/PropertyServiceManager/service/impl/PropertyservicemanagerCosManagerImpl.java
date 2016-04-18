@@ -242,4 +242,22 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
 	    	savePropertyservicemanagerCos.setBacktime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 	    	return propertyservicemanagerCosDao.save(savePropertyservicemanagerCos);
 	    }
+	    /**
+		 * 根据当前用户分页查询  根据订单号模糊查询
+		 */
+	    @EsbServiceMapping(pubConditions={@PubCondition(property="memberInformation.memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	   
+		public PagerRecords getPagerLikeCos(Pager pager,//分页条件
+				@ConditionCollection(domainClazz=PropertyservicemanagerCos.class) Collection<Condition> conditions,//查询条件
+				@OrderCollection Collection<Order> orders,
+				@ServiceParam(name="startTime") String startTime,
+				@ServiceParam(name="endTime") String endTime,
+				@ServiceParam(name="coslikeCode") String coslikeCode)
+				throws BusException {  
+	    	conditions.add(ConditionUtils.getCondition("cosCode", Condition.LIKE, coslikeCode));
+	        //conditions.add(ConditionUtils.getCondition("cosCode", Condition.EQUALS, cosCode));
+	    	conditions.add(ConditionUtils.getCondition("cosTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+	    	PagerRecords pagerRecords = propertyservicemanagerCosDao.findByPager(pager, conditions, orders);  	
+	    	return pagerRecords;
+		}
 }
