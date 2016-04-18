@@ -683,4 +683,4 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
   }
 
     
-}
+
