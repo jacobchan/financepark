@@ -9,7 +9,7 @@
 							<label class="fl mr20 f16">申请时间：</label>
 							<input class="bd-input fl" type="text" id="startTime"><span class="fl ml15 mr15">到</span>
 							<input class="bd-input fl" type="text" id="endTime">
-							<div class="inp-box ml20"><input placeholder="订单号查询" type="text" id="cosCode"><a class="fa fa-search" href=""></a></div>
+							<div class="inp-box ml20"><input placeholder="投诉单号查询" type="text" id="cosCode"><a class="fa fa-search" href=""></a></div>
 							<input value="搜索" class="hhf-submit" type="button">
 						</div>
 						
@@ -25,7 +25,7 @@
 							</colgroup>
 							<tbody id="czh-knowledge">
 								<tr>
-									<th>订单号</th>
+									<th>投诉单号</th>
 									<th>申请时间</th>
 									<th>是否回访</th>
 									<th>联系人</th>
