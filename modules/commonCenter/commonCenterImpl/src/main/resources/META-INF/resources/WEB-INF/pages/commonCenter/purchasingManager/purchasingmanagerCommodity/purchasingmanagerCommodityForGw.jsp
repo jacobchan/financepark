@@ -18,6 +18,7 @@
 		
 		<youi:gridCol property="commodityTitle"  caption="标题" align="center" width="20%"/>
 		<%-- <youi:gridCol property="purchasingmanagerMerchant.merchantName"  caption="商户名称" align="center" width="9%"/> --%>
+		<youi:gridCol property="purchasingmanagerGenre.genreName"  caption="商品类别" align="center" width="20%"/>
 		<youi:gridCol property="commodityPrice"  caption="标价" align="center" width="10%"/>
 		<%-- <youi:gridCol property="commodityStock"  caption="库存" align="center" width="8%"/> --%>
 		<youi:gridCol property="commodityDescribe"  caption="描述" align="center" width="30%"/>
@@ -37,7 +38,7 @@
 		   <youi:fieldHidden property="genreCode"  caption="工位" defaultValue="040101"/>
 			<youi:fieldText property="commodityTitle"  caption="标题" notNull="true"/>
 			<youi:fieldText property="commodityPrice"  caption="标价" notNull="true"/>
-			<youi:fieldSelect property="genreId" caption="商品类别"  src="esb/web/purchasingmanagerPublicManager/getRecordsByGenreCode.json" parents="genreCode" parentsAlias="genreCode" notNull="true" code="genreId" show="genreName"/>
+			<%-- <youi:fieldSelect property="genreId" caption="商品类别"  src="esb/web/purchasingmanagerPublicManager/getRecordsByGenreCode.json" parents="genreCode" parentsAlias="genreCode" notNull="true" code="genreId" show="genreName"/> --%>
 		   <youi:fieldSelect property="gw.commodityId" show="itemName" code="itemValue"
 				src="esb/web/reservationRecordManager/getRecordsByRecordType.json" notNull="true" caption="所属创立方"/>
 		<%-- 	<youi:fieldSelect property="purchasingmanagerMerchant.merchantId" show="merchantName" code="merchantId"

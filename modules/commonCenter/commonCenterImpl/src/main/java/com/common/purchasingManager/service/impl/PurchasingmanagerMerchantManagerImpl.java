@@ -191,8 +191,20 @@ public class PurchasingmanagerMerchantManagerImpl extends BaseManagerImpl implem
      */
     @Override
     @EsbServiceMapping
-	public List<PurchasingmanagerMerchant> getMerchantsByGenre(@ServiceParam(name="genreId") String genreId)  throws BusException{
-    	PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(genreId);
+	public List<PurchasingmanagerMerchant> getMerchantsByGenre(@ServiceParam(name="genreId") String genreId,@ServiceParam(name="genreCode") String genreCode)  throws BusException{
+    	PurchasingmanagerGenre pg =new PurchasingmanagerGenre();
+    	if(genreId!=null){
+    		pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(genreId);
+    	}else{
+    		if(genreCode !=null){
+    			Collection<Condition> conditions = new ArrayList<Condition>();
+    			conditions.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS, genreCode));
+    			// 根据genreCode查询属于商品
+    			List<PurchasingmanagerGenre> purchasingmanagerGenreList=purchasingmanagerGenreManager.getPurchasingmanagerGenres(conditions, null);
+    			pg=purchasingmanagerGenreList.size()>0?purchasingmanagerGenreList.get(0):null;
+    		}
+    	}
+    	
     	while(pg.getGenreCode() == null){//获取有编码的商品类别
 			pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(pg.getPagrenId());
 		}
