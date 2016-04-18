@@ -32,16 +32,7 @@
 							
 							
 						</tbody></table>
-						<div class="fr page-list-a clearfix lh30 mt20 f12">
-							<span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
-							<a href="">首</a>
-							<a href=""><i class="fa fa-angle-left"></i></a>
-							<a>1</a>
-							<a href=""><i class="fa fa-angle-right"></i></a>
-							<a href="">末</a>
-							<input class="bd-input fl ml10 mr10" style="width:40px;" type="text">
-							<a href="">Go</a>
-						</div>
+						<div class="tcdPageCode fr"></div>
 					</div>
 				</div>	
 	<!--***弹窗 start****************************************-->
@@ -157,16 +148,7 @@
 				}
 			}
 		});
-	/* 	$.ajax({
-			url:baseUrl+'propertyservicemanagerChargeManager/getChargeListforpage.json', 
-			success:function(result){
-				console.log(result);
-				if(result&&result.records){
-					_parseRecords(result.records);
-				}
-			}
-		});
- */	});
+	});
 	
 	//拼接列表
 	function _parseRecords(record){
@@ -196,26 +178,48 @@
 		var me=obj.parentNode.parentNode;
 		alert(me.id+"          付款功能后续添加！");
 	}
-	//根据订单号查询
+	//根据订单号查询 模糊查询
 	$('.hhf-submit').click(function(){	
-		
-		$(".aaa").empty();
-		 var userorderCode=$("#userorderCode").val(); 
-		 var startTime=$("#startTime").val(); 
-		 var endTime=$("#endTime").val(); 
-		 params=['userorderCode='+userorderCode+'','startTime='+startTime+'','endTime='+endTime+''];
-	      $.ajax({
-	    	 url:baseUrl+'propertyservicemanagerChargeManager/getChargelistLikeUserorderCode.json',
-	    	 data:params.join('&'),
-	    	 success:function(result){		
-	    		 
-					console.log(result.records);           
-					if(result&&result.records){						
-						_parseRecords(result.records);							
+		var userorderCode=$("#userorderCode").val();
+		//alert(ocCode);
+		var startTime=$("#startTime").val(); 
+		var endTime=$("#endTime").val(); 			
+		var params = ['LikeuserorderCode='+userorderCode,'startTime='+startTime,'endTime='+endTime];
+		$.ajax({
+			url:baseUrl+'propertyservicemanagerBxManager/getPagerLikeBx.json',
+			data:params.join('&'),
+			success:function(results){	
+				pageCount=Math.ceil(results.totalCount/pageSize);//页数				
+				//alert(pageCount);
+				 refreshData_query(1,pageSize);
+					$(".tcdPageCode").createPage({
+					    pageCount:pageCount,
+					    current:1,
+					    backFn:function(p){
+					    	currentIndex = p;
+					       this.pageCount=pageCount;
+					       refreshData_query(p,pageSize);
+					    }
+					});			
+              }
+        }); 			
+    });	
+		//根据订单号查询 分页列表
+		function refreshData_query(pageIndex,pageSize){
+			var userorderCode=$("#userorderCode").val();
+			 var startTime=$("#startTime").val(); 
+			 var endTime=$("#endTime").val(); 
+			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'LikeuserorderCode='+userorderCode,'startTime='+startTime,'endTime='+endTime];
+			$.ajax({
+				url:baseUrl+'propertyservicemanagerBxManager/getPagerLikeBx.json',
+				data:params.join('&'),
+				success:function(results){
+					if(results&&results.records){
+						 _parseRecords(results.records);
 					}
 				}
-		}); 
-	}); 
+			});
+		}
 	$(function(){
 		laydate({
 		    elem: '#startTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
