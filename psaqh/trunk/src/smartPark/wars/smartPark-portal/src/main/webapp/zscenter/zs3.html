@@ -146,12 +146,12 @@
 					</tr>
 				</table>
 			</form>
-			
+			<div class="error-toast">
+				<p></p>
+			</div>
 		</div>
 		<!-- 弹出表单的错误提示弹窗 -->
-		<div class="error-toast">
-				<p></p>
-		</div>
+		
 	</div>
 	<!--***弹窗 end****************************************-->
 	<script type="text/javascript">
@@ -205,8 +205,11 @@
 									$("#policyApplyContactTel").val("");
 									$(".bg-tanc.m1").hide();//隐藏表单
 									$("#loading").addClass("undis") ;
+									//弹出弹框，指定时间跳转，取消则不跳转
 									$(".bg-tanc.m2").show() ;
-									countdown(3);
+									$('#ti-m1').text('5');
+									a=5;
+									timer=setInterval("jump1()",1000);
 								}else{
 									close("未知错误，申请失败！");
 								}
@@ -337,7 +340,7 @@
 				} 
 			});
 			$(".tc-close").click(function(){
-				$(".bg-tanc.m1").hide();
+				clearInterval(timer);
 			});
 		})
 		
@@ -397,7 +400,7 @@
 	<!--*******************企业会员申请成功弹窗 End************************-->
 	<!--*******************企业会员申请成功弹窗 跳转Start************************-->
 	<script type="text/javascript">
-		//定时跳转
+		/* //定时跳转
 		function countdown(i){
 		 	$("#ti-m1").text(i);
 		     i = i - 1;
@@ -406,7 +409,16 @@
 		     }else{
 		     	jump();
 		     }
-		 }
+		 } */
+		var a;
+		function jump1(){
+			if(a>1){
+				a--;
+				$("#ti-m1").text(a);
+			}else{
+				jump();
+			}		
+		}
 		//跳转我的政策
 		 function jump(){
 		 	window.location.href=cenUrl+"member/memberCenter/personalCenter/policyApply.html";
