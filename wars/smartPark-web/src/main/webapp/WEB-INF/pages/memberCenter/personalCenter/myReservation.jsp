@@ -22,7 +22,7 @@ myReservation.jspmyReservation.jsp<%@ page language="java" pageEncoding="UTF-8"%
 	}
 	//入驻服务预约
 	function jump1(){
-    	$("#loadData").load(cenUrl+"member/memberCenter/personalCenter/myReservation_Entrec.html");  
+    	$("#loadData").load(cenUrl+"member/memberCenter/personalCenter/myReservationEntrec.html");  
 	}		
 	$(function () {
 		$(".order-nav li").click(function(){
