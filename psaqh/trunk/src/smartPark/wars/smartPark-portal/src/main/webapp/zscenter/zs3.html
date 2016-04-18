@@ -68,7 +68,7 @@
 			<div class="fr w285"><div id="youi_page_right" class="youi-page-right clearfix"></div></div>
 		</div>
 	</div>
-	<!--这里自己调用 页面加载动态效果-->	
+	<!--*******************页面加载动态效果 Start************************-->
 	 <div class="clearfix undis" id="loading">
 		<div id="contain">
 		    <div class='wrap' id='wrap1'>
@@ -87,7 +87,8 @@
 		    	<div class='part' id='part4'></div>
 		    </div>
 		</div>
-	</div>				
+	</div>
+	<!--*******************页面加载动态效果 End************************-->				
 	<!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
@@ -95,7 +96,7 @@
 	<style>
 		.line-table input[type="text"]{width:100% !important;}
 	</style>
-	<div class="bg-tanc">
+	<div class="bg-tanc m1">
 		<div class="tanc-con" style="margin-top:-252px;top:50%;width:420px;padding:40px;">
 			<a href="javascript:;" class="tc-close"></a>
 			<form>
@@ -147,6 +148,10 @@
 			</form>
 			
 		</div>
+		<!-- 弹出表单的错误提示弹窗 -->
+		<div class="error-toast">
+				<p></p>
+		</div>
 	</div>
 	<!--***弹窗 end****************************************-->
 	<script type="text/javascript">
@@ -164,20 +169,20 @@
 						var policyApplyContactPeople = $("#policyApplyContactPeople").val();
 						var policyApplyContactTel = $("#policyApplyContactTel").val() ;
 						if(policyApplyConpanyName == ""){
-							close("请输入公司名称！");
+							showMessage("请输入公司名称！");
 							return ;
 						}
 						if(policyApplyContactPeople == ""){
-							close("请输入联系人！");
+							showMessage("请输入联系人！");
 							return ;
 						}
 						if(policyApplyContactTel == ""){
-							close("请输入联系手机！");
+							showMessage("请输入联系手机！");
 							return ;
 						}
 						var isMobile=/^(?:13\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;//手机号的格式
 						if(! isMobile.test(policyApplyContactTel)){
-							close("请输入正确的手机号！");
+							showMessage("请输入正确的手机号！");
 							return ;
 						}  
 						$("#loading").removeClass("undis") ;//页面加载显示动态效果
@@ -193,12 +198,18 @@
 							jsonp:'data:jsonp',
 							dataType:'jsonp',
 							success:function(results){
-								$("#policyApplyConpanyName").val("");//将输入框内容置为空
-								$("#policyApplyContactPeople").val("");
-								$("#policyApplyContactTel").val("");
-								$(".bg-tanc").hide();//隐藏表单
-								$("#loading").addClass("undis") ;
-								close("申请成功！");
+								console.log(results) ;
+								if(results.record){
+									$("#policyApplyConpanyName").val("");//将输入框内容置为空
+									$("#policyApplyContactPeople").val("");
+									$("#policyApplyContactTel").val("");
+									$(".bg-tanc.m1").hide();//隐藏表单
+									$("#loading").addClass("undis") ;
+									$(".bg-tanc.m2").show() ;
+									countdown(3);
+								}else{
+									close("未知错误，申请失败！");
+								}
 							}
 						});
 					}
@@ -294,12 +305,12 @@
 			$(document).on("click",".ib-1",function(){
 				
 				obj = $(this).parent().parent().attr("id") ;
-				$(".bg-tanc").find("form").attr("class",obj);
+				$(".bg-tanc.m1").find("form").attr("class",obj);
 				if(!isLogin){
 					close("匿名用户不能申请！");
 					return ;
 				}else{
-					$(".bg-tanc").hide() ;//隐藏表单div
+					$(".bg-tanc.m1").hide() ;//隐藏表单div
 					$("#loading").removeClass("undis") ;//页面加载显示动态效果
 					$.youi.ajaxUtils.ajax({
 						url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
@@ -315,7 +326,7 @@
 								$("#policyApplyContactPeople").val(name);
 								$("#policyApplyContactTel").val(mobile) ;
 								$("#loading").addClass("undis") ;//页面加载隐藏动态效果
-								$(".bg-tanc").show();
+								$(".bg-tanc.m1").show();
 							}else{
 								$("#loading").addClass("undis") ;//页面加载隐藏动态效果
 								close("非企业会员不能申请哦！");
@@ -326,10 +337,11 @@
 				} 
 			});
 			$(".tc-close").click(function(){
-				$(".bg-tanc").hide();
+				$(".bg-tanc.m1").hide();
 			});
 		})
 		
+		<!--*******************非登录状态和非企业会员下的验证弹窗 Start************************-->
 	 	var pltime,timer;
         function closeTanc(){
             if(pltime>1){
@@ -346,6 +358,13 @@
 	        pltime=1;
 	        timer=setInterval("closeTanc()",1000);
         }
+     <!--*******************非登录状态和非企业会员下的验证弹窗 End************************-->
+      //显示信息
+     function showMessage(message){
+      	$(".error-toast").animate({top:"20px",opacity:"1"});
+      	$(".error-toast p").html(message);
+  		setTimeout(function(){$(".error-toast").animate({top:"-40px",opacity:"0"})},2000);
+      }
 	</script>
 	<!--***弹窗 start****************************************-->
 	<!-- 弹出层样式 -->
@@ -356,5 +375,50 @@
         </div>
     </div>
 	<!--***弹窗 end****************************************-->
-	
+	<!--*******************企业会员申请成功弹窗 Start************************-->
+	<div class="bg-tanc m2">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="tc mt40">
+				<div class="mt20 mb20 f16 lh26">
+					<img src="../styles/images/yqfw/correct.png" border="0" class="mr20"/>
+				</div>
+				<p class="mb10 f16">您已经申请成功，请到会员中心查看。</p>
+				<p><span class="c-o f24 tc-time" id="ti-m1">3 </span>秒后，系统将自动跳转</p>
+				<p class="mt10"><a style="cursor:pointer;" onclick="jump();" class="c-6">手动跳转 ></a></p>
+				<div class="clearfix mt30">
+					<a style="cursor:pointer;" onclick="jumpIndex();"  class="c-6"><i class="fa fa-home mr10" style="font-size:24px;"></i>返回首页</a>
+					<span class="f14 ml20 mr20 c-6">|</span>
+					<a style="cursor:pointer;" onclick="jumpPerson();"  class="c-6"><i class="fa fa-user mr10" style="font-size:20px;"></i>个人中心</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--*******************企业会员申请成功弹窗 End************************-->
+	<!--*******************企业会员申请成功弹窗 跳转Start************************-->
+	<script type="text/javascript">
+		//定时跳转
+		function countdown(i){
+		 	$("#ti-m1").text(i);
+		     i = i - 1;
+		     if(i > 0) {
+		         setTimeout("countdown("+i+")", 1000);
+		     }else{
+		     	jump();
+		     }
+		 }
+		//跳转我的政策
+		 function jump(){
+		 	window.location.href=cenUrl+"member/memberCenter/personalCenter/policyApply.html";
+		 }
+		 //跳转个人中心
+		 function jumpPerson(){
+		 	window.location.href=cenUrl+"member/memberCenter/personalCenter/personInfo.html";
+		 }
+		 //跳转首页
+		 function jumpIndex(){
+		 	window.location.href=cenUrl;
+		 }
+	</script>
+	<!--*******************企业会员申请成功弹窗 跳转End************************-->
 </html>
