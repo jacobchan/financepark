@@ -259,7 +259,7 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 	 * @param ReservationRecord
 	 */
     @EsbServiceMapping
-	 public void cancelReservation(ReservationRecord o) throws BusException{
+	 public ReservationRecord cancelReservation(ReservationRecord o) throws BusException{
     	ReservationRecord p=new ReservationRecord();
 		String recordId=o.getRecordId();
 		if(StringUtils.isNotEmpty(recordId)){
@@ -267,7 +267,8 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 		}
 		p.setRecordStatus("04");//已取消
 		p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-		reservationRecordDao.save(p);
+		return reservationRecordDao.save(p);
+		
     }
     
     /**
@@ -281,9 +282,6 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
     	//获取当前用户预约
     	conditions.add(ConditionUtils.getCondition("createUser", Condition.EQUALS, userId));
     	PagerRecords pagerRecords = reservationRecordDao.findByPager(pager, conditions, orders);
-//    	List<ReservationRecord> list =reservationRecordDao.commonQuery(condition, null);
 		return pagerRecords;
-	}
-    
-
+	} 
 }
