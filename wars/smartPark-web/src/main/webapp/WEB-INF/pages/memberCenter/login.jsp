@@ -41,7 +41,8 @@
 		                    </div>
 					        <div class="mt10 clearfix">
 			                	<label class="fl ml20" style="cursor:pointer"><input type="checkbox" class="vm mr10">&nbsp;<span class="vm">记住密码</span></label>
-			                	<div class="fr"><a href="javascript:;" class="c3 mr20" onclick="openUrl();">忘记密码？</a></div>
+			                	<div class="fr"><a href="<%=request.getContextPath()%>/findpsw.html" 
+			                		class="c3 mr20" >忘记密码？</a></div>
 			                </div>
 			              	 <div class="mt10 clearfix" style="text-align: center;">
 			                    <youi:out value="${error}"/>
@@ -274,8 +275,8 @@ function registClick(){
 			}); 
 		});
 		function openUrl(){
-			var url=proUrl+"findpsw.html"; 
-			window.location.assign(url); 
+			var url=cenUrl+"member/memberCenter/findpsw.html"; 
+			window.location=url; 
 		};
 </script>
 <script type="text/javascript">
