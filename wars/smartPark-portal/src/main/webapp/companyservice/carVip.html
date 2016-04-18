@@ -335,9 +335,19 @@
 			}
 		  	});	
 		};
+		$(function(){
+			$.getScript(cenUrl+'portal/userInfo.html',function(){
+				if($.youi.serverConfig.authorization){
+					//登录成功
+					
+				}
+				else{
+					//登录失败
+				}
+			})
+		})
 		
-		
-		window.onload=function(){
+		/* window.onload=function(){
 			// 获取登录信息
  	   		$.youi.ajaxUtils.ajax({
 			url:baseUrl+'memberInformationManager/getMemberInformationByLoginUser.json',
@@ -349,7 +359,7 @@
 				}
 			}
 			});
-		}
+		} */
 		
     </script>
     
