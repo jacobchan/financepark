@@ -8,7 +8,7 @@
 				src="esb/web/propertyservicemanagerCosManager/getPagerPropertyservicemanagerCoss.json"
 				dataFormId="form_propertyservicemanagerCos"
 				editSrc="esb/web/propertyservicemanagerCosManager/getPropertyservicemanagerCos.json"
-				edit="NOT" remove="NOT" height="436"
+				add="NOT" edit="NOT" remove="NOT" height="436"
 				removeSrc="esb/web/propertyservicemanagerCosManager/removePropertyservicemanagerCos.json">
 				<youi:fieldLayout labelWidths="120,120">
 					<youi:fieldText property="cosCode" caption="投诉单号" />
@@ -29,7 +29,7 @@
 				<%-- <youi:button name="govisit" caption="回访" icon="save" active="1" />
 				<youi:button name="evaluate" caption="评价" icon="edit" active="1" /> --%>
 				<youi:gridCol property="cosCode" caption="投诉单号" width="15%" />
-				<youi:gridCol property="backcode" caption="回访单号" width="15%" />
+ 				<%--<youi:gridCol property="backcode" caption="回访单号" width="15%" /> --%>
 				<youi:gridCol property="cosContent" caption="投诉内容" width="14%" />
 				<youi:gridCol property="cosBool" caption="是否接受回访" convert="isAbleVisible" width="8%"/>
 				<youi:gridCol property="backrecord" caption="回访内容" width="14%" />
@@ -37,6 +37,7 @@
 				<youi:gridCol property="cosStatus" caption="投诉状态" convert="acceptanceStatus" width="7%" />
 				<youi:gridCol property="cosTime" caption="投诉时间" width="9%" />
 				<youi:gridCol property="backtime" caption="回访时间" width="9%" />
+				<youi:gridCol property="backRemark" caption="拒绝理由" width="15%" />
 				<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 					<youi:button name="edit" caption="修改" />
 					<youi:button name="remove" caption="删除" />
