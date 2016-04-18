@@ -96,7 +96,7 @@ public interface PropertyservicemanagerCosManager extends BaseManager{
 	 * @param conditions 查询条件
 	 * @return 分页对象
 	 */
-	public PagerRecords getPagerFkcodes(Pager pager,Collection<Condition> conditions,Collection<Order> orders) throws BusException;
+	public PagerRecords getPagerCos(Pager pager,Collection<Condition> conditions,Collection<Order> orders) throws BusException;
 	
 	/**
      * 受理保存对象
@@ -109,4 +109,12 @@ public interface PropertyservicemanagerCosManager extends BaseManager{
      * 修改投诉状态标识，添加拒绝原因记录
      */
     public PropertyservicemanagerCos rejectPropertyservicemanagerCos(PropertyservicemanagerCos o) throws BusException;
+    /**
+	 * 根据当前用户分页查询  根据订单号
+	 * @return 分页对象
+	 */
+	public PagerRecords getPagerLikeCos(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders,				
+			String startTime,String endTime,String coslikeCode) throws BusException;
 }
