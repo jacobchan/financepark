@@ -297,5 +297,36 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
 		}
     	return pagerRecords;
 	}
+    /**
+	 * 根据当前用户分页查询
+	 * @return 分页对象
+	 */
+    
+    @EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	public PagerRecords getPagerLikeFk(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PropertyservicemanagerFkcode.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders,
+			@ServiceParam(name="fkLikeCode") String fkLikeCode,
+			@ServiceParam(name="startTime") String startTime,
+			@ServiceParam(name="endTime") String endTime)
+			throws BusException {
+    	conditions.add(ConditionUtils.getCondition("fkCode", Condition.LIKE, fkLikeCode));	
+		conditions.add(ConditionUtils.getCondition("fkcodeTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+    	PagerRecords pagerRecords = propertyservicemanagerFkcodeDao.findByPager(pager, conditions, orders); 
+    	@SuppressWarnings("unchecked")
+		List<PropertyservicemanagerFkcode> list = pagerRecords.getRecords();
+    	for(PropertyservicemanagerFkcode fk : list){
+			if(StringUtils.isNotEmpty(fk.getFkcodeId())){
+				String fkcode = fk.getFkcodeId();
+				Collection<Condition> condition = new ArrayList<Condition>();
+				condition.add(ConditionUtils.getCondition("propertyservicemanagerFkcode.fkcodeId", Condition.EQUALS,fkcode));
+				List<PropertyservicemanagerTwcrd> twcrd = propertyservicemanagerTwcrdManager.getPropertyservicemanagerTwcrds(condition, null) ;//通过访客申请对象得到对应的二维码对象
+				fk.setDksataus(twcrd.get(0).getStatus());
+													
+			}
+		}
+    	return pagerRecords;
+	}
+    
     
 }
