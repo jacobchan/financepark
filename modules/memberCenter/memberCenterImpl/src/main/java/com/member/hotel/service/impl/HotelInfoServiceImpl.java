@@ -23,7 +23,7 @@ import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.framework.esb.annotation.ConditionCollection;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.ServiceParam;
-import com.gsoft.utils.HotelUtil;
+import com.gsoft.utils.HttpGetAndPostUtil;
 import com.member.hotel.entity.HotelConditions;
 import com.member.hotel.entity.HotelOrder;
 import com.member.hotel.service.HotelInfoService;
@@ -66,7 +66,7 @@ public class HotelInfoServiceImpl extends BaseManagerImpl implements HotelInfoSe
 	    params.put("is_kezhan", is_kezhan);
 	    try
 	    {
-		      result = HotelUtil.net(HotelUtil.url1, params, "GET");
+		      result = HttpGetAndPostUtil.net(HttpGetAndPostUtil.url1, params, "GET");
 		      ObjectMapper objectMapper = new ObjectMapper();
 		      JsonNode resultJson = objectMapper.readTree(result);
 		      JsonNode reqHeader = resultJson.get("retHeader");
@@ -137,15 +137,9 @@ public class HotelInfoServiceImpl extends BaseManagerImpl implements HotelInfoSe
 			System.out.println("获取HotelConditions实体类属性 异常:" + e);
 		    e.printStackTrace();
 		}
-	    /*
-	    if (!"".equals(conditions.getCid()) && conditions.getCid()!=null) {
-	    	params.put("cid", conditions.getCid());
-		}else{
-			return null;
-		}*/
 	    try
 	    {
-	      result = HotelUtil.net(HotelUtil.url1, params, "GET");
+	      result = HttpGetAndPostUtil.net(HttpGetAndPostUtil.url1, params, "GET");
 	      ObjectMapper objectMapper = new ObjectMapper();
 	      JsonNode resultJson = objectMapper.readTree(result);
 	      JsonNode reqHeader = resultJson.get("retHeader");
@@ -197,7 +191,7 @@ public class HotelInfoServiceImpl extends BaseManagerImpl implements HotelInfoSe
 	    params.put("cid", cid);
 	    try
 	    {
-	      result = HotelUtil.net(HotelUtil.url1, params, "GET");
+	      result = HttpGetAndPostUtil.net(HttpGetAndPostUtil.url1, params, "GET");
 	      ObjectMapper objectMapper = new ObjectMapper();
 	      JsonNode resultJson = objectMapper.readTree(result);
 	      JsonNode reqHeader = resultJson.get("retHeader");
@@ -245,7 +239,7 @@ public class HotelInfoServiceImpl extends BaseManagerImpl implements HotelInfoSe
 	    params.put("hid", hid);
 	    try
 	    {
-	      result = HotelUtil.net(HotelUtil.url1, params, "GET");
+	      result = HttpGetAndPostUtil.net(HttpGetAndPostUtil.url1, params, "GET");
 	      ObjectMapper objectMapper = new ObjectMapper();
 	      JsonNode resultJson = objectMapper.readTree(result);
 	      JsonNode reqHeader = resultJson.get("retHeader");
@@ -294,7 +288,7 @@ public class HotelInfoServiceImpl extends BaseManagerImpl implements HotelInfoSe
 	    params.put("page", page);
 	    try
 	    {
-	      result = HotelUtil.net(HotelUtil.url1, params, "GET");
+	      result = HttpGetAndPostUtil.net(HttpGetAndPostUtil.url1, params, "GET");
 	      ObjectMapper objectMapper = new ObjectMapper();
 	      JsonNode resultJson = objectMapper.readTree(result);
 	      JsonNode reqHeader = resultJson.get("retHeader");
@@ -327,7 +321,7 @@ public class HotelInfoServiceImpl extends BaseManagerImpl implements HotelInfoSe
 		}
 	    try
 	    {
-	      result = HotelUtil.net(HotelUtil.url1, params, "GET");
+	      result = HttpGetAndPostUtil.net(HttpGetAndPostUtil.url1, params, "GET");
 	      ObjectMapper objectMapper = new ObjectMapper();
 	      JsonNode resultJson = objectMapper.readTree(result);
 	      JsonNode reqHeader = resultJson.get("retHeader");
@@ -356,7 +350,7 @@ public class HotelInfoServiceImpl extends BaseManagerImpl implements HotelInfoSe
 	    params.put("hid", hid);
 	    try
 	    {
-	      result = HotelUtil.net(HotelUtil.url1, params, "GET");
+	      result = HttpGetAndPostUtil.net(HttpGetAndPostUtil.url1, params, "GET");
 	      ObjectMapper objectMapper = new ObjectMapper();
 	      JsonNode resultJson = objectMapper.readTree(result);
 	      JsonNode reqHeader = resultJson.get("retHeader");
@@ -395,7 +389,7 @@ public class HotelInfoServiceImpl extends BaseManagerImpl implements HotelInfoSe
 		}
 	    try
 	    {
-	      result = HotelUtil.net(HotelUtil.url3, params, "GET");//该接口返回的数据是多组酒店数据，hid允许多个
+	      result = HttpGetAndPostUtil.net(HttpGetAndPostUtil.url3, params, "GET");//该接口返回的数据是多组酒店数据，hid允许多个
 	      ObjectMapper objectMapper = new ObjectMapper();
 	      JsonNode resultJsonList = objectMapper.readTree(result);
 	      JsonNode resultJson = resultJsonList.elements().next();//此处我们只取一个hid，即只取一组酒店房型数据

@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
-import com.gsoft.utils.HotelUtil;
+import com.gsoft.utils.HttpGetAndPostUtil;
 import com.member.hotel.service.HotelBasicsService;
 
 @Service("hotelBasicsService")
@@ -34,7 +34,7 @@ public class HotelBasicsServiceImpl extends BaseManagerImpl implements HotelBasi
 	    params.put("agent_id", agent_id);
 	    params.put("agent_md", agent_md);
 	    try {
-	        result = HotelUtil.net(HotelUtil.url1, params, "GET");
+	        result = HttpGetAndPostUtil.net(HttpGetAndPostUtil.url1, params, "GET");
 	        ObjectMapper objectMapper = new ObjectMapper();
 	        JsonNode resultJson = objectMapper.readTree(result);
 	        JsonNode list = resultJson.get("reqdata");
@@ -62,7 +62,7 @@ public class HotelBasicsServiceImpl extends BaseManagerImpl implements HotelBasi
 	    params.put("agent_md", agent_md);
 	    params.put("px", px);
 	    try {
-	        result = HotelUtil.net(HotelUtil.url1, params, "GET");
+	        result = HttpGetAndPostUtil.net(HttpGetAndPostUtil.url1, params, "GET");
 	        ObjectMapper objectMapper = new ObjectMapper();
 	        JsonNode resultJson = objectMapper.readTree(result);
 	        JsonNode list = resultJson.get("reqdata");
@@ -90,7 +90,7 @@ public class HotelBasicsServiceImpl extends BaseManagerImpl implements HotelBasi
 	    params.put("agent_md",agent_md);
 	    params.put("cityid",cityId);
 	    try {
-	        result = HotelUtil.net(HotelUtil.url1, params, "GET");
+	        result = HttpGetAndPostUtil.net(HttpGetAndPostUtil.url1, params, "GET");
 	        ObjectMapper objectMapper = new ObjectMapper();
 	        JsonNode resultJson = objectMapper.readTree(result);
 	        JsonNode list = resultJson.get("reqdata");
@@ -117,7 +117,7 @@ public class HotelBasicsServiceImpl extends BaseManagerImpl implements HotelBasi
 	    params.put("agent_md", agent_md);
 	    params.put("cityid",cityId);
 	    try {
-	        result = HotelUtil.net(HotelUtil.url1, params, "GET");
+	        result = HttpGetAndPostUtil.net(HttpGetAndPostUtil.url1, params, "GET");
 	        ObjectMapper objectMapper = new ObjectMapper();
 	        JsonNode resultJson = objectMapper.readTree(result);
 	        JsonNode list = resultJson.get("reqdata");
@@ -147,7 +147,7 @@ public class HotelBasicsServiceImpl extends BaseManagerImpl implements HotelBasi
 	    params.put("lat",lat);
 	    params.put("nums","10");
 	    try {
-	      result = HotelUtil.net(HotelUtil.url1, params, "GET");
+	      result = HttpGetAndPostUtil.net(HttpGetAndPostUtil.url1, params, "GET");
 	      ObjectMapper objectMapper = new ObjectMapper();
 	      JsonNode resultJson = objectMapper.readTree(result);
 	      JsonNode list = resultJson.get("reqdata");

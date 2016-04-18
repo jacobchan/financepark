@@ -18,7 +18,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
-import com.gsoft.utils.HotelUtil;
+import com.gsoft.utils.BizCodeUtil;
+import com.gsoft.utils.HttpGetAndPostUtil;
 import com.member.hotel.entity.HotelOrderConditions;
 import com.member.hotel.service.HotelOrderService;
 
@@ -42,7 +43,7 @@ public class HotelOrderServiceImpl extends BaseManagerImpl implements HotelOrder
 	    params.put("agent_id", agent_id);
 	    params.put("agent_md", agent_md);
 	    try {
-			result = HotelUtil.net(HotelUtil.url1, params, "GET");
+			result = HttpGetAndPostUtil.net(HttpGetAndPostUtil.url1, params, "GET");
 			ObjectMapper objectMapper = new ObjectMapper();
 			JsonNode resultJson = objectMapper.readTree(result);
 			JsonNode reqdata = resultJson.get("reqdata");
@@ -69,7 +70,7 @@ public class HotelOrderServiceImpl extends BaseManagerImpl implements HotelOrder
 	    params.put("agent_id", agent_id);
 	    params.put("agent_md", agent_md);
 	    try {
-			result = HotelUtil.net(HotelUtil.url1, params, "GET");
+			result = HttpGetAndPostUtil.net(HttpGetAndPostUtil.url1, params, "GET");
 			ObjectMapper objectMapper = new ObjectMapper();
 			JsonNode resultJson = objectMapper.readTree(result);
 	    } catch (Exception e) {
@@ -100,13 +101,14 @@ public class HotelOrderServiceImpl extends BaseManagerImpl implements HotelOrder
 	                 }
 	             }
 		    }
-		    //params.put("guid", UUID.fromString("平台订单号").toString());
+		    String orderNumber = BizCodeUtil.getInstance().getBizCodeDate("JD");
+		    params.put("guid", orderNumber);//UUID.fromString(orderNumber).toString()
 		} catch (Exception e) {
 			System.out.println("获取HotelOrderConditions实体类属性 异常:" + e);
 		    throw new BusException("获取HotelOrderConditions实体类属性 异常: "+e.getMessage());
 		}
 	    try {
-			result = HotelUtil.sendPost(HotelUtil.url2, params);
+			result = HttpGetAndPostUtil.HotelSendPost(HttpGetAndPostUtil.url2, params);
 			ObjectMapper objectMapper = new ObjectMapper();
 		    JsonNode resultJson = objectMapper.readTree(result);
 		    //Map<String, Object> resultMap = objectMapper.convertValue(resultJson, Map.class);
@@ -128,7 +130,7 @@ public class HotelOrderServiceImpl extends BaseManagerImpl implements HotelOrder
 	    params.put("agent_id", agent_id);
 	    params.put("agent_md", agent_md);
 	    try {
-			result = HotelUtil.net(HotelUtil.url1, params, "GET");
+			result = HttpGetAndPostUtil.net(HttpGetAndPostUtil.url1, params, "GET");
 			ObjectMapper objectMapper = new ObjectMapper();
 			JsonNode resultJson = objectMapper.readTree(result);
 	    } catch (Exception e) {
