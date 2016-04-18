@@ -110,7 +110,7 @@ public interface PropertyservicemanagerCosManager extends BaseManager{
      */
     public PropertyservicemanagerCos rejectPropertyservicemanagerCos(PropertyservicemanagerCos o) throws BusException;
     /**
-	 * 根据当前用户分页查询  根据订单号
+	 * 根据当前用户分页查询 根据投诉单号模糊查询（ 前台个人中心）		 
 	 * @return 分页对象
 	 */
 	public PagerRecords getPagerLikeCos(Pager pager,//分页条件
