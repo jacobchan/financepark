@@ -184,4 +184,21 @@ public class PropertyservicemanagerChargeManagerImpl extends BaseManagerImpl imp
     	PagerRecords pagerRecords = propertyservicemanagerChargeDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
+    /**
+   	 * 根据当前用户分页查询  模糊查询
+   	 * @return 分页对象
+   	 */
+       @EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",operator=Condition.EQUALS,pubProperty="userId")})
+   	public PagerRecords getPagerLikeCharge(Pager pager,//分页条件
+   			@ConditionCollection(domainClazz=PropertyservicemanagerCharge.class) Collection<Condition> conditions,//查询条件
+   			@OrderCollection Collection<Order> orders,
+			@ServiceParam(name="LikeuserorderCode") String LikeuserorderCode,
+			@ServiceParam(name="startTime") String startTime,
+			@ServiceParam(name="endTime") String endTime)
+   			throws BusException {
+    	conditions.add(ConditionUtils.getCondition("userorder.userorderCode", Condition.LIKE, LikeuserorderCode));
+   		conditions.add(ConditionUtils.getCondition("chargeEndate", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+       	PagerRecords pagerRecords = propertyservicemanagerChargeDao.findByPager(pager, conditions, orders);
+   		return pagerRecords;
+   	}
 }
