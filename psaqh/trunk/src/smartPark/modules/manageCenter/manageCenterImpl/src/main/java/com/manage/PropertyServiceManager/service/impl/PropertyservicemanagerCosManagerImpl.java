@@ -246,7 +246,7 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
 		 *  /**
 		 * 根据当前用户分页查询 根据投诉单号模糊查询（ 前台个人中心）
 		 */
-		 */
+		 
 	    @EsbServiceMapping(pubConditions={@PubCondition(property="memberInformation.memberId",operator=Condition.EQUALS,pubProperty="userId")})	   
 		public PagerRecords getPagerLikeCos(Pager pager,//分页条件
 				@ConditionCollection(domainClazz=PropertyservicemanagerCos.class) Collection<Condition> conditions,//查询条件
