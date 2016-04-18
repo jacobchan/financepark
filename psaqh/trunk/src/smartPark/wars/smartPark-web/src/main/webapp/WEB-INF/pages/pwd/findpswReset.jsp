@@ -45,7 +45,7 @@
                         <span class="mr15 fl">确认新密码</span>
                         <input type="text" id="repasswd" placeholder="确认新密码">
                     </div>
-                   <a class="ib-btn mt25"  style="width:350px;margin-left:58px;" href="javascript:;">确定</a>
+                   <a class="ib-btn mt25"  style="width:350px;margin-left:85px;" href="javascript:;">确定</a>
                 </div>
            </form>
         </div>

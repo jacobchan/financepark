@@ -44,7 +44,7 @@
                         <input type="text" id="phoneCode" placeholder="请输入验证码" style="width:140px;">
                         <a href="javascript:;" class="ib-btn fl ml20 ib-o" id="sendCaptcha" style="margin-top:0px;">发送验证码</a>
                     </div>
-                   <a class="ib-btn mt25" id="next" style="width:350px;margin-left:58px;" href="javascript:;">下一步</a>
+                   <a class="ib-btn mt25" id="next" style="width:350px;margin-left:85px;" href="javascript:;">下一步</a>
                 </div>
            </form>
         </div>
