@@ -102,10 +102,6 @@ public interface PropertyservicemanagerBxManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public List<PropertyservicemanagerBx> getEnterprisemaillistLikeBxCode(String userId,String bxCode,String startTime,String endTime) throws BusException;
-	/**
-	 * 根据当前用户分页查询
-	 * @return 分页对象
-	 */
 	 /**
 		 * 根据当前用户分页查询
 		 * @return 分页对象
@@ -113,4 +109,13 @@ public interface PropertyservicemanagerBxManager extends BaseManager{
 		public PagerRecords getPagerBxs(Pager pager,//分页条件
 				Collection<Condition> conditions,//查询条件
 				Collection<Order> orders) throws BusException;
+		/**
+		 * 根据当前用户分页查询 
+		 * 模糊查询
+		 * @return 分页对象
+		 */
+		public PagerRecords getPagerLikeBx(Pager pager,//分页条件
+				Collection<Condition> conditions,//查询条件
+				Collection<Order> orders,String bxLikeCode,String startTime,String endTime) throws BusException;
+
 }
