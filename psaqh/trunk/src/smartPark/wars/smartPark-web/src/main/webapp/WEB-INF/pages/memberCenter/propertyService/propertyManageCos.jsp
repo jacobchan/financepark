@@ -73,7 +73,7 @@
 	var pageSize=5;
 	var pageCount=1;
 	var currentIndex = 1;
-	var serviceURL = baseUrl+'propertyservicemanagerCosManager/getPagerFkcodes.json';
+	var serviceURL = baseUrl+'propertyservicemanagerCosManager/getPagerCos.json';
 	
 	$(function () {
 		
@@ -93,9 +93,6 @@
 								        refreshData(p,pageSize);
 								    }
 								});			
-			/* 	if(result&&result.records){
-					_parseRecords(result.records);
-				} */
 			}
 		}); 			
 	});	
@@ -168,15 +165,15 @@
 			}
 		};
 		
-		 function cancel(obj){
+		/*  function cancel(obj){
 				var me=obj.parentNode.parentNode;
 				var cosCode=me.childNodes[0].innerText;
 				$(".cosCode").html(cosCode);
 				$(".cosCode")[0].setAttribute("id",me.id);
 				$(".bg-tanc").show();
-			};
+			}; */
 			//根据订单号查询
-			$('.hhf-submit').click(function(){	
+	/*  $('.hhf-submit').click(function(){	
 				
 				$(".aaa").empty();
 				 var cosCode=$("#cosCode").val(); 
@@ -185,6 +182,7 @@
 				 params=['cosCode='+cosCode+'','startTime='+startTime+'','endTime='+endTime+''];
 			      $.ajax({
 			    	 url:baseUrl+'propertyservicemanagerCosManager/getCoslistLikeCosCode.json',
+			    	 //url:baseUrl+'propertyservicemanagerCosManager/getPagerCos.json',
 			    	 data:params.join('&'),
 			    	 success:function(result){					    		 
 							console.log(result.records);           
@@ -193,7 +191,48 @@
 							}
 						}
 				}); 
-			}); 
+	});   */
+	 $('.hhf-submit').click(function(){	
+		var cosCode=$("#cosCode").val();
+		var startTime=$("#startTime").val(); 
+		var endTime=$("#endTime").val(); 			
+		var params = ['coslikeCode='+cosCode,'startTime='+startTime,'endTime='+endTime];
+		$.ajax({
+			url:baseUrl+'propertyservicemanagerCosManager/getPagerLikeCos.json',
+			data:params.join('&'),
+			success:function(results){	
+				pageCount=Math.ceil(results.totalCount/pageSize);//页数				
+				
+				 refreshData_query(1,pageSize);
+					$(".tcdPageCode").createPage({
+					    pageCount:pageCount,
+					    current:1,
+					    backFn:function(p){
+					    	currentIndex = p;
+					       this.pageCount=pageCount;
+					       refreshData_query(p,pageSize);
+					    }
+					});			
+              }
+        }); 			
+    });	
+		//根据订单号查询 分页列表
+		function refreshData_query(pageIndex,pageSize){
+			var cosCode=$("#cosCode").val();	
+			 var startTime=$("#startTime").val(); 
+			 var endTime=$("#endTime").val(); 
+			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'coslikeCode='+cosCode,'startTime='+startTime,'endTime='+endTime];
+			$.ajax({
+				url:baseUrl+'propertyservicemanagerCosManager/getPagerLikeCos.json',
+				data:params.join('&'),
+				success:function(results){
+					if(results&&results.records){
+						 _parseRecords(results.records);
+					}
+				}
+			});
+		}
+	 
 	</script>
 	
 	<!-- 取消投诉 -->
