@@ -25,8 +25,9 @@
 						format="yyyy-MM-dd" />
 				</youi:fieldLayout>
 				<youi:button name="acceptance" caption="受理" icon="search" active="1" />
-				<youi:button name="govisit" caption="回访" icon="save" active="1" />
-				<youi:button name="evaluate" caption="评价" icon="edit" active="1" />
+				<youi:button name="reject" caption="拒绝" icon="search" active="1" />
+				<%-- <youi:button name="govisit" caption="回访" icon="save" active="1" />
+				<youi:button name="evaluate" caption="评价" icon="edit" active="1" /> --%>
 				<youi:gridCol property="cosCode" caption="投诉单号" width="15%" />
 				<youi:gridCol property="backcode" caption="回访单号" width="15%" />
 				<youi:gridCol property="cosContent" caption="投诉内容" width="14%" />
@@ -110,29 +111,72 @@
 		</youi:fieldLayout>
 	</youi:form>
 
+	<!-- form-受理填写信息 -->
+	<youi:form dialog="true" caption="受理记录填写"
+		id="form_acceptanceMessage"
+		action="esb/web/propertyservicemanagerCosManager/acceptancePropertyservicemanagerCos.json" width="600">
+		<youi:fieldLayout prefix="acceptance" columns="1"
+			labelWidths="120,120">
+			<youi:fieldHidden property="cosId" caption="投诉编号" />
+			<youi:fieldArea property="backrecord" caption="受理记录" rows="8" column="20" tooltips="受理记录" notNull="true" />
+		</youi:fieldLayout>
+	</youi:form>
+	
+	<!-- form-拒绝填写信息 -->
+	<youi:form dialog="true" caption="拒绝记录填写"
+		id="form_rejectMessage"
+		action="esb/web/propertyservicemanagerCosManager/rejectPropertyservicemanagerCos.json" width="600">
+		<youi:fieldLayout prefix="reject" columns="1"
+			labelWidths="120,120">
+			<youi:fieldHidden property="cosId" caption="投诉编号" />
+			<youi:fieldArea property="backRemark" caption="拒绝记录" rows="8" column="20" tooltips="拒绝记录" notNull="true" />
+		</youi:fieldLayout>
+	</youi:form>
 	<!--**********************************页面函数Start********************************-->
 	<!-- 受理操作 -->
 	<youi:func name="func_grid_acceptance">
 		var gridElement = $elem('grid_propertyservicemanagerCos',pageId),
 		selectedRecord = gridElement.grid('getSelectedRecord');
 		var cosstatus = selectedRecord.cosStatus;
-		if(cosstatus=='0'){
-			$.youi.messageUtils.confirm('确定受理此投诉?',function(){
-				$.youi.ajaxUtil.ajax({
-					url:'/esb/web/propertyservicemanagerCosManager/upCosbyId.json',
-					data:{id:selectedRecord.cosId,code:'2'},
-					success:function(result){	
-						$elem('grid_propertyservicemanagerCos',pageId).grid('pReload');
-						alert("操作成功!");
-					}
-				});
-			});
-		}else if(cosstatus=='2'){
-			alert("该记录已在受理中!");
+		if(cosstatus=='01'){
+			$elem('acceptance_cosId',pageId).fieldValue(selectedRecord.cosId);
+			$elem('form_acceptanceMessage',pageId).form('open');
 		}else{
-			alert("该状态下不能作受理操作！");
+			alert("该记录已操作!");
 		}
 	</youi:func>
+	
+	<!-- 受理操作表单提交后事件 -->
+	<youi:func name="form_acceptanceMessage_afterSubmit">
+		var acceptanceMessage = $elem('form_acceptanceMessage',pageId);
+		acceptanceMessage.form('reset');
+		acceptanceMessage.form('close');
+		$elem('grid_acceptanceMessage',pageId).grid('pReload');
+		$elem('grid_propertyservicemanagerCos',pageId).grid('pReload');
+	</youi:func>
+	
+	<!-- 拒绝操作 -->
+	<youi:func name="func_grid_reject">
+		var gridElement = $elem('grid_propertyservicemanagerCos',pageId),
+		selectedRecord = gridElement.grid('getSelectedRecord');
+		var cosstatus = selectedRecord.cosStatus;
+		if(cosstatus=='01'){
+			$elem('reject_cosId',pageId).fieldValue(selectedRecord.cosId);
+			$elem('form_rejectMessage',pageId).form('open');
+		}else{
+			alert("该记录已操作!");
+		}
+	</youi:func>
+	
+	<!-- 拒绝操作 表单提交后事件 -->
+	<youi:func name="form_rejectMessage_afterSubmit">
+		var rejectMessage = $elem('form_rejectMessage',pageId);
+		rejectMessage.form('reset');
+		rejectMessage.form('close');
+		$elem('grid_rejectMessage',pageId).grid('pReload');
+		$elem('grid_propertyservicemanagerCos',pageId).grid('pReload');
+	</youi:func>
+	
 	<!-- 回访操作 -->
 	<youi:func name="func_grid_govisit">
 		var gridElement = $elem('grid_propertyservicemanagerCos',pageId),
