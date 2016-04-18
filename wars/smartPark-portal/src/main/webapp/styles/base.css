@@ -281,3 +281,13 @@ input.ib-btn{border:1px solid #fa742c;line-height: 0px;}
 .ib-btn:hover,a.ib-btn:hover{background: #ff5900;color: #fff !important;}
 .ib-btn.fs-btn{background: #4bb6fa;}
 .ib-btn.fs-btn:hover{background: #47aced;color: #fff !important;}
+
+/** 大图片加载中样式 **/
+img.loading {
+    background-color: #FFFFFF;
+    background-image: url(images/loader.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+

@@ -435,6 +435,7 @@
                </ul>
         	</div>
         </div>
+        <div class="clearfix"></div><!--清除浮动-->
         <div class="content_right">
         	<div class="mb15 mt15"><span class="span_bold">园区实体店铺</span></div>
                  <div class="layout_table st_dian Shop">
@@ -1279,7 +1280,7 @@
 			for(var i=0;i<record.length;i++){
 				html+="<li class='clearfix' onclick='redirectPage(this)'; id='"+record[i].applyId+"'>"+
 							"<div class='plg-photo'>"+
-								"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityImage+"&method=show' border='0' width='100%'/>"+
+								"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityImage+"&method=show' border='0' width='100%' class=\"loading\"/>"+
 								"<em>"+record[i].applayType.typeName+"</em>"+
 							"</div>"+
 							"<div class='plg-article pr'>"+
