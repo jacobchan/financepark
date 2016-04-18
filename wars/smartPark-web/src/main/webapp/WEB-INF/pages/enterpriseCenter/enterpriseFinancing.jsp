@@ -61,7 +61,7 @@
 		                        <div class="font_xianzhi">字数限制：<span id="currentCount" style="color:red;">0</span>/200</div>
 		                    </div>
 		                </div>
-		                <div class="meiti_save_btn"><input type="submit" value="保存" class="hhf-submit" style="height:40px;" /></div>
+		                <div class="meiti_save_btn"><div class="save_btn"><a>保存</a></div></div>
 		            </div>
 					<div class="rozi_main">
 						<div class="clearfix yin-group">
@@ -71,6 +71,13 @@
 						</div>
 		            </div>
 		        </div>    
+		    </div>
+		</div>
+		<!-- 弹出层样式 -->
+		<div class="toast">
+		    <div class="toast-con clearfix">
+		        <div class="close-toast fr"></div>
+		        <p class="tc mt25 f18" id="toast_text" style="color:#ff6715">请登录后重试！</p>
 		    </div>
 		</div>
 	</body>

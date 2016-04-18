@@ -7,112 +7,10 @@
 		<title>专利与知识产权</title>
 		<%@ include file="/WEB-INF/pages/common/enterpriseScriptAddCss.jsp"%>
 		<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/page/zs.css">
-		<script type="text/javascript">
-			// 中文字符判断
-			function getStrLength(str) { 
-				var len = str.length; 
-			    var reLen = 0; 
-			    for (var i = 0; i < len; i++) {        
-			        if (str.charCodeAt(i) < 27 || str.charCodeAt(i) > 126) { 
-			            // 全角    
-			            reLen += 2; 
-			        } else { 
-			            reLen++; 
-			        } 
-			    } 
-			    return reLen;    
-			}
-			//删除专利
-			function removeKnowledge(obj){
-			 	$.youi.ajaxUtils.ajax({
-					url:baseUrl+'/informationKnowledgeManager/removeInformationKnowledge.json',
-					data:'knowledgeId='+obj,
-					success:function(result){
-						alert("删除成功");
-						location.reload();
-					}
-				});
-			}
-			//修改地址
-			function updateKnowledge(obj0, obj1, obj2, obj3){
-				$("#knowledgeId").val(obj0);
-				$("#knowledgeRe").html(obj1);
-		  		$("#knowledgeTitle").val(obj2);
-		  		$("#knowledgeContent").val(obj3);
-		  		$("#currentCount").html(getStrLength(obj3));
-			}
-			$(document).ready(function() {
-				$("#knowledgeContent").on('keyup', function() {
-				    var len = getStrLength(this.value);
-				    $("#currentCount").html(len);
-				});
-				$.ajax({
-					url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
-					success:function(result){
-						if(result&&result.record){
-							$("#knowledgeRe").html(result.record.companyId);
-							//根据企业id获取融资信息
-					    	$.ajax({
-					    		url : baseUrl+"/informationKnowledgeManager/findInformationKnowledge.json",
-					    		data : ['knowledgeRe='+result.record.companyId].join('&'),
-					    		success : function(results) {
-					    			if (results && results.records) {
-					    				var records = results.records;
-					    				$("#knowledgeDiv").empty();
-					    				for(var i=0; i<records.length; i++){
-					    					var imgsrc = "../styles/images/qiye/photo_list1.png";
-					    					if(records[i].knowledgeUrl!=null && records[i].knowledgeUrl!=""){
-					    						imgsrc = cenUrl+"common/uploadImage.html?repository=/swfupload&path="+records[i].knowledgeUrl+"&method=show";
-					    					}
-					    					var knowledgeDiv = '<li>'+
-					                            '<div class="mt_list">'+
-					                                '<div class="list_pic"><img src="'+imgsrc+'"></div>'+
-					                                '<div class="list_tex">'+
-					                                    '<table>'+
-					                                        '<tr>'+
-					                                            '<td colspan="2" height="40" valign="middle" align="left"><a class="tit">'+records[i].knowledgeTitle+'</a></td>'+
-					                                        '</tr>'+
-					                                        '<tr>'+
-					                                            '<td colspan="2" height="42" valign="top" align="left"><span class="baodao_main">'+records[i].knowledgeContent+'</span></td>'+
-					                                        '</tr>'+
-					                                        '<tr>'+
-					                                            '<td height="40" valign="middle" align="left"><a href=\'javascript:updateKnowledge("'+records[i].knowledgeId+'", "'+records[i].knowledgeRe+'", "'+records[i].knowledgeTitle+'", "'+records[i].knowledgeContent+'");\'><span>编辑</span></a>丨<a href=\'javascript:removeKnowledge("'+records[i].knowledgeId+'");\'>删除</a></td>'+
-					                                        '</tr>'+
-					                                    '</table>'+
-					                                '</div>'+
-					                            '</div>'+
-					                        '</li>';
-					    					$("#knowledgeDiv").append(knowledgeDiv);
-					    				}
-					    			}
-					    		}
-					    	});
-						}
-					}
-				});
-				$(".hhf-submit").click(function(){
-					var knowledgeId=$("#knowledgeId").val();
-			  		var knowledgeRe=$("#knowledgeRe").html();
-			  		var knowledgeTitle=$("#knowledgeTitle").val();
-			  		var knowledgeContent=$("#knowledgeContent").val();
-					var params = ['knowledgeId='+knowledgeId+'','knowledgeRe='+knowledgeRe+'','knowledgeTitle='+knowledgeTitle+'','knowledgeContent='+knowledgeContent+''];
-					$.youi.ajaxUtils.ajax({
-						url:baseUrl+'/informationKnowledgeManager/saveInformationKnowledge.json',
-						data:params.join('&'),
-						success:function(result){
-							if(result && result.record){
-								$("#knowledgeTitle").val();
-						  		$("#knowledgeContent").val();
-								alert("保存成功");
-								window.location.reload();
-							}
-						}
-					});
-				});
-				$("#moreul").slideDown("slow");
-			  	$("#moreul > li:eq(2)").addClass("active");
-			});
-		</script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/ztree/js/jquery.ztree.core.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/ztree/js/jquery.ztree.excheck.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/ckeditor/ckeditor.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/enterpriseCenter/enterpriseKnowledge.js"></script>
 	</head>
 	<body class="page-header-fixed" style=" background-image:none">
 		<%@ include file="/WEB-INF/pages/enterpriseCenter/common/ec_head.jsp"%>
@@ -129,7 +27,10 @@
 			            <div class="qiye_text"><span>专利图片</span></div>
 			            <div class="upload_main">
 		                    <img id="rzLogo" src="../styles/images/qiye/user-photo.png" border="0" class="fl" width="107" height="107"/>
-		                    <div class="photo-edit"><input type="file" />编辑<br/>图片</div>
+		                    <div class="photo-edit">
+		                    	<input type="file" id="imgUpload" name="imgUpload" draggable="true" accept=".png,.jpg"/>
+		                    	编辑<br/>图片
+		                    </div>
 		            	</div>
 		            </div>
 			        <div class="xiangxi_baodao">
@@ -144,7 +45,7 @@
 			                	<div class="font_xianzhi">字数限制：<span id="currentCount" style="color:red;">0</span>/200</div>
 			            	</div>
 			            </div>
-			            <div class="meiti_save_btn"><input type="submit" value="保存" class="hhf-submit" style="height:40px;" /></div>
+			            <div class="meiti_save_btn"><div class="save_btn"><a>保存</a></div></div>
 			            <div class="main-title"><span>专利&nbsp;/&nbsp;知识产权列表</span></div>
 						<div class="baodao_list zuanli">
 		                	<ul id="knowledgeDiv">
@@ -155,5 +56,70 @@
 		        </div>    
 		    </div>
 		</div>
+		<!-- 弹出层样式 -->
+		<div class="toast">
+		    <div class="toast-con clearfix">
+		        <div class="close-toast fr"></div>
+		        <p class="tc mt25 f18" id="toast_text" style="color:#ff6715">请登录后重试！</p>
+		    </div>
+		</div>
 	</body>
+	<script type="text/javascript">
+		var uploader = new plupload.Uploader({
+			runtimes : 'html5,flash,silverlight',//设置运行环境，会按设置的顺序，可以选择的值有html5,gears,flash,silverlight,browserplus,html
+			browse_button : 'imgUpload',
+			flash_swf_url : '../../scripts/fileUpload/Moxie.swf',
+			silverlight_xap_url : '../../scripts/fileUpload/Moxie.xap',
+			url : cenUrl+'fileUpload/goUpload.html',//上传文件路径
+			max_file_size : '400kb', //最大只能上传400kb的文件
+			prevent_duplicates : true, //不允许选取重复文件
+			//此处是控制上传组件是否允许多文件选择还是单文件选择：true/多文件；false/单文件
+			multi_selection: false,
+			//给后台传入参数
+			multipart_params: {
+				//上传标识 0：图片上传;1：文件上传
+				fileFlg:"0"
+			},
+			filters : [ {
+				title : 'Image files',
+				extensions : 'jpg,gif,png'
+			} ],
+			init : {
+				FilesAdded : function(up, files) {
+					//此处用户图片的回显（可根据自己的业务修改）
+					previewImage(files[0], function(imgsrc) {
+						$("#rzLogo").attr("src",imgsrc);
+					});
+				}
+			}
+		});
+
+		uploader.init();
+
+		//图片回显预览
+		function previewImage(file, callback) {//file为plupload事件监听函数参数中的file对象,callback为预览图片准备完成的回调函数
+			if (!file || !/image\//.test(file.type))
+				return; //确保文件是图片
+			if (file.type == 'image/gif') {//gif使用FileReader进行预览,因为mOxie.Image只支持jpg和png
+				var fr = new mOxie.FileReader();
+				fr.onload = function() {
+					callback(fr.result);
+					fr.destroy();
+					fr = null;
+				}
+				fr.readAsDataURL(file.getSource());
+			} else {
+				var preloader = new mOxie.Image();
+				preloader.onload = function() {
+					var imgsrc = preloader.type == 'image/jpeg' ? preloader
+							.getAsDataURL('image/jpeg', 80) : preloader
+							.getAsDataURL(); //得到图片src,实质为一个base64编码的数据
+					callback && callback(imgsrc); //callback传入的参数为预览图片的url
+					preloader.destroy();
+					preloader = null;
+				};
+				preloader.load(file.getSource());
+			}
+		}
+	</script>
 </html>
