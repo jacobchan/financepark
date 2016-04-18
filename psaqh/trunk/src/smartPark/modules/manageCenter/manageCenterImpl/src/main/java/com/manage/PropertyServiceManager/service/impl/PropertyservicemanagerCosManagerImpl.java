@@ -243,10 +243,11 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
 	    	return propertyservicemanagerCosDao.save(savePropertyservicemanagerCos);
 	    }
 	    /**
-		 * 根据当前用户分页查询  根据订单号模糊查询
+		 *  /**
+		 * 根据当前用户分页查询 根据投诉单号模糊查询（ 前台个人中心）
 		 */
-	    @EsbServiceMapping(pubConditions={@PubCondition(property="memberInformation.memberId",operator=Condition.EQUALS,pubProperty="userId")})
-	   
+		 */
+	    @EsbServiceMapping(pubConditions={@PubCondition(property="memberInformation.memberId",operator=Condition.EQUALS,pubProperty="userId")})	   
 		public PagerRecords getPagerLikeCos(Pager pager,//分页条件
 				@ConditionCollection(domainClazz=PropertyservicemanagerCos.class) Collection<Condition> conditions,//查询条件
 				@OrderCollection Collection<Order> orders,
