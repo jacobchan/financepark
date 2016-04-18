@@ -52,7 +52,7 @@
                 		 "<div class='czh-group' style='border-bottom:1px solid #ecebeb'>"+
                     	 "<h4>"+record[i].applyTitle+"</h4>"+
                     	 "<span>活动发起人："+record[i].memberId.memberName+"</span><br/>"+
-                    	 "<span>举办时间："+startime+"- "+endtime+"</span>"+
+                    	 "<span>举办时间："+startime+" - "+endtime+"</span>"+
                 		 "</div>"+
                 		 "<div class='czh-group'>"+
                     	 "<font class='cg-soan-btn' style='background:#FF6715'>相关文档</font>"+
@@ -92,8 +92,8 @@
 			var index2=time.lastIndexOf("-"); 
 			var cha=parseInt(index2)-(parseInt(index1)+1); 
 			var month=time.substr((parseInt(index1)+1),cha); 
-			var kg=time.indexOf(" "); 
-			cha=parseInt(kg)-parseInt(index2); 
+			var kg=time.indexOf(" ");
+			cha=parseInt(kg)-(parseInt(index2)+1);
 			var day=time.substr(parseInt(index2)+1,cha); 
 			date = month+"/"+day;
 			return date;
