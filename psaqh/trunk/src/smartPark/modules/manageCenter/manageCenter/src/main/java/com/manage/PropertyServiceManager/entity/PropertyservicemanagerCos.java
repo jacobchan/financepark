@@ -33,7 +33,7 @@ public class PropertyservicemanagerCos implements Domain{
 
 	@Column(name = "COS_STATUS_")
 	@Length(max=2)
-	private String cosStatus;//投诉受理状态
+	private String cosStatus;//投诉受理状态 01：待受理 02：已受理 03：已取消 04：已退回
 
 	@Column(name = "COS_TIME_")
 	@Length(max=20)
@@ -86,6 +86,19 @@ public class PropertyservicemanagerCos implements Domain{
 	@Length(max=20)
 	private String backtime;//回访时间
 	
+	@Column(name = "BACK_REMARK_")
+	@Length(max=256)
+	private String backRemark;//拒绝理由
+	
+	
+	public String getBackRemark() {
+		return backRemark;
+	}
+
+	public void setBackRemark(String backRemark) {
+		this.backRemark = backRemark;
+	}
+
 	public String getBackcode() {
 		return backcode;
 	}
@@ -219,6 +232,7 @@ public class PropertyservicemanagerCos implements Domain{
 		result = prime * result + ((cosBool == null) ? 0 : cosBool.hashCode());
 		result = prime * result + ((cosId == null) ? 0 : cosId.hashCode());
 		result = prime * result + ((cosName == null) ? 0 : cosName.hashCode());
+		result = prime * result + ((backRemark == null) ? 0 : backRemark.hashCode());
 		return result;
 	}
 	
@@ -290,6 +304,11 @@ public class PropertyservicemanagerCos implements Domain{
 			if (other.cosName != null)
 				return false;
 		} else if (!cosName.equals(other.cosName))
+			return false;
+		if (backRemark == null) {
+			if (other.backRemark != null)
+				return false;
+		} else if (!backRemark.equals(other.backRemark))
 			return false;
 		return true;
 	}

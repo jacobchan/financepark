@@ -3,8 +3,8 @@
  */
 package com.manage.PropertyServiceManager.service;
 
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -12,10 +12,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.EsbServiceMapping;
-import com.gsoft.framework.esb.annotation.ServiceParam;
-import com.gsoft.framework.esb.annotation.EsbServiceMapping;
-import com.gsoft.utils.BizCodeUtil;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos;
 
 
@@ -96,9 +92,21 @@ public interface PropertyservicemanagerCosManager extends BaseManager{
     public List<PropertyservicemanagerCos> getCoslistLikeCosCode(String userId,String cosCode,String startTime,String endTime) throws BusException;
     /**
 	 * 根据当前用户分页查询
+	 * @param pager 分页条件
+	 * @param conditions 查询条件
 	 * @return 分页对象
 	 */
-	public PagerRecords getPagerFkcodes(Pager pager,//分页条件
-			Collection<Condition> conditions,//查询条件
-			Collection<Order> orders) throws BusException;
+	public PagerRecords getPagerFkcodes(Pager pager,Collection<Condition> conditions,Collection<Order> orders) throws BusException;
+	
+	/**
+     * 受理保存对象
+     * 修改投诉状态标识，添加回访记录
+     */
+    public PropertyservicemanagerCos acceptancePropertyservicemanagerCos(PropertyservicemanagerCos o) throws BusException;
+    	
+    /**
+     * 受理拒绝保存对象
+     * 修改投诉状态标识，添加拒绝原因记录
+     */
+    public PropertyservicemanagerCos rejectPropertyservicemanagerCos(PropertyservicemanagerCos o) throws BusException;
 }
