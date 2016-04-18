@@ -498,4 +498,10 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		MemberInformation reMemberInformation = this.saveMemberInformation(mi);	
 		return reMemberInformation;		    	
 	}
+    //根据手机号码获取用户
+	@Override
+	public MemberInformation getUserByPhone(String phone) {
+		MemberInformation mem = memberInformationDao.getObjectByUniqueProperty("memberPhoneNumber", phone);
+		return mem;
+	}
 }
