@@ -111,6 +111,9 @@ $(function(){
 				}
 			});
 		});
+        
+        //加载硅谷创业营精彩活动top2、一览表
+        plactive();
 	});
 
 	//限制融资额度（起）只能为数字
@@ -219,6 +222,121 @@ $(function(){
 			}
 		});
 	});
+	
+	//获取精彩活动top2	、一览表
+	function plactive(){
+		//获取创业营类型id
+		var name = "硅谷创业营";
+		$.youi.ajaxUtils.ajax({
+			url:baseUrl+"applayTypeManager/getApplayTypes.json",
+			data:['typeName='+name].join('&'),
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(results){
+				if(results&&results.records){
+					pageplactive(results.records);//活动top2
+					pagechart(results.records);//一览表
+				}
+			}
+		});
+	}
+	//活动top2
+	function pageplactive(record){
+		var typecode = record[0].typeId;
+		var status = "01";
+		var postData = {'pager:pageIndex':1,'pager:pageSize':2,'applayType.typeId':typecode,'applyStatus':status,orderBy:'desc:createTime'};	
+		$.youi.ajaxUtils.ajax({
+			url:baseUrl+"activityApplyManager/getPagerActivityApplys.json",
+			jsonp:'data:jsonp',
+			data:postData,
+			dataType:'jsonp',
+			success:function(results){
+				if(results&&results.records){
+					var record = results.records;
+					var html = "";
+					html +="<h3 class='cic-act'>精彩活动</h3>";
+					for(var i=0;i<record.length;i++){
+						var temp = record[i].commentContent ;
+		 				var start = temp.indexOf("<p>");
+		 				var end = temp.indexOf("</p>");
+		 				var content = temp.substring(start+3,end) ;
+		 				if(content.length>100){
+		 					content = content.substring(0,86)+"......";
+		 				}
+						html+="<div class='cic-group'>"+
+							"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityImage+"&method=show' style='width: 277px;height: 164px;' border='0'>"+
+							"<h4>"+record[i].applyTitle+"</h4>"+
+							"<p>"+content+"</p></div>";
+					}
+					$('.spactive').empty();
+					$('.spactive').append(html);
+				}
+			}
+		});
+	}
+	
+	//拼接一览表
+	function pagechart(record){
+		var typecode = record[0].typeId;
+		var postData = {'applayType.typeId':typecode,orderBy:'desc:startTime'};	
+		$.youi.ajaxUtils.ajax({
+			url:baseUrl+"activityApplyManager/getPagerActivityApplys.json",
+			jsonp:'data:jsonp',
+			data:postData,
+			dataType:'jsonp',
+			success:function(results){
+				if(results&&results.records){
+					var record = results.records;
+					var html = "";
+					for(var i=0;i<record.length;i++){
+						var status = record[i].applyStatus ;
+		 				if(status=='01'){
+		 					var star = record[i].startTime;
+		 					var mon = getmonth(star);
+		 					var min = gethour(star);
+		 					html +="<div><em class='em1'>"+mon+"</em><p>"+record[i].applyTitle+"</p><span>"+min+"</span></div>";
+		 				}
+		 				if(status=='02'){
+		 					var star = record[i].startTime;
+		 					var mon = getmonth(star);
+		 					var min = gethour(star);
+		 					html +="<div><em class='em2'>"+mon+"</em><p>"+record[i].applyTitle+"</p><span>"+min+"</span></div>";
+		 				}
+					}
+					$('.cic-trip').empty();
+					$('.cic-trip').append(html);
+				}
+			}
+		});
+	}
+	
+	//截取月年
+	function getmonth(time){
+		var data = "";
+		var index1=time.indexOf("-"); 
+		var index2=time.lastIndexOf("-"); 
+		var cha=parseInt(index2)-(parseInt(index1)+1); 
+		var month=time.substr((parseInt(index1)+1),cha); 
+		var kg=time.indexOf(" ");
+		cha=parseInt(kg)-(parseInt(index2)+1); 
+		var day=time.substr(parseInt(index2)+1,cha); 
+		date = month+"月"+day+"日";
+		return date;
+	}
+	
+	//截取时间
+	function gethour(time){
+		var data = "";
+		var kg=time.indexOf(" "); 
+		var mh=time.indexOf(":"); 
+		cha=parseInt(mh)-(parseInt(kg)+1); 
+		var hour=time.substr(parseInt(kg)+1,cha); 
+		var mh2=time.lastIndexOf(":"); 
+		cha=parseInt(mh2)-(parseInt(mh)+1); 
+		var min=time.substr(parseInt(mh)+1,cha); 
+		date = hour+":"+min; 
+		return date;
+	}
 	
 	//项目类型加载数据
 	function onloadProjectTypesData(){
