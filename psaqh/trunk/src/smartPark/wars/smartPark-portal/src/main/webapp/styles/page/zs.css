@@ -185,13 +185,15 @@ a.add-btn:hover{background: #ffc000;border:1px solid #ffc000;color: #fff;}
 .w787{width: 787px;float: left;}
 .w413{width: 413px;float: right;}
 .zs-center-img{margin-top: 30px;padding-top: 30px;border-top: 1px solid #ecebeb;}
-.small-img{transition: all .4s linear;-moz-transition: all .4s linear;-webkit-transition:  all .4s;-o-transition: all .4s linear;height: 328px; overflow: hidden;position: relative;text-align: center;color: #fff;float: left;margin-bottom: 15px;margin-right: 15px;}
+.small-img{float: left;width: 380px;margin-bottom: 15px;cursor: pointer; margin-right: 15px;height: 326px; overflow: hidden;position: relative;text-align: center;color: #fff;transition: all .4s linear;-moz-transition: all .4s linear;-webkit-transition:  all .4s;-o-transition: all .4s linear; }
+.small-img:nth-child(5n+1){width:775px;}
+.small-img:nth-child(5n+2),.small-img:nth-child(5n){margin-right: 0px;width: 410px;}
 .small-img>img{width: 100%;height: 100%;}
 .small-img .hover{width: 100%;height: 100%;position: absolute;left: 0px;top: 0px;text-align: center;background: rgba(0,0,0,0.3);display: none;}
 .small-img .hover img{margin-top: 120px;}
 .small-img .hover p{position: absolute;bottom: 0px;line-height: 50px;padding-left: 15px;font-size: 20px;}
 .small-img:hover .hover{display: block;}
-.fr .small-img{margin-right: 0px;}
+
 
 /**园区风采弹窗**/
 .tanc .ban{ width:940px; height:760px; position:relative; margin:20px auto;background:#fff;padding:20px;}
@@ -212,7 +214,7 @@ a.add-btn:hover{background: #ffc000;border:1px solid #ffc000;color: #fff;}
 .tanc .prev1{ position:absolute; top:270px; left:11px; width:28px; height:51px;z-index:9;cursor:pointer;}
 .tanc .next1{ position:absolute; top:270px; right:11px; width:28px; height:51px;z-index:9;cursor:pointer;} 
 .tanc .pop_up_xx{ width:40px; height:40px; position:absolute; top:0px; right:-50px; cursor:pointer;}
-.tanc{position: fixed;left: 0px;top:0px;width:100%;display: none;overflow-x: hidden;overflow-y: auto;bottom: 0px;right: 0px;z-index: 99;height: 100%;background:url(../images/zs/bg-black.png);background-repeat: repeat;}
+.tanc{position: fixed;left: 0px;top:0px;width:100%;display: none;overflow-x: hidden;overflow-y: auto;bottom: 0px;right: 0px;z-index: 1000;height: 100%;background:url(../images/zs/bg-black.png);background-repeat: repeat;}
 .bg-opa{text-align: center;background: rgba(255,255,255,1);border-radius: 2px;}
 .bg-opa:hover{background: rgba(255,255,255,0.9);}
 
@@ -240,14 +242,13 @@ a.add-btn:hover{background: #ffc000;border:1px solid #ffc000;color: #fff;}
 .space-centent table.sc-comp td{padding: 0px;}
 .space-centent table.sc-comp td div{border:1px solid #ecebeb;padding: 25px; width:270px;margin-bottom: 40px;text-align: center;}
 
-.slide-container{width: 100%;height: 476px;position: relative;}
+.slide-container{width: 100%;height:648px;position: relative;}
 
 
 /**轮播图**/
 .slideBox{position:relative;height: 100%;overflow:hidden;}
 .slideBox .banner-nav{width: 10000%;height: 100%}
-.slideBox .banner-nav>li{width: 100%;float: left;display: inline-block;height: 100%;}
-.slideBox .banner-nav>li img{width:100%;height:100%;}
+.slideBox .banner-nav>li{width: 100%;float: left;display: inline-block;height: 100%;overflow: hidden;}
 .pagtion{position:absolute;width:200px;left:50%;bottom:10px;margin-left:-100px;text-align:center}
 .pagtion div{display:inline-block;border-radius:100px;width:15px;height:15px;border:1px #858585 solid;cursor:pointer;background:transparent;margin:0px 2px;}
 .pagtion .pt1{background:#d4d4d4;border: 1px solid #d4d4d4;}
