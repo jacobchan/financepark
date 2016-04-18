@@ -283,12 +283,10 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 				@ServiceParam(name="ocCode") String ocCode,
 				@ServiceParam(name="startTime") String startTime,
 				@ServiceParam(name="endTime") String endTime) throws BusException {	
-	        EnterpriseEmployees e = enterpriseEmployeesDao.getObjectByUniqueProperty("member.memberId", userId);
-		    EnterbusinessmanagerRz rz=e.getRz();
-	        String rzName=rz.getRzName();
+	       
 			Collection<Condition> condition = new ArrayList<Condition>();
-			condition.add(ConditionUtils.getCondition("ocComp", Condition.EQUALS, rzName));	
-			condition.add(ConditionUtils.getCondition("ocCode", Condition.LIKE, ocCode));
+			condition.add(ConditionUtils.getCondition("memberId", Condition.EQUALS, userId));	
+			//condition.add(ConditionUtils.getCondition("ocCode", Condition.LIKE, ocCode));
 			condition.add(ConditionUtils.getCondition("ocDate", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
 			List<PropertyservicemanagerOc> list =propertyservicemanagerOcDao.commonQuery(condition, null);
 			return list;
@@ -302,7 +300,33 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 		public PagerRecords getPagerOc(Pager pager,//分页条件
 				@ConditionCollection(domainClazz=PropertyservicemanagerOc.class) Collection<Condition> conditions,//查询条件
 				@OrderCollection Collection<Order> orders)
+				throws BusException {	    		   
+	    	PagerRecords pagerRecords = propertyservicemanagerOcDao.findByPager(pager, conditions, orders);
+	    	List<PropertyservicemanagerOc> list = pagerRecords.getRecords();
+	    	for(PropertyservicemanagerOc oc : list){
+    			if(StringUtils.isNotEmpty(oc.getMemberId())){
+    				String memberId = oc.getMemberId();
+    				MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
+    				oc.setMember(memberInformation);
+    			}
+    		}
+	    	return pagerRecords;
+		}
+	    /**
+		 * 前台根据当前用户分页查询
+		 * @return 分页对象
+		 */
+	    @SuppressWarnings("unchecked")
+	    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+		public PagerRecords getPagerLikeOc(Pager pager,//分页条件
+				@ConditionCollection(domainClazz=PropertyservicemanagerOc.class) Collection<Condition> conditions,//查询条件
+				@OrderCollection Collection<Order> orders,
+				@ServiceParam(name="ocLikeCode") String ocLikeCode,
+				@ServiceParam(name="startTime") String startTime,
+				@ServiceParam(name="endTime") String endTime)
 				throws BusException {
+	    	conditions.add(ConditionUtils.getCondition("ocCode", Condition.LIKE, ocLikeCode));
+	        conditions.add(ConditionUtils.getCondition("ocDate", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));	    	
 	    	PagerRecords pagerRecords = propertyservicemanagerOcDao.findByPager(pager, conditions, orders);
 	    	List<PropertyservicemanagerOc> list = pagerRecords.getRecords();
 	    	for(PropertyservicemanagerOc oc : list){
