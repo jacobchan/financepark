@@ -131,7 +131,7 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
         			o.setApplyCode(BizCodeUtil.getInstance().getBizCodeDate("ZCSQ"));
         			o.setNmIssueflow(nmIssueflow);
         			o.setMember(member);
-        			o.setPolicyApplyStatus("1");//1为申请中
+        			o.setPolicyApplyStatus("01");//1为申请中
         			o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
         			policyApply = policyApplyDao.save(o) ;
         			try {
