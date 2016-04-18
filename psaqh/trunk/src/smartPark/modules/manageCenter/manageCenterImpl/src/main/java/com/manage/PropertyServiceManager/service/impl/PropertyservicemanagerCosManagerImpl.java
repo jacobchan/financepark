@@ -1,7 +1,7 @@
 package com.manage.PropertyServiceManager.service.impl;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,15 +14,18 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.PubCondition;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
-import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
 import com.gsoft.utils.HttpSenderMsg;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerCosDao;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerCosManager;
 @Service("propertyservicemanagerCosManager")
 @Transactional
@@ -196,4 +199,47 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
 	    	PagerRecords pagerRecords = propertyservicemanagerCosDao.findByPager(pager, conditions, orders);  	
 	    	return pagerRecords;
 		}
+	    
+	    
+	    /**
+	     * 受理保存对象
+	     * 修改投诉状态标识，添加回访记录
+	     */
+	    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+	    public PropertyservicemanagerCos acceptancePropertyservicemanagerCos(PropertyservicemanagerCos o) throws BusException{
+	    	//查出该条投诉的基本信息
+	    	PropertyservicemanagerCos savePropertyservicemanagerCos = propertyservicemanagerCosDao.get(o.getCosId());
+	    	
+	    	//投诉受理状态
+	    	savePropertyservicemanagerCos.setCosStatus("02");
+	    	//修改时间
+	    	savePropertyservicemanagerCos.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+	    	//回访记录
+	    	String backrecord = o.getBackrecord();
+	    	savePropertyservicemanagerCos.setBackrecord(backrecord);
+	    	//回访时间
+	    	savePropertyservicemanagerCos.setBacktime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+	    	return propertyservicemanagerCosDao.save(savePropertyservicemanagerCos);
+	    }
+	    
+	    /**
+	     * 受理拒绝保存对象
+	     * 修改投诉状态标识，添加拒绝原因记录
+	     */
+	    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+	    public PropertyservicemanagerCos rejectPropertyservicemanagerCos(PropertyservicemanagerCos o) throws BusException{
+
+	    	//查出该条投诉的基本信息
+	    	PropertyservicemanagerCos savePropertyservicemanagerCos = propertyservicemanagerCosDao.get(o.getCosId());
+	    	//投诉受理状态
+	    	savePropertyservicemanagerCos.setCosStatus("04");
+	    	//修改时间
+	    	savePropertyservicemanagerCos.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+	    	//拒绝原因
+	    	String backRemark = o.getBackRemark();
+	    	savePropertyservicemanagerCos.setBackRemark(backRemark);
+	    	//回访时间
+	    	savePropertyservicemanagerCos.setBacktime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+	    	return propertyservicemanagerCosDao.save(savePropertyservicemanagerCos);
+	    }
 }
