@@ -213,6 +213,28 @@ public class LoginController {
 		return new ModelAndView("welcome");
 	}
 	
+	@RequestMapping("/findpsw.html")
+	public ModelAndView findpsw(){
+		return new ModelAndView("pwd/findpsw");
+	}
+	@RequestMapping("/findCheckPhone.html")
+	public ModelAndView findCheckPhone(
+			HttpServletRequest request,
+			HttpServletResponse response){
+		ModelAndView model = new ModelAndView("pwd/findCheckPhone");
+		model.addObject("phone", request.getSession().getAttribute("phone"));
+		return model;
+	}
+	@RequestMapping("/findpswReset.html")
+	public ModelAndView findpswReset(
+			HttpServletRequest request,
+			HttpServletResponse response){
+		ModelAndView model = new ModelAndView("pwd/findpswReset");
+		model.addObject("memberName", request.getSession().getAttribute("memberName"));
+		model.addObject("memberId", request.getSession().getAttribute("memberId"));
+		return model;
+	}
+	
 	/**
 	 * 密码修改页
 	 * @param request
