@@ -1,4 +1,4 @@
-/*==============================================================*/
+I/*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
 /* Created on:     2016/4/11 10:32:04                           */
 /*==============================================================*/
@@ -124,7 +124,7 @@ alter table sp_favorits_favoritGoods
 
 drop table if exists sp_favorits_favoritGoods;
 
-alter table sp_finace
+alter table and
    drop primary key;
 
 drop table if exists sp_finace;
