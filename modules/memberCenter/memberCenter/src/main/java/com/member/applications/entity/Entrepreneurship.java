@@ -77,10 +77,21 @@ public class Entrepreneurship implements Domain{
 	@Column(name = "IS_FINACE_")
 	@Length(max=1)
 	private String isFinace;//是否融资
+	
+	@Transient
+	private String projectTypeName; //APP端显示项目类型
 
 	@Transient
 	private MemberInformation member;
 	
+	public String getProjectTypeName() {
+		return projectTypeName;
+	}
+
+	public void setProjectTypeName(String projectTypeName) {
+		this.projectTypeName = projectTypeName;
+	}
+
 	public MemberInformation getMember() {
 		return member;
 	}
@@ -207,6 +218,7 @@ public class Entrepreneurship implements Domain{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((isFinace == null) ? 0 : isFinace.hashCode());
 		result = prime * result + ((defineTeacherType == null) ? 0 : defineTeacherType.hashCode());
+		result = prime * result + ((projectTypeName == null) ? 0 : projectTypeName.hashCode());
 		return result;
 	}
 	
@@ -289,6 +301,12 @@ public class Entrepreneurship implements Domain{
 				return false;
 		} else if (!defineTeacherType.equals(other.defineTeacherType))
 			return false;
+		if (projectTypeName == null) {
+			if (other.projectTypeName != null)
+				return false;
+		} else if (!projectTypeName.equals(other.projectTypeName))
+			return false;
+		
 		return true;
 	}
 	
