@@ -91,7 +91,7 @@ $(function() {
 			}
 		}
 	});
-	$(".hhf-submit").click(function(){
+	$(".save_btn").click(function(){
 		var financingId=$("#financingId").val();
   		var financingRe=$("#financingRe").html();
   		var financingName=$("#financingName").val();
@@ -149,14 +149,9 @@ $(function() {
 			data:params.join('&'),
 			success:function(result){
 				if(result && result.record){
-					alert("保存成功");
-					$("#financingName").val();
-					$("#financingAmount").val();
-			  		$("#financingCost").val();
-					$("#financingPre").val();
-					$("#financingTime").val();
-					$("#financingDescribe").val();
-					location.reload();
+					$('#toast_text').html('保存成功！');
+					$(".toast").show();
+		            setTimeout('$(".toast").hide();',2000);//1秒=1000
 				}
 			}
 		});

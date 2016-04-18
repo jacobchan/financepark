@@ -141,9 +141,9 @@ $(function() {
             			//调用实例对象的start()方法开始上传文件
             			qiyeuploader.start(); 
             			qiyeuploader.bind('FileUploaded',function(up, files,info) {
-            				var response = $.parseJSON(info.response);
-                           	if ("0"==response.status){
-                           		rzImages = response.fileUrl[0];
+            				var responseqy = $.parseJSON(info.response);
+                           	if ("0"==responseqy.status){
+                           		rzImages = responseqy.fileUrl[0];
                            		submit(rzId,rzLogo,roomId,rzName,rzRemark,rzUrl,enTypeId,productDiscriptio,rzImages);
                            	}
             			});
