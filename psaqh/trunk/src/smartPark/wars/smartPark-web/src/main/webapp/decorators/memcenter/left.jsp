@@ -12,7 +12,7 @@
 			 <dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/propertyManagerOcBind.html">一卡通绑定</a></dd> 
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/myAdderss.html">我的地址</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/myReservation.html">我的预约</a></dd>
-			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/policyApply.html">我的政策</a></dd>
+			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/policyApply.html">我的申请</a></dd>
 			<dt>物业服务</dt>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/propertyService/propertyManageBx.html">物业报修</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/propertyService/propertyManageCos.html">物业投诉</a></dd>
