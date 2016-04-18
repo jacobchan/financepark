@@ -29,6 +29,7 @@
 		
 		<youi:gridCol property="commodityTitle"  caption="标题" align="center" width="20%"/>
 		<youi:gridCol property="purchasingmanagerMerchant.merchantName"  caption="商户名称" align="center" width="20%"/>
+		<youi:gridCol property="purchasingmanagerGenre.genreName"  caption="商品类别" align="center" width="20%"/>
 	<%-- 	<youi:gridCol property="purchasingmanagerGenre.genreName"  caption="商品类别" align="center" width="8%"/> --%>
 		<youi:gridCol property="commodityPrice"  caption="标价" align="center" width="10%"/>
 		<youi:gridCol property="commodityDescribe"  caption="描述" align="center" width="30%"/>
@@ -54,8 +55,8 @@
 			<youi:fieldSelect property="meetingRoom.gm"  caption="规模人数" convert="roomGm" notNull="true"/>
 			<youi:fieldSelect property="meetingRoom.lx"  caption="会议室类型" convert="roomType" notNull="true"/>
 			<youi:fieldSelect property="meetingRoom.tyy"  caption="是否有投影仪" convert="roomProjector" notNull="true"/>
-			<youi:fieldSelect property="genreId" caption="商品类别"  src="esb/web/purchasingmanagerPublicManager/getRecordsByGenreCode.json" parents="genreCode" parentsAlias="genreCode" notNull="true" code="genreId" show="genreName"/>
-			<youi:fieldSelect property="purchasingmanagerMerchant.merchantId" caption="所属商户" src="esb/web/purchasingmanagerMerchantManager/getMerchantsByGenre.json" parents="genreId" parentsAlias="genreId" notNull="true" code="merchantId" show="merchantName"/>
+			<%-- <youi:fieldSelect property="genreId" caption="商品类别"  src="esb/web/purchasingmanagerPublicManager/getRecordsByGenreCode.json" parents="genreCode" parentsAlias="genreCode" notNull="true" code="genreId" show="genreName"/> --%>
+			<youi:fieldSelect property="purchasingmanagerMerchant.merchantId" caption="所属商户" src="esb/web/purchasingmanagerMerchantManager/getMerchantsByGenre.json" parents="genreCode" parentsAlias="genreCode" notNull="true" code="merchantId" show="merchantName"/>
 			<youi:fieldSwfupload property="commodityImage" caption="图像" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" />
 			<youi:fieldSwfupload property="commodityCoverImage"  caption="封面图片" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" fileUploadLimit="1" fileQueueLimit="1"/>
 			<youi:fieldArea property="commodityDescribe"  caption="描述" column="2" notNull="true"/>

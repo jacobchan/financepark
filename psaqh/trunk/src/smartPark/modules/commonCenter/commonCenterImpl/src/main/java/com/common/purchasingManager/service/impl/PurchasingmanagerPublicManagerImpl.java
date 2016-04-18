@@ -241,6 +241,15 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 		}
 		conditions.add(ConditionUtils.getCondition("genreId",Condition.EQUALS,genreId));
 		PagerRecords pagerRecords = purchasingmanagerCommodityDao.findByPager(pager, conditions, orders);
+		@SuppressWarnings("unchecked")
+		List<PurchasingmanagerCommodity> list=pagerRecords.getRecords();
+		List<PurchasingmanagerCommodity> list1=new ArrayList<PurchasingmanagerCommodity>();
+		PurchasingmanagerGenre pg=purchasingmanagerGenreManager.getPurchasingmanagerGenre(genreId);
+		for(PurchasingmanagerCommodity pc:list){
+			pc.setPurchasingmanagerGenre(pg);
+			list1.add(pc);
+		}
+		pagerRecords.setRecords(list1);
 		return pagerRecords;
 	}
     /**
@@ -349,6 +358,8 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 	@Override
 	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
 	public void saveCommodityAndPropertyForRoom(PurchasingmanagerCommodity o) {
+		List<Record> listForRoom=this.getRecordsByGenreCode("0301");//所属商户
+		o.setGenreId(listForRoom.size()>0?listForRoom.get(0).get("genreId").toString():null);
 		MeetingEntity meetingRoom=o.getMeetingRoom();
 		String adr=meetingRoom.getAdr();//获取会议室地址
 		BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(adr);
@@ -507,6 +518,8 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
      */
 	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
     public void saveCommodityAndPropertyForGw(PurchasingmanagerCommodity o) throws BusException{
+		List<Record> listForGw=this.getRecordsByGenreCode("040101");//所属商户
+		o.setGenreId(listForGw.size()>0?listForGw.get(0).get("genreId").toString():null);
 		//获取工位所属创立方Id
 		GwEntity gw=o.getGw();
 		/*String commodityName="";
@@ -592,6 +605,8 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
      */
 	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
     public void saveCommodityAndPropertyForClf(PurchasingmanagerCommodity o) throws BusException{
+		List<Record> list=this.getRecordsByGenreCode("0401");//所属商户
+		o.setGenreId(list.size()>0?list.get(0).get("genreId").toString():null);
 		//获取创立方地址
 		ClfEntity clf=o.getClf();
 		String adr=clf.getAdr();//获取创立方地址
@@ -675,6 +690,8 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 	@Override
 	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
 	public void saveCommodityAndPropertyForCar(PurchasingmanagerCommodity o) {
+		List<Record> listForCar=this.getRecordsByGenreCode("0302");//所属商户
+		o.setGenreId(listForCar.size()>0?listForCar.get(0).get("genreId").toString():null);
 		//获取当前登录用户
 		Object object = SecurityUtils.getPrincipal();
 		User user = new User();
