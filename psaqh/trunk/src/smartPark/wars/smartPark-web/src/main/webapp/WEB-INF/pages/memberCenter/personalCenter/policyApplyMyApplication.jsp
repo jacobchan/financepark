@@ -22,16 +22,25 @@
 	</table>
 	<div class="tcdPageCode fr"></div>
 </div>
+	<div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
+        </div> 
+        
+    </div>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 <script type="text/javascript">  
+var currentIndex = 1;
+var pageSize=10;
+var pageCount=1;
 	$(function(){
 		loadData();
 	});
 	
 	//加载数据
 	function loadData(){
-		var pageSize=50;
-		var pageCount=1;
+		
 		$.youi.ajaxUtils.ajax({
 			url : baseUrl + "policyApplyManager/getTotalCount.json",
 			success : function(results) {
@@ -39,14 +48,16 @@
 				pageCount = Math.ceil(totalCount / pageSize);
 				//开始勾画页面
 				refreshData(1, pageSize);
+				
 				$(".tcdPageCode").createPage({
-					pageCount : pageCount,
-					current : 1,
-					backFn : function(p) {
-						this.pageCount = pageCount;
-						refreshData(p, pageSize);
-					}
-				});
+				    pageCount:pageCount,
+				    current:1,
+				    backFn:function(p){
+				    	currentIndex = p;
+				       this.pageCount=pageCount;
+				        refreshData(p,pageSize);
+				    }
+				});		
 			}
 		});
 	}
@@ -67,6 +78,7 @@
 	
 	//拼接列表
 	function _parseRecords(recordList){
+		console.log(recordList);
 		var headHtml = "";
 			headHtml+='<tr>'
 			headHtml+='	<th>申请编号</th>'
@@ -83,13 +95,16 @@
 			html += '	<td>'+ recordList[index].nmIssuenews.policyCaption+ '</td>'
 			html += '	<td>'+ recordList[index].policyApplyContactPeople+ '</td>'
 			html += '	<td>'+ recordList[index].createTime+ '</td>'
-			if(recordList[index].applayStatus=="01"){
+			if(recordList[index].policyApplyStatus=="1"){
 				html += '	<td>未办理</td>'
 				html += '	<td><a href="javascript:cancel(\''+recordList[index].policyApplyId+'\');" class="ac-cancle">取消</a></td>'
-			}else if(recordList[index].applayStatus=="02"){
-				html += '	<td>已完成</td>'
+			}else if(recordList[index].policyApplyStatus=="2"){
+				html += '	<td>申请成功</td>'
 				html += '	<td></td>'
-			}else if(recordList[index].applayStatus=="03"){
+			}else if(recordList[index].policyApplyStatus=="3"){
+				html += '	<td>申请失败</td>'
+				html += '	<td></td>'
+			}else if(recordList[index].policyApplyStatus=="4"){
 				html += '	<td>已取消</td>'
 				html += '	<td></td>'
 			}
@@ -97,15 +112,22 @@
 		}
 		$("tbody").html(headHtml+html);
 	};
-	
+	function close(content){		        
+        $(".tc.mt25.f18").empty() ;
+        $(".tc.mt25.f18").append(content) ;
+        $(".toast").show();		      		        		       				
+		setTimeout(function(){$(".toast").hide(); },2000);
+		refreshData(currentIndex,pageSize);
+  }
 	//取消操作
 	function cancel(id){
-		var params = [ 'id=' + id ];
+		var params = [ 'policyApplyId=' + id ];
 		$.youi.ajaxUtils.ajax({
 			url : baseUrl + "policyApplyManager/cancelApply.json",
 			data : params.join('&'),
 			success : function(results) {
-				loadData();
+				//loadData();
+				close("取消成功");
 			}
 		});
 	}
