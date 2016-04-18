@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.CodeManager.service.CodeManager;
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.codemap.entity.Codeitem;
@@ -46,7 +47,8 @@ public class EntrepreneurshipManagerImpl extends BaseManagerImpl implements Entr
 	private CodeitemManager codeitemManager;
 	@Autowired
 	private MemberInformationDao memberInformationDao;
-	
+	@Autowired
+	private CodeManager codeManager;
     /**
      * 查询列表
      */
@@ -80,6 +82,11 @@ public class EntrepreneurshipManagerImpl extends BaseManagerImpl implements Entr
 		//格式化时间跟用户名查找
 		for(int i=0;i<pagerRecords.getRecords().size();i++){
 			Entrepreneurship entrepreneurship= (Entrepreneurship) pagerRecords.getRecords().get(i);
+			//项目类型的代码集名称重新给值
+			Codeitem codeitem = codeManager.getCodeitem("projectType", entrepreneurship.getProjectType());
+			if(null!=codeitem){
+				entrepreneurship.setProjectTypeName(codeitem.getItemCaption());
+			}
 			//变换时间格式
 			String createTime = sdf.format(sdf.parse(entrepreneurship.getCreateTime())).toString();
 			entrepreneurship.setCreateTime(createTime);
