@@ -251,8 +251,5 @@
 				preloader.load(file.getSource());
 			}
 		}
-		function sumbit(){
-			
-		}
 	</script>
 </html>
