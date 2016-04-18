@@ -58,11 +58,11 @@
 						if(records.length == 0){
 							$("#ly1").empty() ;
 							if(issueTypeCode == "0101"){
-								$("#ly1").append("<ul class='ig-nav'><li><p>暂时还没有任何新闻，敬请期待！</p></li></ul>") ;
+								$("#ly1").append("<ul class='ig-nav'><li><p>暂无新闻！</p></li></ul>") ;
 							}else if(issueTypeCode == "0102"){
-								$("#ly1").append("<ul class='yn-nav1'><li><p>暂时还没有任何公告，敬请期待！</p></li></ul>") ;
+								$("#ly1").append("<ul class='yn-nav1'><li><p>暂时公告！</p></li></ul>") ;
 							}else if(issueTypeCode == "0103"){
-								$("#ly1").append("<ul class='yn-nav1'><li><p>暂时还没有任何法规，敬请期待！</p></li></ul>") ;
+								$("#ly1").append("<ul class='yn-nav1'><li><p>暂时政策信息！</p></li></ul>") ;
 							}
 						}else{
 							appendN_1(issueTypeCode,result.records) ;
@@ -92,7 +92,7 @@
 					html += "<li>"+
 								"<a href='../zscenter/zs7.html?policyId="+records[i].policyId+"'>"+
 									"<div class='in-photo'>"+
-										"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+records[i].imageUrl+"&method=show' border='0' width='100%'>"+
+										"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+records[i].imageUrl+"&method=show' border='0' width='100%' class='loading-2'>"+
 									"</div>"+
 									"<div class='fr'>"+
 									"<p>"+title+"</p>"+
