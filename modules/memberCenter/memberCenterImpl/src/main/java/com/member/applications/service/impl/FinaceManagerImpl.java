@@ -36,7 +36,6 @@ import com.gsoft.utils.BizCodeUtil;
 import com.manage.EnterBusinessManager.dao.EnterbusinessmanagerRzDao;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.member.applications.dao.FinaceDao;
-import com.member.applications.entity.Entrepreneurship;
 import com.member.applications.entity.Finace;
 import com.member.applications.service.FinaceManager;
 
@@ -75,7 +74,7 @@ public class FinaceManagerImpl extends BaseManagerImpl implements FinaceManager{
     	return finaceDao.get(id);
     }
 	
-	@EsbServiceMapping
+    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
 	public PagerRecords getPagerFinaces(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=Finace.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException, ParseException{
@@ -186,9 +185,9 @@ public class FinaceManagerImpl extends BaseManagerImpl implements FinaceManager{
 	/**
 	 * 获取整个数据的totalCount
 	 */
-	@EsbServiceMapping
+	@EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
 	public List<Record> getTotalCount(
-			@ConditionCollection(domainClazz=Entrepreneurship.class) Collection<Condition> conditions)  throws BusException{
+			@ConditionCollection(domainClazz=Finace.class) Collection<Condition> conditions)  throws BusException{
 		List<Record> recordList=new ArrayList<Record>();
 		List<Finace> finaceList = this.getFinaces(conditions, null);
 		Record record = new Record();
