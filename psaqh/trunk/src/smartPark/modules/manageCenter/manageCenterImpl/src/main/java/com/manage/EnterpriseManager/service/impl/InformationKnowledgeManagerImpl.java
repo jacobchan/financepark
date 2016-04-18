@@ -14,6 +14,8 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.EnterpriseManager.entity.InformationKnowledge;
 import com.manage.EnterpriseManager.dao.InformationKnowledgeDao;
@@ -58,18 +60,28 @@ public class InformationKnowledgeManagerImpl extends BaseManagerImpl implements 
     /**
      * 保存对象
      */
-    @EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId")})
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
     public InformationKnowledge saveInformationKnowledge(InformationKnowledge o) throws BusException{
-//    	String informationKnowledgeId = o.getInformationKnowledgeId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(informationKnowledgeId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	o.setKnowledgeStatus("1");
-    	o.setCreateTime(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
-    	return informationKnowledgeDao.save(o);
+    	String informationKnowledgeId = o.getKnowledgeId();
+    	boolean isUpdate = StringUtils.isNotEmpty(informationKnowledgeId);
+    	if(isUpdate){//修改
+    		InformationKnowledge ik = informationKnowledgeDao.get(informationKnowledgeId);
+    		ik.setKnowledgeTitle(o.getKnowledgeTitle());
+    		ik.setKnowledgeRe(o.getKnowledgeRe());
+    		ik.setKnowledgeContent(o.getKnowledgeContent());
+    		if(StringUtils.isNotEmpty(o.getKnowledgeUrl())){
+    			ik.setKnowledgeUrl(o.getKnowledgeUrl());
+    		}
+    		ik.setUpdateUser(o.getUpdateUser());
+    		ik.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return informationKnowledgeDao.save(ik);
+    	}else{//新增
+    		o.setKnowledgeStatus("1");
+        	o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+        	o.setCreateUser(o.getUpdateUser());
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+        	return informationKnowledgeDao.save(o);
+    	}
     }
 
     /**

@@ -12,7 +12,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.EnterpriseManager.entity.InformationLegal;
 
@@ -73,8 +72,16 @@ public interface InformationLegalManager extends BaseManager{
 	 * @author ZhuYL
 	 * @time 2016-03-18
 	 */
-	@EsbServiceMapping
 	public List<InformationLegal> findInformationLegal(
 			@ServiceParam(name = "legalRe") String legalRe)
 			throws BusException;
+	/**
+	 * 根据唯一属性查询对象
+	 * @param paramString
+	 * @param paramObject
+	 * @return
+	 * @throws BusException
+	 */
+	public InformationLegal getObjectByUniqueProperty(String paramString,
+			String paramObject) throws BusException;
 }

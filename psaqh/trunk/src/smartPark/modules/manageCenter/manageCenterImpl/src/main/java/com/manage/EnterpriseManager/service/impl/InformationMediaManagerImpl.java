@@ -14,6 +14,8 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.EnterpriseManager.entity.InformationMedia;
 import com.manage.EnterpriseManager.dao.InformationMediaDao;
@@ -58,17 +60,27 @@ public class InformationMediaManagerImpl extends BaseManagerImpl implements Info
     /**
      * 保存对象
      */
-    @EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId")})
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUse", pubProperty = "userId")})
     public InformationMedia saveInformationMedia(InformationMedia o) throws BusException{
-//    	String informationMediaId = o.getInformationMediaId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(informationMediaId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	o.setCreateTime(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
-    	return informationMediaDao.save(o);
+    	String informationMediaId = o.getMediaId();
+    	boolean isUpdate = StringUtils.isNotEmpty(informationMediaId);
+    	if(isUpdate){//修改
+    		InformationMedia media = informationMediaDao.get(informationMediaId);
+    		media.setMediaRe(o.getMediaRe());
+    		media.setMediaTitle(o.getMediaTitle());
+    		media.setMediaTilurl(o.getMediaTilurl());
+    		if(StringUtils.isNotEmpty(o.getMediaUrl())){
+    			media.setMediaUrl(o.getMediaUrl());
+    		}
+    		media.setUpdateUser(o.getUpdateUser());
+    		media.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return informationMediaDao.save(media);
+    	}else{//新增
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+        	o.setCreateUser(o.getUpdateUser());
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return informationMediaDao.save(o);
+    	}
     }
 
     /**
