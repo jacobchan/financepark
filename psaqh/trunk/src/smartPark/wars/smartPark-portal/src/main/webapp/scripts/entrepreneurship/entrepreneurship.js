@@ -106,7 +106,7 @@ $(function(){
 				data:params.join('&'),
 				success:function(results){
 					if(results&&results.record){
-						window.location.href=cenUrl+"member/memberCenter/personalCenter/policyApply.html?showFlg=0";
+						window.location.href=cenUrl+"member/memberCenter/personalCenter/policyApply.html?showFlg=1";
 					}
 				}
 			});
@@ -214,7 +214,7 @@ $(function(){
 			data:params.join('&'),
 			success:function(results){
 				if(results&&results.record){
-					window.location.href=cenUrl+"member/memberCenter/personalCenter/policyApply.html?showFlg=1";
+					window.location.href=cenUrl+"member/memberCenter/personalCenter/policyApply.html?showFlg=2";
 				}
 			}
 		});
