@@ -3,8 +3,9 @@
  */
 package com.manage.PolicyManager.service.impl;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,26 +18,29 @@ import com.common.NewsManager.entity.NmIssuenews;
 import com.common.NewsManager.entity.NmIssuetype;
 import com.common.NewsManager.service.NmIssueflowManager;
 import com.common.NewsManager.service.NmIssuenewsManager;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.PubCondition;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
-import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
 import com.gsoft.utils.HttpSenderMsg;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
-import com.manage.PolicyManager.entity.PolicyApply;
 import com.manage.PolicyManager.dao.PolicyApplyDao;
+import com.manage.PolicyManager.entity.PolicyApply;
 import com.manage.PolicyManager.service.PolicyApplyManager;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerOc;
 
 @Service("policyApplyManager")
 @Transactional
@@ -318,6 +322,20 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
 			throws BusException {
     	PagerRecords pagerRecords = policyApplyDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
+	}
+    
+    /**
+	 * 获取整个数据的totalCount
+	 */
+    @EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	public List<Record> getTotalCount(
+			@ConditionCollection(domainClazz=PolicyApply.class) Collection<Condition> conditions)  throws BusException{
+		List<Record> recordList=new ArrayList<Record>();
+		List<PolicyApply> policyApplyList = this.getPolicyApplys(conditions, null);
+		Record record = new Record();
+		record.put("totalCount", policyApplyList.size());
+		recordList.add(record);
+		return recordList;
 	}
 }
 

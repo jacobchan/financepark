@@ -3,17 +3,16 @@
  */
 package com.manage.PolicyManager.service;
 
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.EsbServiceMapping;
-import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.PolicyManager.entity.PolicyApply;
 
@@ -101,4 +100,9 @@ public interface PolicyApplyManager extends BaseManager{
 	public PagerRecords getPagerPolicyApply(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders) throws BusException;
+	
+	/**
+	 * 获取整个数据的totalCount
+	 */
+	public List<Record> getTotalCount(Collection<Condition> conditions);
 }
