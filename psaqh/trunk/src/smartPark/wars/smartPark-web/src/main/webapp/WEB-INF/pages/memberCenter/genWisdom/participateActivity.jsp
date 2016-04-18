@@ -42,13 +42,17 @@
 		//拼接活动列表
 		function _parseRecords(record){
 			for(var i=0;i<record.length;i++){
+				var star = record[i].startTime;
+				var end = record[i].endTime;
+				var startime = getmonth(star);
+				var endtime = getmonth(end);
 				var html="<a href='javascript:;' id='"+record[i].applyId+"' onclick='javascript:gotoDetails(this)'>"+
 						 "<div class='czh-box'>"+
 						 "<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityImage+"&method=show' style='width: 220px; height: 123px;'>"+
                 		 "<div class='czh-group' style='border-bottom:1px solid #ecebeb'>"+
                     	 "<h4>"+record[i].applyTitle+"</h4>"+
                     	 "<span>活动发起人："+record[i].memberId.memberName+"</span><br/>"+
-                    	 "<span>举办时间："+record[i].startTime+"至"+record[i].endTime+"</span>"+
+                    	 "<span>举办时间："+startime+"- "+endtime+"</span>"+
                 		 "</div>"+
                 		 "<div class='czh-group'>"+
                     	 "<font class='cg-soan-btn' style='background:#FF6715'>相关文档</font>"+
@@ -81,5 +85,19 @@
 			//alert(obj.id+"跳转到详情页面");
 			window.location.href=proUrl+"czh/czh3.html?applyId="+obj.id;
 		}
+		//截取月年
+		function getmonth(time){
+			var data = "";
+			var index1=time.indexOf("-"); 
+			var index2=time.lastIndexOf("-"); 
+			var cha=parseInt(index2)-(parseInt(index1)+1); 
+			var month=time.substr((parseInt(index1)+1),cha); 
+			var kg=time.indexOf(" "); 
+			cha=parseInt(kg)-parseInt(index2); 
+			var day=time.substr(parseInt(index2)+1,cha); 
+			date = month+"/"+day;
+			return date;
+		}
+		
 	</script>
 </youi:html>
