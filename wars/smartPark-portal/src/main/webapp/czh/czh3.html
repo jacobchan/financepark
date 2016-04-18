@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
 	<script type="text/javascript" src="../scripts/page/url.js"></script>	
+		<script type="text/javascript" src="../scripts/page/sprintf.min.js"></script>	
 </head>
 <body>
 	<!--***top start****************************************-->
@@ -25,13 +26,15 @@
 				<a href="czh1.html">创智汇</a><img src="../styles/images/zs/right-j-b.png" border="0" />
 				<a href="" class="current">活动详情页</a>
 			</div>
+			
 			<div class="clearfix mb20">
-				<img src="../styles/images/czh/list-2.jpg" width="470" height="272" border="0" class="fl activityImage"/>
+				
+				<img src="" width="470" height="272" border="0" class="fl activityImage loading"/>
 				<div class="fr">
 					<h3 class="h-bg"></h3>
 					<div class="lh40 mt10 f14" style="color:#898989">
 						<span class="mr20"><img src="../styles/images/czh/clock-l.png" border="0" class="mr10"><span class="time"></span></span>
-						<span><img src="../styles/images/zs/map.png" border="0" class="mr10"><span class="address" id="activityAdr">杭州市富春硅谷园区公共会议室</span></span><br/>
+						<span><img src="../styles/images/zs/map.png" border="0" class="mr10"><span class="address" id="activityAdr"></span></span><br/>
 						<span><img src="../styles/images/czh/user-l.png" border="0" class="mr10"><span class="name"></span></span>
 						
 					</div>
@@ -71,6 +74,8 @@
 					<h2 class="f20 mt20 lh30">活动地点<a href="#" class="f14" style="color:#2578bf">（查看大图）</a></h2>
 				</div>
 			</div>
+			
+				
 		</div>
 	</div>
 	<!--***bottom start****************************************-->
@@ -118,6 +123,7 @@
 	<script type="text/javascript" src="../scripts/page/banner.js"></script>
 	<script type="text/javascript">
 		$(function(){
+			
 			$(".slideBox").hover(function(){
 	      		clearInterval(timer);
 			},function(){ timer = setInterval(run,3000)});
@@ -213,6 +219,7 @@
 			var applyId=tmp2;
 			var serviceURL = baseUrl+"activityApplyManager/getActivityApply.json";
 			var params = ['applyId='+applyId];
+			
 			$.youi.ajaxUtils.ajax({
 				url:serviceURL,
 				data:params.join('&'),
@@ -221,6 +228,7 @@
 				success:function(results){
 					if(results&&results.record){
 					_parseRecords(results.record);
+				
 					}
 				}
 			});	
@@ -239,6 +247,7 @@
 		});
 		//活动详情赋值
 		function _parseRecords(record){
+
 			$(".activityImage").attr("src",cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record.activityImage+"&method=show");
 			$(".h-bg").html(record.applyTitle);
 			$(".time").html(record.startTime);
