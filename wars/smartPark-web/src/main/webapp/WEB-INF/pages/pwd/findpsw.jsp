@@ -43,7 +43,7 @@
                         <img class="yan-img" src="Kaptcha.jpg" id="img_randCode">
                         <a class="help-inline code" href="#" style="margin-left:20px;font-size: 20px;" onclick="changeRandcode();">换一个</a>
                     </div>
-                   <a class="ib-btn mt25" style="width:350px;margin-left:58px;" href="javascript:;">下一步</a>
+                   <a class="ib-btn mt25" style="width:350px;margin-left:58px;margin-top: 18px;" href="javascript:;">下一步</a>
                 </div>
            </form>
         </div>
