@@ -6,9 +6,9 @@
 					<h3 class="per-h3">我的预约列表</h3>
 					<div class="clearfix mt20 mb20">
 						<ul class="order-nav">
-							<li class="active">我的预约</li>
-							<li>入驻申请预约</li>
-							<li>车位预约</li>
+							<li class="active">众创空间预约</li>
+							<li>入驻服务预约</li>
+							<!-- <li>车位预约</li> -->
 						</ul>
 					</div>
 					<div class="clearfix-box">
