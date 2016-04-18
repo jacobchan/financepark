@@ -302,7 +302,7 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
 	 * @param ReservationRecord
 	 */
     @EsbServiceMapping
-	 public void cancelReservation(PropertyservicemanagerEntrec o) throws BusException{
+	 public PropertyservicemanagerEntrec cancelReservation(PropertyservicemanagerEntrec o) throws BusException{
     	PropertyservicemanagerEntrec p=new PropertyservicemanagerEntrec();
 		String entrecId=o.getEntrecId();
 		if(StringUtils.isNotEmpty(entrecId)){
@@ -322,7 +322,28 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
 		propertyservicemanagerEnteringDao.save(entering);
 		
 		p.setEnterrecStatus("04");//已取消
-		propertyservicemanagerEntrecDao.save(p);
+		return propertyservicemanagerEntrecDao.save(p);
     }
+    /**
+	 *前台 根据当前用户分页查询
+	 * @return 分页对象
+	 */
+    // @SuppressWarnings("unchecked")
+	    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId.memberId",operator=Condition.EQUALS,pubProperty="userId")})
+		public PagerRecords getPager(Pager pager,//分页条件
+				@ConditionCollection(domainClazz=PropertyservicemanagerEntrec.class) Collection<Condition> conditions,//查询条件
+				@OrderCollection Collection<Order> orders)
+				throws BusException {
+	    	PagerRecords pagerRecords = propertyservicemanagerEntrecDao.findByPager(pager, conditions, orders);
+	    	/*List<PropertyservicemanagerEntrec> bxlist = pagerRecords.getRecords();
+	    	for(PropertyservicemanagerEntrec bx : bxlist){
+    			if(StringUtils.isNotEmpty(bx.getMemberId())){
+    				String memberId = bx.getMemberId();
+    				MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
+    				bx.setMember(memberInformation);
+    			}
+    		}*/
+			return pagerRecords;
+		}
 
 }
