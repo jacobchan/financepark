@@ -96,9 +96,10 @@ public interface ReservationRecordManager extends BaseManager{
     /**
 	 * 取消预约申请，将待受理状态变更为已取消
 	 * @param propertyservicemanagerEntrec
+     * @return 
 	 * @throws BusException
 	 */
-	 public void cancelReservation(ReservationRecord o) throws BusException;
+	 public ReservationRecord cancelReservation(ReservationRecord o) throws BusException;
 	/**
 	 * 根据当前登录用户获取预约记录
 	 * @param userId
@@ -114,5 +115,4 @@ public interface ReservationRecordManager extends BaseManager{
      * @param genreCode=04:众创空间
      */
 	public List<PurchasingmanagerCommodity> getCommodityByGenreType(String genreCode) throws BusException;
-
 }
