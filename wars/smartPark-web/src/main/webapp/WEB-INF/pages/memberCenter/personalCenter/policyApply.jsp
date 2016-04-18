@@ -3,7 +3,7 @@
 <youi:html title="政策申请">
 	<youi:body decorator="memcenter"> 
 				<div class="w1000">
-					<h3 class="per-h3">我的政策<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要申请政策</a></h3>
+					<h3 class="per-h3">我的申请<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要申请政策</a></h3>
 					<div class="clearfix mt20 mb20">
 						<ul class="order-nav">
 							<li class="active" onclick="jump0();"><span class="pend">政策申请</span></li>
