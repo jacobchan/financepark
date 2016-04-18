@@ -6,25 +6,31 @@
 					<h3 class="per-h3">我的政策<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要申请政策</a></h3>
 					<div class="clearfix mt20 mb20">
 						<ul class="order-nav">
+							<li class="active" onclick="jump0();"><span class="pend">政策申请</span></li>
 							<li class="active" onclick="jump1();"><span class="pend">创业加速申请</span></li>
 							<li onclick="jump2();"><span class="hospital">融资申请</span></li>
 						</ul>
 					</div>
-					<script type="text/javascript">
-					//创业加速申请
-					function jump1(){
-					    $("#loadData").load(cenUrl+"member/memberCenter/personalCenter/policyApplySpEntrepreneurship.html");  
-					}
-					//融资申请
-					function jump2(){
-					    $("#loadData").load(cenUrl+"member/memberCenter/personalCenter/policyApplyFinace.html");  
-					}
-					</script>
+					
 					<div id="loadData"></div>
 				</div>
 		</youi:body>
 		
 	<!--***bottom start****************************************-->
+	<script type="text/javascript">
+		//政策申请
+		function jump0(){
+		    $("#loadData").load(cenUrl+"member/memberCenter/personalCenter/policyApplyMyApplication.html");  
+		}
+		//创业加速申请
+		function jump1(){
+		    $("#loadData").load(cenUrl+"member/memberCenter/personalCenter/policyApplySpEntrepreneurship.html");  
+		}
+		//融资申请
+		function jump2(){
+		    $("#loadData").load(cenUrl+"member/memberCenter/personalCenter/policyApplyFinace.html");  
+		}
+	</script>
 	<script type="text/javascript">
 
 		$(function(){
@@ -34,15 +40,15 @@
 				})		
 			})
 			//页面默认加载创业加速申请加载
-			if(getRequest()=="0"){
+			if(getRequest()=="1"){
 				$(".order-nav li").eq(0).addClass("active").siblings().removeClass("active");
 				jump1();
-			}else if(getRequest()=="1"){
+			}else if(getRequest()=="2"){
 				$(".order-nav li").eq(1).addClass("active").siblings().removeClass("active");
 				jump2();
 			}else{
 				$(".order-nav li").eq(0).addClass("active").siblings().removeClass("active");
-				jump1();
+				jump0();
 			}
 		});
 
