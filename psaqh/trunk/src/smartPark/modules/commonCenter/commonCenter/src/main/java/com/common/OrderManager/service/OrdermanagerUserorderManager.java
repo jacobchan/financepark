@@ -224,4 +224,27 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	 * @throws BusException
 	 */
    	public List<OrdermanagerUserorder> getOrderlistforPage(String userId,String genreCode,String userorderStatus) throws BusException;
+   	/**
+	 *前台 根据当前用户分页查询未完成
+	 * @return 分页对象
+	 */
+	public PagerRecords getPager(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders,
+			String userorderCode,
+  			String userorderProject) throws BusException;
+	/**
+	 *前台 根据当前用户分页查询历史订单
+	 * @return 分页对象
+	 */
+	public PagerRecords getPagerHospital(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders,
+			String userorderCode,
+  			String userorderProject) throws BusException;
+	public PagerRecords getPagerPend(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders,
+			String userorderCode,
+  			String userorderProject) throws BusException;
 }
