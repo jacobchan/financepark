@@ -143,8 +143,8 @@ $('#container_polar').highcharts({
 		
 	<div id="page_index_container">
 		<youi:panel  caption="快捷访问" column="6" height="611" >
-			<youi:form id="form_s" action="esb/fileupload/myservice/myfile.html">
-				<youi:fieldLayout columns="1">
+			<youi:form id="form_s" action="esb/fileupload/myservice/myfile.html" submit="NOT" >
+				<%-- <youi:fieldLayout columns="1">
 					<youi:fieldSpinner step="2" styleClass="input-group" property="spinner" caption="spinner"></youi:fieldSpinner>
 					
 				</youi:fieldLayout>
@@ -153,11 +153,14 @@ $('#container_polar').highcharts({
 					<youi:fieldSelect column="1" src="/wxDistrictManager/getCountries.json" caption="国家" property="country" code="code" show="show"></youi:fieldSelect>
 					<youi:fieldSelect column="1" src="/wxDistrictManager/getProvinces.json" caption="省份" parents="country" property="province"  code="code" show="show"></youi:fieldSelect>
 					<youi:fieldSelect column="4" src="/wxDistrictManager/getCities.json" parents="country,province" property="city"  code="code" show="show"></youi:fieldSelect>
-				</youi:fieldLayout>
+				</youi:fieldLayout> --%>
 			</youi:form>
-			<div id="container">
+			<!-- <div id="container">
 			
-			</div>
+			</div> -->
+			<a onclick="$('body',document).bootstrapLayout('loadPage','012000','page/manageCenter.EmployeeManager.enterpriseEmployees/enterpriseEmployees.html','1111');" class="tree-a page-link">
+				我的任务
+			</a>
 		</youi:panel>
 		
 		<youi:panel caption="我的消息" column="6" height="350">
