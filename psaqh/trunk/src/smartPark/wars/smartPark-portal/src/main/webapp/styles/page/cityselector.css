@@ -15,7 +15,6 @@
 	top: 30px !important;
 	left: 70px !important;
 	min-width: 150px;
-	height:120px; overflow-y:scroll; 
 }
 .jd1_position {
 	top: 30px !important;
@@ -28,7 +27,7 @@
 	padding: 0;
 	list-style: none;
     height: 300px;
-    overflow-y: auto;
+    overflow-y: scroll;
 	
 }
 
@@ -38,12 +37,6 @@
 	display: block;
 	color: #555;
 	padding: 1px 3px;
-	display:block;/*内联对象需加*/
-width:60px;
-word-break:keep-all;/* 不换行 */
-white-space:nowrap;/* 不换行 */
-overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
-text-overflow:ellipsis;
 }
 
 .ac_results li {
@@ -59,12 +52,6 @@ text-overflow:ellipsis;
 	width: 60px;
     overflow: hidden;
     text-overflow: ellipsis;
-	display:block;/*内联对象需加*/
-    width:31em;
-    word-break:keep-all;/* 不换行 */
-    white-space:nowrap;/* 不换行 */
-    overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
-    text-overflow:ellipsis;
 }
 
 .ac_result_tip {
