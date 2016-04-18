@@ -14,6 +14,8 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.EnterpriseManager.entity.InformationLegal;
 import com.manage.EnterpriseManager.dao.InformationLegalDao;
@@ -47,6 +49,15 @@ public class InformationLegalManagerImpl extends BaseManagerImpl implements Info
     public InformationLegal getInformationLegal(@ServiceParam(name="legalId") String id)  throws BusException{
     	return informationLegalDao.get(id);
     }
+    
+    /**
+     * 根据唯一属性查询对象
+     */
+    @Override
+    @EsbServiceMapping
+    public InformationLegal getObjectByUniqueProperty(String paramString,String paramObject)  throws BusException{
+    	return informationLegalDao.getObjectByUniqueProperty(paramString, paramObject);
+    }
 	
 	@EsbServiceMapping
 	public PagerRecords getPagerInformationLegals(Pager pager,//分页条件
@@ -58,17 +69,30 @@ public class InformationLegalManagerImpl extends BaseManagerImpl implements Info
     /**
      * 保存对象
      */
-    @EsbServiceMapping(pubConditions={@PubCondition(property="createUser",pubProperty="userId")})
+    @EsbServiceMapping(pubConditions={@PubCondition(property="updateUse",pubProperty="userId")})
     public InformationLegal saveInformationLegal(InformationLegal o) throws BusException{
-//    	String informationLegalId = o.getInformationLegalId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(informationLegalId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	o.setCreateTime(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
-    	return informationLegalDao.save(o);
+    	String informationLegalId = o.getLegalId();
+    	boolean isUpdate = StringUtils.isNotEmpty(informationLegalId);
+    	if(isUpdate){//修改
+    		InformationLegal legal = informationLegalDao.get(informationLegalId);
+    		legal.setLegalRe(o.getLegalRe());
+    		legal.setLegalName(o.getLegalName());
+    		legal.setLegalBirthday(o.getLegalBirthday());
+    		legal.setLegalTelephone(o.getLegalTelephone());
+    		legal.setLegalBusiness(o.getLegalBusiness());
+    		legal.setLegalRemark(o.getLegalRemark());
+    		if(StringUtils.isNotEmpty(o.getLegalImage())){
+    			legal.setLegalImage(o.getLegalImage());
+    		}
+    		legal.setUpdateUser(o.getUpdateUser());
+    		legal.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return informationLegalDao.save(legal);
+    	}else{//新增
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+        	o.setCreateUser(o.getUpdateUser());
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return informationLegalDao.save(o);
+    	}
     }
 
     /**

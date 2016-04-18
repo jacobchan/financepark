@@ -36,6 +36,8 @@ import com.manage.EmployeeManager.service.EnterpriseRoleManager;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.EnterBusinessManager.dao.EnterbusinessmanagerRzDao;
 import com.manage.EnterBusinessManager.service.EnterbusinessmanagerRzManager;
+import com.manage.EnterpriseManager.entity.InformationLegal;
+import com.manage.EnterpriseManager.service.InformationLegalManager;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerEntrecManager;
 @Service("enterbusinessmanagerRzManager")
@@ -61,6 +63,8 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 	private MemberInformationManager memberInformationManager;
 	@Autowired
 	private EtypeEnterprisetypeManager etypeEnterprisetypeManager;
+	@Autowired
+	private InformationLegalManager informationLegalManager;
 	
     /**
      * 查询列表
@@ -91,6 +95,12 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 			@ConditionCollection(domainClazz=EnterbusinessmanagerRz.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
 		PagerRecords pagerRecords = enterbusinessmanagerRzDao.findByPager(pager, conditions, orders);
+		@SuppressWarnings("unchecked")
+		List<EnterbusinessmanagerRz> enterList = pagerRecords.getRecords();
+		for(EnterbusinessmanagerRz enter:enterList){
+			InformationLegal legal = informationLegalManager.getObjectByUniqueProperty("legalRe",enter.getRzId());
+			enter.setLegal(legal);
+		}
 		return pagerRecords;
 	}
     /**

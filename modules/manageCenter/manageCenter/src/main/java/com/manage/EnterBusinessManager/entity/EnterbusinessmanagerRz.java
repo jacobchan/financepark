@@ -8,6 +8,7 @@ import com.common.BuildingBaseManager.entity.BbmRoom;
 import com.common.EnterpriceTypeManager.entity.EtypeEnterprisetype;
 import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
+import com.manage.EnterpriseManager.entity.InformationLegal;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
 /**
  * 实体: 入驻企业基本信息
@@ -126,9 +127,20 @@ public class EnterbusinessmanagerRz implements Domain{
 	
 	@Column(name = "SCAN_COUNT_")
 	private String scanCount;//浏览次数
+	
+	@Transient
+	private InformationLegal legal;//企业法人
 
 	public String getProductDiscriptio() {
 		return productDiscriptio;
+	}
+
+	public InformationLegal getLegal() {
+		return legal;
+	}
+
+	public void setLegal(InformationLegal legal) {
+		this.legal = legal;
 	}
 
 	public void setProductDiscriptio(String productDiscriptio) {
