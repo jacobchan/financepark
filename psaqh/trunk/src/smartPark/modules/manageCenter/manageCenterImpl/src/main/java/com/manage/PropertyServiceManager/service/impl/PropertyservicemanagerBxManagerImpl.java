@@ -374,4 +374,31 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
     		}
 			return pagerRecords;
 		}
+		 /**
+			 * 根据当前用户分页查询    跟据订单号模糊查询
+			 * @return 分页对象
+			 */
+		    @SuppressWarnings("unchecked")
+		    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+			public PagerRecords getPagerLikeBx(Pager pager,//分页条件
+					@ConditionCollection(domainClazz=PropertyservicemanagerBx.class) Collection<Condition> conditions,//查询条件
+					@OrderCollection Collection<Order> orders,
+					@ServiceParam(name="bxLikeCode") String bxLikeCode,
+					@ServiceParam(name="startTime") String startTime,
+					@ServiceParam(name="endTime") String endTime)
+					throws BusException {
+		    	conditions.add(ConditionUtils.getCondition("bxCode", Condition.LIKE, bxLikeCode));
+				
+				conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+		    	PagerRecords pagerRecords = propertyservicemanagerBxDao.findByPager(pager, conditions, orders);
+		    	List<PropertyservicemanagerBx> bxlist = pagerRecords.getRecords();
+		    	for(PropertyservicemanagerBx bx : bxlist){
+	    			if(StringUtils.isNotEmpty(bx.getMemberId())){
+	    				String memberId = bx.getMemberId();
+	    				MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
+	    				bx.setMember(memberInformation);
+	    			}
+	    		}
+				return pagerRecords;
+			}
 }
