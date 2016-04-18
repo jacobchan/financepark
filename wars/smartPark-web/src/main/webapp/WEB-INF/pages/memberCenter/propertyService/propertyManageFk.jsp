@@ -298,7 +298,7 @@ $(function () {
 			});
 		};
 		//根据订单号查询
-		$('.hhf-submit.a').click(function(){
+	/* 	$('.hhf-submit.a').click(function(){
 			
 			$(".aaa").empty();
 			 var fkCode=$("#fkCode").val(); 
@@ -309,13 +309,54 @@ $(function () {
 		    	 url:baseUrl+'propertyservicemanagerFkcodeManager/getFkcodelistLikeFkcodeCode.json',
 		    	 data:params.join('&'),
 		    	 success:function(result){				    		 
-						/* console.log(result.records);   */         
+						// console.log(result.records);          
 						if(result&&result.records){						
 							_parseRecords(result.records);							
 						}
 					}
 			}); 
-		}); 
+		});  */
+		$('.hhf-submit').click(function(){	
+			var fkCode=$("#fkCode").val();
+			//alert(ocCode);
+			var startTime=$("#startTime").val(); 
+			var endTime=$("#endTime").val(); 			
+			var params = ['fkLikeCode='+fkCode,'startTime='+startTime,'endTime='+endTime];
+			$.ajax({
+				url:baseUrl+'propertyservicemanagerFkcodeManager/getPagerLikeFk.json',
+				data:params.join('&'),
+				success:function(results){	
+					pageCount=Math.ceil(results.totalCount/pageSize);//页数				
+					//alert(pageCount);
+					 refreshData_query(1,pageSize);
+						$(".tcdPageCode").createPage({
+						    pageCount:pageCount,
+						    current:1,
+						    backFn:function(p){
+						    	currentIndex = p;
+						       this.pageCount=pageCount;
+						       refreshData_query(p,pageSize);
+						    }
+						});			
+	              }
+	        }); 			
+	    });	
+			//根据订单号查询 分页列表
+			function refreshData_query(pageIndex,pageSize){
+				var fkCode=$("#fkCode").val();	
+				 var startTime=$("#startTime").val(); 
+				 var endTime=$("#endTime").val(); 
+				var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'fkLikeCode='+fkCode,'startTime='+startTime,'endTime='+endTime];
+				$.ajax({
+					url:baseUrl+'propertyservicemanagerFkcodeManager/getPagerLikeFk.json',
+					data:params.join('&'),
+					success:function(results){
+						if(results&&results.records){
+							 _parseRecords(results.records);
+						}
+					}
+				});
+			}
 	</script>
 	<!-- 取消访客 -->
 	<script type="text/javascript">
