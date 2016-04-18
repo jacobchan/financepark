@@ -52,7 +52,7 @@
 			<div class="h-nav clearfix">
 				<a href="">首页</a><img src="styles/images/zs/right-j-b.png" border="0">
 				<a href="">国内酒店预订</a><img src="styles/images/zs/right-j-b.png" border="0">
-				<a href="" id="currentHotel1" class="current">北京好苑建国酒店</a>
+				<a href="" id="currentHotel1" class="current"></a>
 			</div>
 			<div class="fl" style="width:890px;">
 				<div class="clearfix">
@@ -62,8 +62,8 @@
 							<col width="200"></col>
 						</colgroup>
 						<tr>
-							<td class="f24" id="currentHotel2">北京好苑建国酒店</td>
-							<td align="center"><span class="f24 c-o" id="minprice">¥618</span>起</td>
+							<td class="f24" id="currentHotel2"></td>
+							<td align="center"><span class="f24 c-o" id="minprice">¥ 0</span>起</td>
 						</tr>
 						<tr>
 							<td>
@@ -72,10 +72,10 @@
 										<i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i>
 									</span>
 								</p>
-								<p id="hotelAddr">位于[建国门]北京市东城区建国门内大街17号(朝阳门南小街与建国门内大街交汇处北侧路北) </p>
+								<p id="hotelAddr"> </p>
 							</td>
 							<td align="center">
-								<a href="" class="ib-btn" style="margin-top:0px;">立即预订</a>
+								<!-- <a href="" class="ib-btn" style="margin-top:0px;">立即预订</a> -->
 							</td>
 						</tr>
 					</table>
@@ -88,7 +88,7 @@
 						</colgroup>
 						<tbody>
 							<tr>
-								<td rowspan="2"><div style="width:350px;"><img id="majorPicture" src="styles/images/jd-i1.jpg" width="100%"></div></td>
+								<td rowspan="2"><div style="width:350px;"><img style="max-height: 300px;" id="majorPicture" src="styles/images/jd-i1.jpg" width="100%"></div></td>
 								<td><div style="width:150px;"><img class="hotelPic" src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
 								<td><div style="width:200px;"><img class="hotelPic" src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
 								<td><div style="width:160px;"><img class="hotelPic" src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
@@ -433,6 +433,14 @@
 	<script type="text/javascript" src="scripts/cityselector/fixdiv.js"></script>
 	<script type="text/javascript" src="scripts/cityselector/address.js"></script>
 	<script type="text/javascript">
+	var pltime,timer;//动态加载效果的时间控件变量
+    function closeTanc(){
+        if(pltime>1){
+            pltime--;
+        }else{
+            $(".toast").hide();
+        }       
+    }
 	function GetRequest() {
 	   var url = decodeURI(location.search); //获取url中"?"符后的字串
 	   var theRequest = new Object();
@@ -452,6 +460,22 @@
 	    var dates = Math.abs((startTime - endTime))/(1000*60*60*24);     
 	    return  dates;    
 	}
+	//日期对比 a为开始日期b为结束日期 a>b false a<b true
+	function compareDate(a, b) {
+	    var arr = a.split("-");
+	    var starttime = new Date(arr[0], arr[1], arr[2]);
+	    var starttimes = starttime.getTime();
+
+	    var arrs = b.split("-");
+	    var lktime = new Date(arrs[0], arrs[1], arrs[2]);
+	    var lktimes = lktime.getTime();
+
+	    if (starttimes > lktimes) {
+	        return false;
+	    }
+	    else
+	        return true;
+	}
 	//获取房型数据
 	function getRooms(){
 		$("#roomlist .jd-order-room").remove();
@@ -459,8 +483,24 @@
 		var tm1 = $("#tm1").val();
 		var tm2 = $("#tm2").val();
 		if(tm2<tm1) {
-			alert("离店时间必须大于入住时间！");
-			return ;
+			clearInterval(timer);
+			$("#msg").text("入住时间不能大于离店时间。");
+	        $(".toast").show();
+	        pltime=2;
+	        timer=setInterval("closeTanc()",1000);
+			return false;
+		}
+		//判断当前时间对比
+		var today = new Date();
+		var month = Number(today.getMonth()) + Number(1);
+		var todayDate = today.getFullYear()+"-"+month+"-"+today.getDate();
+		if(!compareDate(todayDate,tm1)){
+			clearInterval(timer);
+			$("#msg").text("所选日期不能小于当前日期。");
+	        $(".toast").show();
+	        pltime=2;
+	        timer=setInterval("closeTanc()",1000);
+			return false;
 		}
 		$("#totalTime").empty();
 		$("#totalTime").html("共"+GetDateDiff(tm1,tm2)+"晚");
@@ -689,7 +729,14 @@
 	});
 	//跳转到订单页面
 	function bookHotel(rid,pid){
-		if(!isLogin){alert("请先登录");return;}
+		if(!isLogin){
+			clearInterval(timer);
+			$("#msg").text("请先登录");
+	        $(".toast").show();
+	        pltime=2;
+	        timer=setInterval("closeTanc()",1000);
+			return ;
+		}
 		var hid = $("#hid").val();
 		var tm1 = $("#tm1").val();
 		var tm2 = $("#tm2").val();
@@ -697,5 +744,13 @@
 	}
 	
 	</script>
+	<!-- 弹出层样式 -->
+    <div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715" id="msg">请登录后重试！</p>
+        </div>
+        
+    </div>
 </body>
 </html>

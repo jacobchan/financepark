@@ -495,7 +495,7 @@
             </form> 
             <form class="reform" style="display:none;" onkeydown="if(event.keyCode==13)return false;">
             	<div class="re_div"  style="position: relative;">
-            		<input id="cityid" name="cityid" type="hidden" value="{$cityid}" />
+            		<input id="cityid" name="cityid" type="hidden" value="" />
                 	<label for="city_name">入住城市</label>
                 	<input type="text" value=""	id="city_name" name="city_name"/>
                 	<div id="suggest" class="ac_results index_position"></div>
@@ -1326,12 +1326,20 @@
       //酒店预定跳转
 		function gotoHotel(){
 			var cityname = $("#city_name").val();
-			var cityId = $("#cityid").val();
+			var cityid = $("#cityid").val();
 			var tm1 = $("#overdate").val();
 			var tm2 = $("#leavedate").val();
 			var today = new Date();
 			var month = Number(today.getMonth()) + Number(1);
 			var todayDate = today.getFullYear()+"-"+month+"-"+today.getDate();
+			if(tm1=="" || tm2=="" || tm1==null || tm2==null || cityid=="" || cityid==null || cityname=="" || cityname=="中文/拼音"){
+				clearInterval(timer);
+				$("#msg").text("请正确选择城市、日期");
+    	        $(".toast").show();
+    	        pltime=2;
+    	        timer=setInterval("closeTanc()",1000);
+				return false;
+			}
 			if(!compareDate(todayDate,tm1)){
 				clearInterval(timer);
 				$("#msg").text("所选日期不能小于当前日期。");
@@ -1341,7 +1349,7 @@
 				return false;
 			}
 			if(compareDate(tm1,tm2)){
-				window.open(encodeURI("jd1.html?cityname="+cityname+"&cityid="+cityId+"&tm1="+tm1+"&tm2="+tm2));
+				window.open(encodeURI("jd1.html?cityname="+cityname+"&cityid="+cityid+"&tm1="+tm1+"&tm2="+tm2));
 			}else{
 				clearInterval(timer);
 				$("#msg").text("入住时间不能大于离店时间。");

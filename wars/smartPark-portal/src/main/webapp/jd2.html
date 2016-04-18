@@ -59,7 +59,7 @@
                 	<p class="f16 c-333 mt10">酒店前台付款：<span class="fr c-o f24 price" id="">￥0 </span></p>
                 </div>
             </div> 
-           	<div class="bg-ff clearfix fl">
+           	<div class="bg-ff clearfix fl" id="main">
            		<form class='tc'>
            			<h3 class="pb10 f16 lh24 tl" style="border-bottom:1px solid #ecebeb;">预定信息</h3>
 	           		<table class="setting-table jdorder-tab mt10 tl">
@@ -236,6 +236,14 @@
 	var iscard = 0; //1是担保 0不担保
 	var carddesc; //担保描述
 	var roomPrice=1;
+	var pltime,timer;//动态加载效果的时间控件变量
+    function closeTanc(){
+        if(pltime>1){
+            pltime--;
+        }else{
+            $(".toast").hide();
+        }       
+    }
 	function GetRequest() {
 	   var url = decodeURI(location.search); //获取url中"?"符后的字串
 	   var theRequest = new Object();
@@ -321,7 +329,7 @@
 		var dayNum = GetDateDiff(tm1,tm2);
 		$(".price").html("￥"+ roomPrice*room_num);
 	}
-	//add creditcard 
+	//add creditcard 添加信用担保模块
 	function addCredit(){
 		var html_ = "<h3 class='pb10 f16 lh24 tl mt10 creditCard' style='border-bottom:1px solid #ecebeb;'>信用卡担保</h3>";
 		html_ += "<div class='hc-con-c mt20 creditCard'>";
@@ -343,8 +351,8 @@
       		html_ += "<span class='lh30 c-b1 ml10'><img src='styles/images/grzx/circle-red.png' class='mr5'>信用卡背面紧跟在卡号末四位号码的后面印刷的3位数字</span></td></tr>";
       		html_ += "<tr><td>持卡人姓名：</td><td><input id='puname' type='text' style='width:115px;'></td></tr>";	
       		html_ += "<tr><td>证件类型：</td><td><div class='tct-select fl' style='width:115px'>";
-      		html_ += "<div class='ic-select'><p id='puidtype' value='0'>身份证</p></div>";
-		html_ += "<ul style='display: ;' class='select-nav'><li value='0'>身份证</li><li value='1'>护照</li><li value='2'>其他</li></ul></div></td></tr>";
+      		html_ += "<div class='ic-select'><p id='puidtype' data-val='0'>身份证</p></div>";
+		html_ += "<ul style='display: ;' class='select-nav'><li data-val='0'>身份证</li><li data-val='1'>护照</li><li data-val='2'>其他</li></ul></div></td></tr>";
 		html_ += "<tr><td>证件号码：</td><td><input id='puidno' type='text'></td></tr></table>";
       		$("#customerInfo").after(html_);	
 	}
@@ -377,7 +385,7 @@
 			              'tm1='+$("#tm1").val(),'tm2='+$("#tm2").val(),'latetime='+$("input:radio:checked").val(),
 			              'rm='+$("#roomNum").text(),'guest='+tmp,'mobile='+$("#mobile").val(),
 			              'pucardno='+$("#pucardno").val(),'puyear='+$("#puyear").text(),'pucode='+$("#pucode").val(),
-			              'pumonth='+$("#pumonth").text(),'puname='+$("#puname").val(),'puidtype='+$("#puidtype").text(),
+			              'pumonth='+$("#pumonth").text(),'puname='+$("#puname").val(),'puidtype='+$("#puidtype").attr("data-val"),
 			              'puidno='+$("#puidno").val()];
 		}else{
 			params = ['hid='+$("#hid").val(),'rid=' + $("#rid").val(),'pid='+$("#pid").val(),
@@ -393,9 +401,28 @@
 			success:function(result){
 				if(result&&result.records){
 					var record = result.records;
-					if(record[0].orderid!=0)
-						window.open("jd3.html");
-					else alert(record[0].error);
+					if(record[0].orderid!=0){
+						$("#main").empty();
+						var html_ = "";
+						html_ += "<div class='clearfix p30' style='border-bottom:1px dashed #ecebeb;'>";
+						html_ += "<div class='fl ml30'><img src='styles/images/sel.png' border='0'></div>";
+	           			html_ += "<div class='fl ml50' style='width:82%'>";
+		           		html_ += "<h2 class='lh35 mb10' style='font-size:26px;'>您的预订提交成功</h2>"
+		           		html_ += "<h5 class='f12 lh30 mb10'><span class='f16 mr10'>"+tmp+"</span> 先生/女士：感谢您的预订，稍后您将收到订单确认短信</h5>";
+		           		html_ += "<p class='c-o f12'>注意事项：为保证您的顺利入住，请到达酒店时，报预订时填写的入住人姓名，并持有效证件办理入住。</p></div></div>";
+		           		html_ += "<div style='margin-left:155px;'>";
+	           			html_ += "<p class='mt30'>订单编号：<span class='ml30'>"+record[0].orderid+"</span></p>";
+	           			html_ += "<p class='mt20'>酒店前台付款：<span class='ml30 c-o f24'>￥"+roomPrice+"</span></p></div>";
+	           			$("#main").append(html_);
+					}
+					else {
+						clearInterval(timer);
+						$("#msg").text("下单失败，所填信息有误");
+				        $(".toast").show();
+				        pltime=2;
+				        timer=setInterval("closeTanc()",1000);
+						return false;
+					}
 				}
 			}
 		});
@@ -407,6 +434,11 @@
 			    $(this).next(".select-nav").show();
 			    e.stopPropagation();//阻止冒泡
 			});
+			$(document).on('click', '.select-nav li', function() {
+				$(this).parent(".select-nav").prev(".ic-select").find("p").text($(this).text());
+				$(this).parent().hide();
+				$(this).parent(".select-nav").prev(".ic-select").find("p").attr("data-val",$(this).attr("data-val"));
+			})
 			var Request = new Object();
 			Request = GetRequest();
 			var hid = Request['hid'];
@@ -524,5 +556,13 @@
 			laydate(end);
 		})
 	</script>
+	<!-- 弹出层样式 -->
+    <div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715" id="msg">请登录后重试！</p>
+        </div>
+        
+    </div>
 </body>
 </html>
