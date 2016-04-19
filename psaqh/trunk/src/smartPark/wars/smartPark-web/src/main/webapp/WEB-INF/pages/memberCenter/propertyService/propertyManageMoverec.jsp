@@ -64,8 +64,7 @@
 	var pageCount=1;
 	var currentIndex = 1;
 	var serviceURL = baseUrl+'propertyservicemanagerMoverecManager/getPagerMoverec.json';
-	$(function () {
-		
+	$(function () {	
 		//分页页码显示
 		 $.ajax({
 			url:serviceURL, 
@@ -81,9 +80,6 @@
 								        refreshData(p,pageSize);
 								    }
 								});			
-			/* 	if(result&&result.records){
-					_parseRecords(result.records);
-				} */
 			}
 		}); 			
 	});	
@@ -101,31 +97,12 @@
 				}
 			}
 		});
-	}
-		/* $(function () {
-			$(".ac-show").click(function(e){
-				$(".bg-tanc").show();
-			});
-			
-			$.ajax({
-				url:baseUrl+'propertyservicemanagerBxManager/getBxListforpage.json', 
-				success:function(result){
-					if(result&&result.records){
-						_parseRecords(result.records);
-					}
-				}
-			});
-			
-		}); */
-
-	 
-	
+	}	 	
 	//拼接列表
 	function _parseRecords(record){
 		$(".fklist").empty();	
 		for(var i=0;i<record.length;i++){
-			var id = record[i].moverecId ;
-			
+			var id = record[i].moverecId ;			
 			var status="";
 			var button=""; 
 			var moverecStatus="";
@@ -144,8 +121,7 @@
 				 moverecTime=record[i].moverecTime;
 			}else if(record[i].moverecTime){
 				moverecTime="";
-			}
-			
+			}			
 			  var html="<div class='gz-fx-box clearfix' id='"+id +"'  >"+
 						    "<div class='gzb-thead'>"+
 						        "<span class='c-o'>订单号："+record[i].moverecCode+"</span>"+
@@ -173,8 +149,7 @@
 	};
 	//取消弹窗
 	function cancel(obj){
-		var me=obj.parentNode.parentNode.parentNode;//找到父节点
-		
+		var me=obj.parentNode.parentNode.parentNode;//找到父节点	
 		//alert(me.id);
 		var moverec=me.childNodes[0].childNodes[0].innerText; 
 		$(".moverec").html(moverec);
@@ -183,24 +158,21 @@
 	};
 	//点击确认取消搬家预约
 	$(function(){
-		$(".hhf-submit").click(function(){
-			
-				var id=$(".moverec")[0].getAttribute("id");
-				
+		$(".hhf-submit").click(function(){			
+				var id=$(".moverec")[0].getAttribute("id");				
 			 	$.ajax({
 					url:baseUrl+'propertyservicemanagerMoverecManager/cancelStatus.json',
 					data:'moverecId='+id,
 					success:function(result){
 						if(result&&result.record){
 							//$(".bg-tanc.m1").close();
-							close("取消成功!");						
-							
+							close("取消成功!");													
 						}
 					}
 				});
 			});
 		});
-	//取消弹窗
+	//操作成功弹窗
 	 function close(content){		        
 	        $(".tc.mt25.f18").empty() ;
 	        $(".tc.mt25.f18").append(content) ;
@@ -223,8 +195,7 @@
 				$(this).parents(".gz-fx-box").find(".fx-two").slideToggle("fast");
 				$(this).parents(".gz-fx-box").find(".fx-one").slideToggle("fast");
 			})
-		})
-		
+		})		
 	</script>
 	<script type="text/javascript">
 	    //点击跳转到搬家申请页面
