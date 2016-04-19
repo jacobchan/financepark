@@ -1,4 +1,4 @@
-myReservation.jspmyReservation.jsp<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/pages/include.jsp" %>
 <youi:html title="我的预约">
 	<youi:body decorator="memcenter"> 
