@@ -41,10 +41,10 @@
 			})
 			//页面默认加载创业加速申请加载
 			if(getRequest()=="1"){
-				$(".order-nav li").eq(0).addClass("active").siblings().removeClass("active");
+				$(".order-nav li").eq(1).addClass("active").siblings().removeClass("active");
 				jump1();
 			}else if(getRequest()=="2"){
-				$(".order-nav li").eq(1).addClass("active").siblings().removeClass("active");
+				$(".order-nav li").eq(2).addClass("active").siblings().removeClass("active");
 				jump2();
 			}else{
 				$(".order-nav li").eq(0).addClass("active").siblings().removeClass("active");
