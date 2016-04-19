@@ -78,7 +78,6 @@ var pageCount=1;
 	
 	//拼接列表
 	function _parseRecords(recordList){
-		console.log(recordList);
 		var headHtml = "";
 			headHtml+='<tr>'
 			headHtml+='	<th>申请编号</th>'
@@ -112,6 +111,7 @@ var pageCount=1;
 		}
 		$("tbody").html(headHtml+html);
 	};
+	//取消成功，提示信息
 	function close(content){		        
         $(".tc.mt25.f18").empty() ;
         $(".tc.mt25.f18").append(content) ;
