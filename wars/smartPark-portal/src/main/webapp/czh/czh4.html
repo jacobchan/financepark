@@ -319,7 +319,7 @@
 						"<div class='clearfix lh40' id='111'>"+
 						"<div class='fl'><span><img src='../styles/images/czh/logo.png'  border='0' width='75' height='25' class='mr20'></span>"+
 						"<span><img src='../styles/images/czh/user-l.png' border='0' class='mr10'>"+record[i].memberId.memberName+"</span>"+
-						"<a href='javascript:;' class='c-o ml20'>在线观看PDF/PPT <i class='fa fa-angle-double-right f16'></i></a>"+"</div>"+
+						"<a href='javascript:;' class='c-o ml20 pdf'>在线观看PDF/PPT <i class='fa fa-angle-double-right f16'></i></a>"+"</div>"+
 							"<div class='fr' id='"+record[i].applyId+"'>"+
 								"<a href='javascript:;'  class='ib-btn acc' style='margin-top:0px;'>我要报名</a>"+
 							"</div>"+
@@ -329,6 +329,14 @@
 		}
 		$('.pb-list-group').empty();
 		$('.pb-list-group').append(html);
+		//文档跳转
+		$(".c-o.ml20.pdf").click(function(e){
+			var id  = $(this).parents("li").attr("id");
+			var url="../czh/czh7.html"+"?"+"applyId="+id; 
+			window.open(url); 
+			e.stopPropagation();	
+		});
+		//报名弹出
 		$(".ib-btn.acc").click(function(e){
 			$(".bg-tanc").attr("id",$(this).parents("li").attr("id"));
 			$("#applyMember").val('');
