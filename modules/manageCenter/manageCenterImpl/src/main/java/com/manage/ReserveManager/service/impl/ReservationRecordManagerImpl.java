@@ -259,7 +259,7 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 			}
 		}else{
 			//return null;
-			throw new BusException("空对象");
+			throw new BusException("对象id为空，取消失败");
 		}    
     }
     /**
