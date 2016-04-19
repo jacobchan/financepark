@@ -271,7 +271,7 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 		// TODO Auto-generated method stub	
 		PropertyservicemanagerOc o=propertyservicemanagerOcDao.get(id);
 		String ocStstus=o.getOcStatus();
-		if(ocStstus.equals("00")){
+		if("00".equals(ocStstus)){
 			o.setOcStatus("08");
 			o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 			return propertyservicemanagerOcDao.save(o); 
