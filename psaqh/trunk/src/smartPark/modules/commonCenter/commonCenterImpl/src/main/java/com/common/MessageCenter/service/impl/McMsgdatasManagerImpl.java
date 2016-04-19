@@ -4,6 +4,7 @@
 package com.common.MessageCenter.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ import com.common.MessageCenter.service.McMsgtempalateManager;
 import com.common.MessageCenter.service.MessagePostProcessor;
 import com.gsoft.common.service.BaseUserManager;
 import com.gsoft.common.util.MessageUtils;
+import com.gsoft.common.util.SMSUtil;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -34,9 +36,13 @@ import com.gsoft.framework.esb.annotation.ConditionCollection;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.OrderCollection;
 import com.gsoft.framework.esb.annotation.ServiceParam;
-import com.gsoft.framework.security.PrincipalConfig;
 import com.gsoft.framework.security.agt.entity.User;
+import com.gsoft.framework.security.agt.service.UserManager;
+import com.gsoft.framework.security.fuc.entity.Role;
+import com.gsoft.framework.security.fuc.service.RoleManager;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.utils.HttpSenderMsg;
 
 @Service("mcMsgdatasManager")
@@ -53,6 +59,10 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 	private BaseUserManager baseUserManager;
 	@Autowired
 	private MemberInformationManager memberInformationManager;
+	@Autowired
+	private UserManager userManager;
+	@Autowired
+	private RoleManager roleManager;
 
 	/**
 	 * 查询列表
@@ -103,7 +113,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 		// }else{//新增
 		//
 		// }
-		o.setSendDate(DateUtils.getToday("yyyy-MM-dd"));
+		o.setSendDate(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		return mcMsgdatasDao.save(o);
 	}
 
@@ -149,64 +159,11 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 	}
 
 	@EsbServiceMapping
-	public String buildMsgContent(McMsgtempalate msgtempalate,
+	public String buildMessageContent(McMsgtempalate msgtempalate,
 			Map<String, String> replaceMap) throws BusException {
 		return com.gsoft.common.util.StringUtils.replaceAllString(
 				msgtempalate.getMsgTempalateContent(),
 				MessageUtils.placeholders, replaceMap);
-	}
-
-	@Override
-	public void sendMessage(McMsgdatas mcMsgdatas) throws BusException {
-		McMsgtempalate tempalate = mcMsgdatas.getMcMsgtempalate();
-		String receiver = tempalate.getMsgReceiver();// 接收对象 ROLE_ID
-		// 用户属性表中 手机属性必须为phone
-		List<String> phones = new ArrayList<String>();
-		// 如果角色属于会员用户，则从会员表里（MemberInformation）查询，否则从User里取
-		if ("企业管理员角色ID".equals(receiver)) {
-			// 查出所有角色为企业管理员的用户,管理员所在企业和当前用户企业相同
-
-		} else {
-			List<User> users = baseUserManager
-					.getUsersByRoles(new String[] { receiver });// 后台用户
-			for (User user : users) {
-				PrincipalConfig principalConfig = user.getPrincipalConfig();
-				if (principalConfig.get("phone") != null) {
-					phones.add(principalConfig.get("phone"));
-				}
-			}
-		}
-		if (messagePostProcessor != null) {
-			messagePostProcessor.send(mcMsgdatas,
-					phones.toArray(new String[phones.size()]));
-		}
-
-	}
-
-	@Override
-	public void sendMessageSingle(McMsgdatas mcMsgdatas, String userId)
-			throws BusException {
-		// 发送给会员用户 ROLE_MEMBER
-		String msgContent = mcMsgdatas.getMsgContent();
-		MemberInformation member = memberInformationManager
-				.getMemberInformation(userId);
-		if (msgContent.contains("@user")) {
-			String userCaption = member.getMemberName();
-			String phone = member.getMemberPhoneNumber();
-			msgContent = msgContent.replace("@user", userCaption);
-			mcMsgdatas.setMsgContent(msgContent);
-			if (messagePostProcessor != null) {
-				messagePostProcessor.send(mcMsgdatas, new String[] { phone });
-			}
-		}
-	}
-	
-	@Override
-	public void sendMessageEnt(McMsgdatas mcMsgdatas, String entId)
-			throws BusException {
-		//通过企业id查找企业管理员
-		String userId = "";//企业管理员属于会员，且只有一个
-		sendMessageSingle(mcMsgdatas,userId);
 	}
 
 	@EsbServiceMapping
@@ -217,13 +174,86 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 		McMsgtempalate msgTempalate = msgtempalateManager
 				.getMsgTempalate(uniqueCode);
 		if(msgTempalate!=null){
-			mcMsgdatas.setMsgCaption(msgTempalate.getMsgTempalateCaption());
-			mcMsgdatas.setMcMsgtempalate(msgTempalate);
-			mcMsgdatas.setMsgContent(buildMsgContent(msgTempalate, replaceMap));
+			mcMsgdatas.setMsgCaption(msgTempalate.getMsgTempalateCaption());//消息内容标题
+			mcMsgdatas.setMcMsgtempalate(msgTempalate);//引用模板
+			mcMsgdatas.setMsgContent(buildMessageContent(msgTempalate, replaceMap));//内容
 		}	
-		mcMsgdatas.setSendStatus("0");// 初始发送状态默认值
+		mcMsgdatas.setSendStatus("00");// 初始发送状态默认值
 		return mcMsgdatas;
 	}
+	
+	public void sendMessage(McMsgdatas mcMsgdatas,String id,int type) throws BusException{
+		String[] phones = null;
+		if(StringUtils.isEmpty(id)){
+			McMsgtempalate tempalate = mcMsgdatas.getMcMsgtempalate();
+			String receiver = tempalate.getMsgReceiver();//模板中定义
+			if("ROLE_MEMBER".equals(receiver)){
+				//会员表--获取对应phones
+				List<MemberInformation> members = memberInformationManager.getMemberInformations();
+				if(members!=null&&members.size()>0){
+					List<String> phoneLists = new ArrayList<String>();
+					for(MemberInformation member:members){
+						phoneLists.add(member.getMemberPhoneNumber());
+					}
+					phones = phoneLists.toArray(new String[phoneLists.size()]);
+				}
+			}else{
+				//用户表--获取对应phones
+				phones = baseUserManager.getPhonesByRole(id);
+			}
+		}else{
+			phones = getPhonesByType(type, id);
+
+		}
+		if (messagePostProcessor != null) {
+			messagePostProcessor.send(mcMsgdatas, phones);
+		}
+	}
+	
+	private String[] getPhonesByType(int type,String id){
+		String[] phones = null;
+		switch (type) {
+		case 0://普通用户
+			User user = userManager.getUser(id);
+			phones = new String[]{user==null?"":user.getPrincipalConfig().get("phone")};
+			break;
+		case 1://会员用户
+			MemberInformation member = memberInformationManager.getMemberInformation(id);
+			phones = new String[]{member==null?"":member.getMemberPhoneNumber()};
+			break;
+		case 2://用户角色
+			phones = baseUserManager.getPhonesByRole(id);
+			break;
+		case 3://会员角色
+			List<MemberInformation> members = memberInformationManager.getMembersByRole(id);
+			if(members!=null&&members.size()>0){
+				List<String> temPhones = new ArrayList<String>();
+				for(MemberInformation member_:members){
+					temPhones.add(member_.getMemberPhoneNumber());
+				}
+				phones = temPhones.toArray(new String[temPhones.size()]);
+			}
+			break;
+		case 4:
+			Collection<Condition> conditions = new ArrayList<Condition>();
+			conditions.add(ConditionUtils.getCondition("roleType", Condition.EQUALS, ""+id));
+			List<Role> roles = roleManager.getRoles(conditions, null);
+			if(roles!=null&&roles.size()>0){
+				List<String> tempPhones = new ArrayList<String>();
+				for(Role role:roles){
+					String[] phones_ = getPhonesByType(2,role.getRoleId());
+					tempPhones.addAll(Arrays.asList(phones_));
+				}
+				phones = tempPhones.toArray(new String[tempPhones.size()]);
+			}
+		default:
+			phones = new String[]{};
+			break;
+		}
+		
+		return phones;
+	}
+	
 	//发送消息
 	@Override
 	public Boolean smsSend(String code, Map<String, Object> params,
@@ -253,7 +283,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 //				bp.setValid("01");
 				success =  false;
 			}
-			mmd.setReceive(recUser);
+			mmd.setReceive(phone);
 			mmd.setMsgCaption(mmt.getMsgTempalateCaption());
 			mmd.setMsgContent(content);
 			mmd.setMsgType(mmt.getMcMsgtype().getMsgTypeCaption());
@@ -267,6 +297,41 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 		}else{
 			return false;
 		}
+	}
+
+	@Override
+	public String sendToBackadmin(McMsgdatas mcMsgdatas,String roleType) throws BusException {
+//		mcMsgdatas.setReceive(roleId);
+		mcMsgdatas.setMsgType("2");//多人
+		sendMessage(mcMsgdatas, roleType, SMSUtil.SEND_ROLEGROUP);
+		return null;
+	}
+
+	@Override
+	public String sendToEntadmin(McMsgdatas mcMsgdatas) throws BusException {
+		String roleId = "ROLE_QY_ADMIN";//企业管理员
+//		mcMsgdatas.setReceive(roleId);
+		mcMsgdatas.setMsgType("2");//多人
+		sendMessage(mcMsgdatas, roleId, SMSUtil.SEND_MEMBERROLE);
+		return null;
+	}
+
+	@Override
+	public String sendToUser(McMsgdatas mcMsgdatas,String userId) throws BusException {
+		if(!StringUtils.isEmpty(userId)){
+//			mcMsgdatas.setReceive(userId);
+			mcMsgdatas.setMsgType("1");//1人
+			sendMessage(mcMsgdatas, userId, SMSUtil.SEND_MEMBER);
+		}
+		return null;
+	}
+
+	@Override
+	public String sendSelected(McMsgdatas mcMsgdatas) throws BusException {
+		if (messagePostProcessor != null) {
+			messagePostProcessor.send(mcMsgdatas, new String[]{ mcMsgdatas.getReceive()});
+		}
+		return null;
 	}
 
 }
