@@ -23,6 +23,10 @@
 			});
 			//设置黄色的皮肤
 			laydateObj.skin('yellow');
+			
+			laydate({
+				elem:''
+			})
 			$(".ic-select").click(function(){
 				$(this).next(".select-nav").toggle();
 				var recordType='0401';//0401:创立方
@@ -510,17 +514,17 @@
 								<p class="c-b1">&nbsp;</p>
 							</div>
 							<ul style="display: none;" class="select-nav">
-								<li>大</li>
-								<li>中</li>
-								<li>小</li>
+								<li>0-10人</li>
+								<li>10-30人</li>
+								<li>30人以上</li>
 							</ul>
 						</div>
 					</td>
 				</tr>
 				
 				<tr>
-					<td valign="top">日期进驻<br/>日期</td>
-					<td><input type="text" placeholder="来访日期" id="fkcodeDate"></td>
+					<td valign="top">期望进驻<br/>日期</td>
+					<td><input type="text" placeholder="期望进驻日期" id="fkcodeDate"></td>
 				</tr>
 				<tr>
 					<td valign="top">业务简介</td>

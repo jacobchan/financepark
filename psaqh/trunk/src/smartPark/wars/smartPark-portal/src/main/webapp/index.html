@@ -201,36 +201,36 @@
             </div>
             <div class="layout_table padding" style="border:none">
             	<ul>
-                	<li class="cp_info tc" onClick="window.open('http://www.ininin.com/product/200021.html')">
+                	<li class="cp_info tc" cc_url="http://www.ininin.com/product/200021.html">
                         <div class="cp"><img src="styles/images/index/cp1.jpg" width="285" height="163"/></div>
                         <p class="lh30 f16 mt10">“新”名片</p>
                         <p class="cc">&yen;8.00</p>
                             
                     </li>
-                    <li class="cp_info tc" onClick="window.open('http://www.ininin.com/product/200037.html')">
+                    <li class="cp_info tc" cc_url="http://www.ininin.com/product/200037.html">
                         <div class="cp"><img src="styles/images/index/cp2.jpg" width="285" height="163"/></div>
                         <p class="lh30 f16 mt10">大型喷绘海报</p>
                         <p class="cc">&yen;75.00</p>
                             
                     </li>
-                    <li class="cp_info tc" onClick="window.open('http://www.ininin.com/product/200069.html')">
+                    <li class="cp_info tc" cc_url="http://www.ininin.com/product/200069.html">
                         <div class="cp"><img src="styles/images/index/cp3.jpg" width="285" height="163"/></div>
                         <p class="lh30 f16 mt10">“新”手提袋</p>
                         <p class="cc">&yen;5.33</p>
                     </li>
-                    <li class="cp_info tc" onClick="window.open('http://www.ininin.com/product/200021.html')">
+                    <li class="cp_info tc" cc_url="http://www.ininin.com/product/200063.html">
                         <div class="cp"><img src="styles/images/index/cp4.jpg" width="285" height="163"/></div>
-                        <p class="lh30 f16 mt10">“台历个性版</p>
+                        <p class="lh30 f16 mt10">台历个性版</p>
                         <p class="cc">&yen;40.00</p>
                             
                     </li>
-                    <li class="cp_info tc" onClick="window.open('http://www.ininin.com/product/200037.html')">
+                    <li class="cp_info tc" cc_url="http://www.ininin.com/product/104.html">
                         <div class="cp"><img src="styles/images/index/cp5.jpg" width="285" height="163"/></div>
                         <p class="lh30 f16 mt10">小型掌上画册</p>
                         <p class="cc">&yen;896.92</p>
                             
                     </li>
-                    <li class="cp_info tc" onClick="window.open('http://www.ininin.com/product/200069.html')">
+                    <li class="cp_info tc" cc_url="http://www.ininin.com/product/1003.html">
                         <div class="cp"><img src="styles/images/index/cp6.jpg" width="285" height="163"/></div>
                         <p class="lh30 f16 mt10">广告字安装</p>
                         <p class="cc">&yen;500</p>
@@ -888,7 +888,6 @@
 			  	 			}
 							 var html="<li onclick="+link+"><div class='fl'><img src='"+imageUrl+"' height='59' width='110'></div><div class='fl ml10'><div class='span_bold'>"+title+"</div>"+
 							"<p class='cc f12'>"+record[i].commodityPrice+"元/小时</p>立即预定</div></li>";
-							/* "<p class='cc f12'>"+record[i].commodityPrice+"元/小时</p><a class='handbtn' href='./companyservice/roomxq.html?id="+record[i].commodityId+"'>立即预定</a></div></li>"; */
 							 $("#roomPage").append(html);
 							 
 					} 
@@ -1477,4 +1476,47 @@
         
     </div>
 </body>
+
+<!-- 页面数据初始化  获取用户信息-->
+<script type="text/javascript">
+//从后台获取加密的SSo链接
+$.youi.ajaxUtils.ajax({
+	url:baseUrl+"memberInformationManager/getEncryptStringForEnterpriseMall.json", 
+	jsonp:'data:jsonp',
+	dataType:'jsonp',
+	success:function(result){
+		
+		if(result&&result.record){
+
+			var link_url = result.record.html+"&redirect_uri=";
+			$("li.cp_info").attr("yy_url",link_url);
+			//checkcode
+		}else{
+			
+		}
+	},
+	error:function(result){
+		$("li.cp_info").attr("yy_url","");
+		return true;
+	}
+	
+});
+
+//绑定企业商城的点击事件
+$(function(){
+	$("li.cp_info").click(function(){
+		var param = $(this).attr('cc_url');
+		var redirectUrl = $(this).attr('yy_url');
+		
+		if(redirectUrl){
+			window.open(redirectUrl+encodeURIComponent(param));
+		}else{
+			window.open(param);
+		}
+	});
+	
+});
+</script>
+
+
 </html>
