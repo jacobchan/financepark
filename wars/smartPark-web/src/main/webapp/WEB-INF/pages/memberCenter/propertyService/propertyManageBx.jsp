@@ -59,6 +59,18 @@
         
     </div>
 	<!--***弹窗 end****************************************-->
+	<div class="bg-tanc m1">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="w60 tc mt40" style="margin-left:20%">
+				<div class="mt20 mb20 f16 lh26">
+					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o moverec">  </span>吗？
+				</div>
+				<!-- <p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p> -->
+				<input value="确定" class="hhf-submit" style="height:36px;" type="submit">
+			</div>
+		</div>
+	</div>
 </youi:body>
 	
 	
@@ -107,23 +119,7 @@
 				}
 			}
 		});
-	}
-		/* $(function () {
-			$(".ac-show").click(function(e){
-				$(".bg-tanc").show();
-			});
-			
-			$.ajax({
-				url:baseUrl+'propertyservicemanagerBxManager/getBxListforpage.json', 
-				success:function(result){
-					if(result&&result.records){
-						_parseRecords(result.records);
-					}
-				}
-			});
-			
-		}); */
-		
+	}		
 		//拼接列表
 		function _parseRecords(record){
 			$("tbody").empty();
@@ -141,7 +137,7 @@
 				var buttonHtml='';
 				if(record[i].bxStatus=='00'){
 					bxStatus='待受理';
-					buttonHtml="<a href='javascript:;' class='ac-show' onclick='javascript:cancel(\""+record[i].bxId+"\")'>取消</a>";
+					buttonHtml="<a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消</a>";
 				}else if(record[i].bxStatus=='01'){
 					bxStatus='已受理';
 				}else if(record[i].bxStatus=='02'){
@@ -189,29 +185,35 @@
 			};
 	</script>
 	<!-- 取消报修订单 -->
-	<script type="text/javascript">
-	
-		 function cancel(bxId){
-			 
-			 	$.youi.ajaxUtils.ajax({
-					url:baseUrl+'propertyservicemanagerBxManager/updateBxforpage.json',
-					data:'bxId='+bxId,
-					success:function(result){
-						if(result&&result.record){
-							if(result.record.bxStatus=='08'){								
-								close("取消成功")																
-							}else if(result.record.bxStatus=='01'){
-								
-								close("重新报修成功");
-								
+	<script type="text/javascript">	
+		 function cancel(obj){
+				var me=obj.parentNode.parentNode;//找到父节点	
+				//alert(me.id);
+				var bxCode=me.childNodes[0].childNodes[0].innerText; //获取订单号
+				$(".moverec").html(bxCode);//给弹窗插入订单号
+				$(".moverec")[0].setAttribute("id",me.id);//给弹窗设置id
+				$(".bg-tanc.m1").show();
+			};
+			//点击确认取消搬家预约
+			$(function(){
+				$(".hhf-submit").click(function(){	
+					    $(".bg-tanc.m1").hide();
+						var id=$(".moverec")[0].getAttribute("id");				
+					 	$.ajax({
+					 		url:baseUrl+'propertyservicemanagerBxManager/updateBxforpage.json',
+							data:'bxId='+id,
+							success:function(result){
+								if(result&&result.record){
+									if(result.record.bxStatus=='08'){								
+										close("取消成功")																
+									}else if(result.record.bxStatus=='01'){								
+										close("重新报修成功");								
+									}													
+								}
 							}
-							
-							
-						}
-					}
-				});
-			}
-		
+						});
+					});
+				});	
 	//根据订单号查询
 	//根据订单号查询
 			 $('.hhf-submit').click(function(){	
