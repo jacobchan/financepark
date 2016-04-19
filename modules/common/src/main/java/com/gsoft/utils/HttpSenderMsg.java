@@ -126,7 +126,7 @@ public class HttpSenderMsg {
 		return HttpSenderMsg.batchSend(url, account, pswd, mobile, msg, needstatus, product, extno);
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 //		String mobile = "18062693970,13554467006";// 手机号码，多个号码使用","分割
 //		String msg = "亲爱的用户，您的验证码是123456，5分钟内有效。";// 短信内容
 //		try {
@@ -135,8 +135,10 @@ public class HttpSenderMsg {
 //			e.printStackTrace();
 //		}
 		
-		String code = sendwithCode("您好！！！！",new String[]{"12345678900","11123456788"});
-		System.out.println("---------"+code);
+		HttpSenderMsg.sendMsg("18062693970", "hello!!!!");
+		
+//		String code = sendwithCode("您好！！！！",new String[]{"18062693970"});
+//		System.out.println("---------"+code);
 	}
 	
 	public static String sendwithCode(String content,String[] phones){
@@ -148,7 +150,8 @@ public class HttpSenderMsg {
 			e.printStackTrace();
 		}
 		if(!StringUtils.isEmpty(result)){
-			int _n = result.indexOf(System.getProperty("line.separator"));
+		//	int _n = result.indexOf(System.getProperty("line.separator"));//
+			int _n = result.indexOf("\n");
 			String responseStr = result;
 			if(_n != -1){
 				responseStr = result.substring(0, _n);
