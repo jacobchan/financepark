@@ -143,5 +143,11 @@ public interface MemberInformationManager extends BaseManager{
       * @return
       */
 	 public MemberInformation getUserByPhone(String phone);
-		
+	
+	 /**根据角色查询会员信息
+	 * @param role
+	 * @return
+	 * @throws BusException
+	 */
+	public List<MemberInformation> getMembersByRole(String role)throws BusException;
 }
