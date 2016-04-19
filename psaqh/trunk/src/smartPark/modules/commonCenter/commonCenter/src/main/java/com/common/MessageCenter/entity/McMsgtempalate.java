@@ -31,7 +31,7 @@ public class McMsgtempalate implements Domain{
 	private String updateUser;//修改人
 
 	@Column(name = "MSG_TEMPALATE_CONTENT_")
-	@Length(max=56)
+//	@Length(max=56)
 	private String msgTempalateContent;//模板内容
 
 	@Column(name = "MSG_RECEIVETYPE_")

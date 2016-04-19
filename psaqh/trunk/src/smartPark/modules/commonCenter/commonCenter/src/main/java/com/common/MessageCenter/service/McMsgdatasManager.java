@@ -81,28 +81,16 @@ public interface McMsgdatasManager extends BaseManager{
 	 * @return
 	 * @throws BusException
 	 */
-	public String buildMsgContent(McMsgtempalate msgtempalate,Map<String,String> replaceMap) throws BusException;
+	public String buildMessageContent(McMsgtempalate msgtempalate,Map<String,String> replaceMap) throws BusException;
 	
-	/**
-	 * 发送消息,根据模板角色发送
-	 * @param mcMsgdatas
+	/**发送消息统一处理，id为空读取模板的发送人，否则根据type判断id的类型确定发送人
+	 * @param mcMsgdatas 消息内容
+	 * @param id 用户/会员/用户角色/会员角色/用户角色组	 id
+	 * @param type 用户/会员/角色/角色组 	 类型（0,1,2,3,4）
 	 * @throws BusException
 	 */
-	public void sendMessage(McMsgdatas mcMsgdatas) throws BusException;
+	public void sendMessage(McMsgdatas mcMsgdatas,String id,int type) throws BusException;
 	
-	/**
-	 * 发送消息,指定用户发送,生成消息类容时#user-->@user
-	 * @param mcMsgdatas
-	 * @throws BusException
-	 */
-	public void sendMessageSingle(McMsgdatas mcMsgdatas,String userId) throws BusException;
-	
-	/**发送消息到企业管理员
-	 * @param mcMsgdatas
-	 * @param entId
-	 * @throws BusException
-	 */
-	public void sendMessageEnt(McMsgdatas mcMsgdatas,String entId) throws BusException;
 	
 	/**构建消息内容对象
 	 * @param uniqueCode 消息模板唯一码
@@ -121,4 +109,37 @@ public interface McMsgdatasManager extends BaseManager{
 	 */
 	public Boolean smsSend(String code, Map<String, Object> params,
 			String recUser, String phone);
+	
+	/**发送给后台管理员
+	 * @param mcMsgdatas
+	 * @param roleType 角色分类
+	 * @return
+	 * @throws BusException
+	 */
+	public String sendToBackadmin(McMsgdatas mcMsgdatas,String roleType)throws BusException;
+	
+	/**发送给企业管理员
+	 * @param mcMsgdatas
+	 * @return
+	 * @throws BusException
+	 */
+	public String sendToEntadmin(McMsgdatas mcMsgdatas)throws BusException;
+	
+	/**发送给用户
+	 * @param mcMsgdatas
+	 * @param userId
+	 * @return
+	 * @throws BusException
+	 */
+	public String sendToUser(McMsgdatas mcMsgdatas,String userId)throws BusException;
+	
+	
+	/**
+	 * 选择消息内容发送
+	 * @param mcMsgdatas
+	 * @return
+	 * @throws BusException
+	 */
+	public String sendSelected(McMsgdatas mcMsgdatas)throws BusException;
+	
 }
