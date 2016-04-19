@@ -43,10 +43,10 @@ myReservation.jspmyReservation.jsp<%@ page language="java" pageEncoding="UTF-8"%
 			//页面默认加载众创空间预约
 			if(getRequest()=="1"){
 				$(".order-nav li").eq(0).addClass("active").siblings().removeClass("active");
-				jump1();
+				jump0();
 			}else if(getRequest()=="2"){
 				$(".order-nav li").eq(1).addClass("active").siblings().removeClass("active");
-				jump2();
+				jump1();
 			}
 			
 		});			
