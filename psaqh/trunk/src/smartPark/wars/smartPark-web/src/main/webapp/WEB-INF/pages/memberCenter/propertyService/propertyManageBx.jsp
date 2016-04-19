@@ -11,7 +11,7 @@
 							<input class="bd-input fl" type="text" id="startTime"><span class="fl ml15 mr15">到</span>
 							<input class="bd-input fl" type="text" id="endTime">
 							<div class="inp-box ml20"><input placeholder="订单号查询" type="text" id="bxCode"><a class="fa fa-search" href=""></a></div>
-							<input value="搜索" class="hhf-submit f14 fr" type="button">
+							<input value="搜索" class="hhf-submit f14 fr query" type="button">
 						</div>
 						<table class="gt-table mt20">
 							<colgroup>
@@ -39,18 +39,7 @@
 	
 	
 	<!--***弹窗 start****************************************-->
-	<div class="bg-tanc">
-		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
-			<a href="javascript:;" class="tc-close"></a>
-			<div class="w60 tc mt40" style="margin-left:20%">
-				<div class="mt20 mb20 f16 lh26">
-					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> <span class="ifSure">确认要取消</span><span class="c-o bxCode"> [ 123456789 ] </span>吗？
-				</div>
-				
-				<input value="确定" class="hhf-submit" style="height:36px;" type="submit">
-			</div>
-		</div>
-	</div>
+
 	<div class="toast">
         <div class="toast-con clearfix">
             <div class="close-toast fr"></div>
@@ -67,7 +56,7 @@
 					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o moverec">  </span>吗？
 				</div>
 				<!-- <p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p> -->
-				<input value="确定" class="hhf-submit" style="height:36px;" type="submit">
+				<input value="确定" class="hhf-submit confirm" style="height:36px;" type="submit">
 			</div>
 		</div>
 	</div>
@@ -196,7 +185,7 @@
 			};
 			//点击确认取消搬家预约
 			$(function(){
-				$(".hhf-submit").click(function(){	
+				$(".hhf-submit.confirm").click(function(){	
 					    $(".bg-tanc.m1").hide();
 						var id=$(".moverec")[0].getAttribute("id");				
 					 	$.ajax({
@@ -215,8 +204,7 @@
 					});
 				});	
 	//根据订单号查询
-	//根据订单号查询
-			 $('.hhf-submit').click(function(){	
+		$('.hhf-submit.f14.fr.query').click(function(){	
 		var bxCode=$("#bxCode").val();
 		//alert(ocCode);
 		var startTime=$("#startTime").val(); 
