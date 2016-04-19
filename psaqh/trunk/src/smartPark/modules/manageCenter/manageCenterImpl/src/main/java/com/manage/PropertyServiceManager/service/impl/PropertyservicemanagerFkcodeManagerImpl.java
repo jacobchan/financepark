@@ -248,9 +248,14 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
     	PropertyservicemanagerFkcode fkcode = propertyservicemanagerFkcodeDao.get(fkcodeId) ;
     	if(fkcode!=null){
     		PropertyservicemanagerTwcrd twcrd = propertyservicemanagerTwcrdManager.findTwcrdByFkcode(fkcode) ;//通过访客申请对象得到对应的二维码对象
-    		twcrd.setStatus("03");
-    		propertyservicemanagerTwcrdManager.savePropertyservicemanagerTwcrd(twcrd);
-    		return fkcode;
+    		String status=twcrd.getStatus();
+    		if("00".equals(status)||"01".equals(status)){//01,00都为未到访状态
+    			twcrd.setStatus("03");
+        		propertyservicemanagerTwcrdManager.savePropertyservicemanagerTwcrd(twcrd);
+        		return fkcode;
+    		}else{
+        		return null;
+        	}   		
     	}else{
     		return null;
     	}
