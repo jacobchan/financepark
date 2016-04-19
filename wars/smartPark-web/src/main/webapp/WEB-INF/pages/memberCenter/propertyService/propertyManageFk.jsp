@@ -144,18 +144,17 @@
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 	<script type="text/javascript">
+	//默认每页10条
 	var pageSize=10;
-	var pageCount=1;
-	var currentIndex = 1;
+	var pageCount=1;//共几页
+	var currentIndex = 1;//第几页
 	var serviceURL = baseUrl+'propertyservicemanagerFkcodeManager/getPagerFkcodes.json';
-$(function () {
-		
+    $(function () {		
 		//分页页码显示
 		 $.ajax({
 			url:serviceURL, 
 			success:function(results){	
-							pageCount=Math.ceil(results.totalCount/pageSize);//页数
-							
+							pageCount=Math.ceil(results.totalCount/pageSize);//页数							
 							 refreshData(1,pageSize);
 								$(".tcdPageCode").createPage({
 								    pageCount:pageCount,
@@ -166,9 +165,6 @@ $(function () {
 								        refreshData(p,pageSize);
 								    }
 								});			
-			/* 	if(result&&result.records){
-					_parseRecords(result.records);
-				} */
 			}
 		}); 			
 	});	
@@ -213,7 +209,7 @@ $(function () {
 				}else if(record[i].dksataus=='03'){
 					status = "已取消";
 				}
-				var html="<tr id='"+id +"' class='aaa'>"+
+				var html="<tr id='"+id +"' >"+
 						"<td><a href=''>"+record[i].fkCode+"</a></td>"+
 						"<td>"+time+"</td>" +	
 						"<td class='"+id+"'>"+status+"</td>"+
@@ -221,52 +217,10 @@ $(function () {
 						"<td>"+record[i].fkcodeTelephone+"</td>"+
 						"<td><a href='javascript:;' onclick='javascript:qrcode(this)' class='ac-see'>查看二维码</a><span class='f12 ml5 mr5'>|</span>"+cancelbutton+"</td>"+
 						"</tr>";
-						var status1=aa(record[i].fkcodeId,status);
-				// alert(record[i].dksataus);
-				         //alert(status1);
-				 $("tbody").append(html);				
-			/* 	 $(".ac-see").click(function(){
-					 $(".bg-tanc.m2").show();
-				 }); */
+				 $("tbody").append(html);							
 			}
-		};
-		function aa(aa,status){
-			var fkcodeId = aa;
-			var status ='' ;
-			
-			
-			//close(aa);
-			 $.ajax({
-					url:baseUrl+'propertyservicemanagerTwcrdManager/findTwcrdById.json', 
-					data:'fkcodeId='+fkcodeId,
-					success:function(result){
-						console.log(result) ;
-						if(result&&result.record){
-							var id = result.record.propertyservicemanagerFkcode.fkcodeId;
-							status = _TwcrdlistRecords(result.record);
-							$('.'+id).text(status) ;
-							//alert(status);
-							return status;
-							
-						}
-					}
-				}); 
-		}; 
-		//获得到访statusa
-		function _TwcrdlistRecords(record){	
-			//console.log(record) ;
-				var status='';			
-				if(record.status=='00'){
-					status = "未到访";
-				}else if(record.status=='01'){
-					status = "未到访";
-				}else if(record.status=='02'){
-					status = "已到访";
-				}else if(record.status=='03'){
-					status = "已取消";
-				}
-				return status;			
-		};
+		};		
+		//确认取消弹窗
 		function cancel(obj){
 			var me=obj.parentNode.parentNode;
 			var fkCode=me.childNodes[0].childNodes[0].innerText; 
@@ -276,10 +230,6 @@ $(function () {
 		};
 		function qrcode(obj){
 	 		var me=obj.parentNode.parentNode;
-		/* 	var fkCode=me.childNodes[0].childNodes[0].innerText; 
-			var bftime = me.childNodes[1].innerText;
-			var url = queryUrl(me.id); 
-			var url=""; */
 			$.youi.ajaxUtils.ajax({
 				url:baseUrl+'propertyservicemanagerTwcrdManager/findTwcrdById.json',
 				data:'fkcodeId='+me.id,
@@ -297,25 +247,7 @@ $(function () {
 				}
 			});
 		};
-		//根据订单号查询
-	/* 	$('.hhf-submit.a').click(function(){
-			
-			$(".aaa").empty();
-			 var fkCode=$("#fkCode").val(); 
-			 var startTime=$("#startTime").val(); 
-			 var endTime=$("#endTime").val(); 
-			 params=['fkCode='+fkCode+'','startTime='+startTime+'','endTime='+endTime+''],
-		      $.ajax({
-		    	 url:baseUrl+'propertyservicemanagerFkcodeManager/getFkcodelistLikeFkcodeCode.json',
-		    	 data:params.join('&'),
-		    	 success:function(result){				    		 
-						// console.log(result.records);          
-						if(result&&result.records){						
-							_parseRecords(result.records);							
-						}
-					}
-			}); 
-		});  */
+		//确认取消按钮
 		$('.hhf-submit').click(function(){	
 			var fkCode=$("#fkCode").val();
 			//alert(ocCode);
@@ -327,7 +259,6 @@ $(function () {
 				data:params.join('&'),
 				success:function(results){	
 					pageCount=Math.ceil(results.totalCount/pageSize);//页数				
-					//alert(pageCount);
 					 refreshData_query(1,pageSize);
 						$(".tcdPageCode").createPage({
 						    pageCount:pageCount,
@@ -393,7 +324,7 @@ $(function () {
 		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 		});
 	});
-	//弹窗
+	//取消成功弹窗
 	 function close(content){		        
 	        $(".tc.mt25.f18").empty() ;
 	        $(".tc.mt25.f18").append(content) ;
