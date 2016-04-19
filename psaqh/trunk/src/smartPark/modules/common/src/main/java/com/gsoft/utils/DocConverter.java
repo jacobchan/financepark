@@ -53,9 +53,9 @@ public class DocConverter {
     public String getOfficeHome() {
         String osName = System.getProperty("os.name");
         if (Pattern.matches("Linux.*", osName)) {
-            return "\\opt\\openoffice.org3";
+            return "\\opt\\openoffice4";
         } else if (Pattern.matches("Windows.*", osName)) {
-            return "C:\\program Files (x86)\\OpenOffice 4";
+            return "C:\\program Files (x86)\\OpenOffice.org 3";
         }
         return null;
     }
@@ -65,9 +65,9 @@ public class DocConverter {
     public String getSWFToolsHome() {
         String osName = System.getProperty("os.name");
         if (Pattern.matches("Linux.*", osName)) {
-            return "\\opt\\openoffice.org3";
+            return "\\usr\\swftools\\bin\\pdf2swf";
         } else if (Pattern.matches("Windows.*", osName)) {
-            return "H:\\SWFTools\\pdf2swf.exe "; 
+            return "F:\\SWFTools\\pdf2swf.exe "; 
         }
         return null;
     }
