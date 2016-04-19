@@ -3,7 +3,7 @@ myReservation.jspmyReservation.jsp<%@ page language="java" pageEncoding="UTF-8"%
 <youi:html title="我的预约">
 	<youi:body decorator="memcenter"> 
 				<div class="w1000">
-					<h3 class="per-h3">我的预约列表<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要申请政策</a></h3>
+					<h3 class="per-h3">我的预约列表</h3>
 					<div class="clearfix mt20 mb20">
 						<ul class="order-nav">
 							<li class="active" onclick="jump0();"><span class="pend">众创空间预约</span></li>
@@ -41,7 +41,7 @@ myReservation.jspmyReservation.jsp<%@ page language="java" pageEncoding="UTF-8"%
 					$(this).addClass("active").siblings().removeClass("active");			
 				})		
 			})
-			//页面默认加载创业加速申请加载
+			//页面默认加载众创空间预约
 			if(getRequest()=="1"){
 				$(".order-nav li").eq(0).addClass("active").siblings().removeClass("active");
 				jump1();
@@ -55,10 +55,7 @@ myReservation.jspmyReservation.jsp<%@ page language="java" pageEncoding="UTF-8"%
 			} 
 		});
 
-		 //点击跳转到政策申请页面
-		$("#a1").click(function(){			
-			location.href = proUrl + "zscenter/zs3.html" ;
-		})	
+	
 		
 		//获取链接后面的值
 		function getRequest() {
