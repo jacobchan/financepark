@@ -324,9 +324,11 @@
 									dataType : 'jsonp',
 									success : function(result) {
 										if (result && result.record) {
-											alert("预约成功");
+											$(".bg-tanc.m1").show();
+											jump1(3);
+											/* alert("预约成功");
 											$(".pop_layer").hide();
-											window.location="carLeasexq.html?id="+commodityId;
+											 */
 										}
 									},error:function(XMLHttpRequest, textStatus, errorThrown){
 										alert(XMLHttpRequest);
@@ -345,8 +347,46 @@
 							
 						});
 		
+		//关闭提示div	
+        $("#close").click(function(){
+        	$(".bg-tanc.m1").hide();
+        });
+		
 		
 	})
+	
+	//toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
+     function jump1(i){
+    	$("#ti-m1").text(i);
+    	i = i - 1;
+		if(i>0){
+			setTimeout("jump1("+i+")", 2000);
+		}else{
+			window.location="advertxq.html?id="+commodityId;
+			//window.location=cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
+		}		
+	} 
+	
 </script>
+
+	 <!-- 弹窗 -->
+     <div class="bg-tanc m1">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+		<a href="javascript:;" class="tc-close" id="close"></a>
+		<div class="tc mt40">
+			<div class="mt20 mb20 f16 lh26" >
+				<img src="../styles/images/yqfw/correct.png" border="0" class="mr20"/>
+			</div>
+			<p class="mb10 f16">您已经成功提交订单，请到会员中心查看。</p>
+			<p><span class="c-o f24 tc-time" id="ti-m1">3 </span>秒后，系统将自动跳转</p>
+			<p class="mt10"><a style="cursor:pointer;" onclick="jump();" class="c-6">手动跳转 ></a></p>
+			<div class="clearfix mt30">
+				<a style="cursor:pointer;" onclick="jumpIndex();"  class="c-6"><i class="fa fa-home mr10" style="font-size:24px;"></i>返回首页</a>
+				<span class="f14 ml20 mr20 c-6">|</span>
+				<a style="cursor:pointer;" onclick="jumpPerson();"  class="c-6"><i class="fa fa-user mr10" style="font-size:20px;"></i>个人中心</a>
+			</div>
+		</div>
+		</div>
+	 </div>
 </body>
 </html>
