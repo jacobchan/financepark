@@ -58,10 +58,6 @@
 	        $(".close-toast").click(function(){
 	            $(".toast").hide();
 	        })
-	        $(".tc-close").click(function(){
-				$(".bg-tanc.m1").hide();
-				$(".bg-tanc.m3").hide();
-			});
 	        
 			$(".now-btn").click(function(){
 				var recordType='04';//04:众创空间
@@ -162,6 +158,13 @@
 				
 				
 			});
+	        $(".tc-close").click(function(){
+	        	clearInterval(timer1);
+				$(".bg-tanc.m1").hide();
+				$(".bg-tanc.m3").hide();
+			});
+			 
+			 
 			$("#lf_time").on("click",function(e){
 				e.stopPropagation();
 	            $(this).next(".time-nav").show();	            
