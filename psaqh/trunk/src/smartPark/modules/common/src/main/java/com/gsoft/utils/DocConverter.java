@@ -17,7 +17,7 @@ import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConv
   *
   */
 public class DocConverter {
-    private static final int environment = 1;// 环境1：windows,2:linux(涉及pdf2swf路径问题)
+    private static final int environment = 2;// 环境1：windows,2:linux(涉及pdf2swf路径问题)
     private String fileString;
     private String outputPath = "";// 输入路径，如果不设置就输出在默认位置
     private  String fileName;
