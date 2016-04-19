@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.gsoft.framework.core.service.BaseManager;
 import com.gsoft.framework.security.agt.entity.User;
+import com.gsoft.framework.security.agt.entity.UserConfigItem;
 
 public interface BaseUserManager extends BaseManager{
 
@@ -12,16 +13,23 @@ public interface BaseUserManager extends BaseManager{
 	 * @return
 	 */
 	public List<User> getUsersByRoles(String[] roles);
-	
-	/**通过用户ID获取用户手机号码
-	 * @param userId
+	/**
+	 * 通过角色获取对应的电话号码
+	 * @param roleId
 	 * @return
 	 */
-	public List<String> getPhones(String[] userId);
+	public String[] getPhonesByRole(String roleId);
 	
-	/**通过用户ID获取用户名
-	 * @param userId
+	
+	/**用户配置信息
+	 * @param id
 	 * @return
 	 */
-	public List<String> getUserCaption(String[] userId);
+	public List<UserConfigItem> getUserConfigItems(String id);
+	
+	/**保存用户配置信息
+	 * @param userConfigItem
+	 * @param userId
+	 */
+	public void saveUserConfigItems(String userId, List<UserConfigItem> userConfigItems);
 }

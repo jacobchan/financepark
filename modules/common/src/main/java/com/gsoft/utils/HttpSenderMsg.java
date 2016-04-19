@@ -2,12 +2,14 @@ package com.gsoft.utils;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.URLDecoder;
+import java.util.Arrays;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.springframework.util.StringUtils;
 public class HttpSenderMsg {
 	/**
 	 * 
@@ -125,12 +127,41 @@ public class HttpSenderMsg {
 	}
 	
 	public static void main(String[] args) {
-		String mobile = "15827117035,18627815920";// 手机号码，多个号码使用","分割
-		String msg = "亲爱的用户，您的验证码是123456，5分钟内有效。";// 短信内容
+//		String mobile = "18062693970,13554467006";// 手机号码，多个号码使用","分割
+//		String msg = "亲爱的用户，您的验证码是123456，5分钟内有效。";// 短信内容
+//		try {
+//			System.out.println("result:"+HttpSenderMsg.sendMsg(mobile, msg));
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		
+		String code = sendwithCode("您好！！！！",new String[]{"12345678900","11123456788"});
+		System.out.println("---------"+code);
+	}
+	
+	public static String sendwithCode(String content,String[] phones){
+		String result = "";
+		String reCode = "";
 		try {
-			System.out.println(HttpSenderMsg.sendMsg(mobile, msg));
+			result = HttpSenderMsg.sendMsg(StringUtils.collectionToDelimitedString(Arrays.asList(phones), ","), content);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		if(!StringUtils.isEmpty(result)){
+			int _n = result.indexOf(System.getProperty("line.separator"));
+			String responseStr = result;
+			if(_n != -1){
+				responseStr = result.substring(0, _n);
+			}
+			String[] resutlStrs = responseStr.split(",");
+			
+			if(resutlStrs!=null&&resutlStrs.length>1){
+				reCode = resutlStrs[1];
+			}
+			
+		}else{
+			
+		}
+		return reCode;
 	}
 }
