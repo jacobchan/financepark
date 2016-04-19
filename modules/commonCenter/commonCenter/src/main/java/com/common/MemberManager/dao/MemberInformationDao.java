@@ -3,9 +3,13 @@
  */
 package com.common.MemberManager.dao;
 
-import com.gsoft.framework.core.dao.Dao;
+import java.util.List;
+
 import com.common.MemberManager.entity.MemberInformation;
+import com.gsoft.framework.core.dao.Dao;
 
 public interface MemberInformationDao extends Dao<MemberInformation, String>  {
+	
+	public List<MemberInformation> getMembersByRole(String role);
 	
 }
