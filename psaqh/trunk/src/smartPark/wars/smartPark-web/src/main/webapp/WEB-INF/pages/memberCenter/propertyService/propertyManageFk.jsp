@@ -194,16 +194,13 @@
 			for(var i=0;i<record.length;i++){
 				var id = record[i].fkcodeId ;
 				var time = record[i].fkcodeTime ;
-				cancelbutton="";
 				if(time){
 					time = time.substring(0,10) ;
 				}
 				if(record[i].dksataus=="00"){
-					status = "未到访";
-					cancelbutton="<span class='f12 ml5 mr5'>|</span><a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消访客</a>";
+					status = "未到访";					
 				}else if(record[i].dksataus=='01'){
-					status = "未到访";
-					cancelbutton="<span class='f12 ml5 mr5'>|</span><a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消访客</a>";
+					status = "未到访";				
 				}else if(record[i].dksataus=='02'){
 					status = "已到访";
 				}else if(record[i].dksataus=='03'){
@@ -215,7 +212,7 @@
 						"<td class='"+id+"'>"+status+"</td>"+
 					    "<td>"+record[i].fkcodeName+"</td>"+
 						"<td>"+record[i].fkcodeTelephone+"</td>"+
-						"<td><a href='javascript:;' onclick='javascript:qrcode(this)' class='ac-see'>查看二维码</a><span class='f12 ml5 mr5'>|</span>"+cancelbutton+"</td>"+
+						"<td><a href='javascript:;' onclick='javascript:qrcode(this)' class='ac-see'>查看二维码</a><span class='f12 ml5 mr5'>|</span>"+"</td>"+
 						"</tr>";
 				 $("tbody").append(html);							
 			}
