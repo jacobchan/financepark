@@ -87,7 +87,7 @@ public class DocConverter {
                 }  
             	// 启动OpenOffice的服务  
                 String command = OpenOffice_HOME  
-                        + "program\\soffice.exe -headless -accept=\"socket,host=127.0.0.1,port=8100;urp;\"";  
+                        + "program\\soffice -headless -accept=\"socket,host=127.0.0.1,port=8100;urp;\"";  
                 Process pro = Runtime.getRuntime().exec(command);  
                 // connect to an OpenOffice.org instance running on port 8100  
                 OpenOfficeConnection connection = new SocketOpenOfficeConnection(  
