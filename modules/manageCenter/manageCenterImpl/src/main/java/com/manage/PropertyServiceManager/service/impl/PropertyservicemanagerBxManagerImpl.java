@@ -321,11 +321,11 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 		PropertyservicemanagerBx bx = propertyservicemanagerBxDao.get(bxId);
 		if(bx!=null){
 	    	String bxstatus = bx.getBxStatus();
-	    	if(!bxstatus.equals("05")){
+	    	if(!"05".equals(bxstatus)){
 	    		//取消报修订单
 	    		bx.setBxStatus("08");
 	    		bx.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-	    	}else if(bxstatus.equals("05")){
+	    	}else if("05".equals(bxstatus)){
 	    		//重新报修--到已受理状态
 	    		bx.setBxStatus("01");
 	    		bx.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
