@@ -78,13 +78,14 @@ public interface MemberInformationManager extends BaseManager{
 	 * @return
 	 */
 	public TempDemo exsitMobile(String mobile) ;
-	  /**
+	/**
 		 * 获取用户基本信息
 		 * @param user 登陆用户名
 		 * @return
 		 * @throws BusException
 		 */
 	public MemberInformation getMemberInformationByLoginUser(String userId) throws BusException;
+	
 	/**
 	 * 修改密码
 	 * @param password
@@ -150,4 +151,11 @@ public interface MemberInformationManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public List<MemberInformation> getMembersByRole(String role)throws BusException;
+	/**
+	 * 获取企业商城的加密数据信息
+	 * @param userId
+	 * @return
+	 * @throws BusException
+	 */
+	public String getEncryptStringForEnterpriseMall(String userId) throws BusException;
 }

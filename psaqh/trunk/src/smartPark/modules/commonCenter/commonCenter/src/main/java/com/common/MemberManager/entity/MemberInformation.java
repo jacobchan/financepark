@@ -86,6 +86,7 @@ public class MemberInformation implements Domain,IdUser, IUser,IMemberInfomation
 	@Transient
 	private String loginType;//非数据库映射属性
 	
+
 	@Transient
 	private List<String> roleIds = new ArrayList<String>();//非数据库映射属性
 	
