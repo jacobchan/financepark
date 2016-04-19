@@ -13,16 +13,14 @@ import com.common.MessageCenter.entity.McMsgdatas;
 import com.common.MessageCenter.service.IMessage;
 import com.common.MessageCenter.service.McMsgdatasManager;
 import com.common.MessageCenter.service.MessagePostProcessor;
-import com.common.core.util.UserUtils;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.utils.HttpSenderMsg;
 
 @Service
 public class MessagePoster implements MessagePostProcessor{
-	
 	@Autowired
-	private McMsgdatasManager msgdatasManager;
+	McMsgdatasManager msgdatasManager;
 	
 	private ExecutorService threadPool = Executors.newFixedThreadPool(10);
 
@@ -73,7 +71,7 @@ public class MessagePoster implements MessagePostProcessor{
 			messageDate.setSendStatus(status);
 			messageDate.setReceive(phone);
 			messageDate.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-			messageDate.setCreateUser(UserUtils.getLoginUserId());
+//			messageDate.setCreateUser(UserUtils.getLoginUserId());
 			msgdatasManager.saveMcMsgdatas(messageDate);
 		}
 	}

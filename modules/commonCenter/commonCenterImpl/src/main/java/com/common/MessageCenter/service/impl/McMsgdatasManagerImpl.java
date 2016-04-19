@@ -246,6 +246,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 				}
 				phones = tempPhones.toArray(new String[tempPhones.size()]);
 			}
+			break;
 		default:
 			phones = new String[]{};
 			break;
@@ -301,7 +302,6 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 
 	@Override
 	public String sendToBackadmin(McMsgdatas mcMsgdatas,String roleType) throws BusException {
-//		mcMsgdatas.setReceive(roleId);
 		mcMsgdatas.setMsgType("2");//多人
 		sendMessage(mcMsgdatas, roleType, SMSUtil.SEND_ROLEGROUP);
 		return null;
@@ -310,7 +310,6 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 	@Override
 	public String sendToEntadmin(McMsgdatas mcMsgdatas) throws BusException {
 		String roleId = "ROLE_QY_ADMIN";//企业管理员
-//		mcMsgdatas.setReceive(roleId);
 		mcMsgdatas.setMsgType("2");//多人
 		sendMessage(mcMsgdatas, roleId, SMSUtil.SEND_MEMBERROLE);
 		return null;
@@ -319,7 +318,6 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 	@Override
 	public String sendToUser(McMsgdatas mcMsgdatas,String userId) throws BusException {
 		if(!StringUtils.isEmpty(userId)){
-//			mcMsgdatas.setReceive(userId);
 			mcMsgdatas.setMsgType("1");//1人
 			sendMessage(mcMsgdatas, userId, SMSUtil.SEND_MEMBER);
 		}
