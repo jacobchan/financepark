@@ -1077,6 +1077,20 @@
 			$(".tip_item").eq(index).show().siblings(".tip_item").hide();
 		}); */
 		
+		
+		//酒店预订数据初始化  Begin  2016年4月19日15:00:57
+		//酒店预订，开始日期默认选中当天时间
+		var dObj = new Date();
+		$("#overdate").val(dObj.toLocaleDateString());
+		dObj.setDate(dObj.getDate()+1);
+		//离开日期，默认为第二天
+		$("#leavedate").val(dObj.toLocaleDateString());
+		//酒店所在城市默认为“杭州”，此处根据项目实施的园区不同改变
+		$("#city_name").val(Hcommoncitys[5][1]);
+		$("#cityid").val(Hcommoncitys[5][0]);
+		//酒店预订初始化 end
+		
+		
 		laydate({
 		    elem: '#lf_date', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
 		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
@@ -1090,12 +1104,13 @@
 		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 		});
 		
-		$("#city_name").suggest(Hcitys, {
+		var cityselectorObj = $("#city_name").suggest(Hcitys, {
 			hot_list : Hcommoncitys,
 			dataContainer : '#cityid',
 			attachObject : '#suggest'
 		});
-
+		
+		
         //关闭toast
         $(".close-toast").click(function(){
             $(".toast").hide();
