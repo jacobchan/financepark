@@ -3,14 +3,25 @@ package com.manage.task.entity;
 import com.gsoft.framework.security.fuc.entity.Menu;
 
 public class Task {
-	private String taskName;
-	private String RoleId;
-	private String tagTable;
-	public String getTagTable() {
-		return tagTable;
+	private String taskName;//任务名
+	private String RoleId;//角色ID
+	private String tagTable;//表名
+	private int taskCount;//任务数
+	private String menuId;//菜单ID
+	private Menu menu;//菜单
+	private String menuSrc;//菜单地址
+	
+	public String getMenuSrc() {
+		return menuSrc;
 	}
-	public void setTagTable(String tabgable) {
-		this.tagTable = tagTable;
+	public void setMenuSrc(String menuSrc) {
+		this.menuSrc = menuSrc;
+	}
+	public String getTaskName() {
+		return taskName;
+	}
+	public void setTaskName(String taskName) {
+		this.taskName = taskName;
 	}
 	public String getRoleId() {
 		return RoleId;
@@ -18,21 +29,11 @@ public class Task {
 	public void setRoleId(String roleId) {
 		RoleId = roleId;
 	}
-	private int taskCount;
-	private String menuId;
-//	private String path;
-	private Menu menu;
-	public Menu getMenu() {
-		return menu;
+	public String getTagTable() {
+		return tagTable;
 	}
-	public void setMenu(Menu menu) {
-		this.menu = menu;
-	}
-	public String getTaskName() {
-		return taskName;
-	}
-	public void setTaskName(String taskName) {
-		this.taskName = taskName;
+	public void setTagTable(String tagTable) {
+		this.tagTable = tagTable;
 	}
 	public int getTaskCount() {
 		return taskCount;
@@ -46,10 +47,13 @@ public class Task {
 	public void setMenuId(String menuId) {
 		this.menuId = menuId;
 	}
-//	public String getPath() {
-//		return path;
-//	}
-//	public void setPath(String path) {
-//		this.path = path;
-//	}
+	public Menu getMenu() {
+		return menu;
+	}
+	public void setMenu(Menu menu) {
+		this.menu = menu;
+	}
+	
+	
+	
 }
