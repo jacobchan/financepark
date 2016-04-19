@@ -2,25 +2,18 @@
  * 代码声明
  */
 package com.manage.ReserveManager.service.impl;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.common.BuildingBaseManager.dao.BbmRoomDao;
-import com.common.BuildingBaseManager.service.BbmRoomManager;
 import com.common.ExtentionAtrManager.service.ExtentionAtrManager;
 import com.common.purchasingManager.dao.PurchasingmanagerCommodityDao;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
 import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
-import com.gsoft.framework.codemap.dao.CodeitemDao;
-import com.gsoft.framework.codemap.entity.Codeitem;
 import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -50,21 +43,12 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 	
 	@Autowired
 	private PurchasingmanagerCommodityDao purchasingmanagerCommodityDao;
-	
-//	@Autowired
-//	private PurchasingmanagerCommodityExtendValueDao purchasingmanagerCommodityExtendValueDao;
-	
-	@Autowired
-	private CodeitemDao<Codeitem, String> codeItemDao;
-	
-	@Autowired
-	private BbmRoomDao bbmRoomDao;
+
 	
 	@Autowired
 	private PurchasingmanagerCommodityManager purchasingmanagerCommodityManager;
 	
-	@Autowired
-	private BbmRoomManager bbmRoomManager;
+	
 	
 	@Autowired
 	private PurchasingmanagerGenreManager purchasingmanagerGenreManager;
@@ -255,22 +239,29 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 	
 	
 	/**
-	 * 取消预约申请，将待受理状态变更为已取消
+	 * 前台个人中心    取消预约申请，将待受理状态变更为已取消
 	 * @param ReservationRecord
 	 */
-    @EsbServiceMapping
-	 public ReservationRecord cancelReservation(ReservationRecord o) throws BusException{
+     @EsbServiceMapping
+      public ReservationRecord cancelReservation(ReservationRecord o) throws BusException{
     	ReservationRecord p=new ReservationRecord();
 		String recordId=o.getRecordId();
 		if(StringUtils.isNotEmpty(recordId)){
 			p=reservationRecordDao.get(recordId);//根据主键查询预约记录基础数据
-		}
-		p.setRecordStatus("04");//已取消
-		p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-		return reservationRecordDao.save(p);
-		
+			String recordStatus = p.getRecordStatus();
+			if("01".equals(recordStatus))
+		    {
+				p.setRecordStatus("04");//04为已取消
+				p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+				return reservationRecordDao.save(p);
+			}else{
+				throw new BusException("当前状态不能取消");				
+			}
+		}else{
+			//return null;
+			throw new BusException("空对象");
+		}    
     }
-    
     /**
      * 根据当前登录用户预约
      */
