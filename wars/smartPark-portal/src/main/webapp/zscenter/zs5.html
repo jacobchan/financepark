@@ -102,6 +102,7 @@
 					}
 					var s=$(window).scrollTop()+670;
 					$('body,html').animate({scrollTop:s},800);
+
 				}else{
 					$(".zs-more").html("到底了……");
 				}
@@ -134,7 +135,7 @@
 	<script type="text/javascript">
 	$(function(){
 		var m;
-		$(".zs-center-img .small-img").click(function () {
+		$(document).on("click",".zs-center-img .small-img",function () {
 			m=$(this).index();
 			var wH=parseInt($(window).height());
 			if(wH<753){
