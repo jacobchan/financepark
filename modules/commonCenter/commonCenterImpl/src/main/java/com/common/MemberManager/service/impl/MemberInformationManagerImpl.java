@@ -46,7 +46,9 @@ import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.PasswordUtils;
 import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.util.StringUtils;
+import com.gsoft.utils.EncryptUtil;
 import com.gsoft.utils.HttpSenderMsg;
+import com.mysql.jdbc.Util;
 
 @Service("memberInformationManager")
 @Transactional
@@ -509,5 +511,24 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	public List<MemberInformation> getMembersByRole(String role)
 			throws BusException {
 		return memberInformationDao.getMembersByRole(role);
+	}
+	
+	@EsbServiceMapping
+	public String getEncryptStringForEnterpriseMall(@ServiceParam(name="userId",pubProperty="userId")String userId) throws BusException{
+		String retString = "http://alpha.ininin.com/oauth/tianan_cyber.html?";
+		
+		MemberInformation noEncypt = memberInformationDao.get(userId);
+		String user_id = EncryptUtil.encrypt(noEncypt.getMemberId());
+		String user_name = EncryptUtil.encrypt(noEncypt.getMemberPhoneNumber());
+		String tel = EncryptUtil.encrypt(noEncypt.getMemberPhoneNumber());
+		String name = EncryptUtil.encrypt(noEncypt.getMemberName());
+		String ent_address = EncryptUtil.encrypt("");
+		String ent_name = EncryptUtil.encrypt("富春硅谷投资股份有限公司");
+		
+		//checkcode MD5
+		String checkCodeString= EncryptUtil.getMD5Str(user_id+user_name+name+tel+ent_address+ent_name);
+	
+		retString = retString+"user_id="+user_id+"&username="+user_name+"&name="+name+"&tel="+tel+"&ent_address="+ent_address+"&ent_name="+ent_name+"&checkcode="+checkCodeString;
+		return retString;
 	}
 }
