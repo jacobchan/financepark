@@ -11,7 +11,7 @@
 
 </head>
 <body>
-	<div id="youi_page_header" class="youi-page-header clearfix" dataType="0" dataId="0"></div>
+	<div id="youi_page_header" class="youi-page-header clearfix"></div>
 	<!--banner-->
 <div class="slideBox">
 	<ul>
@@ -197,41 +197,41 @@
         <div class="content_left mt30">
         	<div class="mb10">
             	<span class="span_ac ">企业商城</span>
-                <!-- <a class="fr" href="./cg30/index.html">更多》</a> -->
+                <a class="fr" href="./cg30/index.html">更多》</a>
             </div>
-            <div class="layout_table padding clearfix" style="border:none">
+            <div class="layout_table padding" style="border:none">
             	<ul>
                 	<li class="cp_info tc" onClick="window.open('http://www.ininin.com/product/200021.html')">
-                        <div><img src="styles/images/index/cp1.jpg" width="285" height="163" class="loading-2"/></div>
+                        <div class="cp"><img src="styles/images/index/cp1.jpg" width="285" height="163"/></div>
                         <p class="lh30 f16 mt10">“新”名片</p>
                         <p class="cc">&yen;8.00</p>
                             
                     </li>
                     <li class="cp_info tc" onClick="window.open('http://www.ininin.com/product/200037.html')">
-                        <div><img src="styles/images/index/cp2.jpg" width="285" height="163" class="loading-2"/></div>
+                        <div class="cp"><img src="styles/images/index/cp2.jpg" width="285" height="163"/></div>
                         <p class="lh30 f16 mt10">大型喷绘海报</p>
                         <p class="cc">&yen;75.00</p>
                             
                     </li>
                     <li class="cp_info tc" onClick="window.open('http://www.ininin.com/product/200069.html')">
-                        <div><img src="styles/images/index/cp3.jpg" width="285" height="163" class="loading-2"/></div>
+                        <div class="cp"><img src="styles/images/index/cp3.jpg" width="285" height="163"/></div>
                         <p class="lh30 f16 mt10">“新”手提袋</p>
                         <p class="cc">&yen;5.33</p>
                     </li>
-                    <li class="cp_info tc" onClick="window.open('http://www.ininin.com/product/200063.html')">
-                        <div><img src="styles/images/index/cp4.jpg" width="285" height="163" class="loading-2"/></div>
+                    <li class="cp_info tc" onClick="window.open('http://www.ininin.com/product/200021.html')">
+                        <div class="cp"><img src="styles/images/index/cp4.jpg" width="285" height="163"/></div>
                         <p class="lh30 f16 mt10">“台历个性版</p>
                         <p class="cc">&yen;40.00</p>
                             
                     </li>
-                    <li class="cp_info tc" onClick="window.open('http://www.ininin.com/product/104.html')">
-                        <div><img src="styles/images/index/cp5.jpg" width="285" height="163" class="loading-2"/></div>
+                    <li class="cp_info tc" onClick="window.open('http://www.ininin.com/product/200037.html')">
+                        <div class="cp"><img src="styles/images/index/cp5.jpg" width="285" height="163"/></div>
                         <p class="lh30 f16 mt10">小型掌上画册</p>
                         <p class="cc">&yen;896.92</p>
                             
                     </li>
-                    <li class="cp_info tc" onClick="window.open('http://www.ininin.com/product/1003.html')">
-                        <div><img src="styles/images/index/cp6.jpg" width="285" height="163" class="loading-2"/></div>
+                    <li class="cp_info tc" onClick="window.open('http://www.ininin.com/product/200069.html')">
+                        <div class="cp"><img src="styles/images/index/cp6.jpg" width="285" height="163"/></div>
                         <p class="lh30 f16 mt10">广告字安装</p>
                         <p class="cc">&yen;500</p>
                     </li>
@@ -349,7 +349,7 @@
         
     </div><!--w882 end-->
     <div class="fr w294">
-    	<div class="content_right clearfix" style="margin-top:37px">
+    	<div class="content_right" style="margin-top:37px">
     		<div class="ii_tit quick"><span class="span_bold">园区快捷服务</span><span>个人快捷服务</span></div>
         	<div class="layout_table menu kjservice">
                 <ul>
@@ -409,7 +409,7 @@
                     </li>
                     <li onClick="location.href='./companyservice/carVip.html'">
                     	<div class="item1 gkj_icon2">
-                        	<a href="javascript:;">车位预留</a>
+                        	<a href="javascript:;">停车缴费</a>
                         </div>
                     </li>
                     <li>
@@ -494,7 +494,7 @@
             </form> 
             <form class="reform" style="display:none;" onkeydown="if(event.keyCode==13)return false;">
             	<div class="re_div"  style="position: relative;">
-            		<input id="cityid" name="cityid" type="hidden" value="" />
+            		<input id="cityid" name="cityid" type="hidden" value="{$cityid}" />
                 	<label for="city_name">入住城市</label>
                 	<input type="text" value=""	id="city_name" name="city_name"/>
                 	<div id="suggest" class="ac_results index_position"></div>
@@ -886,7 +886,7 @@
 						    	title = title.substring(0,10) ;
 						    	title += "..." ;
 			  	 			}
-							 var html="<li onclick="+link+"><div class='fl'><img src='"+imageUrl+"' height='59' width='110' class='loading-2'></div><div class='fl ml10'><div class='span_bold'>"+title+"</div>"+
+							 var html="<li onclick="+link+"><div class='fl'><img src='"+imageUrl+"' height='59' width='110'></div><div class='fl ml10'><div class='span_bold'>"+title+"</div>"+
 							"<p class='cc f12'>"+record[i].commodityPrice+"元/小时</p>立即预定</div></li>";
 							 $("#roomPage").append(html);
 							 
@@ -1201,7 +1201,11 @@
 					}
 				
 			});
-		    
+			$(".tc-close").click(function(){
+				 clearInterval(timer1);
+				$(".bg-tanc.m1").hide();
+				$(".bg-tanc.m2").hide();
+			});
 			var a,timer1;
 			function jump1(){
 				if(a>1){
@@ -1246,9 +1250,9 @@
 		function types(record){
 			var html='';
 			for(var i=0;i<1;i++){
-				html+="<li onclick='loadURL(\"/czh/czh4.html\")' style='cursor:pointer'><a href='javascript:;''><img src='styles/images/index/czh1.jpg' class='loading-2'/></a><div class='f18'>创智讲堂</div></li>"+
-				  " <li onclick='loadURL(\"/czh/czh5.html\")' style='cursor:pointer'><a href='javascript:;'><img src='styles/images/index/czh2.jpg' class='loading-2'/></a><div class='f18'>硅谷创业营</div></li>"+
-			       " <li onclick='loadURL(\"/czh/czh4.html?typeId="+record[i].typeId+"\")' style='cursor:pointer'><a href='javascript:;'><img src='styles/images/index/czh3.jpg' class='loading-2'/></a><div class='f18'>园区活动</div></li>";
+				html+="<li onclick='loadURL(\"/czh/czh4.html\")' style='cursor:pointer'><a href='javascript:;''><img src='styles/images/index/czh1.jpg'/></a><div class='f18'>创智讲堂</div></li>"+
+				  " <li onclick='loadURL(\"/czh/czh5.html\")' style='cursor:pointer'><a href='javascript:;'><img src='styles/images/index/czh2.jpg'/></a><div class='f18'>硅谷创业营</div></li>"+
+			       " <li onclick='loadURL(\"/czh/czh4.html?typeId="+record[i].typeId+"\")' style='cursor:pointer'><a href='javascript:;'><img src='styles/images/index/czh3.jpg'/></a><div class='f18'>园区活动</div></li>";
 		     
 			}
 			$('.czh_ul').empty();
@@ -1279,7 +1283,7 @@
 			for(var i=0;i<record.length;i++){
 				html+="<li class='clearfix' onclick='redirectPage(this)'; id='"+record[i].applyId+"'>"+
 							"<div class='plg-photo'>"+
-								"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityImage+"&method=show' border='0' width='100%' class=\"loading-2\"/>"+
+								"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityImage+"&method=show' border='0' width='100%'/>"+
 								"<em>"+record[i].applayType.typeName+"</em>"+
 							"</div>"+
 							"<div class='plg-article pr'>"+
@@ -1308,9 +1312,7 @@
 				$(".bg-tanc.m2").show();
 				e.stopPropagation();	
 			});
-			$(".tc-close").click(function(){
-				$(".bg-tanc.m2").hide();
-			});
+			
 		};
 		function redirectPage(obj){
 			var applyId=obj.id;
@@ -1325,20 +1327,12 @@
       //酒店预定跳转
 		function gotoHotel(){
 			var cityname = $("#city_name").val();
-			var cityid = $("#cityid").val();
+			var cityId = $("#cityid").val();
 			var tm1 = $("#overdate").val();
 			var tm2 = $("#leavedate").val();
 			var today = new Date();
 			var month = Number(today.getMonth()) + Number(1);
 			var todayDate = today.getFullYear()+"-"+month+"-"+today.getDate();
-			if(tm1=="" || tm2=="" || tm1==null || tm2==null || cityid=="" || cityid==null || cityname=="" || cityname=="中文/拼音"){
-				clearInterval(timer);
-				$("#msg").text("请正确选择城市、日期");
-    	        $(".toast").show();
-    	        pltime=2;
-    	        timer=setInterval("closeTanc()",1000);
-				return false;
-			}
 			if(!compareDate(todayDate,tm1)){
 				clearInterval(timer);
 				$("#msg").text("所选日期不能小于当前日期。");
@@ -1348,7 +1342,7 @@
 				return false;
 			}
 			if(compareDate(tm1,tm2)){
-				window.open(encodeURI("jd1.html?cityname="+cityname+"&cityid="+cityid+"&tm1="+tm1+"&tm2="+tm2));
+				window.open(encodeURI("jd1.html?cityname="+cityname+"&cityid="+cityId+"&tm1="+tm1+"&tm2="+tm2));
 			}else{
 				clearInterval(timer);
 				$("#msg").text("入住时间不能大于离店时间。");
