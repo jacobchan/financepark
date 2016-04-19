@@ -11,17 +11,15 @@ public class ReferenceMap extends HashMap<String, String>{
 
 	public ReferenceMap(){
 	//	super();
-		this.put("#user","@user");
-		this.put("#OrderType","");
-		this.put("#OrderNo","");
-		this.put("#Commdity","");
-		this.put("#RecNo","");
-		this.put("#NewType","");
-		this.put("#Type","");
-		this.put("#RecState","");
-		this.put("#waiter","");
-		this.put("#Phone","");
-		this.put("#qyadmin","");
+		this.put("#admin","");//管理员
+		this.put("#user","");//用户
+		this.put("#phone","");//电话
+		this.put("#orderNo","");//订单编号
+		this.put("#flowNo","");//流程编号
+		this.put("#serviceNo","");//服务编号
+		this.put("#appointmentNo","");//预约编号
+		this.put("#relateProject","");//关联项目
+		this.put("#payProject","");//支付项目
 	}
 	
 	public ReferenceMap(String params){

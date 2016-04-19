@@ -9,78 +9,85 @@ import java.util.List;
  *
  */
 public class MessageTempCode {
+	
 	/**
-	 * #user发起了#OrderType的订单，订单编号#OrderNo，请处理。
+	 * 你有一个新的订单需要处理，订单编号为【 #orderNo】，关联项目为【#relateProject】,请及时处理。
 	 */
-	public static final String MSG_TEMPT_1 = "010000";
+	public static final String MSG_BACKGROUND_1 = "0101";
 	/**
-	 * #user申请了#Commdity的预约，预约编号#RecNo，请处理。
+	 * 你有一个新的申请需要审批，流程编号为【#flowNo】，关联项目为【#relateProject】，请及时处理！
 	 */
-	public static final String MSG_TEMPT_2 = "020000";
+	public static final String MSG_BACKGROUND_2 = "0102";
 	/**
-	 * #user申请#NewType的政策申请，申请编号#RecNo,请处理。
+	 * 你有一个新的物业服务申请需要处理，服务编号为【#serviceNo】，关联项目为【#relateProject】，请及时处理！
 	 */
-	public static final String MSG_TEMPT_3 = "030000";
+	public static final String MSG_BACKGROUND_3 = "0103";
 	/**
-	 * #user，您的#Type#RecNo，已处理，当前状态#RecState，请知悉。
+	 * 你有一个新的预约需要处理，预约编号为【#appointmentNo】，关联项目为【#relateProject】，请及时处理！
 	 */
-	public static final String MSG_TEMPT_4 = "040000";
+	public static final String MSG_BACKGROUND_4 = "0104";
+	
+	
 	/**
-	 * #user，您好，你的预约（预约编号#RecNo）已受理。您的接待员是#waiter，联系电话#Phone
+	 * 尊敬的企业管理员【#admin】，你有一个支付申请需要处理，订单编号为【 #orderNo】，支付项目为【#payProject】，申请的员工为【#user】，请登录企业管理中心进行处理，感谢你对富春硅谷的支持!
 	 */
-	public static final String MSG_TEMPT_5 = "050000";
+	public static final String MSG_ENT_1 = "0201";
 	/**
-	 * #user，您好，贵司的企业码是#EnNo，请填写企业邀请码，加入企业。
+	 * 尊敬的企业管理员【#admin】，你的订单【#orderNo】已经成功支付，支付总金额为：1999元。感谢你对富春硅谷的支持！
 	 */
-	public static final String MSG_TEMPT_6 = "060000";
+	public static final String MSG_ENT_2 = "0202";
+	
+	
 	/**
-	 * #user，您好，你的入驻申请已审核通过，请与#time到服务窗口，凭申请编号#RecNo办理入驻。
+	 * 尊敬的用户#user你好，你的预约已经成功提交，预约单号为【#appointmentNo】，预约结果请留意短信通知，或进入个人中心查看处理结果，感谢你对富春硅谷的支持！
 	 */
-	public static final String MSG_TEMPT_7 = "070000";
+	public static final String MSG_USER_1 = "0301";
 	/**
-	 * #qyadmin，您好!贵公司的员工#user已申请加入企业
+	 * 尊敬的用户#user你好，你的物业报修【订单号：#orderNo】已受理，我们的工作人员将前往维修，为你服务的专业工程师联系方式：张伟伟【手机:#phone】，感谢你对富春硅谷的支持！
 	 */
-	public static final String MSG_TEMPT_8 = "080000";
+	public static final String MSG_USER_2 = "0302";
 	/**
-	 * 
+	 * 尊敬的用户#user你好，你的物业报修已经完工，请及时前往个人中心付款，如有疑问欢迎致电客服中心：83438999，感谢你对富春硅谷的支持！
 	 */
-	public static final String MSG_TEMPT_9 = "090000";
+	public static final String MSG_USER_3 = "0303";
 	/**
-	 * 
+	 * 尊敬的用户#user你好，你的投诉建议我们已经收到，为此给你带来的不便我们深表歉意，我们会尽快安排专业的人员受理，并将受理结果及时反馈给您，感谢你对富春硅谷的支持！【服务编号：#serviceNo】
 	 */
-	public static final String MSG_TEMPT_10 = "100000";
-	/**
-	 * 
-	 */
-	public static final String MSG_TEMPT_11 = "110000";
-	/**
-	 * 
-	 */
-	public static final String MSG_TEMPT_12 = "120000";
-	/**
-	 * 
-	 */
-	public static final String MSG_TEMPT_13 = "130000";
+	public static final String MSG_USER_4 = "0304";
+	
+	
 	/**
 	 * 
 	 */
-	public static final String MSG_TEMPT_14 = "140000";
+	public static final String MSG_TEMPT_11 = "1100";
 	/**
 	 * 
 	 */
-	public static final String MSG_TEMPT_15 = "150000";
+	public static final String MSG_TEMPT_12 = "1200";
 	/**
 	 * 
 	 */
-	public static final String MSG_TEMPT_16 = "160000";
+	public static final String MSG_TEMPT_13 = "1300";
 	/**
 	 * 
 	 */
-	public static final String MSG_TEMPT_17 = "170000";
+	public static final String MSG_TEMPT_14 = "14000";
 	/**
 	 * 
 	 */
-	public static final String MSG_TEMPT_18 = "180000";
+	public static final String MSG_TEMPT_15 = "1500";
+	/**
+	 * 
+	 */
+	public static final String MSG_TEMPT_16 = "1600";
+	/**
+	 * 
+	 */
+	public static final String MSG_TEMPT_17 = "1700";
+	/**
+	 * 
+	 */
+	public static final String MSG_TEMPT_18 = "1800";
 	/**
 	 * 
 	 */

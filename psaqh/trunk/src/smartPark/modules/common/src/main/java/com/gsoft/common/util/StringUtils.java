@@ -72,7 +72,7 @@ public class StringUtils {
 		return str;
 	}
 	
-	/**替换字符串中多个,replaceMap不要 key=value
+	/**替换字符串中多个占位符,replaceMap不要 key=value
 	 * @param str
 	 * @param targets
 	 * @param replaceMap
