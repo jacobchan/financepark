@@ -256,9 +256,8 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
 		public PropertyservicemanagerMoverec cancelStatus(@ServiceParam(name="moverecId") String moverecId) throws BusException{
 	    	PropertyservicemanagerMoverec moverec = propertyservicemanagerMoverecDao.get(moverecId);
 	    	String moverecStatus=moverec.getMoverecStatus();
-	    	if(moverecStatus.equals("00")){
-	    		moverec.setMoverecStatus("03");
-	    		
+	    	if("00".equals(moverecStatus)){
+	    		moverec.setMoverecStatus("03");//0为待审批	    		
 	    	}	
 	    	PropertyservicemanagerMoverec p=propertyservicemanagerMoverecDao.save(moverec);
 			return p;	    	    		    	
