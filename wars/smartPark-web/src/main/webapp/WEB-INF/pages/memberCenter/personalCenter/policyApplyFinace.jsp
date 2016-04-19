@@ -22,8 +22,20 @@
 	</table>
 	<div class="tcdPageCode fr"></div>
 </div>
+<div class="toast">
+    <div class="toast-con clearfix">
+        <div class="close-toast fr"></div>
+        <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
+    </div> 
+</div>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 <script type="text/javascript">  
+	//页面取消成功的Page页
+	var currentIndex = 1;
+	//页面显示的条数
+	var pageSize=10;
+	//默认显示在第1页
+	var pageCount=1;
 	$(function(){
 		loadData();
 	});
@@ -43,6 +55,7 @@
 					pageCount : pageCount,
 					current : 1,
 					backFn : function(p) {
+						currentIndex = p;
 						this.pageCount = pageCount;
 						refreshData(p, pageSize);
 					}
@@ -97,6 +110,15 @@
 		}
 		$("tbody").html(headHtml+html);
 	};
+	//取消成功，提示信息
+	function close(content){		        
+        $(".tc.mt25.f18").empty() ;
+        $(".tc.mt25.f18").append(content) ;
+        $(".toast").show();		      		        		       				
+		setTimeout(function(){$(".toast").hide(); },2000);
+		refreshData(currentIndex,pageSize);
+  	}
+	
 	
 	//取消操作
 	function cancel(id){
@@ -105,7 +127,8 @@
 			url : baseUrl + "finaceManager/goCancel.json",
 			data : params.join('&'),
 			success : function(results) {
-				loadData();
+				//loadData();
+				close("取消成功");
 			}
 		});
 	}
