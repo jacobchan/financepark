@@ -3,7 +3,9 @@
 <youi:page i18n="i18n.security.messages">
 	<!-- 页面描述： -->
 	<!--**********************************子页面**********************************-->
-	
+		<youi:subpage caption="用户信息" 	width="800" subpageId="sp_user_info"
+		src="page/security.agt.user/userinfo.html?userId={userId}">
+	</youi:subpage>
 	<!--**********************************子页面**********************************-->
 	
 	<!--**********************************页面内容********************************-->
@@ -27,6 +29,8 @@
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
 		</youi:gridCol>
+		
+		<youi:button name="userInfo" caption="用户信息" active="1"/>
 	</youi:grid>
 	
 	<!-- form-用户编辑 -->
@@ -59,5 +63,11 @@
 	<youi:func name="grid_user_col_button_remove" params="record,rowDoc">
 		$(this).grid('removeRecords',rowDoc);
 	</youi:func>
+	
+	<youi:func name="func_grid_userInfo">
+		var userid = $elem('grid_user',pageId).grid('getSelectedRecord').userId;
+		$elem('subpage_sp_user_info',pageId).subpage('open',{userId:userid},null,{userId:userid});
+	</youi:func>
+
 	<!--**********************************页面函数********************************-->
 </youi:page>
