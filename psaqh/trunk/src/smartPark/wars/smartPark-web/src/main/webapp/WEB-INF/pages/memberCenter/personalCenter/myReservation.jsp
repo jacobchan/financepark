@@ -8,7 +8,6 @@ myReservation.jspmyReservation.jsp<%@ page language="java" pageEncoding="UTF-8"%
 						<ul class="order-nav">
 							<li class="active" onclick="jump0();"><span class="pend">众创空间预约</span></li>
 							<li class="active" onclick="jump1();"><span class="pend">入驻服务预约</span></li>
-							<!-- <li onclick="jump2();"><span class="hospital">车位预约</span></li> -->
 						</ul>
 					</div>
 					
@@ -49,14 +48,8 @@ myReservation.jspmyReservation.jsp<%@ page language="java" pageEncoding="UTF-8"%
 				$(".order-nav li").eq(1).addClass("active").siblings().removeClass("active");
 				jump2();
 			}
-			 else{
-				$(".order-nav li").eq(0).addClass("active").siblings().removeClass("active");
-				jump0();
-			} 
-		});
-
-	
-		
+			
+		});			
 		//获取链接后面的值
 		function getRequest() {
 			var url = location.search; //获取url中"?"符后的字串
@@ -65,7 +58,6 @@ myReservation.jspmyReservation.jsp<%@ page language="java" pageEncoding="UTF-8"%
 				strs = str.split("="); //用等号进行分隔 （因为知道只有一个参数 所以直接用等号进分隔 如果有多个参数 要用&号分隔 再用等号进行分隔）
 				return strs[1];
 			}
-		}
-		 
+		}		 
      </script>
 </youi:html>
