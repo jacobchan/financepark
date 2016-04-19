@@ -47,7 +47,10 @@ myReservation.jspmyReservation.jsp<%@ page language="java" pageEncoding="UTF-8"%
 			}else if(getRequest()=="2"){
 				$(".order-nav li").eq(1).addClass("active").siblings().removeClass("active");
 				jump1();
-			}
+			}else{
+				$(".order-nav li").eq(0).addClass("active").siblings().removeClass("active");
+				jump0();
+			} 
 			
 		});			
 		//获取链接后面的值
