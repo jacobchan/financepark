@@ -10,7 +10,7 @@
 							<input class="bd-input fl" type="text" id="startTime"><span class="fl ml15 mr15">到</span>
 							<input class="bd-input fl" type="text" id="endTime">
 							<div class="inp-box ml20"><input placeholder="投诉单号查询" type="text" id="cosCode"><a class="fa fa-search" href=""></a></div>
-							<input value="搜索" class="hhf-submit" type="button">
+							<input value="搜索" class="hhf-submit query" type="button">
 						</div>
 						
 						<table class="gt-table mt20">
@@ -43,15 +43,15 @@
 				</div>
 
 	<!--***弹窗 start****************************************-->
-	<div class="bg-tanc">
+		<div class="bg-tanc m1">
 		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
 			<a href="javascript:;" class="tc-close"></a>
 			<div class="w60 tc mt40" style="margin-left:20%">
 				<div class="mt20 mb20 f16 lh26">
-					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o cosCode"> [ 123456789 ] </span>吗？
+					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o moverec">  </span>吗？
 				</div>
-				<p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p>
-				<input value="确定" class="hhf-submit" style="height:36px;" type="submit">
+				<!-- <p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p> -->
+				<input value="确定" class="hhf-submit confirm" style="height:36px;" type="submit">
 			</div>
 		</div>
 	</div>
@@ -59,8 +59,7 @@
         <div class="toast-con clearfix">
             <div class="close-toast fr"></div>
             <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
-        </div> 
-        
+        </div>        
     </div>
 	<!--***弹窗 end****************************************-->
 </youi:body>
@@ -70,19 +69,16 @@
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 	<script type="text/javascript">
-	var pageSize=5;
-	var pageCount=1;
-	var currentIndex = 1;
-	var serviceURL = baseUrl+'propertyservicemanagerCosManager/getPagerCos.json';
-	
-	$(function () {
-		
+	var pageSize=10; //每页默认显示10条
+	var pageCount=1; //总页数
+	var currentIndex = 1; //第几页
+	var serviceURL = baseUrl+'propertyservicemanagerCosManager/getPagerCos.json';	
+	$(function () {		
 		//分页页码显示
 		 $.ajax({
 			url:serviceURL, 
 			success:function(results){	
-							pageCount=Math.ceil(results.totalCount/pageSize);//页数
-							
+							pageCount=Math.ceil(results.totalCount/pageSize);//页数							
 							 refreshData(1,pageSize);
 								$(".tcdPageCode").createPage({
 								    pageCount:pageCount,
@@ -117,82 +113,40 @@
 	     ht="<tr>"+
 			"<th>订单号</th>"+
 			"<th>申请时间</th>"+
-			"<th>是否回访</th>"+
+			//"<th>是否回访</th>"+
 			"<th>联系人</th>"+
 			"<th>联系电话</th>"+
 			"<th>投诉状态</th>"+
 			"<th>操作</th>"+
 		    "</tr>";
-		    $("tbody").append(ht);
-			
+		    $("tbody").append(ht);		
 		//	$("#count").append(record.length);
-			for(var i=0;i<record.length;i++){
-				var bool = "";
+			for(var i=0;i<record.length;i++){				
 				var status = "";
 				var crop = "";
-				if(record[i].cosBool=='0'){
-					bool = "是";
-				}else{
-					bool = "否";
-				}
-				if(record[i].cosStatus=='0'){
+				
+				if(record[i].cosStatus=='01'){
 					status = "待受理";
 					crop = "取消";
-				}else if(record[i].cosStatus=='1'){
-					crop = "取消";
-					status = "受理中";
-				}else if(record[i].cosStatus=='2'){
+				}else if(record[i].cosStatus=='02'){
 					status = "已受理";
-				}else if(record[i].cosStatus=='3'){
+				}else if(record[i].cosStatus=='03'){
 					status = "已取消";
-				}else if(record[i].cosStatus=='4'){
-					status = "已回访";
-				}else if(record[i].cosStatus=='5'){
-					status = "待评价";
-					crop = "评价";
-				}else if(record[i].cosStatus=='6'){
-					status = "已完成";
+				}else if(record[i].cosStatus=='04'){
+					status = "已退回";
 				}
 				var html="<tr id='"+record[i].cosId+"' class='aaa'><td>"+
 				"<a href='<%=request.getContextPath()%>/member/memberCenter/propertyService/propertyManageCosDetail.html'>"+record[i].cosCode+"</a>"+
 				"</td>"+
 				"<td>"+record[i].cosTime+"</td>"+
-				"<td>"+bool+"</td><td>"+record[i].cosName+"</td>"+
+				"<td>"+record[i].cosName+"</td>"+
 				"<td>"+record[i].cosTelephone+"</td><td>"+status+"</td>"+
-				"<td><a href='javascript:;' onclick='javascript:cancel(\""+record[i].cosId+"\")' class='ac-show'>"+crop+"</a></td></tr>";
+				"<td><a href='javascript:;' onclick='javascript:cancel(this)' class='ac-show'>"+crop+"</a></td></tr>";
 				
 				$("tbody").append(html);
 			}
 		};
-		
-		/*  function cancel(obj){
-				var me=obj.parentNode.parentNode;
-				var cosCode=me.childNodes[0].innerText;
-				$(".cosCode").html(cosCode);
-				$(".cosCode")[0].setAttribute("id",me.id);
-				$(".bg-tanc").show();
-			}; */
-			//根据订单号查询
-	/*  $('.hhf-submit').click(function(){	
-				
-				$(".aaa").empty();
-				 var cosCode=$("#cosCode").val(); 
-				 var startTime=$("#startTime").val(); 
-				 var endTime=$("#endTime").val(); 
-				 params=['cosCode='+cosCode+'','startTime='+startTime+'','endTime='+endTime+''];
-			      $.ajax({
-			    	 url:baseUrl+'propertyservicemanagerCosManager/getCoslistLikeCosCode.json',
-			    	 //url:baseUrl+'propertyservicemanagerCosManager/getPagerCos.json',
-			    	 data:params.join('&'),
-			    	 success:function(result){					    		 
-							console.log(result.records);           
-							if(result&&result.records){						
-								_parseRecords(result.records);							
-							}
-						}
-				}); 
-	});   */
-	 $('.hhf-submit').click(function(){	
+	 $('.hhf-submit.query').click(function(){	
 		var cosCode=$("#cosCode").val();
 		var startTime=$("#startTime").val(); 
 		var endTime=$("#endTime").val(); 			
@@ -201,8 +155,7 @@
 			url:baseUrl+'propertyservicemanagerCosManager/getPagerLikeCos.json',
 			data:params.join('&'),
 			success:function(results){	
-				pageCount=Math.ceil(results.totalCount/pageSize);//页数				
-				
+				pageCount=Math.ceil(results.totalCount/pageSize);//页数							
 				 refreshData_query(1,pageSize);
 					$(".tcdPageCode").createPage({
 					    pageCount:pageCount,
@@ -237,20 +190,30 @@
 	
 	<!-- 取消投诉 -->
 	<script type="text/javascript">
-	function cancel(cosId){
-				
-			 	$.youi.ajaxUtils.ajax({
-					url:baseUrl+'propertyservicemanagerCosManager/updateCosforpage.json',
-					data:'cosId='+cosId,
-					success:function(result){
-						if(result&&result.record){
-
-							close("取消成功");
-							
-						}
-					}
-				});
-			}
+			function cancel(obj){
+				var me=obj.parentNode.parentNode;//找到父节点	
+				//alert(me.id);
+				var cosCode=me.childNodes[0].childNodes[0].innerText; //获取订单号
+				$(".moverec").html(cosCode);//给弹窗插入订单号
+				$(".moverec")[0].setAttribute("id",me.id);//给弹窗设置id
+				$(".bg-tanc.m1").show();
+			};
+			//点击确认取消投诉
+			$(function(){
+				$(".hhf-submit.confirm").click(function(){	
+					    $(".bg-tanc.m1").hide();
+						var id=$(".moverec")[0].getAttribute("id");				
+					 	$.ajax({
+					 		url:baseUrl+'propertyservicemanagerCosManager/updateCosforpage.json',
+							data:'cosId='+id,
+							success:function(result){
+								if(result&&result.record){
+									close("取消成功");							
+								}
+							}
+						});
+					});
+				});	
 		
 	$(function(){
 		laydate({
