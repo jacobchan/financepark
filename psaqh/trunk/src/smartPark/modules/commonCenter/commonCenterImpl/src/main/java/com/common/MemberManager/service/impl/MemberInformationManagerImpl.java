@@ -504,4 +504,10 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		MemberInformation mem = memberInformationDao.getObjectByUniqueProperty("memberPhoneNumber", phone);
 		return mem;
 	}
+	
+	@Override
+	public List<MemberInformation> getMembersByRole(String role)
+			throws BusException {
+		return memberInformationDao.getMembersByRole(role);
+	}
 }
