@@ -14,5 +14,5 @@ public interface TaskManager extends BaseManager {
 	 * @return
 	 * @throws BusException
 	 */
-	public List<Task> getAllTasks(String roleId) throws BusException;
+	public List<Task> getAllTasks(String userId) throws BusException;
 }
