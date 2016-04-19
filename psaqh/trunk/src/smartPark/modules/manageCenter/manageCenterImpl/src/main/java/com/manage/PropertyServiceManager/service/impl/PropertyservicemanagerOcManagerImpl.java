@@ -57,10 +57,15 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 	 public void updateOcStatus(@ServiceParam(name="ocId") String id, @ServiceParam(name="ocStatus") String ocStatus)
 				throws BusException {
 		// TODO Auto-generated method stub
-		
-		 PropertyservicemanagerOc o=propertyservicemanagerOcDao.get(id);
-	    	o.setOcStatus(ocStatus);
-	    	propertyservicemanagerOcDao.save(o);
+		 if(id!=null){
+			 PropertyservicemanagerOc o=propertyservicemanagerOcDao.get(id);
+			 String bindStatus=o.getBindStatus();
+			 if("01".equals(bindStatus)){
+				 o.setOcStatus(ocStatus);
+		    	 propertyservicemanagerOcDao.save(o); 
+			 }
+	    	 
+		 }
 	}
 	/* @EsbServiceMapping
 		public void updateUserorderStatus(@ServiceParam(name="userorderId") String id, @ServiceParam(name="userorderStatus") String userorderStatus)
