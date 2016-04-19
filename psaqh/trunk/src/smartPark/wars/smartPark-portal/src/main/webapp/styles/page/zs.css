@@ -840,7 +840,7 @@ a.a-btn-small:hover{background-color: #FF5900;}
 .jd-sea-btn{padding: 0px 40px;height: 30px;background: #82b4f2;color: #fff;border:0px;}
 .jd-sea-btn:hover{background: #68a2e9;}
 .jd-bd-select{border:1px solid #ecebeb;border-bottom: 0px;font-size: 12px;}
-.jd-bd-select .jbk-bt{border-bottom: 1px solid #ecebeb;height: 39px;line-height: 38px;}
+.jd-bd-select .jbk-bt{border-bottom: 1px solid #ecebeb;height: 39px;line-height: 38px;position: relative;overflow: hidden;}
 .jbk-span{width: 120px;text-align: center;background-color: #f6f6f6;display: inline-block;}
 .jbk-bt label{float: left;width: 140px;}
 .jbk-bt label input{float: left;margin-top: 12px;margin-right: 10px;}
@@ -1028,3 +1028,17 @@ input[type="text"].error{border:1px solid #f82e3e !important;}
 .tct-select.error{border:1px solid #f82e3e !important;}
 textarea.error{border:1px solid #f82e3e !important;}
 input[type="password"].error{border:1px solid #f82e3e !important;}
+
+
+/****/
+input.city_name{width: 110px;height: 28px; border:0;}
+.js-s.tct-select .ic-select2{background: none;}
+.js-date{background: url(../images/zs/date_icon.png) 10px center no-repeat}
+.jbk-bt .more_area{position: absolute; right:60px;top: 0; line-height: 38px;color:#333;}
+.jbk-bt .more_area i{font-size: 18px; margin-left: 5px;vertical-align: middle;}
+.jbk-bt .pickUp i:before{content: "\f106";}
+#loading{position: relative;}
+#noresult{line-height: 170px;}
+#noresult>div{width: 240px;padding-left: 50px; background:url(../images/zs/no_info.png) left center no-repeat;}
+
+#loading{position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: #fff;z-index: 9999;}
