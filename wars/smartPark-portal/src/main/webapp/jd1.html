@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>酒店预订</title>
 	<link href="styles/page/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 	<link href="styles/base.css" type="text/css" rel="stylesheet">
 	<link href="styles/page/zs.css" type="text/css" rel="stylesheet">
@@ -34,9 +34,9 @@
 			</div>
 			<div class="jdorder-select clearfix">
 				<div class="tct-select fl js-s clearfix" style="position: relative;">
-					<div class="ic-select">
+					<div class="ic-select ic-select2">
 						<span class="fl lh30 mr10">目的地</span>
-						<p><input type="text" value="" style="width: 110px;height: 28px;" id="city_name" name="city_name"/></p>
+						<p><input type="text" class="city_name" value="" id="city_name" name="city_name"/></p>
 						<input id="cityid" name="cityid" type="hidden" value="" />
 						<div id="suggest" class="ac_results jd1_position"></div>
 					</div>
@@ -59,7 +59,7 @@
 				</div>
 				<input type="submit" value="立即搜索" class="jd-sea-btn fr" onclick="query()">
 			</div>
-			<div class="clearfix jd-bd-select mt20">
+			<div class="clearfix jd-bd-select mt20" id="jd-bd-select">
 				<div class="jbk-bt clearfix">
 					<span class="jbk-span fl">价格区间</span>
 					<span class="ml50 mr50 c-o fl">不限</span>
@@ -82,6 +82,32 @@
 						<label><input type="checkbox" name="star" value="5"> 五星级／豪华型</label>
 					</div>
 				</div>
+				<div class="jbk-bt clearfix jbk-bt-heigh">
+					<span class="jbk-span fl">行政区域</span>
+					<span class="ml50 mr50 c-o fl">不限</span>
+					<div class="fl" style="width: 900px;">
+						<label><input type="checkbox" name="star" value="2"> 福田区</label>
+						<label><input type="checkbox" name="star" value="3"> 南山区</label>
+						<label><input type="checkbox" name="star" value="4"> 宝安区</label>
+						<label><input type="checkbox" name="star" value="5"> 罗湖区</label>
+						<label><input type="checkbox" name="star" value="2"> 福田区</label>
+						<label><input type="checkbox" name="star" value="3"> 南山区</label>
+						<label><input type="checkbox" name="star" value="4"> 宝安区</label>
+						<label><input type="checkbox" name="star" value="5"> 罗湖区</label>
+						<label><input type="checkbox" name="star" value="2"> 福田区</label>
+						<label><input type="checkbox" name="star" value="3"> 南山区</label>
+						<label><input type="checkbox" name="star" value="4"> 宝安区</label>
+						<label><input type="checkbox" name="star" value="5"> 罗湖区</label>
+						<label><input type="checkbox" name="star" value="4"> 宝安区</label>
+						<label><input type="checkbox" name="star" value="5"> 罗湖区</label>
+						<label><input type="checkbox" name="star" value="2"> 福田区</label>
+						<label><input type="checkbox" name="star" value="3"> 南山区</label>
+						<label><input type="checkbox" name="star" value="4"> 宝安区</label>
+						<label><input type="checkbox" name="star" value="5"> 罗湖区</label>
+					</div>
+					<a href="" class="more_area" id="more_area">更多<i class="fa fa-angle-down ml20"></i></a>
+				</div>
+				
 			</div>
 			<h5 class="f12 mt20 mb20 lh30"><span class="f14 c-o" id="totalRecord">0</span> 家酒店满足条件</h5>
 			<div class="fl" style="width:880px;">
@@ -97,38 +123,7 @@
 					</div>
 				</div>
 				<div class="clearfix" id="hotelblock">
-					<div class="jd-order-group" style="position: relative;padding-bottom:40px;">
-						<!-- <table>
-							<colgroup>
-								<col width="180"></col>
-								<col width="490"></col>
-								<col></col>
-								<col width="110"></col>
-							</colgroup>
-							<tr>
-								<td><img src="styles/images/jd-p1.jpg" width="160" height="120"></td>
-								<td>
-									<div class="mb25">
-										<span class="lh30 f16 mr10">北京好苑建国酒店 </span>
-										<span class="starbox1"><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i></span>
-									</div>
-									<p class="mb25 lh20 f12">位于建国门，北京市东城区建国门内大街17号(朝阳门南小街与建国门内...</p>
-									<p class="c-b1 f12">
-										<span class="mr20"><i class="fa fa-wifi"></i> 无线上网</span>
-										<span class="mr20"><i class="fa fa-wifi"></i> 无线上网</span>
-										<span class="mr20"><i class="fa fa-wifi"></i> 接机服务</span>
-									</p>
-								</td>
-								<td valign="top" style="border-right:1px solid #ecebeb">
-									<p class="f12 mb15"><span class="c-o f20">4.5</span>/5.0</p>
-									<p class="c-824 f12">来自37条评论</p>
-								</td>
-								<td align="center">
-									<p><span class="c-o f20">￥618 </span>起</p>
-								</td>
-							</tr>
-						</table> -->
-						<div id="noresult" class="undis" align="center">抱歉，暂时找不到酒店...</div>
+				  <div id="noresult" class="undis" align="center"><div>抱歉，暂时找不到酒店...</div></div>
 						<!--这里自己调用 页面加载动态效果 loading-->	
 						 <div class="clearfix undis" id="loading">
 							<div id="contain" style="height: 60px;">
@@ -146,7 +141,6 @@
 							    </div>
 							</div>
 						</div>
-					</div>
 				</div>
 				<div class="ycc-page clearfix fr" style="text-align:right">
 					<span class="c-b1 mr30 f12" id="totalPage">共 0 页</span><a href="javascript:query(1,1)" class="no-c"><i class="fa fa-angle-double-left"></i></a><a href="" class="current">1</a><a href="">2</a><a href="">3</a><a href="javascript:query(1,2)"><i class="fa fa-angle-double-right"></i></a>
@@ -185,6 +179,22 @@
 	<script type="text/javascript" src="scripts/cityselector/hotelcity.js"></script>
 	<script type="text/javascript" src="scripts/cityselector/j.dimensions.js"></script>
 	<script type="text/javascript" src="scripts/cityselector/j.suggest.js"></script>
+	<script>
+	$(function(){
+		var more_area_h = $("#more_area").parent().height();
+		$("#more_area").on("click",function(e){
+		   if($(this).hasClass("pickUp")){
+			   $(this).toggleClass("pickUp").find("i").parent().parent().height(more_area_h).find(".jbk-span").height("auto");
+		   }else{
+			   $(this).toggleClass("pickUp").find("i").parent().parent().height("auto").find(".jbk-span").height($(this).parent().height());
+		   }
+		   return false;
+		})
+		$("#jd-bd-select").on("click",".jbk-bt .ml50",function(){
+			$(this).siblings("div").find("input").prop("checked",false);
+		})
+	})
+	</script>
 	<script type="text/javascript">
 	var px=1;//酒店列表排序规则 1 热门  2 价格  4 评价 
 	var pg=1,totalPagesize=1;//当前第几页
