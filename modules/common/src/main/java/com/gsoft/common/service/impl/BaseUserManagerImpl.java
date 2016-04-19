@@ -41,10 +41,18 @@ public class BaseUserManagerImpl extends BaseManagerImpl implements BaseUserMana
 		if(users!=null&&users.size()>0){
 			phones = new ArrayList<String>();
 			for(User user:users){
-				PrincipalConfig principalConfig = user.getPrincipalConfig();
-				if(principalConfig!=null){
-					phones.add(principalConfig.get("phone"));
-				}
+				List<UserConfigItem> configItems = userConfigItemDao.getList("userId", user.getUserId());
+				if(configItems!=null&&configItems.size()>0){
+					PrincipalConfig principalConfig = new PrincipalConfig();
+				    for (UserConfigItem configItem : configItems) {
+				      if (!StringUtils.isEmpty(configItem.getName())) {
+				        principalConfig.put(configItem.getName(), configItem.getValue());
+				      }
+				    }
+					if(principalConfig.get("phone")!=null){
+						phones.add(principalConfig.get("phone"));
+					}
+				}	
 			}
 		}
 		return phones==null?null:phones.toArray(new String[phones.size()]);
@@ -93,7 +101,6 @@ public class BaseUserManagerImpl extends BaseManagerImpl implements BaseUserMana
 			}
 		}
 		return false;
-		
 	}
 	
 }
