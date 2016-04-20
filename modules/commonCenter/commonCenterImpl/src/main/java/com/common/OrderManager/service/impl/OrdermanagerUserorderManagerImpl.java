@@ -759,8 +759,8 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     	 if("请选择订单项目".equals(userorderProjecta)){
   		  userorderProjecta=null;
   	     }
-         conditions.add(ConditionUtils.getCondition("userorderCode", Condition.EQUALS, userorderCodeLike));
-         conditions.add(ConditionUtils.getCondition("userorderProject", Condition.LIKE, userorderProjecta));
+         conditions.add(ConditionUtils.getCondition("userorderCode", Condition.LIKE, userorderCodeLike));
+         conditions.add(ConditionUtils.getCondition("userorderProject", Condition.EQUALS, userorderProjecta));
     	 PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
     	 return pagerRecords;
    }
@@ -829,9 +829,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    		record.put("totalCount", List.size());
    		recordList.add(record);
    		return recordList;
-   	}
-
-   	 
+   	}   	 
 }
 
     
