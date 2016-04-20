@@ -35,6 +35,7 @@ import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.framework.esb.annotation.ConditionCollection;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.PubCondition;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.security.agt.entity.User;
 import com.gsoft.framework.security.agt.service.UserManager;
@@ -104,7 +105,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 	/**
 	 * 保存对象
 	 */
-	@EsbServiceMapping
+	@EsbServiceMapping(pubConditions={@PubCondition(pubProperty="createUser", property = "userId")})
 	public McMsgdatas saveMcMsgdatas(McMsgdatas o) throws BusException {
 		// String mcMsgdatasId = o.getMcMsgdatasId();
 		// boolean isUpdate = StringUtils.isNotEmpty(mcMsgdatasId);
