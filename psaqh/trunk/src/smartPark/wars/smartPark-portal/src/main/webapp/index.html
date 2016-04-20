@@ -462,34 +462,38 @@
         </div>
         <div class="content_right">
         	<div class="ii_tit reserve"><span class="span_bold">国内机票预定</span><span>国内酒店预定</span></div>
-            <form class="reform">
+            <form class="reform" onkeydown="if(event.keyCode==13)return false;">
             	<div class="mb20">
-                	<label class="inline_b pr15"><input type="radio" name="zdtype" class="mr5">单人</label>
-                    <label class="inline_b pl15 bl"><input type="radio" name="zdtype" class="mr5">往返</label>
+                	<label class="inline_b pr15"><input type="radio" name="zdtype" class="mr5">单程</label>
+                    <!-- <label class="inline_b pl15 bl"><input type="radio" name="zdtype" class="mr5">往返</label> -->
                 </div>
                 <div style="position:relative">
                 	<div class="re_div">
+                		<input id="city_threeCode1" name="city_threeCode1" type="hidden" value="" />
                     	<label for="formcity">出发城市</label>
-                        <input type="text" id="fromcity"/>
+                        <input type="text" id="fromcity" name="fromcity"/>
+                        <div id="TicketSuggest1" class="ac_results fromcity_position"></div>
                     </div>
                     <div class="re_div">
+                    	<input id="city_threeCode2" name="city_threeCode2" type="hidden" value="" />
                     	<label for="gotocity">到达城市</label>
-                        <input type="text" id="gotocity"/>
+                        <input type="text" id="gotocity" name="gotocity"/>
+                        <div id="TicketSuggest2" class="ac_results gotocity_position"></div>
                     </div>
                     <div class="city_huan">
                     	<div class="huan">换</div>
                     </div>
                 </div>
                 <div class="re_div">
-                	<label for="formdate">出发日期</label>
-                    <input type="date" id="formdate"/>
-                </div>
-                <div class="re_div">
-                	<label for="gotodate">到达日期</label>
+                	<label for="gotodate">出发日期</label>
                     <input type="date" id="gotodate"/>
                 </div>
+                <!-- <div class="re_div">
+                	<label for="returndate">到达日期</label>
+                    <input type="date" id="returndate"/>
+                </div> -->
                 <div style="padding-left:70px">
-                	<input type="submit" class="btn-cheng" value="搜索" onclick="window.open ('hcxx.html')">
+                	<input type="Button" class="btn-cheng" value="搜索" onclick="gotoTicket()">
                 </div>
             </form> 
             <form class="reform" style="display:none;" onkeydown="if(event.keyCode==13)return false;">
@@ -1095,6 +1099,12 @@
 		    elem: '#lf_date', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
 		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 		});
+		//机票时间
+		laydate({
+		    elem: '#gotodate', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+		});
+		//酒店时间
 		laydate({
 		    elem: '#overdate', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
 		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
@@ -1109,7 +1119,19 @@
 			dataContainer : '#cityid',
 			attachObject : '#suggest'
 		});
-		
+		$("#fromcity").suggest(citys, {
+			hot_list : commoncitys,
+			dataContainer : '#city_threeCode1',
+			onSelect : function() {
+				$("#gotocity").click();
+			},
+			attachObject : '#TicketSuggest1'
+		});
+		$("#gotocity").suggest(citys, {
+			hot_list : commoncitys,
+			dataContainer : '#city_threeCode2',
+			attachObject : '#TicketSuggest2'
+		});
 		
         //关闭toast
         $(".close-toast").click(function(){
@@ -1356,6 +1378,21 @@
 			var today = new Date();
 			var month = Number(today.getMonth()) + Number(1);
 			var todayDate = today.getFullYear()+"-"+month+"-"+today.getDate();
+			if(tm1=="" || tm2=="" || tm1==null || tm2==null ){
+				clearInterval(timer);
+				$("#msg").text("请选择正确的日期时间");
+    	        $(".toast").show();
+    	        pltime=2;
+    	        timer=setInterval("closeTanc()",1000);
+				return false;
+			}else if(cityname=="" || cityname=="中文/拼音" || cityid=="" || cityid==null){
+				clearInterval(timer);
+				$("#msg").text("请选择正确的城市");
+    	        $(".toast").show();
+    	        pltime=2;
+    	        timer=setInterval("closeTanc()",1000);
+				return false;
+			}
 			if(!compareDate(todayDate,tm1)){
 				clearInterval(timer);
 				$("#msg").text("所选日期不能小于当前日期。");
@@ -1376,6 +1413,61 @@
 			}
 			
 		}
+      //机票页面跳转
+      function gotoTicket(){
+   	  	var fromcity = $("#fromcity").val();
+		var fromCode = $("#city_threeCode1").val();
+		var gotocity = $("#gotocity").val();
+		var gotoCode = $("#city_threeCode2").val();
+		var gotodate = $("#gotodate").val();
+		var returndate = $("#returndate").val();
+		var today = new Date();
+		var month = Number(today.getMonth()) + Number(1);
+		var todayDate = today.getFullYear()+"-"+month+"-"+today.getDate();
+		if(gotodate=="" || gotodate==null ){  //returndate=="" || returndate==null 
+			clearInterval(timer);
+			$("#msg").text("请选择正确的日期时间");
+ 	        $(".toast").show();
+ 	        pltime=2;
+ 	        timer=setInterval("closeTanc()",1000);
+			return false;
+		}else if(fromcity=="" || fromcity=="中文/拼音" || fromCode=="" || fromCode==null){
+			clearInterval(timer);
+			$("#msg").text("请选择正确的出发城市");
+ 	        $(".toast").show();
+ 	        pltime=2;
+ 	        timer=setInterval("closeTanc()",1000);
+			return false;
+		}else if(gotocity=="" || gotocity=="中文/拼音" || gotoCode=="" || gotoCode==null){
+			clearInterval(timer);
+			$("#msg").text("请选择正确的目的城市");
+ 	        $(".toast").show();
+ 	        pltime=2;
+ 	        timer=setInterval("closeTanc()",1000);
+			return false;
+		}
+		if(!compareDate(todayDate,gotodate)){
+			clearInterval(timer);
+			$("#msg").text("所选日期不能小于当前日期。");
+ 	        $(".toast").show();
+ 	        pltime=2;
+ 	        timer=setInterval("closeTanc()",1000);
+			return false;
+		}else{
+			window.open(encodeURI("hcxx.html?fromcity="+fromcity+"&fromCode="+fromCode+"&gotocity="+gotocity+"&gotoCode="+gotoCode+"&gotodate="+gotodate));
+		}
+		//往返程时判断出发时间与返程时间
+		/* if(compareDate(gotodate,returndate)){
+			window.open(encodeURI("hcxx.html?cityname="+cityname+"&cityid="+cityid+"&tm1="+tm1+"&tm2="+tm2));
+		}else{
+			clearInterval(timer);
+			$("#msg").text("入住时间不能大于离店时间。");
+ 	        $(".toast").show();
+ 	        pltime=2;
+ 	        timer=setInterval("closeTanc()",1000);
+			return false;
+		} */
+      }
       //日期对比 a为开始日期b为结束日期 a>b false a<b true
 		function compareDate(a, b) {
 		    var arr = a.split("-");
