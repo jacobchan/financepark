@@ -53,7 +53,7 @@ public class DocConverter {
     public String getOfficeHome() {
         String osName = System.getProperty("os.name");
         if (Pattern.matches("Linux.*", osName)) {
-            return "//opt//openoffice4";
+            return "/opt/openoffice4";
         } else if (Pattern.matches("Windows.*", osName)) {
             return "C:\\program Files (x86)\\OpenOffice.org 3";
         }
@@ -65,7 +65,7 @@ public class DocConverter {
     public String getSWFToolsHome() {
         String osName = System.getProperty("os.name");
         if (Pattern.matches("Linux.*", osName)) {
-            return "//usr//swftools//bin//pdf2swf";
+            return "/usr/swftools/bin/pdf2swf";
         } else if (Pattern.matches("Windows.*", osName)) {
             return "F:\\SWFTools\\pdf2swf.exe "; 
         }
@@ -87,7 +87,7 @@ public class DocConverter {
                 }  
             	// 启动OpenOffice的服务  
                 String command = OpenOffice_HOME  
-                        + "program\\soffice -headless -accept=\"socket,host=127.0.0.1,port=8100;urp;\"";  
+                        + "program/soffice -headless -accept=\"socket,host=127.0.0.1,port=8100;urp;\"";  
                 Process pro = Runtime.getRuntime().exec(command);  
                 // connect to an OpenOffice.org instance running on port 8100  
                 OpenOfficeConnection connection = new SocketOpenOfficeConnection(  
