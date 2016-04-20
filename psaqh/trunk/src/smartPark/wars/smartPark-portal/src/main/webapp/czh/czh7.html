@@ -118,7 +118,7 @@
 				<div class="art-bd">
 					<span class="lh26 fl">评价文档：</span><img src="../styles/images/czh/star-h.png" border="0" class="mr20">
 				</div>
-				<h3 class="lh40 f16 mt20">文档推荐</h3>
+				<h3 class="lh40 f16 mt20">相关文档</h3>
 				<table class="article-tab" width="100%">
 					<tr>
 						<td><em>P</em></td>
@@ -169,6 +169,7 @@
 					//console.log(results);
 					if(results&&results.records){
 					_parseRecords(results.records);
+						documents(results.records);
 					}
 				}
 			});		
@@ -179,7 +180,8 @@
 			var params = ['documentId='+record[0].documentId];
 			$(".documentName").html(record[0].documentName.split('.')[0]);
 			//关联活动图片
-			var img="<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[0].activityApply.activityImage+"&method=show' border='0' width='288' height='195'/>";
+			var img="<a href='czh3.html?applyId="+record[0].activityApply.applyId+"'>"+
+			"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[0].activityApply.activityImage+"&method=show' border='0' width='288' height='195'/></a>";
             $("#associatedActivitiy").empty().append(img);
 			$.youi.ajaxUtils.ajax({
 				url:baseUrl+'/activityDocumentManager/getViewDocument.json',
@@ -224,6 +226,44 @@
 		                }}
 		        );
 		}
+		function documents(record){
+			var html ="";
+			for(var i=0;i<record.length;i++){
+				html+="<tr id="+record[i].documentId+" onclick='openPage(this)' style='cursor:pointer;'><td><em>P</em></td>"+
+					"<td><p>"+record[i].documentName.split('.')[0]+"</p>"+
+					"<span>"+record[i].createTime+"</span>"+
+					"</td></tr>";
+			}
+			$(".article-tab").empty().append(html);
+		}
+		
+		function openPage(obj){
+			var params = ['documentId='+obj.id];
+			$.youi.ajaxUtils.ajax({
+				url: baseUrl+"activityDocumentManager/getActivityDocument.json",
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(results){
+					if(results&&results.record){
+						$(".documentName").html(results.record.documentName.split('.')[0]);
+					}
+				}
+			});
+			
+			//变更文档展示
+			$.youi.ajaxUtils.ajax({
+				url:baseUrl+'/activityDocumentManager/getViewDocument.json',
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					var swfUrl=result.record.html;
+					_parsePDF(swfUrl);
+				}
+			});
+		}
 	</script>
+
 </body>
 </html>
