@@ -849,7 +849,7 @@ a.a-btn-small:hover{background-color: #FF5900;}
 .jd-bd-select{border:1px solid #ecebeb;border-bottom: 0px;font-size: 12px;}
 .jd-bd-select .jbk-bt{border-bottom: 1px solid #ecebeb;height: 39px;line-height: 38px;position: relative;overflow: hidden;}
 .jbk-span{width: 120px;text-align: center;background-color: #f6f6f6;display: inline-block;}
-.jbk-bt label{float: left;width: 140px;}
+.jbk-bt label{float: left;width: 140px;cursor:pointer;}
 .jbk-bt label input{float: left;margin-top: 12px;margin-right: 10px;}
 .jbs-qu input{border:1px solid #cccccc;height: 20px;text-align: center;width: 60px;}
 .jd-cs{border: 1px solid #d5d4d2;}
