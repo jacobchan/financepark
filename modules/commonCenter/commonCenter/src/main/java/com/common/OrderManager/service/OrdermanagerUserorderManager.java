@@ -6,6 +6,7 @@ package com.common.OrderManager.service;
 import java.util.List;
 import java.util.Collection;
 
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -215,7 +216,7 @@ public interface OrdermanagerUserorderManager extends BaseManager{
     public OrdermanagerUserorder getOrderByCode(String userorderCode)
 			throws BusException;
     /**
-	 * 	通过code，状态,查询订单
+	 * 	通过code，状态,查询订单       
 	 * @param userId
 	 * @param genreCode
 	 * @param userorderStatus
@@ -224,8 +225,12 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	 */
    	public List<OrdermanagerUserorder> getOrderlistforPage(String userId,String genreCode,String userorderStatus) throws BusException;
    	/**
-	 *前台 根据当前用户分页查询未完成
-	 * @return 分页对象
+	 *前台 根据当前用户分页查询未完成 订单       陈烨
+	  * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
 	 */
 	public PagerRecords getPagerAll(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
@@ -233,14 +238,18 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 			String userorderCodeLike,
   			String userorderProject) throws BusException;
 	/**
-	 *前台 根据当前用户分页查询历史订单
-	 * @return 分页对象
+	 *前台 根据当前用户分页查询历史订单       陈烨
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
 	 */
 	public PagerRecords getPagerHospital(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders) throws BusException;
 	/**
-	 * 前台 根据当前用户分页查询待处理订单
+	 * 前台 根据当前用户分页查询待处理订单          陈烨
 	 * @param pager
 	 * @param conditions
 	 * @param orders
@@ -251,7 +260,7 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders) throws BusException;
 	/**
-	 * 前台 根据当前用户分页查询完成订单 根据订单号，订单项目
+	 * 前台 根据当前用户分页查询历史订单 根据订单号，订单项目      陈烨
 	 * @param pager
 	 * @param conditions
 	 * @param orders
@@ -266,7 +275,7 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 			String userorderCodeLike,
   			String userorderProjecta) throws BusException;
 	/**
-	 * 前台 根据当前用户分页查询待处理订单 根据订单号，订单项目
+	 * 前台 根据当前用户分页查询待处理订单 根据订单号，订单项目           陈烨
 	 * @param pager
 	 * @param conditions
 	 * @param orders
@@ -290,4 +299,26 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	 public OrdermanagerUserorder saveWKSerOrder(String userId,
 			List<OrdermanagerCommoditydetail> orderDetailList)
 			throws BusException;
+	  /**
+		 * 获取整个数据的totalCount陈烨
+		 * @param conditions
+	     * @return
+	     * @throws BusException
+		 */	    
+	public List<Record> getTotalCount(Collection<Condition> conditions)  throws BusException;
+	
+	/**
+	 * 获取待处理订单的totalCount  陈烨
+	 * @param conditions
+	 * @return
+	 * @throws BusException
+	 */
+	public List<Record> getTotalCountHospital(Collection<Condition> conditions)  throws BusException;
+	 /**
+	 * 获取已完成订单的totalCount   陈烨
+	 * @param conditions
+	 * @return
+	 * @throws BusException
+	 */
+	public List<Record> getTotalCountPend(Collection<Condition> conditions)  throws BusException;
 }
