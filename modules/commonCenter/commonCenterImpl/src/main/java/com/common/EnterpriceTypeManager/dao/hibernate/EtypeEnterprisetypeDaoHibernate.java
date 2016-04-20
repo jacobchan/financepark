@@ -14,7 +14,7 @@ public class EtypeEnterprisetypeDaoHibernate extends
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<EtypeEnterprisetype> getEtypeEnterprisetypeList() {
-		String hql = "from EtypeEnterprisetype et where et.etypeEnterprisetype is NULL";
+		String hql = "from EtypeEnterprisetype et where et.etypeEnterprisetype is NULL order by et.enTypeId";
 		return getHibernateTemplate().find(hql);
 	}
 	
