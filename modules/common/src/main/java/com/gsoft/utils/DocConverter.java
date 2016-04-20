@@ -65,7 +65,7 @@ public class DocConverter {
     public String getSWFToolsHome() {
         String osName = System.getProperty("os.name");
         if (Pattern.matches("Linux.*", osName)) {
-            return "pdf2swf";
+            return "pdf2swf ";
         } else if (Pattern.matches("Windows.*", osName)) {
             return "F:\\SWFTools\\pdf2swf.exe "; 
         }
