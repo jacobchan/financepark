@@ -34,5 +34,11 @@
 			<artifactId>smartPark-manageCenterImpl</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.3.1</version>
+			<scope>provided</scope>
+		</dependency> 
 	</dependencies>
 </project>
