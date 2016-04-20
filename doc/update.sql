@@ -36,3 +36,6 @@ ALTER TABLE `sp_reservation_record` ADD COLUMN `VISITE_TEL_` varchar(32);
 ALTER TABLE `sp_policy_apply` ADD COLUMN `POLICY_APPLY_CODE_` varchar(50);
 
 ALTER TABLE `sp_activity_apply` ADD COLUMN `APPLAY_ADR_` varchar(256);
+
+ —- 添加回访记录的拒绝理由
+ALTER TABLE `sp_propertyservicemanager_cos` ADD COLUMN `BACK_REMARK_` varchar(256);
