@@ -234,8 +234,10 @@ $(function(){
 			dataType:'jsonp',
 			success:function(results){
 				if(results&&results.records){
-					pageplactive(results.records);//活动top2
-					pagechart(results.records);//一览表
+					if(results.records.length>0){
+						pageplactive(results.records);//活动top2
+						pagechart(results.records);//一览表
+					}
 				}
 			}
 		});
