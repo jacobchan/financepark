@@ -14,14 +14,14 @@ public class EtypeEnterprisetypeDaoHibernate extends
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<EtypeEnterprisetype> getEtypeEnterprisetypeList() {
-		String hql = "from EtypeEnterprisetype where etypeEnterprisetype.enTypeId is null";
+		String hql = "from EtypeEnterprisetype et where et.etypeEnterprisetype is NULL";
 		return getHibernateTemplate().find(hql);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<EtypeEnterprisetype> getSubEnterpriseTypeList() {
-		String hql = "from EtypeEnterprisetype where etypeEnterprisetype.enTypeId is not null";
+		String hql = "from EtypeEnterprisetype et where et.etypeEnterprisetype is not null";
 		return getHibernateTemplate().find(hql);
 	}
 }
