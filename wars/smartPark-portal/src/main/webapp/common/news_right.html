@@ -1,6 +1,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<div class="yqfw-news">
 			<div class="yn-bd">最新公告 <a href="../zscenter/zs4.html" class="c-333 f12 fr">更多》</a></div>
+			<div class="clearfix tc w100 undis" id="tp3">
+				<img src="../styles/images/loader.gif" border="0" />
+			</div>
 			<ul class="yn-nav1" id="zxgg_1">
 				<!-- <li>
 					<p><a href="" class="c-333">杭州，一场无关情爱的风sjl,fd...</a> <span class="fr f12 c-b1">2015-10-22</span></p>
@@ -18,12 +21,10 @@
 					<p><a href="" class="c-333">杭州，一场无关情爱的风sjl,fd...</a> <span class="fr f12 c-b1">2015-10-22</span></p>
 				</li> -->
 			</ul>
-			<div class="clearfix tc w100">
-				<img src="../styles/images/loader.gif" border="0" />
-			</div>
 		</div>
 		<script type="text/javascript">
 			$(function(){
+				$("#tp3").removeClass("undis") ;
 				var params=["issueTypeCode=0102"];
 				$.youi.ajaxUtils.ajax({
 					url:baseUrl +"nmIssuenewsManager/getNmIssuenewsByIssueTypeCode.json",//得到新闻发布类型
@@ -32,6 +33,7 @@
 					dataType:'jsonp',
 					success:function(result){
 						if(result&&result.records){
+							$("#tp3").addClass("undis") ;
 							appendHtml_1(result.records)
 						}
 					}

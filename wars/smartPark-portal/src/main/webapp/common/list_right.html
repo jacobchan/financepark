@@ -4,7 +4,11 @@
 				<li>即将进行</li>
 				<li>文档库</li> -->
 			</ul>
+			<div class="clearfix tc w100 undis" id="tp1">
+				<img src="../styles/images/loader.gif" border="0" />
+			</div>
 			<div class="ifn-group" id="ly1">
+				
 			</div>
 	<script>
 		$(document).on("click",".index-fr-nav li",function(){
@@ -46,6 +50,8 @@
 		}
 		
  		function getN_1(issueTypeCode){
+ 			$("#ly1").empty() ;
+ 			$("#tp1").removeClass("undis") ;
 			var params=["issueTypeCode="+issueTypeCode];
 			$.youi.ajaxUtils.ajax({
 				url:baseUrl +"nmIssuenewsManager/getNmIssuenewsByIssueTypeCode.json",
@@ -56,6 +62,7 @@
 					if(result&&result.records){
 						var records = result.records ;
 						if(records.length == 0){
+							$("#tp1").addClass("undis") ;
 							$("#ly1").empty() ;
 							if(issueTypeCode == "0101"){
 								$("#ly1").append("<ul class='ig-nav'><li><p>暂无新闻！</p></li></ul>") ;
@@ -72,7 +79,7 @@
 			});			
 		}
 		function appendN_1(issueTypeCode,records){
-			$("#ly1").empty() ;
+			$("#tp1").addClass("undis") ;
 			var ul_1 = "<ul class='ig-nav'>" ;
 			var ul_2 = "<ul class='yn-nav1'>" ;
 			var ul_3 = "</ul>" ;
