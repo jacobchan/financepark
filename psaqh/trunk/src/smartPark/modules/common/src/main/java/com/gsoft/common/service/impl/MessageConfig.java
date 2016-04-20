@@ -8,6 +8,7 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.stereotype.Component;
 
 import com.gsoft.common.util.SMSUtil;
 import com.gsoft.framework.util.DateUtils;
@@ -17,6 +18,7 @@ import com.gsoft.framework.util.DateUtils;
  * @author ASUS
  *
  */
+@Component
 public class MessageConfig implements InitializingBean{
 	public static Logger log = Logger.getLogger(MessageConfig.class);
 	
