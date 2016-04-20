@@ -90,14 +90,29 @@
 			});
 		});
 		
+		function getParam() { 
+			var url = document.URL ; //获取页面的URL
+			var param = "" ; 
+			if(url.lastIndexOf("=") != -1){
+				param = url.substring(url.lastIndexOf("=")+1,url.length) ; //获取页面的参数
+				return param ;
+			}else {
+				return null ;
+			}
+		}
+		
 		function getList(records){
 			var len = records.length ;
 			var html = "" ;
 			for(var i=0;i<len;i++){
 				var issueTypeCode = records[i].issueTypeCode ;
 				var title = records[i].issueTypeCaption ;
-				if(i == 0){
+				if(getParam() == null && i==0){
 					html = "<li class='active' id="+issueTypeCode+">"+title+"</li>" ;
+				}else if(getParam() == issueTypeCode){
+					var index = getParam().substring(3)-1 ;
+					html = "<li class='active' id="+issueTypeCode+">"+title+"</li>" ;
+					$(".park-box ul").eq(index).removeClass("undis").siblings().addClass("undis");
 				}else{
 					html = "<li id="+issueTypeCode+">"+title+"</li>" ;
 				}
@@ -305,6 +320,13 @@
 				$("#33").show() ;
 			}
 		});
+	</script>
+	<script type="text/javascript">
+	/* 获取页面传过来的参数 */
+	$(function(){
+		
+	});
+	
 	</script>
 </body>
 </html>
