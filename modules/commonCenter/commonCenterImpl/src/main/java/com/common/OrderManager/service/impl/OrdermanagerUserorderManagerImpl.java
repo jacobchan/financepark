@@ -623,64 +623,96 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
   		List<OrdermanagerUserorder> list =ordermanagerUserorderDao.commonQuery(condition, null);
   		return list;
   	}		
-      /**
-    	 *前台 根据当前用户分页查询未完成订单
+
+       /**
+    	 *前台 根据当前用户分页查询待处理订单 根据订单号，订单项目
     	 * @return 分页对象
     	 */       
       @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
-    	public PagerRecords getPager(Pager pager,//分页条件
+    	public PagerRecords getPagerPend_query(Pager pager,//分页条件
     			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
     			@OrderCollection Collection<Order> orders,
-    			@ServiceParam(name="userorderCode") String userorderCode,
-    			@ServiceParam(name="userorderProject") String userorderProject)
+    			@ServiceParam(name="userorderCodeLike") String userorderCodeLike,
+    			@ServiceParam(name="userorderProjecta") String userorderProjecta)
     			throws BusException {
-         
+    	  if("请选择订单项目".equals(userorderProjecta)){
+    		  userorderProjecta=null;
+    	  }
+         String userorderStatus="01";//01为未完成订单
+        // String userorderCodeLike1="30000";
          //添加条件
-         
-         conditions.add(ConditionUtils.getCondition("userorderCode", Condition.EQUALS, userorderCode));
-         conditions.add(ConditionUtils.getCondition("userorderProject", Condition.EQUALS, userorderProject));
-    	   PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
-    	   return pagerRecords;
+         conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.EQUALS, userorderStatus));
+         conditions.add(ConditionUtils.getCondition("userorderCode", Condition.LIKE, userorderCodeLike));
+        conditions.add(ConditionUtils.getCondition("userorderProject", Condition.EQUALS, userorderProjecta));
+    	 PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
+    	 return pagerRecords;
     		}
+
+
       /**
-     	 *前台 根据当前用户分页查询未完成订单
-     	 * @return 分页对象
-     	 */       
-       @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
-     	public PagerRecords getPagerPend(Pager pager,//分页条件
-     			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
-     			@OrderCollection Collection<Order> orders,
-     			@ServiceParam(name="userorderCode") String userorderCode,
-     			@ServiceParam(name="userorderProject") String userorderProject)
-     			throws BusException {
-          String userorderStatus="01";//01为未完成订单
-          //添加条件
-          conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.EQUALS, userorderStatus));
-          conditions.add(ConditionUtils.getCondition("userorderCode", Condition.EQUALS, userorderCode));
-          conditions.add(ConditionUtils.getCondition("userorderProject", Condition.EQUALS, userorderProject));
-     	   PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
-     	   return pagerRecords;
-     		}
-      /**
-    	 *前台 根据当前用户分页查询历史订单
+    	 *前台 根据当前用户分页查询历史订单   根据订单号，订单项目
     	 * @return 分页对象
     	 */       
-      @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
-    	public PagerRecords getPagerHospital(Pager pager,//分页条件
+    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+    public PagerRecords getPagerHospital_query(Pager pager,//分页条件
     			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
     			@OrderCollection Collection<Order> orders,
-    			@ServiceParam(name="userorderCode") String userorderCode,
-    			@ServiceParam(name="userorderProject") String userorderProject)
+    			@ServiceParam(name="userorderCodeLike") String userorderCodeLike,
+    			@ServiceParam(name="userorderProjecta") String userorderProjecta)
     			throws BusException {
          String userorderStatus="01";//01为未完成订单
          conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.NOT_EQUALS, userorderStatus));
-         conditions.add(ConditionUtils.getCondition("userorderCode", Condition.EQUALS, userorderCode));
-         conditions.add(ConditionUtils.getCondition("userorderProject", Condition.EQUALS, userorderProject));
-    	   PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
-    	   return pagerRecords;
-    		}
+         conditions.add(ConditionUtils.getCondition("userorderCode", Condition.LIKE, userorderCodeLike));
+         conditions.add(ConditionUtils.getCondition("userorderProject", Condition.EQUALS, userorderProjecta));
+    	 PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
+    	 return pagerRecords;
+   }
 
-  }
+    /**
+  	 *前台 根据当前用户分页查询历史订单
+  	 * @return 分页对象
+  	 */       
+    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	public PagerRecords getPagerHospital(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)
+			throws BusException {
+     String userorderStatus="01";//01为未完成订单
+     conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.NOT_EQUALS, userorderStatus));
+	 PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
+	 return pagerRecords;
+}
+    /**
+	 *前台 根据当前用户分页查询全部订单
+	 * @return 分页对象
+	 */       
+    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	public PagerRecords getPagerAll(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders,
+			@ServiceParam(name="userorderCodeLike") String userorderCodeLike,
+			@ServiceParam(name="userorderProjecta") String userorderProjecta)
+			throws BusException {
+         conditions.add(ConditionUtils.getCondition("userorderCode", Condition.EQUALS, userorderCodeLike));
+         conditions.add(ConditionUtils.getCondition("userorderProject", Condition.LIKE, userorderProjecta));
+    	 PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
+    	 return pagerRecords;
+   }
+    /**
+  	 *前台 根据当前用户分页查询待处理订单
+  	 * @return 分页对象
+  	 */       
+    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	public PagerRecords getPagerPend(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)
+			throws BusException {
+     String userorderStatus="01";//01为未完成订单
+     conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.EQUALS, userorderStatus));
+	 PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
+	 return pagerRecords;
+}
+}
 
     
 
