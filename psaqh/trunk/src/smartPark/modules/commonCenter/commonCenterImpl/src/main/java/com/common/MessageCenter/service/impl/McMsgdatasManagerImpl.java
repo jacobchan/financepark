@@ -317,10 +317,10 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 	}
 
 	@Override
-	public String sendToUser(McMsgdatas mcMsgdatas,String userId) throws BusException {
-		if(!StringUtils.isEmpty(userId)){
+	public String sendToUser(McMsgdatas mcMsgdatas,String memberId) throws BusException {
+		if(!StringUtils.isEmpty(memberId)){
 			mcMsgdatas.setMsgType("1");//1人
-			sendMessage(mcMsgdatas, userId, SMSUtil.SEND_MEMBER);
+			sendMessage(mcMsgdatas, memberId, SMSUtil.SEND_MEMBER);
 		}
 		return null;
 	}
