@@ -24,7 +24,7 @@ public class MessageConfig implements InitializingBean{
 	
 	private static void analysis() throws Exception{
 		
-		String fileName = "message.properties";
+		String fileName = "config-message.properties";
 		 // 生成输入流  
         InputStream ins=MessageConfig.class.getResourceAsStream("/"+fileName);
         if(ins==null){
