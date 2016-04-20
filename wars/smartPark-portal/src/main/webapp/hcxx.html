@@ -186,7 +186,7 @@
 			    </div>
 			    <div class="clearfix">
 			    </div>
-			    <div class="clearfix mt30">
+			    <div class="clearfix mt30" id="flightsModel">
 			    	<table class="hcxx-table">
 			    		<colgroup>
 			    			<col width="18%"></col>
@@ -466,5 +466,98 @@
 	<!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
+	<script type="text/javascript" src="scripts/cityselector/aircity.js"></script>
+	<script type="text/javascript" src="scripts/cityselector/hotelcity.js"></script>
+	<script type="text/javascript" src="scripts/cityselector/j.dimensions.js"></script>
+	<script type="text/javascript" src="scripts/cityselector/j.suggest.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var Request = new Object();
+			Request = GetRequest();
+			var fromcity=Request['fromcity'];
+			var fromCode = Request['fromCode'];
+			var gotocity = Request['gotocity'];
+			var gotoCode = Request['gotoCode'];
+			var gotodate = Request['gotodate'];
+			var returndate = Request['returndate'];
+			var params = ['orgAirportCode='+fromCode,'dstAirportCode='+gotoCode,'date='+gotodate];
+			var serviceURL = baseUrl+"TicketServiceManager/getFlights.json";
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					if(result&&result.records){
+						var record = result.records;
+						parseFlights(record[0]);
+					}else{
+						alert("error");
+					}
+				},
+				error:function(){
+					alert("abc");
+				}
+			});
+		});
+		var pltime,timer;//动态加载效果的时间控件变量
+	    function closeTanc(){
+	        if(pltime>1){
+	            pltime--;
+	        }else{
+	            $(".toast").hide();
+	        }       
+	    }
+		function GetRequest() {
+			/* url=decodeURI(location.href);
+			var tmp1=url.split("?")[1]; */
+		   var url = decodeURI(location.search); //获取url中"?"符后的字串
+		   var theRequest = new Object();
+		   if (url.indexOf("?") != -1) {
+		      var str = url.substr(1);
+		      strs = str.split("&");
+		      for(var i = 0; i < strs.length; i ++) {
+		         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+		      }
+		   }
+		   return theRequest;
+		}
+		function parseFlights(record){
+    		var flights = record.flights;
+			for(var i=0;i<flights.length;i++){
+				var flight = flights[i];
+				var html_ = "";
+				html_ += "<div class='hcxx-hb-infor'><table class='hcxx-table'>";
+				html_ += "<colgroup><col width='18%'></col><col width='16%'></col><col width='16%'></col><col width='16%'></col><col width='16%'></col><col></col></colgroup>";
+				html_ += "<thead><tr><td align='left'>";
+				html_ += "<div class='c-333'><img src='styles/images/plane.png' width='18' height='17' class='ml10 mr5'>"+flight.flightNo+"</div>";
+				html_ += "<p class='ml33'>机型 : <span class='c-333'>"+flight.planeType+"</span></p></td>";
+				html_ += "<td><p>"+flight.orgCity+"</p><p>"+flight.dstCity+"</p></td>";
+				//舱位列表第一个
+				var seatItems = flight.seatItems;
+				html_ += "<td><p class='c-333 f16'>"+flight.depTime+"</p><p>"+flight.arriTime+"</p></td>";
+				html_ += "<td><p class='c-o f20'>¥"+seatItems[0].parPrice+"</p><p><span class='c-333'>"+seatItems[0].discount+"</span>折 "+seatItems[0].seatMsg+"</p></td>";
+				if(flight.meal == "true")
+				html_ += "<td><p>¥"+flight.airportTax+"</p><p>包正餐</p></td>";
+				else
+				html_ += "<td><p>¥"+flight.airportTax+"</p><p>不包正餐</p></td>";
+				html_ += "<td><a href='' class='order-btn'>预订</a><p><a href='javascript:;' class='see-all'>查看所有仓位</a></p></td></tr></thead>";
+				//舱位列表重复列表部分
+				html_ += "<tbody class='undis'>";
+				for(var j=1;j<seatItems.length;j++){
+					html_ += "<tr><td colspan='2'></td><td>";
+					html_ += "<p class='c-333 f16'>"+flight.depTime+"</p><p>"+flight.arriTime+"</p></td>";
+					html_ += "<td><p class='c-o f20'>¥"+seatItems[j].parPrice+"</p><p><span class='c-333'>"+seatItems[j].discount+"</span>折 "+seatItems[j].seatMsg+"</p></td>";
+					if(flight.meal == "true")
+					html_ += "<td><p>¥"+flight.airportTax+"</p><p>包正餐</p></td>";
+					else
+					html_ += "<td><p>¥"+flight.airportTax+"</p><p>不包正餐</p></td>";
+					html_ += "<td><a href='' class='order-btn ob-orange'>预订</a></td></tr>";
+				}
+				html_ += "</tbody></table></div>";
+				$("#flightsModel").append(html_);
+			}
+		}
+	</script>
 </body>
 </html>
