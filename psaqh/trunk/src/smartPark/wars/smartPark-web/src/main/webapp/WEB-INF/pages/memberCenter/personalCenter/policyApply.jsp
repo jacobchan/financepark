@@ -25,12 +25,12 @@
 		}
 		//创业加速申请
 		function jump1(){
-			$("#actionUrl").attr("href",proUrl + "czh/czh5.html");
+			$("#actionUrl").attr("href",proUrl + "czh/czh5.html?pUp=1");
 		    $("#loadData").load(cenUrl+"member/memberCenter/personalCenter/policyApplySpEntrepreneurship.html");  
 		}
 		//融资申请
 		function jump2(){
-			$("#actionUrl").attr("href",proUrl + "czh/czh5.html");
+			$("#actionUrl").attr("href",proUrl + "czh/czh5.html?pUp=2");
 		    $("#loadData").load(cenUrl+"member/memberCenter/personalCenter/policyApplyFinace.html");  
 		}
 	</script>
