@@ -143,7 +143,15 @@
 						</div>
 				</div>
 				<div class="ycc-page clearfix fr" style="text-align:right">
-					<span class="c-b1 mr30 f12" id="totalPage">共 0 页</span><a href="javascript:query(1,1)" class="no-c"><i class="fa fa-angle-double-left"></i></a><a href="" class="current">1</a><a href="">2</a><a href="">3</a><a href="javascript:query(1,2)"><i class="fa fa-angle-double-right"></i></a>
+					<span class="c-b1 mr30 f12" id="totalPage">找到相关结果约180个</span>
+					<a href="javascript:query(1,1)" class="no-c"><i class="fa fa-caret-left"></i></a>
+					<a href="" class="current">1</a>
+					<a href="">2</a>
+					<a href="">3</a>
+					<a href="">...</a>
+					<a href="">98</a>
+					<a href="javascript:query(1,2)"><i class="fa fa-caret-right"></i></a>
+					<span class="skip"><font>跳转到</font><input type="text" value="" /> <a href="" class="go">Go</a></span>
 				</div>
 			</div>
 			<div class="fr w285">
@@ -192,6 +200,13 @@
 		})
 		$("#jd-bd-select").on("click",".jbk-bt .ml50",function(){
 			$(this).siblings("div").find("input").prop("checked",false);
+		})
+		$("#jd-bd-select").on("click",".jbk-bt .fl input",function(){
+			if($(this).parent().parent().find("input:checked").length){		
+				$(this).parent().parent().siblings(".ml50").addClass("black");
+			}else{
+				$(this).parent().parent().siblings(".ml50").removeClass("black");
+			}
 		})
 	})
 	</script>
@@ -383,13 +398,15 @@
 				//$(".jd-order-group").remove();
 				$("#totalRecord").html(record[0].totalput);
 				$("#totalPage").empty();
-				$("#totalPage").html("共" + record[0].totalpg + "页");
+				//$("#totalPage").html("共" + record[0].totalpg + "页");
+				$("#totalPage").html("找到相关结果约" + record[0].totalput + "个");
 				totalPagesize = record[0].totalpg;
 			}else{
 				$("#noresult").removeClass("undis");
 				$("#totalRecord").html("0");
 				$("#totalPage").empty();
-				$("#totalPage").html("共 0 页");
+				//$("#totalPage").html("共 0 页");
+				$("#totalPage").html("共 0 个结果")
 			}		
 			for(var i=1;i<record.length;i++){//record[0] 存放返回的头文件信息，包括记录数，页数等
 				var hotel = record[i];
