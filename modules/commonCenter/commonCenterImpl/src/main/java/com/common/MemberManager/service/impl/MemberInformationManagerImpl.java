@@ -542,7 +542,7 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		// 更新时间
 		mi.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		// 开始进行更新操作
-		MemberInformation reMemberInformation = this.saveMemberInformation(mi);
+		MemberInformation reMemberInformation = memberInformationDao.save(mi);
 		return reMemberInformation;
 	}
 
