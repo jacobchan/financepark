@@ -733,24 +733,26 @@
 		//拼接新闻公告列表
 		function parse(record){
 			var html = "" ;
+			var code = "" ;
 			for(var i=0;i<record.length;i++){
 				if(i == 0){
-					html += "<span class='span_bold' id="+record[i].issueTypeId+">"+record[i].issueTypeCaption+"</span>" ;
-					getRecords(record[i].issueTypeId);//页面加载的时候查询当前类型的新闻
+					html += "<span class='span_bold' id="+record[i].issueTypeCode+">"+record[i].issueTypeCaption+"</span>" ;
+					code = record[0].issueTypeCode ;
+					getRecords(code);//页面加载的时候查询当前类型的新闻
 				}else{
-					html += "<span id="+record[i].issueTypeId+">"+record[i].issueTypeCaption+"</span>" ;
+					html += "<span id="+record[i].issueTypeCode+">"+record[i].issueTypeCaption+"</span>" ;
 				}
 			}
-			html += "<a href='./zscenter/zs4.html'>更多》</a>"
+			html += "<a href='./zscenter/zs4.html?code="+code+"' id='gd'>更多》</a>"
 		 	$("#tips1").append(html);
 		}
 		
-		function getRecords(issueTypeId){
+		function getRecords(issueTypeCode){
 			$(".tipbox.tip_item").empty() ;
 			$("#tp5").removeClass("undis") ;
-			var params=["issueTypeId="+issueTypeId];//当前政策类型ID
+			var params=["issueTypeCode="+issueTypeCode];//当前政策类型ID
 			$.youi.ajaxUtils.ajax({
-				url:baseUrl +"nmIssuenewsManager/getAllPolicyByTypeId.json",
+				url:baseUrl +"nmIssuenewsManager/getNmIssuenewsByIssueTypeCode.json",
 				data:params.join('&'),
 				jsonp:'data:jsonp',
 				dataType:'jsonp',
@@ -1081,9 +1083,10 @@
 			var index=$(this).index();
 			$(this).addClass("span_bold").siblings().removeClass("span_bold");
 			$(".tip_item").eq(index).show().siblings(".tip_item").hide();
-			var typeId = $(this).attr("id") ;
+			var issueTypeCode = $(this).attr("id") ;
 			$(".tip_item").empty() ;
-			getRecords(typeId) ;//每次点击新闻类型的时候，查询对应的新闻
+			$("#gd").attr("href","./zscenter/zs4.html?code="+issueTypeCode);
+			getRecords(issueTypeCode) ;//每次点击新闻类型的时候，查询对应的新闻
 		});
         $(".close0").click(function(){
         	$(".pop_layer.pl1").hide();
