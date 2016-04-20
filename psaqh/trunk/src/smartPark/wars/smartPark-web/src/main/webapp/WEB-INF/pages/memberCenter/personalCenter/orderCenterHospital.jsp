@@ -182,9 +182,9 @@ $('.hhf-submit.f14.fl.ml20.hospital').click(function(){
 			success : function(results) {
 								var totalCount=results.records[0].totalCount;
 								pageCount = Math.ceil(totalCount / pageSize);//页数
-							alert(pageCount);
+							//alert(pageCount);
 							refreshData_hospital_query(1,pageSize);
-							    $(".tcdPageCode.fr.hospital").createPage({
+							    $(".tcdPageCode").createPage({
 								//$(".tcdPageCode").createPage({
 								    pageCount:pageCount,
 								    current:1,
@@ -212,21 +212,19 @@ $('.hhf-submit.f14.fl.ml20.hospital').click(function(){
 		}
 	});
 }
-$('.hhf-submit.f14.fl.ml20.all').click(function(){	
+	$('.hhf-submit.f14.fl.ml20.all').click(function(){	
+	// alert(111);
 	 var userorderProjecta=$("#userorderProject").text();		
-	 //alert(userorderProjecta);
-	 var userorderCodeLike=$("#userorderCode").val();	
-	 //alert(userorderCodeLike);
+	 var userorderCodeLike=$("#userorderCode").val();
 	 var params=['userorderProjecta='+userorderProjecta,'userorderCodeLike='+userorderCodeLike];
-	 //var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCode='+userorderCode,'userorderProject='+userorderProject];
 	 $.ajax({
 		 url : baseUrl + "ordermanagerUserorderManager/getTotalCount.json",
 			success : function(results) {
 								var totalCount=results.records[0].totalCount;
 								pageCount = Math.ceil(totalCount / pageSize);//页数
 							   refreshData_All_query(1,pageSize);
-							    $(".tcdPageCode.fr.hospital").createPage({
-								//$(".tcdPageCode").createPage({
+							    $(".tcdPageCode").createPage({
+								
 								    pageCount:pageCount,
 								    current:1,
 								    backFn:function(p){
