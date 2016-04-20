@@ -107,6 +107,7 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
     		return reservationRecordDao.save(r);
     	}else{//新增
     		o.setRecordStatus("01");//待受理
+    		o.setRecordType("04");//04：众创空间
     		o.setRecordCode(BizCodeUtil.getInstance().getBizCodeDate("YYDH"));//生成预约单号
         	o.setCreateUser(o.getUpdateUser());
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
