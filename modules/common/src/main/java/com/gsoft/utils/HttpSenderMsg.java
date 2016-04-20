@@ -11,6 +11,11 @@ import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.springframework.util.StringUtils;
 public class HttpSenderMsg {
+	
+	private static final String URL = "http://222.73.117.158/msg/";
+	private static final String ACCOUNT = "viphzfc";
+	private static final String PASSWORD = "Tch123456";
+	
 	/**
 	 * 
 	 * @param url
@@ -116,29 +121,14 @@ public class HttpSenderMsg {
 	}
 	
 	public static String sendMsg(String mobile, String msg) throws Exception{
-		String url = "http://222.73.117.158/msg/";// 应用地址
-		String account = "viphzfc";// 账号
-		String pswd = "Tch123456";// 密码
+		String url = URL;// 应用地址
+		String account = ACCOUNT;// 账号
+		String pswd = PASSWORD;// 密码
 		boolean needstatus = true;// 是否需要状态报告，需要true，不需要false
 		String product = null;// 产品ID
 		String extno = null;// 扩展码
 		
 		return HttpSenderMsg.batchSend(url, account, pswd, mobile, msg, needstatus, product, extno);
-	}
-	
-	public static void main(String[] args) throws Exception {
-//		String mobile = "18062693970,13554467006";// 手机号码，多个号码使用","分割
-//		String msg = "亲爱的用户，您的验证码是123456，5分钟内有效。";// 短信内容
-//		try {
-//			System.out.println("result:"+HttpSenderMsg.sendMsg(mobile, msg));
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		
-		HttpSenderMsg.sendMsg("18062693970", "hello!!!!");
-		
-//		String code = sendwithCode("您好！！！！",new String[]{"18062693970"});
-//		System.out.println("---------"+code);
 	}
 	
 	public static String sendwithCode(String content,String[] phones){
