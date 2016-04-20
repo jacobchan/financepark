@@ -35,14 +35,13 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.upload.entity.FileStore;
 import com.gsoft.framework.upload.service.FileStoreManager;
-
+import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.DocConverter;
-
 import com.manage.ActivityManager.entity.ActivityDocument;
 import com.manage.ActivityManager.dao.ActivityDocumentDao;
 import com.manage.ActivityManager.service.ActivityDocumentManager;
@@ -92,18 +91,22 @@ public class ActivityDocumentManagerImpl extends BaseManagerImpl implements Acti
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
     public ActivityDocument saveActivityDocument(ActivityDocument o) throws BusException{
-//    	String activityDocumentId = o.getActivityDocumentId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(activityDocumentId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
+    	String activityDocumentId = o.getDocumentId();
+    	boolean isUpdate = StringUtils.isNotEmpty(activityDocumentId);
     	if(o.getDocumentPath()!=null){
         	FileStore fs=fileStoreManager.getFileStoreByPath(o.getDocumentPath());
         	o.setDocumentName(fs.getUploadFileName());	
+    	}
+    	if(isUpdate){//修改
+    		o.setUpdateUser(o.getUpdateUser());
+        	o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	}else{//新增
+    		o.setCreateUser(o.getUpdateUser());
+        	o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+        	o.setUpdateUser(o.getUpdateUser());
+        	o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     	}
     	return activityDocumentDao.save(o);
     }
