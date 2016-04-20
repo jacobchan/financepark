@@ -10,6 +10,9 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.springframework.util.StringUtils;
+
+import com.gsoft.common.service.impl.MessageConfig;
+import com.gsoft.common.util.SMSUtil;
 public class HttpSenderMsg {
 	
 	private static final String URL = "http://222.73.117.156/msg/";
@@ -121,9 +124,9 @@ public class HttpSenderMsg {
 	}
 	
 	public static String sendMsg(String mobile, String msg) throws Exception{
-		String url = URL;// 应用地址
-		String account = ACCOUNT;// 账号
-		String pswd = PASSWORD;// 密码
+		String url = url();// 应用地址
+		String account = account();// 账号
+		String pswd = password();// 密码
 		boolean needstatus = true;// 是否需要状态报告，需要true，不需要false
 		String product = null;// 产品ID
 		String extno = null;// 扩展码
@@ -156,5 +159,29 @@ public class HttpSenderMsg {
 			
 		}
 		return reCode;
+	}
+	
+	public static String url(){
+		if(!StringUtils.isEmpty(MessageConfig.getValue(SMSUtil.URL))){
+			return MessageConfig.getValue(SMSUtil.URL);
+		}else{
+			return URL;
+		}
+	}
+	
+	public static String account(){
+		if(!StringUtils.isEmpty(MessageConfig.getValue(SMSUtil.ACCOUNT))){
+			return MessageConfig.getValue(SMSUtil.ACCOUNT);
+		}else{
+			return ACCOUNT;
+		}
+	}
+	
+	public static String password(){
+		if(!StringUtils.isEmpty(MessageConfig.getValue(SMSUtil.PASSWORD))){
+			return MessageConfig.getValue(SMSUtil.PASSWORD);
+		}else{
+			return PASSWORD;
+		}
 	}
 }

@@ -14,5 +14,9 @@ public class SMSUtil {
 	public static final int SEND_UERROLE = 2;// 用户角色
 	public static final int SEND_MEMBERROLE = 3;// 会员角色
 	public static final int SEND_ROLEGROUP = 4;// 用户类型
+	
+	public static final String URL = "url";//消息服务地址
+	public static final String ACCOUNT = "account";//账号
+	public static final String PASSWORD = "password";//密码
 
 }
