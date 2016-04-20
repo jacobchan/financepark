@@ -3,7 +3,7 @@
 <youi:html title="政策申请">
 	<youi:body decorator="memcenter"> 
 				<div class="w1000">
-					<h3 class="per-h3">我的申请<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要申请政策</a></h3>
+					<h3 class="per-h3">我的申请<a href="javascript:;" class="fr c-333 f14" id="actionUrl"><i class="fa fa-plus-square fl mr10"></i>申请政策</a></h3>
 					<div class="clearfix mt20 mb20">
 						<ul class="order-nav">
 							<li class="active" onclick="jump0();"><span class="pend">政策申请</span></li>
@@ -20,14 +20,17 @@
 	<script type="text/javascript">
 		//政策申请
 		function jump0(){
+			$("#actionUrl").attr("href",proUrl + "zscenter/zs3.html");
 		    $("#loadData").load(cenUrl+"member/memberCenter/personalCenter/policyApplyMyApplication.html");  
 		}
 		//创业加速申请
 		function jump1(){
+			$("#actionUrl").attr("href",proUrl + "czh/czh5.html");
 		    $("#loadData").load(cenUrl+"member/memberCenter/personalCenter/policyApplySpEntrepreneurship.html");  
 		}
 		//融资申请
 		function jump2(){
+			$("#actionUrl").attr("href",proUrl + "czh/czh5.html");
 		    $("#loadData").load(cenUrl+"member/memberCenter/personalCenter/policyApplyFinace.html");  
 		}
 	</script>
@@ -51,11 +54,6 @@
 				jump0();
 			}
 		});
-
-		 //点击跳转到政策申请页面
-		$("#a1").click(function(){			
-			location.href = proUrl + "zscenter/zs3.html" ;
-		})	
 		
 		//获取链接后面的值
 		function getRequest() {
