@@ -17,7 +17,7 @@ import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConv
   *
   */
 public class DocConverter {
-    private static final int environment = 2;// 环境1：windows,2:linux(涉及pdf2swf路径问题)
+    private static final int environment = 0;// 环境1：windows,2:linux(涉及pdf2swf路径问题)
     private String fileString;
     private String outputPath = "";// 输入路径，如果不设置就输出在默认位置
     private  String fileName;
@@ -28,7 +28,17 @@ public class DocConverter {
     public DocConverter(String fileString) {
         ini(fileString);
     }
- 
+    //读取当前操作系统
+    public int getOcName(){
+	    String osName = System.getProperty("os.name");
+	    String ostype = "";
+	    if (Pattern.matches("Linux.*", osName)) {
+	        ostype="2";
+	    } else if (Pattern.matches("Windows.*", osName)) {
+	    	ostype="1";
+	    }
+		return Integer.parseInt(ostype);
+    }
     /*
      * 重新设置 file @param fileString
      */
@@ -51,25 +61,25 @@ public class DocConverter {
      * 操作系统安装openOffice路径
      */
     public String getOfficeHome() {
-        String osName = System.getProperty("os.name");
-        if (Pattern.matches("Linux.*", osName)) {
-            return "/opt/openoffice4";
-        } else if (Pattern.matches("Windows.*", osName)) {
-            return "C:\\program Files (x86)\\OpenOffice.org 3";
+    	String offpath = "";
+        if (getOcName()==2) {
+        	offpath = "/opt/openoffice4";
+        } else if (getOcName()==1) {
+        	offpath = "C:\\program Files (x86)\\OpenOffice.org 3";
         }
-        return null;
+        return offpath;
     }
     /*
      * 操作系统安装SWFTools路径
      */
     public String getSWFToolsHome() {
-        String osName = System.getProperty("os.name");
-        if (Pattern.matches("Linux.*", osName)) {
-            return "pdf2swf ";
-        } else if (Pattern.matches("Windows.*", osName)) {
-            return "F:\\SWFTools\\pdf2swf.exe "; 
+        String swfpath = "";
+        if (getOcName()==2) {
+        	swfpath = "pdf2swf ";
+        } else if (getOcName()==1) {
+        	swfpath = "F:\\SWFTools\\pdf2swf.exe "; 
         }
-        return null;
+        return swfpath;
     }
     
     
@@ -82,12 +92,21 @@ public class DocConverter {
             	String officeHome = getOfficeHome();
             	String OpenOffice_HOME = officeHome;//这里是OpenOffice的安装目录, 在我的项目中,为了便于拓展接口,没有直接写成这个样子,但是这样是绝对没问题的  
                 // 如果从文件中读取的URL地址最后一个字符不是 '\'，则添加'\'  
-                if (OpenOffice_HOME.charAt(OpenOffice_HOME.length() - 1) != '/') {  
-                    OpenOffice_HOME += "/";  
-                }  
-            	// 启动OpenOffice的服务  
-                String command = OpenOffice_HOME  
-                        + "program/soffice -headless -accept=\"socket,host=127.0.0.1,port=8100;urp;\"";  
+            	 String command ="";
+            	if (getOcName()==2){
+            		if (OpenOffice_HOME.charAt(OpenOffice_HOME.length() - 1) != '/') {  
+            			OpenOffice_HOME += "/";  
+            		}
+            		command = OpenOffice_HOME  
+                            + "program/soffice -headless -accept=\"socket,host=127.0.0.1,port=8100;urp;\"";  
+            	}else if(getOcName()==1){
+            		if (OpenOffice_HOME.charAt(OpenOffice_HOME.length() - 1) != '\\') {  
+            			OpenOffice_HOME += "\\";  
+            		}
+            		command = OpenOffice_HOME  
+                            + "program\\soffice.exe -headless -accept=\"socket,host=127.0.0.1,port=8100;urp;\"";  
+            	}
+            	// 启动OpenOffice的服务
                 Process pro = Runtime.getRuntime().exec(command);  
                 // connect to an OpenOffice.org instance running on port 8100  
                 OpenOfficeConnection connection = new SocketOpenOfficeConnection(  
@@ -177,7 +196,7 @@ public class DocConverter {
             return true;
         }
  
-        if (environment == 1) {
+        if (getOcName()== 1) {
             System.out.println("****swf转换器开始工作，当前设置运行环境windows****");
         } else {
             System.out.println("****swf转换器开始工作，当前设置运行环境linux****");
