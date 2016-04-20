@@ -8,39 +8,12 @@ $(function(){
 			$(".ifn-group ul").eq($(this).index()).removeClass("undis").siblings().addClass("undis");
 		});
 		$(".ib-btn.open-m1").click(function(){
-			//判断用户是否登录了
-			if(!isLogin){
-				clearInterval(timer);
-   				$(".toast").show();
-   				pltime=2;
-   				timer=setInterval("closeTanc()",1000);
-				return false;
-			}else{
-				$(".bg-tanc.m1").show();
-				//开始调用项目类型的下拉显示
-				onloadProjectTypesData();
-				//开始加载是否融资的数据
-				onloadFinancingBoolData();
-				//开始加载导师类型的数据
-				onloadTeacherTypeData();
-			}
+			//加速申请页面弹出
+			spEntrepreneurshipShow();
 		});
 		$(".ib-btn.open-m2").click(function(){
-			//判断用户是否登录了
-			if(!isLogin){
-				clearInterval(timer);
-   				$(".toast").show();
-   				pltime=2;
-   				timer=setInterval("closeTanc()",1000);
-				return false;
-			}else{
-				$('body').css("overflow","hidden");
-				$(".bg-tanc.m2").show();
-				//融资申请（公司名称、主页地址加载）
-				onloadCompanyData();
-			}
-			
-			
+			//融资申请页面显示
+			finaceShow();
 		});
 		$(".ib-btn.open-m3").click(function(){
 			//$(".bg-tanc.m3").show();
@@ -63,6 +36,14 @@ $(function(){
             $(".toast").hide();
         })
 		
+        //从数据一览页面跳转判断弹出申请页面
+        if(getRequest()=="1"){
+        	//加速申请页面弹出
+			spEntrepreneurshipShow();
+        }else if(getRequest()=="2"){
+        	//融资申请页面显示
+			finaceShow();
+        }
 		//创业加速计划提交预约按钮操作
 		$("#spEntrepreneurshipSubmit").click(function(){
 			//项目类型
@@ -455,9 +436,62 @@ $(function(){
         }       
     }
     
+    //加速申请页面显示
+    function spEntrepreneurshipShow(){
+    	//判断用户是否登录了
+    	$.getScript(cenUrl+'portal/userInfo.html',function(){
+			var loc = encodeURIComponent(window.location.href);
+			if($.youi.serverConfig.authorization){
+				$(".bg-tanc.m1").show();
+				//开始调用项目类型的下拉显示
+				onloadProjectTypesData();
+				//开始加载是否融资的数据
+				onloadFinancingBoolData();
+				//开始加载导师类型的数据
+				onloadTeacherTypeData();
+			}else{
+				clearInterval(timer);
+				$(".toast").show();
+				pltime=2;
+				timer=setInterval("closeTanc()",1000);
+				return false;
+			}
+		});	
+    }
+    
+    //融资申请页面显示
+    function finaceShow(){
+    	//判断用户是否登录了
+    	$.getScript(cenUrl+'portal/userInfo.html',function(){
+			var loc = encodeURIComponent(window.location.href);
+			if($.youi.serverConfig.authorization){
+				$('body').css("overflow","hidden");
+				$(".bg-tanc.m2").show();
+				//融资申请（公司名称、主页地址加载）
+				onloadCompanyData();
+			}else{
+				clearInterval(timer);
+				$(".toast").show();
+				pltime=2;
+				timer=setInterval("closeTanc()",1000);
+				return false;
+			}
+		});	
+    }
+    
     //显示信息
     function showMessage(message){
     	$(".error-toast").animate({top:"20px",opacity:"1"});
     	$(".error-toast p").html(message);
 		setTimeout(function(){$(".error-toast").animate({top:"-40px",opacity:"0"})},2000);
     }
+    
+  //获取链接后面的值
+	function getRequest() {
+		var url = location.search; //获取url中"?"符后的字串
+		if (url.indexOf("?") != -1) { //判断是否有参数
+			var str = url.substr(1); //从第一个字符开始 因为第0个是?号 获取所有除问号的所有符串
+			strs = str.split("="); //用等号进行分隔 （因为知道只有一个参数 所以直接用等号进分隔 如果有多个参数 要用&号分隔 再用等号进行分隔）
+			return strs[1];
+		}
+	}
