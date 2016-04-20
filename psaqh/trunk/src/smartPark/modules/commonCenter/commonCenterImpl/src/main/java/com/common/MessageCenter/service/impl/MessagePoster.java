@@ -18,24 +18,40 @@ import com.gsoft.framework.util.DateUtils;
 import com.gsoft.utils.HttpSenderMsg;
 
 @Service
-public class MessagePoster implements MessagePostProcessor{
+public class MessagePoster implements MessagePostProcessor {
 	@Autowired
 	McMsgdatasManager msgdatasManager;
-	
-	private ExecutorService threadPool = Executors.newFixedThreadPool(10);
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public void send(final IMessage message, String[] phones) throws BusException {
-		//01 - 成功,02 -- 失败
-		if(phones!=null&&phones.length>0){
-			if(phones.length<=100){
-				for(String phone : phones){
+	public void send(IMessage message, String[] phones) throws BusException {
+		// 00 - 待发送 ，01 - 成功,02 -- 失败
+
+		sendAndSave(message, phones);
+
+	}
+
+	/**
+	 * 单个发送单个保存
+	 * 
+	 * @param message
+	 * @param phones
+	 */
+	@SuppressWarnings("unchecked")
+	public void sendAndSave(final IMessage message, String[] phones) {
+		if (phones != null && phones.length > 0) {
+			if (phones.length <= 100) {
+				for (String phone : phones) {
 					sendSingel(message, phone);
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
-			}else{
+			} else {
+				ExecutorService threadPool = Executors.newFixedThreadPool(10);
 				Collection tasks = new ArrayList();
-				for(final String phone : phones){
+				for (final String phone : phones) {
 					tasks.add(Executors.callable(new Runnable() {
 						@Override
 						public void run() {
@@ -47,31 +63,82 @@ public class MessagePoster implements MessagePostProcessor{
 					threadPool.invokeAll(tasks);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
+				} finally {
+					threadPool.shutdown();
 				}
 			}
-
 		}
-		
 	}
-	
-	public void sendSingel(IMessage message,String phone){
-		String code = HttpSenderMsg.sendwithCode(message.getMsgContent(), new String[]{phone});
+
+	/**
+	 * 群发遍历保存
+	 * 
+	 * @param message
+	 * @param phones
+	 */
+	@SuppressWarnings("unchecked")
+	public void sendThenSave(final IMessage message, String[] phones) {
+		String code = HttpSenderMsg.sendwithCode(message.getMsgContent(),
+				phones);
+		final String status;
+		if (StringUtils.isEmpty(code) || !"0".equals(code)) {
+			status = "01";// 发送失败
+		} else {
+			status = "02";// 发送成功
+		}
+		if (phones != null && phones.length > 0) {
+			if (phones.length <= 100) {
+				for (String phone : phones) {
+					afterSend(message, status, phone);
+				}
+			} else {
+				ExecutorService threadPool = Executors.newFixedThreadPool(10);
+				Collection tasks = new ArrayList();
+				for (final String phone : phones) {
+					tasks.add(Executors.callable(new Runnable() {
+						@Override
+						public void run() {
+							afterSend(message, status, phone);
+						}
+					}));
+				}
+				try {
+					threadPool.invokeAll(tasks);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} finally {
+					threadPool.shutdown();
+				}
+			}
+		}
+	}
+
+	/**
+	 * 一条一条发送短信并且保存
+	 * 
+	 * @param message
+	 * @param phone
+	 */
+	public void sendSingel(IMessage message, String phone) {
+		String code = HttpSenderMsg.sendwithCode(message.getMsgContent(),
+				new String[] { phone });
 		String status = "";
-		if(StringUtils.isEmpty(code)||!"0".equals(code)){
-			status = "01";//发送失败
-		}else{
-			status = "02";//发送成功
+		if (StringUtils.isEmpty(code) || !"0".equals(code)) {
+			status = "01";// 发送失败
+		} else {
+			status = "02";// 发送成功
 		}
-		afterSend(message,status,phone);
+		afterSend(message, status, phone);
 	}
 
-	public void afterSend(IMessage message,String status,String phone) throws BusException {
-		if(message instanceof McMsgdatas){
+	public void afterSend(IMessage message, String status, String phone)
+			throws BusException {
+		if (message instanceof McMsgdatas) {
 			McMsgdatas messageDate = (McMsgdatas) message;
 			messageDate.setSendStatus(status);
 			messageDate.setReceive(phone);
-			messageDate.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-//			messageDate.setCreateUser(UserUtils.getLoginUserId());
+			messageDate
+					.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 			msgdatasManager.saveMcMsgdatas(messageDate);
 		}
 	}
