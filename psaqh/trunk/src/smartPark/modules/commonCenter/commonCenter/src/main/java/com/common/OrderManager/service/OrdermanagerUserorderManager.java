@@ -13,7 +13,6 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
-import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 
@@ -240,20 +239,55 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	public PagerRecords getPagerHospital(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders) throws BusException;
-	//前台 根据当前用户分页查询待处理订单
+	/**
+	 * 前台 根据当前用户分页查询待处理订单
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
 	public PagerRecords getPagerPend(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders) throws BusException;
-	//前台 根据当前用户分页查询完成订单 根据订单号，订单项目
+	/**
+	 * 前台 根据当前用户分页查询完成订单 根据订单号，订单项目
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @param userorderCodeLike
+	 * @param userorderProjecta
+	 * @return
+	 * @throws BusException
+	 */
 	public PagerRecords getPagerHospital_query(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders,
 			String userorderCodeLike,
   			String userorderProjecta) throws BusException;
-	//前台 根据当前用户分页查询待处理订单 根据订单号，订单项目
-	  public PagerRecords getPagerPend_query(Pager pager,//分页条件
+	/**
+	 * 前台 根据当前用户分页查询待处理订单 根据订单号，订单项目
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @param userorderCodeLike
+	 * @param userorderProjecta
+	 * @return
+	 * @throws BusException
+	 */
+	 public PagerRecords getPagerPend_query(Pager pager,//分页条件
   			Collection<Condition> conditions,//查询条件
   			Collection<Order> orders,
   			String userorderCodeLike,
   			String userorderProjecta)throws BusException;
+	/**
+	 * 新增威客服务订单
+	 * @param userId
+	 * @param orderDetailList
+	 * @return
+	 * @throws BusException
+	 */
+	 public OrdermanagerUserorder saveWKSerOrder(String userId,
+			List<OrdermanagerCommoditydetail> orderDetailList)
+			throws BusException;
 }
