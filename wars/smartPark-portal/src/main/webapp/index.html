@@ -1120,7 +1120,7 @@
  	<script type="text/javascript">
 		    //提交预约
 			$("#reserveButton").click(function(){
-				var recordType='04';//04:众创空间
+			//	var recordType='04';//04:众创空间
 				var recordMemberId=$(".select_show").text();
 				if(recordMemberId=="请选择项目"){
 					recordMemberId="";
@@ -1182,7 +1182,7 @@
 	    	        timer=setInterval("closeTanc()",1000);
 					return;
 				}
-				var params = ['visiteDate='+visiteDate,'visiteName='+lfName,'visiteTel='+lfTel,'visiteTime='+visiteTime,'recordType='+recordType,'recordMemberId='+recordMemberId];
+				var params = ['visiteDate='+visiteDate,'visiteName='+lfName,'visiteTel='+lfTel,'visiteTime='+visiteTime,'recordMemberId='+recordMemberId];
 				var serviceURL = baseUrl+"reservationRecordManager/saveReservationRecord.json";
 				//公共方法
 				$.youi.ajaxUtils.ajax({
