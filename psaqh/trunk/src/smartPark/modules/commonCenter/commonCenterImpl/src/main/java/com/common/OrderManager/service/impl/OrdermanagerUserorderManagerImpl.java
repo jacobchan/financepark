@@ -501,6 +501,44 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    		return order;
    	}
     /**
+   	 * 新增威客服务订单
+   	 */
+    @Override
+    @EsbServiceMapping
+   	public OrdermanagerUserorder saveWKSerOrder(@ServiceParam(name="userId",pubProperty="userId") String userId,
+   			@DomainCollection(domainClazz=OrdermanagerCommoditydetail.class) List<OrdermanagerCommoditydetail> orderDetailList) throws BusException {
+       	BigDecimal userorderAmoun = BigDecimal.valueOf(0);
+       	for(OrdermanagerCommoditydetail orderDetail:orderDetailList){//计算订单金额
+       		PurchasingmanagerCommodity commodity = purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(orderDetail.getCommodityId().getCommodityId());
+       		userorderAmoun = userorderAmoun.add(commodity.getCommodityPrice().
+       				multiply(new BigDecimal(orderDetail.getCommoditydetailNum())));
+       	}
+   		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode","0507");
+   		OrdermanagerUserorder order = new OrdermanagerUserorder();
+   		order.setUserorderAmount(userorderAmoun);
+   		order.setGenreId(pg);
+   		order.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("WKFW"));
+   		order.setUserorderStatus("01");//01-未支付
+   		if(StringUtils.isNotEmpty(userId)){
+			MemberInformation mem = memberInformationManager.getMemberInformation(userId);
+			order.setUserorderBuyUser(mem.getMemberName());
+		}
+   		order.setMemberId(userId);
+   		order.setUserorderProject(pg.getGenreName());
+   		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+   		order.setCreateUser(userId);
+   		order.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+   		order.setUpdateUser(userId);
+   		order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+   		order = ordermanagerUserorderDao.save(order);
+   		
+   		for(OrdermanagerCommoditydetail orderDetail:orderDetailList){//保存订单明细
+   			orderDetail.setOrdermanagerUserorder(order);
+   			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
+   		}
+   		return order;
+   	}
+    /**
      * 获取当前登录用户订单列表
      * @return
      * @throws BusException
