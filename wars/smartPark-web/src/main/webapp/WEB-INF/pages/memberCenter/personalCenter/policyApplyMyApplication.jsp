@@ -29,6 +29,7 @@
         </div> 
         
     </div>
+    <div id="loadingShow" class="clearfix"></div>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 <script type="text/javascript">  
 var currentIndex = 1;
@@ -40,24 +41,31 @@ var pageCount=1;
 	
 	//加载数据
 	function loadData(){
-		
 		$.youi.ajaxUtils.ajax({
 			url : baseUrl + "policyApplyManager/getTotalCount.json",
+			beforeSend: function(){
+				//开始显示loading样式
+				$.showBox.Loading();
+			},
 			success : function(results) {
 				var totalCount=results.records[0].totalCount;
 				pageCount = Math.ceil(totalCount / pageSize);
 				//开始勾画页面
 				refreshData(1, pageSize);
-				
-				$(".tcdPageCode").createPage({
-				    pageCount:pageCount,
-				    current:1,
-				    backFn:function(p){
-				    	currentIndex = p;
-				       this.pageCount=pageCount;
-				        refreshData(p,pageSize);
-				    }
-				});		
+				//判断是否有数据，有数据显示翻页样式
+				if(totalCount>0){
+					$(".tcdPageCode").createPage({
+					    pageCount:pageCount,
+					    current:1,
+					    backFn:function(p){
+					    	currentIndex = p;
+					       this.pageCount=pageCount;
+					        refreshData(p,pageSize);
+					    }
+					});	
+				}
+				//关闭loading样式
+				$.showBox.CloseLoading();
 			}
 		});
 	}
@@ -71,7 +79,7 @@ var pageCount=1;
 			success : function(results) {
 				if (results && results.records) {
 					_parseRecords(results.records);
-				}
+				};
 			}
 		});
 	}
@@ -88,27 +96,35 @@ var pageCount=1;
 			headHtml+='	<th>操作</th>'
 			headHtml+='</tr>'
 			var html = "";
-		for (var index = 0; index < recordList.length; index++) {
-			html += '<tr>'
-			html += '	<td><a href="">'+ recordList[index].applyCode+ '</a></td>'
-			html += '	<td>'+ recordList[index].nmIssuenews.policyCaption+ '</td>'
-			html += '	<td>'+ recordList[index].policyApplyContactPeople+ '</td>'
-			html += '	<td>'+ recordList[index].createTime+ '</td>'
-			if(recordList[index].policyApplyStatus=="01"){
-				html += '	<td>未办理</td>'
-				html += '	<td><a href="javascript:cancel(\''+recordList[index].policyApplyId+'\');" class="ac-cancle">取消</a></td>'
-			}else if(recordList[index].policyApplyStatus=="02"){
-				html += '	<td>申请成功</td>'
-				html += '	<td></td>'
-			}else if(recordList[index].policyApplyStatus=="03"){
-				html += '	<td>申请失败</td>'
-				html += '	<td></td>'
-			}else if(recordList[index].policyApplyStatus=="04"){
-				html += '	<td>已取消</td>'
-				html += '	<td></td>'
+			if(recordList.length>0){
+				for (var index = 0; index < recordList.length; index++) {
+					html += '<tr>'
+					html += '	<td><a href="">'+ recordList[index].applyCode+ '</a></td>'
+					html += '	<td>'+ recordList[index].nmIssuenews.policyCaption+ '</td>'
+					html += '	<td>'+ recordList[index].policyApplyContactPeople+ '</td>'
+					html += '	<td>'+ recordList[index].createTime+ '</td>'
+					if(recordList[index].policyApplyStatus=="01"){
+						html += '	<td>未办理</td>'
+						html += '	<td><a href="javascript:cancel(\''+recordList[index].policyApplyId+'\');" class="ac-cancle">取消</a></td>'
+					}else if(recordList[index].policyApplyStatus=="02"){
+						html += '	<td>申请成功</td>'
+						html += '	<td></td>'
+					}else if(recordList[index].policyApplyStatus=="03"){
+						html += '	<td>申请失败</td>'
+						html += '	<td></td>'
+					}else if(recordList[index].policyApplyStatus=="04"){
+						html += '	<td>已取消</td>'
+						html += '	<td></td>'
+					}
+					html += '</tr>'
+				}
+			}else{
+				html += '<tr>'
+				html += '	<td colspan="6">暂无记录</td>'
+				html += '</tr>'
 			}
-			html += '</tr>'
-		}
+			
+		
 		$("tbody").html(headHtml+html);
 	};
 	//取消成功，提示信息

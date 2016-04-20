@@ -28,6 +28,7 @@
         <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
     </div> 
 </div>
+<div id="loadingShow" class="clearfix"></div>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 <script type="text/javascript"> 
 	//页面取消成功的Page页
@@ -44,20 +45,29 @@
 	function loadData(){
 		$.youi.ajaxUtils.ajax({
 			url : baseUrl + "entrepreneurshipManager/getTotalCount.json",
+			beforeSend: function(){
+				//开始显示loading样式
+				$.showBox.Loading();
+			},
 			success : function(results) {
 				var totalCount=results.records[0].totalCount;
 				pageCount = Math.ceil(totalCount / pageSize);
 				//开始勾画页面
 				refreshData(1, pageSize);
-				$(".tcdPageCode").createPage({
-					pageCount : pageCount,
-					current : 1,
-					backFn : function(p) {
-						currentIndex = p;
-						this.pageCount = pageCount;
-						refreshData(p, pageSize);
-					}
-				});
+				//判断是否有数据，有数据显示翻页样式
+				if(totalCount>0){
+					$(".tcdPageCode").createPage({
+						pageCount : pageCount,
+						current : 1,
+						backFn : function(p) {
+							currentIndex = p;
+							this.pageCount = pageCount;
+							refreshData(p, pageSize);
+						}
+					});
+				}
+				//关闭loading样式
+				$.showBox.CloseLoading();
 			}
 		});
 	}
@@ -88,24 +98,30 @@
 			headHtml+='	<th>操作</th>'
 			headHtml+='</tr>'
 			var html = "";
-		for (var index = 0; index < recordList.length; index++) {
-			html += '<tr>'
-			html += '	<td><a href="">'+ recordList[index].applayNo+ '</a></td>'
-			html += '	<td>创业加速申请</td>'
-			html += '	<td>'+ recordList[index].member.memberName+ '</td>'
-			html += '	<td>'+ recordList[index].createTime+ '</td>'
-			if(recordList[index].applayStatus=="01"){
-				html += '	<td>未办理</td>'
-				html += '	<td><a href="javascript:cancel(\''+recordList[index].id+'\');" class="ac-cancle">取消</a></td>'
-			}else if(recordList[index].applayStatus=="02"){
-				html += '	<td>已完成</td>'
-				html += '	<td></td>'
-			}else if(recordList[index].applayStatus=="03"){
-				html += '	<td>已取消</td>'
-				html += '	<td></td>'
+			if(recordList.length>0){
+				for (var index = 0; index < recordList.length; index++) {
+					html += '<tr>'
+					html += '	<td><a href="">'+ recordList[index].applayNo+ '</a></td>'
+					html += '	<td>创业加速申请</td>'
+					html += '	<td>'+ recordList[index].member.memberName+ '</td>'
+					html += '	<td>'+ recordList[index].createTime+ '</td>'
+					if(recordList[index].applayStatus=="01"){
+						html += '	<td>未办理</td>'
+						html += '	<td><a href="javascript:cancel(\''+recordList[index].id+'\');" class="ac-cancle">取消</a></td>'
+					}else if(recordList[index].applayStatus=="02"){
+						html += '	<td>已完成</td>'
+						html += '	<td></td>'
+					}else if(recordList[index].applayStatus=="03"){
+						html += '	<td>已取消</td>'
+						html += '	<td></td>'
+					}
+					html += '</tr>'
+				}
+			}else{
+				html += '<tr>'
+				html += '	<td colspan="6">暂无记录</td>'
+				html += '</tr>'
 			}
-			html += '</tr>'
-		}
 		$("tbody").html(headHtml+html);
 	};
 	
