@@ -228,10 +228,10 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	 *前台 根据当前用户分页查询未完成
 	 * @return 分页对象
 	 */
-	public PagerRecords getPager(Pager pager,//分页条件
+	public PagerRecords getPagerAll(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders,
-			String userorderCode,
+			String userorderCodeLike,
   			String userorderProject) throws BusException;
 	/**
 	 *前台 根据当前用户分页查询历史订单
@@ -239,12 +239,21 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	 */
 	public PagerRecords getPagerHospital(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
-			Collection<Order> orders,
-			String userorderCode,
-  			String userorderProject) throws BusException;
+			Collection<Order> orders) throws BusException;
+	//前台 根据当前用户分页查询待处理订单
 	public PagerRecords getPagerPend(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders) throws BusException;
+	//前台 根据当前用户分页查询完成订单 根据订单号，订单项目
+	public PagerRecords getPagerHospital_query(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders,
-			String userorderCode,
-  			String userorderProject) throws BusException;
+			String userorderCodeLike,
+  			String userorderProjecta) throws BusException;
+	//前台 根据当前用户分页查询待处理订单 根据订单号，订单项目
+	  public PagerRecords getPagerPend_query(Pager pager,//分页条件
+  			Collection<Condition> conditions,//查询条件
+  			Collection<Order> orders,
+  			String userorderCodeLike,
+  			String userorderProjecta)throws BusException;
 }
