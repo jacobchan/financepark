@@ -87,7 +87,7 @@ function _parseRecords(records){
 		$(".tcdPageCode").hide();
 	}
 }
-function findEnterpriseTree(pId){
+function findEnterpriseTree(pId,y){
 //	$("#enterpriseTypeDiv").empty();
 	$.youi.ajaxUtils.ajax({
 		url : baseUrl+'/etypeEnterprisetypeManager/findEnterpriseTypeTree.json',
@@ -97,12 +97,12 @@ function findEnterpriseTree(pId){
 		async : false,
 		success:function(result){
 			var json = eval("[" + result.record.html + "]");
-			var enterpriseTypeDiv ='<dd>';
+			var enterpriseTypeDiv ='';
 			for(var i=0; i<json.length; i++){
 				enterpriseTypeDiv+=json[i].name+"<span>|</span>";
 			}
 			var lastJson = enterpriseTypeDiv.substring(0, enterpriseTypeDiv.lastIndexOf("<span>|</span>", enterpriseTypeDiv.length));
-			$("#enterpriseTypeDiv").append(lastJson+'</dd><div class="sub-bottom"><i class="fa fa-angle-down"></i></div>');
+			$("#enterdd"+y).append(lastJson);
 		}
 	});
 }
@@ -228,10 +228,13 @@ $(function() {
 		dataType : 'jsonp',
 		async : false,
 		success:function(result){
+			$("#enterpriseTypeDiv").empty();
 			var record = result.records;
 			for(var i=0; i<record.length; i++){
-				findEnterpriseTree(record[i].enTypeId);
+				$("#enterpriseTypeDiv").append('<dd id="enterdd'+i+'"></dd>');
+				findEnterpriseTree(record[i].enTypeId,i);
 			}
+			$("#enterpriseTypeDiv").append('<div class="sub-bottom"><i class="fa fa-angle-down"></i></div>');
 		}
 	});
 	
