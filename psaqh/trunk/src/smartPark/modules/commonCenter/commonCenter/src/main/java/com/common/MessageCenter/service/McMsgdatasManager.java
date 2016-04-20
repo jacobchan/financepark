@@ -125,13 +125,13 @@ public interface McMsgdatasManager extends BaseManager{
 	 */
 	public String sendToEntadmin(McMsgdatas mcMsgdatas)throws BusException;
 	
-	/**发送给用户
+	/**发送给会员用户
 	 * @param mcMsgdatas
-	 * @param userId
+	 * @param memberId
 	 * @return
 	 * @throws BusException
 	 */
-	public String sendToUser(McMsgdatas mcMsgdatas,String userId)throws BusException;
+	public String sendToUser(McMsgdatas mcMsgdatas,String memberId)throws BusException;
 	
 	
 	/**
