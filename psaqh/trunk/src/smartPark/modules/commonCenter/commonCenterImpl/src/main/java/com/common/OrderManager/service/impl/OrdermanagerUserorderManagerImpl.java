@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gsoft.framework.codemap.dao.CodeitemDao;
 import com.gsoft.framework.codemap.entity.Codeitem;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -503,7 +504,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     /**
    	 * 新增威客服务订单
    	 */
-    @Override
+   // @Override
     @EsbServiceMapping
    	public OrdermanagerUserorder saveWKSerOrder(@ServiceParam(name="userId",pubProperty="userId") String userId,
    			@DomainCollection(domainClazz=OrdermanagerCommoditydetail.class) List<OrdermanagerCommoditydetail> orderDetailList) throws BusException {
@@ -676,6 +677,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     	  if("请选择订单项目".equals(userorderProjecta)){
     		  userorderProjecta=null;
     	  }
+    	 // userorderProjecta="工商变更";
          String userorderStatus="01";//01为未完成订单
         // String userorderCodeLike1="30000";
          //添加条件
@@ -688,7 +690,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 
 
       /**
-    	 *前台 根据当前用户分页查询历史订单   根据订单号，订单项目
+    	 *前台 根据当前用户分页查询历史订单   根据订单号，订单项目          陈烨
     	 * @return 分页对象
     	 */       
     @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
@@ -699,6 +701,9 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     			@ServiceParam(name="userorderProjecta") String userorderProjecta)
     			throws BusException {
          String userorderStatus="01";//01为未完成订单
+         if("请选择订单项目".equals(userorderProjecta)){
+   		  userorderProjecta=null;
+   	  }
          conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.NOT_EQUALS, userorderStatus));
          conditions.add(ConditionUtils.getCondition("userorderCode", Condition.LIKE, userorderCodeLike));
          conditions.add(ConditionUtils.getCondition("userorderProject", Condition.EQUALS, userorderProjecta));
@@ -707,7 +712,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    }
 
     /**
-  	 *前台 根据当前用户分页查询历史订单
+  	 *前台 根据当前用户分页查询历史订单          陈烨
   	 * @return 分页对象
   	 */       
     @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
@@ -721,7 +726,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	 return pagerRecords;
 }
     /**
-	 *前台 根据当前用户分页查询全部订单
+	 *前台 根据当前用户分页查询全部订单           陈烨
 	 * @return 分页对象
 	 */       
     @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
@@ -731,13 +736,16 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 			@ServiceParam(name="userorderCodeLike") String userorderCodeLike,
 			@ServiceParam(name="userorderProjecta") String userorderProjecta)
 			throws BusException {
+    	 if("请选择订单项目".equals(userorderProjecta)){
+  		  userorderProjecta=null;
+  	     }
          conditions.add(ConditionUtils.getCondition("userorderCode", Condition.EQUALS, userorderCodeLike));
          conditions.add(ConditionUtils.getCondition("userorderProject", Condition.LIKE, userorderProjecta));
     	 PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
     	 return pagerRecords;
    }
     /**
-  	 *前台 根据当前用户分页查询待处理订单
+  	 *前台 根据当前用户分页查询待处理订单       陈烨
   	 * @return 分页对象
   	 */       
     @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
@@ -750,6 +758,49 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	 PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
 	 return pagerRecords;
 }
+    /**
+	 * 获取整个数据的totalCount      陈烨
+	 */
+    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	public List<Record> getTotalCount(
+			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions)  throws BusException{
+		List<Record> recordList=new ArrayList<Record>();
+		List<OrdermanagerUserorder> List = this.getOrdermanagerUserorders(conditions, null);
+		Record record = new Record();
+		record.put("totalCount", List.size());
+		recordList.add(record);
+		return recordList;
+	}
+    /**
+	 * 获取未完成的totalCount          陈烨
+	 */
+    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	public List<Record> getTotalCountPend(
+			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions)  throws BusException{
+		List<Record> recordList=new ArrayList<Record>();
+		String userorderStatus="01";
+		conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.EQUALS, userorderStatus));
+		List<OrdermanagerUserorder> List = this.getOrdermanagerUserorders(conditions, null);
+		Record record = new Record();
+		record.put("totalCount", List.size());
+		recordList.add(record);
+		return recordList;
+	}
+    /**
+   	 * 获取历史的totalCount          陈烨
+   	 */
+       @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+   	public List<Record> getTotalCountHospital(
+   			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions)  throws BusException{
+   		List<Record> recordList=new ArrayList<Record>();
+   		String userorderStatus="01";
+   		conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.NOT_EQUALS, userorderStatus));
+   		List<OrdermanagerUserorder> List = this.getOrdermanagerUserorders(conditions, null);
+   		Record record = new Record();
+   		record.put("totalCount", List.size());
+   		recordList.add(record);
+   		return recordList;
+   	}
 }
 
     
