@@ -199,7 +199,7 @@
 		   return false;
 		})
 		$("#jd-bd-select").on("click",".jbk-bt .ml50",function(){
-			$(this).siblings("div").find("input").prop("checked",false);
+			$(this).removeClass("black").siblings("div").find("input").prop("checked",false);
 		})
 		$("#jd-bd-select").on("click",".jbk-bt .fl input",function(){
 			if($(this).parent().parent().find("input:checked").length){		
