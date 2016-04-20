@@ -12,7 +12,7 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.springframework.util.StringUtils;
 public class HttpSenderMsg {
 	
-	private static final String URL = "http://222.73.117.158/msg/";
+	private static final String URL = "http://222.73.117.156/msg/";
 	private static final String ACCOUNT = "viphzfc";
 	private static final String PASSWORD = "Tch123456";
 	
