@@ -82,8 +82,8 @@ public class DocConverter {
             	String officeHome = getOfficeHome();
             	String OpenOffice_HOME = officeHome;//这里是OpenOffice的安装目录, 在我的项目中,为了便于拓展接口,没有直接写成这个样子,但是这样是绝对没问题的  
                 // 如果从文件中读取的URL地址最后一个字符不是 '\'，则添加'\'  
-                if (OpenOffice_HOME.charAt(OpenOffice_HOME.length() - 1) != '\\') {  
-                    OpenOffice_HOME += "\\";  
+                if (OpenOffice_HOME.charAt(OpenOffice_HOME.length() - 1) != '/') {  
+                    OpenOffice_HOME += "/";  
                 }  
             	// 启动OpenOffice的服务  
                 String command = OpenOffice_HOME  
