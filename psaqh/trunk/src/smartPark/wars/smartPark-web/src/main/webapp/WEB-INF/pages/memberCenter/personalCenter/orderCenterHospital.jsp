@@ -159,24 +159,28 @@
 function _selectRecords(record){		
 	console.log(record);
 	for(var i=0;i<record.length;i++){				
-		var html= "<li>"+record[i].genreName+"</li>";                                                                                  
+		var html= "<li data='"+record[i].genreId+"'>"+record[i].genreName+"</li>";                                                                                  
 		 $(".select-nav").append(html);	
 	}
 	$(".ic-select").click(function(e){
 		$(".select-nav").hide();
 	    $(this).next(".select-nav").show();
-	    e.stopPropagation();//阻止冒泡
+	    e.stopPropagation();//
 	});
 	$(".select-nav li").click(function(){
-		$(this).parents(".tct-select").find(".ic-select p").text($(this).text()) ;
+		$(this).parents(".tct-select").find(".ic-select p").text($(this).text());
+		var livale = $(this).attr("data"); 
+		$(this).parents(".tct-select").find(".ic-select p").attr("data",livale);
 		$(this).parent().hide();
 	});
 }; 
 //根据订单项目模糊查询 待处理订单
 $('.hhf-submit.f14.fl.ml20.hospital').click(function(){	
-	 var userorderProjecta=$("#userorderProject").text();
-	 var userorderCodeLike=$("#userorderCode").val();	
-	 var params=['userorderProjecta='+userorderProjecta,'userorderCodeLike='+userorderCodeLike];
+	//订单类型id
+	 var genId = $(".c-b1").attr("data");	
+	 //订单号
+	 var userorderCodeLike=$("#userorderCode").val();			 
+	 var params=['userorderCodeLike='+userorderCodeLike,'genId='+genId];
 	 $.ajax({
 		 url : baseUrl + "ordermanagerUserorderManager/getTotalCountHospital.json",
 			success : function(results) {
@@ -199,9 +203,12 @@ $('.hhf-submit.f14.fl.ml20.hospital').click(function(){
 		}); 		
 });
 	function refreshData_hospital_query(pageIndex,pageSize){
- 	   var userorderProjecta=$("#userorderProject").text();	 
-       var userorderCodeLike=$("#userorderCode").val();		
-	   var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCodeLike='+userorderCodeLike,'userorderProjecta='+userorderProjecta];
+		//订单类型
+		 var genId = $(".c-b1").attr("data");	
+		 //订单号
+		 var userorderCodeLike=$("#userorderCode").val();			 
+		
+	     var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCodeLike='+userorderCodeLike,'genId='+genId];
 		 $.ajax({
 				url:baseUrl+'ordermanagerUserorderManager/getPagerHospital_query.json', 
 				data:params.join('&'),
@@ -213,10 +220,11 @@ $('.hhf-submit.f14.fl.ml20.hospital').click(function(){
 	});
 }
 	$('.hhf-submit.f14.fl.ml20.all').click(function(){	
-	// alert(111);
-	 var userorderProjecta=$("#userorderProject").text();		
-	 var userorderCodeLike=$("#userorderCode").val();
-	 var params=['userorderProjecta='+userorderProjecta,'userorderCodeLike='+userorderCodeLike];
+	 //订单类型id
+	 var genId = $(".c-b1").attr("data");	
+	 //订单号
+	 var userorderCodeLike=$("#userorderCode").val();			 
+	 var params=['userorderCodeLike='+userorderCodeLike,'genId='+genId];
 	 $.ajax({
 		 url : baseUrl + "ordermanagerUserorderManager/getTotalCount.json",
 			success : function(results) {
@@ -238,12 +246,12 @@ $('.hhf-submit.f14.fl.ml20.hospital').click(function(){
 		}); 		
 });
 function refreshData_All_query(pageIndex,pageSize){
-var userorderProjecta=$("#userorderProject").text();	
-
-var userorderCodeLike=$("#userorderCode").val();	
-	//var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
-	var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCodeLike='+userorderCodeLike,'userorderProjecta='+userorderProjecta];
-	$.ajax({
+	//订单类型id
+	 var genId = $(".c-b1").attr("data");	
+	 //订单号
+	 var userorderCodeLike=$("#userorderCode").val();			 
+	 var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCodeLike='+userorderCodeLike,'genId='+genId];
+	 $.ajax({
 		url:baseUrl+'ordermanagerUserorderManager/getPagerAll.json',
 		data:params.join('&'),
 		success:function(results){
