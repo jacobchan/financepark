@@ -110,7 +110,8 @@ public class EtypeEnterprisetypeManagerImpl extends BaseManagerImpl implements E
 	 */
     @EsbServiceMapping
 	public List<EtypeEnterprisetype> getParentEnterpriseType() throws BusException{
-		return etypeEnterprisetypeDao.getEtypeEnterprisetypeList();
+    	List<EtypeEnterprisetype> list = etypeEnterprisetypeDao.getEtypeEnterprisetypeList();
+		return list;
 	}
     /**
 	 * 获取子级企业类型
@@ -146,6 +147,7 @@ public class EtypeEnterprisetypeManagerImpl extends BaseManagerImpl implements E
 			}
 			json = resultJson.substring(0, resultJson.length() - 1);
 		}
+		System.out.println("json==========="+json);
 		return json;
 	}
 }
