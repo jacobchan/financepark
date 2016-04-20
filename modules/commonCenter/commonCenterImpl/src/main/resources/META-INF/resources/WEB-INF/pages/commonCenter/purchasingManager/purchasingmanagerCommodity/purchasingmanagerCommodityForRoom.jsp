@@ -18,7 +18,7 @@
 	<!--**********************************子页面**********************************-->
 	<youi:grid id="grid_purchasingmanagerCommodity" idKeys="commodityId" caption="商品信息列表"  panel="false"
 				src="esb/web/purchasingmanagerPublicManager/getPagerPurchasingmanagerCommoditys.json" dataFormId="form_purchasingmanagerCommodity"
-				editSrc="esb/web/purchasingmanagerPublicManager/getPurchasingmanagerCommodity.json" edit="NOT" remove="NOT" showCheckbox="true"
+				editSrc="esb/web/purchasingmanagerPublicManager/getPurchasingmanagerCommodityForPublic.json?genreCode=0301" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/purchasingmanagerPublicManager/removePurchasingmanagerCommodity.json">
 		<youi:fieldLayout labelWidths="120,120">
 			<youi:fieldHidden property="genreCode"  caption="会议室" defaultValue="0301"/>
@@ -36,10 +36,10 @@
 		<youi:gridCol property="genreId"  caption="商品类别" align="center" width="0"/>
 		
 		<%-- <youi:button name="commodityAdd" caption="增加"/> --%>
-		<youi:button active="1" name="commodityUpdate" caption="修改"/>
+		<%-- <youi:button active="1" name="commodityUpdate" caption="修改"/> --%>
 		<%-- <youi:button name="veiwCommodity" active="1" caption="查看详情"/> --%>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
-		   <%--  <youi:button name="edit" caption="修改"/>  --%>
+		    <youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
 		</youi:gridCol>
 	</youi:grid>
