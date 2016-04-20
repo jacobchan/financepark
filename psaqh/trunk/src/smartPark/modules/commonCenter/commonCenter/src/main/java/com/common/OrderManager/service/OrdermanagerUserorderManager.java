@@ -236,7 +236,7 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders,
 			String userorderCodeLike,
-  			String userorderProject) throws BusException;
+  			String userorderProjecta) throws BusException;
 	/**
 	 *前台 根据当前用户分页查询历史订单       陈烨
 	 * @param pager
