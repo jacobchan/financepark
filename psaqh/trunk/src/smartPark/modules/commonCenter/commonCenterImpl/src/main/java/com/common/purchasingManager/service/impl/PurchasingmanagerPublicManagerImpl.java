@@ -102,8 +102,10 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     		extentionAtrManagerImpl.setMeetingRoomExtendValue(o);
     	}else if(genreCode !=null &&genreCode.equals("0302")){//车辆
     		extentionAtrManagerImpl.setCarExtendValue(o);
+    	}else if(genreCode !=null &&genreCode.equals("0401")){//创立方
+    		extentionAtrManagerImpl.setClfExtendValue(o);
     	}else if(genreCode !=null &&genreCode.equals("040101")){//工位
-    		extentionAtrManagerImpl.setCarExtendValue(o);
+    		extentionAtrManagerImpl.setGwExtendValue(o);;
     	}
     	
     	return o;
@@ -207,6 +209,8 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     				o.getCar().setZw(zw);;
     			}
     		}
+    	}else if(genreCode !=null &&genreCode.equals("0401")){//创立方
+    		extentionAtrManagerImpl.setClfExtendValue(o);
     	}else if(genreCode !=null &&genreCode.equals("040101")){//工位
     		extentionAtrManagerImpl.setGwExtendValue(o);
     	}
@@ -362,11 +366,11 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 		o.setGenreId(listForRoom.size()>0?listForRoom.get(0).get("genreId").toString():null);
 		MeetingEntity meetingRoom=o.getMeetingRoom();
 		String adr=meetingRoom.getAdr();//获取会议室地址
-		BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(adr);
-		if(bbmRoom != null){
-			//获取单元默认地址
-			adr=bbmRoom.getRoomAddress();
-		}
+//		BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(adr);
+//		if(bbmRoom != null){
+//			//获取单元默认地址
+//			adr=bbmRoom.getRoomAddress();
+//		}
 		
 		String lx=meetingRoom.getLx();//会议室类型
 		if(lx !=null){//会议室类型：01--视频会议室，02---普通会议室
@@ -555,6 +559,7 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     					pce.setCommodityExtendContent(gw.getCommodityId());//保存工位创立方Id属性
     					gwFlag=false;
     				}
+    				pce.setCommodityId(o.getCommodityId());
     				pce.setUpdateUser(o.getUpdateUser());
     				pce.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     				peList.add(pce);
@@ -610,11 +615,11 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 		//获取创立方地址
 		ClfEntity clf=o.getClf();
 		String adr=clf.getAdr();//获取创立方地址
-		BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(adr);
-		if(bbmRoom != null){
-			//获取单元默认地址
-			adr=bbmRoom.getRoomAddress();
-		}
+//		BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(adr);
+//		if(bbmRoom != null){
+//			//获取单元默认地址
+//			adr=bbmRoom.getRoomAddress();
+//		}
 		boolean gwFlag=true;
 		List<PurchasingmanagerCommodityExtend> peList=new ArrayList<PurchasingmanagerCommodityExtend>();
 		
