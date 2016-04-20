@@ -663,10 +663,16 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
   		return list;
   	}		
 
-       /**
-    	 *前台 根据当前用户分页查询待处理订单 根据订单号，订单项目
-    	 * @return 分页对象
-    	 */       
+  	/**
+  	 *前台 根据当前用户分页查询未完成订单     陈烨
+  	  * @param pager
+  	 * @param conditions
+  	 * @param orders
+  	 * @param userorderCodeLike
+  	 * @param userorderProjecta
+  	 * @return
+  	 * @throws BusException
+  	 */       
       @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
     	public PagerRecords getPagerPend_query(Pager pager,//分页条件
     			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
@@ -690,9 +696,15 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 
 
       /**
-    	 *前台 根据当前用户分页查询历史订单   根据订单号，订单项目          陈烨
-    	 * @return 分页对象
-    	 */       
+  	 * 前台 根据当前用户分页查询历史订单 根据订单号，订单项目      陈烨
+  	 * @param pager
+  	 * @param conditions
+  	 * @param orders
+  	 * @param userorderCodeLike
+  	 * @param userorderProjecta
+  	 * @return
+  	 * @throws BusException
+  	 */   
     @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
     public PagerRecords getPagerHospital_query(Pager pager,//分页条件
     			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
@@ -712,9 +724,13 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    }
 
     /**
-  	 *前台 根据当前用户分页查询历史订单          陈烨
-  	 * @return 分页对象
-  	 */       
+	 * 前台 根据当前用户分页查询待处理订单          陈烨
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */     
     @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
 	public PagerRecords getPagerHospital(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
@@ -727,7 +743,11 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 }
     /**
 	 *前台 根据当前用户分页查询全部订单           陈烨
-	 * @return 分页对象
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
 	 */       
     @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
 	public PagerRecords getPagerAll(Pager pager,//分页条件
@@ -753,14 +773,17 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)
 			throws BusException {
-     String userorderStatus="01";//01为未完成订单
-     conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.EQUALS, userorderStatus));
-	 PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
-	 return pagerRecords;
-}
+    	String userorderStatus="01";//01为未完成订单
+    	conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.EQUALS, userorderStatus));
+    	PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
+    	return pagerRecords;
+    }
     /**
-	 * 获取整个数据的totalCount      陈烨
-	 */
+	 * 获取整个数据的totalCount陈烨
+	 * @param conditions
+     * @return
+     * @throws BusException
+	 */	   
     @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
 	public List<Record> getTotalCount(
 			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions)  throws BusException{
@@ -772,7 +795,10 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		return recordList;
 	}
     /**
-	 * 获取未完成的totalCount          陈烨
+	 * 获取待处理订单的totalCount  陈烨
+	 * @param conditions
+	 * @return
+	 * @throws BusException
 	 */
     @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
 	public List<Record> getTotalCountPend(
@@ -787,7 +813,10 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		return recordList;
 	}
     /**
-   	 * 获取历史的totalCount          陈烨
+   	 * 获取已完成订单的totalCount    陈烨
+   	 * @param conditions
+   	 * @return
+   	 * @throws BusException
    	 */
        @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
    	public List<Record> getTotalCountHospital(
@@ -801,6 +830,8 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    		recordList.add(record);
    		return recordList;
    	}
+
+   	 
 }
 
     
