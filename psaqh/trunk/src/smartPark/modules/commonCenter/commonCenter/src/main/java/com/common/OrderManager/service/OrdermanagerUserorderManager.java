@@ -236,7 +236,7 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders,
 			String userorderCodeLike,
-  			String userorderProjecta) throws BusException;
+  			String genId) throws BusException;
 	/**
 	 *前台 根据当前用户分页查询历史订单       陈烨
 	 * @param pager
@@ -273,7 +273,7 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders,
 			String userorderCodeLike,
-  			String userorderProjecta) throws BusException;
+  			String genId) throws BusException;
 	/**
 	 * 前台 根据当前用户分页查询待处理订单 根据订单号，订单项目           陈烨
 	 * @param pager
@@ -288,7 +288,7 @@ public interface OrdermanagerUserorderManager extends BaseManager{
   			Collection<Condition> conditions,//查询条件
   			Collection<Order> orders,
   			String userorderCodeLike,
-  			String userorderProjecta)throws BusException;
+  			String genId)throws BusException;
 	/**
 	 * 新增威客服务订单
 	 * @param userId
@@ -305,7 +305,9 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	     * @return
 	     * @throws BusException
 		 */	    
-	public List<Record> getTotalCount(Collection<Condition> conditions)  throws BusException;
+	public List<Record> getTotalCount(Collection<Condition> conditions,
+  			String userorderCodeLike,
+  			String genId)  throws BusException;
 	
 	/**
 	 * 获取待处理订单的totalCount  陈烨
@@ -313,12 +315,16 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	 * @return
 	 * @throws BusException
 	 */
-	public List<Record> getTotalCountHospital(Collection<Condition> conditions)  throws BusException;
+	public List<Record> getTotalCountHospital(Collection<Condition> conditions,
+  			String userorderCodeLike,
+  			String genId)  throws BusException;
 	 /**
 	 * 获取已完成订单的totalCount   陈烨
 	 * @param conditions
 	 * @return
 	 * @throws BusException
 	 */
-	public List<Record> getTotalCountPend(Collection<Condition> conditions)  throws BusException;
+	public List<Record> getTotalCountPend(Collection<Condition> conditions,
+  			String userorderCodeLike,
+  			String genId)  throws BusException;
 }
