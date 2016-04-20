@@ -207,7 +207,7 @@
 									pageCount = Math.ceil(totalCount / pageSize);//页数
 								$(".tcdPageCode.fr.pend").empty();
 								refreshData_pend_query(1,pageSize);
-								    $(".tcdPageCode.fr.pend").createPage({
+								    $(".tcdPageCode").createPage({
 									//$(".tcdPageCode").createPage({
 									    pageCount:pageCount,
 									    current:1,
@@ -249,7 +249,7 @@ $('.hhf-submit.f14.fl.ml20.all').click(function(){
 								pageCount = Math.ceil(totalCount / pageSize);//页数
 							//alert(pageCount);
 							refreshData_All_query(1,pageSize);
-							    $(".tcdPageCode.fr.pend").createPage({
+							    $(".tcdPageCode").createPage({
 								//$(".tcdPageCode").createPage({
 								    pageCount:pageCount,
 								    current:1,
