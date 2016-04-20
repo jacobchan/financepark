@@ -80,9 +80,7 @@
 		var taskName = selectedRecord.taskName; 
 		var menuId = idKeys.menuId;
 		var menuSrc = idKeys.menuSrc;
-		if(taskCount > 0){
-			loadPage(menuId,menuSrc,taskName,'1111');
-		}
+		loadPage(menuId,menuSrc,taskName,'1111');
 	</youi:func>
 	
 	<youi:func name="noticereceiver_notice_afterReceive" params="active">
