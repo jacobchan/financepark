@@ -2,7 +2,7 @@
 				<div class="mt20 gr-txl clearfix lh30">
 							<div class="tct-select fl mr20" style="width:200px">
 								<div class="ic-select" style="background: url(<%=request.getContextPath()%>/styles/images/yqfw/down.png) no-repeat scroll right center;">
-									<p class="c-b1" id="userorderProject">请选择订单项目</p>
+									<p class="c-b1" id="userorderProject" data="">请选择订单项目</p>
 									<%--   <img src="<%=request.getContextPath()%>/styles/images/yqfw/down.png" />  --%>
 								</div>
 								<ul style="display: none;" class="select-nav" >
@@ -196,16 +196,18 @@
 	
 	//根据订单项目 订单号模糊查询 待处理订单
 	$('.hhf-submit.f14.fl.ml20.pend').click(function(){	
-		 var userorderProjecta=$("#userorderProject").text();		
-		 //alert(userorderProjecta);
+		//订单类型
+		 var genId = $(".c-b1").attr("data");	
+		 //订单号
 		 var userorderCodeLike=$("#userorderCode").val();			 
-		 var params=['userorderProjecta='+userorderProjecta,'userorderCodeLike='+userorderCodeLike];
+		 var params=['userorderCodeLike='+userorderCodeLike,'genId='+genId];
 		 $.ajax({
-			 url : baseUrl + "ordermanagerUserorderManager/getTotalCountPend.json",
+			 url:baseUrl + "ordermanagerUserorderManager/getTotalCountPend.json",
 				success : function(results) {
 									var totalCount=results.records[0].totalCount;
 									pageCount = Math.ceil(totalCount / pageSize);//页数
-								$(".tcdPageCode.fr.pend").empty();
+									alert(pageCount);
+								$(".tcdPageCode").empty();
 								refreshData_pend_query(1,pageSize);
 								    $(".tcdPageCode").createPage({
 									//$(".tcdPageCode").createPage({
@@ -221,11 +223,11 @@
 			}); 		
 	});
 function refreshData_pend_query(pageIndex,pageSize){
-	var userorderProjecta=$("#userorderProject").text();	
-	//alert(userorderProjecta);
-	 var userorderCodeLike=$("#userorderCode").val();	
-		//var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
-		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCodeLike='+userorderCodeLike,'userorderProjecta='+userorderProjecta];
+	//订单类型
+	 var genId = $(".c-b1").attr("data");	
+	 //订单号
+	 var userorderCodeLike=$("#userorderCode").val();					
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCodeLike='+userorderCodeLike,'genId='+genId];
 		$.ajax({
 			url:baseUrl+'ordermanagerUserorderManager/getPagerPend_query.json',
 			data:params.join('&'),
@@ -243,11 +245,12 @@ $('.hhf-submit.f14.fl.ml20.all').click(function(){
 	 var userorderCodeLike=$("#userorderCode").val();			 
 	 var params=['userorderProjecta='+userorderProjecta,'userorderCodeLike='+userorderCodeLike];
 	 $.ajax({
-		 url : baseUrl + "ordermanagerUserorderManager/getTotalCount.json",
+		 url:baseUrl + "ordermanagerUserorderManager/getTotalCount.json",
 			success : function(results) {
 								var totalCount=results.records[0].totalCount;
 								pageCount = Math.ceil(totalCount / pageSize);//页数
 							//alert(pageCount);
+								$(".tcdPageCode").empty();
 							refreshData_All_query(1,pageSize);
 							    $(".tcdPageCode").createPage({
 								//$(".tcdPageCode").createPage({
@@ -294,16 +297,18 @@ var userorderCodeLike=$("#userorderCode").val();
 function _selectRecords(record){		
 	console.log(record);
 	for(var i=0;i<record.length;i++){				
-		var html= "<li>"+record[i].genreName+"</li>";                                                                                  
+		var html= "<li data='"+record[i].genreId+"'>"+record[i].genreName+"</li>";                                                                                  
 		 $(".select-nav").append(html);	
 	}
 	$(".ic-select").click(function(e){
 		$(".select-nav").hide();
 	    $(this).next(".select-nav").show();
-	    e.stopPropagation();//阻止冒泡
+	    e.stopPropagation();//
 	});
 	$(".select-nav li").click(function(){
-		$(this).parents(".tct-select").find(".ic-select p").text($(this).text()) ;
+		$(this).parents(".tct-select").find(".ic-select p").text($(this).text());
+		var livale = $(this).attr("data"); 
+		$(this).parents(".tct-select").find(".ic-select p").attr("data",livale);
 		$(this).parent().hide();
 	});
 }; 
