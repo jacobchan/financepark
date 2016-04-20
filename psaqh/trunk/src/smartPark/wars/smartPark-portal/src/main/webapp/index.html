@@ -598,6 +598,10 @@
             	<!-- <span class="span_bold">公告公示</span><span>园区新闻</span><span>政策法规</span>
                 <a href="javascript:;">更多》</a> -->
             </div>
+            <!-- 加载loading图片 -->
+            <div class="clearfix tc w100 undis" id="tp5">
+				<img src="../styles/images/loader.gif" border="0" />
+			</div>
             <div class="tipbox tip_item line_h">
             	<!-- <ul>
                 	<li><a href="./zscenter/zs4.html">科技部关于《发展众创工作指引》...</a></li>
@@ -615,6 +619,10 @@
                 <a class="fr" href="./zscenter/zs3.html">更多》</a>
             </div>
             <div class="tipbox line_h">
+           		<!-- 加载loading图片 -->
+	            <div class="clearfix tc w100 undis" id="tp4">
+					<img src="../styles/images/loader.gif" border="0" />
+				</div>
             	<ul id="ul2">
                 	<!-- <li><a href="./zscenter/zs4.html">杭州3年建100个特色小镇</a></li>
                     <li><a href="./zscenter/zs4.html">杭州申办亚运会能否成功...</a></li> -->
@@ -738,6 +746,8 @@
 		}
 		
 		function getRecords(issueTypeId){
+			$(".tipbox.tip_item").empty() ;
+			$("#tp5").removeClass("undis") ;
 			var params=["issueTypeId="+issueTypeId];//当前政策类型ID
 			$.youi.ajaxUtils.ajax({
 				url:baseUrl +"nmIssuenewsManager/getAllPolicyByTypeId.json",
@@ -746,6 +756,7 @@
 				dataType:'jsonp',
 				success:function(result){
 					if(result&&result.records){
+						$("#tp5").addClass("undis") ;
 						getHtml(result.records) ;
 					}
 				}
@@ -825,6 +836,7 @@
 	<script type="text/javascript">
 	/* 优惠政策 */
 		$(function(){
+			$("#tp4").removeClass("undis") ;
 			var params=["issueTypeCode=02"];//02代表的优惠政策
 			$.youi.ajaxUtils.ajax({
 				url:baseUrl +"nmIssuetypeManager/getNewsType.json",//得到新闻发布类型
@@ -833,6 +845,7 @@
 				dataType:'jsonp',
 				success:function(result){
 					if(result&&result.records){
+						$("#tp4").addClass("undis") ;
 						getPolicy(result.records);
 					}
 				}
