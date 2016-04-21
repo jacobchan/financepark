@@ -257,4 +257,25 @@ public class EntrepreneurshipManagerImpl extends BaseManagerImpl implements Entr
     	entrepreneurship.setApplayStatus("03");
     	return entrepreneurshipDao.save(entrepreneurship);
     }
+    
+    /**
+     * 替换后台数据列表中的导师类型
+     */
+    @EsbServiceMapping
+    public String getTeacherTypeName(@ServiceParam(name="id") String id) throws BusException{
+    	String teacherTypeName = "";
+    	//获取加速申请的信息
+    	Entrepreneurship entrepreneurship = this.getEntrepreneurship(id);
+    	//判断当前记录的导师类型是否是自定义  05
+    	if("05".equals(entrepreneurship.getTeacherType())){
+    		teacherTypeName = entrepreneurship.getDefineTeacherType();
+    	}else{
+    		//项目类型的代码集名称重新给值
+			Codeitem codeitem = codeManager.getCodeitem("teacherType", entrepreneurship.getTeacherType());
+			if(null!=codeitem){
+				teacherTypeName = codeitem.getItemCaption();
+			}
+    	}
+    	return teacherTypeName;
+    }
 }
