@@ -52,6 +52,29 @@ public class LoginUserData extends BaseDataController {
 		}
 		return new DataModelAndView("000000");
 	}
+	/*
+	 * APP获取注册手机验证码
+	 */
+	@RequestMapping("/appRegisterCaptcha.json")
+	public DataModelAndView getAppMobileCaptcha(@RequestParam("phone") String phone,HttpServletRequest request) {
+		Random random = new Random(new Date().getTime());
+		Long code = Math.abs(random.nextLong() % 999999);
+		String captcha = org.apache.commons.lang.StringUtils.leftPad(code.toString(), 6, '0');
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put(MessageService.CODE, captcha);
+		
+		Boolean success = mcMsgdatasManager.smsSend("1010", map, null, phone);
+		if(success){
+			request.getSession().setAttribute("phone_captcha",
+					phone + "_" + captcha);
+			request.getSession().setAttribute("captcha_getTime_",
+					System.currentTimeMillis());
+		}else{
+			return new DataModelAndView("发送失败");
+		}
+		return new DataModelAndView("000000");
+	}
 	
 	/**
 	 * 用户注册
@@ -157,10 +180,26 @@ public class LoginUserData extends BaseDataController {
 		String phone = (String) request.getSession().getAttribute("phone");
 		Boolean success = mcMsgdatasManager.smsSend("1011", map, null, phone);
 		if(success){
-			request.getSession().setAttribute("phone_captcha",
-					phone + "_" + captcha);
-			request.getSession().setAttribute("captcha_getTime_",
-					System.currentTimeMillis());
+			
+		}else{
+			return new DataModelAndView("发送失败");
+		}
+		return new DataModelAndView("000000");
+	}
+	/*
+	 * APP找回密码获取手机验证码
+	 */
+	@RequestMapping("/appFindPhoneCaptcha.json")
+	public DataModelAndView appFindPhoneCaptcha(@RequestParam("phone") String phone,HttpServletRequest request) {
+		Random random = new Random(new Date().getTime());
+		Long code = Math.abs(random.nextLong() % 999999);
+		String captcha = org.apache.commons.lang.StringUtils.leftPad(code.toString(), 6, '0');
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put(MessageService.CODE, captcha);
+		Boolean success = mcMsgdatasManager.smsSend("1011", map, null, phone);
+		if(success){
+			
 		}else{
 			return new DataModelAndView("发送失败");
 		}
