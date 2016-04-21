@@ -6,6 +6,7 @@ package com.manage.PropertyServiceManager.service;
 import java.util.Collection;
 import java.util.List;
 
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -110,11 +111,23 @@ public interface PropertyservicemanagerCosManager extends BaseManager{
      */
     public PropertyservicemanagerCos rejectPropertyservicemanagerCos(PropertyservicemanagerCos o) throws BusException;
     /**
-	 * 根据当前用户分页查询 根据投诉单号模糊查询（ 前台个人中心）		 
+	 * 根据当前用户分页查询 根据投诉单号模糊查询（ 前台个人中心）		   chenye
 	 * @return 分页对象
 	 */
 	public PagerRecords getPagerLikeCos(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders,				
 			String startTime,String endTime,String coslikeCode) throws BusException;
+	/**
+	 * 获取已完成订单的totalCount    陈烨
+	 * @param conditions
+	 * @param coslikeCode
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 * @throws BusException
+	 */
+	public List<Record> getTotalCount(
+   			Collection<Condition> conditions,
+   			String startTime,String endTime,String coslikeCode) throws BusException;
 }

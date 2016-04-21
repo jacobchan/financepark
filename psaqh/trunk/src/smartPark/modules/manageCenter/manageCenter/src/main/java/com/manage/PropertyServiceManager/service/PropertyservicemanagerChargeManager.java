@@ -6,6 +6,7 @@ package com.manage.PropertyServiceManager.service;
 import java.util.List;
 import java.util.Collection;
 
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -82,11 +83,25 @@ public interface PropertyservicemanagerChargeManager extends BaseManager{
 				Collection<Condition> conditions,//查询条件
 				Collection<Order> orders) throws BusException;
 		/**
-		 * 根据当前用户分页查询 
+		 * 根据当前用户分页查询    chenye
 		 * 模糊查询
 		 * @return 分页对象
 		 */
 		public PagerRecords getPagerLikeCharge(Pager pager,//分页条件
 				Collection<Condition> conditions,//查询条件
 				Collection<Order> orders,String LikeuserorderCode,String startTime,String endTime) throws BusException;
+		/**
+		 * 获取已完成订单的totalCount    陈烨
+		 * @param conditions
+		 * @param LikeuserorderCode
+		 * @param startTime
+		 * @param endTime
+		 * @return
+		 * @throws BusException
+		 */
+		public List<Record> getTotalCount(
+	   			Collection<Condition> conditions,
+	   			String LikeuserorderCode,
+				String startTime,
+				String endTime)  throws BusException;
 }

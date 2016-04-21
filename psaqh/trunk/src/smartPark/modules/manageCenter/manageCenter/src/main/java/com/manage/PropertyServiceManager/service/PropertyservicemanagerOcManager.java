@@ -7,13 +7,16 @@ import java.util.List;
 import java.util.Collection;
 
 import com.common.OrderManager.entity.OrdermanagerUserorder;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.PubCondition;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerOc;
 
@@ -114,5 +117,16 @@ public interface PropertyservicemanagerOcManager extends BaseManager{
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders,
 			String ocLikeCode,String startTime,String endTime) throws BusException;
-
+	/**
+   	 * 获取已完成订单的totalCount    陈烨
+   	 * @param conditions
+   	 * @return
+   	 * @throws BusException
+   	 */
+       
+   	public List<Record> getTotalCount(
+   			 Collection<Condition> conditions,
+   			 String ocLikeCode,
+			 String startTime,
+			 String endTime)  throws BusException;
 }
