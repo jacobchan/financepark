@@ -23,12 +23,12 @@
 			<div class="main-wrapper">
 		    	<div class="main-wrapper-right">
 		        	<div class="main-title"><span>企业资料修改</span></div>
-		        	<span class="" id="financingRe" style="display:none;">${financingRe }</span>
+		        	<span class="" id="financingRe" style="display:none;"></span>
 		            <div class="qiye_logo">
 		            	<div class="qiye_text"><span>企业logo</span></div>
 		                <div class="upload_main">
 		                	<div class="photoedit" style="float: left;">
-								<img id="headImg" src="<%=request.getContextPath()%>/common/uploadImage.html?repository=/swfupload&path=${rzLogo }&method=show" width="168" height="168"/>
+								<img id="headImg" src="" width="168" height="168"/>
 							</div>
 		                    <div class="photo-edit" id="destination" style="width:168px;height:168px;float: left;">
 							    <input type="file" id="imgUpload" name="imgUpload" draggable="true" accept=".png,.jpg"/>
@@ -40,18 +40,18 @@
 		            <div class="xiangxi_xinxi">
 		                <div class="qiye_fullname">
 		                    <div class="qiye_nametex">企业全称</div>
-		                    <div class="name_input"><input id="rzName" name="rzName" type="text" value="${rzName }"></div>
+		                    <div class="name_input"><input id="rzName" name="rzName" type="text" value=""></div>
 		                </div>
 		                <div class="qiye_web">
 		                    <div class="qiye_webtex">官方网站</div>
-		                    <div class="web_input"><input id="rzUrl" name="rzUrl" type="text" value="${rzUrl }"></div>
+		                    <div class="web_input"><input id="rzUrl" name="rzUrl" type="text" value=""></div>
 		                </div>
 		                <div class="qiye_address">
 		                    <div class="qiye_word">所在行业</div>
 		                    <div id="qiye_enType" class="tct-select fl mr20" style="width: 125px;">
 		                    	<div class="ic-select">
-									<p class="c-b1" id="enTypeName" >${enTypeName }</p>
-									<input id="enTypeId" style="display:none;" value="${enTypeId }"/>
+									<p class="c-b1" id="enTypeName" ></p>
+									<input id="enTypeId" style="display:none;" value=""/>
 								</div>
 								<ul id="enTypeNamesing" style="display: none;" class="select-nav"></ul>
 							</div>
@@ -60,8 +60,8 @@
 		                    <div class="qiye_word">地址</div>
 	                    	<div id="qiye_address" class="tct-select fl mr20" >
 		                    	<div class="ic-select">
-									<p class="c-b1" id="roomAddress" >${roomAddress }</p>
-									<input id="roomId" style="display:none;" value="${roomId }"/>
+									<p class="c-b1" id="roomAddress" ></p>
+									<input id="roomId" style="display:none;" value=""/>
 								</div>
 								<ul id="roomAddressing" style="display: none;" class="select-nav"></ul>
 							</div>
@@ -69,8 +69,8 @@
                 		<div class="qiye_jianjie ">
 		                    <div class="qiye_word">公司介绍</div>
 		                    <div class="word_input">
-		                        <textarea id="rzRemark" name="rzRemark" >${rzRemark }</textarea>
-		                        <div class="font_xianzhi">字数限制：<span id="currentCount" style="color:red;">${rzRemarkLength }</span>/200</div>
+		                        <textarea id="rzRemark" name="rzRemark" ></textarea>
+		                        <div class="font_xianzhi">字数限制：<span id="currentCount" style="color:red;"></span>/200</div>
 		                    </div>
 		                </div>
             		</div>
@@ -79,7 +79,7 @@
 		                <div class="qiye_ms">
 		                	<div class="qiye_miaoshu"><span>产品描述</span></div>
 		                    <div class="edit_tool">
-		                    	<textarea id="editorproductDiscriptio" name="productDiscriptio" cols="20" rows="5" class="ckeditor" >${editorproductDiscriptio }</textarea>
+		                    	<textarea id="editorproductDiscriptio" name="productDiscriptio" cols="20" rows="5" class="ckeditor" ></textarea>
 		                    </div>
 		                </div>
 					</div>
@@ -87,15 +87,14 @@
 		                <div class="qiye_xc">
 		                    <div class="qiye_xiangce"><span>企业相册</span></div>
 		                    <div class="photo_list">
-			                    <div class="photoedit" style="float: left;">
-									<img id="qiyeheadImg" src="<%=request.getContextPath()%>/common/uploadImage.html?repository=/swfupload&path=${qiyeheadImg }&method=show" width="220" height="168"/>
+			                    <div class="photoedit" id="qiye_photoedit" style="float: left;">
+			                    	<img id="qiyeheadImg">
+									<div class="photo-edit" style="width:220px;height:168px;margin-bottom: 50px;margin-left: 0px;">
+									    <img style="height:168px; vertical-align:middle;border:0 none;" src="<%=request.getContextPath()%>/styles/images/qiye/add.png">
+	                                    <input type="file" id="qiye_xiangce" name="qiye_xiangce" draggable="true" accept=".png,.jpg"/>
+									</div>
 								</div>
-			                    <div class="photo-edit" style="width:220px;height:168px;float: left;margin-bottom: 50px;">
-								    <img style="height:168px; vertical-align:middle;border:0 none;" src="<%=request.getContextPath()%>/styles/images/qiye/add.png">
-                                    <div class="upload_pic">
-                                    	<input type="file" id="qiye_xiangce" name="qiye_xiangce" draggable="true" accept=".png,.jpg"/>
-                                    </div>
-								</div>
+			                    
 		                       <%--  <ul>
 		                            <li>
 		                                <div style="position:relative">
@@ -148,7 +147,7 @@
 			max_file_size : '400kb', //最大只能上传400kb的文件
 			prevent_duplicates : true, //不允许选取重复文件
 			//此处是控制上传组件是否允许多文件选择还是单文件选择：true/多文件；false/单文件
-			multi_selection: false,
+			multi_selection: true,
 			//给后台传入参数
 			multipart_params: {
 				//上传标识 0：图片上传;1：文件上传
@@ -161,9 +160,18 @@
 			init : {
 				FilesAdded : function(up, files) {
 					//此处用户图片的回显（可根据自己的业务修改）
-					previewQiyeImage(files[0], function(imgsrc) {
-						$("#qiyeheadImg").attr("src",imgsrc);
-					});
+					for(var i = 0, len = files.length; i<len; i++){
+						//构造html来更新UI，显示文件的名字（可根据自己的业务修改）
+						var html = '<img id="qiyeheadImg-'+files[i].id+'" src="" width="220" height="168"/>';				
+						$('#qiyeheadImg').after(html);
+						!function(i){
+							//此处用户图片的回显（可根据自己的业务修改）
+							previewImage(files[i],function(imgsrc){
+								/* $('#qiyeheadImg-'+files[i].id).append('<img src="'+ imgsrc +'" />'); */
+								$('#qiyeheadImg-'+files[i].id).attr("src",imgsrc);
+							});
+					    }(i);
+					};
 				}
 			}
 		});
