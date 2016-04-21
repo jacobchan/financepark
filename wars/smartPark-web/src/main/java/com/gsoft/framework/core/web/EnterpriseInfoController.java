@@ -8,12 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.common.EnterpriceTypeManager.service.EtypeEnterprisetypeManager;
-import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
 import com.gsoft.framework.security.AccountPrincipal;
 import com.gsoft.framework.util.SecurityUtils;
-import com.gsoft.framework.util.StringUtils;
-import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.EnterBusinessManager.service.EnterbusinessmanagerRzManager;
 @Controller
 @RequestMapping("/enterprise")
@@ -36,28 +33,6 @@ public class EnterpriseInfoController {
 			HttpServletResponse response){
 		ModelAndView model = new ModelAndView("enterpriseCenter/enterpriseInfo");
 		AccountPrincipal account = SecurityUtils.getAccount();
-		MemberInformation mem = null;
-		if(account instanceof MemberInformation){
-			mem = memberInformationManager.getMemberInformation(((MemberInformation) account).getMemberId());
-			if(mem != null){
-				if(StringUtils.isNotEmpty(mem.getCompanyId() )){
-					EnterbusinessmanagerRz enterRz = enterbusinessmanagerRzManager.getEnterbusinessmanagerRz(mem.getCompanyId());
-					model.addObject("financingRe", enterRz.getRzId());
-					model.addObject("rzName", enterRz.getRzName());
-					model.addObject("rzUrl", enterRz.getRzUrl());
-					String rzRemark = enterRz.getRzRemark();
-					model.addObject("rzRemark", rzRemark);
-					model.addObject("rzRemarkLength", rzRemark.length());
-					model.addObject("enTypeId", enterRz.getEnTypeId().getEnTypeId());
-					model.addObject("enTypeName", enterRz.getEnTypeId().getEnTypeName());
-					model.addObject("roomId", enterRz.getRoomId().getRoomId());
-					model.addObject("roomAddress", enterRz.getRoomId().getRoomAddress());
-					model.addObject("editorproductDiscriptio", enterRz.getProductDiscriptio());
-					model.addObject("rzLogo", enterRz.getRzLogo());
-					model.addObject("qiyeheadImg", enterRz.getRzImages());
-				}
-			}
-		}
 		model.addObject("user", account);
 		return model;
 	}
