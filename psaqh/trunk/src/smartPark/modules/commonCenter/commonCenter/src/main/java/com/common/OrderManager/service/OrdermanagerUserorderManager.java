@@ -227,16 +227,7 @@ public interface OrdermanagerUserorderManager extends BaseManager{
      */
     public OrdermanagerUserorder getOrderByCode(String userorderCode)
 			throws BusException;
-    /**
-	 * 	通过code，状态,查询订单       
-	 * @param userId
-	 * @param genreCode
-	 * @param userorderStatus
-	 * @return
-	 * @throws BusException
-	 */
-   	public List<OrdermanagerUserorder> getOrderlistforPage(String userId,String genreCode,String userorderStatus) throws BusException;
-   	/**
+    	/**
 	 *前台 根据当前用户分页查询未完成 订单       陈烨
 	  * @param pager
 	 * @param conditions
@@ -246,31 +237,8 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	 */
 	public PagerRecords getPagerAll(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
-			Collection<Order> orders,
-			String userorderCodeLike,
-  			String genId) throws BusException;
-	/**
-	 *前台 根据当前用户分页查询历史订单       陈烨
-	 * @param pager
-	 * @param conditions
-	 * @param orders
-	 * @return
-	 * @throws BusException
-	 */
-	public PagerRecords getPagerHospital(Pager pager,//分页条件
-			Collection<Condition> conditions,//查询条件
-			Collection<Order> orders) throws BusException;
-	/**
-	 * 前台 根据当前用户分页查询待处理订单          陈烨
-	 * @param pager
-	 * @param conditions
-	 * @param orders
-	 * @return
-	 * @throws BusException
-	 */
-	public PagerRecords getPagerPend(Pager pager,//分页条件
-			Collection<Condition> conditions,//查询条件
-			Collection<Order> orders) throws BusException;
+			Collection<Order> orders,String genId) throws BusException;
+	
 	/**
 	 * 前台 根据当前用户分页查询历史订单 根据订单号，订单项目      陈烨
 	 * @param pager
@@ -283,9 +251,7 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	 */
 	public PagerRecords getPagerHospital_query(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
-			Collection<Order> orders,
-			String userorderCodeLike,
-  			String genId) throws BusException;
+			Collection<Order> orders,String genId) throws BusException;
 	/**
 	 * 前台 根据当前用户分页查询待处理订单 根据订单号，订单项目           陈烨
 	 * @param pager
@@ -298,9 +264,7 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	 */
 	 public PagerRecords getPagerPend_query(Pager pager,//分页条件
   			Collection<Condition> conditions,//查询条件
-  			Collection<Order> orders,
-  			String userorderCodeLike,
-  			String genId)throws BusException;
+  			Collection<Order> orders,String genId)throws BusException;
 	/**
 	 * 新增威客服务订单
 	 * @param userId
@@ -317,9 +281,7 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	     * @return
 	     * @throws BusException
 		 */	    
-	public List<Record> getTotalCount(Collection<Condition> conditions,
-  			String userorderCodeLike,
-  			String genId)  throws BusException;
+	public List<Record> getTotalCount(Collection<Condition> conditions,String genId)  throws BusException;
 	
 	/**
 	 * 获取待处理订单的totalCount  陈烨
@@ -327,9 +289,7 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	 * @return
 	 * @throws BusException
 	 */
-	public List<Record> getTotalCountHospital(Collection<Condition> conditions,
-  			String userorderCodeLike,
-  			String genId)  throws BusException;
+	public List<Record> getTotalCountHospital(Collection<Condition> conditions,String genId)  throws BusException;
 	 /**
 	 * 获取已完成订单的totalCount   陈烨
 	 * @param conditions
@@ -337,7 +297,6 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public List<Record> getTotalCountPend(Collection<Condition> conditions,
-  			String userorderCodeLike,
   			String genId)  throws BusException;
 	
 	/**
@@ -349,4 +308,15 @@ public interface OrdermanagerUserorderManager extends BaseManager{
   	public PagerRecords getOrdermanagerUserorderList(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders)  throws BusException;
+  	/**
+	 * 分页查询用户订单表
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	public PagerRecords getUserorder(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders,String genreCode) throws BusException;
 }
