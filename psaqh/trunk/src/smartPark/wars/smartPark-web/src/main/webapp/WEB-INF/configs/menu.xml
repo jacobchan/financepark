@@ -5,6 +5,8 @@
 		<menu id="010200" text="菜单模版定制"  href="page/platform.codemng.codeProject/codeProjectMenus.html"></menu>
 		<menu id="010103" text="模型设计"  href="page/platform.codepdm.pdm/pdm.html"></menu>
 		<menu id="010104" text="图标"  href="page/common/icon.html"></menu>
+		<menu id="010105" text="创业加速申请"  href="page/memberCenter.entrepreneurship/entrepreneurship.html"></menu>
+		<menu id="010106" text="融资申请"  href="page/memberCenter.finace/finace.html"></menu>
 	</menu> 
 	<menu id="010000" text="企业管理">
 		<menu id="011000" text="企业行业类型" href="page/commonCenter.EnterpriceTypeManager.etypeEnterprisetype/etypeEnterprisetype.html"></menu>
