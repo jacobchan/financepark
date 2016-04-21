@@ -95,41 +95,27 @@ public interface PropertyservicemanagerBxManager extends BaseManager{
 	 */
 	public PropertyservicemanagerBx updateBxforpage(String bxId) throws BusException;
 	
-	/**
-	 * //通过订单号获取当前用户的报修单  模糊查询
-	 * @param bxCode订单号
-	 * @return
-	 * @throws BusException
-	 */
-	public List<PropertyservicemanagerBx> getEnterprisemaillistLikeBxCode(String userId,String bxCode,String startTime,String endTime) throws BusException;
 	 /**
-		 * 根据当前用户分页查询
+		 * 根据当前用户分页查询   前台个人中心
 		 * @return 分页对象
-		 */
-		public PagerRecords getPagerBxs(Pager pager,//分页条件
-				Collection<Condition> conditions,//查询条件
-				Collection<Order> orders) throws BusException;
-		/**
-		 * 根据当前用户分页查询 chenye
-		 * 模糊查询
-		 * @return 分页对象
-		 */
-		public PagerRecords getPagerLikeBx(Pager pager,//分页条件
-				Collection<Condition> conditions,//查询条件
-				Collection<Order> orders,String bxLikeCode,String startTime,String endTime) throws BusException;
-		/**
-		 * 获取已完成订单的totalCount    陈烨
 		 * @param conditions
-		 * @param fkLikeCode
+		 * @param startTime
+		 * @param endTime
+		 * @return
+		 * @throws BusException
+		 */
+	public PagerRecords getPagerBxs(Pager pager,//分页条件
+				Collection<Condition> conditions,//查询条件
+				Collection<Order> orders,String startTime,String endTime) throws BusException;
+		/**
+		 * 获取已完成订单的totalCount    前台个人中心    陈烨     
+		 * @param conditions
 		 * @param startTime
 		 * @param endTime
 		 * @return
 		 * @throws BusException
 		 */
 		public List<Record> getTotalCount(
-	   			Collection<Condition> conditions,
-	   			String bxLikeCode,
-				String startTime,
-				String endTime)  throws BusException;
+	   			Collection<Condition> conditions,String startTime,String endTime)  throws BusException;
 		
 }
