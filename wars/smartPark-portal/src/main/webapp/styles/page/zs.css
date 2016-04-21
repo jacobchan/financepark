@@ -613,8 +613,8 @@ a.c-333:hover{color: #ff6715;}
 .indu-logo img{max-width: 160px;height: 160px;}
 
 .dialog-con{background: url(../images/yqfw/cyl-bg.png)no-repeat;padding: 10px;width: 280px;height: 173px;position: absolute;bottom: 63px;display: none;}
-.dialog-con textarea{border:0px;height: 115px;width: 100%;resize:none;}
-.dialog-con a{color: #333;font-size: 14px;line-height: 24px;}
+.dialog-con textarea{border:0px;height: 105px;width: 100%;resize:none;}
+.dialog-con a{color: #ff6715;font-size: 14px;line-height: 24px;}
 .dialog-con a:hover{color: #ff6715;text-decoration: underline;}
 
 /**创智汇 文档详情**/
