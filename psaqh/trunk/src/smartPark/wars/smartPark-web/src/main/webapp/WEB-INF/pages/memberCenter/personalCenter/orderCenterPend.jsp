@@ -63,7 +63,7 @@
 		</div>
 	</div>
 	<!--***弹窗 ****************************************-->
-	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
+	
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 	<script type="text/javascript">
 	var pageSize=10;
@@ -123,7 +123,7 @@
 				"<th>操作</th>"+
 			"</tr>";
 			 $(".pend_list").append(ht);
-			console.log(record);
+			//console.log(record);
 			for(var i=0;i<record.length;i++){				
 				var status = "";
 				var button = "";
@@ -291,7 +291,7 @@ function refreshData_All_query(pageIndex,pageSize){
 });
 
 function _selectRecords(record){		
-	console.log(record);
+	//console.log(record);
 	for(var i=0;i<record.length;i++){				
 		var html= "<li data='"+record[i].genreId+"'>"+record[i].genreName+"</li>";                                                                                  
 		 $(".select-nav").append(html);	
