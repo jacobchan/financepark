@@ -7,12 +7,14 @@ import java.util.List;
 import java.util.Collection;
 
 import com.common.MemberManager.entity.MemberInformation;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode;
 
@@ -116,4 +118,18 @@ public interface PropertyservicemanagerFkcodeManager extends BaseManager{
 	public PagerRecords getPagerLikeFk(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders,String fkLikeCode,String startTime,String endTime) throws BusException;
+	/**
+	 * 获取已完成订单的totalCount    陈烨
+	 * @param conditions
+	 * @param fkLikeCode
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 * @throws BusException
+	 */
+	public List<Record> getTotalCount(
+   			Collection<Condition> conditions,
+   			String fkLikeCode,
+			String startTime,
+			String endTime)  throws BusException;
 }

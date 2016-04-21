@@ -86,18 +86,25 @@ public interface PropertyservicemanagerMoverecManager extends BaseManager{
 	 */
 	public List<Record> getMovcodemapforpage(PropertyservicemanagerMoverec o) throws BusException;
 	/**
-	 * 根据当前用户分页查询
+	 * 根据当前用户分页查询    陈烨
 	 * @return 分页对象
 	 */
 	public PagerRecords getPagerMoverec(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders) throws BusException;
 	/**
-	 * 前台取消访客
+	 * 前台取消访客  陈烨
 	 * @param moverecId
 	 * @return
 	 * @throws BusException
 	 */
     
 	public PropertyservicemanagerMoverec cancelStatus( String moverecId) throws BusException;
+	  /**
+   	 * 获取已完成订单的totalCount    陈烨
+   	 * @param conditions
+   	 * @return
+   	 * @throws BusException
+   	 */
+public List<Record> getTotalCount(Collection<Condition> conditions)  throws BusException;
 }
