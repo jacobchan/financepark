@@ -3,9 +3,11 @@
  */
 package com.common.OrderManager.service;
 
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
+import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
+import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -14,8 +16,6 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
-import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
-import com.common.OrderManager.entity.OrdermanagerUserorder;
 
 public interface OrdermanagerUserorderManager extends BaseManager{
 
@@ -327,4 +327,14 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	public List<Record> getTotalCountPend(Collection<Condition> conditions,
   			String userorderCodeLike,
   			String genId)  throws BusException;
+	
+	/**
+  	 * 获取订单记录
+  	 * @param conditions
+  	 * @return
+  	 * @throws BusException
+  	 */
+  	public PagerRecords getOrdermanagerUserorderList(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders)  throws BusException;
 }

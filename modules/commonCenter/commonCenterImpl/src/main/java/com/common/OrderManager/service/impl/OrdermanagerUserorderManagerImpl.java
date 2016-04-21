@@ -861,7 +861,21 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    		record.put("totalCount", List.size());
    		recordList.add(record);
    		return recordList;
-   	}   	 
+   	}  
+        
+    /**
+  	 * 获取订单记录
+  	 * @param conditions
+  	 * @return
+  	 * @throws BusException
+  	 */
+    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+  	public PagerRecords getOrdermanagerUserorderList(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)  throws BusException{
+    	PagerRecords pagerRecords = this.getPagerOrdermanagerUserorders(pager, conditions, orders);
+  		return pagerRecords;
+  	}  
 }
 
     
