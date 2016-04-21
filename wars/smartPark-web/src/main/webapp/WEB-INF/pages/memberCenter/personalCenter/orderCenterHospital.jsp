@@ -2,7 +2,7 @@
 				<div class="mt20 gr-txl clearfix lh30">
 							<div class="tct-select fl mr20" style="width:200px">
 								<div class="ic-select" style="background: url(<%=request.getContextPath()%>/styles/images/yqfw/down.png) no-repeat scroll right center;">
-									<p class="c-b1" id="userorderProject">请选择订单项目</p>
+									<p class="c-b1" id="userorderProject" data="">请选择订单项目</p>
 									<%--   <img src="<%=request.getContextPath()%>/styles/images/yqfw/down.png" />  --%>
 								</div>
 								<ul style="display: none;" class="select-nav" >
@@ -180,7 +180,7 @@ $('.hhf-submit.f14.fl.ml20.hospital').click(function(){
 	 var genId = $(".c-b1").attr("data");	
 	 //订单号
 	 var userorderCodeLike=$("#userorderCode").val();			 
-	 var params=['userorderCodeLike='+userorderCodeLike,'genId='+genId];
+	 var params=['userorderCode='+userorderCodeLike,'operator:userorderCode=LIKE','genId='+genId];
 	 $.ajax({
 		 url : baseUrl + "ordermanagerUserorderManager/getPagerHospital_query.json",
 			success : function(results) {
@@ -208,7 +208,7 @@ $('.hhf-submit.f14.fl.ml20.hospital').click(function(){
 		 //订单号
 		 var userorderCodeLike=$("#userorderCode").val();			 
 		
-	     var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCodeLike='+userorderCodeLike,'genId='+genId];
+	     var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCode='+userorderCodeLike,'operator:userorderCode=LIKE','genId='+genId];
 		 $.ajax({
 				url:baseUrl+'ordermanagerUserorderManager/getPagerHospital_query.json', 
 				data:params.join('&'),
