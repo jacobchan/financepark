@@ -8,6 +8,7 @@ import javax.persistence.*;
 import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.ExtentionAtrManager.entity.CarEntity;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: 预约记录
@@ -30,6 +31,26 @@ public class ReservationRecord implements Domain{
 	@Column(name = "RECORD_CODE_")
 	@Length(max=32)
 	private String recordCode;//预约单号
+	
+	@Column(name = "RECORD_COMMDITY_ID_")
+	@Length(max=36)
+	private String recordCommdityId;//预约商品ID
+	
+	@Column(name = "COMPANY_NAME_")
+	@Length(max=256)
+	private String companyName;//公司名称
+	
+	@Column(name = "COMPANY_SCALE_")
+	@Length(max=2)
+	private String companyScale;//公司规模
+	
+	@Column(name = "INCOMING_DATE_")
+	@Length(max=20)
+	private String incomingDate;//期望入驻日期
+	
+	@Column(name = "COMPANY_DISCRPTION_")
+	@Length(max=1024)
+	private String companyDiscrption;//公司简介
 
 	@Column(name = "CREATE_USER_")
 	@Length(max=36)
@@ -87,18 +108,47 @@ public class ReservationRecord implements Domain{
 	@Length(max=20)
 	private String visiteTime;//到访时间
 	
-	
+	@Transient
+	private String recordCommdityName;//预约商品名称
+
+
+
+
+	public String getRecordCommdityName() {
+		return recordCommdityName;
+	}
+
+
+
+	public void setRecordCommdityName(String recordCommdityName) {
+		this.recordCommdityName = recordCommdityName;
+	}
+
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime
+				* result
+				+ ((companyDiscrption == null) ? 0 : companyDiscrption
+						.hashCode());
+		result = prime * result
+				+ ((companyName == null) ? 0 : companyName.hashCode());
+		result = prime * result
+				+ ((companyScale == null) ? 0 : companyScale.hashCode());
 		result = prime * result
 				+ ((createTime == null) ? 0 : createTime.hashCode());
 		result = prime * result
 				+ ((createUser == null) ? 0 : createUser.hashCode());
 		result = prime * result
+				+ ((incomingDate == null) ? 0 : incomingDate.hashCode());
+		result = prime * result
 				+ ((recordCode == null) ? 0 : recordCode.hashCode());
+		result = prime
+				* result
+				+ ((recordCommdityId == null) ? 0 : recordCommdityId.hashCode());
 		result = prime * result
 				+ ((recordCustomer == null) ? 0 : recordCustomer.hashCode());
 		result = prime * result
@@ -142,6 +192,21 @@ public class ReservationRecord implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		ReservationRecord other = (ReservationRecord) obj;
+		if (companyDiscrption == null) {
+			if (other.companyDiscrption != null)
+				return false;
+		} else if (!companyDiscrption.equals(other.companyDiscrption))
+			return false;
+		if (companyName == null) {
+			if (other.companyName != null)
+				return false;
+		} else if (!companyName.equals(other.companyName))
+			return false;
+		if (companyScale == null) {
+			if (other.companyScale != null)
+				return false;
+		} else if (!companyScale.equals(other.companyScale))
+			return false;
 		if (createTime == null) {
 			if (other.createTime != null)
 				return false;
@@ -152,10 +217,20 @@ public class ReservationRecord implements Domain{
 				return false;
 		} else if (!createUser.equals(other.createUser))
 			return false;
+		if (incomingDate == null) {
+			if (other.incomingDate != null)
+				return false;
+		} else if (!incomingDate.equals(other.incomingDate))
+			return false;
 		if (recordCode == null) {
 			if (other.recordCode != null)
 				return false;
 		} else if (!recordCode.equals(other.recordCode))
+			return false;
+		if (recordCommdityId == null) {
+			if (other.recordCommdityId != null)
+				return false;
+		} else if (!recordCommdityId.equals(other.recordCommdityId))
 			return false;
 		if (recordCustomer == null) {
 			if (other.recordCustomer != null)
@@ -223,6 +298,66 @@ public class ReservationRecord implements Domain{
 		} else if (!visiteTime.equals(other.visiteTime))
 			return false;
 		return true;
+	}
+
+
+
+	public String getRecordCommdityId() {
+		return recordCommdityId;
+	}
+
+
+
+	public void setRecordCommdityId(String recordCommdityId) {
+		this.recordCommdityId = recordCommdityId;
+	}
+
+
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+
+
+	public String getCompanyScale() {
+		return companyScale;
+	}
+
+
+
+	public void setCompanyScale(String companyScale) {
+		this.companyScale = companyScale;
+	}
+
+
+
+	public String getIncomingDate() {
+		return incomingDate;
+	}
+
+
+
+	public void setIncomingDate(String incomingDate) {
+		this.incomingDate = incomingDate;
+	}
+
+
+
+	public String getCompanyDiscrption() {
+		return companyDiscrption;
+	}
+
+
+
+	public void setCompanyDiscrption(String companyDiscrption) {
+		this.companyDiscrption = companyDiscrption;
 	}
 
 

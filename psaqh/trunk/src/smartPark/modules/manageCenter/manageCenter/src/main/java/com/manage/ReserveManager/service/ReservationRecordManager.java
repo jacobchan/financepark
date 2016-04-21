@@ -37,6 +37,11 @@ public interface ReservationRecordManager extends BaseManager{
      * 根据主键查询
      */
     public ReservationRecord getReservationRecord(String id) throws BusException;
+    
+    /**
+     * 查询企业规模代码集:companyScale
+     */
+	public List<Record> getRecordsByExtendValue(String recordType) throws BusException;
 	/**
 	 * 分页查询用户
 	 * @return 分页对象
