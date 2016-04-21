@@ -20,6 +20,7 @@ public class ReferenceMap extends HashMap<String, String>{
 		this.put("#appointmentNo","");//预约编号
 		this.put("#relateProject","");//关联项目
 		this.put("#payProject","");//支付项目
+		this.put("#engineer", "");//维修工程是
 	}
 	
 	public ReferenceMap(String params){
