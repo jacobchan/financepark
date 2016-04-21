@@ -107,8 +107,6 @@ function enType(){
 }
 
 $(function() {
-	var rzId=$("#financingRe").html();
-	roomAddress(rzId);
 	enType();
   	var editor = CKEDITOR.replace('editorproductDiscriptio');
   	editor.updateElement();
@@ -116,7 +114,48 @@ $(function() {
 	    var len = getStrLength(this.value);
 	    $("#currentCount").html(len);
 	});
+	
+	$.ajax({
+		url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
+		success:function(result){
+			if(result&&result.record){
+				$("#financingRe").html(result.record.companyId);
+				$.ajax({
+					url:baseUrl+'/enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json',
+					data : ['rzId='+result.record.companyId].join('&'),
+					success:function(result){
+						if(result&&result.record){
+							//$("#rzLogo").attr("src","http://localhost:9088/filestore/"+result.record.rzLogo);
+							$("#headImg").attr("src",cenUrl+"common/uploadImage.html?repository=/swfupload&path="+result.record.rzLogo+"&method=show");
+							$("#financingRe").html(result.record.rzId);
+							$("#rzName").val(result.record.rzName);
+	    					$("#rzUrl").val(result.record.rzUrl);
+	    					$("#rzRemark").val(result.record.rzRemark);
+	    					$("#enTypeId").val(result.record.enTypeId.enTypeId);
+	    					$("#enTypeName").html(result.record.enTypeId.enTypeName);
+	    					$("#roomId").val(result.record.roomId.roomId);
+	    					$("#roomAddress").html(result.record.roomId.roomAddress);
+	    					$("#editorproductDiscriptio").val(result.record.productDiscriptio);
+	    					editor.setData(result.record.productDiscriptio);
+	    					$("#currentCount").html(getStrLength(result.record.rzRemark));
+	    					roomAddress(result.record.rzId);
+	    					var rImages = result.record.rzImages;
+	    					var strs= new Array(); //定义一数组
+	    					strs = rImages.split(","); //字符分割
+	    					for (var i=0;i<strs.length ;i++ ){
+	    						var src = cenUrl+"common/uploadImage.html?repository=/swfupload&path="+strs[i]+"&method=show";
+	    						var html = '<img id="qiyeheadImg-'+src+'" src="'+src+'" width="220" height="168"/>';				
+	    						$('#qiyeheadImg').after(html);
+	    					} 
+						}
+					}
+				});
+			}
+		}
+	});
+	
   	$(".save_btn").click(function(){
+  		var rzId=$("#financingRe").html();
   		var rzLogo="";
   		var roomId=$("#roomId").val();
   		var rzName=$("#rzName").val();
@@ -138,33 +177,47 @@ $(function() {
                	if ("0"==response.status){
                		rzLogo = response.fileUrl[0];
                		if(qiyefileCount>0){
-            			//调用实例对象的start()方法开始上传文件
-            			qiyeuploader.start(); 
-            			qiyeuploader.bind('FileUploaded',function(up, files,info) {
-            				var responseqy = $.parseJSON(info.response);
-                           	if ("0"==responseqy.status){
-                           		rzImages = responseqy.fileUrl[0];
-                           		submit(rzId,rzLogo,roomId,rzName,rzRemark,rzUrl,enTypeId,productDiscriptio,rzImages);
-                           	}
-            			});
-            		}
-               	}
+        				//调用实例对象的start()方法开始上传文件
+        				qiyeuploader.start(); 
+        				var i = 0;
+        				qiyeuploader.bind('FileUploaded',function(up, files,info) {
+        					i++;
+        					var response = $.parseJSON(info.response);
+        	               	if ("0"==response.status){
+        	               		rzImages = rzImages+response.fileUrl[0];
+        	               		if(i == qiyefileCount){
+        	               			submit(rzId,rzLogo,roomId,rzName,rzRemark,rzUrl,enTypeId,productDiscriptio,rzImages);
+        	               		}else{
+        	               			rzImages = rzImages+',';
+        	               		};
+        	               	};
+        				});
+        			}else{
+        				submit(rzId,rzLogo,roomId,rzName,rzRemark,rzUrl,enTypeId,productDiscriptio,rzImages);
+        			}
+               	};
 			});
 		}else{
 			if(qiyefileCount>0){
 				//调用实例对象的start()方法开始上传文件
 				qiyeuploader.start(); 
+				var i = 0;
 				qiyeuploader.bind('FileUploaded',function(up, files,info) {
+					i++;
 					var response = $.parseJSON(info.response);
 	               	if ("0"==response.status){
-	               		rzImages = response.fileUrl[0];
-	               		submit(rzId,rzLogo,roomId,rzName,rzRemark,rzUrl,enTypeId,productDiscriptio,rzImages);
-	               	}
+	               		rzImages = rzImages+response.fileUrl[0];
+	               		if(i == qiyefileCount){
+	               			submit(rzId,rzLogo,roomId,rzName,rzRemark,rzUrl,enTypeId,productDiscriptio,rzImages);
+	               		}else{
+	               			rzImages = rzImages+',';
+	               		};
+	               	};
 				});
 			}else{
 				submit(rzId,rzLogo,roomId,rzName,rzRemark,rzUrl,enTypeId,productDiscriptio,rzImages);
 			}
-		}
+		};
 	});
   	$("#moreul > li:eq(0)").addClass("active");
 });
