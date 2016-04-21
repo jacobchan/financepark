@@ -5,15 +5,21 @@ package com.manage.ReserveManager.service.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.common.ExtentionAtrManager.service.ExtentionAtrManager;
+import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.service.MemberInformationManager;
 import com.common.purchasingManager.dao.PurchasingmanagerCommodityDao;
 import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
 import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
+import com.gsoft.framework.codemap.entity.Codeitem;
+import com.gsoft.framework.codemap.service.CodeitemManager;
 import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -56,6 +62,12 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 	@Autowired
 	private ExtentionAtrManager extentionAtrManager;
 	
+	@Autowired
+	private MemberInformationManager memberInformationManager;
+	
+	@Autowired 
+	private CodeitemManager codeitemManager;
+	
 	
     /**
      * 查询列表
@@ -80,19 +92,64 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
     public ReservationRecord getReservationRecord(@ServiceParam(name="recordId") String id)  throws BusException{
     	return reservationRecordDao.get(id);
     }
+    
+    /**
+     * 查询企业规模代码集:companyScale
+     */
+    @EsbServiceMapping
+	public List<Record> getRecordsByExtendValue(@ServiceParam(name="recordType") String recordType) throws BusException{
+    	List<Record> recordList=new ArrayList<Record>();
+    	if(recordType !=null){
+    		Collection<Condition> condition =  new ArrayList<Condition>();
+    		Collection<Order> order = new ArrayList<Order>();
+    		order.add(ConditionUtils.getOrder("itemValue", true));
+    		condition.add(ConditionUtils.getCondition("codemap.code", Condition.EQUALS,recordType));
+    		List<Codeitem> list = codeitemManager.getCodeitems(condition, null);
+    		for(int i=0;i<list.size();i++){
+    			Record record = new Record();
+    			record.put("itemValue", list.get(i).getItemValue());
+    			record.put("itemName", list.get(i).getItemCaption());
+    			recordList.add(record);
+    		}
+    	}
+    	return recordList;
+    }
+
 	
 	@EsbServiceMapping
 	public PagerRecords getPagerReservationRecords(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=ReservationRecord.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
 		PagerRecords pagerRecords = reservationRecordDao.findByPager(pager, conditions, orders);
+		@SuppressWarnings("unchecked")
+		List<ReservationRecord> list=pagerRecords.getRecords();
+		for(ReservationRecord r:list){
+			//获取预约商品名称
+			String commodityId=r.getRecordCommdityId();
+			if(commodityId !=null){
+				PurchasingmanagerCommodity p=purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
+				r.setRecordCommdityName(p.getCommodityTitle());;
+			}
+		}
 		return pagerRecords;
 	}
     /**
      * 保存对象
      */
-	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "recordMemberId", pubProperty = "userId")})
     public ReservationRecord saveReservationRecord(ReservationRecord o) throws BusException{
+		MemberInformation mem=new MemberInformation();
+		if(o.getRecordMemberId() != null){
+	    	mem=memberInformationManager.getMemberInformation(o.getRecordMemberId());
+	    	o.setRecordMemberId(mem.getMemberId());
+	    	if(StringUtils.isEmpty(o.getVisiteTel())){
+	    		o.setVisiteTel(mem.getMemberPhoneNumber());
+	    	}
+	    	if(StringUtils.isEmpty(o.getVisiteName())){
+	    		o.setVisiteName(mem.getMemberName());
+	    	}
+		}
+		
     	String recordId = o.getRecordId();
     	boolean isUpdate = StringUtils.isNotEmpty(recordId);
     	if(isUpdate){//修改
@@ -100,16 +157,18 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
     		r.setRecordMemberId(o.getRecordMemberId());
     		r.setRecordType(o.getRecordType());
     		r.setVisiteDate(o.getVisiteDate());
-    		r.setUpdateUser(o.getUpdateUser());
+    		r.setUpdateUser(o.getRecordMemberId());
     		r.setVisiteName(o.getVisiteName());
     		r.setVisiteTel(o.getVisiteTel());
     		r.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return reservationRecordDao.save(r);
     	}else{//新增
     		o.setRecordStatus("01");//待受理
-    		o.setRecordType("04");//04：众创空间
     		o.setRecordCode(BizCodeUtil.getInstance().getBizCodeDate("YYDH"));//生成预约单号
-        	o.setCreateUser(o.getUpdateUser());
+    		if(StringUtils.isEmpty(o.getVisiteDate())){
+    			o.setVisiteDate(o.getIncomingDate());
+    		}
+        	o.setCreateUser(o.getRecordMemberId());
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return reservationRecordDao.save(o);
