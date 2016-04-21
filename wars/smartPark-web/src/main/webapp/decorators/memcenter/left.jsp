@@ -25,7 +25,7 @@
 			<dd><a href="grzx16.html">我的收益</a></dd>
 			<dt>极速采购</dt>
 			<dd>
-				<a href="<%=request.getContextPath()%>/member/memberCenter/nationalMarketing/myOrder.html">我的订单 <i class="fa fa-angle-down ml10" style="font-size:16px"></i></a>
+				<a href="<%=request.getContextPath()%>/member/memberCenter/nationalMarketing/myOrder.html">我的订单 </a>
 				<ul class="undis">
 					<li><a href="grzx18-2.html">退货</a></li>
 					<li class="active"><a href="grzx18-3.html">评价晒单</a></li>
