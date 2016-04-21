@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.common.MemberManager.service.MemberInformationManager;
 import com.common.OrderManager.dao.OrdermanagerUserorderDao;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -185,7 +186,7 @@ public class PropertyservicemanagerChargeManagerImpl extends BaseManagerImpl imp
 		return pagerRecords;
 	}
     /**
-   	 * 根据当前用户分页查询  模糊查询
+   	 * 根据当前用户分页查询  模糊查询         chenye
    	 * @return 分页对象
    	 */
        @EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",operator=Condition.EQUALS,pubProperty="userId")})
@@ -201,4 +202,25 @@ public class PropertyservicemanagerChargeManagerImpl extends BaseManagerImpl imp
        	PagerRecords pagerRecords = propertyservicemanagerChargeDao.findByPager(pager, conditions, orders);
    		return pagerRecords;
    	}
+       /**
+	   	 * 获取已完成订单的totalCount    陈烨
+	   	 * @param conditions
+	   	 * @return
+	   	 * @throws BusException
+	   	 */
+	       @EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	   	public List<Record> getTotalCount(
+	   			@ConditionCollection(domainClazz=PropertyservicemanagerBx.class) Collection<Condition> conditions,
+	   			@ServiceParam(name="LikeuserorderCode") String LikeuserorderCode,
+				@ServiceParam(name="startTime") String startTime,
+				@ServiceParam(name="endTime") String endTime)  throws BusException{
+	   		List<Record> recordList=new ArrayList<Record>();
+	   		conditions.add(ConditionUtils.getCondition("userorder.userorderCode", Condition.LIKE, LikeuserorderCode));		
+			conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+	    	List<PropertyservicemanagerCharge> List = this.getPropertyservicemanagerCharges(conditions, null);
+	   		Record record = new Record();
+	   		record.put("totalCount", List.size());
+	   		recordList.add(record);
+	   		return recordList;
+	   	}   			
 }
