@@ -43,7 +43,7 @@
 		</div>
 	</div>
 	<!--***弹窗 ****************************************-->
-	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
+	
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 	<script type="text/javascript">
 	var pageSize=10;
