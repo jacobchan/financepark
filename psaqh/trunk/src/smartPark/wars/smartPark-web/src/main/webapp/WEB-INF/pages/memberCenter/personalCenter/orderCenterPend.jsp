@@ -183,8 +183,7 @@
 						if(result&&result.record){
 							//$(".bg-tanc.m1").close();
 							//$(".toast").show();
-							close("取消成功!");						
-							
+							close("取消成功!");													
 						}
 					}
 				});
@@ -193,7 +192,6 @@
 	$(".tc-close").click(function(){	
 	$(".bg-tanc.m1").hide();
 	});
-	
 	//根据订单项目 订单号模糊查询 待处理订单
 	$('.hhf-submit.f14.fl.ml20.pend').click(function(){	
 		//订单类型
@@ -202,7 +200,7 @@
 		 var userorderCodeLike=$("#userorderCode").val();			 
 		 var params=['userorderCodeLike='+userorderCodeLike,'genId='+genId];
 		 $.ajax({
-			 url:baseUrl + "ordermanagerUserorderManager/getTotalCountPend.json",
+			 url:baseUrl + "ordermanagerUserorderManager/getPagerPend_query.json",
 				success : function(results) {
 									var totalCount=results.records[0].totalCount;
 									pageCount = Math.ceil(totalCount / pageSize);//页数
@@ -226,8 +224,10 @@ function refreshData_pend_query(pageIndex,pageSize){
 	//订单类型
 	 var genId = $(".c-b1").attr("data");	
 	 //订单号
-	 var userorderCodeLike=$("#userorderCode").val();					
-		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCodeLike='+userorderCodeLike,'genId='+genId];
+	 //var userorderCodeLike=$("#userorderCode").val();	
+	 var userorderCode=$("#userorderCode").val();	
+	 var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCode='+userorderCode,'operator:userorderCode=LIKE','genId='+genId];
+		//var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCodeLike='+userorderCodeLike,'genId='+genId];
 		$.ajax({
 			url:baseUrl+'ordermanagerUserorderManager/getPagerPend_query.json',
 			data:params.join('&'),
@@ -240,10 +240,9 @@ function refreshData_pend_query(pageIndex,pageSize){
 	} 
 //根据订单项目 订单号模糊   查询 全部订单
 $('.hhf-submit.f14.fl.ml20.all').click(function(){	
-	 var userorderProjecta=$("#userorderProject").text();		
-	 //alert(userorderProjecta);
+	var genId = $(".c-b1").attr("data");		
 	 var userorderCodeLike=$("#userorderCode").val();			 
-	 var params=['userorderProjecta='+userorderProjecta,'userorderCodeLike='+userorderCodeLike];
+	 var params=['genId='+genId,'userorderCodeLike='+userorderCodeLike];
 	 $.ajax({
 		 url:baseUrl + "ordermanagerUserorderManager/getTotalCount.json",
 			success : function(results) {
@@ -262,16 +261,14 @@ $('.hhf-submit.f14.fl.ml20.all').click(function(){
 								       refreshData_All_query(p,pageSize);
 								    }
 								});			
-			
 			}
 		}); 		
 });
 function refreshData_All_query(pageIndex,pageSize){
-var userorderProjecta=$("#userorderProject").text();	
-//alert(userorderProjecta);
-var userorderCodeLike=$("#userorderCode").val();	
-	//var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
-	var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCodeLike='+userorderCodeLike,'userorderProjecta='+userorderProjecta];
+	var genId = $(".c-b1").attr("data");	
+    var userorderCodeLike=$("#userorderCode").val();	
+	
+	var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCode='+userorderCodeLike,'operator:userorderCode=LIKE','genId='+genId];
 	$.ajax({
 		url:baseUrl+'ordermanagerUserorderManager/getPagerAll.json',
 		data:params.join('&'),
