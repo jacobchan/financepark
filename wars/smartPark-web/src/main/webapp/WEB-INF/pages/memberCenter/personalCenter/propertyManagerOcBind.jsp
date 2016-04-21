@@ -27,9 +27,8 @@
 		$(function(){
 			$.ajax({
 			  url:baseUrl+'propertyservicemanagerOcManager/getPropertyservicemanagerOcListByLoginUser.json',
-				success:function(result){
-					
-					console.log(result.records);
+				success:function(result){				
+					//console.log(result.records);
 					if(result&&result.records){					
 						_parseRecords(result.records);						
 					}
