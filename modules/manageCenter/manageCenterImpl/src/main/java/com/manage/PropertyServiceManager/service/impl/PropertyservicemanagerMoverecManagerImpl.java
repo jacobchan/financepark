@@ -235,7 +235,7 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
 		return recordList;
 	}
 	 /**
-		 * 根据当前用户分页查询
+		 * 根据当前用户分页查询    陈烨
 		 * @return 分页对象
 		 */
 	    @EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",operator=Condition.EQUALS,pubProperty="userId")})
@@ -248,7 +248,7 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
 		}
 	    /**
 		 * 前台取消访客
-		 * @param moverecId
+		 * @param moverecId  陈烨
 		 * @return
 		 * @throws BusException
 		 */
@@ -262,4 +262,21 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
 	    	PropertyservicemanagerMoverec p=propertyservicemanagerMoverecDao.save(moverec);
 			return p;	    	    		    	
 	    }
+	    /**
+	   	 * 获取已完成订单的totalCount    陈烨
+	   	 * @param conditions
+	   	 * @return
+	   	 * @throws BusException
+	   	 */
+	       @EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	   	public List<Record> getTotalCount(
+	   			@ConditionCollection(domainClazz=PropertyservicemanagerMoverec.class) Collection<Condition> conditions
+	   			)  throws BusException{
+	   		List<Record> recordList=new ArrayList<Record>();
+	   		List<PropertyservicemanagerMoverec> List = this.getPropertyservicemanagerMoverecs(conditions, null);
+	   		Record record = new Record();
+	   		record.put("totalCount", List.size());
+	   		recordList.add(record);
+	   		return recordList;
+	   	}   			
 }
