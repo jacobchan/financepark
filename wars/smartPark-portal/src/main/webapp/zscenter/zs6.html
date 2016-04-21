@@ -34,9 +34,9 @@
 				});
 			})
 			$(document).on('click', '.select-nav li', function() {
-				$(".ic-select").find("p").text($(this).text());
+				$(this).parent().prev(".ic-select").find("p").text($(this).text());
 				$(this).parent().hide();
-				$(".ic-select").find("p").attr("data-val",$(this).attr("data-val"));
+				$(this).parent().prev(".ic-select").find("p").attr("data-val",$(this).attr("data-val"));
 			})
 			$(function(){
 				$(".space-num .num-reduce").click(function(){
