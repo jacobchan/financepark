@@ -239,18 +239,7 @@
 		
 		function openPage(obj){
 			var params = ['documentId='+obj.id];
-			$.youi.ajaxUtils.ajax({
-				url: baseUrl+"activityDocumentManager/getActivityDocument.json",
-				data:params.join('&'),
-				jsonp:'data:jsonp',
-				dataType:'jsonp',
-				success:function(results){
-					if(results&&results.record){
-						$(".documentName").html(results.record.documentName.split('.')[0]);
-					}
-				}
-			});
-			
+			$(".documentName").html($(obj).find("p").text());
 			//变更文档展示
 			$.youi.ajaxUtils.ajax({
 				url:baseUrl+'/activityDocumentManager/getViewDocument.json',
