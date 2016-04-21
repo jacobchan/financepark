@@ -43,7 +43,7 @@ public class MessageTempCode {
 	 */
 	public static final String MSG_USER_1 = "0301";
 	/**
-	 * 尊敬的用户#user你好，你的物业报修【订单号：#orderNo】已受理，我们的工作人员将前往维修，为你服务的专业工程师联系方式：张伟伟【手机:#phone】，感谢你对富春硅谷的支持！
+	 * 尊敬的用户#user你好，你的物业报修【订单号：#orderNo】已受理，我们的工作人员将前往维修，为你服务的专业工程师联系方式：#engineer【手机:#phone】，感谢你对富春硅谷的支持！
 	 */
 	public static final String MSG_USER_2 = "0302";
 	/**
