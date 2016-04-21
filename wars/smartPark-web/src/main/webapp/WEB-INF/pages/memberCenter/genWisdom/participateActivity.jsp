@@ -33,8 +33,13 @@
 				success:function(result){
 					console.log(result.records);
 					if(result&&result.records){
-						_parseRecords(result.records);
-						_assignment_applyStatus();
+						if(result.records.length>0){
+							_parseRecords(result.records);
+							_assignment_applyStatus();
+						}else{
+							 $(".clearfix .czh-knowledge").append("<p><h3>未找到相关记录!</h3></p>");
+							 $(".fr.page-list-a").empty();
+						}
 					}
 				}
 			});
