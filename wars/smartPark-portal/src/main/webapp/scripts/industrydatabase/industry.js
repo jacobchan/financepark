@@ -69,12 +69,22 @@ $(".lt-circle a").click(function(){
     }
 });
 $(".lt-page .lp-right").click(function(){
-    lb_two_right();
+	if(n>0){
+		lb_two_right();
+	}else{
+		return false;
+	}
+    
 });
 $(".lt-page .lp-left").click(function(){
-    lb_two_left();
+    if(n>0){
+		lb_two_left();
+	}else{
+		return false;
+	}
 });
-$(".open-d").click(function(){
+$(".open-d").click(function(e){
+	e.stopPropagation();
 	$(".dialog-con").toggle();
 });
 //保存评论
@@ -404,4 +414,8 @@ $(document).ready(function() {
 	//		}
 	//	}
 	//});
+});
+
+$("body").bind("click", function(){
+    $(".dialog-con").hide();
 });
