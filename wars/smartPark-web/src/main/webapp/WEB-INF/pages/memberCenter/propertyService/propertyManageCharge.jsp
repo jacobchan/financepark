@@ -97,7 +97,7 @@
 	$(function () {		
 		//分页页码显示
 		 $.ajax({
-			url:serviceURL, 
+			url:baseUrl+'propertyservicemanagerChargeManager/getTotalCount.json', 
 			success:function(results){	
 							pageCount=Math.ceil(results.totalCount/pageSize);//页数
 							
@@ -186,7 +186,7 @@
 		var endTime=$("#endTime").val(); 			
 		var params = ['LikeuserorderCode='+userorderCode,'startTime='+startTime,'endTime='+endTime];
 		$.ajax({
-			url:baseUrl+'propertyservicemanagerBxManager/getPagerLikeBx.json',
+			url:baseUrl+'propertyservicemanagerChargeManager/getTotalCount.json',
 			data:params.join('&'),
 			success:function(results){	
 				pageCount=Math.ceil(results.totalCount/pageSize);//页数				
