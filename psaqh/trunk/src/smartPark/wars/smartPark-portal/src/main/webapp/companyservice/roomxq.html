@@ -280,7 +280,12 @@ function GetRequest() {
     				$("#resoIds").empty();
     				var tr=0;
     				for(var i=0; i<records.length; i++){
-    					var month=$(".fc-left").find('h2').html().substring(5,6);
+    					//修改前写法：var month=$(".fc-left").find('h2').html().substring(5,6)
+    					// 这里在没有数据的时候一定会报空指针错误，导致原本脚本控制的样式出现问题
+    					//暂时以下面方法简单判断
+    					var htmlObj = $(".fc-left").find('h2').html();
+    					var month=htmlObj?htmlObj.substring(5,6):0;
+
     					$("#enteringName").val(records[0].name);
     					$("#enteringTelephone").val(records[0].phone);
     					if((Number(records[i].resoDate.substring(5,7)))==Number(month)){
