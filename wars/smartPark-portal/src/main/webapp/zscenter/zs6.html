@@ -24,18 +24,38 @@
 			//设置黄色的皮肤
 			laydateObj.skin('yellow');
 			
+			var laydateO = laydate({
+			    elem: '#codeDate', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+			    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+			    
+			});
+			//设置黄色的皮肤
+			laydateO.skin('yellow');
+			
 		
 			$(".ic-select").click(function(){
 				$(this).next(".select-nav").toggle();
 				var recordType='0401';//0401:创立方
-				$('.select-nav').select({
+				$(this).next(".select-nav").select({
 					template:'<li data-val={itemValue}>{itemName}</li>',
 					jsonpSrc:baseUrl+"reservationRecordManager/getRecordsByRecordType.json?recordType="+recordType
 				});
 			})
+			
+			$(".ic-select1").click(function(){
+				var companyScale='companyScale';//companyScale:企业规模人数
+				$(this).next(".select-nav").toggle();
+				$(this).next(".select-nav").select({
+					template:'<li data-val={itemValue}>{itemName}</li>',
+					jsonpSrc:baseUrl+"reservationRecordManager/getRecordsByExtendValue.json?recordType="+companyScale
+				});
+				
+			})
 			$(document).on('click', '.select-nav li', function() {
-				$(this).parent().prev(".ic-select").find("p").text($(this).text());
+				$(this).parent().prev().find("p").text($(this).text());
 				$(this).parent().hide();
+				$("#commodityId").val($(this).attr("data-val"));
+				$("#companyScale").val($(this).attr("data-val"));
 				$(this).parent().prev(".ic-select").find("p").attr("data-val",$(this).attr("data-val"));
 			})
 			$(function(){
@@ -64,16 +84,14 @@
 	        })
 	        
 			$(".now-btn").click(function(){
-				var recordType='04';//04:众创空间
-				var recordMemberId=$("#fkcodeComp").text();
-				if(recordMemberId=="请选择项目"){
-					recordMemberId="";
-				}
+				var recordType='01';//01:众创空间
+			//	var recordMemberId=$("#fkcodeComp").text();
+				var recordCommdityId = $("#commodityId").val();
 				var visiteTime=$("#lf_time").val();
 				var lfName=$("#fkcodeName").val();
 				var lfTel=$("#fkcodeTelephone").val();
 				var visiteDate=$("#fkcodeDate").val();
-				if(recordMemberId == null||recordMemberId==""){
+				if(recordCommdityId == null||recordCommdityId==""){
 		    		clearInterval(timer);
 		    		$("#msg").text("请选择参观项目");
 	    	        $(".toast").show();
@@ -127,7 +145,7 @@
 					return;
 				}
                
-				var params = ['visiteDate='+visiteDate,'visiteName='+lfName,'visiteTel='+lfTel,'visiteTime='+visiteTime,'recordType='+recordType,'recordMemberId='+recordMemberId];
+				var params = ['visiteDate='+visiteDate,'visiteName='+lfName,'visiteTel='+lfTel,'visiteTime='+visiteTime,'recordType='+recordType,'recordCommdityId='+recordCommdityId];
 				var serviceURL = baseUrl+"reservationRecordManager/saveReservationRecord.json";
 				//公共方法
 				$.youi.ajaxUtils.ajax({
@@ -162,6 +180,68 @@
 				
 				
 			});
+			
+			$(".ib-btn.tc").click(function(){
+				var recordType='02';//02:工位
+				var recordCommdityId = $("#recordCommdityId").val();
+				var companyName=$("#companyName").val();
+				var incomingDate=$("#codeDate").val();
+				var companyScale=$("#companyScale").val();
+				var companyDiscrption=$("#companyDiscrption").val();
+				if(companyName == null||companyName==""){
+		    		clearInterval(timer);
+		    		$("#msg").text("请填写企业名称");
+	    	        $(".toast").show();
+	    	        pltime=2;
+	    	        timer=setInterval("closeTanc()",1000);
+					return;
+				}
+				if(companyScale ==null|| companyScale==""){
+					clearInterval(timer);
+					$("#msg").text("请选择企业规模");
+	    	        $(".toast").show();
+	    	        pltime=2;
+	    	        timer=setInterval("closeTanc()",1000);
+					return;
+				}
+				if(incomingDate ==null|| incomingDate==""){
+					clearInterval(timer);
+					$("#msg").text("请填写期望入驻日期");
+	    	        $(".toast").show();
+	    	        pltime=2;
+	    	        timer=setInterval("closeTanc()",1000);
+					return;
+				}
+				if(companyDiscrption ==null|| companyDiscrption==""){
+					clearInterval(timer);
+					$("#msg").text("请填写企业简介");
+	    	        $(".toast").show();
+	    	        pltime=2;
+	    	        timer=setInterval("closeTanc()",1000);
+					return;
+				}
+               
+				var params = ['recordCommdityId='+recordCommdityId,'companyName='+companyName,'incomingDate='+incomingDate,'companyScale='+companyScale,'recordType='+recordType,'companyDiscrption='+companyDiscrption];
+				var serviceURL = baseUrl+"reservationRecordManager/saveReservationRecord.json";
+				//公共方法
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					data:params.join('&'),
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(result){
+						if(result&&result.record){
+								$(".bg-tanc.m1").hide();
+								$(".bg-tanc.m3").show();
+								$('#ti-m1').text('5');
+								a=5;
+								timer1=setInterval("jump1()",1000);
+						}
+					}
+				});
+				
+			});
+			
 	        $(".tc-close").click(function(){
 	        	clearInterval(timer1);
 				$(".bg-tanc.m1").hide();
@@ -198,7 +278,16 @@
 				}		
 			}
 			
-			function reserve() {
+			function reserve(id) {
+				if (!isLogin) {
+					clearInterval(timer);
+					$("#msg").text("请登录后重试！");
+		            $(".toast").show();
+		            pltime=2;
+		            timer=setInterval("closeTanc()",1000);
+				 	return;
+				}
+				$("#recordCommdityId").val(id);
 		    	$(".bg-tanc.m1").show();
 			}
 			
@@ -240,7 +329,7 @@
 				for(var i=0;i<record.length;i++){
 					   //http://localhost:8088/smartPark-web/ imageUrl
 						var html="<li><div class='mb10'><img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].commodityImage+"&method=show' border='0'></div>"+
-						"<input type='text' placeholder='活动卡位"+record[i].commodityPrice+ "元/月' disabled='disabled' style='cursor:default'><a style='cursor:pointer;' onclick='reserve()' class='sc-yy'>预约</a></li>";
+						"<input type='text' placeholder='活动卡位"+record[i].commodityPrice+ "元/月' disabled='disabled' style='cursor:default'><a style='cursor:pointer;' onclick='reserve(\""+record[i].commodityId+"\")' class='sc-yy'>预约</a></li>";
 						 $(".space-centent ul").append(html);
 						 
 				}
@@ -304,6 +393,7 @@
 				<div class="sc-w960">
 					<h3 class="sw-h3">预约参与</h3>
 					<div class="input-con">
+					   <input type="hidden" id="commodityId"/>
 						<div class="select-text">
 							<div class="ic-select">
 								<p id="fkcodeComp">请选择项目</p>
@@ -502,32 +592,35 @@
 				</colgroup>
 				<tr>
 					<td valign="top">企业名称</td>
-					<td><input type="text" style="width:300px"></td>
+					<td><input type="hidden" id="recordCommdityId"/>
+					<input type="hidden" id="companyScale"/>
+					<input id="companyName" type="text" style="width:300px"></td>
 				</tr>
 				<tr>
 					<td valign="top">企业规模</td>
 					<td>
 						<div class="tct-select mr20" style="width:150px;">
-							<div class="ic-select" style="background: transparent url(../styles/images/yqfw/down.png) no-repeat scroll right center;">
+							<div class="ic-select1" style="background: transparent url(../styles/images/yqfw/down.png) no-repeat scroll right center;">
 								<p class="c-b1">&nbsp;</p>
 							</div>
 							<ul style="display: none;" class="select-nav">
-								<li>0-10人</li>
+								<!-- <li>0-10人</li>
 								<li>10-30人</li>
-								<li>30人以上</li>
+								<li>30人以上</li> -->
 							</ul>
 						</div>
 					</td>
 				</tr>
 				
 				<tr>
-					<td valign="top">期望进驻<br/>日期</td>
-					<td><input type="text" placeholder="期望进驻日期" id="fkcodeDate"></td>
+					<td valign="top">期望进驻日期</td>
+					<td>
+							<input type="text" placeholder="期望进驻日期" id="codeDate"></td>
 					<!-- <td><input type="text" placeholder="期望进驻日期" id="fkcodeDate"></td> -->
 				</tr>
 				<tr>
 					<td valign="top">业务简介</td>
-					<td><textarea style="height:140px;"></textarea></td>
+					<td><textarea style="height:140px;" id="companyDiscrption"></textarea></td>
 				</tr>
 				<tr>
 					<td></td>
