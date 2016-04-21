@@ -5,34 +5,20 @@ package com.common.OrderManager.service.impl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gsoft.framework.codemap.dao.CodeitemDao;
-import com.gsoft.framework.codemap.entity.Codeitem;
-import com.gsoft.framework.core.dataobj.Record;
-import com.gsoft.framework.core.exception.BusException;
-import com.gsoft.framework.core.orm.Condition;
-import com.gsoft.framework.core.orm.Order;
-import com.gsoft.framework.core.orm.Pager;
-import com.gsoft.framework.core.orm.PagerRecords;
-import com.gsoft.framework.esb.annotation.*;
-import com.gsoft.framework.util.ConditionUtils;
-import com.gsoft.framework.util.DateUtils;
-import com.gsoft.framework.util.StringUtils;
-import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-import com.gsoft.utils.BizCodeUtil;
 import com.common.ExtentionAtrManager.service.ExtentionAtrManager;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
+import com.common.OrderManager.dao.OrdermanagerUserorderDao;
 import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
 import com.common.OrderManager.entity.OrdermanagerOrderprojecttypeValue;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
-import com.common.OrderManager.dao.OrdermanagerUserorderDao;
 import com.common.OrderManager.service.OrdermanagerCommoditydetailManager;
 import com.common.OrderManager.service.OrdermanagerOrderprojecttypeValueManager;
 import com.common.OrderManager.service.OrdermanagerUserorderManager;
@@ -42,6 +28,25 @@ import com.common.purchasingManager.entity.PurchasingmanagerGenreProperty;
 import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
 import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
 import com.common.purchasingManager.service.PurchasingmanagerGenrePropertyManager;
+import com.gsoft.framework.codemap.dao.CodeitemDao;
+import com.gsoft.framework.codemap.entity.Codeitem;
+import com.gsoft.framework.core.dataobj.Record;
+import com.gsoft.framework.core.exception.BusException;
+import com.gsoft.framework.core.orm.Condition;
+import com.gsoft.framework.core.orm.Order;
+import com.gsoft.framework.core.orm.Pager;
+import com.gsoft.framework.core.orm.PagerRecords;
+import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.DomainCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.PubCondition;
+import com.gsoft.framework.esb.annotation.ServiceParam;
+import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.StringUtils;
+import com.gsoft.utils.BizCodeUtil;
 
 @Service("ordermanagerUserorderManager")
 @Transactional
@@ -161,6 +166,35 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     		return ordermanagerUserorderDao.save(o);
     	}
     }
+	
+	/**
+	 * 分页查询用户订单表
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	@EsbServiceMapping
+	public PagerRecords getUserorder(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders,
+			@ServiceParam(name="genreCode") String genreCode) throws BusException{
+		//查询商品类别
+		Collection<Condition> conditionP = new ArrayList<Condition>();
+		conditionP.add(ConditionUtils.getCondition("genreCode",Condition.EQUALS,genreCode));
+		List<PurchasingmanagerGenre> purchasingmanagerGenreList=purchasingmanagerGenreManager.getPurchasingmanagerGenres(conditionP, null);
+		//查询用户订单表(where=订单项目,商品类别ID)
+		if(purchasingmanagerGenreList.size()>0){
+			System.out.println(purchasingmanagerGenreList.get(0).getGenreId());
+			System.out.println(purchasingmanagerGenreList.get(0).getGenreName());
+			conditions.add(ConditionUtils.getCondition("genreId",Condition.EQUALS,purchasingmanagerGenreList.get(0)));
+			conditions.add(ConditionUtils.getCondition("userorderProject",Condition.EQUALS,purchasingmanagerGenreList.get(0).getGenreName()));
+		}
+		PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
+	
 	/**
      * 修改订单
      */
