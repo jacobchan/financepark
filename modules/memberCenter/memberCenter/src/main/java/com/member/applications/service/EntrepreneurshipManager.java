@@ -14,6 +14,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.member.applications.entity.Entrepreneurship;
 
@@ -100,5 +101,10 @@ public interface EntrepreneurshipManager extends BaseManager{
      * 取消操作
      * @param id
      */
-    public Entrepreneurship goCancel(@ServiceParam(name="id") String id) throws BusException;
+    public Entrepreneurship goCancel(String id) throws BusException;
+    
+    /**
+     * 替换后台数据列表中的导师类型
+     */
+    public String getTeacherTypeName(String id) throws BusException;
 }
