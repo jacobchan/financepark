@@ -413,8 +413,12 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 					@ServiceParam(name="startTime") String startTime,
 					@ServiceParam(name="endTime") String endTime)  throws BusException{
 		   		List<Record> recordList=new ArrayList<Record>();
-		   		conditions.add(ConditionUtils.getCondition("bxCode", Condition.LIKE, bxLikeCode));				
+		   		if(StringUtils.isNotEmpty(bxLikeCode)){
+		   		conditions.add(ConditionUtils.getCondition("bxCode", Condition.LIKE, bxLikeCode));	
+		   		}	
+		   		/*if(StringUtils.isNotEmpty(startTime)||StringUtils.isEmpty(endTime)){		
 				conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+		   		}*/		   		
 		    	List<PropertyservicemanagerBx> List = this.getPropertyservicemanagerBxs(conditions, null);
 		   		Record record = new Record();
 		   		record.put("totalCount", List.size());
