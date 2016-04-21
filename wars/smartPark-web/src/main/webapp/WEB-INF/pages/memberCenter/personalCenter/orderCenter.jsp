@@ -73,7 +73,32 @@
 				window.location.href=cenUrl+"member/memberCenter/personalCenter/adsenseOrderDetails.html?userorderCode="+userorderCode;
 			}else if(genreCode == "0304"){//预留停车位
 				window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderCode="+userorderCode;
+			}else if(genreCode == "0501"){//公司注册
+				window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderCode="+userorderCode;
+			}else if(genreCode == "0502"){//工商变更
+				window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderCode="+userorderCode;
+			}else if(genreCode == "0503"){//人事社保
+				window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderCode="+userorderCode;
+			}else if(genreCode == "0504"){//代理记账
+				window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderCode="+userorderCode;
+			}else if(genreCode == "0505"){//法律服务
+				window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderCode="+userorderCode;
+			}else if(genreCode == "0506"){//商标专利
+				window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderCode="+userorderCode;
+			}else if(genreCode == "0507"){//威客服务
+				window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderCode="+userorderCode;
+			}else if(genreCode == "0508"){//IT服务
+				window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderCode="+userorderCode;
+			}else if(genreCode == "0401"){//创立方
+				window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderCode="+userorderCode;
+			}else if(genreCode == "0601"){//物业报修
+				window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderCode="+userorderCode;
+			}else if(genreCode == "0602"){//物业缴费
+				window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderCode="+userorderCode;
+			}else if(genreCode == "02"){//园区饮食
+				window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderCode="+userorderCode;
 			}
+			
 		};
      </script>
 </youi:html>
