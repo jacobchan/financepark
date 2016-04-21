@@ -66,14 +66,10 @@ public class LoginUserData extends BaseDataController {
 		
 		Boolean success = mcMsgdatasManager.smsSend("1010", map, null, phone);
 		if(success){
-			request.getSession().setAttribute("phone_captcha",
-					phone + "_" + captcha);
-			request.getSession().setAttribute("captcha_getTime_",
-					System.currentTimeMillis());
+			return new DataModelAndView("000000");
 		}else{
 			return new DataModelAndView("发送失败");
 		}
-		return new DataModelAndView("000000");
 	}
 	
 	/**
@@ -180,7 +176,10 @@ public class LoginUserData extends BaseDataController {
 		String phone = (String) request.getSession().getAttribute("phone");
 		Boolean success = mcMsgdatasManager.smsSend("1011", map, null, phone);
 		if(success){
-			
+			request.getSession().setAttribute("phone_captcha",
+					phone + "_" + captcha);
+			request.getSession().setAttribute("captcha_getTime_",
+					System.currentTimeMillis());
 		}else{
 			return new DataModelAndView("发送失败");
 		}
@@ -199,10 +198,9 @@ public class LoginUserData extends BaseDataController {
 		map.put(MessageService.CODE, captcha);
 		Boolean success = mcMsgdatasManager.smsSend("1011", map, null, phone);
 		if(success){
-			
+			return new DataModelAndView("000000");
 		}else{
 			return new DataModelAndView("发送失败");
 		}
-		return new DataModelAndView("000000");
 	}
 }
