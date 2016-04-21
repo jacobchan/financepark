@@ -206,7 +206,7 @@
 				success : function(results) {
 									var totalCount=results.records[0].totalCount;
 									pageCount = Math.ceil(totalCount / pageSize);//页数
-									alert(pageCount);
+									//alert(pageCount);
 								$(".tcdPageCode").empty();
 								refreshData_pend_query(1,pageSize);
 								    $(".tcdPageCode").createPage({
