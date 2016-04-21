@@ -69,7 +69,6 @@
 	var pageSize=10;
 	var pageCount=1;
 	var currentIndex = 1;
-	//var serviceURL = baseUrl+'ordermanagerUserorderManager/getPagerPend.json';
 	var serviceURL = baseUrl+'ordermanagerUserorderManager/getPagerPend_query.json';
 	$(function(){
 		loadData();
@@ -78,11 +77,11 @@
 	function loadData(){	
 		//分页页码显示
 		 $.ajax({
+			//url : baseUrl + "ordermanagerUserorderManager/getTotalCountPend.json",
 			url : baseUrl + "ordermanagerUserorderManager/getTotalCountPend.json",
 			success : function(results) {
 								var totalCount=results.records[0].totalCount;
 								pageCount = Math.ceil(totalCount / pageSize);//页数				
-							//alert(pageCount);
 							 refreshData(1,pageSize);
 							//插入页码
 								$(".tcdPageCode").createPage({
@@ -198,7 +197,7 @@
 		 var genId = $(".c-b1").attr("data");	
 		 //订单号
 		 var userorderCodeLike=$("#userorderCode").val();			 
-		 var params=['userorderCodeLike='+userorderCodeLike,'genId='+genId];
+		 var params=['userorderCode='+userorderCodeLike,'operator:userorderCode=LIKE','genId='+genId];
 		 $.ajax({
 			 url:baseUrl + "ordermanagerUserorderManager/getPagerPend_query.json",
 				success : function(results) {
@@ -242,7 +241,7 @@ function refreshData_pend_query(pageIndex,pageSize){
 $('.hhf-submit.f14.fl.ml20.all').click(function(){	
 	var genId = $(".c-b1").attr("data");		
 	 var userorderCodeLike=$("#userorderCode").val();			 
-	 var params=['genId='+genId,'userorderCodeLike='+userorderCodeLike];
+	 var params=['genId='+genId,'userorderCode='+userorderCodeLike,'operator:userorderCode=LIKE',];
 	 $.ajax({
 		 url:baseUrl + "ordermanagerUserorderManager/getTotalCount.json",
 			success : function(results) {
