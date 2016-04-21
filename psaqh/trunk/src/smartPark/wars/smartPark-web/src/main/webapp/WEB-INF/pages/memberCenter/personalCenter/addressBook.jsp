@@ -55,9 +55,6 @@
 								        refreshData(p,pageSize);
 								    }
 								});			
-			// 	if(result&&result.records){
-					_parseRecords(result.records);
-				//} 
 			}
 		}); 			
 	});			
@@ -128,7 +125,7 @@
 			$.ajax({
 			  url:baseUrl+'enterbusinessmanagerRzManager/getCompanyIdName.json',		
 				success:function(result){					
-					console.log(result.record);
+					//console.log(result.record);
 					if(result&&result.record){					
 						_companyRecords(result.record);						
 					}
