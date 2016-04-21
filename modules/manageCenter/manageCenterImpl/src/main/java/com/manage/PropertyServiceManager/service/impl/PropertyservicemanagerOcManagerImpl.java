@@ -358,9 +358,9 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 				@ServiceParam(name="endTime") String endTime)  throws BusException{
 	   		List<Record> recordList=new ArrayList<Record>();
 	   		if(StringUtils.isNotEmpty(ocLikeCode)){
-	   		conditions.add(ConditionUtils.getCondition("bxCode", Condition.LIKE, ocLikeCode));
+	   		conditions.add(ConditionUtils.getCondition("ocCode", Condition.LIKE, ocLikeCode));
 	   		}
-	   		if(StringUtils.isNotEmpty(startTime)||StringUtils.isNotEmpty(endTime)){
+	   		if(StringUtils.isNotEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){
 			conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
 	   			}
 	    	List<PropertyservicemanagerOc> List = this.getPropertyservicemanagerOcs(conditions, null);
