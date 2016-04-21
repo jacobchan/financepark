@@ -39,3 +39,6 @@ ALTER TABLE `sp_activity_apply` ADD COLUMN `APPLAY_ADR_` varchar(256);
 
  —- 添加回访记录的拒绝理由
 ALTER TABLE `sp_propertyservicemanager_cos` ADD COLUMN `BACK_REMARK_` varchar(256);
+
+/*** 修改了预约记录表 ***/
+ALTER TABLE `sp_reservation_record` ADD COLUMN `RECORD_COMMDITY_ID_` varchar(36) AFTER `VISITE_TEL_`, ADD COLUMN `COMPANY_NAME_` varchar(256) AFTER `RECORD_COMMDITY_ID_`, ADD COLUMN `COMPANY_SCALE_` varchar(2) AFTER `COMPANY_NAME_`, ADD COLUMN `INCOMING_DATE_` varchar(20) AFTER `COMPANY_SCALE_`, ADD COLUMN `COMPANY_DISCRPTION_` varchar(1024) AFTER `INCOMING_DATE_`;
