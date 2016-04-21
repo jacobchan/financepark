@@ -675,27 +675,6 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     }
     
     
-    /**
-  	 * 	通过code，状态,查询订单
-  	 * @param userId
-  	 * @param genreCode
-  	 * @param userorderStatus
-  	 * @return
-  	 * @throws BusException
-  	 */
-      @EsbServiceMapping
-  	public List<OrdermanagerUserorder> getOrderlistforPage( @ServiceParam(name="userId",pubProperty="userId") String userId,
-  			@ServiceParam(name="genreCode") String genreCode,@ServiceParam(name="userorderStatus") String userorderStatus) throws BusException {
-      	PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getGenreByUniqueProperty("genreCode",genreCode);
-      	Collection<Condition> condition = new ArrayList<Condition>();
-      	MemberInformation member=memberInformationManager.getMemberInformation(userId);
-  		String memberId=member.getMemberId();
-  		condition.add(ConditionUtils.getCondition("memberId", Condition.EQUALS, memberId));
-  		condition.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, pg.getGenreId()));
-  		condition.add(ConditionUtils.getCondition("userorderStatus", Condition.EQUALS, userorderStatus));
-  		List<OrdermanagerUserorder> list =ordermanagerUserorderDao.commonQuery(condition, null);
-  		return list;
-  	}		
 
   	/**
   	 *前台 根据当前用户分页查询未完成订单     陈烨
@@ -711,15 +690,11 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     	public PagerRecords getPagerPend_query(Pager pager,//分页条件
     			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
     			@OrderCollection Collection<Order> orders,
-    			@ServiceParam(name="userorderCodeLike") String userorderCodeLike,
     			@ServiceParam(name="genId") String genId)
     			throws BusException {
     	
     	 String userorderStatus="01";//01为未完成订单
          conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.EQUALS, userorderStatus));
-         if(StringUtils.isNotEmpty(userorderCodeLike)){
-        	 conditions.add(ConditionUtils.getCondition("userorderCode", Condition.LIKE, userorderCodeLike));
-         }
          if(StringUtils.isNotEmpty(genId)){
         	 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
          }
@@ -740,44 +715,20 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
   	 */   
     @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
     public PagerRecords getPagerHospital_query(Pager pager,//分页条件
-    			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
-    			@OrderCollection Collection<Order> orders,
-    			@ServiceParam(name="userorderCodeLike") String userorderCodeLike,
-    			@ServiceParam(name="genId") String genId)
-    			throws BusException {
-         String userorderStatus="01";//01为未完成订单
-         /*if("请选择订单项目".equals(userorderProjecta)){
-   		  userorderProjecta=null;
-   	  }*/
-         conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.NOT_EQUALS, userorderStatus));
-         if(StringUtils.isNotEmpty(userorderCodeLike)){
-        	 conditions.add(ConditionUtils.getCondition("userorderCode", Condition.LIKE, userorderCodeLike));
-         }
-         if(StringUtils.isNotEmpty(genId)){
-        	 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
-         }
-    	 PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
-    	 return pagerRecords;
-   }
-
-    /**
-	 * 前台 根据当前用户分页查询待处理订单          陈烨
-	 * @param pager
-	 * @param conditions
-	 * @param orders
-	 * @return
-	 * @throws BusException
-	 */     
-    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
-	public PagerRecords getPagerHospital(Pager pager,//分页条件
-			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
-			@OrderCollection Collection<Order> orders)
+    		@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders,
+			@ServiceParam(name="genId") String genId)
 			throws BusException {
-     String userorderStatus="01";//01为未完成订单
+	
+	 String userorderStatus="01";//01为未完成订单
      conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.NOT_EQUALS, userorderStatus));
+     if(StringUtils.isNotEmpty(genId)){
+    	 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
+     }
 	 PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
 	 return pagerRecords;
-}
+	}
+   
     /**
 	 *前台 根据当前用户分页查询全部订单           陈烨
 	 * @param pager
@@ -790,35 +741,15 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	public PagerRecords getPagerAll(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders,
-			@ServiceParam(name="userorderCodeLike") String userorderCodeLike,
 			@ServiceParam(name="genId") String genId)
-			throws BusException {
-    	 /*if("请选择订单项目".equals(userorderProjecta)){
-  		  userorderProjecta=null;
-  	     }*/
-    	 if(StringUtils.isNotEmpty(userorderCodeLike)){
-        	 conditions.add(ConditionUtils.getCondition("userorderCode", Condition.LIKE, userorderCodeLike));
-         }
+			throws BusException {	
          if(StringUtils.isNotEmpty(genId)){
         	 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
          }
     	 PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
     	 return pagerRecords;
    }
-    /**
-  	 *前台 根据当前用户分页查询待处理订单       陈烨
-  	 * @return 分页对象
-  	 */       
-    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
-	public PagerRecords getPagerPend(Pager pager,//分页条件
-			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
-			@OrderCollection Collection<Order> orders)
-			throws BusException {
-    	String userorderStatus="01";//01为未完成订单
-    	conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.EQUALS, userorderStatus));
-    	PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
-    	return pagerRecords;
-    }
+   
     /**
 	 * 获取整个数据的totalCount陈烨
 	 * @param conditions
@@ -828,11 +759,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
 	public List<Record> getTotalCount(
 			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,
-			@ServiceParam(name="userorderCodeLike") String userorderCodeLike,
 			@ServiceParam(name="genId") String genId)  throws BusException{
-    	 if(StringUtils.isNotEmpty(userorderCodeLike)){
-        	 conditions.add(ConditionUtils.getCondition("userorderCode", Condition.LIKE, userorderCodeLike));
-         }
          if(StringUtils.isNotEmpty(genId)){
         	 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
          }
@@ -852,15 +779,11 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
 	public List<Record> getTotalCountPend(
 			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,
-			@ServiceParam(name="userorderCodeLike") String userorderCodeLike,
 			@ServiceParam(name="genId") String genId
 			)  throws BusException{
 		List<Record> recordList=new ArrayList<Record>();
 		String userorderStatus="01";
-		 if(StringUtils.isNotEmpty(userorderCodeLike)){
-        	 conditions.add(ConditionUtils.getCondition("userorderCode", Condition.LIKE, userorderCodeLike));
-         }
-         if(StringUtils.isNotEmpty(genId)){
+		if(StringUtils.isNotEmpty(genId)){
         	 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
          }
 		conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.EQUALS, userorderStatus));
@@ -879,13 +802,9 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
        @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
    	public List<Record> getTotalCountHospital(
    			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,
-			@ServiceParam(name="userorderCodeLike") String userorderCodeLike,
 			@ServiceParam(name="genId") String genId)  throws BusException{
    		List<Record> recordList=new ArrayList<Record>();
    		String userorderStatus="01";
-   	    if(StringUtils.isNotEmpty(userorderCodeLike)){
-    	  conditions.add(ConditionUtils.getCondition("userorderCode", Condition.LIKE, userorderCodeLike));
-        }
         if(StringUtils.isNotEmpty(genId)){
     	  conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
         }
@@ -912,5 +831,4 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
   	}  
 }
 
-    
 
