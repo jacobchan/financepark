@@ -74,7 +74,7 @@
 		
 		//分页页码显示
 		 $.ajax({
-			url:serviceURL, 
+			url:baseUrl+'propertyservicemanagerBxManager/getTotalCount.json', 
 			success:function(results){	
 							pageCount=Math.ceil(results.totalCount/pageSize);//页数
 							
@@ -211,7 +211,7 @@
 		var endTime=$("#endTime").val(); 			
 		var params = ['bxLikeCode='+bxCode,'startTime='+startTime,'endTime='+endTime];
 		$.ajax({
-			url:baseUrl+'propertyservicemanagerBxManager/getPagerLikeBx.json',
+			url:baseUrl+'propertyservicemanagerBxManager/getTotalCount.json',
 			data:params.join('&'),
 			success:function(results){	
 				pageCount=Math.ceil(results.totalCount/pageSize);//页数				
