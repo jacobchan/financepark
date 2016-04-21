@@ -335,67 +335,33 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 			throw new BusException("未查询到该报修单，如有疑问请与客服人员联系");
 		}
 	}
-	//通过订单号获取当前用户的报修单  模糊查询
-	@EsbServiceMapping
-	 public List<PropertyservicemanagerBx> getEnterprisemaillistLikeBxCode(
-		    @ServiceParam(name="userId",pubProperty="userId") String userId,
-			@ServiceParam(name="bxCode") String bxCode,
+	/**
+	 * 根据当前用户分页查询    跟据订单号模糊查询    chenye
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 * @throws BusException
+	 */
+	@SuppressWarnings("unchecked")
+	@EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	public PagerRecords getPagerBxs(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PropertyservicemanagerBx.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders,					
 			@ServiceParam(name="startTime") String startTime,
-			@ServiceParam(name="endTime") String endTime) throws BusException {	
-		EnterpriseEmployees e = enterpriseEmployeesDao.getObjectByUniqueProperty("member.memberId", userId);
-	    EnterbusinessmanagerRz rz=e.getRz();
-        String rzName=rz.getRzName();
-		Collection<Condition> condition = new ArrayList<Condition>();
-		condition.add(ConditionUtils.getCondition("bxCode", Condition.LIKE, bxCode));
-		condition.add(ConditionUtils.getCondition("bxComp", Condition.LIKE, rzName));
-		condition.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
-		List<PropertyservicemanagerBx> list =propertyservicemanagerBxDao.commonQuery(condition, null);
-		return list;
-				
-	}
-	 /**
-		 * 根据当前用户分页查询
-		 * @return 分页对象
-		 */
-	    @SuppressWarnings("unchecked")
-	    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
-		public PagerRecords getPagerBxs(Pager pager,//分页条件
-				@ConditionCollection(domainClazz=PropertyservicemanagerBx.class) Collection<Condition> conditions,//查询条件
-				@OrderCollection Collection<Order> orders)
-				throws BusException {
-	    	PagerRecords pagerRecords = propertyservicemanagerBxDao.findByPager(pager, conditions, orders);
-	    	List<PropertyservicemanagerBx> bxlist = pagerRecords.getRecords();
-	    	for(PropertyservicemanagerBx bx : bxlist){
-    			if(StringUtils.isNotEmpty(bx.getMemberId())){
-    				String memberId = bx.getMemberId();
-    				MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
-    				bx.setMember(memberInformation);
-    			}
-    		}
-			return pagerRecords;
+			@ServiceParam(name="endTime") String endTime)throws BusException {
+		if(StringUtils.isNotEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){
+		conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
 		}
-		 /**
-			 * 根据当前用户分页查询    跟据订单号模糊查询    chenye
-			 * @return 分页对象
-			 */
-		    @SuppressWarnings("unchecked")
-		    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
-			public PagerRecords getPagerLikeBx(Pager pager,//分页条件
-					@ConditionCollection(domainClazz=PropertyservicemanagerBx.class) Collection<Condition> conditions,//查询条件
-					@OrderCollection Collection<Order> orders,
-					@ServiceParam(name="bxLikeCode") String bxLikeCode,
-					@ServiceParam(name="startTime") String startTime,
-					@ServiceParam(name="endTime") String endTime)
-					throws BusException {
-		    	conditions.add(ConditionUtils.getCondition("bxCode", Condition.LIKE, bxLikeCode));				
-				conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
-		    	PagerRecords pagerRecords = propertyservicemanagerBxDao.findByPager(pager, conditions, orders);
-		    	List<PropertyservicemanagerBx> bxlist = pagerRecords.getRecords();
-		    	for(PropertyservicemanagerBx bx : bxlist){
-	    			if(StringUtils.isNotEmpty(bx.getMemberId())){
-	    				String memberId = bx.getMemberId();
-	    				MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
-	    				bx.setMember(memberInformation);
+		PagerRecords pagerRecords = propertyservicemanagerBxDao.findByPager(pager, conditions, orders);
+		List<PropertyservicemanagerBx> bxlist = pagerRecords.getRecords();
+    	for(PropertyservicemanagerBx bx : bxlist){
+    	if(StringUtils.isNotEmpty(bx.getMemberId())){
+		String memberId = bx.getMemberId();
+	    MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
+	    bx.setMember(memberInformation);
 	    			}
 	    		}
 				return pagerRecords;
@@ -409,16 +375,12 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 		       @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
 		   	public List<Record> getTotalCount(
 		   			@ConditionCollection(domainClazz=PropertyservicemanagerBx.class) Collection<Condition> conditions,
-		   			@ServiceParam(name="bxLikeCode") String bxLikeCode,
 					@ServiceParam(name="startTime") String startTime,
 					@ServiceParam(name="endTime") String endTime)  throws BusException{
 		   		List<Record> recordList=new ArrayList<Record>();
-		   		if(StringUtils.isNotEmpty(bxLikeCode)){
-		   		conditions.add(ConditionUtils.getCondition("bxCode", Condition.LIKE, bxLikeCode));	
-		   		}	
-		   		/*if(StringUtils.isNotEmpty(startTime)||StringUtils.isEmpty(endTime)){		
+		   		if(StringUtils.isNotEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){		
 				conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
-		   		}*/		   		
+		   		}	   		
 		    	List<PropertyservicemanagerBx> List = this.getPropertyservicemanagerBxs(conditions, null);
 		   		Record record = new Record();
 		   		record.put("totalCount", List.size());
