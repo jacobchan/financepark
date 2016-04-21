@@ -110,12 +110,26 @@ public interface PropertyservicemanagerBxManager extends BaseManager{
 				Collection<Condition> conditions,//查询条件
 				Collection<Order> orders) throws BusException;
 		/**
-		 * 根据当前用户分页查询 
+		 * 根据当前用户分页查询 chenye
 		 * 模糊查询
 		 * @return 分页对象
 		 */
 		public PagerRecords getPagerLikeBx(Pager pager,//分页条件
 				Collection<Condition> conditions,//查询条件
 				Collection<Order> orders,String bxLikeCode,String startTime,String endTime) throws BusException;
-
+		/**
+		 * 获取已完成订单的totalCount    陈烨
+		 * @param conditions
+		 * @param fkLikeCode
+		 * @param startTime
+		 * @param endTime
+		 * @return
+		 * @throws BusException
+		 */
+		public List<Record> getTotalCount(
+	   			Collection<Condition> conditions,
+	   			String bxLikeCode,
+				String startTime,
+				String endTime)  throws BusException;
+		
 }
