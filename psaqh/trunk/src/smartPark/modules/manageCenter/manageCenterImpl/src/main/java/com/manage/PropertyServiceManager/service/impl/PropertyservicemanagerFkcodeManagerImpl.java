@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -302,8 +303,8 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
 		}
     	return pagerRecords;
 	}
-    /**
-	 * 根据当前用户分页查询
+    /** 
+	 * 根据当前用户分页查询          chenye
 	 * @return 分页对象
 	 */
     
@@ -332,6 +333,27 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
 		}
     	return pagerRecords;
 	}
+    /**
+   	 * 获取已完成订单的totalCount    陈烨
+   	 * @param conditions
+   	 * @return
+   	 * @throws BusException
+   	 */
+       @EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",operator=Condition.EQUALS,pubProperty="userId")})
+   	public List<Record> getTotalCount(
+   			@ConditionCollection(domainClazz=PropertyservicemanagerFkcode.class) Collection<Condition> conditions,
+   			@ServiceParam(name="fkLikeCode") String fkLikeCode,
+			@ServiceParam(name="startTime") String startTime,
+			@ServiceParam(name="endTime") String endTime)  throws BusException{
+   		List<Record> recordList=new ArrayList<Record>();
+   		conditions.add(ConditionUtils.getCondition("bxCode", Condition.LIKE, fkLikeCode));				
+		conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+    	List<PropertyservicemanagerFkcode> List = this.getPropertyservicemanagerFkcodes(conditions, null);
+   		Record record = new Record();
+   		record.put("totalCount", List.size());
+   		recordList.add(record);
+   		return recordList;
+   	}   			
     
     
 }
