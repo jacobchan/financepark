@@ -75,8 +75,10 @@
 		//分页页码显示
 		 $.ajax({
 			url:baseUrl+'propertyservicemanagerBxManager/getTotalCount.json', 
-			success:function(results){	
-							pageCount=Math.ceil(results.totalCount/pageSize);//页数
+			
+				success : function(results) {
+					var totalCount=results.records[0].totalCount;
+					pageCount = Math.ceil(totalCount / pageSize);//页数	
 							
 							 refreshData(1,pageSize);
 								$(".tcdPageCode").createPage({
@@ -211,7 +213,7 @@
 		var endTime=$("#endTime").val(); 			
 		var params = ['bxLikeCode='+bxCode,'startTime='+startTime,'endTime='+endTime];
 		$.ajax({
-			url:baseUrl+'propertyservicemanagerBxManager/getTotalCount.json',
+			url:baseUrl+'propertyservicemanagerBxManager/getPagerLikeBx.json',
 			data:params.join('&'),
 			success:function(results){	
 				pageCount=Math.ceil(results.totalCount/pageSize);//页数				
