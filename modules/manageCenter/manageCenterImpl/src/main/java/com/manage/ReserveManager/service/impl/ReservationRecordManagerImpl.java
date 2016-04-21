@@ -124,11 +124,15 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 		@SuppressWarnings("unchecked")
 		List<ReservationRecord> list=pagerRecords.getRecords();
 		for(ReservationRecord r:list){
-			//获取预约商品名称
-			String commodityId=r.getRecordCommdityId();
-			if(commodityId !=null){
-				PurchasingmanagerCommodity p=purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
-				r.setRecordCommdityName(p.getCommodityTitle());;
+			String recordType=r.getRecordType();
+			//01：众创空间 02：工位
+			if(recordType.equals("01") || recordType.equals("02")){
+				//获取预约商品名称
+				String commodityId=r.getRecordCommdityId();
+				if(commodityId !=null){
+					PurchasingmanagerCommodity p=purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
+					r.setRecordCommdityName(p.getCommodityTitle());;
+				}
 			}
 		}
 		return pagerRecords;
