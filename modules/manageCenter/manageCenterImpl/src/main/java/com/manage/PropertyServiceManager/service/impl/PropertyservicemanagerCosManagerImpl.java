@@ -285,9 +285,13 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
 			@ServiceParam(name="endTime") String endTime,
 			@ServiceParam(name="coslikeCode") String coslikeCode)  throws BusException{
    		List<Record> recordList=new ArrayList<Record>();
-   		conditions.add(ConditionUtils.getCondition("cosCode", Condition.LIKE, coslikeCode));				
+   		if(StringUtils.isNotEmpty(coslikeCode)){
+   		conditions.add(ConditionUtils.getCondition("cosCode", Condition.LIKE, coslikeCode));
+   		}
+   		if(StringUtils.isNotEmpty(startTime)||StringUtils.isNotEmpty(endTime)){
 		conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
-    	List<PropertyservicemanagerCos> List = this.getPropertyservicemanagerCoss(conditions, null);
+   		}
+		List<PropertyservicemanagerCos> List = this.getPropertyservicemanagerCoss(conditions, null);
    		Record record = new Record();
    		record.put("totalCount", List.size());
    		recordList.add(record);
