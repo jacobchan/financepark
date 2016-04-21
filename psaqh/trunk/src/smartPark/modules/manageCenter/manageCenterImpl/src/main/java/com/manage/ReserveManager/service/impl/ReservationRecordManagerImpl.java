@@ -331,8 +331,18 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 			@OrderCollection Collection<Order> orders,
 			@ServiceParam(name="userId",pubProperty = "userId") String userId) throws BusException {
     	//获取当前用户预约
-    	conditions.add(ConditionUtils.getCondition("createUser", Condition.EQUALS, userId));
+    	conditions.add(ConditionUtils.getCondition("recordMemberId", Condition.EQUALS, userId));
     	PagerRecords pagerRecords = reservationRecordDao.findByPager(pager, conditions, orders);
+    	@SuppressWarnings("unchecked")
+		List<ReservationRecord> list=pagerRecords.getRecords();
+		for(ReservationRecord r:list){
+			//获取预约商品名称
+			String commodityId=r.getRecordCommdityId();
+			if(commodityId !=null){
+				PurchasingmanagerCommodity p=purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
+				r.setRecordCommdityName(p.getCommodityTitle());;
+			}
+		}
 		return pagerRecords;
 	} 
 }
