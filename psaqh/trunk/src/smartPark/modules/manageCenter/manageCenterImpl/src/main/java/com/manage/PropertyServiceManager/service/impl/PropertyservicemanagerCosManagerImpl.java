@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.entity.MemberInformation;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -22,9 +23,11 @@ import com.gsoft.framework.esb.annotation.PubCondition;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.utils.BizCodeUtil;
 import com.gsoft.utils.HttpSenderMsg;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerCosDao;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerCosManager;
 @Service("propertyservicemanagerCosManager")
@@ -252,7 +255,7 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
     }
     /**
 	 *  /**
-	 * 根据当前用户分页查询 根据投诉单号模糊查询（ 前台个人中心）
+	 * 根据当前用户分页查询 根据投诉单号模糊查询（ 前台个人中心）    chenye
 	 */
 	 
     @EsbServiceMapping(pubConditions={@PubCondition(property="memberInformation.memberId",operator=Condition.EQUALS,pubProperty="userId")})	   
@@ -269,4 +272,25 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
     	PagerRecords pagerRecords = propertyservicemanagerCosDao.findByPager(pager, conditions, orders);  	
     	return pagerRecords;
 	}
+    /**
+   	 * 获取已完成订单的totalCount    陈烨
+   	 * @param conditions
+   	 * @return
+   	 * @throws BusException
+   	 */
+    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+   	public List<Record> getTotalCount(
+   			@ConditionCollection(domainClazz=PropertyservicemanagerCos.class) Collection<Condition> conditions,
+   			@ServiceParam(name="startTime") String startTime,
+			@ServiceParam(name="endTime") String endTime,
+			@ServiceParam(name="coslikeCode") String coslikeCode)  throws BusException{
+   		List<Record> recordList=new ArrayList<Record>();
+   		conditions.add(ConditionUtils.getCondition("cosCode", Condition.LIKE, coslikeCode));				
+		conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+    	List<PropertyservicemanagerCos> List = this.getPropertyservicemanagerCoss(conditions, null);
+   		Record record = new Record();
+   		record.put("totalCount", List.size());
+   		recordList.add(record);
+   		return recordList;
+    }  		
 }
