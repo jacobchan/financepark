@@ -45,7 +45,7 @@
 	var pageSize=4;
 	var pageCount=1;
 	var currentIndex = 1;
-	var serviceURL = baseUrl+'propertyservicemanagerCosManager/getPagerFkcodes.json';
+	var serviceURL = baseUrl+'propertyservicemanagerCosManager/getPagerCos.json';
 $(function () {
 		
 		//分页页码显示
