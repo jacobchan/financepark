@@ -22,7 +22,7 @@
 								<col width="150"></col>
 								<col></col>
 							</colgroup>
-							<tbody><tr>
+							<tbody class="knowledge"><tr>
 								<th>订单号</th>
 								<th>申请时间</th>
 								<th>状态</th>
@@ -113,7 +113,7 @@
 	}		
 		//拼接列表
 		function _parseRecords(record){
-			$("tbody").empty();
+			$(".knowledge").empty();
 			var ht="<tr>"+
 			"<th>订单号</th>"+
 			"<th>申请时间</th>"+
@@ -122,7 +122,7 @@
 			"<th>联系电话</th>"+
 			"<th>操作</th>"+	
 				"</tr>";
-		$("tbody").append(ht);
+		$(".knowledge").append(ht);
 			for(var i=0;i<record.length;i++){
 				var bxStatus='';
 				var buttonHtml='';
@@ -156,7 +156,7 @@
 						"<td>18659786621</td>"+
 						"<td>"+buttonHtml+"</td>"
 						"</tr>";
-				 $("tbody").append(html);
+				 $(".knowledge").append(html);
 			}
 		};
 		 function cancel(obj){
@@ -211,13 +211,13 @@
 		//alert(ocCode);
 		var startTime=$("#startTime").val(); 
 		var endTime=$("#endTime").val(); 			
-		var params = ['bxLikeCode='+bxCode,'startTime='+startTime,'endTime='+endTime];
+		var params = ['bxCode='+bxCode,'operator:bxCode=LIKE','startTime='+startTime,'endTime='+endTime];
 		$.ajax({
-			url:baseUrl+'propertyservicemanagerBxManager/getPagerLikeBx.json',
+			url:baseUrl+'propertyservicemanagerBxManager/getTotalCount.json',
 			data:params.join('&'),
 			success:function(results){	
-				pageCount=Math.ceil(results.totalCount/pageSize);//页数				
-				//alert(pageCount);
+				var totalCount=results.records[0].totalCount;
+				pageCount = Math.ceil(totalCount / pageSize);//页数					
 				 refreshData_query(1,pageSize);
 					$(".tcdPageCode").createPage({
 					    pageCount:pageCount,
@@ -236,9 +236,9 @@
 			var bxCode=$("#bxCode").val();	
 			 var startTime=$("#startTime").val(); 
 			 var endTime=$("#endTime").val(); 
-			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'bxLikeCode='+bxCode,'startTime='+startTime,'endTime='+endTime];
+			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'bxCode='+bxCode,'operator:bxCode=LIKE','startTime='+startTime,'endTime='+endTime];
 			$.ajax({
-				url:baseUrl+'propertyservicemanagerBxManager/getPagerLikeBx.json',
+				url:baseUrl+'propertyservicemanagerBxManager/getPagerBxs.json',
 				data:params.join('&'),
 				success:function(results){
 					if(results&&results.records){
