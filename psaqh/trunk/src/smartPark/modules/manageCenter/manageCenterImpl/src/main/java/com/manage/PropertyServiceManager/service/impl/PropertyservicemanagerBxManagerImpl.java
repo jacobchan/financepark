@@ -375,7 +375,7 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 			return pagerRecords;
 		}
 		 /**
-			 * 根据当前用户分页查询    跟据订单号模糊查询
+			 * 根据当前用户分页查询    跟据订单号模糊查询    chenye
 			 * @return 分页对象
 			 */
 		    @SuppressWarnings("unchecked")
@@ -387,8 +387,7 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 					@ServiceParam(name="startTime") String startTime,
 					@ServiceParam(name="endTime") String endTime)
 					throws BusException {
-		    	conditions.add(ConditionUtils.getCondition("bxCode", Condition.LIKE, bxLikeCode));
-				
+		    	conditions.add(ConditionUtils.getCondition("bxCode", Condition.LIKE, bxLikeCode));				
 				conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
 		    	PagerRecords pagerRecords = propertyservicemanagerBxDao.findByPager(pager, conditions, orders);
 		    	List<PropertyservicemanagerBx> bxlist = pagerRecords.getRecords();
@@ -401,4 +400,25 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 	    		}
 				return pagerRecords;
 			}
+		    /**
+		   	 * 获取已完成订单的totalCount    陈烨
+		   	 * @param conditions
+		   	 * @return
+		   	 * @throws BusException
+		   	 */
+		       @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+		   	public List<Record> getTotalCount(
+		   			@ConditionCollection(domainClazz=PropertyservicemanagerBx.class) Collection<Condition> conditions,
+		   			@ServiceParam(name="bxLikeCode") String bxLikeCode,
+					@ServiceParam(name="startTime") String startTime,
+					@ServiceParam(name="endTime") String endTime)  throws BusException{
+		   		List<Record> recordList=new ArrayList<Record>();
+		   		conditions.add(ConditionUtils.getCondition("bxCode", Condition.LIKE, bxLikeCode));				
+				conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+		    	List<PropertyservicemanagerBx> List = this.getPropertyservicemanagerBxs(conditions, null);
+		   		Record record = new Record();
+		   		record.put("totalCount", List.size());
+		   		recordList.add(record);
+		   		return recordList;
+		   	}   			    
 }
