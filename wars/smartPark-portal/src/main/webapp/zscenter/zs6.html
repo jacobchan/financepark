@@ -181,7 +181,7 @@
 				
 			});
 			
-			$(".ib-btn.tc").click(function(){
+			$("#companySubmit").click(function(){
 				var recordType='02';//02:工位
 				var recordCommdityId = $("#recordCommdityId").val();
 				var companyName=$("#companyName").val();
@@ -189,36 +189,20 @@
 				var companyScale=$("#companyScale").val();
 				var companyDiscrption=$("#companyDiscrption").val();
 				if(companyName == null||companyName==""){
-		    		clearInterval(timer);
-		    		$("#msg").text("请填写企业名称");
-	    	        $(".toast").show();
-	    	        pltime=2;
-	    	        timer=setInterval("closeTanc()",1000);
-					return;
+	    	        showMessage("请填写企业名称");
+					return false;
 				}
 				if(companyScale ==null|| companyScale==""){
-					clearInterval(timer);
-					$("#msg").text("请选择企业规模");
-	    	        $(".toast").show();
-	    	        pltime=2;
-	    	        timer=setInterval("closeTanc()",1000);
-					return;
+	    	        showMessage("请选择企业规模");
+					return false;
 				}
 				if(incomingDate ==null|| incomingDate==""){
-					clearInterval(timer);
-					$("#msg").text("请填写期望入驻日期");
-	    	        $(".toast").show();
-	    	        pltime=2;
-	    	        timer=setInterval("closeTanc()",1000);
-					return;
+	    	        showMessage("请填写期望进驻日期");
+					return false;
 				}
 				if(companyDiscrption ==null|| companyDiscrption==""){
-					clearInterval(timer);
-					$("#msg").text("请填写企业简介");
-	    	        $(".toast").show();
-	    	        pltime=2;
-	    	        timer=setInterval("closeTanc()",1000);
-					return;
+	    	        showMessage("请填写业务简介");
+					return false;
 				}
                
 				var params = ['recordCommdityId='+recordCommdityId,'companyName='+companyName,'incomingDate='+incomingDate,'companyScale='+companyScale,'recordType='+recordType,'companyDiscrption='+companyDiscrption];
@@ -229,14 +213,11 @@
 					data:params.join('&'),
 					jsonp:'data:jsonp',
 					dataType:'jsonp',
-					success:function(result){
-						if(result&&result.record){
-								$(".bg-tanc.m1").hide();
-								$(".bg-tanc.m3").show();
-								$('#ti-m1').text('5');
-								a=5;
-								timer1=setInterval("jump1()",1000);
-						}
+					success:function(results){
+						console.log(results);
+						if(results&&results.record){
+							window.location = cenUrl+ "member/memberCenter/personalCenter/myReservation.html?showFlg=1";
+						} 
 					}
 				});
 				
@@ -271,7 +252,7 @@
 					$("#ti-m1").text(a);
 				}else{
 					if (isLogin) {
-						window.location=cenUrl+"member/memberCenter/personalCenter/myReservation.html";
+						window.location = cenUrl+ "member/memberCenter/personalCenter/myReservation.html?showFlg=1";
 					}else{
 						window.location="zs6.html";
 					}
@@ -309,6 +290,13 @@
 			function jumpBack(){
 				window.location="zs6.html";
 			}
+			
+		    //显示信息
+		    function showMessage(message){
+		    	$(".error-toast").animate({top:"20px",opacity:"1"});
+		    	$(".error-toast p").html(message);
+				setTimeout(function(){$(".error-toast").animate({top:"-40px",opacity:"0"})},2000);
+		    }
 	</script>
 	<script type="text/javascript">
 		$(function(){
@@ -601,7 +589,7 @@
 					<td>
 						<div class="tct-select mr20" style="width:150px;">
 							<div class="ic-select1" style="background: transparent url(../styles/images/yqfw/down.png) no-repeat scroll right center;">
-								<p class="c-b1">&nbsp;</p>
+								<p class="c-b1">请选择企业规模</p>
 							</div>
 							<ul style="display: none;" class="select-nav">
 								<!-- <li>0-10人</li>
@@ -613,7 +601,7 @@
 				</tr>
 				
 				<tr>
-					<td valign="top">期望进驻日期</td>
+					<td valign="top">期望进驻<br>日期</td>
 					<td>
 							<input type="text" placeholder="期望进驻日期" id="codeDate"></td>
 					<!-- <td><input type="text" placeholder="期望进驻日期" id="fkcodeDate"></td> -->
@@ -624,9 +612,12 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td><a href="" class="ib-btn tc" style="width:120px;">提交</a></td>
+					<td><a class="ib-btn tc" id="companySubmit" style="width:120px;">提交</a></td>
 				</tr>
 			</table>
+			<div class="error-toast">
+				<p></p>
+			</div>
 		</div>
 	</div>
 	
