@@ -109,42 +109,38 @@
 	}
 		//格式化展示列表
 		function _parseRecords(record){
-			$("tbody").empty();
-	     ht="<tr>"+
-			"<th>订单号</th>"+
-			"<th>申请时间</th>"+
-			//"<th>是否回访</th>"+
-			"<th>联系人</th>"+
-			"<th>联系电话</th>"+
-			"<th>投诉状态</th>"+
-			"<th>操作</th>"+
-		    "</tr>";
-		    $("tbody").append(ht);		
-		//	$("#count").append(record.length);
-			for(var i=0;i<record.length;i++){				
-				var status = "";
-				var crop = "";
-				
-				if(record[i].cosStatus=='01'){
-					status = "待受理";
-					crop = "取消";
-				}else if(record[i].cosStatus=='02'){
-					status = "已受理";
-				}else if(record[i].cosStatus=='03'){
-					status = "已取消";
-				}else if(record[i].cosStatus=='04'){
-					status = "已退回";
+			var headHtml = "";
+				headHtml+='<tr>'
+				headHtml+='	<th>订单号</th>'
+				headHtml+='	<th>申请时间</th>'
+				headHtml+='	<th>联系人</th>'
+				headHtml+='	<th>联系电话</th>'
+				headHtml+='	<th>投诉状态</th>'
+				headHtml+='	<th>操作</th>'
+				headHtml+='</tr>'
+				var html = "";
+				for(var i=0;i<record.length;i++){
+					html += '<tr id='+record[i].cosId+' class="aaa">'
+					html += '	<td><a href="<%=request.getContextPath()%>/member/memberCenter/propertyService/propertyManageCosDetail.html">'+record[i].cosCode+'</a></td>'
+					html += '	<td>'+record[i].cosTime+'</td>'
+					html += '	<td>'+record[i].cosName+'</td>'
+					html += '	<td>'+record[i].cosTelephone+'</td>'
+					if(record[i].cosStatus=='01'){
+						html += '	<td>待受理</td>'
+						html += '	<td><a href="javascript:;" onclick="javascript:cancel(this)" class="ac-show">取消</a></td>'
+					}else if(record[i].cosStatus=='02'){
+						html += '	<td>已受理</td>'
+						html += '	<td>&nbsp;</td>'
+					}else if(record[i].cosStatus=='03'){
+						html += '	<td>已取消</td>'
+						html += '	<td>&nbsp;</td>'
+					}else if(record[i].cosStatus=='04'){
+						html += '	<td>已退回</td>'
+						html += '	<td>&nbsp;</td>'
+					}
+					html += '</tr>'
 				}
-				var html="<tr id='"+record[i].cosId+"' class='aaa'><td>"+
-				"<a href='<%=request.getContextPath()%>/member/memberCenter/propertyService/propertyManageCosDetail.html'>"+record[i].cosCode+"</a>"+
-				"</td>"+
-				"<td>"+record[i].cosTime+"</td>"+
-				"<td>"+record[i].cosName+"</td>"+
-				"<td>"+record[i].cosTelephone+"</td><td>"+status+"</td>"+
-				"<td><a href='javascript:;' onclick='javascript:cancel(this)' class='ac-show'>"+crop+"</a></td></tr>";
-				
-				$("tbody").append(html);
-			}
+				$("#czh-knowledge").html(headHtml+html);
 		};
 	 $('.hhf-submit.query').click(function(){	
 		var cosCode=$("#cosCode").val();
