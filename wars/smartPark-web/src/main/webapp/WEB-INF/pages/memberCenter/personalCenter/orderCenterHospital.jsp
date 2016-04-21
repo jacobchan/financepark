@@ -55,7 +55,7 @@
 	var pageSize=10;
 	var pageCount=1;
 	var currentIndex = 1;
-	var serviceURL = baseUrl+'ordermanagerUserorderManager/getPagerHospital.json';
+	var serviceURL = baseUrl+'ordermanagerUserorderManager/getPagerHospital_query.json';
 	$(function(){
 		loadData();
 	});
@@ -105,7 +105,7 @@
 				"<th>订单金额</th>"+
 				"<th>下单时间</th>"+
 				"<th>操作</th>"+
-			"</tr>";
+			   "</tr>";
 			 $(".hospital_list").append(ht);
 			console.log(record);
 			for(var i=0;i<record.length;i++){				
@@ -182,7 +182,7 @@ $('.hhf-submit.f14.fl.ml20.hospital').click(function(){
 	 var userorderCodeLike=$("#userorderCode").val();			 
 	 var params=['userorderCodeLike='+userorderCodeLike,'genId='+genId];
 	 $.ajax({
-		 url : baseUrl + "ordermanagerUserorderManager/getTotalCountHospital.json",
+		 url : baseUrl + "ordermanagerUserorderManager/getPagerHospital_query.json",
 			success : function(results) {
 								var totalCount=results.records[0].totalCount;
 								pageCount = Math.ceil(totalCount / pageSize);//页数
