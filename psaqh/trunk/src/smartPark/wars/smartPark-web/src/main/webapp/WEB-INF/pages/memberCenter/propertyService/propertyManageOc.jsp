@@ -3,7 +3,7 @@
 <youi:html title="一卡通办理">
 	<youi:body decorator="memcenter">  
 				<div class="w1000">
-					<h3 class="per-h3">一卡用绑定<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要申请一卡通</a></h3>
+					<h3 class="per-h3">一卡通绑定<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要申请一卡通</a></h3>
 					<div class="clearfix mt40" rules=none>
 						<div class="mt20 gr-txl clearfix lh30">
 							<label class="fl mr20 f16">申请时间：</label>
@@ -37,17 +37,17 @@
    <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 	<script type="text/javascript">
-	var pageSize=10;
-	var pageCount=1;
-	var currentIndex = 1;
+	var pageSize=10; //每页默认显示10条
+	var pageCount=1; //总页数
+	var currentIndex = 1; //第几页
 	var serviceURL = baseUrl+'propertyservicemanagerOcManager/getPagerOc.json';
-	$(function () {
-		
+	$(function () {	
 		//分页页码显示
 		 $.ajax({
-			url:serviceURL, 
+			url:baseUrl+'propertyservicemanagerOcManager/getTotalCount.json', 
 			success:function(results){	
-							pageCount=Math.ceil(results.totalCount/pageSize);//页数
+				var totalCount=results.records[0].totalCount;
+				pageCount = Math.ceil(totalCount / pageSize);//页数
 							
 							 refreshData(1,pageSize);
 								$(".tcdPageCode").createPage({
@@ -82,7 +82,7 @@
 	}
 		//拼接列表
 		function _parseRecords(record){	
-			$("tbody").empty();
+			$(".gt-table").empty();
 			ht="<tr>"+
 	     	"<td>订单号       </td>"+
          	"<td>预约时间    </td>"+
