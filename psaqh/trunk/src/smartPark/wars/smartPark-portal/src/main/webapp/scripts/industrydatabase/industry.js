@@ -213,7 +213,8 @@ $(document).ready(function() {
 					$("#rzImages").empty();
 					$("#imagesDiv").empty();
     				for(var i=0; i<images.length; i++){
-    					$("#rzImages").append("<li><img src='/filestore/"+images[i]+"'></li>");
+    					var src = cenUrl+"common/uploadImage.html?repository=/swfupload&path="+images[i]+"&method=show";
+    					$("#rzImages").append("<li><img src='"+src+"'></li>");
     				}
     				for(var j=0; j<images.length/2; j++){
     					if(j==0){
