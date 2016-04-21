@@ -65,13 +65,13 @@
 		}
 		//订单中心详情跳转
 		function viewOrder(userorderCode,genreCode){
-			if(genreCode == "0301"){
+			if(genreCode == "0301"){//会议室
 				window.location.href=cenUrl+"member/memberCenter/personalCenter/meetingRoomOrderDetails.html?userorderCode="+userorderCode;
-			}else if(genreCode == "0302"){
+			}else if(genreCode == "0302"){//车辆
 				window.location.href=cenUrl+"member/memberCenter/personalCenter/carOrderDetails.html?userorderCode="+userorderCode;
-			}else if(genreCode == "0303"){
+			}else if(genreCode == "0303"){//广告位
 				window.location.href=cenUrl+"member/memberCenter/personalCenter/adsenseOrderDetails.html?userorderCode="+userorderCode;
-			}else if(genreCode == "0304"){
+			}else if(genreCode == "0304"){//预留停车位
 				window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderCode="+userorderCode;
 			}
 		};
