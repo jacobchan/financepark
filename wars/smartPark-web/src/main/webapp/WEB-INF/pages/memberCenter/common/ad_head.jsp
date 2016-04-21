@@ -70,8 +70,9 @@
 		        		<dt></dt> 
 			        	<dd><a href="javascript:void(0)" onclick="goProperties('wisdompark/office.html')">虚拟空间</a></dd>
 		        		<dd><a href="javascript:void(0)" onclick="goProperties('wisdompark/business.html')">智慧商业</a></dd>
-		        		<dd><a href="javascript:void(0)" onclick="goProperties('wisdompark/safa.html')">安全园区</a></dd>
-		        		<dd><a href="javascript:void(0)" onclick="goProperties('cg30/index.html')">30采购</a></dd>
+		        		<!-- <dd><a href="javascript:void(0)" onclick="goProperties('wisdompark/safa.html')">安全园区</a></dd> -->
+		        		<dd><a href="javascript:void(0)" onclick="goProperties('industrydatabase/enterprise.html')">产业数据库</a></dd>
+		        		<!-- <dd><a href="javascript:void(0)" onclick="goProperties('cg30/index.html')">30采购</a></dd> -->
 	        		</dl>
 		        </li>
 		        <li>
@@ -81,7 +82,7 @@
 		        		<dd><a href="javascript:void(0)" onclick="goProperties('yqfw/yq13.html')">入驻服务</a></dd>
 		        		<dd><a href="javascript:void(0)" onclick="goProperties('yqfw/yq7.html')">物业服务</a></dd>
 		        		<dd><a href="javascript:void(0)" onclick="goProperties('companyservice/carLease.html')">公共资源</a></dd>
-		        		<dd><a href="javascript:void(0)" onclick="goProperties('industrydatabase/enterprise.html')">产业数据库</a></dd>
+		        		<!-- <dd><a href="javascript:void(0)" onclick="goProperties('industrydatabase/enterprise.html')">产业数据库</a></dd> -->
 		        	</dl>
 		        </li>
 		        <li><a href="javascript:void(0)" onclick="goProperties('companyservice/ITserver.html')">企业服务</a></li>
@@ -89,10 +90,11 @@
 		        	<a href="javascript:void(0)" onclick="goProperties('czh/czh1.html')" >创智汇</a>
 		        	<dl>
 		        		<dt></dt>
+		        		<dd><a href="javascript:void(0)" onclick="goProperties('czh/czh1.html')" >创智汇</a></dd>
 		        		<dd><a href="javascript:void(0)" onclick="goProperties('czh/czh2.html')">创智汇介绍</a></dd>
 		        		<dd><a href="javascript:void(0)" onclick="goProperties('czh/czh4.html')">创智讲堂</a></dd>
 		        		<dd><a href="javascript:void(0)" onclick="goProperties('czh/czh5.html')">硅谷创业营</a></dd>
-		        		<dd><a href="javascript:void(0)" onclick="goProperties('cg30/store.html')">积分商城</a></dd>
+		        		<!-- <dd><a href="javascript:void(0)" onclick="goProperties('cg30/store.html')">积分商城</a></dd> -->
 		        	</dl>
 		        </li>
 		    </ul>
