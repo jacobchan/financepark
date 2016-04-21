@@ -121,7 +121,7 @@
 			//async: false, 
 			success:function(result){
 				if(result&&result.record){
-					console.log(result.record) ;
+					//console.log(result.record) ;
 					_parseRecords(result.record);
 					
 				}
@@ -235,7 +235,7 @@
 				data:params.join('&'),
 				success:function(result){
 					if(result&&result.record){
-						console.log(result.record) ;
+						//console.log(result.record) ;
 						var record = result.record ;
 						if(record.flag == '0'){
 							$(".c-o.aa").text(record.msg);
