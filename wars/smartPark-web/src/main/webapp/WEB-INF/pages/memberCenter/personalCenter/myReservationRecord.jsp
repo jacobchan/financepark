@@ -108,10 +108,12 @@
 				    recordStatus="已取消";
 				    buttonHtml="<td></td>";
 				}
+				var visiteTime=record[i].visiteTime;
+				visiteTime=visiteTime?visiteTime:"";
 				html+="<tr id='"+id+"'>"+
 					 "<td><a href=''>"+record[i].recordCode+"</a></td>"+ 
-					"<td>"+record[i].visiteDate+"&nbsp;"+record[i].visiteTime+"</td>"+
-					"<td>"+record[i].recordMemberId+"</td>"+				
+					"<td>"+record[i].visiteDate+"&nbsp;"+visiteTime+"</td>"+
+					"<td>"+record[i].recordCommdityName+"</td>"+				
 					"<td>"+recordStatus+"</td>"+
 					buttonHtml+
 					"</tr>";
