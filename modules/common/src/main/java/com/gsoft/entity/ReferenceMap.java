@@ -11,8 +11,8 @@ public class ReferenceMap extends HashMap<String, String>{
 
 	public ReferenceMap(){
 	//	super();
-		this.put("#admin","");//管理员
-		this.put("#user","");//用户
+		this.put("#admin","#admin");//管理员
+		this.put("#user","#user");//用户
 		this.put("#phone","");//电话
 		this.put("#orderNo","");//订单编号
 		this.put("#flowNo","");//流程编号
