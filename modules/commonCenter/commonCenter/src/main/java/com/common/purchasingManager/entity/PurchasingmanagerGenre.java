@@ -65,6 +65,17 @@ public class PurchasingmanagerGenre implements Domain{
 	@Transient
 	private PurchasingmanagerGenre parentGenre;//上级类别
 	
+	@Transient
+	private PurchasingmanagerCommodity fristpurCommodity;//类别下第一个商品
+
+	public PurchasingmanagerCommodity getFristpurCommodity() {
+		return fristpurCommodity;
+	}
+
+	public void setFristpurCommodity(PurchasingmanagerCommodity fristpurCommodity) {
+		this.fristpurCommodity = fristpurCommodity;
+	}
+
 	public PurchasingmanagerGenre getParentGenre() {
 		return parentGenre;
 	}
