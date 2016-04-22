@@ -33,7 +33,12 @@ public class LoginUserData extends BaseDataController {
 	 * 获取注册手机验证码
 	 */
 	@RequestMapping("/registerCaptcha.json")
-	public DataModelAndView getMobileCaptcha(@RequestParam("phone") String phone,HttpServletRequest request) {
+	public DataModelAndView getMobileCaptcha(@RequestParam("phone") String phone,
+			@RequestParam("imageCode") String imageCode,HttpServletRequest request) {
+		String kaptchaExpected = (String)request.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+		if(!imageCode.equals(kaptchaExpected)){
+			return new DataModelAndView("验证码不正确");
+		}
 		Random random = new Random(new Date().getTime());
 		Long code = Math.abs(random.nextLong() % 999999);
 		String captcha = org.apache.commons.lang.StringUtils.leftPad(code.toString(), 6, '0');
