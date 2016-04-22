@@ -4,7 +4,6 @@
 		<colgroup>
 			<col width="120">
 			<col width="120">
-			<col>
 			<col width="120">
 			<col width="120">
 			<col width="120">
