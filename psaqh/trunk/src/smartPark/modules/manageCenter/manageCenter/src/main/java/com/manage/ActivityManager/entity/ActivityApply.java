@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.Length;
@@ -110,8 +111,17 @@ public class ActivityApply implements Domain{
     @JoinColumn(name="TYPE_ID_")
 	private com.manage.ActivityManager.entity.ApplayType applayType;//活动类型ID
 	
+	@Transient
+	private String documentPath ;
 	
-	
+	public String getDocumentPath() {
+		return documentPath;
+	}
+
+	public void setDocumentPath(String documentPath) {
+		this.documentPath = documentPath;
+	}
+
 	public String getActivityAdr() {
 		return activityAdr;
 	}
