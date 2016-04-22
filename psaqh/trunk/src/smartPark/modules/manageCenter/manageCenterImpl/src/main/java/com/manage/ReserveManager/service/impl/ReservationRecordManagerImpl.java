@@ -191,35 +191,35 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o=reservationRecordDao.save(o);
-    		//发送短信给联系人
-    		try {
-    			//构建替换模板参数对应的map
-    			Map<String, String> replaceMap = new ReferenceMap();
-    			replaceMap.put("#user", mem!=null?mem.getMemberName():o.getVisiteName());
-    			replaceMap.put("#appointmentNo", o.getRecordCode());
-    			//构建消息内容数据
-    			McMsgdatas msgData = mcMsgdatasManager.buildMsgData(MessageTempCode.MSG_USER_1, replaceMap);
-    			//发送消息,给会员
-    			//mcMsgdatasManager.sendMessage(msgData, mem!=null?mem.getMemberId():null, 1);
-    			mcMsgdatasManager.sendMessage(msgData, mem!=null?mem.getMemberPhoneNumber():o.getVisiteTel(), 5);
-    			
-    			
-    			//获取关联项目
-    			String commodityId=o.getRecordCommdityId();
-    			PurchasingmanagerCommodity p =new PurchasingmanagerCommodity();
-				if(commodityId !=null){
-					p=purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
-				}
-				Map<String, String> replaceMap1 = new ReferenceMap();
-    			replaceMap.put("#appointmentNo", o.getRecordCode());
-    			replaceMap.put("#relateProject", p!=null?p.getCommodityTitle():null);
-    			//构建消息内容数据
-    			McMsgdatas msgData1 = mcMsgdatasManager.buildMsgData(MessageTempCode.MSG_BACKGROUND_4, replaceMap1);
-    			//发送消息,给招商管理员:ROLE_SALE_ADMIN
-    			mcMsgdatasManager.sendMessage(msgData1,"ROLE_SALE_ADMIN",2);
-    		} catch (Exception e) {
-    			e.printStackTrace();
-    		}
+//    		//发送短信给联系人
+//    		try {
+//    			//构建替换模板参数对应的map
+//    			Map<String, String> replaceMap = new ReferenceMap();
+//    			replaceMap.put("#user", mem!=null?mem.getMemberName():o.getVisiteName());
+//    			replaceMap.put("#appointmentNo", o.getRecordCode());
+//    			//构建消息内容数据
+//    			McMsgdatas msgData = mcMsgdatasManager.buildMsgData(MessageTempCode.MSG_USER_1, replaceMap);
+//    			//发送消息,给会员
+//    			//mcMsgdatasManager.sendMessage(msgData, mem!=null?mem.getMemberId():null, 1);
+//    			mcMsgdatasManager.sendMessage(msgData, mem!=null?mem.getMemberPhoneNumber():o.getVisiteTel(), 5);
+//    			
+//    			
+//    			//获取关联项目
+//    			String commodityId=o.getRecordCommdityId();
+//    			PurchasingmanagerCommodity p =new PurchasingmanagerCommodity();
+//				if(commodityId !=null){
+//					p=purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
+//				}
+//				Map<String, String> replaceMap1 = new ReferenceMap();
+//    			replaceMap.put("#appointmentNo", o.getRecordCode());
+//    			replaceMap.put("#relateProject", p!=null?p.getCommodityTitle():null);
+//    			//构建消息内容数据
+//    			McMsgdatas msgData1 = mcMsgdatasManager.buildMsgData(MessageTempCode.MSG_BACKGROUND_4, replaceMap1);
+//    			//发送消息,给招商管理员:ROLE_SALE_ADMIN
+//    			mcMsgdatasManager.sendMessage(msgData1,"ROLE_SALE_ADMIN",2);
+//    		} catch (Exception e) {
+//    			e.printStackTrace();
+//    		}
     		return o;
     	}
     	
