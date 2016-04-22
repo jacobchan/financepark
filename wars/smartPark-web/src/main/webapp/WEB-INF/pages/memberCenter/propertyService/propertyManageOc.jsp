@@ -12,15 +12,24 @@
 							<div class="inp-box ml20"><input placeholder="订单号查询" type="text" id="ocCode"><a class="fa fa-search" href=""></a></div>
 							<input value="搜索" class="hhf-submit f14 fr" type="button">
 						</div>											   					    
-						<table class="gt-table mt20" border="0">
-                        <tr>
-					     	<td width="111">订单号 </td>
-                         	<!-- <td width="111">企业名称    </td> -->
-                         	<td width="111">预约时间    </td>
-                         	 <td width="111">预约用户  </td> 
-                         	<td width="111">状态        </td>
-                         	<td width="111">操作  </td>
-                         </tr>                          
+						<table class="gt-table mt20">
+							<colgroup>
+								<col width="150"></col>
+								<col width="150"></col>
+								<col width="150"></col>
+								<col width="120"></col>
+								<col width="150"></col>
+								
+							</colgroup>
+							<tbody><tr>
+								<th>订单号</th>
+								<th>预约时间</th>
+								<th>预约用户</th>
+								<th>状态</th>
+								<th>操作</th>
+							</tr></tbody>
+
+                         <tbody class="oclist"></tbody>                        
                          </table>                     
 					<div class="tcdPageCode fr"></div>
 					</div>
@@ -34,7 +43,7 @@
         
     </div>
 	<!--***bottom start****************************************-->
-   <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
+   
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 	<script type="text/javascript">
 	var pageSize=10; //每页默认显示10条
@@ -47,8 +56,7 @@
 			url:baseUrl+'propertyservicemanagerOcManager/getTotalCount.json', 
 			success:function(results){	
 				var totalCount=results.records[0].totalCount;
-				pageCount = Math.ceil(totalCount / pageSize);//页数
-							
+				pageCount = Math.ceil(totalCount / pageSize);//页数						
 							 refreshData(1,pageSize);
 								$(".tcdPageCode").createPage({
 								    pageCount:pageCount,
@@ -59,9 +67,6 @@
 								        refreshData(p,pageSize);
 								    }
 								});			
-			/* 	if(result&&result.records){
-					_parseRecords(result.records);
-				} */
 			}
 		}); 			
 	});	
@@ -82,7 +87,7 @@
 	}
 		//拼接列表
 		function _parseRecords(record){	
-			$(".gt-table").empty();
+			$(".oclist").empty();
 			ht="<tr>"+
 	     	"<td>订单号       </td>"+
          	"<td>预约时间    </td>"+
@@ -90,7 +95,7 @@
          	"<td>状态           </td>"+
          	"<td>操作          </td>"+
             "</tr>";
-            $(".gt-table").append(ht);
+          //  $(".gt-table").append(ht);
 	 		for(var i=0;i<record.length;i++){
 				var status = "";	
 				var button = "";	
@@ -113,7 +118,7 @@
 				      "<td width='111'>"+status+"</td>"+				    
 				      "<td width='111' >"+button+"</td>"+                    
                       " </tr>"; 
-			 		$(".gt-table").append(html);									 				
+			 		$(".oclist").append(html);									 				
 			}
 		};
 		function hhf(id){						
