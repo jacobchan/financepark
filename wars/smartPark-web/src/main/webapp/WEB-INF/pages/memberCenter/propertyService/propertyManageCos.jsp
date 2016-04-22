@@ -136,11 +136,12 @@
 					status = "已退回";
 				}
 				var html="<tr id='"+record[i].cosId+"' class='aaa'>"+
-				"<td>"+"<a href='<%=request.getContextPath()%>/member/memberCenter/propertyService/propertyManageCosDetail.html'>"+record[i].cosCode+"</a>"+"</td>"+
-				"<td>"+record[i].cosTime+"</td>"+
-				"<td>"+record[i].cosName+"</td>"+
-				"<td>"+record[i].cosTelephone+"</td><td>"+status+"</td>"+
-				"<td><a href='javascript:;' onclick='javascript:cancel(this)' class='ac-show'>"+crop+"</a></td></tr>";
+							"<td><a href='javascript:;' onclick='viewOrder(\""+record[i].cosCode+"\")' class='ac-show'>"+record[i].cosCode+"</a></td>"+
+							"<td>"+record[i].cosTime+"</td>"+
+							"<td>"+record[i].cosName+"</td>"+
+							"<td>"+record[i].cosTelephone+"</td><td>"+status+"</td>"+
+							"<td><a href='javascript:;' onclick='javascript:cancel(this)' class='ac-show'>"+crop+"</a></td>"+
+						  "</tr>";
 				
 				$(".knowledge.a").append(html);
 			}
@@ -243,6 +244,10 @@
 			setTimeout(function(){$(".toast").hide(); },2000);
 			refreshData(currentIndex,pageSize);
       }
+	function viewOrder(cosCode){
+		
+			window.location.href=cenUrl+"member/memberCenter/propertyService/propertyManageCosDetail.html?cosCode="+cosCode;
+		};
 	</script>
 	
 </youi:html>
