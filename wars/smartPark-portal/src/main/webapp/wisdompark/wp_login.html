@@ -11,6 +11,51 @@
 <body>
 <div id="youi_page_header" class="youi-page-header clearfix"></div>
 <!--***top end****************************************-->
+<div class="pop_layer pl1">
+		<div class="online_box clearfix"
+			style="width: 550px; height: 212px; margin-left: -275px; margin-top: -111px; padding: 30px;">
+			<div class="close0 fr"></div>
+			<table class="w100 mt40 c3">
+				<tr>
+					<td width="28%" align="right"><img
+						src="../styles/images/grzx/check.png" class="mr40 mb20" border="0"></td>
+					<td>
+						<h4 class="f24 c-333">您已预约成功！</h4>
+						<p class="f14 cc mt20 mb20">如有问题，请拨打：0571-86508888</p>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+<div class="bg-tanc m1">
+		<div class="tanc-con"
+			style="top: 50%; margin-top: -225px; width: 550px; padding: 40px 30px;">
+			<a href="javascript:;" class="tc-close" id="clo"></a>
+			<div class="tc mt40">
+				<div class="mt20 mb20 f16 lh26">
+					<img src="../styles/images/yqfw/correct.png" border="0"
+						class="mr20" />
+				</div>
+				<p class="mb10 f16">您已经成功预约，请到会员中心查看预约状态。</p>
+				<p>
+					<span class="c-o f24 tc-time mr5" id="ti-m1">5 </span>秒后，系统将自动跳转
+				</p>
+				<!-- <p class="mt10"><a href="" class="c-6">手动跳转 ></a></p> -->
+				<!-- <div class="clearfix mt15 pt15"
+					style="border-top: 1px solid #efecec">
+					<a style="cursor: pointer;" onclick="jumpOrder();" class="ib-btn"
+						style="width:120px;">前往查看</a> <span class="ml30 mr30"></span> <a
+						style="cursor: pointer;" onclick="jumpBack();"
+						class="ib-btn fs-btn" style="width:120px;">返回</a>
+				</div> -->
+				<div class="clearfix mt30">
+					<a style="cursor:pointer;" onclick="jumpIndex();"  class="c-6"><i class="fa fa-home mr10" style="font-size:24px;"></i>返回首页</a>
+					<span class="f14 ml20 mr20 c-6">|</span>
+					<a style="cursor:pointer;" onclick="jumpPerson();"  class="c-6"><i class="fa fa-user mr10" style="font-size:20px;"></i>个人中心</a>
+				</div>
+			</div>
+		</div>
+	</div>
 <!--这里自己调用 页面加载动态效果-->	
  <div class="clearfix undis" id="loading">
 	<div id="contain">
@@ -72,6 +117,10 @@
             <tr>
             	<td>房间名称：</td>
                 <td class="roomNo" align="left"></td>
+            </tr>
+            <tr class="undis">
+            	<td>ID：</td>
+                <td class="roomId" align="left"></td>
             </tr>
             <tr>
             	<td>房间面积：</td>
@@ -217,7 +266,7 @@
 </div>
 <!--******************  code end  ****************************-->
 <!-- 弹窗  start-->
-<div class="bg-tanc m1">
+<div class="bg-tanc n1">
 	<div class="tanc-con" style="top:50%;margin-top:-250px;width:420px;padding:40px;">
 		<a href="javascript:;" class="tc-close"></a>
 		<h3 class="mb10"><b>预约</b></h3>
@@ -228,15 +277,15 @@
 			</colgroup>
 			<tr>
 				<td valign="top">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</td>
-				<td><input type="text" style="width:260px"></td>
+				<td><input type="text" style="width:260px" id="name_1"></td>
 			</tr>
 			<tr>
 				<td valign="top">手&nbsp;&nbsp;机&nbsp;&nbsp;号</td>
-				<td><input type="text" style="width:260px"></td>
+				<td><input type="text" style="width:260px" id="mobile_1"></td>
 			</tr>
 			<tr>
 				<td valign="top">来访日期</td>
-				<td><input type="text" id="fkcodeDate" placeholder="请输入入驻日期" style="width:260px"></td>
+				<td><input type="text" id="fkcodeDate" placeholder="请输入来访日期" style="width:260px"></td>
 			</tr>
 			<tr>
 				<td valign="top">来访时间</td>
@@ -263,7 +312,7 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td><a href="javascript:;" class="ib-btn tc tj" style="width:120px;">提交</a></td>
+				<td><a href="javascript:;" class="ib-btn tc tj" style="width:120px;" id="ly6">提交</a></td>
 			</tr>
 		</table>
 		<div class="error-toast">
@@ -280,6 +329,7 @@
 <script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 <script type="text/javascript" src="../scripts/page/url.js"></script>
 <script type="text/javascript" src="../scripts/page/laydate/laydate.js"></script>
+<script type="text/javascript" src="../scripts/page/right.js"></script>
 <script>
 	$(function(){
 		$(".tj_radio").click(function(){
@@ -291,7 +341,12 @@
 		$("#tj_pop").click(function(){
 			$(".pop_layer").show();
 		});
-
+		$(".close0").click(function(){
+			$(".pop_layer.pl1").hide();
+		});
+		$("#clo").click(function(){
+			clearInterval(timer2);
+		}) ;
 		 //选时间
 		$("#lf_time").on("click",function(e){
             e.stopPropagation();
@@ -313,11 +368,128 @@
             $(".time-nav").hide();
         });
 		
+		$(".btn-chengk").click(function(){
+			var roomId = $(".roomId").text() ;
+			if(roomId == null || roomId == ""){
+				close("请选择一个有效单元！") ;
+			}else{
+				$(".bg-tanc.n1").show() ;
+			}
+		}) ;
+		
+		function clear(){
+			$("#name_1").val("") ;
+			$("#mobile_1").val("") ;
+			$("#fkcodeDate").val("") ;
+			$("#lf_time").val("") ;
+			$(".bg-tanc.n1").hide();
+		}
+		
+		$("#ly6").click(function(){
+			var lf_name = $("#name_1").val() ;
+			var lf_tel = $("#mobile_1").val() ;
+			var lf_date = $("#fkcodeDate").val() ;
+			var lf_time = $("#lf_time").val() ;
+			var roomId = $(".roomId").text() ;
+			
+			if(lf_name.trim() == ""){
+				showMessage("姓名不能为空！") ;
+				return ;
+			}
+			if(lf_tel.trim() == ""){
+				showMessage("手机号不能为空！") ;
+				return ;
+			}
+			var isMobile=/^(?:13\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;//手机号的格式
+			if(! isMobile.test(lf_tel)){
+				showMessage("请输入正确的手机号！");
+				return ;
+			}
+			if(lf_date.trim() == ""){
+				showMessage("来访日期不能为空！") ;
+				return ;
+			}
+			if(lf_time.trim() == ""){
+				showMessage("来访时间不能为空！") ;
+				return ;
+			}
+			
+			var params=["recordCommdityId="+roomId,"visiteDate="+lf_date,
+			            "visiteTime="+lf_time,"visiteTel="+lf_tel,
+			            "visiteName="+lf_name,"recordType="+"03"] ;
+			var serviceURL = baseUrl+ "reservationRecordManager/saveReservationRecord.json";
+			//公共方法
+			$.youi.ajaxUtils.ajax({
+				url : serviceURL,
+				data : params.join('&'),
+				jsonp : 'data:jsonp',
+				dataType : 'jsonp',
+				success : function(result) {
+					if (result && result.record) {
+						if (isLogin) {
+							clear();
+							$(".bg-tanc.m1").show();
+							$('#ti-m1').text('5');
+							b = 5;
+							timer2 = setInterval("jump2()",1000);
+						} else {
+							clear() ;
+							$(".pop_layer.pl1").show();
+							a = 3;
+							timer1 = setInterval("jump1()",1000);
+						}
+					}
+				}
+			});
+			
+		}) ; 
+		
 	});
 
-
+	 //跳转个人中心
+	 function jumpPerson(){
+	 	window.location.href=cenUrl+"member/memberCenter/personalCenter/personInfo.html";
+	 }
+	 //跳转首页
+	 function jumpIndex(){
+	 	window.location.href=cenUrl;
+	 }
 		
-	
+	 //显示信息
+    function showMessage(message){
+     	$(".error-toast").animate({top:"20px",opacity:"1"});
+     	$(".error-toast p").html(message);
+ 		setTimeout(function(){$(".error-toast").animate({top:"-40px",opacity:"0"})},2000);
+     }
+	 
+    var a,timer1;
+	function jump1() {
+		if (a > 1) {
+			a--;
+			$("#ti-m1").text(a);
+		} else {
+				$(".pop_layer.pl1").hide();
+		}
+	}
+	var b,timer2;
+	function jump2() {
+		if (b > 1) {
+			b--;
+			$("#ti-m1").text(b);
+		} else {
+			window.location = cenUrl+ "member/memberCenter/personalCenter/myReservation.html?showFlg=1";
+		}
+	}
+
+	//跳转我的预约
+	function jumpOrder() {
+		window.location = cenUrl
+				+ "member/memberCenter/personalCenter/myReservation.html";
+	}
+	//返回
+	function jumpBack() {
+		window.location = "index.html";
+	}
 </script>
 <script type="text/javascript">
 		 $(function(){
@@ -463,7 +635,7 @@
 							dataType:'jsonp',
 							success:function(results){
 								var record = results.record ;
-								console.log(record) ;
+								//console.log(record) ;
 								if(record.status == "02"){//01表示已售已招
 									
 									$("#ws").addClass("undis") ;
@@ -482,7 +654,7 @@
 												var rz = results.record ;
 												var rzName = rz.rzName ;
 												var id = rz.rzId ;
-												console.log(rzName) ;
+												//console.log(rzName) ;
 												$("#rzName").text(rzName) ;
 												$("#rzName").attr("href","../industrydatabase/industry.html?id="+id) ;
 												$("#ck").attr("href","../industrydatabase/industry.html?id="+id) ;
@@ -498,6 +670,11 @@
 									$(".roomNo").text(record.roomNo) ;
 								}else{
 									$(".roomNo").text("") ;
+								}
+								if(record.roomId){
+									$(".roomId").text(record.roomId) ;
+								}else{
+									$(".roomId").text("") ;
 								}
 								if(record.area){
 									$(".area").text(record.area+" 平方米") ;
@@ -527,6 +704,7 @@
 							}
 						});
 					}else{
+						//$(".roomId").text("") ;
 						$("#roomNo").text("") ;
 						$("#area").text("") ;
 						$("#aspect").text("") ;
