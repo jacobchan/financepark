@@ -27,8 +27,7 @@
 								<th>预约用户</th>
 								<th>状态</th>
 								<th>操作</th>
-							</tr></tbody>
-
+							</tr></tbody>							
                          <tbody class="oclist"></tbody>                        
                          </table>                     
 					<div class="tcdPageCode fr"></div>
@@ -88,14 +87,7 @@
 		//拼接列表
 		function _parseRecords(record){	
 			$(".oclist").empty();
-			ht="<tr>"+
-	     	"<td>订单号       </td>"+
-         	"<td>预约时间    </td>"+
-         	"<td>预约用户  </td> "+
-         	"<td>状态           </td>"+
-         	"<td>操作          </td>"+
-            "</tr>";
-          //  $(".gt-table").append(ht);
+			if(record.length>0){
 	 		for(var i=0;i<record.length;i++){
 				var status = "";	
 				var button = "";	
@@ -120,6 +112,12 @@
                       " </tr>"; 
 			 		$(".oclist").append(html);									 				
 			}
+			}else{
+				var	html1 = '<tr>'
+					html1 += '	<td colspan="6">暂无记录</td>'
+					html1 += '</tr>'
+				 $(".oclist").html(html1);	
+				}		
 		};
 		function hhf(id){						
 			var ocId=id;			
