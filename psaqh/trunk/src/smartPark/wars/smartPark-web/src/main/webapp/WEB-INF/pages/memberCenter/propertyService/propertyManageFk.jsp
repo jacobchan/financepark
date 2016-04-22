@@ -21,8 +21,19 @@
 								<col width="150"></col>
 								<col></col>
 							</colgroup>
-							<tbody class=knowladege>
-						</tbody></table>
+							<tbody>
+								<tr>
+									<th>订单号</th>
+									<th>到访时间</th>
+									<th>到访状态</th>
+									<th>访客姓名</th>
+									<th>访客电话</th>
+									<th>操作</th>
+								</tr>
+							</tbody>
+							<tbody class="fklist">
+							</tbody>
+							</table>
 						<div class="tcdPageCode fr">
 						
 						</div>
@@ -111,11 +122,8 @@
 		//拼接列表
 		function _parseRecords(record){
 			//$("tbody").find('tr:eq(1)').html("");	
-			$("tbody").empty();
-		  	var ht = "<tr><th>订单号</th><th>到访时间</th>"+
-				"<th>到访状态</th><th>访客姓名</th><th>访客电话</th><th>操作</th>";
-			$("tbody").append(ht);
-			
+			$(".fklist").empty();
+			if(record.length>0){
 			for(var i=0;i<record.length;i++){
 				var id = record[i].fkcodeId ;
 				var time = record[i].fkcodeTime ;
@@ -140,7 +148,12 @@
 						"<td><a href='javascript:;' onclick='javascript:qrcode(this)' class='ac-see'>查看二维码</a>"+"</td>"+
 						"</tr>";
 				 $("tbody").append(html);							
-			}
+			}}else{
+				var	html1 = '<tr>'
+					html1 += '	<td colspan="6">暂无记录</td>'
+					html1 += '</tr>'
+						$(".fklist").html(html1);	
+				}
 		};		
 		//确认取消弹窗
 		function cancel(obj){
