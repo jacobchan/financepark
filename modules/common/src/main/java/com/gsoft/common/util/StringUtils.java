@@ -72,7 +72,7 @@ public class StringUtils {
 		return str;
 	}
 	
-	/**替换字符串中多个占位符,replaceMap不要 key=value
+	/**替换字符串中多个占位符,占位符限定为targets的值
 	 * @param str
 	 * @param targets
 	 * @param replaceMap
@@ -92,5 +92,20 @@ public class StringUtils {
 		return str;
 	}
 	
+	/**替换字符串中多个占位符,占位符没有要求
+	 * @param str
+	 * @param targets
+	 * @param replaceMap
+	 * @return
+	 */
+	public static String replaceAllString(String str,Map<String,String> replaceMap){
+		if(com.gsoft.framework.util.StringUtils.isNotEmpty(str)){
+			for(Map.Entry<String, String> entry:replaceMap.entrySet()){
+				String result = str.replace(entry.getKey(), entry.getValue());
+				str = result;
+			}
+		}
+		return str;
+	}
 	
 }
