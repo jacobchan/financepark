@@ -240,11 +240,6 @@
             
             //提交方法
             $("#sub").click(function(){
-            	
-            	
-            	
-            	
-            	
             	var isMobile=/^(?:13\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;//手机号的格式
             	var isNum = /^\+?[1-9][0-9]*$/;
             	if (!isLogin) {
@@ -258,10 +253,6 @@
             	var cpLinkTel = $("#cpLinkTel").val();
             	var cpCount = $("#cpCount").val();
             	var cpEnAdr = $("#cpEnAdr").val();
-            	
-            	
-            	
-            	
             	if(cpEnName==''){
             		$("#msg").text("请填写企业名称");
 		            $(".toast").show();
@@ -311,13 +302,10 @@
             	
             	var cpEntdTime = $("#endTime").val()+" "+$("#cpEntdTime").find("li.selected").html();
             	var cpBegionTime = $("#startTime").val()+" "+$("#cpBegionTime").find("li.selected").html();
-            	
-            	
             	var e = new Date(cpEntdTime.replace(/-/g,"/")); 
             	var s = new Date(cpBegionTime.replace(/-/g,"/")); 
             	var hs = e-s;
             	var hours=Math.floor(hs/(3600*1000))
-            	
             	//订单金额： 小时*车辆数*每小时单据（25）
             	var userorderAmount = hours*cpCount*25;  
             	//提交
