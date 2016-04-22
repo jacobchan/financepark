@@ -16,3 +16,9 @@
 a.c3:hover{color: #FB7730;}
 .btn-cheng{padding:5px 120px;background:#FA742C;border:none;color:#fff;display:inline-block;cursor:pointer; display: block;margin: 35px;font-size: 16px;}
 .btn-cheng:hover{background:#ff5900;color:#fff !important;}
+.bd{border-bottom: 1px solid #efecec;}
+.btn-cheng-code{background:#FA742C;border:none;color:#fff;display:inline-block;cursor:pointer;}
+.btn-cheng-code:hover{background:#ff5900;color:#fff !important;}
+.pb-btn{background: #707070 none repeat scroll 0% 0%;display: inline-block;color: #FFF;}
+.pb-btn:hover{background: #555;color:#fff !important;}
+.message-yz{line-height: 45px;color: #c0c0c0;position: absolute;left: -1px; display: none; top: 45px;z-index: 2;text-align: center;font-size: 12px;width: 350px;border:1px solid #efecec;border-top: 0px;background: #fff;}
