@@ -90,22 +90,20 @@
 		 $.ajax({
 			url:serviceURL, 
 			success:function(results){	
-							pageCount=Math.ceil(results.totalCount/pageSize);//页数							
-							 refreshData(1,pageSize);
-								$(".tcdPageCode").createPage({
-								    pageCount:pageCount,
-								    current:1,
-								    backFn:function(p){
-								    	currentIndex = p;
-								       this.pageCount=pageCount;
-								        refreshData(p,pageSize);
-								    }
-								});			
+				pageCount=Math.ceil(results.totalCount/pageSize);//页数							
+				refreshData(1,pageSize);
+				$(".tcdPageCode").createPage({
+					pageCount:pageCount,
+					current:1,
+					backFn:function(p){
+					currentIndex = p;
+					this.pageCount=pageCount;
+					refreshData(p,pageSize);
+					}
+				});			
 			}
 		}); 			
-	});	
-	
-	
+	});		
 	//分页列表
 	function refreshData(pageIndex,pageSize){
 		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
@@ -182,7 +180,7 @@
 				}
 			});
 		};
-		//确认取消按钮
+		//根据订单号查询
 		$('.hhf-submit').click(function(){	
 			var fkCode=$("#fkCode").val();
 			//alert(ocCode);
