@@ -23,8 +23,10 @@ import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.common.purchasingManager.dao.PurchasingmanagerGenreDao;
+import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
 import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
 
 @Service("purchasingmanagerGenreManager")
@@ -32,6 +34,8 @@ import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
 public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implements PurchasingmanagerGenreManager{
 	@Autowired
 	private PurchasingmanagerGenreDao purchasingmanagerGenreDao;
+	@Autowired
+	private PurchasingmanagerCommodityManager purchasingmanagerCommodityManager;
 	
     /**
      * 查询列表
@@ -270,6 +274,12 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
 			throws BusException {
 		PurchasingmanagerGenre pg = purchasingmanagerGenreDao.getObjectByUniqueProperty("genreCode", "0508");
 		List<PurchasingmanagerGenre> list = purchasingmanagerGenreDao.getList("pagrenId", pg.getGenreId());
+		for(PurchasingmanagerGenre purgenre:list){
+			List<PurchasingmanagerCommodity> purCommodityList =  purchasingmanagerCommodityManager.getCommodityRecordsByGenreId(purgenre.getGenreId());
+			if(purCommodityList != null){
+				purgenre.setFristpurCommodity(purCommodityList.get(0));
+			}
+		}
 		return list;
 	}
 	/**
