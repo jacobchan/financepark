@@ -22,16 +22,19 @@
 								<col width="150"></col>
 								<col></col>
 							</colgroup>
-							<tbody class="knowledge"><tr>
+							<tbody>
+							 <tr>
 								<th>订单号</th>
 								<th>申请时间</th>
 								<th>状态</th>
 								<th>联系人</th>
 								<th>联系电话</th>
 								<th>操作</th>
-							</tr>
-							
-						</tbody></table>
+							</tr>							
+						</tbody>
+						<tbody class="knowledge">
+						</tbody>
+						</table>
 						<div class="tcdPageCode fr"></div>
 					</div>
 					
@@ -61,17 +64,13 @@
 		</div>
 	</div>
 </youi:body>
-	
-	
-	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 	<script type="text/javascript">
 	var pageSize=10;
 	var pageCount=1;
 	var currentIndex = 1;
 	var serviceURL = baseUrl+'propertyservicemanagerBxManager/getPagerBxs.json';
-	$(function () {
-		
+	$(function () {	
 		//分页页码显示
 		 $.ajax({
 			url:baseUrl+'propertyservicemanagerBxManager/getTotalCount.json', 
@@ -89,10 +88,7 @@
 								       this.pageCount=pageCount;
 								        refreshData(p,pageSize);
 								    }
-								});			
-			/* 	if(result&&result.records){
-					_parseRecords(result.records);
-				} */
+								});		
 			}
 		}); 			
 	});	
@@ -114,15 +110,7 @@
 		//拼接列表
 		function _parseRecords(record){
 			$(".knowledge").empty();
-			var ht="<tr>"+
-			"<th>订单号</th>"+
-			"<th>申请时间</th>"+
-			"<th>状态</th>"+
-			"<th>联系人</th>"+
-			"<th>联系电话</th>"+
-			"<th>操作</th>"+	
-				"</tr>";
-		$(".knowledge").append(ht);
+			if(record.length>0){
 			for(var i=0;i<record.length;i++){
 				var bxStatus='';
 				var buttonHtml='';
@@ -148,7 +136,8 @@
 					bxStatus='已取消';
 				}
 				var html="<tr id='"+record[i].bxId+"' class='aaa'>"+
-						"<td><a href=''>"+record[i].bxCode+"</a></td>"+
+						//"<td><a href=''>"+record[i].bxCode+"</a></td>"+
+						"<td><a href='javascript:;' onclick='viewDetail(\""+record[i].bxCode+"\")' class='ac-show'>"+record[i].bxCode+"</a></td>"+
 						"<td>"+record[i].applyTime+"</td>"+
 						"<td>"+bxStatus+"</td>"+
 						//"<td>"+"张三"+"</td>"+
@@ -157,7 +146,12 @@
 						"<td>"+buttonHtml+"</td>"
 						"</tr>";
 				 $(".knowledge").append(html);
-			}
+			}}else{
+				var	html1 = '<tr>'
+					html1 += '	<td colspan="6">暂无记录</td>'
+					html1 += '</tr>'
+						$(".knowledge").html(html1);	
+				}	
 		};
 		 function cancel(obj){
 				var me=obj.parentNode.parentNode;
@@ -270,6 +264,10 @@
 			setTimeout(function(){$(".toast").hide(); },2000);
 			refreshData(currentIndex,pageSize);
       }
+	  function viewDetail(cosCode){
+			
+			window.location.href=cenUrl+"member/memberCenter/propertyService/propertyManageBxDetail.html?cosCode="+cosCode;
+		};
 	</script>
 	<script type="text/javascript">
 	    //点击跳转到投诉页面
