@@ -138,8 +138,7 @@
 					html1 += '	<td colspan="6">暂无记录</td>'
 					html1 += '</tr>'
 						$(".knowledge.a").html(html1);	
-				}
-		
+				}		
 		};
 	 $('.hhf-submit.query').click(function(){	
 		var cosCode=$("#cosCode").val();
