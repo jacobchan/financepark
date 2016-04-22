@@ -68,4 +68,10 @@ public interface ActivityDocumentManager extends BaseManager{
      * 获取文档转换html
      */
     public String  getViewDocument(String id) throws BusException;
+    
+    /**
+     * 保存活动文档列表
+     * @param o
+     */
+    public void saveActivityDocumentList(ActivityDocument o) ;
 }
