@@ -154,7 +154,7 @@ to {opacity:0;}
 						var parkId = park.parkId ;//得到园区ID
 						var params = ["parkId="+parkId];
 						$.youi.ajaxUtils.ajax({
-							url:baseUrl +"bbmBuildingManager/getAllBuildingByParkId.json",//通过园区名称来获取该园区所有楼栋
+							url:baseUrl +"bbmBuildingManager/getAllBuildingByParkId.json",//通过园区ID来获取该园区所有楼栋
 							data:params.join('&'),
 							jsonp:'data:jsonp',
 							dataType:'jsonp',
