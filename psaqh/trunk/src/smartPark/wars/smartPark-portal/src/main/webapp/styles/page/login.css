@@ -12,7 +12,7 @@
 .login_foot{border-top:1px #BFBFBF solid;padding-top:30px;}
 .login_foot a{color:#B8B8B8;margin:0 20px;display:inline-block;font-size: 14px;}
 .login_foot a:hover{color: #666;}
-.c3{color: #333;}.co{color: #ea7b40;}
+.c3{color: #333;}.co{color: #FB7730;}a.co:hover{color: #ff5900;text-decoration: underline;}
 a.c3:hover,a.co:hover{color: #FF6714;}
 .lh50{line-height: 50px;}
 .bd{border-bottom: 1px solid #efecec;}
