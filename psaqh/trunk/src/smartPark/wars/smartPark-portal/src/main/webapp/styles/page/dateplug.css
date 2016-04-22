@@ -1,0 +1,14 @@
+/* CSS Document */
+       .kalendar-detail{position: relative;padding: 0 40px; padding-bottom:30px; display: none}
+	   .kalendar-table{width: 100%;}
+	   .kalendar-detail .pick-up{ position: absolute; right: 22px; bottom: 6px; padding: 2px 20px; background: #fef7ed;color:#ff6715; font-size: 12px; height: 20px; line-height: 20px; border-radius: 2px; box-sizing:content-box; -webkit-box-sizing: content-box; -moz-box-sizing: content-box;-o-box-sizing: content-box;}
+	   .kalendar-detail .pick-up i{ display: inline-block; width: 12px; height: 10px; margin: 5px 15px 0 0; background:url(../images/slideUp.png) center center no-repeat; float:left;}
+	   .kalendar-table tbody td{height: 50px;border: solid 1px #f4f3f3; color:#000; font-weight: bold; font-size:14px;text-align:left;padding: 0 5px;cursor: pointer;}
+	   .kalendar-table thead{line-height: 55px;text-align: center;}
+	   .kalendar-table thead td .border{border-top:solid 1px #f4f3f3;padding-bottom: 30px;}
+	   .kalendar-table thead td{border:0; border-bottom: solid 1px #f4f3f3; font-size: 16px; padding-top: 10px;color:#000; font-weight: bold;}
+	   .kalendar-table thead td a{font-size: 28px;color: #E8E2DB;display: block;width: 30px;height: 30px;text-align: center;line-height: 30px;margin-top: 13px;border-radius: 50%;font-weight: bold; text-align: center;}
+	   .kalendar-table thead td a:hover{color: #fff; background: #ff6716;}
+	   .kalendar-table tbody td .price{text-align: right;color:#ff6715; line-height: 25px;font-weight: normal;}
+	   .kalendar-table tbody td:hover{background: #f6f6f6;}
+	   .kalendar-table tbody td.ago{background: #CCC;}
