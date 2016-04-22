@@ -85,8 +85,8 @@ public interface McMsgdatasManager extends BaseManager{
 	
 	/**发送消息统一处理，id为空读取模板的发送人，否则根据type判断id的类型确定发送人
 	 * @param mcMsgdatas 消息内容
-	 * @param id 用户/会员/用户角色/会员角色/用户角色组	 id
-	 * @param type 用户/会员/角色/角色组 	 类型（0,1,2,3,4）
+	 * @param id 用户/会员/用户角色/会员角色/用户角色组/匿名（phone）	 id
+	 * @param type 用户/会员/角色/角色组/匿名 	 类型（0,1,2,3,4,5）
 	 * @throws BusException
 	 */
 	public void sendMessage(McMsgdatas mcMsgdatas,String id,int type) throws BusException;
