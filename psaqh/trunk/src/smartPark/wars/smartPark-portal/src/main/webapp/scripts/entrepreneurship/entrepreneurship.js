@@ -246,7 +246,7 @@ $(function(){
 		 				if(content.length>100){
 		 					content = content.substring(0,86)+"......";
 		 				}
-						html+="<div class='cic-group'>"+
+						html+="<div class='cic-group' style='cursor:pointer' onclick='opPage(this)' id="+record[i].applyId+">"+
 							"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityImage+"&method=show' style='width: 277px;height: 164px;' border='0'>"+
 							"<h4>"+record[i].applyTitle+"</h4>"+
 							"<p>"+content+"</p></div>";
@@ -277,13 +277,13 @@ $(function(){
 		 					var star = record[i].startTime;
 		 					var mon = getmonth(star);
 		 					var min = gethour(star);
-		 					html +="<div><em class='em1'>"+mon+"</em><p>"+record[i].applyTitle+"</p><span>"+min+"</span></div>";
+		 					html +="<div style='cursor:pointer' onclick='opPage(this)' id="+record[i].applyId+"><em class='em1'>"+mon+"</em><p>"+record[i].applyTitle+"</p><span>"+min+"</span></div>";
 		 				}
 		 				if(status=='02'){
 		 					var star = record[i].startTime;
 		 					var mon = getmonth(star);
 		 					var min = gethour(star);
-		 					html +="<div><em class='em2'>"+mon+"</em><p>"+record[i].applyTitle+"</p><span>"+min+"</span></div>";
+		 					html +="<div style='cursor:pointer' onclick='opPage(this)' id="+record[i].applyId+"><em class='em2'>"+mon+"</em><p>"+record[i].applyTitle+"</p><span>"+min+"</span></div>";
 		 				}
 					}
 					$('.cic-trip').empty();
@@ -292,6 +292,13 @@ $(function(){
 			}
 		});
 	}
+	//跳转活动详情
+	function opPage(obj){
+		var applyId=obj.id;
+		var url="../czh/czh3.html"+"?"+"applyId="+applyId; 
+		window.location.assign(url); 
+	}
+	
 	
 	//截取月年
 	function getmonth(time){
