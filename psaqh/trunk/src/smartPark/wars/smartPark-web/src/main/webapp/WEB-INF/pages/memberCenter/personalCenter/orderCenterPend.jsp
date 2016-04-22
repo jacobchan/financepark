@@ -24,12 +24,11 @@
 		<colgroup>
 			<col width="120">
 			<col width="120">
-			<col>
 			<col width="120">
 			<col width="120">
 			<col width="120">
 		</colgroup>
-		<tbody class="pend_list">
+		<tbody>
 		<tr>
 			<th>订单号</th>
 			<th>订单项目</th>
@@ -38,6 +37,7 @@
 			<th>操作</th>
 		</tr>				
 		</tbody>
+		<tbody class="pend_list"></tbody>
 	</table>
 	<div class="tcdPageCode fr"></div>
 </div>
@@ -112,18 +112,9 @@
 	}
 	
 		//拼接卡号列表
-		function _parseRecords_pend(record){
-			
-			 $(".pend_list").empty();	
-			ht="<tr>"+
-				"<th>订单号</th>"+
-				"<th>订单项目</th>"+
-				"<th>订单金额</th>"+
-				"<th>下单时间</th>"+
-				"<th>操作</th>"+
-			"</tr>";
-			 $(".pend_list").append(ht);
-			//console.log(record);
+		function _parseRecords_pend(record){			
+			 $(".pend_list").empty();
+			 if(record.length>0){
 			for(var i=0;i<record.length;i++){				
 				var status = "";
 				var button = "";
@@ -140,15 +131,19 @@
 				}
 				var method = "viewOrder(\""+record[i].userorderCode+"\",\""+record[i].genreId.genreCode+"\");";
 				var html= "<tr class='aaa' id='"+record[i].userorderId+"'>"+
-					      "<td><a class='custor' onclick='"+method+"'>"+record[i].userorderCode+"</a></td>"+
-                          "<td>"+record[i].userorderProject+"</td>"+
-                          "<td>"+record[i].userorderAmount+"</td>"+
-                          "<td>"+record[i].userorderTime+"</td>"+                                                                        
-                          "<td>"+status  + button+                                                                    
-						  "</td>"+
+					      	"<td><a class='custor' onclick='"+method+"'>"+record[i].userorderCode+"</a></td>"+
+                      	    "<td>"+record[i].userorderProject+"</td>"+
+                      	    "<td>"+record[i].userorderAmount+"</td>"+
+                      	    "<td>"+record[i].userorderTime+"</td>"+                                                                        
+                       	    "<td>"+status  + button+"</td>"+
                           " </tr>";
 				 $(".pend_list").append(html);	
-			}
+			}}else{
+				var	html1 = '<tr>'
+					html1 += '	<td colspan="6">暂无记录</td>'
+					html1 += '</tr>'
+						$(".pend_list").html(html1);	
+				}	
 		};
 		
 	//取消成功弹窗
