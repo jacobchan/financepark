@@ -395,6 +395,10 @@
 						showMessagem3("请输入手机号!");
 						return false;
 					}
+					if(addressDetail==''&&addressPhone==null){
+						showMessagem3("请填写地址!");
+						return false;
+					}
 					message="修改成功!";
 				}else{ //获取新增地址信息
 					var bool = $('input[name="address"]:checked').val();
@@ -415,6 +419,10 @@
 						}
 					}else{
 						showMessagem1("请输入手机号!");
+						return false;
+					}
+					if(addressDetail==''&&addressPhone==null){
+						showMessagem1("请填写地址!");
 						return false;
 					}
 					message="保存成功!";
