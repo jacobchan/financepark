@@ -8,7 +8,7 @@
 			<col width="120">
 			<col width="120">
 		</colgroup>
-		<tbody id="myRecord">
+		<tbody>
 		<tr>
 			<th>预约单号</th>
 			<th>预约时间</th>
@@ -16,6 +16,8 @@
 			<th>状态</th>
 			<th>操作</th>
 		</tr>			
+		</tbody>
+		<tbody id="myRecord">
 		</tbody>
 	</table>
 	<div class="tcdPageCode fr"></div>
@@ -90,6 +92,7 @@
 	
 		//拼接卡号列表
 				function _parseRecords(record){
+					if(record.length>0){
 			var html="<tr><th>预约单号</th><th>预约时间</th><th>预约项目</th><th>状态</th><th>操作</th></tr>";
 			for(var i=0;i<record.length;i++){
 				var recordStatus=record[i].enterrecStatus;
@@ -140,6 +143,12 @@
 			}
 			 $("#myRecord").empty();
 			 $("#myRecord").append(html);
+				}else{
+					var	html1 = '<tr>'
+						html1 += '	<td colspan="6">暂无记录</td>'
+						html1 += '</tr>'
+							$("#myRecord").html(html1);	
+					}	
 		};
 		
 	//取消成功弹窗
