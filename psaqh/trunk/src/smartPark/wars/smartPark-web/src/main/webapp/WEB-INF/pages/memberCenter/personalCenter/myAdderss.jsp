@@ -95,7 +95,7 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td colspan="2"><a href="javascript:;" onclick="javascript:saveadd();" class="ib-btn" style="width:120px;text-align:center;margin-top:10px;">保存</a></td>
+					<td colspan="2"><a href="javascript:;" onclick="javascript:editadd();" class="ib-btn" style="width:120px;text-align:center;margin-top:10px;">保存</a></td>
 				</tr>
 			</table>
 			<div class="error-toast m3">
@@ -372,9 +372,55 @@
 			}
 			
 			
-			//保存地址
-			
+			//保存新增地址
 			function saveadd(){	
+				var addressName="";	
+				var addressPhone="";
+				var addressDetail ="";
+					var bool = $('input[name="address"]:checked').val();
+					if(bool=='0'){
+						/*  var a1 = $("#buildingNo").text();
+						 var a2 = $("#floorNo").text();
+						 var a3 = $("#ad1").val(); */
+						addressDetail = $("#roomNo").attr("value");
+					}else if(bool=='1'){
+						addressDetail = $("#ad2").val();
+					}
+					addressName=$("#addressName").val();	
+					addressPhone=$("#addressPhone").val();
+					if(addressPhone!=''&&addressPhone!=null){
+						if(!isMobil(addressPhone)){
+							showMessagem1("手机号格式不正确!");
+							return false;
+						}
+					}else{
+						showMessagem1("请输入手机号!");
+						return false;
+					}
+					if(addressDetail==''||addressDetail==null){
+						showMessagem1("请填写地址!");
+						return false;
+					}
+				var params = ['addressName='+addressName,
+								'addressPhone='+addressPhone,
+								'addressDetail='+addressDetail];
+				var serviceURL = baseUrl+"memberadrAddressManager/saveMemberadrAddress.json";
+				
+				//公共方法
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					data:params.join('&'),
+					success:function(results){
+						if(results&&results.record){
+							close("保存成功!");
+							setTimeout(function(){$(".bg-tanc.m1").hide(); },1000);
+							refreshData(currentIndex,pageSize);
+						}
+					}
+				});
+			};
+			//保存编辑地址
+			function editadd(){	
 				var addressName="";	
 				var addressPhone="";
 				var addressDetail ="";
@@ -400,33 +446,7 @@
 						return false;
 					}
 					message="修改成功!";
-				}else{ //获取新增地址信息
-					var bool = $('input[name="address"]:checked').val();
-					if(bool=='0'){
-						/*  var a1 = $("#buildingNo").text();
-						 var a2 = $("#floorNo").text();
-						 var a3 = $("#ad1").val(); */
-						addressDetail = $("#roomNo").attr("value");
-					}else if(bool=='1'){
-						addressDetail = $("#ad2").val();
-					}
-					addressName=$("#addressName").val();	
-					addressPhone=$("#addressPhone").val();
-					if(addressPhone!=''&&addressPhone!=null){
-						if(!isMobil(addressPhone)){
-							showMessagem1("手机号格式不正确!");
-							return false;
-						}
-					}else{
-						showMessagem1("请输入手机号!");
-						return false;
-					}
-					if(addressDetail==''||addressDetail==null){
-						showMessagem1("请填写地址!");
-						return false;
-					}
-					message="保存成功!";
-				}	
+				}
 				var params = ['addressId='+addressId,'addressName='+addressName,
 								'addressPhone='+addressPhone,
 								'addressDetail='+addressDetail];
@@ -439,10 +459,7 @@
 					success:function(results){
 						if(results&&results.record){
 							close(message);
-							//location.reload();
-							setTimeout(function(){$(".bg-tanc").hide(); },1000);
-							
-							//setTimeout(function(){$(".bg-tanc.m2").hide(); },1000);
+							setTimeout(function(){$(".bg-tanc.m3").hide(); },1000);
 							$(".bg-tanc.m3").attr("value",'');
 							refreshData(currentIndex,pageSize);
 						}
