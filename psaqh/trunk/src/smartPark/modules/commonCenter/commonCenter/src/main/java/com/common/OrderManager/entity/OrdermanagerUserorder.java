@@ -4,11 +4,20 @@
 package com.common.OrderManager.entity;
 
 import java.math.BigDecimal;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.Length;
 
 import com.common.ExtentionAtrManager.entity.AdsenseOrderEntity;
 import com.common.ExtentionAtrManager.entity.CarOrderEntity;
@@ -102,6 +111,31 @@ public class OrdermanagerUserorder implements Domain{
 	
 	@Transient
 	private AdsenseOrderEntity adsenseOrder;//广告位订单扩展属性
+	
+	@Transient
+	private List<OrdermanagerCommoditydetail> ordermanagerCommodityDetailList;//订单详情（APP专用）
+
+	@Transient
+	private String ordermanagerCommodityDetailListCount;//订单详情Count（APP专用）
+
+
+	public List<OrdermanagerCommoditydetail> getOrdermanagerCommodityDetailList() {
+		return ordermanagerCommodityDetailList;
+	}
+
+	public void setOrdermanagerCommodityDetailList(
+			List<OrdermanagerCommoditydetail> ordermanagerCommodityDetailList) {
+		this.ordermanagerCommodityDetailList = ordermanagerCommodityDetailList;
+	}
+
+	public String getOrdermanagerCommodityDetailListCount() {
+		return ordermanagerCommodityDetailListCount;
+	}
+
+	public void setOrdermanagerCommodityDetailListCount(
+			String ordermanagerCommodityDetailListCount) {
+		this.ordermanagerCommodityDetailListCount = ordermanagerCommodityDetailListCount;
+	}
 
 	public CarOrderEntity getCarOrder() {
 		return carOrder;
@@ -273,6 +307,9 @@ public class OrdermanagerUserorder implements Domain{
 		result = prime * result + ((userorderId == null) ? 0 : userorderId.hashCode());
 		result = prime * result + ((userorderTime == null) ? 0 : userorderTime.hashCode());
 		result = prime * result + ((userorderAdr == null) ? 0 : userorderAdr.hashCode());
+		result = prime * result + ((ordermanagerCommodityDetailList == null) ? 0 : ordermanagerCommodityDetailList.hashCode());
+		result = prime * result + ((ordermanagerCommodityDetailListCount == null) ? 0 : ordermanagerCommodityDetailListCount.hashCode());
+		
 		return result;
 	}
 	
@@ -364,6 +401,16 @@ public class OrdermanagerUserorder implements Domain{
 			if (other.userorderAdr != null)
 				return false;
 		} else if (!userorderAdr.equals(other.userorderAdr))
+			return false;
+		if (ordermanagerCommodityDetailList == null) {
+			if (other.ordermanagerCommodityDetailList != null)
+				return false;
+		} else if (!ordermanagerCommodityDetailList.equals(other.ordermanagerCommodityDetailList))
+			return false;
+		if (ordermanagerCommodityDetailListCount == null) {
+			if (other.ordermanagerCommodityDetailListCount != null)
+				return false;
+		} else if (!ordermanagerCommodityDetailListCount.equals(other.ordermanagerCommodityDetailListCount))
 			return false;
 		return true;
 	}

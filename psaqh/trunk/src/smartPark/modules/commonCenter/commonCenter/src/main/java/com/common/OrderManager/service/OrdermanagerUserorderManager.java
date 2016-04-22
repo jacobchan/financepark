@@ -300,12 +300,12 @@ public interface OrdermanagerUserorderManager extends BaseManager{
   			String genId)  throws BusException;
 	
 	/**
-  	 * 获取订单记录
+  	 * 获取订单记录(APP专用)
   	 * @param conditions
   	 * @return
   	 * @throws BusException
   	 */
-  	public PagerRecords getOrdermanagerUserorderList(Pager pager,//分页条件
+  	public PagerRecords getOrdermanagerUserorderListApp(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders)  throws BusException;
   
