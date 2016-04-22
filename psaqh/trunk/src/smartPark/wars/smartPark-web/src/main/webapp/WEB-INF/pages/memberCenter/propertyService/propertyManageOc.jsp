@@ -34,13 +34,29 @@
 					</div>
 				</div>
 			</youi:body>
-				<div class="toast">
+				<div class="toast">              
+    </div>
+    <!--***弹窗start****************************************-->
+  
+     	<div class="toast">
         <div class="toast-con clearfix">
             <div class="close-toast fr"></div>
             <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
         </div> 
         
     </div>
+    <div class="bg-tanc m1">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="w60 tc mt40" style="margin-left:20%">
+				<div class="mt20 mb20 f16 lh26">
+					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o fkCode"> [ 123456789 ] </span>吗？
+				</div>
+				<!-- <p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p> -->
+				<input value="确定" class="hhf-submit c" style="height:36px;" type="submit">
+			</div>
+		</div>
+	</div>
 	<!--***bottom start****************************************-->
    
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
@@ -100,9 +116,9 @@
 						  status = "已取消";
 					  }else if(record[i].ocStatus=='00'){
 						  status = "待处理";
-						  button="<a href='#' onclick='hhf(\""+record[i].ocId+"\")'>取消</a>";
+						  button="<a href='#' onclick='cancel(this)'>取消</a>";
 					  }	
-					  var html= "<tr class='aaa'>"+
+					  var html= "<tr id='"+record[i].ocId+"'>"+
 				      "<td width='111'>"+record[i].ocCode+"</td>"+
 				
 				      "<td width='111'>"+record[i].ocDate+"</td>"+
@@ -133,7 +149,7 @@
 			});
 		}
 		//根据订单号查询
-			 $('.hhf-submit').click(function(){	
+	 $('.hhf-submit').click(function(){	
 		var ocCode=$("#ocCode").val();
 		//alert(ocCode);
 		var startTime=$("#startTime").val(); 
@@ -198,6 +214,37 @@
 			setTimeout(function(){$(".toast").hide(); },2000);
 			refreshData(currentIndex,pageSize);
       }
+		
+		</script>
+		<script type="text/javascript">
+		//确认取消弹窗
+		function cancel(obj){
+	
+			var me=obj.parentNode.parentNode;
+			//alert(me.id);
+			var ocCode=me.childNodes[0].innerText;  
+			//console.log(me.childNodes[0].innerText);
+			//alert(ocCode);
+			$(".fkCode").html(ocCode);
+			$(".fkCode")[0].setAttribute("id",me.id);
+			$(".bg-tanc.m1").show();
+		};	
+		$(function(){
+			$(".hhf-submit.c").click(function(){
+				$(".bg-tanc.m1").hide(100);
+					var id=$(".fkCode")[0].getAttribute("id");
+				 	$.youi.ajaxUtils.ajax({
+				 		url:baseUrl+'propertyservicemanagerOcManager/cancleOcStatus.json',
+						data:'ocId='+id,
+						success:function(result){
+							if(result&&result.record){
+								close("取消成功!");														
+							}
+						}
+					});
+				});
+			
+		});
 	</script>
 	<script type="text/javascript">
 	    //点击跳转到一卡通申请页面
