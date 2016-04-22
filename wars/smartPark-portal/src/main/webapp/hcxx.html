@@ -6,6 +6,8 @@
 	<link href="styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 	<link href="styles/base.css" type="text/css" rel="stylesheet">
 	<link href="styles/page/zs.css" type="text/css"  rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="styles/page/dateplug.css">
+	
 	<script type="text/javascript" src="scripts/lib/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/bootstrap.min.js"></script>
@@ -15,7 +17,7 @@
 	<script src="scripts/page/laydate/laydate.js"></script>
 	<script type="text/javascript">
 		$(function(){
-			$(".see-all").click(function(){
+			/* $(".see-all").click(function(){
 				if($(this).parents("thead").next("tbody").hasClass("undis")){
 					$(this).parents("thead").next("tbody").removeClass("undis");
 					$(this).html("收起所有仓位");
@@ -23,7 +25,16 @@
 					$(this).parents("thead").next("tbody").addClass("undis");
 					$(this).html("查看所有仓位");
 				}
-			});
+			}); */
+			$("#flightsModel").on("click",".see-all",function(){
+				if($(this).parents("thead").next("tbody").hasClass("undis")){
+					$(this).parents("thead").next("tbody").removeClass("undis");
+					$(this).html("收起所有仓位");
+				}else{
+					$(this).parents("thead").next("tbody").addClass("undis");
+					$(this).html("查看所有仓位");
+				}
+			})
 			var start = {
 			    elem: '#start',
 			    min: laydate.now(), //设定最小日期为当前日期
@@ -108,7 +119,7 @@
 			    </div>
 			    <h3 class="f20 mt20 mb10">选择航班： <span class="ml10 mr10">北京</span>——<span class="ml10 mr10">上海</span> 02月09日 周二  </span> </h3>
 			    <div class="xc-price clearfix">
-		    		<a href="javascript:;" class="xp-tj-cal">
+		    		<a href="javascript:;" class="xp-tj-cal" id="kalendar">
 		    			<div class="cal-icon"></div>
 		    			<p class="lh22">特价日历</p> 
 		    		</a>
@@ -119,7 +130,7 @@
 			    					<td class="preview">
 			    						<a href="javascript:;" target="_self" class="p-fl"></a>
 			    					</td>
-			    					<td class="sc-price-date">
+			    					<!-- <td class="sc-price-date">
 		    							<div class="sc-price-date-inner">
 		    								<table><tbody>
 		    									<tr>
@@ -175,8 +186,8 @@
 		    								</tr>
 		    								</tbody></table>
 			    						</div>
-				    				</td>
-				    				<td class="preview">
+				    				</td> -->
+				    				<td class="preview" id="date_icon">
 			    						<a href="javascript:;" target="_self" class="p-fl p-fr"></a>
 			    					</td>
 			    				</tr>
@@ -184,7 +195,7 @@
 			    		</table>
 			    	</div>
 			    </div>
-			    <div class="clearfix">
+			    <div class="kalendar-detail clearfix" id="kalendar-detail">
 			    </div>
 			    <div class="clearfix mt30" id="flightsModel">
 			    	<table class="hcxx-table">
@@ -205,102 +216,6 @@
 			    			<th>预定操作</th>
 			    		</thead>
 			    	</table>
-			    	<div class="hcxx-hb-infor">
-			    		<table class="hcxx-table">
-			    			<colgroup>
-				    			<col width="18%"></col>
-				    			<col width="16%"></col>
-				    			<col width="16%"></col>
-				    			<col width="16%"></col>
-				    			<col width="16%"></col>
-				    			<col></col>
-				    		</colgroup>
-			    			<thead>
-				    			<tr>
-				    				<td align="left">
-				    					<div class="c-333"><img src="styles/images/plane.png" width="18" height="17" class="ml10 mr5">四川航空 3u8421</div>
-				    					<p class="ml33">机型 : <span class="c-333">320</span></p>
-				    				</td>
-				    				<td>
-				    					<p>北京首都机场</p>
-				    					<p>上海虹桥机场</p>
-				    				</td>
-				    				<td>
-				    					<p class="c-333 f16">07:50</p>
-				    					<p>13:15</p>
-				    				</td>
-				    				<td>
-				    					<p class="c-o f20">¥520</p>
-				    					<p><span class="c-333">23</span>折 头等舱</p>
-				    				</td>
-				    				<td>
-				    					<p>¥520</p>
-				    					<p>包正餐</p>
-				    				</td>
-				    				<td>
-				    					<a href="" class="order-btn">预订</a>
-				    					<p><a href="javascript:;" class="see-all">查看所有仓位</a></p>
-				    				</td>
-				    			</tr>
-				    		</thead>
-				    		<tbody  class="undis">
-				    			<tr>
-				    				<td colspan="2"></td>
-				    				<td>
-				    					<p class="c-333 f16">07:50</p>
-				    					<p>13:15</p>
-				    				</td>
-				    				<td>
-				    					<p class="c-o f20">¥520</p>
-				    					<p><span class="c-333">23</span>折 头等舱</p>
-				    				</td>
-				    				<td>
-				    					<p>¥520</p>
-				    					<p>包正餐</p>
-				    				</td>
-				    				<td>
-				    					<a href="" class="order-btn ob-orange">预订</a>
-				    				</td>
-				    			</tr>
-				    			<tr>
-				    				<td colspan="2"></td>
-				    				<td>
-				    					<p class="c-333 f16">07:50</p>
-				    					<p>13:15</p>
-				    				</td>
-				    				<td>
-				    					<p class="c-o f20">¥520</p>
-				    					<p><span class="c-333">23</span>折 头等舱</p>
-				    				</td>
-				    				<td>
-				    					<p>¥520</p>
-				    					<p>包正餐</p>
-				    				</td>
-				    				<td>
-				    					<a href="" class="order-btn ob-orange">预订</a>
-				    				</td>
-				    			</tr>
-				    			<tr>
-				    				<td colspan="2"></td>
-				    				<td>
-				    					<p class="c-333 f16">07:50</p>
-				    					<p>13:15</p>
-				    				</td>
-				    				<td>
-				    					<p class="c-o f20">¥520</p>
-				    					<p><span class="c-333">23</span>折 头等舱</p>
-				    				</td>
-				    				<td>
-				    					<p>¥520</p>
-				    					<p>包正餐</p>
-				    				</td>
-				    				<td>
-				    					<a href="" class="order-btn ob-orange">预订</a>
-				    				</td>
-				    			</tr>
-				    		</tbody>
-			    		</table>
-			    	</div>
 			    	<div class="hcxx-hb-infor">
 			    		<table class="hcxx-table">
 			    			<colgroup>
@@ -470,7 +385,10 @@
 	<script type="text/javascript" src="scripts/cityselector/hotelcity.js"></script>
 	<script type="text/javascript" src="scripts/cityselector/j.dimensions.js"></script>
 	<script type="text/javascript" src="scripts/cityselector/j.suggest.js"></script>
+	<script type="text/javascript" src="scripts/page/date.js"></script>
+	<script type="text/javascript" src="scripts/page/dateplug.min.js"></script>
 	<script type="text/javascript">
+	var lowest_price = new Array();
 		$(function(){
 			var Request = new Object();
 			Request = GetRequest();
@@ -499,6 +417,44 @@
 					alert("abc");
 				}
 			});
+			params = ['startDate='+gotodate,'deptCode='+fromCode,'arrCode='+gotoCode];
+			serviceURL = baseUrl+"TicketServiceManager/getDailyLowestPrice.json";
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					if(result&&result.records){
+						var record = result.records;
+						for(var i=0;i<record.length;i++){
+							console.debug("index "+ i +":"+record[i].depDate+"  price:"+record[i].ticketPrice);
+							lowest_price.push(record[i].ticketPrice);
+						}
+						parseLowestPrice(record,gotodate);
+					}else{
+						alert("error");
+					}
+				},
+				error:function(){
+					alert("abc");
+				}
+			});
+			
+			$("#kalendar,#pick-up").click(function(){
+				 if($(this).attr("id")=="pick-up"){
+				    $("#kalendar-detail").slideUp() 
+				 }else{
+				    $("#kalendar-detail").slideDown()
+				 }
+			})
+			$("#kalendar-detail").dateplug({
+				price: lowest_price
+				});
+		   $.fn.dateplug.ajax = function(){
+			  alert("tigutf");
+		   }
+			
 		});
 		var pltime,timer;//动态加载效果的时间控件变量
 	    function closeTanc(){
@@ -558,6 +514,168 @@
 				$("#flightsModel").append(html_);
 			}
 		}
+		function parseLowestPrice(record,gotodate){
+			if(compareDate(record[record.length-1].depDate,gotodate)){
+				var d = gotodate.replace(/-/g,'/');
+				var tmp = new Date(d);
+				var html_ = "<td class='sc-price-date'>";
+				html_ += "<div class='sc-price-date-inner'><table><tbody><tr>";
+				for(var i=0 ; i<7;i++){
+					if(i==0){
+						html_ += "<td class='active'><a href='javascript:;' class='outer' target='_top'>";
+					}else{
+						html_ += "<td><a href='javascript:;' class='outer' target='_top'>";
+					}
+					html_ += "<span class='c-o f14'>点击查看</span>";
+					html_ += "<p class='c-333 f12'>"+DateAdd("d",i,tmp).format("yyyy-MM-dd")+"</p>";
+					html_ += "</a></td>";
+				}
+				html_ += "</tr></tbody></table></div></td>";
+				$("date_icon").before(html_);
+			}else{
+				var arr_html = new Array();
+				for(var i=0;i<record.length;){
+					var html1 = "<td class='sc-price-date'>";
+					var html2 = "<td class='sc-price-date' style='display:none'>";
+					if(i%7==0){
+						var flag = 0;
+						var html_ = "<div class='sc-price-date-inner'><table><tbody><tr>";
+						for(var j=0;j<7;j++,i++){
+							if(i>=record.length){
+								html_ += "<td><a href='javascript:;' class='outer' target='_top'>";
+								html_ += "<span class='c-o f14'>点击查看</span>";
+								html_ += "<p class='c-333 f12'>。。。</p>";
+								html_ += "</a></td>";
+							}else{
+								if(gotodate==record[i].depDate){
+									html_ += "<td class='active'><a href='javascript:;' class='outer' target='_top'>";
+									flag = 1;
+								}else{
+									html_ += "<td><a href='javascript:;' class='outer' target='_top'>";
+								}
+								html_ += "<span class='c-o f14'>¥ "+record[i].ticketPrice+"</span>";
+								html_ += "<p class='c-333 f12'>"+record[i].depDate+"</p>";
+								html_ += "</a></td>";
+							}
+						}
+						html_ += "</tr></tbody></table></div></td>";
+						if(flag==1){
+							arr_html.push(html1+html_);
+						}else{
+							arr_html.push(html2+html_);
+						}
+					}
+				}
+				for(var k=0;k<arr_html.length;k++){
+					$("#date_icon").before(arr_html[k]);
+				}
+			}	
+		}
+		//日期对比 a为开始日期b为结束日期 a>b false a<b true
+		function compareDate(a, b) {
+		    var arr = a.split("-");
+		    var starttime = new Date(arr[0], arr[1], arr[2]);
+		    var starttimes = starttime.getTime();
+
+		    var arrs = b.split("-");
+		    var lktime = new Date(arrs[0], arrs[1], arrs[2]);
+		    var lktimes = lktime.getTime();
+
+		    if (starttimes > lktimes) {
+		        return false;
+		    }
+		    else
+		        return true;
+		}
+		/*
+		  *   参数:interval,字符串表达式，表示要添加的时间间隔.
+		  *   参数:number,数值表达式，表示要添加的时间间隔的个数.
+		  *   参数:date,时间对象.
+		  *   返回:新的时间对象.
+		  *   var   now   =   new   Date();
+		  *   var   newDate   =   DateAdd( "d ",5,now);
+		  *---------------   DateAdd(interval,number,date)   -----------------
+		  */
+		function DateAdd(interval,number,date){
+		        switch(interval)
+		        {
+		                case   "y "   :   {
+		                        date.setFullYear(date.getFullYear()+number);
+		                        return   date;
+		                        break;
+		                }
+		                case   "q "   :   {
+		                        date.setMonth(date.getMonth()+number*3);
+		                        return   date;
+		                        break;
+		                }
+		                case   "m "   :   {
+		                        date.setMonth(date.getMonth()+number);
+		                        return   date;
+		                        break;
+		                }
+		                case   "w "   :   {
+		                        date.setDate(date.getDate()+number*7);
+		                        return   date;
+		                        break;
+		                }
+		                case   "d "   :   {
+		                        date.setDate(date.getDate()+number);
+		                        return   date;
+		                        break;
+		                }
+		                case   "h "   :   {
+		                        date.setHours(date.getHours()+number);
+		                        return   date;
+		                        break;
+		                }
+		                case   "m "   :   {
+		                        date.setMinutes(date.getMinutes()+number);
+		                        return   date;
+		                        break;
+		                }
+		                case   "s "   :   {
+		                        date.setSeconds(date.getSeconds()+number);
+		                        return   date;
+		                        break;
+		                }
+		                default   :   {
+		                        date.setDate(d.getDate()+number);
+		                        return   date;
+		                        break;
+		                }
+		        }
+		}
+		
+		// 对Date的扩展，将 Date 转化为指定格式的String 
+		// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符， 
+		// 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) 
+		// 例子： 
+		// (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423 
+		// (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18 
+		Date.prototype.Format = function(fmt) 
+		{
+		  var o = { 
+		    "M+" : this.getMonth()+1,                 //月份 
+		    "d+" : this.getDate(),                    //日 
+		    "h+" : this.getHours(),                   //小时 
+		    "m+" : this.getMinutes(),                 //分 
+		    "s+" : this.getSeconds(),                 //秒 
+		    "q+" : Math.floor((this.getMonth()+3)/3), //季度 
+		    "S"  : this.getMilliseconds()             //毫秒 
+		  }; 
+		  if(/(y+)/.test(fmt)) 
+		    fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
+		  for(var k in o) 
+		    if(new RegExp("("+ k +")").test(fmt)) 
+		  fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length))); 
+		  return fmt; 
+		}
+	</script>
+	<script>
+	 $(function(){
+    	
+	 })
 	</script>
 </body>
 </html>
