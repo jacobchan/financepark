@@ -1240,10 +1240,10 @@
 			//酒店预订数据初始化  Begin  2016年4月19日15:00:57
 			//酒店预订，开始日期默认选中当天时间
 			var dObj = new Date();
-			$("#overdate").val(dObj.toLocaleDateString());
+			$("#overdate").val(dObj.getFullYear()+'-'+(dObj.getMonth()+1<10?"0"+(dObj.getMonth()+1):dObj.getMonth())+'-'+dObj.getDate());
 			dObj.setDate(dObj.getDate() + 1);
 			//离开日期，默认为第二天
-			$("#leavedate").val(dObj.toLocaleDateString());
+			$("#leavedate").val(dObj.getFullYear()+'-'+(dObj.getMonth()+1<10?"0"+(dObj.getMonth()+1):dObj.getMonth())+'-'+dObj.getDate());
 			//酒店所在城市默认为“杭州”，此处根据项目实施的园区不同改变
 			$("#city_name").val(Hcommoncitys[5][1]);
 			$("#cityid").val(Hcommoncitys[5][0]);
@@ -1579,8 +1579,8 @@
 				pltime = 2;
 				timer = setInterval("closeTanc()", 1000);
 				return false;
-			} else if (cityname == "" || cityname == "中文/拼音" || cityid == ""
-					|| cityid == null) {
+			} else if (cityname == "" || cityname == "中文/拼音" || cityId == ""
+					|| cityId == null) {
 				clearInterval(timer);
 				$("#msg").text("请选择正确的城市");
 				$(".toast").show();
