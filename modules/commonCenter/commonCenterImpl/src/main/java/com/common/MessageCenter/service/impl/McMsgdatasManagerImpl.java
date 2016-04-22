@@ -25,6 +25,7 @@ import com.common.MessageCenter.service.MessagePostProcessor;
 import com.gsoft.common.service.BaseUserManager;
 import com.gsoft.common.util.MessageUtils;
 import com.gsoft.common.util.SMSUtil;
+import com.gsoft.entity.ReferenceMap;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -150,7 +151,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 		return mcMsgdatasDao.exists(propertyName, value);
 	}
 
-	@EsbServiceMapping
+
 	public String buildMessageContent(McMsgdatas mcMsgdatas, String[] params)
 			throws BusException {
 		McMsgtempalate msgTempalate = mcMsgdatas.getMcMsgtempalate();// 消息引用的模板
@@ -159,12 +160,15 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 				msgTempalate.getMsgTempalateContent(), '#', params);
 	}
 
-	@EsbServiceMapping
+	
 	public String buildMessageContent(McMsgtempalate msgtempalate,
 			Map<String, String> replaceMap) throws BusException {
-		return com.gsoft.common.util.StringUtils.replaceAllString(
-				msgtempalate.getMsgTempalateContent(),
-				MessageUtils.placeholders, replaceMap);
+		if(replaceMap instanceof ReferenceMap)
+			return com.gsoft.common.util.StringUtils.replaceAllString(
+				msgtempalate.getMsgTempalateContent(),MessageUtils.placeholders, replaceMap);
+		else
+			return com.gsoft.common.util.StringUtils.replaceAllString(
+					msgtempalate.getMsgTempalateContent(), replaceMap);
 	}
 
 	@EsbServiceMapping
@@ -268,28 +272,25 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 				content = content.replace("@"+entry.getKey(), entry.getValue().toString());
 			}
 			McMsgdatas mmd = new McMsgdatas();
+			String status = "";
 			try{
-				String result = HttpSenderMsg.sendMsg(phone, content);
-				if("999999".equals(result)){
-//					bp.setStatus("02"); //发送状态 待发送
-//					bp.setSendMode("02");//预发送
-//					bp.setValid("01");//01-有效
-					success =  false;
-				}else{
-//					bp.setStatus("01"); //发送状态 成功
-//					bp.setValid("01");
+//				String result = HttpSenderMsg.sendMsg(phone, content);
+				String rcode = HttpSenderMsg.sendwithCode(content,
+						new String[] { phone });
+				if (StringUtils.isEmpty(rcode) || !"0".equals(rcode)) {
+					status = "01";// 发送失败
+					success = false;
+				} else {
+					status = "02";// 发送成功
 				}
 			}catch (Exception e) {
-//				bp.setStatus("02"); //发送状态 待发送
-//				bp.setSendMode("02");//预发送
-//				bp.setValid("01");
 				success =  false;
 			}
 			mmd.setReceive(phone);
 			mmd.setMsgCaption(mmt.getMsgTempalateCaption());
 			mmd.setMsgContent(content);
 			mmd.setMsgType(mmt.getMcMsgtype().getMsgTypeCaption());
-			mmd.setSendStatus("02");//02-发送成功
+			mmd.setSendStatus(status);//02-发送成功
 			mmd.setCreateUser(recUser);
 			mmd.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 			mmd.setUpdateUser(recUser);
