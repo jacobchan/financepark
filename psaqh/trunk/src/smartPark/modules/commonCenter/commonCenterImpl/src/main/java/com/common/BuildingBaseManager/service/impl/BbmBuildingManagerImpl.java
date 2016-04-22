@@ -170,4 +170,23 @@ public class BbmBuildingManagerImpl extends BaseManagerImpl implements BbmBuildi
 		return list;
 	}
 	
+	/**
+	 * 通过园区ID获取该园区所有的楼栋
+	 * @param parkId 园区ID
+	 * @return
+	 */
+	@EsbServiceMapping
+	public List<BbmBuilding> getAllBuildingByParkId(@ServiceParam(name="parkId") String parkId)
+			throws BusException {
+		List<BbmBuilding> list = new ArrayList<BbmBuilding>() ;
+		if(StringUtils.isNotEmpty(parkId)){
+			Collection<Condition> condition =  new ArrayList<Condition>();
+    		condition.add(ConditionUtils.getCondition("bbmPark.parkId", Condition.EQUALS,parkId));//创建查询条件
+    		Collection<Order> orders = new ArrayList<Order>();
+    		orders.add(ConditionUtils.getOrder("buildingNo", true));
+			list = bbmBuildingDao.commonQuery(condition, orders) ;
+		}
+		return list;
+	}
+	
 }
