@@ -2,6 +2,7 @@ package com.common.MessageCenter.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -13,6 +14,7 @@ import com.common.MessageCenter.entity.McMsgdatas;
 import com.common.MessageCenter.service.IMessage;
 import com.common.MessageCenter.service.McMsgdatasManager;
 import com.common.MessageCenter.service.MessagePostProcessor;
+import com.gsoft.entity.MsgParam;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.utils.HttpSenderMsg;
@@ -23,10 +25,10 @@ public class MessagePoster implements MessagePostProcessor {
 	McMsgdatasManager msgdatasManager;
 
 	@Override
-	public void send(IMessage message, String[] phones) throws BusException {
+	public void send(IMessage message, List<MsgParam> msgParams) throws BusException {
 		// 00 - 待发送 ，01 - 成功,02 -- 失败
 
-		sendAndSave(message, phones);
+		sendAndSave(message, msgParams);
 
 	}
 
@@ -37,13 +39,17 @@ public class MessagePoster implements MessagePostProcessor {
 	 * @param phones
 	 */
 	@SuppressWarnings("unchecked")
-	public void sendAndSave(final IMessage message, String[] phones) {
-		if (phones != null && phones.length > 0) {
-			if (phones.length <= 100) {
-				for (String phone : phones) {
-					sendSingel(message, phone);
+	public void sendAndSave(final IMessage message, List<MsgParam> msgParams) {
+		if (msgParams != null && msgParams.size() > 0) {
+			if (msgParams.size() <= 1000) {
+				for (MsgParam msgParam : msgParams) {
+					if(StringUtils.isEmpty(msgParam.getPhone()))
+						continue;
+					replaceUser(message,msgParam);
+					
+					sendSingel(message, msgParam.getPhone());
 					try {
-						Thread.sleep(2000);
+						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -51,11 +57,14 @@ public class MessagePoster implements MessagePostProcessor {
 			} else {
 				ExecutorService threadPool = Executors.newFixedThreadPool(10);
 				Collection tasks = new ArrayList();
-				for (final String phone : phones) {
+				for (final MsgParam msgParam : msgParams) {
 					tasks.add(Executors.callable(new Runnable() {
 						@Override
 						public void run() {
-							sendSingel(message, phone);
+							if(!StringUtils.isEmpty(msgParam.getPhone())){
+								replaceUser(message,msgParam);
+								sendSingel(message, msgParam.getPhone());
+							}	
 						}
 					}));
 				}
@@ -67,6 +76,13 @@ public class MessagePoster implements MessagePostProcessor {
 					threadPool.shutdown();
 				}
 			}
+		}
+	}
+
+	private void replaceUser(IMessage message, MsgParam msgParam) {
+		if(message instanceof McMsgdatas){
+			McMsgdatas msgdatas = (McMsgdatas) message;
+			msgdatas.setMsgContent(msgdatas.getMsgContent().replaceAll("#admin|#user", msgParam.getUsername()));
 		}
 	}
 
