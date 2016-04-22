@@ -2,6 +2,9 @@ package com.member.ticket.entity;
 
 import java.util.List;
 
+import org.hibernate.annotations.Entity;
+
+@Entity
 public class WsFlightWithPriceAndCommision {
 	private Boolean codeShare;//	是否共享航班	Boolean	否	
 	private String shareNum;//	共享航班号	String	否	共享航班中的实际承运航班
@@ -63,7 +66,9 @@ public class WsFlightWithPriceAndCommision {
 		return depTime;
 	}
 	public void setDepTime(String depTime) {
-		this.depTime = depTime;
+		StringBuilder sb=new StringBuilder(depTime);
+		sb.insert(2, ':');
+		this.depTime = sb.toString();
 	}
 	public String getDepModifyTime() {
 		return depModifyTime;
@@ -75,7 +80,9 @@ public class WsFlightWithPriceAndCommision {
 		return arriTime;
 	}
 	public void setArriTime(String arriTime) {
-		this.arriTime = arriTime;
+		StringBuilder sb=new StringBuilder(arriTime);
+		sb.insert(2, ':');
+		this.arriTime = sb.toString();
 	}
 	public String getArriModifyTime() {
 		return arriModifyTime;

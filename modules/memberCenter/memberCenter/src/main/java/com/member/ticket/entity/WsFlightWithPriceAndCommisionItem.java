@@ -2,6 +2,9 @@ package com.member.ticket.entity;
 
 import java.util.List;
 
+import org.hibernate.annotations.Entity;
+
+@Entity
 public class WsFlightWithPriceAndCommisionItem {
 	private String date;//	出发日期	String	是	
 	private String orgCity;//	出发城市	String	是	
