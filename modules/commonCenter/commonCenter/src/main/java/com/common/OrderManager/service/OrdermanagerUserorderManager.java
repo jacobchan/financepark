@@ -308,15 +308,5 @@ public interface OrdermanagerUserorderManager extends BaseManager{
   	public PagerRecords getOrdermanagerUserorderList(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders)  throws BusException;
-  	/**
-	 * 分页查询用户订单表
-	 * @param pager
-	 * @param conditions
-	 * @param orders
-	 * @return
-	 * @throws BusException
-	 */
-	public PagerRecords getUserorder(Pager pager,//分页条件
-			Collection<Condition> conditions,//查询条件
-			Collection<Order> orders,String genreCode) throws BusException;
+  
 }
