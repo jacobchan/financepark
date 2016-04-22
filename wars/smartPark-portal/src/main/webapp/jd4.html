@@ -6,6 +6,7 @@
 	<link href="styles/page/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 	<link href="styles/base.css" type="text/css" rel="stylesheet">
 	<link href="styles/page/zs.css" type="text/css" rel="stylesheet">
+	<link href="styles/page/hotel.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="scripts/lib/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/bootstrap.min.js"></script>
@@ -128,11 +129,11 @@
 				<div class="clearfix" id="roomlist">
 					<table class="hcxx-table mb20">
 			    		<colgroup>
-			    			<col width="47%"></col>
+			    			<col width="46%"></col>
+			    			<col width="7%"></col>
 			    			<col width="7%"></col>
 			    			<col width="8%"></col>
-			    			<col width="9%"></col>
-			    			<col width="9%"></col>
+			    			<col width="7%"></col>
 			    			<col></col>
 			    		</colgroup>
 			    		<thead>
@@ -527,18 +528,18 @@
 		var imgs = eval(record.img);
 		var plans = record.plans;
 		var html_ = "";
-		html_ += "<div class='jd-order-room'><table><colgroup><col width='121'></col><col width='101'></col><col></col></colgroup>";
+		html_ += "<div class='jd-order-room'><table><colgroup><col width='121'></col><col width='141'></col><col></col></colgroup>";
 		html_ += "<tbody><tr><td valign='top'><img src='";
 		//判断是否有图片数据
 		if(imgs != null) html_ += "http://tp1.znimg.com/"+imgs[0].spic;
 		else html_ += "styles/images/jd-p3.jpg";
 		html_ += "' width='100' height='75'></td>";
 		html_ += "<td style='border-right:1px solid #ecebeb;' valign='top'>";
-		html_ += "<p class='mb25 lh20 f12 mt10'>"+record.title+"<a class='fa fa-angle-down room-show ml20' href='javascript:;'></a></p>";
+		html_ += "<p class='mb25 lh20 f12 mt10'>"+record.title+"</p>";
 		html_ += "<p class='f12'><span class='c-b1 mr5'>";
 		//需要判断是否提供房间面积数据
-		if(record.area==null) html_ += " "+record.bed+"</p></td>";
-		else html_ += record.area +"㎡</span>| "+record.bed+"</p></td>";
+		if(record.area==null) html_ += " "+record.bed+"<a class='fa fa-angle-down room-show ml20' href='javascript:;'></a></p></td>";
+		else html_ += record.area +"㎡</span>| "+record.bed+"<a class='fa fa-angle-down room-show ml20' href='javascript:;'></a></p></td>";
 		html_ += "<td><table class='room-detail' style='margin-top:0px;'>";				
 		html_ += "<colgroup><col width='26%'></col><col width='10%'></col><col width='10%'></col><col width='12%'></col><col width='12%'></col><col width='10%'></col><col></col></colgroup>";
 		//房型的销售计划
@@ -560,7 +561,7 @@
 				html_ += "<td><a href='javascript:bookHotel("+record.rid+","+plans[i].planid+")' class='hhf-submit lh28'>预订</a></td></tr>";
 			}else{
 				html_ += "<td><span class='c-o f20'>¥ 0</span></td>";
-				html_ += "<td><a disabled='disabled' style='background:#7b7674;' href='javascript:void(0)' class='hhf-submit lh28'>预订</a></td></tr>";
+				html_ += "<td><a disabled='disabled' style='background:#7b7674;border-color:#7b7674' href='javascript:void(0)' class='hhf-submit lh28'>预订</a></td></tr>";
 			}
 				
 		}

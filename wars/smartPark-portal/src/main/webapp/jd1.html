@@ -7,6 +7,7 @@
 	<link href="styles/base.css" type="text/css" rel="stylesheet">
 	<link href="styles/page/zs.css" type="text/css" rel="stylesheet">
 	<link href="styles/page/cityselector.css" type="text/css" rel="stylesheet">
+	<link href="styles/page/hotel.css" type="text/css" rel="stylesheet" />
 	<script type="text/javascript" src="scripts/lib/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/bootstrap.min.js"></script>
@@ -118,8 +119,8 @@
 						<li id="pingfen"><a href="javascript:query(4)">评分</a> <i class="fa fa-angle-down ml20" style="font-size:18px;"></i></li>
 					</ul>
 					<div class="fr clearfix f12">
-						<label class="fl"><input id="promotion" type="checkbox" name="th" class="mr10 fl" style="margin-top:12px;"><span class="fl">特惠</span></label>
-						<label class="ml20 mr20 fl"><input type="checkbox" name="th" class="mr10 fl" style="margin-top:12px;"><span class="fl">免担保</span></label>
+						<label class="fl mr20"><input id="promotion" type="checkbox" name="th" class="mr10 fl" style="margin-top:12px;"><span class="fl">特惠</span></label>
+						<!--<label class="ml20 mr20 fl"><input type="checkbox" name="th" class="mr10 fl" style="margin-top:12px;"><span class="fl">免担保</span></label> -->
 					</div>
 				</div>
 				<div class="clearfix" id="hotelblock">
@@ -269,7 +270,6 @@
 		//搜索
 		function query(){
 			//alert(arguments[0]);//argument 隐含参数对象
-			
 			var cityname = $("#city_name").val();
 			var cityid = $("#cityid").val();
 			//时间

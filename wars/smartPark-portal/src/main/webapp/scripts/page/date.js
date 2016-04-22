@@ -30,6 +30,7 @@
 						  next_opt.month = next_opt.month-1;  
 					  }
 				   }
+				   opt.price = $.fn.dateplug.monthajax();
 				   $this.html(createHtml(next_opt));
 				}) 
 			 }
@@ -53,6 +54,9 @@
 			 price:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
   };
   $.fn.dateplug.ajax = function(){}
+  $.fn.dateplug.monthajax =  function(){
+	  alert("写个方法获取这个月的数据")
+  }
   function createHtml(opt){
 	  var html = '<table class="kalendar-table" border="0" cellpadding="0" cellspacing="0"><thead><tr><td colspan="7"><a href="javascript:;" class="pull-left prev-mon"><</a>'
 	             +opt.year+'年'+opt.month+'月<a href="javascript:;" class="pull-right next-mon">></a><div class="border"></div> </td></tr></thead><tbody>';
@@ -68,7 +72,7 @@
 				 if(j==0){
 				   html+='<tr>';
 			     }
-				 var now = i*7+j+1,now_num = now-first_day,price = opt.price[now_num-1]<=0?"&nbsp;":("￥"+opt.price[now_num-1]);
+				 var now = i*7+j+1,now_num = now-first_day,price = !opt.price[now_num-1]?"&nbsp;":("￥"+opt.price[now_num-1]);
 				 if(first_day<now&&now<=days+first_day){
 					if(now_num>=day_now){
 						html+='<td><p>'+now_num+'</p><p class="price">'+price+'</p></td>'; 
