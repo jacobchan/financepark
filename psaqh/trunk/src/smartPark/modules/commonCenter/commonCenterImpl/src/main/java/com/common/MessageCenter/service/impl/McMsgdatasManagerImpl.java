@@ -6,6 +6,7 @@ package com.common.MessageCenter.service.impl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -25,6 +26,7 @@ import com.common.MessageCenter.service.MessagePostProcessor;
 import com.gsoft.common.service.BaseUserManager;
 import com.gsoft.common.util.MessageUtils;
 import com.gsoft.common.util.SMSUtil;
+import com.gsoft.entity.MsgParam;
 import com.gsoft.entity.ReferenceMap;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -39,6 +41,7 @@ import com.gsoft.framework.esb.annotation.OrderCollection;
 import com.gsoft.framework.esb.annotation.PubCondition;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.security.agt.entity.User;
+import com.gsoft.framework.security.agt.entity.UserConfigItem;
 import com.gsoft.framework.security.agt.service.UserManager;
 import com.gsoft.framework.security.fuc.entity.Role;
 import com.gsoft.framework.security.fuc.service.RoleManager;
@@ -188,76 +191,92 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 	}
 	
 	public void sendMessage(McMsgdatas mcMsgdatas,String id,int type) throws BusException{
-		String[] phones = null;
+		List<MsgParam> msgParams = null;
 		if(StringUtils.isEmpty(id)){
+			msgParams = new ArrayList<MsgParam>();
 			McMsgtempalate tempalate = mcMsgdatas.getMcMsgtempalate();
 			String receiver = tempalate.getMsgReceiver();//模板中定义
 			if("ROLE_MEMBER".equals(receiver)){
-				//会员表--获取对应phones
+				//会员表
 				List<MemberInformation> members = memberInformationManager.getMemberInformations();
 				if(members!=null&&members.size()>0){
-					List<String> phoneLists = new ArrayList<String>();
 					for(MemberInformation member:members){
-						phoneLists.add(member.getMemberPhoneNumber());
+						msgParams.addAll( getPhonesByType(1,member.getMemberId()));
 					}
-					phones = phoneLists.toArray(new String[phoneLists.size()]);
 				}
 			}else{
-				//用户表--获取对应phones
-				phones = baseUserManager.getPhonesByRole(id);
+				//后台用户表
+				msgParams.addAll( getPhonesByType(2,receiver));
 			}
 		}else{
-			phones = getPhonesByType(type, id);
+			msgParams = getPhonesByType(type, id);
 
 		}
 		if (messagePostProcessor != null) {
-			messagePostProcessor.send(mcMsgdatas, phones);
+			messagePostProcessor.send(mcMsgdatas, msgParams);
 		}
 	}
 	
-	private String[] getPhonesByType(int type,String id){
-		String[] phones = null;
+	private List<MsgParam> getPhonesByType(int type,String id){
+		List<MsgParam> msgParams = new ArrayList<MsgParam>();
+//		String[] phones = null;
 		switch (type) {
 		case 0://普通用户
 			User user = userManager.getUser(id);
-			phones = new String[]{user==null?"":user.getPrincipalConfig().get("phone")};
+			if(user!=null){
+				List<UserConfigItem> userConfigs = baseUserManager.getUserConfigItems(user.getUserId());
+				String phone = null;
+				String username = null;
+				for(UserConfigItem userConfigItem : userConfigs){
+					if("phone".equals(userConfigItem.getName()))
+						phone = userConfigItem.getValue();
+					if("username".equals(userConfigItem.getName()))
+						username = userConfigItem.getValue();
+						
+				}
+				if(phone!=null)
+					msgParams.add(new MsgParam(phone, username));
+			}	
 			break;
 		case 1://会员用户
 			MemberInformation member = memberInformationManager.getMemberInformation(id);
-			phones = new String[]{member==null?"":member.getMemberPhoneNumber()};
+			String phone1 = member==null?"":member.getMemberPhoneNumber();
+			String username1 = member==null?"":member.getMemberName();
+			msgParams.add(new MsgParam(phone1, username1));
 			break;
 		case 2://用户角色
-			phones = baseUserManager.getPhonesByRole(id);
+			List<User> users = baseUserManager.getUsersByRoles(new String[]{id});
+			if(users !=null&&users.size()>0){
+				for(User user_:users){
+					msgParams.addAll( getPhonesByType(0,user_.getUserId()));
+				}
+			}
 			break;
 		case 3://会员角色
 			List<MemberInformation> members = memberInformationManager.getMembersByRole(id);
 			if(members!=null&&members.size()>0){
-				List<String> temPhones = new ArrayList<String>();
 				for(MemberInformation member_:members){
-					temPhones.add(member_.getMemberPhoneNumber());
+					msgParams.addAll( getPhonesByType(1,member_.getMemberId()));
 				}
-				phones = temPhones.toArray(new String[temPhones.size()]);
 			}
 			break;
-		case 4:
+		case 4://后台角色类型
 			Collection<Condition> conditions = new ArrayList<Condition>();
 			conditions.add(ConditionUtils.getCondition("roleType", Condition.EQUALS, ""+id));
 			List<Role> roles = roleManager.getRoles(conditions, null);
 			if(roles!=null&&roles.size()>0){
-				List<String> tempPhones = new ArrayList<String>();
 				for(Role role:roles){
-					String[] phones_ = getPhonesByType(2,role.getRoleId());
-					tempPhones.addAll(Arrays.asList(phones_));
+					msgParams.addAll( getPhonesByType(2,role.getRoleId()) );
 				}
-				phones = tempPhones.toArray(new String[tempPhones.size()]);
 			}
 			break;
+		case 5://匿名
+			msgParams.add(new MsgParam(id, ""));
 		default:
-			phones = new String[]{};
 			break;
 		}
 		
-		return phones;
+		return msgParams;
 	}
 	
 	//发送消息
@@ -329,7 +348,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 	@Override
 	public String sendSelected(McMsgdatas mcMsgdatas) throws BusException {
 		if (messagePostProcessor != null) {
-			messagePostProcessor.send(mcMsgdatas, new String[]{ mcMsgdatas.getReceive()});
+			messagePostProcessor.send(mcMsgdatas, Arrays.asList(new MsgParam[]{new MsgParam(mcMsgdatas.getReceive(), "")}));
 		}
 		return null;
 	}
