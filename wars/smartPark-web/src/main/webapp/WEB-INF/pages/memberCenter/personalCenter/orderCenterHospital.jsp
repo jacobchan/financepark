@@ -24,19 +24,20 @@
 		<colgroup>
 			<col width="120">
 			<col width="120">
-			<col>
 			<col width="120">
 			<col width="120">
 			<col width="120">
 		</colgroup>
-		<tbody class="hospital_list">
-		<tr>
+		<tbody>
+		  <tr>
 			<th>订单号</th>
 			<th>订单项目</th>
 			<th>订单金额</th>
 			<th>下单时间</th>
 			<th>操作</th>
-		</tr>			
+		  </tr>
+		</tbody>	
+		<tbody class="hospital_list">		
 		</tbody>
 	</table>
 	<div class="tcdPageCode fr"></div>
@@ -98,15 +99,7 @@
 		//拼接卡号列表
 		function _parseRecords_hospital(record){					
 			$(".hospital_list").empty();	
-			ht="<tr>"+
-				"<th>订单号</th>"+
-				"<th>订单项目</th>"+
-				"<th>订单金额</th>"+
-				"<th>下单时间</th>"+
-				"<th>操作</th>"+
-			   "</tr>";
-			 $(".hospital_list").append(ht);
-			//console.log(record);
+			 if(record.length>0){
 			for(var i=0;i<record.length;i++){				
 				var status = "";
 				var button = "";
@@ -131,7 +124,12 @@
 						  "</td>"+
                           " </tr>";
 				 $(".hospital_list").append(html);	
-			}
+			}}else{
+				var	html1 = '<tr>'
+					html1 += '	<td colspan="6">暂无记录</td>'
+					html1 += '</tr>'
+						$(".hospital_list").html(html1);	
+				}	
 		};  
 		
 	//取消成功弹窗
