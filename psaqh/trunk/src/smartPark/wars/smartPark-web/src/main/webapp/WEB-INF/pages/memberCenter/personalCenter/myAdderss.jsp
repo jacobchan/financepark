@@ -395,7 +395,7 @@
 						showMessagem3("请输入手机号!");
 						return false;
 					}
-					if(addressDetail==''&&addressPhone==null){
+					if(addressDetail==''||addressDetail==null){
 						showMessagem3("请填写地址!");
 						return false;
 					}
@@ -421,7 +421,7 @@
 						showMessagem1("请输入手机号!");
 						return false;
 					}
-					if(addressDetail==''&&addressPhone==null){
+					if(addressDetail==''||addressDetail==null){
 						showMessagem1("请填写地址!");
 						return false;
 					}
