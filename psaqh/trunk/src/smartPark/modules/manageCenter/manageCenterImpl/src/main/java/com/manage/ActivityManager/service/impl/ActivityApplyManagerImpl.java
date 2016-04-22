@@ -123,7 +123,12 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
         	o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     	}
-    	return activityApplyDao.save(o);
+    	ActivityApply apply = activityApplyDao.save(o);
+		ActivityDocument document = new ActivityDocument() ;
+		document.setActivityApply(apply);
+		document.setDocumentPath(o.getDocumentPath());
+		activityDocumentManager.saveActivityDocumentList(document);
+		return apply ;
     }
 
     /**
