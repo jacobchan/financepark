@@ -17,23 +17,24 @@
 							<colgroup>
 								<col width="150"></col>
 								<col width="150"></col>
-								<col width="80"></col>
-								<col width="100"></col>
+								<col width="150"></col>
 								<col width="120"></col>
 								<col width="120"></col>
 								<col></col>
 							</colgroup>
-							<tbody class="knowledge a">
+							<tbody>
 								<tr>
 									<th>投诉单号</th>
-									<th>申请时间</th>
-									<th>是否回访</th>
+									<th>申请时间</th>								
 									<th>联系人</th>
 									<th>联系电话</th>
 									<th>投诉状态</th>
 									<th>操作</th>
 								</tr>
 							</tbody>
+							<tbody class="knowledge a">
+							</tbody>
+							
 						</table>
 						<div class="tcdPageCode fr">
 							
@@ -65,8 +66,7 @@
 </youi:body>
 	
 	
-	<%-- <script type="text/javascript" src="<%=request.getContextPath() %>/scripts/lib/properties.js"></script> --%>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
+	
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 	<script type="text/javascript">
 	var pageSize=10; //每页默认显示10条
@@ -109,22 +109,11 @@
 	}
 		//格式化展示列表
 		function _parseRecords(record){
-			$(".knowledge.a").empty();
-	     ht="<tr>"+
-			"<th>订单号</th>"+
-			"<th>申请时间</th>"+
-			//"<th>是否回访</th>"+
-			"<th>联系人</th>"+
-			"<th>联系电话</th>"+
-			"<th>投诉状态</th>"+
-			"<th>操作</th>"+
-		    "</tr>";
-		    $(".knowledge.a").append(ht);		
-		//	$("#count").append(record.length);
-			for(var i=0;i<record.length;i++){				
+		   $(".knowledge.a").empty();	
+			if(record.length>0){
+				for(var i=0;i<record.length;i++){			
 				var status = "";
-				var crop = "";
-				
+				var crop = "";				
 				if(record[i].cosStatus=='01'){
 					status = "待受理";
 					crop = "取消";
@@ -135,16 +124,22 @@
 				}else if(record[i].cosStatus=='04'){
 					status = "已退回";
 				}
-				var html="<tr id='"+record[i].cosId+"' class='aaa'>"+
+				var html="<tr id='"+record[i].cosId+"' >"+
 							"<td><a href='javascript:;' onclick='viewOrder(\""+record[i].cosCode+"\")' class='ac-show'>"+record[i].cosCode+"</a></td>"+
 							"<td>"+record[i].cosTime+"</td>"+
 							"<td>"+record[i].cosName+"</td>"+
 							"<td>"+record[i].cosTelephone+"</td><td>"+status+"</td>"+
 							"<td><a href='javascript:;' onclick='javascript:cancel(this)' class='ac-show'>"+crop+"</a></td>"+
 						  "</tr>";
-				
-				$(".knowledge.a").append(html);
+						$(".knowledge.a").append(html);	
 			}
+			}else{
+				var	html1 = '<tr>'
+					html1 += '	<td colspan="6">暂无记录</td>'
+					html1 += '</tr>'
+						$(".knowledge.a").html(html1);	
+				}
+		
 		};
 	 $('.hhf-submit.query').click(function(){	
 		var cosCode=$("#cosCode").val();
