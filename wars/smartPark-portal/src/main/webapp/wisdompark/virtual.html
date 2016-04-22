@@ -6,7 +6,7 @@
 <link href="../styles/page/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 <link href="../styles/base.css" type="text/css" rel="stylesheet">
 <link href="../styles/page/page.css" type="text/css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="../styles/page/zs.css">
+<!-- <link rel="stylesheet" type="text/css" href="../styles/page/zs.css"> -->
 <style>
 	.czkj{background:url(../styles/images/zhyq/zckj.png) no-repeat;width:117px;height:36px;position:absolute;top:462px;left:585px;
 		animation:my 1s infinite alternate;-webkit-animation:my 1s infinite alternate;}
@@ -142,20 +142,32 @@ to {opacity:0;}
 	<script type="text/javascript">
 		$(".zznav").hide() ;
 		$("#loading").removeClass("undis") ;
-		 $(function(){
-			var params = ["parkName=富春硅谷"];
+		$(function(){
 			$.youi.ajaxUtils.ajax({
-				url:baseUrl +"bbmBuildingManager/getAllBuildingByParkName.json",//通过园区名称来获取该园区所有楼栋
-				data:params.join('&'),
+				url:baseUrl +"bbmParkManager/getBbmParks.json",//得到所有的园区
 				jsonp:'data:jsonp',
 				dataType:'jsonp',
 				success:function(result){
-					 if(result&&result.records){
-						_parseRecords(result.records) ;
-					} 
-				}
+					if(result.records.length > 0){
+						console.log(result.records) ;
+						var park = result.records[0] ;//获取第一个园区
+						var parkId = park.parkId ;//得到园区ID
+						var params = ["parkId="+parkId];
+						$.youi.ajaxUtils.ajax({
+							url:baseUrl +"bbmBuildingManager/getAllBuildingByParkId.json",//通过园区名称来获取该园区所有楼栋
+							data:params.join('&'),
+							jsonp:'data:jsonp',
+							dataType:'jsonp',
+							success:function(result){
+								 if(result&&result.records){
+									_parseRecords(result.records) ;
+								} 
+							}
+						});
+					}
+				} 
 			});
-		}); 
+		});
 		function _parseRecords(record){//record为楼栋的list
 				for(var i=0;i<record.length;i++){
 					var obj = record[i] ;
