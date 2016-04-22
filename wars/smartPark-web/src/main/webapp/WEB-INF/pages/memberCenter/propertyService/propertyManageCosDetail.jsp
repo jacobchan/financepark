@@ -42,53 +42,11 @@
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 	<script type="text/javascript">
-	var pageSize=4;
-	var pageCount=1;
-	var currentIndex = 1;
-	var serviceURL = baseUrl+'propertyservicemanagerCosManager/getPagerCos.json';
-$(function () {
-		
-		//分页页码显示
-		 $.ajax({
-			url:serviceURL, 
-			success:function(results){	
-							pageCount=Math.ceil(results.totalCount/pageSize);//页数
-							
-							 refreshData(1,pageSize);
-								$(".tcdPageCode").createPage({
-								    pageCount:pageCount,
-								    current:1,
-								    backFn:function(p){
-								    	currentIndex = p;
-								       this.pageCount=pageCount;
-								        refreshData(p,pageSize);
-								    }
-								});			
-			/* 	if(result&&result.records){
-					_parseRecords(result.records);
-				} */
-			}
-		}); 			
-	});	
 	
-	
-	//分页列表
-	function refreshData(pageIndex,pageSize){
-		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
-		$.ajax({
-			url:serviceURL,
-			data:params.join('&'),
-			success:function(results){
-				if(results&&results.records){
-					 _parseRecords(results.records);
-				}
-			}
-		});
-	}
 		//格式化展示列表
 		function _parseRecords(record){
 			$(".clearfixa.a").empty();
-			$("#count").append(record.length);
+			//$("#count").append(record.length);
 			for(var i=0;i<record.length;i++){
 				var bool = "";
 				var status = "";
@@ -157,19 +115,16 @@ $(function () {
 		
 		
 			//根据订单号查询
-			$('.pb-btn.tc').click(function(){	
-				
-				$(".aaa").empty();
-				 var cosCode=$("#cosCode").val(); 
-				 var startTime=$("#startTime").val(); 
-				 var endTime=$("#endTime").val(); 
-				 params=['cosCode='+cosCode+'','startTime='+startTime+'','endTime='+endTime+''];
-			      $.ajax({
-			    	 url:baseUrl+'propertyservicemanagerCosManager/getCoslistLikeCosCode.json',
-			    	 data:params.join('&'),
-			    	 success:function(result){					    		 
+	$(function(){					
+		var arg=getQueryStringArgs();
+	    var cosCode =arg.cosCode;	    
+		$.ajax({
+			url:baseUrl+'propertyservicemanagerCosManager/getPagerCos.json',
+			data:'cosCode='+cosCode,
+			success:function(result){					    		 
 							console.log(result.records);           
-							if(result&&result.records){						
+							if(result&&result.records){	
+								//console.log(result.records);
 								_parseRecords(result.records);							
 							}
 						}
@@ -192,22 +147,7 @@ $(function () {
 				});
 			}
 		
-	$(function(){
-		laydate({
-		    elem: '#startTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
-		    format: 'YYYY-MM-DD hh:mm:ss', //日期格式
-	        istime: true, //是否开启时间选择
-		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
-		});
-	});
-	$(function(){
-		laydate({
-		    elem: '#endTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
-		    format: 'YYYY-MM-DD hh:mm:ss', //日期格式
-	        istime: true, //是否开启时间选择
-		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
-		});
-	});
+
 	//点击跳转到投诉页面
 	$("#a1").click(function(){
 		
