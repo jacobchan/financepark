@@ -29,7 +29,7 @@
 								<th>截止日期</th>
 								<th>操作</th>
 							</tr>
-							
+							</tbody><tbody class="chargelist">
 							
 						</tbody></table>
 						<div class="tcdPageCode fr"></div>
@@ -152,6 +152,8 @@
 	
 	//拼接列表
 	function _parseRecords(record){
+		 $("chargelist").empty();
+	  if(record.length>0){
 		for(var i=0;i<record.length;i++){
 			var chargeStatus='';
 			var userorderStatus=record[i].userorder.userorderStatus;
@@ -161,18 +163,23 @@
 			}else{
 				chargeStatus="已缴费";
 				buttonHtml="<td><a href='javascript:;' class='ac-see lq-fp'>领取发票</a></td>";
-			}
-			
+			}			
 			var html="<tr id='"+record[i].chargeId+"' class='aaa'>"+
-				 	 "<td><a href=''>"+record[i].userorder.userorderCode+"</a></td>"+
-					 "<td>"+record[i].userorder.userorderProject+"</td>"+
-					 "<td>"+record[i].chargeAmount+"元</td>"+
-					 "<td>"+chargeStatus+"</td>"+
-					 "<td>"+record[i].chargeEndate+"</td>"+
-					 buttonHtml+
+				 	 	"<td><a href=''>"+record[i].userorder.userorderCode+"</a></td>"+
+					 	"<td>"+record[i].userorder.userorderProject+"</td>"+
+					 	"<td>"+record[i].chargeAmount+"元</td>"+
+					 	"<td>"+chargeStatus+"</td>"+
+					 	"<td>"+record[i].chargeEndate+"</td>"+
+					 	buttonHtml+
 					 "</tr>";
-			 $("tbody").append(html);
+			 $("chargelist").append(html);
 		}
+	  }else{
+			var	html1 = '<tr>'
+				html1 += '	<td colspan="6">暂无记录</td>'
+				html1 += '</tr>'
+			$(".chargelist").html(html1);	
+			}	
 	};
 	function pay(obj){
 		var me=obj.parentNode.parentNode;
