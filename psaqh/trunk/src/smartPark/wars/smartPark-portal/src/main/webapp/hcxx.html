@@ -386,7 +386,6 @@
 	<script type="text/javascript" src="scripts/cityselector/j.dimensions.js"></script>
 	<script type="text/javascript" src="scripts/cityselector/j.suggest.js"></script>
 	<script type="text/javascript" src="scripts/page/date.js"></script>
-	<script type="text/javascript" src="scripts/page/dateplug.min.js"></script>
 	<script type="text/javascript">
 	var lowest_price = new Array();
 		$(function(){
@@ -448,11 +447,15 @@
 				    $("#kalendar-detail").slideDown()
 				 }
 			})
+			var price = [1,23,4,5,7,8];
 			$("#kalendar-detail").dateplug({
-				price: lowest_price
+				price: price
 				});
 		   $.fn.dateplug.ajax = function(){
 			  alert("tigutf");
+		   }
+		   $.fn.dateplug.monthajax = function(){
+			   return [14,25,36,7,8];
 		   }
 			
 		});
