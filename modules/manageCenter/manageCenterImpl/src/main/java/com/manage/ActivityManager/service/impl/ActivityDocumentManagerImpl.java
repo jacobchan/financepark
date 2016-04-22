@@ -2,20 +2,6 @@
  * 代码声明
  */
 package com.manage.ActivityManager.service.impl;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.ConnectException;
-import java.nio.charset.Charset;
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
@@ -25,13 +11,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.artofsolving.jodconverter.DocumentConverter;
-import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
-import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
-import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
-//import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
@@ -149,5 +130,23 @@ public class ActivityDocumentManagerImpl extends BaseManagerImpl implements Acti
     	return swfPath;
 	
     }
+    
+    /**
+     * 保存活动文档列表
+     * @param o
+     */
+	@Override
+	public void saveActivityDocumentList(ActivityDocument o) {
+		String path = o.getDocumentPath() ;
+		if(StringUtils.isNotEmpty(path)){
+			String[] paths = path.split(",") ;
+			for(String tPath : paths){
+				ActivityDocument document = new ActivityDocument() ;
+				document.setActivityApply(o.getActivityApply());
+				document.setDocumentPath(tPath);
+				this.saveActivityDocument(document) ;
+			}
+		}
+	}
 
 }
