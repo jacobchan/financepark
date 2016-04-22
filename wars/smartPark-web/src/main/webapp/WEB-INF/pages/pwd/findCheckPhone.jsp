@@ -42,7 +42,7 @@
                    <div class="clearfix mt25">
                         <span class="mr15 fl">验证码</span>
                         <input type="text" id="phoneCode" placeholder="请输入验证码" style="width:140px;">
-                        <a href="javascript:;" class="ib-btn fl ml20 ib-o" id="sendCaptcha" style="margin-top:0px;">发送验证码</a>
+                        <a href="javascript:;" class="ib-btn fl ml20 ib-o" id="sendCaptcha" onclick="getCaptcha();" style="margin-top:0px;">发送验证码</a>
                     </div>
                    <a class="ib-btn mt25" id="next" style="width:350px;margin-left:85px;" href="javascript:;">下一步</a>
                 </div>
@@ -68,11 +68,27 @@
 <!--***bottom end****************************************-->
 </body>
 <script type="text/javascript">
+	function getCaptcha(){
+		$.youi.ajaxUtils.ajax({
+			url:cenUrl +"web/loginUser/findPhoneCaptcha.json",
+			success:function(result){
+				if(result && result.record){
+					var res = result.record.html;
+					if(!/^\d{6}$/.test(res)){
+						enableSmsButton(3,res,'重新获取');
+					}else{
+						enableSmsButton(60,'发送成功','重新获取');
+					}
+					$('#sendMobileCaptcha').attr('onclick','getCaptcha();');
+				}
+			}
+		});
+	}
 	function enableSmsButton(sec,processText,enableText){
 		$('#sendCaptcha').html(processText + '(' + sec + ')');
 		if(sec <= 0){
 			$('#sendCaptcha').html(enableText);
-			$('#sendCaptcha').attr('disabled',false);
+			$('#sendMobileCaptcha').attr('onclick','volid(0);');
 		}
 		else{
 			setTimeout(function(){
@@ -85,7 +101,7 @@
         $(".close-toast").click(function(){
             $(".toast").hide();
         });
-		$('#sendCaptcha').click(function(){
+		/* $('#sendCaptcha').click(function(){
 			$.youi.ajaxUtils.ajax({
 				url:cenUrl +"web/loginUser/findPhoneCaptcha.json",
 				success:function(result){
@@ -100,7 +116,7 @@
 					}
 				}
 			});
-		});
+		}); */
 		$("#next").click(function(){
 			var phoneCode = $('#phoneCode').val();
 			$.youi.ajaxUtils.ajax({
