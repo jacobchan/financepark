@@ -4,7 +4,7 @@
 	<youi:body decorator="memcenter">  
 				<div class="w1000">
 					<h3 class="per-h3">搬家放行列表<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要搬家</a></h3>
-					<div class="clearfix mt20 fklist">
+					<div class="clearfix mt20 mlist">
 						
 					</div>
 					<div class="tcdPageCode fr"></div>		
@@ -100,7 +100,8 @@
 	}	 	
 	//拼接列表
 	function _parseRecords(record){
-		$(".fklist").empty();	
+		$(".mlist").empty();	
+		if(record.length>0){
 		for(var i=0;i<record.length;i++){
 			var id = record[i].moverecId ;			
 			var status="";
@@ -144,7 +145,15 @@
 							    "<p>"+record[i].moverecRemark+"</p>"+							 							
 						    "</div>"+
 					"</div>";
-			  $(".fklist").append(html);				
+			  $(".mlist").append(html);				
+		}
+	}else{
+		var html1 = '<table class="gt-table mt20">'
+		    html1 += '<tr>'
+			html1 += '	<td colspan="6">暂无记录</td>'
+			html1 += '</tr>'
+			html1 += '</table>'
+				$(".mlist").html(html1);	
 		}
 	};
 	//取消弹窗
