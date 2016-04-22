@@ -1,5 +1,8 @@
 package com.member.ticket.entity;
 
+import org.hibernate.annotations.Entity;
+
+@Entity
 public class WsPolicyData {
 	private Integer policyId;//	政策ID	Integer	是	
 	private String commisionPoint;//	政策返点	String	是	

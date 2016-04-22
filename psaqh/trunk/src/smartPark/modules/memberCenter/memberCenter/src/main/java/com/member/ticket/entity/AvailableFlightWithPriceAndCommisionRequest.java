@@ -1,6 +1,15 @@
 package com.member.ticket.entity;
 
-public class AvailableFlightWithPriceAndCommisionRequest {
+import org.hibernate.annotations.Entity;
+
+import com.gsoft.framework.core.dataobj.Domain;
+
+@Entity
+public class AvailableFlightWithPriceAndCommisionRequest implements Domain{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String agencyCode;
 	private String sign;
 	private String group;

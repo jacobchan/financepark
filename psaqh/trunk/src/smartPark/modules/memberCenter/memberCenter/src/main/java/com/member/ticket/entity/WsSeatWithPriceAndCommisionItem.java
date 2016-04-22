@@ -1,5 +1,8 @@
 package com.member.ticket.entity;
 
+import org.hibernate.annotations.Entity;
+
+@Entity
 public class WsSeatWithPriceAndCommisionItem {
 	private String flightNo;//	航班号	String	是	
 	private String seatCode;//	舱位码	String	是	

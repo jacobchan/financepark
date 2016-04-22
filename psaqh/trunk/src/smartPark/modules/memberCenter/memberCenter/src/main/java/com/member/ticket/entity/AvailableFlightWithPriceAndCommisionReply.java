@@ -2,28 +2,29 @@ package com.member.ticket.entity;
 
 import java.util.List;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
+import org.hibernate.annotations.Entity;
 
-public class AvailableFlightWithPriceAndCommisionReply {
-	@XStreamAlias("returnCode")
+import com.gsoft.framework.core.dataobj.Domain;
+
+@Entity
+public class AvailableFlightWithPriceAndCommisionReply implements Domain{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private String returnCode;
 	
-	@XStreamAlias("returnMessage")
 	private String returnMessage;
 	
-	@XStreamAlias("flightItems")
 	private List<WsFlightWithPriceAndCommisionItem> flightItems;
 	
-	@XStreamAlias("param1")
 	private String param1;
 	
-	@XStreamAlias("param2")
 	private String param2;
 	
-	@XStreamAlias("param3")
 	private String param3;
 	
-	@XStreamAlias("param4")
 	private String Param4;
 
 	public String getReturnCode() {
