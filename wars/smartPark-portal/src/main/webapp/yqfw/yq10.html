@@ -133,28 +133,18 @@
 					<td><b>园区地址</b></td>
 					<td>
 						<div class="tct-select fl mr20 bbmbud" style="width:160px">
-							<!-- <div class="ic-select">
-								<p>园区地址2</p>
-							</div>
-							<ul style="display: none;" class="select-nav">
-								<li>园区地址1</li>
-								<li>园区地址2</li>
-								<li>园区地址3</li>
-							</ul> -->
+							
 						</div>
 						<div class="tct-select fl bbmfloor" style="width:160px">
-						<div class="ic-select">
+						<!-- <div class="ic-select">
 								<p id="floorNo"></p>
-							</div>
-							<!-- 
-							<ul style="display: none;" class="select-nav">
-								<li>创立方1</li>
-								<li>创立方2</li>
-								<li>创立方3</li>
-							</ul> -->
+							</div> -->
+							
 						</div>
-						<div class="tct-select fl bbmfloor" style="margin-left: 20px;">
-							<input type="text" id="ad1" style="width:160px;height: 29px;">
+						<div class="tct-select fl bbmroom" style="width:160px;margin-left: 20px;">
+							<!-- <div class="ic-select">
+								<p id="roomNo"></p>
+							</div> -->
 						</div>
 					</td>
 				</tr>
@@ -167,7 +157,11 @@
 					<td colspan="2"><a href="javascript:;" onclick="javascript:saveadd();" class="ib-btn" style="width:120px;text-align:center;margin-top:10px;">保存</a></td>
 				</tr>
 			</table>
+			<div class="error-toast m1">
+				<p></p>
+			</div>
 		</div>
+		
 	</div>
 	
 	<div class="bg-tanc m2">
@@ -287,40 +281,46 @@
 	</script>
 	
 	<script type="text/javascript">
-		$(function(){
-			$.youi.ajaxUtils.ajax({
-				url:baseUrl +"memberadrAddressManager/getMemAddforpage.json", 
-				jsonp:'data:jsonp',
-				dataType:'jsonp',
-				success:function(result){
-					if(result&&result.records){
-						_parseRecords(result.records);
-					}
-				}
-			});
+		$(function(){		
+			load();
 		});
-		//拼接地址
-		function _parseRecords(record){
-			var html="";
-			for(var i=0;i<record.length;i++){
-				if(record[i].addressStatus==0){	
-				 html+="<div class='select-address active' id="+record[i].addressId+">"+
-					"<p><span>联系人："+record[i].addressName+"</span><span class='ml20'>联系电话："+record[i].addressPhone+"</span></p>"+
-					"<p>园区地址："+record[i].addressDetail+"</p>"+
-					"<em class='s-a-select'></em>"+
-					"</div>"
-				}else{
-					 html+="<div class='select-address' id="+record[i].addressId+">"+
-						"<p><span>联系人："+record[i].addressName+"</span><span class='ml20'>联系电话："+record[i].addressPhone+"</span></p>"+
-						"<p>园区地址："+record[i].addressDetail+"</p>"+
-						"<em class='s-a-select'></em>"+
-						"</div>"
+				function load(){
+					$.youi.ajaxUtils.ajax({
+					url:baseUrl +"memberadrAddressManager/getMemAddforpage.json", 
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(result){
+						if(result&&result.records){
+							_parseRecords(result.records);
+						}
+					}
+				});
+	
+				//拼接地址
+					function _parseRecords(record){
+						$(".addressList").empty();
+						var html="";
+						for(var i=0;i<record.length;i++){
+							if(record[i].addressStatus==0){	
+							 html+="<div class='select-address active' id="+record[i].addressId+">"+
+								"<p><span>联系人："+record[i].addressName+"</span><span class='ml20'>联系电话："+record[i].addressPhone+"</span></p>"+
+								"<p>园区地址："+record[i].addressDetail+"</p>"+
+								"<em class='s-a-select'></em>"+
+								"</div>"
+							}else{
+								 html+="<div class='select-address' id="+record[i].addressId+">"+
+									"<p><span>联系人："+record[i].addressName+"</span><span class='ml20'>联系电话："+record[i].addressPhone+"</span></p>"+
+									"<p>园区地址："+record[i].addressDetail+"</p>"+
+									"<em class='s-a-select'></em>"+
+									"</div>"
+							}
+						}
+						html+="<a href='javascript:;' class='fl open-tanc'><i class='fa fa-plus-circle mr5'></i>新增地址</a>";
+						$(".addressList").append(html);
+						activeclick();
+					};
 				}
-			}
-			html+="<a href='javascript:;' class='fl open-tanc'><i class='fa fa-plus-circle mr5'></i>新增地址</a>";
-			$(".addressList").append(html);
-			activeclick();
-		};
+
 	</script>
 	
 	
@@ -343,11 +343,11 @@
 			function bbmBuild(record){
 				var html="";
 				html=html+"<div class='ic-select'>"+
-				"<p id='buildingNo' value='"+record[0].buildingId+"'>"+record[0].buildingNo+"</p>"+
+				"<p id='buildingNo' value='"+record[0].buildingId+"'>"+record[0].buildingName+"</p>"+
 				"</div>"+
 				"<ul style='display: none;' class='select-nav'>";
 				for(var i=0;i<record.length;i++){
-					html =html +"<li value='"+record[i].buildingId+"'>"+record[i].buildingNo+"</li>"
+					html =html +"<li value='"+record[i].buildingId+"'>"+record[i].buildingName+"</li>"
 				}
 				html =html +"</ul>";
 				
@@ -356,11 +356,23 @@
 			};
 			//初始化楼层地址
 			function getbbmfloor(){
+				$(".bbmfloor").empty();
 				 var html ="";
-				 html = html +"<ul style='display: none;' class='select-nav' id='floo'>"+
+				 html = html +"<div class='ic-select'><p id='floorNo'></p></div>"+
+				 "<ul style='display: none;' class='select-nav' id='floo'>"+
 				"</ul>";
 				
 				$(".bbmfloor").append(html);
+			};
+			//初始化单元
+			function getbbmroom(){
+				$(".bbmroom").empty();
+				 var html ="";
+				 html = html +"<div class='ic-select'><p id='roomNo'></p></div>"+
+				 "<ul style='display: none;' class='select-nav' id='room'>"+
+				"</ul>";
+				
+				$(".bbmroom").append(html);
 			};
 			//根据所选楼栋查询楼层信息
 			function getfloor(id){
@@ -373,19 +385,46 @@
 					dataType:'jsonp',
 					success:function(result){
 						if(result&&result.records){
-							
-							$("#floorNo").text(result.records[0].floorNo);	
-							var html = "";
-							$("#floo").empty();
-							for(var i=0;i<result.records.length;i++){
-								html =html +"<li>"+result.records[i].floorNo+"</li>"
+							if(result.records.length>0){
+								$("#floorNo").text(result.records[0].floorNo);	
+								var html = "";
+								$("#floo").empty();
+								for(var i=0;i<result.records.length;i++){
+									html =html +"<li value='"+result.records[i].floorId+"'>"+result.records[i].floorNo+"</li>"
+								}
+								$("#floo").append(html);
+								 floorclick();
 							}
-							$("#floo").append(html);
-							 floorclick();
 						}
 					}
 				});
 			}	
+			
+			//根据楼栋id查询单元信息
+			function getroom(id){
+				var roomId = id;
+				var params = ['bbmFloor.floorId='+roomId];
+				$.youi.ajaxUtils.ajax({
+					url:baseUrl +"bbmRoomManager/getBbmRooms.json", 
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					data:params.join('&'),
+					success:function(result){
+						if(result&&result.records){
+							if(result.records.length>0){
+								$("#roomNo").text(result.records[0].roomNo);	
+								var html = "";
+								$("#room").empty();
+								for(var i=0;i<result.records.length;i++){
+									html =html +"<li value='"+result.records[i].roomAddress+"'>"+result.records[i].roomNo+"</li>"
+								}
+								$("#room").append(html);
+								 roomclick();
+							}
+						}
+					}
+				});
+			}
 			//保存地址
 			
 			function saveadd(){
@@ -394,10 +433,11 @@
 				var addressPhone=$("#addressPhone").val();
 				var addressDetail ="";
 				if(bool=='0'){
-					 var a1 = $("#buildingNo").text();
+					/*  var a1 = $("#buildingNo").text();
 					 var a2 = $("#floorNo").text();
 					 var a3 = $("#ad1").val();
-					 addressDetail = a1+"栋"+a2+"室"+a3;
+					 addressDetail = a1+"栋"+a2+"室"+a3; */
+					addressDetail = $("#roomNo").attr("value");
 				}else if(bool=='1'){
 					addressDetail = $("#ad2").val();
 				}
@@ -409,7 +449,14 @@
 		           	timer=setInterval("closeTanc()",1000);
 					return false;
 				}
-				
+				if(addressDetail==''||addressDetail==null){
+					clearInterval(timer);
+					$(".tc.mt25").text("请填写地址!");
+		           	$(".toast").show();
+		           	pltime=1;
+		           	timer=setInterval("closeTanc()",1000);
+					return false;
+				}
 				var params = ['addressName='+addressName,
 								'addressPhone='+addressPhone,
 								'addressDetail='+addressDetail];
@@ -428,7 +475,8 @@
 				           	$(".toast").show();
 				           	pltime=1;
 				           	timer=setInterval("closeTanc()",1000);
-							location.reload();
+							load();
+							setTimeout(function(){$(".bg-tanc.m1").hide(); },1000);
 						}
 					}
 				});
@@ -443,11 +491,16 @@
 				$(this).addClass("active");
 			});
 			$(".open-tanc").click(function(){
+				$("#addressName").val('');	
+				$("#addressPhone").val('');
+				$("#ad2").val('');
 				$(".bg-tanc.m1").show();
 				$(".bbmbud").empty();
 				$("#floorNo").empty();
-				getbbmbud();
-				getbbmfloor();
+				$("#roomNo").empty();
+				getbbmbud();//获取楼栋
+				getbbmfloor();//初始化楼层
+				getbbmroom();//初始化单元
 			});
 		};
 		function liclick(){
@@ -460,14 +513,13 @@
 			     $(".select-nav").hide();
 			});
 			$(".select-nav li").click(function(){
+				$(this).parents(".tct-select").find(".ic-select p").text($(this).text()) ;
 				var lival = $(this)[0].getAttribute("value");
-				var params = ['buildingId='+lival];
+				/* var params = ['buildingId='+lival];
 				var as =$(this);
-				$.youi.ajaxUtils.ajax({
+				$.ajax({
 					url:baseUrl +"bbmBuildingManager/getBbmBuilding.json", 
 					data:params.join('&'),
-					jsonp:'data:jsonp',
-					dataType:'jsonp',
 					success:function(result){
 						if(result&&result.record){
 								var  a = result.record.bbmPark.address;
@@ -477,11 +529,12 @@
 								as.parents(".tct-select").find(".ic-select p").text(add);
 							}
 						}
-				});
+				}); */
 				//$(this).parents(".tct-select").find(".ic-select p").text(add);
-				as.parents(".tct-select").find(".ic-select p")[0].setAttribute("value",lival);
+				$(this).parents(".tct-select").find(".ic-select p")[0].setAttribute("value",lival);
 				getfloor(lival);
-				as.parent().hide();	
+				$("#roomNo").empty();
+				$(this).parent().hide();	
 			});
 		};
 		function floorclick(){
@@ -495,8 +548,27 @@
 			});
 			$(".select-nav li").click(function(){
 				$(this).parents(".tct-select").find(".ic-select p").text($(this).text()) ;
+				var fool = $(this)[0].getAttribute("value");
+				$(this).parents(".tct-select").find(".ic-select p")[0].setAttribute("value",fool);
+				getroom(fool);
 				$(this).parent().hide();
 			});
+		};
+		function roomclick(){
+			$(".ic-select").click(function(e){
+					$(".select-nav").hide();
+				    $(this).next(".select-nav").show();
+				    e.stopPropagation();//阻止冒泡
+				});
+			$("body").click(function(){
+			     $(".select-nav").hide();
+			});
+			$(".select-nav li").click(function(){
+				$(this).parents(".tct-select").find(".ic-select p").text($(this).text()) ;
+				var roomadd= $(this)[0].getAttribute("value");
+				$(this).parents(".tct-select").find(".ic-select p")[0].setAttribute("value",roomadd);
+				$(this).parent().hide();
+			});		
 		};
 		
 		//校验手机号格式
