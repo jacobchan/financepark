@@ -817,16 +817,32 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    	}  
         
     /**
-  	 * 获取订单记录
+  	 * 获取订单记录(APP专用)
   	 * @param conditions
   	 * @return
   	 * @throws BusException
   	 */
     @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
-  	public PagerRecords getOrdermanagerUserorderList(Pager pager,//分页条件
+  	public PagerRecords getOrdermanagerUserorderListApp(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
     	PagerRecords pagerRecords = this.getPagerOrdermanagerUserorders(pager, conditions, orders);
+    	//开始获取该订单下的所有订单详情
+		for(int i=0;i<pagerRecords.getRecords().size();i++){
+			OrdermanagerUserorder ordermanagerUserorder= (OrdermanagerUserorder) pagerRecords.getRecords().get(i);
+			//获取订单号
+			String userorderId = ordermanagerUserorder.getUserorderId();
+			//根据订单号查询该订单下面的所有详细商品
+			Collection<Condition> conditionsDetail = new ArrayList<Condition>();; 
+			//添加查询商品详细列表的条件
+			conditions.add(ConditionUtils.getCondition("ordermanagerUserorder", Condition.EQUALS, userorderId));
+			List<OrdermanagerCommoditydetail> ordermanagerCommodityDetailList = ordermanagerCommoditydetailManager.getOrdermanagerCommoditydetails(conditionsDetail, null);
+			//商品详情列表
+			ordermanagerUserorder.setOrdermanagerCommodityDetailList(ordermanagerCommodityDetailList);
+			//商品详情列表Count
+			String count = String.valueOf(ordermanagerCommodityDetailList.size());
+			ordermanagerUserorder.setOrdermanagerCommodityDetailListCount(count);
+		}
   		return pagerRecords;
   	}  
 }
