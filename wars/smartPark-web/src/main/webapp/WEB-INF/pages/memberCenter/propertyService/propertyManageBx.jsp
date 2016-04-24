@@ -66,19 +66,17 @@
 </youi:body>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 	<script type="text/javascript">
-	var pageSize=10;
-	var pageCount=1;
-	var currentIndex = 1;
+	var pageSize=10;//默认每页10条
+	var pageCount=1;//页数
+	var currentIndex = 1;//第几页
 	var serviceURL = baseUrl+'propertyservicemanagerBxManager/getPagerBxs.json';
 	$(function () {	
 		//分页页码显示
 		 $.ajax({
-			url:baseUrl+'propertyservicemanagerBxManager/getTotalCount.json', 
-			
+			url:baseUrl+'propertyservicemanagerBxManager/getTotalCount.json', 			
 				success : function(results) {
 					var totalCount=results.records[0].totalCount;
-					pageCount = Math.ceil(totalCount / pageSize);//页数	
-							
+					pageCount = Math.ceil(totalCount / pageSize);//页数								
 							 refreshData(1,pageSize);
 								$(".tcdPageCode").createPage({
 								    pageCount:pageCount,
@@ -88,7 +86,7 @@
 								       this.pageCount=pageCount;
 								        refreshData(p,pageSize);
 								    }
-								});		
+				});		
 			}
 		}); 			
 	});	
@@ -137,7 +135,7 @@
 				}
 				var html="<tr id='"+record[i].bxId+"' class='aaa'>"+
 						//"<td><a href=''>"+record[i].bxCode+"</a></td>"+
-						"<td><a href='javascript:;' onclick='viewDetail(\""+record[i].bxCode+"\")' class='ac-show'>"+record[i].bxCode+"</a></td>"+
+						"<td><a href='javascript:;' onclick='viewDetail(\""+record[i].bxId+"\")' class='ac-show'>"+record[i].bxCode+"</a></td>"+
 						"<td>"+record[i].applyTime+"</td>"+
 						"<td>"+bxStatus+"</td>"+
 						//"<td>"+"张三"+"</td>"+
@@ -264,9 +262,8 @@
 			setTimeout(function(){$(".toast").hide(); },2000);
 			refreshData(currentIndex,pageSize);
       }
-	  function viewDetail(cosCode){
-			
-			window.location.href=cenUrl+"member/memberCenter/propertyService/propertyManageBxDetail.html?cosCode="+cosCode;
+	  function viewDetail(bxId){			
+			window.location.href=cenUrl+"member/memberCenter/propertyService/propertyManageBxDetail.html?bxId="+bxId;
 		};
 	</script>
 	<script type="text/javascript">
