@@ -1,7 +1,9 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 				<div class="mt20 gr-txl clearfix lh30">
 							<div class="tct-select fl mr20" style="width:200px">
-								<div class="ic-select" style="background: url(<%=request.getContextPath()%>/styles/images/yqfw/down.png) no-repeat scroll right center;">
+								<div class="ic-select" style="background: url(<%=request.getContextPath()%>/styles/images/yqfw/down.png) no-repeat scroll 
+
+right center;">
 									<p class="c-b1" id="userorderProject" data="">请选择订单项目</p>
 									<%--   <img src="<%=request.getContextPath()%>/styles/images/yqfw/down.png" />  --%>
 								</div>
@@ -11,7 +13,9 @@
 									<li>园区地址3</li> -->
 								</ul>
 							</div>
-							<div class="inp-box ml20" style="width:300px;"><input placeholder="请输入订单号"  id="userorderCode" type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
+							<div class="inp-box ml20" style="width:300px;"><input placeholder="请输入订单号"  id="userorderCode" 
+
+type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
 							
 							<div class="pend_button">
 							  <input value="搜索" class="hhf-submit f14 fl ml20 pend" type="button">
@@ -120,7 +124,7 @@
 				var button = "";
 				if(record[i].userorderStatus=='01'){
 					//status = "待付款";	
-					button = "<a href=''>付款</a><span class='f12 ml5 mr5'>|</span><a href='#'   onclick='cancelStatus(this)'> 取消</a>";
+					button = "<a href=''>付款</a><span class='f12 ml5 mr5'>|</span><a href='#' onclick='cancelStatus(this)'>取消</a>";
 				}else if(record[i].userorderStatus=='02'){
 					//status = "已付款";
 					button = "已付款<span class='f12 ml5 mr5'>|</span><a href=''>评价</a>";
@@ -130,16 +134,16 @@
 					status = "已取消";					
 				}
 				var method = "viewOrder(\""+record[i].userorderCode+"\",\""+record[i].genreId.genreCode+"\");";
-				var html= "<tr class='aaa' id='"+record[i].userorderId+"'>"+
-					      	"<td><a class='custor' onclick='"+method+"'>"+record[i].userorderCode+"</a></td>"+
-                      	    "<td>"+record[i].userorderProject+"</td>"+
-                      	    "<td>"+record[i].userorderAmount+"</td>"+
-                      	    "<td>"+record[i].userorderTime+"</td>"+                                                                        
-                       	    "<td>"+status  + button+"</td>"+
-                          " </tr>";
+				var html= '<tr class="aaa" id="'+record[i].userorderId+'">'
+				    html+=   "<td><a class='custor' onclick='"+method+"'>"+record[i].userorderCode+"</a></td>";
+					html+=   '<td>'+record[i].userorderProject+'</td>'
+                    html+=   '<td>'+record[i].userorderAmount+'</td>'
+                    html+=   '<td>'+record[i].userorderTime+'</td>'                                                                     
+                    html+=   "<td>"+status+button+"</td>";
+                    html+= '</tr>'
 				 $(".pend_list").append(html);	
 			}}else{
-				var	html1 = '<tr>'
+				var	html1 =   '<tr>'
 					html1 += '	<td colspan="6">暂无记录</td>'
 					html1 += '</tr>'
 						$(".pend_list").html(html1);	
