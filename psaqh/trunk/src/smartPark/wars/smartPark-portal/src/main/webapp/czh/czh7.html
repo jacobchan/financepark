@@ -158,7 +158,7 @@
 			var tmp1=url.split("?")[1];  
 			var tmp2=tmp1.split("=")[1]; 
 			var applyId=tmp2;
-			var serviceURL = baseUrl+"activityDocumentManager/getActivityDocuments.json";
+			var serviceURL = baseUrl+"activityDocumentManager/getPagerActivityDocuments.json";
 			var params = ['activityApply.applyId='+applyId];
 			$.youi.ajaxUtils.ajax({
 				url:serviceURL,
