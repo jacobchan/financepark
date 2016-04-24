@@ -111,6 +111,9 @@ public class ActivityApply implements Domain{
     @JoinColumn(name="TYPE_ID_")
 	private com.manage.ActivityManager.entity.ApplayType applayType;//活动类型ID
 	
+	@Column(name = "DOCUMENT_COUNT_")
+	private int documentCount;  //活动文档数
+		
 	@Transient
 	private String documentPath ;
 	
@@ -120,6 +123,14 @@ public class ActivityApply implements Domain{
 
 	public void setDocumentPath(String documentPath) {
 		this.documentPath = documentPath;
+	}
+	
+	public int getDocumentCount() {
+		return documentCount;
+	}
+
+	public void setDocumentCount(int documentCount) {
+		this.documentCount = documentCount;
 	}
 
 	public String getActivityAdr() {
@@ -274,26 +285,53 @@ public class ActivityApply implements Domain{
 	public void setDeadline(String deadline) {
 		this.deadline = deadline;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((applyMaxuser == null) ? 0 : applyMaxuser.hashCode());
-		result = prime * result + ((endTime == null) ? 0 : endTime.hashCode());
-		result = prime * result + ((commentTime == null) ? 0 : commentTime.hashCode());
-		result = prime * result + ((applyTitle == null) ? 0 : applyTitle.hashCode());
-		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
-		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
-		result = prime * result + ((applyStatus == null) ? 0 : applyStatus.hashCode());
-		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
-		result = prime * result + ((applyOrderNumber == null) ? 0 : applyOrderNumber.hashCode());
-		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
-		result = prime * result + ((commentContent == null) ? 0 : commentContent.hashCode());
-		result = prime * result + ((startTime == null) ? 0 : startTime.hashCode());
+		result = prime * result
+				+ ((activityAdr == null) ? 0 : activityAdr.hashCode());
+		result = prime * result
+				+ ((activityImage == null) ? 0 : activityImage.hashCode());
+		result = prime * result
+				+ ((applayType == null) ? 0 : applayType.hashCode());
 		result = prime * result + ((applyId == null) ? 0 : applyId.hashCode());
-		result = prime * result + ((applyNumber == null) ? 0 : applyNumber.hashCode());
-		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result
+				+ ((applyMaxuser == null) ? 0 : applyMaxuser.hashCode());
+		result = prime * result
+				+ ((applyNumber == null) ? 0 : applyNumber.hashCode());
+		result = prime
+				* result
+				+ ((applyOrderNumber == null) ? 0 : applyOrderNumber.hashCode());
+		result = prime * result
+				+ ((applyStatus == null) ? 0 : applyStatus.hashCode());
+		result = prime * result
+				+ ((applyTitle == null) ? 0 : applyTitle.hashCode());
+		result = prime * result
+				+ ((commentContent == null) ? 0 : commentContent.hashCode());
+		result = prime * result
+				+ ((commentTime == null) ? 0 : commentTime.hashCode());
+		result = prime * result
+				+ ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result
+				+ ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result
+				+ ((deadline == null) ? 0 : deadline.hashCode());
+		result = prime * result + documentCount;
+		result = prime * result
+				+ ((documentPath == null) ? 0 : documentPath.hashCode());
+		result = prime * result + ((endTime == null) ? 0 : endTime.hashCode());
+		result = prime * result
+				+ ((isRecoomend == null) ? 0 : isRecoomend.hashCode());
+		result = prime * result
+				+ ((memberId == null) ? 0 : memberId.hashCode());
+		result = prime * result
+				+ ((startTime == null) ? 0 : startTime.hashCode());
+		result = prime * result
+				+ ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result
+				+ ((updateUser == null) ? 0 : updateUser.hashCode());
 		return result;
 	}
 	
@@ -305,81 +343,113 @@ public class ActivityApply implements Domain{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final ActivityApply other = (ActivityApply) obj;
-		if (applyMaxuser == null) {
-			if (other.applyMaxuser != null)
+		ActivityApply other = (ActivityApply) obj;
+		if (activityAdr == null) {
+			if (other.activityAdr != null)
 				return false;
-		} else if (!applyMaxuser.equals(other.applyMaxuser))
+		} else if (!activityAdr.equals(other.activityAdr))
 			return false;
-		if (endTime == null) {
-			if (other.endTime != null)
+		if (activityImage == null) {
+			if (other.activityImage != null)
 				return false;
-		} else if (!endTime.equals(other.endTime))
+		} else if (!activityImage.equals(other.activityImage))
 			return false;
-		if (commentTime == null) {
-			if (other.commentTime != null)
+		if (applayType == null) {
+			if (other.applayType != null)
 				return false;
-		} else if (!commentTime.equals(other.commentTime))
-			return false;
-		if (applyTitle == null) {
-			if (other.applyTitle != null)
-				return false;
-		} else if (!applyTitle.equals(other.applyTitle))
-			return false;
-		if (updateUser == null) {
-			if (other.updateUser != null)
-				return false;
-		} else if (!updateUser.equals(other.updateUser))
-			return false;
-		if (createTime == null) {
-			if (other.createTime != null)
-				return false;
-		} else if (!createTime.equals(other.createTime))
-			return false;
-		if (applyStatus == null) {
-			if (other.applyStatus != null)
-				return false;
-		} else if (!applyStatus.equals(other.applyStatus))
-			return false;
-		if (memberId == null) {
-			if (other.memberId != null)
-				return false;
-		} else if (!memberId.equals(other.memberId))
-			return false;
-		if (applyOrderNumber == null) {
-			if (other.applyOrderNumber != null)
-				return false;
-		} else if (!applyOrderNumber.equals(other.applyOrderNumber))
-			return false;
-		if (updateTime == null) {
-			if (other.updateTime != null)
-				return false;
-		} else if (!updateTime.equals(other.updateTime))
-			return false;
-		if (commentContent == null) {
-			if (other.commentContent != null)
-				return false;
-		} else if (!commentContent.equals(other.commentContent))
-			return false;
-		if (startTime == null) {
-			if (other.startTime != null)
-				return false;
-		} else if (!startTime.equals(other.startTime))
+		} else if (!applayType.equals(other.applayType))
 			return false;
 		if (applyId == null) {
 			if (other.applyId != null)
 				return false;
 		} else if (!applyId.equals(other.applyId))
 			return false;
+		if (applyMaxuser == null) {
+			if (other.applyMaxuser != null)
+				return false;
+		} else if (!applyMaxuser.equals(other.applyMaxuser))
+			return false;
 		if (applyNumber == null) {
 			if (other.applyNumber != null)
 				return false;
 		} else if (!applyNumber.equals(other.applyNumber))
 			return false;
+		if (applyOrderNumber == null) {
+			if (other.applyOrderNumber != null)
+				return false;
+		} else if (!applyOrderNumber.equals(other.applyOrderNumber))
+			return false;
+		if (applyStatus == null) {
+			if (other.applyStatus != null)
+				return false;
+		} else if (!applyStatus.equals(other.applyStatus))
+			return false;
+		if (applyTitle == null) {
+			if (other.applyTitle != null)
+				return false;
+		} else if (!applyTitle.equals(other.applyTitle))
+			return false;
+		if (commentContent == null) {
+			if (other.commentContent != null)
+				return false;
+		} else if (!commentContent.equals(other.commentContent))
+			return false;
+		if (commentTime == null) {
+			if (other.commentTime != null)
+				return false;
+		} else if (!commentTime.equals(other.commentTime))
+			return false;
+		if (createTime == null) {
+			if (other.createTime != null)
+				return false;
+		} else if (!createTime.equals(other.createTime))
+			return false;
 		if (createUser == null) {
 			if (other.createUser != null)
 				return false;
 		} else if (!createUser.equals(other.createUser))
+			return false;
+		if (deadline == null) {
+			if (other.deadline != null)
+				return false;
+		} else if (!deadline.equals(other.deadline))
+			return false;
+		if (documentCount != other.documentCount)
+			return false;
+		if (documentPath == null) {
+			if (other.documentPath != null)
+				return false;
+		} else if (!documentPath.equals(other.documentPath))
+			return false;
+		if (endTime == null) {
+			if (other.endTime != null)
+				return false;
+		} else if (!endTime.equals(other.endTime))
+			return false;
+		if (isRecoomend == null) {
+			if (other.isRecoomend != null)
+				return false;
+		} else if (!isRecoomend.equals(other.isRecoomend))
+			return false;
+		if (memberId == null) {
+			if (other.memberId != null)
+				return false;
+		} else if (!memberId.equals(other.memberId))
+			return false;
+		if (startTime == null) {
+			if (other.startTime != null)
+				return false;
+		} else if (!startTime.equals(other.startTime))
+			return false;
+		if (updateTime == null) {
+			if (other.updateTime != null)
+				return false;
+		} else if (!updateTime.equals(other.updateTime))
+			return false;
+		if (updateUser == null) {
+			if (other.updateUser != null)
+				return false;
+		} else if (!updateUser.equals(other.updateUser))
 			return false;
 		return true;
 	}
