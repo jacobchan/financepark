@@ -452,10 +452,10 @@
 				price: price
 				});
 		   $.fn.dateplug.ajax = function(e){
-			   var  obj = e.srcElement||e.target;
-			  alert(obj.className);
+			  //为每个日期的点击事件添加事件函数 当前日期可以通过class=current属性获取
 		   }
 		   $.fn.dateplug.monthajax = function(){
+			   //获取相应月份的价格数据并返回  当前年月可获取
 			   return [14,25,36,7,8];
 		   }
 			
