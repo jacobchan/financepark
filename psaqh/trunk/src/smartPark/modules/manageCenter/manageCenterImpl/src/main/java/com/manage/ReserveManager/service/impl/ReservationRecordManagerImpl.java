@@ -415,7 +415,7 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 		return pagerRecords;
 	} 
     /**
-   	 * 获取已完成订单的totalCount    
+   	 * 获取订单的totalCount    
    	 * @param conditions
    	 * @return
    	 * @throws BusException
