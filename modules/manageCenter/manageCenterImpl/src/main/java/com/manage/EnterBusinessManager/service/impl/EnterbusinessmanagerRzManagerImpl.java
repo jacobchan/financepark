@@ -346,4 +346,24 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 			EnterbusinessmanagerRz e=enterbusinessmanagerRzDao.get(companyId);
 			return e;
 	 }
+	 
+	 /**
+	  * 通过企业id得到企业单元信息
+	  * @param rzId 企业入驻ID
+	  * @return
+	  * @throws BusException
+	  */
+	@EsbServiceMapping
+	public BbmRoom getRoomByRzId(@ServiceParam(name="rzId") String rzId) throws BusException {
+		if(StringUtils.isNotEmpty(rzId)){
+			EnterbusinessmanagerRz e = enterbusinessmanagerRzDao.get(rzId) ;
+			BbmRoom room = e.getRoomId() ;
+			if(room != null){
+				String roomId = room.getRoomId() ;
+				room = bbmRoomManager.getBbmRoom(roomId) ;
+				return room ;
+			}
+		}
+		return null;
+	}
 }
