@@ -122,6 +122,7 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 			mi.setCompanyId(o.getCompanyId());
 			mi.setUpdateUser(o.getUpdateUser());
 			mi.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+			mi.setMemberPassword(o.getMemberPassword());
 			return memberInformationDao.save(mi);
 		} else {// 新增
 			o.setCreateUser(o.getUpdateUser());
