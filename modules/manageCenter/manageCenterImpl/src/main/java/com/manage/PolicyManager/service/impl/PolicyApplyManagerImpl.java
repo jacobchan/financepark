@@ -303,8 +303,8 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
 	public PolicyApply cancelApply(@ServiceParam(name="policyApplyId") String policyApplyId) throws BusException {
 		 PolicyApply p = policyApplyDao.get(policyApplyId); 
 		 String status = p.getPolicyApplyStatus() ;//得到政策申请状态
-		 if("1".equals(status)){//若当前状态为申请中
-		    	p.setPolicyApplyStatus("4");//4为已取消，相当于前端取消申请
+		 if("01".equals(status)){//若当前状态为申请中
+		    	p.setPolicyApplyStatus("04");//04为已取消，相当于前端取消申请
 		    	p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		    	return policyApplyDao.save(p);
 		 }else{
