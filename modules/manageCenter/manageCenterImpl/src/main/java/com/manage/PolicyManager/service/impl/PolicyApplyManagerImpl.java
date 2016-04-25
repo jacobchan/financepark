@@ -131,7 +131,7 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
         			o.setApplyCode(BizCodeUtil.getInstance().getBizCodeDate("ZCSQ"));
         			o.setNmIssueflow(nmIssueflow);
         			o.setMember(member);
-        			o.setPolicyApplyStatus("01");//1为申请中
+        			o.setPolicyApplyStatus("01");//01为申请中
         			o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
         			policyApply = policyApplyDao.save(o) ;
         			try {
@@ -188,7 +188,7 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
     	String currentStatus = policyApply.getNmIssueflow().getIssueFlowCStatus() ;//得到当前流程状态
     	boolean flag = nmIssueflowManager.isFinally(nmIssuetypeId, currentStatus) ;//判断当前流程是否为最后一个
     	if(flag){
-    		policyApply.setPolicyApplyStatus("2");//2为申请成功
+    		policyApply.setPolicyApplyStatus("02");//02为申请成功
     		policyApplyDao.save(policyApply) ;
     	}
     	return flag ;
@@ -280,13 +280,13 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
     public PolicyApply updatePolicyApplyStatus(@ServiceParam(name="id") String policyApplyId) throws BusException{   	
 	    PolicyApply p = policyApplyDao.get(policyApplyId); 
 	    String status = p.getPolicyApplyStatus() ;
-	    if("1".equals(status)){
-	    	p.setPolicyApplyStatus("3");//3为申请失败
+	    if("01".equals(status)){
+	    	p.setPolicyApplyStatus("03");//3为申请失败
 	    	p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 	    	return policyApplyDao.save(p);
-	    }else if("2".equals(status)){
+	    }else if("02".equals(status)){
 	    	throw new BusException("当前状态无法拒绝申请！") ;
-	    }else if("3".equals(status)){
+	    }else if("03".equals(status)){
 	    	throw new BusException("当前状态已经为拒绝申请！") ;
 	    }else{
 	    	throw new BusException("已取消的申请无法拒绝！") ;
