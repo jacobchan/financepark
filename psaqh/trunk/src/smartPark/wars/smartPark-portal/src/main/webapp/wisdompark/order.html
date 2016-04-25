@@ -257,7 +257,7 @@
             if(date>tt){return 1;}
             else{return 0;}
         }
-        $(".order-nav li").bind("click",function(){
+        $(document).on("click",".order-nav li",function(){
             $(this).addClass("active").siblings().removeClass("active");
         });
     });
