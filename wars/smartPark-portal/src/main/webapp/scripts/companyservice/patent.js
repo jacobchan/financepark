@@ -347,6 +347,12 @@ $(function(){
 		}
 		
 		var evaluateContent = $('#evaluateContent').val();
+		if(evaluateContent == null||evaluateContent == ""){
+			$('#toast_text').html('评论内容不能为空！');
+			$(".toast").show();
+            setTimeout('$(".toast").hide();',2000);//1秒=1000
+            return false;
+		}
 		var params = $.youi.parameterUtils.propertyParameter("overallSatisfaction",overallSatisfaction)+"&";
 		params = params+$.youi.parameterUtils.propertyParameter("reactionRate",reactionRate)+"&";
 		params = params+$.youi.parameterUtils.propertyParameter("serviceAttitude",serviceAttitude)+"&";
@@ -379,6 +385,12 @@ $(function(){
 		 	return;
 		}
 		var content = $('#consultContent').val();
+		if(content == null||content == ""){
+			$('#toast_text').html('咨询内容不能为空！');
+			$(".toast").show();
+            setTimeout('$(".toast").hide();',2000);//1秒=1000
+            return false;
+		}
 		var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/savePurGenreConsult.json";
 		$.youi.ajaxUtils.ajax({
 			url:serviceURL,
