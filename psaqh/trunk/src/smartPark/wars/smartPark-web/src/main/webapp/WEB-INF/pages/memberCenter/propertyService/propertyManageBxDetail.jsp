@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/pages/include.jsp" %>
 
-<youi:html title="物业报修">
+<youi:html title="物业报修详情">
 	<youi:body decorator="memcenter"> 
 	
 	<div class="w1000">
