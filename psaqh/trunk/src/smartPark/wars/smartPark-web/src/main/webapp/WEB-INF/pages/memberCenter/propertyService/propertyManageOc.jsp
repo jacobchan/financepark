@@ -72,15 +72,18 @@
 				var totalCount=results.records[0].totalCount;
 				pageCount = Math.ceil(totalCount / pageSize);//页数						
 							 refreshData(1,pageSize);
-								$(".tcdPageCode").createPage({
-								    pageCount:pageCount,
-								    current:1,
-								    backFn:function(p){
-								    	currentIndex = p;
+							 $(".tcdPageCode").empty();
+								 if(totalCount>0){
+								    $(".tcdPageCode").createPage({
+								       pageCount:pageCount,
+								       current:1,
+								       backFn:function(p){
+								       currentIndex = p;
 								       this.pageCount=pageCount;
-								        refreshData(p,pageSize);
+								       refreshData(p,pageSize);
 								    }
-								});			
+								  });
+								}
 			}
 		}); 			
 	});	
