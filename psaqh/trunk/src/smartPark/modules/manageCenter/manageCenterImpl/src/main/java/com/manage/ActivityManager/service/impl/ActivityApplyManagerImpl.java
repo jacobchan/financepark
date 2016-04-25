@@ -122,6 +122,12 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     		o.setApplyNumber(BizCodeUtil.getInstance().getBizCodeDate("GRHD"));
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
         	o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+        	if(StringUtils.isNotEmpty(o.getDocumentPath())){
+        		String[] paths = o.getDocumentPath().split(",");
+        		o.setDocumentCount(paths.length);
+        	}else{
+        		o.setDocumentCount(0);
+        	}
     	}
     	ActivityApply apply = activityApplyDao.save(o);
 		ActivityDocument document = new ActivityDocument() ;
