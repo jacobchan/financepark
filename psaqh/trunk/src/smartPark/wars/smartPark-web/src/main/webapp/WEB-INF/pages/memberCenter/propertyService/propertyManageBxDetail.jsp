@@ -134,6 +134,7 @@
 					if(result&&result.record){
 						var record = result.record;
 						var bxAddress="";
+						var bxAmount="";
 						$('#bxCode').html(record.bxCode);
 						$('#applyTime').html(record.applyTime);
 						$('#bxComp').html("企业名称："+record.bxComp);
@@ -141,9 +142,9 @@
 						$('#bxRemark').html("报修内容："+record.bxRemark);
 						//$('#bxType').html("报修类型："+record.bxType);
 						if(record.bxAmount==null){
-							record.bxAmount=0;
+							bxAmount=0;
 						}
-						$('#bxAmount').html(record.bxAmount+"元");
+						$('#bxAmount').html(bxAmount+"元");
 						if(!record.bxAddress==null){
 							bxAddress=record.bxAddress;
 						}
