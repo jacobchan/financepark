@@ -354,6 +354,16 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
    		recordList.add(record);
    		return recordList;
    	}   			
-    
-    
+/*		*//**
+		 * 根据主键查询 前台个人中心，保修详情   chenye
+		 *//*
+	@EsbServiceMapping  
+   public PropertyservicemanagerFkcode getFk(@ServiceParam(name="bxId") String id)  throws BusException{
+		PropertyservicemanagerFkcode bx=propertyservicemanagerFkcodeDao.get(id);
+		String memberId=bx.getMemberId();
+		MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId); 
+		bx.setMember(memberInformation);
+		return bx;
+	}   
+    */
 }
