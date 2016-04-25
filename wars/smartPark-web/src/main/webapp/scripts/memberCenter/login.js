@@ -78,6 +78,8 @@ $(function(){
 				}else{
 					enableSmsButton(60,'发送成功','重新获取');
 					$(".message-yz").hide();
+					$('#imageCode').val('');
+					changeRandcode();
 				}
 				$('#sendMobileCaptcha').attr('onclick','volid(0);');
 			}
