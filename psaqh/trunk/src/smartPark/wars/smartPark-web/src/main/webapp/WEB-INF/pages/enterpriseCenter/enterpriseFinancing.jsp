@@ -35,15 +35,15 @@
 		                    <div class="web_input"><input id="financingName" name="financingName" type="text"></div>
 		                </div>
 		                <div class="rongzi_je">
-		                    <div class="qiye_rzje">融资金额</div>
+		                    <div class="qiye_rzje">融资金额(万元)</div>
 		                    <div class="web_input"><input id="financingAmount" name="financingAmount" type="text"></div>
 		                </div>
 		                <div class="rongzi_gz">
-		                    <div class="qiye_rzgz">融资估值</div>
+		                    <div class="qiye_rzgz">融资估值(万元)</div>
 		                    <div class="web_input"><input id="financingCost" name="financingCost" type="text"></div>
 		                </div>
 		                <div class="kechi_gf">
-		                    <div class="qiye_kcgf">可持股份</div>
+		                    <div class="qiye_kcgf">可持股份(%)</div>
 		                    <div class="web_input"><input id="financingPre" name="financingPre" type="text"></div>
 		                </div>
 		                <div class="rongzi_time">
