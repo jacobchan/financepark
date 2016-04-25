@@ -45,6 +45,7 @@ import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.utils.BizCodeUtil;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.ReserveManager.dao.ReservationRecordDao;
 import com.manage.ReserveManager.entity.ReservationRecord;
 import com.manage.ReserveManager.service.ReservationRecordManager;
@@ -413,4 +414,20 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 		}
 		return pagerRecords;
 	} 
+    /**
+   	 * 获取已完成订单的totalCount    
+   	 * @param conditions
+   	 * @return
+   	 * @throws BusException
+   	 */		    
+    @EsbServiceMapping(pubConditions={@PubCondition(property="recordMemberId",operator=Condition.EQUALS,pubProperty="userId")})
+	public List<Record> getTotalCount(
+		   			@ConditionCollection(domainClazz=ReservationRecord.class) Collection<Condition> conditions)  throws BusException{
+	    List<Record> recordList=new ArrayList<Record>();  		
+		List<ReservationRecord> List = this.getReservationRecords(conditions, null);
+		Record record = new Record();
+		record.put("totalCount", List.size());
+		recordList.add(record);
+		return recordList;
+	}  
 }
