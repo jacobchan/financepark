@@ -22,7 +22,8 @@
 			$(".czh-search.link a").click(function(){
 				$(".czh-search.link a").removeClass("active");
 				$(this).addClass("active");
-				parseActivityList($(this).attr("id"));
+				parseActivityList($(this).attr("id"),'0');
+				uptime();
 			});
 		};
 		
@@ -36,8 +37,8 @@
 	<div class="w100">
 		<div class="w1200 clearfix pt30 pb50">
 			<div class="h-nav clearfix">
-					<a href="">首页</a><img src="../styles/images/zs/right-j-b.png" border="0" />
-					<a href="">创智汇</a><img src="../styles/images/zs/right-j-b.png" border="0" />
+					<a href="../index.html">首页</a><img src="../styles/images/zs/right-j-b.png" border="0" />
+					<a href="czh1.html">创智汇</a><img src="../styles/images/zs/right-j-b.png" border="0" />
 					<a href="" class="current">知识库</a>
 				</div>
 			<div class="fl w895">				
@@ -51,11 +52,11 @@
 					<a href="javascript:;" class="a-list">企业活动</a>
 				</div>
 				<div class="czh-search clearfix">
-					<ul class="fl">
+					<!-- <ul class="fl">
 						<li class="active">综合排序</li>
-						<li>最新 <i class="fa fa-angle-down"></i></li>
+						<li onclick="change()">最新 <i class="fa fa-angle-down" id="licktime"  data="0"></i></li>
 						<li>最热 <i class="fa fa-angle-down"></i></li>
-					</ul>
+					</ul> -->
 					<!-- <div class="fr clearfix">
 						<div class="inp-box"><input type="text" placeholder="搜索"><a class="fa fa-search" href=""></a></div>
 						<span class="fl mr20">1/20页</span>
@@ -64,7 +65,7 @@
 					</div> -->
 				</div>
 				<div class="clearfix czh-knowledge">
-					<a href="czh7.html"><div class="czh-box">
+					<!-- <a href="czh7.html"><div class="czh-box">
 						<img src="../styles/images/czh/list-5.jpg">
 						<div class="czh-group" style="border-bottom:1px solid #ecebeb">
 							<h4>UI设计-VIP课堂【云中帆教育】</h4>
@@ -74,7 +75,7 @@
 						<div class="czh-group">
 							<font class="cg-soan-btn">PPT</font>
 						</div>
-					</div></a>
+					</div></a> -->
 					
 					
 				</div>
@@ -122,7 +123,8 @@
 					$(".czh-search.link a").removeClass("active");
 					$("#"+typeId+"").addClass("active");
 				}	
-			  parseActivityList(typeId);
+			  parseActivityList(typeId,'0');
+			  uptime();
 			}
 		
 			//拼接类型数据
@@ -141,8 +143,8 @@
 				clickActive();
 			}
 			
-			//拼接活动数据列表
-			function parseActivityList(typeId){
+			//拼接活动数据列表 desc:0表示默认为降序,1表示升序
+			function parseActivityList(typeId,deac){
 				var pageSize=8;
 				var pageCount=1;	
 				var typecode = typeId;
@@ -154,24 +156,29 @@
 					dataType:'jsonp',
 					success:function(results){
 						pageCount=Math.ceil(results.totalCount/pageSize);
-						 refreshData(1,pageSize);
+						 refreshData(1,pageSize,deac);
 							$(".tcdPageCode").createPage({
 							    pageCount:pageCount,
 							    current:1,
 							    backFn:function(p){
 							       this.pageCount=pageCount;
-							        refreshData(p,pageSize);
+							        refreshData(p,pageSize,deac);
 							    }
 							});
 					}
 				});	
 				
-				function refreshData(pageIndex,pageSize){
-					var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'activityApply.applayType.typeId='+typecode];
+				function refreshData(pageIndex,pageSize,deac){
+					var params = "";
+					if(deac=='0'){
+						 params = {'pager:pageIndex':pageIndex,'pager:pageSize':pageSize,'activityApply.applayType.typeId':typecode,orderBy:'desc:createTime'};
+					}else{
+						 params = {'pager:pageIndex':pageIndex,'pager:pageSize':pageSize,'activityApply.applayType.typeId':typecode,orderBy:'asc:createTime'};
+					}
 					$.youi.ajaxUtils.ajax({
 						url:activeURL,
 						jsonp:'data:jsonp',
-						data:params.join('&'),
+						data:params,
 						dataType:'jsonp',
 						success:function(results){
 							if(results&&results.records){
@@ -191,25 +198,34 @@
 			}
 			
 		function _parseRecords(record){
-			$('.czh-knowledge').empty();
-			var type = $('.a-list.active').text();
-			var html='';
-			for(var i=0;i<record.length;i++){
-				   var count =  getRandom(1000); 
-				   var path = getPathtype(record[i].documentPath);
-					html+="<a href='czh7.html?applyId="+record[i].activityApply.applyId+"'><div class='czh-box'>"+
-					"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityApply.activityImage+"&method=show' style='width: 220px;height: 123px;'>"+
-					"<div class='czh-group' style='border-bottom:1px solid #ecebeb'>"+
-					"<h4>"+record[i].documentName.split('.')[0]+"</h4>"+
-					"<span>月观看人数："+count+"</span>"+
-						"<span class='fr'>"+type+"</span>"+
-					"</div>"+
-					"<div class='czh-group'>"+
-						"<font class='cg-soan-btn'>"+path+"</font>"+
-					"</div></div></a>";
-				}
-			$('.czh-knowledge').append(html);
+				//根据不同类型获取数据
+				$('.czh-knowledge').empty();
+				var type = $('.a-list.active').text();
+				var html='';
+				for(var i=0;i<record.length;i++){
+					   var count =  getRandom(1000); 
+					   var path = getPathtype(record[i].documentPath);
+						html+="<a href='czh7.html?applyId="+record[i].activityApply.applyId+"&documendid="+record[i].documentId+"'><div class='czh-box'>"+
+						"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityApply.activityImage+"&method=show' style='width: 220px;height: 123px;'>"+
+						"<div class='czh-group' style='border-bottom:1px solid #ecebeb'>"+
+						"<h4>"+record[i].documentName.split('.')[0]+"</h4>"+
+						"<span>月观看人数："+count+"</span>"+
+							"<span class='fr'>"+type+"</span>"+
+						"</div>"+
+						"<div class='czh-group'>"+
+							"<font class='cg-soan-btn'>"+path+"</font>"+
+						"</div></div></a>";
+					}
+				$('.czh-knowledge').append(html); 
 			}
+		
+		//初始化时间排序
+		function uptime(){
+			$('.czh-search.clearfix').empty();
+			var html ="<ul class='fl'><li class='active'>综合排序</li>"+
+				"<li onclick='change()'>最新 <i class='fa fa-angle-down' id='licktime' data='0'></i></li></ul>";
+			$('.czh-search.clearfix').append(html);
+		}
 		//生成随机数
 		function getRandom(n){
 	        return Math.floor(Math.random()*n+1);
@@ -221,15 +237,30 @@
 	    	var index2=path.length;
 	    	var postf=path.substring(index1+1,index2);//后缀名  
 	    	if(postf=='doc'||postf=='docx'){
-	    		type="DOC";
+	    		type="WORD";
 	    	}else if(postf=='xls'||postf=='xlsx'){
-	    		type="XLS";
+	    		type="EXCEL";
 	    	}else if(postf=='ppt'||postf=='pptx'){
 	    		type="PPT";
 	    	}
 	    	return type;
 	    } 
-	     
+	    
+		//按最新数据排序
+		function change(){
+			var id = $('.a-list.active').attr("id");
+			if($("#licktime").attr("data")==0){
+				$("#licktime").removeClass("fa-angle-down");
+				$("#licktime").addClass("fa-angle-up");
+				$("#licktime").attr("data","1");
+				parseActivityList(id,'1');
+			}else{
+				$("#licktime").removeClass("fa-angle-up");
+				$("#licktime").addClass("fa-angle-down");
+				$("#licktime").attr("data","0");
+				parseActivityList(id,'0');
+			}
+		}
 </script>
 	
 </body>
