@@ -32,8 +32,8 @@
 										
 										<td>
 											<p id="bxComp">企业名称:</p>
-											<p id="bxAddress">报修地址：T4创业园A201(李 四  15999889999)</p>
-											<p id="memberName">报修地址：T4创业园A201(李 四  15999889999)</p>
+											<p id="bxAddress"></p>
+											<p id="memberName"></p>
 											
 										</td>
 									</tr>
@@ -44,9 +44,9 @@
 						</div>
 						<div class="fr f12">
 							<span class="mr30"> 订单总计费用：<font class="f24 c-o" id="bxAmount">0元</font></span>
-							<a href="javascript:;" class="ib-btn mr15" style="width:120px;">立即支付</a>
-							
+							<a href="javascript:;" class="ib-btn mr15" style="width:120px;">立即支付</a>							
 						</div>
+						<div class="fr f12 a">			</div>
 					</div>
 	
 	</div>
@@ -73,60 +73,44 @@
 		</div>
 	</div>
 </youi:body>
-	<script type="text/javascript">
-	
-		 function cancel(obj){
-				var me=obj.parentNode.parentNode;
-				var bxCode=me.childNodes[0].childNodes[0].innerText; 
-				$(".bxCode").html(bxCode);
-				$(".bxCode")[0].setAttribute("id",me.id);
-				$(".bg-tanc").show();
-			};
-		
-	</script>
-	<!-- 取消报修订单 -->
 	<script type="text/javascript">	
-		 function cancel(obj){
-				var me=obj.parentNode.parentNode;//找到父节点	
-				//alert(me.id);
-				var bxCode=me.childNodes[0].childNodes[0].innerText; //获取订单号
-				$(".moverec").html(bxCode);//给弹窗插入订单号
-				$(".moverec")[0].setAttribute("id",me.id);//给弹窗设置id
-				$(".bg-tanc.m1").show();
-			};
-			//点击确认取消搬家预约
-			$(function(){
-				$(".hhf-submit.confirm").click(function(){	
-					    $(".bg-tanc.m1").hide();
-						var id=$(".moverec")[0].getAttribute("id");				
-					 	$.ajax({
-					 		url:baseUrl+'propertyservicemanagerBxManager/updateBxforpage.json',
-							data:'bxId='+id,
-							success:function(result){
-								if(result&&result.record){
-									if(result.record.bxStatus=='08'){								
-										close("取消成功")																
-									}else if(result.record.bxStatus=='01'){								
-										close("重新报修成功");								
-									}													
-								}
-							}
-						});
-					});
-				});	
-	
+	//取消确认弹窗
+	function cancel(obj){	
+		$(".bg-tanc").show();
+	};	
+	//取消报修订
+	$(function(){
+		 $(".hhf-submit.confirm").click(function(){	
+		 $(".bg-tanc.m1").hide();
+		 var arg=getQueryStringArgs();
+		 var bxId =arg.bxId;				
+		 $.ajax({
+			 url:baseUrl+'propertyservicemanagerBxManager/updateBxforpage.json',
+			 data:'bxId='+bxId,
+			 success:function(result){
+						if(result&&result.record){
+							if(result.record.bxStatus=='08'){								
+								close("取消成功")																
+							}											
+						}
+					}
+				});
+		});
+	});	
+		</script>
+		<script type="text/javascript">	
 	//弹窗
-	  function close(content){		        
+	function close(content){		        
 	        $(".tc.mt25.f18").empty() ;
 	        $(".tc.mt25.f18").append(content) ;
 	        $(".toast").show();		      		        		       				
 			setTimeout(function(){$(".toast").hide(); },2000);
-			refreshData(currentIndex,pageSize);
-      }
-	  $(function(){					
+    }
+	//初始化加载页面
+    $(function(){					
 			var arg=getQueryStringArgs();
 		    var bxId =arg.bxId;
-		    //alert(bxId)
+		    //alert(111);
 			$.ajax({
 				url:baseUrl+'propertyservicemanagerBxManager/getBx.json',
 				data:'bxId='+bxId,
@@ -136,9 +120,9 @@
 						var bxAddress="";
 						var bxAmount="";
 						$('#bxCode').html(record.bxCode);
+						$(".moverec").html(record.bxCode);//给弹窗插入订单号
 						$('#applyTime').html(record.applyTime);
-						$('#bxComp').html("企业名称："+record.bxComp);
-						//$('#bxProject').html("报修项目："+record.bxProject);				
+						$('#bxComp').html("企业名称："+record.bxComp);				
 						$('#bxRemark').html("报修内容："+record.bxRemark);
 						//$('#bxType').html("报修类型："+record.bxType);
 						if(record.bxAmount==null){
@@ -148,13 +132,14 @@
 						if(!record.bxAddress==null){
 							bxAddress=record.bxAddress;
 						}
-						//$('#bxAddress').html("维修地址："+bxAddress+"（"+record.member.memberName+record.member.memberPhoneNumber+"）");
 						$('#bxAddress').html("维修地址："+bxAddress);
 						$('#memberName').html("联系人："+record.member.memberName+" &nbsp&nbsp"+record.member.memberPhoneNumber);
+						$(".fr.f12.a")
 						}
-					}
-			}); 
+					}		
 		}); 
+    }); 
+	
 		
 	</script>
 	<script type="text/javascript">
