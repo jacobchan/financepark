@@ -125,7 +125,7 @@
 					recordStatus="已到访";
 				}else if(recordStatus=="04"){
 					recordStatus="已取消";
-					buttonHtml="";
+					 buttonHtml="<td></td>";
 				}else if(recordStatus=="05"){
 					recordStatus="未到访";
 				}else if(recordStatus=="06"){
