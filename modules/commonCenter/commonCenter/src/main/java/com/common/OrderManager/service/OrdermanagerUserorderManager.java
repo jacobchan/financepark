@@ -308,5 +308,12 @@ public interface OrdermanagerUserorderManager extends BaseManager{
   	public PagerRecords getOrdermanagerUserorderListApp(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders)  throws BusException;
+  	/**
+  	 * 获取支付二维码
+  	 * @param userorderCode
+  	 * @return
+  	 * @throws Exception
+  	 */
+  	public String getPayQrcodeByCode(String userorderCode) throws Exception;
   
 }
