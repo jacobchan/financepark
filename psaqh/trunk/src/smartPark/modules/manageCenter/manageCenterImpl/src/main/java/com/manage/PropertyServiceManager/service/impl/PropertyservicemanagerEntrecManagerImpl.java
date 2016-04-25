@@ -6,6 +6,7 @@ package com.manage.PropertyServiceManager.service.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
+import com.common.MessageCenter.entity.McMsgdatas;
+import com.common.MessageCenter.service.McMsgdatasManager;
+import com.common.MessageCenter.service.McMsgtempalateManager;
+import com.gsoft.entity.MessageTempCode;
+import com.gsoft.entity.ReferenceMap;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -59,6 +65,12 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
 	
 	@Autowired
 	private EnterbusinessmanagerRzManager enterbusinessmanagerRzManager;
+	
+	@Autowired
+	private McMsgtempalateManager mcMsgtempalateManager;
+	
+	@Autowired
+	private McMsgdatasManager mcMsgdatasManager;
     /**
      * 查询列表
      */
@@ -190,11 +202,18 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
     			//新增 入驻服务办理预约记录基础数据
     			o=propertyservicemanagerEntrecDao.save(o);
     			//发送短信给联系人
-//        		try {
-//        			HttpSenderMsg.sendMsg(o.getEnteringTelephone(), "尊敬的"+o.getMemberId().getMemberName()+"你好，你的预约已经成功提交，预约单号为【"+o.getEnterrecCode()+"】,预约结果请留意短信通知,或进入个人中心查看处理结果,感谢你对富春硅谷的支持!");
-//        		} catch (Exception e) {
-//        			e.printStackTrace();
-//        		}
+        		try {
+        			//构建替换模板参数对应的map
+        			Map<String, String> replaceMap = new ReferenceMap();
+        			replaceMap.put("#user",memberInformation.getMemberName());
+        			replaceMap.put("#appointmentNo", o.getEnterrecCode());
+        			//构建消息内容数据
+        			McMsgdatas msgData = mcMsgdatasManager.buildMsgData(MessageTempCode.MSG_USER_1, replaceMap);
+        			//发送消息,给会员
+        			mcMsgdatasManager.sendMessage(msgData, memberInformation.getMemberId(), 1);
+        		} catch (Exception e) {
+        			e.printStackTrace();
+        		}
     			
     			//新增 入驻服务办理预约记录基础数据
         		return o;
@@ -261,12 +280,20 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
 		if(entrec!=null && entrec.getEnterrecStatus().equals("02")){
 			//若该预约可预约状态变更为已授理，则更新企业入驻信息基本数据和企业会员信息
 			enterbusinessmanagerRzManager.saveEnterbusinessmanagerRzBasicData(entrec.getEntrecId());
+			MemberInformation mb=entrec.getMemberId();
 			//发送短信给联系人
-//    		try {
-//    			HttpSenderMsg.sendMsg(entrec.getEnteringTelephone(), "尊敬的"+entrec.getMemberId().getMemberName()+"你好，你的预约已经成功受理，受理编号为【"+entrec.getEnterrecCode()+"】,感谢你对富春硅谷的支持！");
-//    		} catch (Exception e) {
-//    			e.printStackTrace();
-//    		}
+    		try {
+    			//构建替换模板参数对应的map
+    			Map<String, String> replaceMap = new ReferenceMap();
+    			replaceMap.put("#user",mb != null?mb.getMemberName():null);
+    			replaceMap.put("#appointmentNo", entrec.getEnterrecCode());
+    			//构建消息内容数据
+    			McMsgdatas msgData = mcMsgdatasManager.buildMsgData(MessageTempCode.MSG_USER_1, replaceMap);
+    			//发送消息,给会员
+    			mcMsgdatasManager.sendMessage(msgData, mb != null?mb.getMemberPhoneNumber():null, 1);
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}
 			
 		}
 	}
