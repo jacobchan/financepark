@@ -346,12 +346,17 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
 			@ServiceParam(name="startTime") String startTime,
 			@ServiceParam(name="endTime") String endTime)  throws BusException{
    		List<Record> recordList=new ArrayList<Record>();
-   		conditions.add(ConditionUtils.getCondition("bxCode", Condition.LIKE, fkLikeCode));				
-		conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+   		if(StringUtils.isNotEmpty(fkLikeCode)){
+   		    conditions.add(ConditionUtils.getCondition("bxCode", Condition.LIKE, fkLikeCode));	
+   		}
+   		if(StringUtils.isNotEmpty(startTime)||StringUtils.isNotEmpty(endTime)){
+   			conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+   		}
     	List<PropertyservicemanagerFkcode> List = this.getPropertyservicemanagerFkcodes(conditions, null);
    		Record record = new Record();
    		record.put("totalCount", List.size());
    		recordList.add(record);
    		return recordList;
-   	}   			
+   	} 
+    
 }
