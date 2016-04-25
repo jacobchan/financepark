@@ -106,10 +106,10 @@
 		});
 	}		
 		//拼接列表
-		function _parseRecords(record){
-			$(".knowledge").empty();
-			if(record.length>0){
-			for(var i=0;i<record.length;i++){
+	function _parseRecords(record){
+		$(".knowledge").empty();
+		if(record.length>0){
+		for(var i=0;i<record.length;i++){
 				var bxStatus='';
 				var buttonHtml='';
 				if(record[i].bxStatus=='00'){
@@ -149,56 +149,47 @@
 					html1 += '	<td colspan="6">暂无记录</td>'
 					html1 += '</tr>'
 						$(".knowledge").html(html1);	
-				}	
-		};
-		 function cancel(obj){
-				var me=obj.parentNode.parentNode;
-				var bxCode=me.childNodes[0].childNodes[0].innerText; 
-				$(".bxCode").html(bxCode);
-				$(".bxCode")[0].setAttribute("id",me.id);
-				$(".bg-tanc").show();
-			};
-		 function redeal(obj){
-				var me=obj.parentNode.parentNode;
-				var bxCode=me.childNodes[0].childNodes[0].innerText; 
-				$(".bxCode").html(bxCode);
-				$(".ifSure").text("确定要重新报修");
-				$(".bxCode")[0].setAttribute("id",me.id);
-				$(".bg-tanc").show();
-			};
+			}	
+	};		
+	//确认取消弹窗
+    function cancel(obj){
+		var me=obj.parentNode.parentNode;
+		var bxCode=me.childNodes[0].childNodes[0].innerText; 
+		$(".bxCode").html(bxCode);
+		$(".bxCode")[0].setAttribute("id",me.id);
+		$(".bg-tanc").show();
+	};
 	</script>
-	<!-- 取消报修订单 -->
 	<script type="text/javascript">	
-		 function cancel(obj){
-				var me=obj.parentNode.parentNode;//找到父节点	
-				//alert(me.id);
-				var bxCode=me.childNodes[0].childNodes[0].innerText; //获取订单号
-				$(".moverec").html(bxCode);//给弹窗插入订单号
-				$(".moverec")[0].setAttribute("id",me.id);//给弹窗设置id
-				$(".bg-tanc.m1").show();
-			};
-			//点击确认取消搬家预约
-			$(function(){
-				$(".hhf-submit.confirm").click(function(){	
-					    $(".bg-tanc.m1").hide();
-						var id=$(".moverec")[0].getAttribute("id");				
-					 	$.ajax({
-					 		url:baseUrl+'propertyservicemanagerBxManager/updateBxforpage.json',
-							data:'bxId='+id,
-							success:function(result){
-								if(result&&result.record){
-									if(result.record.bxStatus=='08'){								
-										close("取消成功")																
-									}else if(result.record.bxStatus=='01'){								
-										close("重新报修成功");								
-									}													
-								}
-							}
-						});
-					});
-				});	
+	//<!-- 取消报修订单 -->
+	function cancel(obj){
+		var me=obj.parentNode.parentNode;//找到父节点	
+		//alert(me.id);
+		var bxCode=me.childNodes[0].childNodes[0].innerText; //获取订单号
+		$(".moverec").html(bxCode);//给弹窗插入订单号
+		$(".moverec")[0].setAttribute("id",me.id);//给弹窗设置id
+		$(".bg-tanc.m1").show();
+	};
+	//点击确认取消报修预约
+	$(function(){
+		$(".hhf-submit.confirm").click(function(){	
+		    $(".bg-tanc.m1").hide();
+			var id=$(".moverec")[0].getAttribute("id");				
+			$.ajax({
+				url:baseUrl+'propertyservicemanagerBxManager/updateBxforpage.json',
+				data:'bxId='+id,
+				success:function(result){
+					if(result&&result.record){
+						 if(result.record.bxStatus=='08'){								
+							  close("取消成功")																
+					     }											
+					}
+				}
+			});
+		});
+	});	
 	//根据订单号查询
-		$('.hhf-submit.f14.fr.query').click(function(){	
+	$('.hhf-submit.f14.fr.query').click(function(){	
 		var bxCode=$("#bxCode").val();
 		//alert(ocCode);
 		var startTime=$("#startTime").val(); 
@@ -210,8 +201,8 @@
 			success:function(results){	
 				var totalCount=results.records[0].totalCount;
 				pageCount = Math.ceil(totalCount / pageSize);//页数					
-				 refreshData_query(1,pageSize);
-					$(".tcdPageCode").createPage({
+				refreshData_query(1,pageSize);
+				$(".tcdPageCode").createPage({
 					    pageCount:pageCount,
 					    current:1,
 					    backFn:function(p){
@@ -219,26 +210,26 @@
 					       this.pageCount=pageCount;
 					       refreshData_query(p,pageSize);
 					    }
-					});			
+				});			
               }
         }); 			
     });	
 		//根据订单号查询 分页列表
-		function refreshData_query(pageIndex,pageSize){
-			var bxCode=$("#bxCode").val();	
-			 var startTime=$("#startTime").val(); 
-			 var endTime=$("#endTime").val(); 
-			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'bxCode='+bxCode,'operator:bxCode=LIKE','startTime='+startTime,'endTime='+endTime];
-			$.ajax({
+    function refreshData_query(pageIndex,pageSize){
+		 var bxCode=$("#bxCode").val();	
+		 var startTime=$("#startTime").val(); 
+		 var endTime=$("#endTime").val(); 
+		 var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'bxCode='+bxCode,'operator:bxCode=LIKE','startTime='+startTime,'endTime='+endTime];
+		 $.ajax({
 				url:baseUrl+'propertyservicemanagerBxManager/getPagerBxs.json',
 				data:params.join('&'),
 				success:function(results){
 					if(results&&results.records){
 						 _parseRecords(results.records);
 					}
-				}
-			});
-		}
+		        }
+		});
+	}
 	$(function(){
 		laydate({
 		    elem: '#startTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
@@ -262,9 +253,10 @@
 			setTimeout(function(){$(".toast").hide(); },2000);
 			refreshData(currentIndex,pageSize);
       }
+	  //跳转到详情页面
 	  function viewDetail(bxId){			
 			window.location.href=cenUrl+"member/memberCenter/propertyService/propertyManageBxDetail.html?bxId="+bxId;
-		};
+	};
 	</script>
 	<script type="text/javascript">
 	    //点击跳转到投诉页面
