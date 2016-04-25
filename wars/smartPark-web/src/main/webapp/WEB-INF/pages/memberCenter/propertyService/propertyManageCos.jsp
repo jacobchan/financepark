@@ -76,19 +76,20 @@
 	$(function () {		
 		//分页页码显示
 		 $.ajax({
-			url:serviceURL, 
+			url:baseUrl+'propertyservicemanagerCosManager/getTotalCount.json', 
 			success:function(results){	
-							pageCount=Math.ceil(results.totalCount/pageSize);//页数							
-							 refreshData(1,pageSize);
-								$(".tcdPageCode").createPage({
-								    pageCount:pageCount,
-								    current:1,
-								    backFn:function(p){
-								    	currentIndex = p;
-								       this.pageCount=pageCount;
-								        refreshData(p,pageSize);
-								    }
-								});			
+				var totalCount=results.records[0].totalCount;
+				pageCount = Math.ceil(totalCount / pageSize);//页数							
+					refreshData(1,pageSize);
+						$(".tcdPageCode").createPage({
+						pageCount:pageCount,
+						current:1,
+						backFn:function(p){
+						currentIndex = p;
+						this.pageCount=pageCount;
+						refreshData(p,pageSize);
+					}
+				});			
 			}
 		}); 			
 	});	
@@ -140,6 +141,7 @@
 						$(".knowledge.a").html(html1);	
 				}		
 		};
+		//根据订单号，时间查询
 	 $('.hhf-submit.query').click(function(){	
 		var cosCode=$("#cosCode").val();
 		var startTime=$("#startTime").val(); 
