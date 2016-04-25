@@ -19,12 +19,17 @@
 							<col height="50"></col>
 							<col width="220"></col>
 						</colgroup>
-						<tr>
-							<th>姓名</th>
-							<th>联系电话</th>
-							<th>一句话简介</th>
-							<th>加入时间</th>
-						</tr>												
+						
+						    <tbody>
+						        <tr>
+							       <th>姓名</th>
+							       <th>联系电话</th>
+							       <th>一句话简介</th>
+							       <th>加入时间</th>
+							    </tr>	
+						     </tbody>
+						     <tbody class="list"></tbody>
+																	
 					</table>
 					<div class="tcdPageCode fr"></div>
 				</div>
@@ -41,10 +46,10 @@
  	$(function () {		
 		//分页页码显示
 		 $.ajax({
-			url:serviceURL, 
+			url:baseUrl+'memberInformationManager/getPager.json', 
 			success:function(results){	
 							pageCount=Math.ceil(results.totalCount/pageSize);//页数
-							
+							if(pageCount>0){
 							 refreshData(1,pageSize);
 								$(".tcdPageCode").createPage({
 								    pageCount:pageCount,
@@ -54,7 +59,8 @@
 								       this.pageCount=pageCount;
 								        refreshData(p,pageSize);
 								    }
-								});			
+								});	
+							}	
 			}
 		}); 			
 	});			
@@ -73,17 +79,9 @@
 	}  	
 	
 		//拼接卡号列表
-		function _parseRecords(record){	
-			
-			$(".gt-table").empty();	
-			ht=
-				"<tr>"+
-					"<th>姓名</th>"+
-					"<th>联系电话</th>"+
-					"<th>一句话简介</th>"+
-					"<th>加入时间</th>"+
-			   "</tr>";
-			   $(".gt-table").append(ht);
+	function _parseRecords(record){				
+		$(".list").empty();			
+		if(record.length>0){
 	 		for(var i=0;i<record.length;i++){
 	 			  var memberDescribe2="";
 	 			 var createTime="";
@@ -97,48 +95,72 @@
 	 			   }else{
 	 				  createTime="";
 	 				  } 
-					var html= "<tr class='aaa'>"+
-				      "<td >"+record[i].memberName+"</td>"+
-				      "<td >"+record[i].memberPhoneNumber+"</td>"+
-				      "<td >"+memberDescribe2+"</td>"+
-				      "<td>"+createTime+"</td>"+				      				    					    
-                      " </tr>"; 
-			          $(".gt-table").append(html);					  								 				
-			}
-		};
+					var html= "<tr>"+
+				      			 "<td >"+record[i].memberName+"</td>"+
+				     			 "<td >"+record[i].memberPhoneNumber+"</td>"+
+				      			 "<td >"+memberDescribe2+"</td>"+
+				      			 "<td>"+createTime+"</td>"+				      				    					    
+                      		  " </tr>"; 
+			          $(".list").append(html);
+	 		     }
+	 		}else{
+				var	html1 =  '<tr>'
+					html1 += '	<td colspan="6">暂无数据</td>'
+					html1 += '</tr>'
+				$("#myRecord").html(html1);	
+			}			
+	};
 		//根据名字查询
-		$('.hhf-submit').click(function(){					
-			$(".aaa").empty();
-			 var memberName=$("#memberName").val(); 
-		      $.ajax({
-		    	 url:baseUrl+'memberInformationManager/getPhoneNumberlistByName.json',
-		    	 data:'memberName='+memberName,
-		    	 success:function(result){					
-						console.log(result.records);           
-						if(result&&result.records){					
-							_parseRecords(result.records);						
-						}
-					}
-			}); 
-		}); 
-		$(function(){
+	$('.hhf-submit').click(function(){					
+		var memberName=$("#memberName").val(); 
+		var params=['memberName='+memberName,'operator:memberName=LIKE'];
 			$.ajax({
-			  url:baseUrl+'enterbusinessmanagerRzManager/getCompanyIdName.json',		
-				success:function(result){					
-					//console.log(result.record);
-					if(result&&result.record){					
-						_companyRecords(result.record);						
-					}
+			url:baseUrl+'memberInformationManager/getPhoneNumberlistByName.json',
+			data:params.join('&'),
+			url:serviceURL, 
+				success:function(results){	
+						pageCount=Math.ceil(results.totalCount/pageSize);//页数
+						//alert(pageCount);
+						if(pageCount>0){
+							refreshData_query(1,pageSize);
+							$(".tcdPageCode").createPage({
+							    pageCount:pageCount,
+							    current:1,
+							    backFn:function(p){
+							    	currentIndex = p;
+							       this.pageCount=pageCount;
+							       refreshData_query(p,pageSize);
+							    }
+							});	
+						}	
+		      }
+	     }); 			
+    });	
+	//分页列表
+	function refreshData_query(pageIndex,pageSize){
+		var memberName=$("#memberName").val(); 
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'memberName='+memberName,'operator:memberName=LIKE'];
+		$.ajax({
+			url:serviceURL,
+			data:params.join('&'),
+			success:function(results){
+				if(results&&results.records){
+					 _parseRecords(results.records);
 				}
-			});
-		}); 
-		
-		//公司名字
-		function _companyRecords(record){	
-			var companyName=record.rzName;
-			$("#companyName").text(companyName);
-		};
-	
-		
+			}
+		});
+	}  	
+	////公司名字
+	$(function(){
+		$.ajax({
+			url:baseUrl+'enterbusinessmanagerRzManager/getCompanyIdName.json',		
+			success:function(result){					
+			   if(result&&result.record){					
+			      var companyName=record.rzName;
+			      $("#companyName").text(companyName);					
+			   }
+		     }
+		});
+	}); 		
 	</script>
 </youi:html>
