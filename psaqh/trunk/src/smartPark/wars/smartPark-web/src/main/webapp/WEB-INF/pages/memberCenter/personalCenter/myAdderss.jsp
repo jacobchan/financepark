@@ -358,6 +358,7 @@
 						if(result&&result.records){
 							if(result.records.length>0){
 								$("#roomNo").text(result.records[0].roomNo);	
+								$("#roomNo").attr("value",result.records[0].roomAddress);
 								var html = "";
 								$("#room").empty();
 								for(var i=0;i<result.records.length;i++){
