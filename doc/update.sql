@@ -49,3 +49,11 @@ ALTER TABLE `sp_activity_apply` ADD COLUMN `DOCUMENT_COUNT_` INT(10);
 UPDATE sp_activity_apply a set a.DOCUMENT_COUNT_ =0;
 /*update文档数*/
 update sp_activity_apply a inner join (select COUNT(b.DOCUMENT_PATH_) cc,b.APPLY_ID_ as appid from sp_activity_document b GROUP BY b.APPLY_ID_) c on a.APPLY_ID_ =c.appid set a.DOCUMENT_COUNT_ = c.cc;
+
+
+/** 修改订单表 **/
+ALTER TABLE `sp_ordermanager_userorder` ADD COLUMN `PAY_STATUS_` varchar(2) ;
+ALTER TABLE `sp_ordermanager_userorder` ADD COLUMN `PAY_RETURN_CODE_` varchar(32);
+
+/** 修改活动评论 **/
+ALTER TABLE `sp_activity_comment` CHANGE COLUMN `APPLY_ID_` `DOCUMENT_ID_` char(36) DEFAULT NULL;
