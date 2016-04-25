@@ -119,12 +119,11 @@
 						  button="<a href='#' onclick='cancel(this)'>取消</a>";
 					  }	
 					  var html= "<tr id='"+record[i].ocId+"'>"+
-				      "<td width='111'>"+record[i].ocCode+"</td>"+
-				
-				      "<td width='111'>"+record[i].ocDate+"</td>"+
-				     "<td width='111'>"+record[i].member.memberName+"</td>"+
-				      "<td width='111'>"+status+"</td>"+				    
-				      "<td width='111' >"+button+"</td>"+                    
+				      "<td><a href='javascript:;' onclick='viewDetail(\""+record[i].ocId+"\")' class='ac-show'>"+record[i].ocCode+"</a></td>"+		
+				      "<td>"+record[i].ocDate+"</td>"+
+				      "<td>"+record[i].member.memberName+"</td>"+
+				      "<td>"+status+"</td>"+				    
+				      "<td>"+button+"</td>"+                    
                       " </tr>"; 
 			 		$(".oclist").append(html);									 				
 			}
@@ -250,6 +249,10 @@
 	    //点击跳转到一卡通申请页面
 		$("#a1").click(function(){			
 			location.href = proUrl + "yqfw/yq10.html" ;
-		})	
+		})
+		 //跳转到详情页面
+		  function viewDetail(ocId){			
+			window.location.href=cenUrl+"member/memberCenter/propertyService/propertyManageOcDetail.html?ocId="+ocId;
+		};
      </script>
 </youi:html>
