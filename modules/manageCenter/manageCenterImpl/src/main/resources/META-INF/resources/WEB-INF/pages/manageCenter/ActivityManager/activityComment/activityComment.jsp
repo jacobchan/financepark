@@ -23,7 +23,7 @@
 	<youi:form dialog="true" caption="-活动评论" id="form_activityComment" action="esb/web/activityCommentManager/saveActivityComment.json">
 		<youi:fieldLayout prefix="record" labelWidths="100,100">
 			<youi:fieldHidden property="commentId"  caption="评论ID"/>
-			<youi:fieldSelect property="activityApply.applyId"  caption="活动" src="esb/web/activityApplyManager/getActivityApplys.json" code="applyId" show="applyTitle" notNull="ture"/>
+			<youi:fieldSelect property="activityDocument.documentId"  caption="活动" src="esb/web/activityDocumentManager/getActivityDocuments.json" code="documentId" show="documentName" notNull="ture"/>
 			<youi:fieldSelect property="commentMember.memberId"  caption="评论人" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName" notNull="ture"/>			
 			<youi:fieldArea property="commentContent"  caption="评论内容" column="2"/>
 		</youi:fieldLayout>
