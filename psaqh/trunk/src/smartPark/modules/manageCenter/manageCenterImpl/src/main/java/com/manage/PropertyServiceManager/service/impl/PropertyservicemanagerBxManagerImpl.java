@@ -366,25 +366,36 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 	    		}
 				return pagerRecords;
 			}
-		    /**
-		   	 * 获取已完成订单的totalCount    陈烨
-		   	 * @param conditions
-		   	 * @return
-		   	 * @throws BusException
-		   	 */
-		       @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
-		   	public List<Record> getTotalCount(
+	/**
+   	 * 获取已完成订单的totalCount    
+   	 * @param conditions
+   	 * @return
+   	 * @throws BusException
+   	 */		    
+    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	public List<Record> getTotalCount(
 		   			@ConditionCollection(domainClazz=PropertyservicemanagerBx.class) Collection<Condition> conditions,
 					@ServiceParam(name="startTime") String startTime,
 					@ServiceParam(name="endTime") String endTime)  throws BusException{
-		   		List<Record> recordList=new ArrayList<Record>();
-		   		if(StringUtils.isNotEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){		
-				conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
-		   		}	   		
-		    	List<PropertyservicemanagerBx> List = this.getPropertyservicemanagerBxs(conditions, null);
-		   		Record record = new Record();
-		   		record.put("totalCount", List.size());
-		   		recordList.add(record);
-		   		return recordList;
-		   	}   			    
+	    List<Record> recordList=new ArrayList<Record>();
+		if(StringUtils.isNotEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){		
+		conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+		}	   		
+		List<PropertyservicemanagerBx> List = this.getPropertyservicemanagerBxs(conditions, null);
+		Record record = new Record();
+		record.put("totalCount", List.size());
+		recordList.add(record);
+		return recordList;
+	}  
+		/**
+		 * 根据主键查询 前台个人中心，保修详情   chenye
+		 */
+	@EsbServiceMapping  
+    public PropertyservicemanagerBx getBx(@ServiceParam(name="bxId") String id)  throws BusException{
+		PropertyservicemanagerBx bx=propertyservicemanagerBxDao.get(id);
+		String memberId=bx.getMemberId();
+		MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId); 
+		bx.setMember(memberInformation);
+		return bx;
+	}
 }
