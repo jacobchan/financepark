@@ -73,13 +73,13 @@
 			url:cenUrl +"web/loginUser/findPhoneCaptcha.json",
 			success:function(result){
 				if(result && result.record){
+					$('#sendCaptcha').attr('onclick','void(0);');
 					var res = result.record.html;
 					if(!/^\d{6}$/.test(res)){
 						enableSmsButton(3,res,'重新获取');
 					}else{
 						enableSmsButton(60,'发送成功','重新获取');
 					}
-					$('#sendMobileCaptcha').attr('onclick','getCaptcha();');
 				}
 			}
 		});
@@ -88,7 +88,7 @@
 		$('#sendCaptcha').html(processText + '(' + sec + ')');
 		if(sec <= 0){
 			$('#sendCaptcha').html(enableText);
-			$('#sendMobileCaptcha').attr('onclick','volid(0);');
+			$('#sendCaptcha').attr('onclick','getCaptcha();');
 		}
 		else{
 			setTimeout(function(){
