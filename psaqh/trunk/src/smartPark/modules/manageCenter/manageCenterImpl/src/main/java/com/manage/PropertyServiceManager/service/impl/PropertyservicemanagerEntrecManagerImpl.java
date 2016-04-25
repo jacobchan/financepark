@@ -20,6 +20,7 @@ import com.common.MessageCenter.service.McMsgdatasManager;
 import com.common.MessageCenter.service.McMsgtempalateManager;
 import com.gsoft.entity.MessageTempCode;
 import com.gsoft.entity.ReferenceMap;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
