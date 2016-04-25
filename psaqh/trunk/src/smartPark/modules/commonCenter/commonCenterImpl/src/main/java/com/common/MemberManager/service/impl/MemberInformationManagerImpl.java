@@ -45,7 +45,6 @@ import com.gsoft.framework.util.Assert;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.PasswordUtils;
-import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.utils.EncryptUtil;
 import com.gsoft.utils.HttpSenderMsg;
@@ -112,7 +111,6 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	public MemberInformation saveMemberInformation(MemberInformation o) throws BusException {
 		String memberInformationId = o.getMemberId();
 		boolean isUpdate = StringUtils.isNotEmpty(memberInformationId);
-		String userName = SecurityUtils.getAccount().getLoginName();
 		if (isUpdate) {// 修改
 			MemberInformation mi = memberInformationDao.get(memberInformationId);
 
@@ -122,14 +120,13 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 			mi.setMemberBirthdate(o.getMemberBirthdate());
 			mi.setMemberDescribe2(o.getMemberDescribe2());
 			mi.setCompanyId(o.getCompanyId());
-			mi.setUpdateUser(userName);
+			mi.setUpdateUser(o.getUpdateUser());
 			mi.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 			return memberInformationDao.save(mi);
 		} else {// 新增
-
-			o.setCreateUser(userName);
+			o.setCreateUser(o.getUpdateUser());
 			o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-			o.setUpdateUser(userName);
+			o.setUpdateUser(o.getUpdateUser());
 			o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 
 			MemberInformation member = memberInformationDao.save(o);
