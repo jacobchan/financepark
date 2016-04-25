@@ -5,16 +5,16 @@ package com.manage.ReserveManager.service.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.BuildingBaseManager.entity.BbmRoom;
+import com.common.BuildingBaseManager.service.BbmRoomManager;
 import com.common.ExtentionAtrManager.service.ExtentionAtrManager;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
-import com.common.MessageCenter.entity.McMsgdatas;
 import com.common.MessageCenter.service.McMsgdatasManager;
 import com.common.MessageCenter.service.McMsgtempalateManager;
 import com.common.purchasingManager.dao.PurchasingmanagerCommodityDao;
@@ -22,8 +22,6 @@ import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
 import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
-import com.gsoft.entity.MessageTempCode;
-import com.gsoft.entity.ReferenceMap;
 import com.gsoft.framework.codemap.entity.Codeitem;
 import com.gsoft.framework.codemap.service.CodeitemManager;
 import com.gsoft.framework.core.dataobj.Record;
@@ -80,6 +78,8 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 	@Autowired
 	private McMsgdatasManager mcMsgdatasManager;
 	
+	@Autowired
+	private BbmRoomManager bbmRoomManager ;
 	
     /**
      * 查询列表
@@ -137,13 +137,18 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 		List<ReservationRecord> list=pagerRecords.getRecords();
 		for(ReservationRecord r:list){
 			String recordType=r.getRecordType();
+			String commodityId=r.getRecordCommdityId();
 			//01：众创空间 02：工位
 			if(recordType.equals("01") || recordType.equals("02")){
 				//获取预约商品名称
-				String commodityId=r.getRecordCommdityId();
 				if(commodityId !=null){
 					PurchasingmanagerCommodity p=purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
 					r.setRecordCommdityName(p.getCommodityTitle());;
+				}
+			}else if(recordType.equals("03")){//03:单元
+				if(commodityId !=null){
+					BbmRoom room = bbmRoomManager.getBbmRoom(commodityId) ;
+					r.setRecordCommdityName(room.getRoomNo());
 				}
 			}
 		}
@@ -386,13 +391,18 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 		List<ReservationRecord> list=pagerRecords.getRecords();
 		for(ReservationRecord r:list){
 			String recordType=r.getRecordType();
+			String commodityId=r.getRecordCommdityId();
 			//01：众创空间 02：工位
 			if(recordType.equals("01") || recordType.equals("02")){
 				//获取预约商品名称
-				String commodityId=r.getRecordCommdityId();
 				if(commodityId !=null){
 					PurchasingmanagerCommodity p=purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
 					r.setRecordCommdityName(p.getCommodityTitle());;
+				}
+			}else if(recordType.equals("03")){//03:单元
+				if(commodityId !=null){
+					BbmRoom room = bbmRoomManager.getBbmRoom(commodityId) ;
+					r.setRecordCommdityName(room.getRoomNo());
 				}
 			}
 			
