@@ -14,7 +14,7 @@
 			<youi:fieldCalendar property="visiteDate"  caption="来访日期" textFormat="yyyy-MM-dd" format="yyyy-MM-dd"/>
 		</youi:fieldLayout>
 		<youi:button name="cancelReservation" caption="取消预约" icon="edit" active="1"></youi:button> 
-		<youi:button name="changeStatues" caption="预约授理" icon="edit" active="1"></youi:button> 
+		<youi:button name="changeStatues" caption="预约受理" icon="edit" active="1"></youi:button> 
 		<youi:gridCol property="recordCommdityName"  caption="预约商品"  width="10%" align="center"/>
 		<youi:gridCol property="recordType"  caption="预约类型" convert="recordType"  width="10%" align="center"/>
 		<youi:gridCol property="recordStatus"  caption="预约记录状态" convert="enterrecStatus"  width="10%" align="center"/>
@@ -87,9 +87,9 @@
             formCancel.form('fillRecord',selectedRecord).form('open');
 
         }else if(recordStatus == '02'){//02:已授理
-          alert("该数据已经授理！");
+          alert("该数据已经受理！");
         }else{
-            alert("该状态下不能进行授理");
+            alert("该状态下不能进行受理");
 
         }
     </youi:func>
@@ -100,7 +100,7 @@
 	<youi:func name = "form_reservationRecordChange_afterSubmit">
         var formloanApp = $elem('form_reservationRecordChange',pageId);
 		formloanApp.form('close');
-        alert("授理成功");
+        alert("受理成功");
 		$elem('grid_reservationRecord',pageId).grid('pReload');
      </youi:func>
     <!--**********************************页面函数End:受理成功后，关闭页面并刷新父页面********************************-->

@@ -277,24 +277,25 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
 		p.setEnterrecStatus("02");//已授理
 		p.setEnterrecCode(BizCodeUtil.getInstance().getBizCodeDate("RZYY"));//生成入驻预约编号
 		PropertyservicemanagerEntrec entrec=propertyservicemanagerEntrecDao.save(p);
-		if(entrec!=null && entrec.getEnterrecStatus().equals("02")){
+		MemberInformation mb=entrec.getMemberId();
+		//只有入驻申请类型的预约，才生成企业信息
+		if(entrec!=null && entrec.getEnterrecStatus().equals("02") && entrec.getEnteringType().equals("01")){
 			//若该预约可预约状态变更为已授理，则更新企业入驻信息基本数据和企业会员信息
 			enterbusinessmanagerRzManager.saveEnterbusinessmanagerRzBasicData(entrec.getEntrecId());
-			MemberInformation mb=entrec.getMemberId();
-			//发送短信给联系人
-    		try {
-    			//构建替换模板参数对应的map
-    			Map<String, String> replaceMap = new ReferenceMap();
-    			replaceMap.put("#user",mb != null?mb.getMemberName():null);
-    			replaceMap.put("#appointmentNo", entrec.getEnterrecCode());
-    			//构建消息内容数据
-    			McMsgdatas msgData = mcMsgdatasManager.buildMsgData(MessageTempCode.MSG_USER_1, replaceMap);
-    			//发送消息,给会员
-    			mcMsgdatasManager.sendMessage(msgData, mb != null?mb.getMemberPhoneNumber():null, 1);
-    		} catch (Exception e) {
-    			e.printStackTrace();
-    		}
-			
+		}
+		
+		//发送短信给联系人
+		try {
+			//构建替换模板参数对应的map
+			Map<String, String> replaceMap = new ReferenceMap();
+			replaceMap.put("#user",mb != null?mb.getMemberName():null);
+			replaceMap.put("#appointmentNo", entrec.getEnterrecCode());
+			//构建消息内容数据
+			McMsgdatas msgData = mcMsgdatasManager.buildMsgData(MessageTempCode.MSG_USER_1, replaceMap);
+			//发送消息,给会员
+			mcMsgdatasManager.sendMessage(msgData, mb != null?mb.getMemberId():null, 1);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
