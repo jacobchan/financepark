@@ -3,7 +3,7 @@
 <youi:html title="安全中心">
 	<youi:body decorator="memcenter"> 
 				<div class="w1000">
-					<h3 class="per-h3">基本资料</h3>
+					<h3 class="per-h3">安全中心</h3>
 					<h4 class="per-h4 mt20">密码安全</h4>
 					<table class="setting-table mt20">
 						<colgroup>
