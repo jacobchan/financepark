@@ -100,6 +100,14 @@ public class OrdermanagerUserorder implements Domain{
 	@Length(max=256)
 	private String userorderAdr;//发货地址
 	
+	@Column(name = "PAY_STATUS_")
+	@Length(max=2)
+	private String payStatus;//支付状态
+	
+	@Column(name = "PAY_RETURN_CODE_")
+	@Length(max=32)
+	private String payReturnCode;//支付返回订单号
+	
 	@Transient
 	private String status;//订单中文显示状态
 	
@@ -115,6 +123,21 @@ public class OrdermanagerUserorder implements Domain{
 	@Transient
 	private List<OrdermanagerCommoditydetail> ordermanagerCommodityDetailList;//订单详情（APP专用）
 
+	public String getPayStatus() {
+		return payStatus;
+	}
+
+	public void setPayStatus(String payStatus) {
+		this.payStatus = payStatus;
+	}
+
+	public String getPayReturnCode() {
+		return payReturnCode;
+	}
+
+	public void setPayReturnCode(String payReturnCode) {
+		this.payReturnCode = payReturnCode;
+	}
 	@Transient
 	private String ordermanagerCommodityDetailListCount;//订单详情Count（APP专用）
 
