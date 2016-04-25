@@ -69,6 +69,8 @@
 									pageCount = Math.ceil(totalCount / pageSize);//页数
 							 refreshData(1,pageSize);
 							//插入页码
+							$(".tcdPageCode").empty();
+							if(totalCount>0){
 								$(".tcdPageCode").createPage({
 								    pageCount:pageCount,
 								    current:1,
@@ -77,7 +79,8 @@
 								       this.pageCount=pageCount;
 								        refreshData(p,pageSize);
 								    }
-								});			
+								});	
+							}
 			}
 		}); 			
 		}
@@ -181,12 +184,12 @@ $('.hhf-submit.f14.fl.ml20.hospital').click(function(){
 	 $.ajax({
 		 url : baseUrl + "ordermanagerUserorderManager/getPagerHospital_query.json",
 			success : function(results) {
-								var totalCount=results.records[0].totalCount;
-								pageCount = Math.ceil(totalCount / pageSize);//页数
-							//alert(pageCount);
+							var totalCount=results.records[0].totalCount;
+							pageCount = Math.ceil(totalCount / pageSize);//页数
 							refreshData_hospital_query(1,pageSize);
-							    $(".tcdPageCode").createPage({
-								//$(".tcdPageCode").createPage({
+							$(".tcdPageCode").empty();
+							if(totalCount>0){
+							    $(".tcdPageCode").createPage({								
 								    pageCount:pageCount,
 								    current:1,
 								    backFn:function(p){
@@ -195,7 +198,7 @@ $('.hhf-submit.f14.fl.ml20.hospital').click(function(){
 								       refreshData_hospital_query(p,pageSize);
 								    }
 								});			
-			
+							}
 			}
 		}); 		
 });
