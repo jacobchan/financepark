@@ -451,8 +451,9 @@
 			$("#kalendar-detail").dateplug({
 				price: price
 				});
-		   $.fn.dateplug.ajax = function(){
-			  alert("tigutf");
+		   $.fn.dateplug.ajax = function(e){
+			   var  obj = e.srcElement||e.target;
+			  alert(obj.className);
 		   }
 		   $.fn.dateplug.monthajax = function(){
 			   return [14,25,36,7,8];
