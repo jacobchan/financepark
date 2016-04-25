@@ -389,33 +389,7 @@
             displayStatus(commodityId,"prev");
             
         });
-        var i=0;
-        var l=$(".order-nav li").size();
-        var h=$(".order-nav li:first").outerHeight();
-        $(".next-bottom").click(function(){
-            if(i>5-l && l>5){
-                i=i-1;
-            }else if(i==5-l && l>5){
-                i=0;
-            }else if(l<6){
-                i=0;
-            }
-            scholl(i);
-        });
-        $(".pre-top").click(function(){
-            if(i>4-l&&i<0 && l>5){
-                i=i+1;
-            }else if(i==0 && l>5){
-                i=5-l;
-            }else if(l<6){
-                i=0;
-            }
-            scholl(i);
-        });
-        function scholl(i){
-            var topH=i*107+"px";
-            $(".order-nav").animate({top:topH});
-        }
+
     });
 
 </script>
