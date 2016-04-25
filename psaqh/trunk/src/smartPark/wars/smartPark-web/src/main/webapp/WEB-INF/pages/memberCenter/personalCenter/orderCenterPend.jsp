@@ -84,19 +84,22 @@ type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
 			//url : baseUrl + "ordermanagerUserorderManager/getTotalCountPend.json",
 			url : baseUrl + "ordermanagerUserorderManager/getTotalCountPend.json",
 			success : function(results) {
-								var totalCount=results.records[0].totalCount;
-								pageCount = Math.ceil(totalCount / pageSize);//页数				
-							 refreshData(1,pageSize);
-							//插入页码
-								$(".tcdPageCode").createPage({
-								    pageCount:pageCount,
-								    current:1,
-								    backFn:function(p){
-								    	currentIndex = p;
-								       this.pageCount=pageCount;
-								        refreshData(p,pageSize);
-								    }
-								});			
+				var totalCount=results.records[0].totalCount;
+				pageCount = Math.ceil(totalCount / pageSize);//页数				
+				refreshData(1,pageSize);
+				//插入页码
+				$(".tcdPageCode").empty();
+				if(totalCount>0){
+						$(".tcdPageCode").createPage({
+								pageCount:pageCount,
+								current:1,
+								backFn:function(p){
+									currentIndex = p;
+									this.pageCount=pageCount;
+								 	refreshData(p,pageSize);
+								 }
+						});
+				}
 			}
 		}); 			
 		}
