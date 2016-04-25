@@ -34,7 +34,7 @@
 			<div class="h-nav clearfix">
 				<a href="../index.html">首页</a><img src="../styles/images/zs/right-j-b.png" border="0" />
 				<a href="czh1.html">创智汇</a><img src="../styles/images/zs/right-j-b.png" border="0" />
-				<!-- <a href="">知识库</a><img src="../styles/images/zs/right-j-b.png" border="0" /> -->
+				<a href="czh6.html">知识库</a><img src="../styles/images/zs/right-j-b.png" border="0" />
 				<a href="" class="current">文档详情</a>
 			</div>
 			<div class="fl w900">				
@@ -156,8 +156,20 @@
 		$(function(){
 			var url=location.href; 
 			var tmp1=url.split("?")[1];  
-			var tmp2=tmp1.split("=")[1]; 
-			var applyId=tmp2;
+			var tmp2='';
+			var tmp3='';
+			var tmp4='';
+			if(tmp1!=''&&tmp1!=null){
+				tmp2=tmp1.split("=")[1]; 
+				tmp3=tmp1.split("&")[1]; 
+			}
+			if(tmp3!=''&&tmp3!=null){
+				tmp4=tmp3.split("=")[1]; 
+			}
+			var applyId='';
+			if(tmp2!=''&&tmp1!=null){
+				applyId=tmp2;
+			}
 			var serviceURL = baseUrl+"activityDocumentManager/getPagerActivityDocuments.json";
 			var params = ['activityApply.applyId='+applyId];
 			$.youi.ajaxUtils.ajax({
@@ -168,7 +180,11 @@
 				success:function(results){
 					//console.log(results);
 					if(results&&results.records){
-					_parseRecords(results.records);
+						if(tmp4!=''&&tmp4!=null){//知识库进入
+							knowpage(tmp4);
+						}else{//活动进入
+							_parseRecords(results.records);
+						}
 						documents(results.records);
 					}
 				}
@@ -226,6 +242,7 @@
 		                }}
 		        );
 		}
+		//拼接侧边栏
 		function documents(record){
 			var html ="";
 			for(var i=0;i<record.length;i++){
@@ -236,7 +253,7 @@
 			}
 			$(".article-tab").empty().append(html);
 		}
-		
+		//侧边栏点击切换
 		function openPage(obj){
 			var params = ['documentId='+obj.id];
 			$(".documentName").html($(obj).find("p").text());
@@ -252,6 +269,23 @@
 				}
 			});
 		}
+		
+		//知识库进入拼接
+		function knowpage(id){
+			var serviceURL = baseUrl+"activityDocumentManager/getPagerActivityDocuments.json";
+			var params = ['documentId='+id];
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(results){
+					if(results&&results.records){
+						_parseRecords(results.records);
+					}
+				}
+			});		
+		};
 	</script>
 
 </body>
