@@ -21,6 +21,7 @@ import com.common.MemberManager.service.MemberInformationManager;
 import com.common.MemberManager.service.MemberRoleManager;
 import com.common.MessageCenter.service.McMsgdatasManager;
 import com.gsoft.entity.TempDemo;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.dataobj.tree.TreeNode;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -559,9 +560,7 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	@EsbServiceMapping
 	public String getEncryptStringForEnterpriseMall(
 			@ServiceParam(name = "userId", pubProperty = "userId") String userId) throws BusException {
-
 		String retString = this.inininSsoUrl+"?";
-
 		MemberInformation noEncypt = memberInformationDao.get(userId);
 		String user_id = EncryptUtil.encrypt(noEncypt.getMemberId());
 		String user_name = EncryptUtil.encrypt(noEncypt.getMemberPhoneNumber());
@@ -577,4 +576,30 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 				+ "&ent_address=" + ent_address + "&ent_name=" + ent_name + "&checkcode=" + checkCodeString;
 		return retString;
 	}
+	/**
+	 *前台 根据当前用户分页查询
+	 * @return 分页对象
+	 */
+
+	 /**
+	* 获取已完成订单的totalCount    陈烨
+	* @param conditions
+	* @return
+	* @throws BusException
+	*/
+    @EsbServiceMapping
+	public List<Record> getTotalCount(
+	   			@ConditionCollection(domainClazz=MemberInformation.class) Collection<Condition> conditions,
+	   			@ServiceParam(name = "userId", pubProperty = "userId") String userId)  throws BusException{
+	   	List<Record> recordList=new ArrayList<Record>();
+	   	MemberInformation m=memberInformationDao.get(userId);
+	   	String companyId=m.getCompanyId();
+	   	conditions.add(ConditionUtils.getCondition("companyId", Condition.EQUALS, companyId));
+	   	List<MemberInformation> List = this.getMemberInformations(conditions, null);
+	   	Record record = new Record();
+	   	record.put("totalCount", List.size());
+	   	recordList.add(record);
+	   	return recordList;
+	}   	 
+      
 }
