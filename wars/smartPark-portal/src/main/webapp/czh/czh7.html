@@ -37,9 +37,9 @@
 				<h3 class="f24 h40 mb10 documentName">传统企业互联网化方法论</h3>
 				<div class="clearfix text-header mb20">
 					<span><img src="../styles/images/czh/logo.png" border="0" height="29" width="90"></span>
-					<span><img src="../styles/images/czh/user-l.png" border="0" class="mr20">主讲人：刘海峰</span>
-					<span><img src="../styles/images/czh/star.png" border="0" class="mr20" height="20">52人评价</span>
-					<span>125人阅读</span>
+					<span class="docname"></span>
+					<span class="doceval">52人评价</span>
+					<span class="docread">125人阅读</span>
 				</div>
 				<div id="documentViewer" style="width:100%;height:524px;border:1px solid #d4d4d2;background:#fff;padding:30px;"></div>
 				<div class="article-ppt clearfix">
@@ -117,44 +117,17 @@
 				<h3 class="lh40 f16 mt20">相关文档</h3>
 				<div class="at-oh">
 					<table class="article-tab" style="width:275px;table-layout:fixed">
-						<colgroup>
+						<!--<colgroup>
 							<col width="42"></col>
+							<col width="233"></col>
 						</colgroup>
-						<tr>
+						 <tr>
 							<td><em>P</em></td>
 							<td>
 								<p>新人教版一年级语文上册13平平...</p>
 								<span>暂无评价</span><span class="fr">40页</span>
 							</td>
-						</tr>
-						<tr>
-							<td><em>P</em></td>
-							<td>
-								<p>新人教版一年级语文上册13平平...</p>
-								<span>暂无评价</span><span class="fr">40页</span>
-							</td>
-						</tr>
-						<tr>
-							<td><em>P</em></td>
-							<td>
-								<p>新人教版一年级语文上册13平平...</p>
-								<span>暂无评价</span><span class="fr">40页</span>
-							</td>
-						</tr>
-						<tr>
-							<td><em>P</em></td>
-							<td>
-								<p>新人教版一年级语文上册13平平...</p>
-								<span>暂无评价</span><span class="fr">40页</span>
-							</td>
-						</tr>
-						<tr>
-							<td><em>P</em></td>
-							<td>
-								<p>新人教版一年级语文上册13平平...</p>
-								<span>暂无评价</span><span class="fr">40页</span>
-							</td>
-						</tr>
+						</tr> -->
 					</table>
 				</div>
 				
@@ -210,6 +183,13 @@
 		function _parseRecords(record){
 			var documentPath=record[0].documentPath;
 			var params = ['documentId='+record[0].documentId];
+			//关联活动发布人
+			var docname="<img src='../styles/images/czh/user-l.png' border='0' class='mr20'>主讲人："+record[0].activityApply.memberId.memberName+"";
+			$(".docname").append(docname);
+			//阅读数
+			var ronum = getRandom(1000);
+			$(".docread").html(""+ronum+"人阅读");
+			//关联活动文档名称
 			$(".documentName").html(record[0].documentName.split('.')[0]);
 			//关联活动图片
 			var img="<a href='czh3.html?applyId="+record[0].activityApply.applyId+"'>"+
@@ -260,19 +240,25 @@
 		}
 		//拼接侧边栏
 		function documents(record){
+			$(".article-tab").empty();
 			var html ="";
+			html+="<colgroup><col width='42'></col></colgroup>";
 			for(var i=0;i<record.length;i++){
-				html+="<tr id="+record[i].documentId+" onclick='openPage(this)' style='cursor:pointer;'><td><em>P</em></td>"+
+				html+=
+					"<tr id="+record[i].documentId+" onclick='openPage(this)' style='cursor:pointer;'><td><em>P</em></td>"+
 					"<td><p>"+record[i].documentName.split('.')[0]+"</p>"+
 					"<span>"+record[i].createTime+"</span>"+
 					"</td></tr>";
 			}
-			$(".article-tab").empty().append(html);
+			$(".article-tab").append(html);
 		}
 		//侧边栏点击切换
 		function openPage(obj){
 			var params = ['documentId='+obj.id];
 			$(".documentName").html($(obj).find("p").text());
+			//阅读数
+			var ronum = getRandom(1000);
+			$(".docread").html(""+ronum+"人阅读")
 			//变更文档展示
 			$.youi.ajaxUtils.ajax({
 				url:baseUrl+'/activityDocumentManager/getViewDocument.json',
@@ -302,6 +288,11 @@
 				}
 			});		
 		};
+		
+		//生成随机数
+		function getRandom(n){
+	        return Math.floor(Math.random()*n+1);
+	     };
 	</script>
 
 </body>
