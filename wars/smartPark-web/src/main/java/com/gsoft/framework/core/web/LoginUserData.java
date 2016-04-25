@@ -46,6 +46,12 @@ public class LoginUserData extends BaseDataController {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put(MessageService.CODE, captcha);
 		
+		//根据手机号码获取用户
+		MemberInformation mb = memberInformationManager.getUserByPhone(phone);
+		if(mb != null){
+			return new DataModelAndView("该用户已存在！");
+		}
+				
 		Boolean success = mcMsgdatasManager.smsSend("1010", map, null, phone);
 		if(success){
 			request.getSession().setAttribute("phone_captcha",
@@ -68,6 +74,12 @@ public class LoginUserData extends BaseDataController {
 		
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put(MessageService.CODE, captcha);
+		
+		//根据手机号码获取用户
+		MemberInformation mb = memberInformationManager.getUserByPhone(phone);
+		if(mb != null){
+			return new DataModelAndView("该用户已存在！");
+		}
 		
 		Boolean success = mcMsgdatasManager.smsSend("1010", map, null, phone);
 		if(success){
