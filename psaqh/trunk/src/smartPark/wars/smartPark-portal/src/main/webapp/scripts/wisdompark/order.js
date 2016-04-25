@@ -234,8 +234,7 @@ function closeTanc(){
 }
 	//加载会议室
 	function roomDetail(){
-		var pageSize = 5;
-		var params = [ 'genreCode=0301', 'pager:pageSize=' + pageSize ];
+		var params = [ 'genreCode=0301'];
         //0301:会议室
 		$.youi.ajaxUtils.ajax({
 			url:baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommoditys.json",
@@ -281,7 +280,8 @@ function closeTanc(){
 					+ "<p class='cc f14'>"
 					+ record[i].commodityPrice
 					+ "元/小时</p></div></li>";
-			$("#roomDtail").append(html);
+			console.log(html);
+			$(".order-nav.bgfff").append(html);
 
 		}
 		
@@ -291,7 +291,6 @@ function closeTanc(){
         $(".next-bottom").click(function(){
             if(i>5-l && l>5){
                 i=i-1;
-                alert(i);
             }else if(i==5-l && l>5){
                 i=0;
             }else if(l<6){
