@@ -373,5 +373,21 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
     		}*/
 			return pagerRecords;
 		}
+	    /**
+	   	 * 获取已完成订单的totalCount    
+	   	 * @param conditions
+	   	 * @return
+	   	 * @throws BusException
+	   	 */	    		    
+	@EsbServiceMapping(pubConditions={@PubCondition(property="recordMemberId",operator=Condition.EQUALS,pubProperty="userId")})
+	public List<Record> getTotalCount(
+			   			@ConditionCollection(domainClazz=PropertyservicemanagerEntrec.class) Collection<Condition> conditions)  throws BusException{
+		List<Record> recordList=new ArrayList<Record>();  		
+		List<PropertyservicemanagerEntrec> List = this.getPropertyservicemanagerEntrecs(conditions, null);
+		Record record = new Record();
+        record.put("totalCount", List.size());
+		recordList.add(record);
+		return recordList;
+	}
 
 }
