@@ -57,9 +57,10 @@
 	function loadData(){	
 		//分页页码显示
 		 $.ajax({
-			url:serviceURL, 
+			url:baseUrl+'reservationRecordManager/getTotalCount.json',
 			success:function(results){	
-							pageCount=Math.ceil(results.totalCount/pageSize);//页数
+				var totalCount=results.records[0].totalCount;
+				pageCount = Math.ceil(totalCount / pageSize);
 							 refreshData(1,pageSize);
 							//插入页码
 								$(".tcdPageCode").createPage({
