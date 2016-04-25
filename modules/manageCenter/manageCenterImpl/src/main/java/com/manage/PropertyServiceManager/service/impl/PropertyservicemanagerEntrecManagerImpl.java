@@ -356,31 +356,21 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
     /**
 	 *前台 根据当前用户分页查询
 	 * @return 分页对象
-	 */
-    // @SuppressWarnings("unchecked")
-	    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId.memberId",operator=Condition.EQUALS,pubProperty="userId")})
-		public PagerRecords getPager(Pager pager,//分页条件
+	 */ 
+	@EsbServiceMapping(pubConditions={@PubCondition(property="memberId.memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	public PagerRecords getPager(Pager pager,//分页条件
 				@ConditionCollection(domainClazz=PropertyservicemanagerEntrec.class) Collection<Condition> conditions,//查询条件
 				@OrderCollection Collection<Order> orders)
 				throws BusException {
-	    	PagerRecords pagerRecords = propertyservicemanagerEntrecDao.findByPager(pager, conditions, orders);
-	    	/*List<PropertyservicemanagerEntrec> bxlist = pagerRecords.getRecords();
-	    	for(PropertyservicemanagerEntrec bx : bxlist){
-    			if(StringUtils.isNotEmpty(bx.getMemberId())){
-    				String memberId = bx.getMemberId();
-    				MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
-    				bx.setMember(memberInformation);
-    			}
-    		}*/
-			return pagerRecords;
-		}
-	    /**
-	   	 * 获取已完成订单的totalCount    
-	   	 * @param conditions
-	   	 * @return
-	   	 * @throws BusException
-	   	 */	    		    
-	@EsbServiceMapping(pubConditions={@PubCondition(property="recordMemberId",operator=Condition.EQUALS,pubProperty="userId")})
+	   PagerRecords pagerRecords = propertyservicemanagerEntrecDao.findByPager(pager, conditions, orders);
+	   return pagerRecords;
+	}
+   /**获取全部订单的totalCount    
+	* @param conditions
+    * @return
+	* @throws BusException
+	*/	    		    
+	@EsbServiceMapping(pubConditions={@PubCondition(property="memberId.memberId",operator=Condition.EQUALS,pubProperty="userId")})
 	public List<Record> getTotalCount(
 			   			@ConditionCollection(domainClazz=PropertyservicemanagerEntrec.class) Collection<Condition> conditions)  throws BusException{
 		List<Record> recordList=new ArrayList<Record>();  		
