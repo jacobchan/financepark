@@ -129,8 +129,10 @@
 					recordStatus="待受理";
 				}else if(recordStatus=="02"){
 					recordStatus="已受理";
+					buttonHtml="<td></td>";
 				}else if(recordStatus=="03"){
 					recordStatus="已到访";
+					buttonHtml="<td></td>";
 				}else if(recordStatus=="04"){
 					recordStatus="已取消";
 					 buttonHtml="<td></td>";
