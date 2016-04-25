@@ -54,9 +54,15 @@ public class ActivityComment implements Domain{
 	@Length(max=36)
 	private String commentId;//评论ID
 	
+//	@ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name="APPLY_ID_")
+//	private com.manage.ActivityManager.entity.ActivityApply activityApply;//活动申请ID
+	
 	@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="APPLY_ID_")
-	private com.manage.ActivityManager.entity.ActivityApply activityApply;//活动申请ID
+    @JoinColumn(name="DOCUMENT_ID_")
+	private com.manage.ActivityManager.entity.ActivityDocument activityDocument;//活动申请ID
+	
+	
 	
 	public String getUpdateUser(){
 		return this.updateUser;
@@ -118,12 +124,12 @@ public class ActivityComment implements Domain{
 		this.commentId = commentId;
 	}
 	
-	public void setActivityApply(com.manage.ActivityManager.entity.ActivityApply activityApply){
-		this.activityApply = activityApply;
+	public void setActivityDocument(com.manage.ActivityManager.entity.ActivityDocument activityDocument){
+		this.activityDocument = activityDocument;
 	}
 	
-	public com.manage.ActivityManager.entity.ActivityApply getActivityApply(){
-		return this.activityApply;
+	public com.manage.ActivityManager.entity.ActivityDocument getActivityDocument(){
+		return this.activityDocument;
 	}
 	
 	
