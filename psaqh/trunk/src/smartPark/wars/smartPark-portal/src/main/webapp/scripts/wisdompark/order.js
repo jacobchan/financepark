@@ -4,6 +4,7 @@ $(function(){
         
       //在线预约
 		$("#online").click(function(){
+			var commodityId= $("#commodityId").val();
 			var dates=new Array();
 			var times=new Array();
 			$("#data_timer td.clicktd").not("#data_timer td.today").each(function(){
@@ -34,19 +35,26 @@ $(function(){
 				dates.push(date);
 				times.push(time);
 			});
-			alert(dates);
-			if(dates.length>0){
-				$(".pop_layer").show();
+			alert(commodityId);
+			if(commodityId){
+				if(dates.length>0){
+					$(".pop_layer").show();
+				}else{
+					clearInterval(timer);
+					$("#msg").text("请选择预约日期和时间段");
+		            $(".toast").show();
+		            pltime=2;
+		            timer=setInterval("closeTanc()",1000);
+					
+				}
 			}else{
-				$("#msg").text("请选择预约日期和时间段");
-	            $(".toast").show();
 				clearInterval(timer);
-				$("#msg").text("请选择预约日期和时间段");
+				$("#msg").text("请先选择会议室");
 	            $(".toast").show();
 	            pltime=2;
 	            timer=setInterval("closeTanc()",1000);
-				
 			}
+			
 			//alert("已预约id："+$("#resoIds").html().substring(0,$("#resoIds").html().length-1));
 			
 		});
@@ -64,6 +72,8 @@ $(function(){
 	            timer=setInterval("closeTanc()",1000)
 				return;
 				}
+			var commodityId= $("#commodityId").val();
+			var commodityPrice=$("#roomPrice").val();
 			var enteringName=$("#enteringName").val();
 			var enteringTelephone=$("#enteringTelephone").val();
 			var tea=false;
@@ -130,9 +140,10 @@ $(function(){
 				dates.push(date);
 				times.push(time);
 			});
+			
 			if(dates.length>0){
 				var length=dates.length;
-        		var userorderAmount=$('#commodityPrice').text();
+        		var userorderAmount=$("#roomPrice").val();
         		userorderAmount=userorderAmount*length;
 				var string ="";
 				for(var i=0;i<dates.length;i++){
@@ -185,6 +196,33 @@ $(function(){
 		});
 	});
 	
+var a,b,timer1,timer2;
+function jump1(){
+	if(a>1){
+		a--;
+		$("#ti-m1").text(a);
+	}else{
+		window.location=cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
+	}		
+}
+function jump2(){
+	if(b>1){
+		b--;
+		$("#ti-m2").text(b);
+	}else{
+		window.location="order.html";
+	}		
+}
+
+//跳转订单中心
+function jumpOrder(){
+	window.location=cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
+}
+//返回
+function jumpBack(){
+	window.location="roomxq.html?id="+commodityId;
+}
+
 //toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
 var pltime,timer;
 function closeTanc(){
@@ -236,6 +274,7 @@ function closeTanc(){
 			        + "<span id='roomType' style='display:none'>"+record[i].meetingRoom.lx+"</span>"
 			        + "<span id='roomTyy' style='display:none'>"+record[i].meetingRoom.tyy+"</span>"
 			        + "<span id='roomGm' style='display:none'>"+record[i].meetingRoom.gm+"</span>"
+			        + "<span id='roomPrice' style='display:none'>"+record[i].commodityPrice+"</span>"
 			        + "<img src='"+imageUrl+"' width='118' height='66'></div><div class='fl ml10 lh30'><div class='f16 c3'>"
 					+ title
 					+ "</div>"
@@ -247,4 +286,95 @@ function closeTanc(){
 		}
 	};
 	
+	
+    function displayStatus(commodityId,name){
+    	var params = ['commodityId='+commodityId];
+    	var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPublicutilitiesmanagerResoByCommodityId.json";
+    	//根据商品id获取资源可用状态
+    	$.youi.ajaxUtils.ajax({
+    		url : serviceURL,
+    		data:params.join('&'),
+    		jsonp : 'data:jsonp',
+    		dataType : 'jsonp',
+    		async : false,
+    		success : function(results) {
+    			var numArray1 = new Array();
+				var numArrayDate1 = new Array();
+		    	var Request = new Object();
+		    	var resoTime = "";
+    			if (results && results.records) {
+    				var records = results.records;
+    				console.log(records);
+    				$("#resoIds").empty();
+    				var tr=0;
+    				for(var i=0; i<records.length; i++){
+    					var month=$(".fc-left").find('h2').html().substring(5,6);
+    					$("#enteringName").val(records[0].name);
+    					$("#enteringTelephone").val(records[0].phone);
+    					if((Number(records[i].resoDate.substring(5,7)))==Number(month)){
+    						//主键追加到隐藏域供预约使用
+    						$("#resoIds").append(records[i].resoId+",");
+    						if(records[i].resoTime=='01'){
+    							resoTime = "8:00-9:00";
+    							tr=0;
+    						}else if(records[i].resoTime=='02'){
+    							resoTime = "9:00-10:00";
+    							tr=1;
+    						}else if(records[i].resoTime=='03'){
+    							resoTime = "10:00-11:00";
+    							tr=2;
+    						}else if(records[i].resoTime=='04'){
+    							resoTime = "11:00-12:00";
+    							tr=3;
+    						}else if(records[i].resoTime=='05'){
+    							resoTime = "12:00-13:00";
+    							tr=4;
+    						}else if(records[i].resoTime=='06'){
+    							resoTime = "13:00-14:00";
+    							tr=5;
+    						}else if(records[i].resoTime=='07'){
+    							resoTime = "14:00-15:00";
+    							tr=6;
+    						}else if(records[i].resoTime=='08'){
+    							resoTime = "15:00-16:00";
+    							tr=7;
+    						}else if(records[i].resoTime=='09'){
+    							resoTime = "16:00-17:00";
+    							tr=8;
+    						}else{
+    							resoTime = "17:00-18:00";
+    							tr=9;
+    						}
+    						var resoDate1=records[i].resoDate;
+    						if(records[i].resoStatus=='02'){
+    							var y=0;
+    	    					var length=$(".fc-widget-header").find('tr').eq(0).find('th').length;
+    	    					for(var p=1;p<length;p++){
+    	    						var th=$(".fc-widget-header").find('tr').eq(0).find('th').eq(p).attr("data-date");
+    	    						if(resoDate1==th){
+	    	    						y=p;
+	    	    						if(name=="next"){
+	    	    							numArray1.push(y+"-"+tr);	
+	    	    						}
+    	    						}
+    	    					}
+    	    					if(name=="prev"){
+    	    						if(y !=0){
+    	    							numArray1.push(y+"-"+tr);
+        	    					}
+	    						}
+    						}
+    					}
+    				}
+					for(var i=0;i<numArray1.length;i++){
+						var td1=numArray1[i].split("-")[0];
+						var th1=numArray1[i].split("-")[1];
+						td1--;
+						$("#data_timer tr").eq(th1).children("td").eq(td1).addClass("today");
+					}
+					
+    			}
+    		}
+    	});
+	}
 	

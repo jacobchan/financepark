@@ -39,7 +39,7 @@
             </div>
             <div class="clearfix mt10 mb10" style="max-height:535px;overflow:hidden;">
                 <ul class="order-nav bgfff" id="roomDtail" style="border:none">
-                    <li class="clearfix">
+                    <!-- <li class="clearfix">
                         <div class="fl"><img src="../styles/images/index/img.jpg" width="118" height="66"></div>
                         <div class="fl ml10 lh30">
                             <div class="f16 c3">创智中心1号楼</div>
@@ -80,7 +80,7 @@
                             <div class="f16 c3">创智中心4号楼</div>
                             <p class="cc f14">260元/小时</p>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <div class="btn-change next-bottom">
@@ -90,9 +90,9 @@
         <div class="fl ml30 bgfff p15 w780">
         	<div class="borderm pb10">
             	<span class="cblue fw"></span>
-                <div class="od_tip" id="roomType"></div>
-                <div class="od_tip" id="roomTyy"></div>
-                <div class="od_tip" id="roomGm"></div>
+                <div class="od_tip"></div>
+                <div class="od_tip"></div>
+                <div class="od_tip"></div>
             </div>        	
             <div class="tc pr">
                 <div id='calendar'>
@@ -258,6 +258,37 @@
         </div>
     </div>
 </div>
+
+	<div class="bg-tanc m1">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="tc mt40">
+				<div class="mt20 mb20 f16 lh26">
+					<img src="../styles/images/yqfw/correct.png" border="0" class="mr20"/>
+				</div>
+				<p class="mb10 f16">您已经成功提交申请，请到会员中心查看申请状态。</p>
+				<p><span class="c-o f24 tc-time mr5" id="ti-m1">5 </span>秒后，系统将自动跳转</p>
+				<!-- <p class="mt10"><a href="" class="c-6">手动跳转 ></a></p> -->
+				<div class="clearfix mt15 pt15" style="border-top:1px solid #efecec">
+					<a style="cursor:pointer;" onclick="jumpOrder();" class="ib-btn" style="width:120px;">前往查看</a>
+					<span class="ml30 mr30"></span>
+					<a style="cursor:pointer;" onclick="jumpBack();"  class="ib-btn fs-btn" style="width:120px;">返回</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="bg-tanc m2">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="tc mt40">
+				<div class="mt20 mb20 f16 lh26">
+					<img src="../styles/images/yqfw/error.png" border="0" class="mr20"/>
+				</div>
+				<p class="mb10 f16" id="errorText">你还不是园区内的企业用户，无法进行物业报修操作！</p>
+				<p><span class="c-o f24 tc-time mr5" id="ti-m2">5</span>秒后，系统将自动跳转 <a href="" class="c-b1 ml10">手动跳转 ></a></p>
+			</div>
+		</div>
+	</div>
 <!--******************  code end  ****************************-->
 <script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
@@ -297,27 +328,34 @@
             var active=$(this).index();
             var time=$(this).html();
             var dates=$(".fc-day-header").eq(active).attr("data-date");
-            alert(dates+"  "+time);
         });
         $(".fc-next-button").on("click",this,function(){
+        	var commodityId= $("#commodityId").val();
             cursor++;
             var flag=judgment();
             console.log(cursor);
-            if(cursor==0){nowday();return ;}
+            if(cursor==0){nowday();
+            displayStatus(commodityId,"prev");
+            return ;}
             if(flag){
                 $("#data_timer").html(htmls);
+                displayStatus(commodityId,"next");
             }
         });
         $(".fc-prev-button").on("click",this,function(){
+        	var commodityId= $("#commodityId").val();
             cursor--;
             var flag=judgment();
             console.log(cursor);
-            if(cursor==0){nowday();return ;}
+            if(cursor==0){nowday();
+            displayStatus(commodityId,"prev");
+            return ;}
             if(!flag){
                 $("#data_timer td").addClass("pasttd");
             }
             else{
                 $("#data_timer").html(htmls);
+                displayStatus(commodityId,"next");
             }
         });
         function nowday(){
@@ -341,12 +379,14 @@
             var roomType=$(this).find("span").eq(2).text();
             var roomTyy=$(this).find("span").eq(3).text();
             var roomGm=$(this).find("span").eq(4).text();
-            alert(roomType+roomTyy+roomGm);
+            var roomPrice=$(this).find("span").eq(5).text();
+            $("#commodityId").val(commodityId);
+            $("#roomPrice").val(roomPrice);
             $(".cblue.fw").text(commodityTitle);
-            $('#roomType').text(roomType);
-            $('#roomTyy').text(roomTyy);
-            $('#roomGm').text(roomGm);
-           
+            $('.od_tip').eq(0).text(roomType);
+            $('.od_tip').eq(1).text(roomTyy+"投影仪");
+            $('.od_tip').eq(2).text(roomGm);
+            displayStatus(commodityId,"prev");
             
         });
         var i=0;
