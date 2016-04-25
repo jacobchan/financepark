@@ -3,9 +3,10 @@
  */
 package com.manage.EnterBusinessManager.service;
 
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
+import com.common.BuildingBaseManager.entity.BbmRoom;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -118,4 +119,12 @@ public interface EnterbusinessmanagerRzManager extends BaseManager{
 			String rzId, String rzLogo, String roomId, String rzName,
 			String rzRemark, String rzUrl, String enTypeId,
 			String productDiscriptio, String rzImages) throws BusException;
+	 
+	 /**
+	  * 通过企业id得到企业单元信息
+	  * @param rzId 企业入驻ID
+	  * @return
+	  * @throws BusException
+	  */
+	 public BbmRoom getRoomByRzId(String rzId) throws BusException ;
 }
