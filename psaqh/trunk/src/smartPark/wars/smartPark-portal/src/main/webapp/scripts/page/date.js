@@ -1,11 +1,9 @@
 // JavaScript Document
 //Gulf 2016.4.5
 (function(){
-  var date = new Date(),next_opt; 
+  var date = new Date(),next_opt,month=month =  date.getMonth()+1; 
   $.fn.dateplug=function(options){
 		var opt = $.extend({},$.fn.dateplug.defaults,options);
-		var month =  date.getMonth()+1;
-		
         return this.each(function(){
 			 var $this = $(this); 
 		     $this.html(createHtml(opt));
@@ -60,8 +58,8 @@
 	  alert("写个方法获取这个月的数据")
   }
   function createHtml(opt){
-	  var html = '<table class="kalendar-table" border="0" cellpadding="0" cellspacing="0"><thead><tr><td colspan="7"><a href="javascript:;" class="pull-left prev-mon"><</a>'
-	             +opt.year+'年'+opt.month+'月<a href="javascript:;" class="pull-right next-mon">></a><div class="border"></div> </td></tr></thead><tbody>';
+	  var html = '<table class="kalendar-table" border="0" cellpadding="0" cellspacing="0"><thead><tr><td colspan="7"><a href="javascript:;" class="pull-left prev-mon"><</a><span id="kalendar_year">'
+	             +opt.year+'</span>年<span id="kalendar_month">'+opt.month+'</span>月<a href="javascript:;" class="pull-right next-mon">></a><div class="border"></div> </td></tr></thead><tbody>';
 	  var date_month = new Date();
 	      date_month.setFullYear(opt.year,opt.month,0),
 		  days = date_month.getDate();//这个月一共多少天
@@ -76,7 +74,7 @@
 			     }
 				 var now = i*7+j+1,now_num = now-first_day,price = !opt.price[now_num-1]?"&nbsp;":("￥"+opt.price[now_num-1]);
 				 if(first_day<now&&now<=days+first_day){
-					if(now_num>=day_now){
+					if(opt.month>month || opt.month==month && now_num>=day_now){
 						html+='<td><p>'+now_num+'</p><p class="price">'+price+'</p></td>'; 
 					}else{
 					    html+='<td class="ago"><p>'+now_num+'</p><p class="price">'+price+'</p></td>'; 

@@ -453,9 +453,13 @@
 				});
 		   $.fn.dateplug.ajax = function(e){
 			  //为每个日期的点击事件添加事件函数 当前日期可以通过class=current属性获取
+			  var month = $("#kalendar_month").html(),year = $("#kalendar_year").html();
+			  console.log("month: "+month+" year: "+year)
 		   }
 		   $.fn.dateplug.monthajax = function(){
 			   //获取相应月份的价格数据并返回  当前年月可获取
+			   var month = $("#kalendar_month").html(),year = $("#kalendar_year").html();
+			   //此处ajax应该设置为同步执行
 			   return [14,25,36,7,8];
 		   }
 			
