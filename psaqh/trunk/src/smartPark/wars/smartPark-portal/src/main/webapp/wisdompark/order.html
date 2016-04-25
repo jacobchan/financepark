@@ -37,7 +37,7 @@
             <div class="btn-change pre-top">
                 <i class="fa fa-angle-up fa-2x"></i>
             </div>
-            <div class="clearfix mt10 mb10" style="height:535px;overflow:hidden;">
+            <div class="clearfix mt10 mb10" style="max-height:535px;overflow:hidden;">
                 <ul class="order-nav bgfff" id="roomDtail" style="border:none">
                     <li class="clearfix">
                         <div class="fl"><img src="../styles/images/index/img.jpg" width="118" height="66"></div>
@@ -70,14 +70,6 @@
                     <li class="clearfix">
                         <div class="fl"><img src="../styles/images/index/img.jpg" width="118" height="66"></div>
                         <div class="fl ml10 lh30">
-
-                            <div class="f16 c3">创智中心7号楼</div>
-                            <p class="cc f12 f14">190元/小时</p>
-                        </div>
-                    </li>
-                    <li class="clearfix">
-                        <div class="fl"><img src="../styles/images/index/img.jpg" width="118" height="66"></div>
-                        <div class="fl ml10 lh30">
                             <div class="f16 c3">创智中心4号楼</div>
                             <p class="cc f14">260元/小时</p>
                         </div>
@@ -85,9 +77,8 @@
                     <li class="clearfix">
                         <div class="fl"><img src="../styles/images/index/img.jpg" width="118" height="66"></div>
                         <div class="fl ml10 lh30">
-
-                            <div class="f16 c3">创智中心7号楼</div>
-                            <p class="cc f12 f14">190元/小时</p>
+                            <div class="f16 c3">创智中心4号楼</div>
+                            <p class="cc f14">260元/小时</p>
                         </div>
                     </li>
                 </ul>
@@ -362,18 +353,22 @@
         var l=$(".order-nav li").size();
         var h=$(".order-nav li:first").outerHeight();
         $(".next-bottom").click(function(){
-            if(i>5-l){
+            if(i>5-l && l>5){
                 i=i-1;
-            }else if(i==5-l){
+            }else if(i==5-l && l>5){
+                i=0;
+            }else if(l<6){
                 i=0;
             }
             scholl(i);
         });
         $(".pre-top").click(function(){
-            if(i>4-l&&i<0){
+            if(i>4-l&&i<0 && l>5){
                 i=i+1;
-            }else if(i==0){
+            }else if(i==0 && l>5){
                 i=5-l;
+            }else if(l<6){
+                i=0;
             }
             scholl(i);
         });
