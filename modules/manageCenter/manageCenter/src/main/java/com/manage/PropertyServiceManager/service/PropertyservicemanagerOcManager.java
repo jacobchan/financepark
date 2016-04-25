@@ -129,4 +129,8 @@ public interface PropertyservicemanagerOcManager extends BaseManager{
    			 String ocLikeCode,
 			 String startTime,
 			 String endTime)  throws BusException;
+   	/**
+	* 根据主键查询 前台个人中心，一卡通预约详情   chenye
+	*/		
+    public PropertyservicemanagerOc getOc(@ServiceParam(name="bxId") String id)  throws BusException;
 }
