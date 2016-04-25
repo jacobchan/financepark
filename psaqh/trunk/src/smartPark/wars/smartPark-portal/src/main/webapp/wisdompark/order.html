@@ -31,8 +31,8 @@
     <div class="cosbox pl30 pt10">
 		<div class="clearfix mb10"><a href="business.html" class="cc f16 lh30"><i class="fa fa-angle-left fa-2x mr5 fl"></i>会议室预订</a></div>
         <div class="fl bgfff" style="width:330px;">
-            <ul class="order-nav" style="border:none">
-                <li class="clearfix">
+            <ul class="order-nav" id="roomDtail" style="border:none">
+                <!-- <li class="clearfix">
                     <div class="fl"><img src="../styles/images/index/img.jpg" width="118" height="66"></div>
                     <div class="fl ml10 lh30">
                         <div class="f16 c3">创智中心2号楼</div>
@@ -52,15 +52,15 @@
                         <div class="f16 c3">创智中心7号楼</div>
                         <p class="cc f12 f14">190元/小时</p>
                     </div>
-                </li>
+                </li> -->
             </ul>
         </div>
         <div class="fl ml30 bgfff p15 w780">
         	<div class="borderm pb10">
-            	<span class="cblue fw">创智中心二号楼321</span>
-                <div class="od_tip">视频会议室</div>
-                <div class="od_tip">有投影仪</div>
-                <div class="od_tip">10-30人</div>
+            	<span class="cblue fw"></span>
+                <div class="od_tip" id="roomType"></div>
+                <div class="od_tip" id="roomTyy"></div>
+                <div class="od_tip" id="roomGm"></div>
             </div>        	
             <div class="tc pr">
                 <div id='calendar'>
@@ -179,7 +179,53 @@
 <!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 <!--***bottom end****************************************-->
-
+    	 <!-- 弹出层样式未登录 -->
+    <div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715" id="msg">请登录后重试！</p>
+        </div>
+    </div>
+    
+       <div class="pop_layer">
+	<div class="online_box clearfix">
+	<div class="close0 fr"></div>
+    	<div class="fl w95">
+        	<div class="on_title">
+            	<span class="span_bold f18">填写在线预约单</span>
+            </div>
+            <div class="cc mt15 f12">*为了保证您的旅行顺利出行，请务必填写真实信息</div>
+            <form class="online_form mt20">
+            	<div>
+                    <div class="inline_b">
+                        <label><span class="cc vm">*</span>&nbsp;联系人</label>
+                        <input type="text" id="enteringName"/>
+                    </div>
+                    <div class="inline_b ml40">
+                        <label><span class="cc vm">*</span>&nbsp;联系电话</label>
+                        <input type="text" id="enteringTelephone"/>
+                    </div>
+                </div>
+                <div class="mt25">
+                    <div class="inline_b">
+                        <label><span class="cc vm"></span>&nbsp;联系邮箱</label>
+                        <input type="text"/>
+                    </div>
+                    <div class="inline_b ml40">
+                        <label>&nbsp;&nbsp;&nbsp;增值服务</label>
+                        <label class="ib-checkbox" style="width:auto"><input type="checkbox" class="vm mr5"/>茶水</label>
+                </div>
+                <div class="mt25">
+                	<label class="vt">&nbsp;&nbsp;&nbsp;备注</label>
+                    <textarea style="width:552px;height:150px"></textarea>
+                </div>
+                <div class="tc mt50">
+                	<div class="btn-cheng" style="padding:10px 30px">提交预约</div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!--******************  code end  ****************************-->
 <script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="../scripts/lib/jquery-ui.min.js"></script>
@@ -221,7 +267,6 @@
             var dates=$(".fc-day-header").eq(active).attr("data-date");
             alert(dates+"  "+time);
         });
-        
         $(".fc-next-button").on("click",this,function(){
             cursor++;
             var flag=judgment();
@@ -259,9 +304,23 @@
         }
         $(document).on("click",".order-nav li",function(){
             $(this).addClass("active").siblings().removeClass("active");
+            var commodityId=$(this).find("span").eq(0).text();
+            var commodityTitle=$(this).find("span").eq(1).text();
+            var roomType=$(this).find("span").eq(2).text();
+            var roomTyy=$(this).find("span").eq(3).text();
+            var roomGm=$(this).find("span").eq(4).text();
+            alert(roomType+roomTyy+roomGm);
+            $(".cblue.fw").text(commodityTitle);
+            $('#roomType').text(roomType);
+            $('#roomTyy').text(roomTyy);
+            $('#roomGm').text(roomGm);
+           
+            
         });
     });
 
 </script>
+	<!--***虚拟空间会议室预定引用JS****************************************-->
+<script type="text/javascript" src="../scripts/wisdompark/order.js"></script>
 </body>
 </html>
