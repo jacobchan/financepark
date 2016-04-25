@@ -45,3 +45,7 @@ ALTER TABLE `sp_reservation_record` ADD COLUMN `RECORD_COMMDITY_ID_` varchar(36)
 
 /* 新增活动文档数 */
 ALTER TABLE `sp_activity_apply` ADD COLUMN `DOCUMENT_COUNT_` INT(10);
+/*初始化文档数*/
+UPDATE sp_activity_apply a set a.DOCUMENT_COUNT_ ='0';
+/*update文档数*/
+update sp_activity_apply a inner join (select COUNT(b.DOCUMENT_PATH_) cc,b.APPLY_ID_ as appid from sp_activity_document b GROUP BY b.APPLY_ID_) c on a.APPLY_ID_ =c.appid set a.DOCUMENT_COUNT_ = c.cc;
