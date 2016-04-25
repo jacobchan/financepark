@@ -1035,3 +1035,11 @@ input[type="text"].error{border:1px solid #f82e3e !important;}
 .tct-select.error{border:1px solid #f82e3e !important;}
 textarea.error{border:1px solid #f82e3e !important;}
 input[type="password"].error{border:1px solid #f82e3e !important;}
+
+
+/**用户协议**/
+.xy-nav li a{display: block;width: 180px;line-height: 44px;font-size: 15px;text-align: center;border:1px solid #ddd;border-bottom: 0px;color: #222;font-weight: bold;}
+.xy-nav li:last-child a{border-bottom: 1px solid #ddd;}
+.xy-nav li:hover a,.xy-nav li.active a{background-color: #ff6a00;color: #fff;}
+.xy-article p{line-height: 24px;font-size: 14px;margin-bottom: 20px;}
+input[type="password"].error{border:1px solid #f82e3e !important;}
