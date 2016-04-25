@@ -163,6 +163,8 @@
 				pageCount=Math.ceil(results.totalCount/pageSize);//页数				
 				//alert(pageCount);
 				 refreshData_query(1,pageSize);
+				 $(".tcdPageCode").empty();
+				 if(totalCount>0){
 					$(".tcdPageCode").createPage({
 					    pageCount:pageCount,
 					    current:1,
@@ -171,7 +173,8 @@
 					       this.pageCount=pageCount;
 					       refreshData_query(p,pageSize);
 					    }
-					});			
+					});
+				 }
               }
         }); 			
     });	
