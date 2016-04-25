@@ -3,6 +3,7 @@
  */
 package com.manage.ReserveManager.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import com.gsoft.framework.core.service.BaseManager;
 import com.gsoft.framework.esb.annotation.ConditionCollection;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.PubCondition;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
@@ -111,7 +113,7 @@ public interface ReservationRecordManager extends BaseManager{
 	 * @return
 	 * @throws BusException
 	 */
-	public PagerRecords getReservationRecordsforpage(Pager pager,//分页条件
+	public PagerRecords getReservationRecordsforpage(Pager pager,//分页条件    chenye
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders,
 			String userId) throws BusException;
@@ -120,4 +122,12 @@ public interface ReservationRecordManager extends BaseManager{
      * @param genreCode=04:众创空间
      */
 	public List<PurchasingmanagerCommodity> getCommodityByGenreType(String genreCode) throws BusException;
+	 /**
+   	 * 获取已完成订单的totalCount     chenye
+   	 * @param conditions
+   	 * @return
+   	 * @throws BusException
+   	 */		    
+	public List<Record> getTotalCount(
+		   			Collection<Condition> conditions)  throws BusException;	 
 }
