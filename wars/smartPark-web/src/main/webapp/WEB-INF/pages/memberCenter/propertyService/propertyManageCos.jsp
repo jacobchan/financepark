@@ -78,9 +78,12 @@
 		 $.ajax({
 			url:baseUrl+'propertyservicemanagerCosManager/getTotalCount.json', 
 			success:function(results){	
-				var totalCount=results.records[0].totalCount;
-				pageCount = Math.ceil(totalCount / pageSize);//页数							
+				var totalCount=results.records[0].totalCount;				
+				 pageCount = Math.ceil(totalCount / pageSize);//页数	
+				 alert(pageCount);
 					refreshData(1,pageSize);
+					$(".tcdPageCode").empty();
+					if(totalCount>0){
 						$(".tcdPageCode").createPage({
 						pageCount:pageCount,
 						current:1,
@@ -89,7 +92,8 @@
 						this.pageCount=pageCount;
 						refreshData(p,pageSize);
 					}
-				});			
+				 });	
+				}
 			}
 		}); 			
 	});	
