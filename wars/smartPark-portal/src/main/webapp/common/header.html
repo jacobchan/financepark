@@ -94,7 +94,7 @@
 			    	<input type="text" class="input-search" id="rzName_head">
 			    </div>
 		    	<div class="fl">
-			    	<a href="" class="btn-search"></a>
+			    	<a style="cursor:pointer;" class="btn-search"></a>
 			    </div>
 		    </div>
 		    
@@ -239,6 +239,18 @@ $(function() {
 				thisCount = 0;
 			}
 		}
+	});
+	
+	//按名称搜索企业
+	$(".btn-search").click(function() {
+		var txtName = $("#rzName_head").val();
+		if(txtName=='' || txtName.length==0){
+			$('#msg').html('请输入企业名称！');
+			$(".toast").show();
+            setTimeout('$(".toast").hide();',2000);//1秒=1000
+			return false;
+		}
+		window.location.href = "/industrydatabase/enterprise.html?rzName="+txtName;
 	});
 });
 </script>
