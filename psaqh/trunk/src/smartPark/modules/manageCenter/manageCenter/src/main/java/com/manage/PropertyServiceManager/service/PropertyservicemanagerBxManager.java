@@ -95,27 +95,29 @@ public interface PropertyservicemanagerBxManager extends BaseManager{
 	 */
 	public PropertyservicemanagerBx updateBxforpage(String bxId) throws BusException;
 	
-	 /**
-		 * 根据当前用户分页查询   前台个人中心
-		 * @return 分页对象
-		 * @param conditions
-		 * @param startTime
-		 * @param endTime
-		 * @return
-		 * @throws BusException
-		 */
+	/** 
+	 * 根据当前用户分页查询   前台个人中心   chenye
+	 * @return 分页对象
+	 * @param conditions
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 * @throws BusException
+	 */	    
 	public PagerRecords getPagerBxs(Pager pager,//分页条件
 				Collection<Condition> conditions,//查询条件
 				Collection<Order> orders,String startTime,String endTime) throws BusException;
-		/**
-		 * 获取已完成订单的totalCount    前台个人中心    陈烨     
-		 * @param conditions
-		 * @param startTime
-		 * @param endTime
-		 * @return
-		 * @throws BusException
-		 */
-		public List<Record> getTotalCount(
-	   			Collection<Condition> conditions,String startTime,String endTime)  throws BusException;
-		
+	/**
+	 * 获取已完成订单的totalCount    前台个人中心    chenye     
+	 * @param conditions
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 * @throws BusException
+	 */		
+	public List<Record> getTotalCount(Collection<Condition> conditions,String startTime,String endTime)  throws BusException;
+	/**
+	 * 根据主键查询 前台个人中心，保修详情   chenye
+	 */
+	public PropertyservicemanagerBx getBx(String id)  throws BusException;	
 }
