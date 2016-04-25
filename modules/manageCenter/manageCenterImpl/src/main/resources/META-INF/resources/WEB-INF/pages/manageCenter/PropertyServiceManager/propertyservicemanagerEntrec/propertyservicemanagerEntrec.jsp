@@ -3,7 +3,7 @@
 <youi:page>
 	<youi:grid id="grid_propertyservicemanagerEntrec" idKeys="entrecId,propertyservicemanagerEntering.enteringId" caption="入驻服务办理预约记录表列表"  panel="false"
 				src="esb/web/propertyservicemanagerEntrecManager/getPagerPropertyservicemanagerEntrecs.json" dataFormId="form_propertyservicemanagerEntrec"
-				editSrc="esb/web/propertyservicemanagerEntrecManager/getPropertyservicemanagerEntrec.json" add="NOT" remove="NOT" showCheckbox="true"
+				editSrc="esb/web/propertyservicemanagerEntrecManager/getPropertyservicemanagerEntrec.json" add="NOT" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/propertyservicemanagerEntrecManager/removePropertyservicemanagerEntrec.json">
 		<youi:fieldLayout labelWidths="120,120">
 			<youi:fieldSelect property="enteringName"  caption="入驻申请人" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
@@ -35,6 +35,7 @@
 			 <youi:fieldHidden property="memberId"  caption="会员用户ID"/>
 			  <youi:fieldHidden property="enterrecCode"  caption="编号"/>
 			<youi:fieldHidden property="entrecId"  caption="入驻预约记录ID"/>
+			<youi:fieldHidden property="enteringType"  caption="申请类型"/>
 			<youi:fieldHidden property="propertyservicemanagerEntering.enteringId"  caption="预约记录ID"/>
 			<youi:fieldLabel property="propertyservicemanagerEntering.enteringTime"  caption="预约时间段" convert="enteringTime"/>
 			<youi:fieldLabel property="propertyservicemanagerEntering.enteringDate"  caption="预约时间日期" />
