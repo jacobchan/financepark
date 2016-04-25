@@ -369,4 +369,15 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 	   		recordList.add(record);
 	   		return recordList;
 	   	} 
+   /**
+	* 根据主键查询 前台个人中心，一卡通预约详情   chenye
+	*/		
+    @EsbServiceMapping  
+    public PropertyservicemanagerOc getOc(@ServiceParam(name="ocId") String id)  throws BusException{
+    	PropertyservicemanagerOc oc=propertyservicemanagerOcDao.get(id);
+		String memberId=oc.getMemberId();
+		MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId); 
+		oc.setMember(memberInformation);
+		return oc;
+		}	       
 }
