@@ -88,9 +88,10 @@
     $(function () {		
 		//分页页码显示
 		 $.ajax({
-			url:serviceURL, 
+			url: baseUrl+'propertyservicemanagerFkcodeManager/getTotalCount.json', 
 			success:function(results){	
-				pageCount=Math.ceil(results.totalCount/pageSize);//页数							
+				var totalCount=results.records[0].totalCount;
+				pageCount = Math.ceil(totalCount / pageSize);//页数						
 				refreshData(1,pageSize);
 				$(".tcdPageCode").createPage({
 					pageCount:pageCount,
@@ -227,8 +228,7 @@
 	<!-- 取消访客 -->
 	<script type="text/javascript">
 	$(function(){
-		$(".hhf-submit.c").click(function(){
-			
+		$(".hhf-submit.c").click(function(){	
 				var id=$(".fkCode")[0].getAttribute("id");
 			 	$.youi.ajaxUtils.ajax({
 					url:baseUrl+'propertyservicemanagerFkcodeManager/cancelStatus.json',
