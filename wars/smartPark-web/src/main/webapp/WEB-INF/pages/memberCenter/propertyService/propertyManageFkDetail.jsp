@@ -120,7 +120,7 @@
 							fkcodeComp="";
 						}
 						$('#fkcodeComp').html("到访企业："+fkcodeComp);
-						$('#fkcodeTime').html("到访时间："+fkcodeTime);									
+						$('#fkcodeTime').html("到访时间："+record.fkcodeTime);									
 						$('#fkcodeRemark').html("访客说明："+record.fkcodeRemark);															
 						$('#memberName').html("访客姓名："+record.fkcodeName);
 						$('#memberPhoneNumber').html("访客电话："+record.fkcodeTelephone);
