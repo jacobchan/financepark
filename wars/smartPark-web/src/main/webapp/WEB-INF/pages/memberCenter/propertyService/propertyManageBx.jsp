@@ -205,7 +205,9 @@
 				var totalCount=results.records[0].totalCount;
 				pageCount = Math.ceil(totalCount / pageSize);//页数					
 				refreshData_query(1,pageSize);
-				$(".tcdPageCode").createPage({
+				$(".tcdPageCode").empty();
+				if(totalCount>0){
+					$(".tcdPageCode").createPage({
 					    pageCount:pageCount,
 					    current:1,
 					    backFn:function(p){
@@ -213,7 +215,8 @@
 					       this.pageCount=pageCount;
 					       refreshData_query(p,pageSize);
 					    }
-				});			
+					});
+				}
               }
         }); 			
     });	
