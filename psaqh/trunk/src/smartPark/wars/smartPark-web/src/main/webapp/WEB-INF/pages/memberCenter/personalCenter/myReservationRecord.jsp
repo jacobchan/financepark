@@ -58,11 +58,16 @@
 		//分页页码显示
 		 $.ajax({
 			url:baseUrl+'reservationRecordManager/getTotalCount.json',
+			beforeSend: function(){
+				//开始显示loading样式
+				$.showBox.Loading();
+			},
 			success:function(results){	
 				var totalCount=results.records[0].totalCount;
 				pageCount = Math.ceil(totalCount / pageSize);
 							 refreshData(1,pageSize);
 							//插入页码
+							if(totalCount>0){
 								$(".tcdPageCode").createPage({
 								    pageCount:pageCount,
 								    current:1,
@@ -71,7 +76,10 @@
 								       this.pageCount=pageCount;
 								        refreshData(p,pageSize);
 								    }
-								});			
+								});	
+							}
+							//关闭loading样式
+							$.showBox.CloseLoading();
 			}
 		}); 			
 		}
