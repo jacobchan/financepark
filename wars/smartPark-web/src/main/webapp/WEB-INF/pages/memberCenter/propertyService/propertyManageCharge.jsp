@@ -30,8 +30,11 @@
 								<th>操作</th>
 							</tr>
 							</tbody><tbody class="chargelist">
-							
-						</tbody></table>
+							   <tr>
+				     	          <td colspan="6">暂无记录</td>
+				                </tr> 
+						     </tbody>
+						</table>
 						<div class="tcdPageCode fr"></div>
 					</div>
 				</div>	
@@ -102,19 +105,18 @@
 							pageCount=Math.ceil(results.totalCount/pageSize);//页数
 							
 							 refreshData(1,pageSize);
-								$(".tcdPageCode").createPage({
-								    pageCount:pageCount,
-								    current:1,
-								    backFn:function(p){
+							 $(".tcdPageCode").empty();
+								if(totalCount>0){
+								    $(".tcdPageCode").createPage({
+								        pageCount:pageCount,
+								        current:1,
+								        backFn:function(p){
 								    	currentIndex = p;
-								       this.pageCount=pageCount;
+								        this.pageCount=pageCount;
 								        refreshData(p,pageSize);
 								    }
-								});			
-			/* 	if(result&&result.records){
-					_parseRecords(result.records);
-				} */
-			}
+								});						
+								}
 		}); 			
 	});	
 	
