@@ -125,7 +125,7 @@
 			}			
 			  var html="<div class='gz-fx-box clearfix' id='"+id +"'  >"+
 						    "<div class='gzb-thead'>"+
-						        "<span class='c-o'>订单号："+record[i].moverecCode+"</span>"+
+						        "<span class='c-o'>"+record[i].moverecCode+"</span>"+
 							    "<a href='javascript:;' class='fr f12'><i class='fa fa-file-text-o mr10 f20' style='font-size:20px;margin-top:5px;'></i>查看订单详情</a>"+					
 						    "</div>"+ 						   						  
 							"<div class='fx-one p20'>"+
