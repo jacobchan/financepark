@@ -57,10 +57,10 @@
 	function loadData(){	
 		//分页页码显示
 		 $.ajax({
-			url:serviceURL, 
-			success:function(results){	
-							pageCount=Math.ceil(results.totalCount/pageSize);//页数
-							//alert(pageCount);
+				 url:baseUrl+'propertyservicemanagerEntrecManager/getTotalCount.json', 
+				 success:function(results){	
+					var totalCount=results.records[0].totalCount;
+					pageCount = Math.ceil(totalCount / pageSize);
 							 refreshData(1,pageSize);
 							//插入页码
 								$(".tcdPageCode").createPage({
