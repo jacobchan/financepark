@@ -278,7 +278,7 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
    	 * @return
    	 * @throws BusException
    	 */
-    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+    @EsbServiceMapping(pubConditions={@PubCondition(property="memberInformation.memberId",operator=Condition.EQUALS,pubProperty="userId")})
    	public List<Record> getTotalCount(
    			@ConditionCollection(domainClazz=PropertyservicemanagerCos.class) Collection<Condition> conditions,
    			@ServiceParam(name="startTime") String startTime,
