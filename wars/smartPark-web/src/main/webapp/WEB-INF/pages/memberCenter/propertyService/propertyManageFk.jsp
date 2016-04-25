@@ -90,8 +90,7 @@
 		 $.ajax({
 			url: baseUrl+'propertyservicemanagerFkcodeManager/getTotalCount.json', 
 			success:function(results){	
-				var totalCount=results.records[0].totalCount;
-				
+				var totalCount=results.records[0].totalCount;				
 				pageCount = Math.ceil(totalCount / pageSize);//页数					
 				 refreshData(1,pageSize);
 				 $(".tcdPageCode").empty();
@@ -200,6 +199,8 @@
 				success:function(results){	
 					pageCount=Math.ceil(results.totalCount/pageSize);//页数				
 					 refreshData_query(1,pageSize);
+					 $(".tcdPageCode").empty();
+					 if(totalCount>0){
 						$(".tcdPageCode").createPage({
 						    pageCount:pageCount,
 						    current:1,
@@ -208,7 +209,8 @@
 						       this.pageCount=pageCount;
 						       refreshData_query(p,pageSize);
 						    }
-						});			
+						});
+					 }
 	              }
 	        }); 			
 	    });	
