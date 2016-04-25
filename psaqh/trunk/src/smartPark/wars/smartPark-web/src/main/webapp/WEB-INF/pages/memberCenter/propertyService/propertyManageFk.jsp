@@ -138,7 +138,7 @@
 					status = "已取消";
 				}
 				var html="<tr id='"+id +"' >"+
-						"<td><a href=''>"+record[i].fkCode+"</a></td>"+
+						"<td><a href='javascript:;' onclick='viewDetail(\""+record[i].fkcodeId+"\")' class='ac-show'>"+record[i].fkCode+"</a></td>"+
 						"<td>"+time+"</td>" +	
 						"<td class='"+id+"'>"+status+"</td>"+
 					    "<td>"+record[i].fkcodeName+"</td>"+
@@ -265,18 +265,20 @@
 			setTimeout(function(){$(".toast").hide(); },2000);
 			refreshData(currentIndex,pageSize);
    }
-	  $(function () {
-			
-			$(".hhf-submit.c").click(function(){
-				$(".bg-tanc.m1").hide();
-			});									
-		}) 
+    $(function () {		
+		$(".hhf-submit.c").click(function(){
+			$(".bg-tanc.m1").hide();
+		});									
+	}) 	  
 	</script>
 	<script type="text/javascript">
 	    //点击跳转到访客申请页面
-		$("#a1").click(function(){			
-			location.href = proUrl + "yqfw/yq4.html" ;
-		})	
-		
+	$("#a1").click(function(){			
+		location.href = proUrl + "yqfw/yq4.html" ;
+	})	
+		//点击跳转到访客详情页面
+	function viewDetail(fkcodeId){			
+		window.location.href=cenUrl+"member/memberCenter/propertyService/propertyManageFkDetail.html?fkcodeId="+fkcodeId;
+	};
      </script>
 </youi:html>
