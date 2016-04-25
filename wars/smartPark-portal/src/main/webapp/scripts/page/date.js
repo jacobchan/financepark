@@ -38,9 +38,11 @@
 				 $this.slideUp();
 				 });
 		     $this.on("click","tbody td",function(){
-				  if($(this).hasClass("ago")){
+				  if($(this).hasClass("ago")||$(this).html().length==0){
 					 return;  
 				  }else{
+					 $(this).parent().parent().find("td").removeClass("current");
+					 $(this).addClass("current");
 					 $.fn.dateplug.ajax();  
 				  }
 				 })
