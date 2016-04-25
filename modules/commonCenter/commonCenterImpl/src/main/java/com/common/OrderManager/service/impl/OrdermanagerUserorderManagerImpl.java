@@ -28,6 +28,8 @@ import com.common.purchasingManager.entity.PurchasingmanagerGenreProperty;
 import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
 import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
 import com.common.purchasingManager.service.PurchasingmanagerGenrePropertyManager;
+import com.common.wxpay.protocol.UnifiedOrderReqData;
+import com.common.wxpay.service.WxPayManager;
 import com.gsoft.framework.codemap.dao.CodeitemDao;
 import com.gsoft.framework.codemap.entity.Codeitem;
 import com.gsoft.framework.core.dataobj.Record;
@@ -69,6 +71,8 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	private CodeitemDao<Codeitem, String> codeItemDao;
 	@Autowired
 	private ExtentionAtrManager extentionAtrManager;
+	@Autowired
+	private WxPayManager wxPayManager;
 	
     /**
      * 查询列表
@@ -845,6 +849,23 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		}
   		return pagerRecords;
   	}  
+    /**
+  	 * 获取支付二维码
+  	 * @param conditions
+  	 * @return
+     * @throws Exception 
+  	 */
+    @Override
+    @EsbServiceMapping
+    public String getPayQrcodeByCode(@ServiceParam(name="userorderCode") String userorderCode) throws Exception{
+    	OrdermanagerUserorder order = ordermanagerUserorderDao.getObjectByUniqueProperty("userorderCode", userorderCode);
+    	UnifiedOrderReqData unifiedOrderReqData = new UnifiedOrderReqData(
+    			order.getUserorderProject(), order.getUserorderCode(), 1, 
+				"127.0.0.1", "NATIVE", null, order.getUserorderCode(), 
+				order.getUserorderProject(), null, null, null, null, null, null);
+    	String codeUrl = wxPayManager.requestUnifiedOrderService(unifiedOrderReqData);
+    	return codeUrl;
+    }
 }
 
 
