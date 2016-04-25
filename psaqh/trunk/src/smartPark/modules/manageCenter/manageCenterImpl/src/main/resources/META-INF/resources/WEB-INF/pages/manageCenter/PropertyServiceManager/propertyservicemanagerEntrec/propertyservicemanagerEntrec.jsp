@@ -3,7 +3,7 @@
 <youi:page>
 	<youi:grid id="grid_propertyservicemanagerEntrec" idKeys="entrecId,propertyservicemanagerEntering.enteringId" caption="入驻服务办理预约记录表列表"  panel="false"
 				src="esb/web/propertyservicemanagerEntrecManager/getPagerPropertyservicemanagerEntrecs.json" dataFormId="form_propertyservicemanagerEntrec"
-				editSrc="esb/web/propertyservicemanagerEntrecManager/getPropertyservicemanagerEntrec.json" edit="NOT" remove="NOT" showCheckbox="true"
+				editSrc="esb/web/propertyservicemanagerEntrecManager/getPropertyservicemanagerEntrec.json" add="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/propertyservicemanagerEntrecManager/removePropertyservicemanagerEntrec.json">
 		<youi:fieldLayout labelWidths="120,120">
 			<youi:fieldSelect property="enteringName"  caption="入驻申请人" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
@@ -12,7 +12,7 @@
 			<youi:fieldCalendar property="enteringDate"  caption="预约时间日期" textFormat="yyyy-MM-dd" format="yyyy-MM-dd"/>
 		</youi:fieldLayout>
 		<youi:button name="cancelReservation" caption="取消预约" icon="edit" active="1"></youi:button> 
-		<youi:button name="changeStatues" caption="预约授理" icon="edit" active="1"></youi:button> 
+		<youi:button name="changeStatues" caption="预约受理" icon="edit" active="1"></youi:button> 
 		<youi:gridCol property="enterrecCode"  caption="入驻受理编号" width="20%" align="center"/>
 		<youi:gridCol property="enteringName"  caption="入驻申请人" width="10%" align="center"/>
 	    <youi:gridCol property="enteringTelephone"  caption="入驻联系电话" width="15%" align="center"/>
@@ -30,17 +30,15 @@
 	<!-- form-入驻服务办理预约记录表编辑 -->
 	<youi:form dialog="true" caption="入驻服务办理预约记录表" id="form_propertyservicemanagerEntrec" action="esb/web/propertyservicemanagerEntrecManager/savePropertyservicemanagerEntrec.json">
 		<youi:fieldLayout prefix="record" labelWidths="90,100">
-			<youi:fieldSelect property="enteringName"  caption="入驻申请人" notNull="true" src="esb/web/memberInformationManager/getMemberInformations.json" code="memberId" show="memberName"/>
+			<youi:fieldLabel property="enteringName"  caption="入驻申请人"/>
 			 <youi:fieldLabel property="enteringTelephone"  caption="入驻联系电话"/>
-		<%-- 	  <youi:fieldLabel property="enteringTelephone"  caption="入驻联系电话" expression="^1[3|4|5|8|9]{1}[0-9]{9,9}$" expressionMessage="请填写正确的手机号码" notNull="true"/> --%>
 			 <youi:fieldHidden property="memberId"  caption="会员用户ID"/>
-			 <youi:fieldHidden property="enterrecStatus"  caption="预约记录状态"/>
 			  <youi:fieldHidden property="enterrecCode"  caption="编号"/>
-			<youi:fieldSelect property="propertyservicemanagerEntering.enteringId"  caption="预约记录ID" src="esb/web/propertyservicemanagerEnteringManager/getPropertyservicemanagerEnteringsByStatus.json" code="enteringId" show="enteringId" notNull="true"/>
 			<youi:fieldHidden property="entrecId"  caption="入驻预约记录ID"/>
-<%-- 			<youi:fieldSelect property="enterrecStatus"  caption="预约记录状态" convert="enterrecStatus" notNull="true"/> --%>
-			<youi:fieldLabel property="enteringTime"  caption="预约时间段" convert="enteringTime"/>
-			<youi:fieldLabel property="enteringDate"  caption="预约时间日期" />
+			<youi:fieldHidden property="propertyservicemanagerEntering.enteringId"  caption="预约记录ID"/>
+			<youi:fieldLabel property="propertyservicemanagerEntering.enteringTime"  caption="预约时间段" convert="enteringTime"/>
+			<youi:fieldLabel property="propertyservicemanagerEntering.enteringDate"  caption="预约时间日期" />
+			<youi:fieldSelect property="enterrecStatus"  caption="预约记录状态" convert="enterrecStatus" notNull="true"/> 
 		</youi:fieldLayout>
 	</youi:form>
 	
@@ -81,17 +79,19 @@
 		selectedRecord = gridElement.grid('getSelectedRecord');
       	var entrecId = selectedRecord.entrecId;
         var enterrecStatus = selectedRecord.enterrecStatus;
+        var enteringType= selectedRecord.enteringType;
         if(enterrecStatus == '01'){//01:已预约
-             $.youi.ajaxUtil.ajax({
+                 $.youi.ajaxUtil.ajax({
 				url:'/esb/web/propertyservicemanagerEntrecManager/enterApplication.json',
-				data:{entrecId:entrecId},
+				data:{entrecId:entrecId,enteringType:enteringType},
 				success:function(result){
-					alert("授理成功");
+					alert("受理成功");
                     $elem('grid_propertyservicemanagerEntrec',pageId).grid('pReload');
                   } 
             })
+
         }else if(enterrecStatus == '02'){//02:已授理
-          alert("已授理");
+          alert("已受理");
         }else{
             alert("该状态下不能进行授理");
 
