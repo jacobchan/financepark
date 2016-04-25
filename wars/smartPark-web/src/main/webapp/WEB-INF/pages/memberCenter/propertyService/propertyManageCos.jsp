@@ -12,7 +12,8 @@
 							<div class="inp-box ml20"><input placeholder="投诉单号查询" type="text" id="cosCode"><a class="fa fa-search" href=""></a></div>
 							<input value="搜索" class="hhf-submit query" type="button">
 						</div>
-						
+			
+					
 						<table class="gt-table mt20">
 							<colgroup>
 								<col width="150"></col>
@@ -80,7 +81,6 @@
 			success:function(results){	
 				var totalCount=results.records[0].totalCount;				
 				 pageCount = Math.ceil(totalCount / pageSize);//页数	
-				 alert(pageCount);
 					refreshData(1,pageSize);
 					$(".tcdPageCode").empty();
 					if(totalCount>0){
