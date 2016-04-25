@@ -14,10 +14,10 @@
 						</div>
 						<table class="gt-table mt20">
 							<colgroup>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="120"></col>
+								<col width="200"></col>
+								<col width="130"></col>
+								<col width="130"></col>
+								<col width="110"></col>
 								<col width="150"></col>
 								<col></col>
 							</colgroup>
@@ -125,11 +125,13 @@
 			for(var i=0;i<record.length;i++){
 				var id = record[i].fkcodeId ;
 				var time = record[i].fkcodeTime ;
+				var cancelbutton="";
 				if(time){
 					time = time.substring(0,10) ;
 				}
 				if(record[i].dksataus=="00"){
-					status = "未到访";					
+					status = "未到访";	
+					cancelbutton="<span class='f12 ml5 mr5'>|</span><a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消访客</a>";
 				}else if(record[i].dksataus=='01'){
 					status = "未到访";				
 				}else if(record[i].dksataus=='02'){
@@ -143,9 +145,9 @@
 						"<td class='"+id+"'>"+status+"</td>"+
 					    "<td>"+record[i].fkcodeName+"</td>"+
 						"<td>"+record[i].fkcodeTelephone+"</td>"+
-						"<td><a href='javascript:;' onclick='javascript:qrcode(this)' class='ac-see'>查看二维码</a>"+"</td>"+
+						"<td><a href='javascript:;' onclick='javascript:qrcode(this)' class='ac-see'>查看二维码</a>"+cancelbutton+"</td>"+
 						"</tr>";
-				 $("tbody").append(html);							
+				 $(".fklist").append(html);							
 			}}else{
 				var	html1 = '<tr>'
 					html1 += '	<td colspan="6">暂无记录</td>'
