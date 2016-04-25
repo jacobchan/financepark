@@ -125,7 +125,7 @@
 					bxStatus='已完工';
 				}else if(record[i].bxStatus=='05'){
 					bxStatus='已定价';
-					buttonHtml="<td><a href='javascript:;'>付款</a><span class='f12 ml5 mr5'>|</span><a href='javascript:;' onclick='javascript:redeal(\""+record[i].bxId+"\")'>申请重修</a></td>";
+					buttonHtml="<td><a href='javascript:;'>付款</a></td>";
 				}else if(record[i].bxStatus=='06'){
 					bxStatus='已付款';
 				}else if(record[i].bxStatus=='07'){
