@@ -55,19 +55,13 @@ function _parseRecords(records){
 	if(records.length>0){
 		$("#enterprise").empty();
 		for(var i=0;i<records.length;i++){
-			var memberName = records[i].rzManager.memberName;
-			if(memberName.length > 3){
-				memberName = memberName.substr(0,3);
-			}
-			var enTypeName = records[i].enTypeId.enTypeName;
-			if(enTypeName.length > 3){
-				enTypeName = enTypeName.substr(0,3);
-			}
 			var rzRemark = records[i].rzRemark;
 			if(rzRemark == null){
 				rzRemark = "";
 			}
 			var a = (stringLen(records[i].rzName)>20)?stringCut(records[i].rzName, 20):records[i].rzName;
+			var memberName = (stringLen(records[i].rzManager.memberName)>3)?stringCut(records[i].rzManager.memberName, 3):records[i].rzManager.memberName;
+			var enTypeName = (stringLen(records[i].enTypeId.enTypeName)>3)?stringCut(records[i].enTypeId.enTypeName, 3):records[i].enTypeId.enTypeName;
 			var enterDiv = '<div class="yqfu-com-centent">'+
 			'<div class="ycc-con"><img src="../styles/images/yqfw/comp1.png" width="106" height="106"></div>'+
 			'<a href="industry.html?id='+records[i].rzId+'"><p class="p-bottom">'+rzRemark+'</p></a>'+
@@ -105,6 +99,62 @@ function findEnterpriseTree(pId,y){
 			$("#enterdd"+y).append(lastJson);
 		}
 	});
+};
+function search(txtName){
+	var params = ['rzName='+txtName];
+	var serviceURL = baseUrl+"enterbusinessmanagerRzManager/findEnterbusinessmanagerRzByName.json";
+	if(txtName=='' || txtName.length==0){
+		$('#toast_text').html('请输入企业名称！');
+		$(".toast").show();
+        setTimeout('$(".toast").hide();',2000);//1秒=1000
+		return false;
+	}
+	//根据企业名称搜索企业信息
+	$.youi.ajaxUtils.ajax({
+		url : serviceURL,
+		data:params.join('&'),
+		jsonp : 'data:jsonp',
+		dataType : 'jsonp',
+		async : false,
+		success : function(results) {
+			if (results && results.records) {
+				$("#enterprise").empty();
+				var records = results.records;
+				for(var i=0; i<records.length; i++){
+					var a = (stringLen(records[i].rzName)>20)?stringCut(records[i].rzName, 20):records[i].rzName;
+					var memberName = (stringLen(records[i].rzManager.memberName)>3)?stringCut(records[i].rzManager.memberName, 3):records[i].rzManager.memberName;
+					var enterDiv = '<div class="yqfu-com-centent">'+
+					'<div class="ycc-con"><img src="../styles/images/yqfw/comp1.png"></div>'+
+					'<a href="industry.html?id='+records[i].rzId+'"><p class="p-bottom">'+records[i].rzRemark+'</p></a>'+
+					'<div class="clearfix c-bottom lh24">'+
+					'<a href="industry.html?id='+records[i].rzId+'"><font class="c-o f14">'+a+'</font></a>'+
+					'<a href="javascript:;" class="yc-gz fr"><font class="f14">+</font>关注</a>'+
+					'<div class="clearfix c-p mt10">'+
+						'<span><img src="../styles/images/yqfw/map.png" class="mr5">武汉市</span>'+
+						'<span style="margin: 0px 33px;">'+
+						'<img src="../styles/images/yqfw/user.png" class="mr5">'+memberName+'</span>'+
+						'<span><img src="../styles/images/yqfw/ticket.png" class="mr5">'+records[i].enTypeId.enTypeName+'</span>'+
+					'</div></div></div>';
+					$("#enterprise").append(enterDiv);
+				}
+			}else{
+				$("#enterprise").empty();
+				$("#enterprise").append('<div class="tc" style="background:#f6f6f6;height:600px;"><img src="../styles/images/none1.png" border="0" style="margin-top:200px;" /></div>');
+			}
+		}
+	});
+};
+function GetRequest() {
+   var url = location.search; //获取url中"?"符后的字串
+   var theRequest = new Object();
+   if (url.indexOf("?") != -1) {
+      var str = url.substr(1);
+      strs = str.split("&");
+      for(var i = 0; i < strs.length; i ++) {
+         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+      }
+   }
+   return theRequest;
 }
 $(function() {
 	$(document).on("click",".w860 dd",function(){
@@ -131,96 +181,34 @@ $(function() {
 	//按名称搜索企业
 	$(".yih-btn-search").click(function() {
 		var txtName = $("#rzName").val();
-		var params = ['rzName='+txtName];
-		var serviceURL = baseUrl+"enterbusinessmanagerRzManager/findEnterbusinessmanagerRzByName.json";
-		if(txtName=='' || txtName.length==0){
-			alert("请输入企业名称");
-			return false;
-		}
-		//根据企业名称搜索企业信息
+		search(txtName);
+	});
+	
+	var Request = new Object();
+	Request = GetRequest();
+	var rzName = Request['rzName'];
+	if(rzName == null|| rzName == ""){
 		$.youi.ajaxUtils.ajax({
 			url : serviceURL,
-			data:params.join('&'),
 			jsonp : 'data:jsonp',
 			dataType : 'jsonp',
-			async : false,
-			success : function(results) {
-				if (results && results.records) {
-					var records = results.records;
-					for(var i=0; i<records.length; i++){
-						var a = (stringLen(records[i].rzName)>20)?stringCut(records[i].rzName, 20):records[i].rzName;
-						var enterDiv = '<div class="yqfu-com-centent">'+
-						'<div class="ycc-con"><img src="../styles/images/yqfw/comp1.png"></div>'+
-						'<a href="industry.html?id='+records[i].rzId+'"><p class="p-bottom">'+records[i].rzRemark+'</p></a>'+
-						'<div class="clearfix c-bottom lh24">'+
-						'<a href="industry.html?id='+records[i].rzId+'"><font class="c-o f14">'+a+'</font></a>'+
-						'<a href="javascript:;" class="yc-gz fr"><font class="f14">+</font>关注</a>'+
-						'<div class="clearfix c-p mt10">'+
-							'<span><img src="../styles/images/yqfw/map.png" class="mr5">武汉市</span>'+
-							'<span style="margin: 0px 33px;">'+
-							'<img src="../styles/images/yqfw/user.png" class="mr5">'+records[i].rzManager.memberName+'</span>'+
-							'<span><img src="../styles/images/yqfw/ticket.png" class="mr5">'+records[i].enTypeId.enTypeName+'</span>'+
-						'</div></div></div>';
-						$("#enterprise").empty();
-						$("#enterprise").append(enterDiv);
+			success : function(result){
+				pageCount=Math.ceil(result.totalCount/pageSize);
+				refreshData(1,pageSize);
+				$(".tcdPageCode").createPage({
+					pageCount:pageCount,
+					current:1,
+					backFn:function(p){
+					   	this.pageCount=pageCount;
+					    refreshData(p,pageSize);
 					}
-				}else{
-					$("#enterprise").empty();
-					$("#enterprise").append('<div class="tc" style="background:#f6f6f6;height:600px;"><img src="../styles/images/none1.png" border="0" style="margin-top:200px;" /></div>');
-				}
+				});
 			}
 		});
-	});
+	}else{
+		search(rzName);
+	}
 	
-	$.youi.ajaxUtils.ajax({
-		url : serviceURL,
-		jsonp : 'data:jsonp',
-		dataType : 'jsonp',
-		success : function(result){
-			pageCount=Math.ceil(result.totalCount/pageSize);
-			refreshData(1,pageSize);
-			$(".tcdPageCode").createPage({
-				pageCount:pageCount,
-				current:1,
-				backFn:function(p){
-				   	this.pageCount=pageCount;
-				    refreshData(p,pageSize);
-				}
-			});
-		}
-	});
-	
-	//企业列表
-	//获取所有企业信息
-	/*$("#enterprise").empty();
-	var serviceURL = baseUrl+"enterbusinessmanagerRzManager/getEnterbusinessmanagerRzs.json";
-	$.youi.ajaxUtils.ajax({
-		url : serviceURL,
-		jsonp : 'data:jsonp',
-		dataType : 'jsonp',
-		async : false,
-		success : function(results) {
-			if (results && results.records) {
-				var records = results.records;
-				for(var i=0; i<records.length; i++){
-					var a = (stringLen(records[i].rzName)>20)?stringCut(records[i].rzName, 20):records[i].rzName;
-					var enterDiv = '<div class="yqfu-com-centent">'+
-					'<div class="ycc-con"><img src="/filestore/'+records[i].rzLogo+'" width="106" height="106"></div>'+
-					'<a href="industry.html?id='+records[i].rzId+'"><p class="p-bottom">'+records[i].rzRemark+'</p></a>'+
-					'<div class="clearfix c-bottom lh24">'+
-					'<a href="industry.html?id='+records[i].rzId+'"><font class="c-o f14">'+a+'</font></a>'+
-					'<a href="javascript:;" class="yc-gz fr"><font class="f14">+</font>关注</a>'+
-					'<div class="clearfix c-p mt10">'+
-						'<span><img src="../styles/images/yqfw/map.png" class="mr5">武汉市</span>'+
-						'<span style="margin: 0px 33px;">'+
-						'<img src="../styles/images/yqfw/user.png" class="mr5">'+records[i].rzManager.memberName+'</span>'+
-						'<span><img src="../styles/images/yqfw/ticket.png" class="mr5">'+records[i].enTypeId.enTypeName+'</span>'+
-					'</div></div></div>'
-					$("#enterprise").append(enterDiv);
-				}
-			}
-		}
-	});*/
 	//行业类型
 	$.youi.ajaxUtils.ajax({
 		url : baseUrl+'/etypeEnterprisetypeManager/getParentEnterpriseType.json',
