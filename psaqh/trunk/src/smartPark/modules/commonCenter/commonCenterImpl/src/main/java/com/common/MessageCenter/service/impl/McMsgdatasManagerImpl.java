@@ -6,7 +6,6 @@ package com.common.MessageCenter.service.impl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -101,6 +100,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 			Pager pager,// 分页条件
 			@ConditionCollection(domainClazz = McMsgdatas.class) Collection<Condition> conditions,// 查询条件
 			@OrderCollection Collection<Order> orders) throws BusException {
+		orders.add(ConditionUtils.getOrder("sendDate", false));
 		PagerRecords pagerRecords = mcMsgdatasDao.findByPager(pager,
 				conditions, orders);
 		return pagerRecords;
@@ -305,6 +305,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 			}catch (Exception e) {
 				success =  false;
 			}
+			mmd.setSendDate(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 			mmd.setReceive(phone);
 			mmd.setMsgCaption(mmt.getMsgTempalateCaption());
 			mmd.setMsgContent(content);
