@@ -39,11 +39,11 @@
                     <input type="hidden" value="${memberId}" id=memberId >
                     <div class="clearfix mt25">
                         <span class="mr15 fl">新密码</span>
-                        <input type="text" id="passwd" placeholder="新密码">
+                        <input type="password" id="passwd" placeholder="新密码">
                     </div>
                    <div class="clearfix mt25">
                         <span class="mr15 fl">确认新密码</span>
-                        <input type="text" id="repasswd" placeholder="确认新密码">
+                        <input type="password" id="repasswd" placeholder="确认新密码">
                     </div>
                    <a class="ib-btn mt25"  style="width:350px;margin-left:85px;" href="javascript:;">确定</a>
                 </div>
