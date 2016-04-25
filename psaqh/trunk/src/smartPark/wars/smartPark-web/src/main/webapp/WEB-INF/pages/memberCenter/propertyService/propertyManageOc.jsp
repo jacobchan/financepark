@@ -34,8 +34,7 @@
 					</div>
 				</div>
 			</youi:body>
-				<div class="toast">              
-    </div>
+				
     <!--***弹窗start****************************************-->
   
      	<div class="toast">
