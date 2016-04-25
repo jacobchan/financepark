@@ -60,11 +60,11 @@
 		var gridElement = $elem('grid_policyApply',pageId),
         selectedRecord = gridElement.grid('getSelectedRecord');
 		var policyApplyStatus = selectedRecord.policyApplyStatus;
- 		if(policyApplyStatus == '4'){
+ 		if(policyApplyStatus == '04'){
 			alert("当前政策申请已取消，无法处理流程！") ;
-		}else if(policyApplyStatus == '3'){
+		}else if(policyApplyStatus == '03'){
 			alert("当前政策已经申请失败，无法处理流程！") ;
-		}else if(policyApplyStatus == '2'){
+		}else if(policyApplyStatus == '02'){
 			alert("当前政策流程已经处理完，无需再处理！") ;
 		}else{
 			$.youi.messageUtils.confirm('处理任务?',function(){
@@ -85,7 +85,7 @@
 			var gridElement = $elem('grid_policyApply',pageId),
 			selectedRecord = gridElement.grid('getSelectedRecord');
 			var policyApplyStatus = selectedRecord.policyApplyStatus;
-			if(policyApplyStatus == '1'){
+			if(policyApplyStatus == '01'){
 				$.youi.messageUtils.confirm('确定拒绝申请?',function(){
 					$.youi.ajaxUtil.ajax({
 					url:'/esb/web/policyApplyManager/updatePolicyApplyStatus.json',
@@ -96,9 +96,9 @@
 						}
 					});
 				});
-			}else if(policyApplyStatus=='2'){
+			}else if(policyApplyStatus=='02'){
 				alert("申请成功的状态无法拒绝申请!");
-			}else if(policyApplyStatus=='3'){
+			}else if(policyApplyStatus=='03'){
 				alert("申请状态已经是申请失败了！");
 			}else{
 				alert("申请为已取消，无法拒绝！");
