@@ -7,12 +7,16 @@ import java.util.List;
 import java.util.Collection;
 
 import com.gsoft.entity.TempDemo;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.common.MemberManager.entity.MemberInformation;
 
 public interface MemberInformationManager extends BaseManager{
@@ -158,4 +162,13 @@ public interface MemberInformationManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public String getEncryptStringForEnterpriseMall(String userId) throws BusException;
+	/**
+	* 获取已完成订单的totalCount    陈烨
+	* @param conditions
+	* @return
+	* @throws BusException
+	*/
+	public List<Record> getTotalCount(
+	   			Collection<Condition> conditions,
+	   			String userId)  throws BusException;
 }
