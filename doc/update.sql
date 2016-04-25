@@ -37,7 +37,7 @@ ALTER TABLE `sp_policy_apply` ADD COLUMN `POLICY_APPLY_CODE_` varchar(50);
 
 ALTER TABLE `sp_activity_apply` ADD COLUMN `APPLAY_ADR_` varchar(256);
 
- —- 添加回访记录的拒绝理由
+/*** 添加回访记录的拒绝理由 ***/
 ALTER TABLE `sp_propertyservicemanager_cos` ADD COLUMN `BACK_REMARK_` varchar(256);
 
 /*** 修改了预约记录表 ***/
@@ -57,3 +57,5 @@ ALTER TABLE `sp_ordermanager_userorder` ADD COLUMN `PAY_RETURN_CODE_` varchar(32
 
 /** 修改活动评论 **/
 ALTER TABLE `sp_activity_comment` CHANGE COLUMN `APPLY_ID_` `DOCUMENT_ID_` char(36) DEFAULT NULL;
+ALTER TABLE `sp_activity_comment` DROP FOREIGN KEY `FK_Relationship_53`;
+ALTER TABLE `sp_activity_comment` ADD CONSTRAINT `FK_Relationship_53` FOREIGN KEY (`DOCUMENT_ID_`) REFERENCES `sp_activity_document` (`DOCUMENT_ID_`);
