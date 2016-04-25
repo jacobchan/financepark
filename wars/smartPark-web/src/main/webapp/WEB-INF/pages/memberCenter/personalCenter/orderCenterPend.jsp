@@ -203,13 +203,13 @@ type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
 		 $.ajax({
 			 url:baseUrl + "ordermanagerUserorderManager/getPagerPend_query.json",
 				success : function(results) {
-									var totalCount=results.records[0].totalCount;
-									pageCount = Math.ceil(totalCount / pageSize);//页数
-									//alert(pageCount);
+								var totalCount=results.records[0].totalCount;
+								pageCount = Math.ceil(totalCount / pageSize);//页数
 								$(".tcdPageCode").empty();
 								refreshData_pend_query(1,pageSize);
+								$(".tcdPageCode").empty();
+								if(totalCount>0){
 								    $(".tcdPageCode").createPage({
-									//$(".tcdPageCode").createPage({
 									    pageCount:pageCount,
 									    current:1,
 									    backFn:function(p){
@@ -217,7 +217,8 @@ type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
 									       this.pageCount=pageCount;
 									       refreshData_pend_query(p,pageSize);
 									    }
-									});							
+									});	
+								}
 				}
 			}); 		
 	});
