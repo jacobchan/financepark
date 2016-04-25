@@ -8,7 +8,7 @@
 <link href="../styles/page/fullcalendar.css" rel="stylesheet" type="text/css">
 <link href="../styles/page/page.css" type="text/css" rel="stylesheet">
 <style type="text/css">
-    .fc-button{width: 40px;height: 80px;background-size: 100%;}
+    .fc-button{width: 40px;height: 80px;background-size: 100%;margin-top: -23px;}
     #calendar{border:0px;padding:15px 55px 0px;}
     .absolute_div{top: 15px;right: 55px;}
     .fc th{ line-height: 20px;padding: 6px 0;}
@@ -16,6 +16,9 @@
     .fc-left h2{font-size: 18px;}
     .fc-toolbar{margin-bottom: 15px;}
     .colorblock{width: 16px;height: 16px;margin-left: 10px;}
+    .order-nav li{border-bottom: 1px #F3F2F2 solid;padding: 20px 10px;position: relative;cursor: pointer;}
+    .order-nav li.active,.order-nav li:hover{background: #f5f6f7;}
+    .order-nav .active::before{content: "";display: inline-block;width: 13px;height: 20px; position: absolute;background:url(../styles/images/zhyq/right.png) no-repeat; top: 50%;margin-top: -7px;right: -13px;}
 </style>
 </head>
 
@@ -25,38 +28,34 @@
 <!--content-->
 <div class="w1200 pr"><!--选择-->
 	<img src="../styles/images/zhyq/bg.png" style="width:100%"/>
-    <div class="cosbox pl40 pt20">
-		<div><a href="business.html" class="cc"><i class="fa fa-angle-left fa-3x"></i></a></div>
+    <div class="cosbox pl30 pt10">
+		<div class="clearfix mb10"><a href="business.html" class="cc f16 lh30"><i class="fa fa-angle-left fa-2x mr5 fl"></i>会议室预订</a></div>
         <div class="fl bgfff" style="width:330px;">
-            <ul class="hand_ul" style="border:none">
-                <li>
-                    <div class="fl"><img src="../styles/images/index/img.jpg"></div>
-                    <div class="fl ml10">
-                        <div class="span_bold">创智中心2号楼</div>
-                        <p class="cc f12">160元/小时</p>
-                        <a class="handbtn" href="javascript:;">立即预定</a>
-                    </div>
-                    <div class="order"></div>
-                </li>
-                <li>
-                    <div class="fl"><img src="../styles/images/index/img.jpg"></div>
-                    <div class="fl ml10">
-                        <div class="span_bold">创智中心4号楼</div>
-                        <p class="cc f12">260元/小时</p>
-                        <a class="handbtn" href="javascript:;">立即预定</a>
+            <ul class="order-nav" style="border:none">
+                <li class="clearfix">
+                    <div class="fl"><img src="../styles/images/index/img.jpg" width="118" height="66"></div>
+                    <div class="fl ml10 lh30">
+                        <div class="f16 c3">创智中心2号楼</div>
+                        <p class="cc f14">160元/小时</p>
                     </div>
                 </li>
-                <li>
-                    <div class="fl"><img src="../styles/images/index/img.jpg"></div>
-                    <div class="fl ml10">
-                        <div class="span_bold">创智中心7号楼</div>
-                        <p class="cc f12">190元/小时</p>
-                        <a class="handbtn" href="javascript:;">立即预定</a>
+                <li class="clearfix">
+                    <div class="fl"><img src="../styles/images/index/img.jpg" width="118" height="66"></div>
+                    <div class="fl ml10 lh30">
+                        <div class="f16 c3">创智中心4号楼</div>
+                        <p class="cc f14">260元/小时</p>
+                    </div>
+                </li>
+                <li class="clearfix active">
+                    <div class="fl"><img src="../styles/images/index/img.jpg" width="118" height="66"></div>
+                    <div class="fl ml10 lh30">
+                        <div class="f16 c3">创智中心7号楼</div>
+                        <p class="cc f12 f14">190元/小时</p>
                     </div>
                 </li>
             </ul>
         </div>
-        <div class="fl ml20 bgfff p15 w780">
+        <div class="fl ml30 bgfff p15 w780">
         	<div class="borderm pb10">
             	<span class="cblue fw">创智中心二号楼321</span>
                 <div class="od_tip">视频会议室</div>
@@ -158,6 +157,7 @@
                             <td>17:00-18:00</td>
                             <td>17:00-18:00</td>
                             <td>17:00-18:00</td>
+                          
                             <td>17:00-18:00</td>
                             <td>17:00-18:00</td>
                             <td>17:00-18:00</td>
@@ -257,6 +257,9 @@
             if(date>tt){return 1;}
             else{return 0;}
         }
+        $(".order-nav li").bind("click",function(){
+            $(this).addClass("active").siblings().removeClass("active");
+        });
     });
 
 </script>
