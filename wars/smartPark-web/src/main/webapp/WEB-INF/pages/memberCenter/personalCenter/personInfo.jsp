@@ -44,9 +44,9 @@
 							<td>出生日期</td>
 							<td>
 								<div id="birthday_container">
-									<select name="year" id="year"></select>
-									<select name="month" id="month"></select>
-									<select name="day" id="day"></select>
+									<select name="year" id="year" style="width:88px;"></select>
+									<select name="month" id="month" style="width:65px;"></select>
+									<select name="day" id="day" style="width:65px;"></select>
 								</div>
 							</td>
 						</tr>
