@@ -1527,9 +1527,11 @@
 						+ record[i].memberId.memberName
 						+ "</span>"
 						+ "</div>"
-						+ "<div class='fr'>"
-						+ "<a href='javascript:;' class='cc mr25 pdf'>在线观看PDF/PPT  <i class='fa fa-angle-double-right f16'></i></a>"
-						+ "<a href='javascript:;' class='ib-btn lh30 acc' style='margin-top:0px;'>我要报名</a>"
+						+ "<div class='fr'>";
+						if(record[i].documentCount>0){
+							html+= "<a href='javascript:;' class='cc mr25 pdf'>在线观看PDF/PPT  <i class='fa fa-angle-double-right f16'></i></a>";
+						}
+						html+="<a href='javascript:;' class='ib-btn lh30 acc' style='margin-top:0px;'>我要报名</a>"
 						+ "</div>" + "</div>" + "</div>" + "</li>";
 			}
 
