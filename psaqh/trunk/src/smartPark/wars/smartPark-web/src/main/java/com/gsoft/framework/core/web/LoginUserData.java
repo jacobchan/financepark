@@ -155,6 +155,9 @@ public class LoginUserData extends BaseDataController {
 			@RequestParam("passwd") String passwd,
 			@RequestParam("repasswd") String repasswd) {
 
+		if(com.gsoft.framework.util.StringUtils.isEmpty(passwd)){
+			return new DataModelAndView("密码不能为空！");
+		}
 		if (!passwd.equals(repasswd)) {
 			return new DataModelAndView("两次输入的密码不一致");
 		}
@@ -164,6 +167,7 @@ public class LoginUserData extends BaseDataController {
 		}else{
 			mb.setMemberPassword(PasswordUtils.md5Password(passwd));
 			mb.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+			memberInformationManager.saveMemberInformation(mb);
 		}
 		return new DataModelAndView("000000");
 	}
