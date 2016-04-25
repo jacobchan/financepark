@@ -35,7 +35,6 @@ $(function(){
 				dates.push(date);
 				times.push(time);
 			});
-			alert(commodityId);
 			if(commodityId){
 				if(dates.length>0){
 					$(".pop_layer").show();
@@ -220,7 +219,7 @@ function jumpOrder(){
 }
 //返回
 function jumpBack(){
-	window.location="roomxq.html?id="+commodityId;
+	window.location="order.html";
 }
 
 //toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
@@ -316,6 +315,7 @@ function closeTanc(){
 	
 	
     function displayStatus(commodityId,name){
+    	$("#data_timer td").removeClass("today");
     	var params = ['commodityId='+commodityId];
     	var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPublicutilitiesmanagerResoByCommodityId.json";
     	//根据商品id获取资源可用状态
