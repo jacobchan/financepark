@@ -545,12 +545,13 @@ background:url(../images/company/ab_ico.png) no-repeat}
 .subul a{background:none;padding:0;}
 
 /* .maskset:hover .b1mask:hover{display: block !important;}
-.maskset div{position:absolute;z-index: 9;}.hide{display:none;}
+.maskset div{position:absolute;z-index: 9;}
 .b1mask{top:88px;left: 696px;}.b2mask{top:64px;left:102px;}
 .b2f1{top: 509px;left:159px;}.b2f2{top: 467px;left:159px;}.b2f3{top: 424px;left:163px;}.b2f4{top: 376px;left: 143px;}.b2f5{top: 330px;left: 145px}
 .b2f6{top: 285px;left: 145px;}.b2f7{top: 239px;left:147px;}.b2f8{top: 192px;left:146px;}.b2f9{top: 145px;left: 145px;}.b1f1{top: 545px;left: 809px}
 .b1f2{top: 522px;left: 809px;}.b1f3{top: 499px;left:810px;}.b1f4{top: 471px;left:811px;}.b1f5{top: 456px;left: 811px;}.b1f6{top: 434px;left: 811px}
 .b1f7{top: 410px;left: 811px;} */
+.hide{display:none;}
 .off{position:absolute;cursor: pointer;width:44px;height:58px;background:url(../images/zhyq/bg-bf.png) no-repeat center bottom;font-size: 12px;color: #fff;text-align: center;padding-top: 19px;}
 .off:hover{background:url(../images/zhyq/bg-af.png) no-repeat;padding-top: 13px;}
 .off:hover .hide{display:inline-block;}
