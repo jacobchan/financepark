@@ -113,7 +113,7 @@
 					//status = "已付款";
 					button = "已付款<span class='f12 ml5 mr5'>|</span><a href=''>评价</a>";
 				}else if(record[i].userorderStatus=='03'){
-					//status = "已完成";					
+					status = "已完成";					
 				}else if(record[i].userorderStatus=='08'){
 					status = "已取消";					
 				}
@@ -183,7 +183,8 @@ $('.hhf-submit.f14.fl.ml20.hospital').click(function(){
 	 var params=['userorderCode='+userorderCodeLike,'operator:userorderCode=LIKE','genId='+genId];
 	 $.ajax({
 		 url : baseUrl + "ordermanagerUserorderManager/getPagerHospital_query.json",
-			success : function(results) {
+		 data:params.join('&'),
+		 success : function(results) {
 							var totalCount=results.records[0].totalCount;
 							pageCount = Math.ceil(totalCount / pageSize);//页数
 							refreshData_hospital_query(1,pageSize);
