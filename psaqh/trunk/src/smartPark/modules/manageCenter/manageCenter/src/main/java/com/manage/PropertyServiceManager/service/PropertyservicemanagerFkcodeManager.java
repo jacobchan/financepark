@@ -121,15 +121,10 @@ public interface PropertyservicemanagerFkcodeManager extends BaseManager{
 	/**
 	 * 获取已完成订单的totalCount    陈烨
 	 * @param conditions
-	 * @param fkLikeCode
 	 * @param startTime
 	 * @param endTime
 	 * @return
 	 * @throws BusException
 	 */
-	public List<Record> getTotalCount(
-   			Collection<Condition> conditions,
-   			String fkLikeCode,
-			String startTime,
-			String endTime)  throws BusException;
+	public List<Record> getTotalCount(Collection<Condition> conditions,String startTime,String endTime)  throws BusException;
 }
