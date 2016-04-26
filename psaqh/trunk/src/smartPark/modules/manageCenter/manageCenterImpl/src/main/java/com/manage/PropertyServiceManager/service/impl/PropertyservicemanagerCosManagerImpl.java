@@ -2,6 +2,7 @@ package com.manage.PropertyServiceManager.service.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.entity.MemberInformation;
+import com.common.MessageCenter.entity.McMsgdatas;
+import com.common.MessageCenter.service.McMsgdatasManager;
+import com.gsoft.entity.ReferenceMap;
 import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -27,7 +31,6 @@ import com.gsoft.framework.util.StringUtils;
 import com.gsoft.utils.BizCodeUtil;
 import com.gsoft.utils.HttpSenderMsg;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerCosDao;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCos;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerCosManager;
 @Service("propertyservicemanagerCosManager")
@@ -37,6 +40,8 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
 	private PropertyservicemanagerCosDao propertyservicemanagerCosDao;
 	@Autowired
 	private MemberInformationDao memberInformationDao;
+	@Autowired
+	private McMsgdatasManager mcMsgdatasManager;
 	
     /**
      * 查询列表
@@ -227,7 +232,15 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
     	//回访时间
     	savePropertyservicemanagerCos.setBacktime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     	
-    	//发送信息 TODO
+    	//发送信息 
+    	//用户名
+    	String memberName = savePropertyservicemanagerCos.getMemberInformation().getMemberName();
+    	//投诉单号
+    	String cosCode = savePropertyservicemanagerCos.getCosCode();
+    	//用户编号
+    	String memberId = savePropertyservicemanagerCos.getMemberInformation().getMemberId();
+    	this.sendMessage(memberName, cosCode, memberId);
+    	
     	return propertyservicemanagerCosDao.save(savePropertyservicemanagerCos);
     }
     
@@ -249,7 +262,14 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
     	savePropertyservicemanagerCos.setBackRemark(backRemark);
     	//回访时间
     	savePropertyservicemanagerCos.setBacktime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    	//发送信息 TODO
+    	//发送信息
+    	//用户名
+    	String memberName = savePropertyservicemanagerCos.getMemberInformation().getMemberName();
+    	//投诉单号
+    	String cosCode = savePropertyservicemanagerCos.getCosCode();
+    	//用户编号
+    	String memberId = savePropertyservicemanagerCos.getMemberInformation().getMemberId();
+    	this.sendMessage(memberName, cosCode, memberId);
     	
     	return propertyservicemanagerCosDao.save(savePropertyservicemanagerCos);
     }
@@ -296,5 +316,23 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
    		record.put("totalCount", List.size());
    		recordList.add(record);
    		return recordList;
-    }  		
+    }
+    
+    /**
+     * 发送模版消息
+     * @param memberName 用户name
+     * @param cosCode 投诉单号
+     * @param memberId 用户ID
+     * @return
+     */
+    public String sendMessage(String memberName,String cosCode,String memberId) {
+    	//构建替换模板参数对应的map
+		Map<String, String> replaceMap = new ReferenceMap();
+		replaceMap.put("#user", memberName);
+		replaceMap.put("#serviceNo", cosCode);
+		//构建消息内容数据
+		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0307", replaceMap);
+		//发送消息,给会员
+		return mcMsgdatasManager.sendToUser(msgData, memberId);
+	}
 }
