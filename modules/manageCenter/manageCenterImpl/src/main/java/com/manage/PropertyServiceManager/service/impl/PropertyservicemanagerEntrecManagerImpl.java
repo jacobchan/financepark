@@ -129,7 +129,7 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
 		return pagerRecords;
 	}
     /**
-     * 保存对象
+     * 保存对象:入驻申请成功之后，发短信通知用户和后台管理员
      */
 	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
     public PropertyservicemanagerEntrec savePropertyservicemanagerEntrec(PropertyservicemanagerEntrec o) throws BusException{
@@ -212,6 +212,14 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
         			McMsgdatas msgData = mcMsgdatasManager.buildMsgData(MessageTempCode.MSG_USER_1, replaceMap);
         			//发送消息,给会员
         			mcMsgdatasManager.sendMessage(msgData, memberInformation.getMemberId(), 1);
+        			
+        			Map<String, String> replaceMap1 = new ReferenceMap();
+        			replaceMap.put("#appointmentNo", o.getEnterrecCode());
+        			replaceMap.put("#relateProject", "入驻服务");
+        			//构建消息内容数据
+        			McMsgdatas msgData1 = mcMsgdatasManager.buildMsgData(MessageTempCode.MSG_BACKGROUND_4, replaceMap1);
+        			//发送消息,给物业主管:ROLE_TENE_ADMIN
+        			mcMsgdatasManager.sendMessage(msgData1,"ROLE_TENE_ADMIN",2);
         		} catch (Exception e) {
         			e.printStackTrace();
         		}
@@ -289,10 +297,10 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
 		try {
 			//构建替换模板参数对应的map
 			Map<String, String> replaceMap = new ReferenceMap();
-			replaceMap.put("#user",mb != null?mb.getMemberName():null);
+			replaceMap.put("#user",mb != null?mb.getMemberName():entrec.getEnteringName());
 			replaceMap.put("#appointmentNo", entrec.getEnterrecCode());
 			//构建消息内容数据
-			McMsgdatas msgData = mcMsgdatasManager.buildMsgData(MessageTempCode.MSG_USER_1, replaceMap);
+			McMsgdatas msgData = mcMsgdatasManager.buildMsgData(MessageTempCode.MSG_USER_5, replaceMap);
 			//发送消息,给会员
 			mcMsgdatasManager.sendMessage(msgData, mb != null?mb.getMemberId():null, 1);
 		} catch (Exception e) {
