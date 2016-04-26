@@ -106,6 +106,7 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
     		return policyApplyDao.save(o) ;
     	}else{//isUpdate为空，表示不存在该对象，做新增操作
     		String memberId = o.getCreateUser() ;
+    		System.out.println("++++++++++++++++++++++"+memberId+"+++++++++++++++++++++++++");
         	MemberInformation member = null ;
         	if(StringUtils.isEmpty(memberId)){
         		member = memberInformationManager.getMemberInformation(o.getMember().getMemberId()) ;//后台调用
