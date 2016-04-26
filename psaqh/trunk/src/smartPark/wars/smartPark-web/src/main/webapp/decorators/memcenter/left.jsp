@@ -51,6 +51,7 @@
   			  var urlstatus=false;
   			  if(vv == cenUrl+"member/memberCenter/personalCenter/meetingRoomOrderDetails.html"||
   					vv == cenUrl+"member/memberCenter/personalCenter/carOrderDetails.html"||
+  					vv == cenUrl+"member/memberCenter/personalCenter/payWay.html"||
   					vv == cenUrl+"member/memberCenter/personalCenter/adsenseOrderDetails.html"){
   				urlstr = cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
     	  	  };
