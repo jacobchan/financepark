@@ -138,7 +138,7 @@
 			});
 		
 	});
-	</script>
+	
 	
 	    //点击返回
 		  function oc_goBack(){
