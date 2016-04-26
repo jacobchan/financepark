@@ -18,6 +18,8 @@ a.c3:hover,a.co:hover{color: #FF6714;}
 .bd{border-bottom: 1px solid #efecec;}
 .btn-cheng{background:#FA742C;border:none;color:#fff;display:inline-block;cursor:pointer;}
 .btn-cheng:hover{background:#ff5900;color:#fff !important;}
+.btn-disabled{display:inline-block;background:#ccc;border:none;color:#fff;cursor:pointer;}
+.btn-disabled:hover{background:#c1c1c1;color:#fff !important;}
 .pb-btn{background: #707070 none repeat scroll 0% 0%;display: inline-block;color: #FFF;}
 .pb-btn:hover{background: #555;color:#fff !important;}
 
