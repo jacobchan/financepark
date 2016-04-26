@@ -317,7 +317,7 @@
 				for(var i=0;i<record.length;i++){
 					   //http://localhost:8088/smartPark-web/ imageUrl
 						var html="<li><div class='mb10'><img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].commodityImage+"&method=show' border='0' width='300' height='198'></div>"+
-						"<input type='text' placeholder='活动卡位"+record[i].commodityPrice+ "元/月' disabled='disabled' style='cursor:default'><a style='cursor:pointer;' onclick='reserve(\""+record[i].commodityId+"\")' class='sc-yy'>预约</a></li>";
+						"<div class='clearfix'><div class='fl c-333'><p class='f16'>"+record[i].commodityTitle+"</p><p class='f12'>固定卡位"+record[i].commodityPrice+"元/月</p></div><a style='cursor:pointer;' onclick='reserve(\""+record[i].commodityId+"\")' class='sc-yy fr'>预约</a></div></li>";
 						 $(".space-centent ul").append(html);
 						 
 				}
