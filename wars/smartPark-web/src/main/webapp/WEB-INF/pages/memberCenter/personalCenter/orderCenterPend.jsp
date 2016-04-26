@@ -81,11 +81,10 @@ type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
 	function loadData(){	
 		//分页页码显示
 		 $.ajax({
-			//url : baseUrl + "ordermanagerUserorderManager/getTotalCountPend.json",
 			url : baseUrl + "ordermanagerUserorderManager/getTotalCountPend.json",
 			success : function(results) {
 				var totalCount=results.records[0].totalCount;
-				pageCount = Math.ceil(totalCount / pageSize);//页数				
+				pageCount = Math.ceil(totalCount / pageSize);//页数
 				refreshData(1,pageSize);
 				//插入页码
 				$(".tcdPageCode").empty();
@@ -151,8 +150,7 @@ type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
 					html1 += '</tr>'
 						$(".pend_list").html(html1);	
 				}	
-		};
-		
+		};		
 	//取消成功弹窗
  	function close(content){	
         $(".tc.mt25.f18").empty() ;
@@ -160,8 +158,7 @@ type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
         $(".toast").show();		      		        		       				
 		setTimeout(function(){$(".toast").hide(); },2000);
 		refreshData(currentIndex,pageSize);
-  }
- 
+  } 
  	//取消弹窗
 	 function cancelStatus(obj){
 		var me=obj.parentNode.parentNode;//找到父节点
@@ -198,27 +195,30 @@ type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
 		//订单类型
 		 var genId = $(".c-b1").attr("data");	
 		 //订单号
-		 var userorderCodeLike=$("#userorderCode").val();			 
-		 var params=['userorderCode='+userorderCodeLike,'operator:userorderCode=LIKE','genId='+genId];
+		 var userorderCode=$("#userorderCode").val();	
+		 alert(userorderCode);
+		 var params=['userorderCode='+userorderCode,'operator:userorderCode=LIKE','genId='+genId];
 		 $.ajax({
-			 url:baseUrl + "ordermanagerUserorderManager/getPagerPend_query.json",
+			    url:baseUrl + "ordermanagerUserorderManager/getTotalCountPend.json",
+			    data:params.join('&'),
 				success : function(results) {
-								var totalCount=results.records[0].totalCount;
-								pageCount = Math.ceil(totalCount / pageSize);//页数
-								$(".tcdPageCode").empty();
-								refreshData_pend_query(1,pageSize);
-								$(".tcdPageCode").empty();
-								if(totalCount>0){
-								    $(".tcdPageCode").createPage({
-									    pageCount:pageCount,
-									    current:1,
-									    backFn:function(p){
-									    	currentIndex = p;
-									       this.pageCount=pageCount;
-									       refreshData_pend_query(p,pageSize);
-									    }
-									});	
-								}
+					var totalCount=results.records[0].totalCount;
+					pageCount = Math.ceil(totalCount / pageSize);//页数
+					//pageCount=Math.ceil(results.totalCount/pageSize);//页数
+					alert(pageCount);
+					refreshData_pend_query(1,pageSize);
+					$(".tcdPageCode").empty();
+					if(totalCount>0){
+						$(".tcdPageCode").createPage({
+							pageCount:pageCount,
+							current:1,
+							backFn:function(p){
+								currentIndex = p;
+								this.pageCount=pageCount;
+								refreshData_pend_query(p,pageSize);
+							}
+						});	
+					}
 				}
 			}); 		
 	});
@@ -248,28 +248,27 @@ $('.hhf-submit.f14.fl.ml20.all').click(function(){
 	 $.ajax({
 		 url:baseUrl + "ordermanagerUserorderManager/getTotalCount.json",
 			success : function(results) {
-								var totalCount=results.records[0].totalCount;
-								pageCount = Math.ceil(totalCount / pageSize);//页数
-							//alert(pageCount);
-								$(".tcdPageCode").empty();
-							refreshData_All_query(1,pageSize);
-							    $(".tcdPageCode").createPage({
-								//$(".tcdPageCode").createPage({
-								    pageCount:pageCount,
-								    current:1,
-								    backFn:function(p){
-								    	currentIndex = p;
-								       this.pageCount=pageCount;
-								       refreshData_All_query(p,pageSize);
-								    }
-								});			
+				var totalCount=results.records[0].totalCount;
+				pageCount = Math.ceil(totalCount / pageSize);//页数
+				refreshData_All_query(1,pageSize);
+				$(".tcdPageCode").empty();
+				if(totalCount>0){
+					 $(".tcdPageCode").createPage({
+					 	 pageCount:pageCount,
+					 	 current:1,
+					 	 backFn:function(p){
+					     	currentIndex = p;
+					     	this.pageCount=pageCount;
+							refreshData_All_query(p,pageSize);
+						 }
+					 });	
+				}
 			}
 		}); 		
-});
-function refreshData_All_query(pageIndex,pageSize){
+    });
+    function refreshData_All_query(pageIndex,pageSize){
 	var genId = $(".c-b1").attr("data");	
-    var userorderCodeLike=$("#userorderCode").val();	
-	
+    var userorderCodeLike=$("#userorderCode").val();		
 	var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCode='+userorderCodeLike,'operator:userorderCode=LIKE','genId='+genId];
 	$.ajax({
 		url:baseUrl+'ordermanagerUserorderManager/getPagerAll.json',
@@ -281,30 +280,28 @@ function refreshData_All_query(pageIndex,pageSize){
 		}
 	});
 } 
-//下拉选项目名称
+    //下拉选项目名称
 	$(function(){
-	$.ajax({				
-		url:baseUrl+'/purchasingmanagerGenreManager/getGenreProject.json',
-		success:function(result){	
-			if(result&&result.records){					
-				_selectRecords(result.records);						
-			}
-		}
-	});
-});
-
-function _selectRecords(record){		
-	//console.log(record);
-	for(var i=0;i<record.length;i++){				
-		var html= "<li data='"+record[i].genreId+"'>"+record[i].genreName+"</li>";                                                                                  
-		 $(".select-nav").append(html);	
-	}
-	$(".ic-select").click(function(e){
-		$(".select-nav").hide();
-	    $(this).next(".select-nav").show();
-	    e.stopPropagation();//
-	});
-	$(".select-nav li").click(function(){
+	    $.ajax({				
+		    url:baseUrl+'/purchasingmanagerGenreManager/getGenreProject.json',
+		    success:function(result){	
+			    if(result&&result.records){					
+				    _selectRecords(result.records);						
+			    }
+		    }
+	    });
+    });
+    function _selectRecords(record){		
+	    for(var i=0;i<record.length;i++){				
+		    var html= "<li data='"+record[i].genreId+"'>"+record[i].genreName+"</li>";                                                                                  
+		    $(".select-nav").append(html);	
+	    }
+	    $(".ic-select").click(function(e){
+		    $(".select-nav").hide();
+	        $(this).next(".select-nav").show();
+	        e.stopPropagation();//
+	    });
+	    $(".select-nav li").click(function(){
 		$(this).parents(".tct-select").find(".ic-select p").text($(this).text());
 		var livale = $(this).attr("data"); 
 		$(this).parents(".tct-select").find(".ic-select p").attr("data",livale);
