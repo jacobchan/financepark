@@ -364,7 +364,7 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
    	 * @return
    	 */
     @EsbServiceMapping
-    public PropertyservicemanagerFkcode getFkByFkcodeId(@ServiceParam(name="fkcodeId") String fkcodeId) {    	
+    public PropertyservicemanagerFkcode getFkByFkcodeId(@ServiceParam(name="fkcodeId") String fkcodeId) throws BusException{    	
        	if(StringUtils.isNotEmpty(fkcodeId)){
        		PropertyservicemanagerFkcode fk=propertyservicemanagerFkcodeDao.get(fkcodeId);
        		PropertyservicemanagerTwcrd twcrd=propertyservicemanagerTwcrdDao.getObjectByUniqueProperty("propertyservicemanagerFkcode.fkcodeId",fkcodeId);//通过访客id得到对应的二维码对象
