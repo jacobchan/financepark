@@ -55,7 +55,14 @@ public class MessageTempCode {
 	 */
 	public static final String MSG_USER_4 = "0304";
 	
-	
+	/**
+	 * 尊敬的用户#user你好，你的预约已经成功受理，受理编号为【#appointmentNo】，感谢你对富春硅谷的支持！
+	 */
+	public static final String MSG_USER_5 = "0305";
+	/**
+	 * 尊敬的用户#user你好,感谢您到访【#relateProject】，如果有更好的建议，欢迎到我们的官网www.qypark.com或者致电：0755-82379999反馈，期待您的下次光临！
+	 */
+	public static final String MSG_USER_6 = "0306";
 	/**
 	 * 
 	 */
