@@ -77,6 +77,9 @@ type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
 	$(function(){
 		loadData();
 	});
+	function goPay(userorderCode){
+		window.location.href=cenUrl+"member/memberCenter/personalCenter/payWay.html?userorderCode="+userorderCode;
+	};
 	//加载数据
 	function loadData(){	
 		//分页页码显示
@@ -125,8 +128,10 @@ type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
 				var status = "";
 				var button = "";
 				if(record[i].userorderStatus=='01'){
+					var userorderCode = record[i].userorderCode;
 					//status = "待付款";	
-					button = "<a href=''>付款</a><span class='f12 ml5 mr5'>|</span><a href='#' onclick='cancelStatus(this)'>取消</a>";
+					button = "<a href='javascript:void(0);' onclick='goPay(\""+userorderCode+
+					"\");'>付款</a><span class='f12 ml5 mr5'>|</span><a href='#' onclick='cancelStatus(this)'>取消</a>";
 				}else if(record[i].userorderStatus=='02'){
 					//status = "已付款";
 					button = "已付款<span class='f12 ml5 mr5'>|</span><a href=''>评价</a>";
