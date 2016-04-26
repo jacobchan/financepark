@@ -69,10 +69,10 @@
 		 $.ajax({
 			url:serviceURL, 
 			success:function(results){	
-							pageCount=Math.ceil(results.totalCount/pageSize);//页数							
-							 refreshData(1,pageSize);
-							 $(".tcdPageCode").empty();
-								if(totalCount>0){
+				pageCount=Math.ceil(results.totalCount/pageSize);//页数							
+				refreshData(1,pageSize);
+				$(".tcdPageCode").empty();
+				if(pageCount>0){
 								$(".tcdPageCode").createPage({
 								    pageCount:pageCount,
 								    current:1,
@@ -82,7 +82,7 @@
 								        refreshData(p,pageSize);
 								    }
 								});	
-								}
+				}
 			}
 		}); 			
 	});	
