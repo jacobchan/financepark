@@ -15,6 +15,7 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
 import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode;
 
@@ -127,4 +128,10 @@ public interface PropertyservicemanagerFkcodeManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public List<Record> getTotalCount(Collection<Condition> conditions,String startTime,String endTime)  throws BusException;
+  /**
+   	* 根据访客申请ID得到状态
+   	* @param fkcodeId 访客申请ID
+   	* @return
+   	*/
+    public PropertyservicemanagerFkcode getFkByFkcodeId(String fkcodeId);
 }
