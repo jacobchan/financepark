@@ -108,4 +108,14 @@ public class StringUtils {
 		return str;
 	}
 	
+	public static String extractCode(String codeStr){
+		
+		return Pattern.compile("[^0-9]").matcher(codeStr).replaceAll("");
+	}
+	
+	public static void main(String[] args) {
+		String s = "挂电视柜123456，挂电视柜给对方";
+		System.out.println(extractCode(s));
+	}
+	
 }
