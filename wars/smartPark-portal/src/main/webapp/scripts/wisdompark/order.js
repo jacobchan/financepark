@@ -316,9 +316,11 @@ function closeTanc(){
         var roomType=$(".order-nav li:eq(0)").find("span").eq(2).text();
         var roomTyy=$(".order-nav li:eq(0)").find("span").eq(3).text();
         var roomGm=$(".order-nav li:eq(0)").find("span").eq(4).text();
+        var roomPrice=$(".order-nav li:eq(0)").find("span").eq(5).text();
         var commodityTitle=$(".order-nav li:eq(0)").find("span").eq(1).text();
         var commodityId=$(".order-nav li:eq(0)").find("span").eq(0).text();
         $("#commodityId").val(commodityId);
+        $("#roomPrice").val(roomPrice);
         $(".cblue.fw").text(commodityTitle);
         $('.od_tip').eq(0).text(roomType);
         $('.od_tip').eq(1).text(roomTyy+"投影仪");
