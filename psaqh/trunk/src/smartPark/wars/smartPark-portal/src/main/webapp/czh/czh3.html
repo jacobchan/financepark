@@ -79,7 +79,7 @@
 					<h2 class="lh40 f20 mt20">相关文档</h3>
 					<div class="at-oh">
 						<table class="article-tab" style="width:275px;table-layout:fixed">
-							<colgroup>
+							<!-- <colgroup>
 								<col width="42"></col>
 								<col width="233"></col>
 							</colgroup>
@@ -89,7 +89,7 @@
 									<p>新人教版一年级语文上册13平平...</p>
 									<span>暂无评价</span><span class="fr">40页</span>
 								</td>
-							</tr>
+							</tr> -->
 						</table>
 					</div>
 					<h2 class="f20 mt20 lh30">活动地点</h2>
@@ -159,29 +159,12 @@
 			$("a.a-c-o").click(function(){
 				$(".bg-tanc").show();	
 			});
-			//根据活动主键获取相关文档
-			var url=location.href; 
-			var tmp1=url.split("?")[1];  
-			var tmp2=tmp1.split("=")[1]; 
-			var applyId=tmp2;
-			var params = ['applyId='+applyId];
-			var serviceURL = baseUrl+"activityApplyManager/getPublishActivityDocuments.json";
-			$.youi.ajaxUtils.ajax({
-				url:serviceURL,
-				data:params.join('&'),
-				jsonp:'data:jsonp',
-				dataType:'jsonp',
-				success:function(results){
-					console.log(results);
-					if(results&&results.records){
-						_parseActivityRecords(results.records);
-					}
-				}
-			});
+			
 			//报名提交
 			$('.ib-btn').click(function(){
 				 if(!isLogin){
 					   clearInterval(timer);
+					   $(".tc.mt25").text("请登陆！")
 			            $(".toast").show();
 			            pltime=2;
 			            timer=setInterval("closeTanc()",1000);
@@ -235,7 +218,8 @@
 		   		if (!patrn.exec(s)) return false
 		   	 	return true
 		};
-		
+	</script>
+	<script type="text/javascript">
 		$(function(){
 			var url=location.href; 
 			var tmp1=url.split("?")[1];  
@@ -257,17 +241,7 @@
 				}
 			});	
 			//获取文档列表
-			$.youi.ajaxUtils.ajax({
-				url:serviceURL,
-				data:params.join('&'),
-				jsonp:'data:jsonp',
-				dataType:'jsonp',
-				success:function(results){
-					if(results&&results.record){
-					_parseRecords(results.record);
-					}
-				}
-			});	
+			getdocument(applyId);
 		});
 		//活动详情赋值
 		function _parseRecords(record){
@@ -289,28 +263,53 @@
 			local.search($("#activityAdr").html().substring(3,$("#activityAdr").html().length));
 			$('#map div.anchorBL').hide();
 		}
-		//文档库赋值
-		function _parseActivityRecords(record){
-			var html='';
-			for(var i=0;i<record.length;i++){
-				html+="<li>"+
-							"<a href='javascript:;' onclick='redirectPagePDF(this)'; id='"+record[i].documentId+"' >"+
-								"<div class='in-photo'>"+
-									"<img src='../styles/images/zs/nav-img1.png' border='0' width='115' height='71'>"+
-								"</div>"+
-								"<div class='fr'>"+
-									"<p>"+record[i].documentName.split('.')[0]+"</p>"+
-								"</div>"+
-							"</a>"+
-					 "</li>";
-			}
-			$('.ifn-group ul').eq(0).empty();
-			$('.ifn-group ul').eq(0).append(html);
+		
+		//加载文档
+		function getdocument(id){
+			var applyId = id;
+			var serviceURL = baseUrl+"activityDocumentManager/getPagerActivityDocuments.json";
+			var params = ['activityApply.applyId='+applyId];
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(results){
+					if(results&&results.records){
+						if(results.records.length>0){
+							documents(results.records);
+						}else{
+							$(".article-tab").empty();
+							$(".article-tab").append("<tr><td align='center'><h3>暂无活动文档</h3></td></tr>");
+						}
+					}
+				}
+			});	
 		}
+		
+		//拼接侧边栏
+		function documents(record){
+			$(".article-tab").empty();
+			var html ="";
+			html+="<colgroup><col width='42'></col><col width='230'></col></colgroup>";
+			for(var i=0;i<record.length;i++){
+				html+=
+					"<tr id="+record[i].documentId+" onclick='openPage(this)' style='cursor:pointer;'><td><em>P</em></td>"+
+					"<td><p>"+record[i].documentName.split('.')[0]+"</p>"+
+					"<span>"+record[i].createTime+"</span>"+
+					"</td></tr>";
+			}
+			$(".article-tab").append(html);
+		}
+		
 		//文档跳转页面
-		function redirectPagePDF(obj){
+		function openPage(obj){
+			var url=location.href; 
+			var tmp1=url.split("?")[1];  
+			var tmp2=tmp1.split("=")[1]; 
+			var applyId=tmp2;
 			var documentId=obj.id;
-			var url="../czh/czh7.html"+"?"+"documentId="+documentId; 
+			var url="../czh/czh7.html"+"?"+"applyId="+applyId+"&documendid="+documentId; 
 			window.location.assign(url); 
 		}
 	</script>
