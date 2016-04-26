@@ -16,12 +16,9 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.DateUtils;
-
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.manage.ActivityManager.entity.ActivityComment;
 import com.manage.ActivityManager.dao.ActivityCommentDao;
 import com.manage.ActivityManager.service.ActivityCommentManager;
@@ -66,7 +63,7 @@ public class ActivityCommentManagerImpl extends BaseManagerImpl implements Activ
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+    @EsbServiceMapping(pubConditions = {@PubCondition(property = "commentMember.memberId", pubProperty = "userId")})
     public ActivityComment saveActivityComment(ActivityComment o) throws BusException{
 //    	String activityCommentId = o.getActivityCommentId();
 //    	boolean isUpdate = StringUtils.isNotEmpty(activityCommentId);
@@ -75,6 +72,8 @@ public class ActivityCommentManagerImpl extends BaseManagerImpl implements Activ
 //    	}else{//新增
 //    		
 //    	}
+    	o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	o.setCreateUser(o.getCommentMember().getMemberId());
     	o.setCommentTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     	return activityCommentDao.save(o);
     }
