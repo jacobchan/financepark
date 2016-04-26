@@ -81,18 +81,6 @@
 		</div>
 	</div>
 </youi:body>
-	<script type="text/javascript">
-	
-		 function cancel(obj){
-				var me=obj.parentNode.parentNode;
-				var bxCode=me.childNodes[0].childNodes[0].innerText; 
-				$(".bxCode").html(bxCode);
-				$(".bxCode")[0].setAttribute("id",me.id);
-				$(".bg-tanc").show();
-			};
-		
-	</script>
-	<!-- 取消报修订单 -->
 	<script type="text/javascript">	
 	//弹窗
 	  function close(content){		        
@@ -100,9 +88,10 @@
 	        $(".tc.mt25.f18").append(content) ;
 	        $(".toast").show();		      		        		       				
 			setTimeout(function(){$(".toast").hide(); },2000);
-			refreshData(currentIndex,pageSize);
-      }
-	  $(function(){					
+			setTimeout(function(){location.reload(); },2000);
+    }
+    //加载页面
+    $(function(){					
 			var arg=getQueryStringArgs();
 		    var fkcodeId =arg.fkcodeId;
 		   // alert(fkcodeId);
@@ -118,7 +107,7 @@
 						//alert(record.dksataus);
 						if(record.dksataus=="00"){
 							status = "未到访";	
-							cancelbutton="<span class='f12 ml5 mr5'>|</span><a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消访客</a>";
+							cancelbutton="<a href='javascript:;' class='pb-btn tc' onclick='javascript:cancel()'>取消访客</a>";
 							//$('#fkCode').html(cancelbutton);
 						}else if(record.dksataus=='01'){
 							status = "未到访";				
@@ -128,6 +117,7 @@
 							status = "已取消";
 						}
 						$('#fkCode').html(record.fkCode+"&nbsp&nbsp"+status);
+						$(".fkCode").html(record.fkCode);//确认取消弹窗
 						$(".fkcodes").html(record.fkCode);  //二维码弹窗
 						$('#applyTime').html(record.applyTime);
 						if(!record.fkcodeComp==null){
@@ -140,11 +130,11 @@
 						$('#memberPhoneNumber').html("访客电话："+record.fkcodeTelephone);
 						$(".bftime").html(record.fkcodeTime);  //二维码弹窗
 						//var m="\""+record[i].fkcodeId+"\",\""+record[i].fkcodeId+"\"";
-						$('.fr.f12').html("<a href='javascript:;' onclick='qrcode(this)' class='ib-btn mr15'>查看二维码</a>");
+						$('.fr.f12').html("<a href='javascript:;' onclick='qrcode(this)' class='ib-btn mr15'>查看二维码</a>"+cancelbutton);
 						}
 					}
 			}); 
-		}); 
+		}); 	  
 	//查看二维码
     function qrcode(obj){
     	var arg=getQueryStringArgs();
@@ -159,7 +149,29 @@
 				}
 			}
 		});
-    };		
+    };	
+  //确认取消弹窗
+	function cancel(){	
+		$(".bg-tanc.m1").show();
+	};	
+	//取消
+	$(function(){
+		$(".hhf-submit.confirm").click(function(){
+			$(".bg-tanc.m1").hide();
+			var arg=getQueryStringArgs();
+		    var fkcodeId =arg.fkcodeId;
+			 	$.youi.ajaxUtils.ajax({
+			 		url:baseUrl+'propertyservicemanagerFkcodeManager/cancelStatus.json',
+					data:'fkcodeId='+fkcodeId,
+					success:function(result){
+						if(result&&result.record){
+							close("取消成功!");														
+						}
+					}
+				});
+			});
+		
+	});
 	</script>
 	<script type="text/javascript">
 	    //点击返回
