@@ -1,4 +1,10 @@
 $(function(){
+		$(".set-file").hover(function(){
+			$(this).prev(".set-file1").css("background","#fff");
+		},function(){
+			$(this).prev(".set-file1").css("background","#fff");
+		})
+	
 		$(".slideBox").hover(function(){
       		clearInterval(timer);
 		},function(){ timer = setInterval(run,3000)});
