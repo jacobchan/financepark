@@ -6,7 +6,6 @@ package com.manage.ActivityManager.entity;
 import javax.persistence.*;
 
 import org.hibernate.validator.*;
-
 import org.hibernate.annotations.GenericGenerator;
 
 import com.common.MemberManager.entity.MemberInformation;
@@ -62,8 +61,17 @@ public class ActivityComment implements Domain{
     @JoinColumn(name="DOCUMENT_ID_")
 	private com.manage.ActivityManager.entity.ActivityDocument activityDocument;//活动申请ID
 	
+	@Column(name="COMMENT_LEVEL_")
+	private int commentLevel;
 	
-	
+	public int getCommentLevel() {
+		return commentLevel;
+	}
+
+	public void setCommentLevel(int commentLevel) {
+		this.commentLevel = commentLevel;
+	}
+
 	public String getUpdateUser(){
 		return this.updateUser;
 	}
@@ -137,14 +145,26 @@ public class ActivityComment implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
-		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
-		result = prime * result + ((commentContent == null) ? 0 : commentContent.hashCode());
-		result = prime * result + ((commentTime == null) ? 0 : commentTime.hashCode());
-		result = prime * result + ((commentMember == null) ? 0 : commentMember.hashCode());
-		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
-		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
-		result = prime * result + ((commentId == null) ? 0 : commentId.hashCode());
+		result = prime
+				* result
+				+ ((activityDocument == null) ? 0 : activityDocument.hashCode());
+		result = prime * result
+				+ ((commentContent == null) ? 0 : commentContent.hashCode());
+		result = prime * result
+				+ ((commentId == null) ? 0 : commentId.hashCode());
+		result = prime * result + commentLevel;
+		result = prime * result
+				+ ((commentMember == null) ? 0 : commentMember.hashCode());
+		result = prime * result
+				+ ((commentTime == null) ? 0 : commentTime.hashCode());
+		result = prime * result
+				+ ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result
+				+ ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result
+				+ ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result
+				+ ((updateUser == null) ? 0 : updateUser.hashCode());
 		return result;
 	}
 	
@@ -156,46 +176,53 @@ public class ActivityComment implements Domain{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final ActivityComment other = (ActivityComment) obj;
-		if (updateUser == null) {
-			if (other.updateUser != null)
+		ActivityComment other = (ActivityComment) obj;
+		if (activityDocument == null) {
+			if (other.activityDocument != null)
 				return false;
-		} else if (!updateUser.equals(other.updateUser))
-			return false;
-		if (updateTime == null) {
-			if (other.updateTime != null)
-				return false;
-		} else if (!updateTime.equals(other.updateTime))
+		} else if (!activityDocument.equals(other.activityDocument))
 			return false;
 		if (commentContent == null) {
 			if (other.commentContent != null)
 				return false;
 		} else if (!commentContent.equals(other.commentContent))
 			return false;
-		if (commentTime == null) {
-			if (other.commentTime != null)
+		if (commentId == null) {
+			if (other.commentId != null)
 				return false;
-		} else if (!commentTime.equals(other.commentTime))
+		} else if (!commentId.equals(other.commentId))
+			return false;
+		if (commentLevel != other.commentLevel)
 			return false;
 		if (commentMember == null) {
 			if (other.commentMember != null)
 				return false;
 		} else if (!commentMember.equals(other.commentMember))
 			return false;
-		if (createUser == null) {
-			if (other.createUser != null)
+		if (commentTime == null) {
+			if (other.commentTime != null)
 				return false;
-		} else if (!createUser.equals(other.createUser))
+		} else if (!commentTime.equals(other.commentTime))
 			return false;
 		if (createTime == null) {
 			if (other.createTime != null)
 				return false;
 		} else if (!createTime.equals(other.createTime))
 			return false;
-		if (commentId == null) {
-			if (other.commentId != null)
+		if (createUser == null) {
+			if (other.createUser != null)
 				return false;
-		} else if (!commentId.equals(other.commentId))
+		} else if (!createUser.equals(other.createUser))
+			return false;
+		if (updateTime == null) {
+			if (other.updateTime != null)
+				return false;
+		} else if (!updateTime.equals(other.updateTime))
+			return false;
+		if (updateUser == null) {
+			if (other.updateUser != null)
+				return false;
+		} else if (!updateUser.equals(other.updateUser))
 			return false;
 		return true;
 	}
