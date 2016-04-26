@@ -313,6 +313,7 @@ function closeTanc(){
         }
         //一开始加载默认第一条数据
         $(".order-nav li:eq(0)").addClass("active");
+        $("#data_timer td").removeClass("today");
         var roomType=$(".order-nav li:eq(0)").find("span").eq(2).text();
         var roomTyy=$(".order-nav li:eq(0)").find("span").eq(3).text();
         var roomGm=$(".order-nav li:eq(0)").find("span").eq(4).text();
