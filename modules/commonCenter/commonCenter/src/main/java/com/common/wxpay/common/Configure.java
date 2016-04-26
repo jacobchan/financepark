@@ -21,7 +21,7 @@ public class Configure {
 	private static String subMchID = "";
 
 	//HTTPS证书的本地路径
-	private static String certLocalPath = "D:/apiclient_cert.p12";
+	private static String certLocalPath = "/home/smartPark/smartPark/keys/apiclient_cert.p12";
 
 	//HTTPS证书密码，默认密码等于商户号MCHID
 	private static String certPassword = "1336003401";
@@ -34,7 +34,7 @@ public class Configure {
 	
 	
 	//通知地址
-	private static String notifyUrl = "http://120.25.101.206:7788/";
+	private static String notifyUrl = "http://220.249.113.12:8088/web/pay/payReturn.json";
 	//以下是几个API的路径：
 	//1）被扫支付API
 	public static String PAY_API = "https://api.mch.weixin.qq.com/pay/micropay";
