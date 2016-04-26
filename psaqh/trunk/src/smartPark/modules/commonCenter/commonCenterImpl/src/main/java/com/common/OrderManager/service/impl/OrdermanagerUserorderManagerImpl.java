@@ -868,7 +868,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     	OrdermanagerUserorder order = ordermanagerUserorderDao.getObjectByUniqueProperty("userorderCode", userorderCode);
     	UnifiedOrderReqData unifiedOrderReqData = new UnifiedOrderReqData(
     			order.getUserorderProject(), order.getUserorderCode(), 1, 
-				"127.0.0.1", "NATIVE", null, order.getUserorderCode(), 
+				"220.249.113.12", "NATIVE", null, order.getUserorderCode(), 
 				order.getUserorderProject(), null, null, null, null, null, null);
     	String codeUrl = wxPayManager.requestUnifiedOrderService(unifiedOrderReqData);
     	return codeUrl;
