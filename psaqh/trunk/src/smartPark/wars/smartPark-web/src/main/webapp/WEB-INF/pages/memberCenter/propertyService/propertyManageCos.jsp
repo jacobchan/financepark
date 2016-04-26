@@ -16,12 +16,12 @@
 					
 						<table class="gt-table mt20">
 							<colgroup>
-								<col width="150"></col>
+								<col width="190"></col>
 								<col width="150"></col>
 								<col width="150"></col>
 								<col width="120"></col>
 								<col width="120"></col>
-								<col></col>
+								<col width="120"></col>
 							</colgroup>
 							<tbody>
 								<tr>
