@@ -7,12 +7,16 @@ import java.util.List;
 import java.util.Collection;
 
 import com.common.MemberAdrManager.entity.MemberadrAddress;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.PubCondition;
 
 public interface MemberadrAddressManager extends BaseManager{
 
@@ -88,4 +92,12 @@ public interface MemberadrAddressManager extends BaseManager{
 	public PagerRecords getPagergetPagerAddress(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders) throws BusException;
+	 /**
+	    * 获取地址的totalCount    陈烨
+	    * @param conditions
+	    * @return
+	    * @throws BusException
+	    */
+	
+	public List<Record> getTotalCount(Collection<Condition> conditions)  throws BusException;
 }
