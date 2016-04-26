@@ -49,6 +49,17 @@ public class ActivityDocument implements Domain{
 	@Column(name = "CREATE_TIME_")
 	private String createTime;//创建时间
 	
+	@Column(name = "COMMENT_LEVEL_")
+	private String commentLevel;//星数
+	
+	public String getCommentLevel() {
+		return commentLevel;
+	}
+
+	public void setCommentLevel(String commentLevel) {
+		this.commentLevel = commentLevel;
+	}
+
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="APPLY_ID_")
 	private com.manage.ActivityManager.entity.ActivityApply activityApply;//活动申请ID
@@ -123,6 +134,7 @@ public class ActivityDocument implements Domain{
 		result = prime * result + ((documentPath == null) ? 0 : documentPath.hashCode());
 		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
 		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result + ((commentLevel == null) ? 0 : commentLevel.hashCode());
 		return result;
 	}
 	
@@ -169,6 +181,11 @@ public class ActivityDocument implements Domain{
 			if (other.createTime != null)
 				return false;
 		} else if (!createTime.equals(other.createTime))
+			return false;
+		if (commentLevel == null) {
+			if (other.commentLevel != null)
+				return false;
+		} else if (!commentLevel.equals(other.commentLevel))
 			return false;
 		return true;
 	}
