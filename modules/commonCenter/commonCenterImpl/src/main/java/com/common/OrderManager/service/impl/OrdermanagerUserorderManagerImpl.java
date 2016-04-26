@@ -691,14 +691,13 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
   	 * @throws BusException
   	 */       
       @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
-    	public PagerRecords getPagerPend_query(Pager pager,//分页条件
+    public PagerRecords getPagerPend_query(Pager pager,//分页条件
     			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
     			@OrderCollection Collection<Order> orders,
     			@ServiceParam(name="genId") String genId)
     			throws BusException {
-    	
-    	 String userorderStatus="01";//01为未完成订单
-         conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.EQUALS, userorderStatus));
+    	 String[] buff = new String[]{"01","02"};
+         conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.IN, buff));
          if(StringUtils.isNotEmpty(genId)){
         	 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
          }
@@ -724,8 +723,8 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 			@ServiceParam(name="genId") String genId)
 			throws BusException {
 	
-	 String userorderStatus="01";//01为未完成订单
-     conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.NOT_EQUALS, userorderStatus));
+     String[] buff = new String[]{"01","02"};
+     conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.NOT_IN, buff));
      if(StringUtils.isNotEmpty(genId)){
     	 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
      }
@@ -786,11 +785,12 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 			@ServiceParam(name="genId") String genId
 			)  throws BusException{
 		List<Record> recordList=new ArrayList<Record>();
-		String userorderStatus="01";
+		String[] buff = new String[]{"01","02"};
+        conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.IN, buff));
 		if(StringUtils.isNotEmpty(genId)){
         	 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
          }
-		conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.EQUALS, userorderStatus));
+		
 		List<OrdermanagerUserorder> List = this.getOrdermanagerUserorders(conditions, null);
 		Record record = new Record();
 		record.put("totalCount", List.size());
@@ -808,11 +808,11 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,
 			@ServiceParam(name="genId") String genId)  throws BusException{
    		List<Record> recordList=new ArrayList<Record>();
-   		String userorderStatus="01";
+   		String[] buff = new String[]{"01","02"};
+        conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.NOT_IN, buff));
         if(StringUtils.isNotEmpty(genId)){
     	  conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
         }
-   		conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.NOT_EQUALS, userorderStatus));
    		List<OrdermanagerUserorder> List = this.getOrdermanagerUserorders(conditions, null);
    		Record record = new Record();
    		record.put("totalCount", List.size());
@@ -848,7 +848,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 			ordermanagerUserorder.setOrdermanagerCommodityDetailListCount(count);
 		}
   		return pagerRecords;
-  	} 
+  	}  
     /**
   	 * 获取支付二维码
   	 * @param conditions
