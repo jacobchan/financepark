@@ -25,3 +25,12 @@ input.city_name{width: 110px;height: 28px; border:0;}
 
 .mb25 .lh30{cursor: pointer;}
 .mb25 .lh30:hover{color:#ff6715}
+
+a.room-show{text-indent: -9999px; background: url(../images/zs/romm_show_btn.png) left center no-repeat;}
+a.fa-angle-up{background-position: -28px center;}
+
+#roomlist .jd-order-room .guarantee{padding:1px 2px; background: #ff3c47;color: #fff; display: inline-block;border-radius:2px}
+.jd-order-room td .f12{padding-right: 40px; position: relative;line-height: 20px;}
+.jd-order-room td .f12 a{position:absolute; right: 20px; bottom: 0;}
+#roomlist .show_title{border-radius: 3px;color: #333;font-size: 12px;}
+#roomlist .show_title i{position: absolute; display: block; width: 14px; height: 12px; left: 205px; top: -12px; background:url(../images/zs/alert_dir.png) center center no-repeat;}
