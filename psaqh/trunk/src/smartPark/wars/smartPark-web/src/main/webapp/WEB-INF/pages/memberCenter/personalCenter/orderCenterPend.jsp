@@ -196,7 +196,6 @@ type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
 		 var genId = $(".c-b1").attr("data");	
 		 //订单号
 		 var userorderCode=$("#userorderCode").val();	
-		 alert(userorderCode);
 		 var params=['userorderCode='+userorderCode,'operator:userorderCode=LIKE','genId='+genId];
 		 $.ajax({
 			    url:baseUrl + "ordermanagerUserorderManager/getTotalCountPend.json",
@@ -204,8 +203,6 @@ type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
 				success : function(results) {
 					var totalCount=results.records[0].totalCount;
 					pageCount = Math.ceil(totalCount / pageSize);//页数
-					//pageCount=Math.ceil(results.totalCount/pageSize);//页数
-					alert(pageCount);
 					refreshData_pend_query(1,pageSize);
 					$(".tcdPageCode").empty();
 					if(totalCount>0){
