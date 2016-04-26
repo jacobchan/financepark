@@ -155,16 +155,18 @@
 		//alert(ocCode);
 		var startTime=$("#startTime").val(); 
 		var endTime=$("#endTime").val(); 			
-		var params = ['ocLikeCode='+ocCode,'startTime='+startTime,'endTime='+endTime];
+		var params = ['ocCode='+ocCode,'operator:ocCode=LIKE','startTime='+startTime,'endTime='+endTime];
 		$.ajax({
-			url:baseUrl+'propertyservicemanagerOcManager/getPagerLikeOc.json',
+			url:baseUrl+'propertyservicemanagerOcManager/getTotalCount.json',
+			//url:serviceURL, 
 			data:params.join('&'),
 			success:function(results){	
-				pageCount=Math.ceil(results.totalCount/pageSize);//页数				
+				var totalCount=results.records[0].totalCount;
+				pageCount = Math.ceil(totalCount / pageSize);//页数						
 				//alert(pageCount);
 				 refreshData_query(1,pageSize);
 				 $(".tcdPageCode").empty();
-				 if(totalCount>0){
+				 if(pageCount>0){
 					$(".tcdPageCode").createPage({
 					    pageCount:pageCount,
 					    current:1,
