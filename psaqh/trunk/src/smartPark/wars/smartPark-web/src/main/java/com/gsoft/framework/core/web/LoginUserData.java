@@ -49,7 +49,7 @@ public class LoginUserData extends BaseDataController {
 		//根据手机号码获取用户
 		MemberInformation mb = memberInformationManager.getUserByPhone(phone);
 		if(mb != null){
-			return new DataModelAndView("该用户已存在！");
+			return new DataModelAndView("该用户已存在");
 		}
 				
 		Boolean success = mcMsgdatasManager.smsSend("1010", map, null, phone);
@@ -78,7 +78,7 @@ public class LoginUserData extends BaseDataController {
 		//根据手机号码获取用户
 		MemberInformation mb = memberInformationManager.getUserByPhone(phone);
 		if(mb != null){
-			return new DataModelAndView("该用户已存在！");
+			return new DataModelAndView("该用户已存在");
 		}
 		
 		Boolean success = mcMsgdatasManager.smsSend("1010", map, null, phone);
