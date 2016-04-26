@@ -107,19 +107,33 @@
 		    var fkcodeId =arg.fkcodeId;
 		   // alert(fkcodeId);
 			$.ajax({
-				url:baseUrl+'propertyservicemanagerFkcodeManager/getPropertyservicemanagerFkcode.json',
+				url:baseUrl+'propertyservicemanagerFkcodeManager/getFkByFkcodeId.json',
 				data:'fkcodeId='+fkcodeId,
 				success:function(result){					    		           
 					if(result&&result.record){
 						var record = result.record;
-						var fkcodeComp="";						
-						$('#fkCode').html(record.fkCode);
+						var fkcodeComp="";
+						var cancelbutton="";
+						var dksataus="";
+						//alert(record.dksataus);
+						if(record.dksataus=="00"){
+							status = "未到访";	
+							cancelbutton="<span class='f12 ml5 mr5'>|</span><a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消访客</a>";
+							//$('#fkCode').html(cancelbutton);
+						}else if(record.dksataus=='01'){
+							status = "未到访";				
+						}else if(record.dksataus=='02'){
+							status = "已到访";
+						}else if(record.dksataus=='03'){
+							status = "已取消";
+						}
+						$('#fkCode').html(record.fkCode+"&nbsp&nbsp"+status);
 						$(".fkcodes").html(record.fkCode);  //二维码弹窗
 						$('#applyTime').html(record.applyTime);
-						if(record.fkcodeComp==null){
-							fkcodeComp="";
+						if(!record.fkcodeComp==null){
+							fkcodeComp="到访企业："+record.fkcodeComp;
 						}
-						$('#fkcodeComp').html("到访企业："+fkcodeComp);
+						$('#fkcodeComp').html(fkcodeComp);
 						$('#fkcodeTime').html("到访时间："+record.fkcodeTime);									
 						$('#fkcodeRemark').html("访客说明："+record.fkcodeRemark);															
 						$('#memberName').html("访客姓名："+record.fkcodeName);
