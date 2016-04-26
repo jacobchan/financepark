@@ -156,7 +156,7 @@
 							var buttonpay="";
 						}
 						$(".fr.f12.m1").html(buttonpay+buttonHtml);
-						$('#bxCode').html(record.bxCode+bxStatus);
+						$('#bxCode').html(record.bxCode+"&nbsp&nbsp"+bxStatus);
 						if(record.bxAmount==null){
 							bxAmount=0;
 						}
