@@ -221,48 +221,7 @@ $('.hhf-submit.f14.fl.ml20.hospital').click(function(){
 	});
 }
 	$('.hhf-submit.f14.fl.ml20.all').click(function(){	
-	 //订单类型id
-	 var genId = $(".c-b1").attr("data");	
-	 //订单号
-	 var userorderCodeLike=$("#userorderCode").val();			 
-	 var params=['userorderCodeLike='+userorderCodeLike,'genId='+genId];
-	 $.ajax({
-		 url : baseUrl + "ordermanagerUserorderManager/getTotalCount.json",
-		 data:params.join('&'),
-		 success : function(results) {
-			 var totalCount=results.records[0].totalCount;
-			 pageCount = Math.ceil(totalCount / pageSize);//页数
-			 refreshData_All_query(1,pageSize);
-			     $(".tcdPageCode").empty();
-				 if(totalCount>0){
-					 $(".tcdPageCode").createPage({							
-					 	 pageCount:pageCount,
-						 current:1,
-						 backFn:function(p){
-								 currentIndex = p;
-								 this.pageCount=pageCount;
-								 refreshData_All_query(p,pageSize);
-						 }
-					 });	
-				 }
-			
-			}
-		}); 		
+		loadData();
    });
-function refreshData_All_query(pageIndex,pageSize){
-	//订单类型id
-	 var genId = $(".c-b1").attr("data");	
-	 //订单号
-	 var userorderCodeLike=$("#userorderCode").val();			 
-	 var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCodeLike='+userorderCodeLike,'genId='+genId];
-	 $.ajax({
-		url:baseUrl+'ordermanagerUserorderManager/getPagerAll.json',
-		data:params.join('&'),
-		success:function(results){
-			if(results&&results.records){
-				 _parseRecords_hospital(results.records);
-			}
-		}
-	});
-} 
+
 </script>
