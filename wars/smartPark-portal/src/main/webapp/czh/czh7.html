@@ -17,6 +17,7 @@
     
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
 	<script type="text/javascript" src="../scripts/page/grade.js"></script>
+	
 </head>
 <body style="background-color:#f9f9f9">
 	<!--***top start****************************************-->
@@ -57,7 +58,9 @@
 				</div>	
 				<div class="article-comments mt20">
 					<div class="ac-one">
-						<div>您的评论 <img src="../styles/images/czh/star.png" border="0" class="mr20"></div>
+						<div><span class="span_bold vm">您的评论</span>
+						<span class="starbox1"><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i></span>
+						</div>
 						<textarea class="ao-area commtext" placeholder="说点啥吧~"></textarea>	
 						<a href="javascript:;" class="a-c a-c-o fr mt20" style="margin-right:0px;" onclick="postcomm();">发表评论</a>
 					</div>
@@ -108,7 +111,7 @@
 				</div>
 			</div>	
 			<div class="fr w275">
-				<div class="art-bd">
+				<div class="art-bd valcomm">
 					<span class="lh26 fl">评价文档：</span><img src="../styles/images/czh/star-h.png" border="0" class="mr20">
 				</div>
 				<h3 class="lh40 f16 mt20">相关文档</h3>
@@ -163,6 +166,7 @@
 			if(tmp2!=''&&tmp1!=null){
 				applyId=tmp2;
 			}
+			star(".starbox1 i");
 			var serviceURL = baseUrl+"activityDocumentManager/getPagerActivityDocuments.json";
 			var params = ['activityApply.applyId='+applyId];
 			$.youi.ajaxUtils.ajax({
@@ -294,6 +298,18 @@
 			});		
 		};
 		
+		//评论数
+		function star(ele){
+			$(ele).hover(function(){
+				var index=$(this).index()+1;
+				$(ele).removeClass("star1").addClass("star2");
+				var arr=$(ele).toArray().slice(0,index);
+				for(var i=0;i<arr.length;i++){
+					arr[i].className="star1";
+				}
+			});
+		}
+		
 		//生成随机数
 		function getRandom(n){
 	        return Math.floor(Math.random()*n+1);
@@ -318,7 +334,43 @@
 							}
 						}
 					}
-				});		
+				});	
+				
+				$.youi.ajaxUtils.ajax({
+					url:baseUrl+"activityCommentManager/getPagerActivityComments.json",
+					data:['activityDocument.documentId='+documentId].join('&'),
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(results){
+						if(results&&results.records){
+							if(results.records.length>0){
+								var comm = results.records;
+								var len = comm.length;
+								var count =0;
+									for(var j=0;j<len;j++){
+										count+=parseInt(comm[j].commentLevel);
+									}
+									var val = parseInt(count/len);
+									$('.valcomm').empty();
+									var html = "";
+									for(var j=0;j<val;j++){
+										html+="<i class='star1'></i>";
+									}
+									for(var k=0;k<5-val;k++){
+										html+="<i class='star2'></i>";
+									}
+									$('.valcomm').append("<span class='lh26 fl'>评价文档：</span><span class='starbox2'>"+html+"</span>");
+									$('.doceval').empty();
+									$('.doceval').append(""+len+"人评价");
+								}else{
+									$('.valcomm').empty();
+									$('.valcomm').append("<span class='lh26 fl'>评价文档：</span><img src='../styles/images/czh/star-h.png' border='0' class='mr20'>");
+									$('.doceval').empty();
+									$('.doceval').append("0人评价");
+								}
+							}
+						}
+					});
 	     }
 	     
 	   	//拼接top3文档评论
@@ -326,8 +378,17 @@
 				$(".comment").empty();
 				var html ="";
 				for(var i=0;i<record.length;i++){
+					var count = record[i].commentLevel;
+					var cont = "";
+					for(var j=0;j<count;j++){
+						cont+="<i class='star1'></i>";
+					}
+					for(var k=0;k<5-count;k++){
+						cont+="<i class='star2'></i>";
+					}
 					html+="<tr><td><img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].commentMember.memberHeadPortrait+"&method=show' width='58' height='58'></td>"+
-						"<td><h4><img src='../styles/images/czh/star.png' border='0' class='mr20'>"+
+						"<td><h4>"+
+						"<span class='starbox2'>"+cont+"</span>"+
 						"<span class='ml5'>"+record[i].commentMember.memberNickname+"</span></h4>"+
 						"<p class=f14'>"+record[i].commentContent+"</p></td>"+
 						"<td class='tr'><p class='c-b1 f12'>"+record[i].commentTime+"</p></td></tr>";
@@ -346,7 +407,14 @@
 	   			close("请输入评论内容!");
 				return false;
 			}
-	   		var params = ['activityDocument.documentId='+documentId,'commentContent='+commentContent];
+	   		var commentLevel = 0;
+			var arr=$('.starbox1 i').toArray();
+			for(var i=0;i<arr.length;i++){
+				if(arr[i].className=="star1"){
+					commentLevel++;
+				}
+			}
+	   		var params = ['activityDocument.documentId='+documentId,'commentContent='+commentContent,'commentLevel='+commentLevel];
 			$.youi.ajaxUtils.ajax({
 				url:baseUrl+"activityCommentManager/saveActivityComment.json",
 				data:params.join('&'),
