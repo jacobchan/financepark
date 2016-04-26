@@ -142,4 +142,13 @@ public interface McMsgdatasManager extends BaseManager{
 	 */
 	public String sendSelected(McMsgdatas mcMsgdatas)throws BusException;
 	
+	/**
+	 * 校验验证码有效性
+	 * @param phone
+	 * @param code
+	 * @return
+	 * @throws BusException
+	 */
+	public boolean checkCode(String phone,String code) throws BusException;
+	
 }

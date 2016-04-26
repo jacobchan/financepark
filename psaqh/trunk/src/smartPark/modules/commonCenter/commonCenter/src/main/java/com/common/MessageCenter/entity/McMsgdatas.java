@@ -58,10 +58,16 @@ public class McMsgdatas implements Domain,IMessage{
 	@Length(max=36)
 	private String msgCaption;//消息主题
 
+	/**
+	 * 0：注册 1：后台用户 2：企业管理员 3：会员
+	 */
 	@Column(name = "MSG_TYPE_")
 	@Length(max=36)
 	private String msgType;//消息类型
 
+	/**
+	 * 00-待发送，01-发送成功，02-发送失败
+	 */
 	@Column(name = "SEND_STATUS_")
 	@Length(max=2)
 	private String sendStatus;//发送状态
