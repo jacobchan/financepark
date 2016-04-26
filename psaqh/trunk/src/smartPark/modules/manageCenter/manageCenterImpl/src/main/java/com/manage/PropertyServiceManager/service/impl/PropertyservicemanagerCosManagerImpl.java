@@ -329,7 +329,7 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
     	//构建替换模板参数对应的map
 		Map<String, String> replaceMap = new ReferenceMap();
 		replaceMap.put("#user", memberName);
-		replaceMap.put("#serviceNo", cosCode);
+		replaceMap.put("#CosCode", cosCode);
 		//构建消息内容数据
 		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0307", replaceMap);
 		//发送消息,给会员
