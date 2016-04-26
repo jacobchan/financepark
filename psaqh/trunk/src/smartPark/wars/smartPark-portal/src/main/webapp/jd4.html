@@ -708,11 +708,9 @@ a.c-b1:hover {
 			var html = "<div class='show_title' style='position: absolute;top:"+top+"px;width:400px;border: solid 1px #ECEBEB;left:"+($(this).offset().left-200)+"px; padding: 10px;background: #ffffff;'><i></i>"+$(this).attr("aTitle")+"</div>";
 			//alert(html)
 			if(e.type =="mouseover"){
-				//alert("over")
 				$("#roomlist").append(html)
 			}else{
-				//alert("out");
-				//$("#roomlist .show_title").remove();
+				$("#roomlist .show_title").remove();
 			}
 		   }
 		)
