@@ -1489,6 +1489,10 @@
 					}
 				}
 			});
+		 	$("body").bind("click", function(){
+            	$(".time-nav").hide();
+				$(".select_list").hide();
+         	});
 		});
 		function _parseRecords(record) {
 			var html = '';
@@ -1557,11 +1561,6 @@
 			var applyId = obj.id;
 			var url = "../czh/czh3.html" + "?" + "applyId=" + applyId;
 			window.location.assign(url);
-		}
-
-		function abc() {
-			$(".time-nav").hide();
-			$(".select_list").hide();
 		}
 		//酒店预定跳转
 		function gotoHotel() {
