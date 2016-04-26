@@ -231,7 +231,7 @@
 			}
 		});
 	}
-	<!-- 取消访客 -->	
+	//<!-- 取消访客 -->	
 	$(function(){
 		$(".hhf-submit.c").click(function(){	
 				var id=$(".fkCode")[0].getAttribute("id");
