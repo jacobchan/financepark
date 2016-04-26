@@ -848,7 +848,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 			ordermanagerUserorder.setOrdermanagerCommodityDetailListCount(count);
 		}
   		return pagerRecords;
-  	}  
+  	} 
     /**
   	 * 获取支付二维码
   	 * @param conditions
