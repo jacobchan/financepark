@@ -118,7 +118,6 @@
 		}); 
 	//确认取消弹窗
 	function cancel(){	
-		alert(11);
 		$(".bg-tanc.m1").show();
 	};	
 	//取消
