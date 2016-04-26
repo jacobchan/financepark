@@ -153,8 +153,7 @@ public class MessagePoster implements MessagePostProcessor {
 			McMsgdatas messageDate = (McMsgdatas) message;
 			messageDate.setSendStatus(status);
 			messageDate.setReceive(phone);
-			messageDate
-					.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+			messageDate.setSendDate(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 			msgdatasManager.saveMcMsgdatas(messageDate);
 		}
 	}
