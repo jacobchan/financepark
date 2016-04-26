@@ -135,7 +135,8 @@ public class ShoppingcarGroupManagerImpl extends BaseManagerImpl implements Shop
 		o = ordermanagerUserorderManager.saveOrdermanagerUserorder(o);
 		for(ShoppingcarGroup shopCar:shopCarList){//保存订单明细
 			OrdermanagerCommoditydetail orderDetail = new OrdermanagerCommoditydetail();
-			orderDetail.setOrdermanagerUserorder(o);
+//			orderDetail.setOrdermanagerUserorder(order);
+			orderDetail.setOrderId(o.getUserorderId());
 			orderDetail.setCommodityId(shopCar.getCommodityId());
 			orderDetail.setCommoditydetailNum(shopCar.getCompanyCateringNum());
 			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
