@@ -7,6 +7,7 @@
 	<link href="styles/base.css" type="text/css" rel="stylesheet">
 	<link href="styles/page/zs.css" type="text/css"  rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="styles/page/dateplug.css">
+	<link href="styles/page/cityselector.css" type="text/css" rel="stylesheet">
 	
 	<script type="text/javascript" src="scripts/lib/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/jquery-ui.min.js"></script>
@@ -15,6 +16,11 @@
 	<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
 	<script type="text/javascript" src="scripts/page/url.js"></script>
 	<script src="scripts/page/laydate/laydate.js"></script>
+	
+	<script type="text/javascript" src="scripts/cityselector/aircity.js"></script>
+	<script type="text/javascript" src="scripts/cityselector/hotelcity.js"></script>
+	<script type="text/javascript" src="scripts/cityselector/j.dimensions.js"></script>
+	<script type="text/javascript" src="scripts/cityselector/j.suggest.js"></script>
 	<script type="text/javascript">
 		$(function(){
 			/* $(".see-all").click(function(){
@@ -87,15 +93,17 @@
 			            </div>
 			            <div class="search-con">
 			                <label class="mb10">
+			                	<input id="depCityCode" name="depCityCode" type="hidden" value="" class="J_DepCityCode"/>
 			                    <span class="fl">出发城市</span>
-			                    <input type="text" class="pi-input J_DepCity ks-autocomplete-input" name="depCityName" placeholder="城市名" autocomplete="off">
-			                    <input name="depCity" type="hidden" class="J_DepCityCode">
+			                    <input id="fromcity" type="text" class="pi-input J_DepCity ks-autocomplete-input" name="fromcity" placeholder="城市名" autocomplete="off">
 			                </label>
+			                <div id="TicketSuggest1" class="ac_results fromcity_position"></div>
 			                <label>
+			                	<input id="arrCityCode" name="arrCityCode" type="hidden" value="" class="J_DepCityCode"/>
 			                    <span class="fl">到达城市</span>
-			                    <input type="text" class="pi-input" name="arrCityName" placeholder="城市名" autocomplete="off">
-			                    <input name="arrCity" type="hidden" class="J_ArrCityCode">
+			                    <input id="gotocity" type="text" class="pi-input" name="gotocity" placeholder="城市名" autocomplete="off">
 			                </label>
+			                <div id="TicketSuggest2" class="ac_results gotocity_position"></div>
 			                <div class="trade">
 			                	<a href="javascript:void(0)" target="_self">换</a>
 			                </div>
@@ -388,6 +396,8 @@
 	<script type="text/javascript" src="scripts/page/date.js"></script>
 	<script type="text/javascript">
 	var lowest_price = new Array();
+	var lowest_price_date = new Array();
+	var price = new Array();
 		$(function(){
 			var Request = new Object();
 			Request = GetRequest();
@@ -409,7 +419,7 @@
 						var record = result.records;
 						parseFlights(record[0]);
 					}else{
-						alert("error");
+						alert("获取航班信息失败。");
 					}
 				},
 				error:function(){
@@ -429,14 +439,28 @@
 						for(var i=0;i<record.length;i++){
 							console.debug("index "+ i +":"+record[i].depDate+"  price:"+record[i].ticketPrice);
 							lowest_price.push(record[i].ticketPrice);
+							lowest_price_date.push(record[i].depDate);
 						}
+						var maxDays = (new Date()).MaxDayOfDate();
+						//填充当天之前日期的最低价
+						for(var i=0;i<(new Date(lowest_price_date[0].replace(/-/g,'/'))).getDate();i++){
+							price.push(0);
+						}
+						//填充当天到月底的天数的最低价
+						for(var i=(new Date(lowest_price_date[0].replace(/-/g,'/'))).getDate(),j=0;i<maxDays&&j<lowest_price.length;i++,j++){
+							price.push(lowest_price[j]);
+						}
+						//日历控件当前日期月份的价格数组
+						$("#kalendar-detail").dateplug({
+							price: price
+						});
 						parseLowestPrice(record,gotodate);
 					}else{
-						alert("error");
+						console.error("机票最低价获取有误！");
 					}
 				},
 				error:function(){
-					alert("abc");
+					console.error("机票最低价信息获取有误！");
 				}
 			});
 			
@@ -447,10 +471,8 @@
 				    $("#kalendar-detail").slideDown()
 				 }
 			})
-			var price = [1,23,4,5,7,8];
-			$("#kalendar-detail").dateplug({
-				price: price
-				});
+			
+			//日历控件
 		   $.fn.dateplug.ajax = function(e){
 			  //为每个日期的点击事件添加事件函数 当前日期可以通过class=current属性获取
 			  var month = $("#kalendar_month").html(),year = $("#kalendar_year").html(),day = $("#kalendar-detail td.current p:nth-child(1)").html();
@@ -460,8 +482,36 @@
 			   //获取相应月份的价格数据并返回  当前年月可获取
 			   var month = $("#kalendar_month").html(),year = $("#kalendar_year").html(),day = $("#kalendar-detail td.current p:nth-child(1)").html();
 			   //此处ajax应该设置为同步执行
-			   return [14,25,36,7,8];
+			   var resultArray = new Array();
+			   var maxDays = (new Date(year,month-1,1)).MaxDayOfDate();
+			   for(var i=1;i<=maxDays;i++){
+				   var tmp = (new Date(year,month,i)).Format("yyyy-MM-dd");
+				   var flag = 0;
+				   for(var j=0;j<lowest_price_date.length;j++){
+					   if(lowest_price_date[j]==tmp){
+						   resultArray.push(lowest_price[j]);
+						   flag++;
+						   break;
+					   }
+				   }
+				   if(flag==0) resultArray.push(0);
+			   }
+			   return resultArray;
 		   }
+		   //城市选择控件
+		   $("#fromcity").suggest(citys, {
+				hot_list : commoncitys,
+				dataContainer : '#city_threeCode1',
+				onSelect : function() {
+					$("#gotocity").click();
+				},
+				attachObject : '#TicketSuggest1'
+			});
+			$("#gotocity").suggest(citys, {
+				hot_list : commoncitys,
+				dataContainer : '#city_threeCode2',
+				attachObject : '#TicketSuggest2'
+			});
 			
 		});
 		var pltime,timer;//动态加载效果的时间控件变量
@@ -535,7 +585,7 @@
 						html_ += "<td><a href='javascript:;' class='outer' target='_top'>";
 					}
 					html_ += "<span class='c-o f14'>点击查看</span>";
-					html_ += "<p class='c-333 f12'>"+DateAdd("d",i,tmp).format("yyyy-MM-dd")+"</p>";
+					html_ += "<p class='c-333 f12'>"+DateAdd("d ",i,tmp).Format("yyyy-MM-dd")+"</p>";
 					html_ += "</a></td>";
 				}
 				html_ += "</tr></tbody></table></div></td>";
@@ -552,7 +602,7 @@
 							if(i>=record.length){
 								html_ += "<td><a href='javascript:;' class='outer' target='_top'>";
 								html_ += "<span class='c-o f14'>点击查看</span>";
-								html_ += "<p class='c-333 f12'>。。。</p>";
+								html_ += "<p class='c-333 f12'></p>";
 								html_ += "</a></td>";
 							}else{
 								if(gotodate==record[i].depDate){
@@ -579,7 +629,7 @@
 				}
 			}	
 		}
-		//日期对比 a为开始日期b为结束日期 a>b false a<b true
+		//日期对比 a为开始日期b为结束日期 a>b false a<=b true
 		function compareDate(a, b) {
 		    var arr = a.split("-");
 		    var starttime = new Date(arr[0], arr[1], arr[2]);
@@ -648,7 +698,7 @@
 		                        break;
 		                }
 		                default   :   {
-		                        date.setDate(d.getDate()+number);
+		                        date.setDate(date.getDate()+number);
 		                        return   date;
 		                        break;
 		                }
@@ -661,8 +711,7 @@
 		// 例子： 
 		// (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423 
 		// (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18 
-		Date.prototype.Format = function(fmt) 
-		{
+		Date.prototype.Format = function(fmt) {
 		  var o = { 
 		    "M+" : this.getMonth()+1,                 //月份 
 		    "d+" : this.getDate(),                    //日 
@@ -679,11 +728,39 @@
 		  fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length))); 
 		  return fmt; 
 		}
-	</script>
-	<script>
-	 $(function(){
-    	
-	 })
+		//+---------------------------------------------------  
+		//| 比较日期差 dtEnd 格式为日期型或者有效日期格式字符串  
+		//+---------------------------------------------------  
+		function DateDiff(dtStart, dtEnd, strInterval) {
+			if (typeof dtEnd == 'string' ){//如果是字符串转换为日期型  
+				var arys= dtEnd.split('-'); 
+				dtEnd = new Date(arys[0],--arys[1],arys[2]);
+		    }
+			if (typeof dtStart == 'string' ){//如果是字符串转换为日期型  
+				var arys= dtStart.split('-'); 
+				dtStart = new Date(arys[0],--arys[1],arys[2]);
+		    } 
+		    switch (strInterval) {   
+		        case 's' :return parseInt((dtEnd - dtStart) / 1000);  
+		        case 'n' :return parseInt((dtEnd - dtStart) / 60000);  
+		        case 'h' :return parseInt((dtEnd - dtStart) / 3600000);  
+		        case 'd' :return parseInt((dtEnd - dtStart) / 86400000);  
+		        case 'w' :return parseInt((dtEnd - dtStart) / (86400000 * 7));  
+		        case 'm' :return (dtEnd.getMonth()+1)+((dtEnd.getFullYear()-dtStart.getFullYear())*12) - (dtStart.getMonth()+1);  
+		        case 'y' :return dtEnd.getFullYear() - dtStart.getFullYear();  
+		    }  
+		}
+		//+---------------------------------------------------  
+		//| 取得当前日期所在月的最大天数  
+		//+---------------------------------------------------  
+		Date.prototype.MaxDayOfDate = function(){   
+		    var myDate = this; 
+		    var date1 = (new Date(myDate.getFullYear(),myDate.getMonth(),1));
+		    var date2 = (new Date(myDate.getFullYear(),myDate.getMonth(),1));
+		    date2 = DateAdd("m ",1,date2);
+		    var result = DateDiff(date1.Format('yyyy-MM-dd'),date2.Format('yyyy-MM-dd'),"d");
+		    return result;  
+		}  
 	</script>
 </body>
 </html>
