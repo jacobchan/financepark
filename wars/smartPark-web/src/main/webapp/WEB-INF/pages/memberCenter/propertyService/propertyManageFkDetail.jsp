@@ -117,7 +117,7 @@
 							status = "已取消";
 						}
 						$('#fkCode').html(record.fkCode+"&nbsp&nbsp"+status);
-						$(".fkCode").html(record.fkCode);//确认取消弹窗
+						$(".c-o.moverec").html(record.fkCode);//确认取消弹窗
 						$(".fkcodes").html(record.fkCode);  //二维码弹窗
 						$('#applyTime').html(record.applyTime);
 						if(!record.fkcodeComp==null){
