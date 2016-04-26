@@ -92,6 +92,12 @@ public interface ReservationRecordManager extends BaseManager{
   * @throws BusException
   */
     public List<com.gsoft.framework.core.dataobj.Record> getRecordsByRecordType(String recordType) throws BusException;
+    /**
+     *获取招商客服角色
+     * @param o
+     * @throws BusException
+     */
+    public List<com.gsoft.framework.core.dataobj.Record> getRoleSaleSer(String userId) throws BusException;
     
     /**
      * 授理预约记录，变更状态：已预约--->已授理
