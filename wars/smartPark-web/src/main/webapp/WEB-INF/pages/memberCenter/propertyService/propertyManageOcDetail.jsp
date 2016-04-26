@@ -73,7 +73,8 @@
 	        $(".tc.mt25.f18").append(content) ;
 	        $(".toast").show();		      		        		       				
 			setTimeout(function(){$(".toast").hide(); },2000);
-			location.reload();
+			setTimeout(function(){location.reload(); },2000);
+			
       }
     $(function(){					
 		var arg=getQueryStringArgs();
@@ -98,7 +99,7 @@
 							  status = "已取消";
 						  }else if(record.ocStatus=='00'){
 							  status = "待处理";
-							  button="<a href='javascript:;' class='ib-btn mr15' style='width:120px;' onclick='cancel()' align='center' >取消</a>";
+							  button="<a href='javascript:;' class='pb-btn tc' style='width:120px;' onclick='cancel()' align='center' >取消</a>";
 						  }	
 						$(".fr.f12").html(button); 
 						$('#bxCode').html(record.ocCode+"&nbsp&nbsp"+status);
