@@ -24,6 +24,7 @@ import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
 import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
 import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
+import com.gsoft.common.service.BaseUserManager;
 import com.gsoft.entity.MessageTempCode;
 import com.gsoft.entity.ReferenceMap;
 import com.gsoft.framework.codemap.entity.Codeitem;
@@ -41,6 +42,7 @@ import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.OrderCollection;
 import com.gsoft.framework.esb.annotation.PubCondition;
 import com.gsoft.framework.esb.annotation.ServiceParam;
+import com.gsoft.framework.security.agt.entity.User;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
@@ -85,6 +87,9 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 	
 	@Autowired
 	private BbmRoomManager bbmRoomManager ;
+	
+	@Autowired
+	private BaseUserManager baseUserManager;
 	
     /**
      * 查询列表
@@ -215,14 +220,14 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
     			
     			
     			//获取关联项目
-    			String commodityId=o.getRecordCommdityId();
-    			PurchasingmanagerCommodity p =new PurchasingmanagerCommodity();
-				if(commodityId !=null){
-					p=purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
-				}
+//    			String commodityId=o.getRecordCommdityId();
+//    			PurchasingmanagerCommodity p =new PurchasingmanagerCommodity();
+//				if(commodityId !=null){
+//					p=purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
+//				}
 				Map<String, String> replaceMap1 = new ReferenceMap();
     			replaceMap.put("#appointmentNo", o.getRecordCode());
-    			replaceMap.put("#relateProject", p!=null?p.getCommodityTitle():null);
+    			replaceMap.put("#relateProject", "创立方预约");
     			//构建消息内容数据
     			McMsgdatas msgData1 = mcMsgdatasManager.buildMsgData(MessageTempCode.MSG_BACKGROUND_4, replaceMap1);
     			//发送消息,给招商管理员:ROLE_SALE_ADMIN
@@ -267,8 +272,35 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
      */
     @EsbServiceMapping
     public ReservationRecord saveReternRecords(ReservationRecord o) throws BusException{
+    	MemberInformation mem=null;
+		//获取当前登录用户信息
+		if(o.getRecordMemberId() != null){
+	    	mem=memberInformationManager.getMemberInformation(o.getRecordMemberId());
+	    	//非匿名预约：保存当前用户ID作为预约对象
+	    	o.setRecordMemberId(mem.getMemberId());
+	    	
+	    	if(StringUtils.isEmpty(o.getVisiteTel())){
+	    		o.setVisiteTel(mem.getMemberPhoneNumber());//工位预约时
+	    	}
+	    	if(StringUtils.isEmpty(o.getVisiteName())){
+	    		o.setVisiteName(mem.getMemberName());//工位预约时
+	    	}
+		}
     	if(o.getRecordVisiteStatus().equals("01")){//是否回访 01：是
     		o.setRecordStatus("03");//已到访
+    		//发送短信给联系人,通知受理成功
+    		try {
+    			//构建替换模板参数对应的map
+    			Map<String, String> replaceMap = new ReferenceMap();
+    			replaceMap.put("#user",mem != null?mem.getMemberName():o.getVisiteName());
+    			replaceMap.put("#relateProject","创立方");
+    			//构建消息内容数据
+    			McMsgdatas msgData = mcMsgdatasManager.buildMsgData(MessageTempCode.MSG_USER_6, replaceMap);
+    			//发送消息,给会员
+    			mcMsgdatasManager.sendMessage(msgData, mem != null?mem.getMemberPhoneNumber():o.getVisiteTel(), 5);
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}
     	}else{
     		o.setRecordStatus("05");//未到访
     	}
@@ -283,7 +315,50 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 	public void changeReservationRecordByStatus(ReservationRecord o) throws BusException {
 		o.setRecordStatus("02");//已授理
 		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-		reservationRecordDao.save(o);
+		o.setRecordCode(BizCodeUtil.getInstance().getBizCodeDate("SLBH"));//生成受理编号
+		o=reservationRecordDao.save(o);
+		MemberInformation mem=null;
+		//获取当前登录用户信息
+		if(o.getRecordMemberId() != null){
+	    	mem=memberInformationManager.getMemberInformation(o.getRecordMemberId());
+	    	//非匿名预约：保存当前用户ID作为预约对象
+	    	o.setRecordMemberId(mem.getMemberId());
+	    	
+	    	if(StringUtils.isEmpty(o.getVisiteTel())){
+	    		o.setVisiteTel(mem.getMemberPhoneNumber());//工位预约时
+	    	}
+	    	if(StringUtils.isEmpty(o.getVisiteName())){
+	    		o.setVisiteName(mem.getMemberName());//工位预约时
+	    	}
+		}
+
+		//发送短信给联系人,通知受理成功
+		try {
+			//构建替换模板参数对应的map
+			Map<String, String> replaceMap = new ReferenceMap();
+			replaceMap.put("#user",mem != null?mem.getMemberName():o.getVisiteName());
+			replaceMap.put("#appointmentNo", o.getRecordCode());
+			//构建消息内容数据
+			McMsgdatas msgData = mcMsgdatasManager.buildMsgData(MessageTempCode.MSG_USER_5, replaceMap);
+			//发送消息,给会员
+			mcMsgdatasManager.sendMessage(msgData, mem != null?mem.getMemberPhoneNumber():o.getVisiteTel(), 5);
+			
+			//获取关联项目
+//			String commodityId=o.getRecordCommdityId();
+//			PurchasingmanagerCommodity p =new PurchasingmanagerCommodity();
+//			if(commodityId !=null){
+//				p=purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
+//			}
+			Map<String, String> replaceMap1 = new ReferenceMap();
+			replaceMap.put("#appointmentNo", o.getRecordCode());
+			replaceMap.put("#relateProject", "创立方预约");
+			//构建消息内容数据
+			McMsgdatas msgData1 = mcMsgdatasManager.buildMsgData(MessageTempCode.MSG_BACKGROUND_4, replaceMap1);
+			//发送消息,给招商客服:ROLE_SALE_SER
+			mcMsgdatasManager.sendMessage(msgData1,"ROLE_SALE_SER",2);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
     /**
@@ -356,6 +431,25 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 		return recordList;
 	}
 	
+	
+	
+	 /**
+     * 获取客服代表角色
+     */
+	@EsbServiceMapping
+	public List<Record> getRoleSaleSer(@ServiceParam(name="userId",pubProperty = "userId") String userId) throws BusException{
+		List<Record> recordList=new ArrayList<Record>();
+		List<User> users = baseUserManager.getUsersByRoles(new String[]{"ROLE_SALE_SER"});
+		if(users !=null&&users.size()>0){
+			for(User user_:users){
+				Record record = new Record();
+				record.put("loginValue", user_.getUserId());
+				record.put("loginName", user_.getLoginName());
+				recordList.add(record);
+			}
+		}
+		return recordList;
+	}
 	
 	/**
 	 * 前台个人中心    取消预约申请，将待受理状态变更为已取消
