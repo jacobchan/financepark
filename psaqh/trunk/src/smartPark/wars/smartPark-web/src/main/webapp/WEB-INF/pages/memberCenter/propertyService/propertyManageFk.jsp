@@ -192,15 +192,16 @@
 			//alert(ocCode);
 			var startTime=$("#startTime").val(); 
 			var endTime=$("#endTime").val(); 			
-			var params = ['fkLikeCode='+fkCode,'startTime='+startTime,'endTime='+endTime];
+			var params = ['fkCode='+fkCode,'operator:fkCode=LIKE','startTime='+startTime,'endTime='+endTime];
 			$.ajax({
-				url:baseUrl+'propertyservicemanagerFkcodeManager/getPagerLikeFk.json',
+				url:baseUrl+'propertyservicemanagerFkcodeManager/getTotalCount.json',
 				data:params.join('&'),
 				success:function(results){	
-					pageCount=Math.ceil(results.totalCount/pageSize);//页数				
+					var totalCount=results.records[0].totalCount;				
+					pageCount = Math.ceil(totalCount / pageSize);//页数				
 					 refreshData_query(1,pageSize);
 					 $(".tcdPageCode").empty();
-					 if(totalCount>0){
+					 if(pageCount>0){
 						$(".tcdPageCode").createPage({
 						    pageCount:pageCount,
 						    current:1,
