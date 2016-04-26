@@ -9,7 +9,7 @@
 			<youi:fieldSelect property="activityApply.applyId"  caption="活动" src="esb/web/activityApplyManager/getActivityApplys.json" code="applyId" show="applyTitle" notNull="ture"/>
 			<youi:fieldText property="commentTime"  caption="评论时间"/>
 		</youi:fieldLayout>
-		<youi:gridCol property="activityApply.applyTitle"  caption="活动标题" width="20%"/>
+		<youi:gridCol property="activityDocument.documentName"  caption="文档标题" width="20%"/>
 		<youi:gridCol property="commentMember.memberName"  caption="评论人"  width="20%"/>
 		<youi:gridCol property="commentTime"  caption="评论时间" width="10%"/>
 		<youi:gridCol property="commentContent"  caption="评论内容" width="50%"/>
