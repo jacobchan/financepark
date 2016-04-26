@@ -133,5 +133,5 @@ public interface PropertyservicemanagerFkcodeManager extends BaseManager{
    	* @param fkcodeId 访客申请ID
    	* @return
    	*/
-    public PropertyservicemanagerFkcode getFkByFkcodeId(String fkcodeId);
+    public PropertyservicemanagerFkcode getFkByFkcodeId(String fkcodeId)throws BusException;
 }
