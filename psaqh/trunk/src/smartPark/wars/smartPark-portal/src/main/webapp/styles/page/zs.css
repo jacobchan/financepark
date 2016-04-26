@@ -635,6 +635,7 @@ a.article-colle:hover{background:#17e155;}
 .cg-soan-btn.csb2{background-color:#FA742C}
 .cg-soan-btn.csb2:hover{background-color: #FF5900}
 
+.at-oh{height: 199px;overflow-y: auto;width:292px;}
 
 /**个人资料**/
 .per-h3{line-height: 30px;font-size: 16px;color:#fa742c;padding-bottom: 10px;border-bottom: 1px solid #ecebeb;}
