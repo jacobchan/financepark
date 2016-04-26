@@ -16,6 +16,7 @@ import com.common.MemberAdrManager.entity.MemberadrAddress;
 import com.common.MemberAdrManager.service.MemberadrAddressManager;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -183,15 +184,31 @@ public class MemberadrAddressManagerImpl extends BaseManagerImpl implements Memb
 	 *前台 根据当前用户分页查询
 	 * @return 分页对象
 	 */
-            @SuppressWarnings("unchecked")
-	    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId.memberId",operator=Condition.EQUALS,pubProperty="userId")})
-		public PagerRecords getPagergetPagerAddress(Pager pager,//分页条件
+        
+	 @EsbServiceMapping(pubConditions={@PubCondition(property="memberId.memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	 public PagerRecords getPagergetPagerAddress(Pager pager,//分页条件
 				@ConditionCollection(domainClazz=MemberadrAddress.class) Collection<Condition> conditions,//查询条件
 				@OrderCollection Collection<Order> orders)
 				throws BusException {
 	    	PagerRecords pagerRecords = memberadrAddressDao.findByPager(pager, conditions, orders);	    	
 			return pagerRecords;
-		}
+	}
 
+  /**
+    * 获取地址的totalCount    陈烨
+    * @param conditions
+    * @return
+    * @throws BusException
+    */
+    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId.memberId",operator=Condition.EQUALS,pubProperty="userId")})
+    public List<Record> getTotalCount(
+              @ConditionCollection(domainClazz=MemberadrAddress.class) Collection<Condition> conditions)  throws BusException{
+         List<Record> recordList=new ArrayList<Record>();             		                 
+         List<MemberadrAddress> List = this.getMemberadrAddresss(conditions, null);
+         Record record = new Record();
+         record.put("totalCount", List.size());
+         recordList.add(record);
+         return recordList;
+    }   	 
     
 }
