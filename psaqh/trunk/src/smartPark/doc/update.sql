@@ -59,3 +59,5 @@ ALTER TABLE `sp_ordermanager_userorder` ADD COLUMN `PAY_RETURN_CODE_` varchar(32
 ALTER TABLE `sp_activity_comment` CHANGE COLUMN `APPLY_ID_` `DOCUMENT_ID_` char(36) DEFAULT NULL;
 ALTER TABLE `sp_activity_comment` DROP FOREIGN KEY `FK_Relationship_53`;
 ALTER TABLE `sp_activity_comment` ADD CONSTRAINT `FK_Relationship_53` FOREIGN KEY (`DOCUMENT_ID_`) REFERENCES `sp_activity_document` (`DOCUMENT_ID_`);
+/** 修改活动评论 添加评价星数 **/
+ALTER TABLE `sp_activity_comment` ADD COLUMN `COMMENT_LEVEL_` int;
