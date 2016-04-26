@@ -12,19 +12,19 @@ public class Configure {
 	private static String key = "c4bb39853a00687c2e19954fe19631e1";
 
 	//微信分配的公众号ID（开通公众号之后可以获取到）
-	private static String appID = "wx84d2cdb8f3fa1c66";
+	private static String appID = "wx823d57a3d453a029";
 
 	//微信支付分配的商户号ID（开通公众号的微信支付功能之后可以获取到）
-	private static String mchID = "1259951801";
+	private static String mchID = "1336003401";
 
 	//受理模式下给子商户分配的子商户号
 	private static String subMchID = "";
 
 	//HTTPS证书的本地路径
-	private static String certLocalPath = "D:/wechat_test/1259951801/apiclient_cert.p12";
+	private static String certLocalPath = "D:/apiclient_cert.p12";
 
 	//HTTPS证书密码，默认密码等于商户号MCHID
-	private static String certPassword = "1259951801";
+	private static String certPassword = "1336003401";
 
 	//是否使用异步线程的方式来上报API测速，默认为异步模式
 	private static boolean useThreadToDoReport = true;
