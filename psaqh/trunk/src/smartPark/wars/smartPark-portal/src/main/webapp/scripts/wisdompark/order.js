@@ -311,6 +311,19 @@ function closeTanc(){
             var topH=i*107+"px";
             $(".order-nav").animate({top:topH});
         }
+        //一开始加载默认第一条数据
+        $(".order-nav li:eq(0)").addClass("active");
+        var roomType=$(".order-nav li:eq(0)").find("span").eq(2).text();
+        var roomTyy=$(".order-nav li:eq(0)").find("span").eq(3).text();
+        var roomGm=$(".order-nav li:eq(0)").find("span").eq(4).text();
+        var commodityTitle=$(".order-nav li:eq(0)").find("span").eq(1).text();
+        var commodityId=$(".order-nav li:eq(0)").find("span").eq(0).text();
+        $("#commodityId").val(commodityId);
+        $(".cblue.fw").text(commodityTitle);
+        $('.od_tip').eq(0).text(roomType);
+        $('.od_tip').eq(1).text(roomTyy+"投影仪");
+        $('.od_tip').eq(2).text(roomGm);
+        displayStatus(commodityId,"prev");
 	};
 	
 	
