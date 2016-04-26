@@ -167,6 +167,7 @@
 			$(".fkCode")[0].setAttribute("id",me.id);
 			$(".bg-tanc.m1").show();
 		};
+		//二维码弹窗
 		function qrcode(obj){
 	 		var me=obj.parentNode.parentNode;
 			$.youi.ajaxUtils.ajax({
@@ -187,9 +188,8 @@
 			});
 		};
 		//根据订单号查询
-		$('.hhf-submit').click(function(){	
+    $('.hhf-submit').click(function(){	
 			var fkCode=$("#fkCode").val();
-			//alert(ocCode);
 			var startTime=$("#startTime").val(); 
 			var endTime=$("#endTime").val(); 			
 			var params = ['fkCode='+fkCode,'operator:fkCode=LIKE','startTime='+startTime,'endTime='+endTime];
@@ -214,26 +214,24 @@
 					 }
 	              }
 	        }); 			
-	    });	
-			//根据订单号查询 分页列表
-			function refreshData_query(pageIndex,pageSize){
-				var fkCode=$("#fkCode").val();	
-				 var startTime=$("#startTime").val(); 
-				 var endTime=$("#endTime").val(); 
-				var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'fkLikeCode='+fkCode,'startTime='+startTime,'endTime='+endTime];
-				$.ajax({
-					url:baseUrl+'propertyservicemanagerFkcodeManager/getPagerLikeFk.json',
-					data:params.join('&'),
-					success:function(results){
-						if(results&&results.records){
-							 _parseRecords(results.records);
-						}
-					}
-				});
+    });	
+	//根据订单号查询 分页列表
+    function refreshData_query(pageIndex,pageSize){
+		var fkCode=$("#fkCode").val();	
+		var startTime=$("#startTime").val(); 
+		var endTime=$("#endTime").val(); 
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'fkLikeCode='+fkCode,'startTime='+startTime,'endTime='+endTime];
+		$.ajax({
+			url:baseUrl+'propertyservicemanagerFkcodeManager/getPagerLikeFk.json',
+			data:params.join('&'),
+			success:function(results){
+				if(results&&results.records){
+					_parseRecords(results.records);
+				}
 			}
-	</script>
-	<!-- 取消访客 -->
-	<script type="text/javascript">
+		});
+	}
+	<!-- 取消访客 -->	
 	$(function(){
 		$(".hhf-submit.c").click(function(){	
 				var id=$(".fkCode")[0].getAttribute("id");
@@ -243,13 +241,13 @@
 					success:function(result){
 						if(result&&result.record){
 							//$(".bg-tanc.m1").close();
-							close("取消成功!");						
-							
+							close("取消成功!");													
 						}
 					}
 				});
 			});
 		});
+	//日期控件
 	$(function(){
 		laydate({
 		    elem: '#startTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
@@ -279,8 +277,6 @@
 			$(".bg-tanc.m1").hide();
 		});									
 	}) 	  
-	</script>
-	<script type="text/javascript">
 	    //点击跳转到访客申请页面
 	$("#a1").click(function(){			
 		location.href = proUrl + "yqfw/yq4.html" ;
