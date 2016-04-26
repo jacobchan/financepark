@@ -66,9 +66,9 @@
                     <input type="password" id="repasswd">
                 </div>
                 <div class="p10 f12">
-                	<label style="cursor:pointer"><input type="checkbox" class="mr10 fl" style="margin-top:2px;">我已阅读并接受<a href="#" class="co">《硅谷公园用户注册协议》</a></label>
+                	<label style="cursor:pointer" id="read-accept"><input autocomplete="off"  type="checkbox" class="mr10 fl" style="margin-top:2px;" >我已阅读并接受<a href="#" class="co">《硅谷公园用户注册协议》</a></label>
                 </div>
-                <div class="btn-cheng tc lh50 mt20 xiaoqishabi" style="display:block;margin:35px;font-size:16px;" id="register">注册</div>
+                <div class="btn-disabled tc lh50 mt20 xiaoqishabi " style="display:block;margin:35px;font-size:16px;" id="register">注册</div>
             </form>
         </div>
     </div>
@@ -186,6 +186,19 @@ $(function(){
 				});
 			}); 
 		})
+</script>
+<script type="text/javascript">
+    $(function(){
+    	$("#read-accept").click(function(){
+			if($(this).children('input[type="checkbox"]').prop("checked")){
+				$(this).parent().next("#register").removeClass("btn-disabled").addClass("btn-cheng");
+			}else{
+				$(this).parent().next("#register").addClass("btn-disabled").removeClass("btn-cheng");
+			}
+
+		});
+    })
+	
 </script>
 </body>
 </html>
