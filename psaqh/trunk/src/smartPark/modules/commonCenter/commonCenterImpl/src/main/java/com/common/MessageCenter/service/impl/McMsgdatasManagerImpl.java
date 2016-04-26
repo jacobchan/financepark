@@ -3,6 +3,8 @@
  */
 package com.common.MessageCenter.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
 import com.common.MessageCenter.dao.McMsgdatasDao;
+import com.common.MessageCenter.entity.Code;
 import com.common.MessageCenter.entity.McMsgdatas;
 import com.common.MessageCenter.entity.McMsgtempalate;
 import com.common.MessageCenter.service.McMsgdatasManager;
@@ -118,7 +121,10 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 		// }else{//新增
 		//
 		// }
-		o.setSendDate(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		if(StringUtils.isEmpty(o.getSendDate())){
+			o.setSendDate(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		}
 		return mcMsgdatasDao.save(o);
 	}
 
@@ -309,12 +315,12 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 			mmd.setReceive(phone);
 			mmd.setMsgCaption(mmt.getMsgTempalateCaption());
 			mmd.setMsgContent(content);
-			mmd.setMsgType(mmt.getMcMsgtype().getMsgTypeCaption());
+			mmd.setMsgType("0");
 			mmd.setSendStatus(status);//02-发送成功
 			mmd.setCreateUser(recUser);
 			mmd.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-			mmd.setUpdateUser(recUser);
-			mmd.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+//			mmd.setUpdateUser(recUser);
+//			mmd.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 			mcMsgdatasDao.save(mmd);
 			return success;
 		}else{
@@ -324,7 +330,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 
 	@Override
 	public String sendToBackadmin(McMsgdatas mcMsgdatas,String roleType) throws BusException {
-		mcMsgdatas.setMsgType("2");//多人
+		mcMsgdatas.setMsgType("1");
 		sendMessage(mcMsgdatas, roleType, SMSUtil.SEND_ROLEGROUP);
 		return null;
 	}
@@ -332,7 +338,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 	@Override
 	public String sendToEntadmin(McMsgdatas mcMsgdatas) throws BusException {
 		String roleId = "ROLE_QY_ADMIN";//企业管理员
-		mcMsgdatas.setMsgType("2");//多人
+		mcMsgdatas.setMsgType("2");
 		sendMessage(mcMsgdatas, roleId, SMSUtil.SEND_MEMBERROLE);
 		return null;
 	}
@@ -340,7 +346,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 	@Override
 	public String sendToUser(McMsgdatas mcMsgdatas,String memberId) throws BusException {
 		if(!StringUtils.isEmpty(memberId)){
-			mcMsgdatas.setMsgType("1");//1人
+			mcMsgdatas.setMsgType("3");
 			sendMessage(mcMsgdatas, memberId, SMSUtil.SEND_MEMBER);
 		}
 		return null;
@@ -352,6 +358,46 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 			messagePostProcessor.send(mcMsgdatas, Arrays.asList(new MsgParam[]{new MsgParam(mcMsgdatas.getReceive(), "")}));
 		}
 		return null;
+	}
+	
+	@Override
+	public boolean checkCode(String phone, String codeStr) throws BusException {
+		Code code = mcMsgdatasDao.getNewCode(phone);
+		if(code != null){
+			String eCode = code.getCode();
+			String sendTime = code.getSendTime();
+			if(StringUtils.isEmpty(eCode)||StringUtils.isEmpty(sendTime)){
+				throw new BusException("系统不存在有效验证码");
+			}
+			String currentTime = DateUtils.getToday("yyyy-MM-dd hh:mm:ss");
+			if(differenceSecond(currentTime,sendTime)>5000){
+				throw new BusException("手机验证码超时！");
+			}else{
+				if(!codeStr.equals(com.gsoft.common.util.StringUtils.extractCode(eCode))){
+					throw new BusException("输入验证码不匹配");
+				}else{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	/**thisTime - ohterTime
+	 * @param thisTime
+	 * @param ohterTime
+	 * @return
+	 */
+	public static long differenceSecond(String thisTime ,String ohterTime){
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			long thisMillisecond = sdf.parse(thisTime).getTime();
+			long otherMillisecond = sdf.parse(ohterTime).getTime();
+			return (long) ((thisMillisecond - otherMillisecond)/(1000));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return -1;
 	}
 
 }
