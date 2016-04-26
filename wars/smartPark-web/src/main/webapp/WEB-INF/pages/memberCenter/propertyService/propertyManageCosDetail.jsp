@@ -56,23 +56,15 @@
 				}else{
 					bool = "否";
 				}
-				if(record[i].cosStatus=='0'){
+				if(record[i].cosStatus=='01'){
 					status = "待受理";
 					crop = "<a href='' class='pb-btn tc' style='width:120px;' onclick='javascript:cancel(\""+record[i].cosId+"\")' >取消</a>";
-				}else if(record[i].cosStatus=='1'){
-					status = "受理中";
-				}else if(record[i].cosStatus=='2'){
+				}else if(record[i].cosStatus=='02'){
 					status = "已受理";
-				}else if(record[i].cosStatus=='3'){
+				}else if(record[i].cosStatus=='03'){
+					status = "已取消";
+				}else if(record[i].cosStatus=='04'){
 					status = "已退回";
-				}else if(record[i].cosStatus=='4'){
-					status = "已回访";
-				}else if(record[i].cosStatus=='5'){
-					status = "待评价";
-					crop = "<a href='' class='pb-btn tc' style='width:120px;'  >评价</a>";
-					
-				}else if(record[i].cosStatus=='6'){
-					status = "已完成";
 				}
 				var html=
 			"<div class='clearfix mt20'>"+
