@@ -138,13 +138,14 @@
 		
 		//分页页码显示
 		 $.ajax({
-			url:serviceURL, 
-			success:function(results){	
-				pageCount=Math.ceil(results.totalCount/pageSize);//页数							
+			url:baseUrl+'memberadrAddressManager/getTotalCount.json',			
+				success : function(results) {
+					var totalCount=results.records[0].totalCount;
+					pageCount = Math.ceil(totalCount / pageSize);//页数							
 					refreshData(1,pageSize);
 					$(".tcdPageCode").empty();
 					if(totalCount>0){
-								$(".tcdPageCode").createPage({
+						 $(".tcdPageCode").createPage({
 								    pageCount:pageCount,
 								    current:1,
 								    backFn:function(p){
