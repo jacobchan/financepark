@@ -272,6 +272,7 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 		o.setUserorderStatus("01");//01-未支付
 		o.setUserorderProject(publicResoList.get(0).getCommodityId().getCommodityTitle());
 		o.setUpdateUser(publicResoList.get(0).getUpdateUser());
+		o.setMemberId(publicResoList.get(0).getUpdateUser());
 		if(StringUtils.isNotEmpty(userorderAmount) && userorderAmount!=null){
 			o.setUserorderAmount(new BigDecimal(userorderAmount));
 		}else{
