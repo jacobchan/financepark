@@ -173,14 +173,11 @@ type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
 		$(".hhf-submit.confirm").click(function(){
 			    $(".bg-tanc.m1").hide();
 				var id=$(".moverec")[0].getAttribute("id");	
-				//alert(id);
 			 	$.ajax({
 			 		url:baseUrl+'/ordermanagerUserorderManager/cancelStatus.json',
 					data:'id='+id,
 					success:function(result){
 						if(result&&result.record){
-							//$(".bg-tanc.m1").close();
-							//$(".toast").show();
 							close("取消成功!");													
 						}
 					}
@@ -237,46 +234,10 @@ function refreshData_pend_query(pageIndex,pageSize){
 			}
 		});
 	} 
-//根据订单项目 订单号模糊   查询 全部订单
-$('.hhf-submit.f14.fl.ml20.all').click(function(){	
-	var genId = $(".c-b1").attr("data");		
-	 var userorderCodeLike=$("#userorderCode").val();			 
-	 var params=['genId='+genId,'userorderCode='+userorderCodeLike,'operator:userorderCode=LIKE',];
-	 $.ajax({
-		 url:baseUrl + "ordermanagerUserorderManager/getTotalCount.json",
-			success : function(results) {
-				var totalCount=results.records[0].totalCount;
-				pageCount = Math.ceil(totalCount / pageSize);//页数
-				refreshData_All_query(1,pageSize);
-				$(".tcdPageCode").empty();
-				if(totalCount>0){
-					 $(".tcdPageCode").createPage({
-					 	 pageCount:pageCount,
-					 	 current:1,
-					 	 backFn:function(p){
-					     	currentIndex = p;
-					     	this.pageCount=pageCount;
-							refreshData_All_query(p,pageSize);
-						 }
-					 });	
-				}
-			}
-		}); 		
+    //根据订单项目 订单号模糊   查询 全部订单
+    $('.hhf-submit.f14.fl.ml20.all').click(function(){	
+    	loadData();	
     });
-    function refreshData_All_query(pageIndex,pageSize){
-	var genId = $(".c-b1").attr("data");	
-    var userorderCodeLike=$("#userorderCode").val();		
-	var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCode='+userorderCodeLike,'operator:userorderCode=LIKE','genId='+genId];
-	$.ajax({
-		url:baseUrl+'ordermanagerUserorderManager/getPagerAll.json',
-		data:params.join('&'),
-		success:function(results){
-			if(results&&results.records){
-				 _parseRecords_pend(results.records);
-			}
-		}
-	});
-} 
     //下拉选项目名称
 	$(function(){
 	    $.ajax({				
@@ -288,6 +249,7 @@ $('.hhf-submit.f14.fl.ml20.all').click(function(){
 		    }
 	    });
     });
+    //下拉选择项目名称样式
     function _selectRecords(record){		
 	    for(var i=0;i<record.length;i++){				
 		    var html= "<li data='"+record[i].genreId+"'>"+record[i].genreName+"</li>";                                                                                  
