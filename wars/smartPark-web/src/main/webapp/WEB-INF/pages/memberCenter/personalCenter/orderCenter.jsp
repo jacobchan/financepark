@@ -36,7 +36,7 @@
 					$(this).addClass("active").siblings().removeClass("active");			
 				})		
 			})
-			//页面默认加载创业加速申请加载
+			//页面默认加载待处理订单
 			if(getRequest()=="1"){
 				$(".order-nav li").eq(0).addClass("active").siblings().removeClass("active");
 				jump1();
@@ -48,12 +48,6 @@
 				jump0();
 			}
 		});
-
-		 //点击跳转到政策申请页面
-		$("#a1").click(function(){			
-			location.href = proUrl + "zscenter/zs3.html" ;
-		})	
-		
 		//获取链接后面的值
 		function getRequest() {
 			var url = location.search; //获取url中"?"符后的字串
@@ -73,7 +67,7 @@
 				window.location.href=cenUrl+"member/memberCenter/personalCenter/adsenseOrderDetails.html?userorderCode="+userorderCode;
 			}else if(genreCode == "0304"){//预留停车位
 				window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderCode="+userorderCode;
-			}else if(genreCode == "0501"){//公司注册
+			}/* else if(genreCode == "0501"){//公司注册
 				window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderCode="+userorderCode;
 			}else if(genreCode == "0502"){//工商变更
 				window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderCode="+userorderCode;
@@ -98,7 +92,7 @@
 			}else if(genreCode == "02"){//园区饮食
 				window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderCode="+userorderCode;
 			}
-			
+			 */
 		};
      </script>
 </youi:html>
