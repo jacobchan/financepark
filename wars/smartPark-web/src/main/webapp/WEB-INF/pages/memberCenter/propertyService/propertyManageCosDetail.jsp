@@ -4,7 +4,9 @@
 	<youi:body decorator="memcenter"> 
 					
 	<div class="w1000">
-			<h3 class="per-h3">物业投诉详情列表</h3>					
+			<h3 class="per-h3">物业投诉详情列表
+				<a style="cursor: pointer;" onclick="oc_goBack()" class="c-333 fr f14"><i class="fa fa-angle-left f20 mr5 a1" style="font-size:18px;"></i>返回</a>
+			</h3>					
 			<div class="clearfixa a">											
 			</div>														    
 	</div>
@@ -138,20 +140,17 @@
 					}
 				});
 			}
-		
-
-	//点击跳转到投诉页面
-	$("#a1").click(function(){
-		
-		location.href = proUrl + "yqfw/yq9.html" ;
-	})	
+	//点击返回
+	  function oc_goBack(){
+		 window.location.href = cenUrl+"member/memberCenter/propertyService/propertyManageCos.html";
+	}; 
 	//弹窗
 	 function close(content){		        
 	        $(".tc.mt25.f18").empty() ;
 	        $(".tc.mt25.f18").append(content) ;
 	        $(".toast").show();		      		        		       				
 			setTimeout(function(){$(".toast").hide(); },2000);
-			refreshData(currentIndex,pageSize);
+			setTimeout(function(){location.reload(); },2000);
       }
 	</script>
 	
