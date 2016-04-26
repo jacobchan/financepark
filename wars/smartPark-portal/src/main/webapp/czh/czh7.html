@@ -254,7 +254,7 @@
 		function documents(record){
 			$(".article-tab").empty();
 			var html ="";
-			html+="<colgroup><col width='42'></col></colgroup>";
+			html+="<colgroup><col width='42'></col><col width='230'></col></colgroup>";
 			for(var i=0;i<record.length;i++){
 				html+=
 					"<tr id="+record[i].documentId+" onclick='openPage(this)' style='cursor:pointer;'><td><em>P</em></td>"+
