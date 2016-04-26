@@ -39,7 +39,7 @@ public class WxPayManagerImpl extends BaseManagerImpl implements WxPayManager{
 	 */
 	public String requestUnifiedOrderService(UnifiedOrderReqData unifiedOrderReqData) throws UnrecoverableKeyException, KeyManagementException, KeyStoreException, NoSuchAlgorithmException, IOException{
 		httpRequest = new HttpsRequest();
-		Configure.setNotifyUrl("http://www.baidu.com");
+//		Configure.setNotifyUrl("http://www.baidu.com");
 		String responseStr = httpRequest.sendPost(Configure.UNIFIED_ORDER_API, unifiedOrderReqData.toXml());
 		Element element = Util.getObjectFromXML(responseStr);
 		String codeUrl = "";
