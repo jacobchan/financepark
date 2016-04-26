@@ -58,8 +58,8 @@
 				<div class="article-comments mt20">
 					<div class="ac-one">
 						<div>您的评论 <img src="../styles/images/czh/star.png" border="0" class="mr20"></div>
-						<textarea class="ao-area" placeholder="说点啥吧~"></textarea>	
-						<a href="javascript:;" class="a-c a-c-o fr mt20" style="margin-right:0px;">发表评论</a>
+						<textarea class="ao-area commtext" placeholder="说点啥吧~"></textarea>	
+						<a href="javascript:;" class="a-c a-c-o fr mt20" style="margin-right:0px;" onclick="postcomm();">发表评论</a>
 					</div>
 					<div class="yin-group article-yg">
 						<table width="100%" class="f12 lh30">
@@ -68,8 +68,8 @@
 								<col></col>
 								<col></col>
 							</colgroup>
-							<tbody>
-								<tr>
+							<tbody class="comment">
+								<!-- <tr>
 									<td><img src="../styles/images/yqfw/p1.png" width="58" height="58"></td>
 									<td>
 										<h4><img src="../styles/images/czh/star.png" border="0" class="mr20"><span class="ml5">XUXUXU12356+6</span></h4>
@@ -101,7 +101,7 @@
 										<p class="c-b1">2015-12-02</p>
 										<a href="" class="c-b1 f12">回复（0）</a>
 									</td>
-								</tr>
+								</tr> -->
 							</tbody>
 						</table>
 					</div>
@@ -133,6 +133,13 @@
 						<img src="../styles/images/czh/list-2.jpg" border="0" width="100%"/>
 					</div>
 			</div>
+		</div>
+		
+		<div class="toast">
+	        <div class="toast-con clearfix">
+	            <div class="close-toast fr"></div>
+	            <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
+	        </div> 
 		</div>
 	</div>
 	<!--***bottom start****************************************-->
@@ -179,7 +186,7 @@
 		//活动详情赋值
 		function _parseRecords(record){
 			var documentPath=record[0].documentPath;
-			var params = ['documentId='+record[0].documentId];
+			var documentId = record[0].documentId;
 			//关联活动发布人
 			var docname="<img src='../styles/images/czh/user-l.png' border='0' class='mr20'>主讲人："+record[0].activityApply.memberId.memberName+"";
 			$(".docname").append(docname);
@@ -188,12 +195,19 @@
 			$(".docread").html(""+ronum+"人阅读");
 			//关联活动文档名称
 			$(".documentName").html(record[0].documentName.split('.')[0]);
+			$(".documentName").attr("id",record[0].documentId);
 			//关联活动图片
 			var img="<a href='czh3.html?applyId="+record[0].activityApply.applyId+"'>"+
 			"<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[0].activityApply.activityImage+"&method=show' border='0' width='288' height='195'/></a>";
             $("#associatedActivitiy").empty().append(img);
+            getpdf(documentId);
+            getComment(documentId);
+		}
+		//加载文档
+		function getpdf(id){
+			var params = ['documentId='+id];
 			$.youi.ajaxUtils.ajax({
-				url:baseUrl+'/activityDocumentManager/getViewDocument.json',
+				url:baseUrl+'activityDocumentManager/getViewDocument.json',
 				data:params.join('&'),
 				jsonp:'data:jsonp',
 				dataType:'jsonp',
@@ -203,6 +217,7 @@
 				}
 			});
 		}
+		
 		//pdf div赋值
 		function _parsePDF(swfUrl){
 			 $('#documentViewer').FlexPaperViewer(
@@ -251,22 +266,15 @@
 		}
 		//侧边栏点击切换
 		function openPage(obj){
-			var params = ['documentId='+obj.id];
+			var documentId = obj.id;
 			$(".documentName").html($(obj).find("p").text());
+			$(".documentName").attr("id",obj.id);
 			//阅读数
 			var ronum = getRandom(1000);
 			$(".docread").html(""+ronum+"人阅读")
 			//变更文档展示
-			$.youi.ajaxUtils.ajax({
-				url:baseUrl+'/activityDocumentManager/getViewDocument.json',
-				data:params.join('&'),
-				jsonp:'data:jsonp',
-				dataType:'jsonp',
-				success:function(result){
-					var swfUrl=result.record.html;
-					_parsePDF(swfUrl);
-				}
-			});
+			getpdf(documentId);
+			getComment(documentId);
 		}
 		
 		//知识库进入拼接
@@ -290,6 +298,77 @@
 		function getRandom(n){
 	        return Math.floor(Math.random()*n+1);
 	     };
+	     
+	     //加载当前文档评论
+	     function getComment(id){
+	    	 var documentId = id;
+	    	 var params ={'pager:pageIndex':1,'pager:pageSize':3,'activityDocument.documentId':documentId,orderBy:'desc:commentTime'};
+				$.youi.ajaxUtils.ajax({
+					url:baseUrl+"activityCommentManager/getPagerActivityComments.json",
+					data:params,
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(results){
+						if(results&&results.records){
+							if(results.records.length>0){
+								commRecords(results.records);
+							}else{
+								$(".comment").empty();
+								$(".comment").append("<tr><td align='center'><h2>暂无评论</h2></td></tr>");
+							}
+						}
+					}
+				});		
+	     }
+	     
+	   	//拼接top3文档评论
+			function commRecords(record){
+				$(".comment").empty();
+				var html ="";
+				for(var i=0;i<record.length;i++){
+					html+="<tr><td><img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].commentMember.memberHeadPortrait+"&method=show' width='58' height='58'></td>"+
+						"<td><h4><img src='../styles/images/czh/star.png' border='0' class='mr20'>"+
+						"<span class='ml5'>"+record[i].commentMember.memberNickname+"</span></h4>"+
+						"<p class=f14'>"+record[i].commentContent+"</p></td>"+
+						"<td class='tr'><p class='c-b1 f12'>"+record[i].commentTime+"</p></td></tr>";
+				}
+				$(".comment").append(html);
+			}
+	   	//发表评论
+	   	function postcomm(){
+	   		var documentId = $(".documentName").attr("id");
+	   		if(!isLogin){
+	   			close("请登录!");
+				return false;
+			}
+	   		var commentContent = $('.commtext').val();
+	   		if(commentContent==''||commentContent==null){
+	   			close("请输入评论内容!");
+				return false;
+			}
+	   		var params = ['activityDocument.documentId='+documentId,'commentContent='+commentContent];
+			$.youi.ajaxUtils.ajax({
+				url:baseUrl+"activityCommentManager/saveActivityComment.json",
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(results){
+					if(results&&results.record){
+						close("评论成功!");
+						$('.commtext').val('');
+						getComment(results.record.activityDocument.documentId);
+					}
+				}
+			});
+	   	}
+	   	
+	   	//弹出框
+	   	function close(content){		        
+		        $(".tc.mt25.f18").empty() ;
+		        $(".tc.mt25.f18").append(content) ;
+		        $(".toast").show();		      		        		       				
+				setTimeout(function(){$(".toast").hide(); },1000);
+	      }
 	</script>
 
 </body>
