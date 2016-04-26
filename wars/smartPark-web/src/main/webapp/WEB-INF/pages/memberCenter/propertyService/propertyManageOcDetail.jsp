@@ -94,21 +94,21 @@
 						  }else if(record.ocStatus=='02'){
 							  status = "已领卡";
 						  }	
-						  else if(record.ocStatus=='03'){
+						  else if(record.ocStatus=='08'){
 							  status = "已取消";
 						  }else if(record.ocStatus=='00'){
 							  status = "待处理";
 							  button="<a href='javascript:;' class='ib-btn mr15' style='width:120px;' onclick='cancel()' align='center' >取消</a>";
 						  }	
-						 $(".fr.f12").html(button); 
-						$('#bxCode').html(record.ocCode+status);
+						$(".fr.f12").html(button); 
+						$('#bxCode').html(record.ocCode+"&nbsp&nbsp"+status);
 						$('#applyTime').html(record.applyTime);
 						$('#ocDate').html("预约时间："+record.ocDate);										
 						$('#ocRemark').html("预约详情："+record.ocRemark);
 						if(!record.ocComp==null){
-							ocComp=record.ocComp;
+							ocComp="公司名称："+record.ocComp;
 						}
-						$('#ocComp').html("公司名称："+ocComp);
+						$('#ocComp').html(ocComp);
 						$('#memberName').html("联系人："+record.member.memberName);
 						$('#memberPhoneNumber').html("电话："+record.member.memberPhoneNumber);
 						
