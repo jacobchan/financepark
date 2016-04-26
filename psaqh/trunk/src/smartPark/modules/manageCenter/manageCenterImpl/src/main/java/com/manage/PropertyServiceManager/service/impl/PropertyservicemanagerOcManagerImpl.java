@@ -189,39 +189,6 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
      * @return
      * @throws BusException
      */
- /*  // @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")}) 	
-   
-	public List<PropertyservicemanagerOc> getPropertyservicemanagerOcListByLoginUser() throws BusException {		
-    	//先模拟一个登陆用户，之后会修改
-    	MemberInformation member=memberInformationManager.getMemberInformationByLoginUser(null); 
-    //	String memberId =  member.getMemberId();
-    	return propertyservicemanagerOcDao.getList("memberId", member.getMemberId()); 	
-    	
-    	
-	}*/
-    /**
-     * 获取当前登录用户一卡通号码
-     * @return
-     * @throws BusException
-     */
-    /*@EsbServiceMapping(pubConditions={@PubCondition(property="createUser",pubProperty="userId")})
-	public List<PropertyservicemanagerOc> getPropertyservicemanagerOcListByLoginUser(PropertyservicemanagerOc o) throws BusException {
-    	//获取当前登录用户id
-    	String id = o.getCreateUser();
-    	if(id!=null){
-	    	//获取当前用户参加活动的list
-	    	Collection<Condition> condition = new ArrayList<Condition>();
-	    	condition.add(ConditionUtils.getCondition("createUser", Condition.EQUALS, id));
-	    	List<PropertyservicemanagerOc> list = propertyservicemanagerOcDao.commonQuery(condition, null);
-	    	if(list.size()>0){
-	    		return list;
-	    	}else{
-	    		return null;
-	    	}
-    	}else{
-    		return null;
-    	}
-	}*/
     @EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId")})
     public List<PropertyservicemanagerOc> getPropertyservicemanagerOcListByLoginUser(PropertyservicemanagerOc o)
 			throws BusException {
