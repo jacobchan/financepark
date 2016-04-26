@@ -58,9 +58,12 @@ public class OrdermanagerCommoditydetail implements Domain{
 	@Length(max=36)
 	private String commoditydetailId;//明细序号
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="USERORDER_ID_")
-	private com.common.OrderManager.entity.OrdermanagerUserorder ordermanagerUserorder;//用户订单序列
+//	@ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name="USERORDER_ID_")
+//	private com.common.OrderManager.entity.OrdermanagerUserorder ordermanagerUserorder;//用户订单序列
+	@Column(name = "USERORDER_ID_")
+	@Length(max=36)
+	private String orderId;
 	
 	public String getCreateUser(){
 		return this.createUser;
@@ -128,12 +131,19 @@ public class OrdermanagerCommoditydetail implements Domain{
 		this.commoditydetailId = commoditydetailId;
 	}
 	
-	public void setOrdermanagerUserorder(com.common.OrderManager.entity.OrdermanagerUserorder ordermanagerUserorder){
-		this.ordermanagerUserorder = ordermanagerUserorder;
+//	public void setOrdermanagerUserorder(com.common.OrderManager.entity.OrdermanagerUserorder ordermanagerUserorder){
+//		this.ordermanagerUserorder = ordermanagerUserorder;
+//	}
+//	
+//	public com.common.OrderManager.entity.OrdermanagerUserorder getOrdermanagerUserorder(){
+//		return this.ordermanagerUserorder;
+//	}
+	public void setOrderId(String orderId){
+		this.orderId = orderId;
 	}
 	
-	public com.common.OrderManager.entity.OrdermanagerUserorder getOrdermanagerUserorder(){
-		return this.ordermanagerUserorder;
+	public String getOrderId(){
+		return this.orderId;
 	}
 	
 	

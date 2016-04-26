@@ -332,7 +332,8 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		order = ordermanagerUserorderDao.save(order);
 		
 		OrdermanagerCommoditydetail orderDetail = new OrdermanagerCommoditydetail();
-		orderDetail.setOrdermanagerUserorder(order);
+//		orderDetail.setOrdermanagerUserorder(order);
+		orderDetail.setOrderId(order.getUserorderId());
 		orderDetail.setCommodityId(commodity);
 		orderDetail.setCommoditydetailNum("1");
 		ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
@@ -382,7 +383,8 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		order = ordermanagerUserorderDao.save(order);
 		
 		for(OrdermanagerCommoditydetail orderDetail:orderDetailList){//保存订单明细
-			orderDetail.setOrdermanagerUserorder(order);
+//			orderDetail.setOrdermanagerUserorder(order);
+			orderDetail.setOrderId(order.getUserorderId());
 			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
 		}
 		return order;
@@ -420,7 +422,8 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		order = ordermanagerUserorderDao.save(order);
 		
 		for(OrdermanagerCommoditydetail orderDetail:orderDetailList){//保存订单明细
-			orderDetail.setOrdermanagerUserorder(order);
+//			orderDetail.setOrdermanagerUserorder(order);
+			orderDetail.setOrderId(order.getUserorderId());
 			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
 		}
 		return order;
@@ -458,7 +461,8 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    		order = ordermanagerUserorderDao.save(order);
    		
    		for(OrdermanagerCommoditydetail orderDetail:orderDetailList){//保存订单明细
-   			orderDetail.setOrdermanagerUserorder(order);
+//   			orderDetail.setOrdermanagerUserorder(order);
+   			orderDetail.setOrderId(order.getUserorderId());
    			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
    		}
    		return order;
@@ -496,7 +500,8 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    		order = ordermanagerUserorderDao.save(order);
    		
    		for(OrdermanagerCommoditydetail orderDetail:orderDetailList){//保存订单明细
-   			orderDetail.setOrdermanagerUserorder(order);
+//   			orderDetail.setOrdermanagerUserorder(order);
+   			orderDetail.setOrderId(order.getUserorderId());
    			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
    		}
    		return order;
@@ -534,7 +539,8 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    		order = ordermanagerUserorderDao.save(order);
    		
    		for(OrdermanagerCommoditydetail orderDetail:orderDetailList){//保存订单明细
-   			orderDetail.setOrdermanagerUserorder(order);
+//   			orderDetail.setOrdermanagerUserorder(order);
+   			orderDetail.setOrderId(order.getUserorderId());
    			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
    		}
    		return order;
@@ -572,7 +578,8 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    		order = ordermanagerUserorderDao.save(order);
    		
    		for(OrdermanagerCommoditydetail orderDetail:orderDetailList){//保存订单明细
-   			orderDetail.setOrdermanagerUserorder(order);
+//   			orderDetail.setOrdermanagerUserorder(order);
+   			orderDetail.setOrderId(order.getUserorderId());
    			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
    		}
    		return order;

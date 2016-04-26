@@ -144,7 +144,8 @@ public class ShoppingcarCompanyserverManagerImpl extends BaseManagerImpl impleme
 		o = ordermanagerUserorderManager.saveOrdermanagerUserorder(o);
 		for(ShoppingcarCompanyserver shopCar:shopCarList){//保存订单明细
 			OrdermanagerCommoditydetail orderDetail = new OrdermanagerCommoditydetail();
-			orderDetail.setOrdermanagerUserorder(o);
+//			orderDetail.setOrdermanagerUserorder(order);
+			orderDetail.setOrderId(o.getUserorderId());
 			orderDetail.setCommodityId(shopCar.getCommodityId());
 			orderDetail.setCommoditydetailNum(shopCar.getCompanyCateringNum());
 			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
@@ -188,7 +189,8 @@ public class ShoppingcarCompanyserverManagerImpl extends BaseManagerImpl impleme
 		for(ShoppingcarCompanyserver shopCar:shopCarList){//保存订单明细
 			shopCar = shoppingcarCompanyserverDao.get(shopCar.getCompanyServerId());
 			OrdermanagerCommoditydetail orderDetail = new OrdermanagerCommoditydetail();
-			orderDetail.setOrdermanagerUserorder(order);
+//			orderDetail.setOrdermanagerUserorder(order);
+			orderDetail.setOrderId(order.getUserorderId());
 			orderDetail.setCommodityId(shopCar.getCommodityId());
 			orderDetail.setCommoditydetailNum(shopCar.getCompanyCateringNum());
 			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
