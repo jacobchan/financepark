@@ -342,13 +342,9 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
        @EsbServiceMapping(pubConditions={@PubCondition(property="member.memberId",operator=Condition.EQUALS,pubProperty="userId")})
    	public List<Record> getTotalCount(
    			@ConditionCollection(domainClazz=PropertyservicemanagerFkcode.class) Collection<Condition> conditions,
-   			@ServiceParam(name="fkLikeCode") String fkLikeCode,
 			@ServiceParam(name="startTime") String startTime,
 			@ServiceParam(name="endTime") String endTime)  throws BusException{
    		List<Record> recordList=new ArrayList<Record>();
-   		if(StringUtils.isNotEmpty(fkLikeCode)){
-   		    conditions.add(ConditionUtils.getCondition("bxCode", Condition.LIKE, fkLikeCode));	
-   		}
    		if(StringUtils.isNotEmpty(startTime)||StringUtils.isNotEmpty(endTime)){
    			conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
    		}
