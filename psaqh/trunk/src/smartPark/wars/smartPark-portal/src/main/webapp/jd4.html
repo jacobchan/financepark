@@ -1,20 +1,21 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>酒店详情</title>
-	<link href="styles/page/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
-	<link href="styles/base.css" type="text/css" rel="stylesheet">
-	<link href="styles/page/zs.css" type="text/css" rel="stylesheet">
-	<link href="styles/page/hotel.css" type="text/css" rel="stylesheet">
-	<script type="text/javascript" src="scripts/lib/jquery-1.9.1.min.js"></script>
-	<script type="text/javascript" src="scripts/lib/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="scripts/lib/bootstrap.min.js"></script>
-	<script type="text/javascript" src="scripts/lib/giui.min.js"></script>
-	<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
-	<script type="text/javascript" src="scripts/page/laydate/laydate.js"></script>
-	<script type="text/javascript" src="scripts/page/url.js"></script>
-	<script type="text/javascript">
+<meta charset="UTF-8">
+<title>酒店详情</title>
+<link href="styles/page/awesome/css/font-awesome.min.css"
+	type="text/css" rel="stylesheet">
+<link href="styles/base.css" type="text/css" rel="stylesheet">
+<link href="styles/page/zs.css" type="text/css" rel="stylesheet">
+<link href="styles/page/hotel.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="scripts/lib/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="scripts/lib/jquery-ui.min.js"></script>
+<script type="text/javascript" src="scripts/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="scripts/lib/giui.min.js"></script>
+<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
+<script type="text/javascript" src="scripts/page/laydate/laydate.js"></script>
+<script type="text/javascript" src="scripts/page/url.js"></script>
+<script type="text/javascript">
 /* 		$(function(){
 			var start = {
 			    elem: '#startTime',
@@ -39,10 +40,15 @@
 			laydate(end);
 		}) */
 	</script>
-	<style type="text/css">
-		a.c-b1:hover{color: #FB7730;}
-		.jd-ig-nav li{padding: 10px 20px;}
-	</style>
+<style type="text/css">
+a.c-b1:hover {
+	color: #FB7730;
+}
+
+.jd-ig-nav li {
+	padding: 10px 20px;
+}
+</style>
 </head>
 <body>
 	<!--***top start****************************************-->
@@ -51,11 +57,12 @@
 	<div class="w100">
 		<div class="w1200 clearfix pt30 pb50">
 			<div class="h-nav clearfix">
-				<a href="">首页</a><img src="styles/images/zs/right-j-b.png" border="0">
-				<a href="">国内酒店预订</a><img src="styles/images/zs/right-j-b.png" border="0">
-				<a href="" id="currentHotel1" class="current"></a>
+				<a href="">首页</a><img src="styles/images/zs/right-j-b.png"
+					border="0"> <a href="">国内酒店预订</a><img
+					src="styles/images/zs/right-j-b.png" border="0"> <a href=""
+					id="currentHotel1" class="current"></a>
 			</div>
-			<div class="fl" style="width:890px;">
+			<div class="fl" style="width: 890px;">
 				<div class="clearfix">
 					<table width="100%" class="jd-details">
 						<colgroup>
@@ -64,16 +71,18 @@
 						</colgroup>
 						<tr>
 							<td class="f24" id="currentHotel2"></td>
-							<td align="center"><span class="f24 c-o" id="minprice">¥ 0</span>起</td>
+							<td align="center"><span class="f24 c-o" id="minprice">¥
+									0</span>起</td>
 						</tr>
 						<tr>
 							<td>
 								<p class="mb15">
-									<span class="starbox1">
-										<i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i><i class="star1"></i>
+									<span class="starbox1"> <i class="star1"></i><i
+										class="star1"></i><i class="star1"></i><i class="star1"></i><i
+										class="star1"></i>
 									</span>
 								</p>
-								<p id="hotelAddr"> </p>
+								<p id="hotelAddr"></p>
 							</td>
 							<td align="center">
 								<!-- <a href="" class="ib-btn" style="margin-top:0px;">立即预订</a> -->
@@ -89,21 +98,42 @@
 						</colgroup>
 						<tbody>
 							<tr>
-								<td rowspan="2"><div style="width:350px;"><img style="max-height: 300px;" id="majorPicture" src="styles/images/jd-i1.jpg" width="100%"></div></td>
-								<td><div style="width:150px;"><img class="hotelPic" src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
-								<td><div style="width:200px;"><img class="hotelPic" src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
-								<td><div style="width:160px;"><img class="hotelPic" src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
+								<td rowspan="2"><div style="width: 350px;">
+										<img style="max-height: 300px;" id="majorPicture"
+											src="styles/images/jd-i1.jpg" width="100%">
+									</div></td>
+								<td><div style="width: 150px;">
+										<img class="hotelPic" src="styles/images/jd-p2.jpg"
+											width="100%" height="112">
+									</div></td>
+								<td><div style="width: 200px;">
+										<img class="hotelPic" src="styles/images/jd-p2.jpg"
+											width="100%" height="112">
+									</div></td>
+								<td><div style="width: 160px;">
+										<img class="hotelPic" src="styles/images/jd-p2.jpg"
+											width="100%" height="112">
+									</div></td>
 							</tr>
 							<tr>
 								<!-- <td colspan="2"><div style="width:360px;"><img class="hotelPic" src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td> -->
-								<td><div style="width:150px;"><img class="hotelPic" src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
-								<td><div style="width:200px;"><img class="hotelPic" src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
-								<td><div style="width:160px;"><img class="hotelPic" src="styles/images/jd-p2.jpg" width="100%" height="112"></div></td>
+								<td><div style="width: 150px;">
+										<img class="hotelPic" src="styles/images/jd-p2.jpg"
+											width="100%" height="112">
+									</div></td>
+								<td><div style="width: 200px;">
+										<img class="hotelPic" src="styles/images/jd-p2.jpg"
+											width="100%" height="112">
+									</div></td>
+								<td><div style="width: 160px;">
+										<img class="hotelPic" src="styles/images/jd-p2.jpg"
+											width="100%" height="112">
+									</div></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-				<div class="clearfix jd-list mt20 mb20" style="font-size:14px;">
+				<div class="clearfix jd-list mt20 mb20" style="font-size: 14px;">
 					<ul class="fl">
 						<li class="current">酒店房型</li>
 						<li><a href="#tag2">酒店设施</a></li>
@@ -114,38 +144,39 @@
 				</div>
 				<div class="clearfix mb20 f12">
 					<span class="fl lh26">入住时段</span>
-					<div class="jd-bd-box ml10 fl clearfix" style="padding:2px 10px;">
-						<span class="fl lh20">入住</span>
-						<input type="text" id="tm1" class="laydate-icon" style="width:160px;">
+					<div class="jd-bd-box ml10 fl clearfix" style="padding: 2px 10px;">
+						<span class="fl lh20">入住</span> <input type="text" id="tm1"
+							class="laydate-icon" style="width: 160px;">
 					</div>
-					<div class="jd-bd-box ml10 fl clearfix" style="padding:2px 10px;">
-						<span class="fl lh20">离店</span>
-						<input  type="text" id="tm2" class="laydate-icon" style="width:160px;">
+					<div class="jd-bd-box ml10 fl clearfix" style="padding: 2px 10px;">
+						<span class="fl lh20">离店</span> <input type="text" id="tm2"
+							class="laydate-icon" style="width: 160px;">
 					</div>
-   					<span class="ml30 mr20 fl f14 lh26" id="totalTime">共1晚</span>
-   					<input type="hidden" value="" id="hid">
-   					<input value="重新搜索" class="jd-sea-btn fl" type="submit" onclick="getRooms()">
+					<span class="ml30 mr20 fl f14 lh26" id="totalTime">共1晚</span> <input
+						type="hidden" value="" id="hid"> <input value="重新搜索"
+						class="jd-sea-btn fl" type="submit" onclick="getRooms()">
 				</div>
 				<div class="clearfix" id="roomlist">
 					<table class="hcxx-table mb20">
-			    		<colgroup>
-			    			<col width="46%"></col>
-			    			<col width="7%"></col>
-			    			<col width="7%"></col>
-			    			<col width="8%"></col>
-			    			<col width="7%"></col>
-			    			<col></col>
-			    		</colgroup>
-			    		<thead>
-			    			<tr>
-			    			<th><span class="fl ml30">房型</span></th>
-			    			<th><span class="fl">房态</span></th>
-			    			<th><span class="fl">宽带</span></th>
-			    			<th><span class="fl">取消政策</span></th>
-			    			<th><span class="fl">房价</span></th>
-			    			<th width="12%"><span class="fl">&nbsp;</span></th>
-			    		</tr></thead>
-			    	</table>
+						<colgroup>
+							<col width="46%"></col>
+							<col width="7%"></col>
+							<col width="7%"></col>
+							<col width="8%"></col>
+							<col width="7%"></col>
+							<col></col>
+						</colgroup>
+						<thead>
+							<tr>
+								<th><span class="fl ml30">房型</span></th>
+								<th><span class="fl">房态</span></th>
+								<th><span class="fl">宽带</span></th>
+								<th><span class="fl">房价</span></th>
+								<th><span class="fl">&nbsp</span></th>
+								<th width="12%"><span class="fl">&nbsp;</span></th>
+							</tr>
+						</thead>
+					</table>
 					<!-- <div class="jd-order-room">
 						<table>
 							<colgroup>
@@ -217,6 +248,31 @@
 					</div> -->
 
 				</div>
+				
+				<div class="clearfix" id="hotelblock">
+				  <div id="noresult" class="undis" align="center"><div>抱歉，暂时找不到酒店...</div></div>
+						<!--这里自己调用 页面加载动态效果 loading-->	
+			      <div class="clearfix" id="loading">
+						<div id="contain" style="height: 60px;">
+							    <div class='wrap' id='wrap1'>
+							    	<div class='part' id='part1'></div>
+							    </div>
+							    <div class='wrap' id='wrap2'>
+							    	<div class='part' id='part2'></div>
+							    </div>
+							    <div class='wrap' id='wrap3'>
+							    	<div class='part' id='part3'></div>
+							    </div>
+							    <div class='wrap' id='wrap4'>
+							    	<div class='part' id='part4'></div>
+							    </div>
+						</div>
+				  </div>
+				  <div id="isLoading" class="undis" align="center">
+				      <div><span class="isLoading"></span>正在加载中...</div>
+				  </div>
+			    </div>
+				
 				<div class="clearfix" id="tag2">
 					<h1 class="mt20 mb20 f24">酒店设施</h1>
 					<table class="jd-ss">
@@ -285,66 +341,89 @@
 				</div>
 				<div class="clearfix" id="tag4">
 					<h1 class="mt20 mb20 f24">酒店介绍</h1>
-					<p id="hotelContent" class="jd-ss pt20 lh24 f12">北京好苑建国酒店 位于建国门北京市东城区建国门内大街17号(朝阳门南小街与建国门内大街交汇处北侧路北)， 北京好苑建国酒店预订电话：400-666-5511北京好苑建国酒店位于北京市中心的东长安街上，西临东方广场，东近光华长安大厦，邻近国贸商圈、天安门及故宫博物院，与王府井商业步行街咫尺相望，周边商务旅游环境优越。酒店不同规格的客房，为宾客提供舒适的商务空间。不同规格的会议厅、大宴会厅和风味独</p>
-				</div>	
+					<p id="hotelContent" class="jd-ss pt20 lh24 f12">北京好苑建国酒店
+						位于建国门北京市东城区建国门内大街17号(朝阳门南小街与建国门内大街交汇处北侧路北)，
+						北京好苑建国酒店预订电话：400-666-5511北京好苑建国酒店位于北京市中心的东长安街上，西临东方广场，东近光华长安大厦，邻近国贸商圈、天安门及故宫博物院，与王府井商业步行街咫尺相望，周边商务旅游环境优越。酒店不同规格的客房，为宾客提供舒适的商务空间。不同规格的会议厅、大宴会厅和风味独</p>
+				</div>
 				<div class="clearfix" id="tag5">
 					<h1 class="mt20 mb20 f24">酒店点评</h1>
-					<div style="border-top:1px solid #ecebeb;border-bottom:1px solid #ecebeb;" class="pt20 pb20">
+					<div
+						style="border-top: 1px solid #ecebeb; border-bottom: 1px solid #ecebeb;"
+						class="pt20 pb20">
 						<table width="100%">
-							<tbody><tr>
-								<td style="border-right:1px dashed #ecebeb" align="center" width="15%">
-									<p class="f24 c-b1"><span class="c-o haoping" style="font-size:48px;">4.3</span>/5.0</p>
-									<p class="f12 c-b1" id="comment1">来自37人评论</p>
-								</td>
-								<td style="border-right:1px dashed #ecebeb" width="50%">
-									<div class="ml10">
-										<div class="pf-nav">
-										<span class="fl">整洁卫生</span>
-											<ul><li style="width:86%"></li></ul>
-											<span class="c-o">4.3</span>
+							<tbody>
+								<tr>
+									<td style="border-right: 1px dashed #ecebeb" align="center"
+										width="15%">
+										<p class="f24 c-b1">
+											<span class="c-o haoping" style="font-size: 48px;">4.3</span>/5.0
+										</p>
+										<p class="f12 c-b1" id="comment1">来自37人评论</p>
+									</td>
+									<td style="border-right: 1px dashed #ecebeb" width="50%">
+										<div class="ml10">
+											<div class="pf-nav">
+												<span class="fl">整洁卫生</span>
+												<ul>
+													<li style="width: 86%"></li>
+												</ul>
+												<span class="c-o">4.3</span>
+											</div>
+											<div class="pf-nav">
+												<span class="fl">设施装潢</span>
+												<ul>
+													<li style="width: 86%"></li>
+												</ul>
+												<span class="c-o">4.3</span>
+											</div>
+											<div class="pf-nav">
+												<span class="fl">服务质量</span>
+												<ul>
+													<li style="width: 86%"></li>
+												</ul>
+												<span class="c-o">4.3</span>
+											</div>
+											<div class="pf-nav">
+												<span class="fl">交通位置</span>
+												<ul>
+													<li style="width: 86%"></li>
+												</ul>
+												<span class="c-o">4.3</span>
+											</div>
 										</div>
-										<div class="pf-nav">
-											<span class="fl">设施装潢</span>
-											<ul><li style="width:86%"></li></ul>
-											<span class="c-o">4.3</span>
-										</div>
-										<div class="pf-nav">
-											<span class="fl">服务质量</span>
-											<ul><li style="width:86%"></li></ul>
-											<span class="c-o">4.3</span>
-										</div>
-										<div class="pf-nav">
-											<span class="fl">交通位置</span>
-											<ul><li style="width:86%"></li></ul>
-											<span class="c-o">4.3</span>
-										</div>
-									</div>
-									
-								</td>
-								<td>
-									<div class="fl f14" style="width:5%;margin-left:7%;line-height:16px;">住客映像</div>
-									<ul class="fl sug-num">
-										<li>出行方便(16)</li>
-										<li>舒适(12)</li>
-										<li>安静(10)</li>
-										<li>繁华地区(8)</li>
-										<li>优质服务(5)</li>
-										<li>优雅(3)</li>
-									</ul>	
-									
-								</td>
-							</tr>
-						</tbody></table>
+
+									</td>
+									<td>
+										<div class="fl f14"
+											style="width: 5%; margin-left: 7%; line-height: 16px;">住客映像</div>
+										<ul class="fl sug-num">
+											<li>出行方便(16)</li>
+											<li>舒适(12)</li>
+											<li>安静(10)</li>
+											<li>繁华地区(8)</li>
+											<li>优质服务(5)</li>
+											<li>优雅(3)</li>
+										</ul>
+
+									</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
-					<div class="clearfix lh30 f12 pl30 pr10" style="background-color:#f6f6f6;"><span class="f14">住客点评</span> <a href="" class="c-o fr" id="comment2">查看全部37条点评 》</a></div>
+					<div class="clearfix lh30 f12 pl30 pr10"
+						style="background-color: #f6f6f6;">
+						<span class="f14">住客点评</span> <a href="" class="c-o fr"
+							id="comment2">查看全部37条点评 》</a>
+					</div>
 					<div class="clearfix">
 						<table class="f12 sug-table-nav">
 							<tr>
-								<td width="40" align="center">
-									<img src="styles/images/p.jpg" border="0" width="20" height="20">
+								<td width="40" align="center"><img
+									src="styles/images/p.jpg" border="0" width="20" height="20">
 								</td>
 								<td width="115" align="right">
-									<div class="pt10 pb10 pr20" style="border-right:1px solid #ecebeb;">
+									<div class="pt10 pb10 pr20"
+										style="border-right: 1px solid #ecebeb;">
 										<p>138****2931</p>
 										<p class="c-b1">商务标间</p>
 										<p class="c-b1">2014-07-05</p>
@@ -360,18 +439,17 @@
 
 						</table>
 					</div>
-				</div>	
+				</div>
 			</div>
 			<div class="fr w285">
 				<div class="clearfix mb20">
 					<span class="f12 mb15"><span class="c-o f20 haoping">4.5</span>/5.0</span>
-					<span id="comment">来自37条评论</span>
-					<a href="" class="fr c-b1 f12">更多》</a>
+					<span id="comment">来自37条评论</span> <a href="" class="fr c-b1 f12">更多》</a>
 				</div>
-				<div style="background-color:#f6f6f6;" class="lh40">
+				<div style="background-color: #f6f6f6;" class="lh40">
 					<img src="styles/images/message.png" border="0" class="ml10 mr10">交通方便，离地铁1号线约50米。
 				</div>
-				
+
 				<div class=" hc-fr-table mt20">
 					<h3>园区推荐酒店</h3>
 					<ul class="ig-nav jd-ig-nav">
@@ -381,7 +459,9 @@
 							</div>
 							<div class="fr mt10">
 								<a href=""><p class="mb15">北京好苑建国酒店</p></a>
-								<p class="f12"><span class="c-o f16">￥618 </span>起</p>
+								<p class="f12">
+									<span class="c-o f16">￥618 </span>起
+								</p>
 							</div>
 						</li>
 						<li>
@@ -390,7 +470,9 @@
 							</div>
 							<div class="fr mt10">
 								<a href=""><p class="mb15">北京好苑建国酒店</p></a>
-								<p class="f12"><span class="c-o f16">￥618 </span>起</p>
+								<p class="f12">
+									<span class="c-o f16">￥618 </span>起
+								</p>
 							</div>
 						</li>
 						<li>
@@ -399,7 +481,9 @@
 							</div>
 							<div class="fr mt10">
 								<a href=""><p class="mb15">北京好苑建国酒店</p></a>
-								<p class="f12"><span class="c-o f16">￥618 </span>起</p>
+								<p class="f12">
+									<span class="c-o f16">￥618 </span>起
+								</p>
 							</div>
 						</li>
 					</ul>
@@ -407,21 +491,16 @@
 				<div class=" hc-fr-table mt20">
 					<h3>我浏览过的酒店</h3>
 					<ul class="history-infor">
-						<li>
-							<a href="" class="c-333">北京好苑建国酒店 <span class="fr"><span class="c-o f16">￥618 </span>起</span></a>
-						</li>
-						<li>
-							<a href="" class="c-333">北京好苑建国酒店 <span class="fr"><span class="c-o f16">￥618 </span>起</span></a>
-						</li>
-						<li>
-							<a href="" class="c-333">北京好苑建国酒店 <span class="fr"><span class="c-o f16">￥618 </span>起</span></a>
-						</li>
-						<li>
-							<a href="" class="c-333">北京好苑建国酒店 <span class="fr"><span class="c-o f16">￥618 </span>起</span></a>
-						</li>
-						<li>
-							<a href="" class="c-333">北京好苑建国酒店 <span class="fr"><span class="c-o f16">￥618 </span>起</span></a>
-						</li>
+						<li><a href="" class="c-333">北京好苑建国酒店 <span class="fr"><span
+									class="c-o f16">￥618 </span>起</span></a></li>
+						<li><a href="" class="c-333">北京好苑建国酒店 <span class="fr"><span
+									class="c-o f16">￥618 </span>起</span></a></li>
+						<li><a href="" class="c-333">北京好苑建国酒店 <span class="fr"><span
+									class="c-o f16">￥618 </span>起</span></a></li>
+						<li><a href="" class="c-333">北京好苑建国酒店 <span class="fr"><span
+									class="c-o f16">￥618 </span>起</span></a></li>
+						<li><a href="" class="c-333">北京好苑建国酒店 <span class="fr"><span
+									class="c-o f16">￥618 </span>起</span></a></li>
 					</ul>
 				</div>
 			</div>
@@ -434,7 +513,7 @@
 	<script type="text/javascript" src="scripts/cityselector/fixdiv.js"></script>
 	<script type="text/javascript" src="scripts/cityselector/address.js"></script>
 	<script type="text/javascript">
-	var pltime,timer;//动态加载效果的时间控件变量
+	var pltime,timer,first=true;//动态加载效果的时间控件变量
     function closeTanc(){
         if(pltime>1){
             pltime--;
@@ -508,6 +587,8 @@
 		var params = ['hid='+hid,'tm1=' + tm1,'tm2='+tm2];
 		var serviceURL = baseUrl+"hotelInfoService/getHotelData.json";
 		//公共方法
+		$("#isLoading").removeClass("undis");
+		$("#noresult").addClass("undis");
 		$.youi.ajaxUtils.ajax({
 			url:serviceURL,
 			data:params.join('&'),
@@ -519,7 +600,23 @@
 					for(var i=0 ; i<record.length; i++){
 						parseRecord_(record[i]);				
 					}
+				}else{
+					$("#noresult").removeClass("undis");
 				}
+				if(first){
+				    $("#loading").addClass("undis");
+				    first=false;
+				}
+			    $("#isLoading").addClass("undis");
+				
+			},
+			error:function(){
+				if(first){
+				    $("#loading").addClass("undis");
+				    first=false;
+				}
+				$("#isLoading").addClass("undis") ;
+				$("#noresult").removeClass("undis");
 			}
 		});
 	}
@@ -535,11 +632,11 @@
 		else html_ += "styles/images/jd-p3.jpg";
 		html_ += "' width='100' height='75'></td>";
 		html_ += "<td style='border-right:1px solid #ecebeb;' valign='top'>";
-		html_ += "<p class='mb25 lh20 f12 mt10'>"+record.title+"</p>";
+		html_ += "<p class='lh20 f12 mt10'>"+record.title+"</p>";
 		html_ += "<p class='f12'><span class='c-b1 mr5'>";
 		//需要判断是否提供房间面积数据
 		if(record.area==null) html_ += " "+record.bed+"<a class='fa fa-angle-down room-show ml20' href='javascript:;'></a></p></td>";
-		else html_ += record.area +"㎡</span>| "+record.bed+"<a class='fa fa-angle-down room-show ml20' href='javascript:;'></a></p></td>";
+		else html_ += record.area +"㎡</span><br/> "+record.bed+"<a class='fa fa-angle-down room-show ml10' href='javascript:;'></a></p></td>";
 		html_ += "<td><table class='room-detail' style='margin-top:0px;'>";				
 		html_ += "<colgroup><col width='26%'></col><col width='10%'></col><col width='10%'></col><col width='12%'></col><col width='12%'></col><col width='10%'></col><col></col></colgroup>";
 		//房型的销售计划
@@ -550,17 +647,28 @@
 			if(plans[i].status==0) html_ += "<td>有房</td>";
 			else html_ += "<td>无房</td>";
 			html_ += "<td>"+ record.adsl +"</td>";
-			html_ += "<td>";
-			if(plans[i].iscard==0) html_ += "免费取消";
-			else html_ += "<a href='' Title='"+plans[i].carddesc+"'>担保</a>";
-			html_ += "</td>";
+			
 			
 			//html_ += "<td><em class='em-circle'>返</em><span class='c-y'>￥0</span></td>";
 			if(plans[i].status==0){
 				html_ += "<td><span class='c-o f20'>¥"+date[0].price+"</span></td>";
+				
+				html_ += "<td>";
+				/*if(plans[i].iscard==0) html_ += "免费取消";
+				else html_ += "<a href='' Title='"+plans[i].carddesc+"'>担保</a>";*/
+				html_ += "<a href='#' class='guarantee' aTitle='"+plans[i].carddesc+"'>担保</a>";
+				html_ += "</td>";
+				
 				html_ += "<td><a href='javascript:bookHotel("+record.rid+","+plans[i].planid+")' class='hhf-submit lh28'>预订</a></td></tr>";
 			}else{
 				html_ += "<td><span class='c-o f20'>¥ 0</span></td>";
+				
+				html_ += "<td>";
+				/*if(plans[i].iscard==0) html_ += "免费取消";
+				else html_ += "<a href='' Title='"+plans[i].carddesc+"'>担保</a>";*/
+				html_ += "<a href='#' class='guarantee' aTitle='"+plans[i].carddesc+"'>担保</a>";
+				html_ += "</td>";
+				
 				html_ += "<td><a disabled='disabled' style='background:#7b7674;border-color:#7b7674' href='javascript:void(0)' class='hhf-submit lh28'>预订</a></td></tr>";
 			}
 				
@@ -583,7 +691,7 @@
 		html_ += "<p>其他: "+record.notes+"</p></div></td>";			
 		html_ += "</tr></tfoot></table></div>";
 		$("#roomlist").append(html_);	
-		
+		$("")
 	}
 	$(function  () {
 		/* $(".room-show").click(function(){
@@ -594,6 +702,20 @@
 			$(this).toggleClass("fa-angle-down").toggleClass("fa-angle-up");
 			$(this).parents("tbody").next("tfoot").toggle();
 		});
+		$("#roomlist").on("mouseover mouseout",".jd-order-room .guarantee",function(e){
+			var width = $("#roomlist").width(),aH =  $(this).outerHeight(),top = $(this).offset().top+aH+10;
+			//alert($(this).offset().left);
+			var html = "<div class='show_title' style='position: absolute;top:"+top+"px;width:400px;border: solid 1px #ECEBEB;left:"+($(this).offset().left-200)+"px; padding: 10px;background: #ffffff;'><i></i>"+$(this).attr("aTitle")+"</div>";
+			//alert(html)
+			if(e.type =="mouseover"){
+				//alert("over")
+				$("#roomlist").append(html)
+			}else{
+				//alert("out");
+				//$("#roomlist .show_title").remove();
+			}
+		   }
+		)
 		var Request = new Object();
 		Request = GetRequest();
 		var commodityId=Request['id'];
@@ -726,12 +848,12 @@
 	
 	</script>
 	<!-- 弹出层样式 -->
-    <div class="toast">
-        <div class="toast-con clearfix">
-            <div class="close-toast fr"></div>
-            <p class="tc mt25 f18" style="color:#ff6715" id="msg">请登录后重试！</p>
-        </div>
-        
-    </div>
+	<div class="toast">
+		<div class="toast-con clearfix">
+			<div class="close-toast fr"></div>
+			<p class="tc mt25 f18" style="color: #ff6715" id="msg">请登录后重试！</p>
+		</div>
+
+	</div>
 </body>
 </html>
