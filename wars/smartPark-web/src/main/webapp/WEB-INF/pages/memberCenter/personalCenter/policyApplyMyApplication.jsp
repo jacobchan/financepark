@@ -44,8 +44,8 @@ var pageCount=1;
 		$.youi.ajaxUtils.ajax({
 			url : baseUrl + "policyApplyManager/getTotalCount.json",
 			beforeSend: function(){
-				//开始显示loading样式
-				$.showBox.Loading();
+				//开始显示dataLoading样式
+				$.showBox.DataLoading();
 			},
 			success : function(results) {
 				var totalCount=results.records[0].totalCount;
@@ -64,8 +64,8 @@ var pageCount=1;
 					    }
 					});	
 				}
-				//关闭loading样式
-				$.showBox.CloseLoading();
+				//关闭dataLoading样式
+				$.showBox.CloseDataLoading();
 			}
 		});
 	}
