@@ -1,27 +1,35 @@
 ﻿<!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>酒店预订</title>
-	<link href="styles/page/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
-	<link href="styles/base.css" type="text/css" rel="stylesheet">
-	<link href="styles/page/zs.css" type="text/css" rel="stylesheet">
-	<link href="styles/page/cityselector.css" type="text/css" rel="stylesheet">
-	<link href="styles/page/hotel.css" type="text/css" rel="stylesheet" />
-	<script type="text/javascript" src="scripts/lib/jquery-1.9.1.min.js"></script>
-	<script type="text/javascript" src="scripts/lib/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="scripts/lib/bootstrap.min.js"></script>
-	<script type="text/javascript" src="scripts/lib/giui.min.js"></script>
-	<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
-	<script type="text/javascript" src="scripts/page/url.js"></script>
-	<script src="scripts/page/right.js"></script>
-	<style type="text/css">
-		a.c-b1:hover{color: #FB7730;}
-		.jd-ig-nav li{padding: 10px 20px;}
-		.czh-search ul.fl li a.active{
-			color: #ff6715;
-		}
-	</style>
+<meta charset="UTF-8">
+<title>酒店预订</title>
+<link href="styles/page/awesome/css/font-awesome.min.css"
+	type="text/css" rel="stylesheet">
+<link href="styles/base.css" type="text/css" rel="stylesheet">
+<link href="styles/page/zs.css" type="text/css" rel="stylesheet">
+<link href="styles/page/cityselector.css" type="text/css"
+	rel="stylesheet">
+<link href="styles/page/hotel.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="scripts/lib/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="scripts/lib/jquery-ui.min.js"></script>
+<script type="text/javascript" src="scripts/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="scripts/lib/giui.min.js"></script>
+<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
+<script type="text/javascript" src="scripts/page/url.js"></script>
+<script src="scripts/page/right.js"></script>
+<style type="text/css">
+a.c-b1:hover {
+	color: #FB7730;
+}
+
+.jd-ig-nav li {
+	padding: 10px 20px;
+}
+
+.czh-search ul.fl li a.active {
+	color: #ff6715;
+}
+</style>
 </head>
 <body>
 	<!--***top start****************************************-->
@@ -30,14 +38,18 @@
 	<div class="w100">
 		<div class="w1200 clearfix pt30 pb50">
 			<div class="h-nav clearfix">
-				<a href="/"><span>首页</span></a><img src="styles/images/zs/right-j-b.png" border="0">
-				<a href=""><span class="current">国内酒店预订</span></a>
+				<a href="/"><span>首页</span></a><img
+					src="styles/images/zs/right-j-b.png" border="0"> <a href=""><span
+					class="current">国内酒店预订</span></a>
 			</div>
 			<div class="jdorder-select clearfix">
 				<div class="tct-select fl js-s clearfix" style="position: relative;">
 					<div class="ic-select ic-select2">
 						<span class="fl lh30 mr10">目的地</span>
-						<p><input type="text" class="city_name" value="" id="city_name" name="city_name"/></p>
+						<p>
+							<input type="text" class="city_name" value="" id="city_name"
+								name="city_name" />
+						</p>
 						<input id="cityid" name="cityid" type="hidden" value="" />
 						<div id="suggest" class="ac_results jd1_position"></div>
 					</div>
@@ -48,114 +60,143 @@
 					</ul> -->
 				</div>
 				<div class="js-date ml10 fl clearfix">
-					<div class="jd-bg-h"><span class="fl">入住</span><input id="tm1" type="text"></div>
+					<div class="jd-bg-h">
+						<span class="fl">入住</span><input id="tm1" type="text">
+					</div>
 					<span class="fl ml10 mr10">—</span>
-					<div class="jd-bg-h"><span class="fl">离店</span><input id="tm2" type="text"></div>
-					<span class="fl ml50 lh22" id="totalTime">共一晚</span>
-					<a href="" class="fr ml10"><img src="styles/images/close.png" border="0" style="margin-top:3px;"></a>
+					<div class="jd-bg-h">
+						<span class="fl">离店</span><input id="tm2" type="text">
+					</div>
+					<span class="fl ml50 lh22" id="totalTime">共一晚</span> <a href=""
+						class="fr ml10"><img src="styles/images/close.png" border="0"
+						style="margin-top: 3px;"></a>
 				</div>
 				<div class="jd-bd-box ml10 fl clearfix">
-					<span class="fl">关键词</span>
-					<input type="text">
+					<span class="fl">关键词</span> <input type="text">
 				</div>
-				<input type="submit" value="立即搜索" class="jd-sea-btn fr" onclick="query()">
+				<input type="submit" value="立即搜索" class="jd-sea-btn fr"
+					onclick="query()">
 			</div>
 			<div class="clearfix jd-bd-select mt20" id="jd-bd-select">
 				<div class="jbk-bt clearfix">
-					<span class="jbk-span fl">价格区间</span>
-					<span class="ml50 mr50 c-o fl">不限</span>
+					<span class="jbk-span fl">价格区间</span> <span
+						class="ml50 mr50 c-o fl">不限</span>
 					<div class="fl">
-						<label><input type="checkbox" name="price" value="1"><span class="fl"> 低于￥150</span></label>
-						<label><input type="checkbox" name="price" value="150"><span class="fl"> ￥151－300</span></label>
-						<label><input type="checkbox" name="price" value="300"><span class="fl"> ￥301-450</span></label>
-						<label><input type="checkbox" name="price" value="450"><span class="fl"> ￥451－600</span></label>
-						<label><input type="checkbox" name="price" value="600"><span class="fl"> ￥600以上</span></label>
+						<label><input type="checkbox" name="price" value="1"><span
+							class="fl"> 低于￥150</span></label> <label><input type="checkbox"
+							name="price" value="150"><span class="fl">
+								￥151－300</span></label> <label><input type="checkbox" name="price"
+							value="300"><span class="fl"> ￥301-450</span></label> <label><input
+							type="checkbox" name="price" value="450"><span class="fl">
+								￥451－600</span></label> <label><input type="checkbox" name="price"
+							value="600"><span class="fl"> ￥600以上</span></label>
 						<!-- <div class="fl jbs-qu">自定义<input type="text" class="ml10" id="minprice"><span class="ml5 mr5">—</span><input type="text" id="maxprice"></div> -->
 					</div>
 				</div>
 				<div class="jbk-bt clearfix">
-					<span class="jbk-span fl">酒店星级</span>
-					<span class="ml50 mr50 c-o fl">不限</span>
+					<span class="jbk-span fl">酒店星级</span> <span
+						class="ml50 mr50 c-o fl">不限</span>
 					<div class="fl">
-						<label><input type="checkbox" name="star" value="2"> 二星级／经济型</label>
-						<label><input type="checkbox" name="star" value="3"> 三星级／舒适型</label>
-						<label><input type="checkbox" name="star" value="4"> 四星级／高档型</label>
-						<label><input type="checkbox" name="star" value="5"> 五星级／豪华型</label>
+						<label><input type="checkbox" name="star" value="2">
+							二星级／经济型</label> <label><input type="checkbox" name="star"
+							value="3"> 三星级／舒适型</label> <label><input type="checkbox"
+							name="star" value="4"> 四星级／高档型</label> <label><input
+							type="checkbox" name="star" value="5"> 五星级／豪华型</label>
 					</div>
 				</div>
 				<div class="jbk-bt clearfix jbk-bt-heigh">
-					<span class="jbk-span fl">行政区域</span>
-					<span class="ml50 mr50 c-o fl">不限</span>
+					<span class="jbk-span fl">行政区域</span> <span
+						class="ml50 mr50 c-o fl">不限</span>
 					<div class="fl" style="width: 900px;">
-						<label><input type="checkbox" name="star" value="2"> 福田区</label>
-						<label><input type="checkbox" name="star" value="3"> 南山区</label>
-						<label><input type="checkbox" name="star" value="4"> 宝安区</label>
-						<label><input type="checkbox" name="star" value="5"> 罗湖区</label>
-						<label><input type="checkbox" name="star" value="2"> 福田区</label>
-						<label><input type="checkbox" name="star" value="3"> 南山区</label>
-						<label><input type="checkbox" name="star" value="4"> 宝安区</label>
-						<label><input type="checkbox" name="star" value="5"> 罗湖区</label>
-						<label><input type="checkbox" name="star" value="2"> 福田区</label>
-						<label><input type="checkbox" name="star" value="3"> 南山区</label>
-						<label><input type="checkbox" name="star" value="4"> 宝安区</label>
-						<label><input type="checkbox" name="star" value="5"> 罗湖区</label>
-						<label><input type="checkbox" name="star" value="4"> 宝安区</label>
-						<label><input type="checkbox" name="star" value="5"> 罗湖区</label>
-						<label><input type="checkbox" name="star" value="2"> 福田区</label>
-						<label><input type="checkbox" name="star" value="3"> 南山区</label>
-						<label><input type="checkbox" name="star" value="4"> 宝安区</label>
-						<label><input type="checkbox" name="star" value="5"> 罗湖区</label>
+						<label><input type="checkbox" name="star" value="2">
+							福田区</label> <label><input type="checkbox" name="star" value="3">
+							南山区</label> <label><input type="checkbox" name="star" value="4">
+							宝安区</label> <label><input type="checkbox" name="star" value="5">
+							罗湖区</label> <label><input type="checkbox" name="star" value="2">
+							福田区</label> <label><input type="checkbox" name="star" value="3">
+							南山区</label> <label><input type="checkbox" name="star" value="4">
+							宝安区</label> <label><input type="checkbox" name="star" value="5">
+							罗湖区</label> <label><input type="checkbox" name="star" value="2">
+							福田区</label> <label><input type="checkbox" name="star" value="3">
+							南山区</label> <label><input type="checkbox" name="star" value="4">
+							宝安区</label> <label><input type="checkbox" name="star" value="5">
+							罗湖区</label> <label><input type="checkbox" name="star" value="4">
+							宝安区</label> <label><input type="checkbox" name="star" value="5">
+							罗湖区</label> <label><input type="checkbox" name="star" value="2">
+							福田区</label> <label><input type="checkbox" name="star" value="3">
+							南山区</label> <label><input type="checkbox" name="star" value="4">
+							宝安区</label> <label><input type="checkbox" name="star" value="5">
+							罗湖区</label>
 					</div>
-					<a href="" class="more_area" id="more_area">更多<i class="fa fa-angle-down ml10"></i></a>
+					<a href="" class="more_area" id="more_area">更多<i
+						class="fa fa-angle-down ml10"></i></a>
 				</div>
-				
+
 			</div>
-			<h5 class="f12 mt20 mb20 lh30"><span class="f14 c-o" id="totalRecord">0</span> 家酒店满足条件</h5>
-			<div class="fl" style="width:880px;">
-				<div class="czh-search clearfix jd-cs" style="font-size:14px;">
-					<ul class="fl">
-						<li id="remen" class="active"><a class="active" href="javascript:query(1)">热门推荐</a></li>
-						<li id="jiage"><a href="javascript:query(2)">价格</a><i class="fa fa-angle-down ml20" style="font-size:18px;"></i></li>
-						<li id="pingfen"><a href="javascript:query(4)">评分</a> <i class="fa fa-angle-down ml20" style="font-size:18px;"></i></li>
+			<h5 class="f12 mt20 mb20 lh30">
+				<span class="f14 c-o" id="totalRecord">0</span> 家酒店满足条件
+			</h5>
+			<div class="fl" style="width: 880px;">
+				<div class="czh-search clearfix jd-cs" style="font-size: 14px;">
+					<ul class="fl tb_header">
+						<li id="remen" class="active" send_val="1"><a class="active"
+							href="javascript:query(1)">热门推荐</a></li>
+						<li id="jiage" send_val="2"><a href="javascript:query(2)" >价格</a><i
+							class="fa fa-angle-down ml20" style="font-size: 18px;"></i></li>
+						<li id="pingfen" send_val="3"><a href="javascript:query(3)" >评分</a> <i
+							class="fa fa-angle-down ml20" style="font-size: 18px;"></i></li>
 					</ul>
 					<div class="fr clearfix f12">
-						<label class="fl mr20"><input id="promotion" type="checkbox" name="th" class="mr10 fl" style="margin-top:12px;"><span class="fl">特惠</span></label>
+						<label class="fl mr20"><input id="promotion"
+							type="checkbox" name="th" class="mr10 fl"
+							style="margin-top: 12px;"><span class="fl">特惠</span></label>
 						<!--<label class="ml20 mr20 fl"><input type="checkbox" name="th" class="mr10 fl" style="margin-top:12px;"><span class="fl">免担保</span></label> -->
 					</div>
 				</div>
 				<div class="clearfix" id="hotelblock">
-				  <div id="noresult" class="undis" align="center"><div>抱歉，暂时找不到酒店...</div></div>
-						<!--这里自己调用 页面加载动态效果 loading-->	
-			      <div class="clearfix undis" id="loading">
+					<div id="noresult" class="undis" align="center">
+						<div>抱歉，暂时找不到酒店...</div>
+					</div>
+					<!--这里自己调用 页面加载动态效果 loading-->
+					<div class="clearfix undis" id="loading">
 						<div id="contain" style="height: 60px;">
-							    <div class='wrap' id='wrap1'>
-							    	<div class='part' id='part1'></div>
-							    </div>
-							    <div class='wrap' id='wrap2'>
-							    	<div class='part' id='part2'></div>
-							    </div>
-							    <div class='wrap' id='wrap3'>
-							    	<div class='part' id='part3'></div>
-							    </div>
-							    <div class='wrap' id='wrap4'>
-							    	<div class='part' id='part4'></div>
-							    </div>
+							<div class='wrap' id='wrap1'>
+								<div class='part' id='part1'></div>
+							</div>
+							<div class='wrap' id='wrap2'>
+								<div class='part' id='part2'></div>
+							</div>
+							<div class='wrap' id='wrap3'>
+								<div class='part' id='part3'></div>
+							</div>
+							<div class='wrap' id='wrap4'>
+								<div class='part' id='part4'></div>
+							</div>
 						</div>
-				  </div>
-				  <div id="isLoading" class="undis" align="center">
-				      <div><span class="isLoading"></span>正在加载中...</div>
-				  </div>
+					</div>
+					<div id="isLoading" class="undis" align="center">
+						<div>
+							<span class="isLoading"></span>正在加载中...
+						</div>
+					</div>
 				</div>
-				<div class="ycc-page clearfix fr" style="text-align:right">
-					<span class="c-b1 mr30 f12" id="totalPage">找到相关结果约180个</span>
-					<a href="javascript:query(1,1)" class="no-c"><i class="fa fa-caret-left"></i></a>
-					<a href="" class="current">1</a>
-					<a href="">2</a>
-					<a href="">3</a>
-					<a href="">...</a>
-					<a href="">98</a>
-					<a href="javascript:query(1,2)"><i class="fa fa-caret-right"></i></a>
-					<span class="skip"><font>跳转到</font><input type="text" value="" /> <a href="" class="go">Go</a></span>
+
+				<!-- 分页 信息 -->
+				<div id="page_content" class="ycc-page clearfix fr"
+					style="text-align: right">
+					<input type="hidden" id="total_page" value="0" />
+					<span class="c-b1 mr30 f12" id="totalPage">找到相关结果约180个</span> 
+					<a id="prev" href="javascript:void(0);" class="no-c"><i class="fa fa-caret-left"></i></a> 
+					<a href="" class="current">1</a> 
+					<a href="">2</a> <a href="">3</a> 
+					<a href="">4</a> 
+					<a href="">5</a>
+					<a href="">6</a>
+				
+					<a href="javascript:void(0);" id="next"><i class="fa fa-caret-right"></i></a>
+					<span class="skip"><font >总共有：</font><font id="total_page_span"></font><font>页</font>
+					<!-- <input type="text"
+						value="" /> <a href="" class="go">Go</a> --></span>
 				</div>
 			</div>
 			<div class="fr w285">
@@ -179,96 +220,247 @@
 	<!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
-	
+
 	<script type="text/javascript" src="scripts/lib/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
 	<script type="text/javascript" src="scripts/page/laydate/laydate.js"></script>
-	
+
 	<script type="text/javascript" src="scripts/cityselector/aircity.js"></script>
 	<script type="text/javascript" src="scripts/cityselector/hotelcity.js"></script>
-	<script type="text/javascript" src="scripts/cityselector/j.dimensions.js"></script>
+	<script type="text/javascript"
+		src="scripts/cityselector/j.dimensions.js"></script>
 	<script type="text/javascript" src="scripts/cityselector/j.suggest.js"></script>
 	<script>
-	$(function(){
-		var more_area_h = $("#more_area").parent().height();
-		$("#more_area").on("click",function(e){
-		   if($(this).hasClass("pickUp")){
-			   $(this).toggleClass("pickUp").find("i").parent().parent().height(more_area_h).find(".jbk-span").height("auto");
-		   }else{
-			   $(this).toggleClass("pickUp").find("i").parent().parent().height("auto").find(".jbk-span").height($(this).parent().height());
-		   }
-		   return false;
+		$(function() {
+			
+			var more_area_h = $("#more_area").parent().height();
+			$("#more_area").on("click",
+				function(e) {
+					if ($(this).hasClass("pickUp")) {
+						$(this).toggleClass("pickUp").find("i").parent()
+								.parent().height(more_area_h).find(
+										".jbk-span").height("auto");
+					} else {
+						$(this).toggleClass("pickUp").find("i").parent()
+								.parent().height("auto").find(".jbk-span")
+								.height($(this).parent().height());
+					}
+					return false;
+				})
+			$("#jd-bd-select").on("click",".jbk-bt .ml50",
+				function() {
+					$(this).removeClass("black").siblings("div").find("input").prop("checked", false);
+				}
+			)
+			$("#jd-bd-select").on("click",".jbk-bt .fl input",
+				function() {
+					if ($(this).parent().parent().find(
+							"input:checked").length) {
+						$(this).parent().parent().siblings(".ml50")
+								.addClass("black");
+					} else {
+						$(this).parent().parent().siblings(".ml50")
+								.removeClass("black");
+					}
+			})
+			//分页事件绑定
+			var count = $("#page_content").children("a").length;
+			$("#page_content").children("a").each(function(index,element){
+				$(element).attr("href","javascript:void(0)");
+				//初始化页码，除了上一页和下一页的翻页部分
+				if(index>0 && index < count-1 ){
+					//记录当前的页码数
+					$(element).attr("page",index);
+					$(element).attr("href","javascript:void(0)");
+					//绑定页码的点击事件
+					$(element).on("click",{count:count,index:index},pageClickBtn);
+				}
+			});
+			//上一页
+			$("#prev").click(pre_click);
+			//下一页
+			$("#next").click(next_click);
+			
+			removePreNextBtn();
+			
 		})
-		$("#jd-bd-select").on("click",".jbk-bt .ml50",function(){
-			$(this).removeClass("black").siblings("div").find("input").prop("checked",false);
-		})
-		$("#jd-bd-select").on("click",".jbk-bt .fl input",function(){
-			if($(this).parent().parent().find("input:checked").length){		
-				$(this).parent().parent().siblings(".ml50").addClass("black");
+		//页码的点击事件
+		function pageClickBtn(event){
+			//页面显示的总页数 这里是6页 
+			var count = event.data.count;
+			//当前页数索引
+			var index = event.data.index;
+
+			if(index == count-2){
+				//重构页码HTML
+				//表格头部排序方式
+				var order_ = $("ul.tb_header").children("li.active").attr("send_val");
+				//$(this).addClass("current").siblings("a").removeClass("current");
+				$("#page_content").find("a").eq(2).addClass("current").siblings("a").removeClass("current");
+
+				
+				query(order_,$(this).text());
+				//到达可见的最后一页，重构HTML内容
+				pageHTMLRefactor($(this).text(),count,false);
+				removePreNextBtn();		
+			}else if(index == 1 && $(this).attr("page") !=1){
+				var order_ = $("ul.tb_header").children("li.active").attr("send_val");
+				//重构页码HTML
+				//表格头部排序方式
+
+				if($(this).attr("page") < count-2){
+					$("#page_content").find("a").eq($(this).attr("page")).addClass("current").siblings("a").removeClass("current");
+				}else{
+					$("#page_content").find("a").eq(count-2).addClass("current").siblings("a").removeClass("current");
+				}
+
+				query(order_,$(this).text());
+				
+				//到达可见的最后一页，重构HTML内容
+				pageHTMLRefactor($(this).text(),count,true);
+				removePreNextBtn();	
+			
+	
 			}else{
-				$(this).parent().parent().siblings(".ml50").removeClass("black");
+				//表格头部排序方式
+				var order_ = $("ul.tb_header").children("li.active").attr("send_val");
+				$(this).addClass("current").siblings("a").removeClass("current");
+				query(order_,$(this).text());
+				removePreNextBtn();
 			}
-		})
-	})
+		}
+		//当分页点击到可见页码的最后一页时，重构页码的HTML内容
+		//参数说明：
+		//page:当前点击的页数 
+		//count:页面显示页数
+		//prev:是否向前翻N页  (true | false)
+		function pageHTMLRefactor(page,count,prev){
+			if(prev){
+				
+				//向前翻页
+				$("#page_content").children("a").each(function(index){
+					//如果往前翻页数 小于可显示页数
+					if(page<count){
+						var pageNum = index;
+						
+						if(index > 0  && index < count-1){
+							$(this).attr("page",pageNum);
+							$(this).text(pageNum);
+						}
+					}else{
+						var pageNum = Number(page)-count+index+2;
+						
+						if(index > 0  && index < count-1){
+							$(this).attr("page",pageNum);
+							$(this).text(pageNum);
+						}
+					}
+				
+					
+					
+				});
+				
+				
+			}else{
+				//到达最后一个可见分页，往后翻
+				$("#page_content").children("a").each(function(index){
+					var pageNum = Number(page)+index-2;
+					if(index > 0  && index < count-1){
+						$(this).attr("page",pageNum);
+						$(this).text(pageNum);
+					}
+				});
+			}
+		
+		}
+		//判断是否存在上一页 或者下一页，不存在则移除相应的click事件
+		function removePreNextBtn(){
+			var page = $("#page_content").find("a.current").text();
+			var max_page = $("#total_page").val();
+			if(page == 1){
+				$("#prev").off("click");
+			}
+			else if(page == max_page){
+				$("#next").off("click");
+				
+			}else{
+				//先解除绑定，避免重复绑定事件
+				$("#prev").off("click");
+				$("#prev").on("click",pre_click);
+				
+				$("#next").off("click");
+				$("#next").on("click",next_click);
+			}
+			
+		}
+		//上一页按钮事件
+		function pre_click(){
+			$("#page_content a.current").prev().trigger("click");
+		}
+		//下一页按钮事件
+		function next_click(){
+			$("#page_content a.current").next().trigger("click");
+		}
 	</script>
 	<script type="text/javascript">
-	var px=1;//酒店列表排序规则 1 热门  2 价格  4 评价 
-	var pg=1,totalPagesize=1;//当前第几页
-	var pltime,timer;//动态加载效果的时间控件变量
-	    function closeTanc(){
-	        if(pltime>1){
-	            pltime--;
-	        }else{
-	            $(".toast").hide();
-	        }       
-	    }
+		var px = 1;//酒店列表排序规则 1 热门  2 价格  4 评价 
+		var pg = 1, totalPagesize = 1;//当前第几页
+		var pltime, timer;//动态加载效果的时间控件变量
+		function closeTanc() {
+			if (pltime > 1) {
+				pltime--;
+			} else {
+				$(".toast").hide();
+			}
+		}
 		function GetRequest() {
 			/* url=decodeURI(location.href);
 			var tmp1=url.split("?")[1]; */
-		   var url = decodeURI(location.search); //获取url中"?"符后的字串
-		   var theRequest = new Object();
-		   if (url.indexOf("?") != -1) {
-		      var str = url.substr(1);
-		      strs = str.split("&");
-		      for(var i = 0; i < strs.length; i ++) {
-		         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
-		      }
-		   }
-		   return theRequest;
+			var url = decodeURI(location.search); //获取url中"?"符后的字串
+			var theRequest = new Object();
+			if (url.indexOf("?") != -1) {
+				var str = url.substr(1);
+				strs = str.split("&");
+				for (var i = 0; i < strs.length; i++) {
+					theRequest[strs[i].split("=")[0]] = (strs[i].split("=")[1]);
+				}
+			}
+			return theRequest;
 		}
 		//计算时间间隔（天数）
-		function GetDateDiff(startDate,endDate){
-		    var startTime = new Date(Date.parse(startDate.replace(/-/g,   "/"))).getTime();     
-		    var endTime = new Date(Date.parse(endDate.replace(/-/g,   "/"))).getTime();     
-		    var dates = Math.abs((startTime - endTime))/(1000*60*60*24);     
-		    return  dates;    
+		function GetDateDiff(startDate, endDate) {
+			var startTime = new Date(Date.parse(startDate.replace(/-/g, "/")))
+					.getTime();
+			var endTime = new Date(Date.parse(endDate.replace(/-/g, "/")))
+					.getTime();
+			var dates = Math.abs((startTime - endTime)) / (1000 * 60 * 60 * 24);
+			return dates;
 		}
 		//设置标注住几天
-		function setDiffTime(tm1,tm2){
+		function setDiffTime(tm1, tm2) {
 			$("#totalTime").empty();
-			$("#totalTime").html("共"+GetDateDiff(tm1,tm2)+"晚");
+			$("#totalTime").html("共" + GetDateDiff(tm1, tm2) + "晚");
 		}
 		//日期对比 a为开始日期b为结束日期 a>b false a<b true
 		function compareDate(a, b) {
-		    var arr = a.split("-");
-		    var starttime = new Date(arr[0], arr[1], arr[2]);
-		    var starttimes = starttime.getTime();
+			var arr = a.split("-");
+			var starttime = new Date(arr[0], arr[1], arr[2]);
+			var starttimes = starttime.getTime();
 
-		    var arrs = b.split("-");
-		    var lktime = new Date(arrs[0], arrs[1], arrs[2]);
-		    var lktimes = lktime.getTime();
+			var arrs = b.split("-");
+			var lktime = new Date(arrs[0], arrs[1], arrs[2]);
+			var lktimes = lktime.getTime();
 
-		    if (starttimes > lktimes) {
-		        return false;
-		    }
-		    else
-		        return true;
+			if (starttimes > lktimes) {
+				return false;
+			} else
+				return true;
 		}
 		//搜索
-		function query(){
+		function query() {
 			//alert(arguments[0]);//argument 隐含参数对象
 			var cityname = $("#city_name").val();
 			var cityid = $("#cityid").val();
@@ -277,29 +469,31 @@
 			tm2 = $("#tm2").val();
 			var today = new Date();
 			var month = Number(today.getMonth()) + Number(1);
-			var todayDate = today.getFullYear()+"-"+month+"-"+today.getDate();
-			if(tm1=="" || tm2=="" || tm1==null || tm2==null || cityid=="" || cityid==null){
+			var todayDate = today.getFullYear() + "-" + month + "-"
+					+ today.getDate();
+			if (tm1 == "" || tm2 == "" || tm1 == null || tm2 == null
+					|| cityid == "" || cityid == null) {
 				clearInterval(timer);
 				$("#msg").text("请正确选择城市、日期");
-    	        $(".toast").show();
-    	        pltime=2;
-    	        timer=setInterval("closeTanc()",1000);
+				$(".toast").show();
+				pltime = 2;
+				timer = setInterval("closeTanc()", 1000);
 				return false;
 			}
-			if(!compareDate(todayDate,tm1)){
+			if (!compareDate(todayDate, tm1)) {
 				clearInterval(timer);
 				$("#msg").text("所选日期不能小于当前日期。");
-    	        $(".toast").show();
-    	        pltime=2;
-    	        timer=setInterval("closeTanc()",1000);
+				$(".toast").show();
+				pltime = 2;
+				timer = setInterval("closeTanc()", 1000);
 				return false;
 			}
-			if(!compareDate(tm1,tm2)){
+			if (!compareDate(tm1, tm2)) {
 				clearInterval(timer);
 				$("#msg").text("入住时间不能大于离店时间。");
-    	        $(".toast").show();
-    	        pltime=2;
-    	        timer=setInterval("closeTanc()",1000);
+				$(".toast").show();
+				pltime = 2;
+				timer = setInterval("closeTanc()", 1000);
 				return false;
 			}
 			//清空原先的内容
@@ -308,153 +502,233 @@
 			//是否特惠
 			var promotion = "";
 			var promotionlist = $("input[name=th]");
-			if(promotionlist[0].checked){
+			if (promotionlist[0].checked) {
 				promotion = 1;
 			}
 			//价格过滤
 			var minprice = 0;
 			var maxprice = 999999;
 			var pricelist = $("input[name=price]");
-			for(var i=0; i<pricelist.length; i++){
-				if(pricelist[i].checked) {
-					if(minprice == 0){
+			for (var i = 0; i < pricelist.length; i++) {
+				if (pricelist[i].checked) {
+					if (minprice == 0) {
 						minprice = pricelist[i].value;
 						maxprice = Number(pricelist[i].value) + Number(150);
 					}
-					if((pricelist[i].value + 150) > maxprice){
+					if ((pricelist[i].value + 150) > maxprice) {
 						maxprice = Number(pricelist[i].value) + Number(150);
 					}
 				}
 			}
 			//星级过滤
 			var star = $("input[name=star]");
+
+			//酒店星级
 			var rank = -1;
-			for(var i=0;i<star.length;i++){
-				if(star[i].checked) rank = star[i].value;
+			for (var i = 0; i < star.length; i++) {
+				if (star[i].checked)
+					rank = star[i].value;
 			}
 			var params;
-			if(arguments.length == 0){//直接搜索
-				if(rank == -1) params = ['px='+px,'minprice='+minprice,'maxprice='+maxprice,'cid='+cityid,'promotion='+promotion];
-				else params = ['minprice='+minprice,'maxprice='+maxprice,'cid='+cityid,'promotion='+promotion,'rank='+rank];
-			}else if(arguments.length==1){//选择酒店排序方式搜索
+			if (arguments.length == 0) {//直接搜索
+				if (rank == -1)
+					params = [ 'px=' + px, 'minprice=' + minprice,
+							'maxprice=' + maxprice, 'cid=' + cityid,
+							'promotion=' + promotion ];
+				else
+					params = [ 'minprice=' + minprice, 'maxprice=' + maxprice,
+							'cid=' + cityid, 'promotion=' + promotion,
+							'rank=' + rank ];
+			} else if (arguments.length == 1) {//选择酒店排序方式搜索
 				$(".active").removeClass("active");
-				if(arguments[0]==1){ $("#remen").attr("class","active"); $("#remen a").attr("class","active"); px = 1;}
-				if(arguments[0]==2){ $("#jiage").attr("class","active"); $("#jiage a").attr("class","active"); px = 2;}
-				if(arguments[0]==4){ $("#pingfen").attr("class","active"); $("#pingfen a").attr("class","active"); px = 4;}
-				if(rank == -1) params = ['px='+arguments[0],'minprice='+minprice,'maxprice='+maxprice,'cid='+cityid,'promotion='+promotion];
-				else params = ['px='+arguments[0],'minprice='+minprice,'maxprice='+maxprice,'cid='+cityid,'promotion='+promotion,'rank='+rank];
-			}else if(arguments.length==2){//翻页
-				if(rank == -1){
-					if(arguments[1]==1){
-						Number(--pg);
-						if(pg<1) pg=1;
-						params = ['px='+px,'pg='+pg,'minprice='+minprice,'maxprice='+maxprice,'cid='+cityid,'promotion='+promotion];
-					}else{
-						Number(++pg);
-						if(pg > totalPagesize) pg = totalPagesize;
-						params = ['px='+px,'pg='+pg,'minprice='+minprice,'maxprice='+maxprice,'cid='+cityid,'promotion='+promotion];
-					}
-				}else {
-					if(arguments[1]==1){
-						Number(--pg);
-						if(pg<1) pg=1;
-						params = ['px='+arguments[0],'pg='+pg,'minprice='+minprice,'maxprice='+maxprice,'cid='+cityid,'promotion='+promotion,'rank='+rank];
-					}else{
-						Number(++pg);
-						if(pg > totalPagesize) pg = totalPagesize;
-						params = ['px='+arguments[0],'pg='+pg,'minprice='+minprice,'maxprice='+maxprice,'cid='+cityid,'promotion='+promotion,'rank='+rank];
-					}
+				if (arguments[0] == 1) {
+					$("#remen").attr("class", "active");
+					$("#remen a").attr("class", "active");
+					px = 1;
+				}
+				if (arguments[0] == 2) {
+					$("#jiage").attr("class", "active");
+					$("#jiage a").attr("class", "active");
+					px = 2;
+				}
+				if (arguments[0] == 3) {
+					$("#pingfen").attr("class", "active");
+					$("#pingfen a").attr("class", "active");
+					px = 4;
+				}
+				if (rank == -1)
+					params = [ 'px=' + arguments[0], 'minprice=' + minprice,
+							'maxprice=' + maxprice, 'cid=' + cityid,
+							'promotion=' + promotion ];
+				else
+					params = [ 'px=' + arguments[0], 'minprice=' + minprice,
+							'maxprice=' + maxprice, 'cid=' + cityid,
+							'promotion=' + promotion, 'rank=' + rank ];
+			} else if (arguments.length == 2) {//翻页
+				//当前页码
+				var curr_p = arguments[1];
+				console.debug(curr_p);
+				if (rank == -1) {
+					//参数更新
+					params = [ 'px=' + px, 'pg=' + curr_p,
+								'minprice=' + minprice, 'maxprice=' + maxprice,
+								'cid=' + cityid, 'promotion=' + promotion ];
 					
+					/*
+					if (arguments[1] == 1) {
+						Number(--pg);
+						if (pg < 1)
+							pg = 1;
+						params = [ 'px=' + px, 'pg=' + pg,
+								'minprice=' + minprice, 'maxprice=' + maxprice,
+								'cid=' + cityid, 'promotion=' + promotion ];
+					} else {
+						Number(++pg);
+						if (pg > totalPagesize)
+							pg = totalPagesize;
+						params = [ 'px=' + px, 'pg=' + pg,
+								'minprice=' + minprice, 'maxprice=' + maxprice,
+								'cid=' + cityid, 'promotion=' + promotion ];
+					}*/
+					
+				} else {
+					//参数更新
+					params = [ 'px=' + arguments[0], 'pg=' + pg,
+								'minprice=' + minprice, 'maxprice=' + maxprice,
+								'cid=' + cityid, 'promotion=' + promotion,
+								'rank=' + rank ];	
+					
+				/*	if (arguments[1] == 1) {
+						Number(--pg);
+						if (pg < 1)
+							pg = 1;
+						params = [ 'px=' + arguments[0], 'pg=' + pg,
+								'minprice=' + minprice, 'maxprice=' + maxprice,
+								'cid=' + cityid, 'promotion=' + promotion,
+								'rank=' + rank ];
+					} else {
+						Number(++pg);
+						if (pg > totalPagesize)
+							pg = totalPagesize;
+						params = [ 'px=' + arguments[0], 'pg=' + pg,
+								'minprice=' + minprice, 'maxprice=' + maxprice,
+								'cid=' + cityid, 'promotion=' + promotion,
+								'rank=' + rank ];
+					}*/
+			
+
 				}
 			}
-						
-			var serviceURL = baseUrl+"hotelInfoService/searchHotelByConditions.json";
-			setDiffTime(tm1,tm2);
+
+			var serviceURL = baseUrl
+					+ "hotelInfoService/searchHotelByConditions.json";
+			setDiffTime(tm1, tm2);
 			//公共方法
 			$.youi.ajaxUtils.ajax({
-				url:serviceURL,
-				data:params.join('&'),
-				jsonp:'data:jsonp',
-				dataType:'jsonp',
-				success:function(result){
-					if(result&&result.records){
-						if(px==1){ $("#remen").attr("class","active"); $("#remen a").attr("class","active");}
-						else if(px==2){ $("#jiage").attr("class","active"); $("#jiage a").attr("class","active");}
-						else if(px==4){ $("#pingfen").attr("class","active"); $("#pingfen a").attr("class","active");}
+				url : serviceURL,
+				data : params.join('&'),
+				jsonp : 'data:jsonp',
+				dataType : 'jsonp',
+				success : function(result) {
+				
+					if (result && result.records) {
+						if (px == 1) {
+							$("#remen").attr("class", "active");
+							$("#remen a").attr("class", "active");
+						} else if (px == 2) {
+							$("#jiage").attr("class", "active");
+							$("#jiage a").attr("class", "active");
+						} else if (px == 4) {
+							$("#pingfen").attr("class", "active");
+							$("#pingfen a").attr("class", "active");
+						}
 						var record = result.records;
 						parseRecord_(record);
-					}else{
-						$("#isLoading").addClass("undis") ;
+					} else {
+						$("#isLoading").addClass("undis");
 						$("#noresult").removeClass("undis");
 					}
 				},
-				error:function(){
-					$("#isLoading").addClass("undis") ;
+				error : function() {
+					$("#isLoading").addClass("undis");
 					$("#noresult").removeClass("undis");
 				}
 			});
 		}
 		//查询结果列表js构建
-		function parseRecord_(record){
-			if(record.length > 0){
+		function parseRecord_(record) {
+			if (record.length > 0) {
 				$("#noresult").addClass("undis");
 				//$(".jd-order-group").remove();
 				$("#totalRecord").html(record[0].totalput);
 				$("#totalPage").empty();
+				$("#total_page").val(record[0].totalpg);
+				//页面中显示总共有多少页
+				$("#total_page_span").text(record[0].totalpg);
 				//$("#totalPage").html("共" + record[0].totalpg + "页");
 				$("#totalPage").html("找到相关结果约" + record[0].totalput + "个");
 				totalPagesize = record[0].totalpg;
-			}else{
+			} else {
 				$("#noresult").removeClass("undis");
 				$("#totalRecord").html("0");
 				$("#totalPage").empty();
 				//$("#totalPage").html("共 0 页");
 				$("#totalPage").html("共 0 个结果")
-			}		
-			for(var i=1;i<record.length;i++){//record[0] 存放返回的头文件信息，包括记录数，页数等
+			}
+			for (var i = 1; i < record.length; i++) {//record[0] 存放返回的头文件信息，包括记录数，页数等
 				var hotel = record[i];
 				var html = "<div class='jd-order-group append_order'><table><colgroup><col width='180'></col><col width='490'></col><col></col><col width='110'></col></colgroup>";
-					html += "<tr><td><a href='javascript:gotoHotelInfo("+hotel.ID+")'><img src='"+hotel.Picture+"' width='160' height='120'></a></td>";
-					html += "<td><div class='mb25'><span class='lh30 f16 mr10' onclick='gotoHotelInfo("+hotel.ID+")'>" + hotel.HotelName + "</span>";
-					html += "<span class='starbox1'>";
-					for(var j=0;j < hotel.xingji; j++){
-						html += "<i class='star1'></i>";
-					}
-					html += "</span></div>";
-					html += "<p class='mb25 lh20 f12'>"+hotel.Address+"</p>"
-					html += "<p class='c-b1 f12'>";		
-					html += "<span class='mr20'><i class='fa fa-wifi'></i> 无线上网</span> <span class='mr20'><i class='fa fa-wifi'></i> 无线上网</span><span class='mr20'><i class='fa fa-wifi'></i> 接机服务</span>";
-					html += "</p></td>";
-					html += "<td valign='top' style='border-right:1px solid #ecebeb'>";
-					html += "<p class='f12 mb15'><span class='c-o f20'>"+hotel.haoping_num+"</span>/5.0</p>";
-					html += "<p class='c-824 f12'>来自"+hotel.df_scores+"条评论</p></td>";
-					html += "<td align='center'><p><span class='c-o f20'>￥"+hotel.min_jiage+" </span>起</p></td>";
-					html += "</tr></table></div>";
+				html += "<tr><td><a href='javascript:gotoHotelInfo("
+						+ hotel.ID
+						+ ")'><img src='"+hotel.Picture+"' width='160' height='120'></a></td>";
+				html += "<td><div class='mb25'><span class='lh30 f16 mr10' onclick='gotoHotelInfo("
+						+ hotel.ID + ")'>" + hotel.HotelName + "</span>";
+				html += "<span class='starbox1'>";
+				for (var j = 0; j < hotel.xingji; j++) {
+					html += "<i class='star1'></i>";
+				}
+				html += "</span></div>";
+				html += "<p class='mb25 lh20 f12'>" + hotel.Address + "</p>"
+				html += "<p class='c-b1 f12'>";
+				html += "<span class='mr20'><i class='fa fa-wifi'></i> 无线上网</span> <span class='mr20'><i class='fa fa-wifi'></i> 无线上网</span><span class='mr20'><i class='fa fa-wifi'></i> 接机服务</span>";
+				html += "</p></td>";
+				html += "<td valign='top' style='border-right:1px solid #ecebeb'>";
+				html += "<p class='f12 mb15'><span class='c-o f20'>"
+						+ hotel.haoping_num + "</span>/5.0</p>";
+				html += "<p class='c-824 f12'>来自" + hotel.df_scores
+						+ "条评论</p></td>";
+				html += "<td align='center'><p><span class='c-o f20'>￥"
+						+ hotel.min_jiage + " </span>起</p></td>";
+				html += "</tr></table></div>";
 				$("#hotelblock").append(html);
 			}
 			$("#loading").addClass("undis");
 			$("#isLoading").addClass("undis");
 		}
 		//构建热门推荐类酒店
-		function recommend_(record){
-			for(var i=1;i<4;i++){
+		function recommend_(record) {
+			for (var i = 1; i < 4; i++) {
 				var hotel = record[i];
 				var html_ = "<li><div class='in-photo ml10'>";
-				html_ += "<img src='"+ hotel.Picture +"' border='0' width='100%'></div>";
+				html_ += "<img src='" + hotel.Picture
+						+ "' border='0' width='100%'></div>";
 				html_ += "<div class='fr mt10'>";
-				html_ += "<a href='javascript:gotoHotelInfo("+hotel.ID+")'><p class='mb15'>"+hotel.HotelName+"</p></a>";
-				html_ += "<p class='f12'><span class='c-o f16'>￥"+hotel.min_jiage+" </span>起</p></div></li>";
+				html_ += "<a href='javascript:gotoHotelInfo(" + hotel.ID
+						+ ")'><p class='mb15'>" + hotel.HotelName + "</p></a>";
+				html_ += "<p class='f12'><span class='c-o f16'>￥"
+						+ hotel.min_jiage + " </span>起</p></div></li>";
 				$("#recommend").append(html_);
 			}
 		}
 		//跳转到酒店详情页
-		function gotoHotelInfo(hid){
+		function gotoHotelInfo(hid) {
 			var tm1 = $("#tm1").val();
 			var tm2 = $("#tm2").val();
-			window.open(encodeURI("jd4.html?hid="+hid+"&tm1="+tm1+"&tm2="+tm2));
+			window.open(encodeURI("jd4.html?hid=" + hid + "&tm1=" + tm1
+					+ "&tm2=" + tm2));
 		}
 		//dom载入方法
-		$(function  () {
+		$(function() {
 			$("#loading").removeClass("undis");
 			$("#city_name").suggest(Hcitys, {
 				hot_list : Hcommoncitys,
@@ -463,7 +737,7 @@
 			});
 			var Request = new Object();
 			Request = GetRequest();
-			var commodityId=Request['id'];
+			var commodityId = Request['id'];
 			var cityname = Request['cityname'];
 			var cityid = Request['cityid'];
 			var tm1 = Request['tm1'];
@@ -472,72 +746,52 @@
 			$("#cityid").val(cityid);
 			$("#tm1").val(tm1);
 			$("#tm2").val(tm2);
-			setDiffTime(tm1,tm2);
-			var params = ['pagesize=10','px=1','cid='+cityid];
-			var serviceURL = baseUrl+"hotelInfoService/searchHotelByConditions.json";
+			setDiffTime(tm1, tm2);
+			var params = [ 'pagesize=10', 'px=1', 'cid=' + cityid ];
+			var serviceURL = baseUrl
+					+ "hotelInfoService/searchHotelByConditions.json";
 			//公共方法
 			$.youi.ajaxUtils.ajax({
-				url:serviceURL,
-				data:params.join('&'),
-				jsonp:'data:jsonp',
-				dataType:'jsonp',
-				success:function(result){
-					if(result&&result.records){
+				url : serviceURL,
+				data : params.join('&'),
+				jsonp : 'data:jsonp',
+				dataType : 'jsonp',
+				success : function(result) {
+					if (result && result.records) {
 						var record = result.records;
 						parseRecord_(record);
-						if(record.length>3)
+						if (record.length > 3)
 							recommend_(record);
-					}else{
-						$("#loading").addClass("undis") ;
+					} else {
+						$("#loading").addClass("undis");
 						$("#noresult").removeClass("undis");
 					}
 				},
-				error:function(){
-					$("#loading").addClass("undis") ;
+				error : function() {
+					$("#loading").addClass("undis");
 					$("#noresult").removeClass("undis");
 				}
 			});
-			
+
 			laydate({
-			    elem: '#tm1', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
-			    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+				elem : '#tm1', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+				event : 'focus' //响应事件。如果没有传入event，则按照默认的click
 			});
 			laydate({
-			    elem: '#tm2', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
-			    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+				elem : '#tm2', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+				event : 'focus' //响应事件。如果没有传入event，则按照默认的click
 			});
-			/*
-			var start = {
-			    elem: '#startTime',
-			    min: laydate.now(), //设定最小日期为当前日期
-			    max: '2099-06-16 23:59:59', //最大日期
-			    istoday: false,
-			    choose: function(datas){
-			         end.min = datas; //开始日选好后，重置结束日的最小日期
-			         end.start = datas //将结束日的初始值设定为开始日
-			    }
-			};
-			var end = {
-			    elem: '#endTime',
-			    min: laydate.now(),
-			    max: '2099-06-16 23:59:59',
-			    istoday: false,
-			    choose: function(datas){
-			        start.max = datas; //结束日选好后，重置开始日的最大日期
-			    }
-			};
-			laydate(start);
-			laydate(end);*/
+
 		})
 	</script>
 	<!-- 弹出层样式 -->
-    <div class="toast">
-        <div class="toast-con clearfix">
-            <div class="close-toast fr"></div>
-            <p class="tc mt25 f18" style="color:#ff6715" id="msg">请登录后重试！</p>
-        </div>
-        
-    </div>
-	
+	<div class="toast">
+		<div class="toast-con clearfix">
+			<div class="close-toast fr"></div>
+			<p class="tc mt25 f18" style="color: #ff6715" id="msg">请登录后重试！</p>
+		</div>
+
+	</div>
+
 </body>
 </html>
