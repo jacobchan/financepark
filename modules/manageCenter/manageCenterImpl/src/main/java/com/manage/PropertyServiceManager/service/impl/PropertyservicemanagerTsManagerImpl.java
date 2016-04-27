@@ -25,6 +25,7 @@ import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSfpro;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTs;
+import com.manage.PropertyServiceManager.service.PropertyservicemanagerBxManager;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerTsManager;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerBxDao;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerTsDao;
@@ -36,6 +37,8 @@ public class PropertyservicemanagerTsManagerImpl extends BaseManagerImpl impleme
 	private PropertyservicemanagerTsDao propertyservicemanagerTsDao;
 	@Autowired
 	private PropertyservicemanagerBxDao propertyservicemanagerBxDao;
+	@Autowired
+	private PropertyservicemanagerBxManager propertyservicemanagerBxManager;
 	
     /**
      * 查询列表
@@ -93,29 +96,34 @@ public class PropertyservicemanagerTsManagerImpl extends BaseManagerImpl impleme
      */
     @EsbServiceMapping
     public PropertyservicemanagerTs savePropertyservicemanagerTs(PropertyservicemanagerTs o) throws BusException{
-    	String bxid = o.getPropertyservicemanagerBx().getBxId();
-    	PropertyservicemanagerBx bx = propertyservicemanagerBxDao.get(bxid);
-    	if(bx==null){
-    		throw new BusException("没有报修记录存在!");
-    	}else{
-    			if(o.getTsId()==null){
-	    			Collection<Condition> conditionts =  new ArrayList<Condition>();
-	    			String[] aa = {"00","01"};
-	    			conditionts.add(ConditionUtils.getCondition("tsStatus", Condition.IN,aa));//查询已发出派工记录或者派工已受理
-	    			conditionts.add(ConditionUtils.getCondition("propertyservicemanagerBx.bxId", Condition.EQUALS,bxid));
-	    			List<PropertyservicemanagerTs> listTs = propertyservicemanagerTsDao.commonQuery(conditionts, null);
-	    			if(listTs.size()>0){
-	    				throw new BusException("该报修已派工!");
-	    			}else{
-			    		bx.setBxStatus("02");//设置派工记录为待接单
-			    		propertyservicemanagerBxDao.save(bx);
-			    	   	return propertyservicemanagerTsDao.save(o);
-	    			}
-    			}else{
-    				return propertyservicemanagerTsDao.save(o);
-    			}
-    	}
- 
+    		if(o.getTsId()==null){
+    			String bxid = o.getPropertyservicemanagerBx().getBxId();
+    		    PropertyservicemanagerBx bx = propertyservicemanagerBxDao.get(bxid);
+	    		Collection<Condition> conditionts =  new ArrayList<Condition>();
+	    		String[] aa = {"00","01"};
+	    		conditionts.add(ConditionUtils.getCondition("tsStatus", Condition.IN,aa));//查询已发出派工记录或者派工已受理
+	    		conditionts.add(ConditionUtils.getCondition("propertyservicemanagerBx.bxId", Condition.EQUALS,bxid));
+	    		List<PropertyservicemanagerTs> listTs = propertyservicemanagerTsDao.commonQuery(conditionts, null);
+	    		if(listTs.size()>0){
+	    			throw new BusException("该报修已派工!");
+	    		}else{
+			    	bx.setBxStatus("02");//设置派工记录为待接单
+			    	bx.setUpdateUser(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+			    	propertyservicemanagerBxManager.savePropertyservicemanagerBx(bx);
+			    	o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+			    	return propertyservicemanagerTsDao.save(o);
+	    		}
+    		}else{
+    			PropertyservicemanagerTs octs = propertyservicemanagerTsDao.get(o.getTsId());
+    			PropertyservicemanagerBx bx = octs.getPropertyservicemanagerBx();
+    			bx.setBxStatus("01");
+    			propertyservicemanagerBxManager.savePropertyservicemanagerBx(bx);
+    			octs.setTsStatus(o.getTsStatus());
+    			octs.setTsRemark(o.getTsRemark());
+    			octs.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    			octs.setTsTime(DateUtils.getToday("yyyy-MM-dd"));
+    			return propertyservicemanagerTsDao.save(octs);
+    		}
     }
 
     /**
