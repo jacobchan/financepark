@@ -62,10 +62,6 @@
 	</youi:func>
 	
 	
-	<youi:func name="func_grid_enteringAdd">
-		$elem('form_addDisRateConfig',pageId).form('open');
-	</youi:func>
-	
 	<!-- 验证是否分销等级已经配置 -->
 	<youi:func name="records_disLevel_change">	
 		var disLevel = $elem('records_disLevel',pageId).fieldValue();	
