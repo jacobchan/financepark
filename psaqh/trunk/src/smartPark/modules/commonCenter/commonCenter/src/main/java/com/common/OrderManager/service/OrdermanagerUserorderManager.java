@@ -315,5 +315,13 @@ public interface OrdermanagerUserorderManager extends BaseManager{
   	 * @throws Exception
   	 */
   	public String getPayQrcodeByCode(String userorderCode) throws Exception;
+  	/**
+  	 * 保存订单
+  	 * @param o
+  	 * @return
+  	 * @throws BusException
+  	 */
+  	public OrdermanagerUserorder saveUserOrder(OrdermanagerUserorder o)
+			throws BusException;
   
 }
