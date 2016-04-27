@@ -2,47 +2,40 @@
 <%@ include file="/WEB-INF/pages/include.jsp" %>
 <youi:html title="访客登记">
 	<youi:body decorator="memcenter"> 
-				<div class="w1000">
-					<h3 class="per-h3">访客登记列表<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要邀请访客</a></h3>
-					<div class="clearfix">
-						<div class="mt20 gr-txl clearfix lh30">
-							<label class="fl mr20 f16">申请时间：</label>
-							<input class="bd-input fl" type="text" id="startTime"><span class="fl ml15 mr15">到</span>
-							<input class="bd-input fl" type="text" id="endTime">
-							<div class="inp-box ml20"><input placeholder="订单号查询" type="text" id="fkCode"><a class="fa fa-search" href=""></a></div>
-							<input value="搜索" class="hhf-submit a f14 fr" type="button">
-						</div>
-						<table class="gt-table mt20">
-							<colgroup>
-								<col width="200"></col>
-								<col width="130"></col>
-								<col width="130"></col>
-								<col width="110"></col>
-								<col width="150"></col>
-								<col></col>
-							</colgroup>
-							<tbody>
-								<tr>
-									<th>订单号</th>
-									<th>到访时间</th>
-									<th>到访状态</th>
-									<th>访客姓名</th>
-									<th>访客电话</th>
-									<th>操作</th>
-								</tr>
-							</tbody>
-							<tbody class="fklist">
-							</tbody>
-							</table>
-						<div class="tcdPageCode fr">
-						
-						</div>
-					</div>
-					
+		<div class="w1000">
+			<h3 class="per-h3">访客登记列表<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要邀请访客</a></h3>
+			<div class="clearfix">
+				<div class="mt20 gr-txl clearfix lh30">
+					<label class="fl mr20 f16">申请时间：</label>
+					<input class="bd-input fl" type="text" id="startTime"><span class="fl ml15 mr15">到</span>
+					<input class="bd-input fl" type="text" id="endTime">
+					<div class="inp-box ml20"><input placeholder="订单号查询" type="text" id="fkCode"></div>
+					<input value="搜索" class="hhf-submit a f14 fr" type="button">
 				</div>
-
-
-	
+				<table class="gt-table mt20">
+					<colgroup>
+						<col width="200"></col>
+						<col width="130"></col>
+						<col width="130"></col>
+						<col width="110"></col>
+						<col width="150"></col>
+						<col></col>
+					</colgroup>
+					<tbody>
+						<tr>
+							<th>订单号</th>
+							<th>到访时间</th>
+							<th>到访状态</th>
+							<th>访客姓名</th>
+							<th>访客电话</th>
+							<th>操作</th>
+						</tr>
+					</tbody>
+					<tbody class="fklist"></tbody>
+				</table>
+				<div class="tcdPageCode fr"></div>
+			</div>
+		</div>	
 	<!--***弹窗 start****************************************-->
 	<div class="bg-tanc m1">
 		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
@@ -72,8 +65,7 @@
         <div class="toast-con clearfix">
             <div class="close-toast fr"></div>
             <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
-        </div> 
-        
+        </div>       
     </div>
 	<!--***弹窗 end****************************************-->
 </youi:body>
@@ -122,17 +114,16 @@
 		});
 	}
 		//拼接列表
-		function _parseRecords(record){
-			//$("tbody").find('tr:eq(1)').html("");	
-			$(".fklist").empty();
-			if(record.length>0){
+	function _parseRecords(record){	
+		var html="";
+		if(record.length>0){
 			for(var i=0;i<record.length;i++){
 				var id = record[i].fkcodeId ;
 				var time = record[i].fkcodeTime ;
 				var cancelbutton="";
 				if(time){
 					time = time.substring(0,10) ;
-				}
+				}	
 				if(record[i].dksataus=="00"){
 					status = "未到访";	
 					cancelbutton="<span class='f12 ml5 mr5'>|</span><a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消访客</a>";
@@ -143,15 +134,15 @@
 				}else if(record[i].dksataus=='03'){
 					status = "已取消";
 				}
-				var html="<tr id='"+id +"' >"+
-						"<td><a href='javascript:;' onclick='viewDetail(\""+record[i].fkcodeId+"\")' class='ac-show'>"+record[i].fkCode+"</a></td>"+
-						"<td>"+time+"</td>" +	
-						"<td class='"+id+"'>"+status+"</td>"+
-					    "<td>"+record[i].fkcodeName+"</td>"+
-						"<td>"+record[i].fkcodeTelephone+"</td>"+
-						"<td><a href='javascript:;' onclick='javascript:qrcode(this)' class='ac-see'>查看二维码</a>"+cancelbutton+"</td>"+
-						"</tr>";
-				 $(".fklist").append(html);							
+				html+="<tr id='"+id +"' >"+
+						  "<td><a href='javascript:;' onclick='viewDetail(\""+record[i].fkcodeId+"\")' class='ac-show'>"+record[i].fkCode+"</a></td>"+
+						  "<td>"+time+"</td>" +	
+						  "<td class='"+id+"'>"+status+"</td>"+
+					      "<td>"+record[i].fkcodeName+"</td>"+
+						  "<td>"+record[i].fkcodeTelephone+"</td>"+
+						  "<td><a href='javascript:;' onclick='javascript:qrcode(this)' class='ac-see'>查看二维码</a>"+cancelbutton+"</td>"+
+					   "</tr>";
+				 $(".fklist").html(html);							
 			}}else{
 				var	html1 = '<tr>'
 					html1 += '	<td colspan="6">暂无记录</td>'
@@ -159,34 +150,34 @@
 						$(".fklist").html(html1);	
 				}
 		};		
-		//确认取消弹窗
-		function cancel(obj){
-			var me=obj.parentNode.parentNode;
-			var fkCode=me.childNodes[0].childNodes[0].innerText; 
-			$(".fkCode").html(fkCode);
-			$(".fkCode")[0].setAttribute("id",me.id);
-			$(".bg-tanc.m1").show();
-		};
-		//二维码弹窗
-		function qrcode(obj){
-	 		var me=obj.parentNode.parentNode;
-			$.youi.ajaxUtils.ajax({
-				url:baseUrl+'propertyservicemanagerTwcrdManager/findTwcrdById.json',
-				data:'fkcodeId='+me.id,
-				success:function(result){
-					if(result&&result.record){
-						var fkCode=me.childNodes[0].childNodes[0].innerText; 
-						var bftime = me.childNodes[1].innerText;
-						var url = result.record.twcrdAddrec;
-						$(".fkcodes").html(fkCode);
-						$(".bftime").html(bftime);
-						$(".fkcodes")[0].setAttribute("id",me.id);
-						$(".fkurl")[0].setAttribute("src",cenUrl+"common/down.html?repository=/swfupload&path="+url);
-						$(".bg-tanc.m2").show();
-					}
+	//确认取消弹窗
+	function cancel(obj){
+		var me=obj.parentNode.parentNode;
+		var fkCode=me.childNodes[0].childNodes[0].innerText; 
+		$(".fkCode").html(fkCode);
+		$(".fkCode")[0].setAttribute("id",me.id);
+		$(".bg-tanc.m1").show();
+	};
+	//二维码弹窗
+	function qrcode(obj){
+	 	var me=obj.parentNode.parentNode;
+		$.youi.ajaxUtils.ajax({
+			url:baseUrl+'propertyservicemanagerTwcrdManager/findTwcrdById.json',
+			data:'fkcodeId='+me.id,
+			success:function(result){
+				if(result&&result.record){
+					var fkCode=me.childNodes[0].childNodes[0].innerText; 
+					var bftime = me.childNodes[1].innerText;
+					var url = result.record.twcrdAddrec;
+					$(".fkcodes").html(fkCode);
+					$(".bftime").html(bftime);
+					$(".fkcodes")[0].setAttribute("id",me.id);
+					$(".fkurl")[0].setAttribute("src",cenUrl+"common/down.html?repository=/swfupload&path="+url);
+					$(".bg-tanc.m2").show();
 				}
-			});
-		};
+			}
+		});
+	};
 		//根据订单号查询
     $('.hhf-submit').click(function(){	
 			var fkCode=$("#fkCode").val();
