@@ -72,8 +72,13 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
 		orders.add(ConditionUtils.getOrder("roomNo", true));
 		PagerRecords pagerRecords = bbmRoomDao.findByPager(pager, conditions, orders);
 		//@SuppressWarnings("unchecked")
-//		List<BbmRoom> rooms = pagerRecords.getRecords();
-//		for(BbmRoom room:rooms){
+		/*List<BbmRoom> rooms = pagerRecords.getRecords();
+		for(BbmRoom room:rooms){
+			String rzId = room.getRzId() ;
+
+		
+		
+		}*/
 //			BbmPark park = room.getBbmPark();
 //			if(park != null){
 //				room.setParkName(park.getParkName());
@@ -106,7 +111,6 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
     	BbmPark park = building.getBbmPark() ;//获取园区对象
     	o.setBbmBuilding(building);
     	o.setBbmPark(park);
-    	o.setStatus("00");//默认为：00，未使用
     	vilidateForRoomNo(floor,building,o.getRoomNo()) ;
     	int count = Integer.parseInt(floor.getFloorRoomCount()) ;//获取楼层单元的数量
     	List<BbmRoom> room = bbmFloorManager.getRoomByFloorId(floorId) ;//得到当前楼层下的所有room
@@ -140,6 +144,7 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
     		}
     		String roomAddress = getRoomAddress(park,building,floor,o) ;
         	o.setRoomAddress(roomAddress);
+        	o.setStatus("00");//默认为：00，未使用
         	return bbmRoomDao.save(o);
     	}
     }
