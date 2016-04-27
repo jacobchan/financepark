@@ -14,8 +14,8 @@
 			<input placeholder="请输入订单号"  id="userorderCode" type="text"style="width:260px;">
 		</div>													
 			<div  class="hospital_button">
-				<input value="搜索" class="hhf-submit f14 fl ml20 hospital" type="button">
-				<input value="搜索全部" class="hhf-submit f14 fl ml20 all" type="button">
+				<input value="搜索" class="hhf-submit f14 fl ml20 hospital" id="query" type="button">
+				<input value="搜索全部" class="hhf-submit f14 fl ml20 all" id="queryAll" type="button">
 		</div>
 	</div>
     <div class="clearfix">
@@ -175,7 +175,7 @@
     }; 
     
 	//根据订单项目模糊查询 待处理订单
-	$('.hhf-submit.f14.fl.ml20.hospital').click(function(){	
+	$('#query').click(function(){	
 		//订单类型id
 	 	var genId = $(".c-b1").attr("data");	
 	 	//订单号
@@ -220,7 +220,7 @@
 		});
 	}
 	//查询全部
-	$('.hhf-submit.f14.fl.ml20.all').click(function(){	
+	$('#queryAll').click(function(){	
 		loadData();
    });
 
