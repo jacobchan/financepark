@@ -115,13 +115,15 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     		if(rz.getRoomId() != null){
     			if(!o.getRoomId().getRoomId().equals(rz.getRoomId().getRoomId())){
         			BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(o.getRoomId().getRoomId());
+        			
         			rz.setParkId(bbmRoom.getBbmPark().getParkId());
         			rz.setBuildingId(bbmRoom.getBbmBuilding().getBuildingId());
         			rz.setFloorId(bbmRoom.getBbmFloor().getFloorId());
         			//更新单元基础信息企业
-        			bbmRoom.setRzId(enterbusinessmanagerRzId);
-        			bbmRoom.setStatus("02");//已售已招
-        			bbmRoomManager.saveBbmRoom(bbmRoom);
+//        			bbmRoom.setRzId(enterbusinessmanagerRzId);
+//        			bbmRoom.setStatus("02");//已售已招
+//        			bbmRoomManager.saveBbmRoom(bbmRoom);
+        			bbmRoomManager.setEnterRoomStatus(enterbusinessmanagerRzId,o.getRoomId().getRoomId());//企业入驻占用单元时，设置单元状态
         		}
     		}else{
     			BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(o.getRoomId().getRoomId());
@@ -129,9 +131,10 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     			rz.setBuildingId(bbmRoom.getBbmBuilding().getBuildingId());
     			rz.setFloorId(bbmRoom.getBbmFloor().getFloorId());
     			//更新单元基础信息企业
-    			bbmRoom.setRzId(enterbusinessmanagerRzId);
-    			bbmRoom.setStatus("02");//已售已招
-    			bbmRoomManager.saveBbmRoom(bbmRoom);
+//    			bbmRoom.setRzId(enterbusinessmanagerRzId);
+//    			bbmRoom.setStatus("02");//已售已招
+//    			bbmRoomManager.saveBbmRoom(bbmRoom);
+    			bbmRoomManager.setEnterRoomStatus(enterbusinessmanagerRzId,o.getRoomId().getRoomId());//企业入驻占用单元时，设置单元状态
     		}
     		rz.setRoomId(o.getRoomId());
     		rz.setRzManager(o.getRzManager());
@@ -156,14 +159,15 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		
         	BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(o.getRoomId().getRoomId());
+        	bbmRoomManager.setEnterRoomStatus(o.getRzId(),o.getRoomId().getRoomId());//企业入驻占用单元时，设置单元状态
         	o.setParkId(bbmRoom.getBbmPark().getParkId());
     		o.setBuildingId(bbmRoom.getBbmBuilding().getBuildingId());
     		o.setFloorId(bbmRoom.getBbmFloor().getFloorId());
     		o = enterbusinessmanagerRzDao.save(o);
     		//更新单元基础信息企业
-    		bbmRoom.setRzId(o.getRzId());
-    		bbmRoom.setStatus("02");//已售已招
-    		bbmRoomManager.saveBbmRoom(bbmRoom);
+//    		bbmRoom.setRzId(o.getRzId());
+//    		bbmRoom.setStatus("02");//已售已招
+//    		bbmRoomManager.saveBbmRoom(bbmRoom);
         	
         	return o;
     	}
