@@ -150,4 +150,11 @@ public interface NmIssuenewsManager extends BaseManager{
 			@ConditionCollection(domainClazz=NmIssuenews.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders,String issueTypeCode)  throws BusException ;
 	
+	/**
+	 * 后台调用
+	 * 得到所有的优惠政策
+	 * @return
+	 */
+	public List<NmIssuenews> getAllPolicyList() ;
+	
 }
