@@ -12,30 +12,7 @@
 		<div class="tcdPageCode fr"></div>		
 	</div>	
 	<!--***弹窗 start****************************************-->
-	<div class="bg-tanc m1">
-		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
-			<a href="javascript:;" class="tc-close"></a>
-			<div class="w60 tc mt40" style="margin-left:20%">
-				<div class="mt20 mb20 f16 lh26">
-					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o"> [ 123456789 ] </span>吗？
-				</div>
-				<p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p>
-				<input value="确定" class="hhf-submit" style="height:36px;" type="submit">
-			</div>
-		</div>
-	</div>
-	<div class="bg-tanc m2">
-		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
-			<a href="javascript:;" class="tc-close"></a>
-			<div class="w70 tc mt40" style="margin-left:15%">
-				<img src="<%=request.getContextPath()%>/styles/images/grzx/ewm.jpg" border="0" class="mb20"/> 
-				<p class="mb10">订单号：<span class="c-o"> [ 123456789 ] </span></p>
-				<p>到访时间：2016年1月21日15:30</p>
-				<a href="javascript:;" class="ib-btn">分享到手机</a>
-				<p class="c-o f12 mt20">提示:推送到手机，必须确保手机端已经安装我们的官方APP</p>
-			</div>
-		</div>
-	</div>
+
 	<div class="bg-tanc m1">
 		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
 			<a href="javascript:;" class="tc-close"></a>
@@ -44,7 +21,7 @@
 					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o moverec">  </span>吗？
 				</div>
 				<!-- <p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p> -->
-				<input value="确定" class="hhf-submit" style="height:36px;" type="submit">
+				<input value="确定" class="hhf-submit c" style="height:36px;" type="submit">
 			</div>
 		</div>
 	</div>
