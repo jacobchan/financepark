@@ -178,7 +178,7 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
         		bx.setBxAmount(o.getBxAmount());
         		savebx = propertyservicemanagerBxDao.save(bx);
         	}else{
-        		return null;
+        		savebx = propertyservicemanagerBxDao.save(o);
         	}
     	}else{//新增
     		//查询当前申请用户
