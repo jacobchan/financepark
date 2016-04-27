@@ -23,6 +23,7 @@
 		<youi:gridCol property="roomCaption"  caption="单元说明" width="150" align="center"/>
 		<youi:gridCol property="roomHost"  caption="单元业主" width="100" align="center"/>
 		<youi:gridCol property="status"  caption="使用状态" width="100" align="center" convert="roomstatus"/>
+		<%-- <youi:gridCol property="saleState"  caption="招商销售状态" width="100" align="center" convert="saleState"/> --%>
 		<youi:gridCol property="roomAddress"  caption="详细地址" width="300" align="center"/>
 
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
@@ -49,9 +50,9 @@
 			<youi:fieldSelect property="bbmFloor.floorId" caption="所属楼层" code="floorId" show="floorCaption" notNull="true"
 				src="esb/web/bbmFloorManager/getBbmFloors.json" parents="bbmBuilding.buildingId" parentsAlias="bbmBuilding.buildingId"/> --%>
 			<youi:fieldText property="roomCaption"  caption="单元说明"/>
-			<youi:fieldSelect property="status"  caption="使用状态" convert="roomstatus" notNull="true"/>
+			<%-- <youi:fieldSelect property="status"  caption="使用状态" convert="roomstatus" notNull="true"/> --%>
 			<youi:fieldText property="roomHost"  caption="单元业主" notNull="true"/>
-			
+			<youi:fieldHidden property="status"  caption="使用状态"/>
 			<youi:fieldHidden property="rzId"  caption="企业ID"/>
 			<youi:fieldHidden property="roomTenement"  caption="单元租户"/>
 			<youi:fieldHidden property="rentCharge"  caption="物业_租金"/>
