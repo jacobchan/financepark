@@ -28,9 +28,7 @@
             <div class="close-toast fr"></div>
             <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
         </div>         
-    </div>
-
-	
+    </div>	
 	<div class="bg-tanc m1">
 		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
 			<a href="javascript:;" class="tc-close"></a>
@@ -150,9 +148,8 @@
 					"<td>"+recordStatus+"</td>"+
 					buttonHtml+
 					"</tr>";
-			}
-			 $("#myRecord").empty();
-			 $("#myRecord").append(html);
+			}			 
+			 $("#myRecord").html(html);
 		}else{
 			var	html1 = '<tr>'
 				html1 += '	<td colspan="6">暂无记录</td>'
