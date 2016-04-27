@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
-			<youi:grid id="grid_reservationRecord" idKeys="recordId,recordCommdityId,recordCustomer,recordMemberId" caption="预约记录列表"  panel="false" 
+			<youi:grid id="grid_reservationRecord" idKeys="recordId,recordCommdityId,recordCustomer,recordMemberId,recordCode" caption="预约记录列表"  panel="false" 
 				src="esb/web/reservationRecordManager/getPagerReservationRecords.json" dataFormId="form_reservationRecord"
 				editSrc="esb/web/reservationRecordManager/getReservationRecord.json" add="NOT" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/reservationRecordManager/removeReservationRecord.json">
@@ -39,6 +39,7 @@
 			 <youi:fieldLabel property="visiteTime"  caption="来访时间" width="120"/>
 			<youi:fieldHidden property="recordId"  caption="预约记录ID"/>
 			<youi:fieldHidden property="recordStatus"  caption="预约记录状态"/>
+			<youi:fieldHidden property="recordCode"  caption="预约单号"/>
 			<youi:fieldHidden property="visiteName"  caption="来访姓名"/>
 			<youi:fieldHidden property="visiteTel"  caption="联系电话" />
 			<youi:fieldHidden property="recordCommdityId"  caption="预约对象"/>
@@ -59,6 +60,7 @@
 			<youi:fieldHidden property="recordStatus"  caption="预约记录状态"/>
 			<youi:fieldHidden property="visiteName"  caption="来访姓名"/>
 			<youi:fieldHidden property="visiteTel"  caption="联系电话" />
+			<youi:fieldHidden property="recordCode"  caption="预约单号"/>
 			<youi:fieldHidden property="recordCommdityId"  caption="预约对象"/>
 			<youi:fieldHidden property="recordMemberId"  caption="预约对象" />
 		</youi:fieldLayout>
