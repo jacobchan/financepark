@@ -156,7 +156,7 @@
 			url:baseUrl+'enterbusinessmanagerRzManager/getCompanyIdName.json',		
 			success:function(result){					
 			   if(result&&result.record){					
-			      var companyName=record.rzName;
+			      var companyName=result.record.rzName;
 			      $("#companyName").text(companyName);					
 			   }
 		     }
