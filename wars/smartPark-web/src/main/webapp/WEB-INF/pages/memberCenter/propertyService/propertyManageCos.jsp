@@ -119,7 +119,7 @@
 				}
 				html   +="<tr id='"+record[i].cosId+"' >"+
 							"<td><a href='javascript:;' onclick='viewOrder(\""+record[i].cosId+"\")' class='ac-show'>"+record[i].cosCode+"</a></td>"+
-							"<td>"+record[i].cosTime+"</td>"+
+							"<td>"+record[i].cosTime.substring(0,10)+"</td>"+
 							"<td>"+record[i].cosName+"</td>"+
 							"<td>"+record[i].cosTelephone+"</td><td>"+status+"</td>"+
 							"<td><a href='javascript:;' onclick='javascript:cancel(this)' class='ac-show'>"+crop+"</a></td>"+
