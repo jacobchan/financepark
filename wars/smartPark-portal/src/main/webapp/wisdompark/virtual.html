@@ -112,7 +112,7 @@
 	    </div>
     </div>
 	<!--这里自己调用 页面加载动态效果-->	
-	<!--  <div class="clearfix undis" id="loading">
+	<div class="clearfix undis" id="loading">
 		<div id="contain">
 		    <div class='wrap' id='wrap1'>
 		    	<div class='part' id='part1'></div>
@@ -130,8 +130,8 @@
 		    	<div class='part' id='part4'></div>
 		    </div>
 		</div>
-	</div>				 -->
-	<!-- <div class="czkj"></div> -->
+	</div>				 
+	<div class="czkj"></div>
 </div>
 <!--*******************************************-->
     
@@ -254,13 +254,14 @@
 				}else if(i == 1){
 					$(".build-two").attr("value",obj.buildingId) ;
 				} */
-				addAttr(index,obj.buildingId) ;
+				//addAttr(index,obj.buildingId) ;
 			}
-				//$("#loading").addClass("undis") ;
-				//$(".zznav").show() ;
+				$("#loading").addClass("undis") ;
+				$(".zznav").show() ;
 		}
 		
-		function addAttr(index,buildingId){
+		/* 初始化时，给楼层加载floorId */
+		/* function addAttr(index,buildingId){
 			var params = ["buildingId="+buildingId];
 			$.youi.ajaxUtils.ajax({
 				url:baseUrl +"bbmFloorManager/getBbmFloorByBuildingId.json",
@@ -296,7 +297,7 @@
 				});
 			}
 			
-		}
+		} */
 		
 		function findFloorList(buildingId){
 			var params = ["buildingId="+buildingId];
