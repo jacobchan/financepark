@@ -12,7 +12,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.distribution.rule.entity.DisRateConfig;
 
 public interface DisRateConfigManager extends BaseManager{
@@ -40,7 +40,7 @@ public interface DisRateConfigManager extends BaseManager{
     /**
      * 保存并返回对象
      */
-    public DisRateConfig saveDisRateConfig(DisRateConfig o) throws BusException;
+    public void saveDisRateConfig(DisRateConfig o,String v1,String v2,String v3) throws BusException;
 
     /**
      * 删除对象
@@ -63,4 +63,12 @@ public interface DisRateConfigManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitDisRateConfig(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 获取未生成规则的分销等级
+	 * @return
+	 * @throws BusException
+	 */
+	public String getLevel(String level) throws BusException;
+	
 }
