@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
-	<youi:grid id="grid_reservationRecord" idKeys="recordId,recordCommdityId,recordMemberId,recordCustomer" caption="预约记录列表"  panel="false" 
+	<youi:grid id="grid_reservationRecord" idKeys="recordId,recordCommdityId,recordMemberId,recordCustomer,recordCode" caption="预约记录列表"  panel="false" 
 				src="esb/web/reservationRecordManager/getPagerReservationRecords.json" dataFormId="form_reservationRecord"
 				editSrc="esb/web/reservationRecordManager/getReservationRecord.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/reservationRecordManager/removeReservationRecord.json">
@@ -69,6 +69,7 @@
 			<youi:fieldSelect property="recordCustomer"  caption="客服代表" notNull="true" src="esb/web/reservationRecordManager/getRoleSaleSer.json" code="loginValue" show="loginName"/>
 			<%-- <youi:fieldText property="recordServiceTel"  caption="客服电话" notNull="true" expression="^1[3|4|5|8|9]{1}[0-9]{9,9}$" expressionMessage="请填写正确的手机号码"/> --%>
 			<youi:fieldHidden property="recordId"  caption="预约记录ID"/>
+			<youi:fieldHidden property="recordCode"  caption="预约单号"/>
 			<youi:fieldHidden property="recordStatus"  caption="预约记录状态"/>
 			<youi:fieldHidden property="recordServiceTel"  caption="客服电话"/>
 			<youi:fieldHidden property="recordMemberId"  caption="预约对象"/>
