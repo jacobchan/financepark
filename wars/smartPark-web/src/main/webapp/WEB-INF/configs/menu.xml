@@ -115,4 +115,7 @@
 		<menu id="340303" text="餐饮购物车" href="page/memberCenter.shoppingCarManager.shoppingcarCatering/shoppingcarCatering.html"></menu>
 		<menu id="340401" text="收藏夹" href="page/memberCenter.FavoritsManage.favoritsFavoritgoods/favoritsFavoritgoods.html"></menu>
 	</menu>
+	<menu id="360000" text="全员分销">
+		<menu id="360001" text="分佣比例配置" href="page/distribution.rule.disRateConfig/disRateConfig.html"></menu>
+	</menu>
 </menus>
