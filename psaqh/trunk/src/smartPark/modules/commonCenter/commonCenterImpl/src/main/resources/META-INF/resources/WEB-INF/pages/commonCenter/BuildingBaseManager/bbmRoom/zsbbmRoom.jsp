@@ -24,14 +24,13 @@
 		<youi:gridCol property="roomNo"  caption="单元编号" width="100" align="center"/>
 		<youi:gridCol property="roomHost"  caption="单元业主" width="100" align="center"/>
 		<youi:gridCol property="status"  caption="使用状态" width="100" align="center" convert="roomstatus"/>
-
+		<youi:gridCol property="saleState"  caption="招商_销售状态" convert="saleState" width="100" align="center"/>
 		<youi:gridCol property="aspect"  caption="招商_朝向" align="center"/>
 		<youi:gridCol property="salesPrice"  caption="招商_单价" align="center"/>
 		<youi:gridCol property="rebate"  caption="招商_折扣" align="center"/>
 		<youi:gridCol property="furnish"  caption="招商_装修" align="center"/>
 		<youi:gridCol property="lowerPrice"  caption="招商_底价" align="center"/>
 		<youi:gridCol property="roomModule"  caption="招商_户型" align="center"/>
-		<youi:gridCol property="saleState"  caption="招商_销售状态" convert="saleState" width="100" align="center"/>
 		<youi:gridCol property="area"  caption="招商_房间面积" width="100" align="center"/>
 		<youi:gridCol property="roomName"  caption="招商_房间名称" width="100" align="center"/>
 		
