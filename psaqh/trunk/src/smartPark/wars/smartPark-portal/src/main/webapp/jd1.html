@@ -184,19 +184,20 @@ a.c-b1:hover {
 				<!-- 分页 信息 -->
 				<div id="page_content" class="ycc-page clearfix fr"
 					style="text-align: right">
-					<input type="hidden" id="total_page" value="0" />
+					
 					<span class="c-b1 mr30 f12" id="totalPage">找到相关结果约180个</span> 
+				
 					<a id="prev" href="javascript:void(0);" class="no-c"><i class="fa fa-caret-left"></i></a> 
 					<a href="" class="current">1</a> 
-					<a href="">2</a> <a href="">3</a> 
+					<a href="">2</a> 
+					<a href="">3</a> 
 					<a href="">4</a> 
 					<a href="">5</a>
 					<a href="">6</a>
 				
 					<a href="javascript:void(0);" id="next"><i class="fa fa-caret-right"></i></a>
 					<span class="skip"><font >总共有：</font><font id="total_page_span"></font><font>页</font>
-					<!-- <input type="text"
-						value="" /> <a href="" class="go">Go</a> --></span>
+					</span>
 				</div>
 			</div>
 			<div class="fr w285">
@@ -227,7 +228,7 @@ a.c-b1:hover {
 	<script type="text/javascript" src="scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
 	<script type="text/javascript" src="scripts/page/laydate/laydate.js"></script>
-
+    <script type="text/javascript" src="scripts/page/sprintf.min.js"></script>
 	<script type="text/javascript" src="scripts/cityselector/aircity.js"></script>
 	<script type="text/javascript" src="scripts/cityselector/hotelcity.js"></script>
 	<script type="text/javascript"
@@ -280,9 +281,9 @@ a.c-b1:hover {
 				}
 			});
 			//上一页
-			$("#prev").click(pre_click);
+			$("#prev").on("click",pre_click);
 			//下一页
-			$("#next").click(next_click);
+			$("#next").on("click",next_click);
 			
 			removePreNextBtn();
 			
@@ -379,7 +380,7 @@ a.c-b1:hover {
 		//判断是否存在上一页 或者下一页，不存在则移除相应的click事件
 		function removePreNextBtn(){
 			var page = $("#page_content").find("a.current").text();
-			var max_page = $("#total_page").val();
+			var max_page = $("#total_page_span").val();
 			if(page == 1){
 				$("#prev").off("click");
 			}
@@ -403,6 +404,49 @@ a.c-b1:hover {
 		//下一页按钮事件
 		function next_click(){
 			$("#page_content a.current").next().trigger("click");
+		}
+		function refreshPageContent(){ 
+			//template
+			var header ="<span class=\"c-b1 mr30 f12\" id=\"totalPage\">%s</span>"+
+			"<a id=\"prev\" href=\"javascript:void(0);\" class=\"no-c\"><i class=\"fa fa-caret-left\"></i></a>";
+			var bottom = "<a href=\"javascript:void(0);\" id=\"next\"><i class=\"fa fa-caret-right\"></i></a>"+
+			"<span class=\"skip\"><font >总共有：</font><font id=\"total_page_span\">%s</font><font>页</font></span>";
+			var page = "<a href=\"javascript:void(0);\" class=\"%s\">%s</a>";
+			//总页数
+			var totalPage = $("#total_page_span").text();
+			//总显示页数
+			var view_count = 6;
+		
+			//少于最大分页数
+			if(totalPage < view_count)
+			{
+				//$("#prev").appnd
+				var result_count = $("#totalPage").text();
+				//分页头部
+				var header_part = sprintf(header,result_count);
+			
+				var pageHTML = "";
+				for(var i=1; i<=totalPage;i++)
+				{
+					var tmp_page ="";
+					if(i==1){
+						tmp_page = sprintf(page,"current",i);
+					}else{
+						tmp_page = sprintf(page,"",i);
+					}
+					
+					pageHTML+=tmp_page;
+				}
+			
+				
+				//分页底部
+				var bottom_part = sprintf(bottom,totalPage);
+				
+				var html_to_append = header_part +pageHTML+ bottom_part;
+				
+				$("#page_content").html(html_to_append);
+				
+			}
 		}
 	</script>
 	<script type="text/javascript">
@@ -574,22 +618,6 @@ a.c-b1:hover {
 								'minprice=' + minprice, 'maxprice=' + maxprice,
 								'cid=' + cityid, 'promotion=' + promotion ];
 					
-					/*
-					if (arguments[1] == 1) {
-						Number(--pg);
-						if (pg < 1)
-							pg = 1;
-						params = [ 'px=' + px, 'pg=' + pg,
-								'minprice=' + minprice, 'maxprice=' + maxprice,
-								'cid=' + cityid, 'promotion=' + promotion ];
-					} else {
-						Number(++pg);
-						if (pg > totalPagesize)
-							pg = totalPagesize;
-						params = [ 'px=' + px, 'pg=' + pg,
-								'minprice=' + minprice, 'maxprice=' + maxprice,
-								'cid=' + cityid, 'promotion=' + promotion ];
-					}*/
 					
 				} else {
 					//参数更新
@@ -598,24 +626,6 @@ a.c-b1:hover {
 								'cid=' + cityid, 'promotion=' + promotion,
 								'rank=' + rank ];	
 					
-				/*	if (arguments[1] == 1) {
-						Number(--pg);
-						if (pg < 1)
-							pg = 1;
-						params = [ 'px=' + arguments[0], 'pg=' + pg,
-								'minprice=' + minprice, 'maxprice=' + maxprice,
-								'cid=' + cityid, 'promotion=' + promotion,
-								'rank=' + rank ];
-					} else {
-						Number(++pg);
-						if (pg > totalPagesize)
-							pg = totalPagesize;
-						params = [ 'px=' + arguments[0], 'pg=' + pg,
-								'minprice=' + minprice, 'maxprice=' + maxprice,
-								'cid=' + cityid, 'promotion=' + promotion,
-								'rank=' + rank ];
-					}*/
-			
 
 				}
 			}
@@ -644,6 +654,8 @@ a.c-b1:hover {
 						}
 						var record = result.records;
 						parseRecord_(record);
+						refreshPageContent();
+						
 					} else {
 						$("#isLoading").addClass("undis");
 						$("#noresult").removeClass("undis");
@@ -662,7 +674,7 @@ a.c-b1:hover {
 				//$(".jd-order-group").remove();
 				$("#totalRecord").html(record[0].totalput);
 				$("#totalPage").empty();
-				$("#total_page").val(record[0].totalpg);
+				//$("#total_page").val(record[0].totalpg);
 				//页面中显示总共有多少页
 				$("#total_page_span").text(record[0].totalpg);
 				//$("#totalPage").html("共" + record[0].totalpg + "页");
