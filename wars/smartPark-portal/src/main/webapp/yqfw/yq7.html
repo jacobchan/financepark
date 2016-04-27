@@ -120,7 +120,7 @@
 			}
 		   if(url=='0'){
 		  	 window.location=cenUrl+"member/memberCenter/propertyService/propertyManageCharge.html";
-		   }else if(url=='6'||url=='8'||url=='10'){
+		   }else if(url=='4'||url=='6'||url=='8'||url=='10'){
 			 //判断是否是企业员工
 				$.youi.ajaxUtils.ajax({
 				url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
@@ -138,7 +138,7 @@
 						}
 					}
 				});
-		   }else if(url=='4'||url=='9'){
+		   }else if(url=='9'){
 			   window.location="yq"+url+".html";
 		   }else{
 			   	clearInterval(timer);
