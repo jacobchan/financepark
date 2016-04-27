@@ -16,11 +16,10 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
+import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.distribution.rule.entity.DisRateConfig;
 import com.distribution.rule.dao.DisRateConfigDao;
 import com.distribution.rule.service.DisRateConfigManager;
@@ -66,15 +65,31 @@ public class DisRateConfigManagerImpl extends BaseManagerImpl implements DisRate
      * 保存对象
      */
     @EsbServiceMapping
-    public DisRateConfig saveDisRateConfig(DisRateConfig o) throws BusException{
-//    	String disRateConfigId = o.getDisRateConfigId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(disRateConfigId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	return disRateConfigDao.save(o);
+    public void saveDisRateConfig(DisRateConfig o,
+    		@ServiceParam(name="v1") String v1,
+    		@ServiceParam(name="v2") String v2,
+    		@ServiceParam(name="v3") String v3) throws BusException{
+    	String disRateConfigId = o.getRecId();
+    	boolean isUpdate = StringUtils.isNotEmpty(disRateConfigId);
+    	
+    	if(isUpdate){//修改
+    		disRateConfigDao.save(o);
+    	}else{//新增
+    		for(int i=0;i<=2;i++){
+    			if(i==0){
+    				o.setMemLevel("1");
+    				o.setDisRate(v1);
+    			}else if(i==1){
+    				o.setMemLevel("2");
+    				o.setDisRate(v2);
+    			}else if(i==2){
+    				o.setMemLevel("3");
+    				o.setDisRate(v3);
+    			}
+    			disRateConfigDao.save(o);
+    		}
+    	}
+    
     }
 
     /**
@@ -98,9 +113,22 @@ public class DisRateConfigManagerImpl extends BaseManagerImpl implements DisRate
     public boolean exsitDisRateConfig(@ServiceParam(name="recId") String id)  throws BusException{
 		return disRateConfigDao.exists(id);
 	}
-    
+    	
     public boolean exsitDisRateConfig(String propertyName,Object value) throws BusException{
 		return disRateConfigDao.exists(propertyName,value);
+	}
+	
+  
+    @EsbServiceMapping
+	public String getLevel(@ServiceParam(name="level") String level) throws BusException {
+    	String msg = "";
+    	List<DisRateConfig> list = disRateConfigDao.getList("disLevel", level);
+    	if(list.size()>0){
+    		msg="false";
+    	}else{
+    		msg="true";
+    	}
+		return msg;
 	}
 
 }
