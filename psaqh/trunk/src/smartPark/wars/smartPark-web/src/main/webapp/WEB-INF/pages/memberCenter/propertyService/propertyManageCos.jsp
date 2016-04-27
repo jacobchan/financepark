@@ -2,50 +2,43 @@
 <%@ include file="/WEB-INF/pages/include.jsp" %>
 <youi:html title="物业投诉">
 	<youi:body decorator="memcenter"> 
-				<div class="w1000">
-					<h3 class="per-h3">物业投诉列表物业报修列表<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要投诉</a></h3>
-					<div class="clearfix">
-						<div class="mt20 gr-txl clearfix lh30">
-							<label class="fl mr20 f16">申请时间：</label>
-							<input class="bd-input fl" type="text" id="startTime"><span class="fl ml15 mr15">到</span>
-							<input class="bd-input fl" type="text" id="endTime">
-							<div class="inp-box ml20"><input placeholder="投诉单号查询" type="text" id="cosCode"><a class="fa fa-search" href=""></a></div>
-							<input value="搜索" class="hhf-submit query" type="button">
-						</div>
-			
-					
-						<table class="gt-table mt20">
-							<colgroup>
-								<col width="190"></col>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="120"></col>
-								<col width="120"></col>
-								<col width="120"></col>
-							</colgroup>
-							<tbody>
-								<tr>
-									<th>投诉单号</th>
-									<th>申请时间</th>								
-									<th>联系人</th>
-									<th>联系电话</th>
-									<th>投诉状态</th>
-									<th>操作</th>
-								</tr>
-							</tbody>
-							<tbody class="knowledge a">
-							</tbody>
-							
-						</table>
-						<div class="tcdPageCode fr">
-							
-						</div>
-					</div>
-					
-				</div>
-
+		<div class="w1000">
+			<h3 class="per-h3">物业投诉列表物业报修列表<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要投诉</a></h3>
+				<div class="clearfix">
+					<div class="mt20 gr-txl clearfix lh30">
+						<label class="fl mr20 f16">申请时间：</label>
+						<input class="bd-input fl" type="text" id="startTime"><span class="fl ml15 mr15">到</span>
+						<input class="bd-input fl" type="text" id="endTime">
+						<div class="inp-box ml20"><input placeholder="投诉单号查询" type="text" id="cosCode"><a class="fa fa-search" href=""></a></div>
+						<input value="搜索" class="hhf-submit query" id="query" type="button">
+					</div>							
+					<table class="gt-table mt20">
+					<colgroup>
+						<col width="190"></col>
+						<col width="150"></col>
+						<col width="150"></col>
+						<col width="120"></col>
+						<col width="120"></col>
+						<col width="120"></col>
+					</colgroup>
+					<tbody>
+						<tr>
+							<th>投诉单号</th>
+							<th>申请时间</th>								
+							<th>联系人</th>
+							<th>联系电话</th>
+							<th>投诉状态</th>
+							<th>操作</th>
+						</tr>
+					</tbody>
+					<tbody class="knowledge a">
+					</tbody>							
+			</table>
+			<div class="tcdPageCode fr">													</div>
+		</div>					
+    </div>
 	<!--***弹窗 start****************************************-->
-		<div class="bg-tanc m1">
+	<div class="bg-tanc m1">
 		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
 			<a href="javascript:;" class="tc-close"></a>
 			<div class="w60 tc mt40" style="margin-left:20%">
@@ -93,9 +86,7 @@
 				}
 			}
 		}); 			
-	});	
-	
-	
+	});		
 	//分页列表
 	function refreshData(pageIndex,pageSize){
 		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
@@ -109,13 +100,13 @@
 			}
 		});
 	}
-		//格式化展示列表
-		function _parseRecords(record){
-		   $(".knowledge.a").empty();	
-			if(record.length>0){
-				for(var i=0;i<record.length;i++){			
+	//格式化展示列表
+	function _parseRecords(record){
+		var html="";
+		if(record.length>0){
+			for(var i=0;i<record.length;i++){			
 				var status = "";
-				var crop = "";				
+				var crop = "";		
 				if(record[i].cosStatus=='01'){
 					status = "待受理";
 					crop = "取消";
@@ -126,24 +117,24 @@
 				}else if(record[i].cosStatus=='04'){
 					status = "已退回";
 				}
-				var html="<tr id='"+record[i].cosId+"' >"+
+				html   +="<tr id='"+record[i].cosId+"' >"+
 							"<td><a href='javascript:;' onclick='viewOrder(\""+record[i].cosId+"\")' class='ac-show'>"+record[i].cosCode+"</a></td>"+
 							"<td>"+record[i].cosTime+"</td>"+
 							"<td>"+record[i].cosName+"</td>"+
 							"<td>"+record[i].cosTelephone+"</td><td>"+status+"</td>"+
 							"<td><a href='javascript:;' onclick='javascript:cancel(this)' class='ac-show'>"+crop+"</a></td>"+
 						  "</tr>";
-						$(".knowledge.a").append(html);	
 			}
-			}else{
-				var	html1 = '<tr>'
-					html1 += '	<td colspan="6">暂无记录</td>'
-					html1 += '</tr>'
+			$(".knowledge.a").html(html);	
+		}else{
+			var	html1 =  '<tr>'
+				html1 += '	<td colspan="6">暂无记录</td>'
+				html1 += '</tr>'
 						$(".knowledge.a").html(html1);	
-				}		
-		};
+		}		
+	};
 		//根据订单号，时间查询
-    $('.hhf-submit.query').click(function(){	
+    $("#query").click(function(){	
 		var cosCode=$("#cosCode").val();
 		var startTime=$("#startTime").val(); 
 		var endTime=$("#endTime").val(); 			
@@ -169,14 +160,14 @@
               }
         }); 			
     });	
-		//根据订单号查询 分页列表
-		function refreshData_query(pageIndex,pageSize){
-			var cosCode=$("#cosCode").val();	
-			 var startTime=$("#startTime").val(); 
-			 var endTime=$("#endTime").val(); 
-			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'cosCode='+cosCode,'operator:cosCode=LIKE','startTime='+startTime,'endTime='+endTime];
-			$.ajax({
-				url:baseUrl+'propertyservicemanagerCosManager/getPagerLikeCos.json',
+	//根据订单号查询 分页列表
+	function refreshData_query(pageIndex,pageSize){
+		var cosCode=$("#cosCode").val();	
+		var startTime=$("#startTime").val(); 
+		var endTime=$("#endTime").val(); 
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'cosCode='+cosCode,'operator:cosCode=LIKE','startTime='+startTime,'endTime='+endTime];
+		$.ajax({
+			url:baseUrl+'propertyservicemanagerCosManager/getPagerLikeCos.json',
 				data:params.join('&'),
 				success:function(results){
 					if(results&&results.records){
@@ -185,36 +176,31 @@
 				}
 			});
 		}
-	 
-	</script>
-	
-	<!-- 取消投诉 -->
-	<script type="text/javascript">
-			function cancel(obj){
-				var me=obj.parentNode.parentNode;//找到父节点	
-				//alert(me.id);
-				var cosCode=me.childNodes[0].childNodes[0].innerText; //获取订单号
-				$(".moverec").html(cosCode);//给弹窗插入订单号
-				$(".moverec")[0].setAttribute("id",me.id);//给弹窗设置id
-				$(".bg-tanc.m1").show();
-			};
+	//<!-- 取消投诉 -->
+	function cancel(obj){
+		var me=obj.parentNode.parentNode;//找到父节点	
+		//alert(me.id);
+		var cosCode=me.childNodes[0].childNodes[0].innerText; //获取订单号
+		$(".moverec").html(cosCode);//给弹窗插入订单号
+		$(".moverec")[0].setAttribute("id",me.id);//给弹窗设置id
+		$(".bg-tanc.m1").show();
+	};
 			//点击确认取消投诉
-			$(function(){
-				$(".hhf-submit.confirm").click(function(){	
-					    $(".bg-tanc.m1").hide();
-						var id=$(".moverec")[0].getAttribute("id");				
-					 	$.ajax({
-					 		url:baseUrl+'propertyservicemanagerCosManager/updateCosforpage.json',
-							data:'cosId='+id,
-							success:function(result){
-								if(result&&result.record){
-									close("取消成功");							
-								}
-							}
-						});
-					});
-				});	
-		
+	$(function(){
+		$(".hhf-submit.confirm").click(function(){	
+		$(".bg-tanc.m1").hide();
+		var id=$(".moverec")[0].getAttribute("id");				
+		$.ajax({
+			url:baseUrl+'propertyservicemanagerCosManager/updateCosforpage.json',
+			data:'cosId='+id,
+			success:function(result){
+				if(result&&result.record){
+					close("取消成功");							
+				}
+			}
+			});
+		});
+	});			
 	$(function(){
 		laydate({
 		    elem: '#startTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
@@ -244,10 +230,9 @@
 			setTimeout(function(){$(".toast").hide(); },2000);
 			refreshData(currentIndex,pageSize);
       }
-	function viewOrder(cosId){
-		
+	//显示订单详情
+	function viewOrder(cosId){		
 			window.location.href=cenUrl+"member/memberCenter/propertyService/propertyManageCosDetail.html?cosId="+cosId;
 		};
-	</script>
-	
+	</script>	
 </youi:html>
