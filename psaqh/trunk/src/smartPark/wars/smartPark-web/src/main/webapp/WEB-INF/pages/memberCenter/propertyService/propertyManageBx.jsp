@@ -103,42 +103,43 @@
 	}		
 	//拼接列表
 	function _parseRecords(record){
-		$(".knowledge").empty();
+		var html="";
 		if(record.length>0){
-		for(var i=0;i<record.length;i++){
-		    var bxStatus='';
-			var buttonHtml='';
-			if(record[i].bxStatus=='00'){
-			    bxStatus='待受理';
-				buttonHtml="<a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消</a>";
-			}else if(record[i].bxStatus=='01'){
-				bxStatus='已受理';
-			}else if(record[i].bxStatus=='02'){
-				bxStatus='待接单';
-			}else if(record[i].bxStatus=='03'){
-				bxStatus='已派工';
-			}else if(record[i].bxStatus=='04'){
-				bxStatus='已完工';
-			}else if(record[i].bxStatus=='05'){
-				bxStatus='已定价';
-				buttonHtml="<td><a href='javascript:;'>付款</a></td>";
-			}else if(record[i].bxStatus=='06'){
-				bxStatus='已付款';
-			}else if(record[i].bxStatus=='07'){
-				bxStatus='已完成';
-			}else if(record[i].bxStatus=='08'){
-				bxStatus='已取消';
+			for(var i=0;i<record.length;i++){
+		    	var bxStatus='';
+				var buttonHtml='';
+				if(record[i].bxStatus=='00'){
+			    	bxStatus='待受理';
+					buttonHtml="<a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消</a>";
+				}else if(record[i].bxStatus=='01'){
+					bxStatus='已受理';
+				}else if(record[i].bxStatus=='02'){
+					bxStatus='待接单';
+				}else if(record[i].bxStatus=='03'){
+					bxStatus='已派工';
+				}else if(record[i].bxStatus=='04'){
+					bxStatus='已完工';
+				}else if(record[i].bxStatus=='05'){
+					bxStatus='已定价';
+					buttonHtml="<td><a href='javascript:;'>付款</a></td>";
+				}else if(record[i].bxStatus=='06'){
+					bxStatus='已付款';
+				}else if(record[i].bxStatus=='07'){
+					bxStatus='已完成';
+				}else if(record[i].bxStatus=='08'){
+					bxStatus='已取消';
+				}
+			    html += "<tr id='"+record[i].bxId+"' class='aaa'>"+
+							"<td><a href='javascript:;' onclick='viewDetail(\""+record[i].bxId+"\")' class='ac-show'>"+record[i].bxCode+"</a></td>"+
+							"<td>"+record[i].applyTime+"</td>"+
+				   			"<td>"+bxStatus+"</td>"+
+							"<td>"+record[i].member.memberName+"</td>"+
+							"<td>"+record[i].member.memberPhoneNumber+"</td>"+
+							"<td>"+buttonHtml+"</td>"
+						"</tr>";			
 			}
-			var html="<tr id='"+record[i].bxId+"' class='aaa'>"+
-				"<td><a href='javascript:;' onclick='viewDetail(\""+record[i].bxId+"\")' class='ac-show'>"+record[i].bxCode+"</a></td>"+
-				"<td>"+record[i].applyTime+"</td>"+
-				"<td>"+bxStatus+"</td>"+
-				"<td>"+record[i].member.memberName+"</td>"+
-				"<td>18659786621</td>"+
-				"<td>"+buttonHtml+"</td>"
-				"</tr>";
-			$(".knowledge").append(html);
-			}}else{
+		    $(".knowledge").html(html);
+			}else{
 				var	html1 = '<tr>'
 					html1 += '	<td colspan="6">暂无记录</td>'
 					html1 += '</tr>'
@@ -158,7 +159,6 @@
 	//<!-- 取消报修订单 -->
 	function cancel(obj){
 		var me=obj.parentNode.parentNode;//找到父节点	
-		//alert(me.id);
 		var bxCode=me.childNodes[0].childNodes[0].innerText; //获取订单号
 		$(".moverec").html(bxCode);//给弹窗插入订单号
 		$(".moverec")[0].setAttribute("id",me.id);//给弹窗设置id
@@ -211,7 +211,7 @@
               }
         }); 			
     });	
-		//根据订单号查询 分页列表
+	//根据订单号查询 分页列表
     function refreshData_query(pageIndex,pageSize){
 		 var bxCode=$("#bxCode").val();	
 		 var startTime=$("#startTime").val(); 
@@ -243,16 +243,16 @@
 		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 		});
 	});
-	  function close(content){		        
-	        $(".tc.mt25.f18").empty() ;
-	        $(".tc.mt25.f18").append(content) ;
-	        $(".toast").show();		      		        		       				
-			setTimeout(function(){$(".toast").hide(); },2000);
-			refreshData(currentIndex,pageSize);
-      }
-	  //跳转到详情页面
-	  function viewDetail(bxId){			
-			window.location.href=cenUrl+"member/memberCenter/propertyService/propertyManageBxDetail.html?bxId="+bxId;
+    function close(content){		        
+	    $(".tc.mt25.f18").empty() ;
+	    $(".tc.mt25.f18").append(content) ;
+	    $(".toast").show();		      		        		       				
+		setTimeout(function(){$(".toast").hide(); },2000);
+		refreshData(currentIndex,pageSize);
+    }
+	//跳转到详情页面
+    function viewDetail(bxId){			
+		window.location.href=cenUrl+"member/memberCenter/propertyService/propertyManageBxDetail.html?bxId="+bxId;
 	};
 	</script>
 	<script type="text/javascript">
