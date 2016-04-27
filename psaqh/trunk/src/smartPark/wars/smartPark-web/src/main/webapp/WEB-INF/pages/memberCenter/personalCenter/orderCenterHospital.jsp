@@ -64,26 +64,25 @@
 		 $.ajax({
 			 url : baseUrl + "ordermanagerUserorderManager/getTotalCountHospital.json",
 				success : function(results) {
-									var totalCount=results.records[0].totalCount;
-									pageCount = Math.ceil(totalCount / pageSize);//页数
-							 refreshData(1,pageSize);
-							//插入页码
-							$(".tcdPageCode").empty();
-							if(totalCount>0){
-								$(".tcdPageCode").createPage({
-								    pageCount:pageCount,
-								    current:1,
-								    backFn:function(p){
-								    	currentIndex = p;
-								       this.pageCount=pageCount;
-								        refreshData(p,pageSize);
-								    }
-								});	
+					var totalCount=results.records[0].totalCount;
+					pageCount = Math.ceil(totalCount / pageSize);//页数
+					refreshData(1,pageSize);
+					//插入页码
+					$(".tcdPageCode").empty();
+					if(totalCount>0){
+					    $(".tcdPageCode").createPage({
+						    pageCount:pageCount,
+							current:1,
+							backFn:function(p){
+							    currentIndex = p;
+								this.pageCount=pageCount;
+								       refreshData(p,pageSize);
 							}
-			}
-		}); 			
-		}
- 
+						});	
+					}
+				}
+			}); 			
+		} 
 	//分页列表
 	 function refreshData(pageIndex,pageSize){
 		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
@@ -97,7 +96,6 @@
 			}
 		});
 	}
-	
 	//拼接卡号列表
     function _parseRecords_hospital(record){					
 	    $(".hospital_list").empty();
@@ -143,7 +141,7 @@
         $(".toast").show();		      		        		       				
 		setTimeout(function(){$(".toast").hide(); },2000);
 		refreshData(currentIndex,pageSize);
-  }
+    }
  
  	//下拉选项目名称
 	$(function(){
@@ -175,6 +173,7 @@
 			$(this).parent().hide();
 		});
     }; 
+    
 	//根据订单项目模糊查询 待处理订单
 	$('.hhf-submit.f14.fl.ml20.hospital').click(function(){	
 		//订单类型id
@@ -220,6 +219,7 @@
 		  }
 		});
 	}
+	//查询全部
 	$('.hhf-submit.f14.fl.ml20.all').click(function(){	
 		loadData();
    });
