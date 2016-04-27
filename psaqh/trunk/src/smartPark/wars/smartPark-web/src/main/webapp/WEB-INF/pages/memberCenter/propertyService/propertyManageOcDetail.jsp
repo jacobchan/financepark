@@ -103,8 +103,8 @@
 						  }	
 						$(".fr.f12").html(button); 
 						$('#bxCode').html(record.ocCode+"&nbsp&nbsp"+status);
-						$('#applyTime').html(record.applyTime);
-						$('#ocDate').html("预约时间："+record.ocDate);										
+						$('#applyTime').html(record.applyTime.substring(0,10));
+						$('#ocDate').html("预约时间："+record.ocDate.substring(0,10));										
 						$('#ocRemark').html("预约详情："+record.ocRemark);
 						if(!record.ocComp==null){
 							ocComp="公司名称："+record.ocComp;

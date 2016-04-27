@@ -121,7 +121,7 @@
 				}	
 				html+= 	   "<tr id='"+record[i].ocId+"'>"+
 				     		   	"<td><a href='javascript:;' onclick='viewDetail(\""+record[i].ocId+"\")' class='ac-show'>"+record[i].ocCode+"</a></td>"+		
-				      			"<td>"+record[i].ocDate+"</td>"+
+				      			"<td>"+record[i].ocDate.substring(0,10)+"</td>"+
 				      			"<td>"+record[i].member.memberName+"</td>"+
 				      			"<td>"+status+"</td>"+				    
 				      			"<td>"+button+"</td>"+                    
