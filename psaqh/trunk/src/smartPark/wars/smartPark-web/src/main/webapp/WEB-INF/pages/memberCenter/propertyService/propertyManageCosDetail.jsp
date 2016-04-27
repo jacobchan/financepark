@@ -102,7 +102,7 @@
 						  }	
 						$(".fr.f12").html(button); 
 						$('#cosCode').html(record.cosCode+"&nbsp&nbsp"+status);
-						$('#cosTime').html(record.cosTime);													
+						$('#cosTime').html(record.cosTime.substring(0,10));													
 						$('#cosContent').html("预约详情："+record.cosContent);
 						$('#memberName').html("投诉人："+record.memberInformation.memberName);
 						$('#memberPhoneNumber').html("电话："+record.memberInformation.memberPhoneNumber);						
