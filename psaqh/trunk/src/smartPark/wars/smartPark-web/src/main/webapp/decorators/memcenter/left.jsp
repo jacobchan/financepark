@@ -37,11 +37,7 @@
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/genWisdom/releaseActivity.html">发布活动</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/genWisdom/participateActivity.html">我参加的活动</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/genWisdom/publishActivity.html">我发布的活动</a></dd>
-			<dt>
-				<dd>
-					<a href="<%=request.getContextPath()%>/enterprise/info.html"><div class="sidebar-menu-return"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_return.png"></span>返回企业中心</div></a>
-				</dd>
-			</dt>
+	
 		</dl>
 	</div>
 	<script type="text/javascript">
