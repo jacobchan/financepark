@@ -3,17 +3,16 @@
  */
 package com.distribution.rule.service;
 
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
+import com.distribution.rule.entity.DisRateConfig;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.ServiceParam;
-import com.distribution.rule.entity.DisRateConfig;
 
 public interface DisRateConfigManager extends BaseManager{
 
