@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
-	<youi:grid id="grid_reservationRecord" idKeys="recordId,recordCommdityId" caption="预约记录列表"  panel="false" 
+	<youi:grid id="grid_reservationRecord" idKeys="recordId,recordCommdityId,recordMemberId" caption="预约记录列表"  panel="false" 
 				src="esb/web/reservationRecordManager/getPagerReservationRecords.json" dataFormId="form_reservationRecord"
 				editSrc="esb/web/reservationRecordManager/getReservationRecord.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/reservationRecordManager/removeReservationRecord.json">
