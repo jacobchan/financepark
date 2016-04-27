@@ -33,13 +33,13 @@
 		            	<input type="hidden" name="loginType" value="${loginType}"/>
 		                <fieldset>
 		                    <div class="login_input mt10">
-		                        <label class="f16">手机号</label>
+		                        <label class="f14 mr10">手机号</label>
 		                        <input type="text" name="username" class="form-control" value="${username}" placeholder="Username">
 		                    </div>
 		                    <div class="clearfix"></div><br>
 		
 		                    <div class="login_input mt10">
-		                       <label class="f16">密码&nbsp;&nbsp;&nbsp;</label>
+		                       <label class="f14 mr10">密&nbsp;&nbsp;&nbsp;码</label>
 		                       <input type="password" name="password" class="form-control" value="123456" placeholder="Password">
 		                    </div>
 		                    <br/>
@@ -59,9 +59,9 @@
             
             <form class="login_form pr" style="display:none">
             	<div class="login_input mt15">
-                	<label class="f16">用户名</label>
+                	<label class="f14">用户名</label>
                     <input type="text" style="width: 120px;font-size: 14px;" placeholder="请输入手机号码" id="mobile">
-                    <a href="javascript:;" style="color:#FB7730;" id="sendMobileCaptcha" onclick="getCaptcha();">获取验证码</a>
+                    <a href="javascript:;" class="f12 fr my-show co" id="sendMobileCaptcha" onclick="getCaptcha();">获取短信验证码</a>
                 </div>
                 <div class="message-yz">
                 	<p class="bd">进行安全验证</p>
@@ -77,20 +77,20 @@
 	                </div>
                 	
                 	<div class="clearfix pt20 pb20 my-hide">
-                		<a href="javascript:;" class="btn-cheng-code f14 tc lh35 mr20" style="width:80px;border-radius:3px;" id="getCode" >获取短信</a>
+                		<a href="javascript:;" class="btn-cheng f14 tc lh35 mr20" style="width:80px;border-radius:3px;" id="getCode" >获取短信</a>
                 		<a href="javascript:;" class="pb-btn f14 tc lh35" style="width:80px;border-radius:3px;" id="cancelCode">取消</a>
                 	</div>
                 </div>
                 <div class="login_input mt10">
-                	<label class="f16">验证码</label>
+                	<label class="f14">验证码</label>
                     <input type="text" id="captcha">
                 </div>
                 <div class="login_input mt10">
-                	<label class="f16">密码</label>
+                	<label class="f14">密码</label>
                     <input type="password" id="passwd">
                 </div>
                 <div class="login_input mt10">
-                	<label class="f16">确认密码</label>
+                	<label class="f14">确认密码</label>
                     <input type="password" id="repasswd">
                 </div>
                 <div class="p10 f12">
