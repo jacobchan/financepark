@@ -29,7 +29,7 @@
 		<youi:fieldLayout prefix="record">
 			<youi:fieldHidden property="documentId"  caption="文档ID"/>
 			<youi:fieldSelect property="activityApply.applyId"  caption="活动" src="esb/web/activityApplyManager/getActivityApplys.json" code="applyId" show="applyTitle"/>
-			<youi:fieldSwfupload property="documentPath"  caption="文档" uploadUrl="/common/upload.html" fileTypes="*.doc;*.xls;*.ppt"  fileTypesDescription="所有类型" fileSizeLimit="10240" fileUploadLimit="1" fileQueueLimit="1"/>
+			<youi:fieldSwfupload property="documentPath"  caption="文档" uploadUrl="/common/upload.html" fileTypes="*.doc;*.xls;*.ppt;*.docx;*.xlsx;*.pptx;*.pdf"  fileTypesDescription="所有类型" fileSizeLimit="10240" fileUploadLimit="1" fileQueueLimit="1"/>
 		</youi:fieldLayout>
 	</youi:form>
 	

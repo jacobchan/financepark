@@ -65,7 +65,7 @@ function validateTime(startTime,endTime){
 			<youi:fieldSelect property="applayType.typeId"  caption="活动类型" src="esb/web/applayTypeManager/getApplayTypes.json" code="typeId" show="typeName" notNull="true"/>
 			<youi:fieldSelect property="isRecoomend"  caption="是否推荐" convert="bool"/>
 			<youi:fieldSwfupload property="activityImage" caption="活动图片" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" />
-			<youi:fieldSwfupload property="documentPath"  caption="文档" uploadUrl="/common/upload.html" fileTypes="*.doc;*.xls;*.ppt"  fileTypesDescription="所有类型" fileSizeLimit="10240" fileQueueLimit="1"/>
+			<youi:fieldSwfupload property="documentPath"  caption="文档" uploadUrl="/common/upload.html" fileTypes="*.doc;*.xls;*.ppt;*.docx;*.xlsx;*.pptx;*.pdf"  fileTypesDescription="所有类型" fileSizeLimit="10240" fileQueueLimit="1"/>
 			<%-- <youi:fieldArea property="commentContent"  caption="活动内容" column="2" notNull="true"/> --%>
 			<youi:fieldCustom column="2" custom="fieldCkeditor" customOptions="{}" property="commentContent"  caption="活动内容"/>
 		</youi:fieldLayout>
