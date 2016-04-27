@@ -150,10 +150,10 @@
 		$(document).on("mouseover mouseout",".zzul .b1",function(){
 			$(".b-o .build").toggle();
 		});
-		$(document).on("mouseover",".y1",function(){
+		/* $(document).on("mouseover",".y1",function(){
 			var buildingId = $(this).parent().attr("id") ;
 			findFloorList(buildingId) ;
-		});
+		}); */
 		$(document).on("mouseover mouseout",".zzul .b1 li",function(){
 			var index = $(this).index() + 2 ;
 			$(".b-o .build div").eq(index).find("img").toggle();
@@ -166,16 +166,14 @@
 			$(".b-t .build div").eq(index).find("img").toggle();
 		});
 		$(document).on("mouseover mouseout",".build div:not(.bof)",function(){
-			
 				$(this).find("img").toggle();
-			
 		});
 		/*$(document).on("mouseover mouseout",".b-num",function(){
 			$(this).find(".build").toggle();
 		});*/
-		$(document).on("click",".build div",function(){
+		/* $(document).on("click",".build div",function(){
 			location.href = "wp_login.html?floorId="+$(this).attr("value");
-		});
+		}); */
 		
 	});
 /* 	$(function(){
@@ -256,8 +254,12 @@
 				} */
 				//addAttr(index,obj.buildingId) ;
 			}
-				$("#loading").addClass("undis") ;
-				$(".zznav").show() ;
+			for(var j=0;j<record.length;j++){
+				var obj = record[j] ;
+				findFloorList(obj.buildingId) ;
+			}
+			$("#loading").addClass("undis") ;
+			$(".zznav").show() ;
 		}
 		
 		/* 初始化时，给楼层加载floorId */
