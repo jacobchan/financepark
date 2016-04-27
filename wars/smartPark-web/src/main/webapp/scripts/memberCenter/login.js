@@ -87,6 +87,9 @@ $(function(){
 	});
 	
 	$("#register").click(function(){
+		if($("#register").hasClass("btn-disabled")){
+			return ;
+		}
 		var memberPhoneNumber = $("#mobile").val() ;
 		var memberPassword = $("#passwd").val() ;
 		var repasswd = $("#repasswd").val() ;
