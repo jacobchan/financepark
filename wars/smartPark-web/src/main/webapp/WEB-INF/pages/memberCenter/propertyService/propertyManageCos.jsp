@@ -1,9 +1,9 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/pages/include.jsp" %>
-<youi:html title="物业投诉">
+<youi:html title="物业投诉列表">
 	<youi:body decorator="memcenter"> 
 		<div class="w1000">
-			<h3 class="per-h3">物业投诉列表物业报修列表<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要投诉</a></h3>
+			<h3 class="per-h3">物业投诉列表<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要投诉</a></h3>
 				<div class="clearfix">
 					<div class="mt20 gr-txl clearfix lh30">
 						<label class="fl mr20 f16">申请时间：</label>
