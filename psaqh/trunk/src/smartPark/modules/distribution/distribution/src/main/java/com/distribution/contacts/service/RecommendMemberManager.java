@@ -62,4 +62,11 @@ public interface RecommendMemberManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitRecommendMember(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 初始化注册时间
+	 * @throws BusException
+	 */
+	public void updataRegTime(RecommendMember o) throws BusException;
+	
 }
