@@ -170,6 +170,25 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 	}
 	
 	/**
+	 * 后台调用
+	 * 得到所有的优惠证政策
+	 * @return
+	 */
+	@EsbServiceMapping
+	public List<NmIssuenews> getAllPolicyList(){
+		List<NmIssuenews> list = this.getNmIssuenewss() ;
+		List<NmIssuenews> policyList = new ArrayList<NmIssuenews>() ;
+		for(int i=0;i<list.size();i++){
+			NmIssuenews nm = list.get(i) ;
+			String typeCode = nm.getPolicyType().getIssueTypeCode() ;//得到当前新闻的发布类型的typeCode
+			if("0201".equals(typeCode) || "0202".equals(typeCode)){//0201孵化器政策,0202加速器政策
+				policyList.add(nm) ;
+			}
+		}
+		return policyList ;
+	}
+	
+	/**
 	 * 通过发布类型ID，得到该类型下的所有已发布的新闻
 	 * @param issueTypeId 发布类型ID
 	 * @return
