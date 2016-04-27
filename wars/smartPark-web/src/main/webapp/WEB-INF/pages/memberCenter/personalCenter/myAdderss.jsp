@@ -223,7 +223,7 @@
 							"<div class='pl20 pr20 lh35 tr f12' style='border-top:1px solid #ebecec'>"+
 							"<a href='javascript:;' class='mr10' onclick='javascript:setDefault(this)'>设为默认</a>"+
 							"<a href='javascript:;' class='mr10 ga-edit' onclick='javascript:editAdd(this)'>编辑</a>"+
-							"<a onclick='javascript:removeAddress(this)'>删除</a>"+
+							"<a href='javascript:;' class='mr10' onclick='javascript:removeAddress(this)'>删除</a>"+
 							"</div>"+
 							"<em class='s-a-select'>默认</em>"+
 							"</div>"
