@@ -1,19 +1,25 @@
 //web页面的loadingJS
 (function () {
   $.showBox = {
-    Loading: function () {
-        GenerateHtml("loading");
+    PageLoading: function () {
+        GenerateHtml("pageLoading");
     },
-  	CloseLoading: function () {
-  		closeLoading();
+    DataLoading: function () {
+        GenerateHtml("dataLoading");
+    },
+  	ClosePageLoading: function () {
+  		closePageLoading();
+	},
+	CloseDataLoading: function () {
+  		closeDataLoading();
 	}
   }
  
   //生成Html
   var GenerateHtml = function (type,msg,webRoot) {
     var _html = "";
-	   if (type == "loading") {
-		   _html += '<div class="clearfix" id="loading">'
+	   if (type == "pageLoading") {
+		   _html += '<div class="clearfix" id="pageLoading">'
 		   _html += '	<div id="contain">'
 		   _html += '		<div class="wrap" id="wrap1">'
 		   _html += '			<div class="part" id="part1"></div>'
@@ -30,11 +36,22 @@
 		   _html += '	</div>'
 		   _html += '</div>'
 	   }
+	   if (type == "dataLoading") {
+		   _html += '<div class="clearfix tc" id="dataLoading">'
+		   _html += '<img src="../../../styles/images/loading_2.gif" border="0" />'
+		   _html += '</div>'
+	   }
+	   
     $("#loadingShow").append(_html);
   }
   
-  //关闭loadding页面的显示
-  var closeLoading = function () {
-	  $("#loading").addClass("undis");
+  //关闭pageLoading页面的显示
+  var closePageLoading = function () {
+	  $("#pageLoading").addClass("undis");
+	};
+	
+ //关闭dataLoading页面的显示
+  var closeDataLoading = function () {
+	  $("#dataLoading").addClass("undis");
 	};
 })();
