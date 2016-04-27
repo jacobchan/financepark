@@ -23,13 +23,6 @@
 					<col width="110"></col>
 					<col></col>
 				</colgroup>
-				<tr class="label">
-					<td><b>地址类型</b></td>
-					<td>
-						<label><input type="radio" name="address" class="mr5" checked="checked" value="0">园区地址</label>
-						<label class="ml30"><input type="radio" name="address" class="mr5" value="1">非园区地址</label>
-					</td>
-				</tr>
 				<tr>
 					<td><b>姓名</b></td>
 					<td><input type="text" id="addressName"></td>
@@ -38,26 +31,7 @@
 					<td><b>电话</b></td>
 					<td><input type="text" id="addressPhone"></td>
 				</tr>
-				<tr class="show1">
-					<td><b>园区地址</b></td>
-					<td>
-						<div class="tct-select fl mr20 bbmbud" style="width:160px">
-							
-						</div>
-						<div class="tct-select fl bbmfloor" style="width:160px">
-						<!-- <div class="ic-select">
-								<p id="floorNo"></p>
-							</div> -->
-							
-						</div>
-						<div class="tct-select fl bbmroom" style="width:160px;margin-left: 20px;">
-							<!-- <div class="ic-select">
-								<p id="roomNo"></p>
-							</div> -->
-						</div>
-					</td>
-				</tr>
-				<tr class="show2 undis">
+				<tr>
 					<td><b>地址信息</b></td>
 					<td><input type="text" style="width:450px;" id="ad2"></td>
 				</tr>
@@ -190,12 +164,12 @@
 				$("#addressPhone").val('');
 				$("#ad2").val('');
 				$(".bg-tanc.m1").show();
-				$(".bbmbud").empty();
+				/* $(".bbmbud").empty();
 				$("#floorNo").empty();
 				$("#roomNo").empty();
 				getbbmbud();//获取楼栋
 				getbbmfloor();//初始化楼层
-				getbbmroom();//初始化单元
+				getbbmroom();//初始化单元 */
 			});
 		});
 		
@@ -379,15 +353,14 @@
 				var addressName="";	
 				var addressPhone="";
 				var addressDetail ="";
-					var bool = $('input[name="address"]:checked').val();
+				/* 	var bool = $('input[name="address"]:checked').val();
 					if(bool=='0'){
-						/*  var a1 = $("#buildingNo").text();
+						 var a1 = $("#buildingNo").text();
 						 var a2 = $("#floorNo").text();
-						 var a3 = $("#ad1").val(); */
+						 var a3 = $("#ad1").val(); 
 						addressDetail = $("#roomNo").attr("value");
-					}else if(bool=='1'){
-						addressDetail = $("#ad2").val();
-					}
+					}else if(bool=='1'){ */
+					addressDetail = $("#ad2").val();
 					addressName=$("#addressName").val();	
 					addressPhone=$("#addressPhone").val();
 					if(addressPhone!=''&&addressPhone!=null){
