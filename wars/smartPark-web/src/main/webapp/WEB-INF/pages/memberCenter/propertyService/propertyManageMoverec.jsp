@@ -111,7 +111,7 @@
 							    "<tr>"+
 								  "<td>"+
 								 	"<p class='f14 c-333'>"+record[i].moverecComp+"</p>"+
-								    "<p>"+moverecTime+"</p>"+
+								    "<p>"+moverecTime.substring(0,10)+"</p>"+
 								  "</td>"+
 								  "<td><p>"+moverecStatus+"</p></td>"+
 							     "</tr>"+							

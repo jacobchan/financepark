@@ -119,7 +119,7 @@
 						$('#fkCode').html(record.fkCode+"&nbsp&nbsp"+status);
 						$(".c-o.moverec").html(record.fkCode);//确认取消弹窗
 						$(".fkcodes").html(record.fkCode);  //二维码弹窗
-						$('#applyTime').html(record.applyTime);
+						$('#applyTime').html(record.applyTime.substring(0,10));
 						if(!record.fkcodeComp==null){
 							fkcodeComp="到访企业："+record.fkcodeComp;
 						}
