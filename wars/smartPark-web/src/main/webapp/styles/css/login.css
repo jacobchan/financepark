@@ -4,21 +4,23 @@
 .w350{width:350px;border:1px solid #efecec;}
 .login_ul li{display:inline-block;float:left;width:50%;padding:10px;text-align:center;font-size:16px;color:#333;cursor:pointer;background:#F3F3F3;line-height:30px;}
 .login_ul li.active{color:#FB7730;background:#fff;}
-.login_input{height:45px;border-bottom:1px #efecec solid;line-height:45px;padding:0 20px}
-.login_input label{width: 70px;display: inline-block;}
-.login_input input{border:none;font-size:17px;display:inline-block;width:150px;padding-left:10px}
+.login_input{height:45px;border-bottom:1px #efecec solid;line-height:45px;padding:0 15px}
+/* .login_input label{width: 70px;display: inline-block;} */
+.login_input input{border:none;font-size:12px;display:inline-block;width:150px;padding-left:10px}
 .btn_yzm{display:inline-block;cursor:pointer;padding:3px 7px;border:1px #FB7730 solid;color:#FB7730;line-height:normal}
 .btn_yzm:hover{background:#FB7730;color:#fff}
 .login_foot{border-top:1px #BFBFBF solid;padding-top:30px;}
 .login_foot a{color:#B8B8B8;margin:0 20px;display:inline-block;font-size: 14px;}
 .login_foot a:hover{color: #666;}
-.c3{color: #333;}
-a.c3:hover{color: #FB7730;}
-.btn-cheng{padding:5px 120px;background:#FA742C;border:none;color:#fff;display:inline-block;cursor:pointer; display: block;margin: 35px;font-size: 16px;}
-.btn-cheng:hover{background:#ff5900;color:#fff !important;}
+.c3{color: #333;}.co{color: #FB7730;}a.co:hover{color: #ff5900;text-decoration: underline;}
+a.c3:hover,a.co:hover{color: #FF6714;}
+.lh50{line-height: 50px;}
 .bd{border-bottom: 1px solid #efecec;}
-.btn-cheng-code{background:#FA742C;border:none;color:#fff;display:inline-block;cursor:pointer;}
-.btn-cheng-code:hover{background:#ff5900;color:#fff !important;}
+.btn-cheng{background:#FA742C;border:none;color:#fff;display:inline-block;cursor:pointer;}
+.btn-cheng:hover{background:#ff5900;color:#fff !important;}
+.btn-disabled{display:inline-block;background:#ccc;border:none;color:#fff;cursor:pointer;}
+.btn-disabled:hover{background:#c1c1c1;color:#fff !important;}
 .pb-btn{background: #707070 none repeat scroll 0% 0%;display: inline-block;color: #FFF;}
 .pb-btn:hover{background: #555;color:#fff !important;}
+
 .message-yz{line-height: 45px;color: #c0c0c0;position: absolute;left: -1px; display: none; top: 45px;z-index: 2;text-align: center;font-size: 12px;width: 350px;border:1px solid #efecec;border-top: 0px;background: #fff;}
