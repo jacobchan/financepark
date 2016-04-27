@@ -158,57 +158,74 @@ $(function(){
            	pltime=1;
            	timer=setInterval("closeTanc()",1000);
 		} 
-		var phone = $("#iphone").val();
-		var sex = $(".sex-group span.active").index()+1;
-		var time = $("#timer").val();
-		if(phone=="" || phone.length==0){
-			clearInterval(timer);
-			$(".tc.mt25").text("请输入联系电话！");
-           	$(".toast").show();
-           	pltime=1;
-           	timer=setInterval("closeTanc()",1000);
-			return false;
-		}else{
-			if(!isMobil(phone)){
-				clearInterval(timer);
-				$(".tc.mt25").text("手机号格式不正确!");
-	           	$(".toast").show();
-	           	pltime=1;
-	           	timer=setInterval("closeTanc()",1000);
-				return false;
-			}else{
-				if(time=="" || time.length==0){
+		//判断是否是企业员工
+		$.youi.ajaxUtils.ajax({
+		url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
+		jsonp:'data:jsonp',
+		dataType:'jsonp',
+		success:function(result){
+			if(result&&result.record){
+				var phone = $("#iphone").val();
+				var sex = $(".sex-group span.active").index()+1;
+				var time = $("#timer").val();
+				if(phone=="" || phone.length==0){
 					clearInterval(timer);
-					$(".tc.mt25").text("请输入到访时间!");
+					$(".tc.mt25").text("请输入联系电话！");
 		           	$(".toast").show();
 		           	pltime=1;
 		           	timer=setInterval("closeTanc()",1000);
 					return false;
+				}else{
+					if(!isMobil(phone)){
+						clearInterval(timer);
+						$(".tc.mt25").text("手机号格式不正确!");
+			           	$(".toast").show();
+			           	pltime=1;
+			           	timer=setInterval("closeTanc()",1000);
+						return false;
+					}else{
+						if(time=="" || time.length==0){
+							clearInterval(timer);
+							$(".tc.mt25").text("请输入到访时间!");
+				           	$(".toast").show();
+				           	pltime=1;
+				           	timer=setInterval("closeTanc()",1000);
+							return false;
+						}
+					}
 				}
+				
+				var params = ['fkcodeName='+$("#user").val(),
+								'fkcodeSex='+sex,
+								'fkcodeTelephone='+phone,
+							//	'fkcodeComp='+$("#company").val(),
+								'fkcodeTime='+$("#timer").val(),
+								'fkcodeRemark='+$("#userinfo").val()];
+				var serviceURL = baseUrl+"propertyservicemanagerFkcodeManager/savePropertyservicemanagerFkcode.json";
+				
+				//公共方法
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					data:params.join('&'),
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(results){
+						if(results&&results.record){
+							$(".bg-tanc.m2").show();
+							countdown(3);
+							//window.location=cenUrl+"member/memberCenter/propertyService/propertyManageFk.html";
+						}
+					}
+				});
+			}else{
+				clearInterval(timer);
+				$(".tc.mt25").text("您不是企业用户,暂时无法申请!");
+	           	$(".toast").show();
+	           	pltime=1;
+	           	timer=setInterval("closeTanc()",1000);
+				return false;
 			}
 		}
-		
-		var params = ['fkcodeName='+$("#user").val(),
-						'fkcodeSex='+sex,
-						'fkcodeTelephone='+phone,
-					//	'fkcodeComp='+$("#company").val(),
-						'fkcodeTime='+$("#timer").val(),
-						'fkcodeRemark='+$("#userinfo").val()];
-		var serviceURL = baseUrl+"propertyservicemanagerFkcodeManager/savePropertyservicemanagerFkcode.json";
-		
-		//公共方法
-		$.youi.ajaxUtils.ajax({
-			url:serviceURL,
-			data:params.join('&'),
-			jsonp:'data:jsonp',
-			dataType:'jsonp',
-			success:function(results){
-				if(results&&results.record){
-					$(".bg-tanc.m2").show();
-					countdown(3);
-					//window.location=cenUrl+"member/memberCenter/propertyService/propertyManageFk.html";
-				}
-			}
 		});
 	});
 	//校验手机号格式
