@@ -3,26 +3,28 @@
  */
 package com.distribution.rule.service.impl;
 
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.distribution.rule.dao.DisRateConfigDao;
+import com.distribution.rule.entity.DisRateConfig;
+import com.distribution.rule.service.DisRateConfigManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-import com.gsoft.framework.esb.annotation.*;
-import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-import com.common.purchasingManager.entity.PurchasingmanagerGenre;
-import com.distribution.rule.entity.DisRateConfig;
-import com.distribution.rule.dao.DisRateConfigDao;
-import com.distribution.rule.service.DisRateConfigManager;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.ServiceParam;
+import com.gsoft.framework.util.StringUtils;
 
 @Service("disRateConfigManager")
 @Transactional
