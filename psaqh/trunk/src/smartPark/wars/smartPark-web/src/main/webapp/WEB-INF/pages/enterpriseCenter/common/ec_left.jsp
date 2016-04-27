@@ -51,8 +51,8 @@
                      		<span>&nbsp;媒体报道</span>
                     	</a>
                		</li>
-	            	<li class = "qiyemenu"><a href="<%=request.getContextPath()%>/enterprise/book.html"><span>企业通讯录管理</span></a></li>
-	                <li class = "qiyemenu"><a href="<%=request.getContextPath()%>/enterprise/code.html"><span>企业邀请码</span></a></li>
+	            	<%-- <li class = "qiyemenu"><a href="<%=request.getContextPath()%>/enterprise/book.html"><span>企业通讯录管理</span></a></li>
+	                <li class = "qiyemenu"><a href="<%=request.getContextPath()%>/enterprise/code.html"><span>企业邀请码</span></a></li> --%>
 	                <li class = "qiyemenu"><a href="<%=request.getContextPath()%>/enterprise/reply.html"><span>评论消息</span></a></li>
 	            </ul>
 	            <a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/personInfo.html">
