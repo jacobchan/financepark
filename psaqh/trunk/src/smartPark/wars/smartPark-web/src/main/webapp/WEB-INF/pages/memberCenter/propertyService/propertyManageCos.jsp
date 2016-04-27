@@ -65,9 +65,6 @@
     </div>
 	<!--***弹窗 end****************************************-->
 </youi:body>
-	
-	
-	
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 	<script type="text/javascript">
 	var pageSize=10; //每页默认显示10条
@@ -130,7 +127,7 @@
 					status = "已退回";
 				}
 				var html="<tr id='"+record[i].cosId+"' >"+
-							"<td><a href='javascript:;' onclick='viewOrder(\""+record[i].cosCode+"\")' class='ac-show'>"+record[i].cosCode+"</a></td>"+
+							"<td><a href='javascript:;' onclick='viewOrder(\""+record[i].cosId+"\")' class='ac-show'>"+record[i].cosCode+"</a></td>"+
 							"<td>"+record[i].cosTime+"</td>"+
 							"<td>"+record[i].cosName+"</td>"+
 							"<td>"+record[i].cosTelephone+"</td><td>"+status+"</td>"+
@@ -146,19 +143,19 @@
 				}		
 		};
 		//根据订单号，时间查询
-	 $('.hhf-submit.query').click(function(){	
+    $('.hhf-submit.query').click(function(){	
 		var cosCode=$("#cosCode").val();
 		var startTime=$("#startTime").val(); 
 		var endTime=$("#endTime").val(); 			
-		var params = ['coslikeCode='+cosCode,'startTime='+startTime,'endTime='+endTime];
+		var params = ['startTime='+startTime,'endTime='+endTime,'cosCode='+cosCode,'operator:cosCode=LIKE'];
 		$.ajax({
 			url:baseUrl+'propertyservicemanagerCosManager/getPagerLikeCos.json',
 			data:params.join('&'),
 			success:function(results){	
-				pageCount=Math.ceil(results.totalCount/pageSize);//页数							
+				pageCount=Math.ceil(results.totalCount/pageSize);//页数	
 				 refreshData_query(1,pageSize);
 				 $(".tcdPageCode").empty();
-					if(totalCount>0){
+					if(pageCount>0){
 					  $(".tcdPageCode").createPage({
 					    pageCount:pageCount,
 					    current:1,
@@ -177,7 +174,7 @@
 			var cosCode=$("#cosCode").val();	
 			 var startTime=$("#startTime").val(); 
 			 var endTime=$("#endTime").val(); 
-			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'coslikeCode='+cosCode,'startTime='+startTime,'endTime='+endTime];
+			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'cosCode='+cosCode,'operator:cosCode=LIKE','startTime='+startTime,'endTime='+endTime];
 			$.ajax({
 				url:baseUrl+'propertyservicemanagerCosManager/getPagerLikeCos.json',
 				data:params.join('&'),
@@ -247,9 +244,9 @@
 			setTimeout(function(){$(".toast").hide(); },2000);
 			refreshData(currentIndex,pageSize);
       }
-	function viewOrder(cosCode){
+	function viewOrder(cosId){
 		
-			window.location.href=cenUrl+"member/memberCenter/propertyService/propertyManageCosDetail.html?cosCode="+cosCode;
+			window.location.href=cenUrl+"member/memberCenter/propertyService/propertyManageCosDetail.html?cosId="+cosId;
 		};
 	</script>
 	
