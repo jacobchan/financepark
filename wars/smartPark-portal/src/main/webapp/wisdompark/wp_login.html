@@ -600,19 +600,25 @@
 					var roomNum = $(this).attr("title") ;//得到当前div的编号
 					var room = roomByNo(record,roomNum) ;
 					if(room){
-						var status = room.status ;
+						console.log(room) ;
+						var status = room.saleState ;
 						if(status == '00'){//00表示未售
 							$(this).addClass("bgred") ;
+							$(this).attr("id",room.roomId) ;
 						}else if(status == '01'){//01表示已售未招
 							$(this).addClass("bgyellow") ;
-						}else{
+							$(this).attr("id",room.roomId) ;
+						}else if(status == '02'){//02表示已售已招
 							$(this).addClass("bggreen") ;
+							$(this).attr("id",room.roomId) ;
+						}else if(status == null){
+							$(this).addClass("bg-3c") ;
+							$(this).attr("id","") ;
 						}
-						$(this).attr("id",room.roomId) ;
-					}else{
+					} else{
 						$(this).addClass("bg-3c") ;
 						$(this).attr("id","") ;
-					} 
+					}  
 			});
 			$("#loading").addClass("undis") ;
 			$(".mhbg").show() ;
@@ -636,7 +642,7 @@
 							success:function(results){
 								var record = results.record ;
 								//console.log(record) ;
-								if(record.status == "02"){//01表示已售已招
+								if(record.saleState == "02"){//02表示已售已招
 									
 									$("#ws").addClass("undis") ;
 									$("#ys").removeClass("undis") ;
