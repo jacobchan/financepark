@@ -44,6 +44,10 @@
 	function loadData(){
 		$.youi.ajaxUtils.ajax({
 			url : baseUrl + "finaceManager/getTotalCount.json",
+			beforeSend: function(){
+				//开始显示dataLoading样式
+				$.showBox.DataLoading();
+			},
 			success : function(results) {
 				var totalCount=results.records[0].totalCount;
 				pageCount = Math.ceil(totalCount / pageSize);
@@ -61,8 +65,8 @@
 						}
 					});
 				}
-				//关闭loading样式
-				$.showBox.CloseLoading();
+				//关闭dataLoading样式
+				$.showBox.CloseDataLoading();
 			}
 		});
 	}
