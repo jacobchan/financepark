@@ -106,6 +106,7 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
     	BbmPark park = building.getBbmPark() ;//获取园区对象
     	o.setBbmBuilding(building);
     	o.setBbmPark(park);
+    	o.setStatus("00");//默认为：00，未使用
     	vilidateForRoomNo(floor,building,o.getRoomNo()) ;
     	int count = Integer.parseInt(floor.getFloorRoomCount()) ;//获取楼层单元的数量
     	List<BbmRoom> room = bbmFloorManager.getRoomByFloorId(floorId) ;//得到当前楼层下的所有room
@@ -308,5 +309,59 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
 		conditions.add(ConditionUtils.getCondition("rzId", Condition.EQUALS, rzId));
 		List<BbmRoom> roomList = bbmRoomDao.commonQuery(conditions, orders);
 		return roomList;
+	}
+    
+    /**
+	 * 会议室占用单元时，设置单元状态
+	 * @param roomId 单元ID
+	 * @return
+	 * @throws BusException
+	 */
+	@Override
+	@EsbServiceMapping
+	public BbmRoom setMeetingRoomStatus(@ServiceParam(name="roomId") String roomId) throws BusException {
+		if(StringUtils.isNotEmpty(roomId)){
+			BbmRoom room = this.bbmRoomDao.get(roomId) ;
+			room.setSaleState("03"); //销售状态为：无
+			room.setStatus("01");//使用状态：01是会议室
+			return this.bbmRoomDao.save(room) ;
+		}
+		return null;
+	}
+	
+	/**
+	 * 企业入驻占用单元时，设置单元状态
+	 * @param roomId 单元ID
+	 * @return
+	 * @throws BusException
+	 */
+	@Override
+	@EsbServiceMapping
+	public BbmRoom setEnterRoomStatus(@ServiceParam(name="roomId") String roomId) throws BusException {
+		if(StringUtils.isNotEmpty(roomId)){
+			BbmRoom room = this.bbmRoomDao.get(roomId) ;
+			room.setSaleState("02"); //销售状态02为:已售已招
+			room.setStatus("03");//使用状态：03是企业入驻
+			return this.bbmRoomDao.save(room) ;
+		}
+		return null;
+	}
+	
+	/**
+	 * 创立方占用单元时，设置单元状态
+	 * @param roomId 单元ID
+	 * @return
+	 * @throws BusException
+	 */
+	@Override
+	@EsbServiceMapping
+	public BbmRoom setChuangRoomStatus(@ServiceParam(name="roomId") String roomId) throws BusException {
+		if(StringUtils.isNotEmpty(roomId)){
+			BbmRoom room = this.bbmRoomDao.get(roomId) ;
+			room.setSaleState("03"); //销售状态为:无
+			room.setStatus("02");//使用状态：02是创立方
+			return this.bbmRoomDao.save(room) ;
+		}
+		return null;
 	}
 }
