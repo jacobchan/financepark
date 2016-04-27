@@ -224,7 +224,7 @@
 				dataType:'jsonp',
 				success:function(result){
 					if(result&&result.record){
-							var addressId = $(".select-address.active")[0].getAttribute("id");
+							var addressId = $(".select-address.active").attr("id");
 							var time = $('#timer').val(); 
 						
 							 if(time=="" || time.length==0){
@@ -235,7 +235,7 @@
 					           	timer=setInterval("closeTanc()",1000);
 								return false;
 							 }
-							 if(addressId=="" || addressId.length==0){
+							 if(addressId=="" || addressId==null){
 									clearInterval(timer);
 									$(".tc.mt25").text("请选择地址!");
 						           	$(".toast").show();
