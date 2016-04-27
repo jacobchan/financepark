@@ -111,10 +111,11 @@ public interface BbmRoomManager extends BaseManager{
 	/**
 	 * 企业入驻占用单元时，设置单元状态
 	 * @param roomId 单元ID
+	 * @param rzId 入驻ID
 	 * @return
 	 * @throws BusException
 	 */
-	public BbmRoom setEnterRoomStatus(String roomId) throws BusException;
+	public BbmRoom setEnterRoomStatus(String rzId,String roomId) throws BusException;
 	
 	/**
 	 * 创立方占用单元时，设置单元状态

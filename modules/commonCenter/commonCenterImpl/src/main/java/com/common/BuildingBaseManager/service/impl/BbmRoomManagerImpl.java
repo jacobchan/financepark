@@ -337,9 +337,10 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
 	 */
 	@Override
 	@EsbServiceMapping
-	public BbmRoom setEnterRoomStatus(@ServiceParam(name="roomId") String roomId) throws BusException {
+	public BbmRoom setEnterRoomStatus(@ServiceParam(name="rzId") String rzId,@ServiceParam(name="roomId") String roomId) throws BusException {
 		if(StringUtils.isNotEmpty(roomId)){
 			BbmRoom room = this.bbmRoomDao.get(roomId) ;
+			room.setRzId(rzId);
 			room.setSaleState("02"); //销售状态02为:已售已招
 			room.setStatus("03");//使用状态：03是企业入驻
 			return this.bbmRoomDao.save(room) ;

@@ -366,6 +366,7 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 		o.setGenreId(listForRoom.size()>0?listForRoom.get(0).get("genreId").toString():null);
 		MeetingEntity meetingRoom=o.getMeetingRoom();
 		String adr=meetingRoom.getAdr();//获取会议室地址
+		bbmRoomManager.setMeetingRoomStatus(adr);//会议室占用单元时，设置单元状态
 //		BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(adr);
 //		if(bbmRoom != null){
 //			//获取单元默认地址
@@ -615,6 +616,7 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 		//获取创立方地址
 		ClfEntity clf=o.getClf();
 		String adr=clf.getAdr();//获取创立方地址
+		bbmRoomManager.setChuangRoomStatus(adr);//创立方占用单元时，设置单元状态
 //		BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(adr);
 //		if(bbmRoom != null){
 //			//获取单元默认地址
