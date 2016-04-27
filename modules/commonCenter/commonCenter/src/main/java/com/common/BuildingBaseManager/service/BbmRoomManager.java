@@ -99,4 +99,28 @@ public interface BbmRoomManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public List<BbmRoom> getRoomListByRzId(String rzId) throws BusException;
+	
+	/**
+	 * 会议室占用单元时，设置单元状态
+	 * @param roomId 单元ID
+	 * @return
+	 * @throws BusException
+	 */
+	public BbmRoom setMeetingRoomStatus(String roomId) throws BusException;
+	
+	/**
+	 * 企业入驻占用单元时，设置单元状态
+	 * @param roomId 单元ID
+	 * @return
+	 * @throws BusException
+	 */
+	public BbmRoom setEnterRoomStatus(String roomId) throws BusException;
+	
+	/**
+	 * 创立方占用单元时，设置单元状态
+	 * @param roomId 单元ID
+	 * @return
+	 * @throws BusException
+	 */
+	public BbmRoom setChuangRoomStatus(String roomId) throws BusException;
 }
