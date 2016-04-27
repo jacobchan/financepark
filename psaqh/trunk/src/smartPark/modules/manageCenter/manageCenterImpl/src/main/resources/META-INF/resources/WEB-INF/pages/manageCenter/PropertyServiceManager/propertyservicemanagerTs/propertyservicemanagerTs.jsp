@@ -61,6 +61,15 @@
 			<youi:fieldArea property="tsRemark"  caption="备注" column="2"/>
 		</youi:fieldLayout>
 	</youi:form>
+	<!-- form-拒单回填 -->
+	<youi:form dialog="true" caption="拒单" id="form_refuseTs" action="esb/web/propertyservicemanagerTsManager/savePropertyservicemanagerTs.json">
+		<youi:fieldLayout prefix="recordrefuse" labelWidths="120,120">
+			<youi:fieldHidden property="tsId"  caption="主键ID_"/>
+			<youi:fieldHidden property="propertyservicemanagerBx.bxId" caption="报修记录单号"/>
+			<youi:fieldSelect property="tsStatus"  caption="派工受理状态" convert="ts_status" readonly="true"/>
+			<youi:fieldArea property="tsRemark"  caption="备注" column="2"/>
+		</youi:fieldLayout>
+	</youi:form>
 	
 		<!-- form-费用清单编辑 -->
 	<youi:form dialog="true" caption="费用清单" id="form_propertyservicemanagerSer" action="esb/web/propertyservicemanagerSerManager/savePropertyservicemanagerSer.json">
@@ -105,14 +114,17 @@
 			var tsstatus = selectedRecord.tsStatus;
 			if(tsstatus=='00'){
 				$.youi.messageUtils.confirm('确认拒单?',function(){
-					$.youi.ajaxUtil.ajax({
+				$elem('form_refuseTs',pageId).form("reset").form('fillRecord',selectedRecord)
+					.form('fillRecord',{tsStatus:'02'}).form('open');
+					
+					/*$.youi.ajaxUtil.ajax({
 					url:'/esb/web/propertyservicemanagerTsManager/upTsbyId.json',
 					data:{id:selectedRecord.tsId,code:'01'},
 					success:function(result){	
 						$elem('grid_propertyservicemanagerTs',pageId).grid('pReload');
 						alert("拒单成功!");
 						}
-					});
+					});*/
 				});
 			}else if(tsstatus=="01"){
 				alert("您已接单!");
@@ -146,6 +158,12 @@
 			var formpropertyservicemanagerSer = $elem('form_propertyservicemanagerSer',pageId);
 			alert("添加完成！");
 			formpropertyservicemanagerSer.form('close');
+			$elem('grid_propertyservicemanagerTs',pageId).grid('pReload');
+		</youi:func>
+		<youi:func name = "form_refuseTs_afterSubmit">
+			var formrefuseTs = $elem('form_refuseTs',pageId);
+			alert("拒单成功！");
+			formrefuseTs.form('close');
 			$elem('grid_propertyservicemanagerTs',pageId).grid('pReload');
 		</youi:func>
 	<!--**********************************页面函数End**********************************-->
