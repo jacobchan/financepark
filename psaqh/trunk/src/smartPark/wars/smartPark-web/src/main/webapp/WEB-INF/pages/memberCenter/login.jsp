@@ -53,7 +53,7 @@
 			              	 <div class="mt10 clearfix" style="text-align: center;">
 			                    <youi:out value="${error}"/>
 			                 </div>
-		                    <button type="submit" class="btn-cheng tc lh40 mt20">登录</button>
+		                    <button type="submit" class="btn-cheng tc mt20" style="width:278px;line-height:50px; margin:35px;font-size:16px; font-family:'Microsoft YaHei','微软雅黑'">登录</button>
 		                </fieldset>
 		            </form>
             
@@ -93,7 +93,11 @@
                 	<label class="f16">确认密码</label>
                     <input type="password" id="repasswd">
                 </div>
-                <div class="btn-cheng tc lh40 mt20 xiaoqishabi" style="display:block;margin:35px;font-size:16px;" id="register">注册</div>
+                <div class="p10 f12">
+                	<label style="cursor:pointer" id="read-accept"><input autocomplete="off"  type="checkbox" class="mr10 fl" style="margin-top:2px;">我已阅读并接受<a href="javascript:;" class="co" onclick="goProperties('regxy.html')">《硅谷公园用户注册协议》</a></label>
+                </div>
+               <!--  <div class="btn-cheng tc lh40 mt20 xiaoqishabi" style="display:block;margin:35px;font-size:16px;" id="register">注册</div> -->
+            	<div class="btn-disabled tc lh50 mt20 xiaoqishabi " style="display:block;margin:35px;font-size:16px;" id="register">注册</div>
             </form>
         </div>
     </div>
@@ -114,5 +118,21 @@
     <div class="tc caaa mt15 f12">&copy;2014-2015杭州富春硅谷投资有限公司  版权所以  浙  B14231237号</div>
 </div>
 <!--***bottom end****************************************-->
+
+<script type="text/javascript">
+    $(function(){
+    	$("#read-accept").click(function(){
+			if($(this).children('input[type="checkbox"]').prop("checked")){
+				$(this).parent().next("#register").removeClass("btn-disabled").addClass("btn-cheng");
+			}else{
+				$(this).parent().next("#register").addClass("btn-disabled").removeClass("btn-cheng");
+			}
+
+		});
+    })
+	function goProperties(gohref){
+		window.location.href=proUrl+gohref; 
+	}
+</script>
 </body>
 </html>
