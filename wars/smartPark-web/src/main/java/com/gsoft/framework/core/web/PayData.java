@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.gsoft.framework.core.web.controller.BaseDataController;
 
 @Controller
-@RequestMapping("/wxpay")
+@RequestMapping("/web/pay")
 public class PayData extends BaseDataController {
 	
 	/**
 	 * 充值同步返回
 	 * @throws UnsupportedEncodingException 
 	 */
-	@RequestMapping("/notify.json")
+	@RequestMapping("/payReturn.json")
 	public void payReturn(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
          //得到回传参数，并重新构建，解决乱码问题
          Map<String, String> paramMapStr = new HashMap<String, String>();
