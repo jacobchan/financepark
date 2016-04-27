@@ -118,15 +118,14 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
     	String propertyservicemanagerBxId = o.getBxId();
     	boolean isUpdate = StringUtils.isNotEmpty(propertyservicemanagerBxId);
     	PropertyservicemanagerBx savebx = null;
-    	//查询当前申请用户
-		String memberId = o.getMemberId();
-		MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
     	if(isUpdate){//修改
     		//物业管理员定价生成订单
         	if(o.getBxStatus().equals("05")){
         		//获取报修单
         		String bxId = o.getBxId();
         		PropertyservicemanagerBx bx = propertyservicemanagerBxDao.get(bxId);
+        		String memberId = bx.getMemberId();
+        		MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
         		//获取当前登录用户
         		Object object = SecurityUtils.getPrincipal();
         		User user = new User();
@@ -137,7 +136,7 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
      
         		//查询商品类别
         		Collection<Condition> condition =  new ArrayList<Condition>();
-        		condition.add(ConditionUtils.getCondition("genreCode", Condition.EQUALS,"07"));
+        		condition.add(ConditionUtils.getCondition("genreCode", Condition.EQUALS,"0601"));
         		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenres(condition, null).get(0);
         		
         		order.setGenreId(pg);
@@ -182,6 +181,12 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
         		return null;
         	}
     	}else{//新增
+    		//查询当前申请用户
+    		String memberId = o.getMemberId();
+    		MemberInformation memberInformation = null;
+    		if(StringUtils.isNotEmpty(memberId)){
+    			memberInformation = memberInformationManager.getMemberInformation(memberId);
+    		}
    			o.setBxCode(BizCodeUtil.getInstance().getBizCodeDate("WYBX"));
    			o.setCreateUser(memberId);
    			o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
