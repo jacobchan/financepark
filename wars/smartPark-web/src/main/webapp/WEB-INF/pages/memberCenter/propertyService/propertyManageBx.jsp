@@ -8,10 +8,10 @@
 			    <div class="clearfix">
 				    <div class="mt20 gr-txl clearfix lh30">
 					    <label class="fl mr20 f16">申请时间：</label>
-							<input class="bd-input fl" type="text" id="startTime"><span class="fl ml15 mr15">到</span>
-							<input class="bd-input fl" type="text" id="endTime">
-							<div class="inp-box ml20"><input placeholder="订单号查询" type="text" id="bxCode"><a class="fa fa-search" href=""></a></div>
-							<input value="搜索" class="hhf-submit f14 fr query" type="button">
+						<input class="bd-input fl" type="text" id="startTime"><span class="fl ml15 mr15">到</span>
+						<input class="bd-input fl" type="text" id="endTime">
+						<div class="inp-box ml20"><input placeholder="订单号查询" type="text" id="bxCode"><a class="fa fa-search" href=""></a></div>
+						<input value="搜索" class="hhf-submit f14 fr query" type="button">
 					</div>
 					<table class="gt-table mt20">
 					    <colgroup>
@@ -69,25 +69,25 @@
 		//分页页码显示
 	    $.ajax({
 			url:baseUrl+'propertyservicemanagerBxManager/getTotalCount.json', 			
-				success : function(results) {
-					var totalCount=results.records[0].totalCount;
-					pageCount = Math.ceil(totalCount / pageSize);//页数								
-					refreshData(1,pageSize);
-					$(".tcdPageCode").empty();
-					if(totalCount>0){
-					    $(".tcdPageCode").createPage({
-						    pageCount:pageCount,
-							current:1,
-							backFn:function(p){
-							    currentIndex = p;
-								this.pageCount=pageCount;
-								efreshData(p,pageSize);
-							}
-				         });
-					}
+			success:function(results){	
+				var totalCount=results.records[0].totalCount;				
+				pageCount = Math.ceil(totalCount / pageSize);//页数	
+				refreshData(1,pageSize);
+				$(".tcdPageCode").empty();
+				if(totalCount>0){
+					$(".tcdPageCode").createPage({
+						pageCount:pageCount,
+						current:1,
+						backFn:function(p){
+							currentIndex = p;
+							this.pageCount=pageCount;
+							refreshData(p,pageSize);
+						}
+				 	});	
+				}
 			}
 		}); 			
-	});			
+	});		
 	//分页列表
 	function refreshData(pageIndex,pageSize){
 		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
@@ -100,10 +100,11 @@
 				}
 			}
 		});
-	}		
+	}
 	//拼接列表
 	function _parseRecords(record){
 		var html="";
+		var applyTime="";
 		if(record.length>0){
 			for(var i=0;i<record.length;i++){
 		    	var bxStatus='';
@@ -129,9 +130,13 @@
 				}else if(record[i].bxStatus=='08'){
 					bxStatus='已取消';
 				}
+				if(record[i].applyTime){
+					applyTime = record[i].applyTime.substring(0,10);
+					//applyTime = record[i].applyTime.substring(0,4)+"年"+record[i].applyTime.substring(6,7)+"月"+record[i].applyTime.substring(9,10)+"日"+"&nbsp&nbsp"+record[i].applyTime.substring(12,13)+"点";				
+				}                      
 			    html += "<tr id='"+record[i].bxId+"' class='aaa'>"+
 							"<td><a href='javascript:;' onclick='viewDetail(\""+record[i].bxId+"\")' class='ac-show'>"+record[i].bxCode+"</a></td>"+
-							"<td>"+record[i].applyTime+"</td>"+
+							"<td>"+applyTime+"</td>"+
 				   			"<td>"+bxStatus+"</td>"+
 							"<td>"+record[i].member.memberName+"</td>"+
 							"<td>"+record[i].member.memberPhoneNumber+"</td>"+
@@ -227,19 +232,20 @@
 		        }
 		});
 	}
+	//日历控件
 	$(function(){
 		laydate({
 		    elem: '#startTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
-		    format: 'YYYY-MM-DD hh:mm:ss', //日期格式
-	        istime: true, //是否开启时间选择
+		    //format: 'YYYY-MM-DD hh:mm:ss', //日期格式
+	        //istime: true, //是否开启时间选择
 		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 		});
 	});
 	$(function(){
 		laydate({
 		    elem: '#endTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
-		    format: 'YYYY-MM-DD hh:mm:ss', //日期格式
-	        istime: true, //是否开启时间选择
+		    ///format: 'YYYY-MM-DD hh:mm:ss', //日期格式
+	        //istime: true, //是否开启时间选择
 		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 		});
 	});
