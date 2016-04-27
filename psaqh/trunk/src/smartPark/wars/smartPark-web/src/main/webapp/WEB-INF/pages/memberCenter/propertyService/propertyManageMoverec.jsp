@@ -2,15 +2,15 @@
 <%@ include file="/WEB-INF/pages/include.jsp" %>
 <youi:html title="搬家放行">
 	<youi:body decorator="memcenter">  
-				<div class="w1000">
-					<h3 class="per-h3">搬家放行列表<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要搬家</a></h3>
-					<div class="clearfix mt20 mlist">
-						
-					</div>
-					<div class="tcdPageCode fr"></div>		
-				</div>
-
-	
+		<div class="w1000">
+			<h3 class="per-h3">搬家放行列表
+				<a href="javascript:;" class="fr c-333 f14" id="a1">
+					<i class="fa fa-plus-square fl mr10"></i>我要搬家
+				</a>
+			</h3>
+		<div class="clearfix mt20 mlist"></div>
+		<div class="tcdPageCode fr"></div>		
+	</div>	
 	<!--***弹窗 start****************************************-->
 	<div class="bg-tanc m1">
 		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
@@ -73,21 +73,19 @@
 				refreshData(1,pageSize);
 				$(".tcdPageCode").empty();
 				if(pageCount>0){
-								$(".tcdPageCode").createPage({
-								    pageCount:pageCount,
-								    current:1,
-								    backFn:function(p){
-								    	currentIndex = p;
-								       this.pageCount=pageCount;
-								        refreshData(p,pageSize);
-								    }
-								});	
+					$(".tcdPageCode").createPage({
+						pageCount:pageCount,
+						current:1,
+							backFn:function(p){
+								currentIndex = p;
+								this.pageCount=pageCount;
+								refreshData(p,pageSize);
+								}
+						});	
 				}
 			}
 		}); 			
-	});	
-	
-	
+	});			
 	//分页列表
 	function refreshData(pageIndex,pageSize){
 		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
@@ -103,7 +101,7 @@
 	}	 	
 	//拼接列表
 	function _parseRecords(record){
-		$(".mlist").empty();	
+		var html="";	
 		if(record.length>0){
 		for(var i=0;i<record.length;i++){
 			var id = record[i].moverecId ;			
@@ -125,8 +123,8 @@
 				 moverecTime=record[i].moverecTime;
 			}else if(record[i].moverecTime){
 				moverecTime="";
-			}			
-			  var html="<div class='gz-fx-box clearfix' id='"+id +"'  >"+
+			}			 
+			 html+="<div class='gz-fx-box clearfix' id='"+id +"'  >"+
 						    "<div class='gzb-thead'>"+
 						        "<span class='c-o'>"+record[i].moverecCode+"</span>"+
 							    "<a href='javascript:;' class='fr f12'><i class='fa fa-file-text-o mr10 f20' style='font-size:20px;margin-top:5px;'></i>查看订单详情</a>"+					
@@ -148,8 +146,9 @@
 							    "<p>"+record[i].moverecRemark+"</p>"+							 							
 						    "</div>"+
 					"</div>";
-			  $(".mlist").append(html);				
+			  			
 		}
+		$(".mlist").html(html);
 	}else{
 		var html1 = '<table class="gt-table mt20">'
 		    html1 += '<tr>'
