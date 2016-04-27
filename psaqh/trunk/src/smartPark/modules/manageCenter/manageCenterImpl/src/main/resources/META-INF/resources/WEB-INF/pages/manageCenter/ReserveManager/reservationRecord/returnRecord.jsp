@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
-			<youi:grid id="grid_reservationRecord" idKeys="recordId,recordCommdityId" caption="预约记录列表"  panel="false" 
+			<youi:grid id="grid_reservationRecord" idKeys="recordId,recordCommdityId,recordCustomer,recordMemberId" caption="预约记录列表"  panel="false" 
 				src="esb/web/reservationRecordManager/getPagerReservationRecords.json" dataFormId="form_reservationRecord"
 				editSrc="esb/web/reservationRecordManager/getReservationRecord.json" add="NOT" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/reservationRecordManager/removeReservationRecord.json">
@@ -18,7 +18,7 @@
 	    <youi:gridCol property="visiteTel"  caption="联系电话"  width="10%" align="center"/>
 	    <youi:gridCol property="visiteDate"  caption="来访日期"  width="10%" align="center" orderBy="desc"/>
 	    <youi:gridCol property="visiteTime"  caption="来访时间"  width="20%" align="center"/>
-		<youi:gridCol property="recordCustomer"  caption="客服代表"  width="10%" align="center"/>
+		<youi:gridCol property="recordCustomerName"  caption="客服代表"  width="10%" align="center"/>
 		<youi:gridCol property="recordServiceTel"  caption="客服电话"  width="10%" align="center"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>

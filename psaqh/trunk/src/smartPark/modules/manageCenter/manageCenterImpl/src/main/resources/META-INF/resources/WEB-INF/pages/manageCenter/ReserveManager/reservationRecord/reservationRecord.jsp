@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/pages/include.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <youi:page>
-	<youi:grid id="grid_reservationRecord" idKeys="recordId,recordCommdityId,recordMemberId" caption="预约记录列表"  panel="false" 
+	<youi:grid id="grid_reservationRecord" idKeys="recordId,recordCommdityId,recordMemberId,recordCustomer" caption="预约记录列表"  panel="false" 
 				src="esb/web/reservationRecordManager/getPagerReservationRecords.json" dataFormId="form_reservationRecord"
 				editSrc="esb/web/reservationRecordManager/getReservationRecord.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/reservationRecordManager/removeReservationRecord.json">
@@ -22,7 +22,7 @@
 	    <youi:gridCol property="visiteTel"  caption="联系电话"  width="10%" align="center"/>
 	    <youi:gridCol property="visiteDate"  caption="来访日期"  width="10%" align="center" />
 	    <youi:gridCol property="visiteTime"  caption="来访时间"  width="10%" align="center"/>
-	    <youi:gridCol property="recordCustomer"  caption="客服代表"  width="10%" align="center"/>
+	    <youi:gridCol property="recordCustomerName"  caption="客服代表"  width="10%" align="center"/>
 		<youi:gridCol property="recordServiceTel"  caption="客服电话"  width="10%" align="center"/>
         <youi:gridCol property="updateTime"  caption="更新时间"  width="10%" align="center" orderBy="desc"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
@@ -66,10 +66,11 @@
 		    <youi:fieldText property="visiteTime"  caption="来访时间"/>
 		    <%-- <youi:fieldCalendar property="visiteTime"  caption="实际来访时间" width="120" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss"/>
 			<youi:fieldSelect property="recordVisiteStatus"  caption="是否到访" convert="recordVisiteStatus"/> --%>
-			<youi:fieldText property="recordCustomer"  caption="客服代表" notNull="true"/>
-			<youi:fieldText property="recordServiceTel"  caption="客服电话" notNull="true" expression="^1[3|4|5|8|9]{1}[0-9]{9,9}$" expressionMessage="请填写正确的手机号码"/>
+			<youi:fieldSelect property="recordCustomer"  caption="客服代表" notNull="true" src="esb/web/reservationRecordManager/getRoleSaleSer.json" code="loginValue" show="loginName"/>
+			<%-- <youi:fieldText property="recordServiceTel"  caption="客服电话" notNull="true" expression="^1[3|4|5|8|9]{1}[0-9]{9,9}$" expressionMessage="请填写正确的手机号码"/> --%>
 			<youi:fieldHidden property="recordId"  caption="预约记录ID"/>
 			<youi:fieldHidden property="recordStatus"  caption="预约记录状态"/>
+			<youi:fieldHidden property="recordServiceTel"  caption="客服电话"/>
 			<youi:fieldHidden property="recordMemberId"  caption="预约对象"/>
 			<youi:fieldHidden property="recordCommdityId"  caption="预约对象"/>
 			<youi:fieldHidden property="recordVisiteStatus"  caption="是否到访"/>

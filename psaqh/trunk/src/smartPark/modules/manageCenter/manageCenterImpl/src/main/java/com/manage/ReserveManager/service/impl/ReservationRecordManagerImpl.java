@@ -26,6 +26,7 @@ import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
 import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
 import com.gsoft.common.service.BaseUserManager;
 import com.gsoft.entity.MessageTempCode;
+import com.gsoft.entity.MsgParam;
 import com.gsoft.entity.ReferenceMap;
 import com.gsoft.framework.codemap.entity.Codeitem;
 import com.gsoft.framework.codemap.service.CodeitemManager;
@@ -43,6 +44,8 @@ import com.gsoft.framework.esb.annotation.OrderCollection;
 import com.gsoft.framework.esb.annotation.PubCondition;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.security.agt.entity.User;
+import com.gsoft.framework.security.agt.entity.UserConfigItem;
+import com.gsoft.framework.security.agt.service.UserManager;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
@@ -65,7 +68,8 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 	@Autowired
 	private PurchasingmanagerCommodityManager purchasingmanagerCommodityManager;
 	
-	
+	@Autowired
+	private UserManager userManager;
 	
 	@Autowired
 	private PurchasingmanagerGenreManager purchasingmanagerGenreManager;
@@ -146,6 +150,20 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 		@SuppressWarnings("unchecked")
 		List<ReservationRecord> list=pagerRecords.getRecords();
 		for(ReservationRecord r:list){
+			String recordCustomer=r.getRecordCustomer();
+			//获取客服代表姓名
+			if(StringUtils.isNotEmpty(recordCustomer)){
+				User user = userManager.getUser(recordCustomer);
+				r.setRecordCustomerName(user !=null?user.getUserCaption():"");
+				if(user!=null){
+					//查询客服代表的扩展属性值：电话号码
+					List<UserConfigItem> userConfigs = baseUserManager.getUserConfigItems(user.getUserId());
+					for(UserConfigItem userConfigItem : userConfigs){
+						if("phone".equals(userConfigItem.getName()))
+						r.setRecordServiceTel(userConfigItem.getValue());
+					}
+				}
+			}
 			String recordType=r.getRecordType();
 			String commodityId=r.getRecordCommdityId();
 			//01：众创空间 02：工位
@@ -169,7 +187,7 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
      */
 	@EsbServiceMapping(pubConditions = {@PubCondition(property = "recordMemberId", pubProperty = "userId")})
     public ReservationRecord saveReservationRecord(ReservationRecord o) throws BusException{
-		MemberInformation mem=new MemberInformation();
+		MemberInformation mem=null;
 		//获取当前登录用户信息
 		if(o.getRecordMemberId() != null){
 	    	mem=memberInformationManager.getMemberInformation(o.getRecordMemberId());
@@ -355,7 +373,7 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 			//构建消息内容数据
 			McMsgdatas msgData1 = mcMsgdatasManager.buildMsgData(MessageTempCode.MSG_BACKGROUND_4, replaceMap1);
 			//发送消息,给招商客服:ROLE_SALE_SER
-			mcMsgdatasManager.sendMessage(msgData1,"ROLE_SALE_SER",2);
+			mcMsgdatasManager.sendMessage(msgData1,o.getRecordCustomer(),0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -444,7 +462,7 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 			for(User user_:users){
 				Record record = new Record();
 				record.put("loginValue", user_.getUserId());
-				record.put("loginName", user_.getLoginName());
+				record.put("loginName", user_.getUserCaption());
 				recordList.add(record);
 			}
 		}

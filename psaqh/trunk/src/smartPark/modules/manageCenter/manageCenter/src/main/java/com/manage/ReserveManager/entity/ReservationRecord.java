@@ -84,6 +84,9 @@ public class ReservationRecord implements Domain{
 	@Column(name = "RECORD_CUSTOMER")
 	@Length(max=32)
 	private String recordCustomer;//客服代表
+	
+	@Transient
+	private String recordCustomerName;//客服代表姓名
 
 	@Column(name = "UPDATE_TIME_")
 	private String updateTime;//修改时间
@@ -122,6 +125,18 @@ public class ReservationRecord implements Domain{
 
 	public void setRecordCommdityName(String recordCommdityName) {
 		this.recordCommdityName = recordCommdityName;
+	}
+
+
+
+	public String getRecordCustomerName() {
+		return recordCustomerName;
+	}
+
+
+
+	public void setRecordCustomerName(String recordCustomerName) {
+		this.recordCustomerName = recordCustomerName;
 	}
 
 
