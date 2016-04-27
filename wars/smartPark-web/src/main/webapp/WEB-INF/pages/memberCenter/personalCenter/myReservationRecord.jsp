@@ -128,15 +128,14 @@
 					buttonHtml+
 					"</tr>";
 			}
-			 $("#myRecord").empty();
-			 $("#myRecord").append(html);
+			$("#myRecord").html(html);
 			}else{
 				var	html1 = '<tr>'
 					html1 += '	<td colspan="6">暂无记录</td>'
 					html1 += '</tr>'
 				$("#myRecord").html(html1);	
 			}
-		};
+    };
 		
 	//取消成功弹窗
  	function close(content){	
@@ -145,7 +144,7 @@
         $(".toast").show();		      		        		       				
 		setTimeout(function(){$(".toast").hide(); },2000);
 		refreshData(currentIndex,pageSize);
-  }
+    }
  
  	//取消弹窗
 	 function cancelStatus(obj){
@@ -177,6 +176,6 @@
 			});
 		});
 	$(".tc-close").click(function(){	
-	$(".bg-tanc.m1").hide();
+		$(".bg-tanc.m1").hide();
 	});
 </script>
