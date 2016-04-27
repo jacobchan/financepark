@@ -1,28 +1,23 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-				<div class="mt20 gr-txl clearfix lh30">
-							<div class="tct-select fl mr20" style="width:200px">
-								<div class="ic-select" style="background: url(<%=request.getContextPath()%>/styles/images/yqfw/down.png) no-repeat scroll 
-
-right center;">
-									<p class="c-b1" id="userorderProject" data="">请选择订单项目</p>
-									<%--   <img src="<%=request.getContextPath()%>/styles/images/yqfw/down.png" />  --%>
-								</div>
-								<ul style="display: none;" class="select-nav" >
-									<!--  <li>园区地址1</li>
-									<li>园区地址2</li>
-									<li>园区地址3</li> -->
-								</ul>
-							</div>
-							<div class="inp-box ml20" style="width:300px;"><input placeholder="请输入订单号"  id="userorderCode" 
-
-type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
-							
-							<div class="pend_button">
-							  <input value="搜索" class="hhf-submit f14 fl ml20 pend" type="button">
-							  <input value="搜索全部" class="hhf-submit f14 fl ml20 all" type="button">
-							</div>
-							
-						</div>
+    <div class="mt20 gr-txl clearfix lh30">
+	    <div class="tct-select fl mr20" style="width:200px">
+			<div class="ic-select" style="background: url(<%=request.getContextPath()%>/styles/images/yqfw/down.png) no-repeat scroll right center;">
+				<p class="c-b1" id="userorderProject" data="">请选择订单项目</p>
+			</div>
+				<ul style="display: none;" class="select-nav" >
+					<!--  <li>园区地址1</li>
+					<li>园区地址2</li>
+					<li>园区地址3</li> -->
+				</ul>
+		</div>
+		<div class="inp-box ml20" style="width:300px;">
+			<input placeholder="请输入订单号"  id="userorderCode" type="text"style="width:260px;">
+		</div>							
+		<div class="pend_button">
+			<input value="搜索" class="hhf-submit f14 fl ml20 pend" id="query" type="button">
+			<input value="搜索全部" class="hhf-submit f14 fl ml20 all" id="queryAll" type="button">
+		</div>							
+    </div>
 <div class="clearfix">
 	<table class="gt-table mt20">
 		<colgroup>
@@ -52,8 +47,7 @@ type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
             <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
         </div>         
     </div>
-
-	
+    	
 	<div class="bg-tanc m1">
 		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
 			<a href="javascript:;" class="tc-close"></a>
@@ -66,8 +60,7 @@ type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
 			</div>
 		</div>
 	</div>
-	<!--***弹窗 ****************************************-->
-	
+	<!--***弹窗 ****************************************-->	
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 	<script type="text/javascript">
 	var pageSize=10;
@@ -121,9 +114,9 @@ type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
 	}
 	
 		//拼接卡号列表
-		function _parseRecords_pend(record){			
-			 $(".pend_list").empty();
-			 if(record.length>0){
+    function _parseRecords_pend(record){			
+	    var html="";
+		if(record.length>0){
 			for(var i=0;i<record.length;i++){				
 				var status = "";
 				var button = "";
@@ -141,15 +134,16 @@ type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
 					status = "已取消";					
 				}
 				var method = "viewOrder(\""+record[i].userorderCode+"\",\""+record[i].genreId.genreCode+"\");";
-				var html= '<tr class="aaa" id="'+record[i].userorderId+'">'
+				    html+= '<tr class="aaa" id="'+record[i].userorderId+'">'
 				    html+=   "<td><a class='custor' onclick='"+method+"'>"+record[i].userorderCode+"</a></td>";
 					html+=   '<td>'+record[i].userorderProject+'</td>'
                     html+=   '<td>'+record[i].userorderAmount+'</td>'
                     html+=   '<td>'+record[i].userorderTime+'</td>'                                                                     
                     html+=   "<td>"+status+button+"</td>";
-                    html+= '</tr>'
-				 $(".pend_list").append(html);	
-			}}else{
+                    html+= '</tr>'				
+			}
+			 $(".pend_list").html(html);	
+			}else{
 				var	html1 =   '<tr>'
 					html1 += '	<td colspan="6">暂无记录</td>'
 					html1 += '</tr>'
@@ -163,7 +157,7 @@ type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
         $(".toast").show();		      		        		       				
 		setTimeout(function(){$(".toast").hide(); },2000);
 		refreshData(currentIndex,pageSize);
-  } 
+    } 
  	//取消弹窗
 	 function cancelStatus(obj){
 		var me=obj.parentNode.parentNode;//找到父节点
@@ -221,13 +215,12 @@ type="text"style="width:260px;"><a class="fa fa-search" href=""></a></div>
 				}
 			}); 		
 	});
-function refreshData_pend_query(pageIndex,pageSize){
-	//订单类型
-	 var genId = $(".c-b1").attr("data");	
-	 //订单号
-	 //var userorderCodeLike=$("#userorderCode").val();	
-	 var userorderCode=$("#userorderCode").val();	
-	 var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCode='+userorderCode,'operator:userorderCode=LIKE','genId='+genId];
+    function refreshData_pend_query(pageIndex,pageSize){
+		//订单类型
+	 	var genId = $(".c-b1").attr("data");	
+	 	//订单号
+	    var userorderCode=$("#userorderCode").val();	
+	 	var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCode='+userorderCode,'operator:userorderCode=LIKE','genId='+genId];
 		//var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCodeLike='+userorderCodeLike,'genId='+genId];
 		$.ajax({
 			url:baseUrl+'ordermanagerUserorderManager/getPagerPend_query.json',
