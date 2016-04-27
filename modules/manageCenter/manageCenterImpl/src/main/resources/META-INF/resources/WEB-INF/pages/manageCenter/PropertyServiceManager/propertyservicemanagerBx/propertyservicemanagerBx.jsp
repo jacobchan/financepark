@@ -89,7 +89,7 @@
 			<youi:fieldSelect property="tsStatus"  caption="派工受理状态" convert="ts_status" defaultValue="00"/>
 			<youi:fieldText property="tsTelephone"  caption="派工人员电话号码" expression="^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$" expressionMessage="手机号码格式不正确"/>
 			<youi:fieldHidden property="propertyservicemanagerBx.bxId" caption="报修记录单号"/>
-			<youi:fieldArea property="tsRemark"  caption="备注" column="2"/>
+			<%-- <youi:fieldArea property="tsRemark"  caption="备注" column="2"/> --%>
 		</youi:fieldLayout>
 	</youi:form>
 	
