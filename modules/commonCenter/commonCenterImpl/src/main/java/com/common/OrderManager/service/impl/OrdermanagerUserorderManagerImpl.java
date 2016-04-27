@@ -222,6 +222,15 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     	}
 		return o;
     }
+	
+	/**
+     * 保存订单
+     */
+	@Override
+	@EsbServiceMapping
+    public OrdermanagerUserorder saveUserOrder(OrdermanagerUserorder o) throws BusException{
+		return ordermanagerUserorderDao.save(o);
+    }
 
     /**
      * 删除对象
@@ -866,9 +875,10 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     @EsbServiceMapping
     public String getPayQrcodeByCode(@ServiceParam(name="userorderCode") String userorderCode) throws Exception{
     	OrdermanagerUserorder order = ordermanagerUserorderDao.getObjectByUniqueProperty("userorderCode", userorderCode);
+    	BigDecimal b_amount =  order.getUserorderAmount().multiply(BigDecimal.valueOf(100));
     	UnifiedOrderReqData unifiedOrderReqData = new UnifiedOrderReqData(
-    			order.getUserorderProject(), order.getUserorderCode(), 1, 
-				"220.249.113.12", "NATIVE", null, order.getUserorderCode(), 
+    			order.getUserorderProject(), order.getUserorderCode(), b_amount.intValue(), 
+				"127.0.0.1", "NATIVE", null, order.getUserorderCode(), 
 				order.getUserorderProject(), null, null, null, null, null, null);
     	String codeUrl = wxPayManager.requestUnifiedOrderService(unifiedOrderReqData);
     	return codeUrl;
