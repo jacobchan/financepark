@@ -5,7 +5,9 @@ package com.manage.PolicyManager.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
+import com.common.MessageCenter.entity.McMsgdatas;
+import com.common.MessageCenter.service.McMsgdatasManager;
 import com.common.NewsManager.entity.NmIssueflow;
 import com.common.NewsManager.entity.NmIssuenews;
 import com.common.NewsManager.entity.NmIssuetype;
@@ -55,6 +59,8 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
 	private NmIssueflowManager nmIssueflowManager ;
 	@Autowired
 	private NmIssuenewsManager nmIssuenewsManager ;
+	@Autowired
+	private McMsgdatasManager mcMsgdatasManager;
     /**
      * 查询列表
      */
@@ -106,7 +112,6 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
     		return policyApplyDao.save(o) ;
     	}else{//isUpdate为空，表示不存在该对象，做新增操作
     		String memberId = o.getCreateUser() ;
-    		System.out.println("++++++++++++++++++++++"+memberId+"+++++++++++++++++++++++++");
         	MemberInformation member = null ;
         	if(StringUtils.isEmpty(memberId)){
         		member = memberInformationManager.getMemberInformation(o.getMember().getMemberId()) ;//后台调用
@@ -135,12 +140,21 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
         			o.setPolicyApplyStatus("01");//01为申请中
         			o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
         			policyApply = policyApplyDao.save(o) ;
-        			try {
+        			/*try {
         				HttpSenderMsg.sendMsg(policyApply.getPolicyApplyContactTel(), "尊敬的 "+policyApply.getPolicyApplyContactPeople()
         						+" 用户，您已提交 "+policyApply.getNmIssuenews().getPolicyCaption()+" 的申请，当前处理流程为："+nmIssueflow.getIssueFlowCStatus()+",请耐心等待！");
         			} catch (Exception e) {
         				e.printStackTrace();
-        			}
+        			}*/
+        			//构建替换模板参数对应的map
+        			Map<String, String> replaceMap = new HashMap<String, String>();
+        			replaceMap.put("#user", policyApply.getPolicyApplyContactPeople());
+        			replaceMap.put("#policyCaption", policyApply.getNmIssuenews().getPolicyCaption());
+        			replaceMap.put("#issueFlow", nmIssueflow.getIssueFlowCStatus());
+        			//构建消息内容数据
+        			McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0401", replaceMap);
+        			//发送消息,给会员
+        			mcMsgdatasManager.sendToUser(msgData, member.getMemberId());
         		}
         	}
         	return policyApply;
@@ -161,20 +175,38 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
     	if(! flag){
     		NmIssueflow temp = nmIssueflowManager.getNextFlow(nmIssuetypeId, issueFlowId) ;
     		policyApply.setNmIssueflow(temp);
-    		try {
+    		policyApplyDao.save(policyApply) ;
+    		/*try {
     			HttpSenderMsg.sendMsg(policyApply.getPolicyApplyContactTel(), "尊敬的 "+policyApply.getPolicyApplyContactPeople()
 						+"用户，您申请的"+policyApply.getNmIssuenews().getPolicyCaption()+"的当前处理流程为："+temp.getIssueFlowCStatus()+",请耐心等待！");
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
-    		policyApplyDao.save(policyApply) ;
+			}*/
+    		//构建替换模板参数对应的map
+			Map<String, String> replaceMap = new HashMap<String, String>();
+			replaceMap.put("#user", policyApply.getPolicyApplyContactPeople());
+			replaceMap.put("#policyCaption", policyApply.getNmIssuenews().getPolicyCaption());
+			replaceMap.put("#issueFlow", temp.getIssueFlowCStatus());
+			//构建消息内容数据
+			McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0402", replaceMap);
+			//发送消息,给会员
+			mcMsgdatasManager.sendToUser(msgData, policyApply.getCreateUser());
+
     	}else{
-    		try {
+    		/*try {
     			HttpSenderMsg.sendMsg(policyApply.getPolicyApplyContactTel(), "尊敬的 "+policyApply.getPolicyApplyContactPeople()
 						+"用户，您已成功申请"+policyApply.getNmIssuenews().getPolicyCaption()+",谢谢您的支持！");
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
+			}*/
+    		//构建替换模板参数对应的map
+			Map<String, String> replaceMap = new HashMap<String, String>();
+			replaceMap.put("#user", policyApply.getPolicyApplyContactPeople());
+			replaceMap.put("#policyCaption", policyApply.getNmIssuenews().getPolicyCaption());
+			//构建消息内容数据
+			McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0403", replaceMap);
+			//发送消息,给会员
+			mcMsgdatasManager.sendToUser(msgData, policyApply.getCreateUser());
     	}
     }
     
