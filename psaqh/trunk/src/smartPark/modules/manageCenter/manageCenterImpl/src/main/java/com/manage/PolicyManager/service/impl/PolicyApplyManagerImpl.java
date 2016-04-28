@@ -140,12 +140,6 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
         			o.setPolicyApplyStatus("01");//01为申请中
         			o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
         			policyApply = policyApplyDao.save(o) ;
-        			/*try {
-        				HttpSenderMsg.sendMsg(policyApply.getPolicyApplyContactTel(), "尊敬的 "+policyApply.getPolicyApplyContactPeople()
-        						+" 用户，您已提交 "+policyApply.getNmIssuenews().getPolicyCaption()+" 的申请，当前处理流程为："+nmIssueflow.getIssueFlowCStatus()+",请耐心等待！");
-        			} catch (Exception e) {
-        				e.printStackTrace();
-        			}*/
         			//构建替换模板参数对应的map
         			Map<String, String> replaceMap = new HashMap<String, String>();
         			replaceMap.put("#user", policyApply.getPolicyApplyContactPeople());
@@ -176,12 +170,6 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
     		NmIssueflow temp = nmIssueflowManager.getNextFlow(nmIssuetypeId, issueFlowId) ;
     		policyApply.setNmIssueflow(temp);
     		policyApplyDao.save(policyApply) ;
-    		/*try {
-    			HttpSenderMsg.sendMsg(policyApply.getPolicyApplyContactTel(), "尊敬的 "+policyApply.getPolicyApplyContactPeople()
-						+"用户，您申请的"+policyApply.getNmIssuenews().getPolicyCaption()+"的当前处理流程为："+temp.getIssueFlowCStatus()+",请耐心等待！");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}*/
     		//构建替换模板参数对应的map
 			Map<String, String> replaceMap = new HashMap<String, String>();
 			replaceMap.put("#user", policyApply.getPolicyApplyContactPeople());
@@ -193,12 +181,6 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
 			mcMsgdatasManager.sendToUser(msgData, policyApply.getCreateUser());
 
     	}else{
-    		/*try {
-    			HttpSenderMsg.sendMsg(policyApply.getPolicyApplyContactTel(), "尊敬的 "+policyApply.getPolicyApplyContactPeople()
-						+"用户，您已成功申请"+policyApply.getNmIssuenews().getPolicyCaption()+",谢谢您的支持！");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}*/
     		//构建替换模板参数对应的map
 			Map<String, String> replaceMap = new HashMap<String, String>();
 			replaceMap.put("#user", policyApply.getPolicyApplyContactPeople());
@@ -316,7 +298,16 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
 	    if("01".equals(status)){
 	    	p.setPolicyApplyStatus("03");//3为申请失败
 	    	p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-	    	return policyApplyDao.save(p);
+	    	PolicyApply policy = policyApplyDao.save(p);
+	    	//构建替换模板参数对应的map
+			Map<String, String> replaceMap = new HashMap<String, String>();
+			replaceMap.put("#user", p.getPolicyApplyContactPeople());
+			replaceMap.put("#policyCaption", p.getNmIssuenews().getPolicyCaption());
+			//构建消息内容数据
+			McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0404", replaceMap);
+			//发送消息,给会员
+			mcMsgdatasManager.sendToUser(msgData, p.getCreateUser());
+	    	return policy ;
 	    }else if("02".equals(status)){
 	    	throw new BusException("当前状态无法拒绝申请！") ;
 	    }else if("03".equals(status)){
@@ -339,7 +330,16 @@ public class PolicyApplyManagerImpl extends BaseManagerImpl implements PolicyApp
 		 if("01".equals(status)){//若当前状态为申请中
 		    	p.setPolicyApplyStatus("04");//04为已取消，相当于前端取消申请
 		    	p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-		    	return policyApplyDao.save(p);
+		    	PolicyApply policy = policyApplyDao.save(p);
+		    	//构建替换模板参数对应的map
+				Map<String, String> replaceMap = new HashMap<String, String>();
+				replaceMap.put("#user", p.getPolicyApplyContactPeople());
+				replaceMap.put("#policyCaption", p.getNmIssuenews().getPolicyCaption());
+				//构建消息内容数据
+				McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0405", replaceMap);
+				//发送消息,给会员
+				mcMsgdatasManager.sendToUser(msgData, p.getCreateUser());
+		    	return policy ;
 		 }else{
 		    	throw new BusException("当前状态无法取消申请！") ;
 		 }
