@@ -107,7 +107,7 @@ a.c-b1:hover {
 				<div class="jbk-bt clearfix jbk-bt-heigh">
 					<span class="jbk-span fl">行政区域</span> <span
 						class="ml50 mr50 c-o fl">不限</span>
-					<div class="fl" style="width: 900px;">
+					<div class="fl" style="width: 900px;" id="area_list">
 						<label><input type="checkbox" name="star" value="2">
 							福田区</label> <label><input type="checkbox" name="star" value="3">
 							南山区</label> <label><input type="checkbox" name="star" value="4">
@@ -128,6 +128,35 @@ a.c-b1:hover {
 							宝安区</label> <label><input type="checkbox" name="star" value="5">
 							罗湖区</label>
 					</div>
+					<script>
+				  // console.log($("#cityid").val());
+					
+					function getAreaList(cityid){
+						
+						$.youi.ajaxUtils.ajax({
+							url : baseUrl+"hotelBasicsService/getCityArea.json",
+							data : "cityid="+cityid,
+							jsonp : 'data:jsonp',
+							dataType : 'jsonp',
+							success : function(result) {
+  							  var html = "";
+							  for(var i=0,len=result.records.length;i<len;i++){
+								html+="<label><input type='checkbox' name='area' value='"+result.records[i].areaid+"' />"+result.records[i].areaname+"</label>";	
+							  }
+							  $("#area_list").html(html)
+							},
+							error : function() {
+								$("#area_list").html("还没有地区信息")
+							}
+						})
+					}
+				   //更新area_list
+				   $("#city_name").change(function(){
+					   $("#cityid").val($("#suggest .ac_over").attr("rel"));
+					   getAreaList($("#suggest .ac_over").attr("rel"));
+				   })
+					
+					</script>
 					<a href="" class="more_area" id="more_area">更多<i
 						class="fa fa-angle-down ml10"></i></a>
 				</div>
@@ -232,9 +261,9 @@ a.c-b1:hover {
 	<script type="text/javascript"
 		src="scripts/cityselector/j.dimensions.js"></script>
 	<script type="text/javascript" src="scripts/cityselector/j.suggest.js"></script>
+					
 	<script>
 		$(function() {
-			
 			var more_area_h = $("#more_area").parent().height();
 			$("#more_area").on("click",
 				function(e) {
@@ -607,6 +636,13 @@ a.c-b1:hover {
 				if (star[i].checked)
 					rank = star[i].value;
 			}
+			//行政区域
+			var areaid = -1,area = $("input[name=area]");
+			for(var i=0,len=area.length;i<len;i++){
+				if(area[i].checked){
+					areaid = area[i].value;
+				}
+			}
 			var params;
 			if (arguments.length == 0) {//直接搜索
 				if (rank == -1)
@@ -637,11 +673,11 @@ a.c-b1:hover {
 				if (rank == -1)
 					params = [ 'px=' + arguments[0], 'minprice=' + minprice,
 							'maxprice=' + maxprice, 'cid=' + cityid,
-							'promotion=' + promotion ];
+							'promotion=' + promotion];
 				else
 					params = [ 'px=' + arguments[0], 'minprice=' + minprice,
 							'maxprice=' + maxprice, 'cid=' + cityid,
-							'promotion=' + promotion, 'rank=' + rank ];
+							'promotion=' + promotion, 'rank=' + rank,];
 			} else if (arguments.length == 2) {//翻页
 				//当前页码
 				var curr_p = arguments[1];
@@ -658,10 +694,12 @@ a.c-b1:hover {
 					params = [ 'px=' + arguments[0], 'pg=' + curr_p,
 								'minprice=' + minprice, 'maxprice=' + maxprice,
 								'cid=' + cityid, 'promotion=' + promotion,
-								'rank=' + rank ];	
-					
-
+								'rank=' + rank ];
 				}
+			}
+			//添加行政区域参数
+			if(areaid!=-1){
+				params.push("areaid="+areaid);
 			}
 
 			var serviceURL = baseUrl
@@ -900,7 +938,7 @@ a.c-b1:hover {
 				elem : '#tm2', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
 				event : 'focus' //响应事件。如果没有传入event，则按照默认的click
 			});
-
+            getAreaList(cityid);
 		})
 	</script>
 	<!-- 弹出层样式 -->
