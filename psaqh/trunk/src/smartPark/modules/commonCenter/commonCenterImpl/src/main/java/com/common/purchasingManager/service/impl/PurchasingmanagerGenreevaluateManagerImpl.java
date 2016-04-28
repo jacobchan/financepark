@@ -68,6 +68,12 @@ public class PurchasingmanagerGenreevaluateManagerImpl extends BaseManagerImpl i
 			@ConditionCollection(domainClazz=PurchasingmanagerGenreevaluate.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
 		PagerRecords pagerRecords = purchasingmanagerGenreevaluateDao.findByPager(pager, conditions, orders);
+		@SuppressWarnings("unchecked")
+		List<PurchasingmanagerGenreevaluate> purGenreEvaluateList = pagerRecords.getRecords();
+		for(PurchasingmanagerGenreevaluate pgv:purGenreEvaluateList){
+			MemberInformation mem = memberInformationManager.getMemberInformation(pgv.getMember());
+			pgv.setMemberInformation(mem);
+		}
 		return pagerRecords;
 	}
     /**
