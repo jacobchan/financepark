@@ -45,6 +45,10 @@
 		//分页页码显示
 		 $.ajax({
 			url:serviceURL, 
+			beforeSend: function(){
+				//开始显示dataLoading样式
+				$.showBox.DataLoading();
+			},
 			success:function(results){	
 				pageCount=Math.ceil(results.totalCount/pageSize);//页数							
 				refreshData(1,pageSize);
@@ -60,6 +64,8 @@
 								}
 						});	
 				}
+				//关闭dataLoading样式
+				$.showBox.CloseDataLoading();
 			}
 		}); 			
 	});			
