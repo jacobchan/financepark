@@ -12,8 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.utils.HttpGetAndPostUtil;
 import com.member.hotel.service.HotelBasicsService;
 
@@ -53,7 +55,7 @@ public class HotelBasicsServiceImpl extends BaseManagerImpl implements HotelBasi
 	}
 
 	@EsbServiceMapping
-	public List<JsonNode> getCities(int px) {
+	public List<JsonNode> getCities(@ServiceParam(name="px") int px) throws BusException{
 		List<JsonNode> resultList  = new ArrayList<JsonNode>();
 		String result = "";
 		Map<String,Object> params = new HashMap();
@@ -81,7 +83,7 @@ public class HotelBasicsServiceImpl extends BaseManagerImpl implements HotelBasi
 	}
 
 	@EsbServiceMapping
-	public List<JsonNode> getCityArea(String cityId) {
+	public List<JsonNode> getCityArea(@ServiceParam(name="cityid") String cityId) {
 		List<JsonNode> resultList  = new ArrayList<JsonNode>();
 		String result = "";
 	    Map<String,Object> params = new HashMap();
@@ -108,7 +110,7 @@ public class HotelBasicsServiceImpl extends BaseManagerImpl implements HotelBasi
 	}
 
 	@EsbServiceMapping
-	public List<JsonNode> getCityCbd(String cityId) {
+	public List<JsonNode> getCityCbd(@ServiceParam(name="cityid") String cityId) {
 		List<JsonNode> resultList  = new ArrayList<JsonNode>();
 		String result = "";
 		Map<String,Object> params = new HashMap();
@@ -135,7 +137,7 @@ public class HotelBasicsServiceImpl extends BaseManagerImpl implements HotelBasi
 	}
 
 	@EsbServiceMapping
-	public List<JsonNode> searchNearby(String cityId, Double lng, Double lat) {
+	public List<JsonNode> searchNearby(@ServiceParam(name="cityid") String cityId, @ServiceParam(name="lng") Double lng,@ServiceParam(name="lat") Double lat) {
 		List<JsonNode> resultList  = new ArrayList<JsonNode>();
 		String result = "";
 		Map<String,Object> params = new HashMap();
