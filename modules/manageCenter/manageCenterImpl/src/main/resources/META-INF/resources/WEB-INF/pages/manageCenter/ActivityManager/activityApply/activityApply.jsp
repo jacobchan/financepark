@@ -67,7 +67,7 @@ function validateTime(startTime,endTime){
 			<youi:fieldCalendar property="startTime"  caption="活动开始时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="true"/>
 			<youi:fieldCalendar property="endTime"  caption="活动结束时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="true"/>
 			<youi:fieldCalendar property="deadline"  caption="报名截至时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" notNull="true"/>
-			<youi:fieldSelect property="applyStatus"  caption="活动申请状态" convert="activityApplyStatus" notNull="true"/>
+			<youi:fieldHidden property="applyStatus"  caption="活动申请状态"  defaultValue="01"/>
 			<youi:fieldSelect property="applayType.typeId"  caption="活动类型" src="esb/web/applayTypeManager/getApplayTypes.json" code="typeId" show="typeName" notNull="true"/>
 			<youi:fieldSelect property="isRecoomend"  caption="是否推荐" convert="bool"/>
 			<youi:fieldSwfupload property="activityImage" caption="活动图片" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" />
