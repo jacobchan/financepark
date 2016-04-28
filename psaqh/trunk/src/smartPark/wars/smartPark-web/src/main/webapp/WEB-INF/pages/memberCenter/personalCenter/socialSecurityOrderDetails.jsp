@@ -3,7 +3,7 @@
 <youi:html title="订单详情">
 	<head>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/lib/jquery-1.9.1.min.js"></script>
-		<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/memberCenter/bookkeepingOrderDetails.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/memberCenter/socialSecurityOrderDetails.js"></script>
 	</head>
 	<youi:body decorator="memcenter">
 		<div class="w1000">
