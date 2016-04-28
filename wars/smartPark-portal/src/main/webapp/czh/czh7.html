@@ -271,14 +271,17 @@
 		//侧边栏点击切换
 		function openPage(obj){
 			var documentId = obj.id;
-			$(".documentName").html($(obj).find("p").text());
-			$(".documentName").attr("id",obj.id);
-			//阅读数
-			var ronum = getRandom(1000);
-			$(".docread").html(""+ronum+"人阅读")
-			//变更文档展示
-			getpdf(documentId);
-			getComment(documentId);
+			var documentIded = $(".documentName").attr("id");
+			if(documentIded!=documentId){
+				$(".documentName").html($(obj).find("p").text());
+				$(".documentName").attr("id",obj.id);
+				//阅读数
+				var ronum = getRandom(1000);
+				$(".docread").html(""+ronum+"人阅读")
+				//变更文档展示
+				getpdf(documentId);
+				getComment(documentId);
+			}
 		}
 		
 		//知识库进入拼接
