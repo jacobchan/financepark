@@ -158,11 +158,15 @@ $(function() {
 					even.preventDefault();
 					// 当单击某个ＬＩ时反映
 					$("#autoTxt_head li").click(function() {
-						var id = $("#autoTxt_head li:eq(" + this.id + ")").attr('data_id');
-						$("#rzName_head").val($("#autoTxt_head li:eq(" + this.id + ")").text());
-						$("#autoTxt_head").html("");
-						$("#autoTxt_head").hide();
-						window.location.href = "/industrydatabase/industry.html?id="+id;
+						if(maxcount != 0){
+							var id = $("#autoTxt_head li:eq(" + this.id + ")").attr('data_id');
+							$("#rzName_head").val($("#autoTxt_head li:eq(" + this.id + ")").text());
+							$("#autoTxt_head").html("");
+							$("#autoTxt_head").hide();
+						
+							window.location.href = "/industrydatabase/industry.html?id="+id;
+						}
+						
 					});
 					// 移动对象
 					$("#autoTxt_head li").hover(function() {
