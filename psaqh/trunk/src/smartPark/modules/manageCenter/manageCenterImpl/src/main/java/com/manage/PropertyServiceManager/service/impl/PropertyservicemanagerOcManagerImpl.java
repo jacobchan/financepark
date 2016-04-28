@@ -294,11 +294,9 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 		public PagerRecords getPagerLikeOc(Pager pager,//分页条件
 				@ConditionCollection(domainClazz=PropertyservicemanagerOc.class) Collection<Condition> conditions,//查询条件
 				@OrderCollection Collection<Order> orders,
-				@ServiceParam(name="ocLikeCode") String ocLikeCode,
 				@ServiceParam(name="startTime") String startTime,
 				@ServiceParam(name="endTime") String endTime)
 				throws BusException {
-	    	conditions.add(ConditionUtils.getCondition("ocCode", Condition.LIKE, ocLikeCode));
 	        conditions.add(ConditionUtils.getCondition("ocDate", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));	    	
 	    	PagerRecords pagerRecords = propertyservicemanagerOcDao.findByPager(pager, conditions, orders);
 	    	List<PropertyservicemanagerOc> list = pagerRecords.getRecords();
@@ -320,13 +318,9 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 	       @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
 	   	public List<Record> getTotalCount(
 	   			@ConditionCollection(domainClazz=PropertyservicemanagerOc.class) Collection<Condition> conditions,
-	   			@ServiceParam(name="ocLikeCode") String ocLikeCode,
 				@ServiceParam(name="startTime") String startTime,
 				@ServiceParam(name="endTime") String endTime)  throws BusException{
 	   		List<Record> recordList=new ArrayList<Record>();
-	   		if(StringUtils.isNotEmpty(ocLikeCode)){
-	   		conditions.add(ConditionUtils.getCondition("ocCode", Condition.LIKE, ocLikeCode));
-	   		}
 	   		if(StringUtils.isNotEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){
 			conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
 	   			}
