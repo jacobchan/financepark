@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,7 @@ import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
 import com.common.purchasingManager.service.PurchasingmanagerGenrePropertyManager;
 import com.common.wxpay.protocol.UnifiedOrderReqData;
 import com.common.wxpay.service.WxPayManager;
+import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.codemap.dao.CodeitemDao;
 import com.gsoft.framework.codemap.entity.Codeitem;
 import com.gsoft.framework.core.dataobj.Record;
@@ -882,6 +884,26 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 				order.getUserorderProject(), null, null, null, null, null, null);
     	String codeUrl = wxPayManager.requestUnifiedOrderService(unifiedOrderReqData);
     	return codeUrl;
+    }
+    /**
+  	 * 生成微信预支付订单号
+  	 * @param conditions
+  	 * @return
+     * @throws Exception 
+  	 */
+    @Override
+    @EsbServiceMapping
+    public TempDemo getPrepayId(@ServiceParam(name="userorderCode") String userorderCode) throws Exception{
+    	OrdermanagerUserorder order = ordermanagerUserorderDao.getObjectByUniqueProperty("userorderCode", "SBZL1604221712410000");
+    	BigDecimal b_amount =  order.getUserorderAmount().multiply(BigDecimal.valueOf(100));
+    	UnifiedOrderReqData appUnifiedOrderReqData = new UnifiedOrderReqData(
+    			order.getUserorderProject(), order.getUserorderCode(), b_amount.intValue(), 
+				"127.0.0.1", "APP", null, order.getUserorderCode(), 
+				order.getUserorderProject(), null, null, null, null, null, null);
+    	TempDemo temp = new TempDemo();
+    	Map<String, Object> finalpackage = wxPayManager.appRequestOrderService(appUnifiedOrderReqData);
+    	temp.setResMap(finalpackage);
+    	return temp;
     }
 }
 
