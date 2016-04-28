@@ -138,7 +138,7 @@
 				    html+=   "<td><a class='custor' onclick='"+method+"'>"+record[i].userorderCode+"</a></td>";
 					html+=   '<td>'+record[i].userorderProject+'</td>'
                     html+=   '<td>'+record[i].userorderAmount+'</td>'
-                    html+=   '<td>'+record[i].userorderTime+'</td>'                                                                     
+                    html+=   '<td>'+record[i].userorderTime.substring(0,10)+'</td>'                                                                     
                     html+=   "<td>"+status+button+"</td>";
                     html+= '</tr>'				
 			}
