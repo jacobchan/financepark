@@ -33,6 +33,10 @@
 		$.ajax({			 
 			url:baseUrl+'propertyservicemanagerOcManager/getTotalCount.json', 
 			data:'bindStatus='+bindStatus,
+			beforeSend: function(){
+				//开始显示dataLoading样式
+				$.showBox.DataLoading();
+			},
 			success:function(results){	
 				var totalCount=results.records[0].totalCount;
 				pageCount = Math.ceil(totalCount / pageSize);//页数	
@@ -49,6 +53,8 @@
 						}
 					});
 				}
+				//关闭dataLoading样式
+				$.showBox.CloseDataLoading();
 			}
 		}); 			
 	});	
