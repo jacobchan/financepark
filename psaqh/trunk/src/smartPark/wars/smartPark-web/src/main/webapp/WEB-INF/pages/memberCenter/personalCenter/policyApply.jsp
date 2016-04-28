@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/pages/include.jsp" %>
-<youi:html title="政策申请">
+<youi:html title="政策申请列表">
 	<youi:body decorator="memcenter"> 
 				<div class="w1000">
 					<h3 class="per-h3">我的申请<a href="javascript:;" class="fr c-333 f14" id="actionUrl"><i class="fa fa-plus-square fl mr10"></i>申请政策</a></h3>
