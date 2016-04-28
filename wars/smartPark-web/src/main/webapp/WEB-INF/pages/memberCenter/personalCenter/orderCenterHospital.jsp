@@ -120,7 +120,7 @@
 				              "<td><a class='custor' onclick='"+method+"'>"+record[i].userorderCode+"</a></td>"+
                               "<td>"+record[i].userorderProject+"</td>"+
                               "<td>"+record[i].userorderAmount+"</td>"+
-                          	  "<td>"+record[i].userorderTime+"</td>"+                                                                        
+                          	  "<td>"+record[i].userorderTime.substring(0,10)+"</td>"+                                                                        
                           	  "<td>"+status  + button+                                                                    
 						      "</td>"+
                           "</tr>";
