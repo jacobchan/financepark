@@ -54,5 +54,13 @@ public interface HotelInfoService extends BaseManager{
 																								// pagesize每页显示几条评论
 																								// page第几页
 	//获取酒店房型信息
-	List<JsonNode> getHotelData(String hid,String tm1, String tm2) throws BusException;
+	public List<JsonNode> getHotelData(String hid,String tm1, String tm2) throws BusException;
+	/**
+	 * 根据城市ID ，获取对应的行政区
+	 * @param cid 城市ID
+	 * @return 标准JSON数据
+	 * @throws BusException
+	 */
+	public List<JsonNode> getCityArea(String cid) throws BusException;
+	
 }

@@ -37,6 +37,7 @@ public class HotelInfoServiceImpl extends BaseManagerImpl implements HotelInfoSe
 	@Value("${agent.md}")
 	private String agent_md;
 	//@EsbServiceMapping
+	/*
 	public List<JsonNode> searchHotelByConditions_(String cid, int pagesize, int pg, int px,
 			int minprice, int maxprice, String hn, String cityname, int lsid, String bid, String areaid, int rank,
 			int hid, float lng, float lat, int juli, int promotion, int is_kezhan) throws BusException {
@@ -95,27 +96,27 @@ public class HotelInfoServiceImpl extends BaseManagerImpl implements HotelInfoSe
 						
 						resultList.add(avator);
 					}
-					/*for (int i = 0; i < lists.size(); i++) {
+					for (int i = 0; i < lists.size(); i++) {
 						Map<String, Object> map = lists.get(i);
 						Set<String> set = map.keySet();
 						for (Iterator<String> it = set.iterator(); it.hasNext();) {
 							String key = it.next();
 							System.out.println(key + ":" + map.get(key));
 						}
-					}*/
+					}
 				}
 		    } catch (Exception e) {
 	      System.out.println("查询酒店 请求出现异常:" + e);
 	      e.printStackTrace();
 	    }
 	    return resultList;
-	}
+	}*/
 
 	@EsbServiceMapping
 	public List<JsonNode> searchHotelByConditions(HotelConditions conditions) throws BusException {
 		String result = "";
 		List<JsonNode> resultList = new ArrayList<JsonNode>();
-		Map<String,Object> params = new HashMap();
+		Map<String,Object> params = new HashMap<String,Object>();
 	    params.put("method", "search");
 	    params.put("agent_id", agent_id);
 	    params.put("agent_md", agent_md);
@@ -409,4 +410,12 @@ public class HotelInfoServiceImpl extends BaseManagerImpl implements HotelInfoSe
 	    return resultList;
 	}
 
+	@EsbServiceMapping
+	public List<JsonNode> getCityArea(@ServiceParam(name="cid")String cid) throws BusException{
+		List<JsonNode> resultList = new ArrayList<JsonNode>();
+		//获取城市对应的行政区
+		
+		
+		return resultList;
+	}
 }
