@@ -71,6 +71,7 @@
 		<menu id="120008" text="创立方管理" href="page/commonCenter.purchasingManager.purchasingmanagerCommodity/purchasingmanagerCommodityForClf.html"></menu>
 		<menu id="120009" text="工位管理" href="page/commonCenter.purchasingManager.purchasingmanagerCommodity/purchasingmanagerCommodityForGw.html"></menu>
 		<menu id="1200010" text="订单管理" href="page/manageCenter.PublicUtilitiesManager.publicutilitiesmanagerReso/ordermanagerUserorderForPublic.html"></menu>
+		<menu id="1200011" text="商品评论管理" href="page/commonCenter.purchasingManager.purchasingmanagerGenreevaluate/purchasingmanagerGenreevaluate.html"></menu>
 	</menu>
 	<menu id="025000" text="招商预约管理">
 			<menu id="025100" text="预约分配管理" href="page/manageCenter.ReserveManager.reservationRecord/reservationRecord.html"></menu>
