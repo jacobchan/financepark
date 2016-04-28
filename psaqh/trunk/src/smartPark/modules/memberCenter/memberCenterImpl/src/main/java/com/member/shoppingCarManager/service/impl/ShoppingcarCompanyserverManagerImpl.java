@@ -162,6 +162,9 @@ public class ShoppingcarCompanyserverManagerImpl extends BaseManagerImpl impleme
 		if(shopCarList.size() == 0){
 			throw new BusException("购物车不能为空！");
 		}
+		if(StringUtils.isEmpty(userId)){
+			throw new BusException("请登陆后购买！");
+		}
 		OrdermanagerUserorder order = new OrdermanagerUserorder();
 		ShoppingcarCompanyserver scs = shoppingcarCompanyserverDao.get(shopCarList.get(0).getCompanyServerId());
 		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(scs.getCommodityId().getGenreId());
@@ -176,6 +179,7 @@ public class ShoppingcarCompanyserverManagerImpl extends BaseManagerImpl impleme
     	}
 		order.setUserorderAmount(userorderAmoun);
 		if(StringUtils.isNotEmpty(userId)){
+			order.setMemberId(userId);
 			MemberInformation mem = memberInformationManager.getMemberInformation(userId);
 			order.setUserorderBuyUser(mem.getMemberName());
 		}
