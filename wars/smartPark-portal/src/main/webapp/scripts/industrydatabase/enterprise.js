@@ -1,4 +1,4 @@
-var pageSize=4;
+var pageSize=12;
 var pageCount=1;
 var serviceURL = baseUrl+"enterbusinessmanagerRzManager/getPagerEnterbusinessmanagerRzs.json";
 //获取字符串长度（中文2，英文1）
@@ -60,8 +60,15 @@ function _parseRecords(records){
 				rzRemark = "";
 			}
 			var a = (stringLen(records[i].rzName)>20)?stringCut(records[i].rzName, 20):records[i].rzName;
-			var memberName = (stringLen(records[i].rzManager.memberName)>3)?stringCut(records[i].rzManager.memberName, 3):records[i].rzManager.memberName;
-			var enTypeName = (stringLen(records[i].enTypeId.enTypeName)>3)?stringCut(records[i].enTypeId.enTypeName, 3):records[i].enTypeId.enTypeName;
+			var memberName = "";
+			if(records[i].rzManager!=null){
+				memberName = (stringLen(records[i].rzManager.memberName)>3)?stringCut(records[i].rzManager.memberName, 3):records[i].rzManager.memberName;
+			}
+			
+			var enTypeName = "";
+			if(records[i].enTypeId!=null){
+				enTypeName = (stringLen(records[i].enTypeId.enTypeName)>3)?stringCut(records[i].enTypeId.enTypeName, 3):records[i].enTypeId.enTypeName;
+			}
 			var enterDiv = '<div class="yqfu-com-centent">'+
 			'<div class="ycc-con"><img src="../styles/images/yqfw/comp1.png" width="106" height="106"></div>'+
 			'<a href="industry.html?id='+records[i].rzId+'"><p class="p-bottom">'+rzRemark+'</p></a>'+
@@ -69,12 +76,13 @@ function _parseRecords(records){
 			'<a href="industry.html?id='+records[i].rzId+'"><font class="c-o f14">'+a+'</font></a>'+
 			'<a href="javascript:;" class="yc-gz fr"><font class="f14">+</font>关注</a>'+
 			'<div class="clearfix c-p mt10">'+
-				'<span><img src="../styles/images/yqfw/map.png" class="mr5">武汉市</span>'+
+				'<span><img src="../styles/images/yqfw/map.png" class="mr5">杭州市</span>'+
 				'<span style="margin: 0px 33px;">'+
 				'<img src="../styles/images/yqfw/user.png" class="mr5">'+memberName+'</span>'+
 				'<span><img src="../styles/images/yqfw/ticket.png" class="mr5">'+enTypeName+'</span>'+
 			'</div></div></div>';
 			$("#enterprise").append(enterDiv);
+			
 		}
 	}else{
 		//无记录隐藏分页条
