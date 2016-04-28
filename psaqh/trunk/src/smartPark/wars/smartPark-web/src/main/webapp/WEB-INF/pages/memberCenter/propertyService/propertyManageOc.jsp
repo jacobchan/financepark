@@ -184,7 +184,7 @@
 		var ocCode=$("#ocCode").val();	
 		var startTime=$("#startTime").val(); 
 		var endTime=$("#endTime").val(); 
-		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'ocLikeCode='+ocCode,'startTime='+startTime,'endTime='+endTime];
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'ocCode='+ocCode,'operator:ocCode=LIKE','startTime='+startTime,'endTime='+endTime];
 		$.ajax({
 			url:baseUrl+'propertyservicemanagerOcManager/getPagerLikeOc.json',
 			data:params.join('&'),
