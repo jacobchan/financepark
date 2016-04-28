@@ -60,7 +60,7 @@
 			url:baseUrl+'reservationRecordManager/getTotalCount.json',
 			beforeSend: function(){
 				//开始显示loading样式
-				$.showBox.Loading();
+				$.showBox.DataLoading();
 			},
 			success:function(results){	
 				var totalCount=results.records[0].totalCount;
@@ -79,7 +79,7 @@
 								});	
 							}
 							//关闭loading样式
-							$.showBox.CloseLoading();
+							$.showBox.CloseDataLoading();
 			}
 		}); 			
 		}
