@@ -410,12 +410,5 @@ public class HotelInfoServiceImpl extends BaseManagerImpl implements HotelInfoSe
 	    return resultList;
 	}
 
-	@EsbServiceMapping
-	public List<JsonNode> getCityArea(@ServiceParam(name="cid")String cid) throws BusException{
-		List<JsonNode> resultList = new ArrayList<JsonNode>();
-		//获取城市对应的行政区
-		
-		
-		return resultList;
-	}
+
 }
