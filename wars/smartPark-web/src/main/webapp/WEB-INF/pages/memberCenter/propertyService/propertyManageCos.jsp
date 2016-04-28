@@ -68,6 +68,10 @@
 		//分页页码显示
 		 $.ajax({
 			url:baseUrl+'propertyservicemanagerCosManager/getTotalCount.json', 
+			beforeSend: function(){
+				//开始显示dataLoading样式
+				$.showBox.DataLoading();
+			},
 			success:function(results){	
 				var totalCount=results.records[0].totalCount;				
 				 pageCount = Math.ceil(totalCount / pageSize);//页数	
@@ -84,6 +88,8 @@
 					}
 				 });	
 				}
+					//关闭dataLoading样式
+					$.showBox.CloseDataLoading();	
 			}
 		}); 			
 	});		
@@ -142,6 +148,10 @@
 		$.ajax({
 			url:baseUrl+'propertyservicemanagerCosManager/getPagerLikeCos.json',
 			data:params.join('&'),
+			beforeSend: function(){
+				//开始显示dataLoading样式
+				$.showBox.DataLoading();
+			},
 			success:function(results){	
 				pageCount=Math.ceil(results.totalCount/pageSize);//页数	
 				 refreshData_query(1,pageSize);
@@ -157,6 +167,8 @@
 					    }
 					  });	
 					}
+					//关闭dataLoading样式
+					$.showBox.CloseDataLoading();
               }
         }); 			
     });	
