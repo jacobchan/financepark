@@ -321,7 +321,9 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
 			@ServiceParam(name="endTime") String endTime)
 			throws BusException {
     	conditions.add(ConditionUtils.getCondition("fkCode", Condition.LIKE, fkLikeCode));	
-		conditions.add(ConditionUtils.getCondition("fkcodeTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+    	if(StringUtils.isNotEmpty(startTime)||StringUtils.isNotEmpty(endTime)){
+    		conditions.add(ConditionUtils.getCondition("fkcodeTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+    	}
     	PagerRecords pagerRecords = propertyservicemanagerFkcodeDao.findByPager(pager, conditions, orders); 
     	@SuppressWarnings("unchecked")
 		List<PropertyservicemanagerFkcode> list = pagerRecords.getRecords();
