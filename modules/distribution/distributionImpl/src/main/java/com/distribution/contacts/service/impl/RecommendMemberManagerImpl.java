@@ -3,9 +3,7 @@
  */
 package com.distribution.contacts.service.impl;
 
-import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -13,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.common.MemberManager.entity.MemberInformation;
-import com.common.MemberManager.service.MemberInformationManager;
 import com.distribution.contacts.dao.RecommendMemberDao;
 import com.distribution.contacts.entity.RecommendMember;
 import com.distribution.contacts.service.RecommendMemberManager;
@@ -30,7 +26,6 @@ import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.OrderCollection;
 import com.gsoft.framework.esb.annotation.PubCondition;
 import com.gsoft.framework.esb.annotation.ServiceParam;
-import com.gsoft.framework.util.PasswordUtils;
 
 @Service("recommendMemberManager")
 @Transactional
@@ -38,10 +33,7 @@ public class RecommendMemberManagerImpl extends BaseManagerImpl implements Recom
 	@Autowired
 	private RecommendMemberDao recommendMemberDao;
 	
-	@Autowired
-	private MemberInformationManager memberInformationManager;
-	
-    /**		`
+    /**
      * 查询列表
      */
     //@EsbServiceMapping
@@ -77,29 +69,7 @@ public class RecommendMemberManagerImpl extends BaseManagerImpl implements Recom
      */
     @EsbServiceMapping(pubConditions = {@PubCondition(property = "memberId", pubProperty = "userId")})
     public RecommendMember saveRecommendMember(RecommendMember o) throws BusException{
-    	if(o.getRecId()!=null){	
-    		//修改
-    	}else{
-    		//保存
-    		String code = getReCode();
-    		//生成mermber会员
-    		MemberInformation member = new MemberInformation();
-    		member.setMemberPassword(PasswordUtils.md5Password(code));
-    		member.setMemberName(o.getMemName());
-    		member.setMemberPhoneNumber(o.getMemPhone());
-    		memberInformationManager.saveMemberInformation(member);
-    		o.setRecCode(code);
-    	}
-    	recommendMemberDao.save(o);	
-    	return o;
-    }
-    
-    /**
-     * /获取随机字符串
-     * @return
-     */
-    private String getReCode(){
-    	//生成10位数推荐码
+    	//生成推荐码10位数推荐码
 		int CODE_NUM = 10;
 		char[] charSequence = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();  
 		StringBuilder sRand = new StringBuilder(CODE_NUM);   
@@ -110,19 +80,10 @@ public class RecommendMemberManagerImpl extends BaseManagerImpl implements Recom
             String tmp = String.valueOf(charSequence[index]);  
             sRand.append(tmp);  
         }
-    	return sRand.toString();
+        o.setRecCode(sRand.toString());
+    	return recommendMemberDao.save(o);
     }
-   /***
-    * 修改第一次注册时间 同时改变账户状态
-    */
-    public void updataRegTime(RecommendMember o) throws BusException{
-    	SimpleDateFormat newtime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-    	o.setRegTime(newtime.format(new Date()));
-    	recommendMemberDao.save(o);	
-    }
-    
-    
-    
+
     /**
      * 删除对象
      */
