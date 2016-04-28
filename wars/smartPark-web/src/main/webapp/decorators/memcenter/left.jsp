@@ -48,7 +48,16 @@
   			  if(vv == cenUrl+"member/memberCenter/personalCenter/meetingRoomOrderDetails.html"||
   					vv == cenUrl+"member/memberCenter/personalCenter/carOrderDetails.html"||
   					vv == cenUrl+"member/memberCenter/personalCenter/payWay.html"||
-  					vv == cenUrl+"member/memberCenter/personalCenter/adsenseOrderDetails.html"){
+  					vv == cenUrl+"member/memberCenter/personalCenter/adsenseOrderDetails.html"||
+  					vv == cenUrl+"member/memberCenter/personalCenter/BusinesschangeOrderDetails.html"||
+  					vv == cenUrl+"member/memberCenter/personalCenter/ITServiceOrderDetails.html"||
+  					vv == cenUrl+"member/memberCenter/personalCenter/bookkeepingOrderDetails.html"||
+  					vv == cenUrl+"member/memberCenter/personalCenter/companyRegistOrderDetails.html"||
+  					vv == cenUrl+"member/memberCenter/personalCenter/legalServiceOrderDetails.html"||
+  					vv == cenUrl+"member/memberCenter/personalCenter/socialSecurityOrderDetails.html"||
+  					vv == cenUrl+"member/memberCenter/personalCenter/trademarkPatentOrderDetails.html"||
+  					vv == cenUrl+"member/memberCenter/personalCenter/wkServiceOrderDetails.html"
+  					){
   				urlstr = cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
     	  	  }
     	  	  if(vv == cenUrl+"member/memberCenter/propertyService/propertyManageBxDetail.html"){
