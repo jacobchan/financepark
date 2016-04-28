@@ -12,7 +12,7 @@
 			<span style="color:#cdcdcd;" class="mr10">当前用户:${user.loginName}</span>
 			<a href="<%=request.getContextPath()%>/member/memberCenter/logout.html" class="brcd">退出</a>
 			<a href="<%=request.getContextPath()%>/enterprise/info.html" class="brcd">企业管理平台</a>
-			<a href="<%=request.getContextPath()%>/member/memberCenter/index.html" class="brcd">个人中心</a>
+			<%-- <a href="<%=request.getContextPath()%>/member/memberCenter/index.html" class="brcd">个人中心</a> --%>
 			<a href="#">客服体系</a>
 		</div>
 	</div>
