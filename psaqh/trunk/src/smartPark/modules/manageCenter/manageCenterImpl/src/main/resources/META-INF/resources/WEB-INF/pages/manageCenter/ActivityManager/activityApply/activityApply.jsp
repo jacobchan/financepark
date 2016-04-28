@@ -13,6 +13,11 @@ function validateTime(startTime,endTime){
 } 
 </script>
 <youi:page>
+	<youi:subpage id="subpage_Document" subpageId="Document"
+	src="page/manageCenter.ActivityManager.activityDocument/document.html?activityApply.applyId={applyId}" height="500" width="850"
+		caption="文档信息">
+	</youi:subpage>
+
 	<youi:grid id="grid_activityApply" idKeys="applyId" caption="-活动申请内容列表列表"  panel="false"
 				src="esb/web/activityApplyManager/getPagerActivityApplys.json" dataFormId="form_activityApply"
 				editSrc="esb/web/activityApplyManager/getActivityApply.json" edit="NOT" remove="NOT" showCheckbox="true"
@@ -43,7 +48,8 @@ function validateTime(startTime,endTime){
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
 		</youi:gridCol>
-		<youi:button name="pass" caption="申请通过" active="1"></youi:button>
+		<youi:button name="document" caption="文档管理" active="1" icon="edit"></youi:button>
+		<youi:button name="pass" caption="申请通过" active="1" icon="edit"></youi:button>
 	</youi:grid>
 	
 	<!-- form--活动申请内容列表编辑 -->
@@ -65,7 +71,7 @@ function validateTime(startTime,endTime){
 			<youi:fieldSelect property="applayType.typeId"  caption="活动类型" src="esb/web/applayTypeManager/getApplayTypes.json" code="typeId" show="typeName" notNull="true"/>
 			<youi:fieldSelect property="isRecoomend"  caption="是否推荐" convert="bool"/>
 			<youi:fieldSwfupload property="activityImage" caption="活动图片" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" />
-			<youi:fieldSwfupload property="documentPath"  caption="文档" uploadUrl="/common/upload.html" fileTypes="*.doc;*.xls;*.ppt;*.docx;*.xlsx;*.pptx;*.pdf"  fileTypesDescription="所有类型" fileSizeLimit="10240" fileQueueLimit="1"/>
+			<%-- <youi:fieldSwfupload property="documentPath"  caption="文档" uploadUrl="/common/upload.html" fileTypes="*.doc;*.xls;*.ppt;*.docx;*.xlsx;*.pptx;*.pdf"  fileTypesDescription="所有类型" fileSizeLimit="10240" fileQueueLimit="1"/> --%>
 			<%-- <youi:fieldArea property="commentContent"  caption="活动内容" column="2" notNull="true"/> --%>
 			<youi:fieldCustom column="2" custom="fieldCkeditor" customOptions="{}" property="commentContent"  caption="活动内容"/>
 		</youi:fieldLayout>
@@ -98,6 +104,15 @@ function validateTime(startTime,endTime){
 			       }
   
         return true;
+	</youi:func>
+	
+	<!-- 文档管理 -->
+	<youi:func name="func_grid_document">
+		var gridElement=$elem("grid_activityApply",pageId);
+		var subpageElem = $elem('subpage_Document',pageId);
+		var selectedRecord=gridElement.grid("getSelectedRecord");
+		var applyId = selectedRecord['applyId'];
+		subpageElem.subpage('open',{applyId:applyId},null,{applyId:applyId});
 	</youi:func>
 	<!--**********************************页面函数End**********************************-->
 </youi:page>
