@@ -226,7 +226,7 @@
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 <!--***bottom end****************************************-->
 <!--遮罩层-->
-<div class="pop_layer">
+<div class="pop_layer pl2">
 	<div class="tj_info bgfff">
 		<div id="closer"></div>
     	<div class="borderm pb10 f16">填写推荐信息</div>
@@ -339,10 +339,10 @@
 			$(".pop_layer").hide();
 		});
 		$("#tj_pop").click(function(){
-			$(".pop_layer").show();
+			$(".pl2").show();
 		});
 		$(".close0").click(function(){
-			$(".pop_layer.pl1").hide();
+			$(".pl1").hide();
 		});
 		$("#clo").click(function(){
 			clearInterval(timer2);
@@ -434,7 +434,7 @@
 							timer2 = setInterval("jump2()",1000);
 						} else {
 							clear() ;
-							$(".pop_layer.pl1").show();
+							$(".pl1").show();
 							a = 3;
 							timer1 = setInterval("jump1()",1000);
 						}
@@ -468,7 +468,7 @@
 			a--;
 			$("#ti-m1").text(a);
 		} else {
-				$(".pop_layer.pl1").hide();
+				$(".pl1").hide();
 		}
 	}
 	var b,timer2;
@@ -577,7 +577,7 @@
 						$("#msg").html("预约成功！");
 						$(".toast").show();
 						setTimeout('$(".toast").hide();',2000);
-						$(".pop_layer").hide();
+						$(".pl2").hide();
 						$("#name").val('');
 						$("#remark").val('');
 						$("#memRole").val('');
