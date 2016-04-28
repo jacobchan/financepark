@@ -656,7 +656,10 @@ a.c-b1:hover {
 				html_ += "<td>";
 				/*if(plans[i].iscard==0) html_ += "免费取消";
 				else html_ += "<a href='' Title='"+plans[i].carddesc+"'>担保</a>";*/
-				html_ += "<a href='#' class='guarantee' aTitle='"+plans[i].carddesc+"'>担保</a>";
+				if(plans[i].carddesc){
+					html_ += "<a href='#' class='guarantee' aTitle='"+plans[i].carddesc+"'>担保</a>";
+				}
+				
 				html_ += "</td>";
 				
 				html_ += "<td><a href='javascript:bookHotel("+record.rid+","+plans[i].planid+")' class='hhf-submit lh28'>预订</a></td></tr>";
@@ -666,7 +669,9 @@ a.c-b1:hover {
 				html_ += "<td>";
 				/*if(plans[i].iscard==0) html_ += "免费取消";
 				else html_ += "<a href='' Title='"+plans[i].carddesc+"'>担保</a>";*/
-				html_ += "<a href='#' class='guarantee' aTitle='"+plans[i].carddesc+"'>担保</a>";
+				if(plans[i].carddesc){
+					html_ += "<a href='#' class='guarantee' aTitle='"+plans[i].carddesc+"'>担保</a>";
+				}
 				html_ += "</td>";
 				
 				html_ += "<td><a disabled='disabled' style='background:#7b7674;border-color:#7b7674' href='javascript:void(0)' class='hhf-submit lh28'>预订</a></td></tr>";
