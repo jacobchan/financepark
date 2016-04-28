@@ -575,6 +575,8 @@ a.c-b1:hover {
 			//清空原先的内容
 			$(".append_order").remove();
 			$("#isLoading").removeClass("undis");
+			$("#noresult").addClass("undis");
+			$("#page_content").html("");
 			//是否特惠
 			var promotion = "";
 			var promotionlist = $("input[name=th]");
@@ -781,11 +783,12 @@ a.c-b1:hover {
 				totalPagesize = record[0].totalpg;
 			} else {
 				$("#noresult").removeClass("undis");
+				$("#isLoading").addClass("undis");
 				$("#totalRecord").html("0");
 				//$("#totalPage").empty();
 				//$("#totalPage").html("共 0 页");
 				//$("#totalPage").html("共 0 个结果")
-				$("#page_content").html("<span class='c-b1 mr30 f12' id='totalPage'>找到相关结果约0个</span>");
+				//$("#page_content").html("<span class='c-b1 mr30 f12' id='totalPage'>找到相关结果约0个</span>");
 				return;
 			}
 			for (var i = 1; i < record.length; i++) {//record[0] 存放返回的头文件信息，包括记录数，页数等
