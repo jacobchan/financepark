@@ -116,7 +116,7 @@ public interface PropertyservicemanagerOcManager extends BaseManager{
 	public PagerRecords getPagerLikeOc(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders,
-			String ocLikeCode,String startTime,String endTime) throws BusException;
+			String startTime,String endTime) throws BusException;
 	/**
    	 * 获取已完成订单的totalCount    陈烨
    	 * @param conditions
@@ -126,7 +126,6 @@ public interface PropertyservicemanagerOcManager extends BaseManager{
        
    	public List<Record> getTotalCount(
    			 Collection<Condition> conditions,
-   			 String ocLikeCode,
 			 String startTime,
 			 String endTime)  throws BusException;
    	/**
