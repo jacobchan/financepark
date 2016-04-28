@@ -99,10 +99,10 @@ var pageCount=1;
 			if(recordList.length>0){
 				for (var index = 0; index < recordList.length; index++) {
 					html += '<tr>'
-					html += '	<td><a href="">'+ recordList[index].applyCode+ '</a></td>'
+					html += '	<td><a href="#">'+ recordList[index].applyCode+ '</a></td>'
 					html += '	<td>'+ recordList[index].nmIssuenews.policyCaption+ '</td>'
 					html += '	<td>'+ recordList[index].policyApplyContactPeople+ '</td>'
-					html += '	<td>'+ recordList[index].createTime+ '</td>'
+					html += '	<td>'+ recordList[index].createTime.substring(0,10)+ '</td>'
 					if(recordList[index].policyApplyStatus=="01"){
 						html += '	<td>未办理</td>'
 						html += '	<td><a href="javascript:cancel(\''+recordList[index].policyApplyId+'\');" class="ac-cancle">取消</a></td>'
