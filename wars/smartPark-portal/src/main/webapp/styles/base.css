@@ -206,7 +206,7 @@ input{font-family:"微软雅黑";}
 .index-head-nav li>a{color: #333;font-size: 16px;padding: 10px;line-height: 20px;display: inline-block;margin:0px 13px;}
 .index-head-nav li:hover>a,.index-head-nav li.active>a{color: #fb7730;}
 .index-head-nav li:hover dl{display: inline-block;} 
-.index-head-nav li dl{position: absolute;top: 40px; left: 0px;border:1px solid #ddd;background:#fff ;border-top: 0px;width: 100%;display: none;z-index: 200;}
+.index-head-nav li dl{position: absolute;top: 40px; left: 0px;border:1px solid #ddd;background:#fff ;border-top: 0px;width: 100%;display: none;z-index: 2000;}
 .index-head-nav li dl dt{position: absolute;top: -5px;left: 50%;margin-left: -9px;width: 18px;height: 5px;background: url(images/sj-top.png) no-repeat;}
 .index-head-nav li dl dd a{color: #333;font-size: 14px;margin:0px;width: 100%;text-align: center;border-top: 1px solid #e8e8e8;padding: 10px;line-height: 20px;display: inline-block;}
 .index-head-nav li dl dd a:hover,.index-head-nav li dl dd.active a{background: #fb7730;color: #fff!important;}
