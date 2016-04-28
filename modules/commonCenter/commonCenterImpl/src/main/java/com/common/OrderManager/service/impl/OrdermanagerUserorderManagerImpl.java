@@ -894,7 +894,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     @Override
     @EsbServiceMapping
     public TempDemo getPrepayId(@ServiceParam(name="userorderCode") String userorderCode) throws Exception{
-    	OrdermanagerUserorder order = ordermanagerUserorderDao.getObjectByUniqueProperty("userorderCode", "SBZL1604221712410000");
+    	OrdermanagerUserorder order = ordermanagerUserorderDao.getObjectByUniqueProperty("userorderCode", userorderCode);
     	BigDecimal b_amount =  order.getUserorderAmount().multiply(BigDecimal.valueOf(100));
     	UnifiedOrderReqData appUnifiedOrderReqData = new UnifiedOrderReqData(
     			order.getUserorderProject(), order.getUserorderCode(), b_amount.intValue(), 
