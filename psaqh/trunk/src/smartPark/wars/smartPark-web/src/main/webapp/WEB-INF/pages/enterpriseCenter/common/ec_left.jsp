@@ -55,12 +55,12 @@
 	                <li class = "qiyemenu"><a href="<%=request.getContextPath()%>/enterprise/code.html"><span>企业邀请码</span></a></li> --%>
 	                <li class = "qiyemenu"><a href="<%=request.getContextPath()%>/enterprise/reply.html"><span>评论消息</span></a></li>
 	            </ul>
-	            <a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/personInfo.html">
+	           <%--  <a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/personInfo.html">
 	            	<div class="sidebar-menu-return">
 	            		<img src="<%=request.getContextPath()%>/styles/images/qiye/icon_return.png">
 	            		<span> 返回个人中心</span>
 	            	</div>
-	            </a>
+	            </a> --%>
 	        </div>
 		</aside>
 	</body>
