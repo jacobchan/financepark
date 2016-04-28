@@ -28,6 +28,7 @@
         <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
     </div> 
 </div>
+<div id="loadingShow" class="clearfix"></div>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 <script type="text/javascript">  
 	//页面取消成功的Page页
