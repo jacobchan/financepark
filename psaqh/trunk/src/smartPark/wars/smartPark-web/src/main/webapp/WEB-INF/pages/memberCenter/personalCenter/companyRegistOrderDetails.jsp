@@ -30,7 +30,7 @@
 							</tr>
 							<tr>
 								<td>
-									<p class="c-333 f14">订单内容</p>
+								
 									<p>预订日期：<span class="c-o" id="publicResoIdDate"></span></p>
 								</td>
 							</tr>
