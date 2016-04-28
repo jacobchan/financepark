@@ -27,10 +27,42 @@
 		    </div>	
 		</div>
 	<!--***弹窗 start****************************************-->
-	
+	<div class="toast">
+	    <div class="toast-con clearfix">
+	        <div class="close-toast fr"></div>
+	        <p class="tc mt25 f18" id="toast_text" style="color:#ff6715">请登录后重试！</p>
+	    </div>
+	</div>
 	<!--***弹窗 end****************************************-->
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.qrcode.min.js"></script>
 	<script type="text/javascript">
+		function payReturn(sec,userorderCode){
+			if(sec > 0){
+				var serviceURL = baseUrl+"ordermanagerUserorderManager/getOrderByCode.json";
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					data:{userorderCode:userorderCode},
+					success:function(results){
+						if(results&&results.record){
+							var record = results.record;
+							if("02" == record.userorderStatus){
+								$('#toast_text').html('支付成功！');
+								$(".toast").show();
+					            setTimeout('$(".toast").hide();',2000);//1秒=1000
+					            setTimeout(function(){payWay_goBack();},2000);//1秒=1000
+							}else{
+								setTimeout(function(){payReturn(sec - 1,userorderCode);},2000);
+							}
+						}
+					}
+				});
+			}else{
+				$('#toast_text').html('支付超时！');
+				$(".toast").show();
+	            setTimeout('$(".toast").hide();',2000);//1秒=1000
+	            setTimeout(function(){payWay_goBack();},2000);//1秒=1000
+			}
+		}
 		//返回
 		function payWay_goBack(){
 			window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
@@ -61,6 +93,7 @@
 							render	: "table",
 							text	: result.record.html
 						});	
+						payReturn(60,userorderCode);
 					}
 				}
 			});
