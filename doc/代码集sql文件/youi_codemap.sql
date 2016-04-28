@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50538
 File Encoding         : 65001
 
-Date: 2016-04-08 18:43:08
+Date: 2016-04-28 15:20:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,6 +37,7 @@ INSERT INTO `youi_codemap` VALUES ('4028808253bbee0e0153bbf92e470001', 'category
 INSERT INTO `youi_codemap` VALUES ('40288aaa538d8ce201538e0dc0890001', 'rzType', '上市类型', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aaa538d8ce201538e0f9a010007', 'rzProperty', '企业性质', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aaa53ea226d0153eacdb5d80002', 'stalls', '档位', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288aac5436aab4015436c297600003', 'companyScale', '企业规模', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aad53078875015307bebcbe0001', 'financingStatus', '发布状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aad53078875015307bfe6520004', 'financingType', '融资状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aad53078875015307c09d610007', 'recordType', '预约类型', '1', null);
@@ -55,11 +56,13 @@ INSERT INTO `youi_codemap` VALUES ('40288aad5307d0a6015308038d88002a', 'pubStatu
 INSERT INTO `youi_codemap` VALUES ('40288aad5307d0a601530804d9ad0030', 'addressStatus', '地址状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aad5307d0a6015308057ef50033', 'yesOrNo', '是或否', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aad5307d0a60153081a5bbe0037', 'isAbleVisible', '是否接受回访', '1', null);
-INSERT INTO `youi_codemap` VALUES ('40288aad5307d0a60153081a9204003a', 'acceptanceStatus', '投诉受理状态', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288aad5307d0a60153081a9204003a', 'acceptanceStatus', '物业投诉记录状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aae5322165501532219eb9d0002', 'buildingType', '楼栋类别', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aaf52fca91d0152fcabefdb0001', 'floorUsingStatus', '楼层使用状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aaf52fca91d0152fcae28580006', 'saleState', '销售状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288aaf52fca91d0152fcaf96140009', 'policyStatus ', '政策新闻发布状态', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288ab1545ac00301545afef65a0005', 'applayStatus', '创业加速申请状态', '1', null);
+INSERT INTO `youi_codemap` VALUES ('40288ab1545b749c01545bbc5f200002', 'disLevel', '分销等级', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab252f905180152f908e1d30001', 'roomstatus', '房间使用状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab2531113db015311211cf40001', 'policyApplyStatus', '政策申请状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab353e461150153e5929da60008', 'seat', '座位', '1', null);
@@ -71,7 +74,6 @@ INSERT INTO `youi_codemap` VALUES ('40288ab753f378770153f3b3f210000f', 'fx_statu
 INSERT INTO `youi_codemap` VALUES ('40288ab753f378770153f3b5f0300014', 'roomType', '会议室类型', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab753f378770153f3b6c6060017', 'roomProjector', '是否有投影仪', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab753f378770153f3b7ce3a001a', 'roomGm', '会议室规模', '1', null);
-INSERT INTO `youi_codemap` VALUES ('40288ab753f553d80153f5767cf10001', 'recordVisiteStatus', '导师类型', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288abc531c24bb01531c2a418c0001', 'resoStatus', '资源状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ac653cad0250153cad4e2920001', 'roundFinancing', '融资伦次', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288acb53314dd40153318d8a160009', 'oc_status', '一卡通预约状态', '1', null);
@@ -86,6 +88,7 @@ INSERT INTO `youi_codemap` VALUES ('40288acd52f2342b0152f237f5540006', 'ITorderS
 INSERT INTO `youi_codemap` VALUES ('40288acd52f2342b0152f238261a0007', 'tenementOrderStatus', '物业订单状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288acd52f2342b0152f238669e0008', 'resourceOrderStatus', '公共资源订单状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288acd52f2342b0152f277c39b0032', 'enteringStatus', '可预约状态', '1', null);
+INSERT INTO `youi_codemap` VALUES ('4028a18154281aae0154282f47130001', 'msgSendStatus', '消息发送状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('4028d0815094e93f01509519de3e0010', 'codeProjectType', '项目类型', '1', null);
 INSERT INTO `youi_codemap` VALUES ('4028d08150a1df4a0150a208fc1c0007', 'moduleWebType', 'war模块类型', '1', null);
 INSERT INTO `youi_codemap` VALUES ('4028d08150f3d9900150f408a1a70001', 'adapterGroup', '适配器类型', '1', null);
@@ -93,3 +96,5 @@ INSERT INTO `youi_codemap` VALUES ('4028d08151f126740151f184dbe80001', 'sex', '�
 INSERT INTO `youi_codemap` VALUES ('ff80808152f2fa0a0152f316e17d0006', 'enteringTime', '预约办理时段', '1', null);
 INSERT INTO `youi_codemap` VALUES ('ff80808152f2fa0a0152f38940d40009', 'bool', '是否', '1', null);
 INSERT INTO `youi_codemap` VALUES ('ff80808152f2fa0a0152f38b08a7000c', 'merchant_type', '商户类型', '1', null);
+INSERT INTO `youi_codemap` VALUES ('ff8080815413dfe70154143a44b1001d', 'teacherType', '导师类型', '1', null);
+INSERT INTO `youi_codemap` VALUES ('ff8080815413dfe70154143b5ee60024', 'projectType', '创业加速项目类型', '1', null);
