@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.common.OrderManager.service.OrdermanagerUserorderManager;
+import com.common.wxpay.common.Signature;
+import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.web.controller.BaseDataController;
 import com.gsoft.framework.util.DateUtils;
 
@@ -29,7 +31,7 @@ public class PayData extends BaseDataController {
 	private OrdermanagerUserorderManager ordermanagerUserorderManager;
 	
 	/**
-	 * 充值同步返回
+	 * 微信支付异步返回
 	 * @throws IOException 
 	 */
 	@RequestMapping("/notify.json")
@@ -37,15 +39,20 @@ public class PayData extends BaseDataController {
 		System.out.println("---------------微信支付回调----------------");
 		//xml请求解析
 		try {
-			Map<String, String> requestMap = parseXml(request);
-			for(Map.Entry<String, String> entry:requestMap.entrySet()){
+			Map<String, Object> requestMap = parseXml(request);
+			for(Map.Entry<String, Object> entry:requestMap.entrySet()){
 				System.out.println(entry.getKey()+"--->"+entry.getValue());
 			}
-			String resultCode = requestMap.get("result_code");
-			String returnCode = requestMap.get("return_code");
-			String orderCode = requestMap.get("out_trade_no");
-			String tranId = requestMap.get("transaction_id");
+			String sign = Signature.getSign(requestMap);
+			String res_sign =  requestMap.get("sign").toString();
+			if(!sign.equals(res_sign)){
+				throw new BusException("签名不正确！");
+			}
+			String resultCode = requestMap.get("result_code").toString();
+			String returnCode = requestMap.get("return_code").toString();
 			if("SUCCESS".endsWith(resultCode)&&"SUCCESS".endsWith(returnCode)){
+				String orderCode = requestMap.get("out_trade_no").toString();//支付订单号
+				String tranId = requestMap.get("transaction_id").toString();//微信返回交易订单号
 				OrdermanagerUserorder order = ordermanagerUserorderManager.getOrderByCode(orderCode);
 				order.setUserorderStatus("02");//02-已支付
 				order.setPayStatus("01");//01-已支付
@@ -70,9 +77,9 @@ public class PayData extends BaseDataController {
      * @throws Exception
      */
     @SuppressWarnings("unchecked")
-    public static Map<String, String> parseXml(HttpServletRequest request) throws Exception {
+    public static Map<String, Object> parseXml(HttpServletRequest request) throws Exception {
         // 将解析结果存储在HashMap中
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, Object> map = new HashMap<String, Object>();
 
         // 从request中取得输入流
         InputStream inputStream = request.getInputStream();
@@ -91,9 +98,6 @@ public class PayData extends BaseDataController {
         // 释放资源
         inputStream.close();
         inputStream = null;
-
         return map;
     }
-
-
 }
