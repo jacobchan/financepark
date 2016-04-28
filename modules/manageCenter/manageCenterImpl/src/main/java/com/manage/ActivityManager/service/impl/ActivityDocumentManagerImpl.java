@@ -23,8 +23,10 @@ import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.DocConverter;
+import com.manage.ActivityManager.entity.ActivityApply;
 import com.manage.ActivityManager.entity.ActivityDocument;
 import com.manage.ActivityManager.dao.ActivityDocumentDao;
+import com.manage.ActivityManager.service.ActivityApplyManager;
 import com.manage.ActivityManager.service.ActivityDocumentManager;
 
 @Service("activityDocumentManager")
@@ -36,6 +38,8 @@ public class ActivityDocumentManagerImpl extends BaseManagerImpl implements Acti
 	private FileStoreManager fileStoreManager;
 	@Value("#{configProperties['file.root.path']}")
 	private String root;
+	@Autowired
+	private ActivityApplyManager activityApplyManager;
 
      
     /**
@@ -97,6 +101,14 @@ public class ActivityDocumentManagerImpl extends BaseManagerImpl implements Acti
      */
     @EsbServiceMapping
     public void removeActivityDocument(@ServiceParam(name="documentId") String id) throws BusException{
+    	//同时文档数减一
+    	ActivityDocument document = activityDocumentDao.get(id);
+    	ActivityApply apply = document.getActivityApply();
+    	int count = apply.getDocumentCount();
+    	if(count>0){
+    		apply.setDocumentCount(count-1);
+    		activityApplyManager.saveActivityApply(apply);
+    	}
     	activityDocumentDao.remove(id);
     }
     /**
@@ -135,18 +147,42 @@ public class ActivityDocumentManagerImpl extends BaseManagerImpl implements Acti
      * 保存活动文档列表
      * @param o
      */
-	@Override
+	@EsbServiceMapping
 	public void saveActivityDocumentList(ActivityDocument o) {
-		String path = o.getDocumentPath() ;
-		if(StringUtils.isNotEmpty(path)){
-			String[] paths = path.split(",") ;
-			for(String tPath : paths){
-				ActivityDocument document = new ActivityDocument() ;
-				document.setActivityApply(o.getActivityApply());
-				document.setDocumentPath(tPath);
-				this.saveActivityDocument(document) ;
-			}
-		}
+		String applyId =  o.getActivityApply().getApplyId();
+		ActivityApply apply = activityApplyManager.getActivityApply(applyId);
+    	int count = apply.getDocumentCount();
+    	if(count<=0){//未添加过文档
+			String path = o.getDocumentPath() ;
+				if(StringUtils.isNotEmpty(path)){
+					String[] paths = path.split(",") ;
+					count = paths.length;
+					for(String tPath : paths){
+						ActivityDocument document = new ActivityDocument() ;
+						document.setActivityApply(apply);
+						document.setDocumentPath(tPath);
+						this.saveActivityDocument(document) ;
+					}
+				}
+    	}else{
+    		String edpath = o.getDocumentPath() ;
+    		if(StringUtils.isNotEmpty(edpath)){
+    			String[] edpaths = edpath.split(",") ;
+	    		if(StringUtils.isNotEmpty(o.getDocumentId())){//编辑已编辑文档
+	    			this.removeActivityDocument(o.getDocumentId());
+	    			count = count -1;
+	    		}//再次添加文档
+				count = count+edpaths.length;
+				for(String tPath : edpaths){
+					ActivityDocument document = new ActivityDocument() ;	
+					document.setActivityApply(apply);
+					document.setDocumentPath(tPath);
+					this.saveActivityDocument(document) ;
+				}
+    		}
+    	}
+    	apply.setDocumentCount(count);
+    	activityApplyManager.saveActivityApply(apply);
 	}
 
 }
