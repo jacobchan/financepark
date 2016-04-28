@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
+import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -323,5 +324,12 @@ public interface OrdermanagerUserorderManager extends BaseManager{
   	 */
   	public OrdermanagerUserorder saveUserOrder(OrdermanagerUserorder o)
 			throws BusException;
+  	/**
+  	 * 生成微信预支付订单号
+  	 * @param userorderCode
+  	 * @return
+  	 * @throws Exception
+  	 */
+  	public TempDemo getPrepayId(String userorderCode) throws Exception;
   
 }
