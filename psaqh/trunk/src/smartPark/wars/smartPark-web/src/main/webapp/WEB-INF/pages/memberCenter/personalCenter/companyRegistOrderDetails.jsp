@@ -25,7 +25,7 @@
 						<tbody>
 							<tr>
 								<td>
-									<p id="userorderProject">订单项目：商标注册</p>
+									<p id="userorderProject">订单项目：公司注册</p>
 								</td>
 							</tr>
 							<tr>
