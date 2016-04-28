@@ -361,46 +361,68 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	 * @param password
 	 * @param confirmPassword
 	 * @param oldPassword
+	 * @return 
+	 * @return 
 	 * @throws BusException
 	 */
 	@EsbServiceMapping
-	public void doModifyPassword(@ServiceParam(name = "password") String password,
+	public Record doModifyPassword(@ServiceParam(name = "password") String password,
 			@ServiceParam(name = "confirmPassword") String confirmPassword,
 			@ServiceParam(name = "oldPassword") String oldPassword,
 			@ServiceParam(name = "userId", pubProperty = "userId") String userId) throws BusException {
 		// TODO Auto-generated method stub
+		Record record = new Record();
+		String msg="";
 		if (StringUtils.isEmpty(oldPassword)) {
-			throw new BusException("旧密码不能为空！");
+			//throw new BusException("旧密码不能为空！");
+			msg="旧密码不能为空";
 		}
 		if (StringUtils.isEmpty(password)) {
-			throw new BusException("新密码不能为空！");
+			//throw new BusException("新密码不能为空！");
+			msg="新密码不能为空";
 		}
 		if (StringUtils.isEmpty(confirmPassword)) {
-			throw new BusException("确认密码不能为空！");
+			//throw new BusException("确认密码不能为空！");
+			msg="确认密码不能为空";
 		}
 
+		
 		if (!password.equals(confirmPassword)) {
-			throw new BusException("两次输入的密码不一致！");
+			//throw new BusException("两次输入的密码不一致！");
+			msg="两次输入的密码不一致";
 		}
 
 		MemberInformation member = null;
 		try {
 			member = (MemberInformation) this.memberInformationDao.get(userId);
 		} catch (Exception e) {
-			throw new BusException("查找用户ID[" + userId + "]出错！");
+			//throw new BusException("查找用户ID[" + userId + "]出错！");
+			msg="查找用户ID[" + userId + "]出错！";
 		}
 		Assert.notNull(member, "未找到用户！");
-
-		if (!PasswordUtils.md5Password(oldPassword).equals(member.getMemberPassword())) {
-			throw new BusException("请输入正确的旧密码！");
-		}
-
 		if (!password.equals(confirmPassword)) {
-			throw new BusException("两次输入的密码不一致！");
+			//throw new BusException("两次输入的密码不一致！");
+			msg="两次输入的密码不一致！";
+		}
+		if (!PasswordUtils.md5Password(oldPassword).equals(member.getMemberPassword())) {
+			//throw new BusException("请输入正确的旧密码！");
+			msg="请输入正确的旧密码！";
+		}else{
+			if (password.equals(oldPassword)) {
+				msg="新旧密码不能一样";
+			}else{
+				member.setMemberPassword(PasswordUtils.md5Password(password));
+				memberInformationDao.save(member);
+				if(PasswordUtils.md5Password(password).equals(member.getMemberPassword())){
+					msg="修改成功";
+				}
+			}
 		}
 
-		member.setMemberPassword(PasswordUtils.md5Password(password));
-		memberInformationDao.save(member);
+		
+
+		record.put("msg", msg);
+		return record;
 	}
 
 	/**
