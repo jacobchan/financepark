@@ -27,13 +27,15 @@
 					<a href="">招商中心</a><img src="../styles/images/zs/right-j-b.png" border="0" />
 					<a href="" class="current">园区资讯</a>
 			</div>
-
-			<div class="fl w895">				
+			<div class="fl w895">	
 				<div class="park-nav clearfix">
 					<ul class="ull">
 					
 					</ul>
 				</div>
+				<div class="clearfix tc undis" id="tp5">
+			 		 <img src="../styles/images/loading_2.gif" border="0" />
+				</div>	
 				<div class="park-box">
 					<ul class='pb-list-group' id="01"></ul>
 					<ul class='pb-list undis' id="02"></ul>
@@ -152,6 +154,7 @@
  			});
 				
 	        function refreshData(pageIndex,pageSize){
+	        	$("#tp5").removeClass("undis") ;
 	 			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
 	 			$.youi.ajaxUtils.ajax({
 	 				url:serviceURL,
@@ -161,7 +164,9 @@
 	 				success:function(results){
 	 					if(results&&results.records){
 	 						getHtml(results.records);
+	 						$("#tp5").addClass("undis") ;
 	 					}
+	 					$("#tp5").addClass("undis") ;
 	 				}
 	 			});
 	 		}
@@ -220,6 +225,7 @@
  			});
 				
 	        function refreshData(pageIndex,pageSize){
+	        	$("#tp5").removeClass("undis") ;
 	 			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
 	 			$.youi.ajaxUtils.ajax({
 	 				url:serviceURL,
@@ -229,7 +235,9 @@
 	 				success:function(results){
 	 					if(results&&results.records){
 	 						getHtml(results.records);
+	 						$("#tp5").addClass("undis") ;
 	 					}
+	 					$("#tp5").addClass("undis") ;
 	 				}
 	 			});
 	 		}
@@ -273,6 +281,7 @@
  			});
 				
 	        function refreshData(pageIndex,pageSize){
+	        	$("#tp5").removeClass("undis") ;
 	 			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
 	 			$.youi.ajaxUtils.ajax({
 	 				url:serviceURL,
@@ -282,7 +291,9 @@
 	 				success:function(results){
 	 					if(results&&results.records){
 	 						getHtml(results.records);
+	 						$("#tp5").addClass("undis") ;
 	 					}
+	 					$("#tp5").addClass("undis") ;
 	 				}
 	 			});
 	 		}
