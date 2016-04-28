@@ -18,7 +18,7 @@ $(function(){
 				$('#userorderTime').html(record.userorderTime);
 				$('#userorderProject').html("订单项目："+record.userorderProject);
 				$('#userorderAmount').html(record.userorderAmount+"元");
-				$('#publicResoIdDate').html(record.mettingOrder.publicResoIdDate);
+				$('#publicResoIdDate').html(record.mettingOrder.publicResoIdDate.substring(0,10));
 			}
 		}
 	});
