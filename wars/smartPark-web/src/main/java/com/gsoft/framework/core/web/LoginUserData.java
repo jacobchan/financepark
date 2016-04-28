@@ -19,6 +19,7 @@ import com.common.MessageCenter.service.McMsgdatasManager;
 import com.gsoft.entity.MessageService;
 import com.gsoft.framework.core.web.controller.BaseDataController;
 import com.gsoft.framework.core.web.view.DataModelAndView;
+import com.gsoft.framework.security.DefaultLoginFormToken;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.PasswordUtils;
 
@@ -109,6 +110,15 @@ public class LoginUserData extends BaseDataController {
 			return new DataModelAndView("手机验证码不正确");
 		}
 		memberInformationManager.saveReister(passwd, repasswd, phone);
+		// 自动登录
+		try {
+			DefaultLoginFormToken token = new DefaultLoginFormToken(phone,
+					passwd, false, request.getHeader("host"));
+			token.setLoginType("memberCenter");
+			org.apache.shiro.SecurityUtils.getSubject().login(token);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return new DataModelAndView("000000");
 	}
 	
