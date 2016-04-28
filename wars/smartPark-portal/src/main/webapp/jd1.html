@@ -182,9 +182,7 @@ a.c-b1:hover {
 				</div>
 
 				<!-- 分页 信息 -->
-				<div id="page_content" class="ycc-page clearfix fr"
-					style="text-align: right">
-					
+				<div id="page_content" class="ycc-page clearfix fr">
 					<span class="c-b1 mr30 f12" id="totalPage">找到相关结果约180个</span> 
 				
 					<a id="prev" href="javascript:void(0);" class="no-c"><i class="fa fa-caret-left"></i></a> 
@@ -268,8 +266,8 @@ a.c-b1:hover {
 					}
 			})
 			//分页事件绑定
-			var count = $("#page_content").children("a").length;
-			$("#page_content").children("a").each(function(index,element){
+			//var count = $("#page_content a").length;
+			/* $("#page_content").children("a").each(function(index,element){
 				$(element).attr("href","javascript:void(0)");
 				//初始化页码，除了上一页和下一页的翻页部分
 				if(index>0 && index < count-1 ){
@@ -279,21 +277,55 @@ a.c-b1:hover {
 					//绑定页码的点击事件
 					$(element).on("click",{count:count,index:index},pageClickBtn);
 				}
-			});
+			}); */
+			$("#page_content a").attr("href","javascript:void(0)");
+			//console.log("count"+count);
+			/* $("#page_content").on("click","a",function(e){
+			    var index = $(this).index();
+				var data = {};
+				data.count = count;
+				data.index = index;
+				if(index>1 && index < count-1){
+				pageClickBtn(data)
+				} 
+				//var index = $(this).index();
+				var send_value = $("ul.tb_header li.active").attr("send_val"),
+				    active_page;
+				if($(this).attr("id") == "prev"){
+					if($(this).attr("page")<=1){
+						return;
+					}
+					active_page = $(this).attr("page")-1;
+				}else if($(this).attr("id")=="next"){
+					
+				}else{
+					alert("query")
+				   
+				}
+				 query($("ul.tb_header li.active").attr("send_val"),$(this).attr("page"))
+			}) */
+			/* $("#page_content").on("click","span",function(){
+				if($(this).attr("id")=="prev"){
+					pre_click()
+				}else if($(this).attr("id")=="next"){
+					next_click();
+				}
+			}) */
 			//上一页
-			$("#prev").on("click",pre_click);
+			//$("#prev").on("click",pre_click);
 			//下一页
-			$("#next").on("click",next_click);
+			//$("#next").on("click",next_click);
 			
-			removePreNextBtn();
+			//removePreNextBtn();
 			
 		})
 		//页码的点击事件
 		function pageClickBtn(event){
+			alert("1")
 			//页面显示的总页数 这里是6页 
-			var count = event.data.count;
+			var count = event.count;
 			//当前页数索引
-			var index = event.data.index;
+			var index = event.index;
 
 			if(index == count-2){
 				//重构页码HTML
@@ -621,7 +653,7 @@ a.c-b1:hover {
 					
 				} else {
 					//参数更新
-					params = [ 'px=' + arguments[0], 'pg=' + pg,
+					params = [ 'px=' + arguments[0], 'pg=' + curr_p,
 								'minprice=' + minprice, 'maxprice=' + maxprice,
 								'cid=' + cityid, 'promotion=' + promotion,
 								'rank=' + rank ];	
@@ -654,7 +686,8 @@ a.c-b1:hover {
 						}
 						var record = result.records;
 						parseRecord_(record);
-						refreshPageContent();
+						//本来下面的方法就是刷新分页的方法
+						//refreshPageContent();
 						
 					} else {
 						$("#isLoading").addClass("undis");
@@ -667,25 +700,93 @@ a.c-b1:hover {
 				}
 			});
 		}
+		//分页方法
+		//var pageSize =10; 
+		function getPaging(result){
+			var html = "<span class='c-b1 mr30 f12' id='totalPage'>找到相关结果约"+result.totalput+"个</span>";
+			var send_value = $("ul.tb_header li.active").attr("send_val");
+			var pages = result.totalpg+1,lastPage = pages-1;
+			var cur_page = result.page;
+			if(cur_page>1){
+				var prePage = cur_page-1;
+				html+="<a id='prev' href='javascript:void(0)' onclick='query("+send_value+","+prePage+")' class='no-c'><i class='fa fa-caret-left'></i></a>";
+			}
+			
+			if(pages-1<10){
+		   	  for(var i=1;i<pages;i++){
+				if(i==cur_page){
+					html+= "<a href='javascript:void(0)' class='current' onclick='query("+send_value+","+i+")'>"+i+"</a>";
+				}else{
+					html+= "<a href='javascript:void(0)' onclick='query("+send_value+","+i+")'>"+i+"</a>";
+				}
+			  }
+			}else{
+				//pages>10
+				if(cur_page<6){
+					for(var i=1;i<8;i++){
+						if(i==cur_page){
+							html+= "<a href='javascript:void(0)' class='current' onclick='query("+send_value+","+i+")'>"+i+"</a>";
+						 }else{
+							html+= "<a href='javascript:void(0)' onclick='query("+send_value+","+i+")'>"+i+"</a>";
+						 }
+				    }
+					html+="...<a href='javascript:void(0)' onclick='query("+send_value+","+lastPage+")'>"+lastPage+"</a>"
+			
+				}else if(cur_page>5&&cur_page<lastPage-3){
+					html+= "<a href='javascript:void(0)' onclick='query("+send_value+",1)'>1</a>...";
+					for(var i=cur_page-2;i<cur_page+3;i++){
+						if(i==cur_page){
+							html+= "<a href='javascript:void(0)' class='current' onclick='query("+send_value+","+i+")'>"+i+"</a>";
+						 }else{
+							html+= "<a href='javascript:void(0)' onclick='query("+send_value+","+i+")'>"+i+"</a>";
+						 }
+					}
+					//后
+					html+="...<a href='javascript:void(0)' onclick='query("+send_value+","+lastPage+")'>"+lastPage+"</a>"
+		
+				}else{
+					html+= "<a href='javascript:void(0)' onclick='query("+send_value+",1)'>1</a>...";
+					for(var i=lastPage-4;i<lastPage+1;i++){
+						if(i==cur_page){
+							html+= "<a href='javascript:void(0)' class='current' onclick='query("+send_value+","+i+")'>"+i+"</a>";
+						 }else{
+							html+= "<a href='javascript:void(0)' onclick='query("+send_value+","+i+")'>"+i+"</a>";
+						 }
+					}
+				}
+				
+				
+			}
+			if(cur_page<pages-1){
+				var nextPage = cur_page+1
+				html+="<a href='javascript:void(0)' onclick='query("+send_value+","+nextPage+")' id='next'><i class='fa fa-caret-right'></i></a>"
+			}
+			html+="<span class='skip'><font >总共有：</font><font id='total_page_span'>"+result.totalpg+"</font><font>页</font></span>";
+			//alert(html)
+			$("#page_content").html(html);
+		}
+		
 		//查询结果列表js构建
 		function parseRecord_(record) {
 			if (record.length > 0) {
 				$("#noresult").addClass("undis");
 				//$(".jd-order-group").remove();
 				$("#totalRecord").html(record[0].totalput);
-				$("#totalPage").empty();
+				//$("#totalPage").empty();
 				//$("#total_page").val(record[0].totalpg);
 				//页面中显示总共有多少页
-				$("#total_page_span").text(record[0].totalpg);
+				//$("#total_page_span").text(record[0].totalpg);
 				//$("#totalPage").html("共" + record[0].totalpg + "页");
-				$("#totalPage").html("找到相关结果约" + record[0].totalput + "个");
+				//$("#totalPage").html("找到相关结果约" + record[0].totalput + "个");
 				totalPagesize = record[0].totalpg;
 			} else {
 				$("#noresult").removeClass("undis");
 				$("#totalRecord").html("0");
-				$("#totalPage").empty();
+				//$("#totalPage").empty();
 				//$("#totalPage").html("共 0 页");
-				$("#totalPage").html("共 0 个结果")
+				//$("#totalPage").html("共 0 个结果")
+				$("#page_content").html("<span class='c-b1 mr30 f12' id='totalPage'>找到相关结果约0个</span>");
+				return;
 			}
 			for (var i = 1; i < record.length; i++) {//record[0] 存放返回的头文件信息，包括记录数，页数等
 				var hotel = record[i];
@@ -714,6 +815,9 @@ a.c-b1:hover {
 				html += "</tr></table></div>";
 				$("#hotelblock").append(html);
 			}
+			
+			getPaging(record[0]);
+			
 			$("#loading").addClass("undis");
 			$("#isLoading").addClass("undis");
 		}
