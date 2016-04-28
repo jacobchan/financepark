@@ -74,7 +74,7 @@ function _parseRecords(records){
 				ioc = cenUrl+"common/uploadImage.html?repository=/swfupload&path="+records[i].rzLogo+"&method=show";
 			}
 			var enterDiv = '<div class="yqfu-com-centent">'+
-			'<a><div class="ycc-con"><img src="'+ioc+'" width="106" height="106"></div></a>'+
+			'<a href="industry.html?id='+records[i].rzId+'"><div class="ycc-con"><img src="'+ioc+'" width="106" height="106"></div></a>'+
 			'<a href="industry.html?id='+records[i].rzId+'"><p class="p-bottom">'+rzRemark+'</p></a>'+
 			'<div class="clearfix c-bottom lh24">'+
 			'<a href="industry.html?id='+records[i].rzId+'"><font class="c-o f14">'+a+'</font></a>'+
