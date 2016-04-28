@@ -15,7 +15,7 @@ $(function(){
 				var record = results.record;
 				$('#userorderCode').html("订单号："+record.userorderCode);
 				$('#userorderStatus').html(record.status);
-				$('#userorderTime').html(record.userorderTime);
+				$('#userorderTime').html(record.userorderTime.substring(0,10));
 				$('#userorderProject').html("订单项目："+record.userorderProject);
 				$('#userorderAmount').html(record.userorderAmount+"元");
 				$('#publicResoIdDate').html(record.mettingOrder.publicResoIdDate.substring(0,10));
