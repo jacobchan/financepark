@@ -28,7 +28,7 @@
 		<youi:gridCol property="createTime"  caption="创建时间" align="center" width="15%" />
 		
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
-			<youi:button name="edit" caption="修改"/>
+			<%-- <youi:button name="edit" caption="修改"/> --%>
 			<youi:button name="remove" caption="删除"/>
 		</youi:gridCol>
 	</youi:grid>
