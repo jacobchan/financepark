@@ -69,8 +69,12 @@ function _parseRecords(records){
 			if(records[i].enTypeId!=null){
 				enTypeName = (stringLen(records[i].enTypeId.enTypeName)>3)?stringCut(records[i].enTypeId.enTypeName, 3):records[i].enTypeId.enTypeName;
 			}
+			var ioc = "../styles/images/yqfw/comp1.png";
+			if(records[i].rzLogo!=null){
+				ioc = cenUrl+"common/uploadImage.html?repository=/swfupload&path="+records[i].rzLogo+"&method=show";
+			}
 			var enterDiv = '<div class="yqfu-com-centent">'+
-			'<div class="ycc-con"><img src="../styles/images/yqfw/comp1.png" width="106" height="106"></div>'+
+			'<a><div class="ycc-con"><img src="'+ioc+'" width="106" height="106"></div></a>'+
 			'<a href="industry.html?id='+records[i].rzId+'"><p class="p-bottom">'+rzRemark+'</p></a>'+
 			'<div class="clearfix c-bottom lh24">'+
 			'<a href="industry.html?id='+records[i].rzId+'"><font class="c-o f14">'+a+'</font></a>'+
