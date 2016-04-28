@@ -2,38 +2,37 @@
 <%@ include file="/WEB-INF/pages/include.jsp" %>
 <youi:html title="一卡通办理">
 	<youi:body decorator="memcenter">  
-				<div class="w1000">
-					<h3 class="per-h3">一卡通办理<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要申请一卡通</a></h3>
-					<div class="clearfix mt40" rules=none>
-						<div class="mt20 gr-txl clearfix lh30">
-							<label class="fl mr20 f16">申请时间：</label>
-							<input class="bd-input fl" type="text" id="startTime"><span class="fl ml15 mr15">到</span>
-							<input class="bd-input fl" type="text" id="endTime">
-							<div class="inp-box ml20"><input placeholder="订单号查询" type="text" id="ocCode"><a class="fa fa-search" href=""></a></div>
-							<input value="搜索" class="hhf-submit f14 fr" type="button">
-						</div>											   					    
-						<table class="gt-table mt20">
-							<colgroup>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="150"></col>
-								<col width="120"></col>
-								<col width="150"></col>
-								
-							</colgroup>
-							<tbody><tr>
-								<th>订单号</th>
-								<th>预约时间</th>
-								<th>预约用户</th>
-								<th>状态</th>
-								<th>操作</th>
-							</tr></tbody>							
-                         <tbody class="oclist"></tbody>                        
-                         </table>                     
-					<div class="tcdPageCode fr"></div>
-					</div>
-				</div>
-			</youi:body>
+		<div class="w1000">
+			<h3 class="per-h3">一卡通办理<a href="javascript:;" class="fr c-333 f14" id="a1"><i class="fa fa-plus-square fl mr10"></i>我要申请一卡通</a></h3>
+				<div class="clearfix mt40" rules=none>
+					<div class="mt20 gr-txl clearfix lh30">
+						<label class="fl mr20 f16">申请时间：</label>
+						<input class="bd-input fl" type="text" id="startTime"><span class="fl ml15 mr15">到</span>
+						<input class="bd-input fl" type="text" id="endTime">
+						<div class="inp-box ml20"><input placeholder="订单号查询" type="text" id="ocCode"><a class="fa fa-search" href=""></a></div>
+						<input value="搜索" class="hhf-submit f14 fr" type="button">
+					</div>											   					    
+					<table class="gt-table mt20">
+						<colgroup>
+							<col width="150"></col>
+							<col width="150"></col>
+							<col width="150"></col>
+							<col width="120"></col>
+							<col width="150"></col>	
+						</colgroup>
+						<tbody><tr>
+							<th>订单号</th>
+							<th>预约时间</th>
+							<th>预约用户</th>
+							<th>状态</th>
+							<th>操作</th>
+						</tr></tbody>							
+                        <tbody class="oclist"></tbody>                        
+                    </table>                     
+				<div class="tcdPageCode fr"></div>
+			</div>
+		</div>
+	</youi:body>
 				
     <!--***弹窗start****************************************-->
   
@@ -66,24 +65,30 @@
 	var serviceURL = baseUrl+'propertyservicemanagerOcManager/getPagerOc.json';
 	$(function () {	
 		//分页页码显示
-		 $.ajax({
+		$.ajax({
 			url:baseUrl+'propertyservicemanagerOcManager/getTotalCount.json', 
+			beforeSend: function(){
+				//开始显示dataLoading样式
+				$.showBox.DataLoading();
+			},
 			success:function(results){	
 				var totalCount=results.records[0].totalCount;
 				pageCount = Math.ceil(totalCount / pageSize);//页数						
-							 refreshData(1,pageSize);
-							 $(".tcdPageCode").empty();
-								 if(totalCount>0){
-								    $(".tcdPageCode").createPage({
-								       pageCount:pageCount,
-								       current:1,
-								       backFn:function(p){
-								       currentIndex = p;
-								       this.pageCount=pageCount;
-								       refreshData(p,pageSize);
-								    }
-								  });
-								}
+				refreshData(1,pageSize);
+				$(".tcdPageCode").empty();
+				if(totalCount>0){
+					$(".tcdPageCode").createPage({
+						pageCount:pageCount,
+				        current:1,
+						backFn:function(p){
+							currentIndex = p;
+							this.pageCount=pageCount;
+							refreshData(p,pageSize);
+						}
+						});
+				}
+				//关闭dataLoading样式
+				$.showBox.CloseDataLoading();
 			}
 		}); 			
 	});	
@@ -159,6 +164,10 @@
 			url:baseUrl+'propertyservicemanagerOcManager/getTotalCount.json',
 			//url:serviceURL, 
 			data:params.join('&'),
+			beforeSend: function(){
+				//开始显示dataLoading样式
+				$.showBox.DataLoading();
+			},
 			success:function(results){	
 				var totalCount=results.records[0].totalCount;
 				pageCount = Math.ceil(totalCount / pageSize);//页数						
@@ -178,7 +187,7 @@
 				 }
               }
         }); 			
-    });	
+	});	
     //根据订单号查询 分页列表
     function refreshData_query(pageIndex,pageSize){
 		var ocCode=$("#ocCode").val();	
