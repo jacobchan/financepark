@@ -68,7 +68,11 @@
 	$(function () {	
 		//分页页码显示
 	    $.ajax({
-			url:baseUrl+'propertyservicemanagerBxManager/getTotalCount.json', 			
+			url:baseUrl+'propertyservicemanagerBxManager/getTotalCount.json', 
+			beforeSend: function(){
+				//开始显示dataLoading样式
+				$.showBox.DataLoading();
+			},
 			success:function(results){	
 				var totalCount=results.records[0].totalCount;				
 				pageCount = Math.ceil(totalCount / pageSize);//页数	
@@ -85,6 +89,8 @@
 						}
 				 	});	
 				}
+				//关闭dataLoading样式
+				$.showBox.CloseDataLoading();
 			}
 		}); 			
 	});		
@@ -190,13 +196,16 @@
 	//根据订单号查询
 	$('.hhf-submit.f14.fr.query').click(function(){	
 		var bxCode=$("#bxCode").val();
-		//alert(ocCode);
 		var startTime=$("#startTime").val(); 
 		var endTime=$("#endTime").val(); 			
 		var params = ['bxCode='+bxCode,'operator:bxCode=LIKE','startTime='+startTime,'endTime='+endTime];
 		$.ajax({
 			url:baseUrl+'propertyservicemanagerBxManager/getTotalCount.json',
 			data:params.join('&'),
+			beforeSend: function(){
+				//开始显示dataLoading样式
+				$.showBox.DataLoading();
+			},
 			success:function(results){	
 				var totalCount=results.records[0].totalCount;
 				pageCount = Math.ceil(totalCount / pageSize);//页数					
@@ -213,6 +222,8 @@
 					    }
 					});
 				}
+				//关闭dataLoading样式
+				$.showBox.CloseDataLoading();
               }
         }); 			
     });	
