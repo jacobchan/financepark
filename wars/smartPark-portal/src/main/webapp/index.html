@@ -627,8 +627,11 @@
 				<div class="ii_tit hand">
 					<span class="span_bold">会议室预定</span><span>车辆预定</span><span>广告资源预定</span>
 				</div>
+				<div class="clearfix tc undis" id="tp6">
+			 		 <img src="../styles/images/loading_2.gif" border="0" />
+				</div>
 				<ul class="hand_ul" id="roomPage" style="min-height: 304px;">
-
+					
 				</ul>
 				<ul class="hand_ul" id="carPage"
 					style="display: none; min-height: 304px;">
@@ -645,8 +648,8 @@
                 <a href="javascript:;">更多》</a> -->
 				</div>
 				<!-- 加载loading图片 -->
-				<div class="clearfix tc w100 undis" id="tp5">
-					<img src="../styles/images/loader.gif" border="0" />
+				<div class="clearfix tc undis" id="tp5">
+			 		 <img src="../styles/images/loading_2.gif" border="0" />
 				</div>
 				<div class="tipbox tip_item line_h">
 					<!-- <ul>
@@ -666,8 +669,8 @@
 				</div>
 				<div class="tipbox line_h">
 					<!-- 加载loading图片 -->
-					<div class="clearfix tc w100 undis" id="tp4">
-						<img src="../styles/images/loader.gif" border="0" />
+					<div class="clearfix tc undis" id="tp4">
+			 		 	<img src="../styles/images/loading_2.gif" border="0" />
 					</div>
 					<ul id="ul2">
 						<!-- <li><a href="./zscenter/zs4.html">杭州3年建100个特色小镇</a></li>
@@ -945,6 +948,7 @@
 	</script>
 	<script type="text/javascript">
 		$(function() {
+			$("#tp6").removeClass("undis");
 			var pageSize = 3;
 			var params = [ 'genreCode=0301', 'pager:pageSize=' + pageSize ];
 			var serviceURL = baseUrl
@@ -958,8 +962,10 @@
 				dataType : 'jsonp',
 				success : function(results) {
 					if (results && results.records) {
+						$("#tp6").addClass("undis");
 						_sparseRecords(results.records);
 					}
+					$("#tp6").addClass("undis");
 				}
 			});
 
@@ -996,6 +1002,7 @@
 
 	<script type="text/javascript">
 		$(function() {
+			$("#tp6").removeClass("undis");
 			var pageSize = 3;
 			var params = [ 'genreCode=0302', 'pager:pageSize=' + pageSize ];
 			var serviceURL = baseUrl
@@ -1009,8 +1016,10 @@
 				dataType : 'jsonp',
 				success : function(results) {
 					if (results && results.records) {
+						$("#tp6").addClass("undis");
 						_parseRecordss(results.records);
 					}
+					$("#tp6").addClass("undis");
 				}
 			});
 
@@ -1050,6 +1059,7 @@
 
 	<script type="text/javascript">
 		$(function() {
+			$("#tp6").removeClass("undis");
 			var serviceURL = baseUrl
 					+ "publicutilitiesmanagerResoManager/goPage.json?genreCode=0303&indexPage=1";//0303:广告
 
@@ -1060,8 +1070,10 @@
 				dataType : 'jsonp',
 				success : function(results) {
 					if (results && results.records) {
+						$("#tp6").addClass("undis");
 						_parseRecord(results.records);
 					}
+					$("#tp6").addClass("undis");
 				}
 			});
 
