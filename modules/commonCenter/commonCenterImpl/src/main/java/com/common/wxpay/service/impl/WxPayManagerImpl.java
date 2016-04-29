@@ -83,7 +83,8 @@ public class WxPayManagerImpl extends BaseManagerImpl implements WxPayManager{
 			finalpackage.put("partnerid", Configure.getMchid());
 			finalpackage.put("prepayid", prepayId);
 			finalpackage.put("noncestr", RandomStringGenerator.getRandomStringByLength(32));
-			finalpackage.put("timestamp", System.currentTimeMillis());
+			String timestamp = String.valueOf(System.currentTimeMillis()/1000);
+			finalpackage.put("timestamp", timestamp);
 			finalpackage.put("package", "Sign=WXPay");
 	        //根据API给的签名规则进行签名
 	        String sign = Signature.getSign(finalpackage);
