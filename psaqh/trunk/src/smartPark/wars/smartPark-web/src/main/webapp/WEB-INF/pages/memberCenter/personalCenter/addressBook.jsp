@@ -83,7 +83,7 @@
 	
 		//拼接卡号列表
 	function _parseRecords(record){				
-		$(".list").empty();			
+		var html="";		
 		if(record.length>0){
 	 		for(var i=0;i<record.length;i++){
 	 			  var memberDescribe2="";
@@ -98,19 +98,20 @@
 	 			   }else{
 	 				  createTime="";
 	 				  } 
-					var html= "<tr>"+
+					html+= "<tr>"+
 				      			 "<td >"+record[i].memberName+"</td>"+
 				     			 "<td >"+record[i].memberPhoneNumber+"</td>"+
 				      			 "<td >"+memberDescribe2+"</td>"+
 				      			 "<td>"+createTime+"</td>"+				      				    					    
                       		  " </tr>"; 
-			          $(".list").append(html);
-	 		     }
-	 		}else{
+			          
+	 		   }
+	 			$(".list").html(html);
+	 	}else{
 				var	html1 =  '<tr>'
 					html1 += '	<td colspan="6">暂无数据</td>'
 					html1 += '</tr>'
-				$("#myRecord").html(html1);	
+				$(".list").html(html1);	
 			}			
 	};
 		//根据名字查询
