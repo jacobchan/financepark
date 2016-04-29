@@ -66,10 +66,10 @@
 			<a href="javascript:;" class="tc-close"></a>
 			<div class="w70 tc mt40" style="margin-left:15%">
 				<div id="qrcodeTable" style="margin-left: 50px;"></div>
-				<p style="margin-top: 10px;">订单编号：<span class="c-o fkcodes" id="payCode"></span></p>
+				<p style="margin-top: 10px;">订单编号：<span class="fkcodes" id="payCode"></span></p>
 				<p style="margin-top: 10px;">订单金额：<span class="c-o fkcodes" id="userorderAmount"></span> 元</p>
 				<!-- <p style="float: left;">订单类型：<span class="bftime" id="userorderGenreName"></span></p> -->
-				<p class="c-o f12 mt10">提示：微信支付，请扫码支付</p>
+				<p class="f14 mt10">请使用微信扫描二维码以完成支付</p>
 			</div>
 		</div>
 	</div>
