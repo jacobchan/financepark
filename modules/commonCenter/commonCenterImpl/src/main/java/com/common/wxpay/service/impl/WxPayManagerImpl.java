@@ -79,11 +79,11 @@ public class WxPayManagerImpl extends BaseManagerImpl implements WxPayManager{
 		if("SUCCESS".endsWith(resultCode)&&"SUCCESS".endsWith(returnCode)){
 			String prepayId = element.element("prepay_id").getText();//预支付订单号
 			Map<String, Object> finalpackage = new HashMap<String, Object>();
-			finalpackage.put("appId", Configure.getAppid());
-			finalpackage.put("partnerId", Configure.getMchid());
-			finalpackage.put("prepayId", prepayId);
-			finalpackage.put("nonce_str", RandomStringGenerator.getRandomStringByLength(32));
-			finalpackage.put("timeStamp", System.currentTimeMillis());
+			finalpackage.put("appid", Configure.getAppid());
+			finalpackage.put("partnerid", Configure.getMchid());
+			finalpackage.put("prepayid", prepayId);
+			finalpackage.put("noncestr", RandomStringGenerator.getRandomStringByLength(32));
+			finalpackage.put("timestamp", System.currentTimeMillis());
 			finalpackage.put("package", "Sign=WXPay");
 	        //根据API给的签名规则进行签名
 	        String sign = Signature.getSign(finalpackage);
