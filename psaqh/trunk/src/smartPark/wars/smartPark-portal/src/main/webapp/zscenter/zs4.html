@@ -46,7 +46,7 @@
 				<div class="tcdPageCode fr undis" id="33"></div>
 			</div>
 			<!--这里自己调用 页面加载动态效果-->	
-			 <div class="clearfix undis" id="loading">
+			<!--  <div class="clearfix undis" id="loading">
 				<div id="contain">
 				    <div class='wrap' id='wrap1'>
 				    	<div class='part' id='part1'></div>
@@ -61,7 +61,7 @@
 				    	<div class='part' id='part4'></div>
 				    </div>
 				</div>
-			</div>				
+			</div>				 -->
 			<div class="fr w285"><div id="youi_page_right" class="youi-page-right clearfix"></div></div>
 		</div>
 	</div>
@@ -123,7 +123,7 @@
 		}
 		
 		$(function(){
-			$("#loading").removeClass("undis") ;
+			//$("#loading").removeClass("undis") ;
 			var pageSize=3;
 		    var pageCount=1;
 		    var serviceURL = baseUrl+"nmIssuenewsManager/getPagerAllPolicy.json?issueTypeCode=0101";
@@ -144,7 +144,7 @@
  						    }
  						});
  					}else{
- 						$("#loading").addClass("undis") ;
+ 						//$("#loading").addClass("undis") ;
  						$("#01").empty() ;
  						$("#22").hide() ;
  						$("#33").hide() ;
@@ -194,7 +194,7 @@
 								"</li>";
 					$("#01").append(html) ;
 	         	}
-	         	$("#loading").addClass("undis") ;
+	         	//$("#loading").addClass("undis") ;
 	 		}
 		});
 		$(function(){
