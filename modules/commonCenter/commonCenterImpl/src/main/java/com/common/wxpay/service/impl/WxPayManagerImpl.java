@@ -91,7 +91,11 @@ public class WxPayManagerImpl extends BaseManagerImpl implements WxPayManager{
 	        finalpackage.put("sign", sign);
 			return finalpackage;
 		}else{
-			throw new BusException("获取预支付订单号失败！");
+			String errorStr = "获取预支付订单号失败！";
+			if(element.element("err_code_des") != null){
+				errorStr = element.element("err_code_des").getText();
+			}
+			throw new BusException(errorStr);
 		}
 	}
 }
