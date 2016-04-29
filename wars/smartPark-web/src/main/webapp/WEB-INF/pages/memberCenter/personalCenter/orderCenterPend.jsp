@@ -45,7 +45,7 @@
 	<div class="toast">
         <div class="toast-con clearfix">
             <div class="close-toast fr"></div>
-            <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
+            <p class="tc mt25 f18" id="toast_text" style="color:#ff6715">修改成功！</p>
         </div>         
     </div>
     	
@@ -61,18 +61,100 @@
 			</div>
 		</div>
 	</div>
+	<div class="bg-tanc m2">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="w70 tc mt40" style="margin-left:15%">
+				<div id="qrcodeTable" style="margin-left: 50px;"></div>
+				<p style="margin-top: 10px;">订单编号：<span class="c-o fkcodes" id="payCode"></span></p>
+				<p style="margin-top: 10px;">订单金额：<span class="c-o fkcodes" id="userorderAmount"></span> 元</p>
+				<!-- <p style="float: left;">订单类型：<span class="bftime" id="userorderGenreName"></span></p> -->
+				<p class="c-o f12 mt10">提示：微信支付，请扫码支付</p>
+			</div>
+		</div>
+	</div>
 	<!--***弹窗 ****************************************-->	
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.qrcode.min.js"></script>
 	<script type="text/javascript">
 	var pageSize=10;
 	var pageCount=1;
 	var currentIndex = 1;
+	var timeoutProcess;
 	var serviceURL = baseUrl+'ordermanagerUserorderManager/getPagerPend_query.json';
 	$(function(){
 		loadData();
+		$(".tc-close").click(function(){
+			$(".bg-tanc").hide();
+			clearTimeout(timeoutProcess);
+		});
 	});
+	function payReturn(sec,userorderCode){
+		if(sec > 0){
+			var serviceURL = baseUrl+"ordermanagerUserorderManager/getOrderByCode.json";
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				data:{userorderCode:userorderCode},
+				success:function(results){
+					if(results&&results.record){
+						var record = results.record;
+						if("01" == record.payStatus){
+							$(".bg-tanc").hide();
+							$('#toast_text').html('支付成功！');
+							$(".toast").show();
+				            setTimeout('$(".toast").hide();',2000);//1秒=1000
+				            setTimeout(function(){payWay_goBack();},2000);//1秒=1000
+				            clearTimeout(timeoutProcess);
+						}else{
+							timeoutProcess = setTimeout(function(){payReturn(sec - 1,userorderCode);},2000);
+						}
+					}
+				}
+			});
+		}else{
+			$(".bg-tanc").hide();
+			$('#toast_text').html('支付超时！');
+			$(".toast").show();
+            setTimeout('$(".toast").hide();',2000);//1秒=1000
+            clearTimeout(timeoutProcess);
+            setTimeout(function(){payWay_goBack();},2000);//1秒=1000
+		}
+	}
+	
 	function goPay(userorderCode){
-		window.location.href=cenUrl+"member/memberCenter/personalCenter/payWay.html?userorderCode="+userorderCode;
+		
+		var serviceURL = baseUrl+"ordermanagerUserorderManager/getOrderByCode.json";
+		$.youi.ajaxUtils.ajax({
+			url:serviceURL,
+			data:{userorderCode:userorderCode},
+			success:function(results){
+				if(results&&results.record){
+					var record = results.record;
+					$('#payCode').html(record.userorderCode);
+					$('#userorderGenreName').html(record.genreId.genreName);
+					$('#userorderAmount').html(record.userorderAmount);
+					
+					$.youi.ajaxUtils.ajax({
+						url:baseUrl+'ordermanagerUserorderManager/getPayQrcodeByCode.json',
+						data:{userorderCode:userorderCode},
+						success:function(result){
+							if(result && result.record){
+								console.log(result.record);
+								console.log(result.record.html);
+								$("#qrcodeTable").html('');
+								jQuery('#qrcodeTable').qrcode({
+									render	: "table",
+									text	: result.record.html
+								});	
+								$(".bg-tanc.m2").show();
+								payReturn(1800,userorderCode);
+							}
+						}
+					});
+					
+				}
+			}
+		});
 	};
 	//加载数据
 	function loadData(){	
