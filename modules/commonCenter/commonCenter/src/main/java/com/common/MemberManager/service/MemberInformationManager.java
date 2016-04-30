@@ -172,4 +172,13 @@ public interface MemberInformationManager extends BaseManager{
 	public List<Record> getTotalCount(
 	   			Collection<Condition> conditions,
 	   			String userId)  throws BusException;
+	 /**
+     * 前台个人中心    安全中心，chenye
+     * @param userId  
+     * @return
+     * @throws BusException
+     */
+	@EsbServiceMapping
+	public MemberInformation getMember( String userId) throws BusException;
+		
 }
