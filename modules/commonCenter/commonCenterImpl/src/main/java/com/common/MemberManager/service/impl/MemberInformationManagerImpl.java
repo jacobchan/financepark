@@ -623,5 +623,15 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	   	recordList.add(record);
 	   	return recordList;
 	}   	 
-      
+    /**
+     * 前台个人中心    安全中心，chenye
+     * @param userId  
+     * @return
+     * @throws BusException
+     */
+	@EsbServiceMapping
+	public MemberInformation getMember(@ServiceParam(name = "userId", pubProperty = "userId") String userId) throws BusException {
+		MemberInformation member = memberInformationDao.get(userId);		
+		return member;
+	} 
 }
