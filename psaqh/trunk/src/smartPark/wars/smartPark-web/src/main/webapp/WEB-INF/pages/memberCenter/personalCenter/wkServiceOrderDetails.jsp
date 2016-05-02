@@ -25,7 +25,11 @@
 						<tbody>
 							<tr>
 								<td>
-									<p id="userorderProject">订单项目：商标专利</p>
+									<p id="userorderProject">服务描述：</p>								
+								    <p>1.选择产品</p>
+								    <p>2.下单支付</p>
+								    <p>3.上传设计文件并确认</p>
+								    <p>4.等待收货</p>									
 								</td>
 							</tr>
 							<tr>
