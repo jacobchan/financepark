@@ -25,7 +25,9 @@
 						<tbody>
 							<tr>
 								<td>
-									<p id="userorderProject">订单项目：IT服务/p>
+									<p id="userorderProject">服务描述：</p>
+									<p>7*24小时服务，随叫随到，专业技术团队，价格透明，服务一流</p>
+						            <p>优惠报价： ¥67/次 （服务范围仅限软件维护，若涉及硬件则另收费）</p>				           				
 								</td>
 							</tr>
 							<tr>
@@ -38,7 +40,7 @@
 					</table>
 				</div>
 				<div class="fr f12">
-					<span class="mr30"> 订单总计费用：<font class="f24 c-o" id="userorderAmount" >200元</font></span>
+					<span class="mr30"> 订单总计费用：<font class="f24 c-o" id="userorderAmount" >67元</font></span>
 					<a href="javascript:;" class="ib-btn mr15" style="width:120px;">立即支付</a>
 					<a href="" class="pb-btn tc" style="width:120px;">申请退款</a>
 				</div>
