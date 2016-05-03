@@ -87,6 +87,9 @@
         
         <div class="mt30 clearfix">
         	<div class="res_left">
+	        	<div class="clearfix tc undis" id="tp_11">
+			 		 <img src="../styles/images/loading_2.gif" border="0" />
+			  	</div>
             	<ul id="carfix">
                 	<!--<li class="clearfix">
                     	 <div class="fl"><img src="../styles/images/company/car1.jpg"/></div>
@@ -153,7 +156,7 @@
                     <div class="paging">5</div>
                     <div class="paging paging_m">尾页</div> -->
                 </div>
-                 <div class="tc" style="background:#f6f6f6;height:600px;">
+                 <div class="tc imagenone" style="background:#f6f6f6;height:600px;">
                     <img src="../styles/images/none1.png" border="0" style="margin-top:200px;" />
                 </div>
             </div>
@@ -237,6 +240,7 @@ var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommod
 		//拼接活动列表
 		
 		function refreshData(pageIndex,pageSize){
+			$("#tp_11").removeClass("undis") ;
 			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
 			$.youi.ajaxUtils.ajax({
 				url:serviceURL,
@@ -244,8 +248,9 @@ var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommod
 				data:params.join('&'),
 				dataType:'jsonp',
 				success:function(results){
+					$("#tp_11").addClass("undis") ;
 					if(results&&results.records){
-						$('.tc').hide();
+						$('.imagenone').hide();
 						 _parseRecords(results.records);
 					}
 				}
