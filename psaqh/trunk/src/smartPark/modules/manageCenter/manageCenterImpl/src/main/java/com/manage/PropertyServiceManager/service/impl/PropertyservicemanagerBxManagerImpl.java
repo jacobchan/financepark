@@ -357,19 +357,19 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 			@OrderCollection Collection<Order> orders,					
 			@ServiceParam(name="startTime") String startTime,
 			@ServiceParam(name="endTime") String endTime)throws BusException {
-		if(StringUtils.isNotEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){
-		conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+		if(StringUtils.isNotEmpty(startTime)||StringUtils.isNotEmpty(endTime)){
+			conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
 		}
 		PagerRecords pagerRecords = propertyservicemanagerBxDao.findByPager(pager, conditions, orders);
 		List<PropertyservicemanagerBx> bxlist = pagerRecords.getRecords();
     	for(PropertyservicemanagerBx bx : bxlist){
-    	if(StringUtils.isNotEmpty(bx.getMemberId())){
-		String memberId = bx.getMemberId();
-	    MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
-	    bx.setMember(memberInformation);
-	    			}
-	    		}
-				return pagerRecords;
+    		if(StringUtils.isNotEmpty(bx.getMemberId())){
+    			String memberId = bx.getMemberId();
+    			MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
+    			bx.setMember(memberInformation);
+	    	}
+	    }
+		return pagerRecords;
 			}
 	/**
    	 * 获取已完成订单的totalCount    
