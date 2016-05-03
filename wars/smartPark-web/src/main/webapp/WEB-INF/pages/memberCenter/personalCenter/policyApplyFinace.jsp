@@ -74,7 +74,7 @@
 	
 	//分页列表开始显示
 	function refreshData(pageIndex, pageSize) {
-		var params = [ 'pager:pageIndex=' + pageIndex,'pager:pageSize=' + pageSize ];
+		var params = [ 'pager:pageIndex=' + pageIndex,'pager:pageSize=' + pageSize,'orderBy=desc:createTime'];
 		$.youi.ajaxUtils.ajax({
 			url : baseUrl + "finaceManager/getPagerFinaces.json",
 			data : params.join('&'),
