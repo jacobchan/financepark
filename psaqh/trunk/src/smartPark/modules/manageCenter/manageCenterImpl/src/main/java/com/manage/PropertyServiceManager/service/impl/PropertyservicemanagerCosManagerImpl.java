@@ -182,22 +182,6 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
 	    	throw new BusException("该状态下的订单不允许取消操作");
 	    } 
     }
-	//通过订单号获取当前用户的报修单  模糊查询
-	@EsbServiceMapping
-	public List<PropertyservicemanagerCos> getCoslistLikeCosCode(
-		@ServiceParam(name="userId",pubProperty="userId") String userId,
-		@ServiceParam(name="cosCode") String cosCode,
-		@ServiceParam(name="startTime") String startTime,
-		@ServiceParam(name="endTime") String endTime) throws BusException {		
-		
-		Collection<Condition> condition = new ArrayList<Condition>();
-		condition.add(ConditionUtils.getCondition("cosCode", Condition.LIKE, cosCode));	
-		condition.add(ConditionUtils.getCondition("memberInformation.memberId", Condition.EQUALS, userId));
-		condition.add(ConditionUtils.getCondition("cosTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
-		List<PropertyservicemanagerCos> list =propertyservicemanagerCosDao.commonQuery(condition, null);
-		
-		return list;
-	}
 	 /**
 	 * 根据当前用户分页查询
 	 * @return 分页对象
@@ -206,8 +190,13 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
    
 	public PagerRecords getPagerCos(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=PropertyservicemanagerCos.class) Collection<Condition> conditions,//查询条件
-			@OrderCollection Collection<Order> orders)
+			@OrderCollection Collection<Order> orders,
+			@ServiceParam(name="startTime") String startTime,
+			@ServiceParam(name="endTime") String endTime)
 			throws BusException {  
+    	if(StringUtils.isNotEmpty(startTime)||StringUtils.isNotEmpty(endTime)){
+    		conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+       	}
     	PagerRecords pagerRecords = propertyservicemanagerCosDao.findByPager(pager, conditions, orders);  	
     	return pagerRecords;
 	}
@@ -273,25 +262,7 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
     	
     	return propertyservicemanagerCosDao.save(savePropertyservicemanagerCos);
     }
-    /**
-	 *  /**
-	 * 根据当前用户分页查询 根据投诉单号模糊查询（ 前台个人中心）    chenye
-	 */
-	 
-    @EsbServiceMapping(pubConditions={@PubCondition(property="memberInformation.memberId",operator=Condition.EQUALS,pubProperty="userId")})	   
-	public PagerRecords getPagerLikeCos(Pager pager,//分页条件
-			@ConditionCollection(domainClazz=PropertyservicemanagerCos.class) Collection<Condition> conditions,//查询条件
-			@OrderCollection Collection<Order> orders,
-			@ServiceParam(name="startTime") String startTime,
-			@ServiceParam(name="endTime") String endTime,
-			@ServiceParam(name="coslikeCode") String coslikeCode)
-			throws BusException {  
-    	conditions.add(ConditionUtils.getCondition("cosCode", Condition.LIKE, coslikeCode));
-        //conditions.add(ConditionUtils.getCondition("cosCode", Condition.EQUALS, cosCode));
-    	conditions.add(ConditionUtils.getCondition("cosTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
-    	PagerRecords pagerRecords = propertyservicemanagerCosDao.findByPager(pager, conditions, orders);  	
-    	return pagerRecords;
-	}
+    
     /**
    	 * 获取已完成订单的totalCount    陈烨
    	 * @param conditions
@@ -302,14 +273,10 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
    	public List<Record> getTotalCount(
    			@ConditionCollection(domainClazz=PropertyservicemanagerCos.class) Collection<Condition> conditions,
    			@ServiceParam(name="startTime") String startTime,
-			@ServiceParam(name="endTime") String endTime,
-			@ServiceParam(name="coslikeCode") String coslikeCode)  throws BusException{
+			@ServiceParam(name="endTime") String endTime)  throws BusException{
    		List<Record> recordList=new ArrayList<Record>();
-   		if(StringUtils.isNotEmpty(coslikeCode)){
-   		conditions.add(ConditionUtils.getCondition("cosCode", Condition.LIKE, coslikeCode));
-   		}
    		if(StringUtils.isNotEmpty(startTime)||StringUtils.isNotEmpty(endTime)){
-		conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+		conditions.add(ConditionUtils.getCondition("cosTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
    		}
 		List<PropertyservicemanagerCos> List = this.getPropertyservicemanagerCoss(conditions, null);
    		Record record = new Record();
