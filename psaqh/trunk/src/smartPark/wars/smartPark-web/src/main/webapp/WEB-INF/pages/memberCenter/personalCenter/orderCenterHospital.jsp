@@ -86,7 +86,7 @@
 		} 
 	//分页列表
 	 function refreshData(pageIndex,pageSize){
-		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'orderBy=desc:userorderTime'];
 		$.ajax({
 			url:serviceURL,
 			data:params.join('&'),
@@ -209,7 +209,7 @@
 		 var genId = $(".c-b1").attr("data");	
 		 //订单号
 		 var userorderCodeLike=$("#userorderCode").val();			 		
-	     var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCode='+userorderCodeLike,'operator:userorderCode=LIKE','genId='+genId];
+	     var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCode='+userorderCodeLike,'operator:userorderCode=LIKE','genId='+genId,'orderBy=desc:userorderTime'];
 		 $.ajax({
 				url:baseUrl+'ordermanagerUserorderManager/getPagerHospital_query.json', 
 				data:params.join('&'),
