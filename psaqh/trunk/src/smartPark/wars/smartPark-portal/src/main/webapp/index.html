@@ -357,6 +357,9 @@
 					<span class="span_ac ">创智汇</span> <a class="fr"
 						href="./czh/czh1.html">更多》</a>
 				</div>
+				<div class="clearfix tc undis" id="tp_1">
+		 		 	<img src="../styles/images/loading_2.gif" border="0" />
+		  		</div>
 				<ul class="czh_ul clearfix">
 					<!-- <li onclick="loadURL('/czh/czh4.html');" style="cursor:pointer"><a href="javascript:;"><img src="styles/images/index/czh1.jpg"/></a><div class="f18">创智讲堂</div></li>
                 <li onclick="loadURL('/czh/czh5.html');" style="cursor:pointer"><a href="javascript:;"><img src="styles/images/index/czh2.jpg"/></a><div class="f18">硅谷创业营</div></li>
@@ -367,6 +370,9 @@
 				<div class="mb10">
 					<span class="span_ac ">热门活动</span>
 				</div>
+				<div class="clearfix tc undis" id="tp_2">
+		 		 	<img src="../styles/images/loading_2.gif" border="0" />
+		  		</div>
 				<ul class="pb-list-group">
 					<!--                 <li class="clearfix" onclick='window.open("czh/czh3.html");'>
                     <div class="plg-photo">
@@ -1442,6 +1448,7 @@
 	</script>
 	<script type="text/javascript">
 		$(function() {
+			$("#tp_1").removeClass("undis") ;
 			//园区推荐活动类型top4
 			var serviceURL = baseUrl + "applayTypeManager/getApplayTypes.json";
 			var postData = {
@@ -1455,6 +1462,7 @@
 				dataType : 'jsonp',
 				success : function(results) {
 					if (results && results.records) {
+						$("#tp_1").addClass("undis") ;
 						types(results.records);
 					}
 				}
@@ -1477,6 +1485,7 @@
 	</script>
 	<script type="text/javascript">
 		$(function() {
+			$("#tp_2").removeClass("undis") ;
 			//园区推荐活动数据top3
 			var serviceURL = baseUrl
 					+ "activityApplyManager/getPagerActivityApplys.json";
@@ -1496,6 +1505,7 @@
 				dataType : 'jsonp',
 				success : function(results) {
 					if (results && results.records) {
+						$("#tp_2").addClass("undis") ;
 						_parseRecords(results.records);
 					}
 				}
