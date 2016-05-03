@@ -563,29 +563,48 @@
 						return false;
 					}
 				})
-				var remark = $("#remark").val();
-				var stringData="memName="+name+"&"+"memPhone="+phone+"&"+"memRole="+memRole+"&"+"memSex="+memSex+"&"+"remark="+remark;
-				var serviceURL = baseUrl+"recommendMemberManager/saveRecommendMember.json";
-				$(this).html("提交中...");
+				
+				var obj = ['memberPhoneNumber='+phone] ;
+				/* 判断手机号是否已经注册! */
 				$.youi.ajaxUtils.ajax({
-					url:serviceURL,
-					data:stringData,
+					url:baseUrl + "memberInformationManager/exsitMobile.json",
+					data:obj.join('&'),
 					jsonp:'data:jsonp',
 					dataType:'jsonp',
 					success:function(result){
-						$(this).html("提交");
-						$("#msg").html("预约成功！");
-						$(".toast").show();
-						setTimeout('$(".toast").hide();',2000);
-						$(".pl2").hide();
-						$("#name").val('');
-						$("#remark").val('');
-						$("#memRole").val('');
-						$("#phone").val('');
-					},error:function(XMLHttpRequest, textStatus, errorThrown){
-						alert(XMLHttpRequest);
+					 	var flag = result.record.flag ;//获取返回值
+						if(flag == true){
+							alert("此手机号已经注册了！");
+							return ;
+						}else{
+							var remark = $("#remark").val();
+							var stringData="memName="+name+"&"+"memPhone="+phone+"&"+"memRole="+memRole+"&"+"memSex="+memSex+"&"+"remark="+remark;
+							var serviceURL = baseUrl+"recommendMemberManager/saveRecommendMember.json";
+							$(this).html("提交中...");
+							$.youi.ajaxUtils.ajax({
+								url:serviceURL,
+								data:stringData,
+								jsonp:'data:jsonp',
+								dataType:'jsonp',
+								success:function(result){
+									$(this).html("提交");
+									$("#msg").html("预约成功！");
+									$(".toast").show();
+									setTimeout('$(".toast").hide();',2000);
+									$(".pl2").hide();
+									$("#name").val('');
+									$("#remark").val('');
+									$("#memRole").val('');
+									$("#phone").val('');
+								},error:function(XMLHttpRequest, textStatus, errorThrown){
+									alert(XMLHttpRequest);
+								}
+							});
+						}
 					}
 				});
+				
+				
 			});
 			
 		}); 
@@ -747,11 +766,11 @@
         function close(content){
 	        clearInterval(timer);
 	        $(".tc.mt25.f18").empty() ;
-	        $(".tc.mt25.f18").append(content) ;
+	        $(".tc.mt25.f18").append(content);
 	        $(".toast").show();
 	        pltime=1;
 	        timer=setInterval("closeTanc()",1000);
-        }
+        	}
 	</script>
 	<!-- 弹出层样式 -->
     <div class="toast">
@@ -760,6 +779,6 @@
             <p class="tc mt25 f18" style="color:#ff6715" id="msg"></p>
         </div>
     </div>
-	
+		
 </body>
 </html>
