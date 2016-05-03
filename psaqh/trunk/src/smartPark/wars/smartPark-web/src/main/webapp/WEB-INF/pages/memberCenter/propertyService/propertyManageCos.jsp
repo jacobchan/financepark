@@ -144,16 +144,17 @@
 		var cosCode=$("#cosCode").val();
 		var startTime=$("#startTime").val(); 
 		var endTime=$("#endTime").val(); 			
-		var params = ['startTime='+startTime,'endTime='+endTime,'cosCode='+cosCode,'operator:cosCode=LIKE','orderBy=desc:cosTime'];
+		var params = ['startTime='+startTime,'endTime='+endTime,'cosCode='+cosCode,'operator:cosCode=LIKE'];
 		$.ajax({
-			url:baseUrl+'propertyservicemanagerCosManager/getPagerLikeCos.json',
+			url:baseUrl+'propertyservicemanagerCosManager/getTotalCount.json', 
 			data:params.join('&'),
 			beforeSend: function(){
 				//开始显示dataLoading样式
 				$.showBox.DataLoading();
 			},
 			success:function(results){	
-				pageCount=Math.ceil(results.totalCount/pageSize);//页数	
+				var totalCount=results.records[0].totalCount;				
+				 pageCount = Math.ceil(totalCount / pageSize);//页数	
 				 refreshData_query(1,pageSize);
 				 $(".tcdPageCode").empty();
 					if(pageCount>0){
@@ -177,9 +178,9 @@
 		var cosCode=$("#cosCode").val();	
 		var startTime=$("#startTime").val(); 
 		var endTime=$("#endTime").val(); 
-		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'cosCode='+cosCode,'operator:cosCode=LIKE','startTime='+startTime,'endTime='+endTime,'orderBy=desc:createTime'];
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'cosCode='+cosCode,'operator:cosCode=LIKE','startTime='+startTime,'endTime='+endTime,'orderBy=desc:cosTime'];
 		$.ajax({
-			url:baseUrl+'propertyservicemanagerCosManager/getPagerLikeCos.json',
+			url:serviceURL,
 				data:params.join('&'),
 				success:function(results){
 					if(results&&results.records){
