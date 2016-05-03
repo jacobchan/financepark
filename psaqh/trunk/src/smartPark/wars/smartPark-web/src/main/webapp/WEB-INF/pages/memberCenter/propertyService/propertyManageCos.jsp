@@ -95,7 +95,7 @@
 	});		
 	//分页列表
 	function refreshData(pageIndex,pageSize){
-		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'orderBy=desc:cosTime'];
 		$.ajax({
 			url:serviceURL,
 			data:params.join('&'),
@@ -177,7 +177,7 @@
 		var cosCode=$("#cosCode").val();	
 		var startTime=$("#startTime").val(); 
 		var endTime=$("#endTime").val(); 
-		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'cosCode='+cosCode,'operator:cosCode=LIKE','startTime='+startTime,'endTime='+endTime];
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'cosCode='+cosCode,'operator:cosCode=LIKE','startTime='+startTime,'endTime='+endTime,'orderBy=desc:createTime'];
 		$.ajax({
 			url:baseUrl+'propertyservicemanagerCosManager/getPagerLikeCos.json',
 				data:params.join('&'),
