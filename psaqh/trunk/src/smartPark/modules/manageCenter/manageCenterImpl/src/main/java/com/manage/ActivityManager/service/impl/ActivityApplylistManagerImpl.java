@@ -128,8 +128,8 @@ public class ActivityApplylistManagerImpl extends BaseManagerImpl implements Act
     	Record cord = new Record();
     	List<ActivityApplylist> applist = activityApplylistDao.getList(new String[]{"activityApply.applyId","applyPhone"},new String[]{o.getActivityApply().getApplyId(),o.getApplyPhone()});
     	if(applist.size()<=0){
-    		Boolean bool = mcMsgdatasManager.checkCode(o.getApplyPhone(), captcha);
-    		if(bool){
+    		TempDemo demo = mcMsgdatasManager.checkPhoneCode(o.getApplyPhone(), captcha);
+    		if(demo.isFlag()){
     			if(StringUtils.isNotEmpty(o.getUpdateUser())){//登录用户报名保存，匿名用户不保存
     				MemberInformation member=memberInformationManager.getMemberInformation(o.getUpdateUser());
     				o.setMember(member);
@@ -144,7 +144,7 @@ public class ActivityApplylistManagerImpl extends BaseManagerImpl implements Act
 				cord.put("meg", "活动报名成功!");
     		}else{
     			cord.put("code", "01");//校验码错误
-				cord.put("meg", "校验码错误,请重新输入!");
+				cord.put("meg", demo.getBuff());
     		}
     	}else{
     		cord.put("code", "02");//已成功报名
