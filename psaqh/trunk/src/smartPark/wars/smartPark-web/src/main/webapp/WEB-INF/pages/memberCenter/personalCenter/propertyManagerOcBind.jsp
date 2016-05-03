@@ -103,10 +103,9 @@
 				 $("#list").html(html);	
 			}
 		}else{
-			var	html1 = '<tr>'
-				html1 += '	<td >暂无绑定卡号</td>'
-				html1 += '</tr>'
-			 $("#list").html(html1);	}
+			var	html1 = 暂无绑定卡号				
+			 $("#list").html(html1);	
+			}
 		};
 		
 	
@@ -119,24 +118,10 @@
 			success:function(result){
 				if(result&&result.record){
 					close("增加成功");
-					//location.reload();
 				}
 			}
 		});
 	});	 
-/*     function unbound(id){					   			
-			var ocId=id;			
-			$.youi.ajaxUtils.ajax({
-				url:baseUrl+'propertyservicemanagerOcManager/updateBindStatus.json',
-				data:'ocId='+ocId,
-		 		success:function(result){
-					if(result&&result.record){					
-						close("修改成功");
-						//location.reload();
-					}
-				}
-			}); 
-	} */
 	function close(content){		        
 		$(".tc.mt25.f18").empty() ;
 		$(".tc.mt25.f18").append(content) ;
@@ -144,17 +129,15 @@
 		setTimeout(function(){$(".toast").hide(); },1000);
 		refreshData(currentIndex,pageSize);
 	}
-	//<!-- 取消报修订单 -->
+	//解绑
 	function unbound(ocId,ocCode){
 		$(".moverec").html(ocCode);//给弹窗插入订单号
 		$(".moverec")[0].setAttribute("id",ocId);//给弹窗设置id
-		$(".moverec")[0].setAttribute("id",ocId);//给弹窗设置id
 		$(".bg-tanc.m1").show();
 	};
-	//点击确认取消报修预约
+	//点击解绑
 	$(function(){
 		$("#confirm").click(function(){	
-			//alert(11);
 		    $(".bg-tanc.m1").hide();
 			var id=$(".moverec")[0].getAttribute("id");				
 			$.ajax({
@@ -163,7 +146,6 @@
 				success:function(result){
 					if(result&&result.record){					
 						close("修改成功");
-						//location.reload();
 					}
 				}
 			});
