@@ -51,7 +51,7 @@ function GetRequest() {
 					var o=$(".ht-table tr th").length;//得到th有多少个；
 					var dd,dm,dt,dw;
 					var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];//将得到的0-7转化为星期
-					changeDate(num,1000);
+					changeDate(num);
 					//鼠标移上去时出现左右按钮
 					$(".pr").hover(function(){
 						$(this).children(".ht-table").nextAll().toggle();
@@ -73,9 +73,8 @@ function GetRequest() {
 					  	}else{
 					  		num--;
 					  		var serviceURL = baseUrl+"propertyservicemanagerEnteringManager/getEnteringList.json";
-							var pageIndex=num+1;
-							pageCount=$("#pageTotal").val();
-							var pageSize=12;
+					  		var pageIndex=1;
+					  		var pageSize=12;
 							var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
 							var enteringId;
 							//根据商品id获取资源可用状态
@@ -89,42 +88,82 @@ function GetRequest() {
 									if (results && results.records) {
 										pageCount=Math.ceil(results.totalCount/pageSize);
 										var record = results.records;
-										$("#am").empty();
-										$("#pm").empty();
-										var amHtml="<td>09：00-12：00</td><td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>99</span>不可预约</a></td>";
-										var pmHtml="<td>14：00-17：00</td><td><a href='javascript:;' class='em3'>不可预约</a></td>";
-										$("#am").append(amHtml);
-										$("#pm").append(pmHtml);
+										$("#am td").slice(1,8).empty();
+										$("#pm td").slice(1,8).empty();
 										var html="";
 										var htmls="";
+										var dayb=new Array();
+										var dayc=[1,2,3,4,5,6,7];
+										
+										
 										for(var i=0; i<record.length; i++){
 						                $("#enteringName").val(record[0].memName);
 										$("#enteringTelephone").val(record[0].memPhone);
-										if(record[i].enteringTime=='AM'){
-											if(record[i].enteringStatus=='01'){
-												html="<td><a href='javascript:;' class='em1'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-										    }
-											else if(record[i].enteringStatus=='02'){
-												html="<td><a href='javascript:;' class='em2'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-											}else{
-												html="<td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-											}
-											$("#am").append(html);
+										var a=new Array();
+										 for(var j=1;j<8;j++){
+											  	var day=$(".ht-table tr th").eq(j).text();
+											  	var month=day.split("月")[0];
+											  	var days=day.split("月")[1].split("日")[0];
+											  	if(month.length==1){
+											  		month="0"+month;
+											  	}
+											  	if(days.length==1){
+											  		days="0"+days;
+											  	}
+											  	a.push(month+"-"+days);
+											  	
+										 }
+									     
+										 var html1="<span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)";
+										 if(record[i].enteringDate !=undefined){
+										  		var enteringDate=record[i].enteringDate;
+										  		//
+										  		enteringDate=enteringDate.substring(5,enteringDate.length);
+										  		/* alert(enteringDate) */
+										  		for(var q=0;q<a.length;q++){
+										  			var dates=a[q];
+										  			if(enteringDate == dates){
+										  				if(record[i].enteringStatus=='01'){
+															htmls="<a href='javascript:;' class='em1'>"+html1+"</a>";
+														}
+														else if(record[i].enteringStatus=='02'){
+															htmls="<a href='javascript:;' class='em2'>"+html1+"</a>";
+														}else{
+															htmls="<a href='javascript:;' class='em3'>"+html1+"</a>";
+														}
+														$("#am td").eq(q+1).append(htmls);
+														$("#pm td").eq(q+1).append(htmls);
+														/* alert(q+1); */
+														dayb.push(q+1);
+										  			}
+										  		}
+										  	}
+										 
 										}
-											
-										if(record[i].enteringTime=='PM'){
-											if(record[i].enteringStatus=='01'){
-												htmls="<td><a href='javascript:;' class='em1'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+										var dayd=new Array();
+										/* if(dayb.length==0){
+											var htm='<td>09：00-12：00</td><td rowspan="2" colspan="7"><span class="f14">暂无记录</span></td>';
+											$(".ht-table tbody #am").html(htm);
+											$(".ht-table tbody #pm").html("<td>09：00-12：00</td>");
+										}else{ */
+											for(var m=0;m<dayc.length;m++){
+												var dm1=dayc[m];
+												var isExist = false;
+												for (var n=0;n<dayb.length;n++){
+													var dm2=dayb[n];
+													if(dm1==dm2){
+														isExist = true;
+											            break;
+													}
+												}
+												if(!isExist){
+													var htmls1="<a href='javascript:;' class='em3'>暂无数据</a>";
+													$("#am td").eq(dm1).append(htmls1);
+													$("#pm td").eq(dm1).append(htmls1);
+											    }
 											}
-											else if(record[i].enteringStatus=='02'){
-												htmls="<td><a href='javascript:;' class='em2'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-											}else{
-												htmls="<td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-											}
-											$("#pm").append(htmls);
-										}
+										/* } */
 										
-										}
 										
 										$(document).on("click",".em1",function(){
 											$(".em1").removeClass("active");
@@ -136,7 +175,7 @@ function GetRequest() {
 								}
 							});
 					  		console.log(num);
-							changeDate(num,1000);
+							changeDate(num);
 					  	}
 					});
 					//右按钮
@@ -144,7 +183,7 @@ function GetRequest() {
 						num++;
 						pageCount=$("#pageTotal").val();
 						var serviceURL = baseUrl+"propertyservicemanagerEnteringManager/getEnteringList.json";
-						var pageIndex=num+1;
+						var pageIndex=1;
 						var pageSize=12;
 						var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
 						var enteringId;
@@ -158,42 +197,84 @@ function GetRequest() {
 							success : function(results) {
 								if (results && results.records) {
 									var record = results.records;
-									$("#am").empty();
-									$("#pm").empty();
-									var amHtml="<td>09：00-12：00</td><td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>99</span>不可预约</a></td>";
-									var pmHtml="<td>14：00-17：00</td><td><a href='javascript:;' class='em3'>不可预约</a></td>";
-									$("#am").append(amHtml);
-									$("#pm").append(pmHtml);
+									$("#am td").slice(1,8).empty();
+									$("#pm td").slice(1,8).empty();
 									var html="";
 									var htmls="";
+									var dayb=new Array();
+									var dayc=[1,2,3,4,5,6,7];
+									
+									
 									for(var i=0; i<record.length; i++){
 					                $("#enteringName").val(record[0].memName);
 									$("#enteringTelephone").val(record[0].memPhone);
-									if(record[i].enteringTime=='AM'){
-										if(record[i].enteringStatus=='01'){
-											html="<td><a href='javascript:;' class='em1'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-									    }
-										else if(record[i].enteringStatus=='02'){
-											html="<td><a href='javascript:;' class='em2'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-										}else{
-											html="<td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-										}
-										$("#am").append(html);
+									var a=new Array();
+									 for(var j=1;j<8;j++){
+										  	var day=$(".ht-table tr th").eq(j).text();
+										  	
+										  	var month=day.split("月")[0];
+										  	var days=day.split("月")[1].split("日")[0];
+										  /* 	var month=day.substring(0,1);
+										  	var days=day.substring(2,3); */
+										  	if(month.length==1){
+										  		month="0"+month;
+										  	}
+										  	if(days.length==1){
+										  		days="0"+days;
+										  	}
+										  	a.push(month+"-"+days);
+										  	
+									 }
+								     
+									 var html1="<span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)";
+									 if(record[i].enteringDate !=undefined){
+									  		var enteringDate=record[i].enteringDate;
+									  		//
+									  		enteringDate=enteringDate.substring(5,enteringDate.length);
+									  		/* alert(enteringDate) */
+									  		for(var q=0;q<a.length;q++){
+									  			var dates=a[q];
+									  			if(enteringDate == dates){
+									  				if(record[i].enteringStatus=='01'){
+														htmls="<a href='javascript:;' class='em1'>"+html1+"</a>";
+													}
+													else if(record[i].enteringStatus=='02'){
+														htmls="<a href='javascript:;' class='em2'>"+html1+"</a>";
+													}else{
+														htmls="<a href='javascript:;' class='em3'>"+html1+"</a>";
+													}
+													$("#am td").eq(q+1).append(htmls);
+													$("#pm td").eq(q+1).append(htmls);
+													/* alert(q+1); */
+													dayb.push(q+1);
+									  			}
+									  		}
+									  	}
+									 
 									}
-										
-									if(record[i].enteringTime=='PM'){
-										if(record[i].enteringStatus=='01'){
-											htmls="<td><a href='javascript:;' class='em1'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+									var dayd=new Array();
+									/* if(dayb.length==0){
+										var htm='<td>09：00-12：00</td><td rowspan="2" colspan="7"><span class="f14">暂无记录</span></td>';
+										$(".ht-table tbody #am").html(htm);
+										$(".ht-table tbody #pm").html("<td>09：00-12：00</td>");
+									} else{*/
+										for(var m=0;m<dayc.length;m++){
+											var dm1=dayc[m];
+											var isExist = false;
+											for (var n=0;n<dayb.length;n++){
+												var dm2=dayb[n];
+												if(dm1==dm2){
+													isExist = true;
+										            break;
+												}
+											}
+											if(!isExist){
+												var htmls1="<a href='javascript:;' class='em3'>暂无数据</a>";
+												$("#am td").eq(dm1).append(htmls1);
+												$("#pm td").eq(dm1).append(htmls1);
+										    }
 										}
-										else if(record[i].enteringStatus=='02'){
-											htmls="<td><a href='javascript:;' class='em2'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-										}else{
-											htmls="<td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-										}
-										$("#pm").append(htmls);
-									}
-									
-									}
+									/* } */
 									
 									$(document).on("click",".em1",function(){
 										$(".em1").removeClass("active");
@@ -205,18 +286,11 @@ function GetRequest() {
 							}
 						});
 						console.log(num);
-						changeDate(num,pageCount);
+						changeDate(num);
 					})
 					//7个日期的变化公共部分
-					function changeDate(num,pageCount){
+					function changeDate(num){
 						
-			            if(num+1>pageCount){
-			            	clearInterval(timer);
-			            	$("#msg").text("已经是最后一页了");
-				            $(".toast").show();
-				            pltime=1;
-				            timer=setInterval("closeTanc()",1000);
-			            }else{
 			        		var z=7;
 							for(j=1;j<o;j++){
 								for(var i=0;i<j;i++){
@@ -226,10 +300,8 @@ function GetRequest() {
 								  	dt=dd.getDate();
 								  	dw=dd.getDay();	
 								  	$(".ht-table tr th").eq(j).html(dm+"月"+dt+"日"+"<br/>"+weekDay[dw]);
-								  	
 								}
 							}
-			            }
 				
 					};
 				    //关闭toast
@@ -414,24 +486,24 @@ function GetRequest() {
 									<th>1月02日<br/>星期六</th>
 								</tr>
 								<tr id="am">
-									<!-- <td>09：00-12：00</td>
-									<td><a href="javascript:;" class="em3"><span id='enteringId' style='display:none'>99</span>不可预约</a></td>
-									<td><a href="javascript:;" class="em1">可以预约<br/>（8个）</a></td>
-									<td><a href="javascript:;" class="em1">可以预约<br/>（10个）</a></td>
-									<td><a href="javascript:;" class="em2">预约已满</a></td>
-									<td><a href="javascript:;" class="em1">可以预约<br/>（12个）</a></td>
-									<td><a href="javascript:;" class="em2">预约已满</a></td>
-									<td><a href="javascript:;" class="em1">可以预约<br/>（12个）</a></td> -->
+									<td>09：00-12：00</td>
+									<td><!-- <a href="javascript:;" class="em3"><span id='enteringId' style='display:none'>99</span>不可预约</a> --></td>
+									<td><!-- <a href="javascript:;" class="em1">可以预约<br/>（8个）</a> --></td>
+									<td><!-- <a href="javascript:;" class="em1">可以预约<br/>（10个）</a> --></td>
+									<td><!-- <a href="javascript:;" class="em2">预约已满</a> --></td>
+									<td><!-- <a href="javascript:;" class="em1">可以预约<br/>（12个）</a> --></td>
+									<td><!-- <a href="javascript:;" class="em2">预约已满</a> --></td>
+									<td><!-- <a href="javascript:;" class="em1">可以预约<br/>（12个）</a> --></td>
 								</tr>
 								<tr id="pm">
-									<!-- <td>14：00-17：00</td>
-									<td><a href="javascript:;" class="em3">不可预约</a></td>
-									<td><a href="javascript:;" class="em1">可以预约<br/>（8个）</a></td>
-									<td><a href="javascript:;" class="em1">可以预约<br/>（10个）</a></td>
-									<td><a href="javascript:;" class="em1">可以预约<br/>（20个）</a></td>
-									<td><a href="javascript:;" class="em1">可以预约<br/>（12个）</a></td>
-									<td><a href="javascript:;" class="em2">预约已满</a></td>
-									<td><a href="javascript:;" class="em1">可以预约<br/>（12个）</a></td> -->
+									<td>14：00-17：00</td>
+									<td><!-- <a href="javascript:;" class="em3">不可预约</a> --></td>
+									<td><!-- <a href="javascript:;" class="em1">可以预约<br/>（8个）</a> --></td>
+									<td><!-- <a href="javascript:;" class="em1">可以预约<br/>（10个）</a> --></td>
+									<td><!-- <a href="javascript:;" class="em1">可以预约<br/>（20个）</a> --></td>
+									<td><!-- <a href="javascript:;" class="em1">可以预约<br/>（12个）</a> --></td>
+									<td><!-- <a href="javascript:;" class="em2">预约已满</a> --></td>
+									<td><!-- <a href="javascript:;" class="em1">可以预约<br/>（12个）</a> --></td>
 								</tr>
 							</table>
 							<div class="change-date cd-prev"><img src="../styles/images/yqfw/left-angle.png"></div>
@@ -519,41 +591,88 @@ function GetRequest() {
 			if (results && results.records) {
 				var record = results.records;
 			     var pageCount=Math.ceil(record[0].total/pageSize);
+			     
 			     $("#pageTotal").val(pageCount);
 				var amHtml="<td>09：00-12：00</td><td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>99</span>不可预约</a></td>";
 				var pmHtml="<td>14：00-17：00</td><td><a href='javascript:;' class='em3'>不可预约</a></td>";
-				$("#am").append(amHtml);
-				$("#pm").append(pmHtml);
+			//	$("#am").append(amHtml);
+			//	$("#pm").append(pmHtml);
 				var html="";
 				var htmls="";
+				var dayb=new Array();
+				var dayc=[1,2,3,4,5,6,7];
+				
+					
+				
 				for(var i=0; i<record.length; i++){
                 $("#enteringName").val(record[0].memName);
 				$("#enteringTelephone").val(record[0].memPhone);
-				if(record[i].enteringTime=='AM'){
-					if(record[i].enteringStatus=='01'){
-						html="<td><a href='javascript:;' class='em1'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-				    }
-					else if(record[i].enteringStatus=='02'){
-						html="<td><a href='javascript:;' class='em2'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-					}else{
-						html="<td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-					}
-					$("#am").append(html);
+				var a=new Array();
+				 for(var j=1;j<8;j++){
+					  	var day=$(".ht-table tr th").eq(j).text();
+					  	var month=day.split("月")[0];
+					  	var days=day.split("月")[1].split("日")[0];
+					  	if(month.length==1){
+					  		month="0"+month;
+					  	}
+					  	if(days.length==1){
+					  		days="0"+days;
+					  	}
+					  	a.push(month+"-"+days);
+					  	
+				 }
+			     
+				 var html1="<span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)";
+				 if(record[i].enteringDate !=undefined){
+				  		var enteringDate=record[i].enteringDate;
+				  		//
+				  		enteringDate=enteringDate.substring(5,enteringDate.length);
+				  		/* alert(enteringDate) */
+				  		for(var q=0;q<a.length;q++){
+				  			var dates=a[q];
+				  			if(enteringDate == dates){
+				  				if(record[i].enteringStatus=='01'){
+									htmls="<a href='javascript:;' class='em1'>"+html1+"</a>";
+								}
+								else if(record[i].enteringStatus=='02'){
+									htmls="<a href='javascript:;' class='em2'>"+html1+"</a>";
+								}else{
+									htmls="<a href='javascript:;' class='em3'>"+html1+"</a>";
+								}
+								$("#am td").eq(q+1).append(htmls);
+								$("#pm td").eq(q+1).append(htmls);
+								/* alert(q+1); */
+								dayb.push(q+1);
+				  			}
+				  		}
+				  	}
+				 
 				}
-					
-				if(record[i].enteringTime=='PM'){
-					if(record[i].enteringStatus=='01'){
-						htmls="<td><a href='javascript:;' class='em1'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
+				var dayd=new Array();
+				/* if(dayb.length==0){
+					var htm='<td>09：00-12：00</td><td rowspan="2" colspan="7"><span class="f14">暂无记录</span></td>';
+					$(".ht-table tbody #am").html(htm);
+					$(".ht-table tbody #pm").html("<td>09：00-12：00</td>");
+				}else{ */
+					for(var m=0;m<dayc.length;m++){
+						var dm1=dayc[m];
+						var isExist = false;
+						for (var n=0;n<dayb.length;n++){
+							var dm2=dayb[n];
+							if(dm1==dm2){
+								isExist = true;
+					            break;
+							}
+						}
+						if(!isExist){
+							var htmls1="<a href='javascript:;' class='em3'>暂无数据</a>";
+							$("#am td").eq(dm1).append(htmls1);
+							$("#pm td").eq(dm1).append(htmls1);
+					    }
 					}
-					else if(record[i].enteringStatus=='02'){
-						htmls="<td><a href='javascript:;' class='em2'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-					}else{
-						htmls="<td><a href='javascript:;' class='em3'><span id='enteringId' style='display:none'>"+record[i].enteringId+"</span>"+record[i].enteringStatusName+"("+record[i].enteringRemain+"个)</a></td>";
-					}
-					$("#pm").append(htmls);
-				}
+				/* } */
 				
-				}
+				
 				
 				$(document).on("click",".em1",function(){
 					$(".em1").removeClass("active");
