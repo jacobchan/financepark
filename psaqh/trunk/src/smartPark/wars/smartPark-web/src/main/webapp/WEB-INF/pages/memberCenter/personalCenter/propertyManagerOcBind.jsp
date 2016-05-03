@@ -76,7 +76,7 @@
 	
 	//分页列表
 	function refreshData(pageIndex,pageSize){
-		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'bindStatus='+bindStatus];
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'bindStatus='+bindStatus,'orderBy=desc:applyTime'];
 		$.ajax({
 			url:serviceURL,
 			data:params.join('&'),
