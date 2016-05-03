@@ -5,8 +5,11 @@ package com.common.MemberManager.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +26,7 @@ import com.common.MemberManager.entity.MemberRole;
 import com.common.MemberManager.entity.MemberUserInfo;
 import com.common.MemberManager.service.MemberInformationManager;
 import com.common.MemberManager.service.MemberRoleManager;
-import com.common.MessageCenter.entity.McMsgdatas;
 import com.common.MessageCenter.service.McMsgdatasManager;
-import com.gsoft.entity.ReferenceMap;
 import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.dataobj.tree.TreeNode;
@@ -248,12 +249,14 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		this.setDefaultRole(member);
 		
 		//构建替换模板参数对应的map
-		Map<String, String> replaceMap = new ReferenceMap();
+		Map<String, Object> replaceMap = new HashMap<String, Object>();
 		replaceMap.put("#user", phone);
-		//构建消息内容数据
-		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("1012", replaceMap);
 		//发送消息,给会员
-		mcMsgdatasManager.sendToUser(msgData, memberInformation.getMemberId());
+		mcMsgdatasManager.smsSend("1012", replaceMap, null, phone);
+//		//构建消息内容数据
+//		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("1012", replaceMap);
+//		//发送消息,给会员
+//		mcMsgdatasManager.sendToUser(msgData, memberInformation.getMemberId());
 		
 		
 //		try {// 发送短信
