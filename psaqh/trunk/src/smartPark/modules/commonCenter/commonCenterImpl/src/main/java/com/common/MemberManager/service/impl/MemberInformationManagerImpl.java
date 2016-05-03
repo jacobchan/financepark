@@ -6,12 +6,16 @@ package com.common.MemberManager.service.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.entity.MemberInformation;
@@ -19,7 +23,9 @@ import com.common.MemberManager.entity.MemberRole;
 import com.common.MemberManager.entity.MemberUserInfo;
 import com.common.MemberManager.service.MemberInformationManager;
 import com.common.MemberManager.service.MemberRoleManager;
+import com.common.MessageCenter.entity.McMsgdatas;
 import com.common.MessageCenter.service.McMsgdatasManager;
+import com.gsoft.entity.ReferenceMap;
 import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.dataobj.tree.TreeNode;
@@ -48,7 +54,6 @@ import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.PasswordUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.utils.EncryptUtil;
-import com.gsoft.utils.HttpSenderMsg;
 
 
 @Service("memberInformationManager")
@@ -137,6 +142,36 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 			return member;
 		}
 	}
+	
+	//APP端重新设置密码
+	@Override
+	@RequestMapping
+	public MemberInformation findPwdReset(
+			@RequestParam("phone") String phone,
+			@RequestParam("passwd") String passwd,
+			@RequestParam("repasswd") String repasswd,
+			@RequestParam("phoneCode") String phoneCode) {
+
+		if(com.gsoft.framework.util.StringUtils.isEmpty(passwd)){
+			throw new BusException("密码不能为空！");
+		}
+		if (!passwd.equals(repasswd)) {
+			throw new BusException("两次输入的密码不一致");
+		}
+		MemberInformation mb = getUserByPhone(phone);
+		if(mb == null){
+			throw new BusException("用户不存在！");
+		}else{
+			TempDemo temp = mcMsgdatasManager.checkPhoneCode(phone, phoneCode);
+			if(!temp.isFlag()){
+				throw new BusException(temp.getBuff());
+			}
+			mb.setMemberPassword(PasswordUtils.md5Password(passwd));
+			mb.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+			saveMemberInformation(mb);
+		}
+		return mb;
+	}
 
 	/**
 	 * 删除对象
@@ -178,22 +213,13 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	 * @throws BusException
 	 */
 	@EsbServiceMapping
-	public MemberInformation saveReister(@ServiceParam(name = "memberPassword") String passwd,
-			@ServiceParam(name = "repasswd") String repasswd, @ServiceParam(name = "memberPhoneNumber") String mobile)
+	public TempDemo saveReister(@ServiceParam(name = "memberPassword") String passwd,
+			@ServiceParam(name = "repasswd") String repasswd, @ServiceParam(name = "memberPhoneNumber") String phone,
+			@ServiceParam(name = "captcha") String captcha)
 					throws BusException {
-		// 新增用户
-		// 判断用户密码是否准确
-		// if (!passwd.equals(repasswd))
-		// throw new BusException("两次输入的密码不一致");
-		// User user = new User();
-		// user.setLoginName(userName);
-		// user.setUserCaption(userName);
-		// user.setUserActive("1");
-		// user.setPassword(PasswordUtils.md5Password(repasswd));
-		// user.setGroup("003");
-		// User saveuser = userManager.saveUser(user);
+		TempDemo temp  = mcMsgdatasManager.checkPhoneCode(phone, captcha);
 		// 保存用户同时insert youi_user
-		TempDemo td = this.exsitMobile(mobile);
+		TempDemo td = this.exsitMobile(phone);
 		if (td.isFlag()) {// 为true表明手机号已经注册
 			throw new BusException("此手机号已经注册了！");
 		}
@@ -214,18 +240,28 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		}
 
 		MemberInformation memberInformation = new MemberInformation();
-		memberInformation.setMemberName(mobile);
+		memberInformation.setMemberName(phone);
 		memberInformation.setMemberPassword(PasswordUtils.md5Password(passwd));
-		memberInformation.setMemberPhoneNumber(mobile);
+		memberInformation.setMemberPhoneNumber(phone);
 		MemberInformation member = memberInformationDao.save(memberInformation);
 		// 添加默认角色
 		this.setDefaultRole(member);
-		try {// 发送短信
-			HttpSenderMsg.sendMsg(memberInformation.getMemberPhoneNumber(), "尊敬的用户，您已经在富春硅谷平台上注册成功了！欢迎使用！");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return member;
+		
+		//构建替换模板参数对应的map
+		Map<String, String> replaceMap = new ReferenceMap();
+		replaceMap.put("#user", phone);
+		//构建消息内容数据
+		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("1012", replaceMap);
+		//发送消息,给会员
+		mcMsgdatasManager.sendToUser(msgData, memberInformation.getMemberId());
+		
+		
+//		try {// 发送短信
+//			HttpSenderMsg.sendMsg(memberInformation.getMemberPhoneNumber(), "尊敬的用户，您已经在富春硅谷平台上注册成功了！欢迎使用！");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		return temp;
 	}
 
 	/**

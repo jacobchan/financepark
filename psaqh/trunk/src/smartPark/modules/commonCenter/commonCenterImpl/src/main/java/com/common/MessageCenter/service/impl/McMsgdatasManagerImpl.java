@@ -8,13 +8,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
@@ -30,6 +34,7 @@ import com.gsoft.common.util.MessageUtils;
 import com.gsoft.common.util.SMSUtil;
 import com.gsoft.entity.MsgParam;
 import com.gsoft.entity.ReferenceMap;
+import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -284,6 +289,62 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 		
 		return msgParams;
 	}
+	//发送手机验证码
+	@Override
+	@EsbServiceMapping
+	public TempDemo getMobileCaptcha(@RequestParam("phone") String phone){
+		TempDemo temp = new TempDemo();
+		//根据手机号码获取用户
+		MemberInformation mb = memberInformationManager.getUserByPhone(phone);
+		if(mb != null){
+			temp.setFlag(false);
+			temp.setBuff("该用户已存在");
+			return temp;
+		}else{
+			Map<String,Object> map = new HashMap<String, Object>();
+			Random random = new Random(new Date().getTime());
+			Long code = Math.abs(random.nextLong() % 999999);
+			String captcha = org.apache.commons.lang.StringUtils.leftPad(code.toString(), 6, '0');
+			map.put("#code", captcha);
+			Boolean success = smsSend("1010", map, null, phone);
+			if(success){
+				temp.setFlag(true);
+				temp.setBuff("发送成功");
+			}else{
+				temp.setFlag(false);
+				temp.setBuff("发送失败");
+			}
+			return temp;
+		}
+	}
+	//找回密码发送手机验证码
+	@Override
+	@EsbServiceMapping
+	public TempDemo findPhoneCaptcha(@RequestParam("phone") String phone){
+		TempDemo temp = new TempDemo();
+		//根据手机号码获取用户
+		MemberInformation mb = memberInformationManager.getUserByPhone(phone);
+		if(mb == null){
+			temp.setFlag(false);
+			temp.setBuff("手机号不存在");
+			return temp;
+		}else{
+			Map<String,Object> map = new HashMap<String, Object>();
+			Random random = new Random(new Date().getTime());
+			Long code = Math.abs(random.nextLong() % 999999);
+			String captcha = org.apache.commons.lang.StringUtils.leftPad(code.toString(), 6, '0');
+			map.put("#code", captcha);
+			Boolean success = smsSend("1011", map, null, phone);
+			if(success){
+				temp.setFlag(true);
+				temp.setBuff("发送成功");
+			}else{
+				temp.setFlag(false);
+				temp.setBuff("发送失败");
+			}
+			return temp;
+		}
+	}
 	
 	//发送消息
 	@Override
@@ -294,7 +355,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 		if(mmt != null){
 			String content = mmt.getMsgTempalateContent();
 			for (Entry<String, Object> entry : params.entrySet()) {
-				content = content.replace("@"+entry.getKey(), entry.getValue().toString());
+				content = content.replace(entry.getKey(), entry.getValue().toString());
 			}
 			McMsgdatas mmd = new McMsgdatas();
 			String status = "";
@@ -358,6 +419,41 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 			messagePostProcessor.send(mcMsgdatas, Arrays.asList(new MsgParam[]{new MsgParam(mcMsgdatas.getReceive(), "")}));
 		}
 		return null;
+	}
+	//验证手机验证码
+	@Override
+	public TempDemo checkPhoneCode(String phone, String codeStr) throws BusException {
+		TempDemo temp = new TempDemo();
+		Code code = mcMsgdatasDao.getNewCode(phone);
+		if(code != null){
+			String eCode = code.getCode();
+			String sendTime = code.getSendTime();
+			if(StringUtils.isEmpty(eCode)||StringUtils.isEmpty(sendTime)){
+				temp.setFlag(false);
+				temp.setBuff("请先获取短信验证码");
+				return temp;
+			}
+			String currentTime = DateUtils.getToday("yyyy-MM-dd hh:mm:ss");
+			if(differenceSecond(currentTime,sendTime)>5000){
+				temp.setFlag(false);
+				temp.setBuff("请先获取短信验证码");
+				return temp;
+			}else{
+				if(!codeStr.equals(com.gsoft.common.util.StringUtils.extractCode(eCode))){
+					temp.setFlag(false);
+					temp.setBuff("手机验证码不正确");
+					return temp;
+				}else{
+					temp.setFlag(true);
+					temp.setBuff("000000");
+					return temp;
+				}
+			}
+		}else{
+			temp.setFlag(false);
+			temp.setBuff("请先获取短信验证码");
+			return temp;
+		}
 	}
 	
 	@Override
