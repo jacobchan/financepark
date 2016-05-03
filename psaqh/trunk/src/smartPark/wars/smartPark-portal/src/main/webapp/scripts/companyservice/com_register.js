@@ -149,12 +149,16 @@ $(function(){
     $(".close-toast").click(function(){
         $(".toast").hide();
     });
+    $("#tp_13").removeClass("undis") ;
+    $("#tp_14").removeClass("undis") ;
 	var serviceURL = baseUrl+"purchasingmanagerCommodityManager/getComReisterCommodityList.json";
 	$.youi.ajaxUtils.ajax({
 		url:serviceURL,
 		jsonp:'data:jsonp',
 		dataType:'jsonp',
 		success:function(results){
+			 $("#tp_13").addClass("undis") ;
+			 $("#tp_14").addClass("undis") ;
 			if(results&&results.records){
 				var htmls = [];
 				var htmlss = [];
