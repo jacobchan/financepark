@@ -90,15 +90,6 @@ public interface PropertyservicemanagerCosManager extends BaseManager{
      * @throws BusException
      */
     public PropertyservicemanagerCos updateCosforpage(String cosId) throws BusException ;    	 	
-    public List<PropertyservicemanagerCos> getCoslistLikeCosCode(String userId,String cosCode,String startTime,String endTime) throws BusException;
-    /**
-	 * 根据当前用户分页查询
-	 * @param pager 分页条件
-	 * @param conditions 查询条件
-	 * @return 分页对象
-	 */
-	public PagerRecords getPagerCos(Pager pager,Collection<Condition> conditions,Collection<Order> orders) throws BusException;
-	
 	/**
      * 受理保存对象
      * 修改投诉状态标识，添加回访记录
@@ -114,10 +105,10 @@ public interface PropertyservicemanagerCosManager extends BaseManager{
 	 * 根据当前用户分页查询 根据投诉单号模糊查询（ 前台个人中心）		   chenye
 	 * @return 分页对象
 	 */
-	public PagerRecords getPagerLikeCos(Pager pager,//分页条件
+	public PagerRecords getPagerCos(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders,				
-			String startTime,String endTime,String coslikeCode) throws BusException;
+			String startTime,String endTime) throws BusException;
 	/**
 	 * 获取已完成订单的totalCount    陈烨
 	 * @param conditions
@@ -129,5 +120,5 @@ public interface PropertyservicemanagerCosManager extends BaseManager{
 	 */
 	public List<Record> getTotalCount(
    			Collection<Condition> conditions,
-   			String startTime,String endTime,String coslikeCode) throws BusException;
+   			String startTime,String endTime) throws BusException;
 }
