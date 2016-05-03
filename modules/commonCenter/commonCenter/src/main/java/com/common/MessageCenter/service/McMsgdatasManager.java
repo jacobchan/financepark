@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Collection;
 import java.util.Map;
 
+import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -150,5 +151,25 @@ public interface McMsgdatasManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public boolean checkCode(String phone,String code) throws BusException;
+	/**
+	 * 验证手机验证码
+	 * @param phone
+	 * @param codeStr
+	 * @return
+	 * @throws BusException
+	 */
+	public TempDemo checkPhoneCode(String phone, String codeStr) throws BusException;
+	/**
+	 * 发送手机验证码
+	 * @param phone
+	 * @return
+	 */
+	public TempDemo getMobileCaptcha(String phone);
+	/**
+	 * 找回密码发送手机验证码
+	 * @param phone
+	 * @return
+	 */
+	public TempDemo findPhoneCaptcha(String phone);
 	
 }
