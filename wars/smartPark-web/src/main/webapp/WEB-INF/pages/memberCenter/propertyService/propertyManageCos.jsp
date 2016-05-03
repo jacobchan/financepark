@@ -144,7 +144,7 @@
 		var cosCode=$("#cosCode").val();
 		var startTime=$("#startTime").val(); 
 		var endTime=$("#endTime").val(); 			
-		var params = ['startTime='+startTime,'endTime='+endTime,'cosCode='+cosCode,'operator:cosCode=LIKE'];
+		var params = ['startTime='+startTime,'endTime='+endTime,'cosCode='+cosCode,'operator:cosCode=LIKE','orderBy=desc:cosTime'];
 		$.ajax({
 			url:baseUrl+'propertyservicemanagerCosManager/getPagerLikeCos.json',
 			data:params.join('&'),
