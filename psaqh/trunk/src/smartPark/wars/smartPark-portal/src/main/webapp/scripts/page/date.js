@@ -28,7 +28,7 @@
 						  next_opt.month = next_opt.month-1;  
 					  }
 				   }
-				   opt.price = $.fn.dateplug.monthajax();
+				   opt.price = $.fn.dateplug.monthajax($(this));
 				   $this.html(createHtml(next_opt));
 				}) 
 			 }
