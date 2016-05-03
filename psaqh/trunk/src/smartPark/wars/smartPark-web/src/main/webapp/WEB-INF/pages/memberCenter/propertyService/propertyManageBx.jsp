@@ -96,7 +96,7 @@
 	});		
 	//分页列表
 	function refreshData(pageIndex,pageSize){
-		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'orderBy=desc:createTime'];
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'orderBy=desc:applyTime'];
 		$.ajax({
 			url:serviceURL,
 			data:params.join('&'),
@@ -193,12 +193,12 @@
 			});
 		});
 	});	
-	//根据订单号查询
+	//根据订单号   报修时间查询
 	$('.hhf-submit.f14.fr.query').click(function(){	
 		var bxCode=$("#bxCode").val();
 		var startTime=$("#startTime").val(); 
 		var endTime=$("#endTime").val(); 			
-		var params = ['bxCode='+bxCode,'operator:bxCode=LIKE','startTime='+startTime,'endTime='+endTime];
+		var params = ['bxCode='+bxCode,'operator:bxCode=LIKE','startTime='+startTime,'endTime='+endTime,'orderBy=desc:applyTime'];
 		$.ajax({
 			url:baseUrl+'propertyservicemanagerBxManager/getTotalCount.json',
 			data:params.join('&'),
