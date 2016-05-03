@@ -205,20 +205,23 @@
 				</tr>
 				<tr class="show2">
 					<td><input type="text"  id="applyPhone" placeholder="请输入有效的手机号码" style="width:100%"></td>
-					<!-- <td style="padding-left:10px;">
-						<a href="javascript:;" class="send-psw" style="width:100%">发送验证码</a>
-					</td> -->
+					<td style="padding-left:10px;">
+						<a href="javascript:;" class="send-psw" id="sendMobileCaptcha" onclick="getCaptcha();" style="width:100%">发送验证码</a>
+					</td>
 				</tr>
-				<!-- <tr>
+				<tr>
 					<td colspan="2">
-						<input type="text" placeholder="请输入验证码" style="width:100%">
+						<input type="text" placeholder="请输入验证码" style="width:100%" id="captcha">
 						<p style="color:#e04648" class="f12 mt5 undis">验证码错误，请重新输入验证码</p>
 					</td>
-				</tr> -->
+				</tr>
 				<tr>
 					<td colspan="2"><input type="button" class="ib-btn bm" style="width:100%;margin-top:0px;" value="报名"></td>
 				</tr>
 			</tbody></table>
+			<div class="error-toast">
+				<p></p>
+			</div>
 		</div>
 	</div>
 	<!-- 弹窗  end -->
@@ -370,6 +373,9 @@
 			$(".bg-tanc").attr("id",$(this).parents("li").attr("id"));
 			$("#applyMember").val('');
 			$("#applyPhone").val('');
+			$("#captcha").val('');
+			$('#sendMobileCaptcha').html("发送验证码");
+			$('#sendMobileCaptcha').attr('onclick','getCaptcha();');
 			$(".bg-tanc").show();
 			e.stopPropagation();	
 		});
@@ -390,28 +396,68 @@
 	
 	</script>	
 	<script type="text/javascript">
+	function getCaptcha(){
+		var memberPhoneNumber = $("#applyPhone").val();
+		var applyId = $(".bg-tanc").attr("id");
+		if(!isMobil(memberPhoneNumber)){
+			showMessagem("请输入正确的手机号!");
+			return false;
+		}
+		$.youi.ajaxUtils.ajax({
+			url:baseUrl+ "activityApplylistManager/getActivityCaptcha.json",
+			data:{phone:memberPhoneNumber,applyId:applyId},
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(result){
+				var record = result.record;
+				var capt = record.buff;
+				if(!/^\d{6}$/.test(capt)){
+					enableSmsButton(3,capt,'重新获取');
+				}else{
+					enableSmsButton(60,'发送成功','重新获取');
+				} 
+				$('#sendMobileCaptcha').attr('onclick','volid(0);');
+			}
+		});
+	}
+	function enableSmsButton(sec,processText,enableText){
+		$('#sendMobileCaptcha').html(processText + '(' + sec + ')');
+		if(sec <= 0){
+			$('#sendMobileCaptcha').html(enableText);
+			$('#sendMobileCaptcha').attr('onclick','getCaptcha();');
+		}
+		else{
+			t(sec,processText,enableText);
+		}
+	}
+	function t(sec,processText,enableText){
+		var m=setTimeout(function(){
+			enableSmsButton(sec - 1,processText,enableText);
+		},1000);
+		if($(".bg-tanc").is(":hidden")){
+			clearTimeout(m);
+		}
+	}
 	//报名提交
 	$('.ib-btn.bm').click(function(){
-		  if(!isLogin){
-			   clearInterval(timer);
-	            $(".toast").show();
-	            pltime=2;
-	            timer=setInterval("closeTanc()",1000);
-			 	 return false;
-			}
 		  	var applyId = $(".bg-tanc").attr("id");
 		 	var applyMember=$("#applyMember").val();
 			var applyPhone=$("#applyPhone").val();
+			var captcha = $("#captcha").val();
+			if(applyMember==''||applyMember==null){
+				showMessagem("请输入姓名!");
+				return false;
+			}
 			if(!isMobil(applyPhone)){
-				clearInterval(timer);
-				$(".tc.mt25").text("请输入正确的手机号！");
-	           	$(".toast").show();
-	           	pltime=1;
-	           	timer=setInterval("closeTanc()",1000);
+				showMessagem("请输入正确的手机号!");
+				return false;
+			}
+			if(captcha==''||captcha==null){
+				showMessagem("请获取短信校验码!");
 				return false;
 			}
 			var serviceURL = baseUrl+"activityApplylistManager/saveActivityApplylistForPage.json";
-			var params = ['activityApply.applyId='+applyId,'applyMember='+applyMember,'applyPhone='+applyPhone];
+			var params = ['activityApply.applyId='+applyId,'applyMember='+applyMember,'applyPhone='+applyPhone,'captcha='+captcha];
 			$.youi.ajaxUtils.ajax({
 				url:serviceURL,
 				data:params.join('&'),
@@ -419,19 +465,13 @@
 				dataType:'jsonp',
 				success:function(results){
 					if(results&&results.record){
-						clearInterval(timer);
-						$(".tc.mt25").text("报名成功!");
-			         	$(".toast").show();
-			         	pltime=2;
-			         	timer=setInterval("closeTanc()",1000);
-			         	$(".bg-tanc").hide();
-					}else{
-						clearInterval(timer);
-						$(".tc.mt25").text("您已报名成功!");
-			         	$(".toast").show();
-			         	pltime=2;
-			         	timer=setInterval("closeTanc()",1000);
-			         	//$(".bg-tanc").hide();
+						var record = results.record;
+						if(record.code=="00"){
+							showMessagem(record.meg);
+			         		setTimeout(function(){$(".bg-tanc").hide();},2000);
+						}else{
+							showMessagem(record.meg);
+						}
 					}
 				}
 			});			  
@@ -442,6 +482,11 @@
 	   		if (!patrn.exec(s)) return false
 	   	 	return true
 		}
+	function showMessagem(message){
+     	$(".error-toast").animate({top:"20px",opacity:"1"});
+     	$(".error-toast p").html(message);
+ 		setTimeout(function(){$(".error-toast").animate({top:"-40px",opacity:"0"})},2000);
+     }
 	</script>
 	<script type="text/javascript">
 		//toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
