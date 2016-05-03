@@ -1,4 +1,4 @@
-var pageSize=1;
+var pageSize=12;
 var pageCount=1;
 var serviceURL = baseUrl+"enterbusinessmanagerRzManager/getPagerEnterbusinessmanagerRzs.json";
 //获取字符串长度（中文2，英文1）
