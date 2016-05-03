@@ -14,9 +14,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.ConditionCollection;
-import com.gsoft.framework.esb.annotation.EsbServiceMapping;
-import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.common.MemberManager.entity.MemberInformation;
 
 public interface MemberInformationManager extends BaseManager{
@@ -74,7 +71,7 @@ public interface MemberInformationManager extends BaseManager{
 	 * @param mobile 手机号
 	 * @throws BusException
 	 */
-	public MemberInformation saveReister(String passwd,String repasswd,String mobile) throws BusException;
+	public TempDemo saveReister(String passwd,String repasswd,String mobile,String captcha) throws BusException;
 	
 	/**
 	 * 判断手机号是否已经注册
@@ -172,13 +169,21 @@ public interface MemberInformationManager extends BaseManager{
 	public List<Record> getTotalCount(
 	   			Collection<Condition> conditions,
 	   			String userId)  throws BusException;
-	 /**
+	/**
+	 * APP端重新设置密码
+	 * @param phone
+	 * @param passwd
+	 * @param repasswd
+	 * @param phoneCode
+	 * @return
+	 */
+	public MemberInformation findPwdReset(String phone, String passwd,
+			String repasswd, String phoneCode);
+	/**
      * 前台个人中心    安全中心，chenye
      * @param userId  
      * @return
      * @throws BusException
      */
-	@EsbServiceMapping
 	public MemberInformation getMember( String userId) throws BusException;
-		
 }
