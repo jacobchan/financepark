@@ -194,29 +194,37 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
 
     	//保存可办理预约记录
     	for(PropertyservicemanagerEntering entering : listEntering){
-    		List<PropertyservicemanagerEntering> enteringList=new ArrayList<PropertyservicemanagerEntering> ();
-    		entering.setEnteringAlre("0");
-    		entering.setEnteringRemain(entering.getEnteringSum());
-    		entering.setEnteringStatus("01");//预约状态
-    		entering.setEnteringTime("AM");//时段AM： 9:00-11:00
-    		entering.setCreateUser(entering.getUpdateUser());
-    		entering.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    		entering.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    		enteringList.add(entering);
-    		
-    		PropertyservicemanagerEntering p=new PropertyservicemanagerEntering();
-    		p.setEnteringSum(entering.getEnteringSum());//下午预约总量
-    		p.setEnteringAlre("0");
-    		p.setEnteringRemain(entering.getEnteringSum());
-    		p.setEnteringDate(entering.getEnteringDate());
-    		p.setEnteringTime("PM");//时段PM： 14:00-17:00
-    		p.setEnteringStatus("01");//01:可以预约
-    		p.setCreateUser(entering.getUpdateUser());
-    		p.setUpdateUser(entering.getUpdateUser());
-    		p.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    		p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    		enteringList.add(p);
-    		propertyservicemanagerEnteringDao.save(enteringList);
+    		if(StringUtils.isNotEmpty(entering.getEnteringDate())){
+    			if(propertyservicemanagerEnteringDao.exists("enteringDate",entering.getEnteringDate())){
+    				throw new BusException("该预约日期已经添加,无需重复添加！");
+    			}else{
+    				List<PropertyservicemanagerEntering> enteringList=new ArrayList<PropertyservicemanagerEntering> ();
+    	    		entering.setEnteringAlre("0");
+    	    		entering.setEnteringRemain(entering.getEnteringSum());
+    	    		entering.setEnteringStatus("01");//预约状态
+    	    		entering.setEnteringTime("AM");//时段AM： 9:00-11:00
+    	    		entering.setCreateUser(entering.getUpdateUser());
+    	    		entering.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	    		entering.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	    		enteringList.add(entering);
+    	    		
+    	    		PropertyservicemanagerEntering p=new PropertyservicemanagerEntering();
+    	    		p.setEnteringSum(entering.getEnteringSum());//下午预约总量
+    	    		p.setEnteringAlre("0");
+    	    		p.setEnteringRemain(entering.getEnteringSum());
+    	    		p.setEnteringDate(entering.getEnteringDate());
+    	    		p.setEnteringTime("PM");//时段PM： 14:00-17:00
+    	    		p.setEnteringStatus("01");//01:可以预约
+    	    		p.setCreateUser(entering.getUpdateUser());
+    	    		p.setUpdateUser(entering.getUpdateUser());
+    	    		p.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	    		p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	    		enteringList.add(p);
+    	    		propertyservicemanagerEnteringDao.save(enteringList);
+    			}
+    		}else{
+    			throw new BusException("请选择预约日期！");
+    		}
     	}
 
     }
