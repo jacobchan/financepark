@@ -213,6 +213,8 @@ $(function(){
 	//获取精彩活动top2	、一览表
 	function plactive(){
 		//获取创业营类型id
+		$("#tp_55").removeClass("undis") ;
+		$("#tp_56").removeClass("undis") ;
 		var name = "硅谷创业营";
 		$.youi.ajaxUtils.ajax({
 			url:baseUrl+"applayTypeManager/getApplayTypes.json",
@@ -240,6 +242,7 @@ $(function(){
 			data:postData,
 			dataType:'jsonp',
 			success:function(results){
+				$("#tp_55").addClass("undis") ;
 				if(results&&results.records){
 					var record = results.records;
 					var html = "";
@@ -274,6 +277,7 @@ $(function(){
 			data:postData,
 			dataType:'jsonp',
 			success:function(results){
+				$("#tp_56").addClass("undis") ;
 				if(results&&results.records){
 					var record = results.records;
 					var html = "";
