@@ -116,6 +116,7 @@ function star(ele){
 }
 //评论列表展示
 function evaluate(){
+	$("#tp_11").removeClass("undis") ;
 	var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/getPagerPurGenreEvaluatesByCode.json";
 	$.youi.ajaxUtils.ajax({
 		url:serviceURL,
@@ -124,6 +125,7 @@ function evaluate(){
 		dataType:'jsonp',
 		success:function(results){
 			if(results&&results.records){
+				$("#tp_11").addClass("undis") ;
 				var htmls = [];
 				for(var i=0;i<results.records.length;i++){
 					htmls.push('<li><div class="fl"><img src="../styles/images/company/user.png"/><span class="record_info ml20 c3 lh24">'+
@@ -132,6 +134,7 @@ function evaluate(){
 				}
 				$('.record_ul').html(htmls.join(''));
 			}
+			$("#tp_11").addClass("undis") ;
 		}
 	});
 }
