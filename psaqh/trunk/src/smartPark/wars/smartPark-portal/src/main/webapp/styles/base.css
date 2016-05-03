@@ -313,3 +313,6 @@ img.loading-2 {
     background-repeat: no-repeat;
     background-position: center center;
 }
+
+a.send-psw{display: inline-block;text-align: center;padding: 0px 10px;line-height: 30px;height: 30px;border:1px solid #ddd;color: #666;}
+a.send-psw:hover,a.send-psw.active{background: #e7e7e7;}
