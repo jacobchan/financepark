@@ -96,7 +96,7 @@
 	});		
 	//分页列表
 	function refreshData(pageIndex,pageSize){
-		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'orderBy=desc:createTime'];
 		$.ajax({
 			url:serviceURL,
 			data:params.join('&'),
@@ -232,7 +232,7 @@
 		 var bxCode=$("#bxCode").val();	
 		 var startTime=$("#startTime").val(); 
 		 var endTime=$("#endTime").val(); 
-		 var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'bxCode='+bxCode,'operator:bxCode=LIKE','startTime='+startTime,'endTime='+endTime];
+		 var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'bxCode='+bxCode,'operator:bxCode=LIKE','startTime='+startTime,'endTime='+endTime,'orderBy=desc:createTime'];
 		 $.ajax({
 				url:baseUrl+'propertyservicemanagerBxManager/getPagerBxs.json',
 				data:params.join('&'),
