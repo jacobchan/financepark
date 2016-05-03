@@ -566,6 +566,7 @@ var commodityId;
 		$("#online").click(function(){
 			var dates=new Array();
 			var times=new Array();
+			var dateAndTime=new Array();
 			$("#data_timer td.clicktd").not("#data_timer td.today").each(function(){
 				var active=$(this).index();
 				var time=$(this).html();
@@ -591,202 +592,271 @@ var commodityId;
 					time = "10";
 				}
 				var date=$(".fc-day-header").eq(active).attr("data-date");
-				dates.push(date);
-				times.push(time);
+				dates.push(date);//获取日期
+				dateAndTime.push(date+"_"+time);//获取日期和时间段
 			});
-			if(dates.length>0){
-				$(".pop_layer").show();
-				$(".pop_layer.pl1").hide();
-			}else{
-				clearInterval(timer);
-				$("#msg").text("请选择预约日期和时间段");
-	            $(".toast").show();
-	            pltime=2;
-	            timer=setInterval("closeTanc()",1000)
-				
-			}
-			//alert("已预约id："+$("#resoIds").html().substring(0,$("#resoIds").html().length-1));
 			
-		});
-		$(".close0").click(function(){
+			if(dates.length>0){
+				
+				var datess=new Array();
+				var dateAndTimes=new Array();
+				var date0=dates[0];
+				for(var i=0;i<dates.length;i++){
+					//将日期去重
+					if(datess.indexOf(dates[i]) == -1){
+						datess.push(dates[i]);
+					}
+					
+				}
+				var a=new Array(datess.length);
+				var b=new Array(datess.length);
+				for(var i=0;i<datess.length;i++){
+					a[i]=new Array();
+					b[i]=new Array();
+					//根据日期将时间段分组
+					for(var j=0;j<dateAndTime.length;j++){
+						if(dateAndTime[j].split("_")[0]==datess[i]){
+							a[i].push(datess[i]);
+							b[i].push(dateAndTime[j].split("_")[1]);//获取同一天的时间段值
+						}
+					}
+				}
+				var noContinue=new Array();
+				for(var i=0;i<a.length;i++){
+					var c=b[i];
+			        if(c.length>1){
+	                            var n = c.length;
+								var min = Number(c[0]), max = Number(c[0]);
+								for (var j = 1; j < n; j++) {
+									//比较是时间段是否连续
+									if (Number(c[j]) != 0) {
+										if (min > Number(c[j]))
+											min = Number(c[j]);
+										if (max < Number(c[j]))
+											max = Number(c[j]);
+									}
+								}
+								if (max - min > n - 1) {
+									//时间段不连续
+									noContinue.push(a[i]);
+								}
+							}
+				}
+
+						if (noContinue.length > 0) {
+							clearInterval(timer);
+							$("#msg").text("请选择连续的时间段");
+							$(".toast").show();
+							pltime = 2;
+							timer = setInterval("closeTanc()", 1000)
+						} else {
+							$(".pop_layer").show();
+							$(".pop_layer.pl1").hide();
+						}
+
+					} else {
+						clearInterval(timer);
+						$("#msg").text("请选择预约日期和时间段");
+						$(".toast").show();
+						pltime = 2;
+						timer = setInterval("closeTanc()", 1000)
+
+					}
+					//alert("已预约id："+$("#resoIds").html().substring(0,$("#resoIds").html().length-1));
+
+				});
+		$(".close0").click(function() {
 			$(".pop_layer").hide();
 		});
-		  //提交预约
-		$('.btn-cheng').click(function(){
-			if(!isLogin){
-				clearInterval(timer);
-				$("#msg").text("请登录后重试！");
-	            $(".toast").show();
-	            pltime=2;
-	            timer=setInterval("closeTanc()",1000)
-				return;
-				}
-			var enteringName=$("#enteringName").val();
-			var enteringTelephone=$("#enteringTelephone").val();
-			var tea=false;
-		    if($(".ib-checkbox").children('input[type="checkbox"]').is(":checked")){
-		    	tea=true;
-	          }
-            if(enteringName == null||enteringName == ""){
-            	clearInterval(timer);
-            	$("#msg").text("请填写联系人");
-	            $(".toast").show();
-	            pltime=2;
-	            timer=setInterval("closeTanc()",1000)
-				return;
-			}
-            if(enteringTelephone !=null&& enteringTelephone!=""){
-				 if(isMobil(enteringTelephone)){
-						
-					}else{
-						clearInterval(timer);
-						$("#msg").text("电话格式不正确！");
-			            $(".toast").show();
-			            pltime=2;
-			            timer=setInterval("closeTanc()",1000)
-						return;
-					}
-		    	}else{
-		    		clearInterval(timer);
-		    		$("#msg").text("请填写联系人电话");
-		            $(".toast").show();
-		            pltime=2;
-		            timer=setInterval("closeTanc()",1000)
-				    return;
-		    	}
-			
-			
-			
-			var dates=new Array();
-			var times=new Array();
-			$("#data_timer td.clicktd").each(function(){
-				var active=$(this).index();
-				var time=$(this).html();
-				if(time=='8:00-9:00'){
-					time = "01";
-				}else if(time == "9:00-10:00"){
-					time = '02';
-				}else if(time == "10:00-11:00"){
-					time = '03';
-				}else if(time == "11:00-12:00"){
-					time = '04';
-				}else if(time == "12:00-13:00"){
-					time = "05";
-				}else if(time == "13:00-14:00"){
-					time = "06";
-				}else if(time == "14:00-15:00"){
-					time = "07";
-				}else if(time == "15:00-16:00"){
-					time = "08";
-				}else if(time == "16:00-17:00"){
-					time = "09";
-				}else{
-					time = "10";
-				}
-				var date=$(".fc-day-header").eq(active).attr("data-date");
-				dates.push(date);
-				times.push(time);
-			});
-			if(dates.length>0){
-				var length=dates.length;
-        		var userorderAmount=$('#commodityPrice').text();
-        		userorderAmount=userorderAmount*length;
-				var string ="";
-				for(var i=0;i<dates.length;i++){
-					string+="records["+i+"].resoDate="+dates[i]+"&";
-				}
-				for(var i=0;i<times.length;i++){
-					string+="records["+i+"].resoTime="+times[i]+"&";
-				}
-				string+="userorderAmount="+userorderAmount+"&"+"commodityId="+commodityId+"&"+"addService="+tea;
-			   var serviceURL =baseUrl+"publicutilitiesmanagerResoManager/savePublicResoOrderByList.json";
-				//公共方法
-			 $.youi.ajaxUtils.ajax({
-					url:serviceURL,
-					data:string,
-					jsonp:'data:jsonp',
-					dataType:'jsonp',
-					success:function(result){
-						if(result&&result.record){
-							$(".pop_layer").hide();
-							$(".bg-tanc.m1").show();
-							$('#ti-m1').text('5');
-							a=5;
-							timer1=setInterval("jump1()",1000);
-						//	window.location="roomxq.html?id="+commodityId;
-						}
-					},error:function(XMLHttpRequest, textStatus, errorThrown){
-						$(".pop_layer").hide();
-						$("#errorText").text(XMLHttpRequest);
-						$(".bg-tanc.m2").show();
-						$('#ti-m2').text('5');
-						b=5;
-						timer2=setInterval("jump2()",1000);
-					}
-				});
-            }else{
-            	clearInterval(timer);
-            	$("#msg").text("请选择预约日期和时间段");
-	            $(".toast").show();
-	            pltime=2;
-	            timer=setInterval("closeTanc()",1000)
-            }	
-			
-			//校验手机号格式
-			function isMobil(s) {
-			    	var patrn = /^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
-			   		if (!patrn.exec(s)) return false
-			   	 	return true
-				}
-                
+		//提交预约
+		$('.btn-cheng')
+				.click(
+						function() {
+							if (!isLogin) {
+								clearInterval(timer);
+								$("#msg").text("请登录后重试！");
+								$(".toast").show();
+								pltime = 2;
+								timer = setInterval("closeTanc()", 1000)
+								return;
+							}
+							var enteringName = $("#enteringName").val();
+							var enteringTelephone = $("#enteringTelephone")
+									.val();
+							var tea = false;
+							if ($(".ib-checkbox").children(
+									'input[type="checkbox"]').is(":checked")) {
+								tea = true;
+							}
+							if (enteringName == null || enteringName == "") {
+								clearInterval(timer);
+								$("#msg").text("请填写联系人");
+								$(".toast").show();
+								pltime = 2;
+								timer = setInterval("closeTanc()", 1000)
+								return;
+							}
+							if (enteringTelephone != null
+									&& enteringTelephone != "") {
+								if (isMobil(enteringTelephone)) {
+
+								} else {
+									clearInterval(timer);
+									$("#msg").text("电话格式不正确！");
+									$(".toast").show();
+									pltime = 2;
+									timer = setInterval("closeTanc()", 1000)
+									return;
+								}
+							} else {
+								clearInterval(timer);
+								$("#msg").text("请填写联系人电话");
+								$(".toast").show();
+								pltime = 2;
+								timer = setInterval("closeTanc()", 1000)
+								return;
+							}
+
+							var dates = new Array();
+							var times = new Array();
+							$("#data_timer td.clicktd").each(
+									function() {
+										var active = $(this).index();
+										var time = $(this).html();
+										if (time == '8:00-9:00') {
+											time = "01";
+										} else if (time == "9:00-10:00") {
+											time = '02';
+										} else if (time == "10:00-11:00") {
+											time = '03';
+										} else if (time == "11:00-12:00") {
+											time = '04';
+										} else if (time == "12:00-13:00") {
+											time = "05";
+										} else if (time == "13:00-14:00") {
+											time = "06";
+										} else if (time == "14:00-15:00") {
+											time = "07";
+										} else if (time == "15:00-16:00") {
+											time = "08";
+										} else if (time == "16:00-17:00") {
+											time = "09";
+										} else {
+											time = "10";
+										}
+										var date = $(".fc-day-header").eq(
+												active).attr("data-date");
+										dates.push(date);
+										times.push(time);
+									});
+							if (dates.length > 0) {
+								var length = dates.length;
+								var userorderAmount = $('#commodityPrice')
+										.text();
+								userorderAmount = userorderAmount * length;
+								var string = "";
+								for (var i = 0; i < dates.length; i++) {
+									string += "records[" + i + "].resoDate="
+											+ dates[i] + "&";
+								}
+								for (var i = 0; i < times.length; i++) {
+									string += "records[" + i + "].resoTime="
+											+ times[i] + "&";
+								}
+								string += "userorderAmount=" + userorderAmount
+										+ "&" + "commodityId=" + commodityId
+										+ "&" + "addService=" + tea;
+								var serviceURL = baseUrl
+										+ "publicutilitiesmanagerResoManager/savePublicResoOrderByList.json";
+								//公共方法
+								$.youi.ajaxUtils.ajax({
+									url : serviceURL,
+									data : string,
+									jsonp : 'data:jsonp',
+									dataType : 'jsonp',
+									success : function(result) {
+										if (result && result.record) {
+											$(".pop_layer").hide();
+											$(".bg-tanc.m1").show();
+											$('#ti-m1').text('5');
+											a = 5;
+											timer1 = setInterval("jump1()",
+													1000);
+											//	window.location="roomxq.html?id="+commodityId;
+										}
+									},
+									error : function(XMLHttpRequest,
+											textStatus, errorThrown) {
+										$(".pop_layer").hide();
+										$("#errorText").text(XMLHttpRequest);
+										$(".bg-tanc.m2").show();
+										$('#ti-m2').text('5');
+										b = 5;
+										timer2 = setInterval("jump2()", 1000);
+									}
+								});
+							} else {
+								clearInterval(timer);
+								$("#msg").text("请选择预约日期和时间段");
+								$(".toast").show();
+								pltime = 2;
+								timer = setInterval("closeTanc()", 1000)
+							}
+
+							//校验手机号格式
+							function isMobil(s) {
+								var patrn = /^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+								if (!patrn.exec(s))
+									return false
+								return true
+							}
+
+						});
+
+		$(".tc-close").click(function() {
+			$(".bg-tanc").hide();
+			clearInterval(timer1);
+			clearInterval(timer2);
 		});
 
-		  
-		 $(".tc-close").click(function(){     
-            $(".bg-tanc").hide(); 
-            clearInterval(timer1);
-            clearInterval(timer2);
-        });
-		 
-		
 	});
-	var a,b,timer1,timer2;
-	function jump1(){
-		if(a>1){
+	var a, b, timer1, timer2;
+	function jump1() {
+		if (a > 1) {
 			a--;
 			$("#ti-m1").text(a);
-		}else{
-			window.location=cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
-		}		
+		} else {
+			window.location = cenUrl
+					+ "member/memberCenter/personalCenter/orderCenter.html";
+		}
 	}
-	function jump2(){
-		if(b>1){
+	function jump2() {
+		if (b > 1) {
 			b--;
 			$("#ti-m2").text(b);
-		}else{
-			window.location="roomxq.html?id="+commodityId;
-		}		
+		} else {
+			window.location = "roomxq.html?id=" + commodityId;
+		}
 	}
-	
+
 	//跳转订单中心
-	function jumpOrder(){
-		window.location=cenUrl+"member/memberCenter/personalCenter/orderCenter.html";
+	function jumpOrder() {
+		window.location = cenUrl
+				+ "member/memberCenter/personalCenter/orderCenter.html";
 	}
 	//返回
-	function jumpBack(){
-		window.location="roomxq.html?id="+commodityId;
+	function jumpBack() {
+		window.location = "roomxq.html?id=" + commodityId;
 	}
-	      //toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
-        var pltime,timer;
-        function closeTanc(){
-            if(pltime>1){
-                pltime--;
-            }else{
-                $(".toast").hide();
-            }       
-        }
-        
-        
+	//toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
+	var pltime, timer;
+	function closeTanc() {
+		if (pltime > 1) {
+			pltime--;
+		} else {
+			$(".toast").hide();
+		}
+	}
 </script>
 
    <!-- 弹出层样式 -->
