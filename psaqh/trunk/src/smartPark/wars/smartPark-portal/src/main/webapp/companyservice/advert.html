@@ -30,12 +30,15 @@
         <div><img src="../styles/images/company/ad_banner.jpg"/></div>
         <div class="mt30 clearfix">
         	<div class="res_left">
+        		<div class="clearfix tc undis" id="tp_10">
+		 		 	<img src="../styles/images/loading_2.gif" border="0" />
+		  		</div>
             	<ul id="carfix">
             	
                 </ul>
                <div class="tcdPageCode fr">
                 </div>
-                <div class="tc" style="background:#f6f6f6;height:600px;">
+                <div class="tc imagenone" style="background:#f6f6f6;height:600px;">
                     <img src="../styles/images/none1.png" border="0" style="margin-top:200px;" />
                 </div>
             </div>
@@ -113,6 +116,7 @@ var pageCount=1;
 		});
 		
 		function refreshData(pageIndex,pageSize){
+			$("#tp_10").removeClass("undis") ;
 			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
 			$.youi.ajaxUtils.ajax({
 				url:serviceURL,
@@ -120,8 +124,9 @@ var pageCount=1;
 				data:params.join('&'),
 				dataType:'jsonp',
 				success:function(results){
+					$("#tp_10").addClass("undis") ;
 					if(results&&results.records){
-						$('.tc').hide();
+						$('.imagenone').hide();
 						 _parseRecords(results.records);
 					}
 				}
