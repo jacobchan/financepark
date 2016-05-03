@@ -71,12 +71,12 @@ $(function(){
 			url:cenUrl + "web/loginUser/registerCaptcha.json",
 			data:{phone:memberPhoneNumber,imageCode:imageCode},
 			success:function(results){
-				var capt = results.record.html;
-				if(!/^\d{6}$/.test(capt)){
-					enableSmsButton(3,capt,'重新获取');
+				var record = results.record;
+				if(!record.flag){
+					enableSmsButton(3,record.buff,'重新获取');
 					$(".message-yz").hide();
 				}else{
-					enableSmsButton(60,'发送成功','重新获取');
+					enableSmsButton(60,record.buff,'重新获取');
 					$(".message-yz").hide();
 					$('#imageCode').val('');
 					changeRandcode();

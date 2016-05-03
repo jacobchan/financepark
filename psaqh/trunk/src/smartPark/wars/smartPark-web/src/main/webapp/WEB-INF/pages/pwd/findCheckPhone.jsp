@@ -74,11 +74,11 @@
 			success:function(result){
 				if(result && result.record){
 					$('#sendCaptcha').attr('onclick','void(0);');
-					var res = result.record.html;
-					if(!/^\d{6}$/.test(res)){
-						enableSmsButton(3,res,'重新获取');
+					var record = result.record;
+					if(!record.flag){
+						enableSmsButton(3,record.buff,'重新获取');
 					}else{
-						enableSmsButton(60,'发送成功','重新获取');
+						enableSmsButton(60,record.buff,'重新获取');
 					}
 				}
 			}
