@@ -3,9 +3,9 @@
  */
 package com.manage.PropertyServiceManager.service.impl;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
-import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -21,23 +20,22 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.PubCondition;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
-import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
 import com.gsoft.utils.HttpSenderMsg;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCharge;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerOc;
-import com.manage.ActivityManager.entity.ActivityApply;
-import com.manage.ActivityManager.entity.ActivityApplylist;
 import com.manage.EmployeeManager.dao.EnterpriseEmployeesDao;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
-import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerOcDao;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerOc;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerOcManager;
          
 @Service("propertyservicemanagerOcManager")
@@ -249,87 +247,60 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 	    }		
 		  
 	}
-	//通过订单号获取当前用户的一卡通申请记录  模糊查询
-	    @EsbServiceMapping
-		 public List<PropertyservicemanagerOc> getOclistLikeOcCode(
-				 @ServiceParam(name="userId",pubProperty="userId") String userId,
-				@ServiceParam(name="ocCode") String ocCode,
-				@ServiceParam(name="startTime") String startTime,
-				@ServiceParam(name="endTime") String endTime) throws BusException {	
-	       
-			Collection<Condition> condition = new ArrayList<Condition>();
-			condition.add(ConditionUtils.getCondition("memberId", Condition.EQUALS, userId));	
-			//condition.add(ConditionUtils.getCondition("ocCode", Condition.LIKE, ocCode));
-			condition.add(ConditionUtils.getCondition("ocDate", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
-			List<PropertyservicemanagerOc> list =propertyservicemanagerOcDao.commonQuery(condition, null);
-			return list;
-	    }
-	    /**
-		 * 前台根据当前用户分页查询
-		 * @return 分页对象
-		 */
-	    @SuppressWarnings("unchecked")
-	    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
-		public PagerRecords getPagerOc(Pager pager,//分页条件
-				@ConditionCollection(domainClazz=PropertyservicemanagerOc.class) Collection<Condition> conditions,//查询条件
-				@OrderCollection Collection<Order> orders)
-				throws BusException {	    		   
-	    	PagerRecords pagerRecords = propertyservicemanagerOcDao.findByPager(pager, conditions, orders);
-	    	List<PropertyservicemanagerOc> list = pagerRecords.getRecords();
-	    	for(PropertyservicemanagerOc oc : list){
-    			if(StringUtils.isNotEmpty(oc.getMemberId())){
-    				String memberId = oc.getMemberId();
-    				MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
-    				oc.setMember(memberInformation);
-    			}
+	 /**
+	  * 前台根据当前用户分页查询
+	  * @param pager
+	  * @param conditions
+	  * @param orders
+	  * @param startTime
+	  * @param endTime
+	  * @return
+	  * @throws BusException
+	  */
+	@SuppressWarnings("unchecked")
+	@EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	public PagerRecords getPagerOc(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PropertyservicemanagerOc.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders,
+			@ServiceParam(name="startTime") String startTime,
+			@ServiceParam(name="endTime") String endTime)
+			throws BusException {
+	    if(StringUtils.isNotEmpty(startTime)||StringUtils.isNotEmpty(endTime)){
+	    	conditions.add(ConditionUtils.getCondition("ocDate", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));	    	
+	   	}
+	    PagerRecords pagerRecords = propertyservicemanagerOcDao.findByPager(pager, conditions, orders);
+	   	List<PropertyservicemanagerOc> list = pagerRecords.getRecords();
+	   	for(PropertyservicemanagerOc oc : list){
+    		if(StringUtils.isNotEmpty(oc.getMemberId())){
+    			String memberId = oc.getMemberId();
+    			MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
+    			oc.setMember(memberInformation);
     		}
-	    	return pagerRecords;
-		}
-	    /**
-		 * 前台根据当前用户分页查询         chenye
-		 * @return 分页对象
-		 */
-	    @SuppressWarnings("unchecked")
-	    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
-		public PagerRecords getPagerLikeOc(Pager pager,//分页条件
-				@ConditionCollection(domainClazz=PropertyservicemanagerOc.class) Collection<Condition> conditions,//查询条件
-				@OrderCollection Collection<Order> orders,
-				@ServiceParam(name="startTime") String startTime,
-				@ServiceParam(name="endTime") String endTime)
-				throws BusException {
-	        conditions.add(ConditionUtils.getCondition("ocDate", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));	    	
-	    	PagerRecords pagerRecords = propertyservicemanagerOcDao.findByPager(pager, conditions, orders);
-	    	List<PropertyservicemanagerOc> list = pagerRecords.getRecords();
-	    	for(PropertyservicemanagerOc oc : list){
-    			if(StringUtils.isNotEmpty(oc.getMemberId())){
-    				String memberId = oc.getMemberId();
-    				MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
-    				oc.setMember(memberInformation);
-    			}
-    		}
-	    	return pagerRecords;
-		}
-	    /**
-	   	 * 获取已完成订单的totalCount    陈烨
-	   	 * @param conditions
-	   	 * @return
-	   	 * @throws BusException
-	   	 */
-	       @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
-	   	public List<Record> getTotalCount(
+    	}
+	   	return pagerRecords;
+	}
+	    
+   /**
+	* 获取已完成订单的totalCount    陈烨
+  	* @param conditions   	
+  	*  * @return
+	* @throws BusException
+	*/
+	@EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	public List<Record> getTotalCount(
 	   			@ConditionCollection(domainClazz=PropertyservicemanagerOc.class) Collection<Condition> conditions,
 				@ServiceParam(name="startTime") String startTime,
 				@ServiceParam(name="endTime") String endTime)  throws BusException{
-	   		List<Record> recordList=new ArrayList<Record>();
-	   		if(StringUtils.isNotEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){
-			conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
-	   			}
-	    	List<PropertyservicemanagerOc> List = this.getPropertyservicemanagerOcs(conditions, null);
-	   		Record record = new Record();
-	   		record.put("totalCount", List.size());
-	   		recordList.add(record);
-	   		return recordList;
-	   	} 
+	 	List<Record> recordList=new ArrayList<Record>();
+		if(StringUtils.isNotEmpty(startTime)||StringUtils.isNotEmpty(endTime)){
+	   		conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+		}
+		List<PropertyservicemanagerOc> List = this.getPropertyservicemanagerOcs(conditions, null);
+	   	Record record = new Record();
+	  	record.put("totalCount", List.size());
+		recordList.add(record);
+	   	return recordList;
+	} 
    /**
 	* 根据主键查询 前台个人中心，一卡通预约详情   chenye
 	*/		
