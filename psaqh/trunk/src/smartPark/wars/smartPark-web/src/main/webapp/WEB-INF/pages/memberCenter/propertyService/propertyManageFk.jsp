@@ -189,7 +189,7 @@
 			var fkCode=$("#fkCode").val();
 			var startTime=$("#startTime").val(); 
 			var endTime=$("#endTime").val(); 			
-			var params = ['fkCode='+fkCode,'operator:fkCode=LIKE','startTime='+startTime,'endTime='+endTime,'orderBy=desc:applyTime'];
+			var params = ['fkCode='+fkCode,'operator:fkCode=LIKE','startTime='+startTime,'endTime='+endTime];
 			$.ajax({
 				url:baseUrl+'propertyservicemanagerFkcodeManager/getTotalCount.json',
 				data:params.join('&'),
@@ -214,7 +214,7 @@
 						});
 					 }
 					//关闭dataLoading样式
-						$.showBox.CloseDataLoading();
+					$.showBox.CloseDataLoading();
 	              }
 	        }); 			
     });	
@@ -223,7 +223,7 @@
 		var fkCode=$("#fkCode").val();	
 		var startTime=$("#startTime").val(); 
 		var endTime=$("#endTime").val(); 
-		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'fkLikeCode='+fkCode,'startTime='+startTime,'endTime='+endTime];
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'fkLikeCode='+fkCode,'startTime='+startTime,'endTime='+endTime,'orderBy=desc:applyTime'];
 		$.ajax({
 			url:baseUrl+'propertyservicemanagerFkcodeManager/getPagerLikeFk.json',
 			data:params.join('&'),
@@ -234,57 +234,48 @@
 			}
 		});
 	}
-	//<!-- 取消访客 -->	
-	$(function(){
-		$(".hhf-submit.c").click(function(){	
-				var id=$(".fkCode")[0].getAttribute("id");
-			 	$.youi.ajaxUtils.ajax({
-					url:baseUrl+'propertyservicemanagerFkcodeManager/cancelStatus.json',
-					data:'fkcodeId='+id,
-					success:function(result){
-						if(result&&result.record){
-							//$(".bg-tanc.m1").close();
-							close("取消成功!");													
-						}
-					}
-				});
-			});
-		});
-	//日期控件
-	$(function(){
-		laydate({
-		    elem: '#startTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
-		    //format: 'YYYY-MM-DD hh:mm:ss', //日期格式
-	        //istime: true, //是否开启时间选择
-		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
-		});
-	});
-	$(function(){
-		laydate({
-		    elem: '#endTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
-		    //format: 'YYYY-MM-DD hh:mm:ss', //日期格式
-	        //istime: true, //是否开启时间选择
-		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
-		});
-	});
-	//取消成功弹窗
+	// 确认取消弹窗
 	 function close(content){		        
 	        $(".tc.mt25.f18").empty() ;
 	        $(".tc.mt25.f18").append(content) ;
 	        $(".toast").show();		      		        		       				
 			setTimeout(function(){$(".toast").hide(); },2000);
 			refreshData(currentIndex,pageSize);
-   }
-    $(function () {		
+    }
+	// 确认取消弹窗
+	$(function(){
 		$(".hhf-submit.c").click(function(){
 			$(".bg-tanc.m1").hide();
-		});									
-	}) 	  
-	    //点击跳转到访客申请页面
+			var id=$(".fkCode")[0].getAttribute("id");
+			$.youi.ajaxUtils.ajax({
+				url:baseUrl+'propertyservicemanagerFkcodeManager/cancelStatus.json',
+				data:'fkcodeId='+id,
+				success:function(result){
+					if(result&&result.record){
+						close("取消成功!");													
+					}
+				}
+			});
+		});
+	});
+	//日期控件
+	$(function(){
+		laydate({
+		    elem: '#startTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+		});
+	});
+	$(function(){
+		laydate({
+		    elem: '#endTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+		});
+	});    	  
+	//点击跳转到访客申请页面
 	$("#a1").click(function(){			
 		location.href = proUrl + "yqfw/yq4.html" ;
-	})	
-		//点击跳转到访客详情页面
+	})
+	//点击跳转到访客详情页面  并传访客id
 	function viewDetail(fkcodeId){			
 		window.location.href=cenUrl+"member/memberCenter/propertyService/propertyManageFkDetail.html?fkcodeId="+fkcodeId;
 	};
