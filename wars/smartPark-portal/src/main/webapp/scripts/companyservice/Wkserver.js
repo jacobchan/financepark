@@ -27,6 +27,7 @@ function addShopCar(id){
 };
 //评论列表展示
 function evaluate(){
+	$("#tp_46").removeClass("undis") ;
 	var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/getPagerPurGenreEvaluatesByCode.json";
 	$.youi.ajaxUtils.ajax({
 		url:serviceURL,
@@ -34,6 +35,7 @@ function evaluate(){
 		jsonp:'data:jsonp',
 		dataType:'jsonp',
 		success:function(results){
+			$("#tp_46").addClass("undis") ;
 			if(results&&results.records){
 				var htmls = [];
 				for(var i=0;i<results.records.length;i++){
@@ -82,12 +84,14 @@ $(function(){
 	star(".starbox4 i");
 	
 	//商品展示
+	$("#tp_45").removeClass("undis") ;
 	var serviceURL = baseUrl+"purchasingmanagerCommodityManager/getWkserverCommodityList.json";
 	$.youi.ajaxUtils.ajax({
 		url:serviceURL,
 		jsonp:'data:jsonp',
 		dataType:'jsonp',
 		success:function(results){
+			$("#tp_45").addClass("undis") ;
 			if(results&&results.records){
 				var htmls = [];
 				for(var i=0;i<results.records.length;i++){
