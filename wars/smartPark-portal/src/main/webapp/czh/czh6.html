@@ -64,6 +64,9 @@
 						<a href="" class="a-btn"><i class="fa fa-angle-right"></i></a>
 					</div> -->
 				</div>
+				<div class="clearfix tc undis" id="tp_57">
+			 		 <img src="../styles/images/loading_2.gif" border="0" />
+			  	</div>
 				<div class="clearfix czh-knowledge">
 					<!-- <a href="czh7.html"><div class="czh-box">
 						<img src="../styles/images/czh/list-5.jpg">
@@ -169,6 +172,7 @@
 				});	
 				
 				function refreshData(pageIndex,pageSize,deac){
+					$("#tp_57").removeClass("undis") ;
 					var params = "";
 					if(deac=='0'){
 						 params = {'pager:pageIndex':pageIndex,'pager:pageSize':pageSize,'activityApply.applayType.typeId':typecode,orderBy:'desc:createTime'};
@@ -181,6 +185,7 @@
 						data:params,
 						dataType:'jsonp',
 						success:function(results){
+							$("#tp_57").addClass("undis") ;
 							if(results&&results.records){
 								//_parseRecords(results.records);
 								if(results.records.length>0){
