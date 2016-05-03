@@ -454,6 +454,7 @@
 						$("#kalendar-detail").dateplug({
 							price: price
 						});
+						console.log(price)
 						parseLowestPrice(record,gotodate);
 					}else{
 						console.error("机票最低价获取有误！");
@@ -478,12 +479,16 @@
 			  var month = $("#kalendar_month").html(),year = $("#kalendar_year").html(),day = $("#kalendar-detail td.current p:nth-child(1)").html();
 			  console.log("day: "+day+" month: "+month+" year: "+year)
 		   }
-		   $.fn.dateplug.monthajax = function(){
+		   $.fn.dateplug.monthajax = function(obj){
 			   //获取相应月份的价格数据并返回  当前年月可获取
 			   var month = $("#kalendar_month").html(),year = $("#kalendar_year").html(),day = $("#kalendar-detail td.current p:nth-child(1)").html();
 			   //此处ajax应该设置为同步执行
 			   var resultArray = new Array();
-			   var maxDays = (new Date(year,month-1,1)).MaxDayOfDate();
+			   if(obj.hasClass("prev-mon")){
+				   month = month-2;
+			   }
+			   var maxDays = (new Date(year,month,1)).MaxDayOfDate();
+			   alert(maxDays);
 			   for(var i=1;i<=maxDays;i++){
 				   var tmp = (new Date(year,month,i)).Format("yyyy-MM-dd");
 				   var flag = 0;
@@ -496,6 +501,7 @@
 				   }
 				   if(flag==0) resultArray.push(0);
 			   }
+			   //console.log(month+"/"+resultArray)
 			   return resultArray;
 		   }
 		   //城市选择控件
