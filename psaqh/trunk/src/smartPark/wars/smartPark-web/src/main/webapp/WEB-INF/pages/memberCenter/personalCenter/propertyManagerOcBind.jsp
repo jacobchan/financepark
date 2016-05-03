@@ -11,14 +11,28 @@
 			</div>
 
 		</div>
+		<div class="w1000 a" id="list">
+		</div>
 	<div class="tcdPageCode fr"></div>
 </youi:body>
 	<div class="toast">
     	<div class="toast-con clearfix">
      		<div class="close-toast fr"></div>
-     		<p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
+     		<p class="tc mt25 f18" style="color:#ff6715"></p>
   		</div>         
     </div>
+    <div class="bg-tanc m1">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="w60 tc mt40" style="margin-left:20%">
+				<div class="mt20 mb20 f16 lh26">
+					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要取消<span class="c-o moverec">  </span>吗？
+				</div>
+				<!-- <p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p> -->
+				<input value="确定" class="hhf-submit" style="height:36px;" type="submit" id="confirm">
+			</div>
+		</div>
+	</div>
 	<!--***bottom start****************************************-->
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 	<script type="text/javascript">
@@ -75,25 +89,24 @@
 	}
 	//拼接卡号列表
 	function _parseRecords(record){
+		var html = "";
+		var status = "";
 		if(record.length>0){
-			for(var i=0;i<record.length;i++){				
-				var status = "";
-				var html = "";
+			for(var i=0;i<record.length;i++){							
 				 if(record[i].bindStatus=='1'){						
-					html="<div class='mt20'>"+
-							  //"<img src='../images/grzx/check.png' border='0' />"+
-							  "<span class='ml30 mr30'>已绑定卡号：<font class='c-o'>"+record[i].ocNumber+"</font></span>"+
-							  "<input value='解除绑定' class='hhf-submit' style='padding:0px 10px;height:26px;' type='button' value='解绑'   onclick='unbound(\""+record[i].ocId+"\")'>"+
-							  "</div>";
-					 $(".w1000").append(html);		 
+					html+=   "<div class='mt20'>"
+					html +=     "<img src='<%=request.getContextPath()%>/styles/images/grzx/check.png' border='0' />"
+					html +=	    "<span class='ml30 mr30'>已绑定卡号：<font class='c-o'>"+record[i].ocNumber+"</font></span>"
+					html +=	 	"<input value='解除绑定' class='hhf-submit' style='padding:0px 10px;height:26px;' type='button' value='解绑'   onclick='unbound(\""+record[i].ocId+"\",\""+record[i].ocCode+"\")'>"
+					html +=	 "</div>";	 
 				}
-	
+				 $("#list").html(html);	
 			}
 		}else{
 			var	html1 = '<tr>'
-				html1 += '	<td colspan="6">暂无记录</td>'
+				html1 += '	<td >暂无绑定卡号</td>'
 				html1 += '</tr>'
-			 $(".oclist").html(html1);	}
+			 $("#list").html(html1);	}
 		};
 		
 	
@@ -106,30 +119,55 @@
 			success:function(result){
 				if(result&&result.record){
 					close("增加成功");
-					location.reload();
+					//location.reload();
 				}
 			}
 		});
 	});	 
-		function unbound(id){					   			
+/*     function unbound(id){					   			
 			var ocId=id;			
 			$.youi.ajaxUtils.ajax({
 				url:baseUrl+'propertyservicemanagerOcManager/updateBindStatus.json',
 				data:'ocId='+ocId,
 		 		success:function(result){
 					if(result&&result.record){					
-						alert("修改成功");
-						location.reload();
+						close("修改成功");
+						//location.reload();
 					}
 				}
 			}); 
-		}
-		 function close(content){		        
-		        $(".tc.mt25.f18").empty() ;
-		        $(".tc.mt25.f18").append(content) ;
-		        $(".toast").show();		      		        		       				
-				setTimeout(function(){$(".toast").hide(); },1000);
-				//refreshData(currentIndex,pageSize);
-	      }
+	} */
+	function close(content){		        
+		$(".tc.mt25.f18").empty() ;
+		$(".tc.mt25.f18").append(content) ;
+		$(".toast").show();		      		        		       				
+		setTimeout(function(){$(".toast").hide(); },1000);
+		refreshData(currentIndex,pageSize);
+	}
+	//<!-- 取消报修订单 -->
+	function unbound(ocId,ocCode){
+		$(".moverec").html(ocCode);//给弹窗插入订单号
+		$(".moverec")[0].setAttribute("id",ocId);//给弹窗设置id
+		$(".moverec")[0].setAttribute("id",ocId);//给弹窗设置id
+		$(".bg-tanc.m1").show();
+	};
+	//点击确认取消报修预约
+	$(function(){
+		$("#confirm").click(function(){	
+			//alert(11);
+		    $(".bg-tanc.m1").hide();
+			var id=$(".moverec")[0].getAttribute("id");				
+			$.ajax({
+				url:baseUrl+'propertyservicemanagerOcManager/updateBindStatus.json',
+				data:'ocId='+id,
+				success:function(result){
+					if(result&&result.record){					
+						close("修改成功");
+						//location.reload();
+					}
+				}
+			});
+		});
+	});		 
 	</script>
 </youi:html>
