@@ -12,7 +12,8 @@ input.city_name{width: 110px;height: 28px; border:0;}
 #noresult>div{width: 240px;padding-left: 50px; background:url(../images/zs/no_info.png) left center no-repeat;}
 #loading{position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: #fff;z-index: 9999;}
 .mb25 .lh30:hover{color: #ff6715}
-.czh-search ul.fl li a{color:#000;}
+.czh-search ul.fl li{padding: 0;}
+.czh-search ul.fl li a{color:#000; display: block; padding: 0 30px;}
 .fl li a{color: #000;}
 .mb25 .mr10{cursor: pointer;}
 .isLoading{display: inline-block; width: 20px; height: 20px;margin-right: 5px; vertical-align: middle; background: url(../images/loading_2.gif) center center no-repeat;}
