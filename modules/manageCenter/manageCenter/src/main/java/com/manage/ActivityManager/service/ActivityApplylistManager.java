@@ -6,13 +6,14 @@ package com.manage.ActivityManager.service;
 import java.util.List;
 import java.util.Collection;
 
+import com.gsoft.entity.TempDemo;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.manage.ActivityManager.entity.ActivityApply;
 import com.manage.ActivityManager.entity.ActivityApplylist;
 
@@ -70,5 +71,12 @@ public interface ActivityApplylistManager extends BaseManager{
      * @return
      * @throws BusException
      */
-	public ActivityApplylist saveActivityApplylistForPage(ActivityApplylist o) throws BusException;
+	public Record saveActivityApplylistForPage(ActivityApplylist o,String captcha) throws BusException;
+	/**
+	 * 	获取报名活动短信校验码 
+	 * @param id
+	 * @return
+	 * @throws BusException
+	 */
+	public TempDemo getActivityCaptcha(String applyId,String phone) throws BusException; 
 }
