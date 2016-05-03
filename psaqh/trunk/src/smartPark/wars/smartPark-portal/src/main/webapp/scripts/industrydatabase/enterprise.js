@@ -1,4 +1,4 @@
-var pageSize=12;
+var pageSize=1;
 var pageCount=1;
 var serviceURL = baseUrl+"enterbusinessmanagerRzManager/getPagerEnterbusinessmanagerRzs.json";
 //获取字符串长度（中文2，英文1）
@@ -38,6 +38,7 @@ function stringCut(str, len) {
     }
 }
 function refreshData(pageIndex,pageSize){
+	$("#tp_7").removeClass("undis");
 	var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
 	$.youi.ajaxUtils.ajax({
 		url:serviceURL,
@@ -46,6 +47,7 @@ function refreshData(pageIndex,pageSize){
 		data:params.join('&'),
 		success:function(results){
 			if(results&&results.records){
+				$("#tp_7").addClass("undis");
 				_parseRecords(results.records);
 			}
 		}
@@ -222,12 +224,14 @@ $(function() {
 	}
 	
 	//行业类型
+	$("#tp_4").removeClass("undis") ;
 	$.youi.ajaxUtils.ajax({
 		url : baseUrl+'/etypeEnterprisetypeManager/getParentEnterpriseType.json',
 		jsonp : 'data:jsonp',
 		dataType : 'jsonp',
 		async : false,
 		success:function(result){
+			$("#tp_4").addClass("undis") ;
 			$("#enterpriseTypeDiv").empty();
 			var record = result.records;
 			for(var i=0; i<record.length; i++){
@@ -239,6 +243,7 @@ $(function() {
 	});
 	
 	//上市类型
+	$("#tp_5").removeClass("undis") ;
 	$.youi.ajaxUtils.ajax({
 		url : baseUrl+'/informationFinancingManager/findCodeitem.json?code=rzType',
 		jsonp : 'data:jsonp',
@@ -246,6 +251,7 @@ $(function() {
 		async : false,
 		success:function(result){
 			if(result&&result.records){
+				$("#tp_5").addClass("undis") ;
 				var records = result.records;
 				$("#belistedDiv").empty();
 				for(var i=0; i<records.length; i++){
@@ -256,6 +262,7 @@ $(function() {
 	});
 	
 	//公司性质
+	$("#tp_6").removeClass("undis") ;
 	$.youi.ajaxUtils.ajax({
 		url : baseUrl+'/informationFinancingManager/findCodeitem.json?code=rzProperty',
 		jsonp : 'data:jsonp',
@@ -263,6 +270,7 @@ $(function() {
 		async : false,
 		success:function(result){
 			if(result&&result.records){
+				$("#tp_6").addClass("undis") ;
 				var records = result.records;
 				$("#enterpriseNatureDiv").empty();
 				for(var i=0; i<records.length; i++){
