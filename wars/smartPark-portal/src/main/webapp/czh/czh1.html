@@ -41,6 +41,9 @@
 		<div class="w1200" style="color:#333;">
 			<div class="czh-index-child clearfix">
 				<div class="cic-nav">
+				<div class="clearfix tc undis" id="tp_51">
+			 		 <img src="../styles/images/loading_2.gif" border="0" />
+			  	</div>
 					<ul class="applayType">
 				<!-- 		 <li>
 							<a href=""><div><img src="../styles/images/czh/czh-icon1.png" border="0" /></div>
@@ -70,6 +73,9 @@
 				</div>
 			</div>
 			<h3 class="f20 mt30 lh30 mb10">强烈推荐</h3>
+			<div class="clearfix tc undis" id="tp_52">
+		 		 <img src="../styles/images/loading_2.gif" border="0" />
+		  	</div>
 			<div class="clearfix recoomends">
 			<!-- 	<div class="czh-box mr20">
 					<img src="../styles/images/czh/box-p1.jpg">
@@ -132,8 +138,11 @@
 			<div class="clearfix">
 				<div class="fl w895 pr" style="background:transparent;">
 					<div class="mb20">
+					<div class="clearfix tc undis" id="tp_53">
+				 		 <img src="../styles/images/loading_2.gif" border="0" />
+				  	</div>
 						<ul class="pb-list-group">
-							<li class="clearfix" onclick='window.open("../czh/czh3.html");'>
+							<!-- <li class="clearfix" onclick='window.open("../czh/czh3.html");'>
 								<div class="plg-photo">
 									<img src="../styles/images/czh/list-1.jpg" border="0" width="100%"/>
 									<em>创智游学</em>
@@ -189,7 +198,7 @@
 										</div>
 									</div>
 								</div>
-							</li>
+							</li> -->
 						</ul>
 							<div class="tcdPageCode fr">
 					
@@ -308,18 +317,21 @@
 		<script type="text/javascript">
 	$(function(){
 		//活动类型数据
+		$("#tp_51").removeClass("undis") ;
 		var serviceURL = baseUrl+"applayTypeManager/getApplayTypes.json";
 		$.youi.ajaxUtils.ajax({
 			url:serviceURL,
 			jsonp:'data:jsonp',
 			dataType:'jsonp',
 			success:function(results){
+				$("#tp_51").addClass("undis") ;
 				if(results&&results.records){
-				_parseTypeRecords(results.records);
+					_parseTypeRecords(results.records);
 				}
 			}
 		});	
 		//园区推荐活动数据top4
+		$("#tp_52").removeClass("undis") ;
 		var serviceURL = baseUrl+"activityApplyManager/getPagerActivityApplys.json";	
 		var status = "01";
 		var postData = {'pager:pageIndex':1,'pager:pageSize':4,'isRecoomend':0,'applyStatus':status,orderBy:'desc:createTime'};	
@@ -329,6 +341,7 @@
 			jsonp:'data:jsonp',
 			dataType:'jsonp',
 			success:function(results){
+				$("#tp_52").addClass("undis") ;
 				if(results&&results.records){
 				_parseRecoomends(results.records);
 				}
@@ -362,6 +375,7 @@
 			} */
 		});	
 		function refreshData(pageIndex,pageSize){
+			$("#tp_53").removeClass("undis") ;
 			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
 			$.youi.ajaxUtils.ajax({
 				url:activeURL,
@@ -369,6 +383,7 @@
 				data:params.join('&'),
 				dataType:'jsonp',
 				success:function(results){
+					$("#tp_53").addClass("undis") ;
 					if(results&&results.records){
 						_parseRecords(results.records);
 					}
