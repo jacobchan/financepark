@@ -63,6 +63,9 @@
             </div> 
             <!-- 没有数据时显示图片 star-->
             <div class="res_left">
+	            <div class="clearfix tc undis" id="tp_9">
+			 		 <img src="../styles/images/loading_2.gif" border="0" />
+			  	</div>
              	<ul id="carfix">
                 	<!-- <li class="clearfix">
                     	 <div class="fl"><img src="../styles/images/company/car1.jpg"/></div>
@@ -130,7 +133,7 @@
                     <div class="paging">5</div>
                     <div class="paging paging_m">尾页</div> -->
                 </div>
-                <div class="tc" style="background:#f6f6f6;height:600px;">
+                <div class="tc imgnone" style="background:#f6f6f6;height:600px;" >
                     <img src="../styles/images/none1.png" border="0" style="margin-top:200px;" />
                 </div>
              </div>
@@ -200,21 +203,23 @@ var serviceURL = baseUrl+"publicutilitiesmanagerResoManager/getPagerPublicCommod
 			
 		});
 		//拼接活动列表
-		
+			
 			function refreshData(pageIndex,pageSize){
-			var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
-			$.youi.ajaxUtils.ajax({
-				url:serviceURL,
-				jsonp:'data:jsonp',
-				data:params.join('&'),
-				dataType:'jsonp',
-				success:function(results){
-					if(results&&results.records){
-						$('.tc').hide();
-						 _parseRecords(results.records);
+				$("#tp_9").removeClass("undis") ;
+				var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					jsonp:'data:jsonp',
+					data:params.join('&'),
+					dataType:'jsonp',
+					success:function(results){
+						$("#tp_9").addClass("undis") ;
+						if(results&&results.records){
+							$('.imgnone').hide();
+							 _parseRecords(results.records);
+						}
 					}
-				}
-			});
+				});
 		}
 		
 		function _parseRecords(record){
