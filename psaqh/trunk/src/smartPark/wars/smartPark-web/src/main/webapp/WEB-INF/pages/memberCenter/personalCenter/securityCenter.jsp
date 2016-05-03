@@ -60,7 +60,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width:120px;">新手机号验证码</td>
+					<td style="width:120px;">验证码</td>
 					<td>
 						<input type="text" style="width:200px;" id="newcaptcha"> 
 						<span class="c-o ml20 " id="codetest"></span>
@@ -97,7 +97,6 @@
 				if(oldPassword.length<19 && oldPassword.length>5){
 					if(password.length<19 && password.length>5){
 						if(confirmPassword.length<19 && confirmPassword.length>5){
-							//if(!oldPassword==password){
 								if(confirmPassword==password){
 									$.youi.ajaxUtils.ajax({
 										url:baseUrl+'memberInformationManager/doModifyPassword.json',
@@ -118,10 +117,6 @@
 									$("#newmsg").text("两次输入的密码不一致");
 									$("#conmsg").text("两次输入的密码不一致");
 								}
-							//}
-							//else{
-							//	$("#newmsg").text("新密码原密码不能一样");								
-							//}	
 						}else{
 							$("#newmsg").text("新密码不能为空，长度为6到18个字符");
 						}	
