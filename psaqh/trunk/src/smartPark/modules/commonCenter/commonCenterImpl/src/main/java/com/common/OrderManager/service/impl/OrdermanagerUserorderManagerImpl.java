@@ -857,7 +857,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 			//根据订单号查询该订单下面的所有详细商品
 			Collection<Condition> conditionsDetail = new ArrayList<Condition>();; 
 			//添加查询商品详细列表的条件
-			conditions.add(ConditionUtils.getCondition("orderId", Condition.EQUALS, userorderId));
+			conditionsDetail.add(ConditionUtils.getCondition("orderId", Condition.EQUALS, userorderId));
 			List<OrdermanagerCommoditydetail> ordermanagerCommodityDetailList = ordermanagerCommoditydetailManager.getOrdermanagerCommoditydetails(conditionsDetail, null);
 			//商品详情列表
 			ordermanagerUserorder.setOrdermanagerCommodityDetailList(ordermanagerCommodityDetailList);
