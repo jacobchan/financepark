@@ -96,7 +96,7 @@
 	
 	//分页列表
 	function refreshData(pageIndex,pageSize){
-		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'orderBy=desc:applyTime'];
 		$.ajax({
 			url:serviceURL,
 			data:params.join('&'),
@@ -159,7 +159,7 @@
 		//alert(ocCode);
 		var startTime=$("#startTime").val(); 
 		var endTime=$("#endTime").val(); 			
-		var params = ['ocCode='+ocCode,'operator:ocCode=LIKE','startTime='+startTime,'endTime='+endTime];
+		var params = ['ocCode='+ocCode,'operator:ocCode=LIKE','startTime='+startTime,'endTime='+endTime,'orderBy=desc:applyTime'];
 		$.ajax({
 			url:baseUrl+'propertyservicemanagerOcManager/getTotalCount.json',
 			//url:serviceURL, 
@@ -195,7 +195,7 @@
 		var endTime=$("#endTime").val(); 
 		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'ocCode='+ocCode,'operator:ocCode=LIKE','startTime='+startTime,'endTime='+endTime];
 		$.ajax({
-			url:baseUrl+'propertyservicemanagerOcManager/getPagerLikeOc.json',
+			url:baseUrl+'propertyservicemanagerOcManager/getPagerOc.json',
 			data:params.join('&'),
 			success:function(results){
 				if(results&&results.records){
