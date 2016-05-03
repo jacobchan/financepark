@@ -300,6 +300,7 @@
 	</script>
 	<script type="text/javascript">
 		$(function(){
+			$("#tp_3").removeClass("undis") ;
 			var serviceURL = baseUrl+"reservationRecordManager/getCommodityByGenreType.json?genreCode=040101";
 			//公共方法
 			$.youi.ajaxUtils.ajax({
@@ -308,7 +309,8 @@
 				dataType:'jsonp',
 				success:function(results){
 					if(results&&results.records){
-				   _parseRecords(results.records);
+						$("#tp_3").addClass("undis") ;
+				  		_parseRecords(results.records);
 					}
 				}
 			});
@@ -444,6 +446,9 @@
 		<div style="background-color:#ffc000;">
 			<div class="space-centent clearfix">
 				<h3 class="tc">服务价格</h3>
+				<div class="clearfix tc undis" id="tp_3">
+		 		 <img src="../styles/images/loading_2.gif" border="0" />
+		  		</div>
 				<div class="w1200" style="overflow:hidden;">
 					<ul class="sc-nav">
 						<!-- <li>
