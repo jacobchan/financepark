@@ -124,6 +124,7 @@ function star(ele){
 }
 //评论列表展示
 function evaluate(){
+	$("#tp_37").removeClass("undis") ;
 	var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/getPagerPurGenreEvaluatesByCode.json";
 	$.youi.ajaxUtils.ajax({
 		url:serviceURL,
@@ -131,6 +132,7 @@ function evaluate(){
 		jsonp:'data:jsonp',
 		dataType:'jsonp',
 		success:function(results){
+			$("#tp_37").addClass("undis") ;
 			if(results&&results.records){
 				var htmls = [];
 				for(var i=0;i<results.records.length;i++){
