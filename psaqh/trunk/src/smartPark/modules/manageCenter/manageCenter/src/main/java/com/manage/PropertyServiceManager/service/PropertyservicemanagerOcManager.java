@@ -3,10 +3,9 @@
  */
 package com.manage.PropertyServiceManager.service;
 
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
-import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -14,9 +13,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.ConditionCollection;
-import com.gsoft.framework.esb.annotation.EsbServiceMapping;
-import com.gsoft.framework.esb.annotation.PubCondition;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerOc;
 
@@ -95,25 +91,10 @@ public interface PropertyservicemanagerOcManager extends BaseManager{
 	 */
 	public PropertyservicemanagerOc cancleOcStatus(String id)throws BusException;
 	/**
-	 * 通过订单号获取当前用户的一卡通申请记录  模糊查询
-	 * @param userId
-	 * @param ocCode
-	 * @return
-	 * @throws BusException
-	 */
-	public List<PropertyservicemanagerOc> getOclistLikeOcCode(String userId,String ocCode,String startTime,String endTime) throws BusException;
-	/**
-	 *前台 根据当前用户分页查询
-	 * @return 分页对象
-	 */
-	public PagerRecords getPagerOc(Pager pager,//分页条件
-			Collection<Condition> conditions,//查询条件
-			Collection<Order> orders) throws BusException;
-	/**
 	 *前台 根据当前用户分页查询    模糊查询
 	 * @return 分页对象
 	 */
-	public PagerRecords getPagerLikeOc(Pager pager,//分页条件
+	public PagerRecords getPagerOc(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders,
 			String startTime,String endTime) throws BusException;
@@ -122,8 +103,7 @@ public interface PropertyservicemanagerOcManager extends BaseManager{
    	 * @param conditions
    	 * @return
    	 * @throws BusException
-   	 */
-       
+   	 */     
    	public List<Record> getTotalCount(
    			 Collection<Condition> conditions,
 			 String startTime,
