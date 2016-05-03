@@ -124,6 +124,7 @@ function star(ele){
 }
 //评论列表展示
 function evaluate(){
+	$("#tp_42").removeClass("undis") ;
 	var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/getPagerPurGenreEvaluatesByCode.json";
 	$.youi.ajaxUtils.ajax({
 		url:serviceURL,
@@ -131,6 +132,7 @@ function evaluate(){
 		jsonp:'data:jsonp',
 		dataType:'jsonp',
 		success:function(results){
+			$("#tp_42").addClass("undis") ;
 			if(results&&results.records){
 				var htmls = [];
 				for(var i=0;i<results.records.length;i++){
@@ -148,6 +150,8 @@ $(function(){
     $(".close-toast").click(function(){
         $(".toast").hide();
     });
+    $("#tp_41").removeClass("undis") ;
+    $("#tp_43").removeClass("undis") ;
 	var serviceURL = baseUrl+"purchasingmanagerCommodityManager/getChopPatentCommodityList.json";
 	$.youi.ajaxUtils.ajax({
 		url:serviceURL,
@@ -184,6 +188,8 @@ $(function(){
 							'"data-commodityTitle="'+results.records[i].commodityTitle+
 							'"data-commodityPrice="'+results.records[i].commodityPrice+'"></div></li>');
 				}
+				$("#tp_41").addClass("undis") ;
+				$("#tp_43").addClass("undis") ;
 				$('#chopPatent').html(htmls.join(''));
 				$('.shopul').html(htmlss.join(''));
 				
@@ -265,6 +271,8 @@ $(function(){
 					$(".yet_ul").append(html);
 				});
 			}
+			$("#tp_41").addClass("undis") ;
+			$("#tp_43").addClass("undis") ;
 		}
 	});
 	
