@@ -117,6 +117,7 @@
 		<menu id="340401" text="收藏夹" href="page/memberCenter.FavoritsManage.favoritsFavoritgoods/favoritsFavoritgoods.html"></menu>
 	</menu>
 	<menu id="360000" text="全员分销">
-		<menu id="360001" text="分佣比例配置" href="page/distribution.rule.disRateConfig/disRateConfig.html"></menu>
+		<menu id="360001" text="分佣比率配置" href="page/distribution.rule.disRateConfig/disRateConfig.html"></menu>
+		<menu id="360002" text="楼宇佣金比率配置" href="page/distribution.rule.buildingRate/buildingRate.html"></menu>
 	</menu>
 </menus>
