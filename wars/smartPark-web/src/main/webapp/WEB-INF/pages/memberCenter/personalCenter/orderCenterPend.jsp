@@ -8,7 +8,7 @@
 					<!--  <li>园区地址1</li>
 					<li>园区地址2</li>
 					<li>园区地址3</li> -->
-					<li id="userorderProject" data="">请选择订单项目</li>
+					<li id="userorderProject" data="">全部</li>
 				</ul>
 		</div>
 		<div class="inp-box ml20" style="width:300px;">
@@ -304,7 +304,7 @@
 	 	var genId = $(".c-b1").attr("data");	
 	 	//订单号
 	    var userorderCode=$("#userorderCode").val();	
-	 	var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCode='+userorderCode,'operator:userorderCode=LIKE','genId='+genId];
+	 	var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCode='+userorderCode,'operator:userorderCode=LIKE','genId='+genId,'orderBy=desc:userorderTime'];
 		//var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCodeLike='+userorderCodeLike,'genId='+genId];
 		$.ajax({
 			url:baseUrl+'ordermanagerUserorderManager/getPagerPend_query.json',
