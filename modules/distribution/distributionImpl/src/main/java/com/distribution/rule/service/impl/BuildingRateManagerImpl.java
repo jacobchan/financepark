@@ -16,11 +16,9 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.distribution.rule.entity.BuildingRate;
 import com.distribution.rule.dao.BuildingRateDao;
 import com.distribution.rule.service.BuildingRateManager;
@@ -67,13 +65,13 @@ public class BuildingRateManagerImpl extends BaseManagerImpl implements Building
      */
     @EsbServiceMapping
     public BuildingRate saveBuildingRate(BuildingRate o) throws BusException{
-//    	String buildingRateId = o.getBuildingRateId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(buildingRateId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
+    	/*String buildingRateId = o.getRecId();
+    	boolean isUpdate = StringUtils.isNotEmpty(buildingRateId);
+    	if(isUpdate){//修改
+    	
+    	}else{//新增
+    		
+    	}*/
     	return buildingRateDao.save(o);
     }
 
