@@ -424,7 +424,7 @@ a.ib-btn.bg-h{background: #b5b5b5;}
 .ht-table tr th .xx{background: url(../images/yqfw/th-jt.png) no-repeat;width: 100%;height: 48px;position: relative;}
 .ht-table tr th .xx span{position: absolute;display: block;position: absolute;top: 10px;right: 0px;width: 50px;}
 .ht-table tr th .xx em {display: block;position: absolute;bottom:7px;left: 0px; position: absolute;width: 50px;}
-.ht-table tr td{background: #fff;border:1px solid #e9e9e9;text-align: center;padding: 0px 0px;font-size: 12px;color: #333;}
+.ht-table tr td{background: #fff;border:1px solid #e9e9e9;text-align: center;padding: 0px 0px;font-size: 12px;color: #333;height:51px;}
 .ht-table tr td a{width: 108px;display: table-cell;height: 50px;line-height: 18px;color: #fff;vertical-align: middle;}
 .ht-table tr td a.em3{color: #333;}
 .ht-table tr td a.em2,.ht-table tr td a.em3{cursor: text;}
