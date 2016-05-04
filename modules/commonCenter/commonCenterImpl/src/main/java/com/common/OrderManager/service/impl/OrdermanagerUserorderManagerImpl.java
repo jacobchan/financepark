@@ -662,7 +662,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     	OrdermanagerUserorder p = ordermanagerUserorderDao.get(id) ;
 		 String status = p.getUserorderStatus() ;//得到订单状态
 		 if("01".equals(status)){//若当前状态为未支付
-		    	p.setUserorderStatus("08");//08为已取消，相当于前端取消申请
+		    	p.setUserorderStatus("04");//04为已取消，相当于前端取消申请
 		    	p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		    	return ordermanagerUserorderDao.save(p);
 		 }else{
