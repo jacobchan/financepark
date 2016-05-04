@@ -7,5 +7,5 @@
  *
  * Date: 2016-2-16
  */
-var baseUrl = "http://220.249.113.12:8088/esb/web/";
-var cenUrl = 'http://220.249.113.12:8088/';
+var baseUrl = "http://120.25.101.206:8088/esb/web/";
+var cenUrl = 'http://120.25.101.206:8088/';
