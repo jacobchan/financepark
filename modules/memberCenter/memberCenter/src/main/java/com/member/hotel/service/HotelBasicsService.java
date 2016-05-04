@@ -20,7 +20,7 @@ public interface HotelBasicsService extends BaseManager {
 	 */	
 	public List<JsonNode> getCities();
 	
-	public List<JsonNode> getCities(int px);
+	public List<JsonNode> getCities(String px);
 	/*
 	 * 获取城市行政区 
 	 */	

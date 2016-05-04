@@ -2,6 +2,7 @@ package com.member.ticket.service.impl;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,13 +23,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.framework.esb.annotation.DomainCollection;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.util.Dom4jUtils;
 import com.gsoft.framework.util.PasswordUtils;
 import com.gsoft.utils.HttpGetAndPostUtil;
 import com.member.ticket.entity.AvailableFlightWithPriceAndCommisionRequest;
+import com.member.ticket.entity.CreateOrderByPassengerRequest;
 import com.member.ticket.entity.DailyLowestPrice;
+import com.member.ticket.entity.WsBookPnr;
 import com.member.ticket.entity.WsFlightWithPriceAndCommision;
 import com.member.ticket.entity.WsFlightWithPriceAndCommisionItem;
 import com.member.ticket.entity.WsPolicyData;
@@ -46,6 +50,10 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 	private String query_url;
 	@Value("${agent.test.ticket.lowestprice.url}")
 	private String lowest_price_url;
+	@Value("${agent.test.ticket.create.url}")
+	private String create_url;
+	
+	private static final int PERIOD_TIME = 30;
 
 	@SuppressWarnings("unchecked")
 	@EsbServiceMapping
@@ -139,12 +147,12 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 	@EsbServiceMapping
 	public List<DailyLowestPrice> getDailyLowestPrice(@ServiceParam(name="startDate")String startDate,
 			@ServiceParam(name="deptCode")String deptCode,
-			@ServiceParam(name="arrCode")String arrCode){
+			@ServiceParam(name="arrCode")String arrCode) throws Exception{
 		
 		String result = "";
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
-		startDate = df.format(new Date());
-		String endDate = df.format(getDateAfter(new Date(),30));
+		startDate = df.format(df.parse(startDate));
+		String endDate = df.format(getDateAfter(df.parse(startDate),PERIOD_TIME));
 		List<DailyLowestPrice> resultList = new ArrayList<DailyLowestPrice>();
 		Map<String,Object> params = new HashMap();
 		params.put("agencyCode", agencyCode);
@@ -169,39 +177,17 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 					resultList.add(parseLowestPriceXml(elements.get(i)));
 				}
 				//去除可能存在的重复项
-				List newList = new ArrayList();
-				if (resultList.size() % 2 == 0) {
-					for (int i = 0, j = 1; i < resultList.size() && j < resultList.size(); i = i + 2, j = j + 2) {
-						if (resultList.get(i).getDepDate().equals(resultList.get(j).getDepDate())) {
-							if (Double.parseDouble(resultList.get(i).getTicketPrice()) < Double
-									.parseDouble(resultList.get(j).getTicketPrice())) {
-								newList.add(resultList.get(i));
-							} else {
-								newList.add(resultList.get(j));
-							}
-						} else {
-							newList.add(resultList.get(i));
-							newList.add(resultList.get(j));
+				int len = resultList.size();
+				for(int i=len-1; i>=1; i--){
+					if (resultList.get(i).getDepDate().equals(resultList.get(i-1).getDepDate())){
+						if (Double.parseDouble(resultList.get(i).getTicketPrice()) > Double
+								.parseDouble(resultList.get(i-1).getTicketPrice()))  {
+							resultList.remove(i);
+						}else{
+							resultList.remove(i-1);
 						}
 					}
-				} else {
-					for (int i = 0, j = 1; i < resultList.size() && j < resultList.size(); i = i + 2, j = j + 2) {
-						if (resultList.get(i).getDepDate().equals(resultList.get(j).getDepDate())) {
-							if (Double.parseDouble(resultList.get(i).getTicketPrice()) < Double
-									.parseDouble(resultList.get(j).getTicketPrice())) {
-								newList.add(resultList.get(i));
-							} else {
-								newList.add(resultList.get(j));
-							}
-						} else {
-							newList.add(resultList.get(i));
-							newList.add(resultList.get(j));
-						}
-					}
-					newList.add(resultList.get(resultList.size() - 1));
 				}
-				resultList.clear();
-				resultList.addAll(newList);
 				return resultList;
 			}else
 				return null;
@@ -211,7 +197,47 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 		
 	}
 	
-
+	public String bookTicket(@ServiceParam(name="userId",pubProperty="userId") String userId,
+			@DomainCollection(domainClazz=CreateOrderByPassengerRequest.class) CreateOrderByPassengerRequest conditions) {
+		String result = "";
+		Map<String,Object> params = new HashMap();
+		conditions.setAgencyCode(agencyCode);
+		String signString = conditions.getAgencyCode() + conditions.getPolicyId() + safeCode;
+		String sign = PasswordUtils.md5Password(signString);
+		conditions.setSign(sign);
+		//conditions.setNotifiedUrl(notifiedUrl);//确认链接
+		//conditions.setPaymentReturnUrl(paymentReturnUrl);//支付完成后确认链接，已弃用，可随填
+		//conditions.setOutOrderNo(outOrderNo);//自己平台的订单号
+		
+		try {
+			Field[] fields = conditions.getClass().getDeclaredFields();
+		    for(int j=0 ; j<fields.length ; j++){     //遍历所有属性
+		    	 String name1 = fields[j].getName();
+		    	 String name2 = name1.substring(0,1).toUpperCase()+name1.substring(1); //将属性的首字符大写，方便构造get，set方法
+	             String type = fields[j].getGenericType().toString();    //获取属性的类型
+	             if(type.equals("class java.lang.String")){   //如果type是类类型，则前面包含"class "，后面跟类名
+	                 Method m = conditions.getClass().getMethod("get"+name2);
+	                 String value = (String) m.invoke(conditions);    //调用getter方法获取属性值
+	                 if(value != null && !"".equals(value)){
+	                	 params.put(name1, value);
+	                 }
+	             }else if (type.equals("class com.member.ticket.entity.WsBookPnr")) {
+	            	 Method m = conditions.getClass().getMethod("get"+name2);
+	                 WsBookPnr value = (WsBookPnr) m.invoke(conditions);    //调用getter方法获取属性值
+	                 if(value != null && !"".equals(value)){
+	                	 params.put(name1, value);
+	                 }
+				}
+		    }
+			result = HttpGetAndPostUtil.TicketSendPost(create_url, params);
+		} catch (Exception e) {
+			throw new BusException("机票下订单异常:"+e.getLocalizedMessage());
+		}
+		
+		return null;
+	}
+	/***********************************|解析方法|*******************************/
+	
 	@SuppressWarnings("unchecked")
 	private WsFlightWithPriceAndCommision parseFlightsXml(Element element) {
 		List<Element> elements = element.elements();
@@ -424,9 +450,5 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
         now.set(Calendar.DATE, now.get(Calendar.DATE) + day);  
         return now.getTime();  
     }
-	//去除list中重复的元素并保持原来顺序
-	public static void removeDuplicateWithOrder(List list) {  
-	      
-	} 
 
 }
