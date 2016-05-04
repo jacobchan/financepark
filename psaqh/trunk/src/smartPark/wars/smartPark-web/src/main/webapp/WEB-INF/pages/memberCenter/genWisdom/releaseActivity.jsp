@@ -313,7 +313,7 @@
 					flash_swf_url : '../../scripts/fileUpload/Moxie.swf',
 					silverlight_xap_url : '../../scripts/fileUpload/Moxie.xap',
 					url : cenUrl+'fileUpload/goUpload.html',//上传文件路径
-					max_file_size : '400kb', //最大只能上传400kb的文件
+					max_file_size : '2048kb', //最大只能上传2048kb的文件
 					prevent_duplicates : true, //不允许选取重复文件
 					//此处是控制上传组件是否允许多文件选择还是单文件选择：true/多文件；false/单文件
 					multi_selection: false,
