@@ -215,15 +215,10 @@ input{font-family:"微软雅黑";}
 .search-see .btn-search{float: left;width:60px;height: 40px;display: block;background:#ff6715 url(images/zs/search.png) no-repeat center center;border:0px; }
 .search-see .btn-search:hover{background: #ff5900 url(images/zs/search.png) no-repeat center center;;}
 /**尾**/
-.bottom{background:#5E5E5E;color:#dadada;min-width: 1200px;}
-.bottom a{color:#b0b0b0; line-height:25px}
+.bottom{background:#5E5E5E;color:#c4c4c4;min-width: 1200px;font-size: 12px;padding: 20px 0px;}
+.bottom a{color:#d3d3d3; line-height:25px;font-size: 14px;margin:0px 15px;}
 .bottom a:hover{color: #fff !important;}
-.bottom dl{display: inline-block;margin-right:80px;float: left;}
-.bottom dl dt{margin-bottom: 20px;font-size: 14px;}
-.bottom dl dd{font-size:12px;}
-.bottom-partners{width: 1100px;float: right}
-.bottom-partners p{border-bottom:1px #434242 solid;padding:7px 0;line-height:25px}
-.bottom-partners a{margin-right: 20px;font-size: 12px;}
+
 
 /**个人中心**/
 .w200{width: 200px;background-color: #eeeeee;min-height:1040px;}
