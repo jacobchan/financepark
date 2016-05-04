@@ -131,22 +131,32 @@ $(function() {
 							$("#rzName").val(result.record.rzName);
 	    					$("#rzUrl").val(result.record.rzUrl);
 	    					$("#rzRemark").val(result.record.rzRemark);
-	    					$("#enTypeId").val(result.record.enTypeId.enTypeId);
-	    					$("#enTypeName").html(result.record.enTypeId.enTypeName);
-	    					$("#roomId").val(result.record.roomId.roomId);
-	    					$("#roomAddress").html(result.record.roomId.roomAddress);
+	    					if(result.record.enTypeId != null){
+	    						$("#enTypeId").val(result.record.enTypeId.enTypeId);
+	    						$("#enTypeName").html(result.record.enTypeId.enTypeName);
+	    					}
+	    					if(result.record.roomId != null){
+	    						$("#roomId").val(result.record.roomId.roomId);
+		    					$("#roomAddress").html(result.record.roomId.roomAddress);
+	    					}else{
+	    						$("#roomAddress").html("请联系物业管理员，办理入驻！");
+	    					}
 	    					$("#editorproductDiscriptio").val(result.record.productDiscriptio);
 	    					editor.setData(result.record.productDiscriptio);
-	    					$("#currentCount").html(getStrLength(result.record.rzRemark));
+	    					if(result.record.rzRemark != null){
+	    						$("#currentCount").html(getStrLength(result.record.rzRemark));
+	    					}
 	    					roomAddress(result.record.rzId);
 	    					var rImages = result.record.rzImages;
-	    					var strs= new Array(); //定义一数组
-	    					strs = rImages.split(","); //字符分割
-	    					for (var i=0;i<strs.length ;i++ ){
-	    						var src = cenUrl+"common/uploadImage.html?repository=/swfupload&path="+strs[i]+"&method=show";
-	    						var html = '<img id="qiyeheadImg-'+src+'" src="'+src+'" width="220" height="168"/>';				
-	    						$('#qiyeheadImg').after(html);
-	    					} 
+	    					if(rImages != null){
+	    						var strs= new Array(); //定义一数组
+		    					strs = rImages.split(","); //字符分割
+		    					for (var i=0;i<strs.length ;i++ ){
+		    						var src = cenUrl+"common/uploadImage.html?repository=/swfupload&path="+strs[i]+"&method=show";
+		    						var html = '<img id="qiyeheadImg-'+src+'" src="'+src+'" width="220" height="168"/>';				
+		    						$('#qiyeheadImg').after(html);
+		    					} 
+	    					}
 						}
 					}
 				});
@@ -164,7 +174,10 @@ $(function() {
 		var rzRemark=$("#rzRemark").val();
 		var rzImages = "";
 		var productDiscriptio=editor.getData();
-		check(roomId,rzName,rzRemark,rzUrl,enTypeId,productDiscriptio);
+		var bool = check(roomId,rzName,rzRemark,rzUrl,enTypeId,productDiscriptio);
+		if(!bool){
+			return;
+		}
 		
 		//检查是否有选择企业LOGO图片和企业宣传图
 		var fileCount = uploader.files.length;
