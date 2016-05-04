@@ -400,13 +400,13 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 				condition.add(ConditionUtils.getCondition("genreId",Condition.EQUALS,genreId));
 				List<PurchasingmanagerCommodity> pcList = purchasingmanagerCommodityManager.getPurchasingmanagerCommoditys(condition, null);
 				for(PurchasingmanagerCommodity pc:pcList){
-//					extentionAtrManager.setGwExtendValue(pc);
-//					String commodityName=pc.getGw().getCommodityId();
-//		    		if(commodityName !=null){
-//		    			PurchasingmanagerCommodity c=purchasingmanagerCommodityDao.get(commodityName); 
-//		    			commodityName=c.getCommodityTitle();
-//		    			pc.getGw().setCommodityId(commodityName);
-//		    		}
+					extentionAtrManager.setGwExtendValue(pc);
+					String commodityName=pc.getGw().getCommodityId();
+		    		if(commodityName !=null){
+		    			PurchasingmanagerCommodity c=purchasingmanagerCommodityDao.get(commodityName); 
+		    			commodityName=c.getCommodityTitle();
+		    			pc.getGw().setCommodityName(commodityName);
+		    		}
 					recordList.add(pc);
 				}
 			}
