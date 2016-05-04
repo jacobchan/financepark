@@ -108,7 +108,7 @@
 	var pageCount=1;
 	var currentIndex = 1;
 	var serviceURL = baseUrl+'memberadrAddressManager/getPagergetPagerAddress.json';
-	$(function () {
+	function pageget(){
 		
 		//分页页码显示
 		 $.ajax({
@@ -132,7 +132,7 @@
 					}
 			}
 		}); 			
-	});	
+	};	
 	
 	
 	//分页列表
@@ -149,6 +149,8 @@
 		});
 	}
 	$(function(){		
+		//初始化 
+		pageget();
 			/* $.ajax({
 				url:baseUrl+'memberadrAddressManager/getMemberadrAddresssByUser.json', 
 				success:function(result){
@@ -213,8 +215,9 @@
 				url:baseUrl+'memberadrAddressManager/removeMemberadrAddress.json',
 				data:'addressId='+me.id,
 				success:function(result){
-					me.remove();
+					//me.remove();
 					close("删除成功");
+					pageget();
 				}
 			});
 		}
@@ -389,7 +392,8 @@
 						if(results&&results.record){
 							close("保存成功!");
 							setTimeout(function(){$(".bg-tanc.m1").hide(); },1000);
-							refreshData(currentIndex,pageSize);
+							//refreshData(currentIndex,pageSize);
+							pageget();
 						}
 					}
 				});
