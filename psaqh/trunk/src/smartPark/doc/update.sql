@@ -61,3 +61,17 @@ ALTER TABLE `sp_activity_comment` DROP FOREIGN KEY `FK_Relationship_53`;
 ALTER TABLE `sp_activity_comment` ADD CONSTRAINT `FK_Relationship_53` FOREIGN KEY (`DOCUMENT_ID_`) REFERENCES `sp_activity_document` (`DOCUMENT_ID_`);
 /** 修改活动评论 添加评价星数 **/
 ALTER TABLE `sp_activity_comment` ADD COLUMN `COMMENT_LEVEL_` int;
+/*新增活动收藏表*/
+DROP TABLE IF EXISTS `sp_favorits_favoritactivity`;
+CREATE TABLE `sp_favorits_favoritactivity` (
+  `FAVORIT_ACTIVITY_ID_` char(36) NOT NULL,
+  `ACTIVITY_ID_` char(36) NOT NULL,
+  `MEMBER_ID_` char(36) DEFAULT NULL,
+  `UPDATE_USER_` char(36) DEFAULT NULL,
+  `UPDATE_TIME_` datetime DEFAULT NULL,
+  `CREATE_USER_` char(36) DEFAULT NULL,
+  `CREATE_TIME_` datetime DEFAULT NULL,
+  PRIMARY KEY (`FAVORIT_ACTIVITY_ID_`,`ACTIVITY_ID_`),
+  KEY `FK_320701-340402` (`MEMBER_ID_`) USING BTREE,
+  CONSTRAINT `FK_320701-340402` FOREIGN KEY (`MEMBER_ID_`) REFERENCES `sp_member_information` (`MEMBER_ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='340402-活动收藏表';
