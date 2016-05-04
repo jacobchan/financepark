@@ -23,8 +23,8 @@ $(function(){
         }else{
             $(".comRigli-top").fadeOut();
         }
-        var h=$("body").height()-(document.documentElement.clientHeight+407);
-        var t=($("body").height()-627)+"px";
+        var h=$("body").height()-(document.documentElement.clientHeight+120);
+        var t=($("body").height()-350)+"px";
         //console.log(h);
         if($(window).scrollTop()<=h){
         	//console.log(h);
