@@ -73,7 +73,7 @@
 					});
 				});
 			  	/* $("#moreul").slideUp("slow"); */
-			  	$("#moreul > li:eq(6)").addClass("active");
+			  	$(".sidebar-menu-mainul > li:eq(2)").addClass("active");
 			  	
 			  	//获取邀请记录
 			  	$.ajax({

@@ -12,7 +12,7 @@
 				document.getElementById('main-wrapper-right').style.height = height + 'px';
 				
 				/* $("#moreul").slideUp("slow"); */
-			  	$("#moreul > li:eq(7)").addClass("active");
+			  	$(".sidebar-menu-mainul > li:eq(3)").addClass("active");
 			  	
 			  	$.ajax({
 					url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
