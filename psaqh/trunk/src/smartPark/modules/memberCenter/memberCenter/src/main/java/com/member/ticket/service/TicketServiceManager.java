@@ -16,6 +16,6 @@ public interface TicketServiceManager extends BaseManager{
 	
 	public List<WsFlightWithPriceAndCommisionItem> getFlights(AvailableFlightWithPriceAndCommisionRequest conditions);
 
-	public List<DailyLowestPrice> getDailyLowestPrice(String startDate, String deptCode, String arrCode);
+	public List<DailyLowestPrice> getDailyLowestPrice(String startDate, String deptCode, String arrCode) throws Exception;
 	 
 }

@@ -55,7 +55,7 @@ public class HotelBasicsServiceImpl extends BaseManagerImpl implements HotelBasi
 	}
 
 	@EsbServiceMapping
-	public List<JsonNode> getCities(@ServiceParam(name="px") int px) throws BusException{
+	public List<JsonNode> getCities(@ServiceParam(name="px") String px) throws BusException{
 		List<JsonNode> resultList  = new ArrayList<JsonNode>();
 		String result = "";
 		Map<String,Object> params = new HashMap();
