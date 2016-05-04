@@ -6,6 +6,10 @@
 		//分页页码显示
 		 $.ajax({
 			url:baseUrl+'propertyservicemanagerChargeManager/getTotalCount.json', 
+			beforeSend: function(){
+				//开始显示dataLoading样式
+				$.showBox.DataLoading();
+			},
 			success:function(results){	
 				var totalCount=results.records[0].totalCount;				
 				pageCount = Math.ceil(totalCount / pageSize);//页数	
@@ -16,14 +20,17 @@
 						pageCount:pageCount,
 						current:1,
 						backFn:function(p){
-							urrentIndex = p;
+							currentIndex = p;
 							this.pageCount=pageCount;
 							refreshData(p,pageSize);
 						}
-					});						
+				 	});	
 				}
+				//关闭dataLoading样式
+				$.showBox.CloseDataLoading();
+			}
 		}); 			
-	});	
+	});		
 	
 	
 	//分页列表
