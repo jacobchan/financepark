@@ -76,5 +76,27 @@
 	<!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
+	<script type="text/javascript">
+	//获取请求URL
+	function GetRequest() {
+		/* url=decodeURI(location.href);
+		var tmp1=url.split("?")[1]; */
+	   var url = decodeURI(location.search); //获取url中"?"符后的字串
+			   alert(url);
+	   var theRequest = new Object();
+	   if (url.indexOf("?") != -1) {
+	      var str = url.substr(1);
+	      strs = str.split("&");
+	      for(var i = 0; i < strs.length; i ++) {
+	         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+	      }
+	   }
+	   return theRequest;
+	}
+	$(function(){
+		var Request = new Object();
+		Request = GetRequest();
+	});
+	</script>
 </body>
 </html>

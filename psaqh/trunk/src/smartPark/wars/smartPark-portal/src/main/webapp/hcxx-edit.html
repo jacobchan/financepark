@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>机票预定编辑</title>
 	<link href="styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 	<link href="styles/base.css" type="text/css" rel="stylesheet">
 	<link href="styles/page/zs.css" type="text/css" rel="stylesheet">
-	<link href="styles/page/hotel.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="scripts/lib/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/bootstrap.min.js"></script>
@@ -26,7 +25,7 @@
                     <a href=""><span class="current">去程</span></a>
                 </div>
                 <div class="clearfix hc-con-h">
-                    <table>
+                    <table id="flightInfo">
                         <tr>
                             <td class="c-333">北京————上海</td>
                             <td class="c-333">四川航空3u8421</td>
@@ -48,9 +47,6 @@
                 </div>
                 <div class="clearfix mt30">
                 	<h3 class="c-o f16">乘机人信息：<span class="f12 c-b1">[请准确填写乘机人信息，以免在办理登机时发生问题。带*为必填项]</span></h3>
-                	<div class="person-info clearfix" id="person-info">
-                	  
-                	</div>
                 	<div class="hc-con-infor mt10">
 	                   	<table>
 	                   		<colgroup>
@@ -60,44 +56,45 @@
 	                   		<tr>
 	                   			<td valign="top">购票类型<em>*</em></td>
 	                   			<td>
-	                   				<div>
-	                   					<select class="adult">
-		                   					<option>成人</option>
-		                   					<option>儿童</option>
+	                   				<!-- <div class="mb20"> -->
+	                   					<select id="passengerType" class="passengerType">
+		                   					<option value="ADULT">成人</option>
+		                   					<!-- <option value="CHD">儿童</option> -->
 		                   				</select>
-	                   					<span class="ml10">￥3840/成人（含税费）</span>
-	                   				</div>
-	                   				
-	                   			</td>
-	                   		</tr>
-	                   		<tr><td>真实姓名<em>*</em></td>
-	                   		    <td><div>
-	                   					<input class="name" name="name" type="text" value="">
-	                   				</div>
+	                   					<!-- <span class="ml10">￥3840/成人（含税费）</span> -->
+	                   					<input type="text" class="pName ml10" placeholder="乘客姓名" id="pName" name="pName" style="width:220px;">
+	                   				<!-- </div> -->
+	                   				<!-- <div>
+	                   					<input type="text">
+	                   				</div> -->
 	                   			</td>
 	                   		</tr>
 	                   		<tr>
 	                   			<td>证件号码<em>*</em></td>
 	                   			<td>
-	                   				<select>
-	                   					<option>身份证</option>
-	                   					<option>港澳</option>
+	                   				<select id="identityType">
+	                   					<option value="1">身份证</option>
+	                   					<option value="2">护照</option>
+	                   					<option value="3">军官证</option>
+	                   					<option value="4">士兵证</option>
+	                   					<option value="5">台胞证</option>
+	                   					<option value="6">其他</option>
 	                   				</select>
-	                   				<input class="idNumber" type="text" class="ml10" style="width:220px;">
+	                   				<input type="text" class="ml10" style="width:220px;">
 	                   			</td>
 	                   		</tr>
-	                   		<tr>
+	                   		<!-- <tr>
 	                   			<td>保险<em>*</em></td>
 	                   			<td>
-	                   				<select class="insurance">
-	                   					<option value="20">￥20/份</option>
-	                   					<option value="30">￥30/份</option>
+	                   				<select>
+	                   					<option>￥20/份</option>
+	                   					<option>港澳</option>
 	                   				</select>
 	                   				<span class="ml10">￥20/份</span>
 	                   			</td>
-	                   		</tr>
-	                   		<tr>
-	                   			<td colspan="2"><a href="javascript:;" class="open-tanc" id="open-tanc"><i class="fa fa-plus-circle mr5"></i>新增乘机人</a></td>
+	                   		</tr> -->
+	                   		<tr id="addPassenger">
+	                   			<td colspan="2"><a href="javascript:;" class="open-tanc"><i class="fa fa-plus-circle mr5"></i>新增乘机人</a></td>
 	                   		</tr>
 	                   	</table>
 	                </div>
@@ -113,26 +110,26 @@
 	                   		<tr>
 	                   			<td valign="top">真实姓名<em>*</em></td>
 	                   			<td>
-                   					<input type="text">
-                   					<span class="ml10">￥3840/成人（含税费）</span>
+                   					<input type="text" id="linkMan" name="linkMan">
+                   					<!-- <span class="ml10">￥3840/成人（含税费）</span> -->
 	                   			</td>
 	                   		</tr>
 	                   		<tr>
 	                   			<td>手机号码<em>*</em></td>
 	                   			<td>
-	                   				<input type="text">
+	                   				<input type="text" id="linkPhone" name="linkPhone">
 	                   			</td>
 	                   		</tr>
 	                   		<tr>
 	                   			<td>电话</td>
 	                   			<td>
-	                   				<input type="text">
+	                   				<input type="text" id="otherLinkMethod" name="otherLinkMethod">
 	                   			</td>
 	                   		</tr>
 	                   		<tr>
 	                   			<td>电子邮箱</td>
 	                   			<td>
-	                   				<input type="text">
+	                   				<input type="text" id="email" name="email">
 	                   			</td>
 	                   		</tr>
 	                   		<tr>
@@ -153,7 +150,7 @@
                 </div>
                 <div class="clearfix hc-con-h mt20 tr" >
                     <span>共<font class="c-o"> 1 </font>名乘机人 订单总计费用：<font class="c-o f24">1300</font></span>
-                    <a href="javascript:;" class="ib-btn" style="margin:10px 20px;">下一步</a>
+                    <a href="javascript:toSubmit()" class="ib-btn" style="margin:10px 20px;">下一步</a>
                 </div>
             </div>
             <div class="fr" style="width:288px;">
@@ -200,23 +197,72 @@
 	</div>
 	<!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
-	<div class="person-info-list">
-                	      <input type="hidden" name="" value="" /><i></i><span>敬业(1232143543637567568)</span><span>成人</span><span>保险：20元/份</span> <a href="javascript:void(0)">编辑</a>
-                	   </div>
-	<script>
-	$(function(){
-		$("#open-tanc").on("click",function(){
-			var html = "<div class='person-info-list'><input type='hidden' name='' value='' /><i></i><span>"+$(this).parents("table").find("input.name").val()+"("+$(this).parents("table").find(".idNumber").val()+")</span><span>"+$(this).parents("table").find(".adult").find("option:selected").text()+"</span><span>保险："
-	          +$(this).parents("table").find(".insurance").val()+"元/份</span><a href='javascript:void(0)'>编辑</a></div>";
-		   $(".person-info").append(html);
-		})
-		$("#person-info").on("click",".person-info-list>i",function(){
-			$(this).toggleClass("focus");
-			//改变相应input的值
-		})
-		
-	})
-	</script>
 	<!--***bottom end****************************************-->
+	<script type="text/javascript">
+	
+	$(function(){
+		var Request = new Object();
+		Request = GetRequest();
+		var fromcity=Request['fromcity'];
+		var fromCode = Request['fromCode'];
+		var gotocity = Request['gotocity'];
+		var gotoCode = Request['gotoCode'];
+		var gotodate = Request['gotodate'];
+		//航程信息
+		var flightNo = Request['flightNo'];
+		var planeType = Request['planeType'];
+		var orgCity = Request['orgCity'];
+		var arrCity = Request['arrCity'];
+		var depTime = Request['depTime'];
+		var arriTime = Request['arriTime'];
+		var meal = Request['meal'];
+		var airportTax = Request['airportTax'];
+		var seatCode = Request['seatCode'];
+		var parPrice = Request['parPrice'];
+		var seatMsg = Request['seatMsg'];
+		var html_ = "<tr><td class='c-333'>" +fromcity+ "————" +gotocity+ "</td>";
+		html_ += "<td class='c-333'>"+flightNo+"</td>";
+		html_ += "<td>起飞："+orgCity+"</td>";
+		html_ += "<td>票价：<span class='c-o'>￥"+parPrice+"</span></td></tr>";
+        html_ += "<tr><td>"+gotodate+" "+depTime+"</td>";
+        html_ += "<td>机型 : "+planeType+"</td>";
+        html_ += "<td>抵达："+arrCity+"</td>";
+        html_ += "<td>机建费：<span class='c-o'>¥ "+airportTax+"</span></td></tr>";
+        $("#flightInfo").empty();
+        $("#flightInfo").append(html_);
+     
+	});
+	//转到提交页
+	function toSubmit(){
+		var passengerType = $("#passengerType").val();
+		var passengerName = $("#pName").val();
+		var linkPhone = $("#linkPhone");
+		var otherLinkMethod = $("#otherLinkMethod");
+		var linkMan = $("#linkMan");
+		var email = $("#email");
+		var params = decodeURI(location.search);
+		params += "&passengerType=" + passengerType;
+		params += "&passengerName=" + passengerName;
+		params += "&passengerLength=" + passengerType.length;
+		var url = "hcxx-tj.html" + params;
+		window.open(encodeURI(url));
+	}
+	
+	//获取请求URL
+	function GetRequest() {
+		/* url=decodeURI(location.href);
+		var tmp1=url.split("?")[1]; */
+	   var url = decodeURI(location.search); //获取url中"?"符后的字串
+	   var theRequest = new Object();
+	   if (url.indexOf("?") != -1) {
+	      var str = url.substr(1);
+	      strs = str.split("&");
+	      for(var i = 0; i < strs.length; i ++) {
+	         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+	      }
+	   }
+	   return theRequest;
+	}
+	</script>
 </body>
 </html>
