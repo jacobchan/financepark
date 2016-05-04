@@ -65,8 +65,8 @@
 		        		<dt></dt>
 		        		<dd><a href="javascript:void(0)" onclick="goProperties('czh/czh1.html')">创智汇</a></dd>
 		        		<dd><a href="javascript:void(0)" onclick="goProperties('czh/czh2.html')">创智汇介绍</a></dd>
-		        		<dd><a href="javascript:void(0)" onclick="goProperties('czh/czh4.html')">创智讲堂</a></dd>
 		        		<dd><a href="javascript:void(0)" onclick="goProperties('czh/czh5.html')">硅谷创业营</a></dd>
+		        		<dd><a href="javascript:void(0)" onclick="goProperties('czh/czh6.html')">知识库</a></dd>
 		        		<!-- <dd><a href="javascript:void(0)" onclick="goProperties('cg30/store.html')">积分商城</a></dd> -->
 		        	</dl>
 		        </li>
