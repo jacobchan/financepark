@@ -6,6 +6,7 @@
 	<link href="styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 	<link href="styles/base.css" type="text/css" rel="stylesheet">
 	<link href="styles/page/zs.css" type="text/css" rel="stylesheet">
+	<link href="styles/page/hotel.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="scripts/lib/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/bootstrap.min.js"></script>
@@ -47,6 +48,9 @@
                 </div>
                 <div class="clearfix mt30">
                 	<h3 class="c-o f16">乘机人信息：<span class="f12 c-b1">[请准确填写乘机人信息，以免在办理登机时发生问题。带*为必填项]</span></h3>
+                	<div class="person-info clearfix" id="person-info">
+                	  
+                	</div>
                 	<div class="hc-con-infor mt10">
 	                   	<table>
 	                   		<colgroup>
@@ -56,15 +60,19 @@
 	                   		<tr>
 	                   			<td valign="top">购票类型<em>*</em></td>
 	                   			<td>
-	                   				<div class="mb20">
-	                   					<select>
+	                   				<div>
+	                   					<select class="adult">
 		                   					<option>成人</option>
 		                   					<option>儿童</option>
 		                   				</select>
 	                   					<span class="ml10">￥3840/成人（含税费）</span>
 	                   				</div>
-	                   				<div>
-	                   					<input type="text">
+	                   				
+	                   			</td>
+	                   		</tr>
+	                   		<tr><td>真实姓名<em>*</em></td>
+	                   		    <td><div>
+	                   					<input class="name" name="name" type="text" value="">
 	                   				</div>
 	                   			</td>
 	                   		</tr>
@@ -75,21 +83,21 @@
 	                   					<option>身份证</option>
 	                   					<option>港澳</option>
 	                   				</select>
-	                   				<input type="text" class="ml10" style="width:220px;">
+	                   				<input class="idNumber" type="text" class="ml10" style="width:220px;">
 	                   			</td>
 	                   		</tr>
 	                   		<tr>
 	                   			<td>保险<em>*</em></td>
 	                   			<td>
-	                   				<select>
-	                   					<option>￥20/份</option>
-	                   					<option>港澳</option>
+	                   				<select class="insurance">
+	                   					<option value="20">￥20/份</option>
+	                   					<option value="30">￥30/份</option>
 	                   				</select>
 	                   				<span class="ml10">￥20/份</span>
 	                   			</td>
 	                   		</tr>
 	                   		<tr>
-	                   			<td colspan="2"><a href="javascript:;" class="open-tanc"><i class="fa fa-plus-circle mr5"></i>新增乘机人</a></td>
+	                   			<td colspan="2"><a href="javascript:;" class="open-tanc" id="open-tanc"><i class="fa fa-plus-circle mr5"></i>新增乘机人</a></td>
 	                   		</tr>
 	                   	</table>
 	                </div>
@@ -192,6 +200,23 @@
 	</div>
 	<!--***bottom start****************************************-->
 	<div id="youi_page_footer" class="youi-page-footer"></div>
+	<div class="person-info-list">
+                	      <input type="hidden" name="" value="" /><i></i><span>敬业(1232143543637567568)</span><span>成人</span><span>保险：20元/份</span> <a href="javascript:void(0)">编辑</a>
+                	   </div>
+	<script>
+	$(function(){
+		$("#open-tanc").on("click",function(){
+			var html = "<div class='person-info-list'><input type='hidden' name='' value='' /><i></i><span>"+$(this).parents("table").find("input.name").val()+"("+$(this).parents("table").find(".idNumber").val()+")</span><span>"+$(this).parents("table").find(".adult").find("option:selected").text()+"</span><span>保险："
+	          +$(this).parents("table").find(".insurance").val()+"元/份</span><a href='javascript:void(0)'>编辑</a></div>";
+		   $(".person-info").append(html);
+		})
+		$("#person-info").on("click",".person-info-list>i",function(){
+			$(this).toggleClass("focus");
+			//改变相应input的值
+		})
+		
+	})
+	</script>
 	<!--***bottom end****************************************-->
 </body>
 </html>
