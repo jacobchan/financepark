@@ -94,6 +94,18 @@
 				var password=$("#password").val();
 				var confirmPassword=$("#confirmPassword").val();
 				var params=['password='+password,'confirmPassword='+confirmPassword,'oldPassword='+oldPassword];
+				if(!oldPassword){
+					$("#oldmsg").html("原密码为空");
+					return false;
+				}	
+				if(!password){
+					$("#newmsg").html("新密码为空");
+					return false;
+				}	
+				if(!confirmPassword){
+					$("#conmsg").html("确认密码为空");
+					return false;
+				}	
 				if(oldPassword.length<19 && oldPassword.length>5){
 					if(password.length<19 && password.length>5){
 						if(confirmPassword.length<19 && confirmPassword.length>5){
@@ -105,10 +117,11 @@
 											if(result&&result.record){
 												if("修改成功"==result.record.msg){
 													close("密码修改成功！");
-												}else{
-													$("#oldmsg").text(result.record.msg);
+												}else if("新旧密码不能一样"==result.record.msg){
 													$("#newmsg").text(result.record.msg);
-													//$("#conmsg").text(result.record.msg);
+													$("#conmsg").text(result.record.msg);
+												}else if("请输入正确的旧密码！"==result.record.msg){
+													$("#oldmsg").text(result.record.msg);
 												}
 											}
 										}
@@ -118,13 +131,13 @@
 									$("#conmsg").text("两次输入的密码不一致");
 								}
 						}else{
-							$("#newmsg").text("新密码不能为空，长度为6到18个字符");
+							$("#newmsg").text("新密码长度为6到18个字符");
 						}	
 					}else{
-						$("#newmsg").text("新密码不能为空，长度为6到18个字符");
+						$("#newmsg").text("新密码长度为6到18个字符");
 					}					
 				}else{
-					$("#oldmsg").text("原密码不能为空，长度为6到18个字符");
+					$("#oldmsg").text("原密码长度为6到18个字符");
 				}																	
 			});
 		});
@@ -134,16 +147,18 @@
 		    $(".tc.mt25.f18").append(content) ;
 		    $(".toast").show();		      		        		       				
 			setTimeout(function(){$(".toast").hide(); },2000);
-			setTimeout(function(){showphone(); },2000);			
-			//setTimeout(function(){location.reload();},2000);			
+			setTimeout(function(){showphone(); },2000);					
 	    }
 		//给新手机号发送短信验证码
-		//$("#sendnewcaptcha").click(function(){
-			function getCaptcha(){
+		function getCaptcha(){
 			$("#phonetest").empty();
 			var newPhone=$("#memberPhoneNumber").val();		
 			var params =['newPhone='+newPhone];
 			var isMobile=/^(?:13\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;//手机号的格式
+			if(!newPhone){
+				 $("#phonetest").html("手机号为空");
+				return false;
+			}			
 			 if(!isMobile.test(newPhone)){
 				 $("#phonetest").html("手机号输入错误");
 				return false;
@@ -153,8 +168,6 @@
 				data:params.join('&'),
 				success:function(result){
 					if(result && result.record){
-						//var res = result.record.html;
-						//close(res);
 						var capt = result.record.html;
 						if(!/^\d{6}$/.test(capt)){
 							enableSmsButton(3,capt,'重新获取');						
@@ -166,7 +179,6 @@
 				}			
 			});
 		}
-		//});
 		//换手机号验证
 		$(".changePhoneNumber").click(function(){	
 			var memberId=$("#memberId").val();
