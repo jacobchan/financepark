@@ -128,7 +128,13 @@ function evaluate(){
 				$("#tp_11").addClass("undis") ;
 				var htmls = [];
 				for(var i=0;i<results.records.length;i++){
-					htmls.push('<li><div class="fl"><img src="../styles/images/company/user.png"/><span class="record_info ml20 c3 lh24">'+
+					var imsrc = "";
+					if(results.records[i].memberInformation.memberHeadPortrait!=null&&results.records[i].memberInformation.memberHeadPortrait!=''){
+						imsrc=""+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+results.records[i].memberInformation.memberHeadPortrait+"&method=show' width='72' height='83'";
+					}else{
+						imsrc="../styles/images/company/user.png";
+					}
+					htmls.push('<li><div class="fl"><img src='+imsrc+'/><span class="record_info ml20 c3 lh24">'+
 					'<div>'+results.records[i].memberInformation.memberName+'<i class="chuang"></i></div><p>'+results.records[i].content
 					+'<span>('+results.records[i].createTime+')</span></p></span></div></li>');
 				}
