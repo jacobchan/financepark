@@ -38,7 +38,8 @@ function showCom(genreId,y){
 						$('#commodityShow'+y).parents(".taocan").attr("data-id",results.records[i].commodityId);
 						$('#commodityShow'+y).parents(".taocan").attr("data-commodityDescribe",results.records[i].commodityDescribe);
 						$('#commodityPrice'+y).html('&yen;'+results.records[i].commodityPrice+'/次');
-						var des = results.records[i].commodityDescribe.split(",");
+						var commodityDescribe = results.records[i].commodityDescribe;
+						var des = commodityDescribe.split(",");
 						var buff = [];
 						for(var j=0;j<des.length;j++){
 							buff.push('<li class="bgf1 caaa"><span>'+des[j]+'</span></li>');
