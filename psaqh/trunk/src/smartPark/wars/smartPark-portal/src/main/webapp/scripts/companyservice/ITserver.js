@@ -130,7 +130,7 @@ function evaluate(){
 				for(var i=0;i<results.records.length;i++){
 					var imsrc = "";
 					if(results.records[i].memberInformation.memberHeadPortrait!=null&&results.records[i].memberInformation.memberHeadPortrait!=''){
-						imsrc=""+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+results.records[i].memberInformation.memberHeadPortrait+"&method=show' width='72' height='83'";
+						imsrc=""+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+results.records[i].memberInformation.memberHeadPortrait+"&method=show width='72' height='83'";
 					}else{
 						imsrc="../styles/images/company/user.png";
 					}
