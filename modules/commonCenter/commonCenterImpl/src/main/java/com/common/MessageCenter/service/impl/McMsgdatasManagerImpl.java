@@ -292,7 +292,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 	//发送手机验证码
 	@Override
 	@EsbServiceMapping
-	public TempDemo getMobileCaptcha(@RequestParam("phone") String phone){
+	public TempDemo getMobileCaptcha(@ServiceParam(name = "phone") String phone){
 		TempDemo temp = new TempDemo();
 		//根据手机号码获取用户
 		MemberInformation mb = memberInformationManager.getUserByPhone(phone);
@@ -320,7 +320,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 	//找回密码发送手机验证码
 	@Override
 	@EsbServiceMapping
-	public TempDemo findPhoneCaptcha(@RequestParam("phone") String phone){
+	public TempDemo findPhoneCaptcha(@ServiceParam(name = "phone") String phone){
 		TempDemo temp = new TempDemo();
 		//根据手机号码获取用户
 		MemberInformation mb = memberInformationManager.getUserByPhone(phone);
