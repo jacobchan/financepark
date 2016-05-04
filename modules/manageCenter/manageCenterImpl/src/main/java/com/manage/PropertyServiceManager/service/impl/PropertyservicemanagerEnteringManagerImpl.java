@@ -239,7 +239,6 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
     	Collection<Condition> conditions =new ArrayList<Condition>();
     	Collection<Order> orders =new ArrayList<Order>();
     	String now=DateUtils.getToday();
-    	pager.setPageSize(12);
     	orders.add(ConditionUtils.getOrder("enteringDate", true));
     	conditions.add(ConditionUtils.getCondition("enteringDate", Condition.RIGHT,now));
     	PagerRecords pagerRecords = propertyservicemanagerEnteringDao.findByPager(pager, conditions, orders);
@@ -283,6 +282,7 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
     	for(PropertyservicemanagerEntering pe:enteringLists){
     		Record record = new Record();
 			record.put("enteringId",pe.getEnteringId());//ID
+			record.put("enteringDate",pe.getEnteringDate());
 			record.put("enteringRemain",pe.getEnteringRemain());//剩余预约数量
 			record.put("enteringAlre",pe.getEnteringAlre());//已预约数量
 			record.put("enteringTime",pe.getEnteringTime());
