@@ -157,16 +157,16 @@ display:block;position:absolute;bottom:0;right:0;background:url(../images/compan
 .ts-input{padding: 4px 10px;line-height: 20px;border:1px solid #d6d6d6;margin:0px 10px;width: 290px;font-size: 14px;}
 .from-infor font{width: 100px;display: inline-block;float: left;text-align: right;}
 
-.buy-sq-nav{margin:0px auto;display: inline-block;}
-.buy-sq-nav li{float: left;height: 50px;cursor: pointer;color: #595959;font-size: 14px;line-height: 50px;text-align: center;background: #f6f6f6;margin-left: -15px;}
+.buy-sq-nav{margin:0px auto;display: inline-block;height: 50px;line-height: 50px;}
+.buy-sq-nav li{float: left;cursor: pointer;color: #595959;font-size: 14px;text-align: center;background: #f6f6f6;margin-left: -15px;}
 .buy-sq-nav li em{margin-right: 10px;width: 20px;height: 20px;line-height: 20px;display: inline-block;color: #fff;background: #c3c3c3;border-radius:50%;font-size: 13px;text-align: center;}
 .buy-sq-nav li.active em{background: #fb7730;}
-.buy-sq-nav li.li1{width:284px;margin-left: 0px;}
+.buy-sq-nav li.li1{width:284px;margin-left: 0px;background: url(../images/cg30/pay-step1.png) no-repeat;background-size: 100%;}
 .buy-sq-nav li.li2{width:287px;background: url(../images/cg30/pay-step2.png) no-repeat;background-size: 100%;}
-.buy-sq-nav li.li4{width:287px;background: url(../images/cg30/pay-step4.png) no-repeat;background-size: 100%;}
-.buy-sq-nav li.active.li1{background: url(../images/cg30/pay-step1.png) no-repeat;color: #fb7730;background-size: 100%;}
-/* .buy-sq-nav li.active.li2{background: url(../images/cg30/pay-step2.png) no-repeat;color: #fb7730;} */
-
+.buy-sq-nav li.li4{width:287px;background: url(../images/cg30/pay-step3.png) no-repeat;background-size: 100%;}
+.buy-sq-nav li.active.li1{background: url(../images/cg30/pay-step1-a.png) no-repeat;color: #fb7730;background-size: 100%;}
+.buy-sq-nav li.active.li2{background: url(../images/cg30/pay-step2-a.png) no-repeat;color: #fb7730;background-size: 100%;}
+.buy-sq-nav li.active.li4{background: url(../images/cg30/pay-step3-a.png) no-repeat;color: #fb7730;background-size: 100%;}
 
 /**支付方式**/
 .bd-box{border:1px solid #ecebeb;}

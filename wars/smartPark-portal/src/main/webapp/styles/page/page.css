@@ -418,6 +418,25 @@ width:32px;height:32px;position:absolute;top:50%;right:0;margin-top:-16px;}
 .hr_c4{background:url(../images/company/hr_c4.png) top center no-repeat}
 .hr_c5{background:url(../images/company/hr_c4.png) top center no-repeat}
 #hr_flow li{width:20%}
+
+/**社保申请表格**/
+.sh-form{margin:40px auto;width: 730px;}
+.sh-form th{padding:7px 10px;text-align: right;min-width: 90px;vertical-align: top;line-height: 30px;}
+.sh-form .sf-table{margin:0px auto;border:1px solid #eeeded;width: 100%;}
+.sh-form .sf-table th{padding:10px;vertical-align: top;line-height: 30px;text-align: center;background: #f6f6f6;font-size: 16px;color:#333;border-bottom: 1px solid #eeeded;}
+.sh-form .sf-table td{padding: 15px 10px;}
+.sh-form td{padding:7px 10px;}
+.sf-input{border:1px solid #d6d6d6;height: 28px;line-height: 20px;width: 200px;padding: 0px 10px; }
+.sh-form .selectBox{width: 200px;}
+.sh-form .select_show{border:1px solid #ddd;height: 28px;padding: 0px;line-height: 28px;width: 175px;padding-left: 10px;}
+.sh-form .select_down{height: 28px;background-size: auto 100%;width: 25px;}
+.sh-form .select_list{top: 28px;}
+.sh-form .select_list li{line-height: 28px;padding: 0px 10px;width: 198px;height: 28px;}
+.sf-box{cursor: pointer; display: inline-block;width: 100px;height: 30px;line-height: 28px;border:1px solid #ddd;text-align: center;margin-right: 10px;margin-bottom: 10px;}
+.sf-box.sf-active{border:2px solid #ff6715;line-height: 26px;background: url(../images/czh/current.png) no-repeat right bottom;;}
+em.im{background: url(../images/im.png)no-repeat; height: 9px;width: 9px;padding-top: 9px;display: inline-block;}
+
+
 /*
 *********商标专利
 */
