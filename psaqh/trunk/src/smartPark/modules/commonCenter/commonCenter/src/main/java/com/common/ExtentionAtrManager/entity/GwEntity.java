@@ -9,6 +9,16 @@ public class GwEntity {
 	
 	private String commodityId;//创立方Id
 	
+	private String commodityName;//创立方名称
+	
+	public String getCommodityName() {
+		return commodityName;
+	}
+
+	public void setCommodityName(String commodityName) {
+		this.commodityName = commodityName;
+	}
+
 	public String getCommodityIdfieldName() {
 		return "commodityId";
 	}
