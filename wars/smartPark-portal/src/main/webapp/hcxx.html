@@ -398,6 +398,31 @@
 	var lowest_price = new Array();
 	var lowest_price_date = new Array();
 	var price = new Array();
+	var currentLowPrice = 99999999;
+	//跳转到订单填写页面
+		function toFillOrder(){
+			/* if(!isLogin){
+				clearInterval(timer);
+				$("#msg").text("请先登录");
+		        $(".toast").show();
+		        pltime=2;
+		        timer=setInterval("closeTanc()",1000);
+				return ;
+			} */
+			var url = "hcxx-edit.html?";
+			var params = ["flightNo","planeType","orgCity","arrCity","depTime","arriTime","meal","airportTax","seatCode","parPrice","seatMsg","policyId"];
+			url += params[0] +"="+ arguments[0];
+			for(var i=1 ; i<arguments.length&&i<params.length ; i++){
+				url += "&" + params[i] +"="+ arguments[i];
+			}
+			var a1 = $("#fromcity").val();
+			var a2 = $("#gotocity").val();
+			var a3 = $("#depCityCode").val();
+			var a4 = $("#arrCityCode").val();
+			var a5 = $("#start").val();
+			url += "&fromcity=" + a1 + "&gotocity=" + a2 + "&fromCode=" + a3 + "&gotoCode=" + a4 + "&gotodate=" + a5;
+			window.open(encodeURI(url));
+		}
 		$(function(){
 			var Request = new Object();
 			Request = GetRequest();
@@ -407,6 +432,14 @@
 			var gotoCode = Request['gotoCode'];
 			var gotodate = Request['gotodate'];
 			var returndate = Request['returndate'];
+			$("#fromcity").val(fromcity);
+			$("#gotocity").val(gotocity);
+			$("#depCityCode").val(fromCode);
+			$("arrCityCode").val(gotoCode);
+			$("#start").val(gotodate);
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++     获取航班信息                                                                                                                                                                                                                                                                  +++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 			var params = ['orgAirportCode='+fromCode,'dstAirportCode='+gotoCode,'date='+gotodate];
 			var serviceURL = baseUrl+"TicketServiceManager/getFlights.json";
 			$.youi.ajaxUtils.ajax({
@@ -426,7 +459,11 @@
 					console.error("机票信息获取有误！");
 				}
 			});
-			params = ['startDate='+gotodate,'deptCode='+fromCode,'arrCode='+gotoCode];
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++     获取当前天到未来30天的日期最低价                                                                                                                                                                                                                        +++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+			//DateAdd("m ",1,new Date());
+			params = ['startDate='+(new Date()).Format("yyyy-MM-dd"),'deptCode='+fromCode,'arrCode='+gotoCode];
 			serviceURL = baseUrl+"TicketServiceManager/getDailyLowestPrice.json";
 			$.youi.ajaxUtils.ajax({
 				url:serviceURL,
@@ -442,20 +479,30 @@
 							lowest_price_date.push(record[i].depDate);
 						}
 						var maxDays = (new Date()).MaxDayOfDate();
-						//填充当天之前日期的最低价
-						for(var i=0;i<(new Date(lowest_price_date[0].replace(/-/g,'/'))).getDate();i++){
-							price.push(0);
+						var currentMonth = (new Date()).getMonth();
+						//填充日历控件最低价price数组
+						for(var i=0;i<maxDays;i++){
+							var flag = 0;
+							for(var j=0;j<lowest_price_date.length;j++){
+								if((new Date(lowest_price_date[0].replace(/-/g,'/'))).getMonth()==currentMonth){
+									if((new Date(lowest_price_date[j].replace(/-/g,'/'))).getDate()==(i+1)){
+										price.push(lowest_price[j]);
+										flag = 1;
+										break;
+									}
+								}else{
+									continue;
+								}								
+							}
+							if(flag==0){
+								price.push(0);
+							}
 						}
-						//填充当天到月底的天数的最低价
-						for(var i=(new Date(lowest_price_date[0].replace(/-/g,'/'))).getDate(),j=0;i<maxDays&&j<lowest_price.length;i++,j++){
-							price.push(lowest_price[j]);
-						}
+						console.debug(price);
 						//日历控件当前日期月份的价格数组
 						$("#kalendar-detail").dateplug({
 							price: price
 						});
-						console.log(price)
-						parseLowestPrice(record,gotodate);
 					}else{
 						console.error("机票最低价获取有误！");
 					}
@@ -464,16 +511,52 @@
 					console.error("机票最低价信息获取有误！");
 				}
 			});
-			
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++     判断所选日期是否超过当前日期外加30天的范围，若超过，重新获取一次最低价接口，填充日期+最低价的tag条                                                                                +++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+			var tmpTime = DateAdd( "d ",30,new Date()).Format("yyyy-MM-dd");
+			if(compareDate(tmpTime,gotodate)){
+				params = ['startDate='+gotodate,'deptCode='+fromCode,'arrCode='+gotoCode];
+				serviceURL = baseUrl+"TicketServiceManager/getDailyLowestPrice.json";
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					data:params.join('&'),
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(result){
+						if(result&&result.records){
+							var record = result.records;
+							var tmp_date_arr = new Array();
+							var tmp_price_arr = new Array();
+							for(var i=0;i<record.length;i++){
+								console.debug("gotodate index "+ i +":"+record[i].depDate+"  price:"+record[i].ticketPrice);
+								tmp_price_arr.push(record[i].ticketPrice);
+								tmp_date_arr.push(record[i].depDate);
+							}
+							parseLowestPrice(tmp_date_arr,tmp_price_arr,gotodate);
+						}else{
+							console.error("机票最低价获取有误！");
+						}
+					},
+					error:function(){
+						console.error("机票最低价信息获取有误！");
+					}
+				});
+			}else{
+				parseLowestPrice(lowest_price_date,lowest_price,gotodate);
+			}
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++     日历图标点击事件                                                                                                                                                                                                                                                          +++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 			$("#kalendar,#pick-up").click(function(){
 				 if($(this).attr("id")=="pick-up"){
+					 
 				    $("#kalendar-detail").slideUp() 
 				 }else{
 				    $("#kalendar-detail").slideDown()
 				 }
 			})
-			
-			//日历控件
+			//日历控件内的切换与点击事件
 		   $.fn.dateplug.ajax = function(e){
 			  //为每个日期的点击事件添加事件函数 当前日期可以通过class=current属性获取
 			  var month = $("#kalendar_month").html(),year = $("#kalendar_year").html(),day = $("#kalendar-detail td.current p:nth-child(1)").html();
@@ -519,6 +602,9 @@
 			});
 			
 		});
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+//      $(function(){});-->>> Foot
+ /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 		var pltime,timer;//动态加载效果的时间控件变量
 	    function closeTanc(){
 	        if(pltime>1){
@@ -541,6 +627,7 @@
 		   }
 		   return theRequest;
 		}
+		//解析构建航班信息
 		function parseFlights(record){
     		var flights = record.flights;
 			for(var i=0;i<flights.length;i++){
@@ -560,7 +647,11 @@
 				html_ += "<td><p>¥"+flight.airportTax+"</p><p>包正餐</p></td>";
 				else
 				html_ += "<td><p>¥"+flight.airportTax+"</p><p>不包正餐</p></td>";
-				html_ += "<td><a href='' class='order-btn'>预订</a><p><a href='javascript:;' class='see-all'>查看所有仓位</a></p></td></tr></thead>";
+				html_ += "<td><a href='javascript:;' onclick='toFillOrder(\""+
+						flight.flightNo + "\",\"" + flight.planeType + "\",\"" + flight.orgCity + "\",\"" + flight.dstCity + "\",\"" + flight.depTime + "\",\"" + flight.arriTime + "\",\""
+						+ flight.meal + "\",\"" + flight.airportTax + "\",\"" + seatItems[0].seatCode + "\",\"" + seatItems[0].parPrice + "\",\"" + seatItems[0].seatMsg
+						+ "\",\"" + seatItems[0].policyData.policyId
+						+"\")' class='order-btn'>预订</a><p><a href='javascript:;' class='see-all'>查看所有仓位</a></p></td></tr></thead>";
 				//舱位列表重复列表部分
 				html_ += "<tbody class='undis'>";
 				for(var j=1;j<seatItems.length;j++){
@@ -571,68 +662,97 @@
 					html_ += "<td><p>¥"+flight.airportTax+"</p><p>包正餐</p></td>";
 					else
 					html_ += "<td><p>¥"+flight.airportTax+"</p><p>不包正餐</p></td>";
-					html_ += "<td><a href='' class='order-btn ob-orange'>预订</a></td></tr>";
+					html_ += "<td><a href='javascript:;' onclick='toFillOrder(\""+
+							flight.flightNo + "\",\"" + flight.planeType + "\",\"" + flight.orgCity + "\",\"" + flight.dstCity + "\",\"" + flight.depTime + "\",\"" + flight.arriTime + "\",\""
+							+ flight.meal + "\",\"" + flight.airportTax + "\",\"" + seatItems[j].seatCode + "\",\"" + seatItems[j].parPrice + "\",\"" + seatItems[j].seatMsg
+							+ "\",\"" + seatItems[j].policyData.policyId
+							+"\")' class='order-btn ob-orange'>预订</a></td></tr>";
 				}
 				html_ += "</tbody></table></div>";
 				$("#flightsModel").append(html_);
 			}
 		}
-		function parseLowestPrice(record,gotodate){
-			if(compareDate(record[record.length-1].depDate,gotodate)){
-				var d = gotodate.replace(/-/g,'/');
-				var tmp = new Date(d);
-				var html_ = "<td class='sc-price-date'>";
-				html_ += "<div class='sc-price-date-inner'><table><tbody><tr>";
-				for(var i=0 ; i<7;i++){
-					if(i==0){
-						html_ += "<td class='active'><a href='javascript:;' class='outer' target='_top'>";
-					}else{
-						html_ += "<td><a href='javascript:;' class='outer' target='_top'>";
-					}
-					html_ += "<span class='c-o f14'>点击查看</span>";
-					html_ += "<p class='c-333 f12'>"+DateAdd("d ",i,tmp).Format("yyyy-MM-dd")+"</p>";
-					html_ += "</a></td>";
+		
+		//解析构建日期最低价
+		function parseLowestPrice(arrdate,arrprice,gotodate){
+			var len =  DateDiff(arrdate[0],arrdate[arrdate.length-1],"d");
+			var new_price_arr = new Array();
+			var new_date_arr = new Array();
+			for(var i=0,j=0; i<=len&&j<arrdate.length; i++){
+				var tmp = new Date(arrdate[0].replace(/-/g,'/'));
+				if(arrdate[j]==DateAdd( "d ",i,tmp).Format("yyyy-MM-dd")){
+					new_price_arr.push(arrprice[j]);
+					new_date_arr.push(arrdate[j]);
+					j++;
+				}else{
+					new_price_arr.push(0);
+					new_date_arr.push(tmp.Format("yyyy-MM-dd"));
 				}
-				html_ += "</tr></tbody></table></div></td>";
-				$("date_icon").before(html_);
-			}else{
-				var arr_html = new Array();
-				for(var i=0;i<record.length;){
-					var html1 = "<td class='sc-price-date'>";
-					var html2 = "<td class='sc-price-date' style='display:none'>";
-					if(i%7==0){
-						var flag = 0;
-						var html_ = "<div class='sc-price-date-inner'><table><tbody><tr>";
-						for(var j=0;j<7;j++,i++){
-							if(i>=record.length){
-								html_ += "<td><a href='javascript:;' class='outer' target='_top'>";
-								html_ += "<span class='c-o f14'>点击查看</span>";
-								html_ += "<p class='c-333 f12'></p>";
-								html_ += "</a></td>";
-							}else{
-								if(gotodate==record[i].depDate){
-									html_ += "<td class='active'><a href='javascript:;' class='outer' target='_top'>";
-									flag = 1;
-								}else{
-									html_ += "<td><a href='javascript:;' class='outer' target='_top'>";
-								}
-								html_ += "<span class='c-o f14'>¥ "+record[i].ticketPrice+"</span>";
-								html_ += "<p class='c-333 f12'>"+record[i].depDate+"</p>";
-								html_ += "</a></td>";
-							}
-						}
-						html_ += "</tr></tbody></table></div></td>";
-						if(flag==1){
-							arr_html.push(html1+html_);
+			}
+			console.debug("a:"+new_price_arr);
+			console.debug("b:"+new_date_arr);
+			//***************************************************************
+			var arr_html = new Array();
+			for(var i=0,k=0;i<new_date_arr.length;){
+				var html1 = "<td class='sc-price-date'>";
+				var html2 = "<td class='sc-price-date' style='display:none'>";
+				if(i%7==0){
+					var flag = 0;
+					var html_ = "<div class='sc-price-date-inner'><table><tbody><tr>";
+					for(var j=0;j<7;j++,i++){
+						if(i>=new_date_arr.length){
+							//var tmp = new Date(new_date_arr[new_date_arr.length-1].replace(/-/g,'/'));
+							var addToTime = DateAdd("d",i+1-new_date_arr.length,new Date(new_date_arr[new_date_arr.length-1].replace(/-/g,'/'))).Format("yyyy-MM-dd");
+							html_ += "<td><a href='javascript:;' class='outer' target='_top'>";
+							html_ += "<span class='c-o f14'>点击查看</span>";
+							html_ += "<p class='c-333 f12'>"+addToTime+"</p>";
+							html_ += "</a></td>";
 						}else{
-							arr_html.push(html2+html_);
+							if(gotodate==new_date_arr[i]){
+								html_ += "<td class='active'><a href='javascript:;' class='outer' target='_top'>";
+								flag = 1;
+							}else{
+								html_ += "<td><a href='javascript:;' class='outer' target='_top'>";
+							}
+							if(new_price_arr[i]==0){
+								html_ += "<span class='c-o f14'>点击查看</span>";
+							}else{
+								html_ += "<span class='c-o f14'>¥ "+new_price_arr[i]+"</span>";
+							}
+							
+							html_ += "<p class='c-333 f12'>"+new_date_arr[i]+"</p>";
+							html_ += "</a></td>";
 						}
 					}
+					html_ += "</tr></tbody></table></div></td>";
+					if(flag==1){
+						arr_html.push(html1+html_);
+					}else{
+						arr_html.push(html2+html_);
+					}
 				}
-				for(var k=0;k<arr_html.length;k++){
-					$("#date_icon").before(arr_html[k]);
+			}
+			for(var k=0;k<arr_html.length;k++){
+				$("#date_icon").before(arr_html[k]);
+			}
+		}
+		function sortArray(arrdate,arrprice){
+			var len =  DateDiff(arrdate[0],arrdate[arrdate.length-1],"d");
+			var arr = new Array();
+			var first_date = DateAdd( "d ",1,now);
+			for(var i=0,j=0; i<=len&&j<arrdate.length; i++){
+				var tmp = new Date(arrdate[0].replace(/-/g,'/'));
+				if(arrdate[j]==DateAdd( "d ",i,tmp).Format("yyyy-MM-dd")){
+					arr.push(arrprice[j]);
+					j++;
+				}else{
+					arr.push(0);
 				}
-			}	
+			}
+			console.debug("a:"+arrdate);
+			console.debug("b:"+arrprice);
+			console.debug("c:"+arr);
+			return arr;
 		}
 		//日期对比 a为开始日期b为结束日期 a>b false a<=b true
 		function compareDate(a, b) {
@@ -767,5 +887,23 @@
 		    return result;  
 		}  
 	</script>
-</body>
+	<script type="text/javascript">
+	var pltime,timer;//动态加载效果的时间控件变量
+    function closeTanc(){
+        if(pltime>1){
+            pltime--;
+        }else{
+            $(".toast").hide();
+        }       
+    }
+	</script>
+	<!-- 弹出层样式 -->
+    <div class="toast">
+        <div class="toast-con clearfix">
+            <div class="close-toast fr"></div>
+            <p class="tc mt25 f18" style="color:#ff6715" id="msg">请登录后重试！</p>
+        </div>
+        
+    </div>
+	</body>
 </html>
