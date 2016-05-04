@@ -21,7 +21,7 @@
 		    	<a href="javascript:void(0)" onclick="goProperties('index.html')"><img src="<%=request.getContextPath()%>/styles/images/logo_3.png" class="fl" style="margin-top:3px"/></a>		        
 		    </div>
 		   	<div class="party-change">
-		   		<span class="f28">企业管理中心</span>
+		   		<span class="f28">管理中心</span>
 		   	</div>
 		    <ul class="index-head-nav">
 		    	<li><a href="javascript:void(0)" onclick="goProperties('index.html')">首页</a></li>
