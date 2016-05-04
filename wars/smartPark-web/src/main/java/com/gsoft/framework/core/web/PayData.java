@@ -43,8 +43,9 @@ public class PayData extends BaseDataController {
 			for(Map.Entry<String, Object> entry:requestMap.entrySet()){
 				System.out.println(entry.getKey()+"--->"+entry.getValue());
 			}
-			String sign = Signature.getSign(requestMap);
 			String res_sign =  requestMap.get("sign").toString();
+			requestMap.remove("sign");
+			String sign = Signature.getSign(requestMap);
 			if(!sign.equals(res_sign)){
 				throw new BusException("签名不正确！");
 			}
@@ -54,11 +55,13 @@ public class PayData extends BaseDataController {
 				String orderCode = requestMap.get("out_trade_no").toString();//支付订单号
 				String tranId = requestMap.get("transaction_id").toString();//微信返回交易订单号
 				OrdermanagerUserorder order = ordermanagerUserorderManager.getOrderByCode(orderCode);
-				order.setUserorderStatus("02");//02-已支付
-				order.setPayStatus("01");//01-已支付
-				order.setPayReturnCode(tranId);
-				order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-				ordermanagerUserorderManager.saveUserOrder(order);
+				if(!"01".equals(order.getPayStatus())){
+					order.setUserorderStatus("02");//02-已支付
+					order.setPayStatus("01");//01-已支付
+					order.setPayReturnCode(tranId);
+					order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+					ordermanagerUserorderManager.saveUserOrder(order);
+				}
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
