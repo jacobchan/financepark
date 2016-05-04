@@ -127,7 +127,7 @@
 				}
 			});
 		}
-	//<!-- 取消投诉 -->
+	//取消投诉 
 	function cancel(obj){
 		var me=obj.parentNode.parentNode;//找到父节点	
 		//alert(me.id);
@@ -136,7 +136,7 @@
 		$(".moverec")[0].setAttribute("id",me.id);//给弹窗设置id
 		$(".bg-tanc.m1").show();
 	};
-			//点击确认取消投诉
+	//点击确认取消投诉
 	$(function(){
 		$(".hhf-submit.confirm").click(function(){	
 		$(".bg-tanc.m1").hide();
@@ -155,22 +155,17 @@
 	$(function(){
 		laydate({
 		    elem: '#startTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
-		    //format: 'YYYY-MM-DD hh:mm:ss', //日期格式
-	        //istime: true, //是否开启时间选择
 		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 		});
 	});
 	$(function(){
 		laydate({
 		    elem: '#endTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
-		    //format: 'YYYY-MM-DD hh:mm:ss', //日期格式
-	        //istime: true, //是否开启时间选择
 		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 		});
 	});
 	//点击跳转到投诉页面
-	$("#a1").click(function(){
-		
+	$("#a1").click(function(){		
 		location.href = proUrl + "yqfw/yq9.html" ;
 	})	
 	//弹窗
