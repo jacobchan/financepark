@@ -32,7 +32,9 @@ height:100%; position:fixed;}
 .sidebar-menu-mainul{ width:250px}
 .sidebar-menu-mainul li{width:250px;text-align:left;padding:10px 0; line-height:30px; cursor:pointer;}
 .sidebar-menu-mainul li a{padding-left:65px; display:block;}
-.sidebar-menu-mainul li a{font-size:16px; color:#bbbbbb;}
+.sidebar-menu-mainul li a{font-size:14px; color:#bbbbbb;}
+.sidebar-menu-mainul .onshow:hover{ background:#ff6715;}
+.sidebar-menu-mainul li.active{ background:#ff6715;}
 .qiyemenu:hover{ background:#ff6715;}
 .qiyemenu.active{ background:#ff6715;}
 .down-icon{ margin-left:10px;}

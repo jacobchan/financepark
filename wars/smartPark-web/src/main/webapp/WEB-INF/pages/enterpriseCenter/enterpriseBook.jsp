@@ -38,7 +38,7 @@
 				});
 			  	
 			  	/* $("#moreul").slideUp("slow"); */
-			  	$("#moreul > li:eq(5)").addClass("active");
+			  	$(".sidebar-menu-mainul > li:eq(1)").addClass("active");
 			});
 			function refreshData(pageIndex,pageSize){
 				var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'companyId='+$("#companyId").val()];
