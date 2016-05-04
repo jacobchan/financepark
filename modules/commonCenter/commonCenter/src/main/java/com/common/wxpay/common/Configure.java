@@ -34,7 +34,7 @@ public class Configure {
 	
 	
 	//通知地址
-	private static String notifyUrl = "http://www.qypark.com/manage/wxpay/notify.json";
+	private static String notifyUrl = "http://120.25.101.206:8088/wxpay/notify.json";
 	//以下是几个API的路径：
 	//1）被扫支付API
 	public static String PAY_API = "https://api.mch.weixin.qq.com/pay/micropay";
