@@ -195,7 +195,7 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
 			@ServiceParam(name="endTime") String endTime)
 			throws BusException {  
     	if(StringUtils.isNotEmpty(startTime)||StringUtils.isNotEmpty(endTime)){
-    		conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+    		conditions.add(ConditionUtils.getCondition("cosTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
        	}
     	PagerRecords pagerRecords = propertyservicemanagerCosDao.findByPager(pager, conditions, orders);  	
     	return pagerRecords;
@@ -275,8 +275,9 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
    			@ServiceParam(name="startTime") String startTime,
 			@ServiceParam(name="endTime") String endTime)  throws BusException{
    		List<Record> recordList=new ArrayList<Record>();
+   		//开始时间，结束时间有一个不为空，就执行条件
    		if(StringUtils.isNotEmpty(startTime)||StringUtils.isNotEmpty(endTime)){
-		conditions.add(ConditionUtils.getCondition("cosTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+   			conditions.add(ConditionUtils.getCondition("cosTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
    		}
 		List<PropertyservicemanagerCos> List = this.getPropertyservicemanagerCoss(conditions, null);
    		Record record = new Record();
