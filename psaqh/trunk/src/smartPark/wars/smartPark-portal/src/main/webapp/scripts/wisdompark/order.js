@@ -7,6 +7,7 @@ $(function(){
 			var commodityId= $("#commodityId").val();
 			var dates=new Array();
 			var times=new Array();
+			var dateAndTime=new Array();
 			$("#data_timer td.clicktd").not("#data_timer td.today").each(function(){
 				var active=$(this).index();
 				var time=$(this).html();
@@ -32,12 +33,66 @@ $(function(){
 					time = "10";
 				}
 				var date=$(".fc-day-header").eq(active).attr("data-date");
-				dates.push(date);
-				times.push(time);
+				dates.push(date);//获取日期
+				dateAndTime.push(date+"_"+time);//获取日期和时间段
 			});
 			if(commodityId){
 				if(dates.length>0){
-					$(".pop_layer").show();
+					var datess=new Array();
+					var dateAndTimes=new Array();
+					var date0=dates[0];
+					for(var i=0;i<dates.length;i++){
+						//将日期去重
+						if(datess.indexOf(dates[i]) == -1){
+							datess.push(dates[i]);
+						}
+
+					}
+					var a=new Array(datess.length);
+					var b=new Array(datess.length);
+					for(var i=0;i<datess.length;i++){
+						a[i]=new Array();
+						b[i]=new Array();
+						//根据日期将时间段分组
+						for(var j=0;j<dateAndTime.length;j++){
+							if(dateAndTime[j].split("_")[0]==datess[i]){
+								a[i].push(datess[i]);
+								b[i].push(dateAndTime[j].split("_")[1]);//获取同一天的时间段值
+							}
+						}
+					}
+					var noContinue=new Array();
+					for(var i=0;i<a.length;i++){
+						var c=b[i];
+						if(c.length>1){
+							var n = c.length;
+							var min = Number(c[0]), max = Number(c[0]);
+							for (var j = 1; j < n; j++) {
+								//比较是时间段是否连续
+								if (Number(c[j]) != 0) {
+									if (min > Number(c[j]))
+										min = Number(c[j]);
+									if (max < Number(c[j]))
+										max = Number(c[j]);
+								}
+							}
+							if (max - min > n - 1) {
+								//时间段不连续
+								noContinue.push(a[i]);
+							}
+						}
+					}
+
+					if (noContinue.length > 0) {
+						clearInterval(timer);
+						$("#msg").text("请选择连续的时间段");
+						$(".toast").show();
+						pltime = 2;
+						timer = setInterval("closeTanc()", 1000)
+					} else {
+						$(".pop_layer").show();
+					}
+
 				}else{
 					clearInterval(timer);
 					$("#msg").text("请选择预约日期和时间段");
