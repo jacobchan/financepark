@@ -101,9 +101,7 @@
         
     </div>
 	<!--***弹窗 end****************************************-->
-	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/laydate/laydate.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
-	<script type="text/javascript">
-	
-</script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/memberCenter/personalCenter/myAdderss.js"></script>	
+
 </youi:html>
