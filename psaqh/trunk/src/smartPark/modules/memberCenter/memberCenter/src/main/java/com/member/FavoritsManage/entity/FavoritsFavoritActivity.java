@@ -18,7 +18,7 @@ import com.manage.ActivityManager.entity.ActivityApply;
  * 
  */
 @Entity
-@Table(name = "sp_favorits_favoritgoods")
+@Table(name = "sp_favorits_favoritActivity")
 public class FavoritsFavoritActivity implements Domain{
 	
 	private static final long serialVersionUID = 5895671883814315942L;
