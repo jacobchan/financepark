@@ -16,7 +16,7 @@
 	<script type="text/javascript" src="../scripts/lib/flexpaper.js"></script>
 	<!-- <script type="text/javascript" src="../scripts/lib/flexpaper_handlers.js"></script> -->
 	<script type="text/javascript" src="../scripts/page/url.js"></script>
-    
+    <script type="text/javascript" src="../scripts/page/jquery.page.js"></script>	
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
 	<script type="text/javascript" src="../scripts/page/grade.js"></script>
 	
@@ -109,6 +109,9 @@
 								</tr> -->
 							</tbody>
 						</table>
+							<div class="tcdPageCode fr">
+					
+							</div>
 					</div>
 				</div>
 			</div>	
@@ -252,7 +255,7 @@
 		                    CursorToolsVisible : true,     //工具栏上是否显示光标工具
 		                    SearchToolsVisible : true,     //工具栏上是否显示搜索
 		                    WMode : 'window',
-		                    localeChain: 'zh_CN'
+		                    localeChain: 'en_US'
 		                }}
 		        );
 		}
@@ -322,8 +325,10 @@
 	     
 	     //加载当前文档评论
 	     function getComment(id){
+	    	 var pageSize=3;
+			var pageCount=1;	
 	    	 var documentId = id;
-	    	 var params ={'pager:pageIndex':1,'pager:pageSize':3,'activityDocument.documentId':documentId,orderBy:'desc:commentTime'};
+	    	 var params ={'activityDocument.documentId':documentId,orderBy:'desc:commentTime'};
 				$.youi.ajaxUtils.ajax({
 					url:baseUrl+"activityCommentManager/getPagerActivityComments.json",
 					data:params,
@@ -332,14 +337,43 @@
 					success:function(results){
 						if(results&&results.records){
 							if(results.records.length>0){
-								commRecords(results.records);
+								pageCount=Math.ceil(results.totalCount/pageSize);
+								 refreshData(1,pageSize);
+									$(".tcdPageCode").createPage({
+									    pageCount:pageCount,
+									    current:1,
+									    backFn:function(p){
+									       this.pageCount=pageCount;
+									        refreshData(p,pageSize);
+									    }
+									});
+									$(".tcdPageCode").show();
 							}else{
 								$(".comment").empty();
 								$(".comment").append("<tr><td align='center'><h2>暂无评论</h2></td></tr>");
+								$(".tcdPageCode").hide();
 							}
 						}
 					}
 				});	
+				
+				function refreshData(pageIndex,pageSize){
+					var params = {'pager:pageIndex':pageIndex,'pager:pageSize':pageSize,'activityDocument.documentId':documentId,orderBy:'desc:commentTime'};
+					$.youi.ajaxUtils.ajax({
+						url:baseUrl+"activityCommentManager/getPagerActivityComments.json",
+						jsonp:'data:jsonp',
+						data:params,
+						dataType:'jsonp',
+						success:function(results){
+							if(results&&results.records){
+								if(results.records.length>0){
+									commRecords(results.records);
+								}
+							}
+						}
+					});
+				}
+				
 				
 				$.youi.ajaxUtils.ajax({
 					url:baseUrl+"activityCommentManager/getPagerActivityComments.json",
