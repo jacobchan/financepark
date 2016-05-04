@@ -113,7 +113,7 @@
 					button = "已付款<span class='f12 ml5 mr5'>|</span><a href=''>评价</a>";
 				}else if(record[i].userorderStatus=='03'){
 					status = "已完成";					
-				}else if(record[i].userorderStatus=='08'){
+				}else if(record[i].userorderStatus=='08' || record[i].userorderStatus=='04'){
 					status = "已取消";					
 				}
 				var method = "viewOrder(\""+record[i].userorderCode+"\",\""+record[i].genreId.genreCode+"\");";
