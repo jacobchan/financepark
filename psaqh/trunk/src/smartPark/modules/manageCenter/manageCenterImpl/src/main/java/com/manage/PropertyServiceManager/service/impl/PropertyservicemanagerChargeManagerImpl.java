@@ -198,7 +198,15 @@ public class PropertyservicemanagerChargeManagerImpl extends BaseManagerImpl imp
 			@ServiceParam(name="endTime") String endTime)
    			throws BusException {
     	conditions.add(ConditionUtils.getCondition("userorder.userorderCode", Condition.LIKE, LikeuserorderCode));
-   		conditions.add(ConditionUtils.getCondition("chargeEndate", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+   		if(StringUtils.isNotEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){
+			conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+		}
+		if(StringUtils.isNotEmpty(startTime)&&StringUtils.isEmpty(endTime)){
+			conditions.add(ConditionUtils.getCondition("applyTime", Condition.RIGHT_EQ,startTime));
+		}
+		if(StringUtils.isEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){
+			conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+		}
        	PagerRecords pagerRecords = propertyservicemanagerChargeDao.findByPager(pager, conditions, orders);
    		return pagerRecords;
    	}
@@ -216,7 +224,15 @@ public class PropertyservicemanagerChargeManagerImpl extends BaseManagerImpl imp
 				@ServiceParam(name="endTime") String endTime)  throws BusException{
 	   		List<Record> recordList=new ArrayList<Record>();
 	   		conditions.add(ConditionUtils.getCondition("userorder.userorderCode", Condition.LIKE, LikeuserorderCode));		
-			conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+			if(StringUtils.isNotEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){
+				conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+			}
+			if(StringUtils.isNotEmpty(startTime)&&StringUtils.isEmpty(endTime)){
+				conditions.add(ConditionUtils.getCondition("applyTime", Condition.RIGHT_EQ,startTime));
+			}
+			if(StringUtils.isEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){
+				conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+			}
 	    	List<PropertyservicemanagerCharge> List = this.getPropertyservicemanagerCharges(conditions, null);
 	   		Record record = new Record();
 	   		record.put("totalCount", List.size());
