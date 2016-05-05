@@ -3,6 +3,7 @@
  */
 package com.member.FavoritsManage.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -16,11 +17,10 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-
 import com.gsoft.framework.esb.annotation.*;
-
+import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-
 import com.member.FavoritsManage.entity.FavoritsFavoritActivity;
 import com.member.FavoritsManage.dao.FavoritsFavoritActivityDao;
 import com.member.FavoritsManage.service.FavoritsFavoritActivityManager;
@@ -65,15 +65,18 @@ public class FavoritsFavoritActivityManagerImpl extends BaseManagerImpl implemen
     /**
      * 保存对象
      */
-    @EsbServiceMapping
+    @EsbServiceMapping(pubConditions = { @PubCondition(property = "memberId.memberId", pubProperty = "userId") })
     public FavoritsFavoritActivity saveFavoritsFavoritActivity(FavoritsFavoritActivity o) throws BusException{
-//    	String favoritsFavoritActivityId = o.getFavoritsFavoritActivityId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(favoritsFavoritActivityId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
+    	String favoritsFavoritActivityId = o.getFavoritActivityId();
+    	boolean isUpdate = StringUtils.isNotEmpty(favoritsFavoritActivityId);
+    	if(isUpdate){//修改
+   	
+    	}else{//新增
+    		o.setCreateUser(o.getMemberId().getMemberId());
+    		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		o.setUpdateUser(o.getMemberId().getMemberId());
+    	}
     	return favoritsFavoritActivityDao.save(o);
     }
 
@@ -103,4 +106,22 @@ public class FavoritsFavoritActivityManagerImpl extends BaseManagerImpl implemen
 		return favoritsFavoritActivityDao.exists(propertyName,value);
 	}
 
+    /**
+	 * 当前登录用户是否已收藏
+	 * @param applyId
+	 * @return
+	 * @throws BusException
+	 */
+    @EsbServiceMapping(pubConditions = { @PubCondition(property = "memberId.memberId", pubProperty = "userId") })
+	public FavoritsFavoritActivity exsitFavoritsFavoritActivityforPage(FavoritsFavoritActivity o) throws BusException{
+		List<FavoritsFavoritActivity> faActivitylist = new ArrayList<FavoritsFavoritActivity>();
+		if(StringUtils.isNotEmpty(o.getMemberId().getMemberId())){
+			faActivitylist = favoritsFavoritActivityDao.getList(new String[]{"activityId.applyId","memberId.memberId"},new String[]{o.getActivityId().getApplyId(),o.getMemberId().getMemberId()});
+		}
+		if(faActivitylist.size()>0){
+			return faActivitylist.get(0);
+		}else{
+			return null;
+		}
+	}
 }

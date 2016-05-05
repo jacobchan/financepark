@@ -63,4 +63,11 @@ public interface FavoritsFavoritActivityManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitFavoritsFavoritActivity(String propertyName,Object value) throws BusException;
+	/**
+	 * 当前登录用户是否已收藏
+	 * @param applyId
+	 * @return
+	 * @throws BusException
+	 */
+	public FavoritsFavoritActivity exsitFavoritsFavoritActivityforPage(FavoritsFavoritActivity o) throws BusException;
 }
