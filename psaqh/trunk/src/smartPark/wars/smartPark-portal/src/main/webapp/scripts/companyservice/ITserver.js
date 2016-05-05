@@ -130,6 +130,7 @@ function evaluate(){
 			if(results&&results.records){
 				$("#tp_11").addClass("undis") ;
 				if(results.records.length>0){
+					$("#commcount").html(results.totalCount);
 					pageCount=Math.ceil(results.totalCount/pageSize);
 					 refreshData(1,pageSize);
 						$(".tcdPageCode").createPage({
