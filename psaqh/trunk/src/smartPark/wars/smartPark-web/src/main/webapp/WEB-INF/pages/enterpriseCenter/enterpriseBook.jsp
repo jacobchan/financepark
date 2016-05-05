@@ -9,19 +9,18 @@
 		<script type="text/javascript">
 			var pageSize=4;
 			var pageCount=1;
-			var serviceURL = baseUrl+"/memberInformationManager/getPagerMemberInformations.json";
+			var serviceURL = baseUrl+"/memberInformationManager/getPagerEnterMemberInformations.json";
 			$(document).ready(function() {
-				$.ajax({
+				/* $.ajax({
 					url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
 					success:function(result){
 						if(result&&result.record){
 							$("#companyId").val(result.record.companyId);
 						}
 					}
-				});
+				}); */
 			  	$.ajax({
 					url:serviceURL,
-					data:['companyId='+$("#companyId").val()].join('&'),
 					success:function(result){
 						$("#totalCount").html(result.totalCount);
 						pageCount=Math.ceil(result.totalCount/pageSize);
@@ -41,7 +40,7 @@
 			  	$(".sidebar-menu-mainul > li:eq(1)").addClass("active");
 			});
 			function refreshData(pageIndex,pageSize){
-				var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'companyId='+$("#companyId").val()];
+				var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
 				$.ajax({
 					url:serviceURL,
 					data:params.join('&'),
@@ -57,8 +56,8 @@
 				var html='';
 				for(var i=0;i<record.length;i++){
 					var memberHeadPortrait = "../styles/images/qiye/user-photo.png";
-					if(records[i].memberHeadPortrait!=null && records[i].memberHeadPortrait!=""){
-						memberHeadPortrait = cenUrl+"common/uploadImage.html?repository=/swfupload&path="+records[i].memberHeadPortrait+"&method=show";
+					if(record[i].memberHeadPortrait!=null && record[i].memberHeadPortrait!=""){
+						memberHeadPortrait = cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].memberHeadPortrait+"&method=show";
 					}
 					html+='<li>'+
 							'<table>'+
@@ -83,7 +82,7 @@
 			function searchByName(){
 				$.ajax({
 					url:serviceURL,
-					data:['companyId='+$("#companyId").val(),'memberName='+$("#memberName").val()].join('&'),
+					data:['memberName='+$("#memberName").val()].join('&'),
 					success:function(result){
 						$("#totalCount").html(result.totalCount);
 						pageCount=Math.ceil(result.totalCount/pageSize);
