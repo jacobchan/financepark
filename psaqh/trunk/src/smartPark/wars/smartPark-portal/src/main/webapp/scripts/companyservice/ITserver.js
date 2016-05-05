@@ -129,20 +129,23 @@ function evaluate(){
 		success:function(results){
 			if(results&&results.records){
 				$("#tp_11").addClass("undis") ;
-				pageCount=Math.ceil(results.totalCount/pageSize);
-				 refreshData(1,pageSize);
-				$(".tcdPageCode").createPage({
-					   pageCount:pageCount,
-					   current:1,
-					   backFn:function(p){
-					      this.pageCount=pageCount;
-					      refreshData(p,pageSize);
-					   }
-				});
-					
+				if(results.records.length>0){
+					pageCount=Math.ceil(results.totalCount/pageSize);
+					 refreshData(1,pageSize);
+						$(".tcdPageCode").createPage({
+						    pageCount:pageCount,
+						    current:1,
+						    backFn:function(p){
+						       this.pageCount=pageCount;
+						        refreshData(p,pageSize);
+						    }
+						});
+						$(".tcdPageCode").show();
+				}else{
+					$(".tcdPageCode").hide();
+				}
 			}
 			$("#tp_11").addClass("undis") ;
-			$(".tcdPageCode").hide();
 		}
 	});
 	function refreshData(pageIndex,pageSize){
