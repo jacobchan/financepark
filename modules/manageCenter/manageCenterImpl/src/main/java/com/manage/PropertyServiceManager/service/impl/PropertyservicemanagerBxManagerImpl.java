@@ -357,7 +357,13 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 			@OrderCollection Collection<Order> orders,					
 			@ServiceParam(name="startTime") String startTime,
 			@ServiceParam(name="endTime") String endTime)throws BusException {
-		if(StringUtils.isNotEmpty(startTime)||StringUtils.isNotEmpty(endTime)){
+		if(StringUtils.isNotEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){
+			conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+		}
+		if(StringUtils.isNotEmpty(startTime)&&StringUtils.isEmpty(endTime)){
+			conditions.add(ConditionUtils.getCondition("applyTime", Condition.RIGHT_EQ,startTime));
+		}
+		if(StringUtils.isEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){
 			conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
 		}
 		PagerRecords pagerRecords = propertyservicemanagerBxDao.findByPager(pager, conditions, orders);
@@ -370,7 +376,7 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 	    	}
 	    }
 		return pagerRecords;
-			}
+		}
 	/**
    	 * 获取已完成订单的totalCount    
    	 * @param conditions
@@ -383,9 +389,15 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 			@ServiceParam(name="startTime") String startTime,
 			@ServiceParam(name="endTime") String endTime)  throws BusException{
    		List<Record> recordList=new ArrayList<Record>();
-   		if(StringUtils.isNotEmpty(startTime)||StringUtils.isNotEmpty(endTime)){
-   			conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
-   		}
+   		if(StringUtils.isNotEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){
+			conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+		}
+		if(StringUtils.isNotEmpty(startTime)&&StringUtils.isEmpty(endTime)){
+			conditions.add(ConditionUtils.getCondition("applyTime", Condition.RIGHT_EQ,startTime));
+		}
+		if(StringUtils.isEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){
+			conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+		}
     	List<PropertyservicemanagerBx> List = this.getPropertyservicemanagerBxs(conditions, null);
    		Record record = new Record();
    		record.put("totalCount", List.size());
