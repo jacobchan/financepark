@@ -120,7 +120,7 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		if(mem != null){
 			companyId = mem.getCompanyId();
 		}
-		ConditionUtils.getCondition("companyId", Condition.EQUALS, companyId);
+		conditions.add(ConditionUtils.getCondition("companyId", Condition.EQUALS, companyId));
 		PagerRecords pagerRecords = memberInformationDao.findByPager(pager, conditions, orders);
 		pagerRecords.getTotalCount();
 		// Pager pager1=pagerRecords.getPager();
