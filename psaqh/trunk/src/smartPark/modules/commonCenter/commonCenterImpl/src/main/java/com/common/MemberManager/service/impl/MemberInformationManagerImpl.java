@@ -218,8 +218,6 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 			@ServiceParam(name = "repasswd") String repasswd, @ServiceParam(name = "memberPhoneNumber") String phone,
 			@ServiceParam(name = "captcha") String captcha)
 					throws BusException {
-		TempDemo temp  = mcMsgdatasManager.checkPhoneCode(phone, captcha);
-		// 保存用户同时insert youi_user
 		TempDemo td = this.exsitMobile(phone);
 		if (td.isFlag()) {// 为true表明手机号已经注册
 			throw new BusException("此手机号已经注册了！");
@@ -239,31 +237,22 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		if (!passwd.equals(repasswd)) {
 			throw new BusException("两次密码输入不一致！");
 		}
-
-		MemberInformation memberInformation = new MemberInformation();
-		memberInformation.setMemberName(phone);
-		memberInformation.setMemberPassword(PasswordUtils.md5Password(passwd));
-		memberInformation.setMemberPhoneNumber(phone);
-		MemberInformation member = memberInformationDao.save(memberInformation);
-		// 添加默认角色
-		this.setDefaultRole(member);
-		
-		//构建替换模板参数对应的map
-		Map<String, Object> replaceMap = new HashMap<String, Object>();
-		replaceMap.put("#user", phone);
-		//发送消息,给会员
-		mcMsgdatasManager.smsSend("1012", replaceMap, null, phone);
-//		//构建消息内容数据
-//		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("1012", replaceMap);
-//		//发送消息,给会员
-//		mcMsgdatasManager.sendToUser(msgData, memberInformation.getMemberId());
-		
-		
-//		try {// 发送短信
-//			HttpSenderMsg.sendMsg(memberInformation.getMemberPhoneNumber(), "尊敬的用户，您已经在富春硅谷平台上注册成功了！欢迎使用！");
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		TempDemo temp  = mcMsgdatasManager.checkPhoneCode(phone, captcha);
+		if(temp.isFlag()){
+			MemberInformation memberInformation = new MemberInformation();
+			memberInformation.setMemberName(phone);
+			memberInformation.setMemberPassword(PasswordUtils.md5Password(passwd));
+			memberInformation.setMemberPhoneNumber(phone);
+			MemberInformation member = memberInformationDao.save(memberInformation);
+			// 添加默认角色
+			this.setDefaultRole(member);
+			
+			//构建替换模板参数对应的map
+			Map<String, Object> replaceMap = new HashMap<String, Object>();
+			replaceMap.put("#user", phone);
+			//发送消息,给会员
+			mcMsgdatasManager.smsSend("1012", replaceMap, null, phone);
+		}
 		return temp;
 	}
 
