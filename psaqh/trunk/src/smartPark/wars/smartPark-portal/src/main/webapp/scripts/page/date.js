@@ -1,7 +1,7 @@
 // JavaScript Document
 //Gulf 2016.4.5
 (function(){
-  var date = new Date(),next_opt,month=month =  date.getMonth()+1; 
+  var date = new Date(),next_opt,month = date.getMonth()+1,year = date.getFullYear(); 
   $.fn.dateplug=function(options){
 		var opt = $.extend({},$.fn.dateplug.defaults,options);
         return this.each(function(){
@@ -74,7 +74,7 @@
 			     }
 				 var now = i*7+j+1,now_num = now-first_day,price = !opt.price[now_num-1]?"&nbsp;":("￥"+opt.price[now_num-1]);
 				 if(first_day<now&&now<=days+first_day){
-					if(opt.month>month || opt.month==month && now_num>=day_now){
+					if(opt.year>year||opt.year==year&&opt.month>month || opt.year==year&&opt.month==month && now_num>=day_now){
 						html+='<td><p>'+now_num+'</p><p class="price">'+price+'</p></td>'; 
 					}else{
 					    html+='<td class="ago"><p>'+now_num+'</p><p class="price">'+price+'</p></td>'; 
