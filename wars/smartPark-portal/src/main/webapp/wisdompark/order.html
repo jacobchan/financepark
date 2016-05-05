@@ -16,8 +16,8 @@
     .fc-left h2{font-size: 18px;}
     .fc-toolbar{margin-bottom: 15px;}
     .colorblock{width: 16px;height: 16px;margin-left: 10px;}
-    .order-nav{width:330px;height: 550px;}
-    .order-nav li{border-bottom: 1px #F3F2F2 solid;padding: 20px 10px;position: relative;cursor: pointer;background: #fff;}
+    .order-nav{position: relative;top: 0px;width:330px;height:550px;}
+    .order-nav li{border-bottom: 1px #F3F2F2 solid;padding: 20px 10px;position: relative;cursor: pointer;background:#fff;}
     .order-nav li.active,.order-nav li:hover{background: #f5f6f7;}
     .order-nav .active::before{content: "";display: inline-block;width: 13px;height: 20px; position: absolute;background:url(../styles/images/zhyq/right.png) no-repeat; top: 50%;margin-top: -7px;right: -13px;}
     .btn-change{background:rgba(255,255,255,0.6);width: 50px;height: 30px;text-align: center;color: #fff;cursor: pointer;margin: 0px auto;}
@@ -79,20 +79,12 @@
                             <div class="f16 c3">创智中心4号楼</div>
                             <p class="cc f14">260元/小时</p>
                         </div>
-                    </li>
-                    <li class="clearfix">
-                        <div class="fl"><img src="../styles/images/index/img.jpg" width="118" height="66"></div>
-                        <div class="fl ml10 lh30">
-                            <div class="f16 c3">创智中心1号楼</div>
-                            <p class="cc f14">160元/小时</p>
-                        </div>
                     </li> -->
                 </ul>
             </div>
             <div class="page-circle tc">
             </div>
         </div>
-
         <div class="fl ml30 bgfff p15 w780">
         	<div class="borderm pb10">
             	<span class="cblue fw"></span>
@@ -307,32 +299,6 @@
 <script src='../scripts/page/date_week/fullcalendar.min.js'></script>
 <script src='../scripts/page/date_week/lang-all.js'></script>
 <script type="text/javascript" src="../scripts/page/url.js"></script>
-<script type="text/javascript">
-    $(function(){
-        $(".order-nav li").hide();
-        $(".order-nav li").slice(0,5).show();
-        var l=$(".order-nav li").length;
-        var html="<span></span>";
-        var html1="<span></span>";
-        for (var n=1;n<10;n++){
-            html=html+html1;
-            if(l>5*n){
-                $(".page-circle").empty()
-                $(".page-circle").append(html);
-                $(".page-circle span:first").addClass("current");
-            }
-        }
-
-        $(document).on("mouseover",".page-circle span",function(){
-            $(this).addClass("current").siblings().removeClass("current");
-            var m=$(this).index();
-            $(".order-nav li").hide();
-            $(".order-nav li").slice(5*m,5*(m+1)).show();
-
-        })
-
-    })
-</script>
 <script>
 
     $(document).ready(function() {
@@ -364,7 +330,7 @@
             var dates=$(".fc-day-header").eq(active).attr("data-date");
         });
         $(".fc-next-button").on("click",this,function(){
-            var commodityId= $("#commodityId").val();
+        	var commodityId= $("#commodityId").val();
             cursor++;
             var flag=judgment();
             console.log(cursor);
@@ -377,7 +343,7 @@
             }
         });
         $(".fc-prev-button").on("click",this,function(){
-            var commodityId= $("#commodityId").val();
+        	var commodityId= $("#commodityId").val();
             cursor--;
             var flag=judgment();
             console.log(cursor);
