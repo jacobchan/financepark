@@ -14,3 +14,17 @@
 	   .kalendar-table tbody td.ago{background: #CCC;}
 	   .pull-left{float: left}
 	   .pull-right{float: right}
+	   .sc-price-date{width: 720px;float:left;}
+	   
+	   .sc-calendar{position: relative;overflow: hidden;}
+	   .sc-calendar .preview{width: 39px;height: 100%; z-index: 9999; position: absolute; left:0; top:0;float:left;text-align: center;background: #f7f0e6;border-right: 1px solid #ecebeb;transition: all .4s linear;-moz-transition: width  all .4s;-webkit-transition:  all .4s;-o-transition: all .4s linear;}
+	   .sc-calendar .preview:hover{background: #fff;}
+	   .sc-calendar .disabled:hover{background: #f7f0e6;}
+	   .sc-calendar .preview .p-fl{background: #f7f0e6 url(../images/cal.png) no-repeat 0px -64px;width: 18px;height: 30px;display: block;margin:0px auto;margin-top: 13px;}
+       .sc-calendar .preview .p-fr{background: #f7f0e6 url(../images/cal.png) no-repeat -23px -105px;}
+       .sc-calendar .preview:hover .p-fl{background: #fff url(../images/cal.png) no-repeat -21px -64px;}
+       .sc-calendar .preview:hover .p-fr{background: #fff url(../images/cal.png) no-repeat 0px -105px;;}
+       .sc-calendar .disabled:hover .p-fl{background: #f7f0e6 url(../images/cal.png) no-repeat 0px -64px;}
+       .sc-calendar .disabled:hover .p-fr{background: #f7f0e6 url(../images/cal.png) no-repeat -23px -105px;}
+	   #date_icon{float: right; left: 759px;}
+	   .week-list{position: absolute; left: 39px;top: 0;width: 720px;float:left; overflow: hidden; text-align: center;}
