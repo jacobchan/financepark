@@ -3,8 +3,8 @@
  */
 package com.manage.PropertyServiceManager.service;
 
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
 import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Record;
@@ -14,9 +14,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.ConditionCollection;
-import com.gsoft.framework.esb.annotation.EsbServiceMapping;
-import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode;
 
 public interface PropertyservicemanagerFkcodeManager extends BaseManager{
@@ -102,23 +99,14 @@ public interface PropertyservicemanagerFkcodeManager extends BaseManager{
 	 * @throws BusException
 	 */
     public List<PropertyservicemanagerFkcode> getFkcodelistLikeFkcodeCode(String userId,String fkCode,String startTime,String endTime) throws BusException;
-    
-    
-    /**
-	 * 根据当前用户分页查询
-	 * @return 分页对象
-	 */
-	public PagerRecords getPagerFkcodes(Pager pager,//分页条件
-			Collection<Condition> conditions,//查询条件
-			Collection<Order> orders) throws BusException;
 	/**
 	 * 根据当前用户分页查询 
 	 * 模糊查询
 	 * @return 分页对象
 	 */
-	public PagerRecords getPagerLikeFk(Pager pager,//分页条件
+	public PagerRecords getPagerFk(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
-			Collection<Order> orders,String fkLikeCode,String startTime,String endTime) throws BusException;
+			Collection<Order> orders,String startTime,String endTime) throws BusException;
 	/**
 	 * 获取已完成订单的totalCount    陈烨
 	 * @param conditions
