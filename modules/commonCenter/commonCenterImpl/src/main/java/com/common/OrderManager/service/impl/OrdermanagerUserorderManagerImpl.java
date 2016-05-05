@@ -743,33 +743,32 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
   	 * @param userorderProjecta
   	 * @return
   	 * @throws BusException
-  	 */   
-    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
-    public PagerRecords getPagerHospital_query(Pager pager,//分页条件
-    		@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
-			@OrderCollection Collection<Order> orders,
-			@ServiceParam(name="genId") String genId)
-			throws BusException {
-	
-     String[] buff = new String[]{"01","02"};
-     conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.NOT_IN, buff));
-     //IT服务（ff80808153f4a86a0153f4b06a65000d）有四个子类别
-	 String[] buff2 = new String[]{"ff80808153f4a86a0153f4b0a31f000e",	//预约单次    商品类别id
-			                       "ff80808153f4a86a0153f4b0be62000f",	//套餐一
-			                       "ff80808153f4a86a0153f4b0d0b90010",	//套餐二
-			                       "ff80808153f4a86a0153f4b0e4210011"};	//套餐三
-     conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.IN, buff));
-     if(StringUtils.isNotEmpty(genId)){
-    	 if("ff80808153f4a86a0153f4b06a65000d".equals(genId)){
-    		 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.IN, buff2)); 
-    	 }else{
-    		 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
-    	 }
-     }
+  	 */
+     @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+	public PagerRecords getPagerHospital_query(Pager pager,//分页条件
+      			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
+      			@OrderCollection Collection<Order> orders,
+      			@ServiceParam(name="genId") String genId)
+      			throws BusException {
+    	String[] buff = new String[]{"01",   //01为待付款
+      			 						"02"};  //02为待评价
+      	//IT服务（ff80808153f4a86a0153f4b06a65000d）有四个子类别
+      	String[] buff2 = new String[]{"ff80808153f4a86a0153f4b0a31f000e",	//预约单次    商品类别id
+      			                       "ff80808153f4a86a0153f4b0be62000f",	//套餐一
+      			                       "ff80808153f4a86a0153f4b0d0b90010",	//套餐二
+      			                       "ff80808153f4a86a0153f4b0e4210011"};	//套餐三
+        conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.NOT_IN, buff));
+        if(StringUtils.isNotEmpty(genId)){
+        	if("ff80808153f4a86a0153f4b06a65000d".equals(genId)){
+          		conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.IN, buff2)); 
+          	}else{
+          	 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
+          	}
+        }
+      	PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
+      	return pagerRecords;
+      }
 
-	 PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
-	 return pagerRecords;
-	}
    
     /**
 	 *前台 根据当前用户分页查询全部订单           陈烨
@@ -852,26 +851,16 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    	 * @return
    	 * @throws BusException
    	 */
-       @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
-   	public List<Record> getTotalCountHospital(
+    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
+    public List<Record> getTotalCountHospital(
    			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,
 			@ServiceParam(name="genId") String genId)  throws BusException{
    		List<Record> recordList=new ArrayList<Record>();
    		String[] buff = new String[]{"01","02"};
         conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.NOT_IN, buff));
-        //IT服务（ff80808153f4a86a0153f4b06a65000d）有四个子类别
-   	 	String[] buff2 = new String[]{"ff80808153f4a86a0153f4b0a31f000e",	//预约单次    商品类别id
-   			                       "ff80808153f4a86a0153f4b0be62000f",	//套餐一
-   			                       "ff80808153f4a86a0153f4b0d0b90010",	//套餐二
-   			                       "ff80808153f4a86a0153f4b0e4210011"};	//套餐三
-        conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.IN, buff));
         if(StringUtils.isNotEmpty(genId)){
-        	if("ff80808153f4a86a0153f4b06a65000d".equals(genId)){
-        		conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.IN, buff2)); 
-       	 	}else{
-       	 		conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
-       	 	}
-        }	
+    	  conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
+        }
    		List<OrdermanagerUserorder> List = this.getOrdermanagerUserorders(conditions, null);
    		Record record = new Record();
    		record.put("totalCount", List.size());
