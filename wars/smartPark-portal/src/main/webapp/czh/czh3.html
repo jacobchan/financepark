@@ -10,9 +10,9 @@
 	<script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
-	<script type="text/javascript" src="../scripts/page/right.js"></script>
 	<script type="text/javascript" src="../scripts/page/url.js"></script>	
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=0jBm0QtZ3t8BGclw0ujY0kFe"></script>
+	<script type="text/javascript" src="../scripts/page/right.js"></script>
 	
 	<style type="text/css">
 		.anchorBL{
@@ -51,7 +51,7 @@
 					</div>
 					<div class="clearfix pt20">
 						<a href="javascript:;" class="a-c a-c-o">我要报名</a>
-						<a href="javascript:;" class="a-c a-c-p"><img alt="收藏" src="../styles/images/czh/sc.png" border="0" class="mr5">收藏：183人</a>
+						<a href="javascript:;" class="a-c a-c-p"><img alt="收藏" src="../styles/images/czh/sc.png" border="0" class="mr5"></a>
 						<!-- JiaThis Button BEGIN -->
 							<style type="text/css">
 								.jiathis_style>div{box-sizing: content-box !important;}
@@ -150,13 +150,175 @@
 	<script type="text/javascript" src="../scripts/page/banner.js"></script>
 	<script type="text/javascript">
 		$(function(){
+			var url=location.href; 
+			var tmp1=url.split("?")[1];  
+			var tmp2=tmp1.split("=")[1]; 
+			var applyId=tmp2;
+			var serviceURL = baseUrl+"activityApplyManager/getActivityApply.json";
+			var params = ['applyId='+applyId];
+			
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(results){
+					if(results&&results.record){
+					_parseRecords(results.record);
+				
+					}
+				}
+			});	
+			//获取文档列表
+			getdocument(applyId);
+			//获取是否收藏
+			 if(!isLogin){
+				getfavoritActivity(applyId);
+			 }else{
+				getboolfavorit(applyId);
+			 }
+		});
+		//活动详情赋值
+		function _parseRecords(record){
+
+			$(".activityImage").attr("src",cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record.activityImage+"&method=show");
+			$(".h-bg").html(record.applyTitle);
+			$(".time").html(record.startTime);
+			//$(".address").html();
+			$(".name").html("发布人："+record.memberId.memberName);
+			$(".phoneNumber").html(record.memberId.memberPhoneNumber);
+			$(".bd-box").html(record.commentContent);
+			$("#activityAdr").html(record.activityAdr);
+			var map = new BMap.Map("map");//创建Map实例
+			map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+			local = new BMap.LocalSearch(map, {
+				renderOptions: {map: map}
+			});
+			//, panel: "r-result"
+			local.search($("#activityAdr").html().substring(3,$("#activityAdr").html().length));
+			$('#map div.anchorBL').hide();
+		}
+		
+		//加载文档
+		function getdocument(id){
+			var applyId = id;
+			var serviceURL = baseUrl+"activityDocumentManager/getPagerActivityDocuments.json";
+			var params = ['activityId.applyId='+applyId];
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(results){
+					if(results&&results.records){
+						if(results.records.length>0){
+							documents(results.records);
+						}else{
+							$(".article-tab").empty();
+							$(".article-tab").append("<tr><td align='center'><h3>暂无活动文档</h3></td></tr>");
+						}
+					}
+				}
+			});	
+		}
+		//拼接侧边栏
+		function documents(record){
+			$(".article-tab").empty();
+			var html ="";
+			html+="<colgroup><col width='42'></col><col width='230'></col></colgroup>";
+			for(var i=0;i<record.length;i++){
+				html+=
+					"<tr id="+record[i].documentId+" onclick='openPage(this)' style='cursor:pointer;'><td><em>P</em></td>"+
+					"<td><p>"+record[i].documentName.split('.')[0]+"</p>"+
+					"<span>"+record[i].createTime+"</span>"+
+					"</td></tr>";
+			}
+			$(".article-tab").append(html);
+		}
+		
+		//文档跳转页面
+		function openPage(obj){
+			var url=location.href; 
+			var tmp1=url.split("?")[1];  
+			var tmp2=tmp1.split("=")[1]; 
+			var applyId=tmp2;
+			var documentId=obj.id;
+			var url="../czh/czh7.html"+"?"+"applyId="+applyId+"&documendid="+documentId; 
+			window.location.assign(url); 
+		}
+		//获取是否收藏
+		function getboolfavorit(id){
+			var applyId = id;
+			var serviceURL = baseUrl+"favoritsFavoritActivityManager/exsitFavoritsFavoritActivityforPage.json";
+			var params = ['activityId.applyId='+applyId];
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(results){
+					if(results&&results.record){
+							$("a.a-c-p").attr("id",results.record.favoritActivityId);
+							$("a.a-c-p").css("background-color","#ecebeb");
+							$("a.a-c-p").attr("value","0");
+							$("a.a-c-p").html('<img alt="收藏" src="../styles/images/czh/sc-o.png" border="0" class="mr10">已收藏');
+					}else{
+						getfavoritActivity(applyId);
+					}
+				}
+			});	
+		}
+		//加载收藏数
+		function getfavoritActivity(id){
+			var applyId = id;
+			$("a.a-c-p").attr("id",applyId);
+			var serviceURL = baseUrl+"favoritsFavoritActivityManager/getPagerFavoritsFavoritActivitys.json";
+			var params = ['activityId.applyId='+applyId];
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(results){
+					if(results&&results.records){
+						if(results.records.length>0){
+							$("a.a-c-p").empty();
+							$("a.a-c-p").attr("value","1");
+							$("a.a-c-p").removeAttr("style");
+							$("a.a-c-p").append('<img alt="收藏" src="../styles/images/czh/sc.png" border="0" class="mr5">收藏：'+results.totalCount+'人');
+						}else{
+							$("a.a-c-p").empty();
+							$("a.a-c-p").attr("value","1");
+							$("a.a-c-p").removeAttr("style");
+							$("a.a-c-p").append('<img alt="收藏" src="../styles/images/czh/sc.png" border="0" class="mr5">收藏：0人');
+						}
+					}
+				}
+			});	
+		}
+	</script>
+	<script type="text/javascript">
+		$(function(){
 			$(".slideBox").hover(function(){
 	      		clearInterval(timer);
 			},function(){ timer = setInterval(run,3000)});
 
 			$("a.a-c-p").click(function(){
-				$(this).css("background-color","#ecebeb");
-				$(this).html('<img alt="收藏" src="../styles/images/czh/sc-o.png" border="0" class="mr10">已收藏');
+				 if(!isLogin){
+					 clearInterval(timer);
+				     $(".toast").show();
+				     $(".tc.mt25.f18").text("请登录!");
+				     pltime=1;
+				     timer=setInterval("closeTanc()",1000);
+				     return false;
+				 }
+				 var val = $("a.a-c-p").attr("value");
+				 if(val=='0'){//取消收藏
+					 dealfavorits();
+				 }else{//添加收藏
+					 savefavorits();
+				 }
+				 
 			});
 			$("a.a-c-o").click(function(){
 				$("#applyMember").val('');
@@ -167,6 +329,59 @@
 				$(".bg-tanc").show();	
 			});
 		});
+		
+		//添加收藏
+		function savefavorits(){
+			var applyId = $("a.a-c-p").attr("id");
+			var serviceURL = baseUrl+"favoritsFavoritActivityManager/saveFavoritsFavoritActivity.json";
+			var params = ['activityId.applyId='+applyId];
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(results){
+					if(results&&results.record){
+							 clearInterval(timer);
+						     $(".toast").show();
+						     $(".tc.mt25.f18").text("收藏成功!");
+						     pltime=1;
+						     timer=setInterval("closeTanc()",1000);
+						    $("a.a-c-p").attr("id",results.record.favoritActivityId),
+						    $("a.a-c-p").attr("value","0");
+							$("a.a-c-p").css("background-color","#ecebeb");
+							$("a.a-c-p").html('<img alt="收藏" src="../styles/images/czh/sc-o.png" border="0" class="mr10">已收藏');
+						}
+					}
+			});
+		}
+		//取消收藏
+		function dealfavorits(){
+				var url=location.href; 
+				var tmp1=url.split("?")[1];  
+				var tmp2=tmp1.split("=")[1]; 
+				var applyId=tmp2;
+				var favoritActivityId = $("a.a-c-p").attr("id");
+			 	var serviceURL = baseUrl+"favoritsFavoritActivityManager/removeFavoritsFavoritActivity.json";
+				var params = ['favoritActivityId='+favoritActivityId];
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					data:params.join('&'),
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(results){
+				
+								 clearInterval(timer);
+							     $(".toast").show();
+							     $(".tc.mt25.f18").text("取消收藏成功!");
+							     pltime=1;
+							     timer=setInterval("closeTanc()",1000);
+							     getfavoritActivity(applyId);
+						}
+				});
+		}
+		
+		
 		//获取验证码
 		function getCaptcha(){
 			var url=location.href; 
@@ -266,101 +481,6 @@
 	 		setTimeout(function(){$(".error-toast").animate({top:"-40px",opacity:"0"})},2000);
 	     };
 	</script>
-	<script type="text/javascript">
-		$(function(){
-			var url=location.href; 
-			var tmp1=url.split("?")[1];  
-			var tmp2=tmp1.split("=")[1]; 
-			var applyId=tmp2;
-			var serviceURL = baseUrl+"activityApplyManager/getActivityApply.json";
-			var params = ['applyId='+applyId];
-			
-			$.youi.ajaxUtils.ajax({
-				url:serviceURL,
-				data:params.join('&'),
-				jsonp:'data:jsonp',
-				dataType:'jsonp',
-				success:function(results){
-					if(results&&results.record){
-					_parseRecords(results.record);
-				
-					}
-				}
-			});	
-			//获取文档列表
-			getdocument(applyId);
-		});
-		//活动详情赋值
-		function _parseRecords(record){
-
-			$(".activityImage").attr("src",cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record.activityImage+"&method=show");
-			$(".h-bg").html(record.applyTitle);
-			$(".time").html(record.startTime);
-			//$(".address").html();
-			$(".name").html("发布人："+record.memberId.memberName);
-			$(".phoneNumber").html(record.memberId.memberPhoneNumber);
-			$(".bd-box").html(record.commentContent);
-			$("#activityAdr").html(record.activityAdr);
-			var map = new BMap.Map("map");//创建Map实例
-			map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
-			local = new BMap.LocalSearch(map, {
-				renderOptions: {map: map}
-			});
-			//, panel: "r-result"
-			local.search($("#activityAdr").html().substring(3,$("#activityAdr").html().length));
-			$('#map div.anchorBL').hide();
-		}
-		
-		//加载文档
-		function getdocument(id){
-			var applyId = id;
-			var serviceURL = baseUrl+"activityDocumentManager/getPagerActivityDocuments.json";
-			var params = ['activityApply.applyId='+applyId];
-			$.youi.ajaxUtils.ajax({
-				url:serviceURL,
-				data:params.join('&'),
-				jsonp:'data:jsonp',
-				dataType:'jsonp',
-				success:function(results){
-					if(results&&results.records){
-						if(results.records.length>0){
-							documents(results.records);
-						}else{
-							$(".article-tab").empty();
-							$(".article-tab").append("<tr><td align='center'><h3>暂无活动文档</h3></td></tr>");
-						}
-					}
-				}
-			});	
-		}
-		
-		//拼接侧边栏
-		function documents(record){
-			$(".article-tab").empty();
-			var html ="";
-			html+="<colgroup><col width='42'></col><col width='230'></col></colgroup>";
-			for(var i=0;i<record.length;i++){
-				html+=
-					"<tr id="+record[i].documentId+" onclick='openPage(this)' style='cursor:pointer;'><td><em>P</em></td>"+
-					"<td><p>"+record[i].documentName.split('.')[0]+"</p>"+
-					"<span>"+record[i].createTime+"</span>"+
-					"</td></tr>";
-			}
-			$(".article-tab").append(html);
-		}
-		
-		//文档跳转页面
-		function openPage(obj){
-			var url=location.href; 
-			var tmp1=url.split("?")[1];  
-			var tmp2=tmp1.split("=")[1]; 
-			var applyId=tmp2;
-			var documentId=obj.id;
-			var url="../czh/czh7.html"+"?"+"applyId="+applyId+"&documendid="+documentId; 
-			window.location.assign(url); 
-		}
-	</script>
-	
 	<script type="text/javascript">
 		//toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
 		 var pltime,timer;
