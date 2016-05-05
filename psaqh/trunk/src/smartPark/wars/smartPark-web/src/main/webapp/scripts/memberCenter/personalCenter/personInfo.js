@@ -135,8 +135,7 @@
 				}
 			});
 		});	
-	</script>
-		<script type="text/javascript">
+	
 		var uploader = new plupload.Uploader(
 				{
 					runtimes : 'html5,flash,silverlight',//设置运行环境，会按设置的顺序，可以选择的值有html5,gears,flash,silverlight,browserplus,html
@@ -194,8 +193,7 @@
 				preloader.load(file.getSource());
 			}
 		}
-		</script>
-		<script type="text/javascript">
+		
 		$(function () {
 			$("a.c-o").on("click",function(){
 				$(this).parent("p").hide().siblings("p").show();
@@ -349,8 +347,7 @@
 					}
 				});
 			});	
-		</script>
-			<script type="text/javascript">
+		
 			var uploader = new plupload.Uploader(
 					{
 						runtimes : 'html5,flash,silverlight',//设置运行环境，会按设置的顺序，可以选择的值有html5,gears,flash,silverlight,browserplus,html
@@ -408,8 +405,7 @@
 					preloader.load(file.getSource());
 				}
 			}
-			</script>
-			<script type="text/javascript">
+			
 			$(function () {
 				$("a.c-o").on("click",function(){
 					$(this).parent("p").hide().siblings("p").show();
