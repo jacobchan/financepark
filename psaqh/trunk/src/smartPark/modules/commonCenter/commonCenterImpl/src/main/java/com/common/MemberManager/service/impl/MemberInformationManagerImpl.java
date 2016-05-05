@@ -17,8 +17,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.entity.MemberInformation;
@@ -164,12 +162,12 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	
 	//APP端重新设置密码
 	@Override
-	@RequestMapping
+	@EsbServiceMapping
 	public MemberInformation findPwdReset(
 			@ServiceParam(name = "phone") String phone,
 			@ServiceParam(name = "passwd") String passwd,
 			@ServiceParam(name = "repasswd") String repasswd,
-			@ServiceParam(name = "phoneCode") String phoneCode) {
+			@ServiceParam(name = "phoneCode") String phoneCode) throws BusException{
 
 		if(com.gsoft.framework.util.StringUtils.isEmpty(passwd)){
 			throw new BusException("密码不能为空！");
