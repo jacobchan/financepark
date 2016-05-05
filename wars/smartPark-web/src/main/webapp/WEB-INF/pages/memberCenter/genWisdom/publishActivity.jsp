@@ -87,8 +87,14 @@
 			url:baseUrl+'activityApplyManager/getPublishActivityList.json',
 			success:function(result){
 				if(result&&result.records){
-					_parseRecords(result.records);
-					openApplyList(result.records[0].applyId);
+					if(result.records.length>0){
+						_parseRecords(result.records);
+						openApplyList(result.records[0].applyId);
+					}else{
+						$(".clearfix.mt40").empty();
+						var html ="<p class='tcv tc pt30'><img src='"+proUrl+"styles/images/none4.png'/></p>";
+						$(".clearfix.mt40").append(html);
+					}
 				}
 			}
 		});
