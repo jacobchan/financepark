@@ -118,6 +118,8 @@ function star(ele){
 //评论列表展示
 function evaluate(){
 	$("#tp_11").removeClass("undis") ;
+	var pageSize=3;
+	var pageCount=1;	
 	var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/getPagerPurGenreEvaluatesByCode.json";
 	$.youi.ajaxUtils.ajax({
 		url:serviceURL,
@@ -127,23 +129,53 @@ function evaluate(){
 		success:function(results){
 			if(results&&results.records){
 				$("#tp_11").addClass("undis") ;
-				var htmls = [];
-				for(var i=0;i<results.records.length;i++){
-					var imsrc = "";
-					if(results.records[i].memberInformation.memberHeadPortrait!=null&&results.records[i].memberInformation.memberHeadPortrait!=''){
-						imsrc=""+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+results.records[i].memberInformation.memberHeadPortrait+"&method=show width='72' height='83'";
-					}else{
-						imsrc="../styles/images/company/user.png";
-					}
-					htmls.push('<li><div class="fl"><img src='+imsrc+'/><span class="record_info ml20 c3 lh24">'+
-					'<div>'+results.records[i].memberInformation.memberName+'<i class="chuang"></i></div><p>'+results.records[i].content
-					+'<span>('+results.records[i].createTime+')</span></p></span></div></li>');
-				}
-				$('.record_ul').html(htmls.join(''));
+				pageCount=Math.ceil(results.totalCount/pageSize);
+				 refreshData(1,pageSize);
+				$(".tcdPageCode").createPage({
+					   pageCount:pageCount,
+					   current:1,
+					   backFn:function(p){
+					      this.pageCount=pageCount;
+					      refreshData(p,pageSize);
+					   }
+				});
+					
 			}
 			$("#tp_11").addClass("undis") ;
+			$(".tcdPageCode").hide();
 		}
 	});
+	function refreshData(pageIndex,pageSize){
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'genreCode=0508'];
+		$.youi.ajaxUtils.ajax({
+			url:serviceURL,
+			jsonp:'data:jsonp',
+			data:params.join('&'),
+			dataType:'jsonp',
+			success:function(results){
+				if(results&&results.records){
+					if(results.records.length>0){
+						commRecords(results.records);
+					}
+				}
+			}
+		});
+	}
+}
+function commRecords(records){
+	var htmls = [];
+	for(var i=0;i<records.length;i++){
+		var imsrc = "";
+		if(records[i].memberInformation.memberHeadPortrait!=null&&records[i].memberInformation.memberHeadPortrait!=''){
+			imsrc=""+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+records[i].memberInformation.memberHeadPortrait+"&method=show width='72' height='83'";
+		}else{
+			imsrc="../styles/images/company/user.png";
+		}
+		htmls.push('<li><div class="fl"><img src='+imsrc+'/><span class="record_info ml20 c3 lh24">'+
+		'<div>'+records[i].memberInformation.memberName+'<i class="chuang"></i></div><p>'+records[i].content
+		+'<span>('+records[i].createTime+')</span></p></span></div></li>');
+	}
+	$('.record_ul').html(htmls.join(''));
 }
 $(function(){
 	//关闭toast
