@@ -419,3 +419,7 @@ $(document).ready(function() {
 $("body").bind("click", function(){
     $(".dialog-con").hide();
 });
+$(".dialog-con").click(function(e){
+	e.stopPropagation();
+	$(this).show();
+})
