@@ -265,9 +265,15 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 			@ServiceParam(name="startTime") String startTime,
 			@ServiceParam(name="endTime") String endTime)
 			throws BusException {
-	    if(StringUtils.isNotEmpty(startTime)||StringUtils.isNotEmpty(endTime)){
-	    	conditions.add(ConditionUtils.getCondition("ocDate", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));	    	
-	   	}
+		if(StringUtils.isNotEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){
+			conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+		}
+		if(StringUtils.isNotEmpty(startTime)&&StringUtils.isEmpty(endTime)){
+			conditions.add(ConditionUtils.getCondition("applyTime", Condition.RIGHT_EQ,startTime));
+		}
+		if(StringUtils.isEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){
+			conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+		}
 	    PagerRecords pagerRecords = propertyservicemanagerOcDao.findByPager(pager, conditions, orders);
 	   	List<PropertyservicemanagerOc> list = pagerRecords.getRecords();
 	   	for(PropertyservicemanagerOc oc : list){
@@ -292,8 +298,14 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 				@ServiceParam(name="startTime") String startTime,
 				@ServiceParam(name="endTime") String endTime)  throws BusException{
 	 	List<Record> recordList=new ArrayList<Record>();
-		if(StringUtils.isNotEmpty(startTime)||StringUtils.isNotEmpty(endTime)){
-	   		conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+	 	if(StringUtils.isNotEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){
+			conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
+		}
+		if(StringUtils.isNotEmpty(startTime)&&StringUtils.isEmpty(endTime)){
+			conditions.add(ConditionUtils.getCondition("applyTime", Condition.RIGHT_EQ,startTime));
+		}
+		if(StringUtils.isEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){
+			conditions.add(ConditionUtils.getCondition("applyTime", Condition.BETWEEN, startTime+Condition.BETWEEN_SPLIT+endTime));
 		}
 		List<PropertyservicemanagerOc> List = this.getPropertyservicemanagerOcs(conditions, null);
 	   	Record record = new Record();
