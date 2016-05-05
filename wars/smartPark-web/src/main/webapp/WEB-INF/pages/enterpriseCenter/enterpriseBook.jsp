@@ -24,13 +24,13 @@
 					success:function(result){
 						$("#totalCount").html(result.totalCount);
 						pageCount=Math.ceil(result.totalCount/pageSize);
-						refreshData(1,pageSize);
+						refreshData(1,pageSize,null);
 						$(".tcdPageCode").createPage({
 							pageCount:pageCount,
 							current:1,
 							backFn:function(p){
 							   	this.pageCount=pageCount;
-							    refreshData(p,pageSize);
+							    refreshData(p,pageSize,null);
 							}
 						});
 					}
@@ -39,8 +39,14 @@
 			  	/* $("#moreul").slideUp("slow"); */
 			  	$(".sidebar-menu-mainul > li:eq(1)").addClass("active");
 			});
-			function refreshData(pageIndex,pageSize){
-				var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+			function refreshData(pageIndex,pageSize,memberName){
+				var params = [];
+				if(memberName == null){
+					params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+				}else{
+					params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'memberName='+memberName];
+				}
+				
 				$.ajax({
 					url:serviceURL,
 					data:params.join('&'),
@@ -80,19 +86,45 @@
 				$('#bookDiv').append(html);
 			}
 			function searchByName(){
+				var memberName = $("#memberName").val();
+				if(memberName == ""){
+					memberName = null;
+				}
+				var params = [];
+				if(memberName != null){
+					params = ['memberName='+memberName];
+				}
 				$.ajax({
 					url:serviceURL,
-					data:['memberName='+$("#memberName").val()].join('&'),
+					data:params.join('&'),
 					success:function(result){
 						$("#totalCount").html(result.totalCount);
 						pageCount=Math.ceil(result.totalCount/pageSize);
-						refreshData(1,pageSize);
+						refreshData(1,pageSize,memberName);
 						$(".tcdPageCode").createPage({
 							pageCount:pageCount,
 							current:1,
 							backFn:function(p){
 							   	this.pageCount=pageCount;
-							    refreshData(p,pageSize);
+							    refreshData(p,pageSize,memberName);
+							}
+						});
+					}
+				});
+			}
+			function searchAll(){
+				$.ajax({
+					url:serviceURL,
+					success:function(result){
+						$("#totalCount").html(result.totalCount);
+						pageCount=Math.ceil(result.totalCount/pageSize);
+						refreshData(1,pageSize,null);
+						$(".tcdPageCode").createPage({
+							pageCount:pageCount,
+							current:1,
+							backFn:function(p){
+							   	this.pageCount=pageCount;
+							    refreshData(p,pageSize,null);
 							}
 						});
 					}
@@ -114,7 +146,7 @@
 		            	<div class="total_p color_orange">通讯录共有&nbsp;<span id="totalCount"></span>&nbsp;人</div>
 		                <div class="search_name"><input id="memberName" name="memberName" type="text" placeholder="姓名搜索"></div>
 		                <div class="search_ipt"><a href="javascript:searchByName();">搜索</a></div>
-		                <div class="show_all"><a href="javascript:void(0);">显示全部</a></div>
+		                <div class="show_all"><a href="javascript:searchAll();">显示全部</a></div>
 		                <div class="upload_out"><a href="javascript:void(0);">导出到Excel</a></div>
 		            </div>
 		            <div class="phone_no">
