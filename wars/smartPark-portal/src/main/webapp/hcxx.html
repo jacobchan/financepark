@@ -131,76 +131,16 @@
 		    			<div class="cal-icon"></div>
 		    			<p class="lh22">特价日历</p> 
 		    		</a>
-			    	<div class="sc-calendar">
-			    		<table>
-			    			<tbody>
-			    				<tr> 
-			    					<td class="preview">
-			    						<a href="javascript:;" target="_self" class="p-fl"></a>
-			    					</td>
-			    					<!-- <td class="sc-price-date">
-		    							<div class="sc-price-date-inner">
-		    								<table><tbody>
-		    									<tr>
-		    										<td>
-		    											<a href="javascript:;" class="outer lowest" target="_top">
-		    												<span class="c-o f14">¥650</span>
-		    												<p class="c-333 f12">03-07 周一</p>
-		    												<s></s>
-		    											</a>
-		    										</td>
-		    										<td>
-		    											<a href="" class="outer " target="_top">
-		    												<span class="c-o f14">¥820</span>
-		    												<p class="c-333 f12">03-08 周二</p>
-		    											</a>
-		    										</td>
-		    										<td class="active">
-		    											<div></div>
-		    											<a href="" class="outer lowest" target="_top">
-		    												<span class="c-o f14">¥650</span>
-		    												<p class="c-333 f12">03-09 周三</p>
-		    												<s></s>
-		    											</a>
-		    										</td>
-		    										<td>
-		    											<div class="current"><div>
-		    												<a href="" class="outer lowest">
-		    													<span class="c-o f14">¥650</span>
-		    													<p class="c-333 f12">03-10 周四</p>
-		    													<s></s>
-		    												</a>
-		    											</div>
-		    										</div>
-		    									</td>
-		    									<td>
-		    										<a href="" class="outer " target="_top">
-		    											<span class="c-o f14">¥673</span>
-		    											<p class="c-333 f12">03-11 周五</p>
-		    										</a>
-		    									</td>
-		    									<td>
-		    										<a href="" class="outer " target="_top">
-		    											<span class="c-o f14">¥659</span>
-		    											<p class="c-333 f12">03-12 周六</p>
-		    										</a>
-		    									</td>
-		    									<td>
-		    										<a href="?tripType=0&amp;depCity=BJS&amp;arrCity=CAN&amp;depDate=2016-03-13&amp;searchBy=1277" class="outer " target="_top">
-		    											<span class="c-o f14">¥673</span>
-		    											<p class="c-333 f12">03-13 周日</p>
-		    										</a>
-		    									</td>
-		    								</tr>
-		    								</tbody></table>
-			    						</div>
-				    				</td> -->
-				    				<td class="preview" id="date_icon">
-			    						<a href="javascript:;" target="_self" class="p-fl p-fr"></a>
-			    					</td>
-			    				</tr>
-			    			</tbody>
-			    		</table>
+			    	<div class="sc-calendar" id="sc-calendar">
+			    		<div class="preview">
+			    			<a href="javascript:;" target="_self" class="p-fl"></a>
+			    		</div>
+			    		<div class="week-list" id="week-list">
+			    		
+			    		</div>			
+				    	<div class="preview" id="date_icon">
+			    			<a href="javascript:;" target="_self" class="p-fl p-fr"></a>
+			    		</div>
 			    	</div>
 			    </div>
 			    <div class="kalendar-detail clearfix" id="kalendar-detail">
@@ -503,6 +443,12 @@
 						$("#kalendar-detail").dateplug({
 							price: price
 						});
+						var tmpTime = DateAdd( "d ",30,new Date()).Format("yyyy-MM-dd");
+						if(compareDate(tmpTime,gotodate)){
+							parseLowestPrice(lowest_price_date,lowest_price,gotodate);
+						}else{
+							overDate();
+						}
 					}else{
 						console.error("机票最低价获取有误！");
 					}
@@ -514,8 +460,8 @@
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++     判断所选日期是否超过当前日期外加30天的范围，若超过，重新获取一次最低价接口，填充日期+最低价的tag条                                                                                +++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-			var tmpTime = DateAdd( "d ",30,new Date()).Format("yyyy-MM-dd");
-			if(compareDate(tmpTime,gotodate)){
+			
+    		function overDate(){
 				params = ['startDate='+gotodate,'deptCode='+fromCode,'arrCode='+gotoCode];
 				serviceURL = baseUrl+"TicketServiceManager/getDailyLowestPrice.json";
 				$.youi.ajaxUtils.ajax({
@@ -542,9 +488,8 @@
 						console.error("机票最低价信息获取有误！");
 					}
 				});
-			}else{
-				parseLowestPrice(lowest_price_date,lowest_price,gotodate);
-			}
+		}
+			
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++     日历图标点击事件                                                                                                                                                                                                                                                          +++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -560,7 +505,7 @@
 		   $.fn.dateplug.ajax = function(e){
 			  //为每个日期的点击事件添加事件函数 当前日期可以通过class=current属性获取
 			  var month = $("#kalendar_month").html(),year = $("#kalendar_year").html(),day = $("#kalendar-detail td.current p:nth-child(1)").html();
-			  console.log("day: "+day+" month: "+month+" year: "+year)
+			  //console.log("day: "+day+" month: "+month+" year: "+year)
 		   }
 		   $.fn.dateplug.monthajax = function(obj){
 			   //获取相应月份的价格数据并返回  当前年月可获取
@@ -672,7 +617,6 @@
 				$("#flightsModel").append(html_);
 			}
 		}
-		
 		//解析构建日期最低价
 		function parseLowestPrice(arrdate,arrprice,gotodate){
 			var len =  DateDiff(arrdate[0],arrdate[arrdate.length-1],"d");
@@ -694,8 +638,8 @@
 			//***************************************************************
 			var arr_html = new Array();
 			for(var i=0,k=0;i<new_date_arr.length;){
-				var html1 = "<td class='sc-price-date'>";
-				var html2 = "<td class='sc-price-date' style='display:none'>";
+				var html1 = "<div class='sc-price-date'>";
+				var html2 = "<div class='sc-price-date'>";
 				if(i%7==0){
 					var flag = 0;
 					var html_ = "<div class='sc-price-date-inner'><table><tbody><tr>";
@@ -724,17 +668,60 @@
 							html_ += "</a></td>";
 						}
 					}
-					html_ += "</tr></tbody></table></div></td>";
+					
+					html_ += "</tr></tbody></table></div></div>";
 					if(flag==1){
 						arr_html.push(html1+html_);
 					}else{
 						arr_html.push(html2+html_);
 					}
 				}
+				
 			}
 			for(var k=0;k<arr_html.length;k++){
-				$("#date_icon").before(arr_html[k]);
+				$("#week-list").append(arr_html[k]);
 			}
+			weekList(gotodate);
+		}
+		function weekList(gotodate){
+			//alert(gotodate)
+		    var obj = $("#week-list"),len = obj.find(".sc-price-date").length,width = obj.width(),times=0;
+			console.log("width: "+width)
+		    if(len<=1){
+			    obj.siblings(".preview").addClass("disabled");
+		    }else{
+		    	obj.width(len*width).prev().addClass("disabled");
+		    }
+		    $("#sc-calendar").on("click",".preview",function(){
+			      if($(this).hasClass("disabled")||$("#week-list").is(":animated")){
+			    	  return;
+			      }
+			      var left = parseInt($("#week-list").css("left"),10);
+			      if($(this).attr("id")=="date_icon"){
+			    	  //next
+			    	    $("#week-list").animate({left:"-="+width},500,function(){
+			    	    	times++;
+			    	    	if($(this).prev().hasClass("disabled")){
+			    	    		$(this).prev().removeClass("disabled")
+			    	    	}
+			    	    	if(times+1>=len){
+			    	    		$(this).next().addClass("disabled");
+			    	    	}
+			    	    })
+			    	  
+			      }else{
+			    	  //prev
+			    	  $("#week-list").animate({left:"+="+width},500,function(){
+			    		  times--
+			    		  if($(this).next().hasClass("disabled")){
+			    			  $(this).next().removeClass("disabled")
+			    		  }
+			    		  if(times<=0){
+			    			  $(this).prev().addClass("disabled");
+			    		  }
+			    	  })
+			      }
+			})
 		}
 		function sortArray(arrdate,arrprice){
 			var len =  DateDiff(arrdate[0],arrdate[arrdate.length-1],"d");
