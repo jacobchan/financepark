@@ -110,6 +110,24 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		// Pager pager1=pagerRecords.getPager();
 		return pagerRecords;
 	}
+	//获取企业通讯录
+	@Override
+	@EsbServiceMapping
+	public PagerRecords getPagerEnterMemberInformations(Pager pager, // 分页条件
+			@ConditionCollection(domainClazz = MemberInformation.class) Collection<Condition> conditions, // 查询条件
+			@OrderCollection Collection<Order> orders,
+			@ServiceParam(name = "userId", pubProperty = "userId") String userId) throws BusException {
+		MemberInformation mem = memberInformationDao.get(userId);
+		String companyId = "";
+		if(mem != null){
+			companyId = mem.getCompanyId();
+		}
+		ConditionUtils.getCondition("companyId", Condition.EQUALS, companyId);
+		PagerRecords pagerRecords = memberInformationDao.findByPager(pager, conditions, orders);
+		pagerRecords.getTotalCount();
+		// Pager pager1=pagerRecords.getPager();
+		return pagerRecords;
+	}
 
 	/**
 	 * 保存对象
@@ -148,10 +166,10 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	@Override
 	@RequestMapping
 	public MemberInformation findPwdReset(
-			@RequestParam("phone") String phone,
-			@RequestParam("passwd") String passwd,
-			@RequestParam("repasswd") String repasswd,
-			@RequestParam("phoneCode") String phoneCode) {
+			@ServiceParam(name = "phone") String phone,
+			@ServiceParam(name = "passwd") String passwd,
+			@ServiceParam(name = "repasswd") String repasswd,
+			@ServiceParam(name = "phoneCode") String phoneCode) {
 
 		if(com.gsoft.framework.util.StringUtils.isEmpty(passwd)){
 			throw new BusException("密码不能为空！");
