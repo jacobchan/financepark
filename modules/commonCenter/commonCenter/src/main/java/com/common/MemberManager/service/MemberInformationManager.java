@@ -186,4 +186,15 @@ public interface MemberInformationManager extends BaseManager{
      * @throws BusException
      */
 	public MemberInformation getMember( String userId) throws BusException;
+	/**
+	 * 获取企业通讯录
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	public PagerRecords getPagerEnterMemberInformations(Pager pager,
+			Collection<Condition> conditions, Collection<Order> orders,String userId)
+			throws BusException;
 }
