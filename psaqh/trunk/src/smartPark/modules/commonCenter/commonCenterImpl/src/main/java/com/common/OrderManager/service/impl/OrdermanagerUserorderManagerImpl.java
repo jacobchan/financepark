@@ -1,5 +1,5 @@
 /**
- * 代码声明
+getPagerPend_query * 代码声明
  */
 package com.common.OrderManager.service.impl;
 
@@ -714,10 +714,20 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     			@OrderCollection Collection<Order> orders,
     			@ServiceParam(name="genId") String genId)
     			throws BusException {
-    	 String[] buff = new String[]{"01","02"};
+    	 String[] buff = new String[]{"01",   //01为待付款
+    			 						"02"};  //02为待评价
+    	 //IT服务（ff80808153f4a86a0153f4b06a65000d）有四个子类别
+    	 String[] buff2 = new String[]{"ff80808153f4a86a0153f4b0a31f000e",	//预约单次    商品类别id
+    			                       "ff80808153f4a86a0153f4b0be62000f",	//套餐一
+    			                       "ff80808153f4a86a0153f4b0d0b90010",	//套餐二
+    			                       "ff80808153f4a86a0153f4b0e4210011"};	//套餐三
          conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.IN, buff));
          if(StringUtils.isNotEmpty(genId)){
-        	 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
+        	 if("ff80808153f4a86a0153f4b06a65000d".equals(genId)){
+        		 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.IN, buff2)); 
+        	 }else{
+        		 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
+        	 }
          }
     	 PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
     	 return pagerRecords;
@@ -743,9 +753,20 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	
      String[] buff = new String[]{"01","02"};
      conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.NOT_IN, buff));
+     //IT服务（ff80808153f4a86a0153f4b06a65000d）有四个子类别
+	 String[] buff2 = new String[]{"ff80808153f4a86a0153f4b0a31f000e",	//预约单次    商品类别id
+			                       "ff80808153f4a86a0153f4b0be62000f",	//套餐一
+			                       "ff80808153f4a86a0153f4b0d0b90010",	//套餐二
+			                       "ff80808153f4a86a0153f4b0e4210011"};	//套餐三
+     conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.IN, buff));
      if(StringUtils.isNotEmpty(genId)){
-    	 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
+    	 if("ff80808153f4a86a0153f4b06a65000d".equals(genId)){
+    		 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.IN, buff2)); 
+    	 }else{
+    		 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
+    	 }
      }
+
 	 PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
 	 return pagerRecords;
 	}
@@ -772,7 +793,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    }
    
     /**
-	 * 获取整个数据的totalCount陈烨
+	 * 前台 个人中心 获取整个数据的totalCount chenye
 	 * @param conditions
      * @return
      * @throws BusException
@@ -792,7 +813,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		return recordList;
 	}
     /**
-	 * 获取待处理订单的totalCount  陈烨
+	 * 前台 个人中心   获取待处理订单的totalCount  chenye
 	 * @param conditions
 	 * @return
 	 * @throws BusException
@@ -805,10 +826,19 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		List<Record> recordList=new ArrayList<Record>();
 		String[] buff = new String[]{"01","02"};
         conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.IN, buff));
-		if(StringUtils.isNotEmpty(genId)){
-        	 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
-         }
-		
+        //IT服务（ff80808153f4a86a0153f4b06a65000d）有四个子类别
+   	    String[] buff2 = new String[]{"ff80808153f4a86a0153f4b0a31f000e",	//预约单次    商品类别id
+   			                       "ff80808153f4a86a0153f4b0be62000f",	//套餐一
+   			                       "ff80808153f4a86a0153f4b0d0b90010",	//套餐二
+   			                       "ff80808153f4a86a0153f4b0e4210011"};	//套餐三
+        conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.IN, buff));
+        if(StringUtils.isNotEmpty(genId)){
+       	 	if("ff80808153f4a86a0153f4b06a65000d".equals(genId)){
+       	 		conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.IN, buff2)); 
+       	 	}else{
+       	 		conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
+       	 	}
+        }
 		List<OrdermanagerUserorder> List = this.getOrdermanagerUserorders(conditions, null);
 		Record record = new Record();
 		record.put("totalCount", List.size());
@@ -816,7 +846,8 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		return recordList;
 	}
     /**
-   	 * 获取已完成订单的totalCount    陈烨
+     * 前台 个人中心
+   	 * 获取已完成订单的totalCount    chenye
    	 * @param conditions
    	 * @return
    	 * @throws BusException
@@ -828,9 +859,19 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    		List<Record> recordList=new ArrayList<Record>();
    		String[] buff = new String[]{"01","02"};
         conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.NOT_IN, buff));
+        //IT服务（ff80808153f4a86a0153f4b06a65000d）有四个子类别
+   	 	String[] buff2 = new String[]{"ff80808153f4a86a0153f4b0a31f000e",	//预约单次    商品类别id
+   			                       "ff80808153f4a86a0153f4b0be62000f",	//套餐一
+   			                       "ff80808153f4a86a0153f4b0d0b90010",	//套餐二
+   			                       "ff80808153f4a86a0153f4b0e4210011"};	//套餐三
+        conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.IN, buff));
         if(StringUtils.isNotEmpty(genId)){
-    	  conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
-        }
+        	if("ff80808153f4a86a0153f4b06a65000d".equals(genId)){
+        		conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.IN, buff2)); 
+       	 	}else{
+       	 		conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
+       	 	}
+        }	
    		List<OrdermanagerUserorder> List = this.getOrdermanagerUserorders(conditions, null);
    		Record record = new Record();
    		record.put("totalCount", List.size());
