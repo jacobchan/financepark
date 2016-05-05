@@ -41,6 +41,7 @@
 						var record = result.record;
 						var bxAddress="";
 						var bxStatus="";
+						var bxAmount=0;
 						var buttonHtml="";
 						var buttonpay="<span class='mr30'> 订单总计费用：<font class='f24 c-o' id='bxAmount'>0元</font></span>"+
 						              "<a href='' class='ib-btn mr15' style='width:120px;'>立即支付</a>";
@@ -80,7 +81,10 @@
 						}
 						$(".fr.f12.m1").html(buttonpay+buttonHtml);
 						$('#bxCode').html(record.bxCode+"&nbsp&nbsp"+bxStatus);
-						$('#bxAmount').html(record.bxAmount+"元");
+						if(record.bxAmount){
+							bxAmount=record.bxAmount;
+						}
+						$('#bxAmount').html(bxAmount+"元");
 						}
 					}		
 		}); 
