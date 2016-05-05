@@ -171,13 +171,24 @@
 			});	
 			//获取文档列表
 			getdocument(applyId);
-			//获取是否收藏
+			/* //获取是否收藏
 			 if(!isLogin){
 				getfavoritActivity(applyId);
 			 }else{
 				getboolfavorit(applyId);
-			 }
+			 } */
 		});
+		window.onload=function(){
+			var url=location.href; 
+			var tmp1=url.split("?")[1];  
+			var tmp2=tmp1.split("=")[1]; 
+			var applyId=tmp2;
+			 if(!isLogin){
+					getfavoritActivity(applyId);
+				 }else{
+					getboolfavorit(applyId);
+				 }
+		}
 		//活动详情赋值
 		function _parseRecords(record){
 
