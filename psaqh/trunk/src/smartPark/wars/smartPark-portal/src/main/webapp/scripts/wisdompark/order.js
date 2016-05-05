@@ -335,7 +335,7 @@ function closeTanc(){
 					+ record[i].commodityPrice
 					+ "元/小时</p></div></li>";
 			console.log(html);
-			$(".order-nav.bgfff").append(html);
+			$(".order-nav").append(html);
 
 		}
 		
@@ -382,8 +382,27 @@ function closeTanc(){
         $('.od_tip').eq(1).text(roomTyy+"投影仪");
         $('.od_tip').eq(2).text(roomGm);
         displayStatus(commodityId,"prev");
+        $(".order-nav li").hide();
+        $(".order-nav li").slice(0,5).show();
+        var l=$(".order-nav li").length;
+        var html="<span></span>";
+        var html1="<span></span>";
+        for (var n=1;n<10;n++){
+            html=html+html1;
+            if(l>5*n){
+                $(".page-circle").empty()
+                $(".page-circle").append(html);
+                $(".page-circle span:first").addClass("current");
+            }
+        }
 	};
-	
+	$(document).on("mouseover",".page-circle span",function(){
+        $(this).addClass("current").siblings().removeClass("current");
+        var m=$(this).index();
+        $(".order-nav li").hide();
+        $(".order-nav li").slice(5*m,5*(m+1)).show();
+
+    })
 	
     function displayStatus(commodityId,name){
     	$("#data_timer td").removeClass("today");
