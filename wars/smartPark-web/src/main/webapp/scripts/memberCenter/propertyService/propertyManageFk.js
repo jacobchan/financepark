@@ -1,7 +1,7 @@
 var pageSize=10;
 	var pageCount=1;//共几页
 	var currentIndex = 1;//第几页
-	var serviceURL = baseUrl+'propertyservicemanagerFkcodeManager/getPagerFkcodes.json';
+	var serviceURL = baseUrl+'propertyservicemanagerFkcodeManager/getPagerFk.json';
     $(function () {		
 		//分页页码显示
 		 $.ajax({
@@ -150,7 +150,7 @@ var pageSize=10;
 		var endTime=$("#endTime").val(); 
 		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'fkLikeCode='+fkCode,'startTime='+startTime,'endTime='+endTime,'orderBy=desc:applyTime'];
 		$.ajax({
-			url:baseUrl+'propertyservicemanagerFkcodeManager/getPagerLikeFk.json',
+			url:serviceURL,
 			data:params.join('&'),
 			success:function(results){
 				if(results&&results.records){
