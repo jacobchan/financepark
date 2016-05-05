@@ -74,7 +74,7 @@
 					html += '	<td>'+ recordList[index].createTime+ '</td>'
 					if(recordList[index].applayStatus=="01"){
 						html += '	<td>未办理</td>'
-						html+=	"<td><a href='javascript:;' class='ac-show' onclick='javascript:cancel(\""+recordList[index].id+"\",\""+recordList[index].aplaypNo+"\")'>取消</a><td>";
+						//html+=	"<td><a href='javascript:;' class='ac-show' onclick='javascript:cancel(\""+recordList[index].id+"\",\""+recordList[index].aplaypNo+"\")'>取消</a><td>";
 						html += '	<td><a href="javascript:;" onclick="javascript:cancel(\''+recordList[index].id+'\',\''+recordList[index].aplaypNo+'\')" class="ac-cancle">取消</a></td>'
 					}else if(recordList[index].applayStatus=="02"){
 						html += '	<td>已完成</td>'
@@ -122,3 +122,7 @@
 			}
 		});
 	});
+	$(".tc-close").click(function(){
+		$(".bg-tanc.m1").hide();
+	});
+	
