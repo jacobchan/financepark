@@ -40,12 +40,11 @@
 					if(result&&result.record){
 						var record = result.record;
 						var bxAddress="";
-						var bxAmount="";
 						var bxStatus="";
 						var buttonHtml="";
 						var buttonpay="<span class='mr30'> 订单总计费用：<font class='f24 c-o' id='bxAmount'>0元</font></span>"+
 						              "<a href='' class='ib-btn mr15' style='width:120px;'>立即支付</a>";
-						
+						//alert(record.bxAmount);
 						$(".moverec").html(record.bxCode);//给弹窗插入订单号
 						$('#applyTime').html(record.applyTime.substring(0,10));
 						$('#bxComp').html("企业名称："+record.bxComp);				
@@ -71,20 +70,17 @@
 							buttonHtml="<td><a href='javascript:;'>付款</a></td>";
 						}else if(record.bxStatus=='06'){
 							bxStatus='已付款';
-							var buttonpay="";
+							buttonpay="<span class='mr30'> 订单总计费用：<font class='f24 c-o' id='bxAmount'>0元</font></span>";
 						}else if(record.bxStatus=='07'){
 							bxStatus='已完成';
-							var buttonpay="";
+							buttonpay="<span class='mr30'> 订单总计费用：<font class='f24 c-o' id='bxAmount'>0元</font></span>";
 						}else if(record.bxStatus=='08'){
 							bxStatus='已取消';
 							var buttonpay="";
 						}
 						$(".fr.f12.m1").html(buttonpay+buttonHtml);
 						$('#bxCode').html(record.bxCode+"&nbsp&nbsp"+bxStatus);
-						if(record.bxAmount==null){
-							bxAmount=0;
-						}
-						$('#bxAmount').html(bxAmount+"元");
+						$('#bxAmount').html(record.bxAmount+"元");
 						}
 					}		
 		}); 
