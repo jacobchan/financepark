@@ -68,7 +68,7 @@
 					html+='<li>'+
 							'<table>'+
 		                    	'<tr>'+
-		                        	'<td rowspan="4" width="110"><img src="'+memberHeadPortrait+'"></td>'+
+		                        	'<td rowspan="4" width="110"><img src="'+memberHeadPortrait+'" style="width: 107px;height: 107px;"></td>'+
 		                    	'</tr>'+
 		                    	'<tr>'+
 		                       		'<td align="left" valign="middle" class="pl20 hide_dian"><span class="f16 color_41 user_name">'+record[i].memberName+'</span><span class="f14 color_6 tel">联系方式：'+record[i].memberPhoneNumber+'</span></td>'+
