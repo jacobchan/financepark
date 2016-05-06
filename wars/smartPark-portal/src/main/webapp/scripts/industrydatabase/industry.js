@@ -86,6 +86,7 @@ $(".lt-page .lp-left").click(function(){
 $(".open-d").click(function(e){
 	e.stopPropagation();
 	$(".dialog-con").toggle();
+	$("#letterContent").val('');
 });
 //保存评论
 function subComment(){
@@ -139,7 +140,7 @@ function subLetter(){
 	var rzId = Request['id'];
 	var letterContent = $("#letterContent").val();
 	if(letterContent=="" || letterContent.trim().length==0){
-		alert("评论内容不能为空！");
+		close("评论内容不能为空！");
 		return false;
 	}
 	$.youi.ajaxUtils.ajax({
@@ -149,12 +150,13 @@ function subLetter(){
 		dataType : 'jsonp',
 		success : function(result) {
 			if(result && result.record){
-				alert("私信提交成功！");
-				$("#letterContent").val();
+				close("私信提交成功！");
+				 $(".dialog-con").hide();
+				/*$("#letterContent").val();
 				$('.bg-tanc.m1').show();
 				$('#ti-m1').text('5');
 				a=5;
-				timer1=setInterval('jump1();',1000);
+				timer1=setInterval('jump1();',1000);*/
 			}
 		}
 	});
@@ -423,3 +425,22 @@ $(".dialog-con").click(function(e){
 	e.stopPropagation();
 	$(this).show();
 })
+//toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
+var pltime,timer;
+ function closeTanc(){
+ if(pltime>1){
+	 pltime--;
+  }else{
+     $(".toast").hide();
+	 }       
+ };
+//关闭toast
+$(".close-toast").click(function(){
+	   $(".toast").hide();
+ });
+function close(content){		        
+    $(".tc.mt25.f18").empty() ;
+    $(".tc.mt25.f18").append(content) ;
+    $(".toast").show();		      		        		       				
+	setTimeout(function(){$(".toast").hide(); },1000);
+}
