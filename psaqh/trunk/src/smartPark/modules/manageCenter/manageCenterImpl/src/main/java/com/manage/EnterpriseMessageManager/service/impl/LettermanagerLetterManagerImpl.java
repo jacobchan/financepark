@@ -1,15 +1,20 @@
 package com.manage.EnterpriseMessageManager.service.impl;
 import java.util.List;
 import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.service.MemberInformationManager;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.EnterBusinessManager.dao.EnterbusinessmanagerRzDao;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
@@ -23,6 +28,8 @@ public class LettermanagerLetterManagerImpl extends BaseManagerImpl implements L
 	private LettermanagerLetterDao lettermanagerLetterDao;
 	@Autowired
 	private EnterbusinessmanagerRzDao enterbusinessmanagerRzDao;
+	@Autowired
+	private MemberInformationManager memberInformationManager;
 	
     /**
      * 查询列表
@@ -48,11 +55,19 @@ public class LettermanagerLetterManagerImpl extends BaseManagerImpl implements L
     	return lettermanagerLetterDao.get(id);
     }
 	
+	@SuppressWarnings("unchecked")
 	@EsbServiceMapping
 	public PagerRecords getPagerLettermanagerLetters(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=LettermanagerLetter.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
 		PagerRecords pagerRecords = lettermanagerLetterDao.findByPager(pager, conditions, orders);
+		List<LettermanagerLetter>letterlist = pagerRecords.getRecords();
+		for(LettermanagerLetter letter : letterlist )
+		if(StringUtils.isNotEmpty(letter.getCreateUser())){
+			String memberId = letter.getCreateUser();
+			MemberInformation memberInformation = memberInformationManager.getMemberInformation(memberId);
+			letter.setMember(memberInformation);
+		}
 		return pagerRecords;
 	}
     /**
