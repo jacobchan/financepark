@@ -32,15 +32,19 @@ height:100%; position:fixed;}
 .sidebar-menu-mainul{ width:250px}
 .sidebar-menu-mainul li{width:250px;text-align:left;padding:10px 0; line-height:30px; cursor:pointer;}
 .sidebar-menu-mainul li a{padding-left:65px; display:block;}
-.sidebar-menu-mainul li a{font-size:16px; color:#bbbbbb;}
-.down-icon{ margin-left:19px;}
+.sidebar-menu-mainul li a{font-size:14px; color:#bbbbbb;}
+.sidebar-menu-mainul .onshow:hover{ background:#ff6715;}
+.sidebar-menu-mainul li.active{ background:#ff6715;}
+.qiyemenu:hover{ background:#ff6715;}
+.qiyemenu.active{ background:#ff6715;}
+.down-icon{ margin-left:10px;}
 .sidebar-menu-mainul2{ width:250px; height:auto; margin-top:10px;}
 .sidebar-menu-mainul2 li { height:50px; width:250px; padding-left:0px; color:#ffffff; font-size:14px;}
 .sidebar-menu-mainul2 li a{font-size:14px; color:#ffffff; display:block;}
 .sidebar-menu-mainul2 li a span{margin-right:20px;}
 .sidebar-menu-mainul2 li:hover{ background:#ff6715;}
 .sidebar-menu-mainul2 li.active{ background:#ff6715;}
-.sidebar-menu-return{width:250px; height:50px; line-height:50px; font-size:14px; color:#FFFFFF; text-align:center; margin-top:20px; background:#615d59; cursor:pointer;}
+.sidebar-menu-return{width:250px; height:50px; line-height:50px; font-size:14px; color:#FFFFFF; text-align:center; margin-top:5px; background:#615d59; cursor:pointer;}
 .sidebar-menu-return span{ margin-right:20px;}
 
 /*右侧内容*/
@@ -60,11 +64,11 @@ height:100%; position:fixed;}
 .qiye_fullname, .qiye_address, .qiye_web, .qiye_link, .born_time, .rongzi_je, .rongzi_gz, .kechi_gf, .rongzi_time{ width:100%; height:30px; padding-left:75px;clear:both; line-height:30px;margin-bottom:25px;}
 .qiye_nametex, .qiye_word, .qiye_webtex, .qiye_linktex, .born_date, .qiye_rzje, .qiye_rzgz, .qiye_kcgf, .qiye_rzsj{width:100px; height:32px; float:left; color:#2d2b29; font-size:14px;}
 .name_input, .web_input, .link_input{ width:289px; height:32px; border:1px solid #ecebeb; float:left}
-.name_input input, .web_input input, .link_input input{ width:285px; height:30px; border:0; padding:0 5px; color:#2d2b29; font-size:12px; margin:0}
+.name_input input, .web_input input, .link_input input{ width:285px; height:30px; border:0; padding:0 5px; font-size:12px; margin:0}
 
 .qiye_jianjie, .rongzi_js{ width:100%; height:140px; padding-left:75px;margin-bottom:25px;}
 .word_input{ width:80%; border:1px solid #ecebeb; height:140px; float:left;}
-.word_input textarea{ border:0; width:100%; height:110px;resize:none; padding:5px;}
+.word_input textarea{ border:0; width:100%; height:110px;resize:none; padding:5px;font-size:12px;}
 .font_xianzhi{ color:#ababab; font-size:12px; text-align:right; padding-right:20px;}
 .select_address{width:650px; height:32px; float:left; color:#2d2b29; font-size:14px;}
 
@@ -74,8 +78,8 @@ height:100%; position:fixed;}
 .jiesao_word{ width:100%; margin:25px 0; border-bottom:1px dashed #ecebeb; height:auto; padding:5px 0 25px 0;}
 .qiye_js{ width:100%; height:406px; padding-left:75px; margin-bottom:30px;}
 .qiye_jieshao, .qiye_miaoshu, .qiye_xiangce{width:100px; height:30px; float:left;}
-.edit_tool{ width:600px; height:400px; background:#cccccc; float:left}
-.qiye_ms{width:100%; height:400px; padding-left:75px;}
+.edit_tool{ width:600px; height:307px; background:#cccccc; float:left}
+.qiye_ms{width:100%; height:307px; padding-left:75px;}
 
 .qiye_photo{ width:100%; margin:20px 0; height:auto; display:inline-block;}
 .photo_list{ float:left;height:auto; width:80%;}
