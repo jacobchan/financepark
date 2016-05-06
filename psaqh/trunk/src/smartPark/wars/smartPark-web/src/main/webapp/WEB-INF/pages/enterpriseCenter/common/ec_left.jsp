@@ -30,6 +30,7 @@
 	                <li class="onshow"><a href="<%=request.getContextPath()%>/enterprise/code.html">企业邀请码</a></li>
 	                <!-- <li><a href="<%=request.getContextPath()%>/enterprise/order.html">订单中心</a></li> -->
 	                <li class="onshow"><a href="<%=request.getContextPath()%>/enterprise/reply.html">评论消息</a></li>
+	                <li class="onshow"><a href="<%=request.getContextPath()%>/enterprise/industry.html">产业链对接</a></li>
 	            </ul>
 	            <a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/personInfo.html"><div class="sidebar-menu-return"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_return.png"></span>返回个人中心</div></a>
 	        </div>
