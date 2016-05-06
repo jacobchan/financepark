@@ -3,13 +3,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>首页</title>
-
 <link href="styles/page/awesome/css/font-awesome.min.css"
 	type="text/css" rel="stylesheet">
 <link href="styles/base.css" type="text/css" rel="stylesheet">
 <link href="styles/page/page.css" type="text/css" rel="stylesheet">
-<link href="styles/page/cityselector.css" type="text/css"
-	rel="stylesheet">
+<link href="styles/page/cityselector.css" type="text/css" rel="stylesheet">
 
 </head>
 <body>
@@ -568,15 +566,15 @@
 					</div>
 					<div style="position: relative">
 						<div class="re_div">
-							<input id="city_threeCode1" name="city_threeCode1" type="hidden"
-								value="" /> <label for="formcity">出发城市</label> <input
-								type="text" id="fromcity" name="fromcity" />
+							<input id="city_threeCode1" name="city_threeCode1" type="hidden" value="" /> 
+							<label for="formcity">出发城市</label> 
+							<input type="text" id="fromcity" name="fromcity" />
 							<div id="TicketSuggest1" class="ac_results fromcity_position"></div>
 						</div>
 						<div class="re_div">
-							<input id="city_threeCode2" name="city_threeCode2" type="hidden"
-								value="" /> <label for="gotocity">到达城市</label> <input
-								type="text" id="gotocity" name="gotocity" />
+							<input id="city_threeCode2" name="city_threeCode2" type="hidden"value="" /> 
+							<label for="gotocity">到达城市</label> 
+							<input type="text" id="gotocity" name="gotocity" />
 							<div id="TicketSuggest2" class="ac_results gotocity_position"></div>
 						</div>
 						<div class="city_huan">
@@ -609,12 +607,12 @@
 					</div>
 					<div style="position: relative">
 						<div class="re_div">
-							<label for="overdate">入店日期</label> <input type="text"
-								id="overdate" />
+							<label for="overdate">入店日期</label> 
+							<input type="text" class="youi-select" id="overdate" />
 						</div>
 						<div class="re_div">
-							<label for="leavedate">离店日期</label> <input type="text"
-								id="leavedate" />
+							<label for="leavedate">离店日期</label> 
+							<input type="text" class="youi-select" id="leavedate" />
 						</div>
 						<div class="city_huan">
 							<div class="huan">换</div>
@@ -1874,7 +1872,11 @@
 				window.open(param);
 			}
 		});
-
+        $(".reform .city_huan").on("click",function(){
+        	var val1 = $(this).prev().prev().find(".youi-select").val(),val2=$(this).prev().find(".youi-select").val();
+        	$(this).prev().prev().find(".youi-select").val(val2)
+        	$(this).prev().find(".youi-select").val(val1);
+        })
 	});
 </script>
 
