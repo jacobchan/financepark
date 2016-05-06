@@ -101,8 +101,17 @@ var pageCount=1;
 		setTimeout(function(){$(".toast").hide(); },2000);
 		refreshData(currentIndex,pageSize);
   }
-	//取消操作
+	// 确认取消弹窗
 	function cancel(id){
+		//alert(aplaypNo);
+		//$(".moverec").html(aplaypNo);//给弹窗插入订单号
+		$(".moverec")[0].setAttribute("id",id);//给弹窗设置id
+		$(".bg-tanc.m1").show();
+	};
+	//取消操作
+	$(".hhf-submit.confirm").click(function(){	
+	    $(".bg-tanc.m1").hide();
+		var id=$(".moverec")[0].getAttribute("id");	
 		var params = [ 'policyApplyId=' + id ];
 		$.youi.ajaxUtils.ajax({
 			url : baseUrl + "policyApplyManager/cancelApply.json",
@@ -112,4 +121,7 @@ var pageCount=1;
 				close("取消成功");
 			}
 		});
-	}
+	});
+	$(".tc-close").click(function(){
+		$(".bg-tanc.m1").hide();
+	});
