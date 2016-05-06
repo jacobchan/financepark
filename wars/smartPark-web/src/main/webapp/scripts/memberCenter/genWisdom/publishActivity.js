@@ -178,8 +178,7 @@ $(function(){
 		var id=obj.id;
 		alert("点击动作待定...");
 	}
-	</script>
-	<script type="text/javascript">
+	
 	 	$(function(){
 	 		$(".ac_box").on("click","span a",function(){
 	 			$(this).addClass("active").siblings().removeClass("active");
