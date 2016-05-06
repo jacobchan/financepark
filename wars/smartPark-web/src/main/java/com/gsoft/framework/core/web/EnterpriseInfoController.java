@@ -156,4 +156,18 @@ public class EnterpriseInfoController {
 		model.addObject("user", account);
 		return model;
 	}
+	/**
+	 * 企业评论
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/industry.html")
+	public ModelAndView enterpriseIndustry(HttpServletRequest request,
+			HttpServletResponse response){
+		ModelAndView model = new ModelAndView("enterpriseCenter/enterpriseChanye");
+		AccountPrincipal account = SecurityUtils.getAccount();
+		model.addObject("user", account);
+		return model;
+	}
 }
