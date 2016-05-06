@@ -90,12 +90,16 @@ $(".open-d").click(function(e){
 });
 //保存评论
 function subComment(){
+	if(!isLogin){
+		close("请登录！");
+		return false;
+	}
 	var Request = new Object();
 	Request = GetRequest();
 	var rzId = Request['id'];
 	var commentContent = $("#commentContent").val();
 	if(commentContent=="" || commentContent.trim().length==0){
-		alert("评论内容不能为空！");
+		close("评论内容不能为空！");
 		return false;
 	}
 	$.youi.ajaxUtils.ajax({
@@ -111,7 +115,7 @@ function subComment(){
 		    		dataType : 'jsonp',
 					success:function(results){
 						if(results&&results.records&&results.records.length>0){
-							alert("不能重复评论！");
+							close("不能重复评论！");
 						}else{
 							$.youi.ajaxUtils.ajax({
 					    		url : baseUrl+"lettermanagerCommentManager/saveLettermanagerComment.json",
@@ -120,9 +124,10 @@ function subComment(){
 					    		dataType : 'jsonp',
 					    		success : function(result) {
 					    			if(result && result.record){
-					    				alert("评论提交成功！");
-					    				$("#commentContent").val();
-					    				window.location.reload();
+					    				close("评论提交成功！");
+					    				$("#commentContent").val('');
+					    				informeia(rzId);
+					    				//window.location.reload();
 					    			}
 					    		}
 					    	});
@@ -160,6 +165,78 @@ function subLetter(){
 			}
 		}
 	});
+}
+function informeia(rzId){
+	//根据企业id获取评论
+	var pageSize=3;
+	var pageCount=1;	
+	var srcUrl =  baseUrl+"lettermanagerCommentManager/getPagerLettermanagerComments.json";
+	$.youi.ajaxUtils.ajax({
+		url : srcUrl,
+		data : ['commentEnterprise='+rzId].join('&'),
+		jsonp : 'data:jsonp',
+		dataType : 'jsonp',
+		success : function(results) {
+			if(results&&results.records){
+				if(results.records.length>0){
+					$("#commcount").html(results.totalCount);
+					pageCount=Math.ceil(results.totalCount/pageSize);
+					 refreshData(1,pageSize);
+						$(".tcdPageCode").createPage({
+						    pageCount:pageCount,
+						    current:1,
+						    backFn:function(p){
+						       this.pageCount=pageCount;
+						        refreshData(p,pageSize);
+						    }
+						});
+						$(".tcdPageCode").show();
+				}else{
+					$("#commentDiv").empty();
+					$("#commentDiv").append(" <colgroup><col width='95'></col><col></col></colgroup><tr><td align='center'><h2>暂无评论</h2></td></tr>");
+					$(".tcdPageCode").hide();
+					
+				}
+			}
+		}
+	});
+	function refreshData(pageIndex,pageSize){
+		var params = {'pager:pageIndex':pageIndex,'pager:pageSize':pageSize,'commentEnterprise':rzId};
+		$.youi.ajaxUtils.ajax({
+			url:srcUrl,
+			jsonp:'data:jsonp',
+			data:params,
+			dataType:'jsonp',
+			success:function(results){
+				if(results&&results.records){
+					if(results.records.length>0){
+						commRecords(results.records);
+					}
+				}
+			}
+		});
+	}
+}
+function commRecords(records){
+	var comment = '<colgroup><col width="95"></col><col></col></colgroup>';
+	$("#commentDiv").empty();
+	for(var i=0; i<records.length; i++){
+		var imsrc = "";
+		if(records[i].member.memberHeadPortrait!=null&&records[i].member.memberHeadPortrait!=''){
+			imsrc=cenUrl+'common/uploadImage.html?repository=/swfupload&path='+records[i].member.memberHeadPortrait+'&method=show';
+		}else{
+			imsrc="../styles/images/yqfw/p1.png";
+		}
+		comment+='<tr>'+
+					'<td><img src='+imsrc+' style="width:70px;height:70px;"/></td>'+
+					'<td>'+
+						'<h4 class="f14 lh30">'+records[i].member.memberName+'<em class="em-box ml5">创</em></h4>'+
+						'<p class="f14 lh30">'+records[i].commentContent+'<span class="f12">('+records[i].commentTime+')</span></p>'+
+						'<!--<p class="tr f12 lh30"><a href="javascript:;" class="c-333"><i class="fa fa-thumbs-o-up c-o mr5" style="font-size:17px"></i>(0)赞</a><span class="ml10 mr10 c-o">|</span><a href="javscript:;" class="c-333">回复</a></p>-->'+
+					'</td>'+
+				'</tr>';
+	}
+	$("#commentDiv").append(comment);
 }
 function GetRequest() {
    var url = location.search; //获取url中"?"符后的字串
@@ -333,6 +410,7 @@ $(document).ready(function() {
 		}
 	});
 	
+	
 	//根据企业id获取法定代表人信息
 	$.youi.ajaxUtils.ajax({
 		url : baseUrl+"informationLegalManager/findInformationLegal.json",
@@ -355,7 +433,7 @@ $(document).ready(function() {
 	});
 	
 	//根据企业评论
-	$.youi.ajaxUtils.ajax({
+	/*$.youi.ajaxUtils.ajax({
 		url : baseUrl+"lettermanagerCommentManager/getLettermanagerComments.json",
 		data : ['commentEnterprise='+rzId].join('&'),
 		jsonp : 'data:jsonp',
@@ -379,8 +457,8 @@ $(document).ready(function() {
 				$("#commentDiv").append(comment);
 			}
 		}
-	});
-	
+	});*/
+	informeia(rzId);
 	//根据企业id获取公告信息
 	//$.youi.ajaxUtils.ajax({
 	//	url : baseUrl+"informationNoticeManager/findInformationNotice.json",
