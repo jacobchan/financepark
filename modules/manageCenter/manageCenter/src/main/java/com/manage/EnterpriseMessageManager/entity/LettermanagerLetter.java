@@ -4,10 +4,11 @@
 package com.manage.EnterpriseMessageManager.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
 /**
  * 实体: 私信
@@ -61,6 +62,17 @@ public class LettermanagerLetter implements Domain{
 	@Length(max=36)
 	private String letterRecipientId;//接收人ID
 	
+	@Transient
+	private MemberInformation member;
+	
+	public MemberInformation getMember() {
+		return member;
+	}
+
+	public void setMember(MemberInformation member) {
+		this.member = member;
+	}
+
 	public String getUpdateUser(){
 		return this.updateUser;
 	}
