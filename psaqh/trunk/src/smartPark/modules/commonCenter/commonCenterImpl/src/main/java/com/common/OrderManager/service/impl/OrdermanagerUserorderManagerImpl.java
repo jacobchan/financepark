@@ -858,9 +858,18 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    		List<Record> recordList=new ArrayList<Record>();
    		String[] buff = new String[]{"01","02"};
         conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.NOT_IN, buff));
-        if(StringUtils.isNotEmpty(genId)){
-    	  conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
-        }
+        //IT服务（ff80808153f4a86a0153f4b06a65000d）有四个子类别
+   	    String[] buff2 = new String[]{"ff80808153f4a86a0153f4b0a31f000e",	//预约单次    商品类别id
+   			                       "ff80808153f4a86a0153f4b0be62000f",	//套餐一
+   			                       "ff80808153f4a86a0153f4b0d0b90010",	//套餐二
+   			                       "ff80808153f4a86a0153f4b0e4210011"};	//套餐三
+   	    if(StringUtils.isNotEmpty(genId)){
+    	 	if("ff80808153f4a86a0153f4b06a65000d".equals(genId)){
+    	 		conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.IN, buff2)); 
+    	 	}else{
+    	 		conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
+    	 	}
+   	    }
    		List<OrdermanagerUserorder> List = this.getOrdermanagerUserorders(conditions, null);
    		Record record = new Record();
    		record.put("totalCount", List.size());
