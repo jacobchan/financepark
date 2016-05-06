@@ -90,7 +90,7 @@ var pageSize=4;
 							"<div class='pl20 pr20 lh35 tr f12' style='border-top:1px solid #ebecec'>"+
 							"<a href='javascript:;' class='mr10' onclick='javascript:setDefault(this)'>设为默认</a>"+
 							"<a href='javascript:;' class='mr10 ga-edit' onclick='javascript:editAdd(this)'>编辑</a>"+
-							"<a href='javascript:;' class='mr10' onclick='javascript:removeAddress(this)'>删除</a>"+
+							"<a href='javascript:;' class='mr10' onclick='javascript:removeAddress(\""+record[i].addressId+"\")'>删除</a>"+
 							"</div>"+
 							"<em class='s-a-select'>默认</em>"+
 							"</div>"
@@ -99,8 +99,27 @@ var pageSize=4;
 			}
 			$(".addressList").append(html);
 		};
-		//删除地址
-		function removeAddress(obj){
+		//确认删除地址弹窗
+		function removeAddress(id){
+			//$(".moverec").html(aplaypNo);//给弹窗插入订单号
+			$(".moverec")[0].setAttribute("id",id);//给弹窗设置id
+			$(".bg-tanc.a1").show();
+		};
+		//删除操作
+		$(".hhf-submit.confirm").click(function(){	
+		    $(".bg-tanc.a1").hide();
+			var id=$(".moverec")[0].getAttribute("id");	
+			var params = [ 'addressId=' + id ];
+			$.youi.ajaxUtils.ajax({
+				url:baseUrl+'memberadrAddressManager/removeMemberadrAddress.json',
+				data : params.join('&'),
+				success : function(results) {
+					
+					close("删除成功");
+				}
+			});
+		});
+		/*function removeAddress(obj){
 			var me=obj.parentNode.parentNode;
 		 	$.youi.ajaxUtils.ajax({
 				url:baseUrl+'memberadrAddressManager/removeMemberadrAddress.json',
@@ -111,7 +130,7 @@ var pageSize=4;
 					pageget();
 				}
 			});
-		}
+		}*/
 		//设为默认地址
 		function setDefault(obj){
 			var me=obj.parentNode.parentNode;
