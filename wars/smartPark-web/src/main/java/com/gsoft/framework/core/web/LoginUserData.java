@@ -8,8 +8,11 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -19,9 +22,13 @@ import com.common.MemberManager.service.MemberInformationManager;
 import com.common.MessageCenter.service.McMsgdatasManager;
 import com.gsoft.entity.MessageService;
 import com.gsoft.entity.TempDemo;
+import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.web.controller.BaseDataController;
 import com.gsoft.framework.core.web.view.DataModelAndView;
 import com.gsoft.framework.security.DefaultLoginFormToken;
+import com.gsoft.framework.security.agt.dao.UserDao;
+import com.gsoft.framework.security.agt.entity.User;
+import com.gsoft.framework.security.agt.service.impl.UserPasswordService;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.PasswordUtils;
 
@@ -34,6 +41,10 @@ public class LoginUserData extends BaseDataController {
 	private MemberInformationManager memberInformationManager;
 	@Autowired
 	private MemberInformationDao memberInformationDao;
+	@Autowired
+	private UserDao userDao;
+	@Autowired(required=false)
+	private UserPasswordService passwordService;
 	/*
 	 * 获取注册手机验证码
 	 */
@@ -207,5 +218,57 @@ public class LoginUserData extends BaseDataController {
 			}
 		}
 		return new DataModelAndView("发送失败");		
+	}
+	
+	/**
+     * 修改登录用户密码
+     * @param password
+     * @param confirmPassword
+     * @param oldPassword
+     * @return
+     */
+	@RequestMapping("/modifyPassword.json")
+    public DataModelAndView modifyPassword(
+    		@RequestParam("oldPwd") String oldPwd, 
+    		@RequestParam("newPwd") String newPwd, 
+    		@RequestParam("newPwdConfirm") String newPwdConfirm){
+    	if( StringUtils.isBlank(oldPwd) ){
+    		throw new BusException("旧密码不能为空！");
+    	}
+    	if( StringUtils.isBlank(newPwd) ){
+    		throw new BusException("新密码不能为空！");
+    	}
+    	if( !StringUtils.equals(newPwd, newPwdConfirm) ){
+    		throw new BusException("请确认密码是否一致");
+    	}
+    	if( StringUtils.equals(newPwd, oldPwd) ){
+    		throw new BusException("新密码与旧密码重复！");
+    	}
+    	Object object = SecurityUtils.getSubject().getPrincipal();
+		if(object instanceof User){
+			User user = (User) object;
+			//旧密码不符
+			if(!PasswordUtils.md5Password(oldPwd).equals(user.getPassword())){
+				throw new BusException("请输入正确的旧密码！");
+			}
+			user.setPassword(PasswordUtils.md5Password(newPwd));
+			user = saveUser(user);
+			return new DataModelAndView("000000");
+		}
+		else{
+			throw new BusException("用户不存在或会话已失效！");
+		}
+    }
+	public User saveUser(User o)throws BusException{
+	     String userId = o.getUserId();
+	     boolean isUpdate = StringUtils.isNotEmpty(userId);
+	     if (isUpdate) {
+	       User user = (User)this.userDao.get(userId);
+	       Assert.notNull(user, "user is null!");
+	       o.setPassword(o.getPassword());
+	     } else {
+	       o.setPassword(this.passwordService.hashPassword("123456").toHex());
+	     }
+	     return (User)this.userDao.save(o);
 	}
 }
