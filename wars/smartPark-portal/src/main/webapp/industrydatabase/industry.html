@@ -13,6 +13,7 @@
 	<script type="text/javascript" src="../scripts/page/pagewrapper.js"></script>
 	<script type="text/javascript" src="../scripts/page/url.js"></script>
 	<script type="text/javascript" src="../scripts/page/right.js"></script>
+	<script type="text/javascript" src="../scripts/page/jquery.page.js"></script>
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=0jBm0QtZ3t8BGclw0ujY0kFe"></script>
 	<style type="text/css">
 		.anchorBL{
@@ -111,11 +112,15 @@
 						<div class="clearfix yin-group undis">
 							<form class="yg-form">
 								<textarea id="commentContent" name="commentContent" placeholder="来说两句吧..."></textarea>
-								<a href="javascript:subComment();" class="yf-input mt10 mb10" style="line-height:28px;">提交评论</a>
+								<span class="fl f16">共有<font class="cc f18"  id="commcount">0</font>条评论</span>
+								<a href="javascript:;" onclick="subComment();" class="yf-input mt10 mb10" style="line-height:28px;">提交评论</a>
 								<table id="commentDiv" width="100%">
 									
 								</table>
 							</form>
+								<div class="tcdPageCode fr">
+						
+								</div>
 						</div>
 					</div>
 				</div>
