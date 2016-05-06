@@ -103,7 +103,7 @@
 	
 	
 	//取消操作
-	function cancel(id){
+	/*function cancel(id){
 		var params = [ 'id=' + id ];
 		$.youi.ajaxUtils.ajax({
 			url : baseUrl + "finaceManager/goCancel.json",
@@ -113,4 +113,28 @@
 				close("取消成功");
 			}
 		});
-	}
+	}*/
+	// 确认取消弹窗
+	function cancel(id){
+		//alert(aplaypNo);
+		//$(".moverec").html(aplaypNo);//给弹窗插入订单号
+		$(".moverec")[0].setAttribute("id",id);//给弹窗设置id
+		$(".bg-tanc.m1").show();
+	};
+	//取消操作
+	$(".hhf-submit.confirm").click(function(){	
+	    $(".bg-tanc.m1").hide();
+		var id=$(".moverec")[0].getAttribute("id");	
+		var params = [ 'id=' + id ];
+		$.youi.ajaxUtils.ajax({
+			url : baseUrl + "finaceManager/goCancel.json",
+			data : params.join('&'),
+			success : function(results) {
+				//loadData();
+				close("取消成功");
+			}
+		});
+	});
+	$(".tc-close").click(function(){
+		$(".bg-tanc.m1").hide();
+	});
