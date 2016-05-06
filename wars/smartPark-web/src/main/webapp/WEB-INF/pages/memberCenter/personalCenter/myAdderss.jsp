@@ -100,6 +100,19 @@
         </div> 
         
     </div>
+    <!-- 确认取消弹窗 -->    
+    <div class="bg-tanc a1">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="w60 tc mt40" style="margin-left:20%">
+				<div class="mt20 mb20 f16 lh26">
+					<img src="<%=request.getContextPath()%>/styles/images/grzx/warn.png" border="0" class="mr20"/> 确认要删除<span class="c-o moverec">  </span>吗？
+				</div>
+				<!-- <p class="mb30">相关内容：空调不制冷，应该需要补充雪种！</p> -->
+				<input value="确定" class="hhf-submit confirm" style="height:36px;" type="submit">
+			</div>
+		</div>
+	</div>
 	<!--***弹窗 end****************************************-->
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/memberCenter/personalCenter/myAdderss.js"></script>	
