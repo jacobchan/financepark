@@ -52,6 +52,8 @@
 									$(".tcdPageCode").show();
 							}else{
 								$(".tcdPageCode").hide();
+								$('.letter').empty();
+								$('.letter').append("<p><h4 style='text-align: center;'>暂无产业链信息</h4></p>");
 							}
 		    			}
 		    		}
@@ -135,6 +137,7 @@
 					success:function(results){
 						 	var id = $('.main-title').attr("id");
 						 	getletter(id);
+						 	close("删除成功!");
 						}
 					});
 				
@@ -155,6 +158,13 @@
 						$(this).parents(".chanye_row").find(".chanye_btn").show();
 				  	});
 			}
+			//弹出框
+		   	function close(content){		        
+			        $(".tc.mt25.f18").empty() ;
+			        $(".tc.mt25.f18").append(content) ;
+			        $(".toast").show();		      		        		       				
+					setTimeout(function(){$(".toast").hide(); },1000);
+		      }
 		</script>
 	</head>
 	<body class="page-header-fixed" style="background-image:none">
@@ -211,6 +221,12 @@
             </div>
         </div>          
     </div>
+    <div class="toast">
+	        <div class="toast-con clearfix">
+	            <div class="close-toast fr"></div>
+	            <p class="tc mt25 f18" style="color:#ff6715">修改成功！</p>
+	        </div> 
+		</div>
 </div>
 	</body>
 </html>
