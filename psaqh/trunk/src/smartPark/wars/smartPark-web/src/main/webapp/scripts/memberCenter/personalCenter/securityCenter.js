@@ -1,211 +1,143 @@
-   //<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
-	var pageSize=10;//默认每页10条
-	var pageCount=1;//页数
-	var currentIndex = 1;//第几页
-	//var serviceURL = baseUrl+'propertyservicemanagerBxManager/getPagerBxs.json';
-	$(function () {	
-		//分页页码显示
-	    $.ajax({
-			url:baseUrl+'propertyservicemanagerBxManager/getTotalCount.json', 
-			beforeSend: function(){
-				//开始显示dataLoading样式
-				$.showBox.DataLoading();
-			},
-			success:function(results){	
-				var totalCount=results.records[0].totalCount;				
-				pageCount = Math.ceil(totalCount / pageSize);//页数	
-				refreshData(1,pageSize);
-				$(".tcdPageCode").empty();
-				if(totalCount>0){
-					$(".tcdPageCode").createPage({
-						pageCount:pageCount,
-						current:1,
-						backFn:function(p){
-							currentIndex = p;
-							this.pageCount=pageCount;
-							refreshData(p,pageSize);
-						}
-				 	});	
-				}
-				//关闭dataLoading样式
-				$.showBox.CloseDataLoading();
-			}
-		}); 			
-	});		
-	//分页列表
-	function refreshData(pageIndex,pageSize){
-		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'orderBy=desc:applyTime'];
-		$.ajax({
-			url:baseUrl+'propertyservicemanagerBxManager/getPagerBxs.json',
-			data:params.join('&'),
-			success:function(results){
-				if(results&&results.records){
-					 _parseRecords(results.records);
-				}
-			}
-		});
-	}
-	//拼接列表
-	function _parseRecords(record){
-		var html="";
-		var applyTime="";
-		if(record.length>0){
-			for(var i=0;i<record.length;i++){
-		    	var bxStatus='';
-				var buttonHtml='';
-				if(record[i].bxStatus=='00'){
-			    	bxStatus='待受理';
-					buttonHtml="<a href='javascript:;' class='ac-show' onclick='javascript:cancel(this)'>取消</a>";
-				}else if(record[i].bxStatus=='01'){
-					bxStatus='已受理';
-				}else if(record[i].bxStatus=='02'){
-					bxStatus='待接单';
-				}else if(record[i].bxStatus=='03'){
-					bxStatus='已派工';
-				}else if(record[i].bxStatus=='04'){
-					bxStatus='已完工';
-				}else if(record[i].bxStatus=='05'){
-					bxStatus='已定价';
-					buttonHtml="<td><a href='javascript:;'>付款</a></td>";
-				}else if(record[i].bxStatus=='06'){
-					bxStatus='已付款';
-				}else if(record[i].bxStatus=='07'){
-					bxStatus='已完成';
-				}else if(record[i].bxStatus=='08'){
-					bxStatus='已取消';
-				}
-				if(record[i].applyTime){
-					applyTime = record[i].applyTime.substring(0,10);
-					//applyTime = record[i].applyTime.substring(0,4)+"年"+record[i].applyTime.substring(6,7)+"月"+record[i].applyTime.substring(9,10)+"日"+"&nbsp&nbsp"+record[i].applyTime.substring(12,13)+"点";				
-				}                      
-			    html += "<tr id='"+record[i].bxId+"' class='aaa'>"+
-							"<td><a href='javascript:;' onclick='viewDetail(\""+record[i].bxId+"\")' class='ac-show'>"+record[i].bxCode+"</a></td>"+
-							"<td>"+applyTime+"</td>"+
-				   			"<td>"+bxStatus+"</td>"+
-							"<td>"+record[i].member.memberName+"</td>"+
-							"<td>"+record[i].member.memberPhoneNumber+"</td>"+
-							"<td>"+buttonHtml+"</td>"
-						"</tr>";			
-			}
-		    $(".knowledge").html(html);
-			}else{
-				var	html1 = '<tr>'
-					html1 += '	<td colspan="6">暂无记录</td>'
-					html1 += '</tr>'
-						$(".knowledge").html(html1);	
-		}	
-	};		
-	//确认取消弹窗
-    function cancel(obj){
-		var me=obj.parentNode.parentNode;
-		var bxCode=me.childNodes[0].childNodes[0].innerText; 
-		$(".bxCode").html(bxCode);
-		$(".bxCode")[0].setAttribute("id",me.id);
-		$(".bg-tanc").show();
-	};
-	
-	//<!-- 取消报修订单 -->
-	function cancel(obj){
-		var me=obj.parentNode.parentNode;//找到父节点	
-		var bxCode=me.childNodes[0].childNodes[0].innerText; //获取订单号
-		$(".moverec").html(bxCode);//给弹窗插入订单号
-		$(".moverec")[0].setAttribute("id",me.id);//给弹窗设置id
-		$(".bg-tanc.m1").show();
-	};
-	//点击确认取消报修预约
-	$(function(){
-		$(".hhf-submit.confirm").click(function(){	
-		    $(".bg-tanc.m1").hide();
-			var id=$(".moverec")[0].getAttribute("id");				
-			$.ajax({
-				url:baseUrl+'propertyservicemanagerBxManager/updateBxforpage.json',
-				data:'bxId='+id,
-				success:function(result){
-					if(result&&result.record){
-						 if(result.record.bxStatus=='08'){								
-							  close("取消成功")																
-					     }											
-					}
-				}
+		$(function(){
+			//修改密码
+			$(".changePassword").click(function(){
+				$("#oldmsg").empty();
+				$("#newmsg").empty();
+				$("#conmsg").empty();
+				var oldPassword=$("#oldPassword").val();
+				var password=$("#password").val();
+				var confirmPassword=$("#confirmPassword").val();
+				var params=['password='+password,'confirmPassword='+confirmPassword,'oldPassword='+oldPassword];
+				if(!oldPassword){
+					$("#oldmsg").html("原密码为空");
+					return false;
+				}	
+				if(!password){
+					$("#newmsg").html("新密码为空");
+					return false;
+				}	
+				if(!confirmPassword){
+					$("#conmsg").html("确认密码为空");
+					return false;
+				}	
+				if(oldPassword.length<19 && oldPassword.length>5){
+					if(password.length<19 && password.length>5){
+						if(confirmPassword.length<19 && confirmPassword.length>5){
+								if(confirmPassword==password){
+									$.youi.ajaxUtils.ajax({
+										url:baseUrl+'memberInformationManager/doModifyPassword.json',
+										data:params.join('&'),
+										success:function(result){
+											if(result&&result.record){
+												if("修改成功"==result.record.msg){
+													close("密码修改成功！");
+												}else if("新旧密码不能一样"==result.record.msg){
+													$("#newmsg").text(result.record.msg);
+													$("#conmsg").text(result.record.msg);
+												}else if("请输入正确的旧密码！"==result.record.msg){
+													$("#oldmsg").text(result.record.msg);
+												}
+											}
+										}
+								    });	
+								}else{
+									$("#newmsg").text("两次输入的密码不一致");
+									$("#conmsg").text("两次输入的密码不一致");
+								}
+						}else{
+							$("#newmsg").text("新密码长度为6到18个字符");
+						}	
+					}else{
+						$("#newmsg").text("新密码长度为6到18个字符");
+					}					
+				}else{
+					$("#oldmsg").text("原密码长度为6到18个字符");
+				}																	
 			});
 		});
-	});	
-	//根据订单号   报修时间查询
-	$('.hhf-submit.f14.fr.query').click(function(){	
-		var bxCode=$("#bxCode").val();
-		var startTime=$("#startTime").val(); 
-		var endTime=$("#endTime").val(); 			
-		var params = ['bxCode='+bxCode,'operator:bxCode=LIKE','startTime='+startTime,'endTime='+endTime,'orderBy=desc:applyTime'];
-		$.ajax({
-			url:baseUrl+'propertyservicemanagerBxManager/getTotalCount.json',
-			data:params.join('&'),
-			beforeSend: function(){
-				//开始显示dataLoading样式
-				$.showBox.DataLoading();
-			},
-			success:function(results){	
-				var totalCount=results.records[0].totalCount;
-				pageCount = Math.ceil(totalCount / pageSize);//页数					
-				refreshData_query(1,pageSize);
-				$(".tcdPageCode").empty();
-				if(totalCount>0){
-					$(".tcdPageCode").createPage({
-					    pageCount:pageCount,
-					    current:1,
-					    backFn:function(p){
-					    	currentIndex = p;
-					       this.pageCount=pageCount;
-					       refreshData_query(p,pageSize);
-					    }
-					});
-				}
-				//关闭dataLoading样式
-				$.showBox.CloseDataLoading();
-              }
-        }); 			
-    });	
-	//根据订单号查询 分页列表
-    function refreshData_query(pageIndex,pageSize){
-		 var bxCode=$("#bxCode").val();	
-		 var startTime=$("#startTime").val(); 
-		 var endTime=$("#endTime").val(); 
-		 var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'bxCode='+bxCode,'operator:bxCode=LIKE','startTime='+startTime,'endTime='+endTime,'orderBy=desc:createTime'];
-		 $.ajax({
-				url:baseUrl+'propertyservicemanagerBxManager/getPagerBxs.json',
+		//弹窗
+		function close(content){		        
+		    $(".tc.mt25.f18").empty() ;
+		    $(".tc.mt25.f18").append(content) ;
+		    $(".toast").show();		      		        		       				
+			setTimeout(function(){$(".toast").hide(); },2000);
+			setTimeout(function(){showphone(); },2000);					
+	    }
+		//给新手机号发送短信验证码
+		function getCaptcha(){
+			$("#phonetest").empty();
+			var newPhone=$("#memberPhoneNumber").val();		
+			var params =['newPhone='+newPhone];
+			var isMobile=/^(?:13\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;//手机号的格式
+			if(!newPhone){
+				 $("#phonetest").html("手机号为空");
+				return false;
+			}			
+			 if(!isMobile.test(newPhone)){
+				 $("#phonetest").html("手机号输入错误");
+				return false;
+			}			
+			$.youi.ajaxUtils.ajax({
+				url:cenUrl +"web/loginUser/sendnewcaptcha.json",
 				data:params.join('&'),
-				success:function(results){
-					if(results&&results.records){
-						 _parseRecords(results.records);
-					}
-		        }
+				success:function(result){
+					if(result && result.record){
+						var capt = result.record.html;
+						if(!/^\d{6}$/.test(capt)){
+							enableSmsButton(3,capt,'重新获取');						
+						}else{
+							enableSmsButton(60,'发送成功','重新获取');						
+						}
+						$('#sendnewcaptcha').attr('onclick','volid();');
+					}					
+				}			
+			});
+		}
+		//换手机号验证
+		$(".changePhoneNumber").click(function(){	
+			var memberId=$("#memberId").val();
+			var newcaptcha=$("#newcaptcha").val();
+			var memberPhoneNumber=$("#memberPhoneNumber").val();
+			var params =['memberId='+memberId,'newcaptcha='+newcaptcha,'newPhone='+memberPhoneNumber];
+			var isMobile=/^(?:13\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;//手机号的格式
+			
+			$.youi.ajaxUtils.ajax({
+				url:cenUrl +"web/loginUser/changePhone.json",
+				data:params.join('&'),
+				success:function(result){
+					if(result && result.record){
+						var res = result.record.html;
+						close(res);
+					}					
+				}	
+			});				
 		});
-	}
-	//日历控件
-	$(function(){
-		laydate({
-		    elem: '#startTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
-		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+		//显示原手机号   加载用户id
+		$(function(){					
+			showphone();	
 		});
-	});
-	$(function(){
-		laydate({
-		    elem: '#endTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
-		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
-		});
-	});
-    function close(content){		        
-	    $(".tc.mt25.f18").empty() ;
-	    $(".tc.mt25.f18").append(content) ;
-	    $(".toast").show();		      		        		       				
-		setTimeout(function(){$(".toast").hide(); },2000);
-		refreshData(currentIndex,pageSize);
-    }
-	//跳转到详情页面
-    function viewDetail(bxId){			
-		window.location.href=cenUrl+"member/memberCenter/propertyService/propertyManageBxDetail.html?bxId="+bxId;
-	};
-	
-	    //点击跳转到投诉页面
-	$("#a1").click(function(){			
-		location.href = proUrl + "yqfw/yq6.html" ;
-	});	
+		function showphone(){
+			$.youi.ajaxUtils.ajax({
+				url:baseUrl+'memberInformationManager/getMember.json',				
+				success:function(result){
+					if(result && result.record){
+						var res = result.record;
+						$("#memberId").val(res.memberId);
+						$("#oldmemberPhoneNumber").val(res.memberPhoneNumber);
+					}					
+				}	
+			});
+		}
+		//验证码间隔60秒才能发送
+		function enableSmsButton(sec,processText,enableText){
+			$("#sendnewcaptcha").html(processText + '(' + sec + ')');
+			if(sec <= 0){
+				$('#sendnewcaptcha').html(enableText);
+				$('#sendnewcaptcha').attr('onclick','getCaptcha();');
+			}
+			else{
+				setTimeout(function(){
+					enableSmsButton(sec - 1,processText,enableText);
+				},1000);
+			}
+		}
