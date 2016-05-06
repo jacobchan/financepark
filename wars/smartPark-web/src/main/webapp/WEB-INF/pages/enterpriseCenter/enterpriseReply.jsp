@@ -19,42 +19,91 @@
 					success:function(result){
 						if(result&&result.record){
 							$("#companyId").val(result.record.companyId);
+							//根据企业id获取产业链信息
+							 getletter(result.record.companyId);
 						}
 					}
 				});
-			  	//根据企业评论
+			  	
+			});
+			function getletter(id){
+				var pageSize=2;
+				var pageCount=1;	
+				var commentEnterprise = id;
+				//根据企业评论
 		    	$.youi.ajaxUtils.ajax({
-		    		url : baseUrl+"lettermanagerCommentManager/getLettermanagerComments.json",
-		    		data : ['commentEnterprise='+$("#companyId").val()].join('&'),
+		    		url : baseUrl+"lettermanagerCommentManager/getPagerLettermanagerComments.json",
+		    		data : ['commentEnterprise='+commentEnterprise].join('&'),
 		    		success : function(results) {
-		    			var comment = '';
-		    			if (results && results.records && results.records.length>0) {
-		    				var records = results.records;
-		    				$("#commentDiv").empty();
-		    				for(var i=0; i<records.length; i++){
-		    					comment+='<div class="fl" style="width: 80%">'+
-									'<div class="pinglun_ren">'+
-										'<table>'+
-											'<tr>'+
-												'<td>'+
-													'<img src="../styles/images/qiye/qiye/sl-i2.png" width="30" height="30">'+
-												'</td>'+
-												'<td>'+
-													'<span>'+records[i].member.memberName+'：</span>'+
-												'</td>'+
-											'</tr>'+
-										'</table>'+
-									'</div>'+
-									'<div class="pinglun_main">'+records[i].commentContent+'</div>'+
-									'<div class="pinglun_time">'+records[i].commentTime+'</div>'+
-								'</div>'+
-								'<a class="a-c-o fr reply_anniu" href="javascript:;">回复</a>';
-		    				}
-		    				$("#commentDiv").append(comment);
+		    			
+		    			if (results && results.records) {
+		    				if(results.records.length>0){
+								pageCount=Math.ceil(results.totalCount/pageSize);
+								 refreshData(1,pageSize);
+									$(".tcdPageCode").createPage({
+									    pageCount:pageCount,
+									    current:1,
+									    backFn:function(p){
+									       this.pageCount=pageCount;
+									        refreshData(p,pageSize);
+									    }
+									});
+									$(".tcdPageCode").show();
+							}else{
+								$(".tcdPageCode").hide();
+								$('.commentDiv').empty();
+								$('.commentDiv').append("<p><h4 style='text-align: center;'>暂无评论消息</h4></p>");
+							}
 		    			}
 		    		}
 		    	});
-			});
+				
+		    	function refreshData(pageIndex,pageSize){
+					var params = {'pager:pageIndex':pageIndex,'pager:pageSize':pageSize,'commentEnterprise':commentEnterprise};
+					$.youi.ajaxUtils.ajax({
+						url:baseUrl+"lettermanagerCommentManager/getPagerLettermanagerComments.json",
+						data:params,
+						success:function(results){
+							if(results&&results.records){
+								if(results.records.length>0){
+									commRecords(results.records);
+								}
+							}
+						}
+					});
+				}
+			}
+			
+			function commRecords(records){
+				var comment = "";
+				$("#commentDiv").empty();
+				for(var i=0; i<records.length; i++){
+					var img ="";
+					if(records[i].member.memberHeadPortrait!=null&&records[i].member.memberHeadPortrait!=''){
+						img = ""+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+records[i].member.memberHeadPortrait+"&method=show";
+					}else{
+						img = ""+cenUrl+"styles/images/qiye/default.jpg";
+					}
+					comment+='<div class="fl" style="width: 80%">'+
+						'<div class="pinglun_ren">'+
+							'<table>'+
+								'<tr>'+
+									'<td>'+
+										'<img src='+img+' width="40" height="40">'+
+									'</td>'+
+									'<td>'+
+										'<span>'+records[i].member.memberName+'：</span>'+
+									'</td>'+
+								'</tr>'+
+							'</table>'+
+						'</div>'+
+						'<div class="pinglun_main">'+records[i].commentContent+'</div>'+
+						'<div class="pinglun_time">'+records[i].commentTime+'</div>'+
+					'</div>'+
+					'<a class="a-c-o fr reply_anniu" href="javascript:;">回复</a>';
+				}
+				$("#commentDiv").append(comment);
+			}
 		</script>
 	</head>
 	<body class="page-header-fixed" style="background-image: none">
@@ -74,7 +123,7 @@
 							<div id="commentDiv" class="comment clearfix pr">
 								
 							</div>
-							<div class="reply mt30 clearfix">
+						<!-- 	<div class="reply mt30 clearfix">
 								<div class="pinglun_ren">
 									<table>
 										<tr>
@@ -95,14 +144,12 @@
 								</div>
 								<span class="cc">2016年1月18日 10：02</span>
 							</div>
-							<div class="fr page-list-a clearfix lh30 mt20 f12">
-								<span class="mr20 fl">共有 0 条，每页显示： 50 条</span> <a href="">首</a> <a
-									href=""><i class="fa fa-angle-left"></i></a> <a>1</a> <a href=""><i
-									class="fa fa-angle-right"></i></a> <a href="">末</a> <input
-									class="bd-input fl ml10 mr10" style="width: 40px;" type="text">
-								<a href="">Go</a>
-							</div>
+						
+						</div> -->
+						<div class="tcdPageCode fr">
+					
 						</div>
+                        
 					</div>
 				</div>
 			</div>
