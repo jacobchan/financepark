@@ -1,41 +1,83 @@
 $(function(){
-			$.ajax({
-				url:baseUrl+'activityApplyManager/getParticipateActivityList.json',
+	//初始化我参加活动页面
+	$.ajax({
+		url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
+		success:function(result){
+			if(result&&result.record){
+				//获取当前登录用户
+				initPage(result.record.memberId);
+			}
+		}
+	});
+});
+
+		function initPage(id){
+			var memberId = id;
+			var pageSize=8;
+			var pageCount=1;	
+			$.youi.ajaxUtils.ajax({
+				url:baseUrl+'activityApplylistManager/getPagerActivityApplylists.json',
+				data:{'member.memberId':memberId},
 				success:function(result){
-					console.log(result.records);
 					if(result&&result.records){
 						if(result.records.length>0){
-							_parseRecords(result.records);
-							_assignment_applyStatus();
+							pageCount=Math.ceil(result.totalCount/pageSize);
+							 refreshData(1,pageSize);
+								$(".tcdPageCode").createPage({
+								    pageCount:pageCount,
+								    current:1,
+								    backFn:function(p){
+								       this.pageCount=pageCount;
+								        refreshData(p,pageSize);
+								    }
+								});
+								$(".tcdPageCode").show();
 						}else{
-							 $(".clearfix .czh-knowledge").append("<p><h3>未找到相关记录!</h3></p>");
-							 $(".fr.page-list-a").empty();
+								$(".tcdPageCode").hide();
+								$(".clearfix .czh-knowledge").append("<p><h3>未找到相关记录!</h3></p>");
+								$(".fr.page-list-a").empty();
 						}
 					}
 				}
 			});
-		});
+			
+			function refreshData(pageIndex,pageSize){
+				var params = {'pager:pageIndex':pageIndex,'pager:pageSize':pageSize,'member.memberId':memberId};
+				$.youi.ajaxUtils.ajax({
+					url:baseUrl+'activityApplylistManager/getPagerActivityApplylists.json',
+					data:params,
+					success:function(results){
+						if(results&&results.records){
+							if(results.records.length>0){
+								_parseRecords(results.records);
+								_assignment_applyStatus();
+							}
+						}
+					}
+				});
+			}
+		}
 		//拼接活动列表
 		function _parseRecords(record){
 			for(var i=0;i<record.length;i++){
-				var star = record[i].startTime;
-				var end = record[i].endTime;
+				var star = record[i].activityApply.startTime;
+				var end = record[i].activityApply.endTime;
 				var startime = getmonth(star);
 				var endtime = getmonth(end);
-				var html="<a href='javascript:;' id='"+record[i].applyId+"' onclick='javascript:gotoDetails(this)'>"+
+				var html="<a href='javascript:;' id='"+record[i].activityApply.applyId+"' onclick='javascript:gotoDetails(this)'>"+
 						 "<div class='czh-box'>"+
-						 "<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityImage+"&method=show' style='width: 220px; height: 123px;'>"+
+						 "<img src='"+cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].activityApply.activityImage+"&method=show' style='width: 220px; height: 123px;'>"+
                 		 "<div class='czh-group' style='border-bottom:1px solid #ecebeb'>"+
-                    	 "<h4>"+record[i].applyTitle+"</h4>"+
-                    	 "<span>活动发起人："+record[i].memberId.memberName+"</span><br/>"+
+                    	 "<h4>"+record[i].activityApply.applyTitle+"</h4>"+
+                    	 "<span>活动发起人："+record[i].activityApply.memberId.memberName+"</span><br/>"+
                     	 "<span>举办时间："+startime+" - "+endtime+"</span>"+
                 		 "</div>"+
                 		 "<div class='czh-group'>"+
                     	 "<font class='cg-soan-btn' style='background:#FF6715'>相关文档</font>"+
-                    	 "<span class='fr' style='color:#FF6715'>"+record[i].applyStatus+"</span>"+
+                    	 "<span class='fr' style='color:#FF6715'>"+record[i].activityApply.applyStatus+"</span>"+
                 		 "</div>"+
             			 "</div>"+
-            			 "<a>";
+            			 "</a>";
 				 $(".clearfix .czh-knowledge").append(html);
 	
 			}
