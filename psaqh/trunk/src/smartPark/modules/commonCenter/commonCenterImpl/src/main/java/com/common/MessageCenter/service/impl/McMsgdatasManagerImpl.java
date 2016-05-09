@@ -12,8 +12,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.Map.Entry;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +34,7 @@ import com.gsoft.common.util.SMSUtil;
 import com.gsoft.entity.MsgParam;
 import com.gsoft.entity.ReferenceMap;
 import com.gsoft.entity.TempDemo;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -494,5 +495,56 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 		}
 		return -1;
 	}
-
+	/**
+   	 * 前台个人中心  获取已完成订单的totalCount    chenye
+   	 * @param conditions
+   	 * @return
+   	 * @throws BusException
+   	 */
+   /*  public List<Record> getTotalCount(
+   			@ConditionCollection(domainClazz=McMsgdatas.class) Collection<Condition> conditions,
+   			@ServiceParam(name="userId",pubProperty="userId") String userId)  throws BusException{   	
+		MemberInformation memberInformation = memberInformationManager.getMemberInformation(userId);
+		String memberPhoneNumber = memberInformation.getMemberPhoneNumber();
+		conditions.add(ConditionUtils.getCondition("receive",Condition.EQUALS, memberPhoneNumber));
+   		List<Record> recordList=new ArrayList<Record>();
+		List<McMsgdatas> List = this.getMcMsgdatass(conditions, null);
+   		Record record = new Record();
+   		record.put("totalCount", List.size());
+   		recordList.add(record);
+   		return recordList;
+    }*/
+	@EsbServiceMapping
+     public List<Record> getTotalCount(
+    			@ConditionCollection(domainClazz=McMsgdatas.class) Collection<Condition> conditions,
+    			@ServiceParam(name="userId",pubProperty="userId") String userId)  throws BusException{
+    	MemberInformation memberInformation = memberInformationManager.getMemberInformation(userId);
+ 		String memberPhoneNumber = memberInformation.getMemberPhoneNumber();
+ 		conditions.add(ConditionUtils.getCondition("receive",Condition.EQUALS, memberPhoneNumber));
+    	List<Record> recordList=new ArrayList<Record>();   		
+     	List<McMsgdatas> List = this.getMcMsgdatass(conditions, null);
+    	Record record = new Record();
+    	record.put("totalCount", List.size());
+    		recordList.add(record);
+    		return recordList;
+    	} 
+    /**
+	 * 前台个人中心   根据当前用户分页查询    chenye
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	@EsbServiceMapping
+	public PagerRecords getPager(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=McMsgdatas.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders,
+			@ServiceParam(name="userId",pubProperty="userId") String userId)throws BusException {
+		MemberInformation m=memberInformationManager.getMember(userId);
+		String memberPhoneNumber=m.getMemberPhoneNumber();
+		conditions.add(ConditionUtils.getCondition("receive", Condition.EQUALS, memberPhoneNumber));
+		PagerRecords pagerRecords = mcMsgdatasDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}   
 }
