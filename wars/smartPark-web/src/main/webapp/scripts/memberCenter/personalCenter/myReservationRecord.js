@@ -73,7 +73,7 @@ var pageSize=10;
 				var visiteTime=record[i].visiteTime;
 				visiteTime=visiteTime?visiteTime:"";
 				html+="<tr id='"+id+"'>"+
-					 "<td><a href=''>"+record[i].recordCode+"</a></td>"+ 
+					 "<td>"+record[i].recordCode+"</td>"+ 
 					"<td>"+record[i].visiteDate+"&nbsp;"+visiteTime+"</td>"+
 					"<td>"+record[i].recordCommdityName+"</td>"+				
 					"<td>"+recordStatus+"</td>"+
