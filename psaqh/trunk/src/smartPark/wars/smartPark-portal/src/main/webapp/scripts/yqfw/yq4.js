@@ -6,7 +6,7 @@ $(function(){
 			    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 			});
 		})
-		$.youi.ajaxUtils.ajax({
+$.youi.ajaxUtils.ajax({
 		url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
 		jsonp:'data:jsonp',
 		dataType:'jsonp',
@@ -17,8 +17,7 @@ $(function(){
 			}
 		}
 	});
-	</script>
-<script>
+	
 $(function(){
 	$(".hhf-submit").click(function(){
 		/* var obj={
@@ -114,8 +113,7 @@ $(function(){
 	    return true
 	}
 })
-</script>
- <script type="text/javascript">
+
 		//toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
 		 var pltime,timer;
 		 function closeTanc(){
