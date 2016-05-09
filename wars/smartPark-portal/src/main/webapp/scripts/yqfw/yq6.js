@@ -8,9 +8,7 @@ $.youi.ajaxUtils.ajax({
 			}
 		}
 	});
-	</script>
 	
-	<script type="text/javascript">
 		$(function(){
 			$(".hhf-submit").click(function(){
 				/* var obj={
@@ -86,9 +84,7 @@ $.youi.ajaxUtils.ajax({
 				
 			});
 		});
-	</script>
-	<!-- 拼接报修类型 -->
-	<script type="text/javascript">
+	
 		$(function(){
 				$.youi.ajaxUtils.ajax({
 					url:baseUrl +"propertyservicemanagerBxManager/getBxcodemapforpage.json", 
@@ -115,10 +111,7 @@ $.youi.ajaxUtils.ajax({
 				$(".tct-select").append(html);
 				activeclick();
 		}
-	</script>
 	
-	<!-- 拼接报修地址 -->
-	<script type="text/javascript">
 		$(function(){
 				$.youi.ajaxUtils.ajax({
 					url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
@@ -146,8 +139,7 @@ $.youi.ajaxUtils.ajax({
 			$(".sel-add").append(html);
 			address();
 	}
-	</script>
-	<script type="text/javascript">
+	
 		function activeclick(){
 			$(".ic-select").click(function(e){
 				$(".select-nav").hide();
@@ -174,8 +166,7 @@ $.youi.ajaxUtils.ajax({
 				}
 			});
 		};
-	</script>
-	<script type="text/javascript">
+	
 		//toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
 		 var pltime,timer;
 		 function closeTanc(){
