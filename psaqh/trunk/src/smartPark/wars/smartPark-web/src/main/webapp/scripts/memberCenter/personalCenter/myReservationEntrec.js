@@ -95,8 +95,7 @@
 					buttonHtml="<td id="+record[i].enterrecStatus+"></td>";
 				}
 				html+="<tr id='"+record[i].entrecId+"'>"+
-					 "<td><a href=''>"+record[i].enterrecCode+"</a></td>"+ 
-					 /*"<td>"+record[i].enterrecCode+"</td>"+*/
+					 "<td>"+record[i].enterrecCode+"</td>"+ 
 					"<td>"+record[i].propertyservicemanagerEntering.enteringDate+"&nbsp;"+enteringTime+"</td>"+
 					"<td>"+enteringType+"</td>"+
 					"<td>"+recordStatus+"</td>"+
