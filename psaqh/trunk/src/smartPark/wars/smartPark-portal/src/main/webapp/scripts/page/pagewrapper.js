@@ -27,7 +27,7 @@ $(function(){
 		});	
 	});
 		
-	$('#youi_page_right').load($.youi.serverConfig.contextPath+'/common/list_right.html');
+	$('#youi_page_ri').load($.youi.serverConfig.contextPath+'/common/list_right.html');
 	$('#youi_page_rg').load($.youi.serverConfig.contextPath+'/common/news_yqfw.html');
 	$('#youi_page_rgt').load($.youi.serverConfig.contextPath+'/common/news_right.html');
 	$('#youi_page_footer').load($.youi.serverConfig.contextPath+'/common/footer.html');
