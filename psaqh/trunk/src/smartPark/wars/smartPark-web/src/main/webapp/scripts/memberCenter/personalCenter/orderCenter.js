@@ -59,7 +59,7 @@
 			}else if(genreCode == "0507"){//威客服务
 				window.location.href=cenUrl+"member/memberCenter/personalCenter/wkServiceOrderDetails.html?userorderCode="+userorderCode;
 			}else if(genreCode == "0508"){//IT服务
-				window.location.href=cenUrl+"member/memberCenter/personalCenter/ITServiceOrderDetails.jsp.html?userorderCode="+userorderCode;
+				window.location.href=cenUrl+"member/memberCenter/personalCenter/ITServiceOrderDetails.html?userorderCode="+userorderCode;
 			}/* else if(genreCode == "0401"){//创立方
 				window.location.href=cenUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderCode="+userorderCode;
 			}else if(genreCode == "0601"){//物业报修
