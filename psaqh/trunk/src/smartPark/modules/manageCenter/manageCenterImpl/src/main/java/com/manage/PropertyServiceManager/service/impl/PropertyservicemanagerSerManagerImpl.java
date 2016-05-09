@@ -5,13 +5,16 @@ package com.manage.PropertyServiceManager.service.impl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Collection;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 //import com.gsoft.framework.core.orm.ConditionFactory;
@@ -29,6 +32,8 @@ import com.manage.PropertyServiceManager.dao.PropertyservicemanagerBxDao;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerSerDao;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerTsDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerSerManager;
+import com.manage.PropertyServiceManager.service.PropertyservicemanagerTsManager;
+import com.mysql.fabric.xmlrpc.base.Array;
 
 @Service("propertyservicemanagerSerManager")
 @Transactional
@@ -39,6 +44,8 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
 	private PropertyservicemanagerTsDao propertyservicemanagerTsDao;
 	@Autowired
 	private PropertyservicemanagerBxDao propertyservicemanagerBxDao;
+	@Autowired
+	private PropertyservicemanagerTsManager propertyservicemanagerTsManager;
     /**
      * 查询列表
      */
@@ -217,6 +224,34 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
 		
 	}
     
+    /**
+	 *	APP--查询费用维修清单
+	 * @param 报修单id
+	 * @return
+	 * @throws BusException
+	 */
+    @EsbServiceMapping
+    public List<Map<String, Object>> getGroupSer (@ServiceParam(name="bxId") String id) throws BusException{
+    	List<Map<String, Object>> retList = new ArrayList<Map<String, Object>>();
+    	Collection<Condition> condition = new ArrayList<Condition>();
+    	condition.add(ConditionUtils.getCondition("propertyservicemanagerBx.bxId", Condition.EQUALS, id));
+    	List<PropertyservicemanagerTs> tslist =  propertyservicemanagerTsManager.getPropertyservicemanagerTss(condition, null);
+    	if(tslist.size()>0){
+    		for(PropertyservicemanagerTs ts : tslist){
+    			Map<String, Object> urlVariables = new HashMap<String, Object>();
+    			List<Record> re = new ArrayList<Record>();
+    			Record rd = new Record(); 
+    			re = propertyservicemanagerSerDao.querySerList(ts.getTsId());
+    			rd.put("TsName", ts.getTsName());
+    			rd.put("TsTelephone", ts.getTsTelephone());
+    			urlVariables.put("serviceMan", rd);
+    			urlVariables.put("material", re);
+    			retList.add(urlVariables);
+    		}
+    		return retList;
+    	}else{
+    		return null;
+    	}
+    }
     
-
 }
