@@ -1,4 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="../scripts/common/news_right.js"></script>
 		<div class="yqfw-news">
 			<div class="yn-bd">最新公告 <a href="../zscenter/zs4.html?code=0102" class="c-333 f12 fr">更多》</a></div>
 			<div class="clearfix tc undis" id="tp3">
@@ -22,47 +23,3 @@
 				</li> -->
 			</ul>
 		</div>
-		<script type="text/javascript">
-			$(function(){
-				$("#tp3").removeClass("undis") ;
-				var params=["issueTypeCode=0102"];
-				$.youi.ajaxUtils.ajax({
-					url:baseUrl +"nmIssuenewsManager/getNmIssuenewsByIssueTypeCode.json",//得到新闻发布类型
-					data:params.join('&'),
-					jsonp:'data:jsonp',
-					dataType:'jsonp',
-					success:function(result){
-						if(result&&result.records){
-							$("#tp3").addClass("undis") ;
-							appendHtml_1(result.records)
-						}
-					}
-				});
-			});
-			function appendHtml_1(records){
-				var len = records.length ;
-				if(len == 0){
-					$("#zxgg_1").append("<li>暂时还没有任何公告哦！</li>") ;
-				}else if(len > 5){
-					$("#zxgg_1").empty() ;
-					len == 5 ;
-				}
-				var html = "" ;
-				for(var i=0;i<len;i++){
-					var news = records[i] ;
-					var title = news.policyCaption;
-					var id = news.policyId ;
-					if(title.length > 10){
-						title.substring(0,10) ;
-						title += "..." ;
-					}
-					html += "<li>"+
-								"<p>"+
-									"<a href='../zscenter/zs7.html?policyId="+id+"' class='c-333'>"+title+"</a>"+ 
-									"<span class='fr f12 c-b1'>"+news.policyIssueDate+"</span>"+
-								"</p>"+
-							"</li>" ;
-				}
-				$("#zxgg_1").append(html) ;
-			}
-</script>
