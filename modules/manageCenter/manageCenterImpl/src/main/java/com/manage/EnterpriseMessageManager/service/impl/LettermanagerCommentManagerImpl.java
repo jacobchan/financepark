@@ -17,6 +17,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.EnterpriseMessageManager.entity.LettermanagerComment;
 import com.manage.EnterpriseMessageManager.dao.LettermanagerCommentDao;
@@ -64,15 +66,25 @@ public class LettermanagerCommentManagerImpl extends BaseManagerImpl implements 
      */
     @EsbServiceMapping(pubConditions = {@PubCondition(property = "member.memberId", pubProperty = "userId")})
     public LettermanagerComment saveLettermanagerComment(LettermanagerComment o) throws BusException{
-//    	String lettermanagerCommentId = o.getLettermanagerCommentId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(lettermanagerCommentId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	o.setCommentTime(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
-    	return lettermanagerCommentDao.save(o);
+   	String lettermanagerCommentId = o.getCommentId();
+   	boolean isUpdate = StringUtils.isNotEmpty(lettermanagerCommentId);
+   	LettermanagerComment lett = null;
+   	if(isUpdate){//修改
+   			lett = lettermanagerCommentDao.get(o.getCommentId());
+   			lett.setCommentReplyContent(o.getCommentReplyContent());
+   			lett.setCommentReplyTime(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
+   			lett.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+   			lett.setUpdateUser(o.getMember().getMemberId());
+    	}else{//新增
+    		lett = o;
+    		lett.setCommentTime(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
+    		lett.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		lett.setCreateUser(o.getMember().getMemberId());
+    		lett.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+   			lett.setUpdateUser(o.getMember().getMemberId());
+   	}
+
+    	return lettermanagerCommentDao.save(lett);
     }
 
     /**
