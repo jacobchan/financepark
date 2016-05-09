@@ -48,9 +48,9 @@
 						//alert(record.bxAmount);
 						$(".moverec").html(record.bxCode);//给弹窗插入订单号
 						$('#applyTime').html(record.applyTime.substring(0,10));
-						$('#bxComp').html("企业名称："+record.bxComp);				
-						$('#bxRemark').html("报修内容："+record.bxRemark);						
-						if(!record.bxAddress==null){
+						//$('#bxComp').html("企业名称："+record.bxComp);				
+						$('#bxRemark').html("报修内容："+record.bxRemark);
+						if(record.bxAddress){
 							bxAddress=record.bxAddress;
 						}
 						$('#bxAddress').html("维修地址："+bxAddress);
