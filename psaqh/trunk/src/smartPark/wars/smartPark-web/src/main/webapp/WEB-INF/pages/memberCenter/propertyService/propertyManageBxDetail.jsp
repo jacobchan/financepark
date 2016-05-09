@@ -31,7 +31,7 @@
 									<tr>
 										
 										<td>
-											<p id="bxComp">企业名称:</p>
+											<!-- <p id="bxComp">企业名称:</p> -->
 											<p id="bxAddress">地址：</p>
 											<p id="memberName">保修人：</p>											
 										</td>
