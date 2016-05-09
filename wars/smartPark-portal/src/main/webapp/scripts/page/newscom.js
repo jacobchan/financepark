@@ -24,6 +24,6 @@ $(function(){
 			}
 		});
 	});
-	$('#youi_page_ri').load($.youi.serverConfig.contextPath+'/common/news_ri.html');
+	$('#youi_page_ri').load($.youi.serverConfig.contextPath+'/common/news_right.html');
 	$('#youi_page_footer').load($.youi.serverConfig.contextPath+'/common/footer.html');
 });
