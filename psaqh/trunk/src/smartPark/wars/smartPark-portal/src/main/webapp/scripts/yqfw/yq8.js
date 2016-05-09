@@ -1,4 +1,12 @@
-	$.youi.ajaxUtils.ajax({
+$(function(){
+			laydate({
+			    elem: '#timer', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+			    format: 'YYYY-MM-DD hh:mm:ss', //日期格式
+		        istime: true, //是否开启时间选择
+			    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+			});
+		})
+		$.youi.ajaxUtils.ajax({
 			url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
 			jsonp:'data:jsonp',
 			dataType:'jsonp',
@@ -10,6 +18,7 @@
 				}
 			}
 		});
+	
 		$(function(){
 			$(".hhf-submit").click(function(){
 				/* var obj={
@@ -188,4 +197,4 @@
 			 //跳转首页
 			 function jumpIndex(){
 			 	window.location.href=cenUrl;
-			 }
+			 }	 
