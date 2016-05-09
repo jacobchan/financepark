@@ -24,6 +24,7 @@ import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.util.Assert;
 import com.gsoft.framework.util.ConditionUtils;
+import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSer;
@@ -208,6 +209,7 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
 		    		//保存维修单
 		    		for(PropertyservicemanagerSer allser : listSer){
 						allser.setPropertyservicemanagerTs(propertyservicemanagerTsed);
+						allser.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 						propertyservicemanagerSerDao.save(allser);
 					}
     			}else if(bx.getBxStatus().equals("05")){
