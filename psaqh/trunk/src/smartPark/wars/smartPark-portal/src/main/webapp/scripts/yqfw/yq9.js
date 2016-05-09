@@ -9,9 +9,7 @@ $.youi.ajaxUtils.ajax({
 			}
 		}
 	});
-	</script>
 	
-<script type="text/javascript">
 	$(function(){
 		$(".hhf-submit").click(function(){
 			if(!isLogin){
@@ -89,8 +87,7 @@ $.youi.ajaxUtils.ajax({
 	
 		});
 	});
-</script>
- <script type="text/javascript">
+
 		//toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
 		 var pltime,timer;
 		 function closeTanc(){
