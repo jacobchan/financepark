@@ -26,16 +26,16 @@
 							<tr>
 								<td>
 									<p id="userorderProject">服务描述：</p>
-									<p>7*24小时服务，随叫随到，专业技术团队，价格透明，服务一流</p>
-						            <p>优惠报价： ¥67/次 （服务范围仅限软件维护，若涉及硬件则另收费）</p>				           				
+									<!-- <p>7*24小时服务，随叫随到，专业技术团队，价格透明，服务一流</p>
+						            <p>优惠报价： ¥67/次 （服务范围仅限软件维护，若涉及硬件则另收费）</p>		 -->		           				
 								</td>
 							</tr>
-							<tr>
+							<!-- <tr>
 								<td>
 								
-									<p>预订日期：<span class="c-o" id="publicResoIdDate"></span></p>
+									<p>预约日期：<span class="c-o" id="publicResoIdDate"></span></p>
 								</td>
-							</tr>
+							</tr> -->
 						</tbody>
 					</table>
 				</div>
