@@ -75,3 +75,39 @@ CREATE TABLE `sp_favorits_favoritactivity` (
   KEY `FK_320701-340402` (`MEMBER_ID_`) USING BTREE,
   CONSTRAINT `FK_320701-340402` FOREIGN KEY (`MEMBER_ID_`) REFERENCES `sp_member_information` (`MEMBER_ID_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='340402-活动收藏表';
+
+/**乘机人实体  修改时间：2016年5月9日10:28:34    by cqf**/
+drop table if exists sp_ticket_passenger_relation;
+
+/*==============================================================*/
+/* Table: sp_ticket_passenger_relation   乘机人关联中间表                       */
+/*==============================================================*/
+create table sp_ticket_passenger_relation
+(
+   TICKET_PASSENGER_ID  varchar(36) not null,
+   ITEM_ID_             char(36),
+   PASSENGER_ID         char(36)
+);
+
+alter table sp_ticket_passenger_relation
+   add primary key (TICKET_PASSENGER_ID);
+drop table if exists sp_ticket_passenger;
+
+/*==============================================================*/
+/* Table: sp_ticket_passenger     乘机人                              */
+/*==============================================================*/
+create table sp_ticket_passenger
+(
+   PASSENGER_ID         char(36) not null,
+   name                 varchar(16),
+   tel                  varchar(16),
+   type                 varchar(16),
+   identity_type        varchar(16),
+   identity_num         varchar(16),
+   insurance            varchar(32),
+   input_time           timestamp
+);
+
+alter table sp_ticket_passenger
+   add primary key (PASSENGER_ID);
+/**END   ------------------------------------------------**/
