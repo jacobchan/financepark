@@ -349,7 +349,7 @@ a.c-b1:hover {
 								<td>
 									<div class="ml20">
 										<p class="c-o">"来自android的点评"</p>
-										<p>交通方便，离地铁1号线约50米。</p>
+										<p >暂无相关评论！</p>
 									</div>
 								</td>
 							</tr>
@@ -364,13 +364,13 @@ a.c-b1:hover {
 					<span id="comment">来自37条评论</span>
 				</div>
 				<div style="background-color: #f6f6f6;" class="lh40">
-					<img src="styles/images/message.png" border="0" class="ml10 mr10">交通方便，离地铁1号线约50米。
+					<img src="styles/images/message.png" border="0" class="ml10 mr10"><span class="new_comment">该酒店暂无相关评论！</span>
 				</div>
 
 				<div class=" hc-fr-table mt20">
 					<h3>推荐酒店</h3>
-					<ul class="ig-nav jd-ig-nav">
-						<li>
+					<ul class="ig-nav jd-ig-nav" id="recommend">
+						<!-- <li>
 							<div class="in-photo ml10">
 								<img src="styles/images/jd-p1.jpg" border="0" width="100%">
 							</div>
@@ -402,9 +402,10 @@ a.c-b1:hover {
 									<span class="c-o f16">￥618 </span>起
 								</p>
 							</div>
-						</li>
+						</li> -->
 					</ul>
 				</div>
+				<!-- 
 				<div class=" hc-fr-table mt20">
 					<h3>我浏览过的酒店</h3>
 					<ul class="history-infor">
@@ -420,6 +421,7 @@ a.c-b1:hover {
 									class="c-o f16">￥618 </span>起</span></a></li>
 					</ul>
 				</div>
+				 -->
 			</div>
 		</div>
 	</div>
@@ -642,6 +644,7 @@ a.c-b1:hover {
 		var hid = Request['hid'];
 		var tm1 = Request['tm1'];
 		var tm2 = Request['tm2'];
+		var cid = Request['cid'];
 		$("#hid").val(hid);
 		$("#tm1").val(tm1);
 		$("#tm2").val(tm2);
@@ -695,6 +698,32 @@ a.c-b1:hover {
 				}
 			}
 		});
+		
+		//获取热门酒店
+		var params = [ 'pagesize=3', 'px=1', 'cid=' + cid ];
+		var serviceURL = baseUrl
+				+ "hotelInfoService/searchHotelByConditions.json";
+		//公共方法
+		$.youi.ajaxUtils.ajax({
+			url : serviceURL,
+			data : params.join('&'),
+			jsonp : 'data:jsonp',
+			dataType : 'jsonp',
+			success : function(result) {
+				if (result && result.records) {
+					var record = result.records;
+					recommend_(record);
+				} else {
+					$("#loading").addClass("undis");
+					$("#noresult").removeClass("undis");
+				}
+			},
+			error : function() {
+				$("#loading").addClass("undis");
+				$("#noresult").removeClass("undis");
+			}
+		});
+		
 		//获取酒店图片
 		$.youi.ajaxUtils.ajax({
 			url:baseUrl+"hotelInfoService/getHotelPic.json",
@@ -704,10 +733,15 @@ a.c-b1:hover {
 			success:function(result){
 				if(result&&result.records){
 					var pic = result.records;
-					$("#majorPicture").attr("src",pic[1].pic500);
-					$(".hotelPic").each(function(index){
-						$(this).attr("src",pic[index+2].pic160);
-					});
+					if(pic[1]){
+						$("#majorPicture").attr("src",pic[1].pic500);
+						$(".hotelPic").each(function(index){
+							$(this).attr("src",pic[index+2].pic160);
+						});
+					}else{
+					
+					}
+				
 				}
 			}
 		});
@@ -734,6 +768,16 @@ a.c-b1:hover {
 						html_ += "<td><div class='ml20'><p class='c-o'></p>";
 						html_ += "<p>"+comments[i].content+"</p></div></td></tr>";
 						$(".sug-table-nav").append(html_);
+						console.debug(comments);
+						//获取最新评论
+						if(i==0){
+							if(comments[i].content.length >= 16){
+								$("span.new_comment").text(comments[i].content.substring(0,16)+"...");
+							}else{
+								$("span.new_comment").text(comments[i].content)
+							}
+							
+						}
 					}
 				}
 			}
@@ -750,6 +794,33 @@ a.c-b1:hover {
 	
 			
 	});
+
+	
+	//构建热门推荐类酒店
+	function recommend_(record) {
+		for (var i = 1; i < 4; i++) {
+			var hotel = record[i];
+			var html_ = "<li><div class='in-photo ml10'>";
+			html_ += "<img src='" + hotel.Picture
+					+ "' border='0' width='100%'></div>";
+			html_ += "<div class='fr mt10'>";
+			html_ += "<a href='javascript:gotoHotelInfo(" + hotel.ID
+					+ ")'><p class='mb15'>" + hotel.HotelName + "</p></a>";
+			html_ += "<p class='f12'><span class='c-o f16'>￥"
+					+ hotel.min_jiage + " </span>起</p></div></li>";
+			$("#recommend").append(html_);
+		}
+	}
+	//跳转到酒店详情页
+	function gotoHotelInfo(hid) {
+		var Request = new Object();
+		Request = GetRequest();
+		var cid = Request['cid'];
+		var tm1 = $("#tm1").val();
+		var tm2 = $("#tm2").val();
+		window.open(encodeURI("jd4.html?hid=" + hid + "&tm1=" + tm1
+				+ "&tm2=" + tm2 +"&cid="+ cid));
+	}
 	//跳转到订单页面
 	function bookHotel(rid,pid){
 		if(!isLogin){
