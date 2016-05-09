@@ -40,7 +40,7 @@
 						fkcodeComp="到访企业："+record.fkcodeComp;
 					}
 					$('#fkcodeComp').html(fkcodeComp);
-					$('#fkcodeTime').html("到访时间："+record.fkcodeTime);									
+					$('#fkcodeTime').html("到访时间："+record.fkcodeTime.substring(0,10));									
 					$('#fkcodeRemark').html("访客说明："+record.fkcodeRemark);															
 					$('#memberName').html("访客姓名："+record.fkcodeName);
 					$('#memberPhoneNumber').html("访客电话："+record.fkcodeTelephone);
