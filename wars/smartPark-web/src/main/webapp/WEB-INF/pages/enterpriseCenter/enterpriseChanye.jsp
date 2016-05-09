@@ -94,7 +94,7 @@
 					}
 					var time = getmonth(record[i].letterTime);
 					html+='<div class="chanye_row" id='+record[i].letterId+'>'+
-                	'<div class="fl"><img src='+img+' style="width:100px;height:100px; " ></div>'+
+                	'<div class="fl"><img src='+img+' style="width:59px;height:59px; " ></div>'+
                     '<div class="chanye_words">'+
                     	'<span class="speaker">'+name+'：</span>'+
                        '<div class="chanye_con">'+
