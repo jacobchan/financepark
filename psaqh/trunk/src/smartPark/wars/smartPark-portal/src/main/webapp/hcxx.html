@@ -445,9 +445,10 @@
 						});
 						var tmpTime = DateAdd( "d ",30,new Date()).Format("yyyy-MM-dd");
 						if(compareDate(tmpTime,gotodate)){
-							parseLowestPrice(lowest_price_date,lowest_price,gotodate);
-						}else{
 							overDate();
+						}else{
+							parseLowestPrice(lowest_price_date,lowest_price,gotodate);
+							
 						}
 					}else{
 						console.error("机票最低价获取有误！");
@@ -668,7 +669,6 @@
 							html_ += "</a></td>";
 						}
 					}
-					
 					html_ += "</tr></tbody></table></div></div>";
 					if(flag==1){
 						arr_html.push(html1+html_);
