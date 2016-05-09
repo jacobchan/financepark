@@ -7,7 +7,7 @@
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/personInfo.html">个人资料</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/orderCenter.html">订单中心</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/securityCenter.html">安全中心</a></dd>
-			<!-- <dd><a href="">消息</a></dd> -->
+			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/news.html">消息</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/addressBook.html">企业通讯录</a></dd>
 			<%--  <dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/propertyManagerOcBind.html">一卡通绑定</a></dd>  --%>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/personalCenter/myAdderss.html">我的地址</a></dd>
