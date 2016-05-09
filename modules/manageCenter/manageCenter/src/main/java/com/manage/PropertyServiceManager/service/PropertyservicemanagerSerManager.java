@@ -5,7 +5,9 @@ package com.manage.PropertyServiceManager.service;
 
 import java.util.List;
 import java.util.Collection;
+import java.util.Map;
 
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -13,6 +15,7 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
 import com.gsoft.framework.esb.annotation.DomainCollection;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSer;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSfpro;
@@ -98,4 +101,12 @@ public interface PropertyservicemanagerSerManager extends BaseManager{
 	 */
 	public void saveListSer(String tsId ,
 			@DomainCollection(domainClazz=PropertyservicemanagerSer.class) List<PropertyservicemanagerSer> listSer);
+	
+	/**
+	 *	APP--查询费用维修清单
+	 * @param 报修单id
+	 * @return
+	 * @throws BusException
+	 */
+	public List<Map<String, Object>> getGroupSer (String id) throws BusException;
 }
