@@ -8,12 +8,16 @@ import java.util.Collection;
 import java.util.Map;
 
 import com.gsoft.entity.TempDemo;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.common.MessageCenter.entity.McMsgdatas;
 import com.common.MessageCenter.entity.McMsgtempalate;
 
@@ -171,5 +175,23 @@ public interface McMsgdatasManager extends BaseManager{
 	 * @return
 	 */
 	public TempDemo findPhoneCaptcha(String phone);
+	/**
+   	 * 前台个人中心  获取已完成订单的totalCount    chenye
+   	 * @param conditions
+   	 * @return
+   	 * @throws BusException
+   	 */
+     public List<Record> getTotalCount(Collection<Condition> conditions,String userId)  throws BusException;
+     /**
+ 	 * 前台个人中心   根据当前用户分页查询    chenye
+ 	 * @param pager
+ 	 * @param conditions
+ 	 * @param orders
+ 	 * @return
+ 	 * @throws BusException
+ 	 */
+ 	public PagerRecords getPager(Pager pager,//分页条件
+ 			 Collection<Condition> conditions,//查询条件
+ 			 Collection<Order> orders,String userId)throws BusException;
 	
 }
