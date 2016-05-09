@@ -68,7 +68,7 @@
 			if(recordList.length>0){
 				for (var index = 0; index < recordList.length; index++) {
 					html += '<tr>'
-					html += '	<td><a href="">'+ recordList[index].applayNo+ '</a></td>'
+					html += '	<td>'+ recordList[index].applayNo+ '</td>'
 					html += '	<td>融资申请</td>'
 					html += '	<td>'+ recordList[index].member.memberName+ '</td>'
 					html += '	<td>'+ recordList[index].createTime+ '</td>'
