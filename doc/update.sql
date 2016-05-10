@@ -111,3 +111,17 @@ create table sp_ticket_passenger
 alter table sp_ticket_passenger
    add primary key (PASSENGER_ID);
 /**END   ------------------------------------------------**/
+   
+ /* 创建新闻顶或踩关联表 */
+ DROP TABLE IF EXISTS `sp_nm_issuenews_d_or_c_`;
+ CREATE TABLE `sp_nm_issuenews_d_or_c_` (
+  `D_OR_C_ID_` varchar(36) NOT NULL DEFAULT '',
+  `ISSUE_NEWS_ID_` varchar(36) DEFAULT NULL,
+  `USER_IP_` varchar(16) DEFAULT NULL,
+  `STATUS_` varchar(2) DEFAULT NULL,
+  `CURRENT_DING_COUNT_` int(11) DEFAULT NULL,
+  `CURRENT_CAI_COUNT_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`D_OR_C_ID_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;  
+   
+
