@@ -71,7 +71,7 @@ public interface ActivityApplylistManager extends BaseManager{
      * @return
      * @throws BusException
      */
-	public Record saveActivityApplylistForPage(ActivityApplylist o,String captcha) throws BusException;
+	public TempDemo saveActivityApplylistForPage(ActivityApplylist o,String captcha) throws BusException;
 	/**
 	 * 	获取报名活动短信校验码 
 	 * @param id
