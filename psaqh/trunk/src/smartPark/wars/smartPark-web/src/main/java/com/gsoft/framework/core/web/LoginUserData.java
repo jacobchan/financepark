@@ -31,6 +31,7 @@ import com.gsoft.framework.security.agt.entity.User;
 import com.gsoft.framework.security.agt.service.impl.UserPasswordService;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.PasswordUtils;
+import com.manage.EnterBusinessManager.service.EnterbusinessmanagerRzManager;
 
 @Controller
 @RequestMapping("/web/loginUser")
@@ -39,6 +40,8 @@ public class LoginUserData extends BaseDataController {
 	private McMsgdatasManager mcMsgdatasManager;
 	@Autowired
 	private MemberInformationManager memberInformationManager;
+	@Autowired
+	private EnterbusinessmanagerRzManager enterbusinessmanagerRzManager;
 	@Autowired
 	private MemberInformationDao memberInformationDao;
 	@Autowired
@@ -78,6 +81,29 @@ public class LoginUserData extends BaseDataController {
 		try {
 			DefaultLoginFormToken token = new DefaultLoginFormToken(phone,
 					passwd, false, request.getHeader("host"));
+			token.setLoginType("memberCenter");
+			org.apache.shiro.SecurityUtils.getSubject().login(token);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new DataModelAndView("000000");
+	}
+	/**
+	 * 第三方单点登录
+	 * @return
+	 */
+	@RequestMapping("/singleLogin.json")
+	public DataModelAndView singleLogin(HttpServletRequest request,
+			@RequestParam("phone") String phone,@RequestParam("password") String password,
+			@RequestParam("parkName") String parkName,@RequestParam("companyName")String companyName){
+		TempDemo temp = enterbusinessmanagerRzManager.singleLogin(phone, password, parkName,companyName);
+		if(!temp.isFlag()){
+			return new DataModelAndView(temp.getBuff());
+		}
+		// 自动登录
+		try {
+			DefaultLoginFormToken token = new DefaultLoginFormToken(phone,
+					password, false, request.getHeader("host"));
 			token.setLoginType("memberCenter");
 			org.apache.shiro.SecurityUtils.getSubject().login(token);
 		} catch (Exception e) {
