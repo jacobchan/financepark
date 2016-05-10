@@ -106,12 +106,15 @@ public class LoginUserData extends BaseDataController {
 						password, false, request.getHeader("host"));
 				token.setLoginType("memberCenter");
 				org.apache.shiro.SecurityUtils.getSubject().login(token);
+				return new ModelAndView("redirect:/index.html");
 			} catch (Exception e) {
 				e.printStackTrace();
+				return new ModelAndView("redirect:/member/memberCenter/login.html");
 //				throw new BusException("登录不成功！");
 			}
+		}else{
+			return new ModelAndView("redirect:/member/memberCenter/login.html");
 		}
-		return new ModelAndView("redirect:/index.html");
 	}
 	
 	/**
