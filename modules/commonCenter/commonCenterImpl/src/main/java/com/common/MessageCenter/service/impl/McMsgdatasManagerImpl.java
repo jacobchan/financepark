@@ -297,9 +297,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 		//根据手机号码获取用户
 		MemberInformation mb = memberInformationManager.getUserByPhone(phone);
 		if(mb != null){
-			temp.setFlag(false);
-			temp.setBuff("该用户已存在");
-			return temp;
+			throw new BusException("该用户已存在");
 		}else{
 			Map<String,Object> map = new HashMap<String, Object>();
 			Random random = new Random(new Date().getTime());
@@ -311,8 +309,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 				temp.setFlag(true);
 				temp.setBuff("发送成功");
 			}else{
-				temp.setFlag(false);
-				temp.setBuff("发送失败");
+				throw new BusException("发送失败");
 			}
 			return temp;
 		}
@@ -325,9 +322,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 		//根据手机号码获取用户
 		MemberInformation mb = memberInformationManager.getUserByPhone(phone);
 		if(mb == null){
-			temp.setFlag(false);
-			temp.setBuff("手机号不存在");
-			return temp;
+			throw new BusException("手机号不存在");
 		}else{
 			Map<String,Object> map = new HashMap<String, Object>();
 			Random random = new Random(new Date().getTime());
@@ -339,8 +334,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 				temp.setFlag(true);
 				temp.setBuff("发送成功");
 			}else{
-				temp.setFlag(false);
-				temp.setBuff("发送失败");
+				throw new BusException("发送失败");
 			}
 			return temp;
 		}
