@@ -178,9 +178,20 @@ $(function(){
 					$(".toast").show();
 		            setTimeout('$(".toast").hide();',1000);//1秒=1000
 					evaluate();
+					var arg=getQueryStringArgs();
+					var id =arg.userorderId;
+					$.youi.ajaxUtils.ajax({
+						url: baseUrl+"ordermanagerUserorderManager/finishStatus.json",
+						data:{id:id},
+						jsonp:'data:jsonp',
+						dataType:'jsonp',
+						success:function(results){
+						}
+					});
 				}
 			}
 		});
+		
 	});
 	//咨询提交方法
 	$('#consult').click(function(){
@@ -197,6 +208,7 @@ $(function(){
             return false;
 		}
 		var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/savePurGenreConsult.json";
+		
 		$.youi.ajaxUtils.ajax({
 			url:serviceURL,
 			data:{content:content,genreCode:genreCode},
@@ -211,5 +223,6 @@ $(function(){
 				}
 			}
 		});
+		
 	});
 });
