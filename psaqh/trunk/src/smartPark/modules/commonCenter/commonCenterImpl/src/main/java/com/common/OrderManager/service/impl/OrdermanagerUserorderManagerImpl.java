@@ -944,6 +944,24 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     	temp.setResMap(finalpackage);
     	return temp;
     }
+    /**
+     *修改该待评价状态为已完成状态，前端调用   chenye
+     * @param id，
+     * @return
+     * @throws BusException
+     */
+    @EsbServiceMapping
+	public OrdermanagerUserorder  finishStatus(@ServiceParam(name="id") String id) throws BusException{
+    	 OrdermanagerUserorder p = ordermanagerUserorderDao.get(id) ;
+		 String status = p.getUserorderStatus() ;//得到订单状态
+		 if("02".equals(status)){//若当前状态为已支付
+		    	p.setUserorderStatus("03");//03为已完成，
+		    	p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		    	return ordermanagerUserorderDao.save(p);
+		 }else{
+		    	throw new BusException("当前状态无法取消申请！") ;
+		 }
+	}
 }
 
 
