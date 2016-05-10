@@ -12,12 +12,16 @@ import java.util.Map;
 
 
 
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.BuildingBaseManager.service.BbmParkManager;
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.entity.MemberRole;
@@ -65,6 +69,9 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	private MemberRoleManager memberRoleManager;
 	@Autowired
 	private McMsgdatasManager mcMsgdatasManager;
+	@Autowired
+	private BbmParkManager bbmParkManager;
+	
 	@Value("${ininin.sso_url}")
 	private String inininSsoUrl;
 	@Value("${ininin.compname}")
@@ -278,7 +285,8 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	 * @param memberId
 	 *            会员用户ID
 	 */
-	private void setDefaultRole(MemberInformation member) {
+	@Override
+	public void setDefaultRole(MemberInformation member) {
 		MemberRole memberRole = new MemberRole();
 		memberRole.setMemberId(member.getMemberId());
 		memberRole.setRoleId("ROLE_MEMBER");
@@ -677,5 +685,5 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	public MemberInformation getMember(@ServiceParam(name = "userId", pubProperty = "userId") String userId) throws BusException {
 		MemberInformation member = memberInformationDao.get(userId);		
 		return member;
-	} 
+	}
 }

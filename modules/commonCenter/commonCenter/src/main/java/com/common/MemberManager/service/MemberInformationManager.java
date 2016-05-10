@@ -197,4 +197,9 @@ public interface MemberInformationManager extends BaseManager{
 	public PagerRecords getPagerEnterMemberInformations(Pager pager,
 			Collection<Condition> conditions, Collection<Order> orders,String userId)
 			throws BusException;
+	/**
+	 *  添加默认角色
+	 * @param member
+	 */
+	public void setDefaultRole(MemberInformation member);
 }
