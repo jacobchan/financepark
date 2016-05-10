@@ -269,3 +269,6 @@ input{font-family:"Microsoft YaHei","微软雅黑";}
 .toast .toast-con{width:320px;height:110px;margin-left:-160px; top:50%;left:50%;margin-top:-55px;position: absolute;padding:20px;border-radius:5px;background: rgb(255,255,255);}
 .close-toast{background: url(images/zs/close.png) no-repeat;width: 16px;height: 16px;display: inline-table;cursor: pointer;}
 .close-toast:hover{background: url(images/zs/close-o.png) no-repeat;}
+
+.rote{transform:rotate(180deg);-ms-transform:rotate(180deg);/* IE 9 */-moz-transform:rotate(180deg);/* Firefox */-webkit-transform:rotate(180deg); /* Safari 和 Chrome */
+-o-transform:rotate(180deg);}
