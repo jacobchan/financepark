@@ -122,10 +122,10 @@ public class ActivityApplylistManagerImpl extends BaseManagerImpl implements Act
 	}
     
     @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
-	public Record saveActivityApplylistForPage(ActivityApplylist o,@ServiceParam(name="captcha") String captcha)
+	public TempDemo saveActivityApplylistForPage(ActivityApplylist o,@ServiceParam(name="captcha") String captcha)
 			throws BusException {
 		//校验是否重复报名
-    	Record cord = new Record();
+    	TempDemo cord = new TempDemo();
     	List<ActivityApplylist> applist = activityApplylistDao.getList(new String[]{"activityApply.applyId","applyPhone"},new String[]{o.getActivityApply().getApplyId(),o.getApplyPhone()});
     	if(applist.size()<=0){
     		TempDemo demo = mcMsgdatasManager.checkPhoneCode(o.getApplyPhone(), captcha);
@@ -140,15 +140,13 @@ public class ActivityApplylistManagerImpl extends BaseManagerImpl implements Act
 		    	o.setUpdateUser(o.getUpdateUser());
 		    	o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		    	activityApplylistDao.save(o);
-		    	cord.put("code", "00");//报名成功!
-				cord.put("meg", "活动报名成功!");
+				cord.setFlag(true);
+				cord.setBuff("活动报名成功!");
     		}else{
-    			cord.put("code", "01");//校验码错误
-				cord.put("meg", demo.getBuff());
+    			throw new BusException(demo.getBuff());
     		}
     	}else{
-    		cord.put("code", "02");//已成功报名
-			cord.put("meg", "你已报名成功!");
+    		throw new BusException("你已报名成功!");
     	}
     	return cord;
 	}
@@ -173,12 +171,13 @@ public class ActivityApplylistManagerImpl extends BaseManagerImpl implements Act
     		MemberInformation mb = memberInformationManager.getUserByPhone(phone);
     		Boolean success = mcMsgdatasManager.smsSend("1015", map, mb!=null?mb.getMemberId():null, phone);
     		if(success){
-    			demo.setBuff("000000");
+    			demo.setFlag(true);
+				demo.setBuff("发送成功");
     		}else{
-    			demo.setBuff("发送失败");
+    			throw new BusException("发送失败");
     		}
     	}else{
-			demo.setBuff("发送失败");
+    		throw new BusException("发送失败");
 		}
     	return demo;
     }
