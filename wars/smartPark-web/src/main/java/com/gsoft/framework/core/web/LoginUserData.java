@@ -188,23 +188,28 @@ public class LoginUserData extends BaseDataController {
 	}
 	//前台个人中心，安全中心，修改手机号码     给新手机号发送短信验证码
 	@RequestMapping("/sendnewcaptcha.json")
-	public DataModelAndView sendnewcaptcha(@RequestParam("newPhone") String newPhone,HttpServletRequest request) {
-		Random random = new Random(new Date().getTime());
-		Long code = Math.abs(random.nextLong() % 999999);
-		String captcha = org.apache.commons.lang.StringUtils.leftPad(code.toString(), 6, '0');		
-		Map<String,Object> map = new HashMap<String, Object>();
-		map.put(MessageService.CODE, captcha);
-		Boolean success = mcMsgdatasManager.smsSend("1010", map, null, newPhone);
-		if(success){
-			//把手机验证码newcaptcha储存在session中，方便下一个方法调用
-			request.getSession().setAttribute("newcaptcha_session",captcha);
-			//把手机号newPhone储存在session中，方便下一个方法调用
-			request.getSession().setAttribute("newPhone_session",newPhone);
-			//把手机号验证码生成时间储存在session中，方便下一个方法调用
-			request.getSession().setAttribute("newcaptcha_getTime_session",System.currentTimeMillis());
-			return new DataModelAndView("000000");
+	public DataModelAndView sendnewcaptcha(@RequestParam("newPhone") String newPhone,
+			@RequestParam("oldPhone") String oldPhone,HttpServletRequest request) {
+		if(oldPhone.equals(newPhone)){
+			return new DataModelAndView("新手机号与原手机号一致");
 		}else{
-			return new DataModelAndView("发送失败");
+			Random random = new Random(new Date().getTime());
+			Long code = Math.abs(random.nextLong() % 999999);
+			String captcha = org.apache.commons.lang.StringUtils.leftPad(code.toString(), 6, '0');		
+			Map<String,Object> map = new HashMap<String, Object>();
+			map.put(MessageService.CODE, captcha);
+			Boolean success = mcMsgdatasManager.smsSend("1010", map, null, newPhone);
+			if(success){
+				//把手机验证码newcaptcha储存在session中，方便下一个方法调用
+				request.getSession().setAttribute("newcaptcha_session",captcha);
+				//把手机号newPhone储存在session中，方便下一个方法调用
+				request.getSession().setAttribute("newPhone_session",newPhone);
+				//把手机号验证码生成时间储存在session中，方便下一个方法调用
+				request.getSession().setAttribute("newcaptcha_getTime_session",System.currentTimeMillis());
+				return new DataModelAndView("000000");
+			}else{
+				return new DataModelAndView("发送失败");
+			}
 		}
 	}
 	//前台个人中心，安全中心，修改手机号码    验证
