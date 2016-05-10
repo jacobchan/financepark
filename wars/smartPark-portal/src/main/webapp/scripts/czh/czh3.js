@@ -35,7 +35,7 @@ $(function(){
 			 if(!isLogin){
 					getfavoritActivity(applyId);
 				 }else{
-					getboolfavorit(applyId);
+					 getfaCount(applyId);
 				 }
 		}
 		//活动详情赋值
@@ -107,8 +107,9 @@ $(function(){
 			window.location.assign(url); 
 		}
 		//获取是否收藏
-		function getboolfavorit(id){
+		function getboolfavorit(id,data){
 			var applyId = id;
+			var count = data;
 			var serviceURL = baseUrl+"favoritsFavoritActivityManager/exsitFavoritsFavoritActivityforPage.json";
 			var params = ['activityId.applyId='+applyId];
 			$.youi.ajaxUtils.ajax({
@@ -121,13 +122,33 @@ $(function(){
 							$("a.a-c-p").attr("id",results.record.favoritActivityId);
 							$("a.a-c-p").css("background-color","#ecebeb");
 							$("a.a-c-p").attr("value","0");
-							$("a.a-c-p").html('<img alt="收藏" src="../styles/images/czh/sc-o.png" border="0" class="mr10">已收藏');
+							$("a.a-c-p").html('<img alt="收藏" src="../styles/images/czh/sc-o.png" border="0" class="mr10">收藏：'+count+'人');
 					}else{
 						getfavoritActivity(applyId);
 					}
 				}
 			});	
 		}
+		
+		function getfaCount(id){
+			var applyId = id;
+			var serviceURL = baseUrl+"favoritsFavoritActivityManager/getPagerFavoritsFavoritActivitys.json";
+			var params = ['activityId.applyId='+applyId];
+			$.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				async: false, 
+				success:function(results){
+					if(results&&results.records){
+							var data = results.totalCount;
+							getboolfavorit(applyId,data);
+						}
+					}
+			});
+		}
+		
 		//加载收藏数
 		function getfavoritActivity(id){
 			var applyId = id;
@@ -205,10 +226,12 @@ $(function(){
 						     $(".tc.mt25.f18").text("收藏成功!");
 						     pltime=1;
 						     timer=setInterval("closeTanc()",1000);
-						    $("a.a-c-p").attr("id",results.record.favoritActivityId),
+						  /*  $("a.a-c-p").attr("id",results.record.favoritActivityId),
 						    $("a.a-c-p").attr("value","0");
 							$("a.a-c-p").css("background-color","#ecebeb");
-							$("a.a-c-p").html('<img alt="收藏" src="../styles/images/czh/sc-o.png" border="0" class="mr10">已收藏');
+							var count = getfaCount(applyId);
+							$("a.a-c-p").html('<img alt="收藏" src="../styles/images/czh/sc-o.png" border="0" class="mr10">收藏：'+count+'人');*/
+						     getfaCount(applyId);
 						}
 					}
 			});
