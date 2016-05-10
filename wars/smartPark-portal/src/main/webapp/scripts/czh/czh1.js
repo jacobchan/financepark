@@ -237,13 +237,15 @@ $(function(){
 			dataType:'jsonp',
 			success:function(result){
 				var record = result.record;
-				var capt = record.buff;
-				if(!/^\d{6}$/.test(capt)){
+				if(!record.flag){
 					enableSmsButton(3,capt,'重新获取');
 				}else{
 					enableSmsButton(60,'发送成功','重新获取');
 				} 
 				$('#sendMobileCaptcha').attr('onclick','volid(0);');
+			},
+			error:function(msg){
+				enableSmsButton(3,msg,'重新获取');
 			}
 		});
 	}
@@ -293,13 +295,14 @@ $(function(){
 				success:function(results){
 					if(results&&results.record){
 						var record = results.record;
-						if(record.code=="00"){
-							showMessagem(record.meg);
+						if(!record.flag){
+							showMessagem(record.buff);
 			         		setTimeout(function(){$(".bg-tanc").hide();},2000);
-						}else{
-							showMessagem(record.meg);
 						}
 					}
+				},
+				error:function(msg){
+					showMessagem(msg);
 				}
 			});			  
 	});
