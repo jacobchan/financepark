@@ -20,7 +20,7 @@ $(function(){
 		});
 	
 		$(function(){
-			$(".hhf-submit").click(function(){
+			$(".submit1").click(function(){
 				/* var obj={
 					moverecComp:$("#moverecComp").val(),
 					moverecWay:$("#moverecWay").text(),
@@ -71,7 +71,8 @@ $(function(){
 								return false;
 							}
 						}
-		
+						$(".submit1").addClass("undis") ;
+						$(".submit2").removeClass("undis") ;
 						var params = ['moverecComp='+$("#moverecComp").val(),
 										//'moverecWay='+$("#moverecWay")[0].getAttribute("value"),
 										//'moverecUnit='+$("#louyu").val()+$("#unit").val(),
@@ -88,10 +89,15 @@ $(function(){
 						jsonp:'data:jsonp',
 						dataType:'jsonp',
 						success:function(results){
+							$(".submit1").removeClass("undis") ;
+							$(".submit2").addClass("undis") ;
 							if(results&&results.record){
 								$(".bg-tanc.m2").show();
 								countdown(3);
 							}
+						},error:function(XMLHttpRequest, textStatus, errorThrown){
+							$(".submit1").removeClass("undis") ;
+							$(".submit2").addClass("undis") ;
 						}
 					});
 				}else{
