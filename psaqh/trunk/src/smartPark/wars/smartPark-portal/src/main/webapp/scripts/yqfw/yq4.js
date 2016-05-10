@@ -19,7 +19,7 @@ $.youi.ajaxUtils.ajax({
 	});
 	
 $(function(){
-	$(".hhf-submit").click(function(){
+	$(".submit1").click(function(){
 		/* var obj={
 			createUser:$("#user").val(),
 			fkcodeSex:$(".sex-group span.active").index(),//0-男，1女
@@ -73,6 +73,8 @@ $(function(){
 					}
 				}
 				
+				$(".submit1").addClass("undis") ;
+				$(".submit2").removeClass("undis") ;
 				var params = ['fkcodeName='+$("#user").val(),
 								'fkcodeSex='+sex,
 								'fkcodeTelephone='+phone,
@@ -88,11 +90,16 @@ $(function(){
 					jsonp:'data:jsonp',
 					dataType:'jsonp',
 					success:function(results){
+						$(".submit1").removeClass("undis") ;
+						$(".submit2").addClass("undis") ;
 						if(results&&results.record){
 							$(".bg-tanc.m2").show();
 							countdown(3);
 							//window.location=cenUrl+"member/memberCenter/propertyService/propertyManageFk.html";
 						}
+					},error:function(XMLHttpRequest, textStatus, errorThrown){
+						$(".submit1").removeClass("undis") ;
+						$(".submit2").addClass("undis") ;
 					}
 				});
 			}else{
