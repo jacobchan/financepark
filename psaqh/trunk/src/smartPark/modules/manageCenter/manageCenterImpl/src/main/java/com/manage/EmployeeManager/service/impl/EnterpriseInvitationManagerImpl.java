@@ -1,20 +1,11 @@
-/**
- * 代码声明
- */
 package com.manage.EmployeeManager.service.impl;
-
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
-//import com.gsoft.framework.core.orm.ConditionFactory;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
@@ -23,7 +14,6 @@ import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.EmployeeManager.entity.EnterpriseInvitation;
 import com.manage.EmployeeManager.dao.EnterpriseInvitationDao;
 import com.manage.EmployeeManager.service.EnterpriseInvitationManager;
-
 @Service("enterpriseInvitationManager")
 @Transactional
 public class EnterpriseInvitationManagerImpl extends BaseManagerImpl implements EnterpriseInvitationManager{
