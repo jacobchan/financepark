@@ -1,4 +1,4 @@
-var pageSize=5;
+    var pageSize=5;
 	var pageCount=1;
 	var currentIndex = 1;
 	var timeoutProcess;
@@ -14,7 +14,6 @@ var pageSize=5;
 			success : function(results){
 				var totalCount=results.records[0].totalCount;
 				pageCount = Math.ceil(totalCount / pageSize);//页数
-				alert(pageCount);
 				refreshData(1,pageSize);
 				//插入页码
 				$(".tcdPageCode").empty();
