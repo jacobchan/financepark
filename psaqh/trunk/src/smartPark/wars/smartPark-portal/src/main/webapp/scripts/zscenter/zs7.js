@@ -1,19 +1,74 @@
 $(function(){
-		 $(".zan-cai").mouseover(function(){
-			$(this).find(".show2").removeClass("undis").siblings().addClass("undis");
+		/*$(".zan-cai").click(function(){
+			var i=0;
+			$(".zan-cai").each(function(){
+				if($(this).find(".show2").hasClass("undis")){
+					i=i+1;
+				}else{
+					i=i;						
+				}
+			})
+			if(i==2){
+				$(this).find(".show2").removeClass("undis").siblings().addClass("undis");
+			}
+		});*/
+		$(".zan-cai").click(function(){
+			var dingId = $(".imageDing").attr("id") ;
+			var caiId = $(".imageCai").attr("id") ;
+			if(dingId||caiId){//已经顶过或踩过
+				
+			}else{//没有顶过和踩过
+				var status = "" ;
+				$(this).find(".show2").removeClass("undis").siblings().addClass("undis");
+				if($(this).hasClass("dingImage")){
+					status = "00" ;
+				}else if($(this).hasClass("caiImage")){
+					status = "01" ;
+				}
+				var issueNewsId = getParam() ;
+				var userIp = getfinger() ;
+				var param = ["issueNewsId="+issueNewsId,"userIp="+userIp,"status="+status] ;
+				$.youi.ajaxUtils.ajax({
+					url:baseUrl +"nmIssuenewsDorCManager/saveNmIssuenewsDorC.json",
+					data:param.join('&'),
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(result){
+						if(result&&result.record){
+							var record = result.record ;
+							var status = record.status ;
+							if(status == "00"){
+								$(".imageDing").attr("id","00");
+								$("#ding").text("("+record.currentDingCount+")") ;
+							}
+							if(status == "01"){
+								$(".imageCai").attr("id","01");
+								$("#cai").text("("+record.currentCaiCount+")") ;
+							}
+						}
+					}
+				});
+			}
 		});
-		$(".zan-cai").mouseout(function(){
-			$(this).find(".show2").addClass("undis").siblings().removeClass("undis");
-		});
+
+		/*$("#dingImage").mouseover(function(){
+			$("#imageDing1").addClass("undis") ;
+			$("#imageDing").removeClass("undis") ;
+		}) ;
+		$("#dingImage").mouseout(function(){
+			$("#imageDing").addClass("undis") ;
+			$("#imageDing1").removeClass("undis") ;
+		}) ;*/
+		/* 
 		$(".zan-cai").click(function(){
 			$(".zan-cai").find(".show2").addClass("undis").siblings().removeClass("undis");
 			$(this).find(".show2").removeClass("undis").siblings().addClass("undis");
 			$(this).mouseout(function(){
 				$(this).find(".show2").removeClass("undis").siblings().addClass("undis");
 			});
-		}); 
+		}); */
 		
-	});
+});
 $(function(){
 	$("#wb").hide() ;
 	$("#loading").removeClass("undis") ;
@@ -33,9 +88,36 @@ $(function(){
 				dataType:'jsonp',
 				success:function(result){
 					var record = result.record ;
+					setDingAndCai(record)
 					getHtml(record) ;
 				}
 			});
+		}
+	});
+	var userIp = "";
+	userIp = getfinger() ;
+	var params1=["issueNewsId="+policyId,"userIp="+userIp];
+	$.youi.ajaxUtils.ajax({
+		url:baseUrl +"nmIssuenewsDorCManager/getNmIssuenewsDorCByNewsIdAndIp.json",
+		data:params1.join('&'),
+		jsonp:'data:jsonp',
+		dataType:'jsonp',
+		success:function(result){
+			var record = result.record ;
+			console.log(record);
+			if(record){
+				var status = record.status ;
+				if(status == "00"){
+					$(".imageDing").removeClass("undis");
+					$(".imageDing").attr("id","00");
+					$(".imageDing1").addClass("undis");
+				}
+				if(status == "01"){
+					$(".imageCai").removeClass("undis");
+					$(".imageCai").attr("id","01");
+					$(".imageCai1").addClass("undis");
+				}
+			}	
 		}
 	});
 });
@@ -46,6 +128,19 @@ function getParam() {
 	param = url.substring(url.lastIndexOf("=")+1,url.length) ; //获取页面的参数
 	return param ;
 }
+
+/*設置頂或踩的數量*/
+function setDingAndCai(record){
+	$("#ding").text("("+record.dingCount+")") ;
+	$("#cai").text("("+record.caiCount+")") ;
+}
+/*获取指纹*/
+function getfinger(){
+	var fp1 = new Fingerprint();
+	console.log(fp1) ;
+	return fp1.get() ;
+}
+
 /* 拼接HTML */
 function getHtml(record){
 	$('title')[0].innerHTML=record.policyCaption ;//给标题赋值
@@ -75,6 +170,7 @@ $(function(){
 			}
 		}
 	});
+	
 });
 $(function(){
 	var policyId = "" ;
