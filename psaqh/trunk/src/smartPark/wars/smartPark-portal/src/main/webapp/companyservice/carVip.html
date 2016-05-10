@@ -120,7 +120,8 @@
                     <tr>
                         <td></td>
                         <td>
-                        	<input value="在线预订" id="sub" class="btn-cheng"  type="submit" style="width:120px;height:40px;">
+                        	<input value="在线预订" id="sub" class="btn-cheng submit1"  type="submit" style="width:120px;height:40px;">
+                        	<input value="提交中..."  class="btn-cheng submit2 undis"  type="submit" style="width:120px;height:40px;">
                         	<p class="f16 cc mt15" id="submsg" style="display:none">请登录后，提交预约!</p>
                         </td>
                     </tr>
@@ -239,7 +240,7 @@
            	});
             
             //提交方法
-            $("#sub").click(function(){
+            $(".submit1").click(function(){
             	var isMobile=/^(?:13\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;//手机号的格式
             	var isNum = /^\+?[1-9][0-9]*$/;
             	if (!isLogin) {
@@ -309,6 +310,9 @@
             	//订单金额： 小时*车辆数*每小时单据（25）
             	var userorderAmount = hours*cpCount*25;  
             	//提交
+            	
+            	$(".submit1").addClass("undis") ;
+				$(".submit2").removeClass("undis") ;
             	var params = ['cpEnName='+cpEnName,'cpLinkMan='+cpLinkMan,'cpLinkTel='+cpLinkTel,'cpCount='+cpCount,'cpEntdTime='+cpEntdTime,'cpBegionTime='+cpBegionTime,'cpEnAdr='+cpEnAdr,'userorderAmount='+userorderAmount];
             	var serviceURL = baseUrl+"carportManager/saveCarport.json";
             	$.youi.ajaxUtils.ajax({
@@ -317,11 +321,15 @@
 					jsonp : 'data:jsonp',
 					dataType : 'jsonp',
 					success : function(result) {
+						$(".submit1").removeClass("undis") ;
+						$(".submit2").addClass("undis") ;
 						$(".bg-tanc.m1").show();
 						jump1(3);
 						/* a=3;
 						timer2=setInterval("jump1()",2000); */
 					},error:function(XMLHttpRequest, textStatus, errorThrown){
+						$(".submit1").removeClass("undis") ;
+						$(".submit2").addClass("undis") ;
 						//alert(XMLHttpRequest);
 					}
             	});	
