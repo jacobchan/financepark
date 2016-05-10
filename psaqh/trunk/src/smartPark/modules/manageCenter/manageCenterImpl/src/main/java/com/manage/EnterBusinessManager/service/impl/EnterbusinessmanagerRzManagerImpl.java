@@ -12,12 +12,15 @@ import com.common.BuildingBaseManager.dao.BbmBuildingDao;
 import com.common.BuildingBaseManager.dao.BbmFloorDao;
 import com.common.BuildingBaseManager.entity.BbmBuilding;
 import com.common.BuildingBaseManager.entity.BbmFloor;
+import com.common.BuildingBaseManager.entity.BbmPark;
 import com.common.BuildingBaseManager.entity.BbmRoom;
+import com.common.BuildingBaseManager.service.BbmParkManager;
 import com.common.BuildingBaseManager.service.BbmRoomManager;
 import com.common.EnterpriceTypeManager.entity.EtypeEnterprisetype;
 import com.common.EnterpriceTypeManager.service.EtypeEnterprisetypeManager;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
+import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -65,6 +68,8 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 	private EtypeEnterprisetypeManager etypeEnterprisetypeManager;
 	@Autowired
 	private InformationLegalManager informationLegalManager;
+	@Autowired
+	private BbmParkManager bbmParkManager;
 	
     /**
      * 查询列表
@@ -370,4 +375,34 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 		}
 		return null;
 	}
+	/**
+	 * 第三方单点登录
+	 */
+	@Override
+	public TempDemo singleLogin(String phone, String password, String parkName,
+			String companyName) {
+		TempDemo temp = new TempDemo();
+		BbmPark bbmPark = bbmParkManager.getBbmParkByParkName(parkName);
+		if(bbmPark == null){
+			temp.setFlag(false);
+			temp.setBuff("园区不存在！");
+		}else{
+			MemberInformation mem = memberInformationManager.getUserByPhone(phone);
+			if(mem == null){
+				EnterbusinessmanagerRz enterRZ = enterbusinessmanagerRzDao.getObjectByUniqueProperty("rzName", companyName);
+				MemberInformation memberInformation = new MemberInformation();
+				memberInformation.setMemberName(phone);
+				memberInformation.setMemberPassword(password);
+				memberInformation.setMemberPhoneNumber(phone);
+				if(enterRZ != null){
+					memberInformation.setCompanyId(enterRZ.getRzId());
+				}
+				MemberInformation member = memberInformationManager.saveMemberInformation(memberInformation);
+				// 添加默认角色
+				memberInformationManager.setDefaultRole(member);
+			}
+			temp.setFlag(true);
+		}
+		return temp;
+	} 
 }
