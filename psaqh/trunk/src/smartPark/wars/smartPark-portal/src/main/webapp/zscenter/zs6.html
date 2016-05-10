@@ -83,7 +83,7 @@
 	            $(".toast").hide();
 	        })
 	        
-			$(".now-btn").click(function(){
+			$(".submit1").click(function(){
 				var recordType='01';//01:众创空间
 			//	var recordMemberId=$("#fkcodeComp").text();
 				var recordCommdityId = $("#commodityId").val();
@@ -144,7 +144,8 @@
 	    	        timer=setInterval("closeTanc()",1000);
 					return;
 				}
-               
+				$(".submit1").addClass("undis") ;
+				$(".submit2").removeClass("undis") ;
 				var params = ['visiteDate='+visiteDate,'visiteName='+lfName,'visiteTel='+lfTel,'visiteTime='+visiteTime,'recordType='+recordType,'recordCommdityId='+recordCommdityId];
 				var serviceURL = baseUrl+"reservationRecordManager/saveReservationRecord.json";
 				//公共方法
@@ -154,6 +155,8 @@
 					jsonp:'data:jsonp',
 					dataType:'jsonp',
 					success:function(result){
+						$(".submit1").removeClass("undis") ;
+						$(".submit2").addClass("undis") ;
 						if(result&&result.record){
 					//		alert("预约成功");
 					//		window.location="/grzx/grzx8.html";
@@ -168,6 +171,9 @@
 								timer1=setInterval("jump1()",1000);
 							}
 						}
+					},error:function(XMLHttpRequest, textStatus, errorThrown){
+						$(".submit1").removeClass("undis") ;
+						$(".submit2").addClass("undis") ;
 					}
 				});
 				
@@ -181,7 +187,7 @@
 				
 			});
 			
-			$("#companySubmit").click(function(){
+			$(".submit3").click(function(){
 				var recordType='02';//02:工位
 				var recordCommdityId = $("#recordCommdityId").val();
 				var companyName=$("#companyName").val();
@@ -204,7 +210,8 @@
 	    	        showMessage("请填写业务简介");
 					return false;
 				}
-               
+				$(".submit3").addClass("undis") ;
+				$(".submit4").removeClass("undis") ;
 				var params = ['recordCommdityId='+recordCommdityId,'companyName='+companyName,'incomingDate='+incomingDate,'companyScale='+companyScale,'recordType='+recordType,'companyDiscrption='+companyDiscrption];
 				var serviceURL = baseUrl+"reservationRecordManager/saveReservationRecord.json";
 				//公共方法
@@ -214,10 +221,15 @@
 					jsonp:'data:jsonp',
 					dataType:'jsonp',
 					success:function(results){
+						$(".submit3").removeClass("undis") ;
+						$(".submit4").addClass("undis") ;
 						console.log(results);
 						if(results&&results.record){
 							window.location = cenUrl+ "member/memberCenter/personalCenter/myReservation.html?showFlg=1";
 						} 
+					},error:function(XMLHttpRequest, textStatus, errorThrown){
+						$(".submit3").removeClass("undis") ;
+						$(".submit4").addClass("undis") ;
 					}
 				});
 				
@@ -422,7 +434,8 @@
 			            </div>
 						<div class="fl ml15"><input type="text" placeholder="姓名" style="width:90px" id="fkcodeName"></div>
 						<div class="fl ml15"><input type="text" placeholder="手机号码" id="fkcodeTelephone"></div>
-						<input type="button" value="立即预约" class="now-btn">
+						<input type="button" value="立即预约" class="now-btn submit1">
+						<input type="button" value="提交中..." class="now-btn submit2 undis">
 					</div>
 				</div>
 			</div>
@@ -647,7 +660,11 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td><a style="cursor:pointer;" class="ib-btn tc" id="companySubmit" style="width:120px;">提交</a></td>
+					<td>
+						<input value="提交" type="button" class="ib-btn submit3" style="width:120px" id="submit-ib"/>
+						<input value="提交中..." type="button" class="ib-btn submit4 undis" style="width:120px" />
+						<!-- <a style="cursor:pointer;" class="ib-btn tc submit3" id="companySubmit" style="width:120px;">提交</a> -->
+					</td>
 				</tr>
 			</table>
 			<div class="error-toast">
