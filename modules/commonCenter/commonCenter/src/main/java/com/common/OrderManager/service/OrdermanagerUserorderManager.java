@@ -17,6 +17,7 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 
 public interface OrdermanagerUserorderManager extends BaseManager{
 
@@ -331,5 +332,11 @@ public interface OrdermanagerUserorderManager extends BaseManager{
   	 * @throws Exception
   	 */
   	public TempDemo getPrepayId(String userorderCode) throws Exception;
-  
+  	/**
+     *修改该待评价状态为已完成状态，前端调用   chenye
+     * @param id，
+     * @return
+     * @throws BusException
+     */
+	public OrdermanagerUserorder  finishStatus(String id) throws BusException;  
 }
