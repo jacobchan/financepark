@@ -10,7 +10,7 @@ $.youi.ajaxUtils.ajax({
 	});
 	
 		$(function(){
-			$(".hhf-submit").click(function(){
+			$(".submit1").click(function(){
 				/* var obj={
 				bxComp:$("#bxComp").val(),
 				bxWay:$("#bxWay").text(),
@@ -50,6 +50,9 @@ $.youi.ajaxUtils.ajax({
 						}else{
 							add = $('input[name="otheraddress"]').val();
 						}
+						
+						$(".submit1").addClass("undis") ;
+						$(".submit2").removeClass("undis") ;
 						var params = ['bxComp='+$("#bxComp").val(),
 										'bxType='+$("#bxType")[0].getAttribute("value"),
 										'bxRemark='+remark,
@@ -64,10 +67,15 @@ $.youi.ajaxUtils.ajax({
 							jsonp:'data:jsonp',
 							dataType:'jsonp',
 							success:function(results){
+								$(".submit1").removeClass("undis") ;
+								$(".submit2").addClass("undis") ;
 								if(results&&results.record){
 									$(".bg-tanc.m2").show();
 									countdown(3);
 								}
+							},error:function(XMLHttpRequest, textStatus, errorThrown){
+								$(".submit1").removeClass("undis") ;
+								$(".submit2").addClass("undis") ;
 							}
 						});
 					}else{
