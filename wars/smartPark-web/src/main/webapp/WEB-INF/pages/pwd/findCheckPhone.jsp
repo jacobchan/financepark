@@ -81,6 +81,9 @@
 						enableSmsButton(60,record.buff,'重新获取');
 					}
 				}
+			},
+			error:function(msg){
+				enableSmsButton(3,msg,'重新获取');
 			}
 		});
 	}

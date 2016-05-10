@@ -82,6 +82,10 @@ $(function(){
 					changeRandcode();
 				}
 				$('#sendMobileCaptcha').attr('onclick','volid(0);');
+			},
+			error:function(msg){
+				enableSmsButton(3,msg,'重新获取');
+				$(".message-yz").hide();
 			}
 		});
 	});
