@@ -25,7 +25,7 @@ var enteringType = Request['enteringType'];
 						var record = result.records ;
 						if(record.length==0){
 							$("#file").empty("") ;
-							$("#file").append("<li><p>目前还没有文档，敬请期待！</p></li>") ;
+							$("#file").append("<li><p>暂无文档！</p></li>") ;
 						}else{
 							getHt(result.records) ;
 						}
