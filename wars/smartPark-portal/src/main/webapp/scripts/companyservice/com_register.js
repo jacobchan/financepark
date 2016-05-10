@@ -338,6 +338,7 @@ $(function(){
 		params = params+$.youi.parameterUtils.propertyParameter("evaluateContent",evaluateContent);
 		
 		var serviceURL = baseUrl+"purchasingmanagerGenreevaluateManager/savePurGenreEvaluate.json";
+		
 		$.youi.ajaxUtils.ajax({
 			url:serviceURL,
 			data:params,
@@ -350,6 +351,19 @@ $(function(){
 					$(".toast").show();
 		            setTimeout('$(".toast").hide();',1000);//1秒=1000
 					evaluate();
+					var arg=getQueryStringArgs();
+					var id =arg.userorderId;
+					$.youi.ajaxUtils.ajax({
+						url: baseUrl+"ordermanagerUserorderManager/finishStatus.json",
+						data:{id:id},
+						jsonp:'data:jsonp',
+						dataType:'jsonp',
+						success:function(results){	
+							if(results&&results.record){
+								//alert("完成");
+							}
+						}
+					});
 				}
 			}
 		});
