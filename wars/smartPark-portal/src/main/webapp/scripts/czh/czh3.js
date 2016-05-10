@@ -319,7 +319,7 @@ $(function(){
 				success:function(results){
 					if(results&&results.record){
 						var record = results.record;
-						if(!record.flag){
+						if(record.flag){
 							showMessagem(record.buff);
 			         		setTimeout(function(){$(".bg-tanc").hide();},2000);
 						}
