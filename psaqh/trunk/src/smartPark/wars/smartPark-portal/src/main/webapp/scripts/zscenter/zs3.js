@@ -1,5 +1,5 @@
 $(function(){
-	$("#submit-ib").click(function(){
+	$(".submit1").click(function(){
 		var obj=["nmIssuenews.policyId="+$("form").attr("class")];//获取当前政策ID
 		//判断是否是企业员工
 		$.youi.ajaxUtils.ajax({
@@ -27,7 +27,9 @@ $(function(){
 				if(! isMobile.test(policyApplyContactTel)){
 					showMessage("请输入正确的手机号！");
 					return ;
-				}  
+				} 
+				$(".submit1").addClass("undis") ;
+				$(".submit2").removeClass("undis") ;
 				$("#loading").removeClass("undis") ;//页面加载显示动态效果
 				var obj1=[
 				 "policyApplyConpanyName="+policyApplyConpanyName,
@@ -41,7 +43,8 @@ $(function(){
 					jsonp:'data:jsonp',
 					dataType:'jsonp',
 					success:function(results){
-						console.log(results) ;
+						$(".submit1").removeClass("undis") ;
+						$(".submit2").addClass("undis") ;
 						if(results.record){
 							$("#policyApplyConpanyName").val("");//将输入框内容置为空
 							$("#policyApplyContactPeople").val("");
@@ -56,6 +59,9 @@ $(function(){
 						}else{
 							close("未知错误，申请失败！");
 						}
+					},error:function(XMLHttpRequest, textStatus, errorThrown){
+						$(".submit1").removeClass("undis") ;
+						$(".submit2").addClass("undis") ;
 					}
 				});
 			}
