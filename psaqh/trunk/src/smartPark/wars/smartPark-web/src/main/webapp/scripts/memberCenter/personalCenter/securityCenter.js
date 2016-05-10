@@ -1,4 +1,6 @@
-		$(function(){
+var oldPhone="";
+var memberId="";
+$(function(){
 			//修改密码
 			$(".changePassword").click(function(){
 				$("#oldmsg").empty();
@@ -66,8 +68,8 @@
 		//给新手机号发送短信验证码
 		function getCaptcha(){
 			$("#phonetest").empty();
-			var newPhone=$("#memberPhoneNumber").val();		
-			var params =['newPhone='+newPhone];
+			var newPhone=$("#memberPhoneNumber").val();	
+			var params =['newPhone='+newPhone,'oldPhone='+oldPhone];
 			var isMobile=/^(?:13\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;//手机号的格式
 			if(!newPhone){
 				 $("#phonetest").html("手机号为空");
@@ -75,7 +77,7 @@
 			}			
 			 if(!isMobile.test(newPhone)){
 				 $("#phonetest").html("手机号输入错误");
-				return false;
+				 return false;
 			}			
 			$.youi.ajaxUtils.ajax({
 				url:cenUrl +"web/loginUser/sendnewcaptcha.json",
@@ -83,19 +85,24 @@
 				success:function(result){
 					if(result && result.record){
 						var capt = result.record.html;
-						if(!/^\d{6}$/.test(capt)){
-							enableSmsButton(3,capt,'重新获取');						
+						if("新手机号与原手机号一致"==capt){
+							$("#phonetest").html("新手机号与原手机号一致");
 						}else{
-							enableSmsButton(60,'发送成功','重新获取');						
+							if(!/^\d{6}$/.test(capt)){
+								enableSmsButton(3,capt,'重新获取');	
+								$('#sendnewcaptcha').attr('onclick','volid();');
+							}else{
+								enableSmsButton(60,'发送成功','重新获取');	
+								$('#sendnewcaptcha').attr('onclick','volid();');
+							}
 						}
-						$('#sendnewcaptcha').attr('onclick','volid();');
+						
 					}					
 				}			
 			});
 		}
 		//换手机号验证
 		$(".changePhoneNumber").click(function(){	
-			var memberId=$("#memberId").val();
 			var newcaptcha=$("#newcaptcha").val();
 			var memberPhoneNumber=$("#memberPhoneNumber").val();
 			var params =['memberId='+memberId,'newcaptcha='+newcaptcha,'newPhone='+memberPhoneNumber];
@@ -122,8 +129,8 @@
 				success:function(result){
 					if(result && result.record){
 						var res = result.record;
-						$("#memberId").val(res.memberId);
-						$("#oldmemberPhoneNumber").val(res.memberPhoneNumber);
+						memberId=res.memberId;
+						oldPhone=res.memberPhoneNumber;
 					}					
 				}	
 			});
