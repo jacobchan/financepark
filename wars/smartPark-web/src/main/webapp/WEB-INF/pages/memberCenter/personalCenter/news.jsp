@@ -22,16 +22,7 @@
 								<col width="50"></col>
 							</colgroup>
 							<tbody id="newslist">
-								<tr>
-									<td>
-										<h4 class="c-333 mb10 fb f14">物业服务通知</h4>
-										<p>尊敬的用户，您的物业报修订单已经受理，我的维修人员将尽快上门为您服务，请耐心等候...</p>
-										<p class="f12">2016 年 2 月 17 日 15:26:20</p>
-									</td>
-									<td align="right">
-										<a href="" class="see-it">查看</a>
-									</td>
-								</tr>
+							
 							</tbody> 								
 						</table>
 						<div class="tcdPageCode fr"></div>
