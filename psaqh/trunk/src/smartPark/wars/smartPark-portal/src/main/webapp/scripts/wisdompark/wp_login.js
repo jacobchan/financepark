@@ -52,7 +52,7 @@ $(function(){
 			$(".bg-tanc.n1").hide();
 		}
 		
-		$("#ly6").click(function(){
+		$(".submit3").click(function(){
 			var lf_name = $("#name_1").val() ;
 			var lf_tel = $("#mobile_1").val() ;
 			var lf_date = $("#fkcodeDate").val() ;
@@ -80,7 +80,8 @@ $(function(){
 				showMessage("来访时间不能为空！") ;
 				return ;
 			}
-			
+			$(".submit3").addClass("undis") ;
+			$(".submit4").removeClass("undis") ;
 			var params=["recordCommdityId="+roomId,"visiteDate="+lf_date,
 			            "visiteTime="+lf_time,"visiteTel="+lf_tel,
 			            "visiteName="+lf_name,"recordType="+"03"] ;
@@ -92,6 +93,8 @@ $(function(){
 				jsonp : 'data:jsonp',
 				dataType : 'jsonp',
 				success : function(result) {
+					$(".submit3").removeClass("undis") ;
+					$(".submit4").addClass("undis") ;
 					if (result && result.record) {
 						if (isLogin) {
 							clear();
@@ -106,6 +109,9 @@ $(function(){
 							timer1 = setInterval("jump1()",1000);
 						}
 					}
+				},error:function(XMLHttpRequest, textStatus, errorThrown){
+					$(".submit3").removeClass("undis") ;
+					$(".submit4").addClass("undis") ;
 				}
 			});
 			
@@ -193,7 +199,7 @@ $(function(){
 		})
 		
 		//推荐提交事件
-		$("#subReferrer").click(function(){
+		$(".submit1").click(function(){
 			if(!isLogin){
 				$("#msg").html("请登录后重试！");
 				$(".toast").show();
@@ -242,6 +248,8 @@ $(function(){
 						alert("此手机号已经注册了！");
 						return ;
 					}else{
+						$(".submit1").addClass("undis") ;
+						$(".submit2").removeClass("undis") ;
 						var remark = $("#remark").val();
 						var stringData="memName="+name+"&"+"memPhone="+phone+"&"+"memRole="+memRole+"&"+"memSex="+memSex+"&"+"remark="+remark;
 						var serviceURL = baseUrl+"recommendMemberManager/saveRecommendMember.json";
@@ -252,6 +260,8 @@ $(function(){
 							jsonp:'data:jsonp',
 							dataType:'jsonp',
 							success:function(result){
+								$(".submit1").removeClass("undis") ;
+								$(".submit2").addClass("undis") ;
 								$(this).html("提交");
 								$("#msg").html("预约成功！");
 								$(".toast").show();
@@ -262,6 +272,8 @@ $(function(){
 								$("#memRole").val('');
 								$("#phone").val('');
 							},error:function(XMLHttpRequest, textStatus, errorThrown){
+								$(".submit1").removeClass("undis") ;
+								$(".submit2").addClass("undis") ;
 								alert(XMLHttpRequest);
 							}
 						});
