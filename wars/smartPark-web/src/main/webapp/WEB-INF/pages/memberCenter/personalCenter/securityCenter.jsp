@@ -54,7 +54,6 @@
 					<td style="width:120px;">新手机号码</td>
 					<td>
 						<input type="text" id="memberPhoneNumber" style="width:200px;" > 
-						<input type="hidden" readonly="readonly" id="memberId">
 						<a href="javascript:;" class="ml15 open-tanc" style="padding:0px 25px;" id="sendnewcaptcha"  onclick="getCaptcha();">获取验证码</a>
 						<span class="c-o ml20 " id="phonetest"></span>
 					</td>
