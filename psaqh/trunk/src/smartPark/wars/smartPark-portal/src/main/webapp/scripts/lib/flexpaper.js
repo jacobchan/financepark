@@ -404,7 +404,7 @@ window.FlexPaperViewerEmbedding = window.$f = function(id, args) {
                     }
                 }
                 vars = vars.slice(0, -1);
-                html += '<param name="flashvars" value=\'' + vars + '\' />';
+                html += '<param name="wmode" value="transparent" /><param name="flashvars" value=\'' + vars + '\' />';
             }
 
             html += "</object>";
