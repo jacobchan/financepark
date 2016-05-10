@@ -105,7 +105,7 @@ var pageSize=10;
  
 	//分页列表
 	 function refreshData(pageIndex,pageSize){
-		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'orderBy=desc:userorderTime'];
 		$.ajax({
 			url:serviceURL,
 			data:params.join('&'),
@@ -131,7 +131,7 @@ var pageSize=10;
 					"\");'>付款</a><span class='f12 ml5 mr5'>|</span><a href='#' onclick='cancelStatus(this)'>取消</a>";
 				}else if(record[i].userorderStatus=='02'){
 					//status = "已付款";
-					button = "已付款<span class='f12 ml5 mr5'>|</span><a href=''>评价</a>";
+					button = "已付款<span class='f12 ml5 mr5'>|</span><a href='#'  onclick='comment(\""+record[i].userorderId+"\",\""+record[i].genreId.genreCode+"\")'>评价</a>";
 				}else if(record[i].userorderStatus=='03'){
 					//status = "已完成";					
 				}else if(record[i].userorderStatus=='08'){
@@ -197,7 +197,7 @@ var pageSize=10;
 		 var genId = $(".c-b1").attr("data");	
 		 //订单号
 		 var userorderCode=$("#userorderCode").val();	
-		 var params=['userorderCode='+userorderCode,'operator:userorderCode=LIKE','genId='+genId];
+		 var params=['userorderCode='+userorderCode,'operator:userorderCode=LIKE','genId='+genId,'orderBy=desc:userorderTime'];
 		 $.ajax({
 			    url:baseUrl + "ordermanagerUserorderManager/getTotalCountPend.json",
 			    data:params.join('&'),
@@ -270,3 +270,44 @@ var pageSize=10;
 		$(this).parent().hide();
 	});
 }; 
+/*$('#a1').click(function(){	
+	window.location.href = proUrl + "companyservice/ITserver.html#label" ;
+});*/
+function comment(userorderId,genreCode){
+	if(genreCode == "0301"){//会议室
+		window.location.href=proUrl+"member/memberCenter/personalCenter/meetingRoomOrderDetails.html?userorderId="+userorderId;
+	}
+	/*else if(genreCode == "0302"){//车辆
+		window.location.href=proUrl+"member/memberCenter/personalCenter/carOrderDetails.html?userorderId="+userorderId;
+	}else if(genreCode == "0303"){//广告位
+		window.location.href=proUrl+"member/memberCenter/personalCenter/adsenseOrderDetails.html?userorderId="+userorderId;
+	}else if(genreCode == "0304"){//预留停车位
+		window.location.href=proUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderId="+userorderId;
+	}*/
+	else if(genreCode == "0501"){//公司注册
+		window.location.href=proUrl+"companyservice/com_register.html?userorderId="+userorderId+"#comment";
+	}else if(genreCode == "0502"){//工商变更
+		window.location.href=proUrl+"companyservice/Business.html?userorderId="+userorderId+"#comment";
+	}else if(genreCode == "0503"){//人事社保
+		window.location.href=proUrl+"companyservice/HRshebao.html?userorderId="+userorderId+"#comment";
+	}else if(genreCode == "0504"){//代理记账
+		window.location.href=proUrl+"companyservice/Agencybook.html?userorderCode="+userorderId+"#comment";
+	}else if(genreCode == "0505"){//法律服务
+		window.location.href=proUrl+"companyservice/Lawserver.html?userorderId="+userorderId+"#comment";
+	}else if(genreCode == "0506"){//商标专利
+		window.location.href=proUrl+"companyservice/patent.html?userorderId="+userorderId+"#comment";
+	}else if(genreCode == "0507"){//威客服务
+		window.location.href=proUrl+"companyservice/Wkserver.html?userorderId="+userorderId+"#comment";
+	}else if(genreCode == "0508"){//IT服务
+		window.location.href= proUrl + "companyservice/ITserver.html?userorderId="+userorderId+"#comment";
+		
+	}/* else if(genreCode == "0401"){//创立方
+		window.location.href=proUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderId="+userorderId+"#comment";
+	}else if(genreCode == "0601"){//物业报修
+		window.location.href=proUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderId="+userorderId+"#comment";
+	}else if(genreCode == "0602"){//物业缴费
+		window.location.href=proUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderId="+userorderId+"#comment";
+	}else if(genreCode == "02"){//园区饮食
+		window.location.href=proUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderId="+userorderId+"#comment";
+	} */
+}
