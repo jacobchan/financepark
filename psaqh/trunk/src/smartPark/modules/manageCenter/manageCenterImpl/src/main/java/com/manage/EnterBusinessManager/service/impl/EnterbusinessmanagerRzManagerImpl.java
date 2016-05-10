@@ -388,8 +388,8 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 			temp.setBuff("园区不存在！");
 		}else{
 			MemberInformation mem = memberInformationManager.getUserByPhone(phone);
+			EnterbusinessmanagerRz enterRZ = enterbusinessmanagerRzDao.getObjectByUniqueProperty("rzName", companyName);
 			if(mem == null){
-				EnterbusinessmanagerRz enterRZ = enterbusinessmanagerRzDao.getObjectByUniqueProperty("rzName", companyName);
 				MemberInformation memberInformation = new MemberInformation();
 				memberInformation.setMemberName(phone);
 				memberInformation.setMemberPassword(password);
@@ -400,6 +400,13 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 				MemberInformation member = memberInformationManager.saveMemberInformation(memberInformation);
 				// 添加默认角色
 				memberInformationManager.setDefaultRole(member);
+			}else{
+				if(mem.getCompanyId() == null){
+					if(enterRZ != null){
+						mem.setCompanyId(enterRZ.getRzId());
+					}
+					memberInformationManager.saveMemberInformation(mem);
+				}
 			}
 			temp.setFlag(true);
 		}
