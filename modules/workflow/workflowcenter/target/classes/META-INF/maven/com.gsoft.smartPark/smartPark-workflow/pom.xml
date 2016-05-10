@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.gsoft.smartPark</groupId>
+		<artifactId>smartPark</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../../</relativePath>
+	</parent>
+
+	<artifactId>smartPark-workflow</artifactId>
+	<packaging>jar</packaging>
+
+	<name>smartPark-workflow</name>
+	<url>http://maven.apache.org</url>
+	
+	<properties>
+		<gsoft.platform.version>1.0.1-SNAPSHOT</gsoft.platform.version>
+	</properties>
+	<!-- 导入项目公共包 -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.gsoft.smartPark</groupId>
+				<artifactId>smartPark</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+	
+		<dependency>
+			<groupId>com.gsoft.smartPark</groupId>
+			<artifactId>smartPark-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>com.gsoft.framework</groupId>
+			<artifactId>gsoft-framework-core</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.gsoft.framework</groupId>
+			<artifactId>gsoft-framework-context</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<!-- 工作流  -->
+<!-- 		<dependency>
+		  <groupId>com.gsoft.workflow</groupId>
+		  <artifactId>gsoft-workflow-workflow</artifactId>
+		  <version>${gsoft.framework.version}</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.gsoft.workflow</groupId>
+		  <artifactId>gsoft-workflow-workflowImpl</artifactId>
+		  <version>${gsoft.framework.version}</version>
+		</dependency> -->
+		<dependency>
+		  <groupId>com.gsoft.designer</groupId>
+		  <artifactId>gsoft-designer-workflow</artifactId>
+		  <version>${gsoft.framework.version}</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.gsoft.framework</groupId>
+		  <artifactId>gsoft-framework-workflow</artifactId>
+		  <version>${gsoft.framework.version}</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.gsoft.framework</groupId>
+		  <artifactId>gsoft-framework-workflowImpl</artifactId>
+		  <version>${gsoft.framework.version}</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.gsoft.framework</groupId>
+		  <artifactId>gsoft-framework-workflowEsbweb</artifactId>
+		  <version>${gsoft.framework.version}</version>
+		</dependency>
+		
+<!-- 		
+		<dependency>
+			<groupId>com.gsoft.platform</groupId>
+			<artifactId>gsoft-platform-common</artifactId>
+			<version>${gsoft.platform.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.gsoft.platform</groupId>
+			<artifactId>gsoft-platform-mgn</artifactId>
+			<version>${gsoft.platform.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.gsoft.platform</groupId>
+			<artifactId>gsoft-platform-dem</artifactId>
+			<version>${gsoft.platform.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<dependency> 
+			<groupId>com.gsoft.platform</groupId>
+			<artifactId>gsoft-platform-des</artifactId>
+			<version>${gsoft.platform.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.gsoft.platform</groupId>
+			<artifactId>gsoft-platform-dev</artifactId>
+			<version>${gsoft.platform.version}</version>
+			<scope>compile</scope>
+		</dependency>
+ -->		
+
+	</dependencies>
+</project>
