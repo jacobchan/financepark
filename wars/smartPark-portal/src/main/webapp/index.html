@@ -117,6 +117,7 @@
 				</div>
 				<div class="fl ml10">
 					<input id="reserveButton" type="button" value="立即预约" />
+					<input id="reserveButton1" type="button" value="提交中..." class="undis"/>
 				</div>
 			</div>
 		</form>
@@ -1371,6 +1372,8 @@
 								timer = setInterval("closeTanc()", 1000);
 								return;
 							}
+							$("#reserveButton").addClass("undis") ;
+							$("#reserveButton1").removeClass("undis") ;
 							var params = [ 'visiteDate=' + visiteDate,
 									'visiteName=' + lfName,
 									'recordType=' + recordType,
@@ -1386,6 +1389,8 @@
 								jsonp : 'data:jsonp',
 								dataType : 'jsonp',
 								success : function(result) {
+									$("#reserveButton").removeClass("undis") ;
+									$("#reserveButton1").addClass("undis") ;
 									if (result && result.record) {
 										if (isLogin) {
 											$(".bg-tanc.m1").show();
@@ -1401,9 +1406,11 @@
 										}
 
 									}
+								},error:function(XMLHttpRequest, textStatus, errorThrown){
+									$("#reserveButton").removeClass("undis") ;
+									$("#reserveButton1").addClass("undis") ;
 								}
 							});
-
 							//校验手机号格式
 							function isMobil(s) {
 								var patrn = /^(13[0-9]{9})|(14[0-9])|(18[0-9])|(15[0-9][0-9]{8})$/;
