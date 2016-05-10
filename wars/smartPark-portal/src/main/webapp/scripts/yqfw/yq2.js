@@ -77,7 +77,7 @@ function GetRequest() {
 			            $(".toast").hide();
 			        })
 					
-					 $(".hhf-submit").click(function(){	
+					 $("#sub").click(function(){	
 						 if(!isLogin){
 							    clearInterval(timer);
 							    $("#msg").text("请登录后重试！");
@@ -126,7 +126,8 @@ function GetRequest() {
 				            timer=setInterval("closeTanc()",1000);
 							return;
        			    	}
-                      
+                        $(".hhf-submit").addClass("undis") ;
+                        $("#sub1").removeClass("undis") ;
 						var params=['propertyservicemanagerEntering.enteringId='+enteringIdd,'enteringName='+enteringName,'enteringTelephone='+enteringTelephone,'enteringType='+enteringType];
 						var serviceURL = baseUrl+"propertyservicemanagerEntrecManager/savePropertyservicemanagerEntrec.json";
 						//公共方法
@@ -136,6 +137,8 @@ function GetRequest() {
 							jsonp:'data:jsonp',
 							dataType:'jsonp',
 							success:function(results){
+								$(".hhf-submit").removeClass("undis") ;
+		                        $("#sub1").addClass("undis") ;
 								if(results&&results.record){
 									$(".bg-tanc.m1").show();
 									$('#ti-m1').text('5');
@@ -145,6 +148,8 @@ function GetRequest() {
 									//window.location=cenUrl+"member/memberCenter/index.html";
 								}
 							},error:function(XMLHttpRequest, textStatus, errorThrown){
+								$(".hhf-submit").removeClass("undis") ;
+		                        $("#sub1").addClass("undis") ;
 								$("#errorText").text(XMLHttpRequest);
 								$(".bg-tanc.m2").show();
 								$('#ti-m2').text('5');
