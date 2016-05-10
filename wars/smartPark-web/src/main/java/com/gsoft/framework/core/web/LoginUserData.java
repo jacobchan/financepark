@@ -98,10 +98,10 @@ public class LoginUserData extends BaseDataController {
 			@RequestParam("phone") String phone,
 			@RequestParam("parkName") String parkName,@RequestParam("companyName")String companyName){
 		String password = "000000";
-		TempDemo temp = enterbusinessmanagerRzManager.singleLogin(phone, password, parkName,companyName);
-		if(!temp.isFlag()){
-			throw new BusException(temp.getBuff());
-		}
+		enterbusinessmanagerRzManager.singleLogin(phone, password, parkName,companyName);
+//		if(!temp.isFlag()){
+//			throw new BusException(temp.getBuff());
+//		}
 		// 自动登录
 		try {
 			DefaultLoginFormToken token = new DefaultLoginFormToken(phone,
@@ -110,7 +110,7 @@ public class LoginUserData extends BaseDataController {
 			org.apache.shiro.SecurityUtils.getSubject().login(token);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BusException("登录不成功！");
+//			throw new BusException("登录不成功！");
 		}
 		return new ModelAndView("redirect:/index.html");
 	}
