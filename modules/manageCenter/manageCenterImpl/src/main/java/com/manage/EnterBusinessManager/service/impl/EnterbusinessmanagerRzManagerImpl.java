@@ -30,6 +30,7 @@ import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.security.fuc.service.RoleManager;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.PasswordUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
@@ -392,7 +393,7 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 			if(mem == null){
 				MemberInformation memberInformation = new MemberInformation();
 				memberInformation.setMemberName(phone);
-				memberInformation.setMemberPassword(password);
+				memberInformation.setMemberPassword(PasswordUtils.md5Password(password));
 				memberInformation.setMemberPhoneNumber(phone);
 				if(enterRZ != null){
 					memberInformation.setCompanyId(enterRZ.getRzId());
@@ -405,8 +406,9 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 					if(enterRZ != null){
 						mem.setCompanyId(enterRZ.getRzId());
 					}
-					memberInformationManager.saveMemberInformation(mem);
 				}
+				mem.setMemberPassword(PasswordUtils.md5Password(password));
+				memberInformationManager.saveMemberInformation(mem);
 			}
 			temp.setFlag(true);
 		}
