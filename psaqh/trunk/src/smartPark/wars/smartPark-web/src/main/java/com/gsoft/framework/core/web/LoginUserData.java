@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.entity.MemberInformation;
@@ -93,12 +94,13 @@ public class LoginUserData extends BaseDataController {
 	 * @return
 	 */
 	@RequestMapping("/singleLogin.json")
-	public DataModelAndView singleLogin(HttpServletRequest request,
-			@RequestParam("phone") String phone,@RequestParam("password") String password,
+	public ModelAndView singleLogin(HttpServletRequest request,
+			@RequestParam("phone") String phone,
 			@RequestParam("parkName") String parkName,@RequestParam("companyName")String companyName){
+		String password = "000000";
 		TempDemo temp = enterbusinessmanagerRzManager.singleLogin(phone, password, parkName,companyName);
 		if(!temp.isFlag()){
-			return new DataModelAndView(temp.getBuff());
+			throw new BusException(temp.getBuff());
 		}
 		// 自动登录
 		try {
@@ -108,8 +110,9 @@ public class LoginUserData extends BaseDataController {
 			org.apache.shiro.SecurityUtils.getSubject().login(token);
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw new BusException("登录不成功！");
 		}
-		return new DataModelAndView("000000");
+		return new ModelAndView("redirect:/index.html");
 	}
 	
 	/**
