@@ -52,6 +52,7 @@
 			success:function(result){
 				var record = result.record;
 				alert("添加成功!");
+				$elem('form_propertyservicemanagerCharge',pageId).parents('.youi-subpage').subpage('close');
 			}
 		});
 	</youi:func>
