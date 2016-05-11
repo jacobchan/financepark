@@ -57,6 +57,8 @@ $(function() {
 		    				for(var i=0; i<record.length; i++){
 		    					var financingMsg = "";
 		    					var cssStyle = "";
+		    					var activeCss = "";
+		    					var clearfixCss = "";
 		    					var financingId=record[i].financingId;
 		    					var financingRe=record[i].financingRe;
 		    					var financingName=record[i].financingName;
@@ -70,14 +72,18 @@ $(function() {
 		    					if(financingStatus=="1"){
 		    						financingMsg = financingTime.substring(0,4)+"年"+financingTime.substring(5,7)+"月";
 		    						cssStyle = "yg-time history_time";
+		    						activeCss = "em-pa";
+		    						clearfixCss = "clearfix";
 		    					}else{
 		    						financingMsg = "进行中...";
 		    						cssStyle = "yg-time";
+		    						activeCss = "em-pa_active";
+		    						clearfixCss = "clearfix active";
 		    					}
 		    					htmls.push('<div class="'+cssStyle+'">'+
 			    					'<div class="yt-pa"><span>'+financingMsg+'</span></div>'+
-			    					'<em class="em-pa_active"></em>'+
-			    					'<div class="clearfix active">'+
+			    					'<em class="'+activeCss+'"></em>'+
+			    					'<div class="'+clearfixCss+'">'+
 			    						'<span>'+financingSubValue+'</span><span>融资金额：<em class="c-o">'+financingAmount+'万元</em></span><span>融资估值：<em class="c-o">'+financingCost+'万元</em></span><span>可持股份：<em class="c-o">'+financingPre+'%</em></span>'+
 			    					'</div>'+
 			    					'<p>'+financingDescribe+'</p>'+
