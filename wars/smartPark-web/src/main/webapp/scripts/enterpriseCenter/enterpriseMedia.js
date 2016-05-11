@@ -89,6 +89,11 @@ function submit(params){
 				$('#toast_text').html('保存成功！');
 				$(".toast").show();
 	            setTimeout('$(".toast").hide();',2000);//1秒=1000
+	            $("#mediaId").val("");
+	        	$("#mediaRe").html("");
+	        	$("#mediaTitle").val("");
+	        	$("#mediaTilurl").val("");
+	            location.reload();
 			}
 		}
 	});

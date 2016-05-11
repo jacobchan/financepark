@@ -5,7 +5,6 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>企业通讯录</title>
 		<%@ include file="/WEB-INF/pages/common/enterpriseScriptAddCss.jsp"%>
-		<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/page/zs.css">
 		<script type="text/javascript">
 			var pageSize=4;
 			var pageCount=1;
@@ -76,9 +75,9 @@
 			                    '<tr>'+
 			                        '<td align="left" valign="middle" class="pl20"><span class="f14 color_6 hide_dian">'+record[i].memberDescribe2+'</span></td>'+
 			                    '</tr>'+
-			                    '<!--<tr>'+
+			                    '<tr>'+
 			                        '<td align="left" valign="middle" class="pl20"><span class="f12 color_41"><a href="javascript:void(0);">编辑</a>&nbsp;丨&nbsp;<a href="javascript:void(0);">设置权限</a>&nbsp;丨&nbsp;<a href="javascript:void(0);">删除</a></span></td>'+
-			                    '</tr>-->'+
+			                    '</tr>'+
 		                	'</table>'+
 		            	'</li>';
 				}

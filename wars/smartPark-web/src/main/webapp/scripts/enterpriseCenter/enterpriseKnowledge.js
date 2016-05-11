@@ -41,6 +41,13 @@ function submit(params){
 				$('#toast_text').html('保存成功！');
 				$(".toast").show();
 	            setTimeout('$(".toast").hide();',2000);//1秒=1000
+	            
+	            $("#knowledgeId").val("");
+	        	$("#knowledgeRe").html("");
+	        	$("#knowledgeTitle").val("");
+	        	$("#knowledgeContent").val("");
+	        	$("#currentCount").html(0);
+	            location.reload();
 			}
 		}
 	});
