@@ -135,4 +135,12 @@ public interface PurchasingmanagerGenreManager extends BaseManager{
 	 * @return
 	 */
 	public List<PurchasingmanagerGenre> getGenreProject(String userId);
+	/**
+	 * 获取企业服务的所有类别列表(包括IT服务子类别)
+	 * @param userId
+	 * @return
+	 * @throws BusException
+	 */
+	public List<PurchasingmanagerGenre> getCompOrderTypes()
+			throws BusException;
 }
