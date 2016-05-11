@@ -12,7 +12,7 @@
 		<div id="user_info" class="w1200 tr head-top clearfix">
 			<span style="color:#cdcdcd;" class="mr10">当前用户:${user.loginName}</span>
 			<a href="<%=request.getContextPath()%>/member/memberCenter/logout.html" class="brcd">退出</a>
-			<c:if test="${not empty member.companyId}">
+			<c:if test="${member.roleId == 'ROLE_QY_ADMIN'}">
 				<a href="<%=request.getContextPath()%>/enterprise/info.html" class="brcd">企业管理平台</a>
 			</c:if>
 			<%-- <a href="<%=request.getContextPath()%>/member/memberCenter/index.html" class="brcd">个人中心</a> --%>
