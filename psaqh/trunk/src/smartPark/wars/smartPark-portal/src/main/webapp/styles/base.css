@@ -193,7 +193,7 @@ input{font-family:"微软雅黑";}
 
 /**页头和页尾**/
 /**头**/
-.head-top{padding: 10px 0px;line-height: 20px;position:relative;background: rgb(84, 84, 84);}
+.head-top{position:relative;background: rgb(84, 84, 84);height: 40px;line-height: 40px;}
 .head-top a{color: #cdcdcd;margin-right: 15px;font-size: 13px;}
 .head-top a:hover{color: #fff !important;}
 .header-cen{background: #fff;border-bottom: 1px solid #e8e8e8;padding: 20px 0px;min-width: 1200px;}
@@ -230,18 +230,20 @@ input{font-family:"微软雅黑";}
 .per-center-box dl dd ul li a{padding-left: 75px;}
 .per-center-box dl dd ul li.active>a{ color:#fff;background:#fa742c;border-top:1px solid #efefef;border-bottom:1px solid #efefef;}
 
-.brcd{border-right: 1px #999 solid;padding-right: 15px;display: inline-block;color: #cdcdcd;font-size: 13px;cursor:pointer;margin-right: 15px;line-height: 13px;}
-.brcd .pa{display: none;top: 41px; padding:0px 15px;text-align: center;position: absolute;border: 1px #ECEBEB solid;background: #fff;z-index: 2000;}
-.brcd .pa:before{content: "";display: inline-block;position: absolute;border: 7px transparent solid;border-bottom-color: #fff;top:-14px;left:50%;margin-left: -7px}
-.brcd:hover{color: #fff;}
-.brcd:hover .pa{display: block}
-.brcd .wximg{right:145px;}
-.brcd .apptel{width: 140px;right: 70px;}
-.brcd .apptel h3{color: #333;font-size: 12px;line-height: 40px;}
-.brcd .apptel a{text-align: left;width: 104px;height: 30px;padding-left: 10px;background: #ff6715;color: #fff;display: block;line-height: 30px;margin:0px auto 10px ;}
-.brcd .apptel a:hover{background: #FF5900;}
-.brcd .fwtel{width: 230px;right:175px;}
-.brcd .fwtel p{text-align: center;font-size: 12px;line-height: 38px;color: #333;}
+.ht-pr{position: relative;float: left;}
+.brcd{border-right: 1px #999 solid;padding:0px 15px;display: inline-block;color: #cdcdcd;font-size: 13px;cursor:pointer;line-height: 13px;}
+a.brcd{padding-left: 0px;}
+.ht-pr .pa{display: none;top: 40px; padding:0px 15px;text-align: center;position: absolute;border: 1px #ECEBEB solid;background: #fff;z-index: 2000;}
+.ht-pr .pa:before{content: "";display: inline-block;position: absolute;border: 7px transparent solid;border-bottom-color: #fff;top:-14px;left:50%;margin-left: -7px}
+.ht-pr:hover{color: #fff;}
+.ht-pr:hover .pa{display: block;}
+.ht-pr .wximg{right:50%;margin-right: -70px;}
+.ht-pr .apptel{width: 140px;right:50%;margin-right: -70px;}
+.ht-pr .apptel h3{color: #333;font-size: 12px;line-height: 40px;}
+.ht-pr .apptel a{text-align: left;width: 104px;height: 30px;padding-left: 10px;background: #ff6715;color: #fff;display: block;line-height: 30px;margin:0px auto 10px ;}
+.ht-pr .apptel a:hover{background: #FF5900;}
+.ht-pr .fwtel{width: 230px;right:50%;margin-right: -115px;}
+.ht-pr .fwtel p{text-align: center;font-size: 12px;line-height: 38px;color: #333;}
 
 
 /**分页**/
