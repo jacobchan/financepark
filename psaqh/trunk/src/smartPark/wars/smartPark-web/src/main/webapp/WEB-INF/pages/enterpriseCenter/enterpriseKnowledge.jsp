@@ -71,7 +71,7 @@
 			flash_swf_url : '../../scripts/fileUpload/Moxie.swf',
 			silverlight_xap_url : '../../scripts/fileUpload/Moxie.xap',
 			url : cenUrl+'fileUpload/goUpload.html',//上传文件路径
-			max_file_size : '2048kb', //最大只能上传2048kb的文件
+			//max_file_size : '2048kb', //最大只能上传2048kb的文件
 			prevent_duplicates : true, //不允许选取重复文件
 			//此处是控制上传组件是否允许多文件选择还是单文件选择：true/多文件；false/单文件
 			multi_selection: false,
@@ -86,10 +86,18 @@
 			} ],
 			init : {
 				FilesAdded : function(up, files) {
-					//此处用户图片的回显（可根据自己的业务修改）
-					previewImage(files[0], function(imgsrc) {
-						$("#rzLogo").attr("src",imgsrc);
-					});
+					//判断是否大于2M，并处理（大于做出提示并清除上传队列，不大于继续上传并阅览）
+					if(parseInt(files[0].size)/1024<=2048){
+						//此处用户图片的回显（可根据自己的业务修改）
+						previewImage(files[0], function(imgsrc) {
+							$("#rzLogo").attr("src",imgsrc);
+						});
+					}else{
+						up.removeFile(files[0]);
+						$('#toast_text').html('图像大小不能超过2MB！');
+						$(".toast").show();
+			            setTimeout('$(".toast").hide();',3000);
+					}
 				}
 			}
 		});
