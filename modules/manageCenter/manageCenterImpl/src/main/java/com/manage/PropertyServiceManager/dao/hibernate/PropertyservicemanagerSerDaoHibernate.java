@@ -36,7 +36,7 @@ public class PropertyservicemanagerSerDaoHibernate extends
 		return (List<Record>)getHibernateTemplate().execute(new HibernateCallback<Object>() {
 			public Object doInHibernate(Session session)
 					throws HibernateException, SQLException {
-				String sql = "select ym.ITEM_CAPTION,t.SER_PRICE_,t.CREATE_TIME_ from sp_propertyservicemanager_ser t "
+				String sql = "select ym.ITEM_CAPTION,t.SER_PRICE_,DATE_FORMAT(t.CREATE_TIME_,'%Y-%m-%d %H:%i:%s') as TIME from sp_propertyservicemanager_ser t "
 						+ "left join youi_codeitem ym on t.SER_NAME_ = ym.ITEM_VALUE "
 						+"left join youi_codemap yp on ym.Codemap_ID = yp.CODEMAP_ID WHERE yp.`CODE`='ser_name' and t.TS_ID_ = :id";
 				Query query = session.createSQLQuery(sql);
