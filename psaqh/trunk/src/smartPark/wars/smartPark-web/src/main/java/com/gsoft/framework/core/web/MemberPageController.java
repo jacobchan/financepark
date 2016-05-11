@@ -26,6 +26,10 @@ import com.gsoft.framework.security.UserService;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.util.StringUtils;
+import com.manage.EmployeeManager.entity.EnterpriseEmployees;
+import com.manage.EmployeeManager.entity.EnterpriseRole;
+import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
+import com.manage.EmployeeManager.service.EnterpriseRoleManager;
 
 /**
  * 会员页面控制器
@@ -40,6 +44,10 @@ public class MemberPageController {
 	private UserService userService;//用户服务
 	@Autowired
 	private MemberInformationManager memberInformationManager;
+	@Autowired
+	private EnterpriseEmployeesManager enterpriseEmployeesManager;
+	@Autowired
+	private EnterpriseRoleManager enterpriseRoleManager;
 	
 	@RequestMapping(value = "/{pageModule}/{pagePath}.html")
 	public ModelAndView index(HttpServletRequest request, 
@@ -90,10 +98,16 @@ public class MemberPageController {
 		model.setViewName(/*pageModule+"/"+*/pagePath);
 		model.addObject("user", account);
 		Collection<Condition> condition =  new ArrayList<Condition>();
-		condition.add(ConditionUtils.getCondition("memberName", Condition.EQUALS,account.getLoginName()));
-		List<MemberInformation> members =  memberInformationManager.getMemberInformations(condition, null);
-		if(members.size()>0){
-			model.addObject("member", members.get(0));
+		condition.add(ConditionUtils.getCondition("member.memberName", Condition.EQUALS,account.getLoginName()));
+		List<EnterpriseEmployees> employes =  enterpriseEmployeesManager.getEnterpriseEmployeess(condition, null);
+		if(employes.size()>0){
+			EnterpriseEmployees emp = employes.get(0);
+			Collection<Condition> conditions =  new ArrayList<Condition>();
+			conditions.add(ConditionUtils.getCondition("employees.employeesId", Condition.EQUALS,emp.getEmployeesId()));
+			List<EnterpriseRole> role=  enterpriseRoleManager.getEnterpriseRoles(conditions, null);
+			if(role.size()>0){
+				model.addObject("member", role.get(0).getRole());
+			}
 		}
 		model.addObject("pagePath", pagePath);
 		return model;
