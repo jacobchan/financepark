@@ -28,7 +28,7 @@
 		<youi:gridCol property="commodityDownTime"  caption="下架时间" align="center" width="15%"/>
 		<youi:gridCol property="purchasingmanagerGenre.genreId"  caption="商品类别" align="center" width="0"/>
 		
-		<youi:button name="commodity_extend" active="1" caption="商品扩展属性"/>
+		<%-- <youi:button name="commodity_extend" active="1" caption="商品扩展属性"/> --%>
 		<%-- <youi:button name="veiwCommodity" active="1" caption="查看详情"/> --%>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
