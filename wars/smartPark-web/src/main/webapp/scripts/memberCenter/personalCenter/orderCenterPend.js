@@ -120,34 +120,42 @@ var pageSize=10;
 		//拼接卡号列表
     function _parseRecords_pend(record){			
 	    var html="";
+	    $(".pend_list").empty();
 		if(record.length>0){
 			for(var i=0;i<record.length;i++){				
 				var status = "";
 				var button = "";
-				if(record[i].userorderStatus=='01'){
-					var userorderCode = record[i].userorderCode;
-					//status = "待付款";	
-					button = "<a href='javascript:void(0);' onclick='goPay(\""+userorderCode+
-					"\");'>付款</a><span class='f12 ml5 mr5'>|</span><a href='#' onclick='cancelStatus(this)'>取消</a>";
-				}else if(record[i].userorderStatus=='02'){
-					//status = "已付款";
-					button = "已付款<span class='f12 ml5 mr5'>|</span><a href='#'  onclick='comment(\""+record[i].userorderId+"\",\""+record[i].genreId.genreCode+"\")'>评价</a>";
-				}else if(record[i].userorderStatus=='03'){
-					//status = "已完成";					
-				}else if(record[i].userorderStatus=='08'){
-					status = "已取消";					
-				}
-				var method = "viewOrder(\""+record[i].userorderCode+"\",\""+record[i].genreId.genreCode+"\");";
-				    html+= '<tr class="aaa" id="'+record[i].userorderId+'">'
+				var method = "viewOrder(\""+record[i].userorderCode+"\",\""+record[i].genreId.genreCode+"\");";				
+				if(record[i].userorderStatus=='01'){  // 01为待付款
+					var userorderCode =//status = "待付款";	
+					button = "<a href='javascript:void(0);' onclick='goPay(\""+userorderCode+"\");'>付款</a>" +
+							 "<span class='f12 ml5 mr5'>|</span><a href='#' onclick='cancelStatus(this)'>取消</a>";
+					html+= '<tr  id="'+record[i].userorderId+'">'
 				    html+=   "<td><a class='custor' onclick='"+method+"'>"+record[i].userorderCode+"</a></td>";
-				    //html+=   '<td>'+record[i].userorderCode+'</td>';
 					html+=   '<td>'+record[i].userorderProject+'</td>'
                     html+=   '<td>'+record[i].userorderAmount+'</td>'
                     html+=   '<td>'+record[i].userorderTime.substring(0,10)+'</td>'                                                                     
                     html+=   "<td>"+status+button+"</td>";
-                    html+= '</tr>'				
+                    html+= '</tr>'	
+				}	
 			}
-			 $(".pend_list").html(html);	
+			 $(".pend_list").append(html);
+				for(var i=0;i<record.length;i++){				
+					var status = "";
+					var button = "";
+					var method = "viewOrder(\""+record[i].userorderCode+"\",\""+record[i].genreId.genreCode+"\");";
+					if(record[i].userorderStatus=='02'){//02为已付款，待评价状态
+						button = "<font color='green'>已付款</font><span class='f12 ml5 mr5'>|</span><a href='#'  onclick='comment(\""+record[i].userorderId+"\",\""+record[i].genreId.genreCode+"\")' >评价</a>";
+							 	html+= '<tr class="aaa" id="'+record[i].userorderId+'">'
+							    html+=   "<td><a class='custor' onclick='"+method+"'>"+record[i].userorderCode+"</a></td>";
+								html+=   '<td>'+record[i].userorderProject+'</td>'
+			                    html+=   '<td>'+record[i].userorderAmount+'</td>'
+			                    html+=   '<td>'+record[i].userorderTime.substring(0,10)+'</td>'                                                                     
+			                    html+=   "<td>"+status+button+"</td>";
+			                    html+= '</tr>'							
+					}				
+				}
+				 $(".pend_list").append(html);
 			}else{
 				var	html1 =   '<tr>'
 					html1 += '	<td colspan="6">暂无记录</td>'
@@ -270,9 +278,7 @@ var pageSize=10;
 		$(this).parent().hide();
 	});
 }; 
-/*$('#a1').click(function(){	
-	window.location.href = proUrl + "companyservice/ITserver.html#label" ;
-});*/
+
 function comment(userorderId,genreCode){
 	if(genreCode == "0301"){//会议室
 		window.location.href=proUrl+"member/memberCenter/personalCenter/meetingRoomOrderDetails.html?userorderId="+userorderId;
