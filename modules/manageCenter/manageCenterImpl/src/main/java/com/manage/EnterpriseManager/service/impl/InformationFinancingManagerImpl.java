@@ -85,7 +85,7 @@ public class InformationFinancingManagerImpl extends BaseManagerImpl implements 
 		// }else{//新增
 		//
 		// }
-		o.setFinancingStatus("1");
+		o.setFinancingStatus("0");
 		o.setCreateTime(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
 		return informationFinancingDao.save(o);
 	}
