@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <title>企业资料——企业通讯录管理</title>
-<link rel="stylesheet" type="text/css" href="../styles/lib/bootstrap.css">
 <link href="../styles/base.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="../styles/page/main.css">
 <script type="text/javascript" src="../scripts/lib/jquery-1.9.1.min.js"></script>
@@ -49,7 +48,7 @@
                                 <td align="left" valign="middle" class="pl20"><span class="f14 color_6 hide_dian">如若明知水瓶座最爱是流泪，若然道别是下一次如若明知水瓶座最爱是流泪，若然道别是下一次</span></td>
                             </tr>
                             <tr>
-                                <td align="left" valign="middle" class="pl20"><span class="f12 color_41"><a href="javascript:void(0);">编辑</a>&nbsp;丨&nbsp;<a href="javascript:void(0);">设置权限</a>&nbsp;丨&nbsp;<a href="javascript:void(0);">删除</a></span></td>
+                                <td align="left" valign="middle" class="pl20"><span class="f12 color_41"><a href="javascript:void(0);" class="edit-show">编辑</a>&nbsp;丨&nbsp;<a href="javascript:void(0);" class="set-show">设置权限</a>&nbsp;丨&nbsp;<a href="javascript:void(0);">删除</a></span></td>
                             </tr>
                         </table>
                     </li>
@@ -67,7 +66,7 @@
                                 <td align="left" valign="middle" class="pl20"><span class="f14 color_6 hide_dian">如若明知水瓶座最爱是流泪，若然道别是下一次如若明知水瓶座最爱是流泪，若然道别是下一次</span></td>
                             </tr>
                             <tr>
-                                <td align="left" valign="middle" class="pl20"><span class="f12 color_41"><a href="javascript:void(0);">编辑</a>&nbsp;丨&nbsp;<a href="javascript:void(0);">设置权限</a>&nbsp;丨&nbsp;<a href="javascript:void(0);">删除</a></span></td>
+                                <td align="left" valign="middle" class="pl20"><span class="f12 color_41"><a href="javascript:void(0);" class="edit-show">编辑</a>&nbsp;丨&nbsp;<a href="javascript:void(0);" class="set-show">设置权限</a>&nbsp;丨&nbsp;<a href="javascript:void(0);">删除</a></span></td>
                             </tr>
                         </table>
                     </li>
@@ -84,7 +83,7 @@
                                 <td align="left" valign="middle" class="pl20"><span class="f14 color_6 hide_dian">如若明知水瓶座最爱是流泪，若然道别是下一次如若明知水瓶座最爱是流泪，若然道别是下一次</span></td>
                             </tr>
                             <tr>
-                                <td align="left" valign="middle" class="pl20"><span class="f12 color_41"><a href="javascript:void(0);">编辑</a>&nbsp;丨&nbsp;<a href="javascript:void(0);">设置权限</a>&nbsp;丨&nbsp;<a href="javascript:void(0);">删除</a></span></td>
+                                <td align="left" valign="middle" class="pl20"><span class="f12 color_41"><a href="javascript:void(0);" class="edit-show">编辑</a>&nbsp;丨&nbsp;<a href="javascript:void(0);" class="set-show">设置权限</a>&nbsp;丨&nbsp;<a href="javascript:void(0);">删除</a></span></td>
                             </tr>
                         </table>
                     </li>
@@ -101,7 +100,7 @@
                                 <td align="left" valign="middle" class="pl20"><span class="f14 color_6 hide_dian">如若明知水瓶座最爱是流泪，若然道别是下一次如若明知水瓶座最爱是流泪，若然道别是下一次</span></td>
                             </tr>
                             <tr>
-                                <td align="left" valign="middle" class="pl20"><span class="f12 color_41"><a href="javascript:void(0);">编辑</a>&nbsp;丨&nbsp;<a href="javascript:void(0);">设置权限</a>&nbsp;丨&nbsp;<a href="javascript:void(0);">删除</a></span></td>
+                                <td align="left" valign="middle" class="pl20"><span class="f12 color_41"><a href="javascript:void(0);" class="edit-show">编辑</a>&nbsp;丨&nbsp;<a href="javascript:void(0);" class="set-show">设置权限</a>&nbsp;丨&nbsp;<a href="javascript:void(0);">删除</a></span></td>
                             </tr>
                         </table>
                     </li>
@@ -134,12 +133,74 @@
     </div><!-- Main Wrapper -->
 
 </div>
-<script>
-/*获取浏览器的高度*/
-window.onload=function(){
-  var height = Math.max((document.documentElement.clientHeight -135), ($(".main-wrapper").height()));
-  document.getElementById('main-wrapper-right').style.height=height+'px';
-}
+<!--***弹窗 start****************************************-->
+    <div class="bg-tanc m1">
+        <div class="tanc-con c3" style="top:50%;margin-top:-180px;width:440px;padding:40px 30px;color:#333;">
+            <a href="javascript:;" class="tc-close"></a>
+            <h3 class="mb10 f16" style="font-size:16px;"><b>编辑信息</b></h3>
+            <table class="line-table" style="font-size:14px;width:360px">
+                <colgroup>
+                    <col width="100"></col>
+                    <col></col>
+                </colgroup>
+                <tr>
+                    <td><b>姓名</b></td>
+                    <td><input type="text" style="width:200px;"></td>
+                </tr>
+                <tr>
+                    <td><b>联系电话</b></td>
+                    <td><input type="text" style="width:200px;"></td>
+                </tr>
+                <tr>
+                    <td><b>权限</b></td>
+                    <td>
+                        <label class="mr30 lh30"><input type="checkbox" name="address" class="mr5" checked="checked">财务支付</label>
+                        <label class="mr30 lh30"><input type="checkbox" name="address" class="mr5">评论消息管理</label>
+                        <label class="mr30 lh30"><input type="checkbox" name="address" class="mr5">订单管理</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><input value="保存" class="hhf-submit tc" style="height:40px;width:100px;padding:0px;" type="submit"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="bg-tanc m2"> 
+        <div class="tanc-con c3" style="top:50%;margin-top:-130px;width:550px;padding:40px 30px;color:#333;">
+            <a href="javascript:;" class="tc-close"></a>
+            <h3 class="mb10 f16" style="font-size:16px;"><b>权限设置</b><span class="ml30 f12 color_orange">员工：雷布斯</span></h3>
+             <table class="line-table" style="font-size:14px;width:490px">
+                <colgroup>
+                    <col width="100"></col>
+                    <col></col>
+                </colgroup>
+                <tr>
+                    <td><b>可分配角色</b></td>
+                    <td>
+                        <label class="mr30 lh30"><input type="checkbox" name="address" class="mr5" checked="checked">财务支付</label>
+                        <label class="mr30 lh30"><input type="checkbox" name="address" class="mr5">评论消息管理</label>
+                        <label class="mr30 lh30"><input type="checkbox" name="address" class="mr5">订单管理</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><input value="保存" class="hhf-submit tc mt20" style="height:40px;width:100px;padding:0px;" type="submit"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!--***弹窗 end****************************************-->
+<script type="text/javascript">
+    $(function () {
+        $(".edit-show").click(function(){
+            $(".bg-tanc.m1").show();
+        });
+        $(".set-show").click(function(){
+            $(".bg-tanc.m2").show();
+        });
+        $(".tc-close").click(function(){
+            $(".bg-tanc").hide();
+        });
+    })
 </script>
 </body>
 </html>
