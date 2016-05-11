@@ -419,12 +419,12 @@
 							lowest_price_date.push(record[i].depDate);
 						}
 						var maxDays = (new Date()).MaxDayOfDate();
-						var currentMonth = (new Date()).getMonth();
+						var currentMonth = (new Date()).getMonth()+1;
 						//填充日历控件最低价price数组
 						for(var i=0;i<maxDays;i++){
 							var flag = 0;
 							for(var j=0;j<lowest_price_date.length;j++){
-								if((new Date(lowest_price_date[0].replace(/-/g,'/'))).getMonth()==currentMonth){
+								if((new Date(lowest_price_date[j].replace(/-/g,'/'))).getMonth()+1==currentMonth){
 									if((new Date(lowest_price_date[j].replace(/-/g,'/'))).getDate()==(i+1)){
 										price.push(lowest_price[j]);
 										flag = 1;
@@ -438,7 +438,7 @@
 								price.push(0);
 							}
 						}
-						console.debug(price);
+						console.debug("price"+price);
 						//日历控件当前日期月份的价格数组
 						$("#kalendar-detail").dateplug({
 							price: price
@@ -634,8 +634,8 @@
 					new_date_arr.push(tmp.Format("yyyy-MM-dd"));
 				}
 			}
-			console.debug("a:"+new_price_arr);
-			console.debug("b:"+new_date_arr);
+		    /*console.debug("a:"+new_price_arr);
+			console.debug("b:"+new_date_arr);*/
 			//***************************************************************
 			var arr_html = new Array();
 			for(var i=0,k=0;i<new_date_arr.length;){
@@ -684,9 +684,7 @@
 			weekList(gotodate);
 		}
 		function weekList(gotodate){
-			//alert(gotodate)
 		    var obj = $("#week-list"),len = obj.find(".sc-price-date").length,width = obj.width(),times=0;
-			console.log("width: "+width)
 		    if(len<=1){
 			    obj.siblings(".preview").addClass("disabled");
 		    }else{
@@ -736,9 +734,9 @@
 					arr.push(0);
 				}
 			}
-			console.debug("a:"+arrdate);
+			/* console.debug("a:"+arrdate);
 			console.debug("b:"+arrprice);
-			console.debug("c:"+arr);
+			console.debug("c:"+arr); */
 			return arr;
 		}
 		//日期对比 a为开始日期b为结束日期 a>b false a<=b true
