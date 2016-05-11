@@ -304,10 +304,14 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     	if(null!=rz && !"".equals(rz.getBuildingId()) && null!=rz.getBuildingId()){
     		build = bbmBuildingDao.get(rz.getBuildingId());
     		numberCode.append(build.getBuildingNo());
+    	}else{
+    		numberCode.append("A1");
     	}
     	if(null!=rz && !"".equals(rz.getFloorId()) && null!=rz.getFloorId()){
     		floor = bbmFloorDao.get(rz.getFloorId());
     		numberCode.append(floor.getFloorNo());
+    	}else{
+    		numberCode.append("1F");
     	}
     	rz.setRzSign(numberCode.toString().replaceAll("-", "")+random(4));
     	EnterbusinessmanagerRz eb = enterbusinessmanagerRzDao.save(rz);
