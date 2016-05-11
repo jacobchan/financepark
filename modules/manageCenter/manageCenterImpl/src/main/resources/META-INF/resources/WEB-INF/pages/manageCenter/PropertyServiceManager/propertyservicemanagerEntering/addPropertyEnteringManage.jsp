@@ -19,7 +19,7 @@
 	<youi:func name="subpage_init" params="record">
 		$elem('grid_entering',pageId).grid('pReload');
 	</youi:func>
-	<!-- 批量提交维修单 -->
+	<!-- 批量提交 -->
 	<youi:func name="func_grid_chargeSubmit" >
 		var enteringId = $elem('record_sFpro_enteringId',pageId).fieldValue();
 		var records = $elem('grid_entering',pageId).grid('getRecords');
@@ -38,6 +38,7 @@
 			success:function(result){
 				var record = result.record;
 				alert("添加成功!");
+				$elem('grid_entering',pageId).parents('.youi-subpage').subpage('close');
 			}
 		});
 	</youi:func>
