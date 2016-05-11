@@ -19,9 +19,10 @@
 								success : function(result) {
 					    			if (result && result.record) {
 					    				var record = result.record;
+					    				var rzsign = record.rzSign==null?"":record.rzSign;
 					    				$("#codeDiv").empty();
 					    				var codeStr = '<div class="yqm_left">'+
-							                    '<span class="yqm_01">企业邀请码：<font id="rzSign">'+record.rzSign+'</font></span>'+
+							                    '<span class="yqm_01">企业邀请码：<font id="rzSign">'+rzsign+'</font></span>'+
 							                    '<span class="yam_02">（特别说明：为安全起见，可自行刷新更换邀请码刷新后，之前的邀请码将即刻失效。）</span>'+
 							                '</div>'+
 							                '<div class="yqm_right">'+
