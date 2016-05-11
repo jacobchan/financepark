@@ -53,6 +53,7 @@ function check(roomId,rzName,rzRemark,rzUrl,enTypeId,productDiscriptio){
 		alert("产品描述不能为空！");
 		return false;
 	}
+	return true;
 };
 //根据企业ID获取企业所在单元列表
 function roomAddress(rzId){
