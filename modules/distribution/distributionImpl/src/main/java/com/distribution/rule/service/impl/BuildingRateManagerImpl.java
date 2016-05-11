@@ -64,14 +64,24 @@ public class BuildingRateManagerImpl extends BaseManagerImpl implements Building
      * 保存对象
      */
     @EsbServiceMapping
-    public BuildingRate saveBuildingRate(BuildingRate o) throws BusException{
-    	/*String buildingRateId = o.getRecId();
+    public BuildingRate saveBuildingRate(BuildingRate o,@ServiceParam(name="buildingId") String buildingId) throws BusException{
+    	String buildingRateId = o.getRecId();
     	boolean isUpdate = StringUtils.isNotEmpty(buildingRateId);
     	if(isUpdate){//修改
-    	
-    	}else{//新增
     		
-    	}*/
+    	}else{//新增
+    		//buildingId不为空，选择楼宇信息
+    		if(StringUtils.isNotEmpty(buildingId)){
+    			o.setItemId(buildingId);
+    			o.setItemType("1");
+    		}else{
+    			o.setItemType("0");
+    		}
+    		//判断佣金分成是否为0
+    		if(!StringUtils.isNotEmpty(o.getDicRate())){
+    			o.setDicRate("0");
+    		}
+    	}
     	return buildingRateDao.save(o);
     }
 
