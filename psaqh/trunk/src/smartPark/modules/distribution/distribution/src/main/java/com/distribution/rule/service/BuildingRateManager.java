@@ -40,7 +40,7 @@ public interface BuildingRateManager extends BaseManager{
     /**
      * 保存并返回对象
      */
-    public BuildingRate saveBuildingRate(BuildingRate o) throws BusException;
+    public BuildingRate saveBuildingRate(BuildingRate o,String buildingId) throws BusException;
 
     /**
      * 删除对象
