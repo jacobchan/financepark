@@ -304,6 +304,22 @@ public class PurchasingmanagerGenreManagerImpl extends BaseManagerImpl implement
 		List<PurchasingmanagerGenre> list = purchasingmanagerGenreDao.getList("pagrenId", pg.getGenreId());
 		return list;
 	}
+	/**
+	 * 获取企业服务的所有类别列表(包括IT服务子类别)
+	 */
+	@Override
+	@EsbServiceMapping
+	public List<PurchasingmanagerGenre> getCompOrderTypes()
+			throws BusException {
+		PurchasingmanagerGenre pg = purchasingmanagerGenreDao.getObjectByUniqueProperty("genreCode", "05");
+		List<PurchasingmanagerGenre> list = purchasingmanagerGenreDao.getList("pagrenId", pg.getGenreId());
+		PurchasingmanagerGenre ITpg = purchasingmanagerGenreDao.getObjectByUniqueProperty("genreCode", "0508");
+		List<PurchasingmanagerGenre> ITList = purchasingmanagerGenreDao.getList("pagrenId", ITpg.getGenreId());
+		for(PurchasingmanagerGenre pgenre:ITList){
+			list.add(pgenre);
+		}
+		return list;
+	}
 	//获取订单项
 	@Override
 	@EsbServiceMapping
