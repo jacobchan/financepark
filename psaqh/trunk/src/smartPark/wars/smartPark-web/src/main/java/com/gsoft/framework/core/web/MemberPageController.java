@@ -3,6 +3,10 @@
  */
 package com.gsoft.framework.core.web;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,9 +16,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.service.MemberInformationManager;
 import com.gsoft.framework.core.exception.BusException;
+import com.gsoft.framework.core.orm.Condition;
+import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.security.AccountPrincipal;
 import com.gsoft.framework.security.UserService;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.util.StringUtils;
 
@@ -29,6 +38,8 @@ public class MemberPageController {
 	
 	@Autowired
 	private UserService userService;//用户服务
+	@Autowired
+	private MemberInformationManager memberInformationManager;
 	
 	@RequestMapping(value = "/{pageModule}/{pagePath}.html")
 	public ModelAndView index(HttpServletRequest request, 
@@ -78,6 +89,12 @@ public class MemberPageController {
 		ModelAndView model = new ModelAndView();
 		model.setViewName(/*pageModule+"/"+*/pagePath);
 		model.addObject("user", account);
+		Collection<Condition> condition =  new ArrayList<Condition>();
+		condition.add(ConditionUtils.getCondition("memberName", Condition.EQUALS,account.getLoginName()));
+		List<MemberInformation> members =  memberInformationManager.getMemberInformations(condition, null);
+		if(members.size()>0){
+			model.addObject("member", members.get(0));
+		}
 		model.addObject("pagePath", pagePath);
 		return model;
 	}
