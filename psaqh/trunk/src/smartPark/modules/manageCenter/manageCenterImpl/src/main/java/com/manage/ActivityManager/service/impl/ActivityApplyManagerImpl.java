@@ -351,6 +351,7 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
    	 * 获取即将进行的最新活动
    	 * @return 分页对象
    	 */
+    @EsbServiceMapping
     public PagerRecords getNewApplys(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders) throws BusException{
