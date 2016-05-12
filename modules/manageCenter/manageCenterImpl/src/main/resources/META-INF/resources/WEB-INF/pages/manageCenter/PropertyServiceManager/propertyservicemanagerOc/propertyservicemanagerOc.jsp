@@ -3,7 +3,7 @@
 <youi:page>
 	<youi:grid id="grid_propertyservicemanagerOc" idKeys="ocId" caption="一卡通办理申请记录列表"  panel="false"
 				src="esb/web/propertyservicemanagerOcManager/getPagerPropertyservicemanagerOcs.json" dataFormId="form_propertyservicemanagerOc"
-				editSrc="esb/web/propertyservicemanagerOcManager/getPropertyservicemanagerOc.json" edit="NOT" remove="NOT" showCheckbox="true"
+				editSrc="esb/web/propertyservicemanagerOcManager/getPropertyservicemanagerOc.json" edit="NOT" add="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/propertyservicemanagerOcManager/removePropertyservicemanagerOc.json">
 		<youi:fieldLayout labelWidths="122,122">
 			<youi:fieldSelect property="memberId" caption="会员用户" 
