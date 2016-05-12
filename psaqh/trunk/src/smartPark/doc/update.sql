@@ -100,14 +100,17 @@ alter table sp_ticket_passenger_relation add constraint FK_340502_340506 foreign
 
 alter table sp_ticket_passenger_relation add constraint FK_340506_340505 foreign key (PASSENGER_ID)
       references sp_ticket_passenger (PASSENGER_ID) on delete restrict on update restrict;
-drop table if exists sp_ticket_passenger;
+
 /*增加一个第三方机票订单号字段*/
 alter table sp_ticket_order_item add COLUMN ORDER_ID_THIRD varchar(64);
 /*增加第三方酒店订单号保存字段*/
 alter table sp_hotel_order add COLUMN  ORDER_ID_THIRD varchar(64);
+/*增加平台系统订单号*/
+alter table sp_hotel_order add COLUMN  ORDER_NUM_ varchar(64);
 /*==============================================================*/
 /* Table: sp_ticket_passenger     乘机人                              */
 /*==============================================================*/
+drop table if exists sp_ticket_passenger;
 create table sp_ticket_passenger
 (
    PASSENGER_ID         char(36) not null,
