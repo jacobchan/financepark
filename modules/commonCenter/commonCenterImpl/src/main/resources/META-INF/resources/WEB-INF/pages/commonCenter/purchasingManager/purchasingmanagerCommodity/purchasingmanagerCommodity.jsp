@@ -13,7 +13,7 @@
 				removeSrc="esb/web/purchasingmanagerCommodityManager/removePurchasingmanagerCommodity.json">
 		<youi:fieldLayout labelWidths="120,120">
 			<youi:fieldText property="commodityTitle"  caption="标题"/>
-			<youi:fieldTree simple="false" popup="true" tree="${genreTree}" property="purchasingmanagerGenre.genreId" caption="商品类别" onlyLeaf="true"/>
+			<youi:fieldTree simple="false" popup="true" tree="${genreTree}" property="genreId" caption="商品类别" onlyLeaf="true"/>
 			<youi:fieldText property="purchasingmanagerMerchant.merchantName"  caption="商户名称"/>
 		</youi:fieldLayout>
 		
@@ -25,7 +25,7 @@
 		<youi:gridCol property="commodityDescribe"  caption="描述" align="center" width="22%"/>
 		<youi:gridCol property="commodityUpTime"  caption="上架时间" align="center" width="15%"/>
 		<youi:gridCol property="commodityDownTime"  caption="下架时间" align="center" width="15%"/>
-		<youi:gridCol property="purchasingmanagerGenre.genreId"  caption="商品类别" align="center" width="0"/>
+		<youi:gridCol property="genreId"  caption="商品类别" align="center" width="0"/>
 		
 		<youi:button name="commodity_extend" active="1" caption="商品扩展属性"/>
 		<%-- <youi:button name="veiwCommodity" active="1" caption="查看详情"/> --%>
