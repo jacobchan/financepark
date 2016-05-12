@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/pages/include.jsp" %>
-<youi:html title="企业通讯录">
+<youi:html title="系统消息">
 	<youi:body decorator="memcenter"> 
 			<div class="w100">
 		<div class="w1200 clearfix pt30 pb50">
