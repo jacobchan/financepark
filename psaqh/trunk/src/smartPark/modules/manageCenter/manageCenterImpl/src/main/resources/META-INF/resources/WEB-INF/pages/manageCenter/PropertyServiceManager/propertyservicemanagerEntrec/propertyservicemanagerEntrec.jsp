@@ -22,7 +22,7 @@
 		<youi:gridCol property="enteringType"  caption="申请类型" convert="enteringType" width="15%" align="center"/>
 		<youi:gridCol property="propertyservicemanagerEntering.enteringDate"  caption="预约时间日期" width="20%" align="center" orderBy="desc"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
-			<youi:button name="edit" caption="修改"/>
+			<youi:button name="edit" caption="查看详情"/>
 			<youi:button name="remove" caption="删除"/>
 		</youi:gridCol>
 	</youi:grid>
@@ -39,7 +39,7 @@
 			<youi:fieldHidden property="propertyservicemanagerEntering.enteringId"  caption="预约记录ID"/>
 			<youi:fieldLabel property="propertyservicemanagerEntering.enteringTime"  caption="预约时间段" convert="enteringTime"/>
 			<youi:fieldLabel property="propertyservicemanagerEntering.enteringDate"  caption="预约时间日期" />
-			<youi:fieldSelect property="enterrecStatus"  caption="预约记录状态" convert="enterrecStatus" notNull="true"/> 
+			<youi:fieldLabel property="enterrecStatus"  caption="预约记录状态" convert="enterrecStatus"/> 
 		</youi:fieldLayout>
 	</youi:form>
 	
