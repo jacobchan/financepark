@@ -41,7 +41,7 @@
             </p>
         </div>
         <div class="fl userxq">
-        	<div><img src="../styles/images/company/man.png"/></div>
+        	<div id="logoUrl"></div>
             <div class="mt40">
             	<img src="../styles/images/company/res_icon.png" class="mr10"/><span class="vm" id="merchantName">联系人：小周</span>
                 <div class="mt10"><img src="../styles/images/company/res_ico.png" class="mr10"/><span class="vm" id="merchantPhone">联系电话：13456786986</span></div>
@@ -208,6 +208,12 @@ var commodityId;
 					$('#commodityName').text(records[0].commodityTitle);
 					$('#commodityPrice').text(records[0].commodityPrice);
 					$('#commodityDescribe').html(records[0].commodityDescribe);
+					
+					var logoUrl="../styles/images/company/man.png";
+					if(records[0].purchasingmanagerMerchant.merchantLogo !=null && records[0].purchasingmanagerMerchant.merchantLogo!=""){
+						logoUrl=cenUrl+"common/uploadImage.html?repository=/swfupload&path="+records[0].purchasingmanagerMerchant.merchantLogo+"&method=show";
+					}
+					$('#logoUrl').append("<img src='"+logoUrl+"' height='121' width='121'/>");
 					$('#merchantName')
 							.text("联系人：" + records[0].purchasingmanagerMerchant.merchantLinkman);
 					$('#merchantPhone').text(
