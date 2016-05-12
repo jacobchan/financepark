@@ -21,10 +21,6 @@ public class TicketPassengerRelation implements Domain{
 	
 	private static final long serialVersionUID = 7322331315038333662L;
 	
-
-	@Column(name = "ITEM_ID_")
-	@Length(max=36)
-	private String itemId;//ITEM_ID_
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
 	@Column(name = "TICKET_PASSENGER_ID")
@@ -34,14 +30,11 @@ public class TicketPassengerRelation implements Domain{
 	@Column(name = "PASSENGER_ID")
 	@Length(max=36)
 	private String passengerId;//PASSENGER_ID
+
+	@Column(name = "ITEM_ID_")
+	@Length(max=36)
+	private String itemId;//ITEM_ID_
 	
-	public String getItemId(){
-		return this.itemId;
-	}
-	
-	public void setItemId(String itemId){
-		this.itemId = itemId;
-	}
 	public String getTicketPassengerId(){
 		return this.ticketPassengerId;
 	}
@@ -56,6 +49,13 @@ public class TicketPassengerRelation implements Domain{
 	public void setPassengerId(String passengerId){
 		this.passengerId = passengerId;
 	}
+	public String getItemId(){
+		return this.itemId;
+	}
+	
+	public void setItemId(String itemId){
+		this.itemId = itemId;
+	}
 	
 	
 	
@@ -63,9 +63,9 @@ public class TicketPassengerRelation implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((itemId == null) ? 0 : itemId.hashCode());
 		result = prime * result + ((ticketPassengerId == null) ? 0 : ticketPassengerId.hashCode());
 		result = prime * result + ((passengerId == null) ? 0 : passengerId.hashCode());
+		result = prime * result + ((itemId == null) ? 0 : itemId.hashCode());
 		return result;
 	}
 	
@@ -78,11 +78,6 @@ public class TicketPassengerRelation implements Domain{
 		if (getClass() != obj.getClass())
 			return false;
 		final TicketPassengerRelation other = (TicketPassengerRelation) obj;
-		if (itemId == null) {
-			if (other.itemId != null)
-				return false;
-		} else if (!itemId.equals(other.itemId))
-			return false;
 		if (ticketPassengerId == null) {
 			if (other.ticketPassengerId != null)
 				return false;
@@ -92,6 +87,11 @@ public class TicketPassengerRelation implements Domain{
 			if (other.passengerId != null)
 				return false;
 		} else if (!passengerId.equals(other.passengerId))
+			return false;
+		if (itemId == null) {
+			if (other.itemId != null)
+				return false;
+		} else if (!itemId.equals(other.itemId))
 			return false;
 		return true;
 	}
