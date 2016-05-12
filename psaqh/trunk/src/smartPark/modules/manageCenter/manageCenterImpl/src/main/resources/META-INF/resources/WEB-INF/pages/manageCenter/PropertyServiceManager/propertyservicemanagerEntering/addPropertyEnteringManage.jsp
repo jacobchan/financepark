@@ -4,7 +4,6 @@
 
    <!-- form-可办理预约记录增加 -->
 		<youi:grid id="grid_entering" idKeys="enteringId" caption="可办理预约记录增加"  panel="false" scrollHeight="240"
-				showCheckbox="true" 
 				submit="NOT" reset="NOT" usePager="false" editable="true" load="false">
 		<youi:fieldLayout prefix="record_sFpro">
 		<youi:fieldHidden property="enteringId"  caption="派工单Id"/>
