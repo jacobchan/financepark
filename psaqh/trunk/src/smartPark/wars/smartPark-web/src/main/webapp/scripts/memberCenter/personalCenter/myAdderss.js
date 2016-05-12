@@ -468,7 +468,7 @@ $(function() {
 	// 自动补全
 	var maxcount = 0;// 表示他最大的值
 	var thisCount = 0;// 初始化他框的位置
-	$("body").prepend("<div style='width:275px; z-index:100000; vertical-align:middle; display:none; background:#ffffff; position: absolute; border: 1px solid #509f50;' id='autoTxt_head'></div>");
+	$("body").prepend("<div style='width:450px; z-index:100000; vertical-align:middle; display:none; background:#ffffff; position: absolute; border: 1px solid #509f50;' id='autoTxt_head'></div>");
 	//高亮显示
 	jQuery.fn.highLight = function(hightext) {
 		return "<font color='#ff007f'>"+hightext+"</font>";
