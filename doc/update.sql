@@ -77,22 +77,34 @@ CREATE TABLE `sp_favorits_favoritactivity` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='340402-活动收藏表';
 
 /**乘机人实体  修改时间：2016年5月9日10:28:34    by cqf**/
+alter table sp_ticket_passenger_relation
+   drop primary key;
+
 drop table if exists sp_ticket_passenger_relation;
 
 /*==============================================================*/
-/* Table: sp_ticket_passenger_relation   乘机人关联中间表                       */
+/* Table: sp_ticket_passenger_relation      机票乘机人关联表                    */
 /*==============================================================*/
 create table sp_ticket_passenger_relation
 (
    TICKET_PASSENGER_ID  varchar(36) not null,
    ITEM_ID_             char(36),
-   PASSENGER_ID         char(36)
+   PASSENGER_ID         char(36) not null
 );
 
 alter table sp_ticket_passenger_relation
    add primary key (TICKET_PASSENGER_ID);
-drop table if exists sp_ticket_passenger;
 
+alter table sp_ticket_passenger_relation add constraint FK_340502_340506 foreign key (ITEM_ID_)
+      references sp_ticket_order_item (ITEM_ID_) on delete restrict on update restrict;
+
+alter table sp_ticket_passenger_relation add constraint FK_340506_340505 foreign key (PASSENGER_ID)
+      references sp_ticket_passenger (PASSENGER_ID) on delete restrict on update restrict;
+drop table if exists sp_ticket_passenger;
+/*增加一个第三方机票订单号字段*/
+alter table sp_ticket_order_item add COLUMN ORDER_ID_THIRD varchar(64);
+/*增加第三方酒店订单号保存字段*/
+alter table sp_hotel_order add COLUMN  ORDER_ID_THIRD varchar(64);
 /*==============================================================*/
 /* Table: sp_ticket_passenger     乘机人                              */
 /*==============================================================*/
