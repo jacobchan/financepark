@@ -833,6 +833,8 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 	@Override
 	@EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
 	public void saveCommodityAndPropertyForLed(PurchasingmanagerCommodity o) {
+		List<Record> listForCar=this.getRecordsByGenreCode("0303");//所属商户
+		o.setGenreId(listForCar.size()>0?listForCar.get(0).get("genreId").toString():null);
 		Billboard billboard = o.getBillboard();
 		String commodityId = o.getCommodityId();
 		boolean isUpdate = StringUtils.isNotEmpty(commodityId);
