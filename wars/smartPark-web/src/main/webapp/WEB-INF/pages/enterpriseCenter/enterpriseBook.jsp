@@ -18,6 +18,27 @@
 						}
 					}
 				}); */
+		        $(".tc-close").click(function(){
+		            $(".bg-tanc").hide();
+		        });
+				$("#btnEdit").click(function(){
+					var memberIds=$("#memberIds").val();
+			  		var memberNames=$("#memberNames").html();
+			  		var memberPhone=$("#memberPhone").val();
+			  		var params = ['memberId='+memberIds+'','memberName='+memberNames+'','memberPhoneNumber='+memberPhone+''];
+			  		$.youi.ajaxUtils.ajax({
+						url:baseUrl+'/memberInformationManager/updateMemberBook.json',
+						data:params.join('&'),
+						success:function(result){
+							if(result && result.record){
+								$('#toast_text').html('保存成功！');
+								$(".toast").show();
+					            setTimeout('$(".toast").hide();',2000);//1秒=1000
+					            location.reload();
+							}
+						}
+					});
+		        });
 			  	$.ajax({
 					url:serviceURL,
 					success:function(result){
@@ -64,6 +85,7 @@
 					if(record[i].memberHeadPortrait!=null && record[i].memberHeadPortrait!=""){
 						memberHeadPortrait = cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record[i].memberHeadPortrait+"&method=show";
 					}
+					var describe = record[i].memberDescribe2==null?"":record[i].memberDescribe2;
 					html+='<li>'+
 							'<table>'+
 		                    	'<tr>'+
@@ -73,10 +95,10 @@
 		                       		'<td align="left" valign="middle" class="pl20 hide_dian"><span class="f16 color_41 user_name">'+record[i].memberName+'</span><span class="f14 color_6 tel">联系方式：'+record[i].memberPhoneNumber+'</span></td>'+
 		                    	'</tr>'+
 			                    '<tr>'+
-			                        '<td align="left" valign="middle" class="pl20"><span class="f14 color_6 hide_dian">'+record[i].memberDescribe2+'</span></td>'+
+			                        '<td align="left" valign="middle" class="pl20"><span class="f14 color_6 hide_dian">'+describe+'</span></td>'+
 			                    '</tr>'+
 			                    '<tr>'+
-			                        '<td align="left" valign="middle" class="pl20"><span class="f12 color_41"><a href="javascript:void(0);">编辑</a>&nbsp;丨&nbsp;<a href="javascript:void(0);">设置权限</a>&nbsp;丨&nbsp;<a href="javascript:void(0);">删除</a></span></td>'+
+			                        '<td align="left" valign="middle" class="pl20"><span class="f12 color_41"><a href="javascript:edit(\''+record[i].memberId+'\',\''+record[i].memberName+'\',\''+record[i].memberPhoneNumber+'\');" class="edit-show">编辑</a>&nbsp;丨&nbsp;<a href="javascript:show(\''+record[i].memberId+'\');" class="set-show">设置权限</a>&nbsp;丨&nbsp;<a href="javascript:removeBook(\''+record[i].memberId+'\');">删除</a></span></td>'+
 			                    '</tr>'+
 		                	'</table>'+
 		            	'</li>';
@@ -129,6 +151,27 @@
 					}
 				});
 			}
+			function edit(id,name,phone){
+				$(".bg-tanc.m1").show();
+				$("#memberIds").val(id);
+				$("#memberNames").val(name);
+				$("#memberPhone").val(phone);
+			}
+			
+			function show(){
+				$(".bg-tanc.m2").show();
+			}
+			
+			function removeBook(id){
+			 	$.youi.ajaxUtils.ajax({
+					url:baseUrl+'/memberInformationManager/removeMemberInformation.json',
+					data:'memberId='+id,
+					success:function(result){
+						alert("删除成功");
+						location.reload();
+					}
+				});
+			}
 		</script>
 	</head>
 	<body class="page-header-fixed" style="background-image:none">
@@ -155,5 +198,52 @@
 		        </div>   
 		    </div>
 		</div>
+		<div class="bg-tanc m1">
+	        <div class="tanc-con c3" style="top:50%;margin-top:-180px;width:440px;padding:40px 30px;color:#333;">
+	            <a href="javascript:;" class="tc-close"></a>
+	            <h3 class="mb10 f16" style="font-size:16px;"><b>编辑信息</b></h3>
+	            <table class="line-table" style="font-size:14px;width:360px">
+	                <colgroup>
+	                    <col width="100"></col>
+	                    <col></col>
+	                </colgroup>
+	                <input type="text" id="memberIds" name="memberIds" style="display:none;">
+	                <tr>
+	                    <td><b>姓名</b></td>
+	                    <td><input type="text" id="memberNames" name="memberNames" style="width:200px;"></td>
+	                </tr>
+	                <tr>
+	                    <td><b>联系电话</b></td>
+	                    <td><input type="text" id="memberPhone" name="memberPhone" style="width:200px;"></td>
+	                </tr>
+	                <tr>
+	                    <td colspan="2" align="center"><input value="保存" id="btnEdit" class="hhf-submit tc" style="height:40px;width:100px;padding:0px;" type="submit"></td>
+	                </tr>
+	            </table>
+	        </div>
+	    </div>
+	    <div class="bg-tanc m2"> 
+	        <div class="tanc-con c3" style="top:50%;margin-top:-130px;width:550px;padding:40px 30px;color:#333;">
+	            <a href="javascript:;" class="tc-close"></a>
+	            <h3 class="mb10 f16" style="font-size:16px;"><b>权限设置</b><span class="ml30 f12 color_orange">员工：雷布斯</span></h3>
+	             <table class="line-table" style="font-size:14px;width:490px">
+	                <colgroup>
+	                    <col width="100"></col>
+	                    <col></col>
+	                </colgroup>
+	                <tr>
+	                    <td><b>可分配角色</b></td>
+	                    <td>
+	                        <label class="mr30 lh30"><input type="checkbox" name="address" class="mr5" checked="checked">财务支付</label>
+	                        <label class="mr30 lh30"><input type="checkbox" name="address" class="mr5">评论消息管理</label>
+	                        <label class="mr30 lh30"><input type="checkbox" name="address" class="mr5">订单管理</label>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td colspan="2" align="center"><input value="保存" class="hhf-submit tc mt20" style="height:40px;width:100px;padding:0px;" type="submit"></td>
+	                </tr>
+	            </table>
+	        </div>
+	    </div>
 	</body>
 </html>
