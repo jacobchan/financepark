@@ -50,7 +50,7 @@
 			<youi:fieldTree simple="false" popup="true" tree="${enetrTree}" property="enTypeId.enTypeId" caption="企业类型" onlyLeaf="true"/>
 			<youi:fieldSelect property="rzType" caption="上市类型" convert="rzType"/>
 			<youi:fieldSelect property="rzProperty" caption="企业性质" convert="rzProperty"/>
-			<youi:fieldText property="rzSign"  caption="企业码"/>
+			<%-- <youi:fieldText property="rzSign"  caption="企业码"/> --%>
 			<youi:fieldText property="rzUrl"  caption="企业网址"/>
 			<youi:fieldText property="rzTelephone"  caption="联系方式" expression="^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$" expressionMessage="手机号码格式不正确" />
 			<youi:fieldArea property="rzRemark"  caption="企业备注"/>			
