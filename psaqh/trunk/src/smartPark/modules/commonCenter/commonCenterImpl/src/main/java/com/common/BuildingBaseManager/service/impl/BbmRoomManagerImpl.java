@@ -44,6 +44,15 @@ public class BbmRoomManagerImpl extends BaseManagerImpl implements BbmRoomManage
     public List<BbmRoom> getBbmRooms() throws BusException{
     	return bbmRoomDao.getAll();
     }
+    
+    
+	
+    @EsbServiceMapping
+    public List<BbmRoom> getSaleBbmRooms() throws BusException{
+    	List<BbmRoom> list = bbmRoomDao.getList("saleState", "0");
+    	return list;
+    }
+    
      /**
      * 条件查询列表
      */
