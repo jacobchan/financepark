@@ -105,8 +105,8 @@ a.c-b1:hover {
 					</div>
 				</div>
 				<div class="jbk-bt clearfix jbk-bt-heigh">
-					<span class="jbk-span fl">行政区域</span> <span
-						class="ml50 mr50 c-o fl">不限</span>
+					<span class="jbk-span fl">行政区域</span> 
+					<span class="ml50 mr50 c-o fl">不限</span>
 					<div class="fl" style="width: 900px;" id="area_list">
 						<label><input type="checkbox" name="star" value="2">
 							福田区</label> <label><input type="checkbox" name="star" value="3">
@@ -286,68 +286,15 @@ a.c-b1:hover {
 			)
 			$("#jd-bd-select").on("click",".jbk-bt .fl input",
 				function() {
-					if ($(this).parent().parent().find(
-							"input:checked").length) {
-						$(this).parent().parent().siblings(".ml50")
-								.addClass("black");
-					} else {
-						$(this).parent().parent().siblings(".ml50")
-								.removeClass("black");
+					if($(this).is(":checked")){
+						$(this).parent().siblings().find("input").prop("checked",false);
+						$(this).parent().parent().siblings(".ml50").addClass("black");
+						
+					}else{
+						$(this).parent().parent().siblings(".ml50").removeClass("black");
 					}
 			})
-			//分页事件绑定
-			//var count = $("#page_content a").length;
-			/* $("#page_content").children("a").each(function(index,element){
-				$(element).attr("href","javascript:void(0)");
-				//初始化页码，除了上一页和下一页的翻页部分
-				if(index>0 && index < count-1 ){
-					//记录当前的页码数
-					$(element).attr("page",index);
-					$(element).attr("href","javascript:void(0)");
-					//绑定页码的点击事件
-					$(element).on("click",{count:count,index:index},pageClickBtn);
-				}
-			}); */
 			$("#page_content a").attr("href","javascript:void(0)");
-			//console.log("count"+count);
-			/* $("#page_content").on("click","a",function(e){
-			    var index = $(this).index();
-				var data = {};
-				data.count = count;
-				data.index = index;
-				if(index>1 && index < count-1){
-				pageClickBtn(data)
-				} 
-				//var index = $(this).index();
-				var send_value = $("ul.tb_header li.active").attr("send_val"),
-				    active_page;
-				if($(this).attr("id") == "prev"){
-					if($(this).attr("page")<=1){
-						return;
-					}
-					active_page = $(this).attr("page")-1;
-				}else if($(this).attr("id")=="next"){
-					
-				}else{
-					alert("query")
-				   
-				}
-				 query($("ul.tb_header li.active").attr("send_val"),$(this).attr("page"))
-			}) */
-			/* $("#page_content").on("click","span",function(){
-				if($(this).attr("id")=="prev"){
-					pre_click()
-				}else if($(this).attr("id")=="next"){
-					next_click();
-				}
-			}) */
-			//上一页
-			//$("#prev").on("click",pre_click);
-			//下一页
-			//$("#next").on("click",next_click);
-			
-			//removePreNextBtn();
-			
 		})
 		//页码的点击事件
 		function pageClickBtn(event){
@@ -741,7 +688,6 @@ a.c-b1:hover {
 			});
 		}
 		//分页方法
-		//var pageSize =10; 
 		function getPaging(result){
 			var html = "<span class='c-b1 mr30 f12' id='totalPage'>找到相关结果约"+result.totalput+"个</span>";
 			var send_value = $("ul.tb_header li.active").attr("send_val");
