@@ -164,8 +164,10 @@ public class PropertyservicemanagerEnteringManagerImpl extends BaseManagerImpl i
      * 根据主键集合删除对象
      * @param ids
      */
-    public void removePropertyservicemanagerEnterings(@ServiceParam(name="enteringId") String[] ids)  throws BusException{
-   		for(String id:ids){
+    @EsbServiceMapping
+    public void removePropertyservicemanagerEnterings(@DomainCollection(domainClazz=PropertyservicemanagerEntering.class) List<PropertyservicemanagerEntering> listEntering)  throws BusException{
+    	for(PropertyservicemanagerEntering entering : listEntering){
+    		String id=entering.getEnteringId();
     		removePropertyservicemanagerEntering(id);
     	}
     }

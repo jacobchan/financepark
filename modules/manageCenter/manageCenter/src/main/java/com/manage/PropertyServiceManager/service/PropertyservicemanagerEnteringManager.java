@@ -68,7 +68,7 @@ public interface PropertyservicemanagerEnteringManager extends BaseManager{
      * 根据主键集合删除对象
      * @param ids
      */
-    public void removePropertyservicemanagerEnterings(String[] ids) throws BusException;
+    public void removePropertyservicemanagerEnterings(List<PropertyservicemanagerEntering> listEntering) throws BusException;
     
      /**
      * 主键是否已经使用
