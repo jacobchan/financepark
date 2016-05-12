@@ -352,9 +352,7 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
    	 * @return 分页对象
    	 */
     @EsbServiceMapping
-    public PagerRecords getNewApplys(Pager pager,//分页条件
-			Collection<Condition> conditions,//查询条件
-			Collection<Order> orders) throws BusException{
+    public PagerRecords getNewApplys(Pager pager) throws BusException{
     	Collection<Condition> condition = new ArrayList<Condition>();
     	String time = DateUtils.getToday("yyyy-MM-dd HH:mm:ss");
     	condition.add(ConditionUtils.getCondition("startTime",Condition.LEFT,time));
