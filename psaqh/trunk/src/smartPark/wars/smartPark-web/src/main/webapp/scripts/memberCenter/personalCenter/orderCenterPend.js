@@ -81,14 +81,16 @@ var pageSize=10;
 	function loadData(){	
 		//分页页码显示
 		 $.ajax({
-			url : baseUrl + "ordermanagerUserorderManager/getTotalCountPend.json",
+			//url : baseUrl + "ordermanagerUserorderManager/getTotalCountPend.json",
+			url:serviceURL,
 			success : function(results) {
-				var totalCount=results.records[0].totalCount;
-				pageCount = Math.ceil(totalCount / pageSize);//页数
+				//var totalCount=results.records[0].totalCount;
+				//pageCount = Math.ceil(totalCount / pageSize);//页数
+				pageCount=Math.ceil(results.totalCount/pageSize);//页数
 				refreshData(1,pageSize);
 				//插入页码
 				$(".tcdPageCode").empty();
-				if(totalCount>0){
+				if(pageCount>0){
 						$(".tcdPageCode").createPage({
 								pageCount:pageCount,
 								current:1,
@@ -120,42 +122,34 @@ var pageSize=10;
 		//拼接卡号列表
     function _parseRecords_pend(record){			
 	    var html="";
-	    $(".pend_list").empty();
 		if(record.length>0){
 			for(var i=0;i<record.length;i++){				
 				var status = "";
 				var button = "";
-				var method = "viewOrder(\""+record[i].userorderCode+"\",\""+record[i].genreId.genreCode+"\");";				
-				if(record[i].userorderStatus=='01'){  // 01为待付款
-					var userorderCode =//status = "待付款";	
-					button = "<a href='javascript:void(0);' onclick='goPay(\""+userorderCode+"\");'>付款</a>" +
-							 "<span class='f12 ml5 mr5'>|</span><a href='#' onclick='cancelStatus(this)'>取消</a>";
-					html+= '<tr  id="'+record[i].userorderId+'">'
+				if(record[i].userorderStatus=='01'){
+					var userorderCode = record[i].userorderCode;
+					//status = "待付款";	
+					button = "<a href='javascript:void(0);' onclick='goPay(\""+userorderCode+
+					"\");'>付款</a><span class='f12 ml5 mr5'>|</span><a href='#' onclick='cancelStatus(this)'>取消</a>";
+				}else if(record[i].userorderStatus=='02'){
+					//status = "已付款";
+					button = "<font color='green'>已付款</font><span class='f12 ml5 mr5'>|</span><a href='#'  onclick='comment(\""+record[i].userorderId+"\",\""+record[i].genreId.genreCode+"\")'>评价</a>";
+				}else if(record[i].userorderStatus=='03'){
+					//status = "已完成";					
+				}else if(record[i].userorderStatus=='08'){
+					status = "已取消";					
+				}
+				var method = "viewOrder(\""+record[i].userorderCode+"\",\""+record[i].genreId.genreCode+"\");";
+				    html+= '<tr class="aaa" id="'+record[i].userorderId+'">'
 				    html+=   "<td><a class='custor' onclick='"+method+"'>"+record[i].userorderCode+"</a></td>";
+				    //html+=   '<td>'+record[i].userorderCode+'</td>';
 					html+=   '<td>'+record[i].userorderProject+'</td>'
                     html+=   '<td>'+record[i].userorderAmount+'</td>'
                     html+=   '<td>'+record[i].userorderTime.substring(0,10)+'</td>'                                                                     
                     html+=   "<td>"+status+button+"</td>";
-                    html+= '</tr>'	
-				}	
+                    html+= '</tr>'				
 			}
-			 $(".pend_list").append(html);
-				for(var i=0;i<record.length;i++){				
-					var status = "";
-					var button = "";
-					var method = "viewOrder(\""+record[i].userorderCode+"\",\""+record[i].genreId.genreCode+"\");";
-					if(record[i].userorderStatus=='02'){//02为已付款，待评价状态
-						button = "<font color='green'>已付款</font><span class='f12 ml5 mr5'>|</span><a href='#'  onclick='comment(\""+record[i].userorderId+"\",\""+record[i].genreId.genreCode+"\")' >评价</a>";
-							 	html+= '<tr class="aaa" id="'+record[i].userorderId+'">'
-							    html+=   "<td><a class='custor' onclick='"+method+"'>"+record[i].userorderCode+"</a></td>";
-								html+=   '<td>'+record[i].userorderProject+'</td>'
-			                    html+=   '<td>'+record[i].userorderAmount+'</td>'
-			                    html+=   '<td>'+record[i].userorderTime.substring(0,10)+'</td>'                                                                     
-			                    html+=   "<td>"+status+button+"</td>";
-			                    html+= '</tr>'							
-					}				
-				}
-				 $(".pend_list").append(html);
+			 $(".pend_list").html(html);	
 			}else{
 				var	html1 =   '<tr>'
 					html1 += '	<td colspan="6">暂无记录</td>'
@@ -210,11 +204,12 @@ var pageSize=10;
 			    url:baseUrl + "ordermanagerUserorderManager/getTotalCountPend.json",
 			    data:params.join('&'),
 				success : function(results) {
-					var totalCount=results.records[0].totalCount;
-					pageCount = Math.ceil(totalCount / pageSize);//页数
+					//var totalCount=results.records[0].totalCount;
+					//pageCount = Math.ceil(totalCount / pageSize);//页数
+					pageCount=Math.ceil(results.totalCount/pageSize);//页数
 					refreshData_pend_query(1,pageSize);
 					$(".tcdPageCode").empty();
-					if(totalCount>0){
+					if(pageCount>0){
 						$(".tcdPageCode").createPage({
 							pageCount:pageCount,
 							current:1,
@@ -278,7 +273,9 @@ var pageSize=10;
 		$(this).parent().hide();
 	});
 }; 
-
+/*$('#a1').click(function(){	
+	window.location.href = proUrl + "companyservice/ITserver.html#label" ;
+});*/
 function comment(userorderId,genreCode){
 	if(genreCode == "0301"){//会议室
 		window.location.href=proUrl+"member/memberCenter/personalCenter/meetingRoomOrderDetails.html?userorderId="+userorderId;
