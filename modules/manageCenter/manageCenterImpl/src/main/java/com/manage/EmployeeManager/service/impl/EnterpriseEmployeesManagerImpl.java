@@ -187,7 +187,7 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 					role.setUpdateUser(info.getMemberId());
 					role.setUpdateTime(new Timestamp(new Date().getTime()));
 					enterpriseRoleDao.save(role);
-					msg = info.getMemberName()+"成功入驻企业"+rz.getRzName();
+					msg = "成功加入"+rz.getRzName();
 					record.put("flag", 1);
 					record.put("msg", msg);
 					record.put("reName", rz.getRzName());
