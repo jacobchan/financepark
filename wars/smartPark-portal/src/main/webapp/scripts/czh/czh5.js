@@ -51,7 +51,7 @@ $(function(){
 			finaceShow();
         }
 		//创业加速计划提交预约按钮操作
-		$("#spEntrepreneurshipSubmit").click(function(){
+		$(".submit1").click(function(){
 			//项目类型
 			var projectType = $(".ic-select p").attr("data");
 			if(projectType=="NODATA"){
@@ -85,6 +85,8 @@ $(function(){
 				showMessage("请选择导师类型");
 				return false;
 			}
+			$(".submit1").addClass("undis") ;
+			$(".submit2").removeClass("undis") ;
 			var params = ['projectType='+projectType,'projectDis='+projectDis,'isFinace='+isFinace,'teacherType='+teacherType,'teacherTypeFlg='+teacherTypeFlg];
 			$.youi.ajaxUtils.ajax({
 				url:baseUrl+"entrepreneurshipManager/goSaveEntrepreneurship.json", 
@@ -92,9 +94,15 @@ $(function(){
 				dataType:'jsonp',
 				data:params.join('&'),
 				success:function(results){
+					$(".submit2").addClass("undis") ;
+					$(".submit1").removeClass("undis") ;
 					if(results&&results.record){
 						window.location.href=cenUrl+"member/memberCenter/personalCenter/policyApply.html?showFlg=1";
 					}
+				},
+				error:function(msg){
+					$(".submit2").addClass("undis") ;
+					$(".submit1").removeClass("undis") ;
 				}
 			});
 		});
@@ -134,7 +142,7 @@ $(function(){
 	});
 	
 	//融资申请提交预约按钮操作
-	$("#finaceSubmit").click(function(){
+	$(".submit3").click(function(){
 		//公司名称
 		var companyName = $("#companyName").val();
 		if(companyName==""){
@@ -194,6 +202,8 @@ $(function(){
 			showMessage("请填写核心成员");
 			return false;
 		}
+		$(".submit3").addClass("undis") ;
+		$(".submit4").removeClass("undis") ;
 		var params = ['companyName='+companyName,'companyUrl='+companyUrl,'amountStart='+amountStart,
 		              'amountEnd='+amountEnd,'shareRate='+shareRate,'businessDis='+businessDis,
 		              'companyMerite='+companyMerite,'corTeam='+corTeam];
@@ -203,9 +213,15 @@ $(function(){
 			dataType:'jsonp',
 			data:params.join('&'),
 			success:function(results){
+				$(".submit3").removeClass("undis") ;
+				$(".submit4").addClass("undis") ;
 				if(results&&results.record){
 					window.location.href=cenUrl+"member/memberCenter/personalCenter/policyApply.html?showFlg=2";
 				}
+			},
+			error:function(msg){
+				$(".submit3").removeClass("undis") ;
+				$(".submit4").addClass("undis") ;
 			}
 		});
 	});
