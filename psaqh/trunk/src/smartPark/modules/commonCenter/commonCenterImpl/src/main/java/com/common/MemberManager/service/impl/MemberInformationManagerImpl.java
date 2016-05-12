@@ -618,6 +618,29 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		MemberInformation reMemberInformation = memberInformationDao.save(mi);
 		return reMemberInformation;
 	}
+	
+	/**
+	 * 个人中心-个人资料（修改）
+	 * 
+	 * @param o
+	 * @return
+	 * @throws BusException
+	 */
+	@EsbServiceMapping(pubConditions = { @PubCondition(property = "updateUser", pubProperty = "userId") })
+	public MemberInformation updateMemberBook(MemberInformation o) throws BusException {
+
+		// 根据现有的用户ID，查出该用户的基本信息，进行其他信息的修改
+		String memberId = o.getMemberId();
+		MemberInformation mi = this.getMemberInformation(memberId);
+		// 真实姓名
+		mi.setMemberName(o.getMemberName());
+		mi.setMemberPhoneNumber(o.getMemberPhoneNumber());
+		// 更新时间
+		mi.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		// 开始进行更新操作
+		MemberInformation reMemberInformation = memberInformationDao.save(mi);
+		return reMemberInformation;
+	}
 
 	// 根据手机号码获取用户
 	@Override
