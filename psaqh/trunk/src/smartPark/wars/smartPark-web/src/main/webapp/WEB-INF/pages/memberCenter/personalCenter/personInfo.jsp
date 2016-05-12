@@ -45,8 +45,8 @@
 							<td>
 								<div id="birthday_container">
 									<select name="year" id="year" style="width:88px;"></select>
-									<select name="month" id="month" style="width:65px;"></select>
-									<select name="day" id="day" style="width:65px;"></select>
+									<select name="month" id="month" style="width:70px;" ></select>
+									<select name="day" id="day" style="width:70px;text-align:center;" ></select>
 								</div>
 							</td>
 						</tr>
