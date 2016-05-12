@@ -24,7 +24,7 @@ function removeFinancing(obj){
 	});
 }
 //修改地址
-function updateFinancing(obj0, obj1, obj2, obj3, obj4, obj5, obj6, obj7){
+function updateFinancing(obj0, obj1, obj2, obj3, obj4, obj5, obj6, obj7, obj8){
 	$("#financingId").val(obj0);
 	$("#financingRe").html(obj1);
 	$("#financingName").val(obj2);
@@ -34,6 +34,16 @@ function updateFinancing(obj0, obj1, obj2, obj3, obj4, obj5, obj6, obj7){
 	$("#financingTime").val(obj6);
 	$("#financingDescribe").val(obj7);
 	$("#currentCount").html(getStrLength(obj7));
+	
+	$("#roundFinancing li").each(function(index){
+		$(this).removeClass('selected');
+		var text = $(this).text();
+	    if(obj8==text){
+	    	$(this).addClass("selected");
+	    	$(".c-b1").attr("data-val", $(this).attr("data-val"));
+	    	$(".c-b1").html(obj8);
+	    }
+	});
 }
 $(function() {
 	$("#financingDescribe").on('keyup', function() {
@@ -87,7 +97,7 @@ $(function() {
 			    						'<span>'+financingSubValue+'</span><span>融资金额：<em class="c-o">'+financingAmount+'万元</em></span><span>融资估值：<em class="c-o">'+financingCost+'万元</em></span><span>可持股份：<em class="c-o">'+financingPre+'%</em></span>'+
 			    					'</div>'+
 			    					'<p>'+financingDescribe+'</p>'+
-			    			        '<p class="mt10"><a href="javascript:updateFinancing(\''+financingId+'\',\''+financingRe+'\',\''+financingName+'\',\''+financingAmount+'\',\''+financingCost+'\',\''+financingPre+'\',\''+financingTime+'\',\''+financingDescribe+'\');">编辑</a>&nbsp;丨&nbsp;<a href="javascript:removeFinancing(\''+financingId+'\');">删除</a></p>'+
+			    			        '<p class="mt10"><a href="javascript:updateFinancing(\''+financingId+'\',\''+financingRe+'\',\''+financingName+'\',\''+financingAmount+'\',\''+financingCost+'\',\''+financingPre+'\',\''+financingTime+'\',\''+financingDescribe+'\',\''+financingSubValue+'\');">编辑</a>&nbsp;丨&nbsp;<a href="javascript:removeFinancing(\''+financingId+'\');">删除</a></p>'+
 			    				'</div>');
 		    				}
 		    				$("#informationFinancing").html(htmls.join(''));
