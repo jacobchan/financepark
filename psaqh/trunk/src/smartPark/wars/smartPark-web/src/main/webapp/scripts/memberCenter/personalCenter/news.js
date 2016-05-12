@@ -52,9 +52,11 @@
 		if(record.length>0){
 			for(var i=0;i<record.length;i++){				
 				html +='<tr>'
-				html +=		'<td>'
-				html +=			'<h4 class="c-333 mb10 fb f14" >'+record[i].msgCaption+'</h4>'
-				html +=			'<p>'+record[i].msgContent+'</p>'
+				html +=		'<td style="word-wrap:.-word; ">'
+				html +=			'<h4 class="c-333 mb10 fb f14" style="word-break:break-all">'+record[i].msgCaption+'</h4>'
+				html +=			'<p>'+record[i].msgContent.substring(0,50)+'</p>'
+				html +=			'<p>'+record[i].msgContent.substring(50,100)+'</p>'
+				html +=			'<p>'+record[i].msgContent.substring(100,200)+'</p>'
 				html +=			'<p class="f12">'+record[i].sendDate.substring(0,10)+'</p>'
 				html +=		'</td>'					
 				html +=		'<td align="right">'					
