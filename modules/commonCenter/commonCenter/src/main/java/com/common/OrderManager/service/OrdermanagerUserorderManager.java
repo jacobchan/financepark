@@ -339,4 +339,13 @@ public interface OrdermanagerUserorderManager extends BaseManager{
      * @throws BusException
      */
 	public OrdermanagerUserorder  finishStatus(String id) throws BusException;  
+	 /**
+		 * 	通过code，状态,查询订单       
+		 * @param userId
+		 * @param genreCode
+		 * @param userorderStatus
+		 * @return
+		 * @throws BusException
+		 */
+	   	public List<OrdermanagerUserorder> getOrderlistforPage(String userId,String genreCode,String userorderStatus) throws BusException;
 }
