@@ -148,10 +148,28 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     		rz.setRzDate(o.getRzDate());
     		rz.setRzBuss(o.getRzBuss());
     		rz.setEnTypeId(o.getEnTypeId());
-    		rz.setRzSign(o.getRzSign());
+    		StringBuffer numberCode = new StringBuffer();
+    		BbmBuilding build = null;
+        	BbmFloor floor = null;
+    		if(null!=rz && !"".equals(rz.getBuildingId()) && null!=rz.getBuildingId()){
+        		build = bbmBuildingDao.get(rz.getBuildingId());
+        		numberCode.append(build.getBuildingNo());
+        	}else{
+        		numberCode.append("A1");
+        	}
+        	if(null!=rz && !"".equals(rz.getFloorId()) && null!=rz.getFloorId()){
+        		floor = bbmFloorDao.get(rz.getFloorId());
+        		numberCode.append(floor.getFloorNo());
+        	}else{
+        		numberCode.append("1F");
+        	}
+        	rz.setRzSign(numberCode.toString().replaceAll("-", "")+random(4));
+//    		rz.setRzSign(o.getRzSign());
     		rz.setRzUrl(o.getRzUrl());
     		rz.setRzTelephone(o.getRzTelephone());
     		rz.setRzRemark(o.getRzRemark());
+    		rz.setRzType(o.getRzType());
+    		rz.setRzProperty(o.getRzProperty());
     		rz.setRzLogo(o.getRzLogo());
     		rz.setRzImages(o.getRzImages());
     		rz.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
