@@ -96,6 +96,25 @@
 	$(function(){
 		var Request = new Object();
 		Request = GetRequest();
+		//["flightNo","planeType","orgCity","arrCity","depTime","arriTime","meal","airportTax","seatCode","parPrice","seatMsg","policyId"];
+		var segments = [{"flightNo":Request['flightNo'],"depCode":Request['depCode'],"arrCode":Request['arrCode'],"seatClass":Request['seatClass'],
+			"depDate":Request['depDate'],"depTime":Request['depTime'],"arrTime":Request['arrTime'],"planeModel":Request['planeType']}];
+		var passengers = [{"name":Request['passengerName'],"type":Request['passengerType'],"identityType":Request['identityType'],"identityNo":Request['identityNo'],"birthday":""}];
+		var pnrInfo = {"segments":segments,"passengers":passengers,
+				"parPrice":Request['parPrice'],"fuelTax":Request['fuelTax'],"airportTax":Request['airportTax']};
+		var params = ['policyId='+Request['policyId'],'linkMan='+Request['linkMan'],'linkPhone='+Request['linkPhone'],
+		              'otherLinkMethod='+Request['otherLinkMethod']];
+		var serviceURL = baseUrl+"TicketServiceManager/bookTicket.json";
+		$.youi.ajaxUtils.ajax({
+			url:serviceURL,
+			data:params.join('&'),
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(result){
+				alert(result.record);
+			}
+		})
+			
 	});
 	</script>
 </body>

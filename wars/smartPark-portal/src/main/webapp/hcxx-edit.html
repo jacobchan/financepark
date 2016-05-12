@@ -80,7 +80,7 @@
 	                   					<option value="5">台胞证</option>
 	                   					<option value="6">其他</option>
 	                   				</select>
-	                   				<input type="text" class="ml10" style="width:220px;">
+	                   				<input type="text" class="ml10" style="width:220px;" id="identityNo" name="identityNo">
 	                   			</td>
 	                   		</tr>
 	                   		<!-- <tr>
@@ -236,13 +236,20 @@
 	function toSubmit(){
 		var passengerType = $("#passengerType").val();
 		var passengerName = $("#pName").val();
-		var linkPhone = $("#linkPhone");
-		var otherLinkMethod = $("#otherLinkMethod");
-		var linkMan = $("#linkMan");
-		var email = $("#email");
+		var linkPhone = $("#linkPhone").val();
+		var otherLinkMethod = $("#otherLinkMethod").val();
+		var linkMan = $("#linkMan").val();
+		var email = $("#email").val();
+		var identityNo = $("identityNo").val();
+		var identityType = $("identityType").val();
 		var params = decodeURI(location.search);
 		params += "&passengerType=" + passengerType;
 		params += "&passengerName=" + passengerName;
+		params += "&identityNo=" + identityNo;
+		params += "&identityType=" + identityType;
+		params += "&linkMan=" + linkMan;
+		params += "&linkPhone=" + linkPhone;
+		params += "&otherLinkMethod=" + otherLinkMethod;
 		params += "&passengerLength=" + passengerType.length;
 		var url = "hcxx-tj.html" + params;
 		window.open(encodeURI(url));
