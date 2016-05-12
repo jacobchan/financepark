@@ -21,7 +21,7 @@
 		<%-- <youi:gridCol property="buildingId"  caption="楼栋"  renderer="renderer_buildingId" width="10%" align="center"/>
 		<youi:gridCol property="parkId"  caption="园区" renderer="renderer_parkId" width="10%" align="center"/> --%>
 		<youi:gridCol property="roomId.roomNo"  caption="默认单元编号" width="10%" align="center"/>
-		<youi:gridCol property="rzBuss"  caption="企业主营"  width="10%" align="center"/>
+		<youi:gridCol property="rzBuss"  caption="企业主营" convert="pubStatus" width="10%" align="center"/>
 		<youi:gridCol property="enTypeId.enTypeName"  caption="企业类型" width="10%" align="center"/>
 		<youi:gridCol property="rzSign"  caption="企业码" width="10%" align="center"/>
 		<youi:gridCol property="rzUrl"  caption="会员网址" width="10%" align="center"/>
