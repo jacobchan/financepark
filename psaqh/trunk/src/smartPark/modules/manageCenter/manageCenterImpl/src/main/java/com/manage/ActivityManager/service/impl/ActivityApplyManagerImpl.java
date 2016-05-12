@@ -347,4 +347,20 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
 		return activityApplyDao.save(o);
 	}
 
+    /**
+   	 * 获取即将进行的最新活动
+   	 * @return 分页对象
+   	 */
+    public PagerRecords getNewApplys(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders) throws BusException{
+    	Collection<Condition> condition = new ArrayList<Condition>();
+    	String time = DateUtils.getToday("yyyy-MM-dd HH:mm:ss");
+    	condition.add(ConditionUtils.getCondition("startTime",Condition.LEFT,time));
+    	condition.add(ConditionUtils.getCondition("applyStatus", Condition.EQUALS,"01"));
+    	Collection<Order> order = new ArrayList<Order>();
+    	order.add(ConditionUtils.getOrder("startTime", false));
+    	PagerRecords pagerRecords = activityApplyDao.findByPager(pager, condition, order);
+    	return pagerRecords;
+    }
 }
