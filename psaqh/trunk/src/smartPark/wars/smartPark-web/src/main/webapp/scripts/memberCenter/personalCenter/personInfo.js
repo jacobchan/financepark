@@ -82,7 +82,7 @@
 	    					data:params.join('&'),
 	    					success:function(result){
 	    						if(result&&result.record){	    						
-	    							close();
+	    							close("修改成功！");
 	    						}
 	    					}
 	    				});
@@ -96,7 +96,7 @@
 					data:params.join('&'),
 					success:function(result){
 						if(result&&result.record){							
-							close();
+							close("修改成功！");
 						}
 					}
 				});
@@ -127,6 +127,7 @@
 						}else{
 							method() ;
 							$(".bg-tanc").hide() ;
+							close(record.msg);
 							
 						}
 					}
@@ -210,7 +211,9 @@
 			}); */
 		})	//pageLoad Method
 	//操作成功，提示信息
-	function close(content){		        
+	function close(content){
+		$(".tc.mt25.f18").empty() ;
+		$(".tc.mt25.f18").append(content) ;
         $(".toast").show();		      		        		       				
 		setTimeout(function(){$(".toast").hide(); },2000);
 		setTimeout(function(){metodh(); },2000);
