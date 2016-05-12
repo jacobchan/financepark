@@ -9,6 +9,7 @@ public class WsAirSegment {
 	private String depTime;
 	private String arrTime;
 	private String planeModel;
+	private String seatDiscount;
 	private String param1;
 	private String param2;
 	private String param3;
@@ -85,6 +86,12 @@ public class WsAirSegment {
 	}
 	public void setParam4(String param4) {
 		this.param4 = param4;
+	}
+	public String getSeatDiscount() {
+		return seatDiscount;
+	}
+	public void setSeatDiscount(String seatDiscount) {
+		this.seatDiscount = seatDiscount;
 	}
 	
 }
