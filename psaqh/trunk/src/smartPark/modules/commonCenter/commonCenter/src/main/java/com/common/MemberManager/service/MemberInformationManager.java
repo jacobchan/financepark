@@ -140,6 +140,9 @@ public interface MemberInformationManager extends BaseManager{
 	   * @throws BusException	   */				    
     
      public MemberInformation updateMemberInformation(MemberInformation o) throws BusException;
+     
+     public MemberInformation updateMemberBook(MemberInformation o) throws BusException;
+     
      /**
       * 根据手机号码获取用户
       * @param phone
