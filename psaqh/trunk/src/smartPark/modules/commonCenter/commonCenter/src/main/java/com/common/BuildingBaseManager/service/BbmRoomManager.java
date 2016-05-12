@@ -23,6 +23,9 @@ public interface BbmRoomManager extends BaseManager{
      */
     public List<BbmRoom> getBbmRooms() throws BusException;
     
+    
+    public List<BbmRoom> getSaleBbmRooms() throws BusException;
+    
     /**
      * 条件查询列表
      */
