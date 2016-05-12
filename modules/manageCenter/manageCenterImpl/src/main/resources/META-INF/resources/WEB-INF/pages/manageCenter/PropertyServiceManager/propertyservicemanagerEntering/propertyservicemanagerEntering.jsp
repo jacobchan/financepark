@@ -8,7 +8,7 @@
 
 	<youi:grid id="grid_propertyservicemanagerEntering" idKeys="enteringId" caption="可办理预约记录列表"  panel="false" add="NOT"
 				src="esb/web/propertyservicemanagerEnteringManager/getPagerPropertyservicemanagerEnterings.json" dataFormId="form_propertyservicemanagerEntering"
-				editSrc="esb/web/propertyservicemanagerEnteringManager/getPropertyservicemanagerEntering.json" edit="NOT" remove="NOT" showCheckbox="true"
+				editSrc="esb/web/propertyservicemanagerEnteringManager/getPropertyservicemanagerEntering.json" edit="NOT" remove="NOT" showCheckbox="true" ctrlCheck="false"
 				removeSrc="esb/web/propertyservicemanagerEnteringManager/removePropertyservicemanagerEntering.json">
 		<youi:fieldLayout labelWidths="110,110">
 			<youi:fieldSelect property="enteringStatus"  caption="可预约状态" convert="enteringStatus"/>
@@ -25,6 +25,7 @@
 		<youi:gridCol property="enteringRemain"  caption="剩余数量" width="10%" align="right"/>
 		<youi:gridCol property="enteringStatus"  caption="可预约状态" convert="enteringStatus"  width="20%" align="center"/>
 		<youi:button name="enteringAdd" caption="增加"/>
+		<youi:button name="enteringDelete" caption="批量删除"/>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除" />
@@ -109,6 +110,30 @@
 		var selectedRecord = gridElement.grid('getSelectedRecord');
 		//打开子页面
 		subpageElement.subpage('open',null,null,null);
+	</youi:func>
+	
+	<youi:func name="func_grid_enteringDelete" >
+        var enteringId = $elem('record_sFpro_enteringId',pageId).fieldValue();
+		var records = $elem('grid_propertyservicemanagerEntering',pageId).grid('getRecords','true');
+		var submitRecord = {'records':records};
+		var fieldValues = $.youi.recordUtils.recordToParameters(submitRecord);
+		var params = '';
+		for(var i=0;i<fieldValues.length;i++){
+			if($.youi.stringUtils.notEmpty(fieldValues[i].value)){
+				params = params+$.youi.parameterUtils.propertyParameter(fieldValues[i].property,fieldValues[i].value)+'&';
+			}
+		}
+		params = params;
+		$.youi.ajaxUtil.ajax({
+			url:'/esb/web/propertyservicemanagerEnteringManager/removePropertyservicemanagerEnterings.json',
+			data:params,
+			success:function(result){
+				var record = result.record;
+				alert("删除成功!");
+				$elem('grid_propertyservicemanagerEntering',pageId).grid('pReload');
+			}
+		});
+
 	</youi:func>
 	<!--**********************************页面函数:增加可办理预约记录********************************-->
 </youi:page>

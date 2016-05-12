@@ -38,6 +38,7 @@
 				<youi:gridCol property="bxRemark"  caption="描述" width="20%"/>
 				<youi:gridCol property="bxAmount"  caption="维修总价" 	width="9%"/>
 				<youi:gridCol property="bxFujian"  caption="附件" width="8%"/>
+				<youi:gridCol property="applyTime"  caption="申请时间" width="0%" orderBy="desc"/>
 			
 				<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 					<youi:button name="edit" caption="修改"/>
