@@ -714,22 +714,22 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     			@OrderCollection Collection<Order> orders,
     			@ServiceParam(name="genId") String genId)
     			throws BusException {
-    	  
-//    	 conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.EQUALS, "01"));
-//    	 PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);
-//    	 conditions.clear();
-//    	 
-//    	 List<PurchasingmanagerGenre> genreList = purchasingmanagerGenreManager.getCompOrderTypes();
-//    	 List<String> genreIDList = new ArrayList<String>();
-//    	 for(PurchasingmanagerGenre pg:genreList){
-//    		 genreIDList.add(pg.getGenreId());
-//    	 }
-//    	 String[] buff = (String[])genreIDList.toArray(new String[genreIDList.size()]);
-//    	 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.IN, buff));
-//    	 conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.OR, "02"));
-//    	 conditions.add(ConditionUtils.getCondition("memberId", Condition.EQUALS, userId));
-    	 
-    	 PagerRecords pagerRecords = ordermanagerUserorderDao.getPagerPend_query(pager,conditions,orders);
+    	 String[] buff = new String[]{"01",   //01为待付款
+    			 						"02"};  //02为待评价
+    	 //IT服务（ff80808153f4a86a0153f4b06a65000d）有四个子类别
+    	 String[] buff2 = new String[]{"ff80808153f4a86a0153f4b0a31f000e",	//预约单次    商品类别id
+    			                       "ff80808153f4a86a0153f4b0be62000f",	//套餐一
+    			                       "ff80808153f4a86a0153f4b0d0b90010",	//套餐二
+    			                       "ff80808153f4a86a0153f4b0e4210011"};	//套餐三
+         conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.IN, buff));
+         if(StringUtils.isNotEmpty(genId)){
+        	 if("ff80808153f4a86a0153f4b06a65000d".equals(genId)){
+        		 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.IN, buff2)); 
+        	 }else{
+        		 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
+        	 }
+         }
+    	 PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
     	 return pagerRecords;
     	}
 
@@ -761,7 +761,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
         if(StringUtils.isNotEmpty(genId)){
         	if("ff80808153f4a86a0153f4b06a65000d".equals(genId)){
           		conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.IN, buff2)); 
-          	}else {
+          	}else{
           	 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
           	}
         }
