@@ -355,10 +355,10 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     public PagerRecords getNewApplys(Pager pager) throws BusException{
     	Collection<Condition> condition = new ArrayList<Condition>();
     	String time = DateUtils.getToday("yyyy-MM-dd HH:mm:ss");
-    	condition.add(ConditionUtils.getCondition("startTime",Condition.LEFT,time));
+    	condition.add(ConditionUtils.getCondition("startTime",Condition.RIGHT,time));
     	condition.add(ConditionUtils.getCondition("applyStatus", Condition.EQUALS,"01"));
     	Collection<Order> order = new ArrayList<Order>();
-    	order.add(ConditionUtils.getOrder("startTime", false));
+    	order.add(ConditionUtils.getOrder("startTime", true));
     	PagerRecords pagerRecords = activityApplyDao.findByPager(pager, condition, order);
     	return pagerRecords;
     }
