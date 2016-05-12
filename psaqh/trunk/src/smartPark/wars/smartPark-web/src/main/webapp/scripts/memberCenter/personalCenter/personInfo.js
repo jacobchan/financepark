@@ -17,7 +17,9 @@
 		
 		function _parseRecords(record){
 			$("#memberId").html(record.memberId);
-			$("#headImg").attr("src",cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record.memberHeadPortrait+"&method=show");
+			if(record.memberHeadPortrait){
+				$("#headImg").attr("src",cenUrl+"common/uploadImage.html?repository=/swfupload&path="+record.memberHeadPortrait+"&method=show");
+			}
 			$("#memberHeadPortrait").val(record.memberHeadPortrait);
 			$(".c-b1").html(record.memberPhoneNumber);
 			$("#memberNickname").val(record.memberNickname);
