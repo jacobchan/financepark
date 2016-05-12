@@ -6,6 +6,12 @@ public class WsBookPassenger {
 	private String identityType;
 	private String identityNo;
 	private String birthday;
+	//订单返回包括以下信息
+	private String parPrice;//票面价
+	private String settlePrice;//结算价
+	private String fuelTax;//燃油费
+	private String airportTax;//机建费
+	
 	private String param1;
 	private String param2;
 	private String param3;
@@ -63,6 +69,30 @@ public class WsBookPassenger {
 	}
 	public void setParam4(String param4) {
 		this.param4 = param4;
+	}
+	public String getParPrice() {
+		return parPrice;
+	}
+	public void setParPrice(String parPrice) {
+		this.parPrice = parPrice;
+	}
+	public String getSettlePrice() {
+		return settlePrice;
+	}
+	public void setSettlePrice(String settlePrice) {
+		this.settlePrice = settlePrice;
+	}
+	public String getFuelTax() {
+		return fuelTax;
+	}
+	public void setFuelTax(String fuelTax) {
+		this.fuelTax = fuelTax;
+	}
+	public String getAirportTax() {
+		return airportTax;
+	}
+	public void setAirportTax(String airportTax) {
+		this.airportTax = airportTax;
 	}
 
 }

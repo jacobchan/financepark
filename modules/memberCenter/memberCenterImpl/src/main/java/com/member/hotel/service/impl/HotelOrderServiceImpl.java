@@ -2,13 +2,17 @@ package com.member.hotel.service.impl;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,9 +22,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.utils.BizCodeUtil;
 import com.gsoft.utils.HttpGetAndPostUtil;
+import com.member.hotel.dao.HotelOrderDao;
+import com.member.hotel.dao.HotelOrderItemDao;
+import com.member.hotel.entity.HotelOrder;
 import com.member.hotel.entity.HotelOrderConditions;
+import com.member.hotel.entity.HotelOrderItem;
 import com.member.hotel.service.HotelOrderService;
 
 
@@ -31,6 +40,13 @@ public class HotelOrderServiceImpl extends BaseManagerImpl implements HotelOrder
 	private String agent_id;
 	@Value("${agent.md}")
 	private String agent_md;
+	@Value("${hotel.order.number.code}")
+	private String hotelOrderCode;
+	
+	@Autowired
+	private HotelOrderDao hotelOrderDao;
+	@Autowired
+	private HotelOrderItemDao hotelOrderItemDao;
 
 	@Override
 	public List<JsonNode> getOrderList(String dateandtime) {
@@ -81,9 +97,11 @@ public class HotelOrderServiceImpl extends BaseManagerImpl implements HotelOrder
 	  }
 
 	@EsbServiceMapping
-	public List<JsonNode> postBook(HotelOrderConditions hotelOrderConditions) {
+	public List<JsonNode> postBook(@ServiceParam(name="userId",pubProperty="userId") String userId,HotelOrderConditions hotelOrderConditions) {
 		String result = "";
 		List<JsonNode> resultList = new ArrayList<JsonNode>();
+		HotelOrder hotelOrder = new HotelOrder();
+		HotelOrderItem hotelOrderItem = new HotelOrderItem();
 		Map<String,Object> params = new HashMap();
 	    params.put("agent_id", agent_id);
 	    params.put("agent_md", agent_md);
@@ -101,19 +119,29 @@ public class HotelOrderServiceImpl extends BaseManagerImpl implements HotelOrder
 	                 }
 	             }
 		    }
-		    String orderNumber = BizCodeUtil.getInstance().getBizCodeDate("JD");
+		    String orderNumber = BizCodeUtil.getInstance().getBizCodeDate(hotelOrderCode);
 		    params.put("guid", orderNumber);//UUID.fromString(orderNumber).toString()
+		    hotelOrder.setOrderNum(orderNumber);
 		} catch (Exception e) {
 			System.out.println("获取HotelOrderConditions实体类属性 异常:" + e);
 		    throw new BusException("获取HotelOrderConditions实体类属性 异常: "+e.getMessage());
 		}
+	    //酒店订单写入数据库
+	    hotelOrder.setMemberId(userId);
+	    //hotelOrder.setOrderAmount(orderAmount);
+	    hotelOrder.setOrderStatus("1");
+	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    hotelOrder.setOrderTime(format.format(new Date()));
 	    try {
 			result = HttpGetAndPostUtil.HotelSendPost(HttpGetAndPostUtil.url2, params);
 			ObjectMapper objectMapper = new ObjectMapper();
 		    JsonNode resultJson = objectMapper.readTree(result);
-		    //Map<String, Object> resultMap = objectMapper.convertValue(resultJson, Map.class);
 		    resultList.add(resultJson);
 		    System.out.println("result:" + resultJson.get("error")+"   orderId:" + resultJson.get("orderid"));
+		    if(resultJson.get("orderid")!=null && !"0".equals(resultJson.get("orderid").asText())){
+		    	hotelOrder.setOrderIdThird(resultJson.get("orderid").asText());
+			    hotelOrderDao.save(hotelOrder);
+		    }
 		    return resultList;
 		} catch (Exception e) {
 			throw new BusException("提交订单失败："+e.getMessage());
