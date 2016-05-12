@@ -312,7 +312,7 @@ $(function(){
 			}
 		};
 		//报名提交
-		$('.ib-btn').click(function(){
+		$('.submit1').click(function(){
 			var url=location.href; 
 			var tmp1=url.split("?")[1];  
 			var tmp2=tmp1.split("=")[1]; 
@@ -332,6 +332,8 @@ $(function(){
 				showMessagem("请获取短信校验码!");
 				return false;
 			}
+			$(".submit1").addClass("undis") ;
+			$(".submit2").removeClass("undis") ;
 			var serviceURL = baseUrl+"activityApplylistManager/saveActivityApplylistForPage.json";
 			var params = ['activityApply.applyId='+applyId,'applyMember='+applyMember,'applyPhone='+applyPhone,'captcha='+captcha];
 			$.youi.ajaxUtils.ajax({
@@ -340,6 +342,8 @@ $(function(){
 				jsonp:'data:jsonp',
 				dataType:'jsonp',
 				success:function(results){
+					$(".submit2").addClass("undis") ;
+					$(".submit1").removeClass("undis") ;
 					if(results&&results.record){
 						var record = results.record;
 						if(record.flag){
@@ -349,6 +353,8 @@ $(function(){
 					}
 				},
 				error:function(msg){
+					$(".submit2").addClass("undis") ;
+					$(".submit1").removeClass("undis") ;
 					showMessagem(msg);
 				}
 			});	
