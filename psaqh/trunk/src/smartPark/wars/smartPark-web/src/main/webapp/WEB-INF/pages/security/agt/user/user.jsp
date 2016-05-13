@@ -39,8 +39,8 @@
 			<youi:fieldHidden property="userId" caption="用户ID"/>
 			<youi:fieldText notNull="true" property="loginName" caption="登录名"/>
 			<youi:fieldText notNull="true" property="userCaption" caption="用户名称"/>
-			<youi:fieldPassword notNull="true" property="password" caption="密码" />
-			<youi:fieldHidden property="userActive"  caption="是否生效"/>
+			<youi:fieldPassword property="password" caption="密码" />
+			<youi:fieldHidden property="userActive" caption="是否生效"/>
 		</youi:fieldLayout>
 		<fieldset>
 			<legend>选择用户角色</legend>
