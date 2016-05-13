@@ -344,7 +344,14 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     	o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     	o.setCreateUser(o.getUpdateUser());
     	o.setUpdateUser(o.getUpdateUser());
-		return activityApplyDao.save(o);
+    	ActivityApply apply = activityApplyDao.save(o);
+    	if(StringUtils.isNotEmpty(o.getDocumentPath())){ //当上传了文档
+	    	ActivityDocument document = new ActivityDocument() ;
+			document.setActivityApply(apply);
+			document.setDocumentPath(o.getDocumentPath());
+			activityDocumentManager.saveActivityDocumentList(document);
+    	}
+		return apply;
 	}
 
     /**
