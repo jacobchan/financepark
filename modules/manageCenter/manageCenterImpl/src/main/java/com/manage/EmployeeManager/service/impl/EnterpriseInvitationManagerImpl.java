@@ -63,6 +63,7 @@ public class EnterpriseInvitationManagerImpl extends BaseManagerImpl implements 
 //    	}else{//新增
 //    		
 //    	}
+    	o.setInvitationStatus(0);
     	o.setCreateTime(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
     	return enterpriseInvitationDao.save(o);
     }
