@@ -329,7 +329,13 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     @EsbServiceMapping(pubConditions = {@PubCondition(property = "updateUser", pubProperty = "userId")})
 	public ActivityApply saveActivityApplyForPage(ActivityApply o)
 			throws BusException {
-		// TODO Auto-generated method stub
+    	Collection<Condition> conditions=new ArrayList<Condition>();
+    	conditions.add(ConditionUtils.getCondition("memberId.memberId", Condition.EQUALS, o.getUpdateUser()));
+    	conditions.add(ConditionUtils.getCondition("applyStatus", Condition.EQUALS,"00"));
+    	List<ActivityApply> list=activityApplyDao.commonQuery(conditions, null);
+    	if(list.size()>1){
+    		throw new BusException("您有申请还在审核中,请等管理员审批后再申请！");
+    	}
     	o.setMemberId(memberInformationManager.getMemberInformation(o.getUpdateUser()));
     	o.setApplyStatus("00");//默认申请中
     	o.setIsRecoomend("1");//默认不推荐
