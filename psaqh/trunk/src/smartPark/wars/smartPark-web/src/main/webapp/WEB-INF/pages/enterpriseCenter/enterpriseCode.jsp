@@ -7,6 +7,9 @@
 		<%@ include file="/WEB-INF/pages/common/enterpriseScriptAddCss.jsp"%>
 		<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/page/zs.css">
 		<script type="text/javascript">
+			var pageSize=4;
+			var pageCount=1;
+			var serviceURL = baseUrl+"/enterpriseInvitationManager/getPagerEnterpriseInvitations.json";
 			$(document).ready(function() {
 			  	$.ajax({
 					url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
@@ -78,27 +81,64 @@
 			  	
 			  	//获取邀请记录
 			  	$.ajax({
-					url:baseUrl+'/enterpriseInvitationManager/getPagerEnterpriseInvitations.json',
+					url:serviceURL,
 					data : ['rzId='+$("#rzId").val()].join('&'),
 					success : function(result) {
-		    			if (result && result.records) {
-		    				var record = result.records;
-		    				$("#invication").empty();
-		    				var codeStr = '<tr class="th"><td>邀请码</td><td>手机号码</td><td>邀请状态</td><td>邀请时间</td><td>操作</td></tr>';
-		    				for(var i=0; i<record.length; i++){
-		    					codeStr+='<tr>'+
-			                        '<td>'+record[i].invitationCode+'</td>'+
-			                        '<td>'+record[i].invitationTelephone+'</td>'+
-			                        '<td>已邀请</td>'+
-			                        '<td>'+record[i].createTime+'</td>'+
-			                        '<td><a href="javascript:;">取消邀请</a><span></span><a href="javascript:;">重新邀请</a></td>'+
-			                    '</tr>';
-		    				}
-		    				$("#invication").append(codeStr);
-						}
+						pageCount=Math.ceil(result.totalCount/pageSize);
+						refreshData(1,pageSize,null);
+						$(".tcdPageCode").createPage({
+							pageCount:pageCount,
+							current:1,
+							backFn:function(p){
+							   	this.pageCount=pageCount;
+							    refreshData(p,pageSize,null);
+							}
+						});
 					}
 				});
 			});
+			function refreshData(pageIndex,pageSize,memberName){
+				var params = [];
+				if(memberName == null){
+					params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+				}else{
+					params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'memberName='+memberName];
+				}
+				
+				$.ajax({
+					url:serviceURL,
+					data:params.join('&'),
+					success:function(results){
+						if(results&&results.records){
+							_parseRecords(results.records);
+						}
+					}
+				});
+			}
+			function _parseRecords(record){
+				$("#invication").empty();
+				var codeStr = '<tr class="th"><td>邀请码</td><td>手机号码</td><td>邀请状态</td><td>邀请时间</td><td>操作</td></tr>';
+				for(var i=0; i<record.length; i++){
+					var status = "";
+					var actives = "";
+					if(record[i].invitationStatus==0){
+						status = "已邀请";
+						actives = "<a href=\"javascript:;\">取消邀请</a>";
+					}else if(record[i].invitationStatus==1){
+						status = "已加入";
+					}else if(record[i].invitationStatus==2){
+						status = "已取消";
+					}
+					codeStr+='<tr>'+
+                        '<td>'+record[i].invitationCode+'</td>'+
+                        '<td>'+record[i].invitationTelephone+'</td>'+
+                        '<td>'+status+'</td>'+
+                        '<td>'+record[i].createTime+'</td>'+
+                        '<td>'+actives+'</td>'+
+                    '</tr>';
+				}
+				$("#invication").append(codeStr);
+			}
 			function updateCode(rzId){
 				$.ajax({
 					url:baseUrl+'/enterbusinessmanagerRzManager/updateEnteringSign.json',
@@ -129,16 +169,7 @@
 		            <table>
 		                <tbody id="invication"></tbody>
 		            </table>
-		            <div class="fr page-list-a clearfix lh30 mt20 f12">
-		                <span class="mr20 fl">共有 0 条，每页显示： 50 条</span>
-		                <a href="">首</a>
-		                <a href=""><i class="fa fa-angle-left"></i></a>
-		                <a>1</a>
-		                <a href=""><i class="fa fa-angle-right"></i></a>
-		                <a href="">末</a>
-		                <input class="bd-input fl ml10 mr10" style="width:40px;" type="text">
-		                <a href="">Go</a>
-		            </div>
+		            <div class="tcdPageCode fr"></div>
 		        </div>
 		    </div>
 		</div>
