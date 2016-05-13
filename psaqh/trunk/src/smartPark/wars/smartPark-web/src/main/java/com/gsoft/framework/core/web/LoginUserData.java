@@ -122,7 +122,7 @@ public class LoginUserData extends BaseDataController {
 	 * @return
 	 */
 	@RequestMapping("/ortherAppLogin.json")
-	public ModelAndView ortherAppLogin(HttpServletRequest request,
+	public DataModelAndView ortherAppLogin(HttpServletRequest request,
 			@RequestParam("phone") String phone,
 			@RequestParam("parkName") String parkName,@RequestParam("companyName")String companyName){
 		String password = "000000";
@@ -134,7 +134,7 @@ public class LoginUserData extends BaseDataController {
 						password, false, request.getHeader("host"));
 				token.setLoginType("memberCenter");
 				org.apache.shiro.SecurityUtils.getSubject().login(token);
-				return new ModelAndView("000000");
+				return new DataModelAndView("000000");
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new BusException("登录不成功！");
