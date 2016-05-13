@@ -79,7 +79,7 @@
 											<th>文档上传</th>
 											<td>
 												<div class="photo-edit" style="width:200px;height:140px;padding:45px 10px;margin-left:0px;">
-													<input type="file">
+													<input type="file" id="imgFile" name="imgFile" draggable="true" accept=".doc*,.xls*"/>
 													<p style="letter-spacing:10px">点击上传</p>
 												</div>
 											</td>

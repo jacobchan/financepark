@@ -1,4 +1,5 @@
 $(function () {
+		
 		$("#submit").click(function(){
 			var applyTitle = $("#applyTitle").val();
 			var startTime = $("#startTime").val();
@@ -75,60 +76,107 @@ $(function () {
            		timer=setInterval("closeTanc()",1000);
            		return false;
 			}
+			
 			//检查是否有选择头像图片
 			var fileCount = uploader.files.length;
-			//alert(fileCount);
-			if(fileCount>0){
-				//调用实例对象的start()方法开始上传文件，当然你也可以在其他地方调用该方法
+			var docCount = fileuploader.files.length;
+			var docPath ="";
+			var allPath ="";
+			if(fileCount>0&&docCount>0){
 				uploader.start(); 
 				uploader.bind('FileUploaded',function(up, files,info) {
 					var response = $.parseJSON(info.response);
-	               	if ("0"==response.status){
-	               		imgUpload = response.fileUrl[0];
-	               		//var params=['applyTitle='+applyTitle,'startTime='+startTime,'endTime='+endTime,'deadline='+deadline,'applyMaxuser='+applyMaxuser,'applyOrderNumber='+applyOrderNumber,'activityImage='+imgUpload,'commentContent='+commentContent];
-	    				//保存
-	    				$.youi.ajaxUtils.ajax({
-	    					url:baseUrl+'activityApplyManager/saveActivityApplyForPage.json',
-	    					data:{applyTitle:applyTitle,startTime:startTime,endTime:endTime,deadline:deadline,applyMaxuser:applyMaxuser,activityAdr:activityAdr,applyOrderNumber:applyOrderNumber,activityImage:imgUpload,commentContent:commentContent},
-	    					success:function(result){
-	    						if(result&&result.record){
-	    							//alert("发布成功");
-	    							clearInterval(timer);
-									$(".tc.mt25").text("发布成功！");
-					           		$(".toast").show();
-					           		pltime=1;
-					           		timer=setInterval("closeTanc()",1000);
-	    						}
-	    					}
-	    				});
-	               	}
+		           	if ("0"==response.status){
+		           		imgUpload = response.fileUrl[0];	
+		           		fileuploader.start(); 
+		        		var i = 0;
+		        		fileuploader.bind('FileUploaded',function(up, files,info) {
+		        			i++;
+		        			var response = $.parseJSON(info.response);
+		                   	if ("0"==response.status){
+		                   		docPath = docPath+response.fileUrl[0];
+		                   		if(docCount==i){
+		                   			allPath = docPath;
+		                   			var params = {applyTitle:applyTitle,startTime:startTime,endTime:endTime,
+		            						deadline:deadline,applyMaxuser:applyMaxuser,activityAdr:activityAdr,applyOrderNumber:applyOrderNumber,
+		            						activityImage:imgUpload,commentContent:commentContent,documentPath:allPath};
+		                   			saveApply(params);
+		                   		}else{
+		                   			docPath = docPath+",";
+		                   		}
+		        			}
+		        		});
+		           	}
 				});
+			}else if(fileCount>0&&docCount<=0){
+				uploader.start(); 
+				uploader.bind('FileUploaded',function(up, files,info) {
+					var response = $.parseJSON(info.response);
+		           	if ("0"==response.status){
+		           		imgUpload = response.fileUrl[0];	
+		           		var params = {applyTitle:applyTitle,startTime:startTime,endTime:endTime,
+        						deadline:deadline,applyMaxuser:applyMaxuser,activityAdr:activityAdr,applyOrderNumber:applyOrderNumber,
+        						activityImage:imgUpload,commentContent:commentContent};
+               			saveApply(params);
+		           	}
+				});
+			}else if(fileCount<=0&&docCount>0){
+				fileuploader.start(); 
+        		var i = 0;
+        		fileuploader.bind('FileUploaded',function(up, files,info) {
+        			i++;
+        			var response = $.parseJSON(info.response);
+                   	if ("0"==response.status){
+                   		docPath = docPath+response.fileUrl[0];
+                   		if(docCount==i){
+                   			allPath = docPath;
+                   			var params = {applyTitle:applyTitle,startTime:startTime,endTime:endTime,
+            						deadline:deadline,applyMaxuser:applyMaxuser,activityAdr:activityAdr,applyOrderNumber:applyOrderNumber,
+            						commentContent:commentContent,documentPath:allPath};
+                   			saveApply(params);
+                   		}else{
+                   			docPath = docPath+",";
+                   		}
+        			}
+        		});
 			}else{
-				//var params=['applyTitle='+applyTitle,'startTime='+startTime,'endTime='+endTime,'deadline='+deadline,'applyMaxuser='+applyMaxuser,'applyOrderNumber='+applyOrderNumber,'activityImage='+imgUpload,'commentContent='+commentContent];
-				//保存
-				$.youi.ajaxUtils.ajax({
-					url:baseUrl+'activityApplyManager/saveActivityApplyForPage.json',
-					data:{applyTitle:applyTitle,startTime:startTime,endTime:endTime,deadline:deadline,applyMaxuser:applyMaxuser,activityAdr:activityAdr,applyOrderNumber:applyOrderNumber,activityImage:imgUpload,commentContent:commentContent},
-					success:function(result){
-						if(result&&result.record){
-							clearInterval(timer);
-							$(".tc.mt25").text("发布成功！");
-			           		$(".toast").show();
-			           		pltime=1;
-			           		timer=setInterval("closeTanc()",1000);
-						}
-					}
-				});
+				var params = {applyTitle:applyTitle,startTime:startTime,endTime:endTime,
+					deadline:deadline,applyMaxuser:applyMaxuser,activityAdr:activityAdr,
+					applyOrderNumber:applyOrderNumber,activityImage:imgUpload,commentContent:commentContent};
+				saveApply(params);
 			}
 		})
 	});
+	
+	function saveApply(params){
+		$.youi.ajaxUtils.ajax({
+			url:baseUrl+'activityApplyManager/saveActivityApplyForPage.json',
+			data:params,
+			success:function(result){
+				if(result&&result.record){
+					clearInterval(timer);
+					$(".tc.mt25").text("发布成功！");
+	           		$(".toast").show();
+	           		pltime=1;
+	           		timer=setInterval("closeTanc()",1000);
+				}
+			},
+			error:function(msg){
+				clearInterval(timer);
+				$(".tc.mt25").text(msg);
+           		$(".toast").show();
+           		pltime=1;
+           		timer=setInterval("closeTanc()",1000);
+			}
+		});
+	}
 	
 		var uploader = new plupload.Uploader(
 				{
 					runtimes : 'html5,flash,silverlight',//设置运行环境，会按设置的顺序，可以选择的值有html5,gears,flash,silverlight,browserplus,html
 					browse_button : 'imgUpload',
-					flash_swf_url : '../../scripts/fileUpload/Moxie.swf',
-					silverlight_xap_url : '../../scripts/fileUpload/Moxie.xap',
+					flash_swf_url : '../fileUpload/Moxie.swf',
+					silverlight_xap_url : '../fileUpload/Moxie.xap',
 					url : cenUrl+'fileUpload/goUpload.html',//上传文件路径
 					max_file_size : '2048kb', //最大只能上传2048kb的文件
 					prevent_duplicates : true, //不允许选取重复文件
@@ -154,7 +202,36 @@ $(function () {
 				});
 
 		uploader.init();
-
+		
+		var fileuploader = new plupload.Uploader(
+				{
+					runtimes : 'html5,flash,silverlight',//设置运行环境，会按设置的顺序，可以选择的值有html5,gears,flash,silverlight,browserplus,html
+					browse_button : 'imgFile',
+					flash_swf_url : '../fileUpload/Moxie.swf',
+					silverlight_xap_url : '../fileUpload/Moxie.xap',
+					url : cenUrl+'fileUpload/goUpload.html',//上传文件路径
+					max_file_size : '10240kb', //最大只能上传2048kb的文件
+					prevent_duplicates : true, //不允许选取重复文件
+					//此处是控制上传组件是否允许多文件选择还是单文件选择：true/多文件；false/单文件
+					multi_selection: true,
+					//给后台传入参数
+					multipart_params: {
+						//上传标识 0：图片上传;1：文件上传
+						fileFlg:"1"
+					},
+					filters : [ {
+						title : 'file files',
+						extensions : 'doc'
+					} ],
+					init : {
+						FilesAdded : function(up, files) {
+							
+						}
+					}
+				});
+		
+		fileuploader.init();
+		
 		//图片回显预览
 		function previewImage(file, callback) {//file为plupload事件监听函数参数中的file对象,callback为预览图片准备完成的回调函数
 			if (!file || !/image\//.test(file.type))
@@ -214,8 +291,10 @@ $(function () {
 
 		    var start = {
 			    elem: '#startTime',
+			    format:"YYYY-MM-DD hh:mm:ss",
 			    min: laydate.now(), //设定最小日期为当前日期
 			    max: '2099-06-16 23:59:59', //最大日期
+			    istime: true,
 			    istoday: false,
 			    choose: function(datas){
 			         end.min = datas; //开始日选好后，重置结束日的最小日期
@@ -224,8 +303,10 @@ $(function () {
 			};
 			var end = {
 			    elem: '#endTime',
+			    format:"YYYY-MM-DD hh:mm:ss",
 			    min: laydate.now(),
 			    max: '2099-06-16 23:59:59',
+			    istime: true,
 			    istoday: false,
 			    choose: function(datas){
 			        start.max = datas; //结束日选好后，重置开始日的最大日期
@@ -236,7 +317,9 @@ $(function () {
 
 			laydate({
 			    elem: '#enddate', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+			    format:"YYYY-MM-DD hh:mm:ss",
 			    min: laydate.now(),
+			    istime: true,
 			    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 			});
 
