@@ -268,11 +268,11 @@ $(function () {
 	    	var index2=path.length;
 	    	var postf=path.substring(index1+1,index2);//后缀名  
 	    	if(postf=='doc'||postf=='docx'){
-	    		type="../../../styles/images/grzx/user-photo.jpg";
+	    		type="../../../styles/images/grzx/user-photo.png";
 	    	}else if(postf=='xls'||postf=='xlsx'){
-	    		type="../../../styles/images/grzx/user-photo.jpg";
+	    		type="../../../styles/images/grzx/user-photo.png";
 	    	}else if(postf=='ppt'||postf=='pptx'){
-	    		type="../../../styles/images/grzx/user-photo.jpg";
+	    		type="../../../styles/images/grzx/user-photo.png";
 	    	}else if(postf=='pdf'){
 	    		type="../../../styles/images/grzx/user-photo.png";
 	    	}
