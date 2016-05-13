@@ -81,12 +81,12 @@ var pageSize=10;
 	function loadData(){	
 		//分页页码显示
 		 $.ajax({
-			//url : baseUrl + "ordermanagerUserorderManager/getTotalCountPend.json",
-			url:serviceURL,
+			url : baseUrl + "ordermanagerUserorderManager/getTotalCountPend.json",
+			//url:serviceURL,
 			success : function(results) {
-				//var totalCount=results.records[0].totalCount;
-				//pageCount = Math.ceil(totalCount / pageSize);//页数
-				pageCount=Math.ceil(results.totalCount/pageSize);//页数
+				var totalCount=results.records[0].totalCount;
+				pageCount = Math.ceil(totalCount / pageSize);//页数
+				//pageCount=Math.ceil(results.totalCount/pageSize);//页数
 				//console.log(results.records);
 				refreshData(1,pageSize);
 				//插入页码
@@ -205,11 +205,11 @@ var pageSize=10;
 			    url:baseUrl + "ordermanagerUserorderManager/getTotalCountPend.json",
 			    data:params.join('&'),
 				success : function(results) {
-					//var totalCount=results.records[0].totalCount;
-					//pageCount = Math.ceil(totalCount / pageSize);//页数
-					pageCount=Math.ceil(results.totalCount/pageSize);//页数
+					var totalCount=results.records[0].totalCount;
+					pageCount = Math.ceil(totalCount / pageSize);//页数
+					//pageCount=Math.ceil(results.totalCount/pageSize);//页数
 					refreshData_pend_query(1,pageSize);
-					$(".tcdPageCode").empty();
+					$(".tcdPageCode").empty();//
 					if(pageCount>0){
 						$(".tcdPageCode").createPage({
 							pageCount:pageCount,
@@ -229,7 +229,7 @@ var pageSize=10;
 	 	var genId = $(".c-b1").attr("data");	
 	 	//订单号
 	    var userorderCode=$("#userorderCode").val();	
-	 	var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCode='+userorderCode,'operator:userorderCode=LIKE','genId='+genId,'orderBy=desc:userorderTime'];
+	 	var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCode='+userorderCode,'operator:userorderCode=LIKE','genId='+genId];
 		//var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'userorderCodeLike='+userorderCodeLike,'genId='+genId];
 		$.ajax({
 			url:baseUrl+'ordermanagerUserorderManager/getPagerPend_query.json',
