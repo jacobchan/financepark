@@ -174,20 +174,22 @@ public class NmIssuetypeManagerImpl extends BaseManagerImpl implements NmIssuety
 	}
     /**
      * 得到政策新闻的所有的子类型通过issueTypeCode
+     * 若没有子类型，则返回当前类型
      * @return
      */
     @EsbServiceMapping
     public List<NmIssuetype> getNewsType(@ServiceParam(name="issueTypeCode") String issueTypeCode) {
     	NmIssuetype type = nmIssuetypeDao.getObjectByUniqueProperty("issueTypeCode", issueTypeCode) ;//01为新闻公告类型,02为优惠政策
-    	if(type != null){
     		String typeId = type.getIssueTypeId() ;//得到新闻公告ID
     		Collection<Condition> condition =  new ArrayList<Condition>();
     		condition.add(ConditionUtils.getCondition("parentIssueTypeId", Condition.EQUALS,typeId));
     		List<NmIssuetype> list = this.getNmIssuetypes(condition, null) ;//得到上级发布类型ID为typeId的所有发布类型
-    		return list;
-    	}else{
-    		return new ArrayList<NmIssuetype>() ;
-    	}
+    		if(list.size()>0){
+    			return list;
+    		}else{
+    			list.add(type) ;
+    			return list ;
+    		}
     }
     
     /**
