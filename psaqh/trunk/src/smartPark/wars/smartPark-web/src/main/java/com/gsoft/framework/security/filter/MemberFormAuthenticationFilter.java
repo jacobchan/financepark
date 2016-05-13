@@ -64,7 +64,12 @@ public class MemberFormAuthenticationFilter extends DefaultFormAuthenticationFil
 	      }else{
 	    	  EnterbusinessmanagerRz rz = enterbusinessmanagerRzManager.getEnterbusinessmanagerRz(mem.getCompanyId());
 		      params.put("companyName", rz.getRzName());
-		      params.put("companyAdr", rz.getRoomId().getRoomAddress()); 
+		      if(rz.getRoomId() != null){
+		    	  params.put("companyAdr", rz.getRoomId().getRoomAddress()); 
+		      }else{
+		    	  params.put("companyAdr", ""); 
+		      }
+		      
 	      }
 	     
 	      params.put("authorization", this.esbSecurityManager.encryptSecurityInfo(null));
