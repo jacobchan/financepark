@@ -722,6 +722,8 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     			                       "ff80808153f4a86a0153f4b0d0b90010",	//套餐二
     			                       "ff80808153f4a86a0153f4b0e4210011"};	//套餐三
          conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.IN, buff));
+         orders.add(ConditionUtils.getOrder("userorderStatus", true));
+         orders.add(ConditionUtils.getOrder("userorderTime", false));
          if(StringUtils.isNotEmpty(genId)){
         	 if("ff80808153f4a86a0153f4b06a65000d".equals(genId)){
         		 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.IN, buff2)); 
@@ -732,7 +734,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     	 PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
     	 return pagerRecords;
     	}
-
+    
 
       /**
   	 * 前台 根据当前用户分页查询历史订单 根据订单号，订单项目      陈烨
@@ -767,9 +769,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
         }
       	PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
       	return pagerRecords;
-      }
-
-   
+      } 
     /**
 	 *前台 根据当前用户分页查询全部订单           陈烨
 	 * @param pager
