@@ -28,7 +28,7 @@ public interface TicketServiceManager extends BaseManager{
 
 	public String cancelOrder(String userId, String orderId);
 
-	public ModifyAndRefundStipulateVo getModifyAndRefundStipulate(String seatId, String airlineCode, String classCode,
+	public ModifyAndRefundStipulateVo getModifyAndRefundStipulate(String airlineCode, String classCode,
 			String depDate, String depCode, String arrCode);
 
 	public List<WSRefundActionType> getActionTypeForRefund();
