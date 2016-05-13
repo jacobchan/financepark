@@ -35,14 +35,6 @@ public class ModifyAndRefundStipulateVo implements Domain{
 	private String 	param2;
 	private String 	param3;
 	private String 	param4;
-	private String 	id;
-	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	public String getSeatId() {
 		return seatId;
 	}
