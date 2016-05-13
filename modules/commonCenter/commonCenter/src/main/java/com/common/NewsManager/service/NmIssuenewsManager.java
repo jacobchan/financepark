@@ -53,6 +53,11 @@ public interface NmIssuenewsManager extends BaseManager{
      * 保存并返回对象
      */
     public NmIssuenews saveNmIssuenews(NmIssuenews o) throws BusException;
+    
+    /**
+     * 保存并返回对象
+     */
+    public NmIssuenews saveNmIssuenewss(NmIssuenews o,String code) throws BusException;
 
     /**
      * 删除对象
