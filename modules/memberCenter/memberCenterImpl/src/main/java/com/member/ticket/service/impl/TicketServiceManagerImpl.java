@@ -367,16 +367,14 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 	@SuppressWarnings("unchecked")
 	@Override
 	@EsbServiceMapping
-	public ModifyAndRefundStipulateVo getModifyAndRefundStipulate(@ServiceParam(name="seatId") String seatId,
-			@ServiceParam(name="airlineCode") String airlineCode, @ServiceParam(name="classCode") String classCode,
+	public ModifyAndRefundStipulateVo getModifyAndRefundStipulate(@ServiceParam(name="airlineCode") String airlineCode, @ServiceParam(name="classCode") String classCode,
 			@ServiceParam(name="depDate") String depDate,@ServiceParam(name="depCode") String depCode,@ServiceParam(name="arrCode") String arrCode) {
 		String result = "";
 		Map<String,Object> params = new HashMap();
 		params.put("agencyCode", agencyCode);
-		String signString = seatId+agencyCode+airlineCode+arrCode+classCode+depCode+depDate+safeCode;
+		String signString = agencyCode+airlineCode+arrCode+classCode+depCode+depDate+safeCode;
 		String sign = PasswordUtils.md5Password(signString);
 		params.put("sign", sign);
-		params.put("seatId", seatId);
 		params.put("airlineCode", airlineCode);
 		params.put("classCode", classCode);
 		params.put("depDate", depDate);
