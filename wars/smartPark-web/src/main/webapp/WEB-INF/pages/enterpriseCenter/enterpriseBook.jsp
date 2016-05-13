@@ -23,7 +23,7 @@
 		        });
 				$("#btnEdit").click(function(){
 					var memberIds=$("#memberIds").val();
-			  		var memberNames=$("#memberNames").html();
+			  		var memberNames=$("#memberNames").val();
 			  		var memberPhone=$("#memberPhone").val();
 			  		var params = ['memberId='+memberIds+'','memberName='+memberNames+'','memberPhoneNumber='+memberPhone+''];
 			  		$.youi.ajaxUtils.ajax({
