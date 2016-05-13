@@ -110,6 +110,24 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
     		return nmIssuenewsDao.save(o);
     	}
     }
+    
+    @Override
+    @EsbServiceMapping
+    public NmIssuenews saveNmIssuenewss(NmIssuenews o, @ServiceParam(name="code")String code)
+    		throws BusException {
+    	String nmIssuenewsId = o.getPolicyId();
+    	boolean isUpdate = StringUtils.isNotEmpty(nmIssuenewsId);
+    	if(isUpdate){//修改
+    		return nmIssuenewsDao.save(o);
+    	}else{//新增
+    		NmIssuetype type = issuetypeManager.getIssueTypeByIssueTypeCode(code) ;
+    		o.setPolicyType(type);
+//    		o.setBrowseCount("0");
+//    		o.setCaiCount("0");
+//    		o.setDingCount("0");
+    		return nmIssuenewsDao.save(o);
+    	}
+    }
 
     /**
      * 删除对象
