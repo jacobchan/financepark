@@ -233,6 +233,14 @@ var commodityId;
 		
 		//在线预约点击事件
 		$("#online").click(function() {
+			if (!isLogin) {
+				clearInterval(timer);
+				$("#msg").text("请登录后重试！");
+				$(".toast").show();
+				pltime = 2;
+				timer = setInterval("closeTanc()", 1000)
+				return;
+			}
 			var arr = new Array();
 			$("#calendar .today").each(function() {
 				if($(this).attr("id")!=undefined){

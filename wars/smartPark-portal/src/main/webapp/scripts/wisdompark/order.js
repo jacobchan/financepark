@@ -4,6 +4,14 @@ $(function(){
         
       //在线预约
 		$("#online").click(function(){
+			if(!isLogin){
+				clearInterval(timer);
+				$("#msg").text("请登录后重试！");
+	            $(".toast").show();
+	            pltime=2;
+	            timer=setInterval("closeTanc()",1000)
+				return;
+				}
 			var commodityId= $("#commodityId").val();
 			var dates=new Array();
 			var times=new Array();
