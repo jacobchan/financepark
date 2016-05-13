@@ -118,6 +118,33 @@ public class LoginUserData extends BaseDataController {
 	}
 	
 	/**
+	 * 第三方APP登录
+	 * @return
+	 */
+	@RequestMapping("/ortherAppLogin.json")
+	public ModelAndView ortherAppLogin(HttpServletRequest request,
+			@RequestParam("phone") String phone,
+			@RequestParam("parkName") String parkName,@RequestParam("companyName")String companyName){
+		String password = "000000";
+		TempDemo temp = enterbusinessmanagerRzManager.singleLogin(phone, password, parkName,companyName);
+		if(temp.isFlag()){
+			// 自动登录
+			try {
+				DefaultLoginFormToken token = new DefaultLoginFormToken(phone,
+						password, false, request.getHeader("host"));
+				token.setLoginType("memberCenter");
+				org.apache.shiro.SecurityUtils.getSubject().login(token);
+				return new ModelAndView("000000");
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new BusException("登录不成功！");
+			}
+		}else{
+			throw new BusException(temp.getBuff());
+		}
+	}
+	
+	/**
 	 * 通过手机找回密码,输入手机号和验证码
 	 */
 	@RequestMapping("/findpsw.json")
