@@ -75,6 +75,10 @@ $(function () {
            		pltime=1;
            		timer=setInterval("closeTanc()",1000);
            		return false;
+			}else{
+				var aa = $("#"+applyOrderNumber+"").parent().parent();
+				var dd = $(aa).children('td').eq(1);
+				activityAdr = dd[0].innerText;
 			}
 			
 			//检查是否有选择头像图片
@@ -100,6 +104,7 @@ $(function () {
 		                   			var params = {applyTitle:applyTitle,startTime:startTime,endTime:endTime,
 		            						deadline:deadline,applyMaxuser:applyMaxuser,activityAdr:activityAdr,applyOrderNumber:applyOrderNumber,
 		            						activityImage:imgUpload,commentContent:commentContent,documentPath:allPath};
+		                   			console.log(params);
 		                   			saveApply(params);
 		                   		}else{
 		                   			docPath = docPath+",";
@@ -166,7 +171,7 @@ $(function () {
 				$(".tc.mt25").text(msg);
            		$(".toast").show();
            		pltime=1;
-           		timer=setInterval("closeTanc()",1000);
+           		timer=setInterval("closeTanc()",2000);
 			}
 		});
 	}
@@ -221,16 +226,58 @@ $(function () {
 					},
 					filters : [ {
 						title : 'file files',
-						extensions : 'doc'
+						extensions : 'doc,docx,xls,xlsx,ppt,pptx,pdf'
 					} ],
 					init : {
 						FilesAdded : function(up, files) {
-							
+							for(var i = 0, len = files.length; i<len; i++){
+								//构造html来更新UI，显示文件的名字（可根据自己的业务修改）
+								var src = getPathtype(files[i].name);
+								var html = '<div class="gr-czh-list">'+
+	                                '<img src='+src+' height="114" width="202">'+
+	                                '<h3><a href="javascript:;" class="c-333">'+files[i].name+'</a></h3>'+
+	                                '<p class="f12 mb5"> <a href="javascript:;" class="c-b1 ml5 mr10" id='+files[i].id+' onclick="deldoc(this);">删除</a></p>'+
+	                                '</div>';				
+								$('.doclist').append(html);
+								/*!function(i){
+									//此处用户图片的回显（可根据自己的业务修改）
+									previewImage(files[i],function(imgsrc){
+										 $('#qiyeheadImg-'+files[i].id).append('<img src="'+ imgsrc +'" />'); 
+										$('#qiyeheadImg-'+files[i].id).attr("src",imgsrc);
+									});
+							    }(i);*/
+							};
 						}
 					}
 				});
 		
 		fileuploader.init();
+		
+		//删除所选上传文档
+		function deldoc(obj){
+			var me = obj;
+			fileuploader.removeFile(me.id); 
+			$(me.parentNode.parentNode).remove();
+
+		}
+		
+		//获取文件类型
+	    function getPathtype(path){
+	    	var type="";
+	    	var index1=path.lastIndexOf("."); 
+	    	var index2=path.length;
+	    	var postf=path.substring(index1+1,index2);//后缀名  
+	    	if(postf=='doc'||postf=='docx'){
+	    		type="../../../styles/images/grzx/user-photo.jpg";
+	    	}else if(postf=='xls'||postf=='xlsx'){
+	    		type="../../../styles/images/grzx/user-photo.jpg";
+	    	}else if(postf=='ppt'||postf=='pptx'){
+	    		type="../../../styles/images/grzx/user-photo.jpg";
+	    	}else if(postf=='pdf'){
+	    		type="../../../styles/images/grzx/user-photo.png";
+	    	}
+	    	return type;
+	    } 
 		
 		//图片回显预览
 		function previewImage(file, callback) {//file为plupload事件监听函数参数中的file对象,callback为预览图片准备完成的回调函数
@@ -344,7 +391,7 @@ $(function () {
 		$(function(){
 			$.ajax({
 				url:baseUrl+'ordermanagerUserorderManager/getOrderlistforPage.json',
-				data:['userorderStatus=01','genreCode=0301'].join('&'),
+				data:['userorderStatus=02','genreCode=0301'].join('&'),
 				success:function(result){
 					if(result&&result.records){
 						roomRecords(result.records);
@@ -389,7 +436,7 @@ $(function () {
  
         });
 		$("#a1").click(function(){			
-			location.href = proUrl + "companyservice/room.html" ;
+			window.open(proUrl + "companyservice/room.html") ;
 		})	
 	
 		//toast弹窗出来后，一秒自动关闭,请再调用弹窗toast的时候调用该方法
