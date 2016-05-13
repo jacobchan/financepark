@@ -1,6 +1,5 @@
 package com.member.ticket.entity;
 
-import javax.persistence.Entity;
 
 import com.gsoft.framework.core.dataobj.Domain;
 
