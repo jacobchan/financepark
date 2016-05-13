@@ -126,28 +126,29 @@ public class ActivityApplylistManagerImpl extends BaseManagerImpl implements Act
 			throws BusException {
 		//校验是否重复报名
     	TempDemo cord = new TempDemo();
-    	List<ActivityApplylist> applist = activityApplylistDao.getList(new String[]{"activityApply.applyId","applyPhone"},new String[]{o.getActivityApply().getApplyId(),o.getApplyPhone()});
-    	if(applist.size()<=0){
+    	
     		TempDemo demo = mcMsgdatasManager.checkPhoneCode(o.getApplyPhone(), captcha);
     		if(demo.isFlag()){
-    			if(StringUtils.isNotEmpty(o.getUpdateUser())){//登录用户报名保存，匿名用户不保存
-    				MemberInformation member=memberInformationManager.getMemberInformation(o.getUpdateUser());
-    				o.setMember(member);
-    			}
-		    	o.setApplylistTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-		    	o.setCreateUser(o.getUpdateUser());
-		    	o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-		    	o.setUpdateUser(o.getUpdateUser());
-		    	o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-		    	activityApplylistDao.save(o);
-				cord.setFlag(true);
-				cord.setBuff("活动报名成功!");
+	    		List<ActivityApplylist> applist = activityApplylistDao.getList(new String[]{"activityApply.applyId","applyPhone"},new String[]{o.getActivityApply().getApplyId(),o.getApplyPhone()});
+	    	    if(applist.size()<=0){
+	    		if(StringUtils.isNotEmpty(o.getUpdateUser())){//登录用户报名保存，匿名用户不保存
+	    			MemberInformation member=memberInformationManager.getMemberInformation(o.getUpdateUser());
+	    			o.setMember(member);
+	    		}
+				    o.setApplylistTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+				    o.setCreateUser(o.getUpdateUser());
+				    o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+				    o.setUpdateUser(o.getUpdateUser());
+				    o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+				    activityApplylistDao.save(o);
+					cord.setFlag(true);
+					cord.setBuff("活动报名成功!");
+    	    	}else{
+    	    		throw new BusException("你已报名成功!");
+    	    	}
     		}else{
     			throw new BusException(demo.getBuff());
     		}
-    	}else{
-    		throw new BusException("你已报名成功!");
-    	}
     	return cord;
 	}
     /**
