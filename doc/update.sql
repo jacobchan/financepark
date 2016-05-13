@@ -140,3 +140,4 @@ alter table sp_ticket_passenger
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;  
    
 
+alter table sp_enterprise_invitation add COLUMN INVITATION_STATUS_ Integer(20);
