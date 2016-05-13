@@ -171,6 +171,8 @@ public class LoginUserData extends BaseDataController {
 			     Map results = new HashMap();
 			     results.put("record", params);
 			     results.put("message", new Message("000000", "登录成功"));
+			     response.setHeader("Content-type", "text/html;charset=UTF-8"); 
+			     response.setCharacterEncoding("UTF-8");  
 			     try{
 			        response.getOutputStream().write(PojoMapper.toJson(results, false).getBytes("UTF-8"));
 			      }catch (IOException ioe) {
