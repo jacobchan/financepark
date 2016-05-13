@@ -70,7 +70,27 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
 	@EsbServiceMapping
 	public PagerRecords getPagerNmIssuenewss(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=NmIssuenews.class) Collection<Condition> conditions,//查询条件
-			@OrderCollection Collection<Order> orders)  throws BusException{
+			@OrderCollection Collection<Order> orders,
+			@ServiceParam(name="issueTypeCode") String issueTypeCode)  throws BusException{
+		if(StringUtils.isNotEmpty(issueTypeCode)){
+			conditions.add(ConditionUtils.getCondition("policyType.issueTypeCode", Condition.EQUALS,issueTypeCode));
+		}
+		PagerRecords pagerRecords = nmIssuenewsDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
+	
+	@EsbServiceMapping
+	public PagerRecords getPagerYHZCIssuenewss(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=NmIssuenews.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders,
+			@ServiceParam(name="issueTypeCode") String issueTypeCode)  throws BusException{
+		List<NmIssuetype> list = issuetypeManager.getNewsType(issueTypeCode) ;
+		String[] str = new String[list.size()];
+		for(int i=0;i<list.size() ;i++){
+			String code = list.get(i).getIssueTypeCode() ;
+			str[i] = code ;
+		}
+		conditions.add(ConditionUtils.getCondition("policyType.issueTypeCode", Condition.IN,str));
 		PagerRecords pagerRecords = nmIssuenewsDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
