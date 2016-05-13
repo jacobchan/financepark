@@ -33,6 +33,10 @@ public class EnterpriseInvitation implements Domain{
 	@Column(name = "INVITATION_TELEPHONE")
 	@Length(max=32)
 	private String invitationTelephone;//会员电话
+	
+	@Column(name = "INVITATION_STATUS_")
+	@Length(max=20)
+	private Integer invitationStatus;//状态
 
 	@Column(name = "CREATE_USER_")
 	@Length(max=36)
@@ -108,8 +112,14 @@ public class EnterpriseInvitation implements Domain{
 		this.invitationCode = invitationCode;
 	}
 	
-	
-	
+	public Integer getInvitationStatus() {
+		return invitationStatus;
+	}
+
+	public void setInvitationStatus(Integer invitationStatus) {
+		this.invitationStatus = invitationStatus;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
