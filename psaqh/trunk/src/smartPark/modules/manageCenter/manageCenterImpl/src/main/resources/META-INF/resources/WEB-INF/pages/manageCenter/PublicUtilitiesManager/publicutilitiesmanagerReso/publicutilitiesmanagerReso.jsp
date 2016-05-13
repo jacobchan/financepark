@@ -3,7 +3,7 @@
 <youi:page>
 				<youi:grid id="grid_publicutilitiesmanagerReso" idKeys="resoId" caption="资源状态列表"  panel="false"
 				src="esb/web/publicutilitiesmanagerResoManager/getPagerPublicutilitiesmanagerResos.json" dataFormId="form_publicutilitiesmanagerReso"
-				editSrc="esb/web/publicutilitiesmanagerResoManager/getPublicutilitiesmanagerReso.json" edit="NOT" remove="NOT" showCheckbox="true"
+				editSrc="esb/web/publicutilitiesmanagerResoManager/getPublicutilitiesmanagerReso.json" edit="NOT" add="预定" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/publicutilitiesmanagerResoManager/removePublicutilitiesmanagerReso.json">
 		<youi:fieldLayout>
 
@@ -14,7 +14,7 @@
 			</youi:fieldSelect>
 			<youi:fieldSelect property="resoTime"  caption="可用时段" convert="resoTime"/>
 		</youi:fieldLayout>
-        <youi:button name="reserve" caption="预约" active="1"/>
+       <%--  <youi:button name="reserve" caption="预约" active="1"/> --%>
 		<youi:gridCol property="commodityId.commodityTitle"  caption="商品名称" width="20%"  align="center"/>
 		<youi:gridCol property="resoStatus"  caption="资源状态" convert="resoStatus" width="20%" align="center"/>
 		<youi:gridCol property="resoDate"  caption="可用日期" orderBy="desc" width="20%" align="center"/>
