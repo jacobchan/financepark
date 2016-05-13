@@ -85,6 +85,7 @@ var pageCount=1;
 					html += '</tr>'
 				}
 			}else{
+				$(".tcdPageCode").empty();
 				html += '<tr>'
 				html += '	<td colspan="6">暂无记录</td>'
 				html += '</tr>'
