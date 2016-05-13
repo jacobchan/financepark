@@ -93,7 +93,11 @@ public class FileUploadController {
 			//TODO 后续完善
 			String fileFlg = request.getParameter("fileFlg");
 			//执行上传操作，返回带有文件URL的集合
-			urlList = this.uploadImage(request, response);
+			if(fileFlg.equals("0")){
+				urlList = this.uploadImage(request, response);
+			}else{
+				urlList = this.uploadFile(request, response);
+			}
 		} catch (IOException e) {
 			urlList.clear();
 		}
@@ -122,56 +126,67 @@ public class FileUploadController {
 	 * @throws IOException
 	 */
 	public  List<String> uploadFile( HttpServletRequest request, HttpServletResponse response   ) throws IOException {
-		//返回处理标识
-		List<String> urlList = new ArrayList<String>();
-		//数据库保存的图片路径
-		String imagePathDB = "";
-		//创建一个通用的多部分解析器
-		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
-		//判断 request 是否有文件上传,即多部分请求
-		if(multipartResolver.isMultipart(request)){
-			//转换成多部分request  
-			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest)request;
-			//取得request中的所有文件名
-			Iterator<String> iter = multiRequest.getFileNames();
-			if(iter.hasNext()){
-				while(iter.hasNext()){
-					int i = 0;
-					//取得上传文件
-					MultipartFile file = multiRequest.getFile(iter.next());
-					if(file != null){
-						//取得当前上传文件的文件名称
-						String myFileName = file.getOriginalFilename();
-						//如果名称不为"",说明该文件存在，否则说明该文件不存在
-						if(myFileName.trim() !=""){
-							myFileName = myFileName.substring(0, myFileName.indexOf("."));
-							//文件名
-							String filename= getName("test.jpg");
-							//图片保存路径
-							SimpleDateFormat formater = new SimpleDateFormat("yyyyMMdd");
-							String urlPathString = formater.format(new Date())+"/"+filename;
-							String savePath = this.getFolder(urlPathString,request);
-							File localFile = new File(savePath);
-							//获取图片内容下载到本地服务器的路径
-							//String basePath = request.getContextPath();
-							//网页显示路径
-							imagePathDB = urlPathString;
-							try {
-								file.transferTo(localFile);
-								urlList.add(i,imagePathDB);
-							} catch (IllegalStateException e) {
-								break;
-							} catch (IOException e) {
-								break;
-							}
-						}
-					}
-					i++;
-				}
-			}
-		}
-		return urlList;
-	}
+        //返回处理标识
+        List<String> urlList = new ArrayList<String>();
+        //数据库保存的图片路径
+        String imagePathDB = "";
+        //创建一个通用的多部分解析器
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+        //判断 request 是否有文件上传,即多部分请求
+        if(multipartResolver.isMultipart(request)){
+            //转换成多部分request  
+            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest)request;
+            //取得request中的所有文件名
+            Iterator<String> iter = multiRequest.getFileNames();
+            if(iter.hasNext()){
+                while(iter.hasNext()){
+                    int i = 0;
+                    //取得上传文件
+                    MultipartFile file = multiRequest.getFile(iter.next());
+                    if(file != null){
+                        //取得当前上传文件的文件名称
+                        String myFileName = file.getOriginalFilename();
+                        //如果名称不为"",说明该文件存在，否则说明该文件不存在
+                        if(myFileName.trim() !=""){
+                            //myFileName = myFileName.substring(0, myFileName.indexOf("."));
+                            //文件名
+                            String filename= getName(myFileName);
+                            //图片保存路径
+                            SimpleDateFormat formater = new SimpleDateFormat("yyyyMM");
+                            String urlPathString = "upload/"+formater.format(new Date())+"/"+filename;
+                            File path = new File(root+"upload/"+formater.format(new Date()));
+                            FileStore Store = new FileStore();
+                            Store.setFilePath(urlPathString);
+                            Store.setStatus("0");
+                            Long a = file.getSize();
+                            Store.setFileSize(Integer.valueOf(a.toString()));
+                            Store.setUploadFileName(myFileName);
+                            Store.setTimestamp(DateUtils.getToday("yyyyMMddHHmmss"));
+                            fileStoreDao.save(Store);
+                            if(!path.exists()){
+      						  path.mkdirs();
+      					  }
+                            File localFile = new File(root+urlPathString);
+                            //获取图片内容下载到本地服务器的路径
+                            //String basePath = request.getContextPath();
+                            //网页显示路径
+                            imagePathDB = urlPathString;
+                            try {
+                                file.transferTo(localFile);
+                                urlList.add(i,imagePathDB);
+                            } catch (IllegalStateException e) {
+                                break;
+                            } catch (IOException e) {
+                                break;
+                            }
+                        }
+                    }
+                    i++;
+                }
+            }
+        }
+        return urlList;
+    }
 	
 	public List<String> uploadImage(HttpServletRequest  request,HttpServletResponse response) throws IllegalStateException, IOException, FileUploadException{
 		List<String> urlList = new ArrayList<String>();
@@ -218,9 +233,8 @@ public class FileUploadController {
 	 * @return
 	 */
 	public String getName(String fileName) {
-		Random random = new Random();
-		return "" + random.nextInt(10000)
-				+ System.currentTimeMillis() + getFileExt(fileName);
+		//Random random = new Random();
+		return "" + UUID.randomUUID().toString()+ getFileExt(fileName);
 	}
 	
 	/**
