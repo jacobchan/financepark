@@ -34,9 +34,9 @@
 			</dd> --%>
 			<!-- <dd><a href="">退货处理</a></dd> -->
 			<dt>创智汇</dt>
-			<%-- <dd><a href="<%=request.getContextPath()%>/member/memberCenter/genWisdom/releaseActivity.html">发布活动</a></dd> --%>
+			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/genWisdom/releaseActivity.html">发布活动</a></dd>
 			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/genWisdom/participateActivity.html">我参加的活动</a></dd>
-			<%-- <dd><a href="<%=request.getContextPath()%>/member/memberCenter/genWisdom/publishActivity.html">我发布的活动</a></dd> --%>
+			<dd><a href="<%=request.getContextPath()%>/member/memberCenter/genWisdom/publishActivity.html">我发布的活动</a></dd>
 	
 		</dl>
 	</div>
