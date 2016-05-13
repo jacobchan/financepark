@@ -108,7 +108,11 @@ public class UserManagerImpl extends BaseManagerImpl implements UserManager,
 				o.setPassword(user.getPassword());
 			}
 		} else {
-			o.setPassword(this.passwordService.hashPassword(o.getPassword()).toHex());
+			if(null!=o.getPassword() && !"".equals(o.getPassword())){
+				o.setPassword(this.passwordService.hashPassword(o.getPassword()).toHex());
+			}else{
+				o.setPassword(this.passwordService.hashPassword("123456").toHex());
+			}
 		}
 		return (User) this.userDao.save(o);
 	}
