@@ -219,7 +219,7 @@ $(function(){
 			}
 			//保存地址
 			
-			function saveadd(){
+			$("#save1").click(function(){
 				//var bool = $('input[name="address"]:checked').val();
 				var addressName=$("#addressName").val();	
 				var addressPhone=$("#addressPhone").val();
@@ -253,7 +253,8 @@ $(function(){
 								'addressPhone='+addressPhone,
 								'addressDetail='+addressDetail];
 				var serviceURL = baseUrl+"memberadrAddressManager/saveMemberadrAddress.json";
-				
+				$("#save1").addClass("undis") ;
+				$("#save2").removeClass("undis") ;
 				//公共方法
 				$.youi.ajaxUtils.ajax({
 					url:serviceURL,
@@ -261,6 +262,8 @@ $(function(){
 					jsonp:'data:jsonp',
 					dataType:'jsonp',
 					success:function(results){
+						$("#save2").addClass("undis") ;
+						$("#save1").removeClass("undis") ;
 						if(results&&results.record){
 							clearInterval(timer);
 							$(".tc.mt25").text("保存成功!");
@@ -270,9 +273,12 @@ $(function(){
 							load();
 							setTimeout(function(){$(".bg-tanc.m1").hide(); },1000);
 						}
+					},error:function(XMLHttpRequest, textStatus, errorThrown){
+						$("#save2").addClass("undis") ;
+						$("#save1").removeClass("undis") ;
 					}
 				});
-			};
+			});
 	
 		function activeclick(){
 			$(".select-address").click(function(){
