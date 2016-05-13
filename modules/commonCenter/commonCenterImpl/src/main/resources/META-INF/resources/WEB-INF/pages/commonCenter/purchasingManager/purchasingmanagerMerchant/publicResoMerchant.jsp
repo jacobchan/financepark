@@ -56,7 +56,7 @@
 	
 	<!--**********************************页面函数Start********************************-->
 	<youi:func name="func_grid_addressManage">
-		var selectRecord = $elem('grid_purchasingmanagerMerchant',pageId).grid('getSelectedRecord');
+		var selectRecord = $elem('grid_publicResoMerchant',pageId).grid('getSelectedRecord');
 		var merchantId = selectRecord['merchantId'];
 		$elem('subpage_sb_merchant_addressManage',pageId).subpage('open',{merchantId:merchantId},null,{merchantId:merchantId});
 	</youi:func>
