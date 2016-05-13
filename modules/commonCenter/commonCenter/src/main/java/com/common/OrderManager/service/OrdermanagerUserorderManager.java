@@ -229,18 +229,6 @@ public interface OrdermanagerUserorderManager extends BaseManager{
      */
     public OrdermanagerUserorder getOrderByCode(String userorderCode)
 			throws BusException;
-    	/**
-	 *前台 根据当前用户分页查询未完成 订单       陈烨
-	  * @param pager
-	 * @param conditions
-	 * @param orders
-	 * @return
-	 * @throws BusException
-	 */
-	public PagerRecords getPagerAll(Pager pager,//分页条件
-			Collection<Condition> conditions,//查询条件
-			Collection<Order> orders,String genId) throws BusException;
-	
 	/**
 	 * 前台 根据当前用户分页查询历史订单 根据订单号，订单项目      陈烨
 	 * @param pager
@@ -277,14 +265,7 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	 public OrdermanagerUserorder saveWKSerOrder(String userId,
 			List<OrdermanagerCommoditydetail> orderDetailList)
 			throws BusException;
-	  /**
-		 * 获取整个数据的totalCount陈烨
-		 * @param conditions
-	     * @return
-	     * @throws BusException
-		 */	    
-	public List<Record> getTotalCount(Collection<Condition> conditions,String genId)  throws BusException;
-	
+	 
 	/**
 	 * 获取待处理订单的totalCount  陈烨
 	 * @param conditions
@@ -339,13 +320,13 @@ public interface OrdermanagerUserorderManager extends BaseManager{
      * @throws BusException
      */
 	public OrdermanagerUserorder  finishStatus(String id) throws BusException;  
-	 /**
-		 * 	通过code，状态,查询订单       
-		 * @param userId
-		 * @param genreCode
-		 * @param userorderStatus
-		 * @return
-		 * @throws BusException
-		 */
-	   	public List<OrdermanagerUserorder> getOrderlistforPage(String userId,String genreCode,String userorderStatus) throws BusException;
+	/**
+	 * 	通过code，状态,查询订单       
+	 * @param userId
+	 * @param genreCode
+	 * @param userorderStatus
+	 * @return
+	 * @throws BusException
+	 */	 	
+	public List<OrdermanagerUserorder> getOrderlistforPage(String userId,String genreCode,String userorderStatus) throws BusException;
 }
