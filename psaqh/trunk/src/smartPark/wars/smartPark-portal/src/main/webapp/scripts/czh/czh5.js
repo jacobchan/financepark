@@ -231,7 +231,7 @@ $(function(){
 		//获取创业营类型id
 		$("#tp_55").removeClass("undis") ;
 		$("#tp_56").removeClass("undis") ;
-		var name = "03";//创业营凑得
+		var name = "03";//创业营类型编码
 		$.youi.ajaxUtils.ajax({
 			url:baseUrl+"applayTypeManager/getApplayTypes.json",
 			data:['typeCode='+name].join('&'),
