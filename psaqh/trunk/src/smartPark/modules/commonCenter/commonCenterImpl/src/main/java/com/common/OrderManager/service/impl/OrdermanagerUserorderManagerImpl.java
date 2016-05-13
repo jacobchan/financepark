@@ -714,23 +714,23 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     			@OrderCollection Collection<Order> orders,
     			@ServiceParam(name="genId") String genId)
     			throws BusException {
+    	 //未付款订单排在前面，
+         orders.add(ConditionUtils.getOrder("userorderStatus", true));
+         //时间越近的订单排在前面
+         orders.add(ConditionUtils.getOrder("userorderTime", false));
     	 String[] buff = new String[]{"01",   //01为待付款
     			 						"02"};  //02为待评价
-    	 //IT服务（ff80808153f4a86a0153f4b06a65000d）有四个子类别
-    	 String[] buff2 = new String[]{"ff80808153f4a86a0153f4b0a31f000e",	//预约单次    商品类别id
-    			                       "ff80808153f4a86a0153f4b0be62000f",	//套餐一
-    			                       "ff80808153f4a86a0153f4b0d0b90010",	//套餐二
-    			                       "ff80808153f4a86a0153f4b0e4210011"};	//套餐三
-         conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.IN, buff));
-         orders.add(ConditionUtils.getOrder("userorderStatus", true));
-         orders.add(ConditionUtils.getOrder("userorderTime", false));
+    	 conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.IN, buff));
+    	 //IT服务有四个子类别
          if(StringUtils.isNotEmpty(genId)){
-        	 if("ff80808153f4a86a0153f4b06a65000d".equals(genId)){
-        		 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.IN, buff2)); 
-        	 }else{
-        		 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
-        	 }
-         }
+  			PurchasingmanagerGenre p = purchasingmanagerGenreManager.getPurchasingmanagerGenre(genId);	
+  		    //如果下拉选择为IT服务  则添加条件查询子类别
+  			if("0508".equals(p.getGenreCode())){//0508为IT服务
+  				conditions.add(ConditionUtils.getCondition("genreId.pagrenId", Condition.EQUALS, genId));				 
+  			}else{
+  				conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
+         	}
+  		 } 
     	 PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
     	 return pagerRecords;
     	}
@@ -754,63 +754,21 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
       			throws BusException {
     	String[] buff = new String[]{"01",   //01为待付款
       			 						"02"};  //02为待评价
+    	conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.NOT_IN, buff));
       	//IT服务（ff80808153f4a86a0153f4b06a65000d）有四个子类别
-      	String[] buff2 = new String[]{"ff80808153f4a86a0153f4b0a31f000e",	//预约单次    商品类别id
-      			                       "ff80808153f4a86a0153f4b0be62000f",	//套餐一
-      			                       "ff80808153f4a86a0153f4b0d0b90010",	//套餐二
-      			                       "ff80808153f4a86a0153f4b0e4210011"};	//套餐三
-        conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.NOT_IN, buff));
         if(StringUtils.isNotEmpty(genId)){
-        	if("ff80808153f4a86a0153f4b06a65000d".equals(genId)){
-          		conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.IN, buff2)); 
-          	}else{
-          	 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
-          	}
-        }
+ 			PurchasingmanagerGenre p = purchasingmanagerGenreManager.getPurchasingmanagerGenre(genId);
+ 			//如果下拉选择为IT服务  则添加条件查询四个子类别
+ 			if("0508".equals(p.getGenreCode())){  //0508为IT服务类别编号
+ 				conditions.add(ConditionUtils.getCondition("genreId.pagrenId", Condition.EQUALS, genId)); 
+ 			}else{
+ 				conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
+        	}
+ 		} 		
       	PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
       	return pagerRecords;
       } 
-    /**
-	 *前台 根据当前用户分页查询全部订单           陈烨
-	 * @param pager
-	 * @param conditions
-	 * @param orders
-	 * @return
-	 * @throws BusException
-	 */       
-    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
-	public PagerRecords getPagerAll(Pager pager,//分页条件
-			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,//查询条件
-			@OrderCollection Collection<Order> orders,
-			@ServiceParam(name="genId") String genId)
-			throws BusException {	
-         if(StringUtils.isNotEmpty(genId)){
-        	 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
-         }
-    	 PagerRecords pagerRecords = ordermanagerUserorderDao.findByPager(pager, conditions, orders);  	  
-    	 return pagerRecords;
-   }
-   
-    /**
-	 * 前台 个人中心 获取整个数据的totalCount chenye
-	 * @param conditions
-     * @return
-     * @throws BusException
-	 */	   
-    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",operator=Condition.EQUALS,pubProperty="userId")})
-	public List<Record> getTotalCount(
-			@ConditionCollection(domainClazz=OrdermanagerUserorder.class) Collection<Condition> conditions,
-			@ServiceParam(name="genId") String genId)  throws BusException{
-         if(StringUtils.isNotEmpty(genId)){
-        	 conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
-         }
-		List<Record> recordList=new ArrayList<Record>();
-		List<OrdermanagerUserorder> List = this.getOrdermanagerUserorders(conditions, null);
-		Record record = new Record();
-		record.put("totalCount", List.size());
-		recordList.add(record);
-		return recordList;
-	}
+
     /**
 	 * 前台 个人中心   获取待处理订单的totalCount  chenye
 	 * @param conditions
@@ -824,20 +782,17 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 			)  throws BusException{
 		List<Record> recordList=new ArrayList<Record>();
 		String[] buff = new String[]{"01","02"};
-        conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.IN, buff));
+        conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.IN, buff));      
         //IT服务（ff80808153f4a86a0153f4b06a65000d）有四个子类别
-   	    String[] buff2 = new String[]{"ff80808153f4a86a0153f4b0a31f000e",	//预约单次    商品类别id
-   			                       "ff80808153f4a86a0153f4b0be62000f",	//套餐一
-   			                       "ff80808153f4a86a0153f4b0d0b90010",	//套餐二
-   			                       "ff80808153f4a86a0153f4b0e4210011"};	//套餐三
-        conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.IN, buff));
         if(StringUtils.isNotEmpty(genId)){
-       	 	if("ff80808153f4a86a0153f4b06a65000d".equals(genId)){
-       	 		conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.IN, buff2)); 
-       	 	}else{
-       	 		conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
-       	 	}
-        }
+ 			PurchasingmanagerGenre p = purchasingmanagerGenreManager.getPurchasingmanagerGenre(genId);
+ 			//如果下拉选择为IT服务  则添加条件查询四个子类别
+ 			if("0508".equals(p.getGenreCode())){  //0508为IT服务类别编号
+ 				conditions.add(ConditionUtils.getCondition("genreId.pagrenId", Condition.EQUALS, genId)); 
+ 			}else{
+ 				conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
+        	}
+ 		} 		
 		List<OrdermanagerUserorder> List = this.getOrdermanagerUserorders(conditions, null);
 		Record record = new Record();
 		record.put("totalCount", List.size());
@@ -859,17 +814,15 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    		String[] buff = new String[]{"01","02"};
         conditions.add(ConditionUtils.getCondition("userorderStatus", Condition.NOT_IN, buff));
         //IT服务（ff80808153f4a86a0153f4b06a65000d）有四个子类别
-   	    String[] buff2 = new String[]{"ff80808153f4a86a0153f4b0a31f000e",	//预约单次    商品类别id
-   			                       "ff80808153f4a86a0153f4b0be62000f",	//套餐一
-   			                       "ff80808153f4a86a0153f4b0d0b90010",	//套餐二
-   			                       "ff80808153f4a86a0153f4b0e4210011"};	//套餐三
-   	    if(StringUtils.isNotEmpty(genId)){
-    	 	if("ff80808153f4a86a0153f4b06a65000d".equals(genId)){
-    	 		conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.IN, buff2)); 
-    	 	}else{
-    	 		conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
-    	 	}
-   	    }
+        if(StringUtils.isNotEmpty(genId)){
+ 			PurchasingmanagerGenre p = purchasingmanagerGenreManager.getPurchasingmanagerGenre(genId);
+ 			//如果选择为IT服务  则添加条件查询四个子类别
+ 			if("0508".equals(p.getGenreCode())){  //0508为IT服务类别编号
+ 				conditions.add(ConditionUtils.getCondition("genreId.pagrenId", Condition.EQUALS, genId)); 
+ 			}else{
+ 				conditions.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, genId));
+        	}
+ 		} 		
    		List<OrdermanagerUserorder> List = this.getOrdermanagerUserorders(conditions, null);
    		Record record = new Record();
    		record.put("totalCount", List.size());
