@@ -1,15 +1,18 @@
 package com.gsoft.framework.core.web;
 
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -26,12 +29,16 @@ import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.web.controller.BaseDataController;
 import com.gsoft.framework.core.web.view.DataModelAndView;
+import com.gsoft.framework.core.web.view.Message;
 import com.gsoft.framework.security.DefaultLoginFormToken;
+import com.gsoft.framework.security.EsbSecurityManager;
 import com.gsoft.framework.security.agt.dao.UserDao;
 import com.gsoft.framework.security.agt.entity.User;
 import com.gsoft.framework.security.agt.service.impl.UserPasswordService;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.PasswordUtils;
+import com.gsoft.framework.util.PojoMapper;
+import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.EnterBusinessManager.service.EnterbusinessmanagerRzManager;
 
 @Controller
@@ -49,6 +56,8 @@ public class LoginUserData extends BaseDataController {
 	private UserDao userDao;
 	@Autowired(required=false)
 	private UserPasswordService passwordService;
+	@Autowired
+	private EsbSecurityManager esbSecurityManager;
 	/*
 	 * 获取注册手机验证码
 	 */
@@ -121,8 +130,10 @@ public class LoginUserData extends BaseDataController {
 	 * 第三方APP登录
 	 * @return
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/ortherAppLogin.json")
-	public DataModelAndView ortherAppLogin(HttpServletRequest request,
+	public void ortherAppLogin(HttpServletRequest request,
+			HttpServletResponse response,
 			@RequestParam("phone") String phone,
 			@RequestParam("parkName") String parkName,@RequestParam("companyName")String companyName){
 		String password = "000000";
@@ -134,7 +145,37 @@ public class LoginUserData extends BaseDataController {
 						password, false, request.getHeader("host"));
 				token.setLoginType("memberCenter");
 				org.apache.shiro.SecurityUtils.getSubject().login(token);
-				return new DataModelAndView("000000");
+				
+				Subject subject = SecurityUtils.getSubject();
+				Map params = new HashMap();
+			    params.put("principal", token.getPrincipal());
+			    params.put("username", phone);
+			    MemberInformation mem = (MemberInformation) subject.getPrincipal();
+			    params.put("memberInfoMation", mem);
+			    params.put("companyId", mem.getCompanyId());
+			    if(StringUtils.isEmpty(mem.getCompanyId())){
+			    	params.put("companyName", "");
+				    params.put("companyAdr", ""); 
+			    }else{
+			    	EnterbusinessmanagerRz rz = enterbusinessmanagerRzManager.getEnterbusinessmanagerRz(mem.getCompanyId());
+				    params.put("companyName", rz.getRzName());
+				    if(rz.getRoomId() != null){
+				    	params.put("companyAdr", rz.getRoomId().getRoomAddress()); 
+				    }else{
+				    	params.put("companyAdr", ""); 
+				    }
+				      
+			     }
+			     
+			     params.put("authorization", esbSecurityManager.encryptSecurityInfo(null));
+			     Map results = new HashMap();
+			     results.put("record", params);
+			     results.put("message", new Message("000000", "登录成功"));
+			     try{
+			        response.getOutputStream().write(PojoMapper.toJson(results, false).getBytes("UTF-8"));
+			      }catch (IOException ioe) {
+			        ioe.printStackTrace();
+			      }
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new BusException("登录不成功！");
