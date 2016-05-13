@@ -102,6 +102,10 @@
 		<menu id="030700" text="发布流程" href="page/commonCenter.NewsManager.nmIssueflow/nmIssueflow.html"></menu>
 		<menu id="030800" text="发布模板" href="page/commonCenter.NewsManager.nmIssuetempalate/nmIssuetempalate.html"></menu>
 		<menu id="030900" text="新闻政策" href="page/commonCenter.NewsManager.nmIssuenews/nmIssuenews.html"></menu>
+		<menu id="030910" text="优惠政策" href="page/commonCenter.NewsManager.nmIssuenews/yhzcIssuenews.html"></menu>
+		<menu id="030920" text="园区新闻" href="page/commonCenter.NewsManager.nmIssuenews/yqxwIssuenews.html"></menu>
+		<menu id="030930" text="园区公告" href="page/commonCenter.NewsManager.nmIssuenews/yqggIssuenews.html"></menu>
+		<menu id="030940" text="政策法规" href="page/commonCenter.NewsManager.nmIssuenews/zcfgIssuenews.html"></menu>
 		<menu id="031000" text="政策申请记录" href="page/manageCenter.PolicyManager.policyApply/policyApply.html"></menu> 
 		<menu id="031100" text="消息类型" href="page/commonCenter.MessageCenter.mcMsgtype/mcMsgtype.html"></menu>
 		<menu id="031200" text="消息模板" href="page/commonCenter.MessageCenter.mcMsgtempalate/mcMsgtempalate.html"></menu>
