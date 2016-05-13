@@ -14,6 +14,7 @@ import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
 import com.gsoft.framework.esb.annotation.ConditionCollection;
 import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.common.NewsManager.entity.NmIssueflow;
 import com.common.NewsManager.entity.NmIssuenews;
 
@@ -38,7 +39,16 @@ public interface NmIssuenewsManager extends BaseManager{
 	 */
 	public PagerRecords getPagerNmIssuenewss(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
-			Collection<Order> orders) throws BusException;
+			Collection<Order> orders,
+			String issueTypeCode) throws BusException;
+	/**
+	 * 分页查询优惠政策
+	 * @return 分页对象
+	 */
+	public PagerRecords getPagerYHZCIssuenewss(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders,
+			String issueTypeCode) throws BusException;
     /**
      * 保存并返回对象
      */
