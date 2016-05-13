@@ -71,15 +71,15 @@
 										<col></col>
 									</colgroup>
 									<tbody>
-										<tr>
+										<!-- <tr>
 											<th>文档标题</th>
 											<td><input type="text"></td>
-										</tr>
+										</tr> -->
 										<tr>
 											<th>文档上传</th>
 											<td>
 												<div class="photo-edit" style="width:200px;height:140px;padding:45px 10px;margin-left:0px;">
-													<input type="file" id="imgFile" name="imgFile" draggable="true" accept=".doc*,.xls*"/>
+													<input type="file" id="imgFile" name="imgFile" draggable="true" accept=".doc,.docx,.xls,.xlsx,.ppt,.pptx,.pdf"/>
 													<p style="letter-spacing:10px">点击上传</p>
 												</div>
 											</td>
@@ -89,33 +89,13 @@
 											<td></td>
 										</tr>
 										<tr>
-											<!-- <td colspan="2">
-												<div class="gr-czh-list">
+											<td colspan="2" class="doclist">
+												<!-- <div class="gr-czh-list">
 					                                <img src="../styles/images/czh/list-5.jpg" height="114" width="202">
 					                                <h3><a href="" class="c-333">孩子不宜过早玩的10种运动</a></h3>
 					                                <p class="f12 mb5"><a href="javascript:;" class="c-b1 ml5 mr10">编辑</a> <a href="javascript:;" class="c-b1">删除</a></p>
-					                            </div>
-					                           <div class="gr-czh-list">
-					                                <img src="../styles/images/czh/list-5.jpg" height="114" width="202">
-					                                <h3><a href="" class="c-333">孩子不宜过早玩的10种运动</a></h3>
-					                                <p class="f12 mb5"><a href="javascript:;" class="c-b1 ml5 mr10">编辑</a> <a href="javascript:;" class="c-b1">删除</a></p>
-					                            </div>
-					                            <div class="gr-czh-list">
-					                                <img src="../styles/images/czh/list-5.jpg" height="114" width="202">
-					                                <h3><a href="" class="c-333">孩子不宜过早玩的10种运动</a></h3>
-					                                <p class="f12 mb5"><a href="javascript:;" class="c-b1 ml5 mr10">编辑</a> <a href="javascript:;" class="c-b1">删除</a></p>
-					                            </div>
-					                            <div class="gr-czh-list">
-					                                <img src="../styles/images/czh/list-5.jpg" height="114" width="202">
-					                                <h3><a href="" class="c-333">孩子不宜过早玩的10种运动</a></h3>
-					                                <p class="f12 mb5"><a href="javascript:;" class="c-b1 ml5 mr10">编辑</a> <a href="javascript:;" class="c-b1">删除</a></p>
-					                            </div>
-					                            <div class="gr-czh-list">
-					                                <img src="../styles/images/czh/list-5.jpg" height="114" width="202">
-					                                <h3><a href="" class="c-333">孩子不宜过早玩的10种运动</a></h3>
-					                                <p class="f12 mb5"><a href="javascript:;" class="c-b1 ml5 mr10">编辑</a> <a href="javascript:;" class="c-b1">删除</a></p>
-					                            </div>
-											</td> -->
+					                            </div> -->
+											</td>
 										</tr>
 									</tbody>
 								</table>
