@@ -144,7 +144,7 @@ public class ActivityApplylistManagerImpl extends BaseManagerImpl implements Act
 					cord.setFlag(true);
 					cord.setBuff("活动报名成功!");
     	    	}else{
-    	    		throw new BusException("你已报名成功!");
+    	    		throw new BusException("该活动您已参加,无需重复报名!");
     	    	}
     		}else{
     			throw new BusException(demo.getBuff());
