@@ -35,10 +35,11 @@
 	
 	<!-- form-用户编辑 -->
 	<youi:form dialog="true" caption="用户" id="form_user" action="agt.91010204">
-		<youi:fieldLayout prefix="record">
-			<youi:fieldHidden property="userId"  caption="用户ID"/>
-			<youi:fieldText notNull="true" property="loginName"  caption="登录名"/>
-			<youi:fieldText notNull="true" property="userCaption"  caption="用户名称"/>
+		<youi:fieldLayout prefix="record" labelWidths="80,80" columns="1">
+			<youi:fieldHidden property="userId" caption="用户ID"/>
+			<youi:fieldText notNull="true" property="loginName" caption="登录名"/>
+			<youi:fieldText notNull="true" property="userCaption" caption="用户名称"/>
+			<youi:fieldPassword notNull="true" property="password" caption="密码" />
 			<youi:fieldHidden property="userActive"  caption="是否生效"/>
 		</youi:fieldLayout>
 		<fieldset>
