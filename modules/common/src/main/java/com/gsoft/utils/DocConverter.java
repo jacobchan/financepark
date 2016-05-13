@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import org.artofsolving.jodconverter.OfficeDocumentConverter;
 import org.artofsolving.jodconverter.office.DefaultOfficeManagerConfiguration;
 import org.artofsolving.jodconverter.office.OfficeManager;
+import org.springframework.beans.factory.annotation.Value;
  /**
   * 文档转pdf浏览类
   * @author xtc
@@ -26,7 +27,11 @@ public class DocConverter {
     private File pdfFile;
     private  File swfFile;
     private File docFile;
- 
+    @Value("#{configProperties['openPathwin']}")
+	private static String openPathwin;
+    @Value("#{configProperties['openPathlnx']}")
+	private static String openPathlnx;
+    
     public DocConverter(String fileString) {
         ini(fileString);
     }
@@ -186,11 +191,15 @@ public class DocConverter {
     public boolean conver() {
         if (swfFile.exists()) {
             System.out.println("****swf转换器开始工作，该文件已经转换为swf****");
+            System.out.println(openPathlnx);
+            System.out.println(openPathwin);
             return true;
         }
  
         if (getOcName()== 1) {
             System.out.println("****swf转换器开始工作，当前设置运行环境windows****");
+            System.out.println(openPathlnx);
+            System.out.println(openPathwin);
         } else {
             System.out.println("****swf转换器开始工作，当前设置运行环境linux****");
         }
