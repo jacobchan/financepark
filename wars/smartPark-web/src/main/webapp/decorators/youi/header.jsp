@@ -36,10 +36,10 @@ function viewMemberBase(){
 		<li class="dropdown hidden-xs">
 			<a href="#" title="" class="dropdown-toggle" data-toggle="dropdown"> 
 				<span class="glyphicon glyphicon-user padding-right-small"></span>
-				<i class="fa fa-caret-down"></i>
+				<span><shiro:principal/></span>
 			</a>
 			<ul class="dropdown-menu">
-				<!-- <li><a href="#" onclick="viewMemberBase();">账户信息</a></li> -->
+				<!--<li><a href="#" onclick="viewMemberBase();">账户信息</a></li>-->
 				<li><a href="#" onclick="changePwd();">修改密码</a></li>
 			</ul>
 		</li>
