@@ -231,10 +231,10 @@ $(function(){
 		//获取创业营类型id
 		$("#tp_55").removeClass("undis") ;
 		$("#tp_56").removeClass("undis") ;
-		var name = "硅谷创业营";
+		var name = "03";//创业营凑得
 		$.youi.ajaxUtils.ajax({
 			url:baseUrl+"applayTypeManager/getApplayTypes.json",
-			data:['typeName='+name].join('&'),
+			data:['typeCode='+name].join('&'),
 			jsonp:'data:jsonp',
 			dataType:'jsonp',
 			success:function(results){
