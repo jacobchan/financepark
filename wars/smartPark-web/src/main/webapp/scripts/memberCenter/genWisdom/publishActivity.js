@@ -139,11 +139,11 @@ $(function(){
 			var documentName=record[i].documentName;
 			var dn=documentName.split('.');
 			  html+="<a href='javascript:;' onclick='redirectPagePDF(this)' id="+record[i].documentId+"><div class='czh-box'>"+
-		              "<img src='<%=request.getContextPath()%>/styles/images/czh/list-5.jpg'>"+
+		              "<img src='../../../styles/images/grzx/user-photo.png' style='width: 220px;height: 123px;'>"+
 		              "<div class='czh-group' style='border-bottom:1px solid #ecebeb'>"+
 		                 "<h4>"+dn[0]+"</h4>"+
 		                 "<span>月观看人数：12</span>"+
-		                 "<span class='fr'>创智讲堂</span>"+
+		                 "<span class='fr'>"+record[i].activityApply.applayType.typeName+"</span>"+
 		              "</div>"+
 		              "<div class='czh-group'>"+
 		                "  <font class='cg-soan-btn'>"+dn[1]+"</font>"+
