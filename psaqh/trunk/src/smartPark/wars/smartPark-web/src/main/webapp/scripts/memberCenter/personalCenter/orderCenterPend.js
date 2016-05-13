@@ -87,6 +87,7 @@ var pageSize=10;
 				//var totalCount=results.records[0].totalCount;
 				//pageCount = Math.ceil(totalCount / pageSize);//页数
 				pageCount=Math.ceil(results.totalCount/pageSize);//页数
+				//console.log(results.records);
 				refreshData(1,pageSize);
 				//插入页码
 				$(".tcdPageCode").empty();
@@ -107,7 +108,7 @@ var pageSize=10;
  
 	//分页列表
 	 function refreshData(pageIndex,pageSize){
-		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'orderBy=desc:userorderTime'];
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
 		$.ajax({
 			url:serviceURL,
 			data:params.join('&'),
@@ -145,7 +146,7 @@ var pageSize=10;
 				    //html+=   '<td>'+record[i].userorderCode+'</td>';
 					html+=   '<td>'+record[i].userorderProject+'</td>'
                     html+=   '<td>'+record[i].userorderAmount+'</td>'
-                    html+=   '<td>'+record[i].userorderTime.substring(0,10)+'</td>'                                                                     
+                    html+=   '<td>'+record[i].userorderTime.substring(0,10)+'</td>' 
                     html+=   "<td>"+status+button+"</td>";
                     html+= '</tr>'				
 			}
@@ -199,7 +200,7 @@ var pageSize=10;
 		 var genId = $(".c-b1").attr("data");	
 		 //订单号
 		 var userorderCode=$("#userorderCode").val();	
-		 var params=['userorderCode='+userorderCode,'operator:userorderCode=LIKE','genId='+genId,'orderBy=desc:userorderTime'];
+		 var params=['userorderCode='+userorderCode,'operator:userorderCode=LIKE','genId='+genId];
 		 $.ajax({
 			    url:baseUrl + "ordermanagerUserorderManager/getTotalCountPend.json",
 			    data:params.join('&'),
