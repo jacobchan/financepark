@@ -49,6 +49,11 @@ public interface NmIssuetypeManager extends BaseManager{
      * 保存并返回对象
      */
     public NmIssuetype saveNmIssuetype(NmIssuetype o) throws BusException;
+    
+    /**
+     * 保存并返回对象
+     */
+    public NmIssuetype saveNmIssuetypes(NmIssuetype o,String code) throws BusException;
 
     /**
      * 删除对象
