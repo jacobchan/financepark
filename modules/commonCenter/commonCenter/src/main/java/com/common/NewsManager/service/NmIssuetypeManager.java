@@ -38,6 +38,13 @@ public interface NmIssuetypeManager extends BaseManager{
 	public PagerRecords getPagerNmIssuetypes(Pager pager,//分页条件
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders) throws BusException;
+	/**
+	 * 分页查询通过issueTypeCode
+	 * @return 分页对象
+	 */
+	public PagerRecords getPagerNmIssuetypesByCode(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders,String issueTypeCode) throws BusException;
     /**
      * 保存并返回对象
      */
