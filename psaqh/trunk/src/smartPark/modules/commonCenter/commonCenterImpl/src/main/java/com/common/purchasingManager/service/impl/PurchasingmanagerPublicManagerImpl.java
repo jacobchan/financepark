@@ -842,6 +842,7 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 		boolean sizeFlag = true;
 		boolean unitFlag = true;
 		boolean loopTypeFlag = true;
+		boolean adrFlag = true;
 		List<PurchasingmanagerCommodityExtend> peList=new ArrayList<PurchasingmanagerCommodityExtend>();
 		
     	if(isUpdate){//修改
@@ -871,7 +872,11 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     				}else if(billboard.getLoopTypefieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
     					pce.setCommodityExtendContent(billboard.getLoopType());//保存会议室类型
     					loopTypeFlag=false;
+    				}else if(billboard.getAdrfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(billboard.getAdr());//保存广告地址
+    					adrFlag=false;
     				}
+    				pce.setCommodityId(o.getCommodityId());
     				pce.setUpdateUser(o.getUpdateUser());
     				pce.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     				peList.add(pce);
@@ -882,11 +887,13 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 	    			throw new BusException("请先添加广告位单位属性");
 	    		}else if(loopTypeFlag){
 	    			throw new BusException("请先添加广告位轮播方式属性");
+	    		}else if(adrFlag){
+	    			throw new BusException("请先添加广告位地址属性");
 	    		}else{
 	    			purchasingmanagerCommodityExtendDao.save(peList);//保存广告位扩展属性列表
 	    		}
     		}else{
-    			throw new BusException("请先添加广告位的全部扩展属性：尺寸、单位和轮播方式等");
+    			throw new BusException("请先添加广告位的全部扩展属性：尺寸、单位、轮播方式和地址等");
     		}
     	}else{//新增
     		o=purchasingmanagerCommodityDao.save(o);
@@ -904,6 +911,9 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
     				}else if(billboard.getLoopTypefieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
     					pce.setCommodityExtendContent(billboard.getLoopType());//保存会议室类型
     					loopTypeFlag=false;
+    				}else if(billboard.getAdrfieldName().equals(pce.getPurchasingmanagerGenreProperty().getGenrePropertyFieldName())){
+    					pce.setCommodityExtendContent(billboard.getAdr());//保存广告地址
+    					adrFlag=false;
     				}
     				
     				PurchasingmanagerCommodity pc = new PurchasingmanagerCommodity();
@@ -921,11 +931,13 @@ public class PurchasingmanagerPublicManagerImpl extends BaseManagerImpl implemen
 	    			throw new BusException("请先添加广告位单位属性");
 	    		}else if(loopTypeFlag){
 	    			throw new BusException("请先添加广告位轮播方式属性");
+	    		}else if(adrFlag){
+	    			throw new BusException("请先添加广告位地址属性");
 	    		}else{
 	    			purchasingmanagerCommodityExtendDao.save(peList);//保存广告位扩展属性列表
 	    		}
     		}else{
-    			throw new BusException("请先添加广告位的全部扩展属性：尺寸、单位和轮播方式等");
+    			throw new BusException("请先添加广告位的全部扩展属性：尺寸、单位、轮播方式和地址等");
     		}
     		
     	}
