@@ -45,7 +45,8 @@
 			<youi:fieldText property="commodityPrice"  caption="标价" notNull="true"/>		
 			<youi:fieldText property="billboard.size" caption="尺寸" notNull="true"/>
 			<youi:fieldText property="billboard.unit"  caption="单位" notNull="true"/>
-			<youi:fieldText property="billboard.loopType"  caption="轮播方式" notNull="true"/>			
+			<youi:fieldText property="billboard.loopType"  caption="轮播方式" notNull="true"/>	
+			<youi:fieldText property="billboard.adr"  caption="地址" notNull="true"/>			
 			<%-- <youi:fieldSelect property="genreId" caption="商品类别"  src="esb/web/purchasingmanagerPublicManager/getRecordsByGenreCode.json" parents="genreCode" parentsAlias="genreCode" notNull="true" code="genreId" show="genreName"/> --%>
 			<youi:fieldSelect property="purchasingmanagerMerchant.merchantId" caption="所属商户" src="esb/web/purchasingmanagerMerchantManager/getMerchantsByGenre.json" parents="genreCode" parentsAlias="genreCode" notNull="true" code="merchantId" show="merchantName"/>
 			<youi:fieldSwfupload property="commodityImage" caption="图像" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072" />
