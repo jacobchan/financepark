@@ -278,17 +278,15 @@ var pageSize=10;
 	window.location.href = proUrl + "companyservice/ITserver.html#label" ;
 });*/
 function comment(userorderId,genreCode){
-	if(genreCode == "0301"){//会议室
+	/*if(genreCode == "0301"){//会议室
 		window.location.href=proUrl+"member/memberCenter/personalCenter/meetingRoomOrderDetails.html?userorderId="+userorderId;
-	}
-	/*else if(genreCode == "0302"){//车辆
+	}else if(genreCode == "0302"){//车辆
 		window.location.href=proUrl+"member/memberCenter/personalCenter/carOrderDetails.html?userorderId="+userorderId;
 	}else if(genreCode == "0303"){//广告位
 		window.location.href=proUrl+"member/memberCenter/personalCenter/adsenseOrderDetails.html?userorderId="+userorderId;
 	}else if(genreCode == "0304"){//预留停车位
 		window.location.href=proUrl+"member/memberCenter/personalCenter/orderCarNum.html?userorderId="+userorderId;
-	}*/
-	else if(genreCode == "0501"){//公司注册
+	}else */if(genreCode == "0501"){//公司注册
 		window.location.href=proUrl+"companyservice/com_register.html?userorderId="+userorderId+"#comment";
 	}else if(genreCode == "0502"){//工商变更
 		window.location.href=proUrl+"companyservice/Business.html?userorderId="+userorderId+"#comment";
