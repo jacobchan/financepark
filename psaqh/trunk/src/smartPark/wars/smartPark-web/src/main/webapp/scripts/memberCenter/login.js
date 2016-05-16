@@ -19,6 +19,7 @@ function enableSmsButton(sec,processText,enableText){
 }
 function getCaptcha(){
 	var memberPhoneNumber = $("#mobile").val() ;
+	var obj = ['memberPhoneNumber='+memberPhoneNumber] ;	
 	var isMobile=/^(?:13\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;//手机号的格式
 	if(!isMobile.test(memberPhoneNumber)){
 		//alert("请输入正确的手机号！") ;
@@ -27,7 +28,27 @@ function getCaptcha(){
    		setTimeout("$('.toast').hide();", 2000);
 		return ;
 	}
-	$(".message-yz").toggle();
+	$.youi.ajaxUtils.ajax({
+		url:baseUrl + "memberInformationManager/exsitMobile.json",
+		data:obj.join('&'),
+		jsonp:'data:jsonp',
+		dataType:'jsonp',
+		success:function(result){
+		 	var flag = result.record.flag ;//获取返回值
+			if(flag == true){
+				//alert("此手机号已经注册了！");
+				$(".tc.mt25").text("此手机号已经注册了！");
+	           	$(".toast").show();
+	           	pltime=3;
+	           	//timer=setInterval("closeTanc()",1000);
+	           	setTimeout(function(){$(".toast").hide();},1000);
+				return ;
+			}else{
+				$(".message-yz").toggle();  //显示验证码图片
+			}
+		}
+	});
+	
 }
 $(function(){
 	$(".close-toast").click(function(){
