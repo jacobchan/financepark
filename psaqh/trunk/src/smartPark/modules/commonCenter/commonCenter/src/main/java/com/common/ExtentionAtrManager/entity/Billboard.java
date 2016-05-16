@@ -7,6 +7,8 @@ public class Billboard {
 	
 	private String loopType;
 	
+	private String adr;
+	
 	
 	public String getSizefieldName() {
 		return "size";
@@ -18,6 +20,10 @@ public class Billboard {
 	
 	public String getLoopTypefieldName() {
 		return "loopType";
+	}
+	
+	public String getAdrfieldName() {
+		return "adr";
 	}
 	
 	public String getSize() {
@@ -42,6 +48,14 @@ public class Billboard {
 
 	public void setLoopType(String loopType) {
 		this.loopType = loopType;
+	}
+
+	public String getAdr() {
+		return adr;
+	}
+
+	public void setAdr(String adr) {
+		this.adr = adr;
 	}
 	
 	

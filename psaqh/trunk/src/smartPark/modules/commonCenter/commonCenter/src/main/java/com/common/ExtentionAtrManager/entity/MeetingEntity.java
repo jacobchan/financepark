@@ -12,6 +12,8 @@ public class MeetingEntity {
 	private String lx; //lx
 	private String tyy; //tyy
 	
+	private String adrName;//地址名称
+	
 	private String tea; //增值服务：茶水
 	
 	public String getTea() {
@@ -36,6 +38,10 @@ public class MeetingEntity {
 	
 	public String getTyyfieldName() {
 		return "tyy";
+	}
+	
+	public String getAdrNamefieldName() {
+		return "adrName";
 	}
 	
 	public String getTeafieldName() {
@@ -70,4 +76,14 @@ public class MeetingEntity {
 	public void setAdr(String adr) {
 		this.adr = adr;
 	}
+
+	public String getAdrName() {
+		return adrName;
+	}
+
+	public void setAdrName(String adrName) {
+		this.adrName = adrName;
+	}
+	
+	
 }
