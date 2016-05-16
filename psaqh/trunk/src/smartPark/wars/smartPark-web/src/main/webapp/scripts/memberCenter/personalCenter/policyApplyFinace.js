@@ -136,6 +136,6 @@
 			}
 		});
 	});
-	$(".tc-close").click(function(){
-		$(".bg-tanc.m1").hide();
-	});
+	$(".close-toast").click(function(){					
+		$(".toast").hide();		       
+	});	
