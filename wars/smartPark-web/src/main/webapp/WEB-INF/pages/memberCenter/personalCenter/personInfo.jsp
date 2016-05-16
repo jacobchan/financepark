@@ -111,6 +111,5 @@
 
 	</youi:body>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/memberCenter/personalCenter/myReservationRecord.js"></script>	
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/memberCenter/personalCenter/personInfo.js"></script>		
 </youi:html>
