@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -139,49 +138,36 @@ public class LoginUserData extends BaseDataController {
 		String password = "000000";
 		TempDemo temp = enterbusinessmanagerRzManager.singleLogin(phone, password, parkName,companyName);
 		if(temp.isFlag()){
-			// 自动登录
-			try {
-				DefaultLoginFormToken token = new DefaultLoginFormToken(phone,
-						password, false, request.getHeader("host"));
-				token.setLoginType("memberCenter");
-				org.apache.shiro.SecurityUtils.getSubject().login(token);
-				
-				Subject subject = SecurityUtils.getSubject();
-				Map params = new HashMap();
-			    params.put("principal", token.getPrincipal());
-			    params.put("username", phone);
-			    MemberInformation mem = (MemberInformation) subject.getPrincipal();
-			    params.put("memberInfoMation", mem);
-			    params.put("companyId", mem.getCompanyId());
-			    if(StringUtils.isEmpty(mem.getCompanyId())){
-			    	params.put("companyName", "");
-				    params.put("companyAdr", ""); 
+			Map params = new HashMap();
+		    MemberInformation mem = memberInformationManager.getUserByPhone(phone);
+		    params.put("memberInfoMation", mem);
+		    params.put("principal", mem.getLoginName());
+		    params.put("username", phone);
+		    params.put("companyId", mem.getCompanyId());
+		    if(StringUtils.isEmpty(mem.getCompanyId())){
+		    	params.put("companyName", "");
+			    params.put("companyAdr", ""); 
+		    }else{
+		    	EnterbusinessmanagerRz rz = enterbusinessmanagerRzManager.getEnterbusinessmanagerRz(mem.getCompanyId());
+			    params.put("companyName", rz.getRzName());
+			    if(rz.getRoomId() != null){
+			    	params.put("companyAdr", rz.getRoomId().getRoomAddress()); 
 			    }else{
-			    	EnterbusinessmanagerRz rz = enterbusinessmanagerRzManager.getEnterbusinessmanagerRz(mem.getCompanyId());
-				    params.put("companyName", rz.getRzName());
-				    if(rz.getRoomId() != null){
-				    	params.put("companyAdr", rz.getRoomId().getRoomAddress()); 
-				    }else{
-				    	params.put("companyAdr", ""); 
-				    }
-				      
-			     }
-			     
-			     params.put("authorization", esbSecurityManager.encryptSecurityInfo(null));
-			     Map results = new HashMap();
-			     results.put("record", params);
-			     results.put("message", new Message("000000", "登录成功"));
-			     response.setHeader("Content-type", "text/html;charset=UTF-8"); 
-			     response.setCharacterEncoding("UTF-8");  
-			     try{
-			        response.getOutputStream().write(PojoMapper.toJson(results, false).getBytes("UTF-8"));
-			      }catch (IOException ioe) {
-			        ioe.printStackTrace();
-			      }
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw new BusException("登录不成功！");
-			}
+			    	params.put("companyAdr", ""); 
+			    }
+		     }
+		     
+		     params.put("authorization", esbSecurityManager.encryptSecurityInfo(null));
+		     Map results = new HashMap();
+		     results.put("record", params);
+		     results.put("message", new Message("000000", "登录成功"));
+		     response.setHeader("Content-type", "text/html;charset=UTF-8"); 
+		     response.setCharacterEncoding("UTF-8");  
+		     try{
+		        response.getOutputStream().write(PojoMapper.toJson(results, false).getBytes("UTF-8"));
+		      }catch (IOException ioe) {
+		        ioe.printStackTrace();
+		      }
 		}else{
 			throw new BusException(temp.getBuff());
 		}
