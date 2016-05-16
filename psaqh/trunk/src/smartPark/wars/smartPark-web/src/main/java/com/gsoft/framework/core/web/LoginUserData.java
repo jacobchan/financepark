@@ -259,7 +259,7 @@ public class LoginUserData extends BaseDataController {
 			String captcha = org.apache.commons.lang.StringUtils.leftPad(code.toString(), 6, '0');		
 			Map<String,Object> map = new HashMap<String, Object>();
 			map.put(MessageService.CODE, captcha);
-			Boolean success = mcMsgdatasManager.smsSend("1010", map, null, newPhone);
+			Boolean success = mcMsgdatasManager.smsSend("0501", map, null, newPhone);
 			if(success){
 				//把手机验证码newcaptcha储存在session中，方便下一个方法调用
 				request.getSession().setAttribute("newcaptcha_session",captcha);
