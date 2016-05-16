@@ -121,6 +121,7 @@ public class ExtentionAtrManagerImpl implements ExtentionAtrManager {
 		String unitName = billboard.getUnitfieldName();
 		String unit = this.getExtendValue(unitName,commdity.getCommodityId());
 		billboard.setUnit(unit);
+		billboard.setAdr(this.getExtendValue(billboard.getAdrfieldName(),commdity.getCommodityId()));
 		commdity.setBillboard(billboard);
 	}
 	
