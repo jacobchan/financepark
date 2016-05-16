@@ -293,7 +293,7 @@ function comment(userorderId,genreCode){
 	}else if(genreCode == "0503"){//人事社保
 		window.location.href=proUrl+"companyservice/HRshebao.html?userorderId="+userorderId+"#comment";
 	}else if(genreCode == "0504"){//代理记账
-		window.location.href=proUrl+"companyservice/Agencybook.html?userorderCode="+userorderId+"#comment";
+		window.location.href=proUrl+"companyservice/Agencybook.html?userorderId="+userorderId+"#comment";
 	}else if(genreCode == "0505"){//法律服务
 		window.location.href=proUrl+"companyservice/Lawserver.html?userorderId="+userorderId+"#comment";
 	}else if(genreCode == "0506"){//商标专利
