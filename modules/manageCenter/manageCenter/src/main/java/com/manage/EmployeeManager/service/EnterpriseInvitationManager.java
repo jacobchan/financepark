@@ -1,20 +1,13 @@
-/**
- * 代码声明
- */
 package com.manage.EmployeeManager.service;
-
 import java.util.List;
 import java.util.Collection;
-
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
 import com.manage.EmployeeManager.entity.EnterpriseInvitation;
-
 public interface EnterpriseInvitationManager extends BaseManager{
 
     /**
@@ -63,4 +56,6 @@ public interface EnterpriseInvitationManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitEnterpriseInvitation(String propertyName,Object value) throws BusException;
+	
+	public void updateInvitationStatus(String invitationId, Integer invitationStatus) throws BusException;
 }
