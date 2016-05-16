@@ -4,9 +4,18 @@
 
 <html>
 <head>
-<script src="<%=request.getContextPath()%>/scripts/3.0/lib/jquery.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/scripts/3.0/lib/bootstrap.js" type="text/javascript"></script>
-<youi:style href="/styles/3.0/bootstrap.css" />
+<script src="<%=request.getContextPath()%>/scripts/3.0/lib/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script type="text/javascript"  src="<%=request.getContextPath()%>/scripts/page/url.js"></script>
+<!--主内容页面居中js-->
+<script type="text/javascript">
+	window.onload=window.onresize=function () {
+		var h=($(window).height()-$(".login_main").outerHeight())/2+"px";
+		var w=($(window).width()-$(".login_main").outerWidth())/2+"px";
+		$(".login_main").css({"margin-top":h,"margin-left":w});
+		
+	}
+</script>
+<youi:style href="/styles/3.0/login.css" />
 <title>系统登录${userAdapter}</title>
 
 </head>
@@ -17,7 +26,48 @@
 </shiro:authenticated>
 
 <body>
-	<div class="container">
+
+	<div class="login_main">
+	<div class="login_content">
+    	<form class="login_form" action="login.html" method="post" name="form">
+            <div class="form_control">
+                <div class="user_main">
+                    <span></span>
+                    <input type="text" placeholder="请输入用户名" name="username" class="user_int"  value="demo-plt" placeholder="Username">
+                </div>
+                <span class="error1"></span><!--错误提示-->
+            </div>
+            <div class="form_control">
+                <div class="password_main">
+                    <span></span>
+                    <input type="password" placeholder="请输入密码" class="paswd_int" name="password" value="123456">
+                </div>
+            <span class="error1"></span><!--错误提示-->
+            </div>
+            <div class="yzm">
+            	<div class="form_control">
+                    <div class="yz_tex"><input type="text" placeholder="验证码" class="yzm_int" name="kaptcha"></div>
+                    <span class="error2"></span><!--错误提示-->
+                </div>
+                <div class="yzm_pic"><img src="<%=request.getContextPath()%>/Kaptcha.jpg" style="width: 94px;height: 40px;"id="img_randCode"><a href="javascript:;" onclick="changeRandcode();">换一换</a></div>
+            </div>
+            
+            <div class="pasd_choose clearfix">
+                <label class="re_pasd" style="cursor:pointer"><input type="checkbox" id="checkbox_a1" class="chk_1" /> <label for="checkbox_a1"></label><span class="vm">记住密码</span></label>
+                <div class="fo_pasd"><a href="javascript:;" class="c3 mr20">忘记密码？</a></div>
+            </div>
+             
+            <a class="login_btn" href="javascript:;" onclick="fsubmit(document.form);"></a>
+            
+        </form>
+    	
+    </div>
+	
+		
+</div>	
+		
+		
+	<%-- <div class="container">
     <div class="row">
         
     <div class="row">
@@ -61,6 +111,38 @@
     </div><!--/row-->
 </div><!--/fluid-row-->
 
-</div>
+</div> --%>
 </body>
+<!--输入框输入状态边框变色js-->
+<script>
+ $(function(){
+       $(function(){
+        $(".user_main").click(function(){
+			$(".password_main").removeClass("active");
+			$(".yz_tex").removeClass("active");
+            $(this).toggleClass("active");	
+        })
+		
+		 $(".password_main").click(function(){
+			$(".user_main").removeClass("active");
+			$(".yz_tex").removeClass("active");
+            $(this).toggleClass("active");	
+        })
+		
+		 $(".yz_tex").click(function(){
+			$(".user_main").removeClass("active");
+			$(".password_main").removeClass("active");
+            $(this).toggleClass("active");	
+        })
+		
+      })
+		
+ });
+ 	function fsubmit(obj){
+		 obj.submit();
+	 };
+	 function changeRandcode(){
+			$('#img_randCode').attr("src",cenUrl+"Kaptcha.jpg?timeStamp="+new Date().getTime());
+	};
+</script>
 </html>
