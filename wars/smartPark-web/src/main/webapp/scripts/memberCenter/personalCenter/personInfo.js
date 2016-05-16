@@ -35,7 +35,6 @@
 				getRzName(record.companyId);//获得公司名字
 				$("#ly1").hide() ;
 			}
-			
 		};
 		function getRzName(companyId){
 			var id=companyId;
@@ -57,7 +56,6 @@
 	}
 		
 		$('.hhf-submit').click(function(){
-			this.disabled=true;
 			var flg = false;
 			var memberId=$("#memberId").html();
 			var memberNickname=$("#memberNickname").val();
