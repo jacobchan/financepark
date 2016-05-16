@@ -95,9 +95,9 @@ public class EnterpriseInvitationManagerImpl extends BaseManagerImpl implements 
 	}
 
     @EsbServiceMapping
-	public void updateInvitationStatus(@ServiceParam(name="invitationId") String invitationId, @ServiceParam(name="invitationStatus") Integer invitationStatus) throws BusException {
+	public void updateInvitationStatus(@ServiceParam(name="invitationId") String invitationId, @ServiceParam(name="invitationStatus") String invitationStatus) throws BusException {
     	EnterpriseInvitation enterpriseInvitation=enterpriseInvitationDao.get(invitationId);
-    	enterpriseInvitation.setInvitationStatus(invitationStatus);
+    	enterpriseInvitation.setInvitationStatus(Integer.valueOf(invitationStatus));
     	enterpriseInvitationDao.save(enterpriseInvitation);
 	}
 }
