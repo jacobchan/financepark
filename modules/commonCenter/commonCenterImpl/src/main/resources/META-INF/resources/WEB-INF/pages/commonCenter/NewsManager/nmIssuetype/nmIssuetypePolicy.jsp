@@ -9,7 +9,6 @@
 					editSrc="esb/web/nmIssuetypeManager/getNmIssuetype.json" showCheckbox="true"
 					removeSrc="esb/web/nmIssuetypeManager/removeNmIssuetype.json">
 			<youi:fieldLayout prefix="search" columns="2" labelWidths="100,100">
-				<%-- <youi:fieldTree property="parentIssueTypeId" caption="上级发布类型" tree="${typeTree}" simple="false"/> --%>
 				<youi:fieldText property="issueTypeCaption"  caption="发布类型描述" operator="LIKE"/>
 				<youi:fieldText property="issueTypeCode"  caption="发布类型编码" operator="LIKE"/>
 			</youi:fieldLayout>
@@ -35,17 +34,14 @@
 </youi:table>	
 	
 	<!-- form-发布类型编辑 -->
-	<youi:form dialog="true" caption="发布类型" id="form_nmIssuetype" action="esb/web/nmIssuetypeManager/saveNmIssuetype.json">
+	<youi:form dialog="true" caption="发布类型" id="form_nmIssuetype" action="esb/web/nmIssuetypeManager/saveNmIssuetypes.json?code=02">
 		<youi:fieldLayout prefix="record" columns="2" labelWidths="150px,150px">
 			<youi:fieldHidden property="issueTypeId"  caption="发布类型ID"/>
 			<youi:fieldText property="issueTypeCaption"  caption="发布类型描述" notNull="true"/>
 			<youi:fieldText property="issueTypeCode"  caption="发布类型编码" notNull="true" validateSrc="esb/web/nmIssuetypeManager/codeExist.json"/>
-		<youi:fieldTree property="parentIssueTypeId" caption="上级发布类型" tree="${typeTree}" simple="false"/>
-		<%-- 	<youi:fieldTree property="parentIssueTypeId" caption="上级发布类型" rootText="发布类型"
-				 src="esb/web/nmIssuetypeManager/getChildren.json" simple="false"
-				 show="issueTypeCaption" code="issueTypeId" iteratorParentAttr="issueTypeId" /> --%>	 
 			<youi:fieldHidden property="leaf" defaultValue="1" caption="是否子节点"/>
 			<youi:fieldHidden property="issueTypeStatus"  caption="发布类型状态" defaultValue="1"/>
+			<youi:fieldHidden property="parentIssueTypeId"  caption="上级发布类型" />
 		</youi:fieldLayout>
 	</youi:form>
 	
