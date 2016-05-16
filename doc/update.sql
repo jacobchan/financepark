@@ -125,6 +125,7 @@ create table sp_ticket_passenger
 
 alter table sp_ticket_passenger
    add primary key (PASSENGER_ID);
+ALTER TABLE sp_ticket_passenger ADD COLUMN ticket_num VARCHAR(32);
 /**END   ------------------------------------------------**/
    
  /* 创建新闻顶或踩关联表 */
