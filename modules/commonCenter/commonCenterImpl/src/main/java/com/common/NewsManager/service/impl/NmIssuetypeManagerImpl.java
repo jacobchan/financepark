@@ -72,6 +72,32 @@ public class NmIssuetypeManagerImpl extends BaseManagerImpl implements NmIssuety
 		}
 		return pagerRecords;
 	}
+	
+	@EsbServiceMapping
+	public PagerRecords getPagerNmIssuetypesByCode(Pager pager,
+			@ConditionCollection(domainClazz=NmIssuetype.class) Collection<Condition> conditions, 
+			@OrderCollection Collection<Order> orders,
+			@ServiceParam(name="code") String code) throws BusException {
+		List<NmIssuetype> list = this.getNewsType(code);
+		String str[] = new String[list.size()+1] ;
+		str[0] = code ;
+		for(int i=0;i<list.size();i++){
+			str[i+1] = list.get(i).getIssueTypeCode() ;
+		}
+		conditions.add(ConditionUtils.getCondition("issueTypeCode", Condition.IN,str));
+		PagerRecords pagerRecords = nmIssuetypeDao.findByPager(pager, conditions, orders);
+		List<NmIssuetype> nmIssuetypes = pagerRecords.getRecords();
+		for(NmIssuetype nmIssuetype:nmIssuetypes){
+			String issueTypeParentCaption = null;
+			if(StringUtils.isNotEmpty(nmIssuetype.getParentIssueTypeId())){
+				NmIssuetype issueType = nmIssuetypeDao.get(nmIssuetype.getParentIssueTypeId());
+				issueTypeParentCaption = issueType.getIssueTypeCaption();
+			}
+			nmIssuetype.setIssueTypeParentCaption(issueTypeParentCaption);
+		}
+		return pagerRecords;
+	}
+	
     /**
      * 保存对象
      */
@@ -180,16 +206,16 @@ public class NmIssuetypeManagerImpl extends BaseManagerImpl implements NmIssuety
     @EsbServiceMapping
     public List<NmIssuetype> getNewsType(@ServiceParam(name="issueTypeCode") String issueTypeCode) {
     	NmIssuetype type = nmIssuetypeDao.getObjectByUniqueProperty("issueTypeCode", issueTypeCode) ;//01为新闻公告类型,02为优惠政策
-    		String typeId = type.getIssueTypeId() ;//得到新闻公告ID
-    		Collection<Condition> condition =  new ArrayList<Condition>();
-    		condition.add(ConditionUtils.getCondition("parentIssueTypeId", Condition.EQUALS,typeId));
-    		List<NmIssuetype> list = this.getNmIssuetypes(condition, null) ;//得到上级发布类型ID为typeId的所有发布类型
-    		if(list.size()>0){
-    			return list;
-    		}else{
-    			list.add(type) ;
-    			return list ;
-    		}
+		String typeId = type.getIssueTypeId() ;//得到新闻公告ID
+		Collection<Condition> condition =  new ArrayList<Condition>();
+		condition.add(ConditionUtils.getCondition("parentIssueTypeId", Condition.EQUALS,typeId));
+		List<NmIssuetype> list = this.getNmIssuetypes(condition, null) ;//得到上级发布类型ID为typeId的所有发布类型
+		if(list.size()>0){
+			return list;
+		}else{
+			list.add(type) ;
+			return list ;
+		}
     }
     
     /**
