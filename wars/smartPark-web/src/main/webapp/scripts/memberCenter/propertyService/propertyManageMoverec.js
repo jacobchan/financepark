@@ -148,7 +148,23 @@
 				$(this).parents(".gz-fx-box").find(".fx-one").slideToggle("fast");
 			})
 		})		
-	    //点击跳转到搬家申请页面
-		$("#a1").click(function(){			
-			location.href = proUrl + "yqfw/yq8.html" ;
-		})	
+	//点击跳转到投诉页面      判断是否为企业用户
+	$("#a1").click(function(){			
+		$.youi.ajaxUtils.ajax({
+			url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(result){
+				if(result&&result.record){					
+					window.location.href = proUrl + "yqfw/yq8.html" ;
+					}else{							
+						$(".tc.mt25").text("您不是企业用户,暂时无法申请!");
+			           	$(".toast").show();
+			           	setTimeout(function(){$(".toast").hide(); },2000);			           	
+					}
+				}
+			});
+	});	
+	$(".close-toast").click(function(){					
+		$(".toast").hide();		       
+	});		

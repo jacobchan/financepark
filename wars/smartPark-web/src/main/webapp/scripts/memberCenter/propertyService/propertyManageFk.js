@@ -196,11 +196,27 @@ var pageSize=10;
 		    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 		});
 	});    	  
-	//点击跳转到访客申请页面
+	//点击跳转到投诉页面      判断是否为企业用户
 	$("#a1").click(function(){			
-		location.href = proUrl + "yqfw/yq4.html" ;
-	})
+		$.youi.ajaxUtils.ajax({
+			url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(result){
+				if(result&&result.record){					
+					window.location.href = proUrl + "yqfw/yq4.html" ;
+					}else{							
+						$(".tc.mt25").text("您不是企业用户,暂时无法申请!");
+			           	$(".toast").show();
+			           	setTimeout(function(){$(".toast").hide(); },2000);		           	
+					}
+				}
+			});
+	});	
 	//点击跳转到访客详情页面  并传访客id
 	function viewDetail(fkcodeId){			
 		window.location.href=cenUrl+"member/memberCenter/propertyService/propertyManageFkDetail.html?fkcodeId="+fkcodeId;
 	};
+	$(".close-toast").click(function(){					
+		$(".toast").hide();		       
+	});	
