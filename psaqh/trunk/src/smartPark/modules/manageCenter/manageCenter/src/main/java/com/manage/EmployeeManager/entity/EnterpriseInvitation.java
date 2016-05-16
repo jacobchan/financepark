@@ -35,7 +35,6 @@ public class EnterpriseInvitation implements Domain{
 	private String invitationTelephone;//会员电话
 	
 	@Column(name = "INVITATION_STATUS_")
-	@Length(max=20)
 	private Integer invitationStatus;//状态
 
 	@Column(name = "CREATE_USER_")

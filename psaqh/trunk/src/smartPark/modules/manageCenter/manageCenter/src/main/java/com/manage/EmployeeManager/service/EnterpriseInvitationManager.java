@@ -57,5 +57,5 @@ public interface EnterpriseInvitationManager extends BaseManager{
      */
 	public boolean exsitEnterpriseInvitation(String propertyName,Object value) throws BusException;
 	
-	public void updateInvitationStatus(String invitationId, Integer invitationStatus) throws BusException;
+	public void updateInvitationStatus(String invitationId, String invitationStatus) throws BusException;
 }
