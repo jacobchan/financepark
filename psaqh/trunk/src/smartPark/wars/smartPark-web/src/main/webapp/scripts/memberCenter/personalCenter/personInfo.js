@@ -221,5 +221,5 @@
 		$(".tc.mt25.f18").append(content) ;
         $(".toast").show();		      		        		       				
 		setTimeout(function(){$(".toast").hide(); },2000);
-		setTimeout(function(){metodh(); },2000);
+		setTimeout(function(){method(); },2000);
   	}
