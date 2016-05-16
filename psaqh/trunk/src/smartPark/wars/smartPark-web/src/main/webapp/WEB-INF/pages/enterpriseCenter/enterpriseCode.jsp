@@ -82,7 +82,7 @@
 			  	//获取邀请记录
 			  	$.ajax({
 					url:serviceURL,
-					data : ['rzId='+$("#rzId").val()].join('&'),
+					data : ['enterbusinessmanagerRz.rzId='+$("#rzId").val()].join('&'),
 					success : function(result) {
 						pageCount=Math.ceil(result.totalCount/pageSize);
 						refreshData(1,pageSize,null);
@@ -91,18 +91,18 @@
 							current:1,
 							backFn:function(p){
 							   	this.pageCount=pageCount;
-							    refreshData(p,pageSize,null);
+							    refreshData(p,pageSize,$("#rzId").val());
 							}
 						});
 					}
 				});
 			});
-			function refreshData(pageIndex,pageSize,memberName){
+			function refreshData(pageIndex,pageSize,rzId){
 				var params = [];
 				if(memberName == null){
 					params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
 				}else{
-					params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'memberName='+memberName];
+					params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'enterbusinessmanagerRz.rzId='+rzId];
 				}
 				
 				$.ajax({
@@ -123,7 +123,7 @@
 					var actives = "";
 					if(record[i].invitationStatus==0){
 						status = "已邀请";
-						actives = "<a href=\"javascript:;\">取消邀请</a>";
+						actives = "<a href=\"javascript:updateStatus(\'"+record[i].invitationId+"\', 2);\">取消邀请</a>";
 					}else if(record[i].invitationStatus==1){
 						status = "已加入";
 					}else if(record[i].invitationStatus==2){
@@ -145,6 +145,15 @@
 					data : ['rzId='+rzId].join('&'),
 					success : function(result) {
 						$("#rzSign").html(result.record.rzSign);
+					}
+				});
+			}
+			function updateStatus(id, status){
+				$.ajax({
+					url:baseUrl+'/enterpriseInvitationManager/updateInvitationStatus.json',
+					data : ['invitationId='+id, 'invitationStatus='+status].join('&'),
+					success : function(result) {
+						location.reload();
 					}
 				});
 			}
