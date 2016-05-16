@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>登录页面</title>
+<link href="css/login0513_.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+
+<!--主内容页面居中js-->
+<script type="text/javascript">
+	window.onload=window.onresize=function () {
+		var h=($(window).height()-$(".login_main").outerHeight())/2+"px";
+		var w=($(window).width()-$(".login_main").outerWidth())/2+"px";
+		$(".login_main").css({"margin-top":h,"margin-left":w});
+		
+	}
+</script>
+
+
+</head>
+
+<body>
+<div class="login_main">
+	<div class="login_content">
+    	<form class="login_form">
+            <div class="form_control">
+                <div class="user_main">
+                    <span></span>
+                    <input type="text" placeholder="请输入用户名" class="user_int">
+                </div>
+                <span class="error1"></span><!--错误提示-->
+            </div>
+            <div class="form_control">
+                <div class="password_main">
+                    <span></span>
+                    <input type="password" placeholder="请输入密码" class="paswd_int">
+                </div>
+            <span class="error1"></span><!--错误提示-->
+            
+            <div class="yzm">
+            	<div class="form_control">
+                    <div class="yz_tex"><input type="text" placeholder="验证码" class="yzm_int"></div>
+                    <span class="error2"></span><!--错误提示-->
+                </div>
+                <div class="yzm_pic"><img src="images/yzm_img.png"><a href="javascript:;">换一换</a></div>
+            </div>
+            
+            <div class="pasd_choose clearfix">
+                <label class="re_pasd" style="cursor:pointer"><input type="checkbox" id="checkbox_a1" class="chk_1" /> <label for="checkbox_a1"></label><span class="vm">记住密码</span></label>
+                <div class="fo_pasd"><a href="javascript:;" class="c3 mr20">忘记密码？</a></div>
+            </div>
+             
+            <a class="login_btn" href="javascript:;"></a>
+            
+        </form>
+    
+    </div>
+	
+
+</div>
+
+<!--输入框输入状态边框变色js-->
+<script>
+ $(function(){
+       $(function(){
+        $(".user_main").click(function(){
+			$(".password_main").removeClass("active");
+			$(".yz_tex").removeClass("active");
+            $(this).toggleClass("active");	
+        })
+		
+		 $(".password_main").click(function(){
+			$(".user_main").removeClass("active");
+			$(".yz_tex").removeClass("active");
+            $(this).toggleClass("active");	
+        })
+		
+		 $(".yz_tex").click(function(){
+			$(".user_main").removeClass("active");
+			$(".password_main").removeClass("active");
+            $(this).toggleClass("active");	
+        })
+		
+      })
+		
+ })
+</script>
+</body>
+</html>
