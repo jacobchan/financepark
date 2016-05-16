@@ -17,6 +17,5 @@
 		</youi:body>
 		
 	<!--***bottom start****************************************-->
-	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/memberCenter/personalCenter/myReservationRecord.js"></script>	
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/memberCenter/personalCenter/policyApply.js"></script>		
 </youi:html>
