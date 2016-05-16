@@ -145,9 +145,16 @@ public class PropertyservicemanagerEntrecManagerImpl extends BaseManagerImpl imp
 		//判断入驻申请人是否重复
 		List<PropertyservicemanagerEntrec> entrecList=new ArrayList<PropertyservicemanagerEntrec>();
 		Collection<Condition> conditions = new ArrayList<Condition>();
-		conditions.add(ConditionUtils.getCondition("memberId.memberId", Condition.EQUALS, memberInformation.getMemberId()));
-		conditions.add(ConditionUtils.getCondition("enterrecStatus",Condition.IN, new String[] {"01","02","06"}));//待受理，已授理，已入驻
-		conditions.add(ConditionUtils.getCondition("enteringType", Condition.EQUALS, enteringType));
+		if(enteringType.equals("01")){//01:入驻申请
+			conditions.add(ConditionUtils.getCondition("memberId.memberId", Condition.EQUALS, memberInformation.getMemberId()));
+			conditions.add(ConditionUtils.getCondition("enterrecStatus",Condition.IN, new String[] {"01","02","06"}));//待受理，已授理，已入驻
+			conditions.add(ConditionUtils.getCondition("enteringType", Condition.EQUALS, enteringType));
+		}else{
+			conditions.add(ConditionUtils.getCondition("memberId.memberId", Condition.EQUALS, memberInformation.getMemberId()));
+			conditions.add(ConditionUtils.getCondition("enterrecStatus",Condition.IN, new String[] {"01"}));//待受理
+			conditions.add(ConditionUtils.getCondition("enteringType", Condition.EQUALS, enteringType));
+		}
+		
 
 		entrecList=propertyservicemanagerEntrecDao.commonQuery(conditions, null);
     	
