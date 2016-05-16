@@ -203,9 +203,24 @@
 	//跳转到详情页面
     function viewDetail(bxId){			
 		window.location.href=cenUrl+"member/memberCenter/propertyService/propertyManageBxDetail.html?bxId="+bxId;
-	};
-	
-	    //点击跳转到投诉页面
+	};	
+	//点击跳转到投诉页面      判断是否为企业用户
 	$("#a1").click(function(){			
-		location.href = proUrl + "yqfw/yq6.html" ;
+		$.youi.ajaxUtils.ajax({
+			url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
+			jsonp:'data:jsonp',
+			dataType:'jsonp',
+			success:function(result){
+				if(result&&result.record){					
+					window.location.href = proUrl + "yqfw/yq6.html" ;
+					}else{							
+						$(".tc.mt25").text("您不是企业用户,暂时无法申请!");
+			           	$(".toast").show();
+			           	setTimeout(function(){$(".toast").hide(); },2000);			           	
+					}
+				}
+			});
 	});	
+	$(".close-toast").click(function(){					
+		$(".toast").hide();		       
+	});		
