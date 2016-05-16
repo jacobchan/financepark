@@ -23,8 +23,8 @@
                      <a href=""><span>航程信息</span></a> <font class="c-333 f12 fl ml10 mr10">|</font>
                     <a href=""><span class="current">去程</span></a>
                 </div>
-                <div class="clearfix hc-con-h">
-                    <table>
+                <div class="clearfix hc-con-h" >
+                    <table id="flightInfo">
                         <tr>
                             <td class="c-333">北京————上海</td>
                             <td class="c-333">四川航空3u8421</td>
@@ -47,7 +47,7 @@
                 <div class="hc-con-infor mt20">
                     <div class="clearfix">
                         <h3 class="c-o f16">乘机人信息：</h3>
-                        <div class="hcc-line">
+                        <div class="hcc-line" id="pass_info">
                             <p>乘机人姓名：<font class="f24">阿达</font></p>
                             <p>证件号码：<font class="f24">340222199208026911</font></p>
                             <p>证件类型：身份证</p>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="clearfix mt20 pt20" style="border-top:1px solid #efecec;">
                         <h3 class="c-o f16 mb20">联系人信息 ：</h3>
-                        <div class="hcc-line">
+                        <div class="hcc-line" id="link_info">
                             <p>姓名：阿萨斯的</p>
                             <p>手机号码：18688829610</p>
                             <p>电子邮箱：435161289@qq.com</p>
@@ -67,6 +67,7 @@
                     </div>
                 </div>
                 <div class="clearfix hc-con-h mt20 tr" >
+                    <a href="javascript:;" class="ib-btn fl" id="prev_edit" style="margin:10px 20px;">上一步</a>
                     <span>共<font class="c-o"> 1 </font>名乘机人 订单总计费用：<font class="c-o f24">1300</font></span>
                     <a href="javascript:;" class="ib-btn" style="margin:10px 20px;">提交订单</a>
                 </div>
@@ -111,10 +112,57 @@
 			jsonp:'data:jsonp',
 			dataType:'jsonp',
 			success:function(result){
-				alert(result.record);
+				
 			}
 		})
-			
+		//航程信息
+		var html_ = "<tr><td class='c-333'>" +Request['fromcity']+ "————" +Request['gotocity']+ "</td>";
+		html_ += "<td class='c-333'>"+Request['flightNo']+"</td>";
+		html_ += "<td>起飞："+Request['orgCity']+"</td>";
+		html_ += "<td>票价：<span class='c-o'>￥"+Request['parPrice']+"</span></td></tr>";
+        html_ += "<tr><td>"+Request['gotoCode']+" "+Request['depTime']+"</td>";
+        html_ += "<td>机型 : "+Request['planeType']+"</td>";
+        html_ += "<td>抵达："+Request['arrCity']+"</td>";
+        html_ += "<td>机建费：<span class='c-o'>¥ "+Request['airportTax']+"</span></td></tr>";
+        $("#flightInfo").empty();
+        $("#flightInfo").append(html_);
+		//乘机人信息
+		/* <div class="hcc-line">
+                            <p>乘机人姓名：<font class="f24">阿达</font></p>
+                            <p>证件号码：<font class="f24">340222199208026911</font></p>
+                            <p>证件类型：身份证</p>
+                            <p>乘客类型：成人</p>
+                            <p>乘客生日：1992-08-02</p>
+                            <p>保险：航空意外险： 阿达（1份 ）  </p>
+                        </div> */
+         var passengers = Request['passengers'].split(":"),
+             pass_html="";
+             
+             for(var i=0,len=passengers.length;i<len;i++){
+            	 var pass_info = passengers[i].split("-");
+            	 pass_html+="<div class='pass_list'><p>乘机人姓名：<font class='f24'>"+pass_info[0]+"</font></p>"
+            	            +"<p>证件号码：<font class='f24'>"+pass_info[1]+"</font></p>"
+                            +"<p>乘客类型："+(pass_info[2]=="CHD"?"儿童":"成人")+"</p>"
+            	            +"</div>";
+             }
+             //alert(passengers)
+         $("#pass_info").html(pass_html);
+        //联系人信息
+		var linkMan = Request['linkMan'].split("-"); 
+        var link_html = "<p>姓名："+linkMan[0]+"</p>"+
+                        "<p>手机号码："+linkMan[1]+"</p>";
+        if(linkMan[2]!="null"){
+        	link_html+="<p>电话："+linkMan[2]+"</p>";
+        }
+        if(linkMan[3]!="null"){
+        	link_html+="<p>电子邮箱："+linkMan[3]+"</p>"
+        }
+        $("#link_info").html(link_html);
+        
+		//上一步
+		$("#prev_edit").on("click",function(){
+			window.location.href="hcxx-edit.html"+window.location.href.substring(window.location.href.indexOf("?"))
+		})
 	});
 	</script>
 </body>

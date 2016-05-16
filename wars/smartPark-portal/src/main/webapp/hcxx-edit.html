@@ -3,9 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>机票预定编辑</title>
-	<link href="styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+	<!-- <link href="styles/awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet"> -->
 	<link href="styles/base.css" type="text/css" rel="stylesheet">
 	<link href="styles/page/zs.css" type="text/css" rel="stylesheet">
+	<link href="styles/page/hotel.css" type="text/css" rel="stylesheet" >
 	<script type="text/javascript" src="scripts/lib/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="scripts/lib/bootstrap.min.js"></script>
@@ -43,10 +44,14 @@
                 </div>
                 <div class="hc-con-c mt20">
                     <p class="c-333 mb10">退改签规则：</p>
-                    <p>取消座位时间计算手续费;按照当前舱位票面价收取退票费;起飞前2.0小时（含）以外免收退票费,起飞前2.0小时以内及起飞后收取当前舱位票面价的10.0%退票费;可以改签;</p>
+                    <p id="rule">取消座位时间计算手续费;按照当前舱位票面价收取退票费;起飞前2.0小时（含）以外免收退票费,起飞前2.0小时以内及起飞后收取当前舱位票面价的10.0%退票费;可以改签;</p>
                 </div>
+               
                 <div class="clearfix mt30">
                 	<h3 class="c-o f16">乘机人信息：<span class="f12 c-b1">[请准确填写乘机人信息，以免在办理登机时发生问题。带*为必填项]</span></h3>
+                	<div class="person-info clearfix" id="person-info">
+                	  
+                	</div>
                 	<div class="hc-con-infor mt10">
 	                   	<table>
 	                   		<colgroup>
@@ -56,19 +61,21 @@
 	                   		<tr>
 	                   			<td valign="top">购票类型<em>*</em></td>
 	                   			<td>
-	                   				<!-- <div class="mb20"> -->
 	                   					<select id="passengerType" class="passengerType">
 		                   					<option value="ADULT">成人</option>
-		                   					<!-- <option value="CHD">儿童</option> -->
+		                   					<option value="CHD">儿童</option>
 		                   				</select>
-	                   					<!-- <span class="ml10">￥3840/成人（含税费）</span> -->
-	                   					<input type="text" class="pName ml10" placeholder="乘客姓名" id="pName" name="pName" style="width:220px;">
-	                   				<!-- </div> -->
-	                   				<!-- <div>
-	                   					<input type="text">
-	                   				</div> -->
+	                   					<span class="ml10">￥3840/成人（含税费）</span>
 	                   			</td>
 	                   		</tr>
+	                   		<tr>
+	                   		    <td>真实姓名<em>*</em></td>
+	                   		    <td>
+	                   			    <!--  <input class="name" name="name" placeholder="乘客姓名" id="pName" type="text" value="" />-->
+	                   				<input type="text" class="pName" placeholder="乘客姓名" id="pName" name="pName" style="width:220px;">
+	                   				<label class="error"></label>
+	                   			</td>
+	                   		</tr>	 
 	                   		<tr>
 	                   			<td>证件号码<em>*</em></td>
 	                   			<td>
@@ -81,8 +88,20 @@
 	                   					<option value="6">其他</option>
 	                   				</select>
 	                   				<input type="text" class="ml10" style="width:220px;" id="identityNo" name="identityNo">
+	                   				<label class="error"></label>
 	                   			</td>
 	                   		</tr>
+	                   		<tr>
+	                   			<td>保险<em>*</em></td>
+	                   			<td>
+	                   				<select class="insurance" id="insurance">
+	                   					<option value="20">￥20/份</option>
+	                   					<option value="30">￥30/份</option>
+	                   				</select>
+	                   				<label class="error"></label>
+	                   			</td>
+	                   		</tr>
+	                   		
 	                   		<!-- <tr>
 	                   			<td>保险<em>*</em></td>
 	                   			<td>
@@ -94,7 +113,7 @@
 	                   			</td>
 	                   		</tr> -->
 	                   		<tr id="addPassenger">
-	                   			<td colspan="2"><a href="javascript:;" class="open-tanc"><i class="fa fa-plus-circle mr5"></i>新增乘机人</a></td>
+	                   			<td colspan="2"><a href="javascript:;" class="open-tanc" id="open-tanc"><i class="fa fa-plus-circle mr5"></i>新增乘机人</a></td>
 	                   		</tr>
 	                   	</table>
 	                </div>
@@ -104,26 +123,28 @@
                 	<div class="hc-con-infor mt10">
 	                   	<table>
 	                   		<colgroup>
-	                   			<col width="100"></col>
+	                  			<col width="100"></col>
 	                   			<col></col>
 	                   		</colgroup>
 	                   		<tr>
 	                   			<td valign="top">真实姓名<em>*</em></td>
 	                   			<td>
                    					<input type="text" id="linkMan" name="linkMan">
-                   					<!-- <span class="ml10">￥3840/成人（含税费）</span> -->
+                   					<label class="error"></label>
 	                   			</td>
 	                   		</tr>
 	                   		<tr>
 	                   			<td>手机号码<em>*</em></td>
 	                   			<td>
 	                   				<input type="text" id="linkPhone" name="linkPhone">
+	                   				<label class="error"></label>
 	                   			</td>
 	                   		</tr>
 	                   		<tr>
 	                   			<td>电话</td>
 	                   			<td>
 	                   				<input type="text" id="otherLinkMethod" name="otherLinkMethod">
+	                   				
 	                   			</td>
 	                   		</tr>
 	                   		<tr>
@@ -199,66 +220,75 @@
 	<div id="youi_page_footer" class="youi-page-footer"></div>
 	<!--***bottom end****************************************-->
 	<script type="text/javascript">
-	
+	//公用一个参数列表
+	var Request = GetRequest();
 	$(function(){
-		var Request = new Object();
-		Request = GetRequest();
-		var fromcity=Request['fromcity'];
-		var fromCode = Request['fromCode'];
-		var gotocity = Request['gotocity'];
-		var gotoCode = Request['gotoCode'];
-		var gotodate = Request['gotodate'];
 		//航程信息
-		var flightNo = Request['flightNo'];
-		var planeType = Request['planeType'];
-		var orgCity = Request['orgCity'];
-		var arrCity = Request['arrCity'];
-		var depTime = Request['depTime'];
-		var arriTime = Request['arriTime'];
-		var meal = Request['meal'];
-		var airportTax = Request['airportTax'];
-		var seatCode = Request['seatCode'];
-		var parPrice = Request['parPrice'];
-		var seatMsg = Request['seatMsg'];
-		var html_ = "<tr><td class='c-333'>" +fromcity+ "————" +gotocity+ "</td>";
-		html_ += "<td class='c-333'>"+flightNo+"</td>";
-		html_ += "<td>起飞："+orgCity+"</td>";
-		html_ += "<td>票价：<span class='c-o'>￥"+parPrice+"</span></td></tr>";
-        html_ += "<tr><td>"+gotodate+" "+depTime+"</td>";
-        html_ += "<td>机型 : "+planeType+"</td>";
-        html_ += "<td>抵达："+arrCity+"</td>";
-        html_ += "<td>机建费：<span class='c-o'>¥ "+airportTax+"</span></td></tr>";
+		var html_ = "<tr><td class='c-333'>" +Request['fromcity']+ "————" +Request['gotocity']+ "</td>";
+		html_ += "<td class='c-333'>"+Request['flightNo']+"</td>";
+		html_ += "<td>起飞："+Request['orgCity']+"</td>";
+		html_ += "<td>票价：<span class='c-o'>￥"+Request['parPrice']+"</span></td></tr>";
+        html_ += "<tr><td>"+Request['gotoCode']+" "+Request['depTime']+"</td>";
+        html_ += "<td>机型 : "+Request['planeType']+"</td>";
+        html_ += "<td>抵达："+Request['arrCity']+"</td>";
+        html_ += "<td>机建费：<span class='c-o'>¥ "+Request['airportTax']+"</span></td></tr>";
         $("#flightInfo").empty();
         $("#flightInfo").append(html_);
-     
+        //绑定  编辑状态数据 
+        var linkMan = Request['linkMan'];
+        if(linkMan){
+        	//绑定联系人信息
+            linkMan = linkMan.split("-");
+        	$("#linkMan").val(linkMan[0]);
+        	$("#linkPhone").val(linkMan[1]);
+        	if(linkMan[2]!="null"){
+        		$("#otherLinkMethod").val(linkMan[2])
+        	}
+        	if(linkMan[3]!="null"){
+        		$("#email").val(linkMan[3]);
+        	}
+        }
+        if(Request['passengers']){
+        	//绑定乘机人信息
+        }
 	});
 	//转到提交页
 	function toSubmit(){
-		var passengerType = $("#passengerType").val();
-		var passengerName = $("#pName").val();
-		var linkPhone = $("#linkPhone").val();
-		var otherLinkMethod = $("#otherLinkMethod").val();
-		var linkMan = $("#linkMan").val();
-		var email = $("#email").val();
-		var identityNo = $("identityNo").val();
-		var identityType = $("identityType").val();
-		var params = decodeURI(location.search);
-		params += "&passengerType=" + passengerType;
-		params += "&passengerName=" + passengerName;
-		params += "&identityNo=" + identityNo;
-		params += "&identityType=" + identityType;
-		params += "&linkMan=" + linkMan;
-		params += "&linkPhone=" + linkPhone;
-		params += "&otherLinkMethod=" + otherLinkMethod;
-		params += "&passengerLength=" + passengerType.length;
-		var url = "hcxx-tj.html" + params;
+		//验证联系人信息填写  乘机人勾选
+		if(!$("#person-info .person-info-list>.focus")){
+			alert("请选择联系人！")
+			return;
+		}
+		if(!$("#linkMan").val()){
+			$("#linkMan").siblings(".error").html("请填写真实姓名")
+			return;
+		}
+		if(!$("#linkPhone").val()){
+			$("#linkPhone").siblings(".error").html("请填写手机号")
+			return;
+		}
+		var linkMan = $("#linkMan").val()+"-"+$("#linkPhone").val();
+		if($("#otherLinkMethod").val()!=""&&$("#otherLinkMethod").val().length!=0){
+			linkMan+="-"+$("#otherLinkMethod").val()
+		}else{
+			linkMan+="-null";
+		}
+		if($("#email").val()!=""&&$("#email").val().length!=0){
+			linkMan+="-"+$("#email").val();
+		}else{
+			linkMan+="-null";
+		}
+		Request['linkMan']=linkMan;
+		var params = "";
+		for(var o in Request){
+			params+="&"+o+"="+Request[o];
+		}
+		var url = "hcxx-tj.html?" + params.substring(1);
 		window.open(encodeURI(url));
 	}
 	
 	//获取请求URL
 	function GetRequest() {
-		/* url=decodeURI(location.href);
-		var tmp1=url.split("?")[1]; */
 	   var url = decodeURI(location.search); //获取url中"?"符后的字串
 	   var theRequest = new Object();
 	   if (url.indexOf("?") != -1) {
@@ -271,5 +301,61 @@
 	   return theRequest;
 	}
 	</script>
+	 <script>
+			var urlParams = Request;
+			$.youi.ajaxUtils.ajax({
+				url : baseUrl+"TicketServiceManager/getModifyAndRefundStipulate.json",
+				data:'airlineCode='+urlParams['flightNo'].substring(0,2)+'&classCode='+urlParams['seatCode']+'&depDate='+urlParams['gotodate']+'&depCode='+urlParams['fromCode']+'&arrCode='+urlParams['gotoCode'],
+				jsonp : 'data:jsonp',
+				dataType : 'jsonp',
+				success : function(result) {
+					if (result && result.record) {
+						$("#rule").html(decodeURIComponent(result.record.refundStipulate))
+					} else {
+						$("#rule").html("暂无规则！");
+					}
+				},
+				error : function() {
+					$("#rule").html("暂无规则！");
+				}
+			});
+                </script>
+	<script>
+	$(function(){
+		$("#open-tanc").on("click",function(){
+			//姓名
+			var pName = $("#pName");
+			if(pName.val()==""||pName.val().length==0){
+				pName.siblings(".error").html("乘客姓名不能为空！")
+			    return;
+			}
+			var identityNo = $("#identityNo"); 
+			if(identityNo.val()==""||identityNo.val().length==0){
+				identityNo.siblings(".error").html("证件号码不能为空！")
+				return;
+			}
+			//验证
+			var html = "<div class='person-info-list'><input type='hidden' value='"+pName.val()+"-"+identityNo.val()+"-"+$("#passengerType").val()+"' /><i></i><span>"+pName.val()+"("+identityNo.val()+")</span><span>"+$("#passengerType").find("option:selected").text()+"</span><span>保险："
+	          +$(this).parents("table").find(".insurance").val()+"元/份</span><a href='javascript:void(0)'>编辑</a></div>";
+		   $(".person-info").append(html);
+		   //清空
+		   pName.val("");
+		   identityNo.val("");
+		   $("#insurance option:first-child,#identityType option:first-child,#passengerType option:first-child").attr("selected",true)
+		   $(".hc-con-infor .error").html("");
+		})
+		$("#person-info").on("click",".person-info-list>i",function(){
+			$(this).toggleClass("focus");
+			//改变Request中passengers的值
+			var passenger = "";
+			$("#person-info .person-info-list>.focus").each(function(){
+				passenger+=":"+$(this).siblings("input").val();
+			})
+			Request['passengers']=passenger.substring(1);
+		})
+		
+	})
+	</script>
+	
 </body>
 </html>

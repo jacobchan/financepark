@@ -44,3 +44,5 @@ a.fa-angle-up{background-position: -28px center;}
 .person-info-list i.focus{border:0;background:url(/styles/images/person_checked.png) center center no-repeat;}
 .person-info-list>span{padding-right: 20px;}
 .person-info-list>a{margin-left: 40px; color:#fa742c;}
+
+.hc-con-infor .error{color:red; padding-left: 10px;}
