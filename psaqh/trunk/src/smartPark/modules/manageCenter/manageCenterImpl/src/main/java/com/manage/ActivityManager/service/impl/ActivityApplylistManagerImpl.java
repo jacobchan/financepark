@@ -85,14 +85,22 @@ public class ActivityApplylistManagerImpl extends BaseManagerImpl implements Act
      */
     @EsbServiceMapping
     public ActivityApplylist saveActivityApplylist(ActivityApplylist o) throws BusException{
-//    	String activityApplylistId = o.getActivityApplylistId();
-//    	boolean isUpdate = StringUtils.isNotEmpty(activityApplylistId);
-//    	if(isUpdate){//修改
-//    	
-//    	}else{//新增
-//    		
-//    	}
-    	return activityApplylistDao.save(o);
+    	String activityApplylistId = o.getApplylistId();
+    	ActivityApplylist applist = new ActivityApplylist();
+    	boolean isUpdate = StringUtils.isNotEmpty(activityApplylistId);
+    	if(isUpdate){//修改
+    		applist = activityApplylistDao.get(activityApplylistId);
+    		applist.setApplyMember(o.getApplyMember());
+    		applist.setApplyPhone(o.getApplyPhone());
+    		applist.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	}else{//新增
+    		applist = o;
+    		if(o.getMember()!=null){
+    			applist.setCreateUser(o.getMember().getMemberId());
+    		}
+    		applist.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    	}
+    	return activityApplylistDao.save(applist);
     }
 
     /**
