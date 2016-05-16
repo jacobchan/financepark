@@ -142,3 +142,5 @@ ALTER TABLE sp_ticket_passenger ADD COLUMN ticket_num VARCHAR(32);
    
 
 alter table sp_enterprise_invitation add COLUMN INVITATION_STATUS_ Integer(20);
+
+alter table sp_activity_applylist modify column APPLYLIST_TIME_ VARCHAR(20);
