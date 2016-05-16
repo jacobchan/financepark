@@ -78,28 +78,35 @@
 				});
 			  	/* $("#moreul").slideUp("slow"); */
 			  	$(".sidebar-menu-mainul > li:eq(2)").addClass("active");
-			  	
-			  	//获取邀请记录
 			  	$.ajax({
-					url:serviceURL,
-					data : ['enterbusinessmanagerRz.rzId='+$("#rzId").val()].join('&'),
-					success : function(result) {
-						pageCount=Math.ceil(result.totalCount/pageSize);
-						refreshData(1,pageSize,null);
-						$(".tcdPageCode").createPage({
-							pageCount:pageCount,
-							current:1,
-							backFn:function(p){
-							   	this.pageCount=pageCount;
-							    refreshData(p,pageSize,$("#rzId").val());
-							}
-						});
+					url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
+					success:function(result){
+						if(result&&result.record){
+							var rzId = result.record.companyId;
+						  	//获取邀请记录
+						  	$.ajax({
+								url:serviceURL,
+								data : ['enterbusinessmanagerRz.rzId='+rzId].join('&'),
+								success : function(result) {
+									pageCount=Math.ceil(result.totalCount/pageSize);
+									refreshData(1,pageSize,null);
+									$(".tcdPageCode").createPage({
+										pageCount:pageCount,
+										current:1,
+										backFn:function(p){
+										   	this.pageCount=pageCount;
+										    refreshData(p,pageSize,rzId);
+										}
+									});
+								}
+							});
+						}
 					}
-				});
+			  	});
 			});
 			function refreshData(pageIndex,pageSize,rzId){
 				var params = [];
-				if(memberName == null){
+				if(rzId == null){
 					params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
 				}else{
 					params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'enterbusinessmanagerRz.rzId='+rzId];
@@ -153,7 +160,11 @@
 					url:baseUrl+'/enterpriseInvitationManager/updateInvitationStatus.json',
 					data : ['invitationId='+id, 'invitationStatus='+status].join('&'),
 					success : function(result) {
-						location.reload();
+						if(result.message==null){
+							location.reload();
+						}else{
+							alert(result.message.info);
+						}
 					}
 				});
 			}
