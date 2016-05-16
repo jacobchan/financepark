@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.BuildingBaseManager.entity.BbmRoom;
+import com.common.BuildingBaseManager.service.BbmRoomManager;
 import com.common.ExtentionAtrManager.service.ExtentionAtrManager;
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.entity.MemberInformation;
@@ -70,11 +72,8 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 	@Autowired
 	private OrdermanagerOrderprojecttypeValueManager orderprojectValueManager;
 	
-//	@Autowired
-//	private PurchasingmanagerMerchantManager purchasingmanagerMerchantManager;
-//	
-//	@Autowired
-//	private PurchasingmanagerCommodityExtendManager purchasingmanagerCommodityExtendManager;
+	@Autowired
+	private BbmRoomManager bbmRoomManager;
 
 	@Autowired
 	private PurchasingmanagerGenreManager purchasingmanagerGenreManager;
@@ -475,6 +474,13 @@ public class PublicutilitiesmanagerResoManagerImpl extends BaseManagerImpl imple
 		for(PurchasingmanagerCommodity pc:pcList){
 			if(genreCode.equals("0301")){//会议室
 				extentionAtrManager.setMeetingRoomExtendValue(pc);
+				String adr=pc.getMeetingRoom().getAdr();
+				BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(adr);
+				if(bbmRoom != null){
+					//获取单元默认地址
+					String adrName=bbmRoom.getRoomAddress();
+					pc.getMeetingRoom().setAdrName(adrName);
+				}
 				if(StringUtils.isNotEmpty(roomType) && StringUtils.isNotEmpty(roomProjector) && StringUtils.isNotEmpty(roomGm)){
 					if(pc.getMeetingRoom().getLx().equals(roomType) && pc.getMeetingRoom().getTyy().equals(roomProjector) && pc.getMeetingRoom().getGm().equals(roomGm)){
 						pcLists.add(pc);
