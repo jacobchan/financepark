@@ -429,7 +429,7 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 						mem.setCompanyId(enterRZ.getRzId());
 					}
 				}
-				mem.setMemberPassword(PasswordUtils.md5Password(password));
+//				mem.setMemberPassword(PasswordUtils.md5Password(password));
 				memberInformationManager.saveMemberInformation(mem);
 			}
 			temp.setFlag(true);
