@@ -99,6 +99,8 @@
 		<menu id="030500" text="系统菜单" href="page/security.fuc.menu/menu.html"></menu>
 		<menu id="030107" text="代码集管理" href="page/codemap/codemap.html"></menu>
 		<menu id="030600" text="发布类型" href="page/commonCenter.NewsManager.nmIssuetype/nmIssuetype.html"></menu>
+		<menu id="030610" text="新闻类型管理" href="page/commonCenter.NewsManager.nmIssuetype/nmIssuetypeNews.html"></menu>
+		<menu id="030620" text="政策类型管理" href="page/commonCenter.NewsManager.nmIssuetype/nmIssuetypePolicy.html"></menu>
 		<menu id="030700" text="发布流程" href="page/commonCenter.NewsManager.nmIssueflow/nmIssueflow.html"></menu>
 		<menu id="030800" text="发布模板" href="page/commonCenter.NewsManager.nmIssuetempalate/nmIssuetempalate.html"></menu>
 		<menu id="030900" text="新闻政策" href="page/commonCenter.NewsManager.nmIssuenews/nmIssuenews.html"></menu>
