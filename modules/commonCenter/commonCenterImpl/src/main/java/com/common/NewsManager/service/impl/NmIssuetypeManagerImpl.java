@@ -79,10 +79,9 @@ public class NmIssuetypeManagerImpl extends BaseManagerImpl implements NmIssuety
 			@OrderCollection Collection<Order> orders,
 			@ServiceParam(name="code") String code) throws BusException {
 		List<NmIssuetype> list = this.getNewsType(code);
-		String str[] = new String[list.size()+1] ;
-		str[0] = code ;
+		String str[] = new String[list.size()] ;
 		for(int i=0;i<list.size();i++){
-			str[i+1] = list.get(i).getIssueTypeCode() ;
+			str[i] = list.get(i).getIssueTypeCode() ;
 		}
 		conditions.add(ConditionUtils.getCondition("issueTypeCode", Condition.IN,str));
 		PagerRecords pagerRecords = nmIssuetypeDao.findByPager(pager, conditions, orders);
@@ -139,6 +138,38 @@ public class NmIssuetypeManagerImpl extends BaseManagerImpl implements NmIssuety
             issueType = pIssueTypePath = issueType;
           }
           o.setIssueTypePath(issueType);
+        }
+
+    	return nmIssuetypeDao.save(o);
+    }
+    
+    @EsbServiceMapping
+    public NmIssuetype saveNmIssuetypes(NmIssuetype o,@ServiceParam(name="code") String code)
+    		throws BusException {
+    	String issueTypeId = o.getIssueTypeId();
+        boolean isUpdate = StringUtils.isNotEmpty(issueTypeId);
+        
+        //编码唯一判断
+        boolean hasCode = nmIssuetypeDao.exists("issueTypeCode", o.getIssueTypeCode());
+        if(hasCode){
+        	NmIssuetype IssueType = nmIssuetypeDao.getObjectByUniqueProperty("issueTypeCode", o.getIssueTypeCode());
+        	if(!isUpdate){
+        		throw new BusException("类型编码已经存在");
+        	}
+        	if(!issueTypeId.equals(IssueType.getIssueTypeId())){
+        		throw new BusException("类型编码已经存在");
+        	}
+        }
+
+        if (!isUpdate)
+        {
+          o.setLeaf("1");
+          NmIssuetype type = this.getIssueTypeByIssueTypeCode(code) ;
+          String parentIssueTypeId = type.getIssueTypeId();
+          o.setParentIssueTypeId(parentIssueTypeId);
+          o.setIssueTypeStatus("1");
+          o.setIssueTypePath("/"+o.getIssueTypeCode());
+      
         }
 
     	return nmIssuetypeDao.save(o);
