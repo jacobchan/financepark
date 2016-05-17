@@ -522,10 +522,8 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 			@ConditionCollection(domainClazz=McMsgdatas.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders,
 			@ServiceParam(name="userId",pubProperty="userId") String userId)throws BusException {
-		//orders.add(ConditionUtils.getOrder("readStatus", false));
-		//orders.add(ConditionUtils.getOrder("sendDate", true));
-		//orders.add(ConditionUtils.getOrder("sendDate", true));
-
+		orders.add(ConditionUtils.getOrder("readStatus", true));
+		orders.add(ConditionUtils.getOrder("sendDate", false));
 		MemberInformation m=memberInformationManager.getMember(userId);
 		String memberPhoneNumber=m.getMemberPhoneNumber();
 		conditions.add(ConditionUtils.getCondition("receive", Condition.EQUALS, memberPhoneNumber));
