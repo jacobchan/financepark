@@ -53,7 +53,13 @@ public class NmIssuetypeManagerImpl extends BaseManagerImpl implements NmIssuety
      */
     @EsbServiceMapping
     public NmIssuetype getNmIssuetype(@ServiceParam(name="issueTypeId") String id)  throws BusException{
-    	return nmIssuetypeDao.get(id);
+    	NmIssuetype type = nmIssuetypeDao.get(id) ;
+    	if(StringUtils.isNotEmpty(type.getParentIssueTypeId())){
+	    	NmIssuetype issueType = nmIssuetypeDao.get(type.getParentIssueTypeId());
+	    	String issueTypeParentCaption = issueType.getIssueTypeCaption();
+	    	type.setIssueTypeParentCaption(issueTypeParentCaption);
+    	}
+    	return type;
     }
 	
 	@EsbServiceMapping
