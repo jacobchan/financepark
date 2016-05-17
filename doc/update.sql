@@ -147,3 +147,4 @@ ALTER TABLE sp_ticket_order ADD COLUMN note VARCHAR(256);
 alter table sp_enterprise_invitation add COLUMN INVITATION_STATUS_ Integer(20);
 
 alter table sp_activity_applylist modify column APPLYLIST_TIME_ VARCHAR(20);
+ALTER TABLE `sp_mc_msgdatas_` ADD COLUMN `READ_STATUS_` char(2);
