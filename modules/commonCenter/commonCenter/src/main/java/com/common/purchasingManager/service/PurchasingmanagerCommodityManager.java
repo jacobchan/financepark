@@ -13,6 +13,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 
 public interface PurchasingmanagerCommodityManager extends BaseManager{
 
@@ -231,4 +232,16 @@ public interface PurchasingmanagerCommodityManager extends BaseManager{
 	 */
 	public List<PurchasingmanagerCommodity> getWkserverCommodityList(String userId)
 			throws BusException;
+	/**
+	 * 删除用户角色
+	 * @param id
+	 * @throws BusException
+	 */
+	public void removeRole( String id) throws BusException;
+	/**
+	 * 删除系统菜单
+	 * @param id
+	 * @throws BusException
+	 */
+	public void removeMenu(String id) throws BusException;
 }
