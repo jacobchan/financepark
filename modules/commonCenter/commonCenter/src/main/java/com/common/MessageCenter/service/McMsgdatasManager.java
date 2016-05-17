@@ -16,6 +16,7 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
 import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
 import com.gsoft.framework.esb.annotation.OrderCollection;
 import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.common.MessageCenter.entity.McMsgdatas;
@@ -200,4 +201,12 @@ public interface McMsgdatasManager extends BaseManager{
    	 * @throws BusException
    	 */
      public List<Record> getTotalCountread(Collection<Condition> conditions,String userId)  throws BusException;
+     /**
+    	 * app  修改状态   
+    	 * @return
+    	 * msgId    id
+    	 * @throws BusException
+    	 */
+ 	@EsbServiceMapping
+ 	public McMsgdatas updateStstus(String msgId)  throws BusException;
 }
