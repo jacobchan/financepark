@@ -40,7 +40,14 @@ public class ActivityDocumentManagerImpl extends BaseManagerImpl implements Acti
 	private String root;
 	@Autowired
 	private ActivityApplyManager activityApplyManager;
-
+    @Value("#{configProperties['openPathwin']}")
+	private String openPathwin;
+    @Value("#{configProperties['openPathlnx']}")
+	private String openPathlnx;
+    @Value("#{configProperties['swfPathwin']}")
+	private String swfPathwin;
+    @Value("#{configProperties['swfPathlnx']}")
+	private String swfPathlnx;
      
     /**
      * 查询列表
@@ -137,7 +144,7 @@ public class ActivityDocumentManagerImpl extends BaseManagerImpl implements Acti
     	FileStore fs=fileStoreManager.getFileStoreByPath(ad.getDocumentPath());
     	String filePath=fs.getFilePath();
     	String fileName = filePath .substring(0,filePath .lastIndexOf("."));
-    	DocConverter.getSwfPath(root+filePath);
+    	DocConverter.getSwfPath(root+filePath,openPathwin,openPathlnx,swfPathwin,swfPathlnx);
     	String swfPath=fileName+".swf";
     	return swfPath;
 	
