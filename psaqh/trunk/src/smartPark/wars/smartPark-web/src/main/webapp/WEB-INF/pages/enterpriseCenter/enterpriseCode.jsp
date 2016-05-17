@@ -157,9 +157,9 @@
 			}
 			function updateStatus(id, status){
 				$.ajax({
-					url:baseUrl+'/enterpriseInvitationManager/updateInvitationStatus.json',
-					data : ['invitationId='+id, 'invitationStatus='+status].join('&'),
-					success : function(result) {
+					url: baseUrl+'/enterpriseInvitationManager/updateInvitationStatus.json',
+					data: ['invitationId='+id, 'invitationStatus='+status].join('&'),
+					success: function(result) {
 						if(result.message==null){
 							location.reload();
 						}else{
