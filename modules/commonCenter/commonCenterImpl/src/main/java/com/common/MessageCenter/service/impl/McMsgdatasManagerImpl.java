@@ -501,6 +501,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
     			@ServiceParam(name="userId",pubProperty="userId") String userId)  throws BusException{
     	MemberInformation memberInformation = memberInformationManager.getMemberInformation(userId);
  		String memberPhoneNumber = memberInformation.getMemberPhoneNumber();
+ 		//添加条件。根据号码查询
  		conditions.add(ConditionUtils.getCondition("receive",Condition.EQUALS, memberPhoneNumber));
     	List<Record> recordList=new ArrayList<Record>();   		
      	List<McMsgdatas> List = this.getMcMsgdatass(conditions, null);
@@ -522,10 +523,15 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 			@ConditionCollection(domainClazz=McMsgdatas.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders,
 			@ServiceParam(name="userId",pubProperty="userId") String userId)throws BusException {
+		//先根据状态排序，未读排在前面
 		orders.add(ConditionUtils.getOrder("readStatus", true));
+		//再根据时间，排序，近期排前面
 		orders.add(ConditionUtils.getOrder("sendDate", false));
+		//获取当前用户
 		MemberInformation m=memberInformationManager.getMember(userId);
+		//获取当前用户电话
 		String memberPhoneNumber=m.getMemberPhoneNumber();
+		//添加条件，根据号码查询
 		conditions.add(ConditionUtils.getCondition("receive", Condition.EQUALS, memberPhoneNumber));
 		PagerRecords pagerRecords = mcMsgdatasDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
@@ -542,7 +548,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
     			@ServiceParam(name="userId",pubProperty="userId") String userId)  throws BusException{
     	MemberInformation memberInformation = memberInformationManager.getMemberInformation(userId);
  		String memberPhoneNumber = memberInformation.getMemberPhoneNumber();
- 		conditions.add(ConditionUtils.getCondition("receive",Condition.EQUALS, memberPhoneNumber));
+ 		//添加条件    查询未读状态的信息，00为未读状态
  		conditions.add(ConditionUtils.getCondition("readStatus",Condition.EQUALS, "00"));
     	List<Record> recordList=new ArrayList<Record>();   		
      	List<McMsgdatas> List = this.getMcMsgdatass(conditions, null);
