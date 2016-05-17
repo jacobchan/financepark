@@ -125,7 +125,10 @@ create table sp_ticket_passenger
 
 alter table sp_ticket_passenger
    add primary key (PASSENGER_ID);
+/*增加乘机人 票号字段*/
 ALTER TABLE sp_ticket_passenger ADD COLUMN ticket_num VARCHAR(32);
+/*添加机票订单 备注字段*/
+ALTER TABLE sp_ticket_order ADD COLUMN note VARCHAR(256);
 /**END   ------------------------------------------------**/
    
  /* 创建新闻顶或踩关联表 */
