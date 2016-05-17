@@ -20,7 +20,7 @@
 	<youi:grid id="grid_role" idKeys="roleId" caption="角色列表" panel="false"
 				src="esb/web/roleManager/getPagerRoles.json" dataFormId="form_role"  pageSize="10"
 				editSrc="/local/fuc/role/getRole.json" edit="NOT" remove="NOT" exportXls="true" exportPdf="true" exportTxt="txt"
-				removeSrc="/local/fuc/role/removeRole.json">
+				removeSrc="esb/web/roleMenuManager/removeRole.json">
 		<youi:fieldLayout styleClass="notFillQuery">
 			<youi:fieldText operator="LIKE" property="roleId"  caption="角色名"/>
 			<youi:fieldText operator="LIKE" property="roleCaption"  caption="角色描述"/>

@@ -24,7 +24,7 @@
 	<youi:form styleClass="page-height col-sm-10" caption="编辑系统菜单" id="form_menu" panel="false"
 		action="/local/fuc/menu/saveMenu.json" findAction="/local/fuc/menu/getMenu.json"
 		idKeys="menuId" submit="保存菜单"
-		removeAction="/local/fuc/menu/removeMenu.json">
+		removeAction="esb/web/roleMenuManager/removeMenu.json">
 
 		<youi:fieldLayout prefix="record" columns="3">
 			<youi:fieldHidden styleClass="field-parent" property="parentMenuId" />
