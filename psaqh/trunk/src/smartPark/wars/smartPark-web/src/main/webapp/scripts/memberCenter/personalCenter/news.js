@@ -34,7 +34,8 @@
  
 	//分页列表
 	 function refreshData(pageIndex,pageSize){
-		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'orderBy=desc:readStatus','orderBy=desc:sendDate'];
+		//var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'orderBy=desc:readStatus','orderBy=desc:sendDate'];
+		var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
 		$.ajax({
 			url:serviceURL,
 			data:params.join('&'),
