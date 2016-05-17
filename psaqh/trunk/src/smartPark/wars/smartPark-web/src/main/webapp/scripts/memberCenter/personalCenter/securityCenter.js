@@ -78,28 +78,51 @@ $(function(){
 			 if(!isMobile.test(newPhone)){
 				 $("#phonetest").html("手机号输入错误");
 				 return false;
-			}			
+			}	
+			var obj = ['memberPhoneNumber='+newPhone] ;
 			$.youi.ajaxUtils.ajax({
-				url:cenUrl +"web/loginUser/sendnewcaptcha.json",
-				data:params.join('&'),
+				url:baseUrl + "memberInformationManager/exsitMobile.json",
+				data:obj.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
 				success:function(result){
-					if(result && result.record){
-						var capt = result.record.html;
-						if("新手机号与原手机号一致"==capt){
-							$("#phonetest").html("新手机号与原手机号一致");
-						}else{
-							if(!/^\d{6}$/.test(capt)){
-								enableSmsButton(3,capt,'重新获取');	
-								$('#sendnewcaptcha').attr('onclick','volid();');
-							}else{
-								enableSmsButton(60,'发送成功','重新获取');	
-								$('#sendnewcaptcha').attr('onclick','volid();');
-							}
-						}
+				 	var flag = result.record.flag ;//获取返回值
+					if(flag == true){
+						$("#phonetest").html("此手机号已经注册了！");
 						
-					}					
-				}			
+						//$(".tc.mt25").text("此手机号已经注册了！");
+			           //	$(".toast").show();
+			           	//pltime=3;
+			           	//timer=setInterval("closeTanc()",1000);
+			           	//setTimeout(function(){$(".toast").hide();},1000);
+						return ;
+					}
+					else{
+						$.youi.ajaxUtils.ajax({
+							url:cenUrl +"web/loginUser/sendnewcaptcha.json",
+							data:params.join('&'),
+							success:function(result){
+								if(result && result.record){
+									var capt = result.record.html;
+									if("新手机号与原手机号一致"==capt){
+										$("#phonetest").html("新手机号与原手机号一致");
+									}else{
+										if(!/^\d{6}$/.test(capt)){
+											enableSmsButton(3,capt,'重新获取');	
+											$('#sendnewcaptcha').attr('onclick','volid();');
+										}else{
+											enableSmsButton(60,'发送成功','重新获取');	
+											$('#sendnewcaptcha').attr('onclick','volid();');
+										}
+									}
+									
+								}					
+							}			
+						});
+					}
+				}
 			});
+			
 		}
 		//换手机号验证
 		$(".changePhoneNumber").click(function(){	
