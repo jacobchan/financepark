@@ -10,7 +10,6 @@ import org.springframework.ui.ModelMap;
 
 import com.common.NewsManager.entity.NmIssuetype;
 import com.common.NewsManager.service.NmIssuetypeManager;
-import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.gsoft.framework.core.dataobj.tree.HtmlTreeNode;
 import com.gsoft.framework.core.dataobj.tree.TreeUtils;
 import com.gsoft.framework.core.web.AbstractPageModel;
