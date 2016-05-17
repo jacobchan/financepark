@@ -99,7 +99,7 @@
 			                        '<td align="left" valign="middle" class="pl20"><span class="f14 color_6 hide_dian">'+describe+'</span></td>'+
 			                    '</tr>'+
 			                    '<tr>'+
-			                        '<td align="left" valign="middle" class="pl20"><span class="f12 color_41"><a href="javascript:edit(\''+record[i].memberId+'\',\''+record[i].memberName+'\',\''+record[i].memberPhoneNumber+'\');" class="edit-show">编辑</a>&nbsp;丨&nbsp;<a href="javascript:show(\''+record[i].memberId+'\');" class="set-show">设置权限</a>&nbsp;丨&nbsp;<a href="javascript:removeBook(\''+record[i].memberId+'\');">删除</a></span></td>'+
+			                        '<td align="left" valign="middle" class="pl20"><span class="f12 color_41"><a href="javascript:edit(\''+record[i].memberId+'\',\''+record[i].memberName+'\',\''+record[i].memberPhoneNumber+'\');" class="edit-show">编辑</a>&nbsp;丨&nbsp;<a href="javascript:removeBook(\''+record[i].memberId+'\');">删除</a></span></td>'+
 			                    '</tr>'+
 		                	'</table>'+
 		            	'</li>';
