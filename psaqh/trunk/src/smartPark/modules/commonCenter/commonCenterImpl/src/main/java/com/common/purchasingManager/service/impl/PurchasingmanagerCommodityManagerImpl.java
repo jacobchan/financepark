@@ -4,29 +4,43 @@
 package com.common.purchasingManager.service.impl;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.ExtentionAtrManager.service.ExtentionAtrManager;
+import com.common.purchasingManager.dao.PurchasingmanagerCommodityDao;
+import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
+import com.common.purchasingManager.entity.PurchasingmanagerGenre;
+import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
+import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.PubCondition;
+import com.gsoft.framework.esb.annotation.ServiceParam;
+import com.gsoft.framework.security.agt.dao.UserDao;
+import com.gsoft.framework.security.agt.entity.User;
+import com.gsoft.framework.security.agt.service.UserManager;
+import com.gsoft.framework.security.fuc.dao.MenuDao;
+import com.gsoft.framework.security.fuc.dao.RoleDao;
+import com.gsoft.framework.security.fuc.entity.Menu;
+import com.gsoft.framework.security.fuc.entity.Role;
+import com.gsoft.framework.security.fuc.service.MenuManager;
+import com.gsoft.framework.security.fuc.service.RoleManager;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
-import com.gsoft.framework.core.service.impl.BaseManagerImpl;
-import com.common.ExtentionAtrManager.service.ExtentionAtrManager;
-import com.common.purchasingManager.entity.PurchasingmanagerCommodity;
-import com.common.purchasingManager.entity.PurchasingmanagerGenre;
-import com.common.purchasingManager.dao.PurchasingmanagerCommodityDao;
-import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
-import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
 
 @Service("purchasingmanagerCommodityManager")
 @Transactional
@@ -37,7 +51,23 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
 	private PurchasingmanagerGenreManager purchasingmanagerGenreManager;
 	@Autowired
 	private ExtentionAtrManager extentionAtrManager;
+	@Autowired
+	private RoleManager roleManager;
+
+	@Autowired
+	private MenuManager menuManager;
 	
+	@Autowired
+	private UserManager userManager;
+
+	@Autowired
+	private MenuDao menuDao;
+
+	@Autowired
+	private RoleDao roleDao;
+	
+	@Autowired
+	private UserDao userDao;
     /**
      * 查询列表
      */
@@ -471,5 +501,31 @@ public class PurchasingmanagerCommodityManagerImpl extends BaseManagerImpl imple
 			pc.setPurchasingmanagerGenre(pg);
 		}
 		return pagerRecords;
+	}
+	
+	@EsbServiceMapping
+	public void removeRole(@ServiceParam(name="roleId") String id) throws BusException{
+		Role dbRole=roleManager.getRole(id);
+		List<User> userRoleList = purchasingmanagerCommodityDao.getUserRoleListByRoleId(dbRole.getRoleId());
+		for(User u:userRoleList){
+			User user = (User) this.userDao.get(u.getUserId());
+			user.setRoles(null);
+			user=userDao.save(user);
+		}
+		dbRole.setMenus(null);
+		dbRole=roleDao.save(dbRole);
+		roleDao.remove(id);
+	}
+	
+	@EsbServiceMapping
+	public void removeMenu(@ServiceParam(name="menuId") String id) throws BusException{
+		//通过菜单编号menuId查询所有关联的角色
+		List<String> userRoleList = purchasingmanagerCommodityDao.getUserRoleListByMenuId(id);
+		for(String roleId:userRoleList){
+			Role dbRole=roleManager.getRole(roleId);
+			dbRole.setMenus(null);
+			dbRole=roleDao.save(dbRole);
+		}
+		 this.menuDao.remove(id);
 	}
 }
