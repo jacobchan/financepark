@@ -18,7 +18,9 @@ function removeFinancing(obj){
 		url:baseUrl+'/informationFinancingManager/removeInformationFinancing.json',
 		data:'financingId='+obj,
 		success:function(result){
-			alert("删除成功");
+			$('#toast_text').html('删除成功！');
+			$(".toast").show();
+            setTimeout('$(".toast").hide();',3000);//1秒=1000
 			location.reload();
 		}
 	});
@@ -167,7 +169,7 @@ $(function() {
 				if(result && result.record){
 					$('#toast_text').html('保存成功！');
 					$(".toast").show();
-		            setTimeout('$(".toast").hide();',2000);//1秒=1000
+		            setTimeout('$(".toast").hide();',3000);//1秒=1000
 		            location.reload();
 				}
 			}
