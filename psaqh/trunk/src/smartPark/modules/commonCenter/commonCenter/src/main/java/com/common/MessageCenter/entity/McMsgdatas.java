@@ -71,7 +71,13 @@ public class McMsgdatas implements Domain,IMessage{
 	@Column(name = "SEND_STATUS_")
 	@Length(max=2)
 	private String sendStatus;//发送状态
-	
+	/**
+	 * 00-未读，01-已读
+	 */
+	@Column(name = "READ_STATUS_")
+	@Length(max=2)
+	private String readStatus;//阅读状态
+
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="MSG_TEMPALATE_ID_")
 	private com.common.MessageCenter.entity.McMsgtempalate mcMsgtempalate;//消息模板ID
@@ -154,6 +160,14 @@ public class McMsgdatas implements Domain,IMessage{
 		this.sendStatus = sendStatus;
 	}
 	
+	public String getReadStatus() {
+		return readStatus;
+	}
+
+	public void setReadStatus(String readStatus) {
+		this.readStatus = readStatus;
+	}
+
 	public void setMcMsgtempalate(com.common.MessageCenter.entity.McMsgtempalate mcMsgtempalate){
 		this.mcMsgtempalate = mcMsgtempalate;
 	}
@@ -163,24 +177,38 @@ public class McMsgdatas implements Domain,IMessage{
 	}
 	
 	
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
-		result = prime * result + ((msgContent == null) ? 0 : msgContent.hashCode());
-		result = prime * result + ((receive == null) ? 0 : receive.hashCode());
-		result = prime * result + ((sendDate == null) ? 0 : sendDate.hashCode());
+		result = prime * result
+				+ ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result
+				+ ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result
+				+ ((mcMsgtempalate == null) ? 0 : mcMsgtempalate.hashCode());
+		result = prime * result
+				+ ((msgCaption == null) ? 0 : msgCaption.hashCode());
+		result = prime * result
+				+ ((msgContent == null) ? 0 : msgContent.hashCode());
 		result = prime * result + ((msgId == null) ? 0 : msgId.hashCode());
-		result = prime * result + ((createUser == null) ? 0 : createUser.hashCode());
-		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
-		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
-		result = prime * result + ((msgCaption == null) ? 0 : msgCaption.hashCode());
 		result = prime * result + ((msgType == null) ? 0 : msgType.hashCode());
-		result = prime * result + ((sendStatus == null) ? 0 : sendStatus.hashCode());
+		result = prime * result
+				+ ((readStatus == null) ? 0 : readStatus.hashCode());
+		result = prime * result + ((receive == null) ? 0 : receive.hashCode());
+		result = prime * result
+				+ ((sendDate == null) ? 0 : sendDate.hashCode());
+		result = prime * result
+				+ ((sendStatus == null) ? 0 : sendStatus.hashCode());
+		result = prime * result
+				+ ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result
+				+ ((updateUser == null) ? 0 : updateUser.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -189,16 +217,46 @@ public class McMsgdatas implements Domain,IMessage{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final McMsgdatas other = (McMsgdatas) obj;
+		McMsgdatas other = (McMsgdatas) obj;
 		if (createTime == null) {
 			if (other.createTime != null)
 				return false;
 		} else if (!createTime.equals(other.createTime))
 			return false;
+		if (createUser == null) {
+			if (other.createUser != null)
+				return false;
+		} else if (!createUser.equals(other.createUser))
+			return false;
+		if (mcMsgtempalate == null) {
+			if (other.mcMsgtempalate != null)
+				return false;
+		} else if (!mcMsgtempalate.equals(other.mcMsgtempalate))
+			return false;
+		if (msgCaption == null) {
+			if (other.msgCaption != null)
+				return false;
+		} else if (!msgCaption.equals(other.msgCaption))
+			return false;
 		if (msgContent == null) {
 			if (other.msgContent != null)
 				return false;
 		} else if (!msgContent.equals(other.msgContent))
+			return false;
+		if (msgId == null) {
+			if (other.msgId != null)
+				return false;
+		} else if (!msgId.equals(other.msgId))
+			return false;
+		if (msgType == null) {
+			if (other.msgType != null)
+				return false;
+		} else if (!msgType.equals(other.msgType))
+			return false;
+		if (readStatus == null) {
+			if (other.readStatus != null)
+				return false;
+		} else if (!readStatus.equals(other.readStatus))
 			return false;
 		if (receive == null) {
 			if (other.receive != null)
@@ -210,15 +268,10 @@ public class McMsgdatas implements Domain,IMessage{
 				return false;
 		} else if (!sendDate.equals(other.sendDate))
 			return false;
-		if (msgId == null) {
-			if (other.msgId != null)
+		if (sendStatus == null) {
+			if (other.sendStatus != null)
 				return false;
-		} else if (!msgId.equals(other.msgId))
-			return false;
-		if (createUser == null) {
-			if (other.createUser != null)
-				return false;
-		} else if (!createUser.equals(other.createUser))
+		} else if (!sendStatus.equals(other.sendStatus))
 			return false;
 		if (updateTime == null) {
 			if (other.updateTime != null)
@@ -229,21 +282,6 @@ public class McMsgdatas implements Domain,IMessage{
 			if (other.updateUser != null)
 				return false;
 		} else if (!updateUser.equals(other.updateUser))
-			return false;
-		if (msgCaption == null) {
-			if (other.msgCaption != null)
-				return false;
-		} else if (!msgCaption.equals(other.msgCaption))
-			return false;
-		if (msgType == null) {
-			if (other.msgType != null)
-				return false;
-		} else if (!msgType.equals(other.msgType))
-			return false;
-		if (sendStatus == null) {
-			if (other.sendStatus != null)
-				return false;
-		} else if (!sendStatus.equals(other.sendStatus))
 			return false;
 		return true;
 	}
