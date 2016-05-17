@@ -490,24 +490,11 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 		return -1;
 	}
 	/**
-   	 * 前台个人中心  获取已完成订单的totalCount    chenye
+   	 * 前台个人中心  获取全部消息的条数    chenye
    	 * @param conditions
    	 * @return
    	 * @throws BusException
    	 */
-   /*  public List<Record> getTotalCount(
-   			@ConditionCollection(domainClazz=McMsgdatas.class) Collection<Condition> conditions,
-   			@ServiceParam(name="userId",pubProperty="userId") String userId)  throws BusException{   	
-		MemberInformation memberInformation = memberInformationManager.getMemberInformation(userId);
-		String memberPhoneNumber = memberInformation.getMemberPhoneNumber();
-		conditions.add(ConditionUtils.getCondition("receive",Condition.EQUALS, memberPhoneNumber));
-   		List<Record> recordList=new ArrayList<Record>();
-		List<McMsgdatas> List = this.getMcMsgdatass(conditions, null);
-   		Record record = new Record();
-   		record.put("totalCount", List.size());
-   		recordList.add(record);
-   		return recordList;
-    }*/
 	@EsbServiceMapping
      public List<Record> getTotalCount(
     			@ConditionCollection(domainClazz=McMsgdatas.class) Collection<Condition> conditions,
@@ -535,10 +522,35 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 			@ConditionCollection(domainClazz=McMsgdatas.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders,
 			@ServiceParam(name="userId",pubProperty="userId") String userId)throws BusException {
+		//orders.add(ConditionUtils.getOrder("readStatus", false));
+		//orders.add(ConditionUtils.getOrder("sendDate", true));
+		//orders.add(ConditionUtils.getOrder("sendDate", true));
+
 		MemberInformation m=memberInformationManager.getMember(userId);
 		String memberPhoneNumber=m.getMemberPhoneNumber();
 		conditions.add(ConditionUtils.getCondition("receive", Condition.EQUALS, memberPhoneNumber));
 		PagerRecords pagerRecords = mcMsgdatasDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
-	}   
+	}  
+	/**
+   	 * 前台个人中心  获取未读消息的条数totalCount    chenye
+   	 * @param conditions
+   	 * @return
+   	 * @throws BusException
+   	 */
+	@EsbServiceMapping
+     public List<Record> getTotalCountread(
+    			@ConditionCollection(domainClazz=McMsgdatas.class) Collection<Condition> conditions,
+    			@ServiceParam(name="userId",pubProperty="userId") String userId)  throws BusException{
+    	MemberInformation memberInformation = memberInformationManager.getMemberInformation(userId);
+ 		String memberPhoneNumber = memberInformation.getMemberPhoneNumber();
+ 		conditions.add(ConditionUtils.getCondition("receive",Condition.EQUALS, memberPhoneNumber));
+ 		conditions.add(ConditionUtils.getCondition("readStatus",Condition.EQUALS, "00"));
+    	List<Record> recordList=new ArrayList<Record>();   		
+     	List<McMsgdatas> List = this.getMcMsgdatass(conditions, null);
+    	Record record = new Record();
+    	record.put("totalCount", List.size());
+    		recordList.add(record);
+    		return recordList;
+    	} 
 }
