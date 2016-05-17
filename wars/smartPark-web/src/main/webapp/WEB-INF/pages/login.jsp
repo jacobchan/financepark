@@ -58,7 +58,9 @@
             </div>
              
             <a class="login_btn" href="javascript:;" onclick="fsubmit(document.form);"></a>
-            
+         
+              <span style="padding-left: 80px;color: red;float: right;"> <youi:out value="${error}"/> </span>
+
         </form>
     	
     </div>
