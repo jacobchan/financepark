@@ -11,11 +11,13 @@ import org.artofsolving.jodconverter.OfficeDocumentConverter;
 import org.artofsolving.jodconverter.office.DefaultOfficeManagerConfiguration;
 import org.artofsolving.jodconverter.office.OfficeManager;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
  /**
   * 文档转pdf浏览类
   * @author xtc
   *
   */
+@Component
 public class DocConverter {
     private static final int environment = 0;// 环境1：windows,2:linux(涉及pdf2swf路径问题)
     private static  OfficeManager officeManager;
@@ -27,10 +29,7 @@ public class DocConverter {
     private File pdfFile;
     private  File swfFile;
     private File docFile;
-    @Value("#{configProperties['openPathwin']}")
-	private static String openPathwin;
-    @Value("#{configProperties['openPathlnx']}")
-	private static String openPathlnx;
+    private static String SWF_PATH_HOME ="";
     
     public DocConverter(String fileString) {
         ini(fileString);
@@ -68,24 +67,24 @@ public class DocConverter {
      * 操作系统安装openOffice路径
      */
     public static String getOfficeHome() {
-    	String offpath = "";
-        if (getOcName()==2) {
+    	String offpath = OPEN_OFFICE_HOME;
+       /* if (getOcName()==2) {
         	offpath = "/opt/openoffice4";
         } else if (getOcName()==1) {
         	offpath = "C:\\program Files (x86)\\OpenOffice.org 3";
-        }
+        }*/
         return offpath;
     }
     /*
      * 操作系统安装SWFTools路径
      */
     public String getSWFToolsHome() {
-        String swfpath = "";
-        if (getOcName()==2) {
+        String swfpath = SWF_PATH_HOME;
+        /*if (getOcName()==2) {
         	swfpath = "pdf2swf ";
         } else if (getOcName()==1) {
         	swfpath = "F:\\SWFTools\\pdf2swf.exe "; 
-        }
+        }*/
         return swfpath;
     }
     
@@ -191,15 +190,11 @@ public class DocConverter {
     public boolean conver() {
         if (swfFile.exists()) {
             System.out.println("****swf转换器开始工作，该文件已经转换为swf****");
-            System.out.println(openPathlnx);
-            System.out.println(openPathwin);
             return true;
         }
  
         if (getOcName()== 1) {
             System.out.println("****swf转换器开始工作，当前设置运行环境windows****");
-            System.out.println(openPathlnx);
-            System.out.println(openPathwin);
         } else {
             System.out.println("****swf转换器开始工作，当前设置运行环境linux****");
         }
@@ -277,8 +272,15 @@ public class DocConverter {
     }
     
     
-    public static  void getSwfPath(String path) {
+    public static  void getSwfPath(String path,String winOpenPath,String linOpenPath,String winSwfPath,String linSwfPath ) {
         DocConverter d = new DocConverter(path);
+        if (getOcName()==2) {
+        	OPEN_OFFICE_HOME =linOpenPath;
+        	SWF_PATH_HOME = linSwfPath;
+        } else if (getOcName()==1) {
+        	OPEN_OFFICE_HOME = winOpenPath;
+        	SWF_PATH_HOME = winSwfPath;
+        }
         d.conver();     
     }
 }
