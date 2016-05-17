@@ -176,7 +176,7 @@ public interface McMsgdatasManager extends BaseManager{
 	 */
 	public TempDemo findPhoneCaptcha(String phone);
 	/**
-   	 * 前台个人中心  获取已完成订单的totalCount    chenye
+   	 * 前台个人中心  获取全部消息的条数totalCount    chenye
    	 * @param conditions
    	 * @return
    	 * @throws BusException
@@ -193,5 +193,11 @@ public interface McMsgdatasManager extends BaseManager{
  	public PagerRecords getPager(Pager pager,//分页条件
  			 Collection<Condition> conditions,//查询条件
  			 Collection<Order> orders,String userId)throws BusException;
-	
+ 	/**
+   	 * 前台个人中心  获取未读消息的条数totalCount    chenye
+   	 * @param conditions
+   	 * @return
+   	 * @throws BusException
+   	 */
+     public List<Record> getTotalCountread(Collection<Condition> conditions,String userId)  throws BusException;
 }
