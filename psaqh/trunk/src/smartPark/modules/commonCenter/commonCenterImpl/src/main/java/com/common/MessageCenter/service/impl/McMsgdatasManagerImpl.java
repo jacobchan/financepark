@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import org.omg.PortableInterceptor.SUCCESSFUL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -554,7 +555,35 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
      	List<McMsgdatas> List = this.getMcMsgdatass(conditions, null);
     	Record record = new Record();
     	record.put("totalCount", List.size());
-    		recordList.add(record);
-    		return recordList;
-    	} 
+    	recordList.add(record);
+    	return recordList;
+    } 
+	/**
+   	 * app  修改状态   
+   	 * @return
+   	 * msgId    id
+   	 * @throws BusException
+   	 */
+	@EsbServiceMapping
+	public McMsgdatas updateStstus(@ServiceParam(name="msgId") String msgId)  throws BusException{
+		if(StringUtils.isNotEmpty(msgId)){
+			//根据id获取消息对象
+			McMsgdatas m=mcMsgdatasDao.get(msgId);
+			//获取当前状态
+			String status=m.getReadStatus();
+			if("00".equals(status)){//00为未读状态
+				//修改状态为已读
+				m.setReadStatus("01");//01为已读状态
+				//保存系统当前时间为修改时间
+				m.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+				//获取修改后的对象
+				McMsgdatas mcMsgdatas=mcMsgdatasDao.save(m);
+				return mcMsgdatas;
+			}else{
+				return null;
+			}			
+		}else{
+			return null;
+		}	
+    } 
 }
