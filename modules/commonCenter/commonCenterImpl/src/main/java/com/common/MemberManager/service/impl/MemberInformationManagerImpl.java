@@ -12,9 +12,16 @@ import java.util.Map;
 
 
 
+<<<<<<< .mine
 
 
 
+
+=======
+
+
+
+>>>>>>> .r5798
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.Ordered;
@@ -373,7 +380,7 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		member.getPrincipalConfig().put("redirect", token.getRedirect());
 		return new MemberUserInfo(member);
 	}
-
+	
 	@Override
 	public IRealmUserInfo getRealmUserInfo(MemberInformation member) {
 		// TODO Auto-generated method stub
@@ -708,5 +715,67 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	public MemberInformation getMember(@ServiceParam(name = "userId", pubProperty = "userId") String userId) throws BusException {
 		MemberInformation member = memberInformationDao.get(userId);		
 		return member;
+	}
+	
+	/**
+	 * 查询所有下级会员
+	 * @param lev 
+	 * @return
+	 */
+	public List<MemberInformation> findNextMember(String lev){
+		List<MemberInformation> members = memberInformationDao.getAll();
+		List<MemberInformation> nextMember = new ArrayList<MemberInformation>();
+		for(MemberInformation m:members){
+			//下线会员
+			if(StringUtils.isEmpty(m.getParentMemberId())){
+				MemberInformation member = getMember(m.getParentMemberId());
+				//查询一级下线
+				if(lev.equals("1")){
+					nextMember.add(member);
+				}else{
+
+				}
+				
+			}
+			
+		}
+		return nextMember;
+	}
+	
+	/**
+	 * 查询个人会员下线
+	 * @return
+	 */
+	public List<MemberInformation> findNextMember(String memberId,String lev){
+		Collection<Condition> conditions =  new ArrayList<Condition>();
+		conditions.add(ConditionUtils.getCondition("parentMemberId", Condition.EQUALS,memberId));
+		List<MemberInformation> lev1Members = getMemberInformations(conditions, null);
+		//一级下线
+		if(lev.equals("1")){
+			return lev1Members;
+		}else{
+			//二级下线
+			List<MemberInformation> lev2Members = new ArrayList<MemberInformation>();
+			for(MemberInformation m:lev1Members){
+				if(StringUtils.isEmpty(m.getParentMemberId())){
+					MemberInformation member = getMember(m.getParentMemberId());
+					lev2Members.add(member);
+				}
+			}
+			if(lev.equals("2")){
+				return lev2Members;
+			}else if(lev.equals("3")){
+				//三级下线
+				List<MemberInformation> lev3Members = new ArrayList<MemberInformation>();
+				for(MemberInformation m:lev2Members){
+					if(StringUtils.isEmpty(m.getParentMemberId())){
+						MemberInformation member = getMember(m.getParentMemberId());
+						lev3Members.add(member);
+					}
+				}
+				return lev3Members;
+			}
+		}
+		return lev1Members;
 	}
 }
