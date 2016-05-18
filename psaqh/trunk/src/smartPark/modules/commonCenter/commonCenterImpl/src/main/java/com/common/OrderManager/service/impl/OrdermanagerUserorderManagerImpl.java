@@ -935,6 +935,17 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
   		condition.add(ConditionUtils.getCondition("genreId.genreId", Condition.EQUALS, pg.getGenreId()));
   		condition.add(ConditionUtils.getCondition("userorderStatus", Condition.EQUALS, userorderStatus));
   		List<OrdermanagerUserorder> list =ordermanagerUserorderDao.commonQuery(condition, null);
+  			if(list.size()>0){
+  				for(OrdermanagerUserorder order : list){
+  					if("0301".equals(order.getGenreId().getGenreCode())){
+  			    		extentionAtrManager.setMeetingOrderExtendValue(order);
+  			    	}else if("0302".equals(order.getGenreId().getGenreCode())){
+  			    		extentionAtrManager.setCarOrderExtendValue(order);
+  			    	}else if("0303".equals(order.getGenreId().getGenreCode())){
+  			    		extentionAtrManager.setAdsenseOrderExtendValue(order);
+  			    	}
+  				}
+  			}
   		return list;
   	}	
 }
