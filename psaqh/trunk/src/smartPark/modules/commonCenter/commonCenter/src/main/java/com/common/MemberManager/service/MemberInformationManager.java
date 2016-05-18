@@ -189,6 +189,20 @@ public interface MemberInformationManager extends BaseManager{
      * @throws BusException
      */
 	public MemberInformation getMember( String userId) throws BusException;
+
+	
+	/**
+	 * 查询所有下级会员
+	 * @return
+	 */
+	public List<MemberInformation> findNextMember(String lev);
+	
+	/**
+	 * 查询所有下级会员
+	 * @return
+	 */
+	public List<MemberInformation> findNextMember(String memberId,String lev);
+
 	/**
 	 * 获取企业通讯录
 	 * @param pager
@@ -205,4 +219,5 @@ public interface MemberInformationManager extends BaseManager{
 	 * @param member
 	 */
 	public void setDefaultRole(MemberInformation member);
+
 }
