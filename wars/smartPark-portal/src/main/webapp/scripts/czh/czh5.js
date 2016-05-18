@@ -58,7 +58,7 @@ $(function(){
 			//项目类型
 			var projectType = $(".ic-select p").attr("data");
 			if(projectType=="NODATA"){
-				showMessage("请选择项目类型");
+				showMessage2("请选择项目类型");
 				//设置边框颜色变红
 				$("#codeProjectType").addClass("bk2");     //添加样式bk2
 				$("#codeProjectType").removeClass("bk1") ; //移除样式bk1
@@ -73,7 +73,7 @@ $(function(){
 			//项目简介
 			var projectDis = $("#projectDis").val();
 			if(projectDis==""){
-				showMessage("请填写项目简介");
+				showMessage2("请填写项目简介");
 				//设置边框颜色变红
 				$("#projectDis").addClass("bk2");     //添加样式bk2
 				$("#projectDis").removeClass("bk1") ; //移除样式bk1
@@ -81,14 +81,14 @@ $(function(){
 				setTimeout(function(){
 					$("#projectDis").addClass("bk1");   //添加样式bk2
 					$("#projectDis").removeClass("bk2");//移除样式bk1
-					} ,1113000);    //3000为3000毫秒，=3秒
+					} ,3000);    //3000为3000毫秒，=3秒
 				return false;
 			}
 			
 			//是否融资选择
 			var isFinace = $("#isFinace").find("span.active").attr("data");
 			if(isFinace==""){
-				showMessage("请选择是否融资");
+				showMessage2("请选择是否融资");
 				//设置边框颜色变红
 				$("#isFinace").addClass("bk2");     //添加样式bk2
 				$("#isFinace").removeClass("bk1") ; //移除样式bk1
@@ -109,7 +109,7 @@ $(function(){
 			}
 			
 			if(teacherType==""){
-				showMessage("请选择导师类型");
+				showMessage2("请选择导师类型");
 				//设置边框颜色变红
 				$("#teacherType").addClass("bk2");     //添加样式bk2
 				$("#teacherType").removeClass("bk1") ; //移除样式bk1
@@ -632,9 +632,15 @@ $(function(){
 		});	
     }
     
-    //显示信息
+    //融资申请弹窗错误提示
     function showMessage(message){
     	$(".error-toast").animate({top:"800px",opacity:"1"});
+    	$(".error-toast p").html(message);
+    	setTimeout(function(){$(".error-toast").animate({top:"-40px",opacity:"0"})},2000);
+    }
+    //创业加速申请弹窗错误提示
+    function showMessage2(message){
+    	$(".error-toast").animate({top:"530px",left:"450",opacity:"1"});
     	$(".error-toast p").html(message);
     	setTimeout(function(){$(".error-toast").animate({top:"-40px",opacity:"0"})},2000);
     }
