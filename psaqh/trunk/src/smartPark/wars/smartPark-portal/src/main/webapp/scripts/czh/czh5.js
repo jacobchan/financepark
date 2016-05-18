@@ -81,7 +81,7 @@ $(function(){
 				setTimeout(function(){
 					$("#projectDis").addClass("bk1");   //添加样式bk2
 					$("#projectDis").removeClass("bk2");//移除样式bk1
-					} ,3000);    //3000为3000毫秒，=3秒
+					} ,1113000);    //3000为3000毫秒，=3秒
 				return false;
 			}
 			
