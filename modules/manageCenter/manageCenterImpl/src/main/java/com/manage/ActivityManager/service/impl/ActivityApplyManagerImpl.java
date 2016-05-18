@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.ExtentionAtrManager.service.ExtentionAtrManager;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
@@ -59,6 +60,8 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
 	private OrdermanagerUserorderManager ordermanagerUserorderManager;
 	@Autowired
 	private PurchasingmanagerCommodityManager purchasingmanagerCommodityManager;
+	@Autowired
+	private ExtentionAtrManager extentionAtrManager;
     /**
      * 查询列表
      */
@@ -254,6 +257,17 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
     	Collection<Condition> condition = new ArrayList<Condition>();
     	condition.add(ConditionUtils.getCondition("userorderId", Condition.EQUALS,aa.getApplyOrderNumber()));
     	List<OrdermanagerUserorder> ordermanagerUserorder=ordermanagerUserorderManager.getOrdermanagerUserorders(condition, null);
+    	if(ordermanagerUserorder.size()>0){
+				for(OrdermanagerUserorder order : ordermanagerUserorder){
+					if("0301".equals(order.getGenreId().getGenreCode())){
+			    		extentionAtrManager.setMeetingOrderExtendValue(order);
+			    	}else if("0302".equals(order.getGenreId().getGenreCode())){
+			    		extentionAtrManager.setCarOrderExtendValue(order);
+			    	}else if("0303".equals(order.getGenreId().getGenreCode())){
+			    		extentionAtrManager.setAdsenseOrderExtendValue(order);
+			    	}
+				}
+			}
 		return ordermanagerUserorder;
 	}
     
