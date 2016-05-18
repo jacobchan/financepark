@@ -514,7 +514,7 @@ $(function(){
     
     //显示信息
     function showMessage(message){
-    	$(".error-toast").animate({top:"20px",opacity:"1"});
+    	$(".error-toast").animate({top:"800px",opacity:"1"});
     	$(".error-toast p").html(message);
 		setTimeout(function(){$(".error-toast").animate({top:"-40px",opacity:"0"})},2000);
     }
