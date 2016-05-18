@@ -363,11 +363,13 @@ a.send-psw:hover,a.send-psw.active{background: #e7e7e7;}
 .bg-tanc .tanc-con table.cic-l-t td textarea{width: 100%;resize:none;border:1px solid #ddd;padding: 10px;line-height: 20px;}
 .speed-sort li{float: left;margin-right: 20px;border:1px solid #d5d4d2;padding: 0px 20px;line-height: 30px;font-size: 14px;margin-bottom: 20px;cursor: pointer;}
 .speed-sort li.active{background: url(../images/czh/current.png) no-repeat right bottom;border:1px solid #ff6715;color: #ff6715; }
-
+/*融资申请弹窗*/
 .bg-tanc .tanc-con1{width:810px;display: block;background: #fff;margin:30px auto; position: relative;color: #888;box-shadow: 0px 0px 5px 3px rgba(83,83,83,0.8);padding: 40px 60px;-webkit-box-shadow: 0px 0px 5px 3px rgba(83,83,83,0.8);-moz-box-shadow: 0px 0px 5px 3px rgba(83,83,83,0.8);}
 .bg-tanc .tanc-con1 h3{border-bottom: 1px solid #ddd;line-height: 24px;font-size: 20px;padding-bottom: 16px;}
 .bg-tanc .tanc-con1 table.line-table td{padding: 10px 0px;}
 .bg-tanc .tanc-con1  input[type="text"]{padding: 5px 10px;line-height: 20px;}
+/*创业加速申请弹窗*/
+.setting-table1 td textarea{resize:none;padding:10px;height: 174px;width: 100%;}
 
 .bk1{border:1px solid #ddd;}
 .bk2{border:1px solid red;}
