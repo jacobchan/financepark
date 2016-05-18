@@ -155,6 +155,37 @@ $(function(){
 		$(".clearfix.czh-knowledge.mt30").append(html);
 	}
 	
+	//拼接时间段
+	function getTimes(time){
+		var beginTime = "0";
+		var endTime = "0";
+		var timeStrs = time.split(",");
+		for(var i = 0;i<timeStrs.length;i++){
+			var ss = timeStrs[i];
+			var data1 = "";
+			var data2 = "";
+			var index1=ss.indexOf(":"); 
+			var index2=ss.indexOf("-"); 
+			var index3=ss.lastIndexOf(":");
+			var chu = parseInt(index3)-(parseInt(index2)+1);
+			data1 = ss.substr(0,(parseInt(index1)));
+			data2 = ss.substr((parseInt(index2)+1),chu);
+			if(beginTime=="0"){
+				beginTime = data1;
+			}
+			if(endTime=="0"){
+				endTime = data2;
+			}
+			if(parseInt(data1)<parseInt(beginTime)){
+				beginTime = data1;
+			}
+			if(parseInt(data2)>parseInt(endTime)){
+				endTime = data2;
+			}
+		}
+		return beginTime+":00-"+endTime+":00";
+	}
+	
 	//拼接活动场地
 	function _parseApplyorder(record){
 		$("tbody").empty();
@@ -163,8 +194,11 @@ $(function(){
 		$("tbody").append(head);
 		var html="";
 		for(var i=0;i<record.length;i++){
+			var data = record[i].mettingOrder.publicResoIdDate;
+			var time = record[i].mettingOrder.publicResoIdTime;
+			var orderTime =data+" "+getTimes(time);
 			html+="<tr><td align='left' style='padding-left: 75px;'>"+record[i].userorderProject+"</td>"+
-			"<td>2016-03-12 08:00 - 18:00</td><td>"+record[i].userorderAmount+"元/小时</td>"+
+			"<td>"+orderTime+"</td><td>"+record[i].userorderAmount+"元/小时</td>"+
 			"<td><a href='"+proUrl+"companyservice/room.html' class='c-333'>查看场地详情</a></td></tr>";
 		}
 		$("tbody").append(html);
