@@ -83,16 +83,43 @@ public class MemberInformation implements Domain,IdUser, IUser,IMemberInfomation
 	@Length(max=32)
 	private String memberNickname;//昵称
 	
+	@Column(name = "PARENT_MEMBER_ID_")
+	@Length(max=36)
+	private String parentMemberId;//上级会员id
+	
+	@Column(name = "M_LEVEL_")
+	@Length(max=32)
+	private String level;//会员等级
+	
 	@Transient
 	private String loginType;//非数据库映射属性
 	
-
+	
 	@Transient
 	private List<String> roleIds = new ArrayList<String>();//非数据库映射属性
 	
 	@Transient
 	private PrincipalConfig principalConfig = new PrincipalConfig();
 	
+	
+	
+	
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
+	public String getParentMemberId() {
+		return parentMemberId;
+	}
+
+	public void setParentMemberId(String parentMemberId) {
+		this.parentMemberId = parentMemberId;
+	}
+
 	public String getMemberBirthdate(){
 		return this.memberBirthdate;
 	}
