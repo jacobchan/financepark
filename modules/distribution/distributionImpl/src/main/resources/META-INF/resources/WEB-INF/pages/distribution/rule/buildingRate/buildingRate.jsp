@@ -26,8 +26,8 @@
 		<youi:fieldLayout prefix="records">
 			<youi:fieldSelect property="itemId" caption="所属单元" code="roomId" show="roomNo" notNull="true"
 				src="esb/web/bbmRoomManager/getBbmRooms.json" readonly="true"/>
-			<youi:fieldText property="buildingNo"  caption="所属楼层" readonly="true"/>
-			<youi:fieldText property="itemName"  caption="所属楼栋" readonly="true"/>
+			<%-- <youi:fieldText property="buildingNo"  caption="所属楼层" readonly="true"/>
+			<youi:fieldText property="itemName"  caption="所属楼栋" readonly="true"/> --%>
 			<youi:fieldText property="parkName"  caption="所属园区" readonly="true"/>
 			<%-- <youi:fieldText property="itemId"  caption="单元/楼宇ID"/>
 			<youi:fieldText property="itemType"  caption="单元/楼宇"/>  --%>
@@ -42,15 +42,18 @@
 	<youi:form dialog="true" caption="楼宇佣金比率配置" id="form_saveBuildingRate" action="esb/web/buildingRateManager/saveBuildingRate.json">
 		<youi:fieldLayout prefix="record">
 			<youi:fieldSelect property="roomType" caption="单元/楼宇" convert="disRoom"/>
-			 
-			<youi:fieldSelect property="itemId" caption="所属单元" code="roomId" show="roomNo" 
-				src="esb/web/bbmRoomManager/getBbmRooms.json" />
+			
+			<youi:fieldTree simple="false" popup="true" tree="${bbmRoomTree}" property="itemId"  caption="会议室地址" onlyLeaf="true" notNull="true"/>
+			
+			
+			<%-- <youi:fieldSelect property="itemId" caption="所属单元" code="roomId" show="roomNo" 
+				src="esb/web/bbmRoomManager/getBbmRooms.json" /> --%>
 
 			<youi:fieldSelect property="buildingId"  caption="所属楼宇" code="buildingId" show="buildingName" 
 				src="esb/web/bbmBuildingManager/getBbmBuildings.json" />
 			
-			<youi:fieldText property="buildingNo"  caption="所属楼层" readonly="true"/>
-			<youi:fieldText property="itemName"  caption="所属楼栋" readonly="true"/>
+			<%-- <youi:fieldText property="buildingNo"  caption="所属楼层" readonly="true"/>
+			<youi:fieldText property="itemName"  caption="所属楼栋" readonly="true"/> --%>
 			<youi:fieldText property="parkName"  caption="所属园区" readonly="true"/>
 			<youi:fieldText property="dicRate"  caption="提佣系数" expression="^[0-9]*$" expressionMessage="提佣系数不正确"/>
 			<youi:fieldHidden property="recId"></youi:fieldHidden>
@@ -118,7 +121,7 @@
 				success:function(result){
 					var record = result.records;
 					if(record.length>0){
-						alert("该楼宇以配置,请选择未配置楼宇");
+						alert("该单元已配置,请选择未配置单元");
 						$elem('record_buildingId',pageId).fieldValue("");
 					}else{
 						$.youi.ajaxUtil.ajax({
@@ -154,14 +157,16 @@
 	</youi:func>
 	<!-- 单元发生变化时，对应的楼栋，园区也发生变化 -->	
 	<youi:func name = "record_itemId_change">
+			alert("ss");
 			var itemId = $('#P_'+pageId+'_record_itemId').fieldValue();//获取当前选中楼栋的id
+			alert(itemId);
 			$.youi.ajaxUtil.ajax({
 				url:'/esb/web/buildingRateManager/getPagerBuildingRates.json',
 				data:{itemId:itemId},
 				success:function(result){
 					var record = result.records;
 					if(record.length>0){
-						alert("该单元以配置,请选择未配置单元");
+						alert("该单元已配置,请选择未配置单元");
 						$elem('record_itemId',pageId).fieldValue("");
 					}else{
 						$.youi.ajaxUtil.ajax({
