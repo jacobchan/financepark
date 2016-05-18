@@ -12,7 +12,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-
+import com.common.MemberManager.entity.MemberInformation;
 import com.distribution.income.entity.SalesRec;
 
 public interface SalesRecManager extends BaseManager{
@@ -40,7 +40,7 @@ public interface SalesRecManager extends BaseManager{
     /**
      * 保存并返回对象
      */
-    public SalesRec saveSalesRec(SalesRec o) throws BusException;
+    public SalesRec saveSalesRec(SalesRec o,String memPhone) throws BusException;
 
     /**
      * 删除对象
@@ -63,4 +63,10 @@ public interface SalesRecManager extends BaseManager{
      * @param ids
      */
 	public boolean exsitSalesRec(String propertyName,Object value) throws BusException;
+	
+	/**
+	 * 查询所有下级会员
+	 * @return
+	 */
+	public List<MemberInformation> findNextMember(String memberId,String lev);
 }
