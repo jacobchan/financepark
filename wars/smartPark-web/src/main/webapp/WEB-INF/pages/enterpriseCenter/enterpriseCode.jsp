@@ -48,8 +48,10 @@
 					var phone = phoneArr.split(",");
 					var regPhone = /^1[3|5|8][0-9]\d{4,8}$/;
 					for(var i=0; i<phone.length; i++){
-						if (!regPhone.test(phone[i])) { 
-							alert("手机号码不正确！");
+						if (!regPhone.test(phone[i])) {
+							$('#toast_text').html('手机号码不正确！');
+							$(".toast").show();
+				            setTimeout('$(".toast").hide();',3000);//1秒=1000
 							return false;
 						}else{
 							$.youi.ajaxUtils.ajax({
@@ -70,7 +72,9 @@
 			    			if (result && result.record) {
 			    				var msg = result.record.html.split(",");
 			    				if(msg[1].substring(0,1)==0){
-			    					alert("手机号码："+phoneArr+"\n\n发送时间："+msg[0].substring(0,4)+"年"+msg[0].substring(4,6)+"月"+msg[0].substring(6,8)+"日 "+msg[0].substring(8,10)+":"+msg[0].substring(10,12)+":"+msg[0].substring(12,14)+"\n\n发送状态：成功！");
+			    					$('#toast_text').html("手机号码："+phoneArr+"\n\n发送时间："+msg[0].substring(0,4)+"年"+msg[0].substring(4,6)+"月"+msg[0].substring(6,8)+"日 "+msg[0].substring(8,10)+":"+msg[0].substring(10,12)+":"+msg[0].substring(12,14)+"\n\n发送状态：成功！");
+									$(".toast").show();
+						            setTimeout('$(".toast").hide();',3000);//1秒=1000
 			    				}
 			    			}
 						}
@@ -163,7 +167,9 @@
 						if(result.message==null){
 							location.reload();
 						}else{
-							alert(result.message.info);
+							$('#toast_text').html(result.message.info);
+							$(".toast").show();
+				            setTimeout('$(".toast").hide();',3000);//1秒=1000
 						}
 					}
 				});
