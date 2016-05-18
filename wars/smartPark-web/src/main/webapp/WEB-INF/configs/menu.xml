@@ -126,5 +126,7 @@
 	<menu id="360000" text="全员分销">
 		<menu id="360001" text="分佣比率配置" href="page/distribution.rule.disRateConfig/disRateConfig.html"></menu>
 		<menu id="360002" text="楼宇佣金比率配置" href="page/distribution.rule.buildingRate/buildingRate.html"></menu>
+		<menu id="360004" text="楼宇售卖记录" href="page/distribution.income.salesRec/salesRec.html"></menu>
+		<menu id="360005" text="会员层级" href="page/distribution.income.salesRec/memberInfoList.html"></menu>
 	</menu>
 </menus>
