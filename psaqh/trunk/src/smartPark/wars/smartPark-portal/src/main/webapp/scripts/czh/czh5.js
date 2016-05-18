@@ -7,7 +7,10 @@ $(function(){
 	
 		$(".slideBox").hover(function(){
       		clearInterval(timer);
-		},function(){ timer = setInterval(run,3000)});
+		},function(){ 
+			//timer = setInterval(run,3000)
+			});
+		
 		$(".index-fr-nav li").click(function(){
 			$(".index-fr-nav li").removeClass("active");
 			$(this).addClass("active");
@@ -56,6 +59,14 @@ $(function(){
 			var projectType = $(".ic-select p").attr("data");
 			if(projectType=="NODATA"){
 				showMessage("请选择项目类型");
+				//设置边框颜色变红
+				$("#codeProjectType").addClass("bk2");     //添加样式bk2
+				$("#codeProjectType").removeClass("bk1") ; //移除样式bk1
+				//3秒后边框颜色还原
+				setTimeout(function(){
+					$("#codeProjectType").addClass("bk1");   //添加样式bk2
+					$("#codeProjectType").removeClass("bk2");//移除样式bk1
+					} ,3000);    //3000为3000毫秒，=3秒
 				return false;
 			}
 			
@@ -63,6 +74,14 @@ $(function(){
 			var projectDis = $("#projectDis").val();
 			if(projectDis==""){
 				showMessage("请填写项目简介");
+				//设置边框颜色变红
+				$("#projectDis").addClass("bk2");     //添加样式bk2
+				$("#projectDis").removeClass("bk1") ; //移除样式bk1
+				//3秒后边框颜色还原
+				setTimeout(function(){
+					$("#projectDis").addClass("bk1");   //添加样式bk2
+					$("#projectDis").removeClass("bk2");//移除样式bk1
+					} ,3000);    //3000为3000毫秒，=3秒
 				return false;
 			}
 			
@@ -70,6 +89,14 @@ $(function(){
 			var isFinace = $("#isFinace").find("span.active").attr("data");
 			if(isFinace==""){
 				showMessage("请选择是否融资");
+				//设置边框颜色变红
+				$("#isFinace").addClass("bk2");     //添加样式bk2
+				$("#isFinace").removeClass("bk1") ; //移除样式bk1
+				//3秒后边框颜色还原
+				setTimeout(function(){
+					$("#isFinace").addClass("bk1");   //添加样式bk2
+					$("#isFinace").removeClass("bk2");//移除样式bk1
+					} ,3000);    //3000为3000毫秒，=3秒
 				return false;
 			}
 			
@@ -83,6 +110,14 @@ $(function(){
 			
 			if(teacherType==""){
 				showMessage("请选择导师类型");
+				//设置边框颜色变红
+				$("#teacherType").addClass("bk2");     //添加样式bk2
+				$("#teacherType").removeClass("bk1") ; //移除样式bk1
+				//3秒后边框颜色还原
+				setTimeout(function(){
+					$("#teacherType").addClass("bk1");   //添加样式bk2
+					$("#teacherType").removeClass("bk2");//移除样式bk1
+					} ,3000);    //3000为3000毫秒，=3秒
 				return false;
 			}
 			$(".submit1").addClass("undis") ;
@@ -147,6 +182,14 @@ $(function(){
 		var companyName = $("#companyName").val();
 		if(companyName==""){
 			showMessage("请填写公司名称");
+			//设置边框颜色变红
+			$("#companyName").addClass("bk2");     //添加样式bk2
+			$("#companyName").removeClass("bk1") ; //移除样式bk1
+			//4秒后边框颜色还原
+			setTimeout(function(){
+				$("#companyName").addClass("bk1");   //添加样式bk2
+				$("#companyName").removeClass("bk2");//移除样式bk1
+				} ,3000);    //3000为3000毫秒，=3秒
 			return false;
 		}
 		
@@ -154,33 +197,81 @@ $(function(){
 		var companyUrl = $("#companyUrl").val();
 		if(companyUrl==""){
 			showMessage("请填写主页地址");
+			//设置边框颜色变红
+			$("#companyUrl").addClass("bk2");     //添加样式bk2
+			$("#companyUrl").removeClass("bk1") ; //移除样式bk1
+			//4秒后边框颜色还原
+			setTimeout(function(){
+				$("#companyUrl").addClass("bk1");   //添加样式bk2
+				$("#companyUrl").removeClass("bk2");//移除样式bk1
+				} ,3000);    //3000为3000毫秒，=3秒
 			return false;
 		}
 		//融资额度（起）
 		var amountStart = $("#amountStart").val();
 		if(amountStart==""){
 			showMessage("请填写融资额度");
+			//设置边框颜色变红
+			$("#amountStart").addClass("bk2");     //添加样式bk2
+			$("#amountStart").removeClass("bk1") ; //移除样式bk1
+			//3秒后边框颜色还原
+			setTimeout(function(){
+				$("#amountStart").addClass("bk1");   //添加样式bk2
+				$("#amountStart").removeClass("bk2");//移除样式bk1
+				} ,4000);    //4000为4000毫秒，=4秒
 			return false;
 		}
 		//融资额度（止）
 		var amountEnd = $("#amountEnd").val();
 		if(amountEnd==""){
 			showMessage("请填写融资额度");
+			//设置边框颜色变红
+			$("#amountEnd").addClass("bk2");     //添加样式bk2
+			$("#amountEnd").removeClass("bk1") ; //移除样式bk1
+			//3秒后边框颜色还原
+			setTimeout(function(){
+				$("#amountEnd").addClass("bk1");   //添加样式bk2
+				$("#amountEnd").removeClass("bk2");//移除样式bk1
+				} ,3000);    //3000为3000毫秒，=3秒
 			return false;
 		}
 		if(amountStart>=amountEnd){
 			showMessage("请填写融资额度");
+			//设置边框颜色变红
+			$("#amountEnd").addClass("bk2");     //添加样式bk2
+			$("#amountEnd").removeClass("bk1") ; //移除样式bk1
+			//3秒后边框颜色还原
+			setTimeout(function(){
+				$("#amountEnd").addClass("bk1");   //添加样式bk2
+				$("#amountEnd").removeClass("bk2");//移除样式bk1
+				} ,3000);    //3000为3000毫秒，=3秒
 			return false;
 		}
 		//股份占比
 		var shareRate = $("#shareRate").val();
 		if(shareRate==""){
 			showMessage("请填写股份占比");
+			//设置边框颜色变红
+			$("#shareRate").addClass("bk2");     //添加样式bk2
+			$("#shareRate").removeClass("bk1") ; //移除样式bk1
+			//3秒后边框颜色还原
+			setTimeout(function(){
+				$("#shareRate").addClass("bk1");   //添加样式bk2
+				$("#shareRate").removeClass("bk2");//移除样式bk1
+				} ,3000);    //3000为3000毫秒，=3秒
 			return false;
 		}else{
 			//判断比例是否大于100
 			if(shareRate>100){
 				showMessage("股份占比不能大于100%");
+				//设置边框颜色变红
+				$("#shareRate").addClass("bk2");     //添加样式bk2
+				$("#shareRate").removeClass("bk1") ; //移除样式bk1
+				//3秒后边框颜色还原
+				setTimeout(function(){
+					$("#shareRate").addClass("bk1");   //添加样式bk2
+					$("#shareRate").removeClass("bk2");//移除样式bk1
+					} ,3000);    //3000为3000毫秒，=3秒
 				return false;
 			}
 		}
@@ -188,22 +279,51 @@ $(function(){
 		var businessDis = $("#businessDis").val();
 		if(businessDis==""){
 			showMessage("请填写业务简介");
+			//设置边框颜色变红
+			$("#businessDis").addClass("bk2");     //添加样式bk2
+			$("#businessDis").removeClass("bk1") ; //移除样式bk1
+			//3秒后边框颜色还原
+			setTimeout(function(){
+				$("#businessDis").addClass("bk1");   //添加样式bk2
+				$("#businessDis").removeClass("bk2");//移除样式bk1
+				} ,3000);    //3000为3000毫秒，=3秒
 			return false;
 		}
 		//公司优势
 		var companyMerite = $("#companyMerite").val();
 		if(companyMerite==""){
 			showMessage("请填写公司优势");
+			//设置边框颜色变红
+			$("#companyMerite").addClass("bk2");     //添加样式bk2
+			$("#companyMerite").removeClass("bk1") ; //移除样式bk1
+			//4秒后边框颜色还原
+			setTimeout(function(){
+				$("#companyMerite").addClass("bk1");   //添加样式bk2
+				$("#companyMerite").removeClass("bk2");//移除样式bk1
+				} ,4000);    //4000为4000毫秒，=4秒
 			return false;
 		}
 		//核心成员
 		var corTeam = $("#corTeam").val();
 		if(corTeam==""){
 			showMessage("请填写核心成员");
+			//设置边框颜色变红
+			$("#corTeam").addClass("bk2");     //添加样式bk2
+			$("#corTeam").removeClass("bk1") ; //移除样式bk1
+			//4秒后边框颜色还原
+			setTimeout(function(){
+				$("#corTeam").addClass("bk1");   //添加样式bk2
+				$("#corTeam").removeClass("bk2");//移除样式bk1
+				} ,4000);    //4000为4000毫秒，=4秒
 			return false;
 		}
+		//防止表单重复提交
 		$(".submit3").addClass("undis") ;
-		$(".submit4").removeClass("undis") ;
+		//一秒钟后才能再次提交
+		setTimeout(function(){
+			$(".submit3").removeClass("undis") ;
+		},2000);
+		//$(".submit4").removeClass("undis") ;
 		var params = ['companyName='+companyName,'companyUrl='+companyUrl,'amountStart='+amountStart,
 		              'amountEnd='+amountEnd,'shareRate='+shareRate,'businessDis='+businessDis,
 		              'companyMerite='+companyMerite,'corTeam='+corTeam];
@@ -516,7 +636,7 @@ $(function(){
     function showMessage(message){
     	$(".error-toast").animate({top:"800px",opacity:"1"});
     	$(".error-toast p").html(message);
-		setTimeout(function(){$(".error-toast").animate({top:"-40px",opacity:"0"})},2000);
+    	setTimeout(function(){$(".error-toast").animate({top:"-40px",opacity:"0"})},2000);
     }
     
   //获取链接后面的值
