@@ -550,7 +550,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
     	MemberInformation memberInformation = memberInformationManager.getMemberInformation(userId);
  		String memberPhoneNumber = memberInformation.getMemberPhoneNumber();
  		//添加条件    查询未读状态的信息，00为未读状态
- 		conditions.add(ConditionUtils.getCondition("readStatus",Condition.EQUALS, "00"));
+ 		conditions.add(ConditionUtils.getCondition("readStatus",Condition.NOT_EQUALS, "01"));
     	List<Record> recordList=new ArrayList<Record>();   		
      	List<McMsgdatas> List = this.getMcMsgdatass(conditions, null);
     	Record record = new Record();
