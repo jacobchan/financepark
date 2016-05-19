@@ -3,7 +3,7 @@
 <youi:page>
 	<youi:grid id="grid_bbmRoom" idKeys="roomId" caption="单元基础信息列表"  panel="false"
 				src="esb/web/bbmRoomManager/getPagerBbmRooms.json" dataFormId="form_bbmRoom"
-				editSrc="esb/web/bbmRoomManager/getBbmRoom.json" edit="NOT" remove="NOT" showCheckbox="true"
+				editSrc="esb/web/bbmRoomManager/getBbmRoom.json"  exportXls="true" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/bbmRoomManager/removeBbmRoom.json">
 		<youi:fieldLayout columns="2" labelWidths="100,100">
 			<youi:fieldText property="roomNo"  caption="单元编号" operator="LIKE"/>
