@@ -63,7 +63,7 @@ $(function(){
 		function getdocument(id){
 			var applyId = id;
 			var serviceURL = baseUrl+"activityDocumentManager/getPagerActivityDocuments.json";
-			var params = ['activityId.applyId='+applyId];
+			var params = ['activityApply.applyId='+applyId];
 			$.youi.ajaxUtils.ajax({
 				url:serviceURL,
 				data:params.join('&'),
