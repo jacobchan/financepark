@@ -20,7 +20,7 @@
 	   .sc-price-date .active{background: #fff;}
 	   
 	   .sc-calendar{position: relative;overflow: hidden;}
-	   .sc-calendar .preview{width: 39px;height: 100%; z-index: 9999;cursor:pointer; position: absolute; left:0; top:0;float:left;text-align: center;background: #f7f0e6;border-right: 1px solid #ecebeb;transition: all .4s linear;-moz-transition: width  all .4s;-webkit-transition:  all .4s;-o-transition: all .4s linear;}
+	   .sc-calendar .preview{width: 39px;height: 100%; z-index: 9999;cursor:pointer; position: absolute; left:0; top:0;float:left;text-align: center;background: #f7f0e6;border-right: 1px solid #ecebeb;transition: all .4s linear;-moz-transition: width  all .4s;-webkit-transition:  all .4s;-o-transition: all .4s linear;border-bottom: solid 1px #ed7034;}
 	   .sc-calendar .preview:hover{background: #fff;}
 	   .sc-calendar .disabled:hover{background: #f7f0e6;}
 	   .sc-calendar .preview .p-fl{background: #f7f0e6 url(../images/cal.png) no-repeat 0px -64px;width: 18px;height: 30px;display: block;margin:0px auto;margin-top: 13px;transition: all .4s linear;
@@ -40,4 +40,9 @@
 	   .isLoading{display: inline-block; width: 20px; height: 20px;margin-right: 5px; vertical-align: middle; background: url(../images/loading_2.gif) center center no-repeat;}
 	   #noresult{line-height: 170px;}
        #noresult>div{width: 240px;padding-left: 50px; background:url(../images/zs/no_info.png) left center no-repeat;}
+       .xc-price{border-bottom: 0;}
+       .sc-price-date-inner td,
+       .xc-price .xp-tj-cal{border-bottom: solid 1px #ed7034}
+       .sc-price-date .active{border: solid 1px #ed7034;border-bottom: solid 1px #fff;}
+       .sc-price-date .active:before{content:"";}
 	   
