@@ -13,7 +13,7 @@
 
 	<youi:grid id="grid_propertyservicemanagerCharge" idKeys="chargeId" caption="物业收费登记表列表"  panel="false" pageSize="2" add="NOT"
 				src="esb/web/propertyservicemanagerChargeManager/getPagerPropertyservicemanagerCharges.json" dataFormId="form_propertyservicemanagerCharge"
-				editSrc="esb/web/propertyservicemanagerChargeManager/getPropertyservicemanagerCharge.json" edit="NOT" remove="NOT" showCheckbox="true"
+				editSrc="esb/web/propertyservicemanagerChargeManager/getPropertyservicemanagerCharge.json" exportXls="true" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/propertyservicemanagerChargeManager/removePropertyservicemanagerCharge.json">
 		<youi:fieldLayout labelWidths="120,120">
 			<youi:fieldTree simple="false" popup="true" tree="${bbmRoomTree}" property="bbmRoom.roomNo"  caption="单元编号" onlyLeaf="true"/>
