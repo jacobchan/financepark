@@ -23,15 +23,6 @@
 	<script type="text/javascript" src="scripts/cityselector/j.suggest.js"></script>
 	<script type="text/javascript">
 		$(function(){
-			/* $(".see-all").click(function(){
-				if($(this).parents("thead").next("tbody").hasClass("undis")){
-					$(this).parents("thead").next("tbody").removeClass("undis");
-					$(this).html("收起所有仓位");
-				}else{
-					$(this).parents("thead").next("tbody").addClass("undis");
-					$(this).html("查看所有仓位");
-				}
-			}); */
 			$("#flightsModel").on("click",".see-all",function(){
 				if($(this).parents("thead").next("tbody").hasClass("undis")){
 					$(this).parents("thead").next("tbody").removeClass("undis");
@@ -164,102 +155,14 @@
 			    			<th>预定操作</th>
 			    		</thead>
 			    	</table>
-			    	<div class="hcxx-hb-infor">
-			    		<table class="hcxx-table">
-			    			<colgroup>
-				    			<col width="18%"></col>
-				    			<col width="16%"></col>
-				    			<col width="16%"></col>
-				    			<col width="16%"></col>
-				    			<col width="16%"></col>
-				    			<col></col>
-				    		</colgroup>
-			    			<thead>
-				    			<tr>
-				    				<td align="left">
-				    					<div class="c-333"><img src="styles/images/plane.png" width="18" height="17" class="ml10 mr5">四川航空 3u8421</div>
-				    					<p class="ml33">机型 : <span class="c-333">320</span></p>
-				    				</td>
-				    				<td>
-				    					<p>北京首都机场</p>
-				    					<p>上海虹桥机场</p>
-				    				</td>
-				    				<td>
-				    					<p class="c-333 f16">07:50</p>
-				    					<p>13:15</p>
-				    				</td>
-				    				<td>
-				    					<p class="c-o f20">¥520</p>
-				    					<p><span class="c-333">23</span>折 头等舱</p>
-				    				</td>
-				    				<td>
-				    					<p>¥520</p>
-				    					<p>包正餐</p>
-				    				</td>
-				    				<td>
-				    					<a href="" class="order-btn">预订</a>
-				    					<p><a href="javascript:;" class="see-all">查看所有仓位</a></p>
-				    				</td>
-				    			</tr>
-				    		</thead>
-				    		<tbody  class="undis">
-				    			<tr>
-				    				<td colspan="2"></td>
-				    				<td>
-				    					<p class="c-333 f16">07:50</p>
-				    					<p>13:15</p>
-				    				</td>
-				    				<td>
-				    					<p class="c-o f20">¥520</p>
-				    					<p><span class="c-333">23</span>折 头等舱</p>
-				    				</td>
-				    				<td>
-				    					<p>¥520</p>
-				    					<p>包正餐</p>
-				    				</td>
-				    				<td>
-				    					<a href="" class="order-btn ob-orange">预订</a>
-				    				</td>
-				    			</tr>
-				    			<tr>
-				    				<td colspan="2"></td>
-				    				<td>
-				    					<p class="c-333 f16">07:50</p>
-				    					<p>13:15</p>
-				    				</td>
-				    				<td>
-				    					<p class="c-o f20">¥520</p>
-				    					<p><span class="c-333">23</span>折 头等舱</p>
-				    				</td>
-				    				<td>
-				    					<p>¥520</p>
-				    					<p>包正餐</p>
-				    				</td>
-				    				<td>
-				    					<a href="" class="order-btn ob-orange">预订</a>
-				    				</td>
-				    			</tr>
-				    			<tr>
-				    				<td colspan="2"></td>
-				    				<td>
-				    					<p class="c-333 f16">07:50</p>
-				    					<p>13:15</p>
-				    				</td>
-				    				<td>
-				    					<p class="c-o f20">¥520</p>
-				    					<p><span class="c-333">23</span>折 头等舱</p>
-				    				</td>
-				    				<td>
-				    					<p>¥520</p>
-				    					<p>包正餐</p>
-				    				</td>
-				    				<td>
-				    					<a href="" class="order-btn ob-orange">预订</a>
-				    				</td>
-				    			</tr>
-				    		</tbody>
-			    		</table>
-			    	</div>
+			    	<div id="isLoading" class="undis" align="center">
+						<div>
+							<span class="isLoading"></span>正在加载中...
+						</div>
+					</div>
+			    	<div id="noresult" class="undis" align="center">
+						<div>抱歉，找不到当天的航班...</div>
+					</div>
 			    </div>
             </div>
             <div class="fr" style="width:288px;">
@@ -382,23 +285,7 @@
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 			var params = ['orgAirportCode='+fromCode,'dstAirportCode='+gotoCode,'date='+gotodate];
 			var serviceURL = baseUrl+"TicketServiceManager/getFlights.json";
-			$.youi.ajaxUtils.ajax({
-				url:serviceURL,
-				data:params.join('&'),
-				jsonp:'data:jsonp',
-				dataType:'jsonp',
-				success:function(result){
-					if(result&&result.records){
-						var record = result.records;
-						parseFlights(record[0]);
-					}else{
-						alert("获取航班信息失败。");
-					}
-				},
-				error:function(){
-					console.error("机票信息获取有误！");
-				}
-			});
+			getFlights(params,serviceURL);
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++     获取当前天到未来30天的日期最低价                                                                                                                                                                                                                        +++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -459,38 +346,15 @@
 				}
 			});
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-+++++++     判断所选日期是否超过当前日期外加30天的范围，若超过，重新获取一次最低价接口，填充日期+最低价的tag条                                                                                +++++++++
++++++++     日历条点击事件                                                                                                                                                                                                                                                          +++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-			
-    		function overDate(){
-				params = ['startDate='+gotodate,'deptCode='+fromCode,'arrCode='+gotoCode];
-				serviceURL = baseUrl+"TicketServiceManager/getDailyLowestPrice.json";
-				$.youi.ajaxUtils.ajax({
-					url:serviceURL,
-					data:params.join('&'),
-					jsonp:'data:jsonp',
-					dataType:'jsonp',
-					success:function(result){
-						if(result&&result.records){
-							var record = result.records;
-							var tmp_date_arr = new Array();
-							var tmp_price_arr = new Array();
-							for(var i=0;i<record.length;i++){
-								console.debug("gotodate index "+ i +":"+record[i].depDate+"  price:"+record[i].ticketPrice);
-								tmp_price_arr.push(record[i].ticketPrice);
-								tmp_date_arr.push(record[i].depDate);
-							}
-							parseLowestPrice(tmp_date_arr,tmp_price_arr,gotodate);
-						}else{
-							console.error("机票最低价获取有误！");
-						}
-					},
-					error:function(){
-						console.error("机票最低价信息获取有误！");
-					}
-				});
-		}
-			
+            $("#week-list").on("click","tr td",function(){
+            	$(this).addClass("active").siblings().removeClass("active");
+            	var datas = ['orgAirportCode='+fromCode,'dstAirportCode='+gotoCode,'date='+$(this).find("p").html()];
+    			var flightUrl = baseUrl+"TicketServiceManager/getFlights.json";
+    			//alert(datas)
+    			getFlights(datas,flightUrl);
+            })
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++     日历图标点击事件                                                                                                                                                                                                                                                          +++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -550,9 +414,40 @@
 		});
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 //      $(function(){});-->>> Foot
- /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-		var pltime,timer;//动态加载效果的时间控件变量
-	    function closeTanc(){
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+		
+ 
+        var pltime,timer;//动态加载效果的时间控件变量
+        /*******************************************************/
+		function getFlights(params,serviceURL){
+			  $("#flightsModel .hcxx-hb-infor").remove();
+			  $("#isLoading").removeClass("undis");
+			  $("#noresult").addClass("undis");
+			  $.youi.ajaxUtils.ajax({
+				url:serviceURL,
+				data:params.join('&'),
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					//alert(result.records.length)
+					if(result&&result.records){
+						var record = result.records;
+						parseFlights(record[0]);
+					}else{
+						//alert("获取航班信息失败。");
+						$("#isLoading").addClass("undis");
+						$("#noresult").removeClass("undis");
+					}
+				},
+				error:function(){
+					//console.error("机票信息获取有误！");
+					$("#isLoading").addClass("undis");
+					$("#noresult").removeClass("undis");
+				}
+		  	  });
+		}
+		/*******************************************************/
+        function closeTanc(){
 	        if(pltime>1){
 	            pltime--;
 	        }else{
@@ -572,6 +467,37 @@
 		      }
 		   }
 		   return theRequest;
+		}
+		/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		+++++++     判断所选日期是否超过当前日期外加30天的范围，若超过，重新获取一次最低价接口，填充日期+最低价的tag条                                                                                +++++++++
+		+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/			
+		function overDate(){
+				params = ['startDate='+gotodate,'deptCode='+fromCode,'arrCode='+gotoCode];
+				serviceURL = baseUrl+"TicketServiceManager/getDailyLowestPrice.json";
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					data:params.join('&'),
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(result){
+						if(result&&result.records){
+							var record = result.records;
+							var tmp_date_arr = new Array();
+							var tmp_price_arr = new Array();
+							for(var i=0;i<record.length;i++){
+								console.debug("gotodate index "+ i +":"+record[i].depDate+"  price:"+record[i].ticketPrice);
+								tmp_price_arr.push(record[i].ticketPrice);
+								tmp_date_arr.push(record[i].depDate);
+							}
+							parseLowestPrice(tmp_date_arr,tmp_price_arr,gotodate);
+						}else{
+							console.error("机票最低价获取有误！");
+						}
+					},
+					error:function(){
+							console.error("机票最低价信息获取有误！");
+					}
+				});
 		}
 		//解析构建航班信息
 		function parseFlights(record){
@@ -615,6 +541,7 @@
 							+"\")' class='order-btn ob-orange'>预订</a></td></tr>";
 				}
 				html_ += "</tbody></table></div>";
+				$("#isLoading").addClass("undis");
 				$("#flightsModel").append(html_);
 			}
 		}
