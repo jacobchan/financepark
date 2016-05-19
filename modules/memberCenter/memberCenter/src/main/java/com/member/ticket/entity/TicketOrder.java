@@ -51,6 +51,10 @@ public class TicketOrder implements Domain{
 	@Length(max=32)
 	private String orderNo;//订单号码
 	
+	@Column(name = "note")
+	@Length(max=256)
+	private String note;//备注
+	
 	public String getPayType(){
 		return this.payType;
 	}
@@ -101,8 +105,14 @@ public class TicketOrder implements Domain{
 		this.orderNo = orderNo;
 	}
 	
-	
-	
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -114,6 +124,7 @@ public class TicketOrder implements Domain{
 		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
 		result = prime * result + ((orderTime == null) ? 0 : orderTime.hashCode());
 		result = prime * result + ((orderNo == null) ? 0 : orderNo.hashCode());
+		result = prime * result + ((note == null) ? 0 : note.hashCode());
 		return result;
 	}
 	
@@ -160,6 +171,11 @@ public class TicketOrder implements Domain{
 			if (other.orderNo != null)
 				return false;
 		} else if (!orderNo.equals(other.orderNo))
+			return false;
+		if (note == null) {
+			if (other.note != null)
+				return false;
+		} else if (!note.equals(other.note))
 			return false;
 		return true;
 	}
