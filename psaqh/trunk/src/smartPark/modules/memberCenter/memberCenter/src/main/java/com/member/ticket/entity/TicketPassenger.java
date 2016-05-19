@@ -54,6 +54,18 @@ public class TicketPassenger implements Domain{
 	@Column(name = "input_time")
 	private java.sql.Timestamp inputTime;//时间
 	
+	@Column(name = "ticket_num")
+	@Length(max=32)
+	private String ticket_num;//票号
+	
+	public String getTicket_num() {
+		return ticket_num;
+	}
+
+	public void setTicket_num(String ticket_num) {
+		this.ticket_num = ticket_num;
+	}
+
 	public String getIdentityNum(){
 		return this.identityNum;
 	}
@@ -125,6 +137,7 @@ public class TicketPassenger implements Domain{
 		result = prime * result + ((identityType == null) ? 0 : identityType.hashCode());
 		result = prime * result + ((tel == null) ? 0 : tel.hashCode());
 		result = prime * result + ((inputTime == null) ? 0 : inputTime.hashCode());
+		result = prime * result + ((ticket_num == null) ? 0 : ticket_num.hashCode());
 		return result;
 	}
 	
@@ -176,6 +189,11 @@ public class TicketPassenger implements Domain{
 			if (other.inputTime != null)
 				return false;
 		} else if (!inputTime.equals(other.inputTime))
+			return false;
+		if (ticket_num == null) {
+			if (other.ticket_num != null)
+				return false;
+		} else if (!ticket_num.equals(other.ticket_num))
 			return false;
 		return true;
 	}

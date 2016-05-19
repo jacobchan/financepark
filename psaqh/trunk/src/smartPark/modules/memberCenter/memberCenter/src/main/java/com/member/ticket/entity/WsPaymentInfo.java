@@ -14,6 +14,11 @@ public class WsPaymentInfo {
 	private String param2;
 	private String param3;
 	private String param4;
+	
+	private Float totalTicketPrice;
+	private Float totalPay;
+	private String payTradeNo;
+	
 	public Float getTotalParPrice() {
 		return totalParPrice;
 	}
@@ -91,6 +96,24 @@ public class WsPaymentInfo {
 	}
 	public void setParam4(String param4) {
 		this.param4 = param4;
+	}
+	public Float getTotalTicketPrice() {
+		return totalTicketPrice;
+	}
+	public void setTotalTicketPrice(Float totalTicketPrice) {
+		this.totalTicketPrice = totalTicketPrice;
+	}
+	public Float getTotalPay() {
+		return totalPay;
+	}
+	public void setTotalPay(Float totalPay) {
+		this.totalPay = totalPay;
+	}
+	public String getPayTradeNo() {
+		return payTradeNo;
+	}
+	public void setPayTradeNo(String payTradeNo) {
+		this.payTradeNo = payTradeNo;
 	}
 
 }

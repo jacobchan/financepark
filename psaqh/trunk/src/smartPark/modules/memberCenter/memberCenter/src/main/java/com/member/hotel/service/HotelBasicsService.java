@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.poi.ss.formula.functions.T;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.service.BaseManager;
 
 public interface HotelBasicsService extends BaseManager {
@@ -30,5 +31,7 @@ public interface HotelBasicsService extends BaseManager {
 	 */	
 	public List<JsonNode> getCityCbd(String cityId);
 	
-	public List<JsonNode> searchNearby(String cityId,Double lng,Double lat);                
+	public List<JsonNode> searchNearby(String cityId,Double lng,Double lat);
+	
+	public TempDemo getHotelCaptcha(String phone);
 }

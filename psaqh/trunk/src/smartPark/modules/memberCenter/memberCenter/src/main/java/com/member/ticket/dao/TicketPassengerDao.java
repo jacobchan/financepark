@@ -7,5 +7,9 @@ import com.gsoft.framework.core.dao.Dao;
 import com.member.ticket.entity.TicketPassenger;
 
 public interface TicketPassengerDao extends Dao<TicketPassenger, String>  {
+
+	TicketPassenger findById(String passengerId);
+
+	void update(TicketPassenger ticketPassenger);
 	
 }
