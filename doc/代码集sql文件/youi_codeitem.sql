@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50538
 File Encoding         : 65001
 
-Date: 2016-04-28 15:21:01
+Date: 2016-05-19 18:07:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,6 +35,8 @@ CREATE TABLE `youi_codeitem` (
 -- ----------------------------
 -- Records of youi_codeitem
 -- ----------------------------
+INSERT INTO `youi_codeitem` VALUES ('2c9ba381549840390154997cfc7b0002', '2c9ba381549840390154997cbd950001', '0', '单元', null);
+INSERT INTO `youi_codeitem` VALUES ('2c9ba381549840390154997d2a8b0003', '2c9ba381549840390154997cbd950001', '1', '楼宇', null);
 INSERT INTO `youi_codeitem` VALUES ('2c9dc604391da4c701391dab23d70002', '2c9dc604391da4c701391daaedc80001', '1', '代码集', null);
 INSERT INTO `youi_codeitem` VALUES ('2c9dc604391da4c701391dab42bd0003', '2c9dc604391da4c701391daaedc80001', '2', 'SQL代码集', null);
 INSERT INTO `youi_codeitem` VALUES ('402809cb53365be001533660c94b0001', '40288aad53078875015307c266c3000f', '04', '已取消', null);
@@ -160,9 +162,6 @@ INSERT INTO `youi_codeitem` VALUES ('40288ab553cfaceb0153cfc7db950003', '40288ab
 INSERT INTO `youi_codeitem` VALUES ('40288ab553cfaceb0153cfc82c130004', '40288ab553cfaceb0153cfc693e00001', '03', '合同主体变更', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab553cfaceb0153cfc8759c0005', '40288ab553cfaceb0153cfc693e00001', '04', '客户续约', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab553cfaceb0153cfc8c9f60006', '40288ab553cfaceb0153cfc693e00001', '05', '客户退租', null);
-INSERT INTO `youi_codeitem` VALUES ('40288ab753f378770153f3ac54120002', '40288ab753f378770153f3abff250001', '01', '物业费', null);
-INSERT INTO `youi_codeitem` VALUES ('40288ab753f378770153f3ac7c050003', '40288ab753f378770153f3abff250001', '02', '水费', null);
-INSERT INTO `youi_codeitem` VALUES ('40288ab753f378770153f3ac9a870004', '40288ab753f378770153f3abff250001', '03', '电费', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab753f378770153f3af467a0005', '40288aad5307d0a6015307f882a7001b', '03', '已处理', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab753f378770153f3b1b0d40007', '40288ab753f378770153f3b1679b0006', '01', '申请中', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ab753f378770153f3b1e8910008', '40288ab753f378770153f3b1679b0006', '02', '申请成功', null);
@@ -283,5 +282,3 @@ INSERT INTO `youi_codeitem` VALUES ('ff8080815413dfe70154143c674b0028', '40288aa
 INSERT INTO `youi_codeitem` VALUES ('ff8080815456509c0154565732450001', '40288aaf52fca91d0152fcae28580006', '02', '已售已招', null);
 INSERT INTO `youi_codeitem` VALUES ('ff8080815456509c0154565749c60002', '40288aaf52fca91d0152fcae28580006', '03', '无', null);
 INSERT INTO `youi_codeitem` VALUES ('ff8080815456509c01545658214f0003', '40288ab252f905180152f908e1d30001', '03', '企业入驻', null);
-INSERT INTO `youi_codeitem` VALUES ('2c9ba381549840390154997cfc7b0002', '2c9ba381549840390154997cbd950001', '0', '单元', null);
-INSERT INTO `youi_codeitem` VALUES ('2c9ba381549840390154997d2a8b0003', '2c9ba381549840390154997cbd950001', '1', '楼宇', null);
