@@ -2,18 +2,13 @@ package com.member.ticket.service.impl;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +16,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.framework.esb.annotation.DomainCollection;
@@ -31,6 +25,8 @@ import com.gsoft.framework.util.Dom4jUtils;
 import com.gsoft.framework.util.PasswordUtils;
 import com.gsoft.utils.BizCodeUtil;
 import com.gsoft.utils.HttpGetAndPostUtil;
+import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
+import com.member.ticket.dao.RefundOrderDao;
 import com.member.ticket.dao.TicketOrderDao;
 import com.member.ticket.dao.TicketOrderItemDao;
 import com.member.ticket.dao.TicketPassengerDao;
@@ -39,11 +35,14 @@ import com.member.ticket.entity.AvailableFlightWithPriceAndCommisionRequest;
 import com.member.ticket.entity.CreateOrderByPassengerRequest;
 import com.member.ticket.entity.DailyLowestPrice;
 import com.member.ticket.entity.ModifyAndRefundStipulateVo;
+import com.member.ticket.entity.NotifyVO;
+import com.member.ticket.entity.RefundOrder;
 import com.member.ticket.entity.TicketOrder;
 import com.member.ticket.entity.TicketOrderItem;
 import com.member.ticket.entity.TicketPassenger;
 import com.member.ticket.entity.TicketPassengerRelation;
 import com.member.ticket.entity.WSRefundActionType;
+import com.member.ticket.entity.WSRefundTicketInfo;
 import com.member.ticket.entity.WsAirSegment;
 import com.member.ticket.entity.WsBookPassenger;
 import com.member.ticket.entity.WsBookPnr;
@@ -74,11 +73,21 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 	private String cancel_url;
 	@Value("${agent.test.ticket.stipulate.url}")
 	private String stipulate_url;
+	@Value("${agent.test.ticket.actiontype.url}")
+	private String actionType_url;
+	@Value("${agent.test.ticket.order.pay.url}")
+	private String pay_url;
+	@Value("${agent.ticket.order.refund.url}")
+	private String refund_url;
 	
-	@Value("${agent.notify.url}")
-	private String notifiedUrl;
 	@Value("${ticket.order.number.code}")
 	private String ticketOrderCode;
+	@Value("${agent.ticket.order.payerLoginName}")
+	private String payerLoginName ;
+	@Value("${agent.notify.url}")
+	private String notifiedUrl;
+	@Value("${agent.refund.notify.url}")
+	private String refundNotify_url;
 	
 	private static Integer canclePNR = 0;
 	private static final int PERIOD_TIME = 30;
@@ -91,6 +100,8 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 	private TicketPassengerDao ticketPassengerDao;
 	@Autowired
 	private TicketPassengerRelationDao ticketPassengerRelationDao;
+	@Autowired
+	private RefundOrderDao refundOrderDao;
 //#################################################################################################################################
 	@SuppressWarnings("unchecked")
 	@EsbServiceMapping
@@ -237,8 +248,7 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 	@SuppressWarnings("unchecked")
 	@Override
 	@EsbServiceMapping
-	public String bookTicket(@ServiceParam(name="userId",pubProperty="userId") String userId,
-			@DomainCollection(domainClazz=CreateOrderByPassengerRequest.class) CreateOrderByPassengerRequest conditions) {
+	public String bookTicket(@ServiceParam(name="userId",pubProperty="userId") String userId, CreateOrderByPassengerRequest conditions) {
 		String result = "";
 		TicketOrder ticketOrder = new TicketOrder();
 		TicketOrderItem ticketOrderItem = new TicketOrderItem();
@@ -313,7 +323,7 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 	@EsbServiceMapping
 	public WsPolicyOrder getOrderInfo(@ServiceParam(name="userId",pubProperty="userId") String userId,@ServiceParam(name="orderid") String orderId) {
 		String result = "";
-		Map<String,Object> params = new HashMap();
+		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("orderNo", orderId);
 		params.put("agencyCode", agencyCode);
 		String signString = agencyCode + orderId + safeCode;
@@ -340,7 +350,7 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 	@EsbServiceMapping
 	public String cancelOrder(@ServiceParam(name="userId",pubProperty="userId") String userId,@ServiceParam(name="orderid") String orderId) {
 		String result = "";
-		Map<String,Object> params = new HashMap();
+		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("orderNo", orderId);
 		params.put("agencyCode", agencyCode);
 		params.put("canclePNR", canclePNR);
@@ -363,14 +373,14 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 		}
 
 	}
-//退票政策################################################################################################################################	
+//退票政策##############################################################################################################################	
 	@SuppressWarnings("unchecked")
 	@Override
 	@EsbServiceMapping
 	public ModifyAndRefundStipulateVo getModifyAndRefundStipulate(@ServiceParam(name="airlineCode") String airlineCode, @ServiceParam(name="classCode") String classCode,
 			@ServiceParam(name="depDate") String depDate,@ServiceParam(name="depCode") String depCode,@ServiceParam(name="arrCode") String arrCode) {
 		String result = "";
-		Map<String,Object> params = new HashMap();
+		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("agencyCode", agencyCode);
 		String signString = agencyCode+airlineCode+arrCode+classCode+depCode+depDate+safeCode;
 		String sign = PasswordUtils.md5Password(signString);
@@ -402,13 +412,13 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 	public List<WSRefundActionType> getActionTypeForRefund() {
 		String result = "";
 		List<WSRefundActionType> resultList = new ArrayList<WSRefundActionType>();
-		Map<String,Object> params = new HashMap();
+		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("agencyCode", agencyCode);
 		String signString = agencyCode+safeCode;
 		String sign = PasswordUtils.md5Password(signString);
 		params.put("sign", sign);
 		try {
-			result = HttpGetAndPostUtil.TicketSendPost(create_url, params);
+			result = HttpGetAndPostUtil.TicketSendPost(actionType_url, params);
 			Document document = Dom4jUtils.parseText(result);
 			Element root = document.getRootElement();
 			if ("S".equals(root.selectSingleNode("returnCode").getText())){
@@ -423,6 +433,173 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 		} catch (Exception e) {
 			throw new BusException("取消订单异常："+e.getMessage());
 		}
+	}
+//自动支付接口#########################################################################################################################
+	public String payTo51book(@ServiceParam(name="orderNo") String orderNo) {
+		String result = "";
+		Map<String,Object> params = new HashMap<String,Object>();
+		String payType = "1";
+		params.put("payType", payType);
+		params.put("agencyCode", agencyCode);
+		String signString = agencyCode+orderNo+payType+payerLoginName+safeCode;
+		String sign = PasswordUtils.md5Password(signString);
+		params.put("sign", sign);
+		try {
+			result = HttpGetAndPostUtil.TicketSendPost(pay_url, params);
+			Document document = Dom4jUtils.parseText(result);
+			Element root = document.getRootElement();
+			if ("S".equals(root.selectSingleNode("returnCode").getText())){
+				Element element = root.element("paymentInfo");
+				WsPaymentInfo wsPaymentInfo = parsePaymentInfoXml(element);
+				return "S";
+			}else{
+				return root.elementText("returnMessage");
+			}
+		} catch (Exception e) {
+			throw new BusException("支付51book订单异常："+e.getMessage());
+		}
+	}
+//退款申请############################################################################################################################
+	public String applyPolicyOrderRefund(@ServiceParam(name="liantuoOrderNo") String liantuoOrderNo,
+			@ServiceParam(name="outOrderNo") String outOrderNo,@ServiceParam(name="actionType") String actionType,
+			@ServiceParam(name="refundReason")String refundReason,
+			@DomainCollection(domainClazz=WSRefundTicketInfo.class) List<WSRefundTicketInfo> conditions) {
+		String result = "";
+		RefundOrder refundOrder = new RefundOrder();
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("liantuoOrderNo", liantuoOrderNo);
+		params.put("agencyCode", agencyCode);
+		String signString = actionType +agencyCode+ safeCode;
+		String sign = PasswordUtils.md5Password(signString);
+		params.put("sign", sign);
+		params.put("refundTicketList", conditions);
+		params.put("cancelPnrStatus", "1");//pnr取消状态 1为默认 系统帮忙取消
+		params.put("refundReason", refundReason==null?"":refundReason);
+		params.put("refundNotifiedUrl", refundNotify_url);
+		try {
+			result = HttpGetAndPostUtil.TicketSendPost(refund_url, params);
+			Document document = Dom4jUtils.parseText(result);
+			Element root = document.getRootElement();
+			if ("S".equals(root.selectSingleNode("returnCode").getText())){
+				List<TicketOrderItem> items = ticketOrderItemDao.findByThirdOrderId(liantuoOrderNo);
+				if (items!=null && !items.isEmpty()) {
+					refundOrder.setTicketOrder(items.get(0).getTicketOrder());
+				}
+				refundOrder.setRefundRecord(refundReason);
+				refundOrder.setRefundOrderNo(root.elementText("refundNo"));
+				refundOrder.setRefundOrderType("00");
+				refundOrder.setIsSucess("F");
+				refundOrderDao.save(refundOrder);
+				return "S";
+			}else{
+				return root.elementText("returnMessage");
+			}
+		} catch (Exception e) {
+			throw new BusException("申请退款异常："+e.getMessage());
+		}		
+
+	}
+	
+//下单后的回调函数#######################################################################################################################
+	public String notify(NotifyVO notifyVO) {
+		List<TicketOrderItem> items;
+		switch (Integer.parseInt(notifyVO.getType())) {
+		case 0://拒单
+			items = ticketOrderItemDao.findByThirdOrderId(notifyVO.getSequenceNo());
+			if (items!=null && !items.isEmpty()) {
+				TicketOrderItem ticketOrderItem = items.get(0);
+				TicketOrder ticketOrder = ticketOrderItem.getTicketOrder();
+				ticketOrder.setOrderType("04");
+				ticketOrder.setNote(notifyVO.getReason());
+				ticketOrderDao.update(ticketOrder);
+				return "S";
+//				TicketPassengerRelation ticketPassengerRelation = ticketPassengerRelationDao.findByItemId(ticketOrderItem.getItemId());
+//				TicketPassenger ticketPassenger = ticketPassengerDao.findById(ticketPassengerRelation.getPassengerId());
+			}			
+			break;
+		case 1://成功出票
+			items = ticketOrderItemDao.findByThirdOrderId(notifyVO.getSequenceNo());
+			if (items!=null && !items.isEmpty()) {
+				TicketOrderItem ticketOrderItem = items.get(0);
+				TicketOrder ticketOrder = ticketOrderItem.getTicketOrder();
+				ticketOrder.setOrderType("03");
+				ticketOrderDao.update(ticketOrder);
+				List<TicketPassengerRelation> ticketPassengerRelations = ticketPassengerRelationDao.findByItemId(ticketOrderItem.getItemId());
+				String[] ticket_nums = notifyVO.getTicketNos().split(",");
+				String[] passengers = notifyVO.getPassengerNames().split(",");
+				for (int i = 0; i < ticketPassengerRelations.size(); i++) {
+					TicketPassenger ticketPassenger = ticketPassengerDao.findById(ticketPassengerRelations.get(i).getPassengerId());
+					for (int j = 0; j < ticket_nums.length && j<passengers.length; j++) {
+						if (passengers[j].equals(ticketPassenger.getName())) {
+							ticketPassenger.setTicket_num(ticket_nums[j]);
+							ticketPassengerDao.update(ticketPassenger);
+							break;
+						}
+					}
+				}
+				return "S";
+			}
+			break;
+		case 2://出票失败
+			items = ticketOrderItemDao.findByThirdOrderId(notifyVO.getOrderNo());
+			if (items!=null && !items.isEmpty()) {
+				TicketOrderItem ticketOrderItem = items.get(0);
+				TicketOrder ticketOrder = ticketOrderItem.getTicketOrder();
+				ticketOrder.setOrderType("06");
+				ticketOrderDao.update(ticketOrder);
+				return "S";
+			}
+			break;
+		case 3://预定失败
+			items = ticketOrderItemDao.findByThirdOrderId(notifyVO.getOrderNo());
+			if (items!=null && !items.isEmpty()) {
+				TicketOrderItem ticketOrderItem = items.get(0);
+				TicketOrder ticketOrder = ticketOrderItem.getTicketOrder();
+				ticketOrder.setOrderType("05");
+				ticketOrder.setNote(notifyVO.getContent());
+				ticketOrderDao.update(ticketOrder);
+				return "S";
+			}
+			break;
+		default:
+			break;
+		}
+		
+		return "F";
+	}
+//申请退款后的回调函数#####################################################################################################################
+	public String refundNotify(NotifyVO notifyVO) {
+		RefundOrder refundOrder;
+		switch (Integer.parseInt(notifyVO.getType())) {
+		case 0:
+			refundOrder = refundOrderDao.findByRefundNo(notifyVO.getSequenceNo());
+			if (refundOrder!=null) {
+				refundOrder.setRefundOrderType("02");
+				TicketOrder ticketOrder = refundOrder.getTicketOrder();
+				ticketOrder.setNote(notifyVO.getVenderRemark());
+				ticketOrderDao.update(ticketOrder);
+				refundOrderDao.update(refundOrder);
+				return "S";
+			}			
+			break;
+		case 1:
+			refundOrder = refundOrderDao.findByRefundNo(notifyVO.getSequenceNo());
+			if (refundOrder!=null) {
+				refundOrder.setRefundOrderType("01");
+				refundOrder.setRefundOrderTime(notifyVO.getVenderRefundTime());
+				refundOrder.setRefundAmount(notifyVO.getVenderPayPrice());
+				refundOrder.setFeeAmount(notifyVO.getRefundFee());
+				TicketOrder ticketOrder = refundOrder.getTicketOrder();
+				ticketOrder.setOrderType("08");
+				ticketOrderDao.update(ticketOrder);
+				refundOrderDao.update(refundOrder);
+				return "S";
+			}
+			break;
+		default:
+			break;
+		}
+		return "F";
 	}
 	/***********************************|解析方法|*******************************/
 	private WSRefundActionType parseRefundActionType(Element element) {
@@ -902,7 +1079,7 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 	public static Date getDateAfter(Date d, int day) {  
         Calendar now = Calendar.getInstance();  
         now.setTime(d);  
-        now.set(Calendar.DATE, now.get(Calendar.DATE) + day);  
+        now.set(Calendar.DATE, now.get(Calendar.DATE) + day);
         return now.getTime();  
     }
 

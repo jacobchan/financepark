@@ -17,8 +17,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MessageCenter.service.McMsgdatasManager;
+import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
@@ -31,6 +35,8 @@ import com.member.hotel.entity.HotelOrder;
 import com.member.hotel.entity.HotelOrderConditions;
 import com.member.hotel.entity.HotelOrderItem;
 import com.member.hotel.service.HotelOrderService;
+
+import net.sf.json.JSONObject;
 
 
 @Service("hotelOrderService")
@@ -47,6 +53,8 @@ public class HotelOrderServiceImpl extends BaseManagerImpl implements HotelOrder
 	private HotelOrderDao hotelOrderDao;
 	@Autowired
 	private HotelOrderItemDao hotelOrderItemDao;
+	@Autowired
+	private McMsgdatasManager mcMsgdatasManager;
 
 	@Override
 	public List<JsonNode> getOrderList(String dateandtime) {
@@ -97,9 +105,20 @@ public class HotelOrderServiceImpl extends BaseManagerImpl implements HotelOrder
 	  }
 
 	@EsbServiceMapping
-	public List<JsonNode> postBook(@ServiceParam(name="userId",pubProperty="userId") String userId,HotelOrderConditions hotelOrderConditions) {
+	public List<JsonNode> postBook(@ServiceParam(name="userId",pubProperty="userId") String userId,
+			@ServiceParam(name="captcha") String captcha,HotelOrderConditions hotelOrderConditions) {
 		String result = "";
 		List<JsonNode> resultList = new ArrayList<JsonNode>();
+		//校验验证码
+		TempDemo tempDemo = mcMsgdatasManager.checkPhoneCode(hotelOrderConditions.getMobile(), captcha);
+		if (!tempDemo.isFlag()) {
+			ObjectMapper mapper = new ObjectMapper();  
+	        JsonNode node = mapper.createObjectNode(); 
+	        ((ObjectNode) node).put("flag",tempDemo.isFlag());  
+	        ((ObjectNode) node).put("buff", tempDemo.getBuff());
+	        resultList.add(node);
+	        return resultList;
+		}		
 		HotelOrder hotelOrder = new HotelOrder();
 		HotelOrderItem hotelOrderItem = new HotelOrderItem();
 		Map<String,Object> params = new HashMap();

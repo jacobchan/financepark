@@ -1,17 +1,22 @@
 package com.member.hotel.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.MessageCenter.service.McMsgdatasManager;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
@@ -23,6 +28,9 @@ import com.member.hotel.service.HotelBasicsService;
 @Transactional
 public class HotelBasicsServiceImpl extends BaseManagerImpl implements HotelBasicsService {
 
+	@Autowired
+	private McMsgdatasManager mcMsgdatasManager;
+	
 	@Value("${agent.id}")
 	private String agent_id;
 	@Value("${agent.md}")
@@ -165,6 +173,24 @@ public class HotelBasicsServiceImpl extends BaseManagerImpl implements HotelBasi
 	      e.printStackTrace();
 	    }
 	    return resultList;
+	}
+	//酒店下单获取验证码
+	@EsbServiceMapping
+	public TempDemo getHotelCaptcha(@ServiceParam(name="phone")String phone){
+		TempDemo temp = new TempDemo();
+		Map<String,Object> map = new HashMap<String, Object>();
+		Random random = new Random(new Date().getTime());
+		Long code = Math.abs(random.nextLong() % 999999);
+		String captcha = org.apache.commons.lang.StringUtils.leftPad(code.toString(), 6, '0');
+		map.put("#code", captcha);
+		Boolean success = mcMsgdatasManager.smsSend("0406", map, null, phone);
+		if(success){
+			temp.setFlag(true);
+			temp.setBuff("发送成功");
+		}else{
+			throw new BusException("发送失败");
+		}
+		return temp;
 	}
 
 }
