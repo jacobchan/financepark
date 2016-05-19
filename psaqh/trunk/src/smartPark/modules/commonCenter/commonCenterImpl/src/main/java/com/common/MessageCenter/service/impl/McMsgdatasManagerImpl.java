@@ -128,6 +128,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
 		//
 		// }
 		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		o.setReadStatus("00");
 		if(StringUtils.isEmpty(o.getSendDate())){
 			o.setSendDate(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 		}
@@ -550,7 +551,7 @@ public class McMsgdatasManagerImpl extends BaseManagerImpl implements
     	MemberInformation memberInformation = memberInformationManager.getMemberInformation(userId);
  		String memberPhoneNumber = memberInformation.getMemberPhoneNumber();
  		//添加条件    查询未读状态的信息，00为未读状态
- 		conditions.add(ConditionUtils.getCondition("readStatus",Condition.NOT_EQUALS, "01"));
+ 		conditions.add(ConditionUtils.getCondition("readStatus",Condition.EQUALS, "00"));
     	List<Record> recordList=new ArrayList<Record>();   		
      	List<McMsgdatas> List = this.getMcMsgdatass(conditions, null);
     	Record record = new Record();
