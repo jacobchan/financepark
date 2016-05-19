@@ -129,6 +129,13 @@
 	           				</td>
 	           			</tr>
 	           			<tr>
+	           				<td>验证码：</td>
+	           				<td>
+	           					<input id="captcha" type="text">
+	           					<input id="captchaBtn" value="获取验证码" class="hhf-submit ml30" type="button" onclick="getCaptcha()">
+	           				</td>
+	           			</tr>
+	           			<tr>
 	           				<td>Email：</td>
 	           				<td>
 	           					<input type="text">
@@ -273,6 +280,38 @@
 	function reload(){
 		window.location.href=encodeURI("jd2.html?hid="+$("#hid").val()+"&tm1="+$("#tm1").val()+"&tm2="+$("#tm2").val()+"&rid="+$("#rid").val()+"&pid="+$("#pid").val()); 
 	}
+	//获取验证码
+	function getCaptcha(){
+		if($("#mobile").val()!=null&&$("#mobile").val()!=""){
+			if(!isMobil($("#mobile").val())){
+				$("#mobile").after("<font class='font' color='#FF0000'>*请输入正确的手机号码</font>");
+				return ;
+			}else{
+				params = ['phone=' + $("#mobile").val()];
+				serviceURL = baseUrl+"hotelBasicsService/getHotelCaptcha.json";
+				$.youi.ajaxUtils.ajax({
+					url:serviceURL,
+					data:params.join('&'),
+					jsonp:'data:jsonp',
+					dataType:'jsonp',
+					success:function(result){
+						if(result&&result.record){
+							var temp = result.record;
+							if(temp.flag){
+								return true;
+							}else{
+								alert(temp.buff);
+							}
+						}
+					}
+				});
+			}
+		}else{
+			$("#mobile").after("<font class='font' color='#FF0000'>*手机号码不能为空</font>");
+			return ;
+		}
+		
+	}
 	//判断担保
 	function decideRule(){
 		/* var now = new Date();
@@ -380,17 +419,21 @@
 			$("#mobile").after("<font class='font' color='#FF0000'>*手机号码不能为空</font>");
 			return ;
 		}
+		if($("#captcha").val()==null||$("#captcha").val()==""){
+			$("#captchaBtn").after("<font class='font' color='#FF0000'>*验证码不能为空</font>");
+			return ;
+		}
 		if($("#creditTable").length>0){
 			params = ['hid='+$("#hid").val(),'rid=' + $("#rid").val(),'pid='+$("#pid").val(),
 			              'tm1='+$("#tm1").val(),'tm2='+$("#tm2").val(),'latetime='+$("input:radio:checked").val(),
 			              'rm='+$("#roomNum").text(),'guest='+tmp,'mobile='+$("#mobile").val(),
 			              'pucardno='+$("#pucardno").val(),'puyear='+$("#puyear").text(),'pucode='+$("#pucode").val(),
 			              'pumonth='+$("#pumonth").text(),'puname='+$("#puname").val(),'puidtype='+$("#puidtype").attr("data-val"),
-			              'puidno='+$("#puidno").val()];
+			              'puidno='+$("#puidno").val(),'captcha='+$("#captcha").val()];
 		}else{
 			params = ['hid='+$("#hid").val(),'rid=' + $("#rid").val(),'pid='+$("#pid").val(),
 		              'tm1='+$("#tm1").val(),'tm2='+$("#tm2").val(),'latetime='+$("input:radio:checked").val(),
-		              'rm='+$("#roomNum").text(),'guest='+tmp,'mobile='+$("#mobile").val()];
+		              'rm='+$("#roomNum").text(),'guest='+tmp,'mobile='+$("#mobile").val(),'captcha='+$("#captcha").val()];
 		}
 		serviceURL = baseUrl+"hotelOrderService/postBook.json";
 		$.youi.ajaxUtils.ajax({
@@ -401,7 +444,14 @@
 			success:function(result){
 				if(result&&result.records){
 					var record = result.records;
-					if(record[0].orderid!=0){
+					if("undefined"!= typeof record[0].flag && record[0].flag==false){
+						clearInterval(timer);
+						$("#msg").text(record[0].buff);
+				        $(".toast").show();
+				        pltime=2;
+				        timer=setInterval("closeTanc()",1000);
+						return false;
+					}else if(record[0].orderid!=0){
 						$("#main").empty();
 						var html_ = "";
 						html_ += "<div class='clearfix p30' style='border-bottom:1px dashed #ecebeb;'>";
@@ -414,8 +464,7 @@
 	           			html_ += "<p class='mt30'>订单编号：<span class='ml30'>"+record[0].orderid+"</span></p>";
 	           			html_ += "<p class='mt20'>酒店前台付款：<span class='ml30 c-o f24'>￥"+roomPrice+"</span></p></div>";
 	           			$("#main").append(html_);
-					}
-					else {
+					} else {
 						clearInterval(timer);
 						$("#msg").text("下单失败，所填信息有误");
 				        $(".toast").show();
