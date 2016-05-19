@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50538
 File Encoding         : 65001
 
-Date: 2016-04-28 15:20:52
+Date: 2016-05-19 18:07:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,6 +31,7 @@ CREATE TABLE `youi_codemap` (
 -- ----------------------------
 -- Records of youi_codemap
 -- ----------------------------
+INSERT INTO `youi_codemap` VALUES ('2c9ba381549840390154997cbd950001', 'disRoom', '单元类型', '1', null);
 INSERT INTO `youi_codemap` VALUES ('2c9dc604391da4c701391daaedc80001', 'codemapType', '代码集类型', '1', '');
 INSERT INTO `youi_codemap` VALUES ('40283f8153168c33015316f2fa9c0001', 'payWay', '支付方式', '1', null);
 INSERT INTO `youi_codemap` VALUES ('4028808253bbee0e0153bbf92e470001', 'category', '扩散属性所属分类', '1', null);
@@ -67,7 +68,6 @@ INSERT INTO `youi_codemap` VALUES ('40288ab252f905180152f908e1d30001', 'roomstat
 INSERT INTO `youi_codemap` VALUES ('40288ab2531113db015311211cf40001', 'policyApplyStatus', '政策申请状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab353e461150153e5929da60008', 'seat', '座位', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab553cfaceb0153cfc693e00001', 'enteringType', '入驻申请类型', '1', null);
-INSERT INTO `youi_codemap` VALUES ('40288ab753f378770153f3abff250001', ' sfproName', '物业收费项目 ', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab753f378770153f3b1679b0006', 'applyStatus', '访客申请状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab753f378770153f3b2cfba000a', 'moverec_status', '搬家申请状态', '1', null);
 INSERT INTO `youi_codemap` VALUES ('40288ab753f378770153f3b3f210000f', 'fx_status', '二维码状态', '1', null);
@@ -98,4 +98,3 @@ INSERT INTO `youi_codemap` VALUES ('ff80808152f2fa0a0152f38940d40009', 'bool', '
 INSERT INTO `youi_codemap` VALUES ('ff80808152f2fa0a0152f38b08a7000c', 'merchant_type', '商户类型', '1', null);
 INSERT INTO `youi_codemap` VALUES ('ff8080815413dfe70154143a44b1001d', 'teacherType', '导师类型', '1', null);
 INSERT INTO `youi_codemap` VALUES ('ff8080815413dfe70154143b5ee60024', 'projectType', '创业加速项目类型', '1', null);
-INSERT INTO `youi_codemap` VALUES ('2c9ba381549840390154997cbd950001', 'disRoom', '单元类型', '1', null);
