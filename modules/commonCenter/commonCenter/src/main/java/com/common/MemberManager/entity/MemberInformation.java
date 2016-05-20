@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
@@ -21,12 +21,10 @@ import com.gsoft.framework.security.PrincipalConfig;
  * @version
  * 
  */
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "sp_member_information")
 public class MemberInformation implements Domain,IdUser, IUser,IMemberInfomation{
-	
-	private static final long serialVersionUID = 2177240078237624499L;
-	
 	@Column(name = "MEMBER_BIRTHDATE_")
 	private String memberBirthdate;//出生日期
 
