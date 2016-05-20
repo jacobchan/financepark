@@ -14,11 +14,12 @@
 						removeSrc="esb/web/propertyservicemanagerTsManager/removePropertyservicemanagerTs.json">
 				<youi:fieldLayout labelWidths="120,120">
 					<youi:fieldSelect property="tsStatus"  caption="派工受理状态" convert="ts_status"/>
-					<youi:fieldText property="tsTelephone"  caption="派工人员电话号码"/>
-					<youi:fieldText property="tsName"  caption="派工人员"/>
+					<%-- <youi:fieldText property="tsTelephone"  caption="派工人员电话号码"/> --%>
+					<%-- <youi:fieldText property="tsName"  caption="派工人员"/> --%>
 				</youi:fieldLayout>
 				<youi:button name="agree" caption="接单" icon="edit" active="1"/>
 				<youi:button name="refuse" caption="拒单" icon="edit" active="1"/>
+				<youi:button name="finish" caption="完成" icon="edit" active="1"/>
 				<youi:button name="putfrom" caption="填报维修费用清单" icon="edit" active="1"/>
 				
 				<youi:gridCol property="tsName"  caption="派工人员" width="12%"/>
@@ -117,19 +118,47 @@
 				$elem('form_refuseTs',pageId).form("reset").form('fillRecord',selectedRecord)
 					.form('fillRecord',{tsStatus:'02'}).form('open');
 					
-					/*$.youi.ajaxUtil.ajax({
+					$.youi.ajaxUtil.ajax({
 					url:'/esb/web/propertyservicemanagerTsManager/upTsbyId.json',
 					data:{id:selectedRecord.tsId,code:'01'},
 					success:function(result){	
 						$elem('grid_propertyservicemanagerTs',pageId).grid('pReload');
 						alert("拒单成功!");
 						}
-					});*/
+					});
 				});
 			}else if(tsstatus=="01"){
 				alert("您已接单!");
 			}else if(tsstatus=="03"){
 				alert("已处理!");
+			}else{
+				alert("您已拒单!");
+			}
+		</youi:func>
+		<!-- 派工人员完成订单-->
+		<youi:func name="func_grid_finish">
+			var gridElement = $elem('grid_propertyservicemanagerTs',pageId),
+			selectedRecord = gridElement.grid('getSelectedRecord');
+			var tsstatus = selectedRecord.tsStatus;
+			if(tsstatus=='03'){
+				$.youi.messageUtils.confirm('确认完成?',function(){
+					$elem('form_refuseTs',pageId).form("reset")
+					.form('fillRecord',selectedRecord);
+					//.form('fillRecord',{tsStatus:'02'}).form('open');
+					
+					$.youi.ajaxUtil.ajax({
+					url:'/esb/web/propertyservicemanagerTsManager/upTsStatusbyId.json',
+					data:{id:selectedRecord.tsId},
+					success:function(result){	
+						$elem('grid_propertyservicemanagerTs',pageId).grid('pReload');
+						alert("已完成!");
+						}
+					});
+				});
+			}else if(tsstatus=="01"){
+				alert("您已接单!");
+			}else if(tsstatus=="00"){
+				alert("您未接单!");
 			}else{
 				alert("您已拒单!");
 			}
