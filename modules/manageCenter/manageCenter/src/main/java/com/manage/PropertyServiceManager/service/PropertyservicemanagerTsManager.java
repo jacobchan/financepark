@@ -12,10 +12,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.ConditionCollection;
-import com.gsoft.framework.esb.annotation.EsbServiceMapping;
-import com.gsoft.framework.esb.annotation.OrderCollection;
-import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTs;
 
@@ -109,5 +105,19 @@ public interface PropertyservicemanagerTsManager extends BaseManager{
    	 * @param id 派工id
    	 * @throws BusException
    	 */
-   	public void upTsStatusbyId(@ServiceParam(name="id") String id) throws BusException;
+   	public void upTsStatusbyId(String id) throws BusException;
+	/**
+	 * 根据物业报修ID查询最新一条维修记录
+	 * @param bxId
+	 * @return
+	 * @throws BusException
+	 */
+	public PropertyservicemanagerTs getPropertyservicemanagerTssBybxId(
+			String bxId) throws BusException;
+	/**
+	 * 保存对象
+	 * @param o
+	 * @return
+	 */
+	public PropertyservicemanagerTs savePts(PropertyservicemanagerTs o);
 }
