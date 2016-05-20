@@ -1,19 +1,28 @@
 package com.gsoft.framework.core.web;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.common.EnterpriceTypeManager.service.EtypeEnterprisetypeManager;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
+import com.gsoft.framework.core.orm.Condition;
+import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.security.AccountPrincipal;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.utils.ExportExcel;
+import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.EnterBusinessManager.service.EnterbusinessmanagerRzManager;
 @Controller
 @RequestMapping("/enterprise")
@@ -181,16 +190,21 @@ public class EnterpriseInfoController {
 	 */
 	@RequestMapping(value = "/memberExportExcel.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public void memberExportExcel(HttpServletRequest request, HttpServletResponse response, String rzId){
+		Collection<Condition> condition = new ArrayList<Condition>();
+    	Collection<Order> order = new ArrayList<Order>();
+    	condition.add(ConditionUtils.getCondition("companyId", Condition.EQUALS, rzId));
+		
 		ExportExcel<MemberInformation> mi = new ExportExcel<MemberInformation>();
 		String[] headers = { "图像", "姓名", "联系方式", "描述" };
-		List<MemberInformation> ml = memberInformationManager.getMemberInformations();
+		List<MemberInformation> ml = memberInformationManager.getMemberInformations(condition, order);
+		EnterbusinessmanagerRz r = enterbusinessmanagerRzManager.getEnterbusinessmanagerRz(rzId);
 		try {
           response.setContentType("application/vnd.ms-excel;charset=UTF-8");  
           response.addHeader(  
                   "Content-Disposition",  
-                  "attachment;filename=" + new String(("项目数据查询.xls").getBytes("UTF-8"), "ISO-8859-1"));
+                  "attachment;filename=" + new String(("企业通讯录-"+System.currentTimeMillis()+".xls").getBytes("UTF-8"), "ISO-8859-1"));
           OutputStream os = response.getOutputStream();
-          mi.exportExcel(headers, ml, os);
+          mi.exportExcel(headers, ml, os, r.getRzName()+"通讯录");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
