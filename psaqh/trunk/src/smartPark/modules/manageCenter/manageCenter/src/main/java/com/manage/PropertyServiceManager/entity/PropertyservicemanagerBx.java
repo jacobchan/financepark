@@ -12,6 +12,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Domain;
+import com.gsoft.framework.workflow.entity.WorkflowDomain;
 /**
  * 实体: 物业报修记录
  * @author
@@ -20,7 +21,7 @@ import com.gsoft.framework.core.dataobj.Domain;
  */
 @Entity
 @Table(name = "sp_propertyservicemanager_bx")
-public class PropertyservicemanagerBx implements Domain{
+public class PropertyservicemanagerBx implements Domain,WorkflowDomain{
 	
 	private static final long serialVersionUID = 1200019789396828818L;
 	
@@ -374,5 +375,11 @@ public class PropertyservicemanagerBx implements Domain{
 	
 	public String toString(){
 		return super.toString();
+	}
+
+	@Override
+	public String getBusinessKey() {
+		// TODO Auto-generated method stub
+		return bxId;
 	}
 }

@@ -13,7 +13,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 
 public interface PropertyservicemanagerBxManager extends BaseManager{
@@ -119,5 +118,20 @@ public interface PropertyservicemanagerBxManager extends BaseManager{
 	/**
 	 * 根据主键查询 前台个人中心，保修详情   chenye
 	 */
-	public PropertyservicemanagerBx getBx(String id)  throws BusException;	
+	public PropertyservicemanagerBx getBx(String id)  throws BusException;
+	/**
+	 * 生成物业报修属性值
+	 * @param userId
+	 * @return
+	 * @throws BusException
+	 */
+	public PropertyservicemanagerBx getPsBx(String userId) throws BusException;
+	/**
+	 * 保存物业报修
+	 * @param psBx
+	 * @return
+	 * @throws BusException
+	 */
+	public PropertyservicemanagerBx savaPsBx(PropertyservicemanagerBx psBx)
+			throws BusException;	
 }
