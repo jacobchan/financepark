@@ -8,7 +8,7 @@
 	
 	<repositories>
 		
-		<repository>
+		<repository>  
 			<id>releases</id>
 			<url>${nexus.root}/content/repositories/releases</url>
 		</repository>
@@ -50,6 +50,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<nexus.root>http://120.25.101.206:8081/nexus</nexus.root>
 		<gsoft.version>1.0.4-SNAPSHOT</gsoft.version>
+		<gsoft.framework.version>1.0.0-SNAPSHOT</gsoft.framework.version>
+		<activiti.version>5.13</activiti.version>
 		<maven.build.timestamp.format>yyMMdd</maven.build.timestamp.format>
 	</properties>
 	<!-- 本模块使用的包 -->
@@ -133,7 +135,61 @@
 			<version>${gsoft.version}</version>
 			<scope>compile</scope>
 		</dependency>
+		<!-- 工作流
+		<dependency>
+			<groupId>com.gsoft.framework</groupId>
+			<artifactId>gsoft-framework-workflow</artifactId>
+			<version>${gsoft.version}</version>
+			<scope>compile</scope>
+		</dependency> 
 		
+		<dependency>
+		  <groupId>com.gsoft.framework</groupId>
+		  <artifactId>gsoft-framework-workflowImpl</artifactId>
+		  <version>${gsoft.version}</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.gsoft.framework</groupId>
+		  <artifactId>gsoft-framework-workflowEsbweb</artifactId>
+		  <version>${gsoft.version}</version>
+		</dependency> -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-bpmn-model</artifactId>
+			<version>${activiti.version}</version>
+			<scope>compile</scope> 
+		</dependency>
+		
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-bpmn-converter</artifactId>
+			<version>${activiti.version}</version>
+			<scope>compile</scope> 
+		</dependency> 
+		
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-engine</artifactId>
+			<version>${activiti.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.activiti</groupId> 
+			<artifactId>activiti-spring</artifactId>
+			<version>${activiti.version}</version>
+			<scope>compile</scope>
+		</dependency>
 		
 		
 		<!--代码集  -->
@@ -189,7 +245,7 @@
 			<artifactId>gsoft-esb-weixin</artifactId>
 			<version>${gsoft.version}</version>
 		</dependency>-->
-		
+			
 		<!-- web 容器包 -->
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
@@ -218,6 +274,11 @@
 		<dependency>
 			<groupId>com.gsoft.smartPark</groupId>
 			<artifactId>smartPark-distributionImpl</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.gsoft.smartPark</groupId>
+			<artifactId>smartPark-workflow</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
