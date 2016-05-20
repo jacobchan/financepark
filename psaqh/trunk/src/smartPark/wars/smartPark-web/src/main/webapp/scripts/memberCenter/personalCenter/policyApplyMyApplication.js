@@ -71,7 +71,7 @@ var pageCount=1;
 					html += '	<td>'+ recordList[index].createTime.substring(0,10)+ '</td>'
 					if(recordList[index].policyApplyStatus=="01"){
 						html += '	<td>未办理</td>'
-						html += '	<td><a href="javascript:cancel(\''+recordList[index].policyApplyId+'\');" class="ac-cancle">取消</a></td>'
+						html += '	<td><a href="javascript:cancel(\''+recordList[index].policyApplyId+'\',\''+recordList[index].applyCode+'\');" class="ac-cancle">取消</a></td>'
 					}else if(recordList[index].policyApplyStatus=="02"){
 						html += '	<td>申请成功</td>'
 						html += '	<td></td>'
@@ -103,9 +103,9 @@ var pageCount=1;
 		refreshData(currentIndex,pageSize);
   }
 	// 确认取消弹窗
-	function cancel(id){
+	function cancel(id,applyCode){
 		//alert(aplaypNo);
-		//$(".moverec").html(aplaypNo);//给弹窗插入订单号
+		$(".moverec").html(applyCode);//给弹窗插入订单号
 		$(".moverec")[0].setAttribute("id",id);//给弹窗设置id
 		$(".bg-tanc.m1").show();
 	};
@@ -126,3 +126,6 @@ var pageCount=1;
 	$(".close-toast").click(function(){					
 		$(".toast").hide();		       
 	});	
+	$(".tc-close").click(function(){					
+		$(".bg-tanc.m1").hide();
+	});

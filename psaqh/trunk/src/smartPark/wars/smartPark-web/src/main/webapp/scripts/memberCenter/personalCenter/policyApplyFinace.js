@@ -74,7 +74,7 @@
 					html += '	<td>'+ recordList[index].createTime+ '</td>'
 					if(recordList[index].applayStatus=="01"){
 						html += '	<td>未办理</td>'
-						html += '	<td><a href="javascript:cancel(\''+recordList[index].id+'\');" class="ac-cancle">取消</a></td>'
+						html += '	<td><a href="javascript:cancel(\''+recordList[index].id+'\',\''+recordList[index].applayNo+'\');" class="ac-cancle">取消</a></td>'
 					}else if(recordList[index].applayStatus=="02"){
 						html += '	<td>已完成</td>'
 						html += '	<td></td>'
@@ -116,14 +116,14 @@
 		});
 	}*/
 	// 确认取消弹窗
-	function cancel(id){
+	function cancel(id,aplaypNo){
 		//alert(aplaypNo);
-		//$(".moverec").html(aplaypNo);//给弹窗插入订单号
+		$(".moverec").html(aplaypNo);//给弹窗插入订单号
 		$(".moverec")[0].setAttribute("id",id);//给弹窗设置id
 		$(".bg-tanc.m1").show();
 	};
 	//取消操作
-	$(".hhf-submit.confirm").click(function(){	
+	$(".confirm").click(function(){	
 	    $(".bg-tanc.m1").hide();
 		var id=$(".moverec")[0].getAttribute("id");	
 		var params = [ 'id=' + id ];
@@ -139,3 +139,6 @@
 	$(".close-toast").click(function(){					
 		$(".toast").hide();		       
 	});	
+	$(".tc-close").click(function(){					
+		$(".bg-tanc.m1").hide();
+	});
