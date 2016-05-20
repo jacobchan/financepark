@@ -12,8 +12,8 @@
 		
 			<youi:fieldSelect property="serType"  caption="材料类别" convert="ser_type"/>
 		</youi:fieldLayout>
-		<youi:gridCol property="propertyservicemanagerTs.tsName" caption="维修人" width="10%"/>
-		<youi:gridCol property="propertyservicemanagerTs.tsTelephone" caption="维修人电话" width="15%"/>
+		<%-- <youi:gridCol property="propertyservicemanagerTs.tsName" caption="维修人" width="10%"/> --%>
+		<%-- <youi:gridCol property="propertyservicemanagerTs.tsTelephone" caption="维修人电话" width="15%"/> --%>
 		<youi:gridCol property="propertyservicemanagerTs.propertyservicemanagerBx.bxComp" caption="报修企业" width="20%"/>
 		<youi:gridCol property="serName"  caption="材料名称" width="20%" convert="ser_name"/>
 
