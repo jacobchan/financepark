@@ -87,22 +87,14 @@
 		                <div class="qiye_xc">
 		                    <div class="qiye_xiangce"><span>企业相册</span></div>
 		                    <div class="photo_list">
-			                    <div class="photoedit" id="qiye_photoedit" style="float: left;">
-			                    	<img id="qiyeheadImg">
-									<div class="photo-edit" style="width:220px;height:168px;margin-bottom: 50px;margin-left: 0px;">
-									    <img style="height:168px; vertical-align:middle;border:0 none;" src="<%=request.getContextPath()%>/styles/images/qiye/add.png">
-	                                    <input type="file" id="qiye_xiangce" name="qiye_xiangce" draggable="true" accept=".png,.jpg"/>
-									</div>
-								</div>
-			                    
-		                       <%--  <ul>
-		                            <li>
+			                    <ul>
+		                            <!--<li>
 		                                <div style="position:relative">
 		                                    <div class="overlay"></div>
-		                                    <img id="qiyeheadImg" src="<%=request.getContextPath()%>/common/uploadImage.html?repository=/swfupload&path=${qiyeheadImg }&method=show" width="168" height="168"/>                                        
+		                                    <img src="<%=request.getContextPath()%>/common/uploadImage.html?repository=/swfupload&path=${qiyeheadImg }&method=show" width="168" height="168"/>                                        
 		                                </div>
-		                            </li>
-		                            <li>
+		                            </li>-->
+		                            <li id="qiyeheadImg">
 		                                <div style="position:relative">
 		                                    <img src="<%=request.getContextPath()%>/styles/images/qiye/add.png">
 		                                    <div class="upload_pic">
@@ -110,7 +102,7 @@
 		                                    </div>
 		                                </div>
 		                            </li>
-	                        	</ul> --%>
+	                        	</ul>
 	                         	<div class="photo_btn">
 	                            	<div class="save_btn"><a>保存</a></div>
 	                            	<!-- <div class="quxiao_btn"><a>取消</a></div> -->
@@ -162,8 +154,8 @@
 					//此处用户图片的回显（可根据自己的业务修改）
 					for(var i = 0, len = files.length; i<len; i++){
 						//构造html来更新UI，显示文件的名字（可根据自己的业务修改）
-						var html = '<img id="qiyeheadImg-'+files[i].id+'" src="" width="220" height="168"/>';				
-						$('#qiyeheadImg').after(html);
+						var html = '<li><div style="position:relative"><div class="overlay"></div><img id="qiyeheadImg-'+files[i].id+'" src="" width="168" height="168"/></div></li>';				
+						$('#qiyeheadImg').before(html);
 						!function(i){
 							//此处用户图片的回显（可根据自己的业务修改）
 							previewImage(files[i],function(imgsrc){
