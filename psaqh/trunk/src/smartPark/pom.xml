@@ -111,6 +111,7 @@
 		<module>modules/memberCenter/memberCenter</module>
 		<module>modules/distribution/distribution</module>
 		<module>modules/distribution/distributionImpl</module>
+		<module>modules/workflow/workflowcenter</module>
 	</modules>
 
 	<build>
