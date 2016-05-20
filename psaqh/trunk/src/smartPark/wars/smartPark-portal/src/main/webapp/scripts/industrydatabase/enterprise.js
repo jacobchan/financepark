@@ -2,9 +2,14 @@ var pageSize=12;
 var pageCount=1;
 var serviceURL = baseUrl+"enterbusinessmanagerRzManager/getPagerEnterbusinessmanagerRzs.json";
 var disOne = false;
+var disTwo = false;
+var disThr = false;
+var typeId = "";
+var rzType = "";
+var rzProperty = "";
 function findabouttype(obj){
 	$("#allone").attr("class", "dl-all");
-	var typeId = $("#"+obj).attr("data");
+	typeId = $("#"+obj).attr("data");
 	var params = ['enTypeId.etypeEnterprisetype.enTypeId='+typeId];
 	$.youi.ajaxUtils.ajax({
 		url : serviceURL,
@@ -14,13 +19,36 @@ function findabouttype(obj){
 		async : false,
 		success : function(result){
 			pageCount=Math.ceil(result.totalCount/pageSize);
-			refreshData(1,pageSize,typeId);
+			refreshData(1,pageSize,typeId,rzType,rzProperty);
 			$(".tcdPageCode").createPage({
 				pageCount:pageCount,
 				current:1,
 				backFn:function(p){
 				   	this.pageCount=pageCount;
-				    refreshData(p,pageSize,typeId);
+				    refreshData(p,pageSize,typeId,rzType,rzProperty);
+				}
+			});
+		}
+	});
+}
+function findrztype(obj){
+	$("#alltwo").attr("class", "dl-all");
+	var params = ['rzType='+obj];
+	$.youi.ajaxUtils.ajax({
+		url : serviceURL,
+		data:params.join('&'),
+		jsonp : 'data:jsonp',
+		dataType : 'jsonp',
+		async : false,
+		success : function(result){
+			pageCount=Math.ceil(result.totalCount/pageSize);
+			refreshData(1,pageSize,typeId,rzType,rzProperty);
+			$(".tcdPageCode").createPage({
+				pageCount:pageCount,
+				current:1,
+				backFn:function(p){
+				   	this.pageCount=pageCount;
+				    refreshData(p,pageSize,typeId,rzType,rzProperty);
 				}
 			});
 		}
@@ -62,13 +90,17 @@ function stringCut(str, len) {
         return str;
     }
 }
-function refreshData(pageIndex,pageSize,typeId){
+function refreshData(pageIndex,pageSize,typeId,rzType,rzProperty){
 	$("#tp_7").removeClass("undis");
-	var params = "";
+	var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
 	if(typeId!="" && typeId!=null){
-		params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'enTypeId.etypeEnterprisetype.enTypeId='+typeId];
-	}else{
-		params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+		params.push('enTypeId.etypeEnterprisetype.enTypeId='+typeId);
+	}
+	if(rzType!="" && rzType!=null){
+		params.push('rzType='+rzType);
+	}
+	if(rzProperty!="" && rzProperty!=null){
+		params.push('rzProperty='+rzProperty);
 	}
 	$.youi.ajaxUtils.ajax({
 		url:serviceURL,
@@ -241,6 +273,36 @@ $(function() {
 			disOne = true;
 		}
 	});
+	$("#alltwo").click(function() {
+		if(disTwo){
+			$("#belistedDiv dd").each(function(i){
+				$(this).addClass("active");
+			});
+			$("#alltwo").attr("class", "dl-all");
+			disTwo = false;
+		}else{
+			$("#belistedDiv dd").each(function(i){
+				$(this).removeClass();
+			});
+			$("#alltwo").attr("class", "active dl-all");
+			disTwo = true;
+		}
+	});
+	$("#allthree").click(function() {
+		if(disThr){
+			$("#enterpriseNatureDiv dd").each(function(i){
+				$(this).addClass("active");
+			});
+			$("#allthree").attr("class", "dl-all");
+			disThr = false;
+		}else{
+			$("#enterpriseNatureDiv dd").each(function(i){
+				$(this).removeClass();
+			});
+			$("#allthree").attr("class", "active dl-all");
+			disThr = true;
+		}
+	});
 	//按名称搜索企业
 	$(".yih-btn-search").click(function() {
 		var txtName = $("#rzName").val();
@@ -304,7 +366,7 @@ $(function() {
 				var records = result.records;
 				$("#belistedDiv").empty();
 				for(var i=0; i<records.length; i++){
-					$("#belistedDiv").append("<dd data-id='"+records[i].itemId+"' data-val='"+records[i].itemValue+"'>"+records[i].itemCaption+"</dd>");
+					$("#belistedDiv").append("<dd data-id='"+records[i].itemId+"' data-val='"+records[i].itemValue+"' onclick='javascript:findrztype(\""+records[i].itemValue+"\");'>"+records[i].itemCaption+"</dd>");
 				}
 			}
 		}
