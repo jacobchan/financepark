@@ -154,8 +154,8 @@ $(function() {
 		    					strs = rImages.split(","); //字符分割
 		    					for (var i=0;i<strs.length ;i++ ){
 		    						var src = cenUrl+"common/uploadImage.html?repository=/swfupload&path="+strs[i]+"&method=show";
-		    						var html = '<img id="qiyeheadImg-'+src+'" src="'+src+'" width="220" height="168"/>';				
-		    						$('#qiyeheadImg').after(html);
+		    						var html = '<li><div style="position:relative"><div class="overlay"></div><img id="qiyeheadImg-'+src+'" src="'+src+'" width="168" height="168"/></div></li>';				
+		    						$('#qiyeheadImg').before(html);
 		    					} 
 	    					}
 						}
