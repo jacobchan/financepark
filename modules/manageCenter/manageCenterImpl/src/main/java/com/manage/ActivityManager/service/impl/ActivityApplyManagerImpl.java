@@ -275,10 +275,10 @@ public class ActivityApplyManagerImpl extends BaseManagerImpl implements Activit
      * 申请通过更改状态
      */
     @EsbServiceMapping
-	public void updateApplyStatus(@ServiceParam(name="applyId") String id) throws BusException {
+	public void updateApplyStatus(@ServiceParam(name="applyId") String id,@ServiceParam(name="applyStatus") String status) throws BusException {
 		// TODO Auto-generated method stub
     	ActivityApply aa=activityApplyDao.get(id);
-    	aa.setApplyStatus("01");
+    	aa.setApplyStatus(status);
     	activityApplyDao.save(aa);
 	}
     /**

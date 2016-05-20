@@ -113,7 +113,7 @@ public interface ActivityApplyManager extends BaseManager{
      * @param id
      * @throws BusException
      */
-    public void updateApplyStatus(String id) throws BusException;
+    public void updateApplyStatus(String id,String status) throws BusException;
  
     /**
      * 根据创智慧类型获取活动
