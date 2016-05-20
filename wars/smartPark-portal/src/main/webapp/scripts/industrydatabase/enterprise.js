@@ -1,6 +1,63 @@
 var pageSize=12;
 var pageCount=1;
 var serviceURL = baseUrl+"enterbusinessmanagerRzManager/getPagerEnterbusinessmanagerRzs.json";
+function findabouttype(obj){
+	var typeId = $("#"+obj).attr("data");
+	var params = ['enTypeId.etypeEnterprisetype.enTypeId='+typeId];
+	$.youi.ajaxUtils.ajax({
+		url : serviceURL,
+		data:params.join('&'),
+		jsonp : 'data:jsonp',
+		dataType : 'jsonp',
+		async : false,
+		success : function(result){
+			pageCount=Math.ceil(result.totalCount/pageSize);
+			refreshData(1,pageSize,typeId);
+			$(".tcdPageCode").createPage({
+				pageCount:pageCount,
+				current:1,
+				backFn:function(p){
+				   	this.pageCount=pageCount;
+				    refreshData(p,pageSize,typeId);
+				}
+			});
+		}
+	});
+	//根据企业名称搜索企业信息
+//	$.youi.ajaxUtils.ajax({
+//		url : serviceURL,
+//		data:params.join('&'),
+//		jsonp : 'data:jsonp',
+//		dataType : 'jsonp',
+//		async : false,
+//		success : function(results) {
+//			if (results && results.records) {
+//				$("#enterprise").empty();
+//				var records = results.records;
+//				for(var i=0; i<records.length; i++){
+//					var a = (stringLen(records[i].rzName)>20)?stringCut(records[i].rzName, 20):records[i].rzName;
+//					var memberName = (stringLen(records[i].rzManager.memberName)>3)?stringCut(records[i].rzManager.memberName, 3):records[i].rzManager.memberName;
+//					var enterDiv = '<div class="yqfu-com-centent">'+
+//					'<div class="ycc-con"><img src="../styles/images/yqfw/comp1.png"></div>'+
+//					'<a href="industry.html?id='+records[i].rzId+'"><p class="p-bottom">'+records[i].rzRemark+'</p></a>'+
+//					'<div class="clearfix c-bottom lh24">'+
+//					'<a href="industry.html?id='+records[i].rzId+'"><font class="c-o f14">'+a+'</font></a>'+
+//					'<a href="javascript:;" class="yc-gz fr"><font class="f14">+</font>关注</a>'+
+//					'<div class="clearfix c-p mt10">'+
+//						'<span><img src="../styles/images/yqfw/map.png" class="mr5">武汉市</span>'+
+//						'<span style="margin: 0px 33px;">'+
+//						'<img src="../styles/images/yqfw/user.png" class="mr5">'+memberName+'</span>'+
+//						'<span><img src="../styles/images/yqfw/ticket.png" class="mr5">'+records[i].enTypeId.enTypeName+'</span>'+
+//					'</div></div></div>';
+//					$("#enterprise").append(enterDiv);
+//				}
+//			}else{
+//				$("#enterprise").empty();
+//				$("#enterprise").append('<div class="tc" style="background:#f6f6f6;height:600px;"><img src="../styles/images/none1.png" border="0" style="margin-top:200px;" /></div>');
+//			}
+//		}
+//	});
+}
 //获取字符串长度（中文2，英文1）
 function stringLen(str) {
     var realLength = 0;
@@ -37,9 +94,14 @@ function stringCut(str, len) {
         return str;
     }
 }
-function refreshData(pageIndex,pageSize){
+function refreshData(pageIndex,pageSize,typeId){
 	$("#tp_7").removeClass("undis");
-	var params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+	var params = "";
+	if(typeId!="" && typeId!=null){
+		params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'enTypeId.etypeEnterprisetype.enTypeId='+typeId];
+	}else{
+		params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
+	}
 	$.youi.ajaxUtils.ajax({
 		url:serviceURL,
 		jsonp : 'data:jsonp',
@@ -61,8 +123,11 @@ function _parseRecords(records){
 			if(rzRemark == null){
 				rzRemark = "";
 			}
-			var a = (stringLen(records[i].rzName)>20)?stringCut(records[i].rzName, 20):records[i].rzName;
-			var memberName = "";
+			var rzName = "--";
+			if(records[i].rzName!="" && records[i].rzName!=null){
+				rzName = (stringLen(records[i].rzName)>20)?stringCut(records[i].rzName, 20):records[i].rzName;
+			}
+			var memberName = "--";
 			if(records[i].rzManager!=null){
 				memberName = (stringLen(records[i].rzManager.memberName)>3)?stringCut(records[i].rzManager.memberName, 3):records[i].rzManager.memberName;
 			}
@@ -79,7 +144,7 @@ function _parseRecords(records){
 			'<a href="industry.html?id='+records[i].rzId+'"><div class="ycc-con"><img src="'+ioc+'" width="106" height="106"></div></a>'+
 			'<a href="industry.html?id='+records[i].rzId+'"><p class="p-bottom">'+rzRemark+'</p></a>'+
 			'<div class="clearfix c-bottom lh24">'+
-			'<a href="industry.html?id='+records[i].rzId+'"><font class="c-o f14">'+a+'</font></a>'+
+			'<a href="industry.html?id='+records[i].rzId+'"><font class="c-o f14">'+rzName+'</font></a>'+
 			'<a href="javascript:;" class="yc-gz fr"><font class="f14">+</font>关注</a>'+
 			'<div class="clearfix c-p mt10">'+
 				'<span><img src="../styles/images/yqfw/map.png" class="mr5">杭州市</span>'+
@@ -88,15 +153,16 @@ function _parseRecords(records){
 				'<span><img src="../styles/images/yqfw/ticket.png" class="mr5">'+enTypeName+'</span>'+
 			'</div></div></div>';
 			$("#enterprise").append(enterDiv);
-			
+			$(".tcdPageCode").show();
 		}
 	}else{
+		$("#enterprise").empty();
 		//无记录隐藏分页条
 		$(".tcdPageCode").hide();
 	}
 }
 function findEnterpriseTree(pId,y){
-//	$("#enterpriseTypeDiv").empty();
+	$("#enterdd"+y).attr("data", pId);
 	$.youi.ajaxUtils.ajax({
 		url : baseUrl+'/etypeEnterprisetypeManager/findEnterpriseTypeTree.json',
 		data : ['pId='+pId].join('&'),
@@ -120,7 +186,7 @@ function search(txtName){
 	if(txtName=='' || txtName.length==0){
 		$('#toast_text').html('请输入企业名称！');
 		$(".toast").show();
-        setTimeout('$(".toast").hide();',2000);//1秒=1000
+        setTimeout('$(".toast").hide();',3000);//1秒=1000
 		return false;
 	}
 	//根据企业名称搜索企业信息
@@ -201,7 +267,7 @@ $(function() {
 	var Request = new Object();
 	Request = GetRequest();
 	var rzName = Request['rzName'];
-	if(rzName == null|| rzName == ""){
+	if(rzName == null || rzName == ""){
 		$.youi.ajaxUtils.ajax({
 			url : serviceURL,
 			jsonp : 'data:jsonp',
@@ -235,7 +301,7 @@ $(function() {
 			$("#enterpriseTypeDiv").empty();
 			var record = result.records;
 			for(var i=0; i<record.length; i++){
-				$("#enterpriseTypeDiv").append('<dd id="enterdd'+i+'"></dd>');
+				$("#enterpriseTypeDiv").append('<dd id="enterdd'+i+'" onclick="javascript:findabouttype(this.id);"></dd>');
 				findEnterpriseTree(record[i].enTypeId,i);
 			}
 			$("#enterpriseTypeDiv").append('<div class="sub-bottom"><i class="fa fa-angle-down"></i></div>');
