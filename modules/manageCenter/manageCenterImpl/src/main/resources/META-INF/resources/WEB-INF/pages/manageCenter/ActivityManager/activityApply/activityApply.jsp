@@ -50,6 +50,7 @@ function validateTime(startTime,endTime){
 		</youi:gridCol>
 		<youi:button name="document" caption="文档管理" active="1" icon="edit"></youi:button>
 		<youi:button name="pass" caption="申请通过" active="1" icon="edit"></youi:button>
+		<youi:button name="refuse" caption="拒绝申请" active="1" icon="edit"></youi:button>
 	</youi:grid>
 	
 	<!-- form--活动申请内容列表编辑 -->
@@ -84,7 +85,7 @@ function validateTime(startTime,endTime){
 		if(selectedRecord.applyStatus=="00"){
 			$.youi.ajaxUtil.ajax({
 				url:'esb/web/activityApplyManager/updateApplyStatus.json',
-				data:'applyId='+selectedRecord.applyId,
+				data:'applyId='+selectedRecord.applyId+'&'+'applyStatus=01',
 				success:function(result){
 				gridElement.grid("pReload");
 				}
@@ -94,6 +95,24 @@ function validateTime(startTime,endTime){
 		}
 		
 	</youi:func>
+	
+	<youi:func name="func_grid_refuse">
+		var gridElement=$elem("grid_activityApply",pageId);
+		var selectedRecord=gridElement.grid("getSelectedRecord");
+		if(selectedRecord.applyStatus=="00"){
+			$.youi.ajaxUtil.ajax({
+				url:'esb/web/activityApplyManager/updateApplyStatus.json',
+				data:'applyId='+selectedRecord.applyId+'&'+'applyStatus=03',
+				success:function(result){
+				gridElement.grid("pReload");
+				}
+			})
+		}else{
+			alert("状态为申请中才可以拒绝！")
+		}
+		
+	</youi:func>
+	
 	<youi:func name="form_activityApply_beforeSubmit">//校验
 		var startTime=$elem('record_startTime',pageId).fieldValue();
 		var endTime=$elem('record_endTime',pageId).fieldValue();
