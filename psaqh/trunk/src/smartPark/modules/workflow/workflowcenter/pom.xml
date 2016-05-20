@@ -18,6 +18,7 @@
 	
 	<properties>
 		<gsoft.platform.version>1.0.1-SNAPSHOT</gsoft.platform.version>
+		<activiti.version>5.13</activiti.version>
 	</properties>
 	<!-- 导入项目公共包 -->
 	<dependencyManagement>
@@ -81,6 +82,11 @@
 		  <groupId>com.gsoft.framework</groupId>
 		  <artifactId>gsoft-framework-workflowEsbweb</artifactId>
 		  <version>${gsoft.framework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.gsoft.smartPark</groupId>
+			<artifactId>smartPark-manageCenterImpl</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 		
 <!-- 		
