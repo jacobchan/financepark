@@ -53,29 +53,47 @@ $.youi.ajaxUtils.ajax({
 						
 						$(".submit1").addClass("undis") ;
 						$(".submit2").removeClass("undis") ;
-						var params = ['bxComp='+$("#bxComp").val(),
-										'bxType='+$("#bxType")[0].getAttribute("value"),
-										'bxRemark='+remark,
-										'bxAddress='+add,
-										'bxFujian='+$("#upload").val()];
-						var serviceURL =baseUrl+"propertyservicemanagerBxManager/savePropertyservicemanagerBx.json";
-						
-						//公共方法
+						//获得物业报修属性值
 						$.youi.ajaxUtils.ajax({
-							url:serviceURL,
-							data:params.join('&'),
+							url:baseUrl+"propertyservicemanagerBxManager/getPsBx.json", 
 							jsonp:'data:jsonp',
 							dataType:'jsonp',
-							success:function(results){
-								$(".submit1").removeClass("undis") ;
-								$(".submit2").addClass("undis") ;
-								if(results&&results.record){
+							success:function(result){
+								if(result&&result.record){
+									var record = result.record;
+									var params = ['bxComp='+$("#bxComp").val(),
+													'bxType='+$("#bxType")[0].getAttribute("value"),
+													'bxRemark='+remark,
+													'bxStatus='+record.bxStatus,
+													'bxCode='+record.bxCode,
+													'createUsercaption='+record.member.memberName,
+													'bxAddress='+add,
+													'flowProcessId='+"propertyrepair",
+													'processDefinitionId='+"propertyrepair",
+													'bxFujian='+$("#upload").val()];
+									var serviceURL =cenUrl+"workflow/run/start.json";
+									
+									//公共方法
+									$.youi.ajaxUtils.ajax({
+										url:serviceURL,
+										data:params.join('&'),
+										jsonp:'data:jsonp',
+										dataType:'jsonp',
+										success:function(){
+											$(".submit1").removeClass("undis") ;
+											$(".submit2").addClass("undis") ;
+											$(".bg-tanc.m2").show();
+											countdown(3);
+										},error:function(XMLHttpRequest, textStatus, errorThrown){
+											$(".submit1").removeClass("undis") ;
+											$(".submit2").addClass("undis") ;
+										}
+									});
+									$(".submit1").removeClass("undis") ;
+									$(".submit2").addClass("undis") ;
 									$(".bg-tanc.m2").show();
 									countdown(3);
 								}
-							},error:function(XMLHttpRequest, textStatus, errorThrown){
-								$(".submit1").removeClass("undis") ;
-								$(".submit2").addClass("undis") ;
 							}
 						});
 					}else{
