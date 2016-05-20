@@ -10,11 +10,8 @@
 	</menu>
 	
 	物业报修	
-用户申请	page/myflow.repair/userCreateAndSubmit.html
-物业受理	page/myflow.repair/realestateAccept.html
-物业派工	page/myflow.repair/realestateAssign.html
-维修工接单	page/myflow.repair/maintainerReceive.html
-维修工修理	page/myflow.repair/maintainerProcess.html
-用户评价	page/myflow.repair/userAppraise.html
-维修单详情	page/myflow.repair/repairOrder.html
+物业派工	page/myflow.repair/f_dispatching.html
+维修接单	page/myflow.repair/f_accept.html
+填报维修记录	page/myflow.repair/f_mainRecord.html
+//维修单详情	page/myflow.repair/repairOrder.html
 

@@ -73,7 +73,7 @@ public class RepairOrderManagerImpl extends BaseManagerImpl implements
 	@EsbServiceMapping
 	// (pubConditions={@PubCondition(property="address",pubProperty="userId")})
 	public RepairOrder saveRepairOrder(RepairOrder o) throws BusException {
-		String RepairOrderId = o.getId();
+		String RepairOrderId = o.getFlowId();
 		boolean isUpdate = StringUtils.isNotEmpty(RepairOrderId);
 		List<RepairOrder> list = this.getRepairOrders();// 得到所有的园区
 		if (isUpdate) {// 修改
