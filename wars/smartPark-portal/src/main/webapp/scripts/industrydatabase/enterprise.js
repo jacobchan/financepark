@@ -1,7 +1,9 @@
 var pageSize=12;
 var pageCount=1;
 var serviceURL = baseUrl+"enterbusinessmanagerRzManager/getPagerEnterbusinessmanagerRzs.json";
+var disOne = false;
 function findabouttype(obj){
+	$("#allone").attr("class", "dl-all");
 	var typeId = $("#"+obj).attr("data");
 	var params = ['enTypeId.etypeEnterprisetype.enTypeId='+typeId];
 	$.youi.ajaxUtils.ajax({
@@ -23,40 +25,6 @@ function findabouttype(obj){
 			});
 		}
 	});
-	//根据企业名称搜索企业信息
-//	$.youi.ajaxUtils.ajax({
-//		url : serviceURL,
-//		data:params.join('&'),
-//		jsonp : 'data:jsonp',
-//		dataType : 'jsonp',
-//		async : false,
-//		success : function(results) {
-//			if (results && results.records) {
-//				$("#enterprise").empty();
-//				var records = results.records;
-//				for(var i=0; i<records.length; i++){
-//					var a = (stringLen(records[i].rzName)>20)?stringCut(records[i].rzName, 20):records[i].rzName;
-//					var memberName = (stringLen(records[i].rzManager.memberName)>3)?stringCut(records[i].rzManager.memberName, 3):records[i].rzManager.memberName;
-//					var enterDiv = '<div class="yqfu-com-centent">'+
-//					'<div class="ycc-con"><img src="../styles/images/yqfw/comp1.png"></div>'+
-//					'<a href="industry.html?id='+records[i].rzId+'"><p class="p-bottom">'+records[i].rzRemark+'</p></a>'+
-//					'<div class="clearfix c-bottom lh24">'+
-//					'<a href="industry.html?id='+records[i].rzId+'"><font class="c-o f14">'+a+'</font></a>'+
-//					'<a href="javascript:;" class="yc-gz fr"><font class="f14">+</font>关注</a>'+
-//					'<div class="clearfix c-p mt10">'+
-//						'<span><img src="../styles/images/yqfw/map.png" class="mr5">武汉市</span>'+
-//						'<span style="margin: 0px 33px;">'+
-//						'<img src="../styles/images/yqfw/user.png" class="mr5">'+memberName+'</span>'+
-//						'<span><img src="../styles/images/yqfw/ticket.png" class="mr5">'+records[i].enTypeId.enTypeName+'</span>'+
-//					'</div></div></div>';
-//					$("#enterprise").append(enterDiv);
-//				}
-//			}else{
-//				$("#enterprise").empty();
-//				$("#enterprise").append('<div class="tc" style="background:#f6f6f6;height:600px;"><img src="../styles/images/none1.png" border="0" style="margin-top:200px;" /></div>');
-//			}
-//		}
-//	});
 }
 //获取字符串长度（中文2，英文1）
 function stringLen(str) {
@@ -256,6 +224,21 @@ $(function() {
 			$(this).children("i").removeClass("fa-angle-up").addClass("fa-angle-down");
 			$(this).parents("dl").css("height","44px");
 			$(this).parent(".w860").removeClass("w860-bg");
+		}
+	});
+	$("#allone").click(function() {
+		if(disOne){
+			$("#enterpriseTypeDiv dd").each(function(i){
+				$("#enterdd"+i).attr("class", "active");
+			});
+			$("#allone").attr("class", "dl-all");
+			disOne = false;
+		}else{
+			$("#enterpriseTypeDiv dd").each(function(i){
+				$("#enterdd"+i).removeClass();
+			});
+			$("#allone").attr("class", "active dl-all");
+			disOne = true;
 		}
 	});
 	//按名称搜索企业
