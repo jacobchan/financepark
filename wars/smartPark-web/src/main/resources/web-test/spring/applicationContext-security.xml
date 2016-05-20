@@ -21,9 +21,9 @@
 			http://www.springframework.org/schema/tx 
 			http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 	
-	<bean id="authc" class="com.gsoft.framework.security.DefaultFormAuthenticationFilter">
+	<bean id="authc" class="com.gsoft.framework.security.filter.LoginFormAuthenticationFilter">
 		<!-- 启用校验码控制 -->
-		<property name="vcodeCheck" value="false"></property>
+		<property name="vcodeCheck" value="true"></property>
 		<property name="authParam" value="projectId"></property>
 	</bean>
 	
