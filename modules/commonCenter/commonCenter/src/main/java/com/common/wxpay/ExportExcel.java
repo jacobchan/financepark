@@ -56,16 +56,15 @@ public class ExportExcel<T> {
 		// 生成一个表格
 		HSSFSheet sheet = workbook.createSheet(title);
 		// 设置表格默认列宽度为15个字节
-		sheet.setDefaultColumnWidth((short) 15);
+		sheet.setDefaultColumnWidth((short) 25);
 		// 声明一个画图的顶级管理器
 		HSSFPatriarch patriarch = sheet.createDrawingPatriarch();
 		// 定义注释的大小和位置,详见文档
-		HSSFComment comment = patriarch.createComment(new HSSFClientAnchor(0,
-				0, 0, 0, (short) 4, 2, (short) 6, 5));
+		HSSFComment comment = patriarch.createComment(new HSSFClientAnchor(0, 0, 0, 0, (short) 4, 2, (short) 6, 5));
 		// 设置注释内容
-		comment.setString(new HSSFRichTextString("可以在POI中添加注释！"));
+		comment.setString(new HSSFRichTextString("企业通讯录名单！"));
 		// 设置注释作者，当鼠标移动到单元格上是可以在状态栏中看到该内容.
-		comment.setAuthor("leno");
+		comment.setAuthor("企业公园");
 
 		// 产生表格标题行
 		HSSFRow rowm = sheet.createRow(0);
@@ -77,12 +76,17 @@ public class ExportExcel<T> {
 		cellTiltle.setCellStyle(columnTopStyle);
 		cellTiltle.setCellValue(title);
 
+		// 创建字体  
+        HSSFFont ftRed = workbook.createFont();
+        ftRed.setStrikeout(true);  
+        ftRed.setColor(HSSFColor.RED.index);
 		// 产生表格标题行
-		HSSFRow row = sheet.createRow(1);
+		HSSFRow row = sheet.createRow(2);
 		for (short i = 0; i < headers.length; i++) {
-			HSSFCell cell = row.createCell(i);
-			HSSFRichTextString text = new HSSFRichTextString(headers[i]);
-			cell.setCellValue(text);
+			HSSFCell cell = row.createCell(i, HSSFCell.CELL_TYPE_STRING);
+			HSSFRichTextString textString = new HSSFRichTextString(headers[i]);
+			textString.applyFont(ftRed);
+			cell.setCellValue(textString);
 			cell.setCellStyle(styles);
 		}
 
@@ -92,7 +96,7 @@ public class ExportExcel<T> {
 			HSSFRow rows = sheet.createRow(i + 3);// 创建所需的行数
 			MemberInformation m = (MemberInformation)dataset.get(i);
 			
-			HSSFCell cell0 = rows.createCell(1, HSSFCell.CELL_TYPE_STRING);
+			HSSFCell cell0 = rows.createCell(0, HSSFCell.CELL_TYPE_STRING);
 			if (!"".equals(m.getMemberHeadPortrait()) && m.getMemberHeadPortrait() != null) {
 				cell0.setCellValue(m.getMemberHeadPortrait());
 			}else{
@@ -207,7 +211,7 @@ public class ExportExcel<T> {
 		// 在样式用应用设置的字体;
 		style.setFont(font);
 		// 设置自动换行;
-		style.setWrapText(false);
+		style.setWrapText(true);
 		// 设置水平对齐的样式为居中对齐;
 		style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 		// 设置垂直对齐的样式为居中对齐;
