@@ -29,18 +29,9 @@ import org.apache.poi.hssf.util.HSSFColor;
  */
 @SuppressWarnings({ "deprecation" })
 public class ExportExcel<T> {
-	public void exportExcel(Collection<T> dataset, OutputStream out) {
-		exportExcel("测试POI导出EXCEL文档", null, dataset, out, "yyyy-MM-dd");
-	}
-
 	public void exportExcel(String[] headers, Collection<T> dataset,
-			OutputStream out) {
-		exportExcel("测试POI导出EXCEL文档", headers, dataset, out, "yyyy-MM-dd");
-	}
-
-	public void exportExcel(String[] headers, Collection<T> dataset,
-			OutputStream out, String pattern) {
-		exportExcel("测试POI导出EXCEL文档", headers, dataset, out, pattern);
+			OutputStream out, String title) {
+		exportExcel(headers, dataset, out, "yyyy-MM-dd", title);
 	}
 
 	/**
@@ -58,8 +49,8 @@ public class ExportExcel<T> {
 	 * @param pattern
 	 *            如果有时间数据，设定输出格式。默认为"yyy-MM-dd"
 	 */
-	public void exportExcel(String title, String[] headers,
-			Collection<T> dataset, OutputStream out, String pattern) {
+	public void exportExcel(String[] headers,
+			Collection<T> dataset, OutputStream out, String pattern, String title) {
 		// 声明一个工作薄
 		HSSFWorkbook workbook = new HSSFWorkbook();
 		// 生成一个表格
@@ -90,9 +81,9 @@ public class ExportExcel<T> {
 		HSSFRow row = sheet.createRow(1);
 		for (short i = 0; i < headers.length; i++) {
 			HSSFCell cell = row.createCell(i);
-			cell.setCellStyle(styles);
 			HSSFRichTextString text = new HSSFRichTextString(headers[i]);
 			cell.setCellValue(text);
+			cell.setCellStyle(styles);
 		}
 
 		// 遍历集合数据，产生数据行
@@ -100,19 +91,14 @@ public class ExportExcel<T> {
 		for (int i = 0; i < dataset.size(); i++) {
 			Object[] obj = dataset.toArray();// 遍历每个对象
 			HSSFRow rows = sheet.createRow(i + 3);// 创建所需的行数
-
 			for (int j = 0; j < obj.length; j++) {
-				HSSFCell cell = null; // 设置单元格的数据类型
-				if (j == 0) {
-					cell = rows.createCell(j, HSSFCell.CELL_TYPE_NUMERIC);
-					cell.setCellValue(i + 1);
-				} else {
-					cell = rows.createCell(j, HSSFCell.CELL_TYPE_STRING);
-					if (!"".equals(obj[j]) && obj[j] != null) {
-						cell.setCellValue(obj[j].toString()); // 设置单元格的值
-					}
+				HSSFCell cell = rows.createCell(j, HSSFCell.CELL_TYPE_STRING);
+				if (!"".equals(obj[j]) && obj[j] != null) {
+					cell.setCellValue(obj[j].toString());
+				}else{
+					cell.setCellValue("");
 				}
-				cell.setCellStyle(styles); // 设置单元格样式
+				cell.setCellStyle(styles);
 			}
 		}
 		try {
