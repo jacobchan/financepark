@@ -8,7 +8,7 @@
 					dataType:'jsonp',
 					success:function(result){
 						if(result&&result.record){					
-							window.location.href = proUrl + "zscenter/zs3.html" ;
+							$("#actionUrl").attr("href",proUrl + "zscenter/zs3.html");
 							}else{
 								$(".tc.mt25").text("您不是企业用户,暂时无法申请!");
 					           	$(".toast").show();
@@ -21,7 +21,6 @@
 		}
 		//创业加速申请
 		function jump1(){
-			//$("#actionUrl").attr("href",proUrl + "czh/czh5.html?pUp=1");
 			//点击跳转到申请政策页面      判断是否为企业用户
 			$("#actionUrl").click(function(){			
 				$.youi.ajaxUtils.ajax({
@@ -30,7 +29,7 @@
 					dataType:'jsonp',
 					success:function(result){
 						if(result&&result.record){					
-							window.location.href = proUrl + "czh/czh5.html?pUp=1" ;
+							$("#actionUrl").attr("href",proUrl + "czh/czh5.html?pUp=1");
 							}else{							
 								$(".tc.mt25").text("您不是企业用户,暂时无法申请!");
 					           	$(".toast").show();
@@ -43,7 +42,6 @@
 		}
 		//融资申请
 		function jump2(){
-			//$("#actionUrl").attr("href",proUrl + "czh/czh5.html?pUp=2");
 			$("#actionUrl").click(function(){			
 				$.youi.ajaxUtils.ajax({
 					url:baseUrl+"enterpriseEmployeesManager/getEnterEmployforpage.json", 
@@ -51,7 +49,7 @@
 					dataType:'jsonp',
 					success:function(result){
 						if(result&&result.record){					
-							window.location.href = proUrl + "czh/czh5.html?pUp=2" ;
+							$("#actionUrl").attr("href",proUrl + "czh/czh5.html?pUp=2");
 							}else{							
 								$(".tc.mt25").text("您不是企业用户,暂时无法申请!");
 					           	$(".toast").show();
