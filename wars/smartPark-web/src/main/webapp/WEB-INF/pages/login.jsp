@@ -46,7 +46,7 @@
             </div>
             <div class="yzm">
             	<div class="form_control">
-                    <div class="yz_tex"><input type="text" placeholder="验证码" class="yzm_int" name="kaptcha"></div>
+                    <div class="yz_tex"><input type="text" placeholder="验证码" class="yzm_int" pattern="^[a-zA-Z0-9]{4,4}$" name="verificationCode"  required="required"></div>
                     <span class="error2"></span><!--错误提示-->
                 </div>
                 <div class="yzm_pic"><img src="<%=request.getContextPath()%>/Kaptcha.jpg" style="width: 94px;height: 40px;"id="img_randCode"><a href="javascript:;" onclick="changeRandcode();">换一换</a></div>
