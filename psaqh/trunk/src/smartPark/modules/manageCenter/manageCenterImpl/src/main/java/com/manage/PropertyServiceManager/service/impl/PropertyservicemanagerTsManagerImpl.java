@@ -242,4 +242,24 @@ public class PropertyservicemanagerTsManagerImpl extends BaseManagerImpl impleme
 		PagerRecords pagerRecords = propertyservicemanagerTsDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
+    /**
+   	 * 根据派工id修改保修状态 为已完成
+   	 * @param id 派工id
+   	 * @throws BusException
+   	 */
+    @EsbServiceMapping
+   	public void upTsStatusbyId(@ServiceParam(name="id") String id) throws BusException {
+       	PropertyservicemanagerTs  ts = propertyservicemanagerTsDao.get(id);
+       	PropertyservicemanagerBx bx = ts.getPropertyservicemanagerBx();
+   		if(ts.getTsStatus().equals("03")){//维修人员接单，改状态为已接单，已派工
+   			ts.setTsStatus("04");
+   			ts.setTsTime(DateUtils.getToday("yyyy-MM-dd"));
+   			ts.setUpdateTime(DateUtils.getToday("yyyy-MM-dd"));
+   			bx.setBxStatus("07");
+   			bx.setUpdateTime(DateUtils.getToday("yyyy-MM-dd"));
+   			propertyservicemanagerTsDao.save(ts);
+   			propertyservicemanagerBxDao.save(bx);
+   		}
+   	}
+
 }
