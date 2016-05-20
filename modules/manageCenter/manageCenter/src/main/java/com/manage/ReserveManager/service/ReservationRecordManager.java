@@ -3,7 +3,6 @@
  */
 package com.manage.ReserveManager.service;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,13 +14,6 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.ConditionCollection;
-import com.gsoft.framework.esb.annotation.EsbServiceMapping;
-import com.gsoft.framework.esb.annotation.OrderCollection;
-import com.gsoft.framework.esb.annotation.PubCondition;
-import com.gsoft.framework.esb.annotation.ServiceParam;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerEntrec;
 import com.manage.ReserveManager.entity.ReservationRecord;
 
 public interface ReservationRecordManager extends BaseManager{
@@ -135,5 +127,12 @@ public interface ReservationRecordManager extends BaseManager{
    	 * @throws BusException
    	 */		    
 	public List<Record> getTotalCount(
-		   			Collection<Condition> conditions)  throws BusException;	 
+		   			Collection<Condition> conditions)  throws BusException;
+	/**
+	 * 获取维修工角色
+	 * @param userId
+	 * @return
+	 * @throws BusException
+	 */
+	public List<Record> getRoleRepairer(String userId) throws BusException;	 
 }

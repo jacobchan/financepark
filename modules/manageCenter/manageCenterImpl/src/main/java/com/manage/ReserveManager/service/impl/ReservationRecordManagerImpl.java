@@ -26,7 +26,6 @@ import com.common.purchasingManager.service.PurchasingmanagerCommodityManager;
 import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
 import com.gsoft.common.service.BaseUserManager;
 import com.gsoft.entity.MessageTempCode;
-import com.gsoft.entity.MsgParam;
 import com.gsoft.entity.ReferenceMap;
 import com.gsoft.framework.codemap.entity.Codeitem;
 import com.gsoft.framework.codemap.service.CodeitemManager;
@@ -50,7 +49,6 @@ import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.utils.BizCodeUtil;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.ReserveManager.dao.ReservationRecordDao;
 import com.manage.ReserveManager.entity.ReservationRecord;
 import com.manage.ReserveManager.service.ReservationRecordManager;
@@ -458,6 +456,25 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 	public List<Record> getRoleSaleSer(@ServiceParam(name="userId",pubProperty = "userId") String userId) throws BusException{
 		List<Record> recordList=new ArrayList<Record>();
 		List<User> users = baseUserManager.getUsersByRoles(new String[]{"ROLE_SALE_SER"});
+		if(users !=null&&users.size()>0){
+			for(User user_:users){
+				Record record = new Record();
+				record.put("loginValue", user_.getUserId());
+				record.put("loginName", user_.getUserCaption());
+				recordList.add(record);
+			}
+		}
+		return recordList;
+	}
+	
+	 /**
+     * 获取维修工角色
+     */
+	@Override
+	@EsbServiceMapping
+	public List<Record> getRoleRepairer(@ServiceParam(name="userId",pubProperty = "userId") String userId) throws BusException{
+		List<Record> recordList=new ArrayList<Record>();
+		List<User> users = baseUserManager.getUsersByRoles(new String[]{"ROLE_TENE_OPER"});
 		if(users !=null&&users.size()>0){
 			for(User user_:users){
 				Record record = new Record();
