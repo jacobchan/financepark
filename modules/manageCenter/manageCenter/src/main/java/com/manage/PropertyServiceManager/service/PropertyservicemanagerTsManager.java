@@ -104,4 +104,10 @@ public interface PropertyservicemanagerTsManager extends BaseManager{
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders,
 			String userId) throws BusException;
+    /**
+   	 * 根据派工id修改保修状态 为已完成
+   	 * @param id 派工id
+   	 * @throws BusException
+   	 */
+   	public void upTsStatusbyId(@ServiceParam(name="id") String id) throws BusException;
 }
