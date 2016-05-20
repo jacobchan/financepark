@@ -27,6 +27,7 @@ import com.gsoft.framework.security.agt.entity.User;
 import com.gsoft.framework.util.Assert;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.StringUtils;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerBxDao;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerTsDao;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
@@ -61,6 +62,24 @@ public class PropertyservicemanagerTsManagerImpl extends BaseManagerImpl impleme
     	@ConditionCollection(domainClazz=PropertyservicemanagerTs.class) Collection<Condition> conditions,
     	@OrderCollection Collection<Order> orders) throws BusException{
     	return propertyservicemanagerTsDao.commonQuery(conditions, orders);
+    }
+    /**
+     * 根据物业报修ID查询最新一条维修记录
+     */
+    @Override
+    @EsbServiceMapping
+    public PropertyservicemanagerTs getPropertyservicemanagerTssBybxId(String bxId) throws BusException{
+    	Collection<Condition> conditions = new ArrayList<Condition>();
+		Collection<Order> orders = new ArrayList<Order>();
+		conditions.add(ConditionUtils.getCondition("propertyservicemanagerBx.bxId",
+				Condition.EQUALS, bxId));
+		orders.add(ConditionUtils.getOrder("createTime", false));
+		List<PropertyservicemanagerTs> list = propertyservicemanagerTsDao.commonQuery(conditions, orders);
+		if (list.size() != 0) {
+			return list.get(0);
+		} else {
+			return null;
+		}
     }
     /**
      * 根据主键查询
@@ -130,6 +149,20 @@ public class PropertyservicemanagerTsManagerImpl extends BaseManagerImpl impleme
     			octs.setTsTime(DateUtils.getToday("yyyy-MM-dd"));
     			return propertyservicemanagerTsDao.save(octs);
     		}
+    }
+    
+    /**
+     * 保存对象
+     */
+    @Override
+    @EsbServiceMapping
+    public PropertyservicemanagerTs savePts(PropertyservicemanagerTs o){
+    	String ptsId = o.getTsId();
+    	if(StringUtils.isEmpty(ptsId)){
+    		return propertyservicemanagerTsDao.save(o);
+    	}else{
+    		return propertyservicemanagerTsDao.save(o);
+    	}
     }
 
     /**
