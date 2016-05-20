@@ -65,7 +65,7 @@
 				if(rzId == null){
 					params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
 				}else{
-					params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'enterbusinessmanagerRz.rzId='+rzId];
+					params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'companyId='+rzId];
 				}
 				
 				$.ajax({
