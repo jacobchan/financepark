@@ -30,6 +30,11 @@
 
 	<dependencies>
 		<dependency>
+		  <groupId>com.gsoft.framework</groupId>
+		  <artifactId>gsoft-framework-workflowImpl</artifactId>
+		  <version>${gsoft.framework.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>com.gsoft.smartPark</groupId>
 			<artifactId>smartPark-commonCenterImpl</artifactId>
 			<version>${project.version}</version>
