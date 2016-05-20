@@ -43,7 +43,6 @@ import com.manage.EmployeeManager.dao.EnterpriseEmployeesDao;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTs;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerBxDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerBxManager;
@@ -200,6 +199,35 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
     		}
    		}	
     	return savebx;
+    }
+    //生成物业报修属性值
+    @Override
+    @EsbServiceMapping
+    public PropertyservicemanagerBx getPsBx(@ServiceParam(name="userId",pubProperty="userId") String userId) throws BusException{
+    	MemberInformation mem = memberInformationManager.getMember(userId);
+    	PropertyservicemanagerBx psBx = new PropertyservicemanagerBx();
+    	psBx.setBxCode(BizCodeUtil.getInstance().getBizCodeDate("WYBX"));
+		psBx.setCreateUser(userId);
+		psBx.setBxStatus("00");
+		psBx.setMember(mem);
+		return psBx;
+    }
+    //保存物业报修
+    @Override
+    @EsbServiceMapping
+    public PropertyservicemanagerBx savaPsBx(PropertyservicemanagerBx psBx) throws BusException{
+    	String bxId = psBx.getBxId();
+    	if(StringUtils.isNotEmpty(bxId)){
+    		PropertyservicemanagerBx propertyservicemanagerBx = propertyservicemanagerBxDao.get(bxId);
+    		propertyservicemanagerBx.setUpdateUser(psBx.getUpdateUser());
+    		propertyservicemanagerBx.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		propertyservicemanagerBx.setBxStatus(psBx.getBxStatus());
+    		return propertyservicemanagerBxDao.save(propertyservicemanagerBx);
+    	}else{
+    		psBx.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		psBx.setApplyTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		return propertyservicemanagerBxDao.save(psBx);
+    	}
     }
 
     /**
