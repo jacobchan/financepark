@@ -14,14 +14,14 @@
 			var pageCount=1;
 			var serviceURL = baseUrl+"/memberInformationManager/getPagerEnterMemberInformations.json";
 			$(document).ready(function() {
-				/* $.ajax({
+				$.ajax({
 					url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
 					success:function(result){
 						if(result&&result.record){
 							$("#companyId").val(result.record.companyId);
 						}
 					}
-				}); */
+				});
 		        $(".tc-close").click(function(){
 		            $(".bg-tanc").hide();
 		        });
@@ -54,7 +54,7 @@
 							current:1,
 							backFn:function(p){
 							   	this.pageCount=pageCount;
-							    refreshData(p,pageSize,null);
+							    refreshData(p,pageSize,$("#companyId").val());
 							}
 						});
 					}
@@ -63,12 +63,12 @@
 			  	/* $("#moreul").slideUp("slow"); */
 			  	$(".sidebar-menu-mainul > li:eq(1)").addClass("active");
 			});
-			function refreshData(pageIndex,pageSize,memberName){
+			function refreshData(pageIndex,pageSize,rzId){
 				var params = [];
-				if(memberName == null){
+				if(rzId == null){
 					params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize];
 				}else{
-					params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'memberName='+memberName];
+					params = ['pager:pageIndex='+pageIndex,'pager:pageSize='+pageSize,'enterbusinessmanagerRz.rzId='+rzId];
 				}
 				
 				$.ajax({
@@ -171,10 +171,16 @@
 					url:baseUrl+'/memberInformationManager/removeMemberInformation.json',
 					data:'memberId='+id,
 					success:function(result){
-						alert("删除成功");
+						$('#toast_text').html('删除成功！');
+						$(".toast").show();
+			            setTimeout('$(".toast").hide();',3000);//1秒=1000
 						location.reload();
 					}
 				});
+			}
+			function memberExport(){
+				var url="<%=request.getContextPath()%>/enterprise/memberExportExcel.html?rzId="+$("#companyId").val();
+		        window.open(url);
 			}
 		</script>
 	</head>
@@ -193,7 +199,7 @@
 		                <div class="search_name"><input id="memberName" name="memberName" type="text" placeholder="姓名搜索"></div>
 		                <div class="search_ipt"><a href="javascript:searchByName();">搜索</a></div>
 		                <div class="show_all"><a href="javascript:searchAll();">显示全部</a></div>
-		                <div class="upload_out"><a href="javascript:void(0);">导出到Excel</a></div>
+		                <div class="upload_out"><a href="javascript:memberExport();">导出到Excel</a></div>
 		            </div>
 		            <div class="phone_no">
 		            	<ul id="bookDiv"></ul>
