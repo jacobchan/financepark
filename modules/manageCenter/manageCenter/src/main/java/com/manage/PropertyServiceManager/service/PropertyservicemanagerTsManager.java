@@ -12,6 +12,10 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTs;
 
@@ -90,4 +94,14 @@ public interface PropertyservicemanagerTsManager extends BaseManager{
 	 * @throws BusException
 	 */
 	public PropertyservicemanagerTs getTsBybxId(String bxId)throws BusException;
+	/**
+     * 后台个人派工记录
+     * @param userId
+	 * @return
+	 * @throws BusException
+     */;
+    public PagerRecords getPropertyTs(Pager pager,//分页条件
+			Collection<Condition> conditions,//查询条件
+			Collection<Order> orders,
+			String userId) throws BusException;
 }
