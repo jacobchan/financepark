@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50538
 File Encoding         : 65001
 
-Date: 2016-05-19 18:07:43
+Date: 2016-05-20 10:02:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -186,6 +186,7 @@ INSERT INTO `youi_codeitem` VALUES ('40288ab753f3cd7a0153f3f285010001', '40288aa
 INSERT INTO `youi_codeitem` VALUES ('40288abc531c24bb01531c2a88940002', '40288abc531c24bb01531c2a418c0001', '01', '可用', null);
 INSERT INTO `youi_codeitem` VALUES ('40288abc531c24bb01531c2ab6970003', '40288abc531c24bb01531c2a418c0001', '02', '已预订', null);
 INSERT INTO `youi_codeitem` VALUES ('40288abc531c24bb01531c2ad5960004', '40288abc531c24bb01531c2a418c0001', '03', '不可用', null);
+INSERT INTO `youi_codeitem` VALUES ('40288ac054cbda6a0154cbe1076c0001', '40288aad5307d0a6015307f882a7001b', '04', '已完成', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ac653cad0250153cad520fe0002', '40288ac653cad0250153cad4e2920001', '01', 'Pre-A', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ac653cad0250153cad556b50003', '40288ac653cad0250153cad4e2920001', '02', 'Pre-B', null);
 INSERT INTO `youi_codeitem` VALUES ('40288ac653cad0250153cad695d50004', '40288ac653cad0250153cad4e2920001', '03', 'Pre-C', null);
