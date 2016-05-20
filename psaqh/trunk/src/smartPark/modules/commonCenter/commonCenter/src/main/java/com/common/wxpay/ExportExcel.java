@@ -56,7 +56,7 @@ public class ExportExcel<T> {
 		// 生成一个表格
 		HSSFSheet sheet = workbook.createSheet(title);
 		// 设置表格默认列宽度为15个字节
-		sheet.setDefaultColumnWidth((short) 25);
+		sheet.setDefaultColumnWidth((short)30);
 		// 声明一个画图的顶级管理器
 		HSSFPatriarch patriarch = sheet.createDrawingPatriarch();
 		// 定义注释的大小和位置,详见文档
@@ -78,10 +78,12 @@ public class ExportExcel<T> {
 
 		// 创建字体  
         HSSFFont ftRed = workbook.createFont();
-        ftRed.setStrikeout(true);  
+        ftRed.setStrikeout(true); 
         ftRed.setColor(HSSFColor.RED.index);
+        ftRed.setFontHeightInPoints((short) 12);
 		// 产生表格标题行
 		HSSFRow row = sheet.createRow(2);
+		row.setHeight((short)506);
 		for (short i = 0; i < headers.length; i++) {
 			HSSFCell cell = row.createCell(i, HSSFCell.CELL_TYPE_STRING);
 			HSSFRichTextString textString = new HSSFRichTextString(headers[i]);
@@ -94,6 +96,7 @@ public class ExportExcel<T> {
 		// 将查询出的数据设置到sheet对应的单元格中
 		for (int i = 0; i < dataset.size(); i++) {
 			HSSFRow rows = sheet.createRow(i + 3);// 创建所需的行数
+			rows.setHeight((short)1012);
 			MemberInformation m = (MemberInformation)dataset.get(i);
 			
 			HSSFCell cell0 = rows.createCell(0, HSSFCell.CELL_TYPE_STRING);
