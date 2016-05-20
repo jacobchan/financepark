@@ -48,7 +48,7 @@
 		<br/>
 	</youi:form>
 	<!--  -->
-	<youi:form dialog="true" id="form_upload" caption="流程上传" action="/local/workflow/flowdes/uploadFlow.json">
+	<youi:form dialog="true" id="form_upload" caption="流程上传" action="/local/workflow/flowd/uploadFlow.json">
 		<youi:fieldLayout prefix="upload" columns="1">
 			<youi:fieldHidden property="flowId"  caption="流程ID"/>
 			<youi:fieldLabel width="602" property="flowCaption"  caption="流程描述"/>
