@@ -4,8 +4,8 @@
 package com.manage.PropertyServiceManager.service.impl;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,18 +17,22 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.ServiceParam;
+import com.gsoft.framework.security.agt.dao.UserDao;
+import com.gsoft.framework.security.agt.entity.User;
 import com.gsoft.framework.util.Assert;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
-import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.manage.PropertyServiceManager.dao.PropertyservicemanagerBxDao;
+import com.manage.PropertyServiceManager.dao.PropertyservicemanagerTsDao;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSfpro;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTs;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerBxManager;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerTsManager;
-import com.manage.PropertyServiceManager.dao.PropertyservicemanagerBxDao;
-import com.manage.PropertyServiceManager.dao.PropertyservicemanagerTsDao;
 
 @Service("propertyservicemanagerTsManager")
 @Transactional
@@ -39,6 +43,8 @@ public class PropertyservicemanagerTsManagerImpl extends BaseManagerImpl impleme
 	private PropertyservicemanagerBxDao propertyservicemanagerBxDao;
 	@Autowired
 	private PropertyservicemanagerBxManager propertyservicemanagerBxManager;
+	@Autowired
+	private UserDao userDao;
 	
     /**
      * 查询列表
@@ -218,8 +224,22 @@ public class PropertyservicemanagerTsManagerImpl extends BaseManagerImpl impleme
 			ts = listTs.get(0);	 
 		}
 		return ts;		
+	}  
+    /**
+     * 后台个人派工记录
+     * @param userId
+	 * @return
+	 * @throws BusException
+     */
+    @EsbServiceMapping
+    public PagerRecords getPropertyTs(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PropertyservicemanagerTs.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders,
+			@ServiceParam(name="userId",pubProperty="userId") String userId) throws BusException{
+    	User u=userDao.get(userId);
+    	String name=u.getLoginName();
+    	conditions.add(ConditionUtils.getCondition("tsName",Condition.EQUALS, name));
+		PagerRecords pagerRecords = propertyservicemanagerTsDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
 	}
-
-
-    
 }
