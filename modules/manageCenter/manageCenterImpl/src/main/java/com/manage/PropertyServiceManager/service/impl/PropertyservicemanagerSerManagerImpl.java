@@ -22,6 +22,8 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.security.agt.dao.UserDao;
+import com.gsoft.framework.security.agt.entity.User;
 import com.gsoft.framework.util.Assert;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
@@ -47,6 +49,8 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
 	private PropertyservicemanagerBxDao propertyservicemanagerBxDao;
 	@Autowired
 	private PropertyservicemanagerTsManager propertyservicemanagerTsManager;
+	@Autowired
+	private UserDao userDao;
     /**
      * 查询列表
      */
@@ -255,5 +259,21 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
     		return null;
     	}
     }
-    
+    /**
+     * 后台个人维修记录
+     * @param userId
+	 * @return
+	 * @throws BusException
+     */
+    @EsbServiceMapping
+    public PagerRecords getPropertySer(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PropertyservicemanagerSer.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders,
+			@ServiceParam(name="userId",pubProperty="userId") String userId) throws BusException{
+    	User u=userDao.get(userId);
+    	String name=u.getLoginName();
+    	conditions.add(ConditionUtils.getCondition("propertyservicemanagerTs.tsName",Condition.EQUALS, name));
+		PagerRecords pagerRecords = propertyservicemanagerSerDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
 }
