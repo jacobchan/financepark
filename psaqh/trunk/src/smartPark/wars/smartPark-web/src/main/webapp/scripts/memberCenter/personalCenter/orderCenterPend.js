@@ -77,6 +77,46 @@ var pageSize=10;
 			}
 		});
 	};
+	function repair(bxId){
+		if(bxId != null){
+			var sURL =baseUrl+"propertyservicemanagerBxManager/getPropertyservicemanagerBx.json";
+			//公共方法
+			$.youi.ajaxUtils.ajax({
+				url:sURL,
+				data:{bxId:bxId},
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					if(result && result.record){
+						var record = result.record;
+						var bxCode = record.bxCode;
+						var params = ['params.flowProcessId='+"propertyrepair",
+						              'params.bxStatus='+"04",
+						              'params.bxCode='+bxCode];
+						var serviceURL =cenUrl+"workflow/run/getPagerTasks.json";
+						$.youi.ajaxUtils.ajax({
+							url:serviceURL,
+							data:params.join('&'),
+							success:function(results){
+								if(results&&results.records){
+									var record = results.records;
+									var length = record.length;
+									if(length == 0){
+										alert("已重修或已支付，不能重修！");
+									}else{
+										var taskId = record[0].id;
+										$("#taskId").val(taskId);
+										$(".bg-tanc.m3").show();
+									}
+								}
+							}
+						});
+					}
+				}
+			});
+			
+		}
+	};
 	//加载数据
 	function loadData(){	
 		//分页页码显示
@@ -128,10 +168,17 @@ var pageSize=10;
 				var status = "";
 				var button = "";
 				if(record[i].userorderStatus=='01'){
-					var userorderCode = record[i].userorderCode;
 					//status = "待付款";	
-					button = "<a href='javascript:void(0);' onclick='goPay(\""+userorderCode+
-					"\");'>付款</a><span class='f12 ml5 mr5'>|</span><a href='#' onclick='cancelStatus(this)'>取消</a>";
+					var userorderCode = record[i].userorderCode;
+					var bxId = record[i].bxId;
+					if(record[i].genreId.genreCode == '0601'){
+						button = "<a href='javascript:void(0);' onclick='repair(\""+bxId+
+						"\");'>重修</a><span class='f12 ml5 mr5'>|</span><a href='javascript:void(0);' onclick='goPay(\""+userorderCode+
+						"\");'>付款</a><span class='f12 ml5 mr5'>|</span><a href='#' onclick='cancelStatus(this)'>取消</a>";
+					}else{
+						button = "<a href='javascript:void(0);' onclick='goPay(\""+userorderCode+
+						"\");'>付款</a><span class='f12 ml5 mr5'>|</span><a href='#' onclick='cancelStatus(this)'>取消</a>";
+					}
 				}else if(record[i].userorderStatus=='02'){
 					//status = "已付款";
 					button = "<font color='green'>已付款</font><span class='f12 ml5 mr5'>|</span><a href='#'  onclick='comment(\""+record[i].userorderId+"\",\""+record[i].genreId.genreCode+"\")'>评价</a>";
@@ -178,19 +225,36 @@ var pageSize=10;
 	//点击确认取消预约
 	$(function(){
 		$(".hhf-submit.confirm").click(function(){
-			    $(".bg-tanc.m1").hide();
-				var id=$(".moverec")[0].getAttribute("id");	
-			 	$.ajax({
-			 		url:baseUrl+'/ordermanagerUserorderManager/cancelStatus.json',
-					data:'id='+id,
-					success:function(result){
-						if(result&&result.record){
-							close("取消成功!");													
-						}
+		    $(".bg-tanc.m1").hide();
+			var id=$(".moverec")[0].getAttribute("id");	
+		 	$.ajax({
+		 		url:baseUrl+'/ordermanagerUserorderManager/cancelStatus.json',
+				data:'id='+id,
+				success:function(result){
+					if(result&&result.record){
+						close("取消成功!");													
 					}
-				});
+				}
 			});
 		});
+		
+		$(".hhf-submit.repair").click(function(){
+		    $(".bg-tanc.m3").hide();
+		    var taskId = $("#taskId").val();
+		    var flowSuggestCx = $("#flowSuggestCx").val();
+		    var params = ['taskId='+taskId,
+		                  'flowSuggestCx='+flowSuggestCx,
+							'bxStatus='+"01",
+							'repair='+"0"];
+		 	$.ajax({
+		 		url:cenUrl+'workflow/run/completeTask.json',
+		 		data:params.join('&'),
+				success:function(result){
+					close("申请重修成功!");
+				}
+			});
+		});
+	});
 	$(".tc-close").click(function(){	
 	$(".bg-tanc.m1").hide();
 	});

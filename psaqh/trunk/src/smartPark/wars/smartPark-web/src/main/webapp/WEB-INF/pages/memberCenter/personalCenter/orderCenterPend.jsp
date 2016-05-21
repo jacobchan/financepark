@@ -73,6 +73,18 @@
 			</div>
 		</div>
 	</div>
+	<div class="bg-tanc m3">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<input type="hidden" value="" id="taskId"/>
+			<div class="w70 tc mt40" style="margin-left:15%">
+				<!-- <p style="margin-top: 10px;">订单编号：<span class="fkcodes" id="orderCode_repair"></span></p> -->
+				<p style="margin-top: 10px;">重修备注：</p>
+				<textarea id="flowSuggestCx" rows="5" cols="50"></textarea>
+				<input value="确定" class="hhf-submit repair" style="height:36px;margin-top: 10px;" type="button">
+			</div>
+		</div>
+	</div>
 	<!--***弹窗 ****************************************-->	
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 
