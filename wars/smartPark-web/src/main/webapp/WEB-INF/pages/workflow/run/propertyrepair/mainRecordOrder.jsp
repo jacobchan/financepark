@@ -25,7 +25,7 @@
 	
 	<!--**********************************页面函数Start********************************-->
 	<!-- 填报维修费用清单 -->
-		<youi:func name="func_grid_putfrom">
+		<youi:func name="func_form_putfrom">
 			var bxCode =  $elem('record_bxCode',pageId).fieldValue();
 			var subpageElement = $elem('subpage_addSer',pageId);
 			subpageElement.subpage('open',{bxCode:bxCode});
