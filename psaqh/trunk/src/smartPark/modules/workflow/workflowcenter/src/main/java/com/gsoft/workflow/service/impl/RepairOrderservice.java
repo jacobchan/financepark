@@ -1,5 +1,7 @@
 package com.gsoft.workflow.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -11,9 +13,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.service.MemberInformationManager;
+import com.common.OrderManager.entity.OrdermanagerOrderprojecttypeValue;
+import com.common.OrderManager.entity.OrdermanagerUserorder;
+import com.common.OrderManager.service.OrdermanagerOrderprojecttypeValueManager;
+import com.common.OrderManager.service.OrdermanagerUserorderManager;
+import com.common.purchasingManager.entity.PurchasingmanagerGenre;
+import com.common.purchasingManager.entity.PurchasingmanagerGenreProperty;
+import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
+import com.common.purchasingManager.service.PurchasingmanagerGenrePropertyManager;
 import com.gsoft.framework.core.exception.BusException;
+import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.security.agt.entity.User;
 import com.gsoft.framework.security.agt.service.UserManager;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.PropertyUtils;
 import com.gsoft.framework.workflow.entity.WorkflowDomain;
@@ -35,6 +48,16 @@ public class RepairOrderservice implements AccountFlowBusinessService{
 	PropertyservicemanagerBxManager propertyservicemanagerBxManager;
 	@Autowired
 	PropertyservicemanagerTsManager propertyservicemanagerTsManager;
+	@Autowired
+	private OrdermanagerUserorderManager ordermanagerUserorderManager;
+	@Autowired
+	private PurchasingmanagerGenreManager	purchasingmanagerGenreManager;
+	@Autowired
+	private PurchasingmanagerGenrePropertyManager purchasingmanagerGenrePropertyManager;
+	@Autowired
+	private OrdermanagerOrderprojecttypeValueManager ordermanagerOrderprojecttypeValueManager;
+	@Autowired
+	private MemberInformationManager memberInformationManager;
 	@Autowired
 	UserManager userManager;
 
@@ -72,6 +95,7 @@ public class RepairOrderservice implements AccountFlowBusinessService{
 		psbx.setBxCode(bxCode);
 		psbx.setCreateUser(userId);
 		psbx.setBxStatus(bxStatus);
+		psbx.setMemberId(userId);
 		psbx = propertyservicemanagerBxManager.savaPsBx(psbx);
 			
 		RepairOrder repairOrder = new RepairOrder();
@@ -112,23 +136,28 @@ public class RepairOrderservice implements AccountFlowBusinessService{
 	@Override
 	public void updateBusiness(String serviceName, ProcessInstance processinstance,
 			Task task, Map<String, Object> map) {
-		String bxType = (String) PropertyUtils.getSimplePropertyValue(map, "bxType");
-		String bxRemark = (String) PropertyUtils.getSimplePropertyValue(map, "bxRemark");
-		String bxAddress = (String) PropertyUtils.getSimplePropertyValue(map, "bxAddress");
-		String bxCode = (String) PropertyUtils.getSimplePropertyValue(map, "bxCode");
+//		String bxType = (String) PropertyUtils.getSimplePropertyValue(map, "bxType");
+//		String bxRemark = (String) PropertyUtils.getSimplePropertyValue(map, "bxRemark");
+//		String bxAddress = (String) PropertyUtils.getSimplePropertyValue(map, "bxAddress");
+//		String bxCode = (String) PropertyUtils.getSimplePropertyValue(map, "bxCode");
 		String bxStatus = (String) PropertyUtils.getSimplePropertyValue(map, "bxStatus");
 		String flowProcessId = (String) PropertyUtils.getSimplePropertyValue(map, "flowProcessId");
 		
 		Object object = SecurityUtils.getSubject().getPrincipal();
 		String userId = "";
 		String userName = "";
-		if(object instanceof User){
+		if(object instanceof MemberInformation){
+			MemberInformation mem = (MemberInformation) object;
+			userName = mem.getMemberName();
+			userId = mem.getMemberId();
+		}else if(object instanceof User){
 			User user = (User)object;
-			userName= user.getUserCaption();
+			userName = user.getUserCaption();
 			userId = user.getUserId();
 		}else{
 			throw new BusException("用户不存在或会话已失效！");
 		}
+		
 		String key = task.getTaskDefinitionKey();
 		if(key!=null&&!key.equals("")){
 			RepairOrder repairOrder = new RepairOrder();
@@ -195,11 +224,65 @@ public class RepairOrderservice implements AccountFlowBusinessService{
 				repairOrder.setFlowProcessId(flowProcessId);
 				
 			}else if(key.equals("mainRecord")){//待填报维修记录
-				psbx.setBxStatus("04");//已完工
-				psbx.setUpdateUser(userId);
-				propertyservicemanagerBxManager.savaPsBx(psbx);
-				repairOrder.setFlowType("04");
-				
+				PropertyservicemanagerTs psts = propertyservicemanagerTsManager.getPropertyservicemanagerTssBybxId(bxId);
+				if("03".equals(psts.getTsStatus())){
+					psbx.setBxStatus("04");//已完工
+					psbx.setUpdateUser(userId);
+					propertyservicemanagerBxManager.savaPsBx(psbx);
+					repairOrder.setFlowType("04");
+					
+					OrdermanagerUserorder order = new OrdermanagerUserorder();
+				     
+	        		//查询商品类别
+	        		Collection<Condition> condition =  new ArrayList<Condition>();
+	        		condition.add(ConditionUtils.getCondition("genreCode", Condition.EQUALS,"0601"));
+	        		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenres(condition, null).get(0);
+	        		
+	        		order.setGenreId(pg);
+	        		order.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("BXOD"));
+	        		order.setUserorderStatus("01");//01-未支付
+	        		order.setCreateUser(userId);
+	        		order.setBxId(bxId);
+	        		order.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+	        		order.setUpdateUser(userId);
+	        		order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+	        		MemberInformation mem = memberInformationManager.getMember(psbx.getMemberId());
+	        		order.setUserorderBuyUser(mem.getMemberName());//购买人姓名
+	        		order.setMemberId(psbx.getMemberId());//购买人id
+	        		order.setUserorderProject("物业报修");//购买项目
+	        		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+	        		order.setUserorderAmount(psbx.getBxAmount());//购买金额
+	        		OrdermanagerUserorder saveorder = 	ordermanagerUserorderManager.saveOrdermanagerUserorder(order);
+	        		if(saveorder!=null){
+		        		//保存订单扩展属性列表
+		        		Collection<Condition> purcondition =  new ArrayList<Condition>();
+		        		purcondition.add(ConditionUtils.getCondition("purchasingmanagerGenre.genreId", Condition.EQUALS,pg.getGenreId()));
+		        		List<PurchasingmanagerGenreProperty> genrePropertyList = purchasingmanagerGenrePropertyManager.getPurchasingmanagerGenrePropertys(purcondition,null);
+		        		if(genrePropertyList.size()>0){
+		    	    		for(PurchasingmanagerGenreProperty genreProperty:genrePropertyList){//保存订单扩展项信息
+		    	    			OrdermanagerOrderprojecttypeValue orderExtendValue = new OrdermanagerOrderprojecttypeValue();
+		    	    			orderExtendValue.setOrdermanagerUserorder(saveorder);
+		    	    			orderExtendValue.setGenrePropertyId(genreProperty);
+		    	    			if("orderBxId".equals(genreProperty.getGenrePropertyFieldName())){
+		    	    				orderExtendValue.setOrderprojecttypeValueFieldValue(bxId);
+		    	    			}
+		    	    			ordermanagerOrderprojecttypeValueManager.saveOrdermanagerOrderprojecttypeValue(orderExtendValue);
+		    	    		}
+		        		}
+	        		}
+				}else{
+					throw new BusException("请先填写报修费用清单！");
+				}
+			} if(key.equals("repairOrPay")){//重修或者支付
+				String repair = (String) PropertyUtils.getSimplePropertyValue(map, "repair");
+				if("0".equals(repair)){
+					psbx.setBxStatus("01");//待派工
+					psbx.setUpdateUser(userId);
+					propertyservicemanagerBxManager.savaPsBx(psbx);
+					repairOrder.setFlowType("01");
+				}else{
+					
+				}
 			}
 			repairOrder.setPropertyservicemanagerBx(psbx);
 			repairOrder.setCreateUser(userId);
