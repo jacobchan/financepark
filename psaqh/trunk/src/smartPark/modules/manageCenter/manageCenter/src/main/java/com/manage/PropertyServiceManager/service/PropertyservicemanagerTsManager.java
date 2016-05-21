@@ -120,4 +120,11 @@ public interface PropertyservicemanagerTsManager extends BaseManager{
 	 * @return
 	 */
 	public PropertyservicemanagerTs savePts(PropertyservicemanagerTs o);
+	/**
+	 * 根据物业报修编号查询最新一条维修记录
+	 * @param bxCode
+	 * @return
+	 * @throws BusException
+	 */
+	public PropertyservicemanagerTs getPsTsBybxCode(String bxCode) throws BusException;
 }
