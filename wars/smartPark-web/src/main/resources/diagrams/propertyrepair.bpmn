@@ -30,17 +30,15 @@
     <sequenceFlow id="flow10" sourceRef="exclusivegateway3" targetRef="dispatching">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${repair=='0'}]]></conditionExpression>
     </sequenceFlow>
-    <userTask id="pay" name="支付"></userTask>
-    <sequenceFlow id="flow11" sourceRef="exclusivegateway3" targetRef="pay">
+    <sequenceFlow id="flow11" sourceRef="exclusivegateway3" targetRef="evaluate">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${repair=='1'}]]></conditionExpression>
     </sequenceFlow>
     <userTask id="evaluate" name="评价"></userTask>
-    <sequenceFlow id="flow12" sourceRef="pay" targetRef="evaluate"></sequenceFlow>
     <endEvent id="endevent2" name="End"></endEvent>
     <sequenceFlow id="flow13" sourceRef="evaluate" targetRef="endevent2"></sequenceFlow>
   </process>
-  <bpmndi:BPMNDiagram id="BPMNDiagram_propertyRepair">
-    <bpmndi:BPMNPlane bpmnElement="propertyRepair" id="BPMNPlane_propertyRepair">
+  <bpmndi:BPMNDiagram id="BPMNDiagram_propertyrepair">
+    <bpmndi:BPMNPlane bpmnElement="propertyrepair" id="BPMNPlane_propertyrepair">
       <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
         <omgdc:Bounds height="35.0" width="35.0" x="60.0" y="480.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
@@ -68,11 +66,8 @@
       <bpmndi:BPMNShape bpmnElement="exclusivegateway3" id="BPMNShape_exclusivegateway3">
         <omgdc:Bounds height="40.0" width="40.0" x="520.0" y="107.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="pay" id="BPMNShape_pay">
-        <omgdc:Bounds height="55.0" width="105.0" x="650.0" y="100.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="evaluate" id="BPMNShape_evaluate">
-        <omgdc:Bounds height="55.0" width="105.0" x="650.0" y="240.0"></omgdc:Bounds>
+        <omgdc:Bounds height="55.0" width="105.0" x="650.0" y="100.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="endevent2" id="BPMNShape_endevent2">
         <omgdc:Bounds height="35.0" width="35.0" x="685.0" y="372.0"></omgdc:Bounds>
@@ -124,12 +119,8 @@
         <omgdi:waypoint x="560.0" y="127.0"></omgdi:waypoint>
         <omgdi:waypoint x="650.0" y="127.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow12" id="BPMNEdge_flow12">
-        <omgdi:waypoint x="702.0" y="155.0"></omgdi:waypoint>
-        <omgdi:waypoint x="702.0" y="240.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow13" id="BPMNEdge_flow13">
-        <omgdi:waypoint x="702.0" y="295.0"></omgdi:waypoint>
+        <omgdi:waypoint x="702.0" y="155.0"></omgdi:waypoint>
         <omgdi:waypoint x="702.0" y="372.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
