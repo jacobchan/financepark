@@ -34,9 +34,9 @@ import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTs;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerBxDao;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerSerDao;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerTsDao;
+import com.manage.PropertyServiceManager.service.PropertyservicemanagerBxManager;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerSerManager;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerTsManager;
-import com.mysql.fabric.xmlrpc.base.Array;
 
 @Service("propertyservicemanagerSerManager")
 @Transactional
@@ -47,6 +47,8 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
 	private PropertyservicemanagerTsDao propertyservicemanagerTsDao;
 	@Autowired
 	private PropertyservicemanagerBxDao propertyservicemanagerBxDao;
+	@Autowired
+	private PropertyservicemanagerBxManager propertyservicemanagerBxManager;
 	@Autowired
 	private PropertyservicemanagerTsManager propertyservicemanagerTsManager;
 	@Autowired
@@ -79,6 +81,21 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
 	public PagerRecords getPagerPropertyservicemanagerSers(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=PropertyservicemanagerSer.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
+		PagerRecords pagerRecords = propertyservicemanagerSerDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	}
+	/**
+	 * 根据报修编号查询最近一次的维修费用清单
+	 */
+	@Override
+	@EsbServiceMapping
+	public PagerRecords getPagerPsSers(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PropertyservicemanagerSer.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders,
+			@ServiceParam(name="bxCode") String bxCode)  throws BusException{
+		PropertyservicemanagerBx psbx = propertyservicemanagerBxDao.getObjectByUniqueProperty("bxCode", bxCode);
+		PropertyservicemanagerTs psts = propertyservicemanagerTsManager.getPropertyservicemanagerTssBybxId(psbx.getBxId());
+		conditions.add(ConditionUtils.getCondition("propertyservicemanagerTs.tsId", Condition.EQUALS, psts.getTsId()));
 		PagerRecords pagerRecords = propertyservicemanagerSerDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
@@ -184,19 +201,19 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
 
     /**
 	 * 批量新增维修费用清单
-	 * @param tsId 派工ID
+	 * @param bxCode 报修编号
 	 * @param listSer 费用清单列表
 	 */
     @EsbServiceMapping
-	public void saveListSer(@ServiceParam(name="tsId") String tsId,
+	public void saveListSer(@ServiceParam(name="bxCode") String bxCode,
 			@DomainCollection(domainClazz=PropertyservicemanagerSer.class) List<PropertyservicemanagerSer> listSer) {
-    	PropertyservicemanagerTs  propertyservicemanagerTsed = propertyservicemanagerTsDao.get(tsId);
-    	if(propertyservicemanagerTsed==null){
+    	PropertyservicemanagerBx bx = propertyservicemanagerBxDao.getObjectByUniqueProperty("bxCode", bxCode);
+		PropertyservicemanagerTs psts = propertyservicemanagerTsManager.getPropertyservicemanagerTssBybxId(bx.getBxId());
+    	if(psts==null){
     		throw new BusException("没有派工记录!");
     	}else{
-    		if(propertyservicemanagerTsed.getTsStatus().equals("01")){//派工状态已接单
-    			PropertyservicemanagerBx bx = propertyservicemanagerTsed.getPropertyservicemanagerBx();
-    			if(bx.getBxStatus().equals("03")||bx.getBxStatus().equals("04")){//管理员已定价不能新增或修改维修单
+    		if(psts.getTsStatus().equals("01")){//派工状态已接单
+    			if(bx.getBxStatus().equals("03")){//待填报维修记录
     				BigDecimal amount = BigDecimal.valueOf(0);
     				BigDecimal bxAmount = bx.getBxAmount();
     					for(PropertyservicemanagerSer ser : listSer){//自动计算总价
@@ -209,10 +226,12 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
     					}
 	    				//变更状态为已完工
 	    				bx.setBxStatus("04");
+	    				psts.setTsStatus("03");//已填报费用清单
 		    		propertyservicemanagerBxDao.save(bx);
+		    		propertyservicemanagerTsManager.savePts(psts);
 		    		//保存维修单
 		    		for(PropertyservicemanagerSer allser : listSer){
-						allser.setPropertyservicemanagerTs(propertyservicemanagerTsed);
+						allser.setPropertyservicemanagerTs(psts);
 						allser.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 						propertyservicemanagerSerDao.save(allser);
 					}

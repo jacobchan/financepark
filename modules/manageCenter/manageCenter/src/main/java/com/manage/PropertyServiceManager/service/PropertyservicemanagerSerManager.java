@@ -7,21 +7,15 @@ import java.util.List;
 import java.util.Collection;
 import java.util.Map;
 
-import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.ConditionCollection;
 import com.gsoft.framework.esb.annotation.DomainCollection;
 import com.gsoft.framework.esb.annotation.EsbServiceMapping;
-import com.gsoft.framework.esb.annotation.OrderCollection;
-import com.gsoft.framework.esb.annotation.ServiceParam;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSer;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerSfpro;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTs;
 
 public interface PropertyservicemanagerSerManager extends BaseManager{
@@ -123,4 +117,15 @@ public interface PropertyservicemanagerSerManager extends BaseManager{
 			Collection<Condition> conditions,//查询条件
 			Collection<Order> orders,
 			String userId) throws BusException;
+    /**
+     * 根据报修编号查询最近一次的维修费用清单
+     * @param pager
+     * @param conditions
+     * @param orders
+     * @param bxCode
+     * @return
+     * @throws BusException
+     */
+	public PagerRecords getPagerPsSers(Pager pager, Collection<Condition> conditions,
+			Collection<Order> orders, String bxCode) throws BusException;
 }

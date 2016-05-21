@@ -64,6 +64,24 @@ public class PropertyservicemanagerTsManagerImpl extends BaseManagerImpl impleme
     	return propertyservicemanagerTsDao.commonQuery(conditions, orders);
     }
     /**
+     * 根据物业报修编号查询最新一条维修记录
+     */
+    @Override
+    @EsbServiceMapping
+    public PropertyservicemanagerTs getPsTsBybxCode(@ServiceParam(name="bxCode") String bxCode) throws BusException{
+    	Collection<Condition> conditions = new ArrayList<Condition>();
+		Collection<Order> orders = new ArrayList<Order>();
+		conditions.add(ConditionUtils.getCondition("propertyservicemanagerBx.bxCode",
+				Condition.EQUALS, bxCode));
+		orders.add(ConditionUtils.getOrder("createTime", false));
+		List<PropertyservicemanagerTs> list = propertyservicemanagerTsDao.commonQuery(conditions, orders);
+		if (list.size() != 0) {
+			return list.get(0);
+		} else {
+			return null;
+		}
+    }
+    /**
      * 根据物业报修ID查询最新一条维修记录
      */
     @Override

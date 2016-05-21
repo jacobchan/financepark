@@ -3,11 +3,11 @@
 <youi:page>
 
 	<youi:grid id="grid_proSer" idKeys="serId" caption="维修费用清单"  panel="false" scrollHeight="240"
-				src="esb/web/propertyservicemanagerSerManager/getPagerPropertyservicemanagerSers.json" dataFormId="form_sFproManage"
+				src="esb/web/propertyservicemanagerSerManager/getPagerPsSers.json" dataFormId="form_sFproManage"
 				showCheckbox="true" 
 				submit="NOT" reset="NOT" usePager="false" editable="true" load="false">
 		<youi:fieldLayout prefix="recordSer">
-			<youi:fieldHidden property="propertyservicemanagerTs.tsId"  caption="派工单Id"/>
+			<youi:fieldText property="bxCode"  caption="报修编号"/>
 		</youi:fieldLayout>
 		
 		<youi:gridCol editor="fieldSelect" property="serName"  caption="材料名称" width="35%" convert="ser_name"/>
@@ -20,12 +20,12 @@
 	<!--**********************************页面函数********************************-->
 	<!-- 初始化页面数据 -->
 	<youi:func name="subpage_init" params="record">
-		$elem('recordSer_propertyservicemanagerTs_tsId',pageId).fieldValue(record.tsId);
+		$elem('recordSer_bxCode',pageId).fieldValue(record.bxCode);
 		$elem('grid_proSer',pageId).grid('pReload');
 	</youi:func>
 	<!-- 批量提交维修单 -->
 	<youi:func name="func_grid_serSubmit" >
-		var tsId = $elem('recordSer_propertyservicemanagerTs_tsId',pageId).fieldValue();
+		var bxCode = $elem('recordSer_bxCode',pageId).fieldValue();
 		var records = $elem('grid_proSer',pageId).grid('getRecords');
 		var submitRecord = {'records':records};
 		var fieldValues = $.youi.recordUtils.recordToParameters(submitRecord);
@@ -35,7 +35,7 @@
 				params = params+$.youi.parameterUtils.propertyParameter(fieldValues[i].property,fieldValues[i].value)+'&';
 			}
 		}
-		params = params+'tsId='+tsId;
+		params = params+'bxCode='+bxCode;
 		$.youi.ajaxUtil.ajax({
 			url:'/esb/web/propertyservicemanagerSerManager/saveListSer.json',
 			data:params,
