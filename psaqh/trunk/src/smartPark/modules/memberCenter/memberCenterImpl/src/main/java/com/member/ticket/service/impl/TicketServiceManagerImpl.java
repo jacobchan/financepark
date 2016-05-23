@@ -321,12 +321,12 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 	@SuppressWarnings("unchecked")
 	@Override
 	@EsbServiceMapping
-	public WsPolicyOrder getOrderInfo(@ServiceParam(name="userId",pubProperty="userId") String userId,@ServiceParam(name="orderid") String orderId) {
+	public WsPolicyOrder getOrderInfo(@ServiceParam(name="userId",pubProperty="userId") String userId,@ServiceParam(name="orderNo") String orderNo) {
 		String result = "";
 		Map<String,Object> params = new HashMap<String,Object>();
-		params.put("orderNo", orderId);
+		params.put("orderNo", orderNo);
 		params.put("agencyCode", agencyCode);
-		String signString = agencyCode + orderId + safeCode;
+		String signString = agencyCode + orderNo + safeCode;
 		String sign = PasswordUtils.md5Password(signString);
 		params.put("sign", sign);
 		try {
@@ -348,13 +348,13 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 	@SuppressWarnings("unchecked")
 	@Override
 	@EsbServiceMapping
-	public String cancelOrder(@ServiceParam(name="userId",pubProperty="userId") String userId,@ServiceParam(name="orderid") String orderId) {
+	public String cancelOrder(@ServiceParam(name="userId",pubProperty="userId") String userId,@ServiceParam(name="orderNo") String orderNo) {
 		String result = "";
 		Map<String,Object> params = new HashMap<String,Object>();
-		params.put("orderNo", orderId);
+		params.put("orderNo", orderNo);
 		params.put("agencyCode", agencyCode);
 		params.put("canclePNR", canclePNR);
-		String signString = agencyCode + canclePNR + orderId + safeCode;
+		String signString = agencyCode + canclePNR + orderNo + safeCode;
 		String sign = PasswordUtils.md5Password(signString);
 		params.put("sign", sign);
 		try {
@@ -440,6 +440,7 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 		Map<String,Object> params = new HashMap<String,Object>();
 		String payType = "1";
 		params.put("payType", payType);
+		params.put("orderNo", orderNo);
 		params.put("agencyCode", agencyCode);
 		String signString = agencyCode+orderNo+payType+payerLoginName+safeCode;
 		String sign = PasswordUtils.md5Password(signString);
