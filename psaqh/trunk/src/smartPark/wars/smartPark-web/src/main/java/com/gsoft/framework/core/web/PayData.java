@@ -31,6 +31,7 @@ import com.gsoft.framework.core.web.controller.BaseDataController;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
+import com.gsoft.framework.workflow.service.FlowRunManager;
 import com.gsoft.framework.workflow.service.impl.FlowRunManagerImpl;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerBxManager;
@@ -41,7 +42,7 @@ public class PayData extends BaseDataController {
 	@Autowired
 	private OrdermanagerUserorderManager ordermanagerUserorderManager;
 	@Autowired
-	private FlowRunManagerImpl flowRunManagerImpl;
+	private FlowRunManager flowRunManagerImpl;
 	@Autowired
 	private PropertyservicemanagerBxManager propertyservicemanagerBxManager;
 	
