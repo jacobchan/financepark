@@ -296,11 +296,6 @@
 		  <artifactId>gsoft-framework-workflowImpl</artifactId>
 		  <version>1.0.4-SNAPSHOT</version>
 		</dependency>
-		<dependency>
-		  <groupId>com.gsoft.framework</groupId>
-		  <artifactId>gsoft-framework-workflowEsbweb</artifactId>
-		  <version>1.0.4-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 	
 	<profiles>
