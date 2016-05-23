@@ -148,3 +148,23 @@ alter table sp_enterprise_invitation add COLUMN INVITATION_STATUS_ Integer(20);
 
 alter table sp_activity_applylist modify column APPLYLIST_TIME_ VARCHAR(20);
 ALTER TABLE `sp_mc_msgdatas_` ADD COLUMN `READ_STATUS_` char(2);
+
+
+CREATE TABLE `sp_workflow_repair_` (
+  `flow_id_` varchar(36) NOT NULL,
+  `flow_person_id_` varchar(36) DEFAULT NULL,
+  `PropertyservicemanagerBxId_` varchar(36) DEFAULT NULL,
+  `flow_type_` char(2) DEFAULT NULL,
+  `flow_result_pg_` char(2) DEFAULT NULL,
+  `flow_suggest_pg_` varchar(500) DEFAULT NULL,
+  `flow_result_jg_` char(2) DEFAULT NULL,
+  `flow_suggest_jg_` varchar(500) DEFAULT NULL,
+  `create_user_` varchar(36) DEFAULT NULL,
+  `create_user_caption_` varchar(20) DEFAULT NULL,
+  `update_user_` varchar(36) DEFAULT NULL,
+  `update_user_caption_` varchar(20) DEFAULT NULL,
+  `create_time_` varchar(20) DEFAULT NULL,
+  `update_time_` varchar(20) DEFAULT NULL,
+  `flow_process_id_` varchar(36) DEFAULT NULL,
+  PRIMARY KEY (`flow_id_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
