@@ -38,14 +38,21 @@ public class NmIssuenews implements Domain{
 	@Column(name = "POLICY_COME_")
 	@Length(max=36)
 	private String policyCome;//政策发布人
-
 	@Column(name = "POLICY_CONTENT_")
-	private String policyContent;//政策内容
+	private String policyContent;// 政策内容
+	
+	
+	@Column(name = "VALID_DATE_")
+	private String validDate;//有效时间
+	
+	@Column(name = "EQUIP_REWARD_")
+	private String equipReward;// 配套奖励
 
 	@Column(name = "POLICY_STATUS_")
 	@Length(max=2)
 	private String policyStatus;//政策发布状态
 
+	
 	@Column(name = "POLICY_ISSUE_DATE_")
 	@Length(max=20)
 	private String policyIssueDate;//政策发布时间
@@ -217,6 +224,21 @@ public class NmIssuenews implements Domain{
 		} else if (!policyIssueDate.equals(other.policyIssueDate))
 			return false;
 		return true;
+	}
+	public String getValidDate() {
+		return validDate;
+	}
+
+	public void setValidDate(String validDate) {
+		this.validDate = validDate;
+	}
+
+	public String getEquipReward() {
+		return equipReward;
+	}
+
+	public void setEquipReward(String equipReward) {
+		this.equipReward = equipReward;
 	}
 	
 	public String toString(){
