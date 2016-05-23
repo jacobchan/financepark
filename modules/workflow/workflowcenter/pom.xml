@@ -79,11 +79,6 @@
 		  <version>${gsoft.framework.version}</version>
 		</dependency>
 		<dependency>
-		  <groupId>com.gsoft.framework</groupId>
-		  <artifactId>gsoft-framework-workflowEsbweb</artifactId>
-		  <version>${gsoft.framework.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>com.gsoft.smartPark</groupId>
 			<artifactId>smartPark-manageCenterImpl</artifactId>
 			<version>${project.version}</version>
