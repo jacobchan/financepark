@@ -244,7 +244,7 @@ var pageSize=10;
 		    var flowSuggestCx = $("#flowSuggestCx").val();
 		    var params = ['taskId='+taskId,
 		                  'flowSuggestCx='+flowSuggestCx,
-							'bxStatus='+"01",
+							'bxStatus='+"00",
 							'repair='+"0"];
 		 	$.ajax({
 		 		url:cenUrl+'workflow/run/completeTask.json',
