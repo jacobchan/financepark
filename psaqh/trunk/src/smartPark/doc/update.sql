@@ -184,3 +184,7 @@ CREATE TABLE `youi_flow` (
   `FLOW_ADDON_HTMLS` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`FLOW_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='930101流程定义';
+
+/*新闻模型增加字段 2016-5-23 19:09:13 by CQF */
+ALTER TABLE `sp_nm_issuenews_` ADD COLUMN `VALID_DATE_`  datetime NULL DEFAULT NULL;
+ALTER TABLE `sp_nm_issuenews_` ADD COLUMN `EQUIP_REWARD_`  text;
