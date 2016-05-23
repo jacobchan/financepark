@@ -16,7 +16,7 @@
 		<youi:fieldLayout prefix="search" labelWidths="100,100">
 			<youi:fieldHidden property="params.flowProcessId"  caption="流程实例" defaultValue="propertyrepair"/>
 			<youi:fieldHidden property="params.bxStatus"  caption="流程类型" defaultValue="02"/>
-			<youi:fieldText property="params.flowPersonId" caption="接单人" defaultValue="40288acf5396c93e015398864e570009"/>
+			<youi:fieldHidden property="params.flowPersonId" caption="接单人" />
 		</youi:fieldLayout>
 		
 		<youi:gridCol property="params.bxCode"  caption="报修编号" width="17%" align="center"/>
@@ -43,18 +43,19 @@
 		subpageElem.subpage('open',select,null,{taskId:select.id,subpagePrefix:select.id,
 			bxCode:bxCode,bxType:bxType,bxRemark:bxRemark,bxAddress:bxAddress,flowSuggestPg:flowSuggestPg});
 	</youi:func>
-	
-	<%-- <youi:func name="form_completeTask_afterSubmit">
-		var gridElement = $elem('grid_repairOrder',pageId);
-		gridElement.grid('pReload');
-	</youi:func> --%>
-	
-	<%-- <youi:func name="subpage_process_beforeSubmit">
-		var subpageElem = $elem('subpage_process',pageId);
-		var aa = subpageElem.flowResultJg;
-		var flowResultJg = $elem('subpage_process_recordab_flowResultJg',pageId).fieldValue();
-		return false;
-	</youi:func> --%>
+	<youi:func name="init">
+		$.youi.ajaxUtil.ajax({
+			url:'/esb/web/memberInformationManager/getUserLoginUser.json',
+			success:function(result){
+				var record = result.record;
+				if(record!=null){
+					$elem('search_params_flowPersonId',pageId).fieldValue(record.userId);
+					var gridElement = $elem('grid_repairOrder',pageId);
+					gridElement.grid('pReload');
+				}
+			}
+		})
+	</youi:func>
 	
 	<youi:func name="subpage_process_afterSubmit">
 		var gridElement = $elem('grid_repairOrder',pageId);
