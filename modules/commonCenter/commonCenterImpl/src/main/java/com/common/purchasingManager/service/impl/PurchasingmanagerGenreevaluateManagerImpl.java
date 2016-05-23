@@ -3,6 +3,7 @@
  */
 package com.common.purchasingManager.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
@@ -17,6 +18,7 @@ import com.common.purchasingManager.entity.PurchasingmanagerGenre;
 import com.common.purchasingManager.entity.PurchasingmanagerGenreevaluate;
 import com.common.purchasingManager.service.PurchasingmanagerGenreManager;
 import com.common.purchasingManager.service.PurchasingmanagerGenreevaluateManager;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -187,5 +189,37 @@ public class PurchasingmanagerGenreevaluateManagerImpl extends BaseManagerImpl i
     public boolean exsitPurchasingmanagerGenreevaluate(String propertyName,Object value) throws BusException{
 		return purchasingmanagerGenreevaluateDao.exists(propertyName,value);
 	}
-
+    /**
+   	 * 前台个人中心  获取已完成订单的totalCount    chenye
+   	 * @param conditions
+   	 * @return
+   	 * @throws BusException
+   	 */
+  
+    @EsbServiceMapping(pubConditions={@PubCondition(property="member",operator=Condition.EQUALS,pubProperty="userId")})
+     public List<Record> getTotalCount(
+    			@ConditionCollection(domainClazz=PurchasingmanagerGenreevaluate.class) Collection<Condition> conditions)
+    			throws BusException{    	
+    	List<Record> recordList=new ArrayList<Record>();   		
+     	List<PurchasingmanagerGenreevaluate> List = this.getPurchasingmanagerGenreevaluates(conditions, null);
+    	Record record = new Record();
+    	record.put("totalCount", List.size());
+    		recordList.add(record);
+    		return recordList;
+    	} 
+    /**
+	 * 前台个人中心   根据当前用户分页查询    chenye
+	 * @param pager
+	 * @param conditions
+	 * @param orders
+	 * @return
+	 * @throws BusException
+	 */
+	@EsbServiceMapping(pubConditions={@PubCondition(property="member",operator=Condition.EQUALS,pubProperty="userId")})
+	public PagerRecords getPager(Pager pager,//分页条件
+			@ConditionCollection(domainClazz=PurchasingmanagerGenreevaluate.class) Collection<Condition> conditions,//查询条件
+			@OrderCollection Collection<Order> orders)throws BusException {	
+		PagerRecords pagerRecords = purchasingmanagerGenreevaluateDao.findByPager(pager, conditions, orders);
+		return pagerRecords;
+	} 
 }
