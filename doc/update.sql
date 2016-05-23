@@ -168,3 +168,19 @@ CREATE TABLE `sp_workflow_repair_` (
   `flow_process_id_` varchar(36) DEFAULT NULL,
   PRIMARY KEY (`flow_id_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `youi_flow`;
+CREATE TABLE `youi_flow` (
+  `FLOW_ID` varchar(32) NOT NULL,
+  `FLOW_CONTENT` text,
+  `DEPLOY_ID` varchar(32) DEFAULT NULL,
+  `DEPLOY_TIME` varchar(20) DEFAULT NULL,
+  `FLOW_CAPTION` varchar(80) DEFAULT NULL,
+  `FLOW_CODE` varchar(20) DEFAULT NULL,
+  `FLOW_NAME` varchar(20) DEFAULT NULL,
+  `START_FORM` varchar(60) DEFAULT NULL,
+  `STATUS` varchar(2) DEFAULT NULL,
+  `FLOW_BUSINESS_SERVICE` varchar(100) DEFAULT NULL,
+  `FLOW_ADDON_HTMLS` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`FLOW_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='930101流程定义';
