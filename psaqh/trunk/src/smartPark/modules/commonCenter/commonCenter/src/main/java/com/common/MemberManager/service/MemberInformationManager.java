@@ -14,6 +14,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.security.agt.entity.User;
 import com.common.MemberManager.entity.MemberInformation;
 
 public interface MemberInformationManager extends BaseManager{
@@ -219,5 +220,12 @@ public interface MemberInformationManager extends BaseManager{
 	 * @param member
 	 */
 	public void setDefaultRole(MemberInformation member);
+	/**
+	 * 获取后台用户
+	 * @param userId
+	 * @return
+	 * @throws BusException
+	 */
+	public User getUserLoginUser(String userId) throws BusException;
 
 }

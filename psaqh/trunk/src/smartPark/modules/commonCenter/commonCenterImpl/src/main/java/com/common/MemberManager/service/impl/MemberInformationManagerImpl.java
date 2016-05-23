@@ -44,7 +44,9 @@ import com.gsoft.framework.security.IRealmUserInfo;
 import com.gsoft.framework.security.IRealmUserToken;
 import com.gsoft.framework.security.IUser;
 import com.gsoft.framework.security.IUserAdapter;
+import com.gsoft.framework.security.agt.entity.User;
 import com.gsoft.framework.security.agt.service.UserLoginService;
+import com.gsoft.framework.security.agt.service.UserManager;
 import com.gsoft.framework.util.Assert;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
@@ -65,6 +67,8 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	private McMsgdatasManager mcMsgdatasManager;
 	@Autowired
 	private BbmParkManager bbmParkManager;
+	@Autowired
+	private UserManager userManager;
 	
 	@Value("${ininin.sso_url}")
 	private String inininSsoUrl;
@@ -324,6 +328,22 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		// TODO Auto-generated method stub
 
 		return memberInformationDao.get(userId);
+	}
+	
+	/**
+	 * 获取后台用户
+	 * 
+	 * @param user
+	 *            登陆用户名
+	 * @return
+	 * @throws BusException
+	 */
+	@Override
+	@EsbServiceMapping
+	public User getUserLoginUser(
+			@ServiceParam(name = "userId", pubProperty = "userId") String userId) throws BusException {
+		// TODO Auto-generated method stub
+		return userManager.getUser(userId);
 	}
 
 	@Override
