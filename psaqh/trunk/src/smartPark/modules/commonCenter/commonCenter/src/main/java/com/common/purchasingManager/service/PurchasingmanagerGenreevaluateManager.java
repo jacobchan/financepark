@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Collection;
 
 import com.common.purchasingManager.entity.PurchasingmanagerGenreevaluate;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
@@ -101,4 +102,22 @@ public interface PurchasingmanagerGenreevaluateManager extends BaseManager{
 	 */
 	public PurchasingmanagerGenreevaluate savePurGenreConsult(String userId,
 			String genreCode, String content) throws BusException;
+	/**
+   	 * 前台个人中心  获取已完成订单的totalCount    chenye
+   	 * @param conditions
+   	 * @return
+   	 * @throws BusException
+   	 */
+    public List<Record> getTotalCount(Collection<Condition> conditions)throws BusException;
+    /**
+  	 * 前台个人中心   根据当前用户分页查询    chenye
+  	 * @param pager
+  	 * @param conditions
+  	 * @param orders
+  	 * @return
+  	 * @throws BusException
+  	 */
+  	public PagerRecords getPager(Pager pager,//分页条件
+  			Collection<Condition> conditions,//查询条件
+  			Collection<Order> orders)throws BusException;
 }
