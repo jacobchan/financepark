@@ -31,7 +31,7 @@ import com.gsoft.framework.core.web.controller.BaseDataController;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
-import com.gsoft.framework.workflow.service.FlowRunManager;
+import com.gsoft.framework.workflow.service.impl.FlowRunManagerImpl;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerBxManager;
 
@@ -41,7 +41,7 @@ public class PayData extends BaseDataController {
 	@Autowired
 	private OrdermanagerUserorderManager ordermanagerUserorderManager;
 	@Autowired
-	private FlowRunManager flowRunManager;
+	private FlowRunManagerImpl flowRunManagerImpl;
 	@Autowired
 	private PropertyservicemanagerBxManager propertyservicemanagerBxManager;
 	
@@ -83,7 +83,7 @@ public class PayData extends BaseDataController {
 						conditions.add(ConditionUtils.getCondition("params.bxStatus", Condition.EQUALS, "04"));
 						PropertyservicemanagerBx psbx = propertyservicemanagerBxManager.getPropertyservicemanagerBx(order.getBxId());
 						conditions.add(ConditionUtils.getCondition("params.bxCode", Condition.EQUALS, psbx.getBxCode()));
-						PagerRecords pagerRecords = flowRunManager.getPagerTasks(pager, conditions, null);
+						PagerRecords pagerRecords = flowRunManagerImpl.getPagerTasks(pager, conditions, null);
 						@SuppressWarnings("unchecked")
 						List<Task> list = pagerRecords.getRecords();
 						if(list.size()>0){
@@ -91,7 +91,7 @@ public class PayData extends BaseDataController {
 							Map<String, Object> paramMap = new HashMap<String, Object>();
 							paramMap.put("bxStatus", "05");
 							paramMap.put("repair", "1");
-							flowRunManager.completeTask(taskId, paramMap);
+							flowRunManagerImpl.completeTask(taskId, paramMap);
 						}
 					}
 					
