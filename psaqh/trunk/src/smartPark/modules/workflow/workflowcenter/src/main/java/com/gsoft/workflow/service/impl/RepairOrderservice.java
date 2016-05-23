@@ -276,10 +276,10 @@ public class RepairOrderservice implements AccountFlowBusinessService{
 			} if(key.equals("repairOrPay")){//重修或者支付
 				String repair = (String) PropertyUtils.getSimplePropertyValue(map, "repair");
 				if("0".equals(repair)){
-					psbx.setBxStatus("01");//待派工
+					psbx.setBxStatus("00");//待派工
 					psbx.setUpdateUser(userId);
 					propertyservicemanagerBxManager.savaPsBx(psbx);
-					repairOrder.setFlowType("01");
+					repairOrder.setFlowType("00");
 				}else{
 					psbx.setBxStatus("05");//待评价
 					psbx.setUpdateUser(userId);
