@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.common.EnterpriceTypeManager.service.EtypeEnterprisetypeManager;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
-import com.common.wxpay.ExportExcel;
+//import com.common.wxpay.ExportExcel;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.security.AccountPrincipal;
@@ -191,19 +191,19 @@ public class EnterpriseInfoController {
     	Collection<Order> order = new ArrayList<Order>();
     	condition.add(ConditionUtils.getCondition("companyId", Condition.EQUALS, rzId));
 		
-		ExportExcel<MemberInformation> mi = new ExportExcel<MemberInformation>();
-		String[] headers = { "图像", "姓名", "联系方式", "描述" };
-		List<MemberInformation> ml = memberInformationManager.getMemberInformations(condition, order);
-		EnterbusinessmanagerRz r = enterbusinessmanagerRzManager.getEnterbusinessmanagerRz(rzId);
-		try {
-          response.setContentType("application/vnd.ms-excel;charset=UTF-8");  
-          response.addHeader(  
-                  "Content-Disposition",  
-                  "attachment;filename=" + new String(("企业通讯录-"+System.currentTimeMillis()+".xls").getBytes("UTF-8"), "ISO-8859-1"));
-          OutputStream os = response.getOutputStream();
-          mi.exportExcel(headers, ml, os, r.getRzName()+"通讯录");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		ExportExcel<MemberInformation> mi = new ExportExcel<MemberInformation>();
+//		String[] headers = { "图像", "姓名", "联系方式", "描述" };
+//		List<MemberInformation> ml = memberInformationManager.getMemberInformations(condition, order);
+//		EnterbusinessmanagerRz r = enterbusinessmanagerRzManager.getEnterbusinessmanagerRz(rzId);
+//		try {
+//          response.setContentType("application/vnd.ms-excel;charset=UTF-8");  
+//          response.addHeader(  
+//                  "Content-Disposition",  
+//                  "attachment;filename=" + new String(("企业通讯录-"+System.currentTimeMillis()+".xls").getBytes("UTF-8"), "ISO-8859-1"));
+//          OutputStream os = response.getOutputStream();
+//          mi.exportExcel(headers, ml, os, r.getRzName()+"通讯录");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 }
