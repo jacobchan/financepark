@@ -60,12 +60,13 @@
 				html +=		'<td style="word-wrap:.-word; ">'
 				html +=			'<h4 class="c-333 mb10 fb f14" style="word-break:break-all">'+record[i].msgCaption+'</h4>'
 				html +=			'<p>'+record[i].msgContent.substring(0,50)+'</p>'
-				html +=			'<p id="'+record[i].msgId+'" style="display:none">'+record[i].msgContent.substring(50,100)+'</p>'
-				html +=			'<p id="'+record[i].msgId+'" style="display:none">'+record[i].msgContent.substring(100,200)+'</p>'
+				html +=			'<p id="'+record[i].msgId+'" >'+record[i].msgContent.substring(50,100)+'</p>'
+				html +=			'<p id="'+record[i].msgId+'" >'+record[i].msgContent.substring(100,150)+'</p>'
+				html +=			'<p id="'+record[i].msgId+'" >'+record[i].msgContent.substring(150,200)+'</p>'
 				html +=			'<p class="f12">'+sendDate+'</p>'
 				html +=		'</td>'					
 				html +=		'<td align="right">'					
-				html +=			'<a href="#" class="see-it" onclick="show1(\''+record[i].msgId+'\')">查看</a>'					
+				//html +=			'<a href="#" class="see-it" onclick="show1(\''+record[i].msgId+'\')">查看</a>'					
 				html +=		'</td>'					
 				html +=	'</tr>'			    			
 			}
@@ -77,6 +78,6 @@
 						$("#newslist").html(html1);	
 			}	
 	};	
-	function show1(id){
+	/*function show1(id){
 		$("#"+id).show();
-	};
+	};*/
