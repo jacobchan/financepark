@@ -3,6 +3,8 @@ package com.gsoft.framework.core.web;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +12,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.activiti.engine.task.Task;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -21,14 +24,26 @@ import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.common.OrderManager.service.OrdermanagerUserorderManager;
 import com.common.wxpay.common.Signature;
 import com.gsoft.framework.core.exception.BusException;
+import com.gsoft.framework.core.orm.Condition;
+import com.gsoft.framework.core.orm.Pager;
+import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.web.controller.BaseDataController;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
+import com.gsoft.framework.util.StringUtils;
+import com.gsoft.framework.workflow.service.FlowRunManager;
+import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
+import com.manage.PropertyServiceManager.service.PropertyservicemanagerBxManager;
 
 @Controller
 @RequestMapping("/wxpay")
 public class PayData extends BaseDataController {
 	@Autowired
 	private OrdermanagerUserorderManager ordermanagerUserorderManager;
+	@Autowired
+	private FlowRunManager flowRunManager;
+	@Autowired
+	private PropertyservicemanagerBxManager propertyservicemanagerBxManager;
 	
 	/**
 	 * 微信支付异步返回
@@ -61,6 +76,25 @@ public class PayData extends BaseDataController {
 					order.setPayReturnCode(tranId);
 					order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 					ordermanagerUserorderManager.saveUserOrder(order);
+					if(StringUtils.isNotEmpty(order.getBxId())){
+						Pager pager = new Pager("10", "1", String.valueOf(Pager.QUERY_TYPE_ALL)); 
+						Collection<Condition> conditions = new ArrayList<Condition>();
+						conditions.add(ConditionUtils.getCondition("params.flowProcessId", Condition.EQUALS, "propertyrepair"));
+						conditions.add(ConditionUtils.getCondition("params.bxStatus", Condition.EQUALS, "04"));
+						PropertyservicemanagerBx psbx = propertyservicemanagerBxManager.getPropertyservicemanagerBx(order.getBxId());
+						conditions.add(ConditionUtils.getCondition("params.bxCode", Condition.EQUALS, psbx.getBxCode()));
+						PagerRecords pagerRecords = flowRunManager.getPagerTasks(pager, conditions, null);
+						@SuppressWarnings("unchecked")
+						List<Task> list = pagerRecords.getRecords();
+						if(list.size()>0){
+							String taskId = list.get(0).getId();
+							Map<String, Object> paramMap = new HashMap<String, Object>();
+							paramMap.put("bxStatus", "05");
+							paramMap.put("repair", "1");
+							flowRunManager.completeTask(taskId, paramMap);
+						}
+					}
+					
 				}
 			}
 		} catch (Exception e) {
