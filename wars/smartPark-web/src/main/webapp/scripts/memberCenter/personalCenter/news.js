@@ -58,7 +58,7 @@
 					sendDate=record[i].sendDate.substring(0,19);
 				}
 				if(record[i].msgContent){
-					msgContent=record[i].msgContent.replace(/\d{6}/,'******'); 
+					msgContent=record[i].msgContent.replace(/\d{6}(，)/,'******，'); 
 				}
 				html +='<tr>'
 				html +=		'<td style="word-wrap:.-word; ">'
