@@ -8,13 +8,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.service.BaseManager;
-import com.gsoft.framework.esb.annotation.EsbServiceMapping;
-import com.gsoft.framework.esb.annotation.ServiceParam;
 
 @Service("aliPayManager")
 @Transactional
 public interface AliPayManager extends BaseManager{
 
 	public String getAlipaySignStr(String id) throws BusException;
+
+	public String getAlipayParamStr(String userorderCode) throws BusException;
+
+	public String getAlipayapiHtml(String userorderCode) throws BusException;
 	
 }
