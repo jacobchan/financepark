@@ -122,9 +122,10 @@ public class NmIssuenewsManagerImpl extends BaseManagerImpl implements NmIssuene
     	}else{//新增
     		NmIssuetype type = issuetypeManager.getIssueTypeByIssueTypeCode(code) ;
     		o.setPolicyType(type);
-//    		o.setBrowseCount("0");
-//    		o.setCaiCount("0");
-//    		o.setDingCount("0");
+    		o.setPolicyStatus("1");//已发布
+    		o.setBrowseCount("0");
+    		o.setCaiCount("0");
+    		o.setDingCount("0");
     		return nmIssuenewsDao.save(o);
     	}
     }
