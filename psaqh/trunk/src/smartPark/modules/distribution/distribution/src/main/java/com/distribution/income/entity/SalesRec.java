@@ -4,8 +4,8 @@
 package com.distribution.income.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
@@ -28,6 +28,9 @@ public class SalesRec implements Domain{
 	@Column(name = "FACT_DIS_RATE_")
 	@Length(max=10)
 	private String factDisRate;//分佣总比例
+	
+	@Transient
+	private String factDisRateShow;//分佣总比例百分比显示
 
 	@Column(name = "FACT_DIS_AMOUNT_")
 	@Length(max=10)
@@ -73,6 +76,14 @@ public class SalesRec implements Domain{
 		return this.factDisRate;
 	}
 	
+	public String getFactDisRateShow() {
+		return factDisRateShow;
+	}
+
+	public void setFactDisRateShow(String factDisRateShow) {
+		this.factDisRateShow = factDisRateShow;
+	}
+
 	public void setFactDisRate(String factDisRate){
 		this.factDisRate = factDisRate;
 	}
