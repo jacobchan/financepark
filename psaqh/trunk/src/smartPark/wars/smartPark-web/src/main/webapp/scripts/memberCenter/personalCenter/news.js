@@ -51,18 +51,22 @@
     function _parseRecords_pend(record){			
 	    var html="";
 	    var sendDate="";
+	    var msgContent="";
 		if(record.length>0){
 			for(var i=0;i<record.length;i++){	
 				if(record[i].sendDate){
 					sendDate=record[i].sendDate.substring(0,19);
 				}
+				if(record[i].msgContent){
+					msgContent=record[i].msgContent.replace(/\d{6}/,'******'); 
+				}
 				html +='<tr>'
 				html +=		'<td style="word-wrap:.-word; ">'
 				html +=			'<h4 class="c-333 mb10 fb f14" style="word-break:break-all">'+record[i].msgCaption+'</h4>'
-				html +=			'<p>'+record[i].msgContent.substring(0,50)+'</p>'
-				html +=			'<p id="'+record[i].msgId+'" >'+record[i].msgContent.substring(50,100)+'</p>'
-				html +=			'<p id="'+record[i].msgId+'" >'+record[i].msgContent.substring(100,150)+'</p>'
-				html +=			'<p id="'+record[i].msgId+'" >'+record[i].msgContent.substring(150,200)+'</p>'
+				html +=			'<p>'+msgContent.substring(0,50)+'</p>'
+				html +=			'<p id="'+record[i].msgId+'" >'+msgContent.substring(50,100)+'</p>'
+				html +=			'<p id="'+record[i].msgId+'" >'+msgContent.substring(100,150)+'</p>'
+				html +=			'<p id="'+record[i].msgId+'" >'+msgContent.substring(150,200)+'</p>'
 				html +=			'<p class="f12">'+sendDate+'</p>'
 				html +=		'</td>'					
 				html +=		'<td align="right">'					
