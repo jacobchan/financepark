@@ -98,3 +98,4 @@ INSERT INTO `youi_codemap` VALUES ('ff80808152f2fa0a0152f38940d40009', 'bool', '
 INSERT INTO `youi_codemap` VALUES ('ff80808152f2fa0a0152f38b08a7000c', 'merchant_type', '商户类型', '1', null);
 INSERT INTO `youi_codemap` VALUES ('ff8080815413dfe70154143a44b1001d', 'teacherType', '导师类型', '1', null);
 INSERT INTO `youi_codemap` VALUES ('ff8080815413dfe70154143b5ee60024', 'projectType', '创业加速项目类型', '1', null);
+INSERT INTO `youi_codemap` VALUES ('ff80808154e05c160154e05f2e330001', 'memLevel', '会员等级', '1', null);
