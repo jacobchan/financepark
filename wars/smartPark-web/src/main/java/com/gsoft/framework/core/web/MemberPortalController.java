@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,6 +30,8 @@ public class MemberPortalController {
 	
 	@Autowired
 	private EsbSecurityManager esbSecurityManager;
+	@Value("#{configProperties['proUrl']}")
+	private String prourl;
 	
 	//门户通过jsonp获取用户信息
 	@RequestMapping(value = "/userInfo.html")
@@ -57,9 +60,10 @@ public class MemberPortalController {
     		HttpServletResponse response){
 		//退出系统
 		org.apache.shiro.SecurityUtils.getSubject().logout();
-		String redirect = request.getParameter("redirect");
+		//String redirect = request.getParameter("redirect");
 		try {
-			WebUtils.issueRedirect(request, response, redirect);
+			//WebUtils.issueRedirect(request, response, redirect);
+			WebUtils.issueRedirect(request, response, prourl);
 		} catch (IOException e) {
 //			e.printStackTrace();
 		}
