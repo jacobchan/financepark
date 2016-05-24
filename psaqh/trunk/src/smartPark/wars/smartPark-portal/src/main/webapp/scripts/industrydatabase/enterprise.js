@@ -157,6 +157,7 @@ function _parseRecords(records){
 		}
 	}else{
 		$("#enterprise").empty();
+		$("#enterprise").append('<div class="tc" style="background:#f6f6f6;height:600px;"><img src="../styles/images/none1.png" border="0" style="margin-top:200px;" /></div>');
 		//无记录隐藏分页条
 		$(".tcdPageCode").hide();
 	}
