@@ -188,3 +188,41 @@ CREATE TABLE `youi_flow` (
 /*新闻模型增加字段 2016-5-23 19:09:13 by CQF */
 ALTER TABLE `sp_nm_issuenews_` ADD COLUMN `VALID_DATE_`  datetime NULL DEFAULT NULL;
 ALTER TABLE `sp_nm_issuenews_` ADD COLUMN `EQUIP_REWARD_`  text;
+
+
+/**重建酒店订单表，删除并重建索引，增加字段   by CQF 2016-5-24 16:58:56   ------  BEGIN --------------**/ 
+ALTER TABLE sp_hotel_order DROP FOREIGN KEY FK_320701_340601;
+ALTER TABLE sp_hotel_order_item DROP FOREIGN KEY FK_340601_340602;
+alter table sp_hotel_order drop primary key;
+
+drop table if exists sp_hotel_order;
+create table sp_hotel_order
+(
+   ORDER_ID_            char(36) not null,
+   ORDER_NUM_           varchar(36),
+   MEMBER_ID_           char(36),
+   ORDER_TIME_          varchar(20),
+   ORDER_AMOUNT_        decimal(10,2),
+   ORDER_STATUS_        varchar(2),
+   HOTEL_NAME_          varchar(256),
+   HOTEL_ID_            char(36),
+   ROOM_COUNT_          int,
+   COMING_TIME_         varchar(20),
+   OUT_TIME_            varchar(20),
+   DAILY_PRICE_         varchar(1024),
+   ORDER_INFO_          varchar(256),
+   XING_HAO_            varchar(256),
+   RZ_MOBILE_           varchar(20),
+   ORDER_UPDATE_TIME    varchar(20),
+   ORDER_ID_THIRD       varchar(64)
+);
+
+alter table sp_hotel_order add primary key (ORDER_ID_);
+
+alter table sp_hotel_order add constraint FK_320701_340601 foreign key (MEMBER_ID_)
+      references sp_member_information (MEMBER_ID_) on delete restrict on update restrict;
+
+alter table sp_hotel_order_item add constraint FK_340601_340602 foreign key (ORDER_ID_)
+      references sp_hotel_order (ORDER_ID_) on delete restrict on update restrict;
+
+/** 重建酒店订单表    --------------------------------END --------------------------*/
