@@ -32,21 +32,21 @@ function showCom(genreId,y){
 				var htmls = [];
 				for(var i=0;i<results.records.length;i++){
 					if(i==0){
-						htmls.push('<li class="it_selected" data-id="'+results.records[i].commodityId+'"data-commodityDescribe="'+
-								results.records[i].commodityDescribe+'" data-commodityPrice="'+results.records[i].commodityPrice+'"><span>'+
+						htmls.push('<li onclick="time1(\''+results.records[i].commodityId+'\');"   class="it_selected" data-id="'+results.records[i].commodityId+'"data-commodityDescribe="'+
+								results.records[i].commodityDescribe+'" data-commodityPrice="'+results.records[i].commodityPrice+'"><span >'+
 								results.records[i].commodityTitle+'</span><i class="sel_icon"></i></li>');
 						$('#commodityShow'+y).parents(".taocan").attr("data-id",results.records[i].commodityId);
 						$('#commodityShow'+y).parents(".taocan").attr("data-commodityDescribe",results.records[i].commodityDescribe);
 						$('#commodityPrice'+y).html('&yen;'+results.records[i].commodityPrice+'/次');
 						var commodityDescribe = results.records[i].commodityDescribe;
-						var des = commodityDescribe.split(",");
+						var des =commodityDescribe.split(",");
 						var buff = [];
 						for(var j=0;j<des.length;j++){
 							buff.push('<li class="bgf1 caaa"><span>'+des[j]+'</span></li>');
 						}
 						$('#wt_info'+y).html(buff);
 					}else{
-						htmls.push('<li data-id="'+results.records[i].commodityId+'"data-commodityDescribe="'+results.records[i].commodityDescribe+
+						htmls.push('<li onclick="time1(\''+results.records[i].commodityId+'\');"  data-id="'+results.records[i].commodityId+'"data-commodityDescribe="'+results.records[i].commodityDescribe+
 								'" data-commodityPrice="'+results.records[i].commodityPrice+'"><span>'+
 								results.records[i].commodityTitle+'</span><i class="sel_icon"></i></li>');
 					}
@@ -209,40 +209,40 @@ $(function(){
 				var htmls = [];
 				for(var i=0;i<results.records.length;i++){
 					if(i==0){
-						htmls.push('<li class="it_selected" data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
+						htmls.push('<li onclick="'+"kind"+i+'();"  class="it_selected" data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
 						showCom(results.records[i].genreId,i+1);
 					}else{
-						htmls.push('<li data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
+						htmls.push('<li onclick="'+"kind"+i+'();" data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
 					}
 				}
 				$('#it_select1').html(htmls.join(''));
 				htmls = [];
 				for(var i=0;i<results.records.length;i++){
 					if(i==1){
-						htmls.push('<li class="it_selected" data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
+						htmls.push('<li   onclick="'+"kind"+i+'();" class="it_selected" data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
 						showCom(results.records[i].genreId,i+1);
 					}else{
-						htmls.push('<li data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
+						htmls.push('<li onclick="'+"kind"+i+'();" data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
 					}
 				}
 				$('#it_select2').html(htmls.join(''));
 				htmls = [];
 				for(var i=0;i<results.records.length;i++){
 					if(i==2){
-						htmls.push('<li class="it_selected" data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
+						htmls.push('<li  onclick="'+"kind"+i+'();" class="it_selected" data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
 						showCom(results.records[i].genreId,i+1);
 					}else{
-						htmls.push('<li data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
+						htmls.push('<li  onclick="'+"kind"+i+'();" data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
 					}
 				}
 				$('#it_select3').html(htmls.join(''));
 				htmls = [];
 				for(var i=0;i<results.records.length;i++){
 					if(i==3){
-						htmls.push('<li class="it_selected" data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
+						htmls.push('<li  onclick="'+"kind"+i+'();" class="it_selected" data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
 						showCom(results.records[i].genreId,i+1);
 					}else{
-						htmls.push('<li data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
+						htmls.push('<li  onclick="'+"kind"+i+'();" data-id="'+results.records[i].genreId+'"><span>'+results.records[i].genreName+'</span><i class="sel_icon"></i></li>');
 					}
 				}
 				$('#it_select4').html(htmls.join(''));
@@ -423,3 +423,47 @@ $(function(){
 		});
 	});
 });
+var kind="";
+function kind0(){
+	kind=0;
+	//alert(kind);
+}
+function kind1(){
+	kind=1;
+	//alert(kind);
+}
+function kind2(){
+	kind=2;
+	//alert(kind);
+}
+function kind3(){
+	kind=3;
+}
+function kind4(){
+	kind=4;
+}
+
+function time1(id){
+	//alert(id);
+	var sURL = baseUrl+"purchasingmanagerCommodityManager/getPurchasingmanagerCommodity.json";
+	$.youi.ajaxUtils.ajax({
+		url:sURL,
+		data:{commodityId:id},
+		jsonp:'data:jsonp',
+		dataType:'jsonp',
+		success:function(results){
+			if(results&&results.record){
+				//alert(results.record.commodityTitle);				
+				if("季付"==results.record.commodityTitle){
+					$('#servicetime'+kind).html("3月");
+				}else if("半年付"==results.record.commodityTitle){
+					//alert(1);
+					$('#servicetime'+kind).html("6月");
+				}else if("年付"==results.record.commodityTitle){
+					//alert(2);
+					$('#servicetime'+kind).html("12月");
+				}			
+			}
+		}
+	});	
+}
