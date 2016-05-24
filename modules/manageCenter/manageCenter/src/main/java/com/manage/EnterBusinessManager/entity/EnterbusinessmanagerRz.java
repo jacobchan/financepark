@@ -436,7 +436,21 @@ public class EnterbusinessmanagerRz implements Domain{
 		return true;
 	}
 	
-	public String toString(){
-		return super.toString();
+	@Override
+	public String toString() {
+		return "[updateUser=" + updateUser
+				+ ", updateTime=" + updateTime + ", createUser=" + createUser
+				+ ", createTime=" + createTime + ", rzManager=" + rzManager
+				+ ", entrecId=" + entrecId + ", rzDate=" + rzDate
+				+ ", rzRemark=" + rzRemark + ", buildingId=" + buildingId
+				+ ", floorId=" + floorId + ", roomId=" + roomId + ", rzBuss="
+				+ rzBuss + ", rzId=" + rzId + ", enTypeId=" + enTypeId
+				+ ", rzSign=" + rzSign + ", rzMem=" + rzMem + ", rzTelephone="
+				+ rzTelephone + ", rzName=" + rzName + ", parkId=" + parkId
+				+ ", rzLogo=" + rzLogo + ", rzType=" + rzType + ", rzProperty="
+				+ rzProperty + ", rzUrl=" + rzUrl + ", rzImages=" + rzImages
+				+ ", productDiscriptio=" + productDiscriptio
+				+ ", attentionCount=" + attentionCount + ", scanCount="
+				+ scanCount + ", legal=" + legal + "]";
 	}
 }
