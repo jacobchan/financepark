@@ -41,12 +41,12 @@
 			<youi:fieldText property="policyCaption"  caption="政策法规名称"  notNull="true"/>
 			<youi:fieldSelect property="nmIssuetempalate.issueTempalateId" caption="发布模板" 
 				src="esb/web/nmIssuetempalateManager/getNmIssuetempalates.json" code="issueTempalateId" show="issueTempalateCaption" />
-			<youi:fieldSelect property="policyStatus"  caption="发布状态" convert="policyStatus" notNull="true"/>
 			<youi:fieldText property="policyCome"  caption="发布人" notNull="true" />
 			<youi:fieldCalendar property="policyIssueDate"  caption="发布时间" notNull="true"/>
-			<youi:fieldText property="browseCount"  caption="浏览次数" notNull="true" expression="^\d{0,32}$" expressionMessage="请输入数字!"/>
-			<youi:fieldText property="dingCount"  caption="顶的次数" notNull="true" expression="^\d{0,32}$" expressionMessage="请输入数字!"/>
-			<youi:fieldText property="caiCount"  caption="踩的次数" notNull="true" expression="^\d{0,32}$" expressionMessage="请输入数字!"/>
+			<youi:fieldHidden property="browseCount"  caption="浏览次数" />
+			<youi:fieldHidden property="dingCount"  caption="顶的次数"/>
+			<youi:fieldHidden property="caiCount"  caption="踩的次数"/>
+			<youi:fieldHidden property="policyStatus"  caption="发布状态"/>
 			<youi:fieldSwfupload property="imageUrl" caption="图片URL" uploadUrl="/common/uploadImage.html" 
 				fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="10240" />
 			<youi:fieldCustom column="2" custom="fieldCkeditor" customOptions="{}" property="policyContent"  caption="政策法规内容"/>
