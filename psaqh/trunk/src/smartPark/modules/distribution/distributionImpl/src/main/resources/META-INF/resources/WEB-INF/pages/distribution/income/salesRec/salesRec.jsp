@@ -11,15 +11,15 @@
 				editSrc="esb/web/salesRecManager/getSalesRec.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/salesRecManager/removeSalesRec.json">
 		<youi:fieldLayout>
-			<youi:fieldText property="disLevelCount"  caption="分佣层数"/>
-			<youi:fieldText property="factDisRate"  caption="分佣总比例"/>
-			<youi:fieldText property="factDisAmount"  caption="分佣总额"/>
-			<youi:fieldText property="saleAmount"  caption="成交金额"/>
-			<youi:fieldText property="preDisAmount"  caption="预计分佣总额"/>
+			<youi:fieldText property="disLevelCount"  caption="分佣层数" align="center"/>
+			<youi:fieldText property="factDisRateShow"  caption="分佣总比例" align="center"/>
+			<youi:fieldText property="factDisAmount"  caption="分佣总额" align="center"/>
+			<youi:fieldText property="saleAmount"  caption="成交金额" align="center"/>
+			<youi:fieldText property="preDisAmount"  caption="预计分佣总额" align="center"/>
 			<%-- <youi:fieldText property="recId"  caption="序列"/> --%>
 			<%-- <youi:fieldText property="roomId"  caption="单元ID"/> --%>
-			<youi:fieldText property="isOut"  caption="是否超额"/>
-			<youi:fieldText property="isExtract"  caption="是否提佣"/>
+			<youi:fieldText property="isOut"  caption="是否超额" align="center"/>
+			<youi:fieldText property="isExtract"  caption="是否提佣" align="center"/>
 		</youi:fieldLayout>
 		<youi:gridCol property="disLevelCount"  caption="分佣层数"/>
 		<youi:gridCol property="factDisRate"  caption="分佣总比例"/>
@@ -31,7 +31,7 @@
 		<youi:gridCol property="saleAmount"  caption="成交金额"  />
 		<youi:gridCol property="preDisAmount"  caption="预计分佣总额"/>
 		<youi:gridCol property="isOut"  caption="是否超额"/>
-		<youi:gridCol property="isExtract"  caption="是否提佣" />
+		<youi:gridCol property="isExtract"  caption="是否提佣" convert="bool" />
 		
 		 <youi:button active="1" name="viewDmTabs" caption="详细信息"/>   
 		<%-- <youi:gridCol width="10%" fixed="false" property="button" type="button" caption="详细信息">

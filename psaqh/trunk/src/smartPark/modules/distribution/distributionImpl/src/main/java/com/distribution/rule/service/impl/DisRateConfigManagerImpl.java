@@ -3,6 +3,7 @@
  */
 package com.distribution.rule.service.impl;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
@@ -61,6 +62,21 @@ public class DisRateConfigManagerImpl extends BaseManagerImpl implements DisRate
 			@ConditionCollection(domainClazz=DisRateConfig.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
 		PagerRecords pagerRecords = disRateConfigDao.findByPager(pager, conditions, orders);
+		@SuppressWarnings("unchecked")
+		List<DisRateConfig> disRateConfigList=pagerRecords.getRecords();
+		for(DisRateConfig disRateConfig:disRateConfigList){
+			String disRate=disRateConfig.getDisRate();
+			BigDecimal dicRates = new BigDecimal(disRate);
+			if(disRate.indexOf(".")>0){
+				//分佣比率四舍五入取两位两数
+				BigDecimal dic = dicRates.setScale(2, BigDecimal.ROUND_HALF_UP);
+				disRateConfig.setDisRateShow(String.valueOf(dic)+"%");
+			}else{
+				disRateConfig.setDisRateShow(String.valueOf(dicRates)+"%");
+			}
+			
+			
+		}
 		return pagerRecords;
 	}
     /**
