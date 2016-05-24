@@ -11,7 +11,6 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
-
 /* *
  *类名：AlipaySubmit
  *功能：支付宝各接口请求提交类
@@ -38,8 +37,8 @@ public class AlipaySubmit {
 	public static String buildRequestMysign(Map<String, String> sPara) {
     	String prestr = AlipayCore.createLinkString(sPara); //把数组所有元素，按照“参数=参数值”的模式用“&”字符拼接成字符串
         String mysign = "";
-        if(AlipayConfig.sign_type.equals("MD5") ) {
-        	mysign = MD5.sign(prestr, AlipayConfig.key, AlipayConfig.input_charset);
+        if(AlipayConfig.sign_type.equals("RSA") ){
+        	mysign = RSA.sign(prestr, AlipayConfig.private_key, AlipayConfig.input_charset);
         }
         return mysign;
     }
