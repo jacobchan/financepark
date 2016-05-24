@@ -86,6 +86,21 @@ public class SalesRecManagerImpl extends BaseManagerImpl implements SalesRecMana
 			@ConditionCollection(domainClazz=SalesRec.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
 		PagerRecords pagerRecords = salesRecDao.findByPager(pager, conditions, orders);
+		@SuppressWarnings("unchecked")
+		List<SalesRec> salesRecList=pagerRecords.getRecords();
+		for(SalesRec salesRec:salesRecList){
+			String factDisRate=salesRec.getFactDisRate();
+			BigDecimal factDisRates = new BigDecimal(factDisRate);
+			if(factDisRate.indexOf(".")>0){
+				//分佣比率四舍五入取两位两数
+				BigDecimal dic = factDisRates.setScale(2, BigDecimal.ROUND_HALF_UP);
+				salesRec.setFactDisRateShow(String.valueOf(dic)+"%");
+			}else{
+				salesRec.setFactDisRateShow(String.valueOf(factDisRates)+"%");
+			}
+			
+			
+		}
 		return pagerRecords;
 	}
     /**
