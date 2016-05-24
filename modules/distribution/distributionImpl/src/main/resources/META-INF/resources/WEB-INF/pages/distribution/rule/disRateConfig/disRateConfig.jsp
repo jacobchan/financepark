@@ -7,13 +7,12 @@
 				editSrc="esb/web/disRateConfigManager/getDisRateConfig.json" edit="NOT" remove="NOT" showCheckbox="true"
 				removeSrc="esb/web/disRateConfigManager/removeDisRateConfig.json">
 		<youi:fieldLayout>
-			<youi:fieldText property="memLevel"  caption="会员等级"/>
-			<youi:fieldText property="disRate"  caption="分佣比率"/>
-			<youi:fieldText property="disLevel"  caption="分销等级"/>
+			<youi:fieldSelect property="memLevel"  caption="会员等级" convert="memLevel"/>
+			<youi:fieldSelect property="disLevel"  caption="分销等级" convert="disLevel"/>
 		</youi:fieldLayout>
-		<youi:gridCol property="memLevel"  caption="会员等级" width="20%"/>
-		<youi:gridCol property="disRate"  caption="分佣比率" width="20%"/>
-		<youi:gridCol property="disLevel"  caption="分销等级" width="20%"/>
+		<youi:gridCol property="memLevel"  caption="会员等级" width="20%" convert="memLevel" align="center"/>
+		<youi:gridCol property="disRateShow"  caption="分佣比率" width="20%" align="right"/>
+		<youi:gridCol property="disLevel"  caption="分销等级" convert="disLevel" width="20%" align="center"/>
 		<youi:button name="enteringAdd" caption="添加"></youi:button>
 		<youi:gridCol width="60" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改"/>
@@ -26,8 +25,8 @@
 	action="esb/web/disRateConfigManager/saveDisRateConfig.json">
 		<youi:fieldLayout prefix="record">
 			<youi:fieldHidden property="recId"/>
-			<youi:fieldText property="disLevel"  caption="分销等级" readonly="true"/>
-			<youi:fieldText property="memLevel"  caption="会员等级" readonly="true"/>
+			<youi:fieldSelect property="disLevel"  convert="disLevel" caption="分销等级" readonly="true"/>
+			<youi:fieldSelect property="memLevel"  convert="memLevel" caption="会员等级" readonly="true"/>
 			<youi:fieldText property="disRate"  caption="分佣比率"/>
 		</youi:fieldLayout>
 	</youi:form>	
