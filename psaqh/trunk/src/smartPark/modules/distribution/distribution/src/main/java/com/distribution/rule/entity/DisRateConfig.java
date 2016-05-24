@@ -4,8 +4,8 @@
 package com.distribution.rule.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.*;
 
+import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.gsoft.framework.core.dataobj.Domain;
@@ -34,6 +34,8 @@ public class DisRateConfig implements Domain{
 	@Column(name = "DIS_RATE_")
 	@Length(max=10)
 	private String disRate;//分佣比率
+	@Transient
+	private String disRateShow;//分佣比率百分比显示
 
 	@Column(name = "DIS_LEVEL_")
 	@Length(max=2)
@@ -50,6 +52,14 @@ public class DisRateConfig implements Domain{
 		return this.recId;
 	}
 	
+	public String getDisRateShow() {
+		return disRateShow;
+	}
+
+	public void setDisRateShow(String disRateShow) {
+		this.disRateShow = disRateShow;
+	}
+
 	public void setRecId(String recId){
 		this.recId = recId;
 	}
