@@ -73,10 +73,10 @@ public class AliPayManagerImpl extends BaseManagerImpl implements AliPayManager{
         String subject = order.getUserorderCode();
         String total_fee = order.getUserorderAmount().toString();
         //商品描述，可空
-        String body = "";
+        String body = order.getUserorderCode();
         //把请求参数打包成数组
   		Map<String, String> sParaTemp = new HashMap<String, String>();
-  		sParaTemp.put("service", AlipayConfig.service);
+  		sParaTemp.put("service", AlipayConfig.app_service);
         sParaTemp.put("partner", AlipayConfig.partner);
         sParaTemp.put("seller_id", AlipayConfig.seller_id);
         sParaTemp.put("_input_charset", AlipayConfig.input_charset);
@@ -89,7 +89,8 @@ public class AliPayManagerImpl extends BaseManagerImpl implements AliPayManager{
   		sParaTemp.put("subject", subject);
   		sParaTemp.put("total_fee", total_fee);
   		sParaTemp.put("body", body);
-  		String paramStr = AlipayCore.createLinkString(AlipaySubmit.buildRequestPara(sParaTemp));
+  		sParaTemp = AlipaySubmit.buildRequestParaApp(sParaTemp);
+  		String paramStr = AlipayCore.createLinkStringApp(sParaTemp);
   		return paramStr;
     }
     
@@ -105,7 +106,7 @@ public class AliPayManagerImpl extends BaseManagerImpl implements AliPayManager{
         String subject = order.getUserorderCode();
         String total_fee = order.getUserorderAmount().toString();
         //商品描述，可空
-        String body = "";
+        String body = order.getUserorderCode();
         //把请求参数打包成数组
   		Map<String, String> sParaTemp = new HashMap<String, String>();
   		sParaTemp.put("service", AlipayConfig.service);
