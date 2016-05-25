@@ -36,9 +36,9 @@
 	action="esb/web/disRateConfigManager/saveDisRateConfig.json">
 		<youi:fieldLayout prefix="records">
 			<youi:fieldSelect property="disLevel" convert="disLevel" caption="分销等级" notNull="true"/>
-			<youi:fieldText property="v1"  caption="v1分佣" notNull="true"/>
-			<youi:fieldText property="v2"  caption="v2分佣" notNull="true"/>
-			<youi:fieldText property="v3"  caption="v3分佣" notNull="true"/>
+			<youi:fieldText property="v1"  caption="初级会员" notNull="true"/>
+			<youi:fieldText property="v2"  caption="中级会员" notNull="true"/>
+			<youi:fieldText property="v3"  caption="高级会员" notNull="true"/>
 		</youi:fieldLayout>
 	</youi:form>
 	
