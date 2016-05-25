@@ -15,6 +15,7 @@
 		<youi:gridCol property="receive"  caption="接收人" width="15%" align="center"/>
 		<youi:gridCol property="sendDate"  caption="发送时间" width="15%" align="center"/>
 		<youi:gridCol property="sendStatus"  caption="发送状态" width="15%" align="center" convert="msgSendStatus"/>
+		<youi:gridCol property="readStatus"  caption="阅读状态" width="15%" align="center"/>
 		
 		<youi:gridCol width="80" fixed="true" property="button" type="button" caption="操作">
 			<youi:button name="edit" caption="修改" icon="search"/>
