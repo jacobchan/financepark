@@ -342,7 +342,7 @@ $(document).ready(function() {
 					if(records[i].financingStatus=="1"){
 						financingMsg = records[i].financingTime.substring(0,4)+"年<p>"+records[i].financingTime.substring(5,7)+"月"+records[i].financingTime.substring(8,10)+"日</p>";
 					}else{
-						financingMsg = "发布中...";
+						financingMsg = "";
 					}
 					financingDiv += '<div class="yg-time">'+
 							'<div class="yt-pa">'+financingMsg+'</div><em class="em-pa"></em>'+
