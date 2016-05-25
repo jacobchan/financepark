@@ -281,10 +281,10 @@ public class RepairOrderservice implements AccountFlowBusinessService{
 					propertyservicemanagerBxManager.savaPsBx(psbx);
 					repairOrder.setFlowType("00");
 				}else{
-					psbx.setBxStatus("05");//待评价
+					psbx.setBxStatus("06");//已付款
 					psbx.setUpdateUser(userId);
 					propertyservicemanagerBxManager.savaPsBx(psbx);
-					repairOrder.setFlowType("05");
+					repairOrder.setFlowType("06");
 				}
 			}
 			repairOrder.setPropertyservicemanagerBx(psbx);
