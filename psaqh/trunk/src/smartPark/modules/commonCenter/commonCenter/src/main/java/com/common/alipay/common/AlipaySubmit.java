@@ -1,8 +1,10 @@
 package com.common.alipay.common;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +43,45 @@ public class AlipaySubmit {
         	mysign = RSA.sign(prestr, AlipayConfig.private_key, AlipayConfig.input_charset);
         }
         return mysign;
+    }
+	
+	
+	/**
+     * 生成签名结果App
+     * @param sPara 要签名的数组
+     * @return 签名结果字符串
+     */
+	public static String buildRequestMysignApp(Map<String, String> sPara) {
+    	String prestr = AlipayCore.createLinkStringApp(sPara); //把数组所有元素，按照“参数=参数值”的模式用“&”字符拼接成字符串
+        String mysign = "";
+        if(AlipayConfig.sign_type.equals("RSA") ){
+        	mysign = RSA.sign(prestr, AlipayConfig.private_key, AlipayConfig.input_charset);
+        	try {
+				mysign = URLEncoder.encode(mysign, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
+        return mysign;
+    }
+	
+	/**
+     * 生成要请求给支付宝的参数数组App
+     * @param sParaTemp 请求前的参数数组
+     * @return 要请求的参数数组
+     */
+    public static Map<String, String> buildRequestParaApp(Map<String, String> sParaTemp) {
+        //除去数组中的空值和签名参数
+        Map<String, String> sPara = AlipayCore.paraFilter(sParaTemp);
+        //生成签名结果
+        String mysign = buildRequestMysignApp(sPara);
+
+        //签名结果与签名方式加入请求提交参数组中
+        sPara.put("sign", mysign);
+        sPara.put("sign_type", AlipayConfig.sign_type);
+
+        return sPara;
     }
 	
     /**
