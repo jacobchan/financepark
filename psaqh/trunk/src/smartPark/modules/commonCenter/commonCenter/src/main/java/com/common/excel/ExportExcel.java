@@ -1,4 +1,5 @@
 package com.common.excel;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.apache.poi.hssf.util.CellRangeAddress;
 import org.apache.poi.hssf.util.HSSFColor;
 
 import com.common.MemberManager.entity.MemberInformation;
+
 /**
  * 利用开源组件POI3.0.2动态导出EXCEL文档 转载时请保留以下信息，注明出处！
  * 
@@ -49,18 +51,19 @@ public class ExportExcel<T> {
 	 * @param pattern
 	 *            如果有时间数据，设定输出格式。默认为"yyy-MM-dd"
 	 */
-	public void exportExcel(String[] headers,
-			List<T> dataset, OutputStream out, String pattern, String title) {
+	public void exportExcel(String[] headers, List<T> dataset,
+			OutputStream out, String pattern, String title) {
 		// 声明一个工作薄
 		HSSFWorkbook workbook = new HSSFWorkbook();
 		// 生成一个表格
 		HSSFSheet sheet = workbook.createSheet(title);
 		// 设置表格默认列宽度为15个字节
-		sheet.setDefaultColumnWidth((short)30);
+		sheet.setDefaultColumnWidth((short) 30);
 		// 声明一个画图的顶级管理器
 		HSSFPatriarch patriarch = sheet.createDrawingPatriarch();
 		// 定义注释的大小和位置,详见文档
-		HSSFComment comment = patriarch.createComment(new HSSFClientAnchor(0, 0, 0, 0, (short) 4, 2, (short) 6, 5));
+		HSSFComment comment = patriarch.createComment(new HSSFClientAnchor(0,
+				0, 0, 0, (short) 4, 2, (short) 6, 5));
 		// 设置注释内容
 		comment.setString(new HSSFRichTextString("企业通讯录名单！"));
 		// 设置注释作者，当鼠标移动到单元格上是可以在状态栏中看到该内容.
@@ -76,14 +79,14 @@ public class ExportExcel<T> {
 		cellTiltle.setCellStyle(columnTopStyle);
 		cellTiltle.setCellValue(title);
 
-		// 创建字体  
-        HSSFFont ftRed = workbook.createFont();
-        ftRed.setStrikeout(true); 
-        ftRed.setColor(HSSFColor.RED.index);
-        ftRed.setFontHeightInPoints((short) 12);
+		// 创建字体
+		HSSFFont ftRed = workbook.createFont();
+		// ftRed.setStrikeout(true);
+		ftRed.setColor(HSSFColor.RED.index);
+		ftRed.setFontHeightInPoints((short) 12);
 		// 产生表格标题行
 		HSSFRow row = sheet.createRow(2);
-		row.setHeight((short)506);
+		row.setHeight((short) 506);
 		for (short i = 0; i < headers.length; i++) {
 			HSSFCell cell = row.createCell(i, HSSFCell.CELL_TYPE_STRING);
 			HSSFRichTextString textString = new HSSFRichTextString(headers[i]);
@@ -96,37 +99,40 @@ public class ExportExcel<T> {
 		// 将查询出的数据设置到sheet对应的单元格中
 		for (int i = 0; i < dataset.size(); i++) {
 			HSSFRow rows = sheet.createRow(i + 3);// 创建所需的行数
-			rows.setHeight((short)1012);
-			MemberInformation m = (MemberInformation)dataset.get(i);
-			
+			rows.setHeight((short) 1012);
+			MemberInformation m = (MemberInformation) dataset.get(i);
+
 			HSSFCell cell0 = rows.createCell(0, HSSFCell.CELL_TYPE_STRING);
-			if (!"".equals(m.getMemberHeadPortrait()) && m.getMemberHeadPortrait() != null) {
+			if (!"".equals(m.getMemberHeadPortrait())
+					&& m.getMemberHeadPortrait() != null) {
 				cell0.setCellValue(m.getMemberHeadPortrait());
-			}else{
+			} else {
 				cell0.setCellValue("");
 			}
 			cell0.setCellStyle(styles);
-			
+
 			HSSFCell cell1 = rows.createCell(1, HSSFCell.CELL_TYPE_STRING);
 			if (!"".equals(m.getMemberName()) && m.getMemberName() != null) {
 				cell1.setCellValue(m.getMemberName());
-			}else{
+			} else {
 				cell1.setCellValue("");
 			}
 			cell1.setCellStyle(styles);
-			
+
 			HSSFCell cell2 = rows.createCell(2, HSSFCell.CELL_TYPE_STRING);
-			if (!"".equals(m.getMemberPhoneNumber()) && m.getMemberPhoneNumber() != null) {
+			if (!"".equals(m.getMemberPhoneNumber())
+					&& m.getMemberPhoneNumber() != null) {
 				cell2.setCellValue(m.getMemberPhoneNumber());
-			}else{
+			} else {
 				cell2.setCellValue("");
 			}
 			cell2.setCellStyle(styles);
-			
+
 			HSSFCell cell3 = rows.createCell(3, HSSFCell.CELL_TYPE_STRING);
-			if (!"".equals(m.getMemberDescribe2()) && m.getMemberDescribe2() != null) {
+			if (!"".equals(m.getMemberDescribe2())
+					&& m.getMemberDescribe2() != null) {
 				cell3.setCellValue(m.getMemberDescribe2());
-			}else{
+			} else {
 				cell3.setCellValue("");
 			}
 			cell3.setCellStyle(styles);
@@ -188,9 +194,9 @@ public class ExportExcel<T> {
 		// 设置字体
 		HSSFFont font = workbook.createFont();
 		// 设置字体大小
-		 font.setFontHeightInPoints((short) 10);
+		font.setFontHeightInPoints((short) 10);
 		// 字体加粗
-//		 font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+		// font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
 		// 设置字体名字
 		font.setFontName("Courier New");
 		// 设置样式;
