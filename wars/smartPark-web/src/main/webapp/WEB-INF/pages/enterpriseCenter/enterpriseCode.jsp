@@ -74,7 +74,7 @@
 					    				var msg = result.record.html.split(",");
 					    				if(msg[1].substring(0,1)==0){
 					    					$(".bg-tanc").hide();
-					    					$('#toast_text').html("手机号码："+phoneArr+"<br/>发送时间："+msg[0].substring(0,4)+"年"+msg[0].substring(4,6)+"月"+msg[0].substring(6,8)+"日 "+msg[0].substring(8,10)+":"+msg[0].substring(10,12)+":"+msg[0].substring(12,14)+"<br/>发送状态：成功！");
+					    					$('#toast_text').html("发送状态：成功！");
 											$(".toast").show();
 								            setTimeout('$(".toast").hide();',3000);//1秒=1000
 								            $.ajax({
@@ -103,7 +103,7 @@
 												}
 										  	});
 					    				}else{
-					    					$('#toast_text').html("手机号码："+phoneArr+"<br/>发送时间："+msg[0].substring(0,4)+"年"+msg[0].substring(4,6)+"月"+msg[0].substring(6,8)+"日 "+msg[0].substring(8,10)+":"+msg[0].substring(10,12)+":"+msg[0].substring(12,14)+"<br/>发送状态：失败！");
+					    					$('#toast_text').html("发送状态：失败！");
 											$(".toast").show();
 								            setTimeout('$(".toast").hide();',3000);//1秒=1000
 					    				}
@@ -136,7 +136,7 @@
 					    				var msg = result.record.html.split(",");
 					    				if(msg[1].substring(0,1)==0){
 					    					$(".bg-tanc").hide();
-					    					$('#toast_text').html("手机号码："+phoneArr+"<br/>发送时间："+msg[0].substring(0,4)+"年"+msg[0].substring(4,6)+"月"+msg[0].substring(6,8)+"日 "+msg[0].substring(8,10)+":"+msg[0].substring(10,12)+":"+msg[0].substring(12,14)+"<br/>发送状态：成功！");
+					    					$('#toast_text').html("发送状态：成功！");
 											$(".toast").show();
 								            setTimeout('$(".toast").hide();',3000);//1秒=1000
 								            $.ajax({
@@ -165,7 +165,7 @@
 												}
 										  	});
 					    				}else{
-					    					$('#toast_text').html("手机号码："+phoneArr+"<br/>发送时间："+msg[0].substring(0,4)+"年"+msg[0].substring(4,6)+"月"+msg[0].substring(6,8)+"日 "+msg[0].substring(8,10)+":"+msg[0].substring(10,12)+":"+msg[0].substring(12,14)+"<br/>发送状态：失败！");
+					    					$('#toast_text').html("发送状态：失败！");
 											$(".toast").show();
 								            setTimeout('$(".toast").hide();',3000);//1秒=1000
 					    				}
