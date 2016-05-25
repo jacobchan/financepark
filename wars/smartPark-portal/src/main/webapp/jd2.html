@@ -429,11 +429,11 @@
 			              'rm='+$("#roomNum").text(),'guest='+tmp,'mobile='+$("#mobile").val(),
 			              'pucardno='+$("#pucardno").val(),'puyear='+$("#puyear").text(),'pucode='+$("#pucode").val(),
 			              'pumonth='+$("#pumonth").text(),'puname='+$("#puname").val(),'puidtype='+$("#puidtype").attr("data-val"),
-			              'puidno='+$("#puidno").val(),'captcha='+$("#captcha").val()];
+			              'puidno='+$("#puidno").val(),'captcha='+$("#captcha").val(),'totalprice='+roomPrice];
 		}else{
 			params = ['hid='+$("#hid").val(),'rid=' + $("#rid").val(),'pid='+$("#pid").val(),
 		              'tm1='+$("#tm1").val(),'tm2='+$("#tm2").val(),'latetime='+$("input:radio:checked").val(),
-		              'rm='+$("#roomNum").text(),'guest='+tmp,'mobile='+$("#mobile").val(),'captcha='+$("#captcha").val()];
+		              'rm='+$("#roomNum").text(),'guest='+tmp,'mobile='+$("#mobile").val(),'captcha='+$("#captcha").val(),'totalprice='+roomPrice];
 		}
 		serviceURL = baseUrl+"hotelOrderService/postBook.json";
 		$.youi.ajaxUtils.ajax({
