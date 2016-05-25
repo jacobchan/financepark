@@ -33,14 +33,14 @@
             <div class="form_control">
                 <div class="user_main">
                     <span></span>
-                    <input type="text" placeholder="请输入用户名" name="username" class="user_int"  value="demo-plt" placeholder="Username">
+                    <input type="text" placeholder="请输入用户名" name="username" class="user_int" placeholder="Username">
                 </div>
                 <span class="error1"></span><!--错误提示-->
             </div>
             <div class="form_control">
                 <div class="password_main">
                     <span></span>
-                    <input type="password" placeholder="请输入密码" class="paswd_int" name="password" value="123456">
+                    <input type="password" placeholder="请输入密码" class="paswd_int" name="password">
                 </div>
             <span class="error1"></span><!--错误提示-->
             </div>
