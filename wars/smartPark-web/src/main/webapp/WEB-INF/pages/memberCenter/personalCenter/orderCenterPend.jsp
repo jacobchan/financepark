@@ -85,6 +85,39 @@
 			</div>
 		</div>
 	</div>
+	<!-- 选择微信支付、支付宝支付 -->
+	<div class="bg-tanc m4">
+		<div class="tanc-con" style="top:50%;margin-top:-225px;width:550px;padding:40px 30px;">
+			<a href="javascript:;" class="tc-close"></a>
+			<div class="w70 tc mt40" style="margin-left:15%">
+				<div><table class="setting-table">
+							<!-- <colgroup>
+								<col width="40"></col>
+								<col></col>
+								<col width="60"></col>
+								<col></col>
+							</colgroup> -->
+							<tr style="float: left;">
+								<td style="font-size: 16px;">选择支付方式：</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="select-address active" data="1">
+										<p>微信支付</p>
+									</div>
+									<div class="select-address" data="2">
+										<p>支付宝支付</p>
+									</div> 
+								</td>
+							</tr>
+							
+							</table>
+							
+							</div>
+				<input value="确定" class="hhf-submit pay" style="height:36px;margin-top: 10px;" type="button">
+			</div>
+		</div>
+	</div>
 	<!--***弹窗 ****************************************-->	
 	<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/page/jquery.page.js"></script>
 

@@ -43,6 +43,12 @@ var pageSize=10;
 	}
 	
 	function goPay(userorderCode){
+		$(".bg-tanc.m4").attr("id",userorderCode);
+		$(".bg-tanc.m4").show();
+	}
+	
+	
+	function goPayfor(userorderCode){
 		
 		var serviceURL = baseUrl+"ordermanagerUserorderManager/getOrderByCode.json";
 		$.youi.ajaxUtils.ajax({
@@ -235,6 +241,11 @@ var pageSize=10;
 			});
 		});
 		
+		$(".select-address").click(function(){
+			$(this).parent().find(".select-address").removeClass("active");
+			$(this).addClass("active");
+		});
+		
 		$(".hhf-submit.repair").click(function(){
 		    $(".bg-tanc.m3").hide();
 		    var taskId = $("#taskId").val();
@@ -251,6 +262,21 @@ var pageSize=10;
 				}
 			});
 		});
+		
+		$(".hhf-submit.pay").click(function(){
+		    $(".bg-tanc.m4").hide();
+		    var userorderCode = $(".bg-tanc.m4").attr("id");
+		    var data = $(".select-address.active").attr("data");
+		    if(data=='1'){//微信支付
+		    	goPayfor(userorderCode);
+		    }else if(data=='2'){//支付宝支付
+		    	var url = cenUrl+"alipayapi.html?userorderCode="+userorderCode;
+		    	 window.location.href=url; 
+		    }else{
+		    	close("请选择支付方式!");
+		    }
+		});
+		
 	});
 	$(".tc-close").click(function(){	
 	$(".bg-tanc.m1").hide();
