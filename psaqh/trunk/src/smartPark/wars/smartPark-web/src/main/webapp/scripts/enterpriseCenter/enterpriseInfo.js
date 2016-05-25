@@ -30,27 +30,39 @@ function check(roomId,rzName,rzRemark,rzUrl,enTypeId,productDiscriptio){
 	//url正则表达式
 	var urlRegex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
 	if(rzName=="" || rzName.trim().length==0){
-		alert("企业名称不能为空！");
+		$('#toast_text').html('企业名称不能为空！');
+		$(".toast").show();
+        setTimeout('$(".toast").hide();',2000);//1秒=1000
 		return false;
 	}
 	if(roomId=="" || roomId.trim().length==0){
-		alert("地址不能为空！");
+		$('#toast_text').html('地址不能为空！');
+		$(".toast").show();
+        setTimeout('$(".toast").hide();',2000);//1秒=1000
 		return false;
 	}
 	if(rzUrl=="" || !urlRegex.test(rzUrl)){
-		alert("网址输入错误！");
+		$('#toast_text').html('网址输入错误！');
+		$(".toast").show();
+        setTimeout('$(".toast").hide();',2000);//1秒=1000
 		return false;
 	}
 	if(enTypeId=="" || enTypeId.trim().length==0){
-		alert("行业类型不能为空！");
+		$('#toast_text').html('行业类型不能为空！');
+		$(".toast").show();
+        setTimeout('$(".toast").hide();',2000);//1秒=1000
 		return false;
 	}
 	if(rzRemark=="" || rzRemark.trim().length==0){
-		alert("公司介绍不能为空！");
+		$('#toast_text').html('公司介绍不能为空！');
+		$(".toast").show();
+        setTimeout('$(".toast").hide();',2000);//1秒=1000
 		return false;
 	}
 	if(productDiscriptio=="" || productDiscriptio.trim().length==0){
-		alert("产品描述不能为空！");
+		$('#toast_text').html('产品描述不能为空！');
+		$(".toast").show();
+        setTimeout('$(".toast").hide();',2000);//1秒=1000
 		return false;
 	}
 	return true;
