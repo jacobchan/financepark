@@ -5,7 +5,9 @@ package com.manage.PropertyServiceManager.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
+import com.common.MessageCenter.entity.McMsgdatas;
+import com.common.MessageCenter.service.McMsgdatasManager;
 import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -49,6 +53,8 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 	private EnterpriseEmployeesDao enterpriseEmployeesDao;
 	@Autowired
 	private EnterpriseEmployeesManager enterpriseEmployeesManager;
+	@Autowired
+	private McMsgdatasManager mcMsgdatasManager;
 	/**
      * 修改一卡通预约状态
      */
@@ -144,8 +150,14 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 	    		o.setApplyTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
 	    		saveOc = propertyservicemanagerOcDao.save(o);
 	    		//发送短信给联系人
-	    		try {
-	    			HttpSenderMsg.sendMsg(saveOc.getOcAddree().getAddressPhone(), "您的一卡通申请已成功,申请单号："+saveOc.getOcCode()+"，请等待办卡完成！");
+	    		Map<String, String> replaceMap = new HashMap<String, String>();		
+	        	replaceMap.put("#user", memberInformationManager.getMember(o.getMemberId()).getMemberName());
+	        	replaceMap.put("#ocCode", o.getOcCode());
+	        	McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0312", replaceMap);			
+	        	//mcMsgdatasManager.sendToUser(msgData, o.getMemberInformation().getMemberId());
+	        	try {
+	        		mcMsgdatasManager.sendToUser(msgData, o.getMemberId());
+	    			//HttpSenderMsg.sendMsg(saveOc.getOcAddree().getAddressPhone(), "您的一卡通申请已成功,申请单号："+saveOc.getOcCode()+"，请等待办卡完成！");
 	    		} catch (Exception e) {
 	    			e.printStackTrace();
 	    		}
