@@ -39,14 +39,14 @@
 										<tr>
 											<th>活动封面</th>
 											<td>
+												<div class="photoedit" style="left:22px;float: left;">
+													<img id="headImg" src="<%=request.getContextPath()%>/styles/images/grzx/user-photo.png"  width="200" height="200"/>
+												</div>
 												 <div class="photo-edit" id="destination" style="width:200px;height:200px;margin-left:0px;">
 							    					<input type="file" id="imgUpload" name="imgUpload" draggable="true" accept=".png,.jpg"/>
 							    					<p>编辑 <span class="ml10">封面</span></p>
 													<p class="f12">封面图片大小建议：288*195</p>
-												</div>
-												<div class="photoedit" style="left:22px">
-													<img id="headImg" src="<%=request.getContextPath()%>/styles/images/grzx/user-photo.png"  width="200" height="200"/>
-											</div>		
+												</div>		
 											</td>
 										</tr>
 										<tr>
