@@ -102,9 +102,9 @@
 		<property name="userService" ref="userService"></property>
 	</bean>
 	
-	<!-- 开发用户适配  -->
+	<!-- 开发用户适配  
 	<bean id="devUserAdapter" class="com.gsoft.framework.security.dev.DevUserAdapter">
-	</bean>
+	</bean>-->
 	
 	<!-- 用户密码表单登录  -->
 	<bean id="realm" class="com.gsoft.framework.security.FormLoginRealm">
