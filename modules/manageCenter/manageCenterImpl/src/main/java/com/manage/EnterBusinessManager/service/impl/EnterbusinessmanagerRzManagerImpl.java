@@ -3,11 +3,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 import java.util.Random;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.common.BuildingBaseManager.dao.BbmBuildingDao;
 import com.common.BuildingBaseManager.dao.BbmFloorDao;
 import com.common.BuildingBaseManager.entity.BbmBuilding;
@@ -316,25 +314,66 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     @EsbServiceMapping
 	public EnterbusinessmanagerRz updateEnteringSign(@ServiceParam(name="rzId") String rzId) throws BusException{
     	EnterbusinessmanagerRz rz = enterbusinessmanagerRzDao.get(rzId);
+    	String rzSign = createSign(rzId);
+    	Boolean isExist = findEnterbusinessmanagerRzBySign(rzSign);
+    	EnterbusinessmanagerRz eb = null;
+    	if(isExist){
+    		rzSign = createSign(rzId);
+    		rz.setRzSign(rzSign);
+        	eb = enterbusinessmanagerRzDao.save(rz);
+    	}else{
+    		rz.setRzSign(rzSign);
+        	eb = enterbusinessmanagerRzDao.save(rz);
+    	}
+    	return eb;
+	}
+    
+    /**
+     * 生成企业码
+     * @param rzId
+     * @return
+     */
+    public String createSign(String rzId){
+    	EnterbusinessmanagerRz rz = enterbusinessmanagerRzDao.get(rzId);
     	BbmBuilding build = null;
     	BbmFloor floor = null;
     	StringBuffer numberCode = new StringBuffer();
+    	String rzSign = "";
     	if(null!=rz && !"".equals(rz.getBuildingId()) && null!=rz.getBuildingId()){
     		build = bbmBuildingDao.get(rz.getBuildingId());
     		numberCode.append(build.getBuildingNo());
     	}else{
-    		numberCode.append("A1");
+    		numberCode.append((char) (Math.random() * 26 + 'A')+random(1));
     	}
     	if(null!=rz && !"".equals(rz.getFloorId()) && null!=rz.getFloorId()){
     		floor = bbmFloorDao.get(rz.getFloorId());
     		numberCode.append(floor.getFloorNo());
     	}else{
-    		numberCode.append("1F");
+    		numberCode.append(random(1)+(char) (Math.random() * 26 + 'A'));
     	}
-    	rz.setRzSign(numberCode.toString().replaceAll("-", "")+random(4));
-    	EnterbusinessmanagerRz eb = enterbusinessmanagerRzDao.save(rz);
-    	return eb;
-	}
+    	rzSign = numberCode.toString().replaceAll("-", "")+random(4);
+    	return rzSign;
+    }
+
+    /**
+     * 检查企业码是否重复
+     * @param rzSign
+     * @return
+     * @throws BusException
+	 * @author ZhuYL
+	 * @time 2016-03-17
+     */
+	public Boolean findEnterbusinessmanagerRzBySign(String rzSign){
+    	Collection<Condition> condition = new ArrayList<Condition>();
+    	Collection<Order> order = new ArrayList<Order>();
+    	condition.add(ConditionUtils.getCondition("rzSign", Condition.EQUALS, rzSign));
+    	List<EnterbusinessmanagerRz> list = enterbusinessmanagerRzDao.commonQuery(condition, order);
+    	if(list.size()>0){
+    		return true;
+    	}else{
+    		return false;
+    	}
+    }
     
     /**
      * 获取指定位数不重复随机数
@@ -363,6 +402,7 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
         }
         return new String(chs);
     }
+   
     /**
 	  * //获取当前用户公司名字
 	  * @param userId
