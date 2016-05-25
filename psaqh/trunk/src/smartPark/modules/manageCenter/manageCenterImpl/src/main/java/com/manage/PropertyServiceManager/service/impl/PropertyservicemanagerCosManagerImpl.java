@@ -1,6 +1,7 @@
 package com.manage.PropertyServiceManager.service.impl;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -89,8 +90,15 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
     	if("".equals(o.getCosTime()) || null==o.getCosTime()){
     		o.setCosTime(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
     	}
+    	//发送信息 
+    	Map<String, String> replaceMap = new HashMap<String, String>();		
+    	replaceMap.put("#user", o.getMemberInformation().getMemberName());
+    	replaceMap.put("#cosCode", o.getCosCode());
+    	McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0309", replaceMap);			
+    	//mcMsgdatasManager.sendToUser(msgData, o.getMemberInformation().getMemberId());
     	try {
-			HttpSenderMsg.sendMsg(o.getCosTelephone(), "您提交的投诉："+o.getCosCode()+"待物业管理员受理中，请及时关注受理状态！");
+    		mcMsgdatasManager.sendToUser(msgData, o.getMemberInformation().getMemberId());
+			//HttpSenderMsg.sendMsg(o.getCosTelephone(), "您提交的投诉："+o.getCosCode()+"待物业管理员受理中，请及时关注受理状态！");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
