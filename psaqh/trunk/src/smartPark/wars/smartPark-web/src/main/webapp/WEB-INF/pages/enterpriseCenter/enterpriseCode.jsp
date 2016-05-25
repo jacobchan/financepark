@@ -5,7 +5,6 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>企业码</title>
 		<%@ include file="/WEB-INF/pages/common/enterpriseScriptAddCss.jsp"%>
-		<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/page/zs.css">
 		<script type="text/javascript">
 			var pageSize=4;
 			var pageCount=1;
@@ -47,38 +46,139 @@
 					var code = $("#rzSign").html();
 					var phone = phoneArr.split(",");
 					var regPhone = /^1[3|5|8][0-9]\d{4,8}$/;
-					for(var i=0; i<phone.length; i++){
-						if (!regPhone.test(phone[i])) {
-							$('#toast_text').html('手机号码不正确！');
-							$(".toast").show();
-				            setTimeout('$(".toast").hide();',3000);//1秒=1000
-							return false;
-						}else{
-							$.youi.ajaxUtils.ajax({
-	    						url:baseUrl+'/enterpriseInvitationManager/saveEnterpriseInvitation.json',
-	    						data:['enterbusinessmanagerRz.rzId='+$("#rzId").val(), 'invitationCode='+code, 'invitationTelephone='+phone[i]].join('&'),
-	    						success:function(result){
-	    							if(result && result.record){
-	    								return true;
-	    							}
-	    						}
-	    					});
-						}
-					}
-					$.ajax({
-						url:baseUrl+'/informationFinancingManager/sendEnterpriseCode.json',
-						data : ['mobile='+phoneArr, 'code='+code].join('&'),
-						success : function(result) {
-			    			if (result && result.record) {
-			    				var msg = result.record.html.split(",");
-			    				if(msg[1].substring(0,1)==0){
-			    					$('#toast_text').html("手机号码："+phoneArr+"\n\n发送时间："+msg[0].substring(0,4)+"年"+msg[0].substring(4,6)+"月"+msg[0].substring(6,8)+"日 "+msg[0].substring(8,10)+":"+msg[0].substring(10,12)+":"+msg[0].substring(12,14)+"\n\n发送状态：成功！");
+					if(phoneArr!=null && phoneArr!="" && $.trim(phoneArr).length>0){
+						if(phone.length>0){
+							for(var i=0; i<phone.length; i++){
+								if (!regPhone.test(phone[i])) {
+									$('#toast_text').html('手机号码不正确！');
 									$(".toast").show();
 						            setTimeout('$(".toast").hide();',3000);//1秒=1000
-			    				}
-			    			}
+									return false;
+								}else{
+									$.youi.ajaxUtils.ajax({
+			    						url:baseUrl+'/enterpriseInvitationManager/saveEnterpriseInvitation.json',
+			    						data:['enterbusinessmanagerRz.rzId='+$("#rzId").val(), 'invitationCode='+code, 'invitationTelephone='+phone[i]].join('&'),
+			    						success:function(result){
+			    							if(result && result.record){
+			    								return true;
+			    							}
+			    						}
+			    					});
+								}
+							}
+							$.ajax({
+								url:baseUrl+'/informationFinancingManager/sendEnterpriseCode.json',
+								data : ['mobile='+phoneArr, 'code='+code].join('&'),
+								success : function(result) {
+					    			if (result && result.record) {
+					    				var msg = result.record.html.split(",");
+					    				if(msg[1].substring(0,1)==0){
+					    					$(".bg-tanc").hide();
+					    					$('#toast_text').html("手机号码："+phoneArr+"<br/>发送时间："+msg[0].substring(0,4)+"年"+msg[0].substring(4,6)+"月"+msg[0].substring(6,8)+"日 "+msg[0].substring(8,10)+":"+msg[0].substring(10,12)+":"+msg[0].substring(12,14)+"<br/>发送状态：成功！");
+											$(".toast").show();
+								            setTimeout('$(".toast").hide();',3000);//1秒=1000
+								            $.ajax({
+												url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
+												success:function(result){
+													if(result&&result.record){
+														var rzId = result.record.companyId;
+													  	//获取邀请记录
+													  	$.ajax({
+															url:serviceURL,
+															data : ['enterbusinessmanagerRz.rzId='+rzId].join('&'),
+															success : function(result) {
+																pageCount=Math.ceil(result.totalCount/pageSize);
+																refreshData(1,pageSize,null);
+																$(".tcdPageCode").createPage({
+																	pageCount:pageCount,
+																	current:1,
+																	backFn:function(p){
+																	   	this.pageCount=pageCount;
+																	    refreshData(p,pageSize,rzId);
+																	}
+																});
+															}
+														});
+													}
+												}
+										  	});
+					    				}else{
+					    					$('#toast_text').html("手机号码："+phoneArr+"<br/>发送时间："+msg[0].substring(0,4)+"年"+msg[0].substring(4,6)+"月"+msg[0].substring(6,8)+"日 "+msg[0].substring(8,10)+":"+msg[0].substring(10,12)+":"+msg[0].substring(12,14)+"<br/>发送状态：失败！");
+											$(".toast").show();
+								            setTimeout('$(".toast").hide();',3000);//1秒=1000
+					    				}
+							            $("#enterprisePhone").val("");
+					    			}
+								}
+							});
+						}else{
+							if (!regPhone.test(phoneArr)) {
+								$('#toast_text').html('手机号码不正确！');
+								$(".toast").show();
+					            setTimeout('$(".toast").hide();',3000);//1秒=1000
+								return false;
+							}else{
+								$.youi.ajaxUtils.ajax({
+		    						url:baseUrl+'/enterpriseInvitationManager/saveEnterpriseInvitation.json',
+		    						data:['enterbusinessmanagerRz.rzId='+$("#rzId").val(), 'invitationCode='+code, 'invitationTelephone='+phone[i]].join('&'),
+		    						success:function(result){
+		    							if(result && result.record){
+		    								return true;
+		    							}
+		    						}
+		    					});
+							}
+							$.ajax({
+								url:baseUrl+'/informationFinancingManager/sendEnterpriseCode.json',
+								data : ['mobile='+phoneArr, 'code='+code].join('&'),
+								success : function(result) {
+					    			if (result && result.record) {
+					    				var msg = result.record.html.split(",");
+					    				if(msg[1].substring(0,1)==0){
+					    					$(".bg-tanc").hide();
+					    					$('#toast_text').html("手机号码："+phoneArr+"<br/>发送时间："+msg[0].substring(0,4)+"年"+msg[0].substring(4,6)+"月"+msg[0].substring(6,8)+"日 "+msg[0].substring(8,10)+":"+msg[0].substring(10,12)+":"+msg[0].substring(12,14)+"<br/>发送状态：成功！");
+											$(".toast").show();
+								            setTimeout('$(".toast").hide();',3000);//1秒=1000
+								            $.ajax({
+												url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
+												success:function(result){
+													if(result&&result.record){
+														var rzId = result.record.companyId;
+													  	//获取邀请记录
+													  	$.ajax({
+															url:serviceURL,
+															data : ['enterbusinessmanagerRz.rzId='+rzId].join('&'),
+															success : function(result) {
+																pageCount=Math.ceil(result.totalCount/pageSize);
+																refreshData(1,pageSize,null);
+																$(".tcdPageCode").createPage({
+																	pageCount:pageCount,
+																	current:1,
+																	backFn:function(p){
+																	   	this.pageCount=pageCount;
+																	    refreshData(p,pageSize,rzId);
+																	}
+																});
+															}
+														});
+													}
+												}
+										  	});
+					    				}else{
+					    					$('#toast_text').html("手机号码："+phoneArr+"<br/>发送时间："+msg[0].substring(0,4)+"年"+msg[0].substring(4,6)+"月"+msg[0].substring(6,8)+"日 "+msg[0].substring(8,10)+":"+msg[0].substring(10,12)+":"+msg[0].substring(12,14)+"<br/>发送状态：失败！");
+											$(".toast").show();
+								            setTimeout('$(".toast").hide();',3000);//1秒=1000
+					    				}
+					    			}
+						            $("#enterprisePhone").val("");
+								}
+							});
 						}
-					});
+					}else{
+						$('#toast_text').html("手机号码不能为空！");
+						$(".toast").show();
+			            setTimeout('$(".toast").hide();',3000);//1秒=1000
+					}
 				});
 			  	/* $("#moreul").slideUp("slow"); */
 			  	$(".sidebar-menu-mainul > li:eq(2)").addClass("active");
@@ -220,6 +320,13 @@
 					</tbody>
 				</table>
 			</div>
+		</div>
+		<!-- 弹出层样式 -->
+		<div class="toast">
+		    <div class="toast-con clearfix">
+		        <div class="close-toast fr"></div>
+		        <p class="tc mt25 f18" id="toast_text" style="color:#ff6715">请登录后重试！</p>
+		    </div>
 		</div>
 	</body>
 </html>
