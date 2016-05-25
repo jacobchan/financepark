@@ -4,8 +4,10 @@
 package com.manage.PropertyServiceManager.service.impl;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
+import com.common.MessageCenter.entity.McMsgdatas;
+import com.common.MessageCenter.service.McMsgdatasManager;
 import com.gsoft.framework.codemap.entity.Codeitem;
 import com.gsoft.framework.codemap.service.CodeitemManager;
 import com.gsoft.framework.core.dataobj.Record;
@@ -23,26 +27,22 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.PubCondition;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
-import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
-import com.gsoft.utils.HttpSenderMsg;
 import com.gsoft.utils.QRCodeUtil;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerCharge;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFkcode;
+import com.manage.PropertyServiceManager.dao.PropertyservicemanagerMoverecDao;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerFxtdc;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerMoverec;
-import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTwcrd;
-import com.manage.PropertyServiceManager.dao.PropertyservicemanagerFxtdcDao;
-import com.manage.PropertyServiceManager.dao.PropertyservicemanagerMoverecDao;
-import com.manage.PropertyServiceManager.dao.PropertyservicemanagerTwcrdDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerFxtdcManager;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerMoverecManager;
-import com.manage.PropertyServiceManager.service.PropertyservicemanagerTwcrdManager;
 
 @Service("propertyservicemanagerMoverecManager")
 @Transactional
@@ -55,6 +55,10 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
 	private CodeitemManager codeitemManager;
 	@Value("#{configProperties['file.root.path']}")
 	private String root;
+	@Autowired
+	private McMsgdatasManager mcMsgdatasManager;
+	@Autowired
+	private MemberInformationManager memberInformationManager;
     /**
      * 查询列表
      */
@@ -108,10 +112,26 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
    	    	o.setApplyTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
    	    	//保存并得到当前对象
    	    	rec =  propertyservicemanagerMoverecDao.save(o);
-   	    	try {
-    			HttpSenderMsg.sendMsg(rec.getMoverecPhone(), "尊敬的用户"+rec.getMoverecName()+"你好，"
-    					+"你的搬家预约已经成功提交，预约单号为【"+rec.getMoverecCode()+"】，预约结果请留意短信通知，"
-    					+ "或进入个人中心查看处理结果，感谢你对富春硅谷的支持！");
+   	    	Map<String, String> replaceMap = new HashMap<String, String>();	
+   	    	//获取当前用户id
+   	    	String memberId=o.getMember().getMemberId();
+   	        //获取当前用户对象
+    		MemberInformation m=memberInformationManager.getMember(memberId);
+    		//获取当前用户名字
+    		String name=m.getMemberName();
+    		//把名字放进短信模板中
+        	replaceMap.put("#user",name);
+        	//把订单编号放进短信模板中
+        	replaceMap.put("#movereCode", o.getMoverecCode());
+        	//0311为短信模板编号
+        	McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0311", replaceMap);			
+        	//mcMsgdatasManager.sendToUser(msgData, o.getMemberInformation().getMemberId());
+        	try {
+        		//发短信
+        		mcMsgdatasManager.sendToUser(msgData, o.getMember().getMemberId());
+    			//HttpSenderMsg.sendMsg(rec.getMoverecPhone(), "尊敬的用户"+rec.getMoverecName()+"你好，"
+    					//+"你的搬家预约已经成功提交，预约单号为【"+rec.getMoverecCode()+"】，预约结果请留意短信通知，"
+    					//+ "或进入个人中心查看处理结果，感谢你对富春硅谷的支持！");
     		} catch (Exception e) {
     			e.printStackTrace();
     		}
