@@ -123,43 +123,63 @@ $(function() {
 		//金额正则表达式
 		var regex = /^\d+\.?\d{0,2}$/;
 		if(financingSub==null || financingSub=="" || financingSub.length==0){
-			alert("融资轮次不能为空！");
+			$('#toast_text').html('融资伦次不能为空！');
+			$(".toast").show();
+            setTimeout('$(".toast").hide();',2000);//1秒=1000
 			return false;
 		}
 		if(financingName=="" || financingName.length==0){
-			alert("融资企业名称不能为空！");
+			$('#toast_text').html('融资企业名称不能为空！');
+			$(".toast").show();
+            setTimeout('$(".toast").hide();',2000);//1秒=1000
 			return false;
 		}
 		if(financingAmount=="" || financingAmount.length==0){
-			alert("融资金额不能为空！");
+			$('#toast_text').html('融资金额不能为空！');
+			$(".toast").show();
+            setTimeout('$(".toast").hide();',2000);//1秒=1000
 			return false;
 		}
 		if(!regex.test(financingAmount)){
-			alert("融资金额格式不正确！");
+			$('#toast_text').html('融资金额格式不正确！');
+			$(".toast").show();
+            setTimeout('$(".toast").hide();',2000);//1秒=1000
 			return false;
 		}
 		if(financingCost=="" || financingCost.length==0){
-			alert("融资估值不能为空！");
+			$('#toast_text').html('融资估值不能为空！');
+			$(".toast").show();
+            setTimeout('$(".toast").hide();',2000);//1秒=1000
 			return false;
 		}
 		if(!regex.test(financingCost)){
-			alert("融资估值格式不正确！");
+			$('#toast_text').html('融资估值格式不正确！');
+			$(".toast").show();
+            setTimeout('$(".toast").hide();',2000);//1秒=1000
 			return false;
 		}
 		if(financingPre=="" || financingPre.length==0){
-			alert("可持股份不能为空！");
+			$('#toast_text').html('可持股份不能为空！');
+			$(".toast").show();
+            setTimeout('$(".toast").hide();',2000);//1秒=1000
 			return false;
 		}
 		if(!regex.test(financingPre)){
-			alert("可持股份格式不正确！");
+			$('#toast_text').html('可持股份格式不正确！');
+			$(".toast").show();
+            setTimeout('$(".toast").hide();',2000);//1秒=1000
 			return false;
 		}
 		if(financingTime=="" || financingTime.length==0){
-			alert("融资时间不能为空！");
+			$('#toast_text').html('融资时间不能为空！');
+			$(".toast").show();
+            setTimeout('$(".toast").hide();',2000);//1秒=1000
 			return false;
 		}
 		if(financingDescribe=="" || financingDescribe.length==0){
-			alert("融资描述不能为空！");
+			$('#toast_text').html('融资描述不能为空！');
+			$(".toast").show();
+            setTimeout('$(".toast").hide();',2000);//1秒=1000
 			return false;
 		}
 		$.youi.ajaxUtils.ajax({
