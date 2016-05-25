@@ -172,12 +172,9 @@ var pageSize=10;
 					var userorderCode = record[i].userorderCode;
 					var bxId = record[i].bxId;
 					if(record[i].genreId.genreCode == '0601'){
-						button = "<a href='javascript:void(0);' onclick='repair(\""+bxId+
-						"\");'>重修</a><span class='f12 ml5 mr5'>|</span><a href='javascript:void(0);' onclick='goPay(\""+userorderCode+
-						"\");'>付款</a><span class='f12 ml5 mr5'>|</span><a href='#' onclick='cancelStatus(this)'>取消</a>";
+						button = "<a href='javascript:void(0);' onclick='repair(\""+bxId+"\");'>重修</a><span class='f12 ml5 mr5'>|</span><a href='javascript:void(0);' onclick='goPay(\""+userorderCode+"\");'>付款</a><span class='f12 ml5 mr5'>|</span><a href='#' onclick='cancelStatus(this)'>取消</a>";
 					}else{
-						button = "<a href='javascript:void(0);' onclick='goPay(\""+userorderCode+
-						"\");'>付款</a><span class='f12 ml5 mr5'>|</span><a href='#' onclick='cancelStatus(this)'>取消</a>";
+						button = "<a href='javascript:void(0);' onclick='goPay(\""+userorderCode+"\");'>付款</a><span class='f12 ml5 mr5'>|</span><a href='#' onclick='cancelStatus(this)'>取消</a>";
 					}
 				}else if(record[i].userorderStatus=='02'){
 					//status = "已付款";
