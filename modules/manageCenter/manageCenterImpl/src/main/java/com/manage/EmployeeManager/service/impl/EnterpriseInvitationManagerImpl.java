@@ -1,15 +1,18 @@
 package com.manage.EmployeeManager.service.impl;
 import java.util.List;
 import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.EmployeeManager.entity.EnterpriseInvitation;
 import com.manage.EmployeeManager.dao.EnterpriseInvitationDao;
@@ -48,6 +51,7 @@ public class EnterpriseInvitationManagerImpl extends BaseManagerImpl implements 
 	public PagerRecords getPagerEnterpriseInvitations(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=EnterpriseInvitation.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
+		orders.add(ConditionUtils.getOrder("createTime", false));
 		PagerRecords pagerRecords = enterpriseInvitationDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
 	}
