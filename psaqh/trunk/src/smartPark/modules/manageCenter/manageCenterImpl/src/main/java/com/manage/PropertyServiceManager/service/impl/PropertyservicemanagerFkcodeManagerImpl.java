@@ -5,7 +5,9 @@ package com.manage.PropertyServiceManager.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
+import com.common.MessageCenter.entity.McMsgdatas;
+import com.common.MessageCenter.service.McMsgdatasManager;
 import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -31,7 +35,6 @@ import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.utils.BizCodeUtil;
-import com.gsoft.utils.HttpSenderMsg;
 import com.gsoft.utils.QRCodeUtil;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
@@ -57,6 +60,8 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
 	private EnterpriseEmployeesManager enterpriseEmployeesManager;
 	@Value("#{configProperties['file.root.path']}")
 	private String root;
+	@Autowired
+	private McMsgdatasManager mcMsgdatasManager;
     /**
      * 查询列表
      */
@@ -116,11 +121,7 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
     		
     		fkcode = propertyservicemanagerFkcodeDao.save(o) ;//保存访客申请
     		
-    		try {
-    			HttpSenderMsg.sendMsg(fkcode.getFkcodeTelephone(), "您提交访客申请："+fkcode.getFkCode()+"已成功，欢迎到来！");
-    		} catch (Exception e) {
-    			e.printStackTrace();
-    		}
+    		
 
     		
     		PropertyservicemanagerTwcrd twcrd = new PropertyservicemanagerTwcrd() ;//申请成功后会生成对应的二维码
@@ -135,7 +136,27 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-    		
+    		Map<String, String> replaceMap = new HashMap<String, String>();		
+    		//获取当前用户id
+   	    	String memberId=o.getMember().getMemberId();
+   	        //获取当前用户对象
+    		MemberInformation m=memberInformationManager.getMember(memberId);
+    		//获取当前用户名字
+    		String name=m.getMemberName();
+    		//把名字放进短信模板中
+        	replaceMap.put("#user",name);
+        	//把订单编号放进短信模板中
+        	replaceMap.put("#fkCode", o.getFkCode());
+        	//0310为模板编号
+        	McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0310", replaceMap);			
+        	//mcMsgdatasManager.sendToUser(msgData, o.getMemberInformation().getMemberId());
+        	try {
+        		//调用发短信方法
+        		mcMsgdatasManager.sendToUser(msgData, o.getMember().getMemberId());
+    			//HttpSenderMsg.sendMsg(fkcode.getFkcodeTelephone(), "您提交访客申请："+fkcode.getFkCode()+"已成功，欢迎到来！");
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}
     		propertyservicemanagerTwcrdManager.savePropertyservicemanagerTwcrd(twcrd) ;//保存访客申请的二维码
     	}
     	return fkcode;
