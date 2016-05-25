@@ -11,6 +11,7 @@
 	<script type="text/javascript" src="scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
 	<script type="text/javascript" src="scripts/page/url.js"></script>
+	<script type="text/javascript" src="scripts/airlines/airline.js"></script>
 </head>
 <body>
 	<!--***top start****************************************-->
@@ -69,7 +70,7 @@
                 <div class="clearfix hc-con-h mt20 tr" >
                     <a href="javascript:;" class="ib-btn fl" id="prev_edit" style="margin:10px 20px;">上一步</a>
                     <span>共<font class="c-o"> 1 </font>名乘机人 订单总计费用：<font class="c-o f24">1300</font></span>
-                    <a href="javascript:;" class="ib-btn" style="margin:10px 20px;">提交订单</a>
+                    <a href="javascript:;" class="ib-btn" id="commit" style="margin:10px 20px;">提交订单</a>
                 </div>
             </div>
 		</div>
@@ -80,10 +81,7 @@
 	<script type="text/javascript">
 	//获取请求URL
 	function GetRequest() {
-		/* url=decodeURI(location.href);
-		var tmp1=url.split("?")[1]; */
 	   var url = decodeURI(location.search); //获取url中"?"符后的字串
-			   alert(url);
 	   var theRequest = new Object();
 	   if (url.indexOf("?") != -1) {
 	      var str = url.substr(1);
@@ -95,49 +93,21 @@
 	   return theRequest;
 	}
 	$(function(){
-		var Request = new Object();
-		Request = GetRequest();
-		//["flightNo","planeType","orgCity","arrCity","depTime","arriTime","meal","airportTax","seatCode","parPrice","seatMsg","policyId"];
-		var segments = [{"flightNo":Request['flightNo'],"depCode":Request['depCode'],"arrCode":Request['arrCode'],"seatClass":Request['seatClass'],
-			"depDate":Request['depDate'],"depTime":Request['depTime'],"arrTime":Request['arrTime'],"planeModel":Request['planeType']}];
-		var passengers = [{"name":Request['passengerName'],"type":Request['passengerType'],"identityType":Request['identityType'],"identityNo":Request['identityNo'],"birthday":""}];
-		var pnrInfo = {"segments":segments,"passengers":passengers,
-				"parPrice":Request['parPrice'],"fuelTax":Request['fuelTax'],"airportTax":Request['airportTax']};
-		var params = ['policyId='+Request['policyId'],'linkMan='+Request['linkMan'],'linkPhone='+Request['linkPhone'],
-		              'otherLinkMethod='+Request['otherLinkMethod']];
-		var serviceURL = baseUrl+"TicketServiceManager/bookTicket.json";
-		$.youi.ajaxUtils.ajax({
-			url:serviceURL,
-			data:params.join('&'),
-			jsonp:'data:jsonp',
-			dataType:'jsonp',
-			success:function(result){
-				
-			}
-		})
+		var Request = GetRequest();
 		//航程信息
 		var html_ = "<tr><td class='c-333'>" +Request['fromcity']+ "————" +Request['gotocity']+ "</td>";
-		html_ += "<td class='c-333'>"+Request['flightNo']+"</td>";
-		html_ += "<td>起飞："+Request['orgCity']+"</td>";
+		html_ += "<td class='c-333'>"+airlines[Request['flightNo'].substring(0,2)]+Request['flightNo'].substring(2)+"</td>";
+		html_ += "<td>起飞："+airport[Request['orgCity']]+"</td>";
 		html_ += "<td>票价：<span class='c-o'>￥"+Request['parPrice']+"</span></td></tr>";
-        html_ += "<tr><td>"+Request['gotoCode']+" "+Request['depTime']+"</td>";
+        html_ += "<tr><td>"+airport[Request['gotoCode']]+" "+Request['depTime']+"</td>";
         html_ += "<td>机型 : "+Request['planeType']+"</td>";
-        html_ += "<td>抵达："+Request['arrCity']+"</td>";
+        html_ += "<td>抵达："+airport[Request['arrCity']]+"</td>";
         html_ += "<td>机建费：<span class='c-o'>¥ "+Request['airportTax']+"</span></td></tr>";
         $("#flightInfo").empty();
         $("#flightInfo").append(html_);
 		//乘机人信息
-		/* <div class="hcc-line">
-                            <p>乘机人姓名：<font class="f24">阿达</font></p>
-                            <p>证件号码：<font class="f24">340222199208026911</font></p>
-                            <p>证件类型：身份证</p>
-                            <p>乘客类型：成人</p>
-                            <p>乘客生日：1992-08-02</p>
-                            <p>保险：航空意外险： 阿达（1份 ）  </p>
-                        </div> */
-         var passengers = Request['passengers'].split(":"),
+        var passengers = Request['passengers'].split(":"),
              pass_html="";
-             
              for(var i=0,len=passengers.length;i<len;i++){
             	 var pass_info = passengers[i].split("-");
             	 pass_html+="<div class='pass_list'><p>乘机人姓名：<font class='f24'>"+pass_info[0]+"</font></p>"
@@ -146,7 +116,7 @@
             	            +"</div>";
              }
              //alert(passengers)
-         $("#pass_info").html(pass_html);
+        $("#pass_info").html(pass_html);
         //联系人信息
 		var linkMan = Request['linkMan'].split("-"); 
         var link_html = "<p>姓名："+linkMan[0]+"</p>"+
@@ -158,10 +128,73 @@
         	link_html+="<p>电子邮箱："+linkMan[3]+"</p>"
         }
         $("#link_info").html(link_html);
-        
 		//上一步
 		$("#prev_edit").on("click",function(){
 			window.location.href="hcxx-edit.html"+window.location.href.substring(window.location.href.indexOf("?"))
+		})
+		//提交订单
+		$("#commit").on("click",function(){
+			//准备数据
+			var commitURL = baseUrl+"TicketServiceManager/bookTicket.json",sendData = {};
+			commitURL = "http://192.168.1.103:8088/smartPark-web/esb/web/TicketServiceManager/bookTicket.json";
+			//policyId :政策Id
+			//linkMan :订票联系人
+			//linkPhone :联系电话
+			//outOrderNo :外部订单号
+			//createdBy :订单创建人
+			//pnrInfo---pnr相关信息
+			//
+			//
+			//
+			//所有参数
+			sendData.policyId = Request["policyId"];
+			sendData.linkMan = Request["linkMan"].split("-")[0];
+			sendData.linkPhone = Request["linkMan"].split("-")[1];
+			
+			//sendData.parPrice = Request["parPrice"];
+			//sendData.airportTax = Request["airportTax"];
+			//sendData.fuelTax = null;
+			var pnrInfo = {};
+			var passengers = [],passengersList = Request["passengers"].split(":");
+			for(var i=0,len = passengersList.length;i<len;i++){
+				var passenger = {};
+				passenger.name = passengersList[i].split("-")[0];
+				passenger.identityType=1;
+				passenger.identityNo = passengersList[i].split("-")[1];
+				passenger.adult = passengersList[i].split("-")[2];
+				passengers.push(passenger);
+			}
+			
+			var segments = [];
+			segments.flightNo = Request["flightNo"];
+			segments.depCode = Request["fromCode"];
+			segments.arrCode = Request["gotoCode"];
+			segments.depdate = "20160526";
+			segments.depTime = "0930";
+			segments.arrTime = "0730";
+			segments.planeModel = Request["planeModel"];
+			pnrInfo.parPrice = Request["parPrice"];
+			pnrInfo.airportTax = Request["airportTax"];
+			pnrInfo.fuelTax = null;
+			pnrInfo.segments = segments;
+			pnrInfo.passengers = passengers;
+			
+			sendData.pnrInfo = pnrInfo;
+			 $.youi.ajaxUtils.ajax({
+				url:commitURL,
+				data:sendData,
+				jsonp:'data:jsonp',
+				dataType:'jsonp',
+				success:function(result){
+					if(result&&result.records){
+						var record = result.records;
+						window.local.href="/manage/member/memberCenter/personalCenter/meetingRoomOrderDetails.html?userorderCode=GGZY1605061100530000";
+					}
+				},
+				error:function(){
+					var error = "";
+				}
+		    })   
 		})
 	});
 	</script>
