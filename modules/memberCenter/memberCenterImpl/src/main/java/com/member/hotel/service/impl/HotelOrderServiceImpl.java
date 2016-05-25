@@ -106,7 +106,8 @@ public class HotelOrderServiceImpl extends BaseManagerImpl implements HotelOrder
 
 	@EsbServiceMapping
 	public List<JsonNode> postBook(@ServiceParam(name="userId",pubProperty="userId") String userId,
-			@ServiceParam(name="captcha") String captcha,HotelOrderConditions hotelOrderConditions) {
+			@ServiceParam(name="captcha") String captcha,@ServiceParam(name="totalprice")String totalprice,
+			HotelOrderConditions hotelOrderConditions) {
 		String result = "";
 		List<JsonNode> resultList = new ArrayList<JsonNode>();
 		//校验验证码
@@ -141,6 +142,13 @@ public class HotelOrderServiceImpl extends BaseManagerImpl implements HotelOrder
 		    String orderNumber = BizCodeUtil.getInstance().getBizCodeDate(hotelOrderCode);
 		    params.put("guid", orderNumber);//UUID.fromString(orderNumber).toString()
 		    hotelOrder.setOrderNum(orderNumber);
+		    hotelOrder.setComingTime(hotelOrderConditions.getTm1());//入住
+		    hotelOrder.setOutTime(hotelOrderConditions.getTm2());//离店
+		    hotelOrder.setRoomCount(hotelOrderConditions.getRm());//房间数量
+		    hotelOrder.setOrderAmount(totalprice);
+		    hotelOrder.setRzMobile(hotelOrderConditions.getMobile());
+		    hotelOrder.setOrderInfo(hotelOrderConditions.getGuest());
+		    hotelOrder.setHotelId(hotelOrderConditions.getHid());
 		} catch (Exception e) {
 			System.out.println("获取HotelOrderConditions实体类属性 异常:" + e);
 		    throw new BusException("获取HotelOrderConditions实体类属性 异常: "+e.getMessage());

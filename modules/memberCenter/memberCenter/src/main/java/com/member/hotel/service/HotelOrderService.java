@@ -24,7 +24,7 @@ public interface HotelOrderService extends BaseManager{
 	 * pucode CVV2码（信用卡背面紧跟在卡号末四位号码的后面印刷的3位数字） pumonth 有效期月（格式：01、02.....12）
 	 * puname 持卡人姓名 puidtype 0或1或2(分别对应：身份证,护照,其他) puidno 证件号码
 	 */
-	public List<JsonNode> postBook(String userId,String captcha,HotelOrderConditions hotelOrderConditions);
+	public List<JsonNode> postBook(String userId,String captcha,String totalprice,HotelOrderConditions hotelOrderConditions);
 	
 	public String cancelOrder(int orderid);
 }
