@@ -68,15 +68,14 @@ $(function () {
            		timer=setInterval("closeTanc()",1000);
            		return false;
 			}
-			if(applyOrderNumber==''||applyOrderNumber==null){
-				clearInterval(timer);
+			if(applyOrderNumber!=''||applyOrderNumber!=null){
+				/*clearInterval(timer);
 				$(".tc.mt25").text("请选择活动场地！");
            		$(".toast").show();
            		pltime=1;
            		timer=setInterval("closeTanc()",1000);
-           		return false;
-			}else{
-				var aa = $("#"+applyOrderNumber+"").parent().parent();
+           		return false;*/
+           		var aa = $("#"+applyOrderNumber+"").parent().parent();
 				var dd = $(aa).children('td').eq(1);
 				activityAdr = dd[0].innerText;
 			}
@@ -434,8 +433,13 @@ $(function () {
 	//拼接会议室
 	function roomRecords(record){
 		$(".activeroom").empty();
-	  	var ht = "<tr align='center' class='f14 c-333'><td colspan='2'>地点</td>"+
+	  	var ht = "";
+		if(record.length>0){
+			ht+="<tr align='center' class='f14 c-333'><td colspan='2'>地点</td>"+
 		"<td>时间</td><td>价格</td><td>操作</td></tr>";
+		}else{
+			ht+="<tr align='center'><td><h2 style='color: #fa742c;'>未找到购买的活动场地</h2></td><tr>"; 
+		}
 		$(".activeroom").append(ht);
 		
 		for(var i=0;i<record.length;i++){
