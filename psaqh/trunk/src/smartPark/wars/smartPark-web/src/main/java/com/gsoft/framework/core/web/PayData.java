@@ -45,6 +45,20 @@ public class PayData extends BaseDataController {
 	@Autowired
 	private PropertyservicemanagerBxManager propertyservicemanagerBxManager;
 	
+	@RequestMapping("/aliReturn.json")
+	public void aliReturn(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		System.out.println("---------------支付宝回调测试----------------");
+		try {
+			Map<String, Object> requestMap = parseXml(request);
+			for(Map.Entry<String, Object> entry:requestMap.entrySet()){
+				System.out.println(entry.getKey()+"--->"+entry.getValue());
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * 微信支付异步返回
 	 * @throws IOException 
