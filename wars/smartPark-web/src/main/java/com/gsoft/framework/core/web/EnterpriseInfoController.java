@@ -6,13 +6,17 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.common.BuildingBaseManager.service.BbmRoomManager;
 import com.common.EnterpriceTypeManager.service.EtypeEnterprisetypeManager;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
@@ -37,6 +41,8 @@ public class EnterpriseInfoController {
 	private MemberInformationManager memberInformationManager;
 	@Autowired
 	private EnterbusinessmanagerRzManager enterbusinessmanagerRzManager;
+	@Autowired
+	private BbmRoomManager bbmRoomManager;
 	
 	/**
 	 * 企业信息
@@ -273,8 +279,24 @@ public class EnterpriseInfoController {
 
 		List<EnterpriseInfomation> rzsList = ExcelHelper.getInstanse().importToObjectList(head, sourceFile, EnterpriseInfomation.class);
 
-		for (EnterpriseInfomation detail : rzsList) {
-			System.out.println(detail.toString());
+		//获取数据保存到企业入驻表
+		for (EnterpriseInfomation i : rzsList) {
+			EnterbusinessmanagerRz r = new EnterbusinessmanagerRz();
+			r.setRzName(i.getRzName());
+			r.setRzSign(i.getRzSign());
+			r.setRzDate(i.getRzDate().toString());
+			r.setEnTypeId(etypeEnterprisetypeManager.getEtypeEnterprisetype(i.getEnTypeName()));
+			r.setRzType(i.getRzType());
+			r.setRzProperty(i.getRzProperty());
+			r.setRzManager(memberInformationManager.getMemberInformation(i.getMemberName()));
+			r.setParkId(i.getParkId());
+			r.setBuildingId(i.getBuildingId());
+			r.setRoomId(bbmRoomManager.getBbmRoom(i.getRoomId()));
+			r.setFloorId(i.getFloorId());
+			r.setRzLogo(i.getRzLogo());
+			r.setRzUrl(i.getRzUrl());
+			r.setRzRemark(i.getRzRemark());
+			enterbusinessmanagerRzManager.saveEnterbusinessmanagerRz(r);
 		}
 	}
 }
