@@ -574,12 +574,17 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 			@ServiceParam(name = "userId", pubProperty = "userId") String userId,
 			@ServiceParam(name = "memberName") String memberName) throws BusException {
 		MemberInformation m = memberInformationDao.getObjectByUniqueProperty("memberId", userId);
-		String companyId = m.getCompanyId();
-		Collection<Condition> condition = new ArrayList<Condition>();
-		condition.add(ConditionUtils.getCondition("companyId", Condition.EQUALS, companyId));
-		condition.add(ConditionUtils.getCondition("memberName", Condition.LIKE, memberName));
-		List<MemberInformation> list = memberInformationDao.commonQuery(condition, null);
-		return list;
+		String companyId = "";
+		companyId = m.getCompanyId();
+		if(companyId!=null){
+			Collection<Condition> condition = new ArrayList<Condition>();
+			condition.add(ConditionUtils.getCondition("companyId", Condition.EQUALS, companyId));
+			condition.add(ConditionUtils.getCondition("memberName", Condition.LIKE, memberName));
+			List<MemberInformation> list = memberInformationDao.commonQuery(condition, null);
+			return list;
+		}else{
+			return null;
+		}		
 	}
 
 	/**
@@ -596,11 +601,16 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		// 根据用户id获取当前用户
 		MemberInformation m = memberInformationDao.getObjectByUniqueProperty("memberId", userId);
 		// 获取公司id
-		String companyId = m.getCompanyId();
-		// 添加条件 （根据公司id查询）
-		conditions.add(ConditionUtils.getCondition("companyId", Condition.EQUALS, companyId));
-		PagerRecords pagerRecords = memberInformationDao.findByPager(pager, conditions, orders);
-		return pagerRecords;
+		String companyId ="";
+		companyId = m.getCompanyId();		
+		if(companyId!=null){
+			// 添加条件 （根据公司id查询）
+			conditions.add(ConditionUtils.getCondition("companyId", Condition.EQUALS, companyId));
+			PagerRecords pagerRecords = memberInformationDao.findByPager(pager, conditions, orders);
+			return pagerRecords;
+		}else{
+			return null;
+		}		
 	}
 
 	/**
