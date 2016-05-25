@@ -13,6 +13,7 @@
 	<script type="text/javascript" src="scripts/lib/giui.min.js"></script>
 	<script type="text/javascript" src="scripts/page/pagewrapper.js"></script>
 	<script type="text/javascript" src="scripts/page/url.js"></script>
+	<script type="text/javascript" src="scripts/airlines/airline.js"></script>
 </head>
 <body>
 	<!--***top start****************************************-->
@@ -101,17 +102,6 @@
 	                   				<label class="error"></label>
 	                   			</td>
 	                   		</tr>
-	                   		
-	                   		<!-- <tr>
-	                   			<td>保险<em>*</em></td>
-	                   			<td>
-	                   				<select>
-	                   					<option>￥20/份</option>
-	                   					<option>港澳</option>
-	                   				</select>
-	                   				<span class="ml10">￥20/份</span>
-	                   			</td>
-	                   		</tr> -->
 	                   		<tr id="addPassenger">
 	                   			<td colspan="2"><a href="javascript:;" class="open-tanc" id="open-tanc"><i class="fa fa-plus-circle mr5"></i>新增乘机人</a></td>
 	                   		</tr>
@@ -175,7 +165,7 @@
                 </div>
             </div>
             <div class="fr" style="width:288px;">
-            	<div class="hc-fr-table">
+            	<div class="hc-fr-table" id="hc-fr-table">
             		<h3>结算信息</h3>
             		<table>
             			<colgroup>
@@ -185,11 +175,11 @@
             			<tbody>
             				<tr>
 	            				<th>总计人数：</th>
-	            				<td>1人</td> 
+	            				<td id="person_num">1人</td> 
 	            			</tr>
 	            			<tr>
 	            				<th>票价金额：   </th>
-	            				<td>1230</td> 
+	            				<td id="price">1230</td> 
 	            			</tr>
 	            			<tr>
 	            				<th>机建费： </th>
@@ -207,7 +197,7 @@
             			<tfoot>
             				<tr>
 	            				<th>合计金额： </th>
-	            				<td> ¥<span class="f24">1300</span></td> 
+	            				<td> ¥<span class="f24" id="totalDollar">1300</span></td> 
 	            			</tr>
             			</tfoot>
             			
@@ -225,12 +215,12 @@
 	$(function(){
 		//航程信息
 		var html_ = "<tr><td class='c-333'>" +Request['fromcity']+ "————" +Request['gotocity']+ "</td>";
-		html_ += "<td class='c-333'>"+Request['flightNo']+"</td>";
-		html_ += "<td>起飞："+Request['orgCity']+"</td>";
+		html_ += "<td class='c-333'>"+airlines[Request['flightNo'].substring(0,2)]+Request['flightNo'].substring(2)+"</td>";
+		html_ += "<td>起飞："+airport[Request['orgCity']]+"</td>";
 		html_ += "<td>票价：<span class='c-o'>￥"+Request['parPrice']+"</span></td></tr>";
-        html_ += "<tr><td>"+Request['gotoCode']+" "+Request['depTime']+"</td>";
+        html_ += "<tr><td>"+airport[Request['gotoCode']]+" "+Request['depTime']+"</td>";
         html_ += "<td>机型 : "+Request['planeType']+"</td>";
-        html_ += "<td>抵达："+Request['arrCity']+"</td>";
+        html_ += "<td>抵达："+airport[Request['arrCity']]+"</td>";
         html_ += "<td>机建费：<span class='c-o'>¥ "+Request['airportTax']+"</span></td></tr>";
         $("#flightInfo").empty();
         $("#flightInfo").append(html_);
@@ -251,6 +241,8 @@
         if(Request['passengers']){
         	//绑定乘机人信息
         }
+        //绑定右侧栏数据
+        updateData();
 	});
 	//转到提交页
 	function toSubmit(){
@@ -299,6 +291,16 @@
 	      }
 	   }
 	   return theRequest;
+	}
+	//更新右侧栏的统计数据
+	function updateData(){
+		if($("#person-info .person-info-list i.focus")){
+			var len = $("#person-info .person-info-list i.focus").length
+			$("#person_num").html(len+"人");
+			$("#price").html("￥"+Request["parPrice"])
+			$("#totalDollar").html(len*Request["parPrice"]);
+			//alert(len)
+		}
 	}
 	</script>
 	 <script>
@@ -352,6 +354,7 @@
 				passenger+=":"+$(this).siblings("input").val();
 			})
 			Request['passengers']=passenger.substring(1);
+			updateData();
 		})
 		
 	})
