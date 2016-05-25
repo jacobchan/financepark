@@ -18,7 +18,7 @@
 			<youi:fieldText property="preDisAmount"  caption="预计分佣总额" />
 			<%-- <youi:fieldText property="recId"  caption="序列"/> --%>
 			<%-- <youi:fieldText property="roomId"  caption="单元ID"/> --%>
-			<youi:fieldText property="isOut"  caption="是否超额" align="center"/>
+			<youi:fieldText property="isOut"  caption="是否超额"/>
 			<youi:fieldText property="isExtract"  caption="是否提佣" />
 		</youi:fieldLayout>
 		<youi:gridCol property="disLevelCount"  caption="分佣层数" align="center"/>
