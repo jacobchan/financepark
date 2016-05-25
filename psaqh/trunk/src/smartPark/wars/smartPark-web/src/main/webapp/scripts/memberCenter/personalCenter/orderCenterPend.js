@@ -270,7 +270,7 @@ var pageSize=10;
 		    if(data=='1'){//微信支付
 		    	goPayfor(userorderCode);
 		    }else if(data=='2'){//支付宝支付
-		    	var url = cenUrl+"alipayapi.html?userorderCode="+userorderCode;
+		    	var url = cenUrl+"alipay/alipayapi.html?userorderCode="+userorderCode;
 		    	 window.location.href=url; 
 		    }else{
 		    	close("请选择支付方式!");
