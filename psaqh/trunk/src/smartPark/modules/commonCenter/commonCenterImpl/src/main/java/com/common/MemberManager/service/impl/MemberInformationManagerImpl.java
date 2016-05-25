@@ -601,16 +601,14 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		// 根据用户id获取当前用户
 		MemberInformation m = memberInformationDao.getObjectByUniqueProperty("memberId", userId);
 		// 获取公司id
-		String companyId ="";
-		companyId = m.getCompanyId();		
-		if(companyId!=null){
-			// 添加条件 （根据公司id查询）
-			conditions.add(ConditionUtils.getCondition("companyId", Condition.EQUALS, companyId));
-			PagerRecords pagerRecords = memberInformationDao.findByPager(pager, conditions, orders);
-			return pagerRecords;
-		}else{
-			return null;
-		}		
+		String companyId ="公司id";
+		if(m.getCompanyId()!=null){
+			companyId = m.getCompanyId();
+		}
+		// 添加条件 （根据公司id查询）
+		conditions.add(ConditionUtils.getCondition("companyId", Condition.EQUALS, companyId));
+		PagerRecords pagerRecords = memberInformationDao.findByPager(pager, conditions, orders);
+		return pagerRecords;		
 	}
 
 	/**
