@@ -13,7 +13,7 @@
 			  	$.ajax({
 					url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
 					success:function(result){
-						if(result&&result.record){
+						if(result&&result.record&&result.record.companyId){
 							$("#rzId").val(result.record.companyId);
 							$.ajax({
 								url:baseUrl+'/enterbusinessmanagerRzManager/getEnterbusinessmanagerRz.json',
@@ -80,7 +80,7 @@
 								            $.ajax({
 												url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
 												success:function(result){
-													if(result&&result.record){
+													if(result&&result.record&&result.record.companyId){
 														var rzId = result.record.companyId;
 													  	//获取邀请记录
 													  	$.ajax({
@@ -142,7 +142,7 @@
 								            $.ajax({
 												url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
 												success:function(result){
-													if(result&&result.record){
+													if(result&&result.record&&result.record.companyId){
 														var rzId = result.record.companyId;
 													  	//获取邀请记录
 													  	$.ajax({
@@ -185,7 +185,7 @@
 			  	$.ajax({
 					url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',
 					success:function(result){
-						if(result&&result.record){
+						if(result&&result.record&&result.record.companyId){
 							var rzId = result.record.companyId;
 						  	//获取邀请记录
 						  	$.ajax({
