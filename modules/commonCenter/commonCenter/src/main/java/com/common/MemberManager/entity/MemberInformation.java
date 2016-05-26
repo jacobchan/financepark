@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
 import org.hibernate.validator.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -90,8 +91,7 @@ public class MemberInformation implements Domain,IdUser, IUser,IMemberInfomation
 	private String level;//会员等级
 	
 	@Transient
-	private String loginType;//非数据库映射属性
-	
+	private String companyName;//企业名称
 	
 	@Transient
 	private List<String> roleIds = new ArrayList<String>();//非数据库映射属性
@@ -99,9 +99,18 @@ public class MemberInformation implements Domain,IdUser, IUser,IMemberInfomation
 	@Transient
 	private PrincipalConfig principalConfig = new PrincipalConfig();
 	
+	@Transient
+	private String loginType;//非数据库映射属性
 	
 	
-	
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
 	public String getLevel() {
 		return level;
 	}
