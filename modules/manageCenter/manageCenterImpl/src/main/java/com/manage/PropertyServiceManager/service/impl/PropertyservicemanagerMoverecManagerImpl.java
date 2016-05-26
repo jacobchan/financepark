@@ -125,7 +125,7 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
         	replaceMap.put("#movereCode", o.getMoverecCode());
         	//0311为短信模板编号
         	McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0311", replaceMap);			
-        	//mcMsgdatasManager.sendToUser(msgData, o.getMemberInformation().getMemberId());
+        	//mcMsgdatasManager.sendToUser(msgData, o.getMember().getMemberId());
         	try {
         		//发短信
         		mcMsgdatasManager.sendToUser(msgData, o.getMember().getMemberId());
@@ -280,6 +280,20 @@ public class PropertyservicemanagerMoverecManagerImpl extends BaseManagerImpl im
 	    		moverec.setMoverecStatus("03");//0为待审批	    		
 	    	}	
 	    	PropertyservicemanagerMoverec p=propertyservicemanagerMoverecDao.save(moverec);
+	    	Map<String, String> replaceMap = new HashMap<String, String>();	
+   	    	//获取当前用户id
+   	    	String memberId=moverec.getMember().getMemberId();
+   	        //获取当前用户对象
+    		MemberInformation m=memberInformationManager.getMember(memberId);
+    		//获取当前用户名字
+    		String name=m.getMemberName();
+    		//把名字放进短信模板中
+        	replaceMap.put("#user",name);
+        	//把订单编号放进短信模板中
+        	replaceMap.put("#movereCode", moverec.getMoverecCode());
+        	//0311为短信模板编号
+        	McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0316", replaceMap);			
+        	mcMsgdatasManager.sendToUser(msgData, moverec.getMember().getMemberId());
 			return p;	    	    		    	
 	    }
 	    /**
