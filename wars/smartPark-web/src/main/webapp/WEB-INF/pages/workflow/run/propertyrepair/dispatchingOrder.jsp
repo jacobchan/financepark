@@ -7,6 +7,9 @@
 			<youi:fieldHidden property="flowProcessId"  caption="工作流ID" defaultValue="propertyrepair"/>
 			<youi:fieldHidden property="bxRemark" caption="报修描述"/>
 			<youi:fieldHidden property="bxAddress" caption="报修地址"/>
+			<youi:fieldLabel property="companyName" caption="企业名称"/>
+			<youi:fieldLabel property="createUsercaption" caption="联系人"/>
+			<youi:fieldLabel property="phone" caption="联系电话"/>
 			<youi:fieldArea property="bxRemark_show"  caption="报修描述" rows="2"   column="2" readonly="true"/>
 			<youi:fieldArea property="bxAddress_show"  caption="报修地址" rows="2"   column="2" readonly="true"/>
 			<youi:fieldSelect property="flowResultPg"  caption="是否派工" convert="bool" notNull="true"/>
