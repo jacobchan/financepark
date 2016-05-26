@@ -2,11 +2,17 @@ package com.member.ticket.entity;
 
 import java.util.List;
 
-public class WsBookPnr {
+import com.gsoft.framework.core.dataobj.Domain;
+
+public class WsBookPnr implements Domain{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private List<WsAirSegment> segments;
 	private List<WsBookPassenger> passengers;
 	private Double parPrice;//票面价
-	private Double uelTax;//燃油税
+	private Double fuelTax;//燃油税
 	private Double airportTax;//机建费
 	private String param1;
 	private String param2;
@@ -31,11 +37,12 @@ public class WsBookPnr {
 	public void setParPrice(Double parPrice) {
 		this.parPrice = parPrice;
 	}
-	public Double getUelTax() {
-		return uelTax;
+
+	public Double getFuelTax() {
+		return fuelTax;
 	}
-	public void setUelTax(Double uelTax) {
-		this.uelTax = uelTax;
+	public void setFuelTax(Double fuelTax) {
+		this.fuelTax = fuelTax;
 	}
 	public Double getAirportTax() {
 		return airportTax;

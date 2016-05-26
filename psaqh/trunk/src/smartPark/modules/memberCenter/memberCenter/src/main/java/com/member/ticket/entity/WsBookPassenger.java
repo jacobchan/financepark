@@ -1,6 +1,12 @@
 package com.member.ticket.entity;
 
-public class WsBookPassenger {
+import com.gsoft.framework.core.dataobj.Domain;
+
+public class WsBookPassenger implements Domain{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 456L;
 	private String name;
 	private String type;
 	private String identityType;

@@ -1,6 +1,15 @@
 package com.member.ticket.entity;
 
-public class WsAirSegment {
+import org.hibernate.annotations.Entity;
+
+import com.gsoft.framework.core.dataobj.Domain;
+
+@Entity
+public class WsAirSegment implements Domain{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 123L;
 	private String flightNo;
 	private String depCode;
 	private String arrCode;
