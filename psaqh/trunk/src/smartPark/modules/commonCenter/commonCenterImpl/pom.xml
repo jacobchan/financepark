@@ -28,7 +28,7 @@
 		</dependencies>
 	</dependencyManagement>
 		
-	<dependencies>
+	<dependencies>	
 		<dependency>
 			<groupId>com.gsoft.smartPark</groupId>
 			<artifactId>smartPark-commonCenter</artifactId>
@@ -58,6 +58,5 @@
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
 		</dependency>
-		
 	</dependencies>
 </project>
