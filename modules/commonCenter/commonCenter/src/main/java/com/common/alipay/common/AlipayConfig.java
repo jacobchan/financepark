@@ -44,10 +44,10 @@ public class AlipayConfig {
 	public static String alipay_app_public_key  = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDDI6d306Q8fIfCOaTXyiUeJHkrIvYISRcc73s3vF1ZT7XN8RNPwJxo8pWaJMmvyTn9N4HQ632qJBVHf8sxHi/fEsraprwCtzvzQETrNRwVxLO5jVmRGi60j8Ue1efIlzPXV9je9mkjzOmdssymZkh2QhUrCmZYI/FCEa3/cNMW0QIDAQAB";
 	
 	// 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问(修改支付状态)
-	public static String notify_url = "http://120.25.101.206:8088/wxpay/aliReturn.json";
+	public static String notify_url = "http://120.25.101.206:8088/alipay/notify.html";
 
 	// 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问(订单成功后跳转)
-	public static String return_url = "http://www.daotmd.com/alipay/create_direct_pay_by_user-JAVA-UTF-8/return_url.jsp";
+	public static String return_url = "http://120.25.101.206:8088/member/memberCenter/personalCenter/orderCenter.html";
 
 	// 签名方式
 	public static String sign_type = "RSA";
