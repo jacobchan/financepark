@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.common.BuildingBaseManager.entity.BbmRoom;
+import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -139,4 +140,7 @@ public interface EnterbusinessmanagerRzManager extends BaseManager{
 	 */
 	public TempDemo singleLogin(String phone, String password, String parkName,
 			String companyName);
+	
+	public MemberInformation updateMemberInformationOfCompany(
+			MemberInformation o) throws BusException;
 }
