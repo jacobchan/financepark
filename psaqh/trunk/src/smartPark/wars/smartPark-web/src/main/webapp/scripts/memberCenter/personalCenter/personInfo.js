@@ -29,9 +29,9 @@
 				$("#month").val(record.memberBirthdate.substring(5,7));
 				$("#day").val(record.memberBirthdate.substring(8,10));
 			}
-			$("#memberDescribe2").val(record.memberDescribe2);
-			$("#companyId").val(record.companyId);
+			$("#memberDescribe2").val(record.memberDescribe2);			
 			if(record.companyId){
+				$("#companyId").val(record.companyId);
 				getRzName(record.companyId);//获得公司名字
 				$("#ly1").hide() ;
 			}
