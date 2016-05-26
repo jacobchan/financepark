@@ -46,7 +46,7 @@ $.youi.ajaxUtils.ajax({
 						}
 						var add = "";
 						if($('input[name="address"]')[0].getAttribute("value")==0){
-							add = result.record.rz.rzName;
+							add = result.record.rz.roomId.roomAddress;
 						}else{
 							add = $('input[name="otheraddress"]').val();
 						}
