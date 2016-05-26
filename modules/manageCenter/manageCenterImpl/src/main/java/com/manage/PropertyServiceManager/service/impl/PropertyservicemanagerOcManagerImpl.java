@@ -226,7 +226,7 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 		psm.setBindStatus("0");
 		Map<String, String> replaceMap = new HashMap<String, String>();		
 		replaceMap.put("#user", memberInformationManager.getMember(psm.getMemberId()).getMemberName());
-		replaceMap.put("#ocCode", psm.getOcCode());
+		replaceMap.put("#ocNumber", psm.getOcNumber());
 		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0318", replaceMap);			
    		mcMsgdatasManager.sendToUser(msgData, psm.getMemberId());
 	    return propertyservicemanagerOcDao.save(psm);    		
@@ -245,7 +245,7 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
         psm.setBindStatus("1");
         Map<String, String> replaceMap = new HashMap<String, String>();		
 		replaceMap.put("#user", memberInformationManager.getMember(psm.getMemberId()).getMemberName());
-		replaceMap.put("#ocCode", psm.getOcCode());
+		replaceMap.put("#ocNumber", psm.getOcNumber());
 		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0319", replaceMap);			
   		mcMsgdatasManager.sendToUser(msgData, psm.getMemberId());
 	    return propertyservicemanagerOcDao.save(psm);    		
