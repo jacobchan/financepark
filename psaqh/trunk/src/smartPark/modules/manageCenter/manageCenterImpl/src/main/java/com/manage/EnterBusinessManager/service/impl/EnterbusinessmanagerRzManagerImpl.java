@@ -496,43 +496,57 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 	 * @throws BusException
 	 */
 	@EsbServiceMapping(pubConditions = { @PubCondition(property = "updateUser", pubProperty = "userId") })
-	public MemberInformation updateMemberInformationOfCompany(
-			MemberInformation o) throws BusException {
-		StringBuffer roleIds = new StringBuffer();
-		StringBuffer employeesIds = new StringBuffer();
-		String[] roleId = new String[1];
-		String[] employeesId = new String[1];
-		// 获取当前member对象
-		MemberInformation m = memberInformationDao.get(o.getMemberId());
-		// 根据员工id获取角色
-		List<EnterpriseRole> r = null;
-		Collection<Condition> conditionRole = new ArrayList<Condition>();
-		Collection<Order> orderRole = new ArrayList<Order>();
-		// 根据memberId获取员工
-		Collection<Condition> conditionEmployees = new ArrayList<Condition>();
-		Collection<Order> orderEmployees = new ArrayList<Order>();
-		conditionEmployees.add(ConditionUtils.getCondition("member.memberId", Condition.EQUALS, m.getMemberId()));
-		List<EnterpriseEmployees> e = enterpriseEmployeesDao.commonQuery(conditionEmployees, orderEmployees);
-		if(e.size()>0){
-			for (int i = 0; i < e.size(); i++) {
-				conditionRole.add(ConditionUtils.getCondition("employees.employeesId", Condition.EQUALS, e.get(i).getEmployeesId()));
-				r = enterpriseRoleDao.commonQuery(conditionRole, orderRole);
-				employeesIds.append(e.get(i).getEmployeesId()+",");
-			}
-			//删除员工
-			employeesId[0] = employeesIds.substring(0, employeesIds.length()-1);
-			enterpriseEmployeesManager.removeEnterpriseEmployeess(employeesId);
-			if(r.size()>0){
-				for (int n = 0; n < r.size(); n++) {
-					roleIds.append(r.get(n).getrId()+",");
+	public String updateMemberInformationOfCompany(MemberInformation o) throws BusException {
+		String msg = "";
+		if(!"".equals(o.getCompanyId()) && null!=o.getCompanyId()){
+			StringBuffer roleIds = new StringBuffer();
+			StringBuffer employeesIds = new StringBuffer();
+			String[] roleId = new String[1];
+			String[] employeesId = new String[1];
+			// 获取当前member对象
+			MemberInformation m = memberInformationDao.get(o.getMemberId());
+			// 根据员工id获取角色
+			List<EnterpriseRole> r = null;
+			Collection<Condition> conditionRole = new ArrayList<Condition>();
+			Collection<Order> orderRole = new ArrayList<Order>();
+			// 根据memberId获取员工
+			Collection<Condition> conditionEmployees = new ArrayList<Condition>();
+			Collection<Order> orderEmployees = new ArrayList<Order>();
+			conditionEmployees.add(ConditionUtils.getCondition("member.memberId", Condition.EQUALS, m.getMemberId()));
+			List<EnterpriseEmployees> e = enterpriseEmployeesDao.commonQuery(conditionEmployees, orderEmployees);
+			if(e.size()>0){
+				for (int i = 0; i < e.size(); i++) {
+					conditionRole.add(ConditionUtils.getCondition("employees.employeesId", Condition.EQUALS, e.get(i).getEmployeesId()));
+					r = enterpriseRoleDao.commonQuery(conditionRole, orderRole);
+					employeesIds.append(e.get(i).getEmployeesId()+",");
 				}
-				//批量删除角色
-				roleId[0] = roleIds.substring(0, roleIds.length()-1);
-				enterpriseRoleManager.removeEnterpriseRoles(roleId);
+				if(r.size()>0){
+					if(!"ROLE_QY_ADMIN".equals(r.get(0).getRole().getRoleId())){
+						for (int n = 0; n < r.size(); n++) {
+							roleIds.append(r.get(n).getrId()+",");
+						}
+						//批量删除角色
+						roleId[0] = roleIds.substring(0, roleIds.length()-1);
+						enterpriseRoleManager.removeEnterpriseRoles(roleId);
+						//删除员工
+						employeesId[0] = employeesIds.substring(0, employeesIds.length()-1);
+						enterpriseEmployeesManager.removeEnterpriseEmployeess(employeesId);
+						
+						//置空member的company
+						m.setCompanyId("");
+						memberInformationDao.save(m);
+					}else{
+						msg = "企业管理员不能删除！";
+					}
+				}else{
+					msg = "员工角色不存在！";
+				}
+			}else{
+				msg = "企业员工不存在！";
 			}
+		}else{
+			msg = "非企业员工！";
 		}
-		//置空member的company
-		m.setCompanyId("");
-		return memberInformationDao.save(m);
+		return msg;
 	}
 }
