@@ -141,6 +141,5 @@ public interface EnterbusinessmanagerRzManager extends BaseManager{
 	public TempDemo singleLogin(String phone, String password, String parkName,
 			String companyName);
 	
-	public MemberInformation updateMemberInformationOfCompany(
-			MemberInformation o) throws BusException;
+	public String updateMemberInformationOfCompany(MemberInformation o) throws BusException;
 }
