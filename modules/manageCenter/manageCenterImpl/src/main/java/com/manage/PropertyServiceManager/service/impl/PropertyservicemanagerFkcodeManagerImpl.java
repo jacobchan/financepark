@@ -149,7 +149,7 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
         	replaceMap.put("#fkCode", o.getFkCode());
         	//0310为模板编号
         	McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0310", replaceMap);			
-        	//mcMsgdatasManager.sendToUser(msgData, o.getMemberInformation().getMemberId());
+        	//mcMsgdatasManager.sendToUser(msgData, o.getMember().getMemberId());
         	try {
         		//调用发短信方法
         		mcMsgdatasManager.sendToUser(msgData, o.getMember().getMemberId());
@@ -278,6 +278,20 @@ public class PropertyservicemanagerFkcodeManagerImpl extends BaseManagerImpl imp
     		if("00".equals(status)||"01".equals(status)){//01,00都为未到访状态
     			twcrd.setStatus("03");
         		propertyservicemanagerTwcrdManager.savePropertyservicemanagerTwcrd(twcrd);
+        		Map<String, String> replaceMap = new HashMap<String, String>();		
+        		//获取当前用户id
+       	    	String memberId=fkcode.getMember().getMemberId();
+       	        //获取当前用户对象
+        		MemberInformation m=memberInformationManager.getMember(memberId);
+        		//获取当前用户名字
+        		String name=m.getMemberName();
+        		//把名字放进短信模板中
+            	replaceMap.put("#user",name);
+            	//把订单编号放进短信模板中
+            	replaceMap.put("#fkCode", fkcode.getFkCode());
+            	//0310为模板编号
+            	McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0315", replaceMap);			
+            	mcMsgdatasManager.sendToUser(msgData, fkcode.getMember().getMemberId());
         		return fkcode;
     		}else{
         		return null;
