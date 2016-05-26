@@ -4,8 +4,10 @@
 package com.manage.PropertyServiceManager.service.impl;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
+import com.common.MessageCenter.entity.McMsgdatas;
+import com.common.MessageCenter.service.McMsgdatasManager;
 import com.common.OrderManager.entity.OrdermanagerOrderprojecttypeValue;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.common.OrderManager.service.OrdermanagerOrderprojecttypeValueManager;
@@ -30,21 +34,24 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.PubCondition;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.security.agt.entity.User;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.SecurityUtils;
 import com.gsoft.framework.util.StringUtils;
-import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.gsoft.utils.BizCodeUtil;
-import com.gsoft.utils.HttpSenderMsg;
 import com.manage.EmployeeManager.dao.EnterpriseEmployeesDao;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
+import com.manage.PropertyServiceManager.dao.PropertyservicemanagerBxDao;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTs;
-import com.manage.PropertyServiceManager.dao.PropertyservicemanagerBxDao;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerBxManager;
 import com.manage.PropertyServiceManager.service.PropertyservicemanagerTsManager;
 
@@ -69,6 +76,8 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 	private EnterpriseEmployeesDao enterpriseEmployeesDao;
 	@Autowired 
 	private CodeitemManager codeitemManager;
+	@Autowired
+	private McMsgdatasManager mcMsgdatasManager;
     /**
      * 查询列表
      */
@@ -192,8 +201,13 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
    			o.setApplyTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
    			o.setBxStatus("00");
    			savebx = propertyservicemanagerBxDao.save(o);
-   			try {
-    			HttpSenderMsg.sendMsg(memberInformation.getMemberPhoneNumber(), "您提交报修已成功，申请单号："+savebx.getBxCode()+"，请等待物业管理员审批！");
+   			Map<String, String> replaceMap = new HashMap<String, String>(); 			
+			replaceMap.put("#user", memberInformation.getMemberPhoneNumber());
+			replaceMap.put("#bxCode", o.getBxCode());
+			McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0308", replaceMap);
+   			try {  				
+   				mcMsgdatasManager.sendToUser(msgData, o.getMemberId());
+   				//HttpSenderMsg.sendMsg(memberInformation.getMemberPhoneNumber(), "您提交报修已成功，申请单号："+savebx.getBxCode()+"，请等待物业管理员审批！");
     		} catch (Exception e) {
     			e.printStackTrace();
     		}
@@ -214,7 +228,7 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
     }
     //保存物业报修
     @Override
-    @EsbServiceMapping
+    @EsbServiceMapping(pubConditions={@PubCondition(property="memberId",pubProperty="userId")})
     public PropertyservicemanagerBx savaPsBx(PropertyservicemanagerBx psBx) throws BusException{
     	String bxId = psBx.getBxId();
     	if(StringUtils.isNotEmpty(bxId)){
@@ -222,6 +236,13 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
     		propertyservicemanagerBx.setUpdateUser(psBx.getUpdateUser());
     		propertyservicemanagerBx.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		propertyservicemanagerBx.setBxStatus(psBx.getBxStatus());
+    		Map<String, String> replaceMap = new HashMap<String, String>(); 
+    		String memberId =psBx.getMemberId();
+    		MemberInformation m=memberInformationManager.getMemberInformation(memberId);
+			replaceMap.put("#user", m.getMemberPhoneNumber());
+			replaceMap.put("#bxCode", psBx.getBxCode());
+			McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0308", replaceMap);  			  				
+   			mcMsgdatasManager.sendToUser(msgData, memberId);
     		return propertyservicemanagerBxDao.save(propertyservicemanagerBx);
     	}else{
     		psBx.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
@@ -358,6 +379,12 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 	    		//取消报修订单
 	    		bx.setBxStatus("08");
 	    		bx.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+	    		Map<String, String> replaceMap = new HashMap<String, String>(); 
+	    		MemberInformation m=memberInformationManager.getMemberInformation(bx.getMemberId());
+				replaceMap.put("#user", m.getMemberPhoneNumber());
+				replaceMap.put("#bxCode", bx.getBxCode());
+				McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0313", replaceMap);				
+	   			mcMsgdatasManager.sendToUser(msgData, bx.getMemberId());
 	    	}else if("05".equals(bxstatus)){
 	    		//重新报修--到已受理状态
 	    		bx.setBxStatus("01");
