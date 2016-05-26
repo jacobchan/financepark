@@ -49,6 +49,7 @@ import com.gsoft.utils.BizCodeUtil;
 import com.manage.EmployeeManager.dao.EnterpriseEmployeesDao;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
+import com.manage.EnterBusinessManager.service.EnterbusinessmanagerRzManager;
 import com.manage.PropertyServiceManager.dao.PropertyservicemanagerBxDao;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerBx;
 import com.manage.PropertyServiceManager.entity.PropertyservicemanagerTs;
@@ -78,6 +79,8 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 	private CodeitemManager codeitemManager;
 	@Autowired
 	private McMsgdatasManager mcMsgdatasManager;
+	@Autowired
+	private EnterbusinessmanagerRzManager enterbusinessmanagerRzManager;
     /**
      * 查询列表
      */
@@ -219,6 +222,11 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
     @EsbServiceMapping
     public PropertyservicemanagerBx getPsBx(@ServiceParam(name="userId",pubProperty="userId") String userId) throws BusException{
     	MemberInformation mem = memberInformationManager.getMember(userId);
+    	String companyId = mem.getCompanyId();
+    	if(StringUtils.isNotEmpty(companyId)){
+    		EnterbusinessmanagerRz rz = enterbusinessmanagerRzManager.getEnterbusinessmanagerRz(companyId);
+    		mem.setCompanyName(rz.getRzName());
+    	}
     	PropertyservicemanagerBx psBx = new PropertyservicemanagerBx();
     	psBx.setBxCode(BizCodeUtil.getInstance().getBizCodeDate("WYBX"));
 		psBx.setCreateUser(userId);
