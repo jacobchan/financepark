@@ -3,9 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.common.BuildingBaseManager.dao.BbmBuildingDao;
 import com.common.BuildingBaseManager.dao.BbmFloorDao;
 import com.common.BuildingBaseManager.entity.BbmBuilding;
@@ -496,8 +498,10 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 	@EsbServiceMapping(pubConditions = { @PubCondition(property = "updateUser", pubProperty = "userId") })
 	public MemberInformation updateMemberInformationOfCompany(
 			MemberInformation o) throws BusException {
-		String[] roleIds = {};
-		String[] employeesIds = {};
+		StringBuffer roleIds = new StringBuffer();
+		StringBuffer employeesIds = new StringBuffer();
+		String[] roleId = new String[1];
+		String[] employeesId = new String[1];
 		// 获取当前member对象
 		MemberInformation m = memberInformationDao.get(o.getMemberId());
 		// 根据员工id获取角色
@@ -507,22 +511,27 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 		// 根据memberId获取员工
 		Collection<Condition> conditionEmployees = new ArrayList<Condition>();
 		Collection<Order> orderEmployees = new ArrayList<Order>();
-		conditionEmployees.add(ConditionUtils.getCondition("member.memberId",
-				Condition.EQUALS, m.getMemberId()));
-		List<EnterpriseEmployees> e = enterpriseEmployeesDao.commonQuery(
-				conditionEmployees, orderEmployees);
-		for (int i = 0; i < e.size(); i++) {
-			conditionRole.add(ConditionUtils.getCondition(
-					"employees.employeesId", Condition.EQUALS, e.get(i)
-							.getEmployeesId()));
-			r = enterpriseRoleDao.commonQuery(conditionRole, orderRole);
-			employeesIds[i] = e.get(i).getEmployeesId();
+		conditionEmployees.add(ConditionUtils.getCondition("member.memberId", Condition.EQUALS, m.getMemberId()));
+		List<EnterpriseEmployees> e = enterpriseEmployeesDao.commonQuery(conditionEmployees, orderEmployees);
+		if(e.size()>0){
+			for (int i = 0; i < e.size(); i++) {
+				conditionRole.add(ConditionUtils.getCondition("employees.employeesId", Condition.EQUALS, e.get(i).getEmployeesId()));
+				r = enterpriseRoleDao.commonQuery(conditionRole, orderRole);
+				employeesIds.append(e.get(i).getEmployeesId()+",");
+			}
+			//删除员工
+			employeesId[0] = employeesIds.substring(0, employeesIds.length()-1);
+			enterpriseEmployeesManager.removeEnterpriseEmployeess(employeesId);
+			if(r.size()>0){
+				for (int n = 0; n < r.size(); n++) {
+					roleIds.append(r.get(n).getrId()+",");
+				}
+				//批量删除角色
+				roleId[0] = roleIds.substring(0, roleIds.length()-1);
+				enterpriseRoleManager.removeEnterpriseRoles(roleId);
+			}
 		}
-		for (int n = 0; n < r.size(); n++) {
-			roleIds[n] = r.get(n).getrId();
-		}
-		enterpriseRoleManager.removeEnterpriseRoles(roleIds);
-		enterpriseEmployeesManager.removeEnterpriseEmployeess(employeesIds);
+		//置空member的company
 		m.setCompanyId("");
 		return memberInformationDao.save(m);
 	}
