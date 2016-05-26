@@ -56,7 +56,7 @@
 					}
 				});
 			  	
-			  	/* $("#moreul").slideUp("slow"); */
+			  	$("#moreul").slideUp("slow");
 			  	$(".sidebar-menu-mainul > li:eq(1)").addClass("active");
 			});
 			function refreshData(pageIndex,pageSize,rzId){
@@ -251,5 +251,12 @@
 	            </table>
 	        </div>
 	    </div>
+	    <!-- 弹出层样式 -->
+		<div class="toast">
+		    <div class="toast-con clearfix">
+		        <div class="close-toast fr"></div>
+		        <p class="tc mt25 f18" id="toast_text" style="color:#ff6715">请登录后重试！</p>
+		    </div>
+		</div>
 	</body>
 </html>
