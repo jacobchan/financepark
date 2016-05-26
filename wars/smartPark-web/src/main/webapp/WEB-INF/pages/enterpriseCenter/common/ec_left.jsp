@@ -10,6 +10,9 @@
 				color:#FFFFFF;
 			}
 		</style>
+		<script type="text/javascript">
+			
+		</script>
 	</head>
 	<body>
 		<aside class="sidebar-menu fixed">
@@ -17,7 +20,7 @@
 	        	<div class="sidebar-menu-bread"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_home.png"></span>企业管理中心</div>
 	        	<ul class="sidebar-menu-mainul">
 	                <li>
-	                    <a id="more">企业资料 <span class="down-icon"><img src="<%=request.getContextPath()%>/styles/images/qiye/angle-down.png"></span></a>
+	                    <a id="more">企业资料 <span class="down-icon"><img src="<%=request.getContextPath()%>/styles/images/qiye/angle-up.png"></span></a>
 	                    <ul id="moreul" class="sidebar-menu-mainul2">
 	                        <li><a href="<%=request.getContextPath()%>/enterprise/info.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_xinxi.png"></span>企业信息</a></li>
 	                        <li><a href="<%=request.getContextPath()%>/enterprise/financing.html"><span><img src="<%=request.getContextPath()%>/styles/images/qiye/icon_rongzi.png"></span>融资信息</a></li>
