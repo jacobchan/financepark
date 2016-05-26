@@ -8,6 +8,11 @@
 		formAction="workflow/run/completeTask.json" formSubmit="提 交"
 		width="600">
 	</youi:subpage>
+	<!-- 跳转费用清单页面 -->
+	<youi:subpage
+		src="page/manageCenter.PropertyServiceManager.propertyservicemanagerTs/addSer.html" 
+		subpageId="addSer" height="500" caption="维修费用清单新增">
+	</youi:subpage>
 	
 	<youi:grid id="grid_repairOrder" idKeys="processDefinitionId,id,formKey" caption="填写报修单"  panel="false"
 				src="workflow/run/getPagerTasks.json"
@@ -28,10 +33,18 @@
 		<youi:gridCol property="params.createUsercaption"  caption="创建人" width="10%" align="center"/>
 		<youi:gridCol property="createTime"  type="date" caption="创建时间" width="15%" align="center"/>
 		
+		<youi:button name="putfrom" caption="填报维修费用清单" active="1"  icon="edit"/>
 		<youi:button name="process" icon="addRecord" active="1" caption="填写报修单"/>
 	</youi:grid>
 	
 	<!--**********************************页面函数Start********************************-->
+	<!-- 填报维修费用清单 -->
+	<youi:func name="func_grid_putfrom">
+		var select = $elem('grid_repairOrder',pageId).grid("getSelectedRecord");	
+		var bxCode = select['params.bxCode'];
+		var subpageElement = $elem('subpage_addSer',pageId);
+		subpageElement.subpage('open',{bxCode:bxCode});
+	</youi:func>
 	<youi:func name="func_grid_process">
 		var select = $elem('grid_repairOrder',pageId).grid("getSelectedRecord");			
         var subpageElem = $elem('subpage_process',pageId);
