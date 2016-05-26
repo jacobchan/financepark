@@ -67,6 +67,8 @@ $.youi.ajaxUtils.ajax({
 													'bxStatus='+record.bxStatus,
 													'bxCode='+record.bxCode,
 													'createUsercaption='+record.member.memberName,
+													'phone='+record.member.memberPhoneNumber,
+													'companyName='+record.member.companyName,
 													'bxAddress='+add,
 													'flowProcessId='+"propertyrepair",
 													'processDefinitionId='+"propertyrepair",
