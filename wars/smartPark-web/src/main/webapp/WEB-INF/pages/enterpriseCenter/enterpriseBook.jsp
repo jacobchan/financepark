@@ -164,8 +164,8 @@
 			
 			function removeBook(id){
 			 	$.youi.ajaxUtils.ajax({
-					url:baseUrl+'/memberInformationManager/removeMemberInformation.json',
-					data:'memberId='+id,
+					url:baseUrl+'/enterbusinessmanagerRzManager/updateMemberInformationOfCompany.json',
+					data:'memberId='+id+'&companyId='+$("#companyId").val(),
 					success:function(result){
 						$('#toast_text').html('删除成功！');
 						$(".toast").show();
