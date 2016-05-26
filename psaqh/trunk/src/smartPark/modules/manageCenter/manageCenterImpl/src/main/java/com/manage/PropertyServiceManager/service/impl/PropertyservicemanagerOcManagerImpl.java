@@ -220,11 +220,16 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
      * @throws BusException
      */
    @EsbServiceMapping
-    public PropertyservicemanagerOc updateBindStatus(PropertyservicemanagerOc p) throws BusException{   	
-	   String ocId = p.getOcId();	   
-	   PropertyservicemanagerOc psm = propertyservicemanagerOcDao.get(ocId);    		
-       psm.setBindStatus("0");
-	   return propertyservicemanagerOcDao.save(psm);    		
+	public PropertyservicemanagerOc updateBindStatus(PropertyservicemanagerOc p) throws BusException{   	
+		String ocId = p.getOcId();	   
+		PropertyservicemanagerOc psm = propertyservicemanagerOcDao.get(ocId);    		
+		psm.setBindStatus("0");
+		Map<String, String> replaceMap = new HashMap<String, String>();		
+		replaceMap.put("#user", memberInformationManager.getMember(psm.getMemberId()).getMemberName());
+		replaceMap.put("#ocCode", psm.getOcCode());
+		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0318", replaceMap);			
+   		mcMsgdatasManager.sendToUser(msgData, psm.getMemberId());
+	    return propertyservicemanagerOcDao.save(psm);    		
     }
    /**
 	 * 增加绑定卡号
@@ -236,9 +241,14 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 		   @ServiceParam(name="ocNumber") String ocNumber,  
 		   @ServiceParam(name="bindStatus") String  bindStatus)
 			throws BusException {											
-	   PropertyservicemanagerOc psm = propertyservicemanagerOcDao. getObjectByUniqueProperty("ocNumber", ocNumber);   		
-       psm.setBindStatus("1");
-	   return propertyservicemanagerOcDao.save(psm);    		
+	    PropertyservicemanagerOc psm = propertyservicemanagerOcDao. getObjectByUniqueProperty("ocNumber", ocNumber);   		
+        psm.setBindStatus("1");
+        Map<String, String> replaceMap = new HashMap<String, String>();		
+		replaceMap.put("#user", memberInformationManager.getMember(psm.getMemberId()).getMemberName());
+		replaceMap.put("#ocCode", psm.getOcCode());
+		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0319", replaceMap);			
+  		mcMsgdatasManager.sendToUser(msgData, psm.getMemberId());
+	    return propertyservicemanagerOcDao.save(psm);    		
    }
    /**
     * 修改一卡通预约状态
@@ -252,6 +262,11 @@ public class PropertyservicemanagerOcManagerImpl extends BaseManagerImpl impleme
 		if("00".equals(ocStstus)){
 			o.setOcStatus("08");
 			o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+			Map<String, String> replaceMap = new HashMap<String, String>();		
+			replaceMap.put("#user", memberInformationManager.getMember(o.getMemberId()).getMemberName());
+			replaceMap.put("#ocCode", o.getOcCode());
+			McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0317", replaceMap);			
+	  		mcMsgdatasManager.sendToUser(msgData, o.getMemberId());
 			return propertyservicemanagerOcDao.save(o); 
 	    }else{
 	    	 throw new BusException("只有在未办理成功时才能取消"); 
