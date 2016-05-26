@@ -231,6 +231,6 @@ $(function() {
 		$(".c-b1").text(selecttext).attr("data-val",val);
 	});
 	
-	/*$("#moreul").slideDown("slow");*/
+	$("#moreul").slideDown("slow");
   	$("#moreul > li:eq(1)").addClass("active");
 });
