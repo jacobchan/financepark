@@ -1,20 +1,14 @@
-/**
- * 代码声明
- */
 package com.common.MemberManager.service.impl;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.common.BuildingBaseManager.service.BbmParkManager;
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.entity.MemberInformation;
@@ -53,12 +47,11 @@ import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.PasswordUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.utils.EncryptUtil;
-
-
 @Service("memberInformationManager")
 @Transactional
-public class MemberInformationManagerImpl extends BaseManagerImpl implements MemberInformationManager,
-		UserLoginService<MemberInformation>, IUserAdapter<MemberInformation, DefaultLoginFormToken>, Ordered {
+public class MemberInformationManagerImpl extends BaseManagerImpl implements
+		MemberInformationManager, UserLoginService<MemberInformation>,
+		IUserAdapter<MemberInformation, DefaultLoginFormToken>, Ordered {
 	@Autowired
 	private MemberInformationDao memberInformationDao;
 	@Autowired
@@ -69,7 +62,7 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	private BbmParkManager bbmParkManager;
 	@Autowired
 	private UserManager userManager;
-	
+
 	@Value("${ininin.sso_url}")
 	private String inininSsoUrl;
 	@Value("${ininin.compname}")
@@ -97,7 +90,8 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	 * 根据主键查询
 	 */
 	@EsbServiceMapping
-	public MemberInformation getMemberInformation(@ServiceParam(name = "memberId") String id) throws BusException {
+	public MemberInformation getMemberInformation(
+			@ServiceParam(name = "memberId") String id) throws BusException {
 		MemberInformation member = memberInformationDao.get(id);
 		List<String> memberRoles = memberRoleManager.getRolesByMemberId(id);
 		member.setRoleIds(memberRoles);
@@ -105,28 +99,35 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	}
 
 	@EsbServiceMapping
-	public PagerRecords getPagerMemberInformations(Pager pager, // 分页条件
+	public PagerRecords getPagerMemberInformations(
+			Pager pager, // 分页条件
 			@ConditionCollection(domainClazz = MemberInformation.class) Collection<Condition> conditions, // 查询条件
 			@OrderCollection Collection<Order> orders) throws BusException {
-		PagerRecords pagerRecords = memberInformationDao.findByPager(pager, conditions, orders);
+		PagerRecords pagerRecords = memberInformationDao.findByPager(pager,
+				conditions, orders);
 		pagerRecords.getTotalCount();
 		// Pager pager1=pagerRecords.getPager();
 		return pagerRecords;
 	}
-	//获取企业通讯录
+
+	// 获取企业通讯录
 	@Override
 	@EsbServiceMapping
-	public PagerRecords getPagerEnterMemberInformations(Pager pager, // 分页条件
+	public PagerRecords getPagerEnterMemberInformations(
+			Pager pager, // 分页条件
 			@ConditionCollection(domainClazz = MemberInformation.class) Collection<Condition> conditions, // 查询条件
 			@OrderCollection Collection<Order> orders,
-			@ServiceParam(name = "userId", pubProperty = "userId") String userId) throws BusException {
+			@ServiceParam(name = "userId", pubProperty = "userId") String userId)
+			throws BusException {
 		MemberInformation mem = memberInformationDao.get(userId);
 		String companyId = "";
-		if(mem != null){
+		if (mem != null) {
 			companyId = mem.getCompanyId();
 		}
-		conditions.add(ConditionUtils.getCondition("companyId", Condition.EQUALS, companyId));
-		PagerRecords pagerRecords = memberInformationDao.findByPager(pager, conditions, orders);
+		conditions.add(ConditionUtils.getCondition("companyId",
+				Condition.EQUALS, companyId));
+		PagerRecords pagerRecords = memberInformationDao.findByPager(pager,
+				conditions, orders);
 		pagerRecords.getTotalCount();
 		// Pager pager1=pagerRecords.getPager();
 		return pagerRecords;
@@ -136,11 +137,13 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	 * 保存对象
 	 */
 	@EsbServiceMapping(pubConditions = { @PubCondition(property = "updateUser", pubProperty = "userId") })
-	public MemberInformation saveMemberInformation(MemberInformation o) throws BusException {
+	public MemberInformation saveMemberInformation(MemberInformation o)
+			throws BusException {
 		String memberInformationId = o.getMemberId();
 		boolean isUpdate = StringUtils.isNotEmpty(memberInformationId);
 		if (isUpdate) {// 修改
-			MemberInformation mi = memberInformationDao.get(memberInformationId);
+			MemberInformation mi = memberInformationDao
+					.get(memberInformationId);
 
 			mi.setMemberPhoneNumber(o.getMemberPhoneNumber());
 			mi.setMemberName(o.getMemberName());
@@ -164,28 +167,29 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 			return member;
 		}
 	}
-	
-	//APP端重新设置密码
+
+	// APP端重新设置密码
 	@Override
 	@EsbServiceMapping
 	public MemberInformation findPwdReset(
 			@ServiceParam(name = "phone") String phone,
 			@ServiceParam(name = "passwd") String passwd,
 			@ServiceParam(name = "repasswd") String repasswd,
-			@ServiceParam(name = "phoneCode") String phoneCode) throws BusException{
+			@ServiceParam(name = "phoneCode") String phoneCode)
+			throws BusException {
 
-		if(com.gsoft.framework.util.StringUtils.isEmpty(passwd)){
+		if (com.gsoft.framework.util.StringUtils.isEmpty(passwd)) {
 			throw new BusException("密码不能为空！");
 		}
 		if (!passwd.equals(repasswd)) {
 			throw new BusException("两次输入的密码不一致");
 		}
 		MemberInformation mb = getUserByPhone(phone);
-		if(mb == null){
+		if (mb == null) {
 			throw new BusException("用户不存在！");
-		}else{
+		} else {
 			TempDemo temp = mcMsgdatasManager.checkPhoneCode(phone, phoneCode);
-			if(!temp.isFlag()){
+			if (!temp.isFlag()) {
 				throw new BusException(temp.getBuff());
 			}
 			mb.setMemberPassword(PasswordUtils.md5Password(passwd));
@@ -199,7 +203,8 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	 * 删除对象
 	 */
 	@EsbServiceMapping
-	public void removeMemberInformation(@ServiceParam(name = "memberId") String id) throws BusException {
+	public void removeMemberInformation(
+			@ServiceParam(name = "memberId") String id) throws BusException {
 		memberInformationDao.remove(id);
 	}
 
@@ -208,18 +213,21 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	 * 
 	 * @param ids
 	 */
-	public void removeMemberInformations(@ServiceParam(name = "memberId") String[] ids) throws BusException {
+	public void removeMemberInformations(
+			@ServiceParam(name = "memberId") String[] ids) throws BusException {
 		for (String id : ids) {
 			removeMemberInformation(id);
 		}
 	}
 
 	@EsbServiceMapping
-	public boolean exsitMemberInformation(@ServiceParam(name = "memberId") String id) throws BusException {
+	public boolean exsitMemberInformation(
+			@ServiceParam(name = "memberId") String id) throws BusException {
 		return memberInformationDao.exists(id);
 	}
 
-	public boolean exsitMemberInformation(String propertyName, Object value) throws BusException {
+	public boolean exsitMemberInformation(String propertyName, Object value)
+			throws BusException {
 		return memberInformationDao.exists(propertyName, value);
 	}
 
@@ -235,10 +243,11 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	 * @throws BusException
 	 */
 	@EsbServiceMapping
-	public TempDemo saveReister(@ServiceParam(name = "memberPassword") String passwd,
-			@ServiceParam(name = "repasswd") String repasswd, @ServiceParam(name = "memberPhoneNumber") String phone,
-			@ServiceParam(name = "captcha") String captcha)
-					throws BusException {
+	public TempDemo saveReister(
+			@ServiceParam(name = "memberPassword") String passwd,
+			@ServiceParam(name = "repasswd") String repasswd,
+			@ServiceParam(name = "memberPhoneNumber") String phone,
+			@ServiceParam(name = "captcha") String captcha) throws BusException {
 		TempDemo td = this.exsitMobile(phone);
 		if (td.isFlag()) {// 为true表明手机号已经注册
 			throw new BusException("此手机号已经注册了！");
@@ -258,20 +267,22 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		if (!passwd.equals(repasswd)) {
 			throw new BusException("两次密码输入不一致！");
 		}
-		TempDemo temp  = mcMsgdatasManager.checkPhoneCode(phone, captcha);
-		if(temp.isFlag()){
+		TempDemo temp = mcMsgdatasManager.checkPhoneCode(phone, captcha);
+		if (temp.isFlag()) {
 			MemberInformation memberInformation = new MemberInformation();
 			memberInformation.setMemberName(phone);
-			memberInformation.setMemberPassword(PasswordUtils.md5Password(passwd));
+			memberInformation.setMemberPassword(PasswordUtils
+					.md5Password(passwd));
 			memberInformation.setMemberPhoneNumber(phone);
-			MemberInformation member = memberInformationDao.save(memberInformation);
+			MemberInformation member = memberInformationDao
+					.save(memberInformation);
 			// 添加默认角色
 			this.setDefaultRole(member);
-			
-			//构建替换模板参数对应的map
+
+			// 构建替换模板参数对应的map
 			Map<String, Object> replaceMap = new HashMap<String, Object>();
 			replaceMap.put("#user", phone);
-			//发送消息,给会员
+			// 发送消息,给会员
 			mcMsgdatasManager.smsSend("1012", replaceMap, null, phone);
 		}
 		return temp;
@@ -301,11 +312,12 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	 */
 	@Override
 	@EsbServiceMapping
-	public TempDemo exsitMobile(@ServiceParam(name = "memberPhoneNumber") String mobile) {
+	public TempDemo exsitMobile(
+			@ServiceParam(name = "memberPhoneNumber") String mobile) {
 		// 判断该用户是否存在
 		TempDemo td = new TempDemo();// new 一个自定义对象
-		MemberInformation memberInformationed = memberInformationDao.getObjectByUniqueProperty("memberPhoneNumber",
-				mobile);
+		MemberInformation memberInformationed = memberInformationDao
+				.getObjectByUniqueProperty("memberPhoneNumber", mobile);
 		if (memberInformationed != null) {// 存在，则将td中的flag设为true
 			td.setFlag(true);
 		} else {
@@ -324,9 +336,8 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	 */
 	@EsbServiceMapping
 	public MemberInformation getMemberInformationByLoginUser(
-			@ServiceParam(name = "userId", pubProperty = "userId") String userId) throws BusException {
-		// TODO Auto-generated method stub
-
+			@ServiceParam(name = "userId", pubProperty = "userId") String userId)
+			throws BusException {
 		return memberInformationDao.get(userId);
 	}
 	
@@ -348,49 +359,44 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 
 	@Override
 	public List<String> getAccountMenus(MemberInformation member) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<IAgency> getAgencyByParent(String arg0) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public TreeNode getAgencyTree() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<IMenu> getProviderMenus() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public IRealmUserInfo getRealmUserInfo(DefaultLoginFormToken token) {
-		// TODO Auto-generated method stub
 		// 疑问，token里面存值，是在什么地方存储的？，多种方式登录如何处理，如用邮箱登录，手机登录，用户名登录。
 		// 因为2，登录类型是从哪里获取的？
 		String phoneNumber = token.getUsername();
-		MemberInformation member = this.memberInformationDao.getObjectByUniqueProperty("memberPhoneNumber",
-				phoneNumber);
+		MemberInformation member = this.memberInformationDao
+				.getObjectByUniqueProperty("memberPhoneNumber", phoneNumber);
 		// Collection<Condition> conditions = new Collection<Condition>();
 		// conditions.add(Condition.)
-		List<String> roles = memberRoleManager.getRolesByMemberId(member.getMemberId());
+		List<String> roles = memberRoleManager.getRolesByMemberId(member
+				.getMemberId());
 		member.setRoleIds(roles);
 		member.getPrincipalConfig().put("userId", member.getMemberId());
 		member.getPrincipalConfig().put("loginType", token.getLoginType());
 		member.getPrincipalConfig().put("redirect", token.getRedirect());
 		return new MemberUserInfo(member);
 	}
-	
+
 	@Override
 	public IRealmUserInfo getRealmUserInfo(MemberInformation member) {
-		// TODO Auto-generated method stub
 		return new MemberUserInfo(member);
 	}
 
@@ -398,26 +404,24 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	public boolean supports(IRealmUserToken token) {
 		if (token instanceof DefaultLoginFormToken) {
 			// 只支持带登录类型的登录
-			return StringUtils.isNotEmpty(((DefaultLoginFormToken) token).getLoginType());
+			return StringUtils.isNotEmpty(((DefaultLoginFormToken) token)
+					.getLoginType());
 		}
 		return false;
 	}
 
 	@Override
 	public boolean supports(IUser member) {
-		// TODO Auto-generated method stub
 		return MemberInformation.class.isAssignableFrom(member.getClass());
 	}
 
 	@Override
 	public MemberInformation getLoginUser(String arg0) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public int getOrder() {
-		// TODO Auto-generated method stub
 		return -1;
 	}
 
@@ -427,65 +431,65 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	 * @param password
 	 * @param confirmPassword
 	 * @param oldPassword
-	 * @return 
-	 * @return 
+	 * @return
+	 * @return
 	 * @throws BusException
 	 */
 	@EsbServiceMapping
-	public Record doModifyPassword(@ServiceParam(name = "password") String password,
+	public Record doModifyPassword(
+			@ServiceParam(name = "password") String password,
 			@ServiceParam(name = "confirmPassword") String confirmPassword,
 			@ServiceParam(name = "oldPassword") String oldPassword,
-			@ServiceParam(name = "userId", pubProperty = "userId") String userId) throws BusException {
-		// TODO Auto-generated method stub
+			@ServiceParam(name = "userId", pubProperty = "userId") String userId)
+			throws BusException {
 		Record record = new Record();
-		String msg="";
+		String msg = "";
 		if (StringUtils.isEmpty(oldPassword)) {
-			//throw new BusException("旧密码不能为空！");
-			msg="旧密码不能为空";
+			// throw new BusException("旧密码不能为空！");
+			msg = "旧密码不能为空";
 		}
 		if (StringUtils.isEmpty(password)) {
-			//throw new BusException("新密码不能为空！");
-			msg="新密码不能为空";
+			// throw new BusException("新密码不能为空！");
+			msg = "新密码不能为空";
 		}
 		if (StringUtils.isEmpty(confirmPassword)) {
-			//throw new BusException("确认密码不能为空！");
-			msg="确认密码不能为空";
+			// throw new BusException("确认密码不能为空！");
+			msg = "确认密码不能为空";
 		}
 
-		
 		if (!password.equals(confirmPassword)) {
-			//throw new BusException("两次输入的密码不一致！");
-			msg="两次输入的密码不一致";
+			// throw new BusException("两次输入的密码不一致！");
+			msg = "两次输入的密码不一致";
 		}
 
 		MemberInformation member = null;
 		try {
 			member = (MemberInformation) this.memberInformationDao.get(userId);
 		} catch (Exception e) {
-			//throw new BusException("查找用户ID[" + userId + "]出错！");
-			msg="查找用户ID[" + userId + "]出错！";
+			// throw new BusException("查找用户ID[" + userId + "]出错！");
+			msg = "查找用户ID[" + userId + "]出错！";
 		}
 		Assert.notNull(member, "未找到用户！");
 		if (!password.equals(confirmPassword)) {
-			//throw new BusException("两次输入的密码不一致！");
-			msg="两次输入的密码不一致！";
+			// throw new BusException("两次输入的密码不一致！");
+			msg = "两次输入的密码不一致！";
 		}
-		if (!PasswordUtils.md5Password(oldPassword).equals(member.getMemberPassword())) {
-			//throw new BusException("请输入正确的旧密码！");
-			msg="请输入正确的旧密码！";
-		}else{
+		if (!PasswordUtils.md5Password(oldPassword).equals(
+				member.getMemberPassword())) {
+			// throw new BusException("请输入正确的旧密码！");
+			msg = "请输入正确的旧密码！";
+		} else {
 			if (password.equals(oldPassword)) {
-				msg="新旧密码不能一样";
-			}else{
+				msg = "新旧密码不能一样";
+			} else {
 				member.setMemberPassword(PasswordUtils.md5Password(password));
 				memberInformationDao.save(member);
-				if(PasswordUtils.md5Password(password).equals(member.getMemberPassword())){
-					msg="修改成功";
+				if (PasswordUtils.md5Password(password).equals(
+						member.getMemberPassword())) {
+					msg = "修改成功";
 				}
 			}
 		}
-
-		
 
 		record.put("msg", msg);
 		return record;
@@ -499,17 +503,18 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	 */
 	@EsbServiceMapping(pubConditions = { @PubCondition(property = "updateUser", pubProperty = "userId") })
 	public void updatePhoneNumber(MemberInformation o) throws BusException {
-		// TODO Auto-generated method stub
 		MemberInformation member = null;
 		try {
-			member = (MemberInformation) this.memberInformationDao.get(o.getUpdateUser());
+			member = (MemberInformation) this.memberInformationDao.get(o
+					.getUpdateUser());
 		} catch (Exception e) {
 			throw new BusException("查找用户ID[" + o.getUpdateUser() + "]出错！");
 		}
 		Assert.notNull(member, "未找到用户！");
 
 		if (!o.getMemberPhoneNumber().equals(member.getMemberPhoneNumber())) {
-			if (memberInformationDao.exists("memberPhoneNumber", o.getMemberPhoneNumber())) {
+			if (memberInformationDao.exists("memberPhoneNumber",
+					o.getMemberPhoneNumber())) {
 				throw new BusException("手机号码已被使用，请更换手机号码");
 			}
 		}
@@ -525,18 +530,22 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	 * @throws BusException
 	 */
 	@EsbServiceMapping
-	public MemberInformation userLogin(MemberInformation memberInformation) throws BusException {
+	public MemberInformation userLogin(MemberInformation memberInformation)
+			throws BusException {
 
-		MemberInformation member = this.memberInformationDao.getObjectByUniqueProperty("memberPhoneNumber",
-				memberInformation.getMemberPhoneNumber());
+		MemberInformation member = this.memberInformationDao
+				.getObjectByUniqueProperty("memberPhoneNumber",
+						memberInformation.getMemberPhoneNumber());
 		if (member == null) {
 			throw new BusException("999999", "改用户不存在！");
 		}
-		if (!member.getPassword().equals(PasswordUtils.md5Password(memberInformation.getPassword()))) {
+		if (!member.getPassword().equals(
+				PasswordUtils.md5Password(memberInformation.getPassword()))) {
 			throw new BusException("999999", "密码错误");
 		}
 
-		List<String> roles = memberRoleManager.getRolesByMemberId(member.getMemberId());
+		List<String> roles = memberRoleManager.getRolesByMemberId(member
+				.getMemberId());
 		member.setRoleIds(roles);
 		member.getPrincipalConfig().put("userId", member.getMemberId());
 		return member;
@@ -552,12 +561,16 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	 */
 	@EsbServiceMapping
 	public List<MemberInformation> getPhoneNumberlist(
-			@ServiceParam(name = "userId", pubProperty = "userId") String userId) throws BusException {
-		MemberInformation m = memberInformationDao.getObjectByUniqueProperty("memberId", userId);
+			@ServiceParam(name = "userId", pubProperty = "userId") String userId)
+			throws BusException {
+		MemberInformation m = memberInformationDao.getObjectByUniqueProperty(
+				"memberId", userId);
 		String companyId = m.getCompanyId();
 		Collection<Condition> condition = new ArrayList<Condition>();
-		condition.add(ConditionUtils.getCondition("companyId", Condition.EQUALS, companyId));
-		List<MemberInformation> list = memberInformationDao.commonQuery(condition, null);
+		condition.add(ConditionUtils.getCondition("companyId",
+				Condition.EQUALS, companyId));
+		List<MemberInformation> list = memberInformationDao.commonQuery(
+				condition, null);
 		return list;
 	}
 
@@ -572,19 +585,19 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	@EsbServiceMapping
 	public List<MemberInformation> getPhoneNumberlistByName(
 			@ServiceParam(name = "userId", pubProperty = "userId") String userId,
-			@ServiceParam(name = "memberName") String memberName) throws BusException {
-		MemberInformation m = memberInformationDao.getObjectByUniqueProperty("memberId", userId);
-		String companyId = "";
-		companyId = m.getCompanyId();
-		if(companyId!=null){
-			Collection<Condition> condition = new ArrayList<Condition>();
-			condition.add(ConditionUtils.getCondition("companyId", Condition.EQUALS, companyId));
-			condition.add(ConditionUtils.getCondition("memberName", Condition.LIKE, memberName));
-			List<MemberInformation> list = memberInformationDao.commonQuery(condition, null);
-			return list;
-		}else{
-			return null;
-		}		
+			@ServiceParam(name = "memberName") String memberName)
+			throws BusException {
+		MemberInformation m = memberInformationDao.getObjectByUniqueProperty(
+				"memberId", userId);
+		String companyId = m.getCompanyId();
+		Collection<Condition> condition = new ArrayList<Condition>();
+		condition.add(ConditionUtils.getCondition("companyId",
+				Condition.EQUALS, companyId));
+		condition.add(ConditionUtils.getCondition("memberName", Condition.LIKE,
+				memberName));
+		List<MemberInformation> list = memberInformationDao.commonQuery(
+				condition, null);
+		return list;
 	}
 
 	/**
@@ -594,20 +607,25 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	 */
 	// @SuppressWarnings("unchecked")
 	@EsbServiceMapping
-	public PagerRecords getPager(Pager pager, // 分页条件
+	public PagerRecords getPager(
+			Pager pager, // 分页条件
 			@ConditionCollection(domainClazz = MemberInformation.class) Collection<Condition> conditions, // 查询条件
 			@OrderCollection Collection<Order> orders,
-			@ServiceParam(name = "userId", pubProperty = "userId") String userId) throws BusException {
+			@ServiceParam(name = "userId", pubProperty = "userId") String userId)
+			throws BusException {
 		// 根据用户id获取当前用户
-		MemberInformation m = memberInformationDao.getObjectByUniqueProperty("memberId", userId);
+		MemberInformation m = memberInformationDao.getObjectByUniqueProperty(
+				"memberId", userId);
 		// 获取公司id
 		String companyId ="公司id";
 		if(m.getCompanyId()!=null){
 			companyId = m.getCompanyId();
 		}
 		// 添加条件 （根据公司id查询）
-		conditions.add(ConditionUtils.getCondition("companyId", Condition.EQUALS, companyId));
-		PagerRecords pagerRecords = memberInformationDao.findByPager(pager, conditions, orders);
+		conditions.add(ConditionUtils.getCondition("companyId",
+				Condition.EQUALS, companyId));
+		PagerRecords pagerRecords = memberInformationDao.findByPager(pager,
+				conditions, orders);
 		return pagerRecords;		
 	}
 
@@ -619,7 +637,8 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	 * @throws BusException
 	 */
 	@EsbServiceMapping(pubConditions = { @PubCondition(property = "updateUser", pubProperty = "userId") })
-	public MemberInformation updateMemberInformation(MemberInformation o) throws BusException {
+	public MemberInformation updateMemberInformation(MemberInformation o)
+			throws BusException {
 
 		// 根据现有的用户ID，查出该用户的基本信息，进行其他信息的修改
 		String memberId = o.getMemberId();
@@ -640,7 +659,7 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		MemberInformation reMemberInformation = memberInformationDao.save(mi);
 		return reMemberInformation;
 	}
-	
+
 	/**
 	 * 个人中心-个人资料（修改）
 	 * 
@@ -649,7 +668,8 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	 * @throws BusException
 	 */
 	@EsbServiceMapping(pubConditions = { @PubCondition(property = "updateUser", pubProperty = "userId") })
-	public MemberInformation updateMemberBook(MemberInformation o) throws BusException {
+	public MemberInformation updateMemberBook(MemberInformation o)
+			throws BusException {
 
 		// 根据现有的用户ID，查出该用户的基本信息，进行其他信息的修改
 		String memberId = o.getMemberId();
@@ -667,19 +687,22 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 	// 根据手机号码获取用户
 	@Override
 	public MemberInformation getUserByPhone(String phone) {
-		MemberInformation mem = memberInformationDao.getObjectByUniqueProperty("memberPhoneNumber", phone);
+		MemberInformation mem = memberInformationDao.getObjectByUniqueProperty(
+				"memberPhoneNumber", phone);
 		return mem;
 	}
 
 	@Override
-	public List<MemberInformation> getMembersByRole(String role) throws BusException {
+	public List<MemberInformation> getMembersByRole(String role)
+			throws BusException {
 		return memberInformationDao.getMembersByRole(role);
 	}
 
 	@EsbServiceMapping
 	public String getEncryptStringForEnterpriseMall(
-			@ServiceParam(name = "userId", pubProperty = "userId") String userId) throws BusException {
-		String retString = this.inininSsoUrl+"?";
+			@ServiceParam(name = "userId", pubProperty = "userId") String userId)
+			throws BusException {
+		String retString = this.inininSsoUrl + "?";
 		MemberInformation noEncypt = memberInformationDao.get(userId);
 		String user_id = EncryptUtil.encrypt(noEncypt.getMemberId());
 		String user_name = EncryptUtil.encrypt(noEncypt.getMemberPhoneNumber());
@@ -689,102 +712,120 @@ public class MemberInformationManagerImpl extends BaseManagerImpl implements Mem
 		String ent_name = EncryptUtil.encrypt(this.companyName);
 
 		// checkcode MD5
-		String checkCodeString = EncryptUtil.getMD5Str(user_id + user_name + name + tel + ent_address + ent_name);
+		String checkCodeString = EncryptUtil.getMD5Str(user_id + user_name
+				+ name + tel + ent_address + ent_name);
 
-		retString = retString + "user_id=" + user_id + "&username=" + user_name + "&name=" + name + "&tel=" + tel
-				+ "&ent_address=" + ent_address + "&ent_name=" + ent_name + "&checkcode=" + checkCodeString;
+		retString = retString + "user_id=" + user_id + "&username=" + user_name
+				+ "&name=" + name + "&tel=" + tel + "&ent_address="
+				+ ent_address + "&ent_name=" + ent_name + "&checkcode="
+				+ checkCodeString;
 		return retString;
 	}
+
 	/**
-	 *前台 根据当前用户分页查询
+	 * 前台 根据当前用户分页查询
+	 * 
 	 * @return 分页对象
 	 */
 
-	 /**
-	* 获取已完成订单的totalCount    陈烨
-	* @param conditions
-	* @return
-	* @throws BusException
-	*/
-    @EsbServiceMapping
-	public List<Record> getTotalCount(
-	   			@ConditionCollection(domainClazz=MemberInformation.class) Collection<Condition> conditions,
-	   			@ServiceParam(name = "userId", pubProperty = "userId") String userId)  throws BusException{
-	   	List<Record> recordList=new ArrayList<Record>();
-	   	MemberInformation m=memberInformationDao.get(userId);
-	   	String companyId=m.getCompanyId();
-	   	conditions.add(ConditionUtils.getCondition("companyId", Condition.EQUALS, companyId));
-	   	List<MemberInformation> List = this.getMemberInformations(conditions, null);
-	   	Record record = new Record();
-	   	record.put("totalCount", List.size());
-	   	recordList.add(record);
-	   	return recordList;
-	}   	 
-    /**
-     * 前台个人中心    安全中心，chenye
-     * @param userId  
-     * @return
-     * @throws BusException
-     */
+	/**
+	 * 获取已完成订单的totalCount 陈烨
+	 * 
+	 * @param conditions
+	 * @return
+	 * @throws BusException
+	 */
 	@EsbServiceMapping
-	public MemberInformation getMember(@ServiceParam(name = "userId", pubProperty = "userId") String userId) throws BusException {
-		MemberInformation member = memberInformationDao.get(userId);		
+	public List<Record> getTotalCount(
+			@ConditionCollection(domainClazz = MemberInformation.class) Collection<Condition> conditions,
+			@ServiceParam(name = "userId", pubProperty = "userId") String userId)
+			throws BusException {
+		List<Record> recordList = new ArrayList<Record>();
+		MemberInformation m = memberInformationDao.get(userId);
+		String companyId = m.getCompanyId();
+		conditions.add(ConditionUtils.getCondition("companyId",
+				Condition.EQUALS, companyId));
+		List<MemberInformation> List = this.getMemberInformations(conditions,
+				null);
+		Record record = new Record();
+		record.put("totalCount", List.size());
+		recordList.add(record);
+		return recordList;
+	}
+
+	/**
+	 * 前台个人中心 安全中心，chenye
+	 * 
+	 * @param userId
+	 * @return
+	 * @throws BusException
+	 */
+	@EsbServiceMapping
+	public MemberInformation getMember(
+			@ServiceParam(name = "userId", pubProperty = "userId") String userId)
+			throws BusException {
+		MemberInformation member = memberInformationDao.get(userId);
 		return member;
 	}
-	
+
 	/**
 	 * 查询所有下级会员
-	 * @param lev 
+	 * 
+	 * @param lev
 	 * @return
 	 */
-	public List<MemberInformation> findNextMember(String lev){
+	public List<MemberInformation> findNextMember(String lev) {
 		List<MemberInformation> members = memberInformationDao.getAll();
 		List<MemberInformation> nextMember = new ArrayList<MemberInformation>();
-		for(MemberInformation m:members){
-			//下线会员
-			if(StringUtils.isEmpty(m.getParentMemberId())){
+		for (MemberInformation m : members) {
+			// 下线会员
+			if (StringUtils.isEmpty(m.getParentMemberId())) {
 				MemberInformation member = getMember(m.getParentMemberId());
-				//查询一级下线
-				if(lev.equals("1")){
+				// 查询一级下线
+				if (lev.equals("1")) {
 					nextMember.add(member);
-				}else{
+				} else {
 
 				}
-				
+
 			}
-			
+
 		}
 		return nextMember;
 	}
-	
+
 	/**
 	 * 查询个人会员下线
+	 * 
 	 * @return
 	 */
-	public List<MemberInformation> findNextMember(String memberId,String lev){
-		Collection<Condition> conditions =  new ArrayList<Condition>();
-		conditions.add(ConditionUtils.getCondition("parentMemberId", Condition.EQUALS,memberId));
-		List<MemberInformation> lev1Members = getMemberInformations(conditions, null);
-		//一级下线
-		if(lev.equals("1")){
+	public List<MemberInformation> findNextMember(String memberId, String lev) {
+		Collection<Condition> conditions = new ArrayList<Condition>();
+		conditions.add(ConditionUtils.getCondition("parentMemberId",
+				Condition.EQUALS, memberId));
+		List<MemberInformation> lev1Members = getMemberInformations(conditions,
+				null);
+		// 一级下线
+		if (lev.equals("1")) {
 			return lev1Members;
-		}else{
-			//二级下线
+		} else {
+			// 二级下线
 			List<MemberInformation> lev2Members = new ArrayList<MemberInformation>();
-			for(MemberInformation m:lev1Members){
-				if(StringUtils.isEmpty(m.getParentMemberId())){
+			for (MemberInformation m : lev1Members) {
+				if (StringUtils.isEmpty(m.getParentMemberId())) {
 					MemberInformation member = getMember(m.getParentMemberId());
 					lev2Members.add(member);
 				}
 			}
-			if(lev.equals("2")){
+			if (lev.equals("2")) {
 				return lev2Members;
-			}else if(lev.equals("3")){
-				//三级下线
+			} else if (lev.equals("3")) {
+				// 三级下线
 				List<MemberInformation> lev3Members = new ArrayList<MemberInformation>();
-				for(MemberInformation m:lev2Members){
-					if(StringUtils.isEmpty(m.getParentMemberId())){
-						MemberInformation member = getMember(m.getParentMemberId());
+				for (MemberInformation m : lev2Members) {
+					if (StringUtils.isEmpty(m.getParentMemberId())) {
+						MemberInformation member = getMember(m
+								.getParentMemberId());
 						lev3Members.add(member);
 					}
 				}
