@@ -16,6 +16,7 @@ import com.common.BuildingBaseManager.service.BbmParkManager;
 import com.common.BuildingBaseManager.service.BbmRoomManager;
 import com.common.EnterpriceTypeManager.entity.EtypeEnterprisetype;
 import com.common.EnterpriceTypeManager.service.EtypeEnterprisetypeManager;
+import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
 import com.gsoft.entity.TempDemo;
@@ -31,6 +32,8 @@ import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.PasswordUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.manage.EmployeeManager.dao.EnterpriseEmployeesDao;
+import com.manage.EmployeeManager.dao.EnterpriseRoleDao;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 import com.manage.EmployeeManager.entity.EnterpriseRole;
 import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
@@ -69,6 +72,13 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 	private InformationLegalManager informationLegalManager;
 	@Autowired
 	private BbmParkManager bbmParkManager;
+	
+	@Autowired
+	private EnterpriseEmployeesDao enterpriseEmployeesDao;
+	@Autowired
+	private EnterpriseRoleDao enterpriseRoleDao;
+	@Autowired
+	private MemberInformationDao memberInformationDao;
 	
     /**
      * 查询列表
@@ -476,4 +486,44 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 		}
 		return temp;
 	} 
+	
+	/**
+	 * 删除企业通讯录员工与企业关系
+	 * @param o
+	 * @return
+	 * @throws BusException
+	 */
+	@EsbServiceMapping(pubConditions = { @PubCondition(property = "updateUser", pubProperty = "userId") })
+	public MemberInformation updateMemberInformationOfCompany(
+			MemberInformation o) throws BusException {
+		String[] roleIds = {};
+		String[] employeesIds = {};
+		// 获取当前member对象
+		MemberInformation m = memberInformationDao.get(o.getMemberId());
+		// 根据员工id获取角色
+		List<EnterpriseRole> r = null;
+		Collection<Condition> conditionRole = new ArrayList<Condition>();
+		Collection<Order> orderRole = new ArrayList<Order>();
+		// 根据memberId获取员工
+		Collection<Condition> conditionEmployees = new ArrayList<Condition>();
+		Collection<Order> orderEmployees = new ArrayList<Order>();
+		conditionEmployees.add(ConditionUtils.getCondition("member.memberId",
+				Condition.EQUALS, m.getMemberId()));
+		List<EnterpriseEmployees> e = enterpriseEmployeesDao.commonQuery(
+				conditionEmployees, orderEmployees);
+		for (int i = 0; i < e.size(); i++) {
+			conditionRole.add(ConditionUtils.getCondition(
+					"employees.employeesId", Condition.EQUALS, e.get(i)
+							.getEmployeesId()));
+			r = enterpriseRoleDao.commonQuery(conditionRole, orderRole);
+			employeesIds[i] = e.get(i).getEmployeesId();
+		}
+		for (int n = 0; n < r.size(); n++) {
+			roleIds[n] = r.get(n).getrId();
+		}
+		enterpriseRoleManager.removeEnterpriseRoles(roleIds);
+		enterpriseEmployeesManager.removeEnterpriseEmployeess(employeesIds);
+		m.setCompanyId("");
+		return memberInformationDao.save(m);
+	}
 }
