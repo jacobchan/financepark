@@ -23,6 +23,8 @@
 		<youi:gridCol property="params.bxType"  caption="报修类型" width="10%" align="center" />
 		<youi:gridCol property="params.bxStatus"  caption="报修状态" width="10%" align="center"/>
 		<youi:gridCol property="params.bxRemark"  caption="报修描述" width="19%" align="center"/>
+		<youi:gridCol property="params.phone"  caption="联系电话" width="18%" align="center"/>
+		<youi:gridCol property="params.companyName"  caption="企业名称" width="18%" align="center"/>
 		<youi:gridCol property="params.flowSuggestPg"  caption="派工备注" width="19%" align="center"/>
 		<youi:gridCol property="params.bxAddress"  caption="报修地址" width="0%" align="center"/>
 		<youi:gridCol property="params.createUsercaption"  caption="创建人" width="10%" align="center"/>
@@ -40,8 +42,11 @@
 		var bxType = select['params.bxType'];
 		var bxRemark = select['params.bxRemark'];
 		var bxAddress = select['params.bxAddress'];
-		subpageElem.subpage('open',select,null,{taskId:select.id,subpagePrefix:select.id,
-			bxCode:bxCode,bxType:bxType,bxRemark:bxRemark,bxAddress:bxAddress,flowSuggestPg:flowSuggestPg});
+		var phone = select['params.phone'];
+		var companyName = select['params.companyName'];
+		var createUsercaption = select['params.createUsercaption'];
+		subpageElem.subpage('open',select,null,{taskId:select.id,subpagePrefix:select.id,createUsercaption:createUsercaption,
+			bxCode:bxCode,bxType:bxType,bxRemark:bxRemark,bxAddress:bxAddress,flowSuggestPg:flowSuggestPg,companyName:companyName,phone:phone});
 	</youi:func>
 	<youi:func name="init">
 		$.youi.ajaxUtil.ajax({
