@@ -212,9 +212,9 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
     	if(psts==null){
     		throw new BusException("没有派工记录!");
     	}else{
-//    		if(psts.getTsStatus().equals("01")){//派工状态已接单
+    		if(psts.getTsStatus().equals("01")||psts.getTsStatus().equals("03")){//派工状态已接单
     			if(bx.getBxStatus().equals("03")){//待填报维修记录
-    				BigDecimal amount = BigDecimal.valueOf(0);
+    				/*BigDecimal amount = BigDecimal.valueOf(0);
     				BigDecimal bxAmount = bx.getBxAmount();
     					for(PropertyservicemanagerSer ser : listSer){//自动计算总价
     						amount = amount.add(ser.getSerPrice());
@@ -223,11 +223,11 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
     						bx.setBxAmount(amount.add(bxAmount));
     					}else{
     						bx.setBxAmount(amount);
-    					}
+    					}*/
 	    				//变更状态为已完工
-	    				bx.setBxStatus("04");
+	    				//bx.setBxStatus("04");
 	    				psts.setTsStatus("03");//已填报费用清单
-		    		propertyservicemanagerBxDao.save(bx);
+		    		//propertyservicemanagerBxDao.save(bx);
 		    		propertyservicemanagerTsManager.savePts(psts);
 		    		//保存维修单
 		    		for(PropertyservicemanagerSer allser : listSer){
@@ -242,11 +242,11 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
     			}else if(bx.getBxStatus().equals("07")){
     				throw new BusException("报修流程已结束!");
     			}
-//    		}else{
-//    			throw new BusException("派工记录有误!");
-//    		}
+    		}else{
+    			throw new BusException("派工记录有误!");
+    		}
     	}
-		
+    	upBxAmount(bx.getBxId());
 	}
     
     /**
@@ -294,5 +294,26 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
     	conditions.add(ConditionUtils.getCondition("propertyservicemanagerTs.tsName",Condition.EQUALS, name));
 		PagerRecords pagerRecords = propertyservicemanagerSerDao.findByPager(pager, conditions, orders);
 		return pagerRecords;
+	}
+    
+    /**
+	 * 根据报修id 更新报修费用清单总价
+	 * @param bxId
+	 * @throws BusException
+	 */
+	public void upBxAmount(String bxId) throws BusException{
+		PropertyservicemanagerBx bx= propertyservicemanagerBxManager.getPropertyservicemanagerBx(bxId);
+		if(bx==null){
+			throw new BusException("未找到报修记录!");
+		}
+		List<PropertyservicemanagerSer> list = propertyservicemanagerSerDao.getList("propertyservicemanagerTs.propertyservicemanagerBx.bxId", bxId);
+		BigDecimal amount = BigDecimal.valueOf(0);
+		if(list.size()>0){
+			for(PropertyservicemanagerSer ser : list){//自动计算总价
+				amount = amount.add(ser.getSerPrice());
+			}
+		}
+		bx.setBxAmount(amount);
+		propertyservicemanagerBxDao.save(bx);
 	}
 }
