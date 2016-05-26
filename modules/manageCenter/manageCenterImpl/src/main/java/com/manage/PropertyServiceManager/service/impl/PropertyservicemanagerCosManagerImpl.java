@@ -95,7 +95,6 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
     	replaceMap.put("#user", o.getMemberInformation().getMemberName());
     	replaceMap.put("#cosCode", o.getCosCode());
     	McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0309", replaceMap);			
-    	//mcMsgdatasManager.sendToUser(msgData, o.getMemberInformation().getMemberId());
     	try {
     		mcMsgdatasManager.sendToUser(msgData, o.getMemberInformation().getMemberId());
 			//HttpSenderMsg.sendMsg(o.getCosTelephone(), "您提交的投诉："+o.getCosCode()+"待物业管理员受理中，请及时关注受理状态！");
@@ -182,6 +181,11 @@ public class PropertyservicemanagerCosManagerImpl extends BaseManagerImpl implem
 		    if("01".equals(cosStatus)){
 		    	psm.setCosStatus("03");
 		    	psm.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		    	Map<String, String> replaceMap = new HashMap<String, String>();		
+		    	replaceMap.put("#user", psm.getMemberInformation().getMemberName());
+		    	replaceMap.put("#cosCode", psm.getCosCode());
+		    	McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0314", replaceMap);					    
+		    	mcMsgdatasManager.sendToUser(msgData, psm.getMemberInformation().getMemberId());
 		    }else{
 		    	throw new BusException("该状态下的订单不允许取消操作");
 		    }
