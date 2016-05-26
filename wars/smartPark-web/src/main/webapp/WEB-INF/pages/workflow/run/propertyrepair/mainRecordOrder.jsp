@@ -9,7 +9,6 @@
 		subpageId="addSer" height="500" caption="维修费用清单新增">
 	</youi:subpage>
 	<youi:form id="" submit="NOT" reset="NOT" panel="false">
-		<youi:button name="putfrom" caption="填报维修费用清单" icon="edit"/>
 		<youi:fieldLayout prefix="record" labelWidths="100,100">
 			<youi:fieldHidden property="bxCode"  caption="报修编号"/>
 			<youi:fieldHidden property="taskId"  caption="ID"/>
@@ -24,7 +23,7 @@
 	</youi:form>
 	
 	<!--**********************************页面函数Start********************************-->
-	<!-- 填报维修费用清单 -->
+		<!-- 填报维修费用清单 -->
 		<youi:func name="func_form_putfrom">
 			var bxCode =  $elem('record_bxCode',pageId).fieldValue();
 			var subpageElement = $elem('subpage_addSer',pageId);
