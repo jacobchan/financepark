@@ -39,23 +39,24 @@
 						}
 					});
 		        });
-			  	$.ajax({
-					url:serviceURL,
-					success:function(result){
-						$("#totalCount").html(result.totalCount);
-						pageCount=Math.ceil(result.totalCount/pageSize);
-						refreshData(1,pageSize,null);
-						$(".tcdPageCode").createPage({
-							pageCount:pageCount,
-							current:1,
-							backFn:function(p){
-							   	this.pageCount=pageCount;
-							    refreshData(p,pageSize,$("#companyId").val());
-							}
-						});
-					}
-				});
-			  	
+			  	if($("#companyId").val()!=""){
+			  		$.ajax({
+						url:serviceURL,
+						success:function(result){
+							$("#totalCount").html(result.totalCount);
+							pageCount=Math.ceil(result.totalCount/pageSize);
+							refreshData(1,pageSize,null);
+							$(".tcdPageCode").createPage({
+								pageCount:pageCount,
+								current:1,
+								backFn:function(p){
+								   	this.pageCount=pageCount;
+								    refreshData(p,pageSize,$("#companyId").val());
+								}
+							});
+						}
+					});
+			  	}
 			  	$("#moreul").slideUp("slow");
 			  	$(".sidebar-menu-mainul > li:eq(1)").addClass("active");
 			});
@@ -113,7 +114,15 @@
 				}
 				var params = [];
 				if(memberName != null){
-					params = ['memberName='+memberName];
+					params.push('memberName='+memberName);
+				}
+				if($("#companyId").val()!=""){
+					params.push('companyId='+$("#companyId").val());
+				}else{
+					$('#toast_text').html('企业信息不存在！');
+					$(".toast").show();
+		            setTimeout('$(".toast").hide();',3000);//1秒=1000
+		            return;
 				}
 				$.ajax({
 					url:serviceURL,
@@ -134,22 +143,28 @@
 				});
 			}
 			function searchAll(){
-				$.ajax({
-					url:serviceURL,
-					success:function(result){
-						$("#totalCount").html(result.totalCount);
-						pageCount=Math.ceil(result.totalCount/pageSize);
-						refreshData(1,pageSize,null);
-						$(".tcdPageCode").createPage({
-							pageCount:pageCount,
-							current:1,
-							backFn:function(p){
-							   	this.pageCount=pageCount;
-							    refreshData(p,pageSize,null);
-							}
-						});
-					}
-				});
+				if($("#companyId").val()!=""){
+			  		$.ajax({
+						url:serviceURL,
+						success:function(result){
+							$("#totalCount").html(result.totalCount);
+							pageCount=Math.ceil(result.totalCount/pageSize);
+							refreshData(1,pageSize,null);
+							$(".tcdPageCode").createPage({
+								pageCount:pageCount,
+								current:1,
+								backFn:function(p){
+								   	this.pageCount=pageCount;
+								    refreshData(p,pageSize,$("#companyId").val());
+								}
+							});
+						}
+					});
+			  	}else{
+					$('#toast_text').html('企业信息不存在！');
+					$(".toast").show();
+		            setTimeout('$(".toast").hide();',3000);//1秒=1000
+				}
 			}
 			function edit(id,name,phone){
 				$(".bg-tanc.m1").show();
@@ -167,16 +182,40 @@
 					url:baseUrl+'/enterbusinessmanagerRzManager/updateMemberInformationOfCompany.json',
 					data:'memberId='+id+'&companyId='+$("#companyId").val(),
 					success:function(result){
-						$('#toast_text').html('删除成功！');
+						$('#toast_text').html(result.record.html);
 						$(".toast").show();
 			            setTimeout('$(".toast").hide();',3000);//1秒=1000
-						location.reload();
+						
+			            if($("#companyId").val()!=""){
+					  		$.ajax({
+								url:serviceURL,
+								success:function(result){
+									$("#totalCount").html(result.totalCount);
+									pageCount=Math.ceil(result.totalCount/pageSize);
+									refreshData(1,pageSize,null);
+									$(".tcdPageCode").createPage({
+										pageCount:pageCount,
+										current:1,
+										backFn:function(p){
+										   	this.pageCount=pageCount;
+										    refreshData(p,pageSize,$("#companyId").val());
+										}
+									});
+								}
+							});
+					  	}
 					}
 				});
 			}
 			function memberExport(){
-				var url="<%=request.getContextPath()%>/enterprise/memberExportExcel.html?rzId="+$("#companyId").val();
-		        window.open(url);
+				if($("#companyId").val()!=""){
+					var url="<%=request.getContextPath()%>/enterprise/memberExportExcel.html?rzId="+$("#companyId").val();
+		        	window.open(url);
+				}else{
+					$('#toast_text').html('企业信息不存在！');
+					$(".toast").show();
+		            setTimeout('$(".toast").hide();',3000);//1秒=1000
+				}
 			}
 		</script>
 	</head>
