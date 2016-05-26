@@ -4,6 +4,7 @@
 package com.manage.ReserveManager.service.impl;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -501,6 +502,18 @@ public class ReservationRecordManagerImpl extends BaseManagerImpl implements Res
 		    {
 				p.setRecordStatus("04");//04为已取消
 				p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+				//构建替换模板参数对应的map
+				Map<String, String> replaceMap = new HashMap<String, String>();
+				String memberId=p.getRecordMemberId();
+				MemberInformation member=memberInformationManager.getMemberInformation(memberId);
+				//获取当前用户名字放入replaceMap中
+				replaceMap.put("#user", member.getMemberName());
+				//获取当前订单号放入replaceMap中
+				replaceMap.put("#recordCode", p.getRecordCode());
+				//构建短信       0324为短信模板编号
+				McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0324", replaceMap);  
+				//发短信给用户
+				mcMsgdatasManager.sendToUser(msgData, memberId);
 				return reservationRecordDao.save(p);
 			}else{
 				throw new BusException("当前状态不能取消");				
