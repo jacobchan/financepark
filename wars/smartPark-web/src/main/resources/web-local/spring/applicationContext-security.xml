@@ -67,9 +67,8 @@
 				/index.html = authc
 				/page/** = authc
 				/member/*/logout.html=anon
-				/member/qiyeCenter/** = authcmember,rolesdeny[ROLE_QIYE]
 				/member/** = authcmember
-				/enterprise/** = authcmember
+				/enterprise/** = authcmember,roles[ROLE_QY_ADMIN]
 	        </value>
 		</property>
 		<!--  实现 com.gsoft.framework.core.security.UrlResourceManager接口，
