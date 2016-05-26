@@ -128,4 +128,10 @@ public interface PropertyservicemanagerSerManager extends BaseManager{
      */
 	public PagerRecords getPagerPsSers(Pager pager, Collection<Condition> conditions,
 			Collection<Order> orders, String bxCode) throws BusException;
+	/**
+	 * 根据报修id 更新报修费用清单总价
+	 * @param bxId
+	 * @throws BusException
+	 */
+	public void upBxAmount(String bxId) throws BusException;
 }
