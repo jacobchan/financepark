@@ -135,8 +135,8 @@
 		//提交订单
 		$("#commit").on("click",function(){
 			//准备数据
-			var commitURL = baseUrl+"TicketServiceManager/bookTicket.json",sendData = {};
-			commitURL = "http://192.168.1.103:8088/smartPark-web/esb/web/TicketServiceManager/bookTicket.json";
+			var commitURL = baseUrl+"TicketServiceManager/bookTicket.json",params = '';
+			//commitURL = "http://192.168.1.103:8088/smartPark-web/esb/web/TicketServiceManager/bookTicket.json";
 			//policyId :政策Id
 			//linkMan :订票联系人
 			//linkPhone :联系电话
@@ -147,42 +147,63 @@
 			//
 			//
 			//所有参数
-			sendData.policyId = Request["policyId"];
-			sendData.linkMan = Request["linkMan"].split("-")[0];
-			sendData.linkPhone = Request["linkMan"].split("-")[1];
+			/* records.policyId = Request["policyId"];
+			records.linkMan = Request["linkMan"].split("-")[0];
+			records.linkPhone = Request["linkMan"].split("-")[1];
+			records.otherLinkMethod = "00000000";
 			
-			//sendData.parPrice = Request["parPrice"];
-			//sendData.airportTax = Request["airportTax"];
-			//sendData.fuelTax = null;
-			var pnrInfo = {};
+			records.parPrice = Request["parPrice"];
+			records.airportTax = Request["airportTax"];
+			records.fuelTax = null;*/
+			params = params+$.youi.parameterUtils.propertyParameter("policyId",Request["policyId"])+'&';
+			params = params+$.youi.parameterUtils.propertyParameter("linkMan",Request["linkMan"].split("-")[0])+'&';
+			params = params+$.youi.parameterUtils.propertyParameter("linkPhone",Request["linkMan"].split("-")[1])+'&';
+			params = params+$.youi.parameterUtils.propertyParameter("otherLinkMethod","00000000")+'&';
+			params = params+$.youi.parameterUtils.propertyParameter("parPrice",Request["parPrice"])+'&';
+			params = params+$.youi.parameterUtils.propertyParameter("airportTax",Request["airportTax"])+'&';
+			params = params+$.youi.parameterUtils.propertyParameter("fuelTax","0")+'&';
+			
+			//var pnrInfo = {};
 			var passengers = [],passengersList = Request["passengers"].split(":");
 			for(var i=0,len = passengersList.length;i<len;i++){
 				var passenger = {};
 				passenger.name = passengersList[i].split("-")[0];
 				passenger.identityType=1;
 				passenger.identityNo = passengersList[i].split("-")[1];
-				passenger.adult = passengersList[i].split("-")[2];
+				//passenger.type = passengersList[i].split("-")[2];
+				passenger.type = "0";
 				passengers.push(passenger);
+				for(var o in passenger){
+					params = params+$.youi.parameterUtils.propertyParameter("passengers["+i+"]."+o,passenger[o])+'&';
+				}
+				var segment = {};
+				segment.flightNo = Request["flightNo"];
+				segment.depCode = Request["fromCode"];
+				segment.arrCode = Request["gotoCode"];
+				segment.depDate = Request["gotodate"];
+				segment.depTime = Request["depTime"].replace(":","");
+				segment.arrTime = Request["arriTime"].replace(":","");
+				segment.planeModel = Request["planeType"];
+				segment.seatClass = Request["seatCode"];
+				for(var o in segment){
+					params = params+$.youi.parameterUtils.propertyParameter("segments["+0+"]."+o,segment[o])+'&';
+				}
 			}
-			
-			var segments = [];
-			segments.flightNo = Request["flightNo"];
-			segments.depCode = Request["fromCode"];
-			segments.arrCode = Request["gotoCode"];
-			segments.depdate = "20160526";
-			segments.depTime = "0930";
-			segments.arrTime = "0730";
-			segments.planeModel = Request["planeModel"];
-			pnrInfo.parPrice = Request["parPrice"];
+			//records.passengers = passengers;
+			//segments.push(segment);
+			/* pnrInfo.parPrice = Request["parPrice"];
 			pnrInfo.airportTax = Request["airportTax"];
 			pnrInfo.fuelTax = null;
 			pnrInfo.segments = segments;
-			pnrInfo.passengers = passengers;
+			pnrInfo.passengers = passengers; */
+			//alert(segments);
+			//alert(pnrInfo);
 			
-			sendData.pnrInfo = pnrInfo;
+			//records.segments = segments;
+			//records.pnrInfo = pnrInfo;
 			 $.youi.ajaxUtils.ajax({
 				url:commitURL,
-				data:sendData,
+				data:params,
 				jsonp:'data:jsonp',
 				dataType:'jsonp',
 				success:function(result){
