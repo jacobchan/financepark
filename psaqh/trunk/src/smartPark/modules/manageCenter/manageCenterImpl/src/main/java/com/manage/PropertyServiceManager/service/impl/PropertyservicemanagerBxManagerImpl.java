@@ -235,7 +235,11 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
     		PropertyservicemanagerBx propertyservicemanagerBx = propertyservicemanagerBxDao.get(bxId);
     		propertyservicemanagerBx.setUpdateUser(psBx.getUpdateUser());
     		propertyservicemanagerBx.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    		propertyservicemanagerBx.setBxStatus(psBx.getBxStatus());
+    		propertyservicemanagerBx.setBxStatus(psBx.getBxStatus());		
+    		return propertyservicemanagerBxDao.save(propertyservicemanagerBx);
+    	}else{
+    		psBx.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		psBx.setApplyTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		Map<String, String> replaceMap = new HashMap<String, String>(); 
     		String memberId =psBx.getMemberId();
     		MemberInformation m=memberInformationManager.getMemberInformation(memberId);
@@ -243,10 +247,6 @@ public class PropertyservicemanagerBxManagerImpl extends BaseManagerImpl impleme
 			replaceMap.put("#bxCode", psBx.getBxCode());
 			McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0308", replaceMap);  			  				
    			mcMsgdatasManager.sendToUser(msgData, memberId);
-    		return propertyservicemanagerBxDao.save(propertyservicemanagerBx);
-    	}else{
-    		psBx.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    		psBx.setApplyTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		return propertyservicemanagerBxDao.save(psBx);
     	}
     }
