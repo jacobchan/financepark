@@ -11,9 +11,6 @@
 			}
 			body{ font-family:"Microsoft YaHei","微软雅黑";color:#333; font-size: 14px;}
 		</style>
-		<script type="text/javascript">
-			
-		</script>
 	</head>
 	<body>
 		<aside class="sidebar-menu fixed">
