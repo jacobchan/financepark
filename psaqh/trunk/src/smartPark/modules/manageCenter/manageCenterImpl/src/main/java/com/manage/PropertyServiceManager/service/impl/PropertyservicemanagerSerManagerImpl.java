@@ -109,7 +109,7 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
     	if(propertyservicemanagerTsed==null){
     		throw new BusException("没有派工记录!");
     	}else{
-    		if(propertyservicemanagerTsed.getTsStatus().equals("01")){//派工状态已接单
+//    		if(propertyservicemanagerTsed.getTsStatus().equals("01")){//派工状态已接单
     			PropertyservicemanagerBx bx = propertyservicemanagerTsed.getPropertyservicemanagerBx();
     			if(!bx.getBxStatus().equals("05")){//管理员已定价不能新增或修改维修单
     				BigDecimal amount =null;
@@ -128,9 +128,9 @@ public class PropertyservicemanagerSerManagerImpl extends BaseManagerImpl implem
     			}else{
     				throw new BusException("管理员已定价!");
     			}
-    		}else{
-    			throw new BusException("派工记录有误!");
-    		}
+//    		}else{
+//    			throw new BusException("派工记录有误!");
+//    		}
     	}
     }
 
