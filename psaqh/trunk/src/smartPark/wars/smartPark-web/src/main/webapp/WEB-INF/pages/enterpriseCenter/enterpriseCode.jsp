@@ -180,7 +180,7 @@
 			            setTimeout('$(".toast").hide();',3000);//1秒=1000
 					}
 				});
-			  	$("#moreul").slideUp("slow");
+			  	$("#moreul").slideDown("slow");
 			  	$(".sidebar-menu-mainul > li:eq(2)").addClass("active");
 			  	$.ajax({
 					url:baseUrl+'/memberInformationManager/getMemberInformationByLoginUser.json',

@@ -57,7 +57,7 @@
 						}
 					});
 			  	}
-			  	$("#moreul").slideUp("slow");
+			  	$("#moreul").slideDown("slow");
 			  	$(".sidebar-menu-mainul > li:eq(1)").addClass("active");
 			});
 			function refreshData(pageIndex,pageSize,rzId){
