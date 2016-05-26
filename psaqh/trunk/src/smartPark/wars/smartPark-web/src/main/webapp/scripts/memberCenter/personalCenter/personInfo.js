@@ -31,7 +31,7 @@
 			}
 			$("#memberDescribe2").val(record.memberDescribe2);
 			$("#companyId").val(record.companyId);
-			if(record.companyId != null){
+			if(record.companyId){
 				getRzName(record.companyId);//获得公司名字
 				$("#ly1").hide() ;
 			}
