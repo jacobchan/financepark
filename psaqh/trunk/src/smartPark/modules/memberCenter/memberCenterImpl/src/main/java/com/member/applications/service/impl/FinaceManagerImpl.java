@@ -17,6 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.entity.MemberInformation;
+import com.common.MemberManager.service.MemberInformationManager;
+import com.common.MessageCenter.entity.McMsgdatas;
+import com.common.MessageCenter.service.McMsgdatasManager;
 import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -48,8 +51,10 @@ public class FinaceManagerImpl extends BaseManagerImpl implements FinaceManager{
 	private EnterbusinessmanagerRzDao enterbusinessmanagerRzDao;
 	@Autowired
 	private MemberInformationDao memberInformationDao;
-	
-	
+	@Autowired
+	private MemberInformationManager memberInformationManager;
+	@Autowired
+	private McMsgdatasManager mcMsgdatasManager;
     /**
      * 查询列表
      */
@@ -168,7 +173,7 @@ public class FinaceManagerImpl extends BaseManagerImpl implements FinaceManager{
 	 * @return
 	 * @throws BusException
 	 */
-	@EsbServiceMapping(pubConditions = {@PubCondition(property = "createUser", pubProperty = "userId"),@PubCondition(property = "memberId", pubProperty = "userId")})
+	@EsbServiceMapping(pubConditions = {@PubCondition(property = "memberId", pubProperty = "userId"),@PubCondition(property = "memberId", pubProperty = "userId")})
 	public Finace goSaveFinace(Finace o)  throws BusException{
 		//创建时间
 		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
@@ -176,7 +181,20 @@ public class FinaceManagerImpl extends BaseManagerImpl implements FinaceManager{
 		o.setApplayStatus("01");
 		//申请编号
 		String applayNo = BizCodeUtil.getInstance().getBizCodeDate("RZSQ");
-		o.setApplayNo(applayNo);
+		o.setApplayNo(applayNo);	
+		Map<String, String> replaceMap = new HashMap<String, String>();
+		//获取当前用户id
+		String memberId =o.getMemberId();
+		//获取当前用户对象
+		MemberInformation m=memberInformationManager.getMemberInformation(memberId);
+		//获取当前用户名字放入replaceMap中
+		replaceMap.put("#user", m.getMemberPhoneNumber());
+		//获取当前订单号放入replaceMap中
+		replaceMap.put("#applayNo", o.getApplayNo());
+		//构建短信       0308为短信模板编号
+		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0320", replaceMap);  
+		//发短信给用户
+		mcMsgdatasManager.sendToUser(msgData, memberId);
 		//创建返回保存成功返回的实体
 		Finace saveFinace = this.saveFinace(o);
 		return saveFinace;
@@ -205,6 +223,19 @@ public class FinaceManagerImpl extends BaseManagerImpl implements FinaceManager{
     	Finace finace = this.getFinace(id);
     	//更改申请标识为03：取消
     	finace.setApplayStatus("03");
+    	Map<String, String> replaceMap = new HashMap<String, String>();
+		//获取当前用户id
+		String memberId =finace.getMemberId();
+		//获取当前用户对象
+		MemberInformation m=memberInformationManager.getMemberInformation(memberId);
+		//获取当前用户名字放入replaceMap中
+		replaceMap.put("#user", m.getMemberPhoneNumber());
+		//获取当前订单号放入replaceMap中
+		replaceMap.put("#applayNo", finace.getApplayNo());
+		//构建短信       0308为短信模板编号
+		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0321", replaceMap);  
+		//发短信给用户
+		mcMsgdatasManager.sendToUser(msgData, memberId);
     	return finaceDao.save(finace);
     }
 }
