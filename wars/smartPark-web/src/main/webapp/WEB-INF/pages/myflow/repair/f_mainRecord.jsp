@@ -33,8 +33,8 @@
 		<youi:gridCol property="params.createUsercaption"  caption="创建人" width="10%" align="center"/>
 		<youi:gridCol property="createTime"  type="date" caption="创建时间" width="15%" align="center"/>
 		
-		<youi:button name="putfrom" caption="填报维修费用清单" active="1"  icon="edit"/>
-		<youi:button name="process" icon="addRecord" active="1" caption="填写报修单"/>
+		<youi:button name="putfrom" caption="填报费用清单" active="1"  icon="addRecord"/>
+		<youi:button name="process" icon="addRecord" active="1" caption="维修完成"/>
 	</youi:grid>
 	
 	<!--**********************************页面函数Start********************************-->
