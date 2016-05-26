@@ -25,7 +25,6 @@ import com.gsoft.framework.util.Dom4jUtils;
 import com.gsoft.framework.util.PasswordUtils;
 import com.gsoft.utils.BizCodeUtil;
 import com.gsoft.utils.HttpGetAndPostUtil;
-import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 import com.member.ticket.dao.RefundOrderDao;
 import com.member.ticket.dao.TicketOrderDao;
 import com.member.ticket.dao.TicketOrderItemDao;
@@ -248,7 +247,16 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 	@SuppressWarnings("unchecked")
 	@Override
 	@EsbServiceMapping
-	public String bookTicket(@ServiceParam(name="userId",pubProperty="userId") String userId, CreateOrderByPassengerRequest conditions) {
+	public String bookTicket(@ServiceParam(name="userId",pubProperty="userId") String userId,
+			@DomainCollection(name="segments",domainClazz=WsAirSegment.class)List<WsAirSegment> segments,
+			@DomainCollection(name="passengers",domainClazz=WsBookPassenger.class)List<WsBookPassenger> passengers,
+			@ServiceParam(name="policyId") String policyId,@ServiceParam(name="linkMan") String linkMan,
+			@ServiceParam(name="linkPhone") String linkPhone,@ServiceParam(name="parPrice") String parPrice,
+			@ServiceParam(name="fuelTax") String fuelTax,@ServiceParam(name="airportTax") String airportTax,
+			@ServiceParam(name="otherLinkMethod") String otherLinkMethod) {
+		/*CreateOrderByPassengerRequest condition
+		 * @ServiceParam(name="_parPrice") String parPrice,
+			@ServiceParam(name="_fuelTax") String fuelTax,@ServiceParam(name="_airportTax") String airportTax,*/
 		String result = "";
 		TicketOrder ticketOrder = new TicketOrder();
 		TicketOrderItem ticketOrderItem = new TicketOrderItem();
@@ -256,19 +264,34 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 		TicketPassengerRelation ticketPassengerRelation ;
 		
 		Map<String,Object> params = new HashMap<String, Object>();
-		conditions.setAgencyCode(agencyCode);
-		String signString = conditions.getAgencyCode() + conditions.getPolicyId() + safeCode;
+		params.put("agencyCode", agencyCode);
+		params.put("policyId", policyId);
+		params.put("linkMan", linkMan);
+		params.put("linkPhone",linkPhone);
+		params.put("otherLinkMethod", otherLinkMethod);
+		params.put("notifiedUrl", notifiedUrl);
+		params.put("paymentReturnUrl", "www");
+		String signString = agencyCode + policyId + safeCode;
 		String sign = PasswordUtils.md5Password(signString);
-		conditions.setSign(sign);
-		conditions.setNotifiedUrl(notifiedUrl);//确认链接
-		conditions.setPaymentReturnUrl("");//支付完成后确认链接，已弃用，可随填
+		params.put("sign", sign);
 		String psaOrderNo = BizCodeUtil.getInstance().getBizCodeDate(ticketOrderCode);
-		conditions.setOutOrderNo(psaOrderNo);//自己平台的订单号
+		params.put("outOrderNo", psaOrderNo);
+		WsBookPnr pnrInfo = new WsBookPnr();
+		if (airportTax!=null && !"".equals(airportTax)) {
+			pnrInfo.setAirportTax(Double.parseDouble(airportTax));
+		}
+		if (fuelTax!=null && !"".equals(fuelTax)) {
+			pnrInfo.setFuelTax(Double.parseDouble(fuelTax));
+		}
+		pnrInfo.setParPrice(Double.parseDouble(parPrice));
+		pnrInfo.setSegments(segments);
+		pnrInfo.setPassengers(passengers);
+		params.put("pnrInfo", pnrInfo);
 		ticketOrder.setMemberId(userId);
 		ticketOrder.setOrderNo(psaOrderNo);
 		
 		try {
-			Field[] fields = conditions.getClass().getDeclaredFields();
+			/*Field[] fields = conditions.getClass().getDeclaredFields();
 		    for(int j=0 ; j<fields.length ; j++){     //遍历所有属性
 		    	 String name1 = fields[j].getName();
 		    	 String name2 = name1.substring(0,1).toUpperCase()+name1.substring(1); //将属性的首字符大写，方便构造get，set方法
@@ -286,7 +309,7 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 	                	 params.put(name1, value);
 	                 }
 				}
-		    }
+		    }*/
 			result = HttpGetAndPostUtil.TicketSendPost(create_url, params);
 			Document document = Dom4jUtils.parseText(result);
 			Element root = document.getRootElement();
