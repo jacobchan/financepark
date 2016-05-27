@@ -16,6 +16,8 @@
 			<youi:fieldText property="enTypeId"  caption="企业类型ID"/>
 			<youi:fieldText property="rzSign"  caption="企业码"/>
 		</youi:fieldLayout>
+		<youi:button name="exportTemplate" caption="模板下载" icon="search" />
+		<youi:button name="importEnterprise" caption="企业导入" icon="save" />
 		<youi:gridCol property="rzName" caption="企业名称" width="10%" align="center"/>
 		<youi:gridCol property="rzManager.memberName" caption="企业管理员" width="10%" align="center"/>
 		<youi:gridCol property="rzDate"  caption="入驻时间" format="yyyy-MM-dd HH:mm:ss" textFormat="yyyy-MM-dd HH:mm:ss" width="20%" align="center"/>
@@ -59,6 +61,13 @@
 			<youi:fieldSwfupload property="rzImages" caption="企业宣传图" uploadUrl="/common/uploadImage.html" fileTypes="*.jpg;*.jpeg;*.png"  fileTypesDescription="所有类型" fileSizeLimit="3072"/>
 		</youi:fieldLayout>
 	</youi:form>
+	<youi:form dialog="true" caption="企业信息导入"
+		id="form_importEnterprise"
+		action="esb/web/enterbusinessmanagerRzManager/memberImportExcel.json" width="600">
+		<youi:fieldLayout prefix="recordEnterprise" columns="1" labelWidths="120,120">
+			<youi:fieldSwfupload property="batchExcel" caption="批量注册文件" uploadUrl="/common/upload.html" fileTypes="*.xls;*.xlsx" fileTypesDescription="所有类型" fileSizeLimit="5120" fileUploadLimit="2" fileQueueLimit="2" />
+		</youi:fieldLayout>
+	</youi:form>
 	<youi:func name="form_enterbusinessmanagerRz_afterSubmit" params="result">
 		$.youi.ajaxUtil.ajax({
 			url:'esb/web/enterbusinessmanagerRzManager/updateEnteringStatus.json',
@@ -67,6 +76,23 @@
 				
 			}
 		});
+	</youi:func>
+	
+	<youi:func name="func_grid_exportTemplate">
+		var url="enterprise/downloadTemplate.html";
+		window.open(url);
+	</youi:func>
+	
+	<youi:func name="func_grid_importEnterprise">
+		$elem('form_importEnterprise',pageId).form('open');
+	</youi:func>
+	
+	<youi:func name="form_importEnterprise_afterSubmit" params="result">
+		alert(result.record.html);
+		var importEnterprise = $elem('form_importEnterprise',pageId);
+		importEnterprise.form('reset');
+		importEnterprise.form('close');
+		$elem('grid_enterbusinessmanagerRz',pageId).grid('pReload');
 	</youi:func>
 	
 	<youi:func name="renderer_parkId" params="col,record">
