@@ -1,10 +1,14 @@
 package com.manage.EnterBusinessManager.service.impl;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +25,9 @@ import com.common.EnterpriceTypeManager.service.EtypeEnterprisetypeManager;
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
+import com.common.excel.ExcelColumn;
+import com.common.excel.ExcelHead;
+import com.common.excel.ExcelHelper;
 import com.gsoft.entity.TempDemo;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
@@ -29,6 +36,7 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.esb.annotation.*;
 import com.gsoft.framework.security.fuc.service.RoleManager;
+import com.gsoft.framework.upload.service.FileStoreManager;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.PasswordUtils;
@@ -41,6 +49,7 @@ import com.manage.EmployeeManager.entity.EnterpriseRole;
 import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
 import com.manage.EmployeeManager.service.EnterpriseRoleManager;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
+import com.manage.EnterBusinessManager.entity.EnterpriseInfomation;
 import com.manage.EnterBusinessManager.dao.EnterbusinessmanagerRzDao;
 import com.manage.EnterBusinessManager.service.EnterbusinessmanagerRzManager;
 import com.manage.EnterpriseManager.entity.InformationLegal;
@@ -50,6 +59,8 @@ import com.manage.PropertyServiceManager.service.PropertyservicemanagerEntrecMan
 @Service("enterbusinessmanagerRzManager")
 @Transactional
 public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implements EnterbusinessmanagerRzManager{
+	@Value("#{configProperties['file.root.path']}")
+	private String root;
 	@Autowired
 	private EnterbusinessmanagerRzDao enterbusinessmanagerRzDao;
 	@Autowired
@@ -74,7 +85,8 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 	private InformationLegalManager informationLegalManager;
 	@Autowired
 	private BbmParkManager bbmParkManager;
-	
+	@Autowired
+	private FileStoreManager fileStoreManager;
 	@Autowired
 	private EnterpriseEmployeesDao enterpriseEmployeesDao;
 	@Autowired
@@ -110,6 +122,7 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 	public PagerRecords getPagerEnterbusinessmanagerRzs(Pager pager,//分页条件
 			@ConditionCollection(domainClazz=EnterbusinessmanagerRz.class) Collection<Condition> conditions,//查询条件
 			@OrderCollection Collection<Order> orders)  throws BusException{
+		orders.add(ConditionUtils.getOrder("rzDate", false));
 		PagerRecords pagerRecords = enterbusinessmanagerRzDao.findByPager(pager, conditions, orders);
 		@SuppressWarnings("unchecked")
 		List<EnterbusinessmanagerRz> enterList = pagerRecords.getRecords();
@@ -546,6 +559,82 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 			}
 		}else{
 			msg = "非企业员工！";
+		}
+		return msg;
+	}
+	/**
+	 * 企业信息Excel导入
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@EsbServiceMapping(pubConditions = { @PubCondition(property = "updateUser", pubProperty = "userId") })
+	public String memberImportExcel(@ServiceParam(name="batchExcel") String batchExcel) throws BusException {
+		String msg = "ok";
+		File file = new File(new File(root), batchExcel);
+		if(!file.exists()){
+			msg = "文件不存在！";
+			throw new BusException("文件不存在！");
+		}
+		
+		List<ExcelColumn> excelColumns = new ArrayList<ExcelColumn>();
+		excelColumns.add(new ExcelColumn(0, "rzName", "企业名称"));
+		excelColumns.add(new ExcelColumn(1, "rzSign", "企业码"));
+		excelColumns.add(new ExcelColumn(2, "rzDate", "入驻时间"));
+		excelColumns.add(new ExcelColumn(3, "enTypeName", "行业类型"));
+		excelColumns.add(new ExcelColumn(4, "rzType", "上市类型"));
+		excelColumns.add(new ExcelColumn(5, "rzProperty", "企业性质"));
+		excelColumns.add(new ExcelColumn(6, "memberName", "企业管理员"));
+		excelColumns.add(new ExcelColumn(7, "parkId", "园区"));
+		excelColumns.add(new ExcelColumn(8, "buildingId", "楼栋"));
+		excelColumns.add(new ExcelColumn(9, "roomId", "单元"));
+		excelColumns.add(new ExcelColumn(10, "floorId", "楼层"));
+		excelColumns.add(new ExcelColumn(11, "rzLogo", "logo"));
+		excelColumns.add(new ExcelColumn(12, "rzUrl", "网址"));
+		excelColumns.add(new ExcelColumn(13, "rzRemark", "描述"));
+
+		// 需要特殊转换的单元
+		Map<String, Map> excelColumnsConvertMap = new HashMap<String, Map>();
+		Map<String, String> rzType = new HashMap<String, String>();
+		rzType.put("主板", "01");
+		rzType.put("中小板", "02");
+		rzType.put("创业板", "03");
+		rzType.put("新三板", "04");
+		rzType.put("未上市", "05");
+		excelColumnsConvertMap.put("rzType", rzType);
+		Map<String, String> rzProperty = new HashMap<String, String>();
+		rzProperty.put("外资（欧美）", "01");
+		rzProperty.put("外资（非欧美）", "02");
+		rzProperty.put("合资", "03");
+		rzProperty.put("国企", "04");
+		rzProperty.put("民营", "05");
+		rzProperty.put("政府机关", "06");
+		rzProperty.put("事业单位", "07");
+		rzProperty.put("非盈利机构", "08");
+		excelColumnsConvertMap.put("rzProperty", rzProperty);
+		ExcelHead head = new ExcelHead();
+		head.setRowCount(2); // 头所占行数
+		head.setColumns(excelColumns); // 列的定义
+		head.setColumnsConvertMap(excelColumnsConvertMap); // 列的转换
+
+		List<EnterpriseInfomation> rzsList = ExcelHelper.getInstanse().importToObjectList(head, file, EnterpriseInfomation.class);
+
+		//获取数据保存到企业入驻表
+		for (EnterpriseInfomation i : rzsList) {
+			EnterbusinessmanagerRz r = new EnterbusinessmanagerRz();
+			r.setRzName(i.getRzName());
+			r.setRzSign(i.getRzSign());
+			r.setRzDate(i.getRzDate());
+			r.setEnTypeId(etypeEnterprisetypeManager.getEtypeEnterprisetype(i.getEnTypeName()));
+			r.setRzType(i.getRzType());
+			r.setRzProperty(i.getRzProperty());
+			r.setRzManager(memberInformationManager.getMemberInformation(i.getMemberName()));
+			r.setParkId(i.getParkId());
+			r.setBuildingId(i.getBuildingId());
+			r.setRoomId(bbmRoomManager.getBbmRoom(i.getRoomId()));
+			r.setFloorId(i.getFloorId());
+			r.setRzLogo(i.getRzLogo());
+			r.setRzUrl(i.getRzUrl());
+			r.setRzRemark(i.getRzRemark());
+			enterbusinessmanagerRzDao.save(r);
 		}
 		return msg;
 	}
