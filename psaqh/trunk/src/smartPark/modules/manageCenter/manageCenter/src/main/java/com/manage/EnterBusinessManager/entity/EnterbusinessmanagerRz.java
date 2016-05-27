@@ -130,7 +130,23 @@ public class EnterbusinessmanagerRz implements Domain{
 	
 	@Transient
 	private InformationLegal legal;//企业法人
+    /**新增园区字段   start**/
+	@Column(name = "PARK_NAME_")
+	@Length(max=256)
+	private String parkName;//园区名称
+	/**新增园区字段   end**/ 
 
+	/**新增园区字段   start**/
+	public String getParkName() {
+		return parkName;
+	}
+
+	public void setParkName(String parkName) {
+		this.parkName = parkName;
+	}
+
+
+	/**新增园区字段   end**/
 	public String getProductDiscriptio() {
 		return productDiscriptio;
 	}
@@ -355,17 +371,53 @@ public class EnterbusinessmanagerRz implements Domain{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((rzManager == null) ? 0 : rzManager.hashCode());
-		result = prime * result + ((rzDate == null) ? 0 : rzDate.hashCode());
-		result = prime * result + ((rzRemark == null) ? 0 : rzRemark.hashCode());
-		result = prime * result + ((buildingId == null) ? 0 : buildingId.hashCode());
-		result = prime * result + ((rzBuss == null) ? 0 : rzBuss.hashCode());
-		result = prime * result + ((rzId == null) ? 0 : rzId.hashCode());
-		result = prime * result + ((enTypeId == null) ? 0 : enTypeId.hashCode());
-		result = prime * result + ((rzSign == null) ? 0 : rzSign.hashCode());
-		result = prime * result + ((rzMem == null) ? 0 : rzMem.hashCode());
-		result = prime * result + ((rzTelephone == null) ? 0 : rzTelephone.hashCode());
+		result = prime * result
+				+ ((attentionCount == null) ? 0 : attentionCount.hashCode());
+		result = prime * result
+				+ ((buildingId == null) ? 0 : buildingId.hashCode());
+		result = prime * result
+				+ ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result
+				+ ((createUser == null) ? 0 : createUser.hashCode());
+		result = prime * result
+				+ ((enTypeId == null) ? 0 : enTypeId.hashCode());
+		result = prime * result
+				+ ((entrecId == null) ? 0 : entrecId.hashCode());
+		result = prime * result + ((floorId == null) ? 0 : floorId.hashCode());
+		result = prime * result + ((legal == null) ? 0 : legal.hashCode());
 		result = prime * result + ((parkId == null) ? 0 : parkId.hashCode());
+		result = prime * result
+				+ ((parkName == null) ? 0 : parkName.hashCode());
+		result = prime
+				* result
+				+ ((productDiscriptio == null) ? 0 : productDiscriptio
+						.hashCode());
+		result = prime * result + ((roomId == null) ? 0 : roomId.hashCode());
+		result = prime * result + ((rzBuss == null) ? 0 : rzBuss.hashCode());
+		result = prime * result + ((rzDate == null) ? 0 : rzDate.hashCode());
+		result = prime * result + ((rzId == null) ? 0 : rzId.hashCode());
+		result = prime * result
+				+ ((rzImages == null) ? 0 : rzImages.hashCode());
+		result = prime * result + ((rzLogo == null) ? 0 : rzLogo.hashCode());
+		result = prime * result
+				+ ((rzManager == null) ? 0 : rzManager.hashCode());
+		result = prime * result + ((rzMem == null) ? 0 : rzMem.hashCode());
+		result = prime * result + ((rzName == null) ? 0 : rzName.hashCode());
+		result = prime * result
+				+ ((rzProperty == null) ? 0 : rzProperty.hashCode());
+		result = prime * result
+				+ ((rzRemark == null) ? 0 : rzRemark.hashCode());
+		result = prime * result + ((rzSign == null) ? 0 : rzSign.hashCode());
+		result = prime * result
+				+ ((rzTelephone == null) ? 0 : rzTelephone.hashCode());
+		result = prime * result + ((rzType == null) ? 0 : rzType.hashCode());
+		result = prime * result + ((rzUrl == null) ? 0 : rzUrl.hashCode());
+		result = prime * result
+				+ ((scanCount == null) ? 0 : scanCount.hashCode());
+		result = prime * result
+				+ ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result
+				+ ((updateUser == null) ? 0 : updateUser.hashCode());
 		return result;
 	}
 	
@@ -377,61 +429,151 @@ public class EnterbusinessmanagerRz implements Domain{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final EnterbusinessmanagerRz other = (EnterbusinessmanagerRz) obj;
-		if (rzManager == null) {
-			if (other.rzManager != null)
+		EnterbusinessmanagerRz other = (EnterbusinessmanagerRz) obj;
+		if (attentionCount == null) {
+			if (other.attentionCount != null)
 				return false;
-		} else if (!rzManager.equals(other.rzManager))
-			return false;
-		if (rzDate == null) {
-			if (other.rzDate != null)
-				return false;
-		} else if (!rzDate.equals(other.rzDate))
-			return false;
-		if (rzRemark == null) {
-			if (other.rzRemark != null)
-				return false;
-		} else if (!rzRemark.equals(other.rzRemark))
+		} else if (!attentionCount.equals(other.attentionCount))
 			return false;
 		if (buildingId == null) {
 			if (other.buildingId != null)
 				return false;
 		} else if (!buildingId.equals(other.buildingId))
 			return false;
-		if (rzBuss == null) {
-			if (other.rzBuss != null)
+		if (createTime == null) {
+			if (other.createTime != null)
 				return false;
-		} else if (!rzBuss.equals(other.rzBuss))
+		} else if (!createTime.equals(other.createTime))
 			return false;
-		if (rzId == null) {
-			if (other.rzId != null)
+		if (createUser == null) {
+			if (other.createUser != null)
 				return false;
-		} else if (!rzId.equals(other.rzId))
+		} else if (!createUser.equals(other.createUser))
 			return false;
 		if (enTypeId == null) {
 			if (other.enTypeId != null)
 				return false;
 		} else if (!enTypeId.equals(other.enTypeId))
 			return false;
-		if (rzSign == null) {
-			if (other.rzSign != null)
+		if (entrecId == null) {
+			if (other.entrecId != null)
 				return false;
-		} else if (!rzSign.equals(other.rzSign))
+		} else if (!entrecId.equals(other.entrecId))
+			return false;
+		if (floorId == null) {
+			if (other.floorId != null)
+				return false;
+		} else if (!floorId.equals(other.floorId))
+			return false;
+		if (legal == null) {
+			if (other.legal != null)
+				return false;
+		} else if (!legal.equals(other.legal))
+			return false;
+		if (parkId == null) {
+			if (other.parkId != null)
+				return false;
+		} else if (!parkId.equals(other.parkId))
+			return false;
+		if (parkName == null) {
+			if (other.parkName != null)
+				return false;
+		} else if (!parkName.equals(other.parkName))
+			return false;
+		if (productDiscriptio == null) {
+			if (other.productDiscriptio != null)
+				return false;
+		} else if (!productDiscriptio.equals(other.productDiscriptio))
+			return false;
+		if (roomId == null) {
+			if (other.roomId != null)
+				return false;
+		} else if (!roomId.equals(other.roomId))
+			return false;
+		if (rzBuss == null) {
+			if (other.rzBuss != null)
+				return false;
+		} else if (!rzBuss.equals(other.rzBuss))
+			return false;
+		if (rzDate == null) {
+			if (other.rzDate != null)
+				return false;
+		} else if (!rzDate.equals(other.rzDate))
+			return false;
+		if (rzId == null) {
+			if (other.rzId != null)
+				return false;
+		} else if (!rzId.equals(other.rzId))
+			return false;
+		if (rzImages == null) {
+			if (other.rzImages != null)
+				return false;
+		} else if (!rzImages.equals(other.rzImages))
+			return false;
+		if (rzLogo == null) {
+			if (other.rzLogo != null)
+				return false;
+		} else if (!rzLogo.equals(other.rzLogo))
+			return false;
+		if (rzManager == null) {
+			if (other.rzManager != null)
+				return false;
+		} else if (!rzManager.equals(other.rzManager))
 			return false;
 		if (rzMem == null) {
 			if (other.rzMem != null)
 				return false;
 		} else if (!rzMem.equals(other.rzMem))
 			return false;
+		if (rzName == null) {
+			if (other.rzName != null)
+				return false;
+		} else if (!rzName.equals(other.rzName))
+			return false;
+		if (rzProperty == null) {
+			if (other.rzProperty != null)
+				return false;
+		} else if (!rzProperty.equals(other.rzProperty))
+			return false;
+		if (rzRemark == null) {
+			if (other.rzRemark != null)
+				return false;
+		} else if (!rzRemark.equals(other.rzRemark))
+			return false;
+		if (rzSign == null) {
+			if (other.rzSign != null)
+				return false;
+		} else if (!rzSign.equals(other.rzSign))
+			return false;
 		if (rzTelephone == null) {
 			if (other.rzTelephone != null)
 				return false;
 		} else if (!rzTelephone.equals(other.rzTelephone))
 			return false;
-		if (parkId == null) {
-			if (other.parkId != null)
+		if (rzType == null) {
+			if (other.rzType != null)
 				return false;
-		} else if (!parkId.equals(other.parkId))
+		} else if (!rzType.equals(other.rzType))
+			return false;
+		if (rzUrl == null) {
+			if (other.rzUrl != null)
+				return false;
+		} else if (!rzUrl.equals(other.rzUrl))
+			return false;
+		if (scanCount == null) {
+			if (other.scanCount != null)
+				return false;
+		} else if (!scanCount.equals(other.scanCount))
+			return false;
+		if (updateTime == null) {
+			if (other.updateTime != null)
+				return false;
+		} else if (!updateTime.equals(other.updateTime))
+			return false;
+		if (updateUser == null) {
+			if (other.updateUser != null)
+				return false;
+		} else if (!updateUser.equals(other.updateUser))
 			return false;
 		return true;
 	}
