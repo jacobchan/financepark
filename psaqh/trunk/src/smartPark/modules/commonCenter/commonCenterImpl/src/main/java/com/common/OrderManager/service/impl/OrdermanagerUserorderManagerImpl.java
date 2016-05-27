@@ -6,6 +6,7 @@ package com.common.OrderManager.service.impl;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.common.ExtentionAtrManager.service.ExtentionAtrManager;
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
+import com.common.MessageCenter.entity.McMsgdatas;
+import com.common.MessageCenter.service.McMsgdatasManager;
 import com.common.OrderManager.dao.OrdermanagerUserorderDao;
 import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
 import com.common.OrderManager.entity.OrdermanagerOrderprojecttypeValue;
@@ -75,7 +78,8 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 	private ExtentionAtrManager extentionAtrManager;
 	@Autowired
 	private WxPayManager wxPayManager;
-	
+	@Autowired
+	private McMsgdatasManager mcMsgdatasManager;
     /**
      * 查询列表
      */
@@ -220,6 +224,20 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
     		}
     		order.setUpdateUser(o.getUpdateUser());
     		order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+    		//构建替换模板参数对应的map
+    		Map<String, String> replaceMap = new HashMap<String, String>();
+    		//获取当前用户对象
+    		MemberInformation m=memberInformationManager.getMemberInformation(userorderId);
+    		//获取当前订单项目放入replaceMap中
+    		replaceMap.put("#type",order.getUserorderProject());
+    		//获取当前用户名字放入replaceMap中
+    		replaceMap.put("#user", m.getMemberPhoneNumber());
+    		//获取当前订单号放入replaceMap中
+    		replaceMap.put("#userorderCode",order.getUserorderCode());
+    		//构建短信       0322为短信模板编号
+    		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0325", replaceMap);  
+    		//发短信给用户
+    		mcMsgdatasManager.sendToUser(msgData, userorderId);
     		return ordermanagerUserorderDao.save(order);
     	}
 		return o;
@@ -320,7 +338,7 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(commodity.getGenreId());
 		//根据类别ID获取类别扩展属性列表
 		List<PurchasingmanagerGenreProperty> pgpList = purchasingmanagerGenrePropertyManager.getPurGenrePropertysByGenre(pg.getGenreId());
-		while(pg.getGenreCode() != null){//获取有类别编码的上级商品类别
+		if(pg.getPagrenId() != null){ //获取有类别编码的上级商品类别
 			pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(pg.getPagrenId());
 		}
 		OrdermanagerUserorder order = new OrdermanagerUserorder();
@@ -358,6 +376,20 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 				ordermanagerOrderprojecttypeValueManager.saveOrdermanagerOrderprojecttypeValue(orderExc);
 			}
 		}
+		//构建替换模板参数对应的map
+		Map<String, String> replaceMap = new HashMap<String, String>();
+		//获取当前用户对象
+		MemberInformation m=memberInformationManager.getMemberInformation(userId);
+		//获取当前订单项目放入replaceMap中
+		replaceMap.put("#type",order.getUserorderProject());
+		//获取当前用户名字放入replaceMap中
+		replaceMap.put("#user", m.getMemberPhoneNumber());
+		//获取当前订单号放入replaceMap中
+		replaceMap.put("#userorderCode",order.getUserorderCode());
+		//构建短信       0322为短信模板编号
+		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0325", replaceMap);  
+		//发短信给用户
+		mcMsgdatasManager.sendToUser(msgData, order.getMemberId());	
 		return order;
 	}
     
@@ -398,6 +430,20 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 			orderDetail.setOrderId(order.getUserorderId());
 			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
 		}
+		//构建替换模板参数对应的map
+		Map<String, String> replaceMap = new HashMap<String, String>();
+		//获取当前用户对象
+		MemberInformation m=memberInformationManager.getMemberInformation(userId);
+		//获取当前订单项目放入replaceMap中
+		replaceMap.put("#type",order.getUserorderProject());
+		//获取当前用户名字放入replaceMap中
+		replaceMap.put("#user", m.getMemberPhoneNumber());
+		//获取当前订单号放入replaceMap中
+		replaceMap.put("#userorderCode",order.getUserorderCode());
+		//构建短信       0322为短信模板编号
+		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0325", replaceMap);  
+		//发短信给用户
+		mcMsgdatasManager.sendToUser(msgData, order.getMemberId());
 		return order;
 	}
     /**
@@ -437,6 +483,20 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 			orderDetail.setOrderId(order.getUserorderId());
 			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
 		}
+		//构建替换模板参数对应的map
+		Map<String, String> replaceMap = new HashMap<String, String>();
+		//获取当前用户对象
+		MemberInformation m=memberInformationManager.getMemberInformation(userId);
+		//获取当前订单项目放入replaceMap中
+		replaceMap.put("#type",order.getUserorderProject());
+		//获取当前用户名字放入replaceMap中
+		replaceMap.put("#user", m.getMemberPhoneNumber());
+		//获取当前订单号放入replaceMap中
+		replaceMap.put("#userorderCode",order.getUserorderCode());
+		//构建短信       0322为短信模板编号
+		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0325", replaceMap);  
+		//发短信给用户
+		mcMsgdatasManager.sendToUser(msgData, order.getMemberId());
 		return order;
 	}
     /**
@@ -476,6 +536,20 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    			orderDetail.setOrderId(order.getUserorderId());
    			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
    		}
+		//构建替换模板参数对应的map
+		Map<String, String> replaceMap = new HashMap<String, String>();
+		//获取当前用户对象
+		MemberInformation m=memberInformationManager.getMemberInformation(userId);
+		//获取当前订单项目放入replaceMap中
+		replaceMap.put("#type",order.getUserorderProject());
+		//获取当前用户名字放入replaceMap中
+		replaceMap.put("#user", m.getMemberPhoneNumber());
+		//获取当前订单号放入replaceMap中
+		replaceMap.put("#userorderCode",order.getUserorderCode());
+		//构建短信       0322为短信模板编号
+		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0325", replaceMap);  
+		//发短信给用户
+		mcMsgdatasManager.sendToUser(msgData, order.getMemberId());
    		return order;
    	}
     /**
@@ -515,6 +589,20 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    			orderDetail.setOrderId(order.getUserorderId());
    			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
    		}
+		//构建替换模板参数对应的map
+		Map<String, String> replaceMap = new HashMap<String, String>();
+		//获取当前用户对象
+		MemberInformation m=memberInformationManager.getMemberInformation(userId);
+		//获取当前订单项目放入replaceMap中
+		replaceMap.put("#type",order.getUserorderProject());
+		//获取当前用户名字放入replaceMap中
+		replaceMap.put("#user", m.getMemberPhoneNumber());
+		//获取当前订单号放入replaceMap中
+		replaceMap.put("#userorderCode",order.getUserorderCode());
+		//构建短信       0322为短信模板编号
+		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0325", replaceMap);  
+		//发短信给用户
+		mcMsgdatasManager.sendToUser(msgData, order.getMemberId());
    		return order;
    	}
     /**
@@ -554,6 +642,20 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    			orderDetail.setOrderId(order.getUserorderId());
    			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
    		}
+		//构建替换模板参数对应的map
+		Map<String, String> replaceMap = new HashMap<String, String>();
+		//获取当前用户对象
+		MemberInformation m=memberInformationManager.getMemberInformation(userId);
+		//获取当前订单项目放入replaceMap中
+		replaceMap.put("#type",order.getUserorderProject());
+		//获取当前用户名字放入replaceMap中
+		replaceMap.put("#user", m.getMemberPhoneNumber());
+		//获取当前订单号放入replaceMap中
+		replaceMap.put("#userorderCode",order.getUserorderCode());
+		//构建短信       0322为短信模板编号
+		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0325", replaceMap);  
+		//发短信给用户
+		mcMsgdatasManager.sendToUser(msgData, order.getMemberId());
    		return order;
    	}
     /**
@@ -593,6 +695,20 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
    			orderDetail.setOrderId(order.getUserorderId());
    			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
    		}
+		//构建替换模板参数对应的map
+		Map<String, String> replaceMap = new HashMap<String, String>();
+		//获取当前用户对象
+		MemberInformation m=memberInformationManager.getMemberInformation(userId);
+		//获取当前订单项目放入replaceMap中
+		replaceMap.put("#type",order.getUserorderProject());
+		//获取当前用户名字放入replaceMap中
+		replaceMap.put("#user", m.getMemberPhoneNumber());
+		//获取当前订单号放入replaceMap中
+		replaceMap.put("#userorderCode",order.getUserorderCode());
+		//构建短信       0322为短信模板编号
+		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0325", replaceMap);  
+		//发短信给用户
+		mcMsgdatasManager.sendToUser(msgData, order.getMemberId());
    		return order;
    	}
     /**
@@ -664,6 +780,20 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
 		 if("01".equals(status)){//若当前状态为未支付
 		    	p.setUserorderStatus("04");//04为已取消，相当于前端取消申请
 		    	p.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+		    	 //构建替换模板参数对应的map
+				Map<String, String> replaceMap = new HashMap<String, String>();
+				//获取当前用户对象
+				MemberInformation m=memberInformationManager.getMemberInformation(p.getMemberId());
+				//获取当前用户名字放入replaceMap中
+				replaceMap.put("#user", m.getMemberPhoneNumber());
+				//获取当前订单项目放入replaceMap中
+				replaceMap.put("#type",p.getUserorderProject());
+				//获取当前订单号放入replaceMap中
+				replaceMap.put("#userorderCode", p.getUserorderCode());
+				//构建短信       0326为短信模板编号
+				McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0326", replaceMap);  
+				//发短信给用户
+				mcMsgdatasManager.sendToUser(msgData, p.getMemberId());
 		    	return ordermanagerUserorderDao.save(p);
 		 }else{
 		    	throw new BusException("当前状态无法取消申请！") ;
