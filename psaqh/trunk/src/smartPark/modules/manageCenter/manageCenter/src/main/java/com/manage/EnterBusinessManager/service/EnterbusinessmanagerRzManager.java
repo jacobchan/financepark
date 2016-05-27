@@ -1,11 +1,6 @@
-/**
- * 代码声明
- */
 package com.manage.EnterBusinessManager.service;
-
 import java.util.Collection;
 import java.util.List;
-
 import com.common.BuildingBaseManager.entity.BbmRoom;
 import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.entity.TempDemo;
@@ -16,9 +11,7 @@ import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
-
 public interface EnterbusinessmanagerRzManager extends BaseManager{
-
     /**
      * 查询列表
      */
@@ -142,4 +135,6 @@ public interface EnterbusinessmanagerRzManager extends BaseManager{
 			String companyName);
 	
 	public String updateMemberInformationOfCompany(MemberInformation o) throws BusException;
+	
+	public String memberImportExcel(String batchExcel) throws BusException;
 }
