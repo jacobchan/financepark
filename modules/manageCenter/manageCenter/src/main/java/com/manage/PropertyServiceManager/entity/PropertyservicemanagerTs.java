@@ -64,7 +64,33 @@ public class PropertyservicemanagerTs implements Domain{
 	@Column(name = "TS_TIME_")
 	@Length(max=20)
 	private String tsTime;//接单时间
+    /**新增园区字段   start**/
+	@Column(name = "PARK_NAME_")
+	@Length(max=256)
+	private String parkName;//园区名称
 	
+	@Column(name = "PARK_ID_")
+	@Length(max=36)
+	private String parkId;//园区id
+	/**新增园区字段   end**/ 
+
+	/**新增园区字段   start**/
+	public String getParkName() {
+		return parkName;
+	}
+
+	public void setParkName(String parkName) {
+		this.parkName = parkName;
+	}
+
+	public String getParkId() {
+		return parkId;
+	}
+
+	public void setParkId(String parkId) {
+		this.parkId = parkId;
+	}
+	/**新增园区字段   end**/
 	public String getTsTime() {
 		return tsTime;
 	}
@@ -171,6 +197,11 @@ public class PropertyservicemanagerTs implements Domain{
 				+ ((updateTime == null) ? 0 : updateTime.hashCode());
 		result = prime * result
 				+ ((updateUser == null) ? 0 : updateUser.hashCode());
+		/**新增园区字段   start**/
+		result = prime * result + ((parkName == null) ? 0 : parkName.hashCode());
+		result = prime * result + ((parkId == null) ? 0 : parkId.hashCode());
+		/**新增园区字段   end**/
+
 		return result;
 	}
 	
@@ -239,6 +270,18 @@ public class PropertyservicemanagerTs implements Domain{
 				return false;
 		} else if (!updateUser.equals(other.updateUser))
 			return false;
+		/**新增园区字段   start**/
+		if (parkId == null) {
+			if (other.parkId != null)
+				return false;
+		} else if (!parkId.equals(other.parkId))
+			return false;
+		if (parkName == null) {
+			if (other.parkName != null)
+				return false;
+		} else if (!parkName.equals(other.parkName))
+			return false;
+		/**新增园区字段   end**/
 		return true;
 	}
 	
