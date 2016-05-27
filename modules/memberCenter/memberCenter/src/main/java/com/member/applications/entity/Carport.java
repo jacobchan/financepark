@@ -83,7 +83,24 @@ public class Carport implements Domain{
 	@Column(name = "APPLAY_NO_")
 	@Length(max=36)
 	private String applayNo;//申请编号
+    /**新增园区字段   start**/
+	@Column(name = "PARK_NAME_")
+	@Length(max=256)
+	private String parkName;//园区名称
 	
+	
+	/**新增园区字段   end**/ 
+
+	/**新增园区字段   start**/
+	public String getParkName() {
+		return parkName;
+	}
+
+	public void setParkName(String parkName) {
+		this.parkName = parkName;
+	}
+	/**新增园区字段   end**/
+
 	public String getUpdateTime(){
 		return this.updateTime;
 	}
@@ -219,6 +236,9 @@ public class Carport implements Domain{
 		result = prime * result + ((cpEnAdr == null) ? 0 : cpEnAdr.hashCode());
 		result = prime * result + ((cpEntdTime == null) ? 0 : cpEntdTime.hashCode());
 		result = prime * result + ((applayNo == null) ? 0 : applayNo.hashCode());
+		/**新增园区字段   start**/
+		result = prime * result + ((parkName == null) ? 0 : parkName.hashCode());
+	    /**新增园区字段   end**/
 		return result;
 	}
 	
@@ -311,6 +331,15 @@ public class Carport implements Domain{
 				return false;
 		} else if (!applayNo.equals(other.applayNo))
 			return false;
+
+		/**新增园区字段   start**/
+		
+		if (parkName == null) {
+			if (other.parkName != null)
+				return false;
+		} else if (!parkName.equals(other.parkName))
+			return false;
+		/**新增园区字段   end**/
 		return true;
 	}
 	

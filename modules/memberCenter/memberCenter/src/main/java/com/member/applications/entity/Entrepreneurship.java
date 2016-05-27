@@ -83,7 +83,25 @@ public class Entrepreneurship implements Domain{
 
 	@Transient
 	private MemberInformation member;
+    /**新增园区字段   start**/
+	@Column(name = "PARK_NAME_")
+	@Length(max=256)
+	private String parkName;//园区名称
 	
+
+	/**新增园区字段   end**/ 
+
+	/**新增园区字段   start**/
+	public String getParkName() {
+		return parkName;
+	}
+
+	public void setParkName(String parkName) {
+		this.parkName = parkName;
+	}
+
+	/**新增园区字段   end**/
+
 	public String getProjectTypeName() {
 		return projectTypeName;
 	}
@@ -219,6 +237,9 @@ public class Entrepreneurship implements Domain{
 		result = prime * result + ((isFinace == null) ? 0 : isFinace.hashCode());
 		result = prime * result + ((defineTeacherType == null) ? 0 : defineTeacherType.hashCode());
 		result = prime * result + ((projectTypeName == null) ? 0 : projectTypeName.hashCode());
+		/**新增园区字段   start**/
+		result = prime * result + ((parkName == null) ? 0 : parkName.hashCode());
+	    /**新增园区字段   end**/
 		return result;
 	}
 	
@@ -306,6 +327,14 @@ public class Entrepreneurship implements Domain{
 				return false;
 		} else if (!projectTypeName.equals(other.projectTypeName))
 			return false;
+		/**新增园区字段   start**/
+	
+		if (parkName == null) {
+			if (other.parkName != null)
+				return false;
+		} else if (!parkName.equals(other.parkName))
+			return false;
+		/**新增园区字段   end**/
 		
 		return true;
 	}

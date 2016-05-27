@@ -95,7 +95,23 @@ public class Finace implements Domain{
 	
 	@Transient
 	private MemberInformation member;
-	
+    /**新增园区字段   start**/
+	@Column(name = "PARK_NAME_")
+	@Length(max=256)
+	private String parkName;//园区名称
+
+	/**新增园区字段   end**/ 
+
+	/**新增园区字段   start**/
+	public String getParkName() {
+		return parkName;
+	}
+
+	public void setParkName(String parkName) {
+		this.parkName = parkName;
+	}
+	/**新增园区字段   end**/
+
 	public MemberInformation getMember() {
 		return member;
 	}
@@ -255,6 +271,9 @@ public class Finace implements Domain{
 		result = prime * result + ((amountStart == null) ? 0 : amountStart.hashCode());
 		result = prime * result + ((corTeam == null) ? 0 : corTeam.hashCode());
 		result = prime * result + ((applayNo == null) ? 0 : applayNo.hashCode());
+		/**新增园区字段   start**/
+		result = prime * result + ((parkName == null) ? 0 : parkName.hashCode());
+		/**新增园区字段   end**/
 		return result;
 	}
 	
@@ -357,6 +376,14 @@ public class Finace implements Domain{
 				return false;
 		} else if (!applayNo.equals(other.applayNo))
 			return false;
+		/**新增园区字段   start**/
+		
+		if (parkName == null) {
+			if (other.parkName != null)
+				return false;
+		} else if (!parkName.equals(other.parkName))
+			return false;
+		/**新增园区字段   end**/
 		return true;
 	}
 	
