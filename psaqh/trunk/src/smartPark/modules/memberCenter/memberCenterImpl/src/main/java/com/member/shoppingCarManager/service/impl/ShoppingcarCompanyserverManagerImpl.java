@@ -4,8 +4,10 @@
 package com.member.shoppingCarManager.service.impl;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Collection;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.common.MemberManager.entity.MemberInformation;
 import com.common.MemberManager.service.MemberInformationManager;
+import com.common.MessageCenter.entity.McMsgdatas;
+import com.common.MessageCenter.service.McMsgdatasManager;
 import com.common.OrderManager.entity.OrdermanagerCommoditydetail;
 import com.common.OrderManager.entity.OrdermanagerUserorder;
 import com.common.OrderManager.service.OrdermanagerCommoditydetailManager;
@@ -51,7 +55,8 @@ public class ShoppingcarCompanyserverManagerImpl extends BaseManagerImpl impleme
 	private PurchasingmanagerCommodityManager purchasingmanagerCommodityManager;
 	@Autowired
 	private MemberInformationManager memberInformationManager;
-	
+	@Autowired
+	private McMsgdatasManager mcMsgdatasManager;
     /**
      * 查询列表
      */
@@ -200,6 +205,20 @@ public class ShoppingcarCompanyserverManagerImpl extends BaseManagerImpl impleme
 			ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
 			shoppingcarCompanyserverDao.remove(shopCar.getCompanyServerId());
 		}
+		//构建替换模板参数对应的map
+		Map<String, String> replaceMap = new HashMap<String, String>();
+		//获取当前用户对象
+		MemberInformation m=memberInformationManager.getMemberInformation(userId);
+		//获取当前订单项目放入replaceMap中
+		replaceMap.put("#type",order.getUserorderProject());
+		//获取当前用户名字放入replaceMap中
+		replaceMap.put("#user", m.getMemberPhoneNumber());
+		//获取当前订单号放入replaceMap中
+		replaceMap.put("#userorderCode",order.getUserorderCode());
+		//构建短信       0322为短信模板编号
+		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0325", replaceMap);  
+		//发短信给用户
+		mcMsgdatasManager.sendToUser(msgData, order.getMemberId());
 		return order;
 	}
     //查询当前用户的购物车列表
