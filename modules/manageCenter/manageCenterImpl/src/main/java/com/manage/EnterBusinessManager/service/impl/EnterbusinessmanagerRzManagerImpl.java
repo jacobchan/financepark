@@ -1,17 +1,17 @@
 package com.manage.EnterBusinessManager.service.impl;
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Random;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.common.BuildingBaseManager.dao.BbmBuildingDao;
 import com.common.BuildingBaseManager.dao.BbmFloorDao;
 import com.common.BuildingBaseManager.entity.BbmBuilding;
@@ -567,8 +567,8 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@EsbServiceMapping(pubConditions = { @PubCondition(property = "updateUser", pubProperty = "userId") })
-	public String memberImportExcel(@ServiceParam(name="batchExcel") String batchExcel) throws BusException {
-		String msg = "ok";
+	public String memberImportExcel(@ServiceParam(name="batchExcel") String batchExcel) throws BusException, ParseException {
+		String msg = "企业信息导入成功！";
 		File file = new File(new File(root), batchExcel);
 		if(!file.exists()){
 			msg = "文件不存在！";
@@ -622,7 +622,7 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 			EnterbusinessmanagerRz r = new EnterbusinessmanagerRz();
 			r.setRzName(i.getRzName());
 			r.setRzSign(i.getRzSign());
-			r.setRzDate(i.getRzDate());
+			r.setRzDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(i.getRzDate()));
 			r.setEnTypeId(etypeEnterprisetypeManager.getEtypeEnterprisetype(i.getEnTypeName()));
 			r.setRzType(i.getRzType());
 			r.setRzProperty(i.getRzProperty());
