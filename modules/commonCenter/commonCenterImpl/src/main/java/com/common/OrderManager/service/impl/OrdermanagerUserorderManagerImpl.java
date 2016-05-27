@@ -1077,7 +1077,73 @@ public class OrdermanagerUserorderManagerImpl extends BaseManagerImpl implements
   				}
   			}
   		return list;
-  	}	
+  	}
+  	/**
+  	 * 新增人事社保订单
+  	 */
+      @Override
+      @EsbServiceMapping
+  	public OrdermanagerUserorder saveHRshebao(@ServiceParam(name="userId",pubProperty="userId") String userId,
+  			@ServiceParam(name="commodityId") String commodityId,@ServiceParam(name="faultDes") String faultDes,
+  			@ServiceParam(name="userorderAdr") String userorderAdr) throws BusException {
+      	PurchasingmanagerCommodity commodity = purchasingmanagerCommodityManager.getPurchasingmanagerCommodity(commodityId);
+  		PurchasingmanagerGenre pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(commodity.getGenreId());
+  		//根据类别ID获取类别扩展属性列表
+  		List<PurchasingmanagerGenreProperty> pgpList = purchasingmanagerGenrePropertyManager.getPurGenrePropertysByGenre(pg.getGenreId());
+  		if(pg.getPagrenId() != null){ //获取有类别编码的上级商品类别
+  			pg = purchasingmanagerGenreManager.getPurchasingmanagerGenre(pg.getPagrenId());
+  		}
+  		OrdermanagerUserorder order = new OrdermanagerUserorder();
+  		order.setUserorderAmount(commodity.getCommodityPrice());
+  		order.setGenreId(pg);
+  		order.setUserorderCode(BizCodeUtil.getInstance().getBizCodeDate("ITFW"));
+  		order.setUserorderStatus("01");//01-未支付
+  		order.setUserorderAdr(userorderAdr);
+  		if(StringUtils.isNotEmpty(userId)){
+  			MemberInformation mem = memberInformationManager.getMemberInformation(userId);
+  			order.setUserorderBuyUser(mem.getMemberName());
+  		}
+  		order.setMemberId(userId);
+     		order.setUserorderProject(pg.getGenreName());
+  		order.setUserorderTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+  		order.setCreateUser(userId);
+  		order.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+  		order.setUpdateUser(userId);
+  		order.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
+  		order = ordermanagerUserorderDao.save(order);
+  		
+  		OrdermanagerCommoditydetail orderDetail = new OrdermanagerCommoditydetail();
+//  		orderDetail.setOrdermanagerUserorder(order);
+  		orderDetail.setOrderId(order.getUserorderId());
+  		orderDetail.setCommodityId(commodity);
+  		orderDetail.setCommoditydetailNum("1");
+  		ordermanagerCommoditydetailManager.saveOrdermanagerCommoditydetail(orderDetail);
+  		
+  		for(PurchasingmanagerGenreProperty pgp:pgpList){
+  			if("faultDes".equals(pgp.getGenrePropertyFieldName())){
+  				OrdermanagerOrderprojecttypeValue orderExc = new OrdermanagerOrderprojecttypeValue();
+  				orderExc.setOrdermanagerUserorder(order);
+  				orderExc.setGenrePropertyId(pgp);
+  				orderExc.setOrderprojecttypeValueFieldValue(faultDes);
+  				ordermanagerOrderprojecttypeValueManager.saveOrdermanagerOrderprojecttypeValue(orderExc);
+  			}
+  		}
+  		//构建替换模板参数对应的map
+  		Map<String, String> replaceMap = new HashMap<String, String>();
+  		//获取当前用户对象
+  		MemberInformation m=memberInformationManager.getMemberInformation(userId);
+  		//获取当前订单项目放入replaceMap中
+  		replaceMap.put("#type",order.getUserorderProject());
+  		//获取当前用户名字放入replaceMap中
+  		replaceMap.put("#user", m.getMemberPhoneNumber());
+  		//获取当前订单号放入replaceMap中
+  		replaceMap.put("#userorderCode",order.getUserorderCode());
+  		//构建短信       0322为短信模板编号
+  		McMsgdatas msgData = mcMsgdatasManager.buildMsgData("0325", replaceMap);  
+  		//发短信给用户
+  		mcMsgdatasManager.sendToUser(msgData, order.getMemberId());	
+  		return order;
+  	}
 }
 
 
