@@ -51,7 +51,6 @@ public class FileUpload implements Domain{
 	@Column(name = "DOWN_NUM_")
 	private int downNum;//文件下载次数
 
-
 	@Column(name = "CREATE_USER_")
 	@Length(max=36)
 	private String createUser;//创建人
@@ -65,161 +64,90 @@ public class FileUpload implements Domain{
 	
 	@Column(name = "UPDATE_TIME_")
 	private String updateTime;//修改时间
+    /**新增园区字段   start**/
+	@Column(name = "PARK_NAME_")
+	@Length(max=256)
+	private String parkName;//园区名称
 	
-	
+	@Column(name = "PARK_ID_")
+	@Length(max=36)
+	private String parkId;//园区id
+	/**新增园区字段   end**/ 
 
+	/**新增园区字段   start**/
+	public String getParkName() {
+		return parkName;
+	}
 
+	public void setParkName(String parkName) {
+		this.parkName = parkName;
+	}
+
+	public String getParkId() {
+		return parkId;
+	}
+
+	public void setParkId(String parkId) {
+		this.parkId = parkId;
+	}
+	/**新增园区字段   end**/
 
 	public String getFileId() {
 		return fileId;
 	}
-
-
-
-
-
 	public void setFileId(String fileId) {
 		this.fileId = fileId;
 	}
-
-
-
-
-
 	public String getFileName() {
 		return fileName;
 	}
-
-
-
-
-
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-
-
-
-
-
 	public String getFilePath() {
 		return filePath;
 	}
-
-
-
-
-
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
-
-
-
-
-
 	public String getFileType() {
 		return fileType;
 	}
-
-
-
-
-
 	public void setFileType(String fileType) {
 		this.fileType = fileType;
 	}
-
-
-
-
-
-
 	public int getDownNum() {
 		return downNum;
 	}
-
-
-
-
-
 	public void setDownNum(int downNum) {
 		this.downNum = downNum;
 	}
-
-
-
-
-
 	public String getCreateUser() {
 		return createUser;
 	}
-
-
-
-
 
 	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
 	}
 
-
-
-
-
 	public String getCreateTime() {
 		return createTime;
 	}
-
-
-
-
-
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-
-
-
-
-
 	public String getUpdateUser() {
 		return updateUser;
 	}
-
-
-
-
-
 	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
 	}
-
-
-
-
-
 	public String getUpdateTime() {
 		return updateTime;
 	}
-
-
-
-
-
 	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
-
-
-
-
-
-
-
-
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -240,6 +168,12 @@ public class FileUpload implements Domain{
 				+ ((updateTime == null) ? 0 : updateTime.hashCode());
 		result = prime * result
 				+ ((updateUser == null) ? 0 : updateUser.hashCode());
+		
+		/**新增园区字段   start**/
+		result = prime * result + ((parkName == null) ? 0 : parkName.hashCode());
+		result = prime * result + ((parkId == null) ? 0 : parkId.hashCode());
+		/**新增园区字段   end**/
+
 		return result;
 	}
 
@@ -298,6 +232,18 @@ public class FileUpload implements Domain{
 				return false;
 		} else if (!updateUser.equals(other.updateUser))
 			return false;
+		/**新增园区字段   start**/
+		if (parkId == null) {
+			if (other.parkId != null)
+				return false;
+		} else if (!parkId.equals(other.parkId))
+			return false;
+		if (parkName == null) {
+			if (other.parkName != null)
+				return false;
+		} else if (!parkName.equals(other.parkName))
+			return false;
+		/**新增园区字段   end**/
 		return true;
 	}
 
