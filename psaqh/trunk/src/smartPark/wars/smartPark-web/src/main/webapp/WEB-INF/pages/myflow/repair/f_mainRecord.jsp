@@ -5,8 +5,7 @@
  
  	<youi:subpage caption="填写报修单" subpageId="process"
 		src="/flow/taskform/{taskId}.html"
-		formAction="workflow/run/completeTask.json" formSubmit="提 交"
-		width="600">
+		formAction="workflow/run/completeTask.json" formSubmit="提 交">
 	</youi:subpage>
 	<!-- 跳转费用清单页面 -->
 	<youi:subpage
