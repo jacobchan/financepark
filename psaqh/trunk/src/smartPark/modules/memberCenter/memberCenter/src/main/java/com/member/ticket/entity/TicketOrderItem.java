@@ -41,7 +41,33 @@ public class TicketOrderItem implements Domain{
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="ORDER_ID_")
 	private com.member.ticket.entity.TicketOrder ticketOrder;//ORDER_ID_
+    /**新增园区字段   start**/
+	@Column(name = "PARK_NAME_")
+	@Length(max=256)
+	private String parkName;//园区名称
 	
+	@Column(name = "PARK_ID_")
+	@Length(max=36)
+	private String parkId;//园区id
+	/**新增园区字段   end**/ 
+
+	/**新增园区字段   start**/
+	public String getParkName() {
+		return parkName;
+	}
+
+	public void setParkName(String parkName) {
+		this.parkName = parkName;
+	}
+
+	public String getParkId() {
+		return parkId;
+	}
+
+	public void setParkId(String parkId) {
+		this.parkId = parkId;
+	}
+	/**新增园区字段   end**/
 	public String getTicketCount(){
 		return this.ticketCount;
 	}
@@ -88,6 +114,10 @@ public class TicketOrderItem implements Domain{
 		result = prime * result + ((itemId == null) ? 0 : itemId.hashCode());
 		result = prime * result + ((ticketNo == null) ? 0 : ticketNo.hashCode());
 		result = prime * result + ((orderIdThird == null) ? 0 : orderIdThird.hashCode());
+		/**新增园区字段   start**/
+		result = prime * result + ((parkName == null) ? 0 : parkName.hashCode());
+		result = prime * result + ((parkId == null) ? 0 : parkId.hashCode());
+		/**新增园区字段   end**/
 		return result;
 	}
 	
@@ -120,6 +150,20 @@ public class TicketOrderItem implements Domain{
 				return false;
 		} else if (!orderIdThird.equals(other.orderIdThird))
 			return false;
+
+
+		/**新增园区字段   start**/
+		if (parkId == null) {
+			if (other.parkId != null)
+				return false;
+		} else if (!parkId.equals(other.parkId))
+			return false;
+		if (parkName == null) {
+			if (other.parkName != null)
+				return false;
+		} else if (!parkName.equals(other.parkName))
+			return false;
+		/**新增园区字段   end**/
 		return true;
 	}
 	
