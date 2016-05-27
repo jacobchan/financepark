@@ -64,7 +64,34 @@ public class LettermanagerLetter implements Domain{
 	
 	@Transient
 	private MemberInformation member;
+    /**新增园区字段   start**/
+	@Column(name = "PARK_NAME_")
+	@Length(max=256)
+	private String parkName;//园区名称
 	
+	@Column(name = "PARK_ID_")
+	@Length(max=36)
+	private String parkId;//园区id
+	/**新增园区字段   end**/ 
+
+	/**新增园区字段   start**/
+	public String getParkName() {
+		return parkName;
+	}
+
+	public void setParkName(String parkName) {
+		this.parkName = parkName;
+	}
+
+	public String getParkId() {
+		return parkId;
+	}
+
+	public void setParkId(String parkId) {
+		this.parkId = parkId;
+	}
+	/**新增园区字段   end**/
+
 	public MemberInformation getMember() {
 		return member;
 	}
@@ -160,6 +187,11 @@ public class LettermanagerLetter implements Domain{
 		result = prime * result + ((letterContent == null) ? 0 : letterContent.hashCode());
 		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
 		result = prime * result + ((letterRecipientId == null) ? 0 : letterRecipientId.hashCode());
+		/**新增园区字段   start**/
+		result = prime * result + ((parkName == null) ? 0 : parkName.hashCode());
+		result = prime * result + ((parkId == null) ? 0 : parkId.hashCode());
+		/**新增园区字段   end**/
+
 		return result;
 	}
 	
@@ -222,6 +254,18 @@ public class LettermanagerLetter implements Domain{
 				return false;
 		} else if (!letterRecipientId.equals(other.letterRecipientId))
 			return false;
+		/**新增园区字段   start**/
+		if (parkId == null) {
+			if (other.parkId != null)
+				return false;
+		} else if (!parkId.equals(other.parkId))
+			return false;
+		if (parkName == null) {
+			if (other.parkName != null)
+				return false;
+		} else if (!parkName.equals(other.parkName))
+			return false;
+		/**新增园区字段   end**/
 		return true;
 	}
 	
