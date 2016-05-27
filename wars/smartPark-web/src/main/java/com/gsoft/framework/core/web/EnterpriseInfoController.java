@@ -1,6 +1,10 @@
 package com.gsoft.framework.core.web;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -297,6 +301,42 @@ public class EnterpriseInfoController {
 			r.setRzUrl(i.getRzUrl());
 			r.setRzRemark(i.getRzRemark());
 			enterbusinessmanagerRzManager.saveEnterbusinessmanagerRz(r);
+		}
+	}
+	/**
+	 * 下载企业导入模板
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "/downloadTemplate.html", method = { RequestMethod.POST, RequestMethod.GET })
+	public void downloadTemplate(HttpServletRequest request, HttpServletResponse response){
+		OutputStream os = null;
+		try {
+			os = response.getOutputStream();
+			response.reset();
+			response.setContentType("application/vnd.ms-excel;charset=UTF-8");  
+			response.addHeader("Content-Disposition", "attachment;filename=" + new String(("企业模板-"+System.currentTimeMillis()+".xlsx").getBytes("UTF-8"), "ISO-8859-1"));
+			String path = request.getSession().getServletContext().getRealPath("/") + "exceltemplate";
+            InputStream inputStream = new FileInputStream(new File(path + File.separator + "template.xlsx"));
+            byte[] b = new byte[2048];
+            int length = 0;
+            while ((length = inputStream.read(b)) > 0) {
+                os.write(b, 0, length);
+            }
+			os.flush();
+			inputStream.close();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(os!=null){
+				try {
+					os.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 }
