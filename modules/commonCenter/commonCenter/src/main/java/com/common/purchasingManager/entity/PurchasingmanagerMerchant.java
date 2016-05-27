@@ -84,6 +84,33 @@ public class PurchasingmanagerMerchant implements Domain{
 	@Column(name = "MERCHANT_ABOUT_")
 	@Length(max=2048)
 	private String merchantAbout;//商户简介
+    /**新增园区字段   start**/
+	@Column(name = "PARK_NAME_")
+	@Length(max=256)
+	private String parkName;//园区名称
+	
+	@Column(name = "PARK_ID_")
+	@Length(max=36)
+	private String parkId;//园区id
+	/**新增园区字段   end**/ 
+
+	/**新增园区字段   start**/
+	public String getParkName() {
+		return parkName;
+	}
+
+	public void setParkName(String parkName) {
+		this.parkName = parkName;
+	}
+
+	public String getParkId() {
+		return parkId;
+	}
+
+	public void setParkId(String parkId) {
+		this.parkId = parkId;
+	}
+	/**新增园区字段   end**/
 
 	public String getMerchantUrl() {
 		return merchantUrl;
@@ -222,6 +249,10 @@ public class PurchasingmanagerMerchant implements Domain{
 		result = prime * result + ((merchantEnterpriseName == null) ? 0 : merchantEnterpriseName.hashCode());
 		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
 		result = prime * result + ((merchantSendAddress == null) ? 0 : merchantSendAddress.hashCode());
+		/**新增园区字段   start**/
+		result = prime * result + ((parkName == null) ? 0 : parkName.hashCode());
+		result = prime * result + ((parkId == null) ? 0 : parkId.hashCode());
+		/**新增园区字段   end**/
 		return result;
 	}
 	
@@ -299,6 +330,19 @@ public class PurchasingmanagerMerchant implements Domain{
 				return false;
 		} else if (!merchantSendAddress.equals(other.merchantSendAddress))
 			return false;
+
+		/**新增园区字段   start**/
+		if (parkId == null) {
+			if (other.parkId != null)
+				return false;
+		} else if (!parkId.equals(other.parkId))
+			return false;
+		if (parkName == null) {
+			if (other.parkName != null)
+				return false;
+		} else if (!parkName.equals(other.parkName))
+			return false;
+		/**新增园区字段   end**/
 		return true;
 	}
 	
