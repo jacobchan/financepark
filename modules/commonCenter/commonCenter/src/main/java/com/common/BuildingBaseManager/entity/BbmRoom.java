@@ -127,6 +127,12 @@ public class BbmRoom implements Domain{
 	@Length(max=1024)
 	private String roomAddress;//详细地址
 	
+    /**新增园区字段   start**/
+	@Column(name = "PARK_ID_")
+	@Length(max=36)
+	private String parkId;//园区id
+	/**新增园区字段   end**/ 
+	
 	public String getRoomAddress() {
 		return roomAddress;
 	}
@@ -326,7 +332,15 @@ public class BbmRoom implements Domain{
 	public com.common.BuildingBaseManager.entity.BbmFloor getBbmFloor(){
 		return this.bbmFloor;
 	}
-	
+	/**新增园区字段   start**/
+	public String getParkId() {
+		return parkId;
+	}
+
+	public void setParkId(String parkId) {
+		this.parkId = parkId;
+	}
+	/**新增园区字段   end**/
 	
 	@Override
 	public int hashCode() {
@@ -350,6 +364,9 @@ public class BbmRoom implements Domain{
 		result = prime * result + ((furnish == null) ? 0 : furnish.hashCode());
 		result = prime * result + ((waterCharge == null) ? 0 : waterCharge.hashCode());
 		result = prime * result + ((roomName == null) ? 0 : roomName.hashCode());
+		/**新增园区字段   start**/
+		result = prime * result + ((parkId == null) ? 0 : parkId.hashCode());
+		/**新增园区字段   end**/
 		return result;
 	}
 	
@@ -452,6 +469,13 @@ public class BbmRoom implements Domain{
 				return false;
 		} else if (!roomName.equals(other.roomName))
 			return false;
+		/**新增园区字段   start**/
+		if (parkId == null) {
+			if (other.parkId != null)
+				return false;
+		} else if (!parkId.equals(other.parkId))
+			return false;		
+		/**新增园区字段   end**/
 		return true;
 	}
 	
