@@ -96,7 +96,7 @@ public interface MemberInformationManager extends BaseManager{
 	 * @return 
 	 * @throws BusException
 	 */
-	public Record doModifyPassword(String password,String confirmPassword,String oldPassword,String userId) throws BusException;
+	public TempDemo doModifyPassword(String password,String confirmPassword,String oldPassword,String userId) throws BusException;
 	/**
 	 * 修改手机号码
 	 * @param memberPhoneNumber
