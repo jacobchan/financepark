@@ -1,6 +1,8 @@
 package com.manage.EnterBusinessManager.service;
+import java.text.ParseException;
 import java.util.Collection;
 import java.util.List;
+
 import com.common.BuildingBaseManager.entity.BbmRoom;
 import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.entity.TempDemo;
@@ -136,5 +138,5 @@ public interface EnterbusinessmanagerRzManager extends BaseManager{
 	
 	public String updateMemberInformationOfCompany(MemberInformation o) throws BusException;
 	
-	public String memberImportExcel(String batchExcel) throws BusException;
+	public String memberImportExcel(String batchExcel) throws BusException, ParseException;
 }

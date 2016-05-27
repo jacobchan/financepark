@@ -1,11 +1,15 @@
 package com.manage.EnterBusinessManager.entity;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.Length;
+
 import com.gsoft.framework.core.dataobj.Domain;
 @SuppressWarnings("serial")
 @Entity
@@ -28,7 +32,7 @@ public class EnterpriseInfomation implements Domain {
 	
 	@Column(name = "RZ_DATE_")
 	@Length(max=20)
-	private String rzDate; //入驻时间
+	private Date rzDate; //入驻时间
 	
 	@Column(name = "en_type_id_")
 	@Length(max=36)
@@ -79,7 +83,7 @@ public class EnterpriseInfomation implements Domain {
 	}
 
 	public EnterpriseInfomation(String rzId, String rzName, String rzSign,
-			String rzDate, String enTypeName, String rzType, String rzProperty,
+			Date rzDate, String enTypeName, String rzType, String rzProperty,
 			String memberName, String parkId, String buildingId, String roomId,
 			String floorId, String rzLogo, String rzUrl, String rzRemark) {
 		super();
@@ -124,11 +128,11 @@ public class EnterpriseInfomation implements Domain {
 		this.rzSign = rzSign;
 	}
 
-	public String getRzDate() {
+	public Date getRzDate() {
 		return rzDate;
 	}
 
-	public void setRzDate(String rzDate) {
+	public void setRzDate(Date rzDate) {
 		this.rzDate = rzDate;
 	}
 
