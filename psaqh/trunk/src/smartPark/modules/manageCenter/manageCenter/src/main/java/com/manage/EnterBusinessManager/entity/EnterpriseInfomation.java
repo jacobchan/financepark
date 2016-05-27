@@ -1,5 +1,4 @@
 package com.manage.EnterBusinessManager.entity;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +28,7 @@ public class EnterpriseInfomation implements Domain {
 	
 	@Column(name = "RZ_DATE_")
 	@Length(max=20)
-	private Date rzDate; //入驻时间
+	private String rzDate; //入驻时间
 	
 	@Column(name = "en_type_id_")
 	@Length(max=36)
@@ -80,7 +79,7 @@ public class EnterpriseInfomation implements Domain {
 	}
 
 	public EnterpriseInfomation(String rzId, String rzName, String rzSign,
-			Date rzDate, String enTypeName, String rzType, String rzProperty,
+			String rzDate, String enTypeName, String rzType, String rzProperty,
 			String memberName, String parkId, String buildingId, String roomId,
 			String floorId, String rzLogo, String rzUrl, String rzRemark) {
 		super();
@@ -125,11 +124,11 @@ public class EnterpriseInfomation implements Domain {
 		this.rzSign = rzSign;
 	}
 
-	public Date getRzDate() {
+	public String getRzDate() {
 		return rzDate;
 	}
 
-	public void setRzDate(Date rzDate) {
+	public void setRzDate(String rzDate) {
 		this.rzDate = rzDate;
 	}
 
