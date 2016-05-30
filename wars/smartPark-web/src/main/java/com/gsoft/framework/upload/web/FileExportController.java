@@ -48,6 +48,9 @@ public class FileExportController {
 	private MemberInformationManager memberInformationManager;
 	@Autowired
 	private CodeitemManager codeitemManager;
+	
+	public static final String TEMPLATE_ENT = "entinfo.xlsx";
+	public static final String TEMPLATE_USER = "userinfo.xlsx";
 
 	@RequestMapping("/entexport.json")
 	public void exportEnts(HttpServletRequest request,
@@ -55,18 +58,22 @@ public class FileExportController {
 		String basepath = this.getClass().getResource("/").getPath();
 		List<String> header = EntConstant.header;
 		List<Record> records = getEntDatas(header);
-		String fileName = "entinfo"+DateUtils.getToday("yyyyMMddHHmmss")+".xlsx";
+		String fileName = "企业信息"+DateUtils.getToday("yyyyMMddHHmmss")+".xlsx";
 		if(request.getHeader("User-Agent").toLowerCase().indexOf("firefox") > 0){
 			fileName = new String(fileName.getBytes("utf-8"),"ISO8859-1");
 		}
 		response.addHeader("Content-Disposition","attachment; filename="+fileName);
 		response.setContentType("application/msexcel");
 		OutputStream out = response.getOutputStream();
-		XlsUtils.buildWorkbook(out,records, header , new File(basepath+"template/entinfo.xlsx"));
+		XlsUtils.buildWorkbook(out,records, header , new File(basepath+"template/"+TEMPLATE_ENT));
 		out.flush();
 		out.close();
 	}
 	
+	/**构建企业信息
+	 * @param header
+	 * @return
+	 */
 	private List<Record> getEntDatas(List<String> header){
 		List<EnterbusinessmanagerRz> ents = enterbusinessmanagerRzManager.getEnterbusinessmanagerRzs();
 		List<Record> records = new ArrayList<Record>();
@@ -110,18 +117,22 @@ public class FileExportController {
 			
 		List<String> header = EmployeConstant.header;
 		List<Record> records = getUserDatas(header);
-		String fileName = "userinfo"+DateUtils.getToday("yyyyMMddHHmmss")+".xlsx";
+		String fileName = "企业员工信息"+DateUtils.getToday("yyyyMMddHHmmss")+".xlsx";
 		if(request.getHeader("User-Agent").toLowerCase().indexOf("firefox") > 0){
 			fileName = new String(fileName.getBytes("utf-8"),"ISO8859-1");
 		}
 		response.addHeader("Content-Disposition","attachment; filename="+fileName);
 		response.setContentType("application/msexcel");
 		OutputStream out = response.getOutputStream();
-		XlsUtils.buildWorkbook(out,records, header , new File(basepath+"template/userinfo.xlsx"));
+		XlsUtils.buildWorkbook(out,records, header , new File(basepath+"template/"+TEMPLATE_USER));
 		out.flush();
 		out.close();
 	}
 	
+	/**构建企业员工数据
+	 * @param header
+	 * @return
+	 */
 	public List<Record> getUserDatas(List<String> header){
 		List<EnterpriseEmployees> employees = enterpriseEmployeesManager.getEnterpriseEmployeess();
 		List<Record> records = new ArrayList<Record>();
