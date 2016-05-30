@@ -1,17 +1,21 @@
 package com.manage.EnterBusinessManager.service.impl;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Collection;
 import java.util.Map;
 import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.common.BuildingBaseManager.dao.BbmBuildingDao;
 import com.common.BuildingBaseManager.dao.BbmFloorDao;
 import com.common.BuildingBaseManager.entity.BbmBuilding;
@@ -28,29 +32,37 @@ import com.common.MemberManager.service.MemberInformationManager;
 import com.common.excel.ExcelColumn;
 import com.common.excel.ExcelHead;
 import com.common.excel.ExcelHelper;
+import com.gsoft.common.util.XlsUtils;
 import com.gsoft.entity.TempDemo;
+import com.gsoft.framework.core.dataobj.Record;
 import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.PubCondition;
+import com.gsoft.framework.esb.annotation.ServiceParam;
 import com.gsoft.framework.security.fuc.service.RoleManager;
+import com.gsoft.framework.upload.entity.FileStore;
 import com.gsoft.framework.upload.service.FileStoreManager;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.DateUtils;
 import com.gsoft.framework.util.PasswordUtils;
+import com.gsoft.framework.util.PropertyUtils;
 import com.gsoft.framework.util.StringUtils;
-import com.gsoft.framework.core.service.impl.BaseManagerImpl;
 import com.manage.EmployeeManager.dao.EnterpriseEmployeesDao;
 import com.manage.EmployeeManager.dao.EnterpriseRoleDao;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 import com.manage.EmployeeManager.entity.EnterpriseRole;
 import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
 import com.manage.EmployeeManager.service.EnterpriseRoleManager;
+import com.manage.EnterBusinessManager.dao.EnterbusinessmanagerRzDao;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.EnterBusinessManager.entity.EnterpriseInfomation;
-import com.manage.EnterBusinessManager.dao.EnterbusinessmanagerRzDao;
 import com.manage.EnterBusinessManager.service.EnterbusinessmanagerRzManager;
 import com.manage.EnterpriseManager.entity.InformationLegal;
 import com.manage.EnterpriseManager.service.InformationLegalManager;
@@ -155,15 +167,17 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
         			bbmRoomManager.setEnterRoomStatus(enterbusinessmanagerRzId,o.getRoomId().getRoomId());//企业入驻占用单元时，设置单元状态
         		}
     		}else{
-    			BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(o.getRoomId().getRoomId());
-    			rz.setParkId(bbmRoom.getBbmPark().getParkId());
-    			rz.setBuildingId(bbmRoom.getBbmBuilding().getBuildingId());
-    			rz.setFloorId(bbmRoom.getBbmFloor().getFloorId());
-    			//更新单元基础信息企业
-//    			bbmRoom.setRzId(enterbusinessmanagerRzId);
-//    			bbmRoom.setStatus("02");//已售已招
-//    			bbmRoomManager.saveBbmRoom(bbmRoom);
-    			bbmRoomManager.setEnterRoomStatus(enterbusinessmanagerRzId,o.getRoomId().getRoomId());//企业入驻占用单元时，设置单元状态
+    			if(o.getRoomId()!=null){
+	    			BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(o.getRoomId().getRoomId());
+	    			rz.setParkId(bbmRoom.getBbmPark().getParkId());
+	    			rz.setBuildingId(bbmRoom.getBbmBuilding().getBuildingId());
+	    			rz.setFloorId(bbmRoom.getBbmFloor().getFloorId());
+	    			//更新单元基础信息企业
+	//    			bbmRoom.setRzId(enterbusinessmanagerRzId);
+	//    			bbmRoom.setStatus("02");//已售已招
+	//    			bbmRoomManager.saveBbmRoom(bbmRoom);
+	    			bbmRoomManager.setEnterRoomStatus(enterbusinessmanagerRzId,o.getRoomId().getRoomId());//企业入驻占用单元时，设置单元状态
+    			}
     		}
     		rz.setRoomId(o.getRoomId());
     		rz.setRzManager(o.getRzManager());
@@ -204,12 +218,13 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
     		o.setCreateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
     		o.setCreateUser(o.getUpdateUser());
     		o.setUpdateTime(DateUtils.getToday("yyyy-MM-dd HH:mm:ss"));
-    		
-        	BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(o.getRoomId().getRoomId());
-        	bbmRoomManager.setEnterRoomStatus(o.getRzId(),o.getRoomId().getRoomId());//企业入驻占用单元时，设置单元状态
-        	o.setParkId(bbmRoom.getBbmPark().getParkId());
-    		o.setBuildingId(bbmRoom.getBbmBuilding().getBuildingId());
-    		o.setFloorId(bbmRoom.getBbmFloor().getFloorId());
+    		if(o.getRoomId()!=null){
+	        	BbmRoom bbmRoom=bbmRoomManager.getBbmRoom(o.getRoomId().getRoomId());
+	        	bbmRoomManager.setEnterRoomStatus(o.getRzId(),o.getRoomId().getRoomId());//企业入驻占用单元时，设置单元状态
+	        	o.setParkId(bbmRoom.getBbmPark().getParkId());
+	    		o.setBuildingId(bbmRoom.getBbmBuilding().getBuildingId());
+	    		o.setFloorId(bbmRoom.getBbmFloor().getFloorId());
+    		}
     		o = enterbusinessmanagerRzDao.save(o);
     		//更新单元基础信息企业
 //    		bbmRoom.setRzId(o.getRzId());
@@ -637,5 +652,67 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 			enterbusinessmanagerRzDao.save(r);
 		}
 		return msg;
+	}
+	
+	
+	@EsbServiceMapping
+	public void entImport(@ServiceParam(name="filePath") String filePath) throws BusException {
+		if(StringUtils.isNotEmpty(filePath)){
+			File xlsFile = new File(filePath);
+			Map<String,String> properties = new HashMap<String,String>();
+			properties.put("rzName", "企业名称");
+			properties.put("rzBuss", "企业管理员电话");
+			properties.put("enTypeId", "所在行业");
+			properties.put("rzProperty", "企业性质"); 
+			properties.put("rzType", "上市类型");
+			properties.put("rzUrl", "公司网址");
+			properties.put("rzRemark", "公司介绍");
+			properties.put("productDiscriptio", "产品描述");
+			//法人信息
+			properties.put("legalName","创世人姓名");
+			properties.put("legalBirthday","出生日期");
+			properties.put("legalTelephone","联系电话");
+			properties.put("legalBusiness","职位");
+			properties.put("legalRemark","");
+			List<Record> records = XlsUtils.buildRecords(xlsFile, properties);
+			if(records!=null&&records.size()>0){
+				List<EnterbusinessmanagerRz> ents = new ArrayList<EnterbusinessmanagerRz>();
+				for(Record record:records){
+					EnterbusinessmanagerRz enter = new EnterbusinessmanagerRz();
+					for(Map.Entry<String, String> entry:properties.entrySet()){
+						PropertyUtils.setSimplePropertyValue(enter, entry.getKey(), record.get(entry.getKey()));
+						
+					}
+					ents.add(enter);
+				}
+				enterbusinessmanagerRzDao.save(ents);
+			}
+			
+		}
+	}
+	
+	@EsbServiceMapping
+	public FileStore entExport() throws BusException {//通过ajax实现下载，但是下载业务没有实现
+		String basepath = this.getClass().getResource("/").getPath();
+		List<EnterbusinessmanagerRz> ents = this.getEnterbusinessmanagerRzs();
+		List<Record> records = new ArrayList<Record>();
+//		records.addAll(ents);
+		List<String> header = new ArrayList<String>();
+		header.add("rzName");
+		header.add("rzTelephone");
+		header.add("rzProperty");
+		header.add("rzType");
+		header.add("rzUrl");
+		header.add("productDiscriptio");
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
+		XlsUtils.buildWorkbook(output,records, header , new File(basepath+"template/entinfo.xls"));
+		
+		ByteArrayInputStream input = new ByteArrayInputStream(output.toByteArray());
+		FileStore fileStore = fileStoreManager.storeFile("entinfo.xlsx", input, null, "");
+		return fileStore;
+	}
+	
+	public EnterbusinessmanagerRz getEnterbusinessmanagerRzByUniqueProperty(String prop,String value) throws BusException{
+		return enterbusinessmanagerRzDao.getObjectByUniqueProperty(prop, value);
 	}
 }
