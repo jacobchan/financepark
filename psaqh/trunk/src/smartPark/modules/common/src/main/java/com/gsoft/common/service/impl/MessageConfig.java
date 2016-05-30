@@ -59,7 +59,7 @@ public class MessageConfig implements InitializingBean{
         configs.put(SMSUtil.ACCOUNT, p.getProperty(SMSUtil.ACCOUNT));
         configs.put(SMSUtil.PASSWORD, p.getProperty(SMSUtil.PASSWORD));
         
-        log.info("-----------"+configs+"------------");
+ //       log.info("-----------"+configs+"------------");
 	}
 	
 	public static String getValue(String key){
