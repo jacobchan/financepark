@@ -1,12 +1,14 @@
 package com.manage.EmployeeManager.service.impl;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.common.MemberManager.dao.MemberInformationDao;
 import com.common.MemberManager.entity.MemberInformation;
 import com.gsoft.framework.core.dataobj.Record;
@@ -15,18 +17,24 @@ import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
-import com.gsoft.framework.esb.annotation.*;
+import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.gsoft.framework.esb.annotation.ConditionCollection;
+import com.gsoft.framework.esb.annotation.EsbServiceMapping;
+import com.gsoft.framework.esb.annotation.OrderCollection;
+import com.gsoft.framework.esb.annotation.PubCondition;
+import com.gsoft.framework.esb.annotation.ServiceParam;
+import com.gsoft.framework.security.agt.service.impl.UserPasswordService;
 import com.gsoft.framework.security.fuc.dao.RoleDao;
 import com.gsoft.framework.security.fuc.entity.Role;
+import com.gsoft.framework.security.fuc.service.RoleManager;
 import com.gsoft.framework.util.ConditionUtils;
-import com.gsoft.framework.core.service.impl.BaseManagerImpl;
+import com.manage.EmployeeManager.dao.EnterpriseEmployeesDao;
+import com.manage.EmployeeManager.dao.EnterpriseInvitationDao;
+import com.manage.EmployeeManager.dao.EnterpriseRoleDao;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
 import com.manage.EmployeeManager.entity.EnterpriseInvitation;
 import com.manage.EmployeeManager.entity.EnterpriseRole;
 import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
-import com.manage.EmployeeManager.dao.EnterpriseEmployeesDao;
-import com.manage.EmployeeManager.dao.EnterpriseInvitationDao;
-import com.manage.EmployeeManager.dao.EnterpriseRoleDao;
 import com.manage.EnterBusinessManager.dao.EnterbusinessmanagerRzDao;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 @Service("enterpriseEmployeesManager")
@@ -44,6 +52,10 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 	private RoleDao roleDao;
 	@Autowired
 	private EnterpriseRoleDao enterpriseRoleDao;
+	@Autowired
+	private RoleManager roleManager;
+	@Autowired
+	private UserPasswordService passwordService;
 
 	/**
 	 * 查询列表
@@ -290,5 +302,24 @@ public class EnterpriseEmployeesManagerImpl extends BaseManagerImpl implements E
 				condition, null);
 		return list;
 
+	}
+	
+	public void saveMemberAndEmploye(MemberInformation member,EnterpriseEmployees employe) throws BusException{
+		member.setMemberPassword(passwordService.hashPassword("123456").toHex());
+		MemberInformation savedMemeber = memberInformationDao.save(member);
+		String phone = savedMemeber.getMemberPhoneNumber();
+		EnterbusinessmanagerRz ent = enterbusinessmanagerRzDao.getObjectByUniqueProperty("rzName", savedMemeber.getCompanyId());
+		employe.setEmployeesName(savedMemeber.getMemberName());
+		employe.setEmployeesTelephone(phone);
+		employe.setRz(ent);
+		employe.setMember(savedMemeber);
+		EnterpriseEmployees savedEmploye = this.saveEnterpriseEmployees(employe);
+		if(phone.equals(ent.getRzBuss())){//管理员
+			EnterpriseRole entRole = new EnterpriseRole();
+			entRole.setEmployees(savedEmploye);
+			entRole.setRole(roleManager.getRole("ROLE_QY_ADMIN"));
+			//如果有则修改
+			enterpriseRoleDao.save(entRole );
+		}
 	}
 }
