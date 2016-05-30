@@ -76,9 +76,9 @@ public class BbmFloor implements Domain{
 	@Length(max=36)
 	private String parkName;//园区名称
     /**新增园区字段   start**/
-	@Column(name = "PARK_ID_")
-	@Length(max=36)
-	private String parkId;//园区id
+//	@Column(name = "PARK_ID_")
+//	@Length(max=36)
+//	private String parkId;//园区id
 	/**新增园区字段   end**/ 	
 	
 	public String getFloorImage() {
@@ -177,15 +177,15 @@ public class BbmFloor implements Domain{
 	public com.common.BuildingBaseManager.entity.BbmBuilding getBbmBuilding(){
 		return this.bbmBuilding;
 	}
-	/**新增园区字段   start**/
-	public String getParkId() {
-		return parkId;
-	}
-
-	public void setParkId(String parkId) {
-		this.parkId = parkId;
-	}
-	/**新增园区字段   end**/
+//	/**新增园区字段   start**/
+//	public String getParkId() {
+//		return parkId;
+//	}
+//
+//	public void setParkId(String parkId) {
+//		this.parkId = parkId;
+//	}
+//	/**新增园区字段   end**/
 	
 	
 	
@@ -202,7 +202,7 @@ public class BbmFloor implements Domain{
 		result = prime * result + ((company == null) ? 0 : company.hashCode());
 		result = prime * result + ((floorRoomCount == null) ? 0 : floorRoomCount.hashCode());
 		/**新增园区字段   start**/
-		result = prime * result + ((parkId == null) ? 0 : parkId.hashCode());
+//		result = prime * result + ((parkId == null) ? 0 : parkId.hashCode());
 		/**新增园区字段   end**/
 		return result;
 	}
@@ -257,11 +257,11 @@ public class BbmFloor implements Domain{
 		} else if (!floorRoomCount.equals(other.floorRoomCount))
 			return false;
 		/**新增园区字段   start**/
-		if (parkId == null) {
-			if (other.parkId != null)
-				return false;
-		} else if (!parkId.equals(other.parkId))
-			return false;
+//		if (parkId == null) {
+//			if (other.parkId != null)
+//				return false;
+//		} else if (!parkId.equals(other.parkId))
+//			return false;
 		/**新增园区字段   end**/
 		return true;
 	}

@@ -77,13 +77,13 @@ public class BbmBuilding implements Domain{
 	private String buildingName;//楼栋名称
 	
     /**新增园区字段   start**/
-	@Column(name = "PARK_NAME_")
-	@Length(max=256)
-	private String parkName;//园区名称
+//	@Column(name = "PARK_NAME_")
+//	@Length(max=256)
+//	private String parkName;//园区名称
 	
-	@Column(name = "PARK_ID_")
-	@Length(max=36)
-	private String parkId;//园区id
+//	@Column(name = "PARK_ID_")
+//	@Length(max=36)
+//	private String parkId;//园区id
 	/**新增园区字段   end**/  
 	
 	
@@ -189,21 +189,21 @@ public class BbmBuilding implements Domain{
 		return this.bbmPark;
 	}
 	/**新增园区字段   start**/
-	public String getParkName() {
-		return parkName;
-	}
+//	public String getParkName() {
+//		return parkName;
+//	}
+//
+//	public void setParkName(String parkName) {
+//		this.parkName = parkName;
+//	}
 
-	public void setParkName(String parkName) {
-		this.parkName = parkName;
-	}
-
-	public String getParkId() {
-		return parkId;
-	}
-
-	public void setParkId(String parkId) {
-		this.parkId = parkId;
-	}
+//	public String getParkId() {
+//		return parkId;
+//	}
+//
+//	public void setParkId(String parkId) {
+//		this.parkId = parkId;
+//	}
 	/**新增园区字段   end**/
 	
 	@Override
@@ -224,8 +224,8 @@ public class BbmBuilding implements Domain{
 		result = prime * result + ((useStatus == null) ? 0 : useStatus.hashCode());
 		
 		/**新增园区字段   start**/
-		result = prime * result + ((parkName == null) ? 0 : parkName.hashCode());
-		result = prime * result + ((parkId == null) ? 0 : parkId.hashCode());
+//		result = prime * result + ((parkName == null) ? 0 : parkName.hashCode());
+//		result = prime * result + ((parkId == null) ? 0 : parkId.hashCode());
 		/**新增园区字段   end**/
 
 		return result;
@@ -301,16 +301,16 @@ public class BbmBuilding implements Domain{
 		} else if (!useStatus.equals(other.useStatus))
 			return false;
 		/**新增园区字段   start**/
-		if (parkId == null) {
-			if (other.parkId != null)
-				return false;
-		} else if (!parkId.equals(other.parkId))
-			return false;
-		if (parkName == null) {
-			if (other.parkName != null)
-				return false;
-		} else if (!parkName.equals(other.parkName))
-			return false;
+//		if (parkId == null) {
+//			if (other.parkId != null)
+//				return false;
+//		} else if (!parkId.equals(other.parkId))
+//			return false;
+//		if (parkName == null) {
+//			if (other.parkName != null)
+//				return false;
+//		} else if (!parkName.equals(other.parkName))
+//			return false;
 		/**新增园区字段   end**/
 		return true;
 	}
