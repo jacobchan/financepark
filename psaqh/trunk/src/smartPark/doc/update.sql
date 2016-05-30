@@ -76,7 +76,7 @@ CREATE TABLE `sp_favorits_favoritactivity` (
   CONSTRAINT `FK_320701-340402` FOREIGN KEY (`MEMBER_ID_`) REFERENCES `sp_member_information` (`MEMBER_ID_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='340402-活动收藏表';
 
-/**乘机人实体  修改时间：2016年5月9日10:28:34    by cqf**/
+/**乘机人实体  修改时间：2016年5月9日10:28:34    by cqf**/ /****   没有在CDM中修改  Jack 20160530 ******/
 alter table sp_ticket_passenger_relation
    drop primary key;
 
@@ -85,6 +85,7 @@ drop table if exists sp_ticket_passenger_relation;
 /*==============================================================*/
 /* Table: sp_ticket_passenger_relation      机票乘机人关联表                    */
 /*==============================================================*/
+/****   没有在CDM中修改  Jack 20160530 ******/
 create table sp_ticket_passenger_relation
 (
    TICKET_PASSENGER_ID  varchar(36) not null,
@@ -101,15 +102,16 @@ alter table sp_ticket_passenger_relation add constraint FK_340502_340506 foreign
 alter table sp_ticket_passenger_relation add constraint FK_340506_340505 foreign key (PASSENGER_ID)
       references sp_ticket_passenger (PASSENGER_ID) on delete restrict on update restrict;
 
-/*增加一个第三方机票订单号字段*/
+/*增加一个第三方机票订单号字段*/ /****   没有在CDM中修改  Jack 20160530 ******/
 alter table sp_ticket_order_item add COLUMN ORDER_ID_THIRD varchar(64);
-/*增加第三方酒店订单号保存字段*/
+/*增加第三方酒店订单号保存字段*/ /****   没有在CDM中修改  Jack 20160530 ******/
 alter table sp_hotel_order add COLUMN  ORDER_ID_THIRD varchar(64);
-/*增加平台系统订单号*/
+/*增加平台系统订单号*/ /****   没有在CDM中修改  Jack 20160530 ******/
 alter table sp_hotel_order add COLUMN  ORDER_NUM_ varchar(64);
 /*==============================================================*/
 /* Table: sp_ticket_passenger     乘机人                              */
 /*==============================================================*/
+/****   没有在CDM中修改  Jack 20160530 ******/
 drop table if exists sp_ticket_passenger;
 create table sp_ticket_passenger
 (
@@ -125,13 +127,13 @@ create table sp_ticket_passenger
 
 alter table sp_ticket_passenger
    add primary key (PASSENGER_ID);
-/*增加乘机人 票号字段*/
+/*增加乘机人 票号字段*/ /****   没有在CDM中修改  Jack 20160530 ******/
 ALTER TABLE sp_ticket_passenger ADD COLUMN ticket_num VARCHAR(32);
-/*添加机票订单 备注字段*/
+/*添加机票订单 备注字段*/ /****   没有在CDM中修改  Jack 20160530 ******/
 ALTER TABLE sp_ticket_order ADD COLUMN note VARCHAR(256);
 /**END   ------------------------------------------------**/
    
- /* 创建新闻顶或踩关联表 */
+ /* 创建新闻顶或踩关联表 */ /****   没有在CDM中修改  Jack 20160530 ******/
  DROP TABLE IF EXISTS `sp_nm_issuenews_d_or_c_`;
  CREATE TABLE `sp_nm_issuenews_d_or_c_` (
   `D_OR_C_ID_` varchar(36) NOT NULL DEFAULT '',
@@ -150,6 +152,7 @@ alter table sp_activity_applylist modify column APPLYLIST_TIME_ VARCHAR(20);
 ALTER TABLE `sp_mc_msgdatas_` ADD COLUMN `READ_STATUS_` char(2);
 
 
+/****   没有在CDM中修改  Jack 20160530 ******/
 CREATE TABLE `sp_workflow_repair_` (
   `flow_id_` varchar(36) NOT NULL,
   `flow_person_id_` varchar(36) DEFAULT NULL,
@@ -169,6 +172,8 @@ CREATE TABLE `sp_workflow_repair_` (
   PRIMARY KEY (`flow_id_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+/****   没有在CDM中修改  Jack 20160530 ******/
 DROP TABLE IF EXISTS `youi_flow`;
 CREATE TABLE `youi_flow` (
   `FLOW_ID` varchar(32) NOT NULL,
@@ -191,6 +196,8 @@ ALTER TABLE `sp_nm_issuenews_` ADD COLUMN `EQUIP_REWARD_`  text;
 
 
 /**重建酒店订单表，删除并重建索引，增加字段   by CQF 2016-5-24 16:58:56   ------  BEGIN --------------**/ 
+
+/****   没有在CDM中修改  Jack 20160530 ******/
 ALTER TABLE sp_hotel_order DROP FOREIGN KEY FK_320701_340601;
 ALTER TABLE sp_hotel_order_item DROP FOREIGN KEY FK_340601_340602;
 alter table sp_hotel_order drop primary key;
