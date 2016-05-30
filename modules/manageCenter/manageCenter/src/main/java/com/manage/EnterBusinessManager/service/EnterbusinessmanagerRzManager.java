@@ -14,6 +14,7 @@ import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
 import com.gsoft.framework.upload.entity.FileStore;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
+import com.manage.EnterpriseManager.entity.InformationLegal;
 public interface EnterbusinessmanagerRzManager extends BaseManager{
     /**
      * 查询列表
@@ -146,4 +147,11 @@ public interface EnterbusinessmanagerRzManager extends BaseManager{
 	public FileStore entExport() throws BusException;
 	
 	public EnterbusinessmanagerRz getEnterbusinessmanagerRzByUniqueProperty(String prop,String value) throws BusException;
+	
+	/**导入保存
+	 * @param ent
+	 * @param legal
+	 * @throws BusException
+	 */
+	public void saveEntAndLegal(EnterbusinessmanagerRz ent,InformationLegal legal) throws BusException;
 }
