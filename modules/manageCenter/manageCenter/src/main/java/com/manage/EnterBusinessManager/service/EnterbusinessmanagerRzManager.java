@@ -12,6 +12,7 @@ import com.gsoft.framework.core.orm.Order;
 import com.gsoft.framework.core.orm.Pager;
 import com.gsoft.framework.core.orm.PagerRecords;
 import com.gsoft.framework.core.service.BaseManager;
+import com.gsoft.framework.upload.entity.FileStore;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 public interface EnterbusinessmanagerRzManager extends BaseManager{
     /**
@@ -139,4 +140,10 @@ public interface EnterbusinessmanagerRzManager extends BaseManager{
 	public String updateMemberInformationOfCompany(MemberInformation o) throws BusException;
 	
 	public String memberImportExcel(String batchExcel) throws BusException, ParseException;
+	
+	public void entImport(String filePath) throws BusException;
+	
+	public FileStore entExport() throws BusException;
+	
+	public EnterbusinessmanagerRz getEnterbusinessmanagerRzByUniqueProperty(String prop,String value) throws BusException;
 }
