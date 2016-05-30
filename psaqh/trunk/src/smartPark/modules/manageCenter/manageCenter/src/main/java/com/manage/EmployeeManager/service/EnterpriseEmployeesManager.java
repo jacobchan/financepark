@@ -120,4 +120,11 @@ public interface EnterpriseEmployeesManager extends BaseManager {
 
 	public List<EnterpriseEmployees> getEnterprisemaillistByName(String userId,
 			String employeesName) throws BusException;
+	
+	/**导入保存
+	 * @param member
+	 * @param employe
+	 * @throws BusException
+	 */
+	public void saveMemberAndEmploye(MemberInformation member,EnterpriseEmployees employe) throws BusException;
 }
