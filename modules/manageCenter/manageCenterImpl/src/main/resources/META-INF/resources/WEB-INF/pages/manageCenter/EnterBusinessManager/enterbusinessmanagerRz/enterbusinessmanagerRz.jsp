@@ -33,6 +33,10 @@
 			<youi:button name="edit" caption="修改"/>
 			<youi:button name="remove" caption="删除"/>
 		</youi:gridCol>
+		<youi:button name="entImport" caption="企业导入" icon="upload"/>
+		<youi:button name="entExport" caption="企业导出" icon="download"/>
+		<youi:button name="userImport" caption="员工导入" icon="upload"/>
+		<youi:button name="userExport" caption="员工导出" icon="download"/>		
 	</youi:grid>
 	
 	<!-- form-入驻企业基本信息编辑 -->
@@ -68,6 +72,26 @@
 			<youi:fieldSwfupload property="batchExcel" caption="批量注册文件" uploadUrl="/common/upload.html" fileTypes="*.xls;*.xlsx" fileTypesDescription="所有类型" fileSizeLimit="5120" fileUploadLimit="2" fileQueueLimit="2" />
 		</youi:fieldLayout>
 	</youi:form>
+	<youi:form id="form_entimport" caption="企业信息上传"
+		action="fileImport/entimport.json"
+		submit="NOT" reset="NOT" dialog="true" height="100">
+		<youi:fieldLayout columns="1" labelWidths="150" prefix="file">
+			<youi:fieldFile property="entfile" caption="企业信息文件" />
+			<%-- <youi:fieldHidden property="filePath" /> --%>
+		</youi:fieldLayout>
+
+		<youi:button name="upload" caption="上传" icon="upload"/>
+	</youi:form>
+	<youi:form id="form_userimport" caption="企业员工上传"
+		action="fileImport/userimport.json"
+		submit="NOT" reset="NOT" dialog="true" height="100">
+		<youi:fieldLayout columns="1" labelWidths="150" prefix="file">
+			<youi:fieldFile property="userfile" caption="企业员工文件" />
+			<%-- <youi:fieldHidden property="filePath" /> --%>
+		</youi:fieldLayout>
+
+		<youi:button name="userUpload" caption="上传" icon="upload"/>
+	</youi:form>	
 	<youi:func name="form_enterbusinessmanagerRz_afterSubmit" params="result">
 		$.youi.ajaxUtil.ajax({
 			url:'esb/web/enterbusinessmanagerRzManager/updateEnteringStatus.json',
@@ -125,4 +149,57 @@
 
         }
 	</youi:func>
+
+	<youi:func name="func_grid_entImport">
+		$elem('file_entfile',pageId).find('input:file')[0].value='';
+		$elem('form_entimport',pageId).form('open');
+	</youi:func>
+
+	<youi:func name="func_form_upload">
+		var fileEle = $elem('file_entfile',pageId).find('input:file');
+//		var value = getPath(fileEle[0]);
+		var value = fileEle[0].value;
+		$elem('file_filePath',pageId).fieldValue(value);
+		$elem('form_entimport',pageId).form('submit');
+		$elem('form_entimport',pageId).form('close');
+	</youi:func>
+
+	<youi:func name="func_grid_entExport">
+		location.href='fileExport/entexport.json';
+	</youi:func>
+	
+	<youi:func name="func_grid_userImport">
+		$elem('file_userfile',pageId).find('input:file')[0].value='';
+		$elem('form_userimport',pageId).form('open');
+	</youi:func>	
+	<youi:func name="func_form_userUpload">
+		var fileEle = $elem('file_userfile',pageId).find('input:file');
+//		var value = getPath(fileEle[0]);
+		var value = fileEle[0].value;
+		$elem('file_filePath',pageId).fieldValue(value);
+		$elem('form_userimport',pageId).form('submit');
+		$elem('form_userimport',pageId).form('close');
+	</youi:func>	
+	<youi:func name="func_grid_userExport">
+		location.href='fileExport/userexport.json';
+	</youi:func>
+<!-- 	<script>
+		function getPath(obj) {
+			if (obj) {
+				if (window.navigator.userAgent.indexOf("MSIE") >= 1) {
+					obj.select();
+					return document.selection.createRange().text;
+				}
+
+				else if (window.navigator.userAgent.indexOf("Firefox") >= 1) {
+					if (obj.files) {
+
+						return obj.files.item(0).getAsDataURL();
+					}
+					return obj.value;
+				}
+				return obj.value;
+			}
+		}
+	</script> -->
 </youi:page>
