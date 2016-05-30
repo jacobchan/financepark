@@ -66,7 +66,7 @@ public class EnterbusinessmanagerRz implements Domain{
 	private BbmRoom roomId;//默认单元
 
 	@Column(name = "RZ_BUSS_")
-	@Length(max=2)
+	@Length(max=32)
 	private String rzBuss;//企业主营
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
