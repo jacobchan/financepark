@@ -715,4 +715,10 @@ public class EnterbusinessmanagerRzManagerImpl extends BaseManagerImpl implement
 	public EnterbusinessmanagerRz getEnterbusinessmanagerRzByUniqueProperty(String prop,String value) throws BusException{
 		return enterbusinessmanagerRzDao.getObjectByUniqueProperty(prop, value);
 	}
+	
+	public void saveEntAndLegal(EnterbusinessmanagerRz ent,InformationLegal legal) throws BusException{
+		EnterbusinessmanagerRz savedEnt = this.saveEnterbusinessmanagerRz(ent);
+		legal.setLegalRe(savedEnt.getRzId());
+		informationLegalManager.saveInformationLegal(legal);
+	}
 }
