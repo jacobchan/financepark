@@ -7,8 +7,9 @@ import java.util.Map;
 
 public class EmployeConstant {
 
-	public static Map<String,String> properties = new HashMap<String,String>();
+	public static Map<String,String> properties = new HashMap<String,String>();//key为entity属性，value为xls文件头行
 	public static Map<String,String> employMap = new HashMap<String, String>();
+	
 	static{
 		employMap.put("employeesDepartment","所属部门");
 		employMap.put("createTime","加入时间");

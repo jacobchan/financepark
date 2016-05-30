@@ -7,8 +7,9 @@ import java.util.Map;
 
 public class EntConstant {
 
-	public static Map<String,String> properties = new HashMap<String,String>();
+	public static Map<String,String> properties = new HashMap<String,String>();//key为entity属性，value为xls文件头行
 	public static Map<String,String> legalMap = new HashMap<String, String>();
+	
 	static{
 		legalMap.put("legalName","创世人姓名");
 		legalMap.put("legalBirthday","出生日期");
@@ -29,7 +30,7 @@ public class EntConstant {
 		properties.putAll(legalMap);
 	}
 	
-	public static List<String> header = new ArrayList<String>();
+	public static List<String> header = new ArrayList<String>();//有序，与实体属性对应，同时与excel头行顺序一致
 	static{
 		header.add("rzName");
 		header.add("rzBuss");
