@@ -66,6 +66,7 @@ public class XlsUtils {
 
 		Workbook wb = null;
 		try {
+			//*.xls,*xlsx版本处理
 			try {
 			//	fs = new POIFSFileSystem(in);
 				wb = new HSSFWorkbook(in);
@@ -85,6 +86,11 @@ public class XlsUtils {
 		return records;
 	}
 	
+	/**将Workbook表头中文转换成英文对应的key，保存到对应的Record中
+	 * @param wb
+	 * @param records
+	 * @param properties value-caption
+	 */
 	public static void parseWorkbook(Workbook wb,List<Record> records,Map<String,String> properties){
 		Sheet sheet = wb.getSheetAt(0); 
 		if (wb != null) {
@@ -115,6 +121,7 @@ public class XlsUtils {
 	}
 	
 	/**
+	 * 导入时文件转换
 	 * @param file
 	 * @param properties 实体属性与 excel头名称对应
 	 * @return
@@ -128,6 +135,11 @@ public class XlsUtils {
 		return new ArrayList<Record>();
 	}
 	
+	/**通过map的value获取对应的key
+	 * @param properties
+	 * @param value
+	 * @return
+	 */
 	public static String getEntryKey(Map<String, String> properties, String value) {
 		for(Map.Entry<String, String> entry:properties.entrySet()){
 			if(value.equals(entry.getValue())){
@@ -137,9 +149,11 @@ public class XlsUtils {
 		return "";
 	}
 	
-	/**导出
-	 * @param recods
-	 * @return
+	/**导出，将recods根据header(有序)转换成输出流
+	 * @param out	输出流
+	 * @param recods	excel的内容
+	 * @param header	excel头对应的key
+	 * @param tempalateFile 模板文件
 	 */
 	public static void buildWorkbook(OutputStream out,List<Record> recods,List<String> header,File tempalateFile){
 		if(recods!=null&&recods!=null){
@@ -178,6 +192,11 @@ public class XlsUtils {
 		
 	}
 	
+	/**cell的样式
+	 * @param workbook
+	 * @param isFirstRow
+	 * @return
+	 */
 	public static CellStyle createStyle(Workbook workbook, boolean isFirstRow) {
 	    CellStyle cellStyle = workbook.createCellStyle();
 	    if (isFirstRow) {
@@ -191,6 +210,18 @@ public class XlsUtils {
 
 	    return cellStyle;
 	  }
+	
+	/**获取cell内容
+	 * @param object
+	 * @return
+	 */
+	public static String getCellText(Object object){
+		if(object!=null){
+			return object.toString().trim();
+		}else{
+			return "";
+		}
+	}
 
 	public static void main(String[] args) {
 //		List<Record> records = getRecords(new File("C:\\Users\\ASUS\\Desktop\\entinfo.xlsx"), 3);
