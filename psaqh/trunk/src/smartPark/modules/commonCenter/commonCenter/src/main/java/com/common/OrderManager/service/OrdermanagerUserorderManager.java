@@ -329,4 +329,7 @@ public interface OrdermanagerUserorderManager extends BaseManager{
 	 * @throws BusException
 	 */	 	
 	public List<OrdermanagerUserorder> getOrderlistforPage(String userId,String genreCode,String userorderStatus) throws BusException;
+	
+	
+	public OrdermanagerUserorder saveHRshebao(String userId, String commodityId, String faultDes,String userorderAdr) throws BusException;
 }
