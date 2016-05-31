@@ -58,21 +58,26 @@ public class FileImportController {
 	private EnterbusinessmanagerRzManager enterbusinessmanagerRzManager;//企业信息
 	@Autowired
 	private EtypeEnterprisetypeDao enterprisetypeDao;//企业行业
-	@Autowired
-	private InformationLegalManager informationLegalManager;//企业法人
+//	@Autowired
+//	private InformationLegalManager informationLegalManager;//企业法人
 	@Autowired
 	private EnterpriseEmployeesManager enterpriseEmployeesManager;//企业员工
-	@Autowired
-	private MemberInformationManager memberInformationManager;//会员信息
-	@Autowired
-	private EnterpriseRoleManager enterpriseRoleManager;//企业员工角色
+//	@Autowired
+//	private MemberInformationManager memberInformationManager;//会员信息
+//	@Autowired
+//	private EnterpriseRoleManager enterpriseRoleManager;//企业员工角色
 	@Autowired
 	private CodeitemManager codeitemManager;
-	@Autowired
-	private RoleManager roleManager;
-	@Autowired
-	private UserPasswordService passwordService;
+//	@Autowired
+//	private RoleManager roleManager;
+//	@Autowired
+//	private UserPasswordService passwordService;
 
+	/**
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping("/entimport.json")
 	public DataModelAndView importEnts(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -117,9 +122,10 @@ public class FileImportController {
 								PropertyUtils.setPropertyValue(legal, entry.getKey(), record.get(entry.getKey()));
 							}
 						}
-						EnterbusinessmanagerRz savedEnt = enterbusinessmanagerRzManager.saveEnterbusinessmanagerRz(enter);
-						legal.setLegalRe(savedEnt.getRzId());
-						informationLegalManager.saveInformationLegal(legal);
+//						EnterbusinessmanagerRz savedEnt = enterbusinessmanagerRzManager.saveEnterbusinessmanagerRz(enter);
+//						legal.setLegalRe(savedEnt.getRzId());
+//						informationLegalManager.saveInformationLegal(legal);
+						enterbusinessmanagerRzManager.saveEntAndLegal(enter,legal);
 					}
 				}
 			}catch(Exception e){
@@ -155,7 +161,7 @@ public class FileImportController {
 						MemberInformation member = new MemberInformation();
 						EnterpriseEmployees employe = new EnterpriseEmployees();
 						for(Map.Entry<String, String> entry:properties.entrySet()){
-	//						if("employeesDepartment".equals(entry.getKey())){//上市类型
+	//						if("employeesDepartment".equals(entry.getKey())){//部门
 	//							record.put("employeesDepartment", codeConvert("", record.get("employeesDepartment").toString()));
 	//						}
 							if(!EmployeConstant.isEmploye(entry.getKey()))
@@ -164,22 +170,23 @@ public class FileImportController {
 								PropertyUtils.setPropertyValue(employe, entry.getKey(), record.get(entry.getKey()));
 							}
 						}	
-						member.setMemberPassword(passwordService.hashPassword("123456").toHex());
-						MemberInformation savedMemeber = memberInformationManager.saveMemberInformation(member);
-						String phone = savedMemeber.getMemberPhoneNumber();
-						EnterbusinessmanagerRz ent = enterbusinessmanagerRzManager.getEnterbusinessmanagerRzByUniqueProperty("rzName", savedMemeber.getCompanyId());
-						employe.setEmployeesName(savedMemeber.getMemberName());
-						employe.setEmployeesTelephone(phone);
-						employe.setRz(ent);
-						employe.setMember(savedMemeber);
-						EnterpriseEmployees savedEmploye = enterpriseEmployeesManager.saveEnterpriseEmployees(employe);
-						if(phone.equals(ent.getRzBuss())){//管理员
-							EnterpriseRole entRole = new EnterpriseRole();
-							entRole.setEmployees(savedEmploye);
-							entRole.setRole(roleManager.getRole("ROLE_QY_ADMIN"));
-							//如果有则修改
-							enterpriseRoleManager.saveEnterpriseRole(entRole );
-						}
+//						member.setMemberPassword(passwordService.hashPassword("123456").toHex());
+//						MemberInformation savedMemeber = memberInformationManager.saveMemberInformation(member);
+//						String phone = savedMemeber.getMemberPhoneNumber();
+//						EnterbusinessmanagerRz ent = enterbusinessmanagerRzManager.getEnterbusinessmanagerRzByUniqueProperty("rzName", savedMemeber.getCompanyId());
+//						employe.setEmployeesName(savedMemeber.getMemberName());
+//						employe.setEmployeesTelephone(phone);
+//						employe.setRz(ent);
+//						employe.setMember(savedMemeber);
+//						EnterpriseEmployees savedEmploye = enterpriseEmployeesManager.saveEnterpriseEmployees(employe);
+//						if(phone.equals(ent.getRzBuss())){//管理员
+//							EnterpriseRole entRole = new EnterpriseRole();
+//							entRole.setEmployees(savedEmploye);
+//							entRole.setRole(roleManager.getRole("ROLE_QY_ADMIN"));
+//							//如果有则修改
+//							enterpriseRoleManager.saveEnterpriseRole(entRole );
+//						}
+						enterpriseEmployeesManager.saveMemberAndEmploye(member,employe);
 					}
 				}
 			}catch(Exception e){
