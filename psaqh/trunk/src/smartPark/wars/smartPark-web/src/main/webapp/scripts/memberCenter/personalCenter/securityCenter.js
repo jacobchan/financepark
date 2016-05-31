@@ -31,14 +31,18 @@ $(function(){
 										data:params.join('&'),
 										success:function(result){
 											if(result&&result.record){
-												if("修改成功"==result.record.msg){
-													close("密码修改成功！");
-												}else if("新旧密码不能一样"==result.record.msg){
-													$("#newmsg").text(result.record.msg);
-													$("#conmsg").text(result.record.msg);
-												}else if("请输入正确的旧密码！"==result.record.msg){
-													$("#oldmsg").text(result.record.msg);
+												if(result.record.flag){												
+													close("密码修改成功！");										
 												}
+											}
+										},
+										error:function(msg){
+											alert(msg);
+											if("新旧密码不能一样"==msg){
+												$("#newmsg").text(msg);
+												$("#conmsg").text(msg);
+											}else if("请输入正确的旧密码！"==msg){
+												$("#oldmsg").text(msg);
 											}
 										}
 								    });	
