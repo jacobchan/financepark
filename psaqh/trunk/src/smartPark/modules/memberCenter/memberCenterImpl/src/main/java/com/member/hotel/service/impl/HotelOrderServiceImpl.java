@@ -34,6 +34,7 @@ import com.member.hotel.dao.HotelOrderItemDao;
 import com.member.hotel.entity.HotelOrder;
 import com.member.hotel.entity.HotelOrderConditions;
 import com.member.hotel.entity.HotelOrderItem;
+import com.member.hotel.entity.HotelOrderVo;
 import com.member.hotel.service.HotelOrderService;
 
 import net.sf.json.JSONObject;
@@ -57,6 +58,7 @@ public class HotelOrderServiceImpl extends BaseManagerImpl implements HotelOrder
 	private McMsgdatasManager mcMsgdatasManager;
 
 	@Override
+	@EsbServiceMapping
 	public List<JsonNode> getOrderList(String dateandtime) {
 	    String result = "";
 	    List<JsonNode> resultList = new ArrayList<JsonNode>();
@@ -85,7 +87,8 @@ public class HotelOrderServiceImpl extends BaseManagerImpl implements HotelOrder
 	  }
 
 	@Override
-	public String getOrderInfo(int orderid) {
+	@EsbServiceMapping
+	public HotelOrderVo getOrderInfo(@ServiceParam(name="orderid")String orderid) {
 	    String result = "";
 	    boolean a = false;
 	    Map<String,Object> params = new HashMap();
@@ -97,11 +100,48 @@ public class HotelOrderServiceImpl extends BaseManagerImpl implements HotelOrder
 			result = HttpGetAndPostUtil.net(HttpGetAndPostUtil.url1, params, "GET");
 			ObjectMapper objectMapper = new ObjectMapper();
 			JsonNode resultJson = objectMapper.readTree(result);
+			if (resultJson.get("retmsg").asText().equals("1")) {
+				JsonNode reqdata = resultJson.get("reqdata");
+				JsonNode retHeader = resultJson.get("retHeader");
+				HotelOrderVo orderVo = new HotelOrderVo();
+				orderVo.setOrderid(retHeader.get("orderid").asText());
+				Method ms[] = orderVo.getClass().getDeclaredMethods();  
+	            for (Method m : ms) {  
+	                if (m.getName().startsWith("set")) {  
+	                      
+	                    String propertyName = m.getName().substring(3);  
+	                    String name = propertyName;  
+	                      
+	                    StringBuffer sb = new StringBuffer(propertyName);    
+	                    sb.replace(0, 1, (propertyName.charAt(0)+"").toLowerCase());    
+	                    propertyName = sb.toString();  
+	                    if (reqdata.get(propertyName) != null && !"".equals(reqdata.get(propertyName).asText())) {
+		                	 m.invoke(orderVo, reqdata.get(propertyName).asText());
+						} 
+	                }  
+	            }
+				/*Field[] fields = orderVo.getClass().getDeclaredFields();
+			    for(int j=0 ; j<fields.length ; j++){     //遍历所有属性
+			    	 String name1 = fields[j].getName();
+			    	 String name2 = name1.substring(0,1).toUpperCase()+name1.substring(1); //将属性的首字符大写，方便构造get，set方法
+		             String type = fields[j].getGenericType().toString();    //获取属性的类型
+		             if (!name1.equals("orderid")) {
+		            	 if(type.equals("class java.lang.String")){   //如果type是类类型，则前面包含"class "，后面跟类名
+			                 Method m = orderVo.getClass().getMethod("set"+name2);
+			                 if (!"".equals(reqdata.get(name1).asText()) && reqdata.get(name1).asText() != null) {
+			                	 String value = (String) m.invoke(orderVo, reqdata.get(name1).asText());
+							}
+			             }
+					}
+			    }*/
+				return orderVo;
+				
+			}else
+				return null;
 	    } catch (Exception e) {
 	    	throw new BusException("获取订单详情失败："+e.getMessage());
 	    	//return "";
 	    }
-	    return result;
 	  }
 
 	@EsbServiceMapping
@@ -123,7 +163,7 @@ public class HotelOrderServiceImpl extends BaseManagerImpl implements HotelOrder
 		HotelOrder hotelOrder = new HotelOrder();
 		HotelOrderItem hotelOrderItem = new HotelOrderItem();
 		Map<String,Object> params = new HashMap();
-	    params.put("agent_id", agent_id);
+	    params.put("agentid", agent_id);
 	    params.put("agent_md", agent_md);
 	    try {//遍历实体类的所有属性，并取值判断
 	    	Field[] fields = hotelOrderConditions.getClass().getDeclaredFields();
@@ -176,7 +216,8 @@ public class HotelOrderServiceImpl extends BaseManagerImpl implements HotelOrder
 	}
 
 	@Override
-	public String cancelOrder(int orderid) {
+	@EsbServiceMapping
+	public String cancelOrder(String orderid) {
 	    String result = "";
 	    boolean a = false;
 	    Map<String,Object> params = new HashMap();
