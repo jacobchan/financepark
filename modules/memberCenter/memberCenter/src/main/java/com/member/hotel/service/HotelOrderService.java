@@ -6,11 +6,12 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.gsoft.framework.core.service.BaseManager;
 import com.member.hotel.entity.HotelOrderConditions;
+import com.member.hotel.entity.HotelOrderVo;
 
 public interface HotelOrderService extends BaseManager{
 	public List<JsonNode> getOrderList(String dateandtime);//dateandtime下单日期
 	
-	public String getOrderInfo(int orderid);//orderid订单号
+	public HotelOrderVo getOrderInfo(String orderid);//orderid订单号
 	/*
 	 * 参数  params
 	 * hid 酒店ID rid 房间ID pid 计划ID agentid 分销ID tm1 到店日期2010-11-25 tm2
@@ -26,5 +27,5 @@ public interface HotelOrderService extends BaseManager{
 	 */
 	public List<JsonNode> postBook(String userId,String captcha,String totalprice,HotelOrderConditions hotelOrderConditions);
 	
-	public String cancelOrder(int orderid);
+	public String cancelOrder(String orderid);
 }
