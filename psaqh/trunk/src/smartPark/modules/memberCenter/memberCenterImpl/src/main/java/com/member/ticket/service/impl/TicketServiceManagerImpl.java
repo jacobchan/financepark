@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.httpclient.methods.PostMethod;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -254,9 +256,6 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 			@ServiceParam(name="linkPhone") String linkPhone,@ServiceParam(name="parPrice") String parPrice,
 			@ServiceParam(name="fuelTax") String fuelTax,@ServiceParam(name="airportTax") String airportTax,
 			@ServiceParam(name="otherLinkMethod") String otherLinkMethod) {
-		/*CreateOrderByPassengerRequest condition
-		 * @ServiceParam(name="_parPrice") String parPrice,
-			@ServiceParam(name="_fuelTax") String fuelTax,@ServiceParam(name="_airportTax") String airportTax,*/
 		String result = "";
 		TicketOrder ticketOrder = new TicketOrder();
 		TicketOrderItem ticketOrderItem = new TicketOrderItem();
@@ -289,6 +288,37 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 		params.put("pnrInfo", pnrInfo);
 		ticketOrder.setMemberId(userId);
 		ticketOrder.setOrderNo(psaOrderNo);
+		// 传入文档上的必传参数
+		PostMethod method = new PostMethod(create_url);
+        method.addParameter("agencyCode", agencyCode);
+        method.addParameter("sign", sign);
+        method.addParameter("policyId", policyId);
+        method.addParameter("linkMan", linkMan);
+        method.addParameter("linkPhone", linkPhone);
+        method.addParameter("notifiedUrl", notifiedUrl);
+        method.addParameter("paymentReturnUrl", "www");
+        method.addParameter("outOrderNo", psaOrderNo);
+        method.addParameter("pnrInfo.parPrice", parPrice);
+        method.addParameter("pnrInfo.fuelTax", fuelTax);
+        method.addParameter("pnrInfo.airportTax", airportTax);
+        for (int i = 0; i < segments.size(); i++) {
+        	method.addParameter("pnrInfo.segments.flightNo", segments.get(i).getFlightNo());
+            method.addParameter("pnrInfo.segments.depCode", segments.get(i).getDepCode());
+            method.addParameter("pnrInfo.segments.arrCode", segments.get(i).getArrCode());
+            method.addParameter("pnrInfo.segments.seatClass", segments.get(i).getSeatClass());
+            method.addParameter("pnrInfo.segments.depDate", segments.get(i).getDepDate());
+            method.addParameter("pnrInfo.segments.depTime", segments.get(i).getDepTime());
+            method.addParameter("pnrInfo.segments.arrTime", segments.get(i).getArrTime());
+            method.addParameter("pnrInfo.segments.planeModel", segments.get(i).getPlaneModel());
+		}
+        for (int j = 0; j < passengers.size(); j++) {
+        	method.addParameter("pnrInfo.passengers.name", passengers.get(j).getName());
+            method.addParameter("pnrInfo.passengers.type", passengers.get(j).getType());
+            method.addParameter("pnrInfo.passengers.identityType", passengers.get(j).getIdentityType());
+            method.addParameter("pnrInfo.passengers.identityNo", passengers.get(j).getIdentityNo());
+		}
+        method.addParameter("allowSwitchPolicy", "0");
+        method.addParameter("needSpeRulePolicy", "0");
 		
 		try {
 			/*Field[] fields = conditions.getClass().getDeclaredFields();
@@ -310,7 +340,7 @@ public class TicketServiceManagerImpl extends BaseManagerImpl implements TicketS
 	                 }
 				}
 		    }*/
-			result = HttpGetAndPostUtil.TicketSendPost(create_url, params);
+			result = HttpGetAndPostUtil.postHttpClient(method);
 			Document document = Dom4jUtils.parseText(result);
 			Element root = document.getRootElement();
 			if ("S".equals(root.selectSingleNode("returnCode").getText())){

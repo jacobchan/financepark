@@ -23,7 +23,7 @@ public class TicketPassenger implements Domain{
 	
 
 	@Column(name = "identity_num")
-	@Length(max=16)
+	@Length(max=18)
 	private String identityNum;//证件号码
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid.hex")
