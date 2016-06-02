@@ -13,6 +13,12 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.Map;
 
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
+
+import com.gsoft.framework.core.exception.BusException;
+
 public class HttpGetAndPostUtil {
 	public static final String DEF_CHATSET = "UTF-8";
 	public static final int DEF_CONN_TIMEOUT = 30000;
@@ -192,4 +198,29 @@ public class HttpGetAndPostUtil {
 		}
 		return null;
 	}
+	
+	public static String postHttpClient(PostMethod method){
+		HttpClient http = new HttpClient();
+        HttpConnectionManagerParams managerParams = http.getHttpConnectionManager().getParams();
+        managerParams.setConnectionTimeout(DEF_CONN_TIMEOUT);
+        managerParams.setSoTimeout(60000);
+
+//        // 响应地址
+//        PostMethod method = new PostMethod(
+//                "http://wstest.51book.com:55779/ltips/services/createOrderByPassengerServiceRestful1.0/createOrderByPassenger");
+        method.getParams().setHttpElementCharset("utf-8");
+        method.getParams().setContentCharset("utf-8");
+        method.getParams().setCredentialCharset("utf-8");
+        
+        String result = "";
+        try {
+            http.executeMethod(method);
+            result = method.getResponseBodyAsString();
+        } catch (IOException e) {
+        	throw new BusException("请求异常:"+e.getLocalizedMessage());
+        }
+        System.out.println(result);
+		return result;
+	}
+	
 }
