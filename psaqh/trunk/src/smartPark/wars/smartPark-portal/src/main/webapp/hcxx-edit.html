@@ -160,7 +160,7 @@
 	                </div>
                 </div>
                 <div class="clearfix hc-con-h mt20 tr" >
-                    <span>共<font class="c-o"> 1 </font>名乘机人 订单总计费用：<font class="c-o f24">1300</font></span>
+                    <span><!-- 共<font class="c-o"> 1 </font>名乘机人 --> 订单总计费用：<font class="c-o f24" id="totalPrice">1300</font></span>
                     <a href="javascript:toSubmit()" class="ib-btn" style="margin:10px 20px;">下一步</a>
                 </div>
             </div>
@@ -224,6 +224,7 @@
         html_ += "<td>机建费：<span class='c-o'>¥ "+Request['airportTax']+"</span></td></tr>";
         $("#flightInfo").empty();
         $("#flightInfo").append(html_);
+        $("#totalPrice").html(Request['parPrice']);
         //绑定  编辑状态数据 
         var linkMan = Request['linkMan'];
         if(linkMan){
@@ -298,7 +299,8 @@
 			var len = $("#person-info .person-info-list i.focus").length
 			$("#person_num").html(len+"人");
 			$("#price").html("￥"+Request["parPrice"])
-			$("#totalDollar").html(len*Request["parPrice"]);
+			$("#totalDollar").html(len*Request["parPrice"]+Number(Request['airportTax']));
+			$("#totalPrice").html(len*Request["parPrice"]+Number(Request['airportTax']));
 			//alert(len)
 		}
 	}
