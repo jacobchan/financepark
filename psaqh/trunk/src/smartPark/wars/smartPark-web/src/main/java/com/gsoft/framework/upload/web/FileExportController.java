@@ -55,7 +55,6 @@ public class FileExportController {
 	@RequestMapping("/entexport.json")
 	public void exportEnts(HttpServletRequest request,
 			HttpServletResponse response) throws FileNotFoundException, IOException{
-		String basepath = this.getClass().getResource("/").getPath();
 		List<String> header = EntConstant.header;
 		List<Record> records = getEntDatas(header);
 		String fileName = "企业信息"+DateUtils.getToday("yyyyMMddHHmmss")+".xlsx";
@@ -65,7 +64,9 @@ public class FileExportController {
 		response.addHeader("Content-Disposition","attachment; filename="+fileName);
 		response.setContentType("application/msexcel");
 		OutputStream out = response.getOutputStream();
-		XlsUtils.buildWorkbook(out,records, header , new File(basepath+"template/"+TEMPLATE_ENT));
+		String basepath = request.getServletContext().getRealPath("/");
+		System.out.println("----"+basepath);
+		XlsUtils.buildWorkbook(out,records, header , new File(basepath +"template/"+TEMPLATE_ENT));
 		out.flush();
 		out.close();
 	}
@@ -113,8 +114,6 @@ public class FileExportController {
 	@RequestMapping("/userexport.json")
 	public void exportUsers(HttpServletRequest request,
 			HttpServletResponse response) throws FileNotFoundException, IOException{
-		String basepath = this.getClass().getResource("/").getPath();
-			
 		List<String> header = EmployeConstant.header;
 		List<Record> records = getUserDatas(header);
 		String fileName = "企业员工信息"+DateUtils.getToday("yyyyMMddHHmmss")+".xlsx";
@@ -124,6 +123,7 @@ public class FileExportController {
 		response.addHeader("Content-Disposition","attachment; filename="+fileName);
 		response.setContentType("application/msexcel");
 		OutputStream out = response.getOutputStream();
+		String basepath = request.getServletContext().getRealPath("/");
 		XlsUtils.buildWorkbook(out,records, header , new File(basepath+"template/"+TEMPLATE_USER));
 		out.flush();
 		out.close();
