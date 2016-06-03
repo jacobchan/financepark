@@ -1,7 +1,5 @@
 package com.gsoft.framework.upload.web;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,14 +17,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.common.EnterpriceTypeManager.dao.EtypeEnterprisetypeDao;
 import com.common.EnterpriceTypeManager.entity.EtypeEnterprisetype;
 import com.common.MemberManager.entity.MemberInformation;
-import com.common.MemberManager.service.MemberInformationManager;
-import com.common.MessageCenter.entity.Code;
 import com.gsoft.common.util.XlsUtils;
 import com.gsoft.entity.EmployeConstant;
 import com.gsoft.entity.EntConstant;
@@ -37,19 +31,14 @@ import com.gsoft.framework.core.exception.BusException;
 import com.gsoft.framework.core.orm.Condition;
 import com.gsoft.framework.core.web.view.DataModelAndView;
 import com.gsoft.framework.core.web.view.Message;
-import com.gsoft.framework.security.agt.service.impl.UserPasswordService;
-import com.gsoft.framework.security.fuc.service.RoleManager;
 import com.gsoft.framework.util.ConditionUtils;
 import com.gsoft.framework.util.PropertyUtils;
 import com.gsoft.framework.util.StringUtils;
 import com.manage.EmployeeManager.entity.EnterpriseEmployees;
-import com.manage.EmployeeManager.entity.EnterpriseRole;
 import com.manage.EmployeeManager.service.EnterpriseEmployeesManager;
-import com.manage.EmployeeManager.service.EnterpriseRoleManager;
 import com.manage.EnterBusinessManager.entity.EnterbusinessmanagerRz;
 import com.manage.EnterBusinessManager.service.EnterbusinessmanagerRzManager;
 import com.manage.EnterpriseManager.entity.InformationLegal;
-import com.manage.EnterpriseManager.service.InformationLegalManager;
 
 @Controller
 @RequestMapping("/fileImport")
@@ -58,20 +47,10 @@ public class FileImportController {
 	private EnterbusinessmanagerRzManager enterbusinessmanagerRzManager;//企业信息
 	@Autowired
 	private EtypeEnterprisetypeDao enterprisetypeDao;//企业行业
-//	@Autowired
-//	private InformationLegalManager informationLegalManager;//企业法人
 	@Autowired
 	private EnterpriseEmployeesManager enterpriseEmployeesManager;//企业员工
-//	@Autowired
-//	private MemberInformationManager memberInformationManager;//会员信息
-//	@Autowired
-//	private EnterpriseRoleManager enterpriseRoleManager;//企业员工角色
 	@Autowired
 	private CodeitemManager codeitemManager;
-//	@Autowired
-//	private RoleManager roleManager;
-//	@Autowired
-//	private UserPasswordService passwordService;
 
 	/**
 	 * @param request
